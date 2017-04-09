@@ -27,6 +27,8 @@ https://github.com/aymericdamien/TopDeepLearning.git
 
 https://github.com/karpathy/neuraltalk2
 
+https://github.com/HFTrader/DeepLearningBook/blob/master/DeepLearningPapers.md
+
 # Videos
 
 Ray Kurzweil: How To Create A Mind: @ TEDxSiliconAlley  -- https://www.youtube.com/watch?v=RIkxVci-R4k
