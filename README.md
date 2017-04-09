@@ -25,6 +25,8 @@ https://www.udacity.com/course/deep-learning-nanodegree-foundation--nd101
 
 https://github.com/aymericdamien/TopDeepLearning.git
 
+https://github.com/karpathy/neuraltalk2
+
 # Videos
 
 Ray Kurzweil: How To Create A Mind: @ TEDxSiliconAlley  -- https://www.youtube.com/watch?v=RIkxVci-R4k
@@ -40,4 +42,6 @@ Google Tech Talk: Deep Learning of Representations -- https://www.youtube.com/wa
 Numenta: Principles of Hierarchical Temporal Memory (HTM): Foundations of Machine Intelligence -- https://www.youtube.com/watch?v=6ufPpZDmPKA
 
 Adam Coates: Machine Learning Discussion Group - Deep Learning w/ Stanford AI Lab --  https://www.youtube.com/watch?v=2QJi0ArLq7s&amp;list=PL78U8qQHXgrhP9aZraxTT5-X1RccTcUYT
+
+
 
