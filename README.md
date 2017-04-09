@@ -43,5 +43,7 @@ Numenta: Principles of Hierarchical Temporal Memory (HTM): Foundations of Machin
 
 Adam Coates: Machine Learning Discussion Group - Deep Learning w/ Stanford AI Lab --  https://www.youtube.com/watch?v=2QJi0ArLq7s&amp;list=PL78U8qQHXgrhP9aZraxTT5-X1RccTcUYT
 
+Deep Learning TV: Playlists/Simplified -- https://www.youtube.com/channel/UC9OeZkIwhzfv-_Cb7fCikLQ
+
 
 
