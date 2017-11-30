@@ -3,7 +3,9 @@
 # Path
 A collection of resources for a educational path I am undertaking
 
-# Courses taken = https://github.com/theGreenJedi/Courses
+# Courses taken 
+
+https://github.com/theGreenJedi/Courses
 
 # Udacity Links
 
