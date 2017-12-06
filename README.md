@@ -13,6 +13,8 @@ https://www.udacity.com/course/how-to-use-git-and-github--ud775
 
 https://www.udacity.com/course/intro-to-computer-science--cs101
 
+https://classroom.udacity.com/courses/ud953/lessons/4943000028/concepts/48980687350923
+
 https://www.udacity.com/course/linear-algebra-refresher-course--ud953
 
 https://www.udacity.com/course/intro-to-descriptive-statistics--ud827
