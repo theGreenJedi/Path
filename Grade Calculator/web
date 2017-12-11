@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+
+<head>
+	<title>GreenJedi's&#8212;Grade Calculator</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="common/stylesheet_1_all_pages.css" type="text/css"/>
+	<link rel="stylesheet" href="common/stylesheet_1_grade_calculator.css" type="text/css"/>
+</head>
+
+<body>
+
+<script type="text/javascript">
+<!--
+var max_event = 20;
+//-->
+
+<!--
+//********** Calculations and Print ***********
+function isNum(textObj){
+	var newValue = textObj;
+	var newLength = newValue.length;
+	for (var i = 0; i < newLength; i++){
+		aChar = newValue.substring(i,i+1)
+		if ((aChar < "0" || aChar > "9")&&(aChar!=".")){
+			return false
+		}
+	}
+	return true
+}
+
+function showResults(thisform){
+
+	var pageh = ''
+
+	var givenoverallgrade = thisform.avggrade.value
+	var givenaveragegrade = thisform.overallgrade.value
+
+	var g_score_in = new Array(max_event+1)
+	var g_weight_in = new Array(max_event+1)
+
+	var g_score_out = new Array(max_event+1)
+	var g_weight_out = new Array(max_event+1)
+
+	var maxWeight = 0
+	var maxShow = 0
+
+	for (var i = 1; i <= max_event; i++){
+		en = 2 * (i - 1)
+		g_score_in[i] = thisform.elements[en].value
+		g_weight_in[i] = thisform.elements[en + 1].value
+	}
+
+	// determine maxWeight as max number of grades to display
+	maxScore = 0
+	for (var i = 1; i <= max_event; i++){
+		if (g_score_in[i] != '') {
+			maxScore = i;
+		}
+	}
+	maxWeight = 0
+	for (var i = 1; i <= max_event; i++){
+		if (g_weight_in[i] != '') {
+			maxWeight = i;
+		}
+	}
+
+//	alert(maxWeight)
+//	alert(maxScore)
+	checkinput1 = false
+	if (maxWeight != maxScore){
+		checkinput1 = true
+	}
+	else {
+		maxShow = maxWeight
+	}
+
+	checkinput2 = false
+	for (var i = 1; i <= maxShow; i++){
+		if (g_weight_in[i] != '' && g_score_in[i] != ''){
+//			alert(i + "-" + isInt(g_weight_in[i]))
+//			alert(i + "-" + isInt(g_score_in[i]))
+			if (!isNum(g_weight_in[i]) || !isNum(g_score_in[i]) || parseFloat(g_weight_in[i]) == 0){
+				checkinput2 = true
+			}
+			else {
+				g_score_out[i] = parseFloat(g_score_in[i])
+				g_weight_out[i] = parseFloat(g_weight_in[i])
+			}
+		}
+	}
+
+//	alert(checkinput1)
+//	alert(checkinput2)
+
+	if (checkinput1 == true || checkinput2 == true){
+		var page = ''
+		page = pageh;
+		page += '<p>There is a problem with your input; please correct and re-enter it.</p>';
+	}
+	else {
+		wt = 100
+
+		// wgt = accumulated total weighted grades
+		var wgt = 0
+		// wut = sum of weights used
+		var wut = 0
+
+		for (var i = 1; i <= maxShow; i++){
+			if (g_score_out[i] >= 0) {
+				wgt = wgt + g_score_out[i] * g_weight_out[i];
+				wut = wut + g_weight_out[i];
+			}
+		}
+
+		// wp = percentage of weights used
+		var wp = wut * 100 / wt;
+		wp = wp.toFixed(3);
+		// wfp = percentage of weights not yet used
+		var wfp = (wt - wut) * 100 / wt;
+		wfp = wfp.toFixed(3);
+
+		// avgsofar = current average grade
+		var avgsofar = 0
+		if (wut > 0) {
+			avgsofar = (wgt * 100 / wut) / 100
+			avgsofar = avgsofar.toFixed(3);
+		}
+
+
+		var gx = 0
+		if (parseFloat(givenoverallgrade) > 0) {
+			gx = (givenoverallgrade * wt - wgt)/(wt-wut)
+			gx = gx.toFixed(3);
+		}
+
+		var gy = 0
+		if (parseFloat(givenaveragegrade) > 0) {
+			gy = (wgt + (wt-wut) * givenaveragegrade)/wt
+			gy = gy.toFixed(3);
+		}
+
+		// Show grade answers
+		var page = pageh
+		page += '<p style="margin-bottom: 25px">Here are the numbers you entered:</p>'
+    	page += '<table class="grades_and_weights">'
+    	page += '<tr><td><b>Assignment</b></td>'
+    	page += '<td><b>Grade</b></td>'
+    	page += '<td><b>Weight (Percent)</b></td></tr>'
+
+		for (var i = 1; i <= maxShow; i++){
+			this_score = g_score_out[i]
+			this_weight = g_weight_out[i]
+			if (this_score != undefined && this_weight != undefined){
+				page += '<tr>';
+				page += '<td>' + i + '</td>';
+				page += '<td class="entered_number">' + this_score + '</td>';
+				page += '<td class="entered_number">' + this_weight + '</td>';
+				page += '</tr>';
+			}
+		}
+
+		page += '</table><br />'
+
+		page += '<p>'
+		if (wgt > 0 && wut > 0) {
+			if (maxShow == 1) {
+				blurb1 = 'According to the numbers you entered, you have a grade of '
+				blurb2 = ' on the assignment you have completed so far, and that assignment&#8217;s weight is '
+				blurb3 = ' percent.</p>'
+			}
+			else {
+				blurb1 = 'According to the numbers you entered, you have an average grade of '
+				blurb2 = ' on the assignments you have completed so far, and those assignments&#8217; combined weight is '
+				blurb3 = ' percent.</p>'
+			}
+			page += blurb1 + avgsofar + blurb2 + wp + blurb3
+
+			if (wp < 100) {
+				if (parseFloat(givenoverallgrade) > 0) {
+					blurb0 = '<br />'
+					blurb1 = '<p>In order to finish with an overall average of '
+					blurb2 = ', you will need an average grade of '
+					blurb3 = ' on the remaining '
+					blurb4 = ' percent of the work in the course'
+					page += blurb0 + blurb1 + givenoverallgrade + blurb2 + gx + blurb3 + wfp + blurb4 + '.</p>'
+				}
+				if (parseFloat(givenaveragegrade) > 0) {
+					blurb0 = '<br />'
+					blurb1 = '<p>If you get an average grade of '
+					blurb2 = ' on the remaining '
+					blurb3 = ' percent of the work in the course, you will finish with an overall average of '
+					page += blurb0 + blurb1 + givenaveragegrade + blurb2 + wfp + blurb3 + gy + '.</p>'
+				}
+			}
+			else if (parseFloat(givenoverallgrade) > 0 || parseFloat(givenaveragegrade) > 0){
+				blurb0 = '<br />'
+				blurb1 = '<p>The sum of the assignment weights you have entered is at least 100 percent,';
+				blurb2 = ' so your grade for this course is already determined.';
+				blurb3 = ' If you know there is more work to be graded, check the weights for the grades you have already received,';
+				blurb4 = ' and enter them again, making sure their weights add up to less than 100 percent.</p>';
+				page += blurb0 + blurb1 + blurb2 + blurb3 + blurb4
+			}
+		}
+	}
+
+	page += '<br /><p align="center"><input type="button" class="button" style="width: 420px;" onclick="showFilledForm()" value="Go back to completed input screen, to change inputs." />'
+	page += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="button" style="width: 250px;" onclick="showEmptyForm()" value="Go back to blank input screen." /></p>'
+	document.getElementById('formDiv').style.visibility = "hidden";
+	document.getElementById('formDiv').style.display = "none";
+	document.getElementById('resultDiv').innerHTML = page;
+	scroll(0,0);
+}
+
+function showFilledForm(){
+	document.getElementById('formDiv').style.visibility = "visible";
+	document.getElementById('formDiv').style.display = "block";
+	document.getElementById('resultDiv').innerHTML = "";
+	scroll(0,0);
+}
+
+function showEmptyForm(){
+	document.getElementById("f1").reset();
+	document.getElementById('formDiv').style.visibility = "visible";
+	document.getElementById('formDiv').style.display = "block";
+	document.getElementById('resultDiv').innerHTML = "";
+	scroll(0,0);
+}
+//-->
+</script>
+
+<div id="main_container">
+
+<p class="header"><a href="." title="go to my home page">Ben Eggleston</a></p>
+<p class="header"><a href="http://www.ku.edu" title="go to KU&#8217;s home page">University of Kansas</a></p>
+
+<h1>Grade Calculator</h1>
+<div id="formDiv">
+<p style="margin-top: 20px; margin-bottom: 20px;"><b>Instructions:</b> Type in the grades you’ve received, along with the weights they’ll have in the determination of your overall average. Then, if you want, fill in one or both of the fields embedded in the questions. After you press ‘Compute’, the results will show your average so far, as well as the answer(s) to any question(s) whose embedded fields you filled in. <i>Every grade you enter must be a non-negative number, and every percentage you enter must be a positive number.</i></p>
+
+<form id="f1" action=" ">
+    <script type="text/javascript">
+<!--
+	// get and show cookies
+
+	var form = '';
+	var g_weight = '';
+	var g_score = '';
+
+	form += '<table class="grades_and_weights">';
+	form += '<tr>';
+	form += '<td><b>Assignment</b></td>';
+	form += '<td><b>Grade</b></td>';
+	form += '<td><b>Weight (Percent)</b></td>';
+	form += '</tr>';
+
+	for (var i = 1; i <= max_event; i++){
+		if (g_score == 'null'){
+			g_score = ''
+		}
+		if (g_weight == 'null'){
+			g_weight = ''
+		}
+		form += '<tr>';
+		form += '<td>' + i + '</td>';
+		form += '<td><input type="text" id="g_score' + i + '" name="g_score' + i + '" value="' + g_score + '" size="3"></td>';
+		form += '<td><input type="text" id="g_weight' + i + '" name="g_weight' + i + '" value="' + g_weight + '" size="3"></td>';
+		form += '</tr>';
+	}
+
+	form += '<tr>';
+	form += '<td colspan="3" text-align="left"><br /><i>What average grade do I need on the remaining assignments<br />in order to end up with an overall average of&nbsp;&nbsp;<input type="text" name="avggrade" size="3" />?</i></td>';
+	form += '</tr>';
+	form += '<tr>';
+	form += '<td colspan="3" text-align="left"><i>What will my overall average be if I get an average of&nbsp;&nbsp;<input type="text" name="overallgrade" size="3" /><br />on the remaining assignments?</i></td>';
+	form += '</tr>';
+	form += '<tr>';
+	form += '<td colspan="3"><input type="button" class="button" style="width: 100px;" name="calculate" value="Compute" onclick="showResults(this.form)"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="button" style="width: 100px;" name="clear" value="Clear "/></td>';
+	form += '</tr>';
+	form += '</table>';
+
+	document.write(form);
+
+	document.getElementById("g_score1").focus()
+	document.getElementById("g_score1").select()
+
+//-->
+</script>
+</form>
+</div>
+<div id="resultDiv">
+</div>
+</div>
+</body>
+</html>
