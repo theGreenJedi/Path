@@ -1,0 +1,605 @@
+1
+00:00:00,230 --> 00:00:04,350
+Hi, in this video, we will introduce
+a problem about a web service, and
+
+2
+00:00:04,350 --> 00:00:06,270
+IP addresses of it's clients.
+
+3
+00:00:06,270 --> 00:00:07,540
+We will use this problem,
+
+4
+00:00:07,540 --> 00:00:10,950
+to illustrate different approaches
+throughout the whole lesson.
+
+5
+00:00:10,950 --> 00:00:13,350
+Suppose you have a web service with many,
+many clients,
+
+6
+00:00:13,350 --> 00:00:17,170
+who access your service through
+the Internet from different computers.
+
+7
+00:00:17,170 --> 00:00:18,120
+In the Internet,
+
+8
+00:00:18,120 --> 00:00:22,120
+there is a system which assigns a unique
+address to each computer in the network.
+
+9
+00:00:22,120 --> 00:00:25,350
+Just like every house in
+the city has its own address.
+
+10
+00:00:25,350 --> 00:00:29,690
+Those addresses of computers
+are called IP addresses or just IPs.
+
+11
+00:00:29,690 --> 00:00:35,040
+Every IP address looks like this,
+four integers, separated by dots.
+
+12
+00:00:35,040 --> 00:00:38,610
+Every of the four integers
+is from 0 to 255.
+
+13
+00:00:38,610 --> 00:00:42,830
+So that it can be stored
+in eight bits of memory.
+
+14
+00:00:42,830 --> 00:00:46,960
+And the whole IP address,
+can be stored in 32 bits of memory
+
+15
+00:00:46,960 --> 00:00:50,740
+as the standard integer type in C++ or
+Java.
+
+16
+00:00:50,740 --> 00:00:54,130
+So there are 2 to the power
+of 32 different IP addresses,
+
+17
+00:00:54,130 --> 00:00:55,500
+which is roughly 4 billion.
+
+18
+00:00:56,500 --> 00:00:58,200
+Recently, the Internet became so
+
+19
+00:00:58,200 --> 00:01:02,460
+big that 4 billion is no longer enough for
+all of the commuters in the network.
+
+20
+00:01:02,460 --> 00:01:07,405
+That's why people designed the new
+address system called IPv6.
+
+21
+00:01:07,405 --> 00:01:11,103
+And the number of addresses
+there is 2 to the power of 128,
+
+22
+00:01:11,103 --> 00:01:13,920
+which is a number with 39 digits.
+
+23
+00:01:13,920 --> 00:01:15,880
+And it will be sufficient for a long time.
+
+24
+00:01:16,920 --> 00:01:17,540
+In this problem,
+
+25
+00:01:17,540 --> 00:01:22,440
+we will start talking about old system
+called IPv4, which is still in use.
+
+26
+00:01:22,440 --> 00:01:25,849
+And which contains only 2 to the power
+of 32 different IP addresses.
+
+27
+00:01:27,170 --> 00:01:30,290
+When somebody accesses your web service,
+
+28
+00:01:30,290 --> 00:01:34,350
+you know from which IP address did he or
+she access it.
+
+29
+00:01:34,350 --> 00:01:38,950
+And you store this information in
+a special file called access log.
+
+30
+00:01:38,950 --> 00:01:44,220
+You want to analyze all the activity, for
+example, to defend yourself from attacks.
+
+31
+00:01:44,220 --> 00:01:48,790
+An adversary can try to kill your service
+by sending lots and lots of requests from
+
+32
+00:01:48,790 --> 00:01:53,890
+his computer to your service, so
+that it doesn't survive the lot and fails.
+
+33
+00:01:53,890 --> 00:01:56,520
+This is called Denial of Service attack.
+
+34
+00:01:56,520 --> 00:01:59,200
+And you want to be able to
+quickly notice the pattern.
+
+35
+00:01:59,200 --> 00:02:03,600
+That there is a unusual high
+number of requests from the same
+
+36
+00:02:03,600 --> 00:02:07,820
+IP address during some period of time for
+example, the last hour.
+
+37
+00:02:07,820 --> 00:02:10,450
+And to do that,
+you want to analyze your Access Log.
+
+38
+00:02:11,460 --> 00:02:16,290
+You can think of your access log as of
+a simple text file with many, many lines.
+
+39
+00:02:16,290 --> 00:02:19,540
+And in each line, you have date and
+time of the access, and
+
+40
+00:02:19,540 --> 00:02:23,250
+the IP address from which
+the client accessed your servers.
+
+41
+00:02:23,250 --> 00:02:27,450
+And you want to be able to quickly
+answer the queries like, did anybody
+
+42
+00:02:27,450 --> 00:02:31,610
+access my service from this particular
+IP address during the last hour?
+
+43
+00:02:31,610 --> 00:02:34,320
+And how many times did
+he access my service?
+
+44
+00:02:34,320 --> 00:02:38,870
+And how many different IPs were used to
+access the service during the last hour?
+
+45
+00:02:39,870 --> 00:02:43,740
+To answer those questions,
+we'll need to do some Log Processing.
+
+46
+00:02:43,740 --> 00:02:48,680
+But of course, we don't want to
+process whole one hour of logs
+
+47
+00:02:48,680 --> 00:02:53,210
+each time we want to answer such a simple
+question because one hour of logs can
+
+48
+00:02:53,210 --> 00:02:56,280
+easily contain dozens of thousands or
+hundred of thousands or
+
+49
+00:02:56,280 --> 00:03:00,370
+even millions of lines depending
+on the load of your web service.
+
+50
+00:03:00,370 --> 00:03:01,620
+Want to do that much faster.
+
+51
+00:03:02,670 --> 00:03:05,639
+So to do that we'll keep count.
+
+52
+00:03:05,639 --> 00:03:10,966
+For each IP address, we'll keep a counter
+that says how many times exactly
+
+53
+00:03:10,966 --> 00:03:16,548
+that IP address appears in the last one
+hour of the access log, or how many times
+
+54
+00:03:16,548 --> 00:03:22,660
+during the last hour clients accessed your
+service from that particular IP address.
+
+55
+00:03:23,680 --> 00:03:27,910
+And we'll store it in some data
+structure C, which is basically
+
+56
+00:03:27,910 --> 00:03:32,690
+some data structure to store the mapping
+from IP addresses to counters.
+
+57
+00:03:32,690 --> 00:03:36,060
+We don't know yet
+how to implement that data structure C.
+
+58
+00:03:36,060 --> 00:03:37,740
+We will discuss that further.
+
+59
+00:03:37,740 --> 00:03:41,568
+We will update the counter corresponding
+to IP addresses every second.
+
+60
+00:03:41,568 --> 00:03:46,661
+For example, if now is 1 hour 45 minutes
+and 13 seconds from the start of the date
+
+61
+00:03:46,661 --> 00:03:51,950
+and we'll ignore the date field in
+the access log for the sake of simplicity.
+
+62
+00:03:51,950 --> 00:03:55,870
+Then we need to increment the counters
+corresponding to the IP addresses in
+
+63
+00:03:55,870 --> 00:03:59,510
+the last two lines of the log,
+because those are new lines.
+
+64
+00:03:59,510 --> 00:04:03,530
+We also need to remember to
+decrement the counters corresponding
+
+65
+00:04:03,530 --> 00:04:06,280
+to the IP addresses in
+the old lines of the log.
+
+66
+00:04:06,280 --> 00:04:09,930
+For that we'll look at the lines
+exactly 1 hour ago in the log.
+
+67
+00:04:09,930 --> 00:04:12,360
+Because the lines which
+are older than that, for
+
+68
+00:04:12,360 --> 00:04:16,640
+them we've already decremented
+the counters in the previous seconds.
+
+69
+00:04:16,640 --> 00:04:19,400
+And the lines which
+are more recent than that,
+
+70
+00:04:19,400 --> 00:04:23,540
+we still don't need to decrement the
+counters because the IPs in those lines
+
+71
+00:04:23,540 --> 00:04:28,220
+are still in the 1 hour window
+ending in the current second.
+
+72
+00:04:28,220 --> 00:04:32,080
+So we'll decrement the counters
+corresponding to the lines which are 1
+
+73
+00:04:32,080 --> 00:04:33,820
+hour ago from the current moment.
+
+74
+00:04:34,890 --> 00:04:37,380
+Now let's look at the to pseudo code.
+
+75
+00:04:37,380 --> 00:04:40,060
+In the main loop we have
+the following variables.
+
+76
+00:04:40,060 --> 00:04:42,470
+log represents the access log.
+
+77
+00:04:42,470 --> 00:04:46,190
+We will think of it as
+an array of log lines.
+
+78
+00:04:46,190 --> 00:04:48,960
+Each log line has two fields.
+
+79
+00:04:48,960 --> 00:04:51,460
+Time and IP address.
+
+80
+00:04:51,460 --> 00:04:54,130
+C is some mapping from IPs to counters.
+
+81
+00:04:54,130 --> 00:04:55,980
+We still don't know how
+to implement that but
+
+82
+00:04:55,980 --> 00:04:58,650
+we suppose that we have some
+data structure for that.
+
+83
+00:04:59,700 --> 00:05:05,470
+i is an index in the log which points
+to the first unprocessed log line.
+
+84
+00:05:05,470 --> 00:05:08,400
+So when a new second starts,
+we'll need to start
+
+85
+00:05:08,400 --> 00:05:12,680
+incrementing counters corresponding to
+lines starting from i and further in log.
+
+86
+00:05:13,770 --> 00:05:17,900
+j is the first or the oldest line
+in the current 1 hour window.
+
+87
+00:05:17,900 --> 00:05:22,850
+So that when the next second starts
+we'll need to decrement counters for
+
+88
+00:05:22,850 --> 00:05:26,610
+some of the lines starting
+from line number j.
+
+89
+00:05:26,610 --> 00:05:30,460
+We initialize i and j with 0 and
+C with an empty mapping,
+
+90
+00:05:30,460 --> 00:05:32,960
+because there is nothing
+to store in the start.
+
+91
+00:05:32,960 --> 00:05:37,030
+And then each second,
+we call procedure UpdateAccessList, and
+
+92
+00:05:37,030 --> 00:05:39,670
+we pass there the access
+log to read data from.
+
+93
+00:05:39,670 --> 00:05:44,020
+We also pass i and j,
+which we will use inside and also update.
+
+94
+00:05:44,020 --> 00:05:47,649
+And we pass data structure C,
+which is our goal to updated.
+
+95
+00:05:49,290 --> 00:05:52,430
+So now let's look at the pseudo code for
+update access list.
+
+96
+00:05:52,430 --> 00:05:53,600
+it consists of two parts.
+
+97
+00:05:53,600 --> 00:05:55,770
+The first part deals
+with the new lines and
+
+98
+00:05:55,770 --> 00:05:58,020
+the second part deals with the old lines.
+
+99
+00:05:59,140 --> 00:06:03,380
+New lines start from line number i
+which is the first unprocessed line.
+
+100
+00:06:03,380 --> 00:06:07,670
+Look at this line and we increase
+the counter corresponding to the IP
+
+101
+00:06:07,670 --> 00:06:10,030
+in this line using our data structure C.
+
+102
+00:06:10,030 --> 00:06:11,940
+And then we go on to the next line.
+
+103
+00:06:11,940 --> 00:06:16,480
+We'll proceed with this while
+the time written in the log line i
+
+104
+00:06:16,480 --> 00:06:21,260
+is still less than or equal to the time
+when UpdateAccessList was launched and
+
+105
+00:06:21,260 --> 00:06:23,550
+then we stop processing new lines.
+
+106
+00:06:23,550 --> 00:06:25,790
+And we want to all blinds.
+
+107
+00:06:25,790 --> 00:06:29,280
+How do we determine that the line is
+old enough, to decrement the counter?
+
+108
+00:06:30,380 --> 00:06:35,820
+We compute the time now,
+which we assume is computed in seconds.
+
+109
+00:06:35,820 --> 00:06:42,690
+So then we need to subtract, exactly one
+hour from that and that is 3600 seconds.
+
+110
+00:06:42,690 --> 00:06:45,980
+And if the time written
+in line j is less than or
+
+111
+00:06:45,980 --> 00:06:48,630
+equal to that, we need to decrement
+the corresponding counter.
+
+112
+00:06:48,630 --> 00:06:54,830
+So we'll start with line number j, which
+is the first line in our 1 hour window.
+
+113
+00:06:54,830 --> 00:06:57,480
+We check that it is old enough
+to decrement the calendar.
+
+114
+00:06:57,480 --> 00:07:01,250
+We decrement the calendar if that's the
+case and then we move on to the next line.
+
+115
+00:07:01,250 --> 00:07:06,857
+In the and when we stop in this while
+loop, j will point again to the first or
+
+116
+00:07:06,857 --> 00:07:10,120
+oldest line in the current 1 hour window.
+
+117
+00:07:11,380 --> 00:07:14,300
+So we've implemented the updating
+procedure correctly.
+
+118
+00:07:14,300 --> 00:07:19,010
+Now how to answer the question
+whether this particular IP was or
+
+119
+00:07:19,010 --> 00:07:23,220
+was not used to access our
+service during the last hour.
+
+120
+00:07:23,220 --> 00:07:25,010
+That is really easy.
+
+121
+00:07:25,010 --> 00:07:28,420
+If the counter corresponding
+to that IP is more than 0,
+
+122
+00:07:28,420 --> 00:07:31,190
+then this IP was used
+during the last hour.
+
+123
+00:07:31,190 --> 00:07:34,002
+Otherwise the counter will be 0.
+
+124
+00:07:34,002 --> 00:07:38,530
+So,we've implemented all the procedures
+
+125
+00:07:38,530 --> 00:07:43,770
+necessary to answer the questions,
+but for one small detail.
+
+126
+00:07:43,770 --> 00:07:46,010
+We don't know how to
+implement data structure C.
+
+127
+00:07:47,140 --> 00:07:49,441
+And we will discuss that
+in the next lectures.

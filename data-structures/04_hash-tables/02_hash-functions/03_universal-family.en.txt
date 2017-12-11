@@ -1,0 +1,119 @@
+Hi, in the previous video you learned
+that for any deterministic hash function, there is a bad input on which it
+will have a lot of collisions. And in this video,
+you will learn to solve that problem. And the idea starts from, remember
+when you started QuickSort algorithm? At first, you learned that it can
+work as slow as m squared time. But then you learned that adding a random
+pivot to the partition procedure helps, because now you know that QuickSort
+works on average in n log n time. And in practice, it works usually faster
+than the other sorting algorithms. So we want to use the same randomization
+idea here for hash functions. But we already know that we cannot just
+use a random hash function because it must be deterministic. So instead, we will first create
+a whole set of hash functions called a family of hash functions. And we'll choose a random function from
+this family to use in our algorithm. Not all families of hash functions
+are good, however, and so we will need a concept of universal
+family of hash functions. So let U be the universe, the set of
+all possible keys that we want to hash. And then a set of hash functions
+denoted by calligraphic letter H, set of functions from U to
+numbers between 0 and m- 1. So hash functions with
+the same cardinality. Such set is called
+a universal family if for any two keys in the universe
+the probability of collision is small. So, what does that mean? Our hash function is
+a deterministic function, so for any two keys it either has a collision for
+those two keys or not. So, what does it mean that
+the probability of collision for two different keys is small? It means that if we look at
+our family calligraphic H, then at most 1/m part of all
+hash functions in this family, at most 1/m of them have a collision for
+these two different keys. And if we select a random hash
+function from the family with probability at least one minus one over m,
+which is very close to one, there will be no collision for
+this hash function and these two keys. And of course it is essential
+that the keys are different. Because if keys are equal then any
+deterministic hash function will have the same value on these two keys. So, this collision property with
+small probability is only for two different keys in the universe,
+but for any two different keys in the universe
+this property should be satisfied. It might seem that it is impossible but
+later you will learn how to build a universal family of hash functions and
+practice. So how are randomization
+idea works in practice. One approach would be to just make one
+hash function which returns a random value between 0 and m-1,
+each value with the same probability. Then the probability of collision for
+any two keys is exactly 1/m. But that is not a universal family. Actually we cannot use this family
+at all because the hash function is not deterministic and we can only
+use deterministic hash functions. So instead,
+we need to have some set of hash functions such that all the hash functions
+in the set are deterministic. And then, we will select a random function
+h from this set of hash functions, and we will use the same fixed function
+h throughout the whole algorithm. So that we can correctly find all the
+objects that we store in the hash table, for example. So, there is a Lemma about
+running time of operations with hash table if we
+use universal family. If hash function h is chosen at
+random from a universal family then on average the length of
+the longest chain in our hash table will be bounded by O(1 + alpha),
+where alpha is the load factor. Load factor is the ratio of number of
+keys that we store in our hash table to the size of the hash table allocated. Which is the same as the chronology
+of the hash functions in the universal family that we use. So, it makes sense. If the load factor is small it means
+that we only store a few keys in a large hash table, and so
+longest chain will be short. But as our table gets filled up,
+the chains grow. This Lemma says, however, that if we chose a random function from a
+universal family they won't grow to much. On average, the longest chain will
+still be of length just (1 + alpha). And probably that is just
+a small number because alpha is usually below one,
+you don't want to store more keys in the hash table than the size
+of the hash table allocated. So alpha will be below
+1 most of the time and then (1+ alpha) is just two, so
+this is a constant actually. So, the corollary is that if h is chosen
+at random from the universal family, then operations with hash table will
+run on average in a constant time. Now the question is,
+how to choose the size of your hash table? Of course, it control the amount of
+memory used with m which is your chronology of the hash functions and which
+is equal to the size of the hash table. But you also control
+the speed of the operations. So ideally, in practice, you want your
+load factor alpha to be between 0.5 and 1. You want it to be below 1 because
+otherwise you store too much keys in the same hash table and
+then everything could becomes slow. But also you don't want alpha to be
+too small because that way you will waste a lot of memory. If alpha is at least one-half,
+then you basically use linear memory to store your n keys and
+your memory overhead is small. And operations still run in time,
+O(1 + alpha) which is a constant time, on average if alpha is between 0.5 and 1. The question is what to do if
+you don't know in advance how many keys you want to
+store in your hash table. Of course, there is a solution to
+start with a very big hash table, so that definitely all the keys will fit. But this way you will
+waste a lot of memory. So, what we can do is copy the idea
+you learned in the lesson about dynamic arrays. You start with a small hash table and then you grow it organically as
+you put in more and more keys. Basically, you resize the hash table and make it twice bigger as soon
+as alpha becomes too large. And then,
+you need to do what is called a rehash. You need to copy all the keys from the
+current hash table to the new bigger hash table. And of course, you will need a new hash function
+with twice the chronology to do that. So here is the code which tries
+to keep loadfFactor below 0.9. And 0.9 is just a number I selected,
+you could put 1 here or 0.8, that doesn't really matter. So first we compute the current
+loadFactor, which is the ratio of the number of keys stored in
+the table to the size of the hash table. And if that loadFactor just
+became bigger than 0.9, we create a new hash table of twice
+the size of our current hash table. We also choose a new random hash
+function from the universal family with twice the cardinality coresponding
+to the new hash table size. And then we take each object
+from our current hash table, and we insert it in the new hash table
+using the new hash function. So we basically copy all
+the keys to the new hash table. And then we substitute our current hash
+table with the bigger one and the current hash function with the hash function
+corresponding to the new hash table. That way,
+the loadFactor decreases roughly twice. Because we added,
+probably just added one new element, the loadFactor became just
+a little more than 0.9. And then we increase the size of the hash
+table twice while the number of keys stayed the same, so
+the loadFactor became roughly 0.45, which is below 0.9,
+which is what we wanted. So to achieve that, you need to
+call this procedure rehash after each operation which inserts
+something in your hash table. And it could work slowly when
+this happens because the rehash procedure needs to copy all
+the keys from your current hash table to the new big hash table,
+and that works in linear time. But similarly to dynamic arrays,
+the amortized running time will still be constant on average because their
+hash will happen only rarely. So you reach a certain
+level of load factor and you increase the size of our table twice. And then it will take twice longer to
+again reach too high value of load factor. And then you'll again increase
+your hash table twice. So the more keys you put in,
+the longer it takes until the next rehash. So their hashes will be really rare, and that's why it won't influence your running
+time with operations, significantly.

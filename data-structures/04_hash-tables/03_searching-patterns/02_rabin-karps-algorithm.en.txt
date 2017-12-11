@@ -1,0 +1,110 @@
+Hi, in this video,
+we'll introduce Rabin-Karp's Algorithm for finding all occurrences
+of a pattern in the text. At first it will have the same
+running time as the Naive Algorithm from the previous video. But then we'll be able to improve it
+significantly for the practical purposes. So we need to compare our pattern
+to all substrings S of text T, with length the same as
+the length of the pattern. And in the Naive algorithm,
+we just did that by checking character by character whether pattern is equal
+to the corresponding substring. And the idea is we could use hashing to
+quickly compare P with substrings of T. So, how to do that? Well, let's introduce
+some hash function h and of course if it is
+a deterministic hash function. And we see that the value of hash
+function on the pattern P is different from the value of this
+hash function on some string S. Then definitely P is not equal to S,
+because h is deterministic. However if the value of hash function on
+P is equal to the value of hash function on S, P can be equal to S or it can be
+different from S if there is a collision. So to exactly check
+whether P is equal to S or not we will need to call
+our function AreEqual(P,S). And so this doesn't yet save us any time. But we hope that we could
+call this function AreEqual less frequently because there
+will be only few collisions. So we'll use polynomial hashing family. Polygraphic P with index p small
+with some big prime number p. And if P pattern is not equal
+to S substring of text, then the probability that the value
+of the hash function on the pattern is the same as the value of hash
+function on the sub string is at most length of the pattern divided
+by our big prime number p. And we'll choose,
+a prime number P big enough, so that this probability will be very small. So here is the code,
+of our algorithm RabinKarp. It takes its input, text T, and pattern P. And it starts by initializing the hash
+function from polynomial family. We first choose a very big prime number p. We'll talk later about how to choose it,
+how big it should be. And we also choose a random
+number x between 1 and p- 1. Choose the specific hash function
+from the polynomial family. Initialize all our list of positions where
+pattern occurs in text with an empty list. We also precompute the hash
+value of our pattern, and we call the PolyHash function to do that. And then we again need to go through all possible starting positions of pattern and
+text. So we go from i from zero to difference
+of the length of text and pattern. And for each i, we take the substring
+starting in this position i and of length equal to
+the lengths of the pattern, which is t from i to i plus
+length of the pattern minus 1. And you compute the hash
+value of this substring. And then we'll look at the hash of
+the pattern and the hash of the substring. If they are different, then it means that definitely,
+P is not equal to this substring. And so,
+P doesn't occur in position i and so we don't need to do anything in this
+iteration so we just continue to the next iteration of the loop
+without calling AreEqual. However, if has values pHash and
+tHash aren't equal, then we need to check if it's true that
+P is really equal to the substring of T starting in position i or it is
+just a collision of our hash function. And to do that we make
+a call to AreEqual and pass there the substring and the pattern. If AreEqual returns true,
+it means that pattern is really equal to the correspondence substring of texts, and
+then we advance position i to resolve. Because pattern P occurs in
+position i in the text T. Otherwise we just continue to
+the next situation of our for loop. So this more or less the same as naive
+algorithm, but we have an additional checking of hash value, and so
+we're not always calling AreEqual. We are calling AreEqual either if P
+is equal to the corresponding sub string of T or if there is a collision. Let's estimate the running
+time of this algorithm. So first we need to talk
+about false alarms. We'll call false alarm the event
+when P is compared with a substring of T from i to
+i plus length of P minus 1. Compared inside the AreEqual procedure,
+but pattern P is actually not
+equal to this substring. So there's a false alarm in the sense
+that P doesn't occur in the text T starting from position i, but
+we still called the AreEqual function. And we need to go character
+by character through P and the substring to test that
+they're actually not equal. So the probability of false alarm as
+we know from the previous lesson, is at most length of the pattern over
+prime number P, which we choose. So on average, the total number of false
+alarms will be the number of iterations of our for loop,
+multiplied by this probability. And so this total number of false
+alarms can be made very small if we choose prime number P, bigger than
+the product of length of the text, and length of the pattern. Much bigger. So now let's estimate the running
+time of everything in our code except for
+calls to the AreEqual function. So the hash value of the pattern is
+computed in time big O of length of the pattern. Hash of the substring corresponding
+to the pattern is computed in the same big O of length
+of the pattern time. And this is done length of text minus
+length of the pattern plus 1 times because that is the number of
+iterations of the for loop. So the total time to compute
+all those hash values is big O of length of text multiplied
+by the length of the pattern. Now what about the running
+time of all calls to AreEqual? Each call to AreEqual is computed in big O
+of length of the pattern because we pass there are two strings of length
+equal to length of the pattern. However, AreEqual is called only when
+the hash value of the pattern as the same as the hash value of
+the corresponding substring of T. And that means that either P
+occurs in position i in text T or there was a false alarm. And by selecting the prime
+number to be very big, much bigger than the product of the length
+of text, and the length of pattern, we can make the number of false alarms
+negligible, at least on average. So, if q is the number of times
+that pattern P is actually found, in different positions in the text T, then the total time spent in AreEqual,
+on average, is big O of q. Which is number of times P is
+really found, plus the fraction T minus P plus 1 multiplied by P and
+divided by prime, p. Which is the average number of
+times that a false alarm happens. So q plus number of false
+alarms is the number of times that we need to actually
+call function AreEqual. And then the time spent inside
+the function AreEqual is proportional to the length of the pattern. So, this is the same as the O of q
+multiplied by the length of the pattern, because the second summoned
+can be made pretty small, less than 1 if we choose
+big enough prime number p. And we'll only get the first summoned
+multiplied by the length of the pattern. And now the total running time of
+the Rabin-Karp's algorithm in this variant is big O length of text multiplied
+by length of pattern plus q multiplied by the length of pattern. But, of course we know that the number of
+times that pattern occurs in text is not bigger than the number of characters,
+in text. Because there are only so many different
+positions where the pattern could start, in text. So, this sum is dominated by
+the sum of big O of length of text, multiplied by length of the pattern. So, this is basically the same
+running time as our estimate for the naive algorithm. So we haven't improved anything yet,
+but this time can be improved for this algorithm with a clever trick. And you will learn it in the next video.

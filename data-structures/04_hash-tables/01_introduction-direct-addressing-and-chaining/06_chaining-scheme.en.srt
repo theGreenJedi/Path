@@ -1,0 +1,407 @@
+1
+00:00:00,350 --> 00:00:00,950
+In this video,
+
+2
+00:00:00,950 --> 00:00:05,600
+we will study chaining, which is one of
+the most frequently used techniques for
+
+3
+00:00:05,600 --> 00:00:11,690
+using hashing to store mappings from one
+type of object to another type of object.
+
+4
+00:00:12,910 --> 00:00:14,530
+So, let us define a map.
+
+5
+00:00:15,810 --> 00:00:20,740
+We often want to store mapping from
+some objects to some other object.
+
+6
+00:00:20,740 --> 00:00:25,370
+For example, I'm mapping from
+IP addresses to integer numbers.
+
+7
+00:00:25,370 --> 00:00:30,760
+Or from filenames to the physical
+location of those files on the disk.
+
+8
+00:00:30,760 --> 00:00:33,690
+From student ID to
+the name of the student.
+
+9
+00:00:33,690 --> 00:00:38,650
+Or from contact name in your phone
+book to the contact phone number.
+
+10
+00:00:40,190 --> 00:00:44,670
+The general definition of
+a map from set of objects S
+
+11
+00:00:44,670 --> 00:00:50,050
+to the set of values V is a data
+structure which has three methods.
+
+12
+00:00:50,050 --> 00:00:54,970
+HasKey, which tells us
+whether there is an entry
+
+13
+00:00:54,970 --> 00:00:59,460
+in the map corresponding
+to object O from set S.
+
+14
+00:00:59,460 --> 00:01:04,610
+Method Get, which returns to us
+the value corresponding to the object O,
+
+15
+00:01:04,610 --> 00:01:05,870
+if there is one.
+
+16
+00:01:05,870 --> 00:01:08,940
+If there is no such value,
+it returns a special value
+
+17
+00:01:08,940 --> 00:01:12,490
+telling us that there is no entry
+corresponding to this object O in the map.
+
+18
+00:01:13,520 --> 00:01:17,550
+And the last method is set,
+the most important method,
+
+19
+00:01:17,550 --> 00:01:21,660
+which sets the value
+corresponding to object O to V.
+
+20
+00:01:22,800 --> 00:01:28,900
+Here, objects O are all from the set S and
+values V are from the set big V.
+
+21
+00:01:30,580 --> 00:01:34,750
+We want to implement a map,
+using hash function, and
+
+22
+00:01:34,750 --> 00:01:38,310
+some combination of ideas
+from direct addressing, and
+
+23
+00:01:38,310 --> 00:01:42,440
+least based solution from
+one of the previous videos.
+
+24
+00:01:42,440 --> 00:01:44,990
+So what we'll do is called chaining.
+
+25
+00:01:44,990 --> 00:01:51,090
+We will create an array of size m, where m
+is the cardinality of the hash function,
+
+26
+00:01:51,090 --> 00:01:54,020
+and in this case, let m be eight.
+
+27
+00:01:54,020 --> 00:01:57,600
+This won't be an array of integers,
+though.
+
+28
+00:01:57,600 --> 00:01:59,610
+This will be an array of lists.
+
+29
+00:01:59,610 --> 00:02:03,560
+So in each cell of this array,
+we will store a list.
+
+30
+00:02:03,560 --> 00:02:06,190
+And this will be a list of pairs.
+
+31
+00:02:06,190 --> 00:02:09,160
+And each pair will consist of an object,
+O.
+
+32
+00:02:09,160 --> 00:02:12,210
+And a value V,
+corresponding to this object.
+
+33
+00:02:12,210 --> 00:02:13,620
+Let's look at an example.
+
+34
+00:02:14,880 --> 00:02:17,710
+For example,
+our objects are IP addresses, and
+
+35
+00:02:17,710 --> 00:02:19,960
+the values are the corresponding counters.
+
+36
+00:02:19,960 --> 00:02:25,080
+As in our initial problem about web
+service, and IP addresses of its class.
+
+37
+00:02:25,080 --> 00:02:31,100
+Now we're processing the log, and
+we see an IP address, starting with 173.
+
+38
+00:02:31,100 --> 00:02:37,120
+And it so happens that the value of hash
+function on this IP address is four.
+
+39
+00:02:37,120 --> 00:02:42,000
+Then, we look at the cell four,
+the list there is now empty.
+
+40
+00:02:42,000 --> 00:02:45,850
+But we append,
+in the pair of our IP address.
+
+41
+00:02:45,850 --> 00:02:49,350
+And the corresponding counter one,
+to this list.
+
+42
+00:02:49,350 --> 00:02:53,590
+The value is one because this is
+the first time that we encounter this AB.
+
+43
+00:02:54,890 --> 00:02:57,360
+Now we'll look at the next IP in the log.
+
+44
+00:02:57,360 --> 00:03:00,840
+It starts with 69, and
+the hash value for this IP is one.
+
+45
+00:03:00,840 --> 00:03:03,900
+So we'll look at the cell number one, and
+
+46
+00:03:03,900 --> 00:03:09,770
+we append the pair of this IP address and
+the corresponding counter one to the list.
+
+47
+00:03:09,770 --> 00:03:14,080
+Again the counter is one because this is
+the first time we see this IP address.
+
+48
+00:03:15,140 --> 00:03:20,690
+Now it looks at the next IP address in
+the log and we see that it again starts
+
+49
+00:03:20,690 --> 00:03:26,230
+with 173 and actually it coincides with
+the first IP that we've already seen.
+
+50
+00:03:26,230 --> 00:03:31,050
+And the hash value is again four,
+because hash function is deterministic,
+
+51
+00:03:31,050 --> 00:03:34,930
+it always returns the same number for
+same object.
+
+52
+00:03:34,930 --> 00:03:38,880
+So we'll look at the cell number four,
+we'll look through the whole list and
+
+53
+00:03:38,880 --> 00:03:45,038
+we find out that there is already a pair
+containing this IP address as the key.
+
+54
+00:03:45,038 --> 00:03:51,350
+So instead of appending this
+IP address again to the list,
+
+55
+00:03:51,350 --> 00:03:54,180
+we will increase the value of the counter
+
+56
+00:03:54,180 --> 00:03:59,350
+by one because this is the second
+time we've seen our IP address.
+
+57
+00:03:59,350 --> 00:04:03,080
+Of course in the interface of
+a general map, there is no method for
+
+58
+00:04:03,080 --> 00:04:08,730
+incrementing a counter, there is a method
+to set so we will need to first use
+
+59
+00:04:08,730 --> 00:04:12,490
+method get to get the value corresponding
+to this IP address, we will get one.
+
+60
+00:04:12,490 --> 00:04:16,910
+We will then increase it by one ourselves,
+get two.
+
+61
+00:04:16,910 --> 00:04:21,190
+And then we will call set for
+this IP address and value two.
+
+62
+00:04:21,190 --> 00:04:26,690
+And it will just rewrite the value
+from one to two in this list element.
+
+63
+00:04:27,820 --> 00:04:31,110
+Then, we'll look at the next
+line in our log, and
+
+64
+00:04:31,110 --> 00:04:34,540
+we see that this is IP starting from 91.
+
+65
+00:04:34,540 --> 00:04:39,020
+And it so happens that the hash value for
+this IP address, again,
+
+66
+00:04:39,020 --> 00:04:42,250
+is four,
+although this is a different IP address.
+
+67
+00:04:42,250 --> 00:04:46,160
+And that has to happen at some point,
+because there are many,
+
+68
+00:04:46,160 --> 00:04:50,010
+many different IP addresses, and
+only eight entries in our array.
+
+69
+00:04:51,170 --> 00:04:51,980
+So what do we do?
+
+70
+00:04:51,980 --> 00:04:56,380
+If we look at the cell number four,
+there is a non-empty list there.
+
+71
+00:04:56,380 --> 00:04:58,120
+We go through the whole list, but
+
+72
+00:04:58,120 --> 00:05:03,570
+we see that our new IP address
+starting from 91 is not in the list.
+
+73
+00:05:03,570 --> 00:05:07,680
+So we add our new IP address
+to the end of this list
+
+74
+00:05:09,010 --> 00:05:11,880
+along with the corresponding
+counter of one.
+
+75
+00:05:11,880 --> 00:05:15,880
+And these two IP addresses in the list for
+
+76
+00:05:15,880 --> 00:05:20,450
+cell number four already
+make a chain together.
+
+77
+00:05:20,450 --> 00:05:25,530
+And if we go further and
+further through the log, and we add some
+
+78
+00:05:25,530 --> 00:05:30,680
+IP addresses to this map,
+some of the chains will become longer.
+
+79
+00:05:30,680 --> 00:05:34,240
+If where some point we'll need to remove
+
+80
+00:05:34,240 --> 00:05:39,780
+some IP address from the list we can do
+that and the chain can become shorter.
+
+81
+00:05:39,780 --> 00:05:44,270
+But anyway, you see the general
+structure that a chain maybe empty,
+
+82
+00:05:44,270 --> 00:05:47,670
+maybe non-empty,
+starts in any cell of the array.
+
+83
+00:05:47,670 --> 00:05:52,620
+The array size is m, which is equal to
+the cardinality of the hash function.
+
+84
+00:05:52,620 --> 00:05:58,005
+And for each such cell we store a list
+with all the IP addresses which
+
+85
+00:05:58,005 --> 00:06:04,173
+occurred before and which have hash value
+the same as the number of the cell.

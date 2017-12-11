@@ -1,0 +1,809 @@
+1
+00:00:01,180 --> 00:00:03,470
+In this video, we're going to
+continue talking about trees.
+
+2
+00:00:03,470 --> 00:00:07,330
+And in particular, look at walking a tree,
+or visiting the elements of a tree,
+
+3
+00:00:07,330 --> 00:00:09,660
+or traversing the elements of a tree.
+
+4
+00:00:09,660 --> 00:00:13,170
+So often we want to go through the nodes
+of a tree in a particular order.
+
+5
+00:00:13,170 --> 00:00:18,460
+We talked earlier, when we were looking
+at the syntax tree of an expression,
+
+6
+00:00:18,460 --> 00:00:21,990
+how we could evaluate the expression
+by working our way up from the leaves.
+
+7
+00:00:21,990 --> 00:00:26,830
+So that would be one way of walking
+through a tree in a particular order so
+
+8
+00:00:26,830 --> 00:00:28,940
+we could evaluate.
+
+9
+00:00:28,940 --> 00:00:31,360
+Another example might be
+printing the nodes of a tree.
+
+10
+00:00:31,360 --> 00:00:33,650
+If we had a binary search tree,
+
+11
+00:00:33,650 --> 00:00:36,560
+we might want to get the elements
+of a tree in sorted order.
+
+12
+00:00:38,180 --> 00:00:40,340
+There are two main ways
+to traverse a tree.
+
+13
+00:00:40,340 --> 00:00:42,420
+One, is depth-first.
+
+14
+00:00:42,420 --> 00:00:43,390
+So there,
+
+15
+00:00:43,390 --> 00:00:48,379
+we completely traverse one sub-tree
+before we go on to a sibling sub-tree.
+
+16
+00:00:48,379 --> 00:00:53,349
+Alternatively, in breadth-first search we
+traverse all the nodes at one level before
+
+17
+00:00:53,349 --> 00:00:54,703
+we go to the next level.
+
+18
+00:00:54,703 --> 00:01:00,265
+So in that case, we would traverse
+all of our siblings before
+
+19
+00:01:00,265 --> 00:01:05,186
+we visited any of the children
+of any of the siblings.
+
+20
+00:01:05,186 --> 00:01:08,030
+We'll see some code examples of these.
+
+21
+00:01:08,030 --> 00:01:13,710
+In depth-first search, so we're going to
+look here at an in-order traversal.
+
+22
+00:01:13,710 --> 00:01:16,860
+And that's really defined best for
+a binary tree.
+
+23
+00:01:16,860 --> 00:01:19,690
+This is InOrderTraversal is
+what we might use to print
+
+24
+00:01:19,690 --> 00:01:22,410
+all the nodes of a binary search
+tree in alphabetical order.
+
+25
+00:01:23,750 --> 00:01:28,250
+So, we're going to have a
+recursive implementation,
+
+26
+00:01:28,250 --> 00:01:31,990
+where if we have a nil tree,
+we do nothing, otherwise,
+
+27
+00:01:31,990 --> 00:01:36,780
+we traverse the left sub-tree, and then do
+whatever we're going to do with the key,
+
+28
+00:01:36,780 --> 00:01:38,820
+visit it, in this case,
+we're going to print it.
+
+29
+00:01:38,820 --> 00:01:41,780
+But often there's just some
+operation you want to carry out, and
+
+30
+00:01:41,780 --> 00:01:44,600
+then traverse the right sub-tree.
+
+31
+00:01:44,600 --> 00:01:45,440
+So let's look at an example of this.
+
+32
+00:01:45,440 --> 00:01:47,880
+We've got our binary search tree.
+
+33
+00:01:47,880 --> 00:01:50,670
+And we're going to look at how these
+nodes get printed out if we do
+
+34
+00:01:50,670 --> 00:01:52,250
+an in-order traversal.
+
+35
+00:01:52,250 --> 00:01:57,530
+So to begin with, we go to the Les node.
+
+36
+00:01:57,530 --> 00:01:59,830
+And from there, since it's not nil,
+
+37
+00:01:59,830 --> 00:02:05,030
+we're going to do an in-order traversal
+of its left child, which is Cathy.
+
+38
+00:02:05,030 --> 00:02:07,520
+Similarly now we're going to do
+an in-order traversal of its left child,
+
+39
+00:02:07,520 --> 00:02:08,030
+which is Alex.
+
+40
+00:02:09,840 --> 00:02:14,090
+We do an in-order traversal of its left
+child which is nil, so it does nothing.
+
+41
+00:02:14,090 --> 00:02:16,960
+So we come back to Alex, and
+then print out Alex, and
+
+42
+00:02:16,960 --> 00:02:21,010
+then traverse its right sub-tree
+which is nil and does nothing.
+
+43
+00:02:21,010 --> 00:02:22,680
+We come back to Alex.
+
+44
+00:02:22,680 --> 00:02:25,830
+And then we're finished with Alex and
+we go back to Cathy.
+
+45
+00:02:25,830 --> 00:02:31,730
+So, we have successfully
+completed Cathy's left sub-tree.
+
+46
+00:02:31,730 --> 00:02:35,609
+So we did an in-order traversal of that, so
+now we're going to print Cathy, and
+
+47
+00:02:35,609 --> 00:02:39,200
+then do an in-order traversal of its
+right sub-tree, which is Frank.
+
+48
+00:02:40,230 --> 00:02:42,910
+So we go to Frank, similarly
+now we're going to print out Frank.
+
+49
+00:02:44,730 --> 00:02:47,220
+We've finished with Frank and
+go back to Cathy, and
+
+50
+00:02:47,220 --> 00:02:50,830
+now we've completed Cathy totally,
+so we go back to Les.
+
+51
+00:02:50,830 --> 00:02:55,150
+We completed Les' left sub-tree, so
+we're now going to print Les and
+
+52
+00:02:55,150 --> 00:02:58,200
+then traverse Les' right sub-tree.
+
+53
+00:02:58,200 --> 00:03:02,050
+So that is Sam,
+traverse its left sub-tree which is Nancy.
+
+54
+00:03:02,050 --> 00:03:06,320
+Print it out, go back to Sam,
+we've completed Sam's left sub-tree, so
+
+55
+00:03:06,320 --> 00:03:11,920
+we print Sam, and then go ahead and
+do Sam's right sub-tree which is Violet,
+
+56
+00:03:11,920 --> 00:03:18,220
+which will end up printing Tony,
+Violet, and then Wendy.
+
+57
+00:03:18,220 --> 00:03:19,690
+We're completed with Wendy.
+
+58
+00:03:19,690 --> 00:03:21,750
+We go back to Violet.
+
+59
+00:03:21,750 --> 00:03:27,290
+We completed her right sub-tree, so we go
+back to Sam, completed his right sub-tree,
+
+60
+00:03:27,290 --> 00:03:30,400
+go back to Les, completed his
+right sub-tree, and we're done.
+
+61
+00:03:30,400 --> 00:03:33,660
+So we see we get the elements
+out in sorted order.
+
+62
+00:03:33,660 --> 00:03:36,270
+And again, we do the left child.
+
+63
+00:03:36,270 --> 00:03:38,650
+And then the node and
+then the right child.
+
+64
+00:03:38,650 --> 00:03:41,906
+And by our definition of
+a binary search tree,
+
+65
+00:03:41,906 --> 00:03:46,415
+that then gives them to us in order
+because we know all the elements in
+
+66
+00:03:46,415 --> 00:03:50,944
+the left child are in fact less than or
+equal to the node itself.
+
+67
+00:03:53,312 --> 00:03:57,898
+The next depth-first
+traversal is a pre-order traversal.
+
+68
+00:03:57,898 --> 00:04:03,320
+Now the in-order traversal really is
+only defined for a binary tree because
+
+69
+00:04:03,320 --> 00:04:08,050
+we talk about doing the left child and
+then the node and then the right child.
+
+70
+00:04:09,230 --> 00:04:12,450
+And so it's not clear if you
+had let's say three children,
+
+71
+00:04:12,450 --> 00:04:16,200
+where it is you'd actually
+put the node itself.
+
+72
+00:04:16,200 --> 00:04:20,320
+So you might do the first child and
+then print the node, and then second and
+
+73
+00:04:20,320 --> 00:04:21,200
+third child.
+
+74
+00:04:21,200 --> 00:04:24,360
+Or first child and then second child and
+print the node, and then third child.
+
+75
+00:04:24,360 --> 00:04:26,855
+It's kind of undefined then,
+so not well-defined.
+
+76
+00:04:28,210 --> 00:04:32,090
+However, these next two, the pre-order and
+post-order traversal are well defined.
+
+77
+00:04:32,090 --> 00:04:33,980
+Not just for binary trees, but for
+
+78
+00:04:33,980 --> 00:04:36,660
+general, arbitrary number
+of children trees.
+
+79
+00:04:37,740 --> 00:04:39,477
+So here the pre-order traversal says,
+
+80
+00:04:39,477 --> 00:04:42,230
+we're going to go ahead
+first if it's nil we return.
+
+81
+00:04:42,230 --> 00:04:47,730
+We print the key first, that is, we visit
+the node itself and then its children.
+
+82
+00:04:47,730 --> 00:04:52,300
+So we're going to, in this case,
+go ahead and go to
+
+83
+00:04:53,890 --> 00:04:57,990
+the Les tree and then print out its
+key and then go to its children.
+
+84
+00:04:57,990 --> 00:05:02,608
+So we're going to first go to its
+left child which is Cathy, and for
+
+85
+00:05:02,608 --> 00:05:05,120
+Cathy, we then print Cathy, and
+
+86
+00:05:05,120 --> 00:05:10,345
+then go to its left child which is Alex,
+print Alex, we go back to Cathy.
+
+87
+00:05:11,510 --> 00:05:15,320
+And we finished its left child, so then
+we go do its right child, which is Frank.
+
+88
+00:05:15,320 --> 00:05:17,810
+We finished Frank.
+
+89
+00:05:17,810 --> 00:05:18,940
+We finished Cathy.
+
+90
+00:05:18,940 --> 00:05:20,190
+We go back up to Les.
+
+91
+00:05:20,190 --> 00:05:21,760
+We've already printed Les.
+
+92
+00:05:21,760 --> 00:05:27,320
+We've already visited or
+traversed Les' left child.
+
+93
+00:05:27,320 --> 00:05:32,260
+Now we can traverse Les' right child,
+so it'll be Sam, which we'll print out.
+
+94
+00:05:32,260 --> 00:05:37,530
+And then we'll go to Nancy, which we'll
+print out, we'll go back up to Sam and
+
+95
+00:05:37,530 --> 00:05:41,670
+then to Violet, and we will print Violet,
+and then print Violet's children,
+
+96
+00:05:41,670 --> 00:05:46,553
+which will be Tony and
+Wendy and then return back.
+
+97
+00:05:48,900 --> 00:05:52,940
+A post-order traversal is like
+a pre-order traversal expect instead of
+
+98
+00:05:52,940 --> 00:05:57,780
+printing the node itself first, which is a
+pre, we print it last, which is the post.
+
+99
+00:05:57,780 --> 00:06:00,390
+So all we've really done is move
+where this print statement is.
+
+100
+00:06:02,360 --> 00:06:08,270
+And here then,
+what's the last of these notes
+
+101
+00:06:08,270 --> 00:06:11,440
+that's going to be printed?
+Well it's actually going to be Les,
+
+102
+00:06:11,440 --> 00:06:13,910
+because we're not going to be able
+to print Les until we've finished
+
+103
+00:06:14,990 --> 00:06:18,320
+completely dealing with Les' left sub-tree
+and right sub-tree.
+
+104
+00:06:18,320 --> 00:06:21,320
+So we'll visit Les, and
+then visit Cathy, and then Alex,
+
+105
+00:06:21,320 --> 00:06:23,320
+and then we'll actually print out Alex.
+
+106
+00:06:23,320 --> 00:06:27,330
+Once we're done with Alex, we'll go
+back up to Cathy and down to Frank, and
+
+107
+00:06:27,330 --> 00:06:30,000
+then print out Frank, and
+then once we're done with both Alex and
+
+108
+00:06:30,000 --> 00:06:31,660
+Frank we can then print Cathy.
+
+109
+00:06:32,820 --> 00:06:34,240
+We go back up to Les, and
+
+110
+00:06:34,240 --> 00:06:38,610
+we now need to go deal with
+Les' right child which is Sam.
+
+111
+00:06:38,610 --> 00:06:42,770
+In order to deal with Sam we go to Nancy,
+print Nancy, go back up to Sam and
+
+112
+00:06:42,770 --> 00:06:47,030
+down to Violet, and deal with the Violet
+tree, which will print out Tony, and
+
+113
+00:06:47,030 --> 00:06:50,310
+then Wendy, and then Violet.
+
+114
+00:06:50,310 --> 00:06:54,830
+And on our way back up, then, when we get
+up to Sam, we have finished its children,
+
+115
+00:06:54,830 --> 00:06:56,260
+so we can print out Sam.
+
+116
+00:06:56,260 --> 00:07:01,560
+When we get up to Les, we've finished
+its children, so we can print out Les.
+
+117
+00:07:01,560 --> 00:07:05,230
+One thing to note about
+the recursive traversal
+
+118
+00:07:05,230 --> 00:07:09,340
+is we do have sort of under the covers,
+a stack that's being used.
+
+119
+00:07:09,340 --> 00:07:14,800
+Because in a recursive call, every time
+we make a call back to a procedure,
+
+120
+00:07:14,800 --> 00:07:18,520
+we are invoking another
+frame on the stack.
+
+121
+00:07:18,520 --> 00:07:25,400
+So we are saving implicitly our
+information of where we are on the stack.
+
+122
+00:07:28,242 --> 00:07:33,340
+Breadth-first, we're going to actually
+use a queue instead of a stack.
+
+123
+00:07:33,340 --> 00:07:36,460
+So in the breadth-first, we are going to
+call it level traversal here,
+
+124
+00:07:36,460 --> 00:07:39,540
+we're going to go ahead and
+instantiate a queue,
+
+125
+00:07:39,540 --> 00:07:44,550
+and on the queue first
+put the root of the tree.
+
+126
+00:07:44,550 --> 00:07:47,400
+So we put that in the queue and
+then while the queue is not empty,
+
+127
+00:07:47,400 --> 00:07:52,550
+we're going to dequeue, so pull a node
+off, deal with that by printing it and
+
+128
+00:07:52,550 --> 00:07:54,390
+then if it's got a left child,
+
+129
+00:07:54,390 --> 00:07:57,980
+enqueue the left child, if it's got
+a right child, enqueue the right child.
+
+130
+00:07:57,980 --> 00:08:00,540
+And so this will have
+the effect of going through and
+
+131
+00:08:00,540 --> 00:08:02,270
+processing the elements in level order.
+
+132
+00:08:02,270 --> 00:08:05,340
+We see the example here, and
+we're going to show the queue.
+
+133
+00:08:05,340 --> 00:08:10,320
+So here let's say we're just before
+the while loop, the queue contains Les.
+
+134
+00:08:10,320 --> 00:08:15,140
+And we're going to now dequeue Les from
+the queue, output it by printing it, and
+
+135
+00:08:15,140 --> 00:08:17,780
+then enqueue Les' children
+which are Cathy and Sam.
+
+136
+00:08:19,160 --> 00:08:21,390
+Now, we visit those in order, so
+
+137
+00:08:21,390 --> 00:08:26,650
+first we're going to dequeue Cathy, print
+it out and then enqueue its children.
+
+138
+00:08:26,650 --> 00:08:29,130
+Remember when we're enqueuing
+we go at the end of the line, so
+
+139
+00:08:29,130 --> 00:08:31,260
+Alex and Frank go after Sam.
+
+140
+00:08:31,260 --> 00:08:34,740
+So now we're going to dequeue Sam,
+print it, and
+
+141
+00:08:34,740 --> 00:08:36,910
+then enqueue its children Nancy and
+Violet.
+
+142
+00:08:36,910 --> 00:08:41,410
+So we can see what we've done then is,
+we first printed Les,
+
+143
+00:08:41,410 --> 00:08:44,660
+that's level one and then we printed the
+elements of level two, which are Cathy and
+
+144
+00:08:44,660 --> 00:08:47,990
+Sam, and now we're going to go on
+to the elements at level three.
+
+145
+00:08:47,990 --> 00:08:53,060
+So notice,
+all the elements in level three,
+
+146
+00:08:53,060 --> 00:08:55,570
+Alex, Frank, Nancy, and
+Violet are in the queue already.
+
+147
+00:08:56,630 --> 00:09:01,190
+And they're all going to be processed
+before any of the level four nodes
+
+148
+00:09:02,190 --> 00:09:04,901
+are processed.
+So even though they'll be pushed in the queue,
+
+149
+00:09:04,901 --> 00:09:08,626
+since the level three nodes got there first
+that they're all going to be processed
+
+150
+00:09:08,626 --> 00:09:10,510
+before we process the level four ones.
+
+151
+00:09:10,510 --> 00:09:13,860
+So here, we dequeue Alex,
+print it out, and we're done.
+
+152
+00:09:13,860 --> 00:09:16,680
+Dequeue Frank, print it out,
+we're done with Frank.
+
+153
+00:09:16,680 --> 00:09:19,920
+Dequeue Nancy, print it out,
+we're done with Nancy.
+
+154
+00:09:19,920 --> 00:09:24,140
+And Violet, we print it out, but
+then also enqueue Tony and Wendy, and
+
+155
+00:09:24,140 --> 00:09:26,940
+then dequeue those and print them out.
+
+156
+00:09:26,940 --> 00:09:30,553
+So this is a breadth-first search,
+with an explicit queue,
+
+157
+00:09:30,553 --> 00:09:34,096
+you can do depth-first searches
+rather than recursively,
+
+158
+00:09:34,096 --> 00:09:38,055
+iteratively, but you will need
+an additional data structure which
+
+159
+00:09:38,055 --> 00:09:41,054
+is a stack to keep track of
+the work still to be done.
+
+160
+00:09:45,125 --> 00:09:48,140
+So in summary, trees are used for lots
+of different things in computer science.
+
+161
+00:09:49,470 --> 00:09:51,250
+We've seen that trees have a key and
+
+162
+00:09:51,250 --> 00:09:55,170
+normally have children, although there
+are alternative representations of trees.
+
+163
+00:09:56,350 --> 00:09:58,770
+The tree walks that are normally
+done are traversals,
+
+164
+00:09:58,770 --> 00:10:02,490
+are DFS: depth-first search,
+and BFS: breadth-first search.
+
+165
+00:10:02,490 --> 00:10:05,784
+There are different types of
+depth-first search traversals,
+
+166
+00:10:05,784 --> 00:10:08,090
+pre-order, in-order, and post-order.
+
+167
+00:10:09,370 --> 00:10:12,010
+When you work with a tree,
+it's common to use  recursive algorithms,
+
+168
+00:10:12,010 --> 00:10:17,280
+although note that we didn't for the
+breadth-first search where we needed to
+
+169
+00:10:17,280 --> 00:10:21,480
+go through the elements of the tree
+in kind of a non-recursive order.
+
+170
+00:10:21,480 --> 00:10:24,570
+And finally, in computer science,
+trees grow down.

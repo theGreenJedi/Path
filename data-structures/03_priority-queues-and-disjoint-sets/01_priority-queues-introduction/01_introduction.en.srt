@@ -1,0 +1,429 @@
+1
+00:00:00,210 --> 00:00:01,270
+Hello everybody.
+
+2
+00:00:01,270 --> 00:00:01,850
+Welcome back.
+
+3
+00:00:02,920 --> 00:00:05,595
+Today, I'm going to be talking
+about priority queues.
+
+4
+00:00:07,040 --> 00:00:11,029
+This popular data structure has built-in
+implementations in many programming
+
+5
+00:00:11,029 --> 00:00:11,790
+languages.
+
+6
+00:00:11,790 --> 00:00:14,521
+For example in C++, Java, and Python.
+
+7
+00:00:14,521 --> 00:00:19,725
+And in this lesson, we will learn what is
+going on inside these implementations.
+
+8
+00:00:19,725 --> 00:00:24,315
+We will see beautiful combinatorial
+ideas that allow to store the contents
+
+9
+00:00:24,315 --> 00:00:28,035
+of a priority queue in
+a complete binary tree,
+
+10
+00:00:28,035 --> 00:00:31,165
+which is in turn stored just as an array.
+
+11
+00:00:31,165 --> 00:00:35,620
+This give an implementation which
+is both time and space efficient.
+
+12
+00:00:35,620 --> 00:00:41,310
+Also, it can be implemented
+just in a few lines of code.
+
+13
+00:00:41,310 --> 00:00:45,790
+A priority queue data structure is
+a generalization of the standard
+
+14
+00:00:45,790 --> 00:00:47,420
+queue data structure.
+
+15
+00:00:47,420 --> 00:00:51,570
+Recall that the queue data structure
+supports the following two
+
+16
+00:00:51,570 --> 00:00:52,480
+main operations.
+
+17
+00:00:52,480 --> 00:00:55,890
+So we have a queue and
+when a new element arrives,
+
+18
+00:00:55,890 --> 00:01:00,820
+we put it to the end of this queue
+by calling the method PushBack(e).
+
+19
+00:01:00,820 --> 00:01:06,030
+And when we need to process the next
+element we extract it from the beginning
+
+20
+00:01:06,030 --> 00:01:10,530
+of the queue by calling
+the method PopFront().
+
+21
+00:01:10,530 --> 00:01:15,075
+In the priority queue data structure,
+there is no such thing as the beginning or
+
+22
+00:01:15,075 --> 00:01:16,935
+the end of a queue.
+
+23
+00:01:16,935 --> 00:01:22,175
+Instead we have just a bag of elements,
+but each element is assigned a priority.
+
+24
+00:01:22,175 --> 00:01:23,845
+When a new element arrives,
+
+25
+00:01:23,845 --> 00:01:28,005
+we just put it inside this bag
+by calling the method Insert.
+
+26
+00:01:28,005 --> 00:01:31,780
+However, when we need to process
+the next element from this bag,
+
+27
+00:01:31,780 --> 00:01:36,320
+we call the method
+ExtractMax which is supposed
+
+28
+00:01:36,320 --> 00:01:40,490
+to find an element inside this bag
+whose priority is currently maximum.
+
+29
+00:01:42,020 --> 00:01:45,900
+A typical use case for
+priority queues is the following.
+
+30
+00:01:45,900 --> 00:01:49,350
+Assume that we have a machine and
+we would like to use this machine for
+
+31
+00:01:49,350 --> 00:01:51,750
+processing jobs.
+
+32
+00:01:51,750 --> 00:01:54,050
+It takes time to process a job and
+
+33
+00:01:54,050 --> 00:01:58,220
+when we are processing the current job,
+a new job may arrive.
+
+34
+00:02:00,100 --> 00:02:05,110
+So we would like to be able to quickly
+perform the following operations.
+
+35
+00:02:05,110 --> 00:02:10,240
+First of all, when a new job arrives
+we would like to insert it to the pool
+
+36
+00:02:10,240 --> 00:02:12,970
+of our other weekly jobs quickly, right?
+
+37
+00:02:12,970 --> 00:02:15,030
+And when we are done with the current job,
+
+38
+00:02:15,030 --> 00:02:19,040
+we would like to be able to
+quickly find the next job.
+
+39
+00:02:19,040 --> 00:02:22,260
+That is,
+the job with the maximum priority.
+
+40
+00:02:24,310 --> 00:02:29,350
+Okay, and now we are ready to state
+the definition of priority queue formally.
+
+41
+00:02:29,350 --> 00:02:34,090
+Formally a priority queue is
+an abstract data type which supports
+
+42
+00:02:34,090 --> 00:02:37,825
+the two main operations,
+Insert and ExtractMax.
+
+43
+00:02:38,990 --> 00:02:41,340
+Consider a toy example.
+
+44
+00:02:41,340 --> 00:02:43,950
+We have a priority queue
+which is initially empty.
+
+45
+00:02:43,950 --> 00:02:48,495
+We then insert element 5 in it,
+we then insert 7,
+
+46
+00:02:48,495 --> 00:02:51,790
+then insert 1, and then insert 4.
+
+47
+00:02:53,010 --> 00:02:58,740
+So we put these elements in random
+places inside this box on the left,
+
+48
+00:02:58,740 --> 00:03:00,320
+just to emphasize, once again,
+
+49
+00:03:00,320 --> 00:03:04,960
+that there is no such thing as the beginning
+or the end of a priority queue.
+
+50
+00:03:04,960 --> 00:03:09,730
+So it is not important how the elements
+are stored inside the priority queue.
+
+51
+00:03:09,730 --> 00:03:16,690
+What is important for us now is that if we
+call ExractMax() for this priority queue,
+
+52
+00:03:16,690 --> 00:03:21,350
+then an element with currently
+highest priority should be extracted.
+
+53
+00:03:21,350 --> 00:03:23,130
+In our toy example it is 7.
+
+54
+00:03:23,130 --> 00:03:27,074
+So if we call ExtractMax for
+this priority queue,
+
+55
+00:03:27,074 --> 00:03:31,120
+then 7 is taken out of the priority queue.
+
+56
+00:03:31,120 --> 00:03:33,962
+Then, well let's insert 3
+into our priority queue and
+
+57
+00:03:33,962 --> 00:03:36,310
+now let's call ExtractMax().
+
+58
+00:03:36,310 --> 00:03:40,030
+The currently highest priority is 5,
+so we extract 5.
+
+59
+00:03:40,030 --> 00:03:45,283
+Then we ExtractMax() once again,
+and now it is 4, okay?
+
+60
+00:03:45,283 --> 00:03:49,614
+Some additional operations that
+we might expect from a particular
+
+61
+00:03:49,614 --> 00:03:54,920
+implementation of a priority queue
+data structure are the following.
+
+62
+00:03:54,920 --> 00:03:58,319
+So first of all,
+we might want to remove an element.
+
+63
+00:03:58,319 --> 00:04:02,594
+I mean, not to extract an element
+with a maximum priority, but
+
+64
+00:04:02,594 --> 00:04:07,940
+to remove a particular element
+given by an iterator, for example.
+
+65
+00:04:07,940 --> 00:04:11,850
+Also, we might want to find
+
+66
+00:04:11,850 --> 00:04:17,210
+the maximum priority without extracting
+an element with a maximum priority.
+
+67
+00:04:17,210 --> 00:04:21,200
+So GetMax is an operation
+which is responsible for this.
+
+68
+00:04:21,200 --> 00:04:26,450
+And also, we might want to change
+the priority of a given element.
+
+69
+00:04:26,450 --> 00:04:30,260
+I mean, to increase or
+to decrease its priority.
+
+70
+00:04:30,260 --> 00:04:35,140
+So ChangePriority(it,p) is
+the operation responsible for this.
+
+71
+00:04:35,140 --> 00:04:40,770
+Let us conclude this introductory
+video by mentioning a few examples of
+
+72
+00:04:40,770 --> 00:04:43,930
+famous algorithms that use
+priority queues essentially.
+
+73
+00:04:45,470 --> 00:04:48,890
+Dijsktra's algorithm uses priority queues
+
+74
+00:04:48,890 --> 00:04:53,920
+to find efficiently the shortest path from
+point a to point b on a map or in a graph.
+
+75
+00:04:55,930 --> 00:05:01,730
+Prim's algorithm uses priority queues to
+find an optimum spanning tree in a graph,
+
+76
+00:05:01,730 --> 00:05:04,100
+this might be useful for
+example in the following case.
+
+77
+00:05:04,100 --> 00:05:07,750
+Assume that you have a set of computers
+and you would like to connect them
+
+78
+00:05:07,750 --> 00:05:11,850
+in a network by putting wires
+between some pairs of them.
+
+79
+00:05:11,850 --> 00:05:14,790
+And you would like to
+minimize the total price or
+
+80
+00:05:14,790 --> 00:05:17,190
+the total length of all the wires.
+
+81
+00:05:18,670 --> 00:05:21,040
+Huffman's algorithm
+
+82
+00:05:21,040 --> 00:05:25,740
+computes an optimum prefix-free
+encoding of a string or a file.
+
+83
+00:05:25,740 --> 00:05:30,280
+It is used, for example,
+in MP3 audio format encoding algorithms.
+
+84
+00:05:31,440 --> 00:05:35,710
+Finally, heap sort algorithm
+uses priority queues
+
+85
+00:05:35,710 --> 00:05:38,570
+to efficiently sort the n given objects.
+
+86
+00:05:38,570 --> 00:05:41,340
+So it is comparison based algorithm.
+
+87
+00:05:41,340 --> 00:05:45,360
+It's running time is n log n,
+as in particularly in the worst case.
+
+88
+00:05:45,360 --> 00:05:49,920
+And another advantage of this
+algorithm is that it is in place,
+
+89
+00:05:49,920 --> 00:05:55,520
+it uses no extra memory for
+sorting the input data.
+
+90
+00:05:55,520 --> 00:05:59,870
+So we will go through all these algorithms
+in this specialization and the heap sort
+
+91
+00:05:59,870 --> 00:06:04,637
+algorithm will be even covered in this
+lesson, in the forthcoming videos.

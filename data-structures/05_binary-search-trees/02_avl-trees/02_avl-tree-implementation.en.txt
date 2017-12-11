@@ -1,0 +1,105 @@
+Hello, everybody, welcome back. Today, we're going to continue talking
+about AVL Trees, and in particular, we're going to talk about the actual
+implementation and what goes into that. So, as you recall, the AVL Tree was this
+sort of property that we wanted our binary search tree to have,
+where we needed to ensure that for any given node, its two children
+have nearly the same height. So the following is an ideal tree
+everything's labelled by their height, it all works out. Now, there's a problem that if we update
+this tree it can destroy this property. So if we try to add a new
+node where the blue node is, then what happens is, a bunch of nodes in
+the tree, their heights change because now they have a longer path
+which leads to this new node. And now there are a couple locations at
+which the AVL property fails to hold. So, in other words,
+we need a way to correct this issue. And there is one thing that actually helps
+a little bit here, which is that when we do an insertion the only heights of nodes
+that change are along the insertion path. The only time when a height
+can get bigger is because the new path from it to a leaf
+ends up at the leaf you staggered. So we only need to worry
+about nodes on this path, but we do actually need to worry. Okay, just sort of review what it is, we have this AVL tree, we want to
+insert a new node either A B C or D. Which one of these will require
+us to do some rebalancing? It turns out that D is the only place
+where we have a problem, but if you insert D it changes a bunch of these heights and
+that destroys AVL program. The other inserts it
+turns out would be fine. Okay, so
+let's actually talk about how to do this. So we need a new insertion algorithm that
+involves some rebalancing of the tree in order to maintain our AVL property. And the basic idea of
+the algorithm is pretty simple. First you just insert your
+node as you would before. You then find the node
+that you just inserted and then you want to run
+some rebalance operation. And this operation should start down at
+N and should probably work its way all the way up to the root, sort of
+following parent pointers as you go. Just to sort of make sure that everything
+that could have been made unbalanced has been fixed, and we're all good. So the question is how do we
+actually do this rebalancing? And, well, the idea is the following. At any given node, if the height of your
+left child and the height of your right child differ by at most 1, you're fine,
+you're already satisfied the AVL property. On the other hand it could be the case
+that your children's heights differ by more than one. In that case you actually do
+need to do some rearranging. If your left child is two taller than
+your right, you need to fix things and probably what you need to do is move
+your left child higher up in the tree relative to your right to compensate for
+the fact that it's sort of bigger. Fortunately for us,
+you can actually show that these inserts, the height difference is never
+going to be more than 2. And that simplifies things a little bit. Okay, so the basic idea is the following. In order to rebalance N,
+first we need to store P, the parent of N just because
+we're going to, after we fix N, we're going to want to fix things at P,
+and so on recursively. Now, if the height of N's left child
+is bigger than the height of its right child by more than one,
+we need to rebalance right-wards. If the height of the right child is bigger
+than the height of the left child by more than one we need to rebalance left-wards. Then after that, no matter what happens, we maybe need to readjust the height of N,
+because the height field that was stored might be
+inaccurate if we inserted things below it. And then if the parent that we
+fixed wasn't the null point, if we weren't already at the root,
+we need to go back up and we need to rebalance
+the parent recursively. So quickly, this AdjustHeight function, this sort of just fixes the number that
+we're storing in the height field. All it does is we sort of set the height
+to be one plus the maximum of the height of the left child and
+the height of the right child. Just given by this recursive
+formula we had for the height. Okay! But the key thing we still
+haven't really touched. We need to figure out how
+to do the rebalancing. So you have a node, its left child
+is heavier than its right child. Its left child has exactly
+two more height to it. And the basic idea is the left child
+is bigger, it needs to be higher up, so we should just rotate everything right. And it turns out that in a lot of
+cases this is actually enough to solve the problem. There is one case where it doesn't work. So B is the node we're
+trying to rebalance. A is its left child which is too heavy,
+and we're going to assume that A is too heavy because its right child
+has some large height, n+1. The problem is that if we just rotate B
+to the right, then this thing of height, n+1, switches sides of the tree
+when we perform this rotation. Switches from being A's
+child to being B's child. And when we do this we've switched
+our tree from being unbalanced at B to being unbalanced at A now,
+in the other direction. And so, just performing this
+one rotation doesn't help here. In this case the problem is that A's right
+child, which we'll call X, was too heavy. So the first thing we need
+to do is make X higher up. So what you can do is,
+instead of just doing this rotation at B, first we rotate A to the left one,
+then we rotate B to the right one. And then you can do some case analysis and
+you figure out after you do this you've actually fixed all
+the problems that you have. And it's good. The operation for
+rebalancing right is you let M be the left child of N and then you check
+to see if we've to be in this other case. If M's right child has height more
+than M's left child, then you rotate M to the left, and then no matter
+what you did, you rotate N to the right. And then no matter what you did, all the nodes that you
+rearranged in this procedure, you need to adjust their heights to
+make sure that everything works out. Once you do this, this rebalances
+things at that node properly, it sets all the heights to what
+they should be, and it's good. Okay, so that's how insert works. Next, we need to talk about delete. And the thing is deletions can also
+change the balance of the tree. Remember generally what we do is
+the deletions we removed the node. But, we replaced it by its successor and
+then promoted its successor's child. And the thing to note is that when you do
+this, sort of the space in the tree where the successor was, the height of that
+denoting that location decreased by one. Because instead of having successor and
+then its child and then some such, you just have the child and such. And this of course can cause your tree to
+become unbalanced even if it were balanced beforehand. So, we of course need a way to fix this,
+but there's a simple solution. You delete the node N as before. You then let M be this left child of
+the node that replaced N this thing that might have unbalanced the tree. And then you run the same rebalance
+operation that we did for our insertions starting on M and
+then filtering its way up the tree. And once you've done that,
+everything works. And so what we've done is we've shown that
+you can maintain this AVL property and you can do it pretty efficiently, all of our rebalancing work was only sort
+of O of 1 work per level of the tree. And so if you can do all of this,
+we can actually perform all of our basic binary search tree operations in O of log
+n time per operation, using AVL trees. And this is great. We really do have a good data structure
+now for these local search problems. So that's all for today, coming next
+lecture we are going to talk about a couple of other useful operations that
+you can perform on binary surgeries.

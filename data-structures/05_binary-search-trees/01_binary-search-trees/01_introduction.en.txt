@@ -1,0 +1,100 @@
+Hello everybody, welcome back. Today, we're going to be starting
+with a new data structures topic. In particular, we are going to be
+talking about Binary Search Trees. And today, we're going to be giving
+some of introductions to the topic and really going to try and do two things. One is to sort of motivate the types of
+the problems that we want to be able to solve this new data structure. And secondly, we'll talk a little
+bit about why the data structures we already know about are not up to this task
+and why we really do need something new. So to begin with let's talk about a few
+problems that you might want to solve. So one is you want to search a dictionary. You've got a dictionary and you want to find all the words that
+start with some given string of letters. Or similarly you've got a bunch of emails
+and you'd like to find all the emails that were sent or
+received during a given period. Or maybe you've got a bunch of friends or
+class or something and you'd like to find the other person in this class
+whose height is closest to yours. Now all of these are examples of what
+we might call a local search problem. What you want for them is you have a data
+structure that stores a bunch of elements. Each of them has some key that
+comes from a linearly ordered set. Something like a word sorted by
+alphabetical order, or a date, or a height, or something like that. And we want this data structure
+to support some operations. Things like range search,
+which should return all of the elements whose keys
+are between two numbers x and y. Or nearest neighbors,
+where given another key z, you want to find the things closest to z
+on either side in this data structure. So, for example, if we have such data
+structure storing the following numbers, if we wanted to do a range search for
+5 to 12, it should return 6, 7 and 10, the three numbers that are stored
+that are between 5 and 12. If we want the nearest neighbors
+of 3 we should return 1 and 4 since those are the closest things
+to we have to 3 on either side. Now if we just wanted to do that,
+it turns out you can do it, but in practice, you really want
+these data structures to be dynamic. You want it to be possible to modify them. So, two more operations that we would like
+to be able to implement are insert and delete. Insert(x) adds a new element with key x,
+and Delete(x) removes an element with key x. Fine. So, for example, we have this array. If we want to insert 3 into it,
+we do whatever we need to, 3 is now stored in this data structure
+in addition to everything else. And then we can delete 10, remove that and we've got slightly
+different elements that we're storing. So just to make sure we're on the same
+page, if you start with such a data structure and it's empty and
+you insert 3, and then insert 8, and then insert 5, then insert 10,
+then delete 8, then insert 12 and ask for the nearest neighbors of
+7 what are you going to return? Well, if you figure out what the data
+structures stores at the end of the day, you've inserted 3, 5, 8, 10 and 12, 8 got deleted, so,
+you've only have the other four left over. And you want the things closest
+to 7 of the remaining guys, which would be 5 and 10. So, that should be the answer. Okay, so this is the data structure
+that we're trying to implement. What can we say about being able to do it? We've seen a bunch of data structures,
+maybe one of them will work. For example, we could try
+implementing this by a hash table. Hash tables are good at storing and
+looking up elements very, very quickly. Unfortunately, they're hard to search. You can't really search for all the elements in the hash table in
+the given range more or less at all. In some sense all the hash table
+lets you do is check whether or not a given element is stored there. You can't find about elements in a range. Similarly nearest neighbor is not really
+a thing you can do with hash tables, but they are good at inserts insertion into
+a hash table is all of one as is deletion. But the searching aspect doesn't work
+here, so maybe we need something else. Well, the next thing we
+can try is an array. And in an array you can do the searches,
+but they're a little bit slow. If you want to do a range
+search on an array, the best you can do is scan
+through the entire array, figure out which elements are in
+the range you want and return those. Similarly you have a nearest
+neighbors search in O(n) time by scanning through the entire array,
+keeping track of the closest things on either sides of the query, and
+then returning the best ones at the end. On the other hand, arrays,
+at least if they're expandable arrays, are still fine with insert and delete. To insert a new element you just add
+it to the next square over at the end. To delete you can't just remove it from
+the array because then you'd leave a gap, but if you take the last element and
+move it over to fill the gap. Once again,
+this delete operations is O(1) time. Perhaps more interestingly than just
+any array though is a sorted array. Here, we're storing all of
+our elements in an array, but we're going to store
+them in a sorted order. And the critical thing about this is
+it allows us to do binary search. If we want to do a range search,
+we can do a binary search to find the left end of the range in our array and
+that takes logarithmic time. And then scan through until we hit
+the right end of the range we want and return everything in the middle. So, the range search here
+is basically log n time at least assuming the number of things
+we actually want to return is small. Similarly nearest neighbors
+is log arithmetic time. We do a binary search to find
+the thing that we're looking for and reach to return the elements
+on either side. Unfortunately, updates to
+a sorted array are hard. You can't just insert a new element at the
+end of the array, because the array needs to remain sorted at the end and this
+will generally destroy the sorted order. If you want to insert 3,
+it really needs to go between 1 and 4. But, you can't really do that, you can't just sort of add a new
+cell in the middle of an array. The only way to actually do this,
+is you can put 3 in that plot and then everything 4 and onwards needs
+to shift over one cell to make room. And so, insertion here is O(n) time
+which is a lot longer than we want. Similarly deletions are going to be hard. If you delete an element, you can't just
+leave a gap, you need to fill it somehow. You can't just bring an element over
+from one of the ends to fill the gap, because that would destroy
+your sorted structure. So the only way to fill the gap
+is to sort of take everything and shift it back over 1 in order to fill
+things up, and that again takes O(n) time. A final thing to look at are linked lists. Now here you can do
+a RangeSearch in O(n) time, you just scan through the list and
+find everything in the range. Similarly nearest neighbors
+are going to be O(n). Of course linked lists, insertion, and deletions are very fast, O(1) at least
+if you've got a doubly linked list. These things are very good. Unfortunately our searches are slow. And even if you make this
+a sorted linked list, if you sort of guarantee that
+everything comes in sorted order, you still can't do better than
+linear time for your searches. Because you can't binary search a linked
+list, even if it's sorted, because there's no way to sort of jump to the middle
+of the list and sort of do comparisons. And so the moral here really is
+that the data structure we've seen up til this point don't work for
+this sort of local search data structure. And so, we're going to need something new. And that's what we're going to start
+talking about in the next lecture.

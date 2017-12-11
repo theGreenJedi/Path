@@ -1,0 +1,448 @@
+1
+00:00:01,870 --> 00:00:03,490
+Hello, everybody, welcome back.
+
+2
+00:00:03,490 --> 00:00:06,230
+We're continuing to talk about
+binary search trees and today,
+
+3
+00:00:06,230 --> 00:00:07,350
+we're going to talk about balance.
+
+4
+00:00:08,500 --> 00:00:12,206
+In particular, we're actually going
+to look at sort of the basic runtime
+
+5
+00:00:12,206 --> 00:00:15,971
+of these operations that we talked about
+in the last lecture and from that,
+
+6
+00:00:15,971 --> 00:00:19,468
+we're going to notice that they'll
+sometimes be a little bit slow.
+
+7
+00:00:19,468 --> 00:00:23,607
+And to combat this, we want to make
+sure that our trees are balanced and
+
+8
+00:00:23,607 --> 00:00:25,712
+well, doing that's a bit tough and
+
+9
+00:00:25,712 --> 00:00:30,578
+we're going to talk a little bit about how
+we're going to do this with rotations.
+
+10
+00:00:30,578 --> 00:00:35,488
+Okay, so first off we've got this great
+operation, it can do local searches,
+
+11
+00:00:35,488 --> 00:00:37,920
+but how long do these operations take?
+
+12
+00:00:39,030 --> 00:00:41,930
+And maybe a key example
+is the Find operation.
+
+13
+00:00:41,930 --> 00:00:44,690
+So we'd like to find 5
+in the following tree.
+
+14
+00:00:44,690 --> 00:00:48,070
+We compare it to 7, and it's less than 7,
+and it's bigger than 2, and
+
+15
+00:00:48,070 --> 00:00:52,660
+it's bigger than 4, and it's less than 6,
+and it's equal to 5, and we found it.
+
+16
+00:00:52,660 --> 00:00:56,590
+And you'll note that the amount of work
+that we did we sort of had to traverse
+
+17
+00:00:56,590 --> 00:01:00,250
+all the way down the tree from the root
+to the node that we're searching for and
+
+18
+00:01:00,250 --> 00:01:03,400
+we had to do a constant amount
+of work at every level.
+
+19
+00:01:03,400 --> 00:01:07,170
+So the number of operations that we had to
+perform was O of the Depth of the tree.
+
+20
+00:01:08,430 --> 00:01:11,220
+Now, just to sort of
+make sure we get this.
+
+21
+00:01:11,220 --> 00:01:14,760
+So if we have the following tree, we could
+be searching for different nodes A, B,
+
+22
+00:01:14,760 --> 00:01:21,560
+C or D, which ones are faster to
+search with, avoiding which others?
+
+23
+00:01:21,560 --> 00:01:23,240
+Well, A is the fastest.
+
+24
+00:01:23,240 --> 00:01:24,860
+It's up at the root.
+
+25
+00:01:24,860 --> 00:01:29,750
+Then D has depth only three, B has
+depth four, and C has depth five, and
+
+26
+00:01:29,750 --> 00:01:34,670
+so A is faster than D is faster
+than B is faster than C probably.
+
+27
+00:01:37,698 --> 00:01:41,950
+So the runtime is the depth of
+the node that you're looking for.
+
+28
+00:01:41,950 --> 00:01:45,220
+But it's unfortunate,
+the depth can actually be pretty bad.
+
+29
+00:01:45,220 --> 00:01:48,700
+In this example,
+we have only ten nodes in the tree, but
+
+30
+00:01:48,700 --> 00:01:51,590
+this 4 at the bottom has depth 6.
+
+31
+00:01:51,590 --> 00:01:54,170
+In fact, if you think about it,
+things could be even worse.
+
+32
+00:01:54,170 --> 00:01:58,180
+A tree on n nodes could have depth n
+if the nodes are just sort of strung
+
+33
+00:01:58,180 --> 00:01:59,620
+out in some long chain.
+
+34
+00:02:01,710 --> 00:02:03,860
+And so this is maybe sort of a problem.
+
+35
+00:02:03,860 --> 00:02:07,450
+That maybe our searches only
+work in O of n time were not any
+
+36
+00:02:07,450 --> 00:02:12,220
+better than any of these other data
+structures that didn't really work.
+
+37
+00:02:12,220 --> 00:02:17,000
+On the other hand, even though depth can
+be very bad, it can also be much smaller.
+
+38
+00:02:17,000 --> 00:02:22,600
+This example has the same ten nodes in it,
+but the depth maximum depth is only four.
+
+39
+00:02:22,600 --> 00:02:27,000
+And so by rearranging your tree, maybe
+you can make the depth a lot smaller.
+
+40
+00:02:28,590 --> 00:02:31,470
+And in particular,
+what you realize is well,
+
+41
+00:02:31,470 --> 00:02:34,420
+in binary search the questions
+that we asked, in order for
+
+42
+00:02:34,420 --> 00:02:37,490
+it to be efficient, we wanted to
+guess the thing in the middle.
+
+43
+00:02:37,490 --> 00:02:39,900
+Because then no matter
+which answer we got,
+
+44
+00:02:39,900 --> 00:02:43,500
+we cut our search space in two,
+and so what this means for
+
+45
+00:02:43,500 --> 00:02:46,980
+a binary search tree is at any node
+you're asking that one question.
+
+46
+00:02:46,980 --> 00:02:49,730
+You want things on the left and
+the things on the right.
+
+47
+00:02:49,730 --> 00:02:52,280
+Those two subtrees should have
+approximately the same size.
+
+48
+00:02:53,700 --> 00:02:56,010
+And this is what we mean by balance.
+
+49
+00:02:56,010 --> 00:02:58,230
+And if you're balanced,
+suppose that you're perfectly balanced,
+
+50
+00:02:58,230 --> 00:03:02,370
+everything is exactly the same size,
+then this is really good for us.
+
+51
+00:03:02,370 --> 00:03:06,180
+Because it means that each
+subtree has half the size
+
+52
+00:03:06,180 --> 00:03:08,360
+of sort of the subtree of its parent.
+
+53
+00:03:09,500 --> 00:03:12,210
+And that means after you go down,
+logarithmically,
+
+54
+00:03:12,210 --> 00:03:15,620
+many levels the subtrees have size one and
+you're just done.
+
+55
+00:03:16,680 --> 00:03:21,950
+And so, if your tree is well balanced,
+operations should run in O(log(n)) time,
+
+56
+00:03:21,950 --> 00:03:22,870
+which is really what we want.
+
+57
+00:03:24,970 --> 00:03:26,610
+But there's a problem with this,
+
+58
+00:03:26,610 --> 00:03:31,610
+that if you make insertions they can
+destroy your balance properties.
+
+59
+00:03:31,610 --> 00:03:35,020
+We start with this tree, it's perfectly
+well balanced and just has one node I
+
+60
+00:03:35,020 --> 00:03:40,050
+guess but we insert two and then we insert
+three and then we insert five and then we
+
+61
+00:03:40,050 --> 00:03:45,750
+insert four and you'll note that suddenly
+we've got a very, very unbalanced tree.
+
+62
+00:03:45,750 --> 00:03:48,380
+But all we did were updates.
+
+63
+00:03:48,380 --> 00:03:51,610
+So, somehow we need a way
+to get around this.
+
+64
+00:03:51,610 --> 00:03:54,320
+We need a way to do updates
+without unbalancing the tree.
+
+65
+00:03:55,560 --> 00:03:59,170
+And the basic idea for how we're going to
+do this, is we're going to want to have
+
+66
+00:03:59,170 --> 00:04:03,680
+some mechanism by which we can rearrange
+the trees in order to maintain balance.
+
+67
+00:04:04,990 --> 00:04:09,850
+And there's one problem with this, which
+is that however we rearrange the tree,
+
+68
+00:04:09,850 --> 00:04:12,000
+we have to maintain the sorting property.
+
+69
+00:04:12,000 --> 00:04:16,200
+We have to make sure that it's
+still sorting correctly or
+
+70
+00:04:16,200 --> 00:04:19,007
+none of our other operations will work.
+
+71
+00:04:19,007 --> 00:04:22,910
+And well, there's a key way to do this,
+and this is what's known as rotation.
+
+72
+00:04:24,140 --> 00:04:26,070
+The idea is you got two nodes, X and Y.
+
+73
+00:04:26,070 --> 00:04:28,080
+We say X is Y's parent.
+
+74
+00:04:28,080 --> 00:04:29,290
+And there's a way to switch them.
+
+75
+00:04:29,290 --> 00:04:32,280
+So, that instead Y is X's parent.
+
+76
+00:04:32,280 --> 00:04:37,270
+And the like sort of sub-trees A,
+B, and C that hang off of X and Y.
+
+77
+00:04:37,270 --> 00:04:40,980
+You need to rearrange them a little
+bit to keep everything still sorted.
+
+78
+00:04:40,980 --> 00:04:43,650
+But there is this sort of
+very local rearrangement.
+
+79
+00:04:43,650 --> 00:04:45,110
+You can go back and forth.
+
+80
+00:04:45,110 --> 00:04:48,350
+And it keeps the sorting
+structure working.
+
+81
+00:04:48,350 --> 00:04:51,460
+And it rearranges the tree in
+some hopefully useful way.
+
+82
+00:04:53,000 --> 00:04:56,240
+So just to be clear about how this works,
+it takes a little bit of bookkeeping.
+
+83
+00:04:56,240 --> 00:04:57,630
+But that's about it.
+
+84
+00:04:57,630 --> 00:04:59,710
+You let P be the parent to X.
+
+85
+00:04:59,710 --> 00:05:01,350
+Y be its left child.
+
+86
+00:05:01,350 --> 00:05:02,370
+B be its right child.
+
+87
+00:05:03,490 --> 00:05:08,140
+And then what we're going to do is we
+just need to reassign some pointers.
+
+88
+00:05:08,140 --> 00:05:13,060
+P is the new parent of Y and Y is its
+child, Y is the new parent of X and
+
+89
+00:05:13,060 --> 00:05:18,260
+X is its right child, X is the new
+parent of B and B is X's new left child.
+
+90
+00:05:18,260 --> 00:05:20,750
+And once you've sort of
+rearranged all those pointers
+
+91
+00:05:20,750 --> 00:05:22,480
+then everything actually works.
+
+92
+00:05:22,480 --> 00:05:26,665
+This is a nice constant time operation and
+it does some useful rearrangements.
+
+93
+00:05:27,880 --> 00:05:32,390
+So what we really need to do though
+is we need to have a way to sort of
+
+94
+00:05:32,390 --> 00:05:36,670
+use these operations to actually keep our
+tree balanced and we're going to start
+
+95
+00:05:36,670 --> 00:05:39,970
+talking about how to do that next
+time when we discuss AVL trees.

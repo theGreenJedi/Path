@@ -1,0 +1,482 @@
+1
+00:00:00,220 --> 00:00:04,410
+Another scheme that we know from
+the previous lesson is chaining.
+
+2
+00:00:04,410 --> 00:00:08,620
+To use that we first select the hash
+function with some cardinality m,
+
+3
+00:00:08,620 --> 00:00:12,240
+then we create an array
+name again of size m.
+
+4
+00:00:12,240 --> 00:00:16,310
+But instead of storing the names
+themselves in the array,
+
+5
+00:00:16,310 --> 00:00:19,450
+we store chains or lists.
+
+6
+00:00:19,450 --> 00:00:24,570
+And in these lists, we'll store
+both names and the phone numbers.
+
+7
+00:00:24,570 --> 00:00:29,440
+And to determine where to put name and
+phone number, we first convert the phone
+
+8
+00:00:29,440 --> 00:00:34,600
+number to integer, then we'll apply hash
+function to it and get a hash value.
+
+9
+00:00:34,600 --> 00:00:36,150
+And put both name and
+
+10
+00:00:36,150 --> 00:00:41,000
+phone number in the chain corresponding
+to the cell with such index.
+
+11
+00:00:41,000 --> 00:00:42,404
+Here is how it looks like.
+
+12
+00:00:42,404 --> 00:00:47,947
+For example, we have a contact of Steve
+and his phone number is 223-23-23.
+
+13
+00:00:47,947 --> 00:00:52,836
+We first convert it to the number
+2 million and a few thousand, and
+
+14
+00:00:52,836 --> 00:00:58,532
+then we compute the hash value of this
+integer number and it turns out to be 1.
+
+15
+00:00:58,532 --> 00:01:02,504
+Then we put both Steve's name and
+his phone number in
+
+16
+00:01:02,504 --> 00:01:07,391
+the chain corresponding to the cell
+number 1 in our array Name.
+
+17
+00:01:07,391 --> 00:01:10,409
+Then we do the same for
+Natalie and her phone number.
+
+18
+00:01:10,409 --> 00:01:14,570
+And it turns out that the hash value of
+the integer corresponding to her phone
+
+19
+00:01:14,570 --> 00:01:18,300
+number is 6, so
+we put her contact in the 6th cell.
+
+20
+00:01:18,300 --> 00:01:20,873
+And then we do the same for Sasha, and
+
+21
+00:01:20,873 --> 00:01:24,947
+the hash value of his phone
+number turns out again to be 1.
+
+22
+00:01:24,947 --> 00:01:29,625
+So Sasha gets in the same cell as Steve.
+
+23
+00:01:29,625 --> 00:01:31,807
+There are the following parameters
+of the chaining scheme.
+
+24
+00:01:31,807 --> 00:01:37,706
+First, n is the total number of phone
+numbers stored in our phone book.
+
+25
+00:01:37,706 --> 00:01:41,009
+m is the cardinality of
+the selected hash function,
+
+26
+00:01:41,009 --> 00:01:46,500
+which is the same as the size of our
+area name, which works as a hash table.
+
+27
+00:01:46,500 --> 00:01:50,370
+c is the length of the longest
+chain in our hash table.
+
+28
+00:01:50,370 --> 00:01:54,670
+We use big O(n + m) memory
+to store the phone book.
+
+29
+00:01:56,100 --> 00:01:58,870
+And also alpha, which is n/m,
+
+30
+00:01:58,870 --> 00:02:03,820
+the number of phone numbers stored
+divided by the size of the hash table,
+
+31
+00:02:03,820 --> 00:02:08,950
+which measures how filled up is our
+hash table, is called the load factor.
+
+32
+00:02:08,950 --> 00:02:10,100
+And we will need it later.
+
+33
+00:02:11,570 --> 00:02:16,448
+So we know that the operations with
+a hash table run in time big O(c + 1).
+
+34
+00:02:16,448 --> 00:02:20,987
+And so we want both small m to
+use fewer memory and small c so
+
+35
+00:02:20,987 --> 00:02:24,120
+that everything works faster.
+
+36
+00:02:24,120 --> 00:02:25,680
+And here's a good example.
+
+37
+00:02:25,680 --> 00:02:30,720
+We see a hash table of size 8 with a few
+chains and we see that the length of
+
+38
+00:02:30,720 --> 00:02:36,705
+the chains are relatively the same, with
+the longest chain being of length just 2.
+
+39
+00:02:36,705 --> 00:02:38,807
+So everything will work fast.
+
+40
+00:02:38,807 --> 00:02:40,116
+And here's a bad example.
+
+41
+00:02:40,116 --> 00:02:47,070
+When we again have hash table of size 8,
+but all the keys fell in the same cell 1.
+
+42
+00:02:47,070 --> 00:02:54,330
+And they make up a very long chain
+of size m, in this case, it is 8.
+
+43
+00:02:54,330 --> 00:02:57,441
+So this is what we want to avoid.
+
+44
+00:02:57,441 --> 00:03:01,370
+Let's try a few hash functions
+that come to our mind.
+
+45
+00:03:01,370 --> 00:03:04,830
+First, let's select cardinality of 1000.
+
+46
+00:03:04,830 --> 00:03:09,880
+And choose the first three digits as
+the hash value for the phone number.
+
+47
+00:03:09,880 --> 00:03:12,220
+For example for
+this phone number it will be 800,
+
+48
+00:03:12,220 --> 00:03:14,935
+because the first three digits are 800.
+
+49
+00:03:16,080 --> 00:03:21,290
+However there is a problem with this hash
+function because the area code, which
+
+50
+00:03:21,290 --> 00:03:25,270
+is the first three digits will be the same
+for many, many people in your phone book.
+
+51
+00:03:25,270 --> 00:03:28,640
+Probably because they live In
+the same city with you, and so
+
+52
+00:03:28,640 --> 00:03:31,180
+they will have the same area code.
+
+53
+00:03:31,180 --> 00:03:35,100
+And the hash values for
+their phone numbers will be the same, and
+
+54
+00:03:35,100 --> 00:03:37,790
+they will make up a very long chain.
+
+55
+00:03:37,790 --> 00:03:42,320
+Another idea is to take the last digits,
+again the cardinality is 1,000, and
+
+56
+00:03:42,320 --> 00:03:45,410
+we take the last three
+digits as the hash value.
+
+57
+00:03:45,410 --> 00:03:49,672
+So for this number, it will be 567.
+
+58
+00:03:49,672 --> 00:03:54,459
+But still, there can be a problem if there
+are many phone numbers in your phone book,
+
+59
+00:03:54,459 --> 00:03:57,021
+which, for example, end in three zeros, or
+
+60
+00:03:57,021 --> 00:03:59,601
+in some other combinations
+of three digits.
+
+61
+00:03:59,601 --> 00:04:05,559
+So, another approach is to just select
+a random value as the hash function,
+
+62
+00:04:05,559 --> 00:04:08,644
+a random number between 0 and 999.
+
+63
+00:04:08,644 --> 00:04:12,594
+And then the distribution of
+hash values will be very good,
+
+64
+00:04:12,594 --> 00:04:15,470
+probably the longest chain will be short.
+
+65
+00:04:15,470 --> 00:04:19,880
+However, we cannot use such
+hash function actually because
+
+66
+00:04:19,880 --> 00:04:24,160
+when we'll call the hash function
+again to look up the phone number we
+
+67
+00:04:24,160 --> 00:04:28,120
+stored in the phone book we won't find it
+because we are looking in the wrong place.
+
+68
+00:04:28,120 --> 00:04:32,440
+Because the value of the hash function
+changed because it's not deterministic.
+
+69
+00:04:32,440 --> 00:04:37,470
+So we learned that the hash function
+must be deterministic, that is return
+
+70
+00:04:37,470 --> 00:04:43,410
+the same value if given the same
+phone number as the input each time.
+
+71
+00:04:43,410 --> 00:04:46,120
+So good hash functions are deterministic.
+
+72
+00:04:46,120 --> 00:04:50,650
+Fast to compute because we do that every
+time we need to store something or
+
+73
+00:04:50,650 --> 00:04:53,540
+modify something or
+find something in our hash table.
+
+74
+00:04:53,540 --> 00:04:57,470
+And they should distribute the keys
+well in different cells and
+
+75
+00:04:57,470 --> 00:04:58,640
+have few collisions.
+
+76
+00:05:00,110 --> 00:05:04,010
+Unfortunately, there is no
+universal hash function.
+
+77
+00:05:04,010 --> 00:05:08,140
+Most specifically, the Lemma says
+that the number of all possible keys,
+
+78
+00:05:08,140 --> 00:05:11,130
+the sizes of the universe
+with keys is large enough.
+
+79
+00:05:11,130 --> 00:05:16,470
+Much larger than the cardinality of
+the hash function that we want to use
+
+80
+00:05:16,470 --> 00:05:17,930
+to save memory.
+
+81
+00:05:17,930 --> 00:05:22,410
+Then for any specific deterministic
+hash function there is a bad input,
+
+82
+00:05:22,410 --> 00:05:24,700
+which results in many, many collisions.
+
+83
+00:05:24,700 --> 00:05:25,760
+Why is that?
+
+84
+00:05:25,760 --> 00:05:29,970
+Well, let's look at the universe U and
+select some cardinality for example, 3.
+
+85
+00:05:31,120 --> 00:05:34,300
+Then, our universe will be
+divided into three groups.
+
+86
+00:05:34,300 --> 00:05:39,320
+All the keys that have hash value 0,
+all the keys that have hash value 1,
+
+87
+00:05:39,320 --> 00:05:42,840
+and all the keys that
+have hash value of 2.
+
+88
+00:05:42,840 --> 00:05:45,790
+Now, let's select
+the biggest of those groups.
+
+89
+00:05:45,790 --> 00:05:49,120
+In this case,
+it's the group with hash value of 1.
+
+90
+00:05:49,120 --> 00:05:55,066
+This group will definitely be of size at
+least one-third of the whole universe and
+
+91
+00:05:55,066 --> 00:05:56,713
+it can be even bigger.
+
+92
+00:05:56,713 --> 00:06:00,892
+In this case for example, around 42%.
+
+93
+00:06:00,892 --> 00:06:05,679
+And then, if we take all these keys or
+a significant part of
+
+94
+00:06:05,679 --> 00:06:11,210
+these keys as an input,
+they will have the same hash value.
+
+95
+00:06:11,210 --> 00:06:16,850
+And so, all of them will make collisions
+between themselves and they will
+
+96
+00:06:16,850 --> 00:06:21,360
+form a very long chain in the hash table
+and everything will work very slowly.
+
+97
+00:06:21,360 --> 00:06:25,090
+Of course, if we change the hash
+function for this particular input,
+
+98
+00:06:25,090 --> 00:06:31,320
+it will distribute the keys more
+uniformly among hash values.
+
+99
+00:06:31,320 --> 00:06:35,520
+But for this particular hash function,
+this will be a bad input.
+
+100
+00:06:35,520 --> 00:06:39,560
+And for any specific hash
+function with any cardinality,
+
+101
+00:06:39,560 --> 00:06:42,670
+we'll be able to select
+a bad input this way.
+
+102
+00:06:42,670 --> 00:06:46,355
+And in the next video,
+you will learn how to solve this problem.

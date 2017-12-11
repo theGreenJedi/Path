@@ -1,0 +1,69 @@
+En este video vamos a hablar de
+un segundo método de análisis de amortización, que se llama el Método del Banquero. La idea aquí es que vamos a cobrar
+extra por cada operación sencilla. Es un poco como el ejemplo que vimos ahorrar dinero para un automóvil Vamos a tomar esos 100 dólares
+y ponerlos en el banco. Y guardamos ese cargo en alguna parte, en el caso del banco, pues en el banco. En nuestro caso, lo haremos conceptualmente 
+en nuestra estructura de datos. No vamos a cambiar el código, 
+simplemente es un análisis nada más. Pero conceptualmente, imaginemos
+que ponemos este coste extra como tokens en nuestra
+estructura de datos. que luego podremos utilizar para
+paga por el coste de operaciones. Se verá más claro cuando veamos un ejemplo. Es un tipo de crédito con amortización o este caso en que ahorramos 100 dólares al mes
+para el automóvil de 6.000 dólares porque sabemos que
+lo necesitaremos. Veamos el mismo ejemplo
+con un arreglo dinámico y n llamadas a PushBack (IntertarAlFinal),
+empezando con un arreglo vacío, ¿ok? La idea es que vamos a cobrar 3 por
+cada inserción. Así que por cada PushBack, 
+vamos a cobrar 3. Uno es el coste directo por almacenar el nuevo elemento en el arreglo, 
+y los otros dos vamos a guardarlos. Así que si necesitamos redimensionar más tarde,
+pagaremos por desplazar los elementos, utilizaremos los tokens que ya hemos guardado. Y luego, pondremos 1 token,
+una vez añadido el elemento. 1 token en el elemento que añadimos,
+luego 1 token en un elemento añadido anteriormente,
+¿ok? Esto se verá más claro cuando
+veamos un ejemplo práctico. Veamos un ejemplo:
+Tenemos un arreglo vacío. Y vamos a empezar con tamaño 0,
+capacidad 0. Hacemos PushBack(a), y ¿qué ocurre? Hay que asignar memoria para el arreglo, 
+tamaño uno, apuntar a ella y luego almacenar "a" en el arreglo. Y ahora ponemos un token en "a" y este token es lo que usamos para
+pagar más tarde para mover "a". En este ejemplo, para el primer elemento no hay
+otro elemento donde poner el otro token Así que simplemente 
+descartaremos ese tercer token. Insertamos "b", ¿okay? No hay capacidad para "b", así que asignamos 
+un arreglo más grande y luego desplazamos "a" ¿Cómo vamos a "pagar" para mover "a"? Bien, con el token que
+ya tiene "a". Ya pagamos previamente para 
+mover "a", ¿ok? Cuando almacenamos "a" en el arreglo
+inicialmente, pusimos un token que "pagaría" para 
+moverlo a un arreglo nuevo. Así es como "pagamos" para mover "a" y luego actualizamos "arr", borramos el anterior
+y ahora almacenamos "b". Así que almacenamos "b" al coste de uno,
+y todavía tenemos dos tokens. Vamos a poner un token en "b" y,
+poner una capacidad sobre dos. Es un elemento anterior, así que
+vamos a poner uno en "b" para que Hemos "gastado" tres: Uno ahora, y dos como pago diferido que usaremos
+más tarde en forma de esos tokens. Recuerda que esos tokens no se almacenan 
+en la estructura de datos, No están en el arreglo, es simplemente un forma de llevar la cuenta mental para
+hacer nuestro análisis. Cuando añadimos "c",
+debemos asignar un nuevo arreglo. Copiamos "a" y pagamos por eso
+con un token pre-pagado. Copiamos "b", pagando con
+un token de pre-pago. Y ahora añadimos "c". Eso es uno,
+el segundo pago que hacemos es un token en "c" y,
+luego un token en "a". Cuatro dividido por dos, esta es la capacidad
+dividida por dos, es dos elementos anteriores. Añadimos "d",
+no hay que redimensionar, ¡por fín! Okay, simplemente ponemos "d" y,
+eso cuesta uno. Segundo, ponemos un token en "d", Tercero, poner un token en capacidad dividido por dos o
+dos elementos anteriores a eso. Fíjate que tenemos un arreglo completo y
+todos los elementos tienen tokens, que significa que necesitaremos redimensionar, 
+y hemos pagado el movimiento por adelantado. Añadimos "e", asignamos nuevo arreglo, Y ahora usamos esos tokens de pre-pago
+para pagar por mover a, b, c y d. Eliminamos el antiguo arreglo,
+y almacenar "e", Y de nuevo, ponemos un token en "e",
+y un token en "a". Entonces, lo que tenemos es un coste amortizado
+de orden 1 por cada PushBack. Y en particular, 
+tenemos un coste de tres, ¿verdad? Claramente, así lo hemos visto. Vamos a recapitular cómo hicimos ésto. Para este arreglo dinámico decidimos que 
+cobraríamos tres, y otras estructuras .. de datos también como otras operaciones no 
+tuvimos que cobrar una cantidad diferente. Debemos averiguar si
+será suficiente, en nuestro caso tres era suficiente, y 
+decidimos que procederíamos a poner esos tokens en
+los elementos que lo necesitaban. Es una forma muy física de llevar la cuenta del
+trabajo que hemos hecho, o el trabajo pagado por adelantado que hemos hecho. Así que cobramos 3,
+1 es el coste directo de la inserción. Si necesitamos redimensionar, hemos preparado 
+las cosas tal que si el arreglo .. .. se llena, para que se llene, hemos necesitado suficientes inserciones
+para que cada elemento tuviera un token. Todos los nuevos que hemos añadido desde 
+el redimensionamiento anterior, más cada vez que añadimos uno de los nuevos,
+hemos pre-pagado por un elemento anterior Así que, pagamos por la inserción,
+uno por el almacenamiento ahora y pagamos uno para ayudar a
+otro elemento anterior El próximo video mostrará una
+tercera forma de hacer Análisis de Amortización, que es el Método del Físico.

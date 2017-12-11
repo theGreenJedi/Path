@@ -1,0 +1,245 @@
+1
+00:00:00,920 --> 00:00:02,820
+Let's go back to the dynamic array.
+
+2
+00:00:02,820 --> 00:00:06,020
+So are there alternatives
+to doubling the array size?
+
+3
+00:00:06,020 --> 00:00:07,400
+Right, we doubled each time.
+
+4
+00:00:07,400 --> 00:00:08,950
+What happens if we didn't double?
+
+5
+00:00:08,950 --> 00:00:10,780
+Well we could use some
+different growth factor.
+
+6
+00:00:10,780 --> 00:00:12,690
+So for instance, we could use 2.5.
+
+7
+00:00:12,690 --> 00:00:16,360
+So grow the array by more than two,
+or grow the array by less than two.
+
+8
+00:00:16,360 --> 00:00:20,100
+As long as we used some constant
+multiplicative factor, we'd be fine.
+
+9
+00:00:20,100 --> 00:00:22,410
+The question is can we
+use a constant amount?
+
+10
+00:00:22,410 --> 00:00:25,140
+Can we add by a particular amount,
+like, let's say, 10 each time?
+
+11
+00:00:25,140 --> 00:00:28,460
+And the answer is really, no.
+
+12
+00:00:28,460 --> 00:00:34,050
+And the reason is, as the array got
+bigger and bigger, and we have to resize
+
+13
+00:00:34,050 --> 00:00:39,473
+every ten times,
+we just don't have enough time
+
+14
+00:00:39,473 --> 00:00:46,020
+to accumulate work in order
+to actually do the movement.
+
+15
+00:00:46,020 --> 00:00:47,980
+Let's look at another way.
+
+16
+00:00:47,980 --> 00:00:48,980
+Let's look at an aggregate method.
+
+17
+00:00:48,980 --> 00:00:53,020
+Let's say c sub i is the cost
+of the i'th insertion.
+
+18
+00:00:53,020 --> 00:00:56,546
+We're going to define that as one, for
+putting in the i'th element,
+
+19
+00:00:56,546 --> 00:01:00,380
+plus either i-1 if the i-1'th
+insertion makes the
+
+20
+00:01:00,380 --> 00:01:01,480
+dynamic array full.
+
+21
+00:01:01,480 --> 00:01:04,040
+So that is if i-1 is a multiple
+of 10 and it's 0 otherwise.
+
+22
+00:01:06,230 --> 00:01:07,750
+By the definition of aggregate method which is
+
+23
+00:01:07,750 --> 00:01:13,420
+just the sum of the total costs divided
+by n and that's n plus again that's
+
+24
+00:01:13,420 --> 00:01:17,790
+the one summed n times is just n plus
+the summation from one to (n-1)/10 of 10j.
+
+25
+00:01:17,790 --> 00:01:20,220
+That is just the multiples of 10.
+
+26
+00:01:20,220 --> 00:01:23,540
+All the way up to but not including n.
+
+27
+00:01:23,540 --> 00:01:24,090
+So 10, 20, 30, 40 and so on.
+
+28
+00:01:25,690 --> 00:01:27,310
+All that divided by n.
+
+29
+00:01:27,310 --> 00:01:30,820
+Well, we can pull the 10
+out of that summation so
+
+30
+00:01:30,820 --> 00:01:34,900
+it's just 10 x the summation
+j = 1 to (n- 1)/10 of j.
+
+31
+00:01:34,900 --> 00:01:39,464
+So that's just numbers 1, 2, 3, 4,
+and so on, all the way up to (n- 1)/10.
+
+32
+00:01:40,630 --> 00:01:43,560
+That is O(n squared).
+
+33
+00:01:43,560 --> 00:01:44,498
+That summation.
+
+34
+00:01:44,498 --> 00:01:51,074
+So we've got n+10 times O(N^2)/n=O(n^2)/n=O(n).
+
+35
+00:01:51,074 --> 00:01:55,500
+So this shows that if we use a constant
+amount to grow the dynamic
+
+36
+00:01:55,500 --> 00:01:59,860
+array each time that we end up with
+an amortized cost for push back of O(n)
+
+37
+00:01:59,860 --> 00:02:01,060
+rather than O(1).
+
+38
+00:02:01,060 --> 00:02:03,210
+So it's extremely important
+to use a constant factor.
+
+39
+00:02:04,800 --> 00:02:07,700
+So in summary we can
+calculate the amortized cost
+
+40
+00:02:08,860 --> 00:02:10,790
+in the context of
+a sequence of operations.
+
+41
+00:02:10,790 --> 00:02:15,950
+Rather than looking at a single operation
+in its worst case we look at a totality
+
+42
+00:02:15,950 --> 00:02:17,410
+of a sequence of operations.
+
+43
+00:02:17,410 --> 00:02:19,310
+We have three ways to do the analysis.
+
+44
+00:02:19,310 --> 00:02:19,980
+The aggregate method,
+
+45
+00:02:19,980 --> 00:02:26,220
+where we just do the brute-force sum based
+on the definition of the amortized cost.
+
+46
+00:02:26,220 --> 00:02:29,350
+We can use the banker's method
+where we actually use tokens and
+
+47
+00:02:29,350 --> 00:02:31,660
+we're saving them conceptually
+in the data structure.
+
+48
+00:02:31,660 --> 00:02:34,445
+Or the physicist's method where
+we define a potential function,
+
+49
+00:02:34,445 --> 00:02:35,960
+and look at the change in that potential.
+
+50
+00:02:37,670 --> 00:02:40,020
+Nothing changes in the code.
+
+51
+00:02:40,020 --> 00:02:42,280
+We're only doing runtime analysis, so
+
+52
+00:02:42,280 --> 00:02:45,300
+the code doesn't actually
+store any tokens at all.
+
+53
+00:02:45,300 --> 00:02:46,400
+That's an important thing to remember.
+
+54
+00:02:49,190 --> 00:02:52,640
+That is dynamic arrays and
+amortized analysis.

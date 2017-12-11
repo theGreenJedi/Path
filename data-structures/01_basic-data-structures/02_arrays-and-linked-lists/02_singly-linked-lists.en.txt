@@ -1,0 +1,117 @@
+Now let's talk about linked lists. So linked lists, it's named kind of
+like links in a chain, right, so we've got a head pointer that points
+to a node that then has some data and points to another node,
+points to another node and eventually points to one that
+doesn't point any farther. So here in our top diagram we show
+head points to the node containing 7, points to the node containing 10,
+points to the node containing 4, points to the node containing
+13 doesn't point anywhere. How this actually works is that
+a node contains a key which in this case is these integers,
+and a next pointer. The diagram below shows more
+detail of what's going on. So head is a pointer
+that points to a node, and that node contains two elements,
+the value 7. And then a pointer that points off to
+the next node that contains a key 10, and a pointer that points
+off to the next node 4, points off to the next node 13,
+13's next pointer is just nill. What are the operations that
+can be done on a linked list? There's several of them, and the names
+of these sometimes are different, in different environments and
+different libraries. But normally the operations
+provided are roughly these. So we can add an element to
+the front of the list, and that we're calling PushFront. So that takes a key,
+adds it to the front of the list. We can return the front
+element of the list. We're calling that TopFront. Or we can remove the front element
+of the list, called PopFront. The same things that we can
+do at the front of the list, we can also do at the end of the list. With PushBack, later on in a later module, we'll actually use the word Append for
+that, or TopBack, or PopBack. These seem uniform in there, but
+there is a difference in that the runtimes are going to be different between those,
+and we're going to talk about that. You can find whether an element is in the
+list and it's as simple as just running yourself down the the list
+looking to find a matching key. You can erase an element and then again
+run yourself down the list til you find the matching key and
+then remove that element. So these latter ones
+are both O(n) time. Is the list empty or not? That's as simple as checking
+is the head equal to nil. We can add a particular key--if we
+want to splice in a key into a list we can actually add in a key either before
+a given node or after a given node. So lets look at the times for
+some common operations. We've got here our list
+with four elements in it: 7, 10, 4, and 13. Now we go ahead and
+push an element to the front. So we push 26 to the front of the list. So the first thing we do, create a node
+that contains the 26 as its key. And then we update our
+next pointer of that node to point to the head,
+which is the 7 element, and then update the head pointer to point to
+our new node, and that's it we're done. So it's O(1). Allocate, update one pointer,
+update another pointer, constant time. If we want to pop the front element, clearly finding the front
+element is very cheap here, right? You can just look at the first element and
+return it. So TopFront is O(1). PopFront turns out is
+going to be O(1). First thing we're going to do,
+update the head pointer. Then, remove the node. That's an O(1) operation. If we want to push at the back,
+and we don't have a tail pointer, we're going to talk about
+a tail pointer in a moment, then it's going to be
+a fairly expensive operation. We're going to have to start at the head
+and walk our way down the list until we get to the end, and add a node there,
+so that's going to be O(n) time. Similarly if we want to TopBack or
+PopBack, we're going to also have to start at the head,
+walk our way down to the last element. Those are all going to be O(n) time. If we had a tail pointer,
+some of these will become simpler. Okay, so, we're going to have both a head
+pointer that points to the head element and a tail pointer that
+points to the tail element. So, that way,
+getting the first element is cheap. Getting the last element is cheap. Let's look at what happens when we
+try an insert when we have a tail. We allocate a node,
+put in our new key, and we then update the next pointer of the
+current tail, to point to this new tail. And then update the tail pointer itself. O(1) operation. Retrieving the last element, so a PopBack, sorry a TopBack,
+is also an O(1) operation. We just go to the tail,
+find the element, return the key. If we want to pop the back however that's
+a little bit of an expensive operation. Okay. We are going to need to update
+the tail to point from 8 to 13 so we're at 8 right now we want to go to 13,
+the problem is how do we get to 13? Okay. We don't have a pointer from 8 to
+13 we have a pointer from 13 to 8. And that pointer doesn't
+help us going back. So what we've got to do is, again, start at
+the head, walk our way down until we find the 13 node that then points
+to the current tail, and then update our tail pointer
+to point to that, and then update the next pointer to be nil. And then we can remove that old one. So that's going to be an O(n)
+operation. because we've got to walk
+all the way down there. Okay, because even though we have a tail
+pointer we don't have the next to the tail pointer, we don't have
+the next to last element. The head is different because our pointers
+point this way, if we had the head Its also cheap to get the second element,
+right, and one more to get the third element but the tail pointer doesn't help
+us get to the next to the last element. Let's look at some of the code for this,
+so for PushFront we have a singly linked list: we're going to allocate a new node,
+set its key, set its next to point to the old head and then
+we'll update the current head pointer. If the tail is equal to nil, that meant
+that before the insertion, the head and the tail were nil, it was an empty list. So we've got to update the tail to
+point to the same thing the head points to. Popping the front, well, if we're asked to pop the front on
+an empty list, that's an error. So that's the first check we do here and then we just update the head to
+point now to the head's next. And just in case that there was
+only one element in the list and now there are no elements,
+we check if our new head is nil and if so update our tail to also be nil. Pushing in the back: allocate a new node,
+set its key, set its next pointer, and
+then check the current tail. If the current tail is nil again,
+it's an empty list. Update the head and
+the tail to point to that new node. Otherwise update the old tail's
+next to point to our new node, and then update the tail
+to point to that new node. Popping the back. More difficult, right. If it's an empty list and
+we're trying to pop, that's an error. If the head is equal to tail,
+that means we have one element. So we need to just update the head and
+the tail to nil. Otherwise we've got to start at the head,
+and start working our way down, trying to find the next
+to the last element. When we exit the while loop,
+p will be the next to last element, and we then update its next pointer to nil. And set our tail equal to that element. Adding after a node? Fairly simple in a singly linked list. Allocate a new node, set its next pointer to whatever node
+we're adding after, to its next. So we sort of splice in, and
+then we need to update the node pointer. The one we're adding after, so
+that it points now to our new node. And just in case that node we're adding
+after was the tail we've got to now update the tail to that new node. Adding before, we have the same problem
+we had in terms of PopBack in that we don't have a link back
+to the previous element. So we have no way of updating its
+next pointer other than going back to the beginning of the head and
+moving our way down until we find it. So AddBefore would be
+an O(n) operation. So let's summarize what
+the cost of things are. PushFront, O(1). TopFront, PopFront, all O(1). Pushing the back O(n) unless we have
+a tail pointer in which case its O(1). TopBack O(n), again unless we have
+a tail pointer in which it's O(1). Popping the back: O(n) operation,
+with or without a tail. Finding a key is O(n) we just walk
+our way through the list trying to find a particular element. Erasing, also O(n). Checking whether it's empty or not is as
+simple as checking whether the head is nil. Adding before: O(n) because
+finding the previous element takes O(n) because we're going to
+walk all the way from the head to find it. AddAfter: constant time.

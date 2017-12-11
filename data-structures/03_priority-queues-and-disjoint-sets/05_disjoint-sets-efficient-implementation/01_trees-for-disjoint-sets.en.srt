@@ -1,0 +1,535 @@
+1
+00:00:00,180 --> 00:00:00,880
+Hi.
+
+2
+00:00:00,880 --> 00:00:05,182
+In the previous video we considered
+a few naive implementations
+
+3
+00:00:05,182 --> 00:00:08,240
+of the disjoint sets data structure.
+
+4
+00:00:08,240 --> 00:00:12,540
+In one of them,
+we represented each set as a linked list.
+
+5
+00:00:12,540 --> 00:00:13,974
+Let me give you a small example.
+
+6
+00:00:17,550 --> 00:00:22,020
+So these four elements
+are organised into a linked list.
+
+7
+00:00:22,020 --> 00:00:26,920
+And we treat the tail of this
+element of this list, so
+
+8
+00:00:26,920 --> 00:00:30,690
+this last element has the idea
+of the correspondence set.
+
+9
+00:00:30,690 --> 00:00:36,370
+And this is well defined idea
+because it is unique for any list,
+
+10
+00:00:36,370 --> 00:00:40,400
+and it can be easily reached from any
+other element in the correspondence set.
+
+11
+00:00:40,400 --> 00:00:44,080
+So if we need to find the ID of
+the set that contains this element,
+
+12
+00:00:45,680 --> 00:00:50,990
+we just follow the next pointers shown
+here until we reach the tail of this list.
+
+13
+00:00:50,990 --> 00:00:55,610
+Another advantage is that merging
+two sets is very easy in this case.
+
+14
+00:00:55,610 --> 00:01:01,810
+So assume that this is our first set and
+the second set looks as follows.
+
+15
+00:01:03,150 --> 00:01:10,160
+Then, to merge these two sets, we just
+append one of the least to the other one.
+
+16
+00:01:10,160 --> 00:01:10,710
+Like this.
+
+17
+00:01:11,860 --> 00:01:16,000
+The first advantage of this merging
+is that it is clearly constant time.
+
+18
+00:01:16,000 --> 00:01:17,860
+We just change one pointer.
+
+19
+00:01:17,860 --> 00:01:23,080
+Another advantage is that it updates
+the ID of the result in that list
+
+20
+00:01:23,080 --> 00:01:24,120
+automatically.
+
+21
+00:01:24,120 --> 00:01:31,095
+Now, with three these elements
+as ID of the result in list.
+
+22
+00:01:31,095 --> 00:01:34,634
+It still can be reached for
+many as an element of this list,
+
+23
+00:01:34,634 --> 00:01:37,225
+just by following these pointers.
+
+24
+00:01:37,225 --> 00:01:41,095
+The main disadvantage of this
+approach is that over time,
+
+25
+00:01:41,095 --> 00:01:43,395
+lists get longer and longer.
+
+26
+00:01:43,395 --> 00:01:48,269
+Which in turn, implies that the find
+declaration gets slower and slower.
+
+27
+00:01:49,720 --> 00:01:55,220
+Well, we then discussed another
+possibility to merge two lists,
+
+28
+00:01:55,220 --> 00:01:56,910
+namely we can do the following.
+
+29
+00:01:58,230 --> 00:02:00,644
+Again, consider the same two lists.
+
+30
+00:02:03,410 --> 00:02:08,692
+And now I assume that instead of just
+appending one list to the other one,
+
+31
+00:02:08,692 --> 00:02:11,900
+we do the following strange thing.
+
+32
+00:02:11,900 --> 00:02:15,807
+We'll just change this pointer as follows.
+
+33
+00:02:19,580 --> 00:02:24,210
+Well, as you see what we
+get is not actually a list,
+
+34
+00:02:24,210 --> 00:02:30,566
+however it is a tree whose root is
+this element and it has two branches,
+
+35
+00:02:30,566 --> 00:02:36,050
+so we do not get a long trees,
+but instead we get a tree.
+
+36
+00:02:36,050 --> 00:02:39,570
+And in this tree we can still
+treat this last element,
+
+37
+00:02:39,570 --> 00:02:42,910
+this root element is the idea
+of the correspondent set.
+
+38
+00:02:42,910 --> 00:02:45,600
+Because it is unique for this for
+
+39
+00:02:45,600 --> 00:02:49,450
+this tree, and also it can be
+reached from many as an element.
+
+40
+00:02:49,450 --> 00:02:53,450
+So in this lesson,
+we'll going to further develop this idea.
+
+41
+00:02:53,450 --> 00:02:58,070
+By doing this we will eventually get
+a very efficient implementation of
+
+42
+00:02:58,070 --> 00:03:00,730
+the disjointed data structure.
+
+43
+00:03:00,730 --> 00:03:03,010
+The general setting is the following.
+
+44
+00:03:03,010 --> 00:03:06,010
+Each set is going to be
+represented as a rooted tree.
+
+45
+00:03:06,010 --> 00:03:11,150
+We will tree the root of each tree as
+the idea of the corresponding cell.
+
+46
+00:03:11,150 --> 00:03:14,060
+For each element,
+we will need to know its parent and
+
+47
+00:03:14,060 --> 00:03:17,580
+this will be stored in
+the array parent of size m.
+
+48
+00:03:17,580 --> 00:03:21,340
+Namely parent of i will be equal to j
+
+49
+00:03:21,340 --> 00:03:25,680
+if element j is a parent of i or
+in case i is a root.
+
+50
+00:03:25,680 --> 00:03:29,510
+Then, parent of i will be equal to i.
+
+51
+00:03:29,510 --> 00:03:31,313
+So this is a toy example.
+
+52
+00:03:31,313 --> 00:03:39,210
+Here, we have three trees and there
+are three roots, five, six, and four.
+
+53
+00:03:39,210 --> 00:03:44,570
+And these three trees are stored in their
+right parent as follows, for example, to
+
+54
+00:03:44,570 --> 00:03:50,450
+indicate that four is the root, we store
+four in the fourth cell of this array.
+
+55
+00:03:50,450 --> 00:03:57,310
+To indicate that 9 is the parent of 7,
+we'll put 9 into the 7th cell.
+
+56
+00:03:57,310 --> 00:04:01,390
+Recall that MakeSet of i creates
+a single [INAUDIBLE] set
+
+57
+00:04:01,390 --> 00:04:04,610
+consistent of just a single element i.
+
+58
+00:04:04,610 --> 00:04:08,522
+To do this, we just assign
+parent of i to be equal to i.
+
+59
+00:04:08,522 --> 00:04:12,630
+This creates the three,
+whose only element is right and
+
+60
+00:04:12,630 --> 00:04:14,480
+this is the root of these three.
+
+61
+00:04:14,480 --> 00:04:17,609
+So for this reason,
+we assign parent to five be equal to i.
+
+62
+00:04:17,609 --> 00:04:20,180
+The running time of this operation is,
+of course, constant.
+
+63
+00:04:21,430 --> 00:04:27,320
+To find the root of the three
+that contains a given element, i,
+
+64
+00:04:27,320 --> 00:04:33,890
+we just follow the parent links from
+the node i until we reach the root.
+
+65
+00:04:33,890 --> 00:04:35,120
+This can be done as follows.
+
+66
+00:04:35,120 --> 00:04:39,850
+While i is not equal to parent[i],
+namely while i is not the root
+
+67
+00:04:39,850 --> 00:04:44,530
+of the corresponding tree,
+we replace i by its parent.
+
+68
+00:04:44,530 --> 00:04:47,410
+So each time, we go close it,
+there's a route.
+
+69
+00:04:47,410 --> 00:04:49,160
+And eventually, we will reach a route.
+
+70
+00:04:49,160 --> 00:04:52,700
+And then this point,
+we return the results in element.
+
+71
+00:04:52,700 --> 00:04:55,090
+The running time of this operation is,
+of course,
+
+72
+00:04:55,090 --> 00:04:58,620
+at most,
+the height of the correspondent tree.
+
+73
+00:04:58,620 --> 00:05:02,110
+Now, we need to design a way
+of nurturing to a trees and
+
+74
+00:05:02,110 --> 00:05:05,250
+there is a very natural idea for
+doing this.
+
+75
+00:05:05,250 --> 00:05:08,340
+We have two trees,
+let's just take one of them and
+
+76
+00:05:08,340 --> 00:05:11,080
+camp under the root of the other one.
+
+77
+00:05:11,080 --> 00:05:13,430
+Let me illustrate it with a small example.
+
+78
+00:05:14,600 --> 00:05:16,757
+Assume that this is our first tree.
+
+79
+00:05:16,757 --> 00:05:20,640
+It contains just three nodes and
+this is the root of this tree so
+
+80
+00:05:20,640 --> 00:05:23,788
+it points to itself, and
+this is our second tree.
+
+81
+00:05:28,920 --> 00:05:31,730
+This is the root, so
+it points at itself again.
+
+82
+00:05:31,730 --> 00:05:35,260
+To merge these two trees
+we just change one pointer.
+
+83
+00:05:35,260 --> 00:05:37,610
+Namely, we say that now.
+
+84
+00:05:39,900 --> 00:05:45,623
+This node is not the root anymore but
+its parent is this node.
+
+85
+00:05:45,623 --> 00:05:49,010
+So we hang the left tree on
+this root of the right tree.
+
+86
+00:05:50,310 --> 00:05:54,250
+Once again this node is
+not the root anymore,
+
+87
+00:05:54,250 --> 00:05:59,050
+while this node is the root
+of the resulting tree.
+
+88
+00:05:59,050 --> 00:06:01,880
+And at this point,
+there is a natural question.
+
+89
+00:06:01,880 --> 00:06:05,670
+We can hang the left tree on
+the root of the right tree.
+
+90
+00:06:05,670 --> 00:06:07,150
+But also, vice versa,
+
+91
+00:06:07,150 --> 00:06:10,330
+we can hang the right tree under
+the root of the left tree.
+
+92
+00:06:10,330 --> 00:06:12,370
+So which one to choose?
+
+93
+00:06:12,370 --> 00:06:17,500
+And after thinking a little bit,
+we realize that it makes sense to hang
+
+94
+00:06:17,500 --> 00:06:23,990
+a tree whose height is smaller under the
+root of the true whose height is larger.
+
+95
+00:06:23,990 --> 00:06:28,530
+And the reason for this is that we
+would like to keep our trees shallow.
+
+96
+00:06:28,530 --> 00:06:33,620
+And in turn the reason for
+this is that the height of the trees
+
+97
+00:06:33,620 --> 00:06:38,240
+in our forest influences the running
+time of the find operation.
+
+98
+00:06:38,240 --> 00:06:44,580
+Namely, the worst case running
+time of the find operation
+
+99
+00:06:44,580 --> 00:06:50,810
+is actually at most the maximal
+height of a tree in our forest.
+
+100
+00:06:50,810 --> 00:06:52,700
+To give a specific example,
+
+101
+00:06:52,700 --> 00:06:55,860
+let's consider the following
+through trees shown on the slide.
+
+102
+00:06:55,860 --> 00:07:00,590
+In this case, we have a tree of
+height one and tree of height two.
+
+103
+00:07:00,590 --> 00:07:04,440
+Assume that we call Union of 3 and
+8, in this case we need to merge
+
+104
+00:07:04,440 --> 00:07:09,120
+these 2 trees and these will discuss
+there are 2 possibilities for doing this.
+
+105
+00:07:09,120 --> 00:07:13,900
+Either we hang the left tree under
+the root of the right tree or vice versa,
+
+106
+00:07:13,900 --> 00:07:18,040
+we hang the right tree under
+the root of the left tree.
+
+107
+00:07:18,040 --> 00:07:22,350
+The results of these two cases
+are shown here on the slide, and
+
+108
+00:07:22,350 --> 00:07:26,940
+you see that in the last case
+the height of the tree increased.
+
+109
+00:07:26,940 --> 00:07:31,830
+And this is not something that we want,
+because as we've discussed the height of
+
+110
+00:07:31,830 --> 00:07:37,990
+this tree influences the worst case
+running time of the find operation.
+
+111
+00:07:37,990 --> 00:07:41,490
+So this illustrates that
+to keep our trees shallow,
+
+112
+00:07:41,490 --> 00:07:47,870
+when merged into a trees we would like
+to hang a tree who's height is smaller.
+
+113
+00:07:47,870 --> 00:07:51,451
+And there's a root of the tree
+whose height is larger.

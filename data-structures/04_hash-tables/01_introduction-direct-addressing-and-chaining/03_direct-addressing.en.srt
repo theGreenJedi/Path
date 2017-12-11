@@ -1,0 +1,514 @@
+1
+00:00:00,620 --> 00:00:01,270
+Hi.
+
+2
+00:00:01,270 --> 00:00:03,830
+In this video we will talk
+about direct addressing,
+
+3
+00:00:03,830 --> 00:00:07,020
+which is the first step
+on the way to hashing.
+
+4
+00:00:07,020 --> 00:00:09,720
+Remember this computer
+code from the last video.
+
+5
+00:00:09,720 --> 00:00:13,900
+We implemented procedure UpdateAccessList
+using a data structure C,
+
+6
+00:00:13,900 --> 00:00:17,740
+which stores a counter for any IP address.
+
+7
+00:00:18,820 --> 00:00:22,120
+Now the question is, how to implement
+the data structure C itself.
+
+8
+00:00:23,120 --> 00:00:28,400
+The idea here, is that there are 2 to
+the power of 32 different IP addresses.
+
+9
+00:00:28,400 --> 00:00:29,990
+According to IP(v4) format.
+
+10
+00:00:31,980 --> 00:00:36,460
+And we can actually convert
+each IP to a 32-bit integer.
+
+11
+00:00:36,460 --> 00:00:41,150
+And it will be a one to one
+correspondence between old possible IPs.
+
+12
+00:00:41,150 --> 00:00:45,150
+And all numbers between zero and
+two to the power 32 minus one.
+
+13
+00:00:46,200 --> 00:00:51,230
+Thus, we can create an array A,
+of size exactly two to the power of 32,
+
+14
+00:00:51,230 --> 00:00:56,040
+with indexes zero to two to
+the power of 32 minus one.
+
+15
+00:00:56,040 --> 00:00:57,640
+And then for each IP,
+
+16
+00:00:57,640 --> 00:01:03,430
+there will be exactly one position in
+this array, correspondent to this IP.
+
+17
+00:01:03,430 --> 00:01:08,220
+And then, we will be able to use
+the corresponding answer in array A.
+
+18
+00:01:08,220 --> 00:01:12,140
+Instead of the counter for this IP.
+
+19
+00:01:13,610 --> 00:01:18,500
+Now, how do we actually convert
+IP addresses to integers?
+
+20
+00:01:18,500 --> 00:01:20,440
+If you look at this picture,
+
+21
+00:01:20,440 --> 00:01:25,580
+you will see that any IP address
+actually consists of 4 integer numbers.
+
+22
+00:01:25,580 --> 00:01:27,620
+Which are all, at most, 255.
+
+23
+00:01:27,620 --> 00:01:32,820
+And each of them corresponds to 8 bits,
+or 1 byte
+
+24
+00:01:32,820 --> 00:01:37,860
+in the total 4-byte or
+32-bit integer number.
+
+25
+00:01:37,860 --> 00:01:42,000
+Basically, if you just coordinate
+
+26
+00:01:42,000 --> 00:01:46,760
+all the 8 bytes corresponding
+to first number with 8 bytes.
+
+27
+00:01:46,760 --> 00:01:50,920
+Corresponding to the second number and to
+the third number and to the fourth number.
+
+28
+00:01:50,920 --> 00:01:53,490
+You will get 32 bytes.
+
+29
+00:01:53,490 --> 00:01:58,660
+And if you then convert this string
+of 32 bytes into the decimal form.
+
+30
+00:01:58,660 --> 00:02:02,530
+You will get an integer number in
+the form which we are used to.
+
+31
+00:02:02,530 --> 00:02:07,812
+For example, if you take a very
+simple IP address, 0.0.0.1.
+
+32
+00:02:07,812 --> 00:02:10,340
+It will convert to integer 1,
+
+33
+00:02:10,340 --> 00:02:16,480
+because all the higher bits are zeroes and
+in the lowest byte.
+
+34
+00:02:16,480 --> 00:02:21,890
+The only bit set is the lowest bit and
+that corresponds to number 1.
+
+35
+00:02:21,890 --> 00:02:25,240
+If we convert the number in the picture,
+to the decimal form,
+
+36
+00:02:25,240 --> 00:02:27,290
+we will get 2886794753.
+
+37
+00:02:27,290 --> 00:02:35,960
+Now, what do you think will be the integer
+number corresponding to this IP?
+
+38
+00:02:35,960 --> 00:02:40,264
+And the correct answer is 1168893508.
+
+39
+00:02:41,770 --> 00:02:43,320
+Now, here is the formula and
+
+40
+00:02:43,320 --> 00:02:49,120
+the code to convert an IP
+address to an integer number.
+
+41
+00:02:49,120 --> 00:02:50,440
+Why is that?
+
+42
+00:02:50,440 --> 00:02:55,810
+Well, the lowest eight bits are in
+the fourth number of the IP address.
+
+43
+00:02:55,810 --> 00:02:57,730
+So we use them without changing.
+
+44
+00:02:58,800 --> 00:03:04,020
+The next Eight bits,
+are in the third number of IP.
+
+45
+00:03:04,020 --> 00:03:05,060
+But to use them,
+
+46
+00:03:05,060 --> 00:03:09,540
+we need to move them to the left by
+eight positions in the binary form.
+
+47
+00:03:09,540 --> 00:03:13,360
+And to do that, we need to multiply
+the corresponding integer number by two to
+
+48
+00:03:13,360 --> 00:03:13,890
+the power of eight.
+
+49
+00:03:15,080 --> 00:03:18,630
+The next eight bits are in
+the second number of the IP.
+
+50
+00:03:19,850 --> 00:03:23,350
+And to use them we need to move
+them to the left by 16 positions
+
+51
+00:03:23,350 --> 00:03:24,670
+in the binary form.
+
+52
+00:03:24,670 --> 00:03:28,680
+To do that, we multiply the corresponding
+integer number by two to the power of 16,
+
+53
+00:03:28,680 --> 00:03:30,430
+and so on.
+
+54
+00:03:30,430 --> 00:03:35,579
+This gives us a one to one correspondence
+between IP address and integer number.
+
+55
+00:03:36,930 --> 00:03:41,330
+Now, we can rewrite the code for
+UpdateAccessList using array A,
+
+56
+00:03:41,330 --> 00:03:43,800
+instead of mysterious data structure C.
+
+57
+00:03:44,970 --> 00:03:48,800
+And the only thing that changes
+is the incrementing and
+
+58
+00:03:48,800 --> 00:03:50,510
+decrementing the counters.
+
+59
+00:03:50,510 --> 00:03:55,650
+So when we need to increment a counter
+corresponding to the IP in the ith line.
+
+60
+00:03:55,650 --> 00:04:01,960
+We first convert this IP to integer number
+from 0 to 2 to the power of 32 minus 1.
+
+61
+00:04:01,960 --> 00:04:09,080
+And then we increase the entry of
+the integer RA A, add this index.
+
+62
+00:04:09,080 --> 00:04:13,570
+Note, that each IP is converted
+to its own integer number.
+
+63
+00:04:13,570 --> 00:04:17,540
+So, there will be no collisions
+between different IP numbers.
+
+64
+00:04:17,540 --> 00:04:22,110
+When we try to increment a counter for
+one IP number and
+
+65
+00:04:22,110 --> 00:04:27,110
+by chance increment the current
+correspondent to another IP address.
+
+66
+00:04:27,110 --> 00:04:30,030
+All IP addresses are uniquely mapped
+
+67
+00:04:30,030 --> 00:04:34,150
+into integers from zero to two
+to the power of 32 minus one.
+
+68
+00:04:34,150 --> 00:04:36,972
+We do the same thing when we
+need to decrement the counter.
+
+69
+00:04:36,972 --> 00:04:40,628
+So basically, in the position in array
+
+70
+00:04:40,628 --> 00:04:45,870
+A corresponding to any IP address,
+we will store the counter.
+
+71
+00:04:45,870 --> 00:04:50,700
+Which measures how many times
+this particular IP was accessed
+
+72
+00:04:50,700 --> 00:04:52,270
+during the last hour.
+
+73
+00:04:52,270 --> 00:04:55,560
+Now, how to answer the question,
+whether this IP was or
+
+74
+00:04:55,560 --> 00:04:59,250
+was not used during the last hour,
+to access your services.
+
+75
+00:04:59,250 --> 00:05:00,340
+This is very easy.
+
+76
+00:05:00,340 --> 00:05:03,860
+We first convert the IP to
+the corresponding position in the area A,
+
+77
+00:05:03,860 --> 00:05:06,340
+and then we look at
+the counter this position.
+
+78
+00:05:07,540 --> 00:05:10,860
+If the IP was used,
+then the counter will be more than zero.
+
+79
+00:05:10,860 --> 00:05:12,430
+Otherwise it will be exactly zero.
+
+80
+00:05:14,500 --> 00:05:18,330
+So, now lets look at the asyptotics
+of this implementation.
+
+81
+00:05:18,330 --> 00:05:21,970
+UpdateAccessList is as fast as we can do.
+
+82
+00:05:21,970 --> 00:05:24,240
+It is constant time per log line.
+
+83
+00:05:24,240 --> 00:05:25,770
+Because for each log line,
+
+84
+00:05:25,770 --> 00:05:29,860
+we only look at some position
+in the array and increment it.
+
+85
+00:05:29,860 --> 00:05:33,030
+And also increment some counter,
+or decrement some counter.
+
+86
+00:05:34,810 --> 00:05:37,330
+AccessedLastHour is also constant time.
+
+87
+00:05:37,330 --> 00:05:40,590
+Because the only thing we do is,
+we look at some position in their rate.
+
+88
+00:05:40,590 --> 00:05:44,210
+Which is a constant time impression and
+compare it with a zero, but
+
+89
+00:05:44,210 --> 00:05:44,960
+there is a drawback.
+
+90
+00:05:46,090 --> 00:05:49,450
+Even if during the last hour,
+for example, in the night,
+
+91
+00:05:49,450 --> 00:05:53,650
+there are only five, or 10, or 100 IPs.
+
+92
+00:05:53,650 --> 00:05:56,000
+From which your clients use the service.
+
+93
+00:05:56,000 --> 00:06:00,920
+You will still need 2 to the power of 32
+memory cells, to store that information.
+
+94
+00:06:02,130 --> 00:06:07,270
+And in general, if you have for
+example, new IP protocol.
+
+95
+00:06:07,270 --> 00:06:14,666
+IPv6, it already contains 2 to the power
+of 128 different IP addresses.
+
+96
+00:06:14,666 --> 00:06:18,940
+And if you create an array of that size,
+it won't fit in memory in your computer.
+
+97
+00:06:19,960 --> 00:06:27,020
+In the general case, we need O(N) memory,
+where N is the size of our universe.
+
+98
+00:06:27,020 --> 00:06:29,220
+Universe is the set of all objects,
+
+99
+00:06:29,220 --> 00:06:33,220
+that we might possibly want to
+store in our data structure.
+
+100
+00:06:33,220 --> 00:06:37,910
+It doesn't mean that every one of them
+will be stored in our data structure.
+
+101
+00:06:37,910 --> 00:06:43,710
+But if we at least at some point might
+want to store it, we have to count it.
+
+102
+00:06:43,710 --> 00:06:48,910
+So for example, if some of the IP
+addresses never access your service.
+
+103
+00:06:48,910 --> 00:06:53,470
+You will still have to have
+a cell in your array for
+
+104
+00:06:53,470 --> 00:06:56,660
+this particular IP,
+in the direct addressing method.
+
+105
+00:06:56,660 --> 00:07:01,100
+So, this method only works when
+the universe is somewhat small.
+
+106
+00:07:01,100 --> 00:07:03,850
+And we need to invent something else
+
+107
+00:07:03,850 --> 00:07:08,530
+to work with the universes which
+are bigger than that or even infinite.
+
+108
+00:07:08,530 --> 00:07:12,700
+Such as, for example,
+the universe of all possible words,
+
+109
+00:07:12,700 --> 00:07:17,010
+all possible strings, or
+all possible files on your computer.
+
+110
+00:07:17,010 --> 00:07:18,928
+And we will talk in
+the next videos about that.

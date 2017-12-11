@@ -1,0 +1,532 @@
+1
+00:00:00,960 --> 00:00:04,300
+Now, let's talk about the final
+way to do amortized analysis,
+
+2
+00:00:04,300 --> 00:00:06,400
+which is the physicist's method.
+
+3
+00:00:06,400 --> 00:00:10,000
+The idea of the physicist's method
+is to define a potential function,
+
+4
+00:00:10,000 --> 00:00:14,180
+which is a function that takes
+a state of a data structure and
+
+5
+00:00:14,180 --> 00:00:16,440
+maps it to an integer
+which is its potential.
+
+6
+00:00:17,580 --> 00:00:21,020
+This is similar in spirit to what you
+may have learned in high school physics,
+
+7
+00:00:21,020 --> 00:00:23,210
+the idea of potential energy.
+
+8
+00:00:23,210 --> 00:00:25,825
+For instance, if you have a ball and
+you take it up to the top of a hill,
+
+9
+00:00:25,825 --> 00:00:28,650
+you've increased its potential energy.
+
+10
+00:00:28,650 --> 00:00:33,820
+If you then let the ball roll down the
+hill, its potential energy decreases and
+
+11
+00:00:33,820 --> 00:00:36,250
+gets converted into kinetic
+energy which increases.
+
+12
+00:00:37,550 --> 00:00:38,750
+We do the same sort of thing for
+
+13
+00:00:38,750 --> 00:00:42,350
+our data structure, storing in it
+the potential to do future work.
+
+14
+00:00:43,580 --> 00:00:45,270
+Couple of rules about
+the potential function.
+
+15
+00:00:45,270 --> 00:00:47,620
+First, phi of h sub 0.
+
+16
+00:00:47,620 --> 00:00:49,364
+So, phi is the potential function.
+
+17
+00:00:49,364 --> 00:00:55,520
+h sub 0 is time 0 of the data structure h,
+so that means the initial
+
+18
+00:00:57,420 --> 00:01:00,765
+state of the data structure, and
+that has to have a potential of 0.
+
+19
+00:01:01,900 --> 00:01:05,283
+Second rule is that
+potential is never negative.
+
+20
+00:01:05,283 --> 00:01:10,807
+So, at any point in time, phi of h
+sub t is greater than or equal to 0.
+
+21
+00:01:10,807 --> 00:01:13,950
+So, once we've defined
+the potential function,
+
+22
+00:01:13,950 --> 00:01:16,870
+we can then say what amortized cost is.
+
+23
+00:01:16,870 --> 00:01:21,349
+The amortized cost of an operation
+t is c sub t, the true cost,
+
+24
+00:01:21,349 --> 00:01:25,778
+plus the change in potential, between,
+
+25
+00:01:25,778 --> 00:01:29,760
+before doing the operation and
+after doing the operation.
+
+26
+00:01:29,760 --> 00:01:34,906
+So, before doing the operation,
+we have phi(h sub t-1) after we have
+
+27
+00:01:34,906 --> 00:01:40,054
+phi(h sub t), so it's c sub t plus
+phi(h sub t)- phi(h sub t-1).
+
+28
+00:01:42,240 --> 00:01:46,690
+What we need to do is choose
+a function phi, such that,
+
+29
+00:01:47,750 --> 00:01:52,780
+if the actual cost is small,
+then we want the potential to increase.
+
+30
+00:01:52,780 --> 00:01:56,870
+So that we're saving up some potential for
+doing later work.
+
+31
+00:01:56,870 --> 00:02:01,330
+And if c sub t is large,
+then we want the potential to decrease.
+
+32
+00:02:01,330 --> 00:02:05,431
+In a way to sort of pay for that work.
+
+33
+00:02:05,431 --> 00:02:10,478
+So, the cost of in operations
+is the sum of the true costs
+
+34
+00:02:10,478 --> 00:02:15,114
+which is a summation from
+i goes from one to n of c sub i.
+
+35
+00:02:15,114 --> 00:02:18,418
+And, what we want to do is relate
+the sum of the true costs to the sum of
+
+36
+00:02:18,418 --> 00:02:20,240
+the amortized costs.
+
+37
+00:02:20,240 --> 00:02:24,029
+So, the sum of the amortized costs is
+the summation from i equals 1 to n of
+
+38
+00:02:24,029 --> 00:02:26,350
+the definition of the amortized cost.
+
+39
+00:02:26,350 --> 00:02:30,150
+Which is (c sub i + phi(hsub i) - 
+phi(h sub i-1)).
+
+40
+00:02:31,850 --> 00:02:33,640
+Or, we could just rewrite that.
+
+41
+00:02:33,640 --> 00:02:38,565
+So, removing the summation is c sub 1
++ phi of (h sub 1)- phi of (h sub 0),
+
+42
+00:02:38,565 --> 00:02:42,269
++ c sub 2 + phi of (h sub 2)-
+phi of (h sub 1) and so on.
+
+43
+00:02:42,269 --> 00:02:47,008
+What's important to note is that we have
+a phi of h sub 1 in the first line and
+
+44
+00:02:47,008 --> 00:02:51,387
+then a minus phi of h sub 1 in the second
+line, so those two cancel out.
+
+45
+00:02:51,387 --> 00:02:54,721
+Similarly, we have a phi of h
+sub 2 in the second line, and
+
+46
+00:02:54,721 --> 00:02:58,841
+we have a phi of h sub 3 when we look
+at the amortized cost at time three.
+
+47
+00:02:58,841 --> 00:03:03,929
+And, that goes on and
+on until at time n-1, we would have a phi
+
+48
+00:03:03,929 --> 00:03:09,313
+of h sub n-1 positive and
+a negative phi of h sub n-1 negative.
+
+49
+00:03:09,313 --> 00:03:13,998
+So, if all these cancellations and
+all we're left with is
+
+50
+00:03:13,998 --> 00:03:18,776
+the very first term phi of h sub 0,
+negative phi of h sub 0,
+
+51
+00:03:18,776 --> 00:03:23,578
+and the very last term in the last
+line which is phi of h sub n.
+
+52
+00:03:23,578 --> 00:03:28,805
+So, this really just equals phi of h sub n
+minus phi of h sub 0 because all the other
+
+53
+00:03:28,805 --> 00:03:33,379
+phis cancel, plus the summation
+from i equals 1 to n of c sub i,
+
+54
+00:03:33,379 --> 00:03:35,070
+that is the true costs.
+
+55
+00:03:35,070 --> 00:03:40,890
+Since phi of h sub n is non negative and
+phi of h sub 0 is 0,
+
+56
+00:03:40,890 --> 00:03:46,105
+this value is greater than or equal to
+just the summation of the true costs.
+
+57
+00:03:47,420 --> 00:03:53,151
+What that means then is we've
+come up with a lower bound on
+
+58
+00:03:53,151 --> 00:03:59,330
+the sum of the amortized
+costs which is the sum of the true costs.
+
+59
+00:03:59,330 --> 00:04:04,900
+So therefore, if we want to look at a cost
+of a entire sequence of operations,
+
+60
+00:04:06,130 --> 00:04:11,600
+we know it's at least
+the sum of the true costs.
+
+61
+00:04:14,880 --> 00:04:20,720
+So, let's look at applying this
+physicist's method to the dynamic array.
+
+62
+00:04:20,720 --> 00:04:22,200
+So, we're going to look
+at n calls to PushBack.
+
+63
+00:04:23,210 --> 00:04:26,110
+Phi of h, so, at any given time
+
+64
+00:04:26,110 --> 00:04:29,990
+the data structure's going to be two
+times the size minus the capacity.
+
+65
+00:04:32,030 --> 00:04:36,020
+So, as the size increases,
+the potential's going to be increasing for
+
+66
+00:04:36,020 --> 00:04:36,764
+a given fixed capacity.
+
+67
+00:04:38,245 --> 00:04:39,075
+Phi of x sub here, so
+
+68
+00:04:39,075 --> 00:04:42,935
+we want to make sure that our phi
+function satisfies our requirements.
+
+69
+00:04:42,935 --> 00:04:45,169
+So, first phi of 0 is 2 x 0- 0,
+
+70
+00:04:45,169 --> 00:04:50,475
+assuming we have an initial array
+of size 0, and that's just 0.
+
+71
+00:04:50,475 --> 00:04:53,672
+Also, phi of h sub i
+is 2 x size - capacity.
+
+72
+00:04:53,672 --> 00:04:56,879
+We know that size is at
+least capacity over 2, so
+
+73
+00:04:56,879 --> 00:05:00,417
+therefore, 2 x size - capacity
+is greater than 0.
+
+74
+00:05:03,645 --> 00:05:07,522
+Now, let's look at our amortized cost.
+
+75
+00:05:07,522 --> 00:05:10,024
+So, we're going to assume we
+don't have to do a resize and
+
+76
+00:05:10,024 --> 00:05:11,633
+let's look at the amortized cost.
+
+77
+00:05:11,633 --> 00:05:16,125
+So, we add a particular element i and
+the amortized cost is
+
+78
+00:05:16,125 --> 00:05:20,816
+the cost of insertion plus
+phi(h sub i) - phi(h sub i-1).
+
+79
+00:05:20,816 --> 00:05:25,727
+So, the cost of insertion is just going to
+be 1 because we're adding an element and
+
+80
+00:05:25,727 --> 00:05:28,341
+we don't have to do any
+moving of elements.
+
+81
+00:05:28,341 --> 00:05:32,684
+Phi of h sub i is 2 x size
+of i - the capacity of i, and
+
+82
+00:05:32,684 --> 00:05:37,230
+phi of h sub i- 1 is 2 x
+size i- 1 - capacity i- 1.
+
+83
+00:05:38,550 --> 00:05:39,480
+Well, what do we know?
+
+84
+00:05:39,480 --> 00:05:42,270
+Since we're not resizing and
+the capacities don't change.
+
+85
+00:05:42,270 --> 00:05:46,960
+So, the capacities cancel themselves out.
+
+86
+00:05:46,960 --> 00:05:50,309
+And so, we are left with 2
+times the difference in sizes.
+
+87
+00:05:50,309 --> 00:05:52,930
+What's the difference in size?
+
+88
+00:05:52,930 --> 00:05:56,750
+Difference in size is just 1,
+because we added one element, so
+
+89
+00:05:56,750 --> 00:05:58,250
+this is 1 + 2 x 1 or 3.
+
+90
+00:05:59,510 --> 00:06:02,440
+It's no accident that this 3 is the same
+
+91
+00:06:02,440 --> 00:06:05,270
+value that we saw when we
+used the banker's method.
+
+92
+00:06:07,200 --> 00:06:10,550
+And then, let's look at the cost
+when we have to do a resize.
+
+93
+00:06:10,550 --> 00:06:14,097
+So, we're going to define
+here k is size sub i-1,
+
+94
+00:06:14,097 --> 00:06:17,487
+which is the same thing
+as capacity sub i-1.
+
+95
+00:06:17,487 --> 00:06:18,510
+Why is it the same?
+
+96
+00:06:18,510 --> 00:06:19,786
+because we're about to do a resize.
+
+97
+00:06:19,786 --> 00:06:23,219
+So, that means that after
+the previous operation,
+
+98
+00:06:23,219 --> 00:06:26,035
+we must have made the dynamic array full.
+
+99
+00:06:26,035 --> 00:06:31,051
+And then,
+phi(h sub i-1) is just 2 times the old
+
+100
+00:06:31,051 --> 00:06:37,397
+size minus the old capacity,
+and that's just 2 x k - k, or k.
+
+101
+00:06:37,397 --> 00:06:43,637
+Phi(h sub i) is 2 times
+the size of i - capacity of i, and
+
+102
+00:06:43,637 --> 00:06:49,227
+that's 2(k + 1), because
+the size sub i is
+
+103
+00:06:49,227 --> 00:06:53,396
+one more than the size of i-1, minus 2k.
+
+104
+00:06:53,396 --> 00:06:54,676
+Why 2k?
+
+105
+00:06:54,676 --> 00:06:58,780
+Because we double the capacity each time.
+
+106
+00:06:58,780 --> 00:06:59,905
+So, that's just equal to 2.
+
+107
+00:06:59,905 --> 00:07:04,434
+So, the amortized cost of adding the
+element is c sub i + phi(h sub i) -
+
+108
+00:07:04,434 --> 00:07:09,403
+phi(h sub i - 1), which is just size of i,
+because that's the number of elements we
+
+109
+00:07:09,403 --> 00:07:14,296
+have to, we have to move size of i-1
+elements and then add the one new element,
+
+110
+00:07:14,296 --> 00:07:15,794
+so, that's size of i.
+
+111
+00:07:15,794 --> 00:07:21,471
+So, we have (sizei)+2-k,
+which is just (k+1)+2-k, which is 3.
+
+112
+00:07:25,036 --> 00:07:29,316
+So, what we have seen now is
+that the amortized cost using
+
+113
+00:07:29,316 --> 00:07:33,159
+the physicist's method
+of adding elements is 3.

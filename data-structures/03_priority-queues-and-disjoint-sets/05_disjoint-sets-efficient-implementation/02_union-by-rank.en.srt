@@ -1,0 +1,638 @@
+1
+00:00:00,290 --> 00:00:05,470
+Okay, when merging two trees we're going
+to hang the shorter one under the root
+
+2
+00:00:05,470 --> 00:00:06,700
+of a taller one.
+
+3
+00:00:06,700 --> 00:00:09,210
+This means that when
+merging two trees we need
+
+4
+00:00:09,210 --> 00:00:12,840
+a way to quickly find
+the height of both trees.
+
+5
+00:00:12,840 --> 00:00:17,130
+Instead of just computing them we're
+going to keep the height of each
+
+6
+00:00:17,130 --> 00:00:22,300
+possible subtree in our forest
+in a separate array called rank.
+
+7
+00:00:22,300 --> 00:00:28,820
+Name the rank of i is equal to
+the height of the subtree rooted at i.
+
+8
+00:00:28,820 --> 00:00:33,699
+The reason we call it rank will
+become clear a little bit later.
+
+9
+00:00:36,080 --> 00:00:39,170
+Let me also mention that this
+way of merging two trees,
+
+10
+00:00:39,170 --> 00:00:44,538
+based on the height is called
+the union by rank heuristic.
+
+11
+00:00:44,538 --> 00:00:50,490
+To keep the rank, we need a small
+addition to our MakeSet implementation,
+
+12
+00:00:50,490 --> 00:00:56,850
+namely when creating a single set,
+we also set rank of i to be equal to zero.
+
+13
+00:00:56,850 --> 00:01:01,666
+This reflects the fact that it is
+currently just a root containing one node,
+
+14
+00:01:01,666 --> 00:01:05,970
+that just a tree containing one node,
+that is a tree of height zero.
+
+15
+00:01:07,230 --> 00:01:08,930
+We do not need to change Find.
+
+16
+00:01:08,930 --> 00:01:11,760
+So the Find operation doesn't
+need to change rank, and
+
+17
+00:01:11,760 --> 00:01:15,050
+it also doesn't use rank in any way.
+
+18
+00:01:15,050 --> 00:01:20,940
+To merge two trees containing the given
+two elements i and j, we do the following.
+
+19
+00:01:20,940 --> 00:01:25,754
+We first find the roots of the point
+in two trees by calling the Find
+
+20
+00:01:25,754 --> 00:01:27,240
+operation two times.
+
+21
+00:01:28,280 --> 00:01:31,610
+We store this root in variables i_id and
+j_id.
+
+22
+00:01:31,610 --> 00:01:35,040
+We then check whether
+i_id is equal to j_id.
+
+23
+00:01:35,040 --> 00:01:38,820
+If they are equal,
+this means that elements i and
+
+24
+00:01:38,820 --> 00:01:40,900
+j already lie in the same set.
+
+25
+00:01:40,900 --> 00:01:43,400
+So we just return in this case.
+
+26
+00:01:43,400 --> 00:01:46,240
+So this is done in the following if loop.
+
+27
+00:01:46,240 --> 00:01:50,820
+We then check whether the height
+of the tree containing element i
+
+28
+00:01:50,820 --> 00:01:54,760
+is larger than the height of
+the tree containing element j.
+
+29
+00:01:54,760 --> 00:02:00,320
+If it is larger,
+then we hang the tree with the root j_id,
+
+30
+00:02:00,320 --> 00:02:03,540
+and this root of element i_id.
+
+31
+00:02:03,540 --> 00:02:05,770
+This is done as follows.
+
+32
+00:02:05,770 --> 00:02:09,860
+Parent of j_id is set to i_id.
+
+33
+00:02:09,860 --> 00:02:12,560
+Otherwise, we do the opposite thing.
+
+34
+00:02:12,560 --> 00:02:17,250
+We just assigned parent of
+i_id to be equal to j_id.
+
+35
+00:02:18,980 --> 00:02:22,410
+So the last thing is that
+we need to check whether
+
+36
+00:02:22,410 --> 00:02:27,060
+the height of the corresponding
+two threes are just equal.
+
+37
+00:02:27,060 --> 00:02:30,120
+Let me illustrate this
+again with a small example.
+
+38
+00:02:30,120 --> 00:02:33,745
+Assume that we are merging
+the following two trees.
+
+39
+00:02:36,470 --> 00:02:40,550
+In this case the height
+of these two elements and
+
+40
+00:02:40,550 --> 00:02:45,930
+this element is zero and
+this height of this element is 1.
+
+41
+00:02:45,930 --> 00:02:50,210
+So in this case roots are equal.
+
+42
+00:02:50,210 --> 00:02:53,300
+The ranks of the corresponding
+roots are equal.
+
+43
+00:02:53,300 --> 00:02:55,336
+To merge these two trees
+we do the following.
+
+44
+00:03:00,277 --> 00:03:03,710
+We just hang the left tree under
+the root of the right tree.
+
+45
+00:03:03,710 --> 00:03:05,090
+If you can see, in this case,
+
+46
+00:03:05,090 --> 00:03:09,940
+the height of the resulting tree actually
+increases and this is the only case
+
+47
+00:03:09,940 --> 00:03:13,650
+when the union operation
+increases the height of this tree.
+
+48
+00:03:13,650 --> 00:03:20,170
+So in this case, initially,
+the longest path contained just one edge.
+
+49
+00:03:20,170 --> 00:03:26,370
+In this case we go the path
+that can contain two edges.
+
+50
+00:03:26,370 --> 00:03:33,640
+So we need to update this rank and
+this is done in the last check.
+
+51
+00:03:33,640 --> 00:03:38,777
+So if initially the ranks of our two
+trees that are going to be merged
+
+52
+00:03:38,777 --> 00:03:43,454
+are equal we hang one of them under
+the root of the other one and
+
+53
+00:03:43,454 --> 00:03:48,130
+increase the rank of
+the resulting tree by one.
+
+54
+00:03:48,130 --> 00:03:52,260
+Let's consider a small example,
+in this case we have six elements.
+
+55
+00:03:52,260 --> 00:03:55,450
+Let's call MakeSet for
+each of these elements.
+
+56
+00:03:55,450 --> 00:03:58,680
+These fields have a data
+structure as follows.
+
+57
+00:03:58,680 --> 00:04:04,250
+So currently,
+each element is its own parent, right?
+
+58
+00:04:04,250 --> 00:04:09,040
+So its current set is
+just a single one set.
+
+59
+00:04:09,040 --> 00:04:16,560
+Also, the height of each sub-tree in our
+data structure is currently equal to 0.
+
+60
+00:04:16,560 --> 00:04:19,620
+Now let's call Union(2,4).
+
+61
+00:04:19,620 --> 00:04:24,380
+In this case, the rank of the subtree
+rooted at 2 is equal to 0.
+
+62
+00:04:24,380 --> 00:04:29,170
+The height of the subtree
+rooted at 4 is equal to 0.
+
+63
+00:04:29,170 --> 00:04:33,654
+So it doesn't mean which one to hang
+under the root of the other one, so
+
+64
+00:04:33,654 --> 00:04:35,250
+let's hang 2 under 4.
+
+65
+00:04:35,250 --> 00:04:37,550
+This changes the data
+structure as follows.
+
+66
+00:04:37,550 --> 00:04:40,360
+Now it's a parent of 2 is 4 and
+
+67
+00:04:40,360 --> 00:04:45,720
+the rank of the subtree
+rooted at 4 is equal to 1.
+
+68
+00:04:45,720 --> 00:04:49,130
+Okay, now let's call Union(5,2).
+
+69
+00:04:49,130 --> 00:04:54,230
+In this case the height of
+
+70
+00:04:54,230 --> 00:04:59,930
+the tree that contains the element
+number 2 is equal to 1, right?
+
+71
+00:04:59,930 --> 00:05:04,820
+While the height of the tree that
+contains element number 5 is equal to 0.
+
+72
+00:05:04,820 --> 00:05:08,340
+So, in this case we're
+going to hang 5 under 4.
+
+73
+00:05:08,340 --> 00:05:09,830
+We do this as follows.
+
+74
+00:05:09,830 --> 00:05:15,380
+So, this change the data structure,
+only this changes only this cell.
+
+75
+00:05:15,380 --> 00:05:18,351
+So now 4 is the parent of 5, and
+
+76
+00:05:18,351 --> 00:05:23,870
+it doesn't change any rank in
+our sub tree, in our forest.
+
+77
+00:05:24,870 --> 00:05:27,670
+Okay, now lets call Union(3,1).
+
+78
+00:05:27,670 --> 00:05:32,190
+This is done as follows,
+now 1 is rank 1, and
+
+79
+00:05:32,190 --> 00:05:35,900
+now the parent of 3 is equal to 1, okay?
+
+80
+00:05:35,900 --> 00:05:40,560
+Now, let's call Union(2,3),
+and again, in this case, 2
+
+81
+00:05:40,560 --> 00:05:45,520
+lies in a set in the tree whose root is 4.
+
+82
+00:05:45,520 --> 00:05:49,410
+And currently,
+the rank of 4 is equal to 1.
+
+83
+00:05:49,410 --> 00:05:51,830
+Also, 3 lies in a set whose root is 1.
+
+84
+00:05:51,830 --> 00:05:55,250
+And currently, rank of 1 is equal to 1.
+
+85
+00:05:55,250 --> 00:05:59,970
+Which means that after merging these two
+trees we will get a tree of height 2.
+
+86
+00:05:59,970 --> 00:06:04,340
+So we do this as follows, now 1 is
+the root of the resulting tree and
+
+87
+00:06:04,340 --> 00:06:07,015
+its rank is equal to 2.
+
+88
+00:06:08,820 --> 00:06:14,980
+Finally we call Union(2,6) and
+this will just attach 6 to 1, as follows.
+
+89
+00:06:15,990 --> 00:06:21,500
+In our current implementation, we maintain
+the following important invariant.
+
+90
+00:06:21,500 --> 00:06:26,510
+At any point of time and for
+any node i, rank of i is equal
+
+91
+00:06:26,510 --> 00:06:31,460
+to the height of the subtree
+rooted at this node, i, right?
+
+92
+00:06:32,690 --> 00:06:36,700
+We will use this invariant to
+prove the following lemma.
+
+93
+00:06:36,700 --> 00:06:41,650
+The height of any tree in our forest
+is at most binary logarithm of n.
+
+94
+00:06:42,710 --> 00:06:47,780
+This will immediately imply that
+the running time of all operations
+
+95
+00:06:47,780 --> 00:06:52,430
+with our data structure is
+at most logarithmic, right?
+
+96
+00:06:52,430 --> 00:06:57,120
+To prove this lemma we will prove
+another lemma shown here on this slide.
+
+97
+00:06:58,440 --> 00:07:03,250
+We're going to prove that if we have
+a tree in our forest whose height
+
+98
+00:07:03,250 --> 00:07:07,800
+is k then this tree contains
+at least two to the k nodes.
+
+99
+00:07:08,980 --> 00:07:11,980
+This will imply the first
+lemma as follows.
+
+100
+00:07:11,980 --> 00:07:15,874
+I assume that some tree
+has height with more,
+
+101
+00:07:15,874 --> 00:07:19,879
+strictly greater than
+binany logarithm of n.
+
+102
+00:07:19,879 --> 00:07:24,232
+Using the second lemma it
+will be possible to show then
+
+103
+00:07:24,232 --> 00:07:28,410
+that this tree contains more than n nodes,
+right?
+
+104
+00:07:28,410 --> 00:07:31,560
+Which would lead to a contradiction
+with the fact that we
+
+105
+00:07:31,560 --> 00:07:34,120
+only have n objects in our data structure.
+
+106
+00:07:35,230 --> 00:07:38,550
+Here we are going to prove
+the second lemma by induction on k.
+
+107
+00:07:38,550 --> 00:07:42,770
+Recall that we proved
+that any tree of height k
+
+108
+00:07:42,770 --> 00:07:46,605
+in our forest contains at
+least 2 to the k nodes.
+
+109
+00:07:46,605 --> 00:07:49,010
+We're going to prove
+this by induction on k.
+
+110
+00:07:49,010 --> 00:07:55,040
+When k is equal to zero this means
+that we have a tree just of height 0,
+
+111
+00:07:55,040 --> 00:07:57,550
+which means that it
+contains just one node.
+
+112
+00:07:57,550 --> 00:08:00,870
+So, in this case,
+the statement clearly holds.
+
+113
+00:08:00,870 --> 00:08:06,782
+Now, to prove the induction step, let's
+recall that the only way to get a height,
+
+114
+00:08:06,782 --> 00:08:12,458
+to get a tree of height k, is to merge
+two trees, whose height is equal to k- 1.
+
+115
+00:08:12,458 --> 00:08:17,431
+I mean to merge both trees such that
+the height of the first tree is equal
+
+116
+00:08:17,431 --> 00:08:21,670
+to k- 1 and the height of
+the second tree is equal to k-1.
+
+117
+00:08:21,670 --> 00:08:26,224
+By the induction hypothesis
+the both of these two trees
+
+118
+00:08:26,224 --> 00:08:29,840
+contain at least 2 to the k-1 node.
+
+119
+00:08:29,840 --> 00:08:33,982
+Which means that our
+resulting tree contains
+
+120
+00:08:33,982 --> 00:08:38,342
+at least 2 to the k- 1
++ 2 to the k- 1 nodes,
+
+121
+00:08:38,342 --> 00:08:42,495
+which is exactly equal to 2 to the k,
+right?
+
+122
+00:08:42,495 --> 00:08:48,010
+Which means that the lemma is proved.
+
+123
+00:08:48,010 --> 00:08:51,640
+To conclude,
+the running time of both Union and
+
+124
+00:08:51,640 --> 00:08:56,250
+Find operations in our current
+implementation is at most logarithmic.
+
+125
+00:08:56,250 --> 00:08:57,080
+Why is so?
+
+126
+00:08:57,080 --> 00:09:00,790
+Well, just because we keep
+our trees shallow, so
+
+127
+00:09:00,790 --> 00:09:05,760
+that the height of any tree in our
+forest is at most logarithmic.
+
+128
+00:09:05,760 --> 00:09:10,520
+This immediately implies the time of any
+
+129
+00:09:10,520 --> 00:09:15,057
+Find operation is also
+big O of logarithm of n.
+
+130
+00:09:15,057 --> 00:09:20,045
+Recall also that the Union operation
+consists of two calls to the Find
+
+131
+00:09:20,045 --> 00:09:23,829
+operation and
+also a few constant time operations,
+
+132
+00:09:23,829 --> 00:09:28,740
+which means also that the running
+time of Union is also big O of log n.
+
+133
+00:09:28,740 --> 00:09:33,813
+In the next video, we will see another
+beautiful heuristic which will just
+
+134
+00:09:33,813 --> 00:09:38,817
+decrease the running time of both
+these operations to nearly a constant.

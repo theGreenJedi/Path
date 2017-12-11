@@ -1,0 +1,100 @@
+So in this lecture, we're going to talk about dynamic
+arrays and amortized analysis. In this video we're going to
+talk about dynamic arrays. So the problem with static arrays is,
+well, they're static. Once you declare them,
+they don't change size, and you have to determine
+that size at compile time. So one solution is what are called
+dynamically-allocated arrays. There you can actually allocate the array, determining the size of
+that array at runtime. So that gets allocated
+from dynamic memory. So that's an advantage. The problem is, what if you don't know the maximum size
+at the time you're allocating the array? A simple example,
+you're reading a bunch of numbers. You need to put them in an array. But you don't know how
+many numbers there'll be. You just know there'll be some mark at the
+end that says we're done with the numbers. So, how big do you make it? Do you make it 1,000 big? But then what if there are 2,000 elements? Make it 10,000 big? But what if there are 20,000 elements? So, a solution to this. There's a saying that says all
+problems in computer science can be solved by another level of indirection. And that's the idea here. We use a level of indirection. Rather than directly storing
+a reference to the either static or dynamically allocated array, we're going to store a pointer to
+our dynamically allocated array. And that allows us then
+to update that pointer. So if we start adding more and
+more elements, when we add too many, we can go ahead and allocate a new array,
+copy over the old elements, get rid of the old array, and
+then update our pointer to that new array. So these are called dynamic arrays or
+sometimes they're called resizable arrays. And this is distinct from
+dynamically allocated arrays. Where we allocate an array, but once it's
+allocated it doesn't change size. So a dynamic array is
+an abstract data type, and basically you want it to
+look kind of like an array. So it has the following operations,
+at a minimum. It has a Get operation,
+that takes an index and returns you the element at that index, and a Set operation, that sets an element at
+a particular index to a particular value. Both of those operations
+have to be constant time. Because that kind of what
+it means to be an array, is that we have random access with
+constant time to the elements. We can PushBack so that adds a new element
+to the array at the end of the array. We can remove an element
+at a particular index. And that'll shuffle down
+all the succeeding ones. And finally, we can find out how
+many elements are in the array. How do we implement this? Well, we're going to store arr,
+which is our dynamically-allocated array. We're going to store capacity, which is the size of that
+dynamically-allocated array, how large it is. And then size is the number of elements
+that we're currently using in the array. Let's look at an example. So let's say our dynamically
+allocated array has a capacity of 2. But we're not using any elements
+in it yet, so it's of size 0. And arr then points to that
+dynamically allocated array. If we do a PushBack of a,
+that's going to go ahead and put a into the array and update the size. We now push b, it's going to put b
+into the array and update the size. Notice now the size is equal to
+the capacity which means this dynamically allocated array is full. So if we get asked to do another PushBack, we've got to go allocate a new
+dynamically-allocated array. We're going to make that larger,
+in this case it's of size 4. And then we copy over each of the elements
+from the old array to the new array. Once we've copied them over, we can go
+ahead and update our array pointer to point to this new dynamically allocated
+array, and then dispose of the old array. At this point now we finally have
+our new dynamically allocated array, that has room to push another element,
+so we push in c. We push in d, if there is room
+we put it in, update the size. And now if we try and push another element,
+again we have a problem, we're too big. We can allocate a new array. In this case,
+we're going to make it of size 8. We'll talk about how you determine
+that size somewhat later. And then copy over a, b, c, and
+d, update the array pointer, de-allocate the old array, and
+now we have room we can push in e. So that's how dynamic arrays work. Let's look at some of the implementations
+of the particular API methods. Get is fairly simple. So we just check and see, we're going to
+assume for the sake of argument, that we are doing 0-based indexing here. So if we want to Get(i), we first
+check and make sure, is i in a range? That is, is it non-negative, and is it within the range
+from 0 to size i minus 1? Because if it's less than 0 or
+it's greater or equal to size, it's out of range, that will be an error. If we're in range then
+we just return index i from the dynamically allocated array. Set is very similar. Check to make sure out index is in bounds,
+and then if it is, update index i of the array to val. PushBack is a little more complicated. So, let's actually skip the if
+statement for now and just say, let's say that there is empty
+space in our dynamic array. In that case, we just set array at
+size to val and then increment size. If, however, we're full,
+we're not going to do that yet, if size is equal to capacity,
+then we go ahead and allocate a new array. We're going to make it twice the capacity,
+and then we go through a for loop, copying over every one of the elements
+from the existing array to the new array. We free up the old array and
+then set array to the new one. At that point then,
+we've got space and we go ahead and set the size element and
+then increment size. Remove's fairly simple. Check that our index is in bounds and
+then go ahead through a loop, basically copying over successive
+elements and then decrementing the size. Size is simple, will just return size. There are common implementations for
+these dynamic arrays and C++'s vector class is
+an example of a dynamic array. And there, notice it uses
+C++ operator overloading, so you can use the standard array
+syntax of left brackets, to either read from or
+write to an element. Java has an ArrayList. Python has the list. And there is no static arrays in Python. All of them are dynamic. What's the runtime? We saw Get and Set are O(1),
+as they should be. PushBack is O(n). Although we're going to see
+that's only the worst case. And most of the time actually,
+when you call PushBack, it's not having to do the expensive operation, that
+is, the size is not equal to capacity. For now, though,
+we're just going to say that it's O(n). We'll look at a more detailed
+analysis when we get into aggregate analysis in our next video. Removing is O(n), because we've
+gotta move all those elements. Size is O(1). So in summary, unlike static arrays,
+dynamic arrays are dynamic. That is, they can be resized. Appending a new element to a dynamic
+array is often constant time, but it can take O(n). We're going to look at a more
+nuanced analysis in the next video. And some space is wasted. In our case, if we're resizing by a factor
+of two, at most half the space is wasted. If we were making our new
+array three times as big, then we can waste two-thirds of our space. If we're only making it 1.5 as big,
+then we would waste less space. It's worth noting dynamic array can also
+be resized smaller, that's possible too. It's worth thinking about what if
+we resized our array to a smaller dynamic array as soon as we got
+under one-half utilization? And it turns out we can come up
+with a sequence of operations that gets to be quite expensive. In the next video, we're going to
+talk about amortized analysis. And in particular, we're going to look at
+one method called the aggregate method.

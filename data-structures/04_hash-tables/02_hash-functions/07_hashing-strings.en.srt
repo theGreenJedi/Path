@@ -1,0 +1,614 @@
+1
+00:00:00,170 --> 00:00:02,430
+Hi, in the previous videos,
+
+2
+00:00:02,430 --> 00:00:08,340
+you've learned how to quickly look up name
+in your phonebook given the phone number.
+
+3
+00:00:08,340 --> 00:00:12,540
+And we want to learn to solve
+the reverse problem given a name,
+
+4
+00:00:12,540 --> 00:00:15,460
+look up a phone number of
+the corresponding person.
+
+5
+00:00:17,060 --> 00:00:20,960
+To do that, we need to implement
+the Map from names to phone numbers.
+
+6
+00:00:22,270 --> 00:00:24,106
+And we can again use hash tables and
+
+7
+00:00:24,106 --> 00:00:27,029
+we can again use chaining as
+in the previous sections.
+
+8
+00:00:27,029 --> 00:00:31,723
+But we need to design a hash
+function that is defined names.
+
+9
+00:00:31,723 --> 00:00:37,020
+And more generally, we want to learn to
+hash arbitrary strings of characters.
+
+10
+00:00:37,020 --> 00:00:41,448
+And by the way in this video, you will
+also learn how hashing of strings and
+
+11
+00:00:41,448 --> 00:00:44,390
+implemented in the Java
+programming language.
+
+12
+00:00:44,390 --> 00:00:47,790
+But first, let's introduce a new notation.
+
+13
+00:00:47,790 --> 00:00:52,498
+Denote by lSl enclosed in vertical
+lines the length of string S.
+
+14
+00:00:52,498 --> 00:00:56,290
+For example,
+the length of string l"a"l is 1,
+
+15
+00:00:56,290 --> 00:01:01,907
+length of string l"ab"l is 2, and
+length of string l"abcde"l is 5.
+
+16
+00:01:01,907 --> 00:01:04,729
+So now how do hash strings?
+
+17
+00:01:04,729 --> 00:01:10,167
+Well when we're given a string,
+we're actually given
+
+18
+00:01:10,167 --> 00:01:15,970
+a sequence of characters from
+S[0] to S length of S- 1.
+
+19
+00:01:15,970 --> 00:01:21,430
+We number the characters of
+the strings from 0 in this lecture.
+
+20
+00:01:21,430 --> 00:01:27,400
+And S[i] Is an individual character that
+is in the i-th position in the string.
+
+21
+00:01:29,230 --> 00:01:31,930
+I say that we should
+use all the characters
+
+22
+00:01:31,930 --> 00:01:34,760
+when we compute our hash
+function of a string.
+
+23
+00:01:34,760 --> 00:01:39,940
+Indeed, if we don't use the first
+character, there will be many collisions.
+
+24
+00:01:39,940 --> 00:01:45,780
+For example, if the first symbol of the
+string is not used, then the hash value
+
+25
+00:01:45,780 --> 00:01:51,110
+of strings ("aa"), ("ba") and so
+on, up to ("za") will be the same.
+
+26
+00:01:51,110 --> 00:01:54,550
+Because however we compute
+the value of the hash function,
+
+27
+00:01:54,550 --> 00:01:57,180
+it doesn't use the value
+of the first character.
+
+28
+00:01:57,180 --> 00:02:00,332
+And if everything else in
+the strings stays the same, and
+
+29
+00:02:00,332 --> 00:02:04,734
+we only change the first character that
+doesn't influence the value of the hash
+
+30
+00:02:04,734 --> 00:02:08,168
+function then the value of the hash
+function must be the same.
+
+31
+00:02:08,168 --> 00:02:11,650
+And so there will be a lot of collisions
+and we want to avoid collisions.
+
+32
+00:02:11,650 --> 00:02:15,620
+So we need to use value of
+each of the characters.
+
+33
+00:02:17,010 --> 00:02:19,770
+Now, we could do a lot
+of things with that.
+
+34
+00:02:19,770 --> 00:02:24,820
+For example,
+sum the values of all the characters or
+
+35
+00:02:24,820 --> 00:02:28,920
+multiply them, but
+we'll do something different.
+
+36
+00:02:28,920 --> 00:02:32,077
+Well first,
+to even compute something on a string,
+
+37
+00:02:32,077 --> 00:02:36,115
+we need to convert each character
+of the string to an integer code.
+
+38
+00:02:36,115 --> 00:02:39,015
+For example,
+that can be ASCII code or Unicode,
+
+39
+00:02:39,015 --> 00:02:44,530
+corresponding to that symbol on your
+computer, that doesn't really matter.
+
+40
+00:02:44,530 --> 00:02:49,792
+And also we'll again need to
+choose a big prime number p,
+
+41
+00:02:49,792 --> 00:02:53,752
+the same as we used in
+the integer hashing.
+
+42
+00:02:53,752 --> 00:02:58,876
+So suppose we've chosen some big
+prime number p, now we introduce
+
+43
+00:02:58,876 --> 00:03:04,783
+a new family of hash functions called
+polynomial family of hash functions.
+
+44
+00:03:04,783 --> 00:03:10,650
+So calligraphy p is the family of hash
+functions which is index by small p,
+
+45
+00:03:10,650 --> 00:03:12,990
+which is our big prime number.
+
+46
+00:03:12,990 --> 00:03:19,139
+And also index by x, and x is a parameter
+which changes from 1 to p- 1.
+
+47
+00:03:19,139 --> 00:03:23,263
+So the value of a hash
+function index by p and
+
+48
+00:03:23,263 --> 00:03:26,941
+x on a string S, is the following sum.
+
+49
+00:03:26,941 --> 00:03:31,996
+It is a polynomial sum where we multiply
+the integer quote corresponding to
+
+50
+00:03:31,996 --> 00:03:37,548
+the ith character of S, which is noted by
+S of i, the same as the character itself.
+
+51
+00:03:37,548 --> 00:03:41,850
+We multiply it by x to the power of i.
+
+52
+00:03:41,850 --> 00:03:48,395
+We sum all these things up, and
+we take the value modular p.
+
+53
+00:03:48,395 --> 00:03:51,095
+So this is a family of hash functions, and
+
+54
+00:03:51,095 --> 00:03:54,270
+the chronology of all
+those hash functions is p.
+
+55
+00:03:54,270 --> 00:03:57,764
+So any such hash function
+returns value from 0 to p- 1.
+
+56
+00:03:57,764 --> 00:04:02,790
+And how many hash functions
+are there in this family?
+
+57
+00:04:02,790 --> 00:04:06,511
+Well of course, there are exactly
+p- 1 different hash functions,
+
+58
+00:04:06,511 --> 00:04:10,490
+because to choose to define a hash
+function from this family you would just
+
+59
+00:04:10,490 --> 00:04:12,108
+need to choose the value of x.
+
+60
+00:04:12,108 --> 00:04:18,379
+And x changes from 1 to p- 1, and
+it's an integer number of course.
+
+61
+00:04:18,379 --> 00:04:22,870
+So how can we implement a hash
+function from this family?
+
+62
+00:04:24,210 --> 00:04:28,383
+S, the procedure PolyHash which
+takes it's input string S,
+
+63
+00:04:28,383 --> 00:04:33,696
+prime number p and parameter x, implements
+the hash function from our peril.
+
+64
+00:04:33,696 --> 00:04:38,621
+It starts with the signing values of 0
+to the result to the hash value will
+
+65
+00:04:38,621 --> 00:04:40,220
+return to end.
+
+66
+00:04:40,220 --> 00:04:46,360
+And then it will go from right
+to left in our string and
+
+67
+00:04:46,360 --> 00:04:51,050
+compute new value based on the value
+of the corresponding character.
+
+68
+00:04:51,050 --> 00:04:55,300
+And there is a formula in
+the code that does exactly that.
+
+69
+00:04:55,300 --> 00:04:58,585
+And I will show you by example
+that what we get in the end
+
+70
+00:04:58,585 --> 00:05:01,656
+by applying this formula
+is exactly what we want.
+
+71
+00:05:01,656 --> 00:05:06,260
+So basically,
+we start with a hash value of 0, and
+
+72
+00:05:06,260 --> 00:05:12,080
+then we start with i equal to 2 if
+the length of our string S is 3.
+
+73
+00:05:12,080 --> 00:05:15,729
+We start with length of S- 1 which is 2.
+
+74
+00:05:15,729 --> 00:05:18,079
+We have current value of hash = 0.
+
+75
+00:05:18,079 --> 00:05:21,111
+So we multiply the 0 by x and get 0,
+
+76
+00:05:21,111 --> 00:05:26,788
+then we add the value of S[i]
+which is S[2], and take it mod p.
+
+77
+00:05:26,788 --> 00:05:32,461
+And so after first iteration of the for
+loop, we get S[2] mod p.
+
+78
+00:05:33,690 --> 00:05:37,937
+What happens is the next iteration,
+that i is decreased and i is now 1.
+
+79
+00:05:37,937 --> 00:05:43,710
+And we multiply the current
+value S[2] by x.
+
+80
+00:05:43,710 --> 00:05:48,280
+And we add s[1], and
+take everything modular p.
+
+81
+00:05:48,280 --> 00:05:52,482
+And what we get is the same as of
+S[1] + S[2] multiply by x modular p.
+
+82
+00:05:52,482 --> 00:05:58,170
+And then the last iteration,
+i is decreased to 0.
+
+83
+00:05:58,170 --> 00:06:00,506
+We multiply the current value by x.
+
+84
+00:06:00,506 --> 00:06:06,538
+What we get is S[1] multiply by
+x + S[2] multiply by x squared.
+
+85
+00:06:06,538 --> 00:06:12,700
+And then we also add S[0] to the sum and
+take everything modular p.
+
+86
+00:06:12,700 --> 00:06:18,632
+And the result is S[0] + S[1]
+multiply by x + S[2] multiply by x2,
+
+87
+00:06:18,632 --> 00:06:20,379
+exactly as we wanted.
+
+88
+00:06:20,379 --> 00:06:25,940
+A polynomial hash function,
+with prime P and prime parameter x.
+
+89
+00:06:28,100 --> 00:06:33,214
+And by the way, the implementation
+of the built in hash code methods in
+
+90
+00:06:33,214 --> 00:06:38,342
+the class stream in Java,
+is very similar to our procedure PolyHash.
+
+91
+00:06:38,342 --> 00:06:42,879
+The only difference is that,
+it always uses x = 31.
+
+92
+00:06:42,879 --> 00:06:47,635
+And for some technical reasons,
+it avoids the modular p operator It
+
+93
+00:06:47,635 --> 00:06:52,231
+just computes the polynomial sum
+without any modular division.
+
+94
+00:06:52,231 --> 00:06:56,883
+So now you know how a function that is
+used probably trillions of times a day by
+
+95
+00:06:56,883 --> 00:07:00,229
+thousands and
+many thousands of different programs,
+
+96
+00:07:00,229 --> 00:07:02,430
+how this function is implemented.
+
+97
+00:07:04,120 --> 00:07:08,300
+So now about the efficiency
+of our polynomial family.
+
+98
+00:07:09,960 --> 00:07:15,795
+First, Lemma says that for
+any two different strings s1 and
+
+99
+00:07:15,795 --> 00:07:18,548
+s2 of length at most L + 1.
+
+100
+00:07:18,548 --> 00:07:23,498
+If you choose a random hash function
+from the polynomial family by
+
+101
+00:07:23,498 --> 00:07:28,092
+selecting a random value of x,
+parameter x from 1 to p- 1.
+
+102
+00:07:28,092 --> 00:07:31,337
+You can select a random hash
+function from the family.
+
+103
+00:07:31,337 --> 00:07:37,553
+So if you select a random hash from the
+polynomial family, then the probability
+
+104
+00:07:37,553 --> 00:07:42,956
+of collision on these two different
+strings is at most L divided by p.
+
+105
+00:07:45,310 --> 00:07:50,306
+So that doesn't seem like a good
+estimate because L can be big,
+
+106
+00:07:50,306 --> 00:07:53,616
+but actually it is your power to choose p.
+
+107
+00:07:53,616 --> 00:08:00,100
+If you choose very, very big prime number
+p then L over p will be very small.
+
+108
+00:08:00,100 --> 00:08:05,891
+And know that it won't influence the
+running time of the PolyHash procedure,
+
+109
+00:08:05,891 --> 00:08:10,468
+because the running time of this
+procedure is big length of S.
+
+110
+00:08:10,468 --> 00:08:12,232
+It only depends on
+the length of the string.
+
+111
+00:08:12,232 --> 00:08:17,300
+It doesn't depend on the length
+of number p more or less.
+
+112
+00:08:17,300 --> 00:08:22,410
+So if you select a really big number p,
+then the probability of collision
+
+113
+00:08:22,410 --> 00:08:27,850
+will be very small and the hash function
+will still be computed very fast.
+
+114
+00:08:27,850 --> 00:08:33,950
+The idea of proof of this Lemma
+is that the equation polynomial
+
+115
+00:08:33,950 --> 00:08:40,060
+equation of power L, modular prime number
+p has at most L different solutions x.
+
+116
+00:08:40,060 --> 00:08:44,564
+Basically, when we consider
+two strings S1 and S2.
+
+117
+00:08:44,564 --> 00:08:47,157
+The fact that the hash value or
+
+118
+00:08:47,157 --> 00:08:52,448
+some hash function from
+the polynomial family is the same for
+
+119
+00:08:52,448 --> 00:08:56,908
+these two strings means
+that x corresponding to our
+
+120
+00:08:56,908 --> 00:09:01,593
+hash function is a solution
+of this kind of equation.
+
+121
+00:09:01,593 --> 00:09:06,020
+And the fact that strings are different
+makes sure that at least one of
+
+122
+00:09:06,020 --> 00:09:11,760
+the coefficients of this equation is
+different from 0, and that is essential.
+
+123
+00:09:11,760 --> 00:09:14,600
+If the strings were the same of course,
+
+124
+00:09:14,600 --> 00:09:18,210
+the value of any hash function
+on them will be the same.
+
+125
+00:09:18,210 --> 00:09:22,337
+But if they're different then
+the probability is at most L over p.
+
+126
+00:09:22,337 --> 00:09:25,759
+Because there are only L or
+less different x for
+
+127
+00:09:25,759 --> 00:09:30,867
+which the hash function can give
+the same value on these two strings.

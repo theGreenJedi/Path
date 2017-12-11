@@ -1,0 +1,69 @@
+Hello everybody, welcome back. We're still talking about
+binary search trees but today we're going to talk about AVL trees. And AVL trees are just sort of a specific
+way of maintaining balance in your binary search tree. And we're just going to talk
+about sort of the basic idea. Next lecture we're going to talk
+about how to actually implement them. But okay, what's the idea? We learned last lecture that in order for our search operations to be fast,
+we need to maintain balance of the tree. But before we can do that we first need a
+way to measure the balance of the tree so that we can know if we're unbalanced and
+know how to fix it. And a natural way to do this is by
+what's called the height of a node. So if you have a node in the tree, its height is the maximum length of a path
+from that node to a leaf of your tree. Fair enough. So for example if we have the following tree,
+what's the height of the highlighted node? Well, this node has height six, the
+following path of length six leads down from this node and
+it turns out to be nothing longer. So, we can define height
+recursively in a very easy way. If you have leaf its height is
+one because you're just there and you can't go any further. Otherwise, well the longest path downwards
+you can have, it's either through the longest path on your left side or
+the longest path on your right side. So you want to take the maximum of
+the height of your left child and the height of your right child, and then you need to add one to that because
+n sort of gets added to this path. Okay, that's fine. Now, in order to actually make use of this
+height we actually are going to want to add a new field to our nodes. So, the nodes that made up our
+tree previously stored a key and are pointed to the parents on the left
+child and the right child, and now they also need to store another
+piece of data, the height of node. And note that we are actually
+going to have to do some work, and we'll talk a little bit
+about how to do this later, to insure that this height field
+is actually kept up to date. We can't just store it as a number and
+leave it there forever. If we rearrange the tree,
+we might need to change its heights. In any case, back to balance. Height is a very rough measure
+of the size of a sub-tree. For things to be balanced, we want the
+size of the two sub-trees of the left and right children of any given
+node to be roughly the same. And so there's an obvious way to do this. We'd like to force the heights of
+these children to be roughly the same. So the AVL property is the following. For all nodes N in our tray,
+we would like it to be the case that the difference between
+the height of the left child and the height of the right
+child is at most one. And we claim that if you can maintain
+this property for all nodes in your tree, this actually ensures that your
+tree is reasonably well balanced. Okay and so, really what we'd like to
+know is that if you have the AVL property on all nodes, then the total height
+of the tree should be logarithmic. It should be O(log(n)). So basically what we want to say
+is that you have an AVL tree and it doesn't have too many nodes. Then the height is not too big. But it turns out that the easier way to
+get at this is to turn this on its head. We want to show instead that
+if you have an AVL tree and the height isn't too big,
+then you can't have too many nodes. And this we can do. So we're going to prove
+the following theorem. Suppose that you have an AVL tree,
+a tree satisfying the AVL property, and N is a node of this tree with height h. THen the claim is that the sub-tree
+of N has to have size at least the Fibonacci Number F's og h. And so just to review,
+we talked about Fibonacci Numbers way back in the introductory unit for this, but
+for the previous course in this sequence. But this is just a sequence of numbers. The zeroth one is zero,
+the first is one, and from there after each Fibonacci number
+is the sum of the previous two. Now, these are a nice predictable
+sequence, they grow pretty fast, the end Fibonacci number's at least two
+to the n over two for all n at least 6. Okay so let's look at the proof, we're going to do this by induction
+on the height of our node. If the node we're looking at
+has height one, it's a leaf. And it's sub-tree has one node which
+is the first Fibonacci number, great. Next we need an inductive hypothesis
+if you've got some node of height h. By sort of definition of the height, at least one of your two children
+need to have height h minus one. Then, by the AVL property, your other child needs to have
+height at least h minus two. So by the inductive hypothesis, the total number of nodes in this tree is
+at least the sum of the h -1 Fibonacci number plus the h- 2 Fibonacci number,
+which equals the h Fibonacci number. And so that completes the proof. So what does this mean? It means that if a node
+in our tree has height h, the sub-tree of that node has height
+at least two to the h over two. But if our tree only has n nodes, two
+to the h over two can't be more than n. So the height can't be more
+than two log base two of n. Which is o of log n. And so the conclusion is if we
+can maintain the AVL property, you can perform all of your find and
+operations in such in O(log(n)) time. And so next lecture we're going to talk
+about how to maintain this property but this is the key idea. If we can maintain this property, we have
+a balanced tree and things should be fast. So I'll see you next time as we discuss
+how to ensure that this happens

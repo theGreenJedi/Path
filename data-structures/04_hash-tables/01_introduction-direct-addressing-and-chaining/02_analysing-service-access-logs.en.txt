@@ -1,0 +1,99 @@
+Hi, in this video, we will introduce
+a problem about a web service, and IP addresses of it's clients. We will use this problem, to illustrate different approaches
+throughout the whole lesson. Suppose you have a web service with many,
+many clients, who access your service through
+the Internet from different computers. In the Internet, there is a system which assigns a unique
+address to each computer in the network. Just like every house in
+the city has its own address. Those addresses of computers
+are called IP addresses or just IPs. Every IP address looks like this,
+four integers, separated by dots. Every of the four integers
+is from 0 to 255. So that it can be stored
+in eight bits of memory. And the whole IP address,
+can be stored in 32 bits of memory as the standard integer type in C++ or
+Java. So there are 2 to the power
+of 32 different IP addresses, which is roughly 4 billion. Recently, the Internet became so big that 4 billion is no longer enough for
+all of the commuters in the network. That's why people designed the new
+address system called IPv6. And the number of addresses
+there is 2 to the power of 128, which is a number with 39 digits. And it will be sufficient for a long time. In this problem, we will start talking about old system
+called IPv4, which is still in use. And which contains only 2 to the power
+of 32 different IP addresses. When somebody accesses your web service, you know from which IP address did he or
+she access it. And you store this information in
+a special file called access log. You want to analyze all the activity, for
+example, to defend yourself from attacks. An adversary can try to kill your service
+by sending lots and lots of requests from his computer to your service, so
+that it doesn't survive the lot and fails. This is called Denial of Service attack. And you want to be able to
+quickly notice the pattern. That there is a unusual high
+number of requests from the same IP address during some period of time for
+example, the last hour. And to do that,
+you want to analyze your Access Log. You can think of your access log as of
+a simple text file with many, many lines. And in each line, you have date and
+time of the access, and the IP address from which
+the client accessed your servers. And you want to be able to quickly
+answer the queries like, did anybody access my service from this particular
+IP address during the last hour? And how many times did
+he access my service? And how many different IPs were used to
+access the service during the last hour? To answer those questions,
+we'll need to do some Log Processing. But of course, we don't want to
+process whole one hour of logs each time we want to answer such a simple
+question because one hour of logs can easily contain dozens of thousands or
+hundred of thousands or even millions of lines depending
+on the load of your web service. Want to do that much faster. So to do that we'll keep count. For each IP address, we'll keep a counter
+that says how many times exactly that IP address appears in the last one
+hour of the access log, or how many times during the last hour clients accessed your
+service from that particular IP address. And we'll store it in some data
+structure C, which is basically some data structure to store the mapping
+from IP addresses to counters. We don't know yet
+how to implement that data structure C. We will discuss that further. We will update the counter corresponding
+to IP addresses every second. For example, if now is 1 hour 45 minutes
+and 13 seconds from the start of the date and we'll ignore the date field in
+the access log for the sake of simplicity. Then we need to increment the counters
+corresponding to the IP addresses in the last two lines of the log,
+because those are new lines. We also need to remember to
+decrement the counters corresponding to the IP addresses in
+the old lines of the log. For that we'll look at the lines
+exactly 1 hour ago in the log. Because the lines which
+are older than that, for them we've already decremented
+the counters in the previous seconds. And the lines which
+are more recent than that, we still don't need to decrement the
+counters because the IPs in those lines are still in the 1 hour window
+ending in the current second. So we'll decrement the counters
+corresponding to the lines which are 1 hour ago from the current moment. Now let's look at the to pseudo code. In the main loop we have
+the following variables. log represents the access log. We will think of it as
+an array of log lines. Each log line has two fields. Time and IP address. C is some mapping from IPs to counters. We still don't know how
+to implement that but we suppose that we have some
+data structure for that. i is an index in the log which points
+to the first unprocessed log line. So when a new second starts,
+we'll need to start incrementing counters corresponding to
+lines starting from i and further in log. j is the first or the oldest line
+in the current 1 hour window. So that when the next second starts
+we'll need to decrement counters for some of the lines starting
+from line number j. We initialize i and j with 0 and
+C with an empty mapping, because there is nothing
+to store in the start. And then each second,
+we call procedure UpdateAccessList, and we pass there the access
+log to read data from. We also pass i and j,
+which we will use inside and also update. And we pass data structure C,
+which is our goal to updated. So now let's look at the pseudo code for
+update access list. it consists of two parts. The first part deals
+with the new lines and the second part deals with the old lines. New lines start from line number i
+which is the first unprocessed line. Look at this line and we increase
+the counter corresponding to the IP in this line using our data structure C. And then we go on to the next line. We'll proceed with this while
+the time written in the log line i is still less than or equal to the time
+when UpdateAccessList was launched and then we stop processing new lines. And we want to all blinds. How do we determine that the line is
+old enough, to decrement the counter? We compute the time now,
+which we assume is computed in seconds. So then we need to subtract, exactly one
+hour from that and that is 3600 seconds. And if the time written
+in line j is less than or equal to that, we need to decrement
+the corresponding counter. So we'll start with line number j, which
+is the first line in our 1 hour window. We check that it is old enough
+to decrement the calendar. We decrement the calendar if that's the
+case and then we move on to the next line. In the and when we stop in this while
+loop, j will point again to the first or oldest line in the current 1 hour window. So we've implemented the updating
+procedure correctly. Now how to answer the question
+whether this particular IP was or was not used to access our
+service during the last hour. That is really easy. If the counter corresponding
+to that IP is more than 0, then this IP was used
+during the last hour. Otherwise the counter will be 0. So,we've implemented all the procedures necessary to answer the questions,
+but for one small detail. We don't know how to
+implement data structure C. And we will discuss that
+in the next lectures.

@@ -1,0 +1,673 @@
+1
+00:00:00,220 --> 00:00:05,776
+In this video, we are going to refine
+our analysis of the BuildHeap procedure.
+
+2
+00:00:05,776 --> 00:00:11,347
+Recall that we estimated the running time
+of the BuildHeap procedure as n log n,
+
+3
+00:00:11,347 --> 00:00:16,920
+because it consists actually of roughly
+n over 2 calls to SiftDown procedure,
+
+4
+00:00:16,920 --> 00:00:19,190
+whose running time is log n.
+
+5
+00:00:19,190 --> 00:00:25,297
+So we get n and over 2 multiplied by
+log n, which is of course O(n log n).
+
+6
+00:00:25,297 --> 00:00:28,280
+Note, however, the following thing.
+
+7
+00:00:28,280 --> 00:00:34,390
+If we call SiftDown for a node which
+is already quite close to the leaves,
+
+8
+00:00:34,390 --> 00:00:39,715
+then the running time of sifting
+it down is much less than log n.
+
+9
+00:00:39,715 --> 00:00:41,050
+Right?
+
+10
+00:00:41,050 --> 00:00:43,030
+Because it is already close to the root.
+
+11
+00:00:43,030 --> 00:00:48,251
+So the number of swaps until
+it goes to the leaves cannot
+
+12
+00:00:48,251 --> 00:00:54,395
+be larger than the height of
+the corresponding subtree, okay?
+
+13
+00:00:54,395 --> 00:00:56,420
+Note also the following thing.
+
+14
+00:00:56,420 --> 00:01:02,740
+We actually, in our tree, we actually have
+many nodes that are close to the root.
+
+15
+00:01:02,740 --> 00:01:07,298
+So we have just one node, which is
+exactly the root, whose height is log n.
+
+16
+00:01:07,298 --> 00:01:10,806
+We have two nodes whose
+height is log n minus 1,
+
+17
+00:01:10,806 --> 00:01:15,215
+we have four nodes whose height
+is log n minus 2, and so on.
+
+18
+00:01:15,215 --> 00:01:21,089
+And we have roughly n over 4
+nodes whose height is just 1.
+
+19
+00:01:21,089 --> 00:01:21,960
+Okay?
+
+20
+00:01:21,960 --> 00:01:26,838
+So it raises the question whether
+our estimate of the running time
+
+21
+00:01:26,838 --> 00:01:30,670
+of BuildHeap procedure
+was too pessimistic.
+
+22
+00:01:30,670 --> 00:01:32,320
+We will see on the next slide.
+
+23
+00:01:32,320 --> 00:01:37,070
+Let's just estimate the running
+time of the BuildHeap procedure
+
+24
+00:01:37,070 --> 00:01:39,326
+a little bit more accurately.
+
+25
+00:01:39,326 --> 00:01:42,720
+Okay, so this is our heap,
+shown schematically.
+
+26
+00:01:44,440 --> 00:01:48,370
+So this is the last level,
+which is probably not completely filled.
+
+27
+00:01:49,540 --> 00:01:54,730
+But all the leaves on the last
+level are in leftmost position.
+
+28
+00:01:54,730 --> 00:02:00,023
+So, on the very top level,
+we have just one node,
+
+29
+00:02:00,023 --> 00:02:05,590
+and sifting down this node
+costs logarithmic time.
+
+30
+00:02:05,590 --> 00:02:10,872
+At the same time, on the last level,
+we have at most n over 2 nodes,
+
+31
+00:02:10,872 --> 00:02:14,420
+and sifting them down
+makes at most one swap.
+
+32
+00:02:14,420 --> 00:02:17,889
+Actually, we do not need even one swap,
+just zero swaps, but
+
+33
+00:02:17,889 --> 00:02:21,190
+let's be just generous enough and
+let's allow one swap.
+
+34
+00:02:21,190 --> 00:02:26,870
+On the next level,
+we have at most n over 4 nodes,
+
+35
+00:02:26,870 --> 00:02:32,700
+and sifting down for
+them costs at most two swaps, and so on.
+
+36
+00:02:32,700 --> 00:02:37,523
+So if we just compute
+the sum of everything, so
+
+37
+00:02:37,523 --> 00:02:40,367
+we have n over 2 nodes, for
+
+38
+00:02:40,367 --> 00:02:45,340
+which the cost of
+the SiftDown procedure is 1.
+
+39
+00:02:45,340 --> 00:02:48,470
+We have n over 4 nodes on the next level,
+for
+
+40
+00:02:48,470 --> 00:02:52,510
+which sifting them down
+makes at most two swaps.
+
+41
+00:02:52,510 --> 00:02:55,890
+On the next level, we have n over 8.
+
+42
+00:02:57,940 --> 00:03:04,780
+Now it's, for each, sifting them down
+costs at most three swaps, and so on.
+
+43
+00:03:04,780 --> 00:03:06,830
+So now let's do the following.
+
+44
+00:03:06,830 --> 00:03:10,720
+Let's just upper bound this
+sum by the following sum.
+
+45
+00:03:10,720 --> 00:03:17,080
+First of all, let's take
+the multiplier n out of this sum.
+
+46
+00:03:17,080 --> 00:03:21,336
+So what is left here is the following,
+
+47
+00:03:21,336 --> 00:03:26,124
+1 over 2 + 2 over 4 + 3 over 8 + 4 over
+
+48
+00:03:26,124 --> 00:03:31,190
+16 + 5 over 32, and so on, right?
+
+49
+00:03:31,190 --> 00:03:34,350
+So this can be upper-bounded
+by the following sum.
+
+50
+00:03:34,350 --> 00:03:38,156
+So this is just the sum
+from i equal to 1 to
+
+51
+00:03:38,156 --> 00:03:43,640
+infinity of the following fraction,
+i divided by 2 to the i.
+
+52
+00:03:43,640 --> 00:03:50,370
+Once again, in our case, in the running
+time of BuildHeap, this sum is finite.
+
+53
+00:03:51,690 --> 00:03:54,700
+So the maximum value of i is log n.
+
+54
+00:03:54,700 --> 00:03:59,840
+We do not have any nodes on
+height larger than log n.
+
+55
+00:03:59,840 --> 00:04:04,440
+But we just upper-bound
+it by an infinite sum,
+
+56
+00:04:04,440 --> 00:04:08,460
+where we can see they're just
+all possible values of i.
+
+57
+00:04:08,460 --> 00:04:16,160
+And even for this sum, we will show that
+the value of this sum is equal to 2.
+
+58
+00:04:16,160 --> 00:04:20,472
+Which gives us that the running time of
+the BuildHeap procedure is actually at
+
+59
+00:04:20,472 --> 00:04:21,080
+most 2n.
+
+60
+00:04:22,390 --> 00:04:29,454
+To estimate the required sum, we start
+with a simpler and more well-known sum.
+
+61
+00:04:29,454 --> 00:04:33,690
+So this is given by the following picture,
+and the sum is given here.
+
+62
+00:04:33,690 --> 00:04:38,960
+So 1 over 2 + 1 over 4 + 1
+over 8 + 1 over 16 and so on.
+
+63
+00:04:38,960 --> 00:04:40,820
+It is equal to 1.
+
+64
+00:04:40,820 --> 00:04:43,400
+And this can be proved
+geometrically as follows.
+
+65
+00:04:43,400 --> 00:04:46,045
+Consider a segment of length 1.
+
+66
+00:04:48,360 --> 00:04:53,242
+Now, above the segment,
+let's draw a segment
+
+67
+00:04:53,242 --> 00:04:57,399
+of size 1 over 2, of length 1 over 2.
+
+68
+00:04:57,399 --> 00:04:58,170
+Okay?
+
+69
+00:04:58,170 --> 00:05:02,000
+This is half of our initial segment.
+
+70
+00:05:02,000 --> 00:05:05,660
+What remains is also
+a segment of size one-half.
+
+71
+00:05:05,660 --> 00:05:09,906
+So when we add a segment of size
+
+72
+00:05:09,906 --> 00:05:14,480
+1 over 4 here,
+
+73
+00:05:14,480 --> 00:05:20,490
+we actually get 2 times closer
+to this vertical line, right?
+
+74
+00:05:20,490 --> 00:05:24,560
+When we add the next one,
+1 over 8, we get, again,
+
+75
+00:05:24,560 --> 00:05:30,541
+2 times closer than we were before adding
+this segment to this vertical line.
+
+76
+00:05:30,541 --> 00:05:36,085
+When we add 1 over 16,
+again, our current distance
+
+77
+00:05:36,085 --> 00:05:40,915
+to the vertical line is 1 over 16,
+and so on.
+
+78
+00:05:40,915 --> 00:05:44,005
+So if we go to infinity,
+
+79
+00:05:44,005 --> 00:05:50,339
+we get infinitely closer
+to this vertical line,
+
+80
+00:05:50,339 --> 00:05:55,620
+which means that this sum is equal to 1.
+
+81
+00:05:55,620 --> 00:06:01,380
+Now, what about the sum
+that we need to estimate?
+
+82
+00:06:01,380 --> 00:06:05,080
+Well, to estimate it, let's first
+do the following strange thing.
+
+83
+00:06:05,080 --> 00:06:08,070
+Let's consider all
+the segments shown above, and
+
+84
+00:06:08,070 --> 00:06:11,160
+let's adjust them by their right end.
+
+85
+00:06:11,160 --> 00:06:14,730
+So consider the segment 1 shown here.
+
+86
+00:06:14,730 --> 00:06:18,280
+Now consider the segment
+of length 1 over 2,
+
+87
+00:06:18,280 --> 00:06:22,700
+the segment of length 1 over 4,
+the segment of length 1 over 8, and so on.
+
+88
+00:06:24,200 --> 00:06:26,360
+So we continue this process to infinity.
+
+89
+00:06:26,360 --> 00:06:31,147
+And we know that the sum of the lengths
+of all these segments is equal to 2,
+
+90
+00:06:31,147 --> 00:06:31,930
+of course.
+
+91
+00:06:33,000 --> 00:06:34,760
+Now, why we're doing this?
+
+92
+00:06:36,930 --> 00:06:38,580
+Well, for the following reason.
+
+93
+00:06:38,580 --> 00:06:41,340
+First, consider the following
+vertical lines.
+
+94
+00:06:46,866 --> 00:06:50,364
+What we need to estimate
+is the following sum,
+
+95
+00:06:50,364 --> 00:06:55,390
+1 over 2 + 2 over 4 + 3 over
+8 + 4 over 16 and so on.
+
+96
+00:06:55,390 --> 00:07:03,582
+Let's see, so
+this is a segment of size 1 over 2, okay.
+
+97
+00:07:03,582 --> 00:07:09,201
+This is two segments of size 1 over 4,
+okay.
+
+98
+00:07:09,201 --> 00:07:17,640
+So this is three segments of
+length 1 over 8, and so on.
+
+99
+00:07:17,640 --> 00:07:21,434
+So if we put another vertical line,
+
+100
+00:07:21,434 --> 00:07:27,510
+we will get four segments of
+size 1 over 16, and so on.
+
+101
+00:07:27,510 --> 00:07:32,830
+So if we do this to infinity, we will
+cover all our segments that are shown
+
+102
+00:07:32,830 --> 00:07:37,940
+here, which proves that
+this sum is equal to 2.
+
+103
+00:07:37,940 --> 00:07:42,547
+Which in turn proves that
+the running time of our BuildHeap
+
+104
+00:07:42,547 --> 00:07:47,634
+procedure is actually just linear,
+it is bounded above by 2n.
+
+105
+00:07:47,634 --> 00:07:52,123
+Our new estimate for the running time of
+the BuildHeap procedure does not actually
+
+106
+00:07:52,123 --> 00:07:55,840
+improve the running time
+of the HeapSort algorithm.
+
+107
+00:07:55,840 --> 00:08:00,345
+Because the HeapSort algorithm first
+builds a heap, and now we know that it can
+
+108
+00:08:00,345 --> 00:08:04,450
+be done in linear time, but then we
+need to extract max n minus 1 times.
+
+109
+00:08:05,470 --> 00:08:07,586
+So we still have n log n time,
+
+110
+00:08:07,586 --> 00:08:12,188
+and actually we cannot do better
+than n log n asymptotically.
+
+111
+00:08:12,188 --> 00:08:16,170
+We already know this, because it
+is a comparison-based algorithm.
+
+112
+00:08:16,170 --> 00:08:23,410
+However, this helps to solve a different
+problem faster than naively.
+
+113
+00:08:23,410 --> 00:08:25,900
+So assume that we're given array and
+
+114
+00:08:25,900 --> 00:08:30,318
+we're given a parameter k,
+which is an integer between 1 and n.
+
+115
+00:08:30,318 --> 00:08:33,570
+And what we would like to do is
+not to sort the given array, but
+
+116
+00:08:33,570 --> 00:08:36,890
+to find the k largest
+elements in this array.
+
+117
+00:08:36,890 --> 00:08:38,360
+Or put it otherwise,
+
+118
+00:08:38,360 --> 00:08:43,440
+we need to output the last k elements
+from the sorted version of our array.
+
+119
+00:08:44,500 --> 00:08:48,120
+So using the new estimate for
+the BuildHeap procedure,
+
+120
+00:08:48,120 --> 00:08:53,740
+we can actually solve this problem in
+linear time, when k is not too large.
+
+121
+00:08:53,740 --> 00:08:58,990
+Namely, when k is at most
+big O(n) divided by log n.
+
+122
+00:08:58,990 --> 00:09:04,670
+For example, if you have an array of
+size n, and you would like just to find
+
+123
+00:09:04,670 --> 00:09:10,110
+square root of n largest elements, then
+you can solve this just in linear time.
+
+124
+00:09:10,110 --> 00:09:14,901
+So you do not need to sort the whole array
+in time n log n to solve this problem.
+
+125
+00:09:14,901 --> 00:09:17,420
+So linear time is enough to solve it.
+
+126
+00:09:17,420 --> 00:09:19,630
+And this is how it can be done.
+
+127
+00:09:19,630 --> 00:09:23,871
+Given an array A of size n and
+parameter k, you just build a heap out of
+
+128
+00:09:23,871 --> 00:09:27,828
+a given array, and then you
+extract the maximum value k times.
+
+129
+00:09:27,828 --> 00:09:28,618
+Right?
+
+130
+00:09:28,618 --> 00:09:30,210
+So easy.
+
+131
+00:09:30,210 --> 00:09:32,860
+The running time of this
+procedure is the following.
+
+132
+00:09:32,860 --> 00:09:36,680
+First, you need to build a heap, so
+you spend a linear amount of work for
+
+133
+00:09:36,680 --> 00:09:40,775
+this, then you need to
+extract max k times.
+
+134
+00:09:40,775 --> 00:09:43,995
+For this, you spend k multiplied by log n.
+
+135
+00:09:43,995 --> 00:09:50,495
+So if k is indeed smaller than n
+divided by log n, so let me write it.
+
+136
+00:09:50,495 --> 00:09:53,700
+So if k is smaller than
+n divided by log n,
+
+137
+00:09:53,700 --> 00:09:58,890
+then this is at most n.
+
+138
+00:09:58,890 --> 00:10:02,630
+So the whole running
+time is at most linear.
+
+139
+00:10:04,090 --> 00:10:08,800
+So to conclude,
+what we've presented here is a heap sort
+
+140
+00:10:08,800 --> 00:10:13,870
+algorithm which actually
+sorts a given array
+
+141
+00:10:13,870 --> 00:10:19,060
+in place without using any additional
+memory and in optimal time n log n.
+
+142
+00:10:19,060 --> 00:10:24,856
+We also discussed that to build
+a heap out of a given array,
+
+143
+00:10:24,856 --> 00:10:30,432
+it's actually enough to spend
+a linear amount of work.

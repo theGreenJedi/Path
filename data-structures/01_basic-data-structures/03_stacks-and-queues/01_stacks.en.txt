@@ -1,0 +1,120 @@
+So now we're going to start talking about
+two very important data structures, stacks and queues. In this video we're
+going to talk about stacks. So, what is a stack? It's an abstract data type, and
+here are the operations we have. We can push a key, so we've got
+a collection of values and we can push it. We can find the most recently
+added key with Top. And we can Pop, which returns and
+removes the most recently added. So, the way to think of it is
+as if you have a stack of books. You can put a book on top of the stack, or you can take a book from
+the top of the stack. But you can't take the element at
+the bottom of the stack of books without taking off all of the previous elements. So it's really pretty simple. Push items on,
+you can find what the top one is. You can pop off the top one and
+you can intermingle these operations. Last one: you can find is is it empty? So are, do we have an empty stack? This turns out to be really useful for
+lots and lots of things, where you need to be keep track of what
+has happened in this particular order. Let's look at an example. So let's say we've got
+a balanced brackets problem. So, here we have a string. And it has left parens, right parens,
+left square brackets, and right square brackets. And we want to determine whether or
+not that string of parentheses and square brackets, whether they're balanced. And balance meaning there's a matching
+left paren for every right paren. And they're in the right order. And they don't cross over. Let's look at some examples
+of unbalanced and balanced. So, the first string here left paren,
+square bracket, matching square bracket,
+matching right paren, square bracket, matching square bracket, left paren,
+matching paren, balanced. The second one also balanced. The unbalanced one for example here a left
+paren with no matching right paren. Assuming that the two parens on the
+right side are matching themselves. The square brackets match, but then we
+have got an unmatched right bracket. In the last case we've got a square left
+bracket and a square right bracket, but the problem is that they
+are in the wrong order. It is the square right bracket
+followed by the square left bracket. How do we keep track of that? And the problem is that in some cases we
+have to kind of keep track of a lot of information. For instance, in the second example,
+here, we've got our opening left paren. Doesn't get matched with
+the right paren for quite a while. There's a lot of intervening stuff,
+and we have to sort of keep track that we've got a left paren whose
+right paren we need to match, even as all this other stuff happens. And it turns out a stack is a good way to
+keep track of it, so here's what we'll do. We'll create a stack and then we'll go
+through every character in the string. If we have an opening paren or an opening square bracket,
+we'll go ahead and push it on the stack. So the stack is going to represent
+the parens that are still open, the parens and brackets which have yet
+to be matched and the order in which they need to be matched, so the outermost ones
+will be at the bottom of the stack and the last one we saw (the innermost one)
+would be at the top of the stack. Then if it's not one
+of these opening ones. Then if our stack is empty then
+that's a problem, because basically we've got a closing paren or bracket and
+there's no matching element. So if the stack is empty, no, we're not balanced. Otherwise we'll pop the top element
+off and then we'll check and see. Does it match, an element from the stack,
+does it match the character we've got? So, if the top was a left paren,
+did we just read a right paren. If so, great. They match. And now those two match, the next one we need to match is
+still the newly top one on the stack or similarly if we have a square bracket on the
+stack and a square bracket we read, those match as well. If they don't match,
+then we've got a problem, right? If we've got a right paren on the stack
+and a, sorry a left paren on the stack and right bracket that we just read,
+those don't match for example. So then we return false. Once we've run through all of the strings,
+were matched, right? No.
+Not necessarily. Imagine we have the string,
+left paren, left paren, left paren.. We go through, we push left paren,
+we push left paren, we push left paren and then we'd be done. It won't ever return false, but, it's no good because we didn't
+actually match what's on the stack. So, once we go through all of
+the characters in the string, then we're going to have to check and
+make sure, is our stack empty? Did we successfully match everything? This is only one example
+of the use of stacks. Stacks are used in lots of other places. They're used for compilers. They're used in a lot of algorithms that
+you'll be seeing throughout this course. So how do you actually implement a stack? Well, let's see. You can implement a stack with
+an array fairly easily, so allocate an array of
+some maximum stack size. So, in this case, we decided it's five,
+just for the sake of example, and we're going to keep a variable, which is the number of elements
+that are actually in the stack. When we push, so in this case we going to
+push a, we're going to go ahead and put it at the end of the array,
+that we've got so far. So, for whatever elements we have,
+we'll append it to those. So in this case, we will put it at the beginning of the
+array because we haven't used any elements. And we will kept track of
+the number of elements, as well. We push b, put in the next spot and
+now our number of elements is two, fairly straight forward, right,
+we're just appending to the array and these are clearly O(1) operations. What's the top element? Well that's really simple. If the number of elements is two, that means we need the second
+element from the array. Which in this case, is b. Again, a constant time operation. We push c, our number of elements is three,
+and now let's say we pop. Well, what do we do? We need to go get the third element,
+which is c, and erase it, and then adjust numElements so it's now 2. Now we can push an element,
+push another element, push a fifth element, and now if we try
+to push again, that's an error, right? Because we don't have any more space. So, that wouldn't be allowed. Is it empty?
+No, how do we know? Because the number of
+elements is greater than zero. Again, an O(1) operation. And now we can start popping,
+which will be returning the appropriate element of the array
+based on the numElements value, and keep popping until we
+get down to no elements. If we're at no elements,
+and we ask it's empty? Yes. That's true. We can also implement
+a stack with a linked list. So, one disadvantage--one
+limitation--of the array is that we have a maximum size,
+based on the array we initially allocated. But all of the operations are
+O(1), which is good. The other potential problem is that
+we have potentially wasted space. So if we allocated a very large array,
+to allow a possibly large stack, we didn't actually use much of it,
+all the rest of it is wasted. If we have a linked list,
+what we do then is every element in the list of course will represent
+a particular element in the stack. And so we'll push a, and then if we
+push b, we're going to go ahead and push b at the front. So basically,
+pushes will turn into PushFront. If we want to get the top element,
+just get the head element, so top will really just be TopFront,
+we can keep pushing. Pushing at the front or popping,
+All of those are O(1) operations. We can keep pushing, and the nice thing
+about this is there's no a priori limit as to the number of elements you can add. As long as you have available memory,
+you can keep adding. There's an overhead though,
+like in the array, we have each element size,
+is just big enough to store our key. Here we've got the overhead
+of storing a pointer as well. On the other hand there's
+no wasted space in terms of allocated space that isn't actually
+being used. So we keep pushing, is it empty? No, because the head is not nil. And
+then we can go ahead and pop, so, if we had a linked list it's very
+simple to implement the stack operations in terms of
+the linked list operations. Push becomes PushFront. Top becomes TopFront and Pop which
+is supposed to both return and pop the top element then become a combination
+of a TopFront followed by a PopFront. Empty is just Empty. We keep popping and then eventually
+we pop the last element and now if we ask whether it's empty,
+the answer will be true. Okay, so that's our stack implementation. Stacks can be implemented with either arrays or
+linked lists, I talked a little bit about the pros and cons of each of those, the
+linked list has fixed amount of overhead, that is for every element you are pushing,
+you have an additional pointer. For arrays you have, potentially,
+space that you've over-allocated, basically, to allow for
+a stack to grow to maximum size. For arrays, stacks do have a maximum size. For linked lists, they don't. Each stack operation is constant time
+for either one of these implementations. Sometimes we know stacks as LIFO queues. LIFO meaning Last In First Out. The last one that was inserted Is
+the first line that comes out. This reminds me sometimes of also
+what's known as GIGO, Garbage In Garbage Out. That if you input garbage into a system,
+you get garbage out. But of course this is different. So that is stacks. In the next video we're going to
+go ahead and look at queues. Thanks.

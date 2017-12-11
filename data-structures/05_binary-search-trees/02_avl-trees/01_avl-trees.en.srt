@@ -1,0 +1,459 @@
+1
+00:00:02,400 --> 00:00:04,140
+Hello everybody, welcome back.
+
+2
+00:00:04,140 --> 00:00:06,530
+We're still talking about
+binary search trees but
+
+3
+00:00:06,530 --> 00:00:09,010
+today we're going to talk about AVL trees.
+
+4
+00:00:09,010 --> 00:00:13,390
+And AVL trees are just sort of a specific
+way of maintaining balance in your
+
+5
+00:00:13,390 --> 00:00:14,720
+binary search tree.
+
+6
+00:00:14,720 --> 00:00:17,270
+And we're just going to talk
+about sort of the basic idea.
+
+7
+00:00:17,270 --> 00:00:19,669
+Next lecture we're going to talk
+about how to actually implement them.
+
+8
+00:00:20,880 --> 00:00:22,890
+But okay, what's the idea?
+
+9
+00:00:22,890 --> 00:00:24,680
+We learned last lecture that in order for
+
+10
+00:00:24,680 --> 00:00:30,040
+our search operations to be fast,
+we need to maintain balance of the tree.
+
+11
+00:00:30,040 --> 00:00:34,520
+But before we can do that we first need a
+way to measure the balance of the tree so
+
+12
+00:00:34,520 --> 00:00:37,430
+that we can know if we're unbalanced and
+know how to fix it.
+
+13
+00:00:38,750 --> 00:00:42,940
+And a natural way to do this is by
+what's called the height of a node.
+
+14
+00:00:42,940 --> 00:00:44,660
+So if you have a node in the tree,
+
+15
+00:00:44,660 --> 00:00:49,730
+its height is the maximum length of a path
+from that node to a leaf of your tree.
+
+16
+00:00:51,310 --> 00:00:52,300
+Fair enough.
+
+17
+00:00:52,300 --> 00:00:53,280
+So for
+
+18
+00:00:53,280 --> 00:00:57,689
+example if we have the following tree,
+what's the height of the highlighted node?
+
+19
+00:00:59,760 --> 00:01:04,330
+Well, this node has height six, the
+following path of length six leads down
+
+20
+00:01:04,330 --> 00:01:08,320
+from this node and
+it turns out to be nothing longer.
+
+21
+00:01:09,480 --> 00:01:13,300
+So, we can define height
+recursively in a very easy way.
+
+22
+00:01:13,300 --> 00:01:16,180
+If you have leaf its height is
+one because you're just there and
+
+23
+00:01:16,180 --> 00:01:17,180
+you can't go any further.
+
+24
+00:01:18,430 --> 00:01:22,710
+Otherwise, well the longest path downwards
+you can have, it's either through
+
+25
+00:01:22,710 --> 00:01:26,780
+the longest path on your left side or
+the longest path on your right side.
+
+26
+00:01:26,780 --> 00:01:30,640
+So you want to take the maximum of
+the height of your left child and
+
+27
+00:01:30,640 --> 00:01:32,620
+the height of your right child, and
+
+28
+00:01:32,620 --> 00:01:36,000
+then you need to add one to that because
+n sort of gets added to this path.
+
+29
+00:01:37,370 --> 00:01:39,270
+Okay, that's fine.
+
+30
+00:01:39,270 --> 00:01:42,870
+Now, in order to actually make use of this
+height we actually are going to want to
+
+31
+00:01:42,870 --> 00:01:44,890
+add a new field to our nodes.
+
+32
+00:01:44,890 --> 00:01:48,010
+So, the nodes that made up our
+tree previously stored a key and
+
+33
+00:01:48,010 --> 00:01:51,290
+are pointed to the parents on the left
+child and the right child, and
+
+34
+00:01:51,290 --> 00:01:54,585
+now they also need to store another
+piece of data, the height of node.
+
+35
+00:01:55,920 --> 00:01:58,550
+And note that we are actually
+going to have to do some work, and
+
+36
+00:01:58,550 --> 00:02:00,215
+we'll talk a little bit
+about how to do this later,
+
+37
+00:02:00,215 --> 00:02:03,630
+to insure that this height field
+is actually kept up to date.
+
+38
+00:02:03,630 --> 00:02:06,650
+We can't just store it as a number and
+leave it there forever.
+
+39
+00:02:06,650 --> 00:02:11,800
+If we rearrange the tree,
+we might need to change its heights.
+
+40
+00:02:11,800 --> 00:02:14,030
+In any case, back to balance.
+
+41
+00:02:14,030 --> 00:02:16,954
+Height is a very rough measure
+of the size of a sub-tree.
+
+42
+00:02:18,080 --> 00:02:21,850
+For things to be balanced, we want the
+size of the two sub-trees of the left and
+
+43
+00:02:21,850 --> 00:02:24,440
+right children of any given
+node to be roughly the same.
+
+44
+00:02:25,450 --> 00:02:27,200
+And so there's an obvious way to do this.
+
+45
+00:02:27,200 --> 00:02:32,950
+We'd like to force the heights of
+these children to be roughly the same.
+
+46
+00:02:32,950 --> 00:02:34,490
+So the AVL property is the following.
+
+47
+00:02:35,640 --> 00:02:38,800
+For all nodes N in our tray,
+we would like it to be the case
+
+48
+00:02:38,800 --> 00:02:41,780
+that the difference between
+the height of the left child and
+
+49
+00:02:41,780 --> 00:02:44,310
+the height of the right
+child is at most one.
+
+50
+00:02:45,550 --> 00:02:49,920
+And we claim that if you can maintain
+this property for all nodes in your tree,
+
+51
+00:02:49,920 --> 00:02:52,770
+this actually ensures that your
+tree is reasonably well balanced.
+
+52
+00:02:55,100 --> 00:03:00,290
+Okay and so, really what we'd like to
+know is that if you have the AVL property
+
+53
+00:03:00,290 --> 00:03:04,560
+on all nodes, then the total height
+of the tree should be logarithmic.
+
+54
+00:03:04,560 --> 00:03:06,900
+It should be O(log(n)).
+
+55
+00:03:06,900 --> 00:03:10,250
+So basically what we want to say
+is that you have an AVL tree and
+
+56
+00:03:10,250 --> 00:03:12,320
+it doesn't have too many nodes.
+
+57
+00:03:12,320 --> 00:03:13,900
+Then the height is not too big.
+
+58
+00:03:15,450 --> 00:03:20,240
+But it turns out that the easier way to
+get at this is to turn this on its head.
+
+59
+00:03:20,240 --> 00:03:24,180
+We want to show instead that
+if you have an AVL tree and
+
+60
+00:03:24,180 --> 00:03:27,240
+the height isn't too big,
+then you can't have too many nodes.
+
+61
+00:03:28,890 --> 00:03:30,450
+And this we can do.
+
+62
+00:03:30,450 --> 00:03:33,140
+So we're going to prove
+the following theorem.
+
+63
+00:03:33,140 --> 00:03:37,970
+Suppose that you have an AVL tree,
+a tree satisfying the AVL property, and
+
+64
+00:03:37,970 --> 00:03:40,180
+N is a node of this tree with height h.
+
+65
+00:03:41,860 --> 00:03:45,170
+THen the claim is that the sub-tree
+of N has to have size at
+
+66
+00:03:45,170 --> 00:03:48,650
+least the Fibonacci Number F's og h.
+
+67
+00:03:48,650 --> 00:03:52,770
+And so just to review,
+we talked about Fibonacci Numbers way back
+
+68
+00:03:52,770 --> 00:03:57,410
+in the introductory unit for this, but
+for the previous course in this sequence.
+
+69
+00:03:57,410 --> 00:03:59,625
+But this is just a sequence of numbers.
+
+70
+00:03:59,625 --> 00:04:02,110
+The zeroth one is zero,
+the first is one, and
+
+71
+00:04:02,110 --> 00:04:06,940
+from there after each Fibonacci number
+is the sum of the previous two.
+
+72
+00:04:06,940 --> 00:04:11,340
+Now, these are a nice predictable
+sequence, they grow pretty fast,
+
+73
+00:04:11,340 --> 00:04:15,969
+the end Fibonacci number's at least two
+to the n over two for all n at least 6.
+
+74
+00:04:17,380 --> 00:04:19,050
+Okay so let's look at the proof,
+
+75
+00:04:19,050 --> 00:04:21,110
+we're going to do this by induction
+on the height of our node.
+
+76
+00:04:22,440 --> 00:04:25,378
+If the node we're looking at
+has height one, it's a leaf.
+
+77
+00:04:25,378 --> 00:04:30,830
+And it's sub-tree has one node which
+is the first Fibonacci number, great.
+
+78
+00:04:32,110 --> 00:04:35,950
+Next we need an inductive hypothesis
+if you've got some node of height h.
+
+79
+00:04:35,950 --> 00:04:37,850
+By sort of definition of the height,
+
+80
+00:04:37,850 --> 00:04:42,410
+at least one of your two children
+need to have height h minus one.
+
+81
+00:04:42,410 --> 00:04:45,310
+Then, by the AVL property,
+
+82
+00:04:45,310 --> 00:04:49,400
+your other child needs to have
+height at least h minus two.
+
+83
+00:04:49,400 --> 00:04:52,080
+So by the inductive hypothesis,
+
+84
+00:04:52,080 --> 00:04:57,770
+the total number of nodes in this tree is
+at least the sum of the h -1 Fibonacci
+
+85
+00:04:57,770 --> 00:05:03,030
+number plus the h- 2 Fibonacci number,
+which equals the h Fibonacci number.
+
+86
+00:05:03,030 --> 00:05:05,200
+And so that completes the proof.
+
+87
+00:05:06,530 --> 00:05:08,180
+So what does this mean?
+
+88
+00:05:08,180 --> 00:05:11,170
+It means that if a node
+in our tree has height h,
+
+89
+00:05:11,170 --> 00:05:15,550
+the sub-tree of that node has height
+at least two to the h over two.
+
+90
+00:05:15,550 --> 00:05:22,430
+But if our tree only has n nodes, two
+to the h over two can't be more than n.
+
+91
+00:05:22,430 --> 00:05:25,970
+So the height can't be more
+than two log base two of n.
+
+92
+00:05:25,970 --> 00:05:26,820
+Which is o of log n.
+
+93
+00:05:28,140 --> 00:05:32,430
+And so the conclusion is if we
+can maintain the AVL property,
+
+94
+00:05:32,430 --> 00:05:38,499
+you can perform all of your find and
+operations in such in O(log(n)) time.
+
+95
+00:05:38,499 --> 00:05:42,130
+And so next lecture we're going to talk
+about how to maintain this property but
+
+96
+00:05:42,130 --> 00:05:43,630
+this is the key idea.
+
+97
+00:05:43,630 --> 00:05:48,620
+If we can maintain this property, we have
+a balanced tree and things should be fast.
+
+98
+00:05:48,620 --> 00:05:52,050
+So I'll see you next time as we discuss
+how to ensure that this happens

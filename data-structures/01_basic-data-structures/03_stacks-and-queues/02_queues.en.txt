@@ -1,0 +1,83 @@
+Now let's talk about queues. So, a queue has some
+similarities with a stack. But in a fundamental way is different. So it's an abstract data type and
+these are the operations that it has. You can Enqueue a key,
+it adds the key to the collection. And then when you Dequeue, that gives you
+back a key and removes it from the queue. It removes and
+returns the least recently added key, rather than in the case of a stack,
+the most recently added key. So that's the fundamental difference. If you think about queues as
+like queuing up in line or waiting in line, this is a first
+come first serve situation. So the longer you've been waiting in line,
+so the longest person waiting in line
+is the next person to be served. Makes sense. So you can imagine if you
+had a grocery store that had a stack that it used for serving people,
+people would be pretty annoyed, right? Because the person who'd just arrived, you've been waiting in line ten minutes,
+a person just arrives, they get served before you do,
+that would not make you happy. So, queues are very useful for instance,
+for things like servers. Where you've got a bunch
+of operations coming in and you want to service the one
+that's been waiting the longest. The other operation is you can find
+out whether the queue is empty or not. So these are often called FIFO,
+first in, first out, and this distinguishes them
+from stacks which are LIFO. Last in, first out. First in first out, or
+first come first serve, same thing. How can you implement a queue? Well, one way is with a linked list,
+where you have a head and a tail pointer. So let's say we start out
+with an empty linked list. We can go ahead and Enqueue, and what
+we're going to do basically in an Enqueue, is we are going to push to
+the back of the linked list, so that's how we'll implement Enqueue. So here, we Enqueue (a), it's now at
+the back of the linked list. If we Enqueue (b),
+it's going to be then added, again, at the end of the linked list. Is it empty?
+No. How do we know it's not empty? Well the simplest thing is we would just
+call to the underlying list implementation and say hey, list are you empty? It would say no. And so empty for the queue is no. We know it's really happening just by
+checking whether the head is nil or not. If we Enqueue(c) then,
+again it goes to the tail of the list. And if I now Dequeue,
+which one is going to be removed? Again this is not a stack,
+in a stack c would be removed. In our case, (a) is going to be removed
+because it's been there longest. That's just an implementation
+of popping from the front. So that would return (a). We can now do some more Enqueueing,
+Enqueue(d), Enqueue(e), Enqueue(f), and now if we start
+Dequeueing, we Dequeue from the front. So Dequeuing (b), Dequeuing (c),
+Dequeuing (d), Dequeuing (e), and finally Dequeuing (f). If we ask whether the queue is empty now,
+the answer is yes. Again, because the head is nil. So Enqueue uses list's PushBack call and
+Dequeue uses both the list's TopFront to get the front element as well
+as PopFront to remove that front element. And Empty just uses the list's Empty method. What about with an array? We could think of doing something similar. That is, we could add at the end and
+then pop from the front. But you can imagine, so, we said the front of the array
+is the beginning of the queue. Then enqeueing is easy, but dequeuing
+would be an expensive O(n) operation. And we want enqeueing to be O(1). We can do that, in a fashion I'll
+show you right now which is basically keeping track of sort of
+the array as a circular array. So we're going to go ahead and
+Enqeue (a), and we have a write index. And the write index tells us where the
+next Enqueue operation should happen. And the read tells us where the next
+Dequeue operation should happen. So we Enqueue a, we Enqueue b,
+and now update our write index. If we ask whether we're empty? No, we're not empty because
+read is not equal to write. That is we have something to
+Dequeue that has been Enqueued. So Empty would be false. We Enqueue (c), we Dequeue,
+again we're going to Dequeue (a), so we Dequeue from the read index. So we basically read what's at the read
+index and then increment the read index. If we now Dequeue again, we read what's
+at the read index which is (b) and we increment the read index. Now we will do some more Enqueueing. Notice at this point that when we
+Enqueue(d), the write index is 4, that's the next place we're going to
+Enqueue(e), which will have us write to the index 4 and then the write index
+wraps back around to the initial element. And, here it's important to note we're
+using zero based indexing with this array because of the fact that
+the first element is zero. We Enqueue again, Enqueue (f), and now if we try Enqueue (g),
+it's not going to allow us to do that. So that will be an error. The reason it would be an error,
+is if we did Enqueue(g), the read and the write index would be both be 2. And it would be hard to distinguish read
+and write index 2 because the queue is full, or read and write index
+both 2 because the queue is empty. So therefore, we have a buffer of at least
+one element that can't be written to, to make sure read and
+write are separate and distinct if the queue's not empty. Now we'll Dequeue, so
+we'll Dequeue (c), basically reading from the read index and updating it. Dequeue (d),
+read from the read index and update it. Dequeue (e) and here again,
+the read index wraps around back to 0. And now finally, we do our final
+Dequeue and now the read and write index are both 1. Which means if we ask whether Dequeue is
+empty, the answer is yes, it is empty. So what we see here is that the cost for
+doing a Dequeue and an Enqueue, as well of course as Empty,
+are all O(1) operations this way. So we can use either a linked list, although we have to have a tail pointer,
+so that PushBack is cheap, or an array. Each of the operations is O(1). One distinction between the array and
+the linked list implementation, is that in the array implementation, we have
+a maximum size that the queue can grow to. So it's bounded. Maybe you want that in which case
+it's fine, but if you don't know a priori how long the queue you need is
+going to be an array is a bad choice. And any amount that is
+unused is wasted space. In a queue that's implemented
+with a linked list, it can get arbitrarily large as
+long as there's available memory. The downside is, every element you
+have to pay for another pointer.

@@ -1,0 +1,274 @@
+1
+00:00:00,250 --> 00:00:04,360
+Hi, in the previous lesson you've
+learned what is a hash function,
+
+2
+00:00:04,360 --> 00:00:08,080
+what is a hash table, and how to use
+those to implement data structures for
+
+3
+00:00:08,080 --> 00:00:13,520
+storing sets of objects and mappings
+from one type of object to another one.
+
+4
+00:00:13,520 --> 00:00:17,610
+However, the speed of this data structure
+depends a lot on the choice of hash
+
+5
+00:00:17,610 --> 00:00:21,960
+function and in this lesson you will
+learn how to choose a good hash function.
+
+6
+00:00:21,960 --> 00:00:26,250
+You will learn how to implement
+an efficient context book.
+
+7
+00:00:26,250 --> 00:00:30,750
+And you will also learn how is hashing
+of strength objects in Java implemented.
+
+8
+00:00:31,840 --> 00:00:34,860
+We will start with the phone book problem.
+
+9
+00:00:34,860 --> 00:00:38,430
+When you use your phone you
+want to be able to quickly
+
+10
+00:00:38,430 --> 00:00:43,510
+look up a phone number of a person
+by name to be able to call him.
+
+11
+00:00:43,510 --> 00:00:46,720
+And to determine who is calling you and
+
+12
+00:00:46,720 --> 00:00:51,240
+to see not their phone number but
+their name if it's in your contact book.
+
+13
+00:00:51,240 --> 00:00:56,040
+So, you need a data structure that
+is able to efficiently add and
+
+14
+00:00:56,040 --> 00:00:58,680
+delete contacts from your phone book.
+
+15
+00:00:58,680 --> 00:01:01,720
+To look up phone number by name and
+
+16
+00:01:01,720 --> 00:01:04,730
+to do the reverse,
+look up the name given the phone number.
+
+17
+00:01:06,030 --> 00:01:08,460
+To do that we will need two mappings,
+
+18
+00:01:08,460 --> 00:01:13,870
+one from phone numbers to names, and
+another one from names to phone numbers.
+
+19
+00:01:13,870 --> 00:01:18,550
+We will implement both of
+those maps as hash tables and
+
+20
+00:01:18,550 --> 00:01:22,030
+we will start from the mapping
+from phone numbers to names.
+
+21
+00:01:23,490 --> 00:01:27,340
+One approach that we know from
+the previous lesson is direct addressing.
+
+22
+00:01:27,340 --> 00:01:31,838
+First, we'll need to convert phone numbers
+to integers and that is very easy to do.
+
+23
+00:01:31,838 --> 00:01:36,551
+We'll implement simple function
+called int, as in integer that
+
+24
+00:01:36,551 --> 00:01:41,910
+just deletes all characters of
+the phone number other then digits.
+
+25
+00:01:41,910 --> 00:01:45,410
+And then you are left with an integer
+number like in this example.
+
+26
+00:01:47,030 --> 00:01:52,510
+Then we'll create an array called Name,
+which will contain 10 to the power
+
+27
+00:01:52,510 --> 00:01:58,650
+L cells, where L is the maximum
+allowed length of the phone number.
+
+28
+00:01:58,650 --> 00:02:02,760
+That way it will be able
+to store a cell for
+
+29
+00:02:02,760 --> 00:02:06,930
+each integer number from 0 to 999,999 and
+that 9 is going L times,
+
+30
+00:02:09,200 --> 00:02:14,340
+where L is the maximum
+length of a phone number.
+
+31
+00:02:14,340 --> 00:02:20,071
+So it will be basically enough to store
+each phone number of allowed length.
+
+32
+00:02:21,100 --> 00:02:25,800
+And in this array, we'll store the names
+corresponding to the phone number.
+
+33
+00:02:25,800 --> 00:02:31,410
+So to store a name corresponding to some
+phone number P, we will first convert P
+
+34
+00:02:31,410 --> 00:02:36,270
+to an integer, and the store the name
+in the cell with this number.
+
+35
+00:02:38,660 --> 00:02:43,320
+And if there is no contact with
+some particular phone number P,
+
+36
+00:02:43,320 --> 00:02:47,950
+we'll just store a default value
+N/A in the corresponding cell.
+
+37
+00:02:47,950 --> 00:02:49,830
+This is how it will look like.
+
+38
+00:02:49,830 --> 00:02:53,550
+On the right is our array Name, and
+on the left, we have two contacts.
+
+39
+00:02:53,550 --> 00:02:59,537
+Natalie with number
+123-45-67 which is converted
+
+40
+00:02:59,537 --> 00:03:05,800
+to 1,234,567 and is stored in the cell
+with this number in the array.
+
+41
+00:03:05,800 --> 00:03:08,330
+It is somewhere in
+the middle of the array,
+
+42
+00:03:08,330 --> 00:03:09,920
+there are a lot of cells before that.
+
+43
+00:03:09,920 --> 00:03:14,628
+A few cells next to it are probably
+filled with default value N/A.
+
+44
+00:03:14,628 --> 00:03:19,506
+Because of course we have much less
+phone numbers in your phone book than 10
+
+45
+00:03:19,506 --> 00:03:22,260
+to the power of 7, which is 10 million.
+
+46
+00:03:23,320 --> 00:03:29,550
+And then there is another contact of Steve
+which is stored at position 2232323.
+
+47
+00:03:29,550 --> 00:03:33,618
+And of course,
+there are more N/As in this array.
+
+48
+00:03:33,618 --> 00:03:38,940
+So as we know operations in the direct
+addressing scheme work in constant time.
+
+49
+00:03:38,940 --> 00:03:43,060
+However the memory consumption
+is exponential in this case.
+
+50
+00:03:43,060 --> 00:03:45,180
+Is big O of 10 to the power of L,
+
+51
+00:03:45,180 --> 00:03:48,420
+where L is the maximum
+allowed phone number length.
+
+52
+00:03:48,420 --> 00:03:52,110
+And that is problematic,
+because with international phone numbers,
+
+53
+00:03:52,110 --> 00:03:56,870
+which can contain 12 digits or more for
+European countries, for example,
+
+54
+00:03:56,870 --> 00:04:03,140
+we will need one terabyte, just to
+store one phone book, of one person.
+
+55
+00:04:03,140 --> 00:04:08,550
+No smart phone is able to store
+a phone book of size one terabyte.
+
+56
+00:04:08,550 --> 00:04:09,420
+And in the next video,
+
+57
+00:04:09,420 --> 00:04:13,540
+we will suggest a scheme that avoids
+this problem with memory consumption.

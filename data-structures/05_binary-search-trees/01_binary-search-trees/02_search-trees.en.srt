@@ -1,0 +1,421 @@
+1
+00:00:01,550 --> 00:00:03,200
+Hello everybody, welcome back.
+
+2
+00:00:03,200 --> 00:00:06,630
+Today, we're going to start
+talking about binary search trees.
+
+3
+00:00:06,630 --> 00:00:10,680
+In particular, we're going to talk about
+what the binary search tree data structure
+
+4
+00:00:10,680 --> 00:00:14,290
+is, how it's constructed, and the basic
+properties that need to be maintained.
+
+5
+00:00:15,430 --> 00:00:19,210
+So last time we came up with this
+idea of a local search problem,
+
+6
+00:00:19,210 --> 00:00:22,240
+we wanted a data structure
+to be able to solve it.
+
+7
+00:00:22,240 --> 00:00:26,350
+And we know that none of the data
+structures we had seen up till this point
+
+8
+00:00:26,350 --> 00:00:29,340
+were sufficient to solve
+the problems that we wanted.
+
+9
+00:00:29,340 --> 00:00:31,690
+But one maybe came closer than the others.
+
+10
+00:00:32,810 --> 00:00:37,940
+Sorted arrays were okay, in that you could
+actually do searches efficiently on them.
+
+11
+00:00:37,940 --> 00:00:41,700
+But unfortunately, you couldn't
+do updates in any reasonable way.
+
+12
+00:00:41,700 --> 00:00:45,450
+But the fact that these things allowed for
+efficient binary searches sort of
+
+13
+00:00:45,450 --> 00:00:48,479
+maybe gives us a good starting point for
+what we're looking for.
+
+14
+00:00:49,910 --> 00:00:51,950
+So, what we should look at is,
+
+15
+00:00:51,950 --> 00:00:54,920
+we should really see this
+operation of binary search.
+
+16
+00:00:54,920 --> 00:00:59,118
+What does it entail, and
+what exactly makes it work?
+
+17
+00:00:59,118 --> 00:01:01,695
+And so we all know how
+a binary search works, right?
+
+18
+00:01:01,695 --> 00:01:04,710
+So you've got your list of numbers,
+you pick the one in the middle.
+
+19
+00:01:04,710 --> 00:01:09,170
+You ask, is the thing I am looking for
+bigger than this or less than this?
+
+20
+00:01:09,170 --> 00:01:12,890
+If it's smaller, I sort of look at
+the middle of first half of the array, and
+
+21
+00:01:12,890 --> 00:01:14,630
+say, is it bigger or less than that?
+
+22
+00:01:14,630 --> 00:01:17,250
+If it's larger, I look to the second
+half of the array, and ask,
+
+23
+00:01:17,250 --> 00:01:18,556
+is it bigger or less than that?
+
+24
+00:01:18,556 --> 00:01:21,450
+And I sort of keep on
+asking these question and
+
+25
+00:01:21,450 --> 00:01:25,080
+each time it sort of narrows down my
+search space until I get an answer.
+
+26
+00:01:27,176 --> 00:01:28,630
+But as you'll note,
+
+27
+00:01:28,630 --> 00:01:33,770
+sort of associated to this sort of binary
+search procedure is a search tree.
+
+28
+00:01:33,770 --> 00:01:36,570
+If you sort of consider
+which questions you ask.
+
+29
+00:01:36,570 --> 00:01:39,760
+First, I ask about,
+is it bigger or less than seven?
+
+30
+00:01:39,760 --> 00:01:42,570
+If it's smaller, I ask about four.
+
+31
+00:01:42,570 --> 00:01:45,190
+If it's bigger, I ask about 13.
+
+32
+00:01:45,190 --> 00:01:48,640
+If I got four and said it was bigger
+than four, I'd then ask about six.
+
+33
+00:01:48,640 --> 00:01:51,390
+And I have this sort of
+whole tree of possibilities.
+
+34
+00:01:51,390 --> 00:01:54,540
+Every time I ask a question it sort
+of splits into two different cases.
+
+35
+00:01:56,020 --> 00:02:00,930
+And maybe the key idea here is that
+if you want to do a binary search,
+
+36
+00:02:00,930 --> 00:02:04,380
+instead of doing it on the array,
+you could just have this search tree.
+
+37
+00:02:04,380 --> 00:02:06,670
+You start at the top of the tree,
+at seven.
+
+38
+00:02:06,670 --> 00:02:09,540
+And then you head down to 4 or 13,
+depending on where you go, and
+
+39
+00:02:09,540 --> 00:02:12,080
+then you keep going down
+until you find your answer.
+
+40
+00:02:13,188 --> 00:02:17,510
+And so in some sense,
+the search tree is as good as the array.
+
+41
+00:02:17,510 --> 00:02:21,790
+But while a sorted array,
+as we saw, was hard to insert into,
+
+42
+00:02:21,790 --> 00:02:25,140
+the tree is actually a lot
+easier to work with in that way.
+
+43
+00:02:25,140 --> 00:02:29,630
+And it turns out this search tree going
+to be the thing that allows us to
+
+44
+00:02:29,630 --> 00:02:32,110
+implement these operations
+in much better way.
+
+45
+00:02:33,800 --> 00:02:36,930
+Okay, so what do we need to
+be the case for the subtree?
+
+46
+00:02:36,930 --> 00:02:38,700
+Well, I mean, like all trees,
+
+47
+00:02:38,700 --> 00:02:41,880
+it should have a root node,
+each node should have two children.
+
+48
+00:02:41,880 --> 00:02:45,130
+It should have a left side, which is sort
+of where you're going to go when you
+
+49
+00:02:45,130 --> 00:02:47,690
+find out that things
+are smaller than that.
+
+50
+00:02:47,690 --> 00:02:48,994
+And then you have a right side,
+
+51
+00:02:48,994 --> 00:02:51,308
+which is where you go when
+things are bigger than that.
+
+52
+00:02:51,308 --> 00:02:53,081
+So, to be a little bit more formal,
+
+53
+00:02:53,081 --> 00:02:55,820
+the tree is constructed
+out of a bunch of nodes.
+
+54
+00:02:55,820 --> 00:02:59,360
+Each node is sort of a data type
+that stores a bunch of things.
+
+55
+00:02:59,360 --> 00:03:03,710
+Importantly, it stores a key, it stores
+a value that you're comparing things to.
+
+56
+00:03:03,710 --> 00:03:05,770
+It also should have a pointer
+to the parent node and
+
+57
+00:03:05,770 --> 00:03:08,300
+a pointer to the left child and
+a pointer to the right child.
+
+58
+00:03:09,500 --> 00:03:14,820
+And to be a search tree, it needs to
+satisfy one very critical property.
+
+59
+00:03:14,820 --> 00:03:17,813
+If you look at the key of a node X,
+then, well,
+
+60
+00:03:17,813 --> 00:03:21,830
+the stuff on the left should be where
+you're going if you do a comparison and
+
+61
+00:03:21,830 --> 00:03:24,930
+find the thing you're looking for
+is smaller than X.
+
+62
+00:03:24,930 --> 00:03:30,290
+And that means that, all the keys stored
+on all the nodes in the left subtree of x,
+
+63
+00:03:30,290 --> 00:03:33,835
+all the descendants of its left child,
+need to have a smaller key than X does.
+
+64
+00:03:35,400 --> 00:03:37,800
+And similarly, if you found that
+something was bigger than X and
+
+65
+00:03:37,800 --> 00:03:40,680
+go to the right,
+it had better actually be on the right.
+
+66
+00:03:40,680 --> 00:03:44,695
+And so, the things whose keys are larger
+than X need to be on the right
+
+67
+00:03:44,695 --> 00:03:45,550
+subtree of X.
+
+68
+00:03:47,000 --> 00:03:48,580
+So just review this.
+
+69
+00:03:48,580 --> 00:03:52,190
+I mean, we have this following
+three trees, A, B, and C.
+
+70
+00:03:52,190 --> 00:03:55,300
+Which one of these trees satisfy
+the Search Tree Property?
+
+71
+00:03:58,305 --> 00:04:02,805
+Well, it turns the only correct one is B,
+B it works out.
+
+72
+00:04:02,805 --> 00:04:05,978
+A has this issue that up at
+the top you've got this node 4 and
+
+73
+00:04:05,978 --> 00:04:08,835
+on the left side,
+it has everything bigger than 4 and
+
+74
+00:04:08,835 --> 00:04:11,777
+on the right side,
+it has everything smaller than 4.
+
+75
+00:04:11,777 --> 00:04:15,600
+And it's supposed to be
+the other way around, but
+
+76
+00:04:15,600 --> 00:04:21,490
+if you switch 4's left and right sides,
+everything would work out there.
+
+77
+00:04:21,490 --> 00:04:22,940
+Now case C is a little bit more subtle.
+
+78
+00:04:22,940 --> 00:04:25,410
+There's really only one problem here.
+
+79
+00:04:25,410 --> 00:04:28,020
+And that's that you have
+this root node which is a 5.
+
+80
+00:04:28,020 --> 00:04:33,990
+And there's another 4, but
+4 is part of 5's right subtree.
+
+81
+00:04:33,990 --> 00:04:35,044
+And remember,
+
+82
+00:04:35,044 --> 00:04:39,670
+everything on the right subtree of
+any node has to be larger than it.
+
+83
+00:04:39,670 --> 00:04:40,635
+And this 4 is smaller.
+
+84
+00:04:40,635 --> 00:04:46,700
+And so other than that one mistake,
+things are okay there as well.
+
+85
+00:04:46,700 --> 00:04:49,210
+Okay, so this is the structure.
+
+86
+00:04:49,210 --> 00:04:52,750
+Next time we're going to talk
+about how to do basic operations
+
+87
+00:04:52,750 --> 00:04:56,260
+on binary search trees and sort of
+give a little bit of pseudocode for
+
+88
+00:04:56,260 --> 00:05:01,680
+how to do these things and then we'll sort
+of have a basic start for this project.

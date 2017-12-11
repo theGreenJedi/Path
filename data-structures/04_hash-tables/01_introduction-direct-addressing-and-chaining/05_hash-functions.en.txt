@@ -1,0 +1,38 @@
+Hi, in this video,
+you will learn what a hash function is, how could we apply it to solve our
+problem with IP addresses, and why it is not straightforward
+to make it to work. Remember the direct addressing
+approach worked particularly fast, but it used a lot of memory that's
+because it encoded IP with numbers and those numbers were sometimes huge. So we had to create an array of size 2
+to the power of 32 just to store all those numbers. What if we could encode our IP
+addresses with smaller numbers, for example, numbers from 0 to 999? We'll still need the code for different
+IP addresses, which are active currently to be different because we want a separate
+counter for each IP in our solution. Let's define a hash function. So if you have universal object S for
+example. A set of all IP addresses or a set of all
+files stored on your computer or a set of all words or cures in the programming
+language, so that is our universe. And we will call it a set S. And now we want to encode each object
+from that universe with a small number. A number from 0 to m- 1 where m
+is a positive integer number. While any function,
+which encodes some object from S as a number from 0 to m- 1,
+is called a hash function. And m is called the cardinality
+of hash function h. So what are the desirable properties
+of the hash function in our problem? First, h should be fast to compute
+because we need to encode some object for each query. Second, we want different values for
+different objects because we want a separate counter for
+each IP address in our problem from them. And also, we want to use direct addressing
+scheme because it was very fast, but we want to use a direct addressing
+scheme with a small amount of memory. And it's only logical to use in this
+case direct addressing scheme with O(m) memories. Just create an area a of size m, and
+then encode each ID with some value from 0 to m- 1, and store the corresponding
+counter In the cell of this array. The problem is that we want small
+cardinality m and it won't work if m is smaller than the number of
+different objects in the universe. Because if we have for
+example 25 object in the universe and m is only 10, then at least two
+objects will have the same code from 0 to 9 because there are only 10 different
+codes and there are 25 different objects. So that won't work for
+all possible universes and for small m. In this situation, when the values of
+the hash function are the same, but the objects which are being encoded
+are different, is called a collision. So collisions cause us problems. Because of collisions,
+we cannot just directly apply the scheme called direct
+addressing with O(m) memory. And in the next lecture,
+we will see how to overcome this problem.

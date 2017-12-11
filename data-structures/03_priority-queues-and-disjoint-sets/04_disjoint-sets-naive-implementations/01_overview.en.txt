@@ -1,0 +1,77 @@
+Hello and welcome to the next lesson
+of the data structures class. It is devoted to disjoint sets. As a first motivating example, consider
+the following maze shown on the slide. It is basically just a grid
+of cells with walls between some pairs of adjacent cells. A natural question for
+such a maze is given two points, given two cells in this maze whether
+there is a path between them. For example for these two points for
+these two cells shown on these slides there is a path and
+it is not too difficult to construct it. Let's do this together. So this is, we can go as follows. And there is actually another path here, we can also go this way. Great. On the other hand, there is no path between these two points
+shown on the slide and to show this we might want to construct just a set of
+all points that are reachable from B. Let's again do this, so let's just mark all the points
+that are reachable from B. So it is not difficult
+to see that we marked just every single point
+which is reachable from B. And we now see that A does
+not belong to this set. Which actually justifies that A is
+not reachable from B in this case. The maze problem can be easily solved
+with the help of the disjoint set data structure which supports
+the following three operations. The first operation is called MakeSet. It takes one argument x and it creates just a set of size
+one containing this element x. The second operation is called Find. It takes an argument x and returns an ID
+of the set that contains this element x. Well, we expect this ID to satisfy
+the following two natural properties. If x and y, if two elements,
+x and y lie in the same set, then we expect the operation Find to
+return the same ID was for x and y. Well just because x and
+y lie in the same set, and Find returns some identifier of this set,
+right? If, on the other hand, x and
+y lie in different sets, then Find(x) should not be
+equal to Find(y), right? The last operation is called Union and
+it takes two arguments, x and y. And then it considers two sets
+containing x and y, and it merges them. In particular,
+if we just called Union(x,y) and right after this we called Find(x) and
+Find(y). Then these two call to Find operation
+should return exactly the same identifier. Just because x and y after the call
+to union, lie in the same merged set. Recall that our maze example
+shows a particular point B is not reachable from a particular
+point A, we did the following. We first constructed
+the region of all cells, reachable from this point B in our maze. We then just checked that a, that point
+a does not belong to this region. So this was a justification of the fact
+that a is not reachable from b in our maze. And in fact, any maze can be
+partitioned into disjoint regions, where in each region, between any
+two cells there is a path, right? And using the disjoint sets data
+structure it is easy to partition any maze into such disjoint regions. We can do this by preprocess
+the maze as follows. We first call MakeSet for
+all cells c in our maze. This creates a separate region for
+each cell. So initially we have as many regions
+as there are cells in our maze. Then we do the following. We go through all possible
+cells in our maze. So when a cell C is fixed, we also go through all possible
+neighbors of this cell in our maze. We say that n is a neighbor of c
+if n is an adjacent cell of c and there is no wall between them. So at this point c belongs to some
+region and n belongs to some region and we just discovered the fact that
+there is a path between c and n. Which means that, actually,
+any cell from this region is reachable from any cell
+from this region, right? To reflect this fact,
+we just call Union(c,n). This creates a separate set for
+these two regions. This merges these two regions, right? So after the call to this preprocess and
+procedure each region in this maze, receives a unique ID, right? So then to check whether a particular
+cell is reachable from other cell we just need to check whether the Find operation
+returns the same for them or not. To give another example of using
+the disjoint sets data structure, assume that we're building a network. In each area we have four machines we
+call MakeSet(1) for the first machine. MakeSet(2) for the second machine,
+and so on, so, to reflect the fact that initially,
+each machine lies in a separate set. In particular, if we now check
+whether Find(1) is equal to Find(2), then it is false just because 1 and
+2 lie in different sets. Now, let's add a wire between the third
+machine and the fourth machine. To notify our data structures that
+now 3 and 4 belong to the same set, we call Union(3,4), okay? Now let's introduce the fifth machine so
+we do this by calling MakeSet(5) then let's add another wire between
+the second machine and the third machine. To notify our data structure about
+this event we call Union(3,2). If we now call Find(1) and
+Find(2), they should return, these two calls should return
+different values because 2 and 1, machines 2 and
+1 still belong to different sets. Okay, now we have the wire
+between the machines 1 and 4. And now yes, to notify our data structure
+about this event we call Union(1,4), and now if we check whether Find(1) is
+equal to Find(2) it should return true. Just because now 1 and 2 lie in the same
+set that contains machine 1, 2, 3, and 4. Later in this specialization,
+we will learn the Kruskal algorithm, which builds a network of a given
+set of machines in an optimal way, and uses the disjoint set
+data structure essentially.

@@ -1,0 +1,601 @@
+1
+00:00:01,090 --> 00:00:03,770
+So in this lecture we're talking
+about arrays and linked lists.
+
+2
+00:00:04,890 --> 00:00:06,820
+In this video,
+we're going to talk about arrays.
+
+3
+00:00:07,950 --> 00:00:11,860
+So here's some examples of declarations of
+arrays in a couple of different languages.
+
+4
+00:00:11,860 --> 00:00:18,541
+Along with, we can see the one dimensional
+array laid out with five elements in it,
+
+5
+00:00:18,541 --> 00:00:24,948
+and then a two dimensional array with one
+row, sorry two rows and five columns.
+
+6
+00:00:26,341 --> 00:00:29,510
+So what's the definition of an array?
+
+7
+00:00:29,510 --> 00:00:32,070
+Well we got basically
+a contiguous array of memory.
+
+8
+00:00:32,070 --> 00:00:33,810
+That is one chunk of memory.
+
+9
+00:00:33,810 --> 00:00:36,350
+That can either be on a stack or
+it can be in the heap,
+
+10
+00:00:36,350 --> 00:00:37,700
+it doesn't really matter where it is.
+
+11
+00:00:38,850 --> 00:00:43,500
+It is broken down into
+equal sized elements, and
+
+12
+00:00:43,500 --> 00:00:46,910
+each of those elements are indexed
+by contiguous integers.
+
+13
+00:00:46,910 --> 00:00:49,640
+All three of these things
+are important for defining an array.
+
+14
+00:00:50,700 --> 00:00:57,010
+Here, in this particular example, we have
+an array whose indices are from 1 to 7.
+
+15
+00:00:57,010 --> 00:00:59,290
+In many languages, the same indices for
+
+16
+00:00:59,290 --> 00:01:01,440
+this particular array
+would be from zero to six.
+
+17
+00:01:01,440 --> 00:01:03,430
+So it would be zero based indexing, but
+
+18
+00:01:03,430 --> 00:01:06,620
+one based indexing is also
+possible in some languages.
+
+19
+00:01:06,620 --> 00:01:09,766
+And other languages allow you to actually
+specify what the initial index is.
+
+20
+00:01:12,471 --> 00:01:14,450
+What's so special about arrays?
+
+21
+00:01:14,450 --> 00:01:17,730
+Well, the key point about an array
+is we have random access.
+
+22
+00:01:17,730 --> 00:01:22,870
+That is, we have constant time access
+to any particular element in an array.
+
+23
+00:01:22,870 --> 00:01:26,530
+Constant time access to read,
+constant time access to write.
+
+24
+00:01:28,230 --> 00:01:29,760
+How does that actually work?
+
+25
+00:01:29,760 --> 00:01:34,030
+Well basically what that means is we
+can just do arithmetic to figure out
+
+26
+00:01:34,030 --> 00:01:36,720
+the address of a particular array element.
+
+27
+00:01:37,780 --> 00:01:40,460
+So the first thing we need to do is
+start with the address of the array.
+
+28
+00:01:42,190 --> 00:01:43,880
+So we take the address of the array and
+
+29
+00:01:43,880 --> 00:01:47,670
+then we multiply that by
+first the element size.
+
+30
+00:01:47,670 --> 00:01:52,770
+So this where the key part that every
+element was the same size matters, so
+
+31
+00:01:52,770 --> 00:01:55,520
+that allows us to do
+a simple multiplication.
+
+32
+00:01:55,520 --> 00:01:59,427
+Rather than if each of the array
+elements were of different sizes,
+
+33
+00:01:59,427 --> 00:02:03,540
+we'd have to sum them together, and
+if we had to sum together n items,
+
+34
+00:02:03,540 --> 00:02:05,241
+that would be order n time.
+
+35
+00:02:05,241 --> 00:02:10,094
+So we take our array address, we add
+to it the element size times i which
+
+36
+00:02:10,094 --> 00:02:14,141
+is the index that's of interest
+minus the first_index.
+
+37
+00:02:15,600 --> 00:02:19,050
+If we're doing zero based indexing,
+that first index isn't really necessary.
+
+38
+00:02:19,050 --> 00:02:22,890
+I like this example because it really
+shows a more general case where we do have
+
+39
+00:02:22,890 --> 00:02:23,410
+a first index.
+
+40
+00:02:24,410 --> 00:02:28,240
+Let's say for instance we're looking
+at the address for index four.
+
+41
+00:02:28,240 --> 00:02:33,830
+We would take four minus the first index,
+which is one, which would give us three.
+
+42
+00:02:33,830 --> 00:02:38,270
+Multiply that by whatever
+our element size is, and
+
+43
+00:02:38,270 --> 00:02:41,120
+then add that to our array address.
+
+44
+00:02:41,120 --> 00:02:44,959
+Now of course, we don't have to do this
+work, the compiler or interpreter does
+
+45
+00:02:44,959 --> 00:02:48,635
+this work for us, but we can see how
+it is that it works in constant-time.
+
+46
+00:02:51,538 --> 00:02:54,400
+Many languages also support
+multi-dimensional arrays,
+
+47
+00:02:54,400 --> 00:02:58,402
+if not you can actually kind of roll your
+own through an example I'll show you here,
+
+48
+00:02:58,402 --> 00:03:00,960
+where you do your own arithmetic.
+
+49
+00:03:00,960 --> 00:03:01,670
+So here, let's look.
+
+50
+00:03:01,670 --> 00:03:06,420
+Let's say that the top left element is at
+index (1, 1), and here's the index (3,4).
+
+51
+00:03:06,420 --> 00:03:09,620
+So this means we're in row 3, column 4.
+
+52
+00:03:09,620 --> 00:03:15,330
+How do we find the address
+of that element?
+
+53
+00:03:15,330 --> 00:03:20,880
+Well, first off what we need
+to do is skip the rows that,
+
+54
+00:03:20,880 --> 00:03:23,820
+the full rows, that we're not using.
+
+55
+00:03:23,820 --> 00:03:26,390
+So that is,
+we need to skip two rows, or skip 3,
+
+56
+00:03:26,390 --> 00:03:31,910
+which is the row index minus 1,
+which is the initial row index.
+
+57
+00:03:31,910 --> 00:03:34,340
+So that gives us 2 times 6 or
+12 elements we're skipping for
+
+58
+00:03:34,340 --> 00:03:38,620
+those rows in order to get to row 3.
+
+59
+00:03:38,620 --> 00:03:44,401
+Then we've got to skip the elements
+before (3,4) in the same row.
+
+60
+00:03:44,401 --> 00:03:45,650
+So there are three of them.
+
+61
+00:03:45,650 --> 00:03:47,130
+How do we get that?
+
+62
+00:03:47,130 --> 00:03:48,684
+We take the column index,
+
+63
+00:03:48,684 --> 00:03:53,510
+which is 4 and subtract it from
+the initial column index which is 1.
+
+64
+00:03:53,510 --> 00:03:55,524
+So this basically gives us 15.
+
+65
+00:03:56,560 --> 00:04:00,688
+Six for the first row, six for
+the second row and then three for
+
+66
+00:04:00,688 --> 00:04:03,877
+the third row before
+this particular element.
+
+67
+00:04:03,877 --> 00:04:06,706
+We take that 15 and
+multiply it by our element size and
+
+68
+00:04:06,706 --> 00:04:08,970
+then add it to our array address.
+
+69
+00:04:08,970 --> 00:04:11,994
+And that will give us the address
+of our element (3,4).
+
+70
+00:04:14,310 --> 00:04:16,040
+Now we made kind of a supposition here.
+
+71
+00:04:16,040 --> 00:04:19,544
+And that was that the way this was laid
+out is we laid out all the elements of
+
+72
+00:04:19,544 --> 00:04:23,247
+the first row, followed by all of
+the elements of the second row, and so on.
+
+73
+00:04:23,247 --> 00:04:28,160
+That's called row-major ordering or
+row-major indexing.
+
+74
+00:04:28,160 --> 00:04:32,545
+And what we do is basically, we lay out,
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5),
+
+75
+00:04:32,545 --> 00:04:33,118
+(1, 6).
+
+76
+00:04:33,118 --> 00:04:36,992
+And then right after that in memory (2,
+1), (2, 2), (2, 3), (2, 4), (2, 5),
+
+77
+00:04:36,992 --> 00:04:37,531
+(2, 6).
+
+78
+00:04:37,531 --> 00:04:41,851
+So the column index is changing
+most rapidly as we're looking at
+
+79
+00:04:41,851 --> 00:04:43,740
+successive elements.
+
+80
+00:04:43,740 --> 00:04:46,850
+And that's an indication
+of it's row-major indexing.
+
+81
+00:04:48,820 --> 00:04:52,690
+We could lay out arrays differently,
+and some languages or
+
+82
+00:04:52,690 --> 00:04:57,620
+compilers actually do that, where they
+would lay out each column in order, so
+
+83
+00:04:57,620 --> 00:05:00,840
+you'd have the first column, then the
+second column, and then the third column.
+
+84
+00:05:00,840 --> 00:05:05,374
+And so that, then, the successive
+elements would be (1, 1), (2,
+
+85
+00:05:05,374 --> 00:05:08,720
+1), (3, 1), followed by (1,
+2), (2, 2), (3, 2), and so on.
+
+86
+00:05:09,940 --> 00:05:14,482
+So there we see that the row index
+is changing most rapidly, and
+
+87
+00:05:14,482 --> 00:05:17,494
+this is called column-major ordering.
+
+88
+00:05:19,380 --> 00:05:21,098
+How long does it take
+to perform operations?
+
+89
+00:05:21,098 --> 00:05:23,679
+We already said to read any
+element is O(1), and
+
+90
+00:05:23,679 --> 00:05:25,880
+to write any element is O(1).
+
+91
+00:05:25,880 --> 00:05:29,870
+That is a standard feature of arrays.
+
+92
+00:05:29,870 --> 00:05:32,230
+What happens if we want to add
+an element at the end of an array?
+
+93
+00:05:32,230 --> 00:05:36,570
+So let's say we have allocated
+seven elements for an array.
+
+94
+00:05:36,570 --> 00:05:38,900
+We're only using four of them, okay?
+
+95
+00:05:38,900 --> 00:05:42,750
+So we have kept track that we're using
+four and we want to add a fifth element.
+
+96
+00:05:42,750 --> 00:05:44,920
+And again there's room for seven.
+
+97
+00:05:44,920 --> 00:05:47,160
+Then all we know it was just add it,
+
+98
+00:05:47,160 --> 00:05:50,200
+then update the number of
+elements that are in use.
+
+99
+00:05:50,200 --> 00:05:51,830
+That's an O(1) operation.
+
+100
+00:05:51,830 --> 00:05:54,030
+If we want to remove
+the last element as well,
+
+101
+00:05:54,030 --> 00:05:57,860
+that's an O(1) operation because we just
+
+102
+00:05:57,860 --> 00:06:01,560
+update the number of elements that are in
+use, and so that's an O(1) operation.
+
+103
+00:06:03,320 --> 00:06:06,490
+Where it gets to be expensive,
+is if we want to, for instance,
+
+104
+00:06:06,490 --> 00:06:08,100
+remove the first element.
+
+105
+00:06:08,100 --> 00:06:09,700
+So we remove the five here, and
+
+106
+00:06:09,700 --> 00:06:12,860
+what we've got to do then,
+we don't want to have holes left in it.
+
+107
+00:06:12,860 --> 00:06:16,517
+So we need to move the 8 down,
+move the 3 down, move the 12 down.
+
+108
+00:06:16,517 --> 00:06:17,780
+That's an O(n) operation.
+
+109
+00:06:19,150 --> 00:06:22,240
+Same thing would happen if he
+wanted to insert at the beginning.
+
+110
+00:06:22,240 --> 00:06:27,000
+So we would need to move the 12, move
+the 3, and move the 8 to make space for
+
+111
+00:06:27,000 --> 00:06:27,920
+our new element.
+
+112
+00:06:27,920 --> 00:06:28,990
+So that also would be O(n).
+
+113
+00:06:30,270 --> 00:06:31,100
+And if we want to add or
+
+114
+00:06:31,100 --> 00:06:33,920
+remove somewhere in the middle,
+again that's an O(n) operation.
+
+115
+00:06:33,920 --> 00:06:35,860
+If we want to add exactly in the middle,
+
+116
+00:06:35,860 --> 00:06:39,670
+we have to move n/2 items,
+which is O(n).
+
+117
+00:06:39,670 --> 00:06:41,010
+Same thing for removal.
+
+118
+00:06:41,010 --> 00:06:43,870
+So arrays are great if you want or
+remove at the end.
+
+119
+00:06:43,870 --> 00:06:49,130
+But it's expensive if you want to add or
+remove in the middle or at the beginning.
+
+120
+00:06:50,510 --> 00:06:54,630
+However, remember,
+a huge advantage for arrays
+
+121
+00:06:54,630 --> 00:06:59,600
+is that we have this constant time
+access to elements, either read or write.
+
+122
+00:07:01,530 --> 00:07:06,600
+In summary then, an array consists
+of a contiguous area of memory.
+
+123
+00:07:06,600 --> 00:07:10,560
+because if it were non-contiguous then we
+couldn't just do this simple arithmetic
+
+124
+00:07:10,560 --> 00:07:11,210
+to get where we're going.
+
+125
+00:07:11,210 --> 00:07:14,850
+We have to have equal-size elements
+again so our arithmetic works.
+
+126
+00:07:14,850 --> 00:07:17,930
+And indexed by contiguous integers
+again so our arithmetic works.
+
+127
+00:07:18,980 --> 00:07:22,530
+We have constant time access to
+any element, constant time to add or
+
+128
+00:07:22,530 --> 00:07:26,600
+remove at the end and linear time to add
+and remove at any arbitrary location.
+
+129
+00:07:27,810 --> 00:07:29,680
+In our next video we're going to
+talk about linked lists.

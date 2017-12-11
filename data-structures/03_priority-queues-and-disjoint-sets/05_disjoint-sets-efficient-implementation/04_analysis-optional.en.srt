@@ -1,0 +1,1142 @@
+1
+00:00:00,280 --> 00:00:04,590
+Our goal in this video is to show that
+if we use both path compression and
+
+2
+00:00:04,590 --> 00:00:09,710
+union by rank heuristics then the average
+running time of a single operation
+
+3
+00:00:09,710 --> 00:00:13,280
+is upper bounded by big
+O of log star of N.
+
+4
+00:00:14,470 --> 00:00:18,500
+Before going into
+the details of the proof,
+
+5
+00:00:18,500 --> 00:00:21,710
+let's realize a few important facts.
+
+6
+00:00:21,710 --> 00:00:26,090
+First of all, know that since we
+are now using path compression,
+
+7
+00:00:26,090 --> 00:00:29,520
+it is no longer the case that the rank of
+
+8
+00:00:31,130 --> 00:00:36,670
+node i is equal to height of
+the tree rooted at vertex i.
+
+9
+00:00:36,670 --> 00:00:39,938
+However, it is still true that
+the rank is an upper bound.
+
+10
+00:00:39,938 --> 00:00:42,100
+On the corresponding height.
+
+11
+00:00:42,100 --> 00:00:46,030
+Let me illustrate this with a toy example.
+
+12
+00:00:46,030 --> 00:00:48,870
+So, I assume that we
+have a tree like this.
+
+13
+00:00:48,870 --> 00:00:51,020
+So, this is root say vertex 5.
+
+14
+00:00:51,020 --> 00:00:55,181
+Here we have vertex 2 and
+
+15
+00:00:55,181 --> 00:01:00,910
+we have node 3, node say 6.
+
+16
+00:01:00,910 --> 00:01:07,988
+Assume that currently rank of this node
+is 2 say 0, this is 1 and this also 0.
+
+17
+00:01:07,988 --> 00:01:10,798
+We now recall find of 6.
+
+18
+00:01:10,798 --> 00:01:17,437
+This will re-attach 6 to
+the current root of this tree.
+
+19
+00:01:17,437 --> 00:01:23,734
+So what we get is the following,
+
+20
+00:01:23,734 --> 00:01:26,539
+5, 3, 1.
+
+21
+00:01:26,539 --> 00:01:31,592
+And also 6 now stays here, all right?
+
+22
+00:01:31,592 --> 00:01:36,000
+So we see that the height of
+these three is equal to 1.
+
+23
+00:01:36,000 --> 00:01:40,180
+However the rank of the root
+is still equal to 2.
+
+24
+00:01:40,180 --> 00:01:46,420
+Recall that find doesn't use and
+doesn't change any rank values.
+
+25
+00:01:46,420 --> 00:01:51,170
+Also for this node 3, it's height.
+
+26
+00:01:51,170 --> 00:01:56,200
+The height of the tree rooted
+at element 3 is equal to 0,
+
+27
+00:01:56,200 --> 00:01:59,830
+however the rank is equal to 1.
+
+28
+00:01:59,830 --> 00:02:05,070
+Well, intuitively it is clear path
+compression can only decrease the height.
+
+29
+00:02:05,070 --> 00:02:07,940
+So for this reason,
+rank is no longer equal
+
+30
+00:02:07,940 --> 00:02:13,100
+to the height of the corresponding tree
+however the height is at most the length.
+
+31
+00:02:13,100 --> 00:02:14,590
+Okay.
+
+32
+00:02:14,590 --> 00:02:17,310
+Another important thing is the following.
+
+33
+00:02:17,310 --> 00:02:24,340
+It is still true that for
+any root node i of rank k.
+
+34
+00:02:24,340 --> 00:02:29,050
+The corresponding sub 3 contains
+at least 2 to the k elements.
+
+35
+00:02:29,050 --> 00:02:34,550
+And this can be seen by realizing that
+the past compression does not affect
+
+36
+00:02:34,550 --> 00:02:36,210
+any root nodes.
+
+37
+00:02:36,210 --> 00:02:40,070
+I mean,
+if we have a root node whose height is k,
+
+38
+00:02:40,070 --> 00:02:45,286
+then no matter how many times and
+for which nodes in these sub tree
+
+39
+00:02:45,286 --> 00:02:50,405
+we call find with path compression,
+all this nodes are still in
+
+40
+00:02:50,405 --> 00:02:56,310
+this subtree rooted at this nodes
+exactly because this node is a root.
+
+41
+00:02:56,310 --> 00:03:01,250
+So any node from this
+subtree cannot be attached
+
+42
+00:03:01,250 --> 00:03:04,000
+to some other vertex and
+some other subtree.
+
+43
+00:03:04,000 --> 00:03:09,130
+This node is still, so once again if
+we have a node who is still a root and
+
+44
+00:03:09,130 --> 00:03:14,130
+whose rank is k, then the corresponding
+subtree contains at least 2 to
+
+45
+00:03:14,130 --> 00:03:17,160
+the k elements, 2 to the k nodes.
+
+46
+00:03:17,160 --> 00:03:23,600
+On this slide we discuss a few
+more important properties.
+
+47
+00:03:23,600 --> 00:03:26,800
+The first one of them says that we have,
+
+48
+00:03:26,800 --> 00:03:32,430
+in our forest, at most n divided
+by 2 to the k nodes of rank k.
+
+49
+00:03:32,430 --> 00:03:33,310
+Why is that?
+
+50
+00:03:33,310 --> 00:03:37,730
+Well, recall that if we
+create a new node of rank k
+
+51
+00:03:39,450 --> 00:03:46,290
+then it was created by merging
+two nodes of rank k-1.
+
+52
+00:03:46,290 --> 00:03:47,320
+Okay.
+
+53
+00:03:47,320 --> 00:03:50,160
+So we know that currently
+this node is a root.
+
+54
+00:03:51,170 --> 00:03:52,400
+At the same time,
+
+55
+00:03:52,400 --> 00:03:57,860
+we know that the correspondence subtree
+contains at least 2 to the k nodes.
+
+56
+00:03:57,860 --> 00:04:02,920
+If we have another another node of rank k.
+
+57
+00:04:02,920 --> 00:04:06,670
+Then it also contains at
+least 2 to the k nodes.
+
+58
+00:04:06,670 --> 00:04:10,560
+Which means that if we
+have too many such nodes.
+
+59
+00:04:10,560 --> 00:04:12,650
+I mean, too many nodes of rank k.
+
+60
+00:04:13,770 --> 00:04:18,950
+By saying too many, I mean that its number
+is greater than n divided by 2 to the k.
+
+61
+00:04:18,950 --> 00:04:22,180
+Then overall, we have more than n element.
+
+62
+00:04:22,180 --> 00:04:24,510
+Which is a contradiction, right?
+
+63
+00:04:24,510 --> 00:04:27,226
+The second property is that,
+when we go up,
+
+64
+00:04:27,226 --> 00:04:32,500
+the rank strictly increases.
+
+65
+00:04:32,500 --> 00:04:37,700
+Well, this was clear if we
+do not use past compression.
+
+66
+00:04:37,700 --> 00:04:41,967
+I mean, if rank is equal to the height
+of the corresponding subtree,
+
+67
+00:04:41,967 --> 00:04:44,610
+then this is completely clear.
+
+68
+00:04:44,610 --> 00:04:48,500
+Let me recall that if we have for
+example a tree
+
+69
+00:04:49,860 --> 00:04:54,670
+of height two,
+then the height of this tree is two.
+
+70
+00:04:54,670 --> 00:04:56,300
+The height of this subtree is one.
+
+71
+00:04:56,300 --> 00:04:58,770
+The height of this subtree is zero.
+
+72
+00:04:58,770 --> 00:05:00,890
+Let's say this is element 5.
+
+73
+00:05:00,890 --> 00:05:01,820
+This is 4.
+
+74
+00:05:01,820 --> 00:05:02,570
+This is 8.
+
+75
+00:05:03,900 --> 00:05:05,490
+Now we have passed compression,
+
+76
+00:05:05,490 --> 00:05:10,370
+so we need to check what happens
+when we compress some paths.
+
+77
+00:05:10,370 --> 00:05:17,420
+If we call Find(5), for example, then
+we'll be reattached to the current root.
+
+78
+00:05:17,420 --> 00:05:22,420
+But it will still be 2.
+
+79
+00:05:22,420 --> 00:05:24,779
+That the rank of the parent.
+
+80
+00:05:26,340 --> 00:05:27,470
+So let me fix this.
+
+81
+00:05:27,470 --> 00:05:31,050
+This is node 8.
+
+82
+00:05:31,050 --> 00:05:36,097
+The rank of the parent is strictly
+
+83
+00:05:36,097 --> 00:05:41,890
+greater than the rank of a child.
+
+84
+00:05:41,890 --> 00:05:48,190
+The last property is,
+says that when a node
+
+85
+00:05:48,190 --> 00:05:54,260
+becomes an internal node it will be
+an internal node forever, right.
+
+86
+00:05:54,260 --> 00:05:59,700
+It will not have a chance to become
+a root and this is just because
+
+87
+00:06:01,620 --> 00:06:05,720
+the find operation doesn't
+change any roots in our forest.
+
+88
+00:06:05,720 --> 00:06:09,100
+While union operation takes two roots and
+
+89
+00:06:09,100 --> 00:06:12,510
+makes one of them a child
+of the other one.
+
+90
+00:06:12,510 --> 00:06:14,900
+So it takes two roots and
+leaves only one root.
+
+91
+00:06:15,960 --> 00:06:16,720
+Okay.
+
+92
+00:06:16,720 --> 00:06:21,020
+So once again when a vertex
+becomes an internal vertex,
+
+93
+00:06:21,020 --> 00:06:25,100
+a non root vertex,
+it will be a non root vertex forever.
+
+94
+00:06:26,270 --> 00:06:31,820
+We now start to estimate
+the running time of M operations.
+
+95
+00:06:31,820 --> 00:06:35,300
+First of all note that the union operation
+
+96
+00:06:35,300 --> 00:06:38,760
+boils down to T(all calls
+to FInd) operation.
+
+97
+00:06:38,760 --> 00:06:42,015
+And also to some constant operations.
+
+98
+00:06:42,015 --> 00:06:47,690
+Namely, when we have two roots
+that were found by two calls to.
+
+99
+00:06:47,690 --> 00:06:48,960
+To find that operation,
+
+100
+00:06:48,960 --> 00:06:54,373
+we need to hank one of them below other
+one which is a constant operation.
+
+101
+00:06:54,373 --> 00:06:55,670
+We just need to change one parent.
+
+102
+00:06:55,670 --> 00:06:59,550
+And also possibly we need
+to change the rank value.
+
+103
+00:06:59,550 --> 00:07:00,300
+Okay.
+
+104
+00:07:00,300 --> 00:07:04,310
+So for this reason when estimating
+the total running time we will just assume
+
+105
+00:07:04,310 --> 00:07:08,485
+that we have m calls to find operation.
+
+106
+00:07:08,485 --> 00:07:13,300
+Paths node that each Find
+operation traverses some
+
+107
+00:07:13,300 --> 00:07:18,220
+pass from a note to find the root
+of the corresponding tree.
+
+108
+00:07:18,220 --> 00:07:21,320
+So we traverse some number of edges.
+
+109
+00:07:21,320 --> 00:07:26,730
+So the total run in time of
+all the defind operations,
+
+110
+00:07:26,730 --> 00:07:33,400
+of all the calls to defind operation is
+just the total number of edges traversed.
+
+111
+00:07:33,400 --> 00:07:38,370
+So this is what is written here,
+we just need to count the number
+
+112
+00:07:38,370 --> 00:07:43,470
+of edges from parent a node
+i through it's paring j,
+
+113
+00:07:43,470 --> 00:07:46,980
+at traverse you know these codes.
+
+114
+00:07:46,980 --> 00:07:51,660
+For technical reasons we will split
+this number into three terms.
+
+115
+00:07:51,660 --> 00:07:57,980
+In the first term we will
+account all the edges that
+
+116
+00:07:57,980 --> 00:08:03,850
+lead from a vertex to the node to
+the root of the corresponding tree.
+
+117
+00:08:03,850 --> 00:08:09,550
+So the first term includes
+all the edges that lead from
+
+118
+00:08:09,550 --> 00:08:14,180
+a node to another node,
+which is the root in this case.
+
+119
+00:08:14,180 --> 00:08:20,310
+The second term include all the remaining
+edges where we go from i to j.
+
+120
+00:08:20,310 --> 00:08:24,920
+Such as there log* of rank of
+
+121
+00:08:24,920 --> 00:08:31,030
+a is strictly smaller than
+log* of rank of j, okay?
+
+122
+00:08:31,030 --> 00:08:34,730
+And their remaining term accounts for
+everything else,
+
+123
+00:08:34,730 --> 00:08:39,515
+namely for all the edges where we go
+from i to j such that j is not the root.
+
+124
+00:08:39,515 --> 00:08:46,716
+And that log*(rank[i]) = log*(rank[j])).
+
+125
+00:08:46,716 --> 00:08:51,085
+We're going to show separately for
+each of these terms that it
+
+126
+00:08:51,085 --> 00:08:55,390
+is upper bounded by big 0 of m
+multiplied by log star of m.
+
+127
+00:08:55,390 --> 00:08:58,980
+Let me show this on
+a small example as usual.
+
+128
+00:08:58,980 --> 00:09:02,380
+Assumes that we have such a path
+that we're going to traverse.
+
+129
+00:09:02,380 --> 00:09:08,580
+A path from the node at the bottom to
+the root of the corresponding tree.
+
+130
+00:09:08,580 --> 00:09:13,560
+So the numbers shown here indicate
+the ranks of the corresponding nodes.
+
+131
+00:09:13,560 --> 00:09:22,600
+Then these two nodes, these two edges
+will be accounted in the first term.
+
+132
+00:09:22,600 --> 00:09:25,470
+Just because these two nodes lead from
+a node to the root this thread just lead
+
+133
+00:09:25,470 --> 00:09:32,880
+from a node to the root of
+the corresponding tree.
+
+134
+00:09:32,880 --> 00:09:37,840
+Well, this edge for
+example will be accounted in the last
+
+135
+00:09:37,840 --> 00:09:42,070
+term because the rank
+of this node is 17 and
+
+136
+00:09:42,070 --> 00:09:46,710
+the rank of this node is 21.
+
+137
+00:09:46,710 --> 00:09:50,640
+And log star of this numbers are equal.
+
+138
+00:09:50,640 --> 00:09:56,470
+At the same time, here we have 14
+the rank 14, and here we have rank 17.
+
+139
+00:09:56,470 --> 00:10:00,580
+And the log star of these
+two numbers are different.
+
+140
+00:10:00,580 --> 00:10:06,800
+For this reason this hatch will be
+accounted in the second term, okay?
+
+141
+00:10:06,800 --> 00:10:09,550
+So on the next sequence of slides,
+
+142
+00:10:09,550 --> 00:10:13,870
+we are going to estimate separately
+each of these three terms.
+
+143
+00:10:13,870 --> 00:10:18,980
+And for each of them, we are going to
+show that it is at most big O of m
+
+144
+00:10:18,980 --> 00:10:21,860
+multiplied by log* of m.
+
+145
+00:10:21,860 --> 00:10:24,250
+The first term is easy to estimate.
+
+146
+00:10:24,250 --> 00:10:31,270
+Recall that in this term we account for
+all the edges traversed by find operation.
+
+147
+00:10:31,270 --> 00:10:37,590
+Where we go from node i to its
+parent j such that j is the root.
+
+148
+00:10:37,590 --> 00:10:41,090
+Clearly for
+each call to find the operation
+
+149
+00:10:41,090 --> 00:10:45,190
+there are at most two side edges, right?
+
+150
+00:10:45,190 --> 00:10:50,120
+Which means that we have
+an upper bound big O of m.
+
+151
+00:10:50,120 --> 00:10:55,560
+In the second term, we need to estimate
+that a long number of edges traversed
+
+152
+00:10:55,560 --> 00:10:59,940
+it during all m calls
+to the find operation.
+
+153
+00:10:59,940 --> 00:11:05,680
+Such that we go from node i to its
+parent j such that j is not the root and
+
+154
+00:11:05,680 --> 00:11:13,450
+also log star of rank of i is strictly
+less than log star of rank of j.
+
+155
+00:11:13,450 --> 00:11:17,210
+We're going to prove here that
+it is upper bounded by big O of
+
+156
+00:11:17,210 --> 00:11:19,730
+m multiplied by log star of n.
+
+157
+00:11:20,880 --> 00:11:25,500
+And this is just because,
+when we go up from some node to
+
+158
+00:11:27,070 --> 00:11:32,560
+the root of the corresponding tree,
+the rank always increases.
+
+159
+00:11:32,560 --> 00:11:38,250
+However, the rank of the root is at most
+log n, which means that during one call
+
+160
+00:11:38,250 --> 00:11:45,010
+to find procedure the lock star of rank
+can only increase log star of n times.
+
+161
+00:11:45,010 --> 00:11:45,740
+Okay.
+
+162
+00:11:45,740 --> 00:11:50,890
+This is just because we've had an upper
+bound for the rank of the root.
+
+163
+00:11:50,890 --> 00:11:55,212
+It is upper bounded by log
+m which means that there
+
+164
+00:11:55,212 --> 00:11:59,640
+are only log star of m
+different possibilities for
+
+165
+00:11:59,640 --> 00:12:04,700
+log star of rank of folds and
+nodes on this.
+
+166
+00:12:04,700 --> 00:12:09,360
+Which means, that these can only increase,
+at most, log star of m times.
+
+167
+00:12:09,360 --> 00:12:12,750
+And we have at most,
+m calls to find the operations.
+
+168
+00:12:12,750 --> 00:12:19,440
+Which gives us, an upper bound m,
+to get, m multiplied by log star of m.
+
+169
+00:12:19,440 --> 00:12:23,040
+Now it remains to estimate the last term.
+
+170
+00:12:23,040 --> 00:12:24,700
+Where we account for
+
+171
+00:12:24,700 --> 00:12:29,900
+all the address traversed during
+m calls to the find operations.
+
+172
+00:12:29,900 --> 00:12:35,760
+Where we go from node i to node j through
+its parent j such that j is not the root,
+
+173
+00:12:35,760 --> 00:12:36,540
+first of all.
+
+174
+00:12:36,540 --> 00:12:44,090
+And then the rank, the log star of rank
+of i is equal to log star of n of j.
+
+175
+00:12:44,090 --> 00:12:48,190
+What we're going to show is that
+the total number of side edges
+
+176
+00:12:48,190 --> 00:12:53,245
+is upper bounded by big O of m
+multiplied by log star of m.
+
+177
+00:12:53,245 --> 00:12:56,460
+Note that this is even
+better than what we need.
+
+178
+00:12:56,460 --> 00:13:04,150
+What we need is a recap upper
+bound which is m log star of n.
+
+179
+00:13:04,150 --> 00:13:09,190
+Recall that we know that m is greater
+than m just because m is the total number
+
+180
+00:13:09,190 --> 00:13:15,520
+of operations, while n is the number
+of calls to make said operations.
+
+181
+00:13:15,520 --> 00:13:21,060
+To estimate the required term, consider
+a particular node i and assume for
+
+182
+00:13:21,060 --> 00:13:27,280
+completeness that it's rank lies in an
+interval from k plus one to two to the k.
+
+183
+00:13:27,280 --> 00:13:30,390
+Recall that this was the form of interval
+
+184
+00:13:30,390 --> 00:13:34,880
+through which the lock
+star function is fixed.
+
+185
+00:13:34,880 --> 00:13:35,380
+Okay?
+
+186
+00:13:37,010 --> 00:13:43,600
+Now let's compute the total number of
+nodes whose rank lies in section interval.
+
+187
+00:13:43,600 --> 00:13:46,500
+So we know that the total
+number of nodes whose rank
+
+188
+00:13:46,500 --> 00:13:51,605
+is equal to k plus one is at most n
+divided by two, to the k plus one.
+
+189
+00:13:51,605 --> 00:13:57,260
+So total number of nodes was ranked equal
+to k plus two is at most n divided by two,
+
+190
+00:13:57,260 --> 00:13:59,048
+to k plus two.
+
+191
+00:13:59,048 --> 00:14:03,910
+And so on, so the total number
+of nodes whose rank lies in this
+
+192
+00:14:03,910 --> 00:14:08,130
+interval is at most n
+divided by two to the k.
+
+193
+00:14:09,200 --> 00:14:12,240
+Okay.
+The next stop equation is that each time
+
+194
+00:14:12,240 --> 00:14:19,940
+when we call Find of i, it is adopted
+by a new parent and since it is new.
+
+195
+00:14:19,940 --> 00:14:25,850
+So, at this point we know that if we have
+a node i and its parent j is not the root.
+
+196
+00:14:25,850 --> 00:14:28,500
+Yes, this is essential.
+
+197
+00:14:28,500 --> 00:14:35,140
+Which means that when we go up we find
+another root when we cofind a Find of i.
+
+198
+00:14:35,140 --> 00:14:39,280
+And at this point we will
+reattach node i to this new root.
+
+199
+00:14:39,280 --> 00:14:41,559
+And this new root has
+strictly larger rank.
+
+200
+00:14:42,830 --> 00:14:48,515
+And this in turn means that after
+most 2 to the k calls to find of i.
+
+201
+00:14:48,515 --> 00:14:53,330
+Find(i) will be adopted by a new parent
+
+202
+00:14:53,330 --> 00:14:58,490
+whose rank, for sure,
+does not lie in this interval.
+
+203
+00:14:58,490 --> 00:15:04,420
+Just because the rank of this
+interval is at most 2 to the k.
+
+204
+00:15:04,420 --> 00:15:08,080
+So if we increase the rank
+of the parent of i,
+
+205
+00:15:08,080 --> 00:15:12,485
+at least 2 to the k times, it will
+be greater than 2 to the k for sure.
+
+206
+00:15:12,485 --> 00:15:14,030
+Right.
+
+207
+00:15:14,030 --> 00:15:18,060
+We now have everything
+to conclude this proof.
+
+208
+00:15:18,060 --> 00:15:21,260
+To conclude estimating the required term.
+
+209
+00:15:21,260 --> 00:15:26,210
+Recall that we are estimating
+the total number of address traversed
+
+210
+00:15:26,210 --> 00:15:28,310
+during n calls to client.
+
+211
+00:15:28,310 --> 00:15:31,006
+Where we go from a node i to its parent j,
+
+212
+00:15:31,006 --> 00:15:37,070
+such that log star of rank of a is
+equal to log star of rank of j.
+
+213
+00:15:37,070 --> 00:15:42,690
+So we have just proved that there are at
+most n divided by 2 to the k nodes
+
+214
+00:15:42,690 --> 00:15:47,540
+whose rank lies in the interval
+from k plus 1 to 2 to the k.
+
+215
+00:15:47,540 --> 00:15:54,300
+We then explained why Any such node
+whose rank lies in such an interval,
+
+216
+00:15:54,300 --> 00:16:00,560
+contributes, at most, 2 to the k to
+the term that we are currently estimating.
+
+217
+00:16:00,560 --> 00:16:07,480
+This means that just all the nodes from,
+whose rank lies in such an interval.
+
+218
+00:16:07,480 --> 00:16:12,780
+Contributes, at most big O
+of N to this term, right?
+
+219
+00:16:12,780 --> 00:16:17,240
+Now it remains to note that the total
+number of different intervals
+
+220
+00:16:17,240 --> 00:16:19,590
+is at most log star of n.
+
+221
+00:16:19,590 --> 00:16:25,760
+Which means that the total contribution
+of all such nodes i to the estimated
+
+222
+00:16:25,760 --> 00:16:30,860
+term is at most big O of n
+Multiplied by log star of n.
+
+223
+00:16:31,990 --> 00:16:35,120
+We now conclude the whole lesson.
+
+224
+00:16:35,120 --> 00:16:39,960
+So in this lesson we considered it
+an implementation of the joins of
+
+225
+00:16:39,960 --> 00:16:44,060
+data structure where each set
+is represented by a tree.
+
+226
+00:16:44,060 --> 00:16:48,090
+And for
+this reason we have a forest of trees.
+
+227
+00:16:48,090 --> 00:16:53,450
+The ID of each set is just the root
+of the corresponding tree.
+
+228
+00:16:53,450 --> 00:16:56,690
+We then consider it to heuristics.
+
+229
+00:16:56,690 --> 00:17:00,110
+The first one is called Union by rank.
+
+230
+00:17:00,110 --> 00:17:05,610
+It says that when merging two trees,
+it makes sense to attach
+
+231
+00:17:05,610 --> 00:17:09,920
+a shorter one to the root of a taller one,
+okay?
+
+232
+00:17:09,920 --> 00:17:15,750
+This helps to keep trees
+in our forest shallow.
+
+233
+00:17:15,750 --> 00:17:19,920
+And for this we keep the rank
+of each subtree rooted
+
+234
+00:17:19,920 --> 00:17:22,960
+at a particular node in
+a separate array called rank.
+
+235
+00:17:23,980 --> 00:17:28,090
+We then discussed another heuristic
+which is called Path compression.
+
+236
+00:17:29,620 --> 00:17:30,708
+The idea is the following.
+
+237
+00:17:30,708 --> 00:17:35,440
+When we traversed a path from a node
+to the root of the corresponding tree,
+
+238
+00:17:35,440 --> 00:17:41,970
+we may want to reattach all the nodes
+found on this path directly to the root.
+
+239
+00:17:41,970 --> 00:17:48,900
+Because this potentially will save us
+time for further find operations, right.
+
+240
+00:17:48,900 --> 00:17:53,470
+We then proved that the resulting
+implementation turns out
+
+241
+00:17:53,470 --> 00:17:56,320
+to be extremely efficient,
+
+242
+00:17:56,320 --> 00:18:02,630
+namely the amortized running time of each
+operation is big O of log star of n.
+
+243
+00:18:02,630 --> 00:18:07,770
+And log star of n is an extremely
+slowly growing function.
+
+244
+00:18:07,770 --> 00:18:14,333
+In particular, log* n is at most five for
+all practical values of n.

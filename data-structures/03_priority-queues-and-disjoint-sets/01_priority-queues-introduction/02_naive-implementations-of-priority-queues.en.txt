@@ -1,0 +1,69 @@
+As usual before going into the details
+of efficient implementation let's check what is wrong
+with naive implementations? For example, what if we store
+the contents of a priority queue just in an unsorted array or
+in an unsorted list? In this example on the slide,
+we use a doubly linked list. Well, in this case inserting
+a new element is very easy. We just append the new element
+to the end of our array or list. For example, as follows, if our new element is seven we can just
+put it to the next available cell in our array where we can just append
+it to the end of the list. So we put 7 to the end. We say that the previous element of 7 is 2
+and that there is no next element, right? So it is easy and
+it takes constant time, okay? Now, what about extracting
+the maximum element in this case? Well, unfortunately we need to scan the
+whole array to find the maximum element. And we need to scan the whole
+list to find the maximum element which gives us a linear running time. That is we O(n), right? In our previous naive implementation
+using an unsorted array or list, the running time of
+the extract max operation is linear. Well, a reasonable approach
+to try to improve this, is to keep the contents of our array,
+for example array, sorted. Well, what are the advantages
+of this approach? Well, of course, in this case,
+extract max is very easy. So, the maximum element,
+is just the last element of our array. Right? Which means that the running time of
+ExtractMax in this case is just constant. However, the disadvantage is that now
+the insertion operation takes linear time, and this is why. Well, to find the right position for the
+new element we can use the binary search. This is actually good, well it can
+be done in logarithmic time. For example, if we need to
+insert 7 in our priority queue, then in logarithmic time we
+will find out that it should be inserted between 3 and
+9 in this for example. However unfortunately after
+finding this right position, we need to shift everything to
+the right of this position by one. Right just to create a vacant position for
+7. For this we need to first
+shift 16 to this cell. Then we move 10 then to this cell,
+then we move 9 to this cell, and finally we put 7 in to this cell,
+and we get it sorted already. So in the worst case, we need to shift a
+linear number of cells, a linear number of elements, which gives us a linear running
+time for the insertion operation. As we've just seen, inserting an element
+into a sorted array is expensive because to insert an element
+into the middle we need to shift all elements to the right
+of this position by one. So, this makes the running time of
+the insertion procedure linear. However if we use a doubly linked list, then inserting into the middle of this
+list is actually constant time operation. So let's try to use a sorted list.
+Well, the first advantage is that the extract max operation
+still takes constant time. Well this is just because, well, the maximum element in our list
+is just the last element, right? So for this reason,
+we have a constant time for extract max. Also, another advantage is that
+inserting in the middle of this list actually takes a constant amount of work,
+not linear, and this is why. Again let's try to insert 7 into our list. Well, this can be done as follows. We know that inserting 7 should
+be done between 3 and 9. So we do just the following. We will remove this. We remove this pointer and
+this pointer. We'll say that now the next
+element after 3 is 7 and the previous element before 7 is 3. And also the next element after 3, after 7
+is 9, and previous element before 9 is 7. So inserting an element just
+involves changing four pointers. Right?
+So it is a constant time operation. However everything is not so
+easy, unfortunately. And this is because just
+finding the right position for inserting this new element
+takes a linear amount of work. And this in particular because we
+cannot use binary search for lists. Given the first element of this list and
+the last element of this list, we cannot find the position of the middle element of
+this list because this is not an arry. We cannot just compute
+the middle index in this array. So for this reason, just finding
+the right position for the new element I mean to keep the list sorted takes
+already a linear amount of work. And for this reason, inserting into a sorted list still
+takes a linear amount of work. Well to conclude if you implement
+a priority queue using a list or an array sorted or
+not then one of the operations insert and extract max takes a linear amount of work. In the next video we will show
+a data structure called binary heap which allows to implement
+a priority queue so that both of these operations can be
+performed in logarithmic amount of work.

@@ -1,0 +1,137 @@
+Hi. In this video we will learn how
+to store a whole lot of objects, how to store big data,
+using distributed hash tables. So big data is when you need to
+store trillions or more objects. For example, trillions of file
+addresses in Dropbox, or user profiles, or emails and user accounts, for
+example, in Gmail or services like that. And you need fast search and
+fast access to that data. So hash tables, in general,
+is a good solution for that problem because they give a constant
+time search access on average. But for number of keys in the order
+of ten to the power of 12, the amount of memory that a single
+hash table will store becomes too big to store it in one computer and
+so we need to do something else, we need to use more computers probably. And the solution to this
+is distributed hash tables. So the first idea for
+distributed hash table is the following, just get more computers. Get 1,000 computers. If you are Google or
+Dropbox you can do that. And then you will store your
+data on many computers. And you will do the following. You create a hash table on
+each of those computers. And then you will separate
+the data between those computers. So each computer will store
+its own part of the data. And you need to determine quickly,
+and automatically, and deterministically which computer
+should store some object O. And there is a simple way, just compute
+some hash function of this object, modular 1000, so we get basically a value
+from 0 to 999 for each object and that will be the number of the computer
+which should store this object. And then you send a request to
+that computer and search or modify what you need to do with that object in
+the local hash table of that computer. And that seems to already solve
+our problem because if a new request comes you quickly compute
+the hash function on the object and you know where to send your request. And then that computer just looks
+up in its local hash table. Each of the local hash tables
+can be 1,000 times less than the total amount of data stored,
+and so it is scalable. If you need more data, you just get
+more computers and everything works. Still there are problems
+with this approach. and the main problem is that
+computers sometimes break. And especially if you have a lot of
+computers, then they break pretty often. For example if a computer breaks once in
+two years on average, then if you have 1,000 computers, on average,
+more than one computer breaks every day. Because there are less than 1,000 days in
+two years, and you have 1,000 computers. So what do you do in that case? You don't want to lose your user's data. So you need to store
+several copies of the data. So basically you can do it in a way that
+every computer stores each part of data. Each part of data should be
+stored on several computers. And what happens then when
+some computer breaks? Well, luckily the data which
+is stored on this computer is also stored somewhere else. But if that's the only copy left after
+this computer broke, you also need to also copy that data to some other computer, so
+that it is again stored in several places. And you need to relocate the data
+from the broken computer and also sometimes your service grows and
+you want to buy more computers. You want to reply faster
+to your clients and new computers are added to the cluster. And then this formula take hash
+value of the object modular 1000. And this is the number of computer
+on which your object is stored. It no longer works. Because the numbers of
+the computers always change. New computers come in. Broken computers come out. And so you need something else. And one way to solve this is
+called consistent hashing. So first, we choose some hash
+function with sum cardinality m. And we choose a circle,
+a regular circle, and you put numbers from zero to m minus
+one on the circle in a clockwise order. And then each object, O, is mapped to some point on the circle corresponding
+to the number hash value of this object. Which is from 0 to m- 1, so it always maps
+to some of the numbers on the circle. And also, each computer ID is
+mapped to the same circle. We hash the ID of the computer and we get the number of the points
+to which this computer is mapped. So let's look at the picture. Here's our circle. And, for example m is 12. Then we put 12 points around the circle. And we put numbers from 0
+to 11 around the circle. And then, objects, such as for example, name Steve,
+can be mapped to some of those 12 points. And if hash value of Steve is 9, then Steve is mapped to
+the point with number 9. And also computers can be mapped
+to points, and for example, this computer with ID 253. If the hash value of 253 is 5, then
+this computer is mapped to the point 5. So what do we do then? We make a rule that each object is stored
+on the so-called closest computer, closest in terms of
+the distance along the circle. And in this case, each computer stores all objects
+falling on some arc, which consists of all objects which are closer to this
+computer than to any other computer. Let's again look at the picture. This is the circle and
+there are six computers and these computers mapped to
+some points on this circle. And then the arcs of the same
+color as the computers near them, are the sets of points, which are closer to the corresponding
+computer than to any other computer. And so each computer is responsible for
+some arc of this circle. For all the keys that
+are mapped to this arc. And so what happens when computers come
+in because new computers are bought or when computers are broken. When a computer goes off when it is
+broken, it's neighbors take its data. So it has two neighbors, and it's arc
+is divided into parts, and one part goes to the right neighbor and the,
+another part goes to the left neighbor. And when a new computer is added
+it takes data from its neighbors. So it comes between some two
+already existing computers, and it takes a part of the arc of one of them, and a part of the arc of another one,
+and he gets its arc. So let's look at an example. For example, the yellow computer
+breaks and it goes away. And then the green and
+the blue computer will take its arc and divide it between themselves. So that's what happens. Another problem which still needs to be
+solved is that when some computer breaks, we need to copy or relocate the data. And how will a node, a computer, know
+where to send the data that is stored? Well, we need another rule for that. We cannot store the addresses
+of all the other computers on each of the computers
+because that is inconvenient. We will have to constantly
+update that information. But, each node, each computer will be so
+called acquainted with a few neighbors. So it will store the metric
+addresses of some of its neighbors. The rule is that for any key, each node will either store this key
+itself, or it will be acquainted. It will know some other computer
+which is closer to this key in terms of
+the distance on the circle. And, that way, if a request comes to
+some node, any node in the network, about some key, it either can find
+this key inside it's own storage, or, it will redirect the request to another
+node which is closer to this key. And that that node will
+either store the key, or direct the code to the next node,
+which is even closer to that key. And in finite number of iterations the
+request will come to the node that will actually stores the key. So that's the idea. And in practice, what we can do
+is we can put the computers, the nodes on the circle. And then each node will know its immediate
+neighbors, its neighbors of neighbors. And then its neighbors in distance of 4
+and distance of 8, and distance of 16. And for all powers of 2 it will
+know neighbors to the right and to the left at distance of this part 2. Of course less than n over half. And it's easier to see
+on the picture again. So suppose we have many, many nodes. And then the upper node will have
+links to its right and left neighbor. To its right and
+left neighbor on distance of two, and to its right and left neighbor,
+the distance of four, and so on. So each node will contain algorithmic
+number of links to other nodes, which is much better than
+storing all the other nodes. And, if we need to come to some key
+from some node that doesn't contain it we'll first jump in the direction where
+the distance to the key decreases. And we will jump as much as we can. If the computer at distance eight is
+closer than our computer to the key, we will jump at least by eight. If computer with distance 16 is closer,
+we'll jump at least 16. If computer with distance 32 is farther,
+then we'll jump just by 16. In this way,
+we will always jump by at least a half of the distance which divides us from
+computer that stores the key itself. And so in algorithmic number of steps,
+we will actually come from the current computer, to the computer
+that actually stores our key. And this network of nodes
+which know some neighbors and they know some of their neighbors
+is called, Overlay Network. So in conclusion,
+Distributed Hash Tables is a way to store Big Data on many many computers and access
+it fast, as if it was on one computer. Consistent Hashing is one way to determine
+which computer actually owns the data, which computer stores
+this particular object. And to do that, consistent
+hashing uses mapping of keys and computer IDs on a circle. And each computer stores
+a range of keys on an arc, which is closest to this computer in
+terms of distance along the circle. And also overlay network is used to route
+the data to and from the right computer. So when a computer is broken, first, its data needs to be
+copied to some other computer. And its neighbors take its data. So computer disappears, and
+its arc disappears, but this is actually divided
+between two neighbor computers. And each of those arcs increases a bit,
+and they cover the whole data and
+then we proceed. If a new computer appears, it takes
+some data from its right neighbor, some data from its left neighbor,
+and assembles an arc for itself. And I hope that after this lecture, you understand how important are data
+structures we study in this course, to the modern technological industry,
+distributed systems, and big data.

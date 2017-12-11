@@ -1,0 +1,245 @@
+1
+00:00:00,260 --> 00:00:02,910
+We'll conclude the lesson
+by a few remarks.
+
+2
+00:00:04,330 --> 00:00:08,750
+First of all, for
+implementing a binary heap in an array,
+
+3
+00:00:08,750 --> 00:00:13,370
+we can as well use zero based arrays.
+
+4
+00:00:13,370 --> 00:00:18,210
+In this case, the formulas for
+computing the parent and
+
+5
+00:00:18,210 --> 00:00:23,410
+the index of the parent of two children
+of a given node, I changed as follows.
+
+6
+00:00:23,410 --> 00:00:30,160
+So, the Parent of i, is given by
+the number (i-1)/2 and rounded down.
+
+7
+00:00:30,160 --> 00:00:37,460
+The LeftChild is given by the number 2i +
+1 and the RightChild is given by 2i + 2.
+
+8
+00:00:37,460 --> 00:00:40,240
+The next remark is that
+
+9
+00:00:40,240 --> 00:00:44,738
+you can implement the binary
+min-heap in exactly the same way.
+
+10
+00:00:44,738 --> 00:00:51,130
+And binary min-heap is a heap where
+each edge is value of their parent,
+
+11
+00:00:51,130 --> 00:00:55,840
+is at most the value of the child.
+
+12
+00:00:55,840 --> 00:01:00,810
+A case like this is useful for
+the case when a iteration just in
+
+13
+00:01:00,810 --> 00:01:05,900
+your priority queue, you need to extract
+an element not with maximum priority,
+
+14
+00:01:05,900 --> 00:01:07,190
+but with minimum priority.
+
+15
+00:01:08,490 --> 00:01:15,780
+The final remark is that binary heaps can
+be easily generalized through d-ary heap.
+
+16
+00:01:15,780 --> 00:01:22,400
+In such a heap, each node has,
+at most, d children.
+
+17
+00:01:22,400 --> 00:01:26,928
+And we require to call
+a d-ary heap complete,
+
+18
+00:01:26,928 --> 00:01:31,190
+we again require that all the levels
+are completely filled, except for
+
+19
+00:01:31,190 --> 00:01:37,360
+possibly the last one where all the nodes
+are in leftmost position, okay?
+
+20
+00:01:37,360 --> 00:01:40,760
+So the height of this
+tree is in this case,
+
+21
+00:01:40,760 --> 00:01:44,450
+log base d of n, not the binary log of n.
+
+22
+00:01:46,070 --> 00:01:51,810
+This in particular means that the running
+time of the SiftUp procedure is,
+
+23
+00:01:51,810 --> 00:01:54,836
+at most, O of log base d of n, right?
+
+24
+00:01:54,836 --> 00:02:00,200
+Just because the height of the tree is,
+at most, log base d of n.
+
+25
+00:02:00,200 --> 00:02:03,490
+And the element just goes down,
+just goes up.
+
+26
+00:02:03,490 --> 00:02:06,890
+If needed,
+we swap an element with its pairing.
+
+27
+00:02:06,890 --> 00:02:10,420
+However, the running time
+of SiftDown procedure
+
+28
+00:02:10,420 --> 00:02:13,660
+increases through d when
+supplied by a log base u of n.
+
+29
+00:02:14,930 --> 00:02:16,990
+This is because when we go down,
+
+30
+00:02:16,990 --> 00:02:22,580
+we always need to find a direction
+where to go in reach of this to go.
+
+31
+00:02:22,580 --> 00:02:28,915
+And this is because, when we need to
+replace, to swap a node with one of
+
+32
+00:02:28,915 --> 00:02:34,700
+its children we first need to select which
+on of these children is the largest one.
+
+33
+00:02:34,700 --> 00:02:38,950
+Right, so for this reason the running
+time of SiftDown procedure
+
+34
+00:02:38,950 --> 00:02:43,350
+in this case is O of d
+multiplied by log base d of n.
+
+35
+00:02:44,370 --> 00:02:49,040
+Okay, time to conclude in
+this segment of lessons we
+
+36
+00:02:49,040 --> 00:02:54,410
+started by introducing the abstract
+data type called priority cues.
+
+37
+00:02:54,410 --> 00:02:58,110
+This abstract data types supports
+the following two main operations
+
+38
+00:02:58,110 --> 00:03:02,170
+insert an element and extract
+an element with the highest priority.
+
+39
+00:03:03,340 --> 00:03:07,060
+This priority queues find
+a lot of applications.
+
+40
+00:03:07,060 --> 00:03:12,050
+We will see many other reasons that
+you used efficiently this data type.
+
+41
+00:03:12,050 --> 00:03:16,170
+Then we explain that if implemented
+naively using an array, or
+
+42
+00:03:16,170 --> 00:03:17,840
+at least sort it or not,
+
+43
+00:03:17,840 --> 00:03:23,150
+one of these two operations will take a
+lenient amount of work, in the worst case.
+
+44
+00:03:23,150 --> 00:03:25,570
+Then we presented binary heaps.
+
+45
+00:03:25,570 --> 00:03:29,720
+So this is a way of implement
+priority queues that gives
+
+46
+00:03:29,720 --> 00:03:34,520
+the worst case running time,
+O of log n for all operations.
+
+47
+00:03:34,520 --> 00:03:39,815
+And also, finally, we explained that
+this also can be made space efficient.
+
+48
+00:03:39,815 --> 00:03:44,820
+Namely, a binary heap is a tree,
+however to store this tree
+
+49
+00:03:44,820 --> 00:03:50,680
+we do not need you to store connections
+to a parent and to children.
+
+50
+00:03:50,680 --> 00:03:53,590
+It is enough to store
+everything in an array.
+
+51
+00:03:53,590 --> 00:03:58,814
+Again, this makes binary heaps
+both time and space efficient.

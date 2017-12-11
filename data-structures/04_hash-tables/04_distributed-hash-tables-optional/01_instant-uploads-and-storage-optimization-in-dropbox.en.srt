@@ -1,0 +1,717 @@
+1
+00:00:00,200 --> 00:00:05,340
+Hi, in this optional lesson we will learn
+a bit about more than distributed systems.
+
+2
+00:00:05,340 --> 00:00:09,286
+And we will start with some interesting
+inner working online storage services
+
+3
+00:00:09,286 --> 00:00:13,063
+which you probably use such as DropBox,
+Google Drive and the Yandex Disk.
+
+4
+00:00:13,063 --> 00:00:16,180
+Have you wondered how
+a very big file of tens or
+
+5
+00:00:16,180 --> 00:00:22,810
+hundreds of megabytes can be uploaded
+almost instantly to your DropBox account?
+
+6
+00:00:22,810 --> 00:00:26,600
+Or maybe your interested,
+how Dropbox, Google Drive and
+
+7
+00:00:26,600 --> 00:00:30,530
+Yandex Disk save petabytes
+of storage space
+
+8
+00:00:30,530 --> 00:00:34,890
+using the ideas from this module
+on hash tables and hash functions.
+
+9
+00:00:34,890 --> 00:00:37,390
+Or maybe you're interested
+in distrusted systems and
+
+10
+00:00:37,390 --> 00:00:39,350
+distributed storage in general.
+
+11
+00:00:39,350 --> 00:00:40,970
+Then, this lecture is for you.
+
+12
+00:00:42,400 --> 00:00:47,400
+So services like Dropbox and
+Google Drive used extra bytes of
+
+13
+00:00:47,400 --> 00:00:52,350
+storage to store data of millions and
+millions of users worldwide.
+
+14
+00:00:53,450 --> 00:00:58,370
+And there's a very simple idea on how
+to actually save some of that space and
+
+15
+00:00:58,370 --> 00:01:05,270
+save some of the cost so it sometimes
+happens that users upload the same files.
+
+16
+00:01:05,270 --> 00:01:08,520
+The first user liked
+the video with the cats and
+
+17
+00:01:08,520 --> 00:01:13,703
+uploaded it to his Dropbox account just
+to save it and to show his friends.
+
+18
+00:01:13,703 --> 00:01:18,091
+And then another user also
+loved this video file.
+
+19
+00:01:18,091 --> 00:01:20,693
+He may have called it different way but
+
+20
+00:01:20,693 --> 00:01:25,340
+still uploaded it to his Dropbox account,
+the exactly same video.
+
+21
+00:01:25,340 --> 00:01:30,311
+And then another user also uploaded this
+video, because this was a viral video and
+
+22
+00:01:30,311 --> 00:01:32,184
+many, many people liked it and
+
+23
+00:01:32,184 --> 00:01:36,314
+some of them decided to upload it
+to their user accounts in Dropbox.
+
+24
+00:01:36,314 --> 00:01:41,910
+And then what we can do on the level
+of the whole Dropbox service is instead
+
+25
+00:01:41,910 --> 00:01:47,139
+of storing all three copies of
+the same video, just save one copy and
+
+26
+00:01:47,139 --> 00:01:53,830
+have links from the user's files to
+this actual, physical, stored file.
+
+27
+00:01:53,830 --> 00:01:58,410
+And then we've just saved 66% of
+
+28
+00:01:58,410 --> 00:02:02,240
+the storage space because we
+basically reduced three times.
+
+29
+00:02:02,240 --> 00:02:07,190
+And if you have some large videos
+which are also very popular
+
+30
+00:02:07,190 --> 00:02:12,090
+that you can save this way significant
+portion of this storage space
+
+31
+00:02:12,090 --> 00:02:17,240
+which all the users collectively use
+in DropBox to store their files.
+
+32
+00:02:18,560 --> 00:02:21,980
+So the question is how to
+actually implement that.
+
+33
+00:02:21,980 --> 00:02:27,181
+So, when you do a new file log,
+you need to determine if there is already
+
+34
+00:02:27,181 --> 00:02:33,076
+the same file in the system or now, and
+if there is, you just ignore the plot, and
+
+35
+00:02:33,076 --> 00:02:39,183
+sent a link to the register's file in the
+user's account, instead of a real file.
+
+36
+00:02:39,183 --> 00:02:43,305
+So, there are a few ways to do that, and
+we'll start with a really simple one.
+
+37
+00:02:43,305 --> 00:02:45,045
+Naive comparison.
+
+38
+00:02:45,045 --> 00:02:47,750
+You take the new file that
+the user wants to upload.
+
+39
+00:02:47,750 --> 00:02:51,210
+You actually upload it
+to a temporary storage,
+
+40
+00:02:51,210 --> 00:02:53,490
+then you go through all the storage files,
+
+41
+00:02:53,490 --> 00:02:58,850
+then you compare the new file with each
+of the storage files, bye, bye, bye.
+
+42
+00:02:58,850 --> 00:03:01,740
+And if there is exactly the same file,
+
+43
+00:03:01,740 --> 00:03:05,980
+you store a link to this file instead of
+the new file that user's wants to upload.
+
+44
+00:03:07,520 --> 00:03:10,050
+So, there are a few
+drawbacks of this approach.
+
+45
+00:03:10,050 --> 00:03:12,820
+First, you have to first,
+upload the file anyways.
+
+46
+00:03:12,820 --> 00:03:17,970
+So you won't see this miraculous
+instant upload time of
+
+47
+00:03:17,970 --> 00:03:21,760
+large files with hundreds of megabytes.
+
+48
+00:03:21,760 --> 00:03:26,292
+And second is to compare a file
+of size S with N other files,
+
+49
+00:03:26,292 --> 00:03:30,094
+it takes time proportional
+to product of N and S.
+
+50
+00:03:30,094 --> 00:03:33,731
+And that can be huge because
+the number of files in Dropbox or
+
+51
+00:03:33,731 --> 00:03:38,705
+Google Drive is probably on the order of
+hundreds of billions or even trillions.
+
+52
+00:03:38,705 --> 00:03:43,164
+And the files uploaded are often
+also very large like gigabytes.
+
+53
+00:03:43,164 --> 00:03:48,182
+And also, if we use the strategy,
+then, as N grows, as service for
+
+54
+00:03:48,182 --> 00:03:53,025
+online storage grows,
+the total running time of all uploads will
+
+55
+00:03:53,025 --> 00:03:57,251
+grow as N squared because each
+new upload is big O(N) and
+
+56
+00:03:57,251 --> 00:04:02,380
+it's longer and longer and
+longer as the number of files increases.
+
+57
+00:04:02,380 --> 00:04:06,320
+So, this approach won't
+work long-term anyway.
+
+58
+00:04:07,440 --> 00:04:08,510
+So what can we do?
+
+59
+00:04:08,510 --> 00:04:13,610
+First idea is, instead of comparing the
+files themselves, try to compare hashes.
+
+60
+00:04:13,610 --> 00:04:18,560
+As in the Rabin Karp's algorithm,
+compare hashes of the files first.
+
+61
+00:04:18,560 --> 00:04:22,300
+If the hashes are different,
+then the files are definitely different.
+
+62
+00:04:22,300 --> 00:04:25,530
+And if there is a file with the same hash,
+
+63
+00:04:25,530 --> 00:04:30,320
+then upload this new file that the user
+wants to upload to his account, and
+
+64
+00:04:30,320 --> 00:04:35,750
+compare the new file with the old file
+with the same hash directly byte by byte.
+
+65
+00:04:35,750 --> 00:04:38,210
+Still, there are problems
+with this approach.
+
+66
+00:04:38,210 --> 00:04:42,470
+First, there can be collisions so
+we cannot just say that if two files have
+
+67
+00:04:42,470 --> 00:04:47,680
+the same hash value then they're equal and
+we don't need to store the new file.
+
+68
+00:04:47,680 --> 00:04:50,940
+Sometimes, different files can
+have the same hash value and
+
+69
+00:04:50,940 --> 00:04:56,820
+we'll still have to compare the two files,
+and also we still have to upload
+
+70
+00:04:56,820 --> 00:05:02,070
+the file to compare directly even
+if the same file's already stored.
+
+71
+00:05:02,070 --> 00:05:07,000
+And we still have to compare
+with all N already stored files.
+
+72
+00:05:07,000 --> 00:05:08,380
+So what can we do?
+
+73
+00:05:08,380 --> 00:05:12,600
+Another idea is we can use
+several hash functions.
+
+74
+00:05:12,600 --> 00:05:18,050
+If we have two equal files, even if we
+compute five different hash functions
+
+75
+00:05:18,050 --> 00:05:21,090
+there values on these two
+files will be the same.
+
+76
+00:05:22,160 --> 00:05:26,600
+So the idea is choose several different
+hash functions independently for example,
+
+77
+00:05:26,600 --> 00:05:31,590
+take functions from polynomial family
+with different multiplier x or
+
+78
+00:05:31,590 --> 00:05:33,440
+with different prime numbers p.
+
+79
+00:05:34,460 --> 00:05:38,060
+And then compute all the hashes for
+each file and
+
+80
+00:05:38,060 --> 00:05:43,080
+if there is a file which is already
+stored and has all the same hash values,
+
+81
+00:05:43,080 --> 00:05:47,140
+then the new file is probably
+the same as the file already stored.
+
+82
+00:05:47,140 --> 00:05:51,470
+In this case, we might want to not
+even upload the new file at all and
+
+83
+00:05:51,470 --> 00:05:57,890
+save the time and
+make the upload seem immediate.
+
+84
+00:05:57,890 --> 00:06:03,410
+And to do that we need to just compute
+hashes locally before upload and only
+
+85
+00:06:03,410 --> 00:06:07,950
+send through the network, which can be
+slow, the variants of the hash functions,
+
+86
+00:06:07,950 --> 00:06:13,830
+which are much, much less in terms
+of space than the initial huge file.
+
+87
+00:06:13,830 --> 00:06:15,840
+So we can do the hash values locally.
+
+88
+00:06:15,840 --> 00:06:20,710
+We send those three or five hash values
+over the network to the service.
+
+89
+00:06:20,710 --> 00:06:24,020
+They're compared to the hash values
+of the files already stored.
+
+90
+00:06:24,020 --> 00:06:30,070
+And if there is a file with same set of
+hash values, we don't upload our new file.
+
+91
+00:06:30,070 --> 00:06:34,010
+And this is how the instant
+upload works sometimes.
+
+92
+00:06:34,010 --> 00:06:38,080
+When you try to upload file which is
+already stored but by someone else.
+
+93
+00:06:38,080 --> 00:06:40,140
+Well of course,
+there is a problem with collisions.
+
+94
+00:06:40,140 --> 00:06:44,330
+Because collisions can happen even if you
+have several different hash functions.
+
+95
+00:06:44,330 --> 00:06:48,390
+Still, there can be two
+different files which have
+
+96
+00:06:48,390 --> 00:06:53,590
+the same set of hash values even for
+several hash functions.
+
+97
+00:06:53,590 --> 00:06:58,490
+And there are even algorithms
+which on purpose find
+
+98
+00:06:58,490 --> 00:07:03,480
+two different files which have the same
+value of a give hash function.
+
+99
+00:07:03,480 --> 00:07:06,810
+If you know for which hash function
+you are trying to find a collision.
+
+100
+00:07:06,810 --> 00:07:10,265
+However, for
+hash functions used in practice,
+
+101
+00:07:10,265 --> 00:07:13,730
+collisions are extremely rare and
+hard to find.
+
+102
+00:07:13,730 --> 00:07:17,365
+And if you use more than one hash
+function, if you use three or
+
+103
+00:07:17,365 --> 00:07:21,780
+even five then you probably won't
+see a collision in a life time.
+
+104
+00:07:21,780 --> 00:07:25,420
+So this is actually done in practice.
+
+105
+00:07:25,420 --> 00:07:29,810
+You compute several different hash
+functions which no body knows and
+
+106
+00:07:29,810 --> 00:07:34,010
+then it is so hard to find two files for
+
+107
+00:07:34,010 --> 00:07:38,420
+which all the hash functions
+have the same values.
+
+108
+00:07:38,420 --> 00:07:43,910
+That a new file is considered to
+be equal to the old stored file
+
+109
+00:07:43,910 --> 00:07:48,619
+if all the hash values coincide with the
+hash values of the file already stored.
+
+110
+00:07:49,740 --> 00:07:54,301
+So we still have an unsolved
+problem that we need to do and
+
+111
+00:07:54,301 --> 00:07:57,190
+comparisons with all
+the already stored files.
+
+112
+00:07:57,190 --> 00:07:59,750
+So how can we solve this problem?
+
+113
+00:07:59,750 --> 00:08:04,290
+Well, we can first precompute hashes
+because when a file is submitted for
+
+114
+00:08:04,290 --> 00:08:07,970
+upload, hash values for
+this file are computed anyway.
+
+115
+00:08:07,970 --> 00:08:11,460
+So we can store the addresses of the files
+
+116
+00:08:12,620 --> 00:08:15,790
+which already stored in
+the service in a hash table and
+
+117
+00:08:15,790 --> 00:08:20,458
+along with the addresses of the files will
+store those hash values for each file.
+
+118
+00:08:20,458 --> 00:08:26,630
+So, we recompute them and store them and
+when we need to search for
+
+119
+00:08:26,630 --> 00:08:32,140
+a new file We actually only need
+to search in the hash table, and
+
+120
+00:08:32,140 --> 00:08:37,640
+we need only the values of the hash
+functions on this file to search for it.
+
+121
+00:08:37,640 --> 00:08:40,070
+We don't need to provide the file itself.
+
+122
+00:08:40,070 --> 00:08:43,970
+So we search for
+the hash values in the hash table.
+
+123
+00:08:43,970 --> 00:08:50,120
+And if we find some files stored in
+this hash table with the same set
+
+124
+00:08:50,120 --> 00:08:54,820
+of hash values, then we know that there is
+already such files stored in the system.
+
+125
+00:08:55,840 --> 00:08:57,530
+So the final solution is the following.
+
+126
+00:08:57,530 --> 00:09:02,090
+We choose from three to five
+different good hash functions, for
+
+127
+00:09:02,090 --> 00:09:04,780
+which it is hard to find solutions.
+
+128
+00:09:04,780 --> 00:09:06,309
+So that we don't see
+collisions in practice.
+
+129
+00:09:06,309 --> 00:09:11,879
+We store the addresses of the files and
+the hashes of those files in a hash table,
+
+130
+00:09:11,879 --> 00:09:16,369
+and before we upload a new file,
+we compute the hashes locally,
+
+131
+00:09:16,369 --> 00:09:19,554
+we send them over
+the network to the service.
+
+132
+00:09:19,554 --> 00:09:25,881
+We check whether there is a file in
+a hash table with the same hash values.
+
+133
+00:09:25,881 --> 00:09:30,298
+And if all the hashes for
+some stored file coincide with
+
+134
+00:09:30,298 --> 00:09:35,310
+the hashes of the new file
+then the search is successful.
+
+135
+00:09:35,310 --> 00:09:37,740
+And in this case we don't
+even upload the file,
+
+136
+00:09:37,740 --> 00:09:42,480
+we just store a link in the user account
+to the existing, already stored file.
+
+137
+00:09:44,000 --> 00:09:49,885
+So this how we can do instant upload
+to Dropbox or Google Drive for
+
+138
+00:09:49,885 --> 00:09:53,360
+[INAUDIBLE] this, and this is actually
+how they save a lot of space,
+
+139
+00:09:53,360 --> 00:09:58,143
+probably petabytes of
+space in their services.
+
+140
+00:09:58,143 --> 00:10:03,070
+However, there are more problems to this,
+because it turns
+
+141
+00:10:03,070 --> 00:10:07,490
+out that billions of files are uploaded
+daily, for example, into Dropbox.
+
+142
+00:10:07,490 --> 00:10:12,080
+And that means that probably around
+trillions are already stored there.
+
+143
+00:10:12,080 --> 00:10:15,900
+And that is just too big for
+a simple hash table on one computer.
+
+144
+00:10:15,900 --> 00:10:20,760
+And also, millions of users upload
+simultaneously their files, and so
+
+145
+00:10:20,760 --> 00:10:24,300
+this is also too many requests for
+a single hash table.
+
+146
+00:10:24,300 --> 00:10:27,010
+And so you need some
+
+147
+00:10:27,010 --> 00:10:31,580
+more sophisticated solution to
+cope with this those two things.
+
+148
+00:10:31,580 --> 00:10:35,585
+And see our next lecture to understand
+how that problem is solved.

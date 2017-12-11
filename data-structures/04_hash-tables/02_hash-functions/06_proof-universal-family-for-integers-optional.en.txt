@@ -1,0 +1,117 @@
+Hi, in this video we will prove that
+the set of functions we suggested to you with integers is really a universal
+family of hash functions. This video will be heavy on math but
+it is optional. We will use properties of prime
+numbers of modular arithmetics. We will use the concept of
+one to one correspondence. Properties of upper integral parts of
+real number and probabilities of course. So the theorem is that the set of
+functions was suggested polygraphic H with index B is the set of all
+hash functions indexed by B, A, and B where B is a prime number and
+A and B are parameters. And those parameters
+generate hash functions. So the formula for the hash function
+is on the side, and parameters a and b are from one to p-1 and
+from zero to p-1, respectively. So this is a family of hash functions
+which contains p multiplied by p-1, different hash functions for
+different bayers ab. So these functions is
+the universal family for the universe of keys,
+which are integers from 0 to p- 1. And of course, it will be also universal
+family for any sub-set of this universe. Now, let's prove this theorem. To do that, we first need a Lemma. So, select some hash function with
+parameters a and b from our set, a b. And fix some keys, x and y which are
+different, then, the intermediate values, which would compute while computing
+the hash value of keys x and y. So ax + b modular p and ay + b modular p, those are the intermediate values
+before we take the value modular m and get the actual value of the hash
+function from our family. So those values are always different for
+different keys in the universe. We will prove this Lemma by contradiction. So suppose is equal to s or
+(ax + b) is equal to (ay +b) mod p. We subtract the right part
+from the left part and we see that a(x-y) is equal to 0 mod p. And that means that b divides
+product of a and x minus y. Now recall that b is a prime number and so it means that either b divides a or
+that b divides x minus y. But a is between 1 and p minus 1 so
+a is a positive integer less than p and p is prime so p cannot divide a and
+thus p must divide x minus y. But x and y are between 0 and p minus 1. So their difference is,
+by absolute value, less than p. And p divides x minus y. So, the only value for x minus y,
+for which it is possible is 0. x minus y is 0. And so x is equal to y. But this contradicts our
+initial assumption that x and y are different keys. And so we prove by contradiction
+that r is not equal to s. There is a corollary from that that for
+hash function h which is without taking modular m,
+there are no collisions. And an important corollary is that for a hash function,
+which is before taking modulo m, there are no collisions for the universe
+of integer keys from 0 to p minus 1. Now we need another lemma. That for
+any pair of different keys x and y, there is a 1 to 1 correspondence
+between pairs of numbers a and b which generally different
+hash functions in our family. And pairs of numbers r and s,
+which are the intermediate values in the computation of hash
+function of keys x and y. Let's prove that. First know that different pairs a,
+b generate different pairs r, s. And that is because if we
+have some pair r, s we can uniquely solve for a and
+b module b with these formulas. So if there is any other pair, a prime
+b prime which leads to the same r and s, then actually a prime and
+b prime have to be equal to a and b respectively because of these equations. So now we know that different pairs a and
+b generate different pairs r, s. And we know that the total number of
+pairs a,b is p multiplied by p-1 because there are p-1 values for a and
+independently p values for b. So total number of pairs
+is p multiplied by p-1. And also, it turns out that the total
+number of pairs r,s is also p multiplied by p-1 Because the total
+number of pairs r, s with values from 0 to p- 1 is p squared. But r must be different from s so
+we must subtract p from that, and that will be p squared- p which
+is the same as p multiplied by p- 1. So the number of pairs a,
+b is the same as the number of pairs r, s. And different pairs a,b led to different
+pairs (r,s) and that means that there is a one to one correspondence
+between these pairs and these pairs. And the corollary from that is that if
+we select some pair of different keys, x and y and
+we select any hash function at random. For all our family with equal probability,
+which is one of p multiplied by p minus one, because they're all,
+p multiplied by p minus 1, different hash functions in our family,
+then each pair of values are S. Which are intermediate values,
+happen with equal probability, again, one over P multiplied by p- 1 so
+why is that? Well we know that there's a one to one
+correspondence between pairs a, b and pairs r, s and selecting the hash
+function from our family is the same selecting random pair a, b we know
+that the probability of any pair a, b is one over p by p -1. And so the probability of any pair
+r,s is the same as the probability of the corresponding pair a,b. So it is always 1/p(p- 1). So we proved our corrollary. Now let's prove the initial theorem. The probability of collision for a fixed
+pair of keys, x and y, which are different is the same as the probability that
+r module m is the same as s module m. We know that r is different from s, but they still can be equal module m
+because m can be less than Pm. In most cases it is actually less than b. So we, again, know that each pair r,
+s has probability 1 over p by p minus 1. And we'll estimate the probability
+of collision using this fact. Know that for each fixed r from 0
+to p minus 1, there are at most. Upper integral part of p over m, minus 1 such value of s that
+s is different from r and r modular m is the same as s modular m. So why is that? Well, let's assume, without loss of
+generality, that r modular m is 0. And look at the roll of numbers from 0-P-1 than the numbers which
+have the same remainder module m as r are 0 M, 2M, 3M, 4M and so on up to a paranted real part
+of P over M-1 multiplied by M. We cannot multiply the next integer
+by m because that is already bigger than p minus 1, so
+in total there are part of pure m, different integers between 0 and p minus 1 which have the same
+remainder modular m as r. But, s also needs to be different from r. So, the number of such s', less by 1. And now, the probability of collision
+is equal to probability r module m, equal to s module m, and that is,
+at most, some of probabilities of all such pairs are s for
+which this equality holds. So we sum over all different
+values of r from 0 to p-1 and then we sum over all pairs
+which contain this r. And for which s module m
+is the same as r module m. We estimated that their at most
+integral part of p over m-1 such as for any fixed r. And the probability of any
+final pair of this r and any s with the same remainder
+module m is 1 over p by p-1 so
+the total probability is at most this sum. And the sum has exactly p and
+it has p in the denominator so we can just remove the sum and
+the denominator and we get upper integral part of
+p over m-1 divided by p-1. Then we use the property of that upper
+integral part of p over m at most p plus m minus one over m. And then, when we make the common
+denominator, and remove all the things that cancel out,
+we see that it is equal to 1 over m. So we just proved that the probability of r modular m being the same as s
+modular m is, at most, 1 over m. And that proves that
+the probability of collision for some fixed pair of different keys,
+x and y is, at most, 1 over m. And that is the property of universal
+family that we needed to prove. So we finally proved our theorem. In conclusion, we've just proved
+that a suggested family is really a universal family for
+integers, but now the important thing that integers are not unbounded
+on the integers from 0 to p- 1. So if you need to hash really,
+really big integers, you will need to select a prime number
+that is bigger, even bigger than the largest of those numbers and
+then you will get universal family for that prime number and
+it will work for your integers. We also proved in the previous
+video the upper bound for expected chain length using universal
+family and constant amortized expected running time of operations with hash
+table, also provided in the last lecture. So now we have the whole picture. We have a universal family for integers. And we have proofs that if
+you use a universal family, that your operations work fast. So now we are confident that if
+you use the suggested family for integers, then the operations
+with the hash tables storing those integers will run fast in practice,
+at least on average.

@@ -1,0 +1,104 @@
+Okay, when merging two trees we're going
+to hang the shorter one under the root of a taller one. This means that when
+merging two trees we need a way to quickly find
+the height of both trees. Instead of just computing them we're
+going to keep the height of each possible subtree in our forest
+in a separate array called rank. Name the rank of i is equal to
+the height of the subtree rooted at i. The reason we call it rank will
+become clear a little bit later. Let me also mention that this
+way of merging two trees, based on the height is called
+the union by rank heuristic. To keep the rank, we need a small
+addition to our MakeSet implementation, namely when creating a single set,
+we also set rank of i to be equal to zero. This reflects the fact that it is
+currently just a root containing one node, that just a tree containing one node,
+that is a tree of height zero. We do not need to change Find. So the Find operation doesn't
+need to change rank, and it also doesn't use rank in any way. To merge two trees containing the given
+two elements i and j, we do the following. We first find the roots of the point
+in two trees by calling the Find operation two times. We store this root in variables i_id and
+j_id. We then check whether
+i_id is equal to j_id. If they are equal,
+this means that elements i and j already lie in the same set. So we just return in this case. So this is done in the following if loop. We then check whether the height
+of the tree containing element i is larger than the height of
+the tree containing element j. If it is larger,
+then we hang the tree with the root j_id, and this root of element i_id. This is done as follows. Parent of j_id is set to i_id. Otherwise, we do the opposite thing. We just assigned parent of
+i_id to be equal to j_id. So the last thing is that
+we need to check whether the height of the corresponding
+two threes are just equal. Let me illustrate this
+again with a small example. Assume that we are merging
+the following two trees. In this case the height
+of these two elements and this element is zero and
+this height of this element is 1. So in this case roots are equal. The ranks of the corresponding
+roots are equal. To merge these two trees
+we do the following. We just hang the left tree under
+the root of the right tree. If you can see, in this case, the height of the resulting tree actually
+increases and this is the only case when the union operation
+increases the height of this tree. So in this case, initially,
+the longest path contained just one edge. In this case we go the path
+that can contain two edges. So we need to update this rank and
+this is done in the last check. So if initially the ranks of our two
+trees that are going to be merged are equal we hang one of them under
+the root of the other one and increase the rank of
+the resulting tree by one. Let's consider a small example,
+in this case we have six elements. Let's call MakeSet for
+each of these elements. These fields have a data
+structure as follows. So currently,
+each element is its own parent, right? So its current set is
+just a single one set. Also, the height of each sub-tree in our
+data structure is currently equal to 0. Now let's call Union(2,4). In this case, the rank of the subtree
+rooted at 2 is equal to 0. The height of the subtree
+rooted at 4 is equal to 0. So it doesn't mean which one to hang
+under the root of the other one, so let's hang 2 under 4. This changes the data
+structure as follows. Now it's a parent of 2 is 4 and the rank of the subtree
+rooted at 4 is equal to 1. Okay, now let's call Union(5,2). In this case the height of the tree that contains the element
+number 2 is equal to 1, right? While the height of the tree that
+contains element number 5 is equal to 0. So, in this case we're
+going to hang 5 under 4. We do this as follows. So, this change the data structure,
+only this changes only this cell. So now 4 is the parent of 5, and it doesn't change any rank in
+our sub tree, in our forest. Okay, now lets call Union(3,1). This is done as follows,
+now 1 is rank 1, and now the parent of 3 is equal to 1, okay? Now, let's call Union(2,3),
+and again, in this case, 2 lies in a set in the tree whose root is 4. And currently,
+the rank of 4 is equal to 1. Also, 3 lies in a set whose root is 1. And currently, rank of 1 is equal to 1. Which means that after merging these two
+trees we will get a tree of height 2. So we do this as follows, now 1 is
+the root of the resulting tree and its rank is equal to 2. Finally we call Union(2,6) and
+this will just attach 6 to 1, as follows. In our current implementation, we maintain
+the following important invariant. At any point of time and for
+any node i, rank of i is equal to the height of the subtree
+rooted at this node, i, right? We will use this invariant to
+prove the following lemma. The height of any tree in our forest
+is at most binary logarithm of n. This will immediately imply that
+the running time of all operations with our data structure is
+at most logarithmic, right? To prove this lemma we will prove
+another lemma shown here on this slide. We're going to prove that if we have
+a tree in our forest whose height is k then this tree contains
+at least two to the k nodes. This will imply the first
+lemma as follows. I assume that some tree
+has height with more, strictly greater than
+binany logarithm of n. Using the second lemma it
+will be possible to show then that this tree contains more than n nodes,
+right? Which would lead to a contradiction
+with the fact that we only have n objects in our data structure. Here we are going to prove
+the second lemma by induction on k. Recall that we proved
+that any tree of height k in our forest contains at
+least 2 to the k nodes. We're going to prove
+this by induction on k. When k is equal to zero this means
+that we have a tree just of height 0, which means that it
+contains just one node. So, in this case,
+the statement clearly holds. Now, to prove the induction step, let's
+recall that the only way to get a height, to get a tree of height k, is to merge
+two trees, whose height is equal to k- 1. I mean to merge both trees such that
+the height of the first tree is equal to k- 1 and the height of
+the second tree is equal to k-1. By the induction hypothesis
+the both of these two trees contain at least 2 to the k-1 node. Which means that our
+resulting tree contains at least 2 to the k- 1
++ 2 to the k- 1 nodes, which is exactly equal to 2 to the k,
+right? Which means that the lemma is proved. To conclude,
+the running time of both Union and Find operations in our current
+implementation is at most logarithmic. Why is so? Well, just because we keep
+our trees shallow, so that the height of any tree in our
+forest is at most logarithmic. This immediately implies the time of any Find operation is also
+big O of logarithm of n. Recall also that the Union operation
+consists of two calls to the Find operation and
+also a few constant time operations, which means also that the running
+time of Union is also big O of log n. In the next video, we will see another
+beautiful heuristic which will just decrease the running time of both
+these operations to nearly a constant.

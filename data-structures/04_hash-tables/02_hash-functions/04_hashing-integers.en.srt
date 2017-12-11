@@ -1,0 +1,581 @@
+1
+00:00:00,200 --> 00:00:01,700
+Hi, in the previous video,
+
+2
+00:00:01,700 --> 00:00:06,590
+you've learned the concept of universal
+family of hash functions and you learned
+
+3
+00:00:06,590 --> 00:00:10,040
+how to use it to make operations
+with your hash table really fast.
+
+4
+00:00:11,070 --> 00:00:15,850
+However, now we need to actually
+build a universal family and you will
+
+5
+00:00:15,850 --> 00:00:21,070
+start with a universal family for the most
+important object which is integer number.
+
+6
+00:00:21,070 --> 00:00:25,819
+Because any object on your computer
+is represented as a series of bits or
+
+7
+00:00:25,819 --> 00:00:30,263
+bytes, and so you can think of it
+as a sequence of integer numbers.
+
+8
+00:00:30,263 --> 00:00:36,080
+And so first, we need to learn
+to hash integers efficiently.
+
+9
+00:00:36,080 --> 00:00:39,530
+So we will build a universal family for
+hashing integers.
+
+10
+00:00:39,530 --> 00:00:43,410
+But we will look at our example
+with phone numbers because
+
+11
+00:00:43,410 --> 00:00:46,630
+we need to store contacts in our phone.
+
+12
+00:00:46,630 --> 00:00:51,030
+So first, we will consider only phone
+numbers up to length seven and for
+
+13
+00:00:51,030 --> 00:00:56,160
+example we will consider
+phone number 148-2567.
+
+14
+00:00:56,160 --> 00:01:00,089
+And again,
+we'll convert all of those phone numbers,
+
+15
+00:01:00,089 --> 00:01:05,782
+we want to start from integers from zero
+to the number consisting of seven nines.
+
+16
+00:01:05,782 --> 00:01:10,559
+And for example, our selected phone number
+
+17
+00:01:10,559 --> 00:01:14,826
+will convert to 1,482,567.
+
+18
+00:01:14,826 --> 00:01:20,793
+And then we will hash those integers
+to which we convert our phone numbers.
+
+19
+00:01:20,793 --> 00:01:25,547
+So to hash them, we will need to
+also choose a big prime number,
+
+20
+00:01:25,547 --> 00:01:28,507
+bigger than 10 to the power of 7, for
+
+21
+00:01:28,507 --> 00:01:33,290
+example, 10,000,019 is
+a suitable prime number.
+
+22
+00:01:33,290 --> 00:01:37,508
+And we will also need to choose the hash
+table size which is the same as
+
+23
+00:01:37,508 --> 00:01:40,618
+the chronology of the hash
+function that we need.
+
+24
+00:01:40,618 --> 00:01:48,122
+So now that we selected p and m, we
+are ready to define universal family for
+
+25
+00:01:48,122 --> 00:01:53,824
+integers between 0 and
+10 to the power of 7 minus 1.
+
+26
+00:01:53,824 --> 00:01:58,134
+So the Lemma says that the following
+family of hash functions is
+
+27
+00:01:58,134 --> 00:01:59,610
+a universal family.
+
+28
+00:02:00,820 --> 00:02:01,590
+What is this family?
+
+29
+00:02:01,590 --> 00:02:07,800
+It is indexed by p, p is the prime number,
+10,000,019, in this case that we choose.
+
+30
+00:02:09,750 --> 00:02:15,504
+And it also has parameters a and b,
+so those parameters are different for
+
+31
+00:02:15,504 --> 00:02:19,110
+different hash functions in these family.
+
+32
+00:02:19,110 --> 00:02:24,120
+Basically, if you fix a and b,
+you fix a hash function from
+
+33
+00:02:24,120 --> 00:02:29,241
+this hash functions family,
+calligraphic H with index p.
+
+34
+00:02:29,241 --> 00:02:35,960
+And x is the key, it is the integer
+number that we want to hash,
+
+35
+00:02:35,960 --> 00:02:40,236
+and it is required that x is less than p.
+
+36
+00:02:40,236 --> 00:02:44,042
+It is from 0 to p minus 1,
+or less than p minus 1, but
+
+37
+00:02:44,042 --> 00:02:46,950
+definitely, it is less than p.
+
+38
+00:02:46,950 --> 00:02:52,080
+So, to create a value of this
+
+39
+00:02:52,080 --> 00:02:57,890
+integer x with some hash function, we
+first make a linear transform of this x.
+
+40
+00:02:57,890 --> 00:03:02,213
+We multiply it by a, corresponding
+to this hash function, and add b,
+
+41
+00:03:02,213 --> 00:03:04,651
+corresponding to this hash function.
+
+42
+00:03:04,651 --> 00:03:08,340
+Then we take the result,
+modulo our big prime number p.
+
+43
+00:03:09,460 --> 00:03:15,030
+And after that, we again take the result
+modulo the size of our hash table or
+
+44
+00:03:15,030 --> 00:03:17,740
+the chronology of the hash
+functions that we need.
+
+45
+00:03:17,740 --> 00:03:23,560
+So all these hash functions indexed by
+a and b will have the same chronology m.
+
+46
+00:03:25,140 --> 00:03:30,620
+And the size of this hash family,
+what do you think it is?
+
+47
+00:03:31,630 --> 00:03:36,173
+Well, it is equal to b multiply
+by p minus 1, why is that?
+
+48
+00:03:36,173 --> 00:03:38,997
+Because there are p minus 1 variance for
+
+49
+00:03:38,997 --> 00:03:43,324
+a, and independently from that,
+there are p variance for b.
+
+50
+00:03:43,324 --> 00:03:48,745
+So the total number of pairs, a and
+b, is p multiplied by p minus 1,
+
+51
+00:03:48,745 --> 00:03:52,400
+that is the size of our universal family.
+
+52
+00:03:52,400 --> 00:03:56,593
+And the Lemma states that it really
+will be a universal family for
+
+53
+00:03:56,593 --> 00:03:58,932
+integers between 0 and p minus 1.
+
+54
+00:03:58,932 --> 00:04:04,120
+We will prove this Lemma in a separate,
+optional video.
+
+55
+00:04:04,120 --> 00:04:09,070
+And here, we'll look at an example
+of how this universal family works.
+
+56
+00:04:09,070 --> 00:04:15,742
+So, for example, we selected hash
+function corresponding to a = 34 and
+
+57
+00:04:15,742 --> 00:04:22,159
+b = 2, so this hash function
+h is h index by p, 34, and 2.
+
+58
+00:04:23,470 --> 00:04:27,398
+And we will compute the value
+of this hash function on number
+
+59
+00:04:27,398 --> 00:04:32,800
+1,482,567 because this integer
+
+60
+00:04:32,800 --> 00:04:39,430
+number corresponds to the phone number who
+we're interested in which is 148-2567.
+
+61
+00:04:39,430 --> 00:04:44,620
+Well, remember that p that we chose
+is a prime number 10,000,019.
+
+62
+00:04:44,620 --> 00:04:49,826
+So first,
+we multiply our number x by 34 and add 2,
+
+63
+00:04:49,826 --> 00:04:54,223
+and after that,
+we take the result modulo b,
+
+64
+00:04:54,223 --> 00:05:00,960
+modulo 10,000,019, and
+the result is 407,185.
+
+65
+00:05:00,960 --> 00:05:03,657
+Then we take this result and
+
+66
+00:05:03,657 --> 00:05:09,644
+take it again modulo 1,000,
+and the result is 185.
+
+67
+00:05:09,644 --> 00:05:16,070
+And so the value for our selected
+hash function on number x is 185.
+
+68
+00:05:16,070 --> 00:05:22,191
+And for any other number x, you would do
+the same, you would multiply x by 34,
+
+69
+00:05:22,191 --> 00:05:27,560
+add 2, take the result modulo b,
+then take the result modulo 1,000.
+
+70
+00:05:27,560 --> 00:05:34,130
+And so any value of our hash function is
+a number between 0 and 999 as we want.
+
+71
+00:05:35,950 --> 00:05:40,020
+And if we do different a and
+b, instead of 34 and 2,
+
+72
+00:05:40,020 --> 00:05:44,080
+we'll just multiply x by different a,
+add different b.
+
+73
+00:05:44,080 --> 00:05:51,246
+Take a modulo b, take the result modulo m,
+and get the value for our hash function.
+
+74
+00:05:51,246 --> 00:05:55,922
+So in the general case, when the phone
+numbers can be longer than seven,
+
+75
+00:05:55,922 --> 00:06:01,430
+we first define the maximum allowed
+length, L, of the phone number.
+
+76
+00:06:01,430 --> 00:06:06,010
+And again, convert all the phone numbers
+to integers which will derive from 0 to 10
+
+77
+00:06:06,010 --> 00:06:10,970
+to the power of L- 1, and
+then we'll hash those integers.
+
+78
+00:06:10,970 --> 00:06:13,910
+To hash those integers, we'll choose
+a sufficiently large number p,
+
+79
+00:06:13,910 --> 00:06:19,050
+p must be more than 10 to the power
+of L for the family to be universal.
+
+80
+00:06:19,050 --> 00:06:23,260
+Because otherwise, if we take some
+p less than 10 to the power of L,
+
+81
+00:06:23,260 --> 00:06:26,741
+there will exist two different
+integer numbers between 0 and
+
+82
+00:06:26,741 --> 00:06:31,630
+10 to the power of L- 1,
+which differ by exactly p.
+
+83
+00:06:31,630 --> 00:06:36,770
+And then, when we compute the value of
+some hash function on both those numbers
+
+84
+00:06:36,770 --> 00:06:40,315
+and we take linear
+transformation of those keys,
+
+85
+00:06:40,315 --> 00:06:44,990
+modulo b, the value of those
+transformations will be the same.
+
+86
+00:06:44,990 --> 00:06:49,570
+And then when we take, again, module m,
+the value again will be the same.
+
+87
+00:06:49,570 --> 00:06:53,960
+And that means that for
+any hash function from our family,
+
+88
+00:06:53,960 --> 00:06:58,380
+the value of its function on
+these two keys will be the same.
+
+89
+00:06:58,380 --> 00:07:01,950
+So there will be a collision for
+any hash function from the family, but
+
+90
+00:07:01,950 --> 00:07:04,330
+that contradicts the definition
+of universal family.
+
+91
+00:07:04,330 --> 00:07:09,230
+Because for a universal family and for
+two fixed different keys, no more than
+
+92
+00:07:09,230 --> 00:07:14,310
+1 over m part of all hash functions
+can have collision for these two keys.
+
+93
+00:07:14,310 --> 00:07:17,590
+And in our case, all hash functions
+have a collision for these two keys, so
+
+94
+00:07:17,590 --> 00:07:20,250
+this is definitely not a universal family.
+
+95
+00:07:20,250 --> 00:07:24,270
+So we must take p more than
+10 to the power of L, and
+
+96
+00:07:24,270 --> 00:07:26,080
+in fact, that is sufficient.
+
+97
+00:07:26,080 --> 00:07:29,370
+Then, we choose hash table of size m, and
+
+98
+00:07:29,370 --> 00:07:35,080
+then we use our universal family,
+calligraphic H with index p.
+
+99
+00:07:35,080 --> 00:07:39,140
+We choose a random hash function from this
+universal family, and to choose a random
+
+100
+00:07:39,140 --> 00:07:43,250
+hash function from this family, we need
+to actually choose two numbers, a and b.
+
+101
+00:07:43,250 --> 00:07:47,441
+And a should be a random
+number between 1 and p-1,
+
+102
+00:07:47,441 --> 00:07:52,405
+and b should be an independent
+random number from 0 to p-1.
+
+103
+00:07:52,405 --> 00:07:57,250
+If we selected those two numbers,
+we define our hash function completed.
+
+104
+00:07:58,780 --> 00:08:02,812
+So now we know how to solve
+the problem of phone book
+
+105
+00:08:02,812 --> 00:08:06,566
+in the direction from
+phone numbers to names.
+
+106
+00:08:06,566 --> 00:08:10,813
+So we first define the longest
+allowed length of the phone number.
+
+107
+00:08:10,813 --> 00:08:15,722
+We convert all the phone numbers
+to integers from 0 to 10
+
+108
+00:08:15,722 --> 00:08:17,635
+to the power of L -1.
+
+109
+00:08:18,970 --> 00:08:22,630
+We choose a big prime number,
+bigger than 10 to the power of L.
+
+110
+00:08:22,630 --> 00:08:27,450
+We choose the size of the hash table
+that we want based on the techniques
+
+111
+00:08:27,450 --> 00:08:32,090
+you learned in the previous video and
+then you add
+
+112
+00:08:32,090 --> 00:08:37,590
+the context to your phone book
+as a hash table of size m.
+
+113
+00:08:37,590 --> 00:08:42,768
+Hashing them by a hash function
+randomly selected from
+
+114
+00:08:42,768 --> 00:08:47,840
+the universal family,
+calligraphic H with index p.
+
+115
+00:08:47,840 --> 00:08:51,587
+And that is the solution in the direction
+from phone numbers to names.
+
+116
+00:08:51,587 --> 00:08:56,387
+This solution will take bit of m memory,
+and you can control for m,
+
+117
+00:08:56,387 --> 00:09:01,017
+and it will work on average in
+constant time if you select m wisely
+
+118
+00:09:01,017 --> 00:09:04,470
+using the techniques
+from the previous video.
+
+119
+00:09:05,700 --> 00:09:09,550
+And now we also need to solve our phone
+book problem in the different direction,
+
+120
+00:09:09,550 --> 00:09:11,740
+from names to phone numbers.
+
+121
+00:09:11,740 --> 00:09:13,635
+And that we will do in the next video.

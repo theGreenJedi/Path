@@ -1,0 +1,608 @@
+1
+00:00:00,260 --> 00:00:04,910
+Hi, in this video we will study another
+approach to the IP addresses problem.
+
+2
+00:00:04,910 --> 00:00:08,497
+In the last video we understood that
+the direct addressing scheme sometimes
+
+3
+00:00:08,497 --> 00:00:09,792
+requires too much memory.
+
+4
+00:00:09,792 --> 00:00:11,100
+And why is that?
+
+5
+00:00:11,100 --> 00:00:13,250
+Because it tries to store something for
+
+6
+00:00:13,250 --> 00:00:18,720
+each possible IP address while we're only
+interested in the active IP addresses.
+
+7
+00:00:18,720 --> 00:00:23,470
+Those from which at least some user has
+accessed our service during the last hour.
+
+8
+00:00:23,470 --> 00:00:26,510
+So the first idea for
+improvement of the memory consumption
+
+9
+00:00:26,510 --> 00:00:30,890
+is let's just store the active IP's and
+nothing else.
+
+10
+00:00:30,890 --> 00:00:35,390
+Another idea is that if our error based
+approach from the last video has failed,
+
+11
+00:00:35,390 --> 00:00:38,240
+then lets try to use
+list instead of an error.
+
+12
+00:00:38,240 --> 00:00:42,390
+So let's store all the IP addresses
+which are active in a list.
+
+13
+00:00:42,390 --> 00:00:44,270
+Sorted by the time of access.
+
+14
+00:00:44,270 --> 00:00:48,370
+So that the first element in the list
+corresponds to the oldest access time
+
+15
+00:00:48,370 --> 00:00:52,600
+during the last hour, and the last element
+in the list corresponds to the latest,
+
+16
+00:00:52,600 --> 00:00:56,900
+newest access from some IP
+address to our service.
+
+17
+00:00:56,900 --> 00:01:01,160
+Let's jump from here right into the pseudo
+code, because it's pretty simple.
+
+18
+00:01:01,160 --> 00:01:04,970
+We're going to have our procedure
+update access list which takes in
+
+19
+00:01:04,970 --> 00:01:06,590
+the log file log.
+
+20
+00:01:06,590 --> 00:01:10,330
+It also takes in i which
+is the index of the first
+
+21
+00:01:10,330 --> 00:01:13,220
+log line which hasn't been processed yet.
+
+22
+00:01:13,220 --> 00:01:16,114
+And also it has input L
+which is the list and
+
+23
+00:01:16,114 --> 00:01:20,916
+instead of some abstract data structure
+see from the first videos and
+
+24
+00:01:20,916 --> 00:01:24,908
+instead of the area a from
+the direct addressing scheme.
+
+25
+00:01:24,908 --> 00:01:29,234
+We put parameter L which is
+a list into this procedure and
+
+26
+00:01:29,234 --> 00:01:33,120
+this is the list with active IP addresses.
+
+27
+00:01:33,120 --> 00:01:38,200
+So our code have to pass first deals with
+new lines and second deals with old lines.
+
+28
+00:01:38,200 --> 00:01:42,426
+We just go searching from
+the first unprocessed line.
+
+29
+00:01:42,426 --> 00:01:47,010
+And if we need to added to our
+list because it was processed
+
+30
+00:01:47,010 --> 00:01:52,090
+during the last hour,
+we just append it to the end of the list.
+
+31
+00:01:52,090 --> 00:01:56,350
+And now again, the last element of
+the list corresponds to the latest,
+
+32
+00:01:56,350 --> 00:01:59,150
+newest access from some IP address.
+
+33
+00:01:59,150 --> 00:02:03,450
+And note that in our list we will
+start not just the IP address but,
+
+34
+00:02:03,450 --> 00:02:05,900
+both IP address and the time of the axis.
+
+35
+00:02:07,470 --> 00:02:12,176
+And then we will go to the next element
+in the log file and go and go while we
+
+36
+00:02:12,176 --> 00:02:16,584
+still have some log lines which we
+need to add to the end of our list.
+
+37
+00:02:16,584 --> 00:02:22,499
+And then the second part we just look at
+the oldest event during the last hour,
+
+38
+00:02:22,499 --> 00:02:27,680
+which is corresponding to
+the first element of the list.
+
+39
+00:02:27,680 --> 00:02:31,590
+And if that is actually before
+the start of the last hour,
+
+40
+00:02:31,590 --> 00:02:33,250
+then we need to remove it from the list.
+
+41
+00:02:33,250 --> 00:02:35,420
+And so we just do L.Pop.
+
+42
+00:02:35,420 --> 00:02:38,529
+And we do that while the head
+of the list is still too old.
+
+43
+00:02:39,570 --> 00:02:45,320
+And when we stop, it means that all
+the elements in the list are actually
+
+44
+00:02:45,320 --> 00:02:47,360
+with time during the last hour.
+
+45
+00:02:47,360 --> 00:02:48,110
+Why is that?
+
+46
+00:02:48,110 --> 00:02:55,130
+Because the list is always kept in
+the order by increasing time of access.
+
+47
+00:02:55,130 --> 00:02:57,757
+When we add new log lines to the list.
+
+48
+00:02:57,757 --> 00:03:01,694
+We add only those which have time even
+more than last element of the list
+
+49
+00:03:01,694 --> 00:03:04,640
+currently, and
+we remove something from the list.
+
+50
+00:03:04,640 --> 00:03:06,820
+We remove the oldest entries.
+
+51
+00:03:06,820 --> 00:03:10,640
+So, all the entries are always sorted,
+and as soon as we removed everything from
+
+52
+00:03:10,640 --> 00:03:15,720
+the start which is too old, all
+the entries in the list are not too old.
+
+53
+00:03:15,720 --> 00:03:17,970
+They are made during the last hour.
+
+54
+00:03:19,120 --> 00:03:23,311
+So this is pretty simple and now we need
+to answer questions like, whether my IP
+
+55
+00:03:23,311 --> 00:03:28,330
+address was used during the last hour to
+access the service and how many times.
+
+56
+00:03:28,330 --> 00:03:30,320
+To answer the first one we just need to
+
+57
+00:03:31,400 --> 00:03:36,930
+find out whether there is an element
+in our list with the given IP address.
+
+58
+00:03:36,930 --> 00:03:41,980
+And that is done by find by ID,
+which is different from the standards
+
+59
+00:03:41,980 --> 00:03:48,330
+find procedure of the least by the fact
+that we search not by the whole object,
+
+60
+00:03:48,330 --> 00:03:51,890
+which is a log line,
+which contains both IP address and time.
+
+61
+00:03:51,890 --> 00:03:55,610
+But we search just by the first field,
+by the IP address.
+
+62
+00:03:55,610 --> 00:04:00,320
+So our list contains
+tuples of IP addresses and
+
+63
+00:04:00,320 --> 00:04:04,270
+times of access, and
+we only look by IP address.
+
+64
+00:04:04,270 --> 00:04:06,390
+But the implementation will be the same.
+
+65
+00:04:06,390 --> 00:04:10,660
+We'll just go from the head of
+the list to the end of the list, and
+
+66
+00:04:10,660 --> 00:04:17,180
+compare the IP field of the log lines
+with the IP address given as the input.
+
+67
+00:04:17,180 --> 00:04:20,050
+And if it coincides we
+will return this element,
+
+68
+00:04:20,050 --> 00:04:24,751
+otherwise we'll return that there is
+nothing with this IP address in the list.
+
+69
+00:04:24,751 --> 00:04:27,707
+And the reason we return
+some special [INAUDIBLE].
+
+70
+00:04:27,707 --> 00:04:31,910
+So then, in the AccessedLastHour,
+just compare the results with null.
+
+71
+00:04:31,910 --> 00:04:35,670
+If it's not null then this IP address
+is in the list, otherwise it's not.
+
+72
+00:04:36,860 --> 00:04:39,220
+And to count the number of times
+
+73
+00:04:40,350 --> 00:04:44,740
+our service was accessed from
+a particular IP address, we just need to
+
+74
+00:04:44,740 --> 00:04:49,260
+count the number of log lines in
+the list which have the same IP address.
+
+75
+00:04:49,260 --> 00:04:53,040
+And that can be done by procedure
+CountIP of the list which
+
+76
+00:04:53,040 --> 00:04:56,790
+again differs from the standard count
+procedure in the list by the fact that it
+
+77
+00:04:56,790 --> 00:05:02,310
+counts by the first field, not by
+the whole object which is a log line.
+
+78
+00:05:02,310 --> 00:05:05,820
+But it just goes from
+to the end of the list.
+
+79
+00:05:05,820 --> 00:05:10,880
+Compares the IP field with
+the given IP and if they coincide,
+
+80
+00:05:10,880 --> 00:05:12,480
+it increases the counter by 1.
+
+81
+00:05:12,480 --> 00:05:15,580
+And returns the counter in the end.
+
+82
+00:05:15,580 --> 00:05:17,380
+So this is all the implementation.
+
+83
+00:05:17,380 --> 00:05:19,190
+Now let's analyze it.
+
+84
+00:05:19,190 --> 00:05:22,450
+Let N be the number of
+currently active IPs,
+
+85
+00:05:22,450 --> 00:05:25,090
+then the memory consumption
+is bigger of N.
+
+86
+00:05:25,090 --> 00:05:29,807
+Because we only store the active IP
+addresses and the corresponding times
+
+87
+00:05:29,807 --> 00:05:34,462
+of X's, but the times of X's on the add
+constant memory per active IPs.
+
+88
+00:05:34,462 --> 00:05:38,935
+So it's all null linear in the number
+of active IPs which is much better than
+
+89
+00:05:38,935 --> 00:05:42,985
+the direct addressing scheme because
+it require an amount of memory
+
+90
+00:05:42,985 --> 00:05:46,630
+proportionally to the number
+of all possible IP addresses.
+
+91
+00:05:46,630 --> 00:05:50,200
+And here will only require amount
+memory proportional to the number of
+
+92
+00:05:50,200 --> 00:05:52,130
+currently active IP addresses.
+
+93
+00:05:52,130 --> 00:05:53,510
+What about running time?
+
+94
+00:05:53,510 --> 00:05:57,362
+We know the standards list
+procedures such as Append, Top and
+
+95
+00:05:57,362 --> 00:05:59,436
+Pop all working constant time and
+
+96
+00:05:59,436 --> 00:06:03,901
+that's why the UpdateAccessList
+works in constant time per log line.
+
+97
+00:06:03,901 --> 00:06:08,414
+Of course, any particular call to
+UpdateAccessList could take more than
+
+98
+00:06:08,414 --> 00:06:12,851
+constant number of operations if we
+need to add more new lines to the end of
+
+99
+00:06:12,851 --> 00:06:17,350
+the list or remove many many old
+lines from the start of the list.
+
+100
+00:06:17,350 --> 00:06:21,164
+But for each log line we will
+only append it at most once and
+
+101
+00:06:21,164 --> 00:06:24,758
+we will only removed from
+the beginning at most once.
+
+102
+00:06:24,758 --> 00:06:28,978
+So it's constant time per log line
+plus constant time per each call of
+
+103
+00:06:28,978 --> 00:06:33,346
+UpdateAccessList just to check whether
+we need to append something and
+
+104
+00:06:33,346 --> 00:06:36,860
+whether we need to remove
+something from the beginning.
+
+105
+00:06:36,860 --> 00:06:40,450
+But this amount of operations
+can be controlled by how
+
+106
+00:06:40,450 --> 00:06:42,860
+often do we actually
+call Update Access List.
+
+107
+00:06:44,020 --> 00:06:46,230
+What about answering the questions?
+
+108
+00:06:46,230 --> 00:06:47,788
+We know that Find By IP and
+
+109
+00:06:47,788 --> 00:06:52,697
+Count IP have to go through the whole list
+in the worst case and actually count.
+
+110
+00:06:52,697 --> 00:06:57,541
+IP has to go through the whole list
+all the time to find out how many
+
+111
+00:06:57,541 --> 00:07:02,566
+log lines have the same IP as the given
+one and so AccessLastHour and
+
+112
+00:07:02,566 --> 00:07:08,220
+AccessCountLastHour are both linear
+in the number of active IPs.
+
+113
+00:07:08,220 --> 00:07:11,860
+And that is actually now good
+because even without introducing
+
+114
+00:07:11,860 --> 00:07:15,110
+any additional data structures,
+we could just take the log file,
+
+115
+00:07:15,110 --> 00:07:20,030
+take the last line in it before
+the current time, and go back from it.
+
+116
+00:07:20,030 --> 00:07:22,880
+And just look through each log line and
+
+117
+00:07:22,880 --> 00:07:26,750
+compare its IP address with
+the IP address in the question.
+
+118
+00:07:26,750 --> 00:07:29,710
+And count how many times it
+occurs during the last hour and
+
+119
+00:07:29,710 --> 00:07:35,620
+just stop as soon as we go through
+the border of the last hour.
+
+120
+00:07:35,620 --> 00:07:38,569
+And that will take the same time
+without any additional data structure.
+
+121
+00:07:38,569 --> 00:07:41,870
+So this solution is not more
+clever than the trio approach.
+
+122
+00:07:43,030 --> 00:07:46,400
+So, we failed somewhat with
+direct addressing scheme and
+
+123
+00:07:46,400 --> 00:07:49,680
+we failed with this list based approach.
+
+124
+00:07:49,680 --> 00:07:52,320
+It is overall a failure?
+
+125
+00:07:52,320 --> 00:07:56,695
+Well no, in the next videos we'll
+combine the ideas from direct
+
+126
+00:07:56,695 --> 00:08:00,110
+addressing scheme with
+the list based approach.
+
+127
+00:08:00,110 --> 00:08:04,614
+And we'll come up with solution which is
+both good in terms of memory consumption
+
+128
+00:08:04,614 --> 00:08:08,734
+and is much faster than the trivial
+approach in terms of the running time.

@@ -1,0 +1,103 @@
+In this video, we are going to refine
+our analysis of the BuildHeap procedure. Recall that we estimated the running time
+of the BuildHeap procedure as n log n, because it consists actually of roughly
+n over 2 calls to SiftDown procedure, whose running time is log n. So we get n and over 2 multiplied by
+log n, which is of course O(n log n). Note, however, the following thing. If we call SiftDown for a node which
+is already quite close to the leaves, then the running time of sifting
+it down is much less than log n. Right? Because it is already close to the root. So the number of swaps until
+it goes to the leaves cannot be larger than the height of
+the corresponding subtree, okay? Note also the following thing. We actually, in our tree, we actually have
+many nodes that are close to the root. So we have just one node, which is
+exactly the root, whose height is log n. We have two nodes whose
+height is log n minus 1, we have four nodes whose height
+is log n minus 2, and so on. And we have roughly n over 4
+nodes whose height is just 1. Okay? So it raises the question whether
+our estimate of the running time of BuildHeap procedure
+was too pessimistic. We will see on the next slide. Let's just estimate the running
+time of the BuildHeap procedure a little bit more accurately. Okay, so this is our heap,
+shown schematically. So this is the last level,
+which is probably not completely filled. But all the leaves on the last
+level are in leftmost position. So, on the very top level,
+we have just one node, and sifting down this node
+costs logarithmic time. At the same time, on the last level,
+we have at most n over 2 nodes, and sifting them down
+makes at most one swap. Actually, we do not need even one swap,
+just zero swaps, but let's be just generous enough and
+let's allow one swap. On the next level,
+we have at most n over 4 nodes, and sifting down for
+them costs at most two swaps, and so on. So if we just compute
+the sum of everything, so we have n over 2 nodes, for which the cost of
+the SiftDown procedure is 1. We have n over 4 nodes on the next level,
+for which sifting them down
+makes at most two swaps. On the next level, we have n over 8. Now it's, for each, sifting them down
+costs at most three swaps, and so on. So now let's do the following. Let's just upper bound this
+sum by the following sum. First of all, let's take
+the multiplier n out of this sum. So what is left here is the following, 1 over 2 + 2 over 4 + 3 over 8 + 4 over 16 + 5 over 32, and so on, right? So this can be upper-bounded
+by the following sum. So this is just the sum
+from i equal to 1 to infinity of the following fraction,
+i divided by 2 to the i. Once again, in our case, in the running
+time of BuildHeap, this sum is finite. So the maximum value of i is log n. We do not have any nodes on
+height larger than log n. But we just upper-bound
+it by an infinite sum, where we can see they're just
+all possible values of i. And even for this sum, we will show that
+the value of this sum is equal to 2. Which gives us that the running time of
+the BuildHeap procedure is actually at most 2n. To estimate the required sum, we start
+with a simpler and more well-known sum. So this is given by the following picture,
+and the sum is given here. So 1 over 2 + 1 over 4 + 1
+over 8 + 1 over 16 and so on. It is equal to 1. And this can be proved
+geometrically as follows. Consider a segment of length 1. Now, above the segment,
+let's draw a segment of size 1 over 2, of length 1 over 2. Okay? This is half of our initial segment. What remains is also
+a segment of size one-half. So when we add a segment of size 1 over 4 here, we actually get 2 times closer
+to this vertical line, right? When we add the next one,
+1 over 8, we get, again, 2 times closer than we were before adding
+this segment to this vertical line. When we add 1 over 16,
+again, our current distance to the vertical line is 1 over 16,
+and so on. So if we go to infinity, we get infinitely closer
+to this vertical line, which means that this sum is equal to 1. Now, what about the sum
+that we need to estimate? Well, to estimate it, let's first
+do the following strange thing. Let's consider all
+the segments shown above, and let's adjust them by their right end. So consider the segment 1 shown here. Now consider the segment
+of length 1 over 2, the segment of length 1 over 4,
+the segment of length 1 over 8, and so on. So we continue this process to infinity. And we know that the sum of the lengths
+of all these segments is equal to 2, of course. Now, why we're doing this? Well, for the following reason. First, consider the following
+vertical lines. What we need to estimate
+is the following sum, 1 over 2 + 2 over 4 + 3 over
+8 + 4 over 16 and so on. Let's see, so
+this is a segment of size 1 over 2, okay. This is two segments of size 1 over 4,
+okay. So this is three segments of
+length 1 over 8, and so on. So if we put another vertical line, we will get four segments of
+size 1 over 16, and so on. So if we do this to infinity, we will
+cover all our segments that are shown here, which proves that
+this sum is equal to 2. Which in turn proves that
+the running time of our BuildHeap procedure is actually just linear,
+it is bounded above by 2n. Our new estimate for the running time of
+the BuildHeap procedure does not actually improve the running time
+of the HeapSort algorithm. Because the HeapSort algorithm first
+builds a heap, and now we know that it can be done in linear time, but then we
+need to extract max n minus 1 times. So we still have n log n time, and actually we cannot do better
+than n log n asymptotically. We already know this, because it
+is a comparison-based algorithm. However, this helps to solve a different
+problem faster than naively. So assume that we're given array and we're given a parameter k,
+which is an integer between 1 and n. And what we would like to do is
+not to sort the given array, but to find the k largest
+elements in this array. Or put it otherwise, we need to output the last k elements
+from the sorted version of our array. So using the new estimate for
+the BuildHeap procedure, we can actually solve this problem in
+linear time, when k is not too large. Namely, when k is at most
+big O(n) divided by log n. For example, if you have an array of
+size n, and you would like just to find square root of n largest elements, then
+you can solve this just in linear time. So you do not need to sort the whole array
+in time n log n to solve this problem. So linear time is enough to solve it. And this is how it can be done. Given an array A of size n and
+parameter k, you just build a heap out of a given array, and then you
+extract the maximum value k times. Right? So easy. The running time of this
+procedure is the following. First, you need to build a heap, so
+you spend a linear amount of work for this, then you need to
+extract max k times. For this, you spend k multiplied by log n. So if k is indeed smaller than n
+divided by log n, so let me write it. So if k is smaller than
+n divided by log n, then this is at most n. So the whole running
+time is at most linear. So to conclude,
+what we've presented here is a heap sort algorithm which actually
+sorts a given array in place without using any additional
+memory and in optimal time n log n. We also discussed that to build
+a heap out of a given array, it's actually enough to spend
+a linear amount of work.

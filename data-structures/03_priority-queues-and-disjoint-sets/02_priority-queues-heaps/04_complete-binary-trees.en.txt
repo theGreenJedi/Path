@@ -1,0 +1,93 @@
+Our goal in this video is
+to design a way of keeping the height of our binary max heap shallow. Well, what is a natural approach to
+create a tree out of n given nodes, whose height is as small as possible. Well, it is natural to require that all
+the levels are fully packed, right. This leads us to a notion
+of a complete binary tree. By definition a binary tree is called
+complete if all its levels are filled completely. Except possibly the last one where
+we require additionally that all the nodes at this last level
+are in left most positions. Let me illustrate this
+with a few small examples. So this is a complete binary tree. This is also a complete binary tree, and
+this is also a complete binary tree. So this is a binary complete tree too. And this is our first example of
+a binary tree which is not complete. Well it is not complete
+because on the last level the two nodes shown here are not
+in the left most positions. This is also not a complete binary tree. This binary tree is also not complete because well this child is missing here,
+right. And this is also an example of
+a binary tree which is not complete. The first advantage of complete
+binary trees is straightforward, and it is exactly what we need actually. Namely, the height of any complete binary
+tree with n nodes is O(log n). Intuitively, this is clear. A complete binary tree with n
+nodes has the minimum possible height over all binary trees with n nodes. Well, just because all the levels of
+this tree, except possibly the last one, are fully packed. Still let me give you a formal proof. Well, for
+this consider our complete binary tree and let me show a small example. So I assume that this is
+our complete binary tree. So in this case, n = 10 and
+the number of levels, l = 4. Well, let's first do the following thing,
+let's complete the last level. And let's denote the result in
+number of nodes by n prime. In this case in particular
+the number of nodes in the new tree is equal to 15. Well the first thing to note
+is that n prime is at most 2n. Well this is just because in such
+a tree where all levels including the last one are fully packed,
+the number of nodes on each level is equal to the number of nodes on
+all the previous levels minus one. Okay, so for example here the number
+of nodes on the last level is 8, and the number of nodes on
+all previous levels is 7. So we added at most seven vertices. Now, when we have such a tree where
+all the levels are packed completely, it is easy to relate the number of
+levels with the number of vertices. Namely with the number of nodes. Namely n prime = to 2 to the l- 1. This allows us to conclude that l
+= binary logarithm of n prime + 1. Now, recall that n prime is at most 2n,
+which allows us to write that l is at most binary logarithm of 2n + 1
+which is of course, O(log n). The second advantage of
+complete binary trees is not so straightforward, but
+fortunately it is still easy to describe. To explain it,
+let's consider again a toy example, I mean a complete binary tree
+shown here on this slide. Let's enumerate all its nodes
+going from top to down, and on each level from left to right. So this way the root receives number 1, to its children receive numbers 2 and
+3 and so on. So it turns out that such a
+numbering allows for each vertex, number i for example, to be specific,
+to compute the number of its parent and the numbers of each children using
+the following simple formulas. Once again, if we have a node number i, then its parent has
+number i divided by 2 and rounded down while its two children
+have numbers 2i and 2i + 1. To give a specific example,
+I assume that i = 4, which means that we are speaking
+about about this node. Then to find out the number of its parent, we need to divide i by 2, this gives us 2. And indeed, vertex number 2 is
+a parent of vertex number 4. While to find out the numbers
+of two children of this node, we need to multiply i by 2,
+this gives us this node and multiply i by 2 + 1 and
+this gives us this node. And these two nodes are indeed
+children of vertex number 4, right? And this is very convenient. This allows us to store the whole
+complete binary tree just in an array. So we do not need to store any links for each vertex to its parent and
+to its two children. So these links can be
+computed just on the fly. Again to give a concrete example, assume
+that we are talking about vertex number 3. So in this case i = 3. To find out the number of its parent,
+we just divide i by 2 and round down. So this gives us vertex number 1, and indeed vertex number 1 is
+a parent of the vertex number 3. And to find out the numbers
+of its two children, we just multiply i by 2 and
+also multiply i by 2 and add 1. This gives us, in this case,
+vertices number 6 and vertex number 7. So, and we know its indices in theory. Okay, we have just discussed two
+advantages of complete binary trees, and it would be too optimistic to expect that
+these advantages come to us at no cost. So we need to pay something, and our cost
+is that we need to keep the tree complete. Right, we need to ensure
+that at each point of time, our binary tree is complete. Well, to ensure this,
+let's just ask ourselves what operations change
+the shape of our tree. Essentially, these are only two
+operations, namely insert and extract max. So, two operations, sift up and sift down, they actually do not change
+the shape of the tree. They just swap some two
+elements inside the tree. Another operation which actually
+change the shape is remove an element, however, it does so
+by calling the ExtractMax procedure. So on the next slide we will explain
+how to modify our Insert and ExtractMax operations so that they
+preserve completeness of our tree. To keep a tree complete when we insert
+something into a complete binary tree, we just insert the new element, as a leaf, to the leftmost vacant
+position on the last level. Well, an example is given here. So, we insert element 30 just to the right
+of the last element on the last level. Okay, then we need to let this new element
+sift up so we perform a number of swaps. So 30 is swapped with 14,
+then still there is a problem, so 30 is greater than 29,
+so we swap it again. Okay, now the property of the heap
+is satisfied for all the edges. Well, when we need to
+extract the maximum value, recall that we first replace
+the root by some leaf. Well in this case,
+to keep the tree complete, let's just select the last
+leaf at the last level. In this case it is 14. So we'll replace 42 with 14,
+and then, again, perform a number of swaps required
+to satisfy the property of the heap. Okay, so in this case, 14 is swapped
+with 30, and then 14 is swapped with 29. This gives us a correct heap whose
+underlying tree is a complete binary tree. Well so far, so good, we now know how
+to maintain the tree complete and how to store it in an array. In the next video we will show
+the full pseudocode of the binary max heap data structure.

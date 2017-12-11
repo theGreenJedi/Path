@@ -1,0 +1,58 @@
+There is a way to make popping
+the back and adding before cheap. Our problem was that although
+we had a way to get from a previous element to the next element,
+we had no way to get back. And what a doubly-linked list says is,
+well, let's go ahead and add a way to get back. So we'll have two pointers,
+forward and back pointers. That's the bidirectional arrow
+we're showing here conceptually. And the way we would
+actually implement this is, with a node that adds an extra pointer. So we have not only a next pointer,
+we have a previous pointer. So this shows for
+example that the 10 element has a next pointer that points to 4 but
+a previous pointer that points to 7. So at any node we can either go forward or
+we can go backwards. So that means if we're trying to pop the
+back, that's going to work pretty well. What we're going to do is update the tail
+pointer to point to the previous element because again we ca get
+there in an O(1) operation. And then update its next pointer to be
+nil and then finally remove the node. So that's O(1). So if we have a doubly linked list it's
+slightly more complicated (our code) because we've got to make sure to manage both
+prev pointers as well as next pointers. So if we're pushing something in the back,
+we'll allocate a new node. If the tail is nil, which means it's
+empty, then we just have a single node whose prev and next pointers are both nil
+and then head and tail both point to it. Otherwise, we need to 
+update the tail's next pointer for this new node,
+because we're pushing at the end and then go update the prev pointer of this
+new node to point to the old tail and then finally update the tail
+pointer itself. Popping the back,
+also pretty straightforward. We're going to again check to see whether
+this is first an empty list, in which case it's an error. A list with only one element,
+in which case it's simple. Otherwise we're going to go ahead and update our tail to be the prev tail,
+and the next of that node to be nil. Adding after, fairly simple again we just
+need to maintain the prev pointer but adding before also now works in
+the sense that we can allocate our node, our new node and its prev pointer will be the prev pointer
+of the existing node we're adding before. We splice it in that way and then we'll update the next pointer of that
+previous node to point to our new node. And finally,
+just in case we're adding before the head, we need to update the head. So in a singly-linked list,
+we saw the cost of things. Working with the front
+of the list was cheap, working with the back of the list
+with no tail, was all linear time. If we added a tail,
+it was easy to push something at the end, easy to retrieve something at the end,
+but hard to remove something at the end. By switching to a doubly linked list, removing from the end (a PopBack)
+becomes now an O(1) operation, as does adding before which used
+to be a linear time operation. One thing to point out as we
+contrast arrays versus linked lists. So in arrays, we have random access, in a sense that it's constant
+time to access any element. That makes things like
+a binary search very simple, where we start searching in the middle,
+and then tell (if we have a sorted array), and then can decide which
+side of the array we're on. And then, go to one side or the other. For a linked list, that doesn't work. Finding the middle element
+is an expensive operation. because you've got to start either
+at the head or the tail and work your way into the middle. So that's an O(n) operation
+to get to any particular element. Big difference in between that and
+an array. However, linked lists are constant time
+to insert at or remove from the front, unlike arrays. What we saw in arrays,
+if you want to insert from the front, or remove from the front, it's going to take you
+O(n) time because you're going to have to move a bunch of elements. If you have a tail and doubly-linked, it is also constant time to
+work at the end of the list. So you can get at or remove from there. It's linear time to find
+an arbitrary element. The list element are not contiguous
+as they are in an array. You have separately allocated
+locations of memory and then there are pointers between them. And then, with a doubly-linked list
+it's also constant time to insert between nodes or to remove a node.

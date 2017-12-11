@@ -1,0 +1,105 @@
+Hello everybody. Welcome back. Today we're going to talk
+more about splay trees. In particular, we can tell how to implement your basic
+search tree operations using a splay tree. So remember, last time, we had this
+idea to design a binary search tree, where every time you queried a node,
+you brought it to the root. And we know that simple ways of
+doing this didn't quite work out so well, so we introduced the splay
+operation, which is a little bit better. Now, there's this problem with the splay
+operation that the way that the splay trees are built, you don't actually
+guarantee the tree is always balanced. Sometimes you'll end up
+with very unbalanced trees. And when that happens, your splay
+operation will actually be very slow because you have to sort of bring
+your node up to the root one or two steps at a time, and
+it will actually take a while. However, you'll note that if I have
+this long stretched out tree, and I splay this leaf all the way to the root,
+we have rearranged the tree, it's now a little bit more
+balanced than it was before. And so, when you use the splay
+operation rather than to sort of rotate to top operation, it's actually
+the case that you can't have a long sequence of expensive splay operations. Because every time you have
+an expensive splay operation, it will rebalance the tree and
+make it more balanced. And so, if you keep picking really
+unbalanced nodes, pretty quickly, the tree will balance itself out, and then you'll
+have nice, short login time operations. But this does mean that we're no
+longer dealing with worst case time. Well, we need to talk about amortized
+analysis, average case time. And the big theorem that we're not going
+to prove today is that the amortized cost of first doing O(D) work, and
+then splaying a node of depth D is actually O(log(n)), where n is
+the total number of nodes in the tree. And we'll prove this later, but using it,
+we can analyze our splay tree operations. And the basic idea is that,
+if you have to do a lot of work and then splay a very deep node, we're going
+to be able to pay for that work by the fact that the splay operation will
+rebalance our tree in some useful way. And that will pay for it and so
+amortized cost will only be O(log(n)). Okay, using this,
+how do we implement our operations? So a splay tree find is
+actually very simple. First we find the node in
+the way we normally would. We then splay the node that we found and
+then return it. Pretty simple. So how does the analysis work? Now the node, remember,
+might not be at small depth. It could be at depth D, or
+D could be as big as N. We then do O(D) work to find the node because that's how long
+a find operation takes. We then run a splay, so we did O(D) work,
+and then we splayed a node of depth D. And so the amortized cost is O(log(n)) for
+this operation, which is what we want. Now, the idea here is that you're paying
+for the work again of finding this N by splaying it back to the root
+to rebalance the tree. And so, if the node was really deep,
+you did do a lot of work. But you also did some
+useful rebalancing work, which means you're not going to
+have to keep doing a lot of work. Now, there's a very important
+point to note here, that it could be that we
+were doing this search, you fail to find a node with exactly
+that key that you were looking for. But when this happens, you still have to splay the closest
+node that you found in this operation. Because otherwise, what's happening
+is your operation did O(D) work, but since you're not doing a splay,
+there's nothing to amortize against. You actually just spent O(D) work. What you need to do is if you're doing
+this big, deep search, you have to pay for it by rebalancing the tree. And you have to, therefore, splay whatever node you found,
+even if it does not have the right key. Okay, so that's fine. Let's talk about Insert. Insert, it turns out, is also really easy. First, you insert a node in
+the same way that you would before. And that's O of depth much work. And then you run the splay tree find. You find the node again, and
+you splay it to the top. It all works. Now to get deletes to work, there's
+actually a pretty clever way to do it. If you splay your node and
+successor both to the top of the tree, you end up with this sort of
+third diagram in this picture. And you'll note that if we want
+to get rid of the red node, all we have to do is sort of promote the
+blue node, its successor, into its place. Because of the way this works out, the blue node will never have a left
+child, and things will just work. So the code for delete is you splay
+the successor of N to the root, you then splay N to the root, and then we just need
+to remove N and promote its successor. So we let L and R be the left and
+right children of N, and basically what we have to do is we need
+to make R to become L's new parent and L R's new child, and
+then set R to be the root of the tree. And once we've rearranged a few pointers,
+everything works. Now, there is one special case here, which is what if N is the largest key in
+the entire tree, there is no successor, you need to do something
+slightly different. I'll leave that to you to figure out. Finally, let's talk about
+the split operation. Now, the split is actually also
+very nice with splay trees. The point is there's one case
+where split entry is really easy. It's if the key at which you're
+supposed to split is right at the root. Because then all you need to do
+is you need to split things into two subtrees by just
+breaking them off the root. And so, but with the splay tree, it's really easy to make any
+node that we want be the root. So what we're going to do is we're going
+to do a search to find the place at which we are supposed to do our split. Take whatever node we found,
+splay it to the root, and then we're just going to break our tree
+into two pieces right at the root. So to see pseudocode for
+this, we're going to let N be what we find when we search for
+the x that we're trying to split at. We then Splay N to the root. Now if N's key is bigger than x,
+we have to cut off the left subtree. If the key is less than x,
+we cut off the right subtree. And if the key is actually equal to x,
+well, the x that we're trying to
+split is actually in the tree. So, I mean, you might do one, or the
+other, depending on if you actually want to keep the node in the tree, or
+maybe you want to throw it away, and we just want to return the left
+subtree and the right subtree. Now just to be clear, if we want to say,
+cut off the left subtree, all we have to do is we let L be the left child, and
+we just have to sort of break the pointer between our node and in its left child,
+so that they're now separate trees. And we just return L and
+N as the two roots. So that's how we do a split. To do a merge, we basically have
+to do the opposite of this. And the idea is that it's very easy to
+merge two trees together when you sort of have this element that's in between
+them right up there at the root. And once again, there's an easy
+way to do this with splay trees. You just find the largest element of
+the left subtree, you splay it to the top, and then just attach the right
+subtree as a child of that node. And then you're done. So, in summary, splay trees. Using this, we can perform actually
+all the operations that we wanted very simply in an O(log(n))
+amortized time per operation. And so
+this provides a very clean way to do this. We left out some things
+in the analysis though. So if you'd like to see
+really what the math behind how we can show all of these things work,
+please come back for the next lecture.

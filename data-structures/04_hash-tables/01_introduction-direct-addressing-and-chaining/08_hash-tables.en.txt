@@ -1,0 +1,80 @@
+Hi, in this video, we will finally
+start talking about hash tables. We will define what a hash table is and
+what we can do with it. In the last video,
+we've introduced the notion of map, and now we'll introduce a very similar and
+natural notion of a set. By definition, a set is a data structure
+which has at least three methods, to add an object to the set,
+to remove an object from the set, and to find out whether a given object
+is already in the set or not. One of the examples we already know very
+well, set of all IPs through which clients access to your service
+during the last hour. This is an example with which we've
+worked for the last few videos. Another example would be to store the set
+of all students currently on campus. And another one is to store all the key
+words of a given programming language so that we can quickly highlight them in
+the text editor, which you used to code. There are two ways to implement a set. One of them is when you already
+have an implementation of a map, you can base your implementation
+of set on the map. Basically, you can set a map from all
+the objects S that you need to store in the set to the set of values, V, which
+only contains two values, true and false. If the object is in the set, then the corresponding value
+to this object will be true. If the object is not in the set,
+it is either not in the map or the corresponding value to
+it in the map is false. But that is not a very efficient
+way because we will have to store twice as much objects and
+values as we need. And also,
+when we remove objects from the set, it will be hard to remove
+them from the map. We will probably have to store them with
+value false, so there's a better way. We can again use chaining. But instead of storing
+pairs of objects and corresponding values in the chains,
+we'll just store objects themselves. Let's see how can we
+implement that into the code. Again, we'll have a hash
+function from all the objects S to the set of integer
+numbers from 0 to m-1. We denote it by O and
+O' objects from the set S, and we initialize array A with an array of
+size m which consists of lists or chains. And each chain consists of object O. Initially all the chains are empty. When we need to find an object inside
+a set, we first compute the hash value of our object, we look at
+the corresponding cell in the array A. We take the list of objects from there,
+and then we go through the whole list and try to find object O there. If we find it, return true. Otherwise, return false because our
+object O can be only in the list corresponding to the cell in the array A,
+number h(O). To implement add, we again compute
+value of hash function on object O, we take the list
+corresponding to this cell. And we go through this list,
+if we find our object O on this list, then we don't need to do anything because
+our object O is already in the set. Otherwise, we append our object to the
+list corresponding to cell number h(O). To remove object from the set,
+we first try to find it in the set. If it's not in the set,
+initially we don't need to do anything. Otherwise, we again compute
+the hash value of our object, take the corresponding list, and
+erase our object from that list. So, now we are ready to
+say what is a hash table? A hash table is any
+implementation of a set or a map which is using hashing,
+hash functions. It can even not use chaining. There are different ways to use
+hash functions to store a set or a map in memory. But chaining is one of the most frequently
+used methods to implement a hash table. We have a few examples of hash
+tables already implemented and built in our standard library types and
+programming languages, for example. Set is implemented as unordered_set in
+C++, as HashSet in Java, as set in Python. And map is implemented as unordered_map
+in C++, as HashMap in Java, and as dict, or dictionary in Python. Why those types are called
+unordered in C++? You will learn in one of the next
+modules about data structures. For now, you just know that hash
+tables were already implemented in the main languages we used for
+the specialization. In conclusion,
+we've learned what is chaining. We've learned what is a hash table. And now we know that chaining is
+a technique that can be used to implement a hash table. We know that the memory consumptions for
+the chaining technique is big O(n + m) where n is the number of objects
+currently stored in the hash table. And m is the cardinality
+of the hash function. We also know that the operations with such
+a hash table implemented using chaining work in time c+1, where c is
+the length of the longest chain. Now the question is,
+how to make both m and c small? Why do we need that? Because we want both small memory
+consumption and fast operations. For example, if m is very big,
+then we can use direct addressing, or something like that. But for some universes,
+some sets of objects, we will use too much memory, or
+we will have just too much overhead on top of our O of n memory which is
+needed to store n objects, anyway. If n is small, but c is big, well that's one different match
+from the list based approach where we used only O of n memory to store
+the list, to store only the active IPs. But then we have to spend O of
+n time to actually look through all the list every time
+we want to make a query. So we want both m being
+relatively small and c. How can we do that? Well, we can do that based on a clever
+selection of a hash function, and we will discuss this topic
+in the next lessons.

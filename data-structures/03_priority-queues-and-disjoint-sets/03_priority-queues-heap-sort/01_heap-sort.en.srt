@@ -1,0 +1,764 @@
+1
+00:00:00,330 --> 00:00:06,360
+>> In this video we will use binary
+heaps to design the heap sort algorithm,
+
+2
+00:00:06,360 --> 00:00:11,290
+which is a fast and
+space efficient sorting algorithm.
+
+3
+00:00:11,290 --> 00:00:16,890
+In fact, using priority queues, or
+using binary heaps, it is not so difficult
+
+4
+00:00:16,890 --> 00:00:22,530
+to come up with an algorithm that sorts
+the given array in time of analog n.
+
+5
+00:00:22,530 --> 00:00:26,160
+Indeed, given a rate a of size m,
+we do the following.
+
+6
+00:00:26,160 --> 00:00:29,580
+First, just create
+an empty priority queue.
+
+7
+00:00:29,580 --> 00:00:35,010
+Then, insert all the elements from
+our array into our priority queue.
+
+8
+00:00:35,010 --> 00:00:39,140
+Then, extract the maximum one
+by one from the given array.
+
+9
+00:00:39,140 --> 00:00:41,090
+Namely, we first extract the maximum.
+
+10
+00:00:41,090 --> 00:00:45,000
+This is the maximum of our array,
+so put it to the last position.
+
+11
+00:00:45,000 --> 00:00:47,450
+Then, extract the next maximum and
+
+12
+00:00:47,450 --> 00:00:50,680
+put it to the left of the last position,
+and so on.
+
+13
+00:00:50,680 --> 00:00:54,740
+This clearly gives us a sorted array,
+right?
+
+14
+00:00:54,740 --> 00:00:59,510
+So, we know that if we use binary
+heaps as an implementation for
+
+15
+00:00:59,510 --> 00:01:03,690
+priority queue, then all operations
+work in logarithmic time.
+
+16
+00:01:03,690 --> 00:01:08,130
+So, this gives us an algorithm with
+a running time big o of n log n.
+
+17
+00:01:08,130 --> 00:01:12,120
+And recall that this is
+asymptotically optimal for
+
+18
+00:01:12,120 --> 00:01:14,820
+algorithms that are comparison-based.
+
+19
+00:01:14,820 --> 00:01:19,120
+And this algorithm is clearly
+comparison-based, all right?
+
+20
+00:01:19,120 --> 00:01:22,720
+Also, know that this is a natural
+generalization of selection
+
+21
+00:01:22,720 --> 00:01:24,020
+sort algorithm.
+
+22
+00:01:24,020 --> 00:01:27,330
+Recall that in selection sort algorithms,
+we proceed as follows.
+
+23
+00:01:27,330 --> 00:01:31,610
+Given an array, we first scan the whole
+array to find the maximum value.
+
+24
+00:01:31,610 --> 00:01:36,300
+So, then we get this maximum value and
+swap it with the last element.
+
+25
+00:01:36,300 --> 00:01:38,440
+Then, we forget about
+this last element and
+
+26
+00:01:38,440 --> 00:01:41,310
+we can see that only n-1 first elements.
+
+27
+00:01:41,310 --> 00:01:45,210
+Again, by scanning this array,
+we find the maximum value, and
+
+28
+00:01:45,210 --> 00:01:49,680
+we swap it with the last element
+in this region, and so on.
+
+29
+00:01:49,680 --> 00:01:52,660
+So, here in the heap sort algorithm,
+
+30
+00:01:52,660 --> 00:01:57,000
+instead of finding the maximum
+value at each iteration, namely,
+
+31
+00:01:57,000 --> 00:02:02,310
+we use a smart data structure,
+namely a binary heap, right?
+
+32
+00:02:02,310 --> 00:02:06,170
+So, the only disadvantage
+of our current algorithm
+
+33
+00:02:06,170 --> 00:02:08,730
+is that it uses additional space.
+
+34
+00:02:08,730 --> 00:02:13,980
+So, it uses additional space
+to store the priority queue.
+
+35
+00:02:13,980 --> 00:02:14,910
+Okay?
+
+36
+00:02:14,910 --> 00:02:18,980
+So, in this lesson we will show
+how to avoid this disadvantage.
+
+37
+00:02:18,980 --> 00:02:24,107
+Namely, given an array A, we will
+first permute its elements somehow,
+
+38
+00:02:24,107 --> 00:02:27,900
+so that the result in array
+is actually a binary heap.
+
+39
+00:02:27,900 --> 00:02:31,320
+So, it satisfies binary heap property.
+
+40
+00:02:31,320 --> 00:02:35,430
+And then, we will sort this array, again,
+
+41
+00:02:35,430 --> 00:02:40,020
+just by calling extract marks and
+minus one times.
+
+42
+00:02:41,370 --> 00:02:45,845
+Building a heap out of a given array
+turns out to be surprisingly simple.
+
+43
+00:02:45,845 --> 00:02:51,080
+Namely, given array A of size
+n where there is a following.
+
+44
+00:02:51,080 --> 00:02:54,338
+We first assign the value of n to is
+variable size just to indicate that
+
+45
+00:02:54,338 --> 00:02:56,170
+we have a heap of size n.
+
+46
+00:02:56,170 --> 00:02:57,260
+Then, we do the following.
+
+47
+00:02:57,260 --> 00:03:02,168
+For each i, going down from n over two,
+rounded down to one,
+
+48
+00:03:02,168 --> 00:03:05,290
+we just sift down the i's element.
+
+49
+00:03:05,290 --> 00:03:08,546
+Let me explain it on a small picture,
+why, how we doing this.
+
+50
+00:03:08,546 --> 00:03:12,789
+So, consider the following.
+
+51
+00:03:16,117 --> 00:03:19,877
+The following heap, that we actually,
+
+52
+00:03:19,877 --> 00:03:24,760
+let me remind you,
+we do not store it explicitly.
+
+53
+00:03:24,760 --> 00:03:27,400
+We have just an array,
+in this case, of size 15.
+
+54
+00:03:27,400 --> 00:03:32,300
+So, this is the first node,
+the second one, the third one, four,
+
+55
+00:03:32,300 --> 00:03:33,480
+five, six, seven.
+
+56
+00:03:35,380 --> 00:03:40,630
+So, if we just can see
+the corresponding array of size 15,
+
+57
+00:03:40,630 --> 00:03:45,570
+and then imagine this
+complete binary tree.
+
+58
+00:03:45,570 --> 00:03:50,798
+Then, the heap property might
+potentially be related on many edges.
+
+59
+00:03:50,798 --> 00:03:57,130
+However, in this tree we have 15 nodes,
+so we have 15 sub trees.
+
+60
+00:03:57,130 --> 00:04:02,860
+And for these sub trees, I mean the root
+that the leaves of these of this tree,
+
+61
+00:04:02,860 --> 00:04:06,510
+the heap property is satisfied for
+an obvious reason.
+
+62
+00:04:06,510 --> 00:04:08,870
+There are no edges in these subtrees.
+
+63
+00:04:08,870 --> 00:04:14,170
+So, the first node where the property
+might be related is node number seven.
+
+64
+00:04:16,060 --> 00:04:21,030
+So, potentially,
+there might be a problem in this subtree.
+
+65
+00:04:21,030 --> 00:04:26,040
+To fix this problem, we just call
+SiftDown for node number seven.
+
+66
+00:04:26,040 --> 00:04:28,046
+Okay?
+After this call,
+
+67
+00:04:28,046 --> 00:04:31,610
+this small sub tree must be here, right?
+
+68
+00:04:31,610 --> 00:04:36,220
+Then, we do the same for node number six.
+
+69
+00:04:36,220 --> 00:04:42,337
+After this call, there are no problems in
+the sub tree rooted at node number six.
+
+70
+00:04:42,337 --> 00:04:47,699
+Then, we do the same for
+four i equal to 5 and 4i equal to 4.
+
+71
+00:04:47,699 --> 00:04:50,940
+Then, we proceed to node number three.
+
+72
+00:04:50,940 --> 00:04:55,730
+Note that, at this point,
+everything is fine in this subtree,
+
+73
+00:04:57,040 --> 00:04:59,320
+and in this subtree, right?
+
+74
+00:04:59,320 --> 00:05:02,740
+We already fixed everything
+in these two subtrees.
+
+75
+00:05:02,740 --> 00:05:11,120
+So, to make, to satisfy the heap property
+in the sub tree rooted at the node three,
+
+76
+00:05:11,120 --> 00:05:16,175
+it is enough to call SiftDown
+from node number three.
+
+77
+00:05:16,175 --> 00:05:16,970
+Okay?
+
+78
+00:05:16,970 --> 00:05:19,180
+Then, we proceed to node number two.
+
+79
+00:05:19,180 --> 00:05:23,170
+And, again, I have to call and
+SiftDown to node number two.
+
+80
+00:05:23,170 --> 00:05:28,850
+We fix the heap property in this sub tree,
+and so on.
+
+81
+00:05:28,850 --> 00:05:33,610
+So, in this example, actually
+the last thing that needs to be done
+
+82
+00:05:33,610 --> 00:05:36,880
+is to call SiftDown for node number one.
+
+83
+00:05:36,880 --> 00:05:39,110
+When we are done with this,
+
+84
+00:05:39,110 --> 00:05:43,041
+we are sure that what we have
+in array A is actually a heap.
+
+85
+00:05:43,041 --> 00:05:46,400
+So, it corresponds to
+a complete binary tree
+
+86
+00:05:46,400 --> 00:05:49,280
+where the heap property is
+satisfied on every edge.
+
+87
+00:05:50,510 --> 00:05:54,130
+Let me repeat slowly what just happened.
+
+88
+00:05:54,130 --> 00:05:58,480
+So, we, to turn a given array into a heap,
+
+89
+00:05:58,480 --> 00:06:04,000
+we start repairing the heap properties
+in larger and larger subtrees.
+
+90
+00:06:04,000 --> 00:06:08,760
+So, we start from the leaves,
+and go to the root.
+
+91
+00:06:08,760 --> 00:06:09,740
+Initially, so,
+
+92
+00:06:09,740 --> 00:06:16,130
+our induction base is that the heap
+property is satisfied at all the leaves.
+
+93
+00:06:16,130 --> 00:06:20,820
+I mean, in all subtrees rooted at
+the leaves for an obvious reason.
+
+94
+00:06:20,820 --> 00:06:24,610
+Any subtree rooted at
+the leaf has just one node,
+
+95
+00:06:24,610 --> 00:06:28,520
+so the property cannot be violated, right?
+
+96
+00:06:28,520 --> 00:06:30,810
+Then, we gradually go up and
+
+97
+00:06:30,810 --> 00:06:36,780
+we fix the heap property by
+shifting down the current vertex.
+
+98
+00:06:36,780 --> 00:06:39,910
+And, finally, when we reach a root,
+
+99
+00:06:39,910 --> 00:06:45,400
+the property is satisfied in
+the whole sub-tree, right?
+
+100
+00:06:45,400 --> 00:06:48,150
+So, this is just a link for
+an online visualization.
+
+101
+00:06:48,150 --> 00:06:50,070
+You can download the slides and
+
+102
+00:06:50,070 --> 00:06:54,849
+play with this visualization if something
+is unclear to you in this process.
+
+103
+00:06:56,360 --> 00:07:00,510
+Let me now mention that the running
+time of this procedure is n log n.
+
+104
+00:07:00,510 --> 00:07:02,643
+Again, for an obvious reason.
+
+105
+00:07:02,643 --> 00:07:08,590
+If, so, we use a binary max heap to
+implement this SiftDown down procedure.
+
+106
+00:07:08,590 --> 00:07:14,805
+So, we call SiftDown roughly n over two
+times and each call is just log n, right?
+
+107
+00:07:14,805 --> 00:07:18,180
+So, we have n log n running time.
+
+108
+00:07:18,180 --> 00:07:24,058
+We already have everything to present, to
+present the in-place heap sort algorithm.
+
+109
+00:07:24,058 --> 00:07:28,670
+Given an array A of size m,
+we first build heap out of it.
+
+110
+00:07:28,670 --> 00:07:33,642
+Namely, we permute its elements so
+that the resulting array corresponds to
+
+111
+00:07:33,642 --> 00:07:39,120
+a complete binary tree, which satisfies
+the heap property on every edge.
+
+112
+00:07:39,120 --> 00:07:42,390
+So, we do this just by
+calling BuildHeap procedure.
+
+113
+00:07:42,390 --> 00:07:48,320
+In particular, this BuildHeap procedure
+assigns the value n to the variable size.
+
+114
+00:07:48,320 --> 00:07:52,670
+Then, we repeat the following
+process n minus 1 times.
+
+115
+00:07:52,670 --> 00:07:59,250
+So, we first, we call that just
+after calling to build heap,
+
+116
+00:07:59,250 --> 00:08:03,620
+the first element of our
+array is a maximum element.
+
+117
+00:08:03,620 --> 00:08:04,270
+Right?
+
+118
+00:08:04,270 --> 00:08:07,770
+So, we would like to put it to
+the last position of our array.
+
+119
+00:08:07,770 --> 00:08:10,584
+So, we just swap A1 with A of n.
+
+120
+00:08:10,584 --> 00:08:15,210
+And currently,
+A of n is equal to n of size, okay?
+
+121
+00:08:15,210 --> 00:08:15,996
+So, we swap it.
+
+122
+00:08:15,996 --> 00:08:18,300
+And then,
+we forget about the last element.
+
+123
+00:08:18,300 --> 00:08:20,380
+So, we decrease size by one.
+
+124
+00:08:20,380 --> 00:08:24,110
+So, we say that now our heap
+occupies the first n-1 element.
+
+125
+00:08:24,110 --> 00:08:29,160
+And since we swapped the last
+element with the first element,
+
+126
+00:08:29,160 --> 00:08:32,150
+we potentially need to sift
+down the first element.
+
+127
+00:08:32,150 --> 00:08:35,780
+So, we just call SiftDown for
+the element number one.
+
+128
+00:08:35,780 --> 00:08:39,050
+And we proceed in a similar fashion.
+
+129
+00:08:39,050 --> 00:08:44,160
+I mean, now the heap occupies n-1,
+the first n-1 position.
+
+130
+00:08:44,160 --> 00:08:50,900
+So, the largest element among the first
+n-1 element is the first element.
+
+131
+00:08:50,900 --> 00:08:53,428
+So, we swap it with element n-1.
+
+132
+00:08:53,428 --> 00:08:58,010
+We forget about the element
+n-1 by reducing the size by 1.
+
+133
+00:08:58,010 --> 00:09:01,820
+And then, see if bounds a first element.
+
+134
+00:09:01,820 --> 00:09:05,294
+Okay?
+So, we repeat this procedure n-1 times,
+
+135
+00:09:05,294 --> 00:09:08,920
+each time finding
+the currently largest element.
+
+136
+00:09:08,920 --> 00:09:13,740
+So, once again, this is an improvement
+of a selection sort algorithm.
+
+137
+00:09:13,740 --> 00:09:15,440
+And this is an in-place algorithm.
+
+138
+00:09:17,190 --> 00:09:19,790
+So, once again,
+let me state some properties of
+
+139
+00:09:19,790 --> 00:09:22,630
+the resulting algorithm
+which is called Heap Sort.
+
+140
+00:09:22,630 --> 00:09:23,800
+It is in place.
+
+141
+00:09:23,800 --> 00:09:26,190
+it doesn't need any additional memory.
+
+142
+00:09:26,190 --> 00:09:29,540
+Everything is happening
+inside the given array A.
+
+143
+00:09:29,540 --> 00:09:32,310
+So this is in advantage of this algorithm.
+
+144
+00:09:32,310 --> 00:09:35,710
+Another advantage is that its
+learning times is n log n.
+
+145
+00:09:35,710 --> 00:09:37,780
+It is as simple, as it is optimal.
+
+146
+00:09:37,780 --> 00:09:41,710
+So, this makes it a good alternative
+to the quick sort algorithm.
+
+147
+00:09:41,710 --> 00:09:46,030
+So, in practice presort is usually faster,
+it is still faster.
+
+148
+00:09:46,030 --> 00:09:50,880
+However, the heap sort algorithm has
+worst case running time n log n.
+
+149
+00:09:50,880 --> 00:09:56,830
+While the quick sort algorithm has
+average case running time n log n.
+
+150
+00:09:56,830 --> 00:10:00,990
+For this reason, a popular approach and
+practice is the following.
+
+151
+00:10:00,990 --> 00:10:03,320
+It is called IntraSort algorithm.
+
+152
+00:10:03,320 --> 00:10:06,140
+You first run quick sort algorithm.
+
+153
+00:10:06,140 --> 00:10:11,740
+If it turns out the be slow, I mean,
+if the recursion dips, exceeds c log n for
+
+154
+00:10:11,740 --> 00:10:17,090
+some constant, c, then you stop the
+current call to quick sort algorithm and
+
+155
+00:10:17,090 --> 00:10:23,060
+switch to heap sort algorithm, which is
+guaranteed to have running time n log n.
+
+156
+00:10:23,060 --> 00:10:27,962
+So, in this case, in this implementation,
+your algorithm usually,
+
+157
+00:10:27,962 --> 00:10:31,404
+in most cases it works
+like quick sort algorithm.
+
+158
+00:10:31,404 --> 00:10:35,936
+And even in these unfortunate
+cases where it works in larger,
+
+159
+00:10:35,936 --> 00:10:39,858
+where quick sort has running
+time larger than n log n,
+
+160
+00:10:39,858 --> 00:10:44,600
+you stop it in the right point of time and
+switch to HeapSort.
+
+161
+00:10:44,600 --> 00:10:49,540
+So, this gives an algorithm which in many
+cases behaves like quick sort algorithm,
+
+162
+00:10:49,540 --> 00:10:51,930
+and it has worst case running time.
+
+163
+00:10:51,930 --> 00:10:55,025
+That must be [INAUDIBLE] n log n.

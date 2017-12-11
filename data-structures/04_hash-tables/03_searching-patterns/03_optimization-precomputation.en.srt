@@ -1,0 +1,651 @@
+1
+00:00:00,170 --> 00:00:04,120
+Hi, in this video you will learn to
+significantly improve the running time of
+
+2
+00:00:04,120 --> 00:00:05,770
+the Rabin-Karp's Algorithm.
+
+3
+00:00:05,770 --> 00:00:09,670
+And to do so we'll need to look closer
+into the polynomial hashing and
+
+4
+00:00:09,670 --> 00:00:11,130
+its properties.
+
+5
+00:00:11,130 --> 00:00:14,600
+Recall that to compute a polynomial
+hash on the string s but
+
+6
+00:00:14,600 --> 00:00:19,990
+first choose a big prime number for the
+polynomial family, then we choose a random
+
+7
+00:00:19,990 --> 00:00:25,060
+integer x from 1 to p minus 1 to select
+a random hash function from the family.
+
+8
+00:00:25,060 --> 00:00:28,900
+And then the value of this hash
+function is the polynomial of x
+
+9
+00:00:28,900 --> 00:00:31,320
+with coefficients which
+are characters of the string S.
+
+10
+00:00:32,340 --> 00:00:37,840
+And to compute this hash functional
+substring of text T starting in position i
+
+11
+00:00:37,840 --> 00:00:42,940
+and having the same length as the pattern
+for which we are looking in the text.
+
+12
+00:00:42,940 --> 00:00:46,070
+We need to also compute
+a similar polynomial sum.
+
+13
+00:00:46,070 --> 00:00:49,850
+It goes from character
+number i to character number
+
+14
+00:00:49,850 --> 00:00:52,690
+i plus length of the pattern minus 1.
+
+15
+00:00:52,690 --> 00:00:56,500
+And we need to multiply each character
+by the corresponding power of x.
+
+16
+00:00:56,500 --> 00:01:01,480
+For example T of i will be multiplied by
+x to the power of zero because this is
+
+17
+00:01:01,480 --> 00:01:07,150
+the first character of the substring and
+the last character will be multiplied by
+
+18
+00:01:07,150 --> 00:01:13,000
+x to the power length of the pattern minus
+1, and here is a formula on the slide.
+
+19
+00:01:13,000 --> 00:01:17,720
+And the idea for the improving of the
+running time is that the polynomial hash
+
+20
+00:01:17,720 --> 00:01:20,830
+value for
+two consecutive substrings of text
+
+21
+00:01:20,830 --> 00:01:24,900
+with length equal to the length of
+the pattern are very similar and
+
+22
+00:01:24,900 --> 00:01:28,380
+one of them can be computed given
+another one in constant time.
+
+23
+00:01:28,380 --> 00:01:32,520
+We introduce a new notation,
+we denote by H[i].
+
+24
+00:01:32,520 --> 00:01:37,990
+The hash value for the substring of
+the text starting in position i and
+
+25
+00:01:37,990 --> 00:01:39,499
+having the same length as the pattern.
+
+26
+00:01:40,630 --> 00:01:44,110
+Now let's look at the example,
+our text is a, b, c, b, d.
+
+27
+00:01:45,290 --> 00:01:49,400
+And we need to convert the characters
+to their integer codes.
+
+28
+00:01:49,400 --> 00:01:53,840
+And let's assume for simplicity that
+the code for a is zero, for b is one, for
+
+29
+00:01:53,840 --> 00:01:57,330
+c is two, and for d is three.
+
+30
+00:01:57,330 --> 00:01:59,799
+Then our text is actually 0, 1, 2, 1, 3.
+
+31
+00:02:01,150 --> 00:02:04,210
+Also, we will assume in this example,
+that the length of the pattern is three.
+
+32
+00:02:04,210 --> 00:02:07,970
+We don't need to know the pattern itself,
+we just fix its length.
+
+33
+00:02:09,220 --> 00:02:11,090
+So we will need to
+computer hash values for
+
+34
+00:02:11,090 --> 00:02:13,280
+the substrings of
+the text of length three.
+
+35
+00:02:13,280 --> 00:02:16,850
+There are three of them,
+abc, bcd, and cbd.
+
+36
+00:02:16,850 --> 00:02:19,280
+We start with the last one, cbd.
+
+37
+00:02:19,280 --> 00:02:24,020
+To compute its hash value, we first
+need to write down the powers of x
+
+38
+00:02:24,020 --> 00:02:26,780
+under the corresponding
+characters of the text.
+
+39
+00:02:27,920 --> 00:02:32,720
+Then we need to multiply each power
+of the x by the corresponding
+
+40
+00:02:32,720 --> 00:02:36,690
+integer code of the character and
+we get 2x and 3x squared.
+
+41
+00:02:36,690 --> 00:02:41,768
+And then we need to sum them and we also
+need to take the value module of b, but
+
+42
+00:02:41,768 --> 00:02:47,140
+on this slide we'll just ignore module of
+p, it will be assumed in each expression.
+
+43
+00:02:47,140 --> 00:02:48,800
+Now let's look at the hash value for
+
+44
+00:02:48,800 --> 00:02:52,330
+the previous substring of
+lines three which is bcb.
+
+45
+00:02:52,330 --> 00:02:56,797
+We again need to write down the powers of
+x under the corresponding integer codes of
+
+46
+00:02:56,797 --> 00:02:57,713
+the character.
+
+47
+00:02:57,713 --> 00:03:03,453
+And again need to multiply the powers of
+x by the corresponding integer codes and
+
+48
+00:03:03,453 --> 00:03:06,806
+get one to x and x squared,
+we need to sum them.
+
+49
+00:03:06,806 --> 00:03:10,359
+Now note the similarity
+between the hash value for
+
+50
+00:03:10,359 --> 00:03:15,698
+the last substring of line three and
+the previous substring of line three.
+
+51
+00:03:15,698 --> 00:03:22,860
+To get the last two terms for bcb, we can
+multiply the first two terms for cdb by x.
+
+52
+00:03:23,940 --> 00:03:28,955
+And we will use this similarity to compute
+the hash for bcb given the hash for cdb.
+
+53
+00:03:28,955 --> 00:03:33,963
+So again H[2] is the same as hash
+value of cbd because it starts
+
+54
+00:03:33,963 --> 00:03:39,550
+in the character with index two and
+it's equal to 2 + x + 3x squared.
+
+55
+00:03:40,740 --> 00:03:45,465
+Now let's compute the age of 1 based on
+that this is the hash value of bcb and
+
+56
+00:03:45,465 --> 00:03:48,920
+we know it's equal to 1 +
+2x + x squared module of p.
+
+57
+00:03:50,010 --> 00:03:55,420
+Now let's rewrite this using this property
+of multiplication by x the terms for
+
+58
+00:03:55,420 --> 00:03:56,590
+the cbd.
+
+59
+00:03:57,690 --> 00:04:04,720
+So it's equal to 1 + x multiplied by
+the first two terms for cbd which are 2+x.
+
+60
+00:04:04,720 --> 00:04:08,153
+Now we don't want to use just
+the first two terms for cbd, we.
+
+61
+00:04:08,153 --> 00:04:10,372
+We want to use the whole cbd so
+
+62
+00:04:10,372 --> 00:04:15,924
+we write this as following 1+ x
+multiplied by the whole expression for
+
+63
+00:04:15,924 --> 00:04:21,213
+cbd but now we need to subtract
+something to make the equality true.
+
+64
+00:04:21,213 --> 00:04:25,640
+And that something is the last term,
+x multiplied by 3x squared,
+
+65
+00:04:25,640 --> 00:04:29,445
+which is the same as 3x cubed,
+so we subtract 3x cubed.
+
+66
+00:04:30,670 --> 00:04:35,770
+Now we regroup the summons, and
+we right as this is equal to
+
+67
+00:04:35,770 --> 00:04:39,882
+x multiplied by the hash value for
+cbd which is big H[2],
+
+68
+00:04:39,882 --> 00:04:44,810
+we add 1 to it and
+we subtract through 3x cubed.
+
+69
+00:04:44,810 --> 00:04:47,790
+In the general case,
+there is a very similar formula.
+
+70
+00:04:47,790 --> 00:04:52,540
+So, here is the expression for
+big H[i + 1], and
+
+71
+00:04:52,540 --> 00:04:56,110
+notice that the powers of x are,
+
+72
+00:04:56,110 --> 00:05:01,790
+in each case j- i- 1 because the substring
+starts in position i plus one.
+
+73
+00:05:01,790 --> 00:05:07,650
+So, we subtract i + 1
+from each j in the sum,
+
+74
+00:05:07,650 --> 00:05:11,720
+and the expression for
+big H[i] is very similar.
+
+75
+00:05:11,720 --> 00:05:15,990
+But, for each power of x,
+we subtract just i from j.
+
+76
+00:05:15,990 --> 00:05:19,260
+Because the substring
+starts in position i.
+
+77
+00:05:19,260 --> 00:05:24,450
+Now let's rewrite this expression so that
+it is more similar to the gauge of i + 1.
+
+78
+00:05:24,450 --> 00:05:29,291
+And to do that, we start summation
+not from i, but from i + 1 and
+
+79
+00:05:29,291 --> 00:05:31,730
+also end it one position later.
+
+80
+00:05:31,730 --> 00:05:36,748
+So, the first sum is now very
+similar to the expression for
+
+81
+00:05:36,748 --> 00:05:41,680
+H[i+1], which has the powers
+of x are always bigger by one.
+
+82
+00:05:41,680 --> 00:05:47,310
+And also we need to add T[i] which
+is not accounted for in the sum, and
+
+83
+00:05:47,310 --> 00:05:51,550
+we need to subtract its last term, because
+it's not In the expression for big H[i].
+
+84
+00:05:51,550 --> 00:05:54,777
+And that is T[i] plus
+length of the pattern,
+
+85
+00:05:54,777 --> 00:05:59,380
+multiplied by x to the power
+of length of the pattern.
+
+86
+00:05:59,380 --> 00:06:03,710
+Now we notice that the first sum
+is the same as x multiplied by
+
+87
+00:06:03,710 --> 00:06:09,150
+the value of hash function for
+the next substream, big H[i+1].
+
+88
+00:06:09,150 --> 00:06:11,900
+And the second and
+third terms are the same.
+
+89
+00:06:11,900 --> 00:06:13,820
+So now we get this recurrent formula.
+
+90
+00:06:13,820 --> 00:06:18,270
+To compute the gauge of i,
+if we know already the gauge of i + 1,
+
+91
+00:06:18,270 --> 00:06:23,568
+we need to multiply it by x and
+then add T[i] and subtract another term.
+
+92
+00:06:23,568 --> 00:06:29,540
+Notice that T[i] and T of i plus
+length of the pattern we just know.
+
+93
+00:06:29,540 --> 00:06:32,710
+And x to the length of the pattern
+
+94
+00:06:32,710 --> 00:06:37,500
+is a multiplier that we can pre
+compute and use for each i.
+
+95
+00:06:38,740 --> 00:06:41,190
+Now let's use this in the pseudo code.
+
+96
+00:06:41,190 --> 00:06:45,830
+Here's the function to pre compute all
+the hash values of our polynomial hash
+
+97
+00:06:45,830 --> 00:06:50,940
+function on the substrings of
+the text t with the length equal
+
+98
+00:06:50,940 --> 00:06:57,920
+to the length of the pattern, and with
+prime number, P and selected integer x.
+
+99
+00:06:57,920 --> 00:07:01,655
+We initialize our answer,
+big H, as an array of length,
+
+100
+00:07:01,655 --> 00:07:04,720
+length of text minus length
+of pattern plus one.
+
+101
+00:07:04,720 --> 00:07:07,780
+Which is the number of
+substrings of the text
+
+102
+00:07:07,780 --> 00:07:10,570
+with length equal to
+the length of the pattern.
+
+103
+00:07:10,570 --> 00:07:14,790
+Also initialize S by the last
+substring of the text
+
+104
+00:07:14,790 --> 00:07:17,800
+with a length equal to
+the length of the pattern.
+
+105
+00:07:17,800 --> 00:07:22,890
+And you compute the hash value for this
+last substring directly by calling our
+
+106
+00:07:22,890 --> 00:07:27,530
+implementation of polynomial hash with the
+substring prime number P and integer x.
+
+107
+00:07:28,670 --> 00:07:32,210
+Then we also need to precompute the value
+of x to the power of length of the pattern
+
+108
+00:07:32,210 --> 00:07:34,290
+and store it in the variable y.
+
+109
+00:07:34,290 --> 00:07:37,302
+To do that we need
+initialize it with 1 and
+
+110
+00:07:37,302 --> 00:07:41,878
+then multiply it length of P times
+by x and take this module of p.
+
+111
+00:07:41,878 --> 00:07:47,090
+And then the main for loop, the second for
+loop goes from right to left and
+
+112
+00:07:47,090 --> 00:07:51,960
+computes the hash values for
+all the substrings of the text, but for
+
+113
+00:07:51,960 --> 00:07:55,566
+the last one for
+which we already know the answer.
+
+114
+00:07:55,566 --> 00:08:00,990
+So to compute H[i] given H[i + 1],
+we multiply it by x.
+
+115
+00:08:00,990 --> 00:08:04,370
+Then we add T[i] and we subtract y,
+
+116
+00:08:04,370 --> 00:08:10,130
+which is x to the power of length of P,
+by T[i + length of the pattern].
+
+117
+00:08:10,130 --> 00:08:12,390
+And we take the expression module of p.
+
+118
+00:08:13,640 --> 00:08:16,890
+And then we just return the array
+with the precomputed values.
+
+119
+00:08:17,900 --> 00:08:23,380
+So to analyze its training time, we know
+that initialization of array H of s and
+
+120
+00:08:23,380 --> 00:08:28,345
+with the accommodations with the hash
+value of the last substring,
+
+121
+00:08:28,345 --> 00:08:31,640
+I'll take time proportional
+to the length of the pattern.
+
+122
+00:08:31,640 --> 00:08:35,197
+Also pre-computation of the x to
+the power of length of P takes time
+
+123
+00:08:35,197 --> 00:08:38,360
+proportional to the length of the pattern.
+
+124
+00:08:38,360 --> 00:08:39,550
+And the second for
+
+125
+00:08:39,550 --> 00:08:45,380
+loop takes time proportional to length
+of the text minus length of the pattern.
+
+126
+00:08:45,380 --> 00:08:49,040
+And all and all it's big O of length
+of the text plus length of the pattern.
+
+127
+00:08:50,650 --> 00:08:53,560
+Now again, polynomial hash is computed
+
+128
+00:08:53,560 --> 00:08:55,300
+in time proportional to
+the length of the pattern.
+
+129
+00:08:55,300 --> 00:09:00,530
+First for loop, computing the power of x,
+also and the second for
+
+130
+00:09:00,530 --> 00:09:03,900
+loop, which goes through all the
+substrings of the text with length equal
+
+131
+00:09:03,900 --> 00:09:09,080
+to the length of the pattern, x length
+of text minus length of pattern time.
+
+132
+00:09:09,080 --> 00:09:12,400
+And the total precomputation time is
+proportional to the sum of length of
+
+133
+00:09:12,400 --> 00:09:14,220
+the text and the pattern.
+
+134
+00:09:14,220 --> 00:09:18,590
+And in the next video we'll
+use these precomputed values
+
+135
+00:09:18,590 --> 00:09:21,860
+to actually improve the running
+time of the Rabin-Karp's Algorithm.

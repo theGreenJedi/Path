@@ -1,0 +1,641 @@
+1
+00:00:00,270 --> 00:00:04,380
+Now when we've seen a few examples of
+using the disjointed set data structure
+
+2
+00:00:04,380 --> 00:00:06,430
+and when we formally defined it,
+
+3
+00:00:06,430 --> 00:00:10,170
+let's start to think about
+possible ways of implementing it.
+
+4
+00:00:10,170 --> 00:00:13,160
+As usual we will start with a few
+
+5
+00:00:13,160 --> 00:00:17,340
+naive implementations that will turn
+out to be slow on one hand, but
+
+6
+00:00:17,340 --> 00:00:22,260
+on the other hand they will help us to
+come up with an efficient implementation.
+
+7
+00:00:23,270 --> 00:00:28,610
+First of all, let us simplify
+our life by assuming that our n
+
+8
+00:00:28,610 --> 00:00:30,850
+objects are just integers from 1 to n.
+
+9
+00:00:32,030 --> 00:00:37,400
+This in particular will allow us to
+use the subjects as indices in a race.
+
+10
+00:00:39,050 --> 00:00:43,560
+Okay, so
+our sets are just sets of integers.
+
+11
+00:00:43,560 --> 00:00:49,430
+And we need to come up with a notion
+of an ID, of a unique ID for each set.
+
+12
+00:00:49,430 --> 00:00:55,410
+So, let's use the smallest
+element in each set as its ID.
+
+13
+00:00:55,410 --> 00:00:58,870
+In particular,
+since our objects are integers, for
+
+14
+00:00:58,870 --> 00:01:03,620
+each element we can
+store the ID of the set,
+
+15
+00:01:03,620 --> 00:01:07,742
+this element belongs to in
+the array called smallest.
+
+16
+00:01:07,742 --> 00:01:10,820
+For example,
+if we have the following three sets,
+
+17
+00:01:11,920 --> 00:01:17,390
+then in the first set the ID,
+namely the smallest element is two.
+
+18
+00:01:17,390 --> 00:01:21,230
+In the second set the smallest element and
+the only element is five.
+
+19
+00:01:21,230 --> 00:01:23,930
+In the third set
+the smallest element is one.
+
+20
+00:01:23,930 --> 00:01:29,460
+Then this information is stored in
+the array called smallest of size nine.
+
+21
+00:01:30,480 --> 00:01:32,230
+Separations MakeSet and
+
+22
+00:01:32,230 --> 00:01:36,730
+Find can be implemented in just
+one line of code in this case.
+
+23
+00:01:36,730 --> 00:01:41,850
+Namely to create a singleton set
+consisting of just element i,
+
+24
+00:01:41,850 --> 00:01:46,980
+we set smallest of i to be equal to i,
+right.
+
+25
+00:01:46,980 --> 00:01:52,170
+To find the ID of the set
+containing the element i,
+
+26
+00:01:52,170 --> 00:01:54,910
+we just return the value of smallest[i].
+
+27
+00:01:54,910 --> 00:01:57,540
+The running time of both of
+these operation is constant.
+
+28
+00:01:59,000 --> 00:02:05,610
+Everything is not so easy with
+the union operation unfortunately.
+
+29
+00:02:05,610 --> 00:02:11,920
+So to merge two sets containing
+elements i and j, we do the following.
+
+30
+00:02:11,920 --> 00:02:17,270
+First we find out the ID of
+the set containing the element i.
+
+31
+00:02:17,270 --> 00:02:24,830
+We do this by calling Find(i) and
+restores the result in the variable i_id.
+
+32
+00:02:24,830 --> 00:02:26,458
+Then we do the same for the element j.
+
+33
+00:02:26,458 --> 00:02:33,500
+We call Find(j) and we store
+the resulting id in the variable j_id.
+
+34
+00:02:33,500 --> 00:02:36,560
+Then we check whether
+i_id is equal to j_id.
+
+35
+00:02:36,560 --> 00:02:43,340
+And if they are equal, this means that
+i and j already lie in the same set.
+
+36
+00:02:43,340 --> 00:02:45,610
+Which means that nothing needs to be done.
+
+37
+00:02:45,610 --> 00:02:47,924
+Which means, in turn,
+that we can just return.
+
+38
+00:02:47,924 --> 00:02:53,980
+If i_id and j_id are different,
+we do the following.
+
+39
+00:02:53,980 --> 00:02:56,260
+Well, we need to merge two sets.
+
+40
+00:02:56,260 --> 00:02:58,800
+The smallest element in this set is i_id.
+
+41
+00:02:58,800 --> 00:03:02,590
+The smallest element in this set is j_id.
+
+42
+00:03:02,590 --> 00:03:06,720
+Which means that the smallest
+element in the merged set
+
+43
+00:03:06,720 --> 00:03:11,720
+should be just the minimum among i_id and
+j_id.
+
+44
+00:03:11,720 --> 00:03:14,580
+Restores as minimum in the variable m.
+
+45
+00:03:14,580 --> 00:03:18,090
+Then we need to scan all the objects,
+
+46
+00:03:18,090 --> 00:03:23,450
+all our n objects and
+update the id of each.
+
+47
+00:03:23,450 --> 00:03:27,290
+And update the value of
+the smallest array for
+
+48
+00:03:27,290 --> 00:03:32,030
+reach objects for
+which their id is i_id or j_id.
+
+49
+00:03:32,030 --> 00:03:37,390
+So this is done in the loop here
+where k ranges from 1 to n.
+
+50
+00:03:37,390 --> 00:03:40,903
+So we check where
+the smallest of k is i_id or
+
+51
+00:03:40,903 --> 00:03:46,110
+j_id and if it is equal then
+we update it to be equal to m.
+
+52
+00:03:46,110 --> 00:03:51,050
+The running time of this operation is
+linear of course, just because essentially
+
+53
+00:03:51,050 --> 00:03:57,610
+what we have here is a single loop
+that goes over all n objects.
+
+54
+00:03:57,610 --> 00:04:01,310
+The bottleneck of our current
+implementation is the union operation,
+
+55
+00:04:01,310 --> 00:04:06,390
+whose running time is linear as opposed
+to the finite make-set operations.
+
+56
+00:04:06,390 --> 00:04:08,600
+Whose running time is just constant.
+
+57
+00:04:08,600 --> 00:04:11,830
+So we definitely need
+another data structure for
+
+58
+00:04:11,830 --> 00:04:16,170
+storing sets, which allows for
+more efficient merging.
+
+59
+00:04:16,170 --> 00:04:18,960
+And one such data
+structure is a linked list.
+
+60
+00:04:20,110 --> 00:04:21,840
+So let's try to use the following idea.
+
+61
+00:04:21,840 --> 00:04:25,450
+Let's represent each set
+just as a linked list and
+
+62
+00:04:25,450 --> 00:04:31,370
+let's use the tail of a list as
+the ID of the corresponding set.
+
+63
+00:04:31,370 --> 00:04:33,840
+Let me illustrate this with two examples.
+
+64
+00:04:33,840 --> 00:04:38,720
+In this case we have two sets,
+each one of them is represented,
+
+65
+00:04:38,720 --> 00:04:41,300
+is organized as a linked list, and
+
+66
+00:04:41,300 --> 00:04:46,250
+we treat the tail of a list as
+the ID of the corresponding set.
+
+67
+00:04:46,250 --> 00:04:50,660
+For example in this case,
+7 is the ID of the first set and
+
+68
+00:04:50,660 --> 00:04:52,690
+8 is the ID of the second set.
+
+69
+00:04:52,690 --> 00:04:58,860
+Now to find the ID of the set that
+contains the element three for example,
+
+70
+00:04:58,860 --> 00:05:05,070
+we just follow the pointers until we
+reach the tail of the corresponding list.
+
+71
+00:05:05,070 --> 00:05:08,250
+So in this case ID is well defined.
+
+72
+00:05:08,250 --> 00:05:10,688
+What is also nice, is that in this case.
+
+73
+00:05:10,688 --> 00:05:16,450
+We can merge two sets very efficiently.
+
+74
+00:05:16,450 --> 00:05:21,870
+Actually since they are organized
+as lists, we just need
+
+75
+00:05:21,870 --> 00:05:27,960
+to append to the other list and
+this requires changing just one pointer.
+
+76
+00:05:27,960 --> 00:05:33,110
+What is very nice in this case is
+just the id of the merge itself
+
+77
+00:05:33,110 --> 00:05:35,810
+is updated automatically.
+
+78
+00:05:35,810 --> 00:05:41,400
+So after the merging,
+the hat of the resulting list is 8, so
+
+79
+00:05:41,400 --> 00:05:46,030
+the ID is updated for all the elements
+of two sets automatically.
+
+80
+00:05:47,260 --> 00:05:51,180
+As we've just discussed, there are at
+least two advantages of the current
+
+81
+00:05:51,180 --> 00:05:55,750
+implementation where we store
+each set as a linked list.
+
+82
+00:05:55,750 --> 00:06:01,450
+First of all the running time of the union
+operation is, in this case, just constant.
+
+83
+00:06:01,450 --> 00:06:04,320
+This is because to merge, to linked lists,
+
+84
+00:06:04,320 --> 00:06:07,390
+we'd just append one of
+them to the other one.
+
+85
+00:06:07,390 --> 00:06:10,650
+And for
+this we need just to change one pointer.
+
+86
+00:06:11,740 --> 00:06:16,310
+Another advantage here is that we
+have a well-defined ID in this case.
+
+87
+00:06:16,310 --> 00:06:22,736
+Namely if two elements lie in
+the same set then find will return
+
+88
+00:06:22,736 --> 00:06:28,420
+the same tale element from
+the corresponding list, right?
+
+89
+00:06:28,420 --> 00:06:32,400
+And also if two elements lie in
+different sets then the tales
+
+90
+00:06:32,400 --> 00:06:35,595
+of the corresponding two
+lists are different.
+
+91
+00:06:35,595 --> 00:06:37,123
+And this is exactly what we want.
+
+92
+00:06:37,123 --> 00:06:40,410
+There are however also two disadvantages.
+
+93
+00:06:40,410 --> 00:06:43,490
+The first disadvantage is that now
+
+94
+00:06:43,490 --> 00:06:47,940
+the running time of the find operation
+is linear in the worst case.
+
+95
+00:06:47,940 --> 00:06:52,430
+This is because to find the tail
+of the corresponding list, I mean,
+
+96
+00:06:52,430 --> 00:06:56,370
+given an element, we would like to
+find the corresponding tail of a list.
+
+97
+00:06:56,370 --> 00:07:03,230
+For this, we need to follow the pointers
+til we reach the tail of this list.
+
+98
+00:07:03,230 --> 00:07:08,920
+For this, we might need potentially to
+traverse a linear number of elements.
+
+99
+00:07:08,920 --> 00:07:14,040
+Because the list might contain
+a linear number of elements.
+
+100
+00:07:14,040 --> 00:07:15,520
+So in the worst case,
+
+101
+00:07:15,520 --> 00:07:19,200
+the running time of Find declaration
+is linear, which is not so good.
+
+102
+00:07:20,200 --> 00:07:27,693
+The second disadvantage is that actually
+implementing Union operation is not so,
+
+103
+00:07:27,693 --> 00:07:33,720
+in constant time, is not so easy as it
+was shown on our previous two examples.
+
+104
+00:07:33,720 --> 00:07:37,200
+Namely, we assumed
+implicitly in this example,
+
+105
+00:07:37,200 --> 00:07:42,000
+then when given two elements x and
+y, we can find the beginning
+
+106
+00:07:42,000 --> 00:07:46,810
+of the list containing x, and the end of
+the list containing y in constant time.
+
+107
+00:07:48,160 --> 00:07:54,100
+So to be able to do this, we might need
+to store some additional information.
+
+108
+00:07:54,100 --> 00:07:58,910
+And this in turn will require us to
+update this information when we merge
+
+109
+00:07:58,910 --> 00:08:00,390
+two elements.
+
+110
+00:08:00,390 --> 00:08:05,280
+So once again, this means that
+to implement union procedure
+
+111
+00:08:05,280 --> 00:08:10,020
+in constant time we need to store
+some additional information,
+
+112
+00:08:10,020 --> 00:08:14,800
+but not just pointers from a particular
+element to the next element.
+
+113
+00:08:14,800 --> 00:08:17,760
+In search of an inspiration for
+
+114
+00:08:17,760 --> 00:08:22,830
+improving our current implementation,
+let's review our previous two examples.
+
+115
+00:08:22,830 --> 00:08:28,130
+So we've discussed that merging
+these two sets shown on this slide
+
+116
+00:08:28,130 --> 00:08:32,430
+is follows as good because it
+requires just constant time and
+
+117
+00:08:32,430 --> 00:08:37,852
+it updates the ID of
+the resulting set automatically.
+
+118
+00:08:37,852 --> 00:08:41,230
+On the other hand it is bad
+because it creates a long list.
+
+119
+00:08:41,230 --> 00:08:46,776
+This in particular requires Find(9)
+to traverse the whole list,
+
+120
+00:08:46,776 --> 00:08:52,430
+and this makes the find operation
+a linear time operation.
+
+121
+00:08:52,430 --> 00:08:58,770
+Right, so let's try to think about a
+different way of merging these two lists.
+
+122
+00:08:58,770 --> 00:09:00,530
+For example, what about the following one?
+
+123
+00:09:02,020 --> 00:09:05,410
+In this case, first of all we,
+
+124
+00:09:05,410 --> 00:09:09,740
+the resulting in structures is not least,
+it's just strange right?
+
+125
+00:09:09,740 --> 00:09:12,950
+However, it is still constant time, right?
+
+126
+00:09:12,950 --> 00:09:20,020
+And also 7 can still be considered
+as a ID of the resulting set.
+
+127
+00:09:20,020 --> 00:09:25,620
+Because 7 is reachable from
+any other element, right?
+
+128
+00:09:25,620 --> 00:09:28,460
+However, so what about this structure?
+
+129
+00:09:28,460 --> 00:09:31,170
+It is not a list, but it is a tree.
+
+130
+00:09:31,170 --> 00:09:38,890
+Right, so it is a tree whose root is
+seven, and that has two branches, right.
+
+131
+00:09:38,890 --> 00:09:43,290
+In the next video we will
+develop this idea to get a very
+
+132
+00:09:43,290 --> 00:09:48,110
+efficient implementation of
+the disjoint sets data structure.
+
+133
+00:09:48,110 --> 00:09:51,410
+Namely, we will represent
+each set as a tree.
+
+134
+00:09:51,410 --> 00:09:54,751
+And we will show that in
+this case the running time,
+
+135
+00:09:54,751 --> 00:09:59,111
+the amortized running time of each
+operation is nearly constant.

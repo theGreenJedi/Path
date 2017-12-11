@@ -1,0 +1,71 @@
+How to implement this in code? Well, let's just assume that we have
+a hash function h from the set of all possible objects S to the set
+of numbers from 0 to m-1. And let us denote by O and
+O prime objects from set S and by v and v prime values from set big V. And let us have an array A,
+which consists of m lists, where m is the cardinality
+of the hash function. And those lists we'll call also chains,
+and those chains consist of pairs
+of objects O and values v. Now let us implement the first method,
+HasKey, which would return whether there is an entry in our table or
+in our map for the object O. First, we compute the value of
+hash function on the object O. We'll look at the corresponding
+cell in the array A, and we'll take the list out from there. Then we go through this list and
+when we go through it, we'll look at pairs O prime,
+v prime that are elements of this list. If for some pair O prime is
+the same as the object O for which we are looking, we return true
+because it means that there is an entry in our map corresponding to the object O. If we don't find any
+corresponding pair in the list, return false because that means
+there is no such object and there is no key corresponding
+to this object in our map. Because it only could be in the list
+corresponding to the cell with number h of O and we didn't find it there. Next let's implement method Get, which should return the value
+corresponding to object O if there is one. Otherwise, return some special
+value telling us that there is no entry corresponding to object O. Again, we start with computing value
+of hash function on object O and looking at the cell number
+h of O in the array A and take the list,
+which is stored in that cell. Then we again go through all
+the pairs in that list L, pairs O prime, v prime, and
+if for some of the pairs, O prime is the same as the object O for
+which we are looking, then we'll return the corresponding value v prime as
+the value corresponding to that object O. If we go through the whole list and
+we don't find corresponding player, we'll return special value n/a,
+which means that there is no value corresponding to
+object O in our map. Why is that? Because if there was some value,
+it has to be in the list corresponding to the cell number h of O because
+that's the way we store our chains, and if we didn't find it there, then there
+is no entry corresponding to the object O. Now the last, most interesting method,
+Set, which accepts two arguments, object O and the value v, which we need
+to set corresponding to this object. We need to either rewrite this value if
+there was already an entry corresponding to the object O with different value. Or we need to create a new value in
+the map corresponding to the object O if it didn't happen to be in the map before. We again start with computing the hash
+function on the object O and looking at the corresponding cell in the array A and
+we'll take the list, we just start there. Now we go through all the pairs
+p in that list L, and each pair p contains two fields,
+first field is p.O, which is the object of that pair, and
+p.v, which is the value of that pair. If for some pair, we see that
+the object of that pair is the same as object O for
+which we need to set the value v, then we just assign the value to the p.v,
+the new value. We will write the old value with
+the new value for that object O and then we return, we exit from the function. Because we've already
+done everything we need. If we go through the whole list and we don't find any pair corresponding to
+our object O, it means that there was no entry in our map corresponding
+to the object O previously. And it means that we need to
+add a new pair to our list, and we just append a new pair
+containing object O and value v to the list L,
+corresponding to the cell number h of O. Now let's look at the SM
+project of the chaining scheme. The first lemma says that if c is
+the length of the longest chain in A, then the running time of all
+three methods is theta of c+1. First, if we look at the list
+corresponding to some object O, the list in the cell number h of O, then the length of this list can be c,
+this can be the longest list itself. And if object O is not in this list and
+would call some of the methods for this object,
+we will need to scan the full list so we'll need to scan all
+c items in this list. Also, if c is 0 so that our map is empty,
+our array A is comprised of m after this. We still need constant time to check that. So that's why c+1 and not just c. Another lemma is talking
+about memory consumption. So let n be the number of different
+keys that we're storing in the map and m is the cardinality of the hash function. Then the memory consumption
+is theta of n+m. That is very easy to prove. First, we need to store n pairs of objects
+and corresponding values in the map. That's where we get theta of n. And we get additional theta of m
+to store the array of m lists. Although those lists can be empty,
+we'll still need to use some memory to store the pointers
+to the heads of those lists, and that's why memory
+consumption is theta of n+m.

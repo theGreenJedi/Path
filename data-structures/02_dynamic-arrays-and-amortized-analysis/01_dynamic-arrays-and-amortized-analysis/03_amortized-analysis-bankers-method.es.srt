@@ -1,0 +1,451 @@
+1
+00:00:00,610 --> 00:00:04,830
+En este video vamos a hablar de
+un segundo método de análisis de amortización,
+
+2
+00:00:04,830 --> 00:00:06,470
+que se llama el Método del Banquero.
+
+3
+00:00:08,160 --> 00:00:13,180
+La idea aquí es que vamos a cobrar
+extra por cada operación sencilla.
+
+4
+00:00:13,180 --> 00:00:16,220
+Es un poco como el ejemplo que vimos
+
+5
+00:00:16,220 --> 00:00:17,810
+ahorrar dinero para un automóvil
+
+6
+00:00:17,810 --> 00:00:21,130
+Vamos a tomar esos 100 dólares
+y ponerlos en el banco.
+
+7
+00:00:21,130 --> 00:00:24,330
+Y guardamos ese cargo en alguna parte,
+
+8
+00:00:24,330 --> 00:00:25,910
+en el caso del banco, pues en el banco.
+
+9
+00:00:25,910 --> 00:00:30,040
+En nuestro caso, lo haremos conceptualmente 
+en nuestra estructura de datos.
+
+10
+00:00:30,040 --> 00:00:35,270
+No vamos a cambiar el código, 
+simplemente es un análisis nada más.
+
+11
+00:00:35,270 --> 00:00:39,710
+Pero conceptualmente, imaginemos
+que ponemos este coste extra
+
+12
+00:00:41,710 --> 00:00:45,120
+como tokens en nuestra
+estructura de datos.
+
+13
+00:00:45,120 --> 00:00:48,515
+que luego podremos utilizar para
+paga por el coste de operaciones.
+
+14
+00:00:48,515 --> 00:00:50,570
+Se verá más claro cuando veamos un ejemplo.
+
+15
+00:00:52,110 --> 00:00:54,667
+Es un tipo de crédito con amortización o
+
+16
+00:00:54,667 --> 00:01:00,236
+este caso en que ahorramos 100 dólares al mes
+para el automóvil de 6.000 dólares
+
+17
+00:01:00,236 --> 00:01:03,034
+porque sabemos que
+lo necesitaremos.
+
+18
+00:01:04,753 --> 00:01:08,280
+Veamos el mismo ejemplo
+con un arreglo dinámico y 
+
+19
+00:01:08,280 --> 00:01:11,840
+n llamadas a PushBack (IntertarAlFinal),
+empezando con un arreglo vacío, ¿ok?
+
+20
+00:01:11,840 --> 00:01:15,740
+La idea es que vamos a cobrar 3 por
+cada inserción.
+
+21
+00:01:15,740 --> 00:01:18,320
+Así que por cada PushBack, 
+vamos a cobrar 3.
+
+22
+00:01:18,320 --> 00:01:21,210
+Uno es el coste directo por
+
+23
+00:01:22,360 --> 00:01:26,910
+almacenar el nuevo elemento en el arreglo, 
+y los otros dos vamos a guardarlos.
+
+24
+00:01:28,520 --> 00:01:33,050
+Así que si necesitamos redimensionar más tarde,
+pagaremos por desplazar los elementos,
+
+25
+00:01:33,050 --> 00:01:37,100
+utilizaremos los tokens que ya hemos guardado.
+
+26
+00:01:37,100 --> 00:01:41,652
+Y luego, pondremos 1 token,
+una vez añadido el elemento.
+
+27
+00:01:41,652 --> 00:01:47,149
+1 token en el elemento que añadimos,
+luego 1 token
+
+28
+00:01:47,149 --> 00:01:52,654
+en un elemento añadido anteriormente,
+¿ok?
+
+29
+00:01:52,654 --> 00:01:55,210
+Esto se verá más claro cuando
+veamos un ejemplo práctico.
+
+30
+00:01:57,160 --> 00:01:58,430
+Veamos un ejemplo:
+Tenemos un arreglo vacío.
+
+31
+00:01:58,430 --> 00:02:01,580
+Y vamos a empezar con tamaño 0,
+capacidad 0.
+
+32
+00:02:01,580 --> 00:02:03,650
+Hacemos PushBack(a), y ¿qué ocurre?
+
+33
+00:02:03,650 --> 00:02:06,970
+Hay que asignar memoria para el arreglo, 
+tamaño uno, apuntar a ella y
+
+34
+00:02:06,970 --> 00:02:09,060
+luego almacenar "a" en el arreglo.
+
+35
+00:02:09,060 --> 00:02:13,510
+Y ahora ponemos un token en "a" y
+
+36
+00:02:13,510 --> 00:02:17,010
+este token es lo que usamos para
+pagar más tarde para mover "a".
+
+37
+00:02:17,010 --> 00:02:18,520
+En este ejemplo, para 
+
+38
+00:02:18,520 --> 00:02:22,390
+el primer elemento no hay
+otro elemento donde poner el otro token
+
+39
+00:02:22,390 --> 00:02:26,370
+Así que simplemente 
+descartaremos ese tercer token.
+
+40
+00:02:26,370 --> 00:02:29,030
+Insertamos "b", ¿okay?
+
+41
+00:02:29,030 --> 00:02:32,940
+No hay capacidad para "b", así que asignamos 
+un arreglo más grande y luego desplazamos "a"
+
+42
+00:02:32,940 --> 00:02:35,240
+¿Cómo vamos a "pagar" para mover "a"?
+
+43
+00:02:35,240 --> 00:02:37,630
+Bien, con el token que
+ya tiene "a".
+
+44
+00:02:37,630 --> 00:02:40,800
+Ya pagamos previamente para 
+mover "a", ¿ok?
+
+45
+00:02:40,800 --> 00:02:43,720
+Cuando almacenamos "a" en el arreglo
+inicialmente,
+
+46
+00:02:43,720 --> 00:02:47,930
+pusimos un token que "pagaría" para 
+moverlo a un arreglo nuevo.
+
+47
+00:02:47,930 --> 00:02:50,850
+Así es como "pagamos" para mover "a" y
+
+48
+00:02:50,850 --> 00:02:55,980
+luego actualizamos "arr", borramos el anterior
+y ahora almacenamos "b".
+
+49
+00:02:55,980 --> 00:02:59,804
+Así que almacenamos "b" al coste de uno,
+y todavía tenemos dos tokens.
+
+50
+00:02:59,804 --> 00:03:04,740
+Vamos a poner un token en "b" y,
+poner una capacidad sobre dos.
+
+51
+00:03:04,740 --> 00:03:09,230
+Es un elemento anterior, así que
+vamos a poner uno en "b" para que
+
+52
+00:03:09,230 --> 00:03:11,270
+Hemos "gastado" tres:
+
+53
+00:03:11,270 --> 00:03:12,570
+Uno ahora, y
+
+54
+00:03:12,570 --> 00:03:18,050
+dos como pago diferido que usaremos
+más tarde en forma de esos tokens.
+
+55
+00:03:19,260 --> 00:03:22,560
+Recuerda que esos tokens no se almacenan 
+en la estructura de datos, 
+
+56
+00:03:22,560 --> 00:03:24,750
+No están en el arreglo, 
+
+57
+00:03:24,750 --> 00:03:26,580
+es simplemente un forma de 
+
+58
+00:03:26,580 --> 00:03:29,590
+llevar la cuenta mental para
+hacer nuestro análisis.
+
+59
+00:03:30,920 --> 00:03:33,790
+Cuando añadimos "c",
+debemos asignar un nuevo arreglo.
+
+60
+00:03:33,790 --> 00:03:37,310
+Copiamos "a" y pagamos por eso
+con un token pre-pagado.
+
+61
+00:03:37,310 --> 00:03:40,560
+Copiamos "b", pagando con
+un token de pre-pago.
+
+62
+00:03:40,560 --> 00:03:43,080
+Y ahora añadimos "c".
+
+63
+00:03:44,540 --> 00:03:47,560
+Eso es uno,
+el segundo pago que hacemos es
+
+64
+00:03:47,560 --> 00:03:50,270
+un token en "c" y,
+luego un token en "a".
+
+65
+00:03:50,270 --> 00:03:55,010
+Cuatro dividido por dos, esta es la capacidad
+dividida por dos, es dos elementos anteriores.
+
+66
+00:03:57,070 --> 00:04:00,850
+Añadimos "d",
+no hay que redimensionar, ¡por fín!
+
+67
+00:04:00,850 --> 00:04:03,750
+Okay, simplemente ponemos "d" y,
+eso cuesta uno.
+
+68
+00:04:03,750 --> 00:04:05,180
+Segundo, ponemos un token en "d",
+
+69
+00:04:05,180 --> 00:04:09,790
+Tercero, poner un token en capacidad dividido por dos o
+dos elementos anteriores a eso.
+
+70
+00:04:09,790 --> 00:04:16,000
+Fíjate que tenemos un arreglo completo y
+todos los elementos tienen tokens, 
+
+71
+00:04:16,000 --> 00:04:20,970
+que significa que necesitaremos redimensionar, 
+y hemos pagado el movimiento por adelantado.
+
+72
+00:04:20,970 --> 00:04:23,305
+Añadimos "e", asignamos nuevo arreglo,
+
+73
+00:04:23,305 --> 00:04:26,610
+Y ahora usamos esos tokens de pre-pago
+para pagar por mover a, b, c y d.
+
+74
+00:04:26,610 --> 00:04:31,400
+Eliminamos el antiguo arreglo,
+y almacenar "e",
+
+75
+00:04:31,400 --> 00:04:34,540
+Y de nuevo, ponemos un token en "e",
+y un token en "a".
+
+76
+00:04:36,600 --> 00:04:41,750
+Entonces, lo que tenemos es un coste amortizado
+de orden 1 por cada PushBack.
+
+77
+00:04:41,750 --> 00:04:44,730
+Y en particular, 
+tenemos un coste de tres, ¿verdad?
+
+78
+00:04:45,980 --> 00:04:46,820
+Claramente, así lo hemos visto.
+
+79
+00:04:48,710 --> 00:04:51,600
+Vamos a recapitular cómo hicimos ésto.
+
+80
+00:04:52,790 --> 00:04:57,330
+Para este arreglo dinámico decidimos que 
+cobraríamos tres, y otras estructuras ..
+
+81
+00:04:57,330 --> 00:05:00,880
+de datos también como otras operaciones no 
+tuvimos que cobrar una cantidad diferente.
+
+82
+00:05:00,880 --> 00:05:03,380
+Debemos averiguar si
+será suficiente,
+
+83
+00:05:03,380 --> 00:05:08,450
+en nuestro caso tres era suficiente, y 
+decidimos que procederíamos a
+
+84
+00:05:09,790 --> 00:05:13,540
+poner esos tokens en
+los elementos que lo necesitaban.
+
+85
+00:05:13,540 --> 00:05:20,605
+Es una forma muy física de llevar la cuenta del
+trabajo que hemos hecho,
+
+86
+00:05:20,605 --> 00:05:22,930
+o el trabajo pagado por adelantado que hemos hecho.
+
+87
+00:05:22,930 --> 00:05:27,170
+Así que cobramos 3,
+1 es el coste directo de la inserción.
+
+88
+00:05:27,170 --> 00:05:31,120
+Si necesitamos redimensionar, hemos preparado 
+las cosas tal que si el arreglo ..
+
+89
+00:05:31,120 --> 00:05:35,840
+.. se llena, para que se llene,
+
+90
+00:05:35,840 --> 00:05:41,030
+hemos necesitado suficientes inserciones
+para que cada elemento tuviera un token.
+
+91
+00:05:41,030 --> 00:05:45,911
+Todos los nuevos que hemos añadido desde 
+el redimensionamiento anterior, más cada vez
+
+92
+00:05:45,911 --> 00:05:50,649
+que añadimos uno de los nuevos,
+hemos pre-pagado por un elemento anterior
+
+93
+00:05:52,622 --> 00:05:58,038
+Así que, pagamos por la inserción,
+uno por el almacenamiento ahora y
+
+94
+00:05:58,038 --> 00:06:01,569
+pagamos uno para ayudar a
+otro elemento anterior
+
+95
+00:06:04,448 --> 00:06:08,427
+El próximo video mostrará una
+tercera forma de hacer Análisis de Amortización,
+
+96
+00:06:08,427 --> 00:06:10,300
+que es el Método del Físico.

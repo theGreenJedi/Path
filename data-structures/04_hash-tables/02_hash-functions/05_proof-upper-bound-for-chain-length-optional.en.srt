@@ -1,0 +1,578 @@
+1
+00:00:00,230 --> 00:00:04,680
+Hi, in this video, you will learn how to
+prove the upper bound on the expected
+
+2
+00:00:04,680 --> 00:00:07,470
+chain length in the hash
+table using chaining and
+
+3
+00:00:07,470 --> 00:00:10,210
+a hash function from
+the universal hash family.
+
+4
+00:00:10,210 --> 00:00:13,110
+This proof is needed to be
+confident that our hash tables
+
+5
+00:00:13,110 --> 00:00:14,360
+will work fast in practice.
+
+6
+00:00:15,430 --> 00:00:18,520
+The proof will use some advanced math,
+which we won't cover, but
+
+7
+00:00:18,520 --> 00:00:20,310
+this video is optional.
+
+8
+00:00:20,310 --> 00:00:23,150
+We will use probabilities,
+mathematical expectation, and
+
+9
+00:00:23,150 --> 00:00:25,670
+the linearity of expectations.
+
+10
+00:00:25,670 --> 00:00:28,270
+First, let us recall what
+is a universal family.
+
+11
+00:00:28,270 --> 00:00:34,500
+So if U is the universe, the set of all
+possible keys that we want to store and
+
+12
+00:00:34,500 --> 00:00:39,500
+calligraphic H is the set of function from
+this universe to the set of numbers from 0
+
+13
+00:00:39,500 --> 00:00:44,430
+to m- 1, where m is the selected
+cardinality of the hash function.
+
+14
+00:00:44,430 --> 00:00:48,700
+Then this set, calligraphic H,
+is called universal family, if for
+
+15
+00:00:48,700 --> 00:00:53,300
+any two different keys from the universe,
+the probability of collision for
+
+16
+00:00:53,300 --> 00:00:58,140
+a random hash function on these
+two keys is at most 1 over m.
+
+17
+00:00:58,140 --> 00:01:00,200
+What do we mean by probability?
+
+18
+00:01:00,200 --> 00:01:06,560
+It is taken over the random choice of a
+hash function from the set calligraphic H.
+
+19
+00:01:06,560 --> 00:01:10,340
+Or in other words, the reformulation
+of this definition is that for
+
+20
+00:01:10,340 --> 00:01:16,370
+any two different keys, x and y from
+the universe, at most 1 over m part of
+
+21
+00:01:16,370 --> 00:01:22,000
+all hash functions in calligraphic H
+produce a collision on these two keys.
+
+22
+00:01:22,000 --> 00:01:24,190
+Let's also recall what is a load factor.
+
+23
+00:01:24,190 --> 00:01:27,880
+You have a hash table of size m,
+storing n keys.
+
+24
+00:01:27,880 --> 00:01:31,230
+Then n/m is denoted by alpha and
+called load factor.
+
+25
+00:01:32,300 --> 00:01:35,390
+That measures how filled up is your table.
+
+26
+00:01:35,390 --> 00:01:40,638
+If you store just one key in a hash table
+of size 10, then load factor is 0.1.
+
+27
+00:01:40,638 --> 00:01:45,774
+And if you store nine keys in a hash table
+of size 10, then the load factor is 0.9.
+
+28
+00:01:47,370 --> 00:01:51,600
+We'll also use the property
+called linearity of expectation.
+
+29
+00:01:51,600 --> 00:01:56,090
+It says that for any finite set of
+random variables, x1 through xk,
+
+30
+00:01:56,090 --> 00:02:00,350
+the random variable y, which is equal
+to sum of these random variables,
+
+31
+00:02:00,350 --> 00:02:05,590
+has expectation which is equal to the sum
+of expectations of these random variables.
+
+32
+00:02:05,590 --> 00:02:08,790
+We won't prove it, we will use it
+as a fact from probability theorem.
+
+33
+00:02:10,180 --> 00:02:12,952
+Now the main theorem
+is that if you select,
+
+34
+00:02:12,952 --> 00:02:17,830
+at random, a hash function from
+a universal family, calligraphic H and
+
+35
+00:02:17,830 --> 00:02:24,170
+it is used to hash n keys into hash table
+T of size m giving load factor alpha.
+
+36
+00:02:24,170 --> 00:02:28,988
+Then for any key k,
+the expected length of the chain in
+
+37
+00:02:28,988 --> 00:02:34,120
+table t which contains
+key k if it stored in it,
+
+38
+00:02:34,120 --> 00:02:37,960
+is at most 1 + alpha.
+
+39
+00:02:37,960 --> 00:02:42,770
+What it means is that on average
+the length of the chain containing
+
+40
+00:02:42,770 --> 00:02:47,520
+any key will be just 1 + alpha,
+which is not too long.
+
+41
+00:02:47,520 --> 00:02:52,187
+Of course, in the worst case,
+the chain containing some key can be very,
+
+42
+00:02:52,187 --> 00:02:56,570
+very long such as n keys, and
+all of them are in the same chain.
+
+43
+00:02:56,570 --> 00:03:00,920
+But, on average, if it's like the random
+hash function from the universal family,
+
+44
+00:03:00,920 --> 00:03:05,260
+the chain length will be at most 1 +
+alpha, where alpha is the lowest factor.
+
+45
+00:03:07,140 --> 00:03:12,830
+So to prove that, we fix some arbitrary
+key k and consider all other keys l
+
+46
+00:03:13,910 --> 00:03:19,650
+and define a random variable
+Xkl which takes value of 1 if
+
+47
+00:03:19,650 --> 00:03:24,560
+the hash value of k is
+equal to hash value of l,
+
+48
+00:03:24,560 --> 00:03:26,844
+if there's a collision between keys k and
+l.
+
+49
+00:03:26,844 --> 00:03:30,751
+And it takes value zero otherwise.
+
+50
+00:03:30,751 --> 00:03:34,400
+Let's estimate the expectation
+of this random variable.
+
+51
+00:03:36,390 --> 00:03:39,910
+It just takes two different value,
+so we need first to multiply,
+
+52
+00:03:39,910 --> 00:03:45,070
+the first one is zero by the probability
+of zero, but we will anyway get zero.
+
+53
+00:03:45,070 --> 00:03:48,129
+And we need to add 1 multiplied
+by the probability of 1,
+
+54
+00:03:48,129 --> 00:03:51,763
+which is the same as the probability
+of collision and we know that for
+
+55
+00:03:51,763 --> 00:03:54,850
+a universal family that
+probability is at most 1 over m.
+
+56
+00:03:55,860 --> 00:04:02,161
+So expectation of Xkl for k and any l
+different from k is at most 1 over m.
+
+57
+00:04:03,290 --> 00:04:06,170
+Now let's estimate the number
+of collisions, and we denote by
+
+58
+00:04:06,170 --> 00:04:10,730
+Yk the number of collisions that k has
+with different keys l in the table.
+
+59
+00:04:12,050 --> 00:04:16,470
+And to do that,
+we can just sum variables Xkl for
+
+60
+00:04:16,470 --> 00:04:20,970
+all l which are different from key,
+and are in the table T.
+
+61
+00:04:20,970 --> 00:04:21,750
+Why is that?
+
+62
+00:04:21,750 --> 00:04:25,610
+Because when a collision happens for
+some key l different from k,
+
+63
+00:04:25,610 --> 00:04:28,870
+variable Xkl takes value 1.
+
+64
+00:04:28,870 --> 00:04:30,918
+Otherwise, it takes value 0.
+
+65
+00:04:30,918 --> 00:04:35,890
+So the sum of all these variables is just
+the number of collisions with key k.
+
+66
+00:04:37,410 --> 00:04:43,910
+Then the length of the chain containing
+key k, potentially, in the table T, is 1.
+
+67
+00:04:43,910 --> 00:04:46,610
+Because this key itself
+could be in the table.
+
+68
+00:04:46,610 --> 00:04:50,309
+Plus the number of collisions
+with different keys, which is Yk.
+
+69
+00:04:51,670 --> 00:04:57,040
+So the expectation of the number of
+collisions is by the property of linearity
+
+70
+00:04:57,040 --> 00:05:02,928
+of expectation, equal to the sum
+of expectations of variables Xkl.
+
+71
+00:05:04,700 --> 00:05:09,440
+And we have an upper bound on the
+expectation of each of those variables,
+
+72
+00:05:09,440 --> 00:05:10,950
+which is 1 over m.
+
+73
+00:05:10,950 --> 00:05:13,390
+So this sum is at most sum for
+
+74
+00:05:13,390 --> 00:05:18,740
+all keys l different from k which
+are in the table T of value 1 over m.
+
+75
+00:05:20,030 --> 00:05:23,280
+And there are at most n
+summands in this sum.
+
+76
+00:05:23,280 --> 00:05:29,240
+Because the size, the number of
+keys in the hash table T, Is n.
+
+77
+00:05:29,240 --> 00:05:34,000
+So at most n of them are both on
+the table and different from k.
+
+78
+00:05:35,370 --> 00:05:38,740
+So this sum is at most n over m.
+
+79
+00:05:38,740 --> 00:05:40,630
+And that is the same as alpha,
+the load factor.
+
+80
+00:05:41,950 --> 00:05:47,448
+And so the expectation of the chain
+length is the expectation of 1 + Yk,
+
+81
+00:05:47,448 --> 00:05:53,760
+and by linearity, is the same as the
+expectation of 1 plus expectation of Yk.
+
+82
+00:05:53,760 --> 00:05:57,468
+But expectation of constant 1 is just 1,
+and
+
+83
+00:05:57,468 --> 00:06:02,224
+expectation of Yk we've just
+estimated from above, and so
+
+84
+00:06:02,224 --> 00:06:08,780
+we have an upper bound on the expected
+chain length, which is 1 + alpha.
+
+85
+00:06:08,780 --> 00:06:10,870
+So we proved our theorem.
+
+86
+00:06:10,870 --> 00:06:13,290
+Now here is a corollary from this theorem,
+
+87
+00:06:13,290 --> 00:06:17,400
+which basically says that if you
+work with your hash table right,
+
+88
+00:06:17,400 --> 00:06:21,450
+then your operations will on
+average run in constant time.
+
+89
+00:06:23,270 --> 00:06:28,060
+More formally, if you do some n
+operations with your hash table which
+
+90
+00:06:28,060 --> 00:06:32,880
+include insertions,
+deletions and modifications, but
+
+91
+00:06:32,880 --> 00:06:37,570
+the total number of insertions is big O of
+m, where m is the size of the hash table.
+
+92
+00:06:38,610 --> 00:06:43,660
+Then, the total time to make all those
+operations will be big theta of n.
+
+93
+00:06:43,660 --> 00:06:47,896
+Well, of course it will be at
+least m to make n operations, but
+
+94
+00:06:47,896 --> 00:06:50,430
+it will be at most proportional to m.
+
+95
+00:06:51,850 --> 00:06:57,560
+And thus the amortized time for each
+operation will be big O of 1 on average.
+
+96
+00:06:59,920 --> 00:07:02,240
+Let's prove this corollary.
+
+97
+00:07:02,240 --> 00:07:04,760
+We have big O of m insertions, so
+
+98
+00:07:04,760 --> 00:07:09,114
+the total number of keys stored at
+any moment is, at most, big O of m.
+
+99
+00:07:10,300 --> 00:07:11,450
+n is big O of m.
+
+100
+00:07:11,450 --> 00:07:17,560
+And then alpha, which is m over m,
+must be big O of 1, must be constant.
+
+101
+00:07:17,560 --> 00:07:19,296
+And then 1 +alpha,
+
+102
+00:07:19,296 --> 00:07:24,710
+our upper bound on the expected
+chain length, is also big O of one.
+
+103
+00:07:24,710 --> 00:07:26,040
+And it means that on average,
+
+104
+00:07:26,040 --> 00:07:29,682
+the expected training time of
+the operation, is big O of one.
+
+105
+00:07:30,930 --> 00:07:34,030
+And then when we sum the expectations for
+
+106
+00:07:34,030 --> 00:07:39,250
+running time of each operation we get the
+expected running time of all n operations,
+
+107
+00:07:39,250 --> 00:07:41,240
+again by linearative expectations.
+
+108
+00:07:41,240 --> 00:07:45,500
+And so the expected running time
+of n operations is big theta of n,
+
+109
+00:07:45,500 --> 00:07:48,920
+because it's big O of n,
+and also it is at least n.
+
+110
+00:07:51,340 --> 00:07:52,380
+In conclusion,
+
+111
+00:07:52,380 --> 00:07:57,080
+we've just proved upper bound 1 +
+alpha on the expected chain length.
+
+112
+00:07:57,080 --> 00:08:00,940
+In the case when we use a hash
+table with chaining scheme and
+
+113
+00:08:00,940 --> 00:08:05,120
+select a random hash function
+from a universal family.
+
+114
+00:08:05,120 --> 00:08:09,280
+And we've also proven constant
+amortized expected running time for
+
+115
+00:08:09,280 --> 00:08:13,410
+operations with a hash table,
+If you use universal family and
+
+116
+00:08:13,410 --> 00:08:17,780
+chaining and you don't put too
+many keys on your hash table.
+
+117
+00:08:17,780 --> 00:08:23,300
+Basically if you keep your loss factor
+below 1, as we discussed in one of
+
+118
+00:08:23,300 --> 00:08:28,179
+the previous videos, then your operations
+on average run in constant time.
+
+119
+00:08:29,510 --> 00:08:34,520
+And in the next video, we'll also prove
+that the set of hash functions that was
+
+120
+00:08:34,520 --> 00:08:38,890
+suggested as a universal family for
+integers is really a universal family.
+
+121
+00:08:38,890 --> 00:08:40,901
+We will prove that formally.

@@ -1,0 +1,98 @@
+Hi, in this video we will study another
+approach to the IP addresses problem. In the last video we understood that
+the direct addressing scheme sometimes requires too much memory. And why is that? Because it tries to store something for each possible IP address while we're only
+interested in the active IP addresses. Those from which at least some user has
+accessed our service during the last hour. So the first idea for
+improvement of the memory consumption is let's just store the active IP's and
+nothing else. Another idea is that if our error based
+approach from the last video has failed, then lets try to use
+list instead of an error. So let's store all the IP addresses
+which are active in a list. Sorted by the time of access. So that the first element in the list
+corresponds to the oldest access time during the last hour, and the last element
+in the list corresponds to the latest, newest access from some IP
+address to our service. Let's jump from here right into the pseudo
+code, because it's pretty simple. We're going to have our procedure
+update access list which takes in the log file log. It also takes in i which
+is the index of the first log line which hasn't been processed yet. And also it has input L
+which is the list and instead of some abstract data structure
+see from the first videos and instead of the area a from
+the direct addressing scheme. We put parameter L which is
+a list into this procedure and this is the list with active IP addresses. So our code have to pass first deals with
+new lines and second deals with old lines. We just go searching from
+the first unprocessed line. And if we need to added to our
+list because it was processed during the last hour,
+we just append it to the end of the list. And now again, the last element of
+the list corresponds to the latest, newest access from some IP address. And note that in our list we will
+start not just the IP address but, both IP address and the time of the axis. And then we will go to the next element
+in the log file and go and go while we still have some log lines which we
+need to add to the end of our list. And then the second part we just look at
+the oldest event during the last hour, which is corresponding to
+the first element of the list. And if that is actually before
+the start of the last hour, then we need to remove it from the list. And so we just do L.Pop. And we do that while the head
+of the list is still too old. And when we stop, it means that all
+the elements in the list are actually with time during the last hour. Why is that? Because the list is always kept in
+the order by increasing time of access. When we add new log lines to the list. We add only those which have time even
+more than last element of the list currently, and
+we remove something from the list. We remove the oldest entries. So, all the entries are always sorted,
+and as soon as we removed everything from the start which is too old, all
+the entries in the list are not too old. They are made during the last hour. So this is pretty simple and now we need
+to answer questions like, whether my IP address was used during the last hour to
+access the service and how many times. To answer the first one we just need to find out whether there is an element
+in our list with the given IP address. And that is done by find by ID,
+which is different from the standards find procedure of the least by the fact
+that we search not by the whole object, which is a log line,
+which contains both IP address and time. But we search just by the first field,
+by the IP address. So our list contains
+tuples of IP addresses and times of access, and
+we only look by IP address. But the implementation will be the same. We'll just go from the head of
+the list to the end of the list, and compare the IP field of the log lines
+with the IP address given as the input. And if it coincides we
+will return this element, otherwise we'll return that there is
+nothing with this IP address in the list. And the reason we return
+some special [INAUDIBLE]. So then, in the AccessedLastHour,
+just compare the results with null. If it's not null then this IP address
+is in the list, otherwise it's not. And to count the number of times our service was accessed from
+a particular IP address, we just need to count the number of log lines in
+the list which have the same IP address. And that can be done by procedure
+CountIP of the list which again differs from the standard count
+procedure in the list by the fact that it counts by the first field, not by
+the whole object which is a log line. But it just goes from
+to the end of the list. Compares the IP field with
+the given IP and if they coincide, it increases the counter by 1. And returns the counter in the end. So this is all the implementation. Now let's analyze it. Let N be the number of
+currently active IPs, then the memory consumption
+is bigger of N. Because we only store the active IP
+addresses and the corresponding times of X's, but the times of X's on the add
+constant memory per active IPs. So it's all null linear in the number
+of active IPs which is much better than the direct addressing scheme because
+it require an amount of memory proportionally to the number
+of all possible IP addresses. And here will only require amount
+memory proportional to the number of currently active IP addresses. What about running time? We know the standards list
+procedures such as Append, Top and Pop all working constant time and that's why the UpdateAccessList
+works in constant time per log line. Of course, any particular call to
+UpdateAccessList could take more than constant number of operations if we
+need to add more new lines to the end of the list or remove many many old
+lines from the start of the list. But for each log line we will
+only append it at most once and we will only removed from
+the beginning at most once. So it's constant time per log line
+plus constant time per each call of UpdateAccessList just to check whether
+we need to append something and whether we need to remove
+something from the beginning. But this amount of operations
+can be controlled by how often do we actually
+call Update Access List. What about answering the questions? We know that Find By IP and Count IP have to go through the whole list
+in the worst case and actually count. IP has to go through the whole list
+all the time to find out how many log lines have the same IP as the given
+one and so AccessLastHour and AccessCountLastHour are both linear
+in the number of active IPs. And that is actually now good
+because even without introducing any additional data structures,
+we could just take the log file, take the last line in it before
+the current time, and go back from it. And just look through each log line and compare its IP address with
+the IP address in the question. And count how many times it
+occurs during the last hour and just stop as soon as we go through
+the border of the last hour. And that will take the same time
+without any additional data structure. So this solution is not more
+clever than the trio approach. So, we failed somewhat with
+direct addressing scheme and we failed with this list based approach. It is overall a failure? Well no, in the next videos we'll
+combine the ideas from direct addressing scheme with
+the list based approach. And we'll come up with solution which is
+both good in terms of memory consumption and is much faster than the trivial
+approach in terms of the running time.

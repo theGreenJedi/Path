@@ -1,0 +1,103 @@
+Now when we've seen a few examples of
+using the disjointed set data structure and when we formally defined it, let's start to think about
+possible ways of implementing it. As usual we will start with a few naive implementations that will turn
+out to be slow on one hand, but on the other hand they will help us to
+come up with an efficient implementation. First of all, let us simplify
+our life by assuming that our n objects are just integers from 1 to n. This in particular will allow us to
+use the subjects as indices in a race. Okay, so
+our sets are just sets of integers. And we need to come up with a notion
+of an ID, of a unique ID for each set. So, let's use the smallest
+element in each set as its ID. In particular,
+since our objects are integers, for each element we can
+store the ID of the set, this element belongs to in
+the array called smallest. For example,
+if we have the following three sets, then in the first set the ID,
+namely the smallest element is two. In the second set the smallest element and
+the only element is five. In the third set
+the smallest element is one. Then this information is stored in
+the array called smallest of size nine. Separations MakeSet and Find can be implemented in just
+one line of code in this case. Namely to create a singleton set
+consisting of just element i, we set smallest of i to be equal to i,
+right. To find the ID of the set
+containing the element i, we just return the value of smallest[i]. The running time of both of
+these operation is constant. Everything is not so easy with
+the union operation unfortunately. So to merge two sets containing
+elements i and j, we do the following. First we find out the ID of
+the set containing the element i. We do this by calling Find(i) and
+restores the result in the variable i_id. Then we do the same for the element j. We call Find(j) and we store
+the resulting id in the variable j_id. Then we check whether
+i_id is equal to j_id. And if they are equal, this means that
+i and j already lie in the same set. Which means that nothing needs to be done. Which means, in turn,
+that we can just return. If i_id and j_id are different,
+we do the following. Well, we need to merge two sets. The smallest element in this set is i_id. The smallest element in this set is j_id. Which means that the smallest
+element in the merged set should be just the minimum among i_id and
+j_id. Restores as minimum in the variable m. Then we need to scan all the objects, all our n objects and
+update the id of each. And update the value of
+the smallest array for reach objects for
+which their id is i_id or j_id. So this is done in the loop here
+where k ranges from 1 to n. So we check where
+the smallest of k is i_id or j_id and if it is equal then
+we update it to be equal to m. The running time of this operation is
+linear of course, just because essentially what we have here is a single loop
+that goes over all n objects. The bottleneck of our current
+implementation is the union operation, whose running time is linear as opposed
+to the finite make-set operations. Whose running time is just constant. So we definitely need
+another data structure for storing sets, which allows for
+more efficient merging. And one such data
+structure is a linked list. So let's try to use the following idea. Let's represent each set
+just as a linked list and let's use the tail of a list as
+the ID of the corresponding set. Let me illustrate this with two examples. In this case we have two sets,
+each one of them is represented, is organized as a linked list, and we treat the tail of a list as
+the ID of the corresponding set. For example in this case,
+7 is the ID of the first set and 8 is the ID of the second set. Now to find the ID of the set that
+contains the element three for example, we just follow the pointers until we
+reach the tail of the corresponding list. So in this case ID is well defined. What is also nice, is that in this case. We can merge two sets very efficiently. Actually since they are organized
+as lists, we just need to append to the other list and
+this requires changing just one pointer. What is very nice in this case is
+just the id of the merge itself is updated automatically. So after the merging,
+the hat of the resulting list is 8, so the ID is updated for all the elements
+of two sets automatically. As we've just discussed, there are at
+least two advantages of the current implementation where we store
+each set as a linked list. First of all the running time of the union
+operation is, in this case, just constant. This is because to merge, to linked lists, we'd just append one of
+them to the other one. And for
+this we need just to change one pointer. Another advantage here is that we
+have a well-defined ID in this case. Namely if two elements lie in
+the same set then find will return the same tale element from
+the corresponding list, right? And also if two elements lie in
+different sets then the tales of the corresponding two
+lists are different. And this is exactly what we want. There are however also two disadvantages. The first disadvantage is that now the running time of the find operation
+is linear in the worst case. This is because to find the tail
+of the corresponding list, I mean, given an element, we would like to
+find the corresponding tail of a list. For this, we need to follow the pointers
+til we reach the tail of this list. For this, we might need potentially to
+traverse a linear number of elements. Because the list might contain
+a linear number of elements. So in the worst case, the running time of Find declaration
+is linear, which is not so good. The second disadvantage is that actually
+implementing Union operation is not so, in constant time, is not so easy as it
+was shown on our previous two examples. Namely, we assumed
+implicitly in this example, then when given two elements x and
+y, we can find the beginning of the list containing x, and the end of
+the list containing y in constant time. So to be able to do this, we might need
+to store some additional information. And this in turn will require us to
+update this information when we merge two elements. So once again, this means that
+to implement union procedure in constant time we need to store
+some additional information, but not just pointers from a particular
+element to the next element. In search of an inspiration for improving our current implementation,
+let's review our previous two examples. So we've discussed that merging
+these two sets shown on this slide is follows as good because it
+requires just constant time and it updates the ID of
+the resulting set automatically. On the other hand it is bad
+because it creates a long list. This in particular requires Find(9)
+to traverse the whole list, and this makes the find operation
+a linear time operation. Right, so let's try to think about a
+different way of merging these two lists. For example, what about the following one? In this case, first of all we, the resulting in structures is not least,
+it's just strange right? However, it is still constant time, right? And also 7 can still be considered
+as a ID of the resulting set. Because 7 is reachable from
+any other element, right? However, so what about this structure? It is not a list, but it is a tree. Right, so it is a tree whose root is
+seven, and that has two branches, right. In the next video we will
+develop this idea to get a very efficient implementation of
+the disjoint sets data structure. Namely, we will represent
+each set as a tree. And we will show that in
+this case the running time, the amortized running time of each
+operation is nearly constant.

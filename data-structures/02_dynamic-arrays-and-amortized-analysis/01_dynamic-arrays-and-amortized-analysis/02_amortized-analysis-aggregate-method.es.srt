@@ -1,0 +1,391 @@
+1
+00:00:00,310 --> 00:00:03,430
+Ahora hablaremos de lo que es un análisis amortizado
+
+2
+00:00:03,430 --> 00:00:05,900
+y veremos uno de los métodos
+para efectuar dicho análisis.
+
+3
+00:00:07,280 --> 00:00:12,410
+A veces nos concentramos únicamente en el peor caso posible, y esto podría ser demasiado rígido.
+
+4
+00:00:12,410 --> 00:00:16,670
+En especial, cuando nos gustaría conocer el costo del peor caso posible para
+
+5
+00:00:16,670 --> 00:00:21,020
+una secuencia de operaciones, donde algunas de estas son económicas
+
+6
+00:00:21,020 --> 00:00:23,680
+y otras son computacionalmente costosas.
+
+7
+00:00:23,680 --> 00:00:26,390
+Si miramos la operación del peor caso posible y 
+
+8
+00:00:26,390 --> 00:00:30,810
+la multiplicamos por el coste, esto podría significar una sobrestimación del coste total.
+
+9
+00:00:32,210 --> 00:00:36,830
+Por ejemplo, para un arreglo dinámico,
+el redimensionado ocurre de vez en cuando.
+
+10
+00:00:36,830 --> 00:00:40,990
+La mayor parte de las veces, hacemos operaciones
+de coste constante, como añadir un elemento.
+
+11
+00:00:40,990 --> 00:00:45,290
+Sólo cuando se alcanza el límite de capacidad
+tenemos que redimensionar.
+
+12
+00:00:45,290 --> 00:00:48,890
+La pregunta es: ¿cuál es el coste total
+si hay que insertar un número de elementos?
+
+13
+00:00:51,730 --> 00:00:53,610
+Ésta es la definición de coste amortizado:
+
+14
+00:00:53,610 --> 00:00:56,520
+Si tenemos una secuencia de n operaciones,
+
+15
+00:00:56,520 --> 00:01:00,920
+el coste amortizado es el coste de
+esas n operaciones dividido por n.
+
+16
+00:01:02,110 --> 00:01:09,190
+Por ejemplo, digamos que compras
+un automóvil por 6.000 dólares,
+
+17
+00:01:09,190 --> 00:01:11,610
+y calculas que va a durar cinco años.
+
+18
+00:01:12,610 --> 00:01:15,880
+Hay dos posibilidades:
+
+19
+00:01:15,880 --> 00:01:17,650
+Una, pagas los 6.000 ahora
+
+20
+00:01:17,650 --> 00:01:21,560
+y dentro de cinco años compras
+uno nuevo - pagando otros 6.000.
+
+21
+00:01:21,560 --> 00:01:27,440
+Otra opción sería ahorrar
+dinero cada mes.
+
+22
+00:01:27,440 --> 00:01:30,420
+Cinco años son 60 meses.
+
+23
+00:01:30,420 --> 00:01:36,430
+Si ahorras 100 dólares cada mes,
+una vez pasados cinco años, entonces
+
+24
+00:01:36,430 --> 00:01:41,940
+a la hora de comprar uno nuevo,
+ya tienes los 6.000 dólares en el banco.
+
+25
+00:01:41,940 --> 00:01:50,130
+Decimos que el coste amortizado mensual
+ es de 100 dólares al mes,
+
+26
+00:01:50,130 --> 00:01:54,890
+mientras que el peor caso de coste
+mensual será 6.000 dólares.
+
+27
+00:01:54,890 --> 00:01:59,640
+Un coste 0 durante 59 meses, 
+ y luego 6.000 de una vez.
+
+28
+00:01:59,640 --> 00:02:03,370
+El coste amortizado ofrece una
+percepción más equilibrada.
+
+29
+00:02:03,370 --> 00:02:07,150
+Si realmente quieres saber cuál
+es lo más que gasto en un mes,
+
+30
+00:02:07,150 --> 00:02:08,610
+la respuesta es 6.000 dólares.
+
+31
+00:02:08,610 --> 00:02:11,205
+Pero si quieres saber cuanto
+gasto de media,
+
+32
+00:02:11,205 --> 00:02:13,740
+100 dólares es un número más razonable.
+
+33
+00:02:13,740 --> 00:02:15,970
+Por eso hacemos
+un análisis de amortización,
+
+34
+00:02:15,970 --> 00:02:20,180
+para tener una idea más precisa del coste
+
+35
+00:02:20,180 --> 00:02:20,860
+de una sucesión de operaciones.
+
+36
+00:02:22,830 --> 00:02:27,360
+Veamos el método agregado para hacer
+análisis de amortización.
+
+37
+00:02:27,360 --> 00:02:32,700
+Y el método agregado se trata de
+ver la definición de lo que
+
+38
+00:02:32,700 --> 00:02:36,620
+un coste amortizado es,
+y usarla directamente para calcular.
+
+39
+00:02:37,970 --> 00:02:40,700
+Vamos a examinar un ejemplo
+de arreglo dinámico y
+
+40
+00:02:40,700 --> 00:02:42,460
+haremos n llamadas a
+PushBack (InsertarAlFinal)
+
+41
+00:02:42,460 --> 00:02:47,210
+Empezaremos con un arreglo vacío
+y n llamadas a PushBack.
+
+42
+00:02:48,620 --> 00:02:53,190
+Y luego averiguaremos el coste amortizado
+de una llamada a PushBack.
+
+43
+00:02:53,190 --> 00:02:56,430
+Sabemos cuál es el tiempo en el peor caso.
+
+44
+00:02:56,430 --> 00:03:00,410
+Definimos C sub i como
+el coste de la i-ésima inserción.
+
+45
+00:03:00,410 --> 00:03:03,080
+Nos interesa de C1 a Cn.
+
+46
+00:03:04,610 --> 00:03:06,025
+Ci es claramente 1,
+
+47
+00:03:06,025 --> 00:03:08,380
+porque tenemos que,
+
+48
+00:03:08,380 --> 00:03:14,100
+lo que vamos a calcular aquí 
+es almacenar en el arreglo
+
+49
+00:03:14,100 --> 00:03:19,485
+Luego el coste es 1 porque 
+añadimos este i-ésimo elemento.
+
+50
+00:03:20,640 --> 00:03:22,350
+Tengamos que 
+redimensionar o no.
+
+51
+00:03:24,200 --> 00:03:28,390
+Si tenemos que redimensionar, la 
+primera pregunta es ¿cuándo?
+
+52
+00:03:28,390 --> 00:03:33,890
+Necesitamos redimensionar si
+ya no hay más capacidad disponible.
+
+53
+00:03:33,890 --> 00:03:36,150
+Esto es, si el tamaño es igual
+a la capacidad.
+
+54
+00:03:36,150 --> 00:03:37,390
+Bueno, ¿cuándo ocurre éso?
+
+55
+00:03:37,390 --> 00:03:42,070
+Eso ocurre si la anterior 
+inserción la llenó.
+
+56
+00:03:42,070 --> 00:03:43,725
+Esto es, llegó a una potencia de 2,
+
+57
+00:03:43,725 --> 00:03:46,850
+porque, en nuestro caso, siempre 
+duplicamos el tamaño.
+
+58
+00:03:46,850 --> 00:03:49,500
+Eso significa que en la i-ésima inserción
+
+59
+00:03:49,500 --> 00:03:53,240
+vamos a tener que redimensionar
+si el elemento i-ésimo -1 lo llenó.
+
+60
+00:03:53,240 --> 00:03:55,475
+Esto es, i-1 es una potencia de 2.
+
+61
+00:03:56,820 --> 00:03:59,850
+Y si no tenemos que redimensionar, no hay
+coste adicional: es simplemente cero.
+
+62
+00:04:01,480 --> 00:04:06,317
+Entonces, el coste amortizado total es realmente
+
+63
+00:04:06,317 --> 00:04:11,630
+la suma del coste real n dividido por n.
+
+64
+00:04:11,630 --> 00:04:15,090
+Eso es, el sumatorio 
+desde i=1 hasta n de C sub i
+
+65
+00:04:15,090 --> 00:04:19,180
+Y de nuevo, C sub i es el coste
+de esa i-ésima inserción.
+
+66
+00:04:19,180 --> 00:04:24,600
+que es igual a n, ya que cada
+C sub i tiene un coste de 1,
+
+67
+00:04:24,600 --> 00:04:30,920
+así que sumamos esas n veces (que es n), más
+
+68
+00:04:30,920 --> 00:04:36,080
+el sumatorio de 2 elevado a j, desde j=1
+hasta el logaritmo en base 2 de n-1
+
+69
+00:04:36,080 --> 00:04:38,680
+Ese sumatorio significa 
+las potencias de dos,
+
+70
+00:04:38,680 --> 00:04:42,888
+hasta llegar a n-1.
+
+71
+00:04:42,888 --> 00:04:47,841
+Por ejemplo, si n es 100, 
+las potencias de 2
+
+72
+00:04:47,841 --> 00:04:53,270
+serán 1, 2, 4, 8, 16, 32 y 64.
+
+73
+00:04:53,270 --> 00:04:54,940
+Y es el sumatorio de todos ésos.
+
+74
+00:04:54,940 --> 00:04:59,170
+Bueno, el sumatorio es sólo de orden n - O(n).
+
+75
+00:05:00,370 --> 00:05:03,820
+Bien. Basicamente tomamos potencias de 2
+
+76
+00:05:03,820 --> 00:05:05,590
+hasta, pero sin incluir, n.
+
+77
+00:05:05,590 --> 00:05:07,690
+Y eso va a ser no más que 2n.
+
+78
+00:05:07,690 --> 00:05:12,400
+Entonces, tenemos n más
+algo que no supera 2n,
+
+79
+00:05:12,400 --> 00:05:17,030
+eso es claramente orden n dividido por n,
+y eso es orden 1.
+
+80
+00:05:17,030 --> 00:05:22,065
+Así lo que hemos calculado es que 
+tenemos un coste amortizado
+
+81
+00:05:22,065 --> 00:05:24,855
+para cada inserción de orden 1.
+
+82
+00:05:26,670 --> 00:05:30,260
+El coste del peor caso sigue siendo orden n, así
+
+83
+00:05:30,260 --> 00:05:33,610
+si queremos saber cuánto tiempo va a tomar 
+y el peor caso cuando
+
+84
+00:05:33,610 --> 00:05:37,305
+inserciones particulares INAUDIBLE,
+el coste amortizado es orden 1.
+
+85
+00:05:38,510 --> 00:05:39,260
+este de aquí,
+
+86
+00:05:39,260 --> 00:05:43,213
+veremos una alternativa para hacer
+este análisis de amortización.

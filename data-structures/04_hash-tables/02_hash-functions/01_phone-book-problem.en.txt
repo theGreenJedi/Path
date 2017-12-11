@@ -1,0 +1,48 @@
+Hi, in the previous lesson you've
+learned what is a hash function, what is a hash table, and how to use
+those to implement data structures for storing sets of objects and mappings
+from one type of object to another one. However, the speed of this data structure
+depends a lot on the choice of hash function and in this lesson you will
+learn how to choose a good hash function. You will learn how to implement
+an efficient context book. And you will also learn how is hashing
+of strength objects in Java implemented. We will start with the phone book problem. When you use your phone you
+want to be able to quickly look up a phone number of a person
+by name to be able to call him. And to determine who is calling you and to see not their phone number but
+their name if it's in your contact book. So, you need a data structure that
+is able to efficiently add and delete contacts from your phone book. To look up phone number by name and to do the reverse,
+look up the name given the phone number. To do that we will need two mappings, one from phone numbers to names, and
+another one from names to phone numbers. We will implement both of
+those maps as hash tables and we will start from the mapping
+from phone numbers to names. One approach that we know from
+the previous lesson is direct addressing. First, we'll need to convert phone numbers
+to integers and that is very easy to do. We'll implement simple function
+called int, as in integer that just deletes all characters of
+the phone number other then digits. And then you are left with an integer
+number like in this example. Then we'll create an array called Name,
+which will contain 10 to the power L cells, where L is the maximum
+allowed length of the phone number. That way it will be able
+to store a cell for each integer number from 0 to 999,999 and
+that 9 is going L times, where L is the maximum
+length of a phone number. So it will be basically enough to store
+each phone number of allowed length. And in this array, we'll store the names
+corresponding to the phone number. So to store a name corresponding to some
+phone number P, we will first convert P to an integer, and the store the name
+in the cell with this number. And if there is no contact with
+some particular phone number P, we'll just store a default value
+N/A in the corresponding cell. This is how it will look like. On the right is our array Name, and
+on the left, we have two contacts. Natalie with number
+123-45-67 which is converted to 1,234,567 and is stored in the cell
+with this number in the array. It is somewhere in
+the middle of the array, there are a lot of cells before that. A few cells next to it are probably
+filled with default value N/A. Because of course we have much less
+phone numbers in your phone book than 10 to the power of 7, which is 10 million. And then there is another contact of Steve
+which is stored at position 2232323. And of course,
+there are more N/As in this array. So as we know operations in the direct
+addressing scheme work in constant time. However the memory consumption
+is exponential in this case. Is big O of 10 to the power of L, where L is the maximum
+allowed phone number length. And that is problematic,
+because with international phone numbers, which can contain 12 digits or more for
+European countries, for example, we will need one terabyte, just to
+store one phone book, of one person. No smart phone is able to store
+a phone book of size one terabyte. And in the next video, we will suggest a scheme that avoids
+this problem with memory consumption.

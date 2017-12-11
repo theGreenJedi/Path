@@ -1,0 +1,71 @@
+Hello everybody, welcome back. Today, we're going to start
+talking about binary search trees. In particular, we're going to talk about
+what the binary search tree data structure is, how it's constructed, and the basic
+properties that need to be maintained. So last time we came up with this
+idea of a local search problem, we wanted a data structure
+to be able to solve it. And we know that none of the data
+structures we had seen up till this point were sufficient to solve
+the problems that we wanted. But one maybe came closer than the others. Sorted arrays were okay, in that you could
+actually do searches efficiently on them. But unfortunately, you couldn't
+do updates in any reasonable way. But the fact that these things allowed for
+efficient binary searches sort of maybe gives us a good starting point for
+what we're looking for. So, what we should look at is, we should really see this
+operation of binary search. What does it entail, and
+what exactly makes it work? And so we all know how
+a binary search works, right? So you've got your list of numbers,
+you pick the one in the middle. You ask, is the thing I am looking for
+bigger than this or less than this? If it's smaller, I sort of look at
+the middle of first half of the array, and say, is it bigger or less than that? If it's larger, I look to the second
+half of the array, and ask, is it bigger or less than that? And I sort of keep on
+asking these question and each time it sort of narrows down my
+search space until I get an answer. But as you'll note, sort of associated to this sort of binary
+search procedure is a search tree. If you sort of consider
+which questions you ask. First, I ask about,
+is it bigger or less than seven? If it's smaller, I ask about four. If it's bigger, I ask about 13. If I got four and said it was bigger
+than four, I'd then ask about six. And I have this sort of
+whole tree of possibilities. Every time I ask a question it sort
+of splits into two different cases. And maybe the key idea here is that
+if you want to do a binary search, instead of doing it on the array,
+you could just have this search tree. You start at the top of the tree,
+at seven. And then you head down to 4 or 13,
+depending on where you go, and then you keep going down
+until you find your answer. And so in some sense,
+the search tree is as good as the array. But while a sorted array,
+as we saw, was hard to insert into, the tree is actually a lot
+easier to work with in that way. And it turns out this search tree going
+to be the thing that allows us to implement these operations
+in much better way. Okay, so what do we need to
+be the case for the subtree? Well, I mean, like all trees, it should have a root node,
+each node should have two children. It should have a left side, which is sort
+of where you're going to go when you find out that things
+are smaller than that. And then you have a right side, which is where you go when
+things are bigger than that. So, to be a little bit more formal, the tree is constructed
+out of a bunch of nodes. Each node is sort of a data type
+that stores a bunch of things. Importantly, it stores a key, it stores
+a value that you're comparing things to. It also should have a pointer
+to the parent node and a pointer to the left child and
+a pointer to the right child. And to be a search tree, it needs to
+satisfy one very critical property. If you look at the key of a node X,
+then, well, the stuff on the left should be where
+you're going if you do a comparison and find the thing you're looking for
+is smaller than X. And that means that, all the keys stored
+on all the nodes in the left subtree of x, all the descendants of its left child,
+need to have a smaller key than X does. And similarly, if you found that
+something was bigger than X and go to the right,
+it had better actually be on the right. And so, the things whose keys are larger
+than X need to be on the right subtree of X. So just review this. I mean, we have this following
+three trees, A, B, and C. Which one of these trees satisfy
+the Search Tree Property? Well, it turns the only correct one is B,
+B it works out. A has this issue that up at
+the top you've got this node 4 and on the left side,
+it has everything bigger than 4 and on the right side,
+it has everything smaller than 4. And it's supposed to be
+the other way around, but if you switch 4's left and right sides,
+everything would work out there. Now case C is a little bit more subtle. There's really only one problem here. And that's that you have
+this root node which is a 5. And there's another 4, but
+4 is part of 5's right subtree. And remember, everything on the right subtree of
+any node has to be larger than it. And this 4 is smaller. And so other than that one mistake,
+things are okay there as well. Okay, so this is the structure. Next time we're going to talk
+about how to do basic operations on binary search trees and sort of
+give a little bit of pseudocode for how to do these things and then we'll sort
+of have a basic start for this project.

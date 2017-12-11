@@ -1,0 +1,76 @@
+>> Now we know of polynomial
+hash family or hashing strings. But there's a problem with that family. All the hash functions in that
+family have a cardinality of P, where P is a very big prime number. And what we want is
+the cardinality of hash functions to be the same as the size
+of our hash table. So, once a small cardinality. So, we won't be able to use this
+binomial hashing family directly in our hash tables. We want to somehow fix the cardinality of
+the functions in the polynomial family. And a good way to do
+that is the following. We design a new complex transformation
+from strings to numbers, from zero, to m minus one. So, we select the cardinality m, and we want to design a function from strings
+to numbers, between zero, and m minus one. And, to that, we first apply our random hash function
+from the polynomial family to the string. And we get some integer number module P,
+and then we can apply a random hash
+function from the universal family for integers less than P, and
+get a number between 0 and m -1, if we select it from universal
+family from cardinality m. So, we now have a complex
+transformation which is two stage. First, take a stream and apply a random function from
+the polynomial family and then apply a random function from the universal
+family for integers to the result. And you get a number from
+zero to m-1 from the string. Note that it is very important that we
+first select both random function from the polynomial family and the random function from
+the universal family of our integers. And we fix them, and we use the same pair
+of functions for the whole algorithm. And then, the whole function from string
+to integer number from between zero and minus one is a deterministic
+hash function. And it can be shown that the family
+of functions define this way is a very good family. It is not a universal family, but
+it is a very good family with [INAUDIBLE]. More specifically, if you take
+any two different strings S1 and S2 of length at most L + 1, and
+you choose a cardinality m, and you apply the process described to
+build a hash family from strings of length at most L + 1 to integers
+numbers between zero and m minus 1. Then the probability of collision for random function from that family
+is at most 1 over m + L over p. So, that is not an universal
+family because for a universal family there shouldn't be
+any summon L over p the probability of collision should be at most 1 over M. But we can be very, very close to
+universal family because we can control P. We can make P very big. And then L over p will be very small. And so, the probability of collision
+will be at most will 1 over m plus some very small number. And so, it will be either even less
+than 1 over m or very close to it. So 1 mL hash, and then universal hash for integers is a good construction
+of a family of hash functions. A Corollary from
+the previous Lemma is that, if we specifically select the prime number
+p to be bigger than m multiplied by L, then the probability of collision will be,
+at most of 1 over m, so it won't be less than 1 over m itself,
+but it will be at most 1 over m
+multiplied by some constant. Why is that? Well, because if we rewrite 1 over m
+plus L over p by 1 over m + L over mL. Then the second expression will be
+bigger because P is bigger than mL. And then it is equal is 2 over
+m which is big O(1 over m). So that way, we proved that
+combination of polynomial hashing with universal hashing for integers,
+is a really good family of hash functions. Now what if we take this new
+family of hash functions and apply it to build a hash table? Well, I say that for
+big enough prime number p, we'll again have running
+time on average c=O(1 + a). The length of the longest
+chain will be O(1 + a). Where alpha is the lowest
+factor of our hash table. And so, by wisely controlling this size
+of the hash table on the lowest factor as we learned in the previous videos. We can control the running time and
+the memory consumption. Of course, computing the hash
+function itself on sum string s is not a constant time operation,
+because the string can be very long. And we need to look through the whole
+string to compute our hash function. But in the case when the lengths of
+the strings in question are bounded, like for example with names definitely
+there are no names longer than a few hundred characters I think, so
+all they are bounded by some constant L. And so computing hash
+function on the names, tags, of course go off the length
+of the stream time, but it is also we go off constant time
+because L is a constant itself, and so we can implement a map from names
+to phone numbers using chaining, using the newly created family of
+hash functions, which is complex. It first applies polynomial hashing
+to the stream, to the name, and then applies universal family or
+integers to the result. So we can choose a random hash
+function from this two staged family. And store our names, and phone numbers in
+the hash table, using this hash function. In conclusion, you learned how to hash
+integers, and strings, really good, so that probability of collision is small. You learned that a phone book
+can be implemented as two maps, as two hash tables, one from phone
+numbers to names, and another one back, from names to phone numbers. And if you manage to do that in such a way
+you don't waste too much memory where all factors of your hash table is between
+one five and one, and search and modification, on average,
+work in constant time, which is great. And then the next lesson. We'll learn to apply hash functions to
+different problems such as searching for patterns in text.

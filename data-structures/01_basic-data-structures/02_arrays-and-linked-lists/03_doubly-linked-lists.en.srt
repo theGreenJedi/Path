@@ -1,0 +1,360 @@
+1
+00:00:02,370 --> 00:00:08,260
+There is a way to make popping
+the back and adding before cheap.
+
+2
+00:00:08,260 --> 00:00:13,060
+Our problem was that although
+we had a way to get from
+
+3
+00:00:13,060 --> 00:00:16,230
+a previous element to the next element,
+we had no way to get back.
+
+4
+00:00:16,230 --> 00:00:18,740
+And what a doubly-linked list says is,
+well, let's go ahead and
+
+5
+00:00:18,740 --> 00:00:19,890
+add a way to get back.
+
+6
+00:00:19,890 --> 00:00:23,110
+So we'll have two pointers,
+forward and back pointers.
+
+7
+00:00:23,110 --> 00:00:25,974
+That's the bidirectional arrow
+we're showing here conceptually.
+
+8
+00:00:25,974 --> 00:00:29,119
+And the way we would
+actually implement this is,
+
+9
+00:00:29,119 --> 00:00:32,050
+with a node that adds an extra pointer.
+
+10
+00:00:32,050 --> 00:00:35,920
+So we have not only a next pointer,
+we have a previous pointer.
+
+11
+00:00:35,920 --> 00:00:41,137
+So this shows for
+example that the 10 element has a next
+
+12
+00:00:41,137 --> 00:00:47,139
+pointer that points to 4 but
+a previous pointer that points to 7.
+
+13
+00:00:47,139 --> 00:00:51,240
+So at any node we can either go forward or
+we can go backwards.
+
+14
+00:00:53,900 --> 00:00:58,560
+So that means if we're trying to pop the
+back, that's going to work pretty well.
+
+15
+00:00:58,560 --> 00:01:02,277
+What we're going to do is update the tail
+pointer to point to the previous element
+
+16
+00:01:02,277 --> 00:01:04,994
+because again we ca get
+there in an O(1) operation.
+
+17
+00:01:04,994 --> 00:01:09,426
+And then update its next pointer to be
+nil and then finally remove the node.
+
+18
+00:01:09,426 --> 00:01:13,409
+So that's O(1).
+
+19
+00:01:13,409 --> 00:01:17,663
+So if we have a doubly linked list it's
+slightly more complicated (our code) because
+
+20
+00:01:17,663 --> 00:01:22,610
+we've got to make sure to manage both
+prev pointers as well as next pointers.
+
+21
+00:01:22,610 --> 00:01:25,768
+So if we're pushing something in the back,
+we'll allocate a new node.
+
+22
+00:01:25,768 --> 00:01:30,440
+If the tail is nil, which means it's
+empty, then we just have a single node
+
+23
+00:01:30,440 --> 00:01:35,422
+whose prev and next pointers are both nil
+and then head and tail both point to it.
+
+24
+00:01:35,422 --> 00:01:41,607
+Otherwise, we need to 
+update the tail's next pointer for
+
+25
+00:01:41,607 --> 00:01:44,517
+this new node,
+because we're pushing at the end and
+
+26
+00:01:44,517 --> 00:01:49,702
+then go update the prev pointer of this
+new node to point to the old tail and
+
+27
+00:01:49,702 --> 00:01:52,940
+then finally update the tail
+pointer itself.
+
+28
+00:01:55,030 --> 00:01:58,690
+Popping the back,
+also pretty straightforward.
+
+29
+00:01:58,690 --> 00:02:02,944
+We're going to again check to see whether
+this is first an empty list,
+
+30
+00:02:02,944 --> 00:02:04,566
+in which case it's an error.
+
+31
+00:02:04,566 --> 00:02:07,970
+A list with only one element,
+in which case it's simple.
+
+32
+00:02:07,970 --> 00:02:10,983
+Otherwise we're going to go ahead and
+
+33
+00:02:10,983 --> 00:02:16,918
+update our tail to be the prev tail,
+and the next of that node to be nil.
+
+34
+00:02:16,918 --> 00:02:22,229
+Adding after, fairly simple again we just
+need to maintain the prev pointer but
+
+35
+00:02:22,229 --> 00:02:26,826
+adding before also now works in
+the sense that we can allocate our node,
+
+36
+00:02:26,826 --> 00:02:27,857
+our new node and
+
+37
+00:02:27,857 --> 00:02:33,670
+its prev pointer will be the prev pointer
+of the existing node we're adding before.
+
+38
+00:02:33,670 --> 00:02:35,242
+We splice it in that way and
+
+39
+00:02:35,242 --> 00:02:40,180
+then we'll update the next pointer of that
+previous node to point to our new node.
+
+40
+00:02:42,410 --> 00:02:45,300
+And finally,
+just in case we're adding before the head,
+
+41
+00:02:45,300 --> 00:02:48,760
+we need to update the head.
+
+42
+00:02:48,760 --> 00:02:53,045
+So in a singly-linked list,
+we saw the cost of things.
+
+43
+00:02:53,045 --> 00:02:55,467
+Working with the front
+of the list was cheap,
+
+44
+00:02:55,467 --> 00:02:59,310
+working with the back of the list
+with no tail, was all linear time.
+
+45
+00:02:59,310 --> 00:03:02,220
+If we added a tail,
+it was easy to push something at the end,
+
+46
+00:03:02,220 --> 00:03:06,160
+easy to retrieve something at the end,
+but hard to remove something at the end.
+
+47
+00:03:06,160 --> 00:03:08,020
+By switching to a doubly linked list,
+
+48
+00:03:08,020 --> 00:03:11,540
+removing from the end (a PopBack)
+becomes now an O(1) operation,
+
+49
+00:03:11,540 --> 00:03:15,270
+as does adding before which used
+to be a linear time operation.
+
+50
+00:03:18,130 --> 00:03:23,450
+One thing to point out as we
+contrast arrays versus linked lists.
+
+51
+00:03:23,450 --> 00:03:25,230
+So in arrays, we have random access,
+
+52
+00:03:25,230 --> 00:03:28,620
+in a sense that it's constant
+time to access any element.
+
+53
+00:03:28,620 --> 00:03:31,540
+That makes things like
+a binary search very simple,
+
+54
+00:03:31,540 --> 00:03:36,880
+where we start searching in the middle,
+and then tell (if we have a sorted array),
+
+55
+00:03:36,880 --> 00:03:39,990
+and then can decide which
+side of the array we're on.
+
+56
+00:03:39,990 --> 00:03:42,846
+And then, go to one side or the other.
+
+57
+00:03:42,846 --> 00:03:43,900
+For a linked list, that doesn't work.
+
+58
+00:03:43,900 --> 00:03:46,725
+Finding the middle element
+is an expensive operation.
+
+59
+00:03:46,725 --> 00:03:49,340
+because you've got to start either
+at the head or the tail and
+
+60
+00:03:49,340 --> 00:03:50,580
+work your way into the middle.
+
+61
+00:03:50,580 --> 00:03:54,910
+So that's an O(n) operation
+to get to any particular element.
+
+62
+00:03:54,910 --> 00:03:56,150
+Big difference in between that and
+an array.
+
+63
+00:03:57,516 --> 00:04:01,804
+However, linked lists are constant time
+to insert at or remove from the front,
+
+64
+00:04:01,804 --> 00:04:02,638
+unlike arrays.
+
+65
+00:04:02,638 --> 00:04:05,000
+What we saw in arrays,
+if you want to insert from the front, or
+
+66
+00:04:05,000 --> 00:04:08,169
+remove from the front, it's going to take you
+O(n) time because you're going to have to move
+
+67
+00:04:08,169 --> 00:04:09,040
+a bunch of elements.
+
+68
+00:04:10,990 --> 00:04:13,080
+If you have a tail and doubly-linked,
+
+69
+00:04:13,080 --> 00:04:15,600
+it is also constant time to
+work at the end of the list.
+
+70
+00:04:15,600 --> 00:04:17,950
+So you can get at or remove from there.
+
+71
+00:04:19,550 --> 00:04:22,450
+It's linear time to find
+an arbitrary element.
+
+72
+00:04:22,450 --> 00:04:24,790
+The list element are not contiguous
+as they are in an array.
+
+73
+00:04:25,860 --> 00:04:30,660
+You have separately allocated
+locations of memory and
+
+74
+00:04:30,660 --> 00:04:32,680
+then there are pointers between them.
+
+75
+00:04:32,680 --> 00:04:36,390
+And then, with a doubly-linked list
+it's also constant time to insert
+
+76
+00:04:36,390 --> 00:04:38,110
+between nodes or to remove a node.

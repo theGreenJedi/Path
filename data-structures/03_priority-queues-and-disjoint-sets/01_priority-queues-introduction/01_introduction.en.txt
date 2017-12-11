@@ -1,0 +1,67 @@
+Hello everybody. Welcome back. Today, I'm going to be talking
+about priority queues. This popular data structure has built-in
+implementations in many programming languages. For example in C++, Java, and Python. And in this lesson, we will learn what is
+going on inside these implementations. We will see beautiful combinatorial
+ideas that allow to store the contents of a priority queue in
+a complete binary tree, which is in turn stored just as an array. This give an implementation which
+is both time and space efficient. Also, it can be implemented
+just in a few lines of code. A priority queue data structure is
+a generalization of the standard queue data structure. Recall that the queue data structure
+supports the following two main operations. So we have a queue and
+when a new element arrives, we put it to the end of this queue
+by calling the method PushBack(e). And when we need to process the next
+element we extract it from the beginning of the queue by calling
+the method PopFront(). In the priority queue data structure,
+there is no such thing as the beginning or the end of a queue. Instead we have just a bag of elements,
+but each element is assigned a priority. When a new element arrives, we just put it inside this bag
+by calling the method Insert. However, when we need to process
+the next element from this bag, we call the method
+ExtractMax which is supposed to find an element inside this bag
+whose priority is currently maximum. A typical use case for
+priority queues is the following. Assume that we have a machine and
+we would like to use this machine for processing jobs. It takes time to process a job and when we are processing the current job,
+a new job may arrive. So we would like to be able to quickly
+perform the following operations. First of all, when a new job arrives
+we would like to insert it to the pool of our other weekly jobs quickly, right? And when we are done with the current job, we would like to be able to
+quickly find the next job. That is,
+the job with the maximum priority. Okay, and now we are ready to state
+the definition of priority queue formally. Formally a priority queue is
+an abstract data type which supports the two main operations,
+Insert and ExtractMax. Consider a toy example. We have a priority queue
+which is initially empty. We then insert element 5 in it,
+we then insert 7, then insert 1, and then insert 4. So we put these elements in random
+places inside this box on the left, just to emphasize, once again, that there is no such thing as the beginning
+or the end of a priority queue. So it is not important how the elements
+are stored inside the priority queue. What is important for us now is that if we
+call ExractMax() for this priority queue, then an element with currently
+highest priority should be extracted. In our toy example it is 7. So if we call ExtractMax for
+this priority queue, then 7 is taken out of the priority queue. Then, well let's insert 3
+into our priority queue and now let's call ExtractMax(). The currently highest priority is 5,
+so we extract 5. Then we ExtractMax() once again,
+and now it is 4, okay? Some additional operations that
+we might expect from a particular implementation of a priority queue
+data structure are the following. So first of all,
+we might want to remove an element. I mean, not to extract an element
+with a maximum priority, but to remove a particular element
+given by an iterator, for example. Also, we might want to find the maximum priority without extracting
+an element with a maximum priority. So GetMax is an operation
+which is responsible for this. And also, we might want to change
+the priority of a given element. I mean, to increase or
+to decrease its priority. So ChangePriority(it,p) is
+the operation responsible for this. Let us conclude this introductory
+video by mentioning a few examples of famous algorithms that use
+priority queues essentially. Dijsktra's algorithm uses priority queues to find efficiently the shortest path from
+point a to point b on a map or in a graph. Prim's algorithm uses priority queues to
+find an optimum spanning tree in a graph, this might be useful for
+example in the following case. Assume that you have a set of computers
+and you would like to connect them in a network by putting wires
+between some pairs of them. And you would like to
+minimize the total price or the total length of all the wires. Huffman's algorithm computes an optimum prefix-free
+encoding of a string or a file. It is used, for example,
+in MP3 audio format encoding algorithms. Finally, heap sort algorithm
+uses priority queues to efficiently sort the n given objects. So it is comparison based algorithm. It's running time is n log n,
+as in particularly in the worst case. And another advantage of this
+algorithm is that it is in place, it uses no extra memory for
+sorting the input data. So we will go through all these algorithms
+in this specialization and the heap sort algorithm will be even covered in this
+lesson, in the forthcoming videos.

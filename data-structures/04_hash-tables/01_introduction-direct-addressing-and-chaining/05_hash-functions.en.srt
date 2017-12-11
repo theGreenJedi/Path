@@ -1,0 +1,216 @@
+1
+00:00:00,270 --> 00:00:04,070
+Hi, in this video,
+you will learn what a hash function is,
+
+2
+00:00:04,070 --> 00:00:08,000
+how could we apply it to solve our
+problem with IP addresses, and
+
+3
+00:00:08,000 --> 00:00:11,430
+why it is not straightforward
+to make it to work.
+
+4
+00:00:11,430 --> 00:00:15,510
+Remember the direct addressing
+approach worked particularly fast, but
+
+5
+00:00:15,510 --> 00:00:19,970
+it used a lot of memory that's
+because it encoded IP with numbers and
+
+6
+00:00:19,970 --> 00:00:22,030
+those numbers were sometimes huge.
+
+7
+00:00:22,030 --> 00:00:26,811
+So we had to create an array of size 2
+to the power of 32 just to store all
+
+8
+00:00:26,811 --> 00:00:27,948
+those numbers.
+
+9
+00:00:27,948 --> 00:00:32,719
+What if we could encode our IP
+addresses with smaller numbers,
+
+10
+00:00:32,719 --> 00:00:35,878
+for example, numbers from 0 to 999?
+
+11
+00:00:35,878 --> 00:00:41,065
+We'll still need the code for different
+IP addresses, which are active currently
+
+12
+00:00:41,065 --> 00:00:45,970
+to be different because we want a separate
+counter for each IP in our solution.
+
+13
+00:00:47,120 --> 00:00:49,270
+Let's define a hash function.
+
+14
+00:00:49,270 --> 00:00:53,820
+So if you have universal object S for
+example.
+
+15
+00:00:53,820 --> 00:00:58,720
+A set of all IP addresses or a set of all
+files stored on your computer or a set
+
+16
+00:00:58,720 --> 00:01:03,250
+of all words or cures in the programming
+language, so that is our universe.
+
+17
+00:01:03,250 --> 00:01:05,200
+And we will call it a set S.
+
+18
+00:01:05,200 --> 00:01:11,050
+And now we want to encode each object
+from that universe with a small number.
+
+19
+00:01:11,050 --> 00:01:16,810
+A number from 0 to m- 1 where m
+is a positive integer number.
+
+20
+00:01:16,810 --> 00:01:21,790
+While any function,
+which encodes some object from S
+
+21
+00:01:21,790 --> 00:01:25,130
+as a number from 0 to m- 1,
+is called a hash function.
+
+22
+00:01:26,350 --> 00:01:29,750
+And m is called the cardinality
+of hash function h.
+
+23
+00:01:31,000 --> 00:01:35,380
+So what are the desirable properties
+of the hash function in our problem?
+
+24
+00:01:35,380 --> 00:01:40,640
+First, h should be fast to compute
+because we need to encode some object for
+
+25
+00:01:40,640 --> 00:01:42,120
+each query.
+
+26
+00:01:42,120 --> 00:01:45,560
+Second, we want different values for
+different objects
+
+27
+00:01:45,560 --> 00:01:50,080
+because we want a separate counter for
+each IP address in our problem from them.
+
+28
+00:01:51,080 --> 00:01:56,620
+And also, we want to use direct addressing
+scheme because it was very fast,
+
+29
+00:01:56,620 --> 00:02:00,630
+but we want to use a direct addressing
+scheme with a small amount of memory.
+
+30
+00:02:00,630 --> 00:02:05,137
+And it's only logical to use in this
+case direct addressing scheme with O(m)
+
+31
+00:02:05,137 --> 00:02:06,180
+memories.
+
+32
+00:02:06,180 --> 00:02:12,386
+Just create an area a of size m, and
+then encode each ID with some value from
+
+33
+00:02:12,386 --> 00:02:17,440
+0 to m- 1, and store the corresponding
+counter In the cell of this array.
+
+34
+00:02:18,780 --> 00:02:23,720
+The problem is that we want small
+cardinality m and it won't work
+
+35
+00:02:23,720 --> 00:02:29,060
+if m is smaller than the number of
+different objects in the universe.
+
+36
+00:02:29,060 --> 00:02:34,020
+Because if we have for
+example 25 object in the universe and
+
+37
+00:02:34,020 --> 00:02:39,448
+m is only 10, then at least two
+objects will have the same code from
+
+38
+00:02:39,448 --> 00:02:45,250
+0 to 9 because there are only 10 different
+codes and there are 25 different objects.
+
+39
+00:02:45,250 --> 00:02:50,920
+So that won't work for
+all possible universes and for small m.
+
+40
+00:02:52,130 --> 00:02:56,900
+In this situation, when the values of
+the hash function are the same, but
+
+41
+00:02:56,900 --> 00:03:01,310
+the objects which are being encoded
+are different, is called a collision.
+
+42
+00:03:01,310 --> 00:03:03,690
+So collisions cause us problems.
+
+43
+00:03:03,690 --> 00:03:07,060
+Because of collisions,
+we cannot just directly
+
+44
+00:03:07,060 --> 00:03:11,900
+apply the scheme called direct
+addressing with O(m) memory.
+
+45
+00:03:11,900 --> 00:03:15,318
+And in the next lecture,
+we will see how to overcome this problem.

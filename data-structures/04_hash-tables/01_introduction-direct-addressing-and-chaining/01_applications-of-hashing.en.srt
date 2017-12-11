@@ -1,0 +1,197 @@
+1
+00:00:00,400 --> 00:00:01,130
+Hi.
+
+2
+00:00:01,130 --> 00:00:04,410
+In this module, we'll study hashing,
+and hash tables.
+
+3
+00:00:04,410 --> 00:00:07,960
+Hashing is a powerful technique
+with a wide range of applications.
+
+4
+00:00:07,960 --> 00:00:11,440
+In this video, we will learn about
+some examples of those applications,
+
+5
+00:00:11,440 --> 00:00:13,350
+just to have a taste of it.
+
+6
+00:00:13,350 --> 00:00:16,650
+The first example that comes to mind is,
+of course, programming languages.
+
+7
+00:00:16,650 --> 00:00:20,540
+In most of the programming languages,
+there are built-in data types or
+
+8
+00:00:20,540 --> 00:00:25,100
+data structures in the standard
+library that are based on hash tables.
+
+9
+00:00:25,100 --> 00:00:29,760
+For example, dict or
+dictionary in Python, or HashMap in Java.
+
+10
+00:00:29,760 --> 00:00:33,450
+Another case is keywords
+of the language itself.
+
+11
+00:00:33,450 --> 00:00:37,580
+When you need to highlight them in the
+text editor or when the compiler needs to
+
+12
+00:00:37,580 --> 00:00:42,550
+separate keywords from other identifiers
+in the problem to compile it.
+
+13
+00:00:42,550 --> 00:00:44,960
+It needs to store all
+the keywords in the set.
+
+14
+00:00:44,960 --> 00:00:47,475
+And that set is usually
+intuitive using the hashtag.
+
+15
+00:00:48,660 --> 00:00:50,770
+Another example is file system.
+
+16
+00:00:50,770 --> 00:00:54,700
+When you interact with a file system
+as a user, you see the file name,
+
+17
+00:00:54,700 --> 00:00:56,850
+maybe the path to the file.
+
+18
+00:00:56,850 --> 00:01:00,980
+But to actually store the correspondence
+between the file name and path, and
+
+19
+00:01:00,980 --> 00:01:03,520
+the physical location of
+that file on the disk.
+
+20
+00:01:03,520 --> 00:01:07,230
+System uses a map, and that map is
+usually implemented as a hash table.
+
+21
+00:01:08,540 --> 00:01:11,540
+Another example is password verification.
+
+22
+00:01:11,540 --> 00:01:17,530
+When you use some web service and you log
+into that and you type your password,
+
+23
+00:01:17,530 --> 00:01:21,510
+actually if it is a good service, it won't
+send your password in clear text through
+
+24
+00:01:21,510 --> 00:01:25,180
+the network to the server to check if
+that's the correct password or not,
+
+25
+00:01:25,180 --> 00:01:29,650
+because that message could be intercepted
+and then someone will know your password.
+
+26
+00:01:29,650 --> 00:01:33,500
+Instead, a hash value of
+your password is computed.
+
+27
+00:01:33,500 --> 00:01:36,590
+On your client side and
+then sent to the server and
+
+28
+00:01:36,590 --> 00:01:42,290
+the server compares that hash value with
+the hash value of the stored password.
+
+29
+00:01:42,290 --> 00:01:44,830
+And if those coincide,
+you get authenticated.
+
+30
+00:01:46,130 --> 00:01:49,320
+Special cryptographic hash
+functions are used for that.
+
+31
+00:01:49,320 --> 00:01:52,690
+It means that it is very hard to try and
+
+32
+00:01:52,690 --> 00:01:57,130
+find another string which has
+the same hash value as your password.
+
+33
+00:01:57,130 --> 00:01:58,000
+So you are secure.
+
+34
+00:01:58,000 --> 00:02:02,940
+Nobody can actually construct a different
+string which has the same hash value as
+
+35
+00:02:02,940 --> 00:02:08,740
+your password and then log in as you
+in the system, even if he intercepted
+
+36
+00:02:08,740 --> 00:02:11,950
+the message with the hash value of
+your password going to the server.
+
+37
+00:02:13,310 --> 00:02:17,660
+Another example, storage optimization for
+online cloud storages,
+
+38
+00:02:17,660 --> 00:02:21,190
+such as Dropbox,
+Google Drive or Yandex.Disk.
+
+39
+00:02:21,190 --> 00:02:26,327
+Those use a huge amount of space
+to store all the user files and
+
+40
+00:02:26,327 --> 00:02:30,370
+that can actually be
+optimized using hashing.
+
+41
+00:02:30,370 --> 00:02:33,560
+We will discuss this example further
+in the lectures of this module.

@@ -1,0 +1,49 @@
+Ahora hablaremos de lo que es un análisis amortizado y veremos uno de los métodos
+para efectuar dicho análisis. A veces nos concentramos únicamente en el peor caso posible, y esto podría ser demasiado rígido. En especial, cuando nos gustaría conocer el costo del peor caso posible para una secuencia de operaciones, donde algunas de estas son económicas y otras son computacionalmente costosas. Si miramos la operación del peor caso posible y la multiplicamos por el coste, esto podría significar una sobrestimación del coste total. Por ejemplo, para un arreglo dinámico,
+el redimensionado ocurre de vez en cuando. La mayor parte de las veces, hacemos operaciones
+de coste constante, como añadir un elemento. Sólo cuando se alcanza el límite de capacidad
+tenemos que redimensionar. La pregunta es: ¿cuál es el coste total
+si hay que insertar un número de elementos? Ésta es la definición de coste amortizado: Si tenemos una secuencia de n operaciones, el coste amortizado es el coste de
+esas n operaciones dividido por n. Por ejemplo, digamos que compras
+un automóvil por 6.000 dólares, y calculas que va a durar cinco años. Hay dos posibilidades: Una, pagas los 6.000 ahora y dentro de cinco años compras
+uno nuevo - pagando otros 6.000. Otra opción sería ahorrar
+dinero cada mes. Cinco años son 60 meses. Si ahorras 100 dólares cada mes,
+una vez pasados cinco años, entonces a la hora de comprar uno nuevo,
+ya tienes los 6.000 dólares en el banco. Decimos que el coste amortizado mensual
+ es de 100 dólares al mes, mientras que el peor caso de coste
+mensual será 6.000 dólares. Un coste 0 durante 59 meses, 
+ y luego 6.000 de una vez. El coste amortizado ofrece una
+percepción más equilibrada. Si realmente quieres saber cuál
+es lo más que gasto en un mes, la respuesta es 6.000 dólares. Pero si quieres saber cuanto
+gasto de media, 100 dólares es un número más razonable. Por eso hacemos
+un análisis de amortización, para tener una idea más precisa del coste de una sucesión de operaciones. Veamos el método agregado para hacer
+análisis de amortización. Y el método agregado se trata de
+ver la definición de lo que un coste amortizado es,
+y usarla directamente para calcular. Vamos a examinar un ejemplo
+de arreglo dinámico y haremos n llamadas a
+PushBack (InsertarAlFinal) Empezaremos con un arreglo vacío
+y n llamadas a PushBack. Y luego averiguaremos el coste amortizado
+de una llamada a PushBack. Sabemos cuál es el tiempo en el peor caso. Definimos C sub i como
+el coste de la i-ésima inserción. Nos interesa de C1 a Cn. Ci es claramente 1, porque tenemos que, lo que vamos a calcular aquí 
+es almacenar en el arreglo Luego el coste es 1 porque 
+añadimos este i-ésimo elemento. Tengamos que 
+redimensionar o no. Si tenemos que redimensionar, la 
+primera pregunta es ¿cuándo? Necesitamos redimensionar si
+ya no hay más capacidad disponible. Esto es, si el tamaño es igual
+a la capacidad. Bueno, ¿cuándo ocurre éso? Eso ocurre si la anterior 
+inserción la llenó. Esto es, llegó a una potencia de 2, porque, en nuestro caso, siempre 
+duplicamos el tamaño. Eso significa que en la i-ésima inserción vamos a tener que redimensionar
+si el elemento i-ésimo -1 lo llenó. Esto es, i-1 es una potencia de 2. Y si no tenemos que redimensionar, no hay
+coste adicional: es simplemente cero. Entonces, el coste amortizado total es realmente la suma del coste real n dividido por n. Eso es, el sumatorio 
+desde i=1 hasta n de C sub i Y de nuevo, C sub i es el coste
+de esa i-ésima inserción. que es igual a n, ya que cada
+C sub i tiene un coste de 1, así que sumamos esas n veces (que es n), más el sumatorio de 2 elevado a j, desde j=1
+hasta el logaritmo en base 2 de n-1 Ese sumatorio significa 
+las potencias de dos, hasta llegar a n-1. Por ejemplo, si n es 100, 
+las potencias de 2 serán 1, 2, 4, 8, 16, 32 y 64. Y es el sumatorio de todos ésos. Bueno, el sumatorio es sólo de orden n - O(n). Bien. Basicamente tomamos potencias de 2 hasta, pero sin incluir, n. Y eso va a ser no más que 2n. Entonces, tenemos n más
+algo que no supera 2n, eso es claramente orden n dividido por n,
+y eso es orden 1. Así lo que hemos calculado es que 
+tenemos un coste amortizado para cada inserción de orden 1. El coste del peor caso sigue siendo orden n, así si queremos saber cuánto tiempo va a tomar 
+y el peor caso cuando inserciones particulares INAUDIBLE,
+el coste amortizado es orden 1. este de aquí, veremos una alternativa para hacer
+este análisis de amortización.

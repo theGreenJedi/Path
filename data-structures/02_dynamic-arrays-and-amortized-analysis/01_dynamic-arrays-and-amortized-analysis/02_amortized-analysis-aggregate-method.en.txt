@@ -1,0 +1,58 @@
+So we'll discuss now what
+Amortized Analysis is and look at a particular method for
+doing such analysis. Sometimes, we're looking at an individual
+worst case and that may be too severe. In particular we may want to
+know the total worst case for a sequence of operations and it may
+be some of those operations are cheap, while only certain of them are expensive. So if we look at the worst
+case operation for any one and multiply that by the total,
+it may be overstating the total cost. As an example, for a dynamic array,
+we only resize every so often. Most of the time, we're doing a constant
+time operation, just adding an element. It's only when we fully reach
+the capacity, that we have to resize. So the question is, what's the total cost
+if you have to insert a bunch of items? So here's the definition
+of amortized cost. You have a sequence of n operations, the amortized cost is the cost of
+those n operations divided by n. This is similar in spirit to let's say you
+buy a car for, I don't know, $6,000. And you figure it's going to
+last you five years. Now, you have two possibilities. One, you pay the $6,000 and then five years later you have
+to pony up another $6,000. Another option would be to
+put aside money every month. So five years is 60 months. So if you put away $100 a month,
+once the five years is over, then when it's time to buy a new car for $6000,
+you'll have $6000 in your bank account. And so there that amortized cost
+(monthly cost) is $100 a month, whereas the worst case monthly
+cost is actually 6,000, it's 0 for 59 months and then it's 6,000
+after one month, so you can see that, that amortized cost gives you
+a more balanced understanding. If you really want to know what's
+the most I spend in every month, the answer yes is $6,000. But if you want to know sort of
+an average what am I spending, $100 is a more reasonable number. So that's why we do this
+amortized analysis, to get a more nuanced picture of
+what it looks like for a succession of operations. So let's look at the aggregate
+method of doing amortized analysis. And the aggregate method really says,
+let's look at the definition of what an amortized cost is, and
+use that to directly calculate. So we're going to look at
+an example of dynamic array and we're going to do n calls to PushBack. So we're going to start with an empty
+array and n times call PushBack. And then we'll find out what the amortized
+cost is of a single call to PushBack. We know the worst case time is O(n). Let's define c sub i as
+the cost of the i'th insertion. So we're interested in c1 to cn. So ci is clearly 1. because we have got to actual, and what we're going to count for
+a second here is writing into the array. So the cost is 1 because we have to write
+in this i'th element that we're adding. Regardless of whether or
+not we need to resize. If we need to resize, the first
+question is when do we need to resize? We need to resize if our
+capacity is used up. That is if the size is equal to capacity. Well when does that happen? That happens if the previous
+insertion filled it up. That is made it a full power of 2, because in our case we're
+always doubling the size. So that says on the i'th insertion we're going to have to resize
+if the i'th- 1 filled it up. That is the i- 1 is a power of 2. And if we don't have to resize, there's
+no additional cost, it's just zero. So the total amortized cost is really the sum of the n actual costs divided by n. So that's a summation from
+i = 1 to n of c sub i. And again c sub i is the cost
+of that i'th insertion. While that's equal to n,
+because every c sub i has a cost of 1, so we sum that n times, that's n plus then
+the summation from what's this, this looks a little complicated so j = 1 to the floor
+of log base 2 of n- 1 of 2 to the j. That just really says the power of twos. All the way up to n- 1. So to give an example,
+if n is 100, the power of 2s are going to be 1, 2,
+4, 8, 16, 32, and 64. And it's the summation of all of those. Well that summation is just order n. Right.
+We basically take powers of 2 up to but not including n. And that is going to be no more than 2n. So we've got n plus
+something no more than 2n, that's clearly O(n) divided by n,
+and that's just O(1). So what we've determined then
+is that we have a amortized cost for each insertion of order 1. Our worst case cost is still order n, so if we want to know how long it's going to
+take in the worst case for any particular insertion is O(n),
+but the amortized cost is O(1). In the next video, we're going to look at an alternative
+way to do this amortized analysis.

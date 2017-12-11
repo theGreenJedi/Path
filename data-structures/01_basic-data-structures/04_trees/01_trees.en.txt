@@ -1,0 +1,121 @@
+In this lecture,
+we're going to talk about trees. Let's look at some example trees. So here we have a sentence,
+"I ate the cake". Now, we're going to look
+at a syntax tree for that, which shows the structure of the sentence. So it's similar to sentence diagramming
+that you may have done in grade school. So we have at the top of the tree,
+the S for sentence and then children:
+a noun phrase and a verb phrase. The child of the noun phrase is
+the word I from the sentence. And the child of the verb phrase is a verb
+and noun phrase, where the verb is ate, and the noun phrase is a determiner and
+a noun, the and cake. So along the bottom of the tree,
+we have the words from the sentence, "I ate the cake", and the rest of the tree
+reflects the structure of that sentence. We can look here at a syntax tree for
+an expression  2sin(3z-7), we can break that up into the structure. So at the top level,
+we have a multiplication, that's really the last thing that's done,
+multiplying the 2 and the sine. Within the sine,
+what we're applying the sine to is 3z-7, so we have the minus that's happening last
+with a 7 and then this 3z, 3 times z. So this shows again the structure
+of the expression and the order in which you might evaluate it. So from the bottom, you would first do 3
+times z, and then you would subtract 7 from that, you'd apply the sine to that,
+and then you multiply that by 2. Trees are also used to reflect hierarchy. So this reflects hierarchy of geography
+where we have at the left hand side the top level of the hierarchy, the world. And then below that, entities in the world, United States,
+all sorts of other things, United Kingdom. And then below that,
+various subcomponents of the geography. So we've got, for
+the case of the United States, states, and then within those states, cities. Another example of a hierarchy
+is the animal kingdom. This is part of it where we've got
+animals, and then below that, different types of animals, so invertebrates,
+reptiles, mammals, and so on. And then within each of these,
+we have various subcategorizations. So this shows this entire hierarchy. We also use trees in computer science for
+code. So in order to represent code, we will
+do that with an abstract syntax tree. So our code here is a while loop. While x is less than 0, x is x+2, f of x. So we reflect that at the top,
+we have while, which is our while loop. And the children of the while loop
+are the condition that needs to be met for the while loop to continue and
+then the statement to execute. So the condition is x less than 0, so
+comparison operation, the variable x and the constant 0. And then the statement to execute, well,
+it's actually multiple statements so we have a block. And in those blocks, we have two different
+statements, an assignment statement and a procedure call. The assignment statement, the left child
+is the variable we're assigning to, which is x, and the right child is
+an expression, in this case, x+2. The procedure call, the left child
+is the name of the procedure, and subsequent children
+are the arguments to that procedure. In our case, we just have one argument x. Binary search tree is a very common
+type of a tree used in computer science. The binary search tree is defined
+by the fact that it's binary, so that means it has at most
+two children at each node. And we have the property
+that at the root node, the value of that root
+node is greater than or equal to all of the nodes
+in the left child, and it's less than the nodes
+in the right child. So here less than or greater than,
+we're talking about alphabetically. So Les is greater than Alex,
+Cathy, and Frank, but is less than Nancy, Sam,
+Violet, Tony, and Wendy. And then that same thing is true for
+every node in the tree has the same thing. For instance, Violet is greater than or
+equal to Tony and strictly less than Wendy. The binary search tree allows
+you to search quickly. For instance, if we wanted to search in
+this tree for Tony, we could start at Les. Notice that we are greater than Les,
+so therefore, we're going to go right. We're greater than Sam so we'll go right. We're less than Violet so
+we'll go left and then we find Tony. And we do that in just four comparisons. It's a lot like a binary
+search in a sorted array. So with all these examples of trees,
+what's the actual definition of a tree? Well a tree is,
+this is a recursive definition. A tree is either empty or
+it's a node that has a key and it has a list of child trees. So if we go back to our example here,
+Les is a node that has the key Les and two child trees, the
+Cathy child tree and the Sam child tree. The Cathy child tree is
+a node with a key Cathy and two child trees, the Alex child tree and
+the Frank child tree. Let's look at the Frank child tree. It's a node with a key Frank and two,
+well, does it have any child trees? No, it has no child trees. So let's look at some other examples. An empty tree, well, we don't really
+have a good representation for that, it's just empty. A tree with one node is the Fred tree,
+and it has no children. A tree with two nodes is a Fred
+with a single child Sally, that in itself has no children. In computer science commonly, trees grow
+down, so parents are above their children. So that's why we have Fred above Sally. So let's look at some other
+terminology for trees. So here, we have a tree,
+Fred is the root of the tree. So it's the top node in the tree. And here, the children of Fred are Kate,
+Sally, and Jim. We are actually showing that with arrows,
+commonly, when you show trees, you don't actually show the arrows. We just assume that if a node
+is above another node, that it's a parent of that node. A child has a line down
+directly from a parent, so Kate is a parent of Sam,
+and Sam is a child of Kate. An ancestor is a parent or
+parent's parents and so on. So Sam's ancestors are Kate and Fred. Hugh's ancestors are also Kate and Fred. Sally's ancestors are just Fred. The descendant is an inverse of
+the ancestor, so it's the child or child of child and so on. So the descendants of Fred are all of
+the other nodes since it's the root, Sam, Hugh, Kate, Sally and Jim. The descendants of Kate
+would just be Sam and Hugh. Sibling, two parents, sorry, two nodes sharing the same parent, so
+Kate, Sally and Jim are all siblings. Sam and Hugh are also siblings. A leaf is a node that has no children. So that's Sam, Hugh, Sally, and Jim. An interior node are all
+nodes that aren't leaves. So this is Kate and Fred. Another way to describe it is
+all nodes that do have children. A level: 1 plus the number of
+edges between the root and a node, let's think about that. Fred, how many edges are there
+between the root and the Fred node? Well, since the Fred node is the root,
+there are no edges. So its level would be 1. Kate has one edge between Fred and Kate, so its level would be 2,
+along with its siblings, Sally and Jim. And Sam and Hugh are level 3. The height: the maximum depth of
+the subtree node in the farthest leaf, so here we want to look, for instance,
+if we want to look at the height of Fred, we want to look at what is
+its farthest down descendant. And so its farthest down
+descendant would either be Sam or Hugh. Its height would be 3. So the leaf heights are 1. Kate has height 2. Fred has height 3. We also have the idea of a forest. Extending this tree metaphor,
+so it's a collection of trees. So we have here two trees with a root Kate
+and a root Sally, and those form a forest. So a node has a key, children, which is a list of children nodes, and
+then it may or may not have a parent. The most common representation probably
+of trees, is really without the parent. But it's possible to also have parent
+pointers, and that can be useful as a way to traverse from anywhere in a tree to
+anywhere else by going up and then down, following parent nodes and
+then child nodes. On rare occasions, you could have a tree that's
+represented just with parent pointers. Okay, but that's unusual because a lot
+of times, kind of the way you get access to a tree is via its root and
+you want to go down from there. There are other less commonly used
+representations of trees as well, we're not going to get into here. Binary trees are very commonly used. So a binary tree has,
+at most, two children. Rather than having in this general
+list of children, for a binary tree, we normally have an explicit left and
+right child, either of which can be nil. As with the normal tree,
+the general form of a tree, you may or may not have a parent pointer. Let's look at a couple of
+procedures operating on trees. Since trees are recursively defined,
+it's very common to write routines that operate on trees
+that are themselves recursive. So for instance, if we want to calculate the height of
+a tree, that is the height of a root node, we can go ahead and recursively do that,
+going through the tree. So we can say, for instance, if we have
+a nil tree, then its height is a 0. Otherwise, we're 1 plus the maximum of the
+left child tree and the right child tree. So if we look at a leaf for example,
+that height would be 1 because the height of the left child is nil, is 0, and the
+height of the nil right child is also 0. So the max of that is 0, 1 plus 0. We could also look at calculating the size
+of a tree that is the number of nodes. Again, if we have a nil tree,
+we have zero nodes. Otherwise, we have the number of
+nodes in the left child plus 1 for ourselves plus the number of
+nodes in the right child. So 1 plus the size of the left tree
+plus the size of the right tree. In the next video, we're going to look
+at different ways to traverse a tree.

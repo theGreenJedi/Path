@@ -1,0 +1,458 @@
+1
+00:00:00,005 --> 00:00:04,344
+Hi, in this video, we will finally
+start talking about hash tables.
+
+2
+00:00:04,344 --> 00:00:09,106
+We will define what a hash table is and
+what we can do with it.
+
+3
+00:00:09,106 --> 00:00:12,293
+In the last video,
+we've introduced the notion of map, and
+
+4
+00:00:12,293 --> 00:00:16,480
+now we'll introduce a very similar and
+natural notion of a set.
+
+5
+00:00:16,480 --> 00:00:21,130
+By definition, a set is a data structure
+which has at least three methods,
+
+6
+00:00:21,130 --> 00:00:25,240
+to add an object to the set,
+to remove an object from the set, and
+
+7
+00:00:25,240 --> 00:00:28,480
+to find out whether a given object
+is already in the set or not.
+
+8
+00:00:29,640 --> 00:00:34,572
+One of the examples we already know very
+well, set of all IPs through which clients
+
+9
+00:00:34,572 --> 00:00:37,940
+access to your service
+during the last hour.
+
+10
+00:00:37,940 --> 00:00:42,710
+This is an example with which we've
+worked for the last few videos.
+
+11
+00:00:42,710 --> 00:00:48,230
+Another example would be to store the set
+of all students currently on campus.
+
+12
+00:00:48,230 --> 00:00:52,940
+And another one is to store all the key
+words of a given programming language so
+
+13
+00:00:52,940 --> 00:00:58,820
+that we can quickly highlight them in
+the text editor, which you used to code.
+
+14
+00:00:58,820 --> 00:01:00,950
+There are two ways to implement a set.
+
+15
+00:01:00,950 --> 00:01:04,780
+One of them is when you already
+have an implementation of a map,
+
+16
+00:01:04,780 --> 00:01:09,110
+you can base your implementation
+of set on the map.
+
+17
+00:01:09,110 --> 00:01:15,430
+Basically, you can set a map from all
+the objects S that you need to store
+
+18
+00:01:15,430 --> 00:01:21,390
+in the set to the set of values, V, which
+only contains two values, true and false.
+
+19
+00:01:22,420 --> 00:01:24,490
+If the object is in the set,
+
+20
+00:01:24,490 --> 00:01:27,650
+then the corresponding value
+to this object will be true.
+
+21
+00:01:27,650 --> 00:01:31,420
+If the object is not in the set,
+it is either not in the map or
+
+22
+00:01:31,420 --> 00:01:35,460
+the corresponding value to
+it in the map is false.
+
+23
+00:01:35,460 --> 00:01:40,081
+But that is not a very efficient
+way because we will have to
+
+24
+00:01:40,081 --> 00:01:44,139
+store twice as much objects and
+values as we need.
+
+25
+00:01:44,139 --> 00:01:47,206
+And also,
+when we remove objects from the set,
+
+26
+00:01:47,206 --> 00:01:49,973
+it will be hard to remove
+them from the map.
+
+27
+00:01:49,973 --> 00:01:55,372
+We will probably have to store them with
+value false, so there's a better way.
+
+28
+00:01:55,372 --> 00:01:57,750
+We can again use chaining.
+
+29
+00:01:57,750 --> 00:02:00,620
+But instead of storing
+pairs of objects and
+
+30
+00:02:00,620 --> 00:02:05,650
+corresponding values in the chains,
+we'll just store objects themselves.
+
+31
+00:02:05,650 --> 00:02:09,090
+Let's see how can we
+implement that into the code.
+
+32
+00:02:09,090 --> 00:02:12,250
+Again, we'll have a hash
+function from all the objects S
+
+33
+00:02:12,250 --> 00:02:16,870
+to the set of integer
+numbers from 0 to m-1.
+
+34
+00:02:16,870 --> 00:02:21,040
+We denote it by O and
+O' objects from the set S, and
+
+35
+00:02:21,040 --> 00:02:27,730
+we initialize array A with an array of
+size m which consists of lists or chains.
+
+36
+00:02:27,730 --> 00:02:30,360
+And each chain consists of object O.
+
+37
+00:02:30,360 --> 00:02:31,599
+Initially all the chains are empty.
+
+38
+00:02:32,830 --> 00:02:37,590
+When we need to find an object inside
+a set, we first compute the hash value
+
+39
+00:02:37,590 --> 00:02:41,220
+of our object, we look at
+the corresponding cell in the array A.
+
+40
+00:02:41,220 --> 00:02:45,580
+We take the list of objects from there,
+and then we go through the whole list and
+
+41
+00:02:45,580 --> 00:02:48,280
+try to find object O there.
+
+42
+00:02:48,280 --> 00:02:50,430
+If we find it, return true.
+
+43
+00:02:50,430 --> 00:02:54,990
+Otherwise, return false because our
+object O can be only in the list
+
+44
+00:02:54,990 --> 00:02:58,910
+corresponding to the cell in the array A,
+number h(O).
+
+45
+00:03:00,790 --> 00:03:05,925
+To implement add, we again compute
+value of hash function on object O,
+
+46
+00:03:05,925 --> 00:03:09,186
+we take the list
+corresponding to this cell.
+
+47
+00:03:09,186 --> 00:03:12,869
+And we go through this list,
+if we find our object O on this list,
+
+48
+00:03:12,869 --> 00:03:17,268
+then we don't need to do anything because
+our object O is already in the set.
+
+49
+00:03:17,268 --> 00:03:22,900
+Otherwise, we append our object to the
+list corresponding to cell number h(O).
+
+50
+00:03:24,700 --> 00:03:29,033
+To remove object from the set,
+we first try to find it in the set.
+
+51
+00:03:29,033 --> 00:03:32,284
+If it's not in the set,
+initially we don't need to do anything.
+
+52
+00:03:32,284 --> 00:03:35,615
+Otherwise, we again compute
+the hash value of our object,
+
+53
+00:03:35,615 --> 00:03:39,425
+take the corresponding list, and
+erase our object from that list.
+
+54
+00:03:42,164 --> 00:03:45,320
+So, now we are ready to
+say what is a hash table?
+
+55
+00:03:45,320 --> 00:03:48,170
+A hash table is any
+implementation of a set or
+
+56
+00:03:48,170 --> 00:03:51,910
+a map which is using hashing,
+hash functions.
+
+57
+00:03:51,910 --> 00:03:54,750
+It can even not use chaining.
+
+58
+00:03:54,750 --> 00:03:59,040
+There are different ways to use
+hash functions to store a set or
+
+59
+00:03:59,040 --> 00:04:00,780
+a map in memory.
+
+60
+00:04:00,780 --> 00:04:05,149
+But chaining is one of the most frequently
+used methods to implement a hash table.
+
+61
+00:04:07,250 --> 00:04:10,620
+We have a few examples of hash
+tables already implemented and
+
+62
+00:04:10,620 --> 00:04:15,070
+built in our standard library types and
+programming languages, for example.
+
+63
+00:04:15,070 --> 00:04:21,834
+Set is implemented as unordered_set in
+C++, as HashSet in Java, as set in Python.
+
+64
+00:04:21,834 --> 00:04:26,231
+And map is implemented as unordered_map
+in C++, as HashMap in Java,
+
+65
+00:04:26,231 --> 00:04:28,620
+and as dict, or dictionary in Python.
+
+66
+00:04:29,710 --> 00:04:32,708
+Why those types are called
+unordered in C++?
+
+67
+00:04:32,708 --> 00:04:37,640
+You will learn in one of the next
+modules about data structures.
+
+68
+00:04:37,640 --> 00:04:43,100
+For now, you just know that hash
+tables were already implemented in
+
+69
+00:04:43,100 --> 00:04:46,670
+the main languages we used for
+the specialization.
+
+70
+00:04:47,820 --> 00:04:50,940
+In conclusion,
+we've learned what is chaining.
+
+71
+00:04:50,940 --> 00:04:52,950
+We've learned what is a hash table.
+
+72
+00:04:52,950 --> 00:04:56,767
+And now we know that chaining is
+a technique that can be used to implement
+
+73
+00:04:56,767 --> 00:04:57,610
+a hash table.
+
+74
+00:04:57,610 --> 00:05:02,190
+We know that the memory consumptions for
+the chaining technique is big O(n + m)
+
+75
+00:05:02,190 --> 00:05:05,475
+where n is the number of objects
+currently stored in the hash table.
+
+76
+00:05:05,475 --> 00:05:07,960
+And m is the cardinality
+of the hash function.
+
+77
+00:05:09,420 --> 00:05:13,486
+We also know that the operations with such
+a hash table implemented using chaining
+
+78
+00:05:13,486 --> 00:05:18,389
+work in time c+1, where c is
+the length of the longest chain.
+
+79
+00:05:19,720 --> 00:05:23,600
+Now the question is,
+how to make both m and c small?
+
+80
+00:05:23,600 --> 00:05:24,860
+Why do we need that?
+
+81
+00:05:24,860 --> 00:05:29,980
+Because we want both small memory
+consumption and fast operations.
+
+82
+00:05:29,980 --> 00:05:35,350
+For example, if m is very big,
+then we can use direct addressing,
+
+83
+00:05:35,350 --> 00:05:36,590
+or something like that.
+
+84
+00:05:36,590 --> 00:05:41,280
+But for some universes,
+some sets of objects,
+
+85
+00:05:41,280 --> 00:05:44,780
+we will use too much memory, or
+we will have just too much overhead
+
+86
+00:05:45,850 --> 00:05:50,120
+on top of our O of n memory which is
+needed to store n objects, anyway.
+
+87
+00:05:50,120 --> 00:05:53,220
+If n is small, but c is big,
+
+88
+00:05:53,220 --> 00:05:57,760
+well that's one different match
+from the list based approach where
+
+89
+00:05:57,760 --> 00:06:02,700
+we used only O of n memory to store
+the list, to store only the active IPs.
+
+90
+00:06:02,700 --> 00:06:07,460
+But then we have to spend O of
+n time to actually look through
+
+91
+00:06:07,460 --> 00:06:10,420
+all the list every time
+we want to make a query.
+
+92
+00:06:10,420 --> 00:06:15,320
+So we want both m being
+relatively small and c.
+
+93
+00:06:15,320 --> 00:06:16,340
+How can we do that?
+
+94
+00:06:16,340 --> 00:06:20,960
+Well, we can do that based on a clever
+selection of a hash function, and
+
+95
+00:06:20,960 --> 00:06:24,048
+we will discuss this topic
+in the next lessons.

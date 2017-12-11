@@ -1,0 +1,114 @@
+>> In this video we will use binary
+heaps to design the heap sort algorithm, which is a fast and
+space efficient sorting algorithm. In fact, using priority queues, or
+using binary heaps, it is not so difficult to come up with an algorithm that sorts
+the given array in time of analog n. Indeed, given a rate a of size m,
+we do the following. First, just create
+an empty priority queue. Then, insert all the elements from
+our array into our priority queue. Then, extract the maximum one
+by one from the given array. Namely, we first extract the maximum. This is the maximum of our array,
+so put it to the last position. Then, extract the next maximum and put it to the left of the last position,
+and so on. This clearly gives us a sorted array,
+right? So, we know that if we use binary
+heaps as an implementation for priority queue, then all operations
+work in logarithmic time. So, this gives us an algorithm with
+a running time big o of n log n. And recall that this is
+asymptotically optimal for algorithms that are comparison-based. And this algorithm is clearly
+comparison-based, all right? Also, know that this is a natural
+generalization of selection sort algorithm. Recall that in selection sort algorithms,
+we proceed as follows. Given an array, we first scan the whole
+array to find the maximum value. So, then we get this maximum value and
+swap it with the last element. Then, we forget about
+this last element and we can see that only n-1 first elements. Again, by scanning this array,
+we find the maximum value, and we swap it with the last element
+in this region, and so on. So, here in the heap sort algorithm, instead of finding the maximum
+value at each iteration, namely, we use a smart data structure,
+namely a binary heap, right? So, the only disadvantage
+of our current algorithm is that it uses additional space. So, it uses additional space
+to store the priority queue. Okay? So, in this lesson we will show
+how to avoid this disadvantage. Namely, given an array A, we will
+first permute its elements somehow, so that the result in array
+is actually a binary heap. So, it satisfies binary heap property. And then, we will sort this array, again, just by calling extract marks and
+minus one times. Building a heap out of a given array
+turns out to be surprisingly simple. Namely, given array A of size
+n where there is a following. We first assign the value of n to is
+variable size just to indicate that we have a heap of size n. Then, we do the following. For each i, going down from n over two,
+rounded down to one, we just sift down the i's element. Let me explain it on a small picture,
+why, how we doing this. So, consider the following. The following heap, that we actually, let me remind you,
+we do not store it explicitly. We have just an array,
+in this case, of size 15. So, this is the first node,
+the second one, the third one, four, five, six, seven. So, if we just can see
+the corresponding array of size 15, and then imagine this
+complete binary tree. Then, the heap property might
+potentially be related on many edges. However, in this tree we have 15 nodes,
+so we have 15 sub trees. And for these sub trees, I mean the root
+that the leaves of these of this tree, the heap property is satisfied for
+an obvious reason. There are no edges in these subtrees. So, the first node where the property
+might be related is node number seven. So, potentially,
+there might be a problem in this subtree. To fix this problem, we just call
+SiftDown for node number seven. Okay?
+After this call, this small sub tree must be here, right? Then, we do the same for node number six. After this call, there are no problems in
+the sub tree rooted at node number six. Then, we do the same for
+four i equal to 5 and 4i equal to 4. Then, we proceed to node number three. Note that, at this point,
+everything is fine in this subtree, and in this subtree, right? We already fixed everything
+in these two subtrees. So, to make, to satisfy the heap property
+in the sub tree rooted at the node three, it is enough to call SiftDown
+from node number three. Okay? Then, we proceed to node number two. And, again, I have to call and
+SiftDown to node number two. We fix the heap property in this sub tree,
+and so on. So, in this example, actually
+the last thing that needs to be done is to call SiftDown for node number one. When we are done with this, we are sure that what we have
+in array A is actually a heap. So, it corresponds to
+a complete binary tree where the heap property is
+satisfied on every edge. Let me repeat slowly what just happened. So, we, to turn a given array into a heap, we start repairing the heap properties
+in larger and larger subtrees. So, we start from the leaves,
+and go to the root. Initially, so, our induction base is that the heap
+property is satisfied at all the leaves. I mean, in all subtrees rooted at
+the leaves for an obvious reason. Any subtree rooted at
+the leaf has just one node, so the property cannot be violated, right? Then, we gradually go up and we fix the heap property by
+shifting down the current vertex. And, finally, when we reach a root, the property is satisfied in
+the whole sub-tree, right? So, this is just a link for
+an online visualization. You can download the slides and play with this visualization if something
+is unclear to you in this process. Let me now mention that the running
+time of this procedure is n log n. Again, for an obvious reason. If, so, we use a binary max heap to
+implement this SiftDown down procedure. So, we call SiftDown roughly n over two
+times and each call is just log n, right? So, we have n log n running time. We already have everything to present, to
+present the in-place heap sort algorithm. Given an array A of size m,
+we first build heap out of it. Namely, we permute its elements so
+that the resulting array corresponds to a complete binary tree, which satisfies
+the heap property on every edge. So, we do this just by
+calling BuildHeap procedure. In particular, this BuildHeap procedure
+assigns the value n to the variable size. Then, we repeat the following
+process n minus 1 times. So, we first, we call that just
+after calling to build heap, the first element of our
+array is a maximum element. Right? So, we would like to put it to
+the last position of our array. So, we just swap A1 with A of n. And currently,
+A of n is equal to n of size, okay? So, we swap it. And then,
+we forget about the last element. So, we decrease size by one. So, we say that now our heap
+occupies the first n-1 element. And since we swapped the last
+element with the first element, we potentially need to sift
+down the first element. So, we just call SiftDown for
+the element number one. And we proceed in a similar fashion. I mean, now the heap occupies n-1,
+the first n-1 position. So, the largest element among the first
+n-1 element is the first element. So, we swap it with element n-1. We forget about the element
+n-1 by reducing the size by 1. And then, see if bounds a first element. Okay?
+So, we repeat this procedure n-1 times, each time finding
+the currently largest element. So, once again, this is an improvement
+of a selection sort algorithm. And this is an in-place algorithm. So, once again,
+let me state some properties of the resulting algorithm
+which is called Heap Sort. It is in place. it doesn't need any additional memory. Everything is happening
+inside the given array A. So this is in advantage of this algorithm. Another advantage is that its
+learning times is n log n. It is as simple, as it is optimal. So, this makes it a good alternative
+to the quick sort algorithm. So, in practice presort is usually faster,
+it is still faster. However, the heap sort algorithm has
+worst case running time n log n. While the quick sort algorithm has
+average case running time n log n. For this reason, a popular approach and
+practice is the following. It is called IntraSort algorithm. You first run quick sort algorithm. If it turns out the be slow, I mean,
+if the recursion dips, exceeds c log n for some constant, c, then you stop the
+current call to quick sort algorithm and switch to heap sort algorithm, which is
+guaranteed to have running time n log n. So, in this case, in this implementation,
+your algorithm usually, in most cases it works
+like quick sort algorithm. And even in these unfortunate
+cases where it works in larger, where quick sort has running
+time larger than n log n, you stop it in the right point of time and
+switch to HeapSort. So, this gives an algorithm which in many
+cases behaves like quick sort algorithm, and it has worst case running time. That must be [INAUDIBLE] n log n.

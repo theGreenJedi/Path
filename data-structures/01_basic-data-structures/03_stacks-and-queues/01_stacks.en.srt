@@ -1,0 +1,838 @@
+1
+00:00:00,280 --> 00:00:04,160
+So now we're going to start talking about
+two very important data structures,
+
+2
+00:00:04,160 --> 00:00:05,240
+stacks and queues.
+
+3
+00:00:05,240 --> 00:00:08,270
+In this video we're
+going to talk about stacks.
+
+4
+00:00:09,980 --> 00:00:11,690
+So, what is a stack?
+
+5
+00:00:11,690 --> 00:00:14,770
+It's an abstract data type, and
+here are the operations we have.
+
+6
+00:00:14,770 --> 00:00:18,940
+We can push a key, so we've got
+a collection of values and we can push it.
+
+7
+00:00:19,970 --> 00:00:24,270
+We can find the most recently
+added key with Top.
+
+8
+00:00:24,270 --> 00:00:27,560
+And we can Pop, which returns and
+removes the most recently added.
+
+9
+00:00:27,560 --> 00:00:32,470
+So, the way to think of it is
+as if you have a stack of books.
+
+10
+00:00:32,470 --> 00:00:34,450
+You can put a book on top of the stack, or
+
+11
+00:00:34,450 --> 00:00:36,700
+you can take a book from
+the top of the stack.
+
+12
+00:00:36,700 --> 00:00:40,740
+But you can't take the element at
+the bottom of the stack of books without
+
+13
+00:00:40,740 --> 00:00:43,250
+taking off all of the previous elements.
+
+14
+00:00:43,250 --> 00:00:44,940
+So it's really pretty simple.
+
+15
+00:00:44,940 --> 00:00:48,030
+Push items on,
+you can find what the top one is.
+
+16
+00:00:48,030 --> 00:00:52,980
+You can pop off the top one and
+you can intermingle these operations.
+
+17
+00:00:52,980 --> 00:00:54,620
+Last one: you can find is is it empty?
+
+18
+00:00:54,620 --> 00:00:56,940
+So are, do we have an empty stack?
+
+19
+00:00:58,020 --> 00:01:01,310
+This turns out to be really useful for
+lots and lots of things,
+
+20
+00:01:01,310 --> 00:01:06,210
+where you need to be keep track of what
+has happened in this particular order.
+
+21
+00:01:06,210 --> 00:01:07,550
+Let's look at an example.
+
+22
+00:01:07,550 --> 00:01:09,940
+So let's say we've got
+a balanced brackets problem.
+
+23
+00:01:09,940 --> 00:01:11,250
+So, here we have a string.
+
+24
+00:01:11,250 --> 00:01:14,830
+And it has left parens, right parens,
+left square brackets, and
+
+25
+00:01:14,830 --> 00:01:16,240
+right square brackets.
+
+26
+00:01:16,240 --> 00:01:20,500
+And we want to determine whether or
+not that string of parentheses and
+
+27
+00:01:20,500 --> 00:01:21,760
+square brackets, whether they're balanced.
+
+28
+00:01:23,240 --> 00:01:27,310
+And balance meaning there's a matching
+left paren for every right paren.
+
+29
+00:01:27,310 --> 00:01:28,810
+And they're in the right order.
+
+30
+00:01:28,810 --> 00:01:30,920
+And they don't cross over.
+
+31
+00:01:30,920 --> 00:01:33,340
+Let's look at some examples
+of unbalanced and balanced.
+
+32
+00:01:33,340 --> 00:01:39,080
+So, the first string here left paren,
+square bracket,
+
+33
+00:01:39,080 --> 00:01:41,150
+matching square bracket,
+matching right paren, square bracket,
+
+34
+00:01:41,150 --> 00:01:46,400
+matching square bracket, left paren,
+matching paren, balanced.
+
+35
+00:01:46,400 --> 00:01:49,260
+The second one also balanced.
+
+36
+00:01:49,260 --> 00:01:56,130
+The unbalanced one for example here a left
+paren with no matching right paren.
+
+37
+00:01:56,130 --> 00:01:59,040
+Assuming that the two parens on the
+right side are matching themselves.
+
+38
+00:01:59,040 --> 00:02:05,760
+The square brackets match, but then we
+have got an unmatched right bracket.
+
+39
+00:02:05,760 --> 00:02:09,190
+In the last case we've got a square left
+bracket and a square right bracket, but
+
+40
+00:02:09,190 --> 00:02:10,780
+the problem is that they
+are in the wrong order.
+
+41
+00:02:10,780 --> 00:02:13,670
+It is the square right bracket
+followed by the square left bracket.
+
+42
+00:02:15,740 --> 00:02:17,040
+How do we keep track of that?
+
+43
+00:02:17,040 --> 00:02:20,120
+And the problem is that in some cases we
+have to kind of keep track of a lot of
+
+44
+00:02:20,120 --> 00:02:21,130
+information.
+
+45
+00:02:21,130 --> 00:02:26,420
+For instance, in the second example,
+here, we've got our opening left paren.
+
+46
+00:02:26,420 --> 00:02:28,180
+Doesn't get matched with
+the right paren for quite a while.
+
+47
+00:02:28,180 --> 00:02:31,930
+There's a lot of intervening stuff,
+and we have to sort of keep track
+
+48
+00:02:31,930 --> 00:02:34,840
+that we've got a left paren whose
+right paren we need to match,
+
+49
+00:02:34,840 --> 00:02:37,090
+even as all this other stuff happens.
+
+50
+00:02:37,090 --> 00:02:41,420
+And it turns out a stack is a good way to
+keep track of it, so here's what we'll do.
+
+51
+00:02:41,420 --> 00:02:45,240
+We'll create a stack and then we'll go
+through every character in the string.
+
+52
+00:02:46,420 --> 00:02:50,940
+If we have an opening paren or
+
+53
+00:02:50,940 --> 00:02:55,110
+an opening square bracket,
+we'll go ahead and push it on the stack.
+
+54
+00:02:55,110 --> 00:03:00,590
+So the stack is going to represent
+the parens that are still open,
+
+55
+00:03:00,590 --> 00:03:05,320
+the parens and brackets which have yet
+to be matched and the order in which they
+
+56
+00:03:05,320 --> 00:03:09,890
+need to be matched, so the outermost ones
+will be at the bottom of the stack and
+
+57
+00:03:09,890 --> 00:03:14,860
+the last one we saw (the innermost one)
+would be at the top of the stack.
+
+58
+00:03:14,860 --> 00:03:17,640
+Then if it's not one
+of these opening ones.
+
+59
+00:03:17,640 --> 00:03:21,410
+Then if our stack is empty then
+that's a problem, because basically
+
+60
+00:03:21,410 --> 00:03:26,060
+we've got a closing paren or bracket and
+there's no matching element.
+
+61
+00:03:26,060 --> 00:03:27,260
+So if the stack is empty, no,
+
+62
+00:03:27,260 --> 00:03:29,060
+we're not balanced.
+
+63
+00:03:29,060 --> 00:03:32,070
+Otherwise we'll pop the top element
+off and then we'll check and see.
+
+64
+00:03:32,070 --> 00:03:36,750
+Does it match, an element from the stack,
+does it match the character we've got?
+
+65
+00:03:36,750 --> 00:03:41,080
+So, if the top was a left paren,
+did we just read a right paren.
+
+66
+00:03:41,080 --> 00:03:42,720
+If so, great.
+
+67
+00:03:42,720 --> 00:03:43,660
+They match.
+
+68
+00:03:43,660 --> 00:03:45,780
+And now those two match,
+
+69
+00:03:45,780 --> 00:03:51,440
+the next one we need to match is
+still the newly top one on the stack
+
+70
+00:03:51,440 --> 00:03:56,530
+or similarly if we have a square bracket on the
+stack and a square bracket we read, those match as well.
+
+71
+00:03:56,530 --> 00:04:03,080
+If they don't match,
+then we've got a problem, right?
+
+72
+00:04:03,080 --> 00:04:10,460
+If we've got a right paren on the stack
+and a, sorry a left paren on the stack and
+
+73
+00:04:10,460 --> 00:04:14,510
+right bracket that we just read,
+those don't match for example.
+
+74
+00:04:14,510 --> 00:04:15,810
+So then we return false.
+
+75
+00:04:16,960 --> 00:04:20,810
+Once we've run through all of the strings,
+were matched, right?
+
+76
+00:04:20,810 --> 00:04:22,310
+No.
+Not necessarily.
+
+77
+00:04:22,310 --> 00:04:25,100
+Imagine we have the string,
+left paren, left paren, left paren..
+
+78
+00:04:25,100 --> 00:04:27,322
+We go through, we push left paren,
+we push left paren, we push left paren and
+
+79
+00:04:27,322 --> 00:04:28,240
+then we'd be done.
+
+80
+00:04:28,240 --> 00:04:32,170
+It won't ever return false, but,
+
+81
+00:04:32,170 --> 00:04:35,380
+it's no good because we didn't
+actually match what's on the stack.
+
+82
+00:04:35,380 --> 00:04:40,770
+So, once we go through all of
+the characters in the string,
+
+83
+00:04:40,770 --> 00:04:44,370
+then we're going to have to check and
+make sure, is our stack empty?
+
+84
+00:04:44,370 --> 00:04:47,510
+Did we successfully match everything?
+
+85
+00:04:47,510 --> 00:04:50,940
+This is only one example
+of the use of stacks.
+
+86
+00:04:50,940 --> 00:04:53,280
+Stacks are used in lots of other places.
+
+87
+00:04:53,280 --> 00:04:55,920
+They're used for compilers.
+
+88
+00:04:55,920 --> 00:04:59,610
+They're used in a lot of algorithms that
+you'll be seeing throughout this course.
+
+89
+00:05:01,430 --> 00:05:02,910
+So how do you actually implement a stack?
+
+90
+00:05:02,910 --> 00:05:03,660
+Well, let's see.
+
+91
+00:05:03,660 --> 00:05:06,510
+You can implement a stack with
+an array fairly easily, so
+
+92
+00:05:06,510 --> 00:05:09,270
+allocate an array of
+some maximum stack size.
+
+93
+00:05:10,800 --> 00:05:14,930
+So, in this case, we decided it's five,
+just for the sake of example, and
+
+94
+00:05:14,930 --> 00:05:17,220
+we're going to keep a variable,
+
+95
+00:05:17,220 --> 00:05:19,120
+which is the number of elements
+that are actually in the stack.
+
+96
+00:05:20,550 --> 00:05:23,990
+When we push, so in this case we going to
+push a, we're going to go ahead and
+
+97
+00:05:23,990 --> 00:05:27,750
+put it at the end of the array,
+that we've got so far.
+
+98
+00:05:27,750 --> 00:05:31,540
+So, for whatever elements we have,
+we'll append it to those.
+
+99
+00:05:31,540 --> 00:05:32,070
+So in this case,
+
+100
+00:05:32,070 --> 00:05:35,570
+we will put it at the beginning of the
+array because we haven't used any elements.
+
+101
+00:05:35,570 --> 00:05:38,860
+And we will kept track of
+the number of elements, as well.
+
+102
+00:05:38,860 --> 00:05:43,160
+We push b, put in the next spot and
+now our number of elements is two,
+
+103
+00:05:43,160 --> 00:05:50,750
+fairly straight forward, right,
+we're just appending to the array and
+
+104
+00:05:50,750 --> 00:05:53,300
+these are clearly O(1) operations.
+
+105
+00:05:55,050 --> 00:05:56,120
+What's the top element?
+
+106
+00:05:56,120 --> 00:05:57,550
+Well that's really simple.
+
+107
+00:05:57,550 --> 00:05:59,160
+If the number of elements is two,
+
+108
+00:05:59,160 --> 00:06:01,190
+that means we need the second
+element from the array.
+
+109
+00:06:01,190 --> 00:06:03,520
+Which in this case, is b.
+
+110
+00:06:03,520 --> 00:06:04,740
+Again, a constant time operation.
+
+111
+00:06:06,210 --> 00:06:10,460
+We push c, our number of elements is three,
+and now let's say we pop.
+
+112
+00:06:10,460 --> 00:06:11,440
+Well, what do we do?
+
+113
+00:06:11,440 --> 00:06:15,940
+We need to go get the third element,
+which is c, and erase it, and
+
+114
+00:06:15,940 --> 00:06:19,340
+then adjust numElements so it's now 2.
+
+115
+00:06:19,340 --> 00:06:23,230
+Now we can push an element,
+push another element,
+
+116
+00:06:24,230 --> 00:06:28,340
+push a fifth element, and now if we try
+to push again, that's an error, right?
+
+117
+00:06:28,340 --> 00:06:30,490
+Because we don't have any more space.
+
+118
+00:06:30,490 --> 00:06:31,750
+So, that wouldn't be allowed.
+
+119
+00:06:33,310 --> 00:06:35,680
+Is it empty?
+No, how do we know?
+
+120
+00:06:35,680 --> 00:06:37,170
+Because the number of
+elements is greater than zero.
+
+121
+00:06:38,270 --> 00:06:39,380
+Again, an O(1) operation.
+
+122
+00:06:40,660 --> 00:06:43,800
+And now we can start popping,
+which will be returning
+
+123
+00:06:43,800 --> 00:06:48,670
+the appropriate element of the array
+based on the numElements value, and
+
+124
+00:06:48,670 --> 00:06:52,170
+keep popping until we
+get down to no elements.
+
+125
+00:06:53,780 --> 00:06:55,980
+If we're at no elements,
+and we ask it's empty?
+
+126
+00:06:55,980 --> 00:06:57,020
+Yes.
+
+127
+00:06:57,020 --> 00:06:57,520
+That's true.
+
+128
+00:06:59,620 --> 00:07:01,890
+We can also implement
+a stack with a linked list.
+
+129
+00:07:01,890 --> 00:07:07,660
+So, one disadvantage--one
+limitation--of the array
+
+130
+00:07:07,660 --> 00:07:12,110
+is that we have a maximum size,
+based on the array we initially allocated.
+
+131
+00:07:13,400 --> 00:07:14,300
+But all of the operations are
+O(1), which is good.
+
+132
+00:07:16,270 --> 00:07:20,550
+The other potential problem is that
+we have potentially wasted space.
+
+133
+00:07:20,550 --> 00:07:25,600
+So if we allocated a very large array,
+to allow a possibly large stack,
+
+134
+00:07:25,600 --> 00:07:28,730
+we didn't actually use much of it,
+all the rest of it is wasted.
+
+135
+00:07:28,730 --> 00:07:33,370
+If we have a linked list,
+what we do then is every element
+
+136
+00:07:33,370 --> 00:07:36,820
+in the list of course will represent
+a particular element in the stack.
+
+137
+00:07:36,820 --> 00:07:41,130
+And so we'll push a, and then if we
+push b, we're going to go ahead and
+
+138
+00:07:41,130 --> 00:07:42,530
+push b at the front.
+
+139
+00:07:42,530 --> 00:07:47,010
+So basically,
+pushes will turn into PushFront.
+
+140
+00:07:47,010 --> 00:07:52,020
+If we want to get the top element,
+just get the head element,
+
+141
+00:07:52,020 --> 00:07:56,280
+so top will really just be TopFront,
+we can keep pushing.
+
+142
+00:07:56,280 --> 00:08:02,170
+Pushing at the front or popping,
+All of those are O(1) operations.
+
+143
+00:08:02,170 --> 00:08:07,540
+We can keep pushing, and the nice thing
+about this is there's no a priori limit
+
+144
+00:08:07,540 --> 00:08:09,200
+as to the number of elements you can add.
+
+145
+00:08:09,200 --> 00:08:12,200
+As long as you have available memory,
+you can keep adding.
+
+146
+00:08:12,200 --> 00:08:15,570
+There's an overhead though,
+like in the array,
+
+147
+00:08:15,570 --> 00:08:21,120
+we have each element size,
+is just big enough to store our key.
+
+148
+00:08:21,120 --> 00:08:26,090
+Here we've got the overhead
+of storing a pointer as well.
+
+149
+00:08:26,090 --> 00:08:29,640
+On the other hand there's
+no wasted space in terms of
+
+150
+00:08:29,640 --> 00:08:33,580
+allocated space that isn't actually
+being used.
+
+151
+00:08:33,580 --> 00:08:35,500
+So we keep pushing, is it empty?
+
+152
+00:08:35,500 --> 00:08:36,860
+No, because the head is not nil.
+
+153
+00:08:38,070 --> 00:08:41,080
+And
+then we can go ahead and pop, so,
+
+154
+00:08:41,080 --> 00:08:44,960
+if we had a linked list it's very
+simple to implement the stack
+
+155
+00:08:44,960 --> 00:08:47,670
+operations in terms of
+the linked list operations.
+
+156
+00:08:47,670 --> 00:08:48,800
+Push becomes PushFront.
+
+157
+00:08:51,430 --> 00:08:56,400
+Top becomes TopFront and Pop which
+is supposed to both return and pop
+
+158
+00:08:56,400 --> 00:09:01,330
+the top element then become a combination
+of a TopFront followed by a PopFront.
+
+159
+00:09:01,330 --> 00:09:04,330
+Empty is just Empty.
+
+160
+00:09:04,330 --> 00:09:08,100
+We keep popping and then eventually
+we pop the last element and
+
+161
+00:09:08,100 --> 00:09:11,070
+now if we ask whether it's empty,
+the answer will be true.
+
+162
+00:09:13,580 --> 00:09:16,700
+Okay, so that's our stack implementation.
+
+163
+00:09:16,700 --> 00:09:21,930
+Stacks can be implemented with either arrays or
+linked lists, I talked a little bit about
+
+164
+00:09:21,930 --> 00:09:26,980
+the pros and cons of each of those, the
+linked list has fixed amount of overhead,
+
+165
+00:09:26,980 --> 00:09:32,430
+that is for every element you are pushing,
+you have an additional pointer.
+
+166
+00:09:32,430 --> 00:09:39,000
+For arrays you have, potentially,
+space that you've over-allocated,
+
+167
+00:09:39,000 --> 00:09:42,450
+basically, to allow for
+a stack to grow to maximum size.
+
+168
+00:09:42,450 --> 00:09:44,440
+For arrays, stacks do have a maximum size.
+
+169
+00:09:44,440 --> 00:09:46,120
+For linked lists, they don't.
+
+170
+00:09:46,120 --> 00:09:52,720
+Each stack operation is constant time
+for either one of these implementations.
+
+171
+00:09:52,720 --> 00:09:55,950
+Sometimes we know stacks as LIFO queues.
+
+172
+00:09:55,950 --> 00:09:58,480
+LIFO meaning Last In First Out.
+
+173
+00:09:58,480 --> 00:10:05,000
+The last one that was inserted Is
+the first line that comes out.
+
+174
+00:10:05,000 --> 00:10:07,660
+This reminds me sometimes of also
+what's known as GIGO,
+
+175
+00:10:07,660 --> 00:10:09,310
+Garbage In Garbage Out.
+
+176
+00:10:09,310 --> 00:10:12,090
+That if you input garbage into a system,
+you get garbage out.
+
+177
+00:10:12,090 --> 00:10:13,810
+But of course this is different.
+
+178
+00:10:14,930 --> 00:10:16,530
+So that is stacks.
+
+179
+00:10:16,530 --> 00:10:18,950
+In the next video we're going to
+go ahead and look at queues.
+
+180
+00:10:18,950 --> 00:10:19,450
+Thanks.

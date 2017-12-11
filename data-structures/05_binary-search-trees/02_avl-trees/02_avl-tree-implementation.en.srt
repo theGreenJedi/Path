@@ -1,0 +1,627 @@
+1
+00:00:03,331 --> 00:00:05,060
+Hello, everybody, welcome back.
+
+2
+00:00:05,060 --> 00:00:08,440
+Today, we're going to continue talking
+about AVL Trees, and in particular,
+
+3
+00:00:08,440 --> 00:00:13,970
+we're going to talk about the actual
+implementation and what goes into that.
+
+4
+00:00:13,970 --> 00:00:18,520
+So, as you recall, the AVL Tree was this
+sort of property that we wanted our binary
+
+5
+00:00:18,520 --> 00:00:21,280
+search tree to have,
+where we needed to ensure that for
+
+6
+00:00:21,280 --> 00:00:25,160
+any given node, its two children
+have nearly the same height.
+
+7
+00:00:25,160 --> 00:00:29,000
+So the following is an ideal tree
+everything's labelled by their height,
+
+8
+00:00:29,000 --> 00:00:30,620
+it all works out.
+
+9
+00:00:30,620 --> 00:00:35,280
+Now, there's a problem that if we update
+this tree it can destroy this property.
+
+10
+00:00:36,320 --> 00:00:40,060
+So if we try to add a new
+node where the blue node is,
+
+11
+00:00:40,060 --> 00:00:44,510
+then what happens is, a bunch of nodes in
+the tree, their heights change because
+
+12
+00:00:44,510 --> 00:00:48,000
+now they have a longer path
+which leads to this new node.
+
+13
+00:00:48,000 --> 00:00:53,335
+And now there are a couple locations at
+which the AVL property fails to hold.
+
+14
+00:00:53,335 --> 00:00:57,110
+So, in other words,
+we need a way to correct this issue.
+
+15
+00:00:59,280 --> 00:01:03,380
+And there is one thing that actually helps
+a little bit here, which is that when we
+
+16
+00:01:03,380 --> 00:01:08,360
+do an insertion the only heights of nodes
+that change are along the insertion path.
+
+17
+00:01:08,360 --> 00:01:13,170
+The only time when a height
+can get bigger is because
+
+18
+00:01:13,170 --> 00:01:18,360
+the new path from it to a leaf
+ends up at the leaf you staggered.
+
+19
+00:01:18,360 --> 00:01:21,700
+So we only need to worry
+about nodes on this path, but
+
+20
+00:01:21,700 --> 00:01:24,400
+we do actually need to worry.
+
+21
+00:01:24,400 --> 00:01:26,770
+Okay, just sort of review what it is,
+
+22
+00:01:26,770 --> 00:01:31,650
+we have this AVL tree, we want to
+insert a new node either A B C or D.
+
+23
+00:01:32,670 --> 00:01:36,220
+Which one of these will require
+us to do some rebalancing?
+
+24
+00:01:38,940 --> 00:01:42,210
+It turns out that D is the only place
+where we have a problem, but if you insert
+
+25
+00:01:42,210 --> 00:01:46,470
+D it changes a bunch of these heights and
+that destroys AVL program.
+
+26
+00:01:46,470 --> 00:01:48,630
+The other inserts it
+turns out would be fine.
+
+27
+00:01:50,590 --> 00:01:53,700
+Okay, so
+let's actually talk about how to do this.
+
+28
+00:01:53,700 --> 00:01:58,980
+So we need a new insertion algorithm that
+involves some rebalancing of the tree
+
+29
+00:01:58,980 --> 00:02:00,500
+in order to maintain our AVL property.
+
+30
+00:02:01,910 --> 00:02:05,920
+And the basic idea of
+the algorithm is pretty simple.
+
+31
+00:02:05,920 --> 00:02:09,400
+First you just insert your
+node as you would before.
+
+32
+00:02:09,400 --> 00:02:12,330
+You then find the node
+that you just inserted and
+
+33
+00:02:12,330 --> 00:02:14,590
+then you want to run
+some rebalance operation.
+
+34
+00:02:14,590 --> 00:02:18,607
+And this operation should start down at
+N and should probably work its way all
+
+35
+00:02:18,607 --> 00:02:22,211
+the way up to the root, sort of
+following parent pointers as you go.
+
+36
+00:02:22,211 --> 00:02:26,324
+Just to sort of make sure that everything
+that could have been made unbalanced has
+
+37
+00:02:26,324 --> 00:02:28,082
+been fixed, and we're all good.
+
+38
+00:02:29,603 --> 00:02:33,440
+So the question is how do we
+actually do this rebalancing?
+
+39
+00:02:34,570 --> 00:02:36,410
+And, well, the idea is the following.
+
+40
+00:02:37,650 --> 00:02:41,350
+At any given node, if the height of your
+left child and the height of your right
+
+41
+00:02:41,350 --> 00:02:46,410
+child differ by at most 1, you're fine,
+you're already satisfied the AVL property.
+
+42
+00:02:48,320 --> 00:02:51,530
+On the other hand it could be the case
+that your children's heights differ
+
+43
+00:02:51,530 --> 00:02:53,070
+by more than one.
+
+44
+00:02:53,070 --> 00:02:55,935
+In that case you actually do
+need to do some rearranging.
+
+45
+00:02:55,935 --> 00:03:00,585
+If your left child is two taller than
+your right, you need to fix things and
+
+46
+00:03:00,585 --> 00:03:05,011
+probably what you need to do is move
+your left child higher up in the tree
+
+47
+00:03:05,011 --> 00:03:09,834
+relative to your right to compensate for
+the fact that it's sort of bigger.
+
+48
+00:03:09,834 --> 00:03:12,804
+Fortunately for us,
+you can actually show that these inserts,
+
+49
+00:03:12,804 --> 00:03:15,390
+the height difference is never
+going to be more than 2.
+
+50
+00:03:15,390 --> 00:03:19,460
+And that simplifies things a little bit.
+
+51
+00:03:19,460 --> 00:03:21,200
+Okay, so the basic idea is the following.
+
+52
+00:03:21,200 --> 00:03:24,050
+In order to rebalance N,
+first we need to store P,
+
+53
+00:03:24,050 --> 00:03:27,370
+the parent of N just because
+we're going to, after we fix N,
+
+54
+00:03:27,370 --> 00:03:30,500
+we're going to want to fix things at P,
+and so on recursively.
+
+55
+00:03:31,590 --> 00:03:36,190
+Now, if the height of N's left child
+is bigger than the height of its
+
+56
+00:03:36,190 --> 00:03:40,840
+right child by more than one,
+we need to rebalance right-wards.
+
+57
+00:03:40,840 --> 00:03:44,020
+If the height of the right child is bigger
+than the height of the left child by more
+
+58
+00:03:44,020 --> 00:03:45,875
+than one we need to rebalance left-wards.
+
+59
+00:03:46,950 --> 00:03:48,660
+Then after that, no matter what happens,
+
+60
+00:03:48,660 --> 00:03:51,410
+we maybe need to readjust the height of N,
+because
+
+61
+00:03:51,410 --> 00:03:55,410
+the height field that was stored might be
+inaccurate if we inserted things below it.
+
+62
+00:03:56,580 --> 00:04:00,470
+And then if the parent that we
+fixed wasn't the null point,
+
+63
+00:04:00,470 --> 00:04:03,850
+if we weren't already at the root,
+we need to go back up and
+
+64
+00:04:03,850 --> 00:04:06,330
+we need to rebalance
+the parent recursively.
+
+65
+00:04:08,230 --> 00:04:10,740
+So quickly, this AdjustHeight function,
+
+66
+00:04:10,740 --> 00:04:14,310
+this sort of just fixes the number that
+we're storing in the height field.
+
+67
+00:04:14,310 --> 00:04:18,440
+All it does is we sort of set the height
+to be one plus the maximum of the height
+
+68
+00:04:18,440 --> 00:04:20,170
+of the left child and
+the height of the right child.
+
+69
+00:04:20,170 --> 00:04:24,964
+Just given by this recursive
+formula we had for the height.
+
+70
+00:04:24,964 --> 00:04:25,690
+Okay!
+
+71
+00:04:25,690 --> 00:04:27,780
+But the key thing we still
+haven't really touched.
+
+72
+00:04:27,780 --> 00:04:30,286
+We need to figure out how
+to do the rebalancing.
+
+73
+00:04:30,286 --> 00:04:34,686
+So you have a node, its left child
+is heavier than its right child.
+
+74
+00:04:34,686 --> 00:04:38,280
+Its left child has exactly
+two more height to it.
+
+75
+00:04:39,560 --> 00:04:43,430
+And the basic idea is the left child
+is bigger, it needs to be higher up, so
+
+76
+00:04:43,430 --> 00:04:45,220
+we should just rotate everything right.
+
+77
+00:04:46,260 --> 00:04:49,799
+And it turns out that in a lot of
+cases this is actually enough to solve
+
+78
+00:04:49,799 --> 00:04:50,554
+the problem.
+
+79
+00:04:50,554 --> 00:04:54,374
+There is one case where it doesn't work.
+
+80
+00:04:54,374 --> 00:04:56,950
+So B is the node we're
+trying to rebalance.
+
+81
+00:04:56,950 --> 00:05:01,769
+A is its left child which is too heavy,
+and we're going to assume that A is
+
+82
+00:05:01,769 --> 00:05:06,118
+too heavy because its right child
+has some large height, n+1.
+
+83
+00:05:06,118 --> 00:05:11,699
+The problem is that if we just rotate B
+to the right, then this thing of height,
+
+84
+00:05:11,699 --> 00:05:16,520
+n+1, switches sides of the tree
+when we perform this rotation.
+
+85
+00:05:16,520 --> 00:05:19,820
+Switches from being A's
+child to being B's child.
+
+86
+00:05:19,820 --> 00:05:24,140
+And when we do this we've switched
+our tree from being unbalanced at B
+
+87
+00:05:24,140 --> 00:05:27,040
+to being unbalanced at A now,
+in the other direction.
+
+88
+00:05:28,180 --> 00:05:31,520
+And so, just performing this
+one rotation doesn't help here.
+
+89
+00:05:32,800 --> 00:05:38,390
+In this case the problem is that A's right
+child, which we'll call X, was too heavy.
+
+90
+00:05:38,390 --> 00:05:41,590
+So the first thing we need
+to do is make X higher up.
+
+91
+00:05:41,590 --> 00:05:45,980
+So what you can do is,
+instead of just doing this rotation at B,
+
+92
+00:05:45,980 --> 00:05:51,270
+first we rotate A to the left one,
+then we rotate B to the right one.
+
+93
+00:05:51,270 --> 00:05:55,200
+And then you can do some case analysis and
+you figure out after you do this
+
+94
+00:05:55,200 --> 00:05:57,500
+you've actually fixed all
+the problems that you have.
+
+95
+00:05:58,550 --> 00:05:59,050
+And it's good.
+
+96
+00:06:00,220 --> 00:06:04,380
+The operation for
+rebalancing right is you let M
+
+97
+00:06:04,380 --> 00:06:09,200
+be the left child of N and then you check
+to see if we've to be in this other case.
+
+98
+00:06:09,200 --> 00:06:13,940
+If M's right child has height more
+than M's left child, then you
+
+99
+00:06:13,940 --> 00:06:19,150
+rotate M to the left, and then no matter
+what you did, you rotate N to the right.
+
+100
+00:06:19,150 --> 00:06:20,560
+And then no matter what you did,
+
+101
+00:06:20,560 --> 00:06:23,500
+all the nodes that you
+rearranged in this procedure,
+
+102
+00:06:23,500 --> 00:06:28,620
+you need to adjust their heights to
+make sure that everything works out.
+
+103
+00:06:28,620 --> 00:06:32,150
+Once you do this, this rebalances
+things at that node properly,
+
+104
+00:06:32,150 --> 00:06:34,980
+it sets all the heights to what
+they should be, and it's good.
+
+105
+00:06:36,770 --> 00:06:38,700
+Okay, so that's how insert works.
+
+106
+00:06:38,700 --> 00:06:40,910
+Next, we need to talk about delete.
+
+107
+00:06:40,910 --> 00:06:44,940
+And the thing is deletions can also
+change the balance of the tree.
+
+108
+00:06:44,940 --> 00:06:48,350
+Remember generally what we do is
+the deletions we removed the node.
+
+109
+00:06:48,350 --> 00:06:52,530
+But, we replaced it by its successor and
+then promoted its successor's child.
+
+110
+00:06:54,040 --> 00:06:58,961
+And the thing to note is that when you do
+this, sort of the space in the tree where
+
+111
+00:06:58,961 --> 00:07:04,051
+the successor was, the height of that
+denoting that location decreased by one.
+
+112
+00:07:04,051 --> 00:07:07,407
+Because instead of having successor and
+then its child and then some such,
+
+113
+00:07:07,407 --> 00:07:08,910
+you just have the child and such.
+
+114
+00:07:09,990 --> 00:07:14,771
+And this of course can cause your tree to
+become unbalanced even if it were balanced
+
+115
+00:07:14,771 --> 00:07:15,618
+beforehand.
+
+116
+00:07:15,618 --> 00:07:20,520
+So, we of course need a way to fix this,
+but there's a simple solution.
+
+117
+00:07:20,520 --> 00:07:23,220
+You delete the node N as before.
+
+118
+00:07:23,220 --> 00:07:27,700
+You then let M be this left child of
+the node that replaced N this thing
+
+119
+00:07:27,700 --> 00:07:30,110
+that might have unbalanced the tree.
+
+120
+00:07:30,110 --> 00:07:33,220
+And then you run the same rebalance
+operation that we did for
+
+121
+00:07:33,220 --> 00:07:37,710
+our insertions starting on M and
+then filtering its way up the tree.
+
+122
+00:07:37,710 --> 00:07:40,000
+And once you've done that,
+everything works.
+
+123
+00:07:41,570 --> 00:07:46,040
+And so what we've done is we've shown that
+you can maintain this AVL property and
+
+124
+00:07:46,040 --> 00:07:47,260
+you can do it pretty efficiently,
+
+125
+00:07:47,260 --> 00:07:53,790
+all of our rebalancing work was only sort
+of O of 1 work per level of the tree.
+
+126
+00:07:53,790 --> 00:07:57,340
+And so if you can do all of this,
+we can actually perform all of our basic
+
+127
+00:07:57,340 --> 00:08:02,790
+binary search tree operations in O of log
+n time per operation, using AVL trees.
+
+128
+00:08:02,790 --> 00:08:03,700
+And this is great.
+
+129
+00:08:03,700 --> 00:08:07,200
+We really do have a good data structure
+now for these local search problems.
+
+130
+00:08:08,420 --> 00:08:11,842
+So that's all for today, coming next
+lecture we are going to talk about
+
+131
+00:08:11,842 --> 00:08:15,620
+a couple of other useful operations that
+you can perform on binary surgeries.

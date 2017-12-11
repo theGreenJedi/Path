@@ -1,0 +1,82 @@
+Now, let's talk about the final
+way to do amortized analysis, which is the physicist's method. The idea of the physicist's method
+is to define a potential function, which is a function that takes
+a state of a data structure and maps it to an integer
+which is its potential. This is similar in spirit to what you
+may have learned in high school physics, the idea of potential energy. For instance, if you have a ball and
+you take it up to the top of a hill, you've increased its potential energy. If you then let the ball roll down the
+hill, its potential energy decreases and gets converted into kinetic
+energy which increases. We do the same sort of thing for our data structure, storing in it
+the potential to do future work. Couple of rules about
+the potential function. First, phi of h sub 0. So, phi is the potential function. h sub 0 is time 0 of the data structure h,
+so that means the initial state of the data structure, and
+that has to have a potential of 0. Second rule is that
+potential is never negative. So, at any point in time, phi of h
+sub t is greater than or equal to 0. So, once we've defined
+the potential function, we can then say what amortized cost is. The amortized cost of an operation
+t is c sub t, the true cost, plus the change in potential, between, before doing the operation and
+after doing the operation. So, before doing the operation,
+we have phi(h sub t-1) after we have phi(h sub t), so it's c sub t plus
+phi(h sub t)- phi(h sub t-1). What we need to do is choose
+a function phi, such that, if the actual cost is small,
+then we want the potential to increase. So that we're saving up some potential for
+doing later work. And if c sub t is large,
+then we want the potential to decrease. In a way to sort of pay for that work. So, the cost of in operations
+is the sum of the true costs which is a summation from
+i goes from one to n of c sub i. And, what we want to do is relate
+the sum of the true costs to the sum of the amortized costs. So, the sum of the amortized costs is
+the summation from i equals 1 to n of the definition of the amortized cost. Which is (c sub i + phi(hsub i) - 
+phi(h sub i-1)). Or, we could just rewrite that. So, removing the summation is c sub 1
++ phi of (h sub 1)- phi of (h sub 0), + c sub 2 + phi of (h sub 2)-
+phi of (h sub 1) and so on. What's important to note is that we have
+a phi of h sub 1 in the first line and then a minus phi of h sub 1 in the second
+line, so those two cancel out. Similarly, we have a phi of h
+sub 2 in the second line, and we have a phi of h sub 3 when we look
+at the amortized cost at time three. And, that goes on and
+on until at time n-1, we would have a phi of h sub n-1 positive and
+a negative phi of h sub n-1 negative. So, if all these cancellations and
+all we're left with is the very first term phi of h sub 0,
+negative phi of h sub 0, and the very last term in the last
+line which is phi of h sub n. So, this really just equals phi of h sub n
+minus phi of h sub 0 because all the other phis cancel, plus the summation
+from i equals 1 to n of c sub i, that is the true costs. Since phi of h sub n is non negative and
+phi of h sub 0 is 0, this value is greater than or equal to
+just the summation of the true costs. What that means then is we've
+come up with a lower bound on the sum of the amortized
+costs which is the sum of the true costs. So therefore, if we want to look at a cost
+of a entire sequence of operations, we know it's at least
+the sum of the true costs. So, let's look at applying this
+physicist's method to the dynamic array. So, we're going to look
+at n calls to PushBack. Phi of h, so, at any given time the data structure's going to be two
+times the size minus the capacity. So, as the size increases,
+the potential's going to be increasing for a given fixed capacity. Phi of x sub here, so we want to make sure that our phi
+function satisfies our requirements. So, first phi of 0 is 2 x 0- 0, assuming we have an initial array
+of size 0, and that's just 0. Also, phi of h sub i
+is 2 x size - capacity. We know that size is at
+least capacity over 2, so therefore, 2 x size - capacity
+is greater than 0. Now, let's look at our amortized cost. So, we're going to assume we
+don't have to do a resize and let's look at the amortized cost. So, we add a particular element i and
+the amortized cost is the cost of insertion plus
+phi(h sub i) - phi(h sub i-1). So, the cost of insertion is just going to
+be 1 because we're adding an element and we don't have to do any
+moving of elements. Phi of h sub i is 2 x size
+of i - the capacity of i, and phi of h sub i- 1 is 2 x
+size i- 1 - capacity i- 1. Well, what do we know? Since we're not resizing and
+the capacities don't change. So, the capacities cancel themselves out. And so, we are left with 2
+times the difference in sizes. What's the difference in size? Difference in size is just 1,
+because we added one element, so this is 1 + 2 x 1 or 3. It's no accident that this 3 is the same value that we saw when we
+used the banker's method. And then, let's look at the cost
+when we have to do a resize. So, we're going to define
+here k is size sub i-1, which is the same thing
+as capacity sub i-1. Why is it the same? because we're about to do a resize. So, that means that after
+the previous operation, we must have made the dynamic array full. And then,
+phi(h sub i-1) is just 2 times the old size minus the old capacity,
+and that's just 2 x k - k, or k. Phi(h sub i) is 2 times
+the size of i - capacity of i, and that's 2(k + 1), because
+the size sub i is one more than the size of i-1, minus 2k. Why 2k? Because we double the capacity each time. So, that's just equal to 2. So, the amortized cost of adding the
+element is c sub i + phi(h sub i) - phi(h sub i - 1), which is just size of i,
+because that's the number of elements we have to, we have to move size of i-1
+elements and then add the one new element, so, that's size of i. So, we have (sizei)+2-k,
+which is just (k+1)+2-k, which is 3. So, what we have seen now is
+that the amortized cost using the physicist's method
+of adding elements is 3.

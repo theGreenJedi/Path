@@ -1,0 +1,124 @@
+Hello everybody. Welcome back. Today we're still talking about splay
+trees and we're actually going to go into a little bit of the math behind
+analyzing their run times. So remember last time we analyzed
+splay trees and in order to do so we needed the following important result, that the amortized cost of doing O(D)
+work and then splaying a node of depth D is actually O(log(n)) where n is
+the total number of nodes in the tree. And today we're going to prove that. So to do this of course we need
+to amortize, we need to pay for this extra work by doing something
+to make the tree simpler. And the way we talk about this being
+simple is we're going to pick a potential function, and so that if we do
+a lot of work it's going to pay for itself by decreasing this potential. And it takes some cleverness to find
+the right one and it turns out more or less the right potential
+function is the following. We define the rank of a node N to be
+the log of the size of it's subtree, where the size of it's subtree is just the
+number of nodes that are descendants of N in that tree. Then the potential function for the tree is P is just the sum over all
+nodes N in the tree of the rank of N. Now to get a feel for what this
+means if your tree is balanced, or even approximately balanced, potential function should be approximately
+linear in the total number of the nodes. But if on the other hand,
+it's incredibly unbalanced, say just one big chain of nodes, then the
+potential could be as biggest N(log(n)). And so, a very large potential function
+means that your tree is very unbalanced. And so,
+if you are decreasing the potential, it means that you're rebalancing the tree. So what we need to do is we need to see
+what happens when you perform a splay operation, what does it do
+to the potential function. Now, to do that,
+the splay operation is composed of a bunch of these little operations,
+zig, zig zigs and zig zags and we want to know for each operation
+what does that do to the potential. So for example when you perform a zig operation
+how does the potential function change? Well you'll note that other than N and
+P, these two nodes that were directly affected, none of the nodes
+have their subtrees change at all. And therefore the ranks of all
+the other nodes stay exactly the same. So the change in potential
+function is just the new rank of N plus the new rank of P, minus the old
+rank of N and the old rank of P. Now, the new rank of N and
+the old rank of P are actually the same, because each of those had subtrees
+that were just the entire tree. And so this is just the new rank
+of P minus the old rank of N and it's easy to see that's at most, the newer
+rank of N minus the old rank of N. That's not so bad. Now let's look at the zig-zig analysis
+which is a little bit trickier. So here the change in the potential is
+the new rank of N plus the new rank of P plus the new rank of Q
+minus the old rank of N, and the old rank of P and the old rank of Q. So the new ranks minus all the old ranks. Now the claim here is that
+this is at most 3 times the new rank of N minus
+the old rank of N minus 2. And to prove this we
+need a few observations. The first thing is that the rank of
+N is equal to the old rank of Q and that this term is actually bigger than
+any other term in our expression. And that's simply because, I mean, both
+of these nodes what are their subtrees? Well, it's N, P and Q. And then the red, green,
+blue and black subtrees. They're the same subtrees, the same size. They've got the same rate. But the next thing to note is that the old
+size of N's subtree and the new size of Q's subtree, when you add them together,
+it's going to be the red subtree, the green subtree, the blue subtree, and
+the black subtree plus two more nodes. And that's actually one less than the size
+of either of these two big terms. And what that says,
+when you take logarithms, you can actually get that the size,
+the rank of N, the old rank of N plus the new rank of Q is at most
+twice the new rank of N minus 2. Because they're sort
+of half the size each. And therefore, if you combine
+these inequalities together, you can actually get the one that
+we wanted on the previous slide. Now, the zig-zag analysis
+is pretty similar to this. Here, you can show the change in
+potential is at most twice the new rank of N minus the old rank of N minus 2. Okay, great. So now we perform
+an entire splay operation. So we splay once, and then again,
+and then again, and then again, all the way up until we finally have
+the final version of N that's the root. And we want to know what the total
+change in the potential function is over all of these little teeny steps. Well what is it? Well it's at most the sum of the changes
+in potentials from each steps. The last one you have three
+times the final rank of N minus the rank of N one step before that,
+minus two. You add to that the rank of N one step
+before the N minus the rank of N two steps before the N minus 2. Then you add three times the rank of N two
+steps before the end minus the rank three steps before the N minus 2 and
+so on and so forth. And this sum actually telescopes. The rank of N one step before the end
+there are two versions of it and they cancel. The rank two steps before the end, there are two terms that cancel and
+so on and so forth. And the only terms that are left is well
+you've got three times the rank of N at the very end of your splay operation,
+minus the rank of N at the very beginning of your splay operation,
+and then for each of these steps, for each two levels the N went up the tree,
+you have this copy of -2. So that's minus the depth of the node app. And so the change in potential is
+just O of log(n) minus the depth, which is minus the work that you did. And note it's O of log(n)
+because the rank of n is at most log of the total number
+of nodes in the tree. And so if you add the change in potential
+to the amount of work that you did, you get out O of log(n). And so the amortized cost of
+your O of D work plus your splay operation is just O of log(n). Now, that shows there our splay trees
+runs an O of log(n) amortized time per operation. And if that was all you could say there is
+nothing really to be too excited about. I mean it gets about the same run time, maybe it's a little bit
+easier to implement. It's a little bit more annoying
+because it's only amortized rather than worst case. Some operations will be
+much more expensive than log(n) even if on average
+the operations are pretty cheap. But another great thing is that
+splay tree has also have many other wonderful properties. For example, if you assign weights
+to the nodes in any way such that the sum of all nodes of
+their weight is equal to one, the amortized cost of accessing a node
+is actually just O(log(1/wt (N))). And that means that if you spend a lot of
+time accessing high weight nodes it might actually be much quicker that
+log(N) time per operation. And so, and note that this run time bound
+holds no matter what weights you assign. You don't need to change
+the algorithm based on the weights. This bound happens automatically. And so if there are certain nodes that get
+accessed much more frequently than others, you could just sort of artificially
+assign them very high weights and then that actually means that your
+display tree automatically runs faster than log(n) per operation. Another bound is the dynamic finger bound. The amortized cost of accessing
+a node is O(log(D + 1)) where here, D is the distance in terms of the ordering
+between nodes between the last access and the current access. So if say you want to list all the nodes
+in order or search for all the nodes in order, it's actually pretty fast
+to do a display tree because D is 1. It's a constant per operation
+rather than O of log(n). Another bound is the working set bound. The amortized cost of accessing
+a node N is O(log(t+1)) where t is the amount of time that has elapsed
+since that node N was last accessed. And what that means, for
+example, is that if you tend to access nodes that you've
+accessed recently a lot. So you access one node
+pretty frequently and then they move to accessing
+a different node pretty frequently, then this actually does a lot better
+again than O of log(n) per operation. Finally we've got what's known as
+the dynamic optimality conjecture. And this says if you give me any list of
+splay tree operations, inserts, finds, deletes whatever. And then you build the best
+possible dynamic search tree for that particular sequence of operations. You can have it completely optimized to
+perform those operations as best possible. The conjecture says that if you run
+a splay tree on those operations it does worse by at most a constant factor. And that's pretty amazing. It would say that if there is any binary
+search three that does particularly well on a sequence of operations than at
+least conjecturally a splay tree does. So the conclusion here is that
+splay trees, they're pretty fast, they require only O of log(n) amortized
+time per operation which, remember, it can be a problem if you're worried
+that the occasional operation might take a long time. But in addition to this, splay trees can
+actually be much better if your input queries have extra structure, if you call
+some nodes more frequently than others, or you tend to call nearby nodes to the ones
+that you most recently accessed, and things like that. But that's actually it for today. That's a splay tree, that's why
+they're considered to be useful. And that's this course,
+I really hope that you've enjoyed it, I hope you'll come back for
+our next course and best of luck.

@@ -1,0 +1,87 @@
+So in this lecture we're talking
+about arrays and linked lists. In this video,
+we're going to talk about arrays. So here's some examples of declarations of
+arrays in a couple of different languages. Along with, we can see the one dimensional
+array laid out with five elements in it, and then a two dimensional array with one
+row, sorry two rows and five columns. So what's the definition of an array? Well we got basically
+a contiguous array of memory. That is one chunk of memory. That can either be on a stack or
+it can be in the heap, it doesn't really matter where it is. It is broken down into
+equal sized elements, and each of those elements are indexed
+by contiguous integers. All three of these things
+are important for defining an array. Here, in this particular example, we have
+an array whose indices are from 1 to 7. In many languages, the same indices for this particular array
+would be from zero to six. So it would be zero based indexing, but one based indexing is also
+possible in some languages. And other languages allow you to actually
+specify what the initial index is. What's so special about arrays? Well, the key point about an array
+is we have random access. That is, we have constant time access
+to any particular element in an array. Constant time access to read,
+constant time access to write. How does that actually work? Well basically what that means is we
+can just do arithmetic to figure out the address of a particular array element. So the first thing we need to do is
+start with the address of the array. So we take the address of the array and then we multiply that by
+first the element size. So this where the key part that every
+element was the same size matters, so that allows us to do
+a simple multiplication. Rather than if each of the array
+elements were of different sizes, we'd have to sum them together, and
+if we had to sum together n items, that would be order n time. So we take our array address, we add
+to it the element size times i which is the index that's of interest
+minus the first_index. If we're doing zero based indexing,
+that first index isn't really necessary. I like this example because it really
+shows a more general case where we do have a first index. Let's say for instance we're looking
+at the address for index four. We would take four minus the first index,
+which is one, which would give us three. Multiply that by whatever
+our element size is, and then add that to our array address. Now of course, we don't have to do this
+work, the compiler or interpreter does this work for us, but we can see how
+it is that it works in constant-time. Many languages also support
+multi-dimensional arrays, if not you can actually kind of roll your
+own through an example I'll show you here, where you do your own arithmetic. So here, let's look. Let's say that the top left element is at
+index (1, 1), and here's the index (3,4). So this means we're in row 3, column 4. How do we find the address
+of that element? Well, first off what we need
+to do is skip the rows that, the full rows, that we're not using. So that is,
+we need to skip two rows, or skip 3, which is the row index minus 1,
+which is the initial row index. So that gives us 2 times 6 or
+12 elements we're skipping for those rows in order to get to row 3. Then we've got to skip the elements
+before (3,4) in the same row. So there are three of them. How do we get that? We take the column index, which is 4 and subtract it from
+the initial column index which is 1. So this basically gives us 15. Six for the first row, six for
+the second row and then three for the third row before
+this particular element. We take that 15 and
+multiply it by our element size and then add it to our array address. And that will give us the address
+of our element (3,4). Now we made kind of a supposition here. And that was that the way this was laid
+out is we laid out all the elements of the first row, followed by all of
+the elements of the second row, and so on. That's called row-major ordering or
+row-major indexing. And what we do is basically, we lay out,
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6). And then right after that in memory (2,
+1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6). So the column index is changing
+most rapidly as we're looking at successive elements. And that's an indication
+of it's row-major indexing. We could lay out arrays differently,
+and some languages or compilers actually do that, where they
+would lay out each column in order, so you'd have the first column, then the
+second column, and then the third column. And so that, then, the successive
+elements would be (1, 1), (2, 1), (3, 1), followed by (1,
+2), (2, 2), (3, 2), and so on. So there we see that the row index
+is changing most rapidly, and this is called column-major ordering. How long does it take
+to perform operations? We already said to read any
+element is O(1), and to write any element is O(1). That is a standard feature of arrays. What happens if we want to add
+an element at the end of an array? So let's say we have allocated
+seven elements for an array. We're only using four of them, okay? So we have kept track that we're using
+four and we want to add a fifth element. And again there's room for seven. Then all we know it was just add it, then update the number of
+elements that are in use. That's an O(1) operation. If we want to remove
+the last element as well, that's an O(1) operation because we just update the number of elements that are in
+use, and so that's an O(1) operation. Where it gets to be expensive,
+is if we want to, for instance, remove the first element. So we remove the five here, and what we've got to do then,
+we don't want to have holes left in it. So we need to move the 8 down,
+move the 3 down, move the 12 down. That's an O(n) operation. Same thing would happen if he
+wanted to insert at the beginning. So we would need to move the 12, move
+the 3, and move the 8 to make space for our new element. So that also would be O(n). And if we want to add or remove somewhere in the middle,
+again that's an O(n) operation. If we want to add exactly in the middle, we have to move n/2 items,
+which is O(n). Same thing for removal. So arrays are great if you want or
+remove at the end. But it's expensive if you want to add or
+remove in the middle or at the beginning. However, remember,
+a huge advantage for arrays is that we have this constant time
+access to elements, either read or write. In summary then, an array consists
+of a contiguous area of memory. because if it were non-contiguous then we
+couldn't just do this simple arithmetic to get where we're going. We have to have equal-size elements
+again so our arithmetic works. And indexed by contiguous integers
+again so our arithmetic works. We have constant time access to
+any element, constant time to add or remove at the end and linear time to add
+and remove at any arbitrary location. In our next video we're going to
+talk about linked lists.

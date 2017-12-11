@@ -1,0 +1,43 @@
+We'll conclude the lesson
+by a few remarks. First of all, for
+implementing a binary heap in an array, we can as well use zero based arrays. In this case, the formulas for
+computing the parent and the index of the parent of two children
+of a given node, I changed as follows. So, the Parent of i, is given by
+the number (i-1)/2 and rounded down. The LeftChild is given by the number 2i +
+1 and the RightChild is given by 2i + 2. The next remark is that you can implement the binary
+min-heap in exactly the same way. And binary min-heap is a heap where
+each edge is value of their parent, is at most the value of the child. A case like this is useful for
+the case when a iteration just in your priority queue, you need to extract
+an element not with maximum priority, but with minimum priority. The final remark is that binary heaps can
+be easily generalized through d-ary heap. In such a heap, each node has,
+at most, d children. And we require to call
+a d-ary heap complete, we again require that all the levels
+are completely filled, except for possibly the last one where all the nodes
+are in leftmost position, okay? So the height of this
+tree is in this case, log base d of n, not the binary log of n. This in particular means that the running
+time of the SiftUp procedure is, at most, O of log base d of n, right? Just because the height of the tree is,
+at most, log base d of n. And the element just goes down,
+just goes up. If needed,
+we swap an element with its pairing. However, the running time
+of SiftDown procedure increases through d when
+supplied by a log base u of n. This is because when we go down, we always need to find a direction
+where to go in reach of this to go. And this is because, when we need to
+replace, to swap a node with one of its children we first need to select which
+on of these children is the largest one. Right, so for this reason the running
+time of SiftDown procedure in this case is O of d
+multiplied by log base d of n. Okay, time to conclude in
+this segment of lessons we started by introducing the abstract
+data type called priority cues. This abstract data types supports
+the following two main operations insert an element and extract
+an element with the highest priority. This priority queues find
+a lot of applications. We will see many other reasons that
+you used efficiently this data type. Then we explain that if implemented
+naively using an array, or at least sort it or not, one of these two operations will take a
+lenient amount of work, in the worst case. Then we presented binary heaps. So this is a way of implement
+priority queues that gives the worst case running time,
+O of log n for all operations. And also, finally, we explained that
+this also can be made space efficient. Namely, a binary heap is a tree,
+however to store this tree we do not need you to store connections
+to a parent and to children. It is enough to store
+everything in an array. Again, this makes binary heaps
+both time and space efficient.

@@ -1,0 +1,74 @@
+Hi, in this video we'll use the
+precomputed hashes from the previous video to improve the running time of
+the RabinKarp cell algorithm. And here is the pseudo code. Actually it is very similar to
+the pseudo code of the initial RabinKarp algorithm and
+only a few lines changed. So again, choose a very big prime
+number p and we choose a random number x from 1 to p- 1 to choose a random Hash
+function from the polynomial family. We initialize the result
+with an positions. And we compute the hash of
+the pattern in the variable pHash directly using our implementation
+of polynomial hash. And then we call
+the PrecomputeHashes function from the previous video to precompute big H,
+an array with hash values of all sub strings of the text with
+length equal to the pattern p. We need them to check whether it
+makes sense to compare pattern to a sub string if their hashes are the same. Or maybe if their hashes
+are different then, there is no point comparing them character
+by characte,r because it means that pattern is definitely
+different from the substream. So, then our main for loop goes for all i, starting positions for
+the pattern, from 0 to length of text minus length of pattern as in the previous
+version of the RabinKarp's algorithm. And the main thing that changed is that. We compare the hash of the pattern,
+not with a vary of hash functions computed on the fly, but
+with the pre-computed value of the hash function for the substream
+starting in position i, H[i]. If they are different, it means that
+the pattern is definitely different from the substream starting in position i and
+we don't need to compare them character by character, so we just continue to
+the next iteration of the for loop. Otherwise, if the hash value
+of the pattern is the same as the hash value of the substring, we need to actually compare them on
+the quality, character by character. And to do that, we call function AreEqual
+for the substring and the pattern. If they are actually equal,
+we append position i to the result to the list of all the occurrences
+of pattern indexed. Otherwise, we proceed
+to the next iteration. And in the end, we return result, the list of all positions in
+which pattern occurs in the text. Let's analyze the running time of this
+version of RabinKarp's algorithm. First we compute the hash
+value of the pattern in time proportional to its length. Then we call
+the PrecomputeHashes function, which we estimated in
+the previous video around in time proportional to the sum of
+length of text and the pattern. And then the only other thing that
+we do is we compare the hashes, and for some of the substrings
+we call function AreEqual. And we already know from the previous
+videos that the total time spent in AreEqual is on average, proportional to
+q multiplied by length of the pattern, where q is the number of
+occurrences of pattern and text. Why is that? Because we only compared pattern
+to a substring if they're equal or if there's a collision. You can compare such a big prime P, that
+the collisions have very low probability, and on average,
+they won't influence the running time. So, on average, total time spent
+in AreEqual is proportional to q multiplied by length of the pattern. And then the total average running time,
+is proportional to length of the text, plus q plus 1,
+multiplied by length of the pattern. And this is actually much better, than the
+time for the algorithm, because usually q is very small, q is the number of times
+you actually found pattern in text. If you are, for example, searching for
+your name on a website or for infected code pattern in
+the binary code of the program, there will be no or only a few
+places where you actually find it. And that their number is q and it is
+usually much, much less than the total number of positions in the test
+which is length of the test. So the second sum of [q plus 1 multiplied
+by 1 looks like by length of the pattern is much smaller than length of the text
+multiply it by length of the pattern. And if pattern is sufficiently long,
+then the first summoned is also much smaller than length of the text
+multiplied by length of the pattern. So we improved our running time for most
+practical purposes very significantly. Of course it's only an average, but
+in practice, this will work really well. And to conclude.
+In this module, we cited hash tables and hash functions, and we learned that hash
+tables are useful for storing sets of objects and mappings from one
+type of object to another one. And we managed to do it in such
+a way that you can search and modify keys and values of the hash
+tables in constant time on average. And to do so,
+you must use good hash families, and you must select random hash
+functions from good hash families. And you also learned that
+hashes are not only useful for storing something, but they're also
+useful while working with strings and texts, for finding patterns in long texts. And actually, there are a lot
+more applications of hashing in distributed systems, for
+example, and in data science. And I'll tell you about
+some applications and distributive systems in
+the next few optional videos.

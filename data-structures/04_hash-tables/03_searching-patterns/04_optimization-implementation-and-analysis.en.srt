@@ -1,0 +1,408 @@
+1
+00:00:00,180 --> 00:00:04,630
+Hi, in this video we'll use the
+precomputed hashes from the previous video
+
+2
+00:00:04,630 --> 00:00:07,770
+to improve the running time of
+the RabinKarp cell algorithm.
+
+3
+00:00:07,770 --> 00:00:09,440
+And here is the pseudo code.
+
+4
+00:00:09,440 --> 00:00:12,900
+Actually it is very similar to
+the pseudo code of the initial
+
+5
+00:00:12,900 --> 00:00:16,020
+RabinKarp algorithm and
+only a few lines changed.
+
+6
+00:00:16,020 --> 00:00:20,860
+So again, choose a very big prime
+number p and we choose a random number
+
+7
+00:00:20,860 --> 00:00:26,190
+x from 1 to p- 1 to choose a random Hash
+function from the polynomial family.
+
+8
+00:00:26,190 --> 00:00:28,660
+We initialize the result
+with an positions.
+
+9
+00:00:29,930 --> 00:00:34,310
+And we compute the hash of
+the pattern in the variable pHash
+
+10
+00:00:34,310 --> 00:00:36,980
+directly using our implementation
+of polynomial hash.
+
+11
+00:00:38,110 --> 00:00:42,059
+And then we call
+the PrecomputeHashes function from
+
+12
+00:00:42,059 --> 00:00:46,994
+the previous video to precompute big H,
+an array with hash values
+
+13
+00:00:46,994 --> 00:00:51,858
+of all sub strings of the text with
+length equal to the pattern p.
+
+14
+00:00:51,858 --> 00:00:56,627
+We need them to check whether it
+makes sense to compare pattern to
+
+15
+00:00:56,627 --> 00:00:59,730
+a sub string if their hashes are the same.
+
+16
+00:00:59,730 --> 00:01:02,553
+Or maybe if their hashes
+are different then,
+
+17
+00:01:02,553 --> 00:01:07,532
+there is no point comparing them character
+by characte,r because it means that
+
+18
+00:01:07,532 --> 00:01:10,970
+pattern is definitely
+different from the substream.
+
+19
+00:01:12,030 --> 00:01:15,650
+So, then our main for loop goes for
+
+20
+00:01:15,650 --> 00:01:20,520
+all i, starting positions for
+the pattern, from 0 to length of text
+
+21
+00:01:20,520 --> 00:01:24,830
+minus length of pattern as in the previous
+version of the RabinKarp's algorithm.
+
+22
+00:01:24,830 --> 00:01:27,080
+And the main thing that changed is that.
+
+23
+00:01:27,080 --> 00:01:32,080
+We compare the hash of the pattern,
+not with a vary
+
+24
+00:01:32,080 --> 00:01:37,170
+of hash functions computed on the fly, but
+with the pre-computed value of the hash
+
+25
+00:01:37,170 --> 00:01:41,940
+function for the substream
+starting in position i, H[i].
+
+26
+00:01:41,940 --> 00:01:45,670
+If they are different, it means that
+the pattern is definitely different from
+
+27
+00:01:45,670 --> 00:01:51,060
+the substream starting in position i and
+we don't need to compare them character
+
+28
+00:01:51,060 --> 00:01:55,070
+by character, so we just continue to
+the next iteration of the for loop.
+
+29
+00:01:55,070 --> 00:01:58,430
+Otherwise, if the hash value
+of the pattern is the same
+
+30
+00:01:58,430 --> 00:02:00,500
+as the hash value of the substring,
+
+31
+00:02:00,500 --> 00:02:04,850
+we need to actually compare them on
+the quality, character by character.
+
+32
+00:02:04,850 --> 00:02:09,408
+And to do that, we call function AreEqual
+for the substring and the pattern.
+
+33
+00:02:09,408 --> 00:02:14,610
+If they are actually equal,
+we append position i to the result
+
+34
+00:02:14,610 --> 00:02:18,640
+to the list of all the occurrences
+of pattern indexed.
+
+35
+00:02:18,640 --> 00:02:20,890
+Otherwise, we proceed
+to the next iteration.
+
+36
+00:02:20,890 --> 00:02:23,620
+And in the end, we return result,
+
+37
+00:02:23,620 --> 00:02:27,450
+the list of all positions in
+which pattern occurs in the text.
+
+38
+00:02:28,670 --> 00:02:33,970
+Let's analyze the running time of this
+version of RabinKarp's algorithm.
+
+39
+00:02:33,970 --> 00:02:38,535
+First we compute the hash
+value of the pattern in time
+
+40
+00:02:38,535 --> 00:02:41,150
+proportional to its length.
+
+41
+00:02:41,150 --> 00:02:43,430
+Then we call
+the PrecomputeHashes function,
+
+42
+00:02:43,430 --> 00:02:46,770
+which we estimated in
+the previous video around
+
+43
+00:02:46,770 --> 00:02:50,000
+in time proportional to the sum of
+length of text and the pattern.
+
+44
+00:02:51,270 --> 00:02:56,597
+And then the only other thing that
+we do is we compare the hashes,
+
+45
+00:02:56,597 --> 00:03:01,446
+and for some of the substrings
+we call function AreEqual.
+
+46
+00:03:01,446 --> 00:03:06,486
+And we already know from the previous
+videos that the total time spent in
+
+47
+00:03:06,486 --> 00:03:12,198
+AreEqual is on average, proportional to
+q multiplied by length of the pattern,
+
+48
+00:03:12,198 --> 00:03:16,690
+where q is the number of
+occurrences of pattern and text.
+
+49
+00:03:16,690 --> 00:03:17,590
+Why is that?
+
+50
+00:03:17,590 --> 00:03:22,220
+Because we only compared pattern
+to a substring if they're equal or
+
+51
+00:03:22,220 --> 00:03:23,650
+if there's a collision.
+
+52
+00:03:23,650 --> 00:03:29,342
+You can compare such a big prime P, that
+the collisions have very low probability,
+
+53
+00:03:29,342 --> 00:03:33,341
+and on average,
+they won't influence the running time.
+
+54
+00:03:33,341 --> 00:03:37,961
+So, on average, total time spent
+in AreEqual is proportional to q
+
+55
+00:03:37,961 --> 00:03:40,609
+multiplied by length of the pattern.
+
+56
+00:03:40,609 --> 00:03:45,866
+And then the total average running time,
+is proportional to length of the text,
+
+57
+00:03:45,866 --> 00:03:49,360
+plus q plus 1,
+multiplied by length of the pattern.
+
+58
+00:03:51,130 --> 00:03:58,070
+And this is actually much better, than the
+time for the algorithm, because usually
+
+59
+00:03:58,070 --> 00:04:01,730
+q is very small, q is the number of times
+you actually found pattern in text.
+
+60
+00:04:01,730 --> 00:04:06,660
+If you are, for example, searching for
+your name on a website or
+
+61
+00:04:06,660 --> 00:04:11,410
+for infected code pattern in
+the binary code of the program,
+
+62
+00:04:11,410 --> 00:04:15,290
+there will be no or only a few
+places where you actually find it.
+
+63
+00:04:15,290 --> 00:04:20,300
+And that their number is q and it is
+usually much, much less than the total
+
+64
+00:04:20,300 --> 00:04:25,190
+number of positions in the test
+which is length of the test.
+
+65
+00:04:25,190 --> 00:04:28,609
+So the second sum of [q plus 1 multiplied
+by 1 looks like by length of the pattern
+
+66
+00:04:28,609 --> 00:04:31,849
+is much smaller than length of the text
+multiply it by length of the pattern.
+
+67
+00:04:31,849 --> 00:04:36,329
+And if pattern is sufficiently long,
+then the first summoned is also
+
+68
+00:04:36,329 --> 00:04:41,210
+much smaller than length of the text
+multiplied by length of the pattern.
+
+69
+00:04:41,210 --> 00:04:46,830
+So we improved our running time for most
+practical purposes very significantly.
+
+70
+00:04:46,830 --> 00:04:50,690
+Of course it's only an average, but
+in practice, this will work really well.
+
+71
+00:04:52,530 --> 00:04:56,200
+And to conclude.
+In this module, we cited hash tables and
+
+72
+00:04:56,200 --> 00:05:01,060
+hash functions, and we learned that hash
+tables are useful for storing sets of
+
+73
+00:05:01,060 --> 00:05:06,080
+objects and mappings from one
+type of object to another one.
+
+74
+00:05:06,080 --> 00:05:10,848
+And we managed to do it in such
+a way that you can search and
+
+75
+00:05:10,848 --> 00:05:16,848
+modify keys and values of the hash
+tables in constant time on average.
+
+76
+00:05:16,848 --> 00:05:20,754
+And to do so,
+you must use good hash families, and
+
+77
+00:05:20,754 --> 00:05:25,780
+you must select random hash
+functions from good hash families.
+
+78
+00:05:26,920 --> 00:05:31,210
+And you also learned that
+hashes are not only useful for
+
+79
+00:05:31,210 --> 00:05:36,440
+storing something, but they're also
+useful while working with strings and
+
+80
+00:05:36,440 --> 00:05:40,480
+texts, for finding patterns in long texts.
+
+81
+00:05:40,480 --> 00:05:44,570
+And actually, there are a lot
+more applications of hashing
+
+82
+00:05:44,570 --> 00:05:47,940
+in distributed systems, for
+example, and in data science.
+
+83
+00:05:47,940 --> 00:05:50,818
+And I'll tell you about
+some applications and
+
+84
+00:05:50,818 --> 00:05:54,297
+distributive systems in
+the next few optional videos.

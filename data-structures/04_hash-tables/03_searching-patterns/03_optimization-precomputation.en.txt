@@ -1,0 +1,113 @@
+Hi, in this video you will learn to
+significantly improve the running time of the Rabin-Karp's Algorithm. And to do so we'll need to look closer
+into the polynomial hashing and its properties. Recall that to compute a polynomial
+hash on the string s but first choose a big prime number for the
+polynomial family, then we choose a random integer x from 1 to p minus 1 to select
+a random hash function from the family. And then the value of this hash
+function is the polynomial of x with coefficients which
+are characters of the string S. And to compute this hash functional
+substring of text T starting in position i and having the same length as the pattern
+for which we are looking in the text. We need to also compute
+a similar polynomial sum. It goes from character
+number i to character number i plus length of the pattern minus 1. And we need to multiply each character
+by the corresponding power of x. For example T of i will be multiplied by
+x to the power of zero because this is the first character of the substring and
+the last character will be multiplied by x to the power length of the pattern minus
+1, and here is a formula on the slide. And the idea for the improving of the
+running time is that the polynomial hash value for
+two consecutive substrings of text with length equal to the length of
+the pattern are very similar and one of them can be computed given
+another one in constant time. We introduce a new notation,
+we denote by H[i]. The hash value for the substring of
+the text starting in position i and having the same length as the pattern. Now let's look at the example,
+our text is a, b, c, b, d. And we need to convert the characters
+to their integer codes. And let's assume for simplicity that
+the code for a is zero, for b is one, for c is two, and for d is three. Then our text is actually 0, 1, 2, 1, 3. Also, we will assume in this example,
+that the length of the pattern is three. We don't need to know the pattern itself,
+we just fix its length. So we will need to
+computer hash values for the substrings of
+the text of length three. There are three of them,
+abc, bcd, and cbd. We start with the last one, cbd. To compute its hash value, we first
+need to write down the powers of x under the corresponding
+characters of the text. Then we need to multiply each power
+of the x by the corresponding integer code of the character and
+we get 2x and 3x squared. And then we need to sum them and we also
+need to take the value module of b, but on this slide we'll just ignore module of
+p, it will be assumed in each expression. Now let's look at the hash value for the previous substring of
+lines three which is bcb. We again need to write down the powers of
+x under the corresponding integer codes of the character. And again need to multiply the powers of
+x by the corresponding integer codes and get one to x and x squared,
+we need to sum them. Now note the similarity
+between the hash value for the last substring of line three and
+the previous substring of line three. To get the last two terms for bcb, we can
+multiply the first two terms for cdb by x. And we will use this similarity to compute
+the hash for bcb given the hash for cdb. So again H[2] is the same as hash
+value of cbd because it starts in the character with index two and
+it's equal to 2 + x + 3x squared. Now let's compute the age of 1 based on
+that this is the hash value of bcb and we know it's equal to 1 +
+2x + x squared module of p. Now let's rewrite this using this property
+of multiplication by x the terms for the cbd. So it's equal to 1 + x multiplied by
+the first two terms for cbd which are 2+x. Now we don't want to use just
+the first two terms for cbd, we. We want to use the whole cbd so we write this as following 1+ x
+multiplied by the whole expression for cbd but now we need to subtract
+something to make the equality true. And that something is the last term,
+x multiplied by 3x squared, which is the same as 3x cubed,
+so we subtract 3x cubed. Now we regroup the summons, and
+we right as this is equal to x multiplied by the hash value for
+cbd which is big H[2], we add 1 to it and
+we subtract through 3x cubed. In the general case,
+there is a very similar formula. So, here is the expression for
+big H[i + 1], and notice that the powers of x are, in each case j- i- 1 because the substring
+starts in position i plus one. So, we subtract i + 1
+from each j in the sum, and the expression for
+big H[i] is very similar. But, for each power of x,
+we subtract just i from j. Because the substring
+starts in position i. Now let's rewrite this expression so that
+it is more similar to the gauge of i + 1. And to do that, we start summation
+not from i, but from i + 1 and also end it one position later. So, the first sum is now very
+similar to the expression for H[i+1], which has the powers
+of x are always bigger by one. And also we need to add T[i] which
+is not accounted for in the sum, and we need to subtract its last term, because
+it's not In the expression for big H[i]. And that is T[i] plus
+length of the pattern, multiplied by x to the power
+of length of the pattern. Now we notice that the first sum
+is the same as x multiplied by the value of hash function for
+the next substream, big H[i+1]. And the second and
+third terms are the same. So now we get this recurrent formula. To compute the gauge of i,
+if we know already the gauge of i + 1, we need to multiply it by x and
+then add T[i] and subtract another term. Notice that T[i] and T of i plus
+length of the pattern we just know. And x to the length of the pattern is a multiplier that we can pre
+compute and use for each i. Now let's use this in the pseudo code. Here's the function to pre compute all
+the hash values of our polynomial hash function on the substrings of
+the text t with the length equal to the length of the pattern, and with
+prime number, P and selected integer x. We initialize our answer,
+big H, as an array of length, length of text minus length
+of pattern plus one. Which is the number of
+substrings of the text with length equal to
+the length of the pattern. Also initialize S by the last
+substring of the text with a length equal to
+the length of the pattern. And you compute the hash value for this
+last substring directly by calling our implementation of polynomial hash with the
+substring prime number P and integer x. Then we also need to precompute the value
+of x to the power of length of the pattern and store it in the variable y. To do that we need
+initialize it with 1 and then multiply it length of P times
+by x and take this module of p. And then the main for loop, the second for
+loop goes from right to left and computes the hash values for
+all the substrings of the text, but for the last one for
+which we already know the answer. So to compute H[i] given H[i + 1],
+we multiply it by x. Then we add T[i] and we subtract y, which is x to the power of length of P,
+by T[i + length of the pattern]. And we take the expression module of p. And then we just return the array
+with the precomputed values. So to analyze its training time, we know
+that initialization of array H of s and with the accommodations with the hash
+value of the last substring, I'll take time proportional
+to the length of the pattern. Also pre-computation of the x to
+the power of length of P takes time proportional to the length of the pattern. And the second for loop takes time proportional to length
+of the text minus length of the pattern. And all and all it's big O of length
+of the text plus length of the pattern. Now again, polynomial hash is computed in time proportional to
+the length of the pattern. First for loop, computing the power of x,
+also and the second for loop, which goes through all the
+substrings of the text with length equal to the length of the pattern, x length
+of text minus length of pattern time. And the total precomputation time is
+proportional to the sum of length of the text and the pattern. And in the next video we'll
+use these precomputed values to actually improve the running
+time of the Rabin-Karp's Algorithm.

@@ -1,0 +1,468 @@
+1
+00:00:00,250 --> 00:00:00,890
+Hi.
+
+2
+00:00:00,890 --> 00:00:04,090
+In this lesson, you will learn about
+applications of hashing to problems
+
+3
+00:00:04,090 --> 00:00:05,900
+regarding strings and texts.
+
+4
+00:00:05,900 --> 00:00:09,650
+We will consider the problem
+of finding patterns in text.
+
+5
+00:00:09,650 --> 00:00:14,040
+The problem is, given a long text T,
+for example a book or a website or
+
+6
+00:00:14,040 --> 00:00:19,260
+a Facebook profile, and some pattern P
+which can be a word, a phrase, a sentence.
+
+7
+00:00:19,260 --> 00:00:23,250
+Find all occurrences of
+pattern in the text.
+
+8
+00:00:23,250 --> 00:00:27,910
+Some examples of that can be that you
+want to find all occurrences were name on
+
+9
+00:00:27,910 --> 00:00:32,830
+the website or you want to find all
+the Twitter messages about your company to
+
+10
+00:00:32,830 --> 00:00:35,390
+analyze the reviews of your new product.
+
+11
+00:00:35,390 --> 00:00:39,400
+Or, you could potentially want to detect
+all the files in your computer which
+
+12
+00:00:39,400 --> 00:00:45,050
+are infected by specific computer virus
+and in that case you won't find letters
+
+13
+00:00:45,050 --> 00:00:49,200
+in text, you will find code patterns
+in the binary code of the program.
+
+14
+00:00:50,450 --> 00:00:52,270
+Anyway the algorithm will be the same.
+
+15
+00:00:53,880 --> 00:00:58,920
+First we introduce some new notations,
+substring notation, we denote by S from
+
+16
+00:00:58,920 --> 00:01:04,600
+I to J the substring of string S, starting
+in position I and ending in position J.
+
+17
+00:01:04,600 --> 00:01:07,230
+Both I and
+J are included in the substring.
+
+18
+00:01:07,230 --> 00:01:12,420
+For example, if S is the string ABCDE,
+then S from zero to four
+
+19
+00:01:12,420 --> 00:01:18,680
+is the same string ABCDE because
+we index our characters from zero
+
+20
+00:01:18,680 --> 00:01:23,000
+and A is the character number zero and
+E is the character number four.
+
+21
+00:01:24,070 --> 00:01:28,450
+S from one to three is bcd because b
+is the character with index one and
+
+22
+00:01:28,450 --> 00:01:31,200
+d is the character with index three.
+
+23
+00:01:31,200 --> 00:01:33,168
+And S from two to two is also allowed.
+
+24
+00:01:33,168 --> 00:01:39,120
+It's a sub-string of length one, string c.
+
+25
+00:01:39,120 --> 00:01:42,000
+And I shouldn't be more than J of
+
+26
+00:01:42,000 --> 00:01:45,460
+course because otherwise there
+is no sub-string from I to J.
+
+27
+00:01:46,980 --> 00:01:51,250
+So, the formal version of our
+problem to find pattern in text
+
+28
+00:01:51,250 --> 00:01:56,240
+is that you're given strings T and
+P as input and
+
+29
+00:01:56,240 --> 00:01:59,980
+you need to find all such
+positions I in the text T
+
+30
+00:02:01,050 --> 00:02:06,840
+that pattern P occurs in text
+T starting from position I.
+
+31
+00:02:06,840 --> 00:02:12,220
+That is the same that to say
+that a substring of t from I to
+
+32
+00:02:12,220 --> 00:02:18,620
+I plus length of T minus one, the
+substring of T starting from I with length
+
+33
+00:02:18,620 --> 00:02:23,830
+equal to the length of the pattern
+is equal to the pattern.
+
+34
+00:02:23,830 --> 00:02:26,990
+So we want to find all such
+positions i and, of course,
+
+35
+00:02:26,990 --> 00:02:31,640
+i can be from zero to length of
+text minus length of pattern.
+
+36
+00:02:31,640 --> 00:02:36,500
+It cannot be bigger because otherwise
+the pattern just won't fit in the text,
+
+37
+00:02:37,710 --> 00:02:40,849
+it will be ending to the right
+from the end of the text.
+
+38
+00:02:42,220 --> 00:02:46,790
+So we've start with a naive
+algorithm to solve this problem.
+
+39
+00:02:46,790 --> 00:02:49,170
+Physically we go through
+all possible positions,
+
+40
+00:02:49,170 --> 00:02:54,280
+i from zero to difference of
+the length of the text and pattern.
+
+41
+00:02:54,280 --> 00:02:59,530
+And then for each such position I would
+just check character by character,
+
+42
+00:02:59,530 --> 00:03:02,610
+whether the corresponding
+sub string of T starting in
+
+43
+00:03:02,610 --> 00:03:05,838
+position number I is equal
+to the pattern or not.
+
+44
+00:03:05,838 --> 00:03:09,850
+If it is equal to the pattern we
+advance position I to the result.
+
+45
+00:03:11,290 --> 00:03:15,283
+First we need to implement a function
+to compare two strings and
+
+46
+00:03:15,283 --> 00:03:20,104
+we start with checking whether their
+lengths are the same or not of cvourse if
+
+47
+00:03:20,104 --> 00:03:25,326
+the lengths of strings is different then
+the strings are definitely difference.
+
+48
+00:03:25,326 --> 00:03:29,900
+If that's not the case,
+then the length of the strings are equal.
+
+49
+00:03:29,900 --> 00:03:34,110
+And then we go through all
+the positions in both strings with
+
+50
+00:03:34,110 --> 00:03:38,230
+I going from zero to length of
+the first string minus one.
+
+51
+00:03:38,230 --> 00:03:42,280
+And if the corresponding symbols
+on the ith position differ,
+
+52
+00:03:42,280 --> 00:03:44,210
+then the strings are different.
+
+53
+00:03:44,210 --> 00:03:46,060
+Otherwise they are the same.
+
+54
+00:03:47,280 --> 00:03:52,770
+Now we will use this function to find
+our occurrence of pattern in the text.
+
+55
+00:03:53,820 --> 00:03:57,660
+The procedure find pattern naive
+implements our naive algorithm.
+
+56
+00:03:57,660 --> 00:04:02,940
+So let's start with an empty list in
+the variable result and then we'd would
+
+57
+00:04:02,940 --> 00:04:07,340
+go through all the possible positions
+where pattern could start with X for
+
+58
+00:04:07,340 --> 00:04:12,390
+I from zero to lines of text
+minus length of the pattern and
+
+59
+00:04:12,390 --> 00:04:16,470
+we check whether the substring
+starting in I with
+
+60
+00:04:16,470 --> 00:04:20,570
+length equal to length of the pattern
+is equal to the pattern itself.
+
+61
+00:04:20,570 --> 00:04:25,910
+If it is, then we append position
+I to the result because this is
+
+62
+00:04:25,910 --> 00:04:32,330
+a position where pattern occurs in
+text and then, we just return the list
+
+63
+00:04:32,330 --> 00:04:37,870
+that we collected by going through all
+possible positions of pattern in the text.
+
+64
+00:04:37,870 --> 00:04:42,410
+I'd say that the running time of
+this naive algorithm is big O of
+
+65
+00:04:42,410 --> 00:04:44,949
+length of the text multiply
+by length of the pattern.
+
+66
+00:04:46,130 --> 00:04:46,980
+Why is that?
+
+67
+00:04:46,980 --> 00:04:52,240
+Well, each call to the function AreEqual,
+runs in time big O,
+
+68
+00:04:52,240 --> 00:04:56,040
+of length of the pattern,
+because both strings we pass there,
+
+69
+00:04:57,050 --> 00:05:00,570
+are of lengths,
+the same as the length of the pattern.
+
+70
+00:05:00,570 --> 00:05:04,610
+And, the running time of AreEqual,
+is linear.
+
+71
+00:05:05,820 --> 00:05:07,720
+And then we have exactly
+
+72
+00:05:08,950 --> 00:05:14,040
+length of T minus length of P
+plus one calls of this function,
+
+73
+00:05:14,040 --> 00:05:19,020
+which total to big O of length
+of T multiplied by length of P,
+
+74
+00:05:19,020 --> 00:05:23,810
+because we always consider that length
+of the text is bigger than the length of
+
+75
+00:05:23,810 --> 00:05:28,660
+the pattern, and so this is the upper
+bound for our running time.
+
+76
+00:05:28,660 --> 00:05:32,550
+Actually, this is not just the upper
+bound, it's also lower bound.
+
+77
+00:05:33,570 --> 00:05:38,150
+For example, consider, text T,
+which consists of many,
+
+78
+00:05:38,150 --> 00:05:42,240
+many letters, a, and pattern P,
+which consists of many,
+
+79
+00:05:42,240 --> 00:05:46,870
+many letters a, and
+then letter b in the end, and also
+
+80
+00:05:47,880 --> 00:05:52,790
+we choose such text that it is much longer
+than the pattern which is basically
+
+81
+00:05:53,880 --> 00:05:58,632
+almost always true in
+the practical problems.
+
+82
+00:05:58,632 --> 00:06:04,260
+For each position i and
+t which we try to observe
+
+83
+00:06:04,260 --> 00:06:08,698
+the goal to our equal to make
+has to make all of the maximum
+
+84
+00:06:08,698 --> 00:06:13,290
+possible number of comparisons which is
+equal to the length of the pattern B.
+
+85
+00:06:13,290 --> 00:06:14,290
+Why is that?
+
+86
+00:06:14,290 --> 00:06:16,490
+Because one would call our equal for
+
+87
+00:06:16,490 --> 00:06:21,230
+substring of T starting in position I and
+for the pattern B.
+
+88
+00:06:21,230 --> 00:06:26,570
+We see that they differ only in the last
+characters so our equal has to check all
+
+89
+00:06:26,570 --> 00:06:31,410
+of the previous characters until it comes
+to the last character of P and determines
+
+90
+00:06:31,410 --> 00:06:36,660
+that actual pattern is different from
+the corresponding substring of D.
+
+91
+00:06:36,660 --> 00:06:42,685
+Last in this case the naive algorithm
+will do at least proportional
+
+92
+00:06:42,685 --> 00:06:47,650
+to length of T multiplied
+by length of T operations.
+
+93
+00:06:47,650 --> 00:06:50,470
+That's our estimate is not just big O,
+
+94
+00:06:50,470 --> 00:06:54,998
+it is big letter which means that
+it is not only in upper bound but
+
+95
+00:06:54,998 --> 00:06:59,461
+also a lower bound on the writing
+time on the naive algorithm.
+
+96
+00:06:59,461 --> 00:07:03,561
+In the next video we will
+introduce an algorithm based on
+
+97
+00:07:03,561 --> 00:07:06,362
+hashing which has better running time

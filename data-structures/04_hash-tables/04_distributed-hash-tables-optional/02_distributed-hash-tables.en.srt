@@ -1,0 +1,867 @@
+1
+00:00:00,180 --> 00:00:01,080
+Hi.
+
+2
+00:00:01,080 --> 00:00:04,490
+In this video we will learn how
+to store a whole lot of objects,
+
+3
+00:00:04,490 --> 00:00:07,420
+how to store big data,
+using distributed hash tables.
+
+4
+00:00:08,790 --> 00:00:11,980
+So big data is when you need to
+store trillions or more objects.
+
+5
+00:00:11,980 --> 00:00:17,290
+For example, trillions of file
+addresses in Dropbox, or user profiles,
+
+6
+00:00:17,290 --> 00:00:22,690
+or emails and user accounts, for
+example, in Gmail or services like that.
+
+7
+00:00:22,690 --> 00:00:26,048
+And you need fast search and
+fast access to that data.
+
+8
+00:00:26,048 --> 00:00:29,516
+So hash tables, in general,
+is a good solution for
+
+9
+00:00:29,516 --> 00:00:34,528
+that problem because they give a constant
+time search access on average.
+
+10
+00:00:34,528 --> 00:00:38,426
+But for number of keys in the order
+of ten to the power of 12,
+
+11
+00:00:38,426 --> 00:00:42,708
+the amount of memory that a single
+hash table will store becomes too
+
+12
+00:00:42,708 --> 00:00:46,914
+big to store it in one computer and
+so we need to do something else,
+
+13
+00:00:46,914 --> 00:00:49,565
+we need to use more computers probably.
+
+14
+00:00:49,565 --> 00:00:53,300
+And the solution to this
+is distributed hash tables.
+
+15
+00:00:53,300 --> 00:00:56,760
+So the first idea for
+distributed hash table is the following,
+
+16
+00:00:56,760 --> 00:00:58,280
+just get more computers.
+
+17
+00:00:58,280 --> 00:00:59,920
+Get 1,000 computers.
+
+18
+00:00:59,920 --> 00:01:03,700
+If you are Google or
+Dropbox you can do that.
+
+19
+00:01:03,700 --> 00:01:07,650
+And then you will store your
+data on many computers.
+
+20
+00:01:07,650 --> 00:01:09,620
+And you will do the following.
+
+21
+00:01:09,620 --> 00:01:14,360
+You create a hash table on
+each of those computers.
+
+22
+00:01:14,360 --> 00:01:17,760
+And then you will separate
+the data between those computers.
+
+23
+00:01:17,760 --> 00:01:21,800
+So each computer will store
+its own part of the data.
+
+24
+00:01:21,800 --> 00:01:25,510
+And you need to determine quickly,
+and automatically, and
+
+25
+00:01:25,510 --> 00:01:29,050
+deterministically which computer
+should store some object O.
+
+26
+00:01:30,050 --> 00:01:36,020
+And there is a simple way, just compute
+some hash function of this object,
+
+27
+00:01:36,020 --> 00:01:43,340
+modular 1000, so we get basically a value
+from 0 to 999 for each object and
+
+28
+00:01:43,340 --> 00:01:47,140
+that will be the number of the computer
+which should store this object.
+
+29
+00:01:47,140 --> 00:01:52,990
+And then you send a request to
+that computer and search or modify
+
+30
+00:01:52,990 --> 00:01:56,120
+what you need to do with that object in
+the local hash table of that computer.
+
+31
+00:01:56,120 --> 00:02:00,570
+And that seems to already solve
+our problem because if a new
+
+32
+00:02:00,570 --> 00:02:03,710
+request comes you quickly compute
+the hash function on the object and
+
+33
+00:02:03,710 --> 00:02:06,220
+you know where to send your request.
+
+34
+00:02:06,220 --> 00:02:11,300
+And then that computer just looks
+up in its local hash table.
+
+35
+00:02:11,300 --> 00:02:15,270
+Each of the local hash tables
+can be 1,000 times less
+
+36
+00:02:15,270 --> 00:02:20,740
+than the total amount of data stored,
+and so it is scalable.
+
+37
+00:02:20,740 --> 00:02:24,490
+If you need more data, you just get
+more computers and everything works.
+
+38
+00:02:24,490 --> 00:02:26,070
+Still there are problems
+with this approach.
+
+39
+00:02:26,070 --> 00:02:28,820
+and the main problem is that
+computers sometimes break.
+
+40
+00:02:28,820 --> 00:02:32,520
+And especially if you have a lot of
+computers, then they break pretty often.
+
+41
+00:02:32,520 --> 00:02:37,505
+For example if a computer breaks once in
+two years on average, then if you have
+
+42
+00:02:37,505 --> 00:02:41,980
+1,000 computers, on average,
+more than one computer breaks every day.
+
+43
+00:02:41,980 --> 00:02:47,020
+Because there are less than 1,000 days in
+two years, and you have 1,000 computers.
+
+44
+00:02:47,020 --> 00:02:47,940
+So what do you do in that case?
+
+45
+00:02:47,940 --> 00:02:50,890
+You don't want to lose your user's data.
+
+46
+00:02:50,890 --> 00:02:53,120
+So you need to store
+several copies of the data.
+
+47
+00:02:53,120 --> 00:02:59,090
+So basically you can do it in a way that
+every computer stores each part of data.
+
+48
+00:02:59,090 --> 00:03:02,920
+Each part of data should be
+stored on several computers.
+
+49
+00:03:02,920 --> 00:03:05,850
+And what happens then when
+some computer breaks?
+
+50
+00:03:05,850 --> 00:03:09,570
+Well, luckily the data which
+is stored on this computer
+
+51
+00:03:09,570 --> 00:03:12,010
+is also stored somewhere else.
+
+52
+00:03:12,010 --> 00:03:17,000
+But if that's the only copy left after
+this computer broke, you also need to also
+
+53
+00:03:17,000 --> 00:03:22,280
+copy that data to some other computer, so
+that it is again stored in several places.
+
+54
+00:03:22,280 --> 00:03:25,270
+And you need to relocate the data
+from the broken computer and
+
+55
+00:03:25,270 --> 00:03:28,890
+also sometimes your service grows and
+you want to buy more computers.
+
+56
+00:03:28,890 --> 00:03:32,390
+You want to reply faster
+to your clients and
+
+57
+00:03:32,390 --> 00:03:34,180
+new computers are added to the cluster.
+
+58
+00:03:34,180 --> 00:03:38,738
+And then this formula take hash
+value of the object modular 1000.
+
+59
+00:03:38,738 --> 00:03:41,860
+And this is the number of computer
+on which your object is stored.
+
+60
+00:03:41,860 --> 00:03:42,860
+It no longer works.
+
+61
+00:03:42,860 --> 00:03:45,350
+Because the numbers of
+the computers always change.
+
+62
+00:03:45,350 --> 00:03:47,040
+New computers come in.
+
+63
+00:03:47,040 --> 00:03:48,820
+Broken computers come out.
+
+64
+00:03:48,820 --> 00:03:50,200
+And so you need something else.
+
+65
+00:03:51,560 --> 00:03:55,620
+And one way to solve this is
+called consistent hashing.
+
+66
+00:03:55,620 --> 00:03:59,360
+So first, we choose some hash
+function with sum cardinality m.
+
+67
+00:03:59,360 --> 00:04:02,960
+And we choose a circle,
+a regular circle, and
+
+68
+00:04:02,960 --> 00:04:09,640
+you put numbers from zero to m minus
+one on the circle in a clockwise order.
+
+69
+00:04:09,640 --> 00:04:12,890
+And then each object, O, is mapped
+
+70
+00:04:12,890 --> 00:04:17,619
+to some point on the circle corresponding
+to the number hash value of this object.
+
+71
+00:04:18,860 --> 00:04:26,080
+Which is from 0 to m- 1, so it always maps
+to some of the numbers on the circle.
+
+72
+00:04:26,080 --> 00:04:31,305
+And also, each computer ID is
+mapped to the same circle.
+
+73
+00:04:31,305 --> 00:04:35,820
+We hash the ID of the computer and
+
+74
+00:04:35,820 --> 00:04:38,900
+we get the number of the points
+to which this computer is mapped.
+
+75
+00:04:38,900 --> 00:04:40,670
+So let's look at the picture.
+
+76
+00:04:40,670 --> 00:04:42,060
+Here's our circle.
+
+77
+00:04:42,060 --> 00:04:43,580
+And, for example m is 12.
+
+78
+00:04:43,580 --> 00:04:46,550
+Then we put 12 points around the circle.
+
+79
+00:04:46,550 --> 00:04:50,870
+And we put numbers from 0
+to 11 around the circle.
+
+80
+00:04:50,870 --> 00:04:52,630
+And then, objects, such as for example,
+
+81
+00:04:52,630 --> 00:04:57,380
+name Steve,
+can be mapped to some of those 12 points.
+
+82
+00:04:57,380 --> 00:05:00,360
+And if hash value of Steve is 9,
+
+83
+00:05:00,360 --> 00:05:03,680
+then Steve is mapped to
+the point with number 9.
+
+84
+00:05:03,680 --> 00:05:07,074
+And also computers can be mapped
+to points, and for example,
+
+85
+00:05:07,074 --> 00:05:08,776
+this computer with ID 253.
+
+86
+00:05:08,776 --> 00:05:14,998
+If the hash value of 253 is 5, then
+this computer is mapped to the point 5.
+
+87
+00:05:14,998 --> 00:05:15,890
+So what do we do then?
+
+88
+00:05:17,180 --> 00:05:23,120
+We make a rule that each object is stored
+on the so-called closest computer,
+
+89
+00:05:23,120 --> 00:05:27,140
+closest in terms of
+the distance along the circle.
+
+90
+00:05:27,140 --> 00:05:28,980
+And in this case,
+
+91
+00:05:28,980 --> 00:05:34,430
+each computer stores all objects
+falling on some arc, which consists
+
+92
+00:05:34,430 --> 00:05:39,370
+of all objects which are closer to this
+computer than to any other computer.
+
+93
+00:05:39,370 --> 00:05:40,900
+Let's again look at the picture.
+
+94
+00:05:40,900 --> 00:05:44,370
+This is the circle and
+there are six computers and
+
+95
+00:05:44,370 --> 00:05:47,670
+these computers mapped to
+some points on this circle.
+
+96
+00:05:47,670 --> 00:05:52,980
+And then the arcs of the same
+color as the computers near them,
+
+97
+00:05:52,980 --> 00:05:55,350
+are the sets of points,
+
+98
+00:05:55,350 --> 00:05:59,290
+which are closer to the corresponding
+computer than to any other computer.
+
+99
+00:05:59,290 --> 00:06:03,120
+And so each computer is responsible for
+some arc of this circle.
+
+100
+00:06:03,120 --> 00:06:05,890
+For all the keys that
+are mapped to this arc.
+
+101
+00:06:07,250 --> 00:06:11,840
+And so what happens when computers come
+in because new computers are bought or
+
+102
+00:06:11,840 --> 00:06:13,500
+when computers are broken.
+
+103
+00:06:13,500 --> 00:06:18,878
+When a computer goes off when it is
+broken, it's neighbors take its data.
+
+104
+00:06:18,878 --> 00:06:23,667
+So it has two neighbors, and it's arc
+is divided into parts, and one part
+
+105
+00:06:23,667 --> 00:06:29,190
+goes to the right neighbor and the,
+another part goes to the left neighbor.
+
+106
+00:06:29,190 --> 00:06:33,116
+And when a new computer is added
+it takes data from its neighbors.
+
+107
+00:06:33,116 --> 00:06:38,060
+So it comes between some two
+already existing computers, and
+
+108
+00:06:38,060 --> 00:06:41,195
+it takes a part of the arc of one of them,
+
+109
+00:06:41,195 --> 00:06:46,490
+and a part of the arc of another one,
+and he gets its arc.
+
+110
+00:06:46,490 --> 00:06:49,080
+So let's look at an example.
+
+111
+00:06:49,080 --> 00:06:54,070
+For example, the yellow computer
+breaks and it goes away.
+
+112
+00:06:54,070 --> 00:06:58,655
+And then the green and
+the blue computer will take its arc and
+
+113
+00:06:58,655 --> 00:07:01,138
+divide it between themselves.
+
+114
+00:07:01,138 --> 00:07:04,150
+So that's what happens.
+
+115
+00:07:04,150 --> 00:07:09,830
+Another problem which still needs to be
+solved is that when some computer breaks,
+
+116
+00:07:09,830 --> 00:07:12,900
+we need to copy or relocate the data.
+
+117
+00:07:12,900 --> 00:07:17,800
+And how will a node, a computer, know
+where to send the data that is stored?
+
+118
+00:07:20,190 --> 00:07:23,160
+Well, we need another rule for that.
+
+119
+00:07:24,250 --> 00:07:27,620
+We cannot store the addresses
+of all the other computers
+
+120
+00:07:27,620 --> 00:07:31,080
+on each of the computers
+because that is inconvenient.
+
+121
+00:07:31,080 --> 00:07:33,610
+We will have to constantly
+update that information.
+
+122
+00:07:34,760 --> 00:07:41,720
+But, each node, each computer will be so
+called acquainted with a few neighbors.
+
+123
+00:07:41,720 --> 00:07:47,840
+So it will store the metric
+addresses of some of its neighbors.
+
+124
+00:07:47,840 --> 00:07:51,340
+The rule is that for any key,
+
+125
+00:07:52,750 --> 00:07:58,390
+each node will either store this key
+itself, or it will be acquainted.
+
+126
+00:07:58,390 --> 00:08:01,880
+It will know some other computer
+which is closer to this
+
+127
+00:08:01,880 --> 00:08:04,080
+key in terms of
+the distance on the circle.
+
+128
+00:08:04,080 --> 00:08:11,380
+And, that way, if a request comes to
+some node, any node in the network,
+
+129
+00:08:11,380 --> 00:08:16,690
+about some key, it either can find
+this key inside it's own storage, or,
+
+130
+00:08:16,690 --> 00:08:21,890
+it will redirect the request to another
+node which is closer to this key.
+
+131
+00:08:21,890 --> 00:08:25,510
+And that that node will
+either store the key, or
+
+132
+00:08:25,510 --> 00:08:28,830
+direct the code to the next node,
+which is even closer to that key.
+
+133
+00:08:28,830 --> 00:08:32,420
+And in finite number of iterations the
+request will come to the node that will
+
+134
+00:08:32,420 --> 00:08:34,190
+actually stores the key.
+
+135
+00:08:34,190 --> 00:08:36,170
+So that's the idea.
+
+136
+00:08:36,170 --> 00:08:41,170
+And in practice, what we can do
+is we can put the computers,
+
+137
+00:08:41,170 --> 00:08:43,660
+the nodes on the circle.
+
+138
+00:08:43,660 --> 00:08:50,170
+And then each node will know its immediate
+neighbors, its neighbors of neighbors.
+
+139
+00:08:50,170 --> 00:08:55,670
+And then its neighbors in distance of 4
+and distance of 8, and distance of 16.
+
+140
+00:08:55,670 --> 00:09:00,450
+And for all powers of 2 it will
+know neighbors to the right and
+
+141
+00:09:00,450 --> 00:09:04,730
+to the left at distance of this part 2.
+
+142
+00:09:04,730 --> 00:09:07,870
+Of course less than n over half.
+
+143
+00:09:07,870 --> 00:09:12,090
+And it's easier to see
+on the picture again.
+
+144
+00:09:12,090 --> 00:09:14,660
+So suppose we have many, many nodes.
+
+145
+00:09:14,660 --> 00:09:19,210
+And then the upper node will have
+links to its right and left neighbor.
+
+146
+00:09:19,210 --> 00:09:22,790
+To its right and
+left neighbor on distance of two, and
+
+147
+00:09:22,790 --> 00:09:27,210
+to its right and left neighbor,
+the distance of four, and so on.
+
+148
+00:09:27,210 --> 00:09:32,060
+So each node will contain algorithmic
+number of links to other nodes,
+
+149
+00:09:32,060 --> 00:09:36,290
+which is much better than
+storing all the other nodes.
+
+150
+00:09:36,290 --> 00:09:41,480
+And, if we need to come to some key
+from some node that doesn't contain it
+
+151
+00:09:41,480 --> 00:09:48,720
+we'll first jump in the direction where
+the distance to the key decreases.
+
+152
+00:09:48,720 --> 00:09:50,860
+And we will jump as much as we can.
+
+153
+00:09:50,860 --> 00:09:56,890
+If the computer at distance eight is
+closer than our computer to the key,
+
+154
+00:09:56,890 --> 00:09:59,250
+we will jump at least by eight.
+
+155
+00:09:59,250 --> 00:10:03,800
+If computer with distance 16 is closer,
+we'll jump at least 16.
+
+156
+00:10:03,800 --> 00:10:09,630
+If computer with distance 32 is farther,
+then we'll jump just by 16.
+
+157
+00:10:09,630 --> 00:10:14,470
+In this way,
+we will always jump by at least a half
+
+158
+00:10:14,470 --> 00:10:19,720
+of the distance which divides us from
+computer that stores the key itself.
+
+159
+00:10:19,720 --> 00:10:23,560
+And so in algorithmic number of steps,
+we will actually come from
+
+160
+00:10:23,560 --> 00:10:26,980
+the current computer, to the computer
+that actually stores our key.
+
+161
+00:10:28,090 --> 00:10:32,940
+And this network of nodes
+which know some neighbors and
+
+162
+00:10:32,940 --> 00:10:37,440
+they know some of their neighbors
+is called, Overlay Network.
+
+163
+00:10:37,440 --> 00:10:42,390
+So in conclusion,
+Distributed Hash Tables is a way to store
+
+164
+00:10:42,390 --> 00:10:47,140
+Big Data on many many computers and access
+it fast, as if it was on one computer.
+
+165
+00:10:48,210 --> 00:10:53,300
+Consistent Hashing is one way to determine
+which computer actually owns the data,
+
+166
+00:10:53,300 --> 00:10:55,990
+which computer stores
+this particular object.
+
+167
+00:10:55,990 --> 00:11:00,530
+And to do that, consistent
+hashing uses mapping of keys and
+
+168
+00:11:00,530 --> 00:11:02,500
+computer IDs on a circle.
+
+169
+00:11:02,500 --> 00:11:06,120
+And each computer stores
+a range of keys on an arc,
+
+170
+00:11:06,120 --> 00:11:11,410
+which is closest to this computer in
+terms of distance along the circle.
+
+171
+00:11:11,410 --> 00:11:16,470
+And also overlay network is used to route
+the data to and from the right computer.
+
+172
+00:11:16,470 --> 00:11:18,950
+So when a computer is broken,
+
+173
+00:11:19,990 --> 00:11:24,900
+first, its data needs to be
+copied to some other computer.
+
+174
+00:11:24,900 --> 00:11:26,620
+And its neighbors take its data.
+
+175
+00:11:26,620 --> 00:11:29,980
+So computer disappears, and
+its arc disappears, but
+
+176
+00:11:29,980 --> 00:11:33,130
+this is actually divided
+between two neighbor computers.
+
+177
+00:11:33,130 --> 00:11:36,980
+And each of those arcs increases a bit,
+and
+
+178
+00:11:36,980 --> 00:11:39,970
+they cover the whole data and
+then we proceed.
+
+179
+00:11:39,970 --> 00:11:44,320
+If a new computer appears, it takes
+some data from its right neighbor,
+
+180
+00:11:44,320 --> 00:11:48,550
+some data from its left neighbor,
+and assembles an arc for itself.
+
+181
+00:11:49,550 --> 00:11:51,231
+And I hope that after this lecture,
+
+182
+00:11:51,231 --> 00:11:54,763
+you understand how important are data
+structures we study in this course,
+
+183
+00:11:54,763 --> 00:11:58,484
+to the modern technological industry,
+distributed systems, and big data.

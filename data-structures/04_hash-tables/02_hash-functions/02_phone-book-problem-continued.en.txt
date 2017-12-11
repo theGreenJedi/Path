@@ -1,0 +1,76 @@
+Another scheme that we know from
+the previous lesson is chaining. To use that we first select the hash
+function with some cardinality m, then we create an array
+name again of size m. But instead of storing the names
+themselves in the array, we store chains or lists. And in these lists, we'll store
+both names and the phone numbers. And to determine where to put name and
+phone number, we first convert the phone number to integer, then we'll apply hash
+function to it and get a hash value. And put both name and phone number in the chain corresponding
+to the cell with such index. Here is how it looks like. For example, we have a contact of Steve
+and his phone number is 223-23-23. We first convert it to the number
+2 million and a few thousand, and then we compute the hash value of this
+integer number and it turns out to be 1. Then we put both Steve's name and
+his phone number in the chain corresponding to the cell
+number 1 in our array Name. Then we do the same for
+Natalie and her phone number. And it turns out that the hash value of
+the integer corresponding to her phone number is 6, so
+we put her contact in the 6th cell. And then we do the same for Sasha, and the hash value of his phone
+number turns out again to be 1. So Sasha gets in the same cell as Steve. There are the following parameters
+of the chaining scheme. First, n is the total number of phone
+numbers stored in our phone book. m is the cardinality of
+the selected hash function, which is the same as the size of our
+area name, which works as a hash table. c is the length of the longest
+chain in our hash table. We use big O(n + m) memory
+to store the phone book. And also alpha, which is n/m, the number of phone numbers stored
+divided by the size of the hash table, which measures how filled up is our
+hash table, is called the load factor. And we will need it later. So we know that the operations with
+a hash table run in time big O(c + 1). And so we want both small m to
+use fewer memory and small c so that everything works faster. And here's a good example. We see a hash table of size 8 with a few
+chains and we see that the length of the chains are relatively the same, with
+the longest chain being of length just 2. So everything will work fast. And here's a bad example. When we again have hash table of size 8,
+but all the keys fell in the same cell 1. And they make up a very long chain
+of size m, in this case, it is 8. So this is what we want to avoid. Let's try a few hash functions
+that come to our mind. First, let's select cardinality of 1000. And choose the first three digits as
+the hash value for the phone number. For example for
+this phone number it will be 800, because the first three digits are 800. However there is a problem with this hash
+function because the area code, which is the first three digits will be the same
+for many, many people in your phone book. Probably because they live In
+the same city with you, and so they will have the same area code. And the hash values for
+their phone numbers will be the same, and they will make up a very long chain. Another idea is to take the last digits,
+again the cardinality is 1,000, and we take the last three
+digits as the hash value. So for this number, it will be 567. But still, there can be a problem if there
+are many phone numbers in your phone book, which, for example, end in three zeros, or in some other combinations
+of three digits. So, another approach is to just select
+a random value as the hash function, a random number between 0 and 999. And then the distribution of
+hash values will be very good, probably the longest chain will be short. However, we cannot use such
+hash function actually because when we'll call the hash function
+again to look up the phone number we stored in the phone book we won't find it
+because we are looking in the wrong place. Because the value of the hash function
+changed because it's not deterministic. So we learned that the hash function
+must be deterministic, that is return the same value if given the same
+phone number as the input each time. So good hash functions are deterministic. Fast to compute because we do that every
+time we need to store something or modify something or
+find something in our hash table. And they should distribute the keys
+well in different cells and have few collisions. Unfortunately, there is no
+universal hash function. Most specifically, the Lemma says
+that the number of all possible keys, the sizes of the universe
+with keys is large enough. Much larger than the cardinality of
+the hash function that we want to use to save memory. Then for any specific deterministic
+hash function there is a bad input, which results in many, many collisions. Why is that? Well, let's look at the universe U and
+select some cardinality for example, 3. Then, our universe will be
+divided into three groups. All the keys that have hash value 0,
+all the keys that have hash value 1, and all the keys that
+have hash value of 2. Now, let's select
+the biggest of those groups. In this case,
+it's the group with hash value of 1. This group will definitely be of size at
+least one-third of the whole universe and it can be even bigger. In this case for example, around 42%. And then, if we take all these keys or
+a significant part of these keys as an input,
+they will have the same hash value. And so, all of them will make collisions
+between themselves and they will form a very long chain in the hash table
+and everything will work very slowly. Of course, if we change the hash
+function for this particular input, it will distribute the keys more
+uniformly among hash values. But for this particular hash function,
+this will be a bad input. And for any specific hash
+function with any cardinality, we'll be able to select
+a bad input this way. And in the next video,
+you will learn how to solve this problem.

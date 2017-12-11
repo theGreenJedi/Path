@@ -1,0 +1,127 @@
+Hi, in this optional lesson we will learn
+a bit about more than distributed systems. And we will start with some interesting
+inner working online storage services which you probably use such as DropBox,
+Google Drive and the Yandex Disk. Have you wondered how
+a very big file of tens or hundreds of megabytes can be uploaded
+almost instantly to your DropBox account? Or maybe your interested,
+how Dropbox, Google Drive and Yandex Disk save petabytes
+of storage space using the ideas from this module
+on hash tables and hash functions. Or maybe you're interested
+in distrusted systems and distributed storage in general. Then, this lecture is for you. So services like Dropbox and
+Google Drive used extra bytes of storage to store data of millions and
+millions of users worldwide. And there's a very simple idea on how
+to actually save some of that space and save some of the cost so it sometimes
+happens that users upload the same files. The first user liked
+the video with the cats and uploaded it to his Dropbox account just
+to save it and to show his friends. And then another user also
+loved this video file. He may have called it different way but still uploaded it to his Dropbox account,
+the exactly same video. And then another user also uploaded this
+video, because this was a viral video and many, many people liked it and some of them decided to upload it
+to their user accounts in Dropbox. And then what we can do on the level
+of the whole Dropbox service is instead of storing all three copies of
+the same video, just save one copy and have links from the user's files to
+this actual, physical, stored file. And then we've just saved 66% of the storage space because we
+basically reduced three times. And if you have some large videos
+which are also very popular that you can save this way significant
+portion of this storage space which all the users collectively use
+in DropBox to store their files. So the question is how to
+actually implement that. So, when you do a new file log,
+you need to determine if there is already the same file in the system or now, and
+if there is, you just ignore the plot, and sent a link to the register's file in the
+user's account, instead of a real file. So, there are a few ways to do that, and
+we'll start with a really simple one. Naive comparison. You take the new file that
+the user wants to upload. You actually upload it
+to a temporary storage, then you go through all the storage files, then you compare the new file with each
+of the storage files, bye, bye, bye. And if there is exactly the same file, you store a link to this file instead of
+the new file that user's wants to upload. So, there are a few
+drawbacks of this approach. First, you have to first,
+upload the file anyways. So you won't see this miraculous
+instant upload time of large files with hundreds of megabytes. And second is to compare a file
+of size S with N other files, it takes time proportional
+to product of N and S. And that can be huge because
+the number of files in Dropbox or Google Drive is probably on the order of
+hundreds of billions or even trillions. And the files uploaded are often
+also very large like gigabytes. And also, if we use the strategy,
+then, as N grows, as service for online storage grows,
+the total running time of all uploads will grow as N squared because each
+new upload is big O(N) and it's longer and longer and
+longer as the number of files increases. So, this approach won't
+work long-term anyway. So what can we do? First idea is, instead of comparing the
+files themselves, try to compare hashes. As in the Rabin Karp's algorithm,
+compare hashes of the files first. If the hashes are different,
+then the files are definitely different. And if there is a file with the same hash, then upload this new file that the user
+wants to upload to his account, and compare the new file with the old file
+with the same hash directly byte by byte. Still, there are problems
+with this approach. First, there can be collisions so
+we cannot just say that if two files have the same hash value then they're equal and
+we don't need to store the new file. Sometimes, different files can
+have the same hash value and we'll still have to compare the two files,
+and also we still have to upload the file to compare directly even
+if the same file's already stored. And we still have to compare
+with all N already stored files. So what can we do? Another idea is we can use
+several hash functions. If we have two equal files, even if we
+compute five different hash functions there values on these two
+files will be the same. So the idea is choose several different
+hash functions independently for example, take functions from polynomial family
+with different multiplier x or with different prime numbers p. And then compute all the hashes for
+each file and if there is a file which is already
+stored and has all the same hash values, then the new file is probably
+the same as the file already stored. In this case, we might want to not
+even upload the new file at all and save the time and
+make the upload seem immediate. And to do that we need to just compute
+hashes locally before upload and only send through the network, which can be
+slow, the variants of the hash functions, which are much, much less in terms
+of space than the initial huge file. So we can do the hash values locally. We send those three or five hash values
+over the network to the service. They're compared to the hash values
+of the files already stored. And if there is a file with same set of
+hash values, we don't upload our new file. And this is how the instant
+upload works sometimes. When you try to upload file which is
+already stored but by someone else. Well of course,
+there is a problem with collisions. Because collisions can happen even if you
+have several different hash functions. Still, there can be two
+different files which have the same set of hash values even for
+several hash functions. And there are even algorithms
+which on purpose find two different files which have the same
+value of a give hash function. If you know for which hash function
+you are trying to find a collision. However, for
+hash functions used in practice, collisions are extremely rare and
+hard to find. And if you use more than one hash
+function, if you use three or even five then you probably won't
+see a collision in a life time. So this is actually done in practice. You compute several different hash
+functions which no body knows and then it is so hard to find two files for which all the hash functions
+have the same values. That a new file is considered to
+be equal to the old stored file if all the hash values coincide with the
+hash values of the file already stored. So we still have an unsolved
+problem that we need to do and comparisons with all
+the already stored files. So how can we solve this problem? Well, we can first precompute hashes
+because when a file is submitted for upload, hash values for
+this file are computed anyway. So we can store the addresses of the files which already stored in
+the service in a hash table and along with the addresses of the files will
+store those hash values for each file. So, we recompute them and store them and
+when we need to search for a new file We actually only need
+to search in the hash table, and we need only the values of the hash
+functions on this file to search for it. We don't need to provide the file itself. So we search for
+the hash values in the hash table. And if we find some files stored in
+this hash table with the same set of hash values, then we know that there is
+already such files stored in the system. So the final solution is the following. We choose from three to five
+different good hash functions, for which it is hard to find solutions. So that we don't see
+collisions in practice. We store the addresses of the files and
+the hashes of those files in a hash table, and before we upload a new file,
+we compute the hashes locally, we send them over
+the network to the service. We check whether there is a file in
+a hash table with the same hash values. And if all the hashes for
+some stored file coincide with the hashes of the new file
+then the search is successful. And in this case we don't
+even upload the file, we just store a link in the user account
+to the existing, already stored file. So this how we can do instant upload
+to Dropbox or Google Drive for [INAUDIBLE] this, and this is actually
+how they save a lot of space, probably petabytes of
+space in their services. However, there are more problems to this,
+because it turns out that billions of files are uploaded
+daily, for example, into Dropbox. And that means that probably around
+trillions are already stored there. And that is just too big for
+a simple hash table on one computer. And also, millions of users upload
+simultaneously their files, and so this is also too many requests for
+a single hash table. And so you need some more sophisticated solution to
+cope with this those two things. And see our next lecture to understand
+how that problem is solved.

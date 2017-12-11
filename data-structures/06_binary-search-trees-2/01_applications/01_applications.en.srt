@@ -1,0 +1,802 @@
+1
+00:00:04,659 --> 00:00:06,810
+Hello everybody, welcome back.
+
+2
+00:00:06,810 --> 00:00:10,320
+Today we're going to talk more about
+binary searches, in particular we're going
+
+3
+00:00:10,320 --> 00:00:13,870
+to give a couple of applications
+to computing order statistics.
+
+4
+00:00:13,870 --> 00:00:18,150
+And then a sort of additional
+use of binary search trees,
+
+5
+00:00:18,150 --> 00:00:19,230
+to store assorted lists.
+
+6
+00:00:21,050 --> 00:00:24,580
+Okay, so, there's some questions
+that you might want to ask.
+
+7
+00:00:24,580 --> 00:00:26,920
+You've got a bunch of elements that
+are stored in this binary search
+
+8
+00:00:26,920 --> 00:00:27,750
+tree data structure.
+
+9
+00:00:27,750 --> 00:00:30,590
+They're assorted by some ordering.
+
+10
+00:00:30,590 --> 00:00:31,450
+Things we might want to do.
+
+11
+00:00:31,450 --> 00:00:34,390
+We might want to find
+the 7th largest element.
+
+12
+00:00:34,390 --> 00:00:38,740
+Or maybe we want the median element,
+or the 25th percentile element.
+
+13
+00:00:38,740 --> 00:00:43,400
+Now, these are all instances
+of an order statistic problem.
+
+14
+00:00:43,400 --> 00:00:47,620
+We would like to be able to be given
+the root of the T tree and the number k,
+
+15
+00:00:47,620 --> 00:00:51,510
+we should be able to return the kth
+smallest element stored in the T tree.
+
+16
+00:00:53,350 --> 00:00:57,430
+So, the basic idea is that this
+is sort of a search problem.
+
+17
+00:00:57,430 --> 00:01:00,310
+We sort of should treat it like one.
+
+18
+00:01:00,310 --> 00:01:02,680
+But to do that we need to know
+which subtree to search in.
+
+19
+00:01:03,910 --> 00:01:07,870
+So I mean, is the case smallest
+element in the left subtree?
+
+20
+00:01:07,870 --> 00:01:12,000
+Well, the left subtree does store
+a bunch of the smallest elements.
+
+21
+00:01:12,000 --> 00:01:15,380
+But the real question is,
+does it store k of them?
+
+22
+00:01:15,380 --> 00:01:18,400
+If it stores at least, k,
+k's smallest element should be in there,
+
+23
+00:01:18,400 --> 00:01:20,190
+otherwise it won't be.
+
+24
+00:01:20,190 --> 00:01:25,160
+So the thing that we need to know, is how
+many elements are in the left subtree?
+
+25
+00:01:26,540 --> 00:01:29,590
+And so, we really need a tree
+where we can easily tell
+
+26
+00:01:29,590 --> 00:01:31,109
+how many elements are in each subtree.
+
+27
+00:01:32,360 --> 00:01:34,450
+Well, there's an easy fix for that.
+
+28
+00:01:34,450 --> 00:01:36,410
+You just add that as a new field.
+
+29
+00:01:36,410 --> 00:01:41,300
+So N.Size should return the number
+of elements in the subtree of N.
+
+30
+00:01:42,440 --> 00:01:46,240
+It's a new field, it stores that, it
+should satisfy the property, that the size
+
+31
+00:01:46,240 --> 00:01:50,661
+of N is the size of the left subtree, and
+the size of the right subtree, plus one,
+
+32
+00:01:50,661 --> 00:01:54,799
+all added together, where if you have
+null pointers, these have size zero.
+
+33
+00:01:55,910 --> 00:01:57,210
+Okay?
+
+34
+00:01:57,210 --> 00:02:00,010
+Now, we have to be a little bit careful,
+just like with the height,
+
+35
+00:02:00,010 --> 00:02:04,210
+we couldn't just define this field and
+hope that it always has the right value.
+
+36
+00:02:04,210 --> 00:02:07,000
+You actually need to do some work
+to make sure this stays correct.
+
+37
+00:02:08,090 --> 00:02:14,740
+For example, when you perform a rotation,
+the sizes of various subtrees will change.
+
+38
+00:02:14,740 --> 00:02:19,452
+Fortunately, only the sort of two nodes
+that you moved around, will actually have
+
+39
+00:02:19,452 --> 00:02:23,184
+their subtree sizes changed, but
+you do need to deal with those.
+
+40
+00:02:23,184 --> 00:02:27,280
+And so, we're going to have
+an operation called RecomputeSize,
+
+41
+00:02:27,280 --> 00:02:31,720
+which just recomputes the size as the sum
+of the size of its left child, and
+
+42
+00:02:31,720 --> 00:02:34,190
+the size of its right child, and one.
+
+43
+00:02:34,190 --> 00:02:38,080
+And then to do a rotation,
+we should do this as we did before.
+
+44
+00:02:38,080 --> 00:02:43,070
+But then we need to recompute the sizes
+of the two nodes that we rotated.
+
+45
+00:02:43,070 --> 00:02:45,990
+And you need to make sure to do
+this in the right order, actually,
+
+46
+00:02:45,990 --> 00:02:50,220
+because the size of the parent
+depends on the size of the child.
+
+47
+00:02:50,220 --> 00:02:52,360
+So you need to recompute the child first.
+
+48
+00:02:54,630 --> 00:02:58,510
+Okay, but once you got all
+the sizes of nodes stored,
+
+49
+00:02:58,510 --> 00:03:00,517
+it's actually not hard to
+compute order statistics.
+
+50
+00:03:01,950 --> 00:03:05,390
+So to compute the kth smallest
+element in your tree, R,
+
+51
+00:03:05,390 --> 00:03:11,089
+what you do is we let s be the size
+of the left sub tree, R.Left.Size.
+
+52
+00:03:12,190 --> 00:03:17,970
+Now, if k = s+1, they're exactly
+s things smaller than the root.
+
+53
+00:03:17,970 --> 00:03:23,300
+The root is the s plus firsts
+smallest element, so we return R.
+
+54
+00:03:23,300 --> 00:03:30,060
+Otherwise, if k < s + 1, the kth
+smallest element is in the left subtree,
+
+55
+00:03:30,060 --> 00:03:36,440
+so recursively return the kth smallest
+element of our .Left subtree.
+
+56
+00:03:36,440 --> 00:03:41,980
+On the other hand, if k > s+1,
+we need to look in the right subtree.
+
+57
+00:03:41,980 --> 00:03:46,420
+Now unfortunately, it's no longer the kth
+smallest element of the right subtree,
+
+58
+00:03:46,420 --> 00:03:50,299
+because there were already
+s+1 smaller elements.
+
+59
+00:03:51,410 --> 00:03:54,220
+So what we actually need to
+compute is the k-s-1st smallest
+
+60
+00:03:54,220 --> 00:03:55,965
+element in the right subtree.
+
+61
+00:03:58,160 --> 00:04:01,420
+But with this minor adjustment,
+this algorithm works.
+
+62
+00:04:01,420 --> 00:04:04,070
+The runtime is all of the height
+of the node that you search for,
+
+63
+00:04:04,070 --> 00:04:06,360
+it's basically just a binary search.
+
+64
+00:04:06,360 --> 00:04:11,790
+But we need to use these sizes of trees
+in order to just figure out which side to
+
+65
+00:04:11,790 --> 00:04:19,200
+look at, instead of comparing the actual
+keys, but this works perfectly well.
+
+66
+00:04:20,590 --> 00:04:22,618
+Now here's a puzzle that
+I'm going to give you.
+
+67
+00:04:22,618 --> 00:04:26,240
+We're not going to do homework on this,
+but it's something you should think about.
+
+68
+00:04:26,240 --> 00:04:31,210
+What we've shown you how to do is,
+given a rank, k,
+
+69
+00:04:31,210 --> 00:04:33,940
+we can find the kth smallest node.
+
+70
+00:04:33,940 --> 00:04:35,650
+How would you do the opposite?
+
+71
+00:04:35,650 --> 00:04:40,510
+Given a node, figure out how many
+nodes in the tree are smaller than it.
+
+72
+00:04:40,510 --> 00:04:43,830
+You can do it using this kind of thing,
+but it takes a little bit of thinking.
+
+73
+00:04:45,720 --> 00:04:47,550
+Okay that was one problem.
+
+74
+00:04:47,550 --> 00:04:51,350
+We're going to talk about one more
+application of binary search trees.
+
+75
+00:04:51,350 --> 00:04:53,460
+And, this problem's a little bit weird,
+but
+
+76
+00:04:53,460 --> 00:04:58,040
+it's going to introduce
+some very important ideas.
+
+77
+00:04:58,040 --> 00:05:02,030
+So we have an array of squares,
+they're each colored black or white.
+
+78
+00:05:02,030 --> 00:05:05,750
+And we want to be able to perform this
+flip operation, which what it does is it
+
+79
+00:05:05,750 --> 00:05:09,900
+sort of points at some square, x,
+and every square after that index,
+
+80
+00:05:09,900 --> 00:05:11,950
+it flips them from black to white,
+and white to black.
+
+81
+00:05:12,970 --> 00:05:17,850
+So, in the array pictured, we're flipping
+the last four guys, and they go from being
+
+82
+00:05:17,850 --> 00:05:22,510
+white, white, black, white,
+to being black, black, white, black.
+
+83
+00:05:22,510 --> 00:05:23,640
+Okay.
+
+84
+00:05:23,640 --> 00:05:27,370
+So, formally, we sort of want a data
+structure that maintains this.
+
+85
+00:05:27,370 --> 00:05:30,570
+You can create an array of size n,
+you can ask for
+
+86
+00:05:30,570 --> 00:05:34,330
+the color of the mth square, or
+you can fun this flip operation,
+
+87
+00:05:34,330 --> 00:05:37,590
+which flips the color of all
+the squares after index x.
+
+88
+00:05:39,270 --> 00:05:41,630
+Okay, those are the things
+we want to support.
+
+89
+00:05:41,630 --> 00:05:46,390
+Now, we could do this by just having
+an array and storing all the colors.
+
+90
+00:05:46,390 --> 00:05:49,270
+The problem is that the flip
+would be pretty slow.
+
+91
+00:05:49,270 --> 00:05:52,210
+Because if you wanted to flip all of
+the things with index bigger than x,
+
+92
+00:05:53,740 --> 00:05:56,390
+then there's no good way to do this.
+
+93
+00:05:56,390 --> 00:06:02,190
+You just have to sort of go through every
+
+94
+00:06:02,190 --> 00:06:05,220
+square of index bigger than x, and flip
+them, and that could take linear time.
+
+95
+00:06:07,270 --> 00:06:12,500
+So it turns out that there's a nice way
+to use binary search trees to solve this.
+
+96
+00:06:12,500 --> 00:06:14,980
+And this requires sort of
+a slightly different way of
+
+97
+00:06:14,980 --> 00:06:16,600
+thinking about binary search trees.
+
+98
+00:06:17,890 --> 00:06:21,060
+Up until now we thought of a search
+tree as sort of having a bunch of
+
+99
+00:06:21,060 --> 00:06:24,808
+elements there stored, and
+they allow you to do searches on them.
+
+100
+00:06:24,808 --> 00:06:28,420
+And so somehow you're given the keys, and
+the search tree allows you to find them.
+
+101
+00:06:29,550 --> 00:06:30,960
+But there's another way to do it.
+
+102
+00:06:30,960 --> 00:06:35,420
+And maybe a good way to illustrate it,
+is by looking at the logo for our course.
+
+103
+00:06:35,420 --> 00:06:37,940
+So this is a binary search tree.
+
+104
+00:06:37,940 --> 00:06:39,830
+Every node has a letter in it.
+
+105
+00:06:39,830 --> 00:06:43,470
+But you'll note that this isn't
+sorted in terms of these letters.
+
+106
+00:06:43,470 --> 00:06:49,450
+For example, O is the left child of I, but
+O comes after I in alphabetical order.
+
+107
+00:06:49,450 --> 00:06:51,300
+These things aren't sorted alphabetically.
+
+108
+00:06:53,250 --> 00:06:56,920
+On the other hand, you'll note that
+the binary search tree structure
+
+109
+00:06:56,920 --> 00:07:00,620
+actually does tell you what order these
+letters are supposed to be going in.
+
+110
+00:07:01,850 --> 00:07:04,860
+I mean, the smallest thing here should
+be A, because it's the left child,
+
+111
+00:07:04,860 --> 00:07:06,850
+of the left child, of the left child,
+of the left child.
+
+112
+00:07:07,880 --> 00:07:14,310
+Then L is the next smallest, then G,
+then O, R, I, then T, H, M, S.
+
+113
+00:07:14,310 --> 00:07:17,630
+And so, it tells us what order these
+layers are supposed to be, and
+
+114
+00:07:17,630 --> 00:07:19,060
+they spell algorithms.
+
+115
+00:07:20,970 --> 00:07:25,616
+And that's the basic idea, that you can
+use a tree to store some sort of sorted
+
+116
+00:07:25,616 --> 00:07:27,918
+list of things, in a convenient way.
+
+117
+00:07:27,918 --> 00:07:30,260
+So, for
+example we have the following tree.
+
+118
+00:07:30,260 --> 00:07:34,582
+There are no actual keys stored on them,
+but of this A, B, C,
+
+119
+00:07:34,582 --> 00:07:39,860
+D, and E, one of these is the 5th
+smallest element in the tree.
+
+120
+00:07:39,860 --> 00:07:40,418
+Which one is it?
+
+121
+00:07:42,923 --> 00:07:43,820
+Well, it's D.
+
+122
+00:07:43,820 --> 00:07:46,400
+I mean you sort of count
+the smallest sum left, then B,
+
+123
+00:07:46,400 --> 00:07:48,930
+then this other thing,
+and D is the 5th smallest.
+
+124
+00:07:50,130 --> 00:07:52,140
+Okay, so what's the point?
+
+125
+00:07:52,140 --> 00:07:54,090
+How are we going to use
+this to do our flip arrays?
+
+126
+00:07:54,090 --> 00:07:58,200
+What we're going to do is, instead
+of storing the sequence of black and
+
+127
+00:07:58,200 --> 00:08:01,980
+white cells as an array,
+we're going to store it as a list.
+
+128
+00:08:01,980 --> 00:08:04,170
+And in this list we're going to
+have a bunch of nodes,
+
+129
+00:08:04,170 --> 00:08:06,800
+they're going to be colored black or
+white, fine.
+
+130
+00:08:09,150 --> 00:08:11,360
+Actually, there's a bit of a clever thing.
+
+131
+00:08:11,360 --> 00:08:15,170
+We're actually going to want two trees,
+one with the normal colors, and
+
+132
+00:08:15,170 --> 00:08:17,190
+one with the opposite colors.
+
+133
+00:08:17,190 --> 00:08:19,730
+And the reason for
+this is that when we want to do flips,
+
+134
+00:08:19,730 --> 00:08:22,680
+we want to be able to replace
+things with their opposite colors.
+
+135
+00:08:22,680 --> 00:08:27,130
+So, it helps to have everything
+opposited already stored somewhere.
+
+136
+00:08:28,760 --> 00:08:30,136
+But now comes the really clever bit.
+
+137
+00:08:30,136 --> 00:08:34,860
+If we wanted to do this flip operation,
+say we wanted to take the last three
+
+138
+00:08:34,860 --> 00:08:40,920
+elements of our tree and flip all of
+their colors, well this second tree,
+
+139
+00:08:40,920 --> 00:08:46,590
+this dual tree, the last three elements
+of that tree, have the opposite colors.
+
+140
+00:08:46,590 --> 00:08:51,380
+So all that we need to do is swap the last
+three elements of the tree on the left,
+
+141
+00:08:51,380 --> 00:08:53,640
+the last three elements of
+the tree on the right, and
+
+142
+00:08:53,640 --> 00:08:55,520
+we have effectively swapped those colors.
+
+143
+00:08:56,840 --> 00:08:59,130
+And what's even better is
+that using these merge and
+
+144
+00:08:59,130 --> 00:09:02,040
+split operations from last time,
+we can actually do this.
+
+145
+00:09:04,170 --> 00:09:07,085
+So let's see how this is implemented.
+
+146
+00:09:07,085 --> 00:09:10,780
+Firstly, to create this thing,
+we just build two trees, where T1,
+
+147
+00:09:10,780 --> 00:09:14,480
+all of the things are colored white,
+and T2, they're all colored black.
+
+148
+00:09:14,480 --> 00:09:15,750
+Great.
+
+149
+00:09:15,750 --> 00:09:17,940
+To find the color of the mth node,
+
+150
+00:09:17,940 --> 00:09:22,440
+you just find the mth node within T1 and
+return its color.
+
+151
+00:09:23,580 --> 00:09:25,000
+Great.
+
+152
+00:09:25,000 --> 00:09:26,980
+The flip operation is the interesting bit.
+
+153
+00:09:26,980 --> 00:09:30,990
+If we wanted to Flip(x), what you do is,
+you split T1 at x into two halves,
+
+154
+00:09:30,990 --> 00:09:36,070
+and you split T2 at x, and
+then you merge them back together.
+
+155
+00:09:36,070 --> 00:09:40,470
+But you merge the left half of T1,
+with the right half of T2, and
+
+156
+00:09:40,470 --> 00:09:43,560
+you merge the left half of T2,
+with the right half of T1.
+
+157
+00:09:43,560 --> 00:09:50,148
+And that effectively did move around
+the sort of last N bits, and it works.
+
+158
+00:09:50,148 --> 00:09:54,153
+And so, as the moral,
+trees can actually be used for
+
+159
+00:09:54,153 --> 00:09:57,808
+more than just performing
+searches on things.
+
+160
+00:09:57,808 --> 00:10:00,867
+We can use them to store these
+sorted lists, and merge and
+
+161
+00:10:00,867 --> 00:10:03,546
+split then become very
+interesting operations,
+
+162
+00:10:03,546 --> 00:10:08,020
+in that they can allow us to
+recombine these lists in useful ways.
+
+163
+00:10:08,020 --> 00:10:10,690
+Okay, so that's all for
+these applications.
+
+164
+00:10:10,690 --> 00:10:14,115
+Next time we're going to sort of talk,
+we're going to give an optional lecture,
+
+165
+00:10:14,115 --> 00:10:17,230
+and it's going to talk about
+an alternative way to implement
+
+166
+00:10:17,230 --> 00:10:20,415
+many of these useful binary
+search tree operations.
+
+167
+00:10:20,415 --> 00:10:25,655
+So, please come to that, it'll be
+interesting, but it's not really required.
+
+168
+00:10:25,655 --> 00:10:28,365
+It's another way to do some of this stuff.
+
+169
+00:10:28,365 --> 00:10:29,715
+But, I hope I'll see you there.

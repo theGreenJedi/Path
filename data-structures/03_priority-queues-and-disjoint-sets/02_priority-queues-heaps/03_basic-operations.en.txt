@@ -1,0 +1,132 @@
+Let's see how basic operations
+work with binary max heaps. What is particularly easy for binary max heaps is finding the maximum
+value without extracting it. I mean,
+it is easy to implement GetMax operation. Well, recall that the main property of
+that binary max heap tree is the following. For each edge its top value is greater or
+equals than its bottom value. this means that if we go from
+bottom to top now in our trees, the values can only increase. This in particular means that the maximum
+value is stored at the root of our tree. So just to implement GetMax, we just return the value at
+the root of our tree. And this takes us just
+a constant time of course. Now let see how inserting a
+new element into to the max binary heap works. So first of all a new element should
+be attached somewhere to our tree. We cannot attach it to
+the root in this case for example, because the root
+already has two children. Therefore, we just attach it to some leaf. Let's select for example, the leaf
+seven and attach a new node to it. The new node in this case has value 32. Well, it is still a binary tree. Right?
+Because seven, before attaching seven, had zero children,
+now it has just one child. So it is still a binary tree. However, the heap property
+might potentially be violated. And it is violated actually in this case,
+right? Which is shown by this red edge. So for this red edge the value
+of it parent which is seven, is less than the value
+of its child which is 32. So we need to fix it somehow. So to fix it we just allow
+that the new element to sift up. So this new element has value 32, which is relatively large with respect
+to all other elements in this tree, so we need to move it
+somewhere closer to the root. So the process of moving it closer
+to the roof is called sifting up. So the first thing to do is we
+need to fix this problematic edge. To fix it,
+we perform the following simple operation. We just swap the corresponding
+two elements. In this case, we'll swap seven and 32. After they swap,
+there is no problem on this edge. However, it might be the case that
+the new element 32 is still smaller. Is still greater than its parent and
+this is the case, in our toy example. So the parent of 32 is now 29, which is smaller than 32, so
+we still need to fix this red problem. And we just repeat this process, we again swap the new element
+with its parent, right? So we swap it and
+now we see that the property is satisfied for
+all edges in this binary tree. So what we've just done is that we
+let the new element to sift up. And what is important to note here is that
+we maintained the following invariant, that the heap property at any point of
+time of sifting the new element up, the heap property is violated on at
+most one edge of our binary tree. So and if we see that
+there is a problematic edge, we just swap its two elements, right? And each time during this process the
+problematic node gets closer to the root. This in particular implies that
+the number of swaps required is at most the height of this tree. Which in turn means that the running
+time of insertion procedure, as well as the running time
+of the sifting up procedure, in this case is big O of the tree height. Now let's see how the extract max
+procedure works for binary max heaps. First of all, recall that we already
+know that the maximum value is stored at the root of the tree. However, we cannot just take and detach the root node because it
+will leave two sub trees, right? So we need to somehow preserve
+the structure of the tree. What is easy to detach from
+a binary tree is any leaf. So let's do the following,
+let's select any leaf of our tree and let's replace the root with this leaf. So in this case
+this produces the following tree. This potentially might
+violate the heap property. And in this case,
+this does violate the property. So the new root 12,
+is less than both its children. So the property is violated on two edges. So 12 is a relatively
+small number in this case. So we need to
+move it down to the leaves. Great, so for
+this we will implement a new procedure, which is called SiftDown, okay? So, similarly to SiftUp,
+we are going to replace, to replace the new element
+with one of its children. In this case we have a choice actually, we can replace it either with its
+left child or with its right child. By thinking a little bit we
+realize that it will make more sense to replace it with
+the left child in this case. Because the left child is larger than the
+right child, because after this, after we replace 12 with 29, the right problematic
+edge will be fixed automatically, right? So this is how we are going to
+perform the SiftDown procedure. Once again, we select the largest
+of two child and we replace. the problematic
+node with this larger child. As you can see, the right problematic
+edge is fixed automatically. The left edge is also fixed,
+just because we swapped two elements. However, the new problematic node
+might introduce new problems, right closer to the bottom of the tree. Now we see that there is
+still a problematic edge, so in this case, we have just one edge so
+12 is smaller than 14, but it is greater than seven, so
+we are safe in the right tree. In this case we swap 14 with 12 and after that we just get a tree where
+the property is satisfied on all edges. So once again we maintain
+the following invariant. At each point of time we have
+just one problematic node, and we always solve the problematic node. With the larger one of its children, so
+that to fix both problematic edges. Right?
+And the problematic node always
+gets closer to the leaf, which means that the total running
+time of the extract max as well as the sift down procedures is
+proportional to the tree height. Now, when we have implemented both
+procedures, sifting up and sifting down, it's not so difficult to implement
+also the ChangePriority procedure. So assume that we have an element for which we would like to
+change its priority. This means that we are going
+either to decrease its priority or increase its priority. Well, to fix the potential
+problems that might be introduced by changing its priority, we are going to
+call either sifting up or sifting down. Well, let me illustrate this
+again on the toy example. Assume that we are going to change
+the priority of this leaf 12. So we've just changed it. We just increased the priority
+of this element to 35. In this case, we potentially introduced
+some problems and we need to fix some. Well we see that 35 is a relatively
+large number which means that we need to sift it up. So we need to move it closer to the root. So to do this we just
+call SiftUp procedure. Which repeatedly swaps
+the problematic node with its parent, so in this case this will produce
+the following sequence of swaps. First will swap 35 with 18 this
+gives us the following picture, we see there is still a problem 35 is still
+larger than its parent so we swap it again. Now we see that 35 is
+smaller than its parent. And actually, the heap property
+is satisfied for all edges. Once again, what is important in this
+case is that at each point of time, the heap property is violated on
+at most one edge of our tree. So since our problematic node always
+gets closer to the root at each step, I mean, after each swap. We conclude that the running time of
+change priority procedure is also at most Big O of the tree height. There is an elegant way of removing
+an element from the binary max heap. Namely it can be done just by calling
+two procedures that we already have. So I assume that we have a particular
+element that we're going to remove. So the first step to do is we just change
+its priority to plus infinity, that is, to a number which is definitely larger than
+all the elements in our binary MaxHeap. When we call it, the change priority
+procedure will sift this element to the top of our tree,
+namely to the root of our tree. Then to remove this element it is enough
+to call the extract max procedure. So in this particular example
+it will work as follows. So assume that we're going to
+remove the element 18, which is highlighted here on this slide. So we first change it's
+priority to infinity. Then the ChangePriority procedure
+calls the SiftUp procedure. This procedure realizes that there is,
+that the property is violated on this edge. And swaps these two elements. Then it swaps the next two elements and
+each at this point well this, this node that we're going
+to remove is at the root. Well, to remove this node,
+we just call the ExtractMax procedure. So recall that the first step
+of ExtractMax is to replace the root node with any leaf. So let's select, for example, 11. So we replace,
+we replace the root with 11. Then we need to call sift down, just to let this new root go closer to the leaves. Well, in this case,
+11 will be replaced first by 42, then there is still a problem
+on the edge from 11 to, to 18. So we swap 11 with 18 and
+finally we swap 11 with 12. Well, once again since everything
+boils down just to two procedures. First is change priority. And the second one is extracting the max. And they all, they both work in time
+proportional to the tree height. So we conclude that the running time of
+the remove procedure is also, at most, Big O of the tree height. So to summarize,
+we were able to implement all max binary heap operations in time
+proportional to the tree height, and the GetMax procedure even works in
+constant time in our current implementation. So we definitely would like
+to keep our trees shallow. And this will be the subject
+of our next video.

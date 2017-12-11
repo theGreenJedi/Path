@@ -1,0 +1,131 @@
+Hello everybody, welcome back. We're continuing to talk
+about binary search trees. And today, we're going to talk about
+how to implement the basic operations of a binary search tree. So we're going to talk about this and talk about a few of the difficulties
+that show up when you're trying it. Okay, so let's start with searching. And this is sort of the key thing that
+you want to be able to do on the binary search tree. And the primary operation that
+we're going to look at for how to do this is what
+we're going to call Find. Now Find is a function. What it takes is a key k and
+the root R of a tree. And what it's going to return is the node
+in the subtree with R as the root whose key is equal to k. Okay, that's the goal and
+the idea is pretty easy. I mean the search tree is set
+up to do binary searches on. So what we're going to do is we're going
+to sort of start at the top of the tree. We're going to compare 6,
+the thing we're searching for, to 7. 6 is less than 7 and
+that means since everything less than 7 is in its left subtree,
+we should look in the left subtree. So we go left. We now compare 6 to 4,
+the root of this left subtree. 6 is bigger than 4. Everything bigger than 4 in
+the place that we're looking is going to be in 4s right subtree,
+so we had down in that way. We now compare 6 to 6. They're equal, and so
+we are done with our search. And so this algorithm is actually
+very easy to implement recursively. If the key of R.Key = k, then we're done. We just return the node R at the root and
+that's all there is to it. Otherwise, if R.key > K,
+we need something less than R, so the thing we're looking for
+should be in the left subtree. So we recursively run Find on k and
+R's left child. On the other hand, if R.key < k,
+we have to look in the right subtree, so we find k in the subtree of Rs child. Okay, this works fine as long as the thing
+we're looking is in the tree, but what happens if we're looking for
+a key that isn't there? So we're trying to find 5 in this tree. We checked it's less than 7. It's more than 4. It's less than 6. 6 doesn't have a left child. We have a null pointer,
+what do we do here? Well, in some sense we could just return
+some errors saying the thing you were looking for wasn't there, but
+we did actually find something useful. We didn't find 5 in the tree,
+because its not there, but we sort of figured out where 5 should
+have been in the tree if it were there. And so, if you stop your search right
+before you hit the null pointer, you can actually something useful. You find the place where
+k would fit in the tree. So it makes a little bit of sense
+to modify this Find procedure so that if say R.key > k, then instead of
+just checking the left points here, we first check to see if R
+actually has a left child. If Rs Left child isn't null, we can recursively try to
+find k in the left subtree. But otherwise, if it is null,
+we'll just stop early and return R and do something similar for the other case. And this sort of means that
+if we're searching for something that's not in the tree,
+we at least give something close to it. Okay, so that's one thing we can do. Another thing that we might want to do
+is sort of talk with adjacent elements. If we've got some element in the tree,
+we might want to find the next element. And so in particular another function
+we might want which we will call next. It takes a node N and outputs the node in
+the same tree with the next largest key. And maybe one way to think about this is
+instead of searching for every key and has we should search the tree for something
+just a tiny bit bigger than that. And, now if N has a right
+child this is kind of easy. The first bunch of steps lead you to
+the node N, and then you want to go right, because it is bigger than N. But after you do that you
+just keep going left, because it's not, it's smaller
+than all of these other things. They're a little bit bigger than N. And you just keep going until you hit a
+node where you can't go left any further. It's left pointer is null, and
+that's going to be the successor. Now, this doesn't work if N has no right
+child, because you can't go right from N. You also go looking on the left side of N,
+doesn't work. Everything is going to be smaller there. So instead what you have to do
+is you have to go up the tree. You check its parent, and if its parent is smaller than n as well,
+you have to check the grandparent. You just keep going up until you find
+the first ancestor that's bigger than n. And once you have that,
+that will actually be the successor. So, the algorithm for next involves
+a little bit of case analysis. If N does not have a right child,
+we're going to run this protocol we call RightAncestor, which goes up until
+you take the first step right? Otherwise, we are going to return what
+we're going to call the LeftDescendant of Ns right child which means you sort of go
+left, until you can't go left anymore. Now both of these are easy to implement,
+recursively for LeftDescendant if you don't have a left
+child, you're done, you return N. Otherwise you take one step left and
+repeat. For RightAncestor you check to see if your
+parent has a larger key than you if so you return your parent otherwise
+you go up a level and repeat, and just keep going until you find it. And so
+putting these together that computes next. Now it turns out that this range search
+operation that we talked about before, this you're given two numbers x and
+y and the root of the tree and you'd like to return a list of all
+the nodes whose keys are between x and y you can implement this pretty
+easily using what we already have. So, the idea is, well,
+you want to find the RangeSearch, say, everything between 5 and 12. First thing you do is you do a search for
+the first element in that range, in this case, it will be 6. Then you find the next element,
+which is 7, and the next element, which is 10 and the next element is 13,
+it's too big so you stop. So the implementation is pretty easy. We create a list L that's going
+to store everything that we find, we let N be what we get when we try to
+find the left N point x within our tree. And then while the key of this note
+N that we're working at is less than y as long as the key is bigger than x, we're going to this node to our list and
+then we're going to replace N by Next(N). We're just going to iterate through
+these nodes until they're too big, and then we return L. Okay, so that's how you do range search. And nearest neighbors, you can
+figure it out, it's a similar idea. Now, the interesting things are how
+do we do inserts and deletes? So, for insertion we want to be given
+the key k and the root R of the tree and we'd like to add a node with
+key equal to k to our tree. And the basic idea is that unlike with our
+certain array with the tree we can just have a new element and just have
+it hanging off one of our leaves. And this works perfectly well. There is a big of a technical
+problem here, though. We can't just have it hang off anywhere. I mean, three that we're
+inserting is smaller than seven, so it needs to be on
+the left side of seven. And furthermore, there are a whole bunch
+of other things that needs to satisfy to keep the search property working out. But, fortunately for us,
+this find operation. If we tried to find A node
+that wasn't in our tree actually did tell us where
+that node should belong was. So to insert we just find our key
+within R, and that gives us P, and the new node that we want should be
+a child of P, on the appropriate right or left side, depending on
+the comparison between things. And that's that. A little bit more difficult is Delete. So, here we just want to node N,
+we should remove it from our tree. Now there's a problem we can't just
+delete the node because then its parent doesn't have a child. It's children don't have parents,
+it breaks things apart. So we need to find some
+way to fill the gap. And there is a natural
+way to fill this gap. The point is you want to fill the gap with
+something nearby in the sorted order, so you try and find the next element,
+X, and maybe you just take X and fill the gap that you
+created by deleting this. Unfortunately, there could be a problem. Now, X turns out because it's
+the next element that often not going to have a left child, because the
+left child would be sort of even closer. But it might have a right child and
+if it does have this right child, then by moving X side of the way it's
+right child is now going to be orphaned. It's not going to have a proper parents. So in addition to moving X to
+fill that gap you have to move Y up to fill the gap that you made
+by moving X out of the way. But once you do that it's
+actually perfectly good. You've done a reasonable rearrangement
+tree and removed nodes you want. So the implementation takes
+a little bit of work. First you check to see
+if N has a right child. If it's right child is null then it
+turns out we're not in this other case. But you can just remove N and you need
+to promote Ns left child, if it has one. So Ns left child should now
+become the child of Ns parent instead of the other way around. Otherwise we're going to
+let X be next of N and note that X does not have a left child. And then we're going to replace N by X and
+promote Xs right child to sort of fill the gap that we made
+by moving X out of the way. But this all works. Just to review it, so if we have the following tree and
+we're deleting the highlighting node. Which of the following three
+trees do we end up with? Well the answer here is C. The point is that we deleted 1 so we want to replace it with
+the next element which is 2. So we took 2 and
+put it to the place where 1 was. Now 2s child, 4, needs to be promoted. So 4 now becomes the new child. Six and everything works nicely and
+in this tree. Okay so if I tell you implement some
+basic operations for binary search trees next time we'll going to talk about
+the run time of these operations, which are going to leads us to some interesting
+ideas about the balance of these trees.

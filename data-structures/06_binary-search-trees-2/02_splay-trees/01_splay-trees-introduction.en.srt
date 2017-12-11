@@ -1,0 +1,507 @@
+1
+00:00:01,360 --> 00:00:02,260
+Hello everybody.
+
+2
+00:00:02,260 --> 00:00:03,480
+Welcome back.
+
+3
+00:00:03,480 --> 00:00:05,225
+Today we are going to talk about
+something a little different.
+
+4
+00:00:06,260 --> 00:00:08,790
+Up until this point,
+we've talked about AVL trees,
+
+5
+00:00:08,790 --> 00:00:12,730
+we've talked about how to keep them bound,
+and how to use them, to implement all of
+
+6
+00:00:12,730 --> 00:00:17,670
+our binary search tree operations,
+and all of log on time pre-operations.
+
+7
+00:00:17,670 --> 00:00:22,300
+But it turns out that there are a wide
+number of different binary search tree
+
+8
+00:00:22,300 --> 00:00:26,240
+structures that give you different ways
+to ensure that your trees are balanced,
+
+9
+00:00:26,240 --> 00:00:30,320
+there are trepes, there are red block
+trees, and today we're going to talk about
+
+10
+00:00:30,320 --> 00:00:33,730
+splay trees as sort of another example
+of the types of things that you can do.
+
+11
+00:00:35,190 --> 00:00:40,670
+And to motivate this suppose that, well,
+if you're searching for random elements,
+
+12
+00:00:40,670 --> 00:00:45,380
+one after the other, you can actually show
+that no matter what splay your use or
+
+13
+00:00:45,380 --> 00:00:51,920
+data, searcher you use it will always
+take at least log n time per operation.
+
+14
+00:00:51,920 --> 00:00:53,239
+That's actually the best you can do.
+
+15
+00:00:54,470 --> 00:00:58,940
+However, if some items are searched for
+more frequently than others,
+
+16
+00:00:58,940 --> 00:01:00,790
+you might be able to do better.
+
+17
+00:01:00,790 --> 00:01:02,850
+If you take the frequently
+queried items and
+
+18
+00:01:02,850 --> 00:01:07,710
+put them close to the root,
+those items will be faster to search for.
+
+19
+00:01:07,710 --> 00:01:10,940
+And some of the other items might
+be a little bit slower, but
+
+20
+00:01:10,940 --> 00:01:11,930
+you should still be okay.
+
+21
+00:01:13,110 --> 00:01:15,830
+To compare for example,
+we've got the unbalanced tree and
+
+22
+00:01:15,830 --> 00:01:18,200
+the balanced one with the same entires.
+
+23
+00:01:18,200 --> 00:01:23,580
+But you'll note that 1, 5 and 7 are much
+higher up in the unbalanced tree.
+
+24
+00:01:23,580 --> 00:01:27,620
+Now if we search for random things, if we
+search for 11, 11 is much higher up in
+
+25
+00:01:27,620 --> 00:01:32,240
+the balanced tree than the unbalanced one,
+so the unbalanced one is slower there.
+
+26
+00:01:32,240 --> 00:01:34,140
+But when we search for 1,
+
+27
+00:01:34,140 --> 00:01:37,450
+it takes a lot less time in
+the unbalanced case, we search for
+
+28
+00:01:37,450 --> 00:01:41,620
+one again, we search for seven, it's again
+a lot cheaper in the unbalanced case.
+
+29
+00:01:41,620 --> 00:01:46,050
+And if we do some sequence
+of searches well,
+
+30
+00:01:46,050 --> 00:01:49,760
+it might turn out that's is actually
+cheaper to use the unbalanced tree than
+
+31
+00:01:49,760 --> 00:01:53,780
+the balanced one if these
+elements that tend to be higher
+
+32
+00:01:53,780 --> 00:01:58,510
+up in the unbalanced tree are searched for
+more frequently than other elements.
+
+33
+00:02:00,350 --> 00:02:04,600
+So the idea here is that we'd like to have
+a search tree where we can put the commons
+
+34
+00:02:04,600 --> 00:02:08,350
+searched common nodes near the root of the
+tree so that they are cheaper to look up.
+
+35
+00:02:09,680 --> 00:02:13,840
+However, very often it will be the case
+that we won't know ahead of time
+
+36
+00:02:13,840 --> 00:02:16,240
+which those commonly searched for
+nodes will be.
+
+37
+00:02:17,540 --> 00:02:19,050
+And so if we, or
+
+38
+00:02:19,050 --> 00:02:23,690
+in this situation we'll need an adaptive
+way to bring them close to the root.
+
+39
+00:02:23,690 --> 00:02:27,840
+And one natural way to do it is every
+time you find a node in your tree
+
+40
+00:02:27,840 --> 00:02:31,340
+you do something to rearrange the tree and
+bring that node up to the root.
+
+41
+00:02:32,400 --> 00:02:35,850
+And that way at least heuristically,
+if there are elements that you search for
+
+42
+00:02:35,850 --> 00:02:40,000
+frequently, then since you keep
+bringing them up to the root,
+
+43
+00:02:40,000 --> 00:02:43,040
+they'll usually stay
+somewhat close to the root.
+
+44
+00:02:43,040 --> 00:02:44,620
+And they'll be very cheap to access.
+
+45
+00:02:46,670 --> 00:02:51,770
+So if we want to phrase this in a nice
+simple way, one thing that you could
+
+46
+00:02:51,770 --> 00:02:54,990
+do is if you have your tree and you've
+got this node that you searched for,
+
+47
+00:02:54,990 --> 00:02:58,170
+you could just bring it to the root
+by just rotating to the top.
+
+48
+00:02:58,170 --> 00:03:00,760
+You rotate it up and again and
+again and again, and
+
+49
+00:03:00,760 --> 00:03:02,770
+again until it ends up being the root.
+
+50
+00:03:04,480 --> 00:03:08,250
+Unfortunately, this simple idea
+is actually not very good.
+
+51
+00:03:08,250 --> 00:03:10,650
+As you'll note,
+we started with an unbalanced tree,
+
+52
+00:03:10,650 --> 00:03:14,510
+but after we did this operation,
+the tree is still unbalanced.
+
+53
+00:03:15,960 --> 00:03:19,750
+And in fact, if you keep doing this
+you'll get a bad sequence of inputs.
+
+54
+00:03:19,750 --> 00:03:24,480
+You can note that there's this loop here,
+these five rearrangements of the tree.
+
+55
+00:03:24,480 --> 00:03:27,870
+Where if you keep doing the appropriate
+search and then you rotate the searched
+
+56
+00:03:27,870 --> 00:03:31,800
+for a note all the way to the top,
+they just go in this loop.
+
+57
+00:03:31,800 --> 00:03:35,740
+And when this happens, if you count
+the total time it takes to perform
+
+58
+00:03:35,740 --> 00:03:43,080
+the sequence of operations, it takes O of
+n squared time to perform n operations.
+
+59
+00:03:43,080 --> 00:03:47,230
+And so the average time per operation
+is linear rather than logarithmic
+
+60
+00:03:47,230 --> 00:03:49,780
+which is far to slow.
+
+61
+00:03:49,780 --> 00:03:53,910
+So this rotate things up to the top
+doesn't actually work very well,
+
+62
+00:03:53,910 --> 00:03:54,690
+we need something better.
+
+63
+00:03:56,350 --> 00:03:59,620
+And for this we're going to make
+just a slight modification.
+
+64
+00:03:59,620 --> 00:04:03,990
+The rotate to top algorithm basically
+says you look at the node and
+
+65
+00:04:03,990 --> 00:04:07,750
+its parent and you rearrange them and
+then you, again, look at the node and
+
+66
+00:04:07,750 --> 00:04:10,700
+its parent and rearrange them, and
+keep going until you get to the root.
+
+67
+00:04:11,810 --> 00:04:14,020
+The modification,
+instead of just looking at the node and
+
+68
+00:04:14,020 --> 00:04:17,840
+its parent, you're going to look at the
+node and its parent and its grandparent.
+
+69
+00:04:19,070 --> 00:04:20,800
+And there are a few cases here.
+
+70
+00:04:20,800 --> 00:04:24,280
+Firstly, there's the case where
+the node and its parent and
+
+71
+00:04:24,280 --> 00:04:26,480
+grandparent are on the same side of it.
+
+72
+00:04:26,480 --> 00:04:27,970
+This is called the zig-zig case.
+
+73
+00:04:29,060 --> 00:04:32,240
+Then what we're going to do is we're
+going to elevate the node up so
+
+74
+00:04:32,240 --> 00:04:35,890
+that it's now the parent of
+what was its old parent, and
+
+75
+00:04:35,890 --> 00:04:37,830
+that's on top of what
+was the old grandparent.
+
+76
+00:04:40,410 --> 00:04:42,220
+On the other hand,
+it could be that the parent and
+
+77
+00:04:42,220 --> 00:04:46,960
+grandparent are on opposite sides of the
+nodes, what's known as the zig-zag case.
+
+78
+00:04:46,960 --> 00:04:48,950
+Then you rearrange the tree as follows, so
+
+79
+00:04:48,950 --> 00:04:52,965
+that the node is now the new parent
+parent of its old parent and grandparent.
+
+80
+00:04:54,505 --> 00:04:58,775
+And finally there's one more case where
+the node's parent is actually the root
+
+81
+00:04:58,775 --> 00:05:01,165
+node, so it doesn't have a grandparent.
+
+82
+00:05:01,165 --> 00:05:05,260
+And then you actually just
+rotate the node up And so
+
+83
+00:05:05,260 --> 00:05:09,860
+if we combine these operations, together
+we get what's called the splay operation.
+
+84
+00:05:09,860 --> 00:05:11,080
+If you want to splay a node N, and
+
+85
+00:05:11,080 --> 00:05:14,620
+this is a way of bringing the node
+N to the root of the tree,
+
+86
+00:05:14,620 --> 00:05:19,260
+you determine which case you are in,
+the Zig-Zig, the Zig-Zag, or the Zig case.
+
+87
+00:05:19,260 --> 00:05:22,930
+You apply the appropriate local
+operation to rearrange the tree.
+
+88
+00:05:24,240 --> 00:05:27,320
+And then if the parent of
+the node is not null IE,
+
+89
+00:05:27,320 --> 00:05:30,880
+if the node is not the root of
+the tree yet, you splay n again.
+
+90
+00:05:30,880 --> 00:05:37,010
+And you just keep splaying until
+it gets to become the root.
+
+91
+00:05:37,010 --> 00:05:39,700
+Okay so to make sure that we're
+on the same page with this.
+
+92
+00:05:39,700 --> 00:05:44,986
+If the take the tree up top and
+we splay the highlighted node number 4,
+
+93
+00:05:44,986 --> 00:05:50,373
+which of these three trees, A, B,
+or C, do we end up with afterwards?
+
+94
+00:05:53,089 --> 00:05:55,280
+Well, the answer, here, is A.
+
+95
+00:05:55,280 --> 00:05:58,680
+So, the point is, we start in this
+configuration, we note that we're,
+
+96
+00:05:58,680 --> 00:06:02,640
+originally, in the zig, zig case,
+two, three, and then, four.
+
+97
+00:06:02,640 --> 00:06:08,900
+So, we elevate four, such that three, and
+then, two come down from it, as children.
+
+98
+00:06:08,900 --> 00:06:11,630
+And then we're in the zig zag case.
+
+99
+00:06:11,630 --> 00:06:16,342
+One and five are on opposite sides of
+four so we elevate four, one and five
+
+100
+00:06:16,342 --> 00:06:21,288
+are it's new children and three and two
+now hang off of one and that is exactly
+
+101
+00:06:21,288 --> 00:06:26,332
+what we were supposed to end up with and
+so that is the answer to this question.
+
+102
+00:06:27,992 --> 00:06:31,760
+Okay, so
+that's what the splay operation is.
+
+103
+00:06:31,760 --> 00:06:35,790
+Next time we're going to talk about
+how to use the splay operation
+
+104
+00:06:35,790 --> 00:06:37,410
+to rebalance your circuitry, and
+
+105
+00:06:37,410 --> 00:06:43,175
+how to use it to perform all the basic
+binary circuitry operations efficiently.
+
+106
+00:06:43,175 --> 00:06:44,530
+So I'll see you then.

@@ -1,0 +1,822 @@
+1
+00:00:00,210 --> 00:00:04,140
+Let's see how basic operations
+work with binary max heaps.
+
+2
+00:00:05,460 --> 00:00:07,100
+What is particularly easy for
+
+3
+00:00:07,100 --> 00:00:12,920
+binary max heaps is finding the maximum
+value without extracting it.
+
+4
+00:00:12,920 --> 00:00:18,315
+I mean,
+it is easy to implement GetMax operation.
+
+5
+00:00:18,315 --> 00:00:25,430
+Well, recall that the main property of
+that binary max heap tree is the following.
+
+6
+00:00:25,430 --> 00:00:32,030
+For each edge its top value is greater or
+equals than its bottom value.
+
+7
+00:00:32,030 --> 00:00:36,550
+this means that if we go from
+bottom to top now in our trees, the
+
+8
+00:00:36,550 --> 00:00:39,110
+values can only increase.
+
+9
+00:00:39,110 --> 00:00:45,440
+This in particular means that the maximum
+value is stored at the root of our tree.
+
+10
+00:00:45,440 --> 00:00:47,728
+So just to implement GetMax,
+
+11
+00:00:47,728 --> 00:00:52,320
+we just return the value at
+the root of our tree.
+
+12
+00:00:52,320 --> 00:00:55,760
+And this takes us just
+a constant time of course.
+
+13
+00:00:55,760 --> 00:01:01,543
+Now let see how inserting a
+new element into to the max binary heap works.
+
+14
+00:01:01,543 --> 00:01:06,410
+So first of all a new element should
+be attached somewhere to our tree.
+
+15
+00:01:06,410 --> 00:01:08,840
+We cannot attach it to
+the root in this case for
+
+16
+00:01:08,840 --> 00:01:13,670
+example, because the root
+already has two children.
+
+17
+00:01:13,670 --> 00:01:17,160
+Therefore, we just attach it to some leaf.
+
+18
+00:01:17,160 --> 00:01:21,870
+Let's select for example, the leaf
+seven and attach a new node to it.
+
+19
+00:01:21,870 --> 00:01:25,720
+The new node in this case has value 32.
+
+20
+00:01:25,720 --> 00:01:28,540
+Well, it is still a binary tree.
+
+21
+00:01:28,540 --> 00:01:31,297
+Right?
+Because seven, before attaching seven,
+
+22
+00:01:31,297 --> 00:01:34,240
+had zero children,
+now it has just one child.
+
+23
+00:01:34,240 --> 00:01:36,450
+So it is still a binary tree.
+
+24
+00:01:36,450 --> 00:01:41,150
+However, the heap property
+might potentially be violated.
+
+25
+00:01:41,150 --> 00:01:44,660
+And it is violated actually in this case,
+right?
+
+26
+00:01:44,660 --> 00:01:47,080
+Which is shown by this red edge.
+
+27
+00:01:47,080 --> 00:01:51,670
+So for this red edge the value
+of it parent which is seven,
+
+28
+00:01:51,670 --> 00:01:55,650
+is less than the value
+of its child which is 32.
+
+29
+00:01:55,650 --> 00:01:59,180
+So we need to fix it somehow.
+
+30
+00:01:59,180 --> 00:02:06,480
+So to fix it we just allow
+that the new element to sift up.
+
+31
+00:02:06,480 --> 00:02:09,290
+So this new element has value 32,
+
+32
+00:02:09,290 --> 00:02:14,970
+which is relatively large with respect
+to all other elements in this tree,
+
+33
+00:02:14,970 --> 00:02:19,110
+so we need to move it
+somewhere closer to the root.
+
+34
+00:02:19,110 --> 00:02:24,010
+So the process of moving it closer
+to the roof is called sifting up.
+
+35
+00:02:25,020 --> 00:02:30,500
+So the first thing to do is we
+need to fix this problematic edge.
+
+36
+00:02:30,500 --> 00:02:34,860
+To fix it,
+we perform the following simple operation.
+
+37
+00:02:34,860 --> 00:02:38,020
+We just swap the corresponding
+two elements.
+
+38
+00:02:38,020 --> 00:02:40,750
+In this case, we'll swap seven and 32.
+
+39
+00:02:40,750 --> 00:02:46,320
+After they swap,
+there is no problem on this edge.
+
+40
+00:02:46,320 --> 00:02:53,730
+However, it might be the case that
+the new element 32 is still smaller.
+
+41
+00:02:53,730 --> 00:02:58,810
+Is still greater than its parent and
+this is the case, in our toy example.
+
+42
+00:02:58,810 --> 00:03:03,500
+So the parent of 32 is now 29,
+
+43
+00:03:03,500 --> 00:03:10,260
+which is smaller than 32, so
+we still need to fix this red problem.
+
+44
+00:03:10,260 --> 00:03:12,440
+And we just repeat this process,
+
+45
+00:03:12,440 --> 00:03:17,300
+we again swap the new element
+with its parent, right?
+
+46
+00:03:17,300 --> 00:03:22,810
+So we swap it and
+now we see that the property is
+
+47
+00:03:22,810 --> 00:03:26,660
+satisfied for
+all edges in this binary tree.
+
+48
+00:03:27,880 --> 00:03:32,431
+So what we've just done is that we
+let the new element to sift up.
+
+49
+00:03:33,450 --> 00:03:38,340
+And what is important to note here is that
+we maintained the following invariant,
+
+50
+00:03:38,340 --> 00:03:45,670
+that the heap property at any point of
+time of sifting the new element up,
+
+51
+00:03:45,670 --> 00:03:51,950
+the heap property is violated on at
+most one edge of our binary tree.
+
+52
+00:03:51,950 --> 00:03:55,740
+So and if we see that
+there is a problematic edge,
+
+53
+00:03:55,740 --> 00:03:59,230
+we just swap its two elements, right?
+
+54
+00:03:59,230 --> 00:04:05,160
+And each time during this process the
+problematic node gets closer to the root.
+
+55
+00:04:05,160 --> 00:04:10,380
+This in particular implies that
+the number of swaps required is at most
+
+56
+00:04:10,380 --> 00:04:12,180
+the height of this tree.
+
+57
+00:04:12,180 --> 00:04:16,780
+Which in turn means that the running
+time of insertion procedure,
+
+58
+00:04:16,780 --> 00:04:19,810
+as well as the running time
+of the sifting up procedure,
+
+59
+00:04:19,810 --> 00:04:23,540
+in this case is big O of the tree height.
+
+60
+00:04:24,720 --> 00:04:29,900
+Now let's see how the extract max
+procedure works for binary max heaps.
+
+61
+00:04:29,900 --> 00:04:33,890
+First of all, recall that we already
+know that the maximum value is stored
+
+62
+00:04:33,890 --> 00:04:36,520
+at the root of the tree.
+
+63
+00:04:36,520 --> 00:04:38,190
+However, we cannot just take and
+
+64
+00:04:38,190 --> 00:04:42,360
+detach the root node because it
+will leave two sub trees, right?
+
+65
+00:04:42,360 --> 00:04:45,800
+So we need to somehow preserve
+the structure of the tree.
+
+66
+00:04:45,800 --> 00:04:50,730
+What is easy to detach from
+a binary tree is any leaf.
+
+67
+00:04:50,730 --> 00:04:54,950
+So let's do the following,
+let's select any leaf of our tree and
+
+68
+00:04:54,950 --> 00:04:57,750
+let's replace the root with this leaf.
+
+69
+00:04:57,750 --> 00:05:02,650
+So in this case
+this produces the following tree.
+
+70
+00:05:04,100 --> 00:05:07,600
+This potentially might
+violate the heap property.
+
+71
+00:05:07,600 --> 00:05:11,270
+And in this case,
+this does violate the property.
+
+72
+00:05:11,270 --> 00:05:15,020
+So the new root 12,
+is less than both its children.
+
+73
+00:05:15,020 --> 00:05:18,240
+So the property is violated on two edges.
+
+74
+00:05:18,240 --> 00:05:21,660
+So 12 is a relatively
+small number in this case.
+
+75
+00:05:21,660 --> 00:05:26,280
+So we need to
+move it down to the leaves.
+
+76
+00:05:26,280 --> 00:05:30,370
+Great, so for
+this we will implement a new procedure,
+
+77
+00:05:30,370 --> 00:05:35,469
+which is called SiftDown, okay?
+
+78
+00:05:35,469 --> 00:05:39,910
+So, similarly to SiftUp,
+we are going to replace,
+
+79
+00:05:41,270 --> 00:05:44,700
+to replace the new element
+with one of its children.
+
+80
+00:05:44,700 --> 00:05:46,330
+In this case we have a choice actually,
+
+81
+00:05:46,330 --> 00:05:50,360
+we can replace it either with its
+left child or with its right child.
+
+82
+00:05:50,360 --> 00:05:54,480
+By thinking a little bit we
+realize that it will make
+
+83
+00:05:54,480 --> 00:05:58,290
+more sense to replace it with
+the left child in this case.
+
+84
+00:05:58,290 --> 00:06:03,530
+Because the left child is larger than the
+right child, because after this, after we
+
+85
+00:06:03,530 --> 00:06:11,520
+replace 12 with 29, the right problematic
+edge will be fixed automatically, right?
+
+86
+00:06:11,520 --> 00:06:17,260
+So this is how we are going to
+perform the SiftDown procedure.
+
+87
+00:06:17,260 --> 00:06:22,190
+Once again, we select the largest
+of two child and we replace.
+
+88
+00:06:22,190 --> 00:06:27,860
+the problematic
+node with this larger child.
+
+89
+00:06:27,860 --> 00:06:31,880
+As you can see, the right problematic
+edge is fixed automatically.
+
+90
+00:06:31,880 --> 00:06:37,200
+The left edge is also fixed,
+just because we swapped two elements.
+
+91
+00:06:37,200 --> 00:06:41,490
+However, the new problematic node
+might introduce new problems,
+
+92
+00:06:41,490 --> 00:06:43,880
+right closer to the bottom of the tree.
+
+93
+00:06:43,880 --> 00:06:47,610
+Now we see that there is
+still a problematic edge, so
+
+94
+00:06:47,610 --> 00:06:52,610
+in this case, we have just one edge so
+12 is smaller than 14, but
+
+95
+00:06:52,610 --> 00:06:56,670
+it is greater than seven, so
+we are safe in the right tree.
+
+96
+00:06:56,670 --> 00:07:01,850
+In this case we swap 14 with 12 and
+
+97
+00:07:01,850 --> 00:07:09,880
+after that we just get a tree where
+the property is satisfied on all edges.
+
+98
+00:07:09,880 --> 00:07:13,630
+So once again we maintain
+the following invariant.
+
+99
+00:07:13,630 --> 00:07:18,810
+At each point of time we have
+just one problematic node, and
+
+100
+00:07:18,810 --> 00:07:21,720
+we always solve the problematic node.
+
+101
+00:07:21,720 --> 00:07:29,410
+With the larger one of its children, so
+that to fix both problematic edges.
+
+102
+00:07:29,410 --> 00:07:29,960
+Right?
+And
+
+103
+00:07:29,960 --> 00:07:33,610
+the problematic node always
+gets closer to the leaf,
+
+104
+00:07:33,610 --> 00:07:38,680
+which means that the total running
+time of the extract max as well as
+
+105
+00:07:38,680 --> 00:07:44,520
+the sift down procedures is
+proportional to the tree height.
+
+106
+00:07:46,120 --> 00:07:50,030
+Now, when we have implemented both
+procedures, sifting up and sifting down,
+
+107
+00:07:50,030 --> 00:07:54,300
+it's not so difficult to implement
+also the ChangePriority procedure.
+
+108
+00:07:54,300 --> 00:07:57,050
+So assume that we have an element for
+
+109
+00:07:57,050 --> 00:07:59,760
+which we would like to
+change its priority.
+
+110
+00:07:59,760 --> 00:08:02,660
+This means that we are going
+either to decrease its priority or
+
+111
+00:08:02,660 --> 00:08:04,750
+increase its priority.
+
+112
+00:08:04,750 --> 00:08:09,980
+Well, to fix the potential
+problems that might be introduced
+
+113
+00:08:09,980 --> 00:08:14,950
+by changing its priority, we are going to
+call either sifting up or sifting down.
+
+114
+00:08:16,220 --> 00:08:19,070
+Well, let me illustrate this
+again on the toy example.
+
+115
+00:08:19,070 --> 00:08:23,840
+Assume that we are going to change
+the priority of this leaf 12.
+
+116
+00:08:23,840 --> 00:08:26,400
+So we've just changed it.
+
+117
+00:08:26,400 --> 00:08:29,460
+We just increased the priority
+of this element to 35.
+
+118
+00:08:29,460 --> 00:08:35,800
+In this case, we potentially introduced
+some problems and we need to fix some.
+
+119
+00:08:36,850 --> 00:08:41,260
+Well we see that 35 is a relatively
+large number which means that we need to
+
+120
+00:08:41,260 --> 00:08:42,150
+sift it up.
+
+121
+00:08:42,150 --> 00:08:44,760
+So we need to move it closer to the root.
+
+122
+00:08:44,760 --> 00:08:48,090
+So to do this we just
+call SiftUp procedure.
+
+123
+00:08:48,090 --> 00:08:50,999
+Which repeatedly swaps
+the problematic node
+
+124
+00:08:50,999 --> 00:08:55,810
+with its parent, so
+
+125
+00:08:55,810 --> 00:08:59,320
+in this case this will produce
+the following sequence of swaps.
+
+126
+00:09:00,340 --> 00:09:04,570
+First will swap 35 with 18 this
+gives us the following picture,
+
+127
+00:09:04,570 --> 00:09:10,720
+we see there is still a problem 35 is still
+larger than its parent so we swap it again.
+
+128
+00:09:10,720 --> 00:09:16,780
+Now we see that 35 is
+smaller than its parent.
+
+129
+00:09:16,780 --> 00:09:21,200
+And actually, the heap property
+is satisfied for all edges.
+
+130
+00:09:21,200 --> 00:09:25,180
+Once again, what is important in this
+case is that at each point of time,
+
+131
+00:09:25,180 --> 00:09:30,570
+the heap property is violated on
+at most one edge of our tree.
+
+132
+00:09:30,570 --> 00:09:36,410
+So since our problematic node always
+gets closer to the root at each step,
+
+133
+00:09:36,410 --> 00:09:38,450
+I mean, after each swap.
+
+134
+00:09:38,450 --> 00:09:43,490
+We conclude that the running time of
+change priority procedure is also at most
+
+135
+00:09:43,490 --> 00:09:45,960
+Big O of the tree height.
+
+136
+00:09:45,960 --> 00:09:51,240
+There is an elegant way of removing
+an element from the binary max heap.
+
+137
+00:09:51,240 --> 00:09:56,240
+Namely it can be done just by calling
+two procedures that we already have.
+
+138
+00:09:56,240 --> 00:10:00,020
+So I assume that we have a particular
+element that we're going to remove.
+
+139
+00:10:01,520 --> 00:10:07,360
+So the first step to do is we just change
+its priority to plus infinity, that is,
+
+140
+00:10:07,360 --> 00:10:13,830
+to a number which is definitely larger than
+all the elements in our binary MaxHeap.
+
+141
+00:10:13,830 --> 00:10:18,620
+When we call it, the change priority
+procedure will sift this element
+
+142
+00:10:18,620 --> 00:10:21,670
+to the top of our tree,
+namely to the root of our tree.
+
+143
+00:10:21,670 --> 00:10:27,620
+Then to remove this element it is enough
+to call the extract max procedure.
+
+144
+00:10:27,620 --> 00:10:31,700
+So in this particular example
+it will work as follows.
+
+145
+00:10:31,700 --> 00:10:37,030
+So assume that we're going to
+remove the element 18,
+
+146
+00:10:37,030 --> 00:10:40,450
+which is highlighted here on this slide.
+
+147
+00:10:40,450 --> 00:10:43,820
+So we first change it's
+priority to infinity.
+
+148
+00:10:43,820 --> 00:10:48,340
+Then the ChangePriority procedure
+calls the SiftUp procedure.
+
+149
+00:10:48,340 --> 00:10:55,510
+This procedure realizes that there is,
+that the property is violated on this edge.
+
+150
+00:10:55,510 --> 00:10:57,290
+And swaps these two elements.
+
+151
+00:10:57,290 --> 00:11:03,770
+Then it swaps the next two elements and
+each at this point well this,
+
+152
+00:11:04,930 --> 00:11:08,600
+this node that we're going
+to remove is at the root.
+
+153
+00:11:08,600 --> 00:11:13,740
+Well, to remove this node,
+we just call the ExtractMax procedure.
+
+154
+00:11:13,740 --> 00:11:18,750
+So recall that the first step
+of ExtractMax is to replace
+
+155
+00:11:18,750 --> 00:11:20,850
+the root node with any leaf.
+
+156
+00:11:20,850 --> 00:11:23,020
+So let's select, for example, 11.
+
+157
+00:11:23,020 --> 00:11:27,910
+So we replace,
+we replace the root with 11.
+
+158
+00:11:27,910 --> 00:11:32,988
+Then we need to call sift down, just to
+
+159
+00:11:32,988 --> 00:11:38,550
+let this new root go closer to the leaves.
+
+160
+00:11:39,640 --> 00:11:44,300
+Well, in this case,
+11 will be replaced first by 42,
+
+161
+00:11:44,300 --> 00:11:51,130
+then there is still a problem
+on the edge from 11 to, to 18.
+
+162
+00:11:51,130 --> 00:11:56,160
+So we swap 11 with 18 and
+finally we swap 11 with 12.
+
+163
+00:11:56,160 --> 00:12:02,075
+Well, once again since everything
+boils down just to two procedures.
+
+164
+00:12:02,075 --> 00:12:03,950
+First is change priority.
+
+165
+00:12:03,950 --> 00:12:06,680
+And the second one is extracting the max.
+
+166
+00:12:06,680 --> 00:12:12,220
+And they all, they both work in time
+proportional to the tree height.
+
+167
+00:12:12,220 --> 00:12:16,930
+So we conclude that the running time of
+the remove procedure is also, at most,
+
+168
+00:12:16,930 --> 00:12:19,860
+Big O of the tree height.
+
+169
+00:12:19,860 --> 00:12:23,230
+So to summarize,
+we were able to implement all
+
+170
+00:12:23,230 --> 00:12:27,715
+max binary heap operations in time
+proportional to the tree height, and
+
+171
+00:12:27,715 --> 00:12:33,000
+the GetMax procedure even works in
+constant time in our current implementation.
+
+172
+00:12:33,000 --> 00:12:36,320
+So we definitely would like
+to keep our trees shallow.
+
+173
+00:12:36,320 --> 00:12:38,928
+And this will be the subject
+of our next video.

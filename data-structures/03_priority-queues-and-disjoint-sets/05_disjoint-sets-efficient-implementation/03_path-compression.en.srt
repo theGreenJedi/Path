@@ -1,0 +1,409 @@
+1
+00:00:00,220 --> 00:00:03,680
+To build our Y intuition involves
+a second characteristic for
+
+2
+00:00:03,680 --> 00:00:05,770
+the disjoint at the destruction.
+
+3
+00:00:05,770 --> 00:00:10,060
+Let's again consider the example
+shown here on the slide.
+
+4
+00:00:10,060 --> 00:00:13,510
+Assume that we call find of six.
+
+5
+00:00:13,510 --> 00:00:18,089
+This will traverse the following path
+from six to the root of this tree.
+
+6
+00:00:19,690 --> 00:00:24,930
+So let's know that in this
+case we find the root of three
+
+7
+00:00:24,930 --> 00:00:29,900
+that contains element six,
+but we also find the root
+
+8
+00:00:29,900 --> 00:00:34,310
+of the tree that contains element 12 and
+contains element three.
+
+9
+00:00:34,310 --> 00:00:38,760
+In general, by reversing this
+path we find the root for
+
+10
+00:00:38,760 --> 00:00:42,040
+all the elements on this path.
+
+11
+00:00:42,040 --> 00:00:43,920
+So, why lose this information?
+
+12
+00:00:43,920 --> 00:00:45,770
+Let's just store it somehow.
+
+13
+00:00:45,770 --> 00:00:47,920
+And one way to do this, for example,
+
+14
+00:00:47,920 --> 00:00:53,320
+is to re-attach all these notes directly
+to the root, we can do this as follows.
+
+15
+00:00:53,320 --> 00:00:57,190
+Now as you can see
+the parent of element 12 for
+
+16
+00:00:57,190 --> 00:01:01,210
+example is five, and also the parent
+of element six is also five.
+
+17
+00:01:01,210 --> 00:01:04,690
+We've just attached them
+directly to the root.
+
+18
+00:01:04,690 --> 00:01:08,280
+And this can not only save
+us space in the future.
+
+19
+00:01:08,280 --> 00:01:10,480
+Save us time, I'm sorry, in the future.
+
+20
+00:01:10,480 --> 00:01:13,900
+For future calls of find operation.
+
+21
+00:01:13,900 --> 00:01:18,561
+So this heuristic is
+called path compression.
+
+22
+00:01:18,561 --> 00:01:24,210
+Implementing this heuristic I
+mean path compression heuristic,
+
+23
+00:01:24,210 --> 00:01:26,660
+don't sound to be surprisingly simple.
+
+24
+00:01:26,660 --> 00:01:28,590
+It is actually only three lines of code.
+
+25
+00:01:30,240 --> 00:01:31,620
+Here we do the following.
+
+26
+00:01:31,620 --> 00:01:35,160
+We first check whether i
+is equal to parent of i.
+
+27
+00:01:35,160 --> 00:01:38,830
+If it is equal, if it is the root,
+then we will just return the result.
+
+28
+00:01:38,830 --> 00:01:42,611
+If i is not the root,
+if i is not the root, we do the following.
+
+29
+00:01:42,611 --> 00:01:47,888
+We call find recursively for
+the parent of the node i.
+
+30
+00:01:47,888 --> 00:01:49,607
+This is done here.
+
+31
+00:01:49,607 --> 00:01:53,640
+So we call find for
+the parent of the node i.
+
+32
+00:01:53,640 --> 00:01:57,220
+It will return the root of
+the correspondent three.
+
+33
+00:01:57,220 --> 00:02:04,770
+And then we set parent of i to
+be equal to the returned root.
+
+34
+00:02:04,770 --> 00:02:10,070
+That is, we attach the node
+number i directly to the root.
+
+35
+00:02:10,070 --> 00:02:14,590
+And we do this recursively for
+all the elements on this pass.
+
+36
+00:02:14,590 --> 00:02:17,735
+Finally we return the new parent of i,
+
+37
+00:02:17,735 --> 00:02:22,760
+which is now just the root
+of the corresponding tree.
+
+38
+00:02:22,760 --> 00:02:26,970
+Before stating an upper bound on the
+running time of operations of our current
+
+39
+00:02:26,970 --> 00:02:32,370
+implementations, we need to introduce
+the so-called iterated logarithm function,
+
+40
+00:02:32,370 --> 00:02:34,200
+which is also denoted by log star of n.
+
+41
+00:02:34,200 --> 00:02:40,740
+So by definition, iterated logarithm
+of n is the number of times the binary
+
+42
+00:02:40,740 --> 00:02:46,720
+logarithm should be applied to n before
+we get a number which is at most one.
+
+43
+00:02:46,720 --> 00:02:49,190
+Let me illustrate this with an example so
+
+44
+00:02:49,190 --> 00:02:53,240
+n equal to one is a binary
+logarithm of n is equal to zero.
+
+45
+00:02:53,240 --> 00:02:57,490
+We do not need to apply binary logarithm
+to get a number which is at most one,
+
+46
+00:02:57,490 --> 00:03:00,540
+because n is already
+almost one in this case.
+
+47
+00:03:00,540 --> 00:03:01,960
+For n equal to two,
+
+48
+00:03:01,960 --> 00:03:07,260
+we need to apply binary logarithm once
+to get the number which is at most one.
+
+49
+00:03:07,260 --> 00:03:12,540
+Mainly, if we apply binary algorithm
+to two we just get the number one.
+
+50
+00:03:12,540 --> 00:03:14,700
+Okay for n equals to three and four,
+
+51
+00:03:14,700 --> 00:03:17,930
+the binary algorithm is equal to two and
+so on.
+
+52
+00:03:17,930 --> 00:03:21,658
+And for example, for
+the numbers shown here,
+
+53
+00:03:21,658 --> 00:03:26,725
+two to the sixth,
+5536 If we apply binary logarithm once,
+
+54
+00:03:26,725 --> 00:03:31,888
+then just by definition of binary
+logarithm we get this number,
+
+55
+00:03:31,888 --> 00:03:35,732
+just 65536, which is two to 16, okay?
+
+56
+00:03:35,732 --> 00:03:42,384
+So if we apply the binary logarithm once
+again we get 16, 16 is two to the four.
+
+57
+00:03:42,384 --> 00:03:46,093
+If we apply the binary logarithm
+once again we get four.
+
+58
+00:03:46,093 --> 00:03:52,120
+If we apply, again, we get two, and if we
+apply it finally once again, we get one.
+
+59
+00:03:52,120 --> 00:03:53,710
+And at this point, we stop.
+
+60
+00:03:55,040 --> 00:03:59,860
+So we applied the binary logarithm
+five times to get a number which is at
+
+61
+00:03:59,860 --> 00:04:03,156
+most one, which ensures that for
+this number,
+
+62
+00:04:03,156 --> 00:04:10,110
+two to the 65536 the log
+star is equal to five, okay?
+
+63
+00:04:10,110 --> 00:04:15,290
+So, and this shows that for
+any practical value of n, the binary log,
+
+64
+00:04:15,290 --> 00:04:18,350
+the log star function is, at most, five.
+
+65
+00:04:18,350 --> 00:04:21,490
+Because this number is extremely huge.
+
+66
+00:04:21,490 --> 00:04:24,440
+We will never see any value of
+
+67
+00:04:24,440 --> 00:04:27,170
+m which is greater than this
+number in practical value.
+
+68
+00:04:27,170 --> 00:04:31,750
+We will never get an input, a sequence
+that consists of so many elements.
+
+69
+00:04:31,750 --> 00:04:35,810
+So theoretically speaking,
+the lock star function is not bound.
+
+70
+00:04:35,810 --> 00:04:37,280
+It is not constant.
+
+71
+00:04:37,280 --> 00:04:42,120
+So there are extremely huge numbers for
+which lock star is equal to ten or
+
+72
+00:04:42,120 --> 00:04:45,120
+twenty or 100 and so on.
+
+73
+00:04:45,120 --> 00:04:50,780
+However, for all practical values of n,
+log star of n is at most five.
+
+74
+00:04:50,780 --> 00:04:54,640
+We're now ready to state an upper bound.
+
+75
+00:04:54,640 --> 00:05:00,270
+Assume that we used both union by rank
+heuristic and past compression heuristic,
+
+76
+00:05:00,270 --> 00:05:04,930
+and assume that we make m
+operations with our data structure,
+
+77
+00:05:04,930 --> 00:05:11,290
+of which m are calls to the MakeSet
+does a MakeSet operation.
+
+78
+00:05:11,290 --> 00:05:15,600
+Namely, we have n object, and
+we make m operations with them.
+
+79
+00:05:15,600 --> 00:05:22,565
+Then the total running time of
+all these calls is O(mlog*n).
+
+80
+00:05:22,565 --> 00:05:30,940
+Put it otherwise, the amortized running
+time of a single operation is O(log*n).
+
+81
+00:05:30,940 --> 00:05:38,040
+And recalls it for all practical values
+of n, log star of n is at most five.
+
+82
+00:05:38,040 --> 00:05:43,870
+Which means that we have
+a constant average time for
+
+83
+00:05:43,870 --> 00:05:47,590
+a single operation for
+all practical values of n.
+
+84
+00:05:47,590 --> 00:05:50,425
+So once again,
+log star theoretically speaking,
+
+85
+00:05:50,425 --> 00:05:54,710
+log star function is not bound,
+however it is at most five for
+
+86
+00:05:54,710 --> 00:06:01,140
+all practical values of n which makes our
+data structure very efficient in practice.
+
+87
+00:06:01,140 --> 00:06:04,554
+We will prove this upper
+bound in the next video.

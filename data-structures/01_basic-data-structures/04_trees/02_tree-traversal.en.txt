@@ -1,0 +1,131 @@
+In this video, we're going to
+continue talking about trees. And in particular, look at walking a tree,
+or visiting the elements of a tree, or traversing the elements of a tree. So often we want to go through the nodes
+of a tree in a particular order. We talked earlier, when we were looking
+at the syntax tree of an expression, how we could evaluate the expression
+by working our way up from the leaves. So that would be one way of walking
+through a tree in a particular order so we could evaluate. Another example might be
+printing the nodes of a tree. If we had a binary search tree, we might want to get the elements
+of a tree in sorted order. There are two main ways
+to traverse a tree. One, is depth-first. So there, we completely traverse one sub-tree
+before we go on to a sibling sub-tree. Alternatively, in breadth-first search we
+traverse all the nodes at one level before we go to the next level. So in that case, we would traverse
+all of our siblings before we visited any of the children
+of any of the siblings. We'll see some code examples of these. In depth-first search, so we're going to
+look here at an in-order traversal. And that's really defined best for
+a binary tree. This is InOrderTraversal is
+what we might use to print all the nodes of a binary search
+tree in alphabetical order. So, we're going to have a
+recursive implementation, where if we have a nil tree,
+we do nothing, otherwise, we traverse the left sub-tree, and then do
+whatever we're going to do with the key, visit it, in this case,
+we're going to print it. But often there's just some
+operation you want to carry out, and then traverse the right sub-tree. So let's look at an example of this. We've got our binary search tree. And we're going to look at how these
+nodes get printed out if we do an in-order traversal. So to begin with, we go to the Les node. And from there, since it's not nil, we're going to do an in-order traversal
+of its left child, which is Cathy. Similarly now we're going to do
+an in-order traversal of its left child, which is Alex. We do an in-order traversal of its left
+child which is nil, so it does nothing. So we come back to Alex, and
+then print out Alex, and then traverse its right sub-tree
+which is nil and does nothing. We come back to Alex. And then we're finished with Alex and
+we go back to Cathy. So, we have successfully
+completed Cathy's left sub-tree. So we did an in-order traversal of that, so
+now we're going to print Cathy, and then do an in-order traversal of its
+right sub-tree, which is Frank. So we go to Frank, similarly
+now we're going to print out Frank. We've finished with Frank and
+go back to Cathy, and now we've completed Cathy totally,
+so we go back to Les. We completed Les' left sub-tree, so
+we're now going to print Les and then traverse Les' right sub-tree. So that is Sam,
+traverse its left sub-tree which is Nancy. Print it out, go back to Sam,
+we've completed Sam's left sub-tree, so we print Sam, and then go ahead and
+do Sam's right sub-tree which is Violet, which will end up printing Tony,
+Violet, and then Wendy. We're completed with Wendy. We go back to Violet. We completed her right sub-tree, so we go
+back to Sam, completed his right sub-tree, go back to Les, completed his
+right sub-tree, and we're done. So we see we get the elements
+out in sorted order. And again, we do the left child. And then the node and
+then the right child. And by our definition of
+a binary search tree, that then gives them to us in order
+because we know all the elements in the left child are in fact less than or
+equal to the node itself. The next depth-first
+traversal is a pre-order traversal. Now the in-order traversal really is
+only defined for a binary tree because we talk about doing the left child and
+then the node and then the right child. And so it's not clear if you
+had let's say three children, where it is you'd actually
+put the node itself. So you might do the first child and
+then print the node, and then second and third child. Or first child and then second child and
+print the node, and then third child. It's kind of undefined then,
+so not well-defined. However, these next two, the pre-order and
+post-order traversal are well defined. Not just for binary trees, but for general, arbitrary number
+of children trees. So here the pre-order traversal says, we're going to go ahead
+first if it's nil we return. We print the key first, that is, we visit
+the node itself and then its children. So we're going to, in this case,
+go ahead and go to the Les tree and then print out its
+key and then go to its children. So we're going to first go to its
+left child which is Cathy, and for Cathy, we then print Cathy, and then go to its left child which is Alex,
+print Alex, we go back to Cathy. And we finished its left child, so then
+we go do its right child, which is Frank. We finished Frank. We finished Cathy. We go back up to Les. We've already printed Les. We've already visited or
+traversed Les' left child. Now we can traverse Les' right child,
+so it'll be Sam, which we'll print out. And then we'll go to Nancy, which we'll
+print out, we'll go back up to Sam and then to Violet, and we will print Violet,
+and then print Violet's children, which will be Tony and
+Wendy and then return back. A post-order traversal is like
+a pre-order traversal expect instead of printing the node itself first, which is a
+pre, we print it last, which is the post. So all we've really done is move
+where this print statement is. And here then,
+what's the last of these notes that's going to be printed?
+Well it's actually going to be Les, because we're not going to be able
+to print Les until we've finished completely dealing with Les' left sub-tree
+and right sub-tree. So we'll visit Les, and
+then visit Cathy, and then Alex, and then we'll actually print out Alex. Once we're done with Alex, we'll go
+back up to Cathy and down to Frank, and then print out Frank, and
+then once we're done with both Alex and Frank we can then print Cathy. We go back up to Les, and we now need to go deal with
+Les' right child which is Sam. In order to deal with Sam we go to Nancy,
+print Nancy, go back up to Sam and down to Violet, and deal with the Violet
+tree, which will print out Tony, and then Wendy, and then Violet. And on our way back up, then, when we get
+up to Sam, we have finished its children, so we can print out Sam. When we get up to Les, we've finished
+its children, so we can print out Les. One thing to note about
+the recursive traversal is we do have sort of under the covers,
+a stack that's being used. Because in a recursive call, every time
+we make a call back to a procedure, we are invoking another
+frame on the stack. So we are saving implicitly our
+information of where we are on the stack. Breadth-first, we're going to actually
+use a queue instead of a stack. So in the breadth-first, we are going to
+call it level traversal here, we're going to go ahead and
+instantiate a queue, and on the queue first
+put the root of the tree. So we put that in the queue and
+then while the queue is not empty, we're going to dequeue, so pull a node
+off, deal with that by printing it and then if it's got a left child, enqueue the left child, if it's got
+a right child, enqueue the right child. And so this will have
+the effect of going through and processing the elements in level order. We see the example here, and
+we're going to show the queue. So here let's say we're just before
+the while loop, the queue contains Les. And we're going to now dequeue Les from
+the queue, output it by printing it, and then enqueue Les' children
+which are Cathy and Sam. Now, we visit those in order, so first we're going to dequeue Cathy, print
+it out and then enqueue its children. Remember when we're enqueuing
+we go at the end of the line, so Alex and Frank go after Sam. So now we're going to dequeue Sam,
+print it, and then enqueue its children Nancy and
+Violet. So we can see what we've done then is,
+we first printed Les, that's level one and then we printed the
+elements of level two, which are Cathy and Sam, and now we're going to go on
+to the elements at level three. So notice,
+all the elements in level three, Alex, Frank, Nancy, and
+Violet are in the queue already. And they're all going to be processed
+before any of the level four nodes are processed.
+So even though they'll be pushed in the queue, since the level three nodes got there first
+that they're all going to be processed before we process the level four ones. So here, we dequeue Alex,
+print it out, and we're done. Dequeue Frank, print it out,
+we're done with Frank. Dequeue Nancy, print it out,
+we're done with Nancy. And Violet, we print it out, but
+then also enqueue Tony and Wendy, and then dequeue those and print them out. So this is a breadth-first search,
+with an explicit queue, you can do depth-first searches
+rather than recursively, iteratively, but you will need
+an additional data structure which is a stack to keep track of
+the work still to be done. So in summary, trees are used for lots
+of different things in computer science. We've seen that trees have a key and normally have children, although there
+are alternative representations of trees. The tree walks that are normally
+done are traversals, are DFS: depth-first search,
+and BFS: breadth-first search. There are different types of
+depth-first search traversals, pre-order, in-order, and post-order. When you work with a tree,
+it's common to use  recursive algorithms, although note that we didn't for the
+breadth-first search where we needed to go through the elements of the tree
+in kind of a non-recursive order. And finally, in computer science,
+trees grow down.

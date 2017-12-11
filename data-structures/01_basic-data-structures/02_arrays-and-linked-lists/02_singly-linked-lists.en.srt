@@ -1,0 +1,735 @@
+1
+00:00:00,240 --> 00:00:01,280
+Now let's talk about linked lists.
+
+2
+00:00:02,338 --> 00:00:06,590
+So linked lists, it's named kind of
+like links in a chain, right, so
+
+3
+00:00:06,590 --> 00:00:11,730
+we've got a head pointer that points
+to a node that then has some data and
+
+4
+00:00:11,730 --> 00:00:13,460
+points to another node,
+points to another node and
+
+5
+00:00:13,460 --> 00:00:16,150
+eventually points to one that
+doesn't point any farther.
+
+6
+00:00:16,150 --> 00:00:19,330
+So here in our top diagram we show
+head points to the node containing 7,
+
+7
+00:00:19,330 --> 00:00:22,510
+points to the node containing 10,
+points to the node containing 4,
+
+8
+00:00:22,510 --> 00:00:25,280
+points to the node containing
+13 doesn't point anywhere.
+
+9
+00:00:25,280 --> 00:00:29,639
+How this actually works is that
+a node contains a key which in
+
+10
+00:00:29,639 --> 00:00:34,120
+this case is these integers,
+and a next pointer.
+
+11
+00:00:34,120 --> 00:00:37,750
+The diagram below shows more
+detail of what's going on.
+
+12
+00:00:37,750 --> 00:00:40,520
+So head is a pointer
+that points to a node,
+
+13
+00:00:40,520 --> 00:00:43,920
+and that node contains two elements,
+the value 7.
+
+14
+00:00:43,920 --> 00:00:48,890
+And then a pointer that points off to
+the next node that contains a key 10,
+
+15
+00:00:48,890 --> 00:00:52,120
+and a pointer that points
+off to the next node 4,
+
+16
+00:00:52,120 --> 00:00:56,030
+points off to the next node 13,
+13's next pointer is just nill.
+
+17
+00:00:59,680 --> 00:01:05,150
+What are the operations that
+can be done on a linked list?
+
+18
+00:01:05,150 --> 00:01:09,000
+There's several of them, and the names
+of these sometimes are different,
+
+19
+00:01:09,000 --> 00:01:11,490
+in different environments and
+different libraries.
+
+20
+00:01:11,490 --> 00:01:16,650
+But normally the operations
+provided are roughly these.
+
+21
+00:01:16,650 --> 00:01:19,110
+So we can add an element to
+the front of the list, and
+
+22
+00:01:19,110 --> 00:01:20,440
+that we're calling PushFront.
+
+23
+00:01:20,440 --> 00:01:23,200
+So that takes a key,
+adds it to the front of the list.
+
+24
+00:01:23,200 --> 00:01:26,310
+We can return the front
+element of the list.
+
+25
+00:01:26,310 --> 00:01:28,560
+We're calling that TopFront.
+
+26
+00:01:28,560 --> 00:01:32,110
+Or we can remove the front element
+of the list, called PopFront.
+
+27
+00:01:32,110 --> 00:01:34,290
+The same things that we can
+do at the front of the list,
+
+28
+00:01:34,290 --> 00:01:35,870
+we can also do at the end of the list.
+
+29
+00:01:35,870 --> 00:01:39,550
+With PushBack, later on in a later module,
+
+30
+00:01:39,550 --> 00:01:44,350
+we'll actually use the word Append for
+that, or TopBack, or PopBack.
+
+31
+00:01:45,670 --> 00:01:50,500
+These seem uniform in there, but
+there is a difference in that the runtimes
+
+32
+00:01:50,500 --> 00:01:52,850
+are going to be different between those,
+and we're going to talk about that.
+
+33
+00:01:54,190 --> 00:01:57,700
+You can find whether an element is in the
+list and it's as simple as just running
+
+34
+00:01:57,700 --> 00:01:59,670
+yourself down the the list
+looking to find a matching key.
+
+35
+00:02:00,830 --> 00:02:03,970
+You can erase an element and then again
+run yourself down the list til you
+
+36
+00:02:03,970 --> 00:02:07,170
+find the matching key and
+then remove that element.
+
+37
+00:02:07,170 --> 00:02:09,280
+So these latter ones
+are both O(n) time.
+
+38
+00:02:10,550 --> 00:02:12,180
+Is the list empty or not?
+
+39
+00:02:12,180 --> 00:02:14,620
+That's as simple as checking
+is the head equal to nil.
+
+40
+00:02:15,710 --> 00:02:19,670
+We can add a particular key--if we
+want to splice in a key into a list we can
+
+41
+00:02:19,670 --> 00:02:24,820
+actually add in a key either before
+a given node or after a given node.
+
+42
+00:02:27,430 --> 00:02:29,529
+So lets look at the times for
+some common operations.
+
+43
+00:02:30,530 --> 00:02:32,220
+We've got here our list
+with four elements in it:
+
+44
+00:02:32,220 --> 00:02:33,970
+7, 10, 4, and 13.
+
+45
+00:02:33,970 --> 00:02:37,570
+Now we go ahead and
+push an element to the front.
+
+46
+00:02:37,570 --> 00:02:38,950
+So we push 26 to the front of the list.
+
+47
+00:02:38,950 --> 00:02:45,530
+So the first thing we do, create a node
+that contains the 26 as its key.
+
+48
+00:02:45,530 --> 00:02:50,325
+And then we update our
+next pointer of that
+
+49
+00:02:50,325 --> 00:02:55,360
+node to point to the head,
+which is the 7 element, and
+
+50
+00:02:55,360 --> 00:02:59,680
+then update the head pointer to point to
+our new node, and that's it we're done.
+
+51
+00:02:59,680 --> 00:03:01,130
+So it's O(1).
+
+52
+00:03:01,130 --> 00:03:04,750
+Allocate, update one pointer,
+update another pointer, constant time.
+
+53
+00:03:06,270 --> 00:03:08,255
+If we want to pop the front element,
+
+54
+00:03:08,255 --> 00:03:12,040
+clearly finding the front
+element is very cheap here, right?
+
+55
+00:03:12,040 --> 00:03:14,000
+You can just look at the first element and
+return it.
+
+56
+00:03:14,000 --> 00:03:15,950
+So TopFront is O(1).
+
+57
+00:03:15,950 --> 00:03:18,670
+PopFront turns out is
+going to be O(1).
+
+58
+00:03:18,670 --> 00:03:21,600
+First thing we're going to do,
+update the head pointer.
+
+59
+00:03:21,600 --> 00:03:23,770
+Then, remove the node.
+
+60
+00:03:23,770 --> 00:03:24,770
+That's an O(1) operation.
+
+61
+00:03:26,520 --> 00:03:30,510
+If we want to push at the back,
+and we don't have a tail pointer,
+
+62
+00:03:30,510 --> 00:03:32,910
+we're going to talk about
+a tail pointer in a moment,
+
+63
+00:03:32,910 --> 00:03:35,010
+then it's going to be
+a fairly expensive operation.
+
+64
+00:03:35,010 --> 00:03:39,630
+We're going to have to start at the head
+and walk our way down the list until we
+
+65
+00:03:39,630 --> 00:03:42,660
+get to the end, and add a node there,
+so that's going to be O(n) time.
+
+66
+00:03:44,220 --> 00:03:48,310
+Similarly if we want to TopBack or
+PopBack, we're going to
+
+67
+00:03:48,310 --> 00:03:51,710
+also have to start at the head,
+walk our way down to the last element.
+
+68
+00:03:51,710 --> 00:03:53,970
+Those are all going to be O(n) time.
+
+69
+00:03:56,500 --> 00:03:59,460
+If we had a tail pointer,
+some of these will become simpler.
+
+70
+00:03:59,460 --> 00:04:02,660
+Okay, so, we're going to have both a head
+pointer that points to the head element
+
+71
+00:04:02,660 --> 00:04:04,920
+and a tail pointer that
+points to the tail element.
+
+72
+00:04:04,920 --> 00:04:06,780
+So, that way,
+getting the first element is cheap.
+
+73
+00:04:06,780 --> 00:04:07,910
+Getting the last element is cheap.
+
+74
+00:04:09,360 --> 00:04:12,810
+Let's look at what happens when we
+try an insert when we have a tail.
+
+75
+00:04:12,810 --> 00:04:17,180
+We allocate a node,
+put in our new key, and
+
+76
+00:04:17,180 --> 00:04:25,380
+we then update the next pointer of the
+current tail, to point to this new tail.
+
+77
+00:04:25,380 --> 00:04:27,590
+And then update the tail pointer itself.
+
+78
+00:04:29,110 --> 00:04:29,900
+O(1) operation.
+
+79
+00:04:31,100 --> 00:04:33,913
+Retrieving the last element, so a PopBack,
+
+80
+00:04:33,913 --> 00:04:37,410
+sorry a TopBack,
+is also an O(1) operation.
+
+81
+00:04:37,410 --> 00:04:39,639
+We just go to the tail,
+find the element, return the key.
+
+82
+00:04:40,660 --> 00:04:44,990
+If we want to pop the back however that's
+a little bit of an expensive operation.
+
+83
+00:04:44,990 --> 00:04:45,820
+Okay.
+
+84
+00:04:45,820 --> 00:04:50,850
+We are going to need to update
+the tail to point from 8 to 13 so
+
+85
+00:04:50,850 --> 00:04:55,320
+we're at 8 right now we want to go to 13,
+the problem is how do we get to 13?
+
+86
+00:04:55,320 --> 00:04:55,940
+Okay.
+
+87
+00:04:57,480 --> 00:05:02,670
+We don't have a pointer from 8 to
+13 we have a pointer from 13 to 8.
+
+88
+00:05:02,670 --> 00:05:05,280
+And that pointer doesn't
+help us going back.
+
+89
+00:05:05,280 --> 00:05:10,680
+So what we've got to do is, again, start at
+the head, walk our way down until we find
+
+90
+00:05:10,680 --> 00:05:15,750
+the 13 node that then points
+to the current tail, and
+
+91
+00:05:15,750 --> 00:05:18,310
+then update our tail pointer
+to point to that, and
+
+92
+00:05:18,310 --> 00:05:22,520
+then update the next pointer to be nil.
+
+93
+00:05:22,520 --> 00:05:25,130
+And then we can remove that old one.
+
+94
+00:05:25,130 --> 00:05:27,640
+So that's going to be an O(n)
+operation.
+
+95
+00:05:27,640 --> 00:05:29,480
+because we've got to walk
+all the way down there.
+
+96
+00:05:29,480 --> 00:05:33,220
+Okay, because even though we have a tail
+pointer we don't have the next to the tail
+
+97
+00:05:33,220 --> 00:05:35,110
+pointer, we don't have
+the next to last element.
+
+98
+00:05:36,120 --> 00:05:40,560
+The head is different because our pointers
+point this way, if we had the head
+
+99
+00:05:40,560 --> 00:05:43,700
+Its also cheap to get the second element,
+right, and one more to get the third
+
+100
+00:05:43,700 --> 00:05:47,250
+element but the tail pointer doesn't help
+us get to the next to the last element.
+
+101
+00:05:49,820 --> 00:05:52,850
+Let's look at some of the code for this,
+so for PushFront we have a singly linked
+
+102
+00:05:52,850 --> 00:05:57,030
+list: we're going to allocate a new node,
+set its key, set its next
+
+103
+00:05:57,030 --> 00:06:01,060
+to point to the old head and then
+we'll update the current head pointer.
+
+104
+00:06:03,710 --> 00:06:07,450
+If the tail is equal to nil, that meant
+that before the insertion, the head and
+
+105
+00:06:07,450 --> 00:06:09,040
+the tail were nil, it was an empty list.
+
+106
+00:06:09,040 --> 00:06:12,460
+So we've got to update the tail to
+point to the same thing the head points to.
+
+107
+00:06:13,780 --> 00:06:15,290
+Popping the front, well,
+
+108
+00:06:15,290 --> 00:06:18,240
+if we're asked to pop the front on
+an empty list, that's an error.
+
+109
+00:06:18,240 --> 00:06:20,980
+So that's the first check we do here and
+
+110
+00:06:20,980 --> 00:06:25,225
+then we just update the head to
+point now to the head's next.
+
+111
+00:06:25,225 --> 00:06:29,952
+And just in case that there was
+only one element in the list and
+
+112
+00:06:29,952 --> 00:06:34,584
+now there are no elements,
+we check if our new head is nil and
+
+113
+00:06:34,584 --> 00:06:37,379
+if so update our tail to also be nil.
+
+114
+00:06:37,379 --> 00:06:41,160
+Pushing in the back: allocate a new node,
+set its key,
+
+115
+00:06:41,160 --> 00:06:45,640
+set its next pointer, and
+then check the current tail.
+
+116
+00:06:45,640 --> 00:06:47,702
+If the current tail is nil again,
+it's an empty list.
+
+117
+00:06:47,702 --> 00:06:50,245
+Update the head and
+the tail to point to that new node.
+
+118
+00:06:50,245 --> 00:06:54,325
+Otherwise update the old tail's
+next to point to our new node,
+
+119
+00:06:54,325 --> 00:06:57,686
+and then update the tail
+to point to that new node.
+
+120
+00:07:00,019 --> 00:07:00,760
+Popping the back.
+
+121
+00:07:02,100 --> 00:07:03,720
+More difficult, right.
+
+122
+00:07:03,720 --> 00:07:06,720
+If it's an empty list and
+we're trying to pop, that's an error.
+
+123
+00:07:06,720 --> 00:07:09,110
+If the head is equal to tail,
+that means we have one element.
+
+124
+00:07:09,110 --> 00:07:11,790
+So we need to just update the head and
+the tail to nil.
+
+125
+00:07:11,790 --> 00:07:15,120
+Otherwise we've got to start at the head,
+and start working our way down,
+
+126
+00:07:15,120 --> 00:07:18,510
+trying to find the next
+to the last element.
+
+127
+00:07:18,510 --> 00:07:22,650
+When we exit the while loop,
+p will be the next to last element, and
+
+128
+00:07:22,650 --> 00:07:24,180
+we then update its next pointer to nil.
+
+129
+00:07:25,190 --> 00:07:27,912
+And set our tail equal to that element.
+
+130
+00:07:30,128 --> 00:07:32,020
+Adding after a node?
+
+131
+00:07:32,020 --> 00:07:34,180
+Fairly simple in a singly linked list.
+
+132
+00:07:34,180 --> 00:07:35,150
+Allocate a new node,
+
+133
+00:07:36,150 --> 00:07:41,170
+set its next pointer to whatever node
+we're adding after, to its next.
+
+134
+00:07:41,170 --> 00:07:44,980
+So we sort of splice in, and
+then we need to update the node pointer.
+
+135
+00:07:44,980 --> 00:07:48,891
+The one we're adding after, so
+that it points now to our new node.
+
+136
+00:07:48,891 --> 00:07:53,227
+And just in case that node we're adding
+after was the tail we've got to now update
+
+137
+00:07:53,227 --> 00:07:54,640
+the tail to that new node.
+
+138
+00:07:55,916 --> 00:08:02,380
+Adding before, we have the same problem
+we had in terms of PopBack in that
+
+139
+00:08:02,380 --> 00:08:07,770
+we don't have a link back
+to the previous element.
+
+140
+00:08:07,770 --> 00:08:11,660
+So we have no way of updating its
+next pointer other than going
+
+141
+00:08:11,660 --> 00:08:15,170
+back to the beginning of the head and
+moving our way down until we find it.
+
+142
+00:08:15,170 --> 00:08:16,830
+So AddBefore would be
+an O(n) operation.
+
+143
+00:08:18,450 --> 00:08:20,780
+So let's summarize what
+the cost of things are.
+
+144
+00:08:20,780 --> 00:08:22,100
+PushFront, O(1).
+
+145
+00:08:23,250 --> 00:08:26,500
+TopFront, PopFront, all O(1).
+
+146
+00:08:26,500 --> 00:08:31,515
+Pushing the back O(n) unless we have
+a tail pointer in which case its O(1).
+
+147
+00:08:32,840 --> 00:08:37,740
+TopBack O(n), again unless we have
+a tail pointer in which it's O(1).
+
+148
+00:08:37,740 --> 00:08:41,450
+Popping the back: O(n) operation,
+with or without a tail.
+
+149
+00:08:42,560 --> 00:08:45,190
+Finding a key is O(n) we just walk
+our way through the list trying to find
+
+150
+00:08:45,190 --> 00:08:46,450
+a particular element.
+
+151
+00:08:46,450 --> 00:08:47,750
+Erasing, also O(n).
+
+152
+00:08:47,750 --> 00:08:52,630
+Checking whether it's empty or not is as
+simple as checking whether the head is nil.
+
+153
+00:08:52,630 --> 00:08:57,290
+Adding before: O(n) because
+finding the previous element
+
+154
+00:08:57,290 --> 00:09:00,530
+takes O(n) because we're going to
+walk all the way from the head to find it.
+
+155
+00:09:00,530 --> 00:09:01,920
+AddAfter: constant time.

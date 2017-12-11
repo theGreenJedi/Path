@@ -1,0 +1,399 @@
+1
+00:00:00,240 --> 00:00:05,100
+As usual before going into the details
+of efficient implementation
+
+2
+00:00:05,100 --> 00:00:09,770
+let's check what is wrong
+with naive implementations?
+
+3
+00:00:09,770 --> 00:00:14,380
+For example, what if we store
+the contents of a priority
+
+4
+00:00:14,380 --> 00:00:19,360
+queue just in an unsorted array or
+in an unsorted list?
+
+5
+00:00:19,360 --> 00:00:23,830
+In this example on the slide,
+we use a doubly linked list.
+
+6
+00:00:23,830 --> 00:00:27,350
+Well, in this case inserting
+a new element is very easy.
+
+7
+00:00:27,350 --> 00:00:32,430
+We just append the new element
+to the end of our array or list.
+
+8
+00:00:32,430 --> 00:00:34,240
+For example, as follows,
+
+9
+00:00:34,240 --> 00:00:39,170
+if our new element is seven we can just
+put it to the next available cell in our
+
+10
+00:00:39,170 --> 00:00:44,020
+array where we can just append
+it to the end of the list.
+
+11
+00:00:44,020 --> 00:00:45,570
+So we put 7 to the end.
+
+12
+00:00:45,570 --> 00:00:52,530
+We say that the previous element of 7 is 2
+and that there is no next element, right?
+
+13
+00:00:52,530 --> 00:00:56,770
+So it is easy and
+it takes constant time, okay?
+
+14
+00:00:56,770 --> 00:01:00,520
+Now, what about extracting
+the maximum element in this case?
+
+15
+00:01:00,520 --> 00:01:04,430
+Well, unfortunately we need to scan the
+whole array to find the maximum element.
+
+16
+00:01:06,220 --> 00:01:09,380
+And we need to scan the whole
+list to find the maximum element
+
+17
+00:01:09,380 --> 00:01:11,780
+which gives us a linear running time.
+
+18
+00:01:11,780 --> 00:01:16,730
+That is we O(n), right?
+
+19
+00:01:16,730 --> 00:01:21,662
+In our previous naive implementation
+using an unsorted array or
+
+20
+00:01:21,662 --> 00:01:25,820
+list, the running time of
+the extract max operation is linear.
+
+21
+00:01:25,820 --> 00:01:28,420
+Well, a reasonable approach
+to try to improve this,
+
+22
+00:01:28,420 --> 00:01:34,110
+is to keep the contents of our array,
+for example array, sorted.
+
+23
+00:01:34,110 --> 00:01:37,350
+Well, what are the advantages
+of this approach?
+
+24
+00:01:37,350 --> 00:01:41,080
+Well, of course, in this case,
+extract max is very easy.
+
+25
+00:01:41,080 --> 00:01:44,390
+So, the maximum element,
+is just the last element of our array.
+
+26
+00:01:44,390 --> 00:01:45,010
+Right?
+
+27
+00:01:45,010 --> 00:01:50,100
+Which means that the running time of
+ExtractMax in this case is just constant.
+
+28
+00:01:50,100 --> 00:01:55,480
+However, the disadvantage is that now
+the insertion operation takes linear time,
+
+29
+00:01:55,480 --> 00:01:57,300
+and this is why.
+
+30
+00:01:57,300 --> 00:02:03,210
+Well, to find the right position for the
+new element we can use the binary search.
+
+31
+00:02:03,210 --> 00:02:06,970
+This is actually good, well it can
+be done in logarithmic time.
+
+32
+00:02:06,970 --> 00:02:12,150
+For example, if we need to
+insert 7 in our priority queue,
+
+33
+00:02:12,150 --> 00:02:17,040
+then in logarithmic time we
+will find out that it should be
+
+34
+00:02:17,040 --> 00:02:21,740
+inserted between 3 and
+9 in this for example.
+
+35
+00:02:21,740 --> 00:02:25,030
+However unfortunately after
+finding this right position,
+
+36
+00:02:25,030 --> 00:02:28,500
+we need to shift everything to
+the right of this position by one.
+
+37
+00:02:29,540 --> 00:02:32,640
+Right just to create a vacant position for
+7.
+
+38
+00:02:32,640 --> 00:02:39,170
+For this we need to first
+shift 16 to this cell.
+
+39
+00:02:39,170 --> 00:02:43,950
+Then we move 10 then to this cell,
+then we move 9 to this cell, and
+
+40
+00:02:43,950 --> 00:02:48,840
+finally we put 7 in to this cell,
+and we get it sorted already.
+
+41
+00:02:48,840 --> 00:02:53,230
+So in the worst case, we need to shift a
+linear number of cells, a linear number of
+
+42
+00:02:54,880 --> 00:03:00,560
+elements, which gives us a linear running
+time for the insertion operation.
+
+43
+00:03:00,560 --> 00:03:05,830
+As we've just seen, inserting an element
+into a sorted array is expensive
+
+44
+00:03:05,830 --> 00:03:10,590
+because to insert an element
+into the middle we need to shift
+
+45
+00:03:10,590 --> 00:03:14,400
+all elements to the right
+of this position by one.
+
+46
+00:03:14,400 --> 00:03:20,840
+So, this makes the running time of
+the insertion procedure linear.
+
+47
+00:03:20,840 --> 00:03:23,157
+However if we use a doubly linked list,
+
+48
+00:03:23,157 --> 00:03:28,110
+then inserting into the middle of this
+list is actually constant time operation.
+
+49
+00:03:28,110 --> 00:03:32,842
+So let's try to use a sorted list.
+Well, the first advantage is
+
+50
+00:03:32,842 --> 00:03:37,300
+that the extract max operation
+still takes constant time.
+
+51
+00:03:37,300 --> 00:03:39,420
+Well this is just because, well,
+
+52
+00:03:39,420 --> 00:03:43,410
+the maximum element in our list
+is just the last element, right?
+
+53
+00:03:43,410 --> 00:03:49,340
+So for this reason,
+we have a constant time for extract max.
+
+54
+00:03:49,340 --> 00:03:54,580
+Also, another advantage is that
+inserting in the middle of this list
+
+55
+00:03:54,580 --> 00:04:00,090
+actually takes a constant amount of work,
+not linear, and this is why.
+
+56
+00:04:00,090 --> 00:04:03,880
+Again let's try to insert 7 into our list.
+
+57
+00:04:03,880 --> 00:04:06,000
+Well, this can be done as follows.
+
+58
+00:04:07,270 --> 00:04:12,190
+We know that inserting 7 should
+be done between 3 and 9.
+
+59
+00:04:12,190 --> 00:04:14,200
+So we do just the following.
+
+60
+00:04:14,200 --> 00:04:16,940
+We will remove this.
+
+61
+00:04:16,940 --> 00:04:19,120
+We remove this pointer and
+this pointer.
+
+62
+00:04:19,120 --> 00:04:22,490
+We'll say that now the next
+element after 3 is 7 and
+
+63
+00:04:22,490 --> 00:04:24,948
+the previous element before 7 is 3.
+
+64
+00:04:24,948 --> 00:04:32,640
+And also the next element after 3, after 7
+is 9, and previous element before 9 is 7.
+
+65
+00:04:32,640 --> 00:04:37,760
+So inserting an element just
+involves changing four pointers.
+
+66
+00:04:37,760 --> 00:04:40,710
+Right?
+So it is a constant time operation.
+
+67
+00:04:40,710 --> 00:04:43,930
+However everything is not so
+easy, unfortunately.
+
+68
+00:04:43,930 --> 00:04:47,660
+And this is because just
+finding the right position for
+
+69
+00:04:47,660 --> 00:04:51,340
+inserting this new element
+takes a linear amount of work.
+
+70
+00:04:51,340 --> 00:04:57,720
+And this in particular because we
+cannot use binary search for lists.
+
+71
+00:04:57,720 --> 00:05:03,500
+Given the first element of this list and
+the last element of this list, we cannot
+
+72
+00:05:03,500 --> 00:05:07,750
+find the position of the middle element of
+this list because this is not an arry.
+
+73
+00:05:07,750 --> 00:05:11,450
+We cannot just compute
+the middle index in this array.
+
+74
+00:05:11,450 --> 00:05:15,970
+So for this reason, just finding
+the right position for the new element
+
+75
+00:05:15,970 --> 00:05:21,140
+I mean to keep the list sorted takes
+already a linear amount of work.
+
+76
+00:05:21,140 --> 00:05:22,400
+And for this reason,
+
+77
+00:05:22,400 --> 00:05:26,840
+inserting into a sorted list still
+takes a linear amount of work.
+
+78
+00:05:28,300 --> 00:05:34,140
+Well to conclude if you implement
+a priority queue using a list or
+
+79
+00:05:34,140 --> 00:05:38,240
+an array sorted or
+not then one of the operations insert and
+
+80
+00:05:38,240 --> 00:05:41,590
+extract max takes a linear amount of work.
+
+81
+00:05:41,590 --> 00:05:46,369
+In the next video we will show
+a data structure called binary heap
+
+82
+00:05:46,369 --> 00:05:49,690
+which allows to implement
+a priority queue so
+
+83
+00:05:49,690 --> 00:05:55,053
+that both of these operations can be
+performed in logarithmic amount of work.

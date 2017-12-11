@@ -1,0 +1,99 @@
+Hi, in the previous video, you've learned the concept of universal
+family of hash functions and you learned how to use it to make operations
+with your hash table really fast. However, now we need to actually
+build a universal family and you will start with a universal family for the most
+important object which is integer number. Because any object on your computer
+is represented as a series of bits or bytes, and so you can think of it
+as a sequence of integer numbers. And so first, we need to learn
+to hash integers efficiently. So we will build a universal family for
+hashing integers. But we will look at our example
+with phone numbers because we need to store contacts in our phone. So first, we will consider only phone
+numbers up to length seven and for example we will consider
+phone number 148-2567. And again,
+we'll convert all of those phone numbers, we want to start from integers from zero
+to the number consisting of seven nines. And for example, our selected phone number will convert to 1,482,567. And then we will hash those integers
+to which we convert our phone numbers. So to hash them, we will need to
+also choose a big prime number, bigger than 10 to the power of 7, for example, 10,000,019 is
+a suitable prime number. And we will also need to choose the hash
+table size which is the same as the chronology of the hash
+function that we need. So now that we selected p and m, we
+are ready to define universal family for integers between 0 and
+10 to the power of 7 minus 1. So the Lemma says that the following
+family of hash functions is a universal family. What is this family? It is indexed by p, p is the prime number,
+10,000,019, in this case that we choose. And it also has parameters a and b,
+so those parameters are different for different hash functions in these family. Basically, if you fix a and b,
+you fix a hash function from this hash functions family,
+calligraphic H with index p. And x is the key, it is the integer
+number that we want to hash, and it is required that x is less than p. It is from 0 to p minus 1,
+or less than p minus 1, but definitely, it is less than p. So, to create a value of this integer x with some hash function, we
+first make a linear transform of this x. We multiply it by a, corresponding
+to this hash function, and add b, corresponding to this hash function. Then we take the result,
+modulo our big prime number p. And after that, we again take the result
+modulo the size of our hash table or the chronology of the hash
+functions that we need. So all these hash functions indexed by
+a and b will have the same chronology m. And the size of this hash family,
+what do you think it is? Well, it is equal to b multiply
+by p minus 1, why is that? Because there are p minus 1 variance for a, and independently from that,
+there are p variance for b. So the total number of pairs, a and
+b, is p multiplied by p minus 1, that is the size of our universal family. And the Lemma states that it really
+will be a universal family for integers between 0 and p minus 1. We will prove this Lemma in a separate,
+optional video. And here, we'll look at an example
+of how this universal family works. So, for example, we selected hash
+function corresponding to a = 34 and b = 2, so this hash function
+h is h index by p, 34, and 2. And we will compute the value
+of this hash function on number 1,482,567 because this integer number corresponds to the phone number who
+we're interested in which is 148-2567. Well, remember that p that we chose
+is a prime number 10,000,019. So first,
+we multiply our number x by 34 and add 2, and after that,
+we take the result modulo b, modulo 10,000,019, and
+the result is 407,185. Then we take this result and take it again modulo 1,000,
+and the result is 185. And so the value for our selected
+hash function on number x is 185. And for any other number x, you would do
+the same, you would multiply x by 34, add 2, take the result modulo b,
+then take the result modulo 1,000. And so any value of our hash function is
+a number between 0 and 999 as we want. And if we do different a and
+b, instead of 34 and 2, we'll just multiply x by different a,
+add different b. Take a modulo b, take the result modulo m,
+and get the value for our hash function. So in the general case, when the phone
+numbers can be longer than seven, we first define the maximum allowed
+length, L, of the phone number. And again, convert all the phone numbers
+to integers which will derive from 0 to 10 to the power of L- 1, and
+then we'll hash those integers. To hash those integers, we'll choose
+a sufficiently large number p, p must be more than 10 to the power
+of L for the family to be universal. Because otherwise, if we take some
+p less than 10 to the power of L, there will exist two different
+integer numbers between 0 and 10 to the power of L- 1,
+which differ by exactly p. And then, when we compute the value of
+some hash function on both those numbers and we take linear
+transformation of those keys, modulo b, the value of those
+transformations will be the same. And then when we take, again, module m,
+the value again will be the same. And that means that for
+any hash function from our family, the value of its function on
+these two keys will be the same. So there will be a collision for
+any hash function from the family, but that contradicts the definition
+of universal family. Because for a universal family and for
+two fixed different keys, no more than 1 over m part of all hash functions
+can have collision for these two keys. And in our case, all hash functions
+have a collision for these two keys, so this is definitely not a universal family. So we must take p more than
+10 to the power of L, and in fact, that is sufficient. Then, we choose hash table of size m, and then we use our universal family,
+calligraphic H with index p. We choose a random hash function from this
+universal family, and to choose a random hash function from this family, we need
+to actually choose two numbers, a and b. And a should be a random
+number between 1 and p-1, and b should be an independent
+random number from 0 to p-1. If we selected those two numbers,
+we define our hash function completed. So now we know how to solve
+the problem of phone book in the direction from
+phone numbers to names. So we first define the longest
+allowed length of the phone number. We convert all the phone numbers
+to integers from 0 to 10 to the power of L -1. We choose a big prime number,
+bigger than 10 to the power of L. We choose the size of the hash table
+that we want based on the techniques you learned in the previous video and
+then you add the context to your phone book
+as a hash table of size m. Hashing them by a hash function
+randomly selected from the universal family,
+calligraphic H with index p. And that is the solution in the direction
+from phone numbers to names. This solution will take bit of m memory,
+and you can control for m, and it will work on average in
+constant time if you select m wisely using the techniques
+from the previous video. And now we also need to solve our phone
+book problem in the different direction, from names to phone numbers. And that we will do in the next video.

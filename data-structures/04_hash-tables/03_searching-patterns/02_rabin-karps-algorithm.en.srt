@@ -1,0 +1,640 @@
+1
+00:00:00,230 --> 00:00:04,280
+Hi, in this video,
+we'll introduce Rabin-Karp's Algorithm for
+
+2
+00:00:04,280 --> 00:00:07,360
+finding all occurrences
+of a pattern in the text.
+
+3
+00:00:07,360 --> 00:00:11,900
+At first it will have the same
+running time as the Naive Algorithm
+
+4
+00:00:11,900 --> 00:00:13,090
+from the previous video.
+
+5
+00:00:13,090 --> 00:00:18,436
+But then we'll be able to improve it
+significantly for the practical purposes.
+
+6
+00:00:18,436 --> 00:00:24,545
+So we need to compare our pattern
+to all substrings S of text T,
+
+7
+00:00:24,545 --> 00:00:29,980
+with length the same as
+the length of the pattern.
+
+8
+00:00:29,980 --> 00:00:34,474
+And in the Naive algorithm,
+we just did that by checking character by
+
+9
+00:00:34,474 --> 00:00:39,056
+character whether pattern is equal
+to the corresponding substring.
+
+10
+00:00:39,056 --> 00:00:46,048
+And the idea is we could use hashing to
+quickly compare P with substrings of T.
+
+11
+00:00:46,048 --> 00:00:47,990
+So, how to do that?
+
+12
+00:00:47,990 --> 00:00:53,370
+Well, let's introduce
+some hash function h and
+
+13
+00:00:53,370 --> 00:00:56,840
+of course if it is
+a deterministic hash function.
+
+14
+00:00:56,840 --> 00:01:01,130
+And we see that the value of hash
+function on the pattern P is
+
+15
+00:01:01,130 --> 00:01:05,100
+different from the value of this
+hash function on some string S.
+
+16
+00:01:05,100 --> 00:01:09,010
+Then definitely P is not equal to S,
+because h is deterministic.
+
+17
+00:01:10,160 --> 00:01:16,600
+However if the value of hash function on
+P is equal to the value of hash function
+
+18
+00:01:16,600 --> 00:01:22,950
+on S, P can be equal to S or it can be
+different from S if there is a collision.
+
+19
+00:01:22,950 --> 00:01:27,740
+So to exactly check
+whether P is equal to S or
+
+20
+00:01:27,740 --> 00:01:33,180
+not we will need to call
+our function AreEqual(P,S).
+
+21
+00:01:33,180 --> 00:01:37,370
+And so this doesn't yet save us any time.
+
+22
+00:01:37,370 --> 00:01:42,230
+But we hope that we could
+call this function AreEqual
+
+23
+00:01:42,230 --> 00:01:47,040
+less frequently because there
+will be only few collisions.
+
+24
+00:01:47,040 --> 00:01:49,905
+So we'll use polynomial hashing family.
+
+25
+00:01:49,905 --> 00:01:56,552
+Polygraphic P with index p small
+with some big prime number p.
+
+26
+00:01:56,552 --> 00:02:00,787
+And if P pattern is not equal
+to S substring of text,
+
+27
+00:02:00,787 --> 00:02:06,600
+then the probability that the value
+of the hash function on the pattern
+
+28
+00:02:06,600 --> 00:02:11,623
+is the same as the value of hash
+function on the sub string is at
+
+29
+00:02:11,623 --> 00:02:16,700
+most length of the pattern divided
+by our big prime number p.
+
+30
+00:02:16,700 --> 00:02:21,270
+And we'll choose,
+a prime number P big enough, so
+
+31
+00:02:21,270 --> 00:02:25,106
+that this probability will be very small.
+
+32
+00:02:25,106 --> 00:02:28,780
+So here is the code,
+of our algorithm RabinKarp.
+
+33
+00:02:28,780 --> 00:02:31,320
+It takes its input, text T, and pattern P.
+
+34
+00:02:33,190 --> 00:02:39,143
+And it starts by initializing the hash
+function from polynomial family.
+
+35
+00:02:39,143 --> 00:02:43,280
+We first choose a very big prime number p.
+
+36
+00:02:43,280 --> 00:02:47,430
+We'll talk later about how to choose it,
+how big it should be.
+
+37
+00:02:47,430 --> 00:02:52,938
+And we also choose a random
+number x between 1 and p- 1.
+
+38
+00:02:52,938 --> 00:02:56,190
+Choose the specific hash function
+from the polynomial family.
+
+39
+00:02:57,300 --> 00:03:03,670
+Initialize all our list of positions where
+pattern occurs in text with an empty list.
+
+40
+00:03:04,780 --> 00:03:09,810
+We also precompute the hash
+value of our pattern, and
+
+41
+00:03:09,810 --> 00:03:12,250
+we call the PolyHash function to do that.
+
+42
+00:03:13,300 --> 00:03:16,440
+And then we again need to go through all
+
+43
+00:03:16,440 --> 00:03:19,140
+possible starting positions of pattern and
+text.
+
+44
+00:03:19,140 --> 00:03:24,560
+So we go from i from zero to difference
+of the length of text and pattern.
+
+45
+00:03:25,900 --> 00:03:31,760
+And for each i, we take the substring
+starting in this position i and
+
+46
+00:03:31,760 --> 00:03:34,720
+of length equal to
+the lengths of the pattern,
+
+47
+00:03:34,720 --> 00:03:39,341
+which is t from i to i plus
+length of the pattern minus 1.
+
+48
+00:03:39,341 --> 00:03:44,170
+And you compute the hash
+value of this substring.
+
+49
+00:03:44,170 --> 00:03:48,750
+And then we'll look at the hash of
+the pattern and the hash of the substring.
+
+50
+00:03:48,750 --> 00:03:50,330
+If they are different,
+
+51
+00:03:50,330 --> 00:03:54,730
+then it means that definitely,
+P is not equal to this substring.
+
+52
+00:03:54,730 --> 00:03:57,410
+And so,
+P doesn't occur in position i and so
+
+53
+00:03:57,410 --> 00:04:02,200
+we don't need to do anything in this
+iteration so we just continue to the next
+
+54
+00:04:02,200 --> 00:04:07,002
+iteration of the loop
+without calling AreEqual.
+
+55
+00:04:07,002 --> 00:04:11,854
+However, if has values pHash and
+tHash aren't equal,
+
+56
+00:04:11,854 --> 00:04:16,890
+then we need to check if it's true that
+P is really equal to the substring
+
+57
+00:04:16,890 --> 00:04:21,680
+of T starting in position i or it is
+just a collision of our hash function.
+
+58
+00:04:21,680 --> 00:04:25,250
+And to do that we make
+a call to AreEqual and
+
+59
+00:04:25,250 --> 00:04:27,172
+pass there the substring and the pattern.
+
+60
+00:04:27,172 --> 00:04:32,020
+If AreEqual returns true,
+it means that pattern is really equal to
+
+61
+00:04:32,020 --> 00:04:37,590
+the correspondence substring of texts, and
+then we advance position i to resolve.
+
+62
+00:04:37,590 --> 00:04:41,530
+Because pattern P occurs in
+position i in the text T.
+
+63
+00:04:41,530 --> 00:04:47,780
+Otherwise we just continue to
+the next situation of our for loop.
+
+64
+00:04:47,780 --> 00:04:53,086
+So this more or less the same as naive
+algorithm, but we have an additional
+
+65
+00:04:53,086 --> 00:04:58,068
+checking of hash value, and so
+we're not always calling AreEqual.
+
+66
+00:04:58,068 --> 00:05:02,778
+We are calling AreEqual either if P
+is equal to the corresponding sub
+
+67
+00:05:02,778 --> 00:05:06,190
+string of T or if there is a collision.
+
+68
+00:05:06,190 --> 00:05:09,300
+Let's estimate the running
+time of this algorithm.
+
+69
+00:05:09,300 --> 00:05:11,920
+So first we need to talk
+about false alarms.
+
+70
+00:05:11,920 --> 00:05:16,230
+We'll call false alarm the event
+when P is compared with
+
+71
+00:05:16,230 --> 00:05:23,190
+a substring of T from i to
+i plus length of P minus 1.
+
+72
+00:05:23,190 --> 00:05:27,610
+Compared inside the AreEqual procedure,
+but
+
+73
+00:05:27,610 --> 00:05:32,490
+pattern P is actually not
+equal to this substring.
+
+74
+00:05:32,490 --> 00:05:37,212
+So there's a false alarm in the sense
+that P doesn't occur in the text T
+
+75
+00:05:37,212 --> 00:05:42,028
+starting from position i, but
+we still called the AreEqual function.
+
+76
+00:05:42,028 --> 00:05:45,342
+And we need to go character
+by character through P and
+
+77
+00:05:45,342 --> 00:05:49,730
+the substring to test that
+they're actually not equal.
+
+78
+00:05:49,730 --> 00:05:55,020
+So the probability of false alarm as
+we know from the previous lesson,
+
+79
+00:05:55,020 --> 00:06:00,326
+is at most length of the pattern over
+prime number P, which we choose.
+
+80
+00:06:00,326 --> 00:06:05,295
+So on average, the total number of false
+alarms will be the number of iterations
+
+81
+00:06:05,295 --> 00:06:08,499
+of our for loop,
+multiplied by this probability.
+
+82
+00:06:09,660 --> 00:06:14,862
+And so this total number of false
+alarms can be made very small if we
+
+83
+00:06:14,862 --> 00:06:20,444
+choose prime number P, bigger than
+the product of length of the text,
+
+84
+00:06:20,444 --> 00:06:22,639
+and length of the pattern.
+
+85
+00:06:22,639 --> 00:06:23,879
+Much bigger.
+
+86
+00:06:23,879 --> 00:06:28,816
+So now let's estimate the running
+time of everything in our
+
+87
+00:06:28,816 --> 00:06:32,876
+code except for
+calls to the AreEqual function.
+
+88
+00:06:32,876 --> 00:06:37,080
+So the hash value of the pattern is
+computed in time big O of length of
+
+89
+00:06:37,080 --> 00:06:37,990
+the pattern.
+
+90
+00:06:39,030 --> 00:06:42,360
+Hash of the substring corresponding
+to the pattern is computed
+
+91
+00:06:42,360 --> 00:06:45,130
+in the same big O of length
+of the pattern time.
+
+92
+00:06:45,130 --> 00:06:49,910
+And this is done length of text minus
+length of the pattern plus 1 times
+
+93
+00:06:49,910 --> 00:06:52,250
+because that is the number of
+iterations of the for loop.
+
+94
+00:06:53,370 --> 00:06:58,280
+So the total time to compute
+all those hash values
+
+95
+00:06:58,280 --> 00:07:02,020
+is big O of length of text multiplied
+by the length of the pattern.
+
+96
+00:07:03,430 --> 00:07:07,576
+Now what about the running
+time of all calls to AreEqual?
+
+97
+00:07:07,576 --> 00:07:12,415
+Each call to AreEqual is computed in big O
+of length of the pattern because we pass
+
+98
+00:07:12,415 --> 00:07:16,260
+there are two strings of length
+equal to length of the pattern.
+
+99
+00:07:17,550 --> 00:07:21,943
+However, AreEqual is called only when
+the hash value of the pattern as
+
+100
+00:07:21,943 --> 00:07:25,898
+the same as the hash value of
+the corresponding substring of T.
+
+101
+00:07:25,898 --> 00:07:31,274
+And that means that either P
+occurs in position i in text T or
+
+102
+00:07:31,274 --> 00:07:33,590
+there was a false alarm.
+
+103
+00:07:34,710 --> 00:07:37,831
+And by selecting the prime
+number to be very big,
+
+104
+00:07:37,831 --> 00:07:42,857
+much bigger than the product of the length
+of text, and the length of pattern,
+
+105
+00:07:42,857 --> 00:07:47,526
+we can make the number of false alarms
+negligible, at least on average.
+
+106
+00:07:47,526 --> 00:07:53,412
+So, if q is the number of times
+that pattern P is actually found,
+
+107
+00:07:53,412 --> 00:07:56,900
+in different positions in the text T,
+
+108
+00:07:56,900 --> 00:08:02,898
+then the total time spent in AreEqual,
+on average, is big O of q.
+
+109
+00:08:02,898 --> 00:08:08,387
+Which is number of times P is
+really found, plus the fraction
+
+110
+00:08:08,387 --> 00:08:14,300
+T minus P plus 1 multiplied by P and
+divided by prime, p.
+
+111
+00:08:14,300 --> 00:08:18,577
+Which is the average number of
+times that a false alarm happens.
+
+112
+00:08:18,577 --> 00:08:22,477
+So q plus number of false
+alarms is the number of
+
+113
+00:08:22,477 --> 00:08:27,188
+times that we need to actually
+call function AreEqual.
+
+114
+00:08:27,188 --> 00:08:30,885
+And then the time spent inside
+the function AreEqual is proportional to
+
+115
+00:08:30,885 --> 00:08:32,309
+the length of the pattern.
+
+116
+00:08:33,690 --> 00:08:40,010
+So, this is the same as the O of q
+multiplied by the length of the pattern,
+
+117
+00:08:40,010 --> 00:08:43,830
+because the second summoned
+can be made pretty small,
+
+118
+00:08:43,830 --> 00:08:47,880
+less than 1 if we choose
+big enough prime number p.
+
+119
+00:08:47,880 --> 00:08:51,440
+And we'll only get the first summoned
+multiplied by the length of the pattern.
+
+120
+00:08:52,700 --> 00:08:57,696
+And now the total running time of
+the Rabin-Karp's algorithm in this variant
+
+121
+00:08:57,696 --> 00:09:01,900
+is big O length of text multiplied
+by length of pattern plus
+
+122
+00:09:01,900 --> 00:09:04,400
+q multiplied by the length of pattern.
+
+123
+00:09:04,400 --> 00:09:09,308
+But, of course we know that the number of
+times that pattern occurs in text is not
+
+124
+00:09:09,308 --> 00:09:12,328
+bigger than the number of characters,
+in text.
+
+125
+00:09:12,328 --> 00:09:16,692
+Because there are only so many different
+positions where the pattern could start,
+
+126
+00:09:16,692 --> 00:09:17,198
+in text.
+
+127
+00:09:17,198 --> 00:09:21,234
+So, this sum is dominated by
+the sum of big O of length of text,
+
+128
+00:09:21,234 --> 00:09:23,730
+multiplied by length of the pattern.
+
+129
+00:09:24,960 --> 00:09:30,100
+So, this is basically the same
+running time as our estimate for
+
+130
+00:09:30,100 --> 00:09:31,770
+the naive algorithm.
+
+131
+00:09:31,770 --> 00:09:37,170
+So we haven't improved anything yet,
+but this time can be improved for
+
+132
+00:09:37,170 --> 00:09:40,590
+this algorithm with a clever trick.
+
+133
+00:09:40,590 --> 00:09:42,388
+And you will learn it in the next video.

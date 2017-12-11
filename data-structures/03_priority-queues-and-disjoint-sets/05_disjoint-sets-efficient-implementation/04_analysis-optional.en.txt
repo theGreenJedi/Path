@@ -1,0 +1,168 @@
+Our goal in this video is to show that
+if we use both path compression and union by rank heuristics then the average
+running time of a single operation is upper bounded by big
+O of log star of N. Before going into
+the details of the proof, let's realize a few important facts. First of all, know that since we
+are now using path compression, it is no longer the case that the rank of node i is equal to height of
+the tree rooted at vertex i. However, it is still true that
+the rank is an upper bound. On the corresponding height. Let me illustrate this with a toy example. So, I assume that we
+have a tree like this. So, this is root say vertex 5. Here we have vertex 2 and we have node 3, node say 6. Assume that currently rank of this node
+is 2 say 0, this is 1 and this also 0. We now recall find of 6. This will re-attach 6 to
+the current root of this tree. So what we get is the following, 5, 3, 1. And also 6 now stays here, all right? So we see that the height of
+these three is equal to 1. However the rank of the root
+is still equal to 2. Recall that find doesn't use and
+doesn't change any rank values. Also for this node 3, it's height. The height of the tree rooted
+at element 3 is equal to 0, however the rank is equal to 1. Well, intuitively it is clear path
+compression can only decrease the height. So for this reason,
+rank is no longer equal to the height of the corresponding tree
+however the height is at most the length. Okay. Another important thing is the following. It is still true that for
+any root node i of rank k. The corresponding sub 3 contains
+at least 2 to the k elements. And this can be seen by realizing that
+the past compression does not affect any root nodes. I mean,
+if we have a root node whose height is k, then no matter how many times and
+for which nodes in these sub tree we call find with path compression,
+all this nodes are still in this subtree rooted at this nodes
+exactly because this node is a root. So any node from this
+subtree cannot be attached to some other vertex and
+some other subtree. This node is still, so once again if
+we have a node who is still a root and whose rank is k, then the corresponding
+subtree contains at least 2 to the k elements, 2 to the k nodes. On this slide we discuss a few
+more important properties. The first one of them says that we have, in our forest, at most n divided
+by 2 to the k nodes of rank k. Why is that? Well, recall that if we
+create a new node of rank k then it was created by merging
+two nodes of rank k-1. Okay. So we know that currently
+this node is a root. At the same time, we know that the correspondence subtree
+contains at least 2 to the k nodes. If we have another another node of rank k. Then it also contains at
+least 2 to the k nodes. Which means that if we
+have too many such nodes. I mean, too many nodes of rank k. By saying too many, I mean that its number
+is greater than n divided by 2 to the k. Then overall, we have more than n element. Which is a contradiction, right? The second property is that,
+when we go up, the rank strictly increases. Well, this was clear if we
+do not use past compression. I mean, if rank is equal to the height
+of the corresponding subtree, then this is completely clear. Let me recall that if we have for
+example a tree of height two,
+then the height of this tree is two. The height of this subtree is one. The height of this subtree is zero. Let's say this is element 5. This is 4. This is 8. Now we have passed compression, so we need to check what happens
+when we compress some paths. If we call Find(5), for example, then
+we'll be reattached to the current root. But it will still be 2. That the rank of the parent. So let me fix this. This is node 8. The rank of the parent is strictly greater than the rank of a child. The last property is,
+says that when a node becomes an internal node it will be
+an internal node forever, right. It will not have a chance to become
+a root and this is just because the find operation doesn't
+change any roots in our forest. While union operation takes two roots and makes one of them a child
+of the other one. So it takes two roots and
+leaves only one root. Okay. So once again when a vertex
+becomes an internal vertex, a non root vertex,
+it will be a non root vertex forever. We now start to estimate
+the running time of M operations. First of all note that the union operation boils down to T(all calls
+to FInd) operation. And also to some constant operations. Namely, when we have two roots
+that were found by two calls to. To find that operation, we need to hank one of them below other
+one which is a constant operation. We just need to change one parent. And also possibly we need
+to change the rank value. Okay. So for this reason when estimating
+the total running time we will just assume that we have m calls to find operation. Paths node that each Find
+operation traverses some pass from a note to find the root
+of the corresponding tree. So we traverse some number of edges. So the total run in time of
+all the defind operations, of all the calls to defind operation is
+just the total number of edges traversed. So this is what is written here,
+we just need to count the number of edges from parent a node
+i through it's paring j, at traverse you know these codes. For technical reasons we will split
+this number into three terms. In the first term we will
+account all the edges that lead from a vertex to the node to
+the root of the corresponding tree. So the first term includes
+all the edges that lead from a node to another node,
+which is the root in this case. The second term include all the remaining
+edges where we go from i to j. Such as there log* of rank of a is strictly smaller than
+log* of rank of j, okay? And their remaining term accounts for
+everything else, namely for all the edges where we go
+from i to j such that j is not the root. And that log*(rank[i]) = log*(rank[j])). We're going to show separately for
+each of these terms that it is upper bounded by big 0 of m
+multiplied by log star of m. Let me show this on
+a small example as usual. Assumes that we have such a path
+that we're going to traverse. A path from the node at the bottom to
+the root of the corresponding tree. So the numbers shown here indicate
+the ranks of the corresponding nodes. Then these two nodes, these two edges
+will be accounted in the first term. Just because these two nodes lead from
+a node to the root this thread just lead from a node to the root of
+the corresponding tree. Well, this edge for
+example will be accounted in the last term because the rank
+of this node is 17 and the rank of this node is 21. And log star of this numbers are equal. At the same time, here we have 14
+the rank 14, and here we have rank 17. And the log star of these
+two numbers are different. For this reason this hatch will be
+accounted in the second term, okay? So on the next sequence of slides, we are going to estimate separately
+each of these three terms. And for each of them, we are going to
+show that it is at most big O of m multiplied by log* of m. The first term is easy to estimate. Recall that in this term we account for
+all the edges traversed by find operation. Where we go from node i to its
+parent j such that j is the root. Clearly for
+each call to find the operation there are at most two side edges, right? Which means that we have
+an upper bound big O of m. In the second term, we need to estimate
+that a long number of edges traversed it during all m calls
+to the find operation. Such that we go from node i to its
+parent j such that j is not the root and also log star of rank of i is strictly
+less than log star of rank of j. We're going to prove here that
+it is upper bounded by big O of m multiplied by log star of n. And this is just because,
+when we go up from some node to the root of the corresponding tree,
+the rank always increases. However, the rank of the root is at most
+log n, which means that during one call to find procedure the lock star of rank
+can only increase log star of n times. Okay. This is just because we've had an upper
+bound for the rank of the root. It is upper bounded by log
+m which means that there are only log star of m
+different possibilities for log star of rank of folds and
+nodes on this. Which means, that these can only increase,
+at most, log star of m times. And we have at most,
+m calls to find the operations. Which gives us, an upper bound m,
+to get, m multiplied by log star of m. Now it remains to estimate the last term. Where we account for all the address traversed during
+m calls to the find operations. Where we go from node i to node j through
+its parent j such that j is not the root, first of all. And then the rank, the log star of rank
+of i is equal to log star of n of j. What we're going to show is that
+the total number of side edges is upper bounded by big O of m
+multiplied by log star of m. Note that this is even
+better than what we need. What we need is a recap upper
+bound which is m log star of n. Recall that we know that m is greater
+than m just because m is the total number of operations, while n is the number
+of calls to make said operations. To estimate the required term, consider
+a particular node i and assume for completeness that it's rank lies in an
+interval from k plus one to two to the k. Recall that this was the form of interval through which the lock
+star function is fixed. Okay? Now let's compute the total number of
+nodes whose rank lies in section interval. So we know that the total
+number of nodes whose rank is equal to k plus one is at most n
+divided by two, to the k plus one. So total number of nodes was ranked equal
+to k plus two is at most n divided by two, to k plus two. And so on, so the total number
+of nodes whose rank lies in this interval is at most n
+divided by two to the k. Okay.
+The next stop equation is that each time when we call Find of i, it is adopted
+by a new parent and since it is new. So, at this point we know that if we have
+a node i and its parent j is not the root. Yes, this is essential. Which means that when we go up we find
+another root when we cofind a Find of i. And at this point we will
+reattach node i to this new root. And this new root has
+strictly larger rank. And this in turn means that after
+most 2 to the k calls to find of i. Find(i) will be adopted by a new parent whose rank, for sure,
+does not lie in this interval. Just because the rank of this
+interval is at most 2 to the k. So if we increase the rank
+of the parent of i, at least 2 to the k times, it will
+be greater than 2 to the k for sure. Right. We now have everything
+to conclude this proof. To conclude estimating the required term. Recall that we are estimating
+the total number of address traversed during n calls to client. Where we go from a node i to its parent j, such that log star of rank of a is
+equal to log star of rank of j. So we have just proved that there are at
+most n divided by 2 to the k nodes whose rank lies in the interval
+from k plus 1 to 2 to the k. We then explained why Any such node
+whose rank lies in such an interval, contributes, at most, 2 to the k to
+the term that we are currently estimating. This means that just all the nodes from,
+whose rank lies in such an interval. Contributes, at most big O
+of N to this term, right? Now it remains to note that the total
+number of different intervals is at most log star of n. Which means that the total contribution
+of all such nodes i to the estimated term is at most big O of n
+Multiplied by log star of n. We now conclude the whole lesson. So in this lesson we considered it
+an implementation of the joins of data structure where each set
+is represented by a tree. And for
+this reason we have a forest of trees. The ID of each set is just the root
+of the corresponding tree. We then consider it to heuristics. The first one is called Union by rank. It says that when merging two trees,
+it makes sense to attach a shorter one to the root of a taller one,
+okay? This helps to keep trees
+in our forest shallow. And for this we keep the rank
+of each subtree rooted at a particular node in
+a separate array called rank. We then discussed another heuristic
+which is called Path compression. The idea is the following. When we traversed a path from a node
+to the root of the corresponding tree, we may want to reattach all the nodes
+found on this path directly to the root. Because this potentially will save us
+time for further find operations, right. We then proved that the resulting
+implementation turns out to be extremely efficient, namely the amortized running time of each
+operation is big O of log star of n. And log star of n is an extremely
+slowly growing function. In particular, log* n is at most five for
+all practical values of n.

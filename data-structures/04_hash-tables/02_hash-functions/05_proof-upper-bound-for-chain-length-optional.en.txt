@@ -1,0 +1,96 @@
+Hi, in this video, you will learn how to
+prove the upper bound on the expected chain length in the hash
+table using chaining and a hash function from
+the universal hash family. This proof is needed to be
+confident that our hash tables will work fast in practice. The proof will use some advanced math,
+which we won't cover, but this video is optional. We will use probabilities,
+mathematical expectation, and the linearity of expectations. First, let us recall what
+is a universal family. So if U is the universe, the set of all
+possible keys that we want to store and calligraphic H is the set of function from
+this universe to the set of numbers from 0 to m- 1, where m is the selected
+cardinality of the hash function. Then this set, calligraphic H,
+is called universal family, if for any two different keys from the universe,
+the probability of collision for a random hash function on these
+two keys is at most 1 over m. What do we mean by probability? It is taken over the random choice of a
+hash function from the set calligraphic H. Or in other words, the reformulation
+of this definition is that for any two different keys, x and y from
+the universe, at most 1 over m part of all hash functions in calligraphic H
+produce a collision on these two keys. Let's also recall what is a load factor. You have a hash table of size m,
+storing n keys. Then n/m is denoted by alpha and
+called load factor. That measures how filled up is your table. If you store just one key in a hash table
+of size 10, then load factor is 0.1. And if you store nine keys in a hash table
+of size 10, then the load factor is 0.9. We'll also use the property
+called linearity of expectation. It says that for any finite set of
+random variables, x1 through xk, the random variable y, which is equal
+to sum of these random variables, has expectation which is equal to the sum
+of expectations of these random variables. We won't prove it, we will use it
+as a fact from probability theorem. Now the main theorem
+is that if you select, at random, a hash function from
+a universal family, calligraphic H and it is used to hash n keys into hash table
+T of size m giving load factor alpha. Then for any key k,
+the expected length of the chain in table t which contains
+key k if it stored in it, is at most 1 + alpha. What it means is that on average
+the length of the chain containing any key will be just 1 + alpha,
+which is not too long. Of course, in the worst case,
+the chain containing some key can be very, very long such as n keys, and
+all of them are in the same chain. But, on average, if it's like the random
+hash function from the universal family, the chain length will be at most 1 +
+alpha, where alpha is the lowest factor. So to prove that, we fix some arbitrary
+key k and consider all other keys l and define a random variable
+Xkl which takes value of 1 if the hash value of k is
+equal to hash value of l, if there's a collision between keys k and
+l. And it takes value zero otherwise. Let's estimate the expectation
+of this random variable. It just takes two different value,
+so we need first to multiply, the first one is zero by the probability
+of zero, but we will anyway get zero. And we need to add 1 multiplied
+by the probability of 1, which is the same as the probability
+of collision and we know that for a universal family that
+probability is at most 1 over m. So expectation of Xkl for k and any l
+different from k is at most 1 over m. Now let's estimate the number
+of collisions, and we denote by Yk the number of collisions that k has
+with different keys l in the table. And to do that,
+we can just sum variables Xkl for all l which are different from key,
+and are in the table T. Why is that? Because when a collision happens for
+some key l different from k, variable Xkl takes value 1. Otherwise, it takes value 0. So the sum of all these variables is just
+the number of collisions with key k. Then the length of the chain containing
+key k, potentially, in the table T, is 1. Because this key itself
+could be in the table. Plus the number of collisions
+with different keys, which is Yk. So the expectation of the number of
+collisions is by the property of linearity of expectation, equal to the sum
+of expectations of variables Xkl. And we have an upper bound on the
+expectation of each of those variables, which is 1 over m. So this sum is at most sum for all keys l different from k which
+are in the table T of value 1 over m. And there are at most n
+summands in this sum. Because the size, the number of
+keys in the hash table T, Is n. So at most n of them are both on
+the table and different from k. So this sum is at most n over m. And that is the same as alpha,
+the load factor. And so the expectation of the chain
+length is the expectation of 1 + Yk, and by linearity, is the same as the
+expectation of 1 plus expectation of Yk. But expectation of constant 1 is just 1,
+and expectation of Yk we've just
+estimated from above, and so we have an upper bound on the expected
+chain length, which is 1 + alpha. So we proved our theorem. Now here is a corollary from this theorem, which basically says that if you
+work with your hash table right, then your operations will on
+average run in constant time. More formally, if you do some n
+operations with your hash table which include insertions,
+deletions and modifications, but the total number of insertions is big O of
+m, where m is the size of the hash table. Then, the total time to make all those
+operations will be big theta of n. Well, of course it will be at
+least m to make n operations, but it will be at most proportional to m. And thus the amortized time for each
+operation will be big O of 1 on average. Let's prove this corollary. We have big O of m insertions, so the total number of keys stored at
+any moment is, at most, big O of m. n is big O of m. And then alpha, which is m over m,
+must be big O of 1, must be constant. And then 1 +alpha, our upper bound on the expected
+chain length, is also big O of one. And it means that on average, the expected training time of
+the operation, is big O of one. And then when we sum the expectations for running time of each operation we get the
+expected running time of all n operations, again by linearative expectations. And so the expected running time
+of n operations is big theta of n, because it's big O of n,
+and also it is at least n. In conclusion, we've just proved upper bound 1 +
+alpha on the expected chain length. In the case when we use a hash
+table with chaining scheme and select a random hash function
+from a universal family. And we've also proven constant
+amortized expected running time for operations with a hash table,
+If you use universal family and chaining and you don't put too
+many keys on your hash table. Basically if you keep your loss factor
+below 1, as we discussed in one of the previous videos, then your operations
+on average run in constant time. And in the next video, we'll also prove
+that the set of hash functions that was suggested as a universal family for
+integers is really a universal family. We will prove that formally.

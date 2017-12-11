@@ -1,0 +1,549 @@
+1
+00:00:01,610 --> 00:00:02,690
+Now let's talk about queues.
+
+2
+00:00:03,700 --> 00:00:09,870
+So, a queue has some
+similarities with a stack.
+
+3
+00:00:09,870 --> 00:00:11,170
+But in a fundamental way is different.
+
+4
+00:00:11,170 --> 00:00:14,760
+So it's an abstract data type and
+these are the operations that it has.
+
+5
+00:00:14,760 --> 00:00:20,130
+You can Enqueue a key,
+it adds the key to the collection.
+
+6
+00:00:20,130 --> 00:00:25,420
+And then when you Dequeue, that gives you
+back a key and removes it from the queue.
+
+7
+00:00:26,520 --> 00:00:30,280
+It removes and
+returns the least recently added key,
+
+8
+00:00:30,280 --> 00:00:33,040
+rather than in the case of a stack,
+the most recently added key.
+
+9
+00:00:33,040 --> 00:00:35,300
+So that's the fundamental difference.
+
+10
+00:00:35,300 --> 00:00:38,200
+If you think about queues as
+like queuing up in line or
+
+11
+00:00:38,200 --> 00:00:42,630
+waiting in line, this is a first
+come first serve situation.
+
+12
+00:00:42,630 --> 00:00:46,850
+So the longer you've been waiting in line,
+so
+
+13
+00:00:46,850 --> 00:00:49,730
+the longest person waiting in line
+is the next person to be served.
+
+14
+00:00:49,730 --> 00:00:50,940
+Makes sense.
+
+15
+00:00:50,940 --> 00:00:56,450
+So you can imagine if you
+had a grocery store that had
+
+16
+00:00:56,450 --> 00:01:00,820
+a stack that it used for serving people,
+people would be pretty annoyed, right?
+
+17
+00:01:00,820 --> 00:01:02,170
+Because the person who'd just arrived,
+
+18
+00:01:02,170 --> 00:01:05,420
+you've been waiting in line ten minutes,
+a person just arrives,
+
+19
+00:01:05,420 --> 00:01:08,510
+they get served before you do,
+that would not make you happy.
+
+20
+00:01:08,510 --> 00:01:12,800
+So, queues are very useful for instance,
+for things like servers.
+
+21
+00:01:12,800 --> 00:01:15,940
+Where you've got a bunch
+of operations coming in and
+
+22
+00:01:15,940 --> 00:01:19,510
+you want to service the one
+that's been waiting the longest.
+
+23
+00:01:20,720 --> 00:01:25,510
+The other operation is you can find
+out whether the queue is empty or not.
+
+24
+00:01:25,510 --> 00:01:28,300
+So these are often called FIFO,
+first in, first out,
+
+25
+00:01:28,300 --> 00:01:32,380
+and this distinguishes them
+from stacks which are LIFO.
+
+26
+00:01:32,380 --> 00:01:34,590
+Last in, first out.
+
+27
+00:01:34,590 --> 00:01:37,870
+First in first out, or
+first come first serve, same thing.
+
+28
+00:01:40,360 --> 00:01:41,270
+How can you implement a queue?
+
+29
+00:01:41,270 --> 00:01:45,175
+Well, one way is with a linked list,
+where you have a head and a tail pointer.
+
+30
+00:01:45,175 --> 00:01:48,575
+So let's say we start out
+with an empty linked list.
+
+31
+00:01:48,575 --> 00:01:54,133
+We can go ahead and Enqueue, and what
+we're going to do basically in an Enqueue,
+
+32
+00:01:54,133 --> 00:01:57,890
+is we are going to push to
+the back of the linked list, so
+
+33
+00:01:57,890 --> 00:02:00,701
+that's how we'll implement Enqueue.
+
+34
+00:02:00,701 --> 00:02:03,797
+So here, we Enqueue (a), it's now at
+the back of the linked list.
+
+35
+00:02:03,797 --> 00:02:07,083
+If we Enqueue (b),
+it's going to be then added, again,
+
+36
+00:02:07,083 --> 00:02:08,739
+at the end of the linked list.
+
+37
+00:02:09,900 --> 00:02:10,970
+Is it empty?
+No.
+
+38
+00:02:10,970 --> 00:02:12,680
+How do we know it's not empty?
+
+39
+00:02:12,680 --> 00:02:15,750
+Well the simplest thing is we would just
+call to the underlying list implementation
+
+40
+00:02:15,750 --> 00:02:16,990
+and say hey, list are you empty?
+
+41
+00:02:16,990 --> 00:02:17,760
+It would say no.
+
+42
+00:02:17,760 --> 00:02:20,620
+And so empty for the queue is no.
+
+43
+00:02:20,620 --> 00:02:25,088
+We know it's really happening just by
+checking whether the head is nil or not.
+
+44
+00:02:25,088 --> 00:02:32,060
+If we Enqueue(c) then,
+again it goes to the tail of the list.
+
+45
+00:02:32,060 --> 00:02:34,360
+And if I now Dequeue,
+which one is going to be removed?
+
+46
+00:02:34,360 --> 00:02:38,480
+Again this is not a stack,
+in a stack c would be removed.
+
+47
+00:02:38,480 --> 00:02:41,540
+In our case, (a) is going to be removed
+because it's been there longest.
+
+48
+00:02:41,540 --> 00:02:44,760
+That's just an implementation
+of popping from the front.
+
+49
+00:02:47,010 --> 00:02:47,930
+So that would return (a).
+
+50
+00:02:49,430 --> 00:02:53,348
+We can now do some more Enqueueing,
+Enqueue(d), Enqueue(e),
+
+51
+00:02:53,348 --> 00:02:57,160
+Enqueue(f), and now if we start
+Dequeueing, we Dequeue from the front.
+
+52
+00:02:58,330 --> 00:03:03,298
+So Dequeuing (b), Dequeuing (c),
+Dequeuing (d), Dequeuing (e), and
+
+53
+00:03:03,298 --> 00:03:05,670
+finally Dequeuing (f).
+
+54
+00:03:05,670 --> 00:03:10,400
+If we ask whether the queue is empty now,
+the answer is yes.
+
+55
+00:03:10,400 --> 00:03:14,470
+Again, because the head is nil.
+
+56
+00:03:14,470 --> 00:03:19,160
+So Enqueue uses list's PushBack call and
+Dequeue uses both the list's
+
+57
+00:03:19,160 --> 00:03:24,080
+TopFront to get the front element as well
+as PopFront to remove that front element.
+
+58
+00:03:25,300 --> 00:03:28,360
+And Empty just uses the list's Empty method.
+
+59
+00:03:30,040 --> 00:03:30,790
+What about with an array?
+
+60
+00:03:30,790 --> 00:03:33,980
+We could think of doing something similar.
+
+61
+00:03:33,980 --> 00:03:37,890
+That is, we could add at the end and
+then pop from the front.
+
+62
+00:03:37,890 --> 00:03:39,610
+But you can imagine, so,
+
+63
+00:03:39,610 --> 00:03:44,790
+we said the front of the array
+is the beginning of the queue.
+
+64
+00:03:46,100 --> 00:03:50,460
+Then enqeueing is easy, but dequeuing
+would be an expensive O(n) operation.
+
+65
+00:03:50,460 --> 00:03:51,930
+And we want enqeueing to be O(1).
+
+66
+00:03:51,930 --> 00:03:56,980
+We can do that, in a fashion I'll
+show you right now which is basically
+
+67
+00:03:56,980 --> 00:04:02,070
+keeping track of sort of
+the array as a circular array.
+
+68
+00:04:02,070 --> 00:04:05,208
+So we're going to go ahead and
+Enqeue (a), and we have a write index.
+
+69
+00:04:05,208 --> 00:04:09,150
+And the write index tells us where the
+next Enqueue operation should happen.
+
+70
+00:04:09,150 --> 00:04:12,800
+And the read tells us where the next
+Dequeue operation should happen.
+
+71
+00:04:12,800 --> 00:04:16,510
+So we Enqueue a, we Enqueue b,
+and now update our write index.
+
+72
+00:04:17,740 --> 00:04:19,060
+If we ask whether we're empty?
+
+73
+00:04:19,060 --> 00:04:21,400
+No, we're not empty because
+read is not equal to write.
+
+74
+00:04:21,400 --> 00:04:26,020
+That is we have something to
+Dequeue that has been Enqueued.
+
+75
+00:04:28,270 --> 00:04:29,718
+So Empty would be false.
+
+76
+00:04:29,718 --> 00:04:34,540
+We Enqueue (c), we Dequeue,
+again we're going to Dequeue (a), so
+
+77
+00:04:34,540 --> 00:04:36,410
+we Dequeue from the read index.
+
+78
+00:04:36,410 --> 00:04:39,920
+So we basically read what's at the read
+index and then increment the read index.
+
+79
+00:04:42,090 --> 00:04:46,460
+If we now Dequeue again, we read what's
+at the read index which is (b) and
+
+80
+00:04:46,460 --> 00:04:48,110
+we increment the read index.
+
+81
+00:04:48,110 --> 00:04:51,570
+Now we will do some more Enqueueing.
+
+82
+00:04:51,570 --> 00:04:55,890
+Notice at this point that when we
+Enqueue(d), the write index is 4,
+
+83
+00:04:55,890 --> 00:05:01,410
+that's the next place we're going to
+Enqueue(e), which will have us write
+
+84
+00:05:01,410 --> 00:05:06,420
+to the index 4 and then the write index
+wraps back around to the initial element.
+
+85
+00:05:09,610 --> 00:05:13,830
+And, here it's important to note we're
+using zero based indexing with this array
+
+86
+00:05:13,830 --> 00:05:15,640
+because of the fact that
+the first element is zero.
+
+87
+00:05:16,960 --> 00:05:19,850
+We Enqueue again, Enqueue (f), and
+
+88
+00:05:19,850 --> 00:05:23,860
+now if we try Enqueue (g),
+it's not going to allow us to do that.
+
+89
+00:05:23,860 --> 00:05:25,100
+So that will be an error.
+
+90
+00:05:25,100 --> 00:05:28,957
+The reason it would be an error,
+is if we did Enqueue(g), the read and
+
+91
+00:05:28,957 --> 00:05:30,961
+the write index would be both be 2.
+
+92
+00:05:30,961 --> 00:05:35,400
+And it would be hard to distinguish read
+and write index 2 because the queue is
+
+93
+00:05:35,400 --> 00:05:39,490
+full, or read and write index
+both 2 because the queue is empty.
+
+94
+00:05:39,490 --> 00:05:43,980
+So therefore, we have a buffer of at least
+one element that can't be written to,
+
+95
+00:05:43,980 --> 00:05:46,090
+to make sure read and
+write are separate and
+
+96
+00:05:46,090 --> 00:05:50,580
+distinct if the queue's not empty.
+
+97
+00:05:50,580 --> 00:05:53,370
+Now we'll Dequeue, so
+we'll Dequeue (c), basically reading from
+
+98
+00:05:53,370 --> 00:05:54,770
+the read index and updating it.
+
+99
+00:05:54,770 --> 00:05:57,670
+Dequeue (d),
+read from the read index and update it.
+
+100
+00:05:57,670 --> 00:06:04,380
+Dequeue (e) and here again,
+the read index wraps around back to 0.
+
+101
+00:06:04,380 --> 00:06:07,360
+And now finally, we do our final
+Dequeue and now the read and
+
+102
+00:06:07,360 --> 00:06:09,190
+write index are both 1.
+
+103
+00:06:09,190 --> 00:06:13,160
+Which means if we ask whether Dequeue is
+empty, the answer is yes, it is empty.
+
+104
+00:06:14,590 --> 00:06:19,111
+So what we see here is that the cost for
+doing a Dequeue and
+
+105
+00:06:19,111 --> 00:06:23,790
+an Enqueue, as well of course as Empty,
+are all O(1) operations this way.
+
+106
+00:06:25,670 --> 00:06:27,330
+So we can use either a linked list,
+
+107
+00:06:27,330 --> 00:06:31,330
+although we have to have a tail pointer,
+so that PushBack is cheap, or an array.
+
+108
+00:06:32,670 --> 00:06:34,350
+Each of the operations is O(1).
+
+109
+00:06:34,350 --> 00:06:39,260
+One distinction between the array and
+the linked list implementation, is
+
+110
+00:06:39,260 --> 00:06:43,320
+that in the array implementation, we have
+a maximum size that the queue can grow to.
+
+111
+00:06:43,320 --> 00:06:44,130
+So it's bounded.
+
+112
+00:06:45,430 --> 00:06:49,270
+Maybe you want that in which case
+it's fine, but if you don't know a priori
+
+113
+00:06:49,270 --> 00:06:54,450
+how long the queue you need is
+going to be an array is a bad choice.
+
+114
+00:06:54,450 --> 00:06:57,930
+And any amount that is
+unused is wasted space.
+
+115
+00:06:59,485 --> 00:07:03,125
+In a queue that's implemented
+with a linked list,
+
+116
+00:07:03,125 --> 00:07:06,745
+it can get arbitrarily large as
+long as there's available memory.
+
+117
+00:07:06,745 --> 00:07:11,675
+The downside is, every element you
+have to pay for another pointer.

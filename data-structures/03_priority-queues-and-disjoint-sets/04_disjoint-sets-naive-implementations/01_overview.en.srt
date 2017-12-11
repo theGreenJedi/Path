@@ -1,0 +1,467 @@
+1
+00:00:00,260 --> 00:00:04,460
+Hello and welcome to the next lesson
+of the data structures class.
+
+2
+00:00:04,460 --> 00:00:06,790
+It is devoted to disjoint sets.
+
+3
+00:00:07,950 --> 00:00:12,130
+As a first motivating example, consider
+the following maze shown on the slide.
+
+4
+00:00:12,130 --> 00:00:16,270
+It is basically just a grid
+of cells with walls between
+
+5
+00:00:16,270 --> 00:00:18,540
+some pairs of adjacent cells.
+
+6
+00:00:18,540 --> 00:00:22,920
+A natural question for
+such a maze is given two points,
+
+7
+00:00:22,920 --> 00:00:28,170
+given two cells in this maze whether
+there is a path between them.
+
+8
+00:00:28,170 --> 00:00:33,340
+For example for these two points for
+these two cells shown on these slides
+
+9
+00:00:33,340 --> 00:00:37,220
+there is a path and
+it is not too difficult to construct it.
+
+10
+00:00:37,220 --> 00:00:38,850
+Let's do this together.
+
+11
+00:00:38,850 --> 00:00:45,510
+So this is, we can go as follows.
+
+12
+00:00:49,959 --> 00:00:55,037
+And there is actually another path here,
+
+13
+00:00:55,037 --> 00:00:57,945
+we can also go this way.
+
+14
+00:00:59,431 --> 00:01:00,690
+Great.
+
+15
+00:01:00,690 --> 00:01:01,980
+On the other hand,
+
+16
+00:01:01,980 --> 00:01:06,870
+there is no path between these two points
+shown on the slide and to show this
+
+17
+00:01:06,870 --> 00:01:12,410
+we might want to construct just a set of
+all points that are reachable from B.
+
+18
+00:01:12,410 --> 00:01:15,190
+Let's again do this, so
+
+19
+00:01:15,190 --> 00:01:20,380
+let's just mark all the points
+that are reachable from B.
+
+20
+00:01:23,010 --> 00:01:25,640
+So it is not difficult
+to see that we marked
+
+21
+00:01:26,970 --> 00:01:30,370
+just every single point
+which is reachable from B.
+
+22
+00:01:30,370 --> 00:01:34,570
+And we now see that A does
+not belong to this set.
+
+23
+00:01:34,570 --> 00:01:38,870
+Which actually justifies that A is
+not reachable from B in this case.
+
+24
+00:01:39,870 --> 00:01:44,560
+The maze problem can be easily solved
+with the help of the disjoint set
+
+25
+00:01:44,560 --> 00:01:49,010
+data structure which supports
+the following three operations.
+
+26
+00:01:49,010 --> 00:01:51,260
+The first operation is called MakeSet.
+
+27
+00:01:51,260 --> 00:01:53,150
+It takes one argument x and
+
+28
+00:01:53,150 --> 00:01:58,550
+it creates just a set of size
+one containing this element x.
+
+29
+00:02:00,140 --> 00:02:02,550
+The second operation is called Find.
+
+30
+00:02:02,550 --> 00:02:10,580
+It takes an argument x and returns an ID
+of the set that contains this element x.
+
+31
+00:02:10,580 --> 00:02:15,720
+Well, we expect this ID to satisfy
+the following two natural properties.
+
+32
+00:02:15,720 --> 00:02:20,440
+If x and y, if two elements,
+x and y lie in the same set,
+
+33
+00:02:20,440 --> 00:02:28,020
+then we expect the operation Find to
+return the same ID was for x and y.
+
+34
+00:02:28,020 --> 00:02:31,230
+Well just because x and
+y lie in the same set, and
+
+35
+00:02:31,230 --> 00:02:35,880
+Find returns some identifier of this set,
+right?
+
+36
+00:02:35,880 --> 00:02:39,500
+If, on the other hand, x and
+y lie in different sets,
+
+37
+00:02:39,500 --> 00:02:44,340
+then Find(x) should not be
+equal to Find(y), right?
+
+38
+00:02:45,650 --> 00:02:50,650
+The last operation is called Union and
+it takes two arguments, x and y.
+
+39
+00:02:50,650 --> 00:02:56,356
+And then it considers two sets
+containing x and y, and it merges them.
+
+40
+00:02:56,356 --> 00:03:00,702
+In particular,
+if we just called Union(x,y) and
+
+41
+00:03:00,702 --> 00:03:05,170
+right after this we called Find(x) and
+Find(y).
+
+42
+00:03:05,170 --> 00:03:11,760
+Then these two call to Find operation
+should return exactly the same identifier.
+
+43
+00:03:11,760 --> 00:03:18,920
+Just because x and y after the call
+to union, lie in the same merged set.
+
+44
+00:03:18,920 --> 00:03:23,170
+Recall that our maze example
+shows a particular point B
+
+45
+00:03:23,170 --> 00:03:27,770
+is not reachable from a particular
+point A, we did the following.
+
+46
+00:03:27,770 --> 00:03:30,550
+We first constructed
+the region of all cells,
+
+47
+00:03:30,550 --> 00:03:33,530
+reachable from this point B in our maze.
+
+48
+00:03:33,530 --> 00:03:38,940
+We then just checked that a, that point
+a does not belong to this region.
+
+49
+00:03:38,940 --> 00:03:43,720
+So this was a justification of the fact
+that a is not reachable from b
+
+50
+00:03:43,720 --> 00:03:45,020
+in our maze.
+
+51
+00:03:45,020 --> 00:03:49,530
+And in fact, any maze can be
+partitioned into disjoint regions,
+
+52
+00:03:49,530 --> 00:03:55,330
+where in each region, between any
+two cells there is a path, right?
+
+53
+00:03:55,330 --> 00:04:00,185
+And using the disjoint sets data
+structure it is easy to partition any
+
+54
+00:04:00,185 --> 00:04:03,290
+maze into such disjoint regions.
+
+55
+00:04:03,290 --> 00:04:07,020
+We can do this by preprocess
+the maze as follows.
+
+56
+00:04:07,020 --> 00:04:12,940
+We first call MakeSet for
+all cells c in our maze.
+
+57
+00:04:12,940 --> 00:04:18,080
+This creates a separate region for
+each cell.
+
+58
+00:04:18,080 --> 00:04:23,180
+So initially we have as many regions
+as there are cells in our maze.
+
+59
+00:04:23,180 --> 00:04:24,300
+Then we do the following.
+
+60
+00:04:24,300 --> 00:04:28,240
+We go through all possible
+cells in our maze.
+
+61
+00:04:28,240 --> 00:04:30,478
+So when a cell C is fixed,
+
+62
+00:04:30,478 --> 00:04:36,460
+we also go through all possible
+neighbors of this cell in our maze.
+
+63
+00:04:36,460 --> 00:04:41,115
+We say that n is a neighbor of c
+if n is an adjacent cell of c and
+
+64
+00:04:41,115 --> 00:04:43,590
+there is no wall between them.
+
+65
+00:04:45,160 --> 00:04:51,090
+So at this point c belongs to some
+region and n belongs to some region and
+
+66
+00:04:51,090 --> 00:04:55,660
+we just discovered the fact that
+there is a path between c and n.
+
+67
+00:04:55,660 --> 00:04:59,390
+Which means that, actually,
+any cell from this region
+
+68
+00:04:59,390 --> 00:05:03,720
+is reachable from any cell
+from this region, right?
+
+69
+00:05:03,720 --> 00:05:08,840
+To reflect this fact,
+we just call Union(c,n).
+
+70
+00:05:08,840 --> 00:05:12,430
+This creates a separate set for
+these two regions.
+
+71
+00:05:12,430 --> 00:05:15,660
+This merges these two regions, right?
+
+72
+00:05:15,660 --> 00:05:21,780
+So after the call to this preprocess and
+procedure each region in this maze,
+
+73
+00:05:21,780 --> 00:05:25,690
+receives a unique ID, right?
+
+74
+00:05:25,690 --> 00:05:31,400
+So then to check whether a particular
+cell is reachable from other cell we just
+
+75
+00:05:31,400 --> 00:05:36,600
+need to check whether the Find operation
+returns the same for them or not.
+
+76
+00:05:38,050 --> 00:05:42,335
+To give another example of using
+the disjoint sets data structure,
+
+77
+00:05:42,335 --> 00:05:44,900
+assume that we're building a network.
+
+78
+00:05:46,030 --> 00:05:52,225
+In each area we have four machines we
+call MakeSet(1) for the first machine.
+
+79
+00:05:52,225 --> 00:05:56,210
+MakeSet(2) for the second machine,
+and so on, so,
+
+80
+00:05:56,210 --> 00:06:01,620
+to reflect the fact that initially,
+each machine lies in a separate set.
+
+81
+00:06:01,620 --> 00:06:06,550
+In particular, if we now check
+whether Find(1) is equal to Find(2),
+
+82
+00:06:06,550 --> 00:06:13,380
+then it is false just because 1 and
+2 lie in different sets.
+
+83
+00:06:13,380 --> 00:06:18,640
+Now, let's add a wire between the third
+machine and the fourth machine.
+
+84
+00:06:18,640 --> 00:06:23,366
+To notify our data structures that
+now 3 and 4 belong to the same set,
+
+85
+00:06:23,366 --> 00:06:28,490
+we call Union(3,4), okay?
+
+86
+00:06:28,490 --> 00:06:33,020
+Now let's introduce the fifth machine so
+we do this by calling MakeSet(5)
+
+87
+00:06:33,020 --> 00:06:37,701
+then let's add another wire between
+the second machine and the third machine.
+
+88
+00:06:37,701 --> 00:06:44,430
+To notify our data structure about
+this event we call Union(3,2).
+
+89
+00:06:44,430 --> 00:06:49,614
+If we now call Find(1) and
+Find(2), they should return,
+
+90
+00:06:49,614 --> 00:06:54,606
+these two calls should return
+different values because 2 and
+
+91
+00:06:54,606 --> 00:06:59,750
+1, machines 2 and
+1 still belong to different sets.
+
+92
+00:06:59,750 --> 00:07:04,757
+Okay, now we have the wire
+between the machines 1 and 4.
+
+93
+00:07:04,757 --> 00:07:11,723
+And now yes, to notify our data structure
+about this event we call Union(1,4),
+
+94
+00:07:11,723 --> 00:07:18,960
+and now if we check whether Find(1) is
+equal to Find(2) it should return true.
+
+95
+00:07:18,960 --> 00:07:26,190
+Just because now 1 and 2 lie in the same
+set that contains machine 1, 2, 3, and 4.
+
+96
+00:07:26,190 --> 00:07:31,240
+Later in this specialization,
+we will learn the Kruskal algorithm,
+
+97
+00:07:31,240 --> 00:07:36,032
+which builds a network of a given
+set of machines in an optimal way,
+
+98
+00:07:36,032 --> 00:07:40,073
+and uses the disjoint set
+data structure essentially.

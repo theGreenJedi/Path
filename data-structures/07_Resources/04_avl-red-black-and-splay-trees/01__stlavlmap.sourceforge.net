@@ -1,0 +1,151 @@
+<html>
+<head>
+<title>STL AVL Map</title>
+</head>
+
+<body>
+<h1>STL AVL Map</h1>
+
+<p>This is an implementation of AVL-tree-based map, multimap, set and multiset containers
+for gcc.</p>
+<p>Although there are more than one release, the AVL code didn't change since the first version.
+All changes made are to the interface headers, to make them as much compatible with the most
+recent GCC (3.4, 4.1, 4.3, etc). You can safely downgrade the library if you can't upgrade your
+gcc.</p>
+
+<p>The headers are based on libstdc++ v3 code, so the same license applies to them.
+The AVL operations (in <i>lib/tree.cpp</i>) were written by Daniel Köhler Osmari, and are 
+distributed under both GPLv3 and Boost licenses.</p>
+
+<h2>News</h2>
+<h3>2008-08-04</h3>
+<p>Version 1.3 was released, to make it compatible with gcc 4.3.</p>
+<h3>2007-02-07</h3>
+<p>Version 1.2 now is updated to correspond with libstdc++ supplied
+  with g++ 4.1.1.</p>
+
+
+<h2>Downloads</h2>
+<p>You can go the 
+<a href="http://sourceforge.net/projects/stlavlmap/">project page</a>
+to download this library.</p>
+
+<h2>Documentation</h2>
+
+<p>This is supposed to be a drop-in replacement for the
+ red-black tree provided by libstdc++. The package also
+ provides the original RB-tree (in the <i>tests</i> directory) to
+ allow a fair comparision (using "make check"); it also
+ builds a library, libavlmap.a that you can use side by side with
+the standard implementation.</p>
+
+<p>This is an example of code using it:</p>
+<pre>
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;iterator&gt;
+#include &lt;avl/set.h&gt;
+
+int main()
+{
+        avl::set&lt;int&gt; my_set;
+
+        my_set.insert(5);
+
+        avl::multiset&lt;int&gt; my_mset;
+        
+        my_mset.insert(2);
+        my_mset.insert(3);
+        my_mset.insert(2);
+
+        /* Now it should print:
+                2
+                2
+                3
+        */
+        std::copy(my_mset.begin(), my_mset.end(), std::ostream_iterator&lt;int&gt;(std::cout, "\n"));
+}
+</pre>
+<p>Note that the set, multiset, map and multimap containers are defined in the "avl" namespace.</p>
+
+<h2>Benchmarks</h2>
+<p>Here are some tests comparing some operations against the original libstdc++ Red-Black
+tree.</p>
+
+<table border=1 align="center">
+<tr><td><p>Core 2 Quad 2.4 GHz, 4 GB RAM<br>
+Linux kernel 2.6.24.52.6.24-server-2mnb<br>
+g++ 4.3.0</p>
+<pre>
+Test:   Insertion with hint
+AVL:    1400000 (1.4 s)
+RB:     1020000 (1.02 s)
+
+Test:   Random deletion
+AVL:    2900000 (2.9 s)
+RB:     2880000 (2.88 s)
+
+Test:   Random insertion
+AVL:    2880000 (2.88 s)
+RB:     3020000 (3.02 s)
+
+Test:   Ascending sorted insertion
+AVL:    2020000 (2.02 s)
+RB:     3990000 (3.99 s)
+
+Test:   Descending sorted insertion
+AVL:    2000000 (2 s)
+RB:     3920000 (3.92 s)
+
+Test:   Traverse ascending
+AVL:    9390000 (9.39 s)
+RB:     9580000 (9.58 s)
+
+Test:   Traverse descending
+AVL:    10050000 (10.05 s)
+RB:     10770000 (10.77 s)
+</pre>
+</td></tr></table>
+
+<table border=1 align="center">
+<tr><td><p>Athlon XP 2000 MHz, 256 MB RAM<br>
+Linux kernel 2.6.17-8mdv<br>
+g++ 4.1.1</p>
+<pre>
+Test:   Random deletion
+AVL:    13970000 (13.97 s)
+RB:     14350000 (14.35 s)
+
+Test:   Random insertion
+AVL:    8920000 (8.92 s)
+RB:     9470000 (9.47 s)
+
+Test:   Ascending sorted insertion
+AVL:    4500000 (4.5 s)
+RB:     6510000 (6.51 s)
+
+Test:   Descending sorted insertion
+AVL:    5080000 (5.08 s)
+RB:     7150000 (7.15 s)
+
+Test:   Traverse ascending
+AVL:    23720000 (23.72 s)
+RB:     23710000 (23.71 s)
+
+Test:   Traverse descending
+AVL:    25910000 (25.91 s)
+RB:     26060000 (26.06 s)
+</pre>
+</td></tr></table>
+
+
+<hr>
+<a href="http://sourceforge.net">
+<img src="http://sourceforge.net/sflogo.php?group_id=132935&amp;type=6"
+width="210" height="62" border="0" alt="SourceForge.net Logo" /></a>
+
+<p>Page created by <a href="mailto:danielosmari at users dot sourceforge.net">Daniel 
+K. O.</a></p>
+
+</body>
+</html>

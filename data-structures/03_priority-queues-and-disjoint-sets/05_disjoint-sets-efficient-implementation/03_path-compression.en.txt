@@ -1,0 +1,63 @@
+To build our Y intuition involves
+a second characteristic for the disjoint at the destruction. Let's again consider the example
+shown here on the slide. Assume that we call find of six. This will traverse the following path
+from six to the root of this tree. So let's know that in this
+case we find the root of three that contains element six,
+but we also find the root of the tree that contains element 12 and
+contains element three. In general, by reversing this
+path we find the root for all the elements on this path. So, why lose this information? Let's just store it somehow. And one way to do this, for example, is to re-attach all these notes directly
+to the root, we can do this as follows. Now as you can see
+the parent of element 12 for example is five, and also the parent
+of element six is also five. We've just attached them
+directly to the root. And this can not only save
+us space in the future. Save us time, I'm sorry, in the future. For future calls of find operation. So this heuristic is
+called path compression. Implementing this heuristic I
+mean path compression heuristic, don't sound to be surprisingly simple. It is actually only three lines of code. Here we do the following. We first check whether i
+is equal to parent of i. If it is equal, if it is the root,
+then we will just return the result. If i is not the root,
+if i is not the root, we do the following. We call find recursively for
+the parent of the node i. This is done here. So we call find for
+the parent of the node i. It will return the root of
+the correspondent three. And then we set parent of i to
+be equal to the returned root. That is, we attach the node
+number i directly to the root. And we do this recursively for
+all the elements on this pass. Finally we return the new parent of i, which is now just the root
+of the corresponding tree. Before stating an upper bound on the
+running time of operations of our current implementations, we need to introduce
+the so-called iterated logarithm function, which is also denoted by log star of n. So by definition, iterated logarithm
+of n is the number of times the binary logarithm should be applied to n before
+we get a number which is at most one. Let me illustrate this with an example so n equal to one is a binary
+logarithm of n is equal to zero. We do not need to apply binary logarithm
+to get a number which is at most one, because n is already
+almost one in this case. For n equal to two, we need to apply binary logarithm once
+to get the number which is at most one. Mainly, if we apply binary algorithm
+to two we just get the number one. Okay for n equals to three and four, the binary algorithm is equal to two and
+so on. And for example, for
+the numbers shown here, two to the sixth,
+5536 If we apply binary logarithm once, then just by definition of binary
+logarithm we get this number, just 65536, which is two to 16, okay? So if we apply the binary logarithm once
+again we get 16, 16 is two to the four. If we apply the binary logarithm
+once again we get four. If we apply, again, we get two, and if we
+apply it finally once again, we get one. And at this point, we stop. So we applied the binary logarithm
+five times to get a number which is at most one, which ensures that for
+this number, two to the 65536 the log
+star is equal to five, okay? So, and this shows that for
+any practical value of n, the binary log, the log star function is, at most, five. Because this number is extremely huge. We will never see any value of m which is greater than this
+number in practical value. We will never get an input, a sequence
+that consists of so many elements. So theoretically speaking,
+the lock star function is not bound. It is not constant. So there are extremely huge numbers for
+which lock star is equal to ten or twenty or 100 and so on. However, for all practical values of n,
+log star of n is at most five. We're now ready to state an upper bound. Assume that we used both union by rank
+heuristic and past compression heuristic, and assume that we make m
+operations with our data structure, of which m are calls to the MakeSet
+does a MakeSet operation. Namely, we have n object, and
+we make m operations with them. Then the total running time of
+all these calls is O(mlog*n). Put it otherwise, the amortized running
+time of a single operation is O(log*n). And recalls it for all practical values
+of n, log star of n is at most five. Which means that we have
+a constant average time for a single operation for
+all practical values of n. So once again,
+log star theoretically speaking, log star function is not bound,
+however it is at most five for all practical values of n which makes our
+data structure very efficient in practice. We will prove this upper
+bound in the next video.

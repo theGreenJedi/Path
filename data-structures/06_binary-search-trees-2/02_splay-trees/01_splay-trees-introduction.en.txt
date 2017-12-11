@@ -1,0 +1,85 @@
+Hello everybody. Welcome back. Today we are going to talk about
+something a little different. Up until this point,
+we've talked about AVL trees, we've talked about how to keep them bound,
+and how to use them, to implement all of our binary search tree operations,
+and all of log on time pre-operations. But it turns out that there are a wide
+number of different binary search tree structures that give you different ways
+to ensure that your trees are balanced, there are trepes, there are red block
+trees, and today we're going to talk about splay trees as sort of another example
+of the types of things that you can do. And to motivate this suppose that, well,
+if you're searching for random elements, one after the other, you can actually show
+that no matter what splay your use or data, searcher you use it will always
+take at least log n time per operation. That's actually the best you can do. However, if some items are searched for
+more frequently than others, you might be able to do better. If you take the frequently
+queried items and put them close to the root,
+those items will be faster to search for. And some of the other items might
+be a little bit slower, but you should still be okay. To compare for example,
+we've got the unbalanced tree and the balanced one with the same entires. But you'll note that 1, 5 and 7 are much
+higher up in the unbalanced tree. Now if we search for random things, if we
+search for 11, 11 is much higher up in the balanced tree than the unbalanced one,
+so the unbalanced one is slower there. But when we search for 1, it takes a lot less time in
+the unbalanced case, we search for one again, we search for seven, it's again
+a lot cheaper in the unbalanced case. And if we do some sequence
+of searches well, it might turn out that's is actually
+cheaper to use the unbalanced tree than the balanced one if these
+elements that tend to be higher up in the unbalanced tree are searched for
+more frequently than other elements. So the idea here is that we'd like to have
+a search tree where we can put the commons searched common nodes near the root of the
+tree so that they are cheaper to look up. However, very often it will be the case
+that we won't know ahead of time which those commonly searched for
+nodes will be. And so if we, or in this situation we'll need an adaptive
+way to bring them close to the root. And one natural way to do it is every
+time you find a node in your tree you do something to rearrange the tree and
+bring that node up to the root. And that way at least heuristically,
+if there are elements that you search for frequently, then since you keep
+bringing them up to the root, they'll usually stay
+somewhat close to the root. And they'll be very cheap to access. So if we want to phrase this in a nice
+simple way, one thing that you could do is if you have your tree and you've
+got this node that you searched for, you could just bring it to the root
+by just rotating to the top. You rotate it up and again and
+again and again, and again until it ends up being the root. Unfortunately, this simple idea
+is actually not very good. As you'll note,
+we started with an unbalanced tree, but after we did this operation,
+the tree is still unbalanced. And in fact, if you keep doing this
+you'll get a bad sequence of inputs. You can note that there's this loop here,
+these five rearrangements of the tree. Where if you keep doing the appropriate
+search and then you rotate the searched for a note all the way to the top,
+they just go in this loop. And when this happens, if you count
+the total time it takes to perform the sequence of operations, it takes O of
+n squared time to perform n operations. And so the average time per operation
+is linear rather than logarithmic which is far to slow. So this rotate things up to the top
+doesn't actually work very well, we need something better. And for this we're going to make
+just a slight modification. The rotate to top algorithm basically
+says you look at the node and its parent and you rearrange them and
+then you, again, look at the node and its parent and rearrange them, and
+keep going until you get to the root. The modification,
+instead of just looking at the node and its parent, you're going to look at the
+node and its parent and its grandparent. And there are a few cases here. Firstly, there's the case where
+the node and its parent and grandparent are on the same side of it. This is called the zig-zig case. Then what we're going to do is we're
+going to elevate the node up so that it's now the parent of
+what was its old parent, and that's on top of what
+was the old grandparent. On the other hand,
+it could be that the parent and grandparent are on opposite sides of the
+nodes, what's known as the zig-zag case. Then you rearrange the tree as follows, so that the node is now the new parent
+parent of its old parent and grandparent. And finally there's one more case where
+the node's parent is actually the root node, so it doesn't have a grandparent. And then you actually just
+rotate the node up And so if we combine these operations, together
+we get what's called the splay operation. If you want to splay a node N, and this is a way of bringing the node
+N to the root of the tree, you determine which case you are in,
+the Zig-Zig, the Zig-Zag, or the Zig case. You apply the appropriate local
+operation to rearrange the tree. And then if the parent of
+the node is not null IE, if the node is not the root of
+the tree yet, you splay n again. And you just keep splaying until
+it gets to become the root. Okay so to make sure that we're
+on the same page with this. If the take the tree up top and
+we splay the highlighted node number 4, which of these three trees, A, B,
+or C, do we end up with afterwards? Well, the answer, here, is A. So, the point is, we start in this
+configuration, we note that we're, originally, in the zig, zig case,
+two, three, and then, four. So, we elevate four, such that three, and
+then, two come down from it, as children. And then we're in the zig zag case. One and five are on opposite sides of
+four so we elevate four, one and five are it's new children and three and two
+now hang off of one and that is exactly what we were supposed to end up with and
+so that is the answer to this question. Okay, so
+that's what the splay operation is. Next time we're going to talk about
+how to use the splay operation to rebalance your circuitry, and how to use it to perform all the basic
+binary circuitry operations efficiently. So I'll see you then.

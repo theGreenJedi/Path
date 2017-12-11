@@ -1,0 +1,121 @@
+Hello everybody, welcome back. Last time, we talked about AVL trees and showed that they can perform your
+basic binary search tree operations. But now we're going to introduce
+a couple of new operations and talk about how to implement them. So, another useful feature of binary
+search trees is in addition to being able to search them, there's also a bunch
+of sort of interesting ways that you could recombine them. And so we're going to discuss
+here two of these operations. One of them is merge, which takes two binary search trees and
+combines them into a single one. And the other one is split,
+which takes one binary search tree and breaks it into two. So, let's start with merge. And the idea is, in general,
+if you have two sorted lists and want to combined them into
+sort of a single sorted list. This is actually pretty slow,
+it's going to take O(n) time, because you sort of need to figure out
+how the lists interweave with each other. This is the thing you do in merge sort. However, there is a case where
+you can merge them a lot faster. And that's the case where they're
+separated from each other, where they're sort of, one's on one side,
+one's on the other side. And so, this is the case that
+merge is going to work with. So you're giving two trees, R1 and
+R2, or the roots of these trees. And they're going to need to have the
+property that all the keys in R1's tree are smaller than all of
+the keys in R2's tree. And if we're given this, we should then
+return the root of a new tree that had all of the elements of both of the trees. So just to review this condition that
+we have, of the three trees below, which of them can be properly
+merged with the one above? The answer is that only A can because all of the elements of A are less than
+all of the elements of the guy above. B has this problem that it's got a 9,
+and 9 is between 8 and 10 so
+it can't really be separated from them. And C has the problem that it has both 2,
+which is smaller than everything above, and 12 which is bigger
+than everything above. So, A is the only guy
+that actually works here. Okay, so
+how do you do this merge operation? Well, there's actually a case where
+it's super easy to merge trees and that's if,
+instead of just being given the two trees, we also have an extra node
+that we can use as the root. Because then you just have the node
+up top, you have the guys in R1, the small guys on the left of it, the guys
+in R2, the big guys on the right of it. That's your tree. So, the implementation,
+we'll call this function MergeWithRoot, is you let R1 be the left child of T,
+R2 be the right child of T. Let T be the parents of these two. If you need to do things
+involving restoring heights, you adjust those as appropriate,
+and then you return T. This takes O(1) time, very simple. The problem is, well,
+what if we're not given this extra node? Then there's actually
+a pretty simple solution. You find the largest element,
+of say, the left subtree. You remove that, and
+then turn it into the root of the new guy. And that works. So now if we want to merge R1 and R2, we're going to find the largest
+element of R1, call that T. You're going to delete T from its subtree,
+and then you're going to merge with root. And that works. The run time's a little bit worse. You have to spend O of the height
+time to find this node T, but other than that it's pretty efficient. So, just to review, we've got this tree, we find
+the biggest element to the left tree 8. We then delete it, and
+then we merge with root. That's all there is to it. Now if we didn't care about balance, that would be all we'd have
+to say about this operation. Unfortunately, this merge operation
+doesn't preserve balance properties. And the problem is that,
+well, the two trees, you didn't really touch them very much,
+so they stay balanced. But when you stick them both
+together under the same root, well, if one tree is much, much bigger
+than the other, suddenly the root is very, very unbalanced, and this is a problem. So we need a way to fix this. And there's actually a not
+very difficult way to do that. The idea is that we can't merge the, say, left subtree with the right subtree
+because the left one is way too big. So what we're going to do is not merge
+the whole guy with the whole guy here. We're going to have to find some node of
+approximately the same height as this guy on the right so that we can merge that. And so what we're going to do is, we're
+going to sort of climb down the sort of right edge of the bigger tree
+until we find a sub tree of the right height that we can merge
+with our guy on the other side. Okay, so how do we implement this? AVLTreeMergeWithRoot. What we're going to do is, if the heights
+of the two trees differ by at most 1, we can just merge with root as before. We then figure out what the height
+of T needs to be and return it. That simple. Otherwise though, what happens if say
+R1's height is bigger than R2's height? Well, what we want to do is we want to
+step down to instead of merging R1 with R2, we merge R1's right child with R2. So, we use merge with root to merge
+the right child with R2 at this T, and we get some new
+tree with root R prime. R prime we set back to be
+the right child of R1, and similarly set R1 to be the parent. And then we need to
+rebalance this at R1 because things might be off by a little bit, but
+it turns out not more than about one. We knew how to deal with that
+with our old rebalance operation. And than we return the root of the tree. If, on the other hand,
+R1's height is smaller than R2's height, we sort of do the same operation but
+on the opposite side. Okay, so, let's analyze this. Every step we take down the side
+of the tree decreases the height difference by either 1 or 2. So we're just going to keep decreasing
+the height difference until we're off by at most 1. Then we merge, and
+we soon have to go back up the chain. But the amount of time this takes
+isn't the depth of the tree, it's sort of the number of steps
+we need to take down the side. And that's approximately
+the difference in the two heights. And this will actualy
+be important in a bit. Okay, so that was the merge operation. Next, we're going to talk about sort
+of the opposite operation, split. Merge takes two trees and
+turns them into one. Split breaks one tree into two. What you do is you pick an element,
+say 6, and then you've got the tree consisting
+of all the elements less than 6, and then another one from all
+the elements bigger than 6. So split should take the root of a tree
+and the key x, and the output should be two different trees, one with all
+the elements less than x in your tree, and one with all of
+the elements bigger than x. Okay now,
+the idea is actually not so hard. What we're going to do is
+we're going to search for x, and then the search path,
+well it's got a few nodes on the path. And then it has a bunch of trees
+hanging off to the left of the path. These things are all going
+to be smaller than x. And it's going to have a bunch of trees
+hanging off to the right that are all going to be bigger than x. And so all we have to do is take
+these trees that are smaller than x, merge them all together,
+take these things bigger than x, merge them all together,
+and then we have two trees. So let's see how this works. So we're going to do this recursively. We're going to split at R,
+at this point x. If our root is null,
+if we just have the null tree, we just return a pair of null vectors,
+whatever. Next if x is less than
+the key at the root, what that means is that everything
+on the right is bigger than x. That's sort of all on the right. But the left side of the root,
+we need to split that in two. So we're going to recursively
+run split on R.Left, and that gives us two trees, R1 and R2. Now R1 is actually everything in
+the whole tree that's smaller than x. That half is done, but R2 needs to be combined with the whole
+right subtree of our original tree. So we run MergeWithRoot on R2 and
+R.Right with R as the root. Fortunately we have this extra nodes,
+uses the root. And this gives us an R3. And we can return R1 and R3 as our split. If X is bigger than the key, we can do
+the same thing on the opposite side. Hopefully you can figure that out. Okay, so
+the first thing to note is that if we, instead of just doing a MergeWithRoot,
+we used AVLMergeWithRoot. This insures that the two trees we
+produce are both balanced, which is good. Also if you look at the run
+time of this algorithm, well, the run time of AVLMergeWithRoot is O,
+the difference in the two heights. So we have to look at the difference
+between the biggest type and the next biggest and the next biggest and
+the one after that and so on. This sum actually telescopes, and the
+total run time is O of the maximum height of one of these trees we're trying
+to merge, which is just O(log(n)). And so we've got these two operation, merge combines trees,
+split breaks them in two, and both operations can be implemented
+in O(log(n)) time using AVL trees. So that's these two operations. Next time we're going to talk
+about a couple of applications. One of them's going to sort of talk about
+a way that we can make use of these split and merge in an interesting way.

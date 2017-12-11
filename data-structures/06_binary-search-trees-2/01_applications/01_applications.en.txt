@@ -1,0 +1,128 @@
+Hello everybody, welcome back. Today we're going to talk more about
+binary searches, in particular we're going to give a couple of applications
+to computing order statistics. And then a sort of additional
+use of binary search trees, to store assorted lists. Okay, so, there's some questions
+that you might want to ask. You've got a bunch of elements that
+are stored in this binary search tree data structure. They're assorted by some ordering. Things we might want to do. We might want to find
+the 7th largest element. Or maybe we want the median element,
+or the 25th percentile element. Now, these are all instances
+of an order statistic problem. We would like to be able to be given
+the root of the T tree and the number k, we should be able to return the kth
+smallest element stored in the T tree. So, the basic idea is that this
+is sort of a search problem. We sort of should treat it like one. But to do that we need to know
+which subtree to search in. So I mean, is the case smallest
+element in the left subtree? Well, the left subtree does store
+a bunch of the smallest elements. But the real question is,
+does it store k of them? If it stores at least, k,
+k's smallest element should be in there, otherwise it won't be. So the thing that we need to know, is how
+many elements are in the left subtree? And so, we really need a tree
+where we can easily tell how many elements are in each subtree. Well, there's an easy fix for that. You just add that as a new field. So N.Size should return the number
+of elements in the subtree of N. It's a new field, it stores that, it
+should satisfy the property, that the size of N is the size of the left subtree, and
+the size of the right subtree, plus one, all added together, where if you have
+null pointers, these have size zero. Okay? Now, we have to be a little bit careful,
+just like with the height, we couldn't just define this field and
+hope that it always has the right value. You actually need to do some work
+to make sure this stays correct. For example, when you perform a rotation,
+the sizes of various subtrees will change. Fortunately, only the sort of two nodes
+that you moved around, will actually have their subtree sizes changed, but
+you do need to deal with those. And so, we're going to have
+an operation called RecomputeSize, which just recomputes the size as the sum
+of the size of its left child, and the size of its right child, and one. And then to do a rotation,
+we should do this as we did before. But then we need to recompute the sizes
+of the two nodes that we rotated. And you need to make sure to do
+this in the right order, actually, because the size of the parent
+depends on the size of the child. So you need to recompute the child first. Okay, but once you got all
+the sizes of nodes stored, it's actually not hard to
+compute order statistics. So to compute the kth smallest
+element in your tree, R, what you do is we let s be the size
+of the left sub tree, R.Left.Size. Now, if k = s+1, they're exactly
+s things smaller than the root. The root is the s plus firsts
+smallest element, so we return R. Otherwise, if k < s + 1, the kth
+smallest element is in the left subtree, so recursively return the kth smallest
+element of our .Left subtree. On the other hand, if k > s+1,
+we need to look in the right subtree. Now unfortunately, it's no longer the kth
+smallest element of the right subtree, because there were already
+s+1 smaller elements. So what we actually need to
+compute is the k-s-1st smallest element in the right subtree. But with this minor adjustment,
+this algorithm works. The runtime is all of the height
+of the node that you search for, it's basically just a binary search. But we need to use these sizes of trees
+in order to just figure out which side to look at, instead of comparing the actual
+keys, but this works perfectly well. Now here's a puzzle that
+I'm going to give you. We're not going to do homework on this,
+but it's something you should think about. What we've shown you how to do is,
+given a rank, k, we can find the kth smallest node. How would you do the opposite? Given a node, figure out how many
+nodes in the tree are smaller than it. You can do it using this kind of thing,
+but it takes a little bit of thinking. Okay that was one problem. We're going to talk about one more
+application of binary search trees. And, this problem's a little bit weird,
+but it's going to introduce
+some very important ideas. So we have an array of squares,
+they're each colored black or white. And we want to be able to perform this
+flip operation, which what it does is it sort of points at some square, x,
+and every square after that index, it flips them from black to white,
+and white to black. So, in the array pictured, we're flipping
+the last four guys, and they go from being white, white, black, white,
+to being black, black, white, black. Okay. So, formally, we sort of want a data
+structure that maintains this. You can create an array of size n,
+you can ask for the color of the mth square, or
+you can fun this flip operation, which flips the color of all
+the squares after index x. Okay, those are the things
+we want to support. Now, we could do this by just having
+an array and storing all the colors. The problem is that the flip
+would be pretty slow. Because if you wanted to flip all of
+the things with index bigger than x, then there's no good way to do this. You just have to sort of go through every square of index bigger than x, and flip
+them, and that could take linear time. So it turns out that there's a nice way
+to use binary search trees to solve this. And this requires sort of
+a slightly different way of thinking about binary search trees. Up until now we thought of a search
+tree as sort of having a bunch of elements there stored, and
+they allow you to do searches on them. And so somehow you're given the keys, and
+the search tree allows you to find them. But there's another way to do it. And maybe a good way to illustrate it,
+is by looking at the logo for our course. So this is a binary search tree. Every node has a letter in it. But you'll note that this isn't
+sorted in terms of these letters. For example, O is the left child of I, but
+O comes after I in alphabetical order. These things aren't sorted alphabetically. On the other hand, you'll note that
+the binary search tree structure actually does tell you what order these
+letters are supposed to be going in. I mean, the smallest thing here should
+be A, because it's the left child, of the left child, of the left child,
+of the left child. Then L is the next smallest, then G,
+then O, R, I, then T, H, M, S. And so, it tells us what order these
+layers are supposed to be, and they spell algorithms. And that's the basic idea, that you can
+use a tree to store some sort of sorted list of things, in a convenient way. So, for
+example we have the following tree. There are no actual keys stored on them,
+but of this A, B, C, D, and E, one of these is the 5th
+smallest element in the tree. Which one is it? Well, it's D. I mean you sort of count
+the smallest sum left, then B, then this other thing,
+and D is the 5th smallest. Okay, so what's the point? How are we going to use
+this to do our flip arrays? What we're going to do is, instead
+of storing the sequence of black and white cells as an array,
+we're going to store it as a list. And in this list we're going to
+have a bunch of nodes, they're going to be colored black or
+white, fine. Actually, there's a bit of a clever thing. We're actually going to want two trees,
+one with the normal colors, and one with the opposite colors. And the reason for
+this is that when we want to do flips, we want to be able to replace
+things with their opposite colors. So, it helps to have everything
+opposited already stored somewhere. But now comes the really clever bit. If we wanted to do this flip operation,
+say we wanted to take the last three elements of our tree and flip all of
+their colors, well this second tree, this dual tree, the last three elements
+of that tree, have the opposite colors. So all that we need to do is swap the last
+three elements of the tree on the left, the last three elements of
+the tree on the right, and we have effectively swapped those colors. And what's even better is
+that using these merge and split operations from last time,
+we can actually do this. So let's see how this is implemented. Firstly, to create this thing,
+we just build two trees, where T1, all of the things are colored white,
+and T2, they're all colored black. Great. To find the color of the mth node, you just find the mth node within T1 and
+return its color. Great. The flip operation is the interesting bit. If we wanted to Flip(x), what you do is,
+you split T1 at x into two halves, and you split T2 at x, and
+then you merge them back together. But you merge the left half of T1,
+with the right half of T2, and you merge the left half of T2,
+with the right half of T1. And that effectively did move around
+the sort of last N bits, and it works. And so, as the moral,
+trees can actually be used for more than just performing
+searches on things. We can use them to store these
+sorted lists, and merge and split then become very
+interesting operations, in that they can allow us to
+recombine these lists in useful ways. Okay, so that's all for
+these applications. Next time we're going to sort of talk,
+we're going to give an optional lecture, and it's going to talk about
+an alternative way to implement many of these useful binary
+search tree operations. So, please come to that, it'll be
+interesting, but it's not really required. It's another way to do some of this stuff. But, I hope I'll see you there.

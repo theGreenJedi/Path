@@ -1,0 +1,69 @@
+In this video, we will study chaining, which is one of
+the most frequently used techniques for using hashing to store mappings from one
+type of object to another type of object. So, let us define a map. We often want to store mapping from
+some objects to some other object. For example, I'm mapping from
+IP addresses to integer numbers. Or from filenames to the physical
+location of those files on the disk. From student ID to
+the name of the student. Or from contact name in your phone
+book to the contact phone number. The general definition of
+a map from set of objects S to the set of values V is a data
+structure which has three methods. HasKey, which tells us
+whether there is an entry in the map corresponding
+to object O from set S. Method Get, which returns to us
+the value corresponding to the object O, if there is one. If there is no such value,
+it returns a special value telling us that there is no entry
+corresponding to this object O in the map. And the last method is set,
+the most important method, which sets the value
+corresponding to object O to V. Here, objects O are all from the set S and
+values V are from the set big V. We want to implement a map,
+using hash function, and some combination of ideas
+from direct addressing, and least based solution from
+one of the previous videos. So what we'll do is called chaining. We will create an array of size m, where m
+is the cardinality of the hash function, and in this case, let m be eight. This won't be an array of integers,
+though. This will be an array of lists. So in each cell of this array,
+we will store a list. And this will be a list of pairs. And each pair will consist of an object,
+O. And a value V,
+corresponding to this object. Let's look at an example. For example,
+our objects are IP addresses, and the values are the corresponding counters. As in our initial problem about web
+service, and IP addresses of its class. Now we're processing the log, and
+we see an IP address, starting with 173. And it so happens that the value of hash
+function on this IP address is four. Then, we look at the cell four,
+the list there is now empty. But we append,
+in the pair of our IP address. And the corresponding counter one,
+to this list. The value is one because this is
+the first time that we encounter this AB. Now we'll look at the next IP in the log. It starts with 69, and
+the hash value for this IP is one. So we'll look at the cell number one, and we append the pair of this IP address and
+the corresponding counter one to the list. Again the counter is one because this is
+the first time we see this IP address. Now it looks at the next IP address in
+the log and we see that it again starts with 173 and actually it coincides with
+the first IP that we've already seen. And the hash value is again four,
+because hash function is deterministic, it always returns the same number for
+same object. So we'll look at the cell number four,
+we'll look through the whole list and we find out that there is already a pair
+containing this IP address as the key. So instead of appending this
+IP address again to the list, we will increase the value of the counter by one because this is the second
+time we've seen our IP address. Of course in the interface of
+a general map, there is no method for incrementing a counter, there is a method
+to set so we will need to first use method get to get the value corresponding
+to this IP address, we will get one. We will then increase it by one ourselves,
+get two. And then we will call set for
+this IP address and value two. And it will just rewrite the value
+from one to two in this list element. Then, we'll look at the next
+line in our log, and we see that this is IP starting from 91. And it so happens that the hash value for
+this IP address, again, is four,
+although this is a different IP address. And that has to happen at some point,
+because there are many, many different IP addresses, and
+only eight entries in our array. So what do we do? If we look at the cell number four,
+there is a non-empty list there. We go through the whole list, but we see that our new IP address
+starting from 91 is not in the list. So we add our new IP address
+to the end of this list along with the corresponding
+counter of one. And these two IP addresses in the list for cell number four already
+make a chain together. And if we go further and
+further through the log, and we add some IP addresses to this map,
+some of the chains will become longer. If where some point we'll need to remove some IP address from the list we can do
+that and the chain can become shorter. But anyway, you see the general
+structure that a chain maybe empty, maybe non-empty,
+starts in any cell of the array. The array size is m, which is equal to
+the cardinality of the hash function. And for each such cell we store a list
+with all the IP addresses which occurred before and which have hash value
+the same as the number of the cell.

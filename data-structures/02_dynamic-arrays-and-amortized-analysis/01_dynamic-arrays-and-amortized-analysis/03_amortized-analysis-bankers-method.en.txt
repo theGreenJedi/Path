@@ -1,0 +1,72 @@
+In this video, we're going to talk about
+a second way to do Amortized Analysis, what we call the Banker's Method. The idea here is that we're going to
+charge extra for each cheap operation. So it's sort of like we're taking
+the example where we looked at saving money for a car. We're going to actually take that $100 and
+put it in the bank. And then we save those charges somewhere, in the case of the bank
+we put it in the bank. In our case we're going to conceptually
+save it in our data structure. We're not actually changing our code,
+this is strictly an analysis. But we're conceptually thinking
+about putting our saved extra cost as sort of tokens
+in our data structure that later on we'll be able to use to
+pay for the expensive operations. To make more sense as we see an example. So it's kind of like an amortizing loan or this case I talked about where we're
+saving $100 a month towards a $6000 car, because we know our current
+car is going to run out. Let's look at this same example
+where we have a dynamic array and n calls to PushBack starting
+with an empty array. The idea is we're going to charge 3 for
+every insertion. So every PushBack,
+we're going to charge 3. One is the raw cost for actually moving in this new item into the array,
+and the other two are going to be saved. So if we need to do a resize in order
+to pay for moving the elements, we're going to use tokens we've already
+saved in order to pay for the moving. And then, we're going to place 1 token,
+once we've actually added our item. 1 token on the item we added and
+then 1 token on an item prior to this in the array. It'll be easier when we look
+at a particular example. Let's look at an example
+we have an empty array. And we're going to start with size 0,
+capacity 0. We PushBack(a), what happens? Well we have to allocate our array
+of size one, point to it, and then we put a into the array. And now we're going to put
+a little token on a and this token is what we use to
+pay later on to moving a. In this particular example for the very first element there's no
+other element to put a token on. So we're just going to waste that other,
+that third token. We push in b. There's no space for b so we've got to
+allocate a larger array and then move a. How are we going to pay for that moving a? Well with the token
+the token that's already on it. So we prepaid this moving a. When we actually initially
+put a into the array, we put a token on it that would pay for
+moving it into a new array. So that's how we pay for moving a and then we update the array, delete the old
+one, and now we actually put b in. So we put b in at the cost of one,
+we still have two more tokens to pay. So we're going to put one on b and
+we're going to put one capacity over two that is one element earlier, so
+we're going to put one on a. So we've spent three now. One for real and two as deferred payment that we're going
+to use later in the form of these tokens. Remember these tokens are not actually
+stored in the data structure. There's nothing actually in the array. This is just something we're using for mental accounting in
+order to do our analysis. When we push in c,
+we're going to allocate a new array. We copy over a and we pay for
+that with our pre-paid token. We copy over b, paying for
+that with our pre-paid token. And now we push in c. That's one,
+the second payment we have to make is, we put a token on c and
+we then we put token on a. Four divided by two, that is the capacity
+divided by two, or two elements prior. We push in d,
+we don't have to do any resizing, finally. Okay, so we just put in d and
+that's the cost of one. Second, put a token on d. Third, put a token capacity over two or
+two elements prior to that. So notice what we've got now is a full
+array and everything has tokens on it which means when we need to resize,
+we have prepaid for all of that movement. So we push in e, allocate a new array. And now we use those prepaid tokens
+to pay for moving a, b, c, and d. Get rid of the old array,
+and now push in e. And again, put a token on e,
+and a token on a. So, what we've got here then is O(1)
+amortized cost for each PushBack. And in particular,
+we have a cost of three, right? So we have clearly seen. So lets look back at how we did this. For this dynamic array we decided we
+had to charge three, and other data structures with other operations we
+not did have to charge a different amount. We have to figure out
+what will be sufficient, in our case three was sufficient, and
+we decided that we would go ahead and store these tokens on
+the elements that needed to be moved. So it's a very physical way to keep track
+of the saved work that we have done, or the prepaid work that we have done. So we charge 3, 1 is 
+the raw cost of insertion. If we need to resize, we've arranged
+things such that whenever the array gets full, we've actually, in order for
+the array to have been full, we had to have done enough PushBacks such
+that every element got a token on it. All the new ones that we added since
+the previous resize, plus every time we added one of those new ones,
+we prepaid for a prior element as well. So, we pay our one insertion, we pay
+one for the element we're adding now and we pay one for
+sort of a buddy element earlier. In the next video we're going to look at
+a third way of doing Amortized Analysis, which is the Physicist's Method.

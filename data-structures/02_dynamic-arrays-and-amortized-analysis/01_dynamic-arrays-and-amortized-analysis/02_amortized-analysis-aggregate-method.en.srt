@@ -1,0 +1,400 @@
+1
+00:00:00,310 --> 00:00:03,430
+So we'll discuss now what
+Amortized Analysis is and
+
+2
+00:00:03,430 --> 00:00:05,900
+look at a particular method for
+doing such analysis.
+
+3
+00:00:07,280 --> 00:00:12,410
+Sometimes, we're looking at an individual
+worst case and that may be too severe.
+
+4
+00:00:12,410 --> 00:00:16,670
+In particular we may want to
+know the total worst case for
+
+5
+00:00:16,670 --> 00:00:21,020
+a sequence of operations and it may
+be some of those operations are cheap,
+
+6
+00:00:21,020 --> 00:00:23,680
+while only certain of them are expensive.
+
+7
+00:00:23,680 --> 00:00:26,390
+So if we look at the worst
+case operation for any one and
+
+8
+00:00:26,390 --> 00:00:30,810
+multiply that by the total,
+it may be overstating the total cost.
+
+9
+00:00:32,210 --> 00:00:36,830
+As an example, for a dynamic array,
+we only resize every so often.
+
+10
+00:00:36,830 --> 00:00:40,990
+Most of the time, we're doing a constant
+time operation, just adding an element.
+
+11
+00:00:40,990 --> 00:00:45,290
+It's only when we fully reach
+the capacity, that we have to resize.
+
+12
+00:00:45,290 --> 00:00:48,890
+So the question is, what's the total cost
+if you have to insert a bunch of items?
+
+13
+00:00:51,730 --> 00:00:53,610
+So here's the definition
+of amortized cost.
+
+14
+00:00:53,610 --> 00:00:56,520
+You have a sequence of n operations,
+
+15
+00:00:56,520 --> 00:01:00,920
+the amortized cost is the cost of
+those n operations divided by n.
+
+16
+00:01:02,110 --> 00:01:09,190
+This is similar in spirit to let's say you
+buy a car for, I don't know, $6,000.
+
+17
+00:01:09,190 --> 00:01:11,610
+And you figure it's going to
+last you five years.
+
+18
+00:01:12,610 --> 00:01:15,880
+Now, you have two possibilities.
+
+19
+00:01:15,880 --> 00:01:17,650
+One, you pay the $6,000 and
+
+20
+00:01:17,650 --> 00:01:21,560
+then five years later you have
+to pony up another $6,000.
+
+21
+00:01:21,560 --> 00:01:27,440
+Another option would be to
+put aside money every month.
+
+22
+00:01:27,440 --> 00:01:30,420
+So five years is 60 months.
+
+23
+00:01:30,420 --> 00:01:36,430
+So if you put away $100 a month,
+once the five years is over, then
+
+24
+00:01:36,430 --> 00:01:41,940
+when it's time to buy a new car for $6000,
+you'll have $6000 in your bank account.
+
+25
+00:01:41,940 --> 00:01:50,130
+And so there that amortized cost
+(monthly cost) is $100 a month,
+
+26
+00:01:50,130 --> 00:01:54,890
+whereas the worst case monthly
+cost is actually 6,000,
+
+27
+00:01:54,890 --> 00:01:59,640
+it's 0 for 59 months and then it's 6,000
+after one month, so you can see that,
+
+28
+00:01:59,640 --> 00:02:03,370
+that amortized cost gives you
+a more balanced understanding.
+
+29
+00:02:03,370 --> 00:02:07,150
+If you really want to know what's
+the most I spend in every month,
+
+30
+00:02:07,150 --> 00:02:08,610
+the answer yes is $6,000.
+
+31
+00:02:08,610 --> 00:02:11,205
+But if you want to know sort of
+an average what am I spending,
+
+32
+00:02:11,205 --> 00:02:13,740
+$100 is a more reasonable number.
+
+33
+00:02:13,740 --> 00:02:15,970
+So that's why we do this
+amortized analysis,
+
+34
+00:02:15,970 --> 00:02:20,180
+to get a more nuanced picture of
+what it looks like for a succession
+
+35
+00:02:20,180 --> 00:02:20,860
+of operations.
+
+36
+00:02:22,830 --> 00:02:27,360
+So let's look at the aggregate
+method of doing amortized analysis.
+
+37
+00:02:27,360 --> 00:02:32,700
+And the aggregate method really says,
+let's look at the definition of what
+
+38
+00:02:32,700 --> 00:02:36,620
+an amortized cost is, and
+use that to directly calculate.
+
+39
+00:02:37,970 --> 00:02:40,700
+So we're going to look at
+an example of dynamic array and
+
+40
+00:02:40,700 --> 00:02:42,460
+we're going to do n calls to PushBack.
+
+41
+00:02:42,460 --> 00:02:47,210
+So we're going to start with an empty
+array and n times call PushBack.
+
+42
+00:02:48,620 --> 00:02:53,190
+And then we'll find out what the amortized
+cost is of a single call to PushBack.
+
+43
+00:02:53,190 --> 00:02:56,430
+We know the worst case time is O(n).
+
+44
+00:02:56,430 --> 00:03:00,410
+Let's define c sub i as
+the cost of the i'th insertion.
+
+45
+00:03:00,410 --> 00:03:03,080
+So we're interested in c1 to cn.
+
+46
+00:03:04,610 --> 00:03:06,025
+So ci is clearly 1.
+
+47
+00:03:06,025 --> 00:03:08,380
+because we have got to actual, and
+
+48
+00:03:08,380 --> 00:03:14,100
+what we're going to count for
+a second here is writing into the array.
+
+49
+00:03:14,100 --> 00:03:19,485
+So the cost is 1 because we have to write
+in this i'th element that we're adding.
+
+50
+00:03:20,640 --> 00:03:22,350
+Regardless of whether or
+not we need to resize.
+
+51
+00:03:24,200 --> 00:03:28,390
+If we need to resize, the first
+question is when do we need to resize?
+
+52
+00:03:28,390 --> 00:03:33,890
+We need to resize if our
+capacity is used up.
+
+53
+00:03:33,890 --> 00:03:36,150
+That is if the size is equal to capacity.
+
+54
+00:03:36,150 --> 00:03:37,390
+Well when does that happen?
+
+55
+00:03:37,390 --> 00:03:42,070
+That happens if the previous
+insertion filled it up.
+
+56
+00:03:42,070 --> 00:03:43,725
+That is made it a full power of 2,
+
+57
+00:03:43,725 --> 00:03:46,850
+because in our case we're
+always doubling the size.
+
+58
+00:03:46,850 --> 00:03:49,500
+So that says on the i'th insertion
+
+59
+00:03:49,500 --> 00:03:53,240
+we're going to have to resize
+if the i'th- 1 filled it up.
+
+60
+00:03:53,240 --> 00:03:55,475
+That is the i- 1 is a power of 2.
+
+61
+00:03:56,820 --> 00:03:59,850
+And if we don't have to resize, there's
+no additional cost, it's just zero.
+
+62
+00:04:01,480 --> 00:04:06,317
+So the total amortized cost is really
+
+63
+00:04:06,317 --> 00:04:11,630
+the sum of the n actual costs divided by n.
+
+64
+00:04:11,630 --> 00:04:15,090
+So that's a summation from
+i = 1 to n of c sub i.
+
+65
+00:04:15,090 --> 00:04:19,180
+And again c sub i is the cost
+of that i'th insertion.
+
+66
+00:04:19,180 --> 00:04:24,600
+While that's equal to n,
+because every c sub i has a cost of 1,
+
+67
+00:04:24,600 --> 00:04:30,920
+so we sum that n times, that's n plus then
+the summation from what's this, this looks
+
+68
+00:04:30,920 --> 00:04:36,080
+a little complicated so j = 1 to the floor
+of log base 2 of n- 1 of 2 to the j.
+
+69
+00:04:36,080 --> 00:04:38,680
+That just really says the power of twos.
+
+70
+00:04:38,680 --> 00:04:42,888
+All the way up to n- 1.
+
+71
+00:04:42,888 --> 00:04:47,841
+So to give an example,
+if n is 100, the power of 2s
+
+72
+00:04:47,841 --> 00:04:53,270
+are going to be 1, 2,
+4, 8, 16, 32, and 64.
+
+73
+00:04:53,270 --> 00:04:54,940
+And it's the summation of all of those.
+
+74
+00:04:54,940 --> 00:04:59,170
+Well that summation is just order n.
+
+75
+00:05:00,370 --> 00:05:03,820
+Right.
+We basically take powers of 2 up to but
+
+76
+00:05:03,820 --> 00:05:05,590
+not including n.
+
+77
+00:05:05,590 --> 00:05:07,690
+And that is going to be no more than 2n.
+
+78
+00:05:07,690 --> 00:05:12,400
+So we've got n plus
+something no more than 2n,
+
+79
+00:05:12,400 --> 00:05:17,030
+that's clearly O(n) divided by n,
+and that's just O(1).
+
+80
+00:05:17,030 --> 00:05:22,065
+So what we've determined then
+is that we have a amortized
+
+81
+00:05:22,065 --> 00:05:24,855
+cost for each insertion of order 1.
+
+82
+00:05:26,670 --> 00:05:30,260
+Our worst case cost is still order n, so
+
+83
+00:05:30,260 --> 00:05:33,610
+if we want to know how long it's going to
+take in the worst case for any 
+
+84
+00:05:33,610 --> 00:05:37,305
+particular insertion is O(n),
+but the amortized cost is O(1).
+
+85
+00:05:38,510 --> 00:05:39,260
+In the next video,
+
+86
+00:05:39,260 --> 00:05:43,213
+we're going to look at an alternative
+way to do this amortized analysis.

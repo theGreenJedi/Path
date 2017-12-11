@@ -1,0 +1,623 @@
+1
+00:00:00,360 --> 00:00:01,420
+Hello everybody.
+
+2
+00:00:01,420 --> 00:00:02,380
+Welcome back.
+
+3
+00:00:02,380 --> 00:00:04,700
+Today we're going to talk
+more about splay trees.
+
+4
+00:00:04,700 --> 00:00:05,656
+In particular,
+
+5
+00:00:05,656 --> 00:00:10,378
+we can tell how to implement your basic
+search tree operations using a splay tree.
+
+6
+00:00:10,378 --> 00:00:13,926
+So remember, last time, we had this
+idea to design a binary search tree,
+
+7
+00:00:13,926 --> 00:00:17,670
+where every time you queried a node,
+you brought it to the root.
+
+8
+00:00:17,670 --> 00:00:21,260
+And we know that simple ways of
+doing this didn't quite work out so
+
+9
+00:00:21,260 --> 00:00:25,230
+well, so we introduced the splay
+operation, which is a little bit better.
+
+10
+00:00:26,310 --> 00:00:31,090
+Now, there's this problem with the splay
+operation that the way that the splay
+
+11
+00:00:31,090 --> 00:00:36,130
+trees are built, you don't actually
+guarantee the tree is always balanced.
+
+12
+00:00:36,130 --> 00:00:39,730
+Sometimes you'll end up
+with very unbalanced trees.
+
+13
+00:00:39,730 --> 00:00:44,111
+And when that happens, your splay
+operation will actually be very slow
+
+14
+00:00:44,111 --> 00:00:47,834
+because you have to sort of bring
+your node up to the root one or
+
+15
+00:00:47,834 --> 00:00:51,210
+two steps at a time, and
+it will actually take a while.
+
+16
+00:00:51,210 --> 00:00:54,960
+However, you'll note that if I have
+this long stretched out tree, and
+
+17
+00:00:54,960 --> 00:00:58,644
+I splay this leaf all the way to the root,
+we have rearranged the tree,
+
+18
+00:00:58,644 --> 00:01:01,606
+it's now a little bit more
+balanced than it was before.
+
+19
+00:01:01,606 --> 00:01:06,494
+And so, when you use the splay
+operation rather than to sort of rotate
+
+20
+00:01:06,494 --> 00:01:11,383
+to top operation, it's actually
+the case that you can't have a long
+
+21
+00:01:11,383 --> 00:01:14,437
+sequence of expensive splay operations.
+
+22
+00:01:14,437 --> 00:01:17,618
+Because every time you have
+an expensive splay operation,
+
+23
+00:01:17,618 --> 00:01:20,560
+it will rebalance the tree and
+make it more balanced.
+
+24
+00:01:20,560 --> 00:01:25,110
+And so, if you keep picking really
+unbalanced nodes, pretty quickly, the tree
+
+25
+00:01:25,110 --> 00:01:29,860
+will balance itself out, and then you'll
+have nice, short login time operations.
+
+26
+00:01:31,840 --> 00:01:35,433
+But this does mean that we're no
+longer dealing with worst case time.
+
+27
+00:01:35,433 --> 00:01:40,350
+Well, we need to talk about amortized
+analysis, average case time.
+
+28
+00:01:40,350 --> 00:01:45,220
+And the big theorem that we're not going
+to prove today is that the amortized cost
+
+29
+00:01:45,220 --> 00:01:50,200
+of first doing O(D) work, and
+then splaying a node of depth
+
+30
+00:01:50,200 --> 00:01:54,390
+D is actually O(log(n)), where n is
+the total number of nodes in the tree.
+
+31
+00:01:55,630 --> 00:02:01,110
+And we'll prove this later, but using it,
+we can analyze our splay tree operations.
+
+32
+00:02:01,110 --> 00:02:04,806
+And the basic idea is that,
+if you have to do a lot of work and
+
+33
+00:02:04,806 --> 00:02:09,409
+then splay a very deep node, we're going
+to be able to pay for that work by
+
+34
+00:02:09,409 --> 00:02:14,323
+the fact that the splay operation will
+rebalance our tree in some useful way.
+
+35
+00:02:14,323 --> 00:02:21,085
+And that will pay for it and so
+amortized cost will only be O(log(n)).
+
+36
+00:02:21,085 --> 00:02:24,485
+Okay, using this,
+how do we implement our operations?
+
+37
+00:02:24,485 --> 00:02:27,305
+So a splay tree find is
+actually very simple.
+
+38
+00:02:27,305 --> 00:02:30,385
+First we find the node in
+the way we normally would.
+
+39
+00:02:30,385 --> 00:02:33,605
+We then splay the node that we found and
+then return it.
+
+40
+00:02:34,815 --> 00:02:36,265
+Pretty simple.
+
+41
+00:02:36,265 --> 00:02:37,759
+So how does the analysis work?
+
+42
+00:02:37,759 --> 00:02:41,335
+Now the node, remember,
+might not be at small depth.
+
+43
+00:02:41,335 --> 00:02:44,345
+It could be at depth D, or
+D could be as big as N.
+
+44
+00:02:45,870 --> 00:02:48,740
+We then do O(D) work to find the node
+
+45
+00:02:48,740 --> 00:02:51,610
+because that's how long
+a find operation takes.
+
+46
+00:02:51,610 --> 00:02:57,290
+We then run a splay, so we did O(D) work,
+and then we splayed a node of depth D.
+
+47
+00:02:57,290 --> 00:03:02,800
+And so the amortized cost is O(log(n)) for
+this operation, which is what we want.
+
+48
+00:03:04,060 --> 00:03:08,940
+Now, the idea here is that you're paying
+for the work again of finding this N
+
+49
+00:03:08,940 --> 00:03:11,810
+by splaying it back to the root
+to rebalance the tree.
+
+50
+00:03:11,810 --> 00:03:15,650
+And so, if the node was really deep,
+you did do a lot of work.
+
+51
+00:03:15,650 --> 00:03:18,330
+But you also did some
+useful rebalancing work,
+
+52
+00:03:18,330 --> 00:03:20,700
+which means you're not going to
+have to keep doing a lot of work.
+
+53
+00:03:22,770 --> 00:03:25,086
+Now, there's a very important
+point to note here,
+
+54
+00:03:25,086 --> 00:03:27,250
+that it could be that we
+were doing this search,
+
+55
+00:03:27,250 --> 00:03:31,000
+you fail to find a node with exactly
+that key that you were looking for.
+
+56
+00:03:32,240 --> 00:03:33,370
+But when this happens,
+
+57
+00:03:33,370 --> 00:03:38,000
+you still have to splay the closest
+node that you found in this operation.
+
+58
+00:03:38,000 --> 00:03:42,930
+Because otherwise, what's happening
+is your operation did O(D) work, but
+
+59
+00:03:42,930 --> 00:03:46,410
+since you're not doing a splay,
+there's nothing to amortize against.
+
+60
+00:03:46,410 --> 00:03:48,440
+You actually just spent O(D) work.
+
+61
+00:03:48,440 --> 00:03:53,300
+What you need to do is if you're doing
+this big, deep search, you have to pay for
+
+62
+00:03:53,300 --> 00:03:55,850
+it by rebalancing the tree.
+
+63
+00:03:55,850 --> 00:03:56,540
+And you have to,
+
+64
+00:03:56,540 --> 00:04:01,160
+therefore, splay whatever node you found,
+even if it does not have the right key.
+
+65
+00:04:03,400 --> 00:04:04,560
+Okay, so that's fine.
+
+66
+00:04:04,560 --> 00:04:06,050
+Let's talk about Insert.
+
+67
+00:04:06,050 --> 00:04:08,130
+Insert, it turns out, is also really easy.
+
+68
+00:04:08,130 --> 00:04:11,378
+First, you insert a node in
+the same way that you would before.
+
+69
+00:04:11,378 --> 00:04:13,230
+And that's O of depth much work.
+
+70
+00:04:14,370 --> 00:04:15,870
+And then you run the splay tree find.
+
+71
+00:04:15,870 --> 00:04:18,990
+You find the node again, and
+you splay it to the top.
+
+72
+00:04:18,990 --> 00:04:19,490
+It all works.
+
+73
+00:04:20,980 --> 00:04:25,160
+Now to get deletes to work, there's
+actually a pretty clever way to do it.
+
+74
+00:04:25,160 --> 00:04:29,650
+If you splay your node and
+successor both to the top of the tree,
+
+75
+00:04:29,650 --> 00:04:33,410
+you end up with this sort of
+third diagram in this picture.
+
+76
+00:04:33,410 --> 00:04:36,349
+And you'll note that if we want
+to get rid of the red node,
+
+77
+00:04:36,349 --> 00:04:40,595
+all we have to do is sort of promote the
+blue node, its successor, into its place.
+
+78
+00:04:40,595 --> 00:04:42,861
+Because of the way this works out,
+
+79
+00:04:42,861 --> 00:04:47,490
+the blue node will never have a left
+child, and things will just work.
+
+80
+00:04:47,490 --> 00:04:52,370
+So the code for delete is you splay
+the successor of N to the root, you then
+
+81
+00:04:52,370 --> 00:04:57,270
+splay N to the root, and then we just need
+to remove N and promote its successor.
+
+82
+00:04:57,270 --> 00:05:00,090
+So we let L and R be the left and
+right children of N, and
+
+83
+00:05:00,090 --> 00:05:05,872
+basically what we have to do is we need
+to make R to become L's new parent and
+
+84
+00:05:05,872 --> 00:05:10,100
+L R's new child, and
+then set R to be the root of the tree.
+
+85
+00:05:10,100 --> 00:05:14,416
+And once we've rearranged a few pointers,
+everything works.
+
+86
+00:05:14,416 --> 00:05:16,678
+Now, there is one special case here,
+
+87
+00:05:16,678 --> 00:05:21,342
+which is what if N is the largest key in
+the entire tree, there is no successor,
+
+88
+00:05:21,342 --> 00:05:24,670
+you need to do something
+slightly different.
+
+89
+00:05:24,670 --> 00:05:25,940
+I'll leave that to you to figure out.
+
+90
+00:05:28,270 --> 00:05:31,050
+Finally, let's talk about
+the split operation.
+
+91
+00:05:31,050 --> 00:05:34,900
+Now, the split is actually also
+very nice with splay trees.
+
+92
+00:05:34,900 --> 00:05:38,647
+The point is there's one case
+where split entry is really easy.
+
+93
+00:05:38,647 --> 00:05:44,390
+It's if the key at which you're
+supposed to split is right at the root.
+
+94
+00:05:44,390 --> 00:05:46,950
+Because then all you need to do
+is you need to split things into
+
+95
+00:05:46,950 --> 00:05:49,120
+two subtrees by just
+breaking them off the root.
+
+96
+00:05:50,690 --> 00:05:52,190
+And so, but with the splay tree,
+
+97
+00:05:52,190 --> 00:05:55,360
+it's really easy to make any
+node that we want be the root.
+
+98
+00:05:56,450 --> 00:05:59,480
+So what we're going to do is we're going
+to do a search to find the place at which
+
+99
+00:05:59,480 --> 00:06:01,740
+we are supposed to do our split.
+
+100
+00:06:01,740 --> 00:06:05,140
+Take whatever node we found,
+splay it to the root, and
+
+101
+00:06:05,140 --> 00:06:08,300
+then we're just going to break our tree
+into two pieces right at the root.
+
+102
+00:06:09,940 --> 00:06:12,760
+So to see pseudocode for
+this, we're going to let
+
+103
+00:06:12,760 --> 00:06:17,560
+N be what we find when we search for
+the x that we're trying to split at.
+
+104
+00:06:17,560 --> 00:06:19,176
+We then Splay N to the root.
+
+105
+00:06:19,176 --> 00:06:26,590
+Now if N's key is bigger than x,
+we have to cut off the left subtree.
+
+106
+00:06:26,590 --> 00:06:29,818
+If the key is less than x,
+we cut off the right subtree.
+
+107
+00:06:29,818 --> 00:06:32,299
+And if the key is actually equal to x,
+well,
+
+108
+00:06:32,299 --> 00:06:35,530
+the x that we're trying to
+split is actually in the tree.
+
+109
+00:06:35,530 --> 00:06:39,756
+So, I mean, you might do one, or the
+other, depending on if you actually want
+
+110
+00:06:39,756 --> 00:06:43,340
+to keep the node in the tree, or
+maybe you want to throw it away, and
+
+111
+00:06:43,340 --> 00:06:46,700
+we just want to return the left
+subtree and the right subtree.
+
+112
+00:06:46,700 --> 00:06:51,401
+Now just to be clear, if we want to say,
+cut off the left subtree, all we have to
+
+113
+00:06:51,401 --> 00:06:55,818
+do is we let L be the left child, and
+we just have to sort of break the pointer
+
+114
+00:06:55,818 --> 00:07:00,496
+between our node and in its left child,
+so that they're now separate trees.
+
+115
+00:07:00,496 --> 00:07:04,188
+And we just return L and
+N as the two roots.
+
+116
+00:07:04,188 --> 00:07:06,488
+So that's how we do a split.
+
+117
+00:07:06,488 --> 00:07:10,440
+To do a merge, we basically have
+to do the opposite of this.
+
+118
+00:07:10,440 --> 00:07:14,760
+And the idea is that it's very easy to
+merge two trees together when you sort of
+
+119
+00:07:14,760 --> 00:07:19,170
+have this element that's in between
+them right up there at the root.
+
+120
+00:07:19,170 --> 00:07:22,500
+And once again, there's an easy
+way to do this with splay trees.
+
+121
+00:07:22,500 --> 00:07:28,551
+You just find the largest element of
+the left subtree, you splay it to the top,
+
+122
+00:07:28,551 --> 00:07:33,335
+and then just attach the right
+subtree as a child of that node.
+
+123
+00:07:33,335 --> 00:07:34,140
+And then you're done.
+
+124
+00:07:35,530 --> 00:07:37,300
+So, in summary, splay trees.
+
+125
+00:07:37,300 --> 00:07:41,269
+Using this, we can perform actually
+all the operations that we wanted very
+
+126
+00:07:41,269 --> 00:07:44,430
+simply in an O(log(n))
+amortized time per operation.
+
+127
+00:07:46,350 --> 00:07:49,800
+And so
+this provides a very clean way to do this.
+
+128
+00:07:49,800 --> 00:07:52,400
+We left out some things
+in the analysis though.
+
+129
+00:07:52,400 --> 00:07:55,270
+So if you'd like to see
+really what the math behind
+
+130
+00:07:55,270 --> 00:07:59,360
+how we can show all of these things work,
+please come back for the next lecture.

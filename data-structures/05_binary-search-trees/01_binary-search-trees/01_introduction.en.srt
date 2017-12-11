@@ -1,0 +1,610 @@
+1
+00:00:00,470 --> 00:00:01,840
+Hello everybody, welcome back.
+
+2
+00:00:01,840 --> 00:00:04,810
+Today, we're going to be starting
+with a new data structures topic.
+
+3
+00:00:04,810 --> 00:00:08,110
+In particular, we are going to be
+talking about Binary Search Trees.
+
+4
+00:00:08,110 --> 00:00:10,820
+And today, we're going to be giving
+some of introductions to the topic and
+
+5
+00:00:10,820 --> 00:00:13,240
+really going to try and do two things.
+
+6
+00:00:13,240 --> 00:00:16,928
+One is to sort of motivate the types of
+the problems that we want to be able to
+
+7
+00:00:16,928 --> 00:00:18,564
+solve this new data structure.
+
+8
+00:00:18,564 --> 00:00:22,723
+And secondly, we'll talk a little
+bit about why the data structures we
+
+9
+00:00:22,723 --> 00:00:27,450
+already know about are not up to this task
+and why we really do need something new.
+
+10
+00:00:27,450 --> 00:00:31,190
+So to begin with let's talk about a few
+problems that you might want to solve.
+
+11
+00:00:31,190 --> 00:00:32,930
+So one is you want to search a dictionary.
+
+12
+00:00:32,930 --> 00:00:34,916
+You've got a dictionary and
+
+13
+00:00:34,916 --> 00:00:40,139
+you want to find all the words that
+start with some given string of letters.
+
+14
+00:00:40,139 --> 00:00:44,361
+Or similarly you've got a bunch of emails
+and you'd like to find all the emails that
+
+15
+00:00:44,361 --> 00:00:46,670
+were sent or
+received during a given period.
+
+16
+00:00:47,750 --> 00:00:50,900
+Or maybe you've got a bunch of friends or
+class or something and you'd like to
+
+17
+00:00:50,900 --> 00:00:54,330
+find the other person in this class
+whose height is closest to yours.
+
+18
+00:00:55,900 --> 00:01:00,260
+Now all of these are examples of what
+we might call a local search problem.
+
+19
+00:01:00,260 --> 00:01:04,080
+What you want for them is you have a data
+structure that stores a bunch of elements.
+
+20
+00:01:04,080 --> 00:01:07,960
+Each of them has some key that
+comes from a linearly ordered set.
+
+21
+00:01:07,960 --> 00:01:12,760
+Something like a word sorted by
+alphabetical order, or a date,
+
+22
+00:01:12,760 --> 00:01:15,230
+or a height, or something like that.
+
+23
+00:01:15,230 --> 00:01:18,530
+And we want this data structure
+to support some operations.
+
+24
+00:01:18,530 --> 00:01:21,863
+Things like range search,
+which should return all
+
+25
+00:01:21,863 --> 00:01:25,673
+of the elements whose keys
+are between two numbers x and y.
+
+26
+00:01:25,673 --> 00:01:28,267
+Or nearest neighbors,
+where given another key z,
+
+27
+00:01:28,267 --> 00:01:32,200
+you want to find the things closest to z
+on either side in this data structure.
+
+28
+00:01:33,400 --> 00:01:38,300
+So, for example, if we have such data
+structure storing the following numbers,
+
+29
+00:01:38,300 --> 00:01:43,170
+if we wanted to do a range search for
+5 to 12, it should return 6, 7 and
+
+30
+00:01:43,170 --> 00:01:46,970
+10, the three numbers that are stored
+that are between 5 and 12.
+
+31
+00:01:46,970 --> 00:01:50,550
+If we want the nearest neighbors
+of 3 we should return 1 and
+
+32
+00:01:50,550 --> 00:01:54,260
+4 since those are the closest things
+to we have to 3 on either side.
+
+33
+00:01:55,880 --> 00:01:59,420
+Now if we just wanted to do that,
+it turns out you can do it,
+
+34
+00:01:59,420 --> 00:02:04,380
+but in practice, you really want
+these data structures to be dynamic.
+
+35
+00:02:04,380 --> 00:02:06,830
+You want it to be possible to modify them.
+
+36
+00:02:06,830 --> 00:02:11,634
+So, two more operations that we would like
+to be able to implement are insert and
+
+37
+00:02:11,634 --> 00:02:12,215
+delete.
+
+38
+00:02:12,215 --> 00:02:14,922
+Insert(x) adds a new element with key x,
+and
+
+39
+00:02:14,922 --> 00:02:18,410
+Delete(x) removes an element with key x.
+
+40
+00:02:18,410 --> 00:02:19,450
+Fine.
+
+41
+00:02:19,450 --> 00:02:22,500
+So, for example, we have this array.
+
+42
+00:02:22,500 --> 00:02:26,070
+If we want to insert 3 into it,
+we do whatever we need to,
+
+43
+00:02:26,070 --> 00:02:29,930
+3 is now stored in this data structure
+in addition to everything else.
+
+44
+00:02:29,930 --> 00:02:31,440
+And then we can delete 10,
+
+45
+00:02:31,440 --> 00:02:34,800
+remove that and we've got slightly
+different elements that we're storing.
+
+46
+00:02:36,100 --> 00:02:40,000
+So just to make sure we're on the same
+page, if you start with such a data
+
+47
+00:02:40,000 --> 00:02:43,890
+structure and it's empty and
+you insert 3, and then insert 8,
+
+48
+00:02:43,890 --> 00:02:48,320
+and then insert 5, then insert 10,
+then delete 8, then insert 12 and
+
+49
+00:02:48,320 --> 00:02:52,920
+ask for the nearest neighbors of
+7 what are you going to return?
+
+50
+00:02:55,650 --> 00:02:58,650
+Well, if you figure out what the data
+structures stores at the end of the day,
+
+51
+00:02:58,650 --> 00:03:01,170
+you've inserted 3, 5, 8, 10 and 12,
+
+52
+00:03:01,170 --> 00:03:05,810
+8 got deleted, so,
+you've only have the other four left over.
+
+53
+00:03:05,810 --> 00:03:08,400
+And you want the things closest
+to 7 of the remaining guys,
+
+54
+00:03:08,400 --> 00:03:10,160
+which would be 5 and 10.
+
+55
+00:03:10,160 --> 00:03:11,220
+So, that should be the answer.
+
+56
+00:03:12,630 --> 00:03:16,000
+Okay, so this is the data structure
+that we're trying to implement.
+
+57
+00:03:16,000 --> 00:03:17,970
+What can we say about being able to do it?
+
+58
+00:03:17,970 --> 00:03:21,260
+We've seen a bunch of data structures,
+maybe one of them will work.
+
+59
+00:03:22,310 --> 00:03:25,120
+For example, we could try
+implementing this by a hash table.
+
+60
+00:03:25,120 --> 00:03:29,420
+Hash tables are good at storing and
+looking up elements very, very quickly.
+
+61
+00:03:30,500 --> 00:03:32,150
+Unfortunately, they're hard to search.
+
+62
+00:03:33,440 --> 00:03:34,740
+You can't really search for
+
+63
+00:03:34,740 --> 00:03:37,880
+all the elements in the hash table in
+the given range more or less at all.
+
+64
+00:03:37,880 --> 00:03:41,410
+In some sense all the hash table
+lets you do is check whether or
+
+65
+00:03:41,410 --> 00:03:43,568
+not a given element is stored there.
+
+66
+00:03:43,568 --> 00:03:46,520
+You can't find about elements in a range.
+
+67
+00:03:47,690 --> 00:03:51,786
+Similarly nearest neighbor is not really
+a thing you can do with hash tables, but
+
+68
+00:03:51,786 --> 00:03:57,730
+they are good at inserts insertion into
+a hash table is all of one as is deletion.
+
+69
+00:03:57,730 --> 00:04:02,210
+But the searching aspect doesn't work
+here, so maybe we need something else.
+
+70
+00:04:03,620 --> 00:04:05,780
+Well, the next thing we
+can try is an array.
+
+71
+00:04:05,780 --> 00:04:09,900
+And in an array you can do the searches,
+but they're a little bit slow.
+
+72
+00:04:09,900 --> 00:04:12,380
+If you want to do a range
+search on an array,
+
+73
+00:04:12,380 --> 00:04:15,540
+the best you can do is scan
+through the entire array,
+
+74
+00:04:15,540 --> 00:04:19,039
+figure out which elements are in
+the range you want and return those.
+
+75
+00:04:20,190 --> 00:04:23,530
+Similarly you have a nearest
+neighbors search in O(n) time
+
+76
+00:04:23,530 --> 00:04:28,190
+by scanning through the entire array,
+keeping track of the closest things on
+
+77
+00:04:28,190 --> 00:04:31,530
+either sides of the query, and
+then returning the best ones at the end.
+
+78
+00:04:33,380 --> 00:04:36,170
+On the other hand, arrays,
+at least if they're expandable arrays,
+
+79
+00:04:36,170 --> 00:04:38,290
+are still fine with insert and delete.
+
+80
+00:04:38,290 --> 00:04:42,670
+To insert a new element you just add
+it to the next square over at the end.
+
+81
+00:04:42,670 --> 00:04:47,070
+To delete you can't just remove it from
+the array because then you'd leave a gap,
+
+82
+00:04:47,070 --> 00:04:50,740
+but if you take the last element and
+move it over to fill the gap.
+
+83
+00:04:50,740 --> 00:04:55,610
+Once again,
+this delete operations is O(1) time.
+
+84
+00:04:55,610 --> 00:05:00,580
+Perhaps more interestingly than just
+any array though is a sorted array.
+
+85
+00:05:00,580 --> 00:05:03,120
+Here, we're storing all of
+our elements in an array, but
+
+86
+00:05:03,120 --> 00:05:04,760
+we're going to store
+them in a sorted order.
+
+87
+00:05:05,930 --> 00:05:09,730
+And the critical thing about this is
+it allows us to do binary search.
+
+88
+00:05:10,860 --> 00:05:14,870
+If we want to do a range search,
+we can do a binary search to find the left
+
+89
+00:05:14,870 --> 00:05:19,400
+end of the range in our array and
+that takes logarithmic time.
+
+90
+00:05:19,400 --> 00:05:22,980
+And then scan through until we hit
+the right end of the range we want and
+
+91
+00:05:22,980 --> 00:05:24,830
+return everything in the middle.
+
+92
+00:05:24,830 --> 00:05:28,250
+So, the range search here
+is basically log n time
+
+93
+00:05:28,250 --> 00:05:31,530
+at least assuming the number of things
+we actually want to return is small.
+
+94
+00:05:32,940 --> 00:05:35,360
+Similarly nearest neighbors
+is log arithmetic time.
+
+95
+00:05:35,360 --> 00:05:38,960
+We do a binary search to find
+the thing that we're looking for and
+
+96
+00:05:38,960 --> 00:05:40,699
+reach to return the elements
+on either side.
+
+97
+00:05:42,770 --> 00:05:47,550
+Unfortunately, updates to
+a sorted array are hard.
+
+98
+00:05:47,550 --> 00:05:52,070
+You can't just insert a new element at the
+end of the array, because the array needs
+
+99
+00:05:52,070 --> 00:05:56,650
+to remain sorted at the end and this
+will generally destroy the sorted order.
+
+100
+00:05:56,650 --> 00:06:01,270
+If you want to insert 3,
+it really needs to go between 1 and 4.
+
+101
+00:06:01,270 --> 00:06:03,510
+But, you can't really do that,
+
+102
+00:06:03,510 --> 00:06:06,740
+you can't just sort of add a new
+cell in the middle of an array.
+
+103
+00:06:06,740 --> 00:06:10,340
+The only way to actually do this,
+is you can put 3 in that plot and
+
+104
+00:06:10,340 --> 00:06:14,520
+then everything 4 and onwards needs
+to shift over one cell to make room.
+
+105
+00:06:15,630 --> 00:06:19,920
+And so, insertion here is O(n) time
+which is a lot longer than we want.
+
+106
+00:06:21,350 --> 00:06:23,470
+Similarly deletions are going to be hard.
+
+107
+00:06:23,470 --> 00:06:28,080
+If you delete an element, you can't just
+leave a gap, you need to fill it somehow.
+
+108
+00:06:28,080 --> 00:06:31,800
+You can't just bring an element over
+from one of the ends to fill the gap,
+
+109
+00:06:31,800 --> 00:06:34,730
+because that would destroy
+your sorted structure.
+
+110
+00:06:34,730 --> 00:06:37,830
+So the only way to fill the gap
+is to sort of take everything and
+
+111
+00:06:37,830 --> 00:06:42,307
+shift it back over 1 in order to fill
+things up, and that again takes O(n) time.
+
+112
+00:06:44,260 --> 00:06:46,470
+A final thing to look at are linked lists.
+
+113
+00:06:46,470 --> 00:06:49,390
+Now here you can do
+a RangeSearch in O(n) time,
+
+114
+00:06:49,390 --> 00:06:52,530
+you just scan through the list and
+find everything in the range.
+
+115
+00:06:52,530 --> 00:06:55,618
+Similarly nearest neighbors
+are going to be O(n).
+
+116
+00:06:55,618 --> 00:06:57,650
+Of course linked lists, insertion, and
+
+117
+00:06:57,650 --> 00:07:01,900
+deletions are very fast, O(1) at least
+if you've got a doubly linked list.
+
+118
+00:07:01,900 --> 00:07:02,896
+These things are very good.
+
+119
+00:07:02,896 --> 00:07:06,260
+Unfortunately our searches are slow.
+
+120
+00:07:06,260 --> 00:07:09,850
+And even if you make this
+a sorted linked list,
+
+121
+00:07:09,850 --> 00:07:13,560
+if you sort of guarantee that
+everything comes in sorted order,
+
+122
+00:07:13,560 --> 00:07:17,140
+you still can't do better than
+linear time for your searches.
+
+123
+00:07:17,140 --> 00:07:21,830
+Because you can't binary search a linked
+list, even if it's sorted, because there's
+
+124
+00:07:21,830 --> 00:07:25,270
+no way to sort of jump to the middle
+of the list and sort of do comparisons.
+
+125
+00:07:26,770 --> 00:07:30,500
+And so the moral here really is
+that the data structure we've seen
+
+126
+00:07:30,500 --> 00:07:35,250
+up til this point don't work for
+this sort of local search data structure.
+
+127
+00:07:35,250 --> 00:07:37,140
+And so, we're going to need something new.
+
+128
+00:07:37,140 --> 00:07:39,645
+And that's what we're going to start
+talking about in the next lecture.

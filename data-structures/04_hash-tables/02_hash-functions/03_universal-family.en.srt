@@ -1,0 +1,677 @@
+1
+00:00:00,000 --> 00:00:04,634
+Hi, in the previous video you learned
+that for any deterministic hash function,
+
+2
+00:00:04,634 --> 00:00:08,072
+there is a bad input on which it
+will have a lot of collisions.
+
+3
+00:00:08,072 --> 00:00:10,974
+And in this video,
+you will learn to solve that problem.
+
+4
+00:00:10,974 --> 00:00:15,988
+And the idea starts from, remember
+when you started QuickSort algorithm?
+
+5
+00:00:15,988 --> 00:00:20,237
+At first, you learned that it can
+work as slow as m squared time.
+
+6
+00:00:20,237 --> 00:00:25,417
+But then you learned that adding a random
+pivot to the partition procedure helps,
+
+7
+00:00:25,417 --> 00:00:29,711
+because now you know that QuickSort
+works on average in n log n time.
+
+8
+00:00:29,711 --> 00:00:34,878
+And in practice, it works usually faster
+than the other sorting algorithms.
+
+9
+00:00:34,878 --> 00:00:39,510
+So we want to use the same randomization
+idea here for hash functions.
+
+10
+00:00:39,510 --> 00:00:43,320
+But we already know that we cannot just
+use a random hash function because
+
+11
+00:00:43,320 --> 00:00:45,060
+it must be deterministic.
+
+12
+00:00:45,060 --> 00:00:49,570
+So instead, we will first create
+a whole set of hash functions
+
+13
+00:00:49,570 --> 00:00:51,612
+called a family of hash functions.
+
+14
+00:00:51,612 --> 00:00:57,185
+And we'll choose a random function from
+this family to use in our algorithm.
+
+15
+00:00:57,185 --> 00:01:01,376
+Not all families of hash functions
+are good, however, and so
+
+16
+00:01:01,376 --> 00:01:05,579
+we will need a concept of universal
+family of hash functions.
+
+17
+00:01:05,579 --> 00:01:10,628
+So let U be the universe, the set of
+all possible keys that we want to hash.
+
+18
+00:01:10,628 --> 00:01:16,101
+And then a set of hash functions
+denoted by calligraphic letter H,
+
+19
+00:01:16,101 --> 00:01:20,710
+set of functions from U to
+numbers between 0 and m- 1.
+
+20
+00:01:20,710 --> 00:01:23,960
+So hash functions with
+the same cardinality.
+
+21
+00:01:23,960 --> 00:01:27,230
+Such set is called
+a universal family if for
+
+22
+00:01:29,130 --> 00:01:33,430
+any two keys in the universe
+the probability of collision is small.
+
+23
+00:01:33,430 --> 00:01:37,189
+So, what does that mean?
+
+24
+00:01:37,189 --> 00:01:41,697
+Our hash function is
+a deterministic function, so for
+
+25
+00:01:41,697 --> 00:01:46,895
+any two keys it either has a collision for
+those two keys or not.
+
+26
+00:01:46,895 --> 00:01:49,874
+So, what does it mean that
+the probability of collision for
+
+27
+00:01:49,874 --> 00:01:51,393
+two different keys is small?
+
+28
+00:01:51,393 --> 00:01:56,437
+It means that if we look at
+our family calligraphic H,
+
+29
+00:01:56,437 --> 00:02:02,152
+then at most 1/m part of all
+hash functions in this family,
+
+30
+00:02:02,152 --> 00:02:09,280
+at most 1/m of them have a collision for
+these two different keys.
+
+31
+00:02:09,280 --> 00:02:13,556
+And if we select a random hash
+function from the family with
+
+32
+00:02:13,556 --> 00:02:18,701
+probability at least one minus one over m,
+which is very close to one,
+
+33
+00:02:18,701 --> 00:02:23,782
+there will be no collision for
+this hash function and these two keys.
+
+34
+00:02:23,782 --> 00:02:26,992
+And of course it is essential
+that the keys are different.
+
+35
+00:02:26,992 --> 00:02:30,830
+Because if keys are equal then any
+deterministic hash function will have
+
+36
+00:02:30,830 --> 00:02:33,300
+the same value on these two keys.
+
+37
+00:02:33,300 --> 00:02:37,387
+So, this collision property with
+small probability is only for
+
+38
+00:02:37,387 --> 00:02:40,187
+two different keys in the universe,
+but for
+
+39
+00:02:40,187 --> 00:02:44,969
+any two different keys in the universe
+this property should be satisfied.
+
+40
+00:02:44,969 --> 00:02:49,394
+It might seem that it is impossible but
+later you will learn how to build
+
+41
+00:02:49,394 --> 00:02:52,701
+a universal family of hash functions and
+practice.
+
+42
+00:02:52,701 --> 00:02:57,080
+So how are randomization
+idea works in practice.
+
+43
+00:02:57,080 --> 00:03:01,978
+One approach would be to just make one
+hash function which returns a random
+
+44
+00:03:01,978 --> 00:03:06,490
+value between 0 and m-1,
+each value with the same probability.
+
+45
+00:03:06,490 --> 00:03:10,787
+Then the probability of collision for
+any two keys is exactly 1/m.
+
+46
+00:03:10,787 --> 00:03:12,774
+But that is not a universal family.
+
+47
+00:03:12,774 --> 00:03:16,370
+Actually we cannot use this family
+at all because the hash function is
+
+48
+00:03:16,370 --> 00:03:20,039
+not deterministic and we can only
+use deterministic hash functions.
+
+49
+00:03:21,410 --> 00:03:25,950
+So instead,
+we need to have some set of hash functions
+
+50
+00:03:25,950 --> 00:03:29,610
+such that all the hash functions
+in the set are deterministic.
+
+51
+00:03:29,610 --> 00:03:35,280
+And then, we will select a random function
+h from this set of hash functions,
+
+52
+00:03:35,280 --> 00:03:40,300
+and we will use the same fixed function
+h throughout the whole algorithm.
+
+53
+00:03:40,300 --> 00:03:45,659
+So that we can correctly find all the
+objects that we store in the hash table,
+
+54
+00:03:45,659 --> 00:03:46,681
+for example.
+
+55
+00:03:46,681 --> 00:03:52,087
+So, there is a Lemma about
+running time of operations
+
+56
+00:03:52,087 --> 00:03:56,538
+with hash table if we
+use universal family.
+
+57
+00:03:56,538 --> 00:04:01,638
+If hash function h is chosen at
+random from a universal family
+
+58
+00:04:01,638 --> 00:04:06,938
+then on average the length of
+the longest chain in our hash table
+
+59
+00:04:06,938 --> 00:04:13,620
+will be bounded by O(1 + alpha),
+where alpha is the load factor.
+
+60
+00:04:13,620 --> 00:04:18,930
+Load factor is the ratio of number of
+keys that we store in our hash table
+
+61
+00:04:18,930 --> 00:04:21,380
+to the size of the hash table allocated.
+
+62
+00:04:22,860 --> 00:04:26,040
+Which is the same as the chronology
+of the hash functions
+
+63
+00:04:26,040 --> 00:04:28,500
+in the universal family that we use.
+
+64
+00:04:28,500 --> 00:04:29,470
+So, it makes sense.
+
+65
+00:04:29,470 --> 00:04:34,260
+If the load factor is small it means
+that we only store a few keys in a large
+
+66
+00:04:34,260 --> 00:04:37,560
+hash table, and so
+longest chain will be short.
+
+67
+00:04:38,730 --> 00:04:42,785
+But as our table gets filled up,
+the chains grow.
+
+68
+00:04:42,785 --> 00:04:44,670
+This Lemma says, however,
+
+69
+00:04:44,670 --> 00:04:49,150
+that if we chose a random function from a
+universal family they won't grow to much.
+
+70
+00:04:49,150 --> 00:04:54,420
+On average, the longest chain will
+still be of length just (1 + alpha).
+
+71
+00:04:54,420 --> 00:04:58,430
+And probably that is just
+a small number because alpha
+
+72
+00:04:59,940 --> 00:05:03,420
+is usually below one,
+you don't want to store more keys in
+
+73
+00:05:03,420 --> 00:05:06,022
+the hash table than the size
+of the hash table allocated.
+
+74
+00:05:06,022 --> 00:05:08,927
+So alpha will be below
+1 most of the time and
+
+75
+00:05:08,927 --> 00:05:14,140
+then (1+ alpha) is just two, so
+this is a constant actually.
+
+76
+00:05:14,140 --> 00:05:18,950
+So, the corollary is that if h is chosen
+at random from the universal family,
+
+77
+00:05:18,950 --> 00:05:22,750
+then operations with hash table will
+run on average in a constant time.
+
+78
+00:05:24,790 --> 00:05:28,512
+Now the question is,
+how to choose the size of your hash table?
+
+79
+00:05:28,512 --> 00:05:33,312
+Of course, it control the amount of
+memory used with m which is your
+
+80
+00:05:33,312 --> 00:05:38,970
+chronology of the hash functions and which
+is equal to the size of the hash table.
+
+81
+00:05:38,970 --> 00:05:40,867
+But you also control
+the speed of the operations.
+
+82
+00:05:40,867 --> 00:05:46,533
+So ideally, in practice, you want your
+load factor alpha to be between 0.5 and 1.
+
+83
+00:05:46,533 --> 00:05:51,526
+You want it to be below 1 because
+otherwise you store too much keys in
+
+84
+00:05:51,526 --> 00:05:56,009
+the same hash table and
+then everything could becomes slow.
+
+85
+00:05:56,009 --> 00:06:00,800
+But also you don't want alpha to be
+too small because that way you will
+
+86
+00:06:00,800 --> 00:06:02,650
+waste a lot of memory.
+
+87
+00:06:02,650 --> 00:06:07,028
+If alpha is at least one-half,
+then you basically use linear memory
+
+88
+00:06:07,028 --> 00:06:10,508
+to store your n keys and
+your memory overhead is small.
+
+89
+00:06:10,508 --> 00:06:17,180
+And operations still run in time,
+O(1 + alpha) which is a constant time,
+
+90
+00:06:17,180 --> 00:06:21,094
+on average if alpha is between 0.5 and 1.
+
+91
+00:06:21,094 --> 00:06:25,305
+The question is what to do if
+you don't know in advance how
+
+92
+00:06:25,305 --> 00:06:28,746
+many keys you want to
+store in your hash table.
+
+93
+00:06:28,746 --> 00:06:32,673
+Of course, there is a solution to
+start with a very big hash table, so
+
+94
+00:06:32,673 --> 00:06:34,925
+that definitely all the keys will fit.
+
+95
+00:06:34,925 --> 00:06:38,849
+But this way you will
+waste a lot of memory.
+
+96
+00:06:38,849 --> 00:06:43,831
+So, what we can do is copy the idea
+you learned in the lesson about
+
+97
+00:06:43,831 --> 00:06:45,950
+dynamic arrays.
+
+98
+00:06:45,950 --> 00:06:47,750
+You start with a small hash table and
+
+99
+00:06:47,750 --> 00:06:52,460
+then you grow it organically as
+you put in more and more keys.
+
+100
+00:06:52,460 --> 00:06:55,010
+Basically, you resize the hash table and
+
+101
+00:06:55,010 --> 00:06:59,340
+make it twice bigger as soon
+as alpha becomes too large.
+
+102
+00:06:59,340 --> 00:07:02,310
+And then,
+you need to do what is called a rehash.
+
+103
+00:07:02,310 --> 00:07:06,820
+You need to copy all the keys from the
+current hash table to the new bigger hash
+
+104
+00:07:06,820 --> 00:07:07,326
+table.
+
+105
+00:07:07,326 --> 00:07:08,177
+And of course,
+
+106
+00:07:08,177 --> 00:07:12,770
+you will need a new hash function
+with twice the chronology to do that.
+
+107
+00:07:12,770 --> 00:07:16,769
+So here is the code which tries
+to keep loadfFactor below 0.9.
+
+108
+00:07:16,769 --> 00:07:20,328
+And 0.9 is just a number I selected,
+you could put 1 here or
+
+109
+00:07:20,328 --> 00:07:23,370
+0.8, that doesn't really matter.
+
+110
+00:07:23,370 --> 00:07:26,640
+So first we compute the current
+loadFactor, which is the ratio
+
+111
+00:07:26,640 --> 00:07:31,410
+of the number of keys stored in
+the table to the size of the hash table.
+
+112
+00:07:31,410 --> 00:07:35,860
+And if that loadFactor just
+became bigger than 0.9,
+
+113
+00:07:35,860 --> 00:07:40,700
+we create a new hash table of twice
+the size of our current hash table.
+
+114
+00:07:40,700 --> 00:07:46,050
+We also choose a new random hash
+function from the universal family
+
+115
+00:07:46,050 --> 00:07:51,110
+with twice the cardinality coresponding
+to the new hash table size.
+
+116
+00:07:51,110 --> 00:07:55,380
+And then we take each object
+from our current hash table, and
+
+117
+00:07:55,380 --> 00:07:59,210
+we insert it in the new hash table
+using the new hash function.
+
+118
+00:07:59,210 --> 00:08:01,594
+So we basically copy all
+the keys to the new hash table.
+
+119
+00:08:01,594 --> 00:08:06,526
+And then we substitute our current hash
+table with the bigger one and the current
+
+120
+00:08:06,526 --> 00:08:11,175
+hash function with the hash function
+corresponding to the new hash table.
+
+121
+00:08:11,175 --> 00:08:16,168
+That way,
+the loadFactor decreases roughly twice.
+
+122
+00:08:16,168 --> 00:08:20,454
+Because we added,
+probably just added one new element,
+
+123
+00:08:20,454 --> 00:08:24,573
+the loadFactor became just
+a little more than 0.9.
+
+124
+00:08:24,573 --> 00:08:29,329
+And then we increase the size of the hash
+table twice while the number of keys
+
+125
+00:08:29,329 --> 00:08:33,331
+stayed the same, so
+the loadFactor became roughly 0.45,
+
+126
+00:08:33,331 --> 00:08:36,444
+which is below 0.9,
+which is what we wanted.
+
+127
+00:08:36,444 --> 00:08:41,183
+So to achieve that, you need to
+call this procedure rehash after
+
+128
+00:08:41,183 --> 00:08:45,681
+each operation which inserts
+something in your hash table.
+
+129
+00:08:45,681 --> 00:08:50,276
+And it could work slowly when
+this happens because the rehash
+
+130
+00:08:50,276 --> 00:08:54,690
+procedure needs to copy all
+the keys from your current hash
+
+131
+00:08:54,690 --> 00:08:59,485
+table to the new big hash table,
+and that works in linear time.
+
+132
+00:08:59,485 --> 00:09:04,449
+But similarly to dynamic arrays,
+the amortized running time will still be
+
+133
+00:09:04,449 --> 00:09:08,797
+constant on average because their
+hash will happen only rarely.
+
+134
+00:09:08,797 --> 00:09:12,473
+So you reach a certain
+level of load factor and
+
+135
+00:09:12,473 --> 00:09:16,650
+you increase the size of our table twice.
+
+136
+00:09:16,650 --> 00:09:22,840
+And then it will take twice longer to
+again reach too high value of load factor.
+
+137
+00:09:22,840 --> 00:09:26,720
+And then you'll again increase
+your hash table twice.
+
+138
+00:09:26,720 --> 00:09:31,702
+So the more keys you put in,
+the longer it takes until the next rehash.
+
+139
+00:09:31,702 --> 00:09:34,240
+So their hashes will be really rare, and
+
+140
+00:09:34,240 --> 00:09:39,701
+that's why it won't influence your running
+time with operations, significantly.

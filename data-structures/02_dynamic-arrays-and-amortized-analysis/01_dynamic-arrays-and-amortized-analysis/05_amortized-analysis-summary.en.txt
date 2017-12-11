@@ -1,0 +1,31 @@
+Let's go back to the dynamic array. So are there alternatives
+to doubling the array size? Right, we doubled each time. What happens if we didn't double? Well we could use some
+different growth factor. So for instance, we could use 2.5. So grow the array by more than two,
+or grow the array by less than two. As long as we used some constant
+multiplicative factor, we'd be fine. The question is can we
+use a constant amount? Can we add by a particular amount,
+like, let's say, 10 each time? And the answer is really, no. And the reason is, as the array got
+bigger and bigger, and we have to resize every ten times,
+we just don't have enough time to accumulate work in order
+to actually do the movement. Let's look at another way. Let's look at an aggregate method. Let's say c sub i is the cost
+of the i'th insertion. We're going to define that as one, for
+putting in the i'th element, plus either i-1 if the i-1'th
+insertion makes the dynamic array full. So that is if i-1 is a multiple
+of 10 and it's 0 otherwise. By the definition of aggregate method which is just the sum of the total costs divided
+by n and that's n plus again that's the one summed n times is just n plus
+the summation from one to (n-1)/10 of 10j. That is just the multiples of 10. All the way up to but not including n. So 10, 20, 30, 40 and so on. All that divided by n. Well, we can pull the 10
+out of that summation so it's just 10 x the summation
+j = 1 to (n- 1)/10 of j. So that's just numbers 1, 2, 3, 4,
+and so on, all the way up to (n- 1)/10. That is O(n squared). That summation. So we've got n+10 times O(N^2)/n=O(n^2)/n=O(n). So this shows that if we use a constant
+amount to grow the dynamic array each time that we end up with
+an amortized cost for push back of O(n) rather than O(1). So it's extremely important
+to use a constant factor. So in summary we can
+calculate the amortized cost in the context of
+a sequence of operations. Rather than looking at a single operation
+in its worst case we look at a totality of a sequence of operations. We have three ways to do the analysis. The aggregate method, where we just do the brute-force sum based
+on the definition of the amortized cost. We can use the banker's method
+where we actually use tokens and we're saving them conceptually
+in the data structure. Or the physicist's method where
+we define a potential function, and look at the change in that potential. Nothing changes in the code. We're only doing runtime analysis, so the code doesn't actually
+store any tokens at all. That's an important thing to remember. That is dynamic arrays and
+amortized analysis.

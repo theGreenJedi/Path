@@ -1,0 +1,795 @@
+1
+00:00:02,970 --> 00:00:04,942
+Hello everybody, welcome back.
+
+2
+00:00:04,942 --> 00:00:07,002
+Last time, we talked about AVL trees and
+
+3
+00:00:07,002 --> 00:00:10,711
+showed that they can perform your
+basic binary search tree operations.
+
+4
+00:00:10,711 --> 00:00:13,978
+But now we're going to introduce
+a couple of new operations and
+
+5
+00:00:13,978 --> 00:00:15,771
+talk about how to implement them.
+
+6
+00:00:15,771 --> 00:00:19,460
+So, another useful feature of binary
+search trees is in addition to being
+
+7
+00:00:19,460 --> 00:00:23,683
+able to search them, there's also a bunch
+of sort of interesting ways that you could
+
+8
+00:00:23,683 --> 00:00:24,591
+recombine them.
+
+9
+00:00:25,970 --> 00:00:29,570
+And so we're going to discuss
+here two of these operations.
+
+10
+00:00:29,570 --> 00:00:30,480
+One of them is merge,
+
+11
+00:00:30,480 --> 00:00:34,610
+which takes two binary search trees and
+combines them into a single one.
+
+12
+00:00:34,610 --> 00:00:37,400
+And the other one is split,
+which takes one binary search tree and
+
+13
+00:00:37,400 --> 00:00:38,130
+breaks it into two.
+
+14
+00:00:39,630 --> 00:00:41,980
+So, let's start with merge.
+
+15
+00:00:41,980 --> 00:00:44,860
+And the idea is, in general,
+if you have two sorted lists and
+
+16
+00:00:44,860 --> 00:00:47,900
+want to combined them into
+sort of a single sorted list.
+
+17
+00:00:47,900 --> 00:00:51,340
+This is actually pretty slow,
+it's going to take O(n) time,
+
+18
+00:00:51,340 --> 00:00:54,880
+because you sort of need to figure out
+how the lists interweave with each other.
+
+19
+00:00:54,880 --> 00:00:56,590
+This is the thing you do in merge sort.
+
+20
+00:00:57,990 --> 00:01:01,560
+However, there is a case where
+you can merge them a lot faster.
+
+21
+00:01:01,560 --> 00:01:04,279
+And that's the case where they're
+separated from each other,
+
+22
+00:01:04,279 --> 00:01:07,312
+where they're sort of, one's on one side,
+one's on the other side.
+
+23
+00:01:07,312 --> 00:01:10,874
+And so, this is the case that
+merge is going to work with.
+
+24
+00:01:10,874 --> 00:01:16,244
+So you're giving two trees, R1 and
+R2, or the roots of these trees.
+
+25
+00:01:16,244 --> 00:01:20,553
+And they're going to need to have the
+property that all the keys in R1's tree
+
+26
+00:01:20,553 --> 00:01:23,220
+are smaller than all of
+the keys in R2's tree.
+
+27
+00:01:25,130 --> 00:01:28,610
+And if we're given this, we should then
+return the root of a new tree that had
+
+28
+00:01:28,610 --> 00:01:30,190
+all of the elements of both of the trees.
+
+29
+00:01:31,760 --> 00:01:36,770
+So just to review this condition that
+we have, of the three trees below,
+
+30
+00:01:36,770 --> 00:01:39,749
+which of them can be properly
+merged with the one above?
+
+31
+00:01:42,070 --> 00:01:44,790
+The answer is that only A can because
+
+32
+00:01:44,790 --> 00:01:48,890
+all of the elements of A are less than
+all of the elements of the guy above.
+
+33
+00:01:48,890 --> 00:01:51,890
+B has this problem that it's got a 9,
+and 9 is between 8 and
+
+34
+00:01:51,890 --> 00:01:55,110
+10 so
+it can't really be separated from them.
+
+35
+00:01:55,110 --> 00:01:59,160
+And C has the problem that it has both 2,
+which is smaller than everything above,
+
+36
+00:01:59,160 --> 00:02:01,930
+and 12 which is bigger
+than everything above.
+
+37
+00:02:01,930 --> 00:02:06,330
+So, A is the only guy
+that actually works here.
+
+38
+00:02:06,330 --> 00:02:08,150
+Okay, so
+how do you do this merge operation?
+
+39
+00:02:09,210 --> 00:02:13,150
+Well, there's actually a case where
+it's super easy to merge trees and
+
+40
+00:02:13,150 --> 00:02:16,130
+that's if,
+instead of just being given the two trees,
+
+41
+00:02:16,130 --> 00:02:18,490
+we also have an extra node
+that we can use as the root.
+
+42
+00:02:19,730 --> 00:02:24,000
+Because then you just have the node
+up top, you have the guys in R1,
+
+43
+00:02:24,000 --> 00:02:28,590
+the small guys on the left of it, the guys
+in R2, the big guys on the right of it.
+
+44
+00:02:28,590 --> 00:02:29,310
+That's your tree.
+
+45
+00:02:30,750 --> 00:02:34,620
+So, the implementation,
+we'll call this function MergeWithRoot,
+
+46
+00:02:34,620 --> 00:02:39,610
+is you let R1 be the left child of T,
+R2 be the right child of T.
+
+47
+00:02:39,610 --> 00:02:41,990
+Let T be the parents of these two.
+
+48
+00:02:41,990 --> 00:02:44,900
+If you need to do things
+involving restoring heights,
+
+49
+00:02:44,900 --> 00:02:48,000
+you adjust those as appropriate,
+and then you return T.
+
+50
+00:02:49,070 --> 00:02:51,200
+This takes O(1) time, very simple.
+
+51
+00:02:52,974 --> 00:02:56,900
+The problem is, well,
+what if we're not given this extra node?
+
+52
+00:02:56,900 --> 00:02:59,560
+Then there's actually
+a pretty simple solution.
+
+53
+00:02:59,560 --> 00:03:03,370
+You find the largest element,
+of say, the left subtree.
+
+54
+00:03:03,370 --> 00:03:06,930
+You remove that, and
+then turn it into the root of the new guy.
+
+55
+00:03:06,930 --> 00:03:08,140
+And that works.
+
+56
+00:03:08,140 --> 00:03:10,640
+So now if we want to merge R1 and
+
+57
+00:03:10,640 --> 00:03:16,090
+R2, we're going to find the largest
+element of R1, call that T.
+
+58
+00:03:16,090 --> 00:03:20,940
+You're going to delete T from its subtree,
+and then you're going to merge with root.
+
+59
+00:03:20,940 --> 00:03:22,000
+And that works.
+
+60
+00:03:22,000 --> 00:03:23,630
+The run time's a little bit worse.
+
+61
+00:03:23,630 --> 00:03:28,180
+You have to spend O of the height
+time to find this node T, but
+
+62
+00:03:28,180 --> 00:03:29,670
+other than that it's pretty efficient.
+
+63
+00:03:31,220 --> 00:03:32,430
+So, just to review,
+
+64
+00:03:32,430 --> 00:03:36,090
+we've got this tree, we find
+the biggest element to the left tree 8.
+
+65
+00:03:36,090 --> 00:03:39,350
+We then delete it, and
+then we merge with root.
+
+66
+00:03:40,570 --> 00:03:42,340
+That's all there is to it.
+
+67
+00:03:42,340 --> 00:03:44,760
+Now if we didn't care about balance,
+
+68
+00:03:44,760 --> 00:03:47,870
+that would be all we'd have
+to say about this operation.
+
+69
+00:03:47,870 --> 00:03:52,990
+Unfortunately, this merge operation
+doesn't preserve balance properties.
+
+70
+00:03:52,990 --> 00:03:56,220
+And the problem is that,
+well, the two trees,
+
+71
+00:03:56,220 --> 00:04:00,190
+you didn't really touch them very much,
+so they stay balanced.
+
+72
+00:04:00,190 --> 00:04:03,320
+But when you stick them both
+together under the same root,
+
+73
+00:04:03,320 --> 00:04:08,030
+well, if one tree is much, much bigger
+than the other, suddenly the root is very,
+
+74
+00:04:08,030 --> 00:04:10,320
+very unbalanced, and this is a problem.
+
+75
+00:04:12,040 --> 00:04:14,288
+So we need a way to fix this.
+
+76
+00:04:14,288 --> 00:04:18,987
+And there's actually a not
+very difficult way to do that.
+
+77
+00:04:18,987 --> 00:04:21,164
+The idea is that we can't merge the, say,
+
+78
+00:04:21,164 --> 00:04:24,810
+left subtree with the right subtree
+because the left one is way too big.
+
+79
+00:04:25,970 --> 00:04:29,600
+So what we're going to do is not merge
+the whole guy with the whole guy here.
+
+80
+00:04:29,600 --> 00:04:34,250
+We're going to have to find some node of
+approximately the same height as this guy
+
+81
+00:04:34,250 --> 00:04:36,180
+on the right so that we can merge that.
+
+82
+00:04:37,760 --> 00:04:42,119
+And so what we're going to do is, we're
+going to sort of climb down the sort of
+
+83
+00:04:42,119 --> 00:04:45,334
+right edge of the bigger tree
+until we find a sub tree of
+
+84
+00:04:45,334 --> 00:04:49,211
+the right height that we can merge
+with our guy on the other side.
+
+85
+00:04:49,211 --> 00:04:51,115
+Okay, so how do we implement this?
+
+86
+00:04:51,115 --> 00:04:53,010
+AVLTreeMergeWithRoot.
+
+87
+00:04:55,200 --> 00:04:59,570
+What we're going to do is, if the heights
+of the two trees differ by at most 1,
+
+88
+00:04:59,570 --> 00:05:01,770
+we can just merge with root as before.
+
+89
+00:05:01,770 --> 00:05:05,118
+We then figure out what the height
+of T needs to be and return it.
+
+90
+00:05:05,118 --> 00:05:08,170
+That simple.
+
+91
+00:05:08,170 --> 00:05:12,880
+Otherwise though, what happens if say
+R1's height is bigger than R2's height?
+
+92
+00:05:14,110 --> 00:05:17,880
+Well, what we want to do is we want to
+step down to instead of merging R1 with
+
+93
+00:05:17,880 --> 00:05:22,540
+R2, we merge R1's right child with R2.
+
+94
+00:05:22,540 --> 00:05:28,570
+So, we use merge with root to merge
+the right child with R2 at this T,
+
+95
+00:05:28,570 --> 00:05:32,475
+and we get some new
+tree with root R prime.
+
+96
+00:05:32,475 --> 00:05:36,141
+R prime we set back to be
+the right child of R1,
+
+97
+00:05:36,141 --> 00:05:39,251
+and similarly set R1 to be the parent.
+
+98
+00:05:39,251 --> 00:05:42,131
+And then we need to
+rebalance this at R1 because
+
+99
+00:05:42,131 --> 00:05:46,744
+things might be off by a little bit, but
+it turns out not more than about one.
+
+100
+00:05:46,744 --> 00:05:50,254
+We knew how to deal with that
+with our old rebalance operation.
+
+101
+00:05:50,254 --> 00:05:51,889
+And than we return the root of the tree.
+
+102
+00:05:53,480 --> 00:05:56,920
+If, on the other hand,
+R1's height is smaller than R2's height,
+
+103
+00:05:56,920 --> 00:05:59,480
+we sort of do the same operation but
+on the opposite side.
+
+104
+00:06:01,620 --> 00:06:04,060
+Okay, so, let's analyze this.
+
+105
+00:06:04,060 --> 00:06:08,602
+Every step we take down the side
+of the tree decreases the height
+
+106
+00:06:08,602 --> 00:06:10,838
+difference by either 1 or 2.
+
+107
+00:06:10,838 --> 00:06:14,688
+So we're just going to keep decreasing
+the height difference until we're off by
+
+108
+00:06:14,688 --> 00:06:15,280
+at most 1.
+
+109
+00:06:15,280 --> 00:06:18,601
+Then we merge, and
+we soon have to go back up the chain.
+
+110
+00:06:18,601 --> 00:06:22,501
+But the amount of time this takes
+isn't the depth of the tree,
+
+111
+00:06:22,501 --> 00:06:27,150
+it's sort of the number of steps
+we need to take down the side.
+
+112
+00:06:27,150 --> 00:06:29,716
+And that's approximately
+the difference in the two heights.
+
+113
+00:06:29,716 --> 00:06:32,090
+And this will actualy
+be important in a bit.
+
+114
+00:06:34,020 --> 00:06:36,500
+Okay, so that was the merge operation.
+
+115
+00:06:36,500 --> 00:06:39,990
+Next, we're going to talk about sort
+of the opposite operation, split.
+
+116
+00:06:39,990 --> 00:06:42,740
+Merge takes two trees and
+turns them into one.
+
+117
+00:06:42,740 --> 00:06:44,470
+Split breaks one tree into two.
+
+118
+00:06:45,620 --> 00:06:48,142
+What you do is you pick an element,
+say 6, and
+
+119
+00:06:48,142 --> 00:06:52,157
+then you've got the tree consisting
+of all the elements less than 6, and
+
+120
+00:06:52,157 --> 00:06:55,168
+then another one from all
+the elements bigger than 6.
+
+121
+00:06:55,168 --> 00:07:00,000
+So split should take the root of a tree
+and the key x, and the output should be
+
+122
+00:07:00,000 --> 00:07:04,909
+two different trees, one with all
+the elements less than x in your tree, and
+
+123
+00:07:04,909 --> 00:07:07,692
+one with all of
+the elements bigger than x.
+
+124
+00:07:07,692 --> 00:07:12,050
+Okay now,
+the idea is actually not so hard.
+
+125
+00:07:12,050 --> 00:07:15,130
+What we're going to do is
+we're going to search for
+
+126
+00:07:15,130 --> 00:07:20,320
+x, and then the search path,
+well it's got a few nodes on the path.
+
+127
+00:07:20,320 --> 00:07:24,320
+And then it has a bunch of trees
+hanging off to the left of the path.
+
+128
+00:07:24,320 --> 00:07:27,021
+These things are all going
+to be smaller than x.
+
+129
+00:07:27,021 --> 00:07:30,245
+And it's going to have a bunch of trees
+hanging off to the right that are all
+
+130
+00:07:30,245 --> 00:07:31,444
+going to be bigger than x.
+
+131
+00:07:31,444 --> 00:07:35,606
+And so all we have to do is take
+these trees that are smaller than x,
+
+132
+00:07:35,606 --> 00:07:39,393
+merge them all together,
+take these things bigger than x,
+
+133
+00:07:39,393 --> 00:07:42,821
+merge them all together,
+and then we have two trees.
+
+134
+00:07:42,821 --> 00:07:44,632
+So let's see how this works.
+
+135
+00:07:44,632 --> 00:07:46,878
+So we're going to do this recursively.
+
+136
+00:07:46,878 --> 00:07:50,708
+We're going to split at R,
+at this point x.
+
+137
+00:07:50,708 --> 00:07:54,172
+If our root is null,
+if we just have the null tree,
+
+138
+00:07:54,172 --> 00:07:57,651
+we just return a pair of null vectors,
+whatever.
+
+139
+00:07:57,651 --> 00:08:00,529
+Next if x is less than
+the key at the root,
+
+140
+00:08:00,529 --> 00:08:05,121
+what that means is that everything
+on the right is bigger than x.
+
+141
+00:08:05,121 --> 00:08:07,071
+That's sort of all on the right.
+
+142
+00:08:07,071 --> 00:08:11,258
+But the left side of the root,
+we need to split that in two.
+
+143
+00:08:11,258 --> 00:08:16,142
+So we're going to recursively
+run split on R.Left, and
+
+144
+00:08:16,142 --> 00:08:19,550
+that gives us two trees, R1 and R2.
+
+145
+00:08:19,550 --> 00:08:23,070
+Now R1 is actually everything in
+the whole tree that's smaller than x.
+
+146
+00:08:23,070 --> 00:08:26,430
+That half is done, but
+
+147
+00:08:26,430 --> 00:08:29,989
+R2 needs to be combined with the whole
+right subtree of our original tree.
+
+148
+00:08:31,200 --> 00:08:36,820
+So we run MergeWithRoot on R2 and
+R.Right with R as the root.
+
+149
+00:08:36,820 --> 00:08:39,660
+Fortunately we have this extra nodes,
+uses the root.
+
+150
+00:08:39,660 --> 00:08:41,190
+And this gives us an R3.
+
+151
+00:08:41,190 --> 00:08:44,080
+And we can return R1 and R3 as our split.
+
+152
+00:08:45,530 --> 00:08:49,180
+If X is bigger than the key, we can do
+the same thing on the opposite side.
+
+153
+00:08:49,180 --> 00:08:50,170
+Hopefully you can figure that out.
+
+154
+00:08:52,490 --> 00:08:54,720
+Okay, so
+the first thing to note is that if we,
+
+155
+00:08:54,720 --> 00:08:58,830
+instead of just doing a MergeWithRoot,
+we used AVLMergeWithRoot.
+
+156
+00:08:58,830 --> 00:09:02,150
+This insures that the two trees we
+produce are both balanced, which is good.
+
+157
+00:09:03,570 --> 00:09:07,650
+Also if you look at the run
+time of this algorithm, well,
+
+158
+00:09:07,650 --> 00:09:12,720
+the run time of AVLMergeWithRoot is O,
+the difference in the two heights.
+
+159
+00:09:13,740 --> 00:09:16,692
+So we have to look at the difference
+between the biggest type and
+
+160
+00:09:16,692 --> 00:09:19,940
+the next biggest and the next biggest and
+the one after that and so on.
+
+161
+00:09:19,940 --> 00:09:24,802
+This sum actually telescopes, and the
+total run time is O of the maximum height
+
+162
+00:09:24,802 --> 00:09:29,531
+of one of these trees we're trying
+to merge, which is just O(log(n)).
+
+163
+00:09:29,531 --> 00:09:32,039
+And so we've got these two operation,
+
+164
+00:09:32,039 --> 00:09:35,459
+merge combines trees,
+split breaks them in two, and
+
+165
+00:09:35,459 --> 00:09:40,330
+both operations can be implemented
+in O(log(n)) time using AVL trees.
+
+166
+00:09:41,725 --> 00:09:44,175
+So that's these two operations.
+
+167
+00:09:44,175 --> 00:09:46,363
+Next time we're going to talk
+about a couple of applications.
+
+168
+00:09:46,363 --> 00:09:49,955
+One of them's going to sort of talk about
+a way that we can make use of these split
+
+169
+00:09:49,955 --> 00:09:51,487
+and merge in an interesting way.

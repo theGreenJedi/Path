@@ -1,0 +1,108 @@
+Hi, in the previous videos, you've learned how to quickly look up name
+in your phonebook given the phone number. And we want to learn to solve
+the reverse problem given a name, look up a phone number of
+the corresponding person. To do that, we need to implement
+the Map from names to phone numbers. And we can again use hash tables and we can again use chaining as
+in the previous sections. But we need to design a hash
+function that is defined names. And more generally, we want to learn to
+hash arbitrary strings of characters. And by the way in this video, you will
+also learn how hashing of strings and implemented in the Java
+programming language. But first, let's introduce a new notation. Denote by lSl enclosed in vertical
+lines the length of string S. For example,
+the length of string l"a"l is 1, length of string l"ab"l is 2, and
+length of string l"abcde"l is 5. So now how do hash strings? Well when we're given a string,
+we're actually given a sequence of characters from
+S[0] to S length of S- 1. We number the characters of
+the strings from 0 in this lecture. And S[i] Is an individual character that
+is in the i-th position in the string. I say that we should
+use all the characters when we compute our hash
+function of a string. Indeed, if we don't use the first
+character, there will be many collisions. For example, if the first symbol of the
+string is not used, then the hash value of strings ("aa"), ("ba") and so
+on, up to ("za") will be the same. Because however we compute
+the value of the hash function, it doesn't use the value
+of the first character. And if everything else in
+the strings stays the same, and we only change the first character that
+doesn't influence the value of the hash function then the value of the hash
+function must be the same. And so there will be a lot of collisions
+and we want to avoid collisions. So we need to use value of
+each of the characters. Now, we could do a lot
+of things with that. For example,
+sum the values of all the characters or multiply them, but
+we'll do something different. Well first,
+to even compute something on a string, we need to convert each character
+of the string to an integer code. For example,
+that can be ASCII code or Unicode, corresponding to that symbol on your
+computer, that doesn't really matter. And also we'll again need to
+choose a big prime number p, the same as we used in
+the integer hashing. So suppose we've chosen some big
+prime number p, now we introduce a new family of hash functions called
+polynomial family of hash functions. So calligraphy p is the family of hash
+functions which is index by small p, which is our big prime number. And also index by x, and x is a parameter
+which changes from 1 to p- 1. So the value of a hash
+function index by p and x on a string S, is the following sum. It is a polynomial sum where we multiply
+the integer quote corresponding to the ith character of S, which is noted by
+S of i, the same as the character itself. We multiply it by x to the power of i. We sum all these things up, and
+we take the value modular p. So this is a family of hash functions, and the chronology of all
+those hash functions is p. So any such hash function
+returns value from 0 to p- 1. And how many hash functions
+are there in this family? Well of course, there are exactly
+p- 1 different hash functions, because to choose to define a hash
+function from this family you would just need to choose the value of x. And x changes from 1 to p- 1, and
+it's an integer number of course. So how can we implement a hash
+function from this family? S, the procedure PolyHash which
+takes it's input string S, prime number p and parameter x, implements
+the hash function from our peril. It starts with the signing values of 0
+to the result to the hash value will return to end. And then it will go from right
+to left in our string and compute new value based on the value
+of the corresponding character. And there is a formula in
+the code that does exactly that. And I will show you by example
+that what we get in the end by applying this formula
+is exactly what we want. So basically,
+we start with a hash value of 0, and then we start with i equal to 2 if
+the length of our string S is 3. We start with length of S- 1 which is 2. We have current value of hash = 0. So we multiply the 0 by x and get 0, then we add the value of S[i]
+which is S[2], and take it mod p. And so after first iteration of the for
+loop, we get S[2] mod p. What happens is the next iteration,
+that i is decreased and i is now 1. And we multiply the current
+value S[2] by x. And we add s[1], and
+take everything modular p. And what we get is the same as of
+S[1] + S[2] multiply by x modular p. And then the last iteration,
+i is decreased to 0. We multiply the current value by x. What we get is S[1] multiply by
+x + S[2] multiply by x squared. And then we also add S[0] to the sum and
+take everything modular p. And the result is S[0] + S[1]
+multiply by x + S[2] multiply by x2, exactly as we wanted. A polynomial hash function,
+with prime P and prime parameter x. And by the way, the implementation
+of the built in hash code methods in the class stream in Java,
+is very similar to our procedure PolyHash. The only difference is that,
+it always uses x = 31. And for some technical reasons,
+it avoids the modular p operator It just computes the polynomial sum
+without any modular division. So now you know how a function that is
+used probably trillions of times a day by thousands and
+many thousands of different programs, how this function is implemented. So now about the efficiency
+of our polynomial family. First, Lemma says that for
+any two different strings s1 and s2 of length at most L + 1. If you choose a random hash function
+from the polynomial family by selecting a random value of x,
+parameter x from 1 to p- 1. You can select a random hash
+function from the family. So if you select a random hash from the
+polynomial family, then the probability of collision on these two different
+strings is at most L divided by p. So that doesn't seem like a good
+estimate because L can be big, but actually it is your power to choose p. If you choose very, very big prime number
+p then L over p will be very small. And know that it won't influence the
+running time of the PolyHash procedure, because the running time of this
+procedure is big length of S. It only depends on
+the length of the string. It doesn't depend on the length
+of number p more or less. So if you select a really big number p,
+then the probability of collision will be very small and the hash function
+will still be computed very fast. The idea of proof of this Lemma
+is that the equation polynomial equation of power L, modular prime number
+p has at most L different solutions x. Basically, when we consider
+two strings S1 and S2. The fact that the hash value or some hash function from
+the polynomial family is the same for these two strings means
+that x corresponding to our hash function is a solution
+of this kind of equation. And the fact that strings are different
+makes sure that at least one of the coefficients of this equation is
+different from 0, and that is essential. If the strings were the same of course, the value of any hash function
+on them will be the same. But if they're different then
+the probability is at most L over p. Because there are only L or
+less different x for which the hash function can give
+the same value on these two strings.

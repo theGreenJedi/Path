@@ -1,0 +1,599 @@
+1
+00:00:00,250 --> 00:00:04,230
+Our goal in this video is
+to design a way of keeping
+
+2
+00:00:04,230 --> 00:00:06,890
+the height of our binary max heap shallow.
+
+3
+00:00:06,890 --> 00:00:12,820
+Well, what is a natural approach to
+create a tree out of n given nodes,
+
+4
+00:00:12,820 --> 00:00:15,070
+whose height is as small as possible.
+
+5
+00:00:15,070 --> 00:00:20,020
+Well, it is natural to require that all
+the levels are fully packed, right.
+
+6
+00:00:20,020 --> 00:00:22,900
+This leads us to a notion
+of a complete binary tree.
+
+7
+00:00:22,900 --> 00:00:27,860
+By definition a binary tree is called
+complete if all its levels are filled
+
+8
+00:00:27,860 --> 00:00:28,825
+completely.
+
+9
+00:00:28,825 --> 00:00:33,395
+Except possibly the last one where
+we require additionally that all
+
+10
+00:00:33,395 --> 00:00:37,174
+the nodes at this last level
+are in left most positions.
+
+11
+00:00:37,174 --> 00:00:41,040
+Let me illustrate this
+with a few small examples.
+
+12
+00:00:41,040 --> 00:00:43,131
+So this is a complete binary tree.
+
+13
+00:00:43,131 --> 00:00:47,715
+This is also a complete binary tree, and
+this is also a complete binary tree.
+
+14
+00:00:47,715 --> 00:00:49,740
+So this is a binary complete tree too.
+
+15
+00:00:50,760 --> 00:00:54,650
+And this is our first example of
+a binary tree which is not complete.
+
+16
+00:00:54,650 --> 00:00:58,400
+Well it is not complete
+because on the last level
+
+17
+00:00:58,400 --> 00:01:02,080
+the two nodes shown here are not
+in the left most positions.
+
+18
+00:01:02,080 --> 00:01:04,620
+This is also not a complete binary tree.
+
+19
+00:01:04,620 --> 00:01:06,430
+This binary tree is also not complete
+
+20
+00:01:07,630 --> 00:01:12,300
+because well this child is missing here,
+right.
+
+21
+00:01:12,300 --> 00:01:17,170
+And this is also an example of
+a binary tree which is not complete.
+
+22
+00:01:17,170 --> 00:01:21,110
+The first advantage of complete
+binary trees is straightforward, and
+
+23
+00:01:21,110 --> 00:01:23,470
+it is exactly what we need actually.
+
+24
+00:01:23,470 --> 00:01:29,310
+Namely, the height of any complete binary
+tree with n nodes is O(log n).
+
+25
+00:01:29,310 --> 00:01:31,400
+Intuitively, this is clear.
+
+26
+00:01:31,400 --> 00:01:36,020
+A complete binary tree with n
+nodes has the minimum possible
+
+27
+00:01:36,020 --> 00:01:39,340
+height over all binary trees with n nodes.
+
+28
+00:01:39,340 --> 00:01:43,890
+Well, just because all the levels of
+this tree, except possibly the last one,
+
+29
+00:01:43,890 --> 00:01:44,960
+are fully packed.
+
+30
+00:01:44,960 --> 00:01:48,240
+Still let me give you a formal proof.
+
+31
+00:01:48,240 --> 00:01:53,510
+Well, for
+this consider our complete binary tree and
+
+32
+00:01:53,510 --> 00:01:55,740
+let me show a small example.
+
+33
+00:01:55,740 --> 00:02:05,000
+So I assume that this is
+our complete binary tree.
+
+34
+00:02:05,000 --> 00:02:10,610
+So in this case, n = 10 and
+the number of levels, l = 4.
+
+35
+00:02:12,630 --> 00:02:17,358
+Well, let's first do the following thing,
+let's complete the last level.
+
+36
+00:02:19,576 --> 00:02:24,800
+And let's denote the result in
+number of nodes by n prime.
+
+37
+00:02:24,800 --> 00:02:28,440
+In this case in particular
+the number of nodes
+
+38
+00:02:30,610 --> 00:02:33,520
+in the new tree is equal to 15.
+
+39
+00:02:33,520 --> 00:02:38,495
+Well the first thing to note
+is that n prime is at most 2n.
+
+40
+00:02:38,495 --> 00:02:44,064
+Well this is just because in such
+a tree where all levels including
+
+41
+00:02:44,064 --> 00:02:49,430
+the last one are fully packed,
+the number of nodes on each level
+
+42
+00:02:49,430 --> 00:02:55,217
+is equal to the number of nodes on
+all the previous levels minus one.
+
+43
+00:02:55,217 --> 00:03:00,304
+Okay, so for example here the number
+of nodes on the last level is 8,
+
+44
+00:03:00,304 --> 00:03:04,990
+and the number of nodes on
+all previous levels is 7.
+
+45
+00:03:04,990 --> 00:03:08,039
+So we added at most seven vertices.
+
+46
+00:03:09,220 --> 00:03:14,060
+Now, when we have such a tree where
+all the levels are packed completely,
+
+47
+00:03:14,060 --> 00:03:18,160
+it is easy to relate the number of
+levels with the number of vertices.
+
+48
+00:03:18,160 --> 00:03:19,720
+Namely with the number of nodes.
+
+49
+00:03:19,720 --> 00:03:22,720
+Namely n prime = to 2 to the l- 1.
+
+50
+00:03:22,720 --> 00:03:30,360
+This allows us to conclude that l
+= binary logarithm of n prime + 1.
+
+51
+00:03:30,360 --> 00:03:35,685
+Now, recall that n prime is at most 2n,
+which allows us to write that l
+
+52
+00:03:35,685 --> 00:03:41,390
+is at most binary logarithm of 2n + 1
+which is of course, O(log n).
+
+53
+00:03:42,580 --> 00:03:46,110
+The second advantage of
+complete binary trees is not so
+
+54
+00:03:46,110 --> 00:03:50,260
+straightforward, but
+fortunately it is still easy to describe.
+
+55
+00:03:50,260 --> 00:03:54,520
+To explain it,
+let's consider again a toy example,
+
+56
+00:03:54,520 --> 00:03:57,770
+I mean a complete binary tree
+shown here on this slide.
+
+57
+00:03:57,770 --> 00:04:01,690
+Let's enumerate all its nodes
+going from top to down, and
+
+58
+00:04:01,690 --> 00:04:03,480
+on each level from left to right.
+
+59
+00:04:04,650 --> 00:04:07,020
+So this way the root receives number 1,
+
+60
+00:04:07,020 --> 00:04:11,960
+to its children receive numbers 2 and
+3 and so on.
+
+61
+00:04:11,960 --> 00:04:18,430
+So it turns out that such a
+numbering allows for each vertex,
+
+62
+00:04:18,430 --> 00:04:23,895
+number i for example, to be specific,
+to compute the number of its parent and
+
+63
+00:04:23,895 --> 00:04:29,320
+the numbers of each children using
+the following simple formulas.
+
+64
+00:04:29,320 --> 00:04:32,706
+Once again, if we have a node number i,
+
+65
+00:04:32,706 --> 00:04:36,504
+then its parent has
+number i divided by 2 and
+
+66
+00:04:36,504 --> 00:04:42,301
+rounded down while its two children
+have numbers 2i and 2i + 1.
+
+67
+00:04:42,301 --> 00:04:46,230
+To give a specific example,
+I assume that i = 4,
+
+68
+00:04:46,230 --> 00:04:50,090
+which means that we are speaking
+about about this node.
+
+69
+00:04:50,090 --> 00:04:54,240
+Then to find out the number of its parent,
+
+70
+00:04:54,240 --> 00:04:58,035
+we need to divide i by 2, this gives us 2.
+
+71
+00:04:59,340 --> 00:05:04,198
+And indeed, vertex number 2 is
+a parent of vertex number 4.
+
+72
+00:05:04,198 --> 00:05:10,307
+While to find out the numbers
+of two children of this node,
+
+73
+00:05:10,307 --> 00:05:15,916
+we need to multiply i by 2,
+this gives us this node and
+
+74
+00:05:15,916 --> 00:05:21,041
+multiply i by 2 + 1 and
+this gives us this node.
+
+75
+00:05:21,041 --> 00:05:25,420
+And these two nodes are indeed
+children of vertex number 4, right?
+
+76
+00:05:25,420 --> 00:05:26,840
+And this is very convenient.
+
+77
+00:05:26,840 --> 00:05:33,410
+This allows us to store the whole
+complete binary tree just in an array.
+
+78
+00:05:33,410 --> 00:05:36,665
+So we do not need to store any links for
+
+79
+00:05:36,665 --> 00:05:41,340
+each vertex to its parent and
+to its two children.
+
+80
+00:05:41,340 --> 00:05:45,430
+So these links can be
+computed just on the fly.
+
+81
+00:05:45,430 --> 00:05:53,033
+Again to give a concrete example, assume
+that we are talking about vertex number 3.
+
+82
+00:05:53,033 --> 00:05:56,430
+So in this case i = 3.
+
+83
+00:05:56,430 --> 00:06:02,730
+To find out the number of its parent,
+we just divide i by 2 and round down.
+
+84
+00:06:02,730 --> 00:06:05,362
+So this gives us vertex number 1, and
+
+85
+00:06:05,362 --> 00:06:09,489
+indeed vertex number 1 is
+a parent of the vertex number 3.
+
+86
+00:06:10,510 --> 00:06:13,595
+And to find out the numbers
+of its two children,
+
+87
+00:06:13,595 --> 00:06:17,390
+we just multiply i by 2 and
+also multiply i by 2 and add 1.
+
+88
+00:06:17,390 --> 00:06:22,938
+This gives us, in this case,
+vertices number 6 and vertex number 7.
+
+89
+00:06:22,938 --> 00:06:27,050
+So, and we know its indices in theory.
+
+90
+00:06:27,050 --> 00:06:31,770
+Okay, we have just discussed two
+advantages of complete binary trees, and
+
+91
+00:06:31,770 --> 00:06:38,130
+it would be too optimistic to expect that
+these advantages come to us at no cost.
+
+92
+00:06:38,130 --> 00:06:44,700
+So we need to pay something, and our cost
+is that we need to keep the tree complete.
+
+93
+00:06:44,700 --> 00:06:48,060
+Right, we need to ensure
+that at each point of time,
+
+94
+00:06:48,060 --> 00:06:50,780
+our binary tree is complete.
+
+95
+00:06:50,780 --> 00:06:55,000
+Well, to ensure this,
+let's just ask ourselves
+
+96
+00:06:55,000 --> 00:07:00,030
+what operations change
+the shape of our tree.
+
+97
+00:07:00,030 --> 00:07:03,980
+Essentially, these are only two
+operations, namely insert and
+
+98
+00:07:03,980 --> 00:07:05,400
+extract max.
+
+99
+00:07:05,400 --> 00:07:08,920
+So, two operations, sift up and sift down,
+
+100
+00:07:08,920 --> 00:07:12,420
+they actually do not change
+the shape of the tree.
+
+101
+00:07:12,420 --> 00:07:16,100
+They just swap some two
+elements inside the tree.
+
+102
+00:07:16,100 --> 00:07:20,810
+Another operation which actually
+change the shape is remove an element,
+
+103
+00:07:20,810 --> 00:07:25,080
+however, it does so
+by calling the ExtractMax procedure.
+
+104
+00:07:26,830 --> 00:07:32,461
+So on the next slide we will explain
+how to modify our Insert and
+
+105
+00:07:32,461 --> 00:07:39,090
+ExtractMax operations so that they
+preserve completeness of our tree.
+
+106
+00:07:40,470 --> 00:07:45,960
+To keep a tree complete when we insert
+something into a complete binary tree,
+
+107
+00:07:45,960 --> 00:07:49,120
+we just insert the new element,
+
+108
+00:07:49,120 --> 00:07:53,400
+as a leaf, to the leftmost vacant
+position on the last level.
+
+109
+00:07:54,400 --> 00:07:56,250
+Well, an example is given here.
+
+110
+00:07:56,250 --> 00:08:05,020
+So, we insert element 30 just to the right
+of the last element on the last level.
+
+111
+00:08:05,020 --> 00:08:14,050
+Okay, then we need to let this new element
+sift up so we perform a number of swaps.
+
+112
+00:08:14,050 --> 00:08:18,870
+So 30 is swapped with 14,
+then still there is a problem, so
+
+113
+00:08:18,870 --> 00:08:22,200
+30 is greater than 29,
+so we swap it again.
+
+114
+00:08:22,200 --> 00:08:27,070
+Okay, now the property of the heap
+is satisfied for all the edges.
+
+115
+00:08:28,210 --> 00:08:31,720
+Well, when we need to
+extract the maximum value,
+
+116
+00:08:31,720 --> 00:08:36,110
+recall that we first replace
+the root by some leaf.
+
+117
+00:08:36,110 --> 00:08:39,030
+Well in this case,
+to keep the tree complete,
+
+118
+00:08:39,030 --> 00:08:42,940
+let's just select the last
+leaf at the last level.
+
+119
+00:08:42,940 --> 00:08:44,420
+In this case it is 14.
+
+120
+00:08:44,420 --> 00:08:49,350
+So we'll replace 42 with 14,
+and then, again,
+
+121
+00:08:49,350 --> 00:08:57,740
+perform a number of swaps required
+to satisfy the property of the heap.
+
+122
+00:08:57,740 --> 00:09:04,260
+Okay, so in this case, 14 is swapped
+with 30, and then 14 is swapped with 29.
+
+123
+00:09:04,260 --> 00:09:09,320
+This gives us a correct heap whose
+underlying tree is a complete binary tree.
+
+124
+00:09:10,580 --> 00:09:14,850
+Well so far, so good, we now know how
+to maintain the tree complete and
+
+125
+00:09:14,850 --> 00:09:17,670
+how to store it in an array.
+
+126
+00:09:17,670 --> 00:09:22,537
+In the next video we will show
+the full pseudocode of the binary
+
+127
+00:09:22,537 --> 00:09:24,604
+max heap data structure.

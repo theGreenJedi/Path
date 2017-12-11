@@ -1,0 +1,76 @@
+In this video, we provide the full pseudocode of
+the binary max heap data structure. Here we will maintain
+the following three variables. H is an array where our heap will stay. MaxSize is the size of this array, and at the same time, it is the maximum
+number of nodes in our heap. And size is the actual size of our heap. So size is always at most maxSize. So let me give you an example. In this case,
+we're given a heap of size 9. And it is stored in the first nine
+cells of our array H whose size is 13. In particular, you may notice that
+there are some values here, and it is actually some garbage. We just don't care about any
+values that stay to the right of the position numbered 9. So our heap occupies the first
+nine positions in the array. Also let me emphasis once again
+that we store just the array H and also variables size and maxSize. So this tree is given to us implicitly. Namely, for any node, we can compute the number of its parent
+and the number of its two children. And we can compute it and access
+the corresponding value in this array. For example, if we have no number three,
+then we can compute the index of its left child,
+which is 2 multiplied by 3. So the value of its right child is 18. These implementations showing
+how to find given a node i, the index of the parent of i and
+two children of i. So they just implement our
+formulas in a straightforward way. To sift element i up, we do the following. While this element is not the root,
+namely, i is greater than 1, and while the value of this node is greater than the value
+of its parent, we do the following. We swap this element with his parent. So this is done on this line. And then we proceed with this new element. I mean, we assign i to be equal to
+Parent of i and go back to this while loop, and we do this until
+the property is satisfied. To sift an element number i down, we first
+need to select the direction of sifting. Namely, if element number i is smaller
+than one or two of its children, we first need to select the largest
+one of its two children, right? So this is done here. So initially, we assign to
+the variable maxIndex the value of i. Then we compute the index of
+the left child of the node number i. Then in the next if loop we first check
+whether i indeed has a left child. This is done in the following check. We check whether l is at most size. Namely, whether l is an index
+which is in our heap, okay? Then if H of l is greater
+than H of maxIndex, we assign maxIndex to be equal to l, okay? Then we do the same with the right child. We first compute its index, then we check
+whether this index is indeed in our heap. Then we check whether
+the value in this node is greater than the value of
+our current maximum index. And if it is,
+then we update the value of maxIndex. And finally, if the node i is not
+the largest one among itself and the two of its children, namely, if i is not equal to maxIndex,
+then we do the following. We swap element number i with
+element number maxIndex. It is done here. And then we continue sifting down the just-swapped element. Okay, so, this is done recursively. However, it is not so
+difficult to avoid using recursion here, just by introducing a new while loop. To insert a new element with priority p in
+our binary max heap, we do the following. We first check whether
+we still have room for a new element,
+namely whether size is equal to maxSize. If it is equal,
+then we just return an error. Otherwise, we do the following. We increase size by 1,
+then we assign H of size to be equal to p. At this point we add a new leaf in our implicit tree to the last level, to
+the leftmost position on the last level. And finally, we call SiftUp to
+sift this element up if needed. To extract the maximum value
+from our binary max heap, we first store the value of the root
+of our tree in the variable result. So result is assigned to be equal H of 1. Then we replace the root by the last leaf,
+by the rightmost leaf on the last level, so this is done by assigning H
+of 1 to be equal to H of size. Okay? Then we decrease the value of size by 1,
+just to show that the last leaf is not in our tree anymore. And finally, we call SiftDown for
+the root, because it was replaced by the last leaf, which is potentially
+quite small and needs to be sifted down. And the last instruction in our
+pseudocode is, we return the result. That means the value which was
+initially in the root of our tree. Removing an element. So as we've discussed already, this actually boils down to calling
+two procedures that we already have. Once again, to remove element number i,
+we do the following. First, we change its priority
+to be equal to infinity, so we assign H of i plus infinity. Then we SiftUp this node, so this will
+move this node to the root of our tree. And then we just call ExtractMax()
+procedure, which will remove the root from this tree and make necessary changes
+in the tree to restore its shape. Finally, to change the priority of
+a given node i to the given value p, we do the following. We first assign H of i to p, okay? Then we check whether
+the new priority increased is greater than the old priority or
+is smaller. If it is greater, then potentially we
+need to sift up the new node. So we just call sift up. If the new priority is smaller,
+then we call SiftDown for this node. Time to summarize. In this sequence of videos, we considered
+the binary max heap data structure, which is a popular way of implementing
+the priority queue data type. The considered implementation is
+quite fast, all operations work in logarithmic time and GetMax
+procedure works even in constant time. It is also space efficient. In this data structure, we store a tree,
+but this tree is stored implicitly. Namely, for each node, we do not store
+a connection or a link to its parent and its two children. Instead, we compute the index of
+the corresponding nodes on the fly. Well, in this case, we store just n
+given cells in an array, nothing more. Okay?
+Another advantage of this data structure, of this implementation,
+is that it is really easy to code. As you've seen, the pseudocode of each
+operation is just a few lines of code. Well, in the next video, we will show how to use binary
+heap to sort data efficiently.

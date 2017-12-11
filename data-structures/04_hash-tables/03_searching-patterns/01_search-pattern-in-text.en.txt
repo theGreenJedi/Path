@@ -1,0 +1,82 @@
+Hi. In this lesson, you will learn about
+applications of hashing to problems regarding strings and texts. We will consider the problem
+of finding patterns in text. The problem is, given a long text T,
+for example a book or a website or a Facebook profile, and some pattern P
+which can be a word, a phrase, a sentence. Find all occurrences of
+pattern in the text. Some examples of that can be that you
+want to find all occurrences were name on the website or you want to find all
+the Twitter messages about your company to analyze the reviews of your new product. Or, you could potentially want to detect
+all the files in your computer which are infected by specific computer virus
+and in that case you won't find letters in text, you will find code patterns
+in the binary code of the program. Anyway the algorithm will be the same. First we introduce some new notations,
+substring notation, we denote by S from I to J the substring of string S, starting
+in position I and ending in position J. Both I and
+J are included in the substring. For example, if S is the string ABCDE,
+then S from zero to four is the same string ABCDE because
+we index our characters from zero and A is the character number zero and
+E is the character number four. S from one to three is bcd because b
+is the character with index one and d is the character with index three. And S from two to two is also allowed. It's a sub-string of length one, string c. And I shouldn't be more than J of course because otherwise there
+is no sub-string from I to J. So, the formal version of our
+problem to find pattern in text is that you're given strings T and
+P as input and you need to find all such
+positions I in the text T that pattern P occurs in text
+T starting from position I. That is the same that to say
+that a substring of t from I to I plus length of T minus one, the
+substring of T starting from I with length equal to the length of the pattern
+is equal to the pattern. So we want to find all such
+positions i and, of course, i can be from zero to length of
+text minus length of pattern. It cannot be bigger because otherwise
+the pattern just won't fit in the text, it will be ending to the right
+from the end of the text. So we've start with a naive
+algorithm to solve this problem. Physically we go through
+all possible positions, i from zero to difference of
+the length of the text and pattern. And then for each such position I would
+just check character by character, whether the corresponding
+sub string of T starting in position number I is equal
+to the pattern or not. If it is equal to the pattern we
+advance position I to the result. First we need to implement a function
+to compare two strings and we start with checking whether their
+lengths are the same or not of cvourse if the lengths of strings is different then
+the strings are definitely difference. If that's not the case,
+then the length of the strings are equal. And then we go through all
+the positions in both strings with I going from zero to length of
+the first string minus one. And if the corresponding symbols
+on the ith position differ, then the strings are different. Otherwise they are the same. Now we will use this function to find
+our occurrence of pattern in the text. The procedure find pattern naive
+implements our naive algorithm. So let's start with an empty list in
+the variable result and then we'd would go through all the possible positions
+where pattern could start with X for I from zero to lines of text
+minus length of the pattern and we check whether the substring
+starting in I with length equal to length of the pattern
+is equal to the pattern itself. If it is, then we append position
+I to the result because this is a position where pattern occurs in
+text and then, we just return the list that we collected by going through all
+possible positions of pattern in the text. I'd say that the running time of
+this naive algorithm is big O of length of the text multiply
+by length of the pattern. Why is that? Well, each call to the function AreEqual,
+runs in time big O, of length of the pattern,
+because both strings we pass there, are of lengths,
+the same as the length of the pattern. And, the running time of AreEqual,
+is linear. And then we have exactly length of T minus length of P
+plus one calls of this function, which total to big O of length
+of T multiplied by length of P, because we always consider that length
+of the text is bigger than the length of the pattern, and so this is the upper
+bound for our running time. Actually, this is not just the upper
+bound, it's also lower bound. For example, consider, text T,
+which consists of many, many letters, a, and pattern P,
+which consists of many, many letters a, and
+then letter b in the end, and also we choose such text that it is much longer
+than the pattern which is basically almost always true in
+the practical problems. For each position i and
+t which we try to observe the goal to our equal to make
+has to make all of the maximum possible number of comparisons which is
+equal to the length of the pattern B. Why is that? Because one would call our equal for substring of T starting in position I and
+for the pattern B. We see that they differ only in the last
+characters so our equal has to check all of the previous characters until it comes
+to the last character of P and determines that actual pattern is different from
+the corresponding substring of D. Last in this case the naive algorithm
+will do at least proportional to length of T multiplied
+by length of T operations. That's our estimate is not just big O, it is big letter which means that
+it is not only in upper bound but also a lower bound on the writing
+time on the naive algorithm. In the next video we will
+introduce an algorithm based on hashing which has better running time
