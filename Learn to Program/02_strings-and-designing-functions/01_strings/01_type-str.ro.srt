@@ -1,0 +1,258 @@
+1
+00:00:01,950 --> 00:00:04,510
+Ernest Hemingway a scris: "Toată viața
+
+2
+00:00:04,510 --> 00:00:08,840
+am privit cuvintele ca și cum le vedeam
+ pentru prima oară".
+
+3
+00:00:08,840 --> 00:00:10,430
+Cuvintele se găsesc peste tot în programare,
+
+4
+00:00:10,430 --> 00:00:16,000
+începând de la căutările Google la bioinformatică,
+ unde ADN-ul este uneori reprezentat
+
+5
+00:00:16,000 --> 00:00:22,580
+ca o secvență de litere A, T, C și G, până la
+ lucruri simple, cum ar fi dialogurile din mesaje.
+
+6
+00:00:22,580 --> 00:00:26,828
+Chiar acum, vom explora reprezentarea
+ string-urilor (șiruri de caractere) în Python
+
+7
+00:00:26,828 --> 00:00:29,031
+și cum putem manipula aceste valori.
+
+8
+00:00:32,268 --> 00:00:35,780
+Un string este o secvență de caractere.
+
+9
+00:00:35,780 --> 00:00:38,143
+În Python, acest tip este denumit str.
+
+10
+00:00:38,143 --> 00:00:40,880
+String-urile încep și se termină
+ cu un apostrof sau cu ghilimele.
+
+11
+00:00:42,110 --> 00:00:44,591
+Cum ar fi 'hello' sau 'how are you?'.
+
+12
+00:00:48,770 --> 00:00:52,831
+Putem include semne de punctuație,
+ așa cum am văzut, sau cratime.
+
+13
+00:00:56,267 --> 00:00:59,470
+String-urile sunt valori și pot fi utilizate
+ în instrucțiuni de atribuire.
+
+14
+00:01:01,770 --> 00:01:06,840
+Dacă este o zi însorită, putem decide
+ să spunem cuiva: 'Ce zi frumoasă!'.
+
+15
+00:01:09,210 --> 00:01:13,949
+Iar dacă este furtună, am putea
+ dori să spunem
+
+16
+00:01:13,949 --> 00:01:17,170
+'Vai, ești ud leoarcă.'
+
+17
+00:01:17,170 --> 00:01:20,520
+Dar, deja putem vedea că avem o problemă,
+
+18
+00:01:20,520 --> 00:01:23,740
+deoarece la cea de-a doua cratimă,
+ se schimbă din verde în negru,
+
+19
+00:01:24,810 --> 00:01:27,000
+și într-adevăr avem o eroare de sintaxă.
+
+20
+00:01:27,000 --> 00:01:28,640
+Desigur, problema este că
+
+21
+00:01:28,640 --> 00:01:33,400
+încercăm să folosim un apostrof în interiorul
+ unui string delimitat de apostrofuri.
+
+22
+00:01:33,400 --> 00:01:35,520
+Iar Python, desigur, nu prea știe ce facem.
+
+23
+00:01:35,520 --> 00:01:42,520
+Deci, din cauza aceasta, Python îți permite
+ să folosești ghilimele.
+
+24
+00:01:42,520 --> 00:01:45,750
+Acum, sunny_greeting este asta,
+
+25
+00:01:45,750 --> 00:01:49,691
+iar storm_greeting este complet ud.
+
+26
+00:01:49,691 --> 00:01:50,924
+Avem și o altă opțiune,
+
+27
+00:01:53,565 --> 00:01:57,048
+în loc să folosim ghilimelele la acest string
+
+28
+00:01:57,048 --> 00:02:02,915
+avem voie să folosim ceea ce se numește
+ caracterul 'escape', o secvență escape.
+
+29
+00:02:02,915 --> 00:02:07,165
+Dacă folosim un \ (backslash), veți observa
+ mai întâi că string-ul devine verde,
+
+30
+00:02:07,165 --> 00:02:10,206
+iar când apăs Return, vom vedea că
+
+31
+00:02:10,206 --> 00:02:14,273
+string-ul va apărea, dar nu vom
+ vedea caracterul \.
+
+32
+00:02:14,273 --> 00:02:19,720
+Mai mult, delimitatorii apostrof de la începutul
+ și sfârșitul acestui string
+
+33
+00:02:19,720 --> 00:02:24,434
+se vor transforma în ghilimele.
+
+34
+00:02:28,319 --> 00:02:31,473
+Putem concatena string-urile utilizând
+ operatorul +.
+
+35
+00:02:37,823 --> 00:02:40,212
+Observați că trebuie să punem noi spațiile albe.
+
+36
+00:02:49,478 --> 00:02:54,210
+Astfel, putem să scriem o versiune a MatLibs,
+ în care să-i cerem unui prieten un substantiv.
+
+37
+00:02:54,210 --> 00:02:55,932
+Să presupunem că a ales râmă.
+
+38
+00:02:55,932 --> 00:02:58,105
+Deci vom avea începutul unui puzzle
+
+39
+00:03:03,143 --> 00:03:10,230
+și poate vom dori să încheiem cu,
+ să zicem, un semn de exclamare,
+
+40
+00:03:10,230 --> 00:03:13,430
+iar substantivul pe care l-a ales este râmă.
+
+41
+00:03:15,180 --> 00:03:16,137
+Acum haideți să le punem împreună.
+
+42
+00:03:26,286 --> 00:03:34,054
+Putem construi un string care se repetă,
+ folosind operatorul înmulțire,
+
+43
+00:03:34,054 --> 00:03:37,306
+și, ca în matematica obișnuită, înmulțirea
+ are prioritate înaintea adunării.
+
+44
+00:03:44,036 --> 00:03:45,665
+Putem să schimbăm asta, folosind parantezele.
+
+45
+00:03:54,478 --> 00:03:57,720
+Totuși, nu putem să adunăm un string
+ cu un număr întreg sau zecimal.
+
+46
+00:04:03,570 --> 00:04:06,386
+Nu poate converti un număr zecimal
+ într-un string, în mod implicit.
+
+47
+00:04:06,386 --> 00:04:10,940
+Trimite o mică atenționare de pericol,
+ că este o eroare de tip.
+
+48
+00:04:10,940 --> 00:04:14,420
+Veți vedea într-o lecție ulterioară cum să
+ combinați string-uri cu numere.
+
+49
+00:04:14,420 --> 00:04:15,430
+Asta se va întâmpla în curând.
+
+50
+00:04:16,600 --> 00:04:21,770
+Nu putem nici să înmulțim string-uri,
+ chiar dacă string-ul are un număr în el.
+
+51
+00:04:23,100 --> 00:04:26,535
+Nu putem înmulți o secvență cu
+ ceva care nu este int, de tip str.
+
+52
+00:04:26,535 --> 00:04:29,939
+Alți operatori nu vor funcționa.
+
+53
+00:04:29,939 --> 00:04:35,491
+Eroare de tip: tip(-uri) de operand fără
+ suport pentru semnul -: 'str' și 'str'.
+
+54
+00:04:35,491 --> 00:04:40,881
+Nu putem folosi două string-uri
+ împreună cu scăderea.
+
+55
+00:04:40,881 --> 00:04:42,221
+Nu putem nici să împărțim.
+
+56
+00:04:42,221 --> 00:04:49,674
+Tipuri de operanzi fără suport pentru
+ împărțire, pentru ridicarea la putere.
+
+57
+00:04:49,674 --> 00:04:52,553
+Observați că fiecare dintre acestea
+ este o eroare de tip.

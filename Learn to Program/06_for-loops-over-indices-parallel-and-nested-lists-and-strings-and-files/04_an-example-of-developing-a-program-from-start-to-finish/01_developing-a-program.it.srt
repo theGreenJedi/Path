@@ -1,0 +1,1682 @@
+1
+00:00:01,100 --> 00:00:04,702
+Questa lezione è enorme.
+Comunque non introduce alcun nuovo
+
+2
+00:00:04,702 --> 00:00:08,915
+strumento di Python, e quindi, puoi considerarla,
+come opzionale, se vuoi.
+
+3
+00:00:08,915 --> 00:00:12,762
+In questa, svilupperò un programma
+dall'inizio.
+
+4
+00:00:12,762 --> 00:00:17,891
+Cercherò di capire, quali informazioni ho
+bisogno di leggere, e devo capire
+
+5
+00:00:17,891 --> 00:00:21,616
+come iniziare e quali funzioni dovrò
+andare a scrivere.
+
+6
+00:00:21,616 --> 00:00:26,623
+Questo è volto a darvi un assaggio del
+processo mentale che effettuo quando
+
+7
+00:00:26,623 --> 00:00:31,703
+scrivo un programma.
+Questo file contiene una serie di voti per
+
+8
+00:00:31,703 --> 00:00:36,102
+l'assegnazione uno.
+C'è una testata seguita da una linea vuota.
+
+9
+00:00:36,102 --> 00:00:41,497
+Seguita da una lista di numeri di studenti e
+il voto per l'assegnazione uno.
+
+10
+00:00:41,497 --> 00:00:46,062
+Ci piacerebbe capire qual è la distribuzione
+di questi voti.
+
+11
+00:00:46,062 --> 00:00:49,631
+Quindi terremo traccia delle
+categorie.
+
+12
+00:00:49,631 --> 00:00:56,022
+Quanti hanno terminato negli intervalli da zero
+a nove, da dieci a diciannove, da venti a 29, e
+
+13
+00:00:56,022 --> 00:01:07,543
+così via.
+E avremo anche una categoria per le
+
+14
+00:01:07,543 --> 00:01:14,189
+persone che hanno ottenuto 100.
+Infine, in questo programma, vogliamo
+
+15
+00:01:14,189 --> 00:01:18,680
+creare u nuovo file contenente questa
+informazione.
+
+16
+00:01:18,680 --> 00:01:24,147
+E anche, una stella per ogni voto che era
+nel range.
+
+17
+00:01:24,147 --> 00:01:31,468
+Quindi vediamo un 77.5, che significa che nel
+nostro file di output, ci piacerebbe una stella qui.
+
+18
+00:01:31,468 --> 00:01:36,350
+C'è un 37.5, è in quel range.
+Vediamo un 62.5.
+
+19
+00:01:36,350 --> 00:01:42,002
+72.5, quindi abbiamo due numeri nel
+range di 70 finora.
+
+20
+00:01:42,002 --> 00:01:49,870
+C'è 100, abbiamo un 55, un 95,
+qualcosa negli ottanta, qualcosa nei
+
+21
+00:01:49,870 --> 00:01:56,987
+novanta e così via.
+Alla fine avremo una stella, per ogni
+
+22
+00:01:56,987 --> 00:02:02,850
+numero nel file, quindi possiamo vedere
+la distribuzione dei voti.
+
+23
+00:02:02,850 --> 00:02:10,403
+Per ottenere un programma che fa questo,
+dobbiamo fare i seguenti passi.
+
+24
+00:02:10,403 --> 00:02:18,258
+E il primo passo sarà, leggere i
+voti, e questa è una normale lista in una 
+
+25
+00:02:18,258 --> 00:02:21,179
+lista.
+E' una situazione con una lista.
+
+26
+00:02:21,179 --> 00:02:25,811
+Quindi andremo a leggere i voti in una
+lista.
+
+27
+00:02:25,811 --> 00:02:29,840
+Questo è il primo passo.
+Il secondo passo sarà
+
+28
+00:02:31,780 --> 00:02:44,300
+contare il numero di voti per range.
+E il terzo passo sarà
+
+29
+00:02:48,320 --> 00:02:59,360
+scrivere un istogramma nel file,
+qualunque file scelga l'utente.
+
+30
+00:02:59,660 --> 00:03:05,379
+Questo processo di scrivere i passi ad un
+livello molto alto è chiamato design
+
+31
+00:03:05,379 --> 00:03:08,854
+top down.
+Quando vediamo un problema per la prima volta,
+
+32
+00:03:08,854 --> 00:03:14,935
+spesso è un po' opprimente pensare a cosa
+dobbiamo fare per portare a termine il compito completo.
+
+33
+00:03:14,935 --> 00:03:21,166
+Quindi lo suddividiamo in passi.
+Una volta che abbiamo deciso dove salvare
+
+34
+00:03:21,166 --> 00:03:25,114
+i nostri dati.
+Possiamo fare questi passi in qualsiasi ordine
+
+35
+00:03:25,114 --> 00:03:28,128
+che ci piaccia.
+Dato che sono, praticamente indipendenti,
+
+36
+00:03:28,128 --> 00:03:33,440
+e possiamo testare ciascuno di essi separatamente.
+Iniziamo un nuovo programma.
+
+37
+00:03:45,780 --> 00:03:50,748
+E prendiamo qualche appunto.
+Metto sotto forma di testo questi scarabocchi.
+
+38
+00:03:50,748 --> 00:03:56,695
+Scrivendolo a mano come abbiamo fatto
+qui, solo l'esempio dell'output che
+
+39
+00:03:56,695 --> 00:04:03,395
+vogliamo e poi la lista dei passi di cui pensiamo
+di aver bisogno di fare per far funzionare
+
+40
+00:04:03,395 --> 00:04:06,707
+questo programma, ha in pratica un grande
+beneficio.
+
+41
+00:04:06,933 --> 00:04:12,579
+Ti permette di uscire dall'ambiente
+di programmazione e pensare solamente
+
+42
+00:04:12,579 --> 00:04:16,634
+come potresti risolvere il problema.
+Questo è essenziale.
+
+43
+00:04:16,634 --> 00:04:21,343
+I programmi sono solo un'espressione
+degli algoritmi che hai in mente.
+
+44
+00:04:21,343 --> 00:04:26,783
+E se hai capito ciò che devi fare,
+ti sarà molto più semplice scrivere il
+
+45
+00:04:26,783 --> 00:04:32,302
+codice.
+Aggiungiamo una nota, riguardo al formato
+
+46
+00:04:32,302 --> 00:04:38,186
+che vogliamo.
+Vogliamo da zero a nove e poi una stella o
+
+47
+00:04:38,186 --> 00:04:44,625
+due, dieci a diciannove.
+Vogliamo quelli dalla riga da venti a 29.
+
+48
+00:04:44,625 --> 00:04:51,731
+Magari non ce ne sono così tanti, e quindi
+tutti fino a da 90 a 99.
+
+49
+00:04:51,731 --> 00:04:57,060
+Whoops vogliamo che quello finisca e poi
+i cento.
+
+50
+00:04:57,380 --> 00:05:01,011
+Ora che ho questo, posso occuparmi
+di questi scarabocchi.
+
+51
+00:05:03,280 --> 00:05:08,261
+Andremo a leggere da files, e saranno file che
+
+52
+00:05:08,261 --> 00:05:11,274
+seleziona l'utente.
+Vogliamo che questo funzioni con ogni file dei
+
+53
+00:05:11,274 --> 00:05:14,349
+compiti di questo formato, non solo
+con questo file particolare.
+
+54
+00:05:14,349 --> 00:05:19,858
+E quindi.
+Impariamo ad usare il Tkinter file dialogue.
+
+55
+00:05:20,708 --> 00:05:28,460
+Inizieremo chiedendo all'utente un file,
+e poi leggeremo il file.
+
+56
+00:05:29,473 --> 00:05:39,605
+Ora abbiamo una variabile A1 con il nome file
+che è ciò che il file dialogue PK ha inserito, chiediamo
+
+57
+00:05:39,605 --> 00:05:44,671
+di ritornare open file.
+Quindi, apriamo il file.
+
+58
+00:05:45,684 --> 00:05:52,650
+Andremo ad effettuare un for sul file A1,
+solo per stampare le righe.
+
+59
+00:05:52,650 --> 00:05:57,089
+Assicuriamoci sono di essere
+in buona forma.
+
+60
+00:05:57,089 --> 00:06:03,058
+Questo procedimento di controllare spesso
+come va con il nostro programma è un'abitudine
+
+61
+00:06:03,058 --> 00:06:08,954
+molto buona da prendere dato che vi permette
+di trovare gli errori di sintassi e gli eerori logici
+
+62
+00:06:08,954 --> 00:06:13,540
+molto prima di aver combinato un pasticcio.
+Quindi facciamo girare il modulo.
+
+63
+00:06:13,880 --> 00:06:17,169
+E vediamo una sintassi non valida.
+Ah, sì.
+
+64
+00:06:17,169 --> 00:06:23,649
+Un tipo sbagliato di istruzione di print.
+E' per i miei vecchi tempi di Python 2.7.
+
+65
+00:06:23,649 --> 00:06:30,200
+Salviamolo e proviamo ancora una volta.
+Ho creato un file di voti più corto solo
+
+66
+00:06:30,200 --> 00:06:34,402
+per non dover lavorare con troppi 
+numeri alla volta.
+
+67
+00:06:34,402 --> 00:06:39,354
+E ho un type error.
+Il problema qui è che sto usando ASCOPE
+
+68
+00:06:39,354 --> 00:06:42,805
+nel file anziché ASCOPE, ASCOPE nel nome
+del file.
+
+69
+00:06:42,805 --> 00:06:46,331
+Ascope  in file, in realtà apre il file per
+voi.
+
+70
+00:06:46,331 --> 00:06:52,558
+Ma, mi piacerebbe farlo in due passi perché
+penso sia più esplicito per le persone che
+
+71
+00:06:52,558 --> 00:06:57,510
+stanno imparando solo ora come programmare.
+Selezionerò di nuovo run, run module.
+
+72
+00:06:57,510 --> 00:07:03,193
+Dice di prendere il nostro file di input e qui,
+ce l'abbiamo.
+
+73
+00:07:03,193 --> 00:07:07,580
+Questo file ha circa nove voti al suo interno.
+
+74
+00:07:08,620 --> 00:07:14,428
+Questo processo di lanciare spesso l'esecuzione
+ci ha fatto trovare due errori nelle mie sole sei
+
+75
+00:07:14,428 --> 00:07:18,929
+righe o circa di codice.
+E quindi mi ha risparmiato un bel po' di tempo
+
+76
+00:07:18,929 --> 00:07:22,342
+dopo quando abbiamo 150 righe di
+codice.
+
+77
+00:07:22,342 --> 00:07:28,223
+Se avessi provato ad aspettare fino a quando
+non avessi avuto la maggior parte del programma scritta,
+
+78
+00:07:28,223 --> 00:07:34,103
+avrei avuto molto meno chiaro il punto dove andare
+a guardare per capire quale fosse il mio problema.
+
+79
+00:07:34,103 --> 00:07:39,912
+Posso dimenticare queste righe di codice ora,
+dato che, so che ho il mio file il mio file è
+
+80
+00:07:39,912 --> 00:07:44,812
+aperto per poter essere letto propriamente.
+Devo fare la stessa cosa con il mio file
+
+81
+00:07:44,812 --> 00:07:52,886
+istogramma.
+E i nomi migliori per l'istogramma finale,
+
+82
+00:07:52,886 --> 00:07:58,304
+sembra ragionevole.
+Mi piace mantenere il mio programma principale separato
+
+83
+00:07:58,304 --> 00:08:03,550
+dalle funzioni su cui mi baso nel mio
+programma principale.
+
+84
+00:08:03,808 --> 00:08:10,430
+Quindi, proprio come per l'assegnazione uno
+e l'assegnazione due, creerò un file per
+
+85
+00:08:10,430 --> 00:08:16,900
+contenere solo le funzioni.
+Lo chiamerò grade.py.
+
+86
+00:08:18,540 --> 00:08:22,928
+E so che dovrò importarlo.
+
+87
+00:08:22,928 --> 00:08:29,775
+I miei passi sono leggere i voti in una
+lista, contare i voti per range, e
+
+88
+00:08:29,775 --> 00:08:36,500
+scrivere l'istogramma nel file.
+Inizieremo
+
+89
+00:08:37,120 --> 00:08:41,174
+leggendo grades da una lista.
+
+90
+00:08:41,174 --> 00:08:46,702
+Dato che sto leggendo da un file è difficile 
+ottenere un esempio.
+
+91
+00:08:46,702 --> 00:08:53,428
+Quindi inizieremo con il tipo contratto.
+So che ho un file aperto per la
+
+92
+00:08:53,428 --> 00:08:54,902
+lettura.
+.
+
+93
+00:08:54,902 --> 00:08:58,956
+E so che andrà a ritornare una lista.
+
+94
+00:08:58,956 --> 00:09:04,208
+E che quelli, tutti i numeri in questo file
+sono floats.
+
+95
+00:09:04,208 --> 00:09:13,720
+Quindi, è una lista di float.
+Ho bisogno di uno spazio aggiuntivo qui,
+
+96
+00:09:13,720 --> 00:09:19,140
+per avere l'indentazione corretta.
+E quello che andrà a fare sarà leggere e
+
+97
+00:09:19,140 --> 00:09:23,295
+ritornare la lista dei voti nel file.
+
+98
+00:09:23,295 --> 00:09:27,901
+Bene, avrò bisogno di una testata.
+Ciò che sto facendo è leggere grades.
+
+99
+00:09:27,901 --> 00:09:32,960
+E' una frase verbale carina, e lo chiamerò
+grading file.
+
+100
+00:09:34,360 --> 00:09:41,722
+Quindi ora posso.
+Finire la mia doc string, il file grade.
+
+101
+00:09:41,722 --> 00:09:48,520
+Eccoci qui.
+Devo sapere che questo stile è nel
+
+102
+00:09:48,520 --> 00:09:54,618
+formato corretto.
+Quindi la pre-condizione di chiamare
+
+103
+00:09:54,618 --> 00:09:57,790
+questa funzione è quella.
+Art file.
+
+104
+00:09:57,790 --> 00:10:01,692
+Grade file.
+Inizia con un header.
+
+105
+00:10:01,692 --> 00:10:08,110
+Poi contiene delle righe vuote. E ha una
+riga vuota.
+
+106
+00:10:08,904 --> 00:10:13,473
+Dato che ho bisogno di poter saltare
+quella testata.
+
+107
+00:10:14,268 --> 00:10:20,326
+E poi ho bisogno di sapere che, ogni
+riga è in questo formato.
+
+108
+00:10:20,326 --> 00:10:24,597
+dove c'è il numero di uno studente e un
+voto.
+
+109
+00:10:25,392 --> 00:10:31,848
+Per poter portare a termine questo
+per prima cosa ho bisogno della testata.
+
+110
+00:10:32,642 --> 00:10:38,900
+E poi di leggere i voti.
+Accumulandoli in una lista.
+
+111
+00:10:38,900 --> 00:10:44,331
+Sto seguendo lo stesso approccio dall'alto in basso.
+Sto scrivendo i passi che devo fare
+
+112
+00:10:44,331 --> 00:10:47,245
+per poter
+portare a termine questo compito più piccolo.
+
+113
+00:10:47,245 --> 00:10:49,564
+.
+Ma è lo stesso approccio.
+
+114
+00:10:49,564 --> 00:10:56,247
+Lo stesso schema dall'alto in basso.
+Per saltare la testata, leggeremo
+
+115
+00:10:56,247 --> 00:11:02,259
+la prima riga.
+E finché la riga non raggiunge il carattere di
+
+116
+00:11:02,259 --> 00:11:06,668
+nuova riga, devo leggere la riga successiva.
+
+117
+00:11:06,668 --> 00:11:14,884
+Ora, ho appena letto la riga vuota, quindi
+ora devo iniziare a leggere i voti e accumularli
+
+118
+00:11:14,884 --> 00:11:20,895
+nella lista.
+Bene, so che andrò a leggere quel
+
+119
+00:11:20,895 --> 00:11:26,847
+primo voto e poi.
+Finché quello che leggo, finché non
+
+120
+00:11:26,847 --> 00:11:33,643
+ho raggiunto la fine del file, e lo scrivo in 
+questo modod, se ricordate, la mia riga 
+
+121
+00:11:33,643 --> 00:11:38,146
+non è la stringa vuota, poi voglio fare la
+stessa cosa.
+
+122
+00:11:38,146 --> 00:11:45,188
+Voglio fare gradefile.readline
+quindi andrà a leggere ogni riga nel
+
+123
+00:11:45,188 --> 00:11:50,272
+resto del file.
+Quello che devo fare è all'interno di questo schema
+
+124
+00:11:50,272 --> 00:11:55,445
+devo accumulare i gradi.
+Per farlo, ho bisogno della mia
+
+125
+00:11:55,445 --> 00:12:00,035
+variabile accumulator.
+Inizierò con una lista vuota, questa
+
+126
+00:12:00,035 --> 00:12:03,460
+arriverà a contenere tutti i voti del file.
+
+127
+00:12:03,460 --> 00:12:11,353
+Finché non ho raggiunto la fine so
+che ho un voto, quindi ora abbiamo una
+
+128
+00:12:11,353 --> 00:12:15,909
+stringa.
+Contenente le informazioni per un singolo
+
+129
+00:12:15,909 --> 00:12:22,227
+studente.
+Andremo a cercare l'ultimo spazio nella
+
+130
+00:12:22,227 --> 00:12:29,790
+riga, quello è lo spazio proprio prima
+del numero, e estrarremmo solo il resto dei
+
+131
+00:12:29,790 --> 00:12:34,959
+caratteri dopo quello.
+Quindi trova l'ultimo spazio, e prendi
+
+132
+00:12:34,959 --> 00:12:40,150
+tutto dopo quello spazio.
+Bene, conosco questo
+
+133
+00:12:40,150 --> 00:12:46,936
+line.rfind, effettua la ricerca da destra.
+Quindi sto cercando lo spazio più a destra,
+
+134
+00:12:46,936 --> 00:12:53,072
+e mi ritorna l'indice di quello spazio
+più a destra nella riga.
+
+135
+00:12:53,072 --> 00:13:00,881
+Vorrei spezzare la linea a partire da
+uno oltre quella posizione, il primo carattere,
+
+136
+00:13:00,881 --> 00:13:07,481
+e andare avanti fino alla fine della stringa, quindi
+questo estrarrà tutto per me.
+
+137
+00:13:07,481 --> 00:13:13,147
+Vediamolo in una variabile.
+Ho il numero però, attualmente è una
+
+138
+00:13:13,147 --> 00:13:18,936
+stringa dato che line è una stringa e quando
+la spezzo, ottengo una stringa.
+
+139
+00:13:18,936 --> 00:13:25,630
+Quindi, quando mi occupo della mia lista dei 
+voti mi piacerebbe trasformarlo in un float.
+
+140
+00:13:25,630 --> 00:13:31,958
+Penso che abbiamo quasi finito.
+Ho la mia lista di voti qui.
+
+141
+00:13:31,958 --> 00:13:42,660
+E quindi questo è quello che ritornerò.
+Proviamolo.
+
+142
+00:13:43,820 --> 00:13:51,260
+Lo farò girare, in modo da avere 
+accesso a read grades nella shell, lo
+
+143
+00:13:51,260 --> 00:13:58,701
+andrò a, whoops, andrò a chiedere per,
+[risata], TK enter dot file, file log,
+
+144
+00:13:58,701 --> 00:14:06,277
+devo importare questo.
+Andrò a chiedere un file.
+
+145
+00:14:06,277 --> 00:14:11,720
+Faremo questo file di test.
+Ora io
+
+146
+00:14:13,880 --> 00:14:22,833
+devo venire qui, e aprire, quel file,
+ed infine, andrò a chiamare v grades su
+
+147
+00:14:22,833 --> 00:14:29,066
+quel file aperto.
+Questo andrà a, ritornarmi, speriamo
+
+148
+00:14:29,066 --> 00:14:34,960
+una lista dei floats che abbiamo visto
+nello schermo qui.
+
+149
+00:14:35,800 --> 00:14:42,786
+E sembra che ci siano tutti.
+Con questo rapido test, penso di essere pronta
+
+150
+00:14:42,786 --> 00:14:49,119
+per chiamare grades dal mio programma principale.
+Ora so come leggere i voti nella
+
+151
+00:14:49,119 --> 00:14:51,720
+lista.
+.
+
+152
+00:14:53,262 --> 00:15:03,701
+Il prossimo compito è contare i voti per ognuna
+delle categorie degli intervalli che abbiamo
+
+153
+00:15:03,701 --> 00:15:08,860
+visto qui.
+Bene, iniziamo a progettarlo.
+
+154
+00:15:10,280 --> 00:15:15,222
+.
+Con questo, ora possiamo avere un
+
+155
+00:15:15,222 --> 00:15:21,023
+esempio.
+Dobbiamo decidere cosa andare a chiamare
+
+156
+00:15:21,023 --> 00:15:23,602
+questo.
+Magari i voti (migliori).
+
+157
+00:15:23,602 --> 00:15:27,900
+Possiamo sempre cambiare idea
+più avanti. E
+
+158
+00:15:27,900 --> 00:15:32,324
+sappiamo che se gli diamo una lista come
+questa.
+
+159
+00:15:32,324 --> 00:15:39,053
+Attualmente abbiamo un esempio di questo.
+Quello che ci piacerebbe fare è magari
+
+160
+00:15:39,053 --> 00:15:45,598
+ritornare una nuova lista con i conti.
+Quindi sappiamo quanto 0 abbiamo.
+
+161
+00:15:45,598 --> 00:15:50,760
+Ne abbiamo due nell'intervallo 
+da due a nove punto qualcosa.
+
+162
+00:15:51,200 --> 00:15:55,183
+Non abbiamo nulla nei 20.
+Whoops.
+
+163
+00:15:55,183 --> 00:16:02,241
+Abbiamo un numero nei 30.
+Non abbiamo numeri nei 40.
+
+164
+00:16:02,241 --> 00:16:06,224
+Un numero nei 50.
+Due numeri.
+
+165
+00:16:06,224 --> 00:16:11,119
+Uno due tre quattro numeri nell'intervallo
+dei 70.
+
+166
+00:16:11,119 --> 00:16:14,422
+Nessun 80.
+Nessun novanta e un cento.
+
+167
+00:16:14,422 --> 00:16:18,909
+Quindi si spera che questo sia quello che saremo in 
+grado di replicare.
+
+168
+00:16:18,909 --> 00:16:24,443
+Andremo a zero, ce n'è uno due
+tre quattro cinque sei sette otto nove
+
+169
+00:16:24,443 --> 00:16:27,360
+zero dieci, venti.
+Whoops, sono fuori di uno.
+
+170
+00:16:28,120 --> 00:16:35,071
+Zeros, nessun dieci, neddun venti, un 30,
+nessun quaranta, un 50, nessun sessanta, quattro
+
+171
+00:16:35,071 --> 00:16:39,773
+settanta, nessun ottanta, nessun novanta,
+e un 100.
+
+172
+00:16:39,773 --> 00:16:47,031
+Quindi due, tre, quattro, otto, nove numeri,
+uno, due, tre, quattro, cinque, sei, sette,
+
+173
+00:16:47,031 --> 00:16:53,880
+otto, nove, numeri quindi penso che
+abbiamo costruito il mio esempio, correttamente.
+
+174
+00:16:54,220 --> 00:16:58,160
+Lo sposteremo qui solo per un minuto
+per poterlo esaminare.
+
+175
+00:16:58,160 --> 00:17:02,484
+Questo istogramma qui.
+Quindi questo è, l'istogramma che
+
+176
+00:17:02,484 --> 00:17:07,123
+voglio alla fine.
+E quello che mi sembra di aver deciso qui è
+
+177
+00:17:07,123 --> 00:17:13,413
+che, all'indice zero, andrò a contare
+tutti i numeri che vanno da zero a
+
+178
+00:17:13,413 --> 00:17:16,951
+nove.
+All'indice uno, nel mio result di questa
+
+179
+00:17:16,951 --> 00:17:21,197
+funzione grade ranges, andrò a contare
+il numero di dieci.
+
+180
+00:17:21,197 --> 00:17:25,285
+Il numero dei venti, il numero dei
+trenta, e così via.
+
+181
+00:17:25,285 --> 00:17:27,462
+E
+L'indice zero corrisponde agli 0.
+
+182
+00:17:27,462 --> 00:17:31,186
+L'indice uno ai 10.
+L'indice due ai 20.
+
+183
+00:17:31,186 --> 00:17:36,330
+L'indice tre è i 30.
+Quindi sembra che io abbia il numero dell'indice.
+
+184
+00:17:36,330 --> 00:17:41,879
+Ma il primo, è il 10.
+I 30, 40 all'indice quattro, 50 all'indice cinque,
+
+185
+00:17:41,879 --> 00:17:47,667
+i 90 all'indice nove, i 100 all'indice dieci.
+Quindi sì, sembra proprio che sia ciò che
+
+186
+00:17:47,667 --> 00:17:51,393
+sto ottenendo.
+Guardando questa rappresentazione dei dati,
+
+187
+00:17:51,393 --> 00:17:57,735
+come sto immagazzinando le informazioni, e cosa
+significa ogni indice, e come corrisponde a
+
+188
+00:17:57,735 --> 00:18:04,157
+questi intervalli qui mi farà di nuovo risparmiare
+molto tempo più avanti quando proverò
+
+189
+00:18:04,157 --> 00:18:11,541
+ad implementare questa funzione.
+Trascinerò questo qui.
+
+190
+00:18:11,541 --> 00:18:16,620
+Annoterò un paio di cose riguardo a cosa ho
+appena pensato.
+
+191
+00:18:17,560 --> 00:18:22,884
+0-9 è l'indice zero. 
+Questo è l'indice uno.
+
+192
+00:18:22,884 --> 00:18:33,089
+Questo è l'indice due e così via.
+Questo è l'indice nove e questo è l'indice dieci.
+
+193
+00:18:33,089 --> 00:18:40,395
+e il mio risultato.
+Bene sembra che lo dia [risata].
+
+194
+00:18:40,395 --> 00:18:45,776
+Se lo sistemo qui.
+Sembra che io gli passi una lista di floats
+
+195
+00:18:45,776 --> 00:18:58,140
+e mi ritorna indietro una lista di quel tipo.
+E sembra che ritorni una lista di
+
+196
+00:18:58,140 --> 00:19:09,080
+interi per ogni indice di x, indicante quanti
+voti sono in questi intervalli.
+
+197
+00:19:13,521 --> 00:19:18,732
+Grades ranges non sembra catturare 
+questa idea.
+
+198
+00:19:18,732 --> 00:19:26,544
+Quindi andrò ad inserire count grade ranges.
+Riceve dei tassi simbolici.
+
+199
+00:19:26,544 --> 00:19:31,832
+Questo significa che devo modificare il
+mio esempio qui.
+
+200
+00:19:31,832 --> 00:19:40,038
+E questa mi sembra una migliore frase verbale.
+Il mio risultato è lungo undici numeri.
+
+201
+00:19:40,038 --> 00:19:47,172
+E voglio tenere traccia di questo count.
+Quindi, range di count sarà, beh,
+
+202
+00:19:47,172 --> 00:19:53,026
+inizia sempre da zero.
+Quindi, questo mi darà una lista di lunghezza
+
+203
+00:19:53,026 --> 00:19:59,218
+undici di interi che sono tutti zero e
+andrò ad aggiornarlo quando osservo
+
+204
+00:19:59,218 --> 00:20:03,815
+ogni numero.
+E ho bisogno di capire come andare a prendere
+
+205
+00:20:03,815 --> 00:20:11,299
+quel 77.5 e prendere solo i caratteri 
+decimali in modo da poterlo usare come un
+
+206
+00:20:11,299 --> 00:20:18,213
+indice in questa lista range count.
+Ogni numeri fino a 70, fino a 79 punto
+
+207
+00:20:18,213 --> 00:20:23,980
+nove dovrebbe terminare solo con il sette.
+Quindi andrò qui e lo
+
+208
+00:20:23,980 --> 00:20:28,734
+proverò un po'.
+77 punto cinque, e lo divido solo per dieci
+
+209
+00:20:28,734 --> 00:20:34,813
+termino con sette punto sette cinque
+voglio eliminare questa parte punto sette
+
+210
+00:20:34,813 --> 00:20:36,450
+cinque.
+Quindi userò
+
+211
+00:20:36,450 --> 00:20:44,121
+l'altra forma della divisione in cui elimino
+la parte frazionaria.
+
+212
+00:20:44,121 --> 00:20:48,723
+Questo funziona se ho solo 70?
+Sì.
+
+213
+00:20:48,723 --> 00:20:51,320
+E cosa diciamo di 79.9?
+Bene.
+
+214
+00:20:52,820 --> 00:21:00,552
+Tornando al mio programma che significa che
+una volta che ho un voto dalla mia lista voglio
+
+215
+00:21:00,552 --> 00:21:05,646
+usare la divisione.
+E poi andrò ad usarlo come un
+
+216
+00:21:05,646 --> 00:21:11,287
+indice e a sistemare council.
+Ho bisogno di inserire questo risultato.
+
+217
+00:21:11,287 --> 00:21:18,508
+Per ogni grado nel file grades,
+ho bisogno di sapere a quale intervallo voglio
+
+218
+00:21:18,508 --> 00:21:23,677
+aggiungere uno di quelli in counts.
+Bene ho appena capito che posso
+
+219
+00:21:23,677 --> 00:21:29,512
+prendere quel voto e dividerlo per dieci e
+trasformare quel risultato in un intero.
+
+220
+00:21:29,512 --> 00:21:35,682
+Quindi questo mi dirà l'indice della lista
+range counts in cui voglio
+
+221
+00:21:35,682 --> 00:21:38,100
+l'incremento.
+Quindi range counts è
+
+222
+00:21:38,100 --> 00:21:49,850
+Range counts all'indice dell'intervallo
+è cosa cera prima più uno.
+
+223
+00:21:50,540 --> 00:21:55,801
+Quindi ho visto tutti i voti.
+Ho finito.
+
+224
+00:21:55,809 --> 00:22:01,629
+Quindi, ritorno semplicemente quella lista.
+E' ora del test.
+
+225
+00:22:01,629 --> 00:22:07,730
+Quindi usiamo questa lista qui.
+Facciamo girare il modulo.
+
+226
+00:22:07,730 --> 00:22:14,596
+Chiamiamo questo e confrontiamo.
+20010104001.
+
+227
+00:22:14,596 --> 00:22:19,240
+Perfetto.
+Due passi effettuati.
+
+228
+00:22:19,240 --> 00:22:25,704
+Uno al termine.
+So che il mio programma principale qui che voglio
+
+229
+00:22:25,704 --> 00:22:31,358
+contare i voti per intervallo.
+Non ho alcuna piccola funzione per farglielo
+
+230
+00:22:31,358 --> 00:22:35,658
+fare per me.
+Quindi range counts sarà ciò che ottengo
+
+231
+00:22:35,658 --> 00:22:39,720
+indietro dalla count grade ranges e passandole
+in ingresso grades.
+
+232
+00:22:41,340 --> 00:22:45,958
+Proviamolo.
+Tutto ciò che faremo è stampare range
+
+233
+00:22:45,958 --> 00:22:50,948
+counts e vedere cosa otteniamo.
+Vediamo se ci sembra di fare progressi.
+
+234
+00:22:50,948 --> 00:22:58,436
+Andiamo e lanciamo, lanciamo il modulo.
+Dice ok, quale vogliamo aprire?
+
+235
+00:22:58,436 --> 00:23:03,352
+Bene, apro il nostro file di test qui.
+E dove vogliamo salvarlo?
+
+236
+00:23:03,352 --> 00:23:08,922
+Bene, andrò a salvarlo alla fine in
+iii.hist, hist per istogramma.
+
+237
+00:23:08,922 --> 00:23:13,510
+Ma, al momento non stiamo scrivendo nulla
+in quel file.
+
+238
+00:23:13,510 --> 00:23:18,343
+Ma devo comunque selezionarlo, dato
+che mi era stato chiesto di farlo.
+
+239
+00:23:18,343 --> 00:23:21,948
+E dice name [inudibile] is not defined.
+
+240
+00:23:21,948 --> 00:23:26,618
+Come può essere?
+Vedo, ho bisogno di usare questi mediante il
+
+241
+00:23:26,618 --> 00:23:33,004
+nome del modulo.
+Ho anche notato che, voglio chiedere di salvare
+
+242
+00:23:33,004 --> 00:23:47,953
+come file dato che questo è il file di output.
+Facciamolo nuovamente girare.
+
+243
+00:23:47,953 --> 00:23:52,650
+Questo uccide il nostro programma di Python, 
+quindi non mi sto avvicinando.
+
+244
+00:23:52,650 --> 00:23:59,979
+E proveremo ancora una volta.
+Ci viene chiesto il nostro file di input, eccolo,
+
+245
+00:23:59,979 --> 00:24:06,902
+o chiesto per il file di output e scegliamo
+quello e chiede se siamo sicuri di
+
+246
+00:24:06,902 --> 00:24:11,464
+volerlo fare?
+Sì, controllo il mio nome che è uno che voglio
+
+247
+00:24:11,464 --> 00:24:16,610
+rimpiazzare.
+Otteniamo la stessa lista stampata qui.
+
+248
+00:24:16,610 --> 00:24:20,040
+Quindi il nostro programma principale ora
+funziona, fin qui.
+
+249
+00:24:20,900 --> 00:24:23,942
+Ora che ho la mia lista dei conti per ogni
+intervallo,
+
+250
+00:24:23,942 --> 00:24:26,736
+è ora di scrivere l'istogramma sul file.
+
+251
+00:24:26,736 --> 00:24:30,523
+Ho fatto questo con questa istruzione di print
+quindi la commenterò.
+
+252
+00:24:30,523 --> 00:24:33,380
+Solo nel caso in cui debba decommentarla 
+più avanti.
+
+253
+00:24:35,480 --> 00:24:43,385
+Torno alla mia funzione file dove sto
+salvando tutte le mie funzioni, e ho bisogno di
+
+254
+00:24:43,385 --> 00:24:49,390
+scrivere un istogramma quindi, seguendo
+il nostro processo di disegno.
+
+255
+00:24:49,390 --> 00:24:57,222
+So che andrò a chiamare e passarle in ingresso
+la lista degli intervalli dei voti che ho
+
+256
+00:24:57,222 --> 00:25:04,042
+generato, quindi ottengo questa informazione
+range counts e anche il file
+
+257
+00:25:04,042 --> 00:25:07,175
+che è stato aperto per la scrittura.
+Quindi
+
+258
+00:25:07,175 --> 00:25:12,981
+so che ho una lista di interi e un file
+aperto per la scrittura.
+
+259
+00:25:13,718 --> 00:25:19,062
+Non ritorna nulla.
+Tutto ciò che fa è scrivere il file.
+
+260
+00:25:19,062 --> 00:25:26,780
+.
+Un istogramma di, di stelle.
+
+261
+00:25:27,220 --> 00:25:31,440
+Basata sui numeri.
+Ho problemi con la digitazione oggi.
+
+262
+00:25:31,440 --> 00:25:36,715
+Di voti nello stesso intervallo.
+Mi chiedo se sia frustrante guardarmi
+
+263
+00:25:36,715 --> 00:25:43,637
+mentre faccio questi errori.
+Bene, ho n esempio dell'output che
+
+264
+00:25:43,637 --> 00:25:46,662
+voglio.
+.
+
+265
+00:25:46,662 --> 00:25:55,619
+E, incollerò semplicemente questo, in modo che in
+qualsiasi modo l'help venga richiamato, possiamo vedere
+
+266
+00:25:55,619 --> 00:26:03,954
+ciò che ci aspettiamo.
+Cosa è Steward write an histogram, quindi
+
+267
+00:26:03,954 --> 00:26:07,572
+"writes histrogram" sembra essere un
+nome ragionevole.
+
+268
+00:26:07,572 --> 00:26:13,978
+Sappiamo che questa è range counts e che
+abbiamo un file istogramma in cui stiamo per
+
+269
+00:26:13,978 --> 00:26:19,659
+scrivere.
+La prima riga dell'output e l'ultima riga
+
+270
+00:26:19,659 --> 00:26:25,034
+dell'output sono leggermente differenti qui ci
+sono più spazi dopo il numero voglio queste
+
+271
+00:26:25,034 --> 00:26:30,157
+linee così, quindi voglio queste stelline
+che si impilino in modo che quando stampo la prima
+
+272
+00:26:30,157 --> 00:26:35,406
+riga e quando stampo penso l'ultima riga
+devo scrivere un paio di spazi in più quindi
+
+273
+00:26:35,406 --> 00:26:39,160
+le gestirò separatamente.
+
+274
+00:26:40,005 --> 00:26:48,237
+Vogliamo prima scrivere da zero a nove, e
+poi quanti spazi vogliamo scrivere?
+
+275
+00:26:48,237 --> 00:26:54,253
+Uno, due tre.
+Non inserisce un nuovo carattere di fine riga al
+
+276
+00:26:54,253 --> 00:27:00,480
+fondo, che è buono, dato che ora voglio
+scrivere delle stelle.
+
+277
+00:27:02,460 --> 00:27:07,454
+Quindi, so che voglio scrivere delle stelle.
+E quante ce ne sono?
+
+278
+00:27:07,454 --> 00:27:11,533
+Beh, è il numero dei voti che c'è 
+nell'intervallo.
+
+279
+00:27:11,533 --> 00:27:18,193
+Quindi andremo a moltiplicare l'asterisco
+per qualsiasi cosa ci sia in range counts all'indice
+
+280
+00:27:18,193 --> 00:27:22,189
+zero.
+Che è il numero dei voti che erano
+
+281
+00:27:22,189 --> 00:27:27,704
+nell'intervallo da zero a nove.
+
+282
+00:27:27,704 --> 00:27:34,497
+E poi voglio iniziare una nuova riga,
+dato che come potete vedere, i voti da dieci a
+
+283
+00:27:34,497 --> 00:27:41,673
+diciannove appaiono sulla riga seguente.
+Terrò poi in considerazione il caso particolare.
+
+284
+00:27:41,673 --> 00:27:45,838
+E qui vogliamo scrivere 100.
+
+285
+00:27:45,838 --> 00:27:51,839
+E, invece di range counts all'indice zero,
+ora è range counts all'ultimo
+
+286
+00:27:51,839 --> 00:27:56,047
+indice.
+Questo mi da il numero di 100 che
+
+287
+00:27:56,047 --> 00:28:02,797
+abbiamo trovato nel file.
+Nel frattempo voglio scrivere una riga per
+
+288
+00:28:02,797 --> 00:28:12,251
+ognuno degli indici da uno a nove quindi
+per i nell'intervallo da uno fino a dieci
+
+289
+00:28:12,251 --> 00:28:15,220
+ma non incluso.
+Bene, cosa deve fare?
+
+290
+00:28:16,192 --> 00:28:24,180
+Questo scrive gli intervalli a due caratteri.
+10, 20, 30 e così via.
+
+291
+00:28:26,360 --> 00:28:33,165
+Devo capire qual è il numero più piccolo e
+quale quello più alto per l'intervallo
+
+292
+00:28:33,165 --> 00:28:37,299
+Corrente.
+Quindi quando i è uno, devo capire il
+
+293
+00:28:37,299 --> 00:28:43,674
+oops, il dieci e il diciannove.
+Quando i è due ho bisogno di 20 e 29 e così
+
+294
+00:28:43,674 --> 00:28:47,120
+via.
+Quindi il punto inferiore di X è solo i per 10.
+
+295
+00:28:48,612 --> 00:28:53,565
+L'indice più alto è
+i per dieci più nove.
+
+296
+00:28:53,565 --> 00:29:01,145
+Solo per controllare, nove volte dieci fa 90 più
+nove 99, quindi funziona anche per 90.
+
+297
+00:29:01,145 --> 00:29:05,674
+Quindi, sì, mi sembra che mi dia il limite inferiore
+
+298
+00:29:05,674 --> 00:29:13,467
+e superiore.
+Scriverò low, ma devo passargli una
+
+299
+00:29:13,467 --> 00:29:25,482
+stringa quindi low, srt di low più l'apostrofo
+fra inferiore e superiore e poi
+
+300
+00:29:25,482 --> 00:29:32,220
+high.
+Seguita da un due punti e uno spazio.
+
+301
+00:29:35,000 --> 00:29:42,433
+Una volta che ho scritto quello, è ora
+di scrivere gli asterischi.
+
+302
+00:29:42,433 --> 00:29:48,682
+Quindi voglio moltiplicare quello per range
+counts a quale indice?
+
+303
+00:29:48,682 --> 00:29:54,500
+Bene, all'indice i.
+Ed infine, voglio scrivere la nuova riga.
+
+304
+00:29:58,600 --> 00:30:02,384
+In uno o due modi.
+Posso fare cosa stavo facendo prima e lanciare
+
+305
+00:30:02,384 --> 00:30:07,492
+questo e poi tirar fuori un esempio di
+range counts ed inviare un file di output e
+
+306
+00:30:07,492 --> 00:30:13,717
+assicurarmi che il file sia stato scritto, ma
+questo è l'ultimo passo nel mio programma quindi
+
+307
+00:30:13,717 --> 00:30:20,479
+in realtà posso farlo qui.
+Ora ho questa informazione in un altro posto quindi
+
+308
+00:30:20,479 --> 00:30:26,162
+andrò a cancellarla.
+Quello che voglio fare ora è scrivere
+
+309
+00:30:26,162 --> 00:30:33,120
+l'istogramma con range counts e il
+mio file di output che è un file a1histfile.
+
+310
+00:30:33,520 --> 00:30:37,646
+Ho verificato
+
+311
+00:30:37,646 --> 00:30:44,066
+Posso semplicemente lanciarlo e controllare
+per assicurarmi che questa nuova funzione faccia
+
+312
+00:30:44,066 --> 00:30:58,060
+cosa voglio.
+Proveremo il nostro A1test.txt.
+
+313
+00:30:59,480 --> 00:31:05,740
+E vogliamo scriverlo in a1test.hist.
+Sì, vogliamo rimpiazzarlo.
+
+314
+00:31:06,500 --> 00:31:09,889
+Uh-oh!
+Ho un problema di non scrivibile qui.
+
+315
+00:31:09,889 --> 00:31:16,586
+Sembra dire che quando ho chiamato
+questo file.right dice che, che è
+
+316
+00:31:16,586 --> 00:31:20,886
+un'operazione non supportata.
+Quel file non è scrivibile.
+
+317
+00:31:20,886 --> 00:31:25,268
+E questo ha senso.
+Dato che l'ho aperto per la lettura.
+
+318
+00:31:25,268 --> 00:31:29,402
+Visto che ho copiato e incollato e dimenticato
+di cambiare quello.
+
+319
+00:31:29,402 --> 00:31:37,208
+Lanciamolo ancora una volta.
+Questo è l'input del mio test.
+
+320
+00:31:37,208 --> 00:31:45,331
+No, non voglio scrivere il mio programma lì.
+Salviamo quello, rimpiazziamo.
+
+321
+00:31:45,331 --> 00:31:51,999
+Okay, nessun errore.
+Andremo a modificare il finder ora.
+
+322
+00:31:52,362 --> 00:31:55,030
+Eccomi.
+Non guardate.
+
+323
+00:31:56,840 --> 00:32:03,580
+Esempi di voti, e ho appena scritto
+a1test.hist.
+
+324
+00:32:04,380 --> 00:32:13,740
+Apriremo questo nell'editor di testo.
+Ed è vuoto.
+
+325
+00:32:15,020 --> 00:32:22,613
+Ora devo capire il perché.
+Torniamo indietro e guardiamo il
+
+326
+00:32:22,613 --> 00:32:31,724
+programma.
+Oh, penso di aver dimenticato di chiudere il mio file.
+
+327
+00:32:31,724 --> 00:32:41,816
+non chiudete i vostri file e allora non verranno
+scritti subito.
+
+328
+00:32:41,816 --> 00:32:59,760
+Oh proviamo un'ultima volta.
+Torniamo indietro, vediamo cosa abbiamo fatto.
+
+329
+00:33:00,340 --> 00:33:09,421
+E qui c'è la nostra informazione.
+Proviamo a farlo girare sul nostro file
+
+330
+00:33:09,421 --> 00:33:14,317
+di dati più grande.
+Okay.
+
+331
+00:33:14,317 --> 00:33:20,989
+1.Pxt è il nostro file più grande.
+E lo salveremo in A1hist.
+
+332
+00:33:20,989 --> 00:33:24,820
+Sì,
+voglio rimpiazzarlo.
+
+333
+00:33:25,340 --> 00:33:30,331
+Tornando nuovamente al finder,
+vogliamo hist.
+
+334
+00:33:30,331 --> 00:33:33,540
+Aha, bello.
+Guardate quello.
+
+335
+00:33:35,580 --> 00:33:38,855
+E' questo è davvero il modo in cui scrivo
+i programmi.
+
+336
+00:33:38,855 --> 00:33:44,178
+Inizio proprio dal principio con solo
+una vaga idea di ciò che voglio e ho
+
+337
+00:33:44,178 --> 00:33:49,365
+un po' di decisioni da fare.
+Quali sono i miei passi, che dati andrò a
+
+338
+00:33:49,365 --> 00:33:52,573
+salvare e come li salverò.
+
+339
+00:33:52,573 --> 00:33:58,373
+E in che ordine scriverò le mie funzioni
+e come andrò a testarle.
+
+340
+00:33:58,373 --> 00:34:00,080
+Spero sia stato divertente.

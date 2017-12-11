@@ -1,0 +1,790 @@
+1
+00:00:00,025 --> 00:00:02,160
+Hello.
+
+2
+00:00:02,160 --> 00:00:03,820
+In this lecture, we're going to do some
+
+3
+00:00:03,820 --> 00:00:05,840
+more work with strings and do some string
+formatting.
+
+4
+00:00:05,840 --> 00:00:09,950
+We're also going to write some interactive
+programs where we display
+
+5
+00:00:09,950 --> 00:00:13,948
+messages to the user and get input from
+the user.
+
+6
+00:00:13,948 --> 00:00:17,060
+Let's get started.
+
+7
+00:00:17,060 --> 00:00:19,500
+We'll call Python's built in function
+Print,
+
+8
+00:00:19,500 --> 00:00:22,780
+passing a single argument to the function
+call.
+
+9
+00:00:22,780 --> 00:00:25,630
+In this case we'll pass the string Hello,
+and Hello
+
+10
+00:00:25,630 --> 00:00:26,975
+will be displayed to the screen.
+
+11
+00:00:26,975 --> 00:00:32,020
+Notcie that when hello is displayed, hello
+
+12
+00:00:32,020 --> 00:00:33,840
+is displayed, it's without the quotation
+marks.
+
+13
+00:00:33,840 --> 00:00:37,540
+The quotes are only for Python's internal
+string
+
+14
+00:00:37,540 --> 00:00:40,449
+representation, and are not seen by the
+user.
+
+15
+00:00:41,510 --> 00:00:44,210
+Let's call print again, passing a
+mathematical
+
+16
+00:00:44,210 --> 00:00:46,490
+expression as an argument to the function.
+
+17
+00:00:47,580 --> 00:00:51,250
+In this case the expression is 3 plus 7
+minus 3.
+
+18
+00:00:51,250 --> 00:00:55,800
+And that expression will first be
+evaluated and then printed to the screen.
+
+19
+00:00:57,040 --> 00:00:59,910
+We'll call print a third time passing in
+
+20
+00:00:59,910 --> 00:01:03,740
+two arguments this time, two strings;
+hello and there.
+
+21
+00:01:03,740 --> 00:01:05,840
+And when the strings are displayed,
+they're
+
+22
+00:01:05,840 --> 00:01:09,200
+displayed with a space between them by
+default.
+
+23
+00:01:09,200 --> 00:01:12,140
+So hello space there is what's printed to
+the screen.
+
+24
+00:01:15,080 --> 00:01:16,973
+Now, we will define two functions.
+
+25
+00:01:16,973 --> 00:01:19,119
+We'll define the functions in a file
+
+26
+00:01:19,119 --> 00:01:23,040
+called calc.pi that I've already created
+and saved.
+
+27
+00:01:23,040 --> 00:01:25,820
+Both functions will calculate the square
+of a number.
+
+28
+00:01:25,820 --> 00:01:30,180
+One function will return that result and
+the other will print it.
+
+29
+00:01:31,600 --> 00:01:34,620
+We begin the function defiinition with the
+word def
+
+30
+00:01:34,620 --> 00:01:37,830
+and the name of this function is square
+return.
+
+31
+00:01:37,830 --> 00:01:39,180
+It will take a single parameter.
+
+32
+00:01:39,180 --> 00:01:40,220
+I'm calling
+
+33
+00:01:40,220 --> 00:01:41,310
+this num.
+
+34
+00:01:41,310 --> 00:01:45,390
+And the job of this function is to return
+num to the power of two.
+
+35
+00:01:48,450 --> 00:01:52,350
+The second function, its name will be
+square print.
+
+36
+00:01:52,350 --> 00:01:55,046
+It also has a single parameter, num, and
+
+37
+00:01:55,046 --> 00:01:58,810
+it's also going to calculate the square of
+num.
+
+38
+00:01:58,810 --> 00:02:03,680
+But rather than returning that value, this
+function will print it.
+
+39
+00:02:03,680 --> 00:02:07,160
+In a moment we will call these two
+functions from the shell.
+
+40
+00:02:07,160 --> 00:02:09,730
+I'd like the output of the call to print
+
+41
+00:02:09,730 --> 00:02:13,170
+to look different from the value returned
+by square print.
+
+42
+00:02:13,170 --> 00:02:13,480
+To do
+
+43
+00:02:13,480 --> 00:02:17,390
+this, I'm adding a string to the list of
+arguments for the print function
+
+44
+00:02:17,390 --> 00:02:22,221
+call so that it will display the square of
+num is before the squared number.
+
+45
+00:02:22,221 --> 00:02:25,199
+The next step is to run the module.
+
+46
+00:02:25,199 --> 00:02:29,740
+We'll go to the Run menu and choose Run
+Module.
+
+47
+00:02:29,740 --> 00:02:32,330
+And now we have access to the two
+functions in the shell.
+
+48
+00:02:33,530 --> 00:02:36,060
+We're going to call these two functions
+and
+
+49
+00:02:36,060 --> 00:02:38,550
+we will store the results of calling those
+functions
+
+50
+00:02:38,550 --> 00:02:40,020
+in a variable.
+
+51
+00:02:40,020 --> 00:02:42,500
+So the variable answer_return will get
+
+52
+00:02:42,500 --> 00:02:44,500
+the result of calling the function
+square_return.
+
+53
+00:02:44,500 --> 00:02:50,150
+We're going to pass an argument to
+square_return and I'm picking the value 4.
+
+54
+00:02:50,150 --> 00:02:51,555
+I could pick any value here.
+
+55
+00:02:51,555 --> 00:02:54,835
+What I'm using for just as an example
+function call.
+
+56
+00:02:54,835 --> 00:02:57,570
+It's now time to run the function.
+
+57
+00:02:57,570 --> 00:03:02,350
+When this function executes, we want to
+watch to see whether anything is printed.
+
+58
+00:03:02,350 --> 00:03:03,650
+And we
+
+59
+00:03:03,650 --> 00:03:06,940
+can see when we execute it now, that we
+immediately get
+
+60
+00:03:06,940 --> 00:03:10,870
+the prompt, so nothing was printed to the
+screen by square return.
+
+61
+00:03:10,870 --> 00:03:15,000
+Next we want to check the value of the
+answer term variable
+
+62
+00:03:15,000 --> 00:03:18,950
+and we can see that answer return first to
+the value 16.
+
+63
+00:03:18,950 --> 00:03:22,840
+So, square return returned the memory
+address of 16 and
+
+64
+00:03:22,840 --> 00:03:26,439
+that memory address was stored in the
+answer return variable.
+
+65
+00:03:28,060 --> 00:03:28,790
+Now its time
+
+66
+00:03:28,790 --> 00:03:31,850
+to call the function square print, we'll
+also pass
+
+67
+00:03:31,850 --> 00:03:34,010
+the value four as the argument, we could
+have picked
+
+68
+00:03:34,010 --> 00:03:37,060
+anything, and we see this time that
+something is
+
+69
+00:03:37,060 --> 00:03:41,090
+displayed to the screen, the square of num
+is 16.
+
+70
+00:03:41,090 --> 00:03:43,470
+Next, we'll examine the contents of the
+variable
+
+71
+00:03:43,470 --> 00:03:46,820
+answer print and this time we don't see
+anything.
+
+72
+00:03:47,910 --> 00:03:50,200
+When a function does not have a return
+statement that
+
+73
+00:03:50,200 --> 00:03:53,830
+gets executed, Python will return None,
+and that's what happens
+
+74
+00:03:53,830 --> 00:03:54,520
+in this case.
+
+75
+00:03:55,870 --> 00:04:00,180
+Because answer_return refers to a numeric
+value, we're able to use
+
+76
+00:04:00,180 --> 00:04:03,920
+it in a mathematical expression, such as
+multiplying it by five.
+
+77
+00:04:03,920 --> 00:04:08,570
+However, answer_print does not refer to a
+numeric value.
+
+78
+00:04:08,570 --> 00:04:12,940
+Get an error message in this case because
+it refers to the value None, or just of
+
+79
+00:04:12,940 --> 00:04:18,840
+type NoneType.
+We now know how to use
+
+80
+00:04:18,840 --> 00:04:22,480
+Python's built-in function print to
+display messages to users.
+
+81
+00:04:22,480 --> 00:04:25,460
+The next step is to use Python's built-in
+
+82
+00:04:25,460 --> 00:04:28,959
+function input to get information from the
+user.
+
+83
+00:04:30,120 --> 00:04:34,650
+We'll call input passing a single string
+as an argument to it.
+
+84
+00:04:34,650 --> 00:04:38,850
+In this case we're going to ask the user
+what is your name?
+
+85
+00:04:38,850 --> 00:04:41,310
+When the function executes that string
+will be
+
+86
+00:04:41,310 --> 00:04:43,900
+printed to the screen, and we'll wait for
+
+87
+00:04:43,900 --> 00:04:47,580
+the user to type some input at the prompt.
+
+88
+00:04:47,580 --> 00:04:51,040
+So notice that the cursor is flashing
+waiting for us to type something.
+
+89
+00:04:53,089 --> 00:04:56,833
+I will now type my name as the user of
+this program, I said
+
+90
+00:04:56,833 --> 00:05:02,530
+my name is Jen, and when I hit Enter the
+function is, completes its execution.
+
+91
+00:05:02,530 --> 00:05:07,760
+The string that I typed, Jen, is returned
+as a string from the function.
+
+92
+00:05:07,760 --> 00:05:09,720
+We see that there are single quotes around
+
+93
+00:05:09,720 --> 00:05:12,690
+it indicating that the value is type
+string.
+
+94
+00:05:12,690 --> 00:05:18,333
+We'll call the function input a second
+time, this time though we will
+
+95
+00:05:18,333 --> 00:05:23,196
+store the result returned by input in a
+variable named name.
+
+96
+00:05:23,196 --> 00:05:25,580
+When we execute the function the user
+
+97
+00:05:25,580 --> 00:05:28,500
+types their name and that value is
+returned
+
+98
+00:05:28,500 --> 00:05:34,280
+as a string, so the memory address of the
+value is stored in the name variable.
+
+99
+00:05:34,280 --> 00:05:36,350
+And when we examine the content of name,
+we
+
+100
+00:05:36,350 --> 00:05:39,400
+will see that it refers to the string jet.
+
+101
+00:05:39,400 --> 00:05:43,250
+We will now use input to prompt the user
+to enter their location.
+
+102
+00:05:43,250 --> 00:05:43,810
+The string,
+
+103
+00:05:43,810 --> 00:05:50,116
+what is your location gets printed and I
+enter my location; Toronto.
+
+104
+00:05:51,220 --> 00:05:53,300
+That value is returned by the function.
+
+105
+00:05:53,300 --> 00:05:57,580
+So location refers to the value Toronto
+and name refers to Jen.
+
+106
+00:05:58,670 --> 00:06:01,465
+Let's now use the two variables, name and
+
+107
+00:06:01,465 --> 00:06:04,960
+location, to display a message back to the
+user.
+
+108
+00:06:04,960 --> 00:06:08,000
+We're going to call print passing in three
+arguments.
+
+109
+00:06:08,000 --> 00:06:08,970
+The first is the
+
+110
+00:06:08,970 --> 00:06:15,990
+name The second will be a string saying
+lives in and the third is the location.
+
+111
+00:06:15,990 --> 00:06:18,760
+So the way we interpret this call to print
+is
+
+112
+00:06:18,760 --> 00:06:22,450
+that first we use the value that name
+refers to.
+
+113
+00:06:22,450 --> 00:06:26,370
+Joining that with a space between it and
+the string lives in.
+
+114
+00:06:28,550 --> 00:06:31,540
+And next, we'll use a space and the value
+
+115
+00:06:31,540 --> 00:06:36,050
+that location refers to, to print Jen
+lives in Toronto.
+
+116
+00:06:36,050 --> 00:06:39,450
+Earlier, I mentioned that name and
+location both referred to strings.
+
+117
+00:06:39,450 --> 00:06:42,660
+In fact, all values, the type of all
+
+118
+00:06:42,660 --> 00:06:45,690
+values returned by input, will be type
+String.
+
+119
+00:06:45,690 --> 00:06:50,120
+Let's cull Input again, asking how many
+cups of coffee I've had today.
+
+120
+00:06:51,460 --> 00:06:53,590
+When I enter a value
+
+121
+00:06:53,590 --> 00:06:57,200
+as a user, I enter 2, and this value
+
+122
+00:06:57,200 --> 00:07:00,190
+is returned by the Input function as a
+string.
+
+123
+00:07:00,190 --> 00:07:06,210
+So we can see that num_coffee refers to
+the string 2, not to the into.
+
+124
+00:07:07,310 --> 00:07:08,790
+You've already seen that we can use
+
+125
+00:07:08,790 --> 00:07:11,750
+single quotes and double quotes to
+represent strings.
+
+126
+00:07:11,750 --> 00:07:16,900
+And now I want to show you a third string
+format, which is triple quote strings.
+
+127
+00:07:21,230 --> 00:07:24,780
+Triple quote strings are able to span
+multiple lines.
+
+128
+00:07:24,780 --> 00:07:29,360
+For example, let's print a triple coated
+string with how on the
+
+129
+00:07:29,360 --> 00:07:33,920
+first line, are on the second, and you on
+the third line.
+
+130
+00:07:33,920 --> 00:07:33,920
+[SOUND]
+
+131
+00:07:33,920 --> 00:07:33,922
+.
+
+132
+00:07:33,922 --> 00:07:42,150
+So that looks like this, one word per
+line.
+
+133
+00:07:42,150 --> 00:07:43,790
+I'm going to use the same string.
+
+134
+00:07:43,790 --> 00:07:46,639
+Only, rather than printing it, I'll store
+it in a variable.
+
+135
+00:07:51,770 --> 00:07:54,580
+And when we examine the contents of
+variable s,
+
+136
+00:07:55,610 --> 00:07:58,480
+it looks a lot different from what we
+inputted.
+
+137
+00:07:58,480 --> 00:08:00,910
+First of all, it doesn't have triple
+quotes anymore.
+
+138
+00:08:00,910 --> 00:08:02,352
+It has single quotes.
+
+139
+00:08:02,352 --> 00:08:07,988
+And secondly, in the places where I had
+hit the Enter key or the Return
+
+140
+00:08:07,988 --> 00:08:12,940
+key, we see this backslash n in two
+places.
+
+141
+00:08:12,940 --> 00:08:16,940
+That character is called the newline
+characters, and it's a special
+
+142
+00:08:16,940 --> 00:08:18,370
+character in Python.
+
+143
+00:08:18,370 --> 00:08:23,510
+The backslash symbol is the escape
+character.
+
+144
+00:08:23,510 --> 00:08:28,150
+And this combination of backslash and n is
+escape sequence newline.
+
+145
+00:08:28,150 --> 00:08:28,650
+There
+
+146
+00:08:31,860 --> 00:08:34,530
+are several other special characters.
+
+147
+00:08:34,530 --> 00:08:40,950
+For example, let's print the numbers three
+four and five, separated by tabs.
+
+148
+00:08:40,950 --> 00:08:44,220
+We use three, and then for the tab symbol,
+we
+
+149
+00:08:44,220 --> 00:08:49,930
+use the escape sequence backslash t, four,
+backslash t, and five.
+
+150
+00:08:49,930 --> 00:08:55,060
+So three tab four tab five, and that's
+what it looks like.
+
+151
+00:08:55,060 --> 00:08:57,180
+In addition to newline and
+
+152
+00:08:57,180 --> 00:09:00,460
+tab, there are several other escape
+sequences.
+
+153
+00:09:00,460 --> 00:09:05,850
+A couple that will be useful for us, are
+the escape sequence, backslash, backslash.
+
+154
+00:09:05,850 --> 00:09:08,190
+Which we use, whenever we want to print a
+
+155
+00:09:08,190 --> 00:09:11,200
+single backslash, or include a single
+backslash in the string.
+
+156
+00:09:12,800 --> 00:09:16,760
+That's because the backslash character, is
+the escape character and when
+
+157
+00:09:16,760 --> 00:09:20,990
+we use it on it's own, we get an error
+message.
+
+158
+00:09:20,990 --> 00:09:22,040
+As it expects,
+
+159
+00:09:22,040 --> 00:09:29,020
+something follows it.
+Another useful sequence, is the single
+
+160
+00:09:29,020 --> 00:09:33,800
+quote sequence, for when you want to
+include a single quote, within our string.
+
+161
+00:09:33,800 --> 00:09:40,540
+For example, if I want to say, don\'t,
+then I use backslash,
+
+162
+00:09:40,540 --> 00:09:46,310
+quote, for the place where I'd like the
+single quote to occur and similarly,
+
+163
+00:09:46,310 --> 00:09:51,200
+when I want to use a quotation marks,
+double quotation marks
+
+164
+00:09:51,200 --> 00:09:56,200
+in a string, I can use the escape
+sequence, backslash, double quotes.
+
+165
+00:09:56,200 --> 00:10:02,819
+So, imagine that we want to do this, says,
+He says.
+
+166
+00:10:02,819 --> 00:10:02,822
+[SOUND]
+
+167
+00:10:02,822 --> 00:10:09,030
+and I use \ double quotes to indicate that
+I
+
+168
+00:10:09,030 --> 00:10:11,200
+would like to use the double quote in the
+string

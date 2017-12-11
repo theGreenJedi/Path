@@ -1,0 +1,639 @@
+1
+00:00:02,050 --> 00:00:04,850
+We have stored collections
+of data using lists.
+
+2
+00:00:04,850 --> 00:00:08,100
+And have used indices to
+access the items of lists.
+
+3
+00:00:08,100 --> 00:00:11,580
+In this lecture, we will explore
+Python's dictionary type, and
+
+4
+00:00:11,580 --> 00:00:15,200
+learn how to store and
+access information, using dictionaries.
+
+5
+00:00:16,930 --> 00:00:21,010
+In an earlier lecture, we used a nested
+list to keep track of assignments, and
+
+6
+00:00:21,010 --> 00:00:22,900
+grades on those assignments.
+
+7
+00:00:22,900 --> 00:00:27,060
+Each inner list was a two item list
+containing the assignment name,
+
+8
+00:00:27,060 --> 00:00:30,090
+a string and a grade which is a number.
+
+9
+00:00:32,090 --> 00:00:35,780
+We can use indexing to access
+the items of the list.
+
+10
+00:00:35,780 --> 00:00:39,730
+Grades at zero are first at
+the list with A1 and its grade.
+
+11
+00:00:39,730 --> 00:00:44,200
+Grades at one the first circle is
+containing A2 and its grade and
+
+12
+00:00:44,200 --> 00:00:47,780
+grades at two refers to the list
+containing A3 and its grade.
+
+13
+00:00:49,680 --> 00:00:53,250
+To find out the name of a particular
+assignment we need to use the first
+
+14
+00:00:53,250 --> 00:00:54,940
+index of that two element list.
+
+15
+00:00:54,940 --> 00:00:59,455
+So for example to find
+the name of the assignment for
+
+16
+00:00:59,455 --> 00:01:03,768
+grades in X1,
+we use index zero to get the name.
+
+17
+00:01:03,768 --> 00:01:08,349
+To access the grade associated
+with that assignment,
+
+18
+00:01:08,349 --> 00:01:11,144
+we use index 1 of the inner list.
+
+19
+00:01:11,144 --> 00:01:15,380
+We will now use a dictionary to
+store the same grades information.
+
+20
+00:01:15,380 --> 00:01:19,780
+And we'll see that accessing the mark
+associated with a particular assignment
+
+21
+00:01:19,780 --> 00:01:22,260
+is going to be simpler when
+working with the dictionary.
+
+22
+00:01:23,800 --> 00:01:26,770
+The variable assignment to grade
+will refer to the new dictionary.
+
+23
+00:01:27,860 --> 00:01:30,924
+And the notation for
+a dictionary is braces.
+
+24
+00:01:33,337 --> 00:01:38,714
+Each entry of a dictionary has two parts,
+and the two parts are separated by colons.
+
+25
+00:01:47,195 --> 00:01:52,281
+This dictionary has three key value pairs.
+
+26
+00:01:52,281 --> 00:01:56,150
+A1 is a key, A2 is a key and A3 is a key.
+
+27
+00:02:00,330 --> 00:02:04,510
+80 is a value,
+it is the value associated with key A1.
+
+28
+00:02:04,510 --> 00:02:09,870
+70 is a value,
+it is the value associated with key A2.
+
+29
+00:02:10,960 --> 00:02:15,490
+And 90 is a value,
+it is the value associated with key A3.
+
+30
+00:02:17,020 --> 00:02:19,630
+To look up the grade
+associated with assignment A2,
+
+31
+00:02:19,630 --> 00:02:24,580
+we can use the bracket notation
+that we used with the nested list.
+
+32
+00:02:24,580 --> 00:02:29,502
+However, rather than put an index
+between the brackets, we will put a key.
+
+33
+00:02:29,502 --> 00:02:34,589
+So we want to look up the value
+associated with key A2,
+
+34
+00:02:34,589 --> 00:02:37,697
+and that gives us the value 70.
+
+35
+00:02:37,697 --> 00:02:38,792
+This notation for
+
+36
+00:02:38,792 --> 00:02:43,391
+looking up a mark associated with
+an assignment is much simpler than the two
+
+37
+00:02:43,391 --> 00:02:47,850
+indices needed to look up the mark
+associated with an assignment.
+
+38
+00:02:47,850 --> 00:02:49,800
+Using the nested list.
+
+39
+00:02:49,800 --> 00:02:52,360
+However, it reveals something
+about dictionaries.
+
+40
+00:02:52,360 --> 00:02:57,010
+In order to be able to look up
+a particular value associated with a key,
+
+41
+00:02:57,010 --> 00:02:58,620
+that key must be unique.
+
+42
+00:02:58,620 --> 00:03:00,760
+It can only occur once in the dictionary.
+
+43
+00:03:02,330 --> 00:03:06,860
+So assignment names A1, A2,
+and A3 are unique names.
+
+44
+00:03:06,860 --> 00:03:09,400
+The marks associated with
+those assignments, or
+
+45
+00:03:09,400 --> 00:03:12,650
+the values of the dictionary,
+could be duplicated.
+
+46
+00:03:12,650 --> 00:03:18,677
+So it's possible that A1 and A2, those
+keys, could have the same value, say, 80.
+
+47
+00:03:22,054 --> 00:03:27,395
+If we try to access a list, and an index
+that does not exist an error occurs.
+
+48
+00:03:27,395 --> 00:03:29,415
+And the same is true for dictionaries.
+
+49
+00:03:29,415 --> 00:03:33,540
+If we try to access a dictionary
+using a key that does not exist,
+
+50
+00:03:33,540 --> 00:03:36,275
+then a key error occurs.
+
+51
+00:03:36,275 --> 00:03:40,255
+They key A4 is not present in
+the dictionary that assignment to grade
+
+52
+00:03:40,255 --> 00:03:40,825
+refers to.
+
+53
+00:03:41,980 --> 00:03:45,170
+Before accessing a key of a dictionary,
+we can check for
+
+54
+00:03:45,170 --> 00:03:47,290
+its existence in the dictionary.
+
+55
+00:03:47,290 --> 00:03:51,683
+So we could have checked to see
+wether A4 is in asn_to_grade.
+
+56
+00:03:53,737 --> 00:03:58,730
+It's not, so False is the value
+that our expression evaluates to.
+
+57
+00:03:58,730 --> 00:04:03,830
+Of course A2 is a key in the dictionary,
+so this expression will evaluate to true.
+
+58
+00:04:06,800 --> 00:04:12,120
+This inoperator is checking for
+the presence of keys, not values.
+
+59
+00:04:12,120 --> 00:04:15,910
+So if we check whether 80
+is in assigned to grade,
+
+60
+00:04:15,910 --> 00:04:21,370
+this expression will also evaluate False,
+since 80 is not a key in that dictionary.
+
+61
+00:04:22,860 --> 00:04:26,028
+Currently there are three
+key-value pairs in the dictionary.
+
+62
+00:04:26,028 --> 00:04:30,738
+The len built-in function,
+that trends the number of key-value pairs.
+
+63
+00:04:33,345 --> 00:04:35,909
+Like lists, dictionaries are mutable,
+
+64
+00:04:35,909 --> 00:04:40,530
+that means the key-value pairs
+can be added to a dictionary.
+
+65
+00:04:40,530 --> 00:04:44,115
+The value associated with
+the key could be changed and
+
+66
+00:04:44,115 --> 00:04:46,520
+key-value pairs can be
+removed from a dictionary.
+
+67
+00:04:47,580 --> 00:04:50,530
+Let's start by adding another
+key-value pair to this dictionary.
+
+68
+00:04:51,530 --> 00:04:56,430
+We're going to add the assignment A4 and
+we indicate this using the same
+
+69
+00:04:56,430 --> 00:05:00,570
+bracket notation that we use to
+access the value at a particular key.
+
+70
+00:05:01,750 --> 00:05:04,580
+But we use it in conjunction
+with an assignment statement.
+
+71
+00:05:04,580 --> 00:05:10,179
+So the dictionary that assigned to grade
+refers to will get a new key A4 and
+
+72
+00:05:10,179 --> 00:05:13,539
+the value associated with that key is 85.
+
+73
+00:05:14,990 --> 00:05:17,673
+The len function now
+returns 4 because there
+
+74
+00:05:17,673 --> 00:05:20,362
+are four key value pairs
+in assign to grades.
+
+75
+00:05:26,890 --> 00:05:32,970
+Using the same notation we can also
+update the values associated with a key.
+
+76
+00:05:32,970 --> 00:05:34,240
+So for key A4.
+
+77
+00:05:34,240 --> 00:05:37,990
+We're going change its
+value now from 85 to 90.
+
+78
+00:05:37,990 --> 00:05:43,110
+Because A4 already exists in
+the dictionary, this becomes a change.
+
+79
+00:05:43,110 --> 00:05:45,220
+If the key A4 didn't exist,
+
+80
+00:05:45,220 --> 00:05:48,080
+like before, then the new key
+value pair would be added.
+
+81
+00:05:50,320 --> 00:05:54,240
+Key A4 originally had the value
+85 associated with it.
+
+82
+00:05:54,240 --> 00:05:58,140
+And now it has the value
+90 associated with it.
+
+83
+00:05:58,140 --> 00:06:04,430
+Notice that the value 90 is associated
+with the key A3 and with the key A4.
+
+84
+00:06:04,430 --> 00:06:08,490
+Values can be duplicated,
+as mentioned before, but keys cannot.
+
+85
+00:06:10,325 --> 00:06:13,590
+Now let's remove a key value
+pair from the dictionary.
+
+86
+00:06:13,590 --> 00:06:18,590
+To do this we will use the operator
+del and then the dictionary
+
+87
+00:06:18,590 --> 00:06:23,000
+reference and the key,
+using the same bracket notation.
+
+88
+00:06:23,000 --> 00:06:28,740
+So we'll remove key A4 along with
+its value from the dictionary.
+
+89
+00:06:30,420 --> 00:06:36,025
+The dictionary's line is
+now going to be three.
+
+90
+00:06:36,025 --> 00:06:42,306
+And the dictionary no longer has
+the key value pair A4 and 90.
+
+91
+00:06:42,306 --> 00:06:45,601
+We can use a for loop to loop
+over the keys of a dictionary,
+
+92
+00:06:45,601 --> 00:06:49,870
+like we did to loop over the characters
+of a string, or the items of a list.
+
+93
+00:06:51,280 --> 00:06:55,350
+Because we're looping over the keys,
+the variable name that I'm going to choose
+
+94
+00:06:55,350 --> 00:06:58,290
+here will be representative
+of the key of the dictionary.
+
+95
+00:06:58,290 --> 00:07:01,500
+I'm going to use the word assignment for
+my variable name.
+
+96
+00:07:01,500 --> 00:07:05,753
+For each assignment in
+the dictionary asn_to_grade,
+
+97
+00:07:05,753 --> 00:07:08,949
+we'll print that assignment, that key.
+
+98
+00:07:13,019 --> 00:07:17,092
+The keys A1, A3 and A2 are printed.
+
+99
+00:07:17,092 --> 00:07:21,752
+However, this doesn't match the order in
+which we added the key value pairs to
+
+100
+00:07:21,752 --> 00:07:23,150
+the dictionary.
+
+101
+00:07:23,150 --> 00:07:28,170
+We put A1 in its value first, then A2
+with its value and A3 with its value.
+
+102
+00:07:29,860 --> 00:07:34,431
+The order that key value pairs are are
+added to the dictionary has no effect on
+
+103
+00:07:34,431 --> 00:07:37,440
+the order in which the for
+loop accesses the keys.
+
+104
+00:07:38,610 --> 00:07:41,720
+Therefore when looping over
+the keys of a dictionary,
+
+105
+00:07:41,720 --> 00:07:45,980
+we cannot rely on the keys being
+accessed in any particular order.
+
+106
+00:07:45,980 --> 00:07:51,020
+In this case we can't rely on A1
+before being printed before A2 and
+
+107
+00:07:51,020 --> 00:07:52,730
+A2 being printed before A3.
+
+108
+00:07:54,170 --> 00:07:59,020
+This time rather than printing the keys of
+the dictionary, let's print the values,
+
+109
+00:08:00,370 --> 00:08:04,576
+all of the for loops that we write over
+dictionaries will be loops over the keys.
+
+110
+00:08:04,576 --> 00:08:07,691
+So we're going to leave
+the header exactly the same,
+
+111
+00:08:07,691 --> 00:08:12,619
+rather than printing the key assignment
+we'll look up the value associated with
+
+112
+00:08:12,619 --> 00:08:16,112
+that key in the dictionary and
+print that value instead.
+
+113
+00:08:19,767 --> 00:08:22,920
+The values 80, 90 and 70 are printed.
+
+114
+00:08:24,450 --> 00:08:27,240
+And finally,
+let's print both the key and the value.
+
+115
+00:08:28,380 --> 00:08:32,130
+When we call print,
+we can pass two arguments.
+
+116
+00:08:32,130 --> 00:08:37,620
+The key assignment, and
+then the value associated with that key.
+
+117
+00:08:39,920 --> 00:08:42,690
+That prints each assignment and
+the mark associated with it.
+
+118
+00:08:43,910 --> 00:08:47,130
+Our introduction to dictionaries
+is almost complete, but
+
+119
+00:08:47,130 --> 00:08:49,850
+there are a couple more
+important things to point out.
+
+120
+00:08:49,850 --> 00:08:52,460
+First, a dictionary can be empty.
+
+121
+00:08:52,460 --> 00:08:54,088
+And we use just the opening and
+
+122
+00:08:54,088 --> 00:08:57,300
+closing braces to indicate
+this with nothing in between.
+
+123
+00:08:57,300 --> 00:09:00,500
+The length of an empty dictionary is 0.
+
+124
+00:09:00,500 --> 00:09:05,310
+Finally, we need to make an important
+note about the types that the keys and
+
+125
+00:09:05,310 --> 00:09:06,909
+values of a dictionary may have.
+
+126
+00:09:08,000 --> 00:09:10,388
+Keys and values can be of different types.
+
+127
+00:09:10,388 --> 00:09:16,100
+So we could have a sting for a key and
+another key could be an int.
+
+128
+00:09:16,100 --> 00:09:20,150
+However, the type of keys
+must always be immutable.
+
+129
+00:09:22,190 --> 00:09:26,640
+Since lists are mutable,
+a list cannot be used as a dictionary key.
+
+130
+00:09:26,640 --> 00:09:30,905
+This assignment statement which attempts
+to add a list with numbers 1 and
+
+131
+00:09:30,905 --> 00:09:34,637
+2 as a key along with the value banana,
+will result in an error.
+
+132
+00:09:38,054 --> 00:09:42,128
+When we want to use a sequence as a key,
+rather than using a list,
+
+133
+00:09:42,128 --> 00:09:46,010
+we can use a tuple,
+because tuples are immutable.
+
+134
+00:09:46,010 --> 00:09:47,676
+The following is acceptable.

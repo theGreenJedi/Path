@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Linux https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            list Methods
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 8.6 List methods
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            <code>list</code> Methods
+        </h1>
+        <h3>
+            Methods
+        </h3>
+        <p>
+            A method is a function inside an object. You can find out the methods in type <code>list</code> by typing <code>dir(list)</code>.
+        </p>
+        <h3>
+            Modifying Lists
+        </h3>
+        <p>
+            The table below contains methods that modify lists.
+        </p>
+        <table border="1px">
+            <tr>
+                <td>
+                    Method
+                </td>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Example
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>list.append(object)</code>
+                </td>
+                <td>
+                    Append <code>object</code> to the end of list.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; colours = ['yellow', 'blue']
+&gt;&gt;&gt; colours.append('red')
+&gt;&gt;&gt; print(colours)
+['yellow', 'blue', 'red']
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>list.extend(list)</code>
+                </td>
+                <td>
+                    Append the items in the list parameter to the list.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; colours.extend(['pink', 'green'])
+&gt;&gt;&gt; print(colours)
+['yellow', 'blue', 'red', 'pink', 'green']
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>list.pop([index])</code>
+                </td>
+                <td>
+                    Remove the item at the end of the list; optional index to remove from anywhere.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; colours.pop()
+'green'
+&gt;&gt;&gt; print(colours)
+['yellow', 'blue', 'red', 'pink']
+&gt;&gt;&gt; colours.pop(2)
+'red'
+&gt;&gt;&gt; print(colours)
+['yellow', 'blue', 'pink']
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>list.remove(object)</code>
+                </td>
+                <td>
+                    Remove the first occurrence of the object; error if not there.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; colours.remove('green')
+Traceback (most recent call last):
+  File "&lt;pyshell#10&gt;", line 1, in &lt;module&gt;
+    colours.remove('green')
+ValueError: list.remove(x): x not in list
+&gt;&gt;&gt; colours.remove('pink')
+&gt;&gt;&gt; print(colours)
+['yellow', 'blue']    
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>list.reverse()</code>
+                </td>
+                <td>
+                    Reverse the list.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; grades = [95, 65, 75, 85]
+&gt;&gt;&gt; grades.reverse()
+&gt;&gt;&gt; print(grades)
+[85, 75, 65, 95]
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>list.sort()</code>
+                </td>
+                <td>
+                    Sort the list from smallest to largest.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; grades.sort()
+&gt;&gt;&gt; print(grades)
+[65, 75, 85, 95]
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>list.insert(int, object)</code>
+                </td>
+                <td>
+                    Insert object at the given index, moving items to make room.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; grades.insert(2, 80)
+&gt;&gt;&gt; print(grades)
+[65, 75, 80, 85, 95]
+</pre>
+                </td>
+            </tr>
+        </table>
+        <h3>
+            Getting Information from Lists
+        </h3>
+        <p>
+            The table below contains methods that return information about lists.
+        </p>
+        <table border="1px">
+            <tr>
+                <td>
+                    Method
+                </td>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Example
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>list.count(object)</code>
+                </td>
+                <td>
+                    Return the number of times object occurs in list.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; letters = ['a', 'a', 'b', 'c']
+&gt;&gt;&gt; letters.count('a')
+2
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>list.index(object)</code>
+                </td>
+                <td>
+                    Return the index of the first occurrence of object; error if not there.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; letters.index('a')
+0
+&gt;&gt;&gt; letters.index('d')
+Traceback (most recent call last):
+  File "&lt;pyshell#24&gt;", line 1, in &lt;module&gt;
+    letters.index('d')
+ValueError: 'd' is not in list                                  
+</pre>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

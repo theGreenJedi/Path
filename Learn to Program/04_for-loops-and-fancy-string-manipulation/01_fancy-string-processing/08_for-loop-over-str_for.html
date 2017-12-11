@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            for loop over str
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128
+" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 9.2 Processing Characters in Strings
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            <code>for</code> loop over <code>str</code>
+        </h1>
+        <h3>
+            For Loops
+        </h3>
+        <p>
+            The general form of a for loop over a string is:
+        </p>
+        <pre>
+for variable in str:
+    body
+                
+</pre>
+        <p>
+            The variable refers to each character of the string in turn and executes the body of the loop for each character. For example:
+        </p>
+        <pre>
+&gt;&gt;&gt; s = 'yesterday'
+&gt;&gt;&gt; for char in s:
+...     print(char)
+... 
+y
+e
+s
+t
+e
+r
+d
+a
+y    
+</pre>
+        <h3>
+            Accumulator pattern: numeric accumulator
+        </h3>
+        <p>
+            Consider the code below, in which the variable <code>num_vowels</code> is an accumulator:
+        </p>
+        <pre>
+def count_vowels(s):
+    """ (str) -&gt; int
+
+    Return the number of vowels in s. Do not treat letter y as a vowel
+    
+    &gt;&gt;&gt; count_vowels('Happy Anniversary!')
+    5
+    &gt;&gt;&gt; count_vowels('xyz')
+    0    
+    """
+
+    num_vowels = 0
+    
+    for char in s:
+        if char in 'aeiouAEIOU':
+            num_vowels = num_vowels + 1
+
+    return num_vowels
+</pre>
+        <p>
+            The <code>loop</code> in the function above will loop over each character that <code>s</code> refers to, in turn. The body of the loop is executed for each character, and when a character is a vowel, the <code>if</code> condition is <code>True</code> and the value that <code>num_vowels</code> refers to is increased by one.
+        </p>
+        <p>
+            The variable <code>num_vowels</code> is an accumulator, because it accumulates information. It starts out referring to the value <code>0</code> and by the end of the function it refers to the number of vowels in <code>s</code>.
+        </p>
+        <h3>
+            Accumulator pattern: string accumulator
+        </h3>
+        <p>
+            In the following function, the variable <code>vowels</code> is also an accumulator:
+        </p>
+        <pre>
+      
+def collect_vowels(s):
+    """ (str) -&gt; str
+
+    Return the vowels from s.  Do not treat the letter
+    y as a vowel.
+
+    &gt;&gt;&gt; collect_vowels('Happy Anniversary!')
+    'aAiea'
+    &gt;&gt;&gt; collect_vowels('xyz')
+    ''
+    """
+
+    vowels = ''
+
+    for char in s:
+        if char in 'aeiouAEIOU':
+            vowels = vowels + char
+
+    return vowels
+</pre>
+        <p>
+            Variable <code>vowels</code> initially refers to the empty string, but over the course of the function it accumulates the vowels from <code>s</code>.
+        </p>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

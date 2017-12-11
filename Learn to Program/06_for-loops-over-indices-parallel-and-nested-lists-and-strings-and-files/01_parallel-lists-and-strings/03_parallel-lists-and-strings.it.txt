@@ -1,0 +1,61 @@
+Abbiamo già usato i cicli sugli indici quando
+lavoriamo con una singola stringa o una singola lista.
+In questa lezione, useremo cicli sugli indici per accedere agli elementi alle
+posizioni corrispondenti di due differenti liste.
+E i caratteri alle posizioni corrispondenti di due liste diverse.
+Inizieremo con l'implementare questa funzione chiamata some items.
+Prende in ingresso due parametri, list1 e list2, che sono entrambe liste di numeri e
+ritorna una lista di numeri. L'obiettivo della funzione è ritornare una nuova
+lista, nella quale ogni elemento è la somma degli elementi alla posizione corrispondente delle
+list1 e list2. Analizziamo cosa significa l'espressione
+posizione corrispondente. Se list1 fa riferimento ad una lista di tre
+elementi, valore uno, due e tre. E list2 fa riferimento a una lista di tre elementi,
+con valori uno, due, quattro e due, ci sono tre elementi in ogni lista, con
+indici zero, uno e due. Quando diciamo che vogliamo considerare gli
+elementi corrispondenti della list1 e list2, stiamo facendo riferimento agli elementi o
+agli oggetti che sono allo stesso indice. Ad esempio, all'indice zero, ci sono
+i valori uno e due, e quelli vengono sommati per ottenere tre.
+All'indice uno ci sono i valori due e quattro, che vengono sommati per ottenere sei.
+E all'indice due, ci sono i valori tre e due, che vengono sommati per ottenere cinque.
+Questo crea una nuova lista che viene ritornata da questa funzione.
+Ora scriviamo questo codice. Ritorneremo una nuova lista, e quindi
+creeremo una variabile, sum list, che farà inizialmente riferimento ad una lista vuota.
+Questa lista verrà costruita un elemento alla volta, per tutto il corso della funzione. Abbiamo visto, quando stavamo analizzando 
+l'esempio, che usavamo gli indici per accedere agli elementi della list1 e list2.
+Quindi, vogliamo iterare sugli indici per i in range delle lunghezza, e ora possiamo 
+passare una delle due liste come argomento.
+List1 e list2 avranno la stessa lunghezza in base alla precondizione della
+funzione mostrata sopra. Quindi, posso prendere qualsiasi delle due
+liste, e sceglierò list1 per prendere la lunghezza di list1.
+Questo significa che range genererà i valori zero, uno fino alla lunghezza della lista
+esclusa. Nel corpo del ciclo, vogliamo accedere alla
+list1 in posizione i, e alla list2 in posizione i, e li sommiamo.
+Una volta che abbiamo calcolato la somma, vogliamo aggiungerlo alla sum list.
+Può essere usato il metodo append per aggiungere quella somma alla fine della sum list.
+Questa è l'unica cosa che dovete fare all'interno del corpo del ciclo for.
+Una volta che il ciclo for ha finito l'esecuzione ed esce, allora possiamo ritornare la sum
+list. Ora, facciamo girare l'esempio di chiamata alla funzione.
+Prima dal modulo, e poi nella shell, chiamiamo la funzione.
+E possiamo vedere che ritorna una lista con i valori tre, sei e cinque.
+Implementiamo ancora un'altra funzione. Il nome di questa funzione è count matches
+e coinvolge due stringhe. Ha due parametri stringa, s1 e s2,
+e ritorna un interno, che è il numero di posizioni nella stringa s1 che contiene lo
+stesso carattere alla posizione corrispondente di s2.
+Ad esempio, per la stringa ape e la stringa are, ci sono due caratteri comuni.
+All'indice zero, c'è una a. E all'indice due, ci sono le e.
+Per le stringhe head e heard, Ci sono anche due caratteri in comune,
+le h all'indice zero e le s all'indice tre. 
+Il primo passo per implementare questa funzione è creare un accumulatore, lo
+chiamerò num matches e inizialmente farà riferimento al valore zero.
+Quella variabile accumulerà il numero di corrispondenze.
+Abbiamo visto questo quando abbiamo analizzato l'esempio, stavamo confrontando le stringhe di caratteri allo
+stesso indice. Questo significa che scriveremo il nostro ciclo
+sopra gli indici delle stringhe. Quindi usiamo range, iniziando dalla posizione
+zero, o valore zero, fino alla lunghezza della stringa, s1.
+E quello che vorremmo fare è confrontare il carattere della stringa ad s1.
+Quindi se s1 all'indice i è uguale alla stringa s2 all'indice i, allora abbiamo trovato una corrispondenza.
+E possiamo incrementare quella variabile num match, aggiungendole uno.
+Una volta che il ciclo è terminato e siamo passati sopra ogni carattere delle
+stringhe, allora viene ritornato num matches. .
+Facciamo girare l'esempio della chiamata alla funzione. Per primo l'esempio ate e ape che ritorna due
+e poi l'esempio head e heard,

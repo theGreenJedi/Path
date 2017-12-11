@@ -1,0 +1,53 @@
+Scrivere è facile più o meno tanto quanto
+leggere da un file. Iniziamo.
+Come promemoria, la funzione open riceve il nome di un file, o il percorso completo o
+solo il nome del file se si trova nella stessa cartella del programma e la modalità, una
+fra lettura, scrittura e aggiunta. Proprio come i file possiedono i metodi read, readline e
+readlines, possiedono anche un metodo write se li apriamo in modalità di scrittura.
+Il metodo write funziona come la funzione print di Python eccetto per il fatto che non
+aggiunge il carattere a capo. Scriveremo una piccola porzione di codice
+che effettua una copia di un file, ma inserisce la parola copy come prima riga del nuovo
+file copiato. Inizieremo mostrando come richiedere
+un utente per un file. Il modulo tkinter possiede un sottomodulo
+chiamato file dialog. Lo importiamo come qui.
+All'interno di quel modulo, c'è una funzione askopenfilename.
+Questa aprirà una finestra di dialogo e ci permetterà di selezionare un file usando il
+selettore del file del computer. Quando chiamiamo askopenfilename, avremo
+bisogno di passare a Python per poter selezionare il file.
+Andremo in trova, In Flanders Fields txt... Quando selezioniamo open, vediamo che la,
+la finestra di dialogo scompare. Ma rimane questa finestra con titolo tk. Questa finestra non da alcun fastidio, e òa
+ignoreremo, e torneremo alla shell di Python.
+Askopenfilename  ha ritornato una stringa contenente il percorso completo del file che
+abbiamo scelto in modo da poterlo usare quando chiamiamo la funzione open.
+La chiameremo di nuovo, e ricorda, la stringa che è stata ritornata.
+Abbiamo bisogno di tornare a Python per poter selezionare il nostro file.
+Ora, dal nome del file, è il percorso per quel file.
+Useremo una nuova funzione nella stessa finestra di dialogo dei file per scegliere un
+file su cui vogliamo scrivere. Invece di Askopenfilename, useremo
+asksaveasfilename. Asksaveasfilename ci permetterà di scegliere un
+nuovo nome file per salvarlo, ma se scegliamo un file che esiste già, ci sarà richiesta
+una conferma se vogliamo veramente rimpiazzare quel file.
+Torneremo di nuovo a Python. E noterete che dice, salva come, con
+uno spazio in cui inserire il nome del nuovo file.
+Bene, non voglio salvarlo nel 6readfiles perché questa lezione è
+6readfiles. Chiameremo questo, Flanders copy.txt.
+Ed ecco cosa scegliamo. Ora apriremo dal <u>filename in modalità
+di lettura.</u> Leggi il contenuto,
+chiudi il file e controlla per essere sicuro di possedere
+ciò che ci aspettavamo, contents è una stringa contenente ciò che c'era nel file inclusi
+tutti gli a capo. Poi, apriremo il file su cui vogliamo scrivere
+per scrivere la parola copy e l'a capo.
+Ricordate, che dobbiamo aggiungere ogni nuova linea che vogliamo dato che, a differenza di
+print, il metodo write non aggiunge alcun altro carattere.
+Poi, scriveremo il contenuto. ed infine, chiuderemo il file.
+Notate che quando apriamo il file, il file su cui stavamo copiando, abbiamo
+usato il carattere w quando abbiamo aperto il file. E il metodo write ritorna un'informazione,
+ritorna un int. In particolare, ritorna il numero di caratteri
+che sono stati scritti. Notate che questo mostra che il backslash
+viene trattato come un singolo carattere, dato che c, o, p, y e la nuova riga costituiscono
+cinque caratteri. Write ritorna questa informazione in modo che tu
+possa controllare e essere sicuro che la lunghezza della tua stringa è il numero di caratteri che sono
+stati scritti con successo. Ora verificheremo che, che il file è
+stato scritto con successo. Qui c'è il nostro Flanders copy txt.
+Quando faccio doppio clic su di lui, si apre e vedremo che la parola copy e il carattere
+nuova riga appare in cima, proprio come abbiamo scritto.

@@ -1,0 +1,63 @@
+Once a function is defined,
+we can call it over and over again. In this lecture,
+we're going to focus on reusing functions by calling them in other
+places when appropriate. For example, we'll call our functions from
+within other function definitions and also within other function calls. In the lecture on defining functions, we wrote triangle.pie which
+contained two functions. This code is a revised version that
+I produced following the steps of the design recipe. To recap the design recipe,
+we begin with an example or two, followed by the type contract, the function header,
+a description of the function. We then code the body and
+test the function. We'll now add another
+function to triangle.pie. This function will calculate
+the semiperimeter of a triangle. The semiperimeter is simply
+half of the perimeter. Following the exact design recipe, the
+first step is coming up with an example. We will call the function semiperimeter. The function will need the lengths of
+the three sides in order to perform the calculation. So in the function call we'll
+imagine passing in three lengths. And then the result we get back
+will be half of the perimeter. Let's do one more function call, this time passing floats
+instead of ints as arguments. And the result that we expect
+to get back would be 12.9. The next step of the design
+recipe is the type contract. For the semiperimeter function, the types will be numbers cuz
+we may have ints or floats. And this function will return a float. Next we provide the function header. We begin with the keyword def
+followed by the function name that we already decided on in our example calls. And we pass in three
+parameters in this case. I will call them side1, side2 and side3. Next is the function description. We need to say what
+the function will return, and explain how the parameters are used. So we're going to return
+the semiperimeter of a triangle that has sides of the length
+given in the parameters. We're now ready to write
+the body of the function. This function is going to return the
+semiperimeter, which means that we will calculate the perimeter by summing the
+three sides and divide that result by two. Notice the part of the body
+of the semiperimeter function is exactly the same as part
+of the body of perimeter. Rather than duplicating the code
+to calculate the perimeter, we can call the perimeter function from
+within the semiperimeter function. By reusing the perimeter function,
+we reduce the risk of making an error when calculating the perimeter, since that
+function has already been tested. Now it's time to test
+the semiperimeter function. We will begin by running the module. And then we will execute that function
+by calling it within the shell. I'm going to use the same example that
+I used in the function's doc string. And we get back 6. And then if I call it with
+the floats from the doc string, well, a mix of floats and
+ints, we get back 12.9. So the function performs
+as we expect it to. Here's another problem for us to consider. For this problem we're going to
+make use of the area function that we wrote earlier. Recall that area has two parameters,
+the base and the height. And then it returns
+the area of the triangle. This problem involves two slices of pizza. At a party there are these
+two slices of pizza left. A hungry person is trying to figure
+out which slice is the largest. Since the slices
+are the shape of triangles, this person measures the base and
+the height of each slice. Now that we know the base and
+the height of each slice of pizza, we can use our program to help
+determine which is biggest. We'll also use one of
+Python's built-in functions, the max function, to help us out. So we start by calling max. And the first argument that we'll pass to
+max will be the area of the first slice of pizza, the slice that has base 3.8 and
+height 7.0. And then the second argument to
+the function max will be area of the second slice of pizza,
+a triangle with base 3.5 and height 6.8. When we execute this function, we find
+out which of those two areas is bigger. And now we can check to see which
+slice of pizza that that value, 13.29 repeating, corresponds with. So we can see from that function
+call the area of the first slice matches the maximum area. And that means that the winning
+pizza slice is this one. So what this example shows is that
+not only can we call functions from within function definitions,
+as we did in the semiperimeter example. But we can also pass
+function calls as arguments to functions since function calls
+are themselves expressions.

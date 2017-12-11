@@ -1,0 +1,311 @@
+<meta charset="utf-8"/>
+<co-content>
+ <h1 level="1">
+  Preface
+ </h1>
+ <h2 level="2">
+  Required Preparation
+ </h2>
+ <p>
+  This handout assumes that you have watched all the week 4 videos and also done the week 4 exercise. If you read this handout before you've done all of that, please come back and re-read it after you've passed the week 4 exercise.
+ </p>
+ <h2 level="2">
+  A2 Problem Domain: Deoxyribonucleic Acid (DNA)
+ </h2>
+ <p>
+  The problem domain for A2 is
+  <a href="http://en.wikipedia.org/wiki/Dna">
+   Deoxyribonucleic Acid (DNA)
+  </a>
+  , the double-stranded molecule that encodes genetic information for living organisms. DNA is made up of four kinds of
+  <em>
+   nucleotides
+  </em>
+  , which are molecules that bond together to form DNA sequences.
+ </p>
+ <p hasmath="true">
+  The four nucleotides are adenine (A), guanine (G), cytosine (C), and thymine (T). Each strand of DNA is a sequence of nucleotides, for example AGCTAC. In a program, we will use a string representation of this, $$\verb|'AGCTAC'|$$.
+ </p>
+ <p>
+  DNA has 2 strands in a double helix. The nucleotides in one strand are bonded to the nucleotides in the other strand. A and T can be bonded together, and thus
+  <em>
+   complement
+  </em>
+  each other; similarly, C and G are complements of each other.
+ </p>
+ <p>
+  You can see a picture of this on
+  <a href="http://en.wikipedia.org/wiki/Dna">
+   the Wikipedia page for DNA
+  </a>
+  . The two strands in DNA are
+  <em>
+   complementary
+  </em>
+  because each nucleotide in one strand is bonded with its complement in the other strand. Thus, given the DNA sequence ACGTACG, its complementary strand is TGCATGC.
+ </p>
+ <h2 level="2">
+  Terminology in this handout
+ </h2>
+ <p>
+  A
+  <em>
+   DNA sequence
+  </em>
+  is a sequence of nucleotides, such as TCATGT.
+ </p>
+ <h1 level="1">
+  What to do
+ </h1>
+ <h2 level="2">
+  Step 1: Download the starter code
+ </h2>
+ <p>
+  In this assignment, we are providing starter code that contains some function headers and docstrings.
+ </p>
+ <p>
+  Download the starter code:
+ </p>
+ <asset assettype="generic" extension="py" id="4z6HWXEQEeavkAqHAqo_cQ" name="a2">
+ </asset>
+ <h2 hasmath="true" level="2">
+  Step 2: Write the bodies of functions $$\verb|get_length|$$, $$\verb|is_longer|$$, $$\verb|count_nucleotides|$$, and $$\verb|contains_sequence|$$
+ </h2>
+ <p>
+  Tip: test your code with empty strings where appropriate.
+ </p>
+ <p hasmath="true">
+  For these functions, you may use built-in functions, $$\verb|str|$$ operations (for example: $$\verb|in|$$, $$\verb|+|$$, indexing), and $$\verb|str|$$ methods.
+ </p>
+ <table columns="2" rows="5">
+  <tr>
+   <td>
+    <p hasmath="true">
+     $$\begin{array}{l}\textbf{Function name:} \\ \textbf{(Parameter types) -&gt; Return type}\end{array}$$
+    </p>
+   </td>
+   <td>
+    <p>
+     <strong>
+      Description
+     </strong>
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p hasmath="true">
+     $$\begin{array}{l}\verb|get_length:| \\ \verb@(str) -&gt; int@\end{array}$$
+    </p>
+   </td>
+   <td>
+    <p>
+     The parameter is a DNA sequence. Return the length of that sequence.
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p hasmath="true">
+     $$\begin{array}{l}\verb|is_longer:| \\ \verb@(str, str) -&gt; bool@\end{array}$$
+    </p>
+   </td>
+   <td>
+    <p hasmath="true">
+     The two parameters are DNA sequences. Return True if and only if the first DNA sequence is longer than the second DNA sequence. (If they are the same length, return $$\verb|False|$$.)
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p hasmath="true">
+     $$\begin{array}{l}\verb|count_nucleotides:| \\ \verb@(str, str) -&gt; int@\end{array}$$
+    </p>
+   </td>
+   <td>
+    <p hasmath="true">
+     The first parameter is a DNA sequence and the second parameter is a nucleotide ($$\verb|'A'|$$, $$\verb|'T'|$$, $$\verb|'C'|$$ or $$\verb|'G'|$$). Return the number of times the nucleotide occurs in the DNA sequence.
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p hasmath="true">
+     $$\begin{array}{l}\verb|contains_sequence:| \\ \verb@(str, str) -&gt; bool@\end{array}$$
+    </p>
+   </td>
+   <td>
+    <p>
+     The two parameters are DNA sequences. Return True if and only if the first DNA sequence contains the second DNA sequence.
+    </p>
+   </td>
+  </tr>
+ </table>
+ <p hasmath="true">
+  Once you have finished writing these functions, in IDLE, choose $$\verb|Run -&gt; Run Module|$$. In the shell, test each function by running some example function calls. You can also submit your assignment at this point to see whether you're on the right track: remember, you can submit once every hour up until the deadline. If the example calls return the expected results and you pass all the tests when you submit, move on to Step 3. Otherwise, modify your code and repeat the tests.
+ </p>
+ <h2 hasmath="true" level="2">
+  Step 3: Write functions $$\verb|is_valid_sequence|$$ and $$\verb|insert_sequence|$$
+ </h2>
+ <p>
+  There is no starter code for these functions. Use the function design recipe to complete them. We have given you some suggestions for examples to try, but you should come up with more on your own based on the descriptions.
+ </p>
+ <p hasmath="true">
+  For these functions, you may use built-in functions and $$\verb|str|$$ operations (for example: $$\verb|in|$$, $$\verb|+|$$, indexing).
+ </p>
+ <p hasmath="true">
+  $$\color{red}{\textbf{Do not use}~\verb|str|~\textbf{methods.}}$$
+ </p>
+ <table columns="2" rows="3">
+  <tr>
+   <td>
+    <p hasmath="true">
+     $$\begin{array}{l}\textbf{Function name:} \\ \textbf{(Parameter types) -&gt; Return type}\end{array}$$
+    </p>
+   </td>
+   <td>
+    <p>
+     <strong>
+      Description
+     </strong>
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p hasmath="true">
+     $$\begin{array}{l}\verb|is_valid_sequence:| \\ \verb@(str) -&gt; bool@\end{array}$$
+    </p>
+   </td>
+   <td>
+    <p hasmath="true">
+     The parameter is a potential DNA sequence. Return True if and only if the DNA sequence is valid (that is, it contains no characters other than $$\verb|'A'|$$, $$\verb|'T'|$$, $$\verb|'C'|$$ and $$\verb|'G'|$$). There are at least 2 ways to approach this. One way is to count the number of characters that are not nucleotides and then at the end check whether there were more than zero. Another way is to use a Boolean variable that represents whether you have found a non-nucleotide character; it would start off as $$\verb|True|$$ and would be set to $$\verb|False|$$ if you found something that wasn't an $$\verb|'A'|$$, $$\verb|'T'|$$, $$\verb|'C'|$$ or $$\verb|'G'|$$. You should construct test cases that contain only $$\verb|'A'|$$s, $$\verb|'T'|$$s, $$\verb|'C'|$$s and $$\verb|'G'|$$s, and you should also create examples that contain other characters. A string is not a valid DNA sequence if it contains lowercase letters.
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p hasmath="true">
+     $$\begin{array}{l}\verb|insert_sequence:| \\ \verb@(str, str, int) -&gt; str@\end{array}$$
+    </p>
+   </td>
+   <td>
+    <p hasmath="true">
+     The first two parameters are DNA sequences and the third parameter is an index. Return the DNA sequence obtained by inserting the second DNA sequence into the first DNA sequence at the given index. (You can assume that the index is valid.)For example, If you call this function with arguments $$\verb|'CCGG'|$$, $$\verb|'AT'|$$, and 2, then it should return $$\verb|'CCATGG'|$$. When coming up with more examples, think about where the second DNA sequence might be inserted: what are the extremes?
+    </p>
+   </td>
+  </tr>
+ </table>
+ <p hasmath="true">
+  Once you have finished writing these functions, in IDLE, choose $$\verb|Run -&gt; Run Module|$$. In the shell, test your function by running your examples. You can also submit your assignment to see whether you're on the right track. If the example calls return the expected results and you pass all the tests when you submit, move on to Step 4. Otherwise, modify your code and repeat the tests.
+ </p>
+ <h2 hasmath="true" level="2">
+  Step 4: Write functions $$\verb|get_complement|$$ and $$\verb|get_complementary_sequence|$$
+ </h2>
+ <p>
+  There is no starter code for these functions. Use the function design recipe to complete them. We have given you some suggestions for examples to try, but you should come up with more on your own based on the descriptions.
+ </p>
+ <p hasmath="true">
+  For these functions, you may use built-in functions and $$\verb|str|$$ operations (for example: $$\verb|in|$$, $$\verb|+|$$, indexing).
+ </p>
+ <p hasmath="true">
+  $$\color{red}{\textbf{Do not use}~\verb|str|~\textbf{methods.}}$$
+ </p>
+ <table columns="2" rows="3">
+  <tr>
+   <td>
+    <p hasmath="true">
+     $$\begin{array}{l}\textbf{Function name:} \\ \textbf{(Parameter types) -&gt; Return type}\end{array}$$
+    </p>
+   </td>
+   <td>
+    <p>
+     <strong>
+      Description
+     </strong>
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p hasmath="true">
+     $$\begin{array}{l}\verb|get_complement:| \\ \verb@(str) -&gt; str@\end{array}$$
+    </p>
+   </td>
+   <td>
+    <p hasmath="true">
+     The first parameter is a nucleotide ($$\verb|'A'|$$, $$\verb|'T'|$$, $$\verb|'C'|$$ or $$\verb|'G'|$$). Return the nucleotide's complement. We have intentionally not given you any examples for this function. The Problem Domain section explains what a nucleotide is and what a complement is.
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p hasmath="true">
+     $$\begin{array}{l}\verb|get_complementary_sequence:| \\ \verb@(str) -&gt; str@\end{array}$$
+    </p>
+   </td>
+   <td>
+    <p hasmath="true">
+     The parameter is a DNA sequence. Return the DNA sequence that is complementary to the given DNA sequence. For example, if you call this function with $$\verb|'AT'|$$ as the argument, it should return $$\verb|'TA'|$$.
+    </p>
+   </td>
+  </tr>
+ </table>
+ <p hasmath="true">
+  Once you have finished writing these functions, in IDLE, choose $$\verb|Run -&gt; Run Module||$$. In the shell, test your function by running some example function calls. You can also submit your assignment to see whether you're on the right track: remember, you can submit once every hour up until the deadline. If the example calls return the expected results and you pass all the tests when you submit, move on to Step 5. Otherwise, modify your code and repeat the tests.
+ </p>
+ <h2 level="2">
+  Step 5: Submit your work
+ </h2>
+ <p hasmath="true">
+  Go to the Assignments page and click the appropriate Submit button. Choose your completed $$\verb|a2.py|$$ file. It should be marked within a few minutes. You can view your results by clicking on the View button in the Feedback column.
+ </p>
+</co-content>
+<style>
+ body {
+    padding: 50px 85px 50px 85px;
+}
+
+table th, table td {
+    border: 1px solid #e0e0e0;
+    padding: 5px 20px;
+    text-align: left;
+}
+input {
+    margin: 10px;
+}
+}
+th {
+    font-weight: bold;
+}
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+img {
+    height: auto;
+    max-width: 100%;
+}
+pre {
+    display: block;
+    margin: 20px;
+    background: #424242;
+    color: #fff;
+    font-size: 13px;
+    white-space: pre-wrap;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    border: 1px solid #ccc;
+}
+</style>
+<script async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ['$','$'] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true
+    }
+  });
+</script>

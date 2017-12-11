@@ -1,0 +1,603 @@
+1
+00:00:01,390 --> 00:00:05,930
+Questi indirizzi di memoria che stiamo usando
+stanno per diventare molto utili.
+
+2
+00:00:05,930 --> 00:00:09,012
+Viene fuori che potete modificare il contenuto
+di qualche oggetto.
+
+3
+00:00:09,012 --> 00:00:13,499
+E senza gli indirizzi di memoria, sarebbe molto
+difficile spiegare cosa sta accadendo.
+
+4
+00:00:15,580 --> 00:00:19,080
+Inizieremo mostrando che gli oggetti liste
+possono essere modificati.
+
+5
+00:00:19,080 --> 00:00:21,160
+Alla linea uno c'è un'istruzione di assegnazione.
+
+6
+00:00:21,160 --> 00:00:25,064
+Valutiamo l'espressione sulla destra,
+e quella crea una lista
+
+7
+00:00:25,064 --> 00:00:29,743
+di oggetti e i sei interi 0, 2,
+4, 6, 8 e 10.
+
+8
+00:00:30,870 --> 00:00:34,395
+Una volta che abbiamo creato la struttura 
+della lista, possiamo
+
+9
+00:00:34,395 --> 00:00:39,880
+assegnare alla variabile lst, l'indirizzo di memoria
+dell'oggetto lista.
+
+10
+00:00:43,030 --> 00:00:47,622
+Quindi, la lista lst, contiene del'indirizzo di memoria
+1 che fa riferimento all'oggetto
+
+11
+00:00:47,622 --> 00:00:53,549
+lista.
+All'indice zero c'è l'indirizzo
+
+12
+00:00:53,549 --> 00:00:59,610
+di memoria ID 2.
+E fa riferimento all'oggetto zero.
+
+13
+00:00:59,610 --> 00:01:05,450
+All'indice uno, facciamo riferimento a due.
+All'indice due, facciamo riferimento a quattro.
+
+14
+00:01:05,450 --> 00:01:06,020
+E così via.
+
+15
+00:01:09,470 --> 00:01:11,970
+Alla linea due c'è un'altra istruzione
+di assegnazione.
+
+16
+00:01:13,790 --> 00:01:17,810
+Sul lato sinistro, non abbiamo solo 
+una variabile.
+
+17
+00:01:17,810 --> 00:01:19,620
+Abbiamo qualcosa di un po' più complesso.
+
+18
+00:01:19,620 --> 00:01:22,350
+Abbiamo una lista all'indice 2.
+
+19
+00:01:22,350 --> 00:01:27,760
+Andremo a modificare quell'indirizzo
+di memoria proprio lì.
+
+20
+00:01:28,940 --> 00:01:32,000
+La lista all'indice 2, dopo che abbiamo
+eseguito quell'istruzione di assegnazione,
+
+21
+00:01:32,000 --> 00:01:35,730
+non fa più riferimento all'intero
+4.
+
+22
+00:01:35,730 --> 00:01:38,790
+Invece, fa riferimento all'intero 5.
+
+23
+00:01:38,790 --> 00:01:43,040
+Stiamo per modificare un oggetto nell'heap.
+
+24
+00:01:47,090 --> 00:01:54,150
+Quando clicco avanti, vediamo che abbiamo 
+un nuovo oggetto all'indirizzo di memoria 8.
+
+25
+00:01:54,150 --> 00:01:58,230
+E quella lista all'indice 2 fa riferimento
+a quel nuovo oggetto.
+
+26
+00:02:00,690 --> 00:02:05,350
+Modifichiamo il codice e facciamo qualcosa
+di diverso.
+
+27
+00:02:05,350 --> 00:02:08,150
+Andrò a rimpiazzare questo codice con
+dell'altro codice.
+
+28
+00:02:09,390 --> 00:02:10,820
+Visualizziamo l'esecuzione.
+
+29
+00:02:14,180 --> 00:02:19,450
+Linea uno, sappiamo cosa ci aspetta.
+Lista 1 fa riferimento ad una lista.
+
+30
+00:02:20,610 --> 00:02:22,800
+Alla lista indice 0, il nostro primo è 0.
+
+31
+00:02:22,800 --> 00:02:27,620
+L'indice quotato 1, il primo di 2.
+L'indice quotato 2, il nostro primo di 4, e così via.
+
+32
+00:02:29,990 --> 00:02:33,680
+Alla linea due, faccio qualcosa di un po'
+curioso.
+
+33
+00:02:33,680 --> 00:02:37,145
+Sto prendendo l'indirizzo di memoria che è
+nella lista delle variabili
+
+34
+00:02:37,145 --> 00:02:41,350
+1 e sto posizionandola nella lista delle variabili 2.
+
+35
+00:02:41,350 --> 00:02:44,480
+L?unica cosa che cambierà è il contenuto
+del modulo name.
+
+36
+00:02:45,850 --> 00:02:46,930
+Ecco.
+
+37
+00:02:46,930 --> 00:02:52,240
+Ora, sia list 1 che list 2 fanno riferimento
+all'oggetto lista.
+
+38
+00:02:56,090 --> 00:03:01,068
+Questo è detto aliasing.
+Quando due variabili contengono entrambe lo stesso
+
+39
+00:03:01,068 --> 00:03:07,490
+indirizzo di memoria, avviene l'aliasing.
+Fin qui tutto bene.
+
+40
+00:03:07,490 --> 00:03:11,730
+Quello che faremo ora è, assegnare
+all'ultimo elemento
+
+41
+00:03:11,730 --> 00:03:15,970
+nella lista uno, per l'oggetto che era delle
+prime due, il valore
+
+42
+00:03:15,970 --> 00:03:21,353
+17.
+Quindi, l'oggetto all'indice 5 sta per cambiare
+
+43
+00:03:21,353 --> 00:03:26,395
+nella lista.
+Stiamo per perdere il
+
+44
+00:03:26,395 --> 00:03:31,330
+riferimento a 10, e invece andremo ad
+avere l'elemento
+
+45
+00:03:31,330 --> 00:03:36,451
+di indice 5 che fa riferimento all'itero 17.
+
+46
+00:03:40,030 --> 00:03:40,800
+Ed eccolo qui.
+
+47
+00:03:44,170 --> 00:03:51,590
+La cosa interessante è che ora la list 2
+ha subito lo stesso cambiamento.
+
+48
+00:03:51,590 --> 00:03:55,820
+List 2 contiene lo stesso indirizzo di memoria
+dell'oggetto list.
+
+49
+00:03:55,820 --> 00:04:01,617
+Abbiamo cambiato quell'oggetto usando la list 1,
+ma anche la list 2 è cambiata.
+
+50
+00:04:01,617 --> 00:04:07,160
+Quindi quando stampiamo list 1 all'indice meno 1,
+stampa l'ultimo elemento, otteniamo 17.
+
+51
+00:04:07,160 --> 00:04:09,260
+E andremo a vedere esattamente lo
+
+52
+00:04:09,260 --> 00:04:13,590
+stesso risultato quando stampiamo la list 2
+all'indice meno 1.
+
+53
+00:04:16,830 --> 00:04:20,180
+Faremo ancora un esempio di aliasing.
+
+54
+00:04:20,180 --> 00:04:23,780
+Abbiamo una funzione double even
+indices che prende un alista
+
+55
+00:04:23,780 --> 00:04:30,080
+di ints come parametro e non ritorna 
+nulla, o ritorna none.
+
+56
+00:04:32,750 --> 00:04:36,790
+Nella docstring dice che raddoppia ogni altro
+intero della lista, iniziando dall'indice 0.
+
+57
+00:04:36,790 --> 00:04:42,990
+Quindi questi valori agli indici 0, 2, 4, 6, 8,
+e così via, verranno raddoppiati.
+
+58
+00:04:44,260 --> 00:04:46,186
+Inizieremo con i che parte da 0.
+
+59
+00:04:46,186 --> 00:04:48,811
+In altre parole, i sarà l'indice del
+
+60
+00:04:48,811 --> 00:04:53,940
+prossimo elemento che deve essere raddoppiato finché
+ne rimane qualcuno.
+
+61
+00:04:55,400 --> 00:04:57,840
+Andrà avanti finché i è minore
+della
+
+62
+00:04:57,840 --> 00:05:01,606
+lunghezza della lista.
+In altre parole, ci fermeremo
+
+63
+00:05:01,606 --> 00:05:05,620
+quando i è uguale o maggiore della
+lunghezza ella lista.
+
+64
+00:05:07,130 --> 00:05:12,910
+All'interno del ciclo, andremo a considerare
+l'elemento all'indice i e raddoppiarlo.
+
+65
+00:05:12,910 --> 00:05:18,110
+E salveremo il riferimento a quel nuovo valore
+nella lista all'indice i.
+
+66
+00:05:18,110 --> 00:05:22,890
+Poi, andremo ad aggiungere
+
+67
+00:05:22,890 --> 00:05:27,240
+2 a i, dato che vogliamo saltare il prossimo indice
+pari.
+
+68
+00:05:28,540 --> 00:05:36,530
+Il nostro programma principale creerà una lista,
+la assegnerà alla variabile list 1 di quella lista.
+
+69
+00:05:36,530 --> 00:05:38,210
+Stamperà la lista.
+
+70
+00:05:38,210 --> 00:05:43,080
+Raddoppierà gli interi agli indici pari
+nella lista.
+
+71
+00:05:43,080 --> 00:05:44,110
+E poi stamperà nuovamente la lista.
+
+72
+00:05:47,790 --> 00:05:51,580
+Definiamo la nostra funzione.
+Creiamo la nostra struttura della lista.
+
+73
+00:05:52,920 --> 00:05:54,390
+Stampiamo la lista.
+
+74
+00:05:55,900 --> 00:06:00,058
+E ora notiamo che la variabile list 1,
+contiene l'indirizzo di memoria ID 2,
+
+75
+00:06:00,058 --> 00:06:05,850
+e quell'ID 2 è l'indirizzo di memoria del nostro
+oggetto lista.
+
+76
+00:06:05,850 --> 00:06:11,660
+Andremo a creare un alias per questo.
+Ma non usiamo un'istruzione di assegnazione.
+
+77
+00:06:11,660 --> 00:06:12,902
+Invece, andremo
+
+78
+00:06:12,902 --> 00:06:18,650
+a fare una chiamata ad una funzione.
+Valuteremo gli argomenti.
+
+79
+00:06:18,650 --> 00:06:21,840
+Otteniamo l'indirizzo di memoria ID 2, che
+andiamo ad inserire nella variabile list
+
+80
+00:06:21,840 --> 00:06:26,730
+nel frame che verrà creato
+per la funzione double even indices.
+
+81
+00:06:30,200 --> 00:06:36,790
+Ora, nella funzione double even indices
+la variabile list fa riferimento a quell'oggetto lista.
+
+82
+00:06:36,790 --> 00:06:40,360
+La variabile list 1 fa anch'essa riferimento
+a quell'oggetto lista.
+
+83
+00:06:41,680 --> 00:06:43,958
+Questo significa che ogni modifica che facciamo a
+
+84
+00:06:43,958 --> 00:06:47,940
+quell'oggetto lista che verrà visto da entrambe
+le variabili.
+
+85
+00:06:49,330 --> 00:06:53,338
+Iniziamo con i dall'indice 0, notate che i
+fa riferimento a 0.
+
+86
+00:06:53,338 --> 00:06:55,282
+La lunghezza della lista
+
+87
+00:06:55,282 --> 00:07:01,470
+è 1, 2, 3, 4, 5, 6, 7.
+Quindi, 0 è minore di 7.
+
+88
+00:07:01,470 --> 00:07:08,640
+Andrò a vedere il valore all'indice 0
+e a moltiplicarlo per 2.
+
+89
+00:07:08,640 --> 00:07:14,233
+Il valore all'indice 0 è 11.
+Moltiplicandolo per 2, ottengo 22.
+
+90
+00:07:14,233 --> 00:07:19,910
+E andremo a prendere quel 22 e avere
+l'indice della lista 0 che fa riferimento a quello.
+
+91
+00:07:23,740 --> 00:07:28,790
+Ora andremo ad aggiungere due ad i e quindi i
+ora fa riferimento a 2.
+
+92
+00:07:30,730 --> 00:07:31,788
+2 è minore di 7.
+
+93
+00:07:31,788 --> 00:07:36,270
+Quindi andrò a fare la stessa cosa, ma
+questa volta con la lista all'indice 2.
+
+94
+00:07:37,640 --> 00:07:39,730
+L'elemento della lista 2 è il 13.
+
+95
+00:07:39,730 --> 00:07:43,352
+Andiamo a prendere 13, raddoppiarlo,
+che ci da 26.
+
+96
+00:07:43,352 --> 00:07:46,043
+E poi andremo a salvare all'indice 2
+della lista
+
+97
+00:07:46,043 --> 00:07:48,872
+l'indirizzo di memoria di quel nuovo intero
+che stiamo per
+
+98
+00:07:48,872 --> 00:07:51,210
+ottenere.
+
+99
+00:07:55,260 --> 00:08:01,531
+Aggiungendo 2 ad i, terminiamo con 4 ovviamente.
+Ora i fa riferimento a 4.
+
+100
+00:08:01,531 --> 00:08:05,877
+4 è minore di 7.
+Quindi stiamo per farlo di nuovo, questa volta
+
+101
+00:08:05,877 --> 00:08:11,810
+cambiando l'elemento all'indice 4, rimpiazzando
+quel 15 con 30.
+
+102
+00:08:11,810 --> 00:08:16,350
+Aggiungi 2 ad i.
+6 è meno di 7.
+
+103
+00:08:16,350 --> 00:08:20,377
+La lista all'indice sei è 17.
+Raddoppiandolo,
+
+104
+00:08:20,377 --> 00:08:26,420
+otteniamo 34, quindi l'indice sei della lista
+fa ora riferimento a 34.
+
+105
+00:08:26,420 --> 00:08:32,032
+Aggiungendo 2 ad i, ora si ottiene 8.
+Questo rende
+
+106
+00:08:32,032 --> 00:08:37,250
+la nostra condizione del loop falsa.
+
+107
+00:08:37,250 --> 00:08:41,395
+Dal momento che abbiamo falso in una
+condizione del ciclo, il ciclo termina.
+
+108
+00:08:41,395 --> 00:08:44,080
+Quindi usciremo dal ciclo.
+
+109
+00:08:44,080 --> 00:08:45,480
+Non ci sono istruzioni
+
+110
+00:08:45,480 --> 00:08:51,370
+alla fine di double even indices, e quindi,
+stiamo per ritornare none.
+
+111
+00:08:51,370 --> 00:08:54,328
+Ricordate, se non c'è alcuna istruzione di return
+in una funzione, allora
+
+112
+00:08:54,328 --> 00:08:57,950
+la funzione ritornerà il valore none di tipo
+none.
+
+113
+00:08:59,300 --> 00:09:00,040
+Dove eravamo?
+
+114
+00:09:00,040 --> 00:09:03,080
+Beh, eravamo nel modulo principale
+quaggiù. 
+
+115
+00:09:03,080 --> 00:09:06,480
+abbiamo appena chiamato double even indices,
+che è finita.
+
+116
+00:09:06,480 --> 00:09:09,001
+Quindi ci sposteremo alla riga 15.
+
+117
+00:09:11,810 --> 00:09:17,450
+Lista 1 ora fa riferimento alla lista oggetto
+che ha 22 all'indice 0.
+
+118
+00:09:17,450 --> 00:09:23,570
+poi 12, poi 26, 14, 30, 16, e 34.
+
+119
+00:09:23,570 --> 00:09:28,840
+Quindi, anche se non l'abbiamo mai menzionato la list 1
+all'interno del corpo della funzione, list 1
+
+120
+00:09:28,840 --> 00:09:34,078
+ora fa riferimento all'oggetto che è stato
+modificato.
+
+121
+00:09:34,078 --> 00:09:37,960
+Quindi, il nostro output contiene i nuovi valori.
+
+122
+00:09:37,960 --> 00:09:40,200
+A causa dell'aliasing, dovete ricordare
+quali
+
+123
+00:09:40,200 --> 00:09:43,620
+tipi sono mutabili e quali non lo sono.
+
+124
+00:09:43,620 --> 00:09:46,760
+Finora, le liste sono gli unici tipi che sono 
+mutabili.
+
+125
+00:09:46,760 --> 00:09:48,490
+Tutti gli altri sono immutabili.
+
+126
+00:09:49,820 --> 00:09:56,090
+Inoltre, devi anche essere un po' prudente
+quando scrivi i docstrings per i tipi mutabili.
+
+127
+00:09:56,090 --> 00:09:58,250
+Devi chiarire se il parametro verrà 
+
+128
+00:09:58,250 --> 00:10:01,480
+modificato dal codice all'interno della
+funzione.

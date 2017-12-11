@@ -1,0 +1,229 @@
+1
+00:00:01,120 --> 00:00:04,516
+You've seen Boolean's functions end of
+statements.
+
+2
+00:00:04,516 --> 00:00:09,272
+We're going to investigate a style issue
+now that can happen when you combine all
+
+3
+00:00:09,272 --> 00:00:14,016
+three.
+We're going to start by writing a function
+
+4
+00:00:14,016 --> 00:00:18,800
+that returns true if the parameter is
+even, and false otherwise.
+
+5
+00:00:20,880 --> 00:00:30,755
+As an example, if a call is even with
+value four and hoping that I get back
+
+6
+00:00:30,755 --> 00:00:36,681
+true.
+And if a call is even 77, then hopefully
+
+7
+00:00:36,681 --> 00:00:43,439
+I'll get back false.
+We can tell that we're sending it back an
+
+8
+00:00:43,439 --> 00:00:50,979
+int and that we hope to get back a Bool.
+Our header is we're going to call the
+
+9
+00:00:50,979 --> 00:00:57,810
+function as even and let's call the
+parameter num because that's a number.
+
+10
+00:00:57,810 --> 00:01:03,780
+And,
+What we're going to do here is return
+
+11
+00:01:03,780 --> 00:01:10,098
+other numb is even.
+Now, that I know the, the details of my
+
+12
+00:01:10,098 --> 00:01:15,253
+function, it's time to figure out some
+code that will let me know whether a
+
+13
+00:01:15,253 --> 00:01:19,308
+number is even or odd.
+I'm going to investigate this in the
+
+14
+00:01:19,308 --> 00:01:24,739
+Python shell. And, notice that if I divide
+four by two, there is no remainder. But,
+
+15
+00:01:24,739 --> 00:01:29,069
+if I divide three or five or seven by two,
+there is a remainder.
+
+16
+00:01:29,069 --> 00:01:32,300
+So, we're going to try out mod for mod two
+is zero,
+
+17
+00:01:33,180 --> 00:01:39,833
+77 mod two is one. And so, any number I
+pick that is odd is going to have a
+
+18
+00:01:39,833 --> 00:01:47,183
+remainder of one, when I divide it by two.
+Continuing this thought, four mod two =
+
+19
+00:01:47,183 --> 00:01:53,255
+zero is true.
+But, something like 77 mod two = zero is
+
+20
+00:01:53,255 --> 00:01:57,399
+false.
+So, this expression, the number mod two
+
+21
+00:01:57,399 --> 00:02:02,700
+equals zero is going to give me the result
+that I want.
+
+22
+00:02:03,300 --> 00:02:13,210
+We might decide to write something like,
+if num mod two is zero, then return true
+
+23
+00:02:13,210 --> 00:02:18,906
+otherwise return false.
+This will certainly work.
+
+24
+00:02:18,906 --> 00:02:23,639
+Let's explore that.
+I will run this so we can have it there.
+
+25
+00:02:23,639 --> 00:02:28,725
+Now, I can access the is even int function
+and say, hey, there's even four?
+
+26
+00:02:28,725 --> 00:02:30,348
+Yes, it is.
+How about three?
+
+27
+00:02:30,350 --> 00:02:33,034
+No, that's false.
+So our function works.
+
+28
+00:02:33,034 --> 00:02:37,354
+However,
+The function body here is three lines too
+
+29
+00:02:37,354 --> 00:02:40,510
+long.
+I don't actually need to use an if
+
+30
+00:02:40,510 --> 00:02:46,287
+statement.
+The issue here is that, num mod two equals
+
+31
+00:02:46,287 --> 00:02:54,420
+zero is already a Boolean expression.
+As we saw over here, four mod two = zero
+
+32
+00:02:54,423 --> 00:03:01,016
+produced the value true.
+I don't need to say if something is true,
+
+33
+00:03:01,016 --> 00:03:06,290
+then return true,
+Otherwise, if it wasn't true, return
+
+34
+00:03:06,290 --> 00:03:12,313
+false.
+I can actually come into this out and
+
+35
+00:03:12,313 --> 00:03:17,700
+replace it with a single line.
+I want to return a Boolean.
+
+36
+00:03:17,700 --> 00:03:24,126
+Num mod two equals zero produces a
+Boolean, so I can just do return num mod
+
+37
+00:03:24,787 --> 00:03:31,151
+two equals zero.
+Let's try this new version out in the
+
+38
+00:03:31,151 --> 00:03:35,893
+shell.
+I still get true, I still get false.
+
+39
+00:03:35,893 --> 00:03:40,595
+So, my new version works just as well as
+the old one.
+
+40
+00:03:40,595 --> 00:03:47,557
+Its shorter, and after a while, you are
+going to find it preferable to the longer
+
+41
+00:03:47,557 --> 00:03:53,958
+version of the if and the else.
+Working with Boolean expressions is new to
+
+42
+00:03:53,958 --> 00:03:58,376
+many of you, and so this may make you a
+little uncomfortable, it might seem a
+
+43
+00:03:58,376 --> 00:04:02,795
+little fancy or even confusing.
+Play with it for awhile, see what you can
+
+44
+00:04:02,795 --> 00:04:07,704
+come up with in the shell when you need a
+Boolean expression, and see if you can
+
+45
+00:04:07,704 --> 00:04:12,306
+simplify some of your return statements.
+If you ever find yourself doing if
+
+46
+00:04:12,306 --> 00:04:15,620
+something where to return true, otherwise,
+return false.

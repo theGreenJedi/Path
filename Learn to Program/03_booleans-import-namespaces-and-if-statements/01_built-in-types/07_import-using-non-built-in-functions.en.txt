@@ -1,0 +1,66 @@
+Python has hundreds and hundreds of
+functions. Most are not immediately available as
+built ins. Instead, the functions are saved into
+different modules, and you need to tell Python that you'd like to use
+them. Similarly, your own functions may also be
+saved into different modules. We will demonstrate this using our
+triangle triangle.pie example. We will define a second function to
+calculate the area of the triangle, for when you know the lengths of the three
+sides but not the base and height. This time, we'll calculate the area of the triangle using Heron's formula, also known
+as Heroes formula. The formula involves both the semi
+perimeter and the lengths of the three sides. S is the semi perimeter, s1, s2 and s3 are the lengths of the three sides of the
+triangle. In order to write this code, we need to
+calculate the semi perimeter. And we already have a function to do this,
+defined in triangle.pi. And we also need a function to calculate
+the square root, and such a function exists, but it isn't a
+built-in function. Instead, it is defined in another file
+named math.pi. Math is a module, as is triangle. As its name implies, the math module
+contains several functions related to math. To see the listing of functions, let's
+import the module to gain access to it. And then we'll call the built-in function
+dir r. We see that a function named square root
+is amongst the available functions, and we can now run help and square root to
+find out more about it. When we ask for information about square
+root, we need to specify that it is in the Math module. We do that using the module name, followed
+by a dot, followed by the function name. And this tells us information about the
+square root function. Now, we're ready to write the function. The first step is going to be to write a
+couple of example function calls. And in order to do that, we need to decide
+on a meaningful function name. I'll use the word area along with hero to indicate that we're using
+hero's formula. This function takes three sides, and in
+this case, I would expect it to return 6.0. We'll add a second function call, second
+example. And in this case, using my calculator,
+I've figured out, you should be getting back something
+like thi 27.731. There will be a few more digits, and I
+don't know exactly what, because Python uses floating point
+arithmetic. But this will give me a sense of whether the function that we're writing is correct
+or not. Now, we'll provide the type contract for
+this function. We'll pass in three numbers, either ints
+or floats, and it will return a float. We're ready now to add the function
+header. Beginning with the word def and the
+function name. Along with the three parameters, which I'm
+going to name side1, side2, and side3. And at this stage, we can add the
+description. This function will return to the area for
+the triangle with sides of length, side 1, side 2 and
+side 3. With the [INAUDIBLE] string complete, we can now work on the
+body of the function. The formula uses the semi-perimeter four
+different times. And rather than call the semi-perimeter four different times with the same
+arguments. We can call it once and store the results
+in a variable. I'll name that variable semi, and then
+we'll call semi-perimeter once to calculate it, with side1, side2, and
+side 3 as arguments. Then we can move on to calculating the
+area. When we calculate the area, we'll use the
+square root function and square root is in the
+Math module. So to access square root, we need to
+import the Math module. I'll do that at the top of my file. And then I will be able to gain access to
+the square root function. [UNKNOWN] Calculate the area. We'll call square root from that using the
+model name, dot, and the function name, and we'll pass
+in the following. Semi times semi minus side1 time semi minus side2 times semi minus side3. And that area is what this function will
+return. Finally, we need to test the function by
+calling it a couple of times. So, I'm going to re-size this window, and
+run the module. Then we'll just re-size this, and will
+copy and paste these function calls. So the first function call should result
+in 6.0 and it does. And the second example should give us
+something like what we had there, and in fact it's giving us more
+digits. I'm going to use that result here instead. So that's what we expect to get. It's not only Python's modules that we can
+import. We can also import a module that we wrote. For example, if we wanted to use one of our triangle functions in another module,
+we could import triangle. The module being imported should be in the
+same directory as the module that's importing it.

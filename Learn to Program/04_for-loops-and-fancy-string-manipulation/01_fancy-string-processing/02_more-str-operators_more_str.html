@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            More str Operators
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi
+">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128
+" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 5.1 A Boolean Type
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            More <code>str</code> Operators
+        </h1>
+        <h3>
+            String Comparisons
+        </h3>
+        <p>
+            The equality and inequlity operators can be applied to strings:
+        </p>
+        <pre>
+&gt;&gt;&gt; 'a' == 'a'
+True
+&gt;&gt;&gt; 'ant' == 'ace'
+False
+&gt;&gt;&gt; 'a' == 'b'
+False
+&gt;&gt;&gt; 'a' != 'b'
+True
+
+</pre>
+        <p>
+            We can compare two strings for their dictionary order, comparing them letter by letter:<br>
+        </p>
+        <pre>
+&gt;&gt;&gt; 'abracadabra' &lt; 'ace'
+True
+&gt;&gt;&gt; 'abracadabra' &gt; 'ace'
+False
+&gt;&gt;&gt; 'a' &lt;= 'a'
+True
+&gt;&gt;&gt; 'A' &lt; 'B'
+True
+</pre>Capitalization matters, and capital letters are less than lowercase letters:
+        <pre>
+&gt;&gt;&gt; 'a' != 'A'
+True
+&gt;&gt;&gt; 'a' &lt; 'A'
+False
+</pre>Every letter can be compared:
+        <pre>
+&gt;&gt;&gt; ',' &lt; '3'
+True
+</pre>We can compare a string and an integer for equality:
+        <pre>
+&gt;&gt;&gt; 's' == 3
+False
+</pre>We can't compare values of two different types for ordering:
+        <pre>
+&gt;&gt;&gt; 's' &lt;= 3
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;&gt;
+TypeError: unorderable types: str() &lt;= int()
+</pre>
+        <h3>
+            Testing For Substrings
+        </h3>
+        <p>
+            The operator <code>in</code> checks whether a string appears anywhere inside another one (that is, whether a string is a substring of another).
+        </p>
+        <pre>
+&gt;&gt;&gt; 'c' in 'aeiou'
+False
+&gt;&gt;&gt; 'cad' in 'abracadabra'
+True
+&gt;&gt;&gt; 'zoo' in 'ooze'
+False
+</pre>
+        <h3>
+            String length: function <code>len</code>
+        </h3>
+        <p>
+            The builtin function <code>len</code> returns the number of characters in a string:
+        </p>
+        <pre>
+&gt;&gt;&gt; len('')
+0
+&gt;&gt;&gt; len('abracadabra')
+11
+&gt;&gt;&gt; len('Bwa' + 'ha' * 10)
+23
+</pre>
+        <h3>
+            Summary
+        </h3>
+        <table border="1px">
+            <tr>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Operator
+                </td>
+                <td>
+                    Example
+                </td>
+                <td>
+                    Result of example
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    equality
+                </td>
+                <td>
+                    <code>==</code>
+                </td>
+                <td>
+                    <code>'cat' == 'cat'</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    inequality
+                </td>
+                <td>
+                    <code>!=</code>
+                </td>
+                <td>
+                    <code>'cat' != 'Cat'</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    less than
+                </td>
+                <td>
+                    <code>&lt;</code>
+                </td>
+                <td>
+                    <code>'A' &lt; 'a'</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    greater than
+                </td>
+                <td>
+                    <code>&gt;</code>
+                </td>
+                <td>
+                    <code>'a' &gt; 'A'</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    less than or equal
+                </td>
+                <td>
+                    <code>&lt;=</code>
+                </td>
+                <td>
+                    <code>'a' &lt;= 'a'</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    greater than or equal
+                </td>
+                <td>
+                    <code>&gt;=</code>
+                </td>
+                <td>
+                    <code>'a' &gt;= 'A'</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    contains
+                </td>
+                <td>
+                    <code>in</code>
+                </td>
+                <td>
+                    <code>'cad' in 'abracadabra'</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    length of <code>str</code> s
+                </td>
+                <td>
+                    <code>len(s)</code>
+                </td>
+                <td>
+                    <code>len("abc")</code>
+                </td>
+                <td>
+                    <code>3</code>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

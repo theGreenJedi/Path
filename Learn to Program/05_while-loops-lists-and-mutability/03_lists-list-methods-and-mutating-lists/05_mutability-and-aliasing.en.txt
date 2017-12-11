@@ -1,0 +1,84 @@
+Those memory addresses that we've been
+using are about to become really useful. It turns out that you can modify
+the contents of some objects, and without memory addresses, it would be
+really hard to explain what is happening. We'll start by showing that
+list objects can be modified. On line one is an assignment statement. We evaluate the expression on the right
+hand side and that creates a list object as well as the six integers zero,
+two, four, six, eight, and ten. Once we have created that list structure
+we're going to assign to variable LST the memory address of the list object. So list LST contains memory address
+ID1 which refers to the list object. At index zero, is memory address ID two. And, that refers to the zero object. At index one, we refers to the two. At index two we refer to the four,
+and so on. On line two is another
+assignment statement. On the left hand side,
+we don't just have a variable. We have something a little more complex,
+we have list at index two. We're actually going to be modifying
+that memory location right there. List at index two, after we
+execute that assignment statement, is no longer going to
+refer to the integer four. Instead it's going to
+refer to integer five. We are going to be modifying
+an object in the heap. When I click forward, we see that we have
+a new object at number address ID eight, and that listed index two
+refers to that new object. Let's go edit the code and
+do something else. I'm going to replace this
+code with some other code. Let's visualize the execution. Line one, we know what to expect. List one refers to a list. At listed index zero our first is zero. At listed index one refers to two,
+listed index two refers to four and so on. On line two,
+I'm doing something rather curious. I'm taking the memory address
+that's in variable list one. And I am placing it in variable list two. The only thing that's going to change
+is the contents of module name. There we go. Now, both list one and
+list two refer to the list object. This is called aliasing,
+when two variables both contain the same memory address, aliasing happens. So far so good. What we're gonna do now is we're going
+to assign to the last item in list one, or the object that list one refers to,
+the value 17. So the item at index five is
+going to change in the list. We're going to lose the reference to 10,
+and instead we're going to have the item
+at index five refer to the integer 17. And there we have it. The interesting thing now is that list
+two got to watch that change happen. List two contains the memory
+address of the list object. We changed that object by using list one. But list two changed as well. So when we print list one at index minus
+one, print the last item, we get a 17. And we're going to see exactly
+the same result when we print list two at index minus one. We will do one more example of aliasing. Here we have a function,
+double_even_indices, that takes a list of ints as a parameter and doesn't return
+anything, or rather, returns none. The doc strings has double every other
+int in list, starting at index zero. So the values at indices zero,
+two, four, six, eight and so on are going to be doubled. We will start I off at zero. In other words, I is going to be
+the index of the next item to double. As long as there's any remaining. We're going to keep going as long as I
+is less than the length of the list. In other words we will
+stop when i is equal to or greater than the length of the list. Within the loop, we are going to look
+at the item at index I and double it. And store the reference to that
+new value in the listed index I. Then we're going to add two to I because
+we want to skip to the next even index. Our main program is
+going to create a list, assign to variable list one, that list. Print that list, double the integers
+at even indices in that list, and then print the list again. We define our function, we create our
+list structure, we print that list and now notice that variable list one
+contains memory address ID two and that ID two is the memory
+address of our list object. We are going to create an alias for
+this but we won't use an assignment statement instead we are going
+to do a function call. We will evaluate the arguments. We get memory invest ID two, which
+we're going to put in variable list in the frame that is going to be created for
+function double_even_indices. Now, in function double_even_indices
+variable list refers to that list object. Variable list one also
+refers to that list object. This means that any change we make
+to that list object is going to be seen by both variables. We start i off at index zero,
+notice that I refers to zero. The lengths of the list is one,
+two, three, four, five, six, seven. So zero is less than seven. I'm going to look at the value at
+index zero and multiply it by two. Value at index 0, is 11, multiplying that by 2 I get 22,
+and we are going to take that 22. And has listed index,
+you will refer to it. Now we're going to add two to I and
+so I now refers to two. Two is less than seven, so
+I'm going to do the same thing but this time with listed index two. Listed index 2 is the 13. We're gonna take that 13,
+double it, giving us 26. And we're going to store in
+list at index two the memory address of that new integer
+that we are about to get. Add in two to I. We end up with four of course. I now refers to four. Four is less than seven, so
+we're going to do this again. This time changing the item and
+index 4, replace that 15 with a 30. Add two to I. Six is less than seven. The listed index 6 is 17. Uploading that, we get 34. So listed index six is
+now going to refer to 34. Adding two to I, I is now eight. That makes our loop condition here false. As soon as we have false in a loop
+condition, the loop terminates, so we are going to exit this loop. There are no statements at
+the end of double even indices. And so, we're about to return none. Remember, if there is no return
+statement in a function, then a function will return
+value none of type none type. Where were we? Well, we were in the main
+module down here. We just called double even indexes. That's about to be done. So we're gonna move on to line 15. List one now refers to the list object
+that has 22 at index 0, then 12, then 26, 14, 30, Then 26, 14, 16, and 34. So even though we never mentioned
+list one inside this function body list one now refers to an object
+that has been modified so our output contains the new values. Because of aliasing you need to
+remember which types are mutable and which types are not. So far,
+list is the only type that is mutable. All the others are immutable. Also, you need to be quite careful when
+writing doc strings for mutable types. You need to be clear about whether the
+parameter is being modified by the code inside the function.

@@ -1,0 +1,69 @@
+Hey everyone, you've seen how to
+evaluate expressions in Python. In this lecture we're going to show you
+how to remember the results of those expressions, so
+that you can use those values later. We're going to explore this idea by
+calculating the areas of some triangles. As a reminder, if I happen to
+know the height of the triangle, I happen to know the width of the base. Then the area of the triangle is a length of the base times the height divided by 2. For example of the height is 12 and
+the length of the base is 20, then the area is 20 times 12 over 2. Let's go explore that in Python. You already know how to
+enter that expression. And get evaluated in Python but,
+since we've decided to calculate the values of a couple of triangles,
+we're actually going to show you how to introduce the words base and
+height to represent values. This is done with assignment statements. Here is an example. [SOUND] What this does
+is it evaluates the 20. It associates that value with variable X. This is called a variable, because it's
+a value that can vary as you'll see. We'll do something similar for
+a variable that we'll call height and then these two names can be used as if they're values were there on the,
+in the Python chat. So bases value is 20,
+height is associated with the value 12. Notice that the equal symbol has a very different meaning in programming
+than in mathematics. Because computer programs
+get rather complicated, we're going to introduce a notation for
+describing variables and their values. What we're going to do is, draw
+a variable base with the box next to it. And what happens in Python
+is 20 doesn't form that box, instead 20 like any other value Python
+lives at a particular memory address. So I'm going to pick
+an arbitrary memory address. And I'm going to mark with an X just to
+make it different from other numbers. Let's say that memory address x3,
+the value 20 appears. The assignment statement
+states that x3 and puts it in the box associated with base. So base contains x3 and in some sense what that means is that points to memory
+address x3 where the value 20 lives. Similarly there is a variable height. And Python keeps track of its
+value in that little box. And its value is a memory address. I'm going to pick x7. These are arbitrary,
+Python is in charge of that choice, and so I don't need to worry about exactly
+what the memory address is as long as I know that this relationship between
+variables and their values exists. Getting back to our programming problem,
+we can actually use base and height in an expression. So if I do base times height divided by 2, I end up with the same result as if
+I had typed 20 times 12 divided by 2. We can also assign the result of
+that last expression to a variable, we'll call it area, and
+let's check it's value. What we're going to do now is we're going
+to give base and height new values. Using assignment statements again. So let's assign the value
+of 2.5 to variable base. What this does in my picture is
+it gets me a new value 2.5, and a particular memory address perhaps, x4 and it replaces the assignment statement
+replaces this x3 with value x4. So, the base no longer points to the 20,
+instead base is associated with the 2.5. Similarly, I can assign the height. What this is going to do, of course, is. Put 7 at a particular memory address,
+perhaps x1 and the assignment statement is going to take that x1, and
+it's going to put it in variable height. Making this connection so
+that height now refers to the 7. Using Ctrl+P I am going to move back
+up to my old calculation of area. And as we're just about to
+see this new area is 8.75, which is indeed what you get if you take
+2.5, multiply it by 7 and divide by 2. Every assignment statement has the form
+variable is assigned expression. Here are the rules for
+executing an assignment statement. And you should do your
+best to memorize these, because this is going to come up over and
+over in the course. Step one, evaluate the expression
+on the right hand side. The value of the expression
+has a memory address. Store that memory address in
+the variable on the left hand side. Every programming language has a set
+of rules for what a legal name is. In Python, variable names must start with
+a letter or the underscore character and it can contain letters,
+numbers and underscores. Both uppercase and lowercase letters are allowed, badly
+formed variable names cause syntax errors. So for example, if we try to start a variable name
+with a number, we're told we can't. Similarly, if we include a non-alphabet,
+non-underscore, non-numeric character in the variable
+name, Python will complain. Python is also case sensitive, so seconds_in_minute is perfectly
+valid variable name. But it's different. From any other combination of
+uppercase and lowercase characters. The first one, seconds in minute, is of
+course more readable than the second one with those capital letters, and
+choosing good names is important, because programs can easily be used,
+read, and improved on for years. Every programming language
+has a set of conventions for how to choose a name, much like web sites
+have a particular style and layout. In Python most variable
+names use only lowercase letters with underscores to separate
+words, we call this pothole case.

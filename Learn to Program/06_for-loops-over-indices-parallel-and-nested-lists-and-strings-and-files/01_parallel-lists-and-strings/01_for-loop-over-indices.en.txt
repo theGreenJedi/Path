@@ -1,0 +1,160 @@
+In previous lectures, we used for loops to
+pass over the characters of strings and the items in lists.
+In this lecture, we are going to use for loops to pass over the indices of strings
+and lists. And this will allow us to solve problems
+that we can't currently solve using for loops..
+The first problem that we'll tackle is to count the number of neighboring pairs of
+characters that are the same within a string.
+So here's an example string. And in this string, there are three pairs
+of neighboring characters that are the same, the c's, the f's and the g's.
+In order to solve this problem, we need to compare neighboring pairs of characters.
+So the string at index zero needs to be compared with the string at index one.
+The string at index one must be compared with the string at index two.
+And so on, until we reach the second last character.
+The string at index -two and we compare it with the last character of the string, the
+string at index -one. Generally speaking, we can describe this
+as, describe as comparing the string at index i with the string at index i + one.
+We'll use the range function to generate these numbers.
+Zero, one up to and including -two, so the, the i values in our comparison.
+As a reminder, range has three parameters, one required and two optional.
+The required parameter is the value at which you want to stop the sequence.
+And optionally we can also provide the start and the step.
+In this case, the start we want is zero, which is the default.
+And the step is one, which is also the default.
+So we only need to use the stop. And we want to stop at the length of the
+string -one. In other words, we want to go up to and
+including length of the string -2,, or the second last character of the string.
+And we indicate this using length of string -1,, up to but not including that
+value. And then, the values of the indices are
+printed. Now that we've written this for loop,
+we're going to use that same header in our function to count the repeated pairs of
+characters in the string. The function that we're writing is count
+adjacent repeats. It has a single string parameter and
+returns an int. And when we call the function, passing the
+example string as an argument, the function should return three.
+For this function, we need to keep track of how many repeated characters we've
+seen. So I'm going to use a variable named
+repeats to do that. And repeats will have an initial value of
+zero. We want to go over the characters of the
+string, pass over them, and we need to use their indices this time.
+We wrote this for loop header already, we're starting at index zero and going up
+to the second last character of the string.
+In the body of the for loop, we want to compare the character at position s at
+index i with the one that comes after it, to see whether they are equal.
+So we can use the equality operator for this, comparing s at index i with s at
+index i1. + one.
+When they are equal, we found one of these adjacent repeats.
+So that repeats variable should be increased by one.
+At the end of the loop, after it has exited, we can return the value that
+repeats the first step. Finally, let's just run this function call
+to ensure that it's working as expected. To do that I need to execute, or run the
+module. And now, we can call the function, and it
+returns three as expected. So to summarize, it's because of the fact
+that we want to compare an element of the list with another element in the list,
+that we are using the indices. It's not enough to know what the value of
+the item is. We need to know where the item is in the
+list in order to determine which other element to compare it with.
+To gain a better understanding of what's happening when this code executes, we'll
+trace it using the Python Visualizer. The first time I hit forward the function
+definition is evaluated, and we're taken to line nineteen where I've put a call to
+the function, using a slightly smaller example.
+When the function is called, the parameter s, refers to the string a c, c f, f h
+which we passed as an argument to the function.
+After line eleven has executed, repeats refers to the value zero.
+On line thirteen is the first line of the for loop.
+I will get the initial value of zero. I
+Initially refers to zero. And the if condition is first checked.
+So, s at i, s at zero, is a is compared with s at i + one, s at one, which is c.
+These characters are not equal, so the body of the for loop is not executed.
+We move on and increment i. So i gets the next value that range
+generates, which is one. Now, i refers to one.
+And s at one is compared with s at two because the characters here are equal,
+The body of the, if, is executed. And repeats will be increased by one.
+Repeats now refers to the value one. And i gets the next value that range
+generates which is two. The string at index two is compared with
+the string at index three and they are not equal, so the body of the f is not
+executed. We advance to the for loop header again,
+and i will be the next value that range generates.
+I, I refers to three. The string at index three is compared with
+the string at index four, those two characters are equal, so the body of the
+if is executed this time, repeats is increased by one, so repeats now refers to
+the value two and i advances to the next value, which is four.
+The string at index four is not equal to the string at index five so the body of if
+won't be executed. And notice that this is the last pair of
+characters that we need to compare, so when the string at index -two, or the
+second last character of the string is reached, that will be the last iteration
+of the for loop. We've reached the header one more time and
+there are no more numbers generated by range.
+So after this, Python advances to line seventeen.
+The value to be returned is the value of repeats, which is two and that is returned
+and then printed on line nineteen. Now let's write another function that
+involves looping over indices. This function is named shift left.
+It has a single list parameter and modifies that list, so the return type is
+none-type, none is returned. The modification to the list is that each
+element of the list, or each item, is shifted one position to the left.
+And the first item is shifted, or moved, to the last position.
+A precondition to this function is that the length of the list is at least one.
+Here is an example list that has four strings.
+Strings a, b, c, and d. The strings will be shifted to the left,
+moving b from index one to index zero. C from index two to index one.
+D From index three to index two.
+And a from zero to the last position where d originally was.
+Therefore the resulting list is b, c, d and a.
+In the example, I showed moving b to the position that a was in.
+And then c to the position that b was in, originally in.
+One thing that I didn't explicitly show in the example is that when we move b into
+a's position, we need to keep track of a. What value is at index zero, in order to
+later be able to move that value to the last position in the list.
+The variable first item is what I'm going to use to keep track of this.
+So it gets the value at list index zero. And we will then be able to take the value
+from index zero and put it in the last position later on.
+The task that we're doing is the shifting of items starting from one.
+So I'm using range again. The first index that I will work with is
+index one. And the stopping position is the length of
+the list. The task is that we would like to take the
+list at position i - one and set it to the list, element to its right.
+So in other words, if one is the first value of i, we're going to take the list
+at position zero and have it get the list at position one.
+So once all of the elements have been shifted to the left, we then want to take
+the element that was originally in the first position, and move it to the last.
+The last element of the list can be indicated using -one, and we will set that
+to our first item variable, which hung on to the original value at index zero.
+At this point, list L has been modified, and the function can exit.
+Let's call the function. In the shell, i will create a list with
+the same example values that we've used. We can call shift left passing L as the
+argument. And now, when we examine the contents of
+L, we see that the values have indeed been shifted to the left with the first item
+being moved to the last position. We will once again use the Python
+Visualizer to visualize the execution of this function call.
+This will help us gain a better understanding of the code and it's
+something that you should be doing as you are writing your code.
+The function is first defined, and on line seventeen the letter's variable refers to
+a four element list of strings containing the strings a, b, c and d. Now the
+function shift left is called. The functions parameter L, refers to the
+list of strings that was passed as an argument to the function.
+On line ten, first item is a variable that gets the value of the list at index zero.
+First item refers to the string A. The for loop begins on line twelve and the
+initial value of I is one. I refers to one, the first value generated
+by range. In the body of the loop, the list at index
+zero, i - one. That's the value of the listed and next
+one. So I, listed zero, is currently a.
+The list at one is b, and we're about to assign the list at zero the value of the
+list at one. Now we can see that the list at zero
+refers to b and so does the list at index one.
+That's why we use the first item variable to keep track of the value that was
+initially at list at index zero. We're going to need that later when we
+move the first item to the last position. Back to the loop, on line twelve, the
+value of i will be increased. I were now refers to two.
+And the list at index one will get the value that is currently at the list at
+index two List at two refers to c. And list at one is about to be assigned
+the, that memory address. So now both list at one, and list at two,
+refer to the c. I gets the max value which is three.
+And the list at index two is about to be assigned the list at index three So we
+have a list with b, c, d, d. And it's time to replace the last d with
+the a. That's what happens on line fifteen.
+The list at the last position will be assigned the value that was originally at
+index zero. This is the last line of our function
+call. So the function finishes executing, and
+returns, then letters is printed. So notice that what was printed when the
+function returned was the value none. And now letters with the values, with the
+strings, b, c, d, and a is displayed..

@@ -1,0 +1,100 @@
+The programs that we've written so far
+execute the same sequence of instructions each time that they're run.
+In this lecture, we're going to use bullion expressions to control which
+instructions get executed. Let's consider this problem.
+A flight was scheduled to arrive at a particular time, and it is now estimated
+to arrive at another time. Write a function, given the two times,
+returns a flight status, either on time, early, or delayed.
+For this function, a time will be represented using a float.
+For example, the time three AM will be represented by 3.0 and the time two:3030
+PM fourteen:30, will be represented by 14.5.
+Therefore, each of the times we're working with is going to be between 0.0 and 24.
+0.0 inclusive and 24 exclusive. This is called a precondition.
+When writing our function we expect that the times provided will be within this
+range. Let's begin to define the function, we'll
+start with some example function calls. I'm going to name this function report
+status. And it will have two arguments, take two
+arguments. The first will be the scheduled time of
+arrival, and the second will be the new estimated time of arrival.
+When those two values are the same, it will return the message on time.
+When the scheduled time is 12.5 and the new estimated time of arrival is 11.5 or
+earlier, this function will return early. .
+And, finally for the last possible situation, is that when the time is 9.0,
+the scheduled time and then you estimated time comes later, this function should
+return a message saying that the flight is delayed.
+Now let's write the type header. The function has two parameters both
+numbers and in all the cases here, I've passed in floats.
+But we could have easily passed in integer values.
+So we can use number for those two parameters and it is going to return
+something of type string. Time for the header.
+We know that we've named the function Report Status and now we need to decide on
+two good names for the parameters. The first parameter, I can call scheduled
+time. The second, I will call estimated time.
+The last part is a doc string that needs to be added is the functions description.
+This function will return a flight status, and that will be one of three strings. On
+time, early or delayed. It's returning that status for a flight
+that was scheduled to arrive, at scheduled time, the first parameter.
+But is now estimated to arrive at estimated time, which is the second
+parameter. One additional piece of information that
+needs to be added to this doc string is that the precondition that the schedule
+time be between 0.0 and 24. The same is true of the estimated time.
+It also needs to fall within that range. .
+. It's now time to write the body of the
+function. We're going to write this function body in
+a couple of different steps. And by the end, we'll have the entire
+thing working. To start with, we need to figure out how
+to execute some statements sometimes, but not on others.
+For example, we want to return a string on time.
+But we don't want to return that string every time this, this function executes.
+Only at the times when scheduled time is equal to estimated time.
+We are going to use an if statement to express this.
+This if statement will have a boolean condition which is that the scheduled time
+be equal to the estimated time. And we are going to place this return
+statement within the body of the if. So notice that it is indented, indicating
+that, that falls within the if statement. The way that we read this code is that if
+this scheduled time is equal to the estimated time, if that boolean expression
+is true, then the return on time statement is executed.
+Otherwise, it is not executed, and we would continue down on, with any code that
+follows this if. Let's save this and run it.
+So when I call this function, in the shell, with equal times it reports the
+status on time. If I were to call this function at the
+moment with one of the time, pairs of times that are not equal, then nothing is
+returned. To be more precise, I should actually say
+that it looks like nothing is returned. Because something is returned by this
+function, even though no return statement was executed.
+Let's print this function call. So the function is called, whatever value
+is returned is returned. And that value is about to be printed.
+And we can see that none is printed. When a function call executes and no
+return statement is executed, the value none is returned by the function.
+The type of none is none-type, not string. So that breaks the type contract that we
+specified for our report status function We need to complete the rest of the
+function ensuring that, that type contract is abided by.
+Let's go back to defining the function. Right now, we have a single if statement
+and when this boolean condition is true, on time is returned.
+When it's false we want to do something else.
+So we check to see if this is true, and then we're going to use L, standing for
+else, L if, to check for a second condition.
+This time we're going to check to see whether the scheduled time is bigger or
+greater than estimated time. And when it is, we will return early.
+. And it's to be spelled as scheduled.
+So at this stage let's run it. And when we call this function with equal
+times it says on time. When we, when we call it with earlier
+times, it reports early. But still, at this point when we call this
+with later time. None is returned.
+So we're not quite done yet. We're going to add a third part to the if
+statement, which is an else clause. Else says, if none of the preceding
+conditions or expressions are true, then do this.
+So we've checked whether they're equal, greater than, and the only thing left is
+that scheduled time is less than estimated time.
+In that situation, this function will return delayed.
+So we can run it again, checking all of our conditions, when they're equal.
+When it's earlier, and when the estimated time is later.
+We now have the appropriate reports. I want to mention a few general features
+of if statements. We can have zero or more L if clauses
+associated with an if And we can have zero or one else clauses, and the else has to
+be the last clause for the if statement. When we have an if statement with these
+various expressions, we evaluate each expression in order.
+And for the first one that evaluates to true, the body of that, that part in the
+if statement is executed. After that body is executed, the if
+statement is terminated. So it exits and continues on to the code
+that comes below it, without checking any further conditions.

@@ -1,0 +1,54 @@
+It is just about as easy to write to a
+file as to read from one. Here we go.
+As a reminder, function open takes the name of a file, either a full path or just
+the name of the file is in the same directory as the program and the mode, one
+of a read, write, and depend. Much like files have read and read line and read
+lines methods, they have a write method if we've opened them for writing.
+Method write works much like Python's print function except that it doesn't add
+a new line character. We're going to write a short bit of code
+that makes a copy of a file, but puts the word copy as the first line in the new
+copied file. We will start by showing you how to prompt
+a user for a file. Module tkinter has a sub-module called
+file dialog. We import it like this.
+Inside that module, is a function askopenfilename.
+This will pop open a dialogue and allow us to select a file using your operating
+system's file chooser. When we call askopenfilename, we'll need
+the switch to Python in order to select the file.
+We will go find, In Flanders Fields txt.. When we select open, we see that the, the
+file dialogue disappears. But we are left with this window with
+title tk. This window does no harm, and we will
+ignore it, and switch back to the Python shell.
+Askopenfilename has returned a string containing the full path to the file that
+we chose so that we can use this when we call function open.
+We will call this again, and remember, the string that was returned.
+We need to switch back to Python in order to select our file.
+Now, from file name, is the path to that file.
+We will use a new function in the same file dialogue module in order to choose a
+file that we would like to write to. Instead of askopenfilename, we will
+asksaveasfilename. Asksaveasfilename allows us to choose a
+new file name to save to, but if we choose a file that already exists, we will be
+prompted to confirm that we really do want to replace that file.
+We'll switch back to Python. And you'll notice that it says, save as,
+with a place to type the name of the new file.
+Well, I don't want to save it in 6readfiles because this lecture is
+6writefiles. We'll call this one, Flanders copy.txt.
+And here is what we chose. We will now open from<u>filename in read
+mode.</u> Read the contents,
+Close the file, And check to make sure that we got what we
+expected and indeed, contents is a string containing what was in that file including
+all of the new line characters. Next, we will open the file that we want
+to write to write the word copy and the new line.
+Remember, that we have to add any new lines that we want because unlike print,
+the write method does not add any extra characters.
+Then, we'll write the contents, And finally, close the file.
+Notice that when we opened the to<u>file,</u> the file that we're copying to, we used
+the character w when we opened to file. And the write method returned information,
+It returned an int. In particular, it returned the number of
+characters that were written. Notice that this shows that the backslash
+then is treated as a single character, because c, o, p, y, and the new line make
+five characters. Write returns this information so you can
+check to make sure that the length of your string is the number of characters that
+were successfully written. We will now verify that, that file was
+written successfully. Here's our Flanders copy txt..
+When I double click on it, it opens and we can see that the word copy and the new
+line character appear at the top, just as we had written.

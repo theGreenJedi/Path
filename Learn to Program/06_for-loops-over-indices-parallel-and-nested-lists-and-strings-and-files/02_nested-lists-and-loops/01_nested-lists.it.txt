@@ -1,0 +1,43 @@
+Le liste possono contenere oggetti di ogni tipo.
+In questa lezione, andremo a lavorare con le liste aventi degli elementi di tipo lista.
+Queste liste sono conosciute come nidificate, con una lista all'interno di un'altra.
+Il nostro primo esempio di lista nidificata è una in cui ogni elemento ha il nome di
+un compito. Ad esempio, compito uno e il voto
+per quel compito. Quindi, ogni elemento sarà una lista con due oggetti.
+La lunghezza della lista grades è tre. Ha tre elementi.
+Ognuno degli elementi è, si per sè, una lista con due elementi.
+Possiamo vedere questo usando l'indicizzazione. Grades all'indice zero è la lista con la stringa
+assignment one, e int 80. Grades all'indice uno è assigment two e 90. E grades allindice due è assignment three
+e 70. La lunghezza di ognuno di questi elementi, anche
+chiamati interlist è due. E possiamo vedere questo passando la lista 
+all'indice zero come argomento della funzione length.
+Un altro modo per accedere agli oggetti di grades è usare un ciclo for, proprio come avremmo fatto
+se la lista avesse delle stringhe o degli interi come elementi.
+Quindi, possiamo dire, per ogni elemento in grades, stampa quell'elemento.
+E l'elemento è, che viene stampato sarà una lista di due elementi.
+Dato che ogni elemento di grades è una lista, può anche essere indicizzato.
+Quindi la lista all'indice zero, da una lista a due elementi con la stringa assignment one
+e voto 80, e possiamo usare un secondo indice per accedere ad ogni parte.
+Quindi, per grades all'indice zero e indice zero c'è assignment one, e in grades all'indice
+zero e indice uno c'è 80. Allo stesso modo per ogni elemento di grades 
+all'indice uno, possiamo accedere al primo valore usando l'indice zero, quindi grades ad uno, zero
+restituisce assignment two, e grades ad uno, uno è 90.
+Grades a due e zero è assignment three, e grades a due e uno è 70.
+Poi, scriveremo una funzione per calcolare la media dei voti data una lista di questa
+forma. La funzione è chiamata calculate average,
+e nota il tipo di contratto. Abbiamo un parametro, che è una lista
+di liste di numeri mescolati. Questo descrive il tipo di liste con cui
+stiamo lavorando. Questa funzione ritornerà un flusso, che è 
+la media dei voti nelle liste date.
+Per calcolare la media, sommeremo i voti e poi divideremo per il numero
+di voti. La variabile totale verrà usata per tenere
+traccia della somma dei voti, e avrà un valore iniziale di zero.
+Passeremo sopra gli elementi della lista di voti per i compiti per gli oggetti che stanno
+nei voti per i compiti, e ogni oggetto è una lista a due elementi con
+una stringa e un intero. Quindi, per il totale, vogliamo sommare il valore
+corrente di total più l'oggetto della lista all'indice uno, che è il voto.
+Una volta che il ciclo for è stato eseguito, divideremo il totale per il numero di voti dei compiti.
+E quel numero di voti è uguale alla lunghezza della lista dei voti dei compiti,
+e poi possiamo ritornare quella media. Facciamo girare l'esempio della funzione.
+Per prima cosa, facciamo girare il modulo, e poi eseguiremo il calcolo della media, confermando che
+ritorni effettivamente 85.0.

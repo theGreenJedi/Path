@@ -1,0 +1,710 @@
+1
+00:00:01,280 --> 00:00:05,808
+I corpi dei cicli possono contenere ogni 
+istruzione inclusi altri cicli.
+
+2
+00:00:05,808 --> 00:00:11,937
+Esploreremo questo in questa lezione.
+Qui abbiamo un ciclo all'interno di un altro ciclo.
+
+3
+00:00:11,937 --> 00:00:17,709
+Il ciclo esterno ha i che varia sui valori
+dieci, undici e dodici. E per ognuna di
+
+4
+00:00:17,709 --> 00:00:22,873
+quelle iterazioni j varia su
+uno, due, te e quattro.
+
+5
+00:00:22,873 --> 00:00:27,809
+Quando visualizzo questo i che inizia
+riferendosi al valore dieci,
+
+6
+00:00:27,809 --> 00:00:33,732
+j non esiste ancora perché abbiamo appena
+raggiunto il ciclo for la prima volta.
+
+7
+00:00:33,732 --> 00:00:38,364
+Questo ciclo for interno
+J assumerà il valore uno nella 
+
+8
+00:00:38,364 --> 00:00:43,251
+prima iterazione.
+i fa sempre riferimento a dieci, e stiamo per
+
+9
+00:00:43,251 --> 00:00:47,090
+stampare ij, quindi dovremmo vedere dieci e uno
+qui.
+
+10
+00:00:47,090 --> 00:00:53,054
+Notate che non appena abbiamo stampato dieci
+e uno, ritorniamo alla linea due, non alla linea
+
+11
+00:00:53,054 --> 00:00:56,473
+uno.
+E la ragione per questo è che stiamo per
+
+12
+00:00:56,473 --> 00:01:02,510
+eseguire completamente il ciclo for interno
+finché J è passato attraverso i numeri 1,2,3
+
+13
+00:01:02,510 --> 00:01:05,928
+e quattro.
+Quindi questo significa che j assumerà
+
+14
+00:01:05,928 --> 00:01:11,443
+poi il valore due.
+E stiamo per stampare dieci e due.
+
+15
+00:01:11,443 --> 00:01:17,272
+Ora j assumerà il valore tre,
+J ora fa riferimento a tre, e stamperemo
+
+16
+00:01:17,272 --> 00:01:23,670
+dieci e tre e quattro. Ora abbiamo finito
+con questo ciclo interno, e quindi andremo
+
+17
+00:01:23,670 --> 00:01:30,185
+a saltare indietro alla riga uno dato che
+abbiamo completato l'esecuzione del corpo del
+
+18
+00:01:30,185 --> 00:01:35,863
+ciclo for più esterno.
+Ora, i assumerà il valore
+
+19
+00:01:35,863 --> 00:01:40,539
+undici.
+J assumerà i valori uno, due,
+
+20
+00:01:40,539 --> 00:01:49,246
+tre e quattro, di nuovo.
+E ora abbiamo finito questo ciclo interno,
+
+21
+00:01:49,246 --> 00:01:55,494
+quindi torniamo di nuovo a quello più esterno.
+Ora, faremo l'ultima iterazione del
+
+22
+00:01:55,494 --> 00:01:59,140
+ciclo più esterno.
+Bene, inizia a dodici e j passerà di
+
+23
+00:01:59,140 --> 00:02:03,416
+nuovo attraverso i numeri uno, due
+tre e quattro.
+
+24
+00:02:03,416 --> 00:02:10,301
+E i non cambierà più.
+Ora abbiamo finito con questo ciclo interno.
+
+25
+00:02:10,301 --> 00:02:13,561
+Torniamo indietro e controlliamo il ciclo più esterno
+ancora una volta.
+
+26
+00:02:13,561 --> 00:02:20,565
+E abbiamo finito con il programma.
+Qui c'è un altro esempio.
+
+27
+00:02:20,565 --> 00:02:24,456
+Terremo traccia di una lista di liste di
+numeri.
+
+28
+00:02:25,104 --> 00:02:31,995
+Queste andranno a rappresentare i voti, 
+quindi magari uno studente riceverà un 70,
+
+29
+00:02:31,995 --> 00:02:37,750
+un 75 e un 80 in un corso.
+E in un altro corso che frequenta
+
+30
+00:02:37,750 --> 00:02:44,154
+riceverà un 70, un 80, un 90 e un 100.
+E nel terzo corso riceverà un 80 e
+
+31
+00:02:44,154 --> 00:02:48,045
+un 100.
+E vuole conoscere quale sia la media per
+
+32
+00:02:48,045 --> 00:02:53,251
+ognuna di queste liste di voti.
+Scriveremo una funzione per
+
+33
+00:02:53,251 --> 00:02:57,776
+calcolare questa lista di medie.
+Ma prima facciamo che iniziare
+
+34
+00:02:57,776 --> 00:03:01,396
+con un problema simile.
+Solo per trovare la media di una lista di
+
+35
+00:03:01,396 --> 00:03:02,060
+numeri.
+Quindi.
+
+36
+00:03:03,300 --> 00:03:10,393
+Diciamo che in un corso, magari
+Inglese, la lista dei voti di cui
+
+37
+00:03:10,393 --> 00:03:15,320
+stiamo per calcolare la media è 70,
+75 e 80.
+
+38
+00:03:16,160 --> 00:03:23,796
+Per calcolare la media di questo,
+abbiamo bisogno di sommare tutti
+
+39
+00:03:23,796 --> 00:03:29,702
+i voti delle assegnazioni e poi dividerli per la
+lunghezza della lista.
+
+40
+00:03:30,517 --> 00:03:39,070
+C'è il nostro accumulatore, e poi per ogni
+voto di Inglese, quello che faremo è
+
+41
+00:03:39,070 --> 00:03:45,494
+andare ad addizionare i voti al totale.
+Ora,
+
+42
+00:03:45,494 --> 00:03:55,575
+il totale è 225.
+Dobbiamo dividere per la lunghezza della
+
+43
+00:03:55,575 --> 00:03:59,326
+lista.
+Ora che sappiamo come calcolare la
+
+44
+00:03:59,326 --> 00:04:05,630
+media di una lista di numeri, ci piacerebbe farlo
+per ogni elemento della lista nella
+
+45
+00:04:05,630 --> 00:04:11,854
+nostra lista dei voti, e vorremmo
+disporre il risultato in una lista di tutte queste
+
+46
+00:04:11,854 --> 00:04:15,923
+medie,
+Mentre sviluppiamo questa funzione, abbiamo
+
+47
+00:04:15,923 --> 00:04:19,753
+bisogno di esempi.
+Il primo esempio che faremo è
+
+48
+00:04:19,753 --> 00:04:25,180
+la lista dei voti con cui abbiamo iniziato
+nel riquadro a sinistra.
+
+49
+00:04:25,660 --> 00:04:32,818
+La media di 70, 75 e 80 è 75.
+La media di 70, 80, 90 e 100 è 85.
+
+50
+00:04:32,818 --> 00:04:38,386
+La media di 80 e 100 è 90.
+Tutti questi sono floats.
+
+51
+00:04:38,386 --> 00:04:43,060
+Allarghiamo solo un po' questa
+finestra.
+
+52
+00:04:44,680 --> 00:04:50,486
+Il contratto è il prossimo.
+Quello che abbiamo è una lista di numeri.
+
+53
+00:04:50,486 --> 00:04:55,865
+Ora, tutti questi sono interi.
+Ma possiamo certamente immaginare di dare
+
+54
+00:04:55,865 --> 00:05:00,391
+un risultato a virgola mobile per i voti
+delle assegnazioni
+
+55
+00:05:00,391 --> 00:05:04,319
+Quindi,
+il contratto sarà una  lista di
+
+56
+00:05:04,319 --> 00:05:08,674
+lista di numeri.
+E questo è il, il tipo della
+
+57
+00:05:08,674 --> 00:05:12,687
+lista di numeri.
+E ritorneremo una lista di
+
+58
+00:05:12,687 --> 00:05:18,974
+float.
+Siamo a posto con average come nome, quindi
+
+59
+00:05:18,974 --> 00:05:27,427
+lo lasciamo così, e andremo a ricevere
+in ingresso magari grades come il nome del nostro
+
+60
+00:05:27,427 --> 00:05:31,059
+parametro.
+
+61
+00:05:31,059 --> 00:05:40,362
+Nella nostra descrizione, questo ritornerà 
+una nuova lista nella quale ogni elemento è
+
+62
+00:05:40,362 --> 00:05:49,420
+la media dei voti della lista interna
+alla posizione corrispondente.
+
+63
+00:05:49,860 --> 00:05:56,858
+.
+di grades. Bene, sappiamo che stiamo costruendo
+
+64
+00:05:56,858 --> 00:06:00,482
+una nuova lista.
+E faremo questa lista annidata
+
+65
+00:06:00,482 --> 00:06:04,845
+con una lista annidata.
+Quindi andremo ad accumulare questo
+
+66
+00:06:04,845 --> 00:06:08,395
+risultato.
+Quindi imposteremo magari averages come nome
+
+67
+00:06:08,395 --> 00:06:13,498
+della nostra variabile, che sarà la lista
+delle medie alla fine.
+
+68
+00:06:13,498 --> 00:06:17,640
+E quando abbiamo finito, sappiamo che vogliamo
+ritornare averages.
+
+69
+00:06:19,060 --> 00:06:27,538
+Bene, vogliamo inserire all'interno di averages,
+la media di ogni lista all'interno della
+
+70
+00:06:27,538 --> 00:06:29,300
+nostra lista grades.
+Quindi,
+
+71
+00:06:31,900 --> 00:06:44,343
+per ognuna delle sottostringhe nella lista
+grades, quello che vogliamo fare è calcolare
+
+72
+00:06:44,343 --> 00:06:50,376
+la media dei della lista dei voti e aggiungerla
+ad averages.
+
+73
+00:06:50,376 --> 00:06:56,532
+Bene, possediamo del codice per fare questo
+sulla sinistra.
+
+74
+00:06:56,532 --> 00:07:02,072
+Sappiamo di voler far partire il totale da
+zero.
+
+75
+00:07:02,072 --> 00:07:09,090
+E poi per ogni voto in questa particolare
+sottolista di voti,
+
+76
+00:07:09,090 --> 00:07:18,314
+vogliamo addizionarlo al totale.
+E poi una volta che abbiamo finito con quello.
+
+77
+00:07:18,314 --> 00:07:24,730
+raccoglieremo i valori nella lista dei voti.
+
+78
+00:07:24,730 --> 00:07:31,147
+Vorremmo aggiungere la media ad averages.
+
+79
+00:07:31,147 --> 00:07:37,796
+E abbiamo finito.
+Ora la richiameremo nel visualizzatore
+
+80
+00:07:37,796 --> 00:07:43,457
+e vedremo la sua esecuzione.
+Abbiamo aggiunto due istruzioni al fondo
+
+81
+00:07:43,457 --> 00:07:47,251
+di questo file.
+La prima crea la, la lista
+
+82
+00:07:47,251 --> 00:07:50,329
+annidata,
+e la seconda chiana la funzione
+
+83
+00:07:50,329 --> 00:07:53,980
+averages passandole una lista.
+Visualizziamola.
+
+84
+00:07:55,280 --> 00:08:01,917
+Per prima cosa definiamo la nostra funzione.
+Poi andremo a creare circa dieci
+
+85
+00:08:01,917 --> 00:08:07,158
+oggetti o giù di lì.
+Grades fa riferimento ad una lista con tre elementi
+
+86
+00:08:07,158 --> 00:08:11,215
+al suo interno.
+Il primo è una lista di tre elementi
+
+87
+00:08:11,215 --> 00:08:16,825
+70, 75 e 80.
+La seconda fa riferimento ad una lista che
+
+88
+00:08:16,825 --> 00:08:22,608
+ha 70, 80, 90 e 100 al suo interno.
+E il terzo elemento all'indice due è questa
+
+89
+00:08:22,867 --> 00:08:27,960
+lista che fa riferimento ad una lista con due
+elementi, 80 e 90.
+
+90
+00:08:30,240 --> 00:08:41,292
+La prima lista annidata contiene 70,
+75 e 80.
+
+91
+00:08:41,292 --> 00:08:47,295
+La seconda lista annidata contiene 70, 80, 90.
+Dov'è?
+
+92
+00:08:47,635 --> 00:08:53,298
+90 e 100.
+La terza lista annidata contiene 80, e
+
+93
+00:08:53,298 --> 00:08:57,942
+100.
+Quindi, la struttura della lista che
+
+94
+00:08:57,942 --> 00:09:05,758
+è presente nella memoria del computer è
+una rappresentazione di cosa abbiamo fatto su
+
+95
+00:09:05,758 --> 00:09:11,761
+questa riga.
+Ora andremo a passare quella lista alla
+
+96
+00:09:11,761 --> 00:09:17,441
+funzione averages.
+Otterremo lo stack frame per la funzione
+
+97
+00:09:17,441 --> 00:09:22,680
+averages contenente il parametro grades
+che fa riferimento alla stessa lista.
+
+98
+00:09:23,580 --> 00:09:31,665
+Inizieremo, qui cè una cosa divertente,
+inizializzeremo una nuova variabile averages che è
+
+99
+00:09:31,665 --> 00:09:36,804
+una lista vuota.
+Notate che abbiamo anche una funzione averages
+
+100
+00:09:36,804 --> 00:09:40,363
+fuori.
+Sono ovviamente due cose
+
+101
+00:09:40,363 --> 00:09:44,239
+differenti.
+Poi attraverseremo questa lista
+
+102
+00:09:44,239 --> 00:09:49,539
+all'interno di questa lista più esterna.
+Quindi la lista grades inizialmente farà
+
+103
+00:09:49,539 --> 00:09:53,020
+riferimento alla lista con indirizzo di memoria
+x3.
+
+104
+00:09:53,860 --> 00:09:59,977
+Poi passeremo su 70, 75 e 80,
+li addizioneremo e divideremo per la lunghezza
+
+105
+00:09:59,977 --> 00:10:03,829
+di quella lista.
+Inizieremo il totale a zero e per
+
+106
+00:10:03,829 --> 00:10:10,097
+ogni giudizio nella lista dei voti, bene
+mark inizierà con 70 e poi 75 e
+
+107
+00:10:10,097 --> 00:10:15,082
+poi 80 ad ogni iterazione qui.
+Prenderemo 70 qui alla riga
+
+108
+00:10:15,082 --> 00:10:19,840
+diciassette e la addizioneremo al
+totale che è zero.
+
+109
+00:10:19,840 --> 00:10:23,389
+Quindi otteniamo 70 ovviamente 70 più zero
+è zero.
+
+110
+00:10:23,389 --> 00:10:31,289
+Lo assegniamo al totale.
+In questa prossima iterazione, andremo ad
+
+111
+00:10:31,289 --> 00:10:40,773
+avere il voto a 75.
+Ora prenderemo 75 e lo addizioneremo a
+
+112
+00:10:40,773 --> 00:10:43,700
+70.
+70 più 75 fa 145.
+
+113
+00:10:43,700 --> 00:10:54,191
+E assegneremo 145 a total.
+Nella prossima iterazione andremo ad
+
+114
+00:10:54,191 --> 00:10:58,644
+assegnare 80 a mark. Questo è ciò che questo
+ciclo for fa.
+
+115
+00:10:58,644 --> 00:11:03,014
+Prende l'ultimo elemento nella lista, mark ora
+fa riferimento ad 80.
+
+116
+00:11:03,014 --> 00:11:09,941
+Alla riga diciassette abbiamo un'istruzione
+di assegnazione. Il lato destro viene valutato
+
+117
+00:11:09,941 --> 00:11:13,900
+a 145 più 80 o 225.
+Assegneremo 225 a total.
+
+118
+00:11:13,900 --> 00:11:19,435
+Ora abbiamo scorso tutti gli oggetti in
+quella prima lista annidata.
+
+119
+00:11:19,435 --> 00:11:25,540
+Abbiamo fatto il 70, il 75 e l'80, e
+quindi questo ciclo for ora teminerà.
+
+120
+00:11:26,360 --> 00:11:33,372
+Calcoleremo 225 diviso per la
+lunghezza della lista grades, che è tre, e
+
+121
+00:11:33,372 --> 00:11:38,080
+aggiungeremo il risultato alla lista
+averages.
+
+122
+00:11:38,640 --> 00:11:43,525
+Ora averages fa riferimento alla lista contenente
+75.
+
+123
+00:11:43,525 --> 00:11:51,075
+225 diviso per tre è 75.
+Abbiamo completato l'esecuzione della prima
+
+124
+00:11:51,075 --> 00:11:58,958
+iterazione del ciclo for più esterno.
+Ora, in questa prossima iterazione, otteniamo
+
+125
+00:11:58,958 --> 00:12:07,396
+la seconda lista, con quattro elementi al suo interno.
+La lista grades ora farà riferimento a questa seconda
+
+126
+00:12:07,396 --> 00:12:14,880
+lista, con 70, 80, 90 e 100 al suo interno.
+Inizializzeremo il totale a zero.
+
+127
+00:12:14,880 --> 00:12:20,351
+Lo resettiamo e quando passeremo sopra
+i quattro numeri,
+
+128
+00:12:20,351 --> 00:12:28,873
+due, tre, quattro e abbiamo fatto.
+E il totale ora è 340. La somma di 70 più
+
+129
+00:12:28,873 --> 00:12:37,664
+80 più 90 più 100.
+Aggiungiamo 340 diviso per quattro alla nostra
+
+130
+00:12:37,664 --> 00:12:42,693
+lista averages.
+E questo è 85.
+
+131
+00:12:42,693 --> 00:12:48,368
+E ora per la terza lista annidata.
+Lista Grades
+
+132
+00:12:48,368 --> 00:12:53,348
+Il primo della lista di due elementi,
+è 80 e 100.
+
+133
+00:12:53,348 --> 00:12:59,550
+Resettiamo total a zero.
+C'è l'80 con cui abbiamo a che fare.
+
+134
+00:12:59,550 --> 00:13:03,996
+Mark ora vale 80.
+Aggiungiamo 80 a zero, che ci da 80,
+
+135
+00:13:03,996 --> 00:13:06,680
+ovviamente.
+Poi otterremo il 100.
+
+136
+00:13:07,160 --> 00:13:14,557
+E li sommeremo insieme.
+E poi aggiungeremo 180 diviso per la
+
+137
+00:13:14,557 --> 00:13:20,480
+lunghezza di quella lista annidata, o due.
+Quindi 180 diviso per due è 90.
+
+138
+00:13:23,080 --> 00:13:28,775
+Ora abbiamo iterato su tutte e tre le nostre
+liste annidate.
+
+139
+00:13:28,775 --> 00:13:33,849
+Quindi termina questo ciclo esterno.
+E abbiamo finito.
+
+140
+00:13:33,849 --> 00:13:41,615
+Ora ritorniamo, questa lista averages
+che per ricordarci contiene 75, 85
+
+141
+00:13:41,615 --> 00:13:44,572
+e 90.
+Dobbiamo ritornare questo valore.
+
+142
+00:13:44,572 --> 00:13:50,925
+Non facciamo niente con quello nel programma
+principale, quindi quando clicco avanti, il
+
+143
+00:13:50,925 --> 00:13:52,740
+programma semplicemente terminerà.

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Linux https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Nested Loops
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 9.5 Nesting Loops in Loops
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Nested Loops
+        </h1>
+        <h3>
+            Bodies of Loops
+        </h3>
+        <p>
+            The bodies of loops can contain any statements,
+            including other loops. When this occurs, this is known
+            as a <em>nested loop</em>.
+        </p>
+        <p>
+            Here is a nested loop involving 2 <code>for</code>
+            loops:
+        </p>
+        <pre>
+for i in range(10, 13):
+    for j in range(1, 5):
+        print(i, j)
+               
+</pre>
+        <p>
+            Here is the output:
+        </p>
+        <pre>
+10 1
+10 2
+10 3
+10 4
+11 1
+11 2
+11 3
+11 4
+12 1
+12 2
+12 3
+12 4
+</pre>
+        <p>
+            Notice that when <code>i</code> is 10, the inner loop
+            executes in its entirety, and only after <code>j</code>
+            has ranged from 1 through 4 is <code>i</code> assigned
+            the value <code>11</code>.
+        </p>
+        <h3>
+            Example of Nested Loops
+        </h3>
+        <pre>
+def calculate_averages(grades):
+    ''' (list of list of number) -&gt; list of float
+
+    Return a new list in which each item is the average of the grades in the
+    inner list at the corresponding position of grades.
+
+    &gt;&gt;&gt; calculate_averages([[70, 75, 80], [70, 80, 90, 100], [80, 100]])
+    [75.0, 85.0, 90.0]
+    '''
+
+    averages = []
+
+    # Calculate the average of each sublist and append it to averages.
+    for grades_list in grades:
+
+        # Calculate the average of grades_list.
+        total = 0
+        for mark in grades_list:
+            total = total + mark
+
+        averages.append(total / len(grades_list))
+
+    return averages
+</pre>
+        <p>
+            In <code>calculate_averages</code>, the <em>outer</em>
+            <code>for</code> loop iterates through each sublist in
+            <code>grades</code>. We then calculate the average of
+            that sublist using a <em>nested</em>, or
+            <em>inner</em>, loop, and add the average to the
+            accumulator (the new list, <code>averages</code>).
+        </p>
+        <hr>
+        <center>
+            Jennifer Campbell &bull; Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

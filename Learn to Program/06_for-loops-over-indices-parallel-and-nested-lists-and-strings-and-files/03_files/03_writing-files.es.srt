@@ -1,0 +1,259 @@
+1
+00:00:01,060 --> 00:00:05,616
+Es casi tan fácil como escribir en un
+archivo así como leer de uno
+
+2
+00:00:05,616 --> 00:00:09,360
+Aquí vamos.
+Como recordatorio, función open o abrir toma el 
+
+3
+00:00:09,360 --> 00:00:14,903
+nombre del archivo, ya sea la ruta de acceso completa o solo
+el nombre del archivo es en el mismo
+
+4
+00:00:14,903 --> 00:00:20,722
+directorio como el programa y uno de los modos,
+de lectura, escritura o dependencia.  Muy parecido a 
+
+5
+00:00:20,722 --> 00:00:26,412
+archivos que tienen los métodos de lectura, lectura de línea, lectura de líneas, ellos tienen método de escritura sí
+
+6
+00:00:26,412 --> 00:00:31,443
+los hemos abierto a ellos para escribir.
+El método de escritura trabaja muy parecido como Python
+
+7
+00:00:31,443 --> 00:00:35,860
+función para imprimir print excepto que no añade un carácter de nueva línea
+
+8
+00:00:36,120 --> 00:00:42,593
+Vamos a escribir un poco de código
+que hace una copia de un archivo, pero pone la
+
+9
+00:00:42,593 --> 00:00:46,620
+palabra copy como la primera línea en el nuevo
+archivo copiado.
+
+10
+00:00:48,320 --> 00:00:53,111
+Empezaremos mostrándote como preguntar
+a un usuario por un archivo.
+
+11
+00:00:53,111 --> 00:00:57,196
+El módulo tkinter tiene un sub-módulo llamado file dialog o diálogo de archivo 
+
+12
+00:00:57,196 --> 00:01:01,596
+Lo importamos de esta forma.
+Dentro de ese módulo, hay una función 
+
+13
+00:01:01,596 --> 00:01:06,466
+askopenfilename.
+Esto abrirá una diálogo emergente y nos permitirá
+
+14
+00:01:06,466 --> 00:01:11,180
+seleccionar un archivo usando file chooser de
+tu sistema operativo
+
+15
+00:01:11,580 --> 00:01:19,745
+Cuando llamamos askopenfilename, necesitaremos
+el cambiar a Python para poder seleccionar
+
+16
+00:01:19,745 --> 00:01:24,979
+el archivo. Buscaremos, In Flanders Fields txt..
+
+17
+00:01:24,979 --> 00:01:30,577
+Cuando seleccionamos abrir, vemos que el
+dialogo de archivos desaparece.
+
+18
+00:01:30,577 --> 00:01:34,447
+Pero nos quedamos con esta ventana con el
+título tk.
+
+19
+00:01:34,447 --> 00:01:40,786
+Esta venatana no hace daño, y la
+vamos a ignorar, y volver al Python
+
+20
+00:01:40,786 --> 00:01:44,538
+shell.
+Askopenfilename a retornado una string
+
+21
+00:01:44,538 --> 00:01:50,528
+conteniendo la ruta de acceso completa al archivo que
+nosotros escojamos, de tal forma que podemos usar cuando nosotros
+
+22
+00:01:50,528 --> 00:01:58,673
+llamamos la función open
+Llamaremos esto nuevamente, y recuerda, la
+
+23
+00:01:58,673 --> 00:02:06,105
+string que fue retornada.
+Debemos cambiar a Python con el fin
+
+24
+00:02:06,105 --> 00:02:14,269
+de seleccionar nuestro archivo.
+Ahora, del nombre del archivo, es la ruta a dicho
+
+25
+00:02:14,269 --> 00:02:19,641
+archivo.
+Usaremos una nueva función en el mismo
+
+26
+00:02:19,641 --> 00:02:26,163
+módulo de diálogo de archivo con el fin de escoger un
+archivo en el cual querramos escribir
+
+27
+00:02:26,163 --> 00:02:31,180
+En lugar de askopenfilename, nosotros usaremos asksaveasfilename.
+
+28
+00:02:31,840 --> 00:02:38,244
+Asksaveasfilename nos permite escoger un
+nuevo nombre de archivo para guardarlo, pero sí
+ escogemos
+
+29
+00:02:38,244 --> 00:02:44,276
+un archivo que ya existe, nos preguntará para confirmar que realmente querramos 
+
+30
+00:02:44,276 --> 00:02:49,632
+reemplazar el archivo.
+Cambiaremos a Python.
+
+31
+00:02:49,632 --> 00:02:56,594
+Y notarás que dice, save as o guardar como,
+con un lugar para tipear el nombre del nuevo
+
+32
+00:02:56,594 --> 00:02:59,813
+archivo.
+Bien, no quiero guardarlo en
+
+33
+00:02:59,813 --> 00:03:04,600
+6readfiles porqué esta clase es 6writefiles
+
+34
+00:03:05,800 --> 00:03:19,840
+Llamaremos esta, Fladers copy.txt.
+Y aquí es lo que escogimos.
+
+35
+00:03:20,820 --> 00:03:25,200
+Abriremos ahora desde <u>filename in read
+mode.</u>
+
+36
+00:03:25,880 --> 00:03:33,140
+Leer el contenido.
+Cerrar el archivo,
+
+37
+00:03:33,940 --> 00:03:40,308
+Y comprobar para asegurar que tenemos lo que
+esperamos y en efecto, el contenido es una string
+
+38
+00:03:40,308 --> 00:03:45,917
+conteniendo lo que estaba en el archivo incluyendo
+todos los cractéres de línea nueva.
+
+39
+00:03:45,917 --> 00:03:55,724
+Siguiente, abriremos un archivo que queremos
+escribir que escriba la palabra copy y una
+
+40
+00:03:55,724 --> 00:03:59,181
+eva línea.
+Recuerda, que debemos añadir cualquier nueva
+
+41
+00:03:59,181 --> 00:04:05,193
+linéa que querramos porque al contrario de print, el método write no añade ningún extra
+
+42
+00:04:05,193 --> 00:04:09,560
+carácter.
+Luego, escribiremos el contenido,
+
+43
+00:04:11,300 --> 00:04:19,006
+Y finalmente, cierra el archivo.
+Nota que cuando abrimos el <u>file,</u>
+
+44
+00:04:19,006 --> 00:04:25,380
+ archivo que estamos copiando, usamos
+el carácter w cuando abrimos el archivo
+
+45
+00:04:25,380 --> 00:04:29,786
+Y la información retornada del método write,
+a retornado un int.
+
+46
+00:04:29,786 --> 00:04:34,771
+En particular, ha retornado el número de caracteres que han sido escritos
+
+47
+00:04:34,771 --> 00:04:40,550
+Nota que esto muestra que el backslash \ entonces es tratado como  un carácter único
+
+48
+00:04:40,550 --> 00:04:44,451
+porque c, o, p, y, y la nueva línea hacen
+cinco caracteres.
+
+49
+00:04:44,451 --> 00:04:50,592
+Write retorna esta información así que puedes
+comprobar para asegurar que la longitud de tu
+
+50
+00:04:50,592 --> 00:04:55,360
+string es el número de carateres que
+fueron escritos exitosamente
+
+51
+00:04:57,680 --> 00:05:02,224
+Ahora verificaremos que el archivo fue
+escrito exitosamente
+
+52
+00:05:02,224 --> 00:05:08,002
+Aquí esta nuestro Flanders copy.txt
+Cuando cliqueo dos veces en el, se abrirá y nosotros
+
+53
+00:05:08,002 --> 00:05:14,164
+podremos ver que la palabra copy y el carácter de
+nueva línea aparece al inicio, como lo
+
+54
+00:05:14,164 --> 00:05:15,320
+que habíamos escrito

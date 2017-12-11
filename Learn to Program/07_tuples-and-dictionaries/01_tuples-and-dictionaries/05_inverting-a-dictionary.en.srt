@@ -1,0 +1,228 @@
+1
+00:00:00,980 --> 00:00:06,100
+In this lecture, we will explore using a
+dictionary as an accumulator.
+
+2
+00:00:06,500 --> 00:00:10,495
+Here, we created dictionary mapping fruits
+to colours.
+
+3
+00:00:10,495 --> 00:00:14,567
+We will run this, in order to explore
+fruits to colours.
+
+4
+00:00:14,567 --> 00:00:18,640
+So that we can be a little bit more
+familiar with it.
+
+5
+00:00:19,060 --> 00:00:25,572
+Here is the fruit to colour dictionary,
+these dictionary entries are not sorted by
+
+6
+00:00:25,572 --> 00:00:30,396
+key or by value.
+We can index into it using the name of a
+
+7
+00:00:30,396 --> 00:00:36,426
+fruit, in order to find out its colour, so
+fruit to colour of orange, is orange,
+
+8
+00:00:36,426 --> 00:00:43,901
+fruit to colour of banana, is yellow.
+We can also iterate over the keys in this
+
+9
+00:00:43,901 --> 00:00:47,345
+dictionary.
+For fruit, in fruit to colour, allows us
+
+10
+00:00:47,345 --> 00:00:52,193
+to get each fruit in turn,
+As well as use that fruit as an index into
+
+11
+00:00:52,193 --> 00:00:56,340
+the dictionary in order to look up the
+corresponding value.
+
+12
+00:00:58,220 --> 00:01:02,770
+And now, we get to the problem we're going
+to explore today.
+
+13
+00:01:02,770 --> 00:01:09,411
+We are going to turn this dictionary
+inside out, or invert fruit to colour.
+
+14
+00:01:10,139 --> 00:01:15,689
+We want to build a new dictionary that
+maps colours to fruits.
+
+15
+00:01:15,689 --> 00:01:23,149
+To do this, we will iterate over the keys
+in the fruit to colour dictionary, extract
+
+16
+00:01:23,149 --> 00:01:30,154
+the colour corresponding to that fruit,
+and then add to our new colour to fruit
+
+17
+00:01:30,154 --> 00:01:37,099
+dictionary the colour to fruit entry.
+Variable colour to fruit is our
+
+18
+00:01:37,099 --> 00:01:42,980
+accumulator.
+We run this again.
+
+19
+00:01:42,980 --> 00:01:47,930
+And examine fruit to colour and colour to
+fruit.
+
+20
+00:01:47,930 --> 00:01:51,735
+But colour to fruit is missing some
+information.
+
+21
+00:01:51,735 --> 00:01:56,027
+There are no pomegranates, no
+strawberries, no peaches.
+
+22
+00:01:56,027 --> 00:02:01,938
+The problem is that there are more than
+one fruit for each of the colours
+
+23
+00:02:01,938 --> 00:02:05,419
+associated with those three missing
+fruits.
+
+24
+00:02:05,419 --> 00:02:09,711
+For example, pomegranates are red, but so
+are cherries.
+
+25
+00:02:09,711 --> 00:02:15,298
+So, when we added cherry to this
+dictionary, it replaced the entry for
+
+26
+00:02:15,298 --> 00:02:18,977
+pomegranate.
+Instead of this straight inversion, we
+
+27
+00:02:18,977 --> 00:02:23,750
+need to be a bit careful.
+We will build a dictionary that maps each
+
+28
+00:02:23,750 --> 00:02:29,806
+colour to a list of fruits of that colour.
+If colour is not already a key in the
+
+29
+00:02:29,806 --> 00:02:36,220
+accumulator, we will add a colour to a
+list with one item in it, the current
+
+30
+00:02:36,220 --> 00:02:41,742
+fruit, as an entry.
+Otherwise, if colour is already a key that
+
+31
+00:02:41,742 --> 00:02:46,034
+means that it already has a list of fruit
+of that colour.
+
+32
+00:02:46,034 --> 00:02:49,560
+We need to append fruit to that existing
+list.
+
+33
+00:02:51,480 --> 00:02:55,500
+Here is the code expressing that
+algorithm.
+
+34
+00:02:56,520 --> 00:03:03,523
+If it is not the case, that colour is the
+key in the colour to fruit dictionary,
+
+35
+00:03:03,523 --> 00:03:09,540
+then we will add an entry, mapping colour
+to a list containing fruit.
+
+36
+00:03:13,320 --> 00:03:21,076
+On the other hand, if colour is already a
+key in the dictionary, then we would like
+
+37
+00:03:21,076 --> 00:03:27,395
+to get the list that, that colour maps to,
+and append variable fruit.
+
+38
+00:03:27,395 --> 00:03:33,620
+We will also delete the old code.
+Let's explore how we've done it.
+
+39
+00:03:37,160 --> 00:03:41,747
+Fruit to colour, is what it always has
+been.
+
+40
+00:03:41,747 --> 00:03:49,940
+Coulor to fruit now, has keys being
+strings, and values being list of strings.
+
+41
+00:03:50,760 --> 00:03:59,139
+Which fruit is colored orange?
+How do we get to the fruit orange?
+
+42
+00:03:59,139 --> 00:04:03,808
+Well, we index into the dictionary using
+string orange.
+
+43
+00:04:03,808 --> 00:04:10,033
+And then, that gives us a list.
+We then, index into that using the regular
+
+44
+00:04:10,033 --> 00:04:15,992
+list indexing way to get orange.
+How can we get to cherry?
+
+45
+00:04:15,992 --> 00:04:22,778
+Well, index into our dictionary using red
+and cherry is the last item in the list
+
+46
+00:04:22,778 --> 00:04:24,120
+that is returned.

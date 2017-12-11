@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Import: Using Non-Builtin Functions
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>6.1 Importing Modules
+                </li>
+                <li>6.2 Defining Your Own Modules
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Import: Using Non-Builtin Functions
+        </h1>
+        <h3>
+            Modules
+        </h3>
+        <p>
+            Python contains many functions, but not all of them are immediately available as builtin functions. Instead of being available as builtins, some functions are saved in different modules. A <em>module</em> is a file containing function definitions and other statements.
+        </p>
+        <p>
+            We may also define our own modules with our own functions.
+        </p>
+        <h3>
+            <code>import</code>
+        </h3>
+        <p>
+            In order to gain access to the functions in a module, we must import that module.
+        </p>
+        <p>
+            The general form of an import statement is:
+        </p>
+        <pre>
+import module_name
+</pre>
+        <p>
+            To access a function within a module, we use:
+        </p>
+        <pre>
+module_name.function_name
+</pre>
+        <p>
+            For example, we can import the Python module <code>math</code> and call the function <code>sqrt</code> from it:
+        </p>
+        <pre>
+import math
+
+def area2(side1, side2, side3):
+        semi = semiperimeter(side1, side2, side3)
+        area = math.sqrt(semi * (semi - side1) * (semi - side2) * (semi - side3))
+        return area
+</pre>
+        <p>
+            In addition to importing Python's modules, we can also import the modules that we write. For example, to use the functions from <code>triangle.py</code> (from the video) in another module, we would <code>import triangle</code>. A module being imported should be in the same directory as the module importing it.
+        </p><br>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

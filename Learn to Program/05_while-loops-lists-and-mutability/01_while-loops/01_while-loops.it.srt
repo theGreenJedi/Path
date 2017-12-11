@@ -1,0 +1,879 @@
+1
+00:00:01,400 --> 00:00:06,540
+In una lezione precedente abbiamo usato un
+ciclo for per iterare su un carattere di una stringa.
+
+2
+00:00:06,540 --> 00:00:09,700
+Ma se non volessimo effettuare un loop 
+su ogni carattere?
+
+3
+00:00:09,700 --> 00:00:12,340
+Magari vogliamo effettuare un loop solo finché
+non troviamo una vocale.
+
+4
+00:00:12,340 --> 00:00:16,090
+O magari non vogliamo lavorare per niente con
+le stringhe.
+
+5
+00:00:16,090 --> 00:00:22,330
+Ad esempio, potremmo voler ripetere un compito
+finché l'utente non inserisce un valore particolare.
+
+6
+00:00:22,330 --> 00:00:25,990
+In questa lezione, vedremo i cicli while
+per effettuare questi compiti.
+
+7
+00:00:27,910 --> 00:00:31,900
+Per cominciare, ricordiamo la forma generica
+di un'istruzione if.
+
+8
+00:00:31,900 --> 00:00:34,920
+Se un'istruzione si basa su un'espressione
+Booleana.
+
+9
+00:00:34,920 --> 00:00:39,830
+Quando quell'espressione è vera, il corpo
+dell'istruzione if viene eseguito.
+
+10
+00:00:39,830 --> 00:00:42,340
+Se l'espressione Booleana è falsa, allora
+
+11
+00:00:42,340 --> 00:00:42,340
+[Suono]
+
+12
+00:00:42,340 --> 00:00:46,870
+procede all'istruzione che segue l'if
+senza eseguire il suo corpo.
+
+13
+00:00:46,870 --> 00:00:54,000
+Un ciclo while ha una forma simile ad un'istruzione 
+if, che si basa anch'essa su un'espressione
+
+14
+00:00:54,000 --> 00:01:00,440
+Booleana, e se l'espressione Booleana
+è vera viene eseguito il corpo del ciclo while.
+
+15
+00:01:00,440 --> 00:01:03,530
+Comunque, a differenza dell'if il ciclo while
+continua a
+
+16
+00:01:03,530 --> 00:01:07,860
+questo punto e controlleremo l'espressione
+Booleana un'altra volta.
+
+17
+00:01:07,860 --> 00:01:12,060
+Se la condizione del ciclo è vera, allora
+il corpo del ciclo while
+
+18
+00:01:12,060 --> 00:01:17,330
+viene nuovamente eseguito e questo processo viene 
+ripetuto finché la condizione del ciclo non diventa falsa.
+
+19
+00:01:19,900 --> 00:01:20,310
+Il primo
+
+20
+00:01:20,310 --> 00:01:20,310
+[MUSICA]
+
+21
+00:01:20,310 --> 00:01:23,620
+esempio di un ciclo while coinvolge la 
+variabile num.
+
+22
+00:01:23,620 --> 00:01:25,005
+Num riceve il valore 2.
+
+23
+00:01:26,160 --> 00:01:27,000
+Il ciclo while
+
+24
+00:01:27,000 --> 00:01:27,000
+[MUSICA]
+
+25
+00:01:27,000 --> 00:01:31,052
+continuerà ad essere eseguito finché num
+è < 100.
+
+26
+00:01:32,100 --> 00:01:32,630
+Nel corpo
+
+27
+00:01:32,630 --> 00:01:32,700
+[MUSICA]
+
+28
+00:01:32,700 --> 00:01:37,150
+del ciclo num viene raddoppiato, e viene
+stampato num.
+
+29
+00:01:39,530 --> 00:01:44,970
+Con num avente 2 come valore iniziale,
+questo ciclo Y viene eseguito 6 volte.
+
+30
+00:01:44,970 --> 00:01:49,620
+Num riceve 4, 8, 16, 32, 64, e infine
+128.
+
+31
+00:01:49,620 --> 00:01:53,600
+A questo punto, la condizione del ciclo
+Y è falsa.
+
+32
+00:01:55,210 --> 00:01:59,680
+Ora se num ottiene il valore 10, e facciamo
+girare nuovamente questo ciclo Y.
+
+33
+00:02:01,200 --> 00:02:04,550
+sono richieste solo quattro iterazioni
+del ciclo while prima che la condizione
+
+34
+00:02:04,550 --> 00:02:07,970
+diventi falsa quindi con quattro iterazioni io
+
+35
+00:02:07,970 --> 00:02:10,800
+intendo che il corpo del ciclo viene eseguito 
+4 volte.
+
+36
+00:02:12,260 --> 00:02:18,170
+A questo punto, num fa riferimento al
+valore 160 e la condizione del ciclo è falsa.
+
+37
+00:02:18,170 --> 00:02:21,900
+Se a questo punto, facciamo girare nuovamente 
+il ciclo while
+
+38
+00:02:21,900 --> 00:02:25,150
+il corpo non viene mai eseguito dato che la
+
+39
+00:02:25,150 --> 00:02:27,740
+condizione del ciclo è falsa
+fin dall'inizio.
+
+40
+00:02:31,830 --> 00:02:35,360
+Ora affrontiamo questo veloce problema
+che ho menzionato prima, che è
+
+41
+00:02:35,360 --> 00:02:39,120
+effettuare un ciclo sui caratteri di una stringa
+finché non si trova una vocale.
+
+42
+00:02:40,180 --> 00:02:44,080
+Per prima cosa, ricordiamo come abbiamo
+iterato sulla stringa usando un ciclo for.
+
+43
+00:02:44,080 --> 00:02:44,580
+Noi
+
+44
+00:02:48,600 --> 00:02:49,060
+abbiamo usato
+
+45
+00:02:49,060 --> 00:02:49,370
+[MUSICA]
+
+46
+00:02:49,370 --> 00:02:55,970
+il ciclo for per i caratteri di una stringa S e andrò 
+semplicemente a stampare quel carattere.
+
+47
+00:02:57,120 --> 00:03:00,360
+Quando questo ciclo finisce, il carattere ha
+un
+
+48
+00:03:00,360 --> 00:03:04,380
+valore iniziale della stringa S alla posizione 
+zero.
+
+49
+00:03:04,380 --> 00:03:10,090
+Poi si prosegue su S finché non viene
+raggiunta la fine della stringa.
+
+50
+00:03:10,090 --> 00:03:14,320
+Quando scriviamo il nostro ciclo Y, dobbiamo
+specificare quegli indici.
+
+51
+00:03:14,320 --> 00:03:19,440
+Quindi inizierò creando una variabile i
+che assume il valore zero p
+
+52
+00:03:19,440 --> 00:03:23,520
+che rappresenta il primo indice della
+stringa sulla quale effettuiamo il ciclo.
+
+53
+00:03:25,350 --> 00:03:28,470
+Ora la condizione del ciclo while, vogliamo
+andare
+
+54
+00:03:28,470 --> 00:03:32,460
+avanti finché non incontriamo una vocale
+quindi ficnhé
+
+55
+00:03:32,460 --> 00:03:39,480
+la stringa alla posizione i non è una vocale.
+Quindi finché non sta nell'insieme delle
+
+56
+00:03:39,480 --> 00:03:43,690
+a e i o u minuscole e delle A E I O U
+maiuscole.
+
+57
+00:03:44,700 --> 00:03:49,080
+Quindi, entreremo nel corpo del ciclo
+e eseguiremo il corpo del ciclo.
+
+58
+00:03:50,150 --> 00:03:54,470
+Nel ciclo, stamperò il carattere,
+la stringa di posizione i.
+
+59
+00:03:56,760 --> 00:04:01,890
+Prima di uscire dal ciclo Y, abbiamo bisogno
+di aumentare l'indice, quindi
+
+60
+00:04:01,890 --> 00:04:07,120
+il suo valore deve aumentare.
+Otterremo il valore di i più uno.
+
+61
+00:04:07,120 --> 00:04:10,560
+Quindi ci spostiamo al prossimo carattere della
+stringa.
+
+62
+00:04:13,740 --> 00:04:16,400
+In questo caso il ciclo while viene eseguito
+
+63
+00:04:16,400 --> 00:04:20,740
+una volta dato che il carattere zero non è
+una vocale.
+
+64
+00:04:20,740 --> 00:04:25,080
+E poi la seconda volte che viene controllata la
+condizione del ciclo while, asset one
+
+65
+00:04:25,080 --> 00:04:29,850
+fa riferimento ad e, che è una sottostringa della
+stringa delle vocali.
+
+66
+00:04:29,850 --> 00:04:33,410
+Quindi la condizione del ciclo while è falsa
+e si esce dal ciclo while.
+
+67
+00:04:34,900 --> 00:04:35,660
+Eseguiamo
+
+68
+00:04:35,660 --> 00:04:35,660
+[MUSICA]
+
+69
+00:04:35,660 --> 00:04:37,320
+lo stesso ciclo.
+Questa volta
+
+70
+00:04:37,320 --> 00:04:37,320
+[MUSICA]
+
+71
+00:04:37,320 --> 00:04:39,590
+usando la stringa there.
+
+72
+00:04:39,590 --> 00:04:45,110
+Impostando i a zero, ancora una volta, e ora
+eseguiamo il ciclo while.
+
+73
+00:04:45,110 --> 00:04:48,090
+Questa volta il corpo del ciclo while viene
+eseguito due volte.
+
+74
+00:04:49,090 --> 00:04:54,190
+Una volta per la consonante t, la seconda volta
+per la consonante h, e poi viene trovata
+
+75
+00:04:54,190 --> 00:04:59,290
+la e, così la condizione del ciclo Y è falsa
+e si esce dal ciclo.
+
+76
+00:05:00,340 --> 00:05:04,640
+Cosa accadrebbe se ci fossero solo consonanti
+nella nostra
+
+77
+00:05:04,640 --> 00:05:04,640
+[MUSICA]
+
+78
+00:05:04,640 --> 00:05:05,140
+stringa.
+
+79
+00:05:11,730 --> 00:05:16,995
+In questo caso, le tre consonanti sono
+mostrate e poi avviene un errore di indice.
+
+80
+00:05:16,995 --> 00:05:21,830
+S(0) fa riferimento ad 'x'.
+S(1)
+
+81
+00:05:21,830 --> 00:05:27,180
+fa riferimento ad 'y' e s(2) fa riferimento a
+'z'.
+
+82
+00:05:27,180 --> 00:05:32,150
+Ma il valore corrente di i è 3 e la
+3 non è una
+
+83
+00:05:32,150 --> 00:05:37,080
+posizione legale, non è un indice valido
+per la stringa s quindi avviene un
+
+84
+00:05:37,080 --> 00:05:38,440
+errore di indice.
+
+85
+00:05:38,440 --> 00:05:43,910
+Non abbiamo specificato quando smettere
+di esaminare i caratteri di s.
+
+86
+00:05:43,910 --> 00:05:46,740
+E quindi abbiamo raggiunto la fine della stringa e
+
+87
+00:05:46,740 --> 00:05:49,820
+abbiamo cercato di accedere ad un indice che
+non esiste.
+
+88
+00:05:50,840 --> 00:05:56,420
+Per prevenire questo, abbiamo bisogno di una
+seconda parte nella condizione Booleana.
+
+89
+00:05:56,420 --> 00:06:01,670
+Che è controllare che i sia all'interno dei
+confini della stringa.
+
+90
+00:06:01,670 --> 00:06:02,300
+Per assicurarci
+
+91
+00:06:02,300 --> 00:06:07,950
+che sia minore della lunghezza.
+Facciamolo ora.
+
+92
+00:06:07,950 --> 00:06:11,630
+Daremo ad i il valore zero.
+
+93
+00:06:11,630 --> 00:06:17,770
+S riceve la stringa, x y z e ora eseguiamo il
+ciclo while.
+
+94
+00:06:17,770 --> 00:06:21,230
+Prima di eseguirla però, andremo prima a
+controllare per
+
+95
+00:06:21,230 --> 00:06:26,060
+assicurarci che i sia minore della lunghezza 
+della stringa.
+
+96
+00:06:26,060 --> 00:06:27,380
+E poi controlleremo
+
+97
+00:06:27,380 --> 00:06:30,930
+per vedere se s e i è una sotto stringa della
+stringa delle vocali.
+
+98
+00:06:31,930 --> 00:06:34,930
+Notate che ho messo prima questa 
+condizione.
+
+99
+00:06:34,930 --> 00:06:37,440
+Vogliamo assicurarci di aver controllato
+che i sia minore
+
+100
+00:06:37,440 --> 00:06:42,810
+della lunghezza prima di cercare di accedere
+alla stringa in posizione i.
+
+101
+00:06:42,810 --> 00:06:48,000
+Python esegue una valutazione pigra di
+questa operazione and, quindi
+
+102
+00:06:48,000 --> 00:06:53,540
+se il primo operando è falso,
+il secondo non viene valutato.
+
+103
+00:06:53,540 --> 00:07:00,140
+Questo significa che se i non è minore
+della lunghezza della stringa, allora N risulta
+
+104
+00:07:00,140 --> 00:07:05,180
+falso a questo punto e non cercheremo
+di accedere alla stringa in posizione i.
+
+105
+00:07:07,360 --> 00:07:13,350
+Quindi in questo caso le tre costanti sono
+mostrate e a questo punto la
+
+106
+00:07:13,350 --> 00:07:18,410
+condizione che i sia minore della lunghezza
+della stringa è falsa, il ciclo viene terminato.
+
+107
+00:07:18,410 --> 00:07:18,910
+[Ma se qualcuno mi tocca l'amante,
+divento una tigre!]
+
+108
+00:07:21,460 --> 00:07:25,350
+Usiamo qualche idea del ciclo while per
+un altro problema.
+
+109
+00:07:26,860 --> 00:07:29,900
+Implementeremo la funzione up to vowel.
+
+110
+00:07:29,900 --> 00:07:30,570
+[Ma se qualcuno mi tocca l'amante,
+divento una tigre!]
+
+111
+00:07:30,570 --> 00:07:33,940
+Ha un parametro stringa e ritornerà una stringa.
+
+112
+00:07:35,180 --> 00:07:38,280
+Andrà a ritornare una sotto stringa del
+parametro stringa
+
+113
+00:07:38,280 --> 00:07:42,660
+s dall'indice zero fino a, ma non includendo
+la prima vocale.
+
+114
+00:07:43,850 --> 00:07:46,900
+Quindi invece di stampare nel modo in cui abbiamo 
+fatto nel nostro esempio nella
+
+115
+00:07:46,900 --> 00:07:51,100
+shell, vogliamo accumulare la sotto stringa
+e ritornarla.
+
+116
+00:07:52,590 --> 00:07:55,630
+Useremo lo schema dell'accumulatore visto
+in precedenza per
+
+117
+00:07:55,630 --> 00:07:58,250
+risolvere questo problema.
+La variabile
+
+118
+00:07:58,250 --> 00:07:58,250
+[MUSICA]
+
+119
+00:07:58,250 --> 00:08:02,260
+before a vowel inizialmente farà riferimento
+ad una stringa vuota e
+
+120
+00:08:02,260 --> 00:08:06,260
+accumuleremo la stringa che
+deve essere ritornata in before a vowel.
+
+121
+00:08:07,820 --> 00:08:10,690
+Il ciclo while che stiamo per usare
+
+122
+00:08:10,690 --> 00:08:13,450
+è esattamente lo stesso che abbiamo scritto
+prima.
+
+123
+00:08:13,450 --> 00:08:18,270
+Vogliamo iterare sui caratteri della stringa
+iniziando dalla posizione zero.
+
+124
+00:08:18,270 --> 00:08:22,300
+Finché non incontriamo una vocale o finché
+viene raggiunta la fine della stringa.
+
+125
+00:08:23,740 --> 00:08:26,080
+All'interno del corpo del ciclo vogliamo
+
+126
+00:08:26,080 --> 00:08:26,250
+[MUSICA]
+
+127
+00:08:26,250 --> 00:08:29,290
+aggiungere all'accumulatore before a vowel.
+Quindi
+
+128
+00:08:29,290 --> 00:08:29,290
+[MUSICA]
+
+129
+00:08:29,290 --> 00:08:33,360
+before a vowel, otterremo il suo valore attuale 
+più il
+
+130
+00:08:33,360 --> 00:08:37,060
+carattere, che è il carattere in posizione i
+della stringa s.
+
+131
+00:08:38,280 --> 00:08:42,800
+Dobbiamo incrementare l'indice, aggiungendogli
+uno,
+
+132
+00:08:42,800 --> 00:08:45,270
+in modo da poterci poi spostare al carattere successivo.
+
+133
+00:08:46,340 --> 00:08:50,370
+E al termine di questa funzione viene
+ritornata la sotto stringa.
+
+134
+00:08:50,370 --> 00:08:52,900
+Quindi verrà ritornata before a vowel.
+
+135
+00:08:54,610 --> 00:08:55,960
+Ora facciamo girare questo codice.
+
+136
+00:08:59,280 --> 00:09:00,980
+E chiamiamo la funzione su Michelle.
+
+137
+00:09:03,530 --> 00:09:06,410
+Per questa prima chiamata della funzione ci
+aspettiamo di ottenere h.
+
+138
+00:09:07,900 --> 00:09:13,490
+Per la seconda, dove c'è l'argomento,
+dovrebbe essere ritornata l'h.
+
+139
+00:09:13,490 --> 00:09:16,440
+E poi il terzo esempio che contiene solamente
+
+140
+00:09:16,440 --> 00:09:16,440
+[MUSICA]
+
+141
+00:09:16,440 --> 00:09:21,170
+un carattere, solo consonanti. Nessuna vocale,
+viene ritornata
+
+142
+00:09:21,170 --> 00:09:21,170
+[MUSICA]
+
+143
+00:09:21,170 --> 00:09:21,820
+l'intera stringa.
+
+144
+00:09:24,140 --> 00:09:26,660
+Implementiamo ancora una funzione.
+
+145
+00:09:26,660 --> 00:09:31,520
+Il nome di questa funzione è get answer
+e questa funzione chiederà
+
+146
+00:09:31,520 --> 00:09:35,490
+all'utente una domanda aspettandosi una
+risposta sì o no.
+
+147
+00:09:35,490 --> 00:09:39,000
+L'utente fornirà la risposta.
+
+148
+00:09:39,000 --> 00:09:44,090
+E vogliamo continuare a proporla finché
+la risposta inserita è sì o no.
+
+149
+00:09:44,090 --> 00:09:49,330
+Quindi potrebbe richiedere un tentativo o dieci, o 100
+tentativi prima che l'utente inserisca
+
+150
+00:09:49,330 --> 00:09:50,100
+la risposta corretta.
+
+151
+00:09:51,210 --> 00:09:53,970
+Alla fine ritorneremo la risposta 
+fornita dall'utente.
+
+152
+00:09:55,750 --> 00:09:58,920
+Implementiamo questa funzione iniziando
+con i prompt,
+
+153
+00:09:58,920 --> 00:10:02,170
+quindi vorremmo richiamare input usando
+
+154
+00:10:02,170 --> 00:10:04,710
+il prompt passato come argomento per ottenere
+la risposta,
+
+155
+00:10:05,840 --> 00:10:08,290
+e il risultato viene inserito nella variabile
+answer.
+
+156
+00:10:11,520 --> 00:10:16,220
+Specifichiamo ora la condizione sotto la quale
+vogliamo riproporre la domanda all'utente.
+
+157
+00:10:16,220 --> 00:10:21,820
+Il corpo del ciclo while sarà un duplicato
+del codice precedente
+
+158
+00:10:21,820 --> 00:10:27,400
+che è una singola, la singola riga di codice
+che mostra all'utente la domanda.
+
+159
+00:10:30,530 --> 00:10:35,350
+Ci piacerebbe continuare ad effettuare il prompt
+quando la risposta non è quella che ci aspettiamo.
+
+160
+00:10:35,350 --> 00:10:40,840
+Quindi se la risposta è sì o no, ci fermiamo.
+
+161
+00:10:40,840 --> 00:10:44,970
+E se poi la risposta non è sì o no,
+
+162
+00:10:44,970 --> 00:10:46,380
+il ciclo deve continuare.
+
+163
+00:10:47,900 --> 00:10:49,660
+Alla fine del ciclo while, una volta
+
+164
+00:10:49,660 --> 00:10:52,900
+che l'esecuzione è terminata, viene ritornata
+answer.
+
+165
+00:10:56,410 --> 00:11:00,446
+Potreste aver notato che non ho incluso
+nessun esempio di chiamata nella doc string.
+
+166
+00:11:00,446 --> 00:11:05,200
+Questo perché l'esecuzione di questa
+funzione
+
+167
+00:11:05,200 --> 00:11:07,480
+si basa sull'input dell'utente, e non
+
+168
+00:11:07,480 --> 00:11:10,140
+posso predire cosa ritornerà la funzione
+
+169
+00:11:10,140 --> 00:11:12,660
+dato che dipende da cosa ha inserito
+l'utente.
+
+170
+00:11:12,660 --> 00:11:14,620
+Facciamola girare ora in modo da vedere
+
+171
+00:11:14,620 --> 00:11:16,990
+che si comporta, che si comporta come
+previsto.
+
+172
+00:11:19,960 --> 00:11:20,460
+Chiamiamo
+
+173
+00:11:20,460 --> 00:11:20,460
+[MUSICA]
+
+174
+00:11:20,460 --> 00:11:25,356
+get anwer, passerò il prompt,
+
+175
+00:11:25,356 --> 00:11:29,052
+e ci viene
+
+176
+00:11:29,052 --> 00:11:34,391
+proposta una
+
+177
+00:11:34,391 --> 00:11:40,510
+domanda.
+Se rispondo maybe, ci viene
+
+178
+00:11:40,510 --> 00:11:40,535
+[MUSICA]
+
+179
+00:11:40,535 --> 00:11:42,100
+riproposta la domanda,
+
+180
+00:11:42,100 --> 00:11:42,320
+[MUSICA]
+
+181
+00:11:42,320 --> 00:11:43,858
+è tardi, ci viene riproposta di nuovo.
+
+182
+00:11:43,858 --> 00:11:43,860
+[MUSICA]
+
+183
+00:11:43,860 --> 00:11:54,560
+Per niente, ci vien riproposta ancora.
+Oops.
+
+184
+00:11:54,560 --> 00:11:59,440
+Finalmente inserisco Yes, e yes viene ritornato
+dalla funzione.
+
+185
+00:11:59,440 --> 00:12:00,850
+Proviamola ancora una volta.
+
+186
+00:12:04,530 --> 00:12:10,090
+Questa volta andrò a rispondere immediatamente
+no, in modo che il corpo del ciclo while
+
+187
+00:12:10,090 --> 00:12:13,480
+non sia eseguito, dato che la condizione del
+while sarà
+
+188
+00:12:13,480 --> 00:12:15,510
+falsa fin dalla prima volta.
+
+189
+00:12:16,770 --> 00:12:19,000
+In questo caso la funzione ritorna no.

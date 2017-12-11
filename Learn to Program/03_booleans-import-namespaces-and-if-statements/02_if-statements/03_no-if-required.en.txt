@@ -1,0 +1,47 @@
+You've seen Boolean's functions end of
+statements. We're going to investigate a style issue
+now that can happen when you combine all three.
+We're going to start by writing a function that returns true if the parameter is
+even, and false otherwise. As an example, if a call is even with
+value four and hoping that I get back true.
+And if a call is even 77, then hopefully I'll get back false.
+We can tell that we're sending it back an int and that we hope to get back a Bool.
+Our header is we're going to call the function as even and let's call the
+parameter num because that's a number. And,
+What we're going to do here is return other numb is even.
+Now, that I know the, the details of my function, it's time to figure out some
+code that will let me know whether a number is even or odd.
+I'm going to investigate this in the Python shell. And, notice that if I divide
+four by two, there is no remainder. But, if I divide three or five or seven by two,
+there is a remainder. So, we're going to try out mod for mod two
+is zero, 77 mod two is one. And so, any number I
+pick that is odd is going to have a remainder of one, when I divide it by two.
+Continuing this thought, four mod two = zero is true.
+But, something like 77 mod two = zero is false.
+So, this expression, the number mod two equals zero is going to give me the result
+that I want. We might decide to write something like,
+if num mod two is zero, then return true otherwise return false.
+This will certainly work. Let's explore that.
+I will run this so we can have it there. Now, I can access the is even int function
+and say, hey, there's even four? Yes, it is.
+How about three? No, that's false.
+So our function works. However,
+The function body here is three lines too long.
+I don't actually need to use an if statement.
+The issue here is that, num mod two equals zero is already a Boolean expression.
+As we saw over here, four mod two = zero produced the value true.
+I don't need to say if something is true, then return true,
+Otherwise, if it wasn't true, return false.
+I can actually come into this out and replace it with a single line.
+I want to return a Boolean. Num mod two equals zero produces a
+Boolean, so I can just do return num mod two equals zero.
+Let's try this new version out in the shell.
+I still get true, I still get false. So, my new version works just as well as
+the old one. Its shorter, and after a while, you are
+going to find it preferable to the longer version of the if and the else.
+Working with Boolean expressions is new to many of you, and so this may make you a
+little uncomfortable, it might seem a little fancy or even confusing.
+Play with it for awhile, see what you can come up with in the shell when you need a
+Boolean expression, and see if you can simplify some of your return statements.
+If you ever find yourself doing if something where to return true, otherwise,
+return false.

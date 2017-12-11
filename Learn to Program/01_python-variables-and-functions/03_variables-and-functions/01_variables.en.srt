@@ -1,0 +1,443 @@
+1
+00:00:02,250 --> 00:00:06,300
+Hey everyone, you've seen how to
+evaluate expressions in Python.
+
+2
+00:00:06,300 --> 00:00:09,510
+In this lecture we're going to show you
+how to remember the results of those
+
+3
+00:00:09,510 --> 00:00:12,120
+expressions, so
+that you can use those values later.
+
+4
+00:00:14,770 --> 00:00:19,330
+We're going to explore this idea by
+calculating the areas of some triangles.
+
+5
+00:00:19,330 --> 00:00:24,130
+As a reminder, if I happen to
+know the height of the triangle,
+
+6
+00:00:26,200 --> 00:00:28,600
+I happen to know the width of the base.
+
+7
+00:00:28,600 --> 00:00:33,715
+Then the area of the triangle is a length
+
+8
+00:00:33,715 --> 00:00:39,297
+of the base times the height divided by 2.
+
+9
+00:00:39,297 --> 00:00:45,295
+For example of the height is 12 and
+the length of the base is 20,
+
+10
+00:00:45,295 --> 00:00:48,950
+then the area is 20 times 12 over 2.
+
+11
+00:00:48,950 --> 00:00:52,840
+Let's go explore that in Python.
+
+12
+00:00:54,460 --> 00:00:57,040
+You already know how to
+enter that expression.
+
+13
+00:00:59,210 --> 00:01:03,470
+And get evaluated in Python but,
+since we've decided to calculate
+
+14
+00:01:03,470 --> 00:01:06,380
+the values of a couple of triangles,
+we're actually going to show you
+
+15
+00:01:06,380 --> 00:01:10,670
+how to introduce the words base and
+height to represent values.
+
+16
+00:01:10,670 --> 00:01:14,320
+This is done with assignment statements.
+
+17
+00:01:14,320 --> 00:01:15,225
+Here is an example.
+
+18
+00:01:15,225 --> 00:01:22,241
+[SOUND] What this does
+is it evaluates the 20.
+
+19
+00:01:22,241 --> 00:01:25,820
+It associates that value with variable X.
+
+20
+00:01:25,820 --> 00:01:29,510
+This is called a variable, because it's
+a value that can vary as you'll see.
+
+21
+00:01:30,820 --> 00:01:36,450
+We'll do something similar for
+a variable that we'll call height and
+
+22
+00:01:36,450 --> 00:01:40,120
+then these two names can be used
+
+23
+00:01:40,120 --> 00:01:44,100
+as if they're values were there on the,
+in the Python chat.
+
+24
+00:01:45,230 --> 00:01:49,690
+So bases value is 20,
+height is associated with the value 12.
+
+25
+00:01:49,690 --> 00:01:54,120
+Notice that the equal symbol has a very
+
+26
+00:01:54,120 --> 00:01:56,370
+different meaning in programming
+than in mathematics.
+
+27
+00:01:57,960 --> 00:02:01,370
+Because computer programs
+get rather complicated,
+
+28
+00:02:01,370 --> 00:02:07,140
+we're going to introduce a notation for
+describing variables and their values.
+
+29
+00:02:07,140 --> 00:02:13,260
+What we're going to do is, draw
+a variable base with the box next to it.
+
+30
+00:02:13,260 --> 00:02:16,520
+And what happens in Python
+is 20 doesn't form that box,
+
+31
+00:02:16,520 --> 00:02:22,390
+instead 20 like any other value Python
+lives at a particular memory address.
+
+32
+00:02:22,390 --> 00:02:26,920
+So I'm going to pick
+an arbitrary memory address.
+
+33
+00:02:26,920 --> 00:02:30,920
+And I'm going to mark with an X just to
+make it different from other numbers.
+
+34
+00:02:30,920 --> 00:02:36,080
+Let's say that memory address x3,
+the value 20 appears.
+
+35
+00:02:36,080 --> 00:02:39,830
+The assignment statement
+states that x3 and
+
+36
+00:02:39,830 --> 00:02:43,890
+puts it in the box associated with base.
+
+37
+00:02:43,890 --> 00:02:48,920
+So base contains x3 and in some sense what
+
+38
+00:02:48,920 --> 00:02:55,080
+that means is that points to memory
+address x3 where the value 20 lives.
+
+39
+00:02:55,080 --> 00:02:58,580
+Similarly there is a variable height.
+
+40
+00:02:58,580 --> 00:03:02,000
+And Python keeps track of its
+value in that little box.
+
+41
+00:03:02,000 --> 00:03:04,070
+And its value is a memory address.
+
+42
+00:03:04,070 --> 00:03:06,640
+I'm going to pick x7.
+
+43
+00:03:06,640 --> 00:03:11,191
+These are arbitrary,
+Python is in charge of that choice, and so
+
+44
+00:03:11,191 --> 00:03:16,249
+I don't need to worry about exactly
+what the memory address is as long as
+
+45
+00:03:16,249 --> 00:03:21,588
+I know that this relationship between
+variables and their values exists.
+
+46
+00:03:24,995 --> 00:03:28,359
+Getting back to our programming problem,
+we can actually use base and
+
+47
+00:03:28,359 --> 00:03:29,930
+height in an expression.
+
+48
+00:03:29,930 --> 00:03:33,750
+So if I do base times height divided by 2,
+
+49
+00:03:33,750 --> 00:03:38,679
+I end up with the same result as if
+I had typed 20 times 12 divided by 2.
+
+50
+00:03:40,670 --> 00:03:47,081
+We can also assign the result of
+that last expression to a variable,
+
+51
+00:03:47,081 --> 00:03:52,034
+we'll call it area, and
+let's check it's value.
+
+52
+00:03:55,405 --> 00:03:59,820
+What we're going to do now is we're going
+to give base and height new values.
+
+53
+00:03:59,820 --> 00:04:02,120
+Using assignment statements again.
+
+54
+00:04:02,120 --> 00:04:07,090
+So let's assign the value
+of 2.5 to variable base.
+
+55
+00:04:08,580 --> 00:04:13,920
+What this does in my picture is
+it gets me a new value 2.5, and
+
+56
+00:04:13,920 --> 00:04:18,480
+a particular memory address perhaps, x4
+
+57
+00:04:20,030 --> 00:04:26,730
+and it replaces the assignment statement
+replaces this x3 with value x4.
+
+58
+00:04:26,730 --> 00:04:32,610
+So, the base no longer points to the 20,
+instead base is associated
+
+59
+00:04:32,610 --> 00:04:37,444
+with the 2.5.
+
+60
+00:04:39,820 --> 00:04:42,733
+Similarly, I can assign the height.
+
+61
+00:04:45,430 --> 00:04:47,813
+What this is going to do, of course, is.
+
+62
+00:04:51,633 --> 00:04:56,575
+Put 7 at a particular memory address,
+perhaps x1 and the assignment statement
+
+63
+00:04:56,575 --> 00:05:01,720
+is going to take that x1, and
+it's going to put it in variable height.
+
+64
+00:05:01,720 --> 00:05:05,699
+Making this connection so
+that height now refers to the 7.
+
+65
+00:05:10,491 --> 00:05:17,820
+Using Ctrl+P I am going to move back
+up to my old calculation of area.
+
+66
+00:05:17,820 --> 00:05:22,383
+And as we're just about to
+see this new area is 8.75,
+
+67
+00:05:22,383 --> 00:05:28,959
+which is indeed what you get if you take
+2.5, multiply it by 7 and divide by 2.
+
+68
+00:05:34,585 --> 00:05:38,450
+Every assignment statement has the form
+variable is assigned expression.
+
+69
+00:05:39,470 --> 00:05:41,980
+Here are the rules for
+executing an assignment statement.
+
+70
+00:05:41,980 --> 00:05:44,910
+And you should do your
+best to memorize these,
+
+71
+00:05:44,910 --> 00:05:48,690
+because this is going to come up over and
+over in the course.
+
+72
+00:05:48,690 --> 00:05:52,410
+Step one, evaluate the expression
+on the right hand side.
+
+73
+00:05:52,410 --> 00:05:55,680
+The value of the expression
+has a memory address.
+
+74
+00:05:55,680 --> 00:06:00,145
+Store that memory address in
+the variable on the left hand side.
+
+75
+00:06:03,943 --> 00:06:07,970
+Every programming language has a set
+of rules for what a legal name is.
+
+76
+00:06:07,970 --> 00:06:12,530
+In Python, variable names must start with
+a letter or the underscore character and
+
+77
+00:06:12,530 --> 00:06:15,720
+it can contain letters,
+numbers and underscores.
+
+78
+00:06:15,720 --> 00:06:16,500
+Both uppercase and
+
+79
+00:06:16,500 --> 00:06:22,120
+lowercase letters are allowed, badly
+formed variable names cause syntax errors.
+
+80
+00:06:22,120 --> 00:06:23,200
+So for example,
+
+81
+00:06:23,200 --> 00:06:27,300
+if we try to start a variable name
+with a number, we're told we can't.
+
+82
+00:06:29,400 --> 00:06:35,294
+Similarly, if we include a non-alphabet,
+non-underscore,
+
+83
+00:06:35,294 --> 00:06:41,734
+non-numeric character in the variable
+name, Python will complain.
+
+84
+00:06:43,650 --> 00:06:46,739
+Python is also case sensitive, so
+
+85
+00:06:46,739 --> 00:06:51,963
+seconds_in_minute is perfectly
+valid variable name.
+
+86
+00:06:55,046 --> 00:06:56,000
+But it's different.
+
+87
+00:06:59,110 --> 00:07:05,167
+From any other combination of
+uppercase and lowercase characters.
+
+88
+00:07:07,553 --> 00:07:11,787
+The first one, seconds in minute, is of
+course more readable than the second one
+
+89
+00:07:11,787 --> 00:07:15,398
+with those capital letters, and
+choosing good names is important,
+
+90
+00:07:15,398 --> 00:07:19,860
+because programs can easily be used,
+read, and improved on for years.
+
+91
+00:07:19,860 --> 00:07:22,100
+Every programming language
+has a set of conventions for
+
+92
+00:07:22,100 --> 00:07:26,220
+how to choose a name, much like web sites
+have a particular style and layout.
+
+93
+00:07:27,910 --> 00:07:31,133
+In Python most variable
+names use only lowercase
+
+94
+00:07:31,133 --> 00:07:36,017
+letters with underscores to separate
+words, we call this pothole case.

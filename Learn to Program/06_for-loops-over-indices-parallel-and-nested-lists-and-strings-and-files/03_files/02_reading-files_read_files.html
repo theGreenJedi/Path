@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Linux https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Read Files
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 10.1 What Kinds of Files Are There?
+                </li>
+                <li>Chapter 10.2 Opening a File
+                </li>
+                <li>Chapter 10.3 Techniques for Reading Files
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Reading Files
+        </h1>
+        <p>
+            Information stored in files can be accessed by a Python
+            program. To get access to the contents of a file, you
+            need to <em>open</em> the file in your program. When
+            you are done using a file, you should <em>close</em>
+            it.
+        </p>
+        <h3>
+            Opening and Closing A File
+        </h3>
+        <p>
+            Python has a built-in function <code>open</code> that
+            can open a file for reading.
+        </p>
+        <p>
+            The form of <code>open</code> is <code>open(filename,
+            mode)</code>, where mode is <code>'r'</code> (to open
+            for reading), <code>'w'</code> (to open for writing),
+            or <code>'a'</code> (to open for appending to what is
+            already in the file).
+        </p>
+        <p>
+            This opens a file called <code>In Flanders
+            Fields.txt</code> for reading:
+        </p>
+        <pre>
+flanders_file = open('In Flanders Fields.txt', 'r')
+</pre>
+        <p>
+            Note that if the file is saved in the same directory as
+            your program, you can simply write the name of the
+            file, as what was done in the above example. However,
+            if it is not saved in the same directory, you must
+            provide the path to it.
+        </p>
+        <p>
+            To close a file, you write
+            <code>flanders_file.close()</code> .
+        </p>
+        <p>
+            There are four standard ways to read from a file. Some
+            use these methods:
+        </p>
+        <p>
+            <code>readline()</code>: read and return the next line
+            from the file, including the newline character (if it
+            exists). Return the empty string if there are no more
+            lines in the file.
+        </p>
+        <p>
+            <code>readlines()</code>: read and return all lines in
+            a file in a list. The lines include the newline
+            character.
+        </p>
+        <p>
+            <code>read()</code>: read the whole file as a single
+            string.
+        </p>
+        <table style=
+        "border: 1px solid black; border-collapse:collapse;">
+            <tr style="background-color:AliceBlue">
+                <th style="border: 1px solid black;">
+                    Approach
+                </th>
+                <th style="border: 1px solid black;">
+                    Code
+                </th>
+                <th style="border: 1px solid black;">
+                    When to use it
+                </th>
+            </tr>
+            <tr>
+                <td style=
+                "border: 1px solid black; vertical-align:top">
+                    The <code>readline</code> approach
+                </td>
+                <td style="border: 1px solid black;">
+                    <pre>
+file = open(filename, 'r')
+
+# Read lines until we reach the
+# place in the file that we want.
+line = file.readline()
+while <em>we are not at the place we want</em>:
+    line = file.readline()
+
+# Now we have reached the section
+# of the file we want to process.
+
+line = file.readline()
+while <em>we are not at the end of the section</em>:
+    <em>process the line</em>
+    line = file.readline()
+
+flanders_file.close()
+</pre>
+                </td>
+                <td style="border: 1px solid black;">
+                    When you want to process only part of a file.
+                </td>
+            </tr>
+            <tr style="background-color:AliceBlue">
+                <td style=
+                "border: 1px solid black; vertical-align:top">
+                    The <code>for <em>line</em> in
+                    <em>file</em></code> approach
+                </td>
+                <td style="border: 1px solid black;">
+                    <pre>
+file = open(filename, 'r')
+
+for line in file:
+    <em>process the line</em>
+
+file.close()
+</pre>
+                </td>
+                <td style="border: 1px solid black;">
+                    When you want to process every line in the file
+                    one at a time.
+                </td>
+            </tr>
+            <tr>
+                <td style=
+                "border: 1px solid black; vertical-align:top">
+                    The <code>read</code> approach
+                </td>
+                <td style="border: 1px solid black;">
+                    <pre>
+file = open(filename, 'r')
+
+contents = file.read()
+
+<em>now process</em> contents
+
+file.close()
+</pre>
+                </td>
+                <td style="border: 1px solid black;">
+                    When you want to read the whole file at once
+                    and use it as a single string.
+                </td>
+            </tr>
+            <tr style="background-color:AliceBlue">
+                <td style=
+                "border: 1px solid black; vertical-align:top">
+                    The <code>readlines</code> approach
+                </td>
+                <td style="border: 1px solid black;">
+                    <pre>
+file = open(filename, 'r')
+
+# Get the contents as a list of strings.
+contents_list = file.readlines()
+
+<em>process</em> contents_list <em>using indexing to
+access particular lines from the file</em>
+
+file.close()
+</pre>
+                </td>
+                <td style="border: 1px solid black;">
+                    When you want to examine each line of a file by
+                    index.
+                </td>
+            </tr>
+        </table>
+        <h3>
+            Examples from the video
+        </h3>
+        <p>
+            Here are the code examples that appeared in the video.
+            All of them read the entire file into a string and
+            print that string.
+        </p>
+        <h4>
+            The <code>readline</code> approach
+        </h4>
+        <pre>
+flanders_file = open(flanders_filename, 'r')
+flanders_poem = ''
+
+line = flanders_file.readline()
+while line != "":
+    flanders_poem = flanders_poem + line
+    line = flanders_file.readline()
+
+print(flanders_poem)
+flanders_file.close()
+        
+</pre>
+        <h4>
+            The <code>for <em>line</em> in <em>file</em></code>
+            approach
+        </h4>
+        <pre>
+flanders_file = open(flanders_filename, 'r')
+flanders_poem = ''
+
+for line in flanders_file:
+    flanders_poem = flanders_poem + line
+
+print(flanders_poem)
+flanders_file.close()
+        
+</pre>
+        <h4>
+            The <code>read</code> approach
+        </h4>
+        <pre>
+flanders_file = open(flanders_filename, 'r')
+flanders_poem = flanders_file.read()
+
+print(flanders_poem)
+flanders_file.close()
+        
+</pre>
+        <h4>
+            The readlines approach
+        </h4>
+        <pre>
+flanders_file = open(flanders_filename, 'r')
+flanders_poem = ''
+
+flanders_list = flanders_file.readlines()
+for line in flanders_list:
+    flanders_poem = flanders_poem + line
+
+print(flanders_poem)
+flanders_file.close()
+        
+</pre>
+        <hr>
+        <center>
+            Jennifer Campbell &bull; Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

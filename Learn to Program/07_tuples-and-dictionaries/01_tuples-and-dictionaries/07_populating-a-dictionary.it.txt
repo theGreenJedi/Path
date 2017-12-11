@@ -1,0 +1,77 @@
+In questa lezione combineremo alcuni
+dei diversi argomenti che abbiamo visto.
+Andremo a leggere dei dati da un file e a salvarli in un dizionario.
+In questa lezione, andremo a lavorare con il file sulla sinistra del vostro schermo. Contiene i voti dell'assegnazione uno.
+Ci sono due colonne, uno per l'ID di uno studente, e una seconda per il voto che lo
+studente con quell'ID ha ottenuto nell'assegnazione.
+Se guardate la lezione opzionale della scorsa settimana, i dati vi appariranno famigliari
+e il compito sarà anch'esso un po' famigliare. Ma, questa volta lavoreremo con i
+dizionari invece che con le liste. Andremo a scrivere la funzione
+read grades. Ha un parametro, che è un file che
+è stato aperto per la lettura. Quel file inizierà con una testata che non 
+contiene nessuna linea vuota e poi una linea vuota e poi le righe del file con
+il numero degli studenti e il voto. Il compito che questa funzione completerà
+è leggere l'informazione del voto dal file e costruire un dizionario per ogni chiave
+come voto. E ogni valore nella lista degli ID degli
+studenti che hanno ricevuto quel voto. Ad esempio, per il voto 77.5 per quella chiave,
+ci sarà una lista contenente l'ID dello studente 0052 e l'ID dello studente 1311,
+dato che quei due studenti hanno ottenuto quel voto.
+Ci potrebbero essere anche altri studenti, più avanti nel file che appariranno nei
+valori della lista per la chiave 77.5 Per implementare questa funzione, abbiamo
+bisogno di portare a termine due compiti principali. Il primo è che dovete semplicemente
+saltare l'intestazione. Una volta che abbiamo saltato l'intestazione, possiamo
+andare a leggere i voti dal file e accumularli dentro il dizionario. Inizieremo saltando l'intestazione.
+Abbiamo quattro modi per leggere da un file e dato che stiamo solo processando parte
+del file, useremo l'approccio read line. Quindi inizieremo usando una riga come file e vogliamo continuare a leggere le righe della
+testata finché non raggiungiamo la riga vuota. Un riga vuota non è esattamente vuota.
+Contiene il carattere di nuova riga, quindi finché la riga non coincide con il carattere
+nuova riga, continueremo a leggere. Quello sarà parte della testata.
+Una volta che la testata è stata saltata, possiamo passare ad accumulare i voti in un
+dizionario. L'accumulatore che uso è, grade_to_ids
+è sarà inizialmente vuota. Dobbiamo leggere la riga successiva del file.
+Possiamo farlo usando read line e vogliamo continuare a leggere le righe del file finché
+non raggiungiamo la fine del file. Questo vorrebbe dire che quella riga sarà vuota.
+Quindi vogliamo continuare a leggere finché la riga non è uguale alla stringa vuota. Una volta che abbiamo letto una riga, dobbiamo 
+estrarre l'ID dello studente e il voto. L'ID dello studente è di quattro caratteri,
+quindi useremo quell'informazione. L'ID dello studente sarà una fetta di quella riga dall'inizio della riga fino al quarto
+carattere. Quindi questo ci darà una stringa contenente
+i quattro caratteri dell'ID dello studente. Il voto sarà ciò che viene dopo quello,
+ci saranno un paio di spazi prima del voto e c'è un carattere di nuova
+riga dopo il voto. Quindi quello che possiamo fare è prendere il resto 
+della riga, ed eliminare gli spazi vuoti che arrivano prima e dopo di lui.
+Quindi, il voto sarà una fetta dall'indice quattro fino alla fine della riga, ma
+verrà eliminato lo spazio bianco dal voto. Non abbiamo ancora finito di lavorare con
+il voto. Vogliamo che grade faccia riferimento ad un float,
+non ad una stringa e attualmente, fa riferimento ad una stringa che contiene un valore numerico.
+Andremo ad applicare float a quella stringa per ricevere indietro un numero a virgola mobile.
+Ora abbiamo il voto e l'ID di uno studente, dobbiamo aggiungerli nel
+dizionario. Ci sono due scenari da considerare.
+Uno è che grade non è ancora una chiave nel dizionario, e l'altra è il caso in cui
+il voto è già una chiave del dizionario.
+Considereremo questi casi separatamente. Inizieremo con il caso in cui il voto
+non è ancora una chiave del dizionario. Quindi, se grade non è in grade_to_ids.
+In questo caso, dobbiamo aggiungerlo per la prima volta.
+Possiamo accedere a grade_to_ids e impostare grade come una chiave assegnandogli il valore,
+che è l'ID di uno studente. L'ID dello studente sarà a sua volta una stringa,
+e il valore associato con una chiave per questo dizionario devono far parte di una lista
+di stringhe. Quindi dobbiamo inserire l'ID dello studente in una
+lista. Possiamo usare le parentesi quadrate per farlo. Il secondo caso è quello in cui il voto è già
+una chiave del dizionario. Quindi se quella condizione if è falsa, dobbiamo
+fare qualcosa di diverso, dato che grade è già una chiave.
+Dato che è già una chiave, c'è già un valore a lui associato, e quel
+valore è una lista di stringhe. Vogliamo aggiungere l'ID di uno studente alla
+lista di stringhe. Quindi dobbiamo accedere a quella lista di 
+stringhe e possiamo farlo guardando il dizionario e cercando il valore associato
+con la chiave grade Questo ci da una lista di stringhe e a quella
+possiamo aggiungere l'ID dello studente. Quindi, in questo caso, non abbiamo bisogno
+di creare una nuova lista, ma solo di aggiungere l'ID dello studente alla lista esistente.
+Una volta che abbiamo finito di aggiungere questo voto e l'ID dello studente al dizionario, possiamo
+passare alla prossima riga di quel file. Quindi, leggeremo un'altra riga.
+Una volta che tutte le righe del file sono state lette, la condizione del ciclo while diventerà
+falsa, e possiamo ritornare il dizionario grade to ids.
+Ora che abbiamo finito di scrivere questa funzione, possiamo farla girare.
+Per iniziare, devo aprire il file dei voti, che è salvato a questo lungo percorso
+e poi posso chiamare la funzione grades, passando quel file grade come parametro
+e che ritorna un dizionario. Possiamo vedere in questo dizionario che 77.5
+ha l'ID dello studente 0052 come uno dei suoi valori, insieme al 1311, e in realtà,
+molti altri studenti hanno ottenuto quel voto.

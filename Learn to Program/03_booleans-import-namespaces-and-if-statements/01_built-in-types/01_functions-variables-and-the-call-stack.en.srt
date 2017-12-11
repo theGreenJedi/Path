@@ -1,0 +1,369 @@
+1
+00:00:01,360 --> 00:00:03,432
+In this video, we're going to explore when
+
+2
+00:00:03,432 --> 00:00:05,616
+variables are created, how long they exist
+in
+
+3
+00:00:05,616 --> 00:00:08,192
+computer memory, and what happens when two
+variables
+
+4
+00:00:08,192 --> 00:00:10,580
+have the same name and two different
+functions.
+
+5
+00:00:13,020 --> 00:00:15,026
+Here we see functions convert to minutes
+
+6
+00:00:15,026 --> 00:00:18,910
+which we explored in the function
+visualization lecture.
+
+7
+00:00:18,910 --> 00:00:21,694
+We have added function covert to seconds,
+which coverts
+
+8
+00:00:21,694 --> 00:00:24,310
+a number of hours to an equivalent number
+of seconds.
+
+9
+00:00:25,480 --> 00:00:28,146
+Convert to seconds does its work by
+calling convert
+
+10
+00:00:28,146 --> 00:00:30,960
+to minutes and then multiplying the result
+by 60.
+
+11
+00:00:30,960 --> 00:00:33,330
+Let's use the visualizer to explore this.
+
+12
+00:00:35,190 --> 00:00:38,115
+We'll quickly step over the function
+definitions to
+
+13
+00:00:38,115 --> 00:00:41,534
+function objects are created.
+Convert to minutes for
+
+14
+00:00:41,534 --> 00:00:41,926
+[UNKNOWN]
+
+15
+00:00:41,926 --> 00:00:45,590
+one of these function objects, and convert
+seconds for first to the other.
+
+16
+00:00:46,960 --> 00:00:49,990
+Now we are about to execute an assignment
+statement.
+
+17
+00:00:49,990 --> 00:00:54,310
+The first step is to evaluate the right
+hand side which is a function call.
+
+18
+00:00:54,310 --> 00:00:58,570
+Python first evaluates the argument and
+creates an object for that value.
+
+19
+00:00:58,570 --> 00:01:00,793
+Next, ifound creates a frame on the call
+stack
+
+20
+00:01:00,793 --> 00:01:03,415
+and stores the memory address of two in
+the parameter,
+
+21
+00:01:03,415 --> 00:01:04,480
+[INAUDIBLE].
+
+22
+00:01:04,480 --> 00:01:10,830
+As a reminder, this area is called the
+call stack.
+
+23
+00:01:10,830 --> 00:01:14,140
+It is shown as an upside down stack of
+frames.
+
+24
+00:01:14,140 --> 00:01:18,340
+During execution of a function call a new
+stack frame is created.
+
+25
+00:01:18,340 --> 00:01:21,690
+Whenever a function exits, the current
+stack frame is erased.
+
+26
+00:01:21,690 --> 00:01:24,310
+And execution of the previous function
+continues.
+
+27
+00:01:25,960 --> 00:01:26,968
+The first line in the body
+
+28
+00:01:26,968 --> 00:01:30,190
+of convert_to_seconds is another
+assignment statement.
+
+29
+00:01:30,190 --> 00:01:32,580
+The right-hand side is a function call.
+
+30
+00:01:32,580 --> 00:01:35,532
+We follow the same rules as always,
+evaluate the
+
+31
+00:01:35,532 --> 00:01:40,140
+argument, num_hours, which contains the
+memory address of value two.
+
+32
+00:01:40,140 --> 00:01:43,444
+Then, a stack form is created for the call
+on convert_to_minutes,
+
+33
+00:01:43,444 --> 00:01:47,250
+and its parameter, mem_hours, contains the
+memory address of that value.
+
+34
+00:01:48,800 --> 00:01:51,750
+There are two variables called mem_hours.
+
+35
+00:01:51,750 --> 00:01:55,234
+One of them is in the frame for the call
+on convert_to_minutes, and one of them
+
+36
+00:01:55,234 --> 00:01:58,310
+is in the frame for the call on
+convert_to_seconds.
+
+37
+00:01:58,310 --> 00:02:01,848
+Python keeps these two running functions
+in separate areas of memory
+
+38
+00:02:01,848 --> 00:02:04,810
+so it does not get confused about which
+variable to use.
+
+39
+00:02:06,890 --> 00:02:09,330
+Back to tracing the execution.
+
+40
+00:02:09,330 --> 00:02:13,250
+The first line in the body of convert the
+minutes is an assignment state.
+
+41
+00:02:13,250 --> 00:02:17,210
+On the right hand side there's an
+expression numerous x 60.
+
+42
+00:02:17,210 --> 00:02:18,840
+Which num_hours do we use?
+
+43
+00:02:19,840 --> 00:02:22,434
+The answer is that python looks in the
+current stack frame.
+
+44
+00:02:22,434 --> 00:02:27,890
+Num_hours refers to two so num_hours type
+60 evaluates to 120.
+
+45
+00:02:27,890 --> 00:02:32,378
+The second step of the assignment is to
+assign 120
+
+46
+00:02:32,378 --> 00:02:35,320
+to variable minutes.
+
+47
+00:02:35,320 --> 00:02:40,100
+If minutes does not exist in the current
+stack frame Then it will be created.
+
+48
+00:02:43,530 --> 00:02:46,670
+Each stack frame contains its own set of
+variables.
+
+49
+00:02:46,670 --> 00:02:51,150
+In the frame for convert to minutes are
+variables, num hours, and minutes.
+
+50
+00:02:51,150 --> 00:02:54,860
+The frame for convert to seconds currently
+only has variable num hours.
+
+51
+00:02:54,860 --> 00:03:00,090
+Although, by the end of its execution, it
+will also have both minutes and seconds.
+
+52
+00:03:00,090 --> 00:03:01,516
+The stack frame for the main
+
+53
+00:03:01,516 --> 00:03:05,520
+program currently has convert_to_minutes
+and convert_to_seconds.
+
+54
+00:03:05,520 --> 00:03:08,640
+Although by the assignment statement on
+line 20 is done
+
+55
+00:03:08,640 --> 00:03:11,410
+executing, variable seconds will exist
+there.
+
+56
+00:03:13,090 --> 00:03:14,740
+We're now about to return the value
+
+57
+00:03:14,740 --> 00:03:17,780
+of variable minutes, and exit the current
+function.
+
+58
+00:03:17,780 --> 00:03:20,160
+But where do we return to?
+
+59
+00:03:20,160 --> 00:03:23,730
+The answer is always, to the next frame on
+the call stack.
+
+60
+00:03:23,730 --> 00:03:28,120
+The current stack frame is created during
+this call on convert_to_minutes.
+
+61
+00:03:28,120 --> 00:03:30,892
+When this call is complete, the current
+stack frame
+
+62
+00:03:30,892 --> 00:03:33,790
+is erased, and Python produces the return
+value as the
+
+63
+00:03:33,790 --> 00:03:36,010
+value of this function call expression.
+
+64
+00:03:37,670 --> 00:03:40,270
+This call is on the right-hand side of an
+assignment statement.
+
+65
+00:03:40,270 --> 00:03:43,966
+To complete the assignment variable
+minutes will be created, and
+
+66
+00:03:43,966 --> 00:03:47,280
+Python will store the memory address of
+the return value.
+
+67
+00:03:49,090 --> 00:03:50,090
+Let's watch that happen.
+
+68
+00:03:52,160 --> 00:03:53,900
+Notice that the frame for convert to
+
+69
+00:03:53,900 --> 00:03:56,394
+minutes has been erased, and variable
+minutes has
+
+70
+00:03:56,394 --> 00:03:58,192
+been created in the frame for convert
+
+71
+00:03:58,192 --> 00:04:02,420
+to seconds Here we have another assignment
+statement.
+
+72
+00:04:02,420 --> 00:04:08,500
+The right-hand side, minutes times 60,
+evaluates to whatever 120 times 60 is.
+
+73
+00:04:08,500 --> 00:04:10,757
+And a new variable seconds will be
+created,
+
+74
+00:04:10,757 --> 00:04:13,330
+and contain the memory address of that new
+value.
+
+75
+00:04:14,850 --> 00:04:17,137
+Next we return seconds.
+
+76
+00:04:17,137 --> 00:04:20,837
+Seconds refers to 7,200 so that's the
+value that gets
+
+77
+00:04:20,837 --> 00:04:24,328
+produced by the call on convert to seconds
+on line 20.
+
+78
+00:04:24,328 --> 00:04:30,944
+[BLANK_AUDIO]

@@ -1,0 +1,68 @@
+In questo video, andremo ad usare il
+Python Visualizer per esplorare come le chiamate alle funzioni vengono gestite nella memoria del computer.
+Abbiamo scritto una funzione chiamata convert to minutes, che prende in ingresso un numero di 
+ore e ritorna il numero equivalente di minuti.
+Ad esempio, se chiamiamo convert to minutes con argomento due, allora ci aspettiamo di ricevere
+120, dato che ci sono 120 minuti in due ore.
+Notate l'indentazione. Tutto il codice che fa parte di una funzione dovrebbe
+essere indentato, di solito di quattro spazi. Vediamo cosa accade quando facciamo girare 
+questo programma. Quando vediamo la definizione della funzione
+o quando Python la vede. Vediamo che una variabile chiamata convert
+to minute viene creata. Contiene l'indirizzo di memoria di un
+oggetto funzione. Quell'oggetto funzione contiene tutte le
+informazioni riguardanti la funzione, incluso tutto il codice che deve essere eseguito, il
+parametro, e la scatola string. Ora siamo in pausa sulla riga dieci che
+contiene un'istruzione di assegnazione. Notate che la variabile minutes two non è
+ancora stata creata, quello accadrà dopo che terminiamo l'esecuzione dell'istruzione
+di assegnazione. Quindi, per prima cosa dobbiamo valutare
+l'espressione sul lato destro del simbolo di uguale e quell'espressione
+è una chiamata ad una funzione. Una volta che la chiamata alla funzione l'ha
+restituito, ci ritornerà un valore e anche minutes two verrà creato e sarà salvato l'indirizzo di
+memoria del valore ritornato. Per eseguire questa chiamata alla funzione,
+viene valutato l'argomento. Quello creerà una scatola per il valore due
+a destra della linea puntinata. Inoltre, sarà creata una nuova regione di 
+memoria per tenere traccia di cosa accade mentre convert to minutes è in esecuzione.
+Qui c'è il valore due, e qui c'è la variabile numhours, che salva l'indirizzo di memoria
+del valore due. L'area della memoria del computer a destra 
+della riga puntinata viene chiamata heap e contiene tutti i valori che vengono creati
+durante l'esecuzione di un programma. L'area di memoria a sinistra della riga 
+puntinata viene chiamata stack, è detto stack perché è come una pila
+di piatti. Quando viene chiamata una funzione, viene
+creato un frame di stack in cima allo stack. E quando la funzione effettua il return il suo frame
+viene rimosso dalla cima dello stack, e il controllo ritorna alla chiamata di quella
+funzione. Ogni frame contiene delle variabili che sono
+specifiche di quella sezione del programma. Il mainframe contiene la variabili che sono
+create al di fuori delle nuove funzioni e le frame per le funzioni che contengono parametri
+e variabili locali. Una variabile locale è una qualsiasi variabile 
+che viene creata all'interno di una funzione come la variabile result.
+Ora che convert to minutes è stata chiamata, andremo avanti per 
+raggiungere il corpo. La linea sette contiene un'istruzione di 
+assegnazione. Valutiamo la parte destra, guardiamo
+quanto vale num hours ed è due. Due volte 60 è 120 quindi andremo a vedere
+il valore 120 che viene creato e vedremo una variabile result che viene creata all'interno
+della funzione convert to minutes. Il risultato per il primo due, 120.
+Num hours fa riferimento a due. Stiamo per eseguire un'istruzione di return,
+che andrà a valutare il risultato che è 120 e andrà a tenere l'indirizzo di
+memoria X3. Notate che stiamo per vedere quale sia
+il valore di ritorno. Non appena clicchiamo avanti ancora una volta,
+andremo ad uscire dalla funzione convert to minutes.
+Il controllo tornerà di nuovo dove eravamo all'interno del programma.
+Era proprio qui, finiremo questa chiamata a convert to minutes con
+argomento due e ci ritornerà l'indirizzo di memoria del valore 120.
+Questo dovrebbe creare una variabile minutes two proprio qui nel modulo mail e quella variabile
+minutes two dovrebbe contenere l'indirizzo di memoria x3.
+Infatti è quello che accade. Lo stack frame per la chiamata a convert to
+minutes non c'è più, non c'è più nella memoria del computer.
+Questo è ciò che accade quando si esce da una funzione. Andremo ad effettuare un'altra chiamata a
+convert to minutes. Questa volta passeremo un argomento
+tre, e salveremo i risultati verso il risultato in minutes three qui.
+Vediamo cosa accade. Valutiamo tre, che vien creata nell'heap. Num hours fa riferimento a quel valore ora.
+Nella prima chiamata faceva riferimento al valore due.
+Ora fa riferimento al valore tre dato che l'abbiamo chiamata con un argomento differente.
+Ora quando calcolo num hours per 60, guardo in cima allo stack qui e vedo che
+sto prendendo tre per 60 che è 180. E quindi otterremo una variabile
+result che fa riferimento a 180. Abbiamo sempre il valore 120 qui, dato che
+fuori, fuori da questa funzione, minutes two fa sempre riferimento a quello.
+Ora andremo a ritornare 180. Quello occuperà l'indirizzo di memoria x5 che
+sarà salvato in una nuova variabile minutes three, che sarà creata
+nel modulo principale.

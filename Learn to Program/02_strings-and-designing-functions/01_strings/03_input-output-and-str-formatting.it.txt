@@ -1,0 +1,118 @@
+Salve. In questa lezione, andremo a fare un po' di lavoro in più con la formattazione delle
+stringhe. Andremo anche a scrivere qualche programma
+interattivo dove mostreremo messaggi all'utente e otterremo degli input
+dall'utente. Iniziamo. Richiameremo la funzione integrata di Python
+print passando un singolo argomento alla chiamata
+della funzione. In questo caso passeremo la stringa Hello
+e Hello verrà mostrato sullo schermo. Notate che quando hello viene mostrato, hello viene mostrato senza gli apici. Gli apici servono solo una rappresentazione
+delle stringhe interna a Python, e non vengono viste dagli utenti. Richiamiamo nuovamente print,
+passando un'espressione matematica come argomento della funzione. In questo caso l'espressione è 3 più 7
+meno 3. E quell'espressione sarà prima
+valutata e poi stampata sullo schermo. Richiameremo print una terza volta passandole due argomenti questa volta, due stringhe:
+hello e there. E quando le stringhe vengono mostrate,
+sono mostrate con uno spazio fra loro per
+default. Quindi hello spazio there è ciò che viene stampato
+sullo schermo. Ora definiremo due funzioni. Definiremo una funzione in un file chiamata calc.pi che ho già creato 
+e salvato. Entrambe le funzioni calcoleranno il quadrato di
+un numero. Una funzione ritornerà quel risultato e
+l'altra lo stamperà. Iniziamo la definizione della funzione con
+la parola def e il nome della funzione è square
+return. Riceverà un singolo parametro. Sto chiamando questo num. E il lavoro di questa funzione è di ritornare
+num elevato alla seconda. La seconda funzione, il suo nome sarà
+square print. Avrà anche lei un solo parametro, num, e andrà a calcolare il quadrato di
+num Ma invece di ritornare quel valore, questa
+funzione lo stamperà. Fra un momento richiameremo queste due
+funzioni dalla shell. Vorrei che l'output della chiamata che stampa appaia diverso dal valore ritornato
+da square print. Per fare questo, sto aggiungendo una stringa alla lista degli
+argomenti per la chiamata della funzione print in modo da stampare il quadrato di num
+sia prima del numero al quadrato. Lo step successivo è far girare il modilo. Andremo nel menu Run e sceglieremo Run
+Module. E ora abbiamo accesso alle due funzioni
+nella shell. Andremo a chiamare queste due funzioni
+e salveremo il risultato delle chiamate a quelle
+funzioni in una varibile. Quindi la variabile answer_return riceverà il risultato della chiamata della funzione
+square_return. Passeremo un argomento a 
+square_return e prenderò il valore 4. Potrei prendere qualsiasi valore qui. Sto usando quattro solo come esempio
+di chiamata della funzione. E' ora di far girare la funzione. Quando la funzione viene eseguita, vogliamo
+vedere se qualcosa viene stampato. E noi pensiamo possiamo vedere che quando la eseguiamo, che
+otteniamo immediatamente il prompt, quindi non è stato stampato nulla
+sullo schermo da square return. Poi vogliamo verificare il valore della
+variabile answer e possiamo vedere che answer return ha
+il valore 16. Quindi, square return ha ritornato l'indirizzo
+di memoria di 16 e quell'indirizzo di memoria è stato salvato nella
+variabile answer return. Adesso è ora di chiamare la funzione square print,
+passeremo anche il valore quattro come argomento, potremmo
+aver preso qualunque cosa, e vediamo che questa volta
+qualcosa viene mostrato sullo schermo, il quadrato di num
+è 16. Poi, esamineremo il contenuto della
+variabile answer print e questa volta non vediamo
+nulla. Quando una funzione non ha un'istruzione
+di return che viene eseguita, Python ritorna None,
+e questo è quello che accade in questo caso. Dato che answer_return si riferisce ad un valore
+numerico, siamo in grado di usarlo in un'espressione matematica, come
+moltiplicarlo per cinque. Invece, answer_print non fa riferimento ad
+un valore numerico. Si ottiene un messaggio d'errore in questo caso
+perché fa riferimento al valore None, o solo di tipo None Type.
+Ora sappiano come usare la funzione di Python integrata print per
+mostrare messaggi agli utenti. Il prossimo step è usare la funzione integrata input per ottenere delle informazioni 
+dall'utente. Chiameremo input passando una singola stringa
+come argomento. In questo caso andremo a chiedere all'utente
+qual è il tuo nome? Quando la funzione esegue quella stringa
+sarà scritta sullo schermo, e aspetteremo che l'utente inserisca qualche input al prompt. Quindi nota che il cursore lampeggia
+aspettando che inseriamo qualcosa. Ora inserirò il mio nome come utente di
+questo programma, ho detto il mio nome è Jen, quando premo invio la
+funzione è, completa l'esecuzione. La stringa che ho digitato, Jen, viene ritornata 
+come stringa dalla funzione. Vediamo che ci sono apici singoli attorno ad essa che indicano che il valore è di
+tipo stringa. Chiameremo la funzione input un'altra
+volta, questa volta però salveremo il risultato ritornato da input in
+una variabile chiamata name. Quando eseguiamo la funzione l'utente digita il suo nome e quel valore viene
+ritornato come stringa, quindi l'indirizzo di memoria del
+valore viene salvato nella variabile name. E quando esaminiamo il contenuto di name,
+noi vedremo che fa riferimento alla stringa
+Jen. Ora useremo input per par inserire all'utente
+la sua locazione. La stringa, what is your location viene stampata e
+inserisco la mia posizione: Toronto. Quel valore viene restituito dalla funzione. Quindi location fa riferimento al valore Toronto
+e name fa riferimento a Jen. Usiamo ora le due variabili, name e location, per mostrare un messaggio
+all'utente. Andremo a richiamare print passando in ingresso
+tre parametri. Il primo è name, il secondo sarà una stringa che dice
+lives e il terzo è la posizione. Quindi il modo in cui interpretiamo questa chiamata
+per stampare è che prima usiamo il valore a cui name
+fa riferimento. collegandola con uno spazio fra lei e la
+stringa lives in. E poi useremo uno spazio e il valore a cui location fa riferimento, per stampare
+Jen lives in Toronto. Prima, ho accennato che name e
+location fanno entrambe riferimento ad una stringa. Infatti, tutti i valori, il tipo di tutti i valori ritornati da input, sarà di tipo
+stringa. Chiamiamo nuovamente input, chiedendo quante
+tazze di caffè ho bevuto oggi. Quando inserisco un valore come utente, inserisco 2, e questo valore viene ritornato dalla funzione input come
+stringa. Quindi possiamo vedere che num_coffee fa riferimento
+alla stringa 2, non all'intero. Avete già visto che possiamo usare gli apici singoli e doppi per rappresentare 
+le stringhe. E ora voglio mostrarvi un terzo tipo di formato
+di stringa, che è quella con tre apici. Le stringhe con tre apici sono in grado
+di contenere più righe. Per esempio, stampiamo una stringa con apici
+tripli con how sulla prima riga, are sulla seconda e you sulla
+terza riga. [MUSICA] Quindi sembra che questo, una parola per
+riga. Andrò ad usare la stessa stringa. Solo che invece di stamparla, la salverò
+in una variabile. E quando esaminiamo il contenuto della
+variabile s sembra diversa da come l'abbiamo 
+inserita. Prima di tutti non ha più gli
+apici tripli. Ha gli apici semplici. E secondo, nel punto in cui ho premuto invio
+oppure il tasto A capo, vediamo questo backslash n in 
+due posti. Questo carattere viene detto carattere
+newline, ed è un carattere speciale in Python. Il simbolo backslash è il carattere di
+escape. E questa combinazione di backslash e n
+è la sequenza escape per nuova riga Ci sono moltissimi altri caratteri speciali. Ad esempio, stampiamo i numeri tre
+quattro e cinque, separati da tab. Usiamo tre e poi per il simbolo tab,
+usiamo la sequenza escape backslash t, quattro,
+backslash t, e cinque. Quindi tre tab quattro tab cinque, ed ecco
+come appare. Oltre a newline e tab, ci sono moltissime altre sequenze di
+escape. Un paio di queste che ci saranno utili, sono
+la sequenza escape backslash, backslash . che usiamo, ogni volta che vogliamo stampare un singolo backslash , o includere un singolo
+backslash in una stringa. Questo perché il carattere backslash , è
+il carattere di escape e quando lo usiamo da solo, otteniamo un messaggio
+d'errore. Dato che ci si aspetta che qualcosa lo segua.
+Un'altra sequenza utile, è la sequenza per l'apice semplice, quando vogliamo
+includere un apice semplice all'interno della nostra stringa. Ad esempio, se vogliamo dire, don\'t,
+allora usiamo un backslash, apice, nel punto in cui si desidera inserire
+l'apice singolo e similmente, quando voglio usare il simbolo di citazione,
+simbolo di citazione doppio in una stringa, posso usare la sequenza
+escape, backslash, apice doppio. Quindi, immaginate di voler fare questo, dice,
+egli dice. [MUSICA] e uso backslash e apici doppi per indicare che mi piacerebbe usare gli apici doppi nella 
+stringa

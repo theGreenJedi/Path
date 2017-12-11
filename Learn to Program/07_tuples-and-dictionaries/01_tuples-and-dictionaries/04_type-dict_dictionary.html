@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Type dict
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi
+">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 11.3 Storing Data Using Dictionaries
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Type <code>dict</code>
+        </h1>
+        <h3>
+            Dictionary
+        </h3>
+        <p>
+            Another way to store collections of data is using Python's dictionary type: <code>dict</code>.
+        </p>
+        <p>
+            The general form of a dictionary is:
+        </p>
+        <pre>
+{key1: value1, key2: value2, ..., keyN: valueN}
+</pre>
+        <p>
+            Keys must be unique. Values may be duplicated. For example:
+        </p>
+        <pre>
+asn_to_grade = {'A1': 80, 'A2': 90, 'A3': 90}
+</pre>In the example above, the keys are unique: <code>'A1'</code>, <code>'A2'</code> and <code>'A3'</code>. The values are not unique: <code>80</code>, <code>90</code> and <code>90</code>.
+        <h3>
+            How To Modify Dictionaries
+        </h3>
+        <p>
+            Dictionaries are mutable: they can be modified. There are a series of operations and methods you can apply to dictionaries which are outlined below.
+        </p>
+        <table border="1px" cellpadding="5px">
+            <tr>
+                <td>
+                    Operation
+                </td>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Example
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>object in dict</code>
+                </td>
+                <td>
+                    Checks whether <code>object</code> is a key in <code>dict</code>.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; asn_to_grade = {'A1': 80, 'A2': 90, 'A3': 90}
+&gt;&gt;&gt; 'A1' in asn_to_grade
+True
+&gt;&gt;&gt; 80 in asn_to_grade
+False
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>len(dict)</code>
+                </td>
+                <td>
+                    Returns the number of keys in <code>dict</code>.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; asn_to_grade = {'A1': 80, 'A2': 90, 'A3': 90}
+&gt;&gt;&gt; len(asn_to_grade)
+3
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>del dict[key]</code>
+                </td>
+                <td>
+                    Removes a key and its associated value from <code>dict</code>.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; asn_to_grade = {'A1': 80, 'A2': 90, 'A3': 90}
+&gt;&gt;&gt; del asn_to_grade['A1']
+&gt;&gt;&gt; asn_to_grade
+{'A3': 90, 'A2': 90}
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>dict[key] = value</code>
+                </td>
+                <td>
+                    If <code>key</code> does not exist in <code>dict</code>, adds <code>key</code> and its associated <code>value</code> to <code>dict</code>.<br>
+                    If <code>key</code> exists in <code>dict</code>, updates <code>dict</code> by setting the value associated with <code>key</code> to <code>value</code>.
+                </td>
+                <td>
+                    <pre>
+&gt;&gt;&gt; asn_to_grade = {'A1' : 80, 'A2': 90, 'A3' : 90}
+&gt;&gt;&gt; asn_to_grade['A4'] = 70
+&gt;&gt;&gt; asn_to_grade
+{'A1': 80, 'A3': 90, 'A2': 90, 'A4': 70}
+</pre>
+                </td>
+            </tr>
+        </table>
+        <h3>
+            Accessing Information From Dictionaries
+        </h3>
+        <p>
+            Dictionaries are unordered. That is, the order the key-value pairs are added to the dictionary has no effect on the order in which they are accessed. For example:
+        </p>
+        <pre>
+&gt;&gt;&gt; asn_to_grade = {'A1': 80, 'A2': 70, 'A3': 90}
+&gt;&gt;&gt; for assignment in asn_to_grade:
+    print(assignment)
+
+
+A1
+A3
+A2
+</pre>
+        <p>
+            The for-loop above printed out the keys of the dictionary. It is also possible to print out the values:
+        </p>
+        <pre>
+&gt;&gt;&gt; asn_to_grade = {'A1': 80, 'A2': 70, 'A3': 90}
+&gt;&gt;&gt; for assignment in asn_to_grade:
+    print(asn_to_grade[assignment])
+
+
+80
+90
+70
+</pre>Finally, both the keys are values can be printed:
+        <pre>
+&gt;&gt;&gt; asn_to_grade = {'A1': 80, 'A2': 70, 'A3': 90}
+&gt;&gt;&gt; for assignment in asn_to_grade:
+    print(assignment, asn_to_grade[assignment])
+
+
+A1 80
+A3 90
+A2 70
+</pre>
+        <h3>
+            Empty Dictionaries
+        </h3>
+        <p>
+            A dictionary can be empty. For example:
+        </p>
+        <pre>
+d = {}
+</pre>
+        <h3>
+            Heterogeneous Dictionaries
+        </h3>
+        <p>
+            A dictionary can have keys of different types. For example, one key can be of type <code>int</code> and another of type <code>str</code>:
+        </p>
+        <pre>
+d = {'apple': 1, 3: 4}
+</pre>
+        <h3>
+            Immutable Keys
+        </h3>The keys of a dictionary must be immutable. Therefore, lists, dictionary and other mutable types cannot be used as keys. The following results in an error:
+        <pre>
+d[[1, 2]] = 'banana'
+</pre>Since lists are mutable, they cannot be keys. Instead, to use a sequence as a key, type <code>tuple</code> can be used:
+        <pre>
+d[(1, 2)] = 'banana'
+</pre>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

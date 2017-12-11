@@ -1,0 +1,303 @@
+1
+00:00:01,320 --> 00:00:06,663
+Abbiamo già usato i cicli sugli indici quando
+lavoriamo con una singola stringa o una singola
+
+2
+00:00:06,663 --> 00:00:09,590
+lista.
+In questa lezione, useremo cicli
+
+3
+00:00:09,590 --> 00:00:14,489
+sugli indici per accedere agli elementi alle
+posizioni corrispondenti di due differenti
+
+4
+00:00:14,489 --> 00:00:17,160
+liste.
+E i caratteri alle posizioni corrispondenti
+
+5
+00:00:17,160 --> 00:00:21,614
+di due liste diverse.
+Inizieremo con l'implementare questa
+
+6
+00:00:21,614 --> 00:00:25,940
+funzione chiamata some items.
+Prende in ingresso due parametri, list1 e list2,
+
+7
+00:00:26,194 --> 00:00:30,330
+che sono entrambe liste di numeri e
+ritorna una lista di numeri.
+
+8
+00:00:30,330 --> 00:00:35,924
+L'obiettivo della funzione è ritornare una nuova
+lista, nella quale ogni elemento è la somma degli
+
+9
+00:00:35,924 --> 00:00:40,696
+elementi alla posizione corrispondente delle
+list1 e list2.
+
+10
+00:00:40,700 --> 00:00:45,060
+Analizziamo cosa significa l'espressione
+posizione corrispondente.
+
+11
+00:00:45,060 --> 00:00:51,316
+Se list1 fa riferimento ad una lista di tre
+elementi, valore uno, due e tre.
+
+12
+00:00:51,316 --> 00:00:58,496
+E list2 fa riferimento a una lista di tre elementi,
+con valori uno, due, quattro e due, ci sono
+
+13
+00:00:58,496 --> 00:01:03,695
+tre elementi in ogni lista, con
+indici zero, uno e due.
+
+14
+00:01:03,700 --> 00:01:10,090
+Quando diciamo che vogliamo considerare gli
+elementi corrispondenti della list1 e list2,
+
+15
+00:01:10,391 --> 00:01:15,880
+stiamo facendo riferimento agli elementi o
+agli oggetti che sono allo stesso indice.
+
+16
+00:01:15,880 --> 00:01:21,594
+Ad esempio, all'indice zero, ci sono
+i valori uno e due, e quelli vengono sommati
+
+17
+00:01:21,594 --> 00:01:25,427
+per ottenere tre.
+All'indice uno ci sono i valori due e
+
+18
+00:01:25,427 --> 00:01:30,916
+quattro, che vengono sommati per ottenere sei.
+E all'indice due, ci sono i valori tre
+
+19
+00:01:30,916 --> 00:01:36,440
+e due, che vengono sommati per ottenere cinque.
+Questo crea una nuova lista che viene
+
+20
+00:01:36,440 --> 00:01:41,314
+ritornata da questa funzione.
+Ora scriviamo questo codice.
+
+21
+00:01:41,314 --> 00:01:47,178
+Ritorneremo una nuova lista, e quindi
+creeremo una variabile, sum list, che
+
+22
+00:01:47,178 --> 00:01:53,192
+farà inizialmente riferimento ad una lista vuota.
+Questa lista verrà costruita un elemento alla
+
+23
+00:01:53,192 --> 00:01:56,650
+volta, per tutto il corso della funzione.
+
+24
+00:01:56,650 --> 00:02:01,932
+Abbiamo visto, quando stavamo analizzando 
+l'esempio, che usavamo gli indici per
+
+25
+00:02:01,932 --> 00:02:08,256
+accedere agli elementi della list1 e list2.
+Quindi, vogliamo iterare sugli indici per
+
+26
+00:02:08,256 --> 00:02:13,985
+i in range delle lunghezza, e ora possiamo 
+passare una delle due liste come
+
+27
+00:02:13,985 --> 00:02:18,300
+argomento.
+List1 e list2 avranno la stessa lunghezza
+
+28
+00:02:18,300 --> 00:02:22,541
+in base alla precondizione della
+funzione mostrata sopra.
+
+29
+00:02:22,541 --> 00:02:28,670
+Quindi, posso prendere qualsiasi delle due
+liste, e sceglierò list1 per prendere la
+
+30
+00:02:28,670 --> 00:02:32,747
+lunghezza di list1.
+Questo significa che range genererà i valori
+
+31
+00:02:32,747 --> 00:02:36,430
+zero, uno fino alla lunghezza della lista
+esclusa.
+
+32
+00:02:36,430 --> 00:02:44,752
+Nel corpo del ciclo, vogliamo accedere alla
+list1 in posizione i, e alla list2 in posizione
+
+33
+00:02:44,752 --> 00:02:53,083
+i, e li sommiamo.
+Una volta che abbiamo calcolato la somma, vogliamo
+
+34
+00:02:53,083 --> 00:03:04,927
+aggiungerlo alla sum list.
+Può essere usato il metodo append per aggiungere
+
+35
+00:03:04,927 --> 00:03:12,707
+quella somma alla fine della sum list.
+Questa è l'unica cosa che dovete fare
+
+36
+00:03:12,707 --> 00:03:17,371
+all'interno del corpo del ciclo for.
+Una volta che il ciclo for ha finito l'esecuzione
+
+37
+00:03:17,371 --> 00:03:20,340
+ed esce, allora possiamo ritornare la sum
+list.
+
+38
+00:03:21,260 --> 00:03:28,266
+Ora, facciamo girare l'esempio di chiamata alla funzione.
+Prima dal modulo, e poi nella
+
+39
+00:03:28,266 --> 00:03:34,284
+shell, chiamiamo la funzione.
+E possiamo vedere che ritorna una lista con
+
+40
+00:03:34,284 --> 00:03:41,800
+i valori tre, sei e cinque.
+Implementiamo ancora un'altra funzione.
+
+41
+00:03:42,140 --> 00:03:47,188
+Il nome di questa funzione è count matches
+e coinvolge due stringhe.
+
+42
+00:03:47,188 --> 00:03:52,948
+Ha due parametri stringa, s1 e s2,
+e ritorna un interno, che è il numero di
+
+43
+00:03:52,948 --> 00:03:58,353
+posizioni nella stringa s1 che contiene lo
+stesso carattere alla posizione corrispondente
+
+44
+00:03:58,353 --> 00:04:04,831
+di s2.
+Ad esempio, per la stringa ape e la stringa
+
+45
+00:04:04,831 --> 00:04:12,593
+are, ci sono due caratteri comuni.
+All'indice zero, c'è una a.
+
+46
+00:04:12,593 --> 00:04:22,120
+E all'indice due, ci sono le e.
+Per le stringhe head e heard,
+
+47
+00:04:23,360 --> 00:04:31,958
+Ci sono anche due caratteri in comune,
+le h all'indice zero e le s all'indice
+
+48
+00:04:31,958 --> 00:04:36,244
+tre. 
+Il primo passo per implementare questa
+
+49
+00:04:36,244 --> 00:04:42,111
+funzione è creare un accumulatore, lo
+chiamerò num matches e inizialmente farà
+
+50
+00:04:42,111 --> 00:04:46,651
+riferimento al valore zero.
+Quella variabile accumulerà il numero
+
+51
+00:04:46,651 --> 00:04:51,382
+di corrispondenze.
+Abbiamo visto questo quando abbiamo analizzato l'esempio,
+
+52
+00:04:51,382 --> 00:04:55,804
+stavamo confrontando le stringhe di caratteri allo
+stesso indice.
+
+53
+00:04:55,804 --> 00:05:01,445
+Questo significa che scriveremo il nostro ciclo
+sopra gli indici delle stringhe.
+
+54
+00:05:01,445 --> 00:05:07,392
+Quindi usiamo range, iniziando dalla posizione
+zero, o valore zero, fino alla lunghezza della
+
+55
+00:05:07,392 --> 00:05:14,044
+stringa, s1.
+E quello che vorremmo fare è confrontare il
+
+56
+00:05:14,044 --> 00:05:20,580
+carattere della stringa ad s1.
+Quindi se s1 all'indice i è uguale alla stringa
+
+57
+00:05:20,580 --> 00:05:27,981
+s2 all'indice i, allora abbiamo trovato una corrispondenza.
+E possiamo incrementare quella variabile num
+
+58
+00:05:27,981 --> 00:05:35,135
+match, aggiungendole uno.
+Una volta che il ciclo è terminato e
+
+59
+00:05:35,135 --> 00:05:43,115
+siamo passati sopra ogni carattere delle
+stringhe, allora viene ritornato num matches.
+
+60
+00:05:43,115 --> 00:05:47,720
+.
+Facciamo girare l'esempio della chiamata alla funzione.
+
+61
+00:05:48,980 --> 00:05:58,680
+Per primo l'esempio ate e ape che ritorna due
+e poi l'esempio head e heard,

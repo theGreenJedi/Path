@@ -1,0 +1,416 @@
+1
+00:00:01,330 --> 00:00:04,270
+Python has hundreds and hundreds of
+functions.
+
+2
+00:00:04,270 --> 00:00:07,580
+Most are not immediately available as
+built ins.
+
+3
+00:00:07,580 --> 00:00:10,790
+Instead, the functions are saved into
+different modules, and you
+
+4
+00:00:10,790 --> 00:00:13,950
+need to tell Python that you'd like to use
+them.
+
+5
+00:00:13,950 --> 00:00:18,760
+Similarly, your own functions may also be
+saved into different modules.
+
+6
+00:00:18,760 --> 00:00:23,090
+We will demonstrate this using our
+triangle triangle.pie example.
+
+7
+00:00:23,090 --> 00:00:26,840
+We will define a second function to
+calculate the area of the triangle,
+
+8
+00:00:26,840 --> 00:00:30,630
+for when you know the lengths of the three
+sides but not the base and height.
+
+9
+00:00:30,630 --> 00:00:32,490
+This time, we'll calculate the area of the
+
+10
+00:00:32,490 --> 00:00:36,610
+triangle using Heron's formula, also known
+as Heroes formula.
+
+11
+00:00:37,880 --> 00:00:41,590
+The formula involves both the semi
+perimeter
+
+12
+00:00:41,590 --> 00:00:43,070
+and the lengths of the three sides.
+
+13
+00:00:44,100 --> 00:00:48,850
+S is the semi perimeter, s1, s2 and s3
+
+14
+00:00:48,850 --> 00:00:50,980
+are the lengths of the three sides of the
+triangle.
+
+15
+00:00:53,200 --> 00:00:57,420
+In order to write this code, we need to
+calculate the semi perimeter.
+
+16
+00:00:57,420 --> 00:01:00,450
+And we already have a function to do this,
+defined in triangle.pi.
+
+17
+00:01:00,450 --> 00:01:04,280
+And we also need a function to calculate
+the square root,
+
+18
+00:01:04,280 --> 00:01:07,970
+and such a function exists, but it isn't a
+built-in function.
+
+19
+00:01:07,970 --> 00:01:12,320
+Instead, it is defined in another file
+named math.pi.
+
+20
+00:01:12,320 --> 00:01:14,440
+Math is a module, as is triangle.
+
+21
+00:01:14,440 --> 00:01:18,510
+As its name implies, the math module
+contains
+
+22
+00:01:18,510 --> 00:01:21,010
+several functions related to math.
+
+23
+00:01:21,010 --> 00:01:26,260
+To see the listing of functions, let's
+import the module to gain access to it.
+
+24
+00:01:26,260 --> 00:01:29,750
+And then we'll call the built-in function
+dir r.
+
+25
+00:01:31,310 --> 00:01:36,370
+We see that a function named square root
+is amongst the available functions, and
+
+26
+00:01:36,370 --> 00:01:39,960
+we can now run help and square root to
+find out more about it.
+
+27
+00:01:39,960 --> 00:01:43,720
+When we ask for information about square
+root, we need to specify that
+
+28
+00:01:43,720 --> 00:01:45,710
+it is in the Math module.
+
+29
+00:01:45,710 --> 00:01:51,320
+We do that using the module name, followed
+by a dot, followed by the function name.
+
+30
+00:01:51,320 --> 00:01:53,760
+And this tells us information about the
+square root function.
+
+31
+00:01:55,040 --> 00:01:56,600
+Now, we're ready to write the function.
+
+32
+00:01:58,560 --> 00:02:02,580
+The first step is going to be to write a
+couple of example function calls.
+
+33
+00:02:02,580 --> 00:02:07,160
+And in order to do that, we need to decide
+on a meaningful function name.
+
+34
+00:02:07,160 --> 00:02:08,920
+I'll use the word area along
+
+35
+00:02:08,920 --> 00:02:11,529
+with hero to indicate that we're using
+hero's formula.
+
+36
+00:02:12,740 --> 00:02:16,300
+This function takes three sides, and in
+this
+
+37
+00:02:16,300 --> 00:02:18,395
+case, I would expect it to return 6.0.
+
+38
+00:02:18,395 --> 00:02:22,480
+We'll add a second function call, second
+example.
+
+39
+00:02:22,480 --> 00:02:25,740
+And in this case, using my calculator,
+I've figured
+
+40
+00:02:25,740 --> 00:02:30,323
+out, you should be getting back something
+like thi 27.731.
+
+41
+00:02:30,323 --> 00:02:34,210
+There will be a few more digits, and I
+don't know exactly
+
+42
+00:02:34,210 --> 00:02:37,100
+what, because Python uses floating point
+arithmetic.
+
+43
+00:02:37,100 --> 00:02:38,970
+But this will give me a sense of whether
+
+44
+00:02:38,970 --> 00:02:40,810
+the function that we're writing is correct
+or not.
+
+45
+00:02:44,060 --> 00:02:47,720
+Now, we'll provide the type contract for
+this function.
+
+46
+00:02:47,720 --> 00:02:52,760
+We'll pass in three numbers, either ints
+or floats, and it will return a float.
+
+47
+00:02:54,230 --> 00:02:58,070
+We're ready now to add the function
+header.
+
+48
+00:02:58,070 --> 00:03:01,780
+Beginning with the word def and the
+function name.
+
+49
+00:03:01,780 --> 00:03:06,740
+Along with the three parameters, which I'm
+going to name side1, side2, and side3.
+
+50
+00:03:09,110 --> 00:03:11,020
+And at this stage, we can add the
+description.
+
+51
+00:03:12,110 --> 00:03:15,580
+This function will return to the area for
+the triangle
+
+52
+00:03:15,580 --> 00:03:18,800
+with sides of length, side 1, side 2 and
+side 3.
+
+53
+00:03:18,800 --> 00:03:19,470
+With the
+
+54
+00:03:19,470 --> 00:03:19,470
+[INAUDIBLE]
+
+55
+00:03:19,470 --> 00:03:23,970
+string complete, we can now work on the
+body of the function.
+
+56
+00:03:23,970 --> 00:03:28,080
+The formula uses the semi-perimeter four
+different times.
+
+57
+00:03:28,080 --> 00:03:29,340
+And rather than call the semi-perimeter
+
+58
+00:03:29,340 --> 00:03:32,380
+four different times with the same
+arguments.
+
+59
+00:03:32,380 --> 00:03:35,980
+We can call it once and store the results
+in a variable.
+
+60
+00:03:35,980 --> 00:03:39,810
+I'll name that variable semi, and then
+we'll call semi-perimeter once
+
+61
+00:03:39,810 --> 00:03:44,950
+to calculate it, with side1, side2, and
+side 3 as arguments.
+
+62
+00:03:46,390 --> 00:03:48,402
+Then we can move on to calculating the
+area.
+
+63
+00:03:49,890 --> 00:03:51,840
+When we calculate the area, we'll use the
+square
+
+64
+00:03:51,840 --> 00:03:55,600
+root function and square root is in the
+Math module.
+
+65
+00:03:55,600 --> 00:04:00,210
+So to access square root, we need to
+import the Math module.
+
+66
+00:04:00,210 --> 00:04:01,670
+I'll do that at the top of my file.
+
+67
+00:04:03,650 --> 00:04:07,259
+And then I will be able to gain access to
+the square root function.
+
+68
+00:04:08,280 --> 00:04:08,280
+[UNKNOWN]
+
+69
+00:04:08,280 --> 00:04:10,130
+Calculate the area.
+
+70
+00:04:10,130 --> 00:04:14,179
+We'll call square root from that using the
+model name,
+
+71
+00:04:14,179 --> 00:04:17,692
+dot, and the function name, and we'll pass
+in the following.
+
+72
+00:04:17,692 --> 00:04:23,948
+Semi times semi minus side1 time
+
+73
+00:04:23,948 --> 00:04:30,270
+semi minus side2 times semi minus side3.
+
+74
+00:04:30,270 --> 00:04:32,550
+And that area is what this function will
+return.
+
+75
+00:04:34,550 --> 00:04:38,180
+Finally, we need to test the function by
+calling it a couple of times.
+
+76
+00:04:39,300 --> 00:04:43,280
+So, I'm going to re-size this window, and
+run the module.
+
+77
+00:04:43,280 --> 00:04:49,200
+Then we'll just re-size this, and will
+copy and paste these function calls.
+
+78
+00:04:49,200 --> 00:04:54,740
+So the first function call should result
+in 6.0 and it does.
+
+79
+00:04:54,740 --> 00:04:59,650
+And the second example should give us
+something like what we had
+
+80
+00:04:59,650 --> 00:05:03,512
+there, and in fact it's giving us more
+digits.
+
+81
+00:05:03,512 --> 00:05:06,480
+I'm going to use that result here instead.
+
+82
+00:05:06,480 --> 00:05:09,870
+So that's what we expect to get.
+
+83
+00:05:09,870 --> 00:05:12,510
+It's not only Python's modules that we can
+import.
+
+84
+00:05:12,510 --> 00:05:15,120
+We can also import a module that we wrote.
+
+85
+00:05:15,120 --> 00:05:17,020
+For example, if we wanted to use one of
+
+86
+00:05:17,020 --> 00:05:21,360
+our triangle functions in another module,
+we could import triangle.
+
+87
+00:05:21,360 --> 00:05:24,910
+The module being imported should be in the
+same directory as the module
+
+88
+00:05:24,910 --> 00:05:25,950
+that's importing it.

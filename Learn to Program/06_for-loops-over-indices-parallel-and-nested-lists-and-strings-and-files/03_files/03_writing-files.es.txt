@@ -1,0 +1,45 @@
+Es casi tan fácil como escribir en un
+archivo así como leer de uno Aquí vamos.
+Como recordatorio, función open o abrir toma el nombre del archivo, ya sea la ruta de acceso completa o solo
+el nombre del archivo es en el mismo directorio como el programa y uno de los modos,
+de lectura, escritura o dependencia.  Muy parecido a archivos que tienen los métodos de lectura, lectura de línea, lectura de líneas, ellos tienen método de escritura sí los hemos abierto a ellos para escribir.
+El método de escritura trabaja muy parecido como Python función para imprimir print excepto que no añade un carácter de nueva línea Vamos a escribir un poco de código
+que hace una copia de un archivo, pero pone la palabra copy como la primera línea en el nuevo
+archivo copiado. Empezaremos mostrándote como preguntar
+a un usuario por un archivo. El módulo tkinter tiene un sub-módulo llamado file dialog o diálogo de archivo Lo importamos de esta forma.
+Dentro de ese módulo, hay una función askopenfilename.
+Esto abrirá una diálogo emergente y nos permitirá seleccionar un archivo usando file chooser de
+tu sistema operativo Cuando llamamos askopenfilename, necesitaremos
+el cambiar a Python para poder seleccionar el archivo. Buscaremos, In Flanders Fields txt.. Cuando seleccionamos abrir, vemos que el
+dialogo de archivos desaparece. Pero nos quedamos con esta ventana con el
+título tk. Esta venatana no hace daño, y la
+vamos a ignorar, y volver al Python shell.
+Askopenfilename a retornado una string conteniendo la ruta de acceso completa al archivo que
+nosotros escojamos, de tal forma que podemos usar cuando nosotros llamamos la función open
+Llamaremos esto nuevamente, y recuerda, la string que fue retornada.
+Debemos cambiar a Python con el fin de seleccionar nuestro archivo.
+Ahora, del nombre del archivo, es la ruta a dicho archivo.
+Usaremos una nueva función en el mismo módulo de diálogo de archivo con el fin de escoger un
+archivo en el cual querramos escribir En lugar de askopenfilename, nosotros usaremos asksaveasfilename. Asksaveasfilename nos permite escoger un
+nuevo nombre de archivo para guardarlo, pero sí
+ escogemos un archivo que ya existe, nos preguntará para confirmar que realmente querramos reemplazar el archivo.
+Cambiaremos a Python. Y notarás que dice, save as o guardar como,
+con un lugar para tipear el nombre del nuevo archivo.
+Bien, no quiero guardarlo en 6readfiles porqué esta clase es 6writefiles Llamaremos esta, Fladers copy.txt.
+Y aquí es lo que escogimos. Abriremos ahora desde <u>filename in read
+mode.</u> Leer el contenido.
+Cerrar el archivo, Y comprobar para asegurar que tenemos lo que
+esperamos y en efecto, el contenido es una string conteniendo lo que estaba en el archivo incluyendo
+todos los cractéres de línea nueva. Siguiente, abriremos un archivo que queremos
+escribir que escriba la palabra copy y una eva línea.
+Recuerda, que debemos añadir cualquier nueva linéa que querramos porque al contrario de print, el método write no añade ningún extra carácter.
+Luego, escribiremos el contenido, Y finalmente, cierra el archivo.
+Nota que cuando abrimos el <u>file,</u> archivo que estamos copiando, usamos
+el carácter w cuando abrimos el archivo Y la información retornada del método write,
+a retornado un int. En particular, ha retornado el número de caracteres que han sido escritos Nota que esto muestra que el backslash \ entonces es tratado como  un carácter único porque c, o, p, y, y la nueva línea hacen
+cinco caracteres. Write retorna esta información así que puedes
+comprobar para asegurar que la longitud de tu string es el número de carateres que
+fueron escritos exitosamente Ahora verificaremos que el archivo fue
+escrito exitosamente Aquí esta nuestro Flanders copy.txt
+Cuando cliqueo dos veces en el, se abrirá y nosotros podremos ver que la palabra copy y el carácter de
+nueva línea aparece al inicio, como lo que habíamos escrito

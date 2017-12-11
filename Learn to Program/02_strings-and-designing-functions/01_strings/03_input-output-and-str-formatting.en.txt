@@ -1,0 +1,120 @@
+Hello. In this lecture, we're going to do some more work with strings and do some string
+formatting. We're also going to write some interactive
+programs where we display messages to the user and get input from
+the user. Let's get started. We'll call Python's built in function
+Print, passing a single argument to the function
+call. In this case we'll pass the string Hello,
+and Hello will be displayed to the screen. Notcie that when hello is displayed, hello is displayed, it's without the quotation
+marks. The quotes are only for Python's internal
+string representation, and are not seen by the
+user. Let's call print again, passing a
+mathematical expression as an argument to the function. In this case the expression is 3 plus 7
+minus 3. And that expression will first be
+evaluated and then printed to the screen. We'll call print a third time passing in two arguments this time, two strings;
+hello and there. And when the strings are displayed,
+they're displayed with a space between them by
+default. So hello space there is what's printed to
+the screen. Now, we will define two functions. We'll define the functions in a file called calc.pi that I've already created
+and saved. Both functions will calculate the square
+of a number. One function will return that result and
+the other will print it. We begin the function defiinition with the
+word def and the name of this function is square
+return. It will take a single parameter. I'm calling this num. And the job of this function is to return
+num to the power of two. The second function, its name will be
+square print. It also has a single parameter, num, and it's also going to calculate the square of
+num. But rather than returning that value, this
+function will print it. In a moment we will call these two
+functions from the shell. I'd like the output of the call to print to look different from the value returned
+by square print. To do this, I'm adding a string to the list of
+arguments for the print function call so that it will display the square of
+num is before the squared number. The next step is to run the module. We'll go to the Run menu and choose Run
+Module. And now we have access to the two
+functions in the shell. We're going to call these two functions
+and we will store the results of calling those
+functions in a variable. So the variable answer_return will get the result of calling the function
+square_return. We're going to pass an argument to
+square_return and I'm picking the value 4. I could pick any value here. What I'm using for just as an example
+function call. It's now time to run the function. When this function executes, we want to
+watch to see whether anything is printed. And we can see when we execute it now, that we
+immediately get the prompt, so nothing was printed to the
+screen by square return. Next we want to check the value of the
+answer term variable and we can see that answer return first to
+the value 16. So, square return returned the memory
+address of 16 and that memory address was stored in the
+answer return variable. Now its time to call the function square print, we'll
+also pass the value four as the argument, we could
+have picked anything, and we see this time that
+something is displayed to the screen, the square of num
+is 16. Next, we'll examine the contents of the
+variable answer print and this time we don't see
+anything. When a function does not have a return
+statement that gets executed, Python will return None,
+and that's what happens in this case. Because answer_return refers to a numeric
+value, we're able to use it in a mathematical expression, such as
+multiplying it by five. However, answer_print does not refer to a
+numeric value. Get an error message in this case because
+it refers to the value None, or just of type NoneType.
+We now know how to use Python's built-in function print to
+display messages to users. The next step is to use Python's built-in function input to get information from the
+user. We'll call input passing a single string
+as an argument to it. In this case we're going to ask the user
+what is your name? When the function executes that string
+will be printed to the screen, and we'll wait for the user to type some input at the prompt. So notice that the cursor is flashing
+waiting for us to type something. I will now type my name as the user of
+this program, I said my name is Jen, and when I hit Enter the
+function is, completes its execution. The string that I typed, Jen, is returned
+as a string from the function. We see that there are single quotes around it indicating that the value is type
+string. We'll call the function input a second
+time, this time though we will store the result returned by input in a
+variable named name. When we execute the function the user types their name and that value is
+returned as a string, so the memory address of the
+value is stored in the name variable. And when we examine the content of name,
+we will see that it refers to the string jet. We will now use input to prompt the user
+to enter their location. The string, what is your location gets printed and I
+enter my location; Toronto. That value is returned by the function. So location refers to the value Toronto
+and name refers to Jen. Let's now use the two variables, name and location, to display a message back to the
+user. We're going to call print passing in three
+arguments. The first is the name The second will be a string saying
+lives in and the third is the location. So the way we interpret this call to print
+is that first we use the value that name
+refers to. Joining that with a space between it and
+the string lives in. And next, we'll use a space and the value that location refers to, to print Jen
+lives in Toronto. Earlier, I mentioned that name and
+location both referred to strings. In fact, all values, the type of all values returned by input, will be type
+String. Let's cull Input again, asking how many
+cups of coffee I've had today. When I enter a value as a user, I enter 2, and this value is returned by the Input function as a
+string. So we can see that num_coffee refers to
+the string 2, not to the into. You've already seen that we can use single quotes and double quotes to
+represent strings. And now I want to show you a third string
+format, which is triple quote strings. Triple quote strings are able to span
+multiple lines. For example, let's print a triple coated
+string with how on the first line, are on the second, and you on
+the third line. [SOUND] . So that looks like this, one word per
+line. I'm going to use the same string. Only, rather than printing it, I'll store
+it in a variable. And when we examine the contents of
+variable s, it looks a lot different from what we
+inputted. First of all, it doesn't have triple
+quotes anymore. It has single quotes. And secondly, in the places where I had
+hit the Enter key or the Return key, we see this backslash n in two
+places. That character is called the newline
+characters, and it's a special character in Python. The backslash symbol is the escape
+character. And this combination of backslash and n is
+escape sequence newline. There are several other special characters. For example, let's print the numbers three
+four and five, separated by tabs. We use three, and then for the tab symbol,
+we use the escape sequence backslash t, four,
+backslash t, and five. So three tab four tab five, and that's
+what it looks like. In addition to newline and tab, there are several other escape
+sequences. A couple that will be useful for us, are
+the escape sequence, backslash, backslash. Which we use, whenever we want to print a single backslash, or include a single
+backslash in the string. That's because the backslash character, is
+the escape character and when we use it on it's own, we get an error
+message. As it expects, something follows it.
+Another useful sequence, is the single quote sequence, for when you want to
+include a single quote, within our string. For example, if I want to say, don\'t,
+then I use backslash, quote, for the place where I'd like the
+single quote to occur and similarly, when I want to use a quotation marks,
+double quotation marks in a string, I can use the escape
+sequence, backslash, double quotes. So, imagine that we want to do this, says,
+He says. [SOUND] and I use \ double quotes to indicate that
+I would like to use the double quote in the
+string

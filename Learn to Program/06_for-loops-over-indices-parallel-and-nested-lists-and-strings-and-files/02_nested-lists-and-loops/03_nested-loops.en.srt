@@ -1,0 +1,713 @@
+1
+00:00:01,280 --> 00:00:05,808
+The bodies of loops can contain any
+statement including other loops.
+
+2
+00:00:05,808 --> 00:00:11,937
+We'll explore that in this lecture.
+Here we have a loop inside another loop.
+
+3
+00:00:11,937 --> 00:00:17,709
+The outer loop has I range over the values
+ten, eleven, and twelve, And for each of
+
+4
+00:00:17,709 --> 00:00:22,873
+those iterations j is going to range
+through one, two, three, and four.
+
+5
+00:00:22,873 --> 00:00:27,809
+When I visualize this I starts off
+referring to the value of ten.
+
+6
+00:00:27,809 --> 00:00:33,732
+J doesn't exist yet because we have just
+reached the four loop the first time.
+
+7
+00:00:33,732 --> 00:00:38,364
+This inner four loop.
+J is going to take on the value one in the
+
+8
+00:00:38,364 --> 00:00:43,251
+first iteration.
+I still refers to ten, And we're about to
+
+9
+00:00:43,251 --> 00:00:47,090
+print IJ, so we should see ten and one up
+here.
+
+10
+00:00:47,090 --> 00:00:53,054
+Notice that as soon as we printed tenant
+one, we went back to line two, not to line
+
+11
+00:00:53,054 --> 00:00:56,473
+one.
+And the reason for that is we are going to
+
+12
+00:00:56,473 --> 00:01:02,510
+completely execute this inner four loop
+until J has gone through the numbers 1,2,3
+
+13
+00:01:02,510 --> 00:01:05,928
+and four.
+So that means that J will take on the
+
+14
+00:01:05,928 --> 00:01:11,443
+value two next.
+And we're going to print tenant two.
+
+15
+00:01:11,443 --> 00:01:17,272
+Now J is going to take on the value three,
+J now refers to three, and we'll print
+
+16
+00:01:17,272 --> 00:01:23,670
+tenant three and four. Now we are done
+with this inner four loop, and so we are
+
+17
+00:01:23,670 --> 00:01:30,185
+going to jump back out to line one because
+we have completed execution of the body of
+
+18
+00:01:30,185 --> 00:01:35,863
+the outer four loop.
+Now, I is going to take on the value
+
+19
+00:01:35,863 --> 00:01:40,539
+eleven.
+J is going to take on the values one, two,
+
+20
+00:01:40,539 --> 00:01:49,246
+three, and four again.
+And now we're done with this inner loop,
+
+21
+00:01:49,246 --> 00:01:55,494
+so we'll go back out to the outer one.
+Now, we will do the last iteration of the
+
+22
+00:01:55,494 --> 00:01:59,140
+outer loop.
+Alright, it starts off as twelve and J is
+
+23
+00:01:59,140 --> 00:02:03,416
+going to go through the numbers one two
+three and four again.
+
+24
+00:02:03,416 --> 00:02:10,301
+And I will not change again.
+Now we are done with this inner loop.
+
+25
+00:02:10,301 --> 00:02:13,561
+We go back and check the outer loop once
+more.
+
+26
+00:02:13,561 --> 00:02:20,565
+And we are done with the program.
+Here is another example.
+
+27
+00:02:20,565 --> 00:02:24,456
+We will keep track of a list of list of
+numbers.
+
+28
+00:02:25,104 --> 00:02:31,995
+These are going to represent grades so for
+perhaps a student will have received a 70
+
+29
+00:02:31,995 --> 00:02:37,750
+a 75 and an 80 in one class.
+And in another class that their are taking
+
+30
+00:02:37,750 --> 00:02:44,154
+they have a 70 an 80 a 90 and a 100.
+And in the third class they have an 80 and
+
+31
+00:02:44,154 --> 00:02:48,045
+a 100.
+And, they want to know what the average is
+
+32
+00:02:48,045 --> 00:02:53,251
+for each of these list of grades.
+We are going to write a function to
+
+33
+00:02:53,251 --> 00:02:57,776
+calculate this list of averages.
+But before we do that we're going to start
+
+34
+00:02:57,776 --> 00:03:01,396
+with a similar problem.
+Just find the average of a list of
+
+35
+00:03:01,396 --> 00:03:02,060
+numbers.
+So.
+
+36
+00:03:03,300 --> 00:03:10,393
+Let's say that in one class, maybe
+English, the list of grades that we're
+
+37
+00:03:10,393 --> 00:03:15,320
+going to calculate the average of is 70,
+75 and 80.
+
+38
+00:03:16,160 --> 00:03:23,796
+In order to calculate the average of this,
+we need to go and add up all the
+
+39
+00:03:23,796 --> 00:03:29,702
+assignment marks and then divide by how
+long that list is.
+
+40
+00:03:30,517 --> 00:03:39,070
+There's our accumulator, and then for each
+mark in English, what we're going to do is
+
+41
+00:03:39,070 --> 00:03:45,494
+we're going to add the mark to the total.
+Now,
+
+42
+00:03:45,494 --> 00:03:55,575
+The total is 225.
+We need to divide that by the length of
+
+43
+00:03:55,575 --> 00:03:59,326
+the list.
+Now that we know how to calculate the
+
+44
+00:03:59,326 --> 00:04:05,630
+average of a list of numbers, we would
+like to do this for each of the lists in
+
+45
+00:04:05,630 --> 00:04:11,854
+our grades list, and we would like to
+assemble the result into a list of these
+
+46
+00:04:11,854 --> 00:04:15,923
+averages.
+As we're developing this function, we need
+
+47
+00:04:15,923 --> 00:04:19,753
+examples.
+The first example we're going to do is
+
+48
+00:04:19,753 --> 00:04:25,180
+this list of grades that we have started
+with over on the left pane.
+
+49
+00:04:25,660 --> 00:04:32,818
+The average of 70, 75 and 80 is 75.
+The average of 70, 80, 90 and 100 is 85.
+
+50
+00:04:32,818 --> 00:04:38,386
+The average of 80 and 100 is 90.
+All of these are floats.
+
+51
+00:04:38,386 --> 00:04:43,060
+Let's make this window just a little bit
+wider.
+
+52
+00:04:44,680 --> 00:04:50,486
+The pipe contract is next.
+What we have is a list of list of numbers.
+
+53
+00:04:50,486 --> 00:04:55,865
+Now, these are all integers.
+But we can certainly imagine giving
+
+54
+00:04:55,865 --> 00:05:00,391
+floating point results for scores on a
+piece of work.
+
+55
+00:05:00,391 --> 00:05:04,319
+So,
+The pipe contract is going to be a list of
+
+56
+00:05:04,319 --> 00:05:08,674
+lists of number.
+And that is the, the type of the
+
+57
+00:05:08,674 --> 00:05:12,687
+parameter.
+And we are going to return a list of
+
+58
+00:05:12,687 --> 00:05:18,974
+float.
+We're fine with averages as the name, so
+
+59
+00:05:18,974 --> 00:05:27,427
+we leave it as such, and we're going to
+take in maybe grades as the name of our
+
+60
+00:05:27,427 --> 00:05:31,059
+parameter.
+.
+
+61
+00:05:31,059 --> 00:05:40,362
+In our description, this is going to
+return a new list in which each item is
+
+62
+00:05:40,362 --> 00:05:49,420
+the average of the grades in the inner
+list at the corresponding position.
+
+63
+00:05:49,860 --> 00:05:56,858
+.
+Of grades. Well, we know we're building a
+
+64
+00:05:56,858 --> 00:06:00,482
+new list.
+And we're going to be doing this nested
+
+65
+00:06:00,482 --> 00:06:04,845
+list by nested list.
+So we're going to be accumulating this
+
+66
+00:06:04,845 --> 00:06:08,395
+result.
+So we'll have maybe averages as the name
+
+67
+00:06:08,395 --> 00:06:13,498
+of our variable, which is going to be the
+list of averages at the end.
+
+68
+00:06:13,498 --> 00:06:17,640
+And when we're done, we know we want to
+return averages.
+
+69
+00:06:19,060 --> 00:06:27,538
+Well, we want to put into averages, the
+average of each of the lists inside our
+
+70
+00:06:27,538 --> 00:06:29,300
+grades lists.
+So,
+
+71
+00:06:31,900 --> 00:06:44,343
+For each of the sub lists in the grades
+list, what we want to do is calculate the
+
+72
+00:06:44,343 --> 00:06:50,376
+average of grades list and append it to
+averages.
+
+73
+00:06:50,376 --> 00:06:56,532
+Well, we have code that does that over on
+the left.
+
+74
+00:06:56,532 --> 00:07:02,072
+We know that we want start total off at
+zero.
+
+75
+00:07:02,072 --> 00:07:09,090
+And then for each mark in this particular
+sub grade list,
+
+76
+00:07:09,090 --> 00:07:18,314
+We would like to add it to total.
+And then once we are done with that,
+
+77
+00:07:18,314 --> 00:07:24,730
+We will summon up the values on the grades
+list.
+
+78
+00:07:24,730 --> 00:07:31,147
+We would like to append to averages the
+average.
+
+79
+00:07:31,147 --> 00:07:37,796
+And we're done.
+We will now call this in the visualizer
+
+80
+00:07:37,796 --> 00:07:43,457
+and watch it execute.
+We have added two statements at the bottom
+
+81
+00:07:43,457 --> 00:07:47,251
+of this file.
+The first one creates the, the nested
+
+82
+00:07:47,251 --> 00:07:50,329
+list,
+And the second one calls the averages
+
+83
+00:07:50,329 --> 00:07:53,980
+function passing in that list.
+Let's visualize this.
+
+84
+00:07:55,280 --> 00:08:01,917
+We first define our function.
+Next we are going to create about ten or
+
+85
+00:08:01,917 --> 00:08:07,158
+so objects.
+Grades refers to a list with three items
+
+86
+00:08:07,158 --> 00:08:11,215
+in it.
+The first one is a list with three items
+
+87
+00:08:11,215 --> 00:08:16,825
+in it, 70, 75 and 80.
+The second one refer this to a list that
+
+88
+00:08:16,825 --> 00:08:22,608
+has 70, 80, 90 and 100 in it.
+And the third item in index two in this
+
+89
+00:08:22,867 --> 00:08:27,960
+outer list refers to a list with two items
+in it, 80 and 90.
+
+90
+00:08:30,240 --> 00:08:41,292
+This first nested list contains 70,
+75, and 80.
+
+91
+00:08:41,292 --> 00:08:47,295
+The second nested list contains 70,80,90.
+Where is it?
+
+92
+00:08:47,635 --> 00:08:53,298
+90 and 100.
+This third nested list contains 80, and
+
+93
+00:08:53,298 --> 00:08:57,942
+100.
+So indeed, the list structure that is
+
+94
+00:08:57,942 --> 00:09:05,758
+built in computer memory is a
+representation of what we have done on
+
+95
+00:09:05,758 --> 00:09:11,761
+this line.
+Now we're going to pass that list into the
+
+96
+00:09:11,761 --> 00:09:17,441
+averages function.
+We'll get a stack frame for function
+
+97
+00:09:17,441 --> 00:09:22,680
+averages containing parameter grades
+referring to that same list.
+
+98
+00:09:23,580 --> 00:09:31,665
+We will start, here's a fun one, we will
+start a new variable averages that is an
+
+99
+00:09:31,665 --> 00:09:36,804
+empty list.
+Notice we also have a function averages
+
+100
+00:09:36,804 --> 00:09:40,363
+outside.
+They're obviously two very different
+
+101
+00:09:40,363 --> 00:09:44,239
+things.
+Next we're going to go through this lists
+
+102
+00:09:44,239 --> 00:09:49,539
+inside this outer list.
+So grades list is initially going to refer
+
+103
+00:09:49,539 --> 00:09:53,020
+to the list that index at memory address
+x3.
+
+104
+00:09:53,860 --> 00:09:59,977
+Then we're going to go through 70, 75, and
+80, add them up and divide by the length
+
+105
+00:09:59,977 --> 00:10:03,829
+of that list.
+We'll start total off at zero and for
+
+106
+00:10:03,829 --> 00:10:10,097
+every mark in the grades list, well mark
+is going to start off at 70 and the 75 and
+
+107
+00:10:10,097 --> 00:10:15,082
+then 80 each iteration here.
+We going to take that 70 here on line
+
+108
+00:10:15,082 --> 00:10:19,840
+seventeen and we're going to add it to the
+total which is zero.
+
+109
+00:10:19,840 --> 00:10:23,389
+So we'll get 70 of course 70 plus zero is
+zero.
+
+110
+00:10:23,389 --> 00:10:31,289
+We will assign that to total.
+On this next iteration, we're going to
+
+111
+00:10:31,289 --> 00:10:40,773
+have the marquee as 75.
+Now we're going to take 75 and add it to
+
+112
+00:10:40,773 --> 00:10:43,700
+70.
+70 plus 75 is 145.
+
+113
+00:10:43,700 --> 00:10:54,191
+And we will assign 145 to total.
+On the next iteration we're going to
+
+114
+00:10:54,191 --> 00:10:58,644
+assign the 80 to mark. That's what this
+four loop does.
+
+115
+00:10:58,644 --> 00:11:03,014
+Grabs the last item in the list, mark now
+refers to 80.
+
+116
+00:11:03,014 --> 00:11:09,941
+On line seventeen we have an assignment
+statement. The right hand side evaluates
+
+117
+00:11:09,941 --> 00:11:13,900
+to 145 plus 80 or 225.
+We'll assign 225 to total.
+
+118
+00:11:13,900 --> 00:11:19,435
+We have now gone through all the items in
+that first nested list.
+
+119
+00:11:19,435 --> 00:11:25,540
+We've done the 70, the 75, and the 80, and
+so this for loop will now terminate.
+
+120
+00:11:26,360 --> 00:11:33,372
+We will calculate 225 divided by the
+length of grades list, which is three, and
+
+121
+00:11:33,372 --> 00:11:38,080
+we will append the result to the averages
+list.
+
+122
+00:11:38,640 --> 00:11:43,525
+Now averages refers to a list containing
+75.
+
+123
+00:11:43,525 --> 00:11:51,075
+225 divided by three is 75.
+We have completed execution of the first
+
+124
+00:11:51,075 --> 00:11:58,958
+iteration of the outer four loop.
+We will now, on this next iteration, get
+
+125
+00:11:58,958 --> 00:12:07,396
+the second list, with four items in it.
+Grades list now refers to that second
+
+126
+00:12:07,396 --> 00:12:14,880
+list, with 70, 80, 90 and 100 in it.
+We will initialize total to zero,
+
+127
+00:12:14,880 --> 00:12:20,351
+Reset it, and then we're going to go
+through the four numbers,
+
+128
+00:12:20,351 --> 00:12:28,873
+Two, three, four and we're done.
+And now total is 340. The sum of 70 plus
+
+129
+00:12:28,873 --> 00:12:37,664
+80 plus 90 plus 100.
+We will append 340 divided by four to our
+
+130
+00:12:37,664 --> 00:12:42,693
+averages list.
+And that happens to be 85.
+
+131
+00:12:42,693 --> 00:12:48,368
+And now for the third nested list.
+Grades list.
+
+132
+00:12:48,368 --> 00:12:53,348
+The first of a list of two items in it,
+that's 80 and 100.
+
+133
+00:12:53,348 --> 00:12:59,550
+We'll reset total to zero.
+There's the 80 that we're dealing with.
+
+134
+00:12:59,550 --> 00:13:03,996
+Mark it now 80.
+We'll add 80 to zero, giving us 80, of
+
+135
+00:13:03,996 --> 00:13:06,680
+course.
+We will then get the 100.
+
+136
+00:13:07,160 --> 00:13:14,557
+And we'll add the two together.
+And then we will append 180 divided by the
+
+137
+00:13:14,557 --> 00:13:20,480
+length of that nested list, or two.
+So 180 divided by two is 90.
+
+138
+00:13:23,080 --> 00:13:28,775
+We have now gone through all three of our
+nested lists.
+
+139
+00:13:28,775 --> 00:13:33,849
+So this outer loop will terminate.
+And we're done.
+
+140
+00:13:33,849 --> 00:13:41,615
+We will now return, this averages list
+which as a reminder now contains 75, 85
+
+141
+00:13:41,615 --> 00:13:44,572
+and 90.
+We have to return that value.
+
+142
+00:13:44,572 --> 00:13:50,925
+We don't do anything with it in the main
+program, so when I click forward, the
+
+143
+00:13:50,925 --> 00:13:52,740
+program will just end.

@@ -1,0 +1,128 @@
+In an earlier lecture we used a four loop
+to loop over each character of a string. But what if we don't want to loop over
+every character? Perhaps we only want to loop until a vowel
+is encountered. Or maybe we don't want to work with
+strings at all. For example, we may want to repeat a task
+until the user enters a particular value. In this lecture, we're going to while
+loops to accomplish these tasks. To begin, let's recall the general form of
+an if statement. An if statement relies on a Boolean
+expression. When that expression is true, the body of
+the if statement is executed. If the Boolean expression is false, then
+the [UNKNOWN] proceeds on to statements that follow the
+if without executing it's body. A wild loop has a similar form to an if
+statement, it also relies on a Boolean expression, and if the Boolean expression
+is true the wild loop body is executed. However, unlike the if the while loop
+continues at this point and we'll check the Boolean
+expression another time. If the loop condition is true, then the
+body of the while loop is executed again and this process repeats
+until the loop condition becomes false. The first [SOUND] example of a while loop involves the
+variable num. Num gets the value 2. The while loop will [SOUND] continue to execute as long as num is <
+100. In the body [SOUND] of the loop num is doubled, and num is
+printed. With num having an initial value of 2,
+this Y loop executes 6 times. Num gets 4, 8, 16, 32, 64, and eventually
+128. At that point, the Y loop condition is
+false. Now if num gets value 10, and we rerun
+this Y loop. It only takes four iterations for the
+while loop condition to become false so by four iterations i mean the body of the loop executes 4
+times. At that point, none refers to the value
+160 and the loop condition is false. If at this point, we rerun this while
+loop. The body never is executed because the loop condition is false from the
+beginning. Now let's address a quick problem that i
+mentioned earlier, which is to loop over the characters of a string
+until a vowel is encountered. First let's recall how we looped over our
+string using a for loop. We used [SOUND] the for loop for character in string S and
+I'm just going to print that character. When we broke this loop The character has
+an initial value of the string S at position
+zero. Then S at one and so on until the end of
+the string was reached. When we write our Y loop, we need to
+specify those indices. So i will begin by creating a variable i
+that gets the value zero and that will represent the first index of the
+string over which we'd like to loop. Now the while loop condition, we want to
+keep going until we encounter a vowel so as
+long as string at position i is not a vowel, So,
+as long as it isn't in this set of lower case, a e i o u and upper case A E I O U. Then, we will enter into the body of the
+loop and execute the loop body. In the loop, i will print that character,
+the string of position i. Before we can exit the Y loop, we need to
+advance the index, so i's value must increase.
+I, we'll get the value of i plus one. So we move on to the next character of the
+string In this case the while loop executes once because the character asset zero is not a
+vowel. And then the second time the while loop
+condition is checked, asset one refers to e, which is a sub string of the
+string of vowels. So the wild loop condition is false and
+the wild loop exits. Let's execute [SOUND] the same loop.
+This time [SOUND] using the string there. Setting i to zero, once again, and now
+executing the wild loop. This time the wild loop body executes
+twice. Once for the consonant t, a second time
+for the consonant h, and then the e is encountered, so the y loop condition
+is false and the loop exits. What happens if there are only consonants
+in our [SOUND] string. In this case, the three consonants are
+displayed and then an index error occurs. S(0) refers to the 'x'.
+S(1) refers to the 'y' and s(2) refers to the
+"z". But the current value of i is 3 and asset
+3 is not a legal position, it's not a valid index
+for stirring s so an index error occurs. We haven't specified when to stop
+examining the characters of s. And so we've hit the end of the string and have tried to access an index that does
+not exist. To prevent this, we need to add a second
+part to our Boolean condition. Which is to check that i is within the
+bounds of the string. To make sure that it is less than the length.
+Let's do that now. We will give i the value zero. S gets string, x y z and now we execute
+the while loop. Before we execute it though, we're going
+to first check to make sure that i is less than the length
+of the string. And then we will check to see whether s and i is a sub string of
+the string of vowels. Notice that i put this condition first. We want to make sure that we check whether
+i is less than the length before trying to access
+the string at position i. Python performs lazy evaluation of it's
+and operation, so if the first operand to an and is false,
+the second is not evaluated. That means that if i is not less than the
+length of the string, then this N is found to be false at that point and we won't try
+to access the string at position i. So in this case the three constants are
+displayed and at that point the condition that i is less than the length
+of the string is false and the loop exits. [NOISE] Let's use some of the ideas from wide loop
+for another problem. The function up to vowel is what we will
+implement. [NOISE] It has one string parameter and it will
+return a string. It's going to return a sub string of the
+string parameter s from index zero, up to but not including
+the first vowel. So rather than print the way we did in our
+example in the shell, we want to accumulate the sub
+string and return it. We'll use the accumulator pattern that we
+saw earlier to solve this problem.
+The variable [SOUND] before a vowel will initially refer to an
+empty string and we will accumulate the string to be
+returned in before a vowel. The while loops that we are going to use is the exact same one that we wrote
+earlier. We want to loop over the characters of the
+string starting at position zero. Until we encounter a vowel or until the
+end the string is reached. Inside the body of the loop we want to [SOUND] add to the before vowel accumulator.
+So [SOUND] before vowel, we'll get its current value
+plus the character, which is the character position
+i of string s. We need to increment the index, adding one
+to it, so that we can then move on to the next
+character. And at the end of this function the
+substring is returned. So before a vowel will be returned. Let's run this code now. And call the function from Michelle. For the first function called we expect to
+get h. For the second one, where there's the
+argument, t h should be returned. And then the third example which contains
+only [SOUND] character, only consonants Not, no vowels
+the entire string [SOUND] is returned. Let's implement one more function. The name of this function is get answer
+and this function will prompt the user with a question asking for
+a yes or no answer. The user will provide the answer. And we want to continue prompting them
+until the answer they enter is yes or no. So it may take one try or ten, or a 100
+tries before the user enters the right answer. At the end we will return the answer that
+the user entered. Let's implement this function beginning
+with the prompts, so we want to call input Using the prompt past as an argument to get answer, and store the results in the answer
+variable. Let's specify the condition now under
+which we want to re-prompt the user. The body of the Y loop is going to be a
+duplicate of the code from above Which is a single, the single line of code
+that prompts the user with that question. We would like to keep prompting them when
+the answer is not the one we're looking for.
+So if answer is yes or no we would stop. And then the answer is not yes or no. The loop needs to continue. At the end of the while loop, once it has finished executing, the answer is
+returned. You may have noticed that i didn't include
+any example calls in the doc string. That's because the execution of this
+function it relies upon the user input, and i can't predict what the function will
+return because it depends on what the user
+entered. Let's run this though now to check to see it perform, that it's performing as
+expected. Calling, [SOUND] get answer, i'll pass a prompt, and we're prompted with a question.
+If i answer maybe, we're [SOUND] re-prompted say, [SOUND] it's late, we get prompted again. [SOUND] Not really, we get prompted again.
+Oops. Finally if i enter yes, yes is returned by
+the function. Let's try that one more time. This time, i'm going to answer no right
+away, so the body of the while loop won't be executed, because the while
+condition will be false the very first time that it is. No is returned by the function in this
+case.

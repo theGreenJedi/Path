@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Type bool: Booleans in Python
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 5.1 A Boolean Type
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Type <code>bool</code>: Booleans in Python
+        </h1>
+        <h3>
+            Boolean values
+        </h3>
+        <p>
+            The Python type <code>bool</code> has two values: <code>True</code> and <code>False</code>.
+        </p>
+        <h3>
+            Comparison operators
+        </h3>
+        <p>
+            The comparison operators take two values and produce a Boolean value.
+        </p>
+        <table cellpadding="5" border="1px">
+            <tr>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Operator
+                </td>
+                <td>
+                    Example
+                </td>
+                <td>
+                    Result of example
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    less than
+                </td>
+                <td>
+                    <code>&lt;</code>
+                </td>
+                <td>
+                    <code>3 &lt; 4</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    greater than
+                </td>
+                <td>
+                    <code>&gt;</code>
+                </td>
+                <td>
+                    <code>3 &gt; 4</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    equal to
+                </td>
+                <td>
+                    <code>==</code>
+                </td>
+                <td>
+                    <code>3 == 4</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    greater than or equal to
+                </td>
+                <td>
+                    <code>&gt;=</code>
+                </td>
+                <td>
+                    <code>3 &gt;= 4</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    less than or equal to
+                </td>
+                <td>
+                    <code>&lt;=</code>
+                </td>
+                <td>
+                    <code>3 &lt;= 4</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    not equal to
+                </td>
+                <td>
+                    <code>!=</code>
+                </td>
+                <td>
+                    <code>3 != 4</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+        </table><br>
+        <h3>
+            Logical operators
+        </h3>
+        <p>
+            There are also three logical operators that produce Boolean values: <code>and</code>, <code>or</code>, and <code>not</code>.
+        </p>
+        <table cellpadding="5" border="1px">
+            <tr>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Operator
+                </td>
+                <td>
+                    Example
+                </td>
+                <td>
+                    Result of example
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    not
+                </td>
+                <td>
+                    <code>not</code>
+                </td>
+                <td>
+                    <code>not (80 &gt;= 50)</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    and
+                </td>
+                <td>
+                    <code>and</code>
+                </td>
+                <td>
+                    <code>(80 &gt;= 50) and (70 &lt;= 50)</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    or
+                </td>
+                <td>
+                    <code>or</code>
+                </td>
+                <td>
+                    <code>(80 &gt;= 50) or (70 &lt;= 50)</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+        </table><br>
+        <h3>
+            The <code>and</code> Logic Table
+        </h3>
+        <p>
+            The <code>and</code> operator produces <code>True</code> if and only if both expressions are <code>True</code>.
+        </p>
+        <p>
+            As such, if the first operand is <code>False</code>, the second condition will not even be checked, because it is already known that the expression will produce <code>False</code>.
+        </p>
+        <table cellpadding="5" border="1px">
+            <tr>
+                <td>
+                    <code><em>expr1</em></code>
+                </td>
+                <td>
+                    <code><em>expr2</em></code>
+                </td>
+                <td>
+                    <code><em>expr1</em> and <em>expr2</em></code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>True</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>True</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>False</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>False</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+            </tr>
+        </table><br>
+        <h3>
+            The <code>or</code> Logic Table
+        </h3>
+        <p>
+            The <code>or</code> operator evaluates to <code>True</code> if and only if at least one operand is <code>True</code>.
+        </p>
+        <p>
+            As such, if the first operand is <code>True</code>, the second condition will not even be checked, because it is already known that the expression will produce <code>True</code>.
+        </p>
+        <table cellpadding="5" border="1px">
+            <tr>
+                <td>
+                    <code><em>expr1</em></code>
+                </td>
+                <td>
+                    <code><em>expr2</em></code>
+                </td>
+                <td>
+                    <code><em>expr1</em> or <em>expr2</em></code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>True</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>True</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>False</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>False</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+            </tr>
+        </table><br>
+        <h3>
+            The <code>not</code> Logic Table
+        </h3>
+        <p>
+            The <code>not</code> operator evaluates to <code>True</code> if and only if the operand is <code>False</code>.
+        </p>
+        <table cellpadding="5" border="1px">
+            <tr>
+                <td>
+                    <code><em>expr1</em></code>
+                </td>
+                <td>
+                    <code>not <em>expr1</em></code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>True</code>
+                </td>
+                <td>
+                    <code>False</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>False</code>
+                </td>
+                <td>
+                    <code>True</code>
+                </td>
+            </tr>
+        </table>
+        <p>
+            Double-negation can be simplified. For example, the expression <code>not not (4 == 5)</code> can be simplified to <code>4 == 5</code>.
+        </p>
+        <h3>
+            Order of Precedence for Logical Operators
+        </h3>
+        <p>
+            The order of precedence for logical operators is: <code>not</code>, <code>and</code>, then <code>or</code>. We can override precedence using parentheses and parentheses can also be added to make things easier to read and understand.
+        </p>
+        <p>
+            For example, the <code>not</code> operator is applied before the <code>or</code> operator in the following code:
+        </p>
+        <pre>
+&gt;&gt;&gt; grade = 80
+&gt;&gt;&gt; grade2 = 90
+&gt;&gt;&gt; not grade &gt;= 50 or grade2 &gt;= 50
+True
+</pre>
+        <p>
+            Parentheses can be added to make this clearer: <code>(not grade &gt;= 50) or (grade2 &gt;= 50)</code>
+        </p>
+        <p>
+            Alternatively, parentheses can be added to change the order of operations: <code>not ((grade &gt;= 50) or (grade2 &gt;= 50))</code>
+        </p>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

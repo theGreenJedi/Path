@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Structuring if Statements
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 5.3 Nested If Statements
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Structuring <code>if</code> Statements
+        </h1>
+        <h3>
+            <code>if-elif</code> vs. <code>if-if</code>
+        </h3>
+        <p>
+            An <code>if</code> statement with an <code>elif</code> clause is a single statement. The expressions are evaluated from top to bottom until one produces <code>True</code> or until there are no expressions left to evaluate. When an expression produces <code>True</code>, the body associated with it is executed and then the <code>if</code> statement exits. Any subsequent expressions are ignored. For example:
+        </p>
+        <pre>
+    grade1 = 70
+    grade2 = 80
+
+    if grade1 &gt;= 50:
+        print('You passed a course with grade: ', grade1)
+    elif grade2 &gt;= 50:
+        print('You passed a course with grade: ', grade2)
+    
+</pre>
+        <p>
+            The <code>if</code> statement condition (<code>grade1 &gt;= 50</code>) evaluates to <code>True</code>, so the body associated with the <code>if</code> is executed and then the <code>if</code> exits. The <code>elif</code> condition is not even evaluated in this case.
+        </p>
+        <p>
+            It is possible for <code>if</code> statements to appear one after another in a program. Although they are be adjacent to each other, they are completely independent of each other and it is possible for the body of each <code>if</code> to be executed. For example:
+        </p>
+        <pre>
+    grade1 = 70
+    grade2 = 80
+
+    if grade1 &gt;= 50:
+        print('You passed a course with grade: ', grade1)
+    if grade2 &gt;= 50:
+        print('You passed a course with grade: ', grade2)
+    
+</pre>In the program above, the condition associated with the first <code>if</code> statement (<code>grade1 &gt;= 50</code>) produces <code>True</code>, so the body associated with it is executed. The condition associated with the second <code>if</code> statement (<code>grade2 &gt;= 50</code>) also produces <code>True</code>, so the body associated with it is also executed.
+        <h3>
+            Nested <code>if</code>s
+        </h3>
+        <p>
+            It is possible to place an <code>if</code> statement within the body of another <code>if</code> statement. For example:
+        </p>
+        <pre>
+    if precipitation:
+        if temperature &gt; 0:
+            print('Bring your umbrella!')
+        else:
+            print('Wear your snow boots and winter coat!)   
+    
+</pre>
+        <p>
+            The statement above can be simplified by removing some of the nesting. The message <code>'Bring your umbrella!'</code> is printed only when both of the <code>if</code> statement conditions are <code>True</code>. The message <code>'Wear your snow boots and winter coat!'</code> is printed only when the outer <code>if</code> condition is <code>True</code>, but the inner <code>if</code> condition is <code>False</code>. The following is equivalent to the code above:
+        </p>
+        <pre>
+if precipitation and temperature &gt; 0:
+    print('Bring your umbrella')
+elif precipitation:
+    print('Wear your snow boots and winter coat!')
+</pre>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

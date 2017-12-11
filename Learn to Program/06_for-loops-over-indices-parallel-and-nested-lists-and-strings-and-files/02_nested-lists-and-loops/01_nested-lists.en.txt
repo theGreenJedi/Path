@@ -1,0 +1,44 @@
+Lists can contain items of any type.
+In this lecture, we're going to work with lists that have items of type lists.
+These lists are known as nested, with one list inside another.
+Our first example of a nested list is one in which each element has the name of an
+assignment. For example, assignment one and a grade
+for that assignment. So, each item will be a two-item list.
+The length of list grades is three. It has three items.
+Each of the items is, itself, a two-element list.
+We can see this using indexing. Grades at index zero is the list with the
+string assignment one, and int 80. Grades at index one is assignment two and
+90. And grades at index two is assignment
+three and 70. The length of each of these items, also
+known as interlists is two. And we can see that by passing the list at
+index zero as an argument to the length function.
+Another way to access the items of grades is to use a for loop, just like we would
+if the list had strings or ints as elements.
+So, we can say, for each item in grades, print that item.
+And the item is, that is printed will be a two-element list.
+Since each item of grades is a list, It can also be indexed.
+So, the list at index zero gives a two element list with string assignment one
+and grade 80, and we can use a second index to access each part.
+So, at grades at index zero and index zero is assignment one, and grades at index
+zero and index one is 80. Similarly, for the element of grades at
+index one, we can access the first value using index zero, so grades at one, zero
+gives assignment two, and grades at one, one is 90.
+Grades at two and zero is assignment three, and grades at two and one is 70.
+Next, we'll write a function to calculate the average of grades given a list of this
+form. The function is named calculate average,
+and notice the type contract. We've got one parameter, which is a list
+of list of stir number. That describes the type of lists we've
+been working with. This function will return a flow, which is
+the average of the grades in the given list.
+To calculate the average, we'll sum the grades and then divide by the number of
+grades. The variable total will be used to keep
+track of the sum of the grades, and it will have an initial value of zero.
+We're going to pass over the list of assignment grades for item in assignment
+grades, And each item is a two-element list with a
+string and an int. So, to the total, we want to add the
+current value of total plus the list item at index one, which is the grade.
+Once the for loop has executed, we will divide the total by the number of grades,
+And that number of grades is equal to the length of the list assignment grades,
+And then we can return that average. Let's run the example call.
+First, run the module, and then, we'll execute calculate average, confirming that
+it does return 85.0.

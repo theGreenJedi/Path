@@ -1,0 +1,290 @@
+1
+00:00:01,490 --> 00:00:05,040
+In our programs we often work
+with collections of data.
+
+2
+00:00:05,040 --> 00:00:09,690
+For example, we may work with student
+grades, or with the titles of books.
+
+3
+00:00:09,690 --> 00:00:13,410
+In this lecture I will introduce
+you to the Python list type.
+
+4
+00:00:13,410 --> 00:00:15,280
+And we will explore some
+of the functions and
+
+5
+00:00:15,280 --> 00:00:17,499
+operations, that can be applied to lists.
+
+6
+00:00:19,180 --> 00:00:24,250
+To begin, I'm going to create a variable
+grades that refers to a three element
+
+7
+00:00:24,250 --> 00:00:25,410
+list of integers.
+
+8
+00:00:26,870 --> 00:00:31,690
+The notation for our list, is an opening
+square bracket, comma separated values,
+
+9
+00:00:31,690 --> 00:00:32,910
+and a closing square bracket.
+
+10
+00:00:34,200 --> 00:00:39,120
+Grades is a three element list, or
+we say that grades has three items.
+
+11
+00:00:39,120 --> 00:00:41,680
+The first item is at index zero.
+
+12
+00:00:41,680 --> 00:00:45,870
+And grades at index zero
+refers to the int 80.
+
+13
+00:00:45,870 --> 00:00:49,664
+Grades at 1 refers to int 90, and
+
+14
+00:00:49,664 --> 00:00:53,720
+grades at index 2 refers to int 70.
+
+15
+00:00:53,720 --> 00:00:57,643
+We can also take slices of a list
+like we can with a string.
+
+16
+00:00:57,643 --> 00:01:02,236
+Beginning with a start index,
+in this case I'll
+
+17
+00:01:02,236 --> 00:01:07,289
+start at index 1, and
+an ending index going up to 2.
+
+18
+00:01:07,289 --> 00:01:11,830
+This gives me a slice of the list,
+which contains a single int, 90.
+
+19
+00:01:11,830 --> 00:01:15,436
+I go from grades at 0, up to 2,
+
+20
+00:01:15,436 --> 00:01:22,060
+then a 2 element slice
+is given with 80 and 90.
+
+21
+00:01:22,060 --> 00:01:25,400
+So the same rules for
+slicing apply to lists as for strings.
+
+22
+00:01:27,150 --> 00:01:31,720
+The in operator that we used for
+strings, can also be used with lists.
+
+23
+00:01:31,720 --> 00:01:37,460
+So this asks whether 80 is an element
+of the list grades, which it is.
+
+24
+00:01:39,000 --> 00:01:41,100
+The expression 60 in grades,
+
+25
+00:01:41,100 --> 00:01:45,370
+evaluates to false since 60 is not
+an element of the list grades.
+
+26
+00:01:47,090 --> 00:01:51,010
+Some of Python's built in functions
+that we used earlier with other types,
+
+27
+00:01:51,010 --> 00:01:54,070
+can also be applied to type list.
+
+28
+00:01:54,070 --> 00:01:56,776
+For example,
+we can find the length of a list,
+
+29
+00:01:56,776 --> 00:02:02,020
+in this case 3,
+because the list has three elements.
+
+30
+00:02:02,020 --> 00:02:04,700
+We can also find the smallest
+value in a list,
+
+31
+00:02:04,700 --> 00:02:07,440
+by passing the list as
+an argument to the function min.
+
+32
+00:02:08,470 --> 00:02:12,550
+And when we call the function max on
+a list, it returns the largest element.
+
+33
+00:02:13,910 --> 00:02:18,980
+There's another function called sum,
+that will sum the elements of the list.
+
+34
+00:02:18,980 --> 00:02:23,010
+So this case it sums 80,
+90 and 70, returning 240.
+
+35
+00:02:23,010 --> 00:02:29,000
+Grades is a list of ints, but
+we can have lists of other types as well.
+
+36
+00:02:29,000 --> 00:02:33,297
+This subjects variable will
+refer to a list of strings.
+
+37
+00:02:39,275 --> 00:02:42,459
+Some of the same functions that
+we applied to the list of ints,
+
+38
+00:02:42,459 --> 00:02:45,150
+can also be applied to
+the list of strings.
+
+39
+00:02:45,150 --> 00:02:48,220
+For example we can find out its length,
+and
+
+40
+00:02:48,220 --> 00:02:51,850
+we can find out the minimum
+value in the list.
+
+41
+00:02:51,850 --> 00:02:55,690
+For strings,
+dictionary ordering is what is compared.
+
+42
+00:02:55,690 --> 00:03:00,800
+And the minimum in this case is bio,
+the max
+
+43
+00:03:02,910 --> 00:03:06,880
+is going to be that comes
+latest in the alphabet, or
+
+44
+00:03:06,880 --> 00:03:08,840
+latest in the dictionary, which is math.
+
+45
+00:03:10,380 --> 00:03:14,670
+And the sum function can
+not be applied to strings.
+
+46
+00:03:14,670 --> 00:03:18,507
+A type error occurs when someone's
+applied to the list of strings.
+
+47
+00:03:20,792 --> 00:03:24,160
+Data of different types may be
+contained in the same list.
+
+48
+00:03:24,160 --> 00:03:28,130
+For example,
+let's make a street_address list.
+
+49
+00:03:28,130 --> 00:03:34,170
+It will have an int for the street number,
+and a string for the name of the street.
+
+50
+00:03:34,170 --> 00:03:36,900
+So we've got an int and
+a string in the same list.
+
+51
+00:03:37,990 --> 00:03:42,030
+The final thing to show you in this
+introduction to lists, is the for
+
+52
+00:03:42,030 --> 00:03:43,180
+loop over lists.
+
+53
+00:03:44,330 --> 00:03:48,080
+So let's look at our grade example.
+
+54
+00:03:48,080 --> 00:03:53,770
+So each grade in the grade's list,
+we will loop over it and display it.
+
+55
+00:03:55,540 --> 00:03:57,150
+Grade is a variable name.
+
+56
+00:03:57,150 --> 00:04:00,510
+I could have used something like item or
+element here.
+
+57
+00:04:01,620 --> 00:04:04,010
+So we'll print those three grades.
+
+58
+00:04:04,010 --> 00:04:08,230
+Similarly, we might loop over subjects,
+and
+
+59
+00:04:08,230 --> 00:04:13,370
+I'm changing the variable name just to
+emphasize that that is just a variable,
+
+60
+00:04:13,370 --> 00:04:17,640
+referring to each element of the list
+in turn, starting from index zero,
+
+61
+00:04:17,640 --> 00:04:21,170
+working to the end of the list,
+printing the subjects.

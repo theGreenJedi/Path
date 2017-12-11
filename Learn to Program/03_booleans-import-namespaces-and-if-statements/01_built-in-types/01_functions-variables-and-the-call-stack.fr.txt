@@ -1,0 +1,26 @@
+Dans cette vidéo nous allons voir à quel moment les variables sont crées, combien de temps elles existent dans la mémoire de la machine et ce qui arrive
+quand deux variables ont le même nom et des fonctions différentes. Voici la fonction concert_to_minutes que nous avons détaillée dans le cours sur la visualisation des fonctions Nous avons ajouté la fonction convert_to_seconds dont l'objet est de convertir un nombre d'heures en secondes. convert_to_seconds fonctionne en appelant convert_to_minutes puis en multipliant le résultat par 60. Utilisons le visualiseur pour l'explorer. Passons rapidement sur la définition de la fonction deux objets fonction sont créés qu'après une stimulation mécanique et convert_to_seconds fait référence à l'autre. Nous sommes maintenant sur le point
+de réaliser une assignation La première étape consiste à évaluer la partie droite qui est un appel de fonction Python évalue l'argument et crée un objet pour cette valeur. Ensuite Python crée un élément dans la pile des appels et enregistre l'adresse mémoire de "2" dans les paramètres [INAUDIBLE] Pour mémoire, cet endroit s'appelle la pile des appels Elle est représentée par une pile inversée d'éléments Lors de l'appel de fonction
+un nouvel élément est ajouté dans la pile Et à chaque sortie de fonction, l'élément en cours dans la pile est supprimé et l'exécution de la fonction précédente reprend. La première ligne du corps de convert_to_seconds est une autre assignation. La partie droite est un appel de fonction nous suivons la même règle que d'habitude, évaluer l'argument num_hours, qui contient 
+l'adresse mémoire de "2" Un élément est alors créé dans la pile
+à l'appel de convert_to_minutes et son paramètre mem_hours contient
+l'adresse mémoire de cette valeur. Il y a deux variables appelées mem_hours L'une d'entre elles est contenue dans l'appel
+à convert_to_minutes et l'autre est contenue dans l'appel
+à convert_to_seconds. Python conserve ces deux fonctions 
+en cours dans deux régions séparées de la mémoire il ne confond donc pas les variable à utiliser. De retour au suivi de léxecution la première ligne de convert_to_minutes
+est une assignation A droite de l'expression nous avons
+num_hours *  60 Quel num_hours devons nous utiliser ? La réponse est que Python 
+regarde dans la pile en cours num_hours fait référence à "2", num_hours fois 60
+est évalué à 120. La deuxième étape de l'assignation est
+d'assigner 120 à la variable minutes. Si minutes n'existe pas dans la pile actuelle,
+elle sera créée Chaque pile contient son propre lot de variables Celle de convert_to_minutes contient
+num_hours et minutes Et celle de convert_to_seconds contient
+seulement num_hours pour le moment Cependant, à la fin de l'exécution,
+il contiendra également minutes et secondes. La pile pour le programme principal contient actuellement convert_to_minutes
+et convert_to_seconds. Cependant, après l'assignation de la ligne 20 la variable seconds y existera. Nous allons à présent renvoyer la valeur de la variable minutes et sortir de la fonction en cours Mais où allons nous retourner ? La réponse est toujours l'élément suivant de la pile d'appel. La pile actuelle est créée lors
+de l'appel à convert_to_minutes Lorsque l'appel se termine, la pile actuelle est supprimée et Python renvoie la valeur de retour en tant que valeur d'initialisation de la fonction. Cet appel es sur la partie droite d'une assignation Pour finir la variable d'assignation minutes
+va être créée et Python va enregistrer 
+l'adresse en mémoire de la valeur retournée Regardons ce qui se passe. Remarquez que la pile de convert_to_minutes a été supprimée et que la variable
+minutes a été créée dans la pile de convert_to_seconds Nous avons ici une nouvelle assignation. La partie droite minutes fois 60 va donner 120 fois 60 et une nouvelle variable "seconds"
+va être créée et contenir l'adresse mémoire de cette nouvelle valeur. Ensuite nous retournons seconds. Seconds fait référence à 7200,
+c'est donc ce que l'on obtient lorsque l'on appelle convert_to_seconds à la ligne 20 [AUDIO VIERGE]

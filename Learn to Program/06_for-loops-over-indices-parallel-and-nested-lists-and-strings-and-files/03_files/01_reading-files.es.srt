@@ -1,0 +1,247 @@
+1
+00:00:00,800 --> 00:00:05,691
+Hasta ahora, nuestros programas han usado
+memoria de la computadora para almacenar información
+
+2
+00:00:05,691 --> 00:00:09,852
+Pero la mayría de la información se almacena en archivos en
+tu computadora
+
+3
+00:00:09,852 --> 00:00:14,305
+En esta clase, te enseñaremos cuatro formas
+para leer un archivo de texto.
+
+4
+00:00:14,305 --> 00:00:20,437
+Usaremos un  archivo conteniendo, In Flanders
+Fields, un poema escrito en el 1915 por un canadiense,
+
+5
+00:00:20,437 --> 00:00:27,906
+El Teniente Coronel John McCrae.
+Antes de que podamos leer un archivo, tenemos que decirle
+
+6
+00:00:27,906 --> 00:00:31,554
+a Python que lo abra
+La función incorporada open hace esto 
+
+7
+00:00:31,554 --> 00:00:36,662
+Toma sus argumentos, el nombre del
+archivo y la letra r que nosotros queramos
+
+8
+00:00:36,662 --> 00:00:39,846
+leer del archivo opuesto a escribir
+en el
+
+9
+00:00:39,846 --> 00:00:44,954
+Si el archivo se encuentra en el mismo directorio como
+el programa, entonces podemos solamente usar
+
+10
+00:00:44,954 --> 00:00:48,602
+el nombre del archivo
+Pero si el archivo se encuentra en un diferente
+
+11
+00:00:48,602 --> 00:00:53,909
+directorio, tal como el directorio que tenemos
+aquí, debemos dar la ruta de acceso completa
+
+12
+00:00:53,909 --> 00:00:56,828
+a el.
+Ahora leeremos el archivo en varias
+
+13
+00:00:56,828 --> 00:01:00,983
+formas.
+o guardaremos en una variable, así que 
+
+14
+00:01:00,983 --> 00:01:06,397
+no tendremos que retipearla.
+Primero, abrimos el archivo para leer.
+
+15
+00:01:06,397 --> 00:01:12,714
+abrimos el archivo para leer, tenemos
+disponible para nosotros un método llamado readline
+
+16
+00:01:13,124 --> 00:01:19,194
+que lee una línea del archivo,
+incluido e carácter de nueva línea al
+
+17
+00:01:19,194 --> 00:01:25,886
+final de la línea y la retorna.
+Podemos leer el poema entero llamando
+
+18
+00:01:25,886 --> 00:01:33,940
+readline una y otra vez. Tome en cuenta que hasta las líneas vacías tienen un
+
+19
+00:01:33,940 --> 00:01:40,699
+carácter de nueva línea al final de ellas
+Ahora que hemos leido hasta el final del
+
+20
+00:01:40,699 --> 00:01:45,171
+archivo, cuando llamemos readline nuevamente, obtendremos una cadena string vacía
+
+21
+00:01:45,171 --> 00:01:50,991
+El único momento que readline retorna la
+cadena string vacía es cuando hemos alcanzado el
+
+22
+00:01:50,991 --> 00:01:55,179
+al fina del archivo.
+Eso significa que podemos usar una iteracción while para
+
+23
+00:01:55,179 --> 00:01:59,935
+leer las líneas de un archivo.
+Cerraremos el archivo y lo reabriremos para
+
+24
+00:01:59,935 --> 00:02:04,832
+que podamos empezar al inicio.
+Leeremos la primera línea del archivo,
+
+25
+00:02:04,832 --> 00:02:10,653
+y luego, hasta que hallamos alcanzado el final del
+archivo, imprimiremos la línea que hemos leído.
+
+26
+00:02:10,653 --> 00:02:13,852
+y luego nos movemos para leer la siguiente
+línea
+
+27
+00:02:13,852 --> 00:02:20,035
+Cuando corremos esta iteracción pon atención
+Vas a ver líneas vacías en medio
+
+28
+00:02:20,035 --> 00:02:24,612
+de cada línea del archivo.
+La razón para esto es que la función readline
+
+29
+00:02:25,006 --> 00:02:30,687
+retornará la línea entera incluido el
+carácter de línea nueva al final.
+
+30
+00:02:30,687 --> 00:02:35,500
+Y cuando imprimimos esa línea
+añade una nueva línea
+
+31
+00:02:36,340 --> 00:02:42,592
+Para prevenir que esto pase,
+usaremos exactamente el mismo formato que
+
+32
+00:02:42,592 --> 00:02:46,529
+hicimos anteriormente.
+Excepto que, en nuestra llamada de la función
+
+33
+00:02:46,529 --> 00:02:53,245
+print, usaremos la cadena string vacía como
+una marca de final de impresión después que print imprima
+
+34
+00:02:53,245 --> 00:03:02,248
+la línea.
+Exploremos ahora como leer solo la 
+
+35
+00:03:02,248 --> 00:03:07,183
+primera estrofa.
+Leemos el título, y, la línea vacía,
+
+36
+00:03:07,183 --> 00:03:11,920
+y luego la primera línea del poema.
+Comprobemos
+
+37
+00:03:13,460 --> 00:03:20,251
+Leeremos cada línea hasta que encontremos la
+línea que contiene nada pero el
+
+38
+00:03:20,251 --> 00:03:30,051
+carácter de nueva línea.
+Este planteamiento readline nos permite leer
+
+39
+00:03:30,051 --> 00:03:34,802
+solamente las partes del archivo que estamos
+interesados y nos permite parar
+
+40
+00:03:34,802 --> 00:03:39,760
+el proceso del archivo tan pronto como hallamos encontrado
+las partes que deseamos
+
+41
+00:03:40,600 --> 00:03:46,862
+Si supiéramos que queremos leer cada
+línea en un archivo, existe una forma sencilla 
+
+42
+00:03:46,862 --> 00:03:53,042
+La iteracción for de Python trabaja con archivos,
+recuperando una línea al tiempo, incluyendo
+
+43
+00:03:53,042 --> 00:03:57,334
+la nueva  línea.
+Si tu archivo no es grande, puedes actualmente
+
+44
+00:03:57,334 --> 00:04:03,280
+leerlo de una sola usando el método read.
+Retorna el contenido entero del archivo como una 
+
+45
+00:04:03,280 --> 00:04:07,152
+cadena string simple.
+La cuarta y última foma que te enseñaremos
+
+46
+00:04:07,152 --> 00:04:13,029
+como leer, el contenido de un archivo
+es usando el método readlines, que retorna una
+
+47
+00:04:13,029 --> 00:04:21,713
+lista de todas las líneas en el archivo.
+Podemos usar esto para imprimir todas las líneas en el
+
+48
+00:04:21,713 --> 00:04:26,162
+el archivo.
+Obtendremos nuestra lista e iremos a través
+
+49
+00:04:26,162 --> 00:04:37,137
+de aquella lista, como lo hicimos anteriormente.
+Este planteamiento es útil si queremos mantener
+
+50
+00:04:37,137 --> 00:04:41,800
+la lista alrededor para que la podamos acceder
+los elementos mas tarde

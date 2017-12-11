@@ -1,0 +1,342 @@
+1
+00:00:02,010 --> 00:00:05,530
+We've already used loops over indices,
+when working with a single string or
+
+2
+00:00:05,530 --> 00:00:06,990
+a single list.
+
+3
+00:00:06,990 --> 00:00:10,040
+In this lecture,
+we're going to use loops over indices
+
+4
+00:00:10,040 --> 00:00:13,720
+to access the items at corresponding
+positions of two different lists.
+
+5
+00:00:13,720 --> 00:00:16,770
+And the characters at corresponding
+positions of two different strings.
+
+6
+00:00:18,630 --> 00:00:22,810
+We will begin by implementing
+this function named sum_items.
+
+7
+00:00:22,810 --> 00:00:27,980
+It takes two parameters, list1 and
+list2 which are both lists of numbers.
+
+8
+00:00:27,980 --> 00:00:29,680
+And it returns a list of numbers.
+
+9
+00:00:30,700 --> 00:00:34,460
+The job of the function is to
+return a new list, in which each
+
+10
+00:00:34,460 --> 00:00:39,131
+item is the sum of the items, at the
+corresponding position of list1 and list2.
+
+11
+00:00:41,150 --> 00:00:44,230
+Let's explore what is meant by
+the phrase corresponding position.
+
+12
+00:00:45,510 --> 00:00:50,682
+If list 1 refers to a list
+with 3 elements values 1, 2,
+
+13
+00:00:50,682 --> 00:00:58,470
+and 3, and list 2, refers to a 3
+element list with values 2, 4, and 2.
+
+14
+00:00:58,470 --> 00:01:03,010
+Then, there are three elements in
+each list with indices 0, 1 and 2.
+
+15
+00:01:04,010 --> 00:01:08,710
+When we say that we want to consider the
+corresponding elements of list1 and list2,
+
+16
+00:01:08,710 --> 00:01:14,170
+we're referring to the elements or
+the items, which are at the same index.
+
+17
+00:01:14,170 --> 00:01:22,400
+For example, at index 0, there are values
+1 and 2, and those are summed to get 3.
+
+18
+00:01:22,400 --> 00:01:27,790
+At index 1, there are values 2 and
+4, which are summed to get 6.
+
+19
+00:01:27,790 --> 00:01:32,950
+And at index 2, there are values 3 and
+2, which, when summed, yield 5.
+
+20
+00:01:33,980 --> 00:01:37,710
+This makes up the new list,
+which is returned by this function.
+
+21
+00:01:39,800 --> 00:01:41,740
+Now, let's write this code.
+
+22
+00:01:41,740 --> 00:01:44,700
+We're going to, return a new list, and so
+
+23
+00:01:44,700 --> 00:01:50,720
+we'll create a variable sum list that
+will initially refer to an empty list.
+
+24
+00:01:50,720 --> 00:01:52,960
+This list will be built
+up one element at a time,
+
+25
+00:01:52,960 --> 00:01:55,440
+through the course of the function.
+
+26
+00:01:57,160 --> 00:01:59,140
+We saw when we were
+looking at the example,
+
+27
+00:01:59,140 --> 00:02:04,560
+that we use indices to access
+the elements of list 1 and list 2, so
+
+28
+00:02:04,560 --> 00:02:11,240
+we want to loop over the indices,
+for i in range of length of.
+
+29
+00:02:11,240 --> 00:02:15,800
+And now we can pass one of the two
+lists in here as an argument.
+
+30
+00:02:15,800 --> 00:02:19,970
+List 1 and list 2 will have the same
+lengths because of the precondition to
+
+31
+00:02:19,970 --> 00:02:21,700
+this function, shown above.
+
+32
+00:02:23,320 --> 00:02:27,100
+Therefore, I can pick either of
+the two lists, and I'll choose list 1.
+
+33
+00:02:27,100 --> 00:02:29,740
+To choose the length of list 1.
+
+34
+00:02:29,740 --> 00:02:33,227
+That means that range will
+generate values 0, 1 up to,
+
+35
+00:02:33,227 --> 00:02:35,780
+but not including the length of the list.
+
+36
+00:02:38,145 --> 00:02:42,943
+In the body of the loop, we want to
+access list one at position I and
+
+37
+00:02:42,943 --> 00:02:45,668
+list 2 at position I, and sum them.
+
+38
+00:02:49,928 --> 00:02:54,459
+Once we've calculated the sum,
+we want to add that to the sum list.
+
+39
+00:03:03,192 --> 00:03:07,781
+The list depend method, can be used to
+add that sum to the end of the sum list.
+
+40
+00:03:10,058 --> 00:03:13,606
+That's the only thing we need to
+do in the body of the for loop.
+
+41
+00:03:13,606 --> 00:03:16,441
+Once the for
+loop has finished executing and
+
+42
+00:03:16,441 --> 00:03:19,051
+exits, then we can return the sum list.
+
+43
+00:03:22,552 --> 00:03:25,023
+Now let's run the example function call.
+
+44
+00:03:27,388 --> 00:03:31,897
+First, run the module, and
+then in the shell, call the function.
+
+45
+00:03:31,897 --> 00:03:35,847
+And we can see that it returns
+a list with values 3, 6, and 5.
+
+46
+00:03:39,139 --> 00:03:41,050
+Let's implement one more function.
+
+47
+00:03:42,570 --> 00:03:45,180
+The name of this function
+is count_matches, and
+
+48
+00:03:45,180 --> 00:03:47,030
+it involves two strings.
+
+49
+00:03:47,030 --> 00:03:49,280
+It has two string parameters, s1 and
+
+50
+00:03:49,280 --> 00:03:54,540
+s2 and returns an int which is
+the number of positions in string s1,
+
+51
+00:03:54,540 --> 00:03:58,510
+that became the same character at
+the corresponding position of s2.
+
+52
+00:04:00,680 --> 00:04:05,450
+For sample, for string ape and string ate,
+
+53
+00:04:05,450 --> 00:04:09,560
+there are two characters in common.
+
+54
+00:04:09,560 --> 00:04:15,390
+At index 0, there are a's,
+and index 2 there are e's.
+
+55
+00:04:17,730 --> 00:04:21,300
+For the strings head and hard.
+
+56
+00:04:23,770 --> 00:04:31,765
+There are also two characters in common,
+the h's at index 0 and the d's at index 3.
+
+57
+00:04:34,090 --> 00:04:38,080
+The first step for implementing this
+function, is to create an accumulator.
+
+58
+00:04:39,310 --> 00:04:43,980
+I'll name it num matches, and
+it will initially refer to the value 0.
+
+59
+00:04:43,980 --> 00:04:46,720
+That variable will accumulate
+the number of matches.
+
+60
+00:04:48,580 --> 00:04:50,560
+We saw that when we looked at the example,
+
+61
+00:04:50,560 --> 00:04:54,890
+we were comparing the string
+characters at the same index.
+
+62
+00:04:54,890 --> 00:04:59,940
+That means, we are gonna write our
+loop over the indices of the strings.
+
+63
+00:04:59,940 --> 00:05:04,879
+So we'll use range,
+starting from position 0, or value 0,
+
+64
+00:05:04,879 --> 00:05:07,594
+up to the length of the string s1.
+
+65
+00:05:10,413 --> 00:05:17,117
+And what we'd like to do is compare
+the character of the the string of s1,
+
+66
+00:05:17,117 --> 00:05:22,328
+so if s1 at index I,
+is equal to the string s2 at index I.
+
+67
+00:05:22,328 --> 00:05:24,143
+Then we found a match, and
+
+68
+00:05:24,143 --> 00:05:28,525
+we can increment the num_matches variable,
+adding 1 to it.
+
+69
+00:05:31,221 --> 00:05:33,860
+Once the loop has finished executing and
+
+70
+00:05:33,860 --> 00:05:39,454
+we've passed over every character in
+the strings, then num_matches is returned.
+
+71
+00:05:44,869 --> 00:05:46,990
+Let's run the example function calls.
+
+72
+00:05:50,311 --> 00:05:55,200
+First the ate and
+ape example returns 2, and
+
+73
+00:05:55,200 --> 00:06:00,613
+then the head and
+hard example, also returns 2.

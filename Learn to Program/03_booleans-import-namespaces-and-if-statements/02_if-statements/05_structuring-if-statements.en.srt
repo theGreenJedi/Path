@@ -1,0 +1,374 @@
+1
+00:00:01,300 --> 00:00:06,565
+When working with 'if statements' we are
+going to have some decisions to make about
+
+2
+00:00:06,565 --> 00:00:10,499
+how to structure our code.
+In this lecture, we will examine two
+
+3
+00:00:10,499 --> 00:00:15,130
+problems, and explore alternative
+solutions involving 'if' for each of the
+
+4
+00:00:15,130 --> 00:00:18,303
+problems.
+This example problem involves two grades;
+
+5
+00:00:18,303 --> 00:00:22,490
+grade one, and grade two.
+We'll give grade one the value of seventy,
+
+6
+00:00:22,490 --> 00:00:28,421
+and grade two gets eighty Now, there's an
+if' lif statement' on lines four through
+
+7
+00:00:28,421 --> 00:00:31,723
+seven.
+There's a Boolean expression associated
+
+8
+00:00:31,723 --> 00:00:36,389
+with the if, and another Boolean
+expression associated with the Lif.
+
+9
+00:00:36,389 --> 00:00:40,050
+These expressions are evaluated from top
+to bottom.
+
+10
+00:00:40,050 --> 00:00:45,937
+And when one of the expressions is true,
+the body associated with it gets executed.
+
+11
+00:00:45,937 --> 00:00:51,608
+And the if statement exits at that point,
+without continuing on to evaluate the
+
+12
+00:00:51,608 --> 00:00:56,201
+subsequent expressions.
+Because of that, at most one of the two
+
+13
+00:00:56,201 --> 00:00:59,917
+print statements will get executed in this
+case.
+
+14
+00:00:59,917 --> 00:01:05,103
+So, let's look at this code.
+If the grape one is greater than 50, and
+
+15
+00:01:05,103 --> 00:01:08,354
+it is, we're enter into the body of the
+if.
+
+16
+00:01:08,354 --> 00:01:14,082
+And at this point, becaue one of the
+expressions associated with the if was
+
+17
+00:01:14,082 --> 00:01:18,495
+true, the if statement will exit after
+executing this body.
+
+18
+00:01:18,495 --> 00:01:24,581
+So we jump down to line nine.
+In line nine there's another if statement
+
+19
+00:01:24,581 --> 00:01:27,965
+and on line eleven there is a third if
+statement.
+
+20
+00:01:27,965 --> 00:01:33,561
+The condition associated with the if on
+line nine is the same as the one on line
+
+21
+00:01:33,561 --> 00:01:39,156
+four and the condition associated with the
+if on line eleven is the same as that
+
+22
+00:01:39,156 --> 00:01:44,475
+associated with the Lif on line six.
+However because this code from lines nine
+
+23
+00:01:44,475 --> 00:01:49,586
+through twelve is two separate if
+statements, as opposed to the if Lif that
+
+24
+00:01:50,001 --> 00:01:54,015
+exists on lines four through seven.
+It behaves differently.
+
+25
+00:01:54,015 --> 00:01:59,299
+We first evaluate the expression
+associated with if online nine, and it's
+
+26
+00:01:59,299 --> 00:02:02,557
+true.
+So, we enter into its body and print the
+
+27
+00:02:02,557 --> 00:02:05,960
+message.
+And, at this point we will exit that if
+
+28
+00:02:05,960 --> 00:02:09,000
+statement, moving onto the subsequent
+code.
+
+29
+00:02:09,000 --> 00:02:13,923
+And, that code is line eleven, where there
+is a separate if statement.
+
+30
+00:02:13,923 --> 00:02:19,860
+This Boolean expression is also true, so
+in this case its body is executed as well.
+
+31
+00:02:21,320 --> 00:02:24,621
+So the if Lif is not equivalent to two if
+statements.
+
+32
+00:02:24,621 --> 00:02:30,100
+And we need to take that into account when
+we're running our code, and take care to
+
+33
+00:02:30,100 --> 00:02:33,269
+use the appropriate structure in each
+situation.
+
+34
+00:02:33,269 --> 00:02:38,023
+Let's consider another problem.
+This problem involves predicting whether
+
+35
+00:02:38,023 --> 00:02:43,040
+we should bring an umbrella or not.
+So we'll take into consideration whether
+
+36
+00:02:43,040 --> 00:02:46,606
+precipitation is expected using a true or
+false value.
+
+37
+00:02:46,606 --> 00:02:51,623
+And what the temperature is for today.
+The temperature, in this case is +eight
+
+38
+00:02:51,623 --> 00:02:55,534
+degrees Celsius.
+This if statement for it checks the
+
+39
+00:02:55,534 --> 00:02:59,829
+condition to see if precipitation is
+expected and that is true.
+
+40
+00:02:59,829 --> 00:03:05,419
+So we enter into the body of the if and in
+the body there is actually another if
+
+41
+00:03:05,419 --> 00:03:08,691
+statement.
+One if statement is nested inside the
+
+42
+00:03:08,691 --> 00:03:11,896
+other.
+We can then check that boolean condition
+
+43
+00:03:11,896 --> 00:03:16,600
+and find that it is true, so we print the
+message bring your umbrella.
+
+44
+00:03:17,100 --> 00:03:23,156
+I want to modify this code so that we
+write a second version without the
+
+45
+00:03:23,156 --> 00:03:27,303
+nesting.
+Notice that when precipitation is true,
+
+46
+00:03:27,303 --> 00:03:33,207
+the condition associated with the first
+if, and the condition associated with the
+
+47
+00:03:33,207 --> 00:03:37,873
+second if is also true.
+That's when we print bring your umbrella.
+
+48
+00:03:37,873 --> 00:03:42,757
+So they both need to be true.
+We'll use the Boolean operator "and" to
+
+49
+00:03:42,757 --> 00:03:47,933
+state that, and that was we can structure
+this as a single If statement.
+
+50
+00:03:47,933 --> 00:03:54,274
+Let's visualize the execution.
+In the first case, the variables have
+
+51
+00:03:54,274 --> 00:03:58,513
+values that, causes to print Bring Your
+Umbrella.
+
+52
+00:03:58,513 --> 00:04:05,328
+And, in the second case, we evaluate this
+Boolean condition, precipitation refers to
+
+53
+00:04:05,328 --> 00:04:11,976
+the value TRUE, temperature refers to the
+value +eight, so this expression is also
+
+54
+00:04:11,976 --> 00:04:16,464
+true, and the message Bring Your Umbrella
+is displayed.
+
+55
+00:04:16,464 --> 00:04:22,198
+Now, let us expand on this example.
+I'm going to add an Else to the if
+
+56
+00:04:22,198 --> 00:04:27,419
+statement on line five.
+This else describes the statement to print
+
+57
+00:04:27,419 --> 00:04:33,962
+when temperature is not greater than zero.
+I'm going to now edit the code on line ten
+
+58
+00:04:33,962 --> 00:04:38,657
+to make that if statement equivalent to
+the one on line four.
+
+59
+00:04:38,657 --> 00:04:43,583
+Let's look at the conditions under which
+the Else code executes.
+
+60
+00:04:43,583 --> 00:04:49,663
+The precipitation condition needs to be
+true, the temperature greater than zero
+
+61
+00:04:49,663 --> 00:04:53,820
+condition must be false and then the Else
+is executed.
+
+62
+00:04:53,820 --> 00:05:00,587
+So we can express this using an L if.
+We want to make sure that the first
+
+63
+00:05:00,587 --> 00:05:05,779
+condition is true.
+And we don't need to check the second
+
+64
+00:05:05,779 --> 00:05:10,321
+condition.
+Because we'll only reach the L if when
+
+65
+00:05:10,321 --> 00:05:15,513
+that is false.
+In that case, we'll print the same message
+
+66
+00:05:15,513 --> 00:05:19,500
+as above.
+Let's visualize the execution now.
+
+67
+00:05:19,940 --> 00:05:25,350
+In fact there's one more thing to do.
+Let's make this a negative three so that
+
+68
+00:05:25,350 --> 00:05:28,680
+it's below freezing and we print those
+messages.
+
+69
+00:05:29,420 --> 00:05:33,970
+So if precipitation is true, we enter into
+the body of the if.
+
+70
+00:05:33,970 --> 00:05:39,863
+Checking this condition, because I just
+changed what temperature refers to, it's
+
+71
+00:05:39,863 --> 00:05:43,370
+false.
+And we print the statement from the Else.
+
+72
+00:05:43,370 --> 00:05:49,218
+In the second If statement, we check the
+first condition, which is false because
+
+73
+00:05:49,218 --> 00:05:55,436
+the temperature is not greater than zero.
+Now we must check the L if clause and this
+
+74
+00:05:55,436 --> 00:06:01,284
+condition is true, so we enter into the
+body of that L if and we print the same
+
+75
+00:06:01,284 --> 00:06:04,245
+message.
+So these two pieces of code are

@@ -1,0 +1,567 @@
+1
+00:00:01,560 --> 00:00:06,873
+Abbiamo salvato delle collezioni di dati usando
+le liste, e abbiamo usato gli indici per accedere agli
+
+2
+00:00:06,873 --> 00:00:10,546
+elementi delle liste.
+In questa lezione, esploreremo il tipo
+
+3
+00:00:10,546 --> 00:00:15,860
+dizionario di Python, e impareremo come salvare
+ed accedere alle informazioni usando i dizionari.
+
+4
+00:00:16,420 --> 00:00:21,689
+E nelle lezioni precedenti, abbiamo usato delle 
+stringhe annidate per tenere traccia delle assegnazioni
+
+5
+00:00:21,689 --> 00:00:26,069
+e dei voti su quelle assegnazioni.
+Ogni lista più interna aveva due elementi,
+
+6
+00:00:26,069 --> 00:00:30,860
+contenenti il nome dell'assegnazione, una stringa
+e un voto, che è un numero.
+
+7
+00:00:31,560 --> 00:00:35,271
+Possiamo usare l'indicizzazione per accedere agli
+elementi di una lista.
+
+8
+00:00:35,271 --> 00:00:39,637
+Grades a zero fa riferimento alla lista con,
+con A1 e il suo voto.
+
+9
+00:00:39,637 --> 00:00:45,749
+Grade a uno fa riferimento alla lista contenente
+A2 e il suo grado e grades a due fa riferimento
+
+10
+00:00:45,749 --> 00:00:51,734
+alla lista contenente A3 e il suo voto.
+Per trovare il nome di un'assegnazione
+
+11
+00:00:51,734 --> 00:00:56,359
+particolare, dobbiamo usare il primo indice
+di quella lista a due elementi.
+
+12
+00:00:56,359 --> 00:01:01,950
+Quindi, per esempio, per trovare il nome
+dell'assegnazione per grades all'indice uno, usiamo
+
+13
+00:01:01,950 --> 00:01:06,644
+l'indice zero per ottenere il nome.
+Per accedere al voto associato con quel
+
+14
+00:01:06,644 --> 00:01:09,820
+assegnazione, usiamo l'indice uno della lista
+più interna.
+
+15
+00:01:10,900 --> 00:01:14,981
+Ora useremo un dizionario per salvare le
+stesse informazioni dei voti.
+
+16
+00:01:14,981 --> 00:01:19,866
+E vediamo che accedendo al voto associato
+con una particolare assegnazione sarà
+
+17
+00:01:19,866 --> 00:01:23,020
+più semplice quando si lavora con un 
+dizionario.
+
+18
+00:01:23,300 --> 00:01:29,206
+L'assegnazione della variabile grado farà
+riferimento al nuovo dizionario, e la
+
+19
+00:01:29,206 --> 00:01:38,945
+notazione per un dizionario in parentesi.
+Ogni entrata di un dizionario ha due parti
+
+20
+00:01:38,945 --> 00:01:51,440
+e le due parti sono separate da due punti.
+Questo dizionario ha tre coppie di valori chiave.
+
+21
+00:01:52,040 --> 00:01:54,903
+A1 è una chiave.
+A2 è una chiave.
+
+22
+00:01:54,903 --> 00:01:58,482
+E A3 è una chiave.
+80 è un valore.
+
+23
+00:01:58,482 --> 00:02:04,806
+E' il valore associato con la chiave A1.
+70 è un valore.
+
+24
+00:02:04,806 --> 00:02:11,606
+E' il valore associato con la chiave A2.
+E 90 è un valore.
+
+25
+00:02:11,606 --> 00:02:19,295
+E' il valore associato con la chiave A3.
+Per controllare i gradi associati con
+
+26
+00:02:19,295 --> 00:02:24,880
+l'assegnazione A2, possiamo usare la notazione
+in parentesi che abbiamo usato con la lista
+
+27
+00:02:24,880 --> 00:02:28,306
+annidata.
+Comunque, invece di inserire un indice fra
+
+28
+00:02:28,306 --> 00:02:32,998
+le parentesi, inseriamo una chiave.
+Quindi, vogliamo vedere il valore
+
+29
+00:02:32,998 --> 00:02:37,020
+associato con la chiave A2.
+E questo ci da il valore 70.
+
+30
+00:02:37,460 --> 00:02:42,555
+Questa notazione per cercare un voto
+associato con un'assegnazione è molto
+
+31
+00:02:42,555 --> 00:02:47,720
+più semplice di due indici che servono 
+per cercare il voto associato con
+
+32
+00:02:47,720 --> 00:02:52,334
+un'assegnazione usando la lista annidata.
+Comunque, rivela qualcosa con i
+
+33
+00:02:52,334 --> 00:02:55,501
+dizionari.
+Per essere in grado di controllare
+
+34
+00:02:55,501 --> 00:02:59,978
+un particolare valore associato con la chiave,
+la chiave deve essere unica.
+
+35
+00:02:59,978 --> 00:03:05,349
+Può solo essere presente una volta nel dizionario.
+Quindi, i nomi delle assegnazioni A1, A2 e A3
+
+36
+00:03:05,349 --> 00:03:08,890
+sono nomi unici.
+I voti associati con queste
+
+37
+00:03:08,890 --> 00:03:13,630
+assegnazioni, o i valori del
+dizionario, possono essere duplicati.
+
+38
+00:03:13,630 --> 00:03:18,741
+Quindi è possibile che A1 e A2, quelle
+chiavi, potrebbero avere lo stesso valore.
+
+39
+00:03:18,741 --> 00:03:22,527
+Diciamo, 80.
+Se proviamo ad accedere alla lista ad un indice
+
+40
+00:03:22,527 --> 00:03:27,911
+che non esiste, otteniamo un errore.
+Lo stesso vale per i dizionari, se
+
+41
+00:03:27,911 --> 00:03:33,436
+cerchiamo di accedere ad un dizionario usando
+una chiave che non esiste, allora avviene un
+
+42
+00:03:33,436 --> 00:03:36,303
+errore di chiave.
+La chiave A4 non è presente nel
+
+43
+00:03:36,303 --> 00:03:39,520
+dizionario a cui fa riferimento grades.
+
+44
+00:03:39,520 --> 00:03:45,239
+Prima di accedere ad una chiave di un dizionario,
+possiamo controllare la sua esistenza nel
+
+45
+00:03:45,239 --> 00:03:49,027
+dizionario.
+Quindi, potremmo aver controllato per vedere se
+
+46
+00:03:49,027 --> 00:03:54,820
+A4 è un'assegnazione in grade.
+Non lo è, quindi False è il valore a cui viene
+
+47
+00:03:54,820 --> 00:03:59,574
+valutata questa espressione.
+Ovviamente, A2 è una chiave nel dizionario.
+
+48
+00:03:59,574 --> 00:04:07,332
+Quindi questa espressione verrà valutata a True.
+Questo operatore controlla la
+
+49
+00:04:07,332 --> 00:04:13,032
+presenza delle chiavi, non dei valori.
+Quindi se controlliamo se 80 è un assegnazione
+
+50
+00:04:13,032 --> 00:04:19,547
+di grade, anche questa espressione verrà valutata
+a False, dato che 80 non è una chiave in quel
+
+51
+00:04:19,547 --> 00:04:23,862
+dizionario.
+Attualmente, ci sono tre coppie di valori chiave
+
+52
+00:04:23,862 --> 00:04:28,422
+nel dizionario.
+La funzione integrata len ritorna il
+
+53
+00:04:28,422 --> 00:04:33,572
+numero di coppie di chiavi.
+Come le liste, i dizionari sono mutabili.
+
+54
+00:04:33,572 --> 00:04:37,828
+Quindi questo significa che una coppia di valori chiave
+può essere aggiunta al dizionario.
+
+55
+00:04:37,828 --> 00:04:43,131
+Il valore associato con una chiave può essere
+modificato e la coppia di valori chiave può essere
+
+56
+00:04:43,131 --> 00:04:47,736
+rimossa da un dizionario.
+Iniziamo aggiungendo un'altra coppia
+
+57
+00:04:47,736 --> 00:04:51,993
+di valori chiave ad un dizionario.
+Andremo ad aggiungere l'assegnazione A4.
+
+58
+00:04:51,993 --> 00:04:57,226
+E possiamo indicarlo usando la stessa
+notazione con parentesi che abbiamo usato per
+
+59
+00:04:57,226 --> 00:05:02,879
+accedere al valore di quella particolare chiave, ma lo
+usiamo in congiunzione ad un'istruzione di
+
+60
+00:05:02,879 --> 00:05:06,661
+assegnazione.
+Quindi, il dizionario che ha assegnato a grade
+
+61
+00:05:06,661 --> 00:05:12,520
+i primi due, otterrà il nuovo valore A4, e
+un valore associato con quella chiave è 85.
+
+62
+00:05:12,520 --> 00:05:18,451
+La funzione len ora restituisce quattro, dato che
+ci sono quattro coppie di valori chiave nell'assegnazione
+
+63
+00:05:18,451 --> 00:05:27,429
+di grades.
+Usando la stessa notazione, possiamo anche
+
+64
+00:05:27,429 --> 00:05:33,551
+aggiornare il valore associato con una chiave.
+Quindi, per la chiave A4, andremo a cambiare il
+
+65
+00:05:33,551 --> 00:05:37,968
+suo valore da 85 a 90.
+Dato che A4 esiste già nel
+
+66
+00:05:37,968 --> 00:05:43,547
+dizionario, questa diventa una modifica.
+Se la chiave A4 non esistesse come prima,
+
+67
+00:05:43,547 --> 00:05:46,880
+allora verrebbe aggiunta la nuova coppia
+di valori chiave.
+
+68
+00:05:47,740 --> 00:05:53,740
+La chiave A4 originariamente ha il valore 85
+associato ad essa e ora, ha il
+
+69
+00:05:53,740 --> 00:05:59,247
+valore 90 associato.
+Notate che il valore 90 è associato
+
+70
+00:05:59,247 --> 00:06:05,329
+sia con la chiave A3 che con la chiave A4.
+ valori possono essere duplicati come menzionato
+
+71
+00:06:05,329 --> 00:06:11,478
+prima, ma le chiavi non possono.
+E rimuoviamo una coppia di valori chiave dal
+
+72
+00:06:11,478 --> 00:06:15,864
+dizionario.
+Per fare questo, useremo l'operatore, del,
+
+73
+00:06:15,864 --> 00:06:22,572
+e poi il riferimento al dizionario, e poi la
+chiave, usando la stessa notazione con parentesi.
+
+74
+00:06:22,572 --> 00:06:28,506
+Quindi, ci sposteremo, e rimuoveremo la chiave A4,
+insieme al suo valore dal dizionario.
+
+75
+00:06:28,506 --> 00:06:32,720
+La lunghezza del dizionario sarà tre.
+
+76
+00:06:33,740 --> 00:06:39,780
+E il dizionario non contiene più la coppia di
+valori chiave A4 e 90.
+
+77
+00:06:40,060 --> 00:06:45,061
+Possiamo usare un ciclo for per iterare sulle
+chiavi di un dizionario, come abbiamo fatto per
+
+78
+00:06:45,061 --> 00:06:48,500
+iterare sui caratteri di una stringa, o gli
+oggetti di una lista.
+
+79
+00:06:48,820 --> 00:06:54,450
+Dato che stiamo iterando sulle chiavi, il nome
+della variabile che sceglierò 
+
+80
+00:06:54,450 --> 00:06:58,513
+qui, sarà rappresentativa delle chiavi del
+dizionario.
+
+81
+00:06:58,513 --> 00:07:01,934
+Useremo la parola assignment per il nome della
+mia variabile.
+
+82
+00:07:01,934 --> 00:07:07,065
+Per ogni assegnazione del dizionario
+assegnata a grade, stamperemo
+
+83
+00:07:07,065 --> 00:07:11,601
+quell'assegnazione, quella chiave.
+Le chiavi A1, A3 e A2 vengono stampate.
+
+84
+00:07:11,601 --> 00:07:19,273
+Comunque, questo non corrisponde all'ordine
+in cui abbiamo aggiunto le coppie di valori chiave al
+
+85
+00:07:19,273 --> 00:07:23,858
+dizionario.
+Abbiamo inserito prima A1 e il suo valore, poi A2 
+
+86
+00:07:23,858 --> 00:07:30,154
+con il suo valore e A3 con il suo valore.
+L'ordine in cui le coppie di valore chiave sono
+
+87
+00:07:30,154 --> 00:07:35,754
+aggiunte al dizionario non ha effetto
+sull'ordine in cui il ciclo for accede alle
+
+88
+00:07:35,754 --> 00:07:39,023
+chiavi.
+Quindi, quando iteriamo sulle chiavi in un
+
+89
+00:07:39,023 --> 00:07:44,451
+dizionario, non possiamo davvero basarci
+sulla chiave a cui si accede in un ordine
+
+90
+00:07:44,451 --> 00:07:47,652
+particolare.
+In questo caso, non possiamo basarci sul fatto che A1
+
+91
+00:07:47,652 --> 00:07:51,271
+sia stampata prima di A2, e A2 sia stampata
+prima di A3.
+
+92
+00:07:51,271 --> 00:07:56,909
+Questa volta, invece di stampare le chiavi 
+del dizionario, stampiamo i valori.
+
+93
+00:07:56,909 --> 00:08:02,616
+Tutti i cicli for che scriviamo sui
+dizionari saranno cicli sulle chiavi.
+
+94
+00:08:02,616 --> 00:08:05,400
+Quindi andremo a lasciare la testata
+esattamente come prima.
+
+95
+00:08:05,960 --> 00:08:11,183
+Invece di stampare la chiave dell'assegnazione
+guardiamo il valore associato con
+
+96
+00:08:11,183 --> 00:08:14,840
+quella chiave nel dizionario e stampiamo
+invece quel valore.
+
+97
+00:08:17,480 --> 00:08:24,686
+Vengono stampati i valori 80, 90 e 70.
+Ed infine, stampiamo sia la chiave che
+
+98
+00:08:24,686 --> 00:08:28,898
+il valore.
+Quando chiamiamo print, possiamo passare
+
+99
+00:08:28,898 --> 00:08:34,140
+due argomenti.
+La chiave assegnazione poi il valore
+
+100
+00:08:34,140 --> 00:08:40,031
+associato con quella chiave.
+Quello stampa ogni assegnazione e il voto
+
+101
+00:08:40,031 --> 00:08:43,889
+ad esso associato.
+La nostra introduzione ai dizionari è praticamente
+
+102
+00:08:43,889 --> 00:08:46,814
+completa.
+Ma ci sono un paio di cose importanti
+
+103
+00:08:46,814 --> 00:08:50,050
+da sottolineare.
+Per prima cosa, un dizionario può essere vuoto,
+
+104
+00:08:50,050 --> 00:08:55,028
+e usiamo quelle parentesi aperta e chiusa
+per indicarlo, senza niente
+
+105
+00:08:55,028 --> 00:08:58,140
+all'interno.
+La lunghezza di un dizionario vuoto è zero.
+
+106
+00:08:58,900 --> 00:09:05,054
+Infine, dobbiamo sottolineare una nota importante
+riguardo ai tipi che le chiavi e i valori
+
+107
+00:09:05,054 --> 00:09:10,022
+di un dizionario possono assumere.
+Le chiavi e i valori possono essere di tipi differenti.
+
+108
+00:09:10,022 --> 00:09:15,064
+Quindi, potremmo avere una stringa come chiave,
+e un'altra chiave potrebbe essere un intero.
+
+109
+00:09:15,064 --> 00:09:18,920
+Comunque, il tipo di chiave è sempre
+immutabile.
+
+110
+00:09:19,640 --> 00:09:24,071
+Dato che le liste sono mutabili, una lista non
+può essere usata come chiave di un dizionario.
+
+111
+00:09:24,071 --> 00:09:29,645
+Questa istruzione di assegnazione, che tenta
+di aggiungere una lista con i numeri uno e due come
+
+112
+00:09:29,645 --> 00:09:33,540
+una chiave, insieme al valore banana,
+risulterà in un errore.
+
+113
+00:09:35,780 --> 00:09:42,385
+Quando vogliamo usare una sequenza come
+chiave, anziché usare una lista, possiamo usare una
+
+114
+00:09:42,385 --> 00:09:47,720
+tuple, dato che le tuple sono immutabili.
+Ciò che segue è accettabile.

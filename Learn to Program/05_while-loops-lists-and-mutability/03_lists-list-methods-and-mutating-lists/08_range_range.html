@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<title>
+			Range
+		</title>
+	</head>
+	<body>
+		<h1>
+			range
+		</h1>
+		<h3>
+			The Built-in Function: range
+		</h3>
+		<p>
+			Python has a built-in function called <code>range</code> that is useful to use when you want to generate a sequence of numbers. You can type <code>help(range)</code> in IDLE if you ever need a reminder. 
+		</p>
+
+		<p>The example below will print the integers 0 to 9, inclusive. 
+			<pre>
+for i in range(10):
+    print (i)
+			</pre>
+		</p>
+
+		<p>
+			The form of <code>range</code> is:
+			<pre>
+range([start,] stop[, step]):
+    return a virtual sequence of numbers from start to stop by step
+			</pre>
+		</p>
+
+		<h3>Applications of Range</h3>
+		<p>
+			There are other options you can specify to <code>range</code>. One option is to let range generate the numbers corresponding to indices of a string or a list.
+		</p>
+		<pre>
+s = 'computer science'
+for i in range(len(s)):
+    print(i)
+		</pre>
+
+		<p> 
+			You can also tell <code>range</code> what index to start at. For instance, the example below starts at index 1 (as opposed to the default which is 0).
+		</p>
+		<pre>
+for i in range(1, len(s)):
+	print(i)
+		</pre>
+
+		<p>
+			You can even specify the "step" for <code>range</code>. The default stepping size is 1, which means that numbers increment by 1. The example below starts at index 1 and its step size is there (goes to every third index). 
+		</p>
+		<pre>
+for i in range(1, len(s), 3):
+    print(i)
+		</pre>
+
+
+		<hr>
+		<center>
+			Jennifer Campbell &bull; Paul Gries<br>
+			University of Toronto
+		</center>
+		<hr>
+	</body>
+</html>

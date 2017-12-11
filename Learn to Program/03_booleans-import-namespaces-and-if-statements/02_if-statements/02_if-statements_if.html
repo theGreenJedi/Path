@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            The if statement
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 5.2 Choosing Which Statements to Execute
+                </li>
+                <li>Chapter 3.8 Omitting a Return Statement: <code>None</code>
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            The <code>if</code> statement
+        </h1>
+        <p>
+            If statements can be used to control which instructions are executed. Here is the general form:
+        </p>
+        <pre>
+if expression1:    
+    body1
+[elif expression2:      0 or more clauses
+    body2]
+[else:                  0 or 1 clause
+    bodyN]
+</pre>
+        <p>
+            <code>elif</code> stands for "else if", so this forms a chain of conditions.
+        </p>
+        <p>
+            To execute an <code>if</code> statement, evaluate each expression in order from top to bottom. If an expression produces <code>True</code>, execute the body of that clause and then skip the rest open the <code>if</code> statement. If there is an <code>else</code>, and none of the expressions produce <code>True</code>, then execute the body of the <code>else</code>.
+        </p>
+        <p>
+            For example, given this function:<br>
+        </p>
+        <pre>
+def report_status(scheduled_time, estimated_time):
+    """ (float, float) -&gt; str """
+    if scheduled_time == estimated_time:
+        return 'on time'
+    elif scheduled_time &gt; estimated_time:  
+        return 'early'
+    else:
+        return 'delayed'
+</pre>In the shell:<br>
+        <pre>
+&gt;&gt;&gt; report_status(14.3, 14.3)
+'on time'
+&gt;&gt;&gt; report_status(12.5, 11.5)
+'early'
+&gt;&gt;&gt; report_status(9.0, 9.5)
+'delayed'
+</pre>
+        <h3>
+            A note on <code>None</code>
+        </h3>
+        <p>
+            When execution of a function body ends without having executed a <code>return</code> statement, the function returns value <code>None</code>. The type of <code>None</code> is <code>NoneType</code>.
+        </p>
+        <p>
+            For example, consider this function:<br>
+        </p>
+        <pre>
+def report_status(scheduled_time, estimated_time):
+    """ (float, float) -&gt; str
+
+    Return the flight status (on time, early, delayed) for a flight that was
+    scheduled to arrive at scheduled_time, but is now estimated to arrive
+    at estimated_time.
+
+    Pre-condition: 0.0 &lt;= scheduled_time &lt; 24.0 and 0.0 &lt;= estimated_time &lt; 24.0
+
+    &gt;&gt;&gt; report_status(14.3, 14.3)
+    'on_time'
+    &gt;&gt;&gt; report_status(12.5, 11.5)
+    'early'
+    &gt;&gt;&gt; report_status(9.0, 9.5)
+    'delayed'
+    """
+
+    if scheduled_time == estimated_time:
+        return 'on time'
+</pre><br>
+        In the shell:<br>
+        <pre>
+    &gt;&gt;&gt; report_status(14,3, 14.3)
+    'on time'
+    &gt;&gt;&gt; report_status(12.5, 11.5)
+    &gt;&gt;&gt; print(report_status(12.5, 11.5))
+    None
+</pre>
+        <p>
+            Because the type of <code>None</code> is <code>NoneType</code>, not <code>str</code>, this breaks the Type Contract. To fix this, we would need to complete the rest of the function.
+        </p><br>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

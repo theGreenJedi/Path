@@ -1,0 +1,449 @@
+1
+00:00:01,060 --> 00:00:04,760
+In this lecture, we'll explore list
+methods.
+
+2
+00:00:05,340 --> 00:00:09,862
+As a reminder, a method is a function that
+is inside an object.
+
+3
+00:00:09,862 --> 00:00:15,842
+You've heard of the methods in type list.
+Ignoring the methods with underscores, we
+
+4
+00:00:15,842 --> 00:00:20,656
+see append, count, extend, index, insert,
+pop, remove, reverse, and sort.
+
+5
+00:00:20,656 --> 00:00:25,834
+Some of these methods modify the list, and
+some just return information.
+
+6
+00:00:25,834 --> 00:00:29,335
+We will now give examples of using each of
+them.
+
+7
+00:00:29,335 --> 00:00:32,836
+We will keep track of someone's favorite
+colours.
+
+8
+00:00:32,836 --> 00:00:37,140
+Here's a prompt that we will use to gather
+the information.
+
+9
+00:00:38,260 --> 00:00:43,167
+We are going to use a loop in order to
+gather all the person's favorite colours,
+
+10
+00:00:43,167 --> 00:00:46,398
+but we need to start by asking them for
+their first.
+
+11
+00:00:46,398 --> 00:00:51,181
+So far, then, variable colours is assigned
+an empty list, and variable prompt is
+
+12
+00:00:51,181 --> 00:00:54,349
+assigned. Enter another one of your
+favorite colours,
+
+13
+00:00:54,349 --> 00:00:59,277
+Type return to end.
+We ask the user to enter their first
+
+14
+00:00:59,277 --> 00:01:06,568
+favorite color by calling function input
+and passing in variable prompt.
+
+15
+00:01:06,568 --> 00:01:12,442
+Let's say, the user types blue.
+So, color now refers to blue.
+
+16
+00:01:12,442 --> 00:01:17,000
+Variable color still refers to an empty
+list.
+
+17
+00:01:17,000 --> 00:01:21,899
+We are accumulating the information that
+the user types.
+
+18
+00:01:21,899 --> 00:01:29,073
+So, what we're going to do is use a while
+loop and say that, while color is not the
+
+19
+00:01:29,073 --> 00:01:34,410
+empty string, we will append the color to
+the colours variable,
+
+20
+00:01:34,410 --> 00:01:39,821
+Colour.apprend color.
+Now, we've appended the color the user
+
+21
+00:01:39,821 --> 00:01:46,533
+just typed, and so we need to get ready
+for the next iteration of the loop by
+
+22
+00:01:46,533 --> 00:01:53,069
+asking the user for another color.
+So, color is assigned input with argument
+
+23
+00:01:53,069 --> 00:01:57,492
+prompt.
+We will now enter the colours yellow, and
+
+24
+00:01:57,492 --> 00:02:04,077
+brown, and, let's say, that that's our
+whole list of favorite colours so we're
+
+25
+00:02:04,077 --> 00:02:10,400
+going to follow the instructions and type
+return to end this while loop.
+
+26
+00:02:10,980 --> 00:02:17,602
+When we examine the colours variable, we
+see that it contains strings blue, yellow,
+
+27
+00:02:17,602 --> 00:02:21,906
+and brown.
+But we forgot some, so we are going to use
+
+28
+00:02:21,906 --> 00:02:28,198
+method extend to extend the list of
+colours by sending in the list of colours
+
+29
+00:02:28,198 --> 00:02:33,268
+that we forgot.
+We will call colours.extend, and pass in
+
+30
+00:02:33,268 --> 00:02:37,741
+the list with the strings hot pink and
+neon green.
+
+31
+00:02:37,741 --> 00:02:44,540
+Now, when we examine colours, we see blue,
+yellow, brown, hot pink and neon green.
+
+32
+00:02:45,060 --> 00:02:51,420
+As it turns out, we don't particularly
+like neon green, so let's call colours.pop
+
+33
+00:02:52,437 --> 00:02:57,255
+to remove it.
+When we examine colours, we see the list
+
+34
+00:02:57,255 --> 00:03:02,471
+blue, yellow, brown and hot pink,
+Neon green is no longer there.
+
+35
+00:03:02,471 --> 00:03:09,740
+One other point to make is that when you
+call colours.pop, not only does it remove
+
+36
+00:03:09,740 --> 00:03:16,154
+the last item, but it also returns it.
+So, you can use it in an assignment
+
+37
+00:03:16,154 --> 00:03:20,815
+statement.
+A function that both returns information
+
+38
+00:03:20,815 --> 00:03:28,149
+and does something to data, such as
+colours.pop is a function that is said to
+
+39
+00:03:28,149 --> 00:03:35,670
+have side-effects.
+We're not enamored of brown either, so we
+
+40
+00:03:35,670 --> 00:03:41,887
+will use pop with its optional argument in
+order to remove it.
+
+41
+00:03:42,689 --> 00:03:51,011
+Brown is at index two, so if I call
+colours.pop two, it will remove brown from
+
+42
+00:03:51,011 --> 00:03:57,508
+the list, as well as return it.
+Examining colours, we see we're down to
+
+43
+00:03:57,508 --> 00:04:02,741
+blue, yellow and hot pink.
+Colours.pop will remove the last item in
+
+44
+00:04:02,741 --> 00:04:06,836
+the list.
+And, colours.pop with an index will remove
+
+45
+00:04:06,836 --> 00:04:12,114
+the item at the given index.
+Method remove picks an object to remove,
+
+46
+00:04:12,114 --> 00:04:16,529
+not an index.
+And it will remove the first occurrence of
+
+47
+00:04:16,529 --> 00:04:23,730
+that object from the list.
+Let's try to use it to remove black,
+
+48
+00:04:23,730 --> 00:04:27,971
+Which isn't in the list.
+And we see we get a value error.
+
+49
+00:04:27,971 --> 00:04:33,424
+It won't work if we call remove with an
+item that is not in the list.
+
+50
+00:04:33,424 --> 00:04:39,181
+So, before calling a method or function
+that might raise an error, we want to
+
+51
+00:04:39,181 --> 00:04:45,770
+check that, that won't actually happen.
+We can count the number of a occurrences
+
+52
+00:04:45,770 --> 00:04:51,450
+of a particular value in, in a list.
+And, if it ends up being greater than
+
+53
+00:04:51,450 --> 00:04:54,783
+zero,
+In other words, if yellow exists in the
+
+54
+00:04:54,783 --> 00:05:02,525
+list, then we can call remove.
+Examining colours, we end up with just
+
+55
+00:05:02,525 --> 00:05:09,406
+blue and hot pink.
+Rather than counting, we could just say,
+
+56
+00:05:09,406 --> 00:05:13,960
+if yellow in colours,
+Then colours.removeyellow.
+
+57
+00:05:13,960 --> 00:05:21,550
+This is more standard than calling
+colours.count and counting the number of
+
+58
+00:05:21,550 --> 00:05:25,800
+items.
+Just say, if it's in there, then call
+
+59
+00:05:25,800 --> 00:05:30,860
+colours.remove on it.
+Of course, yellow wasn't there.
+
+60
+00:05:31,340 --> 00:05:35,160
+And, so the if statement condition
+evaluated to false,
+
+61
+00:05:35,160 --> 00:05:39,800
+And we didn't call colours.remove cuz we
+had previously removed it.
+
+62
+00:05:41,280 --> 00:05:46,863
+We will now call colours.extend with
+arguments auburn, taupe, and magenta.
+
+63
+00:05:46,863 --> 00:05:51,968
+But we get a type error.
+Extend takes exactly one argument, three
+
+64
+00:05:51,968 --> 00:05:55,239
+given.
+The problem is that, we need to put
+
+65
+00:05:55,239 --> 00:06:00,982
+auburn, taupe, and magenta into a list
+because extend is expecting a list.
+
+66
+00:06:00,982 --> 00:06:06,885
+Now, colours refers to the list with
+strings blue, hot pink, auburn, taupe, and
+
+67
+00:06:06,885 --> 00:06:08,720
+magenta.
+We can sort it.
+
+68
+00:06:09,280 --> 00:06:15,906
+Now, colours refers to the alphabetical
+list, auburn, blue, hot pink, magenta, and
+
+69
+00:06:15,906 --> 00:06:19,754
+taupe.
+We can reverse this.
+
+70
+00:06:19,754 --> 00:06:26,932
+We call colours.reverse, and now colours
+refers to taupe, magenta, hot pink, blue,
+
+71
+00:06:26,932 --> 00:06:30,689
+and auburn.
+We are feeling a little guilty about
+
+72
+00:06:30,689 --> 00:06:36,528
+brown, we will call colours.insert in
+order to put it back in the list where it
+
+73
+00:06:36,528 --> 00:06:39,747
+belongs.
+We used arguments minus two and brown to
+
+74
+00:06:39,747 --> 00:06:43,191
+say insert brown at index minus two into
+our colours.
+
+75
+00:06:43,191 --> 00:06:48,880
+We have not replaced the item that was at
+index minus two, instead blue and auburn
+
+76
+00:06:48,880 --> 00:06:52,323
+have been shifted over to make room for
+brown.
+
+77
+00:06:52,323 --> 00:06:58,686
+So, insert does not get rid of anything
+that is in the list, it moves things over
+
+78
+00:06:58,686 --> 00:07:04,755
+to make room.
+Last, let's get rid of hot pink because
+
+79
+00:07:04,755 --> 00:07:08,668
+that's just a little bit bright for our
+aged selves.
+
+80
+00:07:08,668 --> 00:07:12,356
+In order to remove it, we need to know
+it's index.
+
+81
+00:07:12,356 --> 00:07:16,872
+We can call the list index method in order
+to find this out.
+
+82
+00:07:16,872 --> 00:07:21,313
+But again, index might crash if the item
+is not in the list.
+
+83
+00:07:21,313 --> 00:07:26,581
+For example, colours.index remember we
+don't have neon green anymore.
+
+84
+00:07:26,581 --> 00:07:30,420
+It gives us a value error neon green is
+not in list.
+
+85
+00:07:30,420 --> 00:07:36,456
+We want to prevent errors from happening.
+So here, we will use and if statement if
+
+86
+00:07:36,456 --> 00:07:41,865
+hot pink in colours to check to see
+whether we can call index without
+
+87
+00:07:41,865 --> 00:07:45,393
+crashing.
+So, if hot pink is in colours, we will
+
+88
+00:07:45,393 --> 00:07:51,900
+then assign the variable, where, the
+result of calling colours.hotpink, And
+
+89
+00:07:51,900 --> 00:07:58,877
+then, we can use that index where to call
+colours.pop to remove hot pink and now we
+
+90
+00:07:58,877 --> 00:08:02,640
+are left with taupe, magenta, brown, blue,
+and auburn.

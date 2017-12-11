@@ -1,0 +1,243 @@
+1
+00:00:01,020 --> 00:00:06,517
+Il visualizzatore di Python ha dei limiti, non
+permette delle istruzioni di import e smette
+
+2
+00:00:06,517 --> 00:00:11,132
+di tracciare dopo 500 passi.
+Idle possiede un debugger integrato, che è una
+
+3
+00:00:11,132 --> 00:00:15,340
+funzionalità simile al visualizzatore, ma senza
+i disegni carini.
+
+4
+00:00:16,000 --> 00:00:21,113
+Qui vediamo le funzioni convert to minutes
+e convert to seconds, che abbiamo analizzato
+
+5
+00:00:21,113 --> 00:00:25,326
+nelle lezioni dell'ultima settimana.
+Attiviamo il debugger di IDLE.
+
+6
+00:00:25,326 --> 00:00:31,200
+Andremo ad assicurarci che la finestra della 
+shell di Python sia in cima, e poi selezioniamo
+
+7
+00:00:31,200 --> 00:00:35,386
+debug-, debugger.
+Questo apre una finestra chiamata debug control.
+
+8
+00:00:35,386 --> 00:00:41,260
+Ora sto per, per ridimensionarla in modo che
+possiamo vedere tutto mentre viene eseguito.
+
+9
+00:00:41,260 --> 00:00:44,637
+Andiamo a controllare la spunta per
+source.
+
+10
+00:00:44,637 --> 00:00:50,658
+Poi, torniamo qui al nostro modulo
+su cui vogliamo effettuare il debug e selezioniamo
+
+11
+00:00:50,658 --> 00:00:55,876
+run, run module.
+Questa area centrale mostra lo stack di chiamata,
+
+12
+00:00:55,876 --> 00:00:59,852
+o per lo meno la funzione che viene chiamata.
+
+13
+00:00:59,852 --> 00:01:04,160
+Qui sotto si vedono le variabili all'interno
+della chiamata corrente.
+
+14
+00:01:04,440 --> 00:01:10,215
+Notate che la variabile per le funzioni integrate è
+lì, e anche le altre tre variabili di cui
+
+15
+00:01:10,215 --> 00:01:15,779
+non abbiamo ancora discusso in questo corso.
+Step è come il forward del visualizzatore.
+
+16
+00:01:15,779 --> 00:01:20,427
+Definiremo le nostre due funzioni.
+Notate che abbiamo le variabili quaggiù.
+
+17
+00:01:20,427 --> 00:01:25,780
+Tutte quelle, fanno riferimento a funzioni.
+Questa qui, è un indirizzo di memoria.
+
+18
+00:01:26,120 --> 00:01:31,533
+Noterete che ha delle lettere all'interno.
+Questo perché è in base sedici, che
+
+19
+00:01:31,533 --> 00:01:36,873
+è usata, spesso in programmazione i 
+numeri dallo zero al nove, più le
+
+20
+00:01:36,873 --> 00:01:41,060
+lettere A, B, C, D, E ed F per un totale di
+sedici caratteri.
+
+21
+00:01:42,340 --> 00:01:46,389
+Qui abbiamo visto che è evidenziata
+in grigio la riga corrente.
+
+22
+00:01:46,389 --> 00:01:51,550
+E la riga venti è quella linea.
+Quindi ci dice qual è la linea che viene
+
+23
+00:01:51,550 --> 00:01:54,816
+eseguita.
+Quando andiamo ad effettuare lo step di chiamata
+
+24
+00:01:54,816 --> 00:01:59,552
+della funzione convert to seconds.
+Abbiamo solo il parametro num hours
+
+25
+00:01:59,552 --> 00:02:02,761
+disponibile finora per covert to
+seconds.
+
+26
+00:02:02,761 --> 00:02:08,175
+Se vogliamo vedere le, le variabili del modulo,
+possiamo semplicemente cliccare lì e
+
+27
+00:02:08,175 --> 00:02:12,386
+quello passa alla vista per l'esecuzione
+locale, le variabili locali.
+
+28
+00:02:12,386 --> 00:02:18,001
+Ritorneremo a convert to seconds e entreremo
+nella chiamata di convert to minutes.
+
+29
+00:02:18,001 --> 00:02:22,480
+Ora abbiamo tre elementi nello stack di chiamata,
+coinvolte in quel programma.
+
+30
+00:02:22,480 --> 00:02:25,994
+Andiamo avanti ancora di un passo per definire
+la nostra variabile minutes.
+
+31
+00:02:25,994 --> 00:02:29,759
+Minutes ora vale 120.
+Solo per controllare, ritorneremo indietro al
+
+32
+00:02:29,759 --> 00:02:34,779
+frame per convert to seconds, e noteremo
+che ha solo la variabile num hours.
+
+33
+00:02:34,779 --> 00:02:39,674
+Il motivo è, che noi non abbiamo finito questa
+chiamata a convert to minutes, e quindi questa
+
+34
+00:02:39,674 --> 00:02:44,925
+variabile minutes non è ancora stata creata.
+Sto per passare nuovamente alla visuale del, del
+
+35
+00:02:44,925 --> 00:02:48,179
+frame principale.
+E, quando vado un passo avanti, sta solo andando
+
+36
+00:02:48,179 --> 00:02:53,346
+ad eseguire l'istruzione di return tutta insieme
+includendo far apparire il frame dallo
+
+37
+00:02:53,346 --> 00:02:56,281
+stack.
+Non arriviamo a vedere il valore di ritorno
+
+38
+00:02:56,281 --> 00:03:02,959
+prima che il return venga eseguito.
+Quindi siamo di nuovo in convert to seconds, stiamo
+
+39
+00:03:02,959 --> 00:03:10,221
+per valutare 120 per 60 e assegnare
+il risultato a seconds, dove otteniamo 7200
+
+40
+00:03:10,221 --> 00:03:16,699
+e andremo a ritornare 7200.
+Questa chiamata a convert to seconds, e.
+
+41
+00:03:16,699 --> 00:03:20,184
+creerà la variabile seconds,
+nello
+
+42
+00:03:20,184 --> 00:03:25,670
+stack frame per il modulo principale.
+Passando alla nostra vista precedente e cliccando step
+
+43
+00:03:25,670 --> 00:03:29,526
+questo causa la
+fine del nostro programma, visto che questo era
+
+44
+00:03:29,526 --> 00:03:34,396
+l'ultimo passo del programma.
+Torniamo di nuovo lì e notiamo che
+
+45
+00:03:34,396 --> 00:03:40,358
+abbiamo effettivamente una variabile seconds creata.
+Quindi alla fine di un programma si crea un po' di
+
+46
+00:03:40,358 --> 00:03:45,900
+confusione dato che in un'istruzione di return,
+e con l'espressione di return all'interno di una
+
+47
+00:03:45,900 --> 00:03:51,582
+funzione che è l'ultima istruzione
+che viene eseguita, il programma finirà
+
+48
+00:03:51,582 --> 00:03:57,193
+e lo stack frame non verrà rimosso
+dato che il debugger non aggiorna alla
+
+49
+00:03:57,193 --> 00:04:00,140
+fine di un programma una volta che il programma
+è terminato.

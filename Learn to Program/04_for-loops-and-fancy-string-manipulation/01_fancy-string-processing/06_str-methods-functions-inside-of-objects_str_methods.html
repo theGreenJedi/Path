@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            str Methods: Functions Inside Objects
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128
+" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 7.1 Modules, Classes, and Methods
+                </li>
+                <li>Chapter 7.2 Calling Methods the Object-Oriented Way
+                </li>
+                <li>Chapter 7.3 Exploring String Methods
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            <code>str</code> Methods: Functions Inside Objects
+        </h1>
+        <h3>
+            Methods
+        </h3>
+        <p>
+            A <em>method</em> is a function inside of an object.
+        </p>
+        <p>
+            The general form of a method call is:<br>
+            <br>
+            <code>object.method(arguments)</code>
+        </p>
+        <h3>
+            String Methods
+        </h3>
+        <p>
+            Consider the code:
+        </p>
+        <pre>
+&gt;&gt;&gt; white_rabbit = "I'm late! I'm late! For a very important date!"
+</pre>To find out which methods are inside strings, use the function <code>dir</code>:
+        <pre>
+&gt;&gt;&gt; dir(white_rabbit)
+['__add__', '__class__', '__contains__', '__delattr__', '__doc__', '__eq__', '__format__',
+'__ge__', '__getattribute__','__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__',
+'__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__',
+'__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__',
+'__subclasshook__', 'capitalize', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find',
+'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isdecimal', 'isdigit', 'isidentifier',
+'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower',
+'lstrip', 'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit',
+'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper',
+ 'zfill']
+</pre>Passing <code>str</code> as an argument to <code>dir</code> gets the same result:
+        <pre>
+&gt;&gt;&gt; dir(str)
+</pre>For many of the string methods, a new string is returned. Since strings are immutable, the original string is unchanged. For example, a lowercase version of the <code>str</code> that <code>white_rabbit</code> refers to is returned when the method <code>lower</code> is called:
+        <pre>
+&gt;&gt;&gt; white_rabbit.lower()
+&gt;&gt;&gt; "i'm late! i'm late! for a very important date!"
+&gt;&gt;&gt; white_rabbit
+&gt;&gt;&gt; "I'm late! I'm late! For a very important date!"
+                        
+</pre>To get information about a method, such as the <code>lower</code> method, do the following:
+        <pre>
+&gt;&gt;&gt; help(str.lower)
+</pre>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

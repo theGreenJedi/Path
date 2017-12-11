@@ -1,0 +1,495 @@
+1
+00:00:01,100 --> 00:00:05,944
+I programmi che abbiamo scritto finora
+eseguono sempre la stessa sequenza di istruzioni
+
+2
+00:00:05,944 --> 00:00:09,652
+ogni volta che vengono lanciate.
+In questa lezione, andremo ad usare
+
+3
+00:00:09,652 --> 00:00:13,420
+delle espressioni Booleane per controllare
+quali istruzioni devono essere eseguite.
+
+4
+00:00:13,860 --> 00:00:18,823
+Consideriamo questo problema.
+Un volo era stato schedulato per arrivare ad
+
+5
+00:00:18,823 --> 00:00:23,786
+un'orario particolare, e ora si stima che arrivi
+in un altro momento.
+
+6
+00:00:23,786 --> 00:00:29,501
+Scrivi una funzione, che dati i due orari,
+restituisca lo stato del volo, se è in orario,
+
+7
+00:00:29,501 --> 00:00:34,384
+in anticipo, o in ritardo.
+Per questa funzione, un orario sarà
+
+8
+00:00:34,384 --> 00:00:41,375
+rappresentato usando un float.
+Ad esempio, l'orario tre AM sarà
+
+9
+00:00:41,375 --> 00:00:48,693
+rappresentato da 3:0 e il tempo due: 3:30PM
+14:30, sarà rappresentato da
+
+10
+00:00:48,693 --> 00:00:53,285
+14.5.
+Quindi, ogni volta che gli orari con cui lavoriamo
+
+11
+00:00:53,285 --> 00:01:05,080
+sarà fra 0.0 e 24. 
+0.0 inclusivo e 24 esclusivo.
+
+12
+00:01:05,480 --> 00:01:11,029
+Questa è una precondizione alla chiamata.
+Quando scriviamo la nostra funzione ci aspettiamo che
+
+13
+00:01:11,029 --> 00:01:14,280
+l'orario fornito sia all'interno di questo range.
+
+14
+00:01:15,660 --> 00:01:21,475
+Iniziamo a definire la funzione, inizieremo
+con qualche esempio di chiamata alla funzione.
+
+15
+00:01:21,475 --> 00:01:24,820
+Andrò a chiamare questa funzione report
+status.
+
+16
+00:01:25,260 --> 00:01:29,312
+E avrà due argomenti, prende
+due argomenti.
+
+17
+00:01:29,960 --> 00:01:36,363
+Il primo sarà il tempo previsto dei arrivo,
+e il secondo sarà il nuovo tempo
+
+18
+00:01:36,363 --> 00:01:41,550
+previsto di arrivo.
+Quando questi due valori sono uguali,
+
+19
+00:01:41,550 --> 00:01:48,034
+ritornerà il messaggio on time.
+Quando l'orario previsto è 12.5 e il
+
+20
+00:01:48,034 --> 00:01:54,600
+nuovo orario di arrivo previsto è 11.5 o
+prima, questa funzione restituirà early.
+
+21
+00:01:55,420 --> 00:01:58,949
+E infine per l'ultima situazione
+
+22
+00:01:58,949 --> 00:02:06,473
+possibile, è quando l'orario è 9.0,
+il tempo previsto e poi il tempo di arrivo
+
+23
+00:02:06,473 --> 00:02:13,996
+previsto viene spostato in avanti, questa funzione
+dovrebbe ritornare un messaggio che dica che
+
+24
+00:02:13,996 --> 00:02:17,623
+il volo è in ritardo.
+Ora scriviamo il tipo della testata.
+
+25
+00:02:17,623 --> 00:02:23,238
+La funzione ha due parametri entrambi
+numeri e in tutti i casi qui, ho
+
+26
+00:02:23,238 --> 00:02:27,670
+passato dei float.
+Ma avremmo anche potuto passare dei valori
+
+27
+00:02:27,670 --> 00:02:30,773
+interi.
+Quindi potremmo usare number per questi due
+
+28
+00:02:30,773 --> 00:02:35,280
+parametri e ritornerà
+qualcosa di tipo stringa.
+
+29
+00:02:36,540 --> 00:02:41,015
+E' il momento della testata.
+Sappiamo che ho chiamato la funzione
+
+30
+00:02:41,015 --> 00:02:46,957
+report status e ora abbiamo bisogno di decidere
+due buoni nomi per i parametri.
+
+31
+00:02:46,957 --> 00:02:50,507
+Il primo parametro posso chiamarlo scheduled
+time.
+
+32
+00:02:50,507 --> 00:03:04,130
+Il secondo, lo chiamerò estimated time.
+L'ultima parte è una doc string che deve
+
+33
+00:03:04,130 --> 00:03:09,528
+essere aggiunta alla descrizione della funzione.
+Questa funzione ritornerà lo stato del volo,
+
+34
+00:03:09,528 --> 00:03:13,681
+e sarà una delle tre stringhe: on time,
+early o delayed.
+
+35
+00:03:13,681 --> 00:03:19,087
+Ritorna lo stato per un volo il cui 
+arrivo era previsto, all'orario scheduled
+
+36
+00:03:19,087 --> 00:03:22,713
+time, il primo parametro.
+Ma si stima che arrivi all'orario
+
+37
+00:03:22,713 --> 00:03:25,680
+estimated time, che è il secondo
+parametro.
+
+38
+00:03:25,680 --> 00:03:33,185
+Un'informazione aggiuntiva che deve
+essere aggiunta alla doc string è
+
+39
+00:03:33,185 --> 00:03:39,318
+la precondizione che gli orari debbano
+essere fra 0.0 e 24.
+
+40
+00:03:39,318 --> 00:03:46,550
+Lo stesso è vero per il l'estimated time.
+Deve anche cadere nell'intervallo.
+
+41
+00:03:46,550 --> 00:03:55,000
+.
+.
+
+42
+00:03:55,380 --> 00:03:58,799
+E' ora di scrivere il corpo della
+funzione.
+
+43
+00:03:58,799 --> 00:04:03,857
+Scriveremo il corpo di questa funzione in
+un paio di passi differenti.
+
+44
+00:04:03,857 --> 00:04:07,491
+E alla fine, avremo la cosa che funziona
+completamente.
+
+45
+00:04:07,491 --> 00:04:13,261
+Per iniziare, dobbiamo capire come
+eseguire alcune istruzioni solo ogni tanto, ma
+
+46
+00:04:13,261 --> 00:04:17,251
+non sempre.
+Ad esempio, vogliamo ritornare la stringa on
+
+47
+00:04:17,251 --> 00:04:20,457
+time.
+Ma non vogliamo ritornare quella stringa
+
+48
+00:04:20,457 --> 00:04:26,370
+tutte le volte che questa funzione viene eseguita.
+Solo le volte in cui l'orario schedulato è
+
+49
+00:04:26,370 --> 00:04:31,490
+uguale all'orario previsto.
+Andremo ad usare un'istruzione if per
+
+50
+00:04:31,490 --> 00:04:35,688
+esprimerlo.
+Questa istruzione di if avrà una condizione
+
+51
+00:04:35,688 --> 00:04:42,160
+booleana che è se l'orario schedulato è
+uguale all'orario previsto.
+
+52
+00:04:44,800 --> 00:04:50,022
+E posizioneremo questa istruzione di return
+all'interno del corpo dell'if.
+
+53
+00:04:50,022 --> 00:04:55,739
+Infatti notate che è indentato, per indicare
+che cade all'interno dell'istruzione if.
+
+54
+00:04:55,739 --> 00:05:01,244
+Il modo in cui si legge questo codice è che
+se questo orario schedulato è uguale
+
+55
+00:05:01,244 --> 00:05:07,173
+all'orario previsto, se quell'espressione booleana
+è vera, allora verrà effettuato il return
+
+56
+00:05:07,173 --> 00:05:10,560
+sull'espressione on time.
+Altrimenti, non viene eseguito e
+
+57
+00:05:10,560 --> 00:05:14,654
+continueremo ad andare avanti, con il codice
+che segue l'if.
+
+58
+00:05:14,654 --> 00:05:23,288
+Salviamo e facciamolo girare.
+Quindi quando chiamo questa funzione, nella
+
+59
+00:05:23,288 --> 00:05:28,690
+shell, con tempi uguali mi restituisce lo stato 
+on time.
+
+60
+00:05:28,690 --> 00:05:34,305
+Se dovessi richiamare questa funzione al
+momento con uno dei tempi, coppie
+
+61
+00:05:34,305 --> 00:05:38,000
+di tempi che non sono uguali, allora non verrebbe
+restituito nulla.
+
+62
+00:05:38,000 --> 00:05:43,746
+Per essere più precisi, dovrei dire che
+sembra che non venga ritornato nulla.
+
+63
+00:05:43,746 --> 00:05:49,420
+Visto che qualcosa viene ritornato da questa
+funzione, anche se non è stata eseguita alcuna
+
+64
+00:05:49,420 --> 00:05:52,581
+istruzione di return.
+Stampiamo la chiamata alla funzione.
+
+65
+00:05:52,581 --> 00:05:57,249
+Quindi la funzione viene chiamata, qualsiasi valore
+venga ritornato viene ritornato.
+
+66
+00:05:57,249 --> 00:06:02,565
+E quel valore sta per essere stampato.
+E possiamo vedere che viene stampato None.
+
+67
+00:06:02,565 --> 00:06:08,239
+Quando viene eseguita una chiamata ad una funzione
+e non viene eseguita alcuna istruzione di return, il valore
+
+68
+00:06:08,239 --> 00:06:13,481
+ritornato dalla funzione è None.
+Il tipo di Non è il non-type, non stringa.
+
+69
+00:06:13,481 --> 00:06:19,224
+Quindi questo spezza il contratto sui tipi che abbiamo 
+specificato nel nostro report sullo stato della funzione
+
+70
+00:06:19,224 --> 00:06:24,687
+Dobbiamo completare il resto della funzione 
+assicurando che, il tipo del contratto
+
+71
+00:06:24,687 --> 00:06:28,330
+venga rispettato.
+Ritorniamo a definire la funzione.
+
+72
+00:06:28,330 --> 00:06:34,388
+Ora, abbiamo una singola istruzione di if
+e quando questa condizione booleana è vera,
+
+73
+00:06:34,388 --> 00:06:38,933
+viene ritornato on time.
+Quando è falsa vogliamo fare qualcosa
+
+74
+00:06:38,933 --> 00:06:42,265
+di diverso.
+Quindi controlliamo per vedere se è vera, e
+
+75
+00:06:42,265 --> 00:06:47,642
+e poi andremo ad usare el, che sta per
+else, elif, per controllare una seconda
+
+76
+00:06:47,642 --> 00:06:53,130
+condizione.
+Questa volta andremo a controllare per vedere
+
+77
+00:06:53,130 --> 00:06:59,269
+se l'orario schedulato è maggiore 
+del tempo stimato.
+
+78
+00:06:59,269 --> 00:07:05,054
+E quando lo è, ritorneremo early.
+
+79
+00:07:05,054 --> 00:07:13,640
+E deve essere scritto come scheduled.
+Quindi a questo punto facciamolo girare.
+
+80
+00:07:14,520 --> 00:07:21,514
+E quando chiamiamo questa funzione con
+orari uguali dice on time.
+
+81
+00:07:21,514 --> 00:07:28,071
+Quando, quando la chiamiamo con orari
+minori, dice early.
+
+82
+00:07:28,071 --> 00:07:34,410
+Ma ancora a questo punto, quando la 
+chiamiamo con un tempo posteriore
+
+83
+00:07:34,410 --> 00:07:37,877
+viene ritornato None.
+Quindi non abbiamo ancora finito.
+
+84
+00:07:37,877 --> 00:07:43,733
+Andremo ad aggiungere una terza parte
+all'istruzione if, che è un'istanza di else.
+
+85
+00:07:43,733 --> 00:07:49,511
+Else dice, se nessuna delle precedenti
+condizioni è soddisfatta, allora
+
+86
+00:07:49,511 --> 00:07:53,133
+fai questo.
+Quindi abbiamo controllato se sono uguali,
+
+87
+00:07:53,133 --> 00:07:59,528
+maggiori di, e l'unica cosa rimasta è
+che l'orario schedulato sia minore dell'orario
+
+88
+00:07:59,528 --> 00:08:02,764
+previsto.
+In questo caso, questa funzione
+
+89
+00:08:02,764 --> 00:08:08,217
+restituirà delayed.
+Quindi possiamo farlo girare di nuovo, controllando
+
+90
+00:08:08,217 --> 00:08:15,442
+tutte le nostre condizioni, quando sono uguali,
+quando è in anticipo e quando l'orario previsto
+
+91
+00:08:15,442 --> 00:08:20,260
+è posteriore.
+Ora abbiamo i ritorni appropriati.
+
+92
+00:08:21,240 --> 00:08:26,400
+Voglio menzionare un paio di funzionalità
+dell'istruzione if.
+
+93
+00:08:26,400 --> 00:08:33,252
+Possiamo avere zero o più clausole elif 
+associate con un if e possiamo avere zero
+
+94
+00:08:33,252 --> 00:08:40,020
+o una clausola di else, e poi l'else deve essere
+l'ultima clausola per l'istruzione di if.
+
+95
+00:08:40,280 --> 00:08:45,728
+Quando abbiamo un'istruzione di if con queste
+varie espressioni, possiamo valutare ogni
+
+96
+00:08:45,728 --> 00:08:49,974
+espressione in ordine.
+E per la prima che viene valutata a
+
+97
+00:08:49,974 --> 00:08:54,502
+vera, il suo corpo, la parte all'interno
+dell'istruzione if viene eseguita.
+
+98
+00:08:54,502 --> 00:08:58,677
+Dopo che viene eseguito il corpo,
+l'istruzione di if termina.
+
+99
+00:08:58,677 --> 00:09:04,692
+Quindi esiste e continua con il codice che si
+trova al di sotto, senza controllare nessuna
+
+100
+00:09:04,692 --> 00:09:06,037
+altra condizione.

@@ -1,0 +1,1699 @@
+1
+00:00:01,100 --> 00:00:04,702
+This lecture is huge.
+However, it does not introduce any new
+
+2
+00:00:04,702 --> 00:00:08,915
+Python tools, and so, you can consider
+this, to be optional, if you like.
+
+3
+00:00:08,915 --> 00:00:12,762
+In it, I am going to be developing a
+program from the beginning.
+
+4
+00:00:12,762 --> 00:00:17,891
+I'm going to figure out, what information
+I need to read, and I need to figure out
+
+5
+00:00:17,891 --> 00:00:21,616
+how I'm going to start and what functions
+I'm going to write.
+
+6
+00:00:21,616 --> 00:00:26,623
+This is, meant to give you a taste, of the
+thought process that I go through when I
+
+7
+00:00:26,623 --> 00:00:31,703
+write a program.
+This file contains a bunch of assignment
+
+8
+00:00:31,703 --> 00:00:36,102
+one grades.
+There's a header followed by a blank line.
+
+9
+00:00:36,102 --> 00:00:41,497
+Followed by a list of student number and
+grade on assignment one.
+
+10
+00:00:41,497 --> 00:00:46,062
+We would like to know the distribution of
+these grades.
+
+11
+00:00:46,062 --> 00:00:49,631
+So we're going to keep track of
+categories.
+
+12
+00:00:49,631 --> 00:00:56,022
+How many ended up in the range zero to
+nine, ten to nineteen, twenty to 29, and
+
+13
+00:00:56,022 --> 00:01:07,543
+so on.
+And we will have also a category for the
+
+14
+00:01:07,543 --> 00:01:14,189
+people who got 100.
+We ultimately, in this program, want to
+
+15
+00:01:14,189 --> 00:01:18,680
+create a new file containing this
+information.
+
+16
+00:01:18,680 --> 00:01:24,147
+And also, one star for each grade that was
+in that range.
+
+17
+00:01:24,147 --> 00:01:31,468
+So we see a 77.5, that means that in our
+output file, we'd like a star there.
+
+18
+00:01:31,468 --> 00:01:36,350
+There's a 37.5, that's in that range.
+We see a 62.5.
+
+19
+00:01:36,350 --> 00:01:42,002
+72.5, so we have two numbers in the 70
+range so far.
+
+20
+00:01:42,002 --> 00:01:49,870
+There's 100, we've got a 55, a 95,
+something in the eighties, something in
+
+21
+00:01:49,870 --> 00:01:56,987
+the nineties, and so on.
+Eventually we will have one star, for each
+
+22
+00:01:56,987 --> 00:02:02,850
+number in the file, so that we can see the
+distribution of grades.
+
+23
+00:02:02,850 --> 00:02:10,403
+In order to get a program that does this,
+we need to do the following steps.
+
+24
+00:02:10,403 --> 00:02:18,258
+And step one is going to be, read the
+grades, and this is a natural list into a,
+
+25
+00:02:18,258 --> 00:02:21,179
+a list.
+It's a list situation.
+
+26
+00:02:21,179 --> 00:02:25,811
+So we're going to read the grades into a
+list.
+
+27
+00:02:25,811 --> 00:02:29,840
+That's step one.
+Step two is going to be,
+
+28
+00:02:31,780 --> 00:02:44,300
+Count the number of grades per range.
+And step three is going to be.
+
+29
+00:02:48,320 --> 00:02:59,360
+Write the histogram to the file.
+Whichever file the user picks.
+
+30
+00:02:59,660 --> 00:03:05,379
+This process of writing down the steps at
+a very high level is called top down
+
+31
+00:03:05,379 --> 00:03:08,854
+design.
+When we first get a problem, it's often a
+
+32
+00:03:08,854 --> 00:03:14,935
+bit overwhelming wondering how we're going
+to accomplish this tas, the whole task.
+
+33
+00:03:14,935 --> 00:03:21,166
+So we break it down into steps.
+Once we decide on how we're going to store
+
+34
+00:03:21,166 --> 00:03:25,114
+our data.
+We can do these steps in any order that we
+
+35
+00:03:25,114 --> 00:03:28,128
+like.
+Because they are, roughly independent,
+
+36
+00:03:28,128 --> 00:03:33,440
+And we can test each of them separately..
+Let's start a new program.
+
+37
+00:03:45,780 --> 00:03:50,748
+And let's take some notes.
+I'll get those scribbles down into text.
+
+38
+00:03:50,748 --> 00:03:56,695
+Writing stuff out by hand like we did
+here, just the example of the output that
+
+39
+00:03:56,695 --> 00:04:03,395
+we want and then the list of steps that we
+think we need to take in order to get this
+
+40
+00:04:03,395 --> 00:04:06,707
+program to work, actually has a huge
+benefit.
+
+41
+00:04:06,933 --> 00:04:12,579
+It allows you to step away from the
+programming environment and just think
+
+42
+00:04:12,579 --> 00:04:16,634
+about how you might solve the problem.
+This is essential.
+
+43
+00:04:16,634 --> 00:04:21,343
+Programs are just expressions of
+algorithms that you have in your head.
+
+44
+00:04:21,343 --> 00:04:26,783
+And if you figured out what you need to
+do, you'll have a much easier time writing
+
+45
+00:04:26,783 --> 00:04:32,302
+the code.
+Let's make a note about the, the format
+
+46
+00:04:32,302 --> 00:04:38,186
+that we want.
+We want zero to nine and then a star or
+
+47
+00:04:38,186 --> 00:04:44,625
+two, ten to nineteen.
+We want those to line up twenty to 29.
+
+48
+00:04:44,625 --> 00:04:51,731
+Maybe there are that many, and so on all
+the way up to 90 and 99.
+
+49
+00:04:51,731 --> 00:04:57,060
+Whoops we want that ended and then the
+hundreds.
+
+50
+00:04:57,380 --> 00:05:01,011
+Now that I have that, I can get rid of
+this scribbles.
+
+51
+00:05:03,280 --> 00:05:08,261
+We're going to be reading from files, and
+they're going to be files that the user
+
+52
+00:05:08,261 --> 00:05:11,274
+selects.
+We want this to work with any assignment
+
+53
+00:05:11,274 --> 00:05:14,349
+file of this format, not just this
+particular file.
+
+54
+00:05:14,349 --> 00:05:19,858
+And so.
+Learn to use Tkinter's file dialogue.
+
+55
+00:05:20,708 --> 00:05:28,460
+We'll start by asking the user for a file,
+and then just reading the file.
+
+56
+00:05:29,473 --> 00:05:39,605
+We now have variable A1 file name being
+what PK enter dot file dialogue dot ask
+
+57
+00:05:39,605 --> 00:05:44,671
+open file return.
+So, let's open the file.
+
+58
+00:05:45,684 --> 00:05:52,650
+We're going to for line an A1 file, just,
+print the line.
+
+59
+00:05:52,650 --> 00:05:57,089
+Just make sure that we are.
+In good shape.
+
+60
+00:05:57,089 --> 00:06:03,058
+This process of checking frequently about
+how our program is doing is a very good
+
+61
+00:06:03,058 --> 00:06:08,954
+habit to get in to because it allows you
+to catch syntax errors and logic errors
+
+62
+00:06:08,954 --> 00:06:13,540
+early before you've made a mess of things.
+So we run the module.
+
+63
+00:06:13,880 --> 00:06:17,169
+And we see invalid syntax.
+Oh, yes.
+
+64
+00:06:17,169 --> 00:06:23,649
+Wrong kind of print statement.
+That was in my old Python 2.7 days.
+
+65
+00:06:23,649 --> 00:06:30,200
+Save that and try one more time.
+I've made a shorter grades file just so
+
+66
+00:06:30,200 --> 00:06:34,402
+that we don't have to work with so many
+numbers at once.
+
+67
+00:06:34,402 --> 00:06:39,354
+And I have a type error.
+The problem here is that I'm using ASCOPE
+
+68
+00:06:39,354 --> 00:06:42,805
+in file instead of ASCOPE, ASCOPE in file
+name.
+
+69
+00:06:42,805 --> 00:06:46,331
+Ascope in file actually opens the file for
+you.
+
+70
+00:06:46,331 --> 00:06:52,558
+But, I like to do it in two steps because
+I think it's more explicit for people who
+
+71
+00:06:52,558 --> 00:06:57,510
+are just learning how to program.
+I'll select run, run, module again.
+
+72
+00:06:57,510 --> 00:07:03,193
+It says to pick our input file and here,
+we have it.
+
+73
+00:07:03,193 --> 00:07:07,580
+This file has about maybe nine grades in
+it.
+
+74
+00:07:08,620 --> 00:07:14,428
+This process of running frequently has
+found two errors early on in only my six
+
+75
+00:07:14,428 --> 00:07:18,929
+or so lines of code.
+And yet it's going to have saved me a ton
+
+76
+00:07:18,929 --> 00:07:22,342
+of time later on when I have 150 lines of
+code.
+
+77
+00:07:22,342 --> 00:07:28,223
+If I had tried to wait until I had most of
+the program written, I would have been
+
+78
+00:07:28,223 --> 00:07:34,103
+much less clear about where I needed to go
+to look to see where my problems were.
+
+79
+00:07:34,103 --> 00:07:39,912
+I can get rid of these lines of code now,
+because, I know now that I have my file
+
+80
+00:07:39,912 --> 00:07:44,812
+open for reading properly.
+I need to do the same thing with my
+
+81
+00:07:44,812 --> 00:07:52,886
+histogram file.
+And better names for the histogram final,
+
+82
+00:07:52,886 --> 00:07:58,304
+that seems reasonable.
+I like to keep my main programs separate
+
+83
+00:07:58,304 --> 00:08:03,550
+from the functions that, that I rely on in
+my main program.
+
+84
+00:08:03,808 --> 00:08:10,430
+So just like with assignment one and
+assignment two, I will start a file just
+
+85
+00:08:10,430 --> 00:08:16,900
+to contain the functions.
+I'll call it grade.pi.
+
+86
+00:08:18,540 --> 00:08:22,928
+And I know I'm going to have to import it.
+.
+
+87
+00:08:22,928 --> 00:08:29,775
+My steps are reading the grades into a
+list, counting the grades per range, and
+
+88
+00:08:29,775 --> 00:08:36,500
+writing the histogram to the file.
+We will start.
+
+89
+00:08:37,120 --> 00:08:41,174
+With reading the grades into a list.
+.
+
+90
+00:08:41,174 --> 00:08:46,702
+Because I'm reading from a file, it's hard
+to get an example.
+
+91
+00:08:46,702 --> 00:08:53,428
+So, we'll start with the type contract.
+I know that I have a file open for
+
+92
+00:08:53,428 --> 00:08:54,902
+reading.
+.
+
+93
+00:08:54,902 --> 00:08:58,956
+And I know that it's going to return a
+list.
+
+94
+00:08:58,956 --> 00:09:04,208
+And that these, all these numbers in this
+file are floats.
+
+95
+00:09:04,208 --> 00:09:13,720
+So, it's a list of float.
+Need an extra space there, get my
+
+96
+00:09:13,720 --> 00:09:19,140
+indentation proper.
+And what this is going to do is read and
+
+97
+00:09:19,140 --> 00:09:23,295
+return the list of grades in the file.
+.
+
+98
+00:09:23,295 --> 00:09:27,901
+Well, I need a header.
+Read grades is what I'm doing.
+
+99
+00:09:27,901 --> 00:09:32,960
+It's a nice verb phrase, and I'll call
+this grading file.
+
+100
+00:09:34,360 --> 00:09:41,722
+So now I can.
+Finish up my doc string, grade file.
+
+101
+00:09:41,722 --> 00:09:48,520
+There we go.
+I need to know that this style is in the
+
+102
+00:09:48,520 --> 00:09:54,618
+right format.
+So the pre-condition to calling this
+
+103
+00:09:54,618 --> 00:09:57,790
+function is that.
+Art file.
+
+104
+00:09:57,790 --> 00:10:01,692
+Grade file.
+Starts with a header.
+
+105
+00:10:01,692 --> 00:10:08,110
+Then contains to blank lines And has a
+blank line.
+
+106
+00:10:08,904 --> 00:10:13,473
+Because I need to be able to skip that
+header.
+
+107
+00:10:14,268 --> 00:10:20,326
+And then I need to know that the, each
+line is in this format.
+
+108
+00:10:20,326 --> 00:10:24,597
+Where there's a student number and a
+grade.
+
+109
+00:10:25,392 --> 00:10:31,848
+In order to accomplish this I first need
+to skip over the header.
+
+110
+00:10:32,642 --> 00:10:38,900
+And then read the grades.
+Accumulating them into a list.
+
+111
+00:10:38,900 --> 00:10:44,331
+I'm following the same top-down approach.
+I'm writing out the steps that I need to
+
+112
+00:10:44,331 --> 00:10:47,245
+do, in order to.
+Accomplish this, smaller task.
+
+113
+00:10:47,245 --> 00:10:49,564
+.
+But it's the same approach.
+
+114
+00:10:49,564 --> 00:10:56,247
+The same top-down, design.
+In order to skip over the header, we will
+
+115
+00:10:56,247 --> 00:11:02,259
+read the first line.
+And as long as that line is not the new
+
+116
+00:11:02,259 --> 00:11:06,668
+line character, I need to read the next
+line.
+
+117
+00:11:06,668 --> 00:11:14,884
+Now, I have just read the blank line, so
+now I need to read the grades accumulating
+
+118
+00:11:14,884 --> 00:11:20,895
+them into the list.
+Well, I know I'm going to be reading that
+
+119
+00:11:20,895 --> 00:11:26,847
+first grade and then.
+As long as what I read, as long as I
+
+120
+00:11:26,847 --> 00:11:33,643
+haven't reached the end of the file, and I
+write it like that, if you recall, my line
+
+121
+00:11:33,643 --> 00:11:38,146
+is not the empty string, then I wanna do
+the same thing.
+
+122
+00:11:38,146 --> 00:11:45,188
+I want to do gradefile.readline.
+So this is going to read every line in the
+
+123
+00:11:45,188 --> 00:11:50,272
+rest of the file.
+What I need to do now is into this pattern
+
+124
+00:11:50,272 --> 00:11:55,445
+I need to accumulate the grades.
+In order to make that happen, I need my
+
+125
+00:11:55,445 --> 00:12:00,035
+accumulator variable.
+I'll start off with an empty list, this is
+
+126
+00:12:00,035 --> 00:12:03,460
+going to contain all of the grades in the
+file.
+
+127
+00:12:03,460 --> 00:12:11,353
+As long as I haven't reached the end I
+know I have a grate, so now we have a
+
+128
+00:12:11,353 --> 00:12:15,909
+string.
+Containing the information for a single
+
+129
+00:12:15,909 --> 00:12:22,227
+student.
+We're going to find the last space in the
+
+130
+00:12:22,227 --> 00:12:29,790
+line, that's the space right before the
+number, and extract only the rest of the
+
+131
+00:12:29,790 --> 00:12:34,959
+characters after that.
+So find the last space, and take
+
+132
+00:12:34,959 --> 00:12:40,150
+everything after that space.
+Well, I know that.
+
+133
+00:12:40,150 --> 00:12:46,936
+Line.rfind, finds from the right.
+So I'm looking for the right most spaced,
+
+134
+00:12:46,936 --> 00:12:53,072
+that gives me back the index of the right
+most spaced in the line.
+
+135
+00:12:53,072 --> 00:13:00,881
+I would like to slice the line starting at
+one passed that position, the first digit,
+
+136
+00:13:00,881 --> 00:13:07,481
+and go up until the end of the string, so
+this will extract that for me.
+
+137
+00:13:07,481 --> 00:13:13,147
+See that in a variable.
+I have the number but, it's currently a
+
+138
+00:13:13,147 --> 00:13:18,936
+string because line is a string and when I
+slice, I get a string.
+
+139
+00:13:18,936 --> 00:13:25,630
+So, when I attend to my grades list, I
+would like to turn that into a float.
+
+140
+00:13:25,630 --> 00:13:31,958
+I think we're almost done.
+I have my list of grades there.
+
+141
+00:13:31,958 --> 00:13:42,660
+And so that is what I'm going to return.
+Let's try it out.
+
+142
+00:13:43,820 --> 00:13:51,260
+I'm going to run this, so that I have
+access to read grades in the showe, I'm
+
+143
+00:13:51,260 --> 00:13:58,701
+going to, whoops, yep I'm going to ask
+for, [laugh], TK enter dot file, file log,
+
+144
+00:13:58,701 --> 00:14:06,277
+need to import this.
+I'm going to ask for a file.
+
+145
+00:14:06,277 --> 00:14:11,720
+We will take our test file.
+Now I.
+
+146
+00:14:13,880 --> 00:14:22,833
+Need to come here, and open, that file,
+and finally, I'm going to call v grades on
+
+147
+00:14:22,833 --> 00:14:29,066
+that open file.
+This is going to, return to me, hopefully
+
+148
+00:14:29,066 --> 00:14:34,960
+a list of the floats that we see on the
+screen here.
+
+149
+00:14:35,800 --> 00:14:42,786
+And it looks like we have all of them.
+With that quick test, I think I'm ready to
+
+150
+00:14:42,786 --> 00:14:49,119
+call read grades from my main program.
+Now I know how to read the grades into a
+
+151
+00:14:49,119 --> 00:14:51,720
+list.
+.
+
+152
+00:14:53,262 --> 00:15:03,701
+The next task is to count the grades for
+each of the, the range categories that we
+
+153
+00:15:03,701 --> 00:15:08,860
+see here.
+Well, let's go start designing it.
+
+154
+00:15:10,280 --> 00:15:15,222
+.
+With this one, we actually can have an
+
+155
+00:15:15,222 --> 00:15:21,023
+example.
+We have to decide what we're going to call
+
+156
+00:15:21,023 --> 00:15:23,602
+this.
+Maybe (great) ranges.
+
+157
+00:15:23,602 --> 00:15:27,900
+We can always change our mind later.
+And.
+
+158
+00:15:27,900 --> 00:15:32,324
+We now know that if we give it a list like
+this.
+
+159
+00:15:32,324 --> 00:15:39,053
+We actually have an example of this.
+What we would like it to do is maybe
+
+160
+00:15:39,053 --> 00:15:45,598
+return a new list with the counts.
+So we know that we have, how many 0's.
+
+161
+00:15:45,598 --> 00:15:50,760
+We've got two in the zero to nine point
+something range.
+
+162
+00:15:51,200 --> 00:15:55,183
+We have nothing in the 20's.
+Whoops.
+
+163
+00:15:55,183 --> 00:16:02,241
+We have one number in the 30's.
+We have no numbers in the 40's.
+
+164
+00:16:02,241 --> 00:16:06,224
+One number in the 50's.
+Two numbers.
+
+165
+00:16:06,224 --> 00:16:11,119
+One two three four numbers in the 70
+range.
+
+166
+00:16:11,119 --> 00:16:14,422
+No 80's.
+No nineties and one, one hundred.
+
+167
+00:16:14,422 --> 00:16:18,909
+So this hopefully is what we are going to
+be able to return.
+
+168
+00:16:18,909 --> 00:16:24,443
+We are going to zero, there's one two
+three four five six seven eight nine.
+
+169
+00:16:24,443 --> 00:16:27,360
+Zero ten, twenty.
+Whoops, I am off by one.
+
+170
+00:16:28,120 --> 00:16:35,071
+Zeroes, no tens, no twenties, one 30 no
+forties, one 50, no, sixties, four
+
+171
+00:16:35,071 --> 00:16:39,773
+seventies, no eighties, no nineties, and
+one 100.
+
+172
+00:16:39,773 --> 00:16:47,031
+So two, three, four, eight, nine, numbers,
+one, two, three, four, five, six, seven,
+
+173
+00:16:47,031 --> 00:16:53,880
+eight, nine, numbers so I think I've
+costructed my example, correctly.
+
+174
+00:16:54,220 --> 00:16:58,160
+Gonna move this over here for just a
+minute so I can examine.
+
+175
+00:16:58,160 --> 00:17:02,484
+That histogram here.
+So this is, the histogram that I
+
+176
+00:17:02,484 --> 00:17:07,123
+ultimately want.
+And what I've seem to have decided here is
+
+177
+00:17:07,123 --> 00:17:13,413
+that, at index zero, I'm going to count
+all the numbers that are arranged zero to
+
+178
+00:17:13,413 --> 00:17:16,951
+nine.
+At index one, in my result of this grade
+
+179
+00:17:16,951 --> 00:17:21,197
+ranges function, I'm going to count the
+number of tens.
+
+180
+00:17:21,197 --> 00:17:25,285
+The number of twenties, number of
+thirties, and so on.
+
+181
+00:17:25,285 --> 00:17:27,462
+And.
+Index zero is the 0s.
+
+182
+00:17:27,462 --> 00:17:31,186
+Index one is the 10s.
+Index two is the 20s.
+
+183
+00:17:31,186 --> 00:17:36,330
+Index three is the 30s.
+So I seem to have the index number.
+
+184
+00:17:36,330 --> 00:17:41,879
+Be the first, be the 10s digit.
+30s, 40s at index four, 50s at index five,
+
+185
+00:17:41,879 --> 00:17:47,667
+90s at index nine, 100s at index ten.
+So yes, that does seem to be what I'm
+
+186
+00:17:47,667 --> 00:17:51,393
+getting.
+Understanding this data representation,
+
+187
+00:17:51,393 --> 00:17:57,735
+how I'm storing information, and what each
+index means, and how it corresponds to
+
+188
+00:17:57,735 --> 00:18:04,157
+these ranges here is going to, again, save
+me a ton of time later on when I try to
+
+189
+00:18:04,157 --> 00:18:11,541
+implement this function.
+I'm gonna grab this here.
+
+190
+00:18:11,541 --> 00:18:16,620
+And I'm gonna take a few notes about what
+I just figured out.
+
+191
+00:18:17,560 --> 00:18:22,884
+0-9 is index zero.
+This is index one.
+
+192
+00:18:22,884 --> 00:18:33,089
+This is index two and so on.
+This is index nine and this is index ten
+
+193
+00:18:33,089 --> 00:18:40,395
+and my result.
+Well I seem to be giving it [laugh].
+
+194
+00:18:40,395 --> 00:18:45,776
+If I fix that there.
+I seem to be giving this a list of Float
+
+195
+00:18:45,776 --> 00:18:58,140
+and it's giving me back a list of It.
+And this seems to be returning a list of
+
+196
+00:18:58,140 --> 00:19:09,080
+in int each index in, indicates how many
+grades were in these rangers.
+
+197
+00:19:13,521 --> 00:19:18,732
+Grade ranges doesn't seem to quite capture
+the idea.
+
+198
+00:19:18,732 --> 00:19:26,544
+So I'm gonna put count grade ranges.
+Take symbolistic rates.
+
+199
+00:19:26,544 --> 00:19:31,832
+That means I need to change my example
+here.
+
+200
+00:19:31,832 --> 00:19:40,038
+And that does seem a better verb phrase.
+My result is eleven numbers long.
+
+201
+00:19:40,038 --> 00:19:47,172
+And I want to keep track of this count.
+So, range counts is going to be, well,
+
+202
+00:19:47,172 --> 00:19:53,026
+they all start off at zero.
+So, this'll give me a list of length
+
+203
+00:19:53,026 --> 00:19:59,218
+eleven of ints that are all zero and I'm
+going to update this as I look at each
+
+204
+00:19:59,218 --> 00:20:03,815
+number.
+And I need to figure out how I'm gonna
+
+205
+00:20:03,815 --> 00:20:11,299
+take that 77.5 and just get that first the
+tens digit there so I can use that as an
+
+206
+00:20:11,299 --> 00:20:18,213
+index into this range count list.
+Any number up from 70, up through 79 point
+
+207
+00:20:18,213 --> 00:20:23,980
+nine should end up with just the seven.
+So I'm going to come over here, and
+
+208
+00:20:23,980 --> 00:20:28,734
+experiment a little bit.
+77 point five, and just divide by ten,
+
+209
+00:20:28,734 --> 00:20:34,813
+I'll end up with seven point seven, five,
+I want to get rid of that point seven,
+
+210
+00:20:34,813 --> 00:20:36,450
+five.
+So I'll use the.
+
+211
+00:20:36,450 --> 00:20:44,121
+Other form of division where I throw away
+the fractional portion.
+
+212
+00:20:44,121 --> 00:20:48,723
+Does that work if I just have a 70?
+Yup.
+
+213
+00:20:48,723 --> 00:20:51,320
+How about a 79.9?
+Good.
+
+214
+00:20:52,820 --> 00:21:00,552
+Coming back to my program that means that
+once I have a grade from my list I want to
+
+215
+00:21:00,552 --> 00:21:05,646
+use this division.
+And then I'm gonna be using that as a
+
+216
+00:21:05,646 --> 00:21:11,287
+index and arrange council.
+I need to task that result to in it.
+
+217
+00:21:11,287 --> 00:21:18,508
+For each grade in the grades file.
+I need to know which range I want to, add
+
+218
+00:21:18,508 --> 00:21:23,677
+one to in range counts.
+Well, I had just figured out that I can
+
+219
+00:21:23,677 --> 00:21:29,512
+take that grade and divide it by ten and
+turn that result into an int.
+
+220
+00:21:29,512 --> 00:21:35,682
+So this will tell me the index into the
+range counts list that I want the
+
+221
+00:21:35,682 --> 00:21:38,100
+increment.
+So range counts is.
+
+222
+00:21:38,100 --> 00:21:49,850
+Range counts at index which range.
+Is what was there plus one.
+
+223
+00:21:50,540 --> 00:21:55,801
+So I've looked at all of the grades.
+I'm done.
+
+224
+00:21:55,809 --> 00:22:01,629
+So, I'll just return that list.
+It's time to test it.
+
+225
+00:22:01,629 --> 00:22:07,730
+So let's grab that list there.
+Run this module.
+
+226
+00:22:07,730 --> 00:22:14,596
+Call this and compare.
+20010104001.
+
+227
+00:22:14,596 --> 00:22:19,240
+Awesome.
+Two steps down.
+
+228
+00:22:19,240 --> 00:22:25,704
+One to go.
+I know in my main program here that I want
+
+229
+00:22:25,704 --> 00:22:31,358
+to count the grades per range.
+I no have a lovely little function to do
+
+230
+00:22:31,358 --> 00:22:35,658
+that for me.
+So range counts is going to be what I get
+
+231
+00:22:35,658 --> 00:22:39,720
+back from count grade ranges and passing
+in grades.
+
+232
+00:22:41,340 --> 00:22:45,958
+Let's try it out.
+All we're going to do is print range
+
+233
+00:22:45,958 --> 00:22:50,948
+counts and see how we do.
+See whether we seem to be making progress.
+
+234
+00:22:50,948 --> 00:22:58,436
+Let's go to run, run module.
+It says okay, which one do we wanna open?
+
+235
+00:22:58,436 --> 00:23:03,352
+We'll open our test file here.
+And where do we wanna save it?
+
+236
+00:23:03,352 --> 00:23:08,922
+Well I'm gonna eventually save it in
+iii.hist, hist for histogram.
+
+237
+00:23:08,922 --> 00:23:13,510
+But, we're not actually writing anything
+to that file.
+
+238
+00:23:13,510 --> 00:23:18,343
+But I still need to select it, because I
+was asked to do so.
+
+239
+00:23:18,343 --> 00:23:21,948
+And it says name [inaudible] is not
+defined.
+
+240
+00:23:21,948 --> 00:23:26,618
+How can that be?
+I see, I need to use these through the
+
+241
+00:23:26,618 --> 00:23:33,004
+name of the module.
+I also noticed that, I want to ask save as
+
+242
+00:23:33,004 --> 00:23:47,953
+filing because this is the output file.
+Let's restart it.
+
+243
+00:23:47,953 --> 00:23:52,650
+That kills our python program, so that's
+not hanging around.
+
+244
+00:23:52,650 --> 00:23:59,979
+And we'll try one more time.
+And asked for our input file, there it is,
+
+245
+00:23:59,979 --> 00:24:06,902
+or asked for our output file we'll choose
+that one and it says are you sure you want
+
+246
+00:24:06,902 --> 00:24:11,464
+to do that?
+Yeah check my name that is the one I want
+
+247
+00:24:11,464 --> 00:24:16,610
+to replace.
+We get the same list printed here.
+
+248
+00:24:16,610 --> 00:24:20,040
+So our main program is now working, so
+far.
+
+249
+00:24:20,900 --> 00:24:23,942
+Now that I have my list of counts for each
+range.
+
+250
+00:24:23,942 --> 00:24:26,736
+It's time to write the histogram to the
+file.
+
+251
+00:24:26,736 --> 00:24:30,523
+I've done with this print statement so I
+will comment it out.
+
+252
+00:24:30,523 --> 00:24:33,380
+Just in case I need to un-comment it later
+on.
+
+253
+00:24:35,480 --> 00:24:43,385
+Come back to my function file where I'm
+storing all my functions, and I need to
+
+254
+00:24:43,385 --> 00:24:49,390
+write the histogram so, following our
+design process.
+
+255
+00:24:49,390 --> 00:24:57,222
+I know that I'm going to call it and pass
+in that, the grade range list that I had
+
+256
+00:24:57,222 --> 00:25:04,042
+generated, so I get the, this, range
+counts information and also the file
+
+257
+00:25:04,042 --> 00:25:07,175
+that's been opened for writing.
+So.
+
+258
+00:25:07,175 --> 00:25:12,981
+I know that I've got a list of int and a
+file open for writing.
+
+259
+00:25:13,718 --> 00:25:19,062
+Doesn't return anything.
+All it does is it writes the file.
+
+260
+00:25:19,062 --> 00:25:26,780
+.
+A histogram of the, of stars.
+
+261
+00:25:27,220 --> 00:25:31,440
+Based on the number.
+I'm having trouble typing today.
+
+262
+00:25:31,440 --> 00:25:36,715
+Of grades in each range.
+I wonder if it's frustrating watching me
+
+263
+00:25:36,715 --> 00:25:43,637
+makes these mistakes.
+Well, I have an example of the output that
+
+264
+00:25:43,637 --> 00:25:46,662
+I want.
+.
+
+265
+00:25:46,662 --> 00:25:55,619
+And, I'll just paste this, so that whoever
+calls help on this can see what is
+
+266
+00:25:55,619 --> 00:26:03,954
+expected.
+What is a Stewart writes a histogram, so
+
+267
+00:26:03,954 --> 00:26:07,572
+"writes histrogram" seems to be a
+reasonable name.
+
+268
+00:26:07,572 --> 00:26:13,978
+We know this is the range counts and that
+we have a histogram file that we are going
+
+269
+00:26:13,978 --> 00:26:19,659
+to be writing to.
+The first line of output and the last line
+
+270
+00:26:19,659 --> 00:26:25,034
+of output are slightly different there are
+more spaces after the number I want these
+
+271
+00:26:25,034 --> 00:26:30,157
+to line up so, I, I want these stars to
+line up so when I print the first line and
+
+272
+00:26:30,157 --> 00:26:35,406
+when I print I guess write the last line I
+need to write a few extra spaces so I'm
+
+273
+00:26:35,406 --> 00:26:39,160
+going to deal with them separately.
+Here we go.
+
+274
+00:26:40,005 --> 00:26:48,237
+We first want to write zero to nine, and
+then we want to write how many spaces?
+
+275
+00:26:48,237 --> 00:26:54,253
+One, two three.
+Light does not put a new line character at
+
+276
+00:26:54,253 --> 00:27:00,480
+the end, which is good, because now I
+wanna write some stars.
+
+277
+00:27:02,460 --> 00:27:07,454
+So, I know I want to write some stars.
+And, how many are there?
+
+278
+00:27:07,454 --> 00:27:11,533
+Well, it's however many grades were in
+that range.
+
+279
+00:27:11,533 --> 00:27:18,193
+So, we're going to multiply the asterisk
+by whatever is in range counts at index
+
+280
+00:27:18,193 --> 00:27:22,189
+zero.
+Which is the number of grades that were in
+
+281
+00:27:22,189 --> 00:27:27,704
+the range zero through nine.
+.
+
+282
+00:27:27,704 --> 00:27:34,497
+And then I want to start a new line,
+because, as you can see, the ten through
+
+283
+00:27:34,497 --> 00:27:41,673
+nineteen grades appear on the next line.
+I'll take care of the other special case
+
+284
+00:27:41,673 --> 00:27:45,838
+then.
+And, here we want to write 100.
+
+285
+00:27:45,838 --> 00:27:51,839
+And, rather than range counts at index
+zero, it's actually range counts at the
+
+286
+00:27:51,839 --> 00:27:56,047
+last index.
+That'll give me the number of 100s that
+
+287
+00:27:56,047 --> 00:28:02,797
+were found in the file.
+In between I want to write one line for
+
+288
+00:28:02,797 --> 00:28:12,251
+each of the indices one through nine so
+for I in range one up to but not including
+
+289
+00:28:12,251 --> 00:28:15,220
+ten.
+Well, what does this do?
+
+290
+00:28:16,192 --> 00:28:24,180
+This writes the 2-digit ranges.
+10s, 20s, 30s, and so on.
+
+291
+00:28:26,360 --> 00:28:33,165
+I need to figure out the low number and
+there is a high number for the current
+
+292
+00:28:33,165 --> 00:28:37,299
+range.
+So when I is one, I need to figure out the
+
+293
+00:28:37,299 --> 00:28:43,674
+oops, the ten and the nineteenth.
+When I is two I need twenty and 29 and so
+
+294
+00:28:43,674 --> 00:28:47,120
+on.
+So the low end X is just I times ten.
+
+295
+00:28:48,612 --> 00:28:53,565
+The high index is.
+I times ten plus nine.
+
+296
+00:28:53,565 --> 00:29:01,145
+Just to check nine times ten is 90 plus
+nine is 99, so that'll work for 90 as
+
+297
+00:29:01,145 --> 00:29:05,674
+well.
+So, yep that seems to give me the low and
+
+298
+00:29:05,674 --> 00:29:13,467
+the high.
+I am going to write low but I need to give
+
+299
+00:29:13,467 --> 00:29:25,482
+it a string so low, stir of low plus the
+hyphen in between the low and the high and
+
+300
+00:29:25,482 --> 00:29:32,220
+then high.
+Followed by a colon and a space.
+
+301
+00:29:35,000 --> 00:29:42,433
+Once I've written that, , then it's time
+to write the asterisks.
+
+302
+00:29:42,433 --> 00:29:48,682
+So I want to multiply that by range counts
+at which index?
+
+303
+00:29:48,682 --> 00:29:54,500
+Well index I.
+And finally, I want to write the new line.
+
+304
+00:29:58,600 --> 00:30:02,384
+In one of two ways.
+I can do what I was doing before and run
+
+305
+00:30:02,384 --> 00:30:07,492
+this and then come up with an example of
+range counts and send a output file and
+
+306
+00:30:07,492 --> 00:30:13,717
+make sure that file is written, but This
+is the last step in my program so I
+
+307
+00:30:13,717 --> 00:30:20,479
+actually can do that here.
+Now I've got this information elsewhere so
+
+308
+00:30:20,479 --> 00:30:26,162
+I'm going to delete it.
+What I want to do now is write the
+
+309
+00:30:26,162 --> 00:30:33,120
+histogram with the range counts and my
+output file which is a1histfile.
+
+310
+00:30:33,520 --> 00:30:37,646
+I verified that my program seems to be
+working so far.
+
+311
+00:30:37,646 --> 00:30:44,066
+I can just run this in order to check to
+make sure that this new function does what
+
+312
+00:30:44,066 --> 00:30:58,060
+I want it to.
+We'll try our A1test.txt.
+
+313
+00:30:59,480 --> 00:31:05,740
+And we wanna write it to a1test.hist.
+Yep, we wanna replace it.
+
+314
+00:31:06,500 --> 00:31:09,889
+Uh-oh!
+I have a not writable problem here.
+
+315
+00:31:09,889 --> 00:31:16,586
+It seems to be saying that when I called
+this file.right it says that, that is an
+
+316
+00:31:16,586 --> 00:31:20,886
+unsupported operation.
+That this file's not writable.
+
+317
+00:31:20,886 --> 00:31:25,268
+And that makes sense.
+Because I opened it for reading.
+
+318
+00:31:25,268 --> 00:31:29,402
+Cuz I copied and pasted and forgot to
+change that.
+
+319
+00:31:29,402 --> 00:31:37,208
+Let's run this one more time.
+There is my test input.
+
+320
+00:31:37,208 --> 00:31:45,331
+No, I don't wanna write my program there.
+Let's save that, replace.
+
+321
+00:31:45,331 --> 00:31:51,999
+Okay, no errors.
+We're going to switch to the finder now.
+
+322
+00:31:52,362 --> 00:31:55,030
+There I am.
+Don't look.
+
+323
+00:31:56,840 --> 00:32:03,580
+Grades examples, and I just wrote
+a1test.hist.
+
+324
+00:32:04,380 --> 00:32:13,740
+We'll open this in text edit.
+And, it's empty.
+
+325
+00:32:15,020 --> 00:32:22,613
+Now I need to go find out why.
+Let's go back and take a look at the
+
+326
+00:32:22,613 --> 00:32:31,724
+program.
+Oh, I think I forgot to close my files,
+
+327
+00:32:31,724 --> 00:32:41,816
+dont close your files and then they will
+not be written right away.
+
+328
+00:32:41,816 --> 00:32:59,760
+Oh try one last time.
+Head back, see how we did.
+
+329
+00:33:00,340 --> 00:33:09,421
+And there's our information.
+Let's try running it on our larger data
+
+330
+00:33:09,421 --> 00:33:14,317
+file.
+Okay.
+
+331
+00:33:14,317 --> 00:33:20,989
+1.Pxt is our large one.
+And we will save it to A1 hist.
+
+332
+00:33:20,989 --> 00:33:24,820
+Yeah.
+I'ld like to replace that.
+
+333
+00:33:25,340 --> 00:33:30,331
+Switching back to the finder, we want
+hist.
+
+334
+00:33:30,331 --> 00:33:33,540
+Aha, beautiful.
+Look at that.
+
+335
+00:33:35,580 --> 00:33:38,855
+And that is really kind of how I write
+programs.
+
+336
+00:33:38,855 --> 00:33:44,178
+I start out at the very beginning with
+only a vague idea of what I want and I
+
+337
+00:33:44,178 --> 00:33:49,365
+have a bunch of decisions to make.
+What are my steps, what data am I going to
+
+338
+00:33:49,365 --> 00:33:52,573
+be storing and how am I going to be
+storing it.
+
+339
+00:33:52,573 --> 00:33:58,373
+And which order are I'm going to write my
+functions in and how am I going to test
+
+340
+00:33:58,373 --> 00:34:00,080
+them.
+I hope this was fun.

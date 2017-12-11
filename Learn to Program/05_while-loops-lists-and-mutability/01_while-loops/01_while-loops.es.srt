@@ -1,0 +1,872 @@
+1
+00:00:01,400 --> 00:00:06,540
+En una clase anterior usamos un iteración de cuatro
+para iterar sobre cada carácter de una cadena string.
+
+2
+00:00:06,540 --> 00:00:09,700
+Pero ¿qué pasa si no queremos iterar sobre
+cada carácter?
+
+3
+00:00:09,700 --> 00:00:12,340
+Quizás solo queramos iterar hasta que se encuentre
+una vocal. 
+
+4
+00:00:12,340 --> 00:00:16,090
+O puede que no queramos trabajar con
+cadenas en absoluto.
+
+5
+00:00:16,090 --> 00:00:22,330
+Por ejemplo, podemos querer repetir una tarea
+hasta que el usuario introduzca un valor concreto.
+
+6
+00:00:22,330 --> 00:00:25,990
+En ete capítulo, vamos a ver iteraciones 
+"while" para lograr estas tareas. 
+
+7
+00:00:27,910 --> 00:00:31,900
+Para empezar, revisemos el formato general de
+una estructura "if".
+
+8
+00:00:31,900 --> 00:00:34,920
+Una estructura "if" se basa en una expresión
+Booleana.
+
+9
+00:00:34,920 --> 00:00:39,830
+Cuando esta expresión es verdadera, el cuerpo de
+la estructura "if" se ejecuta.
+
+10
+00:00:39,830 --> 00:00:42,340
+Si la expresión Booleana es falsa, entonces
+el
+
+11
+00:00:42,340 --> 00:00:42,340
+Supón [risas], que hay 500 activos.
+¿Qué cartera tiene 500 activos?
+
+12
+00:00:42,340 --> 00:00:46,870
+proceso que sigue a la estructura del "if" se ejecutará
+sin que se ejecute su contenido.
+
+13
+00:00:46,870 --> 00:00:54,000
+Una estructura "while" tiene un formato similar a la del 
+"if", también se basa en una expresión Booleana,
+
+14
+00:00:54,000 --> 00:01:00,440
+y si la expresión Booleana
+es cierta el cuerpo de la estructura "while" se ejecuta.
+
+15
+00:01:00,440 --> 00:01:03,530
+Sin embargo, en contra de lo que hace la iteración "if"
+en la iteración "while" continúa
+
+16
+00:01:03,530 --> 00:01:07,860
+y vuelve a comprobar la expresión Booleana
+otra vez.
+
+17
+00:01:07,860 --> 00:01:12,060
+Si la condición es verdadera, entonces 
+el cuerpo de la iteración "while"
+
+18
+00:01:12,060 --> 00:01:17,330
+se ejecuta de nuevo y el proceso se repite
+hasta que la condición se vuelve falsa.
+
+19
+00:01:19,900 --> 00:01:20,310
+El primero
+
+20
+00:01:20,310 --> 00:01:20,310
+para ir a la guerra.
+
+21
+00:01:20,310 --> 00:01:23,620
+ejemplo de una iteración implica la
+variable num
+
+22
+00:01:23,620 --> 00:01:25,005
+Num tiene el valor 2.
+
+23
+00:01:26,160 --> 00:01:27,000
+La estructura de iteración while
+
+24
+00:01:27,000 --> 00:01:27,000
+para ir a la guerra.
+
+25
+00:01:27,000 --> 00:01:31,052
+continuará ejecutando siempre que num sea < 100.
+
+26
+00:01:32,100 --> 00:01:32,630
+En el cuerpo
+
+27
+00:01:32,630 --> 00:01:32,700
+para ir a la guerra.
+
+28
+00:01:32,700 --> 00:01:37,150
+de la iteración, num es duplicado y num es
+impreso
+
+29
+00:01:39,530 --> 00:01:44,970
+Teniendo num un valor inicial de 2,
+esta iteración Y ejecuta 6 veces
+
+30
+00:01:44,970 --> 00:01:49,620
+Num tiene 4, 8, 16, 32, 64 y eventualmente 128
+
+31
+00:01:49,620 --> 00:01:53,600
+En ese momento, la condición de la iteración Y es
+falsa
+
+32
+00:01:55,210 --> 00:01:59,680
+Ahora si num tiene el valor de 10, y volvemos a correr
+esta iteración Y.
+
+33
+00:02:01,200 --> 00:02:04,550
+Tomará sólo cuatro iteraciones para que
+la condición de la iteración "while"
+
+34
+00:02:04,550 --> 00:02:07,970
+sea falsa así que después de cuatro iteraciones i
+
+35
+00:02:07,970 --> 00:02:10,800
+significa que el cuerpo de la iteración se ejecuta 4
+veces
+
+36
+00:02:12,260 --> 00:02:18,170
+En este punto, no hay referencia con el valor
+160 y la condición de la iteración es falsa
+
+37
+00:02:18,170 --> 00:02:21,900
+Sí en este punto, volvemos a correr esta iteración
+while
+
+38
+00:02:21,900 --> 00:02:25,150
+El cuerpo no se ejecuta nunca porque
+
+39
+00:02:25,150 --> 00:02:27,740
+la condición es falsa desde un
+inicio
+
+40
+00:02:31,830 --> 00:02:35,360
+Ahora veamos un problema rápido que
+mencioné anteriormente
+
+41
+00:02:35,360 --> 00:02:39,120
+la iteración sobre los caracteres de una cadena string
+hasta que una vocal sea encontrada.
+
+42
+00:02:40,180 --> 00:02:44,080
+Primero, recordemos como iteramos sobre nuestra cadena string usando una iteración.
+
+43
+00:02:44,080 --> 00:02:44,580
+Nosotros
+
+44
+00:02:48,600 --> 00:02:49,060
+usamos
+
+45
+00:02:49,060 --> 00:02:49,370
+para ir a la guerra.
+
+46
+00:02:49,370 --> 00:02:55,970
+la iteración for para carácter en la cadena string S y
+simplemente imprimir ese carácter
+
+47
+00:02:57,120 --> 00:03:00,360
+Cuando inetrrumpimos esta iteración el carácter tiene
+un
+
+48
+00:03:00,360 --> 00:03:04,380
+valor inicial de la string S en la posición cero.
+
+49
+00:03:04,380 --> 00:03:10,090
+Después S en una y así sucesivamente hasta el final
+de la cadena string sea alcanzada
+
+50
+00:03:10,090 --> 00:03:14,320
+Cuando escribimos nuestra iteración Y, necesitamos
+especificar estos índices
+
+51
+00:03:14,320 --> 00:03:19,440
+De esta forma empezaré creando la variable i
+que tiene el valor cero y
+
+52
+00:03:19,440 --> 00:03:23,520
+que va a representar el primer índice de la
+cadena string sobre la cual queramos iterar.
+
+53
+00:03:25,350 --> 00:03:28,470
+Ahora la condición de la iteración while, que queramos
+mantener
+
+54
+00:03:28,470 --> 00:03:32,460
+hasta que encontremos una vocal
+siempre que
+
+55
+00:03:32,460 --> 00:03:39,480
+string en la posición i no sea una vocal.  De esta forma, siempre que no sea un conjunto de minúsculas
+
+56
+00:03:39,480 --> 00:03:43,690
+a e i o u y mayúsculas A E I O U 
+
+57
+00:03:44,700 --> 00:03:49,080
+Después ingresaremos en el cuerpo de la
+iteración y ejecutar el cuerpo de la iteración
+
+58
+00:03:50,150 --> 00:03:54,470
+En la iteración, imprimiré ese carácter
+la string de la posición i.
+
+59
+00:03:56,760 --> 00:04:01,890
+Antes que podamos salir de la iteración Y, necesitamos
+avanzar el índice de tal forma que
+
+60
+00:04:01,890 --> 00:04:07,120
+su valor debe incrementar.
+Yo, obtendremos el valor de i mas uno
+
+61
+00:04:07,120 --> 00:04:10,560
+Y así nos movemos hacia el carácter siguiente de la cadena string
+
+62
+00:04:13,740 --> 00:04:16,400
+En este caso la iteración while ejecuta una vez
+
+63
+00:04:16,400 --> 00:04:20,740
+porque el carácter activo no es una
+vocal
+
+64
+00:04:20,740 --> 00:04:25,080
+en la segunda vez que la condición
+de la iteración while sea comprobada, el activo uno
+
+65
+00:04:25,080 --> 00:04:29,850
+se refiere a e, que es una sub-cadena string de la cadena de
+string de vocales
+
+66
+00:04:29,850 --> 00:04:33,410
+De esta forma la condición de la iteración while es falsa y
+la iteración while termina 
+
+67
+00:04:34,900 --> 00:04:35,660
+Ejecutemos
+
+68
+00:04:35,660 --> 00:04:35,660
+para ir a la guerra.
+
+69
+00:04:35,660 --> 00:04:37,320
+la misma iteración.
+Esta vez
+
+70
+00:04:37,320 --> 00:04:37,320
+para ir a la guerra.
+
+71
+00:04:37,320 --> 00:04:39,590
+usando esta cadena string.
+
+72
+00:04:39,590 --> 00:04:45,110
+Inicializando i una vez más a cero,  y ahora
+ejecutando la iteración while.
+
+73
+00:04:45,110 --> 00:04:48,090
+Esta vez el cuerpo de la iteración while se ejecuta
+dos veces
+
+74
+00:04:49,090 --> 00:04:54,190
+Una vez por la constante t, una segunda vez
+por la constante h, y luego la
+
+75
+00:04:54,190 --> 00:04:59,290
+e es encontrada, asñi que la condición de la iteración Y
+es falsa y la iteración termina
+
+76
+00:05:00,340 --> 00:05:04,640
+Qué pasa si sólo hay consonantes
+en nuestra
+
+77
+00:05:04,640 --> 00:05:04,640
+para ir a la guerra.
+
+78
+00:05:04,640 --> 00:05:05,140
+cadena string.
+
+79
+00:05:11,730 --> 00:05:16,995
+En este caso, las tres consonantes se
+muestran y luego un error de índice ocurre.
+
+80
+00:05:16,995 --> 00:05:21,830
+S(0) se refiere a la 'x'
+S(1)
+
+81
+00:05:21,830 --> 00:05:27,180
+se refiere a la 'y' y S(2) se refiere a la
+'z'
+
+82
+00:05:27,180 --> 00:05:32,150
+Pero el valor actual de i es 3 y el activ
+3 no es
+
+83
+00:05:32,150 --> 00:05:37,080
+una posición legal, no es un índice válido
+para la cadena string s, ocurriendo
+
+84
+00:05:37,080 --> 00:05:38,440
+un error de índice.
+
+85
+00:05:38,440 --> 00:05:43,910
+No hemos especificado cuando parar
+la examinación de los caracteres de s.
+
+86
+00:05:43,910 --> 00:05:46,740
+Y así llegamos al final de la cadena string y 
+
+87
+00:05:46,740 --> 00:05:49,820
+hemos tratado de acceder al índice que
+no existe
+
+88
+00:05:50,840 --> 00:05:56,420
+Para prevenir esto, debemos añadir una segunda
+parte a nuestra condición Boolean.
+
+89
+00:05:56,420 --> 00:06:01,670
+Qué es la de comprobar que i este dentro
+de los límites de la cadena string
+
+90
+00:06:01,670 --> 00:06:02,300
+Para asegurar
+
+91
+00:06:02,300 --> 00:06:07,950
+que sea menor que la longitud.
+Hagamos eso ahora.
+
+92
+00:06:07,950 --> 00:06:11,630
+Le daremos el valor de cero a i.
+
+93
+00:06:11,630 --> 00:06:17,770
+S tiene la cadena string x y z y ahora ejecutamos
+la iteración while.
+
+94
+00:06:17,770 --> 00:06:21,230
+Antes de ejecutarla,
+comprobaremos primero para
+
+95
+00:06:21,230 --> 00:06:26,060
+asegurarnos que i es menor que la longitud
+de a cadena string.
+
+96
+00:06:26,060 --> 00:06:27,380
+Y luego comprobaremos que
+
+97
+00:06:27,380 --> 00:06:30,930
+sí s e i son una sub-cadena
+de la cadena string de vocales
+
+98
+00:06:31,930 --> 00:06:34,930
+Tomo nota que he puesto esta condición primero.
+
+99
+00:06:34,930 --> 00:06:37,440
+Queremos asegurarnos que hemos comprobado que
+i sea menor
+
+100
+00:06:37,440 --> 00:06:42,810
+que la longitud antes de tratar de acceder
+la cadena string en la posición i
+
+101
+00:06:42,810 --> 00:06:48,000
+Python realiza una evaluación de esto
+y operación, de tal forma que
+
+102
+00:06:48,000 --> 00:06:53,540
+sí el primer operando es falso
+el segundo no es evaluado
+
+103
+00:06:53,540 --> 00:07:00,140
+Esto significa que si i no es menor que
+la longitud de la cadena string, entonces esta N se ha encontrado
+
+104
+00:07:00,140 --> 00:07:05,180
+que es falsa en el punto que no trataremos de
+acceder la cadena string en la posición i.
+
+105
+00:07:07,360 --> 00:07:13,350
+Así que en este caso las tres constantes so
+mostradas en el punto que
+
+106
+00:07:13,350 --> 00:07:18,410
+la condición que i sea menor que la longitud
+de la cadena string es falsa y la iteración se termina
+
+107
+00:07:18,410 --> 00:07:18,910
+[RUIDO].
+
+108
+00:07:21,460 --> 00:07:25,350
+Usemos algunas de las ideas de la iteración while
+para otro problema
+
+109
+00:07:26,860 --> 00:07:29,900
+La función up_to_vowel es la que
+implementaremos
+
+110
+00:07:29,900 --> 00:07:30,570
+[RUIDO].
+
+111
+00:07:30,570 --> 00:07:33,940
+Tiene un parámetro de cadena string y
+retornará una cadena string
+
+112
+00:07:35,180 --> 00:07:38,280
+Retornará una sub cadena de
+la cadena de parámetro string
+
+113
+00:07:38,280 --> 00:07:42,660
+s desde el índice cero, hasta pero sin incluir
+la primera vocal
+
+114
+00:07:43,850 --> 00:07:46,900
+Así que en vez de imprimir de la forma que hicimos en nuestro
+ejemplo en 
+
+115
+00:07:46,900 --> 00:07:51,100
+la shell, queremos acumular la sub
+cadena string y devoverla
+
+116
+00:07:52,590 --> 00:07:55,630
+Usremos un patrón de acumulador que vimos
+anteriormente para
+
+117
+00:07:55,630 --> 00:07:58,250
+resolver este problema.
+La variable
+
+118
+00:07:58,250 --> 00:07:58,250
+para ir a la guerra.
+
+119
+00:07:58,250 --> 00:08:02,260
+antes de la vocal, inicialmente se refirirá a una
+cadena string vacío y 
+
+120
+00:08:02,260 --> 00:08:06,260
+acumularemos la cadena string para que sea
+retornada antes de la vocal.
+
+121
+00:08:07,820 --> 00:08:10,690
+La iteración while que vamos a usar
+
+122
+00:08:10,690 --> 00:08:13,450
+es exactamente la misma que escribimos
+anteriormente
+
+123
+00:08:13,450 --> 00:08:18,270
+Queremos iterar sobre los caracteres de la
+cadena string empezando en la posición cero
+
+124
+00:08:18,270 --> 00:08:22,300
+Hasta que encontremos la vocal o hasta que
+el final de la cadena string sea alcanzado
+
+125
+00:08:23,740 --> 00:08:26,080
+En el cuepro de la iteración queremos
+
+126
+00:08:26,080 --> 00:08:26,250
+para ir a la guerra.
+
+127
+00:08:26,250 --> 00:08:29,290
+añadir al acumulador de vocales anetrior. Así
+
+128
+00:08:29,290 --> 00:08:29,290
+para ir a la guerra.
+
+129
+00:08:29,290 --> 00:08:33,360
+antes de la vocal, obtengamos su valor actual
+mas el
+
+130
+00:08:33,360 --> 00:08:37,060
+carácter, que es la posición i del carácter
+de la cadena string s.
+
+131
+00:08:38,280 --> 00:08:42,800
+Necesitamos incrementar el índice, añadiendo uno a el.
+
+132
+00:08:42,800 --> 00:08:45,270
+de tal forma que podemos movernos al siguiente
+carácter
+
+133
+00:08:46,340 --> 00:08:50,370
+Y al final de esta función la
+sub-cadena sea retornada
+
+134
+00:08:50,370 --> 00:08:52,900
+Antes que una vocal sea retornada
+
+135
+00:08:54,610 --> 00:08:55,960
+Corramos el código ahora
+
+136
+00:08:59,280 --> 00:09:00,980
+y llamemos la función para Michelle
+
+137
+00:09:03,530 --> 00:09:06,410
+De la primera función llamada, esperamos
+obtener h.
+
+138
+00:09:07,900 --> 00:09:13,490
+De la segunda, donde hay un
+argumento, t h debe ser retornada
+
+139
+00:09:13,490 --> 00:09:16,440
+Y el tercer ejemplo que contiene
+solamente
+
+140
+00:09:16,440 --> 00:09:16,440
+para ir a la guerra.
+
+141
+00:09:16,440 --> 00:09:21,170
+carácter, solo cononantes, No, ninguna vocal
+la cadena completa
+
+142
+00:09:21,170 --> 00:09:21,170
+para ir a la guerra.
+
+143
+00:09:21,170 --> 00:09:21,820
+es retornada
+
+144
+00:09:24,140 --> 00:09:26,660
+Implementemos una función más.
+
+145
+00:09:26,660 --> 00:09:31,520
+ El nombre de esta función es get answer
+y esta función
+
+146
+00:09:31,520 --> 00:09:35,490
+preguntará al usuario una pregunta para
+una respuesta de sí o no
+
+147
+00:09:35,490 --> 00:09:39,000
+El usuario proporcionará la respuesta
+
+148
+00:09:39,000 --> 00:09:44,090
+Y queremos seguir preguntando
+hasta que la respuesta ingresada es sí o no. 
+
+149
+00:09:44,090 --> 00:09:49,330
+Por lo que puede tomar una o 100 veces
+antes que el usuario ingrese
+
+150
+00:09:49,330 --> 00:09:50,100
+la respuesta correcta
+
+151
+00:09:51,210 --> 00:09:53,970
+Al final retornarémos la respuesta que
+el usuario ingresó
+
+152
+00:09:55,750 --> 00:09:58,920
+Implementemos esta función empezando con una solicitación
+
+153
+00:09:58,920 --> 00:10:02,170
+así que llamaremos input usando la
+
+154
+00:10:02,170 --> 00:10:04,710
+solicitud pasado como un argumento para recibir una respuesta,
+
+155
+00:10:05,840 --> 00:10:08,290
+y guardando el resultado en la variable
+de respuesta
+
+156
+00:10:11,520 --> 00:10:16,220
+Especifiquemos la condición ahora bajo
+la que queramos re-solicitar al usuario
+
+157
+00:10:16,220 --> 00:10:21,820
+El cuerpo de la iteración Y será un
+duplicado del código anterior
+
+158
+00:10:21,820 --> 00:10:27,400
+Que una simle, una simple línea de código que
+solicita al usuario con la pregunta
+
+159
+00:10:30,530 --> 00:10:35,350
+Nos gustaría seguir solicitando cuando
+la respuesta no es ninguna de las que estamos buscando
+
+160
+00:10:35,350 --> 00:10:40,840
+Asi, sí a respuesta es sí o no, pararemos.
+
+161
+00:10:40,840 --> 00:10:44,970
+Y si luego la respuesta no es sí o no
+
+162
+00:10:44,970 --> 00:10:46,380
+la iteración debe continuar.
+
+163
+00:10:47,900 --> 00:10:49,660
+Al final de la iteración while, una vez
+
+164
+00:10:49,660 --> 00:10:52,900
+que halla finalizado la ejecución, la respuesta
+será retornada
+
+165
+00:10:56,410 --> 00:11:00,446
+Posiblemente se percataron que no he incluido
+ningún ejemplo de llamada en el doc string.
+
+166
+00:11:00,446 --> 00:11:05,200
+Eso es debido a que la ejecución de esta
+función
+
+167
+00:11:05,200 --> 00:11:07,480
+depende de el ingreso del usuario y yo
+
+168
+00:11:07,480 --> 00:11:10,140
+no puedo predecir que es lo que la fucnión va a
+retornar
+
+169
+00:11:10,140 --> 00:11:12,660
+porque depende en lo que el usuario halla ingresado
+
+170
+00:11:12,660 --> 00:11:14,620
+Corramos esto ahora para comprobar
+
+171
+00:11:14,620 --> 00:11:16,990
+que esta desempeñando como
+esperado
+
+172
+00:11:19,960 --> 00:11:20,460
+Llamando
+
+173
+00:11:20,460 --> 00:11:20,460
+para ir a la guerra.
+
+174
+00:11:20,460 --> 00:11:25,356
+obtenemos la respuesta, pasaré un
+
+175
+00:11:25,356 --> 00:11:29,052
+y nos
+
+176
+00:11:29,052 --> 00:11:34,391
+vemos solicitado con una
+
+177
+00:11:34,391 --> 00:11:40,510
+pregunta.
+Si respondo quizás, seremos
+
+178
+00:11:40,510 --> 00:11:40,535
+para ir a la guerra.
+
+179
+00:11:40,535 --> 00:11:42,100
+re-solicitado, digamos
+
+180
+00:11:42,100 --> 00:11:42,320
+para ir a la guerra.
+
+181
+00:11:42,320 --> 00:11:43,858
+es muy tarde, seremos solicitados nuevamente.
+
+182
+00:11:43,858 --> 00:11:43,860
+para ir a la guerra.
+
+183
+00:11:43,860 --> 00:11:54,560
+No realmente, seremos solicitado nuevamente
+Ooops
+
+184
+00:11:54,560 --> 00:11:59,440
+Finalmente si ingreso sí, sí será retornado
+por la función
+
+185
+00:11:59,440 --> 00:12:00,850
+Tratemos una vez más
+
+186
+00:12:04,530 --> 00:12:10,090
+Esta vez, responderé no
+inmediatamente, así que el cuerpo de la iteración while
+
+187
+00:12:10,090 --> 00:12:13,480
+no será ejecutado, porque la condición
+de la iteración while será
+
+188
+00:12:13,480 --> 00:12:15,510
+falsa desde la primera vez
+
+189
+00:12:16,770 --> 00:12:19,000
+No es retornado por la función en este
+caso

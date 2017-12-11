@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            str: indexing and slicing
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi
+">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128
+" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 5.1 A Boolean Type
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            <code>str</code>: indexing and slicing
+        </h1>
+        <h3>
+            Indexing
+        </h3>
+        <p>
+            An index is a position within the string. Positive indices count from the left-hand side with the first character at index 0, the second at index 1, and so on. Negative indices count from the right-hand side with the last character at index -1, the second last at index -2, and so on. For the string <code>"Learn to Program"</code>, the indices are:<br>
+            <img src="http://spark-public.s3.amazonaws.com/programming1/lecture_summaries/week4/index.png">
+        </p>
+        <p>
+            Let <code>s</code> refer to <code>'Learn to Program'</code>.
+        </p>
+        <p>
+            The first character of the string is at index 0 and can be accessed using this bracket notation:
+        </p>
+        <pre>
+&gt;&gt;&gt; s[0]
+'L'
+&gt;&gt;&gt; s[1]
+'e'
+</pre>Negative indices are used to count from the end (from the right-hand side):
+        <pre>
+&gt;&gt;&gt; s[-1]
+'m'
+&gt;&gt;&gt; s[-2]
+'a'
+</pre>
+        <h3>
+            Slicing
+        </h3>
+        <p>
+            We can extract more than one character using slicing. A slice is a substring from the start index up to but not including the end index. For example:
+        </p>
+        <pre>
+&gt;&gt;&gt; s[0:5]
+'Learn'
+&gt;&gt;&gt; s[6:8]
+'to'
+&gt;&gt;&gt; s[9:16]
+'Program'
+</pre>More generally, the end of the string can be represented using its length:
+        <pre>
+&gt;&gt;&gt; s[9:len(s)]
+'Program'
+</pre>The end index may be omitted entirely and the default is <code>len(s)</code>:
+        <pre>
+&gt;&gt;&gt; s[9:]
+'Program'
+</pre>Similarly, if the start index is omitted, the slice starts from index 0:
+        <pre>
+&gt;&gt;&gt; s[:]
+'Learn to Program'
+&gt;&gt;&gt; s[:8]
+'Learn to'
+</pre>Negative indices can be used for slicing too. The following three expressions are equivalent:
+        <pre>
+&gt;&gt;&gt; s[1:8]
+'earn to'
+&gt;&gt;&gt; s[1:-8]
+'earn to'
+&gt;&gt;&gt; s[-15:-8]
+'earn to'
+</pre>
+        <h3>
+            Modifying Strings
+        </h3>
+        <p>
+            The slicing and indexing operations do not modify the string that they act on, so the string that <code>s</code> refers to is unchanged by the operations above. In fact, we cannot change a string. Operations like the following result in errors:
+        </p>
+        <pre>
+&gt;&gt;&gt; s[6] = 'd'
+Traceback (most recent call last):
+        File &lt;"pyshell#19", line 1, in &lt;module&gt;
+                s[6] = 'd'
+TypeError: 'str' object does not support item assignment
+</pre>
+        <p>
+            Imagine that we want to change string <code>s</code> to refer to <code>'Learned to Program'</code>. The following expression evaluates to that <code>'Learned to Program'</code>: <code>s[:5] + 'ed' + s[5:]</code>
+        </p>
+        <p>
+            Variable <code>s</code> gets the new string: <code>s = s[:5] + 'ed' + s[5:]</code>
+        </p>
+        <p>
+            Notice that the string that <code>s</code> originally referred to was not modified: strings cannot be modified. Instead a new string was created and <code>s</code> was changed to point to that string.
+        </p>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

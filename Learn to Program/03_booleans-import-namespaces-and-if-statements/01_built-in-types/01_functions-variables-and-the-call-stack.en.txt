@@ -1,0 +1,59 @@
+In this video, we're going to explore when variables are created, how long they exist
+in computer memory, and what happens when two
+variables have the same name and two different
+functions. Here we see functions convert to minutes which we explored in the function
+visualization lecture. We have added function covert to seconds,
+which coverts a number of hours to an equivalent number
+of seconds. Convert to seconds does its work by
+calling convert to minutes and then multiplying the result
+by 60. Let's use the visualizer to explore this. We'll quickly step over the function
+definitions to function objects are created.
+Convert to minutes for [UNKNOWN] one of these function objects, and convert
+seconds for first to the other. Now we are about to execute an assignment
+statement. The first step is to evaluate the right
+hand side which is a function call. Python first evaluates the argument and
+creates an object for that value. Next, ifound creates a frame on the call
+stack and stores the memory address of two in
+the parameter, [INAUDIBLE]. As a reminder, this area is called the
+call stack. It is shown as an upside down stack of
+frames. During execution of a function call a new
+stack frame is created. Whenever a function exits, the current
+stack frame is erased. And execution of the previous function
+continues. The first line in the body of convert_to_seconds is another
+assignment statement. The right-hand side is a function call. We follow the same rules as always,
+evaluate the argument, num_hours, which contains the
+memory address of value two. Then, a stack form is created for the call
+on convert_to_minutes, and its parameter, mem_hours, contains the
+memory address of that value. There are two variables called mem_hours. One of them is in the frame for the call
+on convert_to_minutes, and one of them is in the frame for the call on
+convert_to_seconds. Python keeps these two running functions
+in separate areas of memory so it does not get confused about which
+variable to use. Back to tracing the execution. The first line in the body of convert the
+minutes is an assignment state. On the right hand side there's an
+expression numerous x 60. Which num_hours do we use? The answer is that python looks in the
+current stack frame. Num_hours refers to two so num_hours type
+60 evaluates to 120. The second step of the assignment is to
+assign 120 to variable minutes. If minutes does not exist in the current
+stack frame Then it will be created. Each stack frame contains its own set of
+variables. In the frame for convert to minutes are
+variables, num hours, and minutes. The frame for convert to seconds currently
+only has variable num hours. Although, by the end of its execution, it
+will also have both minutes and seconds. The stack frame for the main program currently has convert_to_minutes
+and convert_to_seconds. Although by the assignment statement on
+line 20 is done executing, variable seconds will exist
+there. We're now about to return the value of variable minutes, and exit the current
+function. But where do we return to? The answer is always, to the next frame on
+the call stack. The current stack frame is created during
+this call on convert_to_minutes. When this call is complete, the current
+stack frame is erased, and Python produces the return
+value as the value of this function call expression. This call is on the right-hand side of an
+assignment statement. To complete the assignment variable
+minutes will be created, and Python will store the memory address of
+the return value. Let's watch that happen. Notice that the frame for convert to minutes has been erased, and variable
+minutes has been created in the frame for convert to seconds Here we have another assignment
+statement. The right-hand side, minutes times 60,
+evaluates to whatever 120 times 60 is. And a new variable seconds will be
+created, and contain the memory address of that new
+value. Next we return seconds. Seconds refers to 7,200 so that's the
+value that gets produced by the call on convert to seconds
+on line 20. [BLANK_AUDIO]

@@ -1,0 +1,414 @@
+1
+00:00:01,330 --> 00:00:04,270
+Python possiede centinaia e centinaia di
+funzioni.
+
+2
+00:00:04,270 --> 00:00:07,580
+La maggior parte non sono immediatamente
+utilizzabili come integrate.
+
+3
+00:00:07,580 --> 00:00:10,790
+Invece, le funzioni sono salvate in
+moduli differenti, e tu
+
+4
+00:00:10,790 --> 00:00:13,950
+devi dire a Python che vorresti usarle.
+
+5
+00:00:13,950 --> 00:00:18,760
+In modo simile, le tue funzioni possono anche
+essere salvate in moduli differenti.
+
+6
+00:00:18,760 --> 00:00:23,090
+Mostreremo che usando il nostro
+esempio triangle triangle.py
+
+7
+00:00:23,090 --> 00:00:26,840
+definiremo una seconda funzione per
+calcolare l'area di un triangolo.
+
+8
+00:00:26,840 --> 00:00:30,630
+per quando si conosce la lunghezza dei tre 
+lati, ma non la base e l'altezza.
+
+9
+00:00:30,630 --> 00:00:32,490
+Questa volta, calcoleremo l'area del
+
+10
+00:00:32,490 --> 00:00:36,610
+triangolo usando la formula di Erone, conosciuta
+anche come Heroes fprmula.
+
+11
+00:00:37,880 --> 00:00:41,590
+La forma coinvolge sia il semi
+perimetro
+
+12
+00:00:41,590 --> 00:00:43,070
+e la lunghezza dei tre lati.
+
+13
+00:00:44,100 --> 00:00:48,850
+S è il semiperimetro di s1, s2 e s3
+
+14
+00:00:48,850 --> 00:00:50,980
+sono le lunghezze dei tre lati del 
+triangolo.
+
+15
+00:00:53,200 --> 00:00:57,420
+Per scrivere questo codice abbiamo bisogno 
+di calcolare il semi- perimetro.
+
+16
+00:00:57,420 --> 00:01:00,450
+E abbiamo già una funzione per farlo,
+definita in triangle.py
+
+17
+00:01:00,450 --> 00:01:04,280
+E ci serve anche una funzione per calcolare
+la radice quadrata,
+
+18
+00:01:04,280 --> 00:01:07,970
+e questa funzione esiste, ma non è
+una funzione integrata.
+
+19
+00:01:07,970 --> 00:01:12,320
+Invece, viene definito un altro file 
+chiamato math.py
+
+20
+00:01:12,320 --> 00:01:14,440
+Math è un modulo, come triangle
+
+21
+00:01:14,440 --> 00:01:18,510
+Come indica il suo nome, il modulo math
+contiene
+
+22
+00:01:18,510 --> 00:01:21,010
+molte funzioni legate alla matematica.
+
+23
+00:01:21,010 --> 00:01:26,260
+Per vedere la lista delle funzioni, importiamo 
+il modulo per avere accesso ad esso.
+
+24
+00:01:26,260 --> 00:01:29,750
+E quando chiameremo la funzione integrata
+dir r
+
+25
+00:01:31,310 --> 00:01:36,370
+vedremo una funzione chiamata square root
+che è fra le funzioni disponibili, e
+
+26
+00:01:36,370 --> 00:01:39,960
+ora possiamo lanciare help su square root
+per sapere qualcosa di più a riguardo.
+
+27
+00:01:39,960 --> 00:01:43,720
+Quando chiediamo delle informazioni riguardo a 
+square root, dobbiamo specificare che
+
+28
+00:01:43,720 --> 00:01:45,710
+è nel modulo Math.
+
+29
+00:01:45,710 --> 00:01:51,320
+Lo facciamo usando il nome del modulo, seguito
+da un punto, seguito dal nome della funzione.
+
+30
+00:01:51,320 --> 00:01:53,760
+E ci da delle informazioni riguardo alla
+funzione square root.
+
+31
+00:01:55,040 --> 00:01:56,600
+Ora siamo pronti per scrivere la funzione.
+
+32
+00:01:58,560 --> 00:02:02,580
+Il primo passo sarà andare a scrivere un 
+paio di esempi di chiamate a funzioni.
+
+33
+00:02:02,580 --> 00:02:07,160
+E per farlo, abbiamo bisogno di 
+scegliere un nome di funzione significativo.
+
+34
+00:02:07,160 --> 00:02:08,920
+Userò la parola area con
+
+35
+00:02:08,920 --> 00:02:11,529
+la parola heron per indicare che stiamo
+usando la formula di erone.
+
+36
+00:02:12,740 --> 00:02:16,300
+Questa funzione riceve tre lati, e in
+questo
+
+37
+00:02:16,300 --> 00:02:18,395
+caso, mi aspetto un ritorno di 6.0.
+
+38
+00:02:18,395 --> 00:02:22,480
+Aggiungeremo una seconda chiamata ad 
+una funzione, secondo esempio.
+
+39
+00:02:22,480 --> 00:02:25,740
+E in questo caso, usando il mio computer,
+ho capito
+
+40
+00:02:25,740 --> 00:02:30,323
+che dovremmo ottenere qualcosa del tipo
+27.731.
+
+41
+00:02:30,323 --> 00:02:34,210
+Ci sarà qualche cifra in più, e non
+so esattamente
+
+42
+00:02:34,210 --> 00:02:37,100
+quali, perché Python usa l'aritmetica a 
+virgola mobile.
+
+43
+00:02:37,100 --> 00:02:38,970
+Ma questo mi farà capire se la
+
+44
+00:02:38,970 --> 00:02:40,810
+funzione che stiamo scrivendo è corretta
+o meno.
+
+45
+00:02:44,060 --> 00:02:47,720
+Ora, forniremo il tipo contratto per
+questa funzione.
+
+46
+00:02:47,720 --> 00:02:52,760
+Passeremo in ingresso tre numeri, o int
+o float, e ritorneremo un float.
+
+47
+00:02:54,230 --> 00:02:58,070
+Ora siamo pronti per aggiungere la
+testata della funzione.
+
+48
+00:02:58,070 --> 00:03:01,780
+Iniziamo con la parola def e il
+nome della funzione.
+
+49
+00:03:01,780 --> 00:03:06,740
+insieme ai tre parametri, che sto per 
+nominare side1, side2, and side3.
+
+50
+00:03:09,110 --> 00:03:11,020
+E a questo punto, possiamo aggiungere
+la descrizione.
+
+51
+00:03:12,110 --> 00:03:15,580
+Questa funzione ritornerà l'area 
+del triangolo
+
+52
+00:03:15,580 --> 00:03:18,800
+con lati di lunghezza side 1, side 2 e
+side 3.
+
+53
+00:03:18,800 --> 00:03:19,470
+Con la
+
+54
+00:03:19,470 --> 00:03:19,470
+link, vedrete un
+
+55
+00:03:19,470 --> 00:03:23,970
+stringa completa, ora possiamo lavorare sul
+corpo della funzione.
+
+56
+00:03:23,970 --> 00:03:28,080
+La formula usa il semiperimetro quattro
+volte diverse.
+
+57
+00:03:28,080 --> 00:03:29,340
+E invece di richiamare il semiperimetro
+
+58
+00:03:29,340 --> 00:03:32,380
+quattro volte con gli stessi argomenti
+
+59
+00:03:32,380 --> 00:03:35,980
+possiamo chiamarlo una volta e salvare il risultato
+in una variabile.
+
+60
+00:03:35,980 --> 00:03:39,810
+Chiamerà la variabile semi, e poi
+chiameremo semiperimeter una volta
+
+61
+00:03:39,810 --> 00:03:44,950
+per calcolarlo, con side1, side2, e
+side 3 come argomenti.
+
+62
+00:03:46,390 --> 00:03:48,402
+Poi possiamo passare a calcolare l'area.
+
+63
+00:03:49,890 --> 00:03:51,840
+Possiamo calcolare l'area, useremo la
+funzione
+
+64
+00:03:51,840 --> 00:03:55,600
+square root e square root è nel modulo
+math.
+
+65
+00:03:55,600 --> 00:04:00,210
+Quindi per accedere a square root, dobbiamo
+importare il modulo math.
+
+66
+00:04:00,210 --> 00:04:01,670
+Lo farò al principio del mio file.
+
+67
+00:04:03,650 --> 00:04:07,259
+E poi sarò in grado di avere accesso
+alla funzione square root.
+
+68
+00:04:08,280 --> 00:04:08,280
+[Suono]
+
+69
+00:04:08,280 --> 00:04:10,130
+Calcolare l'area.
+
+70
+00:04:10,130 --> 00:04:14,179
+Chiameremo square root da quella usando
+il nome del modello,
+
+71
+00:04:14,179 --> 00:04:17,692
+punto, e il nome della funzione, e passeremo
+in ingresso il seguente
+
+72
+00:04:17,692 --> 00:04:23,948
+semi per semi meno side1 per
+
+73
+00:04:23,948 --> 00:04:30,270
+semi meno side 2 per semi meno side3.
+
+74
+00:04:30,270 --> 00:04:32,550
+E quell'area è ciò che la funzione
+ritornerà.
+
+75
+00:04:34,550 --> 00:04:38,180
+Infine, dobbiamo testare la funzione
+chiamandola un paio di volte.
+
+76
+00:04:39,300 --> 00:04:43,280
+Quindi, andrò a ridimensionare questa finestra, e
+farò girare il modulo.
+
+77
+00:04:43,280 --> 00:04:49,200
+Poi ridimensionerò questa, e copierò
+e incollerò queste chiamate alla funzione.
+
+78
+00:04:49,200 --> 00:04:54,740
+Quindi la prima chiamata dovrebbe restituire
+6.0 e lo fa.
+
+79
+00:04:54,740 --> 00:04:59,650
+E il secondo esempio dovrebbe darci
+qualcosa come ciò che abbiamo
+
+80
+00:04:59,650 --> 00:05:03,512
+qui, e infatti ci restituisce più
+cifre.
+
+81
+00:05:03,512 --> 00:05:06,480
+Ora invece sto per usare questo risultato qui.
+
+82
+00:05:06,480 --> 00:05:09,870
+Quindi questo è quello che ci 
+aspettiamo di ottenere.
+
+83
+00:05:09,870 --> 00:05:12,510
+Non sono solo i moduli di Python quelli
+che possiamo importare.
+
+84
+00:05:12,510 --> 00:05:15,120
+Possiamo anche importare un modulo scritto da noi.
+
+85
+00:05:15,120 --> 00:05:17,020
+Ad esempio, se volessimo usare una delle
+
+86
+00:05:17,020 --> 00:05:21,360
+nostre funzioni triangle in un altro modulo,
+potremmo importare triangle.
+
+87
+00:05:21,360 --> 00:05:24,910
+Il modulo che deve essere importato deve essere
+nella stessa directory del modulo
+
+88
+00:05:24,910 --> 00:05:25,950
+che lo sta importando.

@@ -1,0 +1,324 @@
+Questa lezione è enorme.
+Comunque non introduce alcun nuovo strumento di Python, e quindi, puoi considerarla,
+come opzionale, se vuoi. In questa, svilupperò un programma
+dall'inizio. Cercherò di capire, quali informazioni ho
+bisogno di leggere, e devo capire come iniziare e quali funzioni dovrò
+andare a scrivere. Questo è volto a darvi un assaggio del
+processo mentale che effettuo quando scrivo un programma.
+Questo file contiene una serie di voti per l'assegnazione uno.
+C'è una testata seguita da una linea vuota. Seguita da una lista di numeri di studenti e
+il voto per l'assegnazione uno. Ci piacerebbe capire qual è la distribuzione
+di questi voti. Quindi terremo traccia delle
+categorie. Quanti hanno terminato negli intervalli da zero
+a nove, da dieci a diciannove, da venti a 29, e così via.
+E avremo anche una categoria per le persone che hanno ottenuto 100.
+Infine, in questo programma, vogliamo creare u nuovo file contenente questa
+informazione. E anche, una stella per ogni voto che era
+nel range. Quindi vediamo un 77.5, che significa che nel
+nostro file di output, ci piacerebbe una stella qui. C'è un 37.5, è in quel range.
+Vediamo un 62.5. 72.5, quindi abbiamo due numeri nel
+range di 70 finora. C'è 100, abbiamo un 55, un 95,
+qualcosa negli ottanta, qualcosa nei novanta e così via.
+Alla fine avremo una stella, per ogni numero nel file, quindi possiamo vedere
+la distribuzione dei voti. Per ottenere un programma che fa questo,
+dobbiamo fare i seguenti passi. E il primo passo sarà, leggere i
+voti, e questa è una normale lista in una lista.
+E' una situazione con una lista. Quindi andremo a leggere i voti in una
+lista. Questo è il primo passo.
+Il secondo passo sarà contare il numero di voti per range.
+E il terzo passo sarà scrivere un istogramma nel file,
+qualunque file scelga l'utente. Questo processo di scrivere i passi ad un
+livello molto alto è chiamato design top down.
+Quando vediamo un problema per la prima volta, spesso è un po' opprimente pensare a cosa
+dobbiamo fare per portare a termine il compito completo. Quindi lo suddividiamo in passi.
+Una volta che abbiamo deciso dove salvare i nostri dati.
+Possiamo fare questi passi in qualsiasi ordine che ci piaccia.
+Dato che sono, praticamente indipendenti, e possiamo testare ciascuno di essi separatamente.
+Iniziamo un nuovo programma. E prendiamo qualche appunto.
+Metto sotto forma di testo questi scarabocchi. Scrivendolo a mano come abbiamo fatto
+qui, solo l'esempio dell'output che vogliamo e poi la lista dei passi di cui pensiamo
+di aver bisogno di fare per far funzionare questo programma, ha in pratica un grande
+beneficio. Ti permette di uscire dall'ambiente
+di programmazione e pensare solamente come potresti risolvere il problema.
+Questo è essenziale. I programmi sono solo un'espressione
+degli algoritmi che hai in mente. E se hai capito ciò che devi fare,
+ti sarà molto più semplice scrivere il codice.
+Aggiungiamo una nota, riguardo al formato che vogliamo.
+Vogliamo da zero a nove e poi una stella o due, dieci a diciannove.
+Vogliamo quelli dalla riga da venti a 29. Magari non ce ne sono così tanti, e quindi
+tutti fino a da 90 a 99. Whoops vogliamo che quello finisca e poi
+i cento. Ora che ho questo, posso occuparmi
+di questi scarabocchi. Andremo a leggere da files, e saranno file che seleziona l'utente.
+Vogliamo che questo funzioni con ogni file dei compiti di questo formato, non solo
+con questo file particolare. E quindi.
+Impariamo ad usare il Tkinter file dialogue. Inizieremo chiedendo all'utente un file,
+e poi leggeremo il file. Ora abbiamo una variabile A1 con il nome file
+che è ciò che il file dialogue PK ha inserito, chiediamo di ritornare open file.
+Quindi, apriamo il file. Andremo ad effettuare un for sul file A1,
+solo per stampare le righe. Assicuriamoci sono di essere
+in buona forma. Questo procedimento di controllare spesso
+come va con il nostro programma è un'abitudine molto buona da prendere dato che vi permette
+di trovare gli errori di sintassi e gli eerori logici molto prima di aver combinato un pasticcio.
+Quindi facciamo girare il modulo. E vediamo una sintassi non valida.
+Ah, sì. Un tipo sbagliato di istruzione di print.
+E' per i miei vecchi tempi di Python 2.7. Salviamolo e proviamo ancora una volta.
+Ho creato un file di voti più corto solo per non dover lavorare con troppi 
+numeri alla volta. E ho un type error.
+Il problema qui è che sto usando ASCOPE nel file anziché ASCOPE, ASCOPE nel nome
+del file. Ascope  in file, in realtà apre il file per
+voi. Ma, mi piacerebbe farlo in due passi perché
+penso sia più esplicito per le persone che stanno imparando solo ora come programmare.
+Selezionerò di nuovo run, run module. Dice di prendere il nostro file di input e qui,
+ce l'abbiamo. Questo file ha circa nove voti al suo interno. Questo processo di lanciare spesso l'esecuzione
+ci ha fatto trovare due errori nelle mie sole sei righe o circa di codice.
+E quindi mi ha risparmiato un bel po' di tempo dopo quando abbiamo 150 righe di
+codice. Se avessi provato ad aspettare fino a quando
+non avessi avuto la maggior parte del programma scritta, avrei avuto molto meno chiaro il punto dove andare
+a guardare per capire quale fosse il mio problema. Posso dimenticare queste righe di codice ora,
+dato che, so che ho il mio file il mio file è aperto per poter essere letto propriamente.
+Devo fare la stessa cosa con il mio file istogramma.
+E i nomi migliori per l'istogramma finale, sembra ragionevole.
+Mi piace mantenere il mio programma principale separato dalle funzioni su cui mi baso nel mio
+programma principale. Quindi, proprio come per l'assegnazione uno
+e l'assegnazione due, creerò un file per contenere solo le funzioni.
+Lo chiamerò grade.py. E so che dovrò importarlo. I miei passi sono leggere i voti in una
+lista, contare i voti per range, e scrivere l'istogramma nel file.
+Inizieremo leggendo grades da una lista. Dato che sto leggendo da un file è difficile 
+ottenere un esempio. Quindi inizieremo con il tipo contratto.
+So che ho un file aperto per la lettura.
+. E so che andrà a ritornare una lista. E che quelli, tutti i numeri in questo file
+sono floats. Quindi, è una lista di float.
+Ho bisogno di uno spazio aggiuntivo qui, per avere l'indentazione corretta.
+E quello che andrà a fare sarà leggere e ritornare la lista dei voti nel file. Bene, avrò bisogno di una testata.
+Ciò che sto facendo è leggere grades. E' una frase verbale carina, e lo chiamerò
+grading file. Quindi ora posso.
+Finire la mia doc string, il file grade. Eccoci qui.
+Devo sapere che questo stile è nel formato corretto.
+Quindi la pre-condizione di chiamare questa funzione è quella.
+Art file. Grade file.
+Inizia con un header. Poi contiene delle righe vuote. E ha una
+riga vuota. Dato che ho bisogno di poter saltare
+quella testata. E poi ho bisogno di sapere che, ogni
+riga è in questo formato. dove c'è il numero di uno studente e un
+voto. Per poter portare a termine questo
+per prima cosa ho bisogno della testata. E poi di leggere i voti.
+Accumulandoli in una lista. Sto seguendo lo stesso approccio dall'alto in basso.
+Sto scrivendo i passi che devo fare per poter
+portare a termine questo compito più piccolo. .
+Ma è lo stesso approccio. Lo stesso schema dall'alto in basso.
+Per saltare la testata, leggeremo la prima riga.
+E finché la riga non raggiunge il carattere di nuova riga, devo leggere la riga successiva. Ora, ho appena letto la riga vuota, quindi
+ora devo iniziare a leggere i voti e accumularli nella lista.
+Bene, so che andrò a leggere quel primo voto e poi.
+Finché quello che leggo, finché non ho raggiunto la fine del file, e lo scrivo in 
+questo modod, se ricordate, la mia riga non è la stringa vuota, poi voglio fare la
+stessa cosa. Voglio fare gradefile.readline
+quindi andrà a leggere ogni riga nel resto del file.
+Quello che devo fare è all'interno di questo schema devo accumulare i gradi.
+Per farlo, ho bisogno della mia variabile accumulator.
+Inizierò con una lista vuota, questa arriverà a contenere tutti i voti del file. Finché non ho raggiunto la fine so
+che ho un voto, quindi ora abbiamo una stringa.
+Contenente le informazioni per un singolo studente.
+Andremo a cercare l'ultimo spazio nella riga, quello è lo spazio proprio prima
+del numero, e estrarremmo solo il resto dei caratteri dopo quello.
+Quindi trova l'ultimo spazio, e prendi tutto dopo quello spazio.
+Bene, conosco questo line.rfind, effettua la ricerca da destra.
+Quindi sto cercando lo spazio più a destra, e mi ritorna l'indice di quello spazio
+più a destra nella riga. Vorrei spezzare la linea a partire da
+uno oltre quella posizione, il primo carattere, e andare avanti fino alla fine della stringa, quindi
+questo estrarrà tutto per me. Vediamolo in una variabile.
+Ho il numero però, attualmente è una stringa dato che line è una stringa e quando
+la spezzo, ottengo una stringa. Quindi, quando mi occupo della mia lista dei 
+voti mi piacerebbe trasformarlo in un float. Penso che abbiamo quasi finito.
+Ho la mia lista di voti qui. E quindi questo è quello che ritornerò.
+Proviamolo. Lo farò girare, in modo da avere 
+accesso a read grades nella shell, lo andrò a, whoops, andrò a chiedere per,
+[risata], TK enter dot file, file log, devo importare questo.
+Andrò a chiedere un file. Faremo questo file di test.
+Ora io devo venire qui, e aprire, quel file,
+ed infine, andrò a chiamare v grades su quel file aperto.
+Questo andrà a, ritornarmi, speriamo una lista dei floats che abbiamo visto
+nello schermo qui. E sembra che ci siano tutti.
+Con questo rapido test, penso di essere pronta per chiamare grades dal mio programma principale.
+Ora so come leggere i voti nella lista.
+. Il prossimo compito è contare i voti per ognuna
+delle categorie degli intervalli che abbiamo visto qui.
+Bene, iniziamo a progettarlo. .
+Con questo, ora possiamo avere un esempio.
+Dobbiamo decidere cosa andare a chiamare questo.
+Magari i voti (migliori). Possiamo sempre cambiare idea
+più avanti. E sappiamo che se gli diamo una lista come
+questa. Attualmente abbiamo un esempio di questo.
+Quello che ci piacerebbe fare è magari ritornare una nuova lista con i conti.
+Quindi sappiamo quanto 0 abbiamo. Ne abbiamo due nell'intervallo 
+da due a nove punto qualcosa. Non abbiamo nulla nei 20.
+Whoops. Abbiamo un numero nei 30.
+Non abbiamo numeri nei 40. Un numero nei 50.
+Due numeri. Uno due tre quattro numeri nell'intervallo
+dei 70. Nessun 80.
+Nessun novanta e un cento. Quindi si spera che questo sia quello che saremo in 
+grado di replicare. Andremo a zero, ce n'è uno due
+tre quattro cinque sei sette otto nove zero dieci, venti.
+Whoops, sono fuori di uno. Zeros, nessun dieci, neddun venti, un 30,
+nessun quaranta, un 50, nessun sessanta, quattro settanta, nessun ottanta, nessun novanta,
+e un 100. Quindi due, tre, quattro, otto, nove numeri,
+uno, due, tre, quattro, cinque, sei, sette, otto, nove, numeri quindi penso che
+abbiamo costruito il mio esempio, correttamente. Lo sposteremo qui solo per un minuto
+per poterlo esaminare. Questo istogramma qui.
+Quindi questo è, l'istogramma che voglio alla fine.
+E quello che mi sembra di aver deciso qui è che, all'indice zero, andrò a contare
+tutti i numeri che vanno da zero a nove.
+All'indice uno, nel mio result di questa funzione grade ranges, andrò a contare
+il numero di dieci. Il numero dei venti, il numero dei
+trenta, e così via. E
+L'indice zero corrisponde agli 0. L'indice uno ai 10.
+L'indice due ai 20. L'indice tre è i 30.
+Quindi sembra che io abbia il numero dell'indice. Ma il primo, è il 10.
+I 30, 40 all'indice quattro, 50 all'indice cinque, i 90 all'indice nove, i 100 all'indice dieci.
+Quindi sì, sembra proprio che sia ciò che sto ottenendo.
+Guardando questa rappresentazione dei dati, come sto immagazzinando le informazioni, e cosa
+significa ogni indice, e come corrisponde a questi intervalli qui mi farà di nuovo risparmiare
+molto tempo più avanti quando proverò ad implementare questa funzione.
+Trascinerò questo qui. Annoterò un paio di cose riguardo a cosa ho
+appena pensato. 0-9 è l'indice zero. 
+Questo è l'indice uno. Questo è l'indice due e così via.
+Questo è l'indice nove e questo è l'indice dieci. e il mio risultato.
+Bene sembra che lo dia [risata]. Se lo sistemo qui.
+Sembra che io gli passi una lista di floats e mi ritorna indietro una lista di quel tipo.
+E sembra che ritorni una lista di interi per ogni indice di x, indicante quanti
+voti sono in questi intervalli. Grades ranges non sembra catturare 
+questa idea. Quindi andrò ad inserire count grade ranges.
+Riceve dei tassi simbolici. Questo significa che devo modificare il
+mio esempio qui. E questa mi sembra una migliore frase verbale.
+Il mio risultato è lungo undici numeri. E voglio tenere traccia di questo count.
+Quindi, range di count sarà, beh, inizia sempre da zero.
+Quindi, questo mi darà una lista di lunghezza undici di interi che sono tutti zero e
+andrò ad aggiornarlo quando osservo ogni numero.
+E ho bisogno di capire come andare a prendere quel 77.5 e prendere solo i caratteri 
+decimali in modo da poterlo usare come un indice in questa lista range count.
+Ogni numeri fino a 70, fino a 79 punto nove dovrebbe terminare solo con il sette.
+Quindi andrò qui e lo proverò un po'.
+77 punto cinque, e lo divido solo per dieci termino con sette punto sette cinque
+voglio eliminare questa parte punto sette cinque.
+Quindi userò l'altra forma della divisione in cui elimino
+la parte frazionaria. Questo funziona se ho solo 70?
+Sì. E cosa diciamo di 79.9?
+Bene. Tornando al mio programma che significa che
+una volta che ho un voto dalla mia lista voglio usare la divisione.
+E poi andrò ad usarlo come un indice e a sistemare council.
+Ho bisogno di inserire questo risultato. Per ogni grado nel file grades,
+ho bisogno di sapere a quale intervallo voglio aggiungere uno di quelli in counts.
+Bene ho appena capito che posso prendere quel voto e dividerlo per dieci e
+trasformare quel risultato in un intero. Quindi questo mi dirà l'indice della lista
+range counts in cui voglio l'incremento.
+Quindi range counts è Range counts all'indice dell'intervallo
+è cosa cera prima più uno. Quindi ho visto tutti i voti.
+Ho finito. Quindi, ritorno semplicemente quella lista.
+E' ora del test. Quindi usiamo questa lista qui.
+Facciamo girare il modulo. Chiamiamo questo e confrontiamo.
+20010104001. Perfetto.
+Due passi effettuati. Uno al termine.
+So che il mio programma principale qui che voglio contare i voti per intervallo.
+Non ho alcuna piccola funzione per farglielo fare per me.
+Quindi range counts sarà ciò che ottengo indietro dalla count grade ranges e passandole
+in ingresso grades. Proviamolo.
+Tutto ciò che faremo è stampare range counts e vedere cosa otteniamo.
+Vediamo se ci sembra di fare progressi. Andiamo e lanciamo, lanciamo il modulo.
+Dice ok, quale vogliamo aprire? Bene, apro il nostro file di test qui.
+E dove vogliamo salvarlo? Bene, andrò a salvarlo alla fine in
+iii.hist, hist per istogramma. Ma, al momento non stiamo scrivendo nulla
+in quel file. Ma devo comunque selezionarlo, dato
+che mi era stato chiesto di farlo. E dice name [inudibile] is not defined. Come può essere?
+Vedo, ho bisogno di usare questi mediante il nome del modulo.
+Ho anche notato che, voglio chiedere di salvare come file dato che questo è il file di output.
+Facciamolo nuovamente girare. Questo uccide il nostro programma di Python, 
+quindi non mi sto avvicinando. E proveremo ancora una volta.
+Ci viene chiesto il nostro file di input, eccolo, o chiesto per il file di output e scegliamo
+quello e chiede se siamo sicuri di volerlo fare?
+Sì, controllo il mio nome che è uno che voglio rimpiazzare.
+Otteniamo la stessa lista stampata qui. Quindi il nostro programma principale ora
+funziona, fin qui. Ora che ho la mia lista dei conti per ogni
+intervallo, è ora di scrivere l'istogramma sul file. Ho fatto questo con questa istruzione di print
+quindi la commenterò. Solo nel caso in cui debba decommentarla 
+più avanti. Torno alla mia funzione file dove sto
+salvando tutte le mie funzioni, e ho bisogno di scrivere un istogramma quindi, seguendo
+il nostro processo di disegno. So che andrò a chiamare e passarle in ingresso
+la lista degli intervalli dei voti che ho generato, quindi ottengo questa informazione
+range counts e anche il file che è stato aperto per la scrittura.
+Quindi so che ho una lista di interi e un file
+aperto per la scrittura. Non ritorna nulla.
+Tutto ciò che fa è scrivere il file. .
+Un istogramma di, di stelle. Basata sui numeri.
+Ho problemi con la digitazione oggi. Di voti nello stesso intervallo.
+Mi chiedo se sia frustrante guardarmi mentre faccio questi errori.
+Bene, ho n esempio dell'output che voglio.
+. E, incollerò semplicemente questo, in modo che in
+qualsiasi modo l'help venga richiamato, possiamo vedere ciò che ci aspettiamo.
+Cosa è Steward write an histogram, quindi "writes histrogram" sembra essere un
+nome ragionevole. Sappiamo che questa è range counts e che
+abbiamo un file istogramma in cui stiamo per scrivere.
+La prima riga dell'output e l'ultima riga dell'output sono leggermente differenti qui ci
+sono più spazi dopo il numero voglio queste linee così, quindi voglio queste stelline
+che si impilino in modo che quando stampo la prima riga e quando stampo penso l'ultima riga
+devo scrivere un paio di spazi in più quindi le gestirò separatamente. Vogliamo prima scrivere da zero a nove, e
+poi quanti spazi vogliamo scrivere? Uno, due tre.
+Non inserisce un nuovo carattere di fine riga al fondo, che è buono, dato che ora voglio
+scrivere delle stelle. Quindi, so che voglio scrivere delle stelle.
+E quante ce ne sono? Beh, è il numero dei voti che c'è 
+nell'intervallo. Quindi andremo a moltiplicare l'asterisco
+per qualsiasi cosa ci sia in range counts all'indice zero.
+Che è il numero dei voti che erano nell'intervallo da zero a nove. E poi voglio iniziare una nuova riga,
+dato che come potete vedere, i voti da dieci a diciannove appaiono sulla riga seguente.
+Terrò poi in considerazione il caso particolare. E qui vogliamo scrivere 100. E, invece di range counts all'indice zero,
+ora è range counts all'ultimo indice.
+Questo mi da il numero di 100 che abbiamo trovato nel file.
+Nel frattempo voglio scrivere una riga per ognuno degli indici da uno a nove quindi
+per i nell'intervallo da uno fino a dieci ma non incluso.
+Bene, cosa deve fare? Questo scrive gli intervalli a due caratteri.
+10, 20, 30 e così via. Devo capire qual è il numero più piccolo e
+quale quello più alto per l'intervallo Corrente.
+Quindi quando i è uno, devo capire il oops, il dieci e il diciannove.
+Quando i è due ho bisogno di 20 e 29 e così via.
+Quindi il punto inferiore di X è solo i per 10. L'indice più alto è
+i per dieci più nove. Solo per controllare, nove volte dieci fa 90 più
+nove 99, quindi funziona anche per 90. Quindi, sì, mi sembra che mi dia il limite inferiore e superiore.
+Scriverò low, ma devo passargli una stringa quindi low, srt di low più l'apostrofo
+fra inferiore e superiore e poi high.
+Seguita da un due punti e uno spazio. Una volta che ho scritto quello, è ora
+di scrivere gli asterischi. Quindi voglio moltiplicare quello per range
+counts a quale indice? Bene, all'indice i.
+Ed infine, voglio scrivere la nuova riga. In uno o due modi.
+Posso fare cosa stavo facendo prima e lanciare questo e poi tirar fuori un esempio di
+range counts ed inviare un file di output e assicurarmi che il file sia stato scritto, ma
+questo è l'ultimo passo nel mio programma quindi in realtà posso farlo qui.
+Ora ho questa informazione in un altro posto quindi andrò a cancellarla.
+Quello che voglio fare ora è scrivere l'istogramma con range counts e il
+mio file di output che è un file a1histfile. Ho verificato Posso semplicemente lanciarlo e controllare
+per assicurarmi che questa nuova funzione faccia cosa voglio.
+Proveremo il nostro A1test.txt. E vogliamo scriverlo in a1test.hist.
+Sì, vogliamo rimpiazzarlo. Uh-oh!
+Ho un problema di non scrivibile qui. Sembra dire che quando ho chiamato
+questo file.right dice che, che è un'operazione non supportata.
+Quel file non è scrivibile. E questo ha senso.
+Dato che l'ho aperto per la lettura. Visto che ho copiato e incollato e dimenticato
+di cambiare quello. Lanciamolo ancora una volta.
+Questo è l'input del mio test. No, non voglio scrivere il mio programma lì.
+Salviamo quello, rimpiazziamo. Okay, nessun errore.
+Andremo a modificare il finder ora. Eccomi.
+Non guardate. Esempi di voti, e ho appena scritto
+a1test.hist. Apriremo questo nell'editor di testo.
+Ed è vuoto. Ora devo capire il perché.
+Torniamo indietro e guardiamo il programma.
+Oh, penso di aver dimenticato di chiudere il mio file. non chiudete i vostri file e allora non verranno
+scritti subito. Oh proviamo un'ultima volta.
+Torniamo indietro, vediamo cosa abbiamo fatto. E qui c'è la nostra informazione.
+Proviamo a farlo girare sul nostro file di dati più grande.
+Okay. 1.Pxt è il nostro file più grande.
+E lo salveremo in A1hist. Sì,
+voglio rimpiazzarlo. Tornando nuovamente al finder,
+vogliamo hist. Aha, bello.
+Guardate quello. E' questo è davvero il modo in cui scrivo
+i programmi. Inizio proprio dal principio con solo
+una vaga idea di ciò che voglio e ho un po' di decisioni da fare.
+Quali sono i miei passi, che dati andrò a salvare e come li salverò. E in che ordine scriverò le mie funzioni
+e come andrò a testarle. Spero sia stato divertente.

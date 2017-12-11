@@ -1,0 +1,401 @@
+1
+00:00:01,800 --> 00:00:05,738
+Ciao a tutti.
+Avete visto come valutare le espressioni in
+
+2
+00:00:05,738 --> 00:00:09,044
+Python.
+In qeusta lezione, andremo a mostrarvi
+
+3
+00:00:09,044 --> 00:00:14,319
+come ricordare il risultato di quelle
+espressioni in modo che possiate usare
+
+4
+00:00:14,319 --> 00:00:17,766
+quei valori più tardi.
+Esploreremo questa idea
+
+5
+00:00:17,766 --> 00:00:23,182
+calcolando l'area di alcuni triangoli.
+Come promemoria, se conosco
+
+6
+00:00:23,182 --> 00:00:28,608
+l'altezza di un triangolo,
+potrei conoscere la lunghezza della
+
+7
+00:00:28,608 --> 00:00:36,019
+base, allora l'area del triangolo
+è la lunghezza della base per
+
+8
+00:00:36,019 --> 00:00:44,400
+l'altezza divisa per due. Quindi, per esempio,
+se l'altezza è dodici e la lunghezza della
+
+9
+00:00:44,400 --> 00:00:50,380
+base è venti, allora l'area è venti
+per dodici su due.
+
+10
+00:00:50,780 --> 00:00:56,797
+Andiamo ad vederlo in Python.
+Sai già come inserire quella
+
+11
+00:00:56,797 --> 00:01:03,037
+espressione e farla calcolare in Python.
+Ma dal momento che abbiamo deciso di calcolare il
+
+12
+00:01:03,037 --> 00:01:08,261
+valore di una coppia di triangoli,
+andremo a mostrarvi come
+
+13
+00:01:08,261 --> 00:01:12,324
+introdurre le parole base e altezza per 
+rappresentare dei valori.
+
+14
+00:01:12,324 --> 00:01:15,880
+Questo viene fatto mediante un'istruzione di
+assegnazione. Ecco un esempio.
+
+15
+00:01:18,340 --> 00:01:25,135
+Quello che fa questo è valutare il venti e
+associare quel valore con una variabile
+
+16
+00:01:25,135 --> 00:01:28,653
+base.
+Base viene detta variabile poiché è un
+
+17
+00:01:28,653 --> 00:01:34,490
+valore, può variare, come vedremo.
+Faremo qualcosa di simile per una variabile
+
+18
+00:01:34,490 --> 00:01:40,806
+chiamata height, e poi, questi
+due nomi potranno essere usati come se i loro valori
+
+19
+00:01:40,806 --> 00:01:48,081
+fossero lì nel controllo di Python.
+Quindi, il valore di base è venti, height è
+
+20
+00:01:48,081 --> 00:01:53,663
+associata con il valore dodici.
+Nota che il simbolo di uguale ha un
+
+21
+00:01:53,663 --> 00:01:59,804
+significato molto diverso in Python rispetto che in
+MAtematica dato che il programma per computer
+
+22
+00:01:59,804 --> 00:02:05,203
+diventa leggermente complicato. Andremo ad
+introdurre una notazione per descrivere
+
+23
+00:02:05,203 --> 00:02:09,060
+le variabili e il loro valori.
+Quello che andremo a fare è
+
+24
+00:02:10,080 --> 00:02:12,976
+dodici variabile base con una scatola vicina
+ad essa.
+
+25
+00:02:12,976 --> 00:02:17,017
+E cosa succede in Python è che venti
+non va in quella scatola.
+
+26
+00:02:17,017 --> 00:02:22,135
+Invece, venti, come ogni altro valore,
+valore in Python, sta ad un particolare
+
+27
+00:02:22,135 --> 00:02:26,176
+indirizzo di memoria.
+Quindi, andrò a prendere un indirizzo di memoria
+
+28
+00:02:26,176 --> 00:02:31,766
+arbitrario che andrò ad indicare con una x
+solo per renderlo differente dagli altri
+
+29
+00:02:31,766 --> 00:02:34,999
+unmeri.
+E diciamo che all'indirizzo di memoria x3,
+
+30
+00:02:34,999 --> 00:02:39,674
+appare il valore venti.
+L'istruzione di assegnazione prende quel x3 e
+
+31
+00:02:39,674 --> 00:02:46,595
+lo posiziona nella scatola associata con base.
+Quindi, base in realtà, il valore di base è x3.
+
+32
+00:02:46,595 --> 00:02:53,698
+E in un certo senso, questo significa che
+punta all'indirizzo di memoria x3 dove
+
+33
+00:02:53,698 --> 00:02:56,340
+sta il valore venti.
+Similmente,
+
+34
+00:02:56,340 --> 00:03:02,662
+c'è una variabile height e Python tiene
+traccia del suo valore in quella piccola scatola,
+
+35
+00:03:02,662 --> 00:03:08,253
+E il suo valore è un indirizzo di memoria.
+Andrò a prendere x7, questo è arbitrario.
+
+36
+00:03:08,253 --> 00:03:14,287
+E' Python che effettua tale scelta e quindi,
+non ho bisogno di preoccuparmi di dove sia esattamente
+
+37
+00:03:14,287 --> 00:03:20,175
+l'indirizzo di memoria, dato che so
+che esiste questa relazione fra le variabili
+
+38
+00:03:20,175 --> 00:03:28,283
+e il loro valore.
+Tornando al nostro problema di programmazione
+
+39
+00:03:28,283 --> 00:03:33,084
+possiamo usare base e haight in una
+espressione.
+
+40
+00:03:33,084 --> 00:03:40,421
+Quindi, se faccio base per height / per due,
+ottengo lo stesso risultato che otterrei se avessi
+
+41
+00:03:40,421 --> 00:03:46,489
+scritto venti per dodici / per due.
+Possiamo anche assegnare il risultato di questa
+
+42
+00:03:46,489 --> 00:03:50,384
+ultima espressione ad una variabile.
+La chiamerò area.
+
+43
+00:03:50,384 --> 00:03:58,970
+Poi, controlliamo il suo valore.
+Quello che andremo a fare ora è che andremo
+
+44
+00:03:58,970 --> 00:04:05,428
+ad assegnare a base e height nuovi valori usando
+di nuovo l'istruzione di assegnazione.
+
+45
+00:04:05,428 --> 00:04:10,108
+Quindi, assegnamo il valore 2.5 alla variabile
+base.
+
+46
+00:04:10,108 --> 00:04:17,783
+Quello che fa nella mia figura è che mi fornisce 
+un nuovo valore 2.5, ad un particolare indirizzo
+
+47
+00:04:17,783 --> 00:04:23,398
+di memoria, magari x4.
+E rimpiazza, l'istruzione di assegnazione
+
+48
+00:04:23,398 --> 00:04:32,907
+rimpiazza questo x3 con il valore x4, quindi la
+base non punta più a venti.
+
+49
+00:04:32,907 --> 00:04:43,900
+Invece, base è associata con 2.5.
+Similmente, posso assegnare l'altezza.
+
+50
+00:04:45,020 --> 00:04:54,092
+Quello che andrà a fare, ovviamente, è
+mettere sette in un particolare indirizzo di memoria,
+
+51
+00:04:54,092 --> 00:04:59,949
+magari x1, e l'istruzione di assegnazione
+andrà a prendere quell'x1 e andrà ad
+
+52
+00:04:59,949 --> 00:05:04,606
+inserirlo in una variabile height,
+rompendo questa connessione in modo che height
+
+53
+00:05:04,606 --> 00:05:13,845
+faccia riferimento a sette.
+Usando Control+P, tornerò indietro
+
+54
+00:05:13,845 --> 00:05:21,390
+al mio vecchio calcolo dell'area e come
+stiamo per vedere, questa nuova area è
+
+55
+00:05:21,390 --> 00:05:25,674
+8.75,
+che è proprio quello che ottieni se prendi
+
+56
+00:05:25,674 --> 00:05:29,680
+2.5, moltiplichi per sette, e dividi per
+due.
+
+57
+00:05:31,220 --> 00:05:35,992
+Ogni istruzione di assegnazione ha la forma
+di una variabile è un'espressione con segno.
+
+58
+00:05:35,992 --> 00:05:40,963
+Queste sono le regole per eseguire 
+un'istruzione di assegnazione e devi fare
+
+59
+00:05:40,963 --> 00:05:45,868
+del tuo meglio per memorizzarlo dato che
+servirà ancora e ancora durante il
+
+60
+00:05:45,868 --> 00:05:46,928
+corso.
+Passo uno,
+
+61
+00:05:46,928 --> 00:05:50,043
+valuta l'espressione sul lato destro.
+
+62
+00:05:50,043 --> 00:05:53,357
+Il valore della sua espressione ha un indirizzo
+di memoria.
+
+63
+00:05:53,357 --> 00:05:57,600
+Salva quell'indirizzo di memoria nella variabile
+sul lato sinistro.
+
+64
+00:05:59,200 --> 00:06:03,488
+Ogni linguaggio di programmazione ha un insieme
+di regole per definire quali siano i nomi ammessi.
+
+65
+00:06:03,488 --> 00:06:08,441
+In Python, il nome di una variabile deve iniziare
+con una lettera o il carattere underscore e
+
+66
+00:06:08,441 --> 00:06:11,099
+può contenere delle lettere, numeri e
+underscores.
+
+67
+00:06:11,099 --> 00:06:14,180
+Sono ammesse sia le lettere maiuscole che
+minuscole.
+
+68
+00:06:14,620 --> 00:06:19,171
+I nomi di variabili non amessi causano degli
+errori di sintassi.
+
+69
+00:06:19,171 --> 00:06:26,377
+Quindi, per esempio, se proviamo ad far iniziare
+il nome di una variabile con un numero, ci dice
+
+70
+00:06:26,377 --> 00:06:31,119
+che non possiamo. Allo stesso modo, 
+se includiamo un carattere non alfabetico,
+
+71
+00:06:31,498 --> 00:06:38,610
+non-underscore, non numerico in un 
+nome di una variabile, il sistema si lamenterà.
+
+72
+00:06:38,610 --> 00:06:47,879
+Python è anche case sensitive.
+Quindi, seconds_in_minute è un nome 
+
+73
+00:06:47,879 --> 00:06:54,058
+perfettamente valido.
+Ma è diverso da qualsiasi altra
+
+74
+00:06:54,058 --> 00:07:02,040
+combinazione di caratteri maiuscoli e minuscoli
+come quello.
+
+75
+00:07:02,820 --> 00:07:08,016
+Il primo, seconds_and_minutes è, ovviamente
+più leggibile che il secondo con
+
+76
+00:07:08,016 --> 00:07:13,150
+quelle lettere capitali e scegliere dei
+bei nomi è importante perché i programmi
+
+77
+00:07:13,150 --> 00:07:16,319
+possono essere facilmente usati, letti e
+migliorati per anni.
+
+78
+00:07:16,319 --> 00:07:21,516
+Ogni linguaggio di programmazione ha un insieme
+di convenzioni per scegliere un nome, come
+
+79
+00:07:21,516 --> 00:07:24,621
+i siti web hanno uno stile ed un layout particolare.
+
+80
+00:07:24,621 --> 00:07:29,501
+In Python, la maggior parte dei nomi di varibili
+usano solo lettere minuscole con underscore per
+
+81
+00:07:29,501 --> 00:07:32,100
+separare le parole, lo chiamiano UNKNOWN case.

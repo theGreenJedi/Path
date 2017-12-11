@@ -1,0 +1,75 @@
+Salut tout le monde.
+Vous avez vu comment évaluer des expressions en Python.
+Dans ce cours, nous allons vous montrer Comment enregistrer les résultats de ces
+expressions pour pouvoir les utiliser plus tard.
+Nous allons explorer cette idée en calculant l'aire de quelques triangles.
+Pour vous rappeler, si je sais la hauteur du triangle,
+et la longueur de la base. alors l'aire du triangle,
+c'est la longueur de la base fois la hauteur divisé par deux. Donc par exemple,
+si la hauteur est douze et la longueur de la base est vingt, alors l'aire est
+vingt fois douze divisé par deux. Allons voir ça en Python.
+Vous savez déjà comment entrer cette expression et la faire évaluer en Python.
+Mais comme on a décidé de calculer ces valeurs pour plusieurs triangles,
+on va vous montrer comment introduire les mots "base" et "height"
+pour représenter des valeurs. On fait ça avec des directives d'assignement.
+Voici un exemple. Cela évalue le vingt et associe
+cette valeur avec la variable "Base".
+"Base" est appelée une variable car c'est une valeur qui peut changer, comme on va le voir.
+On va faire quelque chose de semblable pour une variable "height" après quoi ces
+deux noms peuvent être utilisés comme si ces valeurs étaient là dans le Shell.
+Donc la valeur de "base" est vingt, "height" est associé avec la valeur douze.
+Remarquez que le sens du symbole égal est très différent en programmation comparé aux
+Mathématiques. Comme des programmes peuvent devenir assez compliqués, nous allons
+introduire une notation pour décrire des variables et leur valeurs.
+Ce qu'on va faire c'est dessiner la variable avec une boite à côté. Ce qui se passe en Python c'est que vingt
+ne va pas dans cette boite. À la place, vingt, comme toute autre
+valeur en Python vis à une certaine adresse dans la mémoire. je vais la marquer avec un "x" pour
+la différentier des autres nombres.
+Et disons qu'a l'adresse x3, la valeur vingt apparaît.
+La directive d'assignement prends ce x3 et la met dans la boite associée avec "base".
+Donc la valeur de "base" est vraiment x3. Ce que ça veut dire c'est que cela pointe
+vers l'adresse mémoire x3 où la valeur vingt réside.
+De la même façon, il y a une variable "height" et Python retiens
+sa valeur dans cette boite, et cette valeur est une adresse mémoire.
+Je vais choisir x7, c'est arbitraire. Python se charge de ce choix et donc
+je n'ai pas besoin de me soucier de quelle adresse c'est exactement, tant que je
+sais que cette relation entre des variables et leur valeurs existe.
+Pour retourner à notre problème de programmation, on peut utiliser "base" et "height" dans
+une expression. Donc si je fais "base" fois "height" divisé
+par deux, j'obtiens le résultat comme si j'avais tappé vingt fois douze divisé par deux.
+On peut aussi assigner le résultat de cette expression à une variable.
+Je vais l'appeler "area". Vérifions sa valeur.
+Ce qu'on va faire maintenant c'est donner à "base" et "height" des nouvelles valeurs
+avec de nouvelles directives d'assignement. Assignons la valeur 2.5
+à la variable "base." Dans mon dessin, cela me donne une nouvelle
+valeur : 2.5 à une certaine adresse mémoire, peut-être x4.
+Et la directive d'assignement remplace ce x3 avec la valeur x4, donc "base" ne
+pointe plus sur le vingt. À la place, base est associée avec le 2.5.
+De la même manière, je peux assigner la hauteur. Ce que ça va faire, c'est placer sept à
+une certaine adresse en mémoire, peut-être x1, et la directive d'assignement
+va prendre ce x1 et le mettre dans la variable "height" en
+cassant cette connexion pour que "height" réfère maintenant au sept.
+En utilisant Contrôle+P, je vais remonter jusqu'a mon précédent calcul de "area" et
+comme on va voir, cette nouvelle "area" est 8.75.
+C'est en effet ce qu'on obtiens si on prends 2.5 fois sept et qu'on divise par deux. Chaque directive d'assignement a la forme:
+variable = expression Voici les règles pour exécuter une directive
+d'assignement et vous devriez faire de vôtre mieux pour les retenir car cela
+va revenir tout le temps dans cette classe.
+Première étape : Évaluer l'expression à droite du "=". La valeur de cette expression a une adresse
+dans la mémoire. L'adresse est stockée dans a variable à
+gauche du "=". Chaque language de programmation a un
+jeu de règles décrivant un nom légal. En Python, les noms de variables doivent
+commencer avec une lettre ou un underscore et peuvent contenir des lettres, nombres
+et des underscores. Majuscules et minuscules sont autorisées. Les noms de variables mal formés causent
+des erreurs de syntaxe. Par exemple, si on essaye de commencer
+un nom de variable avec un nombre, on nous dis que l'on ne peut pas.
+Pareillement, si on inclus un caractère qui n'est pas alphabétique, numérique ou
+l'underscore dans un nom : Python se plaint. Python est sensible à la casse.
+seconds_in_minute est un nom parfaitement valable. Mais c'est différent de tout autre combinaison de majuscules et minuscules. Le premier est bien sûr plus lisible
+que le second avec ces majuscules et choisir des bons
+noms est important car les programmes peuvent facilement être utilisés,
+lu et améliorés pendant des années. Chaque language de programmation a des
+conventions pour comment choisir un nom, un peu comme un site web a un style et
+une structure particulière. En Python, la plus-part des variables sont
+tout en minuscules avec des underscores pour séparer les mots. Ce style
+est appelé "pothole_case"

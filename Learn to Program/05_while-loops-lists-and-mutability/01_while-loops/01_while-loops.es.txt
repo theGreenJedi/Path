@@ -1,0 +1,118 @@
+En una clase anterior usamos un iteración de cuatro
+para iterar sobre cada carácter de una cadena string. Pero ¿qué pasa si no queremos iterar sobre
+cada carácter? Quizás solo queramos iterar hasta que se encuentre
+una vocal. O puede que no queramos trabajar con
+cadenas en absoluto. Por ejemplo, podemos querer repetir una tarea
+hasta que el usuario introduzca un valor concreto. En ete capítulo, vamos a ver iteraciones 
+"while" para lograr estas tareas. Para empezar, revisemos el formato general de
+una estructura "if". Una estructura "if" se basa en una expresión
+Booleana. Cuando esta expresión es verdadera, el cuerpo de
+la estructura "if" se ejecuta. Si la expresión Booleana es falsa, entonces
+el Supón [risas], que hay 500 activos.
+¿Qué cartera tiene 500 activos? proceso que sigue a la estructura del "if" se ejecutará
+sin que se ejecute su contenido. Una estructura "while" tiene un formato similar a la del 
+"if", también se basa en una expresión Booleana, y si la expresión Booleana
+es cierta el cuerpo de la estructura "while" se ejecuta. Sin embargo, en contra de lo que hace la iteración "if"
+en la iteración "while" continúa y vuelve a comprobar la expresión Booleana
+otra vez. Si la condición es verdadera, entonces 
+el cuerpo de la iteración "while" se ejecuta de nuevo y el proceso se repite
+hasta que la condición se vuelve falsa. El primero para ir a la guerra. ejemplo de una iteración implica la
+variable num Num tiene el valor 2. La estructura de iteración while para ir a la guerra. continuará ejecutando siempre que num sea < 100. En el cuerpo para ir a la guerra. de la iteración, num es duplicado y num es
+impreso Teniendo num un valor inicial de 2,
+esta iteración Y ejecuta 6 veces Num tiene 4, 8, 16, 32, 64 y eventualmente 128 En ese momento, la condición de la iteración Y es
+falsa Ahora si num tiene el valor de 10, y volvemos a correr
+esta iteración Y. Tomará sólo cuatro iteraciones para que
+la condición de la iteración "while" sea falsa así que después de cuatro iteraciones i significa que el cuerpo de la iteración se ejecuta 4
+veces En este punto, no hay referencia con el valor
+160 y la condición de la iteración es falsa Sí en este punto, volvemos a correr esta iteración
+while El cuerpo no se ejecuta nunca porque la condición es falsa desde un
+inicio Ahora veamos un problema rápido que
+mencioné anteriormente la iteración sobre los caracteres de una cadena string
+hasta que una vocal sea encontrada. Primero, recordemos como iteramos sobre nuestra cadena string usando una iteración. Nosotros usamos para ir a la guerra. la iteración for para carácter en la cadena string S y
+simplemente imprimir ese carácter Cuando inetrrumpimos esta iteración el carácter tiene
+un valor inicial de la string S en la posición cero. Después S en una y así sucesivamente hasta el final
+de la cadena string sea alcanzada Cuando escribimos nuestra iteración Y, necesitamos
+especificar estos índices De esta forma empezaré creando la variable i
+que tiene el valor cero y que va a representar el primer índice de la
+cadena string sobre la cual queramos iterar. Ahora la condición de la iteración while, que queramos
+mantener hasta que encontremos una vocal
+siempre que string en la posición i no sea una vocal.  De esta forma, siempre que no sea un conjunto de minúsculas a e i o u y mayúsculas A E I O U Después ingresaremos en el cuerpo de la
+iteración y ejecutar el cuerpo de la iteración En la iteración, imprimiré ese carácter
+la string de la posición i. Antes que podamos salir de la iteración Y, necesitamos
+avanzar el índice de tal forma que su valor debe incrementar.
+Yo, obtendremos el valor de i mas uno Y así nos movemos hacia el carácter siguiente de la cadena string En este caso la iteración while ejecuta una vez porque el carácter activo no es una
+vocal en la segunda vez que la condición
+de la iteración while sea comprobada, el activo uno se refiere a e, que es una sub-cadena string de la cadena de
+string de vocales De esta forma la condición de la iteración while es falsa y
+la iteración while termina Ejecutemos para ir a la guerra. la misma iteración.
+Esta vez para ir a la guerra. usando esta cadena string. Inicializando i una vez más a cero,  y ahora
+ejecutando la iteración while. Esta vez el cuerpo de la iteración while se ejecuta
+dos veces Una vez por la constante t, una segunda vez
+por la constante h, y luego la e es encontrada, asñi que la condición de la iteración Y
+es falsa y la iteración termina Qué pasa si sólo hay consonantes
+en nuestra para ir a la guerra. cadena string. En este caso, las tres consonantes se
+muestran y luego un error de índice ocurre. S(0) se refiere a la 'x'
+S(1) se refiere a la 'y' y S(2) se refiere a la
+'z' Pero el valor actual de i es 3 y el activ
+3 no es una posición legal, no es un índice válido
+para la cadena string s, ocurriendo un error de índice. No hemos especificado cuando parar
+la examinación de los caracteres de s. Y así llegamos al final de la cadena string y hemos tratado de acceder al índice que
+no existe Para prevenir esto, debemos añadir una segunda
+parte a nuestra condición Boolean. Qué es la de comprobar que i este dentro
+de los límites de la cadena string Para asegurar que sea menor que la longitud.
+Hagamos eso ahora. Le daremos el valor de cero a i. S tiene la cadena string x y z y ahora ejecutamos
+la iteración while. Antes de ejecutarla,
+comprobaremos primero para asegurarnos que i es menor que la longitud
+de a cadena string. Y luego comprobaremos que sí s e i son una sub-cadena
+de la cadena string de vocales Tomo nota que he puesto esta condición primero. Queremos asegurarnos que hemos comprobado que
+i sea menor que la longitud antes de tratar de acceder
+la cadena string en la posición i Python realiza una evaluación de esto
+y operación, de tal forma que sí el primer operando es falso
+el segundo no es evaluado Esto significa que si i no es menor que
+la longitud de la cadena string, entonces esta N se ha encontrado que es falsa en el punto que no trataremos de
+acceder la cadena string en la posición i. Así que en este caso las tres constantes so
+mostradas en el punto que la condición que i sea menor que la longitud
+de la cadena string es falsa y la iteración se termina [RUIDO]. Usemos algunas de las ideas de la iteración while
+para otro problema La función up_to_vowel es la que
+implementaremos [RUIDO]. Tiene un parámetro de cadena string y
+retornará una cadena string Retornará una sub cadena de
+la cadena de parámetro string s desde el índice cero, hasta pero sin incluir
+la primera vocal Así que en vez de imprimir de la forma que hicimos en nuestro
+ejemplo en la shell, queremos acumular la sub
+cadena string y devoverla Usremos un patrón de acumulador que vimos
+anteriormente para resolver este problema.
+La variable para ir a la guerra. antes de la vocal, inicialmente se refirirá a una
+cadena string vacío y acumularemos la cadena string para que sea
+retornada antes de la vocal. La iteración while que vamos a usar es exactamente la misma que escribimos
+anteriormente Queremos iterar sobre los caracteres de la
+cadena string empezando en la posición cero Hasta que encontremos la vocal o hasta que
+el final de la cadena string sea alcanzado En el cuepro de la iteración queremos para ir a la guerra. añadir al acumulador de vocales anetrior. Así para ir a la guerra. antes de la vocal, obtengamos su valor actual
+mas el carácter, que es la posición i del carácter
+de la cadena string s. Necesitamos incrementar el índice, añadiendo uno a el. de tal forma que podemos movernos al siguiente
+carácter Y al final de esta función la
+sub-cadena sea retornada Antes que una vocal sea retornada Corramos el código ahora y llamemos la función para Michelle De la primera función llamada, esperamos
+obtener h. De la segunda, donde hay un
+argumento, t h debe ser retornada Y el tercer ejemplo que contiene
+solamente para ir a la guerra. carácter, solo cononantes, No, ninguna vocal
+la cadena completa para ir a la guerra. es retornada Implementemos una función más. El nombre de esta función es get answer
+y esta función preguntará al usuario una pregunta para
+una respuesta de sí o no El usuario proporcionará la respuesta Y queremos seguir preguntando
+hasta que la respuesta ingresada es sí o no. Por lo que puede tomar una o 100 veces
+antes que el usuario ingrese la respuesta correcta Al final retornarémos la respuesta que
+el usuario ingresó Implementemos esta función empezando con una solicitación así que llamaremos input usando la solicitud pasado como un argumento para recibir una respuesta, y guardando el resultado en la variable
+de respuesta Especifiquemos la condición ahora bajo
+la que queramos re-solicitar al usuario El cuerpo de la iteración Y será un
+duplicado del código anterior Que una simle, una simple línea de código que
+solicita al usuario con la pregunta Nos gustaría seguir solicitando cuando
+la respuesta no es ninguna de las que estamos buscando Asi, sí a respuesta es sí o no, pararemos. Y si luego la respuesta no es sí o no la iteración debe continuar. Al final de la iteración while, una vez que halla finalizado la ejecución, la respuesta
+será retornada Posiblemente se percataron que no he incluido
+ningún ejemplo de llamada en el doc string. Eso es debido a que la ejecución de esta
+función depende de el ingreso del usuario y yo no puedo predecir que es lo que la fucnión va a
+retornar porque depende en lo que el usuario halla ingresado Corramos esto ahora para comprobar que esta desempeñando como
+esperado Llamando para ir a la guerra. obtenemos la respuesta, pasaré un y nos vemos solicitado con una pregunta.
+Si respondo quizás, seremos para ir a la guerra. re-solicitado, digamos para ir a la guerra. es muy tarde, seremos solicitados nuevamente. para ir a la guerra. No realmente, seremos solicitado nuevamente
+Ooops Finalmente si ingreso sí, sí será retornado
+por la función Tratemos una vez más Esta vez, responderé no
+inmediatamente, así que el cuerpo de la iteración while no será ejecutado, porque la condición
+de la iteración while será falsa desde la primera vez No es retornado por la función en este
+caso

@@ -1,0 +1,51 @@
+So far, our programs have used computer
+memory to store information, But most information is stored in files on
+your computer. In this lecture, we'll show you four ways
+to read a text file. We will use a file containing, In Flanders
+Fields, a poem written in 1915 by Canadian Lieutenant Colonel John McCrae.
+Before we can read a file, we need to tell Python to open it.
+The built-in function open does this. It takes its arguments, the name of the
+file, and the letter r that we want to read from that file as opposed to writing
+to it. If the file is in the same directory as
+the program, then we can just use the plain file name,
+But if the file name is in a different directory, such as the directory that we
+have up here, we must give the full path to it.
+We will now read this file in various ways.
+We will save it in a variable, so that we don't have to keep retyping it.
+First, we open the file for reading. When we open a file for reading, we have
+available to us a method called readline that reads one line from the file,
+including the new line character at the end of that line, and returns it.
+We can read this entire poem by calling readline again and again.
+Notice that even blank lines have new line characters at the end of them.
+Now that we have read to the end of the file, when we call readline again, we get
+back the empty string. The only time that readline returns the
+empty string is when we have reached the end of the file.
+That means that we can use a while loop to read the lines from a file.
+We will close the file and reopen it so that we can start at the top.
+We will read the first line of the file, and then, until we have reached the end of
+the file, we will print the line we read and then move on to, to read the next
+line. When we run this loop watch carefully.
+You're going to see blank lines between every line of the file.
+The reason for this is that a readline will return the entire line including the
+new line character at the end. And then when we print that line print
+adds another new line. In order to prevent this from happening,
+we will use exactly the same format that we did before,
+Except then, in our call on the print function, we will use the empty string as
+the end marker to print after print prints the line.
+Let's now explore how to read just the first stanza.
+We read the title, and, the blank line, and then the first line of the poem.
+Let's check. We'll read each line until we find the
+line containing nothing but the new line character.
+This readline approach allows us to read only the parts of the file we are
+interested in and allow us to stop processing a file as soon as we have found
+the parts of it that we want. If we know we would like to read every
+line in a file there is a simpler way. Python's for loop works with files
+retrieving one line at a time, including the new line.
+If your file isn't huge, you can actually read it all at once using method read,
+Returns the entire file contents as a single string.
+The fourth and last way that we will show you how to read, the contents of a file,
+is using method readlines, which returns a list of all the lines in the file.
+We can use this to print all the lines in the file.
+We'll get our list and then go through that list printing, as we did before.
+This approach is useful if we want to keep the list around so that we can access
+elements of it later.

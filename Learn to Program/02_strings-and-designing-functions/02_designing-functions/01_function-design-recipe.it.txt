@@ -1,0 +1,76 @@
+In questa lezione, andremo a mostrarvi una
+serie di passi detti ricetta di disegno,
+che potete usare per scrivere le vostre funzioni.
+Ecco la nostra funzione triangle area. Abbiamo aggiunto una parte alla doc string.
+Esempi di uso, e valori di ritorno attesi.
+La definizione della funzione ha cinque parti. Ha la testata, che include il nome della
+funzione e i parametri. Ha il pipe contract.
+Ci si aspetta che i pipe dei valori siano passati ai parametri, come il
+tipo di ritorno della funzione. Hal la stessa descrizione.
+Ha un paio di esempi di uso di questa funzione.
+E infine, ha il corpo della funzione. La nostra ricetta di disegno vi aiuta a sviluppare
+quelle cinque parti. Più una aggiuntiva, dove testiamo che la nostra funzione 
+lavori correttamente una volta che l'abbiamo scritta. Spiegheremo la ricetta di disegno mentre
+sviluppiamo un'altra funzione. Ecco il problema su cui lavoreremo: la
+misurazione delle temperature negli Stati Uniti in Fahrenheit, e le misurazioni del Canada in
+Celsius. Quando ci si sposta fra le due nazioni,
+è utile avere una funzione di conversione. Scriveremo una funzione che converte da
+Fahrenheit a Celsius. Il primo passo che faremo è di effettuare
+alcuni esempi di uso della vostra funzione che state per scrivere.
+Pensate a cosa volete che faccia la vostra funzione. E scrivete uno o due esempi di chiamata della funzione che volete scrivere.
+Avrete bisogno di un nome per la vostra funzione, potete sempre cambiarlo più avanti.
+I nomi delle funzioni sono spesso verbi o frasi verbali perché svolgono delle cose.
+Quindi, se siete bloccati, rispondete alla domanda, cosa fa la funzione?
+La nostra risposta è, converte da Fahrenheit a Celsius.
+Ma è molto lungo, quindi userò convert to Celsius.
+Potete sempre migliorare il nome più avanti. Cosa vogliamo che accada quando chiamiamo
+convert to Celsius su 32 gradi Fahrenheit?
+Speriamo di ottenere zero. Andremo ad aggiungere le parentesi angolari, in
+modo che sembri che abbia digitato nella shell di Python.
+Aggiungiamo ancora un esempio, per convertire il punto di ebollizione.
+Il prossimo passo è capire il tipo in ingresso.
+Di che tipo sono i parametri? E qual è il tipo del valore che viene
+ritornato. Sembra che vogliamo che convert to Celsius
+lavori con gli interi, ma possiamo immaginare che dovrebbe lavorare anche con i float.
+Useremo la parola number per indicare che posso gestirli entrambi.
+E presumibilmente, ritornerà anche un numero.
+Ora che avete scritto qualche chiamata, e avete un'idea di quali dovrebbero essere
+i tipi, è ora di scrivere l'intestazione della funzione.
+Scegliamo un nome significativo per il parametro in modo che gli altri programmatori abbiamo una vita più facile
+nel capire la nostra funzione. Potete anche modificare il nome della funzione
+qui se volete. Completiamo la testata con le informazioni che conosciamo.
+Sappiamo che il nome della funzione è convert to Celsius e sappiamo che il nostro parametro
+è il numero di gradi Fahrenheit. Quindi, useremo Fahrenheit come nome del 
+nostro parametro. Tutto ciò che sta sotto si suppone stia all'interno
+di una scatola, quindi facciamo attenzione a questo ora.
+A questo punto, dovreste avere un'idea molto precisa su cosa volete che faccia la funzione.
+E' ora di scrivere una descrizione, su cosa fa la nostra funzione.
+Ritorna il numero di gradi Celsius equivalenti ai gradi Fahrenheit.
+Notate che abbiamo menzionato il parametro esplicitamente, e che abbiamo anche descritto
+il valore di ritorno. Questo p molto importante in tutta
+la documentazione. Ora che avete un'idea precisa su cosa deve
+fare la vostra funzione, e che avete deciso il nome della funzione e dei
+parametri, potete scrivere il codice per la funzione.
+Questo sarà molto più semplice da fare se voi avete speso del tempo per pensare agli esempi,
+alla testata e alla descrizione. Come abbiamo imparato a scuola, sottraiamo 32
+dai Fahrenheit, e poi moltiplichiamo per cinque-noni.
+Non lo abbiamo ancora salvato, e avremmo davvero dovuto.
+Lo andremo a chiamare temperature.py.
+E' ora di testare la nostra funzione sugli esempi.
+Dato che avete già capito quale dovrebbe essere il valore di ritorno, potete dire immediatamente
+se il vostro codice, o magari gli esempi non sono corretti.
+Faremo girare questo modulo. Impostiamo le finestre in modo da vederle entrambe 
+in una volta, e poi possiamo semplicemente copiare e incollare i nostri esempi.
+E vediamo che ci aspettiamo zero, ma otteniamo 14.2 periodico.
+E cosa possiamo dire dell'altro? No, nemmeno questo è giusto.
+Potreste aver già visto il problema. La sottrazione ha una precedenza minore sia
+della moltiplicazione che della divisione e quindi la sottrazione avviene alla fine dopo
+aver calcolato 32 per cinque diviso per nove.
+Lo sistemiamo aggiungendo le parentesi, salvando, lanciando di nuovo.
+E poi provando nuovamente i nostri esempi. Abbiamo ottenuto all'incirca ciò che ci aspettavamo nei
+nostri esempi, eccetto per il fatto che riceviamo un float invece che un int.
+Questo perché la divisione produce sempre un float e i vari operatori producono un float
+se uno dei due operando non è un float. Il problema non è con i nostri calcoli.
+E' nei nostri esempi, e nel nostro contract. Number è un tipo di ritorno troppo generico.
+Li sistemeremo entrambi. Facciamo girare il nostro modulo ancora una volta, chiamiamo 
+la help sulla nostra funzione, e divertiamoci nella nostra

@@ -1,0 +1,338 @@
+1
+00:00:00,082 --> 00:00:05,087
+In questo video, andremo ad usare il
+Python Visualizer per esplorare come le chiamate
+
+2
+00:00:05,087 --> 00:00:12,005
+alle funzioni vengono gestite nella memoria del computer.
+Abbiamo scritto una funzione chiamata convert 
+
+3
+00:00:12,005 --> 00:00:18,003
+to minutes, che prende in ingresso un numero di 
+ore e ritorna il numero equivalente di
+
+4
+00:00:18,003 --> 00:00:21,072
+minuti.
+Ad esempio, se chiamiamo convert to minutes
+
+5
+00:00:21,072 --> 00:00:27,076
+con argomento due, allora ci aspettiamo di ricevere
+120, dato che ci sono 120 minuti in
+
+6
+00:00:27,076 --> 00:00:30,020
+due ore.
+Notate l'indentazione.
+
+7
+00:00:30,020 --> 00:00:35,051
+Tutto il codice che fa parte di una funzione dovrebbe
+essere indentato, di solito di quattro spazi.
+
+8
+00:00:35,051 --> 00:00:39,050
+Vediamo cosa accade quando facciamo girare 
+questo programma.
+
+9
+00:00:41,057 --> 00:00:45,959
+Quando vediamo la definizione della funzione
+o quando Python la vede.
+
+10
+00:00:45,959 --> 00:00:50,071
+Vediamo che una variabile chiamata convert
+to minute viene creata.
+
+11
+00:00:50,071 --> 00:00:54,055
+Contiene l'indirizzo di memoria di un
+oggetto funzione.
+
+12
+00:00:54,055 --> 00:01:00,007
+Quell'oggetto funzione contiene tutte le
+informazioni riguardanti la funzione, incluso
+
+13
+00:01:00,007 --> 00:01:05,009
+tutto il codice che deve essere eseguito, il
+parametro, e la scatola string.
+
+14
+00:01:05,009 --> 00:01:09,056
+Ora siamo in pausa sulla riga dieci che
+contiene un'istruzione di assegnazione.
+
+15
+00:01:09,056 --> 00:01:14,076
+Notate che la variabile minutes two non è
+ancora stata creata, quello accadrà dopo
+
+16
+00:01:14,076 --> 00:01:17,068
+che terminiamo l'esecuzione dell'istruzione
+di assegnazione.
+
+17
+00:01:17,068 --> 00:01:22,048
+Quindi, per prima cosa dobbiamo valutare
+l'espressione sul lato destro del
+
+18
+00:01:22,048 --> 00:01:25,086
+simbolo di uguale e quell'espressione
+è una chiamata ad una funzione.
+
+19
+00:01:25,086 --> 00:01:31,018
+Una volta che la chiamata alla funzione l'ha
+restituito, ci ritornerà un valore e anche minutes two
+
+20
+00:01:31,018 --> 00:01:36,012
+verrà creato e sarà salvato l'indirizzo di
+memoria del valore ritornato.
+
+21
+00:01:37,023 --> 00:01:41,078
+Per eseguire questa chiamata alla funzione,
+viene valutato l'argomento.
+
+22
+00:01:41,078 --> 00:01:46,060
+Quello creerà una scatola per il valore due
+a destra della linea puntinata.
+
+23
+00:01:46,060 --> 00:01:52,027
+Inoltre, sarà creata una nuova regione di 
+memoria per tenere traccia di cosa accade
+
+24
+00:01:52,027 --> 00:02:00,090
+mentre convert to minutes è in esecuzione.
+Qui c'è il valore due, e qui c'è la variabile
+
+25
+00:02:00,090 --> 00:02:05,037
+numhours, che salva l'indirizzo di memoria
+del valore due.
+
+26
+00:02:05,040 --> 00:02:10,084
+L'area della memoria del computer a destra 
+della riga puntinata viene chiamata heap e
+
+27
+00:02:10,084 --> 00:02:15,049
+contiene tutti i valori che vengono creati
+durante l'esecuzione di un programma.
+
+28
+00:02:15,049 --> 00:02:20,073
+L'area di memoria a sinistra della riga 
+puntinata viene chiamata stack, è
+
+29
+00:02:20,073 --> 00:02:24,008
+detto stack perché è come una pila
+di piatti.
+
+30
+00:02:24,008 --> 00:02:28,073
+Quando viene chiamata una funzione, viene
+creato un frame di stack in cima allo stack.
+
+31
+00:02:28,073 --> 00:02:34,017
+E quando la funzione effettua il return il suo frame
+viene rimosso dalla cima dello stack, e
+
+32
+00:02:34,017 --> 00:02:37,052
+il controllo ritorna alla chiamata di quella
+funzione.
+
+33
+00:02:37,084 --> 00:02:43,048
+Ogni frame contiene delle variabili che sono
+specifiche di quella sezione del programma.
+
+34
+00:02:43,048 --> 00:02:49,012
+Il mainframe contiene la variabili che sono
+create al di fuori delle nuove funzioni e
+
+35
+00:02:49,012 --> 00:02:52,084
+le frame per le funzioni che contengono parametri
+e variabili locali.
+
+36
+00:02:53,063 --> 00:03:00,072
+Una variabile locale è una qualsiasi variabile 
+che viene creata all'interno di una funzione come
+
+37
+00:03:00,072 --> 00:03:05,054
+la variabile result.
+Ora che convert to minutes è stata
+
+38
+00:03:05,054 --> 00:03:09,082
+chiamata, andremo avanti per 
+raggiungere il corpo.
+
+39
+00:03:09,082 --> 00:03:11,835
+La linea sette contiene un'istruzione di 
+assegnazione.
+
+40
+00:03:11,835 --> 00:03:17,979
+Valutiamo la parte destra, guardiamo
+quanto vale num hours ed è due.
+
+41
+00:03:17,979 --> 00:03:25,143
+Due volte 60 è 120 quindi andremo a vedere
+il valore 120 che viene creato e vedremo
+
+42
+00:03:25,143 --> 00:03:31,787
+una variabile result che viene creata all'interno
+della funzione convert to minutes.
+
+43
+00:03:31,787 --> 00:03:36,820
+Il risultato per il primo due, 120.
+Num hours fa riferimento a due.
+
+44
+00:03:36,822 --> 00:03:45,611
+Stiamo per eseguire un'istruzione di return,
+che andrà a valutare il risultato che è
+
+45
+00:03:45,611 --> 00:03:50,105
+120 e andrà a tenere l'indirizzo di
+memoria X3.
+
+46
+00:03:50,105 --> 00:03:54,927
+Notate che stiamo per vedere quale sia
+il valore di ritorno.
+
+47
+00:03:54,927 --> 00:04:01,565
+Non appena clicchiamo avanti ancora una volta,
+andremo ad uscire dalla funzione convert to
+
+48
+00:04:01,565 --> 00:04:05,151
+minutes.
+Il controllo tornerà di nuovo dove eravamo
+
+49
+00:04:05,151 --> 00:04:09,866
+all'interno del programma.
+Era proprio qui, finiremo
+
+50
+00:04:09,866 --> 00:04:15,838
+questa chiamata a convert to minutes con
+argomento due e ci ritornerà
+
+51
+00:04:15,838 --> 00:04:21,926
+l'indirizzo di memoria del valore 120.
+Questo dovrebbe creare una variabile minutes two
+
+52
+00:04:21,928 --> 00:04:28,959
+proprio qui nel modulo mail e quella variabile
+minutes two dovrebbe contenere l'indirizzo di memoria
+
+53
+00:04:28,959 --> 00:04:32,046
+x3.
+Infatti è quello che accade.
+
+54
+00:04:32,046 --> 00:04:38,048
+Lo stack frame per la chiamata a convert to
+minutes non c'è più, non c'è più nella memoria
+
+55
+00:04:38,048 --> 00:04:42,025
+del computer.
+Questo è ciò che accade quando si esce da una funzione.
+
+56
+00:04:43,066 --> 00:04:47,062
+Andremo ad effettuare un'altra chiamata a
+convert to minutes.
+
+57
+00:04:47,062 --> 00:04:52,353
+Questa volta passeremo un argomento
+tre, e salveremo i risultati
+
+58
+00:04:52,353 --> 00:04:57,031
+verso il risultato in minutes three qui.
+Vediamo cosa accade.
+
+59
+00:04:57,031 --> 00:05:00,055
+Valutiamo tre, che vien creata nell'heap.
+
+60
+00:05:00,055 --> 00:05:06,473
+Num hours fa riferimento a quel valore ora.
+Nella prima chiamata faceva riferimento al
+
+61
+00:05:06,473 --> 00:05:10,378
+valore due.
+Ora fa riferimento al valore tre dato che l'abbiamo
+
+62
+00:05:10,378 --> 00:05:16,675
+chiamata con un argomento differente.
+Ora quando calcolo num hours per 60,
+
+63
+00:05:16,675 --> 00:05:24,083
+guardo in cima allo stack qui e vedo che
+sto prendendo tre per 60 che è 180.
+
+64
+00:05:24,083 --> 00:05:30,017
+E quindi otterremo una variabile
+result che fa riferimento a 180.
+
+65
+00:05:30,017 --> 00:05:37,026
+Abbiamo sempre il valore 120 qui, dato che
+fuori, fuori da questa funzione, minutes
+
+66
+00:05:37,026 --> 00:05:44,063
+two fa sempre riferimento a quello.
+Ora andremo a ritornare 180.
+
+67
+00:05:44,092 --> 00:05:52,058
+Quello occuperà l'indirizzo di memoria x5 che
+sarà salvato in una nuova variabile
+
+68
+00:05:52,058 --> 00:05:57,019
+minutes three, che sarà creata
+nel modulo principale.

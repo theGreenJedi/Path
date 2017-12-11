@@ -1,0 +1,369 @@
+1
+00:00:01,360 --> 00:00:03,432
+In questo video, andremo ad esplorare quando
+
+2
+00:00:03,432 --> 00:00:05,616
+vengono create le variabili, per quanto tempo esistono
+nella
+
+3
+00:00:05,616 --> 00:00:08,192
+memoria del computer, e cosa accade quando due
+variaibli
+
+4
+00:00:08,192 --> 00:00:10,580
+hanno lo stesso nome e due differenti
+funzioni.
+
+5
+00:00:13,020 --> 00:00:15,026
+Qui vediamo la funzione convert to minutes
+
+6
+00:00:15,026 --> 00:00:18,910
+che abbiamo analizzato nella lezione
+di visualizzazione.
+
+7
+00:00:18,910 --> 00:00:21,694
+Abbiamo aggiunto una funzione convert to seconds,
+che converte
+
+8
+00:00:21,694 --> 00:00:24,310
+un numero di ore nel numero equivalente 
+di secondi.
+
+9
+00:00:25,480 --> 00:00:28,146
+Convert to seconds effettua il suo lavoro
+chiamando convert
+
+10
+00:00:28,146 --> 00:00:30,960
+to minutes a poi moltiplicando il risultato per 60.
+
+11
+00:00:30,960 --> 00:00:33,330
+Usiamo il visualizzatore per analizzare questo.
+
+12
+00:00:35,190 --> 00:00:38,115
+Passeremo velocemente sulle definizioni 
+delle funzioni
+
+13
+00:00:38,115 --> 00:00:41,534
+a quando gli oggetti delle funzioni vengono creati.
+Convert to minutes per
+
+14
+00:00:41,534 --> 00:00:41,926
+[Suono]
+
+15
+00:00:41,926 --> 00:00:45,590
+uno di questi oggetti delle funzioni, e converte
+secondi per primo all'altro.
+
+16
+00:00:46,960 --> 00:00:49,990
+Ora stiamo per eseguire un'istruzione di
+assegnazione.
+
+17
+00:00:49,990 --> 00:00:54,310
+Il primo passo è valutare il lato destro
+che è una chiamata ad una funzione.
+
+18
+00:00:54,310 --> 00:00:58,570
+Python valuta per primo l'argomento e
+crea un oggetto per quel valore.
+
+19
+00:00:58,570 --> 00:01:00,793
+Poi, Python crea un frame sullo stack di 
+chiamata
+
+20
+00:01:00,793 --> 00:01:03,415
+e salva l'indirizzo di memoria di due in un
+parametro.
+
+21
+00:01:03,415 --> 00:01:04,480
+[INCOMPRENSIBILE].
+
+22
+00:01:04,480 --> 00:01:10,830
+Come promemoria, questa parte è chiamata
+stack di chiamata.
+
+23
+00:01:10,830 --> 00:01:14,140
+Viene mostrato come un stack di frame
+alla rovescia.
+
+24
+00:01:14,140 --> 00:01:18,340
+Durante l'esecuzione di una chiamata ad una funzione
+viene creato un nuovo stack di frame.
+
+25
+00:01:18,340 --> 00:01:21,690
+Non appena la funzione esce, il frame di
+stack corrente viene cancellato.
+
+26
+00:01:21,690 --> 00:01:24,310
+E l'esecuzione della funzione precedente
+continua.
+
+27
+00:01:25,960 --> 00:01:26,968
+La prima riga nel corpo
+
+28
+00:01:26,968 --> 00:01:30,190
+di convert_to_seconds è un'altra
+istruzione di assegnazione.
+
+29
+00:01:30,190 --> 00:01:32,580
+La parte sinistra è una chiamata ad una
+funzione,
+
+30
+00:01:32,580 --> 00:01:35,532
+Seguiamo le stesse regole di sempre,
+valutiamo 
+
+31
+00:01:35,532 --> 00:01:40,140
+l'argomento, num_hours, che contiene
+l'indirizzo di memoria del valore due.
+
+32
+00:01:40,140 --> 00:01:43,444
+Poi, viene creato uno stack per la chiamata
+di convert_to_minutes,
+
+33
+00:01:43,444 --> 00:01:47,250
+e il suo parametro, num_hours, contiene 
+l'indirizzo di memoria di quel valore.
+
+34
+00:01:48,800 --> 00:01:51,750
+Ci sono due variabili chiamate num_hours.
+
+35
+00:01:51,750 --> 00:01:55,234
+Una di queste si trova nel frame per la chiamata di
+convert_to_minutes, e una di quelle
+
+36
+00:01:55,234 --> 00:01:58,310
+è nel frame per la chiamata di
+convert_to_seconds.
+
+37
+00:01:58,310 --> 00:02:01,848
+Python tiene queste due funzioni in esecuzione
+in aree di memoria separate
+
+38
+00:02:01,848 --> 00:02:04,810
+così non fa confusione su che variabile
+usare.
+
+39
+00:02:06,890 --> 00:02:09,330
+Torniamo a tracciare l'esecuzione.
+
+40
+00:02:09,330 --> 00:02:13,250
+La prima linea del corpo converte i
+minuti in un'istruzione di assegnazione.
+
+41
+00:02:13,250 --> 00:02:17,210
+Sul lato destro c'è un'espressione
+num_hours per 60.
+
+42
+00:02:17,210 --> 00:02:18,840
+Quale num_hours utilizziamo?
+
+43
+00:02:19,840 --> 00:02:22,434
+La risposta è che Python cerca nel
+frame dello stack corrente.
+
+44
+00:02:22,434 --> 00:02:27,890
+Num_hours fa riferimento a due quindi num_hours
+per 60 viene valutato a 120.
+
+45
+00:02:27,890 --> 00:02:32,378
+Il secondo passo dell'assegnazione consiste
+nell'assegnare 120
+
+46
+00:02:32,378 --> 00:02:35,320
+alla variabile minutes.
+
+47
+00:02:35,320 --> 00:02:40,100
+Se minutes non esiste nello stack frame corrente
+allora verrà creato.
+
+48
+00:02:43,530 --> 00:02:46,670
+Ogni stack frame contiene il suo insieme
+di variabili.
+
+49
+00:02:46,670 --> 00:02:51,150
+Nel frame per convert to minutes ci sono
+le variabili, num_hours e minutes.
+
+50
+00:02:51,150 --> 00:02:54,860
+Il fram per convert to seconds attualmente
+ha solo una variabile num_hours.
+
+51
+00:02:54,860 --> 00:03:00,090
+Però, al termine della sua esecuzione, avrà
+anche sia minuti che secondi.
+
+52
+00:03:00,090 --> 00:03:01,516
+Lo stack fram per il programma
+
+53
+00:03:01,516 --> 00:03:05,520
+ricipale attualmente possiede convert_to_minutes
+e convert_to_seconds.
+
+54
+00:03:05,520 --> 00:03:08,640
+Però al momento dell'esecuzione dell'istruzione 
+di assegnazione sulla linea 20
+
+55
+00:03:08,640 --> 00:03:11,410
+esisterà anche qui la variabile seconds.
+
+56
+00:03:13,090 --> 00:03:14,740
+Stiamo per ritornare il valore
+
+57
+00:03:14,740 --> 00:03:17,780
+della variabile minutes, e uscire dalla 
+funzione attuale.
+
+58
+00:03:17,780 --> 00:03:20,160
+Ma a che punto ritorniamo?
+
+59
+00:03:20,160 --> 00:03:23,730
+La risposta è sempre, nel frame vicino nello
+stack di chiamata.
+
+60
+00:03:23,730 --> 00:03:28,120
+Lo stack frame corrente viene creato durante
+la chiamata a convert_to_minutes.
+
+61
+00:03:28,120 --> 00:03:30,892
+Quando questa chiamata è completa,
+lo stack frame corrente
+
+62
+00:03:30,892 --> 00:03:33,790
+viene cancellato, e Python produce il valore
+di ritorno come
+
+63
+00:03:33,790 --> 00:03:36,010
+valore dell'espressione di questa chiamata 
+alla funzione.
+
+64
+00:03:37,670 --> 00:03:40,270
+Questa chiamata è a destra dell'istruzione
+di assegnazione.
+
+65
+00:03:40,270 --> 00:03:43,966
+Per completare l'assegnazione sarà creata la
+variabile minutes, e
+
+66
+00:03:43,966 --> 00:03:47,280
+Python salverà l'indirizzo di memoria del
+valore di ritorno.
+
+67
+00:03:49,090 --> 00:03:50,090
+Vediamo cosa succede.
+
+68
+00:03:52,160 --> 00:03:53,900
+Notate che il frame per convert to
+
+69
+00:03:53,900 --> 00:03:56,394
+minutes è stato cancellato, e la variabile
+minutes è
+
+70
+00:03:56,394 --> 00:03:58,192
+stata creata nel frame per convert
+
+71
+00:03:58,192 --> 00:04:02,420
+to seconds. Qui abbiamo un'altra istruzione
+di assegnazione.
+
+72
+00:04:02,420 --> 00:04:08,500
+Il lato destro, minutes per 60,
+viene valutato al risultato di 120 per 60.
+
+73
+00:04:08,500 --> 00:04:10,757
+E viene creata la nuova variabile
+seconds,
+
+74
+00:04:10,757 --> 00:04:13,330
+e contiene l'indirizzo di memoria del nuovo
+valore.
+
+75
+00:04:14,850 --> 00:04:17,137
+Poi ritorniamo seconds.
+
+76
+00:04:17,137 --> 00:04:20,837
+Seconds fa riferimento a 7200 quindi
+quello è il valore che riceve
+
+77
+00:04:20,837 --> 00:04:24,328
+prodotto dalla chiamata a convert to seconds
+della linea 20.
+
+78
+00:04:24,328 --> 00:04:30,944
+[NO AUDIO]

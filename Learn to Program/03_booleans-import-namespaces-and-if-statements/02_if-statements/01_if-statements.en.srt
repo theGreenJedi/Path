@@ -1,0 +1,498 @@
+1
+00:00:01,100 --> 00:00:05,944
+The programs that we've written so far
+execute the same sequence of instructions
+
+2
+00:00:05,944 --> 00:00:09,652
+each time that they're run.
+In this lecture, we're going to use
+
+3
+00:00:09,652 --> 00:00:13,420
+bullion expressions to control which
+instructions get executed.
+
+4
+00:00:13,860 --> 00:00:18,823
+Let's consider this problem.
+A flight was scheduled to arrive at a
+
+5
+00:00:18,823 --> 00:00:23,786
+particular time, and it is now estimated
+to arrive at another time.
+
+6
+00:00:23,786 --> 00:00:29,501
+Write a function, given the two times,
+returns a flight status, either on time,
+
+7
+00:00:29,501 --> 00:00:34,384
+early, or delayed.
+For this function, a time will be
+
+8
+00:00:34,384 --> 00:00:41,375
+represented using a float.
+For example, the time three AM will be
+
+9
+00:00:41,375 --> 00:00:48,693
+represented by 3.0 and the time two:3030
+PM fourteen:30, will be represented by
+
+10
+00:00:48,693 --> 00:00:53,285
+14.5.
+Therefore, each of the times we're working
+
+11
+00:00:53,285 --> 00:01:05,080
+with is going to be between 0.0 and 24.
+0.0 inclusive and 24 exclusive.
+
+12
+00:01:05,480 --> 00:01:11,029
+This is called a precondition.
+When writing our function we expect that
+
+13
+00:01:11,029 --> 00:01:14,280
+the times provided will be within this
+range.
+
+14
+00:01:15,660 --> 00:01:21,475
+Let's begin to define the function, we'll
+start with some example function calls.
+
+15
+00:01:21,475 --> 00:01:24,820
+I'm going to name this function report
+status.
+
+16
+00:01:25,260 --> 00:01:29,312
+And it will have two arguments, take two
+arguments.
+
+17
+00:01:29,960 --> 00:01:36,363
+The first will be the scheduled time of
+arrival, and the second will be the new
+
+18
+00:01:36,363 --> 00:01:41,550
+estimated time of arrival.
+When those two values are the same, it
+
+19
+00:01:41,550 --> 00:01:48,034
+will return the message on time.
+When the scheduled time is 12.5 and the
+
+20
+00:01:48,034 --> 00:01:54,600
+new estimated time of arrival is 11.5 or
+earlier, this function will return early.
+
+21
+00:01:55,420 --> 00:01:58,949
+.
+And, finally for the last possible
+
+22
+00:01:58,949 --> 00:02:06,473
+situation, is that when the time is 9.0,
+the scheduled time and then you estimated
+
+23
+00:02:06,473 --> 00:02:13,996
+time comes later, this function should
+return a message saying that the flight is
+
+24
+00:02:13,996 --> 00:02:17,623
+delayed.
+Now let's write the type header.
+
+25
+00:02:17,623 --> 00:02:23,238
+The function has two parameters both
+numbers and in all the cases here, I've
+
+26
+00:02:23,238 --> 00:02:27,670
+passed in floats.
+But we could have easily passed in integer
+
+27
+00:02:27,670 --> 00:02:30,773
+values.
+So we can use number for those two
+
+28
+00:02:30,773 --> 00:02:35,280
+parameters and it is going to return
+something of type string.
+
+29
+00:02:36,540 --> 00:02:41,015
+Time for the header.
+We know that we've named the function
+
+30
+00:02:41,015 --> 00:02:46,957
+Report Status and now we need to decide on
+two good names for the parameters.
+
+31
+00:02:46,957 --> 00:02:50,507
+The first parameter, I can call scheduled
+time.
+
+32
+00:02:50,507 --> 00:03:04,130
+The second, I will call estimated time.
+The last part is a doc string that needs
+
+33
+00:03:04,130 --> 00:03:09,528
+to be added is the functions description.
+This function will return a flight status,
+
+34
+00:03:09,528 --> 00:03:13,681
+and that will be one of three strings. On
+time, early or delayed.
+
+35
+00:03:13,681 --> 00:03:19,087
+It's returning that status for a flight
+that was scheduled to arrive, at scheduled
+
+36
+00:03:19,087 --> 00:03:22,713
+time, the first parameter.
+But is now estimated to arrive at
+
+37
+00:03:22,713 --> 00:03:25,680
+estimated time, which is the second
+parameter.
+
+38
+00:03:25,680 --> 00:03:33,185
+One additional piece of information that
+needs to be added to this doc string is
+
+39
+00:03:33,185 --> 00:03:39,318
+that the precondition that the schedule
+time be between 0.0 and 24.
+
+40
+00:03:39,318 --> 00:03:46,550
+The same is true of the estimated time.
+It also needs to fall within that range.
+
+41
+00:03:46,550 --> 00:03:55,000
+.
+.
+
+42
+00:03:55,380 --> 00:03:58,799
+It's now time to write the body of the
+function.
+
+43
+00:03:58,799 --> 00:04:03,857
+We're going to write this function body in
+a couple of different steps.
+
+44
+00:04:03,857 --> 00:04:07,491
+And by the end, we'll have the entire
+thing working.
+
+45
+00:04:07,491 --> 00:04:13,261
+To start with, we need to figure out how
+to execute some statements sometimes, but
+
+46
+00:04:13,261 --> 00:04:17,251
+not on others.
+For example, we want to return a string on
+
+47
+00:04:17,251 --> 00:04:20,457
+time.
+But we don't want to return that string
+
+48
+00:04:20,457 --> 00:04:26,370
+every time this, this function executes.
+Only at the times when scheduled time is
+
+49
+00:04:26,370 --> 00:04:31,490
+equal to estimated time.
+We are going to use an if statement to
+
+50
+00:04:31,490 --> 00:04:35,688
+express this.
+This if statement will have a boolean
+
+51
+00:04:35,688 --> 00:04:42,160
+condition which is that the scheduled time
+be equal to the estimated time.
+
+52
+00:04:44,800 --> 00:04:50,022
+And we are going to place this return
+statement within the body of the if.
+
+53
+00:04:50,022 --> 00:04:55,739
+So notice that it is indented, indicating
+that, that falls within the if statement.
+
+54
+00:04:55,739 --> 00:05:01,244
+The way that we read this code is that if
+this scheduled time is equal to the
+
+55
+00:05:01,244 --> 00:05:07,173
+estimated time, if that boolean expression
+is true, then the return on time statement
+
+56
+00:05:07,173 --> 00:05:10,560
+is executed.
+Otherwise, it is not executed, and we
+
+57
+00:05:10,560 --> 00:05:14,654
+would continue down on, with any code that
+follows this if.
+
+58
+00:05:14,654 --> 00:05:23,288
+Let's save this and run it.
+So when I call this function, in the
+
+59
+00:05:23,288 --> 00:05:28,690
+shell, with equal times it reports the
+status on time.
+
+60
+00:05:28,690 --> 00:05:34,305
+If I were to call this function at the
+moment with one of the time, pairs of
+
+61
+00:05:34,305 --> 00:05:38,000
+times that are not equal, then nothing is
+returned.
+
+62
+00:05:38,000 --> 00:05:43,746
+To be more precise, I should actually say
+that it looks like nothing is returned.
+
+63
+00:05:43,746 --> 00:05:49,420
+Because something is returned by this
+function, even though no return statement
+
+64
+00:05:49,420 --> 00:05:52,581
+was executed.
+Let's print this function call.
+
+65
+00:05:52,581 --> 00:05:57,249
+So the function is called, whatever value
+is returned is returned.
+
+66
+00:05:57,249 --> 00:06:02,565
+And that value is about to be printed.
+And we can see that none is printed.
+
+67
+00:06:02,565 --> 00:06:08,239
+When a function call executes and no
+return statement is executed, the value
+
+68
+00:06:08,239 --> 00:06:13,481
+none is returned by the function.
+The type of none is none-type, not string.
+
+69
+00:06:13,481 --> 00:06:19,224
+So that breaks the type contract that we
+specified for our report status function
+
+70
+00:06:19,224 --> 00:06:24,687
+We need to complete the rest of the
+function ensuring that, that type contract
+
+71
+00:06:24,687 --> 00:06:28,330
+is abided by.
+Let's go back to defining the function.
+
+72
+00:06:28,330 --> 00:06:34,388
+Right now, we have a single if statement
+and when this boolean condition is true,
+
+73
+00:06:34,388 --> 00:06:38,933
+on time is returned.
+When it's false we want to do something
+
+74
+00:06:38,933 --> 00:06:42,265
+else.
+So we check to see if this is true, and
+
+75
+00:06:42,265 --> 00:06:47,642
+then we're going to use L, standing for
+else, L if, to check for a second
+
+76
+00:06:47,642 --> 00:06:53,130
+condition.
+This time we're going to check to see
+
+77
+00:06:53,130 --> 00:06:59,269
+whether the scheduled time is bigger or
+greater than estimated time.
+
+78
+00:06:59,269 --> 00:07:05,054
+And when it is, we will return early.
+.
+
+79
+00:07:05,054 --> 00:07:13,640
+And it's to be spelled as scheduled.
+So at this stage let's run it.
+
+80
+00:07:14,520 --> 00:07:21,514
+And when we call this function with equal
+times it says on time.
+
+81
+00:07:21,514 --> 00:07:28,071
+When we, when we call it with earlier
+times, it reports early.
+
+82
+00:07:28,071 --> 00:07:34,410
+But still, at this point when we call this
+with later time.
+
+83
+00:07:34,410 --> 00:07:37,877
+None is returned.
+So we're not quite done yet.
+
+84
+00:07:37,877 --> 00:07:43,733
+We're going to add a third part to the if
+statement, which is an else clause.
+
+85
+00:07:43,733 --> 00:07:49,511
+Else says, if none of the preceding
+conditions or expressions are true, then
+
+86
+00:07:49,511 --> 00:07:53,133
+do this.
+So we've checked whether they're equal,
+
+87
+00:07:53,133 --> 00:07:59,528
+greater than, and the only thing left is
+that scheduled time is less than estimated
+
+88
+00:07:59,528 --> 00:08:02,764
+time.
+In that situation, this function will
+
+89
+00:08:02,764 --> 00:08:08,217
+return delayed.
+So we can run it again, checking all of
+
+90
+00:08:08,217 --> 00:08:15,442
+our conditions, when they're equal.
+When it's earlier, and when the estimated
+
+91
+00:08:15,442 --> 00:08:20,260
+time is later.
+We now have the appropriate reports.
+
+92
+00:08:21,240 --> 00:08:26,400
+I want to mention a few general features
+of if statements.
+
+93
+00:08:26,400 --> 00:08:33,252
+We can have zero or more L if clauses
+associated with an if And we can have zero
+
+94
+00:08:33,252 --> 00:08:40,020
+or one else clauses, and the else has to
+be the last clause for the if statement.
+
+95
+00:08:40,280 --> 00:08:45,728
+When we have an if statement with these
+various expressions, we evaluate each
+
+96
+00:08:45,728 --> 00:08:49,974
+expression in order.
+And for the first one that evaluates to
+
+97
+00:08:49,974 --> 00:08:54,502
+true, the body of that, that part in the
+if statement is executed.
+
+98
+00:08:54,502 --> 00:08:58,677
+After that body is executed, the if
+statement is terminated.
+
+99
+00:08:58,677 --> 00:09:04,692
+So it exits and continues on to the code
+that comes below it, without checking any
+
+100
+00:09:04,692 --> 00:09:06,037
+further conditions.

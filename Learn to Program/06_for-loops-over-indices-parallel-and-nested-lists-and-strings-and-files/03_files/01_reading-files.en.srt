@@ -1,0 +1,249 @@
+1
+00:00:00,800 --> 00:00:05,691
+So far, our programs have used computer
+memory to store information,
+
+2
+00:00:05,691 --> 00:00:09,852
+But most information is stored in files on
+your computer.
+
+3
+00:00:09,852 --> 00:00:14,305
+In this lecture, we'll show you four ways
+to read a text file.
+
+4
+00:00:14,305 --> 00:00:20,437
+We will use a file containing, In Flanders
+Fields, a poem written in 1915 by Canadian
+
+5
+00:00:20,437 --> 00:00:27,906
+Lieutenant Colonel John McCrae.
+Before we can read a file, we need to tell
+
+6
+00:00:27,906 --> 00:00:31,554
+Python to open it.
+The built-in function open does this.
+
+7
+00:00:31,554 --> 00:00:36,662
+It takes its arguments, the name of the
+file, and the letter r that we want to
+
+8
+00:00:36,662 --> 00:00:39,846
+read from that file as opposed to writing
+to it.
+
+9
+00:00:39,846 --> 00:00:44,954
+If the file is in the same directory as
+the program, then we can just use the
+
+10
+00:00:44,954 --> 00:00:48,602
+plain file name,
+But if the file name is in a different
+
+11
+00:00:48,602 --> 00:00:53,909
+directory, such as the directory that we
+have up here, we must give the full path
+
+12
+00:00:53,909 --> 00:00:56,828
+to it.
+We will now read this file in various
+
+13
+00:00:56,828 --> 00:01:00,983
+ways.
+We will save it in a variable, so that we
+
+14
+00:01:00,983 --> 00:01:06,397
+don't have to keep retyping it.
+First, we open the file for reading.
+
+15
+00:01:06,397 --> 00:01:12,714
+When we open a file for reading, we have
+available to us a method called readline
+
+16
+00:01:13,124 --> 00:01:19,194
+that reads one line from the file,
+including the new line character at the
+
+17
+00:01:19,194 --> 00:01:25,886
+end of that line, and returns it.
+We can read this entire poem by calling
+
+18
+00:01:25,886 --> 00:01:33,940
+readline again and again.
+Notice that even blank lines have new line
+
+19
+00:01:33,940 --> 00:01:40,699
+characters at the end of them.
+Now that we have read to the end of the
+
+20
+00:01:40,699 --> 00:01:45,171
+file, when we call readline again, we get
+back the empty string.
+
+21
+00:01:45,171 --> 00:01:50,991
+The only time that readline returns the
+empty string is when we have reached the
+
+22
+00:01:50,991 --> 00:01:55,179
+end of the file.
+That means that we can use a while loop to
+
+23
+00:01:55,179 --> 00:01:59,935
+read the lines from a file.
+We will close the file and reopen it so
+
+24
+00:01:59,935 --> 00:02:04,832
+that we can start at the top.
+We will read the first line of the file,
+
+25
+00:02:04,832 --> 00:02:10,653
+and then, until we have reached the end of
+the file, we will print the line we read
+
+26
+00:02:10,653 --> 00:02:13,852
+and then move on to, to read the next
+line.
+
+27
+00:02:13,852 --> 00:02:20,035
+When we run this loop watch carefully.
+You're going to see blank lines between
+
+28
+00:02:20,035 --> 00:02:24,612
+every line of the file.
+The reason for this is that a readline
+
+29
+00:02:25,006 --> 00:02:30,687
+will return the entire line including the
+new line character at the end.
+
+30
+00:02:30,687 --> 00:02:35,500
+And then when we print that line print
+adds another new line.
+
+31
+00:02:36,340 --> 00:02:42,592
+In order to prevent this from happening,
+we will use exactly the same format that
+
+32
+00:02:42,592 --> 00:02:46,529
+we did before,
+Except then, in our call on the print
+
+33
+00:02:46,529 --> 00:02:53,245
+function, we will use the empty string as
+the end marker to print after print prints
+
+34
+00:02:53,245 --> 00:03:02,248
+the line.
+Let's now explore how to read just the
+
+35
+00:03:02,248 --> 00:03:07,183
+first stanza.
+We read the title, and, the blank line,
+
+36
+00:03:07,183 --> 00:03:11,920
+and then the first line of the poem.
+Let's check.
+
+37
+00:03:13,460 --> 00:03:20,251
+We'll read each line until we find the
+line containing nothing but the new line
+
+38
+00:03:20,251 --> 00:03:30,051
+character.
+This readline approach allows us to read
+
+39
+00:03:30,051 --> 00:03:34,802
+only the parts of the file we are
+interested in and allow us to stop
+
+40
+00:03:34,802 --> 00:03:39,760
+processing a file as soon as we have found
+the parts of it that we want.
+
+41
+00:03:40,600 --> 00:03:46,862
+If we know we would like to read every
+line in a file there is a simpler way.
+
+42
+00:03:46,862 --> 00:03:53,042
+Python's for loop works with files
+retrieving one line at a time, including
+
+43
+00:03:53,042 --> 00:03:57,334
+the new line.
+If your file isn't huge, you can actually
+
+44
+00:03:57,334 --> 00:04:03,280
+read it all at once using method read,
+Returns the entire file contents as a
+
+45
+00:04:03,280 --> 00:04:07,152
+single string.
+The fourth and last way that we will show
+
+46
+00:04:07,152 --> 00:04:13,029
+you how to read, the contents of a file,
+is using method readlines, which returns a
+
+47
+00:04:13,029 --> 00:04:21,713
+list of all the lines in the file.
+We can use this to print all the lines in
+
+48
+00:04:21,713 --> 00:04:26,162
+the file.
+We'll get our list and then go through
+
+49
+00:04:26,162 --> 00:04:37,137
+that list printing, as we did before.
+This approach is useful if we want to keep
+
+50
+00:04:37,137 --> 00:04:41,800
+the list around so that we can access
+elements of it later.

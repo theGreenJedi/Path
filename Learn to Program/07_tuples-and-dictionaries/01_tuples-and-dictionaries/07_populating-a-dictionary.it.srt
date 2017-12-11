@@ -1,0 +1,403 @@
+1
+00:00:01,240 --> 00:00:05,608
+In questa lezione combineremo alcuni
+dei diversi argomenti che abbiamo
+
+2
+00:00:05,608 --> 00:00:08,317
+visto.
+Andremo a leggere dei dati da un file e
+
+3
+00:00:08,317 --> 00:00:13,406
+a salvarli in un dizionario.
+In questa lezione, andremo a lavorare con
+
+4
+00:00:13,406 --> 00:00:16,600
+il file sulla sinistra del vostro schermo.
+
+5
+00:00:16,600 --> 00:00:21,738
+Contiene i voti dell'assegnazione uno.
+Ci sono due colonne, uno per l'ID di uno
+
+6
+00:00:21,738 --> 00:00:26,876
+studente, e una seconda per il voto che lo
+studente con quell'ID ha ottenuto
+
+7
+00:00:26,876 --> 00:00:30,487
+nell'assegnazione.
+Se guardate la lezione opzionale della
+
+8
+00:00:30,487 --> 00:00:35,503
+scorsa settimana, i dati vi appariranno famigliari
+e il compito sarà anch'esso un po' famigliare.
+
+9
+00:00:35,503 --> 00:00:39,940
+Ma, questa volta lavoreremo con i
+dizionari invece che con le liste.
+
+10
+00:00:40,780 --> 00:00:43,703
+Andremo a scrivere la funzione
+read grades.
+
+11
+00:00:43,703 --> 00:00:48,250
+Ha un parametro, che è un file che
+è stato aperto per la lettura.
+
+12
+00:00:48,250 --> 00:00:53,512
+Quel file inizierà con una testata che non 
+contiene nessuna linea vuota e poi una linea
+
+13
+00:00:53,512 --> 00:00:58,320
+vuota e poi le righe del file con
+il numero degli studenti e il voto.
+
+14
+00:00:58,900 --> 00:01:04,833
+Il compito che questa funzione completerà
+è leggere l'informazione del voto dal
+
+15
+00:01:04,833 --> 00:01:08,506
+file e costruire un dizionario per ogni chiave
+come voto.
+
+16
+00:01:08,506 --> 00:01:13,310
+E ogni valore nella lista degli ID degli
+studenti che hanno ricevuto quel voto.
+
+17
+00:01:13,310 --> 00:01:20,362
+Ad esempio, per il voto 77.5 per quella chiave,
+ci sarà una lista contenente
+
+18
+00:01:20,362 --> 00:01:27,693
+l'ID dello studente 0052 e l'ID dello studente 1311,
+dato che quei due studenti hanno ottenuto
+
+19
+00:01:27,693 --> 00:01:31,591
+quel voto.
+Ci potrebbero essere anche altri studenti,
+
+20
+00:01:31,591 --> 00:01:38,180
+più avanti nel file che appariranno nei
+valori della lista per la chiave 77.5
+
+21
+00:01:38,580 --> 00:01:43,847
+Per implementare questa funzione, abbiamo
+bisogno di portare a termine due compiti principali.
+
+22
+00:01:43,847 --> 00:01:47,560
+Il primo è che dovete semplicemente
+saltare l'intestazione.
+
+23
+00:01:47,560 --> 00:01:55,157
+Una volta che abbiamo saltato l'intestazione, possiamo
+andare a leggere i voti dal
+
+24
+00:01:55,157 --> 00:02:00,320
+file e accumularli dentro il dizionario.
+
+25
+00:02:00,320 --> 00:02:05,898
+Inizieremo saltando l'intestazione.
+Abbiamo quattro modi per leggere da un file e
+
+26
+00:02:05,898 --> 00:02:11,078
+dato che stiamo solo processando parte
+del file, useremo l'approccio read line.
+
+27
+00:02:11,332 --> 00:02:15,099
+Quindi inizieremo usando una riga come file
+
+28
+00:02:15,099 --> 00:02:21,040
+e vogliamo continuare a leggere le righe della
+testata finché non raggiungiamo la riga vuota.
+
+29
+00:02:21,040 --> 00:02:29,334
+Un riga vuota non è esattamente vuota.
+Contiene il carattere di nuova riga, quindi
+
+30
+00:02:29,334 --> 00:02:36,938
+finché la riga non coincide con il carattere
+nuova riga, continueremo a leggere.
+
+31
+00:02:36,938 --> 00:02:43,944
+Quello sarà parte della testata.
+Una volta che la testata è stata saltata, possiamo
+
+32
+00:02:43,944 --> 00:02:48,191
+passare ad accumulare i voti in un
+dizionario.
+
+33
+00:02:48,191 --> 00:02:53,960
+L'accumulatore che uso è, grade_to_ids
+è sarà inizialmente vuota.
+
+34
+00:02:55,160 --> 00:03:02,646
+Dobbiamo leggere la riga successiva del file.
+Possiamo farlo usando read line e vogliamo
+
+35
+00:03:02,646 --> 00:03:08,180
+continuare a leggere le righe del file finché
+non raggiungiamo la fine del file.
+
+36
+00:03:08,780 --> 00:03:11,960
+Questo vorrebbe dire che quella riga sarà
+
+37
+00:03:11,960 --> 00:03:15,207
+vuota.
+Quindi vogliamo continuare a leggere finché la
+
+38
+00:03:15,207 --> 00:03:18,320
+riga non è uguale alla stringa vuota.
+
+39
+00:03:18,320 --> 00:03:23,658
+Una volta che abbiamo letto una riga, dobbiamo 
+estrarre l'ID dello studente e il voto.
+
+40
+00:03:23,658 --> 00:03:29,152
+L'ID dello studente è di quattro caratteri,
+quindi useremo quell'informazione.
+
+41
+00:03:29,152 --> 00:03:32,788
+L'ID dello studente sarà una fetta di quella riga
+
+42
+00:03:32,788 --> 00:03:38,050
+dall'inizio della riga fino al quarto
+carattere.
+
+43
+00:03:38,050 --> 00:03:43,202
+Quindi questo ci darà una stringa contenente
+i quattro caratteri dell'ID dello studente.
+
+44
+00:03:43,202 --> 00:03:48,767
+Il voto sarà ciò che viene dopo quello,
+ci saranno un paio di spazi
+
+45
+00:03:48,767 --> 00:03:53,301
+prima del voto e c'è un carattere di nuova
+riga dopo il voto.
+
+46
+00:03:53,301 --> 00:03:59,072
+Quindi quello che possiamo fare è prendere il resto 
+della riga, ed eliminare gli spazi vuoti che arrivano
+
+47
+00:03:59,072 --> 00:04:03,950
+prima e dopo di lui.
+Quindi, il voto sarà una fetta dall'indice
+
+48
+00:04:03,950 --> 00:04:09,240
+quattro fino alla fine della riga, ma
+verrà eliminato lo spazio bianco dal voto.
+
+49
+00:04:09,580 --> 00:04:12,850
+Non abbiamo ancora finito di lavorare con
+il voto.
+
+50
+00:04:12,850 --> 00:04:18,017
+Vogliamo che grade faccia riferimento ad un float,
+non ad una stringa e attualmente, fa riferimento
+
+51
+00:04:18,017 --> 00:04:23,459
+ad una stringa che contiene un valore numerico.
+Andremo ad applicare float a quella stringa
+
+52
+00:04:23,459 --> 00:04:28,627
+per ricevere indietro un numero a virgola mobile.
+Ora abbiamo il voto e l'ID di uno studente,
+
+53
+00:04:28,627 --> 00:04:31,589
+dobbiamo aggiungerli nel
+dizionario.
+
+54
+00:04:31,589 --> 00:04:36,825
+Ci sono due scenari da considerare.
+Uno è che grade non è ancora una chiave
+
+55
+00:04:36,825 --> 00:04:42,268
+nel dizionario, e l'altra è il caso in cui
+il voto è già una chiave del
+
+56
+00:04:42,268 --> 00:04:45,920
+dizionario.
+Considereremo questi casi separatamente.
+
+57
+00:04:46,680 --> 00:04:54,648
+Inizieremo con il caso in cui il voto
+non è ancora una chiave del dizionario.
+
+58
+00:04:54,648 --> 00:05:01,387
+Quindi, se grade non è in grade_to_ids.
+In questo caso, dobbiamo aggiungerlo per
+
+59
+00:05:01,387 --> 00:05:05,704
+la prima volta.
+Possiamo accedere a grade_to_ids e impostare grade
+
+60
+00:05:05,704 --> 00:05:10,260
+come una chiave assegnandogli il valore,
+che è l'ID di uno studente.
+
+61
+00:05:10,260 --> 00:05:16,655
+L'ID dello studente sarà a sua volta una stringa,
+e il valore associato con una chiave per questo
+
+62
+00:05:16,655 --> 00:05:20,172
+dizionario devono far parte di una lista
+di stringhe.
+
+63
+00:05:20,172 --> 00:05:26,920
+Quindi dobbiamo inserire l'ID dello studente in una
+lista. Possiamo usare le parentesi quadrate per farlo.
+
+64
+00:05:28,320 --> 00:05:33,591
+Il secondo caso è quello in cui il voto è già
+una chiave del dizionario.
+
+65
+00:05:33,591 --> 00:05:39,285
+Quindi se quella condizione if è falsa, dobbiamo
+fare qualcosa di diverso, dato che grade
+
+66
+00:05:39,285 --> 00:05:44,093
+è già una chiave.
+Dato che è già una chiave, c'è già
+
+67
+00:05:44,093 --> 00:05:48,912
+un valore a lui associato, e quel
+valore è una lista di stringhe.
+
+68
+00:05:48,912 --> 00:05:52,490
+Vogliamo aggiungere l'ID di uno studente alla
+lista di stringhe.
+
+69
+00:05:52,490 --> 00:05:58,120
+Quindi dobbiamo accedere a quella lista di 
+stringhe e possiamo farlo guardando il
+
+70
+00:05:58,120 --> 00:06:02,824
+dizionario e cercando il valore associato
+con la chiave grade
+
+71
+00:06:02,824 --> 00:06:07,885
+Questo ci da una lista di stringhe e a quella
+possiamo aggiungere l'ID dello studente.
+
+72
+00:06:07,885 --> 00:06:13,159
+Quindi, in questo caso, non abbiamo bisogno
+di creare una nuova lista, ma solo di aggiungere
+
+73
+00:06:13,159 --> 00:06:18,857
+l'ID dello studente alla lista esistente.
+Una volta che abbiamo finito di aggiungere questo
+
+74
+00:06:18,857 --> 00:06:24,457
+voto e l'ID dello studente al dizionario, possiamo
+passare alla prossima riga di quel file.
+
+75
+00:06:24,457 --> 00:06:30,368
+Quindi, leggeremo un'altra riga.
+Una volta che tutte le righe del file sono state
+
+76
+00:06:30,368 --> 00:06:36,824
+lette, la condizione del ciclo while diventerà
+falsa, e possiamo ritornare il dizionario
+
+77
+00:06:36,824 --> 00:06:40,981
+grade to ids.
+Ora che abbiamo finito di scrivere questa
+
+78
+00:06:40,981 --> 00:06:46,874
+funzione, possiamo farla girare.
+Per iniziare, devo aprire il file dei voti,
+
+79
+00:06:46,874 --> 00:06:54,153
+che è salvato a questo lungo percorso
+e poi posso chiamare la funzione grades,
+
+80
+00:06:54,153 --> 00:07:00,761
+passando quel file grade come parametro
+e che ritorna un dizionario.
+
+81
+00:07:00,761 --> 00:07:08,518
+Possiamo vedere in questo dizionario che 77.5
+ha l'ID dello studente 0052 come uno dei suoi
+
+82
+00:07:08,518 --> 00:07:15,605
+valori, insieme al 1311, e in realtà,
+molti altri studenti hanno ottenuto quel voto.

@@ -1,0 +1,143 @@
+The bodies of loops can contain any
+statement including other loops. We'll explore that in this lecture.
+Here we have a loop inside another loop. The outer loop has I range over the values
+ten, eleven, and twelve, And for each of those iterations j is going to range
+through one, two, three, and four. When I visualize this I starts off
+referring to the value of ten. J doesn't exist yet because we have just
+reached the four loop the first time. This inner four loop.
+J is going to take on the value one in the first iteration.
+I still refers to ten, And we're about to print IJ, so we should see ten and one up
+here. Notice that as soon as we printed tenant
+one, we went back to line two, not to line one.
+And the reason for that is we are going to completely execute this inner four loop
+until J has gone through the numbers 1,2,3 and four.
+So that means that J will take on the value two next.
+And we're going to print tenant two. Now J is going to take on the value three,
+J now refers to three, and we'll print tenant three and four. Now we are done
+with this inner four loop, and so we are going to jump back out to line one because
+we have completed execution of the body of the outer four loop.
+Now, I is going to take on the value eleven.
+J is going to take on the values one, two, three, and four again.
+And now we're done with this inner loop, so we'll go back out to the outer one.
+Now, we will do the last iteration of the outer loop.
+Alright, it starts off as twelve and J is going to go through the numbers one two
+three and four again. And I will not change again.
+Now we are done with this inner loop. We go back and check the outer loop once
+more. And we are done with the program.
+Here is another example. We will keep track of a list of list of
+numbers. These are going to represent grades so for
+perhaps a student will have received a 70 a 75 and an 80 in one class.
+And in another class that their are taking they have a 70 an 80 a 90 and a 100.
+And in the third class they have an 80 and a 100.
+And, they want to know what the average is for each of these list of grades.
+We are going to write a function to calculate this list of averages.
+But before we do that we're going to start with a similar problem.
+Just find the average of a list of numbers.
+So. Let's say that in one class, maybe
+English, the list of grades that we're going to calculate the average of is 70,
+75 and 80. In order to calculate the average of this,
+we need to go and add up all the assignment marks and then divide by how
+long that list is. There's our accumulator, and then for each
+mark in English, what we're going to do is we're going to add the mark to the total.
+Now, The total is 225.
+We need to divide that by the length of the list.
+Now that we know how to calculate the average of a list of numbers, we would
+like to do this for each of the lists in our grades list, and we would like to
+assemble the result into a list of these averages.
+As we're developing this function, we need examples.
+The first example we're going to do is this list of grades that we have started
+with over on the left pane. The average of 70, 75 and 80 is 75.
+The average of 70, 80, 90 and 100 is 85. The average of 80 and 100 is 90.
+All of these are floats. Let's make this window just a little bit
+wider. The pipe contract is next.
+What we have is a list of list of numbers. Now, these are all integers.
+But we can certainly imagine giving floating point results for scores on a
+piece of work. So,
+The pipe contract is going to be a list of lists of number.
+And that is the, the type of the parameter.
+And we are going to return a list of float.
+We're fine with averages as the name, so we leave it as such, and we're going to
+take in maybe grades as the name of our parameter.
+. In our description, this is going to
+return a new list in which each item is the average of the grades in the inner
+list at the corresponding position. .
+Of grades. Well, we know we're building a new list.
+And we're going to be doing this nested list by nested list.
+So we're going to be accumulating this result.
+So we'll have maybe averages as the name of our variable, which is going to be the
+list of averages at the end. And when we're done, we know we want to
+return averages. Well, we want to put into averages, the
+average of each of the lists inside our grades lists.
+So, For each of the sub lists in the grades
+list, what we want to do is calculate the average of grades list and append it to
+averages. Well, we have code that does that over on
+the left. We know that we want start total off at
+zero. And then for each mark in this particular
+sub grade list, We would like to add it to total.
+And then once we are done with that, We will summon up the values on the grades
+list. We would like to append to averages the
+average. And we're done.
+We will now call this in the visualizer and watch it execute.
+We have added two statements at the bottom of this file.
+The first one creates the, the nested list,
+And the second one calls the averages function passing in that list.
+Let's visualize this. We first define our function.
+Next we are going to create about ten or so objects.
+Grades refers to a list with three items in it.
+The first one is a list with three items in it, 70, 75 and 80.
+The second one refer this to a list that has 70, 80, 90 and 100 in it.
+And the third item in index two in this outer list refers to a list with two items
+in it, 80 and 90. This first nested list contains 70,
+75, and 80. The second nested list contains 70,80,90.
+Where is it? 90 and 100.
+This third nested list contains 80, and 100.
+So indeed, the list structure that is built in computer memory is a
+representation of what we have done on this line.
+Now we're going to pass that list into the averages function.
+We'll get a stack frame for function averages containing parameter grades
+referring to that same list. We will start, here's a fun one, we will
+start a new variable averages that is an empty list.
+Notice we also have a function averages outside.
+They're obviously two very different things.
+Next we're going to go through this lists inside this outer list.
+So grades list is initially going to refer to the list that index at memory address
+x3. Then we're going to go through 70, 75, and
+80, add them up and divide by the length of that list.
+We'll start total off at zero and for every mark in the grades list, well mark
+is going to start off at 70 and the 75 and then 80 each iteration here.
+We going to take that 70 here on line seventeen and we're going to add it to the
+total which is zero. So we'll get 70 of course 70 plus zero is
+zero. We will assign that to total.
+On this next iteration, we're going to have the marquee as 75.
+Now we're going to take 75 and add it to 70.
+70 plus 75 is 145. And we will assign 145 to total.
+On the next iteration we're going to assign the 80 to mark. That's what this
+four loop does. Grabs the last item in the list, mark now
+refers to 80. On line seventeen we have an assignment
+statement. The right hand side evaluates to 145 plus 80 or 225.
+We'll assign 225 to total. We have now gone through all the items in
+that first nested list. We've done the 70, the 75, and the 80, and
+so this for loop will now terminate. We will calculate 225 divided by the
+length of grades list, which is three, and we will append the result to the averages
+list. Now averages refers to a list containing
+75. 225 divided by three is 75.
+We have completed execution of the first iteration of the outer four loop.
+We will now, on this next iteration, get the second list, with four items in it.
+Grades list now refers to that second list, with 70, 80, 90 and 100 in it.
+We will initialize total to zero, Reset it, and then we're going to go
+through the four numbers, Two, three, four and we're done.
+And now total is 340. The sum of 70 plus 80 plus 90 plus 100.
+We will append 340 divided by four to our averages list.
+And that happens to be 85. And now for the third nested list.
+Grades list. The first of a list of two items in it,
+that's 80 and 100. We'll reset total to zero.
+There's the 80 that we're dealing with. Mark it now 80.
+We'll add 80 to zero, giving us 80, of course.
+We will then get the 100. And we'll add the two together.
+And then we will append 180 divided by the length of that nested list, or two.
+So 180 divided by two is 90. We have now gone through all three of our
+nested lists. So this outer loop will terminate.
+And we're done. We will now return, this averages list
+which as a reminder now contains 75, 85 and 90.
+We have to return that value. We don't do anything with it in the main
+program, so when I click forward, the program will just end.

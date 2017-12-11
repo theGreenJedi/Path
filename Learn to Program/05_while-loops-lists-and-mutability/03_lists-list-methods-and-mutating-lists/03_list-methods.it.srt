@@ -1,0 +1,448 @@
+1
+00:00:01,060 --> 00:00:04,760
+In questa lezione, esploreremo i metodi 
+delle liste.
+
+2
+00:00:05,340 --> 00:00:09,862
+Come memorandum, un metodo è una funzione
+che si trova all'interno di un oggetto.
+
+3
+00:00:09,862 --> 00:00:15,842
+Avete sentito parlare di metodi del tipo lista.
+Ignorando questi metodi con l'undescore, vediamo
+
+4
+00:00:15,842 --> 00:00:20,656
+append, count, extend, index, insert,
+pop, remove, reverse, e sort.
+
+5
+00:00:20,656 --> 00:00:25,834
+Alcuni di questi metodi modificano la lista, e
+alcuni ritornano solo delle informazioni.
+
+6
+00:00:25,834 --> 00:00:29,335
+Ora diamo alcuni esempi facendo uso di ognuno
+di quelli.
+
+7
+00:00:29,335 --> 00:00:32,836
+Terremo traccia dei colori preferiti di
+qualcuno.
+
+8
+00:00:32,836 --> 00:00:37,140
+Ecco un prompt che useremo per
+raccogliere le informazioni.
+
+9
+00:00:38,260 --> 00:00:43,167
+Useremo un ciclo per raccogliere tutti i 
+colori preferiti di una persona
+
+10
+00:00:43,167 --> 00:00:46,398
+ma dobbiamo iniziare chiedendo loro il
+primo.
+
+11
+00:00:46,398 --> 00:00:51,181
+Finora, quindi, la variabile colours è assegnata
+ad una lista vuota, e la variabile prompt viene
+
+12
+00:00:51,181 --> 00:00:54,349
+assegnata. Inserendo un altro dei 
+colori preferiti,
+
+13
+00:00:54,349 --> 00:00:59,277
+Digitando invio alla fine.
+Chiediamo all'utente di inserire il suo primo
+
+14
+00:00:59,277 --> 00:01:06,568
+colore preferito chiamando al funzione
+input e passando in ingresso la variabile prompt.
+
+15
+00:01:06,568 --> 00:01:12,442
+Supponiamo che l'utente inserisca blue.
+Quindi, color ora fa riferimento a blue.
+
+16
+00:01:12,442 --> 00:01:17,000
+La variabile colors fa ancora riferimento
+ad una stringa vuota.
+
+17
+00:01:17,000 --> 00:01:21,899
+Stiamo accumulando l'informazione che digita
+l'utente.
+
+18
+00:01:21,899 --> 00:01:29,073
+Quindi, quello che andremo a fare è usare un
+ciclo while e a dire, while color non è la
+
+19
+00:01:29,073 --> 00:01:34,410
+stringa vuota, aggiungeremo il colore
+alla variabile colours.
+
+20
+00:01:34,410 --> 00:01:39,821
+Colour.append color.
+Ora che abbiamo appeso il colore che l'utente
+
+21
+00:01:39,821 --> 00:01:46,533
+ha appena inserito, e quindi dobbiamo essere
+pronti per la prossima iterazione del ciclo
+
+22
+00:01:46,533 --> 00:01:53,069
+chiedendo all'utente un altro colore.
+Quindi color viene assegnato con l'input con argomento
+
+23
+00:01:53,069 --> 00:01:57,492
+prompt.
+Ora inseriremo il colore yellow, e
+
+24
+00:01:57,492 --> 00:02:04,077
+brown, e, diciamo, che quella è
+l'intera lista dei colori preferiti quindi
+
+25
+00:02:04,077 --> 00:02:10,400
+seguiremo le istruzioni e digiteremo
+invio per terminare questo ciclo while.
+
+26
+00:02:10,980 --> 00:02:17,602
+Esamineremo la variabile colours, vedremo
+che contiene le stringhe blue, yellow,
+
+27
+00:02:17,602 --> 00:02:21,906
+e brown.
+Ma abbiamo dimenticato qualcosa, quindi useremo
+
+28
+00:02:21,906 --> 00:02:28,198
+il metodo extend per estendere la lista
+dei colori inserendo in ingresso la lista
+
+29
+00:02:28,198 --> 00:02:33,268
+dei colori che abbiamo dimenticato.
+Chiameremo colours.extend, e passeremo
+
+30
+00:02:33,268 --> 00:02:37,741
+in ingresso la lista con le stringhe hot pink e
+neon green.
+
+31
+00:02:37,741 --> 00:02:44,540
+Ora, quando esaminiamo colours, vediamo blue,
+yellow, brown, hot pink e neon green.
+
+32
+00:02:45,060 --> 00:02:51,420
+Viene fuori, che non ci piace particolarmente
+neon green, quindi richiamiamo colours.pop
+
+33
+00:02:52,437 --> 00:02:57,255
+per rimuoverlo.
+Quando esaminiamo colours, vediamo la lista
+
+34
+00:02:57,255 --> 00:03:02,471
+blue, yellow, brown e hot pink,
+Neon green non c'è più.
+
+35
+00:03:02,471 --> 00:03:09,740
+Un altro punto da considerare è che quando
+si richiama colours.pop, non viene solo rimposso
+
+36
+00:03:09,740 --> 00:03:16,154
+l'ultimo elemento, ma viene anche ritornato.
+Quindi, puoi usarlo in un'istruzione di
+
+37
+00:03:16,154 --> 00:03:20,815
+di assegnazione.
+Una funzione che ritorna sia un valore sia
+
+38
+00:03:20,815 --> 00:03:28,149
+effettua qualche operazione sui dati,
+come colours.pop è una funzione per cui si
+
+39
+00:03:28,149 --> 00:03:35,670
+dice che ha del effetti collaterali.
+Non ci piace nemmeno troppo il marrone, quindi
+
+40
+00:03:35,670 --> 00:03:41,887
+useremo pop con questo argomento opzionale
+per poterlo rimuovere.
+
+41
+00:03:42,689 --> 00:03:51,011
+Brown si trova all'indice due, quindi se richiamo
+colours.pop due, rimuoverà brown dalla
+
+42
+00:03:51,011 --> 00:03:57,508
+lista, e lo ritornerà.
+Esaminando colours, vediamo che rimangono
+
+43
+00:03:57,508 --> 00:04:02,741
+blue, yellow e hot pink.
+Colours.pop rimuoverà l'ultimo elemento nella
+
+44
+00:04:02,741 --> 00:04:06,836
+lista.
+E, colours.pop con un indice rimuoverà 
+
+45
+00:04:06,836 --> 00:04:12,114
+l'elemento presente a quell'indice.
+Il metodo remove prende un oggetto da rimuovere,
+
+46
+00:04:12,114 --> 00:04:16,529
+non un indice.
+E rimuoverà la prima occorrenza di
+
+47
+00:04:16,529 --> 00:04:23,730
+quell'oggetto dalla lista.
+Proviamo a usare remove black,
+
+48
+00:04:23,730 --> 00:04:27,971
+che non sta nella lista.
+E vediamo che otteniamo un value error
+
+49
+00:04:27,971 --> 00:04:33,424
+Non funzione se chiamiamo remove su
+un oggetto che non è nella lista.
+
+50
+00:04:33,424 --> 00:04:39,181
+Quindi, prima di richiamare un metodo o una
+funzione che potrebbe restituire un errore, vogliamo
+
+51
+00:04:39,181 --> 00:04:45,770
+controllare, che questo non accada.
+Possiamo contare il numero di occorrenze
+
+52
+00:04:45,770 --> 00:04:51,450
+di un particolare valore in una lista.
+E, se termina essendo maggiore di
+
+53
+00:04:51,450 --> 00:04:54,783
+zero, 
+in altre parole, se yellow esiste nella
+
+54
+00:04:54,783 --> 00:05:02,525
+lista, allora chiamiamo remove.
+Esaminando colours, terminiamo solo con
+
+55
+00:05:02,525 --> 00:05:09,406
+blue e hot pink.
+Invece di contare gli elementi, potremmo dire,
+
+56
+00:05:09,406 --> 00:05:13,960
+if yellow in colours,
+allora colours.remove yellow.
+
+57
+00:05:13,960 --> 00:05:21,550
+Questo è più standard che chiamare
+colours.count e contare il numero degli
+
+58
+00:05:21,550 --> 00:05:25,800
+elementi.
+Supponiamo che ci sia, allora chiamiamo
+
+59
+00:05:25,800 --> 00:05:30,860
+colours.remove su di lui.
+Ovviamente yellow non c'era.
+
+60
+00:05:31,340 --> 00:05:35,160
+E quindi, se la condizione viene valutata
+a falsa,
+
+61
+00:05:35,160 --> 00:05:39,800
+e non abbiamo richiamato colours.remove dato che
+lo abbiamo rimosso in precedenza,
+
+62
+00:05:41,280 --> 00:05:46,863
+chiameremo ora colours.extend con argomenti
+auburn, taupe, e magenta.
+
+63
+00:05:46,863 --> 00:05:51,968
+Ma otteniamo un errore di tipo.
+Extend prende esattamente un argomento,
+
+64
+00:05:51,968 --> 00:05:55,239
+ne abbiamo forniti tre.
+Il problema è che dobbiamo mettere
+
+65
+00:05:55,239 --> 00:06:00,982
+auburn, taupe, e magenta in una lista
+dato che extend si attende una lista.
+
+66
+00:06:00,982 --> 00:06:06,885
+Ora, colours fa riferimento alla lista con
+le stringhe blue, hot pink, auburn, taupe e
+
+67
+00:06:06,885 --> 00:06:08,720
+magenta.
+Possiamo ordinarla.
+
+68
+00:06:09,280 --> 00:06:15,906
+Ora, colours fa riferimento alla lista alfabetica
+auburn, blue, hot pink, magenta e
+
+69
+00:06:15,906 --> 00:06:19,754
+taupe.
+Possiamo invertirla.
+
+70
+00:06:19,754 --> 00:06:26,932
+Chiamiamo colours.reverse, e ora colours
+fa riferimento a taupe, magenta, hot pink, blue,
+
+71
+00:06:26,932 --> 00:06:30,689
+e auburn.
+Ci sentiamo un po' in colpa per il
+
+72
+00:06:30,689 --> 00:06:36,528
+brown, chiameremo colours.insert per
+reinserirlo nella lista a cui
+
+73
+00:06:36,528 --> 00:06:39,747
+appartiene.
+Usiamo gli argomenti meno due e brown per
+
+74
+00:06:39,747 --> 00:06:43,191
+dire inserisci brown all'indice meno due in
+colours.
+
+75
+00:06:43,191 --> 00:06:48,880
+Non abbiamo rimpiazzato l'oggetto che si
+trovava all'indice meno due, invece blue e auburn
+
+76
+00:06:48,880 --> 00:06:52,323
+sono stati spostati in avanti per far posto a brown.
+
+77
+00:06:52,323 --> 00:06:58,686
+Quindi, insert non elimina niente che sia
+nella lista, sposta le cose in avanti
+
+78
+00:06:58,686 --> 00:07:04,755
+per fare posto.
+Infine, eliminiamo hot pink dato che è
+
+79
+00:07:04,755 --> 00:07:08,668
+è un po' troppo chiaro per la
+nostra età.
+
+80
+00:07:08,668 --> 00:07:12,356
+Per rimuoverlo, dobbiamo conoscere 
+il suo indice.
+
+81
+00:07:12,356 --> 00:07:16,872
+Possiamo richiamare il metodo index per
+trovarlo.
+
+82
+00:07:16,872 --> 00:07:21,313
+Ma di nuovo, index potrebbe fallire se
+l'elemento non sta nella lista.
+
+83
+00:07:21,313 --> 00:07:26,581
+Ad esempio, colours.index ricordate che non
+abbiamo più il neon green.
+
+84
+00:07:26,581 --> 00:07:30,420
+Ci da un value error perché neon green
+non è nella lista.
+
+85
+00:07:30,420 --> 00:07:36,456
+Vogliamo evitare che questi errori accadano.
+Quindi qui, useremo un'istruzione if, if
+
+86
+00:07:36,456 --> 00:07:41,865
+hot pink in colours per controllare e vedere
+se possiamo chiamare la funzione index senza
+
+87
+00:07:41,865 --> 00:07:45,393
+andare in errore.
+Quindi, se hot pink è in colours, allora
+
+88
+00:07:45,393 --> 00:07:51,900
+assegneremo la variabile, dove, il
+risultato della chiamata a colours.hotpink,, e
+
+89
+00:07:51,900 --> 00:07:58,877
+poi, possiamo usare quell'indice per chiamare
+colours.pop per rimuovere hot pink e ora
+
+90
+00:07:58,877 --> 00:08:02,640
+ci rimane taupe, magenta, brown, blue,
+e auburn.

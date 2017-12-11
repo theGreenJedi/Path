@@ -1,0 +1,226 @@
+<meta charset="utf-8"/>
+<co-content>
+ <h1 level="1">
+  Preface
+ </h1>
+ <h2 level="2">
+  Required Preparation
+ </h2>
+ <p>
+  This handout assumes that you have watched all the week 6 videos and also done the week 6 exercise. If you read this handout before you've done all of that, please come back and re-read it after you've passed the week 6 exercise.
+ </p>
+ <h2 level="2">
+  No printing!
+ </h2>
+ <p hasmath="true">
+  Don't call function $$\verb|print|$$ anywhere in your code. By now, you should be using the visualizer or the debugger to figure out what your code is doing.
+ </p>
+ <h2 level="2">
+  A3 Problem Domain: Word Search Game
+ </h2>
+ <p>
+  For A3, you will implement a word search game. The game involves a rectangular board of uppercase letters that is read from a file. For example, here are the file contents representing a (tiny) 2 row by 4 column board:
+ </p>
+ <pre language="plain_text">ANTT
+XSOB</pre>
+ <p>
+  The game also involves a non-empty words list read from a file. For example, here are example file contents for a words list:
+ </p>
+ <p>
+  To make it a bit more challenging, there may be words in the words list that do not appear in the board, and the word list is not shown to the players.
+ </p>
+ <pre language="plain_text">ANT
+BOX
+SOB
+TO</pre>
+ <p>
+  The object of the game is for the players to view the board and find words (remember that the words list is unknown to the players). Words may be contained in rows (from left to right) or columns (from top to bottom), but not backwards. When a player correctly guesses a word that occurs in the words list, that player is awarded points according to a scoring system described in the starter code. The game ends when all words on the board that appear in the words list have been guessed.
+ </p>
+ <p>
+  The player with the highest score wins.
+ </p>
+ <p>
+  The words from the words list and the letters of the board are made up of alphabetic, uppercase characters.
+ </p>
+ <h2 level="2">
+  Representing a board and a words list in Python
+ </h2>
+ <p hasmath="true">
+  A
+  <em>
+   board
+  </em>
+  is a $$\verb|list of list of str|$$ such as $$\verb|[['A', 'N', 'T', 'T'], ['X', 'S', 'O', 'B']]|$$.
+ </p>
+ <p hasmath="true">
+  A
+  <em>
+   words list
+  </em>
+  is a $$\verb|list of str|$$ such as $$\verb|['ANT', 'BOX', 'SOB', 'TO']|$$.
+ </p>
+ <h1 level="1">
+  What to do
+ </h1>
+ <h2 level="2">
+  Step 1: Download the starter code
+ </h2>
+ <p>
+  In this assignment, we are providing starter code and sample input files.
+ </p>
+ <p>
+  Headers and docstrings for all functions you write:
+ </p>
+ <asset assettype="generic" extension="py" id="OxD7QHEREeaI_hJe858l4Q" name="a3">
+ </asset>
+ <p>
+  A complete module that calls your functions and drives the game:
+ </p>
+ <asset assettype="generic" extension="py" id="OxIzpHEREeayyA4wl7sUBw" name="a3_driver">
+ </asset>
+ <p>
+  A sample board file:
+ </p>
+ <asset assettype="generic" extension="txt" id="OxG-fHEREeavkAqHAqo_cQ" name="board1">
+ </asset>
+ <p>
+  A sample words list file:
+ </p>
+ <asset assettype="generic" extension="txt" id="OxcVbHEREeaCzBKExvAzbQ" name="wordlist1">
+ </asset>
+ <h2 level="2">
+  Step 2: Complete the functions in a3.py.
+ </h2>
+ <p>
+  The starter code contains a header and a docstring for each function in the list below, so the descriptions are not repeated here. Each docstring contains one example call.
+  <strong>
+   Before implementing a function, you should add additional examples in order to gain a better understanding of that function.
+  </strong>
+ </p>
+ <p hasmath="true">
+  We recommend that you work on the functions in the order that they are listed in the starter code. (Unless you're stuck on one: you may want to move on and come back later.) As usual, once you finish writing a function, in IDLE, choose $$\verb|Run -&gt; Run Module|$$ and test that function by calling some example function calls in the shell. You can also submit your assignment at any point to see whether you're on the right track: remember, you can submit once every hour up until the deadline. If the example calls return the expected results and you pass all the tests when you submit, move on to the next function. Otherwise, modify your code and repeat the tests.
+ </p>
+ <p>
+  It will be useful to call some of these functions when implementing other functions. Here is some information about how the functions relate to each other and how they are used in the game:
+ </p>
+ <ul bullettype="bullets">
+  <li>
+   <p hasmath="true">
+    $$\verb|is_valid_word|$$: checks whether a word that player guessed is in the words list.
+   </p>
+  </li>
+  <li>
+   <p hasmath="true">
+    $$\verb|make_str_from_row|$$: creates a string from the list of single character strings representing a row. Hint: look at how this is used by $$\verb|board_contains_word_in_row|$$.
+   </p>
+  </li>
+  <li>
+   <p hasmath="true">
+    $$\verb|make_str_from_column|$$: creates a string from the list of single character strings representing a column. Hint: this may be helpful for $$\verb|board_contains_word_in_column|$$.
+   </p>
+  </li>
+  <li>
+   <p hasmath="true">
+    $$\verb|board_contains_word_in_row|$$: checks whether a word occurs in any of the rows of the board. This function has been implemented in the starter code.
+   </p>
+  </li>
+  <li>
+   <p hasmath="true">
+    $$\verb|board_contains_word_in_column|$$: checks whether a word occurs in any of the columns of the board. Hint: see $$\verb|board_contains_word_in_row|$$.
+   </p>
+  </li>
+  <li>
+   <p hasmath="true">
+    $$\verb|board_contains_word|$$: checks whether a word occurs in any of the rows or columns of the board.
+   </p>
+  </li>
+  <li>
+   <p hasmath="true">
+    $$\verb|word_score|$$: calculates the score that a correctly guessed word earns. A word that is only 1 or 2 letters long earns 0 points, a word that is 3-6 letters long earns 1 point per letter, a word that is 7-9 letters long earns 2 points per letter, and a word that is 10 or more letters long earns 3 points per letter.
+   </p>
+  </li>
+  <li>
+   <p hasmath="true">
+    $$\verb|update_score|$$: adds the score that a correctly guessed word earns to a player's score.
+   </p>
+  </li>
+  <li>
+   <p hasmath="true">
+    $$\verb|num_words_on_board|$$: counts how many words from the words list appear on a particular board.
+   </p>
+  </li>
+  <li>
+   <p hasmath="true">
+    $$\verb|read_words|$$: creates a words list made up of the words from a file. Hint: to test this function, you should open a file such as $$\verb|wordslist1.txt|$$ and pass the open file as an argument to this function. See $$\verb|a3_driver.py|$$ for an example of this.
+   </p>
+  </li>
+  <li>
+   <p hasmath="true">
+    $$\verb|read_board|$$: creates a board made up of the rows of letters from a file. Hint: to test this function, you should open a file such as $$\verb|board1.txt|$$ and pass the open file as an argument to this function. See $$\verb|a3_driver.py|$$ for an example of this.
+   </p>
+  </li>
+ </ul>
+ <h2 level="2">
+  Step 3: Submit your work
+ </h2>
+ <p hasmath="true">
+  Go to the Assignments page and click the appropriate Submit button. Choose your completed $$\verb|a3.py|$$ file. It should be marked within a few minutes. You can see your results by clicking on your Score.
+ </p>
+ <h2 level="2">
+  Fun stuff: play the game!
+ </h2>
+ <p hasmath="true">
+  $$\color{red}{\textit{This will not work correctly until you have finished the rest of the assignment!}}$$
+ </p>
+ <p hasmath="true">
+  We provide a driver for the game, $$\verb|a3_driver.py|$$. Save it in the same directory as your a3.py file. In IDLE, run $$\verb|a3_driver.py|$$ and play your game!
+ </p>
+</co-content>
+<style>
+ body {
+    padding: 50px 85px 50px 85px;
+}
+
+table th, table td {
+    border: 1px solid #e0e0e0;
+    padding: 5px 20px;
+    text-align: left;
+}
+input {
+    margin: 10px;
+}
+}
+th {
+    font-weight: bold;
+}
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+img {
+    height: auto;
+    max-width: 100%;
+}
+pre {
+    display: block;
+    margin: 20px;
+    background: #424242;
+    color: #fff;
+    font-size: 13px;
+    white-space: pre-wrap;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    border: 1px solid #ccc;
+}
+</style>
+<script async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ['$','$'] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true
+    }
+  });
+</script>

@@ -1,0 +1,329 @@
+1
+00:00:01,600 --> 00:00:04,564
+Now that we have If-statements and loops,
+the problems that
+
+2
+00:00:04,564 --> 00:00:08,000
+we are going to tackle are going to get
+more complicated.
+
+3
+00:00:08,000 --> 00:00:10,128
+Our function bodies are going to get
+longer as
+
+4
+00:00:10,128 --> 00:00:12,760
+well, and are going to need some English
+explanation.
+
+5
+00:00:15,280 --> 00:00:18,970
+Here is the up_to_vowel function from the
+While Loop lecture.
+
+6
+00:00:18,970 --> 00:00:21,290
+We have added two comments.
+
+7
+00:00:21,290 --> 00:00:24,090
+A comment begins with a number sign
+character.
+
+8
+00:00:24,090 --> 00:00:26,190
+Often called the hash character.
+
+9
+00:00:26,190 --> 00:00:31,420
+And goes until the end of the line.
+Python ignores these characters.
+
+10
+00:00:31,420 --> 00:00:36,880
+Their purpose is to document code, much
+like doc strings document functions.
+
+11
+00:00:36,880 --> 00:00:40,950
+The first one describes the variables that
+are used in this function.
+
+12
+00:00:40,950 --> 00:00:45,000
+Notice how it links together before a
+vowel s and i.
+
+13
+00:00:45,000 --> 00:00:49,080
+Let's explore a little bit about what that
+means.
+
+14
+00:00:49,080 --> 00:00:54,078
+we'll do that using the word zymurgy with
+indices
+
+15
+00:00:54,078 --> 00:00:59,218
+zero,one,two,three,four,five, and six.
+
+16
+00:00:59,218 --> 00:01:02,226
+Well, we know that second index is not
+
+17
+00:01:02,226 --> 00:01:05,986
+included in my sub-string, so that means
+that
+
+18
+00:01:05,986 --> 00:01:10,460
+this is s starting an index zero going up
+to index seven.
+
+19
+00:01:12,370 --> 00:01:17,060
+What is s from zero up through index six?
+
+20
+00:01:17,060 --> 00:01:22,000
+That is zymurg.
+
+21
+00:01:22,000 --> 00:01:26,344
+And it's from zero to five is
+
+22
+00:01:26,344 --> 00:01:31,758
+zymur.
+S from zero to four
+
+23
+00:01:31,758 --> 00:01:37,768
+is zymu.
+S from zero to three
+
+24
+00:01:37,768 --> 00:01:44,240
+is zym.
+S from zero to two is zy.
+
+25
+00:01:44,240 --> 00:01:50,906
+S from zero to one is z.
+And here's the fun bit s from
+
+26
+00:01:50,906 --> 00:01:57,300
+zero to zero, just following this pattern
+of reducing
+
+27
+00:01:57,300 --> 00:02:03,050
+the length by one gives me just the empty
+string.
+
+28
+00:02:03,050 --> 00:02:09,190
+Well, we start before vowel off at the
+empty string and I starts off at zero.
+
+29
+00:02:09,190 --> 00:02:10,934
+So if we plug zero in
+
+30
+00:02:10,934 --> 00:02:11,915
+[INAUDIBLE]
+
+31
+00:02:11,915 --> 00:02:17,753
+I, we end up at from, with a S from zero
+to zero, that's this.
+
+32
+00:02:17,753 --> 00:02:20,185
+And S from zero through zero is the
+
+33
+00:02:20,185 --> 00:02:23,605
+empty string, so indeed, before vowel
+contains all
+
+34
+00:02:23,605 --> 00:02:26,341
+the characters found in S from zero
+through
+
+35
+00:02:26,341 --> 00:02:29,090
+zero and before vowel is the empty string.
+
+36
+00:02:30,530 --> 00:02:34,210
+This simple initialization, where we
+assign an empty
+
+37
+00:02:34,210 --> 00:02:36,930
+string to before value and we assign zero
+
+38
+00:02:36,930 --> 00:02:37,980
+to i.
+
+39
+00:02:37,980 --> 00:02:41,750
+Establishes that this description here is
+correct.
+
+40
+00:02:44,120 --> 00:02:48,467
+Furthermore, the first time through the
+loop we're going to add s at index zero to
+
+41
+00:02:48,467 --> 00:02:54,788
+before vowel and replace what we had.
+Well now before vowel contains a Z.
+
+42
+00:02:54,788 --> 00:03:02,540
+I was zero, so i plus 1 is 1, will make i
+1.
+
+43
+00:03:02,540 --> 00:03:09,176
+Now we're on that row when i is 1.
+And indeed this
+
+44
+00:03:09,176 --> 00:03:11,870
+description still is true.
+
+45
+00:03:14,460 --> 00:03:17,199
+The next time through the loop we look at
+
+46
+00:03:17,199 --> 00:03:20,400
+S at index one, coming up here that's the
+y.
+
+47
+00:03:21,500 --> 00:03:27,350
+We take the y and we tack it on to the end
+of before vowel, and then we increment i.
+
+48
+00:03:27,350 --> 00:03:30,233
+I is now two, so S, from zero through
+
+49
+00:03:30,233 --> 00:03:34,430
+two is indeed what we have saved inside
+before vowel.
+
+50
+00:03:36,110 --> 00:03:39,883
+Maintaining this sort of relationship
+between variables
+
+51
+00:03:39,883 --> 00:03:42,193
+is a bit of a tricky business, but it
+
+52
+00:03:42,193 --> 00:03:46,370
+really helps to understand what's going on
+inside this loop.
+
+53
+00:03:47,840 --> 00:03:50,801
+Coming up with these relationships in the
+first place is
+
+54
+00:03:50,801 --> 00:03:55,160
+also challenging but with practice you'll
+get better and better.
+
+55
+00:03:55,160 --> 00:03:59,880
+Whenever you write a loop there's going to
+be a relationship between your variables.
+
+56
+00:03:59,880 --> 00:04:02,440
+Try and figure out what that relationship
+is and
+
+57
+00:04:02,440 --> 00:04:05,290
+you'll have an easier time writing your
+loop body.
+
+58
+00:04:06,380 --> 00:04:09,840
+Also, once you figure out that
+relationship, write it down.
+
+59
+00:04:09,840 --> 00:04:11,820
+Put it in a comment so that you don't have
+to
+
+60
+00:04:11,820 --> 00:04:14,240
+figure it out again the next time you read
+the code.
+
+61
+00:04:15,920 --> 00:04:21,240
+This second comment, accumulate the
+non-vowels at the beginning of the string,
+
+62
+00:04:21,240 --> 00:04:27,290
+describes what the loop does, much like
+doc strings don't say how functions work.
+
+63
+00:04:27,290 --> 00:04:32,290
+This comment does not say how this loop
+gets the job done.
+
+64
+00:04:32,290 --> 00:04:35,040
+It just describes the effect.
+
+65
+00:04:35,040 --> 00:04:38,352
+Comments are intended for programmers and
+so they don't
+
+66
+00:04:38,352 --> 00:04:40,910
+need to describe how the loop does its
+job.
+
+67
+00:04:42,850 --> 00:04:47,440
+You should try and comment complicated
+bits of code to explain.
+
+68
+00:04:47,440 --> 00:04:49,090
+The purpose of it.
+
+69
+00:04:49,090 --> 00:04:50,656
+And you should also write comments
+
+70
+00:04:50,656 --> 00:04:53,150
+to describe relationships between your
+variables.

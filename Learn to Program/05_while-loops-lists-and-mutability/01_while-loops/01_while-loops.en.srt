@@ -1,0 +1,882 @@
+1
+00:00:01,400 --> 00:00:06,540
+In an earlier lecture we used a four loop
+to loop over each character of a string.
+
+2
+00:00:06,540 --> 00:00:09,700
+But what if we don't want to loop over
+every character?
+
+3
+00:00:09,700 --> 00:00:12,340
+Perhaps we only want to loop until a vowel
+is encountered.
+
+4
+00:00:12,340 --> 00:00:16,090
+Or maybe we don't want to work with
+strings at all.
+
+5
+00:00:16,090 --> 00:00:22,330
+For example, we may want to repeat a task
+until the user enters a particular value.
+
+6
+00:00:22,330 --> 00:00:25,990
+In this lecture, we're going to while
+loops to accomplish these tasks.
+
+7
+00:00:27,910 --> 00:00:31,900
+To begin, let's recall the general form of
+an if statement.
+
+8
+00:00:31,900 --> 00:00:34,920
+An if statement relies on a Boolean
+expression.
+
+9
+00:00:34,920 --> 00:00:39,830
+When that expression is true, the body of
+the if statement is executed.
+
+10
+00:00:39,830 --> 00:00:42,340
+If the Boolean expression is false, then
+the
+
+11
+00:00:42,340 --> 00:00:42,340
+[UNKNOWN]
+
+12
+00:00:42,340 --> 00:00:46,870
+proceeds on to statements that follow the
+if without executing it's body.
+
+13
+00:00:46,870 --> 00:00:54,000
+A wild loop has a similar form to an if
+statement, it also relies on a Boolean
+
+14
+00:00:54,000 --> 00:01:00,440
+expression, and if the Boolean expression
+is true the wild loop body is executed.
+
+15
+00:01:00,440 --> 00:01:03,530
+However, unlike the if the while loop
+continues at
+
+16
+00:01:03,530 --> 00:01:07,860
+this point and we'll check the Boolean
+expression another time.
+
+17
+00:01:07,860 --> 00:01:12,060
+If the loop condition is true, then the
+body of the while loop
+
+18
+00:01:12,060 --> 00:01:17,330
+is executed again and this process repeats
+until the loop condition becomes false.
+
+19
+00:01:19,900 --> 00:01:20,310
+The first
+
+20
+00:01:20,310 --> 00:01:20,310
+[SOUND]
+
+21
+00:01:20,310 --> 00:01:23,620
+example of a while loop involves the
+variable num.
+
+22
+00:01:23,620 --> 00:01:25,005
+Num gets the value 2.
+
+23
+00:01:26,160 --> 00:01:27,000
+The while loop will
+
+24
+00:01:27,000 --> 00:01:27,000
+[SOUND]
+
+25
+00:01:27,000 --> 00:01:31,052
+continue to execute as long as num is <
+100.
+
+26
+00:01:32,100 --> 00:01:32,630
+In the body
+
+27
+00:01:32,630 --> 00:01:32,700
+[SOUND]
+
+28
+00:01:32,700 --> 00:01:37,150
+of the loop num is doubled, and num is
+printed.
+
+29
+00:01:39,530 --> 00:01:44,970
+With num having an initial value of 2,
+this Y loop executes 6 times.
+
+30
+00:01:44,970 --> 00:01:49,620
+Num gets 4, 8, 16, 32, 64, and eventually
+128.
+
+31
+00:01:49,620 --> 00:01:53,600
+At that point, the Y loop condition is
+false.
+
+32
+00:01:55,210 --> 00:01:59,680
+Now if num gets value 10, and we rerun
+this Y loop.
+
+33
+00:02:01,200 --> 00:02:04,550
+It only takes four iterations for the
+while loop condition
+
+34
+00:02:04,550 --> 00:02:07,970
+to become false so by four iterations i
+
+35
+00:02:07,970 --> 00:02:10,800
+mean the body of the loop executes 4
+times.
+
+36
+00:02:12,260 --> 00:02:18,170
+At that point, none refers to the value
+160 and the loop condition is false.
+
+37
+00:02:18,170 --> 00:02:21,900
+If at this point, we rerun this while
+loop.
+
+38
+00:02:21,900 --> 00:02:25,150
+The body never is executed because the
+
+39
+00:02:25,150 --> 00:02:27,740
+loop condition is false from the
+beginning.
+
+40
+00:02:31,830 --> 00:02:35,360
+Now let's address a quick problem that i
+mentioned earlier, which is
+
+41
+00:02:35,360 --> 00:02:39,120
+to loop over the characters of a string
+until a vowel is encountered.
+
+42
+00:02:40,180 --> 00:02:44,080
+First let's recall how we looped over our
+string using a for loop.
+
+43
+00:02:44,080 --> 00:02:44,580
+We
+
+44
+00:02:48,600 --> 00:02:49,060
+used
+
+45
+00:02:49,060 --> 00:02:49,370
+[SOUND]
+
+46
+00:02:49,370 --> 00:02:55,970
+the for loop for character in string S and
+I'm just going to print that character.
+
+47
+00:02:57,120 --> 00:03:00,360
+When we broke this loop The character has
+an
+
+48
+00:03:00,360 --> 00:03:04,380
+initial value of the string S at position
+zero.
+
+49
+00:03:04,380 --> 00:03:10,090
+Then S at one and so on until the end of
+the string was reached.
+
+50
+00:03:10,090 --> 00:03:14,320
+When we write our Y loop, we need to
+specify those indices.
+
+51
+00:03:14,320 --> 00:03:19,440
+So i will begin by creating a variable i
+that gets the value zero and
+
+52
+00:03:19,440 --> 00:03:23,520
+that will represent the first index of the
+string over which we'd like to loop.
+
+53
+00:03:25,350 --> 00:03:28,470
+Now the while loop condition, we want to
+keep
+
+54
+00:03:28,470 --> 00:03:32,460
+going until we encounter a vowel so as
+long as
+
+55
+00:03:32,460 --> 00:03:39,480
+string at position i is not a vowel, So,
+as long as it isn't in this set of lower
+
+56
+00:03:39,480 --> 00:03:43,690
+case, a e i o u and upper case A E I O U.
+
+57
+00:03:44,700 --> 00:03:49,080
+Then, we will enter into the body of the
+loop and execute the loop body.
+
+58
+00:03:50,150 --> 00:03:54,470
+In the loop, i will print that character,
+the string of position i.
+
+59
+00:03:56,760 --> 00:04:01,890
+Before we can exit the Y loop, we need to
+advance the index, so
+
+60
+00:04:01,890 --> 00:04:07,120
+i's value must increase.
+I, we'll get the value of i plus one.
+
+61
+00:04:07,120 --> 00:04:10,560
+So we move on to the next character of the
+string
+
+62
+00:04:13,740 --> 00:04:16,400
+In this case the while loop executes once
+
+63
+00:04:16,400 --> 00:04:20,740
+because the character asset zero is not a
+vowel.
+
+64
+00:04:20,740 --> 00:04:25,080
+And then the second time the while loop
+condition is checked, asset one
+
+65
+00:04:25,080 --> 00:04:29,850
+refers to e, which is a sub string of the
+string of vowels.
+
+66
+00:04:29,850 --> 00:04:33,410
+So the wild loop condition is false and
+the wild loop exits.
+
+67
+00:04:34,900 --> 00:04:35,660
+Let's execute
+
+68
+00:04:35,660 --> 00:04:35,660
+[SOUND]
+
+69
+00:04:35,660 --> 00:04:37,320
+the same loop.
+This time
+
+70
+00:04:37,320 --> 00:04:37,320
+[SOUND]
+
+71
+00:04:37,320 --> 00:04:39,590
+using the string there.
+
+72
+00:04:39,590 --> 00:04:45,110
+Setting i to zero, once again, and now
+executing the wild loop.
+
+73
+00:04:45,110 --> 00:04:48,090
+This time the wild loop body executes
+twice.
+
+74
+00:04:49,090 --> 00:04:54,190
+Once for the consonant t, a second time
+for the consonant h, and then the
+
+75
+00:04:54,190 --> 00:04:59,290
+e is encountered, so the y loop condition
+is false and the loop exits.
+
+76
+00:05:00,340 --> 00:05:04,640
+What happens if there are only consonants
+in our
+
+77
+00:05:04,640 --> 00:05:04,640
+[SOUND]
+
+78
+00:05:04,640 --> 00:05:05,140
+string.
+
+79
+00:05:11,730 --> 00:05:16,995
+In this case, the three consonants are
+displayed and then an index error occurs.
+
+80
+00:05:16,995 --> 00:05:21,830
+S(0) refers to the 'x'.
+S(1)
+
+81
+00:05:21,830 --> 00:05:27,180
+refers to the 'y' and s(2) refers to the
+"z".
+
+82
+00:05:27,180 --> 00:05:32,150
+But the current value of i is 3 and asset
+3 is not
+
+83
+00:05:32,150 --> 00:05:37,080
+a legal position, it's not a valid index
+for stirring s so an index
+
+84
+00:05:37,080 --> 00:05:38,440
+error occurs.
+
+85
+00:05:38,440 --> 00:05:43,910
+We haven't specified when to stop
+examining the characters of s.
+
+86
+00:05:43,910 --> 00:05:46,740
+And so we've hit the end of the string and
+
+87
+00:05:46,740 --> 00:05:49,820
+have tried to access an index that does
+not exist.
+
+88
+00:05:50,840 --> 00:05:56,420
+To prevent this, we need to add a second
+part to our Boolean condition.
+
+89
+00:05:56,420 --> 00:06:01,670
+Which is to check that i is within the
+bounds of the string.
+
+90
+00:06:01,670 --> 00:06:02,300
+To make sure
+
+91
+00:06:02,300 --> 00:06:07,950
+that it is less than the length.
+Let's do that now.
+
+92
+00:06:07,950 --> 00:06:11,630
+We will give i the value zero.
+
+93
+00:06:11,630 --> 00:06:17,770
+S gets string, x y z and now we execute
+the while loop.
+
+94
+00:06:17,770 --> 00:06:21,230
+Before we execute it though, we're going
+to first check to
+
+95
+00:06:21,230 --> 00:06:26,060
+make sure that i is less than the length
+of the string.
+
+96
+00:06:26,060 --> 00:06:27,380
+And then we will check
+
+97
+00:06:27,380 --> 00:06:30,930
+to see whether s and i is a sub string of
+the string of vowels.
+
+98
+00:06:31,930 --> 00:06:34,930
+Notice that i put this condition first.
+
+99
+00:06:34,930 --> 00:06:37,440
+We want to make sure that we check whether
+i is less
+
+100
+00:06:37,440 --> 00:06:42,810
+than the length before trying to access
+the string at position i.
+
+101
+00:06:42,810 --> 00:06:48,000
+Python performs lazy evaluation of it's
+and operation, so
+
+102
+00:06:48,000 --> 00:06:53,540
+if the first operand to an and is false,
+the second is not evaluated.
+
+103
+00:06:53,540 --> 00:07:00,140
+That means that if i is not less than the
+length of the string, then this N is found
+
+104
+00:07:00,140 --> 00:07:05,180
+to be false at that point and we won't try
+to access the string at position i.
+
+105
+00:07:07,360 --> 00:07:13,350
+So in this case the three constants are
+displayed and at that point the
+
+106
+00:07:13,350 --> 00:07:18,410
+condition that i is less than the length
+of the string is false and the loop exits.
+
+107
+00:07:18,410 --> 00:07:18,910
+[NOISE]
+
+108
+00:07:21,460 --> 00:07:25,350
+Let's use some of the ideas from wide loop
+for another problem.
+
+109
+00:07:26,860 --> 00:07:29,900
+The function up to vowel is what we will
+implement.
+
+110
+00:07:29,900 --> 00:07:30,570
+[NOISE]
+
+111
+00:07:30,570 --> 00:07:33,940
+It has one string parameter and it will
+return a string.
+
+112
+00:07:35,180 --> 00:07:38,280
+It's going to return a sub string of the
+string parameter
+
+113
+00:07:38,280 --> 00:07:42,660
+s from index zero, up to but not including
+the first vowel.
+
+114
+00:07:43,850 --> 00:07:46,900
+So rather than print the way we did in our
+example in
+
+115
+00:07:46,900 --> 00:07:51,100
+the shell, we want to accumulate the sub
+string and return it.
+
+116
+00:07:52,590 --> 00:07:55,630
+We'll use the accumulator pattern that we
+saw earlier to
+
+117
+00:07:55,630 --> 00:07:58,250
+solve this problem.
+The variable
+
+118
+00:07:58,250 --> 00:07:58,250
+[SOUND]
+
+119
+00:07:58,250 --> 00:08:02,260
+before a vowel will initially refer to an
+empty string and
+
+120
+00:08:02,260 --> 00:08:06,260
+we will accumulate the string to be
+returned in before a vowel.
+
+121
+00:08:07,820 --> 00:08:10,690
+The while loops that we are going to use
+
+122
+00:08:10,690 --> 00:08:13,450
+is the exact same one that we wrote
+earlier.
+
+123
+00:08:13,450 --> 00:08:18,270
+We want to loop over the characters of the
+string starting at position zero.
+
+124
+00:08:18,270 --> 00:08:22,300
+Until we encounter a vowel or until the
+end the string is reached.
+
+125
+00:08:23,740 --> 00:08:26,080
+Inside the body of the loop we want to
+
+126
+00:08:26,080 --> 00:08:26,250
+[SOUND]
+
+127
+00:08:26,250 --> 00:08:29,290
+add to the before vowel accumulator.
+So
+
+128
+00:08:29,290 --> 00:08:29,290
+[SOUND]
+
+129
+00:08:29,290 --> 00:08:33,360
+before vowel, we'll get its current value
+plus the
+
+130
+00:08:33,360 --> 00:08:37,060
+character, which is the character position
+i of string s.
+
+131
+00:08:38,280 --> 00:08:42,800
+We need to increment the index, adding one
+to it,
+
+132
+00:08:42,800 --> 00:08:45,270
+so that we can then move on to the next
+character.
+
+133
+00:08:46,340 --> 00:08:50,370
+And at the end of this function the
+substring is returned.
+
+134
+00:08:50,370 --> 00:08:52,900
+So before a vowel will be returned.
+
+135
+00:08:54,610 --> 00:08:55,960
+Let's run this code now.
+
+136
+00:08:59,280 --> 00:09:00,980
+And call the function from Michelle.
+
+137
+00:09:03,530 --> 00:09:06,410
+For the first function called we expect to
+get h.
+
+138
+00:09:07,900 --> 00:09:13,490
+For the second one, where there's the
+argument, t h should be returned.
+
+139
+00:09:13,490 --> 00:09:16,440
+And then the third example which contains
+only
+
+140
+00:09:16,440 --> 00:09:16,440
+[SOUND]
+
+141
+00:09:16,440 --> 00:09:21,170
+character, only consonants Not, no vowels
+the entire string
+
+142
+00:09:21,170 --> 00:09:21,170
+[SOUND]
+
+143
+00:09:21,170 --> 00:09:21,820
+is returned.
+
+144
+00:09:24,140 --> 00:09:26,660
+Let's implement one more function.
+
+145
+00:09:26,660 --> 00:09:31,520
+The name of this function is get answer
+and this function will
+
+146
+00:09:31,520 --> 00:09:35,490
+prompt the user with a question asking for
+a yes or no answer.
+
+147
+00:09:35,490 --> 00:09:39,000
+The user will provide the answer.
+
+148
+00:09:39,000 --> 00:09:44,090
+And we want to continue prompting them
+until the answer they enter is yes or no.
+
+149
+00:09:44,090 --> 00:09:49,330
+So it may take one try or ten, or a 100
+tries before the user enters
+
+150
+00:09:49,330 --> 00:09:50,100
+the right answer.
+
+151
+00:09:51,210 --> 00:09:53,970
+At the end we will return the answer that
+the user entered.
+
+152
+00:09:55,750 --> 00:09:58,920
+Let's implement this function beginning
+with the prompts,
+
+153
+00:09:58,920 --> 00:10:02,170
+so we want to call input Using the
+
+154
+00:10:02,170 --> 00:10:04,710
+prompt past as an argument to get answer,
+
+155
+00:10:05,840 --> 00:10:08,290
+and store the results in the answer
+variable.
+
+156
+00:10:11,520 --> 00:10:16,220
+Let's specify the condition now under
+which we want to re-prompt the user.
+
+157
+00:10:16,220 --> 00:10:21,820
+The body of the Y loop is going to be a
+duplicate of the code from above
+
+158
+00:10:21,820 --> 00:10:27,400
+Which is a single, the single line of code
+that prompts the user with that question.
+
+159
+00:10:30,530 --> 00:10:35,350
+We would like to keep prompting them when
+the answer is not the one we're looking
+
+160
+00:10:35,350 --> 00:10:40,840
+for.
+So if answer is yes or no we would stop.
+
+161
+00:10:40,840 --> 00:10:44,970
+And then the answer is not yes or no.
+
+162
+00:10:44,970 --> 00:10:46,380
+The loop needs to continue.
+
+163
+00:10:47,900 --> 00:10:49,660
+At the end of the while loop, once
+
+164
+00:10:49,660 --> 00:10:52,900
+it has finished executing, the answer is
+returned.
+
+165
+00:10:56,410 --> 00:11:00,446
+You may have noticed that i didn't include
+any example calls in the doc string.
+
+166
+00:11:00,446 --> 00:11:05,200
+That's because the execution of this
+function
+
+167
+00:11:05,200 --> 00:11:07,480
+it relies upon the user input, and i
+
+168
+00:11:07,480 --> 00:11:10,140
+can't predict what the function will
+return
+
+169
+00:11:10,140 --> 00:11:12,660
+because it depends on what the user
+entered.
+
+170
+00:11:12,660 --> 00:11:14,620
+Let's run this though now to check to
+
+171
+00:11:14,620 --> 00:11:16,990
+see it perform, that it's performing as
+expected.
+
+172
+00:11:19,960 --> 00:11:20,460
+Calling,
+
+173
+00:11:20,460 --> 00:11:20,460
+[SOUND]
+
+174
+00:11:20,460 --> 00:11:25,356
+get answer, i'll pass a prompt,
+
+175
+00:11:25,356 --> 00:11:29,052
+and we're
+
+176
+00:11:29,052 --> 00:11:34,391
+prompted with a
+
+177
+00:11:34,391 --> 00:11:40,510
+question.
+If i answer maybe, we're
+
+178
+00:11:40,510 --> 00:11:40,535
+[SOUND]
+
+179
+00:11:40,535 --> 00:11:42,100
+re-prompted say,
+
+180
+00:11:42,100 --> 00:11:42,320
+[SOUND]
+
+181
+00:11:42,320 --> 00:11:43,858
+it's late, we get prompted again.
+
+182
+00:11:43,858 --> 00:11:43,860
+[SOUND]
+
+183
+00:11:43,860 --> 00:11:54,560
+Not really, we get prompted again.
+Oops.
+
+184
+00:11:54,560 --> 00:11:59,440
+Finally if i enter yes, yes is returned by
+the function.
+
+185
+00:11:59,440 --> 00:12:00,850
+Let's try that one more time.
+
+186
+00:12:04,530 --> 00:12:10,090
+This time, i'm going to answer no right
+away, so the body of the while loop
+
+187
+00:12:10,090 --> 00:12:13,480
+won't be executed, because the while
+condition will
+
+188
+00:12:13,480 --> 00:12:15,510
+be false the very first time that it is.
+
+189
+00:12:16,770 --> 00:12:19,000
+No is returned by the function in this
+case.

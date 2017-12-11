@@ -1,0 +1,93 @@
+Questi indirizzi di memoria che stiamo usando
+stanno per diventare molto utili. Viene fuori che potete modificare il contenuto
+di qualche oggetto. E senza gli indirizzi di memoria, sarebbe molto
+difficile spiegare cosa sta accadendo. Inizieremo mostrando che gli oggetti liste
+possono essere modificati. Alla linea uno c'è un'istruzione di assegnazione. Valutiamo l'espressione sulla destra,
+e quella crea una lista di oggetti e i sei interi 0, 2,
+4, 6, 8 e 10. Una volta che abbiamo creato la struttura 
+della lista, possiamo assegnare alla variabile lst, l'indirizzo di memoria
+dell'oggetto lista. Quindi, la lista lst, contiene del'indirizzo di memoria
+1 che fa riferimento all'oggetto lista.
+All'indice zero c'è l'indirizzo di memoria ID 2.
+E fa riferimento all'oggetto zero. All'indice uno, facciamo riferimento a due.
+All'indice due, facciamo riferimento a quattro. E così via. Alla linea due c'è un'altra istruzione
+di assegnazione. Sul lato sinistro, non abbiamo solo 
+una variabile. Abbiamo qualcosa di un po' più complesso. Abbiamo una lista all'indice 2. Andremo a modificare quell'indirizzo
+di memoria proprio lì. La lista all'indice 2, dopo che abbiamo
+eseguito quell'istruzione di assegnazione, non fa più riferimento all'intero
+4. Invece, fa riferimento all'intero 5. Stiamo per modificare un oggetto nell'heap. Quando clicco avanti, vediamo che abbiamo 
+un nuovo oggetto all'indirizzo di memoria 8. E quella lista all'indice 2 fa riferimento
+a quel nuovo oggetto. Modifichiamo il codice e facciamo qualcosa
+di diverso. Andrò a rimpiazzare questo codice con
+dell'altro codice. Visualizziamo l'esecuzione. Linea uno, sappiamo cosa ci aspetta.
+Lista 1 fa riferimento ad una lista. Alla lista indice 0, il nostro primo è 0. L'indice quotato 1, il primo di 2.
+L'indice quotato 2, il nostro primo di 4, e così via. Alla linea due, faccio qualcosa di un po'
+curioso. Sto prendendo l'indirizzo di memoria che è
+nella lista delle variabili 1 e sto posizionandola nella lista delle variabili 2. L?unica cosa che cambierà è il contenuto
+del modulo name. Ecco. Ora, sia list 1 che list 2 fanno riferimento
+all'oggetto lista. Questo è detto aliasing.
+Quando due variabili contengono entrambe lo stesso indirizzo di memoria, avviene l'aliasing.
+Fin qui tutto bene. Quello che faremo ora è, assegnare
+all'ultimo elemento nella lista uno, per l'oggetto che era delle
+prime due, il valore 17.
+Quindi, l'oggetto all'indice 5 sta per cambiare nella lista.
+Stiamo per perdere il riferimento a 10, e invece andremo ad
+avere l'elemento di indice 5 che fa riferimento all'itero 17. Ed eccolo qui. La cosa interessante è che ora la list 2
+ha subito lo stesso cambiamento. List 2 contiene lo stesso indirizzo di memoria
+dell'oggetto list. Abbiamo cambiato quell'oggetto usando la list 1,
+ma anche la list 2 è cambiata. Quindi quando stampiamo list 1 all'indice meno 1,
+stampa l'ultimo elemento, otteniamo 17. E andremo a vedere esattamente lo stesso risultato quando stampiamo la list 2
+all'indice meno 1. Faremo ancora un esempio di aliasing. Abbiamo una funzione double even
+indices che prende un alista di ints come parametro e non ritorna 
+nulla, o ritorna none. Nella docstring dice che raddoppia ogni altro
+intero della lista, iniziando dall'indice 0. Quindi questi valori agli indici 0, 2, 4, 6, 8,
+e così via, verranno raddoppiati. Inizieremo con i che parte da 0. In altre parole, i sarà l'indice del prossimo elemento che deve essere raddoppiato finché
+ne rimane qualcuno. Andrà avanti finché i è minore
+della lunghezza della lista.
+In altre parole, ci fermeremo quando i è uguale o maggiore della
+lunghezza ella lista. All'interno del ciclo, andremo a considerare
+l'elemento all'indice i e raddoppiarlo. E salveremo il riferimento a quel nuovo valore
+nella lista all'indice i. Poi, andremo ad aggiungere 2 a i, dato che vogliamo saltare il prossimo indice
+pari. Il nostro programma principale creerà una lista,
+la assegnerà alla variabile list 1 di quella lista. Stamperà la lista. Raddoppierà gli interi agli indici pari
+nella lista. E poi stamperà nuovamente la lista. Definiamo la nostra funzione.
+Creiamo la nostra struttura della lista. Stampiamo la lista. E ora notiamo che la variabile list 1,
+contiene l'indirizzo di memoria ID 2, e quell'ID 2 è l'indirizzo di memoria del nostro
+oggetto lista. Andremo a creare un alias per questo.
+Ma non usiamo un'istruzione di assegnazione. Invece, andremo a fare una chiamata ad una funzione.
+Valuteremo gli argomenti. Otteniamo l'indirizzo di memoria ID 2, che
+andiamo ad inserire nella variabile list nel frame che verrà creato
+per la funzione double even indices. Ora, nella funzione double even indices
+la variabile list fa riferimento a quell'oggetto lista. La variabile list 1 fa anch'essa riferimento
+a quell'oggetto lista. Questo significa che ogni modifica che facciamo a quell'oggetto lista che verrà visto da entrambe
+le variabili. Iniziamo con i dall'indice 0, notate che i
+fa riferimento a 0. La lunghezza della lista è 1, 2, 3, 4, 5, 6, 7.
+Quindi, 0 è minore di 7. Andrò a vedere il valore all'indice 0
+e a moltiplicarlo per 2. Il valore all'indice 0 è 11.
+Moltiplicandolo per 2, ottengo 22. E andremo a prendere quel 22 e avere
+l'indice della lista 0 che fa riferimento a quello. Ora andremo ad aggiungere due ad i e quindi i
+ora fa riferimento a 2. 2 è minore di 7. Quindi andrò a fare la stessa cosa, ma
+questa volta con la lista all'indice 2. L'elemento della lista 2 è il 13. Andiamo a prendere 13, raddoppiarlo,
+che ci da 26. E poi andremo a salvare all'indice 2
+della lista l'indirizzo di memoria di quel nuovo intero
+che stiamo per ottenere. Aggiungendo 2 ad i, terminiamo con 4 ovviamente.
+Ora i fa riferimento a 4. 4 è minore di 7.
+Quindi stiamo per farlo di nuovo, questa volta cambiando l'elemento all'indice 4, rimpiazzando
+quel 15 con 30. Aggiungi 2 ad i.
+6 è meno di 7. La lista all'indice sei è 17.
+Raddoppiandolo, otteniamo 34, quindi l'indice sei della lista
+fa ora riferimento a 34. Aggiungendo 2 ad i, ora si ottiene 8.
+Questo rende la nostra condizione del loop falsa. Dal momento che abbiamo falso in una
+condizione del ciclo, il ciclo termina. Quindi usciremo dal ciclo. Non ci sono istruzioni alla fine di double even indices, e quindi,
+stiamo per ritornare none. Ricordate, se non c'è alcuna istruzione di return
+in una funzione, allora la funzione ritornerà il valore none di tipo
+none. Dove eravamo? Beh, eravamo nel modulo principale
+quaggiù. abbiamo appena chiamato double even indices,
+che è finita. Quindi ci sposteremo alla riga 15. Lista 1 ora fa riferimento alla lista oggetto
+che ha 22 all'indice 0. poi 12, poi 26, 14, 30, 16, e 34. Quindi, anche se non l'abbiamo mai menzionato la list 1
+all'interno del corpo della funzione, list 1 ora fa riferimento all'oggetto che è stato
+modificato. Quindi, il nostro output contiene i nuovi valori. A causa dell'aliasing, dovete ricordare
+quali tipi sono mutabili e quali non lo sono. Finora, le liste sono gli unici tipi che sono 
+mutabili. Tutti gli altri sono immutabili. Inoltre, devi anche essere un po' prudente
+quando scrivi i docstrings per i tipi mutabili. Devi chiarire se il parametro verrà modificato dal codice all'interno della
+funzione.

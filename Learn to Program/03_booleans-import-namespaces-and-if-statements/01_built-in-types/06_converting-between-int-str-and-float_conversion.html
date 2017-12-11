@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <meta charset="utf-8">
+        <title>
+            Converting between int, str, and float
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 4.1 Creating Strings of Characters
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Converting between <code>int</code>, <code>str</code>, and <code>float</code>
+        </h1>
+        <h3>
+            str
+        </h3>
+        <p>
+            Builtin function <code>str</code> takes any value and returns a string representation of that value.
+        </p>
+        <pre>
+&gt;&gt;&gt; str(3)
+'3'
+&gt;&gt;&gt; str(47.6)           
+'47.6'
+</pre>
+        <h3>
+            int
+        </h3>
+        <p>
+            Builtin function <code>int</code> takes a string containing only digits (possibly with a leading minus sign <code>-</code>) and returns the <code>int</code> that represents. Function <code>int</code> also converts <code>float</code> values to integers by throwing away the fractional part.
+        </p>
+        <pre>
+&gt;&gt;&gt; int('12345')
+12345
+&gt;&gt;&gt; int('-998')
+-998
+&gt;&gt;&gt; int(-99.9)
+-99
+</pre>
+        <p>
+            If function <code>int</code> is called with a string that contains anything other than digits, a <code>ValueError</code> happens.
+        </p>
+        <pre>
+&gt;&gt;&gt; int('-99.9')
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+ValueError: invalid literal for int() with base 10: '-99.9'
+</pre>
+        <h3>
+            float
+        </h3>
+        <p>
+            Builtin function <code>float</code> takes a string containing only digits and zero or one decimal points (possibly with a leading minus sign <code>-</code>) and returns the <code>float</code> that represents. Function <code>float</code> also converts <code>int</code> values to <code>float</code>s.
+        </p>
+        <pre>
+&gt;&gt;&gt; float('-43.2')
+-43.2
+&gt;&gt;&gt; float('432')
+432.0
+&gt;&gt;&gt; float(4)
+4.0
+</pre>
+        <p>
+            If function <code>float</code> is called with a string that can't be converted, a <code>ValueError</code> happens.
+        </p>
+        <pre>
+&gt;&gt;&gt; float('-9.9.9')
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+ValueError: could not convert string to float: '-9.9.9'
+</pre><br>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

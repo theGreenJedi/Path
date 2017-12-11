@@ -1,0 +1,355 @@
+1
+00:00:00,084 --> 00:00:04,088
+Una volta che una funzione viene definita, possiamo
+richiamarla più e più volte.
+
+2
+00:00:04,088 --> 00:00:10,010
+In questa lezione ci concentreremo sul
+riutilizzo delle funzioni richiamandole in altri
+
+3
+00:00:10,010 --> 00:00:13,743
+posti quando è appropriato.
+Ad esempio chiameremo la nostra funzione
+
+4
+00:00:13,743 --> 00:00:20,040
+all'interno della definizione di altre funzioni
+e anche all'interno di chiamate di altre funzioni.
+
+5
+00:00:20,040 --> 00:00:23,597
+In questa lezione sulla definizione di funzioni.
+Eccoci, triangle.
+
+6
+00:00:23,597 --> 00:00:28,043
+py, che contiene due funzioni.
+Questo codice è una versione rivista che ho
+
+7
+00:00:29,072 --> 00:00:33,007
+prodotto seguendo gli step della ricetta di 
+disegno.
+
+8
+00:00:33,007 --> 00:00:37,513
+Per ricapitolare la ricetta di disegno, iniziamo con
+un esempio o due.
+
+9
+00:00:37,513 --> 00:00:42,922
+seguito dal tipo di contratto, dalla
+testata della funzione, una descrizione della
+
+10
+00:00:42,922 --> 00:00:46,314
+funzione.
+Poi codifichiamo il corpo e testiamo la
+
+11
+00:00:46,314 --> 00:00:49,258
+funzione.
+Ora aggiungiamo un'altra funzione a
+
+12
+00:00:49,258 --> 00:00:53,725
+triangle.py.
+Questa funzione calcolerà il semi
+
+13
+00:00:53,725 --> 00:00:59,243
+perimetro di un triangolo.
+Il semi perimetro p semplicemente la metà del
+
+14
+00:00:59,243 --> 00:01:02,637
+perimetro.
+Seguendo l'esatta ricetta di disegno.
+
+15
+00:01:02,637 --> 00:01:06,015
+Il primo passo è trovare un esempio.
+
+16
+00:01:06,042 --> 00:01:15,086
+Chiameremo la funzione, semi_erimeter.
+La funzione avrà bisogno della lunghezza dei
+
+17
+00:01:15,086 --> 00:01:19,068
+tre lati per effettuare il
+calcolo.
+
+18
+00:01:19,068 --> 00:01:24,070
+Quindi nella chiamata alla funzione, immaginiamo
+di passare, tre lunghezze.
+
+19
+00:01:24,070 --> 00:01:30,012
+E poi, il risultato che otterremo
+sarà metà del perimetro.
+
+20
+00:01:31,065 --> 00:01:38,041
+Effettuiamo una ulteriore chiamata alla funzione, e
+questa volta passando float invece di int come 
+
+21
+00:01:38,041 --> 00:01:45,045
+argomenti.
+E il risultato che ci aspettiamo di ottenere
+
+22
+00:01:45,045 --> 00:01:51,051
+sarebbe 12.9.
+Il prossimo passo della ricetta di disegno è il
+
+23
+00:01:51,051 --> 00:01:56,035
+tipo contratto.
+Per la funzione del semi perimetro, i tipi
+
+24
+00:01:56,035 --> 00:02:03,054
+saranno numeri, dato che potremmo avere degli int
+o dei float, e questa funzione ritornerà un 
+
+25
+00:02:03,054 --> 00:02:08,052
+float.
+Poi definiremo la testata della funzione.
+
+26
+00:02:08,052 --> 00:02:15,035
+Iniziamo con la parola chiave def seguita dalla
+funzione medium che abbiamo già
+
+27
+00:02:15,035 --> 00:02:22,008
+deciso nel nostro esempio di chiamata, e
+passiamo in ingresso tre parametri in questo caso.
+
+28
+00:02:22,008 --> 00:02:26,046
+Li chiamerò lato uno, lato due, e
+lato tre.
+
+29
+00:02:26,046 --> 00:02:32,059
+Poi c'è la descrizione della funzione.
+Dobbiamo dire cosa ritornerà la
+
+30
+00:02:32,059 --> 00:02:36,066
+funzione e spiegare come saranno usati i
+parametri.
+
+31
+00:02:36,066 --> 00:02:41,033
+Quindi andremo a ritornare il semiperimetro di
+un triangolo.
+
+32
+00:02:41,033 --> 00:02:48,059
+La dimensione principale è la lunghezza data, ma
+nei parametri.
+
+33
+00:02:49,063 --> 00:02:56,012
+Ora siamo pronti per scrivere il corpo della
+funzione.
+
+34
+00:02:56,012 --> 00:03:01,070
+Questa funzione ritornerà il
+semiperimetro, il che significa che calcoleremo
+
+35
+00:03:01,070 --> 00:03:07,063
+il perimetro sommando i tre
+lati e dividendo il risultato per due.
+
+36
+00:03:07,063 --> 00:03:13,035
+Notate che parte del corpo della funzione
+semiperimetro è esattamente lo stesso
+
+37
+00:03:13,035 --> 00:03:18,041
+di una parte del corpo del perimetro.
+Invece di duplicare il codice per
+
+38
+00:03:18,041 --> 00:03:23,091
+calcolare il perimetro, possiamo chiamare la
+funzione perimetro all'interno della
+
+39
+00:03:23,091 --> 00:03:30,024
+funzione semiperimetro.
+Riutilizzando i parametri della funzione,
+
+40
+00:03:30,024 --> 00:03:38,024
+possiamo ridurre il rischio di fare un errore mentre
+calcoliamo i perimetro, dato che
+
+41
+00:03:38,024 --> 00:03:46,065
+quella funzione è già stata testata.
+Ora è tempo di testare la funzione
+
+42
+00:03:46,065 --> 00:03:51,012
+semiperimetro.
+Inizieremo facendo girare il modulo.
+
+43
+00:03:51,059 --> 00:03:58,002
+E poi eseguiremo quella funzione
+chiamandola all'interno della shell.
+
+44
+00:03:59,046 --> 00:04:07,064
+Userò lo stesso esempio che ho usato
+nel doc della funzione, la stringa function
+
+45
+00:04:07,064 --> 00:04:12,422
+docs.
+E poi riceviamo indietro sei, e poi se
+
+46
+00:04:12,422 --> 00:04:19,289
+la chiamo con i float della stringa docs,
+combineremo dei float al suo itnerno, e
+
+47
+00:04:19,289 --> 00:04:25,017
+riceveremo 12.9.
+Quindi la funzione agisce come ci attendevamo.
+
+48
+00:04:25,017 --> 00:04:28,001
+C'è un altro problema che dobbiamo considerare.
+
+49
+00:04:28,001 --> 00:04:32,087
+Per questo problema andremo a far uso
+della funzione area che abbiamo scritto
+
+50
+00:04:32,087 --> 00:04:35,079
+prima.
+Ricordiamo che area ha due parametri, la
+
+51
+00:04:35,079 --> 00:04:39,050
+base e l'altezza, e poi ritorna l'area
+del triangolo.
+
+52
+00:04:39,050 --> 00:04:47,058
+Il problema riguarda due fette di pizza.
+Ad una festa ci sono queste due fette di
+
+53
+00:04:47,058 --> 00:04:52,055
+pizza avanzate.
+Una persona affamata cerca di capire
+
+54
+00:04:52,055 --> 00:04:58,050
+quale fetta sia la più grande.
+Dato che le fette sono a forma
+
+55
+00:04:58,050 --> 00:05:04,083
+triangolare la persona misura la base e l'altezza
+di ogni fetta di pizza.
+
+56
+00:05:04,083 --> 00:05:10,080
+Ora che sappiamo la base e l'altezza
+di ogni fetta di pizza, possiamo usare il nostro
+
+57
+00:05:10,080 --> 00:05:14,005
+programma per aiutare a capire quale sia
+la più grande.
+
+58
+00:05:14,005 --> 00:05:19,094
+Useremo anche una delle funzioni integrate 
+di Python, la funzione max, per aiutarci
+
+59
+00:05:19,094 --> 00:05:23,012
+Quindi iniziamo chiamando max, e il
+
+60
+00:05:23,012 --> 00:05:29,039
+primo argomento che passeremo a max sarà
+l'area della prima fetta di pizza.
+
+61
+00:05:29,039 --> 00:05:32,063
+La fetta ha base 3.8 e altezza 7.0.
+
+62
+00:05:32,063 --> 00:05:39,088
+E poi il secondo argomento alla funzione,
+min, max, sarà l'area della
+
+63
+00:05:39,088 --> 00:05:46,027
+seconda fetta di pizza.
+E un triangolo con base 3.5, e altezza
+
+64
+00:05:46,027 --> 00:05:50,065
+6.8.
+Quando eseguiamo questa funzione, scopriamo
+
+65
+00:05:50,065 --> 00:05:58,009
+quale delle due aree è maggiore.
+E ora possiamo controllare quale fetta di
+
+66
+00:05:58,009 --> 00:06:03,072
+pizza, il valore netto corrisponde
+a 13.29 periodico.
+
+67
+00:06:03,072 --> 00:06:10,082
+Quindi possiamo vedere da quella chiamata alla funzione
+che l'area della prima fetta di pizza coincide
+
+68
+00:06:10,082 --> 00:06:15,074
+con l'area massima.
+E questo significa che la fetta di pizza 
+
+69
+00:06:15,074 --> 00:06:19,082
+vincente, è la prima.
+Quindi ciò che mostra questo esempio è che,
+
+70
+00:06:19,082 --> 00:06:24,089
+non solo si può richiamare una funzione
+all'interno di una definizione di una funzione come
+
+71
+00:06:24,089 --> 00:06:29,047
+abbiamo fatto nell'esempio del semiperimetro.
+Ma possiamo anche passare delle chiamate a delle
+
+72
+00:06:29,047 --> 00:06:32,345
+funzioni come argomenti di funzioni.
+Dato che le chiamate a delle funzioni sono loro stesse.

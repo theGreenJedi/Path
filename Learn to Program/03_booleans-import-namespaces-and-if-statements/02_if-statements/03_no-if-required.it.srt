@@ -1,0 +1,229 @@
+1
+00:00:01,120 --> 00:00:04,516
+Avete visto le funzioni Booleane alla fine
+delle istruzioni.
+
+2
+00:00:04,516 --> 00:00:09,272
+Andremo ad analizzare un problema di stile
+che può presentarsi quando combinare tutte
+
+3
+00:00:09,272 --> 00:00:14,016
+e tre.
+Inizieremo scrivendo una funzione
+
+4
+00:00:14,016 --> 00:00:18,800
+che ritorna vero se il parametro è pari,
+e falso altrimenti.
+
+5
+00:00:20,880 --> 00:00:30,755
+Ad esempio, se chiamo pari con
+il valore quattro e spero di ottenere
+
+6
+00:00:30,755 --> 00:00:36,681
+vero.
+E se chiamo even 77, allora spero
+
+7
+00:00:36,681 --> 00:00:43,439
+di ottenere falso.
+Possiamo dire che inviamo un
+
+8
+00:00:43,439 --> 00:00:50,979
+int e speriamo di ottenere indietro un bool.
+La nostra testata è dove andremo a chiamare la
+
+9
+00:00:50,979 --> 00:00:57,810
+funzione come even e chiamiamo il
+parametro num dato che è un numero.
+
+10
+00:00:57,810 --> 00:01:03,780
+E, 
+quello che andiamo a fare è ritornare
+
+11
+00:01:03,780 --> 00:01:10,098
+se num è pari.
+Ora, che conosco i dettagli della mia
+
+12
+00:01:10,098 --> 00:01:15,253
+funzione, è ora di pensare a del codice
+che mi permetta di sapere se
+
+13
+00:01:15,253 --> 00:01:19,308
+un numero è pari o dispari.
+Andrò ad analizzare questo nella
+
+14
+00:01:19,308 --> 00:01:24,739
+shell di Python. E, notate che se divido
+quattro per due, non c'è alcun resto. Ma,
+
+15
+00:01:24,739 --> 00:01:29,069
+se divido tre o cinque o sette per due,
+c'è un resto.
+
+16
+00:01:29,069 --> 00:01:32,300
+Quindi andremo a provare se mod per mod due
+è zero,
+
+17
+00:01:33,180 --> 00:01:39,833
+77 mod due è uno. E quindi, ogni numero che
+io prenda è dispari se avrà
+
+18
+00:01:39,833 --> 00:01:47,183
+resto uno, quando lo divido per due.
+Continuando questo ragionamento, quattro mod due =
+
+19
+00:01:47,183 --> 00:01:53,255
+zero è vero.
+Ma, qualcosa del tipo 77 mod due = zero è
+
+20
+00:01:53,255 --> 00:01:57,399
+falso.
+Quindi, questa espressione, il numero mod due
+
+21
+00:01:57,399 --> 00:02:02,700
+uguale a zero mi darà il risultato
+che voglio.
+
+22
+00:02:03,300 --> 00:02:13,210
+Potremmo decidere di scrivere qualcosa come,
+se num mod due è zero, allora ritorna vero
+
+23
+00:02:13,210 --> 00:02:18,906
+altrimenti ritorna falso.
+Questo funzionerà sicuramente.
+
+24
+00:02:18,906 --> 00:02:23,639
+Analizziamolo.
+Farà girare questo in modo da poterlo avere lì.
+
+25
+00:02:23,639 --> 00:02:28,725
+Ora, posso accedere alla funzione is even e
+dire, hey, quattro è pari?
+
+26
+00:02:28,725 --> 00:02:30,348
+Sì, lo è.
+Cosa diciamo di tre?
+
+27
+00:02:30,350 --> 00:02:33,034
+No, è falso.
+Quindi la nostra funzione è corretta.
+
+28
+00:02:33,034 --> 00:02:37,354
+Comunque,
+il corpo della funzione è tre linee troppo
+
+29
+00:02:37,354 --> 00:02:40,510
+lungo.
+In realtà non ho bisogno di usare
+
+30
+00:02:40,510 --> 00:02:46,287
+un'istruzione if.
+Il problema qui è che, num mod due uguale
+
+31
+00:02:46,287 --> 00:02:54,420
+a zero è già un'espressione Booleana.
+Come abbiamo visto qui, quattro mod due = zero
+
+32
+00:02:54,423 --> 00:03:01,016
+produce il valore vero.
+Non ho bisogno di dire se qualcosa è vero,
+
+33
+00:03:01,016 --> 00:03:06,290
+poi ritornare vero.
+Altrimenti, se non fosse vero, ritornare
+
+34
+00:03:06,290 --> 00:03:12,313
+false.
+Posso togliere questo e
+
+35
+00:03:12,313 --> 00:03:17,700
+rimpiazzarlo con una singola riga.
+Voglio ritornare un Booleano.
+
+36
+00:03:17,700 --> 00:03:24,126
+Num mod due uguale a zero produce un
+Booleano, quindi posso semplicemente ritornare num mod
+
+37
+00:03:24,787 --> 00:03:31,151
+due uguale a zero.
+Proviamo questa nuova versione nella
+
+38
+00:03:31,151 --> 00:03:35,893
+shell.
+Ottengo ancora vero, ottengo ancora falso.
+
+39
+00:03:35,893 --> 00:03:40,595
+Quindi, la mia nuova versione funziona bene come
+quella vecchia.
+
+40
+00:03:40,595 --> 00:03:47,557
+E' più corta, e dopo un po', andrete a preferirla
+alla versione più lunga
+
+41
+00:03:47,557 --> 00:03:53,958
+dell'if e dell'else.
+Lavorando con le espressioni Booleane è una cosa
+
+42
+00:03:53,958 --> 00:03:58,376
+nuova per molti di voi, e quindi potrebbe sembrarvi
+un po' scomoda, potrebbe sembrarvi
+
+43
+00:03:58,376 --> 00:04:02,795
+un po' fantasiosa o anche disorientante.
+Giocateci per un po', vedete se riuscite 
+
+44
+00:04:02,795 --> 00:04:07,704
+a lavorare nella shell quando avete bisogno
+di un'espressione booleana, e vedete se riuscite
+
+45
+00:04:07,704 --> 00:04:12,306
+a semplificare qualcuna delle vostre istruzioni di ritorno.
+Se vi trovate a fare
+
+46
+00:04:12,306 --> 00:04:15,620
+qualcosa dove c'è da ritornare vero, altrimenti,
+ritornare falso.

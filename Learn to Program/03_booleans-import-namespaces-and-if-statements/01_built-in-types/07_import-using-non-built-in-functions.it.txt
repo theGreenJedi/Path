@@ -1,0 +1,64 @@
+Python possiede centinaia e centinaia di
+funzioni. La maggior parte non sono immediatamente
+utilizzabili come integrate. Invece, le funzioni sono salvate in
+moduli differenti, e tu devi dire a Python che vorresti usarle. In modo simile, le tue funzioni possono anche
+essere salvate in moduli differenti. Mostreremo che usando il nostro
+esempio triangle triangle.py definiremo una seconda funzione per
+calcolare l'area di un triangolo. per quando si conosce la lunghezza dei tre 
+lati, ma non la base e l'altezza. Questa volta, calcoleremo l'area del triangolo usando la formula di Erone, conosciuta
+anche come Heroes fprmula. La forma coinvolge sia il semi
+perimetro e la lunghezza dei tre lati. S è il semiperimetro di s1, s2 e s3 sono le lunghezze dei tre lati del 
+triangolo. Per scrivere questo codice abbiamo bisogno 
+di calcolare il semi- perimetro. E abbiamo già una funzione per farlo,
+definita in triangle.py E ci serve anche una funzione per calcolare
+la radice quadrata, e questa funzione esiste, ma non è
+una funzione integrata. Invece, viene definito un altro file 
+chiamato math.py Math è un modulo, come triangle Come indica il suo nome, il modulo math
+contiene molte funzioni legate alla matematica. Per vedere la lista delle funzioni, importiamo 
+il modulo per avere accesso ad esso. E quando chiameremo la funzione integrata
+dir r vedremo una funzione chiamata square root
+che è fra le funzioni disponibili, e ora possiamo lanciare help su square root
+per sapere qualcosa di più a riguardo. Quando chiediamo delle informazioni riguardo a 
+square root, dobbiamo specificare che è nel modulo Math. Lo facciamo usando il nome del modulo, seguito
+da un punto, seguito dal nome della funzione. E ci da delle informazioni riguardo alla
+funzione square root. Ora siamo pronti per scrivere la funzione. Il primo passo sarà andare a scrivere un 
+paio di esempi di chiamate a funzioni. E per farlo, abbiamo bisogno di 
+scegliere un nome di funzione significativo. Userò la parola area con la parola heron per indicare che stiamo
+usando la formula di erone. Questa funzione riceve tre lati, e in
+questo caso, mi aspetto un ritorno di 6.0. Aggiungeremo una seconda chiamata ad 
+una funzione, secondo esempio. E in questo caso, usando il mio computer,
+ho capito che dovremmo ottenere qualcosa del tipo
+27.731. Ci sarà qualche cifra in più, e non
+so esattamente quali, perché Python usa l'aritmetica a 
+virgola mobile. Ma questo mi farà capire se la funzione che stiamo scrivendo è corretta
+o meno. Ora, forniremo il tipo contratto per
+questa funzione. Passeremo in ingresso tre numeri, o int
+o float, e ritorneremo un float. Ora siamo pronti per aggiungere la
+testata della funzione. Iniziamo con la parola def e il
+nome della funzione. insieme ai tre parametri, che sto per 
+nominare side1, side2, and side3. E a questo punto, possiamo aggiungere
+la descrizione. Questa funzione ritornerà l'area 
+del triangolo con lati di lunghezza side 1, side 2 e
+side 3. Con la link, vedrete un stringa completa, ora possiamo lavorare sul
+corpo della funzione. La formula usa il semiperimetro quattro
+volte diverse. E invece di richiamare il semiperimetro quattro volte con gli stessi argomenti possiamo chiamarlo una volta e salvare il risultato
+in una variabile. Chiamerà la variabile semi, e poi
+chiameremo semiperimeter una volta per calcolarlo, con side1, side2, e
+side 3 come argomenti. Poi possiamo passare a calcolare l'area. Possiamo calcolare l'area, useremo la
+funzione square root e square root è nel modulo
+math. Quindi per accedere a square root, dobbiamo
+importare il modulo math. Lo farò al principio del mio file. E poi sarò in grado di avere accesso
+alla funzione square root. [Suono] Calcolare l'area. Chiameremo square root da quella usando
+il nome del modello, punto, e il nome della funzione, e passeremo
+in ingresso il seguente semi per semi meno side1 per semi meno side 2 per semi meno side3. E quell'area è ciò che la funzione
+ritornerà. Infine, dobbiamo testare la funzione
+chiamandola un paio di volte. Quindi, andrò a ridimensionare questa finestra, e
+farò girare il modulo. Poi ridimensionerò questa, e copierò
+e incollerò queste chiamate alla funzione. Quindi la prima chiamata dovrebbe restituire
+6.0 e lo fa. E il secondo esempio dovrebbe darci
+qualcosa come ciò che abbiamo qui, e infatti ci restituisce più
+cifre. Ora invece sto per usare questo risultato qui. Quindi questo è quello che ci 
+aspettiamo di ottenere. Non sono solo i moduli di Python quelli
+che possiamo importare. Possiamo anche importare un modulo scritto da noi. Ad esempio, se volessimo usare una delle nostre funzioni triangle in un altro modulo,
+potremmo importare triangle. Il modulo che deve essere importato deve essere
+nella stessa directory del modulo che lo sta importando.

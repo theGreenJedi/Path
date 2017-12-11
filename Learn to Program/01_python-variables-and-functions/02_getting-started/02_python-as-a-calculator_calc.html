@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Python as a Calculator
+        </title>
+    </head>
+    <body>
+    <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+    <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+      <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+      <ul>
+        <li>Chapter 2.2. Expressions and Values: Arithmetic in Python
+        </li>
+        <li>Chapter 2.3. What Is a Type?
+        </li>
+        <li>Chapter 2.6. How Python Tells You Something Went Wrong
+        </li>
+        <li style="list-style: none">
+          <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+        </li>
+      </ul>
+    </div></a>
+        <h1>
+            Python as a Calculator
+        </h1>
+        <h3>
+            Arithmetic Operators
+        </h3>
+        <table border='1'>
+            <tr>
+                <td>
+                    Operator
+                </td>
+                <td>
+                    Operation
+                </td>
+                <td>
+                    Expression
+                </td>
+                <td>
+                    English description
+                </td>
+                <td>
+                    Result
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>+</code>
+                </td>
+                <td>
+                    addition
+                </td>
+                <td>
+                    <code>11 + 56</code>
+                </td>
+                <td>
+                    11 plus 56
+                </td>
+                <td>
+                    67
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>-</code>
+                </td>
+                <td>
+                    subtraction
+                </td>
+                <td>
+                    <code>23 - 52</code>
+                </td>
+                <td>
+                    23 minus 52
+                </td>
+                <td>
+                    -29
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>*</code>
+                </td>
+                <td>
+                    multiplication
+                </td>
+                <td>
+                    <code>4 * 5</code>
+                </td>
+                <td>
+                    4 multiplied by 5
+                </td>
+                <td>
+                    20
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>**</code>
+                </td>
+                <td>
+                    exponentiation
+                </td>
+                <td>
+                    <code>2 ** 5</code>
+                </td>
+                <td>
+                    2 to the power of 5
+                </td>
+                <td>
+                    32
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>/</code>
+                </td>
+                <td>
+                    division
+                </td>
+                <td>
+                    <code>9 / 2</code>
+                </td>
+                <td>
+                    9 divided by 2
+                </td>
+                <td>
+                    4.5
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>//</code>
+                </td>
+                <td>
+                    integer division
+                </td>
+                <td>
+                    <code>9 // 2</code>
+                </td>
+                <td>
+                    9 divided by 2
+                </td>
+                <td>
+                    4
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>%</code>
+                </td>
+                <td>
+                    modulo (remainder)
+                </td>
+                <td>
+                    <code>9 % 2</code>
+                </td>
+                <td>
+                    9 mod 2
+                </td>
+                <td>
+                    1
+                </td>
+            </tr>
+        </table>
+        <h3>
+            Types <code>int</code> and <code>float</code>
+        </h3>
+        <p>
+            A <em>type</em> is a set of values and operations that can be performed on those values.
+        </p>
+        <p>
+            Two of Python's numeric types:
+        </p>
+        <ul>
+            <li>
+                <p>
+                    <code>int</code>: integer<br>
+                    For example: <code>3</code>, <code>4</code>, <code>894</code>, <code>0</code>, <code>-3</code>, <code>-18</code>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <code>float</code>: floating point number (an approximation to a real number)<br>
+                    For example: <code>5.6</code>, <code>7.342</code>, <code>53452.0</code>, <code>0.0</code>, <code>-89.34</code>, <code>-9.5</code>
+                </p>
+            </li>
+        </ul>
+        <h3>
+            Arithmetic Operator Precedence
+        </h3>
+        <p>
+            When multiple operators are combined in a single expression, the operations are evaluated in order of precedence.
+        </p>
+        <table border='1'>
+            <tr>
+                <td>
+                    Operator
+                </td>
+                <td>
+                    Precedence
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    **
+                </td>
+                <td>
+                    highest
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    - (negation)
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    *, /, //, %
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    + (addition), - (subtraction)
+                </td>
+                <td>
+                    lowest
+                </td>
+            </tr>
+        </table>
+        <h3>
+            Syntax and Semantics
+        </h3>
+        <p>
+            <em>Syntax</em>: the rules that describe valid combinations of Python symbols
+        </p>
+        <p>
+            <em>Semantics</em>: the meaning of a combination of Python symbols is the meaning of an instruction — what a particular combination of symbols does when you execute it.
+        </p>
+        <h3>
+            Errors
+        </h3>
+        <p>
+            A syntax error occurs when we an instruction with invalid syntax is executed. For example:
+        </p>
+        <pre>
+&gt;&gt;&gt; 3) + 2 * 4
+SyntaxError: invalid syntax
+</pre>
+        <p>
+            A semantic error occurs when an instruction with invalid semantics is executed. For example:
+        </p>
+        <pre>
+&gt;&gt;&gt; 89.4 / 0
+Traceback (most recent call last):
+  File "", line 1, in
+    89.4 / 0
+ZeroDivisionError: float division by zero
+</pre>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

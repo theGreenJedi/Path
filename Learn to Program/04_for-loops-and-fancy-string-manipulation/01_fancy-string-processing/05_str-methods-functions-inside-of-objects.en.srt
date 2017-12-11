@@ -1,0 +1,214 @@
+1
+00:00:00,860 --> 00:00:06,614
+So far, we have to find and use functions
+from within modules, for example module
+
+2
+00:00:06,614 --> 00:00:12,584
+Math contains functions that are related
+to Math such as square root and factorial.
+
+3
+00:00:12,584 --> 00:00:18,122
+It turns out that values, also known as
+objects, can contain functions as well,
+
+4
+00:00:18,122 --> 00:00:21,503
+functions inside of objects are called
+methods.
+
+5
+00:00:21,503 --> 00:00:24,740
+In this lecture, we'll explore string
+methods.
+
+6
+00:00:25,400 --> 00:00:28,820
+Here's a quick review.
+To use a function that has been defined
+
+7
+00:00:28,820 --> 00:00:33,657
+inside module Math,, we first import math
+which creates a variable called math that
+
+8
+00:00:33,657 --> 00:00:37,727
+refers to the module object that contains
+the various math functions.
+
+9
+00:00:37,727 --> 00:00:41,620
+And then to call one of these functions,
+we use that math variable.
+
+10
+00:00:42,320 --> 00:00:46,210
+We will do the same kind of thing to call
+string methods.
+
+11
+00:00:46,210 --> 00:00:50,100
+Here is a quote from Lewis Carroll's Alice
+in Wonderland.
+
+12
+00:00:50,400 --> 00:00:55,620
+We can get a new string that has all the
+uppercase letters replaced with their
+
+13
+00:00:55,620 --> 00:01:00,972
+lowercase equivalents by calling the lower
+method inside the white rabbit object.
+
+14
+00:01:00,972 --> 00:01:04,871
+This doesn't change the string that white
+rabbit refers to.
+
+15
+00:01:04,871 --> 00:01:09,960
+It produces a new string, so white rabbit
+still refers to the original string.
+
+16
+00:01:11,060 --> 00:01:18,080
+In order to find out which methods are
+available, we can use dir.
+
+17
+00:01:18,980 --> 00:01:25,300
+We can get the same answer if we use type
+stir, instead of variable, like rabbit.
+
+18
+00:01:26,480 --> 00:01:32,962
+We can ask for help on any of them.
+Return a copy of the string S converted to
+
+19
+00:01:32,962 --> 00:01:37,201
+lowercase.
+Let's look at the help for string method
+
+20
+00:01:37,201 --> 00:01:41,446
+count.
+Return the number of non overlapping
+
+21
+00:01:41,446 --> 00:01:48,439
+occurrences of substring sub in string S,
+starting in index start and going to index
+
+22
+00:01:48,439 --> 00:01:52,102
+end.
+These square brackets indicate optional
+
+23
+00:01:52,102 --> 00:01:56,015
+parameters.
+If I just say, string.count with one
+
+24
+00:01:56,015 --> 00:02:00,594
+argument, then it'll just look everywhere
+in the string.
+
+25
+00:02:00,594 --> 00:02:05,340
+Otherwise, it'll start at index start and
+go to index end.
+
+26
+00:02:05,780 --> 00:02:11,536
+We will use this to find out how many
+times the sub-string ate, a, t, e, appears
+
+27
+00:02:11,536 --> 00:02:17,731
+in the white rabbit quote.
+We can get a copy of a string with the
+
+28
+00:02:17,731 --> 00:02:21,812
+first letter capitalized.
+And if the string is already capitalized,
+
+29
+00:02:21,812 --> 00:02:26,326
+we just get back a copy of it.
+There is a method to find the index of the
+
+30
+00:02:26,326 --> 00:02:29,480
+first occurrence of a string inside
+another string.
+
+31
+00:02:30,860 --> 00:02:36,633
+We can specify a starting index.
+This asks for the first index of late that
+
+32
+00:02:36,633 --> 00:02:43,971
+starts at or after index seven.
+If the sub-string doesn't appear inside
+
+33
+00:02:43,971 --> 00:02:48,660
+the string, -one is returned, find is case
+sensitive.
+
+34
+00:02:49,700 --> 00:02:54,641
+There is an rfind method that searches for
+the last occurrence.
+
+35
+00:02:54,641 --> 00:03:02,744
+Rfind stands for right find Often, we want
+to remove spaces at the beginning or end
+
+36
+00:03:02,744 --> 00:03:06,785
+of a string.
+Method lstrip or left strip, returns a new
+
+37
+00:03:06,785 --> 00:03:11,087
+string but with the white space at the
+beginning removed.
+
+38
+00:03:11,087 --> 00:03:17,126
+Method rstrip operates at the right end.
+If we would like to remove white space
+
+39
+00:03:17,126 --> 00:03:22,781
+from both ends, we use the strip method.
+None of these modify the string that this
+
+40
+00:03:22,781 --> 00:03:25,360
+refers to.
+They all produce new strings.
+
+41
+00:03:25,360 --> 00:03:29,857
+This is the end of our whirlwind tour of
+strings and string methods.
+
+42
+00:03:29,857 --> 00:03:32,900
+We won't introduce every string method to
+you.
+
+43
+00:03:32,900 --> 00:03:38,720
+You can and should use dir and help to
+find out what other string methods exist.

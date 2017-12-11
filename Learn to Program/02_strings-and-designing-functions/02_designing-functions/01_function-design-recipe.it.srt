@@ -1,0 +1,378 @@
+1
+00:00:00,096 --> 00:00:04,044
+In questa lezione, andremo a mostrarvi una
+serie di passi
+
+2
+00:00:04,044 --> 00:00:08,004
+detti ricetta di disegno,
+che potete usare per scrivere le vostre
+
+3
+00:00:08,004 --> 00:00:10,092
+funzioni.
+Ecco la nostra funzione triangle area.
+
+4
+00:00:10,092 --> 00:00:15,093
+Abbiamo aggiunto una parte alla doc string.
+Esempi di uso, e valori di ritorno
+
+5
+00:00:15,093 --> 00:00:18,099
+attesi.
+La definizione della funzione ha cinque parti.
+
+6
+00:00:18,099 --> 00:00:23,054
+Ha la testata, che include il nome della
+funzione e i parametri.
+
+7
+00:00:23,054 --> 00:00:27,084
+Ha il pipe contract.
+Ci si aspetta che i pipe dei valori siano
+
+8
+00:00:27,084 --> 00:00:32,046
+passati ai parametri, come il
+tipo di ritorno della funzione.
+
+9
+00:00:32,046 --> 00:00:36,075
+Hal la stessa descrizione.
+Ha un paio di esempi di uso di questa
+
+10
+00:00:36,075 --> 00:00:40,000
+funzione.
+E infine, ha il corpo della funzione.
+
+11
+00:00:40,000 --> 00:00:43,033
+La nostra ricetta di disegno vi aiuta a sviluppare
+quelle cinque parti.
+
+12
+00:00:43,033 --> 00:00:47,096
+Più una aggiuntiva, dove testiamo che la nostra funzione 
+lavori correttamente una volta che l'abbiamo scritta.
+
+13
+00:00:47,096 --> 00:00:51,092
+Spiegheremo la ricetta di disegno mentre
+sviluppiamo un'altra funzione.
+
+14
+00:00:55,068 --> 00:00:59,067
+Ecco il problema su cui lavoreremo: la
+misurazione delle temperature negli Stati Uniti in
+
+15
+00:00:59,067 --> 00:01:02,003
+Fahrenheit, e le misurazioni del Canada in
+Celsius.
+
+16
+00:01:02,003 --> 00:01:06,023
+Quando ci si sposta fra le due nazioni,
+è utile avere una funzione di conversione.
+
+17
+00:01:06,023 --> 00:01:09,059
+Scriveremo una funzione che converte da
+Fahrenheit a Celsius.
+
+18
+00:01:09,059 --> 00:01:13,091
+Il primo passo che faremo è di effettuare
+alcuni esempi di uso della vostra funzione
+
+19
+00:01:13,091 --> 00:01:17,061
+che state per scrivere.
+Pensate a cosa volete che faccia la vostra funzione.
+
+20
+00:01:17,061 --> 00:01:19,093
+E scrivete uno o due esempi di chiamata della
+
+21
+00:01:19,093 --> 00:01:23,068
+funzione che volete scrivere.
+Avrete bisogno di un nome per la vostra
+
+22
+00:01:23,068 --> 00:01:27,085
+funzione, potete sempre cambiarlo più avanti.
+I nomi delle funzioni sono spesso verbi o frasi
+
+23
+00:01:27,085 --> 00:01:31,049
+verbali perché svolgono delle cose.
+Quindi, se siete bloccati, rispondete alla domanda,
+
+24
+00:01:31,049 --> 00:01:35,003
+cosa fa la funzione?
+La nostra risposta è, converte da
+
+25
+00:01:35,003 --> 00:01:38,087
+Fahrenheit a Celsius.
+Ma è molto lungo, quindi userò
+
+26
+00:01:38,087 --> 00:01:42,073
+convert to Celsius.
+Potete sempre migliorare il nome più avanti.
+
+27
+00:01:42,073 --> 00:01:47,065
+Cosa vogliamo che accada quando chiamiamo
+convert to Celsius su 32 gradi
+
+28
+00:01:47,065 --> 00:01:50,012
+Fahrenheit?
+Speriamo di ottenere zero.
+
+29
+00:01:50,012 --> 00:01:54,047
+Andremo ad aggiungere le parentesi angolari, in
+modo che sembri che abbia digitato nella
+
+30
+00:01:54,047 --> 00:01:58,016
+shell di Python.
+Aggiungiamo ancora un esempio, per convertire il
+
+31
+00:01:58,016 --> 00:02:02,038
+punto di ebollizione.
+Il prossimo passo è capire il tipo
+
+32
+00:02:02,038 --> 00:02:05,022
+in ingresso.
+Di che tipo sono i parametri?
+
+33
+00:02:05,022 --> 00:02:08,056
+E qual è il tipo del valore che viene
+ritornato.
+
+34
+00:02:08,056 --> 00:02:13,059
+Sembra che vogliamo che convert to Celsius
+lavori con gli interi, ma possiamo immaginare
+
+35
+00:02:13,059 --> 00:02:18,037
+che dovrebbe lavorare anche con i float.
+Useremo la parola number per
+
+36
+00:02:18,037 --> 00:02:23,009
+indicare che posso gestirli entrambi.
+E presumibilmente, ritornerà anche un
+
+37
+00:02:23,009 --> 00:02:25,079
+numero.
+Ora che avete scritto qualche chiamata, e
+
+38
+00:02:25,079 --> 00:02:30,057
+avete un'idea di quali dovrebbero essere
+i tipi, è ora di scrivere l'intestazione
+
+39
+00:02:30,057 --> 00:02:34,006
+della funzione.
+Scegliamo un nome significativo per il parametro in modo
+
+40
+00:02:34,006 --> 00:02:38,060
+che gli altri programmatori abbiamo una vita più facile
+nel capire la nostra funzione.
+
+41
+00:02:38,060 --> 00:02:42,003
+Potete anche modificare il nome della funzione
+qui se volete.
+
+42
+00:02:42,052 --> 00:02:49,056
+Completiamo la testata con le informazioni che conosciamo.
+Sappiamo che il nome della funzione è convert
+
+43
+00:02:49,056 --> 00:02:55,053
+to Celsius e sappiamo che il nostro parametro
+è il numero di gradi Fahrenheit.
+
+44
+00:02:55,053 --> 00:02:59,006
+Quindi, useremo Fahrenheit come nome del 
+nostro parametro.
+
+45
+00:02:59,075 --> 00:03:04,087
+Tutto ciò che sta sotto si suppone stia all'interno
+di una scatola, quindi facciamo attenzione a
+
+46
+00:03:04,087 --> 00:03:07,075
+questo ora.
+A questo punto, dovreste avere un'idea molto precisa
+
+47
+00:03:07,075 --> 00:03:12,092
+su cosa volete che faccia la funzione.
+E' ora di scrivere una descrizione, su cosa
+
+48
+00:03:12,092 --> 00:03:16,013
+fa la nostra funzione.
+Ritorna il numero di gradi Celsius
+
+49
+00:03:16,013 --> 00:03:20,072
+equivalenti ai gradi Fahrenheit.
+Notate che abbiamo menzionato il parametro
+
+50
+00:03:20,072 --> 00:03:24,019
+esplicitamente, e che abbiamo anche descritto
+il valore di ritorno.
+
+51
+00:03:24,019 --> 00:03:27,008
+Questo p molto importante in tutta
+la documentazione.
+
+52
+00:03:27,034 --> 00:03:32,002
+Ora che avete un'idea precisa su cosa deve
+fare la vostra funzione, e che avete
+
+53
+00:03:32,002 --> 00:03:36,070
+deciso il nome della funzione e dei
+parametri, potete scrivere il codice per la
+
+54
+00:03:36,070 --> 00:03:39,064
+funzione.
+Questo sarà molto più semplice da fare se voi
+
+55
+00:03:39,064 --> 00:03:44,008
+avete speso del tempo per pensare agli esempi,
+alla testata e alla descrizione.
+
+56
+00:03:44,008 --> 00:03:49,001
+Come abbiamo imparato a scuola, sottraiamo 32
+dai Fahrenheit, e poi moltiplichiamo per
+
+57
+00:03:49,001 --> 00:03:52,026
+cinque-noni.
+Non lo abbiamo ancora salvato, e avremmo davvero
+
+58
+00:03:52,026 --> 00:03:55,058
+dovuto.
+Lo andremo a chiamare
+
+59
+00:03:57,074 --> 00:04:03,037
+temperature.py.
+E' ora di testare la nostra funzione sugli
+
+60
+00:04:03,037 --> 00:04:06,081
+esempi.
+Dato che avete già capito quale dovrebbe
+
+61
+00:04:06,081 --> 00:04:12,047
+essere il valore di ritorno, potete dire immediatamente
+se il vostro codice, o magari gli esempi
+
+62
+00:04:12,047 --> 00:04:15,003
+non sono corretti.
+Faremo girare questo modulo.
+
+63
+00:04:15,030 --> 00:04:22,083
+Impostiamo le finestre in modo da vederle entrambe 
+in una volta, e poi possiamo semplicemente copiare
+
+64
+00:04:22,083 --> 00:04:29,016
+e incollare i nostri esempi.
+E vediamo che ci aspettiamo zero, ma
+
+65
+00:04:29,016 --> 00:04:34,072
+otteniamo 14.2 periodico.
+E cosa possiamo dire dell'altro?
+
+66
+00:04:38,089 --> 00:04:44,061
+No, nemmeno questo è giusto.
+Potreste aver già visto il problema.
+
+67
+00:04:44,061 --> 00:04:51,055
+La sottrazione ha una precedenza minore sia
+della moltiplicazione che della divisione e quindi
+
+68
+00:04:51,055 --> 00:04:58,085
+la sottrazione avviene alla fine dopo
+aver calcolato 32 per cinque diviso per
+
+69
+00:04:58,085 --> 00:05:02,089
+nove.
+Lo sistemiamo aggiungendo le parentesi, salvando,
+
+70
+00:05:02,089 --> 00:05:08,037
+lanciando di nuovo.
+E poi provando nuovamente i nostri esempi.
+
+71
+00:05:09,003 --> 00:05:15,031
+Abbiamo ottenuto all'incirca ciò che ci aspettavamo nei
+nostri esempi, eccetto per il fatto che riceviamo
+
+72
+00:05:15,031 --> 00:05:20,085
+un float invece che un int.
+Questo perché la divisione produce sempre un
+
+73
+00:05:20,085 --> 00:05:26,746
+float e i vari operatori producono un float
+se uno dei due operando non è un float.
+
+74
+00:05:26,746 --> 00:05:33,770
+Il problema non è con i nostri calcoli.
+E' nei nostri esempi, e nel nostro contract.
+
+75
+00:05:33,770 --> 00:05:39,191
+Number è un tipo di ritorno troppo generico.
+Li sistemeremo entrambi.
+
+76
+00:05:39,191 --> 00:05:48,329
+Facciamo girare il nostro modulo ancora una volta, chiamiamo 
+la help sulla nostra funzione, e divertiamoci nella nostra

@@ -1,0 +1,125 @@
+In una lezione precedente abbiamo usato un
+ciclo for per iterare su un carattere di una stringa. Ma se non volessimo effettuare un loop 
+su ogni carattere? Magari vogliamo effettuare un loop solo finché
+non troviamo una vocale. O magari non vogliamo lavorare per niente con
+le stringhe. Ad esempio, potremmo voler ripetere un compito
+finché l'utente non inserisce un valore particolare. In questa lezione, vedremo i cicli while
+per effettuare questi compiti. Per cominciare, ricordiamo la forma generica
+di un'istruzione if. Se un'istruzione si basa su un'espressione
+Booleana. Quando quell'espressione è vera, il corpo
+dell'istruzione if viene eseguito. Se l'espressione Booleana è falsa, allora [Suono] procede all'istruzione che segue l'if
+senza eseguire il suo corpo. Un ciclo while ha una forma simile ad un'istruzione 
+if, che si basa anch'essa su un'espressione Booleana, e se l'espressione Booleana
+è vera viene eseguito il corpo del ciclo while. Comunque, a differenza dell'if il ciclo while
+continua a questo punto e controlleremo l'espressione
+Booleana un'altra volta. Se la condizione del ciclo è vera, allora
+il corpo del ciclo while viene nuovamente eseguito e questo processo viene 
+ripetuto finché la condizione del ciclo non diventa falsa. Il primo [MUSICA] esempio di un ciclo while coinvolge la 
+variabile num. Num riceve il valore 2. Il ciclo while [MUSICA] continuerà ad essere eseguito finché num
+è < 100. Nel corpo [MUSICA] del ciclo num viene raddoppiato, e viene
+stampato num. Con num avente 2 come valore iniziale,
+questo ciclo Y viene eseguito 6 volte. Num riceve 4, 8, 16, 32, 64, e infine
+128. A questo punto, la condizione del ciclo
+Y è falsa. Ora se num ottiene il valore 10, e facciamo
+girare nuovamente questo ciclo Y. sono richieste solo quattro iterazioni
+del ciclo while prima che la condizione diventi falsa quindi con quattro iterazioni io intendo che il corpo del ciclo viene eseguito 
+4 volte. A questo punto, num fa riferimento al
+valore 160 e la condizione del ciclo è falsa. Se a questo punto, facciamo girare nuovamente 
+il ciclo while il corpo non viene mai eseguito dato che la condizione del ciclo è falsa
+fin dall'inizio. Ora affrontiamo questo veloce problema
+che ho menzionato prima, che è effettuare un ciclo sui caratteri di una stringa
+finché non si trova una vocale. Per prima cosa, ricordiamo come abbiamo
+iterato sulla stringa usando un ciclo for. Noi abbiamo usato [MUSICA] il ciclo for per i caratteri di una stringa S e andrò 
+semplicemente a stampare quel carattere. Quando questo ciclo finisce, il carattere ha
+un valore iniziale della stringa S alla posizione 
+zero. Poi si prosegue su S finché non viene
+raggiunta la fine della stringa. Quando scriviamo il nostro ciclo Y, dobbiamo
+specificare quegli indici. Quindi inizierò creando una variabile i
+che assume il valore zero p che rappresenta il primo indice della
+stringa sulla quale effettuiamo il ciclo. Ora la condizione del ciclo while, vogliamo
+andare avanti finché non incontriamo una vocale
+quindi ficnhé la stringa alla posizione i non è una vocale.
+Quindi finché non sta nell'insieme delle a e i o u minuscole e delle A E I O U
+maiuscole. Quindi, entreremo nel corpo del ciclo
+e eseguiremo il corpo del ciclo. Nel ciclo, stamperò il carattere,
+la stringa di posizione i. Prima di uscire dal ciclo Y, abbiamo bisogno
+di aumentare l'indice, quindi il suo valore deve aumentare.
+Otterremo il valore di i più uno. Quindi ci spostiamo al prossimo carattere della
+stringa. In questo caso il ciclo while viene eseguito una volta dato che il carattere zero non è
+una vocale. E poi la seconda volte che viene controllata la
+condizione del ciclo while, asset one fa riferimento ad e, che è una sottostringa della
+stringa delle vocali. Quindi la condizione del ciclo while è falsa
+e si esce dal ciclo while. Eseguiamo [MUSICA] lo stesso ciclo.
+Questa volta [MUSICA] usando la stringa there. Impostando i a zero, ancora una volta, e ora
+eseguiamo il ciclo while. Questa volta il corpo del ciclo while viene
+eseguito due volte. Una volta per la consonante t, la seconda volta
+per la consonante h, e poi viene trovata la e, così la condizione del ciclo Y è falsa
+e si esce dal ciclo. Cosa accadrebbe se ci fossero solo consonanti
+nella nostra [MUSICA] stringa. In questo caso, le tre consonanti sono
+mostrate e poi avviene un errore di indice. S(0) fa riferimento ad 'x'.
+S(1) fa riferimento ad 'y' e s(2) fa riferimento a
+'z'. Ma il valore corrente di i è 3 e la
+3 non è una posizione legale, non è un indice valido
+per la stringa s quindi avviene un errore di indice. Non abbiamo specificato quando smettere
+di esaminare i caratteri di s. E quindi abbiamo raggiunto la fine della stringa e abbiamo cercato di accedere ad un indice che
+non esiste. Per prevenire questo, abbiamo bisogno di una
+seconda parte nella condizione Booleana. Che è controllare che i sia all'interno dei
+confini della stringa. Per assicurarci che sia minore della lunghezza.
+Facciamolo ora. Daremo ad i il valore zero. S riceve la stringa, x y z e ora eseguiamo il
+ciclo while. Prima di eseguirla però, andremo prima a
+controllare per assicurarci che i sia minore della lunghezza 
+della stringa. E poi controlleremo per vedere se s e i è una sotto stringa della
+stringa delle vocali. Notate che ho messo prima questa 
+condizione. Vogliamo assicurarci di aver controllato
+che i sia minore della lunghezza prima di cercare di accedere
+alla stringa in posizione i. Python esegue una valutazione pigra di
+questa operazione and, quindi se il primo operando è falso,
+il secondo non viene valutato. Questo significa che se i non è minore
+della lunghezza della stringa, allora N risulta falso a questo punto e non cercheremo
+di accedere alla stringa in posizione i. Quindi in questo caso le tre costanti sono
+mostrate e a questo punto la condizione che i sia minore della lunghezza
+della stringa è falsa, il ciclo viene terminato. [Ma se qualcuno mi tocca l'amante,
+divento una tigre!] Usiamo qualche idea del ciclo while per
+un altro problema. Implementeremo la funzione up to vowel. [Ma se qualcuno mi tocca l'amante,
+divento una tigre!] Ha un parametro stringa e ritornerà una stringa. Andrà a ritornare una sotto stringa del
+parametro stringa s dall'indice zero fino a, ma non includendo
+la prima vocale. Quindi invece di stampare nel modo in cui abbiamo 
+fatto nel nostro esempio nella shell, vogliamo accumulare la sotto stringa
+e ritornarla. Useremo lo schema dell'accumulatore visto
+in precedenza per risolvere questo problema.
+La variabile [MUSICA] before a vowel inizialmente farà riferimento
+ad una stringa vuota e accumuleremo la stringa che
+deve essere ritornata in before a vowel. Il ciclo while che stiamo per usare è esattamente lo stesso che abbiamo scritto
+prima. Vogliamo iterare sui caratteri della stringa
+iniziando dalla posizione zero. Finché non incontriamo una vocale o finché
+viene raggiunta la fine della stringa. All'interno del corpo del ciclo vogliamo [MUSICA] aggiungere all'accumulatore before a vowel.
+Quindi [MUSICA] before a vowel, otterremo il suo valore attuale 
+più il carattere, che è il carattere in posizione i
+della stringa s. Dobbiamo incrementare l'indice, aggiungendogli
+uno, in modo da poterci poi spostare al carattere successivo. E al termine di questa funzione viene
+ritornata la sotto stringa. Quindi verrà ritornata before a vowel. Ora facciamo girare questo codice. E chiamiamo la funzione su Michelle. Per questa prima chiamata della funzione ci
+aspettiamo di ottenere h. Per la seconda, dove c'è l'argomento,
+dovrebbe essere ritornata l'h. E poi il terzo esempio che contiene solamente [MUSICA] un carattere, solo consonanti. Nessuna vocale,
+viene ritornata [MUSICA] l'intera stringa. Implementiamo ancora una funzione. Il nome di questa funzione è get answer
+e questa funzione chiederà all'utente una domanda aspettandosi una
+risposta sì o no. L'utente fornirà la risposta. E vogliamo continuare a proporla finché
+la risposta inserita è sì o no. Quindi potrebbe richiedere un tentativo o dieci, o 100
+tentativi prima che l'utente inserisca la risposta corretta. Alla fine ritorneremo la risposta 
+fornita dall'utente. Implementiamo questa funzione iniziando
+con i prompt, quindi vorremmo richiamare input usando il prompt passato come argomento per ottenere
+la risposta, e il risultato viene inserito nella variabile
+answer. Specifichiamo ora la condizione sotto la quale
+vogliamo riproporre la domanda all'utente. Il corpo del ciclo while sarà un duplicato
+del codice precedente che è una singola, la singola riga di codice
+che mostra all'utente la domanda. Ci piacerebbe continuare ad effettuare il prompt
+quando la risposta non è quella che ci aspettiamo. Quindi se la risposta è sì o no, ci fermiamo. E se poi la risposta non è sì o no, il ciclo deve continuare. Alla fine del ciclo while, una volta che l'esecuzione è terminata, viene ritornata
+answer. Potreste aver notato che non ho incluso
+nessun esempio di chiamata nella doc string. Questo perché l'esecuzione di questa
+funzione si basa sull'input dell'utente, e non posso predire cosa ritornerà la funzione dato che dipende da cosa ha inserito
+l'utente. Facciamola girare ora in modo da vedere che si comporta, che si comporta come
+previsto. Chiamiamo [MUSICA] get anwer, passerò il prompt, e ci viene proposta una domanda.
+Se rispondo maybe, ci viene [MUSICA] riproposta la domanda, [MUSICA] è tardi, ci viene riproposta di nuovo. [MUSICA] Per niente, ci vien riproposta ancora.
+Oops. Finalmente inserisco Yes, e yes viene ritornato
+dalla funzione. Proviamola ancora una volta. Questa volta andrò a rispondere immediatamente
+no, in modo che il corpo del ciclo while non sia eseguito, dato che la condizione del
+while sarà falsa fin dalla prima volta. In questo caso la funzione ritorna no.

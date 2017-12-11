@@ -1,0 +1,243 @@
+1
+00:00:01,020 --> 00:00:06,517
+The Python Visualizer has limitations, it
+does not allow import statements and it
+
+2
+00:00:06,517 --> 00:00:11,132
+stops tracing after 500 steps.
+Idle comes with a debugger, which is a
+
+3
+00:00:11,132 --> 00:00:15,340
+tool much like the visualizer, but without
+the pretty pictures.
+
+4
+00:00:16,000 --> 00:00:21,113
+Here we see functions convert to minutes
+and convert to seconds, which we explored
+
+5
+00:00:21,113 --> 00:00:25,326
+in last week's lectures.
+Turn on this in IDLE's debugger.
+
+6
+00:00:25,326 --> 00:00:31,200
+We're going to make sure that the Python
+shell window is on top, and then select
+
+7
+00:00:31,200 --> 00:00:35,386
+debug-, debugger.
+This opens a window called debug control.
+
+8
+00:00:35,386 --> 00:00:41,260
+I am now going to, to resize this so that
+we can see everything as we execute.
+
+9
+00:00:41,260 --> 00:00:44,637
+We're going to check the check box for
+source.
+
+10
+00:00:44,637 --> 00:00:50,658
+Then, we're going to come back here to our
+module that we want to debug and select
+
+11
+00:00:50,658 --> 00:00:55,876
+run, run module.
+This middle area displays the call stack,
+
+12
+00:00:55,876 --> 00:00:59,852
+or at least the functions that have been
+called.
+
+13
+00:00:59,852 --> 00:01:04,160
+Down here are the variables inside the
+current call.
+
+14
+00:01:04,440 --> 00:01:10,215
+Notice that the variable for built ins is
+there, as our three other variables that
+
+15
+00:01:10,215 --> 00:01:15,779
+we haven't discussed yet in this course.
+Step is like forward in the visualizer.
+
+16
+00:01:15,779 --> 00:01:20,427
+We'll define our two functions.
+Notice we have variables down here.
+
+17
+00:01:20,427 --> 00:01:25,780
+All for them, referring to functions.
+This right here, that's a memory address.
+
+18
+00:01:26,120 --> 00:01:31,533
+You'll notice it does letters in it.
+That's because it's base sixteen, which
+
+19
+00:01:31,533 --> 00:01:36,873
+uses in, in a lot of programming the
+numbers zero through nine, plus the
+
+20
+00:01:36,873 --> 00:01:41,060
+letters A, B, C, D, E and F, for a total
+of sixteen characters.
+
+21
+00:01:42,340 --> 00:01:46,389
+Over here we see there's a grey highlight
+on the current line.
+
+22
+00:01:46,389 --> 00:01:51,550
+And line twenty happens to be that line.
+So we're told here which line is being
+
+23
+00:01:51,550 --> 00:01:54,816
+executed.
+When we step we're gonna do the function
+
+24
+00:01:54,816 --> 00:01:59,552
+called convert to seconds.
+We only have parameters num hours
+
+25
+00:01:59,552 --> 00:02:02,761
+available so far seconds convert to
+seconds.
+
+26
+00:02:02,761 --> 00:02:08,175
+If we want to see the, the variables in
+the module, we can just click there and
+
+27
+00:02:08,175 --> 00:02:12,386
+that switches the view for the local
+speed, the local variables.
+
+28
+00:02:12,386 --> 00:02:18,001
+We're gonna back to convert to seconds and
+step into the call to convert to minutes.
+
+29
+00:02:18,001 --> 00:02:22,480
+We now have three items on the call stack,
+involved in that program.
+
+30
+00:02:22,480 --> 00:02:25,994
+Let's step one more line to define our
+variable minutes.
+
+31
+00:02:25,994 --> 00:02:29,759
+Minutes is now 120.
+Just to check, we're gonna go back to the
+
+32
+00:02:29,759 --> 00:02:34,779
+frame for convert to seconds, and notice
+that it only has one variable num hours.
+
+33
+00:02:34,779 --> 00:02:39,674
+The reason is, we haven't finished this
+call to convert to minutes, and so this
+
+34
+00:02:39,674 --> 00:02:44,925
+variable minutes has not yet been created.
+I'm going to switch the view back to, the
+
+35
+00:02:44,925 --> 00:02:48,179
+top frame.
+And, when I step, it's actually just going
+
+36
+00:02:48,179 --> 00:02:53,346
+to execute the return statement all at
+once including popping the frame from the
+
+37
+00:02:53,346 --> 00:02:56,281
+stack.
+We don't get to see the return value
+
+38
+00:02:56,281 --> 00:03:02,959
+before the return happens.
+So we're back in convert to seconds, we're
+
+39
+00:03:02,959 --> 00:03:10,221
+about to evaluate 120 times 60 and assign
+the result to seconds, there we go 7,200
+
+40
+00:03:10,221 --> 00:03:16,699
+and we're going to return 7,200 back to.
+This call to convert to seconds, and.
+
+41
+00:03:16,699 --> 00:03:20,184
+It's going to create a variable seconds,
+in the.
+
+42
+00:03:20,184 --> 00:03:25,670
+Stack frame for the main module.
+Switching our view back and clicking step,
+
+43
+00:03:25,670 --> 00:03:29,526
+causes our.
+Program to end because, this was the last
+
+44
+00:03:29,526 --> 00:03:34,396
+statement in the program.
+Let's switch back to there and notice that
+
+45
+00:03:34,396 --> 00:03:40,358
+we do have a variable seconds and created.
+So it's a little confusing at the end of a
+
+46
+00:03:40,358 --> 00:03:45,900
+program because if on a return statement,
+and that return statement is inside a
+
+47
+00:03:45,900 --> 00:03:51,582
+function that is on the last instruction
+that gets executed, the program will end
+
+48
+00:03:51,582 --> 00:03:57,193
+and this stackframe won't be removed
+because the debugger doesn't update at the
+
+49
+00:03:57,193 --> 00:04:00,140
+end of a program once the program is done.

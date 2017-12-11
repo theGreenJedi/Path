@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Built-in Functions
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chaper 3.1. Functions That Python Provides
+                </li>
+                <li>Chaper 3.2. Memory Addresses: How Python Keeps Track of Values
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Built-in Functions
+        </h1>
+        <h3>
+            Function Call
+        </h3>
+        <p>
+            The general form of a function call:
+        </p>
+        <blockquote>
+            <p>
+                <em><code>function_name(arguments)</code></em>
+            </p>
+        </blockquote>
+        <p>
+            The rules for executing a function call:
+        </p>
+        <ol>
+            <li>Evaluate the arguments.
+            </li>
+            <li>Call the function, passing in the argument values.
+            </li>
+        </ol>
+        <p>
+            Terminology:
+        </p>
+        <ul>
+            <li>
+                <em>Argument</em>: a value given to a function
+            </li>
+            <li>
+                <em>Pass</em>: to provide to a function
+            </li>
+            <li>
+                <em>Call</em>: ask Python to evaluate a function
+            </li>
+            <li>
+                <em>Return</em>: pass back a value
+            </li>
+        </ul>
+        <p>
+            Example function calls:
+        </p>
+        <pre>
+&gt;&gt;&gt; abs(-23)
+23
+&gt;&gt;&gt; abs(56.24)
+56.24
+</pre>
+        <h3>
+            Function <code>dir</code>
+        </h3>
+        <p>
+            Python has a set of built-in functions. To see the list of built-in functions, run <code>dir(__builtins__)</code>:
+        </p><code>&gt;&gt;&gt; dir(__builtins__)&lt; br/&gt; ['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException', 'BufferError', 'BytesWarning', 'DeprecationWarning', 'EOFError', 'Ellipsis', 'EnvironmentError', 'Exception', 'False', 'FloatingPointError', 'FutureWarning', 'GeneratorExit', 'IOError', 'ImportError', 'ImportWarning', 'IndentationError', 'IndexError', 'KeyError', 'KeyboardInterrupt', 'LookupError', 'MemoryError', 'NameError', 'None', 'NotImplemented', 'NotImplementedError', 'OSError', 'OverflowError', 'PendingDeprecationWarning', 'ReferenceError', 'ResourceWarning', 'RuntimeError', 'RuntimeWarning', 'StopIteration', 'SyntaxError', 'SyntaxWarning', 'SystemError', 'SystemExit', 'TabError', 'True', 'TypeError', 'UnboundLocalError', 'UnicodeDecodeError', 'UnicodeEncodeError', 'UnicodeError', 'UnicodeTranslateError', 'UnicodeWarning', 'UserWarning', 'ValueError', 'Warning', 'ZeroDivisionError', '_', '__build_class__', '__debug__', '__doc__', '__import__', '__name__', '__package__', 'abs', 'all', 'any', 'ascii', 'bin', 'bool', 'bytearray', 'bytes', 'callable', 'chr', 'classmethod', 'compile', 'complex', 'copyright', 'credits', 'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval', 'exec', 'exit', 'filter', 'float', 'format', 'frozenset', 'getattr', 'globals', 'hasattr', 'hash', 'help', 'hex', 'id', 'input', 'int', 'isinstance', 'issubclass', 'iter', 'len', 'license', 'list', 'locals', 'map', 'max', 'memoryview', 'min', 'next', 'object', 'oct', 'open', 'ord', 'pow', 'print', 'property', 'quit', 'range', 'repr', 'reversed', 'round', 'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super', 'tuple', 'type', 'vars', 'zip']</code>
+        <h3>
+            Function <code>help</code>
+        </h3>
+        <p>
+            To get information about a particular function, call <code>help</code> and pass the function as the argument. For example:
+        </p>
+        <pre>
+&gt;&gt;&gt; help(abs)
+Help on built-in function abs in module builtins:
+abs(...)
+    abs(number) -&gt; number
+
+    Return the absolute value of the argument.
+</pre>
+        <h3>
+            Optional arguments
+        </h3>
+        <p>
+            In the description of function <code>pow</code> below, the square brackets around <code>[, z]</code> indicate that the third argument is optional:
+        </p>
+        <pre>
+&gt;&gt;&gt; help(pow)
+Help on built-in function pow in module builtins:
+
+pow(...)
+    pow(x, y[, z]) -&gt; number
+
+    With two arguments, equivalent to x**y.  With three arguments,
+    equivalent to (x**y) % z, but may be more efficient (e.g. for longs).
+</pre>
+        <p>
+            Function <code>pow</code> can be called with either two or three arguments:
+        </p>
+        <pre>
+&gt;&gt;&gt; pow(2, 5)
+32
+&gt;&gt;&gt; pow(2, 5, 3)
+2
+</pre>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

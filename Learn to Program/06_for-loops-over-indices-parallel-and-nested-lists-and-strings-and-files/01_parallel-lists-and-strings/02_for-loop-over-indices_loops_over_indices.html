@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Linux https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            <code>for</code> loops over indices
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 9.4 Processing Lists Using Indices
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            <code>for</code> loops over indices
+        </h1>
+        <h3>
+            <code>range</code>
+        </h3>
+        <p>
+            Here is the top part of the help for
+            <code>range</code>:
+        </p>
+        <pre>
+class range(object)
+ |  range([start,] stop[, step]) -&gt; range object
+ |  
+ |  Returns a virtual sequence of numbers from start to stop by step.
+        
+</pre>
+        <p>
+            The <code>stop</code> value is not included.
+        </p>
+        <p>
+            <code>range</code> is typically used in a
+            <code>for</code> loop to iterate over a sequence of
+            numbers. Here are some examples:
+        </p>
+        <pre>
+# Iterate over the numbers 0, 1, 2, 3, and 4.
+for i in range(5):
+            
+</pre>
+        <pre>
+# Iterate over the numbers 2, 3, and 4.
+for i in range(2, 5):
+            
+</pre>
+        <pre>
+# Iterate over the numbers 3, 6, 9, 12, 15, and 18.
+for i in range(3, 20, 3):
+            
+</pre>
+        <h3>
+            Iterating over the indices of a list
+        </h3>
+        <p>
+            Because <code>len</code> returns the number of items in
+            a list, it can be used with <code>range</code> to
+            iterate over all the indices. This loop prints all the
+            values in a list:
+        </p>
+        <pre>
+for i in range(len(lst)):
+    print(lst[i])
+</pre>
+        <p>
+            This also gives us flexibility to process only part of
+            a list. For example, We can print only the first half
+            of the list:
+        </p>
+        <pre>
+for i in range(len(lst) // 2):
+    print(lst[i])
+</pre>
+        <p>
+            Or every other element:
+        </p>
+        <pre>
+for i in range(0, len(lst), 2):
+    print(lst[i])
+</pre>
+        <h3>
+            Not "What" but "Where"
+        </h3>
+        <p>
+            Previously, we have written loops over characters in a
+            string or items in a list. However, sometimes there are
+            problems where knowing the value of the items in a list
+            or the characters in a string is not enough; we need to
+            know where it occurs (i.e. its index).
+        </p>
+        <h3>
+            Example 1
+        </h3>
+        <p>
+            The first example is described below:
+        </p>
+        <pre>
+def count_adjacent_repeats(s):
+    ''' (str) -&gt; int
+    
+    Return the number of occurrences of a character and an adjacent character
+    being the same.
+    
+    &gt;&gt;&gt; count_adjacent_repeats('abccdeffggh')
+    3
+    '''
+    
+    repeats = 0
+    
+    for i in range(len(s) - 1):
+        if s[i] == s[i + 1]:
+            repeats = repeats + 1
+    
+    return repeats
+</pre>
+        <p>
+            We want to compare a character in the string with
+            another character in the string beside it. This is why
+            we iterate over the indices because the location is
+            important, and only knowing the value of the character
+            does not provide us with enough information. This is
+            how we are able to count repeated characters in a
+            string. We can't execute the body of the loop if
+            <code>i</code> is <code>len(s) - 1</code> because we
+            compare to <code>s[i + 1]</code>, and that would
+            produce an <code>IndexError</code>.
+        </p>
+        <h3>
+            Example 2
+        </h3>
+        <p>
+            The second example is described below:
+        </p>
+        <pre>
+def shift_left(L):
+    ''' (list) -&gt; NoneType
+    
+    Shift each item in L one position to the left and shift the first item to
+    the last position.
+    
+    Precondition: len(L) &gt;= 1
+    
+    &gt;&gt;&gt; shift_left(['a', 'b', 'c', 'd'])
+    '''
+    
+    first_item = L[0]
+    
+    for i in range(len(L) - 1):
+        L[i] = L[i + 1]
+    
+    L[-1] = first_item
+</pre>
+        <p>
+            For the same reasons as above, merely knowing the value
+            of the items in the list is not enough since we need to
+            know where the items are located; we need to know the
+            index (position) of the item in the list.
+        </p>
+        <hr>
+        <center>
+            Jennifer Campbell &bull; Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

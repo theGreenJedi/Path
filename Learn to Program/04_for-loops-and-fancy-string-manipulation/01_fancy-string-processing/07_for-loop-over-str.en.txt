@@ -1,0 +1,102 @@
+Earlier we saw that each character of
+a string has an index associated with it. And we learned how to access
+each character using its index. In this lecture we will
+use something called a for loop to access the characters of
+a string in turn, one at a time. To begin I'm going to make
+an example string, hi there. And we'll use this string in our first for loop where we're going to print
+each character of it one at a time. Char, that variable C-H-A-R,
+is short for character. And it's just a variable name. The value of char will
+change as the loop executes. In the first iteration of the loop,
+char gets the value of s at position zero, which is h, and then h is printed. Through the next iteration of
+the loop char's value changes, so char refers now to the character
+acquisition 1 of s, which is i. And i is printed. Through the third iteration of the loop,
+char gets the value at position two of s, which is a space,
+and so that space is printed. And this pattern continues until
+the end of the string is reached. So each character of s is
+printed one at a time. Char is a variable name. We could have easily
+chosen something else. For example, this is equivalent. For banana in s, print banana. Of course, it's best to pick
+a meaningful variable name that indicates what it is
+that the variable represents. Here's another for loop. In this loop,
+there are two print statements. So the variable char,
+is printed two times. Initially, to the first iteration
+of the loop, char gets the value h. And h is printed twice,
+then char gets i and i is printed twice and so on until
+the end of the string s is reached. We will now use our for
+loop to solve a problem. The first problem that we'll tackle is to
+count the number of vowels in a string. I'm going to start by writing
+a couple of example function calls. I'm going to name
+the function count_vowels, and it will take a single string argument. The first example uses
+Happy Anniversary as the argument. And in that case,
+count vowels should return five. [SOUND] The next string, xyz, doesn't contain any vowels, so this function should return zero. Let's add the the type contract,
+there's one string parameter, and the function returns an int. And now let's write the function header. The name of the function is count_vowels. And it has one parameter. I'm going to name that parameter s. And the job of this function is to
+return the number of vowels in s. You may have noticed the example function
+calls that we are not including y, so I need to add that to my description. Do not treat the letter y as a vowel. Now we can write the body of the function. Before we write this code I want to start
+by thinking about how we determined what the response of the example
+function call should be. What I did was examine each character
+of the string one at a time beginning with the h. So then I looked at the h and
+decided it was not a vowel but the a is, so I kept track of that. Then I looked at ppy space and encountered another vowel, nni is another one, ve, and rs then another a, that's five. RY exclamation mark. So looking character by character at the
+string we see that there are five vowels. We will model our program after
+the approach that we just took. So we want to keep track of the number
+of vowels that we've seen so far. And initially, we've seen zero vowels. So I'm going to use
+nun_vowels to keep track. We pass over the string examining
+one character at a time. And we can do this using a for loop. So for each character in s we want to
+check to see whether that character is a vowel or not. I can use an if statement
+to check that condition. So if a character appears in
+the string aeiou lowercase and AEIOU uppercase then it is a vowel. And in that case we want to
+increment the value of nun_vowels. So nun_vowels will get it's current value plus 1. After this loop has finished executing,
+and we've passed over each character of the string, nun_vowels will contain
+the total number of vowels in s, and that is the total value
+that we will return. Let's stop for a moment and
+think about this assignment statement. Notice on the right-hand side
+of this assignment statement the expression involves
+the variable nun_vowels. Imagine that the nun_vowels statement that
+occurred outside the loop was not there. When we hit this assignment statement and
+look up the value of nun_vowels a name error would occur, so
+that assignment statement that we used initially to initialize nun_vowels
+to zero is crucially important. Now let's run this code,
+checking our example calls. So we will first run the module, and then in the shell call count vowels. With Happy Anniversary we got five,
+and with xyz we get zero. The variable num_vowels is an accumulator,
+because it accumulates information. It has an initial value of zero and it's value goes up by one
+whenever a vowel is found. The loop ends after every letter
+in x has been examined and all vowels have been counted. Accumulators are not necessarily numeric
+as we'll see in the next problem. Our next task is to return a string containing all of the vowels
+in a given string. I'm going to start with
+example calls again. And we can use the same examples as
+we did in our previous function. So, this function's name
+will be collect_vowels because we are going to
+accumulate them in a string. And given the string, Happy Anniversary, this should return a string
+with the letters lowercase a, uppercase a, I, E, lowercase a again. In the case where there
+are no vowels in the string, it should return the empty string. So it's just an open quotation mark,
+closed quotation mark. The type contract, this takes a string
+parameter and returns a string. And the name of the function as
+we've seen is collect_vowels. The name of the parameter,
+again, I will use the name s. And the job of this function is
+to return the vowels from s. Y isn't treated as a vowel
+in this case either. Like we did with count_vowels I want to
+start by considering how we solved this problem when we were determining what
+the example function call should return. I examined each character of the string
+one at a time, so I'm looking first the H, and then the a, and whenever I encountered
+a vowel I kept track of that so I have an a P-P-Y space and
+then another a. So I want to keep track
+that I've got those two. N-N-I and so on. So I look through the string
+character by character and when I find a vowel I add it to the set
+of characters that I've seen so far. Let's implement this function now. Like before we need to
+accumulate some information. Before it was an integer, this time we want to accumulate
+some information in a string. So I'll use the variable
+vowels to refer to a string. And that string will initially be empty. I haven't see any vowels so far. We're going to examine the string
+ask character by character using for loop, and we want to check to see
+whether that character is a vowel using the exact same approach
+that we did the first time. If the character is a vowel, I want to add it to the set of
+vowels that I've seen so far. So my vowels variable will refer to its original value plus
+the character that we've just seen. I'm using this concatenation operator to add the character to
+the current string of vowels. At the end of the function, once the for
+loop has finished executing and each character from the string has
+been examined, vowels will refer to a string containing each of the vowels
+from s and that is what will be returned. We need to test the function so
+we will run the module, and then call the example
+function calls in the shell. Collect vowels returns
+a string that we expect and this call with a different argument
+also returns the string that we expect. Like the variable nun_vowels, the variable
+vowels is also an accumulator. As it is accumulating a string over
+the course of the function's execution. Like nun_vowels that started at zero and
+grew, vowel starts out as empty, and also grows.

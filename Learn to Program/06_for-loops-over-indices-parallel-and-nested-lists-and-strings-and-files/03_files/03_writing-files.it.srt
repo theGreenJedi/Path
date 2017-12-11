@@ -1,0 +1,267 @@
+1
+00:00:01,060 --> 00:00:05,616
+Scrivere è facile più o meno tanto quanto
+leggere da un file.
+
+2
+00:00:05,616 --> 00:00:09,360
+Iniziamo.
+Come promemoria, la funzione open riceve
+
+3
+00:00:09,360 --> 00:00:14,903
+il nome di un file, o il percorso completo o
+solo il nome del file se si trova nella stessa
+
+4
+00:00:14,903 --> 00:00:20,722
+cartella del programma e la modalità, una
+fra lettura, scrittura e aggiunta. Proprio come 
+
+5
+00:00:20,722 --> 00:00:26,412
+i file possiedono i metodi read, readline e
+readlines, possiedono anche un metodo write se li
+
+6
+00:00:26,412 --> 00:00:31,443
+apriamo in modalità di scrittura.
+Il metodo write funziona come la funzione
+
+7
+00:00:31,443 --> 00:00:35,860
+print di Python eccetto per il fatto che non
+aggiunge il carattere a capo.
+
+8
+00:00:36,120 --> 00:00:42,593
+Scriveremo una piccola porzione di codice
+che effettua una copia di un file, ma inserisce la
+
+9
+00:00:42,593 --> 00:00:46,620
+parola copy come prima riga del nuovo
+file copiato.
+
+10
+00:00:48,320 --> 00:00:53,111
+Inizieremo mostrando come richiedere
+un utente per un file.
+
+11
+00:00:53,111 --> 00:00:57,196
+Il modulo tkinter possiede un sottomodulo
+chiamato file dialog.
+
+12
+00:00:57,196 --> 00:01:01,596
+Lo importiamo come qui.
+All'interno di quel modulo, c'è una funzione
+
+13
+00:01:01,596 --> 00:01:06,466
+askopenfilename.
+Questa aprirà una finestra di dialogo e ci permetterà
+
+14
+00:01:06,466 --> 00:01:11,180
+di selezionare un file usando il
+selettore del file del computer.
+
+15
+00:01:11,580 --> 00:01:19,745
+Quando chiamiamo askopenfilename, avremo
+bisogno di passare a Python per poter selezionare
+
+16
+00:01:19,745 --> 00:01:24,979
+il file.
+Andremo in trova, In Flanders Fields txt...
+
+17
+00:01:24,979 --> 00:01:30,577
+Quando selezioniamo open, vediamo che la,
+la finestra di dialogo scompare.
+
+18
+00:01:30,577 --> 00:01:34,447
+Ma rimane questa finestra con titolo tk.
+
+19
+00:01:34,447 --> 00:01:40,786
+Questa finestra non da alcun fastidio, e òa
+ignoreremo, e torneremo alla shell di
+
+20
+00:01:40,786 --> 00:01:44,538
+Python.
+Askopenfilename  ha ritornato una stringa
+
+21
+00:01:44,538 --> 00:01:50,528
+contenente il percorso completo del file che
+abbiamo scelto in modo da poterlo usare quando
+
+22
+00:01:50,528 --> 00:01:58,673
+chiamiamo la funzione open.
+La chiameremo di nuovo, e ricorda, la
+
+23
+00:01:58,673 --> 00:02:06,105
+stringa che è stata ritornata.
+Abbiamo bisogno di tornare a Python per poter
+
+24
+00:02:06,105 --> 00:02:14,269
+selezionare il nostro file.
+Ora, dal nome del file, è il percorso per quel
+
+25
+00:02:14,269 --> 00:02:19,641
+file.
+Useremo una nuova funzione nella stessa
+
+26
+00:02:19,641 --> 00:02:26,163
+finestra di dialogo dei file per scegliere un
+file su cui vogliamo scrivere.
+
+27
+00:02:26,163 --> 00:02:31,180
+Invece di Askopenfilename, useremo
+asksaveasfilename.
+
+28
+00:02:31,840 --> 00:02:38,244
+Asksaveasfilename ci permetterà di scegliere un
+nuovo nome file per salvarlo, ma se scegliamo
+
+29
+00:02:38,244 --> 00:02:44,276
+un file che esiste già, ci sarà richiesta
+una conferma se vogliamo veramente
+
+30
+00:02:44,276 --> 00:02:49,632
+rimpiazzare quel file.
+Torneremo di nuovo a Python.
+
+31
+00:02:49,632 --> 00:02:56,594
+E noterete che dice, salva come, con
+uno spazio in cui inserire il nome del nuovo
+
+32
+00:02:56,594 --> 00:02:59,813
+file.
+Bene, non voglio salvarlo nel
+
+33
+00:02:59,813 --> 00:03:04,600
+6readfiles perché questa lezione è
+6readfiles.
+
+34
+00:03:05,800 --> 00:03:19,840
+Chiameremo questo, Flanders copy.txt.
+Ed ecco cosa scegliamo.
+
+35
+00:03:20,820 --> 00:03:25,200
+Ora apriremo dal <u>filename in modalità
+di lettura.</u>
+
+36
+00:03:25,880 --> 00:03:33,140
+Leggi il contenuto,
+chiudi il file
+
+37
+00:03:33,940 --> 00:03:40,308
+e controlla per essere sicuro di possedere
+ciò che ci aspettavamo, contents è una stringa
+
+38
+00:03:40,308 --> 00:03:45,917
+contenente ciò che c'era nel file inclusi
+tutti gli a capo.
+
+39
+00:03:45,917 --> 00:03:55,724
+Poi, apriremo il file su cui vogliamo scrivere
+per scrivere la parola copy e
+
+40
+00:03:55,724 --> 00:03:59,181
+l'a capo.
+Ricordate, che dobbiamo aggiungere ogni nuova
+
+41
+00:03:59,181 --> 00:04:05,193
+linea che vogliamo dato che, a differenza di
+print, il metodo write non aggiunge alcun altro
+
+42
+00:04:05,193 --> 00:04:09,560
+carattere.
+Poi, scriveremo il contenuto.
+
+43
+00:04:11,300 --> 00:04:19,006
+ed infine, chiuderemo il file.
+Notate che quando apriamo il file,
+
+44
+00:04:19,006 --> 00:04:25,380
+il file su cui stavamo copiando, abbiamo
+usato il carattere w quando abbiamo aperto il file.
+
+45
+00:04:25,380 --> 00:04:29,786
+E il metodo write ritorna un'informazione,
+ritorna un int.
+
+46
+00:04:29,786 --> 00:04:34,771
+In particolare, ritorna il numero di caratteri
+che sono stati scritti.
+
+47
+00:04:34,771 --> 00:04:40,550
+Notate che questo mostra che il backslash
+viene trattato come un singolo carattere,
+
+48
+00:04:40,550 --> 00:04:44,451
+dato che c, o, p, y e la nuova riga costituiscono
+cinque caratteri.
+
+49
+00:04:44,451 --> 00:04:50,592
+Write ritorna questa informazione in modo che tu
+possa controllare e essere sicuro che la lunghezza della
+
+50
+00:04:50,592 --> 00:04:55,360
+tua stringa è il numero di caratteri che sono
+stati scritti con successo.
+
+51
+00:04:57,680 --> 00:05:02,224
+Ora verificheremo che, che il file è
+stato scritto con successo.
+
+52
+00:05:02,224 --> 00:05:08,002
+Qui c'è il nostro Flanders copy txt.
+Quando faccio doppio clic su di lui, si apre e
+
+53
+00:05:08,002 --> 00:05:14,164
+vedremo che la parola copy e il carattere
+nuova riga appare in cima, proprio come
+
+54
+00:05:14,164 --> 00:05:15,320
+abbiamo scritto.

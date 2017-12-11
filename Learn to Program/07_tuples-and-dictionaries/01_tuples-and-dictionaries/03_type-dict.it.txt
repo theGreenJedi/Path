@@ -1,0 +1,113 @@
+Abbiamo salvato delle collezioni di dati usando
+le liste, e abbiamo usato gli indici per accedere agli elementi delle liste.
+In questa lezione, esploreremo il tipo dizionario di Python, e impareremo come salvare
+ed accedere alle informazioni usando i dizionari. E nelle lezioni precedenti, abbiamo usato delle 
+stringhe annidate per tenere traccia delle assegnazioni e dei voti su quelle assegnazioni.
+Ogni lista più interna aveva due elementi, contenenti il nome dell'assegnazione, una stringa
+e un voto, che è un numero. Possiamo usare l'indicizzazione per accedere agli
+elementi di una lista. Grades a zero fa riferimento alla lista con,
+con A1 e il suo voto. Grade a uno fa riferimento alla lista contenente
+A2 e il suo grado e grades a due fa riferimento alla lista contenente A3 e il suo voto.
+Per trovare il nome di un'assegnazione particolare, dobbiamo usare il primo indice
+di quella lista a due elementi. Quindi, per esempio, per trovare il nome
+dell'assegnazione per grades all'indice uno, usiamo l'indice zero per ottenere il nome.
+Per accedere al voto associato con quel assegnazione, usiamo l'indice uno della lista
+più interna. Ora useremo un dizionario per salvare le
+stesse informazioni dei voti. E vediamo che accedendo al voto associato
+con una particolare assegnazione sarà più semplice quando si lavora con un 
+dizionario. L'assegnazione della variabile grado farà
+riferimento al nuovo dizionario, e la notazione per un dizionario in parentesi.
+Ogni entrata di un dizionario ha due parti e le due parti sono separate da due punti.
+Questo dizionario ha tre coppie di valori chiave. A1 è una chiave.
+A2 è una chiave. E A3 è una chiave.
+80 è un valore. E' il valore associato con la chiave A1.
+70 è un valore. E' il valore associato con la chiave A2.
+E 90 è un valore. E' il valore associato con la chiave A3.
+Per controllare i gradi associati con l'assegnazione A2, possiamo usare la notazione
+in parentesi che abbiamo usato con la lista annidata.
+Comunque, invece di inserire un indice fra le parentesi, inseriamo una chiave.
+Quindi, vogliamo vedere il valore associato con la chiave A2.
+E questo ci da il valore 70. Questa notazione per cercare un voto
+associato con un'assegnazione è molto più semplice di due indici che servono 
+per cercare il voto associato con un'assegnazione usando la lista annidata.
+Comunque, rivela qualcosa con i dizionari.
+Per essere in grado di controllare un particolare valore associato con la chiave,
+la chiave deve essere unica. Può solo essere presente una volta nel dizionario.
+Quindi, i nomi delle assegnazioni A1, A2 e A3 sono nomi unici.
+I voti associati con queste assegnazioni, o i valori del
+dizionario, possono essere duplicati. Quindi è possibile che A1 e A2, quelle
+chiavi, potrebbero avere lo stesso valore. Diciamo, 80.
+Se proviamo ad accedere alla lista ad un indice che non esiste, otteniamo un errore.
+Lo stesso vale per i dizionari, se cerchiamo di accedere ad un dizionario usando
+una chiave che non esiste, allora avviene un errore di chiave.
+La chiave A4 non è presente nel dizionario a cui fa riferimento grades. Prima di accedere ad una chiave di un dizionario,
+possiamo controllare la sua esistenza nel dizionario.
+Quindi, potremmo aver controllato per vedere se A4 è un'assegnazione in grade.
+Non lo è, quindi False è il valore a cui viene valutata questa espressione.
+Ovviamente, A2 è una chiave nel dizionario. Quindi questa espressione verrà valutata a True.
+Questo operatore controlla la presenza delle chiavi, non dei valori.
+Quindi se controlliamo se 80 è un assegnazione di grade, anche questa espressione verrà valutata
+a False, dato che 80 non è una chiave in quel dizionario.
+Attualmente, ci sono tre coppie di valori chiave nel dizionario.
+La funzione integrata len ritorna il numero di coppie di chiavi.
+Come le liste, i dizionari sono mutabili. Quindi questo significa che una coppia di valori chiave
+può essere aggiunta al dizionario. Il valore associato con una chiave può essere
+modificato e la coppia di valori chiave può essere rimossa da un dizionario.
+Iniziamo aggiungendo un'altra coppia di valori chiave ad un dizionario.
+Andremo ad aggiungere l'assegnazione A4. E possiamo indicarlo usando la stessa
+notazione con parentesi che abbiamo usato per accedere al valore di quella particolare chiave, ma lo
+usiamo in congiunzione ad un'istruzione di assegnazione.
+Quindi, il dizionario che ha assegnato a grade i primi due, otterrà il nuovo valore A4, e
+un valore associato con quella chiave è 85. La funzione len ora restituisce quattro, dato che
+ci sono quattro coppie di valori chiave nell'assegnazione di grades.
+Usando la stessa notazione, possiamo anche aggiornare il valore associato con una chiave.
+Quindi, per la chiave A4, andremo a cambiare il suo valore da 85 a 90.
+Dato che A4 esiste già nel dizionario, questa diventa una modifica.
+Se la chiave A4 non esistesse come prima, allora verrebbe aggiunta la nuova coppia
+di valori chiave. La chiave A4 originariamente ha il valore 85
+associato ad essa e ora, ha il valore 90 associato.
+Notate che il valore 90 è associato sia con la chiave A3 che con la chiave A4.
+ valori possono essere duplicati come menzionato prima, ma le chiavi non possono.
+E rimuoviamo una coppia di valori chiave dal dizionario.
+Per fare questo, useremo l'operatore, del, e poi il riferimento al dizionario, e poi la
+chiave, usando la stessa notazione con parentesi. Quindi, ci sposteremo, e rimuoveremo la chiave A4,
+insieme al suo valore dal dizionario. La lunghezza del dizionario sarà tre. E il dizionario non contiene più la coppia di
+valori chiave A4 e 90. Possiamo usare un ciclo for per iterare sulle
+chiavi di un dizionario, come abbiamo fatto per iterare sui caratteri di una stringa, o gli
+oggetti di una lista. Dato che stiamo iterando sulle chiavi, il nome
+della variabile che sceglierò qui, sarà rappresentativa delle chiavi del
+dizionario. Useremo la parola assignment per il nome della
+mia variabile. Per ogni assegnazione del dizionario
+assegnata a grade, stamperemo quell'assegnazione, quella chiave.
+Le chiavi A1, A3 e A2 vengono stampate. Comunque, questo non corrisponde all'ordine
+in cui abbiamo aggiunto le coppie di valori chiave al dizionario.
+Abbiamo inserito prima A1 e il suo valore, poi A2 con il suo valore e A3 con il suo valore.
+L'ordine in cui le coppie di valore chiave sono aggiunte al dizionario non ha effetto
+sull'ordine in cui il ciclo for accede alle chiavi.
+Quindi, quando iteriamo sulle chiavi in un dizionario, non possiamo davvero basarci
+sulla chiave a cui si accede in un ordine particolare.
+In questo caso, non possiamo basarci sul fatto che A1 sia stampata prima di A2, e A2 sia stampata
+prima di A3. Questa volta, invece di stampare le chiavi 
+del dizionario, stampiamo i valori. Tutti i cicli for che scriviamo sui
+dizionari saranno cicli sulle chiavi. Quindi andremo a lasciare la testata
+esattamente come prima. Invece di stampare la chiave dell'assegnazione
+guardiamo il valore associato con quella chiave nel dizionario e stampiamo
+invece quel valore. Vengono stampati i valori 80, 90 e 70.
+Ed infine, stampiamo sia la chiave che il valore.
+Quando chiamiamo print, possiamo passare due argomenti.
+La chiave assegnazione poi il valore associato con quella chiave.
+Quello stampa ogni assegnazione e il voto ad esso associato.
+La nostra introduzione ai dizionari è praticamente completa.
+Ma ci sono un paio di cose importanti da sottolineare.
+Per prima cosa, un dizionario può essere vuoto, e usiamo quelle parentesi aperta e chiusa
+per indicarlo, senza niente all'interno.
+La lunghezza di un dizionario vuoto è zero. Infine, dobbiamo sottolineare una nota importante
+riguardo ai tipi che le chiavi e i valori di un dizionario possono assumere.
+Le chiavi e i valori possono essere di tipi differenti. Quindi, potremmo avere una stringa come chiave,
+e un'altra chiave potrebbe essere un intero. Comunque, il tipo di chiave è sempre
+immutabile. Dato che le liste sono mutabili, una lista non
+può essere usata come chiave di un dizionario. Questa istruzione di assegnazione, che tenta
+di aggiungere una lista con i numeri uno e due come una chiave, insieme al valore banana,
+risulterà in un errore. Quando vogliamo usare una sequenza come
+chiave, anziché usare una lista, possiamo usare una tuple, dato che le tuple sono immutabili.
+Ciò che segue è accettabile.

@@ -1,0 +1,51 @@
+Finora, i nostri programmi hanno usato la memoria
+del computer per immagazzinare delle informazioni, Ma la maggior parte delle informazioni sono
+salvate in file sul computer. In questa lezione, mostreremo quattro modi
+per leggere un file di testo. Useremo un file contenente, In Flanders Fields, 
+un poema scritto nel 1915 dal Tenente Colonnello Canadese John McCrae.
+Prima che possiamo leggere un file, dobbiamo dire a Python di aprirlo.
+La funzione integrata open fa questo. Prende come argomento, il nome del
+file, e la lettera r indica che vogliamo leggere da quel file, e non scrivere su
+di esso. Se il file è nella stessa directory del
+programma, allora possiamo usare il semplice nome del file.
+Ma se il file è in una cartella differente, come nella cartella che
+abbiamo qui, dobbiamo fornire il percorso completo per raggiungerlo.
+Ora leggeremo questo file in modi differenti.
+Lo salveremo in una variabile, in modo da non dover continuare a richiamarlo.
+Prima, apriamo il file per la lettura. Quando apriamo un file per la lettura, abbiamo
+a disposizione un metodo chiamato readline che legge una riga dal file,
+incluso il carattere di a capo al fondo di quella riga, e la ritorna.
+Possiamo leggere questo intero poema chiamando readline ancora e ancora.
+Notate che anche le righe bianche hanno il carattere a capo al fondo di esse.
+Ora che abbiamo letto il file fino al fondo, possiamo chiamare nuovamente readline,
+otteniamo indietro una stringa vuota. L'unica volta che il readline ritorna una stringa
+vuota è quando abbiamo raggiunto la fine del file.
+Questo significa che possiamo usare un ciclo while per leggere le righe di un file.
+Chiuderemo il file e lo riapriremo in modo da poter ricominciare dall'inizio.
+Leggeremo la prima riga del file, e poi, finché non abbiamo raggiunto la fine 
+del file, stamperemo le righe che abbiamo letto e poi andremo avanti, per leggere la riga
+successiva. Quando facciamo girare questo ciclo guardate 
+attentamente. Vedrete delle linee bianche fra ogni riga del file.
+La ragione è che readline ritornerà l'intera riga, includendo
+il carattere di a capo finale. E poi quando stampiamo quella riga, print
+aggiungerà una nuova riga. Per prevenire questa cosa, useremo
+esattamente lo stesso formato che abbiamo usato prima,
+eccetto il fatto che nella nostra chiamata alla funzione print, useremo la stringa vuota da
+stampare come carattere finale dopo che print ha stampato la riga.
+Vediamo ora come leggere solamente la prima strofa.
+Leggiamo il titolo, e poi, la riga vuota, e poi la prima riga del poema.
+Controlliamo. Leggeremo ogni riga finché non troviamo la
+riga contenente niente di più che il carattere di nuova riga.
+Questo approccio di readline ci permette di leggere solo le parti del file a cui siamo
+interessati e ci permette di fermarci nell'elaborazione del file non appena abbiamo
+trovato le parti che vogliamo. Se sappiamo che vogliamo leggere ogni
+riga nel file, c'è un metodo più semplice. Il ciclo for di Python lavora sui file
+recuperando una riga alla volta, incluso il carattere a capo.
+Se il tuo file non è grande, puoi leggerlo tutto in una volta usando il metodo read,
+che ritorna l'intero file contenuto in una singola stringa.
+Il quarto e ultimo modo che mostreremo per leggere il contenuto di un file, 
+è usare il metodo readlines che ritorna una lista di tutte le righe di un file.
+Possiamo usarlo per stampare tutte le righe del file.
+Otterremo la nostra lista e poi effettueremo un ciclo su quella lista, stampando, come abbiamo fatto prima.
+Questo approccio è utile se vogliamo mantenere la lista in modo da poter accedere ai suoi
+elementi più avanti.

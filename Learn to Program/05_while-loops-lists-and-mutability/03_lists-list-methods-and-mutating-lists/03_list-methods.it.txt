@@ -1,0 +1,90 @@
+In questa lezione, esploreremo i metodi 
+delle liste. Come memorandum, un metodo è una funzione
+che si trova all'interno di un oggetto. Avete sentito parlare di metodi del tipo lista.
+Ignorando questi metodi con l'undescore, vediamo append, count, extend, index, insert,
+pop, remove, reverse, e sort. Alcuni di questi metodi modificano la lista, e
+alcuni ritornano solo delle informazioni. Ora diamo alcuni esempi facendo uso di ognuno
+di quelli. Terremo traccia dei colori preferiti di
+qualcuno. Ecco un prompt che useremo per
+raccogliere le informazioni. Useremo un ciclo per raccogliere tutti i 
+colori preferiti di una persona ma dobbiamo iniziare chiedendo loro il
+primo. Finora, quindi, la variabile colours è assegnata
+ad una lista vuota, e la variabile prompt viene assegnata. Inserendo un altro dei 
+colori preferiti, Digitando invio alla fine.
+Chiediamo all'utente di inserire il suo primo colore preferito chiamando al funzione
+input e passando in ingresso la variabile prompt. Supponiamo che l'utente inserisca blue.
+Quindi, color ora fa riferimento a blue. La variabile colors fa ancora riferimento
+ad una stringa vuota. Stiamo accumulando l'informazione che digita
+l'utente. Quindi, quello che andremo a fare è usare un
+ciclo while e a dire, while color non è la stringa vuota, aggiungeremo il colore
+alla variabile colours. Colour.append color.
+Ora che abbiamo appeso il colore che l'utente ha appena inserito, e quindi dobbiamo essere
+pronti per la prossima iterazione del ciclo chiedendo all'utente un altro colore.
+Quindi color viene assegnato con l'input con argomento prompt.
+Ora inseriremo il colore yellow, e brown, e, diciamo, che quella è
+l'intera lista dei colori preferiti quindi seguiremo le istruzioni e digiteremo
+invio per terminare questo ciclo while. Esamineremo la variabile colours, vedremo
+che contiene le stringhe blue, yellow, e brown.
+Ma abbiamo dimenticato qualcosa, quindi useremo il metodo extend per estendere la lista
+dei colori inserendo in ingresso la lista dei colori che abbiamo dimenticato.
+Chiameremo colours.extend, e passeremo in ingresso la lista con le stringhe hot pink e
+neon green. Ora, quando esaminiamo colours, vediamo blue,
+yellow, brown, hot pink e neon green. Viene fuori, che non ci piace particolarmente
+neon green, quindi richiamiamo colours.pop per rimuoverlo.
+Quando esaminiamo colours, vediamo la lista blue, yellow, brown e hot pink,
+Neon green non c'è più. Un altro punto da considerare è che quando
+si richiama colours.pop, non viene solo rimposso l'ultimo elemento, ma viene anche ritornato.
+Quindi, puoi usarlo in un'istruzione di di assegnazione.
+Una funzione che ritorna sia un valore sia effettua qualche operazione sui dati,
+come colours.pop è una funzione per cui si dice che ha del effetti collaterali.
+Non ci piace nemmeno troppo il marrone, quindi useremo pop con questo argomento opzionale
+per poterlo rimuovere. Brown si trova all'indice due, quindi se richiamo
+colours.pop due, rimuoverà brown dalla lista, e lo ritornerà.
+Esaminando colours, vediamo che rimangono blue, yellow e hot pink.
+Colours.pop rimuoverà l'ultimo elemento nella lista.
+E, colours.pop con un indice rimuoverà l'elemento presente a quell'indice.
+Il metodo remove prende un oggetto da rimuovere, non un indice.
+E rimuoverà la prima occorrenza di quell'oggetto dalla lista.
+Proviamo a usare remove black, che non sta nella lista.
+E vediamo che otteniamo un value error Non funzione se chiamiamo remove su
+un oggetto che non è nella lista. Quindi, prima di richiamare un metodo o una
+funzione che potrebbe restituire un errore, vogliamo controllare, che questo non accada.
+Possiamo contare il numero di occorrenze di un particolare valore in una lista.
+E, se termina essendo maggiore di zero, 
+in altre parole, se yellow esiste nella lista, allora chiamiamo remove.
+Esaminando colours, terminiamo solo con blue e hot pink.
+Invece di contare gli elementi, potremmo dire, if yellow in colours,
+allora colours.remove yellow. Questo è più standard che chiamare
+colours.count e contare il numero degli elementi.
+Supponiamo che ci sia, allora chiamiamo colours.remove su di lui.
+Ovviamente yellow non c'era. E quindi, se la condizione viene valutata
+a falsa, e non abbiamo richiamato colours.remove dato che
+lo abbiamo rimosso in precedenza, chiameremo ora colours.extend con argomenti
+auburn, taupe, e magenta. Ma otteniamo un errore di tipo.
+Extend prende esattamente un argomento, ne abbiamo forniti tre.
+Il problema è che dobbiamo mettere auburn, taupe, e magenta in una lista
+dato che extend si attende una lista. Ora, colours fa riferimento alla lista con
+le stringhe blue, hot pink, auburn, taupe e magenta.
+Possiamo ordinarla. Ora, colours fa riferimento alla lista alfabetica
+auburn, blue, hot pink, magenta e taupe.
+Possiamo invertirla. Chiamiamo colours.reverse, e ora colours
+fa riferimento a taupe, magenta, hot pink, blue, e auburn.
+Ci sentiamo un po' in colpa per il brown, chiameremo colours.insert per
+reinserirlo nella lista a cui appartiene.
+Usiamo gli argomenti meno due e brown per dire inserisci brown all'indice meno due in
+colours. Non abbiamo rimpiazzato l'oggetto che si
+trovava all'indice meno due, invece blue e auburn sono stati spostati in avanti per far posto a brown. Quindi, insert non elimina niente che sia
+nella lista, sposta le cose in avanti per fare posto.
+Infine, eliminiamo hot pink dato che è è un po' troppo chiaro per la
+nostra età. Per rimuoverlo, dobbiamo conoscere 
+il suo indice. Possiamo richiamare il metodo index per
+trovarlo. Ma di nuovo, index potrebbe fallire se
+l'elemento non sta nella lista. Ad esempio, colours.index ricordate che non
+abbiamo più il neon green. Ci da un value error perché neon green
+non è nella lista. Vogliamo evitare che questi errori accadano.
+Quindi qui, useremo un'istruzione if, if hot pink in colours per controllare e vedere
+se possiamo chiamare la funzione index senza andare in errore.
+Quindi, se hot pink è in colours, allora assegneremo la variabile, dove, il
+risultato della chiamata a colours.hotpink,, e poi, possiamo usare quell'indice per chiamare
+colours.pop per rimuovere hot pink e ora ci rimane taupe, magenta, brown, blue,
+e auburn.

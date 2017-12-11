@@ -1,0 +1,268 @@
+1
+00:00:01,060 --> 00:00:05,616
+It is just about as easy to write to a
+file as to read from one.
+
+2
+00:00:05,616 --> 00:00:09,360
+Here we go.
+As a reminder, function open takes the
+
+3
+00:00:09,360 --> 00:00:14,903
+name of a file, either a full path or just
+the name of the file is in the same
+
+4
+00:00:14,903 --> 00:00:20,722
+directory as the program and the mode, one
+of a read, write, and depend. Much like
+
+5
+00:00:20,722 --> 00:00:26,412
+files have read and read line and read
+lines methods, they have a write method if
+
+6
+00:00:26,412 --> 00:00:31,443
+we've opened them for writing.
+Method write works much like Python's
+
+7
+00:00:31,443 --> 00:00:35,860
+print function except that it doesn't add
+a new line character.
+
+8
+00:00:36,120 --> 00:00:42,593
+We're going to write a short bit of code
+that makes a copy of a file, but puts the
+
+9
+00:00:42,593 --> 00:00:46,620
+word copy as the first line in the new
+copied file.
+
+10
+00:00:48,320 --> 00:00:53,111
+We will start by showing you how to prompt
+a user for a file.
+
+11
+00:00:53,111 --> 00:00:57,196
+Module tkinter has a sub-module called
+file dialog.
+
+12
+00:00:57,196 --> 00:01:01,596
+We import it like this.
+Inside that module, is a function
+
+13
+00:01:01,596 --> 00:01:06,466
+askopenfilename.
+This will pop open a dialogue and allow us
+
+14
+00:01:06,466 --> 00:01:11,180
+to select a file using your operating
+system's file chooser.
+
+15
+00:01:11,580 --> 00:01:19,745
+When we call askopenfilename, we'll need
+the switch to Python in order to select
+
+16
+00:01:19,745 --> 00:01:24,979
+the file.
+We will go find, In Flanders Fields txt..
+
+17
+00:01:24,979 --> 00:01:30,577
+When we select open, we see that the, the
+file dialogue disappears.
+
+18
+00:01:30,577 --> 00:01:34,447
+But we are left with this window with
+title tk.
+
+19
+00:01:34,447 --> 00:01:40,786
+This window does no harm, and we will
+ignore it, and switch back to the Python
+
+20
+00:01:40,786 --> 00:01:44,538
+shell.
+Askopenfilename has returned a string
+
+21
+00:01:44,538 --> 00:01:50,528
+containing the full path to the file that
+we chose so that we can use this when we
+
+22
+00:01:50,528 --> 00:01:58,673
+call function open.
+We will call this again, and remember, the
+
+23
+00:01:58,673 --> 00:02:06,105
+string that was returned.
+We need to switch back to Python in order
+
+24
+00:02:06,105 --> 00:02:14,269
+to select our file.
+Now, from file name, is the path to that
+
+25
+00:02:14,269 --> 00:02:19,641
+file.
+We will use a new function in the same
+
+26
+00:02:19,641 --> 00:02:26,163
+file dialogue module in order to choose a
+file that we would like to write to.
+
+27
+00:02:26,163 --> 00:02:31,180
+Instead of askopenfilename, we will
+asksaveasfilename.
+
+28
+00:02:31,840 --> 00:02:38,244
+Asksaveasfilename allows us to choose a
+new file name to save to, but if we choose
+
+29
+00:02:38,244 --> 00:02:44,276
+a file that already exists, we will be
+prompted to confirm that we really do want
+
+30
+00:02:44,276 --> 00:02:49,632
+to replace that file.
+We'll switch back to Python.
+
+31
+00:02:49,632 --> 00:02:56,594
+And you'll notice that it says, save as,
+with a place to type the name of the new
+
+32
+00:02:56,594 --> 00:02:59,813
+file.
+Well, I don't want to save it in
+
+33
+00:02:59,813 --> 00:03:04,600
+6readfiles because this lecture is
+6writefiles.
+
+34
+00:03:05,800 --> 00:03:19,840
+We'll call this one, Flanders copy.txt.
+And here is what we chose.
+
+35
+00:03:20,820 --> 00:03:25,200
+We will now open from<u>filename in read
+mode.</u>
+
+36
+00:03:25,880 --> 00:03:33,140
+Read the contents,
+Close the file,
+
+37
+00:03:33,940 --> 00:03:40,308
+And check to make sure that we got what we
+expected and indeed, contents is a string
+
+38
+00:03:40,308 --> 00:03:45,917
+containing what was in that file including
+all of the new line characters.
+
+39
+00:03:45,917 --> 00:03:55,724
+Next, we will open the file that we want
+to write to write the word copy and the
+
+40
+00:03:55,724 --> 00:03:59,181
+new line.
+Remember, that we have to add any new
+
+41
+00:03:59,181 --> 00:04:05,193
+lines that we want because unlike print,
+the write method does not add any extra
+
+42
+00:04:05,193 --> 00:04:09,560
+characters.
+Then, we'll write the contents,
+
+43
+00:04:11,300 --> 00:04:19,006
+And finally, close the file.
+Notice that when we opened the to<u>file,</u>
+
+44
+00:04:19,006 --> 00:04:25,380
+the file that we're copying to, we used
+the character w when we opened to file.
+
+45
+00:04:25,380 --> 00:04:29,786
+And the write method returned information,
+It returned an int.
+
+46
+00:04:29,786 --> 00:04:34,771
+In particular, it returned the number of
+characters that were written.
+
+47
+00:04:34,771 --> 00:04:40,550
+Notice that this shows that the backslash
+then is treated as a single character,
+
+48
+00:04:40,550 --> 00:04:44,451
+because c, o, p, y, and the new line make
+five characters.
+
+49
+00:04:44,451 --> 00:04:50,592
+Write returns this information so you can
+check to make sure that the length of your
+
+50
+00:04:50,592 --> 00:04:55,360
+string is the number of characters that
+were successfully written.
+
+51
+00:04:57,680 --> 00:05:02,224
+We will now verify that, that file was
+written successfully.
+
+52
+00:05:02,224 --> 00:05:08,002
+Here's our Flanders copy txt..
+When I double click on it, it opens and we
+
+53
+00:05:08,002 --> 00:05:14,164
+can see that the word copy and the new
+line character appear at the top, just as
+
+54
+00:05:14,164 --> 00:05:15,320
+we had written.

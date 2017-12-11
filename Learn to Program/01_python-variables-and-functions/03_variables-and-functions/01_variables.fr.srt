@@ -1,0 +1,397 @@
+1
+00:00:01,800 --> 00:00:05,738
+Salut tout le monde.
+Vous avez vu comment évaluer des expressions
+
+2
+00:00:05,738 --> 00:00:09,044
+en Python.
+Dans ce cours, nous allons vous montrer
+
+3
+00:00:09,044 --> 00:00:14,319
+Comment enregistrer les résultats de ces
+expressions pour pouvoir les utiliser
+
+4
+00:00:14,319 --> 00:00:17,766
+plus tard.
+Nous allons explorer cette idée en
+
+5
+00:00:17,766 --> 00:00:23,182
+calculant l'aire de quelques triangles.
+Pour vous rappeler, si je sais la
+
+6
+00:00:23,182 --> 00:00:28,608
+hauteur du triangle,
+et la longueur de la base.
+
+7
+00:00:28,608 --> 00:00:36,019
+alors l'aire du triangle,
+c'est la longueur de la base fois la
+
+8
+00:00:36,019 --> 00:00:44,400
+hauteur divisé par deux. Donc par exemple,
+si la hauteur est douze et la longueur
+
+9
+00:00:44,400 --> 00:00:50,380
+de la base est vingt, alors l'aire est
+vingt fois douze divisé par deux.
+
+10
+00:00:50,780 --> 00:00:56,797
+Allons voir ça en Python.
+Vous savez déjà comment entrer cette
+
+11
+00:00:56,797 --> 00:01:03,037
+expression et la faire évaluer en Python.
+Mais comme on a décidé de calculer ces
+
+12
+00:01:03,037 --> 00:01:08,261
+valeurs pour plusieurs triangles,
+on va vous montrer comment
+
+13
+00:01:08,261 --> 00:01:12,324
+introduire les mots "base" et "height"
+pour représenter des valeurs.
+
+14
+00:01:12,324 --> 00:01:15,880
+On fait ça avec des directives d'assignement.
+Voici un exemple.
+
+15
+00:01:18,340 --> 00:01:25,135
+Cela évalue le vingt et associe
+cette valeur avec la variable
+
+16
+00:01:25,135 --> 00:01:28,653
+"Base".
+"Base" est appelée une variable car c'est une
+
+17
+00:01:28,653 --> 00:01:34,490
+valeur qui peut changer, comme on va le voir.
+On va faire quelque chose de semblable pour
+
+18
+00:01:34,490 --> 00:01:40,806
+une variable "height" après quoi ces
+deux noms peuvent être utilisés comme si
+
+19
+00:01:40,806 --> 00:01:48,081
+ces valeurs étaient là dans le Shell.
+Donc la valeur de "base" est vingt, "height" est
+
+20
+00:01:48,081 --> 00:01:53,663
+associé avec la valeur douze.
+Remarquez que le sens du symbole égal est très
+
+21
+00:01:53,663 --> 00:01:59,804
+différent en programmation comparé aux
+Mathématiques. Comme des programmes peuvent
+
+22
+00:01:59,804 --> 00:02:05,203
+devenir assez compliqués, nous allons
+introduire une notation pour décrire
+
+23
+00:02:05,203 --> 00:02:09,060
+des variables et leur valeurs.
+Ce qu'on va faire c'est
+
+24
+00:02:10,080 --> 00:02:12,976
+dessiner la variable avec une boite à côté.
+
+25
+00:02:12,976 --> 00:02:17,017
+Ce qui se passe en Python c'est que vingt
+ne va pas dans cette boite.
+
+26
+00:02:17,017 --> 00:02:22,135
+À la place, vingt, comme toute autre
+valeur en Python vis à une certaine
+
+27
+00:02:22,135 --> 00:02:26,176
+adresse dans la mémoire.
+
+28
+00:02:26,176 --> 00:02:31,766
+je vais la marquer avec un "x" pour
+la différentier des autres
+
+29
+00:02:31,766 --> 00:02:34,999
+nombres.
+Et disons qu'a l'adresse x3,
+
+30
+00:02:34,999 --> 00:02:39,674
+la valeur vingt apparaît.
+La directive d'assignement prends ce x3 et
+
+31
+00:02:39,674 --> 00:02:46,595
+la met dans la boite associée avec "base".
+Donc la valeur de "base" est vraiment x3.
+
+32
+00:02:46,595 --> 00:02:53,698
+Ce que ça veut dire c'est que cela pointe
+vers l'adresse mémoire x3 où la
+
+33
+00:02:53,698 --> 00:02:56,340
+valeur vingt réside.
+De la même façon,
+
+34
+00:02:56,340 --> 00:03:02,662
+il y a une variable "height" et Python retiens
+sa valeur dans cette boite,
+
+35
+00:03:02,662 --> 00:03:08,253
+et cette valeur est une adresse mémoire.
+Je vais choisir x7, c'est arbitraire.
+
+36
+00:03:08,253 --> 00:03:14,287
+Python se charge de ce choix et donc
+je n'ai pas besoin de me soucier de quelle
+
+37
+00:03:14,287 --> 00:03:20,175
+adresse c'est exactement, tant que je
+sais que cette relation entre des variables
+
+38
+00:03:20,175 --> 00:03:28,283
+et leur valeurs existe.
+Pour retourner à notre problème de programmation,
+
+39
+00:03:28,283 --> 00:03:33,084
+on peut utiliser "base" et "height" dans
+une expression.
+
+40
+00:03:33,084 --> 00:03:40,421
+Donc si je fais "base" fois "height" divisé
+par deux, j'obtiens le résultat comme si
+
+41
+00:03:40,421 --> 00:03:46,489
+j'avais tappé vingt fois douze divisé par deux.
+On peut aussi assigner le résultat de cette
+
+42
+00:03:46,489 --> 00:03:50,384
+expression à une variable.
+Je vais l'appeler "area".
+
+43
+00:03:50,384 --> 00:03:58,970
+Vérifions sa valeur.
+Ce qu'on va faire maintenant c'est donner
+
+44
+00:03:58,970 --> 00:04:05,428
+à "base" et "height" des nouvelles valeurs
+avec de nouvelles directives d'assignement.
+
+45
+00:04:05,428 --> 00:04:10,108
+Assignons la valeur 2.5
+à la variable "base."
+
+46
+00:04:10,108 --> 00:04:17,783
+Dans mon dessin, cela me donne une nouvelle
+valeur : 2.5 à une certaine adresse
+
+47
+00:04:17,783 --> 00:04:23,398
+mémoire, peut-être x4.
+Et la directive d'assignement remplace
+
+48
+00:04:23,398 --> 00:04:32,907
+ce x3 avec la valeur x4, donc "base" ne
+pointe plus sur le vingt.
+
+49
+00:04:32,907 --> 00:04:43,900
+À la place, base est associée avec le 2.5.
+De la même manière, je peux assigner la hauteur.
+
+50
+00:04:45,020 --> 00:04:54,092
+Ce que ça va faire, c'est placer sept à
+une certaine adresse en mémoire,
+
+51
+00:04:54,092 --> 00:04:59,949
+peut-être x1, et la directive d'assignement
+va prendre ce x1 et le
+
+52
+00:04:59,949 --> 00:05:04,606
+mettre dans la variable "height" en
+cassant cette connexion pour que "height"
+
+53
+00:05:04,606 --> 00:05:13,845
+réfère maintenant au sept.
+En utilisant Contrôle+P, je vais remonter
+
+54
+00:05:13,845 --> 00:05:21,390
+jusqu'a mon précédent calcul de "area" et
+comme on va voir, cette nouvelle "area" est
+
+55
+00:05:21,390 --> 00:05:25,674
+8.75.
+C'est en effet ce qu'on obtiens si on prends
+
+56
+00:05:25,674 --> 00:05:29,680
+2.5 fois sept et qu'on divise par deux.
+
+57
+00:05:31,220 --> 00:05:35,992
+Chaque directive d'assignement a la forme:
+variable = expression
+
+58
+00:05:35,992 --> 00:05:40,963
+Voici les règles pour exécuter une directive
+d'assignement et vous devriez faire de vôtre
+
+59
+00:05:40,963 --> 00:05:45,868
+mieux pour les retenir car cela
+va revenir tout le temps dans cette
+
+60
+00:05:45,868 --> 00:05:46,928
+classe.
+Première étape : 
+
+61
+00:05:46,928 --> 00:05:50,043
+Évaluer l'expression à droite du "=".
+
+62
+00:05:50,043 --> 00:05:53,357
+La valeur de cette expression a une adresse
+dans la mémoire.
+
+63
+00:05:53,357 --> 00:05:57,600
+L'adresse est stockée dans a variable à
+gauche du "=".
+
+64
+00:05:59,200 --> 00:06:03,488
+Chaque language de programmation a un
+jeu de règles décrivant un nom légal.
+
+65
+00:06:03,488 --> 00:06:08,441
+En Python, les noms de variables doivent
+commencer avec une lettre ou un underscore et
+
+66
+00:06:08,441 --> 00:06:11,099
+peuvent contenir des lettres, nombres
+et des underscores.
+
+67
+00:06:11,099 --> 00:06:14,180
+Majuscules et minuscules sont autorisées.
+
+68
+00:06:14,620 --> 00:06:19,171
+Les noms de variables mal formés causent
+des erreurs de syntaxe.
+
+69
+00:06:19,171 --> 00:06:26,377
+Par exemple, si on essaye de commencer
+un nom de variable avec un nombre, on nous dis
+
+70
+00:06:26,377 --> 00:06:31,119
+que l'on ne peut pas.
+Pareillement, si on inclus un caractère qui
+
+71
+00:06:31,498 --> 00:06:38,610
+n'est pas alphabétique, numérique ou
+l'underscore dans un nom : Python se plaint.
+
+72
+00:06:38,610 --> 00:06:47,879
+Python est sensible à la casse.
+seconds_in_minute est un nom parfaitement valable.
+
+73
+00:06:47,879 --> 00:06:54,058
+Mais c'est différent de tout autre
+
+74
+00:06:54,058 --> 00:07:02,040
+combinaison de majuscules et minuscules.
+
+75
+00:07:02,820 --> 00:07:08,016
+Le premier est bien sûr plus lisible
+que le second
+
+76
+00:07:08,016 --> 00:07:13,150
+avec ces majuscules et choisir des bons
+noms est important car les programmes
+
+77
+00:07:13,150 --> 00:07:16,319
+peuvent facilement être utilisés,
+lu et améliorés pendant des années.
+
+78
+00:07:16,319 --> 00:07:21,516
+Chaque language de programmation a des
+conventions pour comment choisir un nom,
+
+79
+00:07:21,516 --> 00:07:24,621
+un peu comme un site web a un style et
+une structure particulière.
+
+80
+00:07:24,621 --> 00:07:29,501
+En Python, la plus-part des variables sont
+tout en minuscules avec des underscores
+
+81
+00:07:29,501 --> 00:07:32,100
+pour séparer les mots. Ce style
+est appelé "pothole_case"

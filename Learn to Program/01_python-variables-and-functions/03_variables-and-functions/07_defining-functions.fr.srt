@@ -1,0 +1,439 @@
+1
+00:00:00,012 --> 00:00:02,210
+ Salut ! 
+
+2
+00:00:02,210 --> 00:00:06,380
+ En plus d'utiliser les fonctions de
+base de Python, on peut aussi créer les nôtres. 
+
+3
+00:00:06,380 --> 00:00:08,290
+ C'est ce qu'on va voir dans ce cours. 
+
+4
+00:00:08,290 --> 00:00:14,400
+ Commençons par un exemple mathématique.
+La fonction f de 
+
+5
+00:00:14,400 --> 00:00:19,871
+ x prends x et le passe au carré.
+Voilà à quoi cette fonction ressemble en Python : 
+
+6
+00:00:19,871 --> 00:00:19,871
+ ... 
+
+7
+00:00:19,871 --> 00:00:25,475
+ "def" indiques à Python 
+
+8
+00:00:25,475 --> 00:00:30,799
+ que l'on défini une 
+
+9
+00:00:30,799 --> 00:00:37,246
+ fonction.
+"f" est le nom de cette 
+
+10
+00:00:37,246 --> 00:00:42,880
+ fonction.
+"x" est appelé le paramètre de la fonction. 
+
+11
+00:00:42,880 --> 00:00:45,470
+ C'est une variable dont la valeur
+sera fournie 
+
+12
+00:00:45,470 --> 00:00:46,818
+ quand la fonction est appelée. 
+
+13
+00:00:46,818 --> 00:00:52,750
+ Ce deux-points indique à Python que nous
+allons 
+
+14
+00:00:52,750 --> 00:00:55,080
+ entrer ce qui se produit quand la
+fonction est appelée, 
+
+15
+00:00:56,810 --> 00:01:01,720
+ et le mot "return" indiques que l'on
+renvoie une valeur. 
+
+16
+00:01:03,770 --> 00:01:05,730
+ La forme générale d'une directive
+"return" 
+
+17
+00:01:05,730 --> 00:01:08,710
+ est le mot "return", suivi par une
+expression. 
+
+18
+00:01:08,710 --> 00:01:10,850
+ Et les règles pour exécuter une
+directive "return" sont : 
+
+19
+00:01:10,850 --> 00:01:15,250
+ premièrement, évaluer l'expression,
+ce qui produit une adresse dans la mémoire. 
+
+20
+00:01:15,250 --> 00:01:19,320
+ Et deuxièmement, renvoie cette adresse
+mémoire à l'appelant.
+
+21
+00:01:19,320 --> 00:01:23,460
+ La forme générale d'une définition de
+fonction est le mot "def" suivi par le nom 
+
+22
+00:01:23,460 --> 00:01:29,440
+ de la fonction et ensuite zéro ou
+plusieurs paramètres séparés par des virgules. 
+
+23
+00:01:29,440 --> 00:01:32,200
+ Puis viens le corps de la fonction, qui
+est 
+
+24
+00:01:32,200 --> 00:01:35,820
+ une ou plusieurs directives qui finissent
+souvent par une directive "return". 
+
+25
+00:01:35,820 --> 00:01:37,939
+ Remarquez que le corps est indenté. 
+
+26
+00:01:40,160 --> 00:01:45,390
+ Appelons la fonction f.
+On va passer en argument "3". 
+
+27
+00:01:45,390 --> 00:01:48,000
+ Quand la fonction est appelée, le paramètre
+se comporte comme 
+
+28
+00:01:48,000 --> 00:01:48,400
+
+29
+00:01:48,400 --> 00:01:51,110
+ l'adresse mémoire de la valeur 3. 
+
+30
+00:01:51,110 --> 00:01:57,020
+ En fait, on peut voir ça comme une
+directive d'assignement où x prends 3. 
+
+31
+00:01:57,020 --> 00:02:00,440
+ J'appuie sur Entrée, donc l'appel de
+fonction est exécuté, 
+
+32
+00:02:00,440 --> 00:02:06,340
+ et le résultat de l'appel est que la
+valeur 9 est renvoyée. 
+
+33
+00:02:06,340 --> 00:02:08,620
+ Les appels de fonction sont en fait des
+expressions, donc on 
+
+34
+00:02:08,620 --> 00:02:10,490
+ peut utiliser une variable pour stocker
+le résultat. 
+
+35
+00:02:12,040 --> 00:02:14,290
+ Créons une variable "result" 
+
+36
+00:02:14,290 --> 00:02:16,863
+ qui prends le résultat de l'appel f de 3. 
+
+37
+00:02:18,060 --> 00:02:21,150
+ Souvenez vous des règles pour exécuter
+une directive d'assignement. 
+
+38
+00:02:21,150 --> 00:02:23,385
+ Premièrement, l'expression à 
+
+39
+00:02:23,385 --> 00:02:26,592
+ droite est évaluée, ce qui produit une
+adresse dans la mémoire. 
+
+40
+00:02:26,592 --> 00:02:30,265
+ Deuxièmement, l'adresse est stockée
+dans la variable. 
+
+41
+00:02:30,265 --> 00:02:35,330
+ "result" obtiens d'adresse mémoire de
+l'appel de f de 3. 
+
+42
+00:02:35,330 --> 00:02:39,293
+ Donc en fait, "result" obtiens 9. 
+
+43
+00:02:41,530 --> 00:02:47,439
+ Définissons une autre fonction.
+Rappelez vous du cours sur les variables 
+
+44
+00:02:47,439 --> 00:02:52,782
+ et de comment calculer l'aire d'un
+triangle. On prends la base, 
+
+45
+00:02:52,782 --> 00:02:59,340
+ qu'on multiplie par la hauteur, et puis
+on divise par deux. 
+
+46
+00:02:59,340 --> 00:03:02,610
+ Nous allons maintenant écrire une fonction
+pour calculer l'aire d'un triangle. 
+
+47
+00:03:02,610 --> 00:03:06,400
+ On commence par le mot "def", puis viens
+le nom de la fonction. 
+
+48
+00:03:06,400 --> 00:03:07,770
+ Utilisons le nom "area". 
+
+49
+00:03:09,760 --> 00:03:12,420
+ Après le nom viens les paramètres
+de la fonction,
+
+50
+00:03:12,420 --> 00:03:16,327
+ dans ce cas là on va avoir deux paramètres. 
+
+51
+00:03:16,327 --> 00:03:18,415
+
+52
+00:03:18,415 --> 00:03:22,880
+ On termine cette ligne par un deux-points,
+puis on écris le corps de la fonction. 
+
+53
+00:03:22,880 --> 00:03:32,880
+ On va renvoyer la "base" multiplié par
+"height" puis divisé par deux.  
+
+54
+00:03:36,380 --> 00:03:40,390
+ Appelons la fonction. On va exécuter
+"area" en passant deux arguments : 
+
+55
+00:03:40,390 --> 00:03:41,223
+ trois et quatre. 
+
+56
+00:03:41,223 --> 00:03:47,173
+ Le paramètre "base" obtiens 3, le
+paramètre "height" obtiens 4. 
+
+57
+00:03:47,173 --> 00:03:52,052
+ Cette expression est évaluée : "base"
+fois 
+
+58
+00:03:52,052 --> 00:03:57,480
+ "height", divisé par deux, puis renvoyée. 
+
+59
+00:03:59,080 --> 00:04:02,920
+ Appelons la encore une fois, en lui passant
+un int et 
+
+60
+00:04:02,920 --> 00:04:09,540
+ un float cette fois.
+Les règles pour exécuter un 
+
+61
+00:04:09,540 --> 00:04:15,320
+ appel de fonction sont 1: évaluer les
+arguments pour produire des adresses mémoire.
+
+62
+00:04:15,320 --> 00:04:19,630
+ 2: stoker ces adresses dans les
+paramètres correspondants.
+
+63
+00:04:19,630 --> 00:04:24,230
+ 3: exécuter le corps de la fonction.
+Maintenant, redémarrons le shell Python. 
+
+64
+00:04:24,230 --> 00:04:27,420
+ On va dans le menu du shell, et
+on clique sur redémarrer. 
+
+65
+00:04:29,120 --> 00:04:31,200
+ Nous venons de perdre tout le travail que 
+
+66
+00:04:31,200 --> 00:04:34,200
+ nous avions fait dans le shell, y
+compris la définition de la fonction "area". 
+
+67
+00:04:34,200 --> 00:04:40,200
+ Si on tente d'appeler "area", on a une
+erreur de nom, car "area" n'est pas définie.
+
+68
+00:04:42,770 --> 00:04:45,250
+ La plus-part des programmes Python sont
+sauvegardés dans des fichiers. 
+
+69
+00:04:45,250 --> 00:04:49,524
+ Créons un fichier, et sauvegardons
+notre définition de la fonction "area" dedans. 
+
+70
+00:04:49,524 --> 00:04:57,940
+ Allez dans Fichier > Nouvelle fenêtre  
+
+71
+00:04:57,940 --> 00:05:03,520
+ et on va appeler ce fichier "triangle.py".
+Tous nos programmes Python
+
+72
+00:05:03,520 --> 00:05:08,735
+ seront sauvegardés dans des fichiers .py.
+Redimensionnez la fenêtre 
+
+73
+00:05:08,735 --> 00:05:13,760
+ pour pouvoir voir le shell à gauche 
+
+74
+00:05:13,760 --> 00:05:18,624
+ et notre fichier "triangle.py" sur
+la droite. 
+
+75
+00:05:19,910 --> 00:05:21,700
+ Maintenant que nous avons notre définition 
+
+76
+00:05:21,700 --> 00:05:27,210
+ de la fonction "area" dans "triabgle.py", on
+peut exécuter ce fichier. 
+
+77
+00:05:27,210 --> 00:05:29,260
+ Cliquez sur Run, puis Run module. 
+
+78
+00:05:30,730 --> 00:05:33,940
+ Cela rends la définition de 'area'
+disponible dans le shell. 
+
+79
+00:05:33,940 --> 00:05:37,680
+ Donc maintenant quand on appele "area"
+depuis le shell, il 
+
+80
+00:05:37,680 --> 00:05:40,810
+ sait ce qu'est 'area', et est capable
+d'exécuter cette fonction. 
+
+81
+00:05:40,810 --> 00:05:40,810
+ - 
+
+82
+00:05:40,810 --> 00:05:45,670
+ On peut définir plus d'une fonction
+dans le fichier "triangle.py". 
+
+83
+00:05:45,670 --> 00:05:47,570
+ Ajoutons une autre définition de fonction. 
+
+84
+00:05:47,570 --> 00:05:52,820
+ On va définir une fonction pour calculer
+le périmètre d'un triangle. 
+
+85
+00:05:52,820 --> 00:05:58,810
+ On passera side1, side2 et side3. 
+
+86
+00:05:58,810 --> 00:06:01,530
+ Et la fonction renverra la somme de
+ces côtés. 
+
+87
+00:06:01,530 --> 00:06:01,530
+ - 
+
+88
+00:06:01,530 --> 00:06:02,030
+.
+
+89
+00:06:07,380 --> 00:06:11,460
+ J'ai maintenant sauvegardé triangle.py,
+et si je retourne au shell 
+
+90
+00:06:11,460 --> 00:06:16,216
+ et exécute la fonction, ce qu'on voit
+est une erreur. 
+
+91
+00:06:16,216 --> 00:06:22,770
+ C'est parce qu'à ce moment, bien que la
+fonction soit sauvegardée dans "triangle.py", 
+
+92
+00:06:22,770 --> 00:06:28,530
+ on n'a pas "run" le fichier, donc
+le shell ne sait pas ce qu'est "perimeter". 
+
+93
+00:06:29,580 --> 00:06:32,730
+ Avant d'exécuter une fonction dans le shell,
+on doit "run" ce module. 
+
+94
+00:06:32,730 --> 00:06:39,820
+ Donc j'ai utilisé "run module", maintenant
+je peux appeler "perimeter" et ça exécute.

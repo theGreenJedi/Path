@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Tuples
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi
+">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 11.2 Storing Data Using Tuples
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Tuples
+        </h1>
+        <h3>
+            Immutable Sequences
+        </h3>
+        <p>
+            Tuples are immutable sequences: they cannot be modified. Tuples and lists have much in common, but lists are mutable sequences: they can be modified.
+        </p>
+        <p>
+            Tuples use parentheses instead of square brackets:
+        </p>
+        <pre>
+lst = ['a', 3, -0.2]
+tup = ('a', 3, -0.2)
+</pre>Once created, items in lists and tuples are accessed using the same notation:
+        <pre>
+&gt;&gt;&gt; lst[0]
+'a'
+&gt;&gt;&gt; tup[0]
+'a'
+</pre>Slicing can be used with both:
+        <pre>
+&gt;&gt;&gt; lst[:2]
+['a', 3]
+&gt;&gt;&gt; tup[:2]
+('a', 3)
+</pre>Tuples cannot be modified:
+        <pre>
+&gt;&gt;&gt; tup[0] = 'b'
+TypeError: 'tuple' object does not support item assignment
+</pre>Tuples have fewer methods than lists. In fact, the only regular methods are <code>count</code> and <code>index</code>:
+        <pre>
+&gt;&gt;&gt; dir(list)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__doc__', '__eq__', '__format__',
+'__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__',
+'__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__',
+'__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__',
+'__subclasshook__', '<strong>append', 'count', extend', 'index', 'insert', 'pop', 'remove', 'reverse', sort'</strong>]
+&gt;&gt;&gt; dir(tuple)
+['__add__', '__class__', '__contains__', '__delattr__', '__doc__', '__eq__', '__format__', '__ge__',
+'__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__iter__',
+'__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__',
+'__repr__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', <strong>'count', 'index'</strong>]
+</pre>The rest of the list methods are not available for tuple because they modify the object, and tuples, being immutable, cannot be modified.
+        <p>
+            A <code>for</code> can be used to iterate over the values in a tuple:
+        </p>
+        <pre>
+&gt;&gt;&gt; tup = ('a', 3, -0.2)
+&gt;&gt;&gt; for item in tup:
+    print(item)
+
+a
+3
+-0.2
+
+</pre>A tuple can be passed as an argument to the built-in function <code>len</code>:
+        <pre>
+&gt;&gt;&gt; len(tup)
+3
+
+</pre>It is also possible to iterate over the indices of a tuple:
+        <pre>
+&gt;&gt;&gt; for i in range(len(tup)):
+        print(tup[i])
+
+a
+3
+-0.2
+</pre>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

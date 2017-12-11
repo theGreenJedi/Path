@@ -1,0 +1,61 @@
+In this video we're going to use the
+Python Visualizer to explore how function calls are managed in computer memory. We have written a function
+called convert to minutes, which takes in a number of hours, and
+returns the equivalent number of minutes. For example, if we call convert to
+minutes with argument 2 then expect to get back 120,
+because there are 120 minutes in 2 hours. Notice the indentation all code
+belonging to a function must be indented typically four spaces. Let's visualize what happens
+when we run this program. When we read the function definition,
+of author one Python does, we see that a variable called
+convert to minutes is created. It contains a memory address
+of a function object. That function object contains all
+information about the function including any code that needs to be executed,
+the parameter, and the doc string. We are now now paused on line ten which
+contains an assignment statement. Notice the variable minutes
+too has not been created yet, that will happen after we finish
+executing the assignment statement. So first we have to evaluate
+the expression on the right hand side of the equals symbol, and
+that expression is a function call. Once that function call has returned it
+will give us back a value and minutes too will be created and it will store
+the memory address of that returned value. In order to execute this function
+call the argument is evaluated. That will create a box for value 2 in
+addition a new region of memory will be created to keep track of what happens
+while convert_to_minutes is executed. Here is value 2 and
+here is variable num_hours, the area of computer memory to
+the right is called the heap. And contains all the values that
+are created during execution of a program. The area of memory to the left
+is called the call stack, it's called a stack because
+it's like a stack of plates. When a function is called,
+a stack frame is created and when that function returns,
+its frame is removed from the stack. And control passes back to
+the caller of that function, each frame contains variables that are
+specific to that section of the program. The main frame contains variables that
+are created outside of a new function and frames for functions contain
+parameters and local variables. A local variable is any
+variable that is created inside of a function such as variable result. Line seven contains
+an assignment statement, we evaluate the right hand side. We look up what num_hours is and
+it's 2, 2 times 60 is 120. So we're going to see
+a value 120 get created. And we're going to see a variable
+result get created inside function convert_to_minutes. Result refers to 120,
+num_hours refers to 2. We're about to execute a return statement
+that's going to evaluate result, which is 120 and
+it's going to yield that memory address. Notice that we get to see
+what the return value is. As soon as we click forward one more time we're going to exit function
+convert_to_minutes. Control is going to pass back to where we
+were in the program, that was right here. We're going to finish this call to
+convert_to_minutes with argument 2 and it's going to give us back
+the memory address of value 120. That should create a variable minutes 2,
+In deed, that's what happens. The stack frame for
+the call to convert_to_minutes is gone, gone from computer memory. That's what happens when a function exits,
+we're going to step through another column convert_to_minutes, this
+time we're going to pass an argument 3. And we're going to save the results
+to result the minutes_3 here. Let's watch that happen, we evaluate
+3 which creates it in the heap, Num_hours refers to that value now. It used to refer,
+on the first call, to value two. Now it refers to value 3 because we've
+called it with a different argument. Now, when I calculate num_hours times 60,
+I look at the stack here and I see that I'm taking 3 times 60,
+and that's 180. And so we're going to get
+a variable result referring to 180. We still have value 120 up here because outside of this function, minutes 2 still refers to it. Now we're going to return 180,
+that will yield memory address id5 which is going be
+stored inside a new variable minutes_3 which will be
+created in this main module.

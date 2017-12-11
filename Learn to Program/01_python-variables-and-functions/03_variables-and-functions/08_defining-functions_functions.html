@@ -1,0 +1,130 @@
+<html>
+    <head>
+        <title>
+            Defining Functions
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chaper 3.3. Defining Our Own Functions
+                </li>
+                <li>Chaper 3.4. Using Local Variables for Temporary Storage
+                </li>
+                <li>Chaper 3.7. Writing and Running a Program
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Defining Functions
+        </h1>
+        <h3>
+            Function Definitions
+        </h3>
+        <p>
+            The general form of a function definition:
+        </p>
+        <hr>
+        <pre>
+def function_name(parameters):
+    body
+</pre>
+        <hr>
+        <ul>
+            <li>
+                <code>def</code>: a keyword indicating a function definition
+            </li>
+            <li>function_name: the function name
+            </li>
+            <li>parameters:
+                <ul>
+                    <li>the parameter(s) of the function, 0 or more and are separated by a comma
+                    </li>
+                    <li>a parameter is a variable whose value will be supplied when the function is called
+                    </li>
+                </ul>
+            </li>
+            <li>body:
+                <ul>
+                    <li>1 or more statements, often ending with a <code>return</code> statement
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <p>
+            Example of a function definition:
+        </p>
+        <pre>
+def f(x):
+    return x ** 2
+</pre>
+        <h3>
+            <code>return</code> statement
+        </h3>The general form of a <code>return</code> statement:
+        <hr>
+        <pre>
+return expression
+</pre>
+        <hr>
+        <p>
+            The rules for executing a <code>return</code> statement:
+        </p>
+        <ol>
+            <li>Evaluate the expression. This produces a memory address.
+            </li>
+            <li>Pass back that memory address to the caller. Exit the function.
+            </li>
+        </ol>
+        <h3>
+            Function Calls
+        </h3>
+        <p>
+            Function calls are expressions and the result can be stored in a variable.
+        </p>
+        <p>
+            The general form of a function call:
+        </p>
+        <hr>
+        <pre>
+function_name(arguments)
+</pre>
+        <hr>
+        The rules for executing a function call:
+        <ol>
+            <li>Evaluate the arguments to produce memory addresses.
+            </li>
+            <li>Store those memory addresses in the corresponding parameters.
+            </li>
+            <li>Execute the body of the function.
+            </li>
+        </ol>
+        <hr>
+        Example of a function definition and function calls:
+        <pre>
+&gt;&gt;&gt; def area(base, height):
+    return base * height / 2
+&gt;&gt;&gt; area(3, 4)
+6.0
+&gt;&gt;&gt; result = area(10, 7.45)
+&gt;&gt;&gt; result
+37.25
+</pre>
+        <h3>
+            Saving your programs to ".py" files
+        </h3>
+        <p>
+            We usually save our Python programs in ".py" files. A file can contain multiple function definitions and other statements. Before calling a function from a ".py" file in the shell in IDLE, you need to first execute Run -&gt; Run Module, or else the shell will not recognize the function call.
+        </p>
+        <hr>
+        <center>
+            Jennifer Campbell &bull; Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

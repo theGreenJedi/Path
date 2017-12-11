@@ -1,0 +1,158 @@
+Nelle lezioni precedenti, abbiamo usato i cicli for
+per iterare sopra i caratteri di stringhe e gli elementi delle liste.
+In questa lezione, vedremo come usarli per effettuare dei cicli sugli indici di stringhe
+e liste. E questo ci permetterà di risolvere problemi
+che non possiamo attualmente risolvere usando cicli for.
+Il primo problema che affronteremo è di contare il numero di coppie consecutive di 
+caratteri che sono uguali all'interno della stessa stringa.
+Quindi ecco un esempio di stringa. E in questa stringa, ci sono tre coppie di
+caratteri consecutivi che sono uguali, le c, le f e le g.
+Per risolvere questo problema, abbiamo bisogno di comparare delle coppie di caratteri vicine.
+Quindi la stringa all'indice zero deve essere confrontata con la stringa all'indica uno.
+La stringa al'indice uno deve essere confrontata con la stringa all'indice due.
+E così via, finché non raggiungiamo il penultimo carattere.
+La stringa all'indice -due e la confrontiamo con l'ultimo carattere della stringa, la
+stringa all'indice -uno. Parlando in modo generalizzato, possiamo descrivere
+questo come confronto fra la stringa all'indice i con la stringa all'indice i + uno.
+Useremo la funzione range per generare questi numeri.
+Zero, uno, fino a -due incluso, quindi il, il valore i nel nostro confronto.
+Come promemoria, range accetta tre parametri, uno obbligatorio e due opzionali.
+Il parametro richiesto è il valore al quale si vuole stoppare la sequenza.
+E opzionalmente possiamo anche fornire l'inizio e il passo.
+In questo caso, l'inizio che vogliamo è zero, che è il default.
+E il passo è uno, che è anche il default.
+Quindi abbiamo solo bisogno di usare lo stop. E vogliamo fermarci alla lunghezza della
+stringa -uno. In altre parole, vogliamo andare avanti e
+includere la lunghezza della stringa -2, o il penultimo carattere della stringa.
+E indichiamo questo come lunghezza della stringa -1, fino a quel valore escluso. E poi, vengono stampati i valori degli
+indici. Ora che abbiamo scritto questo ciclo for,
+andremo a usare la stessa testata nella nostra funzione per contare le coppie ripetute di
+caratteri nella stringa. La funzione che stiamo scrivendo è  count
+adjacent repeats. Ha come parametro un'unica stringa
+e ritorna un int. E quando chiamiamo la funzione, passando una
+stringa di esempio come argomento, la funzione dovrebbe ritornare tre.
+Per questa funzione, dobbiamo tenere traccia di quanti caratteri ripetuti abbiamo visto. Quindi andrò ad usare la variabile chiamata
+repeats per farlo. E repeats avrà un valore iniziale di
+zero. Vogliamo iterare sui caratteri della stringa,
+passare sopra di essi, e abbiamo bisogno di usare i loro indici questa volta.
+Abbiamo già scritto la testata di questo ciclo for, iniziamo all'indice zero e andiamo al
+penultimo carattere della stringa.
+Nel corpo del ciclo for, vogliamo confrontare il carattere alla posizione s
+all'indice i con quello che viene dopo di lui, per vedere se sono uguali.
+Quindi possiamo usare l'operatore di uguaglianza per questo, confrontando s all'indice i con
+s all'indice i1 + uno.
+Quando sono uguali, abbiamo trovato una di quelle tre ripetizioni adiacenti.
+Quindi quella variabile repeats dovrebbe aumentare di uno.
+Alla fine del ciclo, dopo che è uscito, possiamo ritornare il valore di
+repeats al primo passo. Infine, facciamo solo girare questa chiamata alla 
+funzione per assicurarci che funzioni come previsto. Per farlo ho bisogno di eseguire, o far girare
+il modulo. E ora, possiamo chiamare la funzione, e ritorna
+tre come previsto. Quindi per riassumere, è dovuto al fatto
+che vogliamo confrontare un elemento della lista con un altro elemento nella lista,
+che usiamo gli indici. Non è sufficiente conoscere il valore
+dell'oggetto. Dobbiamo sapere dov'è l'oggetto nella
+lista per determinare quale altro elemento con cui fare il confronto.
+Per guadagnare una migliore comprensione di cosa stia succedendo quando questo codice viene 
+eseguito, lo tracceremo con il visualizzatore di Python. La prima volta che premo avanti viene valutata
+la definizione della funzione, e siamo portati alla linea diciannove dove ho inserito una
+chiamata alla funzione, usando un esempio leggermente più piccolo.
+Quando la funzione viene chiamata, il parametro s, fa riferimento alla stringa a, c, c, f, f, h
+che abbiamo passato come argomento alla funzione.
+Dopo che è stata eseguita la riga undici, repeats fa riferimento al valore zero.
+La riga tredici è la prima riga del ciclo for.
+Otterrò il valore iniziale di zero. i
+fa inizialmente riferimento a zero. E la condizione if viene controllata per prima.
+Quindi, s a i, s a zero, è a viene confrontata con s ad i + uno, che è c.
+Questi caratteri non sono uguali, quindi il corpo del ciclo for non viene eseguito.
+Ci spostiamo avanti e incrementiamo i. Quindi i riceve il valore successivo che
+genera range, che è uno. Ora, i fa riferimento ad uno.
+E s a uno viene confrontata con s a due dato che i caratteri qui non sono uguali,
+il corpo dell'if, viene eseguito. E repeats verrà aumentato di uno.
+Repeats ora fa riferimento al valore uno. E ottengo il nuovo valore che range
+genera che è due. La stringa all'indice due viene confrontata con
+la stringa all'indice tre e non sono uguali, quindi il corpo della f non viene
+eseguito. Avanziamo nuovamente alla testata del ciclo for,
+e i sarà il prossimo valore che range genera.
+I, i fa riferimento a tre. La stringa all'indice tre viene confrontata con la
+stringa all'indice quattro, quei due caratteri sono uguali, quindi questa volta il corpo 
+dell'if viene eseguito, repeats viene aumentato di uno, quindi repeats ora fa riferimento
+al valore due e i avanza al prossimo valore, che è quattro.
+La stringa all'indice quattro non è uguale alla stringa all'indice cinque quindi il corpo dell'if
+non verrà eseguito. E notate che questa è l'ultima coppia di
+caratteri che abbiamo bisogno di confrontare, quindi quando la stringa all'indice -due, o il
+penultimo carattere della stringa viene raggiunto, quella sarà l'ultima iterazione
+del ciclo for. Abbiamo raggiunto la testata ancora una volta e
+non ci sono più numeri generati da range.
+Quindi dopo questo, Python avanza alla linea diciassette.
+Il valore che deve essere ritornato è il valore di repeats, che è due e che viene ritornato e
+poi stampato alla riga diciannove. Ora scriviamo un'altra funzione che
+riguarda i cicli sugli indici. Questa funzione è chiamata shift lest.
+Ha un singolo parametro lista e modifica quella lista, quindi il tipo di ritorno
+è none-type, viene ritornato none. La modifica alla lista è che ogni elemento 
+della lista, o ogni oggetto, viene shiftato di una posizione a sinistra.
+E il primo elemento viene shiftato, o spostato all'ultima posizione.
+Una precondizione alla funzione è che la lunghezza della stringa sia almeno uno.
+Ecco una lista di esempio che ha quattro stringhe.
+Stringhe a, b, c, e d. Le stringhe saranno spostate a sinistra,
+spostando b dall'indice uno all'indice zero. c dall'indice due all'indice uno.
+d dall'indice tre all'indice due.
+E a da zero all'ultima posizione dove d si trovava in origine.
+Quindi la lista risultante è b, c, d e a.
+Nell'esempio, ho mostrato che b deve essere spostato nella posizione in cui era a.
+E poi c nella posizione in cui era b, originariamente.
+Una cosa che non ho mostrato eslplicitamente nell'esempio è che quando spostiamo b nella
+posizione di a, abbiamo bisogno di tenere traccia di a. Il valore che si trova all'indice zero, per essere
+in grado più avanti di spostare quel valore all'ultima posizione della lista.
+Userò la variabile first item per tenere traccia di questo.
+Quindi ottiene il valore della lista all'indice zero. E poi saremo in grado di prendere il valore
+dall'indice zero e posizionarlo all'ultima posizione più avanti.
+Il compito che stiamo facendo è spostare gli elementi iniziando da uno.
+Quindi userò di nuovo range. Il primo indice con cui lavorerò è
+l'indice uno. E la posizione di stop sarà la lunghezza della
+lista. Il compito che vorremmo portare a termine è
+prendere la lista alla posizione i - uno e inserirlo nell'elemento della lista alla sua destra.
+Quindi, in altre parole, se uno è il primo valore di i, stiamo per prendere la lista
+alla posizione zero e assegnarle il valore della lista alla posizione uno.
+Quindi una volta che tutti gli elementi sono stati spostati a sinistra, vogliamo prendere 
+l'elemento che era originariamente nella prima posizione, e spostarlo all'ultima.
+L'ultimo elemento della lista può essere indicata usando -uno, e lo imposteremo
+nella nostra variabile first item, che contiene il valore originale all'indice zero.
+A  questo punto, la lista L è stata modificata, e la funzione può uscire.
+Chiamiamo la funzione. Nella shell, creerò una lista con gli stessi
+valori dell'esempio che abbiamo usato. Possiamo chiamare shift left L come 
+argomento. E ora, quando esaminiamo il contenuto di L,
+vediamo che i valori sono stati effettivamente shiftati a sinistra con il primo elemento che
+è stato spostato all'ultima posizione. Useremo ancora una volta il Python
+Visualizer per visualizzare l'esecuzione di questa chiamata alla funzione.
+Questo ci aiuterà a prendere più confidenza con la comprensione del codice
+ed è qualcosa che dovreste fare mentre scrivete il vostro codice.
+La funzione viene prima definita, e alla riga diciassette la variabile letter fa riferimento
+ad una stringa di quattro elementi contenente le stringhe a, b, c e d. Ora viene chiamata
+la funzione shift left. Il parametro L della funzione, fa riferimento alla
+lista di stringhe che era stata passata come argomento alla funzione.
+Alla riga dieci, first item è una variabile che ottiene il valore della lista all'indice zero.
+First item fa riferimento alla stringa A. Il ciclo for inizia alla linea dodici e il 
+valore iniziale di i è uno. I fa riferimento ad uno, il primo valore generato
+da range. Nel corpo del ciclo, la lista all'indice
+zero, i - uno. Quello è il valore della lista vicino
+ad uno. Quindi, la lista a zero è attualmente a.
+La lista ad uno è b, e stiamo per assegnare alla lista in zero il valore della
+lista in uno. Ora possiamo vedere che la lista a zero
+fa riferimento a b e quindi lo stesso fa la lista all'indice uno.
+Questo è il motivo per cui la variabile first item tiene traccia del valore che c'era 
+inizialmente all'indice zero. Avremo bisogno di quello più avanti quando
+passeremo first element all'ultima posizione. Tornando al ciclo, alla linea dodici, il
+valore di i verrà aumentato. i ora fa riferimento a due.
+E la lista all'indice uno otterrà il valore che è attualmente nella lista
+all'indice due e due fa riferimento a c. E la lista ad uno verrà assegnata con
+quell'indirizzo di memoria. Quindi ora sia la lista ad uno, che la lista a due,
+fanno riferimento a c. i ottiene il valore massimo che è tre.
+E poi la lista all'indice due sta per essere assegnata alla lista all'indice tre. Quindi
+abbiamo la lista b, c, d, d. Ed è ora di rimpiazzare l'ultimo d con
+la a. Questo è ciò che accade alla riga quindici.
+La lista all'ultima posizione sarà assegnata con il valore che era originariamente
+all'indice zero. Questa è l'ultima riga della nostra chiamata
+alla funzione. Quindi la funzione termina l'esecuzione, e
+ritorna, poi viene stampata letters. Notate che ciò che è stato stampato quando la 
+funzione h effettuato il return è il valore none. E ora viene mostrata letters con i valori, con
+le stringhe b, c, d e a.

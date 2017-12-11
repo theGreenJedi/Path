@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Functions, Variables, and the Call Stack
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>3.5 Tracing Function Calls in the Memory Model
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Functions, Variables, and the Call Stack
+        </h1>
+        <h3>
+            Understanding Scope
+        </h3>
+        <p>
+            Below is an explanation and review of the example used in the video.
+        </p>
+        <pre>
+def convert_to_minutes(num_hours):
+    """ (int) -&gt; int
+    Return the number of minutes there are in num_hours hours.
+    """
+    minutes = num_hours * 60
+    return minutes
+
+def convert_to_seconds(num_hours):
+    """ (int) -&gt; int
+    Return the number of seconds there are in num_hours hours.
+    """
+    minutes = convert_to_minutes(num_hours)
+    seconds = minutes * 60
+    return seconds
+
+seconds = convert_to_seconds(2) 
+</pre>
+        <p>
+            Python defines the first two functions, creates objects for them in the heap, and, in the stack frame for the main program, creates variables that refer to those function objects.<br>
+            <img src="https://d396qusza40orc.cloudfront.net/programming1/lecture_summaries/week3/1.png" alt="Step 1 of execution.">
+        </p>
+        <hr>
+        <p>
+            After that, it executes the assignment statement on line 16. The right-hand side of the assignment statement is a function call so we evaluate the argument, <code>2</code>, first. The frame for <code>convert_to_seconds</code> will appear on the call stack. The parameter, <code>num_hours</code>, will refer to the value <code>2</code>.<br>
+            <img src="https://d396qusza40orc.cloudfront.net/programming1/lecture_summaries/week3/2.png" alt="Step 2 of execution.">
+        </p>
+        <hr>
+        <p>
+            The first statement in function <code>convert_to_seconds</code> is an assignment statement. Again, we evaluate the expression on the right-hand side. This is a function call so we evaluate the argument, <code>num_hours</code>. This produces the value <code>2</code>. A stack frame for function <code>convert_to_minutes</code> is created on the call stack. Python stores the memory address of <code>2</code> in the parameter for <code>convert_to_minutes</code>, which also happens to be called <code>num_hours</code>.<br>
+            <img src="https://d396qusza40orc.cloudfront.net/programming1/lecture_summaries/week3/3.png" alt="Step 3 of execution.">
+        </p>
+        <hr>
+        <p>
+            We now see that there are two variables called <code>num_hours</code> in the call stack; one is in <code>convert_to_minutes</code> and the other is in <code>convert_to_seconds</code>.
+        </p>
+        <p>
+            The next line of code Python executes is <code>minutes = num_hours * 60</code>. However, which instance of <code>num_hours</code> will be used? Python always uses the variable in the current stack frame. With an assignment statement, if the variable does not exist in the current stack frame, Python creates it. So, once <code>num_hours * 60</code> is evaluated, variable <code>minutes</code> is created in the current stack frame.<br>
+            <img src="https://d396qusza40orc.cloudfront.net/programming1/lecture_summaries/week3/4.png" alt="Step 4 of execution.">
+        </p>
+        <hr>
+        <p>
+            The last line of the function is <code>return minutes</code>. Once this statement is complete, Python will return to the frame just underneath the top of the call stack.<br>
+            <img src="https://d396qusza40orc.cloudfront.net/programming1/lecture_summaries/week3/5.png" alt="Step 5 of execution.">
+        </p>
+        <p>
+            So, Python is going to produce the value <code>120</code>, remove the current stack frame, create a new variable called <code>minutes</code> in the stack frame for <code>convert_to_seconds</code>, and store the memory adress of <code>120</code> in that variable.<br>
+            <img src="https://d396qusza40orc.cloudfront.net/programming1/lecture_summaries/week3/6.png" alt="Step 6 of execution.">
+        </p>
+        <hr>
+        <p>
+            Python then executes <code>seconds = minutes * 60</code>. Python evaluates the right-hand side, which produces <code>7200</code>, and stores the memory address of that value in variable <code>seconds</code>. Since this variable does not exist yet, Python creates it in the current stack frame. <img src="https://d396qusza40orc.cloudfront.net/programming1/lecture_summaries/week3/7.png" alt="Step 7 of execution.">
+        </p>
+        <hr>
+        <p>
+            Next is a return statement. Like we saw above, that is going to return control back to the the main module.<br>
+            <img src="https://d396qusza40orc.cloudfront.net/programming1/lecture_summaries/week3/8.png" alt="Step 8 of execution.">
+        </p>
+        <hr>
+        <p>
+            Once the frame for <code>convert_to_seconds</code> is removed, the assignment statement on line 16 (which has been paused a long time!) is completed, and a new variable <code>seconds</code> is created in the stack frame for the main program.<br>
+            <img src="https://d396qusza40orc.cloudfront.net/programming1/lecture_summaries/week3/9.png" alt="Step 9 of execution.">
+        </p>
+        <h3>
+            Notes and assignment and return statements
+        </h3>
+        <p>
+            <b><u>Assignment statement and computer memory</u></b>
+        </p>
+        <pre>
+   variable = expression
+</pre>If a variable does not exist in the current stack frame, Python creates it.
+        <p>
+            <b><u>Return statement and computer memory</u></b>
+        </p>
+        <pre>
+   return expression
+</pre>In addition to evaluating the expression and yielding its value, <code>return</code> also erases the stack frame on top of the call stack.
+        <p>
+            <br>
+        </p>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

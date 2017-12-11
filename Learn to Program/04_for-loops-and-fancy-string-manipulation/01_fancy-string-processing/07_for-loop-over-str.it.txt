@@ -1,0 +1,121 @@
+Prima abbiamo visto che ogni carattere di una
+stringa ha un indice associato, e abbiamo imparato come accedere ad ogni
+carattere usando il suo indice. In questa lettura useremo qualcosa
+chiamato ciclo for per accedere ai caratteri di una stringa, a turno, uno alla
+volta. Per iniziare, sto per fare una stringa di
+esempio, 'Hi There.'. E useremo questa stringa, nel nostro primo loop.
+Stiamo per stampare ogni carattere della stringa, uno alla volta. Char, quella variabile, C-H-A-R, è il diminutivo
+per carattere. Ed è solo il nome di una variabile.
+Il valore di un Char cambierà mentre esegue il ciclo.
+Nella prima iterazione del ciclo, Char ottiene il valore di s alla posizione zero
+che è H. E poi viene stampato H.
+Poi all'iterazione successiva, il valore di char cambia.
+Quindi char ora fa riferimento al carattere alla posizione uno di S, che è I e I viene
+stampata. Invece alla terza iterazione del loop,
+char è il valore alla posizione due di S, che è uno spazio.
+E quindi viene stampato lo spazio. E questo schema continua finché viene
+raggiunta la fine della stringa. Quindi ogni carattere di S viene stampato uno
+alla volta. Hair è il nome di una variabile.
+Potremmo aver facilmente scelto qualcosa di diverso.
+Ad esempio, questo è equivalente a banana in S, stampa banana.
+Certamente, è meglio prendere un nome di variabile che indica cosa rappresenta
+la variabile. .
+Qui c'è un altro ciclo for. In questo ciclo, ci sono due istruzioni 
+di print. Quindi la variabile pair viene stampata due volte.
+Inizialmente, alla prima iterazione del ciclo, pair riceve il valore H, e H viene
+stampata due volte. Poi pair ottiene I, e I viene stampato due volte,
+e così via, finché non viene raggiunta la fine della stringa S. Ora useremo un ciclo for per risolvere
+un problema. Il primo problema che affronteremo, è
+contare il numero di vocali in una stringa. Inizierò scrivendo un paio di
+esempi di chiamata di funzione. Sto per chiamare la funzione count
+vowels. E riceverà un singolo argomento string.
+Il primo, esempio usa Happy Anniversary come argomento.
+E in questo caso, Count Vowels dovrebbe ritornare cinque.
+La stringa successiva X Y Z, non contiene nessuna vocale.
+Quindi questa funzione dovrebbe ritornare zero. Aggiungiamo il tipo di contratto.
+C'è un parametro stringa, e la funzione ritorna un int.
+E ora scriviamo la testata della funzione. Il nome della funzione è count vowels,
+è ha un parametro. Lo chiamerò parametro S.
+E il lavoro di questa funzione è ritornare il numero di vocali in S.
+Potresti aver notato dall'esempio di chiamate delle funzioni che non stiamo
+includendo Y, quindi devo aggiungerlo alla mia descrizione.
+La lettera Y non viene trattata come una vocale. Ora possiamo scrivere il corpo della funzione.
+Prima di scrivere il suo codice voglio iniziare pensando a come abbiamo determinato quale dovrebbe
+essere la risposta degli esempi di chiamate alla funzione.
+Quello che ho fatto è esaminare ogni carattere della stringa uno alla volta, iniziando con
+l'H. Quindi ho considerato l'H e ho deciso che
+non era una vocale, ma che A lo è, perciò ho tenuto traccia di quello.
+Poi ho guardato a P, P Y spazio e ho incontrato un'altra vocale.
+A N, N I è un'altra V E e R S e un'altra A fa cinque R Y punto esclamativo. Quindi andando carattere per carattere della
+stringa abbiamo visto che ci sono cinque vocali. Modelleremo il nostro programma seguendo
+questo approccio che abbiamo appena usato. Quindi vogliamo tenere traccia del numero di
+vocali che abbiamo visto fino ad ora. E, inizialmente, abbiamo zero vocali, quindi
+andrò a usare num_vowels per tenere traccia. Scorriamo la stringa esaminando un
+carattere alla volta. E possiamo farlo semplicemente usando un ciclo for.
+Quindi per ogni carattere in S, vogliamo controllare per vedere se quel carattere è
+una vocale o meno. Posso usare un'istruzione if per vedere, per
+controllare la condizione. Quindi se il carattere che appare nella stringa
+a, e, i, o, u, minuscolo e A, E, I, O, U, maiuscolo, allora è una
+vocale. E in questo caso, vogliamo incrementare il
+valore di num vowels. Quindi num vowels otterrà il suo valore corrente
+più uno. Dopo che questo ciclo for ha terminato l'esecuzione,
+e abbiamo passato ogni carattere della stringa, num_vowels conterrà il numero
+totale di vocali in S, e quello è il valore che ritorneremo.
+Fermiamoci per un momento e pensiamo a questa istruzione di assegnazione.
+Notate che il lato destro di questa espressione di assegnazione, l'espressione coinvolge
+la variabile num vowels. Immaginate che l'istruzione num vow, vowels che
+è presente al di fuori del ciclo non fosse lì.
+Allora passiamo a questa istruzione di assegnazione e guardiamo il valore di num vowels, avviene
+un name error. Quindi l'istruzione di assegnazione che abbiamo usato
+inizialmente per inizializzare num vowels a zero è di importanza fondamentale.
+Ora facciamo girare il codice, controllando le nostre chiamate di esempio.
+Faremo prima girare il modulo e poi, nella shell, chiameremo count vowels.
+Con Happy Anniversary otteniamo cinque. E con XYZ, otteniamo zero.
+La variabile num vowels è un accumulatore dato che accumula informazioni.
+Ha un valore iniziale di zero e il suo valore aumenta ogni volta che viene trovata una vocale. Gli accumulatori non sono necessariamente numerici
+come vedremo nel problema successivo. Il nostro prossimo compito è quello di ritornare
+una stringa contenente tutte le vocali di una data stringa.
+Inizierò di nuovo con un esempio di chiamata, e potremmo usare gli stessi esempio,
+come abbiamo fatto nella funzione precedente. Quindi, il nome di questa funzione sarà collect
+vowels dato che stiamo per accumularle in una stringa.
+E data la stringa happy anniversary questa dovrebbe ritornare una stringa con
+le lettere A I E. Nel caso in cui non ci siano vocali nella
+stringa dovrebbe ritornare la stringa vuota.
+Quindi sarà solamente un aperte virgolette, e chiuse virgolette.
+Il tipo di contratto, questa prende in ingresso un parametro stringa e
+ritorna una stringa. E il nome della funzione come abbiamo visto
+è collect vowels. Il nome del parametro di nuovo, userò
+il nome S. E il lavoro di questa funzione è di ritornare
+le vocali di S. Y non viene considerata come una vocale
+anche in questo caso. Come abbiamo fatto per count vowels.
+Voglio iniziare considerando come abbiamo risolto questo problema, quando stavamo 
+determinando cosa doveva ritornare l'esempio della chiamata.
+Esaminiamo ogni carattere della stringa uno alla volta.
+Quindi, guardiamo prima l'H, e poi la A.
+E tutte le volte che ho incontrato una vocale, ho tenuto traccia di quello.
+Quindi, ho un A, P, P, Y spazio e poi un'altra A, qualche oggetto tiene traccia che ho
+queste due, N, N, I e così via.
+Quindi ora analizziamo la stringa carattere per carattere, e quando trovo, una vocale, la
+aggiungo al chara- set di caratteri che ho visto finora.
+Ora implementiamo questa funzione. Come prima, dobbiamo accumulare delle
+informazioni. Prima, era un intero, questa volta vogliamo
+accumulare delle informazioni in una stringa.
+QUindi userò la variabile vowels per far riferimento ad una stringa.
+E quella stringa sarà inizializzata a vuota. Non abbiamo trovato alcuna vocale finora.
+Stiamo per esaminare la stringa carattere per carattere usando [inudibile],
+e vogliamo controllare per vedere se quel carattere è una vocale usando esattamente lo
+stesso approccio della prima volta. Se il carattere è una vocale, voglio aggiungerla
+all'insieme delle vocali che ho visto finora, quindi la mia variabile vowels farà riferimento
+al suo valore originale più il carattere che abbiamo appena visto.
+Userò questo operatore di concatenazione per aggiungere il carattere alla stringa corrente di
+vocali. Al termine della funzione, una volta che il ciclo
+for ha terminato l'esecuzione e ogni carattere della stringa è stato esaminato,
+vowels farà riferimento alla stringa contenente ognuna delle vocali di S, e
+questo è ciò che verrà ritornato. Dobbiamo testare la funzione, quindi faremo
+girare il modulo. E poi effettueremo le chiamate d'esempio della
+funzione nella shell. Collect vowels ritorna la stringa che
+ci aspettiamo. E questa chiamata per l'argomento differente
+ritorna anch'essa la stringa che ci aspettiamo. Come la variabile num vowels, la variabile
+vowels è anch'essa un accumulatore. Dato che questa accumula una stringa
+durante l'esecuzione della funzione. Come num vowels che è inizializzata a zero e aumenta, 
+vowels inizia con una stringa vuota e aumenta anch'essa.

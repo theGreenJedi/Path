@@ -1,0 +1,302 @@
+1
+00:00:01,600 --> 00:00:04,564
+Ayant les expressions "if" et les boucles à notre disposition,
+les problèmes que
+
+2
+00:00:04,564 --> 00:00:08,000
+nous allons attaquer vont devenir de plus en plus compliqués.
+
+3
+00:00:08,000 --> 00:00:10,128
+Les corps de nos fonctions vont aussi devenir plus long
+
+4
+00:00:10,128 --> 00:00:12,760
+et nous allons avoir besoin d'explications
+
+5
+00:00:15,280 --> 00:00:18,970
+Voici la fonction up_to_vowel, de la vidéo
+sur les boucles while.
+
+6
+00:00:18,970 --> 00:00:21,290
+Nous avons ajouté deux commentaires.
+
+7
+00:00:21,290 --> 00:00:24,090
+Un commentaire commence par un caractère dièse,
+
+8
+00:00:24,090 --> 00:00:26,190
+souvent appelé le caractère "Hash",
+
+9
+00:00:26,190 --> 00:00:31,420
+et continue jusqu’à la fin de la ligne.
+Python ignore ces caractères.
+
+10
+00:00:31,420 --> 00:00:36,880
+Ils servent à documenter le code, tout
+comme les docstrings documentent les fonctions.
+
+11
+00:00:36,880 --> 00:00:40,950
+Le premier décrit les deux variables locales
+utilisées dans cette fonction.
+
+12
+00:00:40,950 --> 00:00:45,000
+Vous pouvez voir qu'il lie ensemble
+"before_vowels" et "i".
+
+13
+00:00:45,000 --> 00:00:49,080
+Explorons un peu ce que cela veut dire.
+
+14
+00:00:49,080 --> 00:00:54,078
+On va utiliser le mot "zymurgy" avec les indices
+
+15
+00:00:54,078 --> 00:00:59,218
+zéro, un, deux, trois, quatre, cinq et six.
+
+16
+00:00:59,218 --> 00:01:02,226
+Nous savons que le deuxième indice n'est pas
+
+17
+00:01:02,226 --> 00:01:05,986
+inclus dans la sous-chaîne, donc ça veut dire que
+
+18
+00:01:05,986 --> 00:01:10,460
+ceci est "s" de l'index zéro jusqu'à l'indice sept.
+
+19
+00:01:12,370 --> 00:01:17,060
+Qu'est-ce que "s" de zéro jusqu'à six ?
+
+20
+00:01:17,060 --> 00:01:22,000
+C'est "zymurg".
+
+21
+00:01:22,000 --> 00:01:26,344
+"s" de zéro à cinq : "zymur"
+
+22
+00:01:26,344 --> 00:01:31,758
+"s" de zéro à quatre : "zymu"
+
+23
+00:01:31,758 --> 00:01:37,768
+"s" de zéro à trois : "zym"
+
+24
+00:01:37,768 --> 00:01:44,240
+"s" de zéro à deux : "zy"
+
+25
+00:01:44,240 --> 00:01:50,906
+"s" de zéro à un est "z", et le truc marrant :
+
+26
+00:01:50,906 --> 00:01:57,300
+de zéro à zéro, en continuant à réduire
+
+27
+00:01:57,300 --> 00:02:03,050
+la longueur par un donne juste la chaîne vide.
+
+28
+00:02:03,050 --> 00:02:09,190
+"before_vowel" commence par la chaîne vide
+et "i" est initialement à zéro.
+
+29
+00:02:09,190 --> 00:02:10,934
+Donc si on remplace "i" par zéro, 
+
+30
+00:02:10,934 --> 00:02:11,915
+
+31
+00:02:11,915 --> 00:02:17,753
+on obtiens "s" de zéro à zéro, c'est ceci.
+
+32
+00:02:17,753 --> 00:02:20,185
+Et "s" de zéro à zéro est la
+
+33
+00:02:20,185 --> 00:02:23,605
+chaîne vide, donc en effet : "before_vowel" contiens tous
+
+34
+00:02:23,605 --> 00:02:26,341
+les caractères dans "s" de zéro
+
+35
+00:02:26,341 --> 00:02:29,090
+à zéro et donc "before_vowel" est la chaîne vide.
+
+36
+00:02:30,530 --> 00:02:34,210
+Cette simple initialisation, où on assigne une chaîne
+
+37
+00:02:34,210 --> 00:02:36,930
+vide à "before_value" et zéro à i,
+
+38
+00:02:36,930 --> 00:02:37,980
+
+39
+00:02:37,980 --> 00:02:41,750
+fait en sorte que cette description ici soit correcte.
+
+40
+00:02:44,120 --> 00:02:48,467
+De plus, au premier tours dans la boucle
+nous allons ajouter "s" à l'indice zéro
+
+41
+00:02:48,467 --> 00:02:54,788
+à "before_vowel" et remplacer ce que nous avions.
+Maintenant "before_vowel" contiens un "z".
+
+42
+00:02:54,788 --> 00:03:02,540
+"i" était zéro, donc "i + 1" est 1,
+la nouvelle valeur de "i".
+
+43
+00:03:02,540 --> 00:03:09,176
+On est alors à cette étape quand "i" est 1,
+et en effet
+
+44
+00:03:09,176 --> 00:03:11,870
+cette description est toujours vraie.
+
+45
+00:03:14,460 --> 00:03:17,199
+Au prochain tours dans la boucle on regarde 
+
+46
+00:03:17,199 --> 00:03:20,400
+"s" à l'indice un, ce qui donne le "y".
+
+47
+00:03:21,500 --> 00:03:27,350
+On prends le y et on le colle à la fin
+de "before_vowels", avant d'incrémenter "i".
+
+48
+00:03:27,350 --> 00:03:30,233
+"i" est à présent deux, donc "s" de zéro à deux
+
+49
+00:03:30,233 --> 00:03:34,430
+est bien ce que nous avons sauvegardé
+dans "before_vowel".
+
+50
+00:03:36,110 --> 00:03:39,883
+Maintenir ce genre de relations
+entre deux variables
+
+51
+00:03:39,883 --> 00:03:42,193
+est un peu compliqué, mais ça aide vraiment
+
+52
+00:03:42,193 --> 00:03:46,370
+à comprendre ce qui se passe
+à l'intérieur de cette boucle.
+
+53
+00:03:47,840 --> 00:03:50,801
+Simplement penser à ces relations est
+
+54
+00:03:50,801 --> 00:03:55,160
+aussi délicat mais avec l'habitude cela
+vous viendra de plus en plus facilement.
+
+55
+00:03:55,160 --> 00:03:59,880
+À chaque fois que vous écrirez une boucle il
+y aura une relation entre vos variables.
+
+56
+00:03:59,880 --> 00:04:02,440
+Essayez de comprendre ce qu'est cette relation
+
+57
+00:04:02,440 --> 00:04:05,290
+et écrire le corps de vos boucles
+deviendra plus facile.
+
+58
+00:04:06,380 --> 00:04:09,840
+Aussi, une fois la relation comprise, écrivez la,
+
+59
+00:04:09,840 --> 00:04:11,820
+mettez la dans un commentaire pour éviter de
+
+60
+00:04:11,820 --> 00:04:14,240
+refaire tout le travail la prochaine fois que
+vous lisez le code.
+
+61
+00:04:15,920 --> 00:04:21,240
+Ce second commentaire :
+# Accumule les non-voyelles au début de la chaîne.
+
+62
+00:04:21,240 --> 00:04:27,290
+décrit ce que fait la boucle, tout comme les docstrings
+n'expliquent pas comment une fonction marche.
+
+63
+00:04:27,290 --> 00:04:32,290
+Le commentaire ne décrit pas comment la boucle
+fais son boulot,
+
+64
+00:04:32,290 --> 00:04:35,040
+il décrit juste son effet.
+
+65
+00:04:35,040 --> 00:04:38,352
+Les commentaires sont à destination de
+programmeurs donc ils n'ont pas
+
+66
+00:04:38,352 --> 00:04:40,910
+besoin de décrire comment le travail
+est fait dans la boucle.
+
+67
+00:04:42,850 --> 00:04:47,440
+Essayez de commenter les bouts de code
+compliqués pour en expliquer
+
+68
+00:04:47,440 --> 00:04:49,090
+leur fonction.
+
+69
+00:04:49,090 --> 00:04:50,656
+Essayez aussi d'écrire des commentaires
+
+70
+00:04:50,656 --> 00:04:53,150
+pour décrire les relations entre vos variables.

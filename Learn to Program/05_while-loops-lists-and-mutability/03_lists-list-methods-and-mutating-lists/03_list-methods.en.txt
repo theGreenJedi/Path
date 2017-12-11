@@ -1,0 +1,91 @@
+In this lecture, we'll explore list
+methods. As a reminder, a method is a function that
+is inside an object. You've heard of the methods in type list.
+Ignoring the methods with underscores, we see append, count, extend, index, insert,
+pop, remove, reverse, and sort. Some of these methods modify the list, and
+some just return information. We will now give examples of using each of
+them. We will keep track of someone's favorite
+colours. Here's a prompt that we will use to gather
+the information. We are going to use a loop in order to
+gather all the person's favorite colours, but we need to start by asking them for
+their first. So far, then, variable colours is assigned
+an empty list, and variable prompt is assigned. Enter another one of your
+favorite colours, Type return to end.
+We ask the user to enter their first favorite color by calling function input
+and passing in variable prompt. Let's say, the user types blue.
+So, color now refers to blue. Variable color still refers to an empty
+list. We are accumulating the information that
+the user types. So, what we're going to do is use a while
+loop and say that, while color is not the empty string, we will append the color to
+the colours variable, Colour.apprend color.
+Now, we've appended the color the user just typed, and so we need to get ready
+for the next iteration of the loop by asking the user for another color.
+So, color is assigned input with argument prompt.
+We will now enter the colours yellow, and brown, and, let's say, that that's our
+whole list of favorite colours so we're going to follow the instructions and type
+return to end this while loop. When we examine the colours variable, we
+see that it contains strings blue, yellow, and brown.
+But we forgot some, so we are going to use method extend to extend the list of
+colours by sending in the list of colours that we forgot.
+We will call colours.extend, and pass in the list with the strings hot pink and
+neon green. Now, when we examine colours, we see blue,
+yellow, brown, hot pink and neon green. As it turns out, we don't particularly
+like neon green, so let's call colours.pop to remove it.
+When we examine colours, we see the list blue, yellow, brown and hot pink,
+Neon green is no longer there. One other point to make is that when you
+call colours.pop, not only does it remove the last item, but it also returns it.
+So, you can use it in an assignment statement.
+A function that both returns information and does something to data, such as
+colours.pop is a function that is said to have side-effects.
+We're not enamored of brown either, so we will use pop with its optional argument in
+order to remove it. Brown is at index two, so if I call
+colours.pop two, it will remove brown from the list, as well as return it.
+Examining colours, we see we're down to blue, yellow and hot pink.
+Colours.pop will remove the last item in the list.
+And, colours.pop with an index will remove the item at the given index.
+Method remove picks an object to remove, not an index.
+And it will remove the first occurrence of that object from the list.
+Let's try to use it to remove black, Which isn't in the list.
+And we see we get a value error. It won't work if we call remove with an
+item that is not in the list. So, before calling a method or function
+that might raise an error, we want to check that, that won't actually happen.
+We can count the number of a occurrences of a particular value in, in a list.
+And, if it ends up being greater than zero,
+In other words, if yellow exists in the list, then we can call remove.
+Examining colours, we end up with just blue and hot pink.
+Rather than counting, we could just say, if yellow in colours,
+Then colours.removeyellow. This is more standard than calling
+colours.count and counting the number of items.
+Just say, if it's in there, then call colours.remove on it.
+Of course, yellow wasn't there. And, so the if statement condition
+evaluated to false, And we didn't call colours.remove cuz we
+had previously removed it. We will now call colours.extend with
+arguments auburn, taupe, and magenta. But we get a type error.
+Extend takes exactly one argument, three given.
+The problem is that, we need to put auburn, taupe, and magenta into a list
+because extend is expecting a list. Now, colours refers to the list with
+strings blue, hot pink, auburn, taupe, and magenta.
+We can sort it. Now, colours refers to the alphabetical
+list, auburn, blue, hot pink, magenta, and taupe.
+We can reverse this. We call colours.reverse, and now colours
+refers to taupe, magenta, hot pink, blue, and auburn.
+We are feeling a little guilty about brown, we will call colours.insert in
+order to put it back in the list where it belongs.
+We used arguments minus two and brown to say insert brown at index minus two into
+our colours. We have not replaced the item that was at
+index minus two, instead blue and auburn have been shifted over to make room for
+brown. So, insert does not get rid of anything
+that is in the list, it moves things over to make room.
+Last, let's get rid of hot pink because that's just a little bit bright for our
+aged selves. In order to remove it, we need to know
+it's index. We can call the list index method in order
+to find this out. But again, index might crash if the item
+is not in the list. For example, colours.index remember we
+don't have neon green anymore. It gives us a value error neon green is
+not in list. We want to prevent errors from happening.
+So here, we will use and if statement if hot pink in colours to check to see
+whether we can call index without crashing.
+So, if hot pink is in colours, we will then assign the variable, where, the
+result of calling colours.hotpink, And then, we can use that index where to call
+colours.pop to remove hot pink and now we are left with taupe, magenta, brown, blue,
+and auburn.

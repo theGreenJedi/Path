@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Linux https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Nested Lists
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 8.7 Working with a List of Lists
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+		<h1>
+			Nested Lists
+		</h1>
+		<p>
+			Lists can contain items of any type, including other
+			lists. These are called <em>nested lists</em>.
+		</p>
+		<p>
+			Here is an example.
+		</p>
+		<pre>
+&gt;&gt;&gt; grades = [['Assignment 1', 80], ['Assignment 2', 90], ['Assignment 3', 70]]
+&gt;&gt;&gt; grades[0]
+['Assignment 1', 80]
+&gt;&gt;&gt; grades[1]
+['Assignment 2', 90]
+&gt;&gt;&gt; grades[2]
+['Assignment 3', 70]
+</pre>
+		<p>
+			To access a nested item, first select the sublist, and
+			then treat the result as a regular list.
+		</p>
+		<p>
+			For example, to access <code>'Assignment 1'</code>, we
+			can first get the sublist and then use it as we would a
+			regular list:
+		</p>
+		<pre>
+&gt;&gt;&gt; sublist = grades[0]
+&gt;&gt;&gt; sublist
+['Assignment 1', 80]
+&gt;&gt;&gt; sublist[0]
+'Assignment 1'
+&gt;&gt;&gt; sublist[1]
+80
+				
+</pre>
+		<p>
+			Both <code>sublist</code> and <code>grades[0]</code>
+			contain the memory address of the <code>['Assignment
+			1', 80]</code> nested list.
+		</p>
+		<p>
+			We can access the items inside the nested lists like
+			this:
+		</p>
+		<pre>
+&gt;&gt;&gt; grades[0][0]
+'Assignment 1'
+&gt;&gt;&gt; grades[0][1]
+80
+&gt;&gt;&gt; grades[1][0]
+'Assignment 2'
+&gt;&gt;&gt; grades[1][1]
+90
+&gt;&gt;&gt; grades[2][0]
+'Assignment 3'
+&gt;&gt;&gt; grades[2][1]
+70
+</pre>
+		<hr>
+		<center>
+			Jennifer Campbell &bull; Paul Gries<br>
+			University of Toronto
+		</center>
+		<hr>
+	</body>
+</html>

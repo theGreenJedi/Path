@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Linux https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Parallel Lists and Strings
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 9.4 Processing Lists Using Indices
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Parallel Lists and Strings
+        </h1>
+        <h3>
+            Correspondings Elements
+        </h3>
+        <p>
+            Two lists are <em>parallel</em> if they have the same
+            length and the items at each index are somehow related.
+            The items at the same index are said to be at
+            <em>corresponding positions</em>.
+        </p>
+        <p>
+            Consider these two lists:
+        </p>
+        <pre>
+list1 = [1, 2, 3]
+list2 = [2, 4, 2]
+</pre>
+        <p>
+            In these two lists, the corresponding element of
+            <code>list1[0]</code> is <code>list2[0]</code>, the
+            corresponding element of <code>list2[1]</code> is
+            <code>list1[1]</code>, and so on.
+        </p>
+        <h3>
+            Example of Corresponding Elements
+        </h3>
+        <pre>
+def match_characters(s1, s2):
+    ''' (str, str) -&gt; int
+    
+    Return the number of characters in s1 that are the same as the character
+    at the corresponding position of s2.
+    
+    Precondition: len(s1) == len(s2)
+    
+    &gt;&gt;&gt; match_characters('ate', 'ape')
+    2
+    &gt;&gt;&gt; match_characters('head', 'hard')
+    2
+    '''
+    
+    num_matches = 0
+    
+    for i in range(len(s1)):
+        if s1[i] == s2[i]:
+            num_matches = num_matches + 1
+    
+    return num_matches
+</pre>
+        <p>
+            The function above counts the corresponding elements of
+            the two strings that are the same character. If a
+            character of <code>s1</code> at index <code>i</code> is
+            the same as the character of <code>s2</code> at the same
+            index, then we increment <code>num_matches</code> by 1
+            (since they match). Otherwise, we continue on to the
+            next pair of corresponding elements and compare them.
+        </p>
+        <hr>
+        <center>
+            Jennifer Campbell &bull; Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

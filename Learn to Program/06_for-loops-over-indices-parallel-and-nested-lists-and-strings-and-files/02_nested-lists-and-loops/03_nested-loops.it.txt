@@ -1,0 +1,140 @@
+I corpi dei cicli possono contenere ogni 
+istruzione inclusi altri cicli. Esploreremo questo in questa lezione.
+Qui abbiamo un ciclo all'interno di un altro ciclo. Il ciclo esterno ha i che varia sui valori
+dieci, undici e dodici. E per ognuna di quelle iterazioni j varia su
+uno, due, te e quattro. Quando visualizzo questo i che inizia
+riferendosi al valore dieci, j non esiste ancora perché abbiamo appena
+raggiunto il ciclo for la prima volta. Questo ciclo for interno
+J assumerà il valore uno nella prima iterazione.
+i fa sempre riferimento a dieci, e stiamo per stampare ij, quindi dovremmo vedere dieci e uno
+qui. Notate che non appena abbiamo stampato dieci
+e uno, ritorniamo alla linea due, non alla linea uno.
+E la ragione per questo è che stiamo per eseguire completamente il ciclo for interno
+finché J è passato attraverso i numeri 1,2,3 e quattro.
+Quindi questo significa che j assumerà poi il valore due.
+E stiamo per stampare dieci e due. Ora j assumerà il valore tre,
+J ora fa riferimento a tre, e stamperemo dieci e tre e quattro. Ora abbiamo finito
+con questo ciclo interno, e quindi andremo a saltare indietro alla riga uno dato che
+abbiamo completato l'esecuzione del corpo del ciclo for più esterno.
+Ora, i assumerà il valore undici.
+J assumerà i valori uno, due, tre e quattro, di nuovo.
+E ora abbiamo finito questo ciclo interno, quindi torniamo di nuovo a quello più esterno.
+Ora, faremo l'ultima iterazione del ciclo più esterno.
+Bene, inizia a dodici e j passerà di nuovo attraverso i numeri uno, due
+tre e quattro. E i non cambierà più.
+Ora abbiamo finito con questo ciclo interno. Torniamo indietro e controlliamo il ciclo più esterno
+ancora una volta. E abbiamo finito con il programma.
+Qui c'è un altro esempio. Terremo traccia di una lista di liste di
+numeri. Queste andranno a rappresentare i voti, 
+quindi magari uno studente riceverà un 70, un 75 e un 80 in un corso.
+E in un altro corso che frequenta riceverà un 70, un 80, un 90 e un 100.
+E nel terzo corso riceverà un 80 e un 100.
+E vuole conoscere quale sia la media per ognuna di queste liste di voti.
+Scriveremo una funzione per calcolare questa lista di medie.
+Ma prima facciamo che iniziare con un problema simile.
+Solo per trovare la media di una lista di numeri.
+Quindi. Diciamo che in un corso, magari
+Inglese, la lista dei voti di cui stiamo per calcolare la media è 70,
+75 e 80. Per calcolare la media di questo,
+abbiamo bisogno di sommare tutti i voti delle assegnazioni e poi dividerli per la
+lunghezza della lista. C'è il nostro accumulatore, e poi per ogni
+voto di Inglese, quello che faremo è andare ad addizionare i voti al totale.
+Ora, il totale è 225.
+Dobbiamo dividere per la lunghezza della lista.
+Ora che sappiamo come calcolare la media di una lista di numeri, ci piacerebbe farlo
+per ogni elemento della lista nella nostra lista dei voti, e vorremmo
+disporre il risultato in una lista di tutte queste medie,
+Mentre sviluppiamo questa funzione, abbiamo bisogno di esempi.
+Il primo esempio che faremo è la lista dei voti con cui abbiamo iniziato
+nel riquadro a sinistra. La media di 70, 75 e 80 è 75.
+La media di 70, 80, 90 e 100 è 85. La media di 80 e 100 è 90.
+Tutti questi sono floats. Allarghiamo solo un po' questa
+finestra. Il contratto è il prossimo.
+Quello che abbiamo è una lista di numeri. Ora, tutti questi sono interi.
+Ma possiamo certamente immaginare di dare un risultato a virgola mobile per i voti
+delle assegnazioni Quindi,
+il contratto sarà una  lista di lista di numeri.
+E questo è il, il tipo della lista di numeri.
+E ritorneremo una lista di float.
+Siamo a posto con average come nome, quindi lo lasciamo così, e andremo a ricevere
+in ingresso magari grades come il nome del nostro parametro. Nella nostra descrizione, questo ritornerà 
+una nuova lista nella quale ogni elemento è la media dei voti della lista interna
+alla posizione corrispondente. .
+di grades. Bene, sappiamo che stiamo costruendo una nuova lista.
+E faremo questa lista annidata con una lista annidata.
+Quindi andremo ad accumulare questo risultato.
+Quindi imposteremo magari averages come nome della nostra variabile, che sarà la lista
+delle medie alla fine. E quando abbiamo finito, sappiamo che vogliamo
+ritornare averages. Bene, vogliamo inserire all'interno di averages,
+la media di ogni lista all'interno della nostra lista grades.
+Quindi, per ognuna delle sottostringhe nella lista
+grades, quello che vogliamo fare è calcolare la media dei della lista dei voti e aggiungerla
+ad averages. Bene, possediamo del codice per fare questo
+sulla sinistra. Sappiamo di voler far partire il totale da
+zero. E poi per ogni voto in questa particolare
+sottolista di voti, vogliamo addizionarlo al totale.
+E poi una volta che abbiamo finito con quello. raccoglieremo i valori nella lista dei voti. Vorremmo aggiungere la media ad averages. E abbiamo finito.
+Ora la richiameremo nel visualizzatore e vedremo la sua esecuzione.
+Abbiamo aggiunto due istruzioni al fondo di questo file.
+La prima crea la, la lista annidata,
+e la seconda chiana la funzione averages passandole una lista.
+Visualizziamola. Per prima cosa definiamo la nostra funzione.
+Poi andremo a creare circa dieci oggetti o giù di lì.
+Grades fa riferimento ad una lista con tre elementi al suo interno.
+Il primo è una lista di tre elementi 70, 75 e 80.
+La seconda fa riferimento ad una lista che ha 70, 80, 90 e 100 al suo interno.
+E il terzo elemento all'indice due è questa lista che fa riferimento ad una lista con due
+elementi, 80 e 90. La prima lista annidata contiene 70,
+75 e 80. La seconda lista annidata contiene 70, 80, 90.
+Dov'è? 90 e 100.
+La terza lista annidata contiene 80, e 100.
+Quindi, la struttura della lista che è presente nella memoria del computer è
+una rappresentazione di cosa abbiamo fatto su questa riga.
+Ora andremo a passare quella lista alla funzione averages.
+Otterremo lo stack frame per la funzione averages contenente il parametro grades
+che fa riferimento alla stessa lista. Inizieremo, qui cè una cosa divertente,
+inizializzeremo una nuova variabile averages che è una lista vuota.
+Notate che abbiamo anche una funzione averages fuori.
+Sono ovviamente due cose differenti.
+Poi attraverseremo questa lista all'interno di questa lista più esterna.
+Quindi la lista grades inizialmente farà riferimento alla lista con indirizzo di memoria
+x3. Poi passeremo su 70, 75 e 80,
+li addizioneremo e divideremo per la lunghezza di quella lista.
+Inizieremo il totale a zero e per ogni giudizio nella lista dei voti, bene
+mark inizierà con 70 e poi 75 e poi 80 ad ogni iterazione qui.
+Prenderemo 70 qui alla riga diciassette e la addizioneremo al
+totale che è zero. Quindi otteniamo 70 ovviamente 70 più zero
+è zero. Lo assegniamo al totale.
+In questa prossima iterazione, andremo ad avere il voto a 75.
+Ora prenderemo 75 e lo addizioneremo a 70.
+70 più 75 fa 145. E assegneremo 145 a total.
+Nella prossima iterazione andremo ad assegnare 80 a mark. Questo è ciò che questo
+ciclo for fa. Prende l'ultimo elemento nella lista, mark ora
+fa riferimento ad 80. Alla riga diciassette abbiamo un'istruzione
+di assegnazione. Il lato destro viene valutato a 145 più 80 o 225.
+Assegneremo 225 a total. Ora abbiamo scorso tutti gli oggetti in
+quella prima lista annidata. Abbiamo fatto il 70, il 75 e l'80, e
+quindi questo ciclo for ora teminerà. Calcoleremo 225 diviso per la
+lunghezza della lista grades, che è tre, e aggiungeremo il risultato alla lista
+averages. Ora averages fa riferimento alla lista contenente
+75. 225 diviso per tre è 75.
+Abbiamo completato l'esecuzione della prima iterazione del ciclo for più esterno.
+Ora, in questa prossima iterazione, otteniamo la seconda lista, con quattro elementi al suo interno.
+La lista grades ora farà riferimento a questa seconda lista, con 70, 80, 90 e 100 al suo interno.
+Inizializzeremo il totale a zero. Lo resettiamo e quando passeremo sopra
+i quattro numeri, due, tre, quattro e abbiamo fatto.
+E il totale ora è 340. La somma di 70 più 80 più 90 più 100.
+Aggiungiamo 340 diviso per quattro alla nostra lista averages.
+E questo è 85. E ora per la terza lista annidata.
+Lista Grades Il primo della lista di due elementi,
+è 80 e 100. Resettiamo total a zero.
+C'è l'80 con cui abbiamo a che fare. Mark ora vale 80.
+Aggiungiamo 80 a zero, che ci da 80, ovviamente.
+Poi otterremo il 100. E li sommeremo insieme.
+E poi aggiungeremo 180 diviso per la lunghezza di quella lista annidata, o due.
+Quindi 180 diviso per due è 90. Ora abbiamo iterato su tutte e tre le nostre
+liste annidate. Quindi termina questo ciclo esterno.
+E abbiamo finito. Ora ritorniamo, questa lista averages
+che per ricordarci contiene 75, 85 e 90.
+Dobbiamo ritornare questo valore. Non facciamo niente con quello nel programma
+principale, quindi quando clicco avanti, il programma semplicemente terminerà.

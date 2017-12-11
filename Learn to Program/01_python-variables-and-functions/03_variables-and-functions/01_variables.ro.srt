@@ -1,0 +1,448 @@
+1
+00:00:02,250 --> 00:00:06,300
+Salutări tuturor, ați văzut cum 
+evaluăm expresiile în Python.
+
+2
+00:00:06,300 --> 00:00:09,510
+În această lecție, vă vom arăta cum să
+ memorați rezultatul acestor
+
+3
+00:00:09,510 --> 00:00:12,120
+expresii, astfel încât să utilizați
+ aceste valori mai târziu.
+
+4
+00:00:14,770 --> 00:00:19,330
+Vom explora această idee, calculând
+ suprafețele unor triunghiuri.
+
+5
+00:00:19,330 --> 00:00:24,130
+Ca să vă reamintiți, dacă știu
+ înălțimea unui triunghi,
+
+6
+00:00:26,200 --> 00:00:28,600
+și știu lățimea bazei,
+
+7
+00:00:28,600 --> 00:00:33,715
+atunci, suprafața triunghiului este lungimea
+
+8
+00:00:33,715 --> 00:00:39,297
+bazei, înmulțită cu înălțimea, împărțit la 2.
+
+9
+00:00:39,297 --> 00:00:45,295
+Deci, dacă înălțimea este 12 iar lungimea
+ bazei este 20,
+
+10
+00:00:45,295 --> 00:00:48,950
+atunci suprafața este 20 ori 12, împărțit la 2.
+
+11
+00:00:48,950 --> 00:00:52,840
+Haideți să încercăm asta în Python.
+
+12
+00:00:54,460 --> 00:00:57,040
+Știți deja cum să scrieți
+ această expresie.
+
+13
+00:00:59,210 --> 00:01:03,470
+și cum să fie evaluată în Python dar,
+ din moment ce ne-am decis să calculăm
+
+14
+00:01:03,470 --> 00:01:06,380
+valorile câtorva triunghiuri, vă vom arăta
+
+15
+00:01:06,380 --> 00:01:10,670
+cum să introduceți cuvintele "base"
+ și "height", pentru a reprezenta valorile.
+
+16
+00:01:10,670 --> 00:01:14,320
+Aceasta se realizează cu ajutorul
+ instrucțiunilor de atribuire.
+
+17
+00:01:14,320 --> 00:01:15,225
+Iată un exemplu.
+
+18
+00:01:15,225 --> 00:01:22,241
+Ce face aceasta este să evalueze
+ numărul 20,
+
+19
+00:01:22,241 --> 00:01:25,820
+și să asocieze acea valoare cu variabila x.
+
+20
+00:01:25,820 --> 00:01:29,510
+Acesta se numește o variabilă, deoarece
+ este o valoare care poate varia,
+ după cum veți vedea.
+
+21
+00:01:30,820 --> 00:01:36,450
+Vom face ceva similar pentru o variabilă
+ pe care o vom numi height și
+
+22
+00:01:36,450 --> 00:01:40,120
+apoi, aceste două nume
+ vor putea fi utilizate
+
+23
+00:01:40,120 --> 00:01:44,100
+ca și cum valorile lor ar apărea
+ acolo, în interpretorul Python.
+
+24
+00:01:45,230 --> 00:01:49,690
+Deci, valoarea base este 20,
+ height este asociată valorii 12.
+
+25
+00:01:49,690 --> 00:01:54,120
+Observați că simbolul egal are un înțeles
+
+26
+00:01:54,120 --> 00:01:56,370
+foarte diferit în programare
+ față de matematică.
+
+27
+00:01:57,960 --> 00:02:01,370
+Deoarece programele de calculator
+ devin foarte complicate,
+
+28
+00:02:01,370 --> 00:02:07,140
+vom introduce o notație pentru a descrie
+ variabilele și valorile lor.
+
+29
+00:02:07,140 --> 00:02:13,260
+Ceea ce vom face este să desenăm
+ o variabilă, baza, cu o casetă lângă ea.
+
+30
+00:02:13,260 --> 00:02:16,520
+Și ce se întâmplă în Python este că,
+ 20 nu intră acea casetă,
+
+31
+00:02:16,520 --> 00:02:22,390
+în schimb, 20, ca orice altă valoare în Python,
+ rezidă la o anumită locație de memorie.
+
+32
+00:02:22,390 --> 00:02:26,920
+Deci voi alege, la întâmplare,
+ o locație de memorie.
+
+33
+00:02:26,920 --> 00:02:30,920
+Și, o voi nota cu un x, doar pentru
+ a o diferenția de alte numere.
+
+34
+00:02:30,920 --> 00:02:36,080
+Să spunem că la locația de
+ memorie x3, apare valoarea 20.
+
+35
+00:02:36,080 --> 00:02:39,830
+Instrucțiunea de atribuire ia acest x3 și
+
+36
+00:02:39,830 --> 00:02:43,890
+îl pune în caseta asociată cu base.
+
+37
+00:02:43,890 --> 00:02:48,920
+Astfel base conține x3 și, într-un fel, aceasta
+
+38
+00:02:48,920 --> 00:02:55,080
+înseamnă că indică locația de memorie,
+ x3 unde rezidă valoarea 20.
+
+39
+00:02:55,080 --> 00:02:58,580
+În mod similar, există o variabilă, înălțimea,
+
+40
+00:02:58,580 --> 00:03:02,000
+și Python păstrează valoarea acesteia
+ în acea casetă mică,
+
+41
+00:03:02,000 --> 00:03:04,070
+iar valoarea acesteia este o locație
+ de memorie.
+
+42
+00:03:04,070 --> 00:03:06,640
+Voi alege x7.
+
+43
+00:03:06,640 --> 00:03:11,191
+Acestea sunt arbitrare, Python este
+ responsabil de această alegere, așa că
+
+44
+00:03:11,191 --> 00:03:16,249
+nu trebuie să-mi fac griji care este exact
+ locația de memorie, atâta vreme cât
+
+45
+00:03:16,249 --> 00:03:21,588
+știu că există această relație între
+ variabile și valorile lor.
+
+46
+00:03:24,995 --> 00:03:28,359
+Revenind la problema noastră de programare,
+putem, de fapt, să folosim base și
+
+47
+00:03:28,359 --> 00:03:29,930
+height, într-o expresie.
+
+48
+00:03:29,930 --> 00:03:33,750
+Deci, dacă înmulțesc base cu height
+ și împart la 2,
+
+49
+00:03:33,750 --> 00:03:38,679
+obțin același rezultat ca în cazul în care
+ aș fi scris 20 ori 12, împărțit la 2.
+
+50
+00:03:40,670 --> 00:03:47,081
+De asemenea, putem atribui unei variabile,
+ rezultatul ultimei expresii, 
+
+51
+00:03:47,081 --> 00:03:52,034
+să o numim area (suprafață), și haideți
+ să verificăm valoarea ei.
+
+52
+00:03:55,405 --> 00:03:59,820
+Ceea ce vom face acum este să dăm
+ noi valori bazei și înălțimii,
+
+53
+00:03:59,820 --> 00:04:02,120
+folosind, din nou, instrucțiuni de atribuire.
+
+54
+00:04:02,120 --> 00:04:07,090
+Haideți să atribuim variabilei base,
+ valoarea 2.5.
+
+55
+00:04:08,580 --> 00:04:13,920
+Ceea ce se întâmplă în desenul meu,
+ este că îmi dă o nouă valoare 2.5 și
+
+56
+00:04:13,920 --> 00:04:18,480
+probabil, o anumită locație de memorie, x4
+
+57
+00:04:20,030 --> 00:04:26,730
+și înlocuiește, instrucțiunea de atribuire
+ înlocuiește această x3 cu valoarea x4.
+
+58
+00:04:26,730 --> 00:04:32,610
+Deci, base nu mai indică valoarea 20
+, în schimb, base este asociată
+
+59
+00:04:32,610 --> 00:04:37,444
+cu 2.5.
+
+60
+00:04:39,820 --> 00:04:42,733
+În mod similar, pot atribui înălțimea.
+
+61
+00:04:45,430 --> 00:04:47,813
+Ceea ce va face acest lucru,
+ desigur, este că
+
+62
+00:04:51,633 --> 00:04:56,575
+va pune 7 la o anumită locație de memorie,
+ poate x1, iar instrucțiunea de atribuire
+
+63
+00:04:56,575 --> 00:05:01,720
+va lua acest x1 și îl va pune
+ în variabila height,
+
+64
+00:05:01,720 --> 00:05:05,699
+realizând această legătură, astfel încât,
+ acum, height se referă la 7.
+
+65
+00:05:10,491 --> 00:05:17,820
+Folosind Ctrl + p, mă voi întoarce
+ la vechiul meu calcul al suprafeței.
+
+66
+00:05:17,820 --> 00:05:22,383
+Și, după cum vom vedea imediat,
+ această nouă suprafață este 8.75,
+
+67
+00:05:22,383 --> 00:05:28,959
+care este într-adevăr ceea ce veți obține,
+ dacă înmulțiți 2.5 cu 7 și împărtiți la 2.
+
+68
+00:05:34,585 --> 00:05:38,450
+Fiecare instrucțiune de atribuire are
+ forma: variabila = expresia atribuită.
+
+69
+00:05:39,470 --> 00:05:41,980
+Acestea sunt regulile de executate a unei
+ instrucțiuni de atribuire
+
+70
+00:05:41,980 --> 00:05:44,910
+Și ar trebui să vă străduiți
+ să le memorați,
+
+71
+00:05:44,910 --> 00:05:48,690
+deoarece vă veți întâlni cu ele în mod
+ repetat în acest curs.
+
+72
+00:05:48,690 --> 00:05:52,410
+Pasul unu, se evaluează expresia
+ din partea dreaptă.
+
+73
+00:05:52,410 --> 00:05:55,680
+Valoarea expresiei are o locație
+ de memorie.
+
+74
+00:05:55,680 --> 00:06:00,145
+Stocați aceasta locație de memorie
+ în variabila din partea stângă.
+
+75
+00:06:03,943 --> 00:06:07,970
+Fiecare limbaj de programare are un set
+ de reguli care definește un nume valabil.
+
+76
+00:06:07,970 --> 00:06:12,530
+În Python, numele de variabile trebuie să
+ înceapă cu o literă sau cu underscore și
+
+77
+00:06:12,530 --> 00:06:15,720
+poate conține litere, numere și caractere
+ underscore.
+
+78
+00:06:15,720 --> 00:06:16,500
+Atât literele mari cât și
+
+79
+00:06:16,500 --> 00:06:22,120
+literele mici sunt permise, numele de variabile
+ formate incorect duc la erori de sintaxă.
+
+80
+00:06:22,120 --> 00:06:23,200
+De exemplu,
+
+81
+00:06:23,200 --> 00:06:27,300
+dacă încercăm să începem un nume de
+ variabilă cu un număr, ni se spune că nu putem.
+
+82
+00:06:29,400 --> 00:06:35,294
+În mod similar, dacă includem un caracter
+ care nu este din alfabet, underscore,
+
+83
+00:06:35,294 --> 00:06:41,734
+sau numeric, în numele variabilei,
+ Python va protesta.
+
+84
+00:06:43,650 --> 00:06:46,739
+Python este de asemenea, sensibil la
+ majuscule (case-sensitive).
+
+85
+00:06:46,739 --> 00:06:51,963
+seconds_in_minute este un nume de
+ variabilă, perfect valabil.
+
+86
+00:06:55,046 --> 00:06:56,000
+Dar este diferit
+
+87
+00:06:59,110 --> 00:07:05,167
+de orice altă combinație de litere
+ mari și litere mici.
+
+88
+00:07:07,553 --> 00:07:11,787
+Primul seconds_in_minute este, desigur,
+ mai ușor de citit decât cel de-al doilea
+
+89
+00:07:11,787 --> 00:07:15,398
+cu acele majuscule, și este importantă
+ alegerea unor nume bune,
+
+90
+00:07:15,398 --> 00:07:19,860
+deoarece programele pot fi ușor de utilizat,
+ citit si îmbunătățit, timp de ani de zile.
+
+91
+00:07:19,860 --> 00:07:22,100
+Fiecare limbaj de programare are un set
+ de convenții care
+
+92
+00:07:22,100 --> 00:07:26,220
+definește cum să alegi un nume, așa cum
+ site-urile web au un anumit stil si aspect.
+
+93
+00:07:27,910 --> 00:07:31,133
+În Python, majoritatea numelor de variabile
+ utilizează doar litere mici
+
+94
+00:07:31,133 --> 00:07:36,017
+și caractere underscore pentru a separa
+ cuvintele, ceea ce noi numim 'pothole case'.

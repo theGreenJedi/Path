@@ -1,0 +1,303 @@
+1
+00:00:00,096 --> 00:00:04,044
+En esta conferencia, vamos a enseñaros una serie de pasos.
+
+2
+00:00:04,044 --> 00:00:08,004
+Llamada la "Receta de Diseño". Que puedes usar para escribir tus propias
+
+3
+00:00:08,004 --> 00:00:10,092
+funciones. Aqui esta nuestra funcion del area del triángulo.
+
+4
+00:00:10,092 --> 00:00:15,093
+Hemos añadido una parte a la cadena de documentacion. Ejemplos de uso y valores de regreso esperados.
+
+5
+00:00:15,093 --> 00:00:18,099
+Esta definicion de funcion tiene 5 partes.
+
+6
+00:00:18,099 --> 00:00:23,054
+Tiene la cabecera, la cual incluye el nombre de la funcion y los parametros.
+
+7
+00:00:23,054 --> 00:00:27,084
+Tiene la "pipe contract". Los tipos de valores que se espera que se pasen
+
+8
+00:00:27,084 --> 00:00:32,046
+a los parametros, como tambien el tipo de valor de retorno.
+
+9
+00:00:32,046 --> 00:00:36,075
+Tiene la descripcion. Tiene varios ejemplos de uso de la funcion.
+
+10
+00:00:36,075 --> 00:00:40,000
+Y por ultimo esta el cuerpo de la funcion.
+
+11
+00:00:40,000 --> 00:00:43,033
+Nuestra receta de diseño te ayuda a desarrollar esas 5 partes.
+
+12
+00:00:43,033 --> 00:00:47,096
+Mas una, donde probamos que nuestra funcion funciona tras haberla escrito.
+
+13
+00:00:47,096 --> 00:00:51,092
+Explicaremos la funcion de diseño mientras desarrollamos otra funcion.
+
+14
+00:00:55,068 --> 00:00:59,067
+Aqui esta el problema con el que trabajaremos: La medida de temperatura de los Estados Unidos
+
+15
+00:00:59,067 --> 00:01:02,003
+esta en Fahrenheit y Canada mide en Centígrados.
+
+16
+00:01:02,003 --> 00:01:06,023
+Mientras viajamos entre los dos paises, ayuda tener una funcion de conversion.
+
+17
+00:01:06,023 --> 00:01:09,059
+Escribiremos una funcion que convierte de Fahrenheit a Centígrados.
+
+18
+00:01:09,059 --> 00:01:13,091
+El primer paso que daremos sera dar unos ejemplos de uso de tu funcion
+
+19
+00:01:13,091 --> 00:01:17,061
+la cual escribiras. Piensa en lo que quieres que haga tu funcion.
+
+20
+00:01:17,061 --> 00:01:19,093
+Y escribe 1 o 2 ejemplos de llamadas
+
+21
+00:01:19,093 --> 00:01:23,068
+a la funcion que quieres escribir. Tendras que pensar un nombre para tu funcion,
+
+22
+00:01:23,068 --> 00:01:27,085
+siempre puedes cambiarlo luego. Los nombres de las funciones suelen ser verbos,
+
+23
+00:01:27,085 --> 00:01:31,049
+porque hacen cosas. Así que si estas atascado, responde a la pregunta,
+
+24
+00:01:31,049 --> 00:01:35,003
+¿Qué es lo que hace la funcion? Nuestra respuesta aqui es, convertir
+
+25
+00:01:35,003 --> 00:01:38,087
+de Fahrenheit a Centígrados. Pero eso es muy largo, por lo que usaré
+
+26
+00:01:38,087 --> 00:01:42,073
+convertir a Centrigrados. Siempre puedes mejorar el nombre después.
+
+27
+00:01:42,073 --> 00:01:47,065
+¿Qué queremos que ocurra cuando llamamos a convertir a Centígrados con 32 grados Fahrenheit?
+
+28
+00:01:47,065 --> 00:01:50,012
+Esperamos que devuelva 0.
+
+29
+00:01:50,012 --> 00:01:54,047
+Añadiremos el signo mayor que para que parezca que esta escrito en la consola de python.
+
+30
+00:01:54,047 --> 00:01:58,016
+Vamos a añadir otro ejemplo para convertir al
+
+31
+00:01:58,016 --> 00:02:02,038
+punto de ebullición. El siguiente paso es pensar en el tipo de la variable.
+
+32
+00:02:02,038 --> 00:02:05,022
+¿De qué tipo son los parametros?
+
+33
+00:02:05,022 --> 00:02:08,056
+¿Y cual e sel tipo de valor que devuelve?
+
+34
+00:02:08,056 --> 00:02:13,059
+Parece que queremos que "convertir a Centígrados" trabaje con enteros, pero podemos imaginar
+
+35
+00:02:13,059 --> 00:02:18,037
+que trabajará bien tambien con floats. Vamos a usar la palabra numero para
+
+36
+00:02:18,037 --> 00:02:23,009
+indicar que puede devolver ambos. Y presumiblemente, devolverá un numero también.
+
+37
+00:02:23,009 --> 00:02:25,079
+Ahora que has escrito algunas llamadas y
+
+38
+00:02:25,079 --> 00:02:30,057
+tienes una idea de como deberian ser los tipos, es hora de escribir la cabecera de la función.
+
+39
+00:02:30,057 --> 00:02:34,006
+Escoge un nombre de parametro significativo para que
+
+40
+00:02:34,006 --> 00:02:38,060
+otros programadores y tu entendais mejor tu función.
+
+41
+00:02:38,060 --> 00:02:42,003
+Tambien puedes modificar el nombre de tu funcion aqui si quieres.
+
+42
+00:02:42,052 --> 00:02:49,056
+Vamos a rellenar lo que sabemos para la cabecera. Sabemos que el nombre de la funcion es
+
+43
+00:02:49,056 --> 00:02:55,053
+convertir a Centigrados y que nuestro parametro es el numero de grados Fahrenheit.
+
+44
+00:02:55,053 --> 00:02:59,006
+Asi que usaremos Fahrenheit como nuestro nombre de parametro.
+
+45
+00:02:59,075 --> 00:03:04,087
+Todo lo de abajo se supone que esta en una "box spring", asi que encarguemonos de ello
+
+46
+00:03:04,087 --> 00:03:07,075
+ahora. Por ahora, deberias tener una buena idea
+
+47
+00:03:07,075 --> 00:03:12,092
+de que es lo que quieres que la funcion haga. Es hora de escribir la descripcion
+
+48
+00:03:12,092 --> 00:03:16,013
+sobre que hace nuestra funcion. Devuelve el numero de grados Centigrados
+
+49
+00:03:16,013 --> 00:03:20,072
+equivalentes a los grados Fahrenheit. Ten en cuenta que mencionamos el parametro
+
+50
+00:03:20,072 --> 00:03:24,019
+explicitamente y también describimos el valor de retorno.
+
+51
+00:03:24,019 --> 00:03:27,008
+Esto es muy importante en toda documentación.
+
+52
+00:03:27,034 --> 00:03:32,002
+Ahora que tienes una buena idea de lo que hace la funcion, y tu
+
+53
+00:03:32,002 --> 00:03:36,070
+has decidido los nombres de la funcion y parámetros, puedes escribir el codigo para la función.
+
+54
+00:03:36,070 --> 00:03:39,064
+Esto te sera mucho más facil de hacer si
+
+55
+00:03:39,064 --> 00:03:44,008
+dedicas tiempo pensando en los ejemplos, cabecera y descripción.
+
+56
+00:03:44,008 --> 00:03:49,001
+Como aprendimos en el colegio, restamos 32 a los grados Fahrenheit y los multiplicamos por
+
+57
+00:03:49,001 --> 00:03:52,026
+cinco novenos (5/9). No hemos guardado esto todavia
+
+58
+00:03:52,026 --> 00:03:55,058
+y deberiamos hacerlo. Vamos a llamar a esta "temperature.pie".
+
+59
+00:03:57,074 --> 00:04:03,037
+Es hora de probar nuestra funcion en
+
+60
+00:04:03,037 --> 00:04:06,081
+los ejemplos. Una vez has pensado que
+
+61
+00:04:06,081 --> 00:04:12,047
+valores retorna, puedes decir si tu codigo o tal vez los ejemplos
+
+62
+00:04:12,047 --> 00:04:15,003
+son incorrectos. Ejecutaremos este módulo.
+
+63
+00:04:15,030 --> 00:04:22,083
+Configura la ventana para que podamos ver ambos a la vez y despues podemos copiar
+
+64
+00:04:22,083 --> 00:04:29,016
+y pegar nuestros ejemplos. Y vemos que esperamos 0 pero
+
+65
+00:04:29,016 --> 00:04:34,072
+obtenemos 14.2 periodico. ¿Qué pasa con el otro?
+
+66
+00:04:38,089 --> 00:04:44,061
+No, tampoco funciona. Tal vez hallas visto el problema.
+
+67
+00:04:44,061 --> 00:04:51,055
+La resta tiene menos prioridad que la multiplicación o la division y
+
+68
+00:04:51,055 --> 00:04:58,085
+entonces la resta pasa despues de que hallamos calculado 32 veces 5 dividido por 9.
+
+69
+00:04:58,085 --> 00:05:02,089
+Arreglamos esto añadiendo parentesis, guardando,
+
+70
+00:05:02,089 --> 00:05:08,037
+volviendo a ejecutar. Y entonces probamos nuestros ejemplos de nuevo.
+
+71
+00:05:09,003 --> 00:05:15,031
+Casi obtenemos los esperado en nuestros ejemplos, excepto que estamos obteniendo
+
+72
+00:05:15,031 --> 00:05:20,085
+un float en lugar de un int. Esto es porque la división siempre produce un
+
+73
+00:05:20,085 --> 00:05:26,746
+float y el operador produce un float tanto si el operando es float como si no.
+
+74
+00:05:26,746 --> 00:05:33,770
+El problema no esta en nuestro calculo. Está en nuestros ejemplos y en nuestros tipos.
+
+75
+00:05:33,770 --> 00:05:39,191
+Numero es demasiado general. Lo arreglaremos.
+
+76
+00:05:39,191 --> 00:05:48,329
+Vamos a ejecutar el módulo otra vez, llamar a ayuda en nuestra funcion y mostrar en

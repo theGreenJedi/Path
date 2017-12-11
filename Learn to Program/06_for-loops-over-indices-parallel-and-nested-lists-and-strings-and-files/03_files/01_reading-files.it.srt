@@ -1,0 +1,249 @@
+1
+00:00:00,800 --> 00:00:05,691
+Finora, i nostri programmi hanno usato la memoria
+del computer per immagazzinare delle informazioni,
+
+2
+00:00:05,691 --> 00:00:09,852
+Ma la maggior parte delle informazioni sono
+salvate in file sul computer.
+
+3
+00:00:09,852 --> 00:00:14,305
+In questa lezione, mostreremo quattro modi
+per leggere un file di testo.
+
+4
+00:00:14,305 --> 00:00:20,437
+Useremo un file contenente, In Flanders Fields, 
+un poema scritto nel 1915 dal Tenente
+
+5
+00:00:20,437 --> 00:00:27,906
+Colonnello Canadese John McCrae.
+Prima che possiamo leggere un file, dobbiamo dire
+
+6
+00:00:27,906 --> 00:00:31,554
+a Python di aprirlo.
+La funzione integrata open fa questo.
+
+7
+00:00:31,554 --> 00:00:36,662
+Prende come argomento, il nome del
+file, e la lettera r indica che vogliamo
+
+8
+00:00:36,662 --> 00:00:39,846
+leggere da quel file, e non scrivere su
+di esso.
+
+9
+00:00:39,846 --> 00:00:44,954
+Se il file è nella stessa directory del
+programma, allora possiamo usare
+
+10
+00:00:44,954 --> 00:00:48,602
+il semplice nome del file.
+Ma se il file è in una cartella
+
+11
+00:00:48,602 --> 00:00:53,909
+differente, come nella cartella che
+abbiamo qui, dobbiamo fornire il percorso completo
+
+12
+00:00:53,909 --> 00:00:56,828
+per raggiungerlo.
+Ora leggeremo questo file in modi
+
+13
+00:00:56,828 --> 00:01:00,983
+differenti.
+Lo salveremo in una variabile, in modo da
+
+14
+00:01:00,983 --> 00:01:06,397
+non dover continuare a richiamarlo.
+Prima, apriamo il file per la lettura.
+
+15
+00:01:06,397 --> 00:01:12,714
+Quando apriamo un file per la lettura, abbiamo
+a disposizione un metodo chiamato readline
+
+16
+00:01:13,124 --> 00:01:19,194
+che legge una riga dal file,
+incluso il carattere di a capo al
+
+17
+00:01:19,194 --> 00:01:25,886
+fondo di quella riga, e la ritorna.
+Possiamo leggere questo intero poema chiamando
+
+18
+00:01:25,886 --> 00:01:33,940
+readline ancora e ancora.
+Notate che anche le righe bianche hanno il carattere
+
+19
+00:01:33,940 --> 00:01:40,699
+a capo al fondo di esse.
+Ora che abbiamo letto il file fino al
+
+20
+00:01:40,699 --> 00:01:45,171
+fondo, possiamo chiamare nuovamente readline,
+otteniamo indietro una stringa vuota.
+
+21
+00:01:45,171 --> 00:01:50,991
+L'unica volta che il readline ritorna una stringa
+vuota è quando abbiamo raggiunto la
+
+22
+00:01:50,991 --> 00:01:55,179
+fine del file.
+Questo significa che possiamo usare un ciclo while
+
+23
+00:01:55,179 --> 00:01:59,935
+per leggere le righe di un file.
+Chiuderemo il file e lo riapriremo in
+
+24
+00:01:59,935 --> 00:02:04,832
+modo da poter ricominciare dall'inizio.
+Leggeremo la prima riga del file,
+
+25
+00:02:04,832 --> 00:02:10,653
+e poi, finché non abbiamo raggiunto la fine 
+del file, stamperemo le righe che abbiamo letto
+
+26
+00:02:10,653 --> 00:02:13,852
+e poi andremo avanti, per leggere la riga
+successiva.
+
+27
+00:02:13,852 --> 00:02:20,035
+Quando facciamo girare questo ciclo guardate 
+attentamente. Vedrete delle linee bianche fra
+
+28
+00:02:20,035 --> 00:02:24,612
+ogni riga del file.
+La ragione è che readline
+
+29
+00:02:25,006 --> 00:02:30,687
+ritornerà l'intera riga, includendo
+il carattere di a capo finale.
+
+30
+00:02:30,687 --> 00:02:35,500
+E poi quando stampiamo quella riga, print
+aggiungerà una nuova riga.
+
+31
+00:02:36,340 --> 00:02:42,592
+Per prevenire questa cosa, useremo
+esattamente lo stesso formato che
+
+32
+00:02:42,592 --> 00:02:46,529
+abbiamo usato prima,
+eccetto il fatto che nella nostra chiamata alla
+
+33
+00:02:46,529 --> 00:02:53,245
+funzione print, useremo la stringa vuota da
+stampare come carattere finale dopo che print
+
+34
+00:02:53,245 --> 00:03:02,248
+ha stampato la riga.
+Vediamo ora come leggere solamente la
+
+35
+00:03:02,248 --> 00:03:07,183
+prima strofa.
+Leggiamo il titolo, e poi, la riga vuota,
+
+36
+00:03:07,183 --> 00:03:11,920
+e poi la prima riga del poema.
+Controlliamo.
+
+37
+00:03:13,460 --> 00:03:20,251
+Leggeremo ogni riga finché non troviamo la
+riga contenente niente di più che il carattere di
+
+38
+00:03:20,251 --> 00:03:30,051
+nuova riga.
+Questo approccio di readline ci permette di leggere
+
+39
+00:03:30,051 --> 00:03:34,802
+solo le parti del file a cui siamo
+interessati e ci permette di fermarci
+
+40
+00:03:34,802 --> 00:03:39,760
+nell'elaborazione del file non appena abbiamo
+trovato le parti che vogliamo.
+
+41
+00:03:40,600 --> 00:03:46,862
+Se sappiamo che vogliamo leggere ogni
+riga nel file, c'è un metodo più semplice.
+
+42
+00:03:46,862 --> 00:03:53,042
+Il ciclo for di Python lavora sui file
+recuperando una riga alla volta, incluso
+
+43
+00:03:53,042 --> 00:03:57,334
+il carattere a capo.
+Se il tuo file non è grande, puoi
+
+44
+00:03:57,334 --> 00:04:03,280
+leggerlo tutto in una volta usando il metodo read,
+che ritorna l'intero file contenuto in una
+
+45
+00:04:03,280 --> 00:04:07,152
+singola stringa.
+Il quarto e ultimo modo che mostreremo
+
+46
+00:04:07,152 --> 00:04:13,029
+per leggere il contenuto di un file, 
+è usare il metodo readlines che ritorna una
+
+47
+00:04:13,029 --> 00:04:21,713
+lista di tutte le righe di un file.
+Possiamo usarlo per stampare tutte le righe
+
+48
+00:04:21,713 --> 00:04:26,162
+del file.
+Otterremo la nostra lista e poi effettueremo un ciclo
+
+49
+00:04:26,162 --> 00:04:37,137
+su quella lista, stampando, come abbiamo fatto prima.
+Questo approccio è utile se vogliamo mantenere
+
+50
+00:04:37,137 --> 00:04:41,800
+la lista in modo da poter accedere ai suoi
+elementi più avanti.

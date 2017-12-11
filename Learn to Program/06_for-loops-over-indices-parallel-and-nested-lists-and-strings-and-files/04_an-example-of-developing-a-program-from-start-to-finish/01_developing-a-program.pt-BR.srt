@@ -1,0 +1,1485 @@
+1
+00:00:01,100 --> 00:00:04,702
+Esta aula é enorme.
+Entretanto, ela não introduz nenhuma nova
+
+2
+00:00:04,702 --> 00:00:08,915
+ferramenta Python, desta forma, você pode consderar esta aula opcional.
+
+3
+00:00:08,915 --> 00:00:12,762
+Nela, irei desenvolver um programa do começo.
+
+4
+00:00:12,762 --> 00:00:17,891
+Avaliarei quais informações precisarei ler
+e preciso decidir
+
+5
+00:00:17,891 --> 00:00:21,616
+como iniciarei e quais funções escreverei.
+
+6
+00:00:21,616 --> 00:00:26,623
+Isto tenciona a dar-lhe um gosto do processo de 
+pensamento que realizo quando escrevo um programa.
+
+7
+00:00:26,623 --> 00:00:31,703
+Este arquivo contém um monte de notas da Tarefa Um.
+
+8
+00:00:31,703 --> 00:00:36,102
+Há um cabeçalho, seguido por uma linha em branco.
+
+9
+00:00:36,102 --> 00:00:41,497
+Seguido por uma lista do número do estudante e a nota atribuída.
+
+10
+00:00:41,497 --> 00:00:46,062
+Gostaríamos de saber a distribuição destas notas.
+
+11
+00:00:46,062 --> 00:00:49,631
+Então manteremos registros 
+por categorias.
+
+12
+00:00:49,631 --> 00:00:56,022
+Quantos terminam na faixa entre zero a nove,
+dez a dezenove, vinte a vinte e nove, e assim por diante
+
+13
+00:00:56,022 --> 00:01:07,543
+E teremos também uma categoria para
+
+14
+00:01:07,543 --> 00:01:14,189
+as pessoas que receberam 100.
+No fim das contas, queremos, neste programa,
+
+15
+00:01:14,189 --> 00:01:18,680
+criar um novo arquivo contendo 
+essas informações.
+
+16
+00:01:18,680 --> 00:01:24,147
+E, também, inserir um asterisco em cada categoria 
+para cada nota existente.
+
+17
+00:01:24,147 --> 00:01:31,468
+Então, se temos a nota 77.5 nesta planilha, 
+no arquivo de saída teremos um asterisco na faixa 70-79.
+
+18
+00:01:31,468 --> 00:01:36,350
+Temos a nota 37.5, então um asterisco na faixa 30-39.
+A nota 62.5, um asterisco na faixa 60-69.
+
+19
+00:01:36,350 --> 00:01:42,002
+A nota 72.5, então mais um asterisco na faixa 70-79.
+
+20
+00:01:42,002 --> 00:01:49,870
+Uma nota 100, uma 55, uma 95, 
+outra na faixa dos oitenta, 
+
+21
+00:01:49,870 --> 00:01:56,987
+uma na faixa dos noventa, e assim por diante.
+Finalmente, teremos um asterisco para cada número da planilha,
+
+22
+00:01:56,987 --> 00:02:02,850
+então poderemos ver a distribuição das notas.
+
+23
+00:02:02,850 --> 00:02:10,403
+A fim de ter um programa que faça isso,
+precisamos executar os seguintes passos.
+
+24
+00:02:10,403 --> 00:02:18,258
+E o passo 1 será: Ler as notas  
+e guardá-las em uma lista.
+
+25
+00:02:18,258 --> 00:02:21,179
+As notas são uma lista simples. 
+É um caso relacionado a listas.
+
+26
+00:02:21,179 --> 00:02:25,811
+Então nós leremos as notas 
+e as guardaremos em uma lista.
+
+27
+00:02:25,811 --> 00:02:29,840
+Este é o passo 1.
+O segundo passo será
+
+28
+00:02:31,780 --> 00:02:44,300
+contar os número de notas por faixa.
+E o terceiro passo será
+
+29
+00:02:48,320 --> 00:02:59,360
+gravar o histograma em arquivo.
+Seja qual for o arquivo selecionado pelo usuário.
+
+30
+00:02:59,660 --> 00:03:05,379
+Este processo de escrever os passos em um 
+nível bem alto é chamado Abordagem Top-Down.
+
+31
+00:03:05,379 --> 00:03:08,854
+Quando pegamos um problema pela primeira vez
+
+32
+00:03:08,854 --> 00:03:14,935
+pode ser muita pressão pensar em como vamos
+resolver a tarefa toda.
+
+33
+00:03:14,935 --> 00:03:21,166
+Então, nós a quebramos em vários passos.
+Uma vez que decidamos como vamos armazenar nosso dados,
+
+34
+00:03:21,166 --> 00:03:25,114
+podemos fazer esses passos 
+em qualquer ordem que desejarmos,
+
+35
+00:03:25,114 --> 00:03:28,128
+porque eles são mais ou menos 
+independentes.
+
+36
+00:03:28,128 --> 00:03:33,440
+E podemos testá-los separadamente.
+Vamos começar um novo programa,
+
+37
+00:03:45,780 --> 00:03:50,748
+e fazer algumas anotações. 
+Vou pegar aqueles rabiscos e passar para um texto.
+
+38
+00:03:50,748 --> 00:03:56,695
+Escrever coisas à mão, como fizemos aqui.
+Apenas o exemplo da saída que queremos
+
+39
+00:03:56,695 --> 00:04:03,395
+e, em seguida, a lista de passos que 
+achamos que temos de dar, a fim de fazer este programa.
+
+40
+00:04:03,395 --> 00:04:06,707
+ Na verdade, tem um enorme benefício.
+
+41
+00:04:06,933 --> 00:04:12,579
+Isto permite que você se afaste do 
+ambiente de desenvolvimento
+
+42
+00:04:12,579 --> 00:04:16,634
+e apenas pense como resolver o problema.
+Isto é essencial.
+
+43
+00:04:16,634 --> 00:04:21,343
+Programas são apenas a expressão 
+de algoritmos que você tem em sua mente.
+
+44
+00:04:21,343 --> 00:04:26,783
+E se você descobrir o que precisa fazer,
+seu  tempo codificando será bem mais fácil.
+
+45
+00:04:26,783 --> 00:04:32,302
+Vamos fazer anotações sobre o formato que queremos.
+
+46
+00:04:32,302 --> 00:04:38,186
+Queremos 0-9 e depois um 
+asterisco ou dois, 10-19.
+
+47
+00:04:38,186 --> 00:04:44,625
+Queremos alinhados.
+
+48
+00:04:44,625 --> 00:04:51,731
+20-29. Talvez possar ter vários asteriscos.
+E assim por diante, até 90-99.
+
+49
+00:04:51,731 --> 00:04:57,060
+E por fim o 100.
+
+50
+00:04:57,380 --> 00:05:01,011
+Agora que tenho isso escrito, 
+posso me livrar desses rabiscos.
+
+51
+00:05:03,280 --> 00:05:08,261
+Nós iremos ler dos arquivos
+que serão selecionados pelo usuário.
+
+52
+00:05:08,261 --> 00:05:11,274
+Queremos que isso funcione
+
+53
+00:05:11,274 --> 00:05:14,349
+com qualquer arquivo neste formato, 
+não apenas este arquivo em particular.
+
+54
+00:05:14,349 --> 00:05:19,858
+Então, vamos aprender a usar 
+a caixa de diálogo de arquivo Tkinter.
+
+55
+00:05:20,708 --> 00:05:28,460
+Começaremos pedindo ao usuário 
+um arquivo e depois o leremos.
+
+56
+00:05:29,473 --> 00:05:39,605
+Agora temos a variável
+a1_filename = tkinter.filedialog.askopenfile()
+
+57
+00:05:39,605 --> 00:05:44,671
+Então, vamos abrir o arquivo: 
+a1_file = open(a1_filename, 'r')
+
+58
+00:05:45,684 --> 00:05:52,650
+Vamos imprimir as linhas, 
+>> for line in a1_file: 
+>> print line
+
+59
+00:05:52,650 --> 00:05:57,089
+apenas para nos certificarmos 
+que está tudo certo.
+
+60
+00:05:57,089 --> 00:06:03,058
+ Este processo de verificar frequentemente como nosso programa 
+está funcionando é um bom hábito a se manter,
+
+61
+00:06:03,058 --> 00:06:08,954
+porque permite que você note erros de 
+sintaxe e de lógica, antes que vire uma bagunça.
+
+62
+00:06:08,954 --> 00:06:13,540
+Então vamos executar o módulo.
+
+63
+00:06:13,880 --> 00:06:17,169
+E nós temos uma sintaxe inválida.
+
+64
+00:06:17,169 --> 00:06:23,649
+Tipo errado de instrução de impressão.
+Culpa da minha época com Python 2.7
+
+65
+00:06:23,649 --> 00:06:30,200
+Salvar e tentar uma outra vez.
+Eu fiz um pequeno arquivo de notas,
+
+66
+00:06:30,200 --> 00:06:34,402
+para que não precisemos trabalhar com muitas notas de uma só vez.
+
+67
+00:06:34,402 --> 00:06:39,354
+E eu tenho o erro de Tipo.
+O problema aqui é que eu estou usando askopenfile()
+
+68
+00:06:39,354 --> 00:06:42,805
+Em vez de askopenfilename()
+
+69
+00:06:42,805 --> 00:06:46,331
+askopenfile na verdade abre o arquivo para você.
+
+70
+00:06:46,331 --> 00:06:52,558
+Mas eu gostaria de fazer isso em dois passos, porque eu acho que é mais explicito
+
+71
+00:06:52,558 --> 00:06:57,510
+para pessoas que estão aprendendo a programar.
+Vou selecionar Run Module (Executar módulo) de novo.
+
+72
+00:06:57,510 --> 00:07:03,193
+Ele pede para selecionar nosso arquivo de saída. 
+E aqui está.
+
+73
+00:07:03,193 --> 00:07:07,580
+Este arquivo deve ter aproximadamente nove notas.
+
+74
+00:07:08,620 --> 00:07:14,428
+Este processo de executar frequentemente encontrou 2 erros 
+
+75
+00:07:14,428 --> 00:07:18,929
+em apenas 6 ou 7 linhas de código.
+E isto me poupou muito tempo mais tarde, 
+
+76
+00:07:18,929 --> 00:07:22,342
+quando eu tivesse umas 150 linhas de código.
+
+77
+00:07:22,342 --> 00:07:28,223
+Se eu tivesse esperado até que tivesse a maior parte do programa escrito,
+
+78
+00:07:28,223 --> 00:07:34,103
+ficaria menos claro saber onde verificar para resolver meus problemas.
+
+79
+00:07:34,103 --> 00:07:39,912
+Eu posso me livrar dessas linhas de código agora, pois agora eu sei que meu arquivo 
+
+80
+00:07:39,912 --> 00:07:44,812
+esta abrindo corretamente.
+Eu preciso fazer o mesmo com o arquivo do histograma.
+
+81
+00:07:44,812 --> 00:07:52,886
+E dar melhores nome às variáveis do arquivo  de histograma.
+
+82
+00:07:52,886 --> 00:07:58,304
+Isto parece razoável.
+
+83
+00:07:58,304 --> 00:08:03,550
+Eu gosto de manter meu programa principal separado das funções que eu dependo.
+
+84
+00:08:03,808 --> 00:08:10,430
+Então, assim como na tarefa 1 e 2, eu criarei um arquivo para manter as funções
+
+85
+00:08:10,430 --> 00:08:16,900
+Vou nomeá-lo de grade.pi .
+
+86
+00:08:18,540 --> 00:08:22,928
+E eu sei que eu terei que importá-lo.
+
+87
+00:08:22,928 --> 00:08:29,775
+Meus passos são: ler as notas em uma lista; contar as notas por faixas; '
+
+88
+00:08:29,775 --> 00:08:36,500
+e escrever o histograma para o arquivo.
+
+89
+00:08:37,120 --> 00:08:41,174
+Vamos começar lendo as notas em uma lista.
+
+90
+00:08:41,174 --> 00:08:46,702
+Como eu estou lendo as notas de um arquivo, é difícil ter um exemplo.
+
+91
+00:08:46,702 --> 00:08:53,428
+Então, nós vamos começar com o type contract. 
+
+92
+00:08:53,428 --> 00:08:54,902
+Eu sei que eu tenho um arquivo aberto para leitura.
+
+93
+00:08:54,902 --> 00:08:58,956
+E eu sei que retornará uma lista.
+
+94
+00:08:58,956 --> 00:09:04,208
+E que todos os números deste arquivo são floats.
+
+95
+00:09:04,208 --> 00:09:13,720
+Então, é uma lista de float.
+Precisa de um espaço extra aqui, deixa eu fazer minha identação adequadamente.
+
+96
+00:09:13,720 --> 00:09:19,140
+E o que faremos é ler e
+
+97
+00:09:19,140 --> 00:09:23,295
+retornar uma lista de notas no arquivo.
+
+98
+00:09:23,295 --> 00:09:27,901
+Bem, eu preciso de um cabeçalho.
+'Ler notas' é o que eu estou fazendo.
+
+99
+00:09:27,901 --> 00:09:32,960
+É ótima oração sem sujeito.
+Eu chamarei de gradefile
+
+100
+00:09:34,360 --> 00:09:41,722
+Então agora eu posso finalizar esta frase do meu documento.
+
+101
+00:09:41,722 --> 00:09:48,520
+Eu preciso saber que este arquivo esta no formato correto.
+
+102
+00:09:48,520 --> 00:09:54,618
+Então, a pré-condição para chamar esta função
+
+103
+00:09:54,618 --> 00:09:57,790
+é que gradefile (o arquivo de notas)
+
+104
+00:09:57,790 --> 00:10:01,692
+inicie com um cabeçalho,
+
+105
+00:10:01,692 --> 00:10:08,110
+sem linhas em brancos e então tenha uma linha em branco.
+
+106
+00:10:08,904 --> 00:10:13,473
+Porque eu preciso ser capaz de ignorar o cabeçalho.
+
+107
+00:10:14,268 --> 00:10:20,326
+E, então, eu preciso que cada linha esteja no formato,
+
+108
+00:10:20,326 --> 00:10:24,597
+onde há um código de aluno e uma nota.
+
+109
+00:10:25,392 --> 00:10:31,848
+A fim de conseguir isso, primeiro eu preciso  pular o cabeçalho.
+
+110
+00:10:32,642 --> 00:10:38,900
+E, em seguida, ler as notas, guardando-as em uma lista.
+
+111
+00:10:38,900 --> 00:10:44,331
+Eu estou seguindo a mesma abordagem top-down. 
+
+112
+00:10:44,331 --> 00:10:47,245
+Eu estou escrevendo os passos que eu preciso seguir, a fim de realizar essa tarefa menor.
+
+113
+00:10:47,245 --> 00:10:49,564
+É a mesma abordagem.
+
+114
+00:10:49,564 --> 00:10:56,247
+A fim de pular o cabeçalho, 
+
+115
+00:10:56,247 --> 00:11:02,259
+nós leremos a primeira linha, desde que não seja o caractere de nova linha ( \n ). 
+
+116
+00:11:02,259 --> 00:11:06,668
+Eu preciso ler a próxima linha.
+
+117
+00:11:06,668 --> 00:11:14,884
+Agora, eu acabei de ler a linha em branco,  então eu preciso ler as notas, guardando-as na lista.
+
+118
+00:11:14,884 --> 00:11:20,895
+Bem, eu sei que lerei a primeira nota e então,
+
+119
+00:11:20,895 --> 00:11:26,847
+enquanto eu não atingir o final do arquivo,
+
+120
+00:11:26,847 --> 00:11:33,643
+Eu escrevo io final do arquivo  como ' ', se vocè se lembra minha linha não é uma string vazia.
+
+121
+00:11:33,643 --> 00:11:38,146
+Então se minha linha não é o fim do arquivo, eu quero fazer a mesma coisa: ler a próxima linha.
+
+122
+00:11:38,146 --> 00:11:45,188
+gradefile.readline()
+Então isso lerá cada linha até o fim do arquivo.
+
+123
+00:11:45,188 --> 00:11:50,272
+O que eu preciso fazer agora é dentro deste padrão.
+
+124
+00:11:50,272 --> 00:11:55,445
+Eu preciso guardar as notas. 
+A fim de fazer isto, eu preciso de uma variável do tipo lista.
+
+125
+00:11:55,445 --> 00:12:00,035
+Eu começarei com uma lista vazia.
+
+126
+00:12:00,035 --> 00:12:03,460
+Esta lista conterá todas as notas do arquivo.
+
+127
+00:12:03,460 --> 00:12:11,353
+Enquanto eu não tiver alcançado o fim do arquivo, eu sei que tenho uma nota. 
+
+128
+00:12:11,353 --> 00:12:15,909
+Então agora temos uma string contendo a informação de um único estudante.
+
+129
+00:12:15,909 --> 00:12:22,227
+Nós vamos procurar o último espaço na linha,
+
+130
+00:12:22,227 --> 00:12:29,790
+que é o espaço à direita do número.
+E extrair os caracteres após este espaço.
+
+131
+00:12:29,790 --> 00:12:34,959
+Então, encontre o último espaço e
+
+132
+00:12:34,959 --> 00:12:40,150
+pego tudo depois deste espaço.
+
+133
+00:12:40,150 --> 00:12:46,936
+Eu sei que line.rfind busca a partir da direita.
+Então eu estou procurando pelo espaço mais à direita.
+
+134
+00:12:46,936 --> 00:12:53,072
+Esta função retorna o index do espço mais à direita da linha.
+
+135
+00:12:53,072 --> 00:13:00,881
+Eu gostaria de cortar a linha começando uma posição após o index retornado:
+o primeiro dígito
+
+136
+00:13:00,881 --> 00:13:07,481
+E continuar até o fin da linha.
+line[line.rfind(' ') + 1:] vai fazer isso para mim.
+
+137
+00:13:07,481 --> 00:13:13,147
+erceba que na variável grade, a nota extraída é uma string,
+
+138
+00:13:13,147 --> 00:13:18,936
+porque  'line' é uma string e quando eu pego um pedaço dela, eu  tenho uma string.
+
+139
+00:13:18,936 --> 00:13:25,630
+Então, quando eu acrescentar a anota na lista de notas, eu gostaria de transformar a nota em float.
+
+140
+00:13:25,630 --> 00:13:31,958
+Acho que estamos quase terminando.
+Eu tenho minha lista de notas aqui: grades
+
+141
+00:13:31,958 --> 00:13:42,660
+E então é isto que eu vou retornar.
+Vamos testar!
+
+142
+00:13:43,820 --> 00:13:51,260
+Eu vou executar isto, então assim terei acesso ao read_grades
+
+143
+00:13:51,260 --> 00:13:58,701
+Eu irei solicitar por um arquivo
+>> tkinter.filedialog.openfilename()
+
+144
+00:13:58,701 --> 00:14:06,277
+Ops, eu preciso importar isto
+>> import tkinter.filedialog
+
+145
+00:14:06,277 --> 00:14:11,720
+Vamos usar nosso arquivo de teste.
+
+146
+00:14:13,880 --> 00:14:22,833
+Agora eu preciso abrir aquele arquivo.
+E, finalmente, 
+
+147
+00:14:22,833 --> 00:14:29,066
+chamarei read_grades para aquele arquivo aberto.
+Isto vai retornar, como esperarmos,   
+
+148
+00:14:29,066 --> 00:14:34,960
+uma lista de floats, como vemos na tela aqui.
+
+149
+00:14:35,800 --> 00:14:42,786
+E parece que temos todas notas.
+Com este teste rápido, acredito que eu estou pronto para
+
+150
+00:14:42,786 --> 00:14:49,119
+chamar read_grades a partir do meu programa principal.
+
+151
+00:14:49,119 --> 00:14:51,720
+Agora eu sei como ler as notas em uma lista.
+
+152
+00:14:53,262 --> 00:15:03,701
+A próxima tarefa é contar a quantidade de notas para cada faixa de valores que temos aqui.
+
+153
+00:15:03,701 --> 00:15:08,860
+Bem, vamos começar a projetá-lo.
+
+154
+00:15:10,280 --> 00:15:15,222
+Com esta tarefa, va verdade, podemos ter um exemplo.
+
+155
+00:15:15,222 --> 00:15:21,023
+Nós temos que decidir como vamos chamar este,
+
+156
+00:15:21,023 --> 00:15:23,602
+talvez,  grade_ranges()
+
+157
+00:15:23,602 --> 00:15:27,900
+Nós podemos sempre mudar de idéia mais tarde.
+
+158
+00:15:27,900 --> 00:15:32,324
+Agora nós sabemos que se passarrmos uma lista como esta
+
+159
+00:15:32,324 --> 00:15:39,053
+Na verdade, nós temos um exemplo disto.
+O que gostariamos de fazer é
+
+160
+00:15:39,053 --> 00:15:45,598
+talvez retornar uma nova lista com as somatórias.
+Então nós sabemos que nós temos quantos 0's?
+
+161
+00:15:45,598 --> 00:15:50,760
+Nós temos 2 na faixa 0-9
+
+162
+00:15:51,200 --> 00:15:55,183
+Não temos nada na faixa 20-29. 
+
+163
+00:15:55,183 --> 00:16:02,241
+Nós temos 1 número na faixa 30-39.
+Não temos nada na 40-49.
+
+164
+00:16:02,241 --> 00:16:06,224
+1 número na faixa 50-59.
+
+165
+00:16:06,224 --> 00:16:11,119
+Um, dois, três, quatro... 4 números na faixa 70-79.
+
+166
+00:16:11,119 --> 00:16:14,422
+Nada no 80-89. Nada no 90-99 e 1 número no 100.
+
+167
+00:16:14,422 --> 00:16:18,909
+Então, confiantemente, é isto que serermos capaz de retornar.
+
+168
+00:16:18,909 --> 00:16:24,443
+Nós vamos...
+[contando a quantidade de entradas na lista de saída ]
+
+169
+00:16:24,443 --> 00:16:27,360
+Ops, está faltando um.
+
+170
+00:16:28,120 --> 00:16:35,071
+Um 0-9, sem 10-19, sem 20-29, um 30-39, sem 40-49, um 50-59, << sem 60-69 >> 
+
+171
+00:16:35,071 --> 00:16:39,773
+quatro 70-79, sem 80-89, sem 90-99 e um 100.
+
+172
+00:16:39,773 --> 00:16:47,031
+[contando a quantidade de entradas em amabas as listas ]
+
+173
+00:16:47,031 --> 00:16:53,880
+Então, acho que eu construi meu exemplo corretamente.
+
+174
+00:16:54,220 --> 00:16:58,160
+Vou mover a tela daqui por um instante, assim eu posso
+
+175
+00:16:58,160 --> 00:17:02,484
+verificar o histograma aqui.
+Então este é o histograma que eu quero por fim.
+
+176
+00:17:02,484 --> 00:17:07,123
+E o que parece que eu decidi é que,
+
+177
+00:17:07,123 --> 00:17:13,413
+no index 0 eu contarei a quantidade de números na faixa 0-9.
+
+178
+00:17:13,413 --> 00:17:16,951
+No index 1, como resultado desta função,
+
+179
+00:17:16,951 --> 00:17:21,197
+contarei os números na faixa 10-11.
+
+180
+00:17:21,197 --> 00:17:25,285
+Os números da 20-29, 30-39 e assim por diante.
+
+181
+00:17:25,285 --> 00:17:27,462
+E, índice 0 é 0-9.
+
+182
+00:17:27,462 --> 00:17:31,186
+Índice 1 é 10-19.
+Índice 2 é 20-29.
+
+183
+00:17:31,186 --> 00:17:36,330
+Índice 3 é 30-39.
+Então, parece que tenho o número do índice.
+
+184
+00:17:36,330 --> 00:17:41,879
+Seja o primeiro, seja os números 10-19, 30-39, 40-49 no índice 4, 50-59 no índice 5,
+
+185
+00:17:41,879 --> 00:17:47,667
+90-99 no índice 9, 100 no índice 10.
+Então, sim, isso parece ser o que estou recebendo.
+
+186
+00:17:47,667 --> 00:17:51,393
+Compreender esta representação de dados,
+
+187
+00:17:51,393 --> 00:17:57,735
+como eu estou armazenando informações, o que cada índice significa e como eles correspondem às faixas,
+
+188
+00:17:57,735 --> 00:18:04,157
+irá, novamente, poupar-me uma quantidade tempo enorme mais tarde,
+
+189
+00:18:04,157 --> 00:18:11,541
+quando eu tentar implementar esta função.
+Eu vou passar isto para cá.
+
+190
+00:18:11,541 --> 00:18:16,620
+E eu irei fazer algumas anotações sobre o que eu acabou de descobrir.
+
+191
+00:18:17,560 --> 00:18:22,884
+0-9 é o índice 0.
+Este é o índice 1.
+
+192
+00:18:22,884 --> 00:18:33,089
+Este é o índice 2 e assim por diante.
+Este é o índice 9 e este o 10.
+
+193
+00:18:33,089 --> 00:18:40,395
+E o meu resultado.
+Bem, parece-me ser dado....
+
+194
+00:18:40,395 --> 00:18:45,776
+<<corrigindo um item>>
+Parce-me que eu dou uma lista de Float
+
+195
+00:18:45,776 --> 00:18:58,140
+e é dado-me de volta uma lista de Int.
+E esta lista parece estar retornando uma lista de Int
+
+196
+00:18:58,140 --> 00:19:09,080
+em que cada índice indica quantos notas estão nestas faixas.
+
+197
+00:19:13,521 --> 00:19:18,732
+"grade ranges" não expressa nem um pouco a idéia.
+
+198
+00:19:18,732 --> 00:19:26,544
+Então eu vou usar count_grade_ranges(grades)
+
+199
+00:19:26,544 --> 00:19:31,832
+Isto significa que terei que mudar meu exemplo aqui.
+
+200
+00:19:31,832 --> 00:19:40,038
+E assim fica com uma expressão verbal melhor.
+Meu resultado tem comprimento de 11  números.
+
+201
+00:19:40,038 --> 00:19:47,172
+Eu eu quero manter registro dessa conta, então range_count será...
+
+202
+00:19:47,172 --> 00:19:53,026
+Bem, todos começam com 0.
+Então, range_counts será uma lista com capacidade para 11 intereiros,
+
+203
+00:19:53,026 --> 00:19:59,218
+todos iniciados em zero, e irei atualizá-los conforme eu for verificando cada número.
+
+204
+00:19:59,218 --> 00:20:03,815
+E eu preciso descobrir como eu, dado o número 77.5, 
+
+205
+00:20:03,815 --> 00:20:11,299
+pegarei o digito da dezena para usar como um um índice para esta lista.
+
+206
+00:20:11,299 --> 00:20:18,213
+Qualquer número entre 70 e 79.9
+
+207
+00:20:18,213 --> 00:20:23,980
+deve iniciar em 7.
+Então eu vou fazer alguns pequenos testes aqui (<<python shell>>)
+
+208
+00:20:23,980 --> 00:20:28,734
+Vou dividir 77.5 por 10
+
+209
+00:20:28,734 --> 00:20:34,813
+E o resultado será 7.75.
+Eu quero me livrar do .75
+
+210
+00:20:34,813 --> 00:20:36,450
+Então eu usarei
+
+211
+00:20:36,450 --> 00:20:44,121
+o outro operador de divisão ( // ), quer irá descartar a parte fracional do resultado.
+
+212
+00:20:44,121 --> 00:20:48,723
+Funcionou? Sim.
+
+213
+00:20:48,723 --> 00:20:51,320
+E que tal 79.9?
+Bom.
+
+214
+00:20:52,820 --> 00:21:00,552
+Retornando ao meu programa. Isto significa que assim que eu tiver uma nota da minha lista,
+
+215
+00:21:00,552 --> 00:21:05,646
+eu quero aplicar esta divisão (x // 10).
+E, então, usar o resultado como índice para a minha lista.
+
+216
+00:21:05,646 --> 00:21:11,287
+Então eu preciso fazer um cast do resultado para int.
+
+217
+00:21:11,287 --> 00:21:18,508
+Para cada nota do arquivo de notas, eu preciso saber qual faixa numérica eu quero.
+
+218
+00:21:18,508 --> 00:21:23,677
+Bem, eu acabei de descobrir que eu posso
+
+219
+00:21:23,677 --> 00:21:29,512
+pegar esta nota e dividir por 10 e transformar o resultado em um INT
+
+220
+00:21:29,512 --> 00:21:35,682
+Então, isto era me dizer o índice da lista range_counts que eu quero incrementar. 
+
+221
+00:21:35,682 --> 00:21:38,100
+Então, range_counts["no índice descoberto"] será
+
+222
+00:21:38,100 --> 00:21:49,850
+o valor que existe lá + 1.
+
+223
+00:21:50,540 --> 00:21:55,801
+Então eu já passei por todas as notas.
+Terminei.
+
+224
+00:21:55,809 --> 00:22:01,629
+Então, eu retornarei esta lista.
+É hora de testar.
+
+225
+00:22:01,629 --> 00:22:07,730
+Então vamos copiar esta lista ali (<<python shell>>)
+
+226
+00:22:07,730 --> 00:22:14,596
+Executar e comparar o resultado.
+
+227
+00:22:14,596 --> 00:22:19,240
+Espetacular!
+2 passos a menos. Vamos para o próximo
+
+228
+00:22:19,240 --> 00:22:25,704
+Eu sei que, em meu programa principal, eu quero contar as notas por faixas.
+
+229
+00:22:25,704 --> 00:22:31,358
+Eu sei que tenho uma linda pequena função que faz isto.
+
+230
+00:22:31,358 --> 00:22:35,658
+Então, range_counts será o resultado
+
+231
+00:22:35,658 --> 00:22:39,720
+ retornado de count_grade_ranges(grades)
+
+232
+00:22:41,340 --> 00:22:45,958
+Vamos testá-los.
+Tudo o que faremos será imprimir range_counts
+
+233
+00:22:45,958 --> 00:22:50,948
+e ver se estamos fazendo progresso.
+
+234
+00:22:50,948 --> 00:22:58,436
+Vamos executar o módulo.
+Ele (o programa) diz "OK, qual arquivo queremos abrir?"
+
+235
+00:22:58,436 --> 00:23:03,352
+Nós iremos abrir nosso arquivo de teste.
+"E onde nós queremos salvá-lo?"
+
+236
+00:23:03,352 --> 00:23:08,922
+Bem, eu vou finalmente salvar em a1_test_hist
+
+237
+00:23:08,922 --> 00:23:13,510
+Mas, nós não estamos escrevendo nada de verdade neste arquivo.
+
+238
+00:23:13,510 --> 00:23:18,343
+Mas eu ainda preciso selecioná-lo, porque eu fui solicitado a fazê-lo.
+
+239
+00:23:18,343 --> 00:23:21,948
+E o erro diz "a1_file não está definido".
+
+240
+00:23:21,948 --> 00:23:26,618
+Como pode isso? 
+Ah, eu entendi, eu preciso usar o nome do módulo.
+
+241
+00:23:26,618 --> 00:23:33,004
+Também notei que eu preciso usar asksaveasfilename ("salvar como")
+
+242
+00:23:33,004 --> 00:23:47,953
+porque é o arquivo de saída
+
+243
+00:23:47,953 --> 00:23:52,650
+Vamos reiniciar. Isto mata nosso programa, assim não terá nada solto por ai.
+
+244
+00:23:52,650 --> 00:23:59,979
+E vamos tentar mais uma vez.
+Solicita nosso arquivo de entrada
+
+245
+00:23:59,979 --> 00:24:06,902
+e solicita nosso arquivo de saída.
+E ele diz "você tem certeza que quer fazer isto?"
+
+246
+00:24:06,902 --> 00:24:11,464
+Sim, eu quero que substitua este arquivo.
+
+247
+00:24:11,464 --> 00:24:16,610
+Nós temos a mesma lista impressa aqui,
+
+248
+00:24:16,610 --> 00:24:20,040
+então nosso programa principal está funcionando até agora.
+
+249
+00:24:20,900 --> 00:24:23,942
+Agora, que eu tenho minha lista de contagem para cada faixa.
+
+250
+00:24:23,942 --> 00:24:26,736
+Esta na hora de escrever o arquivo de histograma.
+
+251
+00:24:26,736 --> 00:24:30,523
+Eu não preciso mais desta declaração print, então vou comentá-la.
+
+252
+00:24:30,523 --> 00:24:33,380
+Apenas para o caso de eu precisar descomentar, mais tarde.
+
+253
+00:24:35,480 --> 00:24:43,385
+De volta ao meu arquivo funções, onde estou armazenado todas as minhas funções.
+
+254
+00:24:43,385 --> 00:24:49,390
+Eu preciso escrever o histograma.
+Seguindo nossa abordagem de desenvolvimento.
+
+255
+00:24:49,390 --> 00:24:57,222
+Eu sei que precisarei chamar e passar a lista grade_ranges.
+
+256
+00:24:57,222 --> 00:25:04,042
+Então eu pego a informação de contagem de faixas e, também, o arquivo
+
+257
+00:25:04,042 --> 00:25:07,175
+que tinha sido aberto para escrita.
+
+258
+00:25:07,175 --> 00:25:12,981
+Então, eu sei que eu tenho uma lista de inteiros e um arquivo para escrever
+
+259
+00:25:13,718 --> 00:25:19,062
+Não retorna nada.
+Tudo o que faz é escrever o arquivo.
+
+260
+00:25:19,062 --> 00:25:26,780
+Escreve um histograma de estrelas, com base no número de notas de cada faixa.
+
+261
+00:25:27,220 --> 00:25:31,440
+Eu estou tendo problemas para digitar hoje.
+
+262
+00:25:31,440 --> 00:25:36,715
+Pergunte-me se é frustrante me assistir cometendo esses erros.
+
+263
+00:25:36,715 --> 00:25:43,637
+Bem, eu tenho um exemplo da saída que eu quero.
+
+264
+00:25:43,637 --> 00:25:46,662
+<< copia e cola o exemplo de uma tela para outra >>
+
+265
+00:25:46,662 --> 00:25:55,619
+E, eu vou colar isto aqui, de modo que ajude visualizando o que é esperado.
+
+266
+00:25:55,619 --> 00:26:03,954
+O que faremos será escrever um histograma, então
+
+267
+00:26:03,954 --> 00:26:07,572
+write_histogram parece ser um nome razoável.
+
+268
+00:26:07,572 --> 00:26:13,978
+Nós sabemos que o primeiro parâmetro é a contagem de faixas e o segundo
+
+269
+00:26:13,978 --> 00:26:19,659
+ o arquivo no qual escreveremos o histograma.
+A primeira linha da saída e a última linha da saída
+
+270
+00:26:19,659 --> 00:26:25,034
+são levemente diferentes das demais. 
+Eu preciso acrescentar mais espaços em branco,
+
+271
+00:26:25,034 --> 00:26:30,157
+para que as estrelas fiquem alinhadas.
+Então, quando eu imprimir a primeira linha e
+
+272
+00:26:30,157 --> 00:26:35,406
+quando eu imprimir a segunda linha, eu precisarei escrever espaços extras.
+
+273
+00:26:35,406 --> 00:26:39,160
+Então vou lidar com essas linhas separadamente.
+Aqui vamos nós!
+
+274
+00:26:40,005 --> 00:26:48,237
+Primeiros, nós queremos escrever "0-9" e então quantos espaços?
+
+275
+00:26:48,237 --> 00:26:54,253
+Write não coloca não inclui o caractere de nova linha ao final, 
+
+276
+00:26:54,253 --> 00:27:00,480
+o que é bom, porque agora eu quero escrever algumas estrelas
+
+277
+00:27:02,460 --> 00:27:07,454
+Então, eu sei que eu quero escrever algumas estrelas.
+E quantas existem?
+
+278
+00:27:07,454 --> 00:27:11,533
+Bem, será a quantidade de notas que existem na faixa.
+
+279
+00:27:11,533 --> 00:27:18,193
+Então, nós iremos multiplicar o asterisco por seja qual for a a contagem no índice 0. 
+
+280
+00:27:18,193 --> 00:27:22,189
+O que é o número de notas que existem
+
+281
+00:27:22,189 --> 00:27:27,704
+na faixa de 0 a 9.
+
+282
+00:27:27,704 --> 00:27:34,497
+E então eu inicio um nova linhas, porque, como você pode ver, 
+
+283
+00:27:34,497 --> 00:27:41,673
+10-19 aparecem na próxima linha.
+Eu tomarei conta do outro caso especial agora.
+
+284
+00:27:41,673 --> 00:27:45,838
+Aqui, nós queremos escrever 100.
+
+285
+00:27:45,838 --> 00:27:51,839
+E, em vez de índice 0, será o último índice (-1).
+
+286
+00:27:51,839 --> 00:27:56,047
+Isto me dará o número de 100s que
+
+287
+00:27:56,047 --> 00:28:02,797
+são encontrados no arquivo.
+No meio, eu quero escrever 1 linha
+
+288
+00:28:02,797 --> 00:28:12,251
+para cada um dos índices de 1 a 9
+<<codificando a declaração FOR>>
+
+289
+00:28:12,251 --> 00:28:15,220
+Então o que é isto? 
+<<refere-se a declaração FOR>>
+
+290
+00:28:16,192 --> 00:28:24,180
+Isto escreve a faixa de 2 dígitos.
+A faixa dos 10s, dos 20s, dos 30 e assim por diante.
+
+291
+00:28:26,360 --> 00:28:33,165
+Eu preciso descobrir o número inicial e o final da faixa corrente.
+
+292
+00:28:33,165 --> 00:28:37,299
+Então, quando a variável i é 1, os números devem ser 10 e 19.
+
+293
+00:28:37,299 --> 00:28:43,674
+Quando i é 2 os números são 20 e 29, e assim por diante.
+
+294
+00:28:43,674 --> 00:28:47,120
+Então, o número inicial (variável low) é a variável i multiplicada por 10.
+
+295
+00:28:48,612 --> 00:28:53,565
+E o número final (variável high) é a variável i multiplicada por 10 e adicionado 9.
+
+296
+00:28:53,565 --> 00:29:01,145
+Apenas para ter certeza, 9 * 10 + 9 é 99. Então isto funciona para a faixa dos 90s.
+
+297
+00:29:01,145 --> 00:29:05,674
+Então,  sim, isto para me retornar os números iniciais e finais.
+
+298
+00:29:05,674 --> 00:29:13,467
+Eu vou escrever o número inicial, mas eu preciso converter low para string.
+
+299
+00:29:13,467 --> 00:29:25,482
+Então str(low) , mais o hífen o número inicial e final,
+
+300
+00:29:25,482 --> 00:29:32,220
+mais str(high). seguindo pelo sinal dois-pontos.
+
+301
+00:29:35,000 --> 00:29:42,433
+Agora é hora de escrever os asteriscos.
+
+302
+00:29:42,433 --> 00:29:48,682
+Então eu quero multiplicar o asterisco pela contagem da faixa de qual índice?
+
+303
+00:29:48,682 --> 00:29:54,500
+Bem, índice i.
+E, finalmente, eu quero escrever a nova linha.
+
+304
+00:29:58,600 --> 00:30:02,384
+Esta é uma das duas formas, eu posso fazer o que eu estava fazendo antes: executar isto;
+
+305
+00:30:02,384 --> 00:30:07,492
+ter um exemplo de range_counts; enviar para um arquivo de saída;
+
+306
+00:30:07,492 --> 00:30:13,717
+e ter certeza que o arquivo foi escrito.
+Mas este é o último passo do meu programa, então eu
+
+307
+00:30:13,717 --> 00:30:20,479
+posso na verdade, fazer isto no meu programa principal.
+Eu vou excluir isto, pois eu tenho essa informação em outro lugar.
+
+308
+00:30:20,479 --> 00:30:26,162
+O que eu quero fazer agora é
+
+309
+00:30:26,162 --> 00:30:33,120
+escrever o histograma com a lista range_counts e com o arquivo de saída que é a1_histfile.
+
+310
+00:30:33,520 --> 00:30:37,646
+Eu verifiquei que meu programa parece estar funciondo até agora.
+
+311
+00:30:37,646 --> 00:30:44,066
+I eu posso apenas executar para ter certeza que esta nova função faz o que eu quero que faça.
+
+312
+00:30:44,066 --> 00:30:58,060
+Bem, eu irei usar o a1_test.txt
+
+313
+00:30:59,480 --> 00:31:05,740
+e queremos escrever no a1_test.hist
+
+314
+00:31:06,500 --> 00:31:09,889
+Uh-oh! Eu tenho o erro "não gravável" aqui.
+
+315
+00:31:09,889 --> 00:31:16,586
+Parece que quando eu chamo histfile.write, diz que é 
+
+316
+00:31:16,586 --> 00:31:20,886
+uma operação não suportada.
+Este arquivo não é gravável.
+
+317
+00:31:20,886 --> 00:31:25,268
+E isso faz sentido.
+Porque eu o abri para leitura.
+
+318
+00:31:25,268 --> 00:31:29,402
+Pois eu copiei e colei o código e esqueci de mudar isto.
+
+319
+00:31:29,402 --> 00:31:37,208
+Vamos executar mais uma vez.
+
+320
+00:31:37,208 --> 00:31:45,331
+Oh, eu quero escrever meu programa aqui.
+Vamos salvar e substituir.
+
+321
+00:31:45,331 --> 00:31:51,999
+Certo, sem erros.
+Nós vamos alternar para o Gerenciador de Arquivos agora.
+
+322
+00:31:52,362 --> 00:31:55,030
+Olha eu aqui.
+Não olhe!
+
+323
+00:31:56,840 --> 00:32:03,580
+E eu acabei de escrever a1_test.hist
+
+324
+00:32:04,380 --> 00:32:13,740
+Vamos abrir este arquivo no editor de texto.
+E esta vazio!
+
+325
+00:32:15,020 --> 00:32:22,613
+Agora eu tenho que encontrar o motivo.
+Vamos voltar ao programa e dar uma olhada.
+
+326
+00:32:22,613 --> 00:32:31,724
+Oh, eu acho que esqueci de fechar meus arquivos.
+
+327
+00:32:31,724 --> 00:32:41,816
+Se você não fecha seus arquivos, eles não estarão disponíveis para serem escritos imediatamente.
+
+328
+00:32:41,816 --> 00:32:59,760
+Vamos tentar mais uma vez.
+Voltando, ver como ficou.
+
+329
+00:33:00,340 --> 00:33:09,421
+E aqui está nossa informação.
+Vamos tentar executar com nosso arquivo maior.
+
+330
+00:33:09,421 --> 00:33:14,317
+Certo!
+
+331
+00:33:14,317 --> 00:33:20,989
+a1.txt é nosso arquivo maior.
+E vamos salvar em a1.hist. 
+
+332
+00:33:20,989 --> 00:33:24,820
+Isso!
+Eu gostaria de substituir isto.
+
+333
+00:33:25,340 --> 00:33:30,331
+Vamos alternar para o Gerenciador de Arquivo, nós queremos a1.hist.
+
+334
+00:33:30,331 --> 00:33:33,540
+Aha, lindo! 
+Olha isto!
+
+335
+00:33:35,580 --> 00:33:38,855
+E isto é realmente a forma como eu escrevo meus programas.
+
+336
+00:33:38,855 --> 00:33:44,178
+Eu começo do início, com apenas uma vaga idéia do que eu quero
+
+337
+00:33:44,178 --> 00:33:49,365
+e eu tenho um monte de decisões a tomar.
+Quais são os meus passos, quais os dados que
+
+338
+00:33:49,365 --> 00:33:52,573
+eu irei armazenar e como eu vou armazenar.
+
+339
+00:33:52,573 --> 00:33:58,373
+E em que ordem eu irei escrever minhas funções e como irei testá-las.
+
+340
+00:33:58,373 --> 00:34:00,080
+Eu espero que tenha sido divertido!

@@ -1,0 +1,83 @@
+In this lecture, we're going to combine
+some of the different topics that we've covered.
+We're going to read data from a file and store it in a dictionary.
+In this lecture, we're going to work with the file on the left-hand side of your
+screen. It contains assignment one grades.
+There are two columns, one for a student ID, and a second for the grade that the
+student with that ID earned on the assignment.
+If you watch the optional lecture from last week, the data will look familiar,
+and the task will be a bit familiar too. But, this time we're working with
+dictionaries rather than with lists. We're going to write the function
+read<u>grades.</u> It has one parameter, which is a file that
+has been opened for reading. That file will start with a header that
+contains no blank lines and then a blank line and then the lines of the file with
+the student number and the grade. The task that this function will complete
+is to read the grade information from the file and build a dictionary for each key
+as a grade. And each value is the list of IDs of
+students who earned that grade. For example, for the grade 77.5 for that
+key, there will be a list containing student ID 0052 and student ID 1311,
+because those two student ID's earned that grade.
+There may be other students, as well, later in the file who will appear in the
+values list for that key 77.5. To implement this function, we need to
+perform two main tasks. The first is you just skip over the
+header. Once we have skipped the header, we can
+move on to reading the grades from the file and accumulating them in the
+dictionary, . We'll begin by skipping the header.
+We have four ways to read from a file and since we're only processing part of the
+file, we're going to use the read line approach.
+So we'll start by using one line as a file and we want to keep reading the lines of
+the header until we reach the blank line. A blank line isn't truly blank.
+It contains the new line character, so as long as the line is not the new line
+character, we'll keep reading. That would be part of the header.
+Once the header has been skipped, we can move on to accumulating the grades into a
+dictionary. The accumulator I'll use is, grade<u>to<u>ids
+and it will initially be empty.</u></u> We need to read the next line as a file.
+We can do that using read line and we want to keep reading lines of the file until
+the end of the file is reached. .
+That would mean that the line would be empty.
+So we want to continue reading as lion, as line is not equal to the empty string.
+. Once we've read a line, we need to extract
+a student ID and the grade. The student ID's are all four characters,
+so we'll use that information. .
+Student ID will be a slice of the line that the line from the beginning up to the
+fourth character . So that will give us a strain containing
+the four digits of the student ID. The grade is going to be what comes after
+that, of a, there are a couple of spaces before the grade and there's a new line
+character after the grade. So what we can do is we can take the rest
+of the line, and strip out the white space that comes before and after it.
+So, the grade will be a slice from index four to the end of the line, but will
+strip off the white space for the grade. We aren't quite done working with grade
+yet. We want grade to refer to a float, not a
+string and currently, it refers to a string that contains a numeric value.
+We're going to apply float to that string to get back a floating point number.
+Now that we have the grade and student I.D., we need to add them to the
+dictionary. There are two scenarios to consider.
+One is that a grade is not yet a key in the dictionary and the other is a case
+where the grade is already a key in the dictionary.
+We'll consider these two cases separately. We'll start with the case where the grade
+is not yet a key in the dictionary. So, if grade is not in grade<u>to<u>ids.
+In that case, we need to add it for the</u></u> first time.
+We can access grade<u>to<u>ids and set grade</u></u> as a key assigning to it the value, which
+is a student ID. Student ID is just a string though, and
+the value associated with a key for this dictionary needs to be in a list of
+strings. So we need to put student ID in a list.
+We can use the square brackets to do so. The second case is the case where grade is
+already a key in the dictionary. So if that if condition is false, we need
+to do something different, because grade already is a key.
+Because it's a key already, there already is a value associated with it, and that
+value is a list of strings. We want to add student ID to the list of
+strings. So we need to access that list of strings
+and we can do that by looking at the dictionary and looking up the value
+associated with the key grade. This gives us a list of strings and to it
+we can append the student ID. So in this case, we don't need to make a
+new list we're just going to add the student ID to the existing list.
+Once we finish adding this grade and student ID to the dictionary, we can move
+onto the next line of the file. So, we'll read another line.
+Once all the lines of the file have been read, the wire loop condition will become
+false, and we can return the grade to IDs dictionary.
+Now that we've finished writing this function, we can run it.
+To begin, I have to open up grades file, which happens to be stored at this long
+path and then I can call the grades, Passing that grades file is the argument
+and it returns a dictionary. We can see in this dictionary that 77.5
+does have student ID 0052 as one of it's values, along with 1311, and actually,
+several other student IDs earned that

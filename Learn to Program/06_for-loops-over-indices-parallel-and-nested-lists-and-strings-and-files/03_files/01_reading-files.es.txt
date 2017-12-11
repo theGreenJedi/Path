@@ -1,0 +1,49 @@
+Hasta ahora, nuestros programas han usado
+memoria de la computadora para almacenar información Pero la mayría de la información se almacena en archivos en
+tu computadora En esta clase, te enseñaremos cuatro formas
+para leer un archivo de texto. Usaremos un  archivo conteniendo, In Flanders
+Fields, un poema escrito en el 1915 por un canadiense, El Teniente Coronel John McCrae.
+Antes de que podamos leer un archivo, tenemos que decirle a Python que lo abra
+La función incorporada open hace esto Toma sus argumentos, el nombre del
+archivo y la letra r que nosotros queramos leer del archivo opuesto a escribir
+en el Si el archivo se encuentra en el mismo directorio como
+el programa, entonces podemos solamente usar el nombre del archivo
+Pero si el archivo se encuentra en un diferente directorio, tal como el directorio que tenemos
+aquí, debemos dar la ruta de acceso completa a el.
+Ahora leeremos el archivo en varias formas.
+o guardaremos en una variable, así que no tendremos que retipearla.
+Primero, abrimos el archivo para leer. abrimos el archivo para leer, tenemos
+disponible para nosotros un método llamado readline que lee una línea del archivo,
+incluido e carácter de nueva línea al final de la línea y la retorna.
+Podemos leer el poema entero llamando readline una y otra vez. Tome en cuenta que hasta las líneas vacías tienen un carácter de nueva línea al final de ellas
+Ahora que hemos leido hasta el final del archivo, cuando llamemos readline nuevamente, obtendremos una cadena string vacía El único momento que readline retorna la
+cadena string vacía es cuando hemos alcanzado el al fina del archivo.
+Eso significa que podemos usar una iteracción while para leer las líneas de un archivo.
+Cerraremos el archivo y lo reabriremos para que podamos empezar al inicio.
+Leeremos la primera línea del archivo, y luego, hasta que hallamos alcanzado el final del
+archivo, imprimiremos la línea que hemos leído. y luego nos movemos para leer la siguiente
+línea Cuando corremos esta iteracción pon atención
+Vas a ver líneas vacías en medio de cada línea del archivo.
+La razón para esto es que la función readline retornará la línea entera incluido el
+carácter de línea nueva al final. Y cuando imprimimos esa línea
+añade una nueva línea Para prevenir que esto pase,
+usaremos exactamente el mismo formato que hicimos anteriormente.
+Excepto que, en nuestra llamada de la función print, usaremos la cadena string vacía como
+una marca de final de impresión después que print imprima la línea.
+Exploremos ahora como leer solo la primera estrofa.
+Leemos el título, y, la línea vacía, y luego la primera línea del poema.
+Comprobemos Leeremos cada línea hasta que encontremos la
+línea que contiene nada pero el carácter de nueva línea.
+Este planteamiento readline nos permite leer solamente las partes del archivo que estamos
+interesados y nos permite parar el proceso del archivo tan pronto como hallamos encontrado
+las partes que deseamos Si supiéramos que queremos leer cada
+línea en un archivo, existe una forma sencilla La iteracción for de Python trabaja con archivos,
+recuperando una línea al tiempo, incluyendo la nueva  línea.
+Si tu archivo no es grande, puedes actualmente leerlo de una sola usando el método read.
+Retorna el contenido entero del archivo como una cadena string simple.
+La cuarta y última foma que te enseñaremos como leer, el contenido de un archivo
+es usando el método readlines, que retorna una lista de todas las líneas en el archivo.
+Podemos usar esto para imprimir todas las líneas en el el archivo.
+Obtendremos nuestra lista e iremos a través de aquella lista, como lo hicimos anteriormente.
+Este planteamiento es útil si queremos mantener la lista alrededor para que la podamos acceder
+los elementos mas tarde

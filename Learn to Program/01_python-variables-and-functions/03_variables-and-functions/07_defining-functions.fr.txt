@@ -1,0 +1,67 @@
+Salut ! En plus d'utiliser les fonctions de
+base de Python, on peut aussi créer les nôtres. C'est ce qu'on va voir dans ce cours. Commençons par un exemple mathématique.
+La fonction f de x prends x et le passe au carré.
+Voilà à quoi cette fonction ressemble en Python : ... "def" indiques à Python que l'on défini une fonction.
+"f" est le nom de cette fonction.
+"x" est appelé le paramètre de la fonction. C'est une variable dont la valeur
+sera fournie quand la fonction est appelée. Ce deux-points indique à Python que nous
+allons entrer ce qui se produit quand la
+fonction est appelée, et le mot "return" indiques que l'on
+renvoie une valeur. La forme générale d'une directive
+"return" est le mot "return", suivi par une
+expression. Et les règles pour exécuter une
+directive "return" sont : premièrement, évaluer l'expression,
+ce qui produit une adresse dans la mémoire. Et deuxièmement, renvoie cette adresse
+mémoire à l'appelant. La forme générale d'une définition de
+fonction est le mot "def" suivi par le nom de la fonction et ensuite zéro ou
+plusieurs paramètres séparés par des virgules. Puis viens le corps de la fonction, qui
+est une ou plusieurs directives qui finissent
+souvent par une directive "return". Remarquez que le corps est indenté. Appelons la fonction f.
+On va passer en argument "3". Quand la fonction est appelée, le paramètre
+se comporte comme l'adresse mémoire de la valeur 3. En fait, on peut voir ça comme une
+directive d'assignement où x prends 3. J'appuie sur Entrée, donc l'appel de
+fonction est exécuté, et le résultat de l'appel est que la
+valeur 9 est renvoyée. Les appels de fonction sont en fait des
+expressions, donc on peut utiliser une variable pour stocker
+le résultat. Créons une variable "result" qui prends le résultat de l'appel f de 3. Souvenez vous des règles pour exécuter
+une directive d'assignement. Premièrement, l'expression à droite est évaluée, ce qui produit une
+adresse dans la mémoire. Deuxièmement, l'adresse est stockée
+dans la variable. "result" obtiens d'adresse mémoire de
+l'appel de f de 3. Donc en fait, "result" obtiens 9. Définissons une autre fonction.
+Rappelez vous du cours sur les variables et de comment calculer l'aire d'un
+triangle. On prends la base, qu'on multiplie par la hauteur, et puis
+on divise par deux. Nous allons maintenant écrire une fonction
+pour calculer l'aire d'un triangle. On commence par le mot "def", puis viens
+le nom de la fonction. Utilisons le nom "area". Après le nom viens les paramètres
+de la fonction, dans ce cas là on va avoir deux paramètres. On termine cette ligne par un deux-points,
+puis on écris le corps de la fonction. On va renvoyer la "base" multiplié par
+"height" puis divisé par deux. Appelons la fonction. On va exécuter
+"area" en passant deux arguments : trois et quatre. Le paramètre "base" obtiens 3, le
+paramètre "height" obtiens 4. Cette expression est évaluée : "base"
+fois "height", divisé par deux, puis renvoyée. Appelons la encore une fois, en lui passant
+un int et un float cette fois.
+Les règles pour exécuter un appel de fonction sont 1: évaluer les
+arguments pour produire des adresses mémoire. 2: stoker ces adresses dans les
+paramètres correspondants. 3: exécuter le corps de la fonction.
+Maintenant, redémarrons le shell Python. On va dans le menu du shell, et
+on clique sur redémarrer. Nous venons de perdre tout le travail que nous avions fait dans le shell, y
+compris la définition de la fonction "area". Si on tente d'appeler "area", on a une
+erreur de nom, car "area" n'est pas définie. La plus-part des programmes Python sont
+sauvegardés dans des fichiers. Créons un fichier, et sauvegardons
+notre définition de la fonction "area" dedans. Allez dans Fichier > Nouvelle fenêtre et on va appeler ce fichier "triangle.py".
+Tous nos programmes Python seront sauvegardés dans des fichiers .py.
+Redimensionnez la fenêtre pour pouvoir voir le shell à gauche et notre fichier "triangle.py" sur
+la droite. Maintenant que nous avons notre définition de la fonction "area" dans "triabgle.py", on
+peut exécuter ce fichier. Cliquez sur Run, puis Run module. Cela rends la définition de 'area'
+disponible dans le shell. Donc maintenant quand on appele "area"
+depuis le shell, il sait ce qu'est 'area', et est capable
+d'exécuter cette fonction. - On peut définir plus d'une fonction
+dans le fichier "triangle.py". Ajoutons une autre définition de fonction. On va définir une fonction pour calculer
+le périmètre d'un triangle. On passera side1, side2 et side3. Et la fonction renverra la somme de
+ces côtés. - . J'ai maintenant sauvegardé triangle.py,
+et si je retourne au shell et exécute la fonction, ce qu'on voit
+est une erreur. C'est parce qu'à ce moment, bien que la
+fonction soit sauvegardée dans "triangle.py", on n'a pas "run" le fichier, donc
+le shell ne sait pas ce qu'est "perimeter". Avant d'exécuter une fonction dans le shell,
+on doit "run" ce module. Donc j'ai utilisé "run module", maintenant
+je peux appeler "perimeter" et ça exécute.

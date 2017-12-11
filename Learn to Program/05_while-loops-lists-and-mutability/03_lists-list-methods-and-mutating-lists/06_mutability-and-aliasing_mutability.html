@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Linux https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Mutability and Aliasing
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 8.5 Aliasing: What’s in a Name?
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Mutability and Aliasing
+        </h1>
+        <h3>
+            Mutability
+        </h3>
+        <p>
+            We say that lists are <i>mutable</i>: they can be modified. All the other types we have seen so far (<code>str</code>, <code>int</code>, <code>float</code> and <code>bool</code>) are <i>immutable</i>: they cannot be modified.
+        </p>
+        <p>
+            Here are several examples of lists being modified:
+        </p>
+        <pre>
+&gt;&gt;&gt; classes = ['chem', 'bio', 'cs', 'eng']
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Elements can be added:
+&gt;&gt;&gt; classes.append('math')
+&gt;&gt;&gt; classes
+['chem', 'bio', 'cs', 'eng', 'math']
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Elements can be replaced:
+&gt;&gt;&gt; classes[1] = 'soc'
+&gt;&gt;&gt; classes
+['chem', 'soc', 'cs', 'eng', 'math']
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Elements can be removed:
+&gt;&gt;&gt; classes.pop()
+'math'
+&gt;&gt;&gt; classes
+['chem', 'soc', 'cs', 'eng']
+</pre>
+        <h3>
+            Aliasing
+        </h3>
+        <p>
+            Consider the following code:
+        </p>
+        <pre>
+&gt;&gt;&gt; lst1 = [11, 12, 13, 14, 15, 16, 17]
+&gt;&gt;&gt; lst2 = lst1
+&gt;&gt;&gt; lst1[-1] = 18
+&gt;&gt;&gt; lst2
+[11, 12, 13, 14, 15, 16, 18]
+</pre>
+        <p>
+            After the second statement executes, <code>lst1</code> and <code>lst2</code> both refer to the same list. When two variables refer to the same objects, they are <em>aliases</em>. If that list is modified, both of <code>lst1</code> and <code>lst2</code> will see the change.
+        </p>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

@@ -1,0 +1,792 @@
+1
+00:00:01,460 --> 00:00:06,933
+Nelle lezioni precedenti, abbiamo usato i cicli for
+per iterare sopra i caratteri di stringhe e
+
+2
+00:00:06,933 --> 00:00:10,890
+gli elementi delle liste.
+In questa lezione, vedremo come usarli per
+
+3
+00:00:10,890 --> 00:00:14,320
+effettuare dei cicli sugli indici di stringhe
+e liste.
+
+4
+00:00:14,320 --> 00:00:19,728
+E questo ci permetterà di risolvere problemi
+che non possiamo attualmente risolvere usando
+
+5
+00:00:19,728 --> 00:00:23,421
+cicli for.
+Il primo problema che affronteremo è di
+
+6
+00:00:23,421 --> 00:00:28,631
+contare il numero di coppie consecutive di 
+caratteri che sono uguali all'interno della
+
+7
+00:00:28,631 --> 00:00:30,940
+stessa stringa.
+Quindi ecco un esempio di stringa.
+
+8
+00:00:32,140 --> 00:00:37,874
+E in questa stringa, ci sono tre coppie di
+caratteri consecutivi che sono
+
+9
+00:00:37,874 --> 00:00:44,352
+uguali, le c, le f e le g.
+Per risolvere questo problema, abbiamo bisogno
+
+10
+00:00:44,352 --> 00:00:50,091
+di comparare delle coppie di caratteri vicine.
+Quindi la stringa all'indice zero deve essere
+
+11
+00:00:50,091 --> 00:00:55,759
+confrontata con la stringa all'indica uno.
+La stringa al'indice uno deve essere confrontata
+
+12
+00:00:55,759 --> 00:01:00,780
+con la stringa all'indice due.
+E così via, finché non raggiungiamo il penultimo
+
+13
+00:01:00,780 --> 00:01:05,156
+carattere.
+La stringa all'indice -due e la confrontiamo
+
+14
+00:01:05,156 --> 00:01:10,249
+con l'ultimo carattere della stringa, la
+stringa all'indice -uno.
+
+15
+00:01:10,250 --> 00:01:17,604
+Parlando in modo generalizzato, possiamo descrivere
+questo come confronto fra la stringa
+
+16
+00:01:17,604 --> 00:01:26,914
+all'indice i con la stringa all'indice i + uno.
+Useremo la funzione range per generare
+
+17
+00:01:26,914 --> 00:01:31,587
+questi numeri.
+Zero, uno, fino a -due incluso, quindi
+
+18
+00:01:31,587 --> 00:01:38,009
+il, il valore i nel nostro confronto.
+Come promemoria, range accetta tre parametri,
+
+19
+00:01:38,009 --> 00:01:43,041
+uno obbligatorio e due opzionali.
+Il parametro richiesto è il valore al
+
+20
+00:01:43,041 --> 00:01:48,511
+quale si vuole stoppare la sequenza.
+E opzionalmente possiamo anche fornire
+
+21
+00:01:48,511 --> 00:01:52,740
+l'inizio e il passo.
+In questo caso, l'inizio che vogliamo è zero,
+
+22
+00:01:52,740 --> 00:01:57,043
+che è il default.
+E il passo è uno, che è anche il
+
+23
+00:01:57,043 --> 00:01:59,960
+default.
+Quindi abbiamo solo bisogno di usare lo stop.
+
+24
+00:01:59,960 --> 00:02:04,188
+E vogliamo fermarci alla lunghezza della
+stringa -uno.
+
+25
+00:02:04,190 --> 00:02:09,777
+In altre parole, vogliamo andare avanti e
+includere la lunghezza della stringa -2, o il
+
+26
+00:02:09,777 --> 00:02:15,237
+penultimo carattere della stringa.
+E indichiamo questo come lunghezza della
+
+27
+00:02:15,237 --> 00:02:19,661
+stringa -1, fino a quel valore escluso.
+
+28
+00:02:19,661 --> 00:02:23,660
+E poi, vengono stampati i valori degli
+indici.
+
+29
+00:02:26,420 --> 00:02:31,598
+Ora che abbiamo scritto questo ciclo for,
+andremo a usare la stessa testata nella nostra
+
+30
+00:02:31,598 --> 00:02:35,754
+funzione per contare le coppie ripetute di
+caratteri nella stringa.
+
+31
+00:02:35,754 --> 00:02:39,462
+La funzione che stiamo scrivendo è  count
+adjacent repeats.
+
+32
+00:02:39,462 --> 00:02:42,786
+Ha come parametro un'unica stringa
+e ritorna un int.
+
+33
+00:02:42,786 --> 00:02:47,645
+E quando chiamiamo la funzione, passando una
+stringa di esempio come argomento, la
+
+34
+00:02:47,645 --> 00:02:52,977
+funzione dovrebbe ritornare tre.
+Per questa funzione, dobbiamo tenere traccia
+
+35
+00:02:52,977 --> 00:02:55,898
+di quanti caratteri ripetuti abbiamo visto.
+
+36
+00:02:55,898 --> 00:02:59,635
+Quindi andrò ad usare la variabile chiamata
+repeats per farlo.
+
+37
+00:02:59,635 --> 00:03:03,060
+E repeats avrà un valore iniziale di
+zero.
+
+38
+00:03:03,060 --> 00:03:09,125
+Vogliamo iterare sui caratteri della stringa,
+passare sopra di essi, e abbiamo bisogno di usare
+
+39
+00:03:09,125 --> 00:03:13,712
+i loro indici questa volta.
+Abbiamo già scritto la testata di questo ciclo for,
+
+40
+00:03:13,712 --> 00:03:19,482
+iniziamo all'indice zero e andiamo al
+penultimo carattere della
+
+41
+00:03:19,482 --> 00:03:24,711
+stringa.
+Nel corpo del ciclo for, vogliamo
+
+42
+00:03:24,711 --> 00:03:31,014
+confrontare il carattere alla posizione s
+all'indice i con quello che viene dopo di lui,
+
+43
+00:03:31,014 --> 00:03:36,530
+per vedere se sono uguali.
+Quindi possiamo usare l'operatore di uguaglianza
+
+44
+00:03:36,530 --> 00:03:40,154
+per questo, confrontando s all'indice i con
+s all'indice i1
+
+45
+00:03:40,154 --> 00:03:43,463
++ uno.
+Quando sono uguali, abbiamo trovato una di quelle
+
+46
+00:03:43,463 --> 00:03:47,560
+tre ripetizioni adiacenti.
+Quindi quella variabile repeats dovrebbe
+
+47
+00:03:47,560 --> 00:03:52,858
+aumentare di uno.
+Alla fine del ciclo, dopo che è
+
+48
+00:03:52,858 --> 00:03:57,380
+uscito, possiamo ritornare il valore di
+repeats al primo passo.
+
+49
+00:03:59,540 --> 00:04:05,772
+Infine, facciamo solo girare questa chiamata alla 
+funzione per assicurarci che funzioni come previsto.
+
+50
+00:04:05,772 --> 00:04:09,344
+Per farlo ho bisogno di eseguire, o far girare
+il modulo.
+
+51
+00:04:09,344 --> 00:04:14,360
+E ora, possiamo chiamare la funzione, e ritorna
+tre come previsto.
+
+52
+00:04:15,540 --> 00:04:21,041
+Quindi per riassumere, è dovuto al fatto
+che vogliamo confrontare un elemento della
+
+53
+00:04:21,041 --> 00:04:25,548
+lista con un altro elemento nella lista,
+che usiamo gli indici.
+
+54
+00:04:25,548 --> 00:04:29,127
+Non è sufficiente conoscere il valore
+dell'oggetto.
+
+55
+00:04:29,127 --> 00:04:34,430
+Dobbiamo sapere dov'è l'oggetto nella
+lista per determinare quale altro
+
+56
+00:04:34,430 --> 00:04:39,625
+elemento con cui fare il confronto.
+Per guadagnare una migliore comprensione di
+
+57
+00:04:39,625 --> 00:04:44,480
+cosa stia succedendo quando questo codice viene 
+eseguito, lo tracceremo con il visualizzatore di Python.
+
+58
+00:04:45,360 --> 00:04:51,485
+La prima volta che premo avanti viene valutata
+la definizione della funzione, e siamo portati
+
+59
+00:04:51,485 --> 00:04:57,462
+alla linea diciannove dove ho inserito una
+chiamata alla funzione, usando un esempio
+
+60
+00:04:57,462 --> 00:05:05,424
+leggermente più piccolo.
+Quando la funzione viene chiamata, il parametro
+
+61
+00:05:05,424 --> 00:05:11,862
+s, fa riferimento alla stringa a, c, c, f, f, h
+che abbiamo passato come argomento alla
+
+62
+00:05:11,862 --> 00:05:16,095
+funzione.
+Dopo che è stata eseguita la riga undici, repeats
+
+63
+00:05:16,095 --> 00:05:24,247
+fa riferimento al valore zero.
+La riga tredici è la prima riga del ciclo
+
+64
+00:05:24,247 --> 00:05:27,750
+for.
+Otterrò il valore iniziale di zero.
+
+65
+00:05:27,750 --> 00:05:30,481
+i
+fa inizialmente riferimento a zero.
+
+66
+00:05:30,483 --> 00:05:36,890
+E la condizione if viene controllata per prima.
+Quindi, s a i, s a zero, è a viene confrontata
+
+67
+00:05:36,890 --> 00:05:43,639
+con s ad i + uno, che è c.
+Questi caratteri non sono uguali, quindi
+
+68
+00:05:43,639 --> 00:05:49,557
+il corpo del ciclo for non viene eseguito.
+Ci spostiamo avanti e incrementiamo i.
+
+69
+00:05:49,557 --> 00:05:55,583
+Quindi i riceve il valore successivo che
+genera range, che è uno.
+
+70
+00:05:55,583 --> 00:06:01,813
+Ora, i fa riferimento ad uno.
+E s a uno viene confrontata con s a due
+
+71
+00:06:01,813 --> 00:06:08,861
+dato che i caratteri qui non sono uguali,
+il corpo dell'if, viene eseguito.
+
+72
+00:06:08,861 --> 00:06:16,311
+E repeats verrà aumentato di uno.
+Repeats ora fa riferimento al valore uno.
+
+73
+00:06:16,312 --> 00:06:21,068
+E ottengo il nuovo valore che range
+genera che è due.
+
+74
+00:06:21,070 --> 00:06:27,260
+La stringa all'indice due viene confrontata con
+la stringa all'indice tre e non sono
+
+75
+00:06:27,260 --> 00:06:30,430
+uguali, quindi il corpo della f non viene
+eseguito.
+
+76
+00:06:30,430 --> 00:06:36,983
+Avanziamo nuovamente alla testata del ciclo for,
+e i sarà il prossimo valore che range
+
+77
+00:06:36,983 --> 00:06:39,277
+genera.
+I, i fa riferimento a tre.
+
+78
+00:06:39,277 --> 00:06:45,666
+La stringa all'indice tre viene confrontata con la
+stringa all'indice quattro, quei due
+
+79
+00:06:45,666 --> 00:06:51,892
+caratteri sono uguali, quindi questa volta il corpo 
+dell'if viene eseguito, repeats viene
+
+80
+00:06:51,892 --> 00:06:58,691
+aumentato di uno, quindi repeats ora fa riferimento
+al valore due e i avanza al prossimo
+
+81
+00:06:58,691 --> 00:07:03,085
+valore, che è quattro.
+La stringa all'indice quattro non è uguale alla
+
+82
+00:07:03,085 --> 00:07:07,184
+stringa all'indice cinque quindi il corpo dell'if
+non verrà eseguito.
+
+83
+00:07:07,184 --> 00:07:12,492
+E notate che questa è l'ultima coppia di
+caratteri che abbiamo bisogno di confrontare, quindi
+
+84
+00:07:12,492 --> 00:07:18,137
+quando la stringa all'indice -due, o il
+penultimo carattere della stringa viene
+
+85
+00:07:18,137 --> 00:07:21,900
+raggiunto, quella sarà l'ultima iterazione
+del ciclo for.
+
+86
+00:07:22,280 --> 00:07:28,237
+Abbiamo raggiunto la testata ancora una volta e
+non ci sono più numeri generati da
+
+87
+00:07:28,237 --> 00:07:31,433
+range.
+Quindi dopo questo, Python avanza alla linea
+
+88
+00:07:31,433 --> 00:07:35,138
+diciassette.
+Il valore che deve essere ritornato è il valore di
+
+89
+00:07:35,138 --> 00:07:43,354
+repeats, che è due e che viene ritornato e
+poi stampato alla riga diciannove.
+
+90
+00:07:43,360 --> 00:07:48,898
+Ora scriviamo un'altra funzione che
+riguarda i cicli sugli indici.
+
+91
+00:07:48,898 --> 00:07:54,761
+Questa funzione è chiamata shift lest.
+Ha un singolo parametro lista e
+
+92
+00:07:54,761 --> 00:08:00,300
+modifica quella lista, quindi il tipo di ritorno
+è none-type, viene ritornato none.
+
+93
+00:08:00,300 --> 00:08:06,240
+La modifica alla lista è che ogni elemento 
+della lista, o ogni oggetto, viene
+
+94
+00:08:06,240 --> 00:08:11,724
+shiftato di una posizione a sinistra.
+E il primo elemento viene shiftato, o spostato
+
+95
+00:08:11,724 --> 00:08:16,369
+all'ultima posizione.
+Una precondizione alla funzione è che
+
+96
+00:08:16,369 --> 00:08:24,845
+la lunghezza della stringa sia almeno uno.
+Ecco una lista di esempio che ha quattro
+
+97
+00:08:24,849 --> 00:08:28,540
+stringhe.
+Stringhe a, b, c, e d.
+
+98
+00:08:28,540 --> 00:08:35,046
+Le stringhe saranno spostate a sinistra,
+spostando b dall'indice uno all'indice zero.
+
+99
+00:08:35,046 --> 00:08:36,998
+c dall'indice due all'indice uno.
+d
+
+100
+00:08:36,998 --> 00:08:48,385
+dall'indice tre all'indice due.
+E a da zero all'ultima posizione dove
+
+101
+00:08:48,385 --> 00:08:54,349
+d si trovava in origine.
+Quindi la lista risultante è b, c, d 
+
+102
+00:08:54,349 --> 00:08:59,883
+e a.
+Nell'esempio, ho mostrato che b deve essere spostato
+
+103
+00:08:59,883 --> 00:09:04,978
+nella posizione in cui era a.
+E poi c nella posizione in cui era b,
+
+104
+00:09:04,978 --> 00:09:09,515
+originariamente.
+Una cosa che non ho mostrato eslplicitamente
+
+105
+00:09:09,515 --> 00:09:15,882
+nell'esempio è che quando spostiamo b nella
+posizione di a, abbiamo bisogno di tenere traccia di a.
+
+106
+00:09:15,882 --> 00:09:22,250
+Il valore che si trova all'indice zero, per essere
+in grado più avanti di spostare quel valore
+
+107
+00:09:22,250 --> 00:09:27,437
+all'ultima posizione della lista.
+Userò la variabile first item
+
+108
+00:09:27,437 --> 00:09:32,557
+per tenere traccia di questo.
+Quindi ottiene il valore della lista all'indice zero.
+
+109
+00:09:32,558 --> 00:09:38,644
+E poi saremo in grado di prendere il valore
+dall'indice zero e posizionarlo all'ultima
+
+110
+00:09:38,644 --> 00:09:44,257
+posizione più avanti.
+Il compito che stiamo facendo è spostare
+
+111
+00:09:44,257 --> 00:09:49,008
+gli elementi iniziando da uno.
+Quindi userò di nuovo range.
+
+112
+00:09:49,008 --> 00:09:53,667
+Il primo indice con cui lavorerò è
+l'indice uno.
+
+113
+00:09:53,668 --> 00:09:58,420
+E la posizione di stop sarà la lunghezza della
+lista.
+
+114
+00:10:00,580 --> 00:10:09,890
+Il compito che vorremmo portare a termine è
+prendere la lista alla posizione i - uno e inserirlo
+
+115
+00:10:09,890 --> 00:10:15,719
+nell'elemento della lista alla sua destra.
+Quindi, in altre parole, se uno è il primo
+
+116
+00:10:15,719 --> 00:10:21,761
+valore di i, stiamo per prendere la lista
+alla posizione zero e assegnarle il valore della
+
+117
+00:10:21,761 --> 00:10:26,428
+lista alla posizione uno.
+Quindi una volta che tutti gli elementi sono stati
+
+118
+00:10:26,428 --> 00:10:32,425
+spostati a sinistra, vogliamo prendere 
+l'elemento che era originariamente nella
+
+119
+00:10:32,425 --> 00:10:38,047
+prima posizione, e spostarlo all'ultima.
+L'ultimo elemento della lista può essere
+
+120
+00:10:38,047 --> 00:10:44,869
+indicata usando -uno, e lo imposteremo
+nella nostra variabile first item, che contiene
+
+121
+00:10:44,869 --> 00:10:50,491
+il valore originale all'indice zero.
+A  questo punto, la lista L è stata modificata,
+
+122
+00:10:50,491 --> 00:10:54,240
+e la funzione può uscire.
+Chiamiamo la funzione.
+
+123
+00:10:54,700 --> 00:11:03,620
+Nella shell, creerò una lista con gli stessi
+valori dell'esempio che abbiamo usato.
+
+124
+00:11:05,200 --> 00:11:09,441
+Possiamo chiamare shift left L come 
+argomento.
+
+125
+00:11:09,441 --> 00:11:16,540
+E ora, quando esaminiamo il contenuto di L,
+vediamo che i valori sono stati effettivamente
+
+126
+00:11:16,540 --> 00:11:22,860
+shiftati a sinistra con il primo elemento che
+è stato spostato all'ultima posizione.
+
+127
+00:11:23,380 --> 00:11:27,393
+Useremo ancora una volta il Python
+Visualizer per visualizzare l'esecuzione di
+
+128
+00:11:27,393 --> 00:11:30,122
+questa chiamata alla funzione.
+Questo ci aiuterà a prendere più
+
+129
+00:11:30,122 --> 00:11:34,242
+confidenza con la comprensione del codice
+ed è qualcosa che dovreste fare mentre
+
+130
+00:11:34,242 --> 00:11:39,475
+scrivete il vostro codice.
+La funzione viene prima definita, e alla riga
+
+131
+00:11:39,475 --> 00:11:46,025
+diciassette la variabile letter fa riferimento
+ad una stringa di quattro elementi contenente
+
+132
+00:11:46,025 --> 00:11:50,860
+le stringhe a, b, c e d. Ora viene chiamata
+la funzione shift left.
+
+133
+00:11:53,200 --> 00:11:59,206
+Il parametro L della funzione, fa riferimento alla
+lista di stringhe che era stata passata come
+
+134
+00:11:59,206 --> 00:12:04,365
+argomento alla funzione.
+Alla riga dieci, first item è una variabile che
+
+135
+00:12:04,365 --> 00:12:10,140
+ottiene il valore della lista all'indice zero.
+First item fa riferimento alla stringa A.
+
+136
+00:12:10,520 --> 00:12:16,533
+Il ciclo for inizia alla linea dodici e il 
+valore iniziale di i è uno.
+
+137
+00:12:16,533 --> 00:12:20,978
+I fa riferimento ad uno, il primo valore generato
+da range.
+
+138
+00:12:20,978 --> 00:12:26,760
+Nel corpo del ciclo, la lista all'indice
+zero, i - uno.
+
+139
+00:12:26,760 --> 00:12:30,596
+Quello è il valore della lista vicino
+ad uno.
+
+140
+00:12:30,597 --> 00:12:36,877
+Quindi, la lista a zero è attualmente a.
+La lista ad uno è b, e stiamo per
+
+141
+00:12:36,877 --> 00:12:41,499
+assegnare alla lista in zero il valore della
+lista in uno.
+
+142
+00:12:41,500 --> 00:12:48,391
+Ora possiamo vedere che la lista a zero
+fa riferimento a b e quindi lo stesso fa la lista
+
+143
+00:12:48,391 --> 00:12:52,169
+all'indice uno.
+Questo è il motivo per cui la variabile first item
+
+144
+00:12:52,169 --> 00:12:56,779
+tiene traccia del valore che c'era 
+inizialmente all'indice zero.
+
+145
+00:12:56,783 --> 00:13:02,211
+Avremo bisogno di quello più avanti quando
+passeremo first element all'ultima posizione.
+
+146
+00:13:02,211 --> 00:13:06,622
+Tornando al ciclo, alla linea dodici, il
+valore di i verrà aumentato.
+
+147
+00:13:06,622 --> 00:13:11,304
+i ora fa riferimento a due.
+E la lista all'indice uno otterrà il
+
+148
+00:13:11,304 --> 00:13:16,257
+valore che è attualmente nella lista
+all'indice due e due fa riferimento a c.
+
+149
+00:13:16,257 --> 00:13:20,600
+E la lista ad uno verrà assegnata con
+quell'indirizzo di memoria.
+
+150
+00:13:21,740 --> 00:13:27,783
+Quindi ora sia la lista ad uno, che la lista a due,
+fanno riferimento a c.
+
+151
+00:13:27,783 --> 00:13:35,821
+i ottiene il valore massimo che è tre.
+E poi la lista all'indice due sta per
+
+152
+00:13:35,821 --> 00:13:44,105
+essere assegnata alla lista all'indice tre. Quindi
+abbiamo la lista b, c, d, d.
+
+153
+00:13:44,105 --> 00:13:48,177
+Ed è ora di rimpiazzare l'ultimo d con
+la a.
+
+154
+00:13:48,177 --> 00:13:54,588
+Questo è ciò che accade alla riga quindici.
+La lista all'ultima posizione sarà 
+
+155
+00:13:54,588 --> 00:14:01,236
+assegnata con il valore che era originariamente
+all'indice zero.
+
+156
+00:14:01,240 --> 00:14:04,527
+Questa è l'ultima riga della nostra chiamata
+alla funzione.
+
+157
+00:14:04,527 --> 00:14:09,956
+Quindi la funzione termina l'esecuzione, e
+ritorna, poi viene stampata letters.
+
+158
+00:14:09,956 --> 00:14:15,920
+Notate che ciò che è stato stampato quando la 
+funzione h effettuato il return è il valore none.
+
+159
+00:14:16,620 --> 00:14:22,386
+E ora viene mostrata letters con i valori, con
+le stringhe b, c, d e a.

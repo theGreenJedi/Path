@@ -1,0 +1,59 @@
+In questo video, andremo ad esplorare quando vengono create le variabili, per quanto tempo esistono
+nella memoria del computer, e cosa accade quando due
+variaibli hanno lo stesso nome e due differenti
+funzioni. Qui vediamo la funzione convert to minutes che abbiamo analizzato nella lezione
+di visualizzazione. Abbiamo aggiunto una funzione convert to seconds,
+che converte un numero di ore nel numero equivalente 
+di secondi. Convert to seconds effettua il suo lavoro
+chiamando convert to minutes a poi moltiplicando il risultato per 60. Usiamo il visualizzatore per analizzare questo. Passeremo velocemente sulle definizioni 
+delle funzioni a quando gli oggetti delle funzioni vengono creati.
+Convert to minutes per [Suono] uno di questi oggetti delle funzioni, e converte
+secondi per primo all'altro. Ora stiamo per eseguire un'istruzione di
+assegnazione. Il primo passo è valutare il lato destro
+che è una chiamata ad una funzione. Python valuta per primo l'argomento e
+crea un oggetto per quel valore. Poi, Python crea un frame sullo stack di 
+chiamata e salva l'indirizzo di memoria di due in un
+parametro. [INCOMPRENSIBILE]. Come promemoria, questa parte è chiamata
+stack di chiamata. Viene mostrato come un stack di frame
+alla rovescia. Durante l'esecuzione di una chiamata ad una funzione
+viene creato un nuovo stack di frame. Non appena la funzione esce, il frame di
+stack corrente viene cancellato. E l'esecuzione della funzione precedente
+continua. La prima riga nel corpo di convert_to_seconds è un'altra
+istruzione di assegnazione. La parte sinistra è una chiamata ad una
+funzione, Seguiamo le stesse regole di sempre,
+valutiamo l'argomento, num_hours, che contiene
+l'indirizzo di memoria del valore due. Poi, viene creato uno stack per la chiamata
+di convert_to_minutes, e il suo parametro, num_hours, contiene 
+l'indirizzo di memoria di quel valore. Ci sono due variabili chiamate num_hours. Una di queste si trova nel frame per la chiamata di
+convert_to_minutes, e una di quelle è nel frame per la chiamata di
+convert_to_seconds. Python tiene queste due funzioni in esecuzione
+in aree di memoria separate così non fa confusione su che variabile
+usare. Torniamo a tracciare l'esecuzione. La prima linea del corpo converte i
+minuti in un'istruzione di assegnazione. Sul lato destro c'è un'espressione
+num_hours per 60. Quale num_hours utilizziamo? La risposta è che Python cerca nel
+frame dello stack corrente. Num_hours fa riferimento a due quindi num_hours
+per 60 viene valutato a 120. Il secondo passo dell'assegnazione consiste
+nell'assegnare 120 alla variabile minutes. Se minutes non esiste nello stack frame corrente
+allora verrà creato. Ogni stack frame contiene il suo insieme
+di variabili. Nel frame per convert to minutes ci sono
+le variabili, num_hours e minutes. Il fram per convert to seconds attualmente
+ha solo una variabile num_hours. Però, al termine della sua esecuzione, avrà
+anche sia minuti che secondi. Lo stack fram per il programma ricipale attualmente possiede convert_to_minutes
+e convert_to_seconds. Però al momento dell'esecuzione dell'istruzione 
+di assegnazione sulla linea 20 esisterà anche qui la variabile seconds. Stiamo per ritornare il valore della variabile minutes, e uscire dalla 
+funzione attuale. Ma a che punto ritorniamo? La risposta è sempre, nel frame vicino nello
+stack di chiamata. Lo stack frame corrente viene creato durante
+la chiamata a convert_to_minutes. Quando questa chiamata è completa,
+lo stack frame corrente viene cancellato, e Python produce il valore
+di ritorno come valore dell'espressione di questa chiamata 
+alla funzione. Questa chiamata è a destra dell'istruzione
+di assegnazione. Per completare l'assegnazione sarà creata la
+variabile minutes, e Python salverà l'indirizzo di memoria del
+valore di ritorno. Vediamo cosa succede. Notate che il frame per convert to minutes è stato cancellato, e la variabile
+minutes è stata creata nel frame per convert to seconds. Qui abbiamo un'altra istruzione
+di assegnazione. Il lato destro, minutes per 60,
+viene valutato al risultato di 120 per 60. E viene creata la nuova variabile
+seconds, e contiene l'indirizzo di memoria del nuovo
+valore. Poi ritorniamo seconds. Seconds fa riferimento a 7200 quindi
+quello è il valore che riceve prodotto dalla chiamata a convert to seconds
+della linea 20. [NO AUDIO]

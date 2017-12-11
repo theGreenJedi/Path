@@ -1,0 +1,794 @@
+1
+00:00:01,460 --> 00:00:06,933
+In previous lectures, we used for loops to
+pass over the characters of strings and
+
+2
+00:00:06,933 --> 00:00:10,890
+the items in lists.
+In this lecture, we are going to use for
+
+3
+00:00:10,890 --> 00:00:14,320
+loops to pass over the indices of strings
+and lists.
+
+4
+00:00:14,320 --> 00:00:19,728
+And this will allow us to solve problems
+that we can't currently solve using for
+
+5
+00:00:19,728 --> 00:00:23,421
+loops..
+The first problem that we'll tackle is to
+
+6
+00:00:23,421 --> 00:00:28,631
+count the number of neighboring pairs of
+characters that are the same within a
+
+7
+00:00:28,631 --> 00:00:30,940
+string.
+So here's an example string.
+
+8
+00:00:32,140 --> 00:00:37,874
+And in this string, there are three pairs
+of neighboring characters that are the
+
+9
+00:00:37,874 --> 00:00:44,352
+same, the c's, the f's and the g's.
+In order to solve this problem, we need to
+
+10
+00:00:44,352 --> 00:00:50,091
+compare neighboring pairs of characters.
+So the string at index zero needs to be
+
+11
+00:00:50,091 --> 00:00:55,759
+compared with the string at index one.
+The string at index one must be compared
+
+12
+00:00:55,759 --> 00:01:00,780
+with the string at index two.
+And so on, until we reach the second last
+
+13
+00:01:00,780 --> 00:01:05,156
+character.
+The string at index -two and we compare it
+
+14
+00:01:05,156 --> 00:01:10,249
+with the last character of the string, the
+string at index -one.
+
+15
+00:01:10,250 --> 00:01:17,604
+Generally speaking, we can describe this
+as, describe as comparing the string at
+
+16
+00:01:17,604 --> 00:01:26,914
+index i with the string at index i + one.
+We'll use the range function to generate
+
+17
+00:01:26,914 --> 00:01:31,587
+these numbers.
+Zero, one up to and including -two, so
+
+18
+00:01:31,587 --> 00:01:38,009
+the, the i values in our comparison.
+As a reminder, range has three parameters,
+
+19
+00:01:38,009 --> 00:01:43,041
+one required and two optional.
+The required parameter is the value at
+
+20
+00:01:43,041 --> 00:01:48,511
+which you want to stop the sequence.
+And optionally we can also provide the
+
+21
+00:01:48,511 --> 00:01:52,740
+start and the step.
+In this case, the start we want is zero,
+
+22
+00:01:52,740 --> 00:01:57,043
+which is the default.
+And the step is one, which is also the
+
+23
+00:01:57,043 --> 00:01:59,960
+default.
+So we only need to use the stop.
+
+24
+00:01:59,960 --> 00:02:04,188
+And we want to stop at the length of the
+string -one.
+
+25
+00:02:04,190 --> 00:02:09,777
+In other words, we want to go up to and
+including length of the string -2,, or the
+
+26
+00:02:09,777 --> 00:02:15,237
+second last character of the string.
+And we indicate this using length of
+
+27
+00:02:15,237 --> 00:02:19,661
+string -1,, up to but not including that
+value.
+
+28
+00:02:19,661 --> 00:02:23,660
+And then, the values of the indices are
+printed.
+
+29
+00:02:26,420 --> 00:02:31,598
+Now that we've written this for loop,
+we're going to use that same header in our
+
+30
+00:02:31,598 --> 00:02:35,754
+function to count the repeated pairs of
+characters in the string.
+
+31
+00:02:35,754 --> 00:02:39,462
+The function that we're writing is count
+adjacent repeats.
+
+32
+00:02:39,462 --> 00:02:42,786
+It has a single string parameter and
+returns an int.
+
+33
+00:02:42,786 --> 00:02:47,645
+And when we call the function, passing the
+example string as an argument, the
+
+34
+00:02:47,645 --> 00:02:52,977
+function should return three.
+For this function, we need to keep track
+
+35
+00:02:52,977 --> 00:02:55,898
+of how many repeated characters we've
+seen.
+
+36
+00:02:55,898 --> 00:02:59,635
+So I'm going to use a variable named
+repeats to do that.
+
+37
+00:02:59,635 --> 00:03:03,060
+And repeats will have an initial value of
+zero.
+
+38
+00:03:03,060 --> 00:03:09,125
+We want to go over the characters of the
+string, pass over them, and we need to use
+
+39
+00:03:09,125 --> 00:03:13,712
+their indices this time.
+We wrote this for loop header already,
+
+40
+00:03:13,712 --> 00:03:19,482
+we're starting at index zero and going up
+to the second last character of the
+
+41
+00:03:19,482 --> 00:03:24,711
+string.
+In the body of the for loop, we want to
+
+42
+00:03:24,711 --> 00:03:31,014
+compare the character at position s at
+index i with the one that comes after it,
+
+43
+00:03:31,014 --> 00:03:36,530
+to see whether they are equal.
+So we can use the equality operator for
+
+44
+00:03:36,530 --> 00:03:40,154
+this, comparing s at index i with s at
+index i1.
+
+45
+00:03:40,154 --> 00:03:43,463
++ one.
+When they are equal, we found one of these
+
+46
+00:03:43,463 --> 00:03:47,560
+adjacent repeats.
+So that repeats variable should be
+
+47
+00:03:47,560 --> 00:03:52,858
+increased by one.
+At the end of the loop, after it has
+
+48
+00:03:52,858 --> 00:03:57,380
+exited, we can return the value that
+repeats the first step.
+
+49
+00:03:59,540 --> 00:04:05,772
+Finally, let's just run this function call
+to ensure that it's working as expected.
+
+50
+00:04:05,772 --> 00:04:09,344
+To do that I need to execute, or run the
+module.
+
+51
+00:04:09,344 --> 00:04:14,360
+And now, we can call the function, and it
+returns three as expected.
+
+52
+00:04:15,540 --> 00:04:21,041
+So to summarize, it's because of the fact
+that we want to compare an element of the
+
+53
+00:04:21,041 --> 00:04:25,548
+list with another element in the list,
+that we are using the indices.
+
+54
+00:04:25,548 --> 00:04:29,127
+It's not enough to know what the value of
+the item is.
+
+55
+00:04:29,127 --> 00:04:34,430
+We need to know where the item is in the
+list in order to determine which other
+
+56
+00:04:34,430 --> 00:04:39,625
+element to compare it with.
+To gain a better understanding of what's
+
+57
+00:04:39,625 --> 00:04:44,480
+happening when this code executes, we'll
+trace it using the Python Visualizer.
+
+58
+00:04:45,360 --> 00:04:51,485
+The first time I hit forward the function
+definition is evaluated, and we're taken
+
+59
+00:04:51,485 --> 00:04:57,462
+to line nineteen where I've put a call to
+the function, using a slightly smaller
+
+60
+00:04:57,462 --> 00:05:05,424
+example.
+When the function is called, the parameter
+
+61
+00:05:05,424 --> 00:05:11,862
+s, refers to the string a c, c f, f h
+which we passed as an argument to the
+
+62
+00:05:11,862 --> 00:05:16,095
+function.
+After line eleven has executed, repeats
+
+63
+00:05:16,095 --> 00:05:24,247
+refers to the value zero.
+On line thirteen is the first line of the
+
+64
+00:05:24,247 --> 00:05:27,750
+for loop.
+I will get the initial value of zero.
+
+65
+00:05:27,750 --> 00:05:30,481
+I
+Initially refers to zero.
+
+66
+00:05:30,483 --> 00:05:36,890
+And the if condition is first checked.
+So, s at i, s at zero, is a is compared
+
+67
+00:05:36,890 --> 00:05:43,639
+with s at i + one, s at one, which is c.
+These characters are not equal, so the
+
+68
+00:05:43,639 --> 00:05:49,557
+body of the for loop is not executed.
+We move on and increment i.
+
+69
+00:05:49,557 --> 00:05:55,583
+So i gets the next value that range
+generates, which is one.
+
+70
+00:05:55,583 --> 00:06:01,813
+Now, i refers to one.
+And s at one is compared with s at two
+
+71
+00:06:01,813 --> 00:06:08,861
+because the characters here are equal,
+The body of the, if, is executed.
+
+72
+00:06:08,861 --> 00:06:16,311
+And repeats will be increased by one.
+Repeats now refers to the value one.
+
+73
+00:06:16,312 --> 00:06:21,068
+And i gets the next value that range
+generates which is two.
+
+74
+00:06:21,070 --> 00:06:27,260
+The string at index two is compared with
+the string at index three and they are not
+
+75
+00:06:27,260 --> 00:06:30,430
+equal, so the body of the f is not
+executed.
+
+76
+00:06:30,430 --> 00:06:36,983
+We advance to the for loop header again,
+and i will be the next value that range
+
+77
+00:06:36,983 --> 00:06:39,277
+generates.
+I, I refers to three.
+
+78
+00:06:39,277 --> 00:06:45,666
+The string at index three is compared with
+the string at index four, those two
+
+79
+00:06:45,666 --> 00:06:51,892
+characters are equal, so the body of the
+if is executed this time, repeats is
+
+80
+00:06:51,892 --> 00:06:58,691
+increased by one, so repeats now refers to
+the value two and i advances to the next
+
+81
+00:06:58,691 --> 00:07:03,085
+value, which is four.
+The string at index four is not equal to
+
+82
+00:07:03,085 --> 00:07:07,184
+the string at index five so the body of if
+won't be executed.
+
+83
+00:07:07,184 --> 00:07:12,492
+And notice that this is the last pair of
+characters that we need to compare, so
+
+84
+00:07:12,492 --> 00:07:18,137
+when the string at index -two, or the
+second last character of the string is
+
+85
+00:07:18,137 --> 00:07:21,900
+reached, that will be the last iteration
+of the for loop.
+
+86
+00:07:22,280 --> 00:07:28,237
+We've reached the header one more time and
+there are no more numbers generated by
+
+87
+00:07:28,237 --> 00:07:31,433
+range.
+So after this, Python advances to line
+
+88
+00:07:31,433 --> 00:07:35,138
+seventeen.
+The value to be returned is the value of
+
+89
+00:07:35,138 --> 00:07:43,354
+repeats, which is two and that is returned
+and then printed on line nineteen.
+
+90
+00:07:43,360 --> 00:07:48,898
+Now let's write another function that
+involves looping over indices.
+
+91
+00:07:48,898 --> 00:07:54,761
+This function is named shift left.
+It has a single list parameter and
+
+92
+00:07:54,761 --> 00:08:00,300
+modifies that list, so the return type is
+none-type, none is returned.
+
+93
+00:08:00,300 --> 00:08:06,240
+The modification to the list is that each
+element of the list, or each item, is
+
+94
+00:08:06,240 --> 00:08:11,724
+shifted one position to the left.
+And the first item is shifted, or moved,
+
+95
+00:08:11,724 --> 00:08:16,369
+to the last position.
+A precondition to this function is that
+
+96
+00:08:16,369 --> 00:08:24,845
+the length of the list is at least one.
+Here is an example list that has four
+
+97
+00:08:24,849 --> 00:08:28,540
+strings.
+Strings a, b, c, and d.
+
+98
+00:08:28,540 --> 00:08:35,046
+The strings will be shifted to the left,
+moving b from index one to index zero.
+
+99
+00:08:35,046 --> 00:08:36,998
+C from index two to index one.
+D
+
+100
+00:08:36,998 --> 00:08:48,385
+From index three to index two.
+And a from zero to the last position where
+
+101
+00:08:48,385 --> 00:08:54,349
+d originally was.
+Therefore the resulting list is b, c, d
+
+102
+00:08:54,349 --> 00:08:59,883
+and a.
+In the example, I showed moving b to the
+
+103
+00:08:59,883 --> 00:09:04,978
+position that a was in.
+And then c to the position that b was in,
+
+104
+00:09:04,978 --> 00:09:09,515
+originally in.
+One thing that I didn't explicitly show in
+
+105
+00:09:09,515 --> 00:09:15,882
+the example is that when we move b into
+a's position, we need to keep track of a.
+
+106
+00:09:15,882 --> 00:09:22,250
+What value is at index zero, in order to
+later be able to move that value to the
+
+107
+00:09:22,250 --> 00:09:27,437
+last position in the list.
+The variable first item is what I'm going
+
+108
+00:09:27,437 --> 00:09:32,557
+to use to keep track of this.
+So it gets the value at list index zero.
+
+109
+00:09:32,558 --> 00:09:38,644
+And we will then be able to take the value
+from index zero and put it in the last
+
+110
+00:09:38,644 --> 00:09:44,257
+position later on.
+The task that we're doing is the shifting
+
+111
+00:09:44,257 --> 00:09:49,008
+of items starting from one.
+So I'm using range again.
+
+112
+00:09:49,008 --> 00:09:53,667
+The first index that I will work with is
+index one.
+
+113
+00:09:53,668 --> 00:09:58,420
+And the stopping position is the length of
+the list.
+
+114
+00:10:00,580 --> 00:10:09,890
+The task is that we would like to take the
+list at position i - one and set it to the
+
+115
+00:10:09,890 --> 00:10:15,719
+list, element to its right.
+So in other words, if one is the first
+
+116
+00:10:15,719 --> 00:10:21,761
+value of i, we're going to take the list
+at position zero and have it get the list
+
+117
+00:10:21,761 --> 00:10:26,428
+at position one.
+So once all of the elements have been
+
+118
+00:10:26,428 --> 00:10:32,425
+shifted to the left, we then want to take
+the element that was originally in the
+
+119
+00:10:32,425 --> 00:10:38,047
+first position, and move it to the last.
+The last element of the list can be
+
+120
+00:10:38,047 --> 00:10:44,869
+indicated using -one, and we will set that
+to our first item variable, which hung on
+
+121
+00:10:44,869 --> 00:10:50,491
+to the original value at index zero.
+At this point, list L has been modified,
+
+122
+00:10:50,491 --> 00:10:54,240
+and the function can exit.
+Let's call the function.
+
+123
+00:10:54,700 --> 00:11:03,620
+In the shell, i will create a list with
+the same example values that we've used.
+
+124
+00:11:05,200 --> 00:11:09,441
+We can call shift left passing L as the
+argument.
+
+125
+00:11:09,441 --> 00:11:16,540
+And now, when we examine the contents of
+L, we see that the values have indeed been
+
+126
+00:11:16,540 --> 00:11:22,860
+shifted to the left with the first item
+being moved to the last position.
+
+127
+00:11:23,380 --> 00:11:27,393
+We will once again use the Python
+Visualizer to visualize the execution of
+
+128
+00:11:27,393 --> 00:11:30,122
+this function call.
+This will help us gain a better
+
+129
+00:11:30,122 --> 00:11:34,242
+understanding of the code and it's
+something that you should be doing as you
+
+130
+00:11:34,242 --> 00:11:39,475
+are writing your code.
+The function is first defined, and on line
+
+131
+00:11:39,475 --> 00:11:46,025
+seventeen the letter's variable refers to
+a four element list of strings containing
+
+132
+00:11:46,025 --> 00:11:50,860
+the strings a, b, c and d. Now the
+function shift left is called.
+
+133
+00:11:53,200 --> 00:11:59,206
+The functions parameter L, refers to the
+list of strings that was passed as an
+
+134
+00:11:59,206 --> 00:12:04,365
+argument to the function.
+On line ten, first item is a variable that
+
+135
+00:12:04,365 --> 00:12:10,140
+gets the value of the list at index zero.
+First item refers to the string A.
+
+136
+00:12:10,520 --> 00:12:16,533
+The for loop begins on line twelve and the
+initial value of I is one.
+
+137
+00:12:16,533 --> 00:12:20,978
+I refers to one, the first value generated
+by range.
+
+138
+00:12:20,978 --> 00:12:26,760
+In the body of the loop, the list at index
+zero, i - one.
+
+139
+00:12:26,760 --> 00:12:30,596
+That's the value of the listed and next
+one.
+
+140
+00:12:30,597 --> 00:12:36,877
+So I, listed zero, is currently a.
+The list at one is b, and we're about to
+
+141
+00:12:36,877 --> 00:12:41,499
+assign the list at zero the value of the
+list at one.
+
+142
+00:12:41,500 --> 00:12:48,391
+Now we can see that the list at zero
+refers to b and so does the list at index
+
+143
+00:12:48,391 --> 00:12:52,169
+one.
+That's why we use the first item variable
+
+144
+00:12:52,169 --> 00:12:56,779
+to keep track of the value that was
+initially at list at index zero.
+
+145
+00:12:56,783 --> 00:13:02,211
+We're going to need that later when we
+move the first item to the last position.
+
+146
+00:13:02,211 --> 00:13:06,622
+Back to the loop, on line twelve, the
+value of i will be increased.
+
+147
+00:13:06,622 --> 00:13:11,304
+I were now refers to two.
+And the list at index one will get the
+
+148
+00:13:11,304 --> 00:13:16,257
+value that is currently at the list at
+index two List at two refers to c.
+
+149
+00:13:16,257 --> 00:13:20,600
+And list at one is about to be assigned
+the, that memory address.
+
+150
+00:13:21,740 --> 00:13:27,783
+So now both list at one, and list at two,
+refer to the c.
+
+151
+00:13:27,783 --> 00:13:35,821
+I gets the max value which is three.
+And the list at index two is about to be
+
+152
+00:13:35,821 --> 00:13:44,105
+assigned the list at index three So we
+have a list with b, c, d, d.
+
+153
+00:13:44,105 --> 00:13:48,177
+And it's time to replace the last d with
+the a.
+
+154
+00:13:48,177 --> 00:13:54,588
+That's what happens on line fifteen.
+The list at the last position will be
+
+155
+00:13:54,588 --> 00:14:01,236
+assigned the value that was originally at
+index zero.
+
+156
+00:14:01,240 --> 00:14:04,527
+This is the last line of our function
+call.
+
+157
+00:14:04,527 --> 00:14:09,956
+So the function finishes executing, and
+returns, then letters is printed.
+
+158
+00:14:09,956 --> 00:14:15,920
+So notice that what was printed when the
+function returned was the value none.
+
+159
+00:14:16,620 --> 00:14:22,386
+And now letters with the values, with the
+strings, b, c, d, and a is displayed..

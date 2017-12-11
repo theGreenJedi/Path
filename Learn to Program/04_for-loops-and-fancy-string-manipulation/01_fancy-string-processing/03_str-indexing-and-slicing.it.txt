@@ -1,0 +1,54 @@
+Quando si lavora con le stringhe, spesso dobbiamo 
+estrarre delle sottostringhe. Ad esempio, se una stringa contiene un numero
+di telefono, potremmo voler estrarre il codice dell'area.
+In questa lezione, introdurrò due tecniche, l'indexing e lo slicing, e
+useremo questi per estrarre delle sottostringhe delle stringhe con cui stiamo lavorando.
+In questa lezione, useremo la stringa learn to program come nostro esempio.
+Ogni carattere della stringa ha un indice che, che è la sua posizione nella
+stringa. Quindi, la stringa all'indice zero, indicata
+usando questa notazione di parentesi, è la L. All'indice uno della stringa, abbiamo una e.
+All'indice due, c'è la prima a. Notate che zero è la prima posizione,
+non uno. Iniziamo a contare da zero.
+Possiamo anche usare degli indici negativi per contare dal fondo, oppure dalla parte destra
+della stringa. Quindi la fine della stringa al -uno è la m.
+A -due c'è l'ultima a. A -tre c'è la r, la ultima r.
+Quindi, una volta che abbiamo visto usare un indice, possiamo estrarre parti della stringa un carattere
+alla volta. Ma, possiamo estrarre più di un carattere usando un approccio chiamato
+slicing. Con lo slicing, forniamo un indice di partenza
+seguito da un due punti, seguito da un indice di arrivo e che ci da una sottostringa dall'indice
+di partenza fino a, ma non includendo l'indice finale.
+Ad esempio, possiamo ottenere questa stringa dalla posizione zero, indice zero fino a, ma non
+includendo l'indice cinque, e questo ci da la stringa Learn.
+Dall'indice sei fino, ma non includendo l'indice otto, c'è il to.
+E, dall'indice nove fino al sedici, c'è la parola Program, stringa Program.
+Sedici è pari alla lunghezza della stringa.
+Quindi, un modo alternativo sarebbe quello di iniziare all'indice nove, ma andare fino a len s.
+Len è una funzione integrata che ritorna la lunghezza della stringa, quindi questa
+espressione è equivalente a quella sopra. Un'altra alternativa sarebbe quella di andare da
+nove, posizionare i due punti, e omettere l'indice di arrivo.
+In questo caso, per default si va fino alla fine della stringa, e quindi è anche 
+equivalente alle due espressioni precedenti. Anche l'indice iniziale può essere omesso.
+Quindi, per esempio, possiamo includere i due punti e andare fino all'indice a.
+Possiamo anche omettere sia l'indice di partenza che quello di arrivo.
+E questo ci restituisce l'intera stringa. Abbiamo visto che gli indici negativi possono essere
+usati per l'indicizzazione, e possono anche essere usati per lo slicing.
+Prendiamo questa sottostringa dall'indice uno fino ma non includendo l'indice otto.
+E la nostra espressione equivalente è di prendere da uno fino a ma non includendo -otto,
+O di andare da -quindici fino a, ma non includendo -otto.
+Quindi, queste tre espressioni sono tutte equivalenti.
+Lo slicing e l'operazione di indicizzazione non modificano la stringa su cui agiscono.
+Quindi, il valore a cui s si riferisce è invariato dalle operazioni precedenti.
+Infatti, non possiamo cambiare il valore di una stringa.
+Le operazioni come le seguenti terminano con errori.
+Se prendo una stringa all'indice sei e cerco di impostarlo a d, ottengo un errore.
+Allo stesso modo, se cerco di modificare la stringa dall'indice nove fino al sedici, e lo faccio
+girare, ottengo anche in questo caso un errore. Ma, immaginate che voglia cambiare la
+stringa s a Learned to Program. Ecco qui un approccio che possiamo usare.
+Possiamo usare il valore attuale di s e ottenere la parola learn, concatenarla con ed
+per farla diventare learned, e concatenarla con il resto della stringa, che è, to
+program. Questo viene valutato a Learned to Program.
+E ora che abbiamo questa nuova stringa, Learned to Program, possiamo fare in modo che
+s faccia riferimento a quella, anziché al suo vecchio valore. Notate che non abbiamo modificato la stringa
+a cui s faceva originariamente riferimento, non possiamo modificarla.
+Invece, abbiamo creato una nuova stringa e abbiamo fatto puntare s a quella nuova
+stringa.

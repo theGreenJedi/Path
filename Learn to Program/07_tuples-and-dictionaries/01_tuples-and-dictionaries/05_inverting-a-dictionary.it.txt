@@ -1,0 +1,44 @@
+In questa lezione, esploreremo come usare
+un dizionario come accumulatore. Qui, abbiamo creato una mappa di dizionario
+frutti a colori. Faremo girare questo, per analizzare
+fruits to colours. In modo da poter avere un po' più
+di famigliarità con questo. Qui abbiamo il dizionario fruits to colour,
+queste voci del dizionario non sono ordinate per chiave o per valore.
+Possiamo indicizzarlo usando il nome di un frutto, per trovare il suo colore, quindi
+fruits to colours di orange, è orange, fruits to colours di banana è yellow.
+Possiamo anche iterare su queste chiavi in questo dizionario.
+Per un frutto in fruits to colour, possiamo ottenere ogni frutto a turno.
+E anche usare quel frutto come indice nel dizionario per guardare
+il valore corrispondente. E ora, arriviamo al problema che andremo ad
+affrontare oggi. Andremo a trasformare questo dizionario
+al contrario, ovvero ad invertire i frutti e i colori. Vogliamo costruire un nuovo dizionario
+che mappi i colori nei frutti. Per farlo, itereremo sulle chiavi nel
+dizionario fruits to colours, estraendo il colore corrispondente a quel frutto,
+e poi aggiungendo il nostro nuovo colore al dizionario nella voce colour to fruit.
+La variabile colour to fruit è il nostro accumulatore.
+Facciamolo girare di nuovo. E esaminiamo fruit to colour e colour to
+fruit. Ma in colour to fruit manca qualche 
+informazione. Non ci sono melograni, niente
+fragole, niente pesche. Il problema è che c'è più di un frutto
+per ognuno dei colori associati con quei frutti mancanti. Ad esempio, i melograni sono rossi, ma anche
+le ciliegie. Quindi, quando aggiungiamo ciliegie a questo
+dizionario, queste rimpiazzano la voce per i melograni.
+Invece dell'inversione diretta, abbiamo bisogno di essere un po' cauti.
+Costruiremo un dizionario che mappa ogni colore ad una lista di frutti di quel colore.
+Se colour non è già una chiave nell'accumulatore, aggiungeremo un colore ad una
+lista con un oggetto al suo interno, il frutto attuale come voce.
+Altrimenti, se colour è già una chiave, il che significa che c'è già una lista di frutti di quel
+colore, dobbiamo aggiungere il frutto a quella lista
+esistente. Ecco il codice per esprimere
+quell'algoritmo. Se il caso non è questo, quel colore è una 
+chiave nel dizionario colour to fruit. Poi aggiungeremo una voce, che mappa quel
+colore ad una lista contenente friut. D'altra parte, se colour è già una chiave del 
+dizionario, allora vorremmo ottenere la lista a cui, a cui mappa quel colore,
+e aggiungere la variabile fruit. Cancelleremo anche il vecchio codice.
+Analizziamo quello che abbiamo fatto. Fruit to colours, è ciò che è sempre stato. Colour to fruit ora, ha delle chiavi che sono
+stringhe, e il valori sono una lista di stringhe. Quale frutto è colorato di arancione?
+Come otteniamo il frutto arancia? Bene, indicizziamo nel dizionario usando
+la stringa orange. E poi, questa ci restituisce una lista.
+Poi, indicizziamo all'interno di questa usando il normale modo di indicizzare le liste, per ottenere 
+orange. Come otteniamo cherry? Bene, indicizziamo nel nostro dizionario usando
+red e cherry è l'ultimo elemento della lista che viene restituita.

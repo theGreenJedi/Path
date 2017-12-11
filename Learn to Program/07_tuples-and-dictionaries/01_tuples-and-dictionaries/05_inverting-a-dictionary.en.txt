@@ -1,0 +1,46 @@
+In this lecture, we will explore using a
+dictionary as an accumulator. Here, we created dictionary mapping fruits
+to colours. We will run this, in order to explore
+fruits to colours. So that we can be a little bit more
+familiar with it. Here is the fruit to colour dictionary,
+these dictionary entries are not sorted by key or by value.
+We can index into it using the name of a fruit, in order to find out its colour, so
+fruit to colour of orange, is orange, fruit to colour of banana, is yellow.
+We can also iterate over the keys in this dictionary.
+For fruit, in fruit to colour, allows us to get each fruit in turn,
+As well as use that fruit as an index into the dictionary in order to look up the
+corresponding value. And now, we get to the problem we're going
+to explore today. We are going to turn this dictionary
+inside out, or invert fruit to colour. We want to build a new dictionary that
+maps colours to fruits. To do this, we will iterate over the keys
+in the fruit to colour dictionary, extract the colour corresponding to that fruit,
+and then add to our new colour to fruit dictionary the colour to fruit entry.
+Variable colour to fruit is our accumulator.
+We run this again. And examine fruit to colour and colour to
+fruit. But colour to fruit is missing some
+information. There are no pomegranates, no
+strawberries, no peaches. The problem is that there are more than
+one fruit for each of the colours associated with those three missing
+fruits. For example, pomegranates are red, but so
+are cherries. So, when we added cherry to this
+dictionary, it replaced the entry for pomegranate.
+Instead of this straight inversion, we need to be a bit careful.
+We will build a dictionary that maps each colour to a list of fruits of that colour.
+If colour is not already a key in the accumulator, we will add a colour to a
+list with one item in it, the current fruit, as an entry.
+Otherwise, if colour is already a key that means that it already has a list of fruit
+of that colour. We need to append fruit to that existing
+list. Here is the code expressing that
+algorithm. If it is not the case, that colour is the
+key in the colour to fruit dictionary, then we will add an entry, mapping colour
+to a list containing fruit. On the other hand, if colour is already a
+key in the dictionary, then we would like to get the list that, that colour maps to,
+and append variable fruit. We will also delete the old code.
+Let's explore how we've done it. Fruit to colour, is what it always has
+been. Coulor to fruit now, has keys being
+strings, and values being list of strings. Which fruit is colored orange?
+How do we get to the fruit orange? Well, we index into the dictionary using
+string orange. And then, that gives us a list.
+We then, index into that using the regular list indexing way to get orange.
+How can we get to cherry? Well, index into our dictionary using red
+and cherry is the last item in the list that is returned.

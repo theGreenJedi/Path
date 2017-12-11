@@ -1,0 +1,47 @@
+Avete visto le funzioni Booleane alla fine
+delle istruzioni. Andremo ad analizzare un problema di stile
+che può presentarsi quando combinare tutte e tre.
+Inizieremo scrivendo una funzione che ritorna vero se il parametro è pari,
+e falso altrimenti. Ad esempio, se chiamo pari con
+il valore quattro e spero di ottenere vero.
+E se chiamo even 77, allora spero di ottenere falso.
+Possiamo dire che inviamo un int e speriamo di ottenere indietro un bool.
+La nostra testata è dove andremo a chiamare la funzione come even e chiamiamo il
+parametro num dato che è un numero. E, 
+quello che andiamo a fare è ritornare se num è pari.
+Ora, che conosco i dettagli della mia funzione, è ora di pensare a del codice
+che mi permetta di sapere se un numero è pari o dispari.
+Andrò ad analizzare questo nella shell di Python. E, notate che se divido
+quattro per due, non c'è alcun resto. Ma, se divido tre o cinque o sette per due,
+c'è un resto. Quindi andremo a provare se mod per mod due
+è zero, 77 mod due è uno. E quindi, ogni numero che
+io prenda è dispari se avrà resto uno, quando lo divido per due.
+Continuando questo ragionamento, quattro mod due = zero è vero.
+Ma, qualcosa del tipo 77 mod due = zero è falso.
+Quindi, questa espressione, il numero mod due uguale a zero mi darà il risultato
+che voglio. Potremmo decidere di scrivere qualcosa come,
+se num mod due è zero, allora ritorna vero altrimenti ritorna falso.
+Questo funzionerà sicuramente. Analizziamolo.
+Farà girare questo in modo da poterlo avere lì. Ora, posso accedere alla funzione is even e
+dire, hey, quattro è pari? Sì, lo è.
+Cosa diciamo di tre? No, è falso.
+Quindi la nostra funzione è corretta. Comunque,
+il corpo della funzione è tre linee troppo lungo.
+In realtà non ho bisogno di usare un'istruzione if.
+Il problema qui è che, num mod due uguale a zero è già un'espressione Booleana.
+Come abbiamo visto qui, quattro mod due = zero produce il valore vero.
+Non ho bisogno di dire se qualcosa è vero, poi ritornare vero.
+Altrimenti, se non fosse vero, ritornare false.
+Posso togliere questo e rimpiazzarlo con una singola riga.
+Voglio ritornare un Booleano. Num mod due uguale a zero produce un
+Booleano, quindi posso semplicemente ritornare num mod due uguale a zero.
+Proviamo questa nuova versione nella shell.
+Ottengo ancora vero, ottengo ancora falso. Quindi, la mia nuova versione funziona bene come
+quella vecchia. E' più corta, e dopo un po', andrete a preferirla
+alla versione più lunga dell'if e dell'else.
+Lavorando con le espressioni Booleane è una cosa nuova per molti di voi, e quindi potrebbe sembrarvi
+un po' scomoda, potrebbe sembrarvi un po' fantasiosa o anche disorientante.
+Giocateci per un po', vedete se riuscite a lavorare nella shell quando avete bisogno
+di un'espressione booleana, e vedete se riuscite a semplificare qualcuna delle vostre istruzioni di ritorno.
+Se vi trovate a fare qualcosa dove c'è da ritornare vero, altrimenti,
+ritornare falso.

@@ -1,0 +1,397 @@
+1
+00:00:01,530 --> 00:00:05,760
+Once a function is defined,
+we can call it over and over again.
+
+2
+00:00:05,760 --> 00:00:08,970
+In this lecture,
+we're going to focus on reusing functions
+
+3
+00:00:08,970 --> 00:00:11,890
+by calling them in other
+places when appropriate.
+
+4
+00:00:11,890 --> 00:00:16,470
+For example, we'll call our functions from
+within other function definitions and
+
+5
+00:00:16,470 --> 00:00:18,149
+also within other function calls.
+
+6
+00:00:20,480 --> 00:00:22,430
+In the lecture on defining functions,
+
+7
+00:00:22,430 --> 00:00:25,271
+we wrote triangle.pie which
+contained two functions.
+
+8
+00:00:27,395 --> 00:00:30,849
+This code is a revised version that
+I produced following the steps of
+
+9
+00:00:30,849 --> 00:00:32,680
+the design recipe.
+
+10
+00:00:32,680 --> 00:00:38,390
+To recap the design recipe,
+we begin with an example or two, followed
+
+11
+00:00:38,390 --> 00:00:44,260
+by the type contract, the function header,
+a description of the function.
+
+12
+00:00:44,260 --> 00:00:47,950
+We then code the body and
+test the function.
+
+13
+00:00:47,950 --> 00:00:51,160
+We'll now add another
+function to triangle.pie.
+
+14
+00:00:51,160 --> 00:00:55,110
+This function will calculate
+the semiperimeter of a triangle.
+
+15
+00:00:55,110 --> 00:00:57,700
+The semiperimeter is simply
+half of the perimeter.
+
+16
+00:00:58,770 --> 00:01:04,011
+Following the exact design recipe, the
+first step is coming up with an example.
+
+17
+00:01:06,647 --> 00:01:09,631
+We will call the function semiperimeter.
+
+18
+00:01:13,323 --> 00:01:17,435
+The function will need the lengths of
+the three sides in order to perform
+
+19
+00:01:17,435 --> 00:01:19,520
+the calculation.
+
+20
+00:01:19,520 --> 00:01:24,100
+So in the function call we'll
+imagine passing in three lengths.
+
+21
+00:01:25,550 --> 00:01:29,412
+And then the result we get back
+will be half of the perimeter.
+
+22
+00:01:32,014 --> 00:01:34,436
+Let's do one more function call,
+
+23
+00:01:34,436 --> 00:01:38,370
+this time passing floats
+instead of ints as arguments.
+
+24
+00:01:42,479 --> 00:01:47,100
+And the result that we expect
+to get back would be 12.9.
+
+25
+00:01:47,100 --> 00:01:51,345
+The next step of the design
+recipe is the type contract.
+
+26
+00:01:52,640 --> 00:01:55,590
+For the semiperimeter function,
+
+27
+00:01:55,590 --> 00:02:01,090
+the types will be numbers cuz
+we may have ints or floats.
+
+28
+00:02:01,090 --> 00:02:03,267
+And this function will return a float.
+
+29
+00:02:05,595 --> 00:02:08,520
+Next we provide the function header.
+
+30
+00:02:08,520 --> 00:02:12,650
+We begin with the keyword def
+followed by the function name that we
+
+31
+00:02:12,650 --> 00:02:15,790
+already decided on in our example calls.
+
+32
+00:02:15,790 --> 00:02:18,780
+And we pass in three
+parameters in this case.
+
+33
+00:02:18,780 --> 00:02:23,362
+I will call them side1, side2 and side3.
+
+34
+00:02:26,706 --> 00:02:28,607
+Next is the function description.
+
+35
+00:02:30,419 --> 00:02:32,844
+We need to say what
+the function will return, and
+
+36
+00:02:32,844 --> 00:02:35,340
+explain how the parameters are used.
+
+37
+00:02:35,340 --> 00:02:40,127
+So we're going to return
+the semiperimeter of a triangle
+
+38
+00:02:40,127 --> 00:02:44,625
+that has sides of the length
+given in the parameters.
+
+39
+00:02:53,077 --> 00:02:55,400
+We're now ready to write
+the body of the function.
+
+40
+00:02:56,730 --> 00:03:01,780
+This function is going to return the
+semiperimeter, which means that we will
+
+41
+00:03:01,780 --> 00:03:08,880
+calculate the perimeter by summing the
+three sides and divide that result by two.
+
+42
+00:03:08,880 --> 00:03:12,610
+Notice the part of the body
+of the semiperimeter function
+
+43
+00:03:12,610 --> 00:03:16,490
+is exactly the same as part
+of the body of perimeter.
+
+44
+00:03:17,830 --> 00:03:20,964
+Rather than duplicating the code
+to calculate the perimeter,
+
+45
+00:03:20,964 --> 00:03:24,821
+we can call the perimeter function from
+within the semiperimeter function.
+
+46
+00:03:27,121 --> 00:03:31,767
+By reusing the perimeter function,
+we reduce the risk of making an error when
+
+47
+00:03:31,767 --> 00:03:36,352
+calculating the perimeter, since that
+function has already been tested.
+
+48
+00:03:43,217 --> 00:03:47,090
+Now it's time to test
+the semiperimeter function.
+
+49
+00:03:47,090 --> 00:03:49,398
+We will begin by running the module.
+
+50
+00:03:52,427 --> 00:03:57,099
+And then we will execute that function
+by calling it within the shell.
+
+51
+00:04:01,526 --> 00:04:07,000
+I'm going to use the same example that
+I used in the function's doc string.
+
+52
+00:04:08,500 --> 00:04:09,685
+And we get back 6.
+
+53
+00:04:12,544 --> 00:04:16,964
+And then if I call it with
+the floats from the doc string,
+
+54
+00:04:16,964 --> 00:04:21,315
+well, a mix of floats and
+ints, we get back 12.9.
+
+55
+00:04:21,315 --> 00:04:24,019
+So the function performs
+as we expect it to.
+
+56
+00:04:28,637 --> 00:04:31,390
+Here's another problem for us to consider.
+
+57
+00:04:31,390 --> 00:04:34,700
+For this problem we're going to
+make use of the area function
+
+58
+00:04:34,700 --> 00:04:36,240
+that we wrote earlier.
+
+59
+00:04:36,240 --> 00:04:39,660
+Recall that area has two parameters,
+the base and the height.
+
+60
+00:04:39,660 --> 00:04:41,470
+And then it returns
+the area of the triangle.
+
+61
+00:04:43,210 --> 00:04:45,303
+This problem involves two slices of pizza.
+
+62
+00:04:52,783 --> 00:04:57,120
+At a party there are these
+two slices of pizza left.
+
+63
+00:04:57,120 --> 00:05:01,460
+A hungry person is trying to figure
+out which slice is the largest.
+
+64
+00:05:01,460 --> 00:05:04,210
+Since the slices
+are the shape of triangles,
+
+65
+00:05:04,210 --> 00:05:07,080
+this person measures the base and
+the height of each slice.
+
+66
+00:05:08,350 --> 00:05:11,390
+Now that we know the base and
+the height of each slice of pizza,
+
+67
+00:05:11,390 --> 00:05:14,650
+we can use our program to help
+determine which is biggest.
+
+68
+00:05:15,750 --> 00:05:18,220
+We'll also use one of
+Python's built-in functions,
+
+69
+00:05:18,220 --> 00:05:20,370
+the max function, to help us out.
+
+70
+00:05:21,420 --> 00:05:23,650
+So we start by calling max.
+
+71
+00:05:23,650 --> 00:05:29,890
+And the first argument that we'll pass to
+max will be the area of the first slice
+
+72
+00:05:29,890 --> 00:05:36,250
+of pizza, the slice that has base 3.8 and
+height 7.0.
+
+73
+00:05:36,250 --> 00:05:41,730
+And then the second argument to
+the function max will be area
+
+74
+00:05:41,730 --> 00:05:49,200
+of the second slice of pizza,
+a triangle with base 3.5 and height 6.8.
+
+75
+00:05:49,200 --> 00:05:54,300
+When we execute this function, we find
+out which of those two areas is bigger.
+
+76
+00:05:55,640 --> 00:06:02,166
+And now we can check to see which
+slice of pizza that that value,
+
+77
+00:06:02,166 --> 00:06:06,860
+13.29 repeating, corresponds with.
+
+78
+00:06:06,860 --> 00:06:11,577
+So we can see from that function
+call the area of the first slice
+
+79
+00:06:11,577 --> 00:06:14,470
+matches the maximum area.
+
+80
+00:06:14,470 --> 00:06:19,250
+And that means that the winning
+pizza slice is this one.
+
+81
+00:06:21,410 --> 00:06:25,430
+So what this example shows is that
+not only can we call functions
+
+82
+00:06:25,430 --> 00:06:29,910
+from within function definitions,
+as we did in the semiperimeter example.
+
+83
+00:06:29,910 --> 00:06:32,608
+But we can also pass
+function calls as arguments
+
+84
+00:06:32,608 --> 00:06:36,325
+to functions since function calls
+are themselves expressions.

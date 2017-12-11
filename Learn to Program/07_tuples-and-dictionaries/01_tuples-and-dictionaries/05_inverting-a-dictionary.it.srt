@@ -1,0 +1,226 @@
+1
+00:00:00,980 --> 00:00:06,100
+In questa lezione, esploreremo come usare
+un dizionario come accumulatore.
+
+2
+00:00:06,500 --> 00:00:10,495
+Qui, abbiamo creato una mappa di dizionario
+frutti a colori.
+
+3
+00:00:10,495 --> 00:00:14,567
+Faremo girare questo, per analizzare
+fruits to colours.
+
+4
+00:00:14,567 --> 00:00:18,640
+In modo da poter avere un po' più
+di famigliarità con questo.
+
+5
+00:00:19,060 --> 00:00:25,572
+Qui abbiamo il dizionario fruits to colour,
+queste voci del dizionario non sono ordinate per
+
+6
+00:00:25,572 --> 00:00:30,396
+chiave o per valore.
+Possiamo indicizzarlo usando il nome di un
+
+7
+00:00:30,396 --> 00:00:36,426
+frutto, per trovare il suo colore, quindi
+fruits to colours di orange, è orange,
+
+8
+00:00:36,426 --> 00:00:43,901
+fruits to colours di banana è yellow.
+Possiamo anche iterare su queste chiavi in
+
+9
+00:00:43,901 --> 00:00:47,345
+questo dizionario.
+Per un frutto in fruits to colour, possiamo
+
+10
+00:00:47,345 --> 00:00:52,193
+ottenere ogni frutto a turno.
+E anche usare quel frutto come indice nel
+
+11
+00:00:52,193 --> 00:00:56,340
+dizionario per guardare
+il valore corrispondente.
+
+12
+00:00:58,220 --> 00:01:02,770
+E ora, arriviamo al problema che andremo ad
+affrontare oggi.
+
+13
+00:01:02,770 --> 00:01:09,411
+Andremo a trasformare questo dizionario
+al contrario, ovvero ad invertire i frutti e i colori.
+
+14
+00:01:10,139 --> 00:01:15,689
+Vogliamo costruire un nuovo dizionario
+che mappi i colori nei frutti.
+
+15
+00:01:15,689 --> 00:01:23,149
+Per farlo, itereremo sulle chiavi nel
+dizionario fruits to colours, estraendo
+
+16
+00:01:23,149 --> 00:01:30,154
+il colore corrispondente a quel frutto,
+e poi aggiungendo il nostro nuovo colore al
+
+17
+00:01:30,154 --> 00:01:37,099
+dizionario nella voce colour to fruit.
+La variabile colour to fruit è il nostro
+
+18
+00:01:37,099 --> 00:01:42,980
+accumulatore.
+Facciamolo girare di nuovo.
+
+19
+00:01:42,980 --> 00:01:47,930
+E esaminiamo fruit to colour e colour to
+fruit.
+
+20
+00:01:47,930 --> 00:01:51,735
+Ma in colour to fruit manca qualche 
+informazione.
+
+21
+00:01:51,735 --> 00:01:56,027
+Non ci sono melograni, niente
+fragole, niente pesche.
+
+22
+00:01:56,027 --> 00:02:01,938
+Il problema è che c'è più di un frutto
+per ognuno dei colori
+
+23
+00:02:01,938 --> 00:02:05,419
+associati con quei frutti mancanti.
+
+24
+00:02:05,419 --> 00:02:09,711
+Ad esempio, i melograni sono rossi, ma anche
+le ciliegie.
+
+25
+00:02:09,711 --> 00:02:15,298
+Quindi, quando aggiungiamo ciliegie a questo
+dizionario, queste rimpiazzano la voce per
+
+26
+00:02:15,298 --> 00:02:18,977
+i melograni.
+Invece dell'inversione diretta, abbiamo
+
+27
+00:02:18,977 --> 00:02:23,750
+bisogno di essere un po' cauti.
+Costruiremo un dizionario che mappa ogni
+
+28
+00:02:23,750 --> 00:02:29,806
+colore ad una lista di frutti di quel colore.
+Se colour non è già una chiave
+
+29
+00:02:29,806 --> 00:02:36,220
+nell'accumulatore, aggiungeremo un colore ad una
+lista con un oggetto al suo interno, il frutto
+
+30
+00:02:36,220 --> 00:02:41,742
+attuale come voce.
+Altrimenti, se colour è già una chiave, il che
+
+31
+00:02:41,742 --> 00:02:46,034
+significa che c'è già una lista di frutti di quel
+colore,
+
+32
+00:02:46,034 --> 00:02:49,560
+dobbiamo aggiungere il frutto a quella lista
+esistente.
+
+33
+00:02:51,480 --> 00:02:55,500
+Ecco il codice per esprimere
+quell'algoritmo.
+
+34
+00:02:56,520 --> 00:03:03,523
+Se il caso non è questo, quel colore è una 
+chiave nel dizionario colour to fruit.
+
+35
+00:03:03,523 --> 00:03:09,540
+Poi aggiungeremo una voce, che mappa quel
+colore ad una lista contenente friut.
+
+36
+00:03:13,320 --> 00:03:21,076
+D'altra parte, se colour è già una chiave del 
+dizionario, allora vorremmo ottenere la lista
+
+37
+00:03:21,076 --> 00:03:27,395
+a cui, a cui mappa quel colore,
+e aggiungere la variabile fruit.
+
+38
+00:03:27,395 --> 00:03:33,620
+Cancelleremo anche il vecchio codice.
+Analizziamo quello che abbiamo fatto.
+
+39
+00:03:37,160 --> 00:03:41,747
+Fruit to colours, è ciò che è sempre stato.
+
+40
+00:03:41,747 --> 00:03:49,940
+Colour to fruit ora, ha delle chiavi che sono
+stringhe, e il valori sono una lista di stringhe.
+
+41
+00:03:50,760 --> 00:03:59,139
+Quale frutto è colorato di arancione?
+Come otteniamo il frutto arancia?
+
+42
+00:03:59,139 --> 00:04:03,808
+Bene, indicizziamo nel dizionario usando
+la stringa orange.
+
+43
+00:04:03,808 --> 00:04:10,033
+E poi, questa ci restituisce una lista.
+Poi, indicizziamo all'interno di questa usando
+
+44
+00:04:10,033 --> 00:04:15,992
+il normale modo di indicizzare le liste, per ottenere 
+orange. Come otteniamo cherry?
+
+45
+00:04:15,992 --> 00:04:22,778
+Bene, indicizziamo nel nostro dizionario usando
+red e cherry è l'ultimo elemento della lista
+
+46
+00:04:22,778 --> 00:04:24,120
+che viene restituita.

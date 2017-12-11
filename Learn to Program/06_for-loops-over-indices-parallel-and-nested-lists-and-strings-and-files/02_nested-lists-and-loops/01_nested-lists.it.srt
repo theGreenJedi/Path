@@ -1,0 +1,213 @@
+1
+00:00:00,000 --> 00:00:06,502
+Le liste possono contenere oggetti di ogni tipo.
+In questa lezione, andremo a lavorare con le
+
+2
+00:00:06,502 --> 00:00:13,005
+liste aventi degli elementi di tipo lista.
+Queste liste sono conosciute come nidificate, con una
+
+3
+00:00:13,005 --> 00:00:18,241
+lista all'interno di un'altra.
+Il nostro primo esempio di lista nidificata è una
+
+4
+00:00:18,241 --> 00:00:22,632
+in cui ogni elemento ha il nome di
+un compito.
+
+5
+00:00:22,632 --> 00:00:27,615
+Ad esempio, compito uno e il voto
+per quel compito.
+
+6
+00:00:27,615 --> 00:00:38,810
+Quindi, ogni elemento sarà una lista con due oggetti.
+La lunghezza della lista grades è tre.
+
+7
+00:00:38,810 --> 00:00:43,535
+Ha tre elementi.
+Ognuno degli elementi è, si per sè, una
+
+8
+00:00:43,535 --> 00:00:47,368
+lista con due elementi.
+Possiamo vedere questo usando l'indicizzazione.
+
+9
+00:00:47,368 --> 00:00:53,357
+Grades all'indice zero è la lista con la stringa
+assignment one, e int 80.
+
+10
+00:00:53,357 --> 00:00:56,950
+Grades all'indice uno è assigment two e 90.
+
+11
+00:00:56,950 --> 00:01:01,023
+E grades allindice due è assignment three
+e 70.
+
+12
+00:01:01,023 --> 00:01:06,293
+La lunghezza di ognuno di questi elementi, anche
+chiamati interlist è due.
+
+13
+00:01:06,293 --> 00:01:12,921
+E possiamo vedere questo passando la lista 
+all'indice zero come argomento della funzione
+
+14
+00:01:12,921 --> 00:01:18,060
+length.
+Un altro modo per accedere agli oggetti di grades
+
+15
+00:01:18,060 --> 00:01:25,228
+è usare un ciclo for, proprio come avremmo fatto
+se la lista avesse delle stringhe o degli interi
+
+16
+00:01:25,228 --> 00:01:29,660
+come elementi.
+Quindi, possiamo dire, per ogni elemento in grades,
+
+17
+00:01:29,660 --> 00:01:35,130
+stampa quell'elemento.
+E l'elemento è, che viene stampato sarà una
+
+18
+00:01:35,130 --> 00:01:39,940
+lista di due elementi.
+Dato che ogni elemento di grades è una lista,
+
+19
+00:01:39,940 --> 00:01:44,949
+può anche essere indicizzato.
+Quindi la lista all'indice zero, da una lista
+
+20
+00:01:44,949 --> 00:01:51,273
+a due elementi con la stringa assignment one
+e voto 80, e possiamo usare un secondo
+
+21
+00:01:51,273 --> 00:01:56,857
+indice per accedere ad ogni parte.
+Quindi, per grades all'indice zero e indice zero
+
+22
+00:01:56,857 --> 00:02:02,031
+c'è assignment one, e in grades all'indice
+zero e indice uno c'è 80.
+
+23
+00:02:02,031 --> 00:02:08,519
+Allo stesso modo per ogni elemento di grades 
+all'indice uno, possiamo accedere al primo valore
+
+24
+00:02:08,519 --> 00:02:14,648
+usando l'indice zero, quindi grades ad uno, zero
+restituisce assignment two, e grades ad uno,
+
+25
+00:02:14,648 --> 00:02:19,403
+uno è 90.
+Grades a due e zero è assignment
+
+26
+00:02:19,403 --> 00:02:27,395
+three, e grades a due e uno è 70.
+Poi, scriveremo una funzione per calcolare
+
+27
+00:02:27,395 --> 00:02:32,252
+la media dei voti data una lista di questa
+forma.
+
+28
+00:02:32,252 --> 00:02:39,233
+La funzione è chiamata calculate average,
+e nota il tipo di contratto.
+
+29
+00:02:39,233 --> 00:02:44,813
+Abbiamo un parametro, che è una lista
+di liste di numeri mescolati.
+
+30
+00:02:44,813 --> 00:02:48,615
+Questo descrive il tipo di liste con cui
+stiamo lavorando.
+
+31
+00:02:48,615 --> 00:02:54,558
+Questa funzione ritornerà un flusso, che è 
+la media dei voti nelle liste
+
+32
+00:02:54,558 --> 00:02:58,885
+date.
+Per calcolare la media, sommeremo i
+
+33
+00:02:58,885 --> 00:03:02,458
+voti e poi divideremo per il numero
+di voti.
+
+34
+00:03:02,458 --> 00:03:08,389
+La variabile totale verrà usata per tenere
+traccia della somma dei voti, e
+
+35
+00:03:08,389 --> 00:03:13,864
+avrà un valore iniziale di zero.
+Passeremo sopra gli elementi della lista di
+
+36
+00:03:13,864 --> 00:03:17,513
+voti per i compiti per gli oggetti che stanno
+nei voti per i compiti,
+
+37
+00:03:17,513 --> 00:03:21,999
+e ogni oggetto è una lista a due elementi con
+una stringa e un intero.
+
+38
+00:03:21,999 --> 00:03:28,199
+Quindi, per il totale, vogliamo sommare il valore
+corrente di total più l'oggetto della lista all'indice
+
+39
+00:03:28,199 --> 00:03:35,280
+uno, che è il voto.
+Una volta che il ciclo for è stato eseguito,
+
+40
+00:03:35,280 --> 00:03:42,909
+divideremo il totale per il numero di voti dei compiti.
+E quel numero di voti è uguale alla
+
+41
+00:03:42,909 --> 00:03:49,710
+lunghezza della lista dei voti dei compiti,
+e poi possiamo ritornare quella media.
+
+42
+00:03:49,710 --> 00:03:55,501
+Facciamo girare l'esempio della funzione.
+Per prima cosa, facciamo girare il modulo, e poi
+
+43
+00:03:55,501 --> 00:04:01,200
+eseguiremo il calcolo della media, confermando che
+ritorni effettivamente 85.0.

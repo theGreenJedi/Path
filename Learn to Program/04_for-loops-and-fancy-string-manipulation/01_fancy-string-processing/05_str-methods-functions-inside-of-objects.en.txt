@@ -1,0 +1,44 @@
+So far, we have to find and use functions
+from within modules, for example module Math contains functions that are related
+to Math such as square root and factorial. It turns out that values, also known as
+objects, can contain functions as well, functions inside of objects are called
+methods. In this lecture, we'll explore string
+methods. Here's a quick review.
+To use a function that has been defined inside module Math,, we first import math
+which creates a variable called math that refers to the module object that contains
+the various math functions. And then to call one of these functions,
+we use that math variable. We will do the same kind of thing to call
+string methods. Here is a quote from Lewis Carroll's Alice
+in Wonderland. We can get a new string that has all the
+uppercase letters replaced with their lowercase equivalents by calling the lower
+method inside the white rabbit object. This doesn't change the string that white
+rabbit refers to. It produces a new string, so white rabbit
+still refers to the original string. In order to find out which methods are
+available, we can use dir. We can get the same answer if we use type
+stir, instead of variable, like rabbit. We can ask for help on any of them.
+Return a copy of the string S converted to lowercase.
+Let's look at the help for string method count.
+Return the number of non overlapping occurrences of substring sub in string S,
+starting in index start and going to index end.
+These square brackets indicate optional parameters.
+If I just say, string.count with one argument, then it'll just look everywhere
+in the string. Otherwise, it'll start at index start and
+go to index end. We will use this to find out how many
+times the sub-string ate, a, t, e, appears in the white rabbit quote.
+We can get a copy of a string with the first letter capitalized.
+And if the string is already capitalized, we just get back a copy of it.
+There is a method to find the index of the first occurrence of a string inside
+another string. We can specify a starting index.
+This asks for the first index of late that starts at or after index seven.
+If the sub-string doesn't appear inside the string, -one is returned, find is case
+sensitive. There is an rfind method that searches for
+the last occurrence. Rfind stands for right find Often, we want
+to remove spaces at the beginning or end of a string.
+Method lstrip or left strip, returns a new string but with the white space at the
+beginning removed. Method rstrip operates at the right end.
+If we would like to remove white space from both ends, we use the strip method.
+None of these modify the string that this refers to.
+They all produce new strings. This is the end of our whirlwind tour of
+strings and string methods. We won't introduce every string method to
+you. You can and should use dir and help to
+find out what other string methods exist.

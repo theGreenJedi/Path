@@ -1,0 +1,29 @@
+En este video, vamos a explorar cuando
+se crean las variables, cuanto tiempo existen en la memoria del computador, y que pasa cuando
+dos variables tienen el mismo nombre y dos funciones diferentes. Aquí, vemos la función convert to minutes, que hemos explorado en la función
+de visualización de lectura. Hemos añadido la función convert to seconds,
+que convierte un numero de horas a un número equivalente de segundos.
+Convert to seconds hace su trabajo llamando a convert to minutes y luego
+multiplicando el resultado por 60. Vamos a usar el visualizador para explorar esto.
+Pasamos por las 2 definiciones de funciones y observamos que hay 2 objetos de
+funcion aquí en la pila También convert to minutes refiere a una de
+las funciones y convert the seconds refiere a la otra. Ahora, estamos a punto de ejecutar una sentencia de asignación. En el lado derecho de la sentencia de asignación está una llamada a función, y evaluaremos el primer argumento que se creará en la memoria del computador aquí en la pila. Vamos a obtener un marco para convertir
+a segundos en la parte superior de la pila. Ese marco contendrá los la variable num hours
+que se refieren al valor de dos. Vamos a dar un paso adelante a la primera línea
+del cuerpo de la función. La primera línea en el cuerpo de convert to
+seconds es una sentencia de asignación. Seguimos las reglas de siempre.
+Evaluamos el lado derecho. Es una llamada de función y cuando
+ejecutamos la llamada  de función, evaluamos el argumento num hours que produce en memoria
+la dirección x3. Enviamos x3 a todos los parametros en convert
+to minutes que también pasa a llamarse num hours. Hay dos variables llamadas num hours en la pila de llamadas. Una de ellas es en función de convertir a minutos y la otra es en función de convertir a segundos. Python mantiene estas dos funciones ejecutándose
+en áreas separadas de la memoria para que no haya confusión sobre qué variable utilizar.
+Vamos a dar un paso adelante en el cuerpo de esta función. Esta es una sentencia de asignación. En el lado derecho tenemos una expresión
+num<u>hours 60 veces, pero ¿que num hours usamos?</u> Python siempre utiliza la variable en el marco que está  en la parte superior de la pila de llamadas.
+La variable minutes no existe todavía y es debido a que la sentencia de asignación no ha terminado de ejecutarse y no hemos visto minutes antes de esto. Una vez que evaluamos 60 veces, tenemos 120, minutes es creada en el marco en la parte superior de la pila de llamadas. Esa es siempre la regla. Las variables se crean en el marco en la parte superior de la pila de llamadas. Vamos a ver que sucede. Ahora estamos a punto de retornar minutos, pero
+¿a dónde? Tenemos dos posibles ubicaciones. La respuesta es siempre al marco justo debajo de la parte superior de la pila de llamadas. Esta llamada a la función se detuvo justo aquí, en la llamada a convert to minutes. Cuando se ejecuta la sentencia return, vemos que vamos a devolver 120 a quien haya llamado a esta función. Esto pasa mas abajo en esta línea como hemos explicado así que nos vamos a tomar la dirección de memoria de 120 y la guardamos en una nueva variable minutes que va a aparecer aquí abajo en la función convert to seconds. Este marco de pila está a punto de desaparecer
+debido a que es uno de los efectos de la sentencia retorno. Borra el marco en la parte superior de la pila de llamadas, devolviendo el control a quien lo llamó. Ahí va.
+Ahora, la variable minutes es creada, el primer valor 120 y estamos a punto de ejecutar otra sentencia de asignación. El lado derecho evalúa minutes 60 veces minutes para los primeros 120, por lo que terminamos con lo que es 60, 120 veces y la variable seconds se va a crear y se referirá a este nuevo valor. 
+Ahí lo tenemos. Seconds, almacena la dirección de memoria x5, en
+la dirección de memoria X5 está el valor 7.200 Continuando, vamos a tener ese valor. Eso va a devolver el control a la línea veinte aquí. Únicamente, está terminando una llamada a convert
+to seconds. Esto produce el valor de 7.200 y vamos a crear una variable seconds mas abajo en el módulo principal que se va a referir a ese valor. Nuestro primer valor seconds,  es ahora 7.200.
+El marco es convert to seconds ya no está aquí ha sido borrado, cuando convert to minutes fue borrado, en el momento en que ejecutamos esta sentencia retorno.

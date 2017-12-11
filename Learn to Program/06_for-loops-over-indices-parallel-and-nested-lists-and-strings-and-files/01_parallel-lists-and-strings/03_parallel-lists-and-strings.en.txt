@@ -1,0 +1,52 @@
+We've already used loops over indices,
+when working with a single string or a single list. In this lecture,
+we're going to use loops over indices to access the items at corresponding
+positions of two different lists. And the characters at corresponding
+positions of two different strings. We will begin by implementing
+this function named sum_items. It takes two parameters, list1 and
+list2 which are both lists of numbers. And it returns a list of numbers. The job of the function is to
+return a new list, in which each item is the sum of the items, at the
+corresponding position of list1 and list2. Let's explore what is meant by
+the phrase corresponding position. If list 1 refers to a list
+with 3 elements values 1, 2, and 3, and list 2, refers to a 3
+element list with values 2, 4, and 2. Then, there are three elements in
+each list with indices 0, 1 and 2. When we say that we want to consider the
+corresponding elements of list1 and list2, we're referring to the elements or
+the items, which are at the same index. For example, at index 0, there are values
+1 and 2, and those are summed to get 3. At index 1, there are values 2 and
+4, which are summed to get 6. And at index 2, there are values 3 and
+2, which, when summed, yield 5. This makes up the new list,
+which is returned by this function. Now, let's write this code. We're going to, return a new list, and so we'll create a variable sum list that
+will initially refer to an empty list. This list will be built
+up one element at a time, through the course of the function. We saw when we were
+looking at the example, that we use indices to access
+the elements of list 1 and list 2, so we want to loop over the indices,
+for i in range of length of. And now we can pass one of the two
+lists in here as an argument. List 1 and list 2 will have the same
+lengths because of the precondition to this function, shown above. Therefore, I can pick either of
+the two lists, and I'll choose list 1. To choose the length of list 1. That means that range will
+generate values 0, 1 up to, but not including the length of the list. In the body of the loop, we want to
+access list one at position I and list 2 at position I, and sum them. Once we've calculated the sum,
+we want to add that to the sum list. The list depend method, can be used to
+add that sum to the end of the sum list. That's the only thing we need to
+do in the body of the for loop. Once the for
+loop has finished executing and exits, then we can return the sum list. Now let's run the example function call. First, run the module, and
+then in the shell, call the function. And we can see that it returns
+a list with values 3, 6, and 5. Let's implement one more function. The name of this function
+is count_matches, and it involves two strings. It has two string parameters, s1 and s2 and returns an int which is
+the number of positions in string s1, that became the same character at
+the corresponding position of s2. For sample, for string ape and string ate, there are two characters in common. At index 0, there are a's,
+and index 2 there are e's. For the strings head and hard. There are also two characters in common,
+the h's at index 0 and the d's at index 3. The first step for implementing this
+function, is to create an accumulator. I'll name it num matches, and
+it will initially refer to the value 0. That variable will accumulate
+the number of matches. We saw that when we looked at the example, we were comparing the string
+characters at the same index. That means, we are gonna write our
+loop over the indices of the strings. So we'll use range,
+starting from position 0, or value 0, up to the length of the string s1. And what we'd like to do is compare
+the character of the the string of s1, so if s1 at index I,
+is equal to the string s2 at index I. Then we found a match, and we can increment the num_matches variable,
+adding 1 to it. Once the loop has finished executing and we've passed over every character in
+the strings, then num_matches is returned. Let's run the example function calls. First the ate and
+ape example returns 2, and then the head and
+hard example, also returns 2.

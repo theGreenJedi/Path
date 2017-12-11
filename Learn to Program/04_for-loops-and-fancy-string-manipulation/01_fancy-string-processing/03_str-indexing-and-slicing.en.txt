@@ -1,0 +1,53 @@
+When working with strings, we often need
+to extract substrings. For example, if a string contains a phone
+number, we may want to extract the area code.
+In this lecture, I'll introduce two techniques, indexing and slicing, and
+we'll use those to extract substrings of the strings we're working with.
+In this lecture, we'll use the string learn to program as our running example.
+Each character of a string has an index which, which is it's position in the
+string. So, the string at index zero, indicated
+using this bracket notation, is the L. At index one of the string, we have an e.
+At index two, is the first a. Notice that zero is the first position,
+not one. We start counting from zero.
+We can also use negative indices to count from the end, or from the right hand side
+of the string. So, the string at -one is the m.
+At -two is the last a, At -three is the r, the last r.
+So, once we've seen using an index, we can extract parts of the string one character
+at a time. But, we can extract more than one character using an approach called
+slicing. With slicing, we provide a start index
+followed by a colon, followed by an end index and that gives us a substring from
+the start index up to, but not including the ending index.
+For example, we can get this string from position zero, index zero up to, but not
+including index five, and that gives us the string Learn.
+From index six up to, but not including eight, is the to.
+And, from index nine up to sixteen, is the word Program, string Program.
+Sixteen is equal to the length of the string.
+So, an alternative would be to start at index nine but go up to len of s.
+Len is a built in function that returns the length of the string, so this
+expression is equivalent to the one above. Another alternative would be to go from
+nine, put the pole in, and omit the ending index.
+In which case, the default is to go to the end of the string, so this is also
+equivalent to the two expressions above. The starting index can also be omitted.
+So, for example, we can include colon and go up to index a,
+We can also omit both the starting and ending indices,
+And that gives the entire string. We've seen that negative indices can be
+used for indexing, and they can be used for slicing as well.
+Let's get this substring from index one up to but not including eight.
+And our equivalent expression is to get it from one up to but not including -eight,
+Or to go from -fifteen up to but not including -eight.
+So, those three expressions are all equivalent.
+The slicing and index operations do not modify the string that they act on.
+So, the value that s refers to is unchanged by the operations above.
+In fact, we cannot change the value of a string.
+Operations like the following result in errors.
+If I take the string at index six and try and set it to d, I get an error.
+Similarly, if I try to modify the string from index nine up to sixteen, have it
+refer to run, an error also occurs. But, imagine that we'd like to change
+string s to refer to Learned to Program. Here's one approach that we can take.
+We can use the current value of s and get the word learn, concatenate that with ed
+to make it learned, and concatenate that with the rest of the string, which is, to
+program. That evaluates to give Learned to Program.
+And now that we have this new string, Learned to Program, we can have s refer to
+that instead of it's old value. Notice that we didn't modify the string
+that s originally referred to, We can't modify it.
+Instead, we created a new string and had s refer to that new string.

@@ -1,0 +1,26 @@
+Ayant les expressions "if" et les boucles à notre disposition,
+les problèmes que nous allons attaquer vont devenir de plus en plus compliqués. Les corps de nos fonctions vont aussi devenir plus long et nous allons avoir besoin d'explications Voici la fonction up_to_vowel, de la vidéo
+sur les boucles while. Nous avons ajouté deux commentaires. Un commentaire commence par un caractère dièse, souvent appelé le caractère "Hash", et continue jusqu’à la fin de la ligne.
+Python ignore ces caractères. Ils servent à documenter le code, tout
+comme les docstrings documentent les fonctions. Le premier décrit les deux variables locales
+utilisées dans cette fonction. Vous pouvez voir qu'il lie ensemble
+"before_vowels" et "i". Explorons un peu ce que cela veut dire. On va utiliser le mot "zymurgy" avec les indices zéro, un, deux, trois, quatre, cinq et six. Nous savons que le deuxième indice n'est pas inclus dans la sous-chaîne, donc ça veut dire que ceci est "s" de l'index zéro jusqu'à l'indice sept. Qu'est-ce que "s" de zéro jusqu'à six ? C'est "zymurg". "s" de zéro à cinq : "zymur" "s" de zéro à quatre : "zymu" "s" de zéro à trois : "zym" "s" de zéro à deux : "zy" "s" de zéro à un est "z", et le truc marrant : de zéro à zéro, en continuant à réduire la longueur par un donne juste la chaîne vide. "before_vowel" commence par la chaîne vide
+et "i" est initialement à zéro. Donc si on remplace "i" par zéro, on obtiens "s" de zéro à zéro, c'est ceci. Et "s" de zéro à zéro est la chaîne vide, donc en effet : "before_vowel" contiens tous les caractères dans "s" de zéro à zéro et donc "before_vowel" est la chaîne vide. Cette simple initialisation, où on assigne une chaîne vide à "before_value" et zéro à i, fait en sorte que cette description ici soit correcte. De plus, au premier tours dans la boucle
+nous allons ajouter "s" à l'indice zéro à "before_vowel" et remplacer ce que nous avions.
+Maintenant "before_vowel" contiens un "z". "i" était zéro, donc "i + 1" est 1,
+la nouvelle valeur de "i". On est alors à cette étape quand "i" est 1,
+et en effet cette description est toujours vraie. Au prochain tours dans la boucle on regarde "s" à l'indice un, ce qui donne le "y". On prends le y et on le colle à la fin
+de "before_vowels", avant d'incrémenter "i". "i" est à présent deux, donc "s" de zéro à deux est bien ce que nous avons sauvegardé
+dans "before_vowel". Maintenir ce genre de relations
+entre deux variables est un peu compliqué, mais ça aide vraiment à comprendre ce qui se passe
+à l'intérieur de cette boucle. Simplement penser à ces relations est aussi délicat mais avec l'habitude cela
+vous viendra de plus en plus facilement. À chaque fois que vous écrirez une boucle il
+y aura une relation entre vos variables. Essayez de comprendre ce qu'est cette relation et écrire le corps de vos boucles
+deviendra plus facile. Aussi, une fois la relation comprise, écrivez la, mettez la dans un commentaire pour éviter de refaire tout le travail la prochaine fois que
+vous lisez le code. Ce second commentaire :
+# Accumule les non-voyelles au début de la chaîne. décrit ce que fait la boucle, tout comme les docstrings
+n'expliquent pas comment une fonction marche. Le commentaire ne décrit pas comment la boucle
+fais son boulot, il décrit juste son effet. Les commentaires sont à destination de
+programmeurs donc ils n'ont pas besoin de décrire comment le travail
+est fait dans la boucle. Essayez de commenter les bouts de code
+compliqués pour en expliquer leur fonction. Essayez aussi d'écrire des commentaires pour décrire les relations entre vos variables.

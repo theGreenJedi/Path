@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Linux https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Write Files
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 10.5 Writing Files
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+		<h1>
+			Write Files
+		</h1>
+		<h3>
+			Writing To A File Within A Python Program
+		</h3>
+		<p>
+			In order to write to a file, we use
+			<code><em>file</em>.write(str)</code>. This method
+			writes a string to a file. Method <code>write</code>
+			works like Python's <code>print</code> function, except
+			that it does not add a newline character.
+		</p>
+		<h3>
+			File dialogs
+		</h3>
+		<p>
+			Module <code>tkinter</code> has a submodule called
+			<code>filedialog</code>. We import it like this:
+		</p>
+		<pre>
+import tkinter.filedialog
+</pre>
+		<p>
+			Function <code>askopenfilename</code> asks the user to
+			select a file to open:
+		</p>
+		<pre>
+tkinter.filedialog.askopenfilename()
+</pre>
+		<p>
+			This function returns the full path to the file, so we
+			can use that when we call function <code>open</code> to
+			open that file.
+		</p>
+		<pre>
+from_filename = tkinter.filedialog.askopenfilename()
+</pre>
+		<p>
+			Function <code>asksaveasfilename</code> asks the user
+			to select a file to save to, and provides a warning if
+			the file already exists.
+		</p>
+		<pre>
+to_filename = tkinter.filedialog.asksaveasfilename()
+</pre>
+		<h3>
+			Example
+		</h3>
+		<p>
+			Below is a program that copies a file, but puts
+			<code>"Copy"</code> as the first line of the copied
+			file.
+		</p>
+		<p>
+			In order to prompt a user for a file.
+		</p>
+		<p>
+			Now we can open the file we want to read from and get
+			the contents:
+		</p>
+		<pre>
+from_file = open(from_filename, 'r')
+contents = from_file.read()
+from_file.close()
+</pre>
+		<p>
+			And we can open the file we want to write to and write
+			the contents:
+		</p>
+		<pre>
+to_file = open(to_filename, 'w')
+to_file.write('Copy\n')  # We have to add the newline ourselves.
+to_file.write(contents)  # Now write the contents of the file.
+to_file.close()
+</pre>
+		<hr>
+		<center>
+			Jennifer Campbell &bull; Paul Gries<br>
+			University of Toronto
+		</center>
+		<hr>
+	</body>
+</html>

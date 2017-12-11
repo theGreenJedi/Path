@@ -1,0 +1,105 @@
+We have stored collections
+of data using lists. And have used indices to
+access the items of lists. In this lecture, we will explore
+Python's dictionary type, and learn how to store and
+access information, using dictionaries. In an earlier lecture, we used a nested
+list to keep track of assignments, and grades on those assignments. Each inner list was a two item list
+containing the assignment name, a string and a grade which is a number. We can use indexing to access
+the items of the list. Grades at zero are first at
+the list with A1 and its grade. Grades at one the first circle is
+containing A2 and its grade and grades at two refers to the list
+containing A3 and its grade. To find out the name of a particular
+assignment we need to use the first index of that two element list. So for example to find
+the name of the assignment for grades in X1,
+we use index zero to get the name. To access the grade associated
+with that assignment, we use index 1 of the inner list. We will now use a dictionary to
+store the same grades information. And we'll see that accessing the mark
+associated with a particular assignment is going to be simpler when
+working with the dictionary. The variable assignment to grade
+will refer to the new dictionary. And the notation for
+a dictionary is braces. Each entry of a dictionary has two parts,
+and the two parts are separated by colons. This dictionary has three key value pairs. A1 is a key, A2 is a key and A3 is a key. 80 is a value,
+it is the value associated with key A1. 70 is a value,
+it is the value associated with key A2. And 90 is a value,
+it is the value associated with key A3. To look up the grade
+associated with assignment A2, we can use the bracket notation
+that we used with the nested list. However, rather than put an index
+between the brackets, we will put a key. So we want to look up the value
+associated with key A2, and that gives us the value 70. This notation for looking up a mark associated with
+an assignment is much simpler than the two indices needed to look up the mark
+associated with an assignment. Using the nested list. However, it reveals something
+about dictionaries. In order to be able to look up
+a particular value associated with a key, that key must be unique. It can only occur once in the dictionary. So assignment names A1, A2,
+and A3 are unique names. The marks associated with
+those assignments, or the values of the dictionary,
+could be duplicated. So it's possible that A1 and A2, those
+keys, could have the same value, say, 80. If we try to access a list, and an index
+that does not exist an error occurs. And the same is true for dictionaries. If we try to access a dictionary
+using a key that does not exist, then a key error occurs. They key A4 is not present in
+the dictionary that assignment to grade refers to. Before accessing a key of a dictionary,
+we can check for its existence in the dictionary. So we could have checked to see
+wether A4 is in asn_to_grade. It's not, so False is the value
+that our expression evaluates to. Of course A2 is a key in the dictionary,
+so this expression will evaluate to true. This inoperator is checking for
+the presence of keys, not values. So if we check whether 80
+is in assigned to grade, this expression will also evaluate False,
+since 80 is not a key in that dictionary. Currently there are three
+key-value pairs in the dictionary. The len built-in function,
+that trends the number of key-value pairs. Like lists, dictionaries are mutable, that means the key-value pairs
+can be added to a dictionary. The value associated with
+the key could be changed and key-value pairs can be
+removed from a dictionary. Let's start by adding another
+key-value pair to this dictionary. We're going to add the assignment A4 and
+we indicate this using the same bracket notation that we use to
+access the value at a particular key. But we use it in conjunction
+with an assignment statement. So the dictionary that assigned to grade
+refers to will get a new key A4 and the value associated with that key is 85. The len function now
+returns 4 because there are four key value pairs
+in assign to grades. Using the same notation we can also
+update the values associated with a key. So for key A4. We're going change its
+value now from 85 to 90. Because A4 already exists in
+the dictionary, this becomes a change. If the key A4 didn't exist, like before, then the new key
+value pair would be added. Key A4 originally had the value
+85 associated with it. And now it has the value
+90 associated with it. Notice that the value 90 is associated
+with the key A3 and with the key A4. Values can be duplicated,
+as mentioned before, but keys cannot. Now let's remove a key value
+pair from the dictionary. To do this we will use the operator
+del and then the dictionary reference and the key,
+using the same bracket notation. So we'll remove key A4 along with
+its value from the dictionary. The dictionary's line is
+now going to be three. And the dictionary no longer has
+the key value pair A4 and 90. We can use a for loop to loop
+over the keys of a dictionary, like we did to loop over the characters
+of a string, or the items of a list. Because we're looping over the keys,
+the variable name that I'm going to choose here will be representative
+of the key of the dictionary. I'm going to use the word assignment for
+my variable name. For each assignment in
+the dictionary asn_to_grade, we'll print that assignment, that key. The keys A1, A3 and A2 are printed. However, this doesn't match the order in
+which we added the key value pairs to the dictionary. We put A1 in its value first, then A2
+with its value and A3 with its value. The order that key value pairs are are
+added to the dictionary has no effect on the order in which the for
+loop accesses the keys. Therefore when looping over
+the keys of a dictionary, we cannot rely on the keys being
+accessed in any particular order. In this case we can't rely on A1
+before being printed before A2 and A2 being printed before A3. This time rather than printing the keys of
+the dictionary, let's print the values, all of the for loops that we write over
+dictionaries will be loops over the keys. So we're going to leave
+the header exactly the same, rather than printing the key assignment
+we'll look up the value associated with that key in the dictionary and
+print that value instead. The values 80, 90 and 70 are printed. And finally,
+let's print both the key and the value. When we call print,
+we can pass two arguments. The key assignment, and
+then the value associated with that key. That prints each assignment and
+the mark associated with it. Our introduction to dictionaries
+is almost complete, but there are a couple more
+important things to point out. First, a dictionary can be empty. And we use just the opening and closing braces to indicate
+this with nothing in between. The length of an empty dictionary is 0. Finally, we need to make an important
+note about the types that the keys and values of a dictionary may have. Keys and values can be of different types. So we could have a sting for a key and
+another key could be an int. However, the type of keys
+must always be immutable. Since lists are mutable,
+a list cannot be used as a dictionary key. This assignment statement which attempts
+to add a list with numbers 1 and 2 as a key along with the value banana,
+will result in an error. When we want to use a sequence as a key,
+rather than using a list, we can use a tuple,
+because tuples are immutable. The following is acceptable.

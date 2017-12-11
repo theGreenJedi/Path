@@ -1,0 +1,127 @@
+Esta aula é enorme.
+Entretanto, ela não introduz nenhuma nova ferramenta Python, desta forma, você pode consderar esta aula opcional. Nela, irei desenvolver um programa do começo. Avaliarei quais informações precisarei ler
+e preciso decidir como iniciarei e quais funções escreverei. Isto tenciona a dar-lhe um gosto do processo de 
+pensamento que realizo quando escrevo um programa. Este arquivo contém um monte de notas da Tarefa Um. Há um cabeçalho, seguido por uma linha em branco. Seguido por uma lista do número do estudante e a nota atribuída. Gostaríamos de saber a distribuição destas notas. Então manteremos registros 
+por categorias. Quantos terminam na faixa entre zero a nove,
+dez a dezenove, vinte a vinte e nove, e assim por diante E teremos também uma categoria para as pessoas que receberam 100.
+No fim das contas, queremos, neste programa, criar um novo arquivo contendo 
+essas informações. E, também, inserir um asterisco em cada categoria 
+para cada nota existente. Então, se temos a nota 77.5 nesta planilha, 
+no arquivo de saída teremos um asterisco na faixa 70-79. Temos a nota 37.5, então um asterisco na faixa 30-39.
+A nota 62.5, um asterisco na faixa 60-69. A nota 72.5, então mais um asterisco na faixa 70-79. Uma nota 100, uma 55, uma 95, 
+outra na faixa dos oitenta, uma na faixa dos noventa, e assim por diante.
+Finalmente, teremos um asterisco para cada número da planilha, então poderemos ver a distribuição das notas. A fim de ter um programa que faça isso,
+precisamos executar os seguintes passos. E o passo 1 será: Ler as notas  
+e guardá-las em uma lista. As notas são uma lista simples. 
+É um caso relacionado a listas. Então nós leremos as notas 
+e as guardaremos em uma lista. Este é o passo 1.
+O segundo passo será contar os número de notas por faixa.
+E o terceiro passo será gravar o histograma em arquivo.
+Seja qual for o arquivo selecionado pelo usuário. Este processo de escrever os passos em um 
+nível bem alto é chamado Abordagem Top-Down. Quando pegamos um problema pela primeira vez pode ser muita pressão pensar em como vamos
+resolver a tarefa toda. Então, nós a quebramos em vários passos.
+Uma vez que decidamos como vamos armazenar nosso dados, podemos fazer esses passos 
+em qualquer ordem que desejarmos, porque eles são mais ou menos 
+independentes. E podemos testá-los separadamente.
+Vamos começar um novo programa, e fazer algumas anotações. 
+Vou pegar aqueles rabiscos e passar para um texto. Escrever coisas à mão, como fizemos aqui.
+Apenas o exemplo da saída que queremos e, em seguida, a lista de passos que 
+achamos que temos de dar, a fim de fazer este programa. Na verdade, tem um enorme benefício. Isto permite que você se afaste do 
+ambiente de desenvolvimento e apenas pense como resolver o problema.
+Isto é essencial. Programas são apenas a expressão 
+de algoritmos que você tem em sua mente. E se você descobrir o que precisa fazer,
+seu  tempo codificando será bem mais fácil. Vamos fazer anotações sobre o formato que queremos. Queremos 0-9 e depois um 
+asterisco ou dois, 10-19. Queremos alinhados. 20-29. Talvez possar ter vários asteriscos.
+E assim por diante, até 90-99. E por fim o 100. Agora que tenho isso escrito, 
+posso me livrar desses rabiscos. Nós iremos ler dos arquivos
+que serão selecionados pelo usuário. Queremos que isso funcione com qualquer arquivo neste formato, 
+não apenas este arquivo em particular. Então, vamos aprender a usar 
+a caixa de diálogo de arquivo Tkinter. Começaremos pedindo ao usuário 
+um arquivo e depois o leremos. Agora temos a variável
+a1_filename = tkinter.filedialog.askopenfile() Então, vamos abrir o arquivo: 
+a1_file = open(a1_filename, 'r') Vamos imprimir as linhas, 
+>> for line in a1_file: 
+>> print line apenas para nos certificarmos 
+que está tudo certo. Este processo de verificar frequentemente como nosso programa 
+está funcionando é um bom hábito a se manter, porque permite que você note erros de 
+sintaxe e de lógica, antes que vire uma bagunça. Então vamos executar o módulo. E nós temos uma sintaxe inválida. Tipo errado de instrução de impressão.
+Culpa da minha época com Python 2.7 Salvar e tentar uma outra vez.
+Eu fiz um pequeno arquivo de notas, para que não precisemos trabalhar com muitas notas de uma só vez. E eu tenho o erro de Tipo.
+O problema aqui é que eu estou usando askopenfile() Em vez de askopenfilename() askopenfile na verdade abre o arquivo para você. Mas eu gostaria de fazer isso em dois passos, porque eu acho que é mais explicito para pessoas que estão aprendendo a programar.
+Vou selecionar Run Module (Executar módulo) de novo. Ele pede para selecionar nosso arquivo de saída. 
+E aqui está. Este arquivo deve ter aproximadamente nove notas. Este processo de executar frequentemente encontrou 2 erros em apenas 6 ou 7 linhas de código.
+E isto me poupou muito tempo mais tarde, quando eu tivesse umas 150 linhas de código. Se eu tivesse esperado até que tivesse a maior parte do programa escrito, ficaria menos claro saber onde verificar para resolver meus problemas. Eu posso me livrar dessas linhas de código agora, pois agora eu sei que meu arquivo esta abrindo corretamente.
+Eu preciso fazer o mesmo com o arquivo do histograma. E dar melhores nome às variáveis do arquivo  de histograma. Isto parece razoável. Eu gosto de manter meu programa principal separado das funções que eu dependo. Então, assim como na tarefa 1 e 2, eu criarei um arquivo para manter as funções Vou nomeá-lo de grade.pi . E eu sei que eu terei que importá-lo. Meus passos são: ler as notas em uma lista; contar as notas por faixas; ' e escrever o histograma para o arquivo. Vamos começar lendo as notas em uma lista. Como eu estou lendo as notas de um arquivo, é difícil ter um exemplo. Então, nós vamos começar com o type contract. Eu sei que eu tenho um arquivo aberto para leitura. E eu sei que retornará uma lista. E que todos os números deste arquivo são floats. Então, é uma lista de float.
+Precisa de um espaço extra aqui, deixa eu fazer minha identação adequadamente. E o que faremos é ler e retornar uma lista de notas no arquivo. Bem, eu preciso de um cabeçalho.
+'Ler notas' é o que eu estou fazendo. É ótima oração sem sujeito.
+Eu chamarei de gradefile Então agora eu posso finalizar esta frase do meu documento. Eu preciso saber que este arquivo esta no formato correto. Então, a pré-condição para chamar esta função é que gradefile (o arquivo de notas) inicie com um cabeçalho, sem linhas em brancos e então tenha uma linha em branco. Porque eu preciso ser capaz de ignorar o cabeçalho. E, então, eu preciso que cada linha esteja no formato, onde há um código de aluno e uma nota. A fim de conseguir isso, primeiro eu preciso  pular o cabeçalho. E, em seguida, ler as notas, guardando-as em uma lista. Eu estou seguindo a mesma abordagem top-down. Eu estou escrevendo os passos que eu preciso seguir, a fim de realizar essa tarefa menor. É a mesma abordagem. A fim de pular o cabeçalho, nós leremos a primeira linha, desde que não seja o caractere de nova linha ( \n ). Eu preciso ler a próxima linha. Agora, eu acabei de ler a linha em branco,  então eu preciso ler as notas, guardando-as na lista. Bem, eu sei que lerei a primeira nota e então, enquanto eu não atingir o final do arquivo, Eu escrevo io final do arquivo  como ' ', se vocè se lembra minha linha não é uma string vazia. Então se minha linha não é o fim do arquivo, eu quero fazer a mesma coisa: ler a próxima linha. gradefile.readline()
+Então isso lerá cada linha até o fim do arquivo. O que eu preciso fazer agora é dentro deste padrão. Eu preciso guardar as notas. 
+A fim de fazer isto, eu preciso de uma variável do tipo lista. Eu começarei com uma lista vazia. Esta lista conterá todas as notas do arquivo. Enquanto eu não tiver alcançado o fim do arquivo, eu sei que tenho uma nota. Então agora temos uma string contendo a informação de um único estudante. Nós vamos procurar o último espaço na linha, que é o espaço à direita do número.
+E extrair os caracteres após este espaço. Então, encontre o último espaço e pego tudo depois deste espaço. Eu sei que line.rfind busca a partir da direita.
+Então eu estou procurando pelo espaço mais à direita. Esta função retorna o index do espço mais à direita da linha. Eu gostaria de cortar a linha começando uma posição após o index retornado:
+o primeiro dígito E continuar até o fin da linha.
+line[line.rfind(' ') + 1:] vai fazer isso para mim. erceba que na variável grade, a nota extraída é uma string, porque  'line' é uma string e quando eu pego um pedaço dela, eu  tenho uma string. Então, quando eu acrescentar a anota na lista de notas, eu gostaria de transformar a nota em float. Acho que estamos quase terminando.
+Eu tenho minha lista de notas aqui: grades E então é isto que eu vou retornar.
+Vamos testar! Eu vou executar isto, então assim terei acesso ao read_grades Eu irei solicitar por um arquivo
+>> tkinter.filedialog.openfilename() Ops, eu preciso importar isto
+>> import tkinter.filedialog Vamos usar nosso arquivo de teste. Agora eu preciso abrir aquele arquivo.
+E, finalmente, chamarei read_grades para aquele arquivo aberto.
+Isto vai retornar, como esperarmos, uma lista de floats, como vemos na tela aqui. E parece que temos todas notas.
+Com este teste rápido, acredito que eu estou pronto para chamar read_grades a partir do meu programa principal. Agora eu sei como ler as notas em uma lista. A próxima tarefa é contar a quantidade de notas para cada faixa de valores que temos aqui. Bem, vamos começar a projetá-lo. Com esta tarefa, va verdade, podemos ter um exemplo. Nós temos que decidir como vamos chamar este, talvez,  grade_ranges() Nós podemos sempre mudar de idéia mais tarde. Agora nós sabemos que se passarrmos uma lista como esta Na verdade, nós temos um exemplo disto.
+O que gostariamos de fazer é talvez retornar uma nova lista com as somatórias.
+Então nós sabemos que nós temos quantos 0's? Nós temos 2 na faixa 0-9 Não temos nada na faixa 20-29. Nós temos 1 número na faixa 30-39.
+Não temos nada na 40-49. 1 número na faixa 50-59. Um, dois, três, quatro... 4 números na faixa 70-79. Nada no 80-89. Nada no 90-99 e 1 número no 100. Então, confiantemente, é isto que serermos capaz de retornar. Nós vamos...
+[contando a quantidade de entradas na lista de saída ] Ops, está faltando um. Um 0-9, sem 10-19, sem 20-29, um 30-39, sem 40-49, um 50-59, << sem 60-69 >> quatro 70-79, sem 80-89, sem 90-99 e um 100. [contando a quantidade de entradas em amabas as listas ] Então, acho que eu construi meu exemplo corretamente. Vou mover a tela daqui por um instante, assim eu posso verificar o histograma aqui.
+Então este é o histograma que eu quero por fim. E o que parece que eu decidi é que, no index 0 eu contarei a quantidade de números na faixa 0-9. No index 1, como resultado desta função, contarei os números na faixa 10-11. Os números da 20-29, 30-39 e assim por diante. E, índice 0 é 0-9. Índice 1 é 10-19.
+Índice 2 é 20-29. Índice 3 é 30-39.
+Então, parece que tenho o número do índice. Seja o primeiro, seja os números 10-19, 30-39, 40-49 no índice 4, 50-59 no índice 5, 90-99 no índice 9, 100 no índice 10.
+Então, sim, isso parece ser o que estou recebendo. Compreender esta representação de dados, como eu estou armazenando informações, o que cada índice significa e como eles correspondem às faixas, irá, novamente, poupar-me uma quantidade tempo enorme mais tarde, quando eu tentar implementar esta função.
+Eu vou passar isto para cá. E eu irei fazer algumas anotações sobre o que eu acabou de descobrir. 0-9 é o índice 0.
+Este é o índice 1. Este é o índice 2 e assim por diante.
+Este é o índice 9 e este o 10. E o meu resultado.
+Bem, parece-me ser dado.... <<corrigindo um item>>
+Parce-me que eu dou uma lista de Float e é dado-me de volta uma lista de Int.
+E esta lista parece estar retornando uma lista de Int em que cada índice indica quantos notas estão nestas faixas. "grade ranges" não expressa nem um pouco a idéia. Então eu vou usar count_grade_ranges(grades) Isto significa que terei que mudar meu exemplo aqui. E assim fica com uma expressão verbal melhor.
+Meu resultado tem comprimento de 11  números. Eu eu quero manter registro dessa conta, então range_count será... Bem, todos começam com 0.
+Então, range_counts será uma lista com capacidade para 11 intereiros, todos iniciados em zero, e irei atualizá-los conforme eu for verificando cada número. E eu preciso descobrir como eu, dado o número 77.5, pegarei o digito da dezena para usar como um um índice para esta lista. Qualquer número entre 70 e 79.9 deve iniciar em 7.
+Então eu vou fazer alguns pequenos testes aqui (<<python shell>>) Vou dividir 77.5 por 10 E o resultado será 7.75.
+Eu quero me livrar do .75 Então eu usarei o outro operador de divisão ( // ), quer irá descartar a parte fracional do resultado. Funcionou? Sim. E que tal 79.9?
+Bom. Retornando ao meu programa. Isto significa que assim que eu tiver uma nota da minha lista, eu quero aplicar esta divisão (x // 10).
+E, então, usar o resultado como índice para a minha lista. Então eu preciso fazer um cast do resultado para int. Para cada nota do arquivo de notas, eu preciso saber qual faixa numérica eu quero. Bem, eu acabei de descobrir que eu posso pegar esta nota e dividir por 10 e transformar o resultado em um INT Então, isto era me dizer o índice da lista range_counts que eu quero incrementar. Então, range_counts["no índice descoberto"] será o valor que existe lá + 1. Então eu já passei por todas as notas.
+Terminei. Então, eu retornarei esta lista.
+É hora de testar. Então vamos copiar esta lista ali (<<python shell>>) Executar e comparar o resultado. Espetacular!
+2 passos a menos. Vamos para o próximo Eu sei que, em meu programa principal, eu quero contar as notas por faixas. Eu sei que tenho uma linda pequena função que faz isto. Então, range_counts será o resultado retornado de count_grade_ranges(grades) Vamos testá-los.
+Tudo o que faremos será imprimir range_counts e ver se estamos fazendo progresso. Vamos executar o módulo.
+Ele (o programa) diz "OK, qual arquivo queremos abrir?" Nós iremos abrir nosso arquivo de teste.
+"E onde nós queremos salvá-lo?" Bem, eu vou finalmente salvar em a1_test_hist Mas, nós não estamos escrevendo nada de verdade neste arquivo. Mas eu ainda preciso selecioná-lo, porque eu fui solicitado a fazê-lo. E o erro diz "a1_file não está definido". Como pode isso? 
+Ah, eu entendi, eu preciso usar o nome do módulo. Também notei que eu preciso usar asksaveasfilename ("salvar como") porque é o arquivo de saída Vamos reiniciar. Isto mata nosso programa, assim não terá nada solto por ai. E vamos tentar mais uma vez.
+Solicita nosso arquivo de entrada e solicita nosso arquivo de saída.
+E ele diz "você tem certeza que quer fazer isto?" Sim, eu quero que substitua este arquivo. Nós temos a mesma lista impressa aqui, então nosso programa principal está funcionando até agora. Agora, que eu tenho minha lista de contagem para cada faixa. Esta na hora de escrever o arquivo de histograma. Eu não preciso mais desta declaração print, então vou comentá-la. Apenas para o caso de eu precisar descomentar, mais tarde. De volta ao meu arquivo funções, onde estou armazenado todas as minhas funções. Eu preciso escrever o histograma.
+Seguindo nossa abordagem de desenvolvimento. Eu sei que precisarei chamar e passar a lista grade_ranges. Então eu pego a informação de contagem de faixas e, também, o arquivo que tinha sido aberto para escrita. Então, eu sei que eu tenho uma lista de inteiros e um arquivo para escrever Não retorna nada.
+Tudo o que faz é escrever o arquivo. Escreve um histograma de estrelas, com base no número de notas de cada faixa. Eu estou tendo problemas para digitar hoje. Pergunte-me se é frustrante me assistir cometendo esses erros. Bem, eu tenho um exemplo da saída que eu quero. << copia e cola o exemplo de uma tela para outra >> E, eu vou colar isto aqui, de modo que ajude visualizando o que é esperado. O que faremos será escrever um histograma, então write_histogram parece ser um nome razoável. Nós sabemos que o primeiro parâmetro é a contagem de faixas e o segundo o arquivo no qual escreveremos o histograma.
+A primeira linha da saída e a última linha da saída são levemente diferentes das demais. 
+Eu preciso acrescentar mais espaços em branco, para que as estrelas fiquem alinhadas.
+Então, quando eu imprimir a primeira linha e quando eu imprimir a segunda linha, eu precisarei escrever espaços extras. Então vou lidar com essas linhas separadamente.
+Aqui vamos nós! Primeiros, nós queremos escrever "0-9" e então quantos espaços? Write não coloca não inclui o caractere de nova linha ao final, o que é bom, porque agora eu quero escrever algumas estrelas Então, eu sei que eu quero escrever algumas estrelas.
+E quantas existem? Bem, será a quantidade de notas que existem na faixa. Então, nós iremos multiplicar o asterisco por seja qual for a a contagem no índice 0. O que é o número de notas que existem na faixa de 0 a 9. E então eu inicio um nova linhas, porque, como você pode ver, 10-19 aparecem na próxima linha.
+Eu tomarei conta do outro caso especial agora. Aqui, nós queremos escrever 100. E, em vez de índice 0, será o último índice (-1). Isto me dará o número de 100s que são encontrados no arquivo.
+No meio, eu quero escrever 1 linha para cada um dos índices de 1 a 9
+<<codificando a declaração FOR>> Então o que é isto? 
+<<refere-se a declaração FOR>> Isto escreve a faixa de 2 dígitos.
+A faixa dos 10s, dos 20s, dos 30 e assim por diante. Eu preciso descobrir o número inicial e o final da faixa corrente. Então, quando a variável i é 1, os números devem ser 10 e 19. Quando i é 2 os números são 20 e 29, e assim por diante. Então, o número inicial (variável low) é a variável i multiplicada por 10. E o número final (variável high) é a variável i multiplicada por 10 e adicionado 9. Apenas para ter certeza, 9 * 10 + 9 é 99. Então isto funciona para a faixa dos 90s. Então,  sim, isto para me retornar os números iniciais e finais. Eu vou escrever o número inicial, mas eu preciso converter low para string. Então str(low) , mais o hífen o número inicial e final, mais str(high). seguindo pelo sinal dois-pontos. Agora é hora de escrever os asteriscos. Então eu quero multiplicar o asterisco pela contagem da faixa de qual índice? Bem, índice i.
+E, finalmente, eu quero escrever a nova linha. Esta é uma das duas formas, eu posso fazer o que eu estava fazendo antes: executar isto; ter um exemplo de range_counts; enviar para um arquivo de saída; e ter certeza que o arquivo foi escrito.
+Mas este é o último passo do meu programa, então eu posso na verdade, fazer isto no meu programa principal.
+Eu vou excluir isto, pois eu tenho essa informação em outro lugar. O que eu quero fazer agora é escrever o histograma com a lista range_counts e com o arquivo de saída que é a1_histfile. Eu verifiquei que meu programa parece estar funciondo até agora. I eu posso apenas executar para ter certeza que esta nova função faz o que eu quero que faça. Bem, eu irei usar o a1_test.txt e queremos escrever no a1_test.hist Uh-oh! Eu tenho o erro "não gravável" aqui. Parece que quando eu chamo histfile.write, diz que é uma operação não suportada.
+Este arquivo não é gravável. E isso faz sentido.
+Porque eu o abri para leitura. Pois eu copiei e colei o código e esqueci de mudar isto. Vamos executar mais uma vez. Oh, eu quero escrever meu programa aqui.
+Vamos salvar e substituir. Certo, sem erros.
+Nós vamos alternar para o Gerenciador de Arquivos agora. Olha eu aqui.
+Não olhe! E eu acabei de escrever a1_test.hist Vamos abrir este arquivo no editor de texto.
+E esta vazio! Agora eu tenho que encontrar o motivo.
+Vamos voltar ao programa e dar uma olhada. Oh, eu acho que esqueci de fechar meus arquivos. Se você não fecha seus arquivos, eles não estarão disponíveis para serem escritos imediatamente. Vamos tentar mais uma vez.
+Voltando, ver como ficou. E aqui está nossa informação.
+Vamos tentar executar com nosso arquivo maior. Certo! a1.txt é nosso arquivo maior.
+E vamos salvar em a1.hist. Isso!
+Eu gostaria de substituir isto. Vamos alternar para o Gerenciador de Arquivo, nós queremos a1.hist. Aha, lindo! 
+Olha isto! E isto é realmente a forma como eu escrevo meus programas. Eu começo do início, com apenas uma vaga idéia do que eu quero e eu tenho um monte de decisões a tomar.
+Quais são os meus passos, quais os dados que eu irei armazenar e como eu vou armazenar. E em que ordem eu irei escrever minhas funções e como irei testá-las. Eu espero que tenha sido divertido!

@@ -1,0 +1,49 @@
+The Python Visualizer has limitations, it
+does not allow import statements and it stops tracing after 500 steps.
+Idle comes with a debugger, which is a tool much like the visualizer, but without
+the pretty pictures. Here we see functions convert to minutes
+and convert to seconds, which we explored in last week's lectures.
+Turn on this in IDLE's debugger. We're going to make sure that the Python
+shell window is on top, and then select debug-, debugger.
+This opens a window called debug control. I am now going to, to resize this so that
+we can see everything as we execute. We're going to check the check box for
+source. Then, we're going to come back here to our
+module that we want to debug and select run, run module.
+This middle area displays the call stack, or at least the functions that have been
+called. Down here are the variables inside the
+current call. Notice that the variable for built ins is
+there, as our three other variables that we haven't discussed yet in this course.
+Step is like forward in the visualizer. We'll define our two functions.
+Notice we have variables down here. All for them, referring to functions.
+This right here, that's a memory address. You'll notice it does letters in it.
+That's because it's base sixteen, which uses in, in a lot of programming the
+numbers zero through nine, plus the letters A, B, C, D, E and F, for a total
+of sixteen characters. Over here we see there's a grey highlight
+on the current line. And line twenty happens to be that line.
+So we're told here which line is being executed.
+When we step we're gonna do the function called convert to seconds.
+We only have parameters num hours available so far seconds convert to
+seconds. If we want to see the, the variables in
+the module, we can just click there and that switches the view for the local
+speed, the local variables. We're gonna back to convert to seconds and
+step into the call to convert to minutes. We now have three items on the call stack,
+involved in that program. Let's step one more line to define our
+variable minutes. Minutes is now 120.
+Just to check, we're gonna go back to the frame for convert to seconds, and notice
+that it only has one variable num hours. The reason is, we haven't finished this
+call to convert to minutes, and so this variable minutes has not yet been created.
+I'm going to switch the view back to, the top frame.
+And, when I step, it's actually just going to execute the return statement all at
+once including popping the frame from the stack.
+We don't get to see the return value before the return happens.
+So we're back in convert to seconds, we're about to evaluate 120 times 60 and assign
+the result to seconds, there we go 7,200 and we're going to return 7,200 back to.
+This call to convert to seconds, and. It's going to create a variable seconds,
+in the. Stack frame for the main module.
+Switching our view back and clicking step, causes our.
+Program to end because, this was the last statement in the program.
+Let's switch back to there and notice that we do have a variable seconds and created.
+So it's a little confusing at the end of a program because if on a return statement,
+and that return statement is inside a function that is on the last instruction
+that gets executed, the program will end and this stackframe won't be removed
+because the debugger doesn't update at the end of a program once the program is done.

@@ -1,0 +1,214 @@
+1
+00:00:00,000 --> 00:00:06,502
+Lists can contain items of any type.
+In this lecture, we're going to work with
+
+2
+00:00:06,502 --> 00:00:13,005
+lists that have items of type lists.
+These lists are known as nested, with one
+
+3
+00:00:13,005 --> 00:00:18,241
+list inside another.
+Our first example of a nested list is one
+
+4
+00:00:18,241 --> 00:00:22,632
+in which each element has the name of an
+assignment.
+
+5
+00:00:22,632 --> 00:00:27,615
+For example, assignment one and a grade
+for that assignment.
+
+6
+00:00:27,615 --> 00:00:38,810
+So, each item will be a two-item list.
+The length of list grades is three.
+
+7
+00:00:38,810 --> 00:00:43,535
+It has three items.
+Each of the items is, itself, a
+
+8
+00:00:43,535 --> 00:00:47,368
+two-element list.
+We can see this using indexing.
+
+9
+00:00:47,368 --> 00:00:53,357
+Grades at index zero is the list with the
+string assignment one, and int 80.
+
+10
+00:00:53,357 --> 00:00:56,950
+Grades at index one is assignment two and
+90.
+
+11
+00:00:56,950 --> 00:01:01,023
+And grades at index two is assignment
+three and 70.
+
+12
+00:01:01,023 --> 00:01:06,293
+The length of each of these items, also
+known as interlists is two.
+
+13
+00:01:06,293 --> 00:01:12,921
+And we can see that by passing the list at
+index zero as an argument to the length
+
+14
+00:01:12,921 --> 00:01:18,060
+function.
+Another way to access the items of grades
+
+15
+00:01:18,060 --> 00:01:25,228
+is to use a for loop, just like we would
+if the list had strings or ints as
+
+16
+00:01:25,228 --> 00:01:29,660
+elements.
+So, we can say, for each item in grades,
+
+17
+00:01:29,660 --> 00:01:35,130
+print that item.
+And the item is, that is printed will be a
+
+18
+00:01:35,130 --> 00:01:39,940
+two-element list.
+Since each item of grades is a list,
+
+19
+00:01:39,940 --> 00:01:44,949
+It can also be indexed.
+So, the list at index zero gives a two
+
+20
+00:01:44,949 --> 00:01:51,273
+element list with string assignment one
+and grade 80, and we can use a second
+
+21
+00:01:51,273 --> 00:01:56,857
+index to access each part.
+So, at grades at index zero and index zero
+
+22
+00:01:56,857 --> 00:02:02,031
+is assignment one, and grades at index
+zero and index one is 80.
+
+23
+00:02:02,031 --> 00:02:08,519
+Similarly, for the element of grades at
+index one, we can access the first value
+
+24
+00:02:08,519 --> 00:02:14,648
+using index zero, so grades at one, zero
+gives assignment two, and grades at one,
+
+25
+00:02:14,648 --> 00:02:19,403
+one is 90.
+Grades at two and zero is assignment
+
+26
+00:02:19,403 --> 00:02:27,395
+three, and grades at two and one is 70.
+Next, we'll write a function to calculate
+
+27
+00:02:27,395 --> 00:02:32,252
+the average of grades given a list of this
+form.
+
+28
+00:02:32,252 --> 00:02:39,233
+The function is named calculate average,
+and notice the type contract.
+
+29
+00:02:39,233 --> 00:02:44,813
+We've got one parameter, which is a list
+of list of stir number.
+
+30
+00:02:44,813 --> 00:02:48,615
+That describes the type of lists we've
+been working with.
+
+31
+00:02:48,615 --> 00:02:54,558
+This function will return a flow, which is
+the average of the grades in the given
+
+32
+00:02:54,558 --> 00:02:58,885
+list.
+To calculate the average, we'll sum the
+
+33
+00:02:58,885 --> 00:03:02,458
+grades and then divide by the number of
+grades.
+
+34
+00:03:02,458 --> 00:03:08,389
+The variable total will be used to keep
+track of the sum of the grades, and it
+
+35
+00:03:08,389 --> 00:03:13,864
+will have an initial value of zero.
+We're going to pass over the list of
+
+36
+00:03:13,864 --> 00:03:17,513
+assignment grades for item in assignment
+grades,
+
+37
+00:03:17,513 --> 00:03:21,999
+And each item is a two-element list with a
+string and an int.
+
+38
+00:03:21,999 --> 00:03:28,199
+So, to the total, we want to add the
+current value of total plus the list item
+
+39
+00:03:28,199 --> 00:03:35,280
+at index one, which is the grade.
+Once the for loop has executed, we will
+
+40
+00:03:35,280 --> 00:03:42,909
+divide the total by the number of grades,
+And that number of grades is equal to the
+
+41
+00:03:42,909 --> 00:03:49,710
+length of the list assignment grades,
+And then we can return that average.
+
+42
+00:03:49,710 --> 00:03:55,501
+Let's run the example call.
+First, run the module, and then, we'll
+
+43
+00:03:55,501 --> 00:04:01,200
+execute calculate average, confirming that
+it does return 85.0.

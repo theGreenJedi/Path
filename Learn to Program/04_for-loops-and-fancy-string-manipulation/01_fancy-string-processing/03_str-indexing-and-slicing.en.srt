@@ -1,0 +1,263 @@
+1
+00:00:01,020 --> 00:00:05,073
+When working with strings, we often need
+to extract substrings.
+
+2
+00:00:05,073 --> 00:00:10,303
+For example, if a string contains a phone
+number, we may want to extract the area
+
+3
+00:00:10,303 --> 00:00:12,919
+code.
+In this lecture, I'll introduce two
+
+4
+00:00:12,919 --> 00:00:17,953
+techniques, indexing and slicing, and
+we'll use those to extract substrings of
+
+5
+00:00:17,953 --> 00:00:23,548
+the strings we're working with.
+In this lecture, we'll use the string
+
+6
+00:00:23,548 --> 00:00:30,138
+learn to program as our running example.
+Each character of a string has an index
+
+7
+00:00:30,138 --> 00:00:33,680
+which, which is it's position in the
+string.
+
+8
+00:00:33,680 --> 00:00:39,859
+So, the string at index zero, indicated
+using this bracket notation, is the L.
+
+9
+00:00:39,859 --> 00:00:45,461
+At index one of the string, we have an e.
+At index two, is the first a.
+
+10
+00:00:45,461 --> 00:00:49,333
+Notice that zero is the first position,
+not one.
+
+11
+00:00:49,333 --> 00:00:57,197
+We start counting from zero.
+We can also use negative indices to count
+
+12
+00:00:57,197 --> 00:01:03,741
+from the end, or from the right hand side
+of the string.
+
+13
+00:01:03,741 --> 00:01:09,809
+So, the string at -one is the m.
+At -two is the last a,
+
+14
+00:01:09,809 --> 00:01:17,216
+At -three is the r, the last r.
+So, once we've seen using an index, we can
+
+15
+00:01:17,216 --> 00:01:22,622
+extract parts of the string one character
+at a time. But, we can extract more than
+
+16
+00:01:22,622 --> 00:01:25,760
+one character using an approach called
+slicing.
+
+17
+00:01:25,760 --> 00:01:31,858
+With slicing, we provide a start index
+followed by a colon, followed by an end
+
+18
+00:01:31,858 --> 00:01:38,352
+index and that gives us a substring from
+the start index up to, but not including
+
+19
+00:01:38,352 --> 00:01:42,866
+the ending index.
+For example, we can get this string from
+
+20
+00:01:42,866 --> 00:01:49,043
+position zero, index zero up to, but not
+including index five, and that gives us
+
+21
+00:01:49,043 --> 00:01:54,311
+the string Learn.
+From index six up to, but not including
+
+22
+00:01:54,311 --> 00:02:00,144
+eight, is the to.
+And, from index nine up to sixteen, is the
+
+23
+00:02:00,144 --> 00:02:05,748
+word Program, string Program.
+Sixteen is equal to the length of the
+
+24
+00:02:05,748 --> 00:02:09,123
+string.
+So, an alternative would be to start at
+
+25
+00:02:09,123 --> 00:02:14,480
+index nine but go up to len of s.
+Len is a built in function that returns
+
+26
+00:02:14,480 --> 00:02:19,984
+the length of the string, so this
+expression is equivalent to the one above.
+
+27
+00:02:19,984 --> 00:02:25,927
+Another alternative would be to go from
+nine, put the pole in, and omit the ending
+
+28
+00:02:25,927 --> 00:02:29,449
+index.
+In which case, the default is to go to the
+
+29
+00:02:29,449 --> 00:02:34,880
+end of the string, so this is also
+equivalent to the two expressions above.
+
+30
+00:02:35,580 --> 00:02:41,986
+The starting index can also be omitted.
+So, for example, we can include colon and
+
+31
+00:02:41,986 --> 00:02:46,527
+go up to index a,
+We can also omit both the starting and
+
+32
+00:02:46,527 --> 00:02:50,420
+ending indices,
+And that gives the entire string.
+
+33
+00:02:51,160 --> 00:02:57,906
+We've seen that negative indices can be
+used for indexing, and they can be used
+
+34
+00:02:57,906 --> 00:03:03,303
+for slicing as well.
+Let's get this substring from index one up
+
+35
+00:03:03,303 --> 00:03:09,206
+to but not including eight.
+And our equivalent expression is to get it
+
+36
+00:03:09,206 --> 00:03:15,531
+from one up to but not including -eight,
+Or to go from -fifteen up to but not
+
+37
+00:03:15,531 --> 00:03:19,832
+including -eight.
+So, those three expressions are all
+
+38
+00:03:19,832 --> 00:03:24,415
+equivalent.
+The slicing and index operations do not
+
+39
+00:03:24,415 --> 00:03:29,405
+modify the string that they act on.
+So, the value that s refers to is
+
+40
+00:03:29,405 --> 00:03:35,990
+unchanged by the operations above.
+In fact, we cannot change the value of a
+
+41
+00:03:35,990 --> 00:03:40,279
+string.
+Operations like the following result in
+
+42
+00:03:40,279 --> 00:03:44,750
+errors.
+If I take the string at index six and try
+
+43
+00:03:44,750 --> 00:03:51,229
+and set it to d, I get an error.
+Similarly, if I try to modify the string
+
+44
+00:03:51,229 --> 00:03:57,800
+from index nine up to sixteen, have it
+refer to run, an error also occurs.
+
+45
+00:03:59,080 --> 00:04:05,679
+But, imagine that we'd like to change
+string s to refer to Learned to Program.
+
+46
+00:04:05,679 --> 00:04:12,449
+Here's one approach that we can take.
+We can use the current value of s and get
+
+47
+00:04:12,449 --> 00:04:19,306
+the word learn, concatenate that with ed
+to make it learned, and concatenate that
+
+48
+00:04:19,306 --> 00:04:23,420
+with the rest of the string, which is, to
+program.
+
+49
+00:04:23,780 --> 00:04:29,818
+That evaluates to give Learned to Program.
+And now that we have this new string,
+
+50
+00:04:29,818 --> 00:04:35,386
+Learned to Program, we can have s refer to
+that instead of it's old value.
+
+51
+00:04:35,386 --> 00:04:40,875
+Notice that we didn't modify the string
+that s originally referred to,
+
+52
+00:04:40,875 --> 00:04:45,659
+We can't modify it.
+Instead, we created a new string and had s
+
+53
+00:04:45,659 --> 00:04:47,620
+refer to that new string.

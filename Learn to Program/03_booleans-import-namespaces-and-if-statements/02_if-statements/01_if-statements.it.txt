@@ -1,0 +1,97 @@
+I programmi che abbiamo scritto finora
+eseguono sempre la stessa sequenza di istruzioni ogni volta che vengono lanciate.
+In questa lezione, andremo ad usare delle espressioni Booleane per controllare
+quali istruzioni devono essere eseguite. Consideriamo questo problema.
+Un volo era stato schedulato per arrivare ad un'orario particolare, e ora si stima che arrivi
+in un altro momento. Scrivi una funzione, che dati i due orari,
+restituisca lo stato del volo, se è in orario, in anticipo, o in ritardo.
+Per questa funzione, un orario sarà rappresentato usando un float.
+Ad esempio, l'orario tre AM sarà rappresentato da 3:0 e il tempo due: 3:30PM
+14:30, sarà rappresentato da 14.5.
+Quindi, ogni volta che gli orari con cui lavoriamo sarà fra 0.0 e 24. 
+0.0 inclusivo e 24 esclusivo. Questa è una precondizione alla chiamata.
+Quando scriviamo la nostra funzione ci aspettiamo che l'orario fornito sia all'interno di questo range. Iniziamo a definire la funzione, inizieremo
+con qualche esempio di chiamata alla funzione. Andrò a chiamare questa funzione report
+status. E avrà due argomenti, prende
+due argomenti. Il primo sarà il tempo previsto dei arrivo,
+e il secondo sarà il nuovo tempo previsto di arrivo.
+Quando questi due valori sono uguali, ritornerà il messaggio on time.
+Quando l'orario previsto è 12.5 e il nuovo orario di arrivo previsto è 11.5 o
+prima, questa funzione restituirà early. E infine per l'ultima situazione possibile, è quando l'orario è 9.0,
+il tempo previsto e poi il tempo di arrivo previsto viene spostato in avanti, questa funzione
+dovrebbe ritornare un messaggio che dica che il volo è in ritardo.
+Ora scriviamo il tipo della testata. La funzione ha due parametri entrambi
+numeri e in tutti i casi qui, ho passato dei float.
+Ma avremmo anche potuto passare dei valori interi.
+Quindi potremmo usare number per questi due parametri e ritornerà
+qualcosa di tipo stringa. E' il momento della testata.
+Sappiamo che ho chiamato la funzione report status e ora abbiamo bisogno di decidere
+due buoni nomi per i parametri. Il primo parametro posso chiamarlo scheduled
+time. Il secondo, lo chiamerò estimated time.
+L'ultima parte è una doc string che deve essere aggiunta alla descrizione della funzione.
+Questa funzione ritornerà lo stato del volo, e sarà una delle tre stringhe: on time,
+early o delayed. Ritorna lo stato per un volo il cui 
+arrivo era previsto, all'orario scheduled time, il primo parametro.
+Ma si stima che arrivi all'orario estimated time, che è il secondo
+parametro. Un'informazione aggiuntiva che deve
+essere aggiunta alla doc string è la precondizione che gli orari debbano
+essere fra 0.0 e 24. Lo stesso è vero per il l'estimated time.
+Deve anche cadere nell'intervallo. .
+. E' ora di scrivere il corpo della
+funzione. Scriveremo il corpo di questa funzione in
+un paio di passi differenti. E alla fine, avremo la cosa che funziona
+completamente. Per iniziare, dobbiamo capire come
+eseguire alcune istruzioni solo ogni tanto, ma non sempre.
+Ad esempio, vogliamo ritornare la stringa on time.
+Ma non vogliamo ritornare quella stringa tutte le volte che questa funzione viene eseguita.
+Solo le volte in cui l'orario schedulato è uguale all'orario previsto.
+Andremo ad usare un'istruzione if per esprimerlo.
+Questa istruzione di if avrà una condizione booleana che è se l'orario schedulato è
+uguale all'orario previsto. E posizioneremo questa istruzione di return
+all'interno del corpo dell'if. Infatti notate che è indentato, per indicare
+che cade all'interno dell'istruzione if. Il modo in cui si legge questo codice è che
+se questo orario schedulato è uguale all'orario previsto, se quell'espressione booleana
+è vera, allora verrà effettuato il return sull'espressione on time.
+Altrimenti, non viene eseguito e continueremo ad andare avanti, con il codice
+che segue l'if. Salviamo e facciamolo girare.
+Quindi quando chiamo questa funzione, nella shell, con tempi uguali mi restituisce lo stato 
+on time. Se dovessi richiamare questa funzione al
+momento con uno dei tempi, coppie di tempi che non sono uguali, allora non verrebbe
+restituito nulla. Per essere più precisi, dovrei dire che
+sembra che non venga ritornato nulla. Visto che qualcosa viene ritornato da questa
+funzione, anche se non è stata eseguita alcuna istruzione di return.
+Stampiamo la chiamata alla funzione. Quindi la funzione viene chiamata, qualsiasi valore
+venga ritornato viene ritornato. E quel valore sta per essere stampato.
+E possiamo vedere che viene stampato None. Quando viene eseguita una chiamata ad una funzione
+e non viene eseguita alcuna istruzione di return, il valore ritornato dalla funzione è None.
+Il tipo di Non è il non-type, non stringa. Quindi questo spezza il contratto sui tipi che abbiamo 
+specificato nel nostro report sullo stato della funzione Dobbiamo completare il resto della funzione 
+assicurando che, il tipo del contratto venga rispettato.
+Ritorniamo a definire la funzione. Ora, abbiamo una singola istruzione di if
+e quando questa condizione booleana è vera, viene ritornato on time.
+Quando è falsa vogliamo fare qualcosa di diverso.
+Quindi controlliamo per vedere se è vera, e e poi andremo ad usare el, che sta per
+else, elif, per controllare una seconda condizione.
+Questa volta andremo a controllare per vedere se l'orario schedulato è maggiore 
+del tempo stimato. E quando lo è, ritorneremo early. E deve essere scritto come scheduled.
+Quindi a questo punto facciamolo girare. E quando chiamiamo questa funzione con
+orari uguali dice on time. Quando, quando la chiamiamo con orari
+minori, dice early. Ma ancora a questo punto, quando la 
+chiamiamo con un tempo posteriore viene ritornato None.
+Quindi non abbiamo ancora finito. Andremo ad aggiungere una terza parte
+all'istruzione if, che è un'istanza di else. Else dice, se nessuna delle precedenti
+condizioni è soddisfatta, allora fai questo.
+Quindi abbiamo controllato se sono uguali, maggiori di, e l'unica cosa rimasta è
+che l'orario schedulato sia minore dell'orario previsto.
+In questo caso, questa funzione restituirà delayed.
+Quindi possiamo farlo girare di nuovo, controllando tutte le nostre condizioni, quando sono uguali,
+quando è in anticipo e quando l'orario previsto è posteriore.
+Ora abbiamo i ritorni appropriati. Voglio menzionare un paio di funzionalità
+dell'istruzione if. Possiamo avere zero o più clausole elif 
+associate con un if e possiamo avere zero o una clausola di else, e poi l'else deve essere
+l'ultima clausola per l'istruzione di if. Quando abbiamo un'istruzione di if con queste
+varie espressioni, possiamo valutare ogni espressione in ordine.
+E per la prima che viene valutata a vera, il suo corpo, la parte all'interno
+dell'istruzione if viene eseguita. Dopo che viene eseguito il corpo,
+l'istruzione di if termina. Quindi esiste e continua con il codice che si
+trova al di sotto, senza controllare nessuna altra condizione.

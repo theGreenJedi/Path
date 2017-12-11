@@ -1,0 +1,69 @@
+Una volta che una funzione viene definita, possiamo
+richiamarla più e più volte. In questa lezione ci concentreremo sul
+riutilizzo delle funzioni richiamandole in altri posti quando è appropriato.
+Ad esempio chiameremo la nostra funzione all'interno della definizione di altre funzioni
+e anche all'interno di chiamate di altre funzioni. In questa lezione sulla definizione di funzioni.
+Eccoci, triangle. py, che contiene due funzioni.
+Questo codice è una versione rivista che ho prodotto seguendo gli step della ricetta di 
+disegno. Per ricapitolare la ricetta di disegno, iniziamo con
+un esempio o due. seguito dal tipo di contratto, dalla
+testata della funzione, una descrizione della funzione.
+Poi codifichiamo il corpo e testiamo la funzione.
+Ora aggiungiamo un'altra funzione a triangle.py.
+Questa funzione calcolerà il semi perimetro di un triangolo.
+Il semi perimetro p semplicemente la metà del perimetro.
+Seguendo l'esatta ricetta di disegno. Il primo passo è trovare un esempio. Chiameremo la funzione, semi_erimeter.
+La funzione avrà bisogno della lunghezza dei tre lati per effettuare il
+calcolo. Quindi nella chiamata alla funzione, immaginiamo
+di passare, tre lunghezze. E poi, il risultato che otterremo
+sarà metà del perimetro. Effettuiamo una ulteriore chiamata alla funzione, e
+questa volta passando float invece di int come argomenti.
+E il risultato che ci aspettiamo di ottenere sarebbe 12.9.
+Il prossimo passo della ricetta di disegno è il tipo contratto.
+Per la funzione del semi perimetro, i tipi saranno numeri, dato che potremmo avere degli int
+o dei float, e questa funzione ritornerà un float.
+Poi definiremo la testata della funzione. Iniziamo con la parola chiave def seguita dalla
+funzione medium che abbiamo già deciso nel nostro esempio di chiamata, e
+passiamo in ingresso tre parametri in questo caso. Li chiamerò lato uno, lato due, e
+lato tre. Poi c'è la descrizione della funzione.
+Dobbiamo dire cosa ritornerà la funzione e spiegare come saranno usati i
+parametri. Quindi andremo a ritornare il semiperimetro di
+un triangolo. La dimensione principale è la lunghezza data, ma
+nei parametri. Ora siamo pronti per scrivere il corpo della
+funzione. Questa funzione ritornerà il
+semiperimetro, il che significa che calcoleremo il perimetro sommando i tre
+lati e dividendo il risultato per due. Notate che parte del corpo della funzione
+semiperimetro è esattamente lo stesso di una parte del corpo del perimetro.
+Invece di duplicare il codice per calcolare il perimetro, possiamo chiamare la
+funzione perimetro all'interno della funzione semiperimetro.
+Riutilizzando i parametri della funzione, possiamo ridurre il rischio di fare un errore mentre
+calcoliamo i perimetro, dato che quella funzione è già stata testata.
+Ora è tempo di testare la funzione semiperimetro.
+Inizieremo facendo girare il modulo. E poi eseguiremo quella funzione
+chiamandola all'interno della shell. Userò lo stesso esempio che ho usato
+nel doc della funzione, la stringa function docs.
+E poi riceviamo indietro sei, e poi se la chiamo con i float della stringa docs,
+combineremo dei float al suo itnerno, e riceveremo 12.9.
+Quindi la funzione agisce come ci attendevamo. C'è un altro problema che dobbiamo considerare. Per questo problema andremo a far uso
+della funzione area che abbiamo scritto prima.
+Ricordiamo che area ha due parametri, la base e l'altezza, e poi ritorna l'area
+del triangolo. Il problema riguarda due fette di pizza.
+Ad una festa ci sono queste due fette di pizza avanzate.
+Una persona affamata cerca di capire quale fetta sia la più grande.
+Dato che le fette sono a forma triangolare la persona misura la base e l'altezza
+di ogni fetta di pizza. Ora che sappiamo la base e l'altezza
+di ogni fetta di pizza, possiamo usare il nostro programma per aiutare a capire quale sia
+la più grande. Useremo anche una delle funzioni integrate 
+di Python, la funzione max, per aiutarci Quindi iniziamo chiamando max, e il primo argomento che passeremo a max sarà
+l'area della prima fetta di pizza. La fetta ha base 3.8 e altezza 7.0. E poi il secondo argomento alla funzione,
+min, max, sarà l'area della seconda fetta di pizza.
+E un triangolo con base 3.5, e altezza 6.8.
+Quando eseguiamo questa funzione, scopriamo quale delle due aree è maggiore.
+E ora possiamo controllare quale fetta di pizza, il valore netto corrisponde
+a 13.29 periodico. Quindi possiamo vedere da quella chiamata alla funzione
+che l'area della prima fetta di pizza coincide con l'area massima.
+E questo significa che la fetta di pizza vincente, è la prima.
+Quindi ciò che mostra questo esempio è che, non solo si può richiamare una funzione
+all'interno di una definizione di una funzione come abbiamo fatto nell'esempio del semiperimetro.
+Ma possiamo anche passare delle chiamate a delle funzioni come argomenti di funzioni.
+Dato che le chiamate a delle funzioni sono loro stesse.

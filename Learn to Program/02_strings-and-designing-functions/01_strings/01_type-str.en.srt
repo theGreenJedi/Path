@@ -1,0 +1,267 @@
+1
+00:00:01,950 --> 00:00:04,510
+Ernest Hemingway wrote, all my life,
+
+2
+00:00:04,510 --> 00:00:08,840
+I've looked at words as though I
+were seeing them for the first time.
+
+3
+00:00:08,840 --> 00:00:10,430
+Words are everywhere in programming.
+
+4
+00:00:10,430 --> 00:00:16,000
+From Google searches to bioinformatics
+where DNA is sometimes represented
+
+5
+00:00:16,000 --> 00:00:22,580
+as a string of As, Ts, Cs, and Gs,
+to simple things like message dialogues.
+
+6
+00:00:22,580 --> 00:00:26,828
+Right now, were going to explore
+Python's string representation and
+
+7
+00:00:26,828 --> 00:00:29,031
+how we can manipulate these values.
+
+8
+00:00:32,268 --> 00:00:35,780
+A string literal is
+a sequence of characters.
+
+9
+00:00:35,780 --> 00:00:38,143
+In Python, this type is called str.
+
+10
+00:00:38,143 --> 00:00:40,880
+Strings start and
+end with a single or double quote.
+
+11
+00:00:42,110 --> 00:00:44,591
+Such as hello or how are you?
+
+12
+00:00:48,770 --> 00:00:52,831
+We can include punctuation,
+as we've just seen, or hyphens.
+
+13
+00:00:56,267 --> 00:00:59,470
+Strings are values and
+can't be used in an assignment statement.
+
+14
+00:01:01,770 --> 00:01:06,840
+It's a sunny day, we like a side to
+say to somebody, what a beautiful day.
+
+15
+00:01:09,210 --> 00:01:13,949
+And if it's storming,
+we might want to say,
+
+16
+00:01:13,949 --> 00:01:17,170
+wow, you're dripping wet.
+
+17
+00:01:17,170 --> 00:01:20,520
+But already we can see
+that we have a problem,
+
+18
+00:01:20,520 --> 00:01:23,740
+because it goes through green
+to black at that second hyphen.
+
+19
+00:01:24,810 --> 00:01:27,000
+And indeed, we have a syntax error.
+
+20
+00:01:27,000 --> 00:01:28,640
+The problem, of course,
+
+21
+00:01:28,640 --> 00:01:33,400
+is that we're trying to use a single
+quote inside a single quoted string.
+
+22
+00:01:33,400 --> 00:01:35,520
+And Python, of course,
+doesn't really know what we're doing.
+
+23
+00:01:35,520 --> 00:01:42,520
+So, Because of this,
+Python allows you to use double quotes.
+
+24
+00:01:42,520 --> 00:01:45,750
+And now a sunny_greeting.
+
+25
+00:01:45,750 --> 00:01:49,691
+There's that, and
+a storm_greeting, is all wet.
+
+26
+00:01:49,691 --> 00:01:50,924
+We have another choice.
+
+27
+00:01:53,565 --> 00:01:57,048
+Instead of using the double
+quotes on this string,
+
+28
+00:01:57,048 --> 00:02:02,915
+we are allowed to use what's called
+the escape character, an escape sequence.
+
+29
+00:02:02,915 --> 00:02:07,165
+If we use a backslash, you'll notice first
+that the string is turned all green.
+
+30
+00:02:07,165 --> 00:02:10,206
+And when I hit return,
+what we're going to see is that
+
+31
+00:02:10,206 --> 00:02:14,273
+the string is going to appear but
+we're not going to see the backslash.
+
+32
+00:02:14,273 --> 00:02:19,720
+Furthermore, the single quote
+markers on the beginning and
+
+33
+00:02:19,720 --> 00:02:24,434
+end of the string will be
+turned into double quotes.
+
+34
+00:02:28,319 --> 00:02:31,473
+We can concatenate strings
+using operator plus.
+
+35
+00:02:37,823 --> 00:02:40,212
+Notice that we have to
+put in our own spaces.
+
+36
+00:02:49,478 --> 00:02:54,210
+With this, we can write a version of
+Mad Libs where we ask a friend for a noun.
+
+37
+00:02:54,210 --> 00:02:55,932
+Let's say they picked earthworm.
+
+38
+00:02:55,932 --> 00:02:58,105
+So we're going to have
+the start of a puzzle.
+
+39
+00:03:03,143 --> 00:03:10,230
+And we would like to end this,
+let's say with an exclamation mark.
+
+40
+00:03:10,230 --> 00:03:13,430
+And the noun they picked is earthworm.
+
+41
+00:03:15,180 --> 00:03:16,137
+Now let’s have them together.
+
+42
+00:03:26,286 --> 00:03:34,054
+We can build up a repeated string
+using the multiplication operator.
+
+43
+00:03:34,054 --> 00:03:37,306
+And as with regular math, multiplication
+has precedence over addition.
+
+44
+00:03:44,036 --> 00:03:45,665
+We can override this using parenthesis.
+
+45
+00:03:54,478 --> 00:03:57,720
+We can't, however,
+add a string to an int or a float.
+
+46
+00:04:03,570 --> 00:04:06,386
+Can't convert float
+object to str implicitly.
+
+47
+00:04:06,386 --> 00:04:10,940
+Sends a little danger,
+notice that it's a TypeError.
+
+48
+00:04:10,940 --> 00:04:14,420
+You'll see in a later lecture how
+to combine strings and numbers.
+
+49
+00:04:14,420 --> 00:04:15,430
+That'll be coming up soon.
+
+50
+00:04:16,600 --> 00:04:21,770
+We can't multiply strings either, even
+if that string has a number inside it.
+
+51
+00:04:23,100 --> 00:04:26,535
+Can't multiply sequence
+by non-int of type 'str'.
+
+52
+00:04:26,535 --> 00:04:29,939
+Other operators won't work.
+
+53
+00:04:29,939 --> 00:04:35,491
+TypeError: unsupported operand type(s) for
+-: 'str' and 'str'.
+
+54
+00:04:35,491 --> 00:04:40,881
+We can't use two strings
+together with subtraction.
+
+55
+00:04:40,881 --> 00:04:42,221
+We can't divide either.
+
+56
+00:04:42,221 --> 00:04:49,674
+Unsupported operand types for
+division, for raising to a power.
+
+57
+00:04:49,674 --> 00:04:52,553
+Notice that every one of
+these is a type error.

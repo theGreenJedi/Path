@@ -1,0 +1,700 @@
+1
+00:00:01,500 --> 00:00:06,540
+Earlier we saw that each character of
+a string has an index associated with it.
+
+2
+00:00:06,540 --> 00:00:10,590
+And we learned how to access
+each character using its index.
+
+3
+00:00:10,590 --> 00:00:12,770
+In this lecture we will
+use something called a for
+
+4
+00:00:12,770 --> 00:00:18,240
+loop to access the characters of
+a string in turn, one at a time.
+
+5
+00:00:18,240 --> 00:00:23,606
+To begin I'm going to make
+an example string, hi there.
+
+6
+00:00:23,606 --> 00:00:26,184
+And we'll use this string in our first for
+
+7
+00:00:26,184 --> 00:00:30,320
+loop where we're going to print
+each character of it one at a time.
+
+8
+00:00:36,100 --> 00:00:41,810
+Char, that variable C-H-A-R,
+is short for character.
+
+9
+00:00:41,810 --> 00:00:44,050
+And it's just a variable name.
+
+10
+00:00:44,050 --> 00:00:48,330
+The value of char will
+change as the loop executes.
+
+11
+00:00:48,330 --> 00:00:54,150
+In the first iteration of the loop,
+char gets the value of s at position zero,
+
+12
+00:00:54,150 --> 00:00:57,410
+which is h, and then h is printed.
+
+13
+00:00:59,620 --> 00:01:03,930
+Through the next iteration of
+the loop char's value changes, so
+
+14
+00:01:03,930 --> 00:01:08,410
+char refers now to the character
+acquisition 1 of s, which is i.
+
+15
+00:01:09,740 --> 00:01:10,890
+And i is printed.
+
+16
+00:01:13,420 --> 00:01:18,270
+Through the third iteration of the loop,
+char gets the value at position
+
+17
+00:01:18,270 --> 00:01:22,940
+two of s, which is a space,
+and so that space is printed.
+
+18
+00:01:24,969 --> 00:01:29,059
+And this pattern continues until
+the end of the string is reached.
+
+19
+00:01:29,059 --> 00:01:32,230
+So each character of s is
+printed one at a time.
+
+20
+00:01:34,290 --> 00:01:35,900
+Char is a variable name.
+
+21
+00:01:35,900 --> 00:01:38,350
+We could have easily
+chosen something else.
+
+22
+00:01:38,350 --> 00:01:41,220
+For example, this is equivalent.
+
+23
+00:01:41,220 --> 00:01:44,870
+For banana in s, print banana.
+
+24
+00:01:46,980 --> 00:01:49,870
+Of course, it's best to pick
+a meaningful variable name
+
+25
+00:01:49,870 --> 00:01:52,549
+that indicates what it is
+that the variable represents.
+
+26
+00:01:54,396 --> 00:01:57,159
+Here's another for loop.
+
+27
+00:01:57,159 --> 00:02:02,139
+In this loop,
+there are two print statements.
+
+28
+00:02:02,139 --> 00:02:05,760
+So the variable char,
+is printed two times.
+
+29
+00:02:05,760 --> 00:02:10,040
+Initially, to the first iteration
+of the loop, char gets the value h.
+
+30
+00:02:11,340 --> 00:02:15,390
+And h is printed twice,
+then char gets i and
+
+31
+00:02:15,390 --> 00:02:20,050
+i is printed twice and so on until
+the end of the string s is reached.
+
+32
+00:02:25,767 --> 00:02:28,770
+We will now use our for
+loop to solve a problem.
+
+33
+00:02:28,770 --> 00:02:33,260
+The first problem that we'll tackle is to
+count the number of vowels in a string.
+
+34
+00:02:34,380 --> 00:02:38,310
+I'm going to start by writing
+a couple of example function calls.
+
+35
+00:02:39,310 --> 00:02:43,993
+I'm going to name
+the function count_vowels,
+
+36
+00:02:43,993 --> 00:02:48,113
+and it will take a single string argument.
+
+37
+00:02:48,113 --> 00:02:53,510
+The first example uses
+Happy Anniversary as the argument.
+
+38
+00:02:53,510 --> 00:02:56,035
+And in that case,
+count vowels should return five.
+
+39
+00:02:56,035 --> 00:03:00,113
+[SOUND] The next string, xyz,
+
+40
+00:03:00,113 --> 00:03:04,681
+doesn't contain any vowels, so
+
+41
+00:03:04,681 --> 00:03:09,585
+this function should return zero.
+
+42
+00:03:09,585 --> 00:03:14,172
+Let's add the the type contract,
+there's one string parameter, and
+
+43
+00:03:14,172 --> 00:03:16,090
+the function returns an int.
+
+44
+00:03:18,340 --> 00:03:20,050
+And now let's write the function header.
+
+45
+00:03:21,210 --> 00:03:24,210
+The name of the function is count_vowels.
+
+46
+00:03:24,210 --> 00:03:25,980
+And it has one parameter.
+
+47
+00:03:25,980 --> 00:03:28,230
+I'm going to name that parameter s.
+
+48
+00:03:31,471 --> 00:03:36,974
+And the job of this function is to
+return the number of vowels in s.
+
+49
+00:03:40,097 --> 00:03:44,651
+You may have noticed the example function
+calls that we are not including y, so
+
+50
+00:03:44,651 --> 00:03:47,260
+I need to add that to my description.
+
+51
+00:03:47,260 --> 00:03:51,459
+Do not treat the letter y as a vowel.
+
+52
+00:03:56,800 --> 00:03:58,710
+Now we can write the body of the function.
+
+53
+00:04:00,880 --> 00:04:05,580
+Before we write this code I want to start
+by thinking about how we determined
+
+54
+00:04:05,580 --> 00:04:09,270
+what the response of the example
+function call should be.
+
+55
+00:04:09,270 --> 00:04:13,520
+What I did was examine each character
+of the string one at a time
+
+56
+00:04:13,520 --> 00:04:14,420
+beginning with the h.
+
+57
+00:04:14,420 --> 00:04:19,161
+So then I looked at the h and
+decided it was not a vowel but
+
+58
+00:04:19,161 --> 00:04:22,060
+the a is, so I kept track of that.
+
+59
+00:04:22,060 --> 00:04:27,416
+Then I looked at ppy space and encountered
+
+60
+00:04:27,416 --> 00:04:32,771
+another vowel, nni is another one, ve,
+
+61
+00:04:32,771 --> 00:04:37,679
+and rs then another a, that's five.
+
+62
+00:04:37,679 --> 00:04:40,117
+RY exclamation mark.
+
+63
+00:04:40,117 --> 00:04:45,590
+So looking character by character at the
+string we see that there are five vowels.
+
+64
+00:04:47,630 --> 00:04:50,540
+We will model our program after
+the approach that we just took.
+
+65
+00:04:51,570 --> 00:04:55,630
+So we want to keep track of the number
+of vowels that we've seen so far.
+
+66
+00:04:55,630 --> 00:04:58,830
+And initially, we've seen zero vowels.
+
+67
+00:04:58,830 --> 00:05:00,830
+So I'm going to use
+nun_vowels to keep track.
+
+68
+00:05:02,090 --> 00:05:06,580
+We pass over the string examining
+one character at a time.
+
+69
+00:05:06,580 --> 00:05:08,650
+And we can do this using a for loop.
+
+70
+00:05:08,650 --> 00:05:13,470
+So for each character in s we want to
+check to see whether that character
+
+71
+00:05:13,470 --> 00:05:14,450
+is a vowel or not.
+
+72
+00:05:15,710 --> 00:05:20,130
+I can use an if statement
+to check that condition.
+
+73
+00:05:20,130 --> 00:05:26,200
+So if a character appears in
+the string aeiou lowercase and
+
+74
+00:05:26,200 --> 00:05:30,440
+AEIOU uppercase then it is a vowel.
+
+75
+00:05:30,440 --> 00:05:36,732
+And in that case we want to
+increment the value of nun_vowels.
+
+76
+00:05:36,732 --> 00:05:41,652
+So nun_vowels will get it's
+
+77
+00:05:41,652 --> 00:05:45,594
+current value plus 1.
+
+78
+00:05:45,594 --> 00:05:50,583
+After this loop has finished executing,
+and we've passed over each character of
+
+79
+00:05:50,583 --> 00:05:55,137
+the string, nun_vowels will contain
+the total number of vowels in s, and
+
+80
+00:05:55,137 --> 00:05:57,830
+that is the total value
+that we will return.
+
+81
+00:06:00,750 --> 00:06:04,970
+Let's stop for a moment and
+think about this assignment statement.
+
+82
+00:06:04,970 --> 00:06:08,480
+Notice on the right-hand side
+of this assignment statement
+
+83
+00:06:08,480 --> 00:06:12,210
+the expression involves
+the variable nun_vowels.
+
+84
+00:06:12,210 --> 00:06:18,520
+Imagine that the nun_vowels statement that
+occurred outside the loop was not there.
+
+85
+00:06:20,780 --> 00:06:26,640
+When we hit this assignment statement and
+look up the value of nun_vowels
+
+86
+00:06:26,640 --> 00:06:32,090
+a name error would occur, so
+that assignment statement that we
+
+87
+00:06:32,090 --> 00:06:36,530
+used initially to initialize nun_vowels
+to zero is crucially important.
+
+88
+00:06:39,870 --> 00:06:43,540
+Now let's run this code,
+checking our example calls.
+
+89
+00:06:44,920 --> 00:06:50,340
+So we will first run the module,
+
+90
+00:06:50,340 --> 00:06:53,540
+and then in the shell call count vowels.
+
+91
+00:06:53,540 --> 00:07:00,312
+With Happy Anniversary we got five,
+and with xyz we get zero.
+
+92
+00:07:04,412 --> 00:07:09,890
+The variable num_vowels is an accumulator,
+because it accumulates information.
+
+93
+00:07:09,890 --> 00:07:12,100
+It has an initial value of zero and
+
+94
+00:07:12,100 --> 00:07:15,270
+it's value goes up by one
+whenever a vowel is found.
+
+95
+00:07:16,300 --> 00:07:19,760
+The loop ends after every letter
+in x has been examined and
+
+96
+00:07:19,760 --> 00:07:20,960
+all vowels have been counted.
+
+97
+00:07:22,080 --> 00:07:25,710
+Accumulators are not necessarily numeric
+as we'll see in the next problem.
+
+98
+00:07:27,470 --> 00:07:30,930
+Our next task is to return a string
+
+99
+00:07:30,930 --> 00:07:33,270
+containing all of the vowels
+in a given string.
+
+100
+00:07:34,970 --> 00:07:37,660
+I'm going to start with
+example calls again.
+
+101
+00:07:38,740 --> 00:07:42,410
+And we can use the same examples as
+we did in our previous function.
+
+102
+00:07:43,850 --> 00:07:47,680
+So, this function's name
+will be collect_vowels
+
+103
+00:07:47,680 --> 00:07:50,570
+because we are going to
+accumulate them in a string.
+
+104
+00:07:53,921 --> 00:07:57,785
+And given the string, Happy Anniversary,
+
+105
+00:07:57,785 --> 00:08:02,903
+this should return a string
+with the letters lowercase a,
+
+106
+00:08:02,903 --> 00:08:06,570
+uppercase a, I, E, lowercase a again.
+
+107
+00:08:12,700 --> 00:08:15,471
+In the case where there
+are no vowels in the string,
+
+108
+00:08:15,471 --> 00:08:17,710
+it should return the empty string.
+
+109
+00:08:17,710 --> 00:08:20,590
+So it's just an open quotation mark,
+closed quotation mark.
+
+110
+00:08:24,406 --> 00:08:30,660
+The type contract, this takes a string
+parameter and returns a string.
+
+111
+00:08:32,900 --> 00:08:37,140
+And the name of the function as
+we've seen is collect_vowels.
+
+112
+00:08:37,140 --> 00:08:40,800
+The name of the parameter,
+again, I will use the name s.
+
+113
+00:08:43,648 --> 00:08:47,950
+And the job of this function is
+to return the vowels from s.
+
+114
+00:08:56,094 --> 00:08:58,780
+Y isn't treated as a vowel
+in this case either.
+
+115
+00:09:00,590 --> 00:09:04,540
+Like we did with count_vowels I want to
+start by considering how we solved this
+
+116
+00:09:04,540 --> 00:09:08,410
+problem when we were determining what
+the example function call should return.
+
+117
+00:09:10,270 --> 00:09:15,500
+I examined each character of the string
+one at a time, so I'm looking first the H,
+
+118
+00:09:15,500 --> 00:09:19,960
+and then the a, and whenever I encountered
+a vowel I kept track of that so
+
+119
+00:09:19,960 --> 00:09:24,730
+I have an a P-P-Y space and
+then another a.
+
+120
+00:09:24,730 --> 00:09:27,935
+So I want to keep track
+that I've got those two.
+
+121
+00:09:27,935 --> 00:09:29,830
+N-N-I and so on.
+
+122
+00:09:32,740 --> 00:09:37,030
+So I look through the string
+character by character and
+
+123
+00:09:37,030 --> 00:09:42,470
+when I find a vowel I add it to the set
+of characters that I've seen so far.
+
+124
+00:09:44,940 --> 00:09:46,370
+Let's implement this function now.
+
+125
+00:09:47,800 --> 00:09:51,270
+Like before we need to
+accumulate some information.
+
+126
+00:09:51,270 --> 00:09:52,990
+Before it was an integer,
+
+127
+00:09:52,990 --> 00:09:56,970
+this time we want to accumulate
+some information in a string.
+
+128
+00:09:56,970 --> 00:10:00,290
+So I'll use the variable
+vowels to refer to a string.
+
+129
+00:10:00,290 --> 00:10:02,520
+And that string will initially be empty.
+
+130
+00:10:02,520 --> 00:10:04,040
+I haven't see any vowels so far.
+
+131
+00:10:05,580 --> 00:10:10,042
+We're going to examine the string
+ask character by character using for
+
+132
+00:10:10,042 --> 00:10:13,850
+loop, and we want to check to see
+whether that character is a vowel
+
+133
+00:10:13,850 --> 00:10:16,570
+using the exact same approach
+that we did the first time.
+
+134
+00:10:19,560 --> 00:10:21,145
+If the character is a vowel,
+
+135
+00:10:21,145 --> 00:10:25,270
+I want to add it to the set of
+vowels that I've seen so far.
+
+136
+00:10:25,270 --> 00:10:28,530
+So my vowels variable will refer to
+
+137
+00:10:28,530 --> 00:10:33,160
+its original value plus
+the character that we've just seen.
+
+138
+00:10:33,160 --> 00:10:35,770
+I'm using this concatenation operator
+
+139
+00:10:35,770 --> 00:10:38,929
+to add the character to
+the current string of vowels.
+
+140
+00:10:40,000 --> 00:10:44,350
+At the end of the function, once the for
+loop has finished executing and
+
+141
+00:10:44,350 --> 00:10:48,430
+each character from the string has
+been examined, vowels will refer to
+
+142
+00:10:48,430 --> 00:10:52,850
+a string containing each of the vowels
+from s and that is what will be returned.
+
+143
+00:10:55,920 --> 00:11:01,350
+We need to test the function so
+we will run the module, and
+
+144
+00:11:01,350 --> 00:11:04,650
+then call the example
+function calls in the shell.
+
+145
+00:11:06,150 --> 00:11:10,030
+Collect vowels returns
+a string that we expect and
+
+146
+00:11:10,030 --> 00:11:15,430
+this call with a different argument
+also returns the string that we expect.
+
+147
+00:11:17,410 --> 00:11:22,680
+Like the variable nun_vowels, the variable
+vowels is also an accumulator.
+
+148
+00:11:22,680 --> 00:11:27,642
+As it is accumulating a string over
+the course of the function's execution.
+
+149
+00:11:27,642 --> 00:11:32,450
+Like nun_vowels that started at zero and
+grew, vowel starts out as empty, and
+
+150
+00:11:32,450 --> 00:11:33,240
+also grows.

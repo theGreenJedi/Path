@@ -1,0 +1,450 @@
+1
+00:00:01,470 --> 00:00:05,950
+In this lecture, we're going to show you
+a series of steps called the Design Recipe
+
+2
+00:00:05,950 --> 00:00:07,980
+that you can use to write
+your own functions.
+
+3
+00:00:09,180 --> 00:00:11,250
+Here is our triangular function.
+
+4
+00:00:11,250 --> 00:00:14,439
+We've added one part to
+the doc strip examples of use.
+
+5
+00:00:14,439 --> 00:00:17,100
+And expected vector in values.
+
+6
+00:00:17,100 --> 00:00:19,360
+This function definition has five parts.
+
+7
+00:00:19,360 --> 00:00:23,490
+It has the header, which includes
+the function name and the parameters.
+
+8
+00:00:23,490 --> 00:00:25,950
+It has the type contract, the types or
+
+9
+00:00:25,950 --> 00:00:29,140
+values that are expected to
+be past to the parameters.
+
+10
+00:00:29,140 --> 00:00:31,580
+As well as the returned
+type of the function.
+
+11
+00:00:31,580 --> 00:00:33,490
+It has the description.
+
+12
+00:00:33,490 --> 00:00:37,300
+It has a couple of examples
+of use of this function.
+
+13
+00:00:37,300 --> 00:00:39,270
+And last, it has the body of the function.
+
+14
+00:00:40,480 --> 00:00:43,670
+Our design recipe helps you
+develop those five parts.
+
+15
+00:00:43,670 --> 00:00:47,050
+Plus one more where we test that our
+function works, once we've written it.
+
+16
+00:00:48,100 --> 00:00:51,793
+We'll explain the design recipe
+as we develop another function.
+
+17
+00:00:55,986 --> 00:00:57,740
+Here is the problem we'll work on.
+
+18
+00:00:57,740 --> 00:01:00,360
+The United States measures
+temperature in Fahrenheit and
+
+19
+00:01:00,360 --> 00:01:02,300
+Canada measures it in Celsius.
+
+20
+00:01:02,300 --> 00:01:06,000
+When traveling between the two countries
+it helps to have a conversion function.
+
+21
+00:01:06,000 --> 00:01:09,790
+We'll write a function that converts
+from Fahrenheit to Celsius.
+
+22
+00:01:09,790 --> 00:01:12,630
+The first step we will do is to
+come up with some examples of
+
+23
+00:01:12,630 --> 00:01:14,970
+using your function that
+you're about to write.
+
+24
+00:01:14,970 --> 00:01:17,620
+Think about what you want your
+function to do and type one or
+
+25
+00:01:17,620 --> 00:01:19,900
+two examples of calls on
+the function you want to write.
+
+26
+00:01:20,900 --> 00:01:22,930
+You'll need to think of a name for
+your function.
+
+27
+00:01:22,930 --> 00:01:24,730
+You can always change it later.
+
+28
+00:01:24,730 --> 00:01:28,820
+Function names are often verbs or
+verb phrases because they do things.
+
+29
+00:01:28,820 --> 00:01:33,250
+So, if you're stuck enter the question,
+what does the function do?
+
+30
+00:01:33,250 --> 00:01:36,975
+Our answer here is convert
+from Fahrenheit to Celsius.
+
+31
+00:01:36,975 --> 00:01:40,335
+But that's pretty long, so
+I'll use convert to Celsius.
+
+32
+00:01:40,335 --> 00:01:43,080
+You can always improve the name later.
+
+33
+00:01:43,080 --> 00:01:47,315
+What do we want to happen when we
+call convert to Celsius on 32 degrees
+
+34
+00:01:47,315 --> 00:01:48,300
+Fahrenheit?
+
+35
+00:01:48,300 --> 00:01:49,510
+We hope to get back zero.
+
+36
+00:01:50,520 --> 00:01:52,460
+We're going to add the angle brackets, so
+
+37
+00:01:52,460 --> 00:01:54,439
+that it looks like it was
+typed in the Python Shell.
+
+38
+00:01:55,700 --> 00:01:58,960
+Let's add one more example to
+convert at the boiling point.
+
+39
+00:02:00,330 --> 00:02:03,410
+The next step is to figure
+out the type contract.
+
+40
+00:02:03,410 --> 00:02:07,535
+What types are the parameters and
+what type is the value that gets returned.
+
+41
+00:02:09,160 --> 00:02:13,580
+It looks like we want to convert
+to Celsius to work with integers.
+
+42
+00:02:13,580 --> 00:02:16,730
+But we can imagine that it
+should work with floats as well.
+
+43
+00:02:16,730 --> 00:02:21,360
+We're going to use the word number,
+to indicate that it can handle either,
+
+44
+00:02:21,360 --> 00:02:25,270
+and presumably,
+it will return a number as well.
+
+45
+00:02:25,270 --> 00:02:29,820
+Now that you've written some calls and you
+have guesses to what the type should be.
+
+46
+00:02:29,820 --> 00:02:32,420
+It's time to write
+the header of the function.
+
+47
+00:02:32,420 --> 00:02:34,130
+Pick a meaningful parameter name so
+
+48
+00:02:34,130 --> 00:02:38,760
+that other programmers and you have an
+easier time understanding your function.
+
+49
+00:02:38,760 --> 00:02:41,360
+You can also modify your
+function name here if you like.
+
+50
+00:02:43,010 --> 00:02:44,520
+Let's fill in what we know for the header.
+
+51
+00:02:45,590 --> 00:02:49,140
+We know that the function
+name is convert_to Celsius.
+
+52
+00:02:51,320 --> 00:02:54,240
+And we know that our parameter is
+the number of degrees Fahrenheit,
+
+53
+00:02:54,240 --> 00:02:58,169
+so that is Fahrenheit
+as our parameter name.
+
+54
+00:03:00,260 --> 00:03:02,760
+Everything below is supposed
+to be in a dock string so
+
+55
+00:03:02,760 --> 00:03:04,725
+let's take care of that now.
+
+56
+00:03:04,725 --> 00:03:10,336
+[SOUND] By now you should have a very good
+idea of what you want your function to do.
+
+57
+00:03:10,336 --> 00:03:11,540
+It's time to write a description.
+
+58
+00:03:12,900 --> 00:03:14,190
+Does our function do,
+
+59
+00:03:14,190 --> 00:03:18,400
+return the number of Celsius degrees
+equivalent to Fahrenheit degrees.
+
+60
+00:03:18,400 --> 00:03:21,310
+Note that we've mentioned
+the perimeter explicitly and
+
+61
+00:03:21,310 --> 00:03:23,700
+we've also described the return value.
+
+62
+00:03:23,700 --> 00:03:27,332
+This is very important
+in all documentation.
+
+63
+00:03:30,764 --> 00:03:33,840
+Now that you have a strong idea
+of what your function should do.
+
+64
+00:03:33,840 --> 00:03:36,270
+And you've decided on the function and
+parameter names.
+
+65
+00:03:36,270 --> 00:03:38,320
+You can write the code for the function.
+
+66
+00:03:38,320 --> 00:03:42,030
+This will be much easier to do if you
+spent time thinking about the examples,
+
+67
+00:03:42,030 --> 00:03:44,167
+contract, header, and the description.
+
+68
+00:03:45,200 --> 00:03:48,520
+As we learned in school,
+we subtract 32 from Fahrenheit.
+
+69
+00:03:49,550 --> 00:03:52,580
+And then we multiply by five-ninths.
+
+70
+00:03:52,580 --> 00:03:55,030
+We haven't saved this yet,
+and we really should.
+
+71
+00:03:56,260 --> 00:04:00,617
+We're going to call this one,
+
+72
+00:04:00,617 --> 00:04:04,310
+[SOUND] temperature.pi.
+
+73
+00:04:04,310 --> 00:04:07,090
+It's time to test our
+function on the examples.
+
+74
+00:04:07,090 --> 00:04:09,580
+Since you've already figured out
+what the return value should be.
+
+75
+00:04:09,580 --> 00:04:13,525
+You can tell right away if your code,
+or perhaps the examples, are incorrect.
+
+76
+00:04:16,231 --> 00:04:17,390
+We move on this module.
+
+77
+00:04:18,970 --> 00:04:22,280
+Set up the Windows so
+we can see both of them at once.
+
+78
+00:04:22,280 --> 00:04:26,930
+And then we can just copy and
+paste our examples.
+
+79
+00:04:28,640 --> 00:04:34,900
+And we see that we are expecting 0 but,
+that we got back 14.2 repeating.
+
+80
+00:04:36,180 --> 00:04:37,484
+What about the other one?
+
+81
+00:04:42,308 --> 00:04:43,870
+No, that's not right either.
+
+82
+00:04:45,360 --> 00:04:47,400
+You may have already seen the problem.
+
+83
+00:04:47,400 --> 00:04:51,570
+Subtraction has lower precedence than
+either multiplication or division.
+
+84
+00:04:51,570 --> 00:04:57,284
+And so the subtraction is happening
+last after we're calculating,
+
+85
+00:04:57,284 --> 00:04:59,656
+32 times 5 divided by 9.
+
+86
+00:04:59,656 --> 00:05:05,394
+We fix this by adding parenthesis,
+
+87
+00:05:05,394 --> 00:05:09,034
+saving, rerunning.
+
+88
+00:05:09,034 --> 00:05:11,094
+And then trying our examples again
+
+89
+00:05:16,368 --> 00:05:18,630
+We almost have what we
+expected on our examples.
+
+90
+00:05:18,630 --> 00:05:22,240
+Except we're getting back
+a float instead of an int.
+
+91
+00:05:22,240 --> 00:05:25,930
+This is because division
+always produces a float.
+
+92
+00:05:25,930 --> 00:05:31,170
+And various operators produce a float
+if either operand isn't of float.
+
+93
+00:05:31,170 --> 00:05:35,870
+The problem is not with our calculation,
+it's in our examples and in our contract.
+
+94
+00:05:35,870 --> 00:05:38,320
+A number is too general of a return type.
+
+95
+00:05:39,500 --> 00:05:40,155
+We'll fix both.
+
+96
+00:05:40,155 --> 00:05:46,260
+[SOUND]
+Let's
+
+97
+00:05:46,260 --> 00:05:51,450
+run our module one more time, call help
+on our function and revel in our clarity.

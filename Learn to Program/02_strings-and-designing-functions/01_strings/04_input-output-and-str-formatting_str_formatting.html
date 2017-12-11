@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Input/Output and
+        </title>
+    </head>
+    <body>
+        <code>str</code> Formatting <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 4.3 Creating a Multiline String
+                </li>
+                <li>Chapter 4.4 Printing Information
+                </li>
+                <li>Chapter 4.5 Getting Information from the Keyboard
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Input/Output and <code>str</code> Formatting
+        </h1>
+        <h3>
+            Function <code>print</code>
+        </h3>
+        <p>
+            Python has a built-in function named <code>print</code> that displays messages to the user. For example, the following function call displays the string <code>"hello"</code>:
+        </p>
+        <pre>
+&gt;&gt;&gt; print("hello")
+hello
+</pre>In the output above, notice that <code>hello</code> is displayed without the quotation marks. The quotes are only for Python's internal string formatting and are not seen by the user.
+        <p>
+            The <code>print</code> function may also be called with a mathematical expression for an argument. Python evaluates the mathematical expression first and then displays the resulting value to the user. For example:
+        </p>
+        <pre>
+&gt;&gt;&gt; print(3 + 7 - 3)
+7
+</pre>
+        <p>
+            Finally, <code>print</code> can take in more than one argument. Each pair of arguments is separated by a comma and a space is inserted between them when they are displayed. For example:
+        </p>
+        <pre>
+&gt;&gt;&gt; print("hello", "there")
+hello there
+</pre>
+        <h3>
+            <code>return</code> vs. <code>print</code>
+        </h3>
+        <hr>
+        <b>Recall:</b> The general form of a <code>return</code> statement:
+        <pre>
+return <em>expression</em>
+</pre>
+        <hr>
+        When a <code>return</code> statement executes, the expression is evaluated to produce a memory address.
+        <ul>
+            <li>
+                <i>What is passed back to the caller?</i><br>
+                That memory address is passed back to the caller.
+            </li>
+            <li>
+                <i>What is displayed?</i><br>
+                Nothing!
+            </li>
+        </ul>
+        <p>
+            An example of <code>return</code>:
+        </p>
+        <pre>
+&gt;&gt;&gt; def square_return(num):
+    return num ** 2
+&gt;&gt;&gt; answer_return = square_return(4)  
+&gt;&gt;&gt; answer_return 
+16      
+</pre>
+        <hr>
+        <p>
+            The general form of a <code>print</code> function call:
+        </p>
+        <pre>
+print(<em>arguments</em>)
+</pre>
+        <hr>
+        When a <code>print</code> function call is executed, the argument(s) are evaluated to produce memory address(es).
+        <ul>
+            <li>
+                <i>What is passed back to the caller?</i><br>
+                Nothing!
+            </li>
+            <li>
+                <i>What is displayed?</i><br>
+                The values at those memory address(es) are displayed on the screen.
+            </li>
+        </ul>
+        <hr>
+        <p>
+            An example of <code>print</code>:
+        </p>
+        <pre>
+&gt;&gt;&gt; def square_print(num):
+    print("The square of num is", num ** 2)
+&gt;&gt;&gt; answer_print = square_print(4)
+The square num is 16
+&gt;&gt;&gt; answer_print
+&gt;&gt;&gt;
+</pre>
+        <h3>
+            Function <code>input</code>
+        </h3>
+        <p>
+            The function <code>input</code> is a built-in function that prompts the user to enter some input. The program waits for the user to enter the input, before executing the subsequent instructions. The value returned from this function is <i>always</i> a string. For example:
+        </p>
+        <pre>
+&gt;&gt;&gt; input("What is your name? ")
+What is your name? Jen
+'Jen'
+&gt;&gt;&gt; name = input("What is your name? ")
+What is your name? Jen
+&gt;&gt;&gt; name
+'Jen'
+&gt;&gt;&gt; location = input("What is your location? ")
+What is your location? Toronto
+&gt;&gt;&gt; location
+'Toronto'
+&gt;&gt;&gt; print(name, "lives in", location)
+Jen lives in Toronto
+&gt;&gt;&gt; num_coffee = input("How many cups of coffee? ")
+How many cups of coffee? 2
+&gt;&gt;&gt; num_coffee
+'2'
+</pre>
+        <h3>
+            Operations on strings
+        </h3>
+        <table cellpadding="5px" border="1px">
+            <tr>
+                <td>
+                    Operation
+                </td>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Example
+                </td>
+                <td>
+                    Output
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>str1 + str2</code>
+                </td>
+                <td>
+                    concatenate <code>str1</code> and <code>str1</code>
+                </td>
+                <td>
+                    <code>print('ab' + 'c')</code>
+                </td>
+                <td>
+                    <code>abc</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>str1 * int1</code>
+                </td>
+                <td>
+                    concatenate <code>int1</code> copies of <code>str1</code>
+                </td>
+                <td>
+                    <code>print('a' * 5)</code>
+                </td>
+                <td>
+                    <code>aaaaa</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>int1 * str1</code>
+                </td>
+                <td>
+                    concatenate <code>int1</code> copies of <code>str1</code>
+                </td>
+                <td>
+                    <code>print(4 * 'bc')</code>
+                </td>
+                <td>
+                    <code>bcbcbcbc</code>
+                </td>
+            </tr>
+        </table>
+        <h3>
+            Triple-quoted strings
+        </h3>
+        <p>
+            We have used single- and double- quotes to represent strings. The third string format uses triple-quotes and a triple-quoted string can span multiple lines. For example:
+        </p>
+        <pre>
+&gt;&gt;&gt; print(''' How
+are
+you?''')
+How
+are 
+you?
+</pre>
+        <h3>
+            Escape Sequences
+        </h3>
+        <p>
+            Python has a special character called an <em>escape character</em>: <code>\</code>. When the escape character is used in a string, the character following the escape character is treated differently from normal. The escape character together with the character that follows it is an <em>escape sequence</em>. The table below contains some of Python's commonly used escape sequences.
+        </p>
+        <table cellpadding="5px" border="1px">
+            <tr>
+                <td>
+                    Escape Sequence
+                </td>
+                <td>
+                    Name
+                </td>
+                <td>
+                    Example
+                </td>
+                <td>
+                    Output
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>\n</code>
+                </td>
+                <td>
+                    newline (ASCII linefeed - LF)
+                </td>
+                <td>
+                    <code>print('''How<br>
+                    are<br>
+                    you?''')</code>
+                </td>
+                <td>
+                    <code>How<br>
+                    are<br>
+                    you?</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>\t</code>
+                </td>
+                <td>
+                    tab (ASCII horizontal tab - TAB)
+                </td>
+                <td>
+                    <code>print('3\t4\t5')</code>
+                </td>
+                <td>
+                    <pre>
+3   4       5
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>\\</code>
+                </td>
+                <td>
+                    backslash (<code>\</code>)
+                </td>
+                <td>
+                    <pre>
+print('\\')
+</pre>
+                </td>
+                <td>
+                    <pre>
+\
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>\'</code>
+                </td>
+                <td>
+                    single quote (<code>'</code>)
+                </td>
+                <td>
+                    <pre>
+print('don\'t')
+</pre>
+                </td>
+                <td>
+                    <pre>
+don't
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>\"</code>
+                </td>
+                <td>
+                    double quote (<code>"</code>)
+                </td>
+                <td>
+                    <pre>
+print("He says, \"hi\".")
+</pre>
+                </td>
+                <td>
+                    <pre>
+He says, "hi".
+</pre>
+                </td>
+            </tr>
+        </table><br>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

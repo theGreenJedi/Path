@@ -1,0 +1,442 @@
+1
+00:00:00,012 --> 00:00:02,210
+Hi there.
+
+2
+00:00:02,210 --> 00:00:06,380
+In addition to using Python's built-in
+functions, we can also define our own.
+
+3
+00:00:06,380 --> 00:00:08,290
+And that's what this lecture's all about.
+
+4
+00:00:08,290 --> 00:00:14,400
+Let's start with an example from math.
+Function f of
+
+5
+00:00:14,400 --> 00:00:19,871
+x, takes x and squares it.
+Here's how the function looks in Python.
+
+6
+00:00:19,871 --> 00:00:19,871
+[SOUND].
+
+7
+00:00:19,871 --> 00:00:25,475
+Def indicates to Python
+
+8
+00:00:25,475 --> 00:00:30,799
+that we're defining a
+
+9
+00:00:30,799 --> 00:00:37,246
+function.
+F is the name of the
+
+10
+00:00:37,246 --> 00:00:42,880
+function.
+X is call the parameter if the function.
+
+11
+00:00:42,880 --> 00:00:45,470
+It's a variable whose value will be
+supplied
+
+12
+00:00:45,470 --> 00:00:46,818
+when the function is called.
+
+13
+00:00:46,818 --> 00:00:52,750
+This colon indicates to Python that we're
+about
+
+14
+00:00:52,750 --> 00:00:55,080
+to type what happens when the function is
+called.
+
+15
+00:00:56,810 --> 00:01:01,720
+And the word Return Indicates that we're
+passing back a value.
+
+16
+00:01:03,770 --> 00:01:05,730
+The general form of a return statement
+
+17
+00:01:05,730 --> 00:01:08,710
+is the word return, followed by an
+expression.
+
+18
+00:01:08,710 --> 00:01:10,850
+And the rules for executing a return
+statement
+
+19
+00:01:10,850 --> 00:01:15,250
+are, first, evaluate the expression,
+producing a memory address.
+
+20
+00:01:15,250 --> 00:01:19,320
+And second, pass back that memory address
+to the caller.
+
+21
+00:01:19,320 --> 00:01:23,460
+The general form of a function definition
+is the word def, followed by the name of
+
+22
+00:01:23,460 --> 00:01:29,440
+the function and then zero or more
+parameters separated by comas.
+
+23
+00:01:29,440 --> 00:01:32,200
+Next comes the body of the function, which
+is
+
+24
+00:01:32,200 --> 00:01:35,820
+one or more statements often ending with a
+return statement.
+
+25
+00:01:35,820 --> 00:01:37,939
+Notice that the body is indented.
+
+26
+00:01:40,160 --> 00:01:45,390
+Let's call the function f.
+So we'll pass in an argument 3.
+
+27
+00:01:45,390 --> 00:01:48,000
+When the function is called, the perimeter
+acts as a
+
+28
+00:01:48,000 --> 00:01:48,400
+[INAUDIBLE]
+
+29
+00:01:48,400 --> 00:01:51,110
+memory address of the value 3.
+
+30
+00:01:51,110 --> 00:01:57,020
+We can think of this, actually, like an
+assignment statement, where x gets 3.
+
+31
+00:01:57,020 --> 00:02:00,440
+I'll hit Enter, so the function call is
+executed.
+
+32
+00:02:00,440 --> 00:02:06,340
+And the result of the function call is
+that the value 9 is returned.
+
+33
+00:02:06,340 --> 00:02:08,620
+Function calls are actually expressions,
+so we
+
+34
+00:02:08,620 --> 00:02:10,490
+can use a variable to store the result.
+
+35
+00:02:12,040 --> 00:02:14,290
+Let's create a variable result
+
+36
+00:02:14,290 --> 00:02:16,863
+that gets the result of calling f of 3.
+
+37
+00:02:18,060 --> 00:02:21,150
+Recall the rules of executing an
+assignment statement.
+
+38
+00:02:21,150 --> 00:02:23,385
+Which are that first, the expression on
+the
+
+39
+00:02:23,385 --> 00:02:26,592
+right-hand side is evaluated, producing a
+memory address.
+
+40
+00:02:26,592 --> 00:02:30,265
+And second, the memory address is stored
+in the variable.
+
+41
+00:02:30,265 --> 00:02:35,330
+The result gets the memory address of the
+call to f of 3.
+
+42
+00:02:35,330 --> 00:02:39,293
+So in other words, result gets 9.
+
+43
+00:02:41,530 --> 00:02:47,439
+Let's define another function.
+Recall from the variables lecture
+
+44
+00:02:47,439 --> 00:02:52,782
+how to calculate the area of a triangle.
+Take the
+
+45
+00:02:52,782 --> 00:02:59,340
+base, multiply it by the height, and then
+divide by 2.
+
+46
+00:02:59,340 --> 00:03:02,610
+We'll now write a function to calculate
+the area of a triangle.
+
+47
+00:03:02,610 --> 00:03:06,400
+We start with the word def, and next comes
+the function name,
+
+48
+00:03:06,400 --> 00:03:07,770
+let's use the name area.
+
+49
+00:03:09,760 --> 00:03:12,420
+After the function name and the parameters
+to the
+
+50
+00:03:12,420 --> 00:03:16,327
+function, in this case we will have two
+parameters.
+
+51
+00:03:16,327 --> 00:03:18,415
+The base and the height.
+
+52
+00:03:18,415 --> 00:03:22,880
+We end this line with a colon, and then we
+write the body of the function.
+
+53
+00:03:22,880 --> 00:03:32,880
+We are going to return the base multiplied
+by the height divided by 2.
+
+54
+00:03:36,380 --> 00:03:40,390
+Let's call the function, we'll execute
+area passing in two arguments.
+
+55
+00:03:40,390 --> 00:03:41,223
+3 and 4.
+
+56
+00:03:41,223 --> 00:03:47,173
+And base, that parameter gets 3, the
+parameter height gets 4.
+
+57
+00:03:47,173 --> 00:03:52,052
+And then that expression is evaluated base
+times
+
+58
+00:03:52,052 --> 00:03:57,480
+height, divided by 2 and return.
+So 6.0 is returned by the function.
+
+59
+00:03:59,080 --> 00:04:02,920
+Let's call it one more time, passing in an
+int and
+
+60
+00:04:02,920 --> 00:04:09,540
+a float this time.
+The extended rules for executing
+
+61
+00:04:09,540 --> 00:04:15,320
+a function call are to first evaluate, the
+arguments to produce memory addresses.
+
+62
+00:04:15,320 --> 00:04:19,630
+Next, store those memory addresses in the
+corresponding parameters.
+
+63
+00:04:19,630 --> 00:04:24,230
+And then execute the body of the function.
+Now, let's restart the Python shell.
+
+64
+00:04:24,230 --> 00:04:27,420
+We go to the shell menu, and click
+Restart.
+
+65
+00:04:29,120 --> 00:04:31,200
+And we've just lost all the work that we
+
+66
+00:04:31,200 --> 00:04:34,200
+did in the shell, including the area
+function definition.
+
+67
+00:04:34,200 --> 00:04:40,200
+If we try to call area, we get a name
+error, because area is not defined.
+
+68
+00:04:42,770 --> 00:04:45,250
+Most Python programs are saved in files.
+
+69
+00:04:45,250 --> 00:04:49,524
+Let's create a new file, and save our
+function definition, area, in it.
+
+70
+00:04:49,524 --> 00:04:57,940
+Go to File > New Window.
+Place our function definition in there.
+
+71
+00:04:57,940 --> 00:05:03,520
+And, we'll save this file as triangle.py.
+All of our Python programs
+
+72
+00:05:03,520 --> 00:05:08,735
+will be saved in .py files.
+Just resize the windows,
+
+73
+00:05:08,735 --> 00:05:13,760
+so we can see the shell on the left-hand
+
+74
+00:05:13,760 --> 00:05:18,624
+side, and our triangle.py file on the
+right-hand side.
+
+75
+00:05:19,910 --> 00:05:21,700
+Now that we have our area function
+
+76
+00:05:21,700 --> 00:05:27,210
+definition in Triangle.py, we can run this
+file.
+
+77
+00:05:27,210 --> 00:05:29,260
+So we click Run, and Run Module.
+
+78
+00:05:30,730 --> 00:05:33,940
+That makes the area function definition
+available in the shell.
+
+79
+00:05:33,940 --> 00:05:37,680
+So now, when we call area from the shell,
+it
+
+80
+00:05:37,680 --> 00:05:40,810
+knows what area is, and is able to execute
+that function.
+
+81
+00:05:40,810 --> 00:05:40,810
+[SOUND]
+
+82
+00:05:40,810 --> 00:05:45,670
+We can define more than one function in
+the Triangle.py file.
+
+83
+00:05:45,670 --> 00:05:47,570
+Let's add another function definition.
+
+84
+00:05:47,570 --> 00:05:52,820
+We will define a function to calculate the
+perimeter of a triangle.
+
+85
+00:05:52,820 --> 00:05:58,810
+We'll pass in sides 1, 2, and 3.
+
+86
+00:05:58,810 --> 00:06:01,530
+And the function will return the sum of
+those sides
+
+87
+00:06:01,530 --> 00:06:01,530
+[SOUND]
+
+88
+00:06:01,530 --> 00:06:02,030
+.
+
+89
+00:06:07,380 --> 00:06:11,460
+At this point, I've saved triangle.py and
+if I go back to
+
+90
+00:06:11,460 --> 00:06:16,216
+the shell and execute the function, what
+we'll see is an error.
+
+91
+00:06:16,216 --> 00:06:22,770
+That's because at this point, although the
+function is saved in triangle.py,
+
+92
+00:06:22,770 --> 00:06:28,530
+we have not run Triangle.py, and so the
+shell does not know what perimeter is.
+
+93
+00:06:29,580 --> 00:06:32,730
+Before executing a function in the shell,
+we need to run that module,
+
+94
+00:06:32,730 --> 00:06:39,820
+so I've hit the cmd to run the module, and
+now I can call perimeter, and it executes.

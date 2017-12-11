@@ -1,0 +1,614 @@
+1
+00:00:01,400 --> 00:00:05,970
+Those memory addresses that we've been
+using are about to become really useful.
+
+2
+00:00:05,970 --> 00:00:09,360
+It turns out that you can modify
+the contents of some objects, and
+
+3
+00:00:09,360 --> 00:00:13,529
+without memory addresses, it would be
+really hard to explain what is happening.
+
+4
+00:00:15,580 --> 00:00:19,120
+We'll start by showing that
+list objects can be modified.
+
+5
+00:00:19,120 --> 00:00:21,190
+On line one is an assignment statement.
+
+6
+00:00:21,190 --> 00:00:25,200
+We evaluate the expression on the right
+hand side and that creates a list object
+
+7
+00:00:25,200 --> 00:00:29,760
+as well as the six integers zero,
+two, four, six, eight, and ten.
+
+8
+00:00:30,910 --> 00:00:35,810
+Once we have created that list structure
+we're going to assign to variable LST
+
+9
+00:00:35,810 --> 00:00:39,750
+the memory address of the list object.
+
+10
+00:00:43,290 --> 00:00:49,190
+So list LST contains memory address
+ID1 which refers to the list object.
+
+11
+00:00:51,080 --> 00:00:56,840
+At index zero, is memory address ID two.
+
+12
+00:00:56,840 --> 00:00:59,670
+And, that refers to the zero object.
+
+13
+00:00:59,670 --> 00:01:03,190
+At index one, we refers to the two.
+
+14
+00:01:03,190 --> 00:01:06,020
+At index two we refer to the four,
+and so on.
+
+15
+00:01:09,520 --> 00:01:12,000
+On line two is another
+assignment statement.
+
+16
+00:01:13,820 --> 00:01:17,820
+On the left hand side,
+we don't just have a variable.
+
+17
+00:01:17,820 --> 00:01:22,510
+We have something a little more complex,
+we have list at index two.
+
+18
+00:01:22,510 --> 00:01:27,820
+We're actually going to be modifying
+that memory location right there.
+
+19
+00:01:28,910 --> 00:01:32,530
+List at index two, after we
+execute that assignment statement,
+
+20
+00:01:32,530 --> 00:01:35,780
+is no longer going to
+refer to the integer four.
+
+21
+00:01:35,780 --> 00:01:39,270
+Instead it's going to
+refer to integer five.
+
+22
+00:01:39,270 --> 00:01:43,210
+We are going to be modifying
+an object in the heap.
+
+23
+00:01:46,958 --> 00:01:54,128
+When I click forward, we see that we have
+a new object at number address ID eight,
+
+24
+00:01:54,128 --> 00:01:58,777
+and that listed index two
+refers to that new object.
+
+25
+00:02:01,517 --> 00:02:05,270
+Let's go edit the code and
+do something else.
+
+26
+00:02:05,270 --> 00:02:09,886
+I'm going to replace this
+code with some other code.
+
+27
+00:02:09,886 --> 00:02:11,754
+Let's visualize the execution.
+
+28
+00:02:13,990 --> 00:02:16,540
+Line one, we know what to expect.
+
+29
+00:02:17,650 --> 00:02:20,630
+List one refers to a list.
+
+30
+00:02:20,630 --> 00:02:22,890
+At listed index zero our first is zero.
+
+31
+00:02:22,890 --> 00:02:30,130
+At listed index one refers to two,
+listed index two refers to four and so on.
+
+32
+00:02:30,130 --> 00:02:33,730
+On line two,
+I'm doing something rather curious.
+
+33
+00:02:33,730 --> 00:02:37,850
+I'm taking the memory address
+that's in variable list one.
+
+34
+00:02:37,850 --> 00:02:40,890
+And I am placing it in variable list two.
+
+35
+00:02:40,890 --> 00:02:44,510
+The only thing that's going to change
+is the contents of module name.
+
+36
+00:02:45,880 --> 00:02:46,980
+There we go.
+
+37
+00:02:46,980 --> 00:02:52,460
+Now, both list one and
+list two refer to the list object.
+
+38
+00:02:55,915 --> 00:03:00,672
+This is called aliasing,
+when two variables both contain
+
+39
+00:03:00,672 --> 00:03:04,470
+the same memory address, aliasing happens.
+
+40
+00:03:05,770 --> 00:03:07,560
+So far so good.
+
+41
+00:03:07,560 --> 00:03:13,040
+What we're gonna do now is we're going
+to assign to the last item in list one,
+
+42
+00:03:13,040 --> 00:03:17,000
+or the object that list one refers to,
+the value 17.
+
+43
+00:03:17,000 --> 00:03:24,450
+So the item at index five is
+going to change in the list.
+
+44
+00:03:24,450 --> 00:03:29,022
+We're going to lose the reference to 10,
+and
+
+45
+00:03:29,022 --> 00:03:36,472
+instead we're going to have the item
+at index five refer to the integer 17.
+
+46
+00:03:38,411 --> 00:03:41,151
+And there we have it.
+
+47
+00:03:43,998 --> 00:03:51,662
+The interesting thing now is that list
+two got to watch that change happen.
+
+48
+00:03:51,662 --> 00:03:55,860
+List two contains the memory
+address of the list object.
+
+49
+00:03:55,860 --> 00:03:58,560
+We changed that object by using list one.
+
+50
+00:03:59,710 --> 00:04:02,310
+But list two changed as well.
+
+51
+00:04:02,310 --> 00:04:07,000
+So when we print list one at index minus
+one, print the last item, we get a 17.
+
+52
+00:04:07,000 --> 00:04:11,888
+And we're going to see exactly
+the same result when we print list two
+
+53
+00:04:11,888 --> 00:04:13,362
+at index minus one.
+
+54
+00:04:16,648 --> 00:04:20,220
+We will do one more example of aliasing.
+
+55
+00:04:20,220 --> 00:04:24,380
+Here we have a function,
+double_even_indices, that takes a list of
+
+56
+00:04:24,380 --> 00:04:30,140
+ints as a parameter and doesn't return
+anything, or rather, returns none.
+
+57
+00:04:32,760 --> 00:04:36,750
+The doc strings has double every other
+int in list, starting at index zero.
+
+58
+00:04:36,750 --> 00:04:39,800
+So the values at indices zero,
+two, four, six, eight and
+
+59
+00:04:39,800 --> 00:04:42,850
+so on are going to be doubled.
+
+60
+00:04:42,850 --> 00:04:46,410
+We will start I off at zero.
+
+61
+00:04:46,410 --> 00:04:52,280
+In other words, I is going to be
+the index of the next item to double.
+
+62
+00:04:52,280 --> 00:04:53,980
+As long as there's any remaining.
+
+63
+00:04:55,430 --> 00:05:00,230
+We're going to keep going as long as I
+is less than the length of the list.
+
+64
+00:05:00,230 --> 00:05:03,330
+In other words we will
+stop when i is equal to or
+
+65
+00:05:03,330 --> 00:05:05,680
+greater than the length of the list.
+
+66
+00:05:07,160 --> 00:05:12,930
+Within the loop, we are going to look
+at the item at index I and double it.
+
+67
+00:05:12,930 --> 00:05:19,530
+And store the reference to that
+new value in the listed index I.
+
+68
+00:05:21,490 --> 00:05:27,270
+Then we're going to add two to I because
+we want to skip to the next even index.
+
+69
+00:05:28,590 --> 00:05:31,469
+Our main program is
+going to create a list,
+
+70
+00:05:32,740 --> 00:05:36,680
+assign to variable list one, that list.
+
+71
+00:05:36,680 --> 00:05:41,592
+Print that list, double the integers
+at even indices in that list,
+
+72
+00:05:41,592 --> 00:05:43,840
+and then print the list again.
+
+73
+00:05:47,810 --> 00:05:54,665
+We define our function, we create our
+list structure, we print that list and
+
+74
+00:05:54,665 --> 00:06:00,676
+now notice that variable list one
+contains memory address ID two and
+
+75
+00:06:00,676 --> 00:06:05,870
+that ID two is the memory
+address of our list object.
+
+76
+00:06:05,870 --> 00:06:10,830
+We are going to create an alias for
+this but we won't use an assignment
+
+77
+00:06:10,830 --> 00:06:15,640
+statement instead we are going
+to do a function call.
+
+78
+00:06:15,640 --> 00:06:18,670
+We will evaluate the arguments.
+
+79
+00:06:18,670 --> 00:06:23,286
+We get memory invest ID two, which
+we're going to put in variable list in
+
+80
+00:06:23,286 --> 00:06:28,148
+the frame that is going to be created for
+function double_even_indices.
+
+81
+00:06:30,042 --> 00:06:36,830
+Now, in function double_even_indices
+variable list refers to that list object.
+
+82
+00:06:36,830 --> 00:06:40,390
+Variable list one also
+refers to that list object.
+
+83
+00:06:41,700 --> 00:06:45,790
+This means that any change we make
+to that list object is going to be
+
+84
+00:06:45,790 --> 00:06:47,960
+seen by both variables.
+
+85
+00:06:49,350 --> 00:06:53,650
+We start i off at index zero,
+notice that I refers to zero.
+
+86
+00:06:53,650 --> 00:06:59,338
+The lengths of the list is one,
+two, three, four, five, six, seven.
+
+87
+00:06:59,338 --> 00:07:01,630
+So zero is less than seven.
+
+88
+00:07:01,630 --> 00:07:08,780
+I'm going to look at the value at
+index zero and multiply it by two.
+
+89
+00:07:08,780 --> 00:07:11,780
+Value at index 0, is 11,
+
+90
+00:07:11,780 --> 00:07:16,870
+multiplying that by 2 I get 22,
+and we are going to take that 22.
+
+91
+00:07:16,870 --> 00:07:19,881
+And has listed index,
+you will refer to it.
+
+92
+00:07:23,601 --> 00:07:30,545
+Now we're going to add two to I and
+so I now refers to two.
+
+93
+00:07:30,545 --> 00:07:34,345
+Two is less than seven, so
+I'm going to do the same thing but
+
+94
+00:07:34,345 --> 00:07:37,431
+this time with listed index two.
+
+95
+00:07:37,431 --> 00:07:40,150
+Listed index 2 is the 13.
+
+96
+00:07:40,150 --> 00:07:42,360
+We're gonna take that 13,
+double it, giving us 26.
+
+97
+00:07:42,360 --> 00:07:46,822
+And we're going to store in
+list at index two the memory
+
+98
+00:07:46,822 --> 00:07:51,104
+address of that new integer
+that we are about to get.
+
+99
+00:07:55,005 --> 00:07:56,250
+Add in two to I.
+
+100
+00:07:58,230 --> 00:08:00,130
+We end up with four of course.
+
+101
+00:08:00,130 --> 00:08:01,840
+I now refers to four.
+
+102
+00:08:01,840 --> 00:08:04,600
+Four is less than seven, so
+we're going to do this again.
+
+103
+00:08:04,600 --> 00:08:10,772
+This time changing the item and
+index 4, replace that 15 with a 30.
+
+104
+00:08:12,723 --> 00:08:14,170
+Add two to I.
+
+105
+00:08:14,170 --> 00:08:16,460
+Six is less than seven.
+
+106
+00:08:16,460 --> 00:08:19,250
+The listed index 6 is 17.
+
+107
+00:08:19,250 --> 00:08:21,517
+Uploading that, we get 34.
+
+108
+00:08:21,517 --> 00:08:25,719
+So listed index six is
+now going to refer to 34.
+
+109
+00:08:28,159 --> 00:08:33,490
+Adding two to I, I is now eight.
+
+110
+00:08:33,490 --> 00:08:38,150
+That makes our loop condition here false.
+
+111
+00:08:38,150 --> 00:08:41,870
+As soon as we have false in a loop
+condition, the loop terminates, so
+
+112
+00:08:41,870 --> 00:08:44,110
+we are going to exit this loop.
+
+113
+00:08:44,110 --> 00:08:47,580
+There are no statements at
+the end of double even indices.
+
+114
+00:08:47,580 --> 00:08:51,420
+And so, we're about to return none.
+
+115
+00:08:51,420 --> 00:08:54,400
+Remember, if there is no return
+statement in a function,
+
+116
+00:08:54,400 --> 00:08:58,010
+then a function will return
+value none of type none type.
+
+117
+00:08:59,300 --> 00:09:00,070
+Where were we?
+
+118
+00:09:00,070 --> 00:09:03,130
+Well, we were in the main
+module down here.
+
+119
+00:09:03,130 --> 00:09:05,460
+We just called double even indexes.
+
+120
+00:09:05,460 --> 00:09:06,880
+That's about to be done.
+
+121
+00:09:06,880 --> 00:09:09,960
+So we're gonna move on to line 15.
+
+122
+00:09:13,182 --> 00:09:18,663
+List one now refers to the list object
+that has 22 at index 0, then 12,
+
+123
+00:09:18,663 --> 00:09:23,280
+then 26, 14, 30, Then 26, 14, 16, and 34.
+
+124
+00:09:23,280 --> 00:09:29,080
+So even though we never mentioned
+list one inside this function body
+
+125
+00:09:29,080 --> 00:09:34,550
+list one now refers to an object
+that has been modified so
+
+126
+00:09:34,550 --> 00:09:38,000
+our output contains the new values.
+
+127
+00:09:38,000 --> 00:09:41,940
+Because of aliasing you need to
+remember which types are mutable and
+
+128
+00:09:41,940 --> 00:09:43,650
+which types are not.
+
+129
+00:09:43,650 --> 00:09:46,810
+So far,
+list is the only type that is mutable.
+
+130
+00:09:46,810 --> 00:09:48,550
+All the others are immutable.
+
+131
+00:09:49,870 --> 00:09:56,140
+Also, you need to be quite careful when
+writing doc strings for mutable types.
+
+132
+00:09:56,140 --> 00:10:00,580
+You need to be clear about whether the
+parameter is being modified by the code
+
+133
+00:10:00,580 --> 00:10:01,490
+inside the function.

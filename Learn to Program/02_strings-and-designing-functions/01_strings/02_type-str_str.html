@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Linux https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Type <code>str</code>: Strings in Python
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chapter 4.1 Creating Strings of Characters
+                </li>
+                <li>Chapter 4.2 Using Special Characters in Strings
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Type <code>str</code>: Strings in Python
+        </h1>
+        <h3>
+            String Literal
+        </h3>
+        <p>
+            A <i>string literal</i> is a sequence of characters. In Python, this type is called <code>str</code>. Strings in Python start and end with a single quotes (<code>'</code>) or double quotes (<code>"</code>). A string can be made up of letters, numbers, and special characters. For example:
+        </p>
+        <pre>
+&gt;&gt;&gt; 'hello'
+'hello'
+&gt;&gt;&gt; 'how are you?'
+'how are you?'
+&gt;&gt;&gt; 'short- and long-term'
+'short- and long-term'
+</pre>
+        <p>
+            If a string begins with a single quote, it must end with a single quote. The same applies to double-quoted strings. You can not mix the type of quotes.
+        </p>
+        <h3>
+            Escape Sequences
+        </h3>
+        <p>
+            To include a quote within a string, use an <em>escape character</em> (<code>\</code>) before it. Otherwise Python interprets that quote as the end of a string and an error occurs. For example, the following code results in an error because Python does not expect anything to come after the second quote:
+        </p>
+        <pre>
+&gt;&gt;&gt; storm_greeting = 'wow, you're dripping wet.'
+SyntaxError: invalid syntax
+</pre>The <em>escape sequence</em> <code>\'</code> indicates that the second quote is simply a quote, not the end of the string:
+        <pre>
+&gt;&gt;&gt; storm_greeting = 'Wow, you\'re dripping wet.'
+"Wow, you're dripping wet."
+</pre>
+        <p>
+            An alternative approach is to use a double-quoted string when including a single-quote within it, or vice-versa. Single- and double-quoted strings are equivalent. For example, when we used double-quotes to indicate the beginning and end of the string, the single-quote in <code>you're</code> no longer causes an error:
+        </p>
+        <pre>
+&gt;&gt;&gt; storm_greeting = "Wow, you're dripping wet."
+"Wow, you're dripping wet."
+</pre>
+        <h3>
+            String Operators
+        </h3>
+        <table cellpadding="5px" border="1px">
+            <tr>
+                <td>
+                    Expression
+                </td>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Example
+                </td>
+                <td>
+                    Output
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>str1 + str2</code>
+                </td>
+                <td>
+                    concatenate <code>str1</code> and <code>str1</code>
+                </td>
+                <td>
+                    <code>print('ab' + 'c')</code>
+                </td>
+                <td>
+                    <code>abc</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>str1 * int1</code>
+                </td>
+                <td>
+                    concatenate <code>int1</code> copies of <code>str1</code>
+                </td>
+                <td>
+                    <code>print('a' * 5)</code>
+                </td>
+                <td>
+                    <code>aaaaa</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>int1 * str1</code>
+                </td>
+                <td>
+                    concatenate <code>int1</code> copies of <code>str1</code>
+                </td>
+                <td>
+                    <code>print(4 * 'bc')</code>
+                </td>
+                <td>
+                    <code>bcbcbcbc</code>
+                </td>
+            </tr>
+        </table>
+        <p>
+            Note: <i>concatenate</i> means to join together
+        </p>
+        <p>
+            The <code>*</code> and <code>+</code> operands obey by the standard precedence rules when used with strings.
+        </p>
+        <p>
+            All other mathematical operators and operands result in a <code>TypeError</code>.
+        </p><br>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>

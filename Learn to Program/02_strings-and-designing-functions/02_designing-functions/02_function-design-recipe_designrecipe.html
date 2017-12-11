@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Mac OS X https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <title>
+            Function Design Recipe
+        </title>
+    </head>
+    <body>
+        <a href="https://www.coursera.org/learn/learn-to-program/resources/oTgXi">
+        <div style="float:right; position:relative; width:30%; border: 2px solid black; margin:5px;">
+            <img alt="Practical Programming" src="https://imagery.pragprog.com/products/336/gwpy2_largecover.jpg?1361381128" style="float:left; margin-right:1em">
+            <ul>
+                <li>Chaper 3.6 Designing New Functions: A Recipe
+                </li>
+                <li style="list-style: none">
+                    <span style="position:absolute; bottom:0; right:0;"><i>Optional reading</i></span>
+                </li>
+            </ul>
+        </div></a>
+        <h1>
+            Function Design Recipe
+        </h1>
+        <h3>
+            The Six Steps
+        </h3>
+        <ol>
+            <li>
+                <b>Examples</b>
+                <ul>
+                    <li>What should your function do?
+                    </li>
+                    <li>Type a couple of example calls.
+                    </li>
+                    <li>Pick a name (often a verb or verb phrase): What is a short answer to "What does your function do"?
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <b>Type Contract</b>
+                <ul>
+                    <li>What are the parameter types?
+                    </li>
+                    <li>What type of value is returned?
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <b>Header</b>
+                <ul>
+                    <li>Pick meaningful parameter names.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <b>Description</b>
+                <ul>
+                    <li>Mention every parameter in your description.
+                    </li>
+                    <li>Describe the return value.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <b>Body</b>
+                <ul>
+                    <li>Write the body of your function.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <b>Test</b>
+                <ul>
+                    <li>Run the examples.
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <h3>
+            Applying the Design Recipe
+        </h3>
+        <p>
+            <b>The problem:</b>
+        </p>
+        <p>
+            The United States measures temperature in Fahrenheit and Canada measures it in Celsius. When travelling between the two countries it helps to have a conversion function. Write a function that converts from Fahrenheit to Celsius.
+        </p>
+        <ol>
+            <li>
+                <b>Examples</b>
+                <pre>
+    &gt;&gt;&gt; convert_to_celsius(32)
+    0
+    &gt;&gt;&gt; convert_to_celsius(212)
+    100
+    
+</pre>
+            </li>
+            <li>
+                <b>Type Contract</b>
+                <pre>
+    (number) -&gt; number
+    
+</pre>
+            </li>
+            <li>
+                <b>Header</b>
+                <pre>
+    def convert_to_celsius(fahrenheit):
+    
+</pre>
+            </li>
+            <li>
+                <b>Description</b>
+                <pre>
+    Return the number of Celsius degrees equivalent to fahrenheit degrees.
+    
+</pre>
+            </li>
+            <li>
+                <b>Body</b>
+                <pre>
+        return (fahrenheit - 32) * 5 / 9
+    
+</pre>
+            </li>
+            <li>
+                <b>Test</b>
+                <pre>
+     Run the examples.   
+    
+</pre>
+            </li>
+        </ol>
+        <h4>
+            Putting it all together:
+        </h4>
+        <pre>
+def convert_to_celsius(fahrenheit):
+   ''' (number) -&gt; number
+   
+   Return the number of Celsius degrees equivalent to fahrenheit degrees.
+   
+   &gt;&gt;&gt; convert_to_ccelsius(32)
+   0
+   &gt;&gt;&gt; convert_to_celsius(212)
+   100
+   '''
+   
+   return (fahrenheit - 32) * 5 / 9
+</pre>
+        <hr>
+        <center>
+            Jennifer Campbell • Paul Gries<br>
+            University of Toronto
+        </center>
+        <hr>
+    </body>
+</html>
