@@ -1,0 +1,19 @@
+In [1]: from pgmpy.models import BayesianModel
+In [2]: from pgmpy.factors import TabularCPD
+In [3]: from pgmpy.inference import ClusterBeliefPropagation as
+CBP
+# Create a bayesian model as we did in the previous chapters
+In [4]: model = BayesianModel([
+('rain', 'traffic_jam'),
+('accident', 'traffic_jam'),
+('traffic_jam', 'long_queues'),
+('traffic_jam', 'late_for_school'),
+('getting_up_late', 'late_for_school')])
+In [5]: cpd_rain = TabularCPD('rain', 2, [[0.4], [0.6]])
+In [6]: cpd_accident = TabularCPD('accident', 2, [[0.2], [0.8]])
+In [7]: cpd_traffic_jam = TabularCPD(
+'traffic_jam', 2,
+[[0.9, 0.6, 0.7, 0.1],
+[0.1, 0.4, 0.3, 0.9]],
+evidence=['rain', 'accident'],
+evidence_card=[2, 2])

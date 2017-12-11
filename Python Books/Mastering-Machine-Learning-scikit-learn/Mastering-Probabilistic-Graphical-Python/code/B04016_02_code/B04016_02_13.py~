@@ -1,0 +1,38 @@
+In [1]: from pgmpy.models import BayesianModel
+In [2]: from pgmpy.factors import TabularCPD
+# Creating the above bayesian network
+In [2]: model = BayesianModel()
+In [3]: model.add_nodes_from(['Rain', 'TrafficJam'])
+In [4]: model.add_edge('Rain', 'TrafficJam')
+In [5]: model.add_edge('Accident', 'TrafficJam')
+In [6]: cpd_rain = TabularCPD('Rain', 2, [[0.4], [0.6]])
+In [7]: cpd_accident = TabularCPD('Accident', 2, [[0.2], [0.8]])
+In [8]: cpd_traffic_jam = TabularCPD(
+'TrafficJam', 2,
+[[0.9, 0.6, 0.7, 0.1],
+[0.1, 0.4, 0.3, 0.9]],
+evidence=['Rain', 'Accident'],
+evidence_card=[2, 2])
+In [9]: model.add_cpds(cpd_rain, cpd_accident, cpd_traffic_jam)
+In [10]: model.add_node('LongQueues')
+In [11]: model.add_edge('TrafficJam', 'LongQueues')
+In [12]: cpd_long_queues = TabularCPD('LongQueues', 2,
+[[0.9, 0.2],
+[0.1, 0.8]],
+evidence=['TrafficJam'],
+evidence_card=[2])
+In [13]: model.add_cpds(cpd_long_queues)
+In [14]: model.add_nodes_from(['GettingUpLate', 'LateForSchool'])
+In [15]: model.add_edges_from([('GettingUpLate', 'LateForSchool'),
+('TrafficJam', 'LateForSchool')])
+In [16]: cpd_getting_up_late = TabularCPD('GettingUpLate', 2,
+[[0.6], [0.4]])
+In [17]: cpd_late_for_school = TabularCPD(
+'LateForSchool', 2,
+[[0.9, 0.45, 0.8, 0.1],
+[0.1, 0.55, 0.2, 0.9]],
+evidence=['GettingUpLate',TrafficJam'],
+evidence_card=[2, 2])
+In [18]: model.add_cpds(cpd_getting_up_late, cpd_late_for_school)
+# Conversion from BayesianModel to MarkovModel is accomplished by
+In [19]: mm = model.to_markov_model()

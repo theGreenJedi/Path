@@ -1,0 +1,50 @@
+In [1]: from sklearn.feature_extraction.text import TfidfVectorizer
+In [2]: corpus = ['This is the first document.',
+'This is the second second document.',
+'And the third one.',
+'Is this the first document?']
+# The input parameter min_df is a threshold which is used to
+# ignore the terms that document frequency less than the
+# threshold. By default it is set as 1.
+In [3]: vectorizer = TfidfVectorizer(min_df=1)
+# fit_transform method basically Learn the vocabulary dictionary
+# and return term-document matrix.
+In [4]: X = vectorizer.fit_transform(corpus)
+# Each term found by the analyzer during the fit is assigned a
+# unique integer index corresponding to a column in the resulting
+# matrix.
+In [5]: print(vectorizer.get_feature_names())
+['and', 'document', 'first', 'is', 'one', 'second', 'the',
+'third', 'this'])
+# The numerical features can be extracted by the method toarray
+# It returns a matrix in the form of (n_corpus, n_features)
+# The columns correspond to vectorizer.get_feature_names(). The
+# value of a[i, j] is basically the count of word correspond to
+# column j in document i
+In [6]: print(X.toarray())
+[[ 0.
+0.43877674 0.54197657 0.43877674 0.
+0.
+0.35872874 0.
+0.43877674]
+[ 0.
+0.27230147 0.
+0.27230147 0.
+0.85322574
+0.22262429
+[ 0.55280532
+0.28847675
+[ 0.
+0.35872874
+0.
+0.
+0.55280532
+0.43877674
+0.
+0.27230147]
+0.
+0.
+0.
+]
+0.54197657 0.43877674
+0.43877674]]

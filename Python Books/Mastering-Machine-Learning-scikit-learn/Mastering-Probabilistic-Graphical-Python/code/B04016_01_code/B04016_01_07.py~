@@ -1,0 +1,10 @@
+In [8]: from pgmpy.independencies import Independencies
+# There are multiple ways to create an Independencies object, we
+# could either initialize an empty object or initialize with some
+# assertions.
+In [9]: independencies = Independencies() # Empty object
+In [10]: independencies.get_assertions()
+Out[10]: []
+In [11]: independencies.add_assertions(assertion1, assertion2)
+In [12]: independencies.get_assertions()
+Out[12]: [(X _|_ Y), (X _|_ Y | Z)]

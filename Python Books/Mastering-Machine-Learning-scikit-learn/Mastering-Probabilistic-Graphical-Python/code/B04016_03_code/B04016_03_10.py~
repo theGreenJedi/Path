@@ -1,0 +1,37 @@
+In [20]: model_inference.map_query(variables=['late_for_school'])
+Out[20]: {'late_for_school': 0}
+In [21]: model_inference.map_query(variables=['late_for_school',
+'accident'])
+Out[21]: {'accident': 1, 'late_for_school': 0}
+# Again we can pass the evidence to the query using the evidence
+# argument in the form of {variable: state}.
+In [22]: model_inference.map_query(variables=['late_for_school'],
+evidence={'accident': 1})
+Out[22]: {'late_for_school': 0}
+In [23]: model_inference.map_query(variables=['late_for_school'],
+evidence={'accident': 1,
+'rain': 1})
+Out[23]: {'late_for_school': 0}
+# Also in the case of MAP queries we can specify the elimination
+# order of the variables. But if the elimination order is not
+# specified pgmpy automatically computes the best elimination
+# order for the query.
+In [24]: model_inference.map_query(
+variables=['late_for_school'],
+elimination_order=['accident', 'rain',
+'traffic_jam',
+'getting_up_late',
+'long_queues'])
+Out[24]: {'late_for_school': 0}
+In [25]: model_inference.map_query(
+variables=['late_for_school'],
+evidence={'accident': 1},
+elimination_order=['rain',
+'traffic_jam',
+'getting_up_late',
+'long_queues'])
+Out[25]: {'late_for_school': 0}
+# Similarly MAP queries can be done for belief propagation as well.
+In [26]: belief_propagation.map_query(['late_for_school'],
+evidence={'accident': 1})
+Out[26]: {'late_for_school': 0}

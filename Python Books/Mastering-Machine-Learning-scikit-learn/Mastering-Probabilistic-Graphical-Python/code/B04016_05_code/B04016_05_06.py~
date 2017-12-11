@@ -1,0 +1,30 @@
+In [12]: raw_data = np.random.randint(low=0, high=2,
+size=(1000, 6)
+In [12]: data = pd.DataFrame(raw_data, columns=['A', 'R', 'J',
+'G', 'L', 'Q'])
+In [13]: student_model = BayesianModel()
+In [14]: student_model.fit(data, esitmator=BayesianEstimator)
+In [15]: student_model.get_cpds()
+Out[15]:
+[<TabularCPD representing P(A: 2)
+<TabularCPD representing P(R: 2)
+<TabularCPD representing P(J: 2)
+<TabularCPD representing P(G: 2)
+<TabularCPD representing P(L: 2)
+<TabularCPD representing P(Q: 2)
+at
+at
+at
+at
+at
+at
+0x7a57e462d128>,
+0x7c57ad993048>,
+0x7f17cd991160>,
+0x7e67b129a278>,
+0x7e37e4695390>,
+0x7f67a289d649>]
+In [16]:student_model.get_nodes()
+Out[16]:[ 'A', 'R', 'J', 'G', 'L', 'Q']
+In [17]:student_model.get_edges()
+Out[17]:[]

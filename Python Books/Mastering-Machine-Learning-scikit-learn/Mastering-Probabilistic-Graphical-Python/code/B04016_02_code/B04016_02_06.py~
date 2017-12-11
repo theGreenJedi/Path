@@ -1,0 +1,6 @@
+# First import MarkovModel class from pgmpy.models
+In [1]: from pgmpy.models import MarkovModel
+In [2]: model = MarkovModel([('A', 'B'), ('B', 'C')])
+In [3]: model.add_node('D')
+In [4]: model.add_edges_from([('C', 'D'), ('D', 'A')])
+

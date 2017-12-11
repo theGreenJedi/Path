@@ -1,0 +1,145 @@
+# First let's import modules that we will be needing
+In [1]: import numpy as np
+In [2]: from pgmpy.models import BayesianModel
+# Now let's create some random data over which we will train and
+# test the model. Here we are creating 1000 data points with each
+# value either 0 or 1.
+In [3]: data = np.random.randint(low=0, high=2, size=(1000, 4))
+In [4]: data
+Out[4]:
+array([[0, 1, 0, 0],
+[1, 1, 1, 0],
+[1, 1, 0, 0],
+...,
+[1, 0, 0, 1],
+[1, 0, 1, 0],
+[1, 0, 0, 0]])
+#
+#
+#
+#
+#
+#
+#
+# Now in general machine learning problems it doesn't matter which
+# column of the array represents which variable (until we use same
+# order for both training and prediction) because all the values
+# are on symmetrical axis but in graphical models each variable is
+# different (in the way it is connected to other variables etc) so
+# we will need to specify which columns of data are for which
+# variable. For that we will use pandas.
+In [5]: import pandas as pd
+In [6]: data = pd.DataFrame(data, columns=['cost', 'quality',
+'location',
+'no_of_people'])
+In [7]: data
+In [8]: train = data[:750]
+# We will try to predict the no_of_people from our model. So for
+# test data we will delete that column and then later on predict
+# those values.
+In [9]: test = data[750:].drop('no_of_people', axis=1)
+In [10]: test
+Out[10]:
+cost quality location
+750
+0
+0
+1
+751
+0
+1
+1
+752
+0
+1
+1
+753
+1
+0
+0
+754
+1
+0
+1
+755
+1
+0
+1
+756
+0
+1
+0
+757
+1
+0
+0
+..
+...
+...
+...
+992
+0
+0
+0
+993
+0
+0
+1
+994
+0
+0
+0
+995
+0
+0
+0
+996
+1
+0
+0
+997
+1
+0
+0
+998
+1
+0
+1
+999
+1
+0
+0
+# Now we will need to create the base network structure for the
+# model.
+In [11]: restaurant_model = BayesianModel(
+[('location', 'cost'),
+('quality', 'cost'),
+('location', 'no_of_people'),
+('cost', 'no_of_people')])
+In [12]: restaurant_model.fit(train)
+# Fit computes the cpd of all the variables from the training data
+# that we provided.
+In [13]: restaurant_model.get_cpds()
+Out[13]:
+[<pgmpy.factors.CPD.TabularCPD at 0x7fc01c029be0>,
+<pgmpy.factors.CPD.TabularCPD at 0x7fc01c029eb8>,
+<pgmpy.factors.CPD.TabularCPD at 0x7fc01c029e48>,
+<pgmpy.factors.CPD.TabularCPD at 0x7fc01c029e80>]
+# Now for predicting the values of no_of_people using this model
+# we can simply call the predict method on our test data.
+In [14]: restaurant_model.predict(test).values.ravel()
+Out[14]:
+array([1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0,
+0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0,
+1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0,
+0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0,
+1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0,
+0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0,
+1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0,
+0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
+0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1,
+0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1,
+0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1,
+1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1,
+1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1,
+0, 0, 0])

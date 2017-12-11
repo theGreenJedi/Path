@@ -1,0 +1,29 @@
+In [11]: from pgmpy.models import MarkovModel
+In [12]: mm = MarkovModel()
+In [13]: mm.add_nodes_from(['A', 'B', 'C'])
+In [14]: mm.add_edges_from([('A', 'B'), ('B', 'C'), ('C', 'A')])
+In [15]: mm.add_factors(phi1, phi2, phi3)
+In [16]: factor_graph_from_mm = mm.to_factor_graph()
+# While converting a markov model into factor graph, factor nodes
+# would be automatically added the factor nodes would be in the
+# form of phi_node1_node2_...
+In [17]: factor_graph_from_mm.nodes()
+Out[17]: ['C', 'B', 'phi_A_B', 'phi_B_C', 'phi_C_A', 'C']
+In [18]: factor_graph.edges()
+Out[18]: [('phi_A_B', 'A'), ('phi_A_C', 'A'), ('B', 'phi_B_C'),
+('B', 'phi_A_B'), ('C', 'phi_B_C'), ('C', 'phi_C_A')]
+# FactorGraph to MarkovModel
+In [19]: phi = Factor(['A', 'B', 'C'], [2, 2, 2],
+np.random.rand(8))
+In [20]: factor_graph = FactorGraph()
+In [21]: factor_graph.add_nodes_from(['A', 'B', 'C', 'phi'])
+In [22]: factor_graph.add_edges_from(
+In [23]: [('A', 'phi'), ('B', 'phi'), ('C', 'phi')])
+In [24]: mm_from_factor_graph = factor_graph.to_markov_model()
+In [24]: mm_from_factor_graph.add_factors(phi)
+Out[24]:
+
+
+
+mm_from_factor_graph.edges()
+[('B', 'A'), ('C', 'B'), ('C', 'A')]

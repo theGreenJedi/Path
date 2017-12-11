@@ -1,0 +1,79 @@
+In
+In
+In
+In
+In
+#
+#
+#
+#
+#
+[1]:
+[2]:
+[3]:
+[4]:
+[5]:
+from
+from
+from
+from
+from
+sklearn.datasets import fetch_20newsgroups
+sklearn.feature_extraction.text import HashingVectorizer
+sklearn.feature_extraction.text import CountVectorizer
+sklearn.naive_bayes import BernoulliNB
+sklearn import metrics
+The dataset used in this example is the 20 newsgroups dataset.
+The 20 Newsgroups data set is a collection of
+approximately 20,000 newsgroup documents, partitioned (nearly)
+evenly across 20 different newsgroups. It will be
+automatically downloaded, then cached.
+# For our simple example we are only going to use 4 news group
+In [6]: categories = ['alt.atheism',
+'talk.religion.misc',
+'comp.graphics',
+'sci.space']
+# Loading training data
+In [7]: data_train = fetch_20newsgroups(subset='train',
+categories=categories,
+shuffle=True,
+random_state=42)
+# Loading test data
+In [8]: data_test = fetch_20newsgroups(subset='test',
+categories=categories,
+shuffle=True,
+random_state=42)
+In [9]: y_train, y_test = data_train.target, data_test.target
+# It can be changed to "count" if we want to use count vectorizer
+In [10]: feature_extractor_type = "hashed"
+In [11]: if feature_extractor_type == "hashed":
+# To convert the text documents into numerical features,
+# we need to use a feature extractor. In this example we
+# are using HashingVectorizer as it would be memory
+# efficient in case of large datasets
+vectorizer = HashingVectorizer(stop_words='english')
+# In case of HashingVectorizer we don't need to fit
+# the data, just transform would work.
+X_train = vectorizer.transform(data_train.data)
+X_test = vectorizer.transform(data_test.data)
+elif feature_extractor_type == "count":
+# The other vectorizer we can use is CountVectorizer with
+# binary=True. But for CountVectorizer we need to fit
+# transform over both training and test data as it
+# requires the complete vocabulary to create the matrix
+vectorizer = CountVectorizer(stop_words='english',
+binary=True)
+# First fit the data
+In [12]: vectorizer.fit(data_train.data + data_test.data)
+# Then transform it
+In [13]: X_train = vectorizer.transform(data_train.data)
+In [14]: X_test = vectorizer.transform(data_test.data)
+# alpha is additive (Laplace/Lidstone) smoothing parameter (0 for
+# no smoothing).
+In [15]: clf = BernoulliNB(alpha=.01)
+# Training the classifier
+In [16]: clf.fit(X_train, y_train)
+# Predicting results
+In [17]: y_predicted = clf.predict(X_test)
+In [18]: score = metrics.accuracy_score(y_test, y_predicted)
+In [19]: print("accuracy: %0.3f" % score)

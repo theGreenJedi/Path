@@ -1,0 +1,19 @@
+In [1]: from pgmpy.models import MarkovModel
+In [2]: from pgmpy.factors import Factor
+In [3]: import numpy as np
+In [4]: model = MarkovModel()
+# Fig 2.7(a) represents the MarkovModel
+In [6]: model.add_nodes_from(['A', 'B', 'C', 'D'])
+In [7]: model.add_edges_from(
+[('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'A')])
+# Adding some factors
+In [8]: phi_A_B = Factor(['A', 'B'], [2, 2], [1, 100, 100, 1])
+In [9]: phi_B_C = Factor(['B', 'C'], [2, 2], [100, 1, 1, 100])
+In [10]: phi_C_D = Factor(['C', 'D'], [2, 2], [1, 100, 100, 1])
+In [11]: phi_D_A = Factor(['D', 'A'], [2, 2], [100, 1, 1, 100])
+In [12]: model.add_factors(phi_A_B, phi_B_C, phi_C_D, phi_D_A)
+In [13]: chordal_graph = model.triangulate()
+# Fig 2.9 represents the chordal graph created by triangulation
+In [14]: chordal_graph.edges()
+Out[14]: [('C', 'D'), ('C', 'B'), ('D', 'B'),
+('D', A'), ('A, 'B')]

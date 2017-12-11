@@ -1,0 +1,22 @@
+# In the preceding example phi, let's try to marginalize it with
+# respect to B
+In [4]: phi_marginalized = phi.marginalize('B', inplace=False)
+In [5]: phi_marginalized.scope()
+Out[6]: ['A']
+# If inplace=True (default), it would modify the original factor
+# instead of returning a new one
+In [7]: phi.marginalize('A')
+In [8]: print(phi)
+╒═════╤═══════════=╕
+│ B
+│
+phi(B) │
+╞═════╪═══════════=╡
+│ B_0 │ 1005.0000 │
+├─────┼───────────-┤
+│ B_1 │ 101.0000 │
+╘═════╧═══════════=╛
+In [9]: phi.scope()
+Out[9]: ['B']
+# A factor can be also marginalized with respect to more than one
+# random variable

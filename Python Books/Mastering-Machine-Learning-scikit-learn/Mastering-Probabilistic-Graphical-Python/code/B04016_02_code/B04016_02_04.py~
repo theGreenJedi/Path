@@ -1,0 +1,31 @@
+# In the preceding example phi, let's try to reduce to the context
+# of b_0
+In [14]: phi = Factor(['a', 'b'], [2, 2], [1000, 1, 5, 100])
+In [15]: phi_reduced = phi.reduce(('b', 0), inplace=False)
+In [16]: print(phi_reduced)
+╒═════╤═══════════╕
+│ a
+│
+phi(a) │
+╞═════╪═══════════╡
+│ a_0 │ 1000.0000 │
+├─────┼───────────┤
+│ a_1 │
+5.0000 │
+╘═════╧═══════════╛
+In [17]: phi_reduced.scope()
+Out[17]: ['a']
+# If inplace=True (default), it would modify the original factor
+# instead of returning a new object.
+In [18]: phi.reduce(('a', 1))
+In [19]: print(phi)
+╒═════╤══════════╕
+│ b
+│
+phi(b) │
+╞═════╪══════════╡
+│ b_0 │
+5.0000 │
+├─────┼──────────┤
+│ b_1 │ 100.0000 │
+╘═════╧══════════╛

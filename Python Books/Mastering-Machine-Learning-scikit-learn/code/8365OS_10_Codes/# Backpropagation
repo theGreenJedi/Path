@@ -1,0 +1,47 @@
+The backpropagation algorithm is commonly used for supervised training of feedforward neural networks. The algorithm takes its name from a portmanteau of "backward propagation", and refers to the direction in which errors flow through the layers of the network. Backpropagation can be theoretically be used to train a feedforward network with any number of hidden units arranged in any number of layers, though computationally power will constrain the number of units and layers.
+
+Backpropagation computes the gradients of a cost function with respect to the weights. The process is based on the chain rule, and flows backwards from the computations used to compute the loss.
+
+Backprop is similar to gradient descent in that it uses the gradient of the cost function to update the values of the model parameters. Unlike the linear models we have previously seen, however, neural nets contain hidden units that represent latent variables; we can't tell what the hidden units should do from the training data. If we do not know what the hidden units should do, we cannot calculate their errors, can we cannot update their weights. 
+
+A naive solution to overcome this is to randomly perturb the weights for the hidden units. If a random change to one of the weights decreases the value of the cost function, the change is saved and another weight is updated. An obvious problem with this solution is its prohibitive computational cost. Backpropagation provides a more efficient solution.
+
+We cannot compute the errors for the hidden units since we don't know what their activations should be. Instead of computing the errors of the hidden units directly, we will train them by measuring how quickly the network's error changes with respect to the hidden units' activations. Once we have the error derivatives with respect to the hidden units' activations, we can calculate the error derivatives with respect to a hidden unit's weights. We can use these to update the values of the weights in order to minimize the cost function.
+
+For clarity in the following description, we will use the following diagram to define two idioms. 
+
+input B C D output
+
+Hidden layer D is "above" layers B and C because it is closer to the output layer. Hidden layer B is below "C" and "D" because it is closer to the input layer.
+
+In general, we will calculate the partial derivative of the error with respect to the output of the network, then use that to calculate the derivative with respect to the activation of the hidden layer below, then use that to calculate the derivative with respect to the next hidden layer below, and so on until we have reached the input layer and updated all of the weights.
+
+More concretely, for each unit in each layer we must calculate two partial derivatives. The first is the derivative of the error with respect to the activation of the unit. This derivative is not used to update the unit's weights; instead, it is used to update the weights of the units connected to it in the layer below. Second, we will calculate the derivative of the error with respect to the unit's weights in order to update their values and minimize the cost function.
+
+We will refer to the following partial figure of a neural net.
+
+TODO diagram
+
+First, backpropagation must calculate the derivative of the error between the value produced by output unit j and the true value of the response variable. This is given by 
+
+\frac{\partial E}{\partial y_j} = -(t_j - y_j)
+
+We've calculated how quickly the error changes with respect to the activation of an output unit. Now we must move backwards through the network towards the input layer below. We've calculated the error derivative with respect to to the activation of an output unit; the next step backwards through the network is to calculate the activation potential of the output unit j. We can use the previous error derivative to calculate the partial derivative of the error with respect to the activation potential of the output unit as follows:
+
+\frac{\partial E}{\partial z_j} = y_i (1 - y_i) \frac{\partial E}{\partial y_j}
+
+After computing the partial derivative of the error with respect to the activation potentials for all of the output units, we can compute the partial derivative of the error with respect to the activations of the previous hidden layer, and the partial derivatives of the output units with respect to their weights. The former will allow us to continue propagating to the hidden layer below, while the latter will allow us to update the weights of the output units.
+
+The partial derivative of the error with respect to a unit's weights is given by the following:
+
+\frac{\partial E}{\partial w_{ij}} = y_i \frac{\partial E}{\partial z_j}
+
+That is, the derivative used to update the weight for a j's connection to a unit i below is the product of the activation of the unit i and the derivative of the error with respect to the activation of unit j. 
+
+Having updated the weights for a layer, we can continue to the layer below. The partial derivative of the error with respect to the activation of hidden unit i is equal to the following:
+
+\frac{\partial E}{\partial y_i} = \sum_j w_{ij} \frac{\partial E}{\partial z_j}.
+
+We can continue calculating for each unit the derivative of the error with respect to the unit's weights and its activation until we reach the input layer. Backpropagation then repeats the process with additional training instances until the error is less than a threshold.
+
+The most important intuition for backpropagation is that, beginning with the output layer, it computes error derivatives for the layer below. These error derivatives can be used to update the values of the weights to minimize the cost function. Unlike the linear models we have discussed, backpropagation does not optimize a convex function; it is possible that backpropagation will converge on parameter values that specify a local, rather than global, minimum. In practice, local optima are frequently adequate for many applications.
