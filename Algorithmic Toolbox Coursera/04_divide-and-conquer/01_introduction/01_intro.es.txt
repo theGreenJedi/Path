@@ -1,0 +1,39 @@
+Hola, soy Neil Rhodes. Bienvenidos al módulo divide y vencerás. En el último módulo, aprendiste 
+cómo usar algoritmos voraces para resolver un particular tipo de problemas. En este módulo aprenderás formas de
+ resolver problemas usando algoritmos de divide y vencerás. El término divide y vencerás es muy antiguo, cuando se aplica en la guerra, sugiere
+ que es más fácil vencer a varios grupos pequeños de oponentes que intentar vencer a un grupo grande. De manera similar, los algoritmos de divide y vencerás toman ventaja de
+ partir un problema en uno o más subproblemas que pueden resolverse 
+de manera independiente. De igual forma que no todos los problemas 
+pueden resolverse con un algoritmo voraz, no todos los problemas pueden
+ resolverse usando divide y vencerás. En lugar de eso, ambas son técnicas 
+que son parte de un kit de estrategias para resolver problemas. Conforme diseñas un algoritmo, 
+necesitarás considerar si un algoritmo voraz podrá funcionar o no. Si no, ¿funcionará un algoritmo de divide y vencerás? Veamos la estructura general de un
+ algoritmo de divide y vencerás. Aquí tenemos un problema a resolver 
+representado de manera abstracta, como un rectángulo azul. Dividimos el problema es un conjunto 
+de subproblemas que no se superponen representados aquí con rectángulos de colores. Es importante que el subproblema 
+sea del mismo tipo que el original. Por ejemplo, aquí hay una manera
+ de dividir el problema rectangular original en un conjunto de subproblemas 
+que no son del mismo tipo. Estos subproblemas son triángulos. Por tanto, esto no representa
+ el algoritmo divide y vencerás. En este caso, dividimos el problema 
+del problema del rectángulo original en un conjunto de subproblemas 
+que son rectángulos también. La dificultad es que estos 
+subproblemas se sobreponen entre sí. Por lo que no representan tampoco
+ el algoritmo de divide y vencerás. Nos regresamos ahora a dividir nuestro problema en un conjunto de subproblemas
+ que no se translapan y del mismo tipo original. Los separamos, y entonces seguimos adelante
+ resolviendo cada subproblema independientemente. Resolvemos el primer problema, 
+representado por una paloma, y entonces continuamos resolviendo
+ cada problema por turno. Una vez que hemos resuelto exitosamente 
+cada uno de los subproblemas, combinamos los resultados en
+ una solución al problema original. Una pregunta que surge es, 
+¿cómo resolvemos cada subproblema? Como cada subproblema es del mismo
+ tipo que el original, podemos resolver el subproblema recursivamente usando
+ la misma estrategia de dividir y vencer. Así, los algoritmos de divide y vencerás 
+naturalmente implican una solución recursiva. En la práctica, si puedes programar un 
+algoritmo de divide y vencerás recursivamente, no es raro reescribir el programa
+ recursivo como uno iterativo. Esto se hace a menudo porque algunos 
+programadores no se sienten tan cómodos con la recursión como con la iteración,
+ además de por el espacio adicional que una implementación recursiva puede
+ tomar en términos del espacio de apilamiento adicional. Esto puede depender del lenguaje y la implementación. En resumen, el algoritmo de divide
+ y vencerás consiste en, uno, dividir el problema en subproblemas 
+del mismo tipo que no se translapan. Dos, resolver recursivamente estos subproblemas. Y tres, combinar los resultados. En el siguiente video, veremos un ejemplo 
+extremadamente simple de divide y vencerás.

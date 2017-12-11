@@ -1,0 +1,22 @@
+Hola a todos Bienvenidos de nuevo. Hoy, hablaremos sobre cómo calcular 
+el Máximo Común Divisor. En particular, lo que nos gustaría
+ hacer con esta sección es definir el problema del Máximo Común Divisor. Discutiremos una forma ineficiente de calcularlo y en la siguiente sección discutiremos cómo hacerlo mejor. Sin embargo, ¿Qué es el MCD (Máximo Común Divisor)? Suponga que tenemos una fracción, 
+a sobre b y que deseamos simplificarla. La forma estándar de lograr esto es dividiendo 
+tanto el numerador como el denominador por algún número 'd', para obtener una fracción equivalente (a/b) / (b/d) Correcto. Ahora, ¿Cuál 'd' debemos usar para esto? Bien, debemos satisfacer dos propiedades, En primer lugar, 'd' debe dividir de forma exacta tanto a 'a' como a 'b
+de tal forma que los nuevos numerador y denominador sean ambos enteros. Pero, sujeto a lo anterior, deseamos que
+ 'd' sea tan grande como sea posible para que podamos reducir la fracción tanto como podamos. Entonces, definimos que para 2 enteros 'a' y 'b', su Máximo Común Divisor, o MCD. es el entero 'd' más grande que divide de 
+forma exacta a 'a' y a 'b'. Bien, entonces es algo que usamos para reducir fracciones. Sin embargo, resulta que MCD es un concepto crítico en el campo de la teoría de números. El estudio de números primos, factorización y similares. Y, debido a su importancia en la teoría de números, 
+ser capaces de calcular MCDs es de hecho muy 
+importante en criptografía Por ejemplo, el hecho de que podamos realizar 
+transacciones bancarias en línea de forma segura es, en parte, debido al hecho de que calculamos 
+MCDs eficientemente para que los algoritmos criptográficos funcionen. Dada esta importancia, deseamos ser capaces de calcular MCDs. Deseamos un algoritmo que, dados 
+dos enteros 'a' y 'b' mayores o iguales a 0 calcule el MCD de 'a' y 'b'. Para aclarar el tipo de entrada que nos interesa, de hecho, deseamos ser capaces de ejecutar
+este algoritmo sobre números largos No deseamos solo que calcule el MCD de 5 y 12, o de 11 y 73. Deseamos ser capaces de calcular el MCD de 3,918,848 y 1,653,264 De hecho, nos interesa ser capaces de calcularlo 
+para números mucho más grandes 20, 50, 100 o 1000 digitos. y, además, ser capaces de calcularlo bastante rápido. Bien, empecemos. Iniciemos sencillamente encontrando
+ un algoritmo que funcione. Lo que deseamos es el número 
+más grande que divida tanto a 'a' como a 'b'. Entonces, una cosa que podemos hacer es probar todos los números candidatos. Esto es, descubrir cuáles dividen a 'a' y a 'b' 
+y retornar el más grande. Aquí hay una implementación. Creamos una variable llamada 'best' y la iniciamos en 0 Sencillamente mantiene el mayor
+ número encontrado hasta ahora Lo ejecutamos de 1 a 'a+b' dado que ese es el rango de números que son validos. ahora, si 'd' divide a 'a', y 'd' divide a 'b', 
+y dado que 'd' está creciendo este debe ser el nuevo 'best' que hemos visto Entonces, asignamos 'd' a 'best' y así, al final del día, retornamos el mejor resultado que encontramos. Este es un algoritmo perfectamente bueno. Funciona. Lastimosamente, es un poco lento, Ya que debemos correr a través del bucle 'a + b' veces y, esto significa que, aún cuando 'a' y 'b' son, digamos, 
+números de 20 digitos, ya va a tomarnos al menos miles de años para poder terminar el cálculo. Esto no es suficiente para el tipo de aplicaciones que nos interesan. Vamos a necesitar un algoritmo mejor. Así que vuelve para la siguiente sesión y hablaremos 
+sobre como encontrar un mejor algoritmo para este problema.

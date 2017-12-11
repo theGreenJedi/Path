@@ -1,0 +1,515 @@
+1
+00:00:00,220 --> 00:00:00,800
+En este vídeo,
+
+2
+00:00:00,800 --> 00:00:05,390
+estudiaremos uno de los tipos de algoritmos más 
+simples, que es el ordenamiento por selección.
+
+3
+00:00:06,570 --> 00:00:13,800
+Su principal idea es muy simple, sólo seguimos aumentando
+ la parte ordenada de nuestro arreglo.
+
+4
+00:00:13,800 --> 00:00:20,085
+Déjenme ilustrarlo con un ejemplo de juguete. 
+Supón que nos dan una secuencia de longitud 5
+
+5
+00:00:20,085 --> 00:00:24,770
+que consiste en 5 enteros, 8, 4, 2, 5 y 2.
+
+6
+00:00:24,770 --> 00:00:29,550
+Y empezamos encontrando uno de los
+ elementos que son un mínimo en este arreglo.
+
+7
+00:00:29,550 --> 00:00:31,560
+En este caso es 2,
+
+8
+00:00:31,560 --> 00:00:33,010
+y ahora hagamos lo siguiente,
+
+9
+00:00:33,010 --> 00:00:36,020
+lo intercambiamos con el primer 
+elemento de nuestro arreglo.
+
+10
+00:00:37,140 --> 00:00:40,740
+Después del intercambio, el 2 se queda en su posición final,
+
+11
+00:00:40,740 --> 00:00:46,030
+2 es el valor mínimo del arreglo y
+ ya está en la primera posición.
+
+12
+00:00:46,030 --> 00:00:49,820
+Ahora hagamos lo siguiente, 
+olvidémonos de este elemento,
+
+13
+00:00:49,820 --> 00:00:52,222
+ya está en su posición inicial,
+
+14
+00:00:52,222 --> 00:00:55,315
+y repitamos el mismo procedimiento 
+con lo que queda de nuestro arreglo.
+
+15
+00:00:55,315 --> 00:01:00,280
+A decir, empezamos primero con el
+ valor mínimo, que de nuevo es 2.
+
+16
+00:01:00,280 --> 00:01:04,200
+lo intercambiamos con el primer 
+elemento de la parte que nos quedó
+
+17
+00:01:04,200 --> 00:01:07,470
+y finalmente nos olvidamos de este término.
+
+18
+00:01:07,470 --> 00:01:12,030
+Así que de nuevo, encontramos el valor mínimo que 
+ahora es 4, lo intercambiamos con el primer elemento
+
+19
+00:01:12,030 --> 00:01:16,100
+de la parte que resta, que es ahora el
+ tercer elemento de nuestro arreglo,
+
+20
+00:01:16,100 --> 00:01:19,550
+y entonces, simplemente olvidamos los primeros 3 términos,
+
+21
+00:01:19,550 --> 00:01:21,490
+y continuamos con nuestra parte restante.
+
+22
+00:01:21,490 --> 00:01:26,830
+Así que, de nuevo, sólo seguimos aumentando la 
+parte ordenada de nuestro arreglo.
+
+23
+00:01:26,830 --> 00:01:31,620
+Al final, lo que tenemos es que el arreglo completo está ordenado.
+
+24
+00:01:31,620 --> 00:01:35,670
+El pseudo código que se muestra aquí, implementa
+
+25
+00:01:35,670 --> 00:01:39,279
+directamente la idea del algoritmo del ordenamiento 
+por selección que acabamos de discutir.
+
+26
+00:01:40,440 --> 00:01:44,390
+Aquí tenemos un bucle donde i va de 1 a n,
+
+27
+00:01:44,390 --> 00:01:46,140
+inicialmente i=1.
+
+28
+00:01:46,140 --> 00:01:51,120
+Dentro de este bucle calculamos el índice 
+de un valor mínimo en el arreglo
+
+29
+00:01:51,120 --> 00:01:54,175
+con índices de i a n.
+
+30
+00:01:54,175 --> 00:01:57,864
+Hacemos esto como sigue. Creamos una variable
+
+31
+00:01:57,864 --> 00:02:01,017
+minIndex que inicialmente es igual a i,
+
+32
+00:02:01,017 --> 00:02:06,328
+y visitamos el resto de los elementos dentro de esta parte,
+
+33
+00:02:06,328 --> 00:02:09,730
+esto es, elementos de i+1 a n,
+
+34
+00:02:09,730 --> 00:02:14,440
+y si encontramos un elemento más 
+pequeño actualizamos la variable minIndex.
+
+35
+00:02:14,440 --> 00:02:19,450
+Así que al final de este bucle lo que tenemos es que minIndex
+
+36
+00:02:19,450 --> 00:02:24,860
+es la posición de un elemento mínimo en el arreglo de i a n.
+
+37
+00:02:25,980 --> 00:02:29,410
+Entonces intercambiamos este elemento con el elemento A[i].
+
+38
+00:02:30,650 --> 00:02:34,580
+A decir, cuando i=1, lo que hicimos fue encontrar
+
+39
+00:02:34,580 --> 00:02:38,340
+el elemento mínimo en el arreglo y lo
+ intercambiamos con el primer elemento.
+
+40
+00:02:38,340 --> 00:02:42,860
+Así que ahora el primer elemento de 
+nuestro arreglo está en su posición final.
+
+41
+00:02:42,860 --> 00:02:46,910
+Entonces, en la segunda iteración de nuestro bucle,
+ hacemos prácticamente lo mismo.
+
+42
+00:02:46,910 --> 00:02:51,200
+Encontramos el valor mínimo, la posición de un valor mínimo
+
+43
+00:02:51,200 --> 00:02:55,548
+dentro de la parte que resta de nuestro arreglo
+ y lo ponemos en el segundo lugar.
+
+44
+00:02:55,548 --> 00:02:59,874
+En la tercera iteración encontramos el
+ valor mínimo de la parte restante,
+
+45
+00:02:59,874 --> 00:03:02,277
+lo ponemos en su lugar, y así seguimos.
+
+46
+00:03:02,277 --> 00:03:06,961
+Así que seguimos aumentando la parte ordenada del arreglo.
+
+47
+00:03:06,961 --> 00:03:12,800
+Ahora sería útil checar la visualización 
+en línea para ver cómo se ve esto,
+
+48
+00:03:12,800 --> 00:03:13,720
+así que hagamos esto.
+
+49
+00:03:15,580 --> 00:03:20,130
+Esta visualización muestra cómo se 
+desempeña el ordenamiento por selección
+
+50
+00:03:20,130 --> 00:03:22,770
+en unos cuantos datos,
+
+51
+00:03:22,770 --> 00:03:28,690
+a decir, en datos aleatorios, en una secuencia que está casi ordenada,
+
+52
+00:03:28,690 --> 00:03:32,030
+también en una secuencia que está ordenada en orden inverso,
+
+53
+00:03:32,030 --> 00:03:35,570
+y en una secuencia que contiene sólo unos cuantos elementos únicos.
+
+54
+00:03:35,570 --> 00:03:37,849
+Corramos este algoritmo y veamos qué pasa.
+
+55
+00:03:44,509 --> 00:03:51,690
+Puedes ver que, de hecho, este algoritmo
+ sólo aumenta la parte ordenada,
+
+56
+00:03:51,690 --> 00:03:56,190
+la región inicialmente ordenada de nuestro arreglo.
+
+57
+00:03:56,190 --> 00:04:01,230
+Otra propiedad interesante que se revela en la visualización
+
+58
+00:04:01,230 --> 00:04:02,010
+es la siguiente.
+
+59
+00:04:02,010 --> 00:04:06,710
+el tiempo de ejecución de este algoritmo 
+no depende de los datos de entrada
+
+60
+00:04:06,710 --> 00:04:10,300
+sólo depende del tamaño de nuestra secuencia inicial.
+
+61
+00:04:11,728 --> 00:04:14,940
+El tiempo de ejecución total de
+ nuestro algoritmo es cuadrático
+
+62
+00:04:14,940 --> 00:04:16,990
+y esto no es difícil de ver, ¿verdad?
+
+63
+00:04:16,990 --> 00:04:21,130
+Lo que tenemos son dos bucles anidados.
+
+64
+00:04:21,130 --> 00:04:24,600
+En el bucle externo i va de 1 a n.
+
+65
+00:04:24,600 --> 00:04:28,690
+En el bucle interior, j va de i+1 a n,
+
+66
+00:04:28,690 --> 00:04:33,880
+para encontrar un mínimo en la parte
+ restante de nuestro arreglo,
+
+67
+00:04:33,880 --> 00:04:37,480
+así que en total tenemos un número cuadrático de iteraciones.
+
+68
+00:04:37,480 --> 00:04:42,100
+En este punto, sin embargo, nos tendríamos
+ que preguntar si nuestra estimación del tiempo
+
+69
+00:04:42,100 --> 00:04:45,050
+para este algoritmo es demasiado pesimista.
+
+70
+00:04:45,050 --> 00:04:46,680
+Y esto es lo que quiero decir con esto.
+
+71
+00:04:46,680 --> 00:04:49,870
+Recuerda que tenemos 2 bucles anidados.
+
+72
+00:04:49,870 --> 00:04:52,290
+En el bucle externo i va de 1 a n.
+
+73
+00:04:52,290 --> 00:04:55,630
+En el bucle interno j va de i+1 hasta n.
+
+74
+00:04:55,630 --> 00:05:00,560
+Así que cuando i=1, el número de
+ iteraciones del bucle interno es n-1.
+
+75
+00:05:00,560 --> 00:05:04,440
+Sin embargo, cuando i=2, el número de
+ iteraciones del bucle interno es n-2,
+
+76
+00:05:04,440 --> 00:05:05,310
+y así sucesivamente.
+
+77
+00:05:05,310 --> 00:05:10,370
+Así que cuando i aumenta, el número de 
+iteraciones del bucle interno disminuye.
+
+78
+00:05:10,370 --> 00:05:14,710
+Una estimación más exacta para el número
+ total de iteraciones del bucle interno
+
+79
+00:05:14,710 --> 00:05:18,910
+sería la siguiente: (n-1)+(n-2)+(n-3), etc.
+
+80
+00:05:19,980 --> 00:05:23,690
+Así que definitivamente es menos que n^2.
+
+81
+00:05:23,690 --> 00:05:27,410
+Sin embargo, mostraremos que 
+asintóticamente esto es igual a n^2.
+
+82
+00:05:27,410 --> 00:05:29,464
+A decir, esto es Theta(n^2),
+
+83
+00:05:29,464 --> 00:05:32,460
+y es aproximadamente igual a n^2/2.
+
+84
+00:05:33,460 --> 00:05:37,724
+La suma, que es lo que necesitamos estimar,
+ es llamada Serie aritmética,
+
+85
+00:05:37,724 --> 00:05:40,560
+y hay una fórmula conocida para esta suma.
+
+86
+00:05:40,560 --> 00:05:44,848
+Así, 1+2+3+...+n,
+
+87
+00:05:44,848 --> 00:05:48,230
+es igual a n(n+1)/2.
+
+88
+00:05:48,230 --> 00:05:51,050
+Y así podemos probar esta fórmula.
+
+89
+00:05:52,100 --> 00:05:57,670
+Escribamos todos nuestros n enteros en un renglón, 1, 2,..., n.
+
+90
+00:05:57,670 --> 00:06:01,560
+Debajo escribamos el mismo conjunto de 
+enteros, pero en orden inverso,
+
+91
+00:06:01,560 --> 00:06:05,960
+n, n-1, ..., 2, 1
+
+92
+00:06:05,960 --> 00:06:10,580
+Entonces, lo que tenemos son 2 renglones de tamaño n,
+
+93
+00:06:10,580 --> 00:06:13,190
+hay n columnas, y en cada una
+
+94
+00:06:13,190 --> 00:06:17,410
+la suma de los correspondientes
+ 2 enteros es igual a n+1.
+
+95
+00:06:17,410 --> 00:06:21,310
+Así que en la primera columna tenemos
+ n y 1, en la segunda columna
+
+96
+00:06:21,310 --> 00:06:25,580
+2 y n-1, y así sucesivamente hasta la 
+última columna donde tenemos n y 1.
+
+97
+00:06:25,580 --> 00:06:30,820
+Y la suma de cada columna es 
+igual a n+1, y hay n columnas,
+
+98
+00:06:30,820 --> 00:06:35,190
+lo que significa que la suma de todos 
+los números en la tabla es igual 
+
+99
+00:06:35,190 --> 00:06:38,200
+a n(n+1).
+
+100
+00:06:38,200 --> 00:06:44,270
+Como la tabla contiene el doble de
+ la suma de los enteros del 1 al n,
+
+101
+00:06:44,270 --> 00:06:51,979
+concluímos que la suma de todos 
+los enteros de 1 a n es igual a n(n+1)/2.
+
+102
+00:06:51,979 --> 00:06:58,340
+Otra posibilidad para ver que esta fórmula es correcta,
+
+103
+00:06:58,340 --> 00:07:05,070
+es tomar un rectángulo de dimensiones n por n+1,
+
+104
+00:07:05,070 --> 00:07:09,985
+así que su área es n(n+1).
+
+105
+00:07:09,985 --> 00:07:14,765
+Y lo cortamos en dos partes como se muestra en la figura,
+
+106
+00:07:14,765 --> 00:07:22,252
+de forma que el área de cada una
+ de las dos partes es igual a 1+2+...+n.
+
+107
+00:07:22,252 --> 00:07:23,872
+Ya estamos listos para concluir.
+
+108
+00:07:23,872 --> 00:07:26,852
+Acabamos de discutir el algoritmo 
+del ordenamiento por selección.
+
+109
+00:07:26,852 --> 00:07:30,032
+Este algoritmo es fácil de implementar, fácil de analizar
+
+110
+00:07:30,032 --> 00:07:35,702
+y su tiempo de ejecución es n^2, donde n 
+es el tamaño de la secuencia de entrada.
+
+111
+00:07:35,702 --> 00:07:39,752
+Ordena la secuencia de entrada, o arreglo, en el mismo lugar,
+
+112
+00:07:39,752 --> 00:07:42,882
+lo que significa que casi no requiere memoria extra.
+
+113
+00:07:42,882 --> 00:07:47,280
+Quiero decir, toda la memoria extra 
+que requiere este algoritmo es nada más para
+
+114
+00:07:47,280 --> 00:07:49,800
+guardar índices, como i, j y n.
+
+115
+00:07:49,800 --> 00:07:55,270
+Hay otros algoritmos cuadráticos, como ordenamiento
+ por inserción, y ordenamiento de burbuja,
+
+116
+00:07:55,270 --> 00:07:58,634
+pero no los vamos a cubrir aquí, y mejor,
+
+117
+00:07:58,634 --> 00:08:04,749
+en el próximo video procederemos con un algoritmo
+ de ordenamiento asintóticamente más rápido.

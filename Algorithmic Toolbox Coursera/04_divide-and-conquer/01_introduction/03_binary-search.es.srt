@@ -1,0 +1,519 @@
+1
+00:00:00,350 --> 00:00:02,960
+Hola, hablemos ahora de la búsqueda binaria.
+
+2
+00:00:04,280 --> 00:00:08,990
+Un diccionario es un buen ejemplo de una lista ordenada.
+
+3
+00:00:08,990 --> 00:00:11,270
+OK, básicamente cada palabra está ordenada.
+
+4
+00:00:11,270 --> 00:00:13,550
+Y eso hace que encontrar palabras sea mucho más fácil.
+
+5
+00:00:13,550 --> 00:00:16,300
+Puedes imaginar lo difícil que sería buscar en un diccionario,
+
+6
+00:00:16,300 --> 00:00:18,910
+si el orden de las palabras fuera aleatorio.
+
+7
+00:00:18,910 --> 00:00:21,710
+Tendrías que buscar en cada una de
+ las páginas, y, de hecho,
+
+8
+00:00:21,710 --> 00:00:22,689
+cada palabra de cada página.
+
+9
+00:00:22,689 --> 00:00:23,760
+Tomaría mucho tiempo.
+
+10
+00:00:25,050 --> 00:00:29,490
+Entonces veamos el enunciado del problema
+ para buscar en en arreglo ordenado.
+
+11
+00:00:29,490 --> 00:00:33,530
+Entonces lo que tenemos de entrada es A, 
+un arreglo, junto con las cotas
+
+12
+00:00:33,530 --> 00:00:37,780
+inferior y superior que especifican los límites
+ en los que hay que buscar en el arreglo.
+
+13
+00:00:37,780 --> 00:00:41,250
+Lo que es importante sobre el arreglo es que está ordenado.
+
+14
+00:00:41,250 --> 00:00:45,900
+Lo que queremos decir con eso es que
+ si vemos un elemento en el índice i
+
+15
+00:00:45,900 --> 00:00:51,590
+y entonces el siguiente elemento, el primer
+ elemento no es mayor que el siguiente.
+
+16
+00:00:51,590 --> 00:00:55,340
+No decimos menor que, porque queremos permitir
+
+17
+00:00:55,340 --> 00:00:57,350
+arreglos con elementos repetidos.
+
+18
+00:00:58,410 --> 00:01:03,517
+Esto es llamado oficialmente un arreglo
+ monotónico no decreciente.
+
+19
+00:01:04,570 --> 00:01:06,230
+La otra entrada es la clave que hay que buscar.
+
+20
+00:01:07,540 --> 00:01:12,251
+La salida de esto es un índice tal que el elemento
+
+21
+00:01:12,251 --> 00:01:16,030
+en ese índice del arreglo es igual a la clave.
+
+22
+00:01:16,030 --> 00:01:20,260
+Decimos que "un" elemento y no "el" elemento 
+como lo hicimos en la búsqueda lineal,
+
+23
+00:01:20,260 --> 00:01:22,461
+debido al hecho de que puedan haber más elementos,
+
+24
+00:01:22,461 --> 00:01:26,710
+más que concuerden porque puede
+ haber duplicados en el arreglo.
+
+25
+00:01:28,560 --> 00:01:30,540
+Si no hay concordancia,
+
+26
+00:01:30,540 --> 00:01:33,295
+en lugar de devolver "NOT_FOUND" 
+como lo hicimos en el caso lineal,
+
+27
+00:01:33,295 --> 00:01:36,290
+vamos a devolver información algo más útil,
+
+28
+00:01:36,290 --> 00:01:39,370
+que es, dónde en el arreglo insertarías
+
+29
+00:01:39,370 --> 00:01:44,600
+el elemento, si es que quisieras insertarlo,
+
+30
+00:01:44,600 --> 00:01:48,020
+o dónde estaría, si estuviera ahí.
+
+31
+00:01:48,020 --> 00:01:50,577
+Así que lo que vamos a devolver es el índice más alto
+
+32
+00:01:50,577 --> 00:01:52,129
+tal que A_i es menor que k.
+
+33
+00:01:52,129 --> 00:01:54,882
+Esto es, si la clave no está en el arreglo,
+
+34
+00:01:54,882 --> 00:02:00,225
+devolvemos un índice tal que si ves el 
+elemento que se encuentra en ese índice,
+
+35
+00:02:00,225 --> 00:02:05,000
+es menor que la clave, pero el siguiente
+ elemento es mayor que la clave.
+
+36
+00:02:07,146 --> 00:02:11,991
+Y tenemos que considerar el hecho 
+de qué pasa si cada elemento 
+
+37
+00:02:11,991 --> 00:02:14,810
+del arreglo es mayor que la clave.
+
+38
+00:02:14,810 --> 00:02:17,509
+En ese caso vamos a continuar y devolveremos low-1.
+
+39
+00:02:19,070 --> 00:02:19,990
+Fíjate en este ejemplo.
+
+40
+00:02:19,990 --> 00:02:24,620
+Tenemos este arreglo con 7 elementos
+ y el elemento 20 está repetido.
+
+41
+00:02:24,620 --> 00:02:29,350
+Si buscamos a 2 en este arreglo, 
+queremos continuar y devolver 0,
+
+42
+00:02:29,350 --> 00:02:32,540
+diciendo que cada elemento en este arreglo es mayor que 2.
+
+43
+00:02:32,540 --> 00:02:35,168
+Si por el otro lado, buscamos a 3, entonces devolvemos 1.
+
+44
+00:02:35,168 --> 00:02:38,259
+Si buscamos 4, también vamos a devolver 1,
+
+45
+00:02:38,259 --> 00:02:41,333
+lo que realmente significa que está entre 1 y 2.
+
+46
+00:02:41,333 --> 00:02:44,440
+Esto es, es mayor que 3 pero menor que 5.
+
+47
+00:02:46,130 --> 00:02:48,740
+Si buscamos 20, devolvemos 4.
+
+48
+00:02:48,740 --> 00:02:50,120
+O, podríamos devolver 5,
+
+49
+00:02:50,120 --> 00:02:54,380
+cualquiera de los dos es válido porque 20
+ está presente en esos dos índices.
+
+50
+00:02:54,380 --> 00:02:56,400
+Y si buscamos 60 devolveremos 7.
+
+51
+00:02:56,400 --> 00:03:00,287
+Pero si buscamos 70 también devolveremos 7.
+
+52
+00:03:02,711 --> 00:03:05,150
+Entonces veamos nuestra implementación
+ de la búsqueda binaria.
+
+53
+00:03:05,150 --> 00:03:09,110
+Entonces vamos a escribir una rutina recursiva, 
+que toma como entrada A, low, high y k,
+
+54
+00:03:09,110 --> 00:03:11,440
+como lo especificamos en el enunciado del problema.
+
+55
+00:03:12,810 --> 00:03:13,880
+Primero, nuestro caso base.
+
+56
+00:03:13,880 --> 00:03:18,590
+Si tenemos un arreglo vacío, esto es, si high es menor que low, 
+
+57
+00:03:18,590 --> 00:03:20,789
+no hay elementos, entonces devolvemos low-1.
+
+58
+00:03:22,570 --> 00:03:24,490
+De otra forma vamos a calcular el punto medio.
+
+59
+00:03:24,490 --> 00:03:27,820
+Queremos algo que está a medio camino de low y high,
+
+60
+00:03:27,820 --> 00:03:32,935
+así que lo que hacemos es estimar el
+ ancho, que es high menos low,
+
+61
+00:03:32,935 --> 00:03:37,399
+cortarlo a la mitad, o sea, dividirlo por 2, y agregarlo a low.
+
+62
+00:03:37,399 --> 00:03:40,234
+Esto no podría ser entero,
+
+63
+00:03:40,234 --> 00:03:45,133
+porque (high-low)/2 puede darnos una fracción,
+
+64
+00:03:45,133 --> 00:03:47,479
+así que vamos a tomar la función piso de esto.
+
+65
+00:03:49,803 --> 00:03:54,185
+Por ejemplo, en el caso previo, 
+teníamos 1 a 6, lo que da 7-1=6,
+
+66
+00:03:54,185 --> 00:03:58,100
+dividido por 2 es 3, más nuestro low que
+ es 1 da 4, y el punto medio es 4.
+
+67
+00:03:58,100 --> 00:03:59,410
+Veremos un ejemplo de esto pronto.
+
+68
+00:04:01,870 --> 00:04:08,430
+Y ahora checamos y vemos si el elemento en
+ el punto medio es igual a nuestra clave.
+
+69
+00:04:08,430 --> 00:04:11,050
+Si lo es, terminamos, lo devolvemos.
+
+70
+00:04:11,050 --> 00:04:13,138
+Si no, las buenas noticias son, por supuesto,
+
+71
+00:04:13,138 --> 00:04:17,810
+que no tenemos que checar todos los otros elementos,
+ hemos desechado la mitad de ellos.
+
+72
+00:04:17,810 --> 00:04:21,570
+Entonces, si la clave es menor que
+ el elemento en el punto medio,
+
+73
+00:04:21,570 --> 00:04:24,140
+entonces podemos ignorar todos los 
+que estén arriba de ese punto.
+
+74
+00:04:24,140 --> 00:04:28,851
+Así que seguimos adelante y ahora devolvemos
+ la búsqueda binaria en A desde low a mid-1,
+
+75
+00:04:28,851 --> 00:04:31,571
+ignorando completamente el resto.
+
+76
+00:04:31,571 --> 00:04:34,963
+De otro modo, si la clave es mayor que el punto medio, de nuevo
+
+77
+00:04:34,963 --> 00:04:39,200
+podemos desechar toda la parte inferior 
+e ir desde el punto medio +1 hasta high.
+
+78
+00:04:41,080 --> 00:04:42,280
+Veamos un ejemplo.
+
+79
+00:04:42,280 --> 00:04:46,280
+Digamos que buscamos la clave 50
+ en este arreglo de 11 elementos.
+
+80
+00:04:46,280 --> 00:04:50,260
+Así que haremos nuestra búsqueda binaria 
+en este arreglo, del 1 al 11, buscando a 50.
+
+81
+00:04:50,260 --> 00:04:53,865
+Low es 1, high es 11.
+
+82
+00:04:53,865 --> 00:04:59,213
+Calculamos el punto medio, que será 11-1, 10
+
+83
+00:04:59,213 --> 00:05:03,432
+dividido por 2 es 5, sumamos 1, el punto medio es 6.
+
+84
+00:05:03,432 --> 00:05:07,693
+Y ahora checamos si el elemento en
+ el punto medio es igual a 50.
+
+85
+00:05:07,693 --> 00:05:08,243
+Pues no.
+
+86
+00:05:08,243 --> 00:05:11,295
+El elemento en el punto medio es 15 y
+ el elemento que estamos buscando es
+
+87
+00:05:11,295 --> 00:05:12,982
+la clave que buscamos es 50.
+
+88
+00:05:12,982 --> 00:05:18,070
+Así que seguimos e ignoramos la parte inferior del arreglo
+
+89
+00:05:18,070 --> 00:05:24,050
+y llamamos a la búsqueda binaria de nuevo, 
+con low=7, uno más que el punto medio.
+
+90
+00:05:25,140 --> 00:05:27,920
+Ahora tenemos una versión más pequeña del problema.
+
+91
+00:05:27,920 --> 00:05:31,660
+Buscamos a 50 entre los elementos del 7 al 11, 
+calculamos el punto medio,
+
+92
+00:05:31,660 --> 00:05:35,321
+11-7 es 4, dividido por 2 es 2,
+
+93
+00:05:35,321 --> 00:05:39,708
+lo agregamos a 7 para obtener un punto medio de 9.
+
+94
+00:05:39,708 --> 00:05:44,594
+Checamos si el elemento en el índice 9 es igual a la clave.
+
+95
+00:05:44,594 --> 00:05:48,210
+El elemento en el índice 9 es 20, nuestra
+ clave es 50, no, no son iguales.
+
+96
+00:05:49,540 --> 00:05:54,900
+Sin embargo, 50 es mayor que 20, así que continuamos 
+
+97
+00:05:54,900 --> 00:05:59,978
+y hacemos una nueva llamada recursiva con
+ low igual al punto medio +1 que es 10.
+
+98
+00:05:59,978 --> 00:06:02,281
+Así que hacemos nuestra búsqueda binaria de 10 a 11,
+
+99
+00:06:02,281 --> 00:06:03,260
+calculamos el punto medio,
+
+100
+00:06:04,830 --> 00:06:10,013
+high-low, 11-10 es 1, dividido por 2 es un medio, +10 es 10.5,
+
+101
+00:06:10,013 --> 00:06:15,140
+tomamos el piso de eso, tenemos 10, así que
+ nuestro punto medio es 10 y medio,
+
+102
+00:06:15,140 --> 00:06:17,480
+¡perdón!, es 10.
+
+103
+00:06:17,480 --> 00:06:18,470
+Y ahora checamos,
+
+104
+00:06:18,470 --> 00:06:22,820
+¿es el valor en el elemento 10 igual a nuestra clave?
+
+105
+00:06:22,820 --> 00:06:26,140
+Bueno pues el valor en el elemento 10 
+es 50, nuestra clave es 50, así que sí,
+
+106
+00:06:26,140 --> 00:06:30,390
+vamos a seguir adelante y devolver el punto medio que es 10.
+
+107
+00:06:30,390 --> 00:06:35,310
+En resumen, entonces, lo que hicimos 
+fue dividir nuestro problema 
+
+108
+00:06:35,310 --> 00:06:37,715
+en subproblemas que no se traslapan del mismo tipo.
+
+109
+00:06:37,715 --> 00:06:39,790
+Resolvimos recursivamente estos subproblemas.
+
+110
+00:06:39,790 --> 00:06:42,920
+Y entonces combinamos los resultados de estos subproblemas.
+
+111
+00:06:42,920 --> 00:06:45,960
+Dividimos el problema en un problema de la mitad del tamaño,
+
+112
+00:06:45,960 --> 00:06:47,460
+ligeramente menor a la mitad,
+
+113
+00:06:47,460 --> 00:06:49,860
+Resolvimos recursivamente ese subproblema
+
+114
+00:06:49,860 --> 00:06:52,770
+y entonces combinamos el resultado muy 
+sencillamente sólo devolviendo el resultado.
+
+115
+00:06:53,850 --> 00:06:57,330
+En el siguiente video vamos a continuar
+ y checar el tiempo de ejecución
+
+116
+00:06:57,330 --> 00:06:58,830
+de la búsqueda binaria,
+
+117
+00:06:58,830 --> 00:07:00,540
+junto con una versión iterativa.
+
+118
+00:07:00,540 --> 00:07:06,050
+Y regresaremos a discutir el problema que discutimos
+
+119
+00:07:06,050 --> 00:07:07,840
+sobre el problema de la traducción del diccionario.
+
+120
+00:07:09,030 --> 00:07:09,640
+Nos veremos pronto.

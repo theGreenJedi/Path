@@ -1,0 +1,107 @@
+En este vídeo, consideraremos un
+problema de código más interesante. Este problema nos obligará a implementar
+una solución más rápida que la solución simple. Primero la depuraremos con pruebas de
+estrés antes de alcanzar una una solución correcta que sea capaz de pasar todas
+las pruebas en el sistema de pruebas. El problema se denomina el problema del
+producto máximo priorizado. En este problema, nos darán un vector
+o una secuencia de n números y nuestro objetivo es encontrar
+un número que pueda ser obtenido multiplicando dos números
+de esta secuencia. Recuerda que en nuestro problema nos dan
+una secuencia de enteros no negativos encontrar el máximo producto entre pares. La entrada para este problema
+consiste en dos líneas. La primera línea contiene
+un único número n que es al menos 2 y como mucho
+2 multiplicado por 10 a la 5. La línea siguiente contiene la
+secuencia de números que son enteros no negativos
+que no superan 10 a la 5. Nuestro objetivo es mostrar un único número,
+el máximo producto entre pares. La página contiene también dos pruebas de ejemplo. Por ejemplo, si una entrada al programa
+es la secuencia de 3 enteros consistente en los números 1, 2, 3,
+entonces la salida debería ser, por supuesto, 6, porque es 2 multiplicado por 3. Para una secuencia ligeramente más larga de tamaño 10, la salida debería ser 140, y esto es 10 multiplicado por 14. Como es habitual también hay una sección que contiene los ficheros de inicio. Y comenzamos eligiendo C++ como nuestro lenguaje
+de programación para este problema. Así es como se ve el fichero
+de inicio de la solución en C++. Empezamos leyendo el número
+n desde la entrada estándar. Después creamos una lista
+o un vector de tamaño n. entonces llenamos este vector con los elementos de
+nuestra secuencia, elemento por elemento, después leemos desde la entrada estándar. Entonces pasamos la secuencia 
+de números a la función MaxPairwiseProduct que calcula
+la respuesta a nuestro problema. Veamos que pasa dentro
+de la función MaxPairwiseProduct. Empezamos inizializando
+la variable result a 0 y examinamos todos los posibles
+pares de diferentes elementos. esto es, pasamos por todos los posibles i y
+j, donde i es menor que j. Lo hacemos mediante dos bucles anidados. Y para cada uno de estos pares, comprobamos si
+el producto de los dos correspondientes números es mayor que
+nuestro resultado actual. Si es así, actualizamos el resultado. Finalmente, devolvemos el resultado. Este algoritmo es correcto
+por una razón obvia. El objetivo de nuestro problema es encontrar 
+el máximo producto entre pares. ¿Correcto? Para hacer esto examinamos
+todos los posibles pares y seleccionamos el máximo producto. De acuerdo. Para comprobar que es correcto,
+vamos a compilarlo, como es habitual. Para ello usamos el flujo de compilador para C++. De acuerdo, y ahora lo probamos. Por ejemplo, para la secuencia de longitud 3, consistente en los números del 1 al 3,
+entonces dice 6. Vamos a probarlo una vez más. Por ejemplo, esta secuencia de longitud 5, consistente en los números 3, 4, 5, 1, 2. La respuesta es 20 como se esperaba,
+porque es el produco de 4 y 5. De acuerdo, parece que es esta es una
+solución correcta y seguimos y la entregamos como una solución
+al sistema de prueba. Hemos enviado nuestra solución
+actual al sistema de calificación, pero desafortunadamente
+no puede pasar todas las pruebas. En particular, hay un mensaje de error 
+mostrado en el sistema de calificación. Echemos un vistazo. Dice que nuestra solución ha fallado la prueba número tres,
+que consiste sólo en dos números. El primero es 10 a la 5 y el segundo es 90.000 Comprobemos si podemos reproducir
+este comportamiento en nuestra máquina local. Llamamos a nuestro programa con sólo dos números, 10 a la 5 y 90.000. Así que de hecho, como resultado,
+en vez de obtener nueve mil millones como se esperaba,
+obtenemos algún número aleatorio. Esto ocurre habitualmente cuando
+hay un desbordamiento de enteros. Y, en efecto, hemos usado
+el tipo estándar entero para almacenar el resultado de
+multiplicar dos números, pero nueve mil millones es demasiado grande para el tipo entero, por lo que no
+encaja en el tipo entero. Lo que se supone que debemos hacer es
+usar un tipo long long C++. Hacemos esto y comprobamos si esto resuelve nuestro problema, nuestra solución. Para ello necesitamos 
+cambiar todos los lugares donde calculamos y almacenamos los resultados. Primero que nada cambiamos
+la declaración de esta variable. También cambiamos el tipo
+de la variable de retorno del resultado. Cuando calculamos el producto de
+estos dos números, primero asignamos, por ejemplo, el primero a un tipo long long. De acuerdo, también y también aquí, ¡genial! Lo compilamos de nuevo. Y volvemos a ejecutarlo para comprobar si
+procesa correctamente nuestro conjunto de datos previo. 10 a la 5 y 90.000. ¡Genial! Muestra correctamente
+nueve mil millones. Ahora debemos estar completamente
+seguros de que nuestra solución es correcta, Porque para buscar el
+máximo producto entre pares simplemente examinamos todos los pares
+posibles y seleccionamos el máximo producto. ¿Qué más podemos hacer? También ahora usamos el tipo correcto 
+para almacenar el resultado. Sigamos adelante y enviemos nuestra
+nueva solución al sistema de calificación. Desafortunadamente nuestra 
+solución es aún incorrecta. En este caso particular, la salida del
+sistema de calificación es la siguiente. "Caso 4 fallado, excedido el tiempo límite". Esto significa que nuestra solución
+es demasiado lenta, que para grandes conjuntos de datos se
+ejecuta en más de un segundo. Vamos a intentar entender
+por qué ocurre esto. Lo primero, el tamaño máximo de un conjunto de
+datos es el tamaño máximo de una secuencia para este problema, en nuestro caso, es
+aproximadamente 10 a la 5. ¿Cuál es el número de operaciones realizadas
+por nuestra solución simple en secuencia? Recuerda que nuestra solución simple
+examina todos los pares posibles de los números de entrada. Esto es aproximadamente n cuadrado. Así cuando n es igual a 10 a la 5,
+esto es 10 a la 10. lo que es más de mil millones. Y mil millones es aproximadamente el número de
+operaciones básicas que un ordenador moderno puede realizar en un segundo. Podemos concluir que necesitamos un 
+algoritmos más rápido para resolver este problema. En particular, nos damos cuenta de que necesitamos
+encontrar el máximo producto entre pares sin necesidad de examinar todos los
+pares posibles de números. Buscando una inspiración, echemos un 
+vistazo a la página del problema. En particular, revisemos el
+segundo ejemplo. En este caso, nuestra entrada
+consiste en diez enteros y la salida, en este caso, es 140. ¿Por qué es ésta? Bueno, porque en nuestra secuencia
+están los números 14 y 10. Y estos dos números son los
+dos máximos números. Por lo que para cualquier otros dos números,
+su producto es menor que 140. Esto nos proporciona la idea de que para 
+encontrar el máximo producto de dos números en nuestra secuencia basta con encontrar los dos
+máximos números de nuestra secuencia. Esto es porque todos los enteros
+de esta secuencia son no negativos. Vamos a implementar esta idea
+en nuestro fichero C++. Aquí está ya implementada
+y se ve de la siguiente manera. La nueva función se llama
+MaxPairwiseProductFast. Ya utiliza el tipo long long para almacenar el resultado y
+hacemos lo siguiente. Escaneando el vector de entrada dos veces,
+encontramos los dos números máximos. En el primer bloque,
+encontramos el primer máximo y almacenamos su índice en la variable max_index y en el segundo bloque,
+hallamos el segundo mayor elemento. La diferencia en el segundo bloque es
+que también necesitamos evitar el primer mayor elemento. ¿Qué más puedes hacer? Lo que hacemos es,
+lo que hacemos es comprobar esto. De acuerdo, y después devolvemos el producto de los dos máximos números en nuestro vector. ¿Correcto? Como es habitual, compilemos y veamos si todo funciona correctamente. Este es nuestro nuevo archivo
+max_pairwise_product_fast.cpp Lo compilamos y primero lo ejecutamos
+en una secuencia pequeña. Por ejemplo, tamaño 3, por ejemplo,
+2, 3, 4, nos da 12 como se esperaba. Bien, ahora hacemos lo siguiente. Comprobamos cuál es el tiempo
+de ejecución con un conjunto de datos enorme. Para ello, en lugar de leer los datos desde la entrada estándar, vamos a generar un enorme vector aquí. Usamos un vector de enteros de tamaño 10 a la 5 y vamos a llenar el vector con ceros. Compilamos y lo ejecutamos. Pone cero inmediatamente,
+lo que significa que es mucho más rápido que
+el algoritmo previo. Así que ahora nuestra solución
+debe ser completamente correcta. Es rápida, usa el tipo correcto para 
+almacenar la solución y es también obviamente correcta porque selecciona los dos mayores números
+y los multiplica. El producto de los dos números puede
+ser el mayor porque hemos seleccionado los dos mayores números. Sin embargo, desafortunadamente,
+aún nuestra solución no es correcta. Puedes entregarla al sistema
+de prueba y ves que la salida será respuesta incorrecta para algún caso de prueba. En el vídeo siguiente, Michael les 
+hablará sobre las pruebas de estrés y les mostrará cómo arreglar esta solución.

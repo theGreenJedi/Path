@@ -1,0 +1,75 @@
+So let's look at a naive divide and conquer algorithm, to solve
+polynomial multiplication problem. The idea is, we're going to
+take our long polynomial and we're going to break it in two parts. The upper half and the lower half. So A(x) is going to be D sub
+one of X ,times x sub n over 2, plus d sub 0 of x, the bottom half. D sub 1 of x, since we've pulled
+out x sub n over 2 terms, it's lowest term is actually,
+just a sub n over 2. So we have two parallel sub polynomials,
+the high and the low. We do the same thing for B. So we break that into E sub 1 of x,
+and E sub 0 of x. Again, where E sub 1 of x is the high
+terms, E sub 0 of x is the low terms. When we do our multiplication, then,
+we just multiply together D 1, x sub n over 2 plus D 0 and
+E 1 times x sub n over 2 plus E 0. And that then yields for terms,
+D sub 1 E sub 1 times x sub n, D sub 1 E sub 0 + D sub 0 E sub 1
+times x sub n/2 + D sub 0 E sub 0. The key here is that, we now just need to
+calculate D1 E1, D1 E0, D0 E1, and D0 E0. Those are all polynomials of degree
+n over 2. And so, now we can go ahead and use a
+recursive solution to solve this problem. So it gives us a divide and
+conquer problem. Its run time is T of n,
+equals 4 T of n over 2. Why 4? 4, because we're breaking 
+into 4 subproblems. Each of them takes time T of n over 2 ecause the problem is broken in half. Plus, then,
+in order to take the results and do our addition that's going
+to take order n time. So some constant k, times that. Let's look at an example. So we have, n is 4, so
+we have degree three polynomials. And we're going to break up A of
+x into the top half, 4x plus 3, and the bottom half, 2x plus 1. Similarly, we're going to break
+up the top half of B of x. X cubed plus 2 x squared
+just becomes x plus 2. And 3x plus 4, stays at 3x plus 4. Now, we compute D1 E1. So multiplying together, 4x + 3, times x
+plus 2, gives us 4 x squared + 11x + 6. Similarly, we calculate D1 E0,
+D0 E1, and D0 E0. Now we've done all four of those
+computations, AB is just D1 E1, 4 x squared + 11x + 6 times x to the 4th,
+plus the sum of D1 E0 and D0 E1, times x squared,
+plus finally D0 E0. If we sum this all together,
+we get 4 x to the 6th, plus 11 x to the 5th, plus 20 x to the 4th, plus 30 x cubed,
+plus 20 x squared, plus 11x plus 4. Which is our solution. Now, how long's this take to run? We're going to look at that in a moment. Let's look at the actual code for it. So we're going to compute a resulting
+array, from 0 to 2n-2, so is all the results coefficients. And our base case is that if n of size 1, we're going to multiply together
+A at a sub l, plus B at b sub l. Let's look at those parameters again. So A and B are our arrays of coefficients,
+n is the size of the problem, a sub l is the first coefficient
+that we're interested in. And b sub l is the coefficient in B,
+that we're interested in. So we're going to be going from b sub l,
+b sub l plus one, b sub l plus two, etc. And for n times. First thing we'll do, is multiply
+together the D sub one and E sub one. So basically what we're doing, I'm sorry,
+the D sub zero and E sub zero. So, what we're doing is taking A and B,
+we're reducing the problem size by 2 and we're starting with
+those same coefficients. And we're going to assign those to
+the lower half of the elements in R. Then we're going to do something similar, where we take the upper
+halves of each of A and B. So again, the problem size becomes n/2,
+but now we're moving the lower coefficient we're interested in from a sub l to a sub
+l + n/2 and b sub l to b sub l + n/2. And we're going to assign those to
+the high coefficients in our result. Then, what we have to do is
+calculate D sub 0 E1, and D1 E0. And then, sum those together. When we sum those together, we're going to assign those to the middle
+elements of the resulting array. And we'll then return that result. Now the question comes up,
+how long does it take? So we have an original problem of size n, we break it into four
+problems of size n over 2. So, level 0 we have size n,
+level 1 we have size of n over 2, at level i, our problems
+are of size n over 2 to the i. And all the way down to the bottom
+of the tree is at log base 2 of n, and each of the problems are of size 1. How many problems do we have? At level 0, we have 1 problem. We have then 4 problems. If we go to the i'th level,
+we have 4 to the i problems. And at the very bottom, then we have
+4 to the log base 2 of n problems. How much work is there? Well, we just need to multiply
+together the number of problems times the amount of work,
+so we have kn here, and 4 times, 4 because there are 4 problems, kn over 2, because the problem
+size is n over 2 and the amount of work we're doing at each
+level is k times n over 2 per problem. So 4 kn over 2 just equals k times 2n,
+At the ith level for the i problems, each problem
+takes k times n over 2 to the i to deal with, we multiply together,
+k 2 to the i times n. And at the very bottom,
+we have k amount of work, we have a problem size of 1,
+times 4 to the log base 2 of n. Well four the log base two of n,
+is just n squared. So we have k n squared.
+Our total as we sum up all the work is going
+to be summation from i equals zero to log base two of n of four to
+the i k times n over two to the i. And that just gets dominated by
+the very bottom term which is big theta of n squared. So that's what our runtime takes.
+This is kind of weird. We went through all this work to
+create a divide and conquer algorithm. And yet, the run time is the same run time as it
+was with our naive original algorithm. We're going to see in the next video,
+a way to redo our divide and conquer algorithm, so we have less
+work to do at each level, and so we actually get a better final run time.

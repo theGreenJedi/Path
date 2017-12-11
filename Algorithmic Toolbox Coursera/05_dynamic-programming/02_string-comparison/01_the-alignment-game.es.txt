@@ -1,0 +1,83 @@
+La fibrosis quística es una de las enfermedades
+ genéticas más comunes en humanos Aproximadamente una de cada 25 personas
+porta un gen de la fibrosis quística. y cuando ambos padres portan un gen defectuoso, 
+hay una probabilidad del 25% de que sus hijos tengan fibrosis quística. A principios de la década de 1980s, los biólogos
+comenzaron la búsqueda de los genes de la fibrosis quística, uno de los primeros proyectos de búsqueda de genes
+en el marco del proyecto del genoma humano. Hace 30 años, los biólogos estrecharon la búsqueda de el gen de la fibrosis quística a una región de un millón
+ de nucleótidos en el cromosoma 7 Sin embargo, esta región contenía muchos genes y no estaba claro cuál de ellos era
+el responsable de la fibrosis quística. ¿Cómo puedes encontrar cuál de estos
+genes es el causante de la fibrosis quística? Te daré una pista. La fibrosis quística implica secreciones dulces con unos niveles de sodio anormalmente elevados. Esta es una pista biológica que no nos ayuda a resolver el reto de encontrar algo en esta área de un millón de nucleótidos que 
+es responsable de la fibrosis quística Te daré la pista número dos. En la época en la que la búsqueda
+de la fibrosis quística estaba en marcha, los biólogos ya sabían la secuencia de algunos
+ genes responsables de secreciones. Por ejemplo, las proteínas de unión a ATP actuán como canales de transporte
+responsables de la secreción. Te podrías todavía preguntar cómo estas
+ dos pistas pueden ayudar a encontrar el gen de la
+fibrosis quística en la región de un millón de nucleótidos en el cromosoma 7. Pero aquí está mi tercera pista. ¿Podríamos buscar genes en esta
+región que sean similares a los genes conocidos
+responsables de la secreción? Los biólogos usaron esta tercera pista y bingo, encontraron que uno de los genes
+en esta región era muy simlar a las proteínas de unión a ATP que actúan como
+canales de transporte responsables de la secreción. Para aprender cómo los biólogos encuentran
+similitudes entre genes, primero aprenderemos cómo jugar a un juego 
+sencillo llamado el juego de alineamiento. El juego de alineamiento es
+un juego para una sóla persona. Te doy dos cadenas y tu objetivo
+es eliminar símbolos de las cadenas de forma que el
+número de puntos sea maximizado. Tengo que explicarte cómo puedes obtener
+puntos jugando al juego de alineamiento. Puedes eliminar los primeros
+símbolos de ambas cadenas. y en este caso, ganas un punto si los
+ dos son el mismo símbolo no obtienes ningún punto
+si son símbolos diferentes. O puedes eliminar el primer símbolo
+de una de las cadenas y en este caso tampoco
+obtienes ningún punto. Vamos a intentar jugar a este juego. Al principio tiene sentido eliminar
+el primer símbolo de ambas cadenas, obtendremos más uno. Entonces, otro par de símbolos idénticos, otro más uno Y ahora los símbolos son diferentes por lo que no tiene sentido eliminar
+los dos porque obtendremos cero puntos. Tal vez deberíamos eliminar sólo "C"
+de la segunda cadena y después de que hayamos hecho esto habrá la posibilidad
+de eliminar dos Gs de ambas cadenas. Tenemos otro punto, seguimos,
+seguimos, seguimos y finalmente después de jugar a este
+juego tenemos una puntuación de más cuatro. ¿Piensas que puedes obtener una puntuación
+de más cinco jugando a este juego? También, después de jugar este juego hemos construido algo que se llama el
+alineamiento de dos cadenas. El alianeamiento de dos cadenas es
+una matriz de dos filas, en la que la primera fila consiste en los símbolos
+de la primera cadena en orden, posiblemente intercaladas
+con el símbolo espacio. y el segundo renglón consiste en los 
+símbolos de la segunda cadena posiblemente intercaladas
+con el símbolo espacio. Después de que construyamos el
+alineamiento, podemos clasificar las diferentes columnas en el
+alineamiento como coincidencias, discrepancias o inserciones. Inserciones se corresponde con el caso
+en el que seleccionamos el símbolo de la segunda cadena y eliminaciones corresponden al caso cuando
+ seleccionamos el símbolo de la primera cadena Y aún más podemos calificar esta 
+alineación dando un premio por cada coincidencia, daremos un premio de más
+uno y una penalización por cada discrepancia y cada inserción y eliminación
+que llamaremos indel. En nuestro caso, usaremos una penalización
+de menos mu para las discrepancias y una penalización de menos sigma
+para inserciones y deleciones o indeles. Por ejemplo, en nuestro caso
+si mu es igual a cero y sigma igual a uno, obtendremos una 
+puntuación de alineamiento igual a uno. Así definimos la puntuación de alineamiento
+como el número de coincidencias menos mu veces el número de discrepancias y
+menos sigma veces el número de indeles. Y el problema del alineamiento óptimo es dadas dos 
+cadenas, una penalización de discrepancia mu, y una penalización de indel sigma, encontrar un
+alineamiento de las dos cadenas maximizando la puntuación. Estaremos particularmente interesados en una
+puntuación particular de la alineación. Definiremos la subsecuencia común como simplemente las coincidencias
+en la alineación de dos cadenas. En este caso, la subsecuencia común
+está representada por ATGT, y el problema de la mayor
+subsecuencia común  que nos interesará es el siguiente. Dadas dos cadenas queremos encontrar la subsecuencia común más larga de estas cadenas Y, por supuesto, ya habrás
+reconocido que para encontrar la subsecuencia común más larga simplemente tenemos
+ que encontrar la alineación con puntaje máximo con parámetros mu igual a cero, y sigma igual a cero. Otro problema clásico en ciencias informáticas 
+es el problema de la distancia de edición. Dadas dos cadenas, encontrar el número
+mínimo de operaciones elementales, inserciones, deleciones o 
+sustituciones de símbolos, que transforman una cadena en otra. Y por supuesto, el número mínimo de
+inserciones, deleciones y discrepancias, en un alineamiento de dos cadenas, 
+representa la distancia de edición. Por ejemplo, si quieres encontrar la
+distancia de edición entre las cadenas, "editing" y "distance",
+podemos construir la alineación óptima de la cadena con el puntaje apropiado Aquí muestro coincidencias,
+discrepancias, inserciones y deleciones. Y para ver que el problema de edición de distancia
+ es equivalente al problema de alineación vamos a considerar este alineamiento
+entre editing y distance. y calculemos el número total de 
+símbolos en las dos cadenas. Obviamente, el número total de
+símbolos en las dos cadenas es igual a dos veces el número de coincidencias,
+más dos veces el número de discrepancias, más el número de inserciones,
+más el número de deleciones. Me tomaré la libertad de derivar esta 
+expresión y después de que la reescriba verás que los primeros tres términos 
+corresponden al puntaje de la alineación, y que los últimos tres términos corresponden
+con la distancia de edición. Así pues, minimizar la distancia de edición es
+lo mismo que maximizar la puntuación de alineamiento, lo que significa que el problema de la distancia
+de edición es sólo una versión particular del problema de alineamiento.

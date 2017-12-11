@@ -1,0 +1,409 @@
+1
+00:00:00,180 --> 00:00:01,080
+Hola.
+
+2
+00:00:01,080 --> 00:00:04,770
+En esta lección aprenderás a implementar un Algoritmo Voraz para
+
+3
+00:00:04,770 --> 00:00:06,480
+el Problema de la Mochila,
+
+4
+00:00:06,480 --> 00:00:11,620
+Cómo estimar su complejidad y cómo mejorar su comportamiento asintótico.
+
+5
+00:00:11,620 --> 00:00:15,580
+Acá está la descripción del algoritmo voraz de
+la lección anterior.
+
+6
+00:00:15,580 --> 00:00:19,610
+Mientras la mochila no esté llena,
+seleccionaremos el mejor objeto restante;
+
+7
+00:00:19,610 --> 00:00:23,510
+Aquel con el mayor valor por unidad de peso,
+
+8
+00:00:23,510 --> 00:00:27,280
+Y meteremos el objeto completo en la mochila o,
+
+9
+00:00:27,280 --> 00:00:31,640
+si queda poco espacio en la mochila,
+dividiremos el objeto y
+
+10
+00:00:31,640 --> 00:00:36,890
+meteremos tanto como podamos, y
+
+11
+00:00:36,890 --> 00:00:40,630
+luego repetiremos este proceso
+hasta que la mochila esté llena.
+
+12
+00:00:40,630 --> 00:00:44,960
+Al final, retornaremos el valor total de los objetos sacados
+y la cantidad de objetos sacados.
+
+13
+00:00:44,960 --> 00:00:50,540
+Hemos probado que la selección del mejor objeto es una movida segura.
+
+14
+00:00:50,540 --> 00:00:56,600
+Entonces, después que seleccionemos el mejor objeto
+lo que nos queda es una mochila con
+
+15
+00:00:56,600 --> 00:01:01,710
+una capacidad que es menor, pero el problema
+es el mismo: tienes algunos objetos y
+
+16
+00:01:01,710 --> 00:01:05,480
+tienes una mochila de cierta capacidad 
+que deberías llenar óptimamente,
+
+17
+00:01:05,480 --> 00:01:09,980
+de manera que se maximice el valor total
+de los objetos que quepan.
+
+18
+00:01:09,980 --> 00:01:12,810
+Así que, este algoritmo voraz realmente funciona.
+
+19
+00:01:12,810 --> 00:01:13,730
+Ahora, implementémoslo.
+
+20
+00:01:15,370 --> 00:01:18,230
+Aquí tenemos una función llamada Mochila.
+
+21
+00:01:18,230 --> 00:01:24,260
+Comienza llenando el arreglo A con
+objetos cuyo valor es 0 y
+
+22
+00:01:25,590 --> 00:01:29,780
+el valor total también lo inicializamos en 0 y luego,
+
+23
+00:01:29,780 --> 00:01:35,070
+como dijimos en la diapositiva, repetimos para "n"
+las siguientes iteraciones.
+
+24
+00:01:35,070 --> 00:01:39,530
+Si la mochila ya está llena, 
+entonces la variable W
+
+25
+00:01:39,530 --> 00:01:44,580
+estará en 0 porque en el comienzo
+teníamos en W el total
+
+26
+00:01:44,580 --> 00:01:49,460
+de la capacidad de la mochila, pero cada vez
+que pongamos algo en la mochila,
+
+27
+00:01:49,460 --> 00:01:55,280
+vamos a actualizar W disminuyéndolo por 
+la cantidad total de peso que hayamos puesto.
+
+28
+00:01:55,280 --> 00:01:58,690
+Así al final, cuando la mochila esté llena, W será 0.
+
+29
+00:01:58,690 --> 00:02:04,190
+Si W está en 0 quiere decir que deberíamos
+simplemente retornar el valor total 
+
+30
+00:02:04,190 --> 00:02:06,459
+y la cantidad de objetos que sacamos.
+
+31
+00:02:07,520 --> 00:02:10,350
+De lo contrario, deberíamos seleccionar el mejor objeto.
+
+32
+00:02:10,350 --> 00:02:16,010
+El mejor objeto es el que queda, 
+por lo tanto "wi" es mayor a 0 
+
+33
+00:02:16,010 --> 00:02:20,910
+y en esos objetos está el que tiene el mayor
+valor por unidad de peso,
+
+34
+00:02:20,910 --> 00:02:24,380
+es decir, el que maximiza la division entre "vi" y "wi".
+
+35
+00:02:25,650 --> 00:02:30,400
+Una vez que tengamos un i, determinaremos la cantidad que tomara, 
+
+36
+00:02:30,400 --> 00:02:35,110
+es el total de "wi" o el total de este objeto si cabe en la mochila.
+
+37
+00:02:35,110 --> 00:02:39,080
+de lo contrario, si la capacidad de la mochila ya es menor,
+
+38
+00:02:39,080 --> 00:02:41,220
+simplemente la llenamos hasta su máxima capacidad.
+
+39
+00:02:41,220 --> 00:02:43,750
+De esta manera, "a" es el mínimo entre wi y W.
+
+40
+00:02:45,250 --> 00:02:48,600
+Después de que hayamos seleccionado la cantidad, 
+simplemente actualizamos las variables.
+
+41
+00:02:48,600 --> 00:02:55,630
+Así que, actualizamos w disminuyéndola por "a", 
+ya que ya sacamos una cantidad "a" de este objeto.
+
+42
+00:02:55,630 --> 00:02:58,260
+También incrementamos la cantidad
+
+43
+00:02:58,260 --> 00:03:02,060
+A del i correspondiente al objeto 
+numero i por el valor de "a".
+
+44
+00:03:02,060 --> 00:03:09,260
+Y también disminuimos la capacidad que resta, 
+porque acabamos de disminuirla en "a",
+
+45
+00:03:09,260 --> 00:03:11,880
+ya que pusimos A del objeto i.
+
+46
+00:03:13,000 --> 00:03:17,900
+También incrementamos V con esta fórmula:
+
+47
+00:03:17,900 --> 00:03:21,960
+"a" multiplicado por vi y dividido por wi.
+
+48
+00:03:21,960 --> 00:03:22,970
+¿Por qué sucede eso? La
+mayoría de las neuronas que
+
+49
+00:03:22,970 --> 00:03:28,480
+Porque tomamos A del objeto i, 
+tomamos "a" unidades 
+
+50
+00:03:28,480 --> 00:03:33,670
+y una unidad equivale al 
+valor de vi dividido en wi.
+
+51
+00:03:33,670 --> 00:03:38,780
+Así que si tomamos "a" unidades, el valor total de este producto es
+
+52
+00:03:38,780 --> 00:03:41,210
+"a" multiplicado por vi y dividido por wi.
+
+53
+00:03:42,700 --> 00:03:48,400
+Después de haber hecho n iteraciones, o quizá menos,
+si la mochila está llena
+
+54
+00:03:48,400 --> 00:03:53,340
+antes de haber terminado n iteraciones, retornaremos
+el valor total y las cantidades del arreglo.
+
+55
+00:03:55,680 --> 00:04:00,560
+Ahora, la complejidad de este algoritmo es Big-O de n al cuadrado.
+
+56
+00:04:00,560 --> 00:04:01,980
+¿Por qué sucede eso? La
+mayoría de las neuronas que
+
+57
+00:04:01,980 --> 00:04:09,230
+Bueno, primero tenemos la selección interior
+del mejor objeto, cuya complejidad es lineal.
+
+58
+00:04:09,230 --> 00:04:13,600
+Porque básicamente, tenemos que revisar
+todos los objetos para seleccionar el mejor.
+
+59
+00:04:13,600 --> 00:04:21,850
+Y tenemos el bucle principal que es ejecutado
+a lo más n veces (quizá menos).
+
+60
+00:04:21,850 --> 00:04:26,630
+Así que en cada iteración hacemos cierta
+computación lineal.
+
+61
+00:04:26,630 --> 00:04:28,900
+y hacemos esto a lo mas n veces.
+
+62
+00:04:28,900 --> 00:04:32,479
+Eso quiere decir que la complejidad total es Big-O de n al cuadrado.
+
+63
+00:04:34,138 --> 00:04:41,760
+Ahora, no podemos mejorar esa complejidad, porque
+si ordenamos los objetos por el valor decreciente 
+
+64
+00:04:41,760 --> 00:04:48,400
+de vi dividido en wi, entonces será más fácil
+seleccionar el mejor objeto que quede.
+
+65
+00:04:48,400 --> 00:04:50,780
+Revisemos este pseudocódigo.
+
+66
+00:04:50,780 --> 00:04:56,030
+Asumamos que ya hemos ordenado los objetos de entrada,
+
+67
+00:04:56,030 --> 00:05:03,065
+tamaño de v1 dividido en w1 es mayor o equivalente a 
+v2 dividido en w2, y eso es mayor
+
+68
+00:05:03,065 --> 00:05:08,864
+o equivalente a la fracción del siguiente
+objeto, y hasta vn dividido en wn.
+
+69
+00:05:09,970 --> 00:05:12,660
+Y podemos comenzar con el mismo arreglo de cantidades
+
+70
+00:05:12,660 --> 00:05:15,610
+el mismo valor total rellenado con 0s.
+
+71
+00:05:15,610 --> 00:05:21,160
+Pero entonces hacemos un bucle for 
+para i desde 1 hasta n.
+
+72
+00:05:21,160 --> 00:05:26,790
+Y en cada iteración i será la mejor unidad que aún quede.
+
+73
+00:05:26,790 --> 00:05:31,030
+Entonces, al comienzo de cada iteración revisamos 
+si aún tenemos algo de capacidad
+
+74
+00:05:31,030 --> 00:05:32,530
+en la mochila.
+
+75
+00:05:32,530 --> 00:05:35,700
+Si ya está llena retornamos la respuesta.
+
+76
+00:05:35,700 --> 00:05:40,190
+De lo contrario, sabemos que i es el mejor objeto,
+
+77
+00:05:40,190 --> 00:05:44,690
+ya que no lo consideramos previamente 
+y es el objeto con el máximo
+
+78
+00:05:44,690 --> 00:05:49,630
+valor por unidad de aquellos
+que no consideramos anteriormente.
+
+79
+00:05:49,630 --> 00:05:53,410
+Entonces, determinamos la cantidad de este objeto 
+con la misma fórmula, y
+
+80
+00:05:53,410 --> 00:05:56,740
+actualizamos los pesos,
+las cantidades, la capacidad y
+
+81
+00:05:56,740 --> 00:06:02,040
+el valor total de la misma manera
+que lo hicimos en el pseudocódigo anterior.
+
+82
+00:06:02,040 --> 00:06:06,340
+El único cambio es que cambiamos 
+el orden en el que consideramos los objetos.
+
+83
+00:06:06,340 --> 00:06:12,940
+Y esto nos permite hacer cada iteración
+con complejidad constante en vez de lineal.
+
+84
+00:06:12,940 --> 00:06:18,640
+Por lo tanto, este nuevo algoritmo funciona en complejidad lineal, 
+porque tiene a lo más n iteraciones.
+
+85
+00:06:18,640 --> 00:06:23,322
+y cada iteración se realiza a lo más en complejidad constante.
+
+86
+00:06:23,322 --> 00:06:27,760
+Así que, si aplicamos primero
+cierto algoritmo de ordenamiento
+
+87
+00:06:27,760 --> 00:06:31,870
+para ordenar los objetos por 
+el valor decreciente de vi dividido en wi.
+
+88
+00:06:31,870 --> 00:06:34,730
+Y luego aplicamos este nuevo procedimiento de la mochila.
+
+89
+00:06:34,730 --> 00:06:38,970
+La complejidad total será n log n, 
+porque el ordenamiento funciona en n log n,
+
+90
+00:06:38,970 --> 00:06:41,625
+y la mochila misma 
+funcionará en complejidad lineal.

@@ -1,0 +1,189 @@
+1
+00:00:00,320 --> 00:00:04,720
+Chào các bạn, tôi là Michael Levin, 
+và hôm nay chúng ta sẽ cùng nhau học về thuật toán Greedy.
+
+2
+00:00:04,720 --> 00:00:07,955
+Đây là một trong những thuật toán 
+đơn giản nhất từng tồn tại
+
+3
+00:00:07,955 --> 00:00:12,722
+như một bản năng, người ta 
+thường áp dụng nó để giải quyết các vấn đề.
+
+4
+00:00:12,722 --> 00:00:15,330
+Chúng ta sẽ xem xét 
+một vài ví dụ thường gặp
+
+5
+00:00:15,330 --> 00:00:19,190
+được áp dụng thuật toán Greedy, 
+để hiểu rõ hơn nó hoạt động như thế nào.
+
+6
+00:00:19,190 --> 00:00:23,511
+Ví dụ đầu tiên 
+là bài toán về tìm số lớn nhất.
+
+7
+00:00:23,511 --> 00:00:27,019
+Với ví dụ này, thậm chí chính các bạn 
+cũng sẽ áp dụng thuật toán Greedy
+
+8
+00:00:27,019 --> 00:00:29,720
+mà không hay biết, vì đó 
+là một cách hết sức tự nhiên.
+
+9
+00:00:30,770 --> 00:00:33,091
+Thử tưởng tượng một tình huống như sau nhé.
+
+10
+00:00:33,091 --> 00:00:37,674
+Bạn đang cố gắng xin việc tại 1 công ty nọ, 
+và đã trải qua vài vòng phỏng vấn,
+
+11
+00:00:37,674 --> 00:00:39,081
+tất cả đều diễn ra suôn sẻ.
+
+12
+00:00:39,081 --> 00:00:42,589
+Giờ bạn sẽ phải đối mặt với 
+cuộc phỏng vấn cuối cùng với sếp, và
+
+13
+00:00:42,589 --> 00:00:45,471
+ông ấy nói bạn rằng
+ông ấy sẵn sàng thuê bạn.
+
+14
+00:00:45,471 --> 00:00:48,509
+Nhưng thay vì thương lượng
+tiền lương với bạn,
+
+15
+00:00:48,509 --> 00:00:52,500
+Ông ấy cho bạn vài mảnh giấy
+trong đó có ghi số ngẫu nhiên.
+
+16
+00:00:53,510 --> 00:00:57,180
+Việc của bạn là phải sắp xếp
+các mảnh giấy đó thành 1 dãy số,
+
+17
+00:00:57,180 --> 00:01:00,890
+và dãy số đó, theo thứ tự từ trái qua phải,
+sẽ chính là mức lương của bạn sau này.
+
+18
+00:01:01,890 --> 00:01:03,920
+Như vậy, vấn đề của bạn ở đây là
+
+19
+00:01:03,920 --> 00:01:07,780
+làm sao để tạo ra số lớn nhất có thể
+với 1 dãy chữ số cho trước.
+
+20
+00:01:08,910 --> 00:01:11,670
+Trên màn hình là một vài cách sắp xếp
+từ tập hợp các chữ số cho sẵn
+
+21
+00:01:13,190 --> 00:01:16,559
+Bạn nghĩ số lớn nhất có thể tạo ra là gì?
+
+22
+00:01:18,520 --> 00:01:22,780
+Vâng, dĩ nhiên là 997531 rồi.
+
+23
+00:01:22,780 --> 00:01:26,963
+Ai cũng thấy là chúng ta chỉ cần sắp xếp
+theo thứ tự từ chữ số lớn nhất đến
+
+24
+00:01:26,963 --> 00:01:28,931
+chữ số bé nhất, từ trái qua phải.
+
+25
+00:01:28,931 --> 00:01:32,520
+Giờ chúng ta cùng xem
+thuật toán Greedy giải bài toán này thế nào nhé.
+
+26
+00:01:33,740 --> 00:01:38,640
+Thuật toán Greedy bắt đầu với
+1 tập hợp các chữ số, sau đó
+
+27
+00:01:38,640 --> 00:01:41,641
+tìm ra chữ số lớn nhất trong dãy.
+
+28
+00:01:41,641 --> 00:01:47,121
+Lấy chữ số đó đưa vào số cần tìm,
+và xoá nó khỏi dãy chữ số ban đầu.
+
+29
+00:01:47,121 --> 00:01:52,410
+Sau đó lặp lại công thức cho đến khi
+không còn chữ số nào trong dãy ban đầu nữa.
+
+30
+00:01:52,410 --> 00:01:57,000
+Bước tiếp theo, chúng ta sẽ tìm chữ số lớn nhất 
+trong dãy chữ số còn lại, dĩ nhiên vẫn là 9.
+
+31
+00:01:57,000 --> 00:02:02,625
+Rồi đưa chữ số đó vào bên phải số cần tìm,
+và xoá nó khỏi dãy chữ số ban đầu.
+
+32
+00:02:02,625 --> 00:02:07,680
+Giờ 7 sẽ là chữ số lớn nhất trong dãy, 
+chúng ta lại lấy nó đặt vào bên phải số cần tìm
+
+33
+00:02:07,680 --> 00:02:09,300
+và xoá nó khỏi dãy chữ số ban đầu.
+
+34
+00:02:09,300 --> 00:02:15,550
+Tiếp tục công thức với các chữ số còn lại trong dãy là 5,3, và 1.
+
+35
+00:02:18,310 --> 00:02:21,710
+Chúng ta sẽ được kết quả cuối cùng là 997531.
+
+36
+00:02:21,710 --> 00:02:25,820
+Trong video tới, chúng ta sẽ
+thiết kế một thuật toán
+
+37
+00:02:25,820 --> 00:02:30,450
+để tìm ra số lần nạp nhiên liệu ít nhất
+cho một chặng đường dài bằng xe hơi.
+
+38
+00:02:30,450 --> 00:02:33,570
+Chúng ta dễ thấy rằng 
+2 bài toán này khá tương tự nhau:
+
+39
+00:02:33,570 --> 00:02:37,060
+bài toán tìm ra số lớn nhất, 
+và bài toán về đổ xăng xe.
+
+40
+00:02:37,060 --> 00:02:39,630
+Chúng ta sẽ thấy thuật toán Greedy 
+hoạt động như thế nào một cách tổng quát.

@@ -1,0 +1,392 @@
+1
+00:00:00,990 --> 00:00:05,217
+En esta lección vamos a hablar de un algoritmo más complicado de divide y vencerás
+
+2
+00:00:05,217 --> 00:00:07,799
+para resolver multiplicación de polinomios.
+
+3
+00:00:07,799 --> 00:00:11,608
+Entonces, primero vamos a hablar de lo que es la multiplicación de polinomios.
+
+4
+00:00:11,608 --> 00:00:15,747
+La multiplicación de polinomios es básicamente tomar dos polinomios
+
+5
+00:00:15,747 --> 00:00:17,424
+y multiplicarlos.
+
+6
+00:00:17,424 --> 00:00:20,326
+Es usado en una variedad de formas en ciencias de la computación.
+
+7
+00:00:20,326 --> 00:00:24,344
+Códigos de corrección de errores. Si es que quieres multiplicar enteros muy grandes,
+
+8
+00:00:24,344 --> 00:00:27,991
+por ejemplo, tienes enteros con miles de dígitos
+
+9
+00:00:27,991 --> 00:00:32,854
+y quieres multiplicarlos, hay una forma más rápido que la forma
+
+10
+00:00:32,854 --> 00:00:36,276
+normal que aprendiste en la primaria.
+
+11
+00:00:36,276 --> 00:00:40,040
+Y eso usa la idea de multiplicar polinomios.
+
+12
+00:00:40,040 --> 00:00:43,860
+Se usa para generar funciones y para convoluciones.
+
+13
+00:00:43,860 --> 00:00:44,917
+Veamos un ejemplo.
+
+14
+00:00:44,917 --> 00:00:50,490
+Digamos que tienes un polinomio A, que es 3x^2+2x+5,
+
+15
+00:00:50,490 --> 00:00:54,470
+y un polinomio B, 5x^2+x+2.
+
+16
+00:00:54,470 --> 00:00:58,027
+Si los multiplicas obtienes 15x^4
+
+17
+00:00:58,027 --> 00:01:02,527
++13x^3+33x^2+9x+10.
+
+18
+00:01:02,527 --> 00:01:03,629
+¿Por qué sucede eso? La
+mayoría de las neuronas que
+
+19
+00:01:03,629 --> 00:01:07,709
+Bien, veamos, por ejemplo, 15x^4 viene de multiplicar 3x^2 por
+
+20
+00:01:07,709 --> 00:01:10,306
+5x^2, lo que da 15x^4.
+
+21
+00:01:10,306 --> 00:01:13,081
+El 10 viene de multiplicar 5 por 2.
+
+22
+00:01:13,081 --> 00:01:18,268
+El 13x^3 viene del 3x^2 por x, que es 3x^3,
+
+23
+00:01:18,268 --> 00:01:22,194
+más 2x por 5x^2, que es 10x^3,
+
+24
+00:01:22,194 --> 00:01:24,389
+para un total de 13x^3.
+
+25
+00:01:24,389 --> 00:01:27,814
+Ahora veamos el enunciado del problema.
+
+26
+00:01:27,814 --> 00:01:31,235
+Entonces, vamos a tener dos polinomios de grado n-1, 
+
+27
+00:01:31,235 --> 00:01:35,587
+a_(n-1) es el coeficiente de x^(n-1) y así hasta
+
+28
+00:01:35,587 --> 00:01:40,200
+a_0, que es el coeficiente de x^0, o el término constante.
+
+29
+00:01:41,870 --> 00:01:44,870
+Y de manera similar tenemos un polinomio B.
+
+30
+00:01:45,870 --> 00:01:50,530
+Primero te puedes preguntar qué pasa si quieres multiplicar polinomios
+
+31
+00:01:50,530 --> 00:01:52,490
+que no tienen el mismo grado?
+
+32
+00:01:52,490 --> 00:01:55,860
+¿Qué si quieres multiplicar un polinomio
+
+33
+00:01:55,860 --> 00:01:58,470
+de grado 3 con uno de grado 2?
+
+34
+00:01:58,470 --> 00:02:03,630
+Donde el grado es el exponente del término más alto.
+
+35
+00:02:04,920 --> 00:02:09,880
+Bien, en ese caso, lo que podrías hacer es rellenar los polinomios más pequeños,
+
+36
+00:02:09,880 --> 00:02:16,000
+poner ceros como coeficientes de los primeros términos.
+
+37
+00:02:16,000 --> 00:02:18,200
+Daré un ejemplo en un momentito.
+
+38
+00:02:18,200 --> 00:02:22,583
+Y entonces, lo que queremos es el producto polinomial, que es un
+
+39
+00:02:22,583 --> 00:02:25,352
+polinomio de grado más alto, ¿sí?
+
+40
+00:02:25,352 --> 00:02:29,060
+Si nuestros polinomios entrantes tienen grado n-1,
+
+41
+00:02:29,060 --> 00:02:34,706
+entonces vamos a tener un término de x^(n-1) en A veces un término de x^(n-1) en B,
+
+42
+00:02:34,706 --> 00:02:39,246
+lo que nos da un término x^(2n-2) en el término c.
+
+43
+00:02:39,246 --> 00:02:44,344
+Entonces, c_(2n-2) viene de
+
+44
+00:02:44,344 --> 00:02:49,358
+multiplicar a_(n-1) y b_(n-1).
+
+45
+00:02:49,358 --> 00:02:53,303
+El término c_(2n-3) viene de a_(n-1)b_(n-2),
+
+46
+00:02:53,303 --> 00:02:56,787
+y a_(n-2)b_(n-1).
+
+47
+00:02:56,787 --> 00:02:59,307
+Entonces hay dos términos que se suman (no multiplican, nota traducción).
+
+48
+00:02:59,307 --> 00:03:04,078
+El término c_(2n-4) tendría 3 términos que se suman,
+
+49
+00:03:04,078 --> 00:03:07,743
+Y así tenemos más y más términos que se suman,
+
+50
+00:03:07,743 --> 00:03:09,558
+y entonces de nuevo son menos para los términos del final,
+
+51
+00:03:09,558 --> 00:03:14,163
+así, c_2 tiene 3 pares que se suman,
+
+52
+00:03:14,163 --> 00:03:17,975
+c_1 tiene dos pares, y c_0 tiene un par.
+
+53
+00:03:17,975 --> 00:03:20,088
+Este es un ejemplo.
+
+54
+00:03:20,088 --> 00:03:22,131
+De hecho  es el ejemplo que teníamos antes.
+
+55
+00:03:22,131 --> 00:03:26,120
+Entonces, n es 3 y nota que todo lo que necesitamos son los coeficientes.
+
+56
+00:03:26,120 --> 00:03:29,890
+no necesitamos escribir las x's.
+
+57
+00:03:29,890 --> 00:03:34,556
+Entonces, 3, 2 y 5, significan 3x^2+2x+5;
+
+58
+00:03:34,556 --> 00:03:37,680
+5, 1, 2, significa 5x^2+x+2.
+
+59
+00:03:38,790 --> 00:03:41,585
+¿Qué tal si B fuera sólo un polinomio de grado uno?
+
+60
+00:03:41,585 --> 00:03:43,372
+fuera sólo x+2.
+
+61
+00:03:43,372 --> 00:03:46,403
+Bien, entonces pondríamos a B como 0, 1, 2,
+
+62
+00:03:46,403 --> 00:03:51,661
+esto es, el término de x^2 de B es 0*x^2.
+
+63
+00:03:51,661 --> 00:03:55,754
+Entonces, A(x) es esto, B(x) es eso.
+
+64
+00:03:55,754 --> 00:03:58,621
+Cuando los multiplicamos obtenemos el mismo resultado que antes,
+
+65
+00:03:58,621 --> 00:04:03,476
+y ahora sólo extraemos los coeficientes aquí, que son 15, 13,
+
+66
+00:04:03,476 --> 00:04:05,715
+33, 9 y 10.
+
+67
+00:04:05,715 --> 00:04:09,991
+Y esa es nuestra respuesta, estos coeficientes.
+
+68
+00:04:09,991 --> 00:04:13,870
+Vamos a ver un algoritmo ingenuo para resolver esto.
+
+69
+00:04:15,420 --> 00:04:21,527
+El algoritmo ingenuo dice básicamente que, primero, creemos un arreglo "product".
+
+70
+00:04:21,527 --> 00:04:25,294
+Éste básicamente va a ser C, el resultado,
+
+71
+00:04:25,294 --> 00:04:28,714
+y va a ser el de grado más alto, 2n-2.
+
+72
+00:04:28,714 --> 00:04:34,410
+Así que va a tener 2n-1 términos, desde 0 hasta el término 2n-2.
+
+73
+00:04:34,410 --> 00:04:37,277
+Lo inicializamos con ceros, y después tenemos un bucle anidado.
+
+74
+00:04:37,277 --> 00:04:40,736
+Para i igual a 0 hasta n-1, para j igual a 0 hasta n-1,
+
+75
+00:04:40,736 --> 00:04:45,320
+y cada vez vamos a calcular un par particular.
+
+76
+00:04:45,320 --> 00:04:49,320
+Así que calculamos el par A[i],B[j]
+
+77
+00:04:49,320 --> 00:04:54,030
+los multiplicamos y los agregamos al producto apropiado.
+
+78
+00:04:54,030 --> 00:04:56,080
+¿Cuál es el producto apropiado?,
+
+79
+00:04:56,080 --> 00:04:59,772
+es el caso i+j.
+
+80
+00:04:59,772 --> 00:05:04,769
+Como ejemplo, cuando i=0 y j=0 calculamos
+
+81
+00:05:04,769 --> 00:05:09,672
+A[0] por B[0] y lo agregamos a product[0].
+
+82
+00:05:09,672 --> 00:05:13,935
+Esto es, los dos términos de grado cero en A Y B
+
+83
+00:05:13,935 --> 00:05:19,192
+se multiplican y dan como resultado el término de grado cero de C.
+
+84
+00:05:19,192 --> 00:05:23,500
+En el otro extremos, si i es n-1 y j es n-1,
+
+85
+00:05:23,500 --> 00:05:30,101
+tomamos A[n-1] por B[n-1] y lo guardamos en product[2n-2].
+
+86
+00:05:30,101 --> 00:05:34,343
+Como puedes ver, los valores intermedios en el producto
+
+87
+00:05:34,343 --> 00:05:39,087
+van a tener más términos sumados que los extremos.
+
+88
+00:05:41,885 --> 00:05:43,673
+Y por supuesto, al final devolvemos product.
+
+89
+00:05:43,673 --> 00:05:45,681
+¿Cuánto tiempo lleva esto?
+
+90
+00:05:45,681 --> 00:05:47,492
+Bueno, esto toma del orden de n^2.
+
+91
+00:05:47,492 --> 00:05:51,385
+Claramente, tenemos dos bucles for, uno más pequeño
+
+92
+00:05:51,385 --> 00:05:56,050
+que va de 0 a 2n-2, por lo que es de orden n.
+
+93
+00:05:56,050 --> 00:06:02,210
+Y entonces un bucle for anidado, donde i va de 0 a n-1, j de 0 a n-1,
+
+94
+00:06:02,210 --> 00:06:07,180
+así que pasan, el primero n veces, el segundo n^2 veces,
+
+95
+00:06:07,180 --> 00:06:09,551
+así que nuestro tiempo es del orden de n^2.
+
+96
+00:06:11,665 --> 00:06:14,405
+En el video siguiente, vamos a ver un algoritmo
+
+97
+00:06:14,405 --> 00:06:17,210
+de divide y vencerás, para resolver este problema.
+
+98
+00:06:17,210 --> 00:06:19,780
+Aun que, veremos, que también será un poco ingenuo.

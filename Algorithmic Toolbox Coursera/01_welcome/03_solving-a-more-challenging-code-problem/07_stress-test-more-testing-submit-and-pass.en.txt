@@ -1,0 +1,102 @@
+In this video,
+we will do more testing first, and then submit our main solution to
+the system, and see how it goes. By the end, you will be fully
+prepared to test your programming assignments in the future. For some small tests with a small n and
+small numbers, we cannot actually find any tests
+in which our solutions differ. That doesn't yet
+mean that both our solutions work. Maybe they will break for bigger values of n, or for
+bigger values of the input numbers. Let's check for that. So we stop our problem with a control-C. We go into the code, again. And, we increase back
+the restrictions on n, on the numbers. For example, n will be up to 100. And the numbers will be up to 100,000, the maximum value permitted
+in the problem statement. We save the code, recompile, and
+launch the stress test again. And now we see that, again, our screen is filling with numbers and
+sometimes words OK. But, there are many more numbers in
+each test, and the numbers are bigger. And still we're waiting and
+waiting and nothing happens. Our program just proceeds
+filling the screen with OKs. So, maybe it works. Or maybe we can test for even bigger
+values of n, because the numbers we used for testing are already big,
+but n is not that big yet. So, let's estimate what is the value
+of n for which we still can test. Our slow solution works in quadratic time. So, testing on 100,000 numbers
+would be probably too long. So maybe we can test for
+a value of n up to 1,000. Let's do that, recompile,
+launch the stress test again. So now our screen is almost
+completely filled with numbers. But we will know if we find a test
+in which our program breaks, because it will then stop. And as soon as it doesn't stop and
+proceeds filling our screen with numbers, it means that for all those
+tests, everything works correctly. So by now, we're pretty sure that
+our solution should work correctly. We stop the stress test. And now we want to make it back a solution
+to the initial problem on the stress test. And to do that, we go to the main
+function, and we comment out the while loop,
+which implements the stress test. And now, everything else in the main loop
+is the solution of the initial problem. So, that's it,
+we can probably already submit this file. So let's save it, and
+just in case, recompile it. And test it on some simple test case. For example,
+we input number two as the two numbers. And then three and
+five as the input numbers. What we see is,
+instead of just number 15, on the screen, we also see some number one and zero. What is that? Well, disregarding what is that, if we submitted this exact solution to the
+system, we would get an incorrect result on the first test we encounter in
+the system, because we only have to output the correct answer to the problem
+and nothing else to their output. And that is a very frequent
+mistake that people do in their first programming assignment,
+so please beware of that. Please only output what is stated
+in the problem statement and nothing more than that,
+nothing less than that. So in this case,
+we only need to output number 15. So let's fix this additional output. Now we probably already guessed that
+this additional output is this debug output of indices,
+which our fast solution finds. So let's comment this also out. Save the file, recompile, and
+launch our program again. And then input the same test. Now we see that it only outputs 15,
+which is the correct answer. So now, we're pretty safe. We can try to submit that
+solution to Coursera, actually. So, let's go and do that. So we create a new submission, and we upload the file,
+the file is stress_test.cpp. That is the file with which we worked,
+right now. We wait for it to upload. And then, we submit. Now we have to wait for
+the grader to grade our solution. And, great, it passed in the system. This illustrates
+the stress test technique. But let us give you
+some additional advice. First, you notice that the stress
+test magically gave us the test in which our main solution and alternative
+solution differed very quickly. But that's not always the case. For example, in this problem,
+max pairwise product, the only test cases on which our main and
+alternative solution differed were the test cases where the two
+biggest numbers are the same. And that's a rare event, especially when you generate big
+random numbers from zero to 100,000. So we were actually lucky to
+quickly generate such a test. And that's true in the general case. Often, the cases when there are equal
+numbers are some kinds of corner cases. Also, the same happens when
+you are working, for example, with strings of Latin letters and,
+the cases where the strings only contain one letter, A, or
+only contain two different letters, for example A and B, as opposed to strings
+which can contain arbitrary Latin letters. Those cases with only a few different
+letters are sometimes corner cases. So, when you want to do stress testing and
+you cannot find quickly a test on which your main
+solution and alternative solution differ, try to generate tests in a more focused
+subspace of full possible tests. For example,
+if you are working with graphs, try generating a disconnected graph,
+a full graph, a bipartite graph. Another important point is that
+if you found a test in which your solutions differ,
+don't hurry to debug something. First try to generate the smallest and easiest test on which
+your solutions differ. This will simplify your debugging a lot. Don't expect stress testing
+to be a silver bullet. For example, it probably won't find out
+that your main solution is too slow because your alternative solution
+will probably be even slower, some brute force solution. And you will have to generate only
+small random tests to compare them. In other cases, integer overflow. Even if you generate random
+tests with big numbers, both of your solutions could potentially
+have integer overflow problems. And then you will not notice that your
+main solution has them in the stress test. So first, test for those cases,
+and then apply stress testing. However, if you've done manual tests,
+integer overflow testing, and max test, and then apply stress testing, you're almost
+guaranteed to have success with it. Because the authors of the problem
+do basically the same when they make the test sets for you. They make some manual tests,
+they make tests with big numbers for integer flow, they make big tests for
+checking time limit, and then they generate some random tests and
+maybe some focused random tests. But that's all. So, you will probably find all the traps
+they've set up for you with just testing. In conclusion, know that it is very
+important to write programs that work on all of the allowed test cases, not just
+on most of the allowed test cases. In practice, if you write programs with
+bugs that only rarely reveal themselves, still some of your users will
+encounter those bugs, and their experience will
+deteriorate significantly. Also, sometimes in the start of a project,
+you want to test some hypothesis and you write some code to check it. Then you get some results and
+base your decisions on that result. Only to later learn that you
+had a bug in the code and all your decisions were wrong. That's why we've prepared thorough test suites
+to check all the aspects of your problems. And here, stress testing will be very
+helpful when your solution fails on some test and you don't even know what is
+the test on which your program fails. We hide the tests on purpose. In real life, you often also won't
+know what are the exact conditions under which your program fails. But now, you are fully prepared to test
+your programs, debug them, and fix them.

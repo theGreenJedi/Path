@@ -1,0 +1,58 @@
+Here we're going to talk
+about the master theorem. We'll describe what the master
+theorem is and how to use it. And we'll reserve to
+the next video a proof. So we've had many occasions where we
+have had to write a recurrence relation for a divide and conquer problem. This is an example of one for
+binary search. We break a problem down into
+a problem half as big and we do a constant amount
+of work at each level. And this gives us a solution
+T(n) = O(log n). The problem is for each one of these
+we have to create a recurrence tree, figure out how much work is done
+at each level, sum up that work. That's a lot to do to solve
+each recurrence relation. Here's an example that we used for
+the polynomial multiplication. So we broke a problem into four
+sub-problems, each half the size, and did a linear amount of work. And the solution was T(n) = O(n squared). When we had the more efficient algorithm,
+where we had only three sub-problems instead of four, we then got a solution
+of O(n to the log base 2 of 3). Sometimes we break a problem
+into only two subproblems and there the solution is O(n log n). So, wouldn't it be nice if there was
+a way that we just had a formula to tell us what the solution is rather than having
+to create this recurrence tree each time? And that's what the Master Theorem
+basically does. So, the Master Theorem says if you have
+a recurrence relation T(n) equals a, some constant, times T(
+the ceiling of n divided by b) + a polynomial in n with degree d. And that ceiling, by the way,
+could just as well be a floor or not be there at all if
+n were a power of b. In any case,
+the a is a constant greater than 0. b is greater than 1 because we want to
+actually make sure the problem size gets smaller. And d is greater than equal to 0. Well, in that case,
+we have a solution for T of n. There are three sub cases. Case number 1, and all of these cases
+depend on the relationship between d, a, and b. In particular,
+is d greater than log base b of a? If so, the solution is just this
+polynomial in n, O(of n to the d). If d is exactly equal log base b of a, then the solution is big O of n to the d
+with an extra factor of log n. And finally,
+if d is less than log base b of a, then the solution is big O of
+n to the log base b of a. So let's look at some
+applications of this theorem. So here's one where we go back to
+the polynomial multiplication. Here a is 4, b is 2, and d is 1. Because O(n) is just O(n to the 1). And we look at the relationship between d,
+which is 1, and log base b of a,
+which is log base 2 of 4 or 2. Well clearly d is less than log base
+b of a, so we're in case three. Therefore T(n) = O(n to
+the log base b of a), or just O(n squared). If now we change the 4 to a 3,
+a is 3, b is 2, d is 1. Now d is still less than
+log base b of a because log base 2 of 3 is greater than 1,
+and so again we're in case three. T(n) equals O(n to the log base b of a),
+which equals O(n to the log base 2 of 3). If we reduce the 3 down
+to a 2 what happens? Well here, a is 2, b is 2, d is 1. Log base b of a is log base 2 of 2,
+which is just 1. So now d is equal log base b or a. We're in case two now. And so, T of n equals O(n log n). And now this shows
+an example also of case two. So this is the binary search example. A is 1, b is 2, d is 0. Well the log base two of one,
+log base b of a, is equal to zero. So d is equal to log base b of a. We're in case two,
+T(n) = O(n to the d log n), which is in the 0 log n,
+which is just O(log n). And a final example where we
+are actually in case one. So here a is 2, b is 2, and d is 2. So log base b of a is log base 2 of 2,
+which is one. So d is now greater than log base b of a. We are now in case one, T(n) equals 
+O(n to the d), which is O(n squared). So what we've seen now is that we have
+this master theorem that allows us, for most recurrences, when
+you do a divide and conquer which fit into this general formula,
+allows us to easily figure out which case we are based on
+the relationships between a, b, and d. And then figure out
+the result quite quickly. In our next video we'll look at a proof
+of why the master theorem works.

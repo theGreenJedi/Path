@@ -1,0 +1,71 @@
+In this last video of this lesson, we
+show a method of reconstructing an actual solution from two tables computed by
+our dynamic programming algorithm. Okay, here on this slide we see
+two tables, m and capital M. Computed by our dynamic program and algorithm which contain minimal and
+maximal values respectively for all possible subexpressions
+of our initial expression. Let me first put in this for all the rows and
+columns of these two matrices, as well as numbers for our initial digits. Well, in particular, we see by
+reading the contents of this cell capital M of (1,6) that the maximal value
+of our initial expression is equal to 200, and our goal is to unwind
+the whole solution, I mean, parenthesizing of the initial expression,
+from these two tables. So our first goal on this way
+is to understand from which two subexpressions of the initial
+expression the value 200 was computed. Well, let's see, when computing
+the value for the maximal value for subexpression (1,6),
+we tried all possible splittings of the expression (1,6)
+into two subexpressions. Well, let's just go through all of them. The first possibility is to split
+it into two subexpressions (1,1), which corresponds just
+to the first digit which is just 5, and subexpression (2,6), with a minus sign between them, right. So for both these two subexpressions
+we already know minimal values and maximal values. Well, let me mark them. So this is the minimal value for
+the subexpression (1,1). This is the maximal value for
+subexpression (1,1). For (2,6), this is the minimal value, -195, and this is a maximal value, 75. So we would like to
+maximize this subexpression one minus subexpression two, which means
+that we would like the first subexpression to be as large as possible and the second
+subexpression to be as small as possible. Well, this means that we need to try to take the maximal value of
+the first subexpression which is five and the minimal value of the second
+subexpression which is -195. Well, we see that in this case, 5 minus -195 is the same as 5 plus 195, which equals exactly 200, right, which allows us to conclude, actually, that the value 200 can
+be obtained as follows. So, we subtract the minimum
+value which is -195 over the second subexpression from 5,
+right. So we restored the last
+operation in an optimal parenthesizing of the initial expression. However, we still need to
+find out how to obtain -195 out of the second subexpression. Well, let's do this. Okay, so
+we need to find how the minimum value of the subexpression (2,6) was obtained. Well, there are several possible
+splittings, once again, of the subexpression (2,6) into
+two smaller sub-subexpressions. The first of them is to
+split (2,6) into (2,2), which just corresponds to
+the digit 8 plus (3,6). Well, in this case, we would like
+the value to be as small as possible and our sign is plus in this case, which
+means that we would like the value of subexpression (2,2) to be
+as small as possible and the value of subexpression (3,6)
+also to be as small as possible. And you already know these values,
+they are in our tables, so the minimal value of
+subexpression (2,2) is 8, while the minimum value of subexpression
+(3, 6) is minus 91, right. So we see that the sum of these
+two values is not equal to -195, right, which means that plus
+is not the last operation in the optimal parenthesizing
+that gives the minimum value of subexpression (2, 6), right. So let's check the next one. Another possibility to split
+the subexpression (2, 6) is the following. We split it into subexpression (2, 3) times subexpression (4, 6), right. So once again, we would like to find
+the minimum value of subexpression (2, 6). Well, let's see just all possibilities. The minimum value of subexpression (2,
+3) is 15. It's maximal value is also 15. As to subexpression (4,6),
+its minimum value is -13. It's maximal value is 5. And we would like the product of these
+two values to be as small as possible. Well, it is not difficult to
+see that if we take just 15 and multiply it, which is a minimum
+value of subexpression (2,3), and multiply it by the minimum
+value of the subexpression (4,6), which is -13, then we get exactly -195. And this, in turn, allows us to get -195 from the subexpression (2,6). We can do as follows. We can first compute the sum of 8 and 7. This gives us 15. And then to multiply it by the result
+of the second subexpression. Well, now it remains to find out how to
+get -13 out of this subexpression for 6, but in this small example,
+it is already easy to get -13. Well, we just first compute
+the sum of 8 and 9 and then subtract it from 4, right. So this way we reconstructed
+the whole solution, I mean, an optimal parenthesizing, or an optimal
+ordering, of our arithmetic operations, leading to this value,
+to this maximal value, 200. Let's just check it once again that our
+parenthesizing leads to the value 200, indeed. So we first compute the sum of 8 and 9. This gives us 17. We then subtract 17 from 4. And this gives us -13. We then compute the sum of 8 and 7. This gives us 15. We multiply 15 by -13. It gives us -195, and, finally, we subtract this number from 5,
+and we get 200, indeed. So we reconstructed the whole solution. In general, I mean for
+an expression consisting of n digits and n minus 1 operations they can respond, an
+algorithm makes roughly quadratic number of steps, because it needs to reconstruct
+n minus one operations, I mean, an order of n minus one operations,
+going from last one to the first one. And for each operation, it potentially
+needs to go through all possible splittings into two subexpressions,
+and this number is at most M. So the running time is bigger of ten
+times M, which is bigger of M squared. And this technique is quite general. It applies in many cases in
+the dynamic problem in algorithms.

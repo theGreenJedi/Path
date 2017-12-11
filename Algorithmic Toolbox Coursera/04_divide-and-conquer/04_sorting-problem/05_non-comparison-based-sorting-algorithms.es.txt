@@ -1,0 +1,55 @@
+En este último video mostraremos que 
+hay casos en que podemos ordenar los n objetos dados sin tener que compararlos entre sí. Para tales algoritmos nuestra cota 
+inferior n log n no aplica. Bien, probablemente el caso más natural en 
+que podemos ordenar n objetos dados sin compararlos, es el caso cuando nuestra secuencia de
+ entrada consiste de enteros pequeños. Lo ilustraremos con un ejemplo de caricatura. Considera un arreglo de tamaño 12 que 
+consiste en sólo 3 dígitos diferentes, quiero decir, cada elemento de nuestro
+ arreglo es igual a 1, 2 o 3. Entonces, podemos hacer lo siguiente. Recorramos
+ el arreglo de izquierda a derecha, hacemos un simple escaneo, y contamos
+ el número de ocurrencias de 1, 2 y 3. Simplemente escaneando este arreglo
+ encuentras que 1 aparece 2 veces, 2 aparece 7 veces, y 3 aparece 3 veces. Y esta información es suficiente para
+ que ordenemos estos objetos, así que puedes usar esta información para
+ llenar el arreglo resultante, A-prima. Así, ponemos 1 dos veces, 2 siete veces, y 3 tres veces. Y esto nos da el arreglo ordenado resultante A-prima, ¿sí? Lo que acaba de pasar es que ¡ordenamos este arreglo, estos n objetos, sin comparar estos objetos entre sí! Sólo contamos el número de ocurrencias 
+de cada número, y para esto, usamos esencialmente la información de que 
+este arreglo contiene enteros pequeños. El algoritmo que acabamos de ver se llama
+ algoritmo de ordenamiento por conteo. Sus principales ideas son las siguientes. Supón que nos dan un arreglo A de tamaño n, y sabemos que todos sus elementos 
+son enteros en el rango de 1 a M. Entonces hacemos lo siguiente. Creamos un arreglo "Count" de tamaño M, y escaneando el arreglo inicial A sólo 
+una vez de izquierda a derecha, contamos el número de ocurrencias de cada i de 1 a M, y guardamos este valor en la celda i de Count. Entonces, escaneamos el arreglo A de izquierda
+ a derecha, y siempre que veamos un elemento igual a i, incrementamos el valor
+ guardado en la celda i de Count. Cuando este arreglo se llene, usamos su información para llenar el arreglo resultante A-prima, como le
+ hicimos en el ejemplo de juguete. Éste es el el pseudocódigo del algoritmo 
+de ordenamiento por conteo. Aquí nos dan un arreglo A de tamaño M, y suponemos que todos los elementos de
+ este arreglo son enteros del 1 al M. Introducimos el arreglo Count, de tamaño M, 
+que llenamos inicialmente con ceros. Llenamos este arreglo escaneando
+ nuestro arreglo inicial A, esto es, siempre que veamos un 
+elemento k en nuestro arreglo inicial, incrementamos la cuenta en la celda k. Así que después del primer bucle de este algoritmo,
+ sabemos exactamente el número total de ocurrencias de cada número k del
+ 1 al M en nuestro arreglo inicial. Por ejemplo, en nuestro ejemplo de
+ caricatura que vimos hace 2 diapositivas, contamos el número 1 dos veces en nuestro arreglo inicial, el número 2 aparece 7 veces en nuestro arreglo inicial, y el número 3 aparece 3 veces. En este punto, sabemos que en el arreglo 
+resultante, los primeros dos elementos serán ocupados por el número 1, los 
+siguientes 7 elementos serán ocupados por el número 2, y los siguientes 3 
+elementos serán ocupados por el 3. Ahora, nos gustaría, además de tener 
+las longitudes de los 3 intervalos, nos gustaría calcular el punto de inicio de cada intervalo. Entonces hacemos esto en un nuevo bucle y para ello introducimos un nuevo arreglo "Pos". Así, Pos[1]=1, lo que significa que el número 1 ocupará un 
+espacio que comienza en el primer índice. Y el punto de inicio de los subsecuentes 
+intervalos  se calcula con el punto de inicio del intervalo previo, más la longitud de ese intervalo. Así, Pos[j] se calcula como Pos[j-1]+Count[j-1]. En este punto sabemos que el punto 
+de inicio de cada rango. Esto es, el número k en el arreglo resultante ocupará 
+un intervalo que empieza en Pos[k]. Entonces sólo peinamos nuestro arreglo inicial, 
+y siempre que veamos un elemento sabremos siempre dónde ponerlo en el arreglo final. Así que déjenme recordarles que no sólo
+ llenamos el arreglo con números del 1 al M sino que también copiamos elementos de nuestro arreglo inicial. Esto es porque lo que estamos buscando en el problema de ordenamiento, es una 
+permutación de nuestros n objetos inicales. Porque lo que tenemos probablemente no 
+sea sólo un número, enteros del 1 al M, sino que estos números pueden ser una clave
+ de algún objeto probablemente más complejo. Está bien, entonces el tiempo de ejecución de este algoritmo 
+se puede ver fácilmente que es O(n+M). Esto es sólo porque aquí tenemos 3 bucles. El primer bucle tiene n iteraciones, el segundo tiene M iteraciones, y el último tiene también n. Aquí está el enunciado formal. El tiempo de ejecución del algoritmo de
+ ordenamiento por conteo es n+M, y el comentario final acerca de este algoritmo
+ es que, si M no crece más rápido que n, por ejemplo, si nuestro arreglo se llena con enteros del 1 al n, o si este arreglo se llena sólo con enteros que están
+ acotados por alguna constante por arriba, entonces el tiempo de ejecución de
+ nuestro algoritmo es sólo lineal en n. Ahora resumiré los últimos tres videos. Primero cubrimos el algoritmo de ordenamiento por mezcla. Éste es un algoritmo del tipo divide y 
+vencerás que procede como sigue. Dado un arreglo de tamaño n, 
+primero se divide en 2 mitades, de aprox el mismo tamaño, después las ordena recursivamente y al final las combina en el arreglo resultante. Mostramos después que el tiempo de 
+ejecución de este algoritmo es O(n log n), que es muy rápido, hasta esto, casi lineal. Después mostramos que ningún otro algoritmo basado
+ en comparación puede ordenar n elementos dados asintóticamente más rápido que n log n. Hicimos esto mostrando que cualquier
+ algoritmo basado en comparación, debe distinguir entre bastantes casos. Entre n! permutaciones posibles. Para éste, en el peor de los casos, 
+un algoritmo basado en comparación debe hacer al menos O(n log n) comparaciones. Después mostramos que, de hecho, se puede hacer más
+ rápido, quiero decir, el problema de ordenamiento puede resolverse en un tiempo menor
+ a n log n, en algunos casos. Por ejemplo, en el caso en que nuestro arreglo de entrada 
+contiene enteros con valores pequeños.

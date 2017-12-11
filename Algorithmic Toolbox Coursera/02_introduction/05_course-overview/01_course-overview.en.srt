@@ -1,0 +1,820 @@
+1
+00:00:02,560 --> 00:00:05,160
+Hello everybody,
+welcome back to the Data Structures and
+
+2
+00:00:05,160 --> 00:00:09,750
+Algorithm specialization and
+the Algorithmic Toolbox course within it.
+
+3
+00:00:09,750 --> 00:00:13,460
+This is the last lecture in
+the introductory unit and
+
+4
+00:00:13,460 --> 00:00:16,390
+here we're going to give sort
+of an overview of the course.
+
+5
+00:00:16,390 --> 00:00:20,981
+And in particular, what we're going to
+do is we're going to talk about sort
+
+6
+00:00:20,981 --> 00:00:25,571
+of the philosophy of the course, and
+how it fits into the what we're going to
+
+7
+00:00:25,571 --> 00:00:28,459
+be teaching you within
+the rest of this course.
+
+8
+00:00:28,459 --> 00:00:30,980
+So, there's a problem.
+
+9
+00:00:30,980 --> 00:00:34,990
+Algorithm design is hard, and
+in particular it's hard to teach.
+
+10
+00:00:34,990 --> 00:00:38,360
+And by this I actually mean
+something pretty specific.
+
+11
+00:00:38,360 --> 00:00:41,380
+Now, algorithms solve many,
+many different problems.
+
+12
+00:00:41,380 --> 00:00:44,590
+You can use them to find paths
+between locations on a map,
+
+13
+00:00:44,590 --> 00:00:49,830
+or find good matchings with some property,
+or identify images in a photograph.
+
+14
+00:00:49,830 --> 00:00:53,420
+Many, many different sort of
+unrelated sounding problems
+
+15
+00:00:53,420 --> 00:00:55,010
+can all be solved by algorithms.
+
+16
+00:00:56,510 --> 00:01:00,320
+And because the sorts of things that
+an algorithm problem might ask you to
+
+17
+00:01:00,320 --> 00:01:00,980
+do are so
+
+18
+00:01:00,980 --> 00:01:05,430
+varied, there's no unified technique that
+will allow you to solve all of them.
+
+19
+00:01:06,880 --> 00:01:11,410
+And this is different from what you see in
+a lot of classes, when you're learning linear
+
+20
+00:01:11,410 --> 00:01:15,750
+algebra they talk about how do you
+solve systems of linear equations.
+
+21
+00:01:15,750 --> 00:01:19,271
+And they teach you some technique,
+like row reduction, and
+
+22
+00:01:19,271 --> 00:01:20,870
+then you're sort of done.
+
+23
+00:01:20,870 --> 00:01:22,680
+You just sort of need to practice it,
+
+24
+00:01:22,680 --> 00:01:25,320
+and you can solve any
+system of linear equations.
+
+25
+00:01:25,320 --> 00:01:27,410
+They give you a system
+of linear equations,
+
+26
+00:01:27,410 --> 00:01:32,290
+you turn the crank on this row reduction
+technology and out pops an answer.
+
+27
+00:01:33,380 --> 00:01:35,470
+For algorithms there
+isn't that sort of thing.
+
+28
+00:01:35,470 --> 00:01:41,190
+There's no general procedure where I give
+you an algorithms problem and you sort of
+
+29
+00:01:41,190 --> 00:01:45,855
+plug it into this machine and turn a crank
+and out pops a good algorithm for it.
+
+30
+00:01:45,855 --> 00:01:47,475
+And this makes it hard to teach.
+
+31
+00:01:47,475 --> 00:01:51,415
+If there was such a thing, we could just
+teach you, here's this thing that you do.
+
+32
+00:01:51,415 --> 00:01:52,905
+You do this, and
+
+33
+00:01:52,905 --> 00:01:55,905
+you'll have a good algorithm for
+any problem you might run into.
+
+34
+00:01:57,725 --> 00:01:59,255
+And it's harder than that.
+
+35
+00:01:59,255 --> 00:02:01,955
+I mean, sometimes,
+in order to find a good algorithm,
+
+36
+00:02:01,955 --> 00:02:04,355
+it requires that you
+have a unique insight.
+
+37
+00:02:04,355 --> 00:02:08,120
+You're working on some problem that
+no one's ever looked at before.
+
+38
+00:02:08,120 --> 00:02:12,250
+In order to find a good algorithm for it,
+you need to come up with some clever idea
+
+39
+00:02:12,250 --> 00:02:14,930
+that no one else has
+ever come up with before.
+
+40
+00:02:14,930 --> 00:02:19,260
+This is why sort of algorithms are so
+well studied,
+
+41
+00:02:19,260 --> 00:02:21,700
+why they're such an active
+field of research.
+
+42
+00:02:21,700 --> 00:02:25,990
+There are still so many different new
+things yet to be discovered there.
+
+43
+00:02:25,990 --> 00:02:29,992
+And we certainly can't teach you things
+that haven't been discovered yet.
+
+44
+00:02:29,992 --> 00:02:33,426
+And we also can't teach you
+things custom tailored to
+
+45
+00:02:33,426 --> 00:02:38,020
+the problems that you are going to run
+into in your life as a programmer.
+
+46
+00:02:39,060 --> 00:02:42,810
+So since we can't teach you everything
+you need to know about how to solve
+
+47
+00:02:42,810 --> 00:02:46,330
+all of your algorithm problems,
+what can we teach you?
+
+48
+00:02:47,720 --> 00:02:49,870
+Well, there are sort of two things.
+
+49
+00:02:49,870 --> 00:02:52,860
+One thing that we can definitely give
+you is practice designing algorithms.
+
+50
+00:02:52,860 --> 00:02:56,200
+We're going to have lots of homework
+problems with lots of things for
+
+51
+00:02:56,200 --> 00:02:59,300
+you to work on, and
+this will give you practice, how do you,
+
+52
+00:02:59,300 --> 00:03:03,250
+given a problem you haven't seen before,
+come up with a good algorithm for it?
+
+53
+00:03:03,250 --> 00:03:05,520
+Once you have the algorithm,
+how do you implement it and
+
+54
+00:03:05,520 --> 00:03:08,470
+make sure everything works and
+runs reasonably well?
+
+55
+00:03:08,470 --> 00:03:09,658
+That's something you can practice.
+
+56
+00:03:09,658 --> 00:03:13,769
+And it turns out that for the type of
+problems where they're sort of very
+
+57
+00:03:13,769 --> 00:03:18,359
+general and can be many different things,
+I mean, it's possible to solve a lot
+
+58
+00:03:18,359 --> 00:03:22,080
+of them, and one of the ways to be
+able to solve them is practice.
+
+59
+00:03:23,280 --> 00:03:24,720
+But we're also going to do more.
+
+60
+00:03:24,720 --> 00:03:28,690
+We're not just going to throw you in
+the deep end and say, try to swim,
+
+61
+00:03:28,690 --> 00:03:30,970
+try to program all of these algorithms.
+
+62
+00:03:30,970 --> 00:03:32,330
+There is something useful.
+
+63
+00:03:33,360 --> 00:03:36,700
+We can't teach you a generic
+procedure that will solve
+
+64
+00:03:36,700 --> 00:03:39,420
+any algorithms problem for you.
+
+65
+00:03:39,420 --> 00:03:42,520
+But what we can do is we can
+give you some common tools.
+
+66
+00:03:42,520 --> 00:03:46,210
+Some very useful tools for
+algorithm design.
+
+67
+00:03:46,210 --> 00:03:50,240
+And especially in this first
+course in our specialization
+
+68
+00:03:50,240 --> 00:03:53,420
+we're really going to focus on helping
+to build up your algorithmic toolbox.
+
+69
+00:03:54,700 --> 00:04:00,030
+And in particular, this course is going
+to focus on three of the most common and
+
+70
+00:04:00,030 --> 00:04:02,690
+most generally applicable
+algorithmic design techniques.
+
+71
+00:04:04,650 --> 00:04:06,410
+The first of these is greedy algorithms.
+
+72
+00:04:06,410 --> 00:04:09,600
+This is something where you're trying
+to construct some big object, and
+
+73
+00:04:09,600 --> 00:04:13,650
+the way you do it is you sort of make
+one decision in the most greedy,
+
+74
+00:04:13,650 --> 00:04:15,060
+locally optimal way you can.
+
+75
+00:04:16,060 --> 00:04:19,330
+And once you've made that decision you
+make another decision in the most greedy,
+
+76
+00:04:19,330 --> 00:04:21,070
+locally optimal way you can.
+
+77
+00:04:21,070 --> 00:04:25,540
+And you just keep making these decisions
+one at a time until you have an answer.
+
+78
+00:04:25,540 --> 00:04:29,970
+And surprisingly somehow making
+these locally optimal decisions
+
+79
+00:04:29,970 --> 00:04:31,879
+gives you a globally optimal solution.
+
+80
+00:04:33,120 --> 00:04:36,860
+And when this happens it gives you
+very clean algorithms and it's great.
+
+81
+00:04:38,150 --> 00:04:40,310
+That's the first thing we'll talk about.
+
+82
+00:04:40,310 --> 00:04:42,100
+Next, we'll talk about divide and conquer,
+
+83
+00:04:42,100 --> 00:04:45,580
+which is a technique where you've got
+some big problem you're trying to solve.
+
+84
+00:04:45,580 --> 00:04:49,770
+What you do is you break it into
+a bunch of little pieces, you solve all
+
+85
+00:04:49,770 --> 00:04:55,500
+the pieces, and then you put their answers
+together to solve the original thing.
+
+86
+00:04:55,500 --> 00:04:57,840
+Finally we'll talk about
+dynamic programming.
+
+87
+00:04:57,840 --> 00:05:00,520
+This is a little bit more
+subtle of a technique.
+
+88
+00:05:00,520 --> 00:05:04,310
+This is what you get when you've got some
+sort of large problem, that has sort of
+
+89
+00:05:04,310 --> 00:05:09,590
+a lot of, not sub-problems, but
+sort of related problems to it.
+
+90
+00:05:09,590 --> 00:05:12,210
+And this sort of whole
+family of related problems,
+
+91
+00:05:12,210 --> 00:05:16,270
+their solutions sort of depend on one
+another in a particular type of way.
+
+92
+00:05:17,880 --> 00:05:20,745
+And when you have it there's
+this great trick that you have,
+
+93
+00:05:20,745 --> 00:05:24,070
+where you sort of start at the small
+problems at the bottom of the pile.
+
+94
+00:05:24,070 --> 00:05:25,670
+And you solve all of them.
+
+95
+00:05:25,670 --> 00:05:27,960
+And you sort of keep track
+of all of your answers.
+
+96
+00:05:27,960 --> 00:05:30,190
+And you use the answers
+to the small problems,
+
+97
+00:05:30,190 --> 00:05:32,940
+to build up to obtain answers to
+the larger and larger problems.
+
+98
+00:05:34,780 --> 00:05:36,880
+So these are what we're
+going to talk about.
+
+99
+00:05:36,880 --> 00:05:42,560
+Each of the techniques we're going to talk
+about, how you recognize when it applies,
+
+100
+00:05:42,560 --> 00:05:45,060
+how do you analyze it when it applies,
+
+101
+00:05:45,060 --> 00:05:49,310
+and some practical techniques about
+how to implement, how to use them.
+
+102
+00:05:49,310 --> 00:05:50,366
+All that good stuff.
+
+103
+00:05:52,478 --> 00:05:56,086
+So there's one other thing before
+we let you go into the fun world of
+
+104
+00:05:56,086 --> 00:06:00,020
+greedy algorithms that you should
+keep in mind throughout this course,
+
+105
+00:06:00,020 --> 00:06:04,560
+and that's that there are these, maybe,
+different levels of algorithm design.
+
+106
+00:06:04,560 --> 00:06:07,320
+There's sort of different levels
+of sophistication that go into it.
+
+107
+00:06:08,700 --> 00:06:11,670
+At sort of the very lowest level,
+or top of this slide,
+
+108
+00:06:11,670 --> 00:06:14,450
+I guess, there is the naive algorithm.
+
+109
+00:06:14,450 --> 00:06:17,480
+This is sort of a thing where you
+take the definition of a problem and
+
+110
+00:06:17,480 --> 00:06:22,110
+you turn it into an algorithm, and
+we saw this for Fibonacci numbers and
+
+111
+00:06:22,110 --> 00:06:23,410
+greatest common divisors.
+
+112
+00:06:23,410 --> 00:06:28,403
+You sort of interpreted the definition
+of the thing you wanted to compute as
+
+113
+00:06:28,403 --> 00:06:30,710
+an algorithm, and you were done.
+
+114
+00:06:30,710 --> 00:06:33,490
+Now, these things are often very slow,
+as we saw.
+
+115
+00:06:33,490 --> 00:06:38,060
+Often they look like in order to find
+the best way of doing something,
+
+116
+00:06:38,060 --> 00:06:44,160
+we enumerate all ways to do it, and
+then figure out which one's the best.
+
+117
+00:06:44,160 --> 00:06:48,330
+On the other hand, these are slow, but
+it's often a good idea to first come up
+
+118
+00:06:48,330 --> 00:06:51,740
+with a naive algorithm, just make sure
+you have some algorithm that works.
+
+119
+00:06:53,100 --> 00:06:57,040
+Sometimes this works well and
+often you can just be done with it.
+
+120
+00:06:57,040 --> 00:07:01,060
+Other times, it's too slow, but
+at least you made sure that you understood
+
+121
+00:07:01,060 --> 00:07:05,050
+what problem you were working on and
+have something that runs.
+
+122
+00:07:06,880 --> 00:07:09,650
+But after that,
+the next thing that you want to do,
+
+123
+00:07:09,650 --> 00:07:14,410
+if this naive algorithm is too slow,
+is you try and look at your tool box.
+
+124
+00:07:14,410 --> 00:07:18,039
+You say, are there any standard
+techniques that I know that apply here?
+
+125
+00:07:18,039 --> 00:07:21,592
+Maybe there's a greedy algorithm
+that solves this problem, or
+
+126
+00:07:21,592 --> 00:07:23,708
+maybe I have to use a dynamic program.
+
+127
+00:07:23,708 --> 00:07:27,312
+But if you can find one of these
+standard techniques that work,
+
+128
+00:07:27,312 --> 00:07:30,848
+often that doesn't involve too
+much effort on your part, and
+
+129
+00:07:30,848 --> 00:07:33,440
+gives you something
+that works pretty well.
+
+130
+00:07:34,880 --> 00:07:39,070
+Now once you have something that works,
+you often want to optimize it.
+
+131
+00:07:39,070 --> 00:07:42,110
+And there are lots of ways to
+improve an existing algorithm.
+
+132
+00:07:42,110 --> 00:07:46,710
+Reduce the runtime from n-cubed
+to n-squared or n-squared to n.
+
+133
+00:07:46,710 --> 00:07:49,305
+And to do this,
+there are just a whole bunch of things.
+
+134
+00:07:49,305 --> 00:07:52,315
+Maybe sometimes you could just sort of
+rearrange the order in which you do
+
+135
+00:07:52,315 --> 00:07:56,035
+the operations to cut out
+some of the work that you do.
+
+136
+00:07:56,035 --> 00:07:59,495
+Sometimes you have to introduce
+a data structure to speed things up.
+
+137
+00:07:59,495 --> 00:08:00,965
+There are a bunch of ways to do this.
+
+138
+00:08:00,965 --> 00:08:03,445
+We'll talk a little bit
+about how this works.
+
+139
+00:08:03,445 --> 00:08:06,625
+And these three levels are things that
+you should be comfortable with and
+
+140
+00:08:06,625 --> 00:08:09,265
+able to apply pretty well
+by the end of this course.
+
+141
+00:08:10,800 --> 00:08:14,130
+However, sometimes these
+three are not enough.
+
+142
+00:08:15,350 --> 00:08:20,810
+Sometimes a naive algorithm is just too
+slow, the standard tools don't apply,
+
+143
+00:08:20,810 --> 00:08:24,210
+there's nothing that you can
+really optimize to improve things.
+
+144
+00:08:24,210 --> 00:08:28,280
+Sometimes in order to get a workable
+algorithm, what you need is magic.
+
+145
+00:08:28,280 --> 00:08:31,690
+You need some unique insight that
+no one else has ever had before.
+
+146
+00:08:32,750 --> 00:08:37,820
+You need some sort of clever new idea and
+these, there's only so
+
+147
+00:08:37,820 --> 00:08:40,690
+much we can do to teach
+you how to produce magic.
+
+148
+00:08:40,690 --> 00:08:46,508
+We will show you some examples of things
+that really did have clever ideas that
+
+149
+00:08:46,508 --> 00:08:49,390
+maybe you can't reproduce
+the thought process like,
+
+150
+00:08:49,390 --> 00:08:53,408
+how do you come up with this crazy idea,
+that just happens to make this work?
+
+151
+00:08:53,408 --> 00:08:58,210
+You should at least be able to appreciate
+the sort of thought that goes into this
+
+152
+00:08:58,210 --> 00:08:59,170
+sort of thing.
+
+153
+00:08:59,170 --> 00:09:02,410
+In any case it's something to keep
+in mind when looking on that,
+
+154
+00:09:02,410 --> 00:09:05,290
+when thinking about our problems, and
+what sort of things are expected of you.
+
+155
+00:09:07,040 --> 00:09:11,550
+In any case, that is basically it for
+the introductory segment.
+
+156
+00:09:11,550 --> 00:09:14,650
+We've talked a lot about sort of
+why algorithms are important and
+
+157
+00:09:14,650 --> 00:09:16,210
+given you some examples.
+
+158
+00:09:16,210 --> 00:09:18,380
+We've talked about asymptotic notation,
+
+159
+00:09:18,380 --> 00:09:22,020
+but now it's time to let you
+go to the rest of the course.
+
+160
+00:09:22,020 --> 00:09:26,790
+The rest of the course will keep giving
+you exercises to hone your skills, and
+
+161
+00:09:26,790 --> 00:09:30,980
+each unit of this course will cover
+one of these major techniques.
+
+162
+00:09:30,980 --> 00:09:34,660
+After I leave you with the end of
+the introduction, Michael will pick up and
+
+163
+00:09:34,660 --> 00:09:36,990
+talk to you about greedy algorithms.
+
+164
+00:09:36,990 --> 00:09:40,520
+Next off, Neil will talk to
+you about divide and conquer.
+
+165
+00:09:40,520 --> 00:09:43,690
+Finally, Pavel will have
+a unit on dynamic programming.
+
+166
+00:09:43,690 --> 00:09:47,230
+Each of these, they will talk to you
+about where the technique applies,
+
+167
+00:09:47,230 --> 00:09:50,680
+how to analyze it, how to implement it,
+all that good stuff.
+
+168
+00:09:51,700 --> 00:09:56,570
+But this is where I leave you, I hope
+you enjoyed the introduction, and I will
+
+169
+00:09:56,570 --> 00:10:00,550
+put you in Michael's very capable hands to
+start learning about greedy algorithms
+
+170
+00:10:00,550 --> 00:10:01,606
+starting in the next lecture.
+
+171
+00:10:01,606 --> 00:10:06,632
+So, until then, farewell.

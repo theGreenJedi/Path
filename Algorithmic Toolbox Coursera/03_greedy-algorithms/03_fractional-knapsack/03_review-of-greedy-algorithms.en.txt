@@ -1,0 +1,33 @@
+Hi, in this lesson, we will review what
+we saw in this module about greedy algorithms and specify what is common and
+important to all greedy algorithms. The main ingredients of any greedy
+algorithm are greedy choice and reduction to a subproblem. You have to prove that your
+greedy choice is a safe move. And also, you have to check that the
+problem that is left after your safe move is really a subproblem. That is, a problem of the same kind but
+with fewer parameters. After you have both,
+you have a greedy algorithm. Then, you need to estimate
+its running time and check that it's good enough for you. Safe moves in different
+problems are different. Basically, you have to invent something
+each time you have a new problem. In the first problem it was,
+select the maximum digit and put it first. In the last problem it was select the item
+with the maximum total value per weight. And you see that in every safe move,
+there's something like maximum, or minimum, or first, or
+leftmost, or rightmost. So, always safe move is greedy,
+but not all greedy moves are safe. So, you really have to prove every time that the move that you
+invented is really safe. Also, you can notice that sometimes we can optimize our initial greedy algorithm
+if we sort our object somehow. So, you can maybe try to solve problem, assuming that everything is
+sorted in some convenient order. And if you see that, because of that, your greedy algorithm can be
+implemented asymptotically faster, then you can just apply sorting first and
+then your greedy algorithm. The general strategy is
+when I have a problem, you can try to come up with some greedy
+choices, and then for some of them, you'll be able to prove that
+they're really safe moves. And if you've proven
+that this is a safe move, then you've reduced your
+problem to something. And then you have to check that
+this something is a subproblem. That is, the problem about the same thing, optimizing the same thing
+with the same restrictions. And then, this is a subproblem. And then you can solve it in the same way
+that you solved your initial problem. And you have this loop from
+problem to subproblem and back to the problem, always reducing
+it by the number of parameters. And in the end of this loop,
+you will have a problem so simple that you can solve it right
+away for one object or zero objects. And then you have your greedy algorithm.

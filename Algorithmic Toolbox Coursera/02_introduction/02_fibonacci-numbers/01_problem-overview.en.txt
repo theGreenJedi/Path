@@ -1,0 +1,37 @@
+Hello everybody! Welcome back. Today we're going to start talk
+about Fibonacci Numbers and algorithms to compute them. In particular, in this lecture we're
+just going to introduce the sequence of the Fibonacci numbers and
+talk a little bit about their properties. So to begin with the Fibonacci numbers
+is a fairly classically studied sequence of natural numbers. The 0th element of the sequence is 0. The first element is 1. And from thereon, each element
+is the sum of the previous two. So 0 and 1 is 1. 1 + 1 is 2. 1 + 2 is 3. 2 + 3 is 5. And the sequence continues,
+8, 13, 21, 34, and so on. So it's a nice sequence of numbers
+defined by some pretty simple recursive rule and it's interesting for
+a number of reasons. It has some interesting number theoretic
+properties, but originally this sequence was developed by an Italian
+mathematician as a mathematical model. And it's a little bit weird. You might try and wonder what sorts
+of things this could be a model for. Well, it turns out that, originally, this was used as sort of a mathematical
+model for rabbit populations. There was some idea that if
+you had a pair of rabbits, it would take them one generation to
+mature and every generation thereafter, they'd produce a pair of offspring. And if you work out what this means,
+then you find out the Fibonacci numbers, tell you how many pairs of rabbits
+you have after n generations. Now, because rabbits are known for
+reproducing rather quickly, you might assume that the sequence therefore
+grows quickly, and in fact it does. It's not hard to show that
+the nth Fibonacci number is at least 2 to the n over 2 for
+all n at least 6. And the proof can be made by induction. You prove this directly for n 6 or 7 just by computing the numbers and
+showing that they're big enough. And after that point,
+Fn is the sum of Fn-1 and Fn-2. By the inductive hypothesis,
+you bound that below and do a little bit of arithmetic. And it's bounded below by 2 to the n/2. So that completes the proof. In fact, with a little bit more work
+you can actually get a formula for the nth Fibonacci number as roughly
+1 point square root of 5 over 2 to the n. These things grow exponentially quickly. And to sort of drive that home a little
+bit more, we can look at some examples. The 20th Fibonacci number is 6765. The 50th Fibonacci number is
+approximately 12 billion. The 100th Fibonacci number is much,
+much bigger than that. And the 500th Fibonacci number is this
+monster with something like a 100 digits to it. So these numbers do get
+rather large quite quickly. So the problem that we're
+going to be looking into for the next couple of lectures is,
+how do you compute Fibonacci? So, if you want to use them to
+model rabbit populations or because of some number theoretic interest. We'd like an algorithm that as input
+takes a non negative integer n and returns the nth Fibonacci number. And we're going to talk about
+how you go about doing this. So, come back next lecture and
+we'll talk about that.

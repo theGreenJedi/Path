@@ -1,0 +1,292 @@
+1
+00:00:00,800 --> 00:00:01,400
+Hola a todos
+
+2
+00:00:01,400 --> 00:00:02,360
+Bienvenidos de nuevo.
+
+3
+00:00:02,360 --> 00:00:06,622
+Hoy, hablaremos sobre cómo calcular 
+el Máximo Común Divisor.
+
+4
+00:00:06,622 --> 00:00:09,970
+En particular, lo que nos gustaría
+ hacer con esta sección
+
+5
+00:00:09,970 --> 00:00:12,980
+es definir el problema del Máximo Común Divisor.
+
+6
+00:00:12,980 --> 00:00:15,560
+Discutiremos una forma ineficiente de calcularlo y
+
+7
+00:00:15,560 --> 00:00:18,845
+en la siguiente sección discutiremos cómo hacerlo mejor.
+
+8
+00:00:18,845 --> 00:00:20,040
+Sin embargo,
+
+9
+00:00:20,040 --> 00:00:20,640
+¿Qué es el MCD (Máximo Común Divisor)?
+
+10
+00:00:21,770 --> 00:00:24,200
+Suponga que tenemos una fracción, 
+a sobre b
+
+11
+00:00:24,200 --> 00:00:26,910
+y que deseamos simplificarla.
+
+12
+00:00:26,910 --> 00:00:30,730
+La forma estándar de lograr esto es dividiendo 
+tanto el numerador como
+
+13
+00:00:30,730 --> 00:00:37,175
+el denominador por algún número 'd', para obtener una fracción equivalente (a/b) / (b/d)
+
+14
+00:00:37,175 --> 00:00:39,260
+Correcto.
+
+15
+00:00:39,260 --> 00:00:42,210
+Ahora, ¿Cuál 'd' debemos usar para esto?
+
+16
+00:00:42,210 --> 00:00:44,550
+Bien, debemos satisfacer dos propiedades,
+
+17
+00:00:45,850 --> 00:00:50,330
+En primer lugar, 'd' debe dividir de forma exacta tanto a 'a' como a 'b
+de tal forma que los nuevos numerador y 
+
+18
+00:00:50,330 --> 00:00:52,160
+denominador sean ambos enteros.
+
+19
+00:00:53,210 --> 00:00:57,190
+Pero, sujeto a lo anterior, deseamos que
+ 'd' sea tan grande como sea posible
+
+20
+00:00:57,190 --> 00:00:59,930
+para que podamos reducir la fracción tanto como podamos.
+
+21
+00:01:01,190 --> 00:01:04,970
+Entonces, definimos que para 2 enteros 'a' y
+
+22
+00:01:04,970 --> 00:01:07,640
+'b', su Máximo Común Divisor, o MCD.
+
+23
+00:01:07,640 --> 00:01:13,340
+es el entero 'd' más grande que divide de 
+forma exacta a 'a' y a 'b'.
+
+24
+00:01:13,340 --> 00:01:16,300
+Bien, entonces es algo que usamos para reducir fracciones.
+
+25
+00:01:16,300 --> 00:01:20,150
+Sin embargo, resulta que MCD es un concepto
+
+26
+00:01:20,150 --> 00:01:22,360
+crítico en el campo de la teoría de números.
+
+27
+00:01:22,360 --> 00:01:26,780
+El estudio de números primos, factorización y similares.
+
+28
+00:01:26,780 --> 00:01:30,960
+Y, debido a su importancia en la teoría de números, 
+ser capaces de 
+
+29
+00:01:30,960 --> 00:01:34,880
+calcular MCDs es de hecho muy 
+importante en criptografía
+
+30
+00:01:34,880 --> 00:01:40,650
+Por ejemplo, el hecho de que podamos realizar 
+transacciones bancarias en línea de forma segura
+
+31
+00:01:40,650 --> 00:01:44,790
+es, en parte, debido al hecho de que calculamos 
+MCDs eficientemente para que
+
+32
+00:01:44,790 --> 00:01:46,880
+los algoritmos criptográficos funcionen.
+
+33
+00:01:48,460 --> 00:01:53,420
+Dada esta importancia, deseamos ser capaces de calcular MCDs.
+
+34
+00:01:53,420 --> 00:01:57,920
+Deseamos un algoritmo que, dados 
+dos enteros 'a' y 'b' mayores o iguales a 0
+
+35
+00:01:57,920 --> 00:02:00,480
+calcule el MCD de 'a' y 'b'.
+
+36
+00:02:01,570 --> 00:02:05,750
+Para aclarar el tipo de entrada que nos interesa,
+
+37
+00:02:05,750 --> 00:02:08,890
+de hecho, deseamos ser capaces de ejecutar
+este algoritmo sobre números largos
+
+38
+00:02:08,890 --> 00:02:15,020
+No deseamos solo que calcule el MCD de 5 y 12, o de 11 y 73.
+
+39
+00:02:15,020 --> 00:02:20,243
+Deseamos ser capaces de calcular el MCD de 
+
+40
+00:02:20,243 --> 00:02:26,160
+3,918,848 y 1,653,264
+
+41
+00:02:26,160 --> 00:02:31,060
+De hecho, nos interesa ser capaces de calcularlo 
+para números mucho más grandes
+
+42
+00:02:31,060 --> 00:02:31,860
+20, 50, 100 o 1000 digitos.
+
+43
+00:02:31,860 --> 00:02:35,950
+y, además, ser capaces de calcularlo bastante rápido.
+
+44
+00:02:37,740 --> 00:02:39,250
+Bien, empecemos.
+
+45
+00:02:39,250 --> 00:02:42,890
+Iniciemos sencillamente encontrando
+ un algoritmo que funcione.
+
+46
+00:02:42,890 --> 00:02:47,210
+Lo que deseamos es el número 
+más grande que divida tanto a 'a' como a 'b'.
+
+47
+00:02:48,250 --> 00:02:49,480
+Entonces, una cosa que podemos hacer
+
+48
+00:02:49,480 --> 00:02:53,170
+es probar todos los números candidatos.
+
+49
+00:02:53,170 --> 00:02:57,100
+Esto es, descubrir cuáles dividen a 'a' y a 'b' 
+y retornar el más grande.
+
+50
+00:02:58,590 --> 00:03:01,150
+Aquí hay una implementación.
+
+51
+00:03:01,150 --> 00:03:03,830
+Creamos una variable llamada 'best' y la iniciamos en 0
+
+52
+00:03:03,830 --> 00:03:06,530
+Sencillamente mantiene el mayor
+ número encontrado hasta ahora
+
+53
+00:03:07,870 --> 00:03:10,624
+Lo ejecutamos de 1 a 'a+b'
+
+54
+00:03:10,624 --> 00:03:14,921
+dado que ese es el rango de números que son validos.
+
+55
+00:03:14,921 --> 00:03:19,692
+ahora, si 'd' divide a 'a', y 'd' divide a 'b', 
+y dado que 'd' está creciendo
+
+56
+00:03:19,692 --> 00:03:22,754
+este debe ser el nuevo 'best' que hemos visto
+
+57
+00:03:22,754 --> 00:03:26,146
+Entonces, asignamos 'd' a 'best' y así, al final del día,
+
+58
+00:03:26,146 --> 00:03:28,460
+retornamos el mejor resultado que encontramos.
+
+59
+00:03:29,490 --> 00:03:31,620
+Este es un algoritmo perfectamente bueno.
+
+60
+00:03:31,620 --> 00:03:32,700
+Funciona.
+
+61
+00:03:32,700 --> 00:03:35,030
+Lastimosamente, es un poco lento,
+
+62
+00:03:35,030 --> 00:03:38,880
+Ya que debemos correr a través del bucle 'a + b' veces
+
+63
+00:03:39,990 --> 00:03:45,290
+y, esto significa que, aún cuando 'a' y 'b' son, digamos, 
+números de 20 digitos, ya va a 
+
+64
+00:03:45,290 --> 00:03:49,280
+tomarnos al menos miles de años para poder terminar el cálculo.
+
+65
+00:03:50,430 --> 00:03:54,440
+Esto no es suficiente para el tipo de aplicaciones que nos interesan.
+
+66
+00:03:54,440 --> 00:03:56,710
+Vamos a necesitar un algoritmo mejor.
+
+67
+00:03:56,710 --> 00:04:00,970
+Así que vuelve para la siguiente sesión y hablaremos 
+sobre como encontrar un mejor algoritmo para
+
+68
+00:04:00,970 --> 00:04:02,500
+este problema.

@@ -1,0 +1,80 @@
+In this last video we will show that
+there are cases when we can sort the n given objects without actually
+comparing them to each other. And for such algorithms, our lower
+bound with n log n does not apply. Well, probably the most natural case
+when we can sort the n given objects without comparing them to each other is the case when our input sequence
+consists of small integers. We will illustrate it with a toy example. So consider an array of size 12 which
+consists of just three different digits. I mean each element of our array
+is equal to either 1, 2 or 3. Then we can do the following, let's just
+go through this array from left to right. I mean by a simple count and count
+the number of occurrences of 1, 2 and 3. Just by scanning this array you will
+find out that 1 appears two times, 2 appears seven times,
+and 3 appears three times. And this information is enough for
+us to sort these objects, so we can use this information to fill
+in the resulting array, A prime. So we put 1 two times, then we put 2 seven
+times, and then we put 3 three times. And this gives us the resulting
+sorted array A prime, right? So what just happened is
+that we sorted this array, these n objects, without comparing
+these objects to each other. We just counted the number of occurrences
+of each number, and for this we used, essentially, the information that
+this array contains small integers. The algorithm that we just saw is
+called counting sort algorithm. Its main ideas are the following. I assume that we're given
+an array A of size n, and we know that all its elements
+are integers in the range from 1 to M. Then, we do the following. We create an array count of size M, and by scanning the initial array
+A just once from left to right, we count the number of occurrences
+of each i from 1 to M, and we store this value in
+the cell count of i. So, we scan the array A from left
+to right, and whenever we see an element equal to i, we increment
+the value stored in the cell count of i. Then when this array is filled,
+we can use this information to fill in the resulting array A prime,
+as we did in our toy example. So this is a pseudocode of the count and
+sort algorithm. Here we're given an array A of size M and we assume that all the elements of
+this array are integers from 1 to M. So we introduce the recount of size M
+which is initially filled in by zeroes. Then by scanning our initial
+array we fill in this array. Namely, whenever we see an element
+k in our initial array, we increase the cell count of k. So after the first loop of this algorithm,
+we know exactly the total number of occurrences of each number k from
+1 to M in our initial array. So for example in our toy
+example two slides before, we counted that the number 1 appears
+two times in our initial array, the number 2 appears seven
+times in our initial array, and number 3 appears three times. So at this point, we know that in the
+resulting array, the first two elements will be occupied by the number 1, the next
+seven elements will be occupied by the number 2, and the next three elements
+will be occupied by the number 3. Now we would like, instead of having just
+the lengths of these three intervals, we would like to compute
+the starting point of each interval. So we do this in a new loop. And for this we introduce a new array Pos. So Pos[1] is equal to 1, meaning that number 1 will occupy
+a range starting from the first index. And the starting point for each subsequent
+range is computed as a starting point of each previous range,
+plus the length of this previous range. So Pos[j] is computed as
+Pos[j -1] + Count[j- 1]. So at this point we know
+the starting point for each range. Namely, k in the resulting array, number k
+will occupy a range starting from Pos[k]. Then we just count our initial array and
+whenever we see an element, we always know where to put
+it in the initial array. So then let me remind you that we do not
+just fill in the array with numbers from 1 to M, but
+we copy elements from our initial array. This is because what we are looking for in this certain problem is a permutation
+of our initial n given objects. Because what we have is probably not just
+number, not just integers from 1 to M, but these numbers are keys of
+some probably complex object. Okay, so the running time of this algorithm can
+be easily seen to be big O of M plus M. This is just because
+here we have three loops. So the first loop has n iterations,
+the second loop has M iterations, and the last loop also has n iterations. Well, so, this is the formal statement. The running time of count and
+sort algorithm is just n + M. And the final remark about this algorithm
+is that if M grows no faster than n, namely, for example, if our array is
+filled by integers from 1 to n, or if this array is filled just by integers
+which are upper bounded by some constant, then the running time of our count and
+sort algorithm is just linear in n. I will now summarize
+the last three videos. So we first covered
+the merge sort algorithm. So this is a divide and conquer based
+algorithm that proceeds as follows. Given an array of size n it
+first splits it into two halves, both roughly equal size,
+then it sorts them recursively and then it merges them into
+the resulting array. We then, and we showed that the running
+time of this algorithm is big O(n log n), which is quite fast actually. Almost teeny. We then showed that no other comparison
+based algorithm can sort n given objects asymptotically faster than an n log n. So we did this by showing that
+any comparison based algorithm must distinguish between too many cases. Between n factorial possible permutations. For this, in the worst case,
+a comparison based algorithm must perform at least big
+O(n log n) interpolations. We then showed that it can be actually
+done faster and in certain problems, can be solved in time less than n log n,
+in some cases. For example, in the case when our input
+array contains small varied integers.

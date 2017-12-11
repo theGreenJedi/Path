@@ -1,0 +1,192 @@
+1
+00:00:00,320 --> 00:00:04,720
+Hi, I'm Michael Levin and
+together we will study Greedy Algorithms.
+
+2
+00:00:04,720 --> 00:00:07,955
+They are some of the simplest
+algorithms that exist and
+
+3
+00:00:07,955 --> 00:00:12,722
+they usually seem a pretty natural
+way to try solving a problem.
+
+4
+00:00:12,722 --> 00:00:15,330
+We will start with a few
+examples of problems that can be
+
+5
+00:00:15,330 --> 00:00:19,190
+solved by greedy algorithms,
+just to illustrate how they work.
+
+6
+00:00:19,190 --> 00:00:23,511
+And our very first problem is
+a problem about largest number.
+
+7
+00:00:23,511 --> 00:00:27,019
+And for this problem, you will probably be
+able to come up with a greedy algorithm
+
+8
+00:00:27,019 --> 00:00:29,720
+yourself, because that is really
+a very natural thing to do.
+
+9
+00:00:30,770 --> 00:00:33,091
+So imagine this situation.
+
+10
+00:00:33,091 --> 00:00:37,674
+You are trying to get a job at a company
+and you already had a few interviews, and
+
+11
+00:00:37,674 --> 00:00:39,081
+everything went well.
+
+12
+00:00:39,081 --> 00:00:42,589
+Now you have your final
+interview with the boss, and
+
+13
+00:00:42,589 --> 00:00:45,471
+he tells you that he
+will give you an offer.
+
+14
+00:00:45,471 --> 00:00:48,509
+But instead of negotiating
+your salary with you,
+
+15
+00:00:48,509 --> 00:00:52,500
+he will give you a few pieces of
+paper with digits written on them.
+
+16
+00:00:53,510 --> 00:00:57,180
+And your task will be to arrange
+those digits in a row, so
+
+17
+00:00:57,180 --> 00:01:00,890
+that when you read the number from left
+to right, that will be your salary.
+
+18
+00:01:01,890 --> 00:01:03,920
+So basically, you have a problem.
+
+19
+00:01:03,920 --> 00:01:07,780
+Given a few digits, to arrange them
+in the largest possible number.
+
+20
+00:01:08,910 --> 00:01:11,670
+And there are a few examples
+of such numbers on the slide.
+
+21
+00:01:13,190 --> 00:01:16,559
+So what do you think will be
+the correct answer to this problem?
+
+22
+00:01:18,520 --> 00:01:22,780
+And of course,
+the correct answer is 997531.
+
+23
+00:01:22,780 --> 00:01:26,963
+And it's pretty obvious that you should
+arrange numbers from the largest to
+
+24
+00:01:26,963 --> 00:01:28,931
+the smallest, from left to right.
+
+25
+00:01:28,931 --> 00:01:32,520
+But let's look at how
+the greedy algorithm does that.
+
+26
+00:01:33,740 --> 00:01:38,640
+So, the Greedy Strategy is start
+with a list of digits then
+
+27
+00:01:38,640 --> 00:01:41,641
+find the maximum digit in the list.
+
+28
+00:01:41,641 --> 00:01:47,121
+Append it to the number and
+remove it from the list.
+
+29
+00:01:47,121 --> 00:01:52,410
+And then repeat this process until
+there are no digits left in the list.
+
+30
+00:01:52,410 --> 00:01:57,000
+So on the next step we will find
+the largest digit, which is again 9.
+
+31
+00:01:57,000 --> 00:02:02,625
+We'll append it to the number to
+the right and remove it from the list.
+
+32
+00:02:02,625 --> 00:02:07,680
+Then we will find 7 as the largest
+digit appended to the right and
+
+33
+00:02:07,680 --> 00:02:09,300
+remove it from the list.
+
+34
+00:02:09,300 --> 00:02:15,550
+And then we'll continue with 5, 3, and 1.
+
+35
+00:02:18,310 --> 00:02:21,710
+And then we get the correct answer,
+997531.
+
+36
+00:02:21,710 --> 00:02:25,820
+And in the next video,
+we will design an algorithm
+
+37
+00:02:25,820 --> 00:02:30,450
+to find the minimum number of refuels
+during a long journey by car.
+
+38
+00:02:30,450 --> 00:02:33,570
+We will see similarities
+between these two problems,
+
+39
+00:02:33,570 --> 00:02:37,060
+largest number problem and
+car refueling problem.
+
+40
+00:02:37,060 --> 00:02:39,630
+And we will define how greedy
+algorithms work in general.

@@ -1,0 +1,165 @@
+1
+00:00:00,250 --> 00:00:04,710
+Hello, and welcome to the next lesson
+in the Divide-and-Conquer model.
+
+2
+00:00:04,710 --> 00:00:08,710
+This lesson is going to be devoted to
+the quick sort algorithm, which is
+
+3
+00:00:08,710 --> 00:00:13,070
+one of the most efficient and commonly
+used in practice sorting algorithms.
+
+4
+00:00:14,490 --> 00:00:18,760
+Well, as usual, we start with
+the overview of this algorithm.
+
+5
+00:00:18,760 --> 00:00:20,640
+The algorithm is comparison based,
+
+6
+00:00:20,640 --> 00:00:26,690
+meaning that it sorts the n given
+elements by comparing pairs of them.
+
+7
+00:00:26,690 --> 00:00:30,957
+Its running time is also asymptotically
+n log n, but not in the worst case,
+
+8
+00:00:30,957 --> 00:00:35,790
+as was with the merge sort algorithm,
+for example, but on the average case.
+
+9
+00:00:35,790 --> 00:00:38,957
+This is because this
+algorithm is randomized,
+
+10
+00:00:38,957 --> 00:00:42,540
+so it uses random numbers to
+sort the given n objects.
+
+11
+00:00:42,540 --> 00:00:46,470
+Well, we will explain later in
+this lesson what this means.
+
+12
+00:00:46,470 --> 00:00:50,790
+Finally, as I said before, this algorithm
+is very efficient in practice and,
+
+13
+00:00:50,790 --> 00:00:53,690
+at the same time, not so
+difficult to implement.
+
+14
+00:00:53,690 --> 00:00:58,580
+This is a toy example explaining the main
+idea of the quick sort algorithm.
+
+15
+00:00:58,580 --> 00:01:03,849
+So given an array, in this case of
+size 11, let's take its first element.
+
+16
+00:01:03,849 --> 00:01:05,390
+In this case it is 6.
+
+17
+00:01:05,390 --> 00:01:06,508
+And let's do the following.
+
+18
+00:01:06,508 --> 00:01:10,204
+Let's rearrange all
+the elements in this array such
+
+19
+00:01:10,204 --> 00:01:14,350
+that the element 6 stays
+in its final position.
+
+20
+00:01:14,350 --> 00:01:17,910
+All the elements that go before
+it are actually at most 6.
+
+21
+00:01:17,910 --> 00:01:22,470
+And all the elements that go after 6,
+after this element, are greater than 6.
+
+22
+00:01:22,470 --> 00:01:26,574
+Well, we will show that this can be done
+by a single scan of the initial array.
+
+23
+00:01:26,574 --> 00:01:30,010
+This is how the resulting
+array looks like.
+
+24
+00:01:30,010 --> 00:01:33,710
+So once again,
+6 stays in its final position.
+
+25
+00:01:33,710 --> 00:01:36,544
+All the elements before it are at most 6.
+
+26
+00:01:36,544 --> 00:01:39,330
+All the elements after
+it are greater than 6.
+
+27
+00:01:39,330 --> 00:01:41,620
+So we do not need to move 6 anymore.
+
+28
+00:01:41,620 --> 00:01:43,680
+It is already in its final position.
+
+29
+00:01:43,680 --> 00:01:47,835
+So what remains to be done is to sort
+all the elements that go before 6 and
+
+30
+00:01:47,835 --> 00:01:49,863
+all the elements that go after 6.
+
+31
+00:01:49,863 --> 00:01:53,967
+And this can be done just with two
+recursive calls to the same algorithm,
+
+32
+00:01:53,967 --> 00:01:56,380
+to the quick sort algorithm.
+
+33
+00:01:56,380 --> 00:01:57,290
+So we do this,
+
+34
+00:01:57,290 --> 00:02:02,380
+and immediately after these two
+recursive calls, we have a sorted array.
+
+35
+00:02:02,380 --> 00:02:06,699
+Well, in the next video we will explain
+all the details of this algorithm.

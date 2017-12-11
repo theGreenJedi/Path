@@ -1,0 +1,107 @@
+We now convert our recurrence relation
+into a dynamic programming algorithm. We start by implementing a procedure
+that computes the minimum and maximum value of the subexpression
+(i,j) through optimal values for smaller sub subexpressions. So the procedure is called MinAndMax(i,j). So we first declared two intervals,
+max and min. Initially min is equal to plus infinity,
+max is equal to minus infinity, or to a very large number,
+or to very small number. Then we go through all possible
+values of k between i and j- 1. I mean between, we just go through all possibilities
+of splitting our subexpression (i, j) into two sub subexpressions from
+i to k and from k plus 1 to j. When such a splitting is fixed,
+we compute four possible values, applying opk to either two maximum values of this
+subexpression or two minimum values or two maximum and minimum value or
+two minimum and maximum value. When such two values are computed, we just check whether one of them can
+improve our minimum or maximum values. If it improves we update the min or
+max variable. Finally we return the minimum value and
+the maximum value for our subexpression. Our current relation expresses
+the solution for an expression (i,j) for a solution for smaller sub subexpressions. What do we mean by saying smaller? Well, we mean just that they are shorter,
+right? So once again when we compute the value
+for a subexpression (i,j) we rely on the fact that those are values for shorter
+subexpressions are already computed. This means that our algorithm
+needs to compute the solutions for all subproblems in order
+of increasing length. Namely, in order of increasing
+value of j minus i, right? So for this problem we have roughly
+quadratic number of subproblems. Namely our subproblem, i, i, j,
+is parameterized by the value of i and j which in turn range from 1 to n. Right, so it makes sense in this
+case to store the values for all subproblems in a two
+dimensional table of size n by n. Recall also that we need
+to recall our subproblems in the order of increasing value of j- 1. We can do this just by going
+through all subproblems in an order shown on the slide. So, why this order? Well this is simply because it goes
+through all possible values of i, j in order of increasing
+j minus y as required. So lets take a look. On this diagonal we have all the cells where I,
+where j- i is equal to 0, right? So the first cell here is 1, 1. The second cell is 2, 2. The third cell is 3, 3 and so on. We then proceed to this
+cell here i is equal to 1, j is equal to 2, so the difference is 1. We then proceed to this cell. This is the cell 2,
+3 with the difference 1 again. We then proceed to this cell which is 3,
+4 and so on. So on this cell we have on this
+diagonal we have all the cells i, j where i- j = 0. On this diagonal we have all cells i,
+j where j- i = 1. For this diagonal,
+this difference is equal to two. For this diagonal, this difference
+is equal to three and so on. The resulting value for our initial subproblem will be computed
+as the value of the last cell. Right, because of this cell responds to
+the initial subexpression from one to n. Now everything is ready to
+write down an algorithm. In the algorithm we will maintain
+two tables, m and capital M. The first one for storing the minimum
+values for all subexpressions, and the second one for storing the maximum
+values for all subexpressions. We start by initializing
+these tables as follows. So when subexpression
+contains just one digit, which means that when j = i,
+then there is nothing, actually to minimize or
+maximize because there are no operations. So there is no order on operations. So, because of that we just initialize the main diagonals of this table with
+the most current point in digits. This is with the following loop. So m(i,i) and M(i,i) = di. Then we go through all possible
+subproblems in order of increasing size. And this is done as follows. We gradually increase
+the parameter s from 1 to n- 1. This is done in the following loop. When s is fixed, i goes from 1 to n- s. And j is computed as i + s. This is done to go through
+all possible payers (i,j) such that j- i = s. Right when i and
+j are fixed we call the procedure min and max to compute the minimum and
+maximum value of the subexpression (i,j). All right. So finally we return the value of
+capital M of 1,n as the result for our initial problem because
+this subexpression, 1 n corresponds to our initial problem. Containing all digits from 1 to n. Okay so the running time
+of this algorithm is cubic. Namely, big O of nq. And these can be seen by noting
+that we have two nested loops. The first one with n-1 iterations,
+the inner one is with n-s iterations, which is at most n. Also, inside these two loops we have
+a call to min and max procedure. The running time of min and max procedure is proportional
+to j-i which is also at most n. So the right end time however
+algorithm is it must O and n times n time n, which is n cubed. This slide shows an example
+on how a table's m and capital M look like if we ran
+a well reason on our toy example, namely expression 5- 8 + 7 x 4- 8 + 9. Let's just go through this
+example step by step. So we start by filling in the values
+on the main diagonal in both matrices. So this is 5, this is 8,
+this is 7, this is 4, 8, 9. So this response to subexpression
+consisted of just one digit. So there is nothing to maximize or
+minimize. So we do the same for capital M matrix. We then proceed to the second diagonal. Well with -3 here and
+this corresponds to this subexpression again in this case there
+is just one operation. So there is nothing to minimize or
+maximize here, because there will just be one
+other when we have Just one sign. So we put -3 here this corresponds to
+the problem, to the subproblem one, two. Let me put all the indices
+here by the way. Then we proceed through the cell to 3,
+which corresponds to this subproblem. Again, there is nothing to maximize or
+minimize so we continue in the same way. In this case it is not so interesting and then we proceed to the third
+day namely to this cell. So this can respond to
+the subexpression 1,3 which consists of three digits and
+two operations, minus and plus. So we know that one of them is the last
+operation in the optimal order when computing minimal value for example. So as soon as this is minus. This will split the subexpression into
+two sub subexpression, 5 and 8 + 7. So for both the subexpressions we already
+know their maximum and minimum values. So once again,
+this subexpression corresponds to (1, 1), this subexpression corresponds to (2, 3). Sort of from second to third digits, and
+third digit from first to first digit. So we know that for the first
+subexpression we know already it's minimum value it is here, and
+it's maximum value, it is here. So for the second subexpression,
+we already know it's minimum value, it is here. It is 15, and then its maximum value. It is also 15. So by going through all possible
+pairs of obviously maximum and minimum values, in this case,
+they're all the same. We compute the minimum value,
+which is just 5- 15. It is minus ten. However, this was only the first
+case of splitting this sub expression into two sub expressions. And as a possibility
+would be the following so we can split it into
+the following two subexpressions. So this corresponds to 1,
+2 and this corresponds to 3,3. Right? So, for one two we know its minimum value,
+it is minus three, and its maximum value,
+it is also minus three. For 3, 3 we know its maximum value. It is here, seven. Its minimum value and its maximum value. So then we can compute- 3 + 7, which gives us just 4. So for the maximum value of
+the subexpression (1,3) we select 4. For the minimum value we select -10. So we proceed filling in this
+table in a similar fashion. So we then put 36 here in this cell,
+then -20 in this cell, and then parallel we put 60 here,
+20 here, and so on. So, in the end we see the value 200 here. And this is the maximum value
+of our initial expression. This still doesn't give us
+the optimal load rate itself, but we will be able to reconstruct
+it from these two tables. Now we are sure that the maximum value
+of our initial expression is 200, and we will find out the optimal ordering,
+or the optimal sizing in a minute.

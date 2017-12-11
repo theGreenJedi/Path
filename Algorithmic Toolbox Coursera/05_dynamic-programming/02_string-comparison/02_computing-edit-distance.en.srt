@@ -1,0 +1,333 @@
+1
+00:00:01,000 --> 00:00:06,810
+Let's now see how dynamic programming
+algorithm solves the edit distance problem.
+
+2
+00:00:06,810 --> 00:00:11,550
+We start by considering two strings,
+A of length n and
+
+3
+00:00:11,550 --> 00:00:16,697
+B of length m and we will ask the question
+question what is an optimal alignment
+
+4
+00:00:16,697 --> 00:00:23,083
+of an i-prefix of A,
+which is the first i symbols of A, and
+
+5
+00:00:23,083 --> 00:00:28,250
+the j-prefix of B which
+are the first j symbols only.
+
+6
+00:00:28,250 --> 00:00:36,600
+The last column of an optimal
+alignment is either an insertion or
+
+7
+00:00:36,600 --> 00:00:41,530
+a deletion or a mismatch, or a match.
+
+8
+00:00:42,850 --> 00:00:47,350
+And please notice that if
+we remove the last column
+
+9
+00:00:47,350 --> 00:00:51,970
+from the optimal alignment of the strings,
+what is left
+
+10
+00:00:51,970 --> 00:00:58,000
+is an optimal alignment of
+the corresponding two prefixes.
+
+11
+00:00:58,000 --> 00:01:04,140
+And we can adjust the score of
+the optimal alignment for i prefix and
+
+12
+00:01:04,140 --> 00:01:10,540
+j prefix by adding plus 1 in the case of
+insertion, plus 1 in the case of deletion,
+
+13
+00:01:10,540 --> 00:01:16,259
+plus 1 in the case of mismatch and
+adding nothing in the case of match.
+
+14
+00:01:17,610 --> 00:01:21,980
+Let's denote D (i, j)
+to be the edit distance
+
+15
+00:01:21,980 --> 00:01:26,530
+between an i-prefix and a j-prefix.
+
+16
+00:01:26,530 --> 00:01:28,590
+And in this case,
+
+17
+00:01:28,590 --> 00:01:34,345
+this figure at the top of the slide
+illustrates the following recurrency.
+
+18
+00:01:34,345 --> 00:01:40,186
+D(i,j) equal to the minimum
+of the following four values:
+
+19
+00:01:40,186 --> 00:01:45,104
+D(i,j-1)+1, D(i-1,j)+1,
+
+20
+00:01:45,104 --> 00:01:50,620
+D(i-1,j-1)+1, in the case the last
+
+21
+00:01:52,360 --> 00:01:58,135
+two symbols in the i prefix of A and
+j prefix of B are different.
+
+22
+00:01:58,135 --> 00:02:06,610
+And D(i- 1, j- 1), if the last symbols
+in i and j prefix are the same.
+
+23
+00:02:08,160 --> 00:02:13,230
+Our goal now is to compute
+the edit distance D, i,
+
+24
+00:02:13,230 --> 00:02:20,950
+j between all i prefixes of string A and
+all j prefixes of string B.
+
+25
+00:02:22,550 --> 00:02:29,630
+In the case of string editing and distance
+we will construct eight by nine grid and
+
+26
+00:02:29,630 --> 00:02:34,392
+our goal is to compute
+all edit distances D(i, j)
+
+27
+00:02:34,392 --> 00:02:37,400
+corresponding to all nodes in this grid.
+
+28
+00:02:37,400 --> 00:02:43,010
+For example, for i and
+j equal to four and four.
+
+29
+00:02:43,010 --> 00:02:48,522
+How will we compute
+the corresponding distance D(i, j)?
+
+30
+00:02:48,522 --> 00:02:56,100
+Let's start by filling distances D(i, 0)
+in the first column of this matrix.
+
+31
+00:02:56,100 --> 00:03:00,991
+It is easy because indeed we
+are comparing an i-prefix
+
+32
+00:03:00,991 --> 00:03:05,137
+of string A against
+a 0-prefix of string D and
+
+33
+00:03:05,137 --> 00:03:11,750
+therefore this edit distance for
+i-prefix will be equal to i.
+
+34
+00:03:11,750 --> 00:03:19,420
+That's what's shown here, similarly we can
+easily fill the first row in this matrix.
+
+35
+00:03:19,420 --> 00:03:26,140
+And now let's try to compute
+what will be the distance D(1,1)
+
+36
+00:03:26,140 --> 00:03:31,750
+corresponding to comparison of string
+consisting of single symbol E,
+
+37
+00:03:31,750 --> 00:03:36,020
+with a string consisting
+of single symbol D,
+
+38
+00:03:36,020 --> 00:03:41,377
+there are three possible
+ways to arrive to the node (1, 1):
+
+39
+00:03:41,377 --> 00:03:46,000
+from the nodes (0, 0), (0, 1), and (1, 0).
+
+40
+00:03:46,000 --> 00:03:52,940
+Which one should be the way we will select
+to find the optimal edit distance.
+
+41
+00:03:52,940 --> 00:03:57,764
+According to the previous recurrency,
+we should select
+
+42
+00:03:57,764 --> 00:04:02,484
+the one of three directions
+that gives minimal value for
+
+43
+00:04:02,484 --> 00:04:06,601
+D(i, j), which is minimum of 2,
+2, and 1 and
+
+44
+00:04:06,601 --> 00:04:11,610
+therefore we arrive to node
+(1, 1) by diagonal edge.
+
+45
+00:04:11,610 --> 00:04:15,200
+Let's keep this in memory that
+
+46
+00:04:15,200 --> 00:04:19,250
+the right direction to arrive at node
+(1, 1) was the diagonal direction.
+
+47
+00:04:20,380 --> 00:04:25,370
+We will now try to compute the edit
+distance for the next node in the matrix.
+
+48
+00:04:25,370 --> 00:04:30,986
+And in this case D(2,1) is
+equal to minimum D(2,0) + 1,
+
+49
+00:04:30,986 --> 00:04:36,799
+D(1,1) + 1 and
+D(1,0) of each tells us that's the optimal
+
+50
+00:04:36,799 --> 00:04:42,590
+way to arrive to this node would be again,
+by diagonal edge.
+
+51
+00:04:42,590 --> 00:04:45,890
+You continue further,
+once again compare three values and
+
+52
+00:04:45,890 --> 00:04:51,510
+it turn out that the best way to arrive
+to this node will be by vertical edge.
+
+53
+00:04:51,510 --> 00:04:58,033
+We'll continue further and we'll fill
+the whole second column in the matrix.
+
+54
+00:04:58,033 --> 00:05:03,697
+Now let's continue with the circle,
+what about this node?
+
+55
+00:05:03,697 --> 00:05:10,699
+For this node D(1,2) =
+minimum {D(1,1) + 1,
+
+56
+00:05:10,699 --> 00:05:15,609
+D (0,2) + 1, and D (0,1) + 1}.
+
+57
+00:05:15,609 --> 00:05:19,880
+And it is minimum of 2, 3, and 2.
+
+58
+00:05:19,880 --> 00:05:26,350
+In fact, there are two optimal
+ways to arrive to this node and
+
+59
+00:05:26,350 --> 00:05:30,970
+in this case we show both
+of them by diagonal edge
+
+60
+00:05:30,970 --> 00:05:35,580
+into this vertex and
+by horizontal edge of this vertex.
+
+61
+00:05:35,580 --> 00:05:41,520
+You'll continue further and slowly but
+surely we will fill the whole matrix.
+
+62
+00:05:44,200 --> 00:05:49,100
+The edit distance pseudocode implements
+the algorithm we just discussed.
+
+63
+00:05:49,100 --> 00:05:55,470
+It first fills in the first column and
+the first row of the dynamic programming
+
+64
+00:05:55,470 --> 00:06:01,230
+matrix and then it continues
+filling it up by computing the cost
+
+65
+00:06:01,230 --> 00:06:07,330
+of moving to vertex (i, j)
+using insertion, deletion,
+
+66
+00:06:07,330 --> 00:06:12,290
+or mismatch or match or in other words,
+exploring all possibility.
+
+67
+00:06:12,290 --> 00:06:18,610
+Moving to the vertex i, j using vertical
+edge, horizontal edge, and diagonal edge.
+
+68
+00:06:18,610 --> 00:06:22,700
+And then it finds out which
+of these possibilities
+
+69
+00:06:22,700 --> 00:06:26,451
+results in the minimum edit distance.

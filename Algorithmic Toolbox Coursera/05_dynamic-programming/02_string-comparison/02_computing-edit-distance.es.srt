@@ -1,0 +1,327 @@
+1
+00:00:01,000 --> 00:00:06,810
+Veamos cómo el algoritmo de programación dinámica
+resuelve el problema de la distancia de edición.
+
+2
+00:00:06,810 --> 00:00:11,550
+Comenzamos considerando dos 
+cadenas, A de longitud n y
+
+3
+00:00:11,550 --> 00:00:16,697
+B de longitud m, y responderemos a la pregunta 
+de cuál es una alineación óptima
+
+4
+00:00:16,697 --> 00:00:23,083
+de un prefijo i de A, que son los 
+primeros i símbolos de A y
+
+5
+00:00:23,083 --> 00:00:28,250
+el prefijo-j de B que son los
+primeros j símbolos de B.
+
+6
+00:00:28,250 --> 00:00:36,600
+La última columna de un alineamiento
+óptimo puede ser una inserción o
+
+7
+00:00:36,600 --> 00:00:41,530
+una deleción, o una discrepancia o una coincidencia.
+
+8
+00:00:42,850 --> 00:00:47,350
+Y, por favor, observa que si
+eliminamos la última columna
+
+9
+00:00:47,350 --> 00:00:51,970
+del alineamiento óptimo de
+las cadenas lo que queda a la izquierda,
+
+10
+00:00:51,970 --> 00:00:58,000
+es un alineamiento óptimo
+de los correspondientes dos prefijos.
+
+11
+00:00:58,000 --> 00:01:04,140
+Y podemos ajustar la puntuación del 
+alineamiento óptimo para el prefijo i y 
+
+12
+00:01:04,140 --> 00:01:10,540
+el prefijo j añadiendo más 1 en el caso
+de una inserción, más 1 en el caso de deleción,
+
+13
+00:01:10,540 --> 00:01:16,259
+más 1 en el caso de una discrepancia y
+no añadiendo nada en caso de coincidencia.
+
+14
+00:01:17,610 --> 00:01:21,980
+Denominemos D(i,j) a la distancia de edición
+
+15
+00:01:21,980 --> 00:01:26,530
+entre un prefijo i y un prefijo j.
+
+16
+00:01:26,530 --> 00:01:28,590
+En este caso,
+
+17
+00:01:28,590 --> 00:01:34,345
+esta figura en la parte superior de la diapositiva
+ilustra la concurrencia descendente.
+
+18
+00:01:34,345 --> 00:01:40,186
+D(i.j) es igual al menor de los
+cuatro valores descendentes
+
+19
+00:01:40,186 --> 00:01:45,104
+D(i,j-1)+1, D(i-1,j)+1,
+
+20
+00:01:45,104 --> 00:01:50,620
+D(i-1,j-1)+1, en el caso de que los
+
+21
+00:01:52,360 --> 00:01:58,135
+dos últimos símbolos sean diferentes,
+
+22
+00:01:58,135 --> 00:02:06,610
+y D(i-1,j-1), si los últimos símbolos
+en los prefijos i y j son el mismo.
+
+23
+00:02:08,160 --> 00:02:13,230
+Nuestro objetivo ahora es calcular
+la distancia de edición D i,j 
+
+24
+00:02:13,230 --> 00:02:20,950
+entre todos los prefijos i de la cadena !
+y todos los prefijos j de la cadena B.
+
+25
+00:02:22,550 --> 00:02:29,630
+En el caso de las cadenas "editing" y "distance",
+construiremos una rejilla de ocho por nueve y
+
+26
+00:02:29,630 --> 00:02:34,392
+nuestro objetivo es calcular todas las
+distancias de edición D i,j
+
+27
+00:02:34,392 --> 00:02:37,400
+correspondientes a todos los nodos de esta rejilla.
+
+28
+00:02:37,400 --> 00:02:43,010
+por ejemplo, para i y j
+iguales a cuatro y cuatro,
+
+29
+00:02:43,010 --> 00:02:48,522
+¿cómo calcularemos
+la correspondiente distancia D i,j?
+
+30
+00:02:48,522 --> 00:02:56,100
+Comenzamos rellenando las distancias D i 0
+en la primera columna de la matriz.
+
+31
+00:02:56,100 --> 00:03:00,991
+Es fácil porque en efecto
+estamos comparando un prefijo i
+
+32
+00:03:00,991 --> 00:03:05,137
+de la cadena A con el prefijo
+0 de la cadena B y
+
+33
+00:03:05,137 --> 00:03:11,750
+por tanto, las distancias visuales
+para el prefijo i serán iguales a i.
+
+34
+00:03:11,750 --> 00:03:19,420
+Es lo que se muestra aquí. De forma similar, podemos
+rellenar fácilmente la primera fila de esta matriz.
+
+35
+00:03:19,420 --> 00:03:26,140
+Ahora intentemos calcular cuál
+será la distancia D(1,1),
+
+36
+00:03:26,140 --> 00:03:31,750
+correspondiente a la comparación entre
+la cadena consistente en un único símbolo "E"
+
+37
+00:03:31,750 --> 00:03:36,020
+en contraste con una cadena
+consistente en un único símbolo D.
+
+38
+00:03:36,020 --> 00:03:41,377
+Existen tres formas posibles
+para llegar al nodo 1,1
+
+39
+00:03:41,377 --> 00:03:46,000
+desde los nodos 0,0, 0,1 y 1,0.
+
+40
+00:03:46,000 --> 00:03:52,940
+¿Cuál debe ser la forma que seleccionaremos
+para encontrar la distancia de edición óptima?
+
+41
+00:03:52,940 --> 00:03:57,764
+De acuerdo con la recurrencia previa,
+debemos seleccionar 
+
+42
+00:03:57,764 --> 00:04:02,484
+de las tres direcciones aquella
+que da el valor mínimo para
+
+43
+00:04:02,484 --> 00:04:06,601
+D i,j que es el mínimo de 2, 2 y 1 y, 
+
+44
+00:04:06,601 --> 00:04:11,610
+por tanto, llegamos al nodo 1,1 por el enlace diagonal.
+
+45
+00:04:11,610 --> 00:04:15,200
+Guardemos esto en la memoria que
+
+46
+00:04:15,200 --> 00:04:19,250
+la dirección correcta para llegar al nodo
+1,1 era la dirección diagonal.
+
+47
+00:04:20,380 --> 00:04:25,370
+Ahora trataremos de calcular la distancia
+de edición para el siguiente nodo en la matriz.
+
+48
+00:04:25,370 --> 00:04:30,986
+y en este caso D(2,1) es igual
+al mínimo de D(2,0) + 1,
+
+49
+00:04:30,986 --> 00:04:36,799
+D(1,1) + 1 y D(1,0), lo que nos dice
+que la forma óptima
+
+50
+00:04:36,799 --> 00:04:42,590
+para llegar a este nodo será de nuevo por la diagonal.
+
+51
+00:04:42,590 --> 00:04:45,890
+Continuando más, de nuevo 
+comparamos los tres valores y
+
+52
+00:04:45,890 --> 00:04:51,510
+resulta que la mejor manera de
+llegar a este nodo será la arista vertical.
+
+53
+00:04:51,510 --> 00:04:58,033
+Continuaremos y rellenaremos por
+completo la segunda columna de la matriz.
+
+54
+00:04:58,033 --> 00:05:03,697
+Continuemos con este círculo,
+¿qué pasa con este nodo?
+
+55
+00:05:03,697 --> 00:05:10,699
+Para este nodo D(1,2) es igual
+al mínimo de D(1,1) + 1,
+
+56
+00:05:10,699 --> 00:05:15,609
+D(0,2) + 1 y D(0,1) + 1.
+
+57
+00:05:15,609 --> 00:05:19,880
+Esto es el mínimo de 2, 3 y 2.
+
+58
+00:05:19,880 --> 00:05:26,350
+De hecho, existen dos formas
+óptimas de llegar a este nodo y
+
+59
+00:05:26,350 --> 00:05:30,970
+en este caso, muestras ambas de ellas
+mediante el enlace diagonal
+
+60
+00:05:30,970 --> 00:05:35,580
+en esta matriz y por el enlace
+horizontal en esta matriz.
+
+61
+00:05:35,580 --> 00:05:41,520
+Continuamos más allá y de forma lenta
+pero segura llenaremos la matriz completa.
+
+62
+00:05:44,200 --> 00:05:49,100
+El pseudocódigo de EditDistance implementa 
+el algoritmo que acabamos de discutir.
+
+63
+00:05:49,100 --> 00:05:55,470
+Primero rellena la primera columna y
+la primera fila de la matriz de programación
+
+64
+00:05:55,470 --> 00:06:01,230
+dinámica, y después continua rellenando
+calculando el costo
+
+65
+00:06:01,230 --> 00:06:07,330
+de moverse al vértice i,j 
+usando inserción, deleción
+
+66
+00:06:07,330 --> 00:06:12,290
+o discrepancia o coincidencia o, en otras 
+palabras,  explorando todas las posibilidades.
+
+67
+00:06:12,290 --> 00:06:18,610
+Moviendose al vértice i,j usando un enlace
+vertical, un enlace horizontal o un enlace diagonal.
+
+68
+00:06:18,610 --> 00:06:22,700
+Y entonces encuentra cuál de estas posibilidades
+
+69
+00:06:22,700 --> 00:06:26,451
+resulta la distancia de edición mínima.

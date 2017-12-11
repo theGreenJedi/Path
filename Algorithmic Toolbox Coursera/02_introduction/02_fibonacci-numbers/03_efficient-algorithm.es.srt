@@ -1,0 +1,376 @@
+1
+00:00:02,713 --> 00:00:05,390
+Hola a todos, bienvenidos de nuevo.
+
+2
+00:00:05,390 --> 00:00:08,080
+Hoy, hablaremos un poco más
+sobre calcular  el máximo
+
+3
+00:00:08,080 --> 00:00:10,040
+común divisor.
+
+4
+00:00:10,040 --> 00:00:10,840
+En concreto hoy,
+
+5
+00:00:10,840 --> 00:00:14,010
+vamos a hablar sobre un algoritmo mucho
+más eficiente que la última vez.
+
+6
+00:00:14,010 --> 00:00:17,200
+Este es conocido como el Algoritmo Euclidiano,
+hablaremos sobre él y 
+
+7
+00:00:17,200 --> 00:00:20,170
+hablaremos un poco 
+sobre como trabaja en tiempo de ejecución.
+
+8
+00:00:21,620 --> 00:00:26,120
+Solo para recordarlo, para los enteros a y b,
+su máximo común divisor
+
+9
+00:00:26,120 --> 00:00:28,880
+es el entero d más grande
+por el que se pueden dividir ambos.
+
+10
+00:00:30,150 --> 00:00:32,490
+Lo que nos gustaría hacer es ser capaces de calcular esto:
+
+11
+00:00:32,490 --> 00:00:34,800
+dados dos enteros, queremos calcular su MCD.
+
+12
+00:00:36,460 --> 00:00:39,780
+Encontramos un mal algoritmo para esto y nos gustaría uno mejor.
+
+13
+00:00:39,780 --> 00:00:43,060
+Resulta que para encontrar un mejor algoritmo,
+
+14
+00:00:43,060 --> 00:00:45,360
+necesitas saber algo interesante.
+
+15
+00:00:45,360 --> 00:00:46,870
+Hay este lema clave que tenemos,
+
+16
+00:00:48,040 --> 00:00:52,458
+donde, supón que a' es el residuo cuando a se divide entre b,
+
+17
+00:00:52,458 --> 00:00:58,241
+entonces, el MCD(a,b) es el mismo que el MCD(a',b),
+
+18
+00:00:58,241 --> 00:01:04,230
+y, claro, el mismo que el MCD(b,a').
+
+19
+00:01:04,230 --> 00:01:08,510
+La prueba de esto, una vez que sabes qué hay
+ que mostrar, no es realmenet muy difícil.
+
+20
+00:01:08,510 --> 00:01:12,010
+La idea es que, como a' es un residuo,
+
+21
+00:01:12,010 --> 00:01:17,800
+esto significa que a es igual a a' más algún
+ múltiplo de b, b*q, para alguna q.
+
+22
+00:01:19,710 --> 00:01:22,560
+De ahí puedes mostrar que si d divide a a y
+
+23
+00:01:22,560 --> 00:01:27,270
+b, entonces esto pasa, si y solo si, divide a a' y b.
+
+24
+00:01:27,270 --> 00:01:34,000
+Porque, por ejemplo, si d divide a' y b, 
+entonces divide a´+ bq, que es a.
+
+25
+00:01:36,010 --> 00:01:39,520
+Entonces, de este enunciado sabemos 
+que los divisores comunes de a y b
+
+26
+00:01:39,520 --> 00:01:44,310
+son exactamente los mismos que los de a' y b.
+
+27
+00:01:44,310 --> 00:01:46,560
+Por tanto, el máximo común divisor de a y b
+
+28
+00:01:46,560 --> 00:01:49,071
+es el máximo común divisor de a' y b.
+
+29
+00:01:50,610 --> 00:01:51,890
+Esta es la idea para el algoritmo.
+
+30
+00:01:52,930 --> 00:01:58,736
+Básicamente tenemos que el MCD(a,b) 
+es el mismo que el MCD(b,a')
+
+31
+00:01:58,736 --> 00:02:01,760
+pero a' es generalmente más pequeña que a,
+
+32
+00:02:01,760 --> 00:02:05,920
+así que si calculamos este nuevo MCD recursivamente, 
+con suerte éste será un problema más fácil.
+
+33
+00:02:07,600 --> 00:02:10,210
+Ahora, necesitamos un caso base para esto, así que
+
+34
+00:02:10,210 --> 00:02:13,170
+vamos a empezar diciendo que, si b es igual a cero,
+
+35
+00:02:14,540 --> 00:02:18,700
+todo divide al cero, así que sólo necesitamos devolver
+ el número más grande que divide a a,
+
+36
+00:02:18,700 --> 00:02:20,670
+así que regresamos a en este caso.
+
+37
+00:02:22,310 --> 00:02:27,810
+De otra forma, vamos a definir a' como 
+el residuo de a dividido por b, y
+
+38
+00:02:27,810 --> 00:02:32,154
+vamos a devolver el MCD(b,a') calculado recursivamente.
+
+39
+00:02:34,060 --> 00:02:37,540
+Por el lema que acabamos de dar, si 
+esto llega a devolver una respuesta,
+
+40
+00:02:37,540 --> 00:02:40,040
+será la respuesta correcta.
+
+41
+00:02:40,040 --> 00:02:43,250
+Pero, por el momento no sabemos 
+ni siquiera si va a terminar,
+
+42
+00:02:43,250 --> 00:02:45,560
+y mucho menos si lo va a hacer en 
+una cantidad de tiempo razonable.
+
+43
+00:02:47,430 --> 00:02:49,310
+Veamos un ejemplo.
+
+44
+00:02:49,310 --> 00:02:58,390
+Supón que queremos calcular el MCD 
+de 3,918,848 y 1,653,264
+
+45
+00:02:58,390 --> 00:03:04,470
+Así que aquí b no es cero, dividimos 
+a entre b, tenemos un residuo,
+
+46
+00:03:04,470 --> 00:03:09,860
+que es algo como 612,000, y ahora tenemos
+ un nuevo problema de MCD para resolver.
+
+47
+00:03:11,100 --> 00:03:18,543
+Otra vez b bo es cero, dividimos a entre b, obtenemos
+ un nuevo residuo de 428 mil y cacho,
+
+48
+00:03:18,543 --> 00:03:23,290
+Repetimos este proceso, nos da un residuo 
+de 183 mil y cacho,..., 61 mil y cacho.
+
+49
+00:03:23,290 --> 00:03:25,250
+dividimos de nuevo, tenemos un residuo de cero.
+
+50
+00:03:26,400 --> 00:03:29,940
+Y ahora b es cero por lo que devolvemos la respuesta
+
+51
+00:03:29,940 --> 00:03:34,510
+61,232, y esta es la respuesta correcta.
+
+52
+00:03:34,510 --> 00:03:39,980
+Notarás que todo esto nos llevó seis pasos
+ para llegar a la respuesta correcta.
+
+53
+00:03:39,980 --> 00:03:42,380
+Mientras que si hubiéramos usado 
+el algoritmo de la vez pasada,
+
+54
+00:03:42,380 --> 00:03:46,969
+habríamos tenido que checar algo así como 5 millones
+ de posibles divisores comunes diferentes
+
+55
+00:03:47,990 --> 00:03:49,100
+para encontrar el mejor.
+
+56
+00:03:51,350 --> 00:03:56,780
+Entonces, esto resultó ser mucho mejor, y para tener
+ una idea de qué tan bien funcionan las cosas
+
+57
+00:03:56,780 --> 00:04:01,700
+o porqué funciona bien, cada vez que tomamos 
+uno de estos residuos con división,
+
+58
+00:04:01,700 --> 00:04:05,069
+reducimos el tamaño del número por
+ un factor de alrededor de 2.
+
+59
+00:04:06,180 --> 00:04:10,627
+Y si en cada paso las cosas se reducen por un factor de dos,
+
+60
+00:04:10,627 --> 00:04:16,279
+después de alrededor de log(a,b) pasos nuestros 
+números serán pequeños o cero, y así,
+
+61
+00:04:16,279 --> 00:04:22,879
+básicamente después de log(a,b) pasos, 
+este algoritmo terminará.
+
+62
+00:04:22,879 --> 00:04:27,763
+Esto significa que, supón que queremos 
+calcular el MCD de números de 100 dígitos,
+
+63
+00:04:27,763 --> 00:04:30,920
+esto sólo nos llevará alrededor de 600 pasos.
+
+64
+00:04:30,920 --> 00:04:35,445
+Cada uno de los pasos que hemos usado
+ es una simple división con residuo,
+
+65
+00:04:35,445 --> 00:04:39,547
+600 divisiones con residuo es algo 
+que puedes hacer trivialmente
+
+66
+00:04:39,547 --> 00:04:41,330
+en cualquier computadora razonable.
+
+67
+00:04:43,140 --> 00:04:47,110
+Y así, este algoritmo calculará MCD
+ muy grandes bastante rápido.
+
+68
+00:04:49,030 --> 00:04:52,840
+En resumen, de nueva cuenta, teníamos 
+este problema computacional,
+
+69
+00:04:52,840 --> 00:04:55,620
+había un algoritmo ingenuo, uno muy simple
+
+70
+00:04:55,620 --> 00:05:00,640
+que provino directo de la definición, pero que era 
+demasiado lento para propósitos prácticos.
+
+71
+00:05:00,640 --> 00:05:04,140
+Hay un algoritmo correcto que es
+ muchísimo mejor, muy manejable.
+
+72
+00:05:04,140 --> 00:05:08,480
+Una vez más, encontrar el el algoritmo correcto
+ hace toda la diferencia del mundo.
+
+73
+00:05:08,480 --> 00:05:12,080
+Pero aquí está esta cosa muy interesante que encontramos.
+
+74
+00:05:12,080 --> 00:05:14,140
+Para obtener el algoritmo correcto,
+
+75
+00:05:14,140 --> 00:05:18,070
+requerimos saber algo más interesante sobre el problema.
+
+76
+00:05:18,070 --> 00:05:20,050
+Necesitamos esta lema clave que vimos ahora, y,
+
+77
+00:05:21,590 --> 00:05:24,110
+esto es un tema con el que te toparás durante el curso, y 
+
+78
+00:05:24,110 --> 00:05:26,870
+a lo largo de tus estudios en algoritmos.
+
+79
+00:05:26,870 --> 00:05:31,520
+Muy seguido, para encontrar un mejor algoritmo
+ para un problema, necesitas
+
+80
+00:05:31,520 --> 00:05:35,490
+entender algo muy interesante acerca de
+ la estructura de la solución, y
+
+81
+00:05:35,490 --> 00:05:37,480
+eso te permitirá simplificar mucho las cosas.
+
+82
+00:05:38,790 --> 00:05:42,930
+Como quiera, eso es todo por hoy, regresa para la
+ siguiente lección, empezaremos a hablar
+
+83
+00:05:42,930 --> 00:05:47,730
+sobre cómo calcular tiempos de ejecución con más detalle
+
+84
+00:05:47,730 --> 00:05:49,338
+Hasta entonces, adiós.

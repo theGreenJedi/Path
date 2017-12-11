@@ -1,0 +1,595 @@
+1
+00:00:00,210 --> 00:00:05,400
+In this video, we'll provide the full
+outline of the Greek word algorithm.
+
+2
+00:00:05,400 --> 00:00:08,850
+So as you remember that
+algorithm is recursive, for
+
+3
+00:00:08,850 --> 00:00:14,300
+this reason we pass through this
+procedure [INAUDIBLE] a and
+
+4
+00:00:14,300 --> 00:00:18,660
+also doing this is l and
+r in this array for left and right and
+
+5
+00:00:18,660 --> 00:00:24,770
+this procedure saw the sub array
+inside r within this is form l to r.
+
+6
+00:00:24,770 --> 00:00:28,380
+Well we first check
+whether l is at least r.
+
+7
+00:00:28,380 --> 00:00:32,330
+And if yes then this means that they
+can respond in sub array contains at
+
+8
+00:00:32,330 --> 00:00:33,670
+most one element.
+
+9
+00:00:33,670 --> 00:00:37,000
+And this in turn means that nothing
+needs to be done so we just return.
+
+10
+00:00:38,240 --> 00:00:42,780
+Otherwise we call the partition
+procedure with the same parameters.
+
+11
+00:00:42,780 --> 00:00:46,470
+It returns an index m between l and r.
+
+12
+00:00:46,470 --> 00:00:49,380
+So it rearranges all the elements inside
+
+13
+00:00:49,380 --> 00:00:52,760
+this sub array with
+the following property.
+
+14
+00:00:52,760 --> 00:00:57,580
+After the call to this procedure,
+A of m stays in its final position,
+
+15
+00:00:57,580 --> 00:01:05,090
+meaning that all the elements to the left
+of an element A of m are at most A of m.
+
+16
+00:01:05,090 --> 00:01:08,570
+And all the elements to the right
+are greater than A of m.
+
+17
+00:01:08,570 --> 00:01:11,530
+Well once again,
+after the call to the partition procedure,
+
+18
+00:01:11,530 --> 00:01:15,140
+A of m stays in its final position.
+
+19
+00:01:15,140 --> 00:01:20,590
+So what remains to be done is to sort all
+the elements that are at most A to m.
+
+20
+00:01:20,590 --> 00:01:25,810
+They stay to the left of A of m, and
+all the elements that stay to the right.
+
+21
+00:01:25,810 --> 00:01:29,350
+So we do this just by
+making two recursive calls.
+
+22
+00:01:29,350 --> 00:01:33,082
+So this is how the wall
+algorithm looks pictorially.
+
+23
+00:01:33,082 --> 00:01:38,222
+Again, we are given an array A,
+with two indices l and r,
+
+24
+00:01:38,222 --> 00:01:43,914
+and we are going to sort the sub
+array inside from indices L to R.
+
+25
+00:01:43,914 --> 00:01:49,463
+So with first call the participation
+procedure which parameter A, l and r.
+
+26
+00:01:49,463 --> 00:01:55,740
+And it gives us an index m between l and
+r was the following property.
+
+27
+00:01:55,740 --> 00:02:00,930
+All elements to the left of them
+are at most the element A of m.
+
+28
+00:02:00,930 --> 00:02:04,320
+All the elements to the right
+are great as an A of m.
+
+29
+00:02:04,320 --> 00:02:09,840
+Then we make two recursive calls to
+sort the left part within this is from
+
+30
+00:02:09,840 --> 00:02:15,360
+l to m- 1 and to solve the right
+part within this is from m + 1 to r.
+
+31
+00:02:15,360 --> 00:02:20,880
+And immediately after these two
+recursive call, we have a sorted array.
+
+32
+00:02:20,880 --> 00:02:25,160
+So before showing the actual
+of the partition procedure,
+
+33
+00:02:25,160 --> 00:02:29,430
+we explain it's main ideas again,
+on a toy example.
+
+34
+00:02:29,430 --> 00:02:34,890
+So first of all, we will take is
+the element A[l] and denoted by x.
+
+35
+00:02:34,890 --> 00:02:37,820
+This will be called our pivot element.
+
+36
+00:02:37,820 --> 00:02:41,000
+So what pivot is exactly is
+the element with respect to which
+
+37
+00:02:41,000 --> 00:02:44,040
+we're going to partition our sub array.
+
+38
+00:02:44,040 --> 00:02:47,480
+So x will be placed in its final position.
+
+39
+00:02:47,480 --> 00:02:53,265
+So our goal now is to rearrange all the
+elements inside our current sub array so
+
+40
+00:02:53,265 --> 00:02:58,524
+that x stays in its final position and
+all the elements to the left of x.
+
+41
+00:02:58,524 --> 00:03:04,010
+At most x and all the elements to
+the right of x are greater than x.
+
+42
+00:03:04,010 --> 00:03:09,840
+So we will do this gradually increasing
+the region of already discovered elements.
+
+43
+00:03:09,840 --> 00:03:16,560
+So for this we will use a counter i, and
+we will maintain the following invariant.
+
+44
+00:03:16,560 --> 00:03:19,356
+So I will go from l + 1 to r, and
+
+45
+00:03:19,356 --> 00:03:24,633
+at each point of time when we
+have already have the i element
+
+46
+00:03:24,633 --> 00:03:30,970
+we will keep to region in sizes
+these region from l + 1 to i.
+
+47
+00:03:30,970 --> 00:03:36,310
+In the first region from l + y to j, we
+will keep all elements that are at most x.
+
+48
+00:03:36,310 --> 00:03:41,370
+In the second adjacent region
+within this is from j +
+
+49
+00:03:41,370 --> 00:03:46,340
+1 to i we will have all elements
+that are greater than x.
+
+50
+00:03:46,340 --> 00:03:47,780
+Let's see it for example.
+
+51
+00:03:48,880 --> 00:03:52,470
+So I assume that we are somewhere
+in the middle of this process.
+
+52
+00:03:52,470 --> 00:03:55,270
+In this case, x is equal to 6, and
+
+53
+00:03:55,270 --> 00:03:59,520
+we need to partition all
+the elements with respect to x.
+
+54
+00:03:59,520 --> 00:04:04,080
+We already have two sub regions so
+in the red region,
+
+55
+00:04:04,080 --> 00:04:07,520
+we keep all elements that are at most x.
+
+56
+00:04:07,520 --> 00:04:12,100
+There are at most 6 in the blue
+region we have holds elements that
+
+57
+00:04:12,100 --> 00:04:13,185
+are greater than 6.
+
+58
+00:04:14,270 --> 00:04:20,747
+Okay, now we move i to the next
+position and we discover the element 9.
+
+59
+00:04:20,747 --> 00:04:23,298
+So this element is greater than 6, so
+
+60
+00:04:23,298 --> 00:04:27,690
+we just need to extend the second region,
+the blue region.
+
+61
+00:04:27,690 --> 00:04:30,460
+The region of elements
+is at greater than 6.
+
+62
+00:04:30,460 --> 00:04:32,480
+So in this case we just do nothing.
+
+63
+00:04:33,990 --> 00:04:38,750
+Well the next case is more interesting,
+we move i to the next position, and
+
+64
+00:04:38,750 --> 00:04:41,060
+we discover the element 4.
+
+65
+00:04:41,060 --> 00:04:44,710
+In this case, we need to somehow
+move this element to the red region,
+
+66
+00:04:44,710 --> 00:04:49,050
+to the region of elements which at most 6.
+
+67
+00:04:49,050 --> 00:04:52,790
+So to do this we just
+swoop it to currently
+
+68
+00:04:52,790 --> 00:04:57,230
+first element of the blue region,
+in this case was 9.
+
+69
+00:04:57,230 --> 00:05:02,618
+So if we do this 4 will be the last
+element of currently red region and
+
+70
+00:05:02,618 --> 00:05:04,490
+9 will go to the blue region.
+
+71
+00:05:04,490 --> 00:05:09,940
+So we do this and now,
+we increase also the just
+
+72
+00:05:09,940 --> 00:05:15,450
+to reflect the fact that our red
+region had just been extended.
+
+73
+00:05:15,450 --> 00:05:20,360
+Then we will find to the next element so
+we discover element 7 which is
+
+74
+00:05:20,360 --> 00:05:24,880
+greater than 6 which means that we
+can just extend the blue region,
+
+75
+00:05:24,880 --> 00:05:28,660
+then we discover another
+element which is 6.
+
+76
+00:05:28,660 --> 00:05:31,850
+6 is at most 6 and
+it is actually equal to 6, so
+
+77
+00:05:31,850 --> 00:05:33,790
+we need to move it to the red region.
+
+78
+00:05:33,790 --> 00:05:39,240
+Again, we swap it with the first
+element of the blue region and
+
+79
+00:05:39,240 --> 00:05:42,340
+then we extend the red region.
+
+80
+00:05:42,340 --> 00:05:47,592
+We increase g to reflect the fact that
+the red region has just been extended,
+
+81
+00:05:47,592 --> 00:05:51,469
+then we discover another element,
+which is at most 6.
+
+82
+00:05:51,469 --> 00:05:54,720
+We move it to the end of the red region.
+
+83
+00:05:55,950 --> 00:06:03,201
+And finally, what we also need to do
+in the very end is to move the pivot
+
+84
+00:06:03,201 --> 00:06:08,969
+element which is 6 in this
+case to its final position.
+
+85
+00:06:08,969 --> 00:06:12,020
+And its final position actually
+can easily be found in this case.
+
+86
+00:06:12,020 --> 00:06:14,780
+So we have red region and
+we have blue region.
+
+87
+00:06:14,780 --> 00:06:18,740
+In red region, all the elements
+are at most 6, and in blue region,
+
+88
+00:06:18,740 --> 00:06:20,720
+all the elements are greater than 6.
+
+89
+00:06:20,720 --> 00:06:25,952
+So we can just swap 6 with the last
+element of the red region.
+
+90
+00:06:25,952 --> 00:06:31,003
+In this case it is 1, so
+if we swap these two elements then you
+
+91
+00:06:31,003 --> 00:06:37,290
+can see that all the elements in the blue
+region are indeed greater than 6.
+
+92
+00:06:37,290 --> 00:06:41,770
+All the elements in the red
+region are smaller than 6.
+
+93
+00:06:41,770 --> 00:06:44,920
+So we are done with this
+partition procedure.
+
+94
+00:06:44,920 --> 00:06:49,550
+Where now ready to present the Soutacot
+of the petition procedure.
+
+95
+00:06:49,550 --> 00:06:53,570
+We called it what we're going to
+do is to place some element x,
+
+96
+00:06:53,570 --> 00:06:59,080
+which is called the pivot, into it's final
+place so that all the elements before
+
+97
+00:06:59,080 --> 00:07:04,130
+x are at most x and all the elements
+after x is greater than x.
+
+98
+00:07:04,130 --> 00:07:09,020
+So as the pivot element in this procedure,
+we are going to use just the first
+
+99
+00:07:09,020 --> 00:07:13,320
+element of the correspondence of rate,
+so x is assigned A of l.
+
+100
+00:07:14,370 --> 00:07:19,300
+We're also going to remain
+the following subregions.
+
+101
+00:07:19,300 --> 00:07:24,110
+So first of all, we will readily increase
+the region of discovered elements.
+
+102
+00:07:24,110 --> 00:07:28,479
+So i goes from l +1 to r and
+inside this region of
+
+103
+00:07:28,479 --> 00:07:33,735
+[INAUDIBLE] elements,
+we will maintain two sub regions.
+
+104
+00:07:33,735 --> 00:07:37,208
+In the first region with
+indices from l +1 to j,
+
+105
+00:07:37,208 --> 00:07:40,210
+we will keep all of
+the elements at most x.
+
+106
+00:07:40,210 --> 00:07:45,310
+In the second region with indices from j+1
+to i, we will keep all of the elements
+
+107
+00:07:45,310 --> 00:07:50,310
+that are greater than x and we will
+gradually and freeze the value of i.
+
+108
+00:07:50,310 --> 00:07:54,770
+So when i is increased, so
+I assumed that i has just been increase so
+
+109
+00:07:54,770 --> 00:07:57,110
+we discovered a new element of A of i.
+
+110
+00:07:57,110 --> 00:08:01,750
+So if A of i is greater
+than x then just the second
+
+111
+00:08:01,750 --> 00:08:06,170
+of region of elements
+that are greater than x,
+
+112
+00:08:06,170 --> 00:08:10,830
+is extended automatically and we do
+not need to do anything in this case.
+
+113
+00:08:10,830 --> 00:08:14,930
+However, if the newly discovered
+element is at most x,
+
+114
+00:08:14,930 --> 00:08:17,830
+then we need to move it
+to the first region.
+
+115
+00:08:17,830 --> 00:08:19,940
+So we do this as follows.
+
+116
+00:08:19,940 --> 00:08:23,525
+So we just increase the value
+of j to indicate the fact that
+
+117
+00:08:23,525 --> 00:08:28,019
+the first region has just been increased,
+and then swap the elements.
+
+118
+00:08:28,019 --> 00:08:31,043
+A[j] and A[i], so this way,
+
+119
+00:08:31,043 --> 00:08:37,130
+we just maintain our invariant
+each time when i is increased.
+
+120
+00:08:37,130 --> 00:08:40,970
+So in the very end,
+when i reaches the value of r,
+
+121
+00:08:40,970 --> 00:08:45,350
+we also need to place our initial
+element that states that at
+
+122
+00:08:45,350 --> 00:08:50,520
+the beginning our pivot
+between our two regions.
+
+123
+00:08:50,520 --> 00:08:57,291
+So for this we just swap elements A[l],
+so this is our pivot with element A[j].
+
+124
+00:08:57,291 --> 00:09:03,097
+And we then return the value j as
+an index of our pivot element.

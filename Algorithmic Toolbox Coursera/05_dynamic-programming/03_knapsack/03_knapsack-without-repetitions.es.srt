@@ -1,0 +1,1122 @@
+1
+00:00:00,550 --> 00:00:04,520
+En este vídeo vamos a diseñar una solución 
+de programación dinámica para
+
+2
+00:00:04,520 --> 00:00:08,470
+para el problema de la mochila sin repeticiones.
+
+3
+00:00:08,470 --> 00:00:14,520
+Recuerda que en este problema nos dan
+una única copia de cada objeto.
+
+4
+00:00:14,520 --> 00:00:20,028
+Esto es también para recordarte el
+enunciado formal del problema, enfatizamos
+
+5
+00:00:20,028 --> 00:00:25,295
+una vez más que no se nos permite
+tomar más de una única copia de cada objeto.
+
+6
+00:00:25,295 --> 00:00:31,036
+Bien, ya sabemos que nuestro algoritmo
+previo no puede producir la respuesta
+
+7
+00:00:31,036 --> 00:00:37,360
+correcta para nuestro nuevo problema
+de mochila sin repeticiones.
+
+8
+00:00:37,360 --> 00:00:43,246
+Esto es simplemente porque en nuestro
+ejemplo sencillo el valor óptimo para
+
+9
+00:00:43,246 --> 00:00:48,835
+la mochila sin repeticiones era 48
+mientras que el valor óptimo para
+
+10
+00:00:48,835 --> 00:00:52,655
+la mochila sin repeticiones era 46.
+
+11
+00:00:52,655 --> 00:00:56,283
+Esto significa que si ejecutamos
+nuestro algoritmo previo,
+
+12
+00:00:56,283 --> 00:00:59,210
+producirá una respuesta incorrecta.
+
+13
+00:00:59,210 --> 00:01:03,620
+Es importante comprender
+donde nuestros algoritmos,
+
+14
+00:01:03,620 --> 00:01:07,240
+más en general, donde nuestro
+razonamiento falla para este problema.
+
+15
+00:01:08,520 --> 00:01:13,566
+Una vez más, vamos a considerar
+un subconjunto óptimo de objetos para
+
+16
+00:01:13,566 --> 00:01:16,681
+una mochila de peso total W.
+
+17
+00:01:16,681 --> 00:01:20,820
+Y, por el momento, asumimos que
+conocemos que contiene el enésimo elemento.
+
+18
+00:01:21,960 --> 00:01:24,140
+Es decir, el último objeto.
+
+19
+00:01:24,140 --> 00:01:30,011
+Podemos razonar, de forma similar al
+caso previo que si eliminamos este elemento
+
+20
+00:01:30,011 --> 00:01:36,172
+de la mochila actual, entonces lo que
+obtenemos debe ser un solución óptima para
+
+21
+00:01:36,172 --> 00:01:41,203
+una mochila de peso inferior, 
+concretamente de peso total W - wn.
+
+22
+00:01:41,203 --> 00:01:45,741
+Si tomamos la pequeña solución y
+le añadimos el enésimo objeto,
+
+23
+00:01:45,741 --> 00:01:50,885
+tenemos una solución óptima para
+la mochila inicial de peso total W.
+
+24
+00:01:50,885 --> 00:01:55,099
+Asumamos, sin embargo, que
+la solución óptima para
+
+25
+00:01:55,099 --> 00:01:59,941
+la mochila más pequeña
+ya contiene el enésimo objeto.
+
+26
+00:01:59,941 --> 00:02:04,617
+Esto significa que no le podemos añadir
+otra copia del enésimo elemento,
+
+27
+00:02:04,617 --> 00:02:09,461
+¿correcto?, porque entones la solución
+resultante contendría dos copias
+
+28
+00:02:09,461 --> 00:02:14,405
+del enésimo elemento que ahora
+está prohibido por el enunciado del problema.
+
+29
+00:02:14,405 --> 00:02:21,030
+Por esto necesitamos encontrar
+una noción diferente de subproblema.
+
+30
+00:02:21,030 --> 00:02:26,750
+Echemos un vistazo aún más cercano
+a nuestra solución óptima.
+
+31
+00:02:26,750 --> 00:02:29,580
+No es difícil ver que existen
+sólo dos casos,
+
+32
+00:02:29,580 --> 00:02:32,550
+o bien contiene el último elemento
+o bien no lo contiene.
+
+33
+00:02:32,550 --> 00:02:35,780
+Asumamos que lo contiene, y
+
+34
+00:02:35,780 --> 00:02:41,670
+eliminemos de nuevo el enésimo
+objeto de nuestra solución actual.
+
+35
+00:02:41,670 --> 00:02:42,970
+¿Qué nos queda?
+
+36
+00:02:42,970 --> 00:02:49,690
+Primero de todo, es alguna solución para
+una mochila de peso total
+
+37
+00:02:49,690 --> 00:02:55,630
+W - wn y además sólo usa
+objetos de 1 a n-1,
+
+38
+00:02:55,630 --> 00:02:59,500
+porque `precisamente hemos seleccionado
+el enésimo objeto, ¿correcto?
+
+39
+00:03:01,010 --> 00:03:04,380
+Si, por el otro lado, la solución inicial para
+
+40
+00:03:04,380 --> 00:03:10,270
+la mochila de peso total W
+no contiene el enésimo objeto,
+
+41
+00:03:10,270 --> 00:03:14,090
+entonces sólo contiene objetos
+de 1 a n menos 1.
+
+42
+00:03:14,090 --> 00:03:15,010
+¿Verdad?
+
+43
+00:03:15,010 --> 00:03:19,200
+Esta simple observación nos
+ayudará a obtener la correcta
+
+44
+00:03:19,200 --> 00:03:22,730
+definición de un subproblema para esta 
+versión del problema de la mochila.
+
+45
+00:03:23,730 --> 00:03:28,070
+En la diapositiva previa,
+hemos razonado como sigue.
+
+46
+00:03:28,070 --> 00:03:33,110
+Consideramos una solución óptima para
+una mochila de peso total W.
+
+47
+00:03:33,110 --> 00:03:35,090
+Y existen dos casos.
+
+48
+00:03:35,090 --> 00:03:39,160
+O bien contiene el último elemento
+o bien no lo contiene.
+
+49
+00:03:39,160 --> 00:03:43,900
+Si lo contiene, podemos eliminarlo
+y reducir el problema a
+
+50
+00:03:43,900 --> 00:03:49,550
+una mochila menor usando sólo
+objetos de uno a n menos uno.
+
+51
+00:03:49,550 --> 00:03:54,574
+Por el otro lado, si no contiene el 
+enésimo objeto, entonces lo reduciremos
+
+52
+00:03:54,574 --> 00:03:59,222
+a otro caso donde la mochila sólo
+usa objetos de 1 a n-1.
+
+53
+00:03:59,222 --> 00:04:03,364
+En cualquier caso, reducimos el número
+de objetos y en el primer caso,
+
+54
+00:04:03,364 --> 00:04:08,970
+también reducimos el tamaño de la mochila,
+el peso total de la mochila.
+
+55
+00:04:08,970 --> 00:04:14,378
+Podríamos continuar este proceso y
+expresar la solución para 
+
+56
+00:04:14,378 --> 00:04:20,650
+todos los subproblemas a través
+de soluciones que fuercen los subproblemas.
+
+57
+00:04:20,650 --> 00:04:25,700
+Si continuamos de la misma manera lo que 
+obtenemos en algún punto intermedio es
+
+58
+00:04:25,700 --> 00:04:32,610
+una solución para una mochila de algún
+peso que sólo usa los primeros i objetos.
+
+59
+00:04:32,610 --> 00:04:37,080
+Vamos a usar esto como definición
+de nuestro subproblema.
+
+60
+00:04:37,080 --> 00:04:41,950
+A saber, para cada w, desde 0 a W, y
+
+61
+00:04:41,950 --> 00:04:46,640
+para cualquier i, desde 0 a n,
+denotamos como valor de w e
+
+62
+00:04:46,640 --> 00:04:53,690
+i al máximo valor que puede obtenerse
+usando únicamene los objetos de 1 a i,
+
+63
+00:04:53,690 --> 00:04:58,860
+y cuyo peso total es como mucho w.
+
+64
+00:04:58,860 --> 00:05:03,910
+De acuerdo, entonces es fácil expresar
+a través de él las soluciones para
+
+65
+00:05:03,910 --> 00:05:05,380
+subproblemas de menor tamaño.
+
+66
+00:05:05,380 --> 00:05:11,480
+Una vez más, el valor de w e i,
+es un subconjunto, es un valor
+
+67
+00:05:12,950 --> 00:05:18,000
+óptimo de un subconjunto, de los primeros
+objetos cuyo peso total es como mucho w.
+
+68
+00:05:18,000 --> 00:05:21,750
+Sabemos que en este subconjunto óptimo,
+
+69
+00:05:21,750 --> 00:05:26,880
+o bien contiene el objeto iésimo o bien 
+no contiene el objeto iésimo.
+
+70
+00:05:26,880 --> 00:05:28,580
+Así pues hay dos casos.
+
+71
+00:05:28,580 --> 00:05:31,220
+Necesitamos seleccionar el
+máximo de los dos casos.
+
+72
+00:05:31,220 --> 00:05:35,250
+Y el primer caso si eliminanos
+el objeto iésimo lo que queda
+
+73
+00:05:35,250 --> 00:05:39,860
+es una solución óptima para
+el siguiente problema.
+
+74
+00:05:39,860 --> 00:05:45,600
+Sólo nos está permitido usar los primeros 
+i-1 objetos y el peso total debe
+
+75
+00:05:45,600 --> 00:05:50,590
+no ser superior a W-wi. Este es el primer 
+término en la expresión de máximo.
+
+76
+00:05:51,690 --> 00:05:56,360
+En el segundo caso, si el objeto iésimo no
+se usa en la solución óptima,
+
+77
+00:05:56,360 --> 00:06:00,000
+entonces sabemos que la solución
+óptima es la misma que para
+
+78
+00:06:00,000 --> 00:06:05,660
+la mochila de peso total W,
+usando sólo los primeros i-1 objetos.
+
+79
+00:06:07,030 --> 00:06:10,010
+Así logramos expresar la solución para
+
+80
+00:06:10,010 --> 00:06:15,030
+nuestro problema a través de soluciones 
+para subproblemas de menor tamaño.
+
+81
+00:06:15,030 --> 00:06:17,900
+Y esta es probablemente
+la cosa más importante
+
+82
+00:06:17,900 --> 00:06:20,579
+en el diseño de algoritmos
+de programación dinámica.
+
+83
+00:06:21,645 --> 00:06:27,250
+Ya tenemos nuestra fórmula recurrente
+en un algoritmo de programación dinámica.
+
+84
+00:06:27,250 --> 00:06:35,196
+Como es habitual, empezamos por la inicialización,
+a saber, estableciendo todos los valores de 0,
+
+85
+00:06:35,196 --> 00:06:39,818
+j a 0 para todos los j y todos
+los valores de w,0 a 0.
+
+86
+00:06:39,818 --> 00:06:44,324
+Bien, esto sólo expresa el hecho 
+de que si no tengo objetos,
+
+87
+00:06:44,324 --> 00:06:46,500
+entonces el valor es cero.
+
+88
+00:06:46,500 --> 00:06:50,200
+Si tengo una mochila de
+peso total cero,
+
+89
+00:06:50,200 --> 00:06:53,590
+entonces el valor total también
+ es cero, por supuesto.
+
+90
+00:06:53,590 --> 00:06:58,540
+Recuerda que tenemos que calcular de
+alguna forma todos los valores de w,i.
+
+91
+00:07:00,470 --> 00:07:06,800
+Recuerda que expresamos el valor de
+w,i a través de los valores de
+
+92
+00:07:07,820 --> 00:07:12,370
+w e i-1 y W e i-1.
+
+93
+00:07:12,370 --> 00:07:17,280
+Esto significa que siempre
+reducimos el problema desde
+
+94
+00:07:17,280 --> 00:07:23,240
+w,i a algo con un menor
+número de objetos, a i-1.
+
+95
+00:07:23,240 --> 00:07:25,990
+Esto nos ayuda realmente a comprender que
+
+96
+00:07:25,990 --> 00:07:31,310
+tiene sentido incrementar gradualmente
+el número de objetos disponibles.
+
+97
+00:07:31,310 --> 00:07:38,260
+Y por eso tenemos en este pseudocódigo
+un bucle exterior donde i va de 1 a n.
+
+98
+00:07:38,260 --> 00:07:44,102
+Cuando i está fijo, calcularemos
+todos los valores de w,i.
+
+99
+00:07:44,102 --> 00:07:51,940
+Para ello, también vamos desde w igual
+a 1 hasta W y hacemos lo siguiente.
+
+100
+00:07:51,940 --> 00:07:56,900
+Ahora que i y w están fijas,
+necesitamos calcular el valor de w,i.
+
+101
+00:07:56,900 --> 00:08:02,240
+Primero, comprobamos cuál
+es la solución para
+
+102
+00:08:02,240 --> 00:08:06,170
+el subproblema cuando usamos
+la mochila con el mismo peso w pero
+
+103
+00:08:06,170 --> 00:08:09,420
+sólo usamos los primeros i-1 objetos.
+
+104
+00:08:11,100 --> 00:08:12,750
+Esto se implementa como sigue.
+
+105
+00:08:12,750 --> 00:08:18,090
+Primero simplemente asignamos
+valor de w,i al valor de w,i-1.
+
+106
+00:08:18,090 --> 00:08:23,320
+Despúes tenemos que comprobar si podemos 
+mejorar este valor usando el objeto iésimo.
+
+107
+00:08:23,320 --> 00:08:29,220
+Lo primero sólo podemos hacer esto 
+si el peso del iésimo objeto no excede
+
+108
+00:08:29,220 --> 00:08:34,640
+el peso de la mochila
+actual que es simplemente w.
+
+109
+00:08:34,640 --> 00:08:40,400
+Si no lo excede, vemos qué pasa
+si tomamos un valor óptimo para
+
+110
+00:08:40,400 --> 00:08:44,010
+la mochila de peso
+total w menos wi.
+
+111
+00:08:44,010 --> 00:08:48,860
+Esto se hace rellenando
+sólo con los elementos de 1 a i menos 1,
+
+112
+00:08:48,860 --> 00:08:52,440
+y añadiendo el iésimo elemento a ellos.
+
+113
+00:08:52,440 --> 00:08:56,780
+Si nos proporciona un valor mayor al que 
+tenemos actualmente, actualizamos el valor
+
+114
+00:08:56,780 --> 00:09:02,970
+de w,i, y al final simplemente
+devolvemos el valor de W y n,
+
+115
+00:09:02,970 --> 00:09:07,160
+porque esta es la solución
+a nuestro problema inicial.
+
+116
+00:09:07,160 --> 00:09:11,280
+Esta es una solución para
+una mochila de tamaño W
+
+117
+00:09:11,280 --> 00:09:16,020
+que usa todos los n objetos. ¿De acuerdo?
+
+118
+00:09:16,020 --> 00:09:22,190
+Ahora está claro que este algoritmo
+es correcto simplemente porque
+
+119
+00:09:22,190 --> 00:09:28,240
+implementa directamente la fórmula 
+recurrente que ya habíamos discutido.
+
+120
+00:09:28,240 --> 00:09:32,620
+Analicemos el tiempo de ejecución.
+
+121
+00:09:32,620 --> 00:09:37,030
+No es difícil demostrar, de nuevo, que
+su tiempo de ejecución es realmente el mismo.
+
+122
+00:09:37,030 --> 00:09:42,200
+Esto es una vez más n multiplicado por W.
+
+123
+00:09:42,200 --> 00:09:46,000
+Esto es así de nuevo porque
+tenemos dos bucles aquí.
+
+124
+00:09:46,000 --> 00:09:49,450
+Este es el primer bucle
+con n iteraciones y
+
+125
+00:09:49,450 --> 00:09:55,155
+éste es el bucle interior con W iteraciones.
+
+126
+00:09:55,155 --> 00:10:01,150
+Y lo que hay dentro sólo
+necesita algún tiempo constante.
+
+127
+00:10:03,580 --> 00:10:10,570
+Apliquemos el algoritmo que acabamos 
+de diseñar a nuestro sencillo ejemplo.
+
+128
+00:10:10,570 --> 00:10:18,470
+Recuerda que necesitamos almacenar
+los valores de todos los subproblemas para w,i,
+
+129
+00:10:18,470 --> 00:10:23,910
+para todos los w desde cero a diez, y para 
+todos los i de cero a cuatro, en nuestro caso.
+
+130
+00:10:23,910 --> 00:10:28,418
+Con este propósito, es natural
+usar una tabla de dos dimensiones,
+
+131
+00:10:28,418 --> 00:10:30,210
+o un array de dos dimensiones.
+
+132
+00:10:30,210 --> 00:10:35,120
+Puedes ver este array bidimensional
+en la diapositiva ya rellenado.
+
+133
+00:10:35,120 --> 00:10:39,980
+Aquí tenemos i, así todas
+las filas de nuestras
+
+134
+00:10:39,980 --> 00:10:45,110
+columnas en la celda con todos los posibles valores de i, y
+
+135
+00:10:45,110 --> 00:10:50,750
+todas las columnas en este conjunto con
+todas los posibles valores de w.
+
+136
+00:10:50,750 --> 00:10:54,550
+Correcto, comenzamos inicializando
+la primera fila y
+
+137
+00:10:54,550 --> 00:10:57,730
+la primera columna de esta tabla con ceros.
+
+138
+00:10:57,730 --> 00:11:01,380
+Esto es, rellenamos esta fila con ceros y
+
+139
+00:11:01,380 --> 00:11:06,170
+también rellenamos esta columna con ceros.
+
+140
+00:11:06,170 --> 00:11:10,040
+Después comenzamor rellenando
+esta tabla fila por fila.
+
+141
+00:11:10,040 --> 00:11:14,360
+Es decir, primero rellenamos esta celda,
+después esta celda,
+
+142
+00:11:14,360 --> 00:11:16,700
+después esta celda, después esta celda y así sucesivamente.
+
+143
+00:11:16,700 --> 00:11:20,375
+Seguimos de esta manera.
+
+144
+00:11:20,375 --> 00:11:23,988
+Así, primero rellenamos esta fila,
+después esta fila.
+
+145
+00:11:23,988 --> 00:11:27,283
+A continuación, rellenamos esta fila
+y después rellenamos esta fila.
+
+146
+00:11:27,283 --> 00:11:31,871
+El resultado de 46 es realmente
+
+147
+00:11:31,871 --> 00:11:36,048
+la respuesta a nuestro problema inicial.
+
+148
+00:11:36,048 --> 00:11:41,922
+Ahora, déjame enseñarte cómo algún 
+valor particular, sólo como ilustración,
+
+149
+00:11:41,922 --> 00:11:47,346
+déjame enseñarte cómo algún
+valor particular en esta tabla es calculado.
+
+150
+00:11:47,346 --> 00:11:50,759
+Por ejemplo, consideramos esta celda.
+
+151
+00:11:53,197 --> 00:11:58,672
+Formalmente, este es el valor
+
+152
+00:11:58,672 --> 00:12:02,850
+valor(10,2).
+
+153
+00:12:02,850 --> 00:12:08,040
+Lo que significa que este es un valor
+óptimo para una mochila de peso
+
+154
+00:12:08,040 --> 00:12:12,570
+total 10 que sólo usa
+los primeros dos objetos.
+
+155
+00:12:12,570 --> 00:12:17,540
+Asumamos que no sabemos
+que poner aquí.
+
+156
+00:12:18,780 --> 00:12:20,990
+Sólo tenemos que calcularlo ahora mismo.
+
+157
+00:12:20,990 --> 00:12:25,932
+Razonamos igual que hicimos antes.
+
+158
+00:12:25,932 --> 00:12:31,690
+Esta es una mochila de peso total 10
+que sólo usa los dos primeros objetos.
+
+159
+00:12:31,690 --> 00:12:36,810
+Bien, entonces decimos que el
+segundo objeto puede ser usado o no.
+
+160
+00:12:36,810 --> 00:12:40,755
+Si no lo usamos, entonces esto
+es lo mismo que rellenar
+
+161
+00:12:40,755 --> 00:12:45,490
+la mochila de peso total diez
+usando solamente el primer objeto.
+
+162
+00:12:45,490 --> 00:12:49,370
+Y ya sabemos este valor
+porque está en la fila anterior.
+
+163
+00:12:49,370 --> 00:12:52,580
+Esto es valor de 10,1. ¿De acuerdo?
+
+164
+00:12:52,580 --> 00:12:55,408
+El valor, en este caso, es 30.
+
+165
+00:12:55,408 --> 00:12:59,608
+Por otro lado, si el segundo
+objeto es utilizado,
+
+166
+00:12:59,608 --> 00:13:05,101
+entonces si lo eliminamos lo que nos
+queda es una solución óptima para
+
+167
+00:13:05,101 --> 00:13:08,907
+una mochila de peso total 10 menos 3,
+
+168
+00:13:08,907 --> 00:13:13,556
+ya que 3 es el peso del segundo objeto,
+
+169
+00:13:13,556 --> 00:13:20,760
+lo que significa que es una solución
+óptima para una mochila de tamaño 7.
+
+170
+00:13:20,760 --> 00:13:23,852
+De peso total 7 que
+sólo usa el primer,
+
+171
+00:13:23,852 --> 00:13:27,670
+donde sólo está permitido
+usar el primer objeto.
+
+172
+00:13:27,670 --> 00:13:31,610
+Además, si añadimos este objeto,
+
+173
+00:13:31,610 --> 00:13:37,310
+si añadimos el segundo objeto
+a la solución, obtenemos 30 más 14,
+
+174
+00:13:37,310 --> 00:13:41,150
+que es mucho mejor que
+sin usar el segundo objeto. ¿De acuerdo?
+
+175
+00:13:41,150 --> 00:13:43,380
+POr eso tenemos 44 aquí.
+
+176
+00:13:45,350 --> 00:13:50,370
+Además, por esta razón hemos
+rellenado esta matriz fila por fila.
+
+177
+00:13:50,370 --> 00:13:55,110
+Ahora, cuando tenemos que
+calcular el valor de esta celda,
+
+178
+00:13:55,110 --> 00:13:59,680
+ya hemos calculado
+el valor de estas dos celdas.
+
+179
+00:14:01,330 --> 00:14:05,830
+Es por lo que rellenamos nuestra 
+matriz exactamente fila por fila.
+
+180
+00:14:07,530 --> 00:14:10,170
+Déjame usar el mismo ejemplo para
+
+181
+00:14:10,170 --> 00:14:13,340
+ilustrar una técnica importante
+en programación dinámica.
+
+182
+00:14:13,340 --> 00:14:16,460
+A saber, reconstruir una solución óptima.
+
+183
+00:14:17,720 --> 00:14:22,630
+Por reconstruir una solución óptima
+en este problema particular quiero decir encontrar
+
+184
+00:14:22,630 --> 00:14:27,710
+no sólo el valor óptimo para
+la mochila de peso total diez,
+
+185
+00:14:27,710 --> 00:14:34,320
+sino el subconjunto de objetos
+que llevan a este valor óptimo.
+
+186
+00:14:34,320 --> 00:14:38,863
+Para ello, primero creamos 
+un array booleano de tamaño cuatro.
+
+187
+00:14:38,863 --> 00:14:41,409
+En este array, marcaremos,
+para cada objeto,
+
+188
+00:14:41,409 --> 00:14:45,070
+si el objeto es usado en una
+solución óptima o no.
+
+189
+00:14:45,070 --> 00:14:49,190
+Lo que vamos a hacer es el
+camino inverso que nos ha conducido
+
+190
+00:14:49,190 --> 00:14:53,110
+al valor óptimo, 46.
+
+191
+00:14:53,110 --> 00:15:00,630
+En particular, tratamos de entender
+cómo este valor de 46 ha sido calculado.
+
+192
+00:15:02,780 --> 00:15:07,660
+Lo primero de todo, 46
+es formalmente valor de 10,4,
+
+193
+00:15:07,660 --> 00:15:11,110
+esto es un valor óptimo para
+
+194
+00:15:11,110 --> 00:15:16,170
+una mochila de peso total diez,
+usando los primeros cuatro objetos.
+
+195
+00:15:16,170 --> 00:15:19,980
+Razonemos si el cuarto
+objeto es usado o no.
+
+196
+00:15:19,980 --> 00:15:24,080
+Si no se usa, entonces este valor
+es el mismo que el valor de 10,
+
+197
+00:15:24,080 --> 00:15:27,050
+3, que se muestra aquí.
+
+198
+00:15:27,050 --> 00:15:32,550
+Este es el valor de una mochila del mismo 
+peso, usando los tres primeros objetos.
+
+199
+00:15:32,550 --> 00:15:38,330
+Por otro lado, si se utiliza, entonces lo que
+queda debe ser una solución óptima para
+
+200
+00:15:38,330 --> 00:15:46,330
+una mochila de tamaño 10 menos 2, que es 8,
+que también usa sólo los tres primeros objetos.
+
+201
+00:15:46,330 --> 00:15:50,820
+Este valor ya está calculado, es 30, así que
+
+202
+00:15:50,820 --> 00:15:55,106
+necesitamos calcular el máximo
+entre 30  más 9,
+
+203
+00:15:55,106 --> 00:15:59,922
+porque el valor del último
+objeto es 9, y 46.
+
+204
+00:15:59,922 --> 00:16:05,109
+En este caso particular,
+el máximo es igual a 46 lo que
+
+205
+00:16:05,109 --> 00:16:10,890
+significa que hemos decidido en este
+punto no usar el último objeto. ¿De acuerdo?
+
+206
+00:16:10,890 --> 00:16:17,180
+Ponemos 0 en nuestro array booleano
+para indicar esto y nos movemos a esta celda.
+
+207
+00:16:18,410 --> 00:16:21,920
+De nuevo, intentamos entender
+cómo ha sido calculado este valor.
+
+208
+00:16:21,920 --> 00:16:25,450
+Se ha calculado como el
+máximo valor de dos
+
+209
+00:16:25,450 --> 00:16:29,080
+números que dependen
+de los siguientes valores.
+
+210
+00:16:29,080 --> 00:16:33,450
+Podemos bien no usar el tercer objeto,
+entonces es lo mismo,
+
+211
+00:16:33,450 --> 00:16:39,180
+tiene el valor de esta celda
+o podemos usar el tercer objeto.
+
+212
+00:16:39,180 --> 00:16:44,240
+En este caso, lo que queda es una 
+mochila de tamaño, de peso total 6,
+
+213
+00:16:44,240 --> 00:16:48,634
+y usando los dos primeros objetos
+y su valor es 30.
+
+214
+00:16:49,860 --> 00:16:53,680
+Más el valor del terce objeto,
+que es 16.
+
+215
+00:16:53,680 --> 00:16:59,230
+En este caso particular,
+30 más 16 es mayor que 44,
+
+216
+00:16:59,230 --> 00:17:06,780
+lo que significa que este valor de
+46 se ha calculado usando este valor.
+
+217
+00:17:06,780 --> 00:17:10,770
+Esto, a su vez, significa que hemos
+decidido usar el tercer objeto.
+
+218
+00:17:10,770 --> 00:17:18,662
+Lo marcamos poniendo
+1 en nuestro array booleano.
+
+219
+00:17:18,662 --> 00:17:23,850
+Permanecemos en esta celda e intentamos 
+comprender cómo se ha calculado.
+
+220
+00:17:23,850 --> 00:17:28,740
+Se ha calculado cómo un
+máximo entre este 30 y 
+
+221
+00:17:28,740 --> 00:17:32,210
+este 0 más 14.
+
+222
+00:17:32,210 --> 00:17:38,800
+Correcto, en este caso, el primer 
+valor es mayor por lo que
+
+223
+00:17:38,800 --> 00:17:46,150
+nos movemos a esta celda y marcamos
+que hemos decidido no usar el segundo objeto.
+
+224
+00:17:46,150 --> 00:17:51,405
+De acuerdo, y finalmente, nos damos cuenta
+de que hemos llegado a este valor
+
+225
+00:17:51,405 --> 00:17:57,919
+30 desde la esquina superior izquierda.
+
+226
+00:17:57,919 --> 00:17:59,214
+¿Verdad?
+
+227
+00:17:59,214 --> 00:18:05,600
+De esta forma, hemos reconstruido
+la solución óptima completa.
+
+228
+00:18:05,600 --> 00:18:10,170
+De nuevo, hemos recorrido a la inverso
+lo que nos conduce al valor óptimo.
+
+229
+00:18:11,370 --> 00:18:15,080
+Aquí, lo que se muestra es que
+hemos decidido usar el primer objeto y
+
+230
+00:18:15,080 --> 00:18:16,580
+el tercer objeto.
+
+231
+00:18:16,580 --> 00:18:21,618
+Vamos a comprobar que, en efecto,
+nos da el valor óptimo de 46.
+
+232
+00:18:21,618 --> 00:18:25,707
+Si, efectivamente, calculamos la
+suma de los pesos del primer y
+
+233
+00:18:25,707 --> 00:18:27,720
+el tercer objeto, es 10.
+
+234
+00:18:27,720 --> 00:18:34,700
+Y mientras el valor total es 30
+más 16 lo que es 46, de hecho.
+
+235
+00:18:34,700 --> 00:18:39,778
+Como dije antes, esta técnica
+es usada habitualmente en
+
+236
+00:18:39,778 --> 00:18:45,167
+los algoritmos de programación dinámica
+para reconstruir la solución óptima.

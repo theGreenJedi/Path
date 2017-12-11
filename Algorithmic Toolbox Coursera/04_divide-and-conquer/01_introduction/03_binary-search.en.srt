@@ -1,0 +1,562 @@
+1
+00:00:00,350 --> 00:00:02,960
+Hi, so let's talk now about binary search.
+
+2
+00:00:04,280 --> 00:00:08,990
+A dictionary is a good
+example of a ordered list.
+
+3
+00:00:08,990 --> 00:00:11,270
+Okay, basically where
+every word is in order.
+
+4
+00:00:11,270 --> 00:00:13,550
+And that makes finding words much easier.
+
+5
+00:00:13,550 --> 00:00:16,300
+You can imagine how difficult it
+would be to search a dictionary
+
+6
+00:00:16,300 --> 00:00:18,910
+if the order of the words was random.
+
+7
+00:00:18,910 --> 00:00:21,710
+You'd have to just search
+through every single page, and in fact,
+
+8
+00:00:21,710 --> 00:00:22,689
+every word on every page.
+
+9
+00:00:22,689 --> 00:00:23,760
+It'd take quite a long time.
+
+10
+00:00:25,050 --> 00:00:29,490
+So let's look at the problem statement for
+searching in a sorted array.
+
+11
+00:00:29,490 --> 00:00:33,530
+So what we have coming in is, A,
+an array, along with a low and
+
+12
+00:00:33,530 --> 00:00:37,780
+upper bound that specify the bounds
+within the array in which to search.
+
+13
+00:00:37,780 --> 00:00:41,250
+What's important about the array
+is that it's in sorted order.
+
+14
+00:00:41,250 --> 00:00:45,900
+What we mean by that is if we look
+at any index i at an element.
+
+15
+00:00:45,900 --> 00:00:51,590
+And then the next element, that this first
+element is no more than the next element.
+
+16
+00:00:51,590 --> 00:00:55,340
+We don't say less than
+because we want to allow for
+
+17
+00:00:55,340 --> 00:00:57,350
+arrays that have repeated elements.
+
+18
+00:00:58,410 --> 00:01:03,517
+So officially this is called
+a monotonic non-decreasing array.
+
+19
+00:01:04,570 --> 00:01:06,230
+The other input is the key to look for.
+
+20
+00:01:07,540 --> 00:01:12,251
+The output for
+this is an index such that the element at
+
+21
+00:01:12,251 --> 00:01:16,030
+that index in the array
+is equal to the key.
+
+22
+00:01:16,030 --> 00:01:20,260
+We say an element and not the element
+just as we did in linear search.
+
+23
+00:01:20,260 --> 00:01:22,461
+because of the fact that there
+may be more than one element--
+
+24
+00:01:22,461 --> 00:01:26,710
+more than one element that matches because
+there may be duplicates in the array.
+
+25
+00:01:28,560 --> 00:01:30,540
+If we don't have a match,
+
+26
+00:01:30,540 --> 00:01:33,295
+instead of returning NOT_FOUND as
+we did in the linear search case,
+
+27
+00:01:33,295 --> 00:01:36,290
+we're going to actually return
+somewhat more useful information,
+
+28
+00:01:36,290 --> 00:01:39,370
+which is where in the array
+would you actually
+
+29
+00:01:39,370 --> 00:01:44,600
+insert the element if
+you wanted to insert it?
+
+30
+00:01:44,600 --> 00:01:48,020
+Or where would it have been,
+if it were there?
+
+31
+00:01:48,020 --> 00:01:50,577
+So what we're going to return
+is the greatest index,
+
+32
+00:01:50,577 --> 00:01:52,129
+such that A sub i is less than k.
+
+33
+00:01:52,129 --> 00:01:54,882
+That is, if the key is not in the array,
+
+34
+00:01:54,882 --> 00:02:00,225
+we're returning an index such that if
+you look at the element at that index,
+
+35
+00:02:00,225 --> 00:02:05,000
+it's less than the key but
+the next element is greater than the key.
+
+36
+00:02:07,146 --> 00:02:11,991
+And we do have to take account of
+the fact that what if every element in
+
+37
+00:02:11,991 --> 00:02:14,810
+the array is greater than the key?
+
+38
+00:02:14,810 --> 00:02:17,509
+In that case, we're going to go ahead and
+return low- 1.
+
+39
+00:02:19,070 --> 00:02:19,990
+So look at an example.
+
+40
+00:02:19,990 --> 00:02:24,620
+We've got this array with 7 elements in
+it, and the element 20 is repeated in it.
+
+41
+00:02:24,620 --> 00:02:29,350
+So if we search in this array for 2,
+we want to go ahead and return 0,
+
+42
+00:02:29,350 --> 00:02:32,540
+saying that every element in
+the array is larger than this.
+
+43
+00:02:32,540 --> 00:02:35,168
+If on the other hand, we look for
+3, we're going to return 1.
+
+44
+00:02:35,168 --> 00:02:38,259
+If we look for 4, we're also
+going to be returning 1.
+
+45
+00:02:38,259 --> 00:02:41,333
+which really signifies between 1 and 2.
+
+46
+00:02:41,333 --> 00:02:44,440
+That is, it's bigger than 3 but
+it's less than 5.
+
+47
+00:02:46,130 --> 00:02:48,740
+If we search for 20, we return 4.
+
+48
+00:02:48,740 --> 00:02:50,120
+Or we might also return 5.
+
+49
+00:02:50,120 --> 00:02:54,380
+Either one of those is valid because
+20 is present at each of those indexes.
+
+50
+00:02:54,380 --> 00:02:56,400
+And if we search for 60, we'll return 7.
+
+51
+00:02:56,400 --> 00:03:00,287
+But if we search for 70,
+we'll also return 7.
+
+52
+00:03:02,711 --> 00:03:05,150
+So let's look at our
+implementation of BinarySearch.
+
+53
+00:03:05,150 --> 00:03:09,110
+So we're going to write a recursive
+routine, taking in A, low, high and key,
+
+54
+00:03:09,110 --> 00:03:11,440
+just as we specified in
+the problem statement.
+
+55
+00:03:12,810 --> 00:03:13,880
+First our base case.
+
+56
+00:03:13,880 --> 00:03:18,590
+If we have an empty array,
+that is if high is less than low, so
+
+57
+00:03:18,590 --> 00:03:20,789
+no elements,
+then we're going to return low-1.
+
+58
+00:03:22,570 --> 00:03:24,490
+Otherwise, we're going to
+calculate the midpoint.
+
+59
+00:03:24,490 --> 00:03:27,820
+So we want something halfway
+between low and high.
+
+60
+00:03:27,820 --> 00:03:32,935
+So what we're going to do is figure
+the width, which is high- low,
+
+61
+00:03:32,935 --> 00:03:37,399
+cut it in half, so divide by 2,
+and then add that to low.
+
+62
+00:03:37,399 --> 00:03:40,234
+That might not be an integer
+
+63
+00:03:40,234 --> 00:03:45,133
+because of the fact that high- low divided
+by 2 may give us a fractional portion,
+
+64
+00:03:45,133 --> 00:03:47,479
+so we're going to take the floor of that.
+
+65
+00:03:49,803 --> 00:03:54,185
+For example, in the previous case,
+we had 1 to 7, it'll be 7- 1 is 6,
+
+66
+00:03:54,185 --> 00:03:58,100
+divided by 2 is 3 + our low is 1 is 4,
+so the midpoint would be 4.
+
+67
+00:03:58,100 --> 00:03:59,410
+We'll see an example of this shortly.
+
+68
+00:04:01,870 --> 00:04:08,430
+And now we check and see is the element
+at that midpoint equal to our key.
+
+69
+00:04:08,430 --> 00:04:11,050
+If so, we're done, we return it.
+
+70
+00:04:11,050 --> 00:04:13,138
+If not, the good news is of course,
+
+71
+00:04:13,138 --> 00:04:17,810
+we don't have to check all the other
+elements, we've ruled out half of them.
+
+72
+00:04:17,810 --> 00:04:21,570
+So if the key is less than
+the midpoint element,
+
+73
+00:04:21,570 --> 00:04:24,140
+then all the upper ones we can ignore.
+
+74
+00:04:24,140 --> 00:04:28,851
+So we're going to go ahead and now return
+the BinarySearch in A from low to mid- 1,
+
+75
+00:04:28,851 --> 00:04:31,571
+completely ignoring all
+the stuff over here.
+
+76
+00:04:31,571 --> 00:04:34,963
+Otherwise, the key is greater
+than the midpoint, and again,
+
+77
+00:04:34,963 --> 00:04:39,200
+we can throw away the lower stuff and
+go from midpoint + 1, all the way to high.
+
+78
+00:04:41,080 --> 00:04:42,280
+Let's look at an example.
+
+79
+00:04:42,280 --> 00:04:46,280
+So let's say we're searching for
+the key 50 in this array with 11 elements.
+
+80
+00:04:46,280 --> 00:04:50,260
+So we'll do a binary search on this array,
+from 1 to 11, looking for 50.
+
+81
+00:04:50,260 --> 00:04:53,865
+Low is 1, high is 11.
+
+82
+00:04:53,865 --> 00:04:59,213
+We'll calculate the midpoint,
+the midpoint will be 11- 1 is 10,
+
+83
+00:04:59,213 --> 00:05:03,432
+divided by 2 is 5,
+add that to 1, the midpoint is 6.
+
+84
+00:05:03,432 --> 00:05:07,693
+And now we check and
+see is the midpoint element equal to 50?
+
+85
+00:05:07,693 --> 00:05:08,243
+Well, no.
+
+86
+00:05:08,243 --> 00:05:11,295
+The midpoint element is 15 and
+the element we are looking for,
+
+87
+00:05:11,295 --> 00:05:12,982
+the key we're looking for, is 50.
+
+88
+00:05:12,982 --> 00:05:18,070
+So we're going to go ahead and
+ignore the lower half of the array and
+
+89
+00:05:18,070 --> 00:05:24,050
+now call binary search again, with the low
+equal to 7, so one more than the midpoint.
+
+90
+00:05:25,140 --> 00:05:27,920
+So now we've got a smaller
+version of the problem.
+
+91
+00:05:27,920 --> 00:05:31,660
+We're looking for 50 within the elements
+7 to 11, we'll calculate the midpoint.
+
+92
+00:05:31,660 --> 00:05:35,321
+11- 7 is 4 divided by 2 is 2, so
+
+93
+00:05:35,321 --> 00:05:39,708
+we'll add that to 7 to
+get a midpoint of 9.
+
+94
+00:05:39,708 --> 00:05:44,594
+We check, is the element at
+index 9 equal to our key?
+
+95
+00:05:44,594 --> 00:05:48,210
+The element at index 9 is 20,
+our key is 50, they're not equal.
+
+96
+00:05:49,540 --> 00:05:54,900
+However, 50 is greater than 20,
+so we're going to go ahead and
+
+97
+00:05:54,900 --> 00:05:59,978
+make a new recursive call with
+midpoint + 1, which is 10.
+
+98
+00:05:59,978 --> 00:06:02,281
+So, again,
+we do our binary search from 10 to 11.
+
+99
+00:06:02,281 --> 00:06:03,260
+We calculate the midpoint.
+
+100
+00:06:04,830 --> 00:06:10,013
+High- low, 11- 10 is 1, divided by 2
+is one-half + 10 is 10 and a half,
+
+101
+00:06:10,013 --> 00:06:15,140
+we take the floor of that, we get 10 and
+a half, so our midpoint is 10 and a half.
+
+102
+00:06:15,140 --> 00:06:17,480
+I'm sorry, our midpoint is 10.
+
+103
+00:06:17,480 --> 00:06:18,470
+And now we check.
+
+104
+00:06:18,470 --> 00:06:22,820
+Is the value at element
+10 equal to our key?
+
+105
+00:06:22,820 --> 00:06:26,140
+Well the value at element 10 is 50,
+our key is 50 so yes.
+
+106
+00:06:26,140 --> 00:06:30,390
+We're going to go ahead and
+return that midpoint which is 10.
+
+107
+00:06:30,390 --> 00:06:35,310
+In summary then,
+what we've done is broken our problem into
+
+108
+00:06:35,310 --> 00:06:37,715
+non-overlapping subproblems
+of the same type.
+
+109
+00:06:37,715 --> 00:06:39,790
+We've recursively solved the subproblems.
+
+110
+00:06:39,790 --> 00:06:42,920
+And then we're going to combine
+the results of those subproblems.
+
+111
+00:06:42,920 --> 00:06:45,960
+We broke the problem into
+a problem of size half
+
+112
+00:06:45,960 --> 00:06:47,460
+(slightly less than half).
+
+113
+00:06:47,460 --> 00:06:49,860
+We recursively solved that
+single subproblem and
+
+114
+00:06:49,860 --> 00:06:52,770
+then we combined the result very
+simply just by returning the result.
+
+115
+00:06:53,850 --> 00:06:57,330
+In the next video, we're going to go
+ahead and look at the runtime for
+
+116
+00:06:57,330 --> 00:06:58,830
+binary search,
+
+117
+00:06:58,830 --> 00:07:00,540
+along with an iterative version.
+
+118
+00:07:00,540 --> 00:07:06,050
+And we'll get back to actually discussing
+that problem that I discussed with
+
+119
+00:07:06,050 --> 00:07:07,840
+the dictionary translation problem.
+
+120
+00:07:09,030 --> 00:07:09,640
+We'll see you shortly.

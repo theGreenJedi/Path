@@ -1,0 +1,540 @@
+1
+00:00:03,123 --> 00:00:04,330
+Hello, everybody.
+
+2
+00:00:04,330 --> 00:00:05,928
+Welcome back.
+
+3
+00:00:05,928 --> 00:00:09,220
+Today, we're going to be talking about
+Big-O notation, which is the specific,
+
+4
+00:00:09,220 --> 00:00:14,290
+sort of asymptotic notation that we
+will be using most frequently here.
+
+5
+00:00:14,290 --> 00:00:17,360
+So, the idea here is we're going to
+introduce the meaning of Big-O notation
+
+6
+00:00:17,360 --> 00:00:22,000
+and describe some of its advantages and
+disadvantages.
+
+7
+00:00:22,000 --> 00:00:23,300
+So to start with the definition.
+
+8
+00:00:23,300 --> 00:00:25,820
+The idea is that we want something
+that cares about what happens
+
+9
+00:00:25,820 --> 00:00:30,930
+when the inputs get very large and sort of
+only care about things up to constants.
+
+10
+00:00:30,930 --> 00:00:32,680
+So we are going to come
+up with a definition.
+
+11
+00:00:32,680 --> 00:00:34,903
+If you've got two functions, f and g.
+
+12
+00:00:34,903 --> 00:00:37,574
+g(n) is Big-O of g(n).
+
+13
+00:00:37,574 --> 00:00:42,218
+If there are two constants,
+capital N and little c,
+
+14
+00:00:42,218 --> 00:00:45,352
+such that for all n, at least N.
+
+15
+00:00:45,352 --> 00:00:49,311
+f(n) is at most c*g(n).
+
+16
+00:00:49,311 --> 00:00:54,100
+And what this means is that at least for
+sufficiently large inputs,
+
+17
+00:00:54,100 --> 00:00:57,640
+f is bounded above by some
+constant multiple of g.
+
+18
+00:00:58,690 --> 00:01:00,926
+Which is really sort of this
+idea that we had from before.
+
+19
+00:01:00,926 --> 00:01:07,580
+Now, for example, 3n squared plus
+5n plus 2 is O of n squared,
+
+20
+00:01:08,760 --> 00:01:13,180
+because if we take any n at at least 1,
+3n squared plus 5n plus 2 is at
+
+21
+00:01:13,180 --> 00:01:18,040
+most 3n squared plus 5n squared plus
+2n squared, which is 10n squared.
+
+22
+00:01:19,470 --> 00:01:21,490
+Some multiple of n squared.
+
+23
+00:01:21,490 --> 00:01:24,360
+So, and in particular if you
+look at these two functions,
+
+24
+00:01:24,360 --> 00:01:27,640
+they really in some sense do
+have the same growth rate.
+
+25
+00:01:27,640 --> 00:01:32,320
+If you look at the ratio between them,
+sure it's large, its 10n equals 1,
+
+26
+00:01:32,320 --> 00:01:35,810
+but as n gets large it actually
+drops down to about 3.
+
+27
+00:01:35,810 --> 00:01:39,350
+And once you're putting in inputs,
+at n equals 100,
+
+28
+00:01:39,350 --> 00:01:44,270
+n squared is a million 3n squared + 5n +
+2 is a little bit more than 3 million.
+
+29
+00:01:45,440 --> 00:01:48,190
+So, they're not the same function.
+
+30
+00:01:48,190 --> 00:01:50,750
+One of them is distinctly
+larger than the other, but
+
+31
+00:01:50,750 --> 00:01:54,720
+it's not larger by much,
+not by more than a factor of about three.
+
+32
+00:01:57,720 --> 00:02:01,030
+Throughout this course, we're going
+to be using big-O notation to report,
+
+33
+00:02:01,030 --> 00:02:03,700
+basically, all of our
+algorithms' runtimes.
+
+34
+00:02:03,700 --> 00:02:06,760
+And, this has a bunch of advantages for
+us.
+
+35
+00:02:07,890 --> 00:02:11,070
+The first thing that it does for
+us is it clarifies growth rate.
+
+36
+00:02:11,070 --> 00:02:12,330
+As I've said before,
+
+37
+00:02:12,330 --> 00:02:18,350
+often what we care about is how does
+our runtime scale with the input size.
+
+38
+00:02:18,350 --> 00:02:22,400
+And this is sort of an artifact to
+the fact that we often really care
+
+39
+00:02:22,400 --> 00:02:26,390
+about what happens when we put really,
+really, really big inputs to our algorithm.
+
+40
+00:02:26,390 --> 00:02:28,820
+How big can we deal with,
+before it starts breaking down?
+
+41
+00:02:29,840 --> 00:02:33,980
+And, if you gave me some sort of
+complicated expression in terms of
+
+42
+00:02:33,980 --> 00:02:36,320
+the input, with lots of terms,
+
+43
+00:02:36,320 --> 00:02:39,940
+then it might be hard given two
+algorithms to really compare them.
+
+44
+00:02:39,940 --> 00:02:43,910
+I mean, which one's bigger would depend
+on exactly which inputs I'm using.
+
+45
+00:02:43,910 --> 00:02:47,580
+It requires some sort of annoying
+computation to determine where exactly
+
+46
+00:02:47,580 --> 00:02:49,310
+one's better than the other.
+
+47
+00:02:49,310 --> 00:02:53,530
+But, if you look at things asymptotically
+what happens as n gets large?
+
+48
+00:02:53,530 --> 00:02:57,610
+It often becomes much more clear that,
+once n is very, very large,
+
+49
+00:02:57,610 --> 00:02:59,710
+algorithm a is better than algorithm b.
+
+50
+00:03:01,510 --> 00:03:04,540
+The second thing it does for
+us is that it cleans up notation.
+
+51
+00:03:04,540 --> 00:03:09,115
+We can write O(n²),
+instead of 3n² + 5n + 2.
+
+52
+00:03:09,115 --> 00:03:12,551
+And that's a lot cleaner and
+much easier to work with.
+
+53
+00:03:12,551 --> 00:03:18,280
+We can write O(n) instead
+of n + log₂(n) + sin(n).
+
+54
+00:03:18,280 --> 00:03:24,370
+We can write O(n log(n)) instead
+of 4n log₂(n) + 7.
+
+55
+00:03:24,370 --> 00:03:26,500
+And note, that in the big O,
+
+56
+00:03:26,500 --> 00:03:30,840
+we don't actually need to specify
+the base of the logarithm that we use.
+
+57
+00:03:30,840 --> 00:03:34,870
+Because log₂(n), and
+log₃(n), and log₁₀(n),
+
+58
+00:03:34,870 --> 00:03:39,510
+and log₇(n),
+They only differ by constant multiples.
+
+59
+00:03:39,510 --> 00:03:43,230
+And up to the constant multiples, this
+big O that we have really doesn't care.
+
+60
+00:03:44,990 --> 00:03:48,040
+Another consequence of this is that
+because our notation is cleaner,
+
+61
+00:03:48,040 --> 00:03:51,870
+because we have fewer lower
+order terms to deal with,
+
+62
+00:03:51,870 --> 00:03:54,330
+this actually makes the algebra
+that we have to do easier.
+
+63
+00:03:54,330 --> 00:03:58,900
+It makes it easier to manipulate big O
+expressions because they're not as messy.
+
+64
+00:04:00,870 --> 00:04:03,860
+And the final thing this does is
+that this big O notation really
+
+65
+00:04:03,860 --> 00:04:07,550
+does solve these problems we were
+talking about a couple of lectures ago.
+
+66
+00:04:07,550 --> 00:04:11,180
+In order to compute runtimes in terms
+of big O, we really don't need to know
+
+67
+00:04:11,180 --> 00:04:15,510
+things like how fast the computer is, or
+what the memory hierarchy looks like,
+
+68
+00:04:15,510 --> 00:04:18,730
+or what compiler we used,
+because, by and large,
+
+69
+00:04:18,730 --> 00:04:23,120
+although these things will have
+a big impact on your final runtime,
+
+70
+00:04:23,120 --> 00:04:26,630
+that impact will generally
+only be a constant multiple.
+
+71
+00:04:26,630 --> 00:04:30,200
+And if two things are only
+off by a constant multiple,
+
+72
+00:04:30,200 --> 00:04:31,440
+they've got the same big O.
+
+73
+00:04:32,900 --> 00:04:33,690
+That's all there is.
+
+74
+00:04:34,830 --> 00:04:36,515
+Now, I should say that there's a warning.
+
+75
+00:04:36,515 --> 00:04:40,490
+Big-O is incredibly useful, we are going to
+be using it for basically everything in
+
+76
+00:04:40,490 --> 00:04:44,960
+this course, but it does lose a lot
+of information about your runtime.
+
+77
+00:04:44,960 --> 00:04:48,170
+It forgets about any constant multiples.
+
+78
+00:04:48,170 --> 00:04:51,840
+So, if you have two algorithms, and
+one of them's a hundred times faster,
+
+79
+00:04:51,840 --> 00:04:53,269
+they have the same Big-O.
+
+80
+00:04:54,360 --> 00:04:56,980
+But, in practice,
+if you want to make things fast,
+
+81
+00:04:56,980 --> 00:04:59,810
+a factor of 100 is a big deal.
+
+82
+00:04:59,810 --> 00:05:01,867
+Even a factor of two is a big deal.
+
+83
+00:05:01,867 --> 00:05:06,386
+And so, if you really want to make
+things fast, once you have a good
+
+84
+00:05:06,386 --> 00:05:11,661
+asymptotic runtime, you then want to
+look into the nitty-gritty details.
+
+85
+00:05:11,661 --> 00:05:13,520
+Can I save a factor of two here?
+
+86
+00:05:13,520 --> 00:05:16,440
+Can I rearrange things to make
+things run a little bit smoother?
+
+87
+00:05:16,440 --> 00:05:19,539
+Can I make it interact better
+with the memory hierarchy?
+
+88
+00:05:19,539 --> 00:05:20,728
+Can I do x, y and
+
+89
+00:05:20,728 --> 00:05:26,690
+z to make it faster by these constant
+factors that we didn't see beforehand?
+
+90
+00:05:26,690 --> 00:05:31,604
+The second thing that you should
+note along these lines is that big O
+
+91
+00:05:31,604 --> 00:05:33,030
+is only asymptotic.
+
+92
+00:05:33,030 --> 00:05:37,790
+In some sense, all it tells you about are
+what happens when you put really, really,
+
+93
+00:05:37,790 --> 00:05:40,180
+really, really,
+really big inputs into the algorithm.
+
+94
+00:05:41,215 --> 00:05:46,370
+And,well, if you actually want to run
+your algorithm on a specific input.
+
+95
+00:05:46,370 --> 00:05:50,120
+Big O doesn't tell you anything about
+how long it takes in some sense.
+
+96
+00:05:50,120 --> 00:05:55,210
+I mean, usually the constants hidden
+by the big O are moderately small and
+
+97
+00:05:55,210 --> 00:05:57,870
+therefore you have something useful.
+
+98
+00:05:57,870 --> 00:05:59,820
+But sometimes they're big.
+
+99
+00:05:59,820 --> 00:06:03,470
+Sometimes an algorithm
+with worse big O runtime,
+
+100
+00:06:03,470 --> 00:06:08,350
+that's worse asymptotically on
+very large inputs, actually, for
+
+101
+00:06:08,350 --> 00:06:13,520
+all practical sizes, is actually
+beaten by some other algorithm.
+
+102
+00:06:13,520 --> 00:06:16,390
+And there are cases of this where
+you find two algorithms where
+
+103
+00:06:16,390 --> 00:06:20,010
+a works better than b on really,
+really, really big inputs.
+
+104
+00:06:20,010 --> 00:06:21,650
+But sometimes really, really,
+
+105
+00:06:21,650 --> 00:06:26,400
+really big means more than you could ever
+store in your computer in the first place.
+
+106
+00:06:26,400 --> 00:06:31,020
+And so, for any practical input
+you want to use algorithm b.
+
+107
+00:06:32,130 --> 00:06:35,920
+In any case, though, despite these
+warnings, big O is incredibly useful.
+
+108
+00:06:35,920 --> 00:06:38,200
+We're going to be using it
+throughout this course.
+
+109
+00:06:38,200 --> 00:06:39,900
+And so, next lecture,
+
+110
+00:06:39,900 --> 00:06:42,720
+we're going to be talking a little bit
+about how to deal with big O expressions,
+
+111
+00:06:42,720 --> 00:06:46,660
+how to manipulate them,
+how to use them to compute runtimes, but
+
+112
+00:06:46,660 --> 00:06:51,310
+once you have that we'll really be
+sort of ready to do some algorithms.
+
+113
+00:06:53,450 --> 00:06:56,450
+In any case, that's all for
+this lecture, come back next time and
+
+114
+00:06:56,450 --> 00:06:57,210
+we'll talk about that.

@@ -1,0 +1,192 @@
+1
+00:00:00,320 --> 00:00:04,720
+Hola, soy Michael Levin y
+juntos vamos a estudiar los Algoritmos Voraces (Greedy Algorithms)
+
+2
+00:00:04,720 --> 00:00:07,955
+Son algunos de los algoritmos
+más sencillos que existen y
+
+3
+00:00:07,955 --> 00:00:12,722
+normalmente son una forma muy natural
+de intentar solventar un problema.
+
+4
+00:00:12,722 --> 00:00:15,330
+Empezaremos con unos pocos ejemplos
+de problemas que pueden ser
+
+5
+00:00:15,330 --> 00:00:19,190
+resueltos por algoritmos voraces,
+sólo para ilustrar cómo funcionan.
+
+6
+00:00:19,190 --> 00:00:23,511
+Y nuestro primer problema es
+un problema sobre el número más grande.
+
+7
+00:00:23,511 --> 00:00:27,019
+Y para este problema, seguramente seas 
+capaz de proponer un algoritmo voraz
+
+8
+00:00:27,019 --> 00:00:29,720
+por ti mismo, porque es realmente
+una manera muy natural de hacerlo.
+
+9
+00:00:30,770 --> 00:00:33,091
+Así que imagina esta situación.
+
+10
+00:00:33,091 --> 00:00:37,674
+Estás tratando de conseguir un trabajo en una compañía
+y ya has tenido algunas entrevistas, y
+
+11
+00:00:37,674 --> 00:00:39,081
+todo ha ido bien.
+
+12
+00:00:39,081 --> 00:00:42,589
+Ahora tienes las entrevista final
+con el jefe, y
+
+13
+00:00:42,589 --> 00:00:45,471
+te dice que
+te dará una oferta
+
+14
+00:00:45,471 --> 00:00:48,509
+Pero en lugar de negociar
+tu salario contigo,
+
+15
+00:00:48,509 --> 00:00:52,500
+te dará una serie de trozos
+de papel con unos digitos escritos en ellos.
+
+16
+00:00:53,510 --> 00:00:57,180
+y tu tarea será organizar
+esos digitos en una fila, tal que
+
+17
+00:00:57,180 --> 00:01:00,890
+cuando leas el número de izquierda
+a derecha, ese será tu salario.
+
+18
+00:01:01,890 --> 00:01:03,920
+Por tanto, básicamente, tienes un problema
+
+19
+00:01:03,920 --> 00:01:07,780
+Dados unos pocos dígitos, organizarlos
+en el número más alto posible
+
+20
+00:01:08,910 --> 00:01:11,670
+Y ahí hay unos pocos ejemplos
+de esos números en las transparencias.
+
+21
+00:01:13,190 --> 00:01:16,559
+¿Cuál piensas que será la
+solución correcta a este problema?
+
+22
+00:01:18,520 --> 00:01:22,780
+Por supuesto,
+la respuesta correcta es 997531.
+
+23
+00:01:22,780 --> 00:01:26,963
+Y es bastante obvio que deberías
+organizar los números del mayor al
+
+24
+00:01:26,963 --> 00:01:28,931
+más pequeño, de izquierda a derecha.
+
+25
+00:01:28,931 --> 00:01:32,520
+Pero veamos cómo
+el algoritmo voraz lo hace.
+
+26
+00:01:33,740 --> 00:01:38,640
+La estrategia voraz es empezar
+con una lista de dígitos y
+
+27
+00:01:38,640 --> 00:01:41,641
+buscar el dígito más grande en la lista.
+
+28
+00:01:41,641 --> 00:01:47,121
+Añadirlo al final del número y
+eliminarlo de la lista.
+
+29
+00:01:47,121 --> 00:01:52,410
+Y entonces repetir este proceso hasta que
+no quedan dígitos en la lista.
+
+30
+00:01:52,410 --> 00:01:57,000
+Por tanto en el siguiente paso encontraremos
+el dígito más grandes, que es de nuevo 9.
+
+31
+00:01:57,000 --> 00:02:02,625
+Lo añadiremos al final del número por la derecha
+y lo eliminaremos de la lista.
+
+32
+00:02:02,625 --> 00:02:07,680
+Después encontraremos el 7 como el dígito
+más grande añadido a la derecha y
+
+33
+00:02:07,680 --> 00:02:09,300
+lo eliminamos de la lista.
+
+34
+00:02:09,300 --> 00:02:15,550
+Y entonces continuaremos con 5, 3 y 1.
+
+35
+00:02:18,310 --> 00:02:21,710
+Y obtenemos la respuesta correcta,
+997531.
+
+36
+00:02:21,710 --> 00:02:25,820
+Y en el próximo vídeo,
+diseñaremos un algoritmo
+
+37
+00:02:25,820 --> 00:02:30,450
+para encontrar el mínimo número de repostajes
+durante un viaje largo por coche.
+
+38
+00:02:30,450 --> 00:02:33,570
+Veremos las similitudes
+entre estos dos problemas,
+
+39
+00:02:33,570 --> 00:02:37,060
+el número más grande y
+el problema de repostaje de un coche.
+
+40
+00:02:37,060 --> 00:02:39,630
+Y definiremos cómo los algoritmos
+voraces funcionan en general.

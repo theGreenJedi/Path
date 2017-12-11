@@ -1,0 +1,267 @@
+1
+00:00:00,380 --> 00:00:04,560
+We now know how to compute the edit
+distance or to compute the optimal
+
+2
+00:00:04,560 --> 00:00:10,510
+alignment by filling in the entries
+in the dynamic programming matrix.
+
+3
+00:00:10,510 --> 00:00:14,830
+But it doesn't tell us yet
+how to construct the alignment
+
+4
+00:00:14,830 --> 00:00:19,250
+two rows with the first row
+representing the first sequence and
+
+5
+00:00:19,250 --> 00:00:21,239
+the second row representing
+the second sequence.
+
+6
+00:00:22,250 --> 00:00:23,620
+Here's an idea.
+
+7
+00:00:23,620 --> 00:00:29,570
+Let's use the backtracking pointers
+that we constructed while filling in
+
+8
+00:00:29,570 --> 00:00:33,965
+the dynamic programming matrix to reconstruct
+optimal alignment between strings.
+
+9
+00:00:35,040 --> 00:00:40,056
+We can start by noting
+that any path from (0, 0)
+
+10
+00:00:40,056 --> 00:00:45,072
+to (i, j) in the
+dynamic programming matrix
+
+11
+00:00:45,072 --> 00:00:51,459
+spell an alignment of an i prefix
+of A with a j prefix of B.
+
+12
+00:00:51,459 --> 00:00:56,492
+For example let's start the line in
+the sequences, which means let's start
+
+13
+00:00:56,492 --> 00:01:02,081
+traveling from the point 0, 0 to the point
+n, m in our dynamic programming matrix.
+
+14
+00:01:02,081 --> 00:01:07,706
+As soon as we move along diagonal left it
+will correspond to either mismatch or
+
+15
+00:01:07,706 --> 00:01:11,287
+match, then we'll continue
+using horizontal or
+
+16
+00:01:11,287 --> 00:01:16,170
+vertical edges and it will correspond
+to insertions or deletions.
+
+17
+00:01:17,360 --> 00:01:19,950
+Then we will use once again diagonal edge.
+
+18
+00:01:19,950 --> 00:01:23,970
+In this case it is a match,
+and you'll continue
+
+19
+00:01:23,970 --> 00:01:28,820
+by constructing the
+n-alignment of two strings.
+
+20
+00:01:28,820 --> 00:01:35,630
+Please note that the constructed path
+corresponds to distance A and is not
+
+21
+00:01:35,630 --> 00:01:42,587
+an optimal alignment because we know that
+an optimal alignment distance is 5.
+
+22
+00:01:43,770 --> 00:01:49,780
+To construct an optimal alignment we will
+use the backtracking pointers by starting
+
+23
+00:01:49,780 --> 00:01:55,440
+from the last vertex in this matrix
+
+24
+00:01:55,440 --> 00:02:01,259
+particularly from this vertex where
+the added distance is recorded as 5.
+
+25
+00:02:02,780 --> 00:02:05,561
+Using backtracking pointers we see that
+
+26
+00:02:05,561 --> 00:02:10,340
+there are two possible ways to
+arrive to this last vertex.
+
+27
+00:02:10,340 --> 00:02:13,180
+Let's arbitrarily choose one of them.
+
+28
+00:02:13,180 --> 00:02:17,810
+One of them corresponds to a mismatch and
+another corresponds to insertion.
+
+29
+00:02:17,810 --> 00:02:23,790
+So let's arbitrarily choose a mismatch
+edge that will correspond to
+
+30
+00:02:23,790 --> 00:02:29,470
+mismatch between j and i,
+then from the previous point there is only
+
+31
+00:02:29,470 --> 00:02:36,010
+one way to move into this point and
+it will correspond to an indel
+
+32
+00:02:36,010 --> 00:02:41,470
+that will continue further,
+match, further, further, further,
+
+33
+00:02:41,470 --> 00:02:46,560
+further, and we will finally
+arrive to the initial point at
+
+34
+00:02:46,560 --> 00:02:51,640
+the same time constructing the optimal
+alignment between two strings.
+
+35
+00:02:52,980 --> 00:02:57,100
+The output alignment pseudoode
+implement's this idea.
+
+36
+00:02:57,100 --> 00:03:05,320
+We simply look at the backtracking
+pointers that enters in the node (i, j).
+
+37
+00:03:05,320 --> 00:03:11,080
+If they arrive to node (i, j)
+by using a vertical edge
+
+38
+00:03:11,080 --> 00:03:17,140
+that we will simply output
+one column of the alignment with
+
+39
+00:03:17,140 --> 00:03:19,810
+a of i in the first row.
+
+40
+00:03:21,200 --> 00:03:26,010
+If on the other hand it corresponds
+to horizontal edge we output
+
+41
+00:03:26,010 --> 00:03:31,540
+column with b of j in the second row,
+and
+
+42
+00:03:31,540 --> 00:03:37,110
+if it corresponds to a diagonal
+edge we output a column
+
+43
+00:03:37,110 --> 00:03:43,320
+of alignment with a of i in the first
+row and v of j in the second row.
+
+44
+00:03:44,480 --> 00:03:49,840
+It appears that we actually need
+to store all backtracking pointers
+
+45
+00:03:49,840 --> 00:03:54,670
+to output alignment, but
+this slightly modified
+
+46
+00:03:54,670 --> 00:03:59,940
+pseudocode tells you that you can compute
+backtracking pointers by analyzing
+
+47
+00:03:59,940 --> 00:04:03,670
+entries in the dynamic programming
+matrix and thus saving a little space.
+
+48
+00:04:05,470 --> 00:04:08,270
+Edit distance is just one
+
+49
+00:04:08,270 --> 00:04:12,980
+many applications of string comparisons
+in various disciplines that range
+
+50
+00:04:12,980 --> 00:04:18,450
+from analyzing internet pages
+to finding similar genes.
+
+51
+00:04:18,450 --> 00:04:22,330
+We started this lecture from
+the example of gene hunt for
+
+52
+00:04:22,330 --> 00:04:28,110
+cystic fibrosis: one of the first
+successes of the human genome project.
+
+53
+00:04:28,110 --> 00:04:32,618
+If you want to learn more about
+comparing genes, protein, and
+
+54
+00:04:32,618 --> 00:04:39,210
+genomes you may enroll in the Coursera
+specialization called Bioinformatics or
+
+55
+00:04:39,210 --> 00:04:44,350
+you can read the book Bioinformatics
+Algorithms: the Active Learning Approach.

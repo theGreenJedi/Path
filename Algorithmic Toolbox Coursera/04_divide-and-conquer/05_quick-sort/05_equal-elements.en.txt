@@ -1,0 +1,71 @@
+In this video we address the issue
+of equal elements in the. So recall that we proved the upper
+bound on the running time of the render Greek algorithm, in the assumption
+that all the elements inside the given array are prioritized different. And actually,
+we used essentially these assumptions. So, recall that we estimated
+the probability that two elements, A prime of I and
+A prime of J are comparative. And we argued that if any element
+between them is selected, the appearance is that they
+will not become period. However, if they are equal, so
+if A prime of A is equal to A prime of J, this means actually that all
+the elements in this range are equal. So if we select any element inside this
+range, in the middle of this range, as a pivot, then it is not true that
+these two elements will go into different parts with respect to this element, this
+is just because all of the elements inside this range are equal, which means that if
+we partition with respect of this element, all of the elements in this range
+will be [INAUDIBLE] this element. So, they all will be in the left part
+with respect to this element, okay? So our analysis doesn't work for
+equal elements but let's see what happens in real life. What happens if we run
+the greek sort algorithm for the array in which there
+are equal elements. For this, let's use the following
+online visualization. This visualization shows
+how different selection, different certain algorithms that
+are formed on different datasets. So there are eight certain algorithms here where we are now
+interested in this QuickSort algorithm. And there are four different
+types of datasets. So the field datasets is
+just random sequence. The next one is in sorted sequence, the next one is a reversed sequence and
+the next one which is most interesting to us at the moment is a sequence that
+contains a few unique elements. So let's see how the greek sort
+algorithm performs on the last dataset. So for this let's just run all
+the algorithms, on all data sets. So let's see what happens here. So you, you may notice now that, for
+example, have already sorted everything. And while greek sort have just finished
+to sort the last, the last data set. So Greek sort is not, is not so fast on data sets that contains few
+unique elements and this is why. So just consider a dataset that consists of elements that are all
+equal to each other. So all elements are equal to each. This means that the selection,
+the partition procedure always partitions the array with
+respect to the element x, right? And then in this case, one of the parts, namely the part of the elements that
+are greater than x, is just empty. It has size zero. And the other part has size n minus one. So the records and equalities, the records
+equalities on the running time of how a algorithm on such a data set
+always satisfies the following relation, T of n is equal to T of n minus 1
+plus a linear term plus T of 0. And we know already, so
+this is an unbalanced partition. We know the responds to
+the quadratic right in time so, which means that the running time of the
+quick sort algorithm a very simple array. So it contains all the elements
+of this array are equal. Which means that actually
+this array is already sorted. In this array our quick sort
+algorithm spends a quadratic time to sort it to overcome this
+difficulty we'll do the following. Instead of partitioning
+our rate into two regions. Namely these regions contain all elements that contain all x and
+all elements that are greater than x. We are going to partition
+into three parts. The corresponding partition procedure
+is usually called three-way partition. Formally, it returns two indices. m1 and m2, such that, all the elements inside the region
+from m1 to m2 are equal to x. All the elements to the left of
+this region are smaller than x. All the elements that are to the right
+of this region are greater than x. So this is how it looks pictorially. We have three regions. So, from l to m1 minus 1, we have all
+elements that are smaller than x. In the region from m1 to m2,
+we have all elements that are equal to x. In the region from m2 plus 1 to r, we have
+all elements that are greater than x. This procedure actually can be
+implemented in a similar way to their regional partition procedure. It can be implemented ties with a single
+kind of area with maintaing their regions or it can be implemented with two counts. So we first split our rate
+into regions which contain elements of most x or greater than x and
+then we split the region into two parts. Well, this is how the modified randomized
+quick sort algorithm is going to apply. So we just replace it, the cold partition procedure by
+a cold two partition suite procedure. Now we have three regions, and, actually
+the middle region is in its final place, so we do not touch it after
+the partition procedure. We make two recursive calls to the first
+region and to the last region. So, let's see whether the resulting
+algorithm is indeed Greek. And for this,
+let's use the same visualization. The resulting algorithm is
+shown here in the last column. Let's, once again, run all the algorithms
+and see what happens in the last column. Well we see that now, the results in
+Greek algorithm, is indeed Greek.

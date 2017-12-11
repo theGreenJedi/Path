@@ -1,0 +1,101 @@
+In this video, we'll provide the full
+outline of the Greek word algorithm. So as you remember that
+algorithm is recursive, for this reason we pass through this
+procedure [INAUDIBLE] a and also doing this is l and
+r in this array for left and right and this procedure saw the sub array
+inside r within this is form l to r. Well we first check
+whether l is at least r. And if yes then this means that they
+can respond in sub array contains at most one element. And this in turn means that nothing
+needs to be done so we just return. Otherwise we call the partition
+procedure with the same parameters. It returns an index m between l and r. So it rearranges all the elements inside this sub array with
+the following property. After the call to this procedure,
+A of m stays in its final position, meaning that all the elements to the left
+of an element A of m are at most A of m. And all the elements to the right
+are greater than A of m. Well once again,
+after the call to the partition procedure, A of m stays in its final position. So what remains to be done is to sort all
+the elements that are at most A to m. They stay to the left of A of m, and
+all the elements that stay to the right. So we do this just by
+making two recursive calls. So this is how the wall
+algorithm looks pictorially. Again, we are given an array A,
+with two indices l and r, and we are going to sort the sub
+array inside from indices L to R. So with first call the participation
+procedure which parameter A, l and r. And it gives us an index m between l and
+r was the following property. All elements to the left of them
+are at most the element A of m. All the elements to the right
+are great as an A of m. Then we make two recursive calls to
+sort the left part within this is from l to m- 1 and to solve the right
+part within this is from m + 1 to r. And immediately after these two
+recursive call, we have a sorted array. So before showing the actual
+of the partition procedure, we explain it's main ideas again,
+on a toy example. So first of all, we will take is
+the element A[l] and denoted by x. This will be called our pivot element. So what pivot is exactly is
+the element with respect to which we're going to partition our sub array. So x will be placed in its final position. So our goal now is to rearrange all the
+elements inside our current sub array so that x stays in its final position and
+all the elements to the left of x. At most x and all the elements to
+the right of x are greater than x. So we will do this gradually increasing
+the region of already discovered elements. So for this we will use a counter i, and
+we will maintain the following invariant. So I will go from l + 1 to r, and at each point of time when we
+have already have the i element we will keep to region in sizes
+these region from l + 1 to i. In the first region from l + y to j, we
+will keep all elements that are at most x. In the second adjacent region
+within this is from j + 1 to i we will have all elements
+that are greater than x. Let's see it for example. So I assume that we are somewhere
+in the middle of this process. In this case, x is equal to 6, and we need to partition all
+the elements with respect to x. We already have two sub regions so
+in the red region, we keep all elements that are at most x. There are at most 6 in the blue
+region we have holds elements that are greater than 6. Okay, now we move i to the next
+position and we discover the element 9. So this element is greater than 6, so we just need to extend the second region,
+the blue region. The region of elements
+is at greater than 6. So in this case we just do nothing. Well the next case is more interesting,
+we move i to the next position, and we discover the element 4. In this case, we need to somehow
+move this element to the red region, to the region of elements which at most 6. So to do this we just
+swoop it to currently first element of the blue region,
+in this case was 9. So if we do this 4 will be the last
+element of currently red region and 9 will go to the blue region. So we do this and now,
+we increase also the just to reflect the fact that our red
+region had just been extended. Then we will find to the next element so
+we discover element 7 which is greater than 6 which means that we
+can just extend the blue region, then we discover another
+element which is 6. 6 is at most 6 and
+it is actually equal to 6, so we need to move it to the red region. Again, we swap it with the first
+element of the blue region and then we extend the red region. We increase g to reflect the fact that
+the red region has just been extended, then we discover another element,
+which is at most 6. We move it to the end of the red region. And finally, what we also need to do
+in the very end is to move the pivot element which is 6 in this
+case to its final position. And its final position actually
+can easily be found in this case. So we have red region and
+we have blue region. In red region, all the elements
+are at most 6, and in blue region, all the elements are greater than 6. So we can just swap 6 with the last
+element of the red region. In this case it is 1, so
+if we swap these two elements then you can see that all the elements in the blue
+region are indeed greater than 6. All the elements in the red
+region are smaller than 6. So we are done with this
+partition procedure. Where now ready to present the Soutacot
+of the petition procedure. We called it what we're going to
+do is to place some element x, which is called the pivot, into it's final
+place so that all the elements before x are at most x and all the elements
+after x is greater than x. So as the pivot element in this procedure,
+we are going to use just the first element of the correspondence of rate,
+so x is assigned A of l. We're also going to remain
+the following subregions. So first of all, we will readily increase
+the region of discovered elements. So i goes from l +1 to r and
+inside this region of [INAUDIBLE] elements,
+we will maintain two sub regions. In the first region with
+indices from l +1 to j, we will keep all of
+the elements at most x. In the second region with indices from j+1
+to i, we will keep all of the elements that are greater than x and we will
+gradually and freeze the value of i. So when i is increased, so
+I assumed that i has just been increase so we discovered a new element of A of i. So if A of i is greater
+than x then just the second of region of elements
+that are greater than x, is extended automatically and we do
+not need to do anything in this case. However, if the newly discovered
+element is at most x, then we need to move it
+to the first region. So we do this as follows. So we just increase the value
+of j to indicate the fact that the first region has just been increased,
+and then swap the elements. A[j] and A[i], so this way, we just maintain our invariant
+each time when i is increased. So in the very end,
+when i reaches the value of r, we also need to place our initial
+element that states that at the beginning our pivot
+between our two regions. So for this we just swap elements A[l],
+so this is our pivot with element A[j]. And we then return the value j as
+an index of our pivot element.

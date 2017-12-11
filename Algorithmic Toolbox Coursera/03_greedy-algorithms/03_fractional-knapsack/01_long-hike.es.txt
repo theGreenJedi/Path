@@ -1,0 +1,26 @@
+Hola. En esta lección aprenderás un  algoritmo
+ para determinar qué productos comestibles y en qué cantidades debes llevar en una excursión muy larga para que maximices su valor energético total. Entonces, planeas una excursión larga. Tomará unos cuantos días o a la mejor semanas pero no sabes exactamente cuántos días tomará. Así que para estar seguro, llevas suficiente comida, y tienes una mochila que puede cargar hasta 15 kg de comida. Y ya compraste algo de queso, jamón y nueces, y tal vez otra comida. Quieres que quepa lo más que se pueda en la mochila, de forma que se maximice las calorías que puedas obtener. Por supuesto, puedes cortar el queso, el jamón, puedes seleccionar unas cuantas nueces. Y entonces meter todo en la mochila. Para resolver este problema de maximización, necesitamos de nuevo reformularlo en términos matemáticos. Y así tenemos un ejemplo del problema clásico de la mochila que dice así: Tenemos n artículos con peso de w1 a wn, y valores de v1 a vn, y una bolsa con capacidad W. Queremos maximizar el valor total de fracciones
+ de los artículos que quepan en la bolsa. En este caso, los pesos se corresponden
+ con los pesos de la vida real y los valores son los valores energéticos 
+de los productos de comida que compraste. Y aquí está un ejemplo, y denotaremos con dólares (no calorías) el valor del producto,
+ y el peso sólo con números. Así que por ejemplo, el primer artículo tiene un valor de $20 y un peso de 4, el segundo artículo tiene un valor de $18 y peso 3, y el tercer artículo tiene un valor de $14 y peso 2. Y tenemos una mochila con capacidad de 7. Hay unas cuantas formas en las que
+ podemos llenar la mochila. Por ejemplo, una de ellas es meter los primeros dos artículos completos en la mochila. Entonces, el valor total es la suma de los valores de esos dos valores, que es $38. Podemos mejorar eso. ¨Por ejemplo, tomar el primer y el tercer artículos completos, y sólo una tercera parte del segundo artículo para un total de $40. Podemos hacerlo mejor tomando el tercer
+ y el segundo artículos completos, y sólo la mitad del primer artículo, lo que nos da $42. Y resulta que éste es el modo óptimo de hacerlo. Ahora queremos crear un algoritmo voraz que resolverá este problema de maximización, y necesitamos hacer una elección 
+voraz y hacer un movimiento seguro. Y para hacer eso, tenemos que checar 
+el valor por unidad de peso. Por ejemplo, para el primer artículo,
+ su valor por unidad de peso es $5, para el segundo artículo, es $6/unidad,
+ y para el tercero es $7/unidad. Así que, aunque el primer artículo es más valioso, el tercer artículo tiene el máximo valor por unidad. Y por supuesto, tenemos la intuición de que
+ probablemente deberíamos meter primero los artículos con máximo valor por unidad. Y realmente, el movimiento seguro es primero intentar meter el valor con máximo valor por unidad. Hay un lema que dice: siempre hay una solución óptima a nuestro problema que usa lo más posible de un artículo
+ con máximo valor por unidad de peso. ¿Y qué queremos decir con lo más posible? Bueno, es ya sea usar el artículo
+ completo si es que cabe en la mochila, o, si la capacidad de la mochila es
+ menor del peso de nuestro artículo, entonces sólo llena la mochila con
+ lo que alcance de este artículo. Probemos que éste es realmente un movimiento seguro. Lo probaremos siguiendo este ejemplo. Entonces, primero supongamos que tenemos una solución óptima, y supongamos que en esta solución
+ óptima no usamos lo más que podamos del mejor artículo, con el mayor valor por unidad de peso. Entonces toma algún artículo que hayamos usado en esta solución y sepáralo en dos partes, una parte del mismo tamaño de lo que tenemos del mejor artículo, y la otra parte es el resto. Entonces, podemos substituir la primera parte por el mejor artículo. Así, por ejemplo, en este caso sustituimos la mitad del primer artículo
+ con el segundo (el tercero, el mejor). Por supuesto, en esta parte, el valor total aumentará, porque el valor por unidad de peso es mejor para el mejor
+ artículo que para el artículo que usamos. Y en el caso general, esto también funcionará. Así que, seremos capaces de reemplazar
+ parte del artículo que usamos por el mejor artículo completo, o, 
+podemos reemplazar el artículo completo que usamos por una parte del mejor artículo. Y en cualquier caso, si podemos hacer tal substitución, por supuesto, el valor total aumentará porque el mejor artículo tiene mejor valor por unidad de peso, así que por cada unidad de peso tendremos mayor valor. Esto nos da un algoritmo voraz para resolver nuestro problema. Lo que haremos es, mientras la mochila
+ no esté llena, haremos una elección voraz. Escogeremos el número i del artículo con máximo valor de vI sobre wi, que es el valor por unidad de peso. Y si este artículo cabe completo en la mochila,
+ entonces toma todo el artículo. De otro modo, si hay poco espacio en la mochila, toma lo más que se pueda del artículo
+ para llenar por completo la mochila. Y al final devolveremos el valor total 
+de los artículos que tomamos y cuánto de éstos tomamos.

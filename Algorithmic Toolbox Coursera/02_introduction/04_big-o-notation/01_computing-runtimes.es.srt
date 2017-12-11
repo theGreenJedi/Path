@@ -1,0 +1,692 @@
+1
+00:00:03,718 --> 00:00:08,540
+Hola a todos, bienvenidos de vuelta a la
+ especialización de estructuras de datos y algoritmos.
+
+2
+00:00:08,540 --> 00:00:13,150
+Hoy vamos a hablar sobre lo que pasa 
+con los tiempos de ejecución
+
+3
+00:00:13,150 --> 00:00:16,740
+y entender realmente cuánto tiempo le 
+lleva trabajar a un programa.
+
+4
+00:00:16,740 --> 00:00:19,890
+Entonces, en particular, hoy vamos a profundizar realmente
+
+5
+00:00:19,890 --> 00:00:22,420
+Digo, hasta este punto hemos usado
+ esta cuenta aproximada de
+
+6
+00:00:22,420 --> 00:00:25,410
+número de líneas de código ejecutado.
+
+7
+00:00:25,410 --> 00:00:29,680
+Y hoy vamos a hablar sobre qué tan preciso es esto y
+
+8
+00:00:29,680 --> 00:00:32,630
+qué tipo de complicaciones aparecen.
+
+9
+00:00:32,630 --> 00:00:36,580
+Y, en particular veremos que si
+ queremos algo que fundamantalmente
+
+10
+00:00:36,580 --> 00:00:40,762
+sea una medida precisa del tiempo de ejecución, 
+resultaría en un inmenso caos.
+
+11
+00:00:40,762 --> 00:00:44,140
+Tendríamos que llamar a todo tipo de datos extra que no son
+
+12
+00:00:44,140 --> 00:00:45,970
+convenientes realmente para nosotros.
+
+13
+00:00:45,970 --> 00:00:47,780
+Así que, estamos hablando realmente del
+
+14
+00:00:49,720 --> 00:00:53,770
+problema que aparece cuando calculamos
+ tiempos de ejecución en algoritmos.
+
+15
+00:00:53,770 --> 00:00:58,564
+Algo que no vamos a resolver realmente
+ hasta la siguiente lección.
+
+16
+00:00:58,564 --> 00:01:01,230
+Así que, para empezar, veamos 
+este algoritmo que teníamos para
+
+17
+00:01:01,230 --> 00:01:03,270
+calcular los números de Fibonacci.
+
+18
+00:01:03,270 --> 00:01:05,400
+Recuerda, creamos un arreglo,
+
+19
+00:01:05,400 --> 00:01:07,756
+asignamos el elemento cero a 0,
+
+20
+00:01:07,756 --> 00:01:09,700
+el primer elemento a 1,
+
+21
+00:01:09,700 --> 00:01:14,598
+entonces tenemos este gran bucle for, 
+donde el elemento i-ésimo es la suma de
+
+22
+00:01:14,598 --> 00:01:17,443
+los elementos i-1 y i-2, y
+
+23
+00:01:17,443 --> 00:01:21,254
+al final del día devolvemos el elemento n-ésimo.
+
+24
+00:01:21,254 --> 00:01:25,839
+Así que, determinamos que cuando corremos 
+este programa ejecutamos alrededor de 2n+2 líneas
+
+25
+00:01:25,839 --> 00:01:27,050
+de código,
+
+26
+00:01:27,050 --> 00:01:31,963
+pero, lo que deberíamos preguntarnos es,
+ ¿es este número de líneas ejecutadas
+
+27
+00:01:31,963 --> 00:01:36,586
+realmente un tipo de descripción precisa
+ del tiempo de ejecución del algoritmo?
+
+28
+00:01:36,586 --> 00:01:41,664
+Quiero decir, de alguna manera, implícitamente, 
+esta medida de líneas de código
+
+29
+00:01:41,664 --> 00:01:48,050
+supone que cualesquiera dos líneas de
+ código son comparables la una a la otra. 
+
+30
+00:01:48,050 --> 00:01:51,750
+Son algo así como una operación básica.
+
+31
+00:01:51,750 --> 00:01:55,010
+Entonces, vamos a ver este programa en mayor detalle y
+
+32
+00:01:55,010 --> 00:02:00,340
+ver qué pasa en algunas de estas líneas de 
+código y ver qué tan válida es esta suposición.
+
+33
+00:02:01,700 --> 00:02:05,050
+Así que, para empezar, creamos este arreglo.
+
+34
+00:02:05,050 --> 00:02:08,030
+Y, ¿qué pasa cuando tratas de inicializar un arreglo?
+
+35
+00:02:09,170 --> 00:02:12,450
+Bueno, esto depende mucho de tu 
+sistema de manejo de memoria.
+
+36
+00:02:12,450 --> 00:02:16,300
+Fundamentalmente, todo lo que tienes que
+ hacer es encontrar algún espacio de memoria
+
+37
+00:02:16,300 --> 00:02:18,800
+y entonces tener un indicador para la primera posición.
+
+38
+00:02:19,990 --> 00:02:23,390
+Por el otro lado, qué tan exacto encuentras esto, 
+puede que tengas que revolver algunas otras
+
+39
+00:02:23,390 --> 00:02:28,240
+cosas para hacerle espacio, puede que, 
+después de colocar el arreglo, tengas que
+
+40
+00:02:28,240 --> 00:02:33,040
+inicializar todas las entradas a cero, 
+para que no tengas basura ahí.
+
+41
+00:02:33,040 --> 00:02:35,040
+Y, entonces no es completamente claro,
+
+42
+00:02:35,040 --> 00:02:39,765
+depende un poco en cómo exactamente 
+está tu programa siendo interpretado
+
+43
+00:02:39,765 --> 00:02:42,320
+Pero, podría ser muy rápido.
+
+44
+00:02:42,320 --> 00:02:47,348
+Podría tomar un buen rato, 
+dependiendo de las circunstancias.
+
+45
+00:02:47,348 --> 00:02:48,660
+Veamos la siguiente línea,
+
+46
+00:02:48,660 --> 00:02:52,660
+esta es sólo una simple asignación, 
+ponemos el 0 en la entrada cero.
+
+47
+00:02:52,660 --> 00:02:54,850
+Sin embargo, si realmente ves esto
+
+48
+00:02:54,850 --> 00:03:00,160
+al nivel de la máquina, estás haciendo algo 
+más de trabajo, necesitas cargar el puntero
+
+49
+00:03:00,160 --> 00:03:04,480
+al elemento cero del arreglo, a la mejor tengas
+ que hacer algo de aritmética para el puntero,
+
+50
+00:03:04,480 --> 00:03:08,850
+necesites entonces guardar este cero
+ literal en ese lugar de la memoria.
+
+51
+00:03:08,850 --> 00:03:12,410
+Podría no ser una operación sino unas cuantas.
+
+52
+00:03:13,930 --> 00:03:16,560
+Similarmente, cuando fijamos el primer elemento a uno,
+
+53
+00:03:16,560 --> 00:03:19,470
+tienes que hacer este similar conjunto de cosas.
+
+54
+00:03:21,030 --> 00:03:26,214
+Después tenemos este bucle for, y 
+con éste, de nuevo, cada vez que
+
+55
+00:03:26,214 --> 00:03:30,600
+tengas que hacer unas cuantas cosas, 
+necesitas incrementar el valor de i,
+
+56
+00:03:30,600 --> 00:03:36,146
+entonces comparar i con n para saber si tienes que salir del bucle
+
+57
+00:03:36,146 --> 00:03:38,383
+y si lo es, tienes que bifurcar,
+
+58
+00:03:38,383 --> 00:03:44,135
+tienes que moverte a otra instrucción en
+ tu programa después del bucle for.
+
+59
+00:03:44,135 --> 00:03:48,487
+Después hay unas adiciones, aquí tenemos
+ que hacer algunas cosas, tenemos que
+
+60
+00:03:48,487 --> 00:03:53,070
+buscar dos valores en el arreglo, 
+escribir un tercer valor en el arreglo.
+
+61
+00:03:53,070 --> 00:03:56,280
+Todo esto implica el mismo tipo de aritmética de punteros
+
+62
+00:03:56,280 --> 00:04:00,740
+y búsquedas de memoria, y agregados
+ de las que hablamos antes, pero
+
+63
+00:04:00,740 --> 00:04:02,090
+también tenemos que hacer esta suma.
+
+64
+00:04:03,210 --> 00:04:07,780
+Y, si fuera sólo una simple suma, tal vez no sería la gran cosa.
+
+65
+00:04:08,810 --> 00:04:12,470
+Sin embargo, esta es la suma de dos números de Fibonacci, y
+
+66
+00:04:12,470 --> 00:04:16,650
+si recuerdas las clases pasadas, encontramos 
+que los números de Fibonacci son
+
+67
+00:04:16,650 --> 00:04:22,350
+muy grandes, de hecho tan grandes que
+ probablemente no caben en una simple máquina
+
+68
+00:04:22,350 --> 00:04:26,690
+así que sumar dos de ellos requiere 
+una cantidad de tiempo no trivial.
+
+69
+00:04:28,120 --> 00:04:31,589
+Así que, de algún modo, no sólo tienes que hacer todo esto,
+
+70
+00:04:31,589 --> 00:04:36,355
+aritmética de arreglos, sino que la suma de los números de 
+
+71
+00:04:36,355 --> 00:04:40,174
+Fibonacci es realmente una operación muy poco trivial.
+
+72
+00:04:40,174 --> 00:04:45,117
+Y entonces hacemos esta devolución donde 
+tenemos que hacer un vector de consulta que implica
+
+73
+00:04:45,117 --> 00:04:49,845
+todo el tipo de cosas de las que hablamos antes 
+y entonces tenemos que hacer una devolución
+
+74
+00:04:49,845 --> 00:04:52,998
+que va a operar con el apilamiento del programa y
+
+75
+00:04:52,998 --> 00:04:55,748
+aparecer un nivel y devolver una respuesta.
+
+76
+00:04:55,748 --> 00:05:00,349
+Así que, en conclusión, este programa 
+tiene seis líneas de código pero
+
+77
+00:05:00,349 --> 00:05:06,410
+la cantidad de trabajo hecho en las distintas
+ líneas de código es muy, muy diferente.
+
+78
+00:05:06,410 --> 00:05:12,080
+Lo que pasa exactamente en cada línea 
+de código no es la misma cosa. 
+
+79
+00:05:12,080 --> 00:05:15,080
+Quizás queramos reconsiderar el hecho de que esta cuenta,
+
+80
+00:05:15,080 --> 00:05:18,650
+el número de líneas de código, es nuestra forma 
+de contar el tiempo de ejecución.
+
+81
+00:05:18,650 --> 00:05:20,500
+Tal vez necesitemos contar otra cosa.
+
+82
+00:05:21,970 --> 00:05:25,110
+Entonces, ¿qué más podemos hacer?
+
+83
+00:05:25,110 --> 00:05:29,864
+Bueno, si quieres ser exacto en lo que nos interesa,
+
+84
+00:05:29,864 --> 00:05:34,090
+lo que necesitas es decir, bueno, 
+vamos a tomar este programa,
+
+85
+00:05:34,090 --> 00:05:37,272
+lo vamos a correr en una computadora real
+
+86
+00:05:37,272 --> 00:05:41,855
+y nos gustaría saber cuánto tiempo le llevará
+
+87
+00:05:41,855 --> 00:05:47,406
+al programa para terminar. Eso es 
+fundamentalmente lo que queremos saber.
+
+88
+00:05:47,406 --> 00:05:52,119
+Desafortunadamente, para averiguar eso 
+necesitamos saber todo tipo de detalles
+
+89
+00:05:52,119 --> 00:05:53,730
+resultar.
+
+90
+00:05:53,730 --> 00:05:57,400
+Necesitamos saber cosas como la velocidad
+ de la computadora que estamos ejecutando,
+
+91
+00:05:57,400 --> 00:06:00,070
+si la corres en una super-computadora
+
+92
+00:06:00,070 --> 00:06:03,970
+le tomará menos tiempo que si lo corres en tu celular.
+
+93
+00:06:05,360 --> 00:06:08,730
+La arquitectura del sistema de la computadora también importa.
+
+94
+00:06:08,730 --> 00:06:13,380
+Exactamente cuáles operaciones tu CPU
+ soporta y exactamente cuánto tiempo le lleva
+
+95
+00:06:13,380 --> 00:06:17,230
+comparado con otras, todo eso tiene
+ un efecto en el tiempo de ejecución.
+
+96
+00:06:18,540 --> 00:06:22,080
+El compilador que usas también hace la diferencia.
+
+97
+00:06:22,080 --> 00:06:26,365
+En la práctica escribes el programa en algún lenguaje de
+
+98
+00:06:26,365 --> 00:06:29,020
+alto nivel como C, Java o Python,
+
+99
+00:06:29,020 --> 00:06:33,950
+o algo, y entonces lo corres por medio de un 
+compilador que lo convierte en código de máquina.
+
+100
+00:06:33,950 --> 00:06:36,470
+Y entonces el complilador,
+
+101
+00:06:36,470 --> 00:06:39,880
+no está haciendo nada más algo completamente obvio,
+
+102
+00:06:39,880 --> 00:06:44,150
+está llevando a cabo todo tipo de
+ optimizaciones interesantes a tu código.
+
+103
+00:06:44,150 --> 00:06:47,280
+Y qué optimizaciones realiza, 
+
+104
+00:06:47,280 --> 00:06:50,180
+y cómo interactúan con lo que has escrito
+
+105
+00:06:50,180 --> 00:06:53,030
+todo eso tendrá un impacto en el tiempo de ejecución.
+
+106
+00:06:54,550 --> 00:06:58,050
+Finalmente, te tendrás que  preocupar por
+ detalles sobre la jerarquía de memoria.
+
+107
+00:06:58,050 --> 00:07:01,160
+Si tu cálculo completo cabe en el caché, 
+
+108
+00:07:01,160 --> 00:07:03,960
+correrá probablemente muy rápido.
+
+109
+00:07:03,960 --> 00:07:06,770
+Sin embargo, si vas a hacer búsquedas en la RAM
+
+110
+00:07:06,770 --> 00:07:08,040
+las cosas serán mucho más lentas.
+
+111
+00:07:08,040 --> 00:07:11,560
+Búsquedas en la RAM realmente toman
+ una cantidad seria de tiempo.
+
+112
+00:07:11,560 --> 00:07:16,650
+Si, por el otro lado, te quedas sin memoria
+ RAM y tienes que empezar a escribir
+
+113
+00:07:16,650 --> 00:07:21,310
+algunas operaciones de memoria en el disco,
+ las cosas se pondrán aún más lentas.
+
+114
+00:07:21,310 --> 00:07:27,300
+Búsquedas en el disco duro pueden tomar milisegundos, 
+lo que es una eternidad en tiempos de cómputo.
+
+115
+00:07:27,300 --> 00:07:32,600
+Y así, exactamente cuánta memoria es guardada
+ en estos diferentes niveles de la jerarquía,
+
+116
+00:07:32,600 --> 00:07:37,532
+y exactamente cuánto tiempo llevan las búsquedas, 
+y qué tan buenos son los algoritmos
+
+117
+00:07:37,532 --> 00:07:41,780
+para predecir las cosas que buscarás en el futuro,
+
+118
+00:07:41,780 --> 00:07:43,725
+todo eso afectará el tiempo de ejecución.
+
+119
+00:07:45,440 --> 00:07:49,320
+Y entonces, poniendo todo junto, encontramos un problema.
+
+120
+00:07:50,440 --> 00:07:54,320
+Proyectar tiempos de ejecución precisos es un gran despapaye. 
+
+121
+00:07:54,320 --> 00:07:56,090
+Necesitas saber todos estos detalles y
+
+122
+00:07:56,090 --> 00:07:58,760
+necesitas resolver como todo interactúa.
+
+123
+00:07:58,760 --> 00:08:02,320
+Y vamos a hablar mucho acerca de algoritmos en la clase,
+
+124
+00:08:02,320 --> 00:08:06,100
+y vamos a necesitar decirte sobre
+ tiempos de ejecución para todos ellos
+
+125
+00:08:06,100 --> 00:08:08,530
+y no queremos tener todo este despapaye
+
+126
+00:08:09,840 --> 00:08:13,110
+cada vez que tenemos un nuevo
+ algoritmo que queremos analizar.
+
+127
+00:08:15,462 --> 00:08:17,230
+Y este es un problema.
+
+128
+00:08:17,230 --> 00:08:18,960
+Otro problema era que
+
+129
+00:08:18,960 --> 00:08:24,020
+en la práctica, y esto suponiendo que supieras estos detalles, 
+
+130
+00:08:24,020 --> 00:08:28,250
+en la práctica no sabes mucho de estos detalles 
+porque estás escribiendo un programa
+
+131
+00:08:28,250 --> 00:08:31,000
+que va a ser ejecutado en la computadora de otra persona y
+
+132
+00:08:31,000 --> 00:08:35,480
+no tienes idea de cómo luce su arquitectura 
+de sistema en esa computadora
+
+133
+00:08:35,480 --> 00:08:38,280
+porque no sabes qué computadora es,
+
+134
+00:08:38,280 --> 00:08:39,500
+no sabes quién la corre.
+
+135
+00:08:39,500 --> 00:08:42,260
+De hecho, habrá varias personas corriendo el
+ programa en diferentes computadoras
+
+136
+00:08:42,260 --> 00:08:45,850
+con diferentes arquitecturas y diferentes
+ velocidades, y todo será un despapaye.
+
+137
+00:08:45,850 --> 00:08:50,290
+Y no quieres realmente calcular el tiempo
+ de ejecución separadamente
+
+138
+00:08:50,290 --> 00:08:51,840
+para cada cliente.
+
+139
+00:08:53,730 --> 00:08:58,780
+Así que tenemos un gran problema aquí
+ y no lo vamos a resolver hoy, pero
+
+140
+00:08:58,780 --> 00:09:02,970
+en la próxima clase vamos a hablar 
+sobre cómo le damos la vuelta.
+
+141
+00:09:02,970 --> 00:09:07,580
+Y lo que realmente queremos es una nueva forma
+ de medir tiempos de ejecución que nos permita
+
+142
+00:09:07,580 --> 00:09:12,240
+tener una respuesta razonable sin saber este tipo de detalles.
+
+143
+00:09:14,050 --> 00:09:16,550
+Y, uno de los trucos claves que deberías buscar
+
+144
+00:09:16,550 --> 00:09:19,710
+que estaremos usando para resolver este problema, 
+es que vamos a obtener cosas que
+
+145
+00:09:19,710 --> 00:09:22,170
+nos den resultados para entradas muy grandes.
+
+146
+00:09:23,210 --> 00:09:23,980
+Éstas nos dicen
+
+147
+00:09:23,980 --> 00:09:28,910
+no necesariamente cuánto tiempo toma 
+en términos de segundos, minutos,
+
+148
+00:09:28,910 --> 00:09:34,610
+y horas reales, sino que nos dicen cómo el tiempo
+ de ejecución se escala con el tamaño de entrada.
+
+149
+00:09:34,610 --> 00:09:39,180
+Y en la práctica esto es una cosa muy
+ importante porque, a menudo,
+
+150
+00:09:39,180 --> 00:09:42,940
+nos preocupa lo que pasa cuando tenemos entradas enormes,
+
+151
+00:09:42,940 --> 00:09:48,340
+millones de datos que necesitamos analizar,
+ ¿cuánto tiempo le lleva?
+
+152
+00:09:48,340 --> 00:09:50,524
+Entonces, regresa para la siguiente clase,
+
+153
+00:09:50,524 --> 00:09:55,672
+donde hablaremos sobre cómo resolver 
+estas cosas, y hablaremos sobre una
+
+154
+00:09:55,672 --> 00:10:00,668
+notación muy útil que estaremos usando por el resto de la serie.
+
+155
+00:10:00,668 --> 00:10:03,190
+Así que espero que vuelvas y, ¡te veo ahí!

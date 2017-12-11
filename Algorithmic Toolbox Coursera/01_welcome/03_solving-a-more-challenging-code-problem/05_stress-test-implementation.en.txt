@@ -1,0 +1,100 @@
+The previous video ended on
+an unsuccessful attempt to submit our solution to the max
+pairwise product problem. Even worse, we don't know what is
+the test on which our program fails because the system doesn't show it to us. This is actually a pretty
+standard situation when solving algorithmic programming assignments. In this, and the next few videos, we will
+learn how to overcome this situation and to even avoid it in the first place. I will explain to you and show you in action a powerful
+technique called stress testing. By the end, you will be able
+to implement a stress test for your solution of an algorithmic problem,
+use it to find a small and easy test on which your program fails,
+debug your program, and make sure it works correctly
+afterwards with high confidence. Also, you will be able to list and apply
+the set of standard testing techniques, which should be always applied when
+solving algorithmic programming assignments. So what is stress testing? In general, it is a program that generates
+random tests in an infinite loop, and for each test,
+it launches your solution on this test and an alternative solution on the same
+test and compares the results. This alternative solution you also have
+to invent and implement yourself, but it is usually easy, because it can be any
+simple, slow, brute force solution, or just any other solution that
+you can come up with. The only requirement is that
+it should be significantly different from your main solution. Then you just wait until you find
+a test on which your solutions differ. If one of them is correct and another is
+wrong, then it is guaranteed to happen, because there is some test for which your
+wrong solution gives the wrong answer, and your correct solution gives correct
+answer, and so they differ. If, however, both of your solutions
+are wrong, which also happens often, they are still almost guaranteed to have
+some test on which one of them gives wrong answer and another one gives
+correct answer because they're probably wrong in different places. When you find a test on which
+your solutions' answers differ, you can determine which one of
+them returns wrong answer and debug it, fix it, and
+then repeat the stress testing. Now let's look at
+the practical implementation. I've already implemented
+the stress test for this problem. It is in the file called stress_test.cpp. Let's look into that. So it is almost the same as
+the solution that we've sent in the previous video, but
+I've added some things. First, we add this #include <cstd.lib>. And this include just
+allows us to use a part of standard library to generate
+some random numbers. And we will use it to generate
+some random tests automatically. Then we have the same
+code of two functions, MaxPairwiseProduct and
+MaxPairwiseProductFast, which we used in our last solution
+which was submitted in the system. But now in the main function,
+we have a whole additional while loop. Here it is, and
+this is where the stress test itself is. So what do we do in principle is
+we generate some random tests, then we launch both solutions,
+MaxPairwiseProduct and MaxPairwiseProductFast on this random test,
+and we compare the results. And the idea is if you have a correct
+solution and another correct solution and the correct answer for
+your problem is the only correct answer, then any two correct solutions will
+give the same answers for any test. And if you have some wrong solution and
+some correct solution, then on some tests,
+their answers will differ. And also if you have two wrong solutions,
+then probably they're wrong in a different way, and
+then there will also be some test, hopefully, on which their
+answers differ. If you generate a lot of tests,
+then with some probability, at some point, you will generate a test for which
+the answers of the solutions differ. You can detect that situation, and then
+look at the input test and at the answers. And you can determine which of the
+algorithms was right, and which was wrong, maybe both were wrong. But anyway, you will find at least one of
+the algorithms which are wrong because if their answers are different, then at
+least one of them gives wrong answer. And then you will be able
+to debug that algorithm, fix the bug, and
+then run the stress test again. And either,
+you will again find some difference, or you won't find any difference anymore,
+and then hopefully, you fixed all the bugs in
+all the solutions, and you can submit it. So how it works in practice. First, we need to generate the test for
+our problem. We'll start with generating number n,
+the number of numbers. And our problem states that
+n should be at least 2. So we first generate a big random
+number using function rand. Then we take it modulo 10, and it gives us some random number
+between 0 and 9, and then we add 2. And so
+we get a random number between 2 and 11. Why is it so small? Well, we first want both our
+solutions to work fast enough. And also if we create a big random test,
+it will be hard for us to debug it, so we start with
+some relatively small value of n. We immediately output it on the screen,
+so that if we find some tests for which our solution is wrong,
+we immediately see it on the screen. After generating n, we should generate
+the array of numbers, a, itself. So we iterate n times,
+and we add random numbers from 0 to 99,999 to the end of array a. So these are the numbers in
+the range which is allowed. And then we also output all
+these numbers in one line, separated by spaces and
+a newline character. So by this time, we've already output
+the whole input test on the screen. Now what we need to do is
+actually need to launch both our solutions on this input test and
+get two results, the result of the main solution and
+the result of the fast solution. After that, we compare those two results. If they are different, it means that at
+least one of the solutions was wrong. So we output words Wrong answer
+on the screen, and we also output the first result, a space, and the second
+result and a newline character. After that, we break our loop. We can notice that our while loop
+is a so-called infinite loop, but we actually end it as soon as we find
+some test for which our solutions differ. If we don't find the different sum test,
+we just output the word OK on the screen, to denote that actually both solutions
+have already computed the answers, but the answers are the same. And then we continue. So we continue our infinite loop,
+in the search of the test that will save us,
+that we can use to debug our solution. And we wrote that code just in front
+of all the code to read the numbers from the input, to compute the answer,
+and to output it to the screen. So we basically inserted this
+code in our regular program. But instead of reading
+numbers from the input, it will first try to find the test for
+which our two solutions differ. And in the next video, we will launch this
+stress test to find a test in which our solutions differ,
+debug our fast solution, and fix it.

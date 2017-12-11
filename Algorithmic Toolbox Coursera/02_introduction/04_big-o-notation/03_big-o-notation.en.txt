@@ -1,0 +1,86 @@
+Hello, everybody. Welcome back. Today, we're going to be talking about
+Big-O notation, which is the specific, sort of asymptotic notation that we
+will be using most frequently here. So, the idea here is we're going to
+introduce the meaning of Big-O notation and describe some of its advantages and
+disadvantages. So to start with the definition. The idea is that we want something
+that cares about what happens when the inputs get very large and sort of
+only care about things up to constants. So we are going to come
+up with a definition. If you've got two functions, f and g. g(n) is Big-O of g(n). If there are two constants,
+capital N and little c, such that for all n, at least N. f(n) is at most c*g(n). And what this means is that at least for
+sufficiently large inputs, f is bounded above by some
+constant multiple of g. Which is really sort of this
+idea that we had from before. Now, for example, 3n squared plus
+5n plus 2 is O of n squared, because if we take any n at at least 1,
+3n squared plus 5n plus 2 is at most 3n squared plus 5n squared plus
+2n squared, which is 10n squared. Some multiple of n squared. So, and in particular if you
+look at these two functions, they really in some sense do
+have the same growth rate. If you look at the ratio between them,
+sure it's large, its 10n equals 1, but as n gets large it actually
+drops down to about 3. And once you're putting in inputs,
+at n equals 100, n squared is a million 3n squared + 5n +
+2 is a little bit more than 3 million. So, they're not the same function. One of them is distinctly
+larger than the other, but it's not larger by much,
+not by more than a factor of about three. Throughout this course, we're going
+to be using big-O notation to report, basically, all of our
+algorithms' runtimes. And, this has a bunch of advantages for
+us. The first thing that it does for
+us is it clarifies growth rate. As I've said before, often what we care about is how does
+our runtime scale with the input size. And this is sort of an artifact to
+the fact that we often really care about what happens when we put really,
+really, really big inputs to our algorithm. How big can we deal with,
+before it starts breaking down? And, if you gave me some sort of
+complicated expression in terms of the input, with lots of terms, then it might be hard given two
+algorithms to really compare them. I mean, which one's bigger would depend
+on exactly which inputs I'm using. It requires some sort of annoying
+computation to determine where exactly one's better than the other. But, if you look at things asymptotically
+what happens as n gets large? It often becomes much more clear that,
+once n is very, very large, algorithm a is better than algorithm b. The second thing it does for
+us is that it cleans up notation. We can write O(n²),
+instead of 3n² + 5n + 2. And that's a lot cleaner and
+much easier to work with. We can write O(n) instead
+of n + log₂(n) + sin(n). We can write O(n log(n)) instead
+of 4n log₂(n) + 7. And note, that in the big O, we don't actually need to specify
+the base of the logarithm that we use. Because log₂(n), and
+log₃(n), and log₁₀(n), and log₇(n),
+They only differ by constant multiples. And up to the constant multiples, this
+big O that we have really doesn't care. Another consequence of this is that
+because our notation is cleaner, because we have fewer lower
+order terms to deal with, this actually makes the algebra
+that we have to do easier. It makes it easier to manipulate big O
+expressions because they're not as messy. And the final thing this does is
+that this big O notation really does solve these problems we were
+talking about a couple of lectures ago. In order to compute runtimes in terms
+of big O, we really don't need to know things like how fast the computer is, or
+what the memory hierarchy looks like, or what compiler we used,
+because, by and large, although these things will have
+a big impact on your final runtime, that impact will generally
+only be a constant multiple. And if two things are only
+off by a constant multiple, they've got the same big O. That's all there is. Now, I should say that there's a warning. Big-O is incredibly useful, we are going to
+be using it for basically everything in this course, but it does lose a lot
+of information about your runtime. It forgets about any constant multiples. So, if you have two algorithms, and
+one of them's a hundred times faster, they have the same Big-O. But, in practice,
+if you want to make things fast, a factor of 100 is a big deal. Even a factor of two is a big deal. And so, if you really want to make
+things fast, once you have a good asymptotic runtime, you then want to
+look into the nitty-gritty details. Can I save a factor of two here? Can I rearrange things to make
+things run a little bit smoother? Can I make it interact better
+with the memory hierarchy? Can I do x, y and z to make it faster by these constant
+factors that we didn't see beforehand? The second thing that you should
+note along these lines is that big O is only asymptotic. In some sense, all it tells you about are
+what happens when you put really, really, really, really,
+really big inputs into the algorithm. And,well, if you actually want to run
+your algorithm on a specific input. Big O doesn't tell you anything about
+how long it takes in some sense. I mean, usually the constants hidden
+by the big O are moderately small and therefore you have something useful. But sometimes they're big. Sometimes an algorithm
+with worse big O runtime, that's worse asymptotically on
+very large inputs, actually, for all practical sizes, is actually
+beaten by some other algorithm. And there are cases of this where
+you find two algorithms where a works better than b on really,
+really, really big inputs. But sometimes really, really, really big means more than you could ever
+store in your computer in the first place. And so, for any practical input
+you want to use algorithm b. In any case, though, despite these
+warnings, big O is incredibly useful. We're going to be using it
+throughout this course. And so, next lecture, we're going to be talking a little bit
+about how to deal with big O expressions, how to manipulate them,
+how to use them to compute runtimes, but once you have that we'll really be
+sort of ready to do some algorithms. In any case, that's all for
+this lecture, come back next time and we'll talk about that.

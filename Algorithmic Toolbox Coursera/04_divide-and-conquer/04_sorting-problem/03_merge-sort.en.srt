@@ -1,0 +1,742 @@
+1
+00:00:00,400 --> 00:00:05,160
+In this video, we will study
+the so-called merge sort algorithm.
+
+2
+00:00:05,160 --> 00:00:07,651
+It is based on the divide and
+conquer technique,
+
+3
+00:00:07,651 --> 00:00:09,424
+which main idea is the following.
+
+4
+00:00:09,424 --> 00:00:13,513
+To solve a given computational problem,
+you first split it into two or
+
+5
+00:00:13,513 --> 00:00:19,090
+more disjoint subproblems, then you solve
+each of these subproblems recursively.
+
+6
+00:00:19,090 --> 00:00:24,078
+And finally, you combine the results
+that you get from the recursive
+
+7
+00:00:24,078 --> 00:00:27,959
+calls to get the result for
+your initial subproblem.
+
+8
+00:00:27,959 --> 00:00:31,904
+And this is exactly what we're going
+to do in merge sort algorithm.
+
+9
+00:00:31,904 --> 00:00:33,570
+So let's show a toy example.
+
+10
+00:00:33,570 --> 00:00:37,320
+We're given an array of size eight,
+and we are going to sort it.
+
+11
+00:00:37,320 --> 00:00:41,400
+First, we just split this array
+into two halves of size four,
+
+12
+00:00:41,400 --> 00:00:43,940
+just the left half and the right half.
+
+13
+00:00:43,940 --> 00:00:49,820
+Then we make two recursive
+calls to sort both these parts.
+
+14
+00:00:49,820 --> 00:00:51,910
+These are two results in arrays.
+
+15
+00:00:51,910 --> 00:00:57,130
+Now what remains to be done is to
+merge these two arrays into one,
+
+16
+00:00:57,130 --> 00:01:01,010
+these two arrays of size four
+into one array of size eight.
+
+17
+00:01:01,010 --> 00:01:04,070
+Well, let's think how this can be done.
+
+18
+00:01:04,070 --> 00:01:04,760
+First of all,
+
+19
+00:01:04,760 --> 00:01:10,370
+I claim that it is easy to find
+the minimal value in the resulting array.
+
+20
+00:01:10,370 --> 00:01:14,040
+Indeed, we know that the minimum value in
+this case in the first array is two, and
+
+21
+00:01:14,040 --> 00:01:16,830
+the minimum value in
+the second array is one.
+
+22
+00:01:16,830 --> 00:01:22,480
+Which means that the minimum value in
+the result in merge array must be one.
+
+23
+00:01:22,480 --> 00:01:26,790
+So let's take one from the right side of
+array, put it in the resulting array and
+
+24
+00:01:26,790 --> 00:01:27,930
+forget about it.
+
+25
+00:01:27,930 --> 00:01:30,110
+It is already in its right place.
+
+26
+00:01:31,200 --> 00:01:33,860
+What remains is an array of size four and
+
+27
+00:01:33,860 --> 00:01:37,580
+an array of size three that
+still need to be merged.
+
+28
+00:01:37,580 --> 00:01:41,190
+Well, again,
+it is easy to find the minimum value of
+
+29
+00:01:42,870 --> 00:01:45,200
+the result of merging these two arrays.
+
+30
+00:01:45,200 --> 00:01:49,360
+In this case, it is two, because the
+minimum value in the array of size four
+
+31
+00:01:49,360 --> 00:01:53,580
+is two, and the minimum value in
+the arrays of size three is six.
+
+32
+00:01:53,580 --> 00:01:58,836
+So two is smaller than six, so
+we get two out of our left array,
+
+33
+00:01:58,836 --> 00:02:03,807
+put it into the resulting array after one,
+and press hit.
+
+34
+00:02:03,807 --> 00:02:08,059
+In the end,
+we get the following sorted array.
+
+35
+00:02:08,059 --> 00:02:13,246
+Again, the pseudocode of the merge sort
+algorithm directly implements this idea.
+
+36
+00:02:13,246 --> 00:02:18,890
+So this pseudocode takes an input
+array A of size n as an input.
+
+37
+00:02:18,890 --> 00:02:23,450
+And if n is equal to 1, then in this case,
+just nothing needs to be done,
+
+38
+00:02:23,450 --> 00:02:27,240
+we can just return the rate A itself.
+
+39
+00:02:27,240 --> 00:02:32,326
+If n is greater than 1,
+on the other hand, then we split the rate
+
+40
+00:02:32,326 --> 00:02:36,957
+A into two roughly equal parts and
+sort them recursively.
+
+41
+00:02:36,957 --> 00:02:39,040
+We call them B and C here.
+
+42
+00:02:39,040 --> 00:02:45,490
+Then the only thing that needs to be done
+is to merge these two sorted arrays.
+
+43
+00:02:45,490 --> 00:02:49,900
+So this is done in the procedure merge,
+which we will present on the next slide.
+
+44
+00:02:49,900 --> 00:02:54,170
+And finally, we just return
+the result of this merging procedure.
+
+45
+00:02:55,210 --> 00:02:58,870
+The pseudocode of the merging
+procedure is also straightforward.
+
+46
+00:02:58,870 --> 00:03:03,748
+Assumes that we are given two sorted
+arrays, B and C, of size p and
+
+47
+00:03:03,748 --> 00:03:09,801
+q respectively, and we would like to merge
+them into a sorted array of size p + q.
+
+48
+00:03:09,801 --> 00:03:15,297
+So the first thing we do is create
+an array of size p + q in array D.
+
+49
+00:03:15,297 --> 00:03:17,380
+It is initially empty.
+
+50
+00:03:17,380 --> 00:03:19,988
+Then we keep doing the following thing.
+
+51
+00:03:19,988 --> 00:03:26,337
+So what is the minimum value among all
+the values stored in the arrays B and C?
+
+52
+00:03:26,337 --> 00:03:28,130
+Well, it is easy to find.
+
+53
+00:03:28,130 --> 00:03:32,150
+We know that the first element in
+the array B is its smallest element, and
+
+54
+00:03:32,150 --> 00:03:36,340
+the first element in the array
+C is its smallest element.
+
+55
+00:03:36,340 --> 00:03:39,480
+So the smallest one among
+these two is the smallest
+
+56
+00:03:39,480 --> 00:03:42,930
+element inside the unit
+of these two arrays.
+
+57
+00:03:42,930 --> 00:03:47,810
+So we just find the minimum of these
+first elements and move it from one of
+
+58
+00:03:47,810 --> 00:03:53,090
+these arrays to the results in array D,
+and forget about this element completely.
+
+59
+00:03:53,090 --> 00:03:55,940
+Now what is left is
+essentially the same problem.
+
+60
+00:03:55,940 --> 00:03:59,480
+We're left with two sorted arrays,
+and we still need to merge them.
+
+61
+00:03:59,480 --> 00:04:01,680
+So we do it exactly the same.
+
+62
+00:04:01,680 --> 00:04:03,200
+We take the first two elements,
+
+63
+00:04:03,200 --> 00:04:08,110
+we compare them and move the smaller
+one to the resulting array.
+
+64
+00:04:08,110 --> 00:04:12,590
+And we keep doing this while
+both of these arrays are empty.
+
+65
+00:04:12,590 --> 00:04:15,980
+I mean, we need this to be able
+to take their first elements.
+
+66
+00:04:15,980 --> 00:04:18,460
+When one of them becomes empty,
+
+67
+00:04:18,460 --> 00:04:24,290
+we just copy the rest of the other
+array to the resulting array D.
+
+68
+00:04:24,290 --> 00:04:27,480
+I mean,
+where rest to the resulting array D.
+
+69
+00:04:27,480 --> 00:04:32,120
+Well, it is not difficult to see that
+this procedure is correct, and the trying
+
+70
+00:04:32,120 --> 00:04:37,600
+time is p + q, namely, the size of
+the array p plus the size of the array q.
+
+71
+00:04:37,600 --> 00:04:42,800
+And this just because we just can
+both of these arrays from left
+
+72
+00:04:42,800 --> 00:04:46,670
+to right in the run of
+this merging procedure.
+
+73
+00:04:46,670 --> 00:04:50,650
+This is how sorting our
+initial array of size eight
+
+74
+00:04:50,650 --> 00:04:53,730
+by the merge sort algorithm looks like.
+
+75
+00:04:53,730 --> 00:04:58,140
+So the merge sort algorithm first splits
+
+76
+00:04:58,140 --> 00:05:02,350
+the initial array of size eight
+into two arrays of size four.
+
+77
+00:05:02,350 --> 00:05:07,010
+Each of these arrays of size four in turn
+is split into two arrays of size two, and
+
+78
+00:05:07,010 --> 00:05:10,840
+each of them is split into
+two arrays of size one.
+
+79
+00:05:10,840 --> 00:05:16,130
+Then merge procedure starts merging
+these arrays of size one into arrays
+
+80
+00:05:16,130 --> 00:05:21,450
+of size twos and into, then these
+arrays of size two into a size four.
+
+81
+00:05:21,450 --> 00:05:26,200
+And finally, it merges the result
+into arrays of size four,
+
+82
+00:05:26,200 --> 00:05:29,378
+into the resulting array of size eight.
+
+83
+00:05:29,378 --> 00:05:34,860
+We are now going to prove that the running
+time of the merge sort algorithm,
+
+84
+00:05:34,860 --> 00:05:38,962
+on a sequence containing n elements,
+is big O of n log n.
+
+85
+00:05:38,962 --> 00:05:45,001
+Know that this is significantly faster
+than a quadratic selection sort algorithm.
+
+86
+00:05:45,001 --> 00:05:49,835
+For example, it is perfectly okay to
+sort the sequence of size 1 million, for
+
+87
+00:05:49,835 --> 00:05:54,321
+example, 10 to the 6th,
+on your laptop using merge sort algorithm.
+
+88
+00:05:54,321 --> 00:05:58,559
+While for the quadratic time
+selection sort algorithm,
+
+89
+00:05:58,559 --> 00:06:04,117
+sorting a sequence of size 10 to the 6th,
+1 million, will take roughly
+
+90
+00:06:04,117 --> 00:06:09,520
+10 to the 12th operations,
+which is too much for modern computers.
+
+91
+00:06:11,050 --> 00:06:16,038
+Okay, so to prove this lemma,
+to prove the upper bound on the running
+
+92
+00:06:16,038 --> 00:06:20,940
+time of the merge sort algorithm,
+first know that to merge two parts
+
+93
+00:06:20,940 --> 00:06:25,880
+of size n over 2 of our initial array,
+takes the linear time.
+
+94
+00:06:25,880 --> 00:06:30,342
+Namely, big O of n, because while
+the left part has size n over 2,
+
+95
+00:06:30,342 --> 00:06:32,930
+the right part has size n over 2.
+
+96
+00:06:32,930 --> 00:06:37,270
+And for merging, we basically just
+combo these parts from left to right.
+
+97
+00:06:37,270 --> 00:06:41,621
+So it takes just a linear
+amount of work to do this.
+
+98
+00:06:41,621 --> 00:06:46,313
+Which, in turn means, that if we denote by
+T of n the running time of our merge sort
+
+99
+00:06:46,313 --> 00:06:49,766
+algorithm, then it satisfies
+the following recurrence.
+
+100
+00:06:49,766 --> 00:06:54,168
+T(n) is at most 2T(n / 2) + big O(n).
+
+101
+00:06:54,168 --> 00:06:59,651
+Here 2T(n / 2) could response
+to two recursive calls.
+
+102
+00:06:59,651 --> 00:07:06,160
+So we denote it by T(n), the running time
+of our algorithm on input of size n.
+
+103
+00:07:06,160 --> 00:07:11,876
+So when we sort two
+sequences of size n / 2,
+
+104
+00:07:11,876 --> 00:07:16,210
+we spend time twice T(n / 2).
+
+105
+00:07:16,210 --> 00:07:21,456
+So the big O of n term corresponds to what
+we do before we make recursive calls and
+
+106
+00:07:21,456 --> 00:07:23,774
+what we do after recursive calls.
+
+107
+00:07:23,774 --> 00:07:29,450
+So what we do before is just split
+the input array into two halves.
+
+108
+00:07:29,450 --> 00:07:35,489
+What we do after is merging the results
+of two arrays into one array of size n.
+
+109
+00:07:35,489 --> 00:07:42,441
+So it is not difficult to see that all
+of this can be done in linear time.
+
+110
+00:07:42,441 --> 00:07:45,759
+So we get this recurrence,
+and on the next slide,
+
+111
+00:07:45,759 --> 00:07:50,183
+we're going to show that this
+recurrence implies that the running
+
+112
+00:07:50,183 --> 00:07:53,741
+time of our algorithm is
+bounded from above by n log n.
+
+113
+00:07:53,741 --> 00:07:56,204
+To estimate the running
+time of this algorithm,
+
+114
+00:07:56,204 --> 00:07:58,134
+let's consider its recursion tree.
+
+115
+00:07:58,134 --> 00:08:03,250
+Namely, at the top of this tree,
+we have one array of size n.
+
+116
+00:08:03,250 --> 00:08:07,982
+So for this array of size n,
+we make two recursive calls for
+
+117
+00:08:07,982 --> 00:08:10,017
+arrays of size n over 2.
+
+118
+00:08:10,017 --> 00:08:14,802
+Each of these arrays of size n
+over 2 in turn is split into two
+
+119
+00:08:14,802 --> 00:08:16,827
+arrays of size n over 4.
+
+120
+00:08:16,827 --> 00:08:20,400
+So we get four arrays of
+size of n over 4 and so on.
+
+121
+00:08:20,400 --> 00:08:24,540
+So in this tree, we have log n levels.
+
+122
+00:08:24,540 --> 00:08:31,010
+Now let's estimate the work done at each
+of the levels of these three separately,
+
+123
+00:08:31,010 --> 00:08:35,065
+namely, once again,
+to solve a problem of size n.
+
+124
+00:08:35,065 --> 00:08:39,471
+To sort an array of size n,
+we first prepare to make recursive calls.
+
+125
+00:08:39,471 --> 00:08:44,600
+In this case, we just split the array
+into two halves of size n over 2.
+
+126
+00:08:44,600 --> 00:08:49,024
+Then we do make recursive calls, and
+then we need to combine the results.
+
+127
+00:08:49,024 --> 00:08:54,650
+So all the work now inside recursive
+calls will be accounted for
+
+128
+00:08:54,650 --> 00:08:57,635
+on the lower levels of this tree.
+
+129
+00:08:57,635 --> 00:09:01,175
+So now what we are going
+to do is to account for
+
+130
+00:09:01,175 --> 00:09:05,102
+only the work done before
+the recursive calls and
+
+131
+00:09:05,102 --> 00:09:09,580
+after the recursive calls
+at each separate level.
+
+132
+00:09:09,580 --> 00:09:14,060
+And we know already that it
+takes linear time to do this.
+
+133
+00:09:14,060 --> 00:09:16,478
+I mean, if we have an array of size n,
+
+134
+00:09:16,478 --> 00:09:19,681
+it takes linear time to
+split it into two halves.
+
+135
+00:09:19,681 --> 00:09:24,305
+And then it takes linear time
+to combine the results of
+
+136
+00:09:24,305 --> 00:09:27,192
+recursive calls into one array.
+
+137
+00:09:27,192 --> 00:09:29,800
+So let's just denote this time by cn,
+
+138
+00:09:29,800 --> 00:09:33,801
+I mean let's denote the hidden
+constant inside big O by c.
+
+139
+00:09:33,801 --> 00:09:38,457
+Then what we can say is that on
+the top level we spend time cn.
+
+140
+00:09:38,457 --> 00:09:42,379
+Then on the next level, for each subarray,
+
+141
+00:09:42,379 --> 00:09:48,530
+we spend time c times n over 2,
+because the size of array is n over 2.
+
+142
+00:09:48,530 --> 00:09:53,432
+However, we have 2 arrays, so the total
+work that we do at this level is 2
+
+143
+00:09:53,432 --> 00:09:57,878
+multiplied by c, multiplied by n over 2,
+which is again just cn.
+
+144
+00:09:57,878 --> 00:10:03,279
+On the next level, we spend time 4
+because we have 4 arrays multiplied by c,
+
+145
+00:10:03,279 --> 00:10:08,220
+multiplied by n over 4, because
+the size of the array is now n over 4.
+
+146
+00:10:08,220 --> 00:10:10,211
+This is a cn again, and so on.
+
+147
+00:10:10,211 --> 00:10:11,511
+So we have log n levels.
+
+148
+00:10:11,511 --> 00:10:15,701
+At each level,
+we do roughly cn operations.
+
+149
+00:10:15,701 --> 00:10:20,757
+So the total number of operations
+in our algorithm is cn log n,
+
+150
+00:10:20,757 --> 00:10:22,811
+which proves our lemma.
+
+151
+00:10:22,811 --> 00:10:26,899
+So again, what we've just proved
+is that the running time of
+
+152
+00:10:26,899 --> 00:10:29,794
+the merge sort algorithm
+is big O of n log n.
+
+153
+00:10:29,794 --> 00:10:34,435
+So in the next video,
+we will show that actually no algorithm,
+
+154
+00:10:34,435 --> 00:10:40,040
+no comparison based algorithms,
+to be completely formal, can sort a given
+
+155
+00:10:40,040 --> 00:10:44,961
+sequence of n elements asymptotically
+faster than in n log n time.
+
+156
+00:10:44,961 --> 00:10:50,072
+Which actually means that the merge sort
+algorithm is asymptotically optimal.

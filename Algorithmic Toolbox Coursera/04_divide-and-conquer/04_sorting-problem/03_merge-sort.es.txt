@@ -1,0 +1,77 @@
+En este video, estudiaremos el llamado
+ algoritmo de ordenamiento por mezcla. Se basa en la técnica de divide y vencerás, cuya idea principal es la siguiente. Para resolver un problema computacional 
+dado, primero lo divides en dos o más subproblemas disjuntos. Luego resuelves
+ cada uno de los subproblemas recursivamente. Y finalmente, combinas los resultados
+ que obtuviste de las llamadas recursivas, para obtener el resultado de tu problema inicial. Y esto es exactamente lo que vamos a hacer 
+en el algoritmo del ordenamiento por mezcla. Mostremos un ejemplo de caricatura. Nos dan un arreglo de tamaño 8, y lo vamos a ordenar. Primero lo dividimos en dos mitades de tamaño 4, la parte izquierda y la parte derecha. Entonces hacemos 2 llamadas 
+recursivas para ordenar ambas partes. Éstos son los resultados de los arreglos. Ahora, lo que queda por hacer, es 
+combinar estos 2 arreglos en uno, estos arreglos de tamaño 4 en uno de tamaño 8. Bien, pensemos cómo puede hacerse. En primer lugar, yo afirmo que es fácil encontrar el 
+valor mínimo en el arreglo resultante. De hecho, sabemos que el valor mínimo
+ en este caso, en el primer arreglo es 2, y el valor mínimo en el segundo arreglo es 1. Lo que significa que el valor mínimo en 
+el resultado, en el arreglo fundido, debe ser 1. Así que tomemos a 1 del arreglo de la derecha, 
+pongámoslo en el arreglo resultante, y olvidémonos de él. Ya está en su lugar correcto. Lo que queda es un arreglo de tamaño 4 y un arreglo de tamaño 3 que todavía necesitan fusionarse. Bueno, de nuevo, es fácil encontrar el valor mínimo del resultado de mezclar estos dos arreglos. En este caso es 2, porque el valor
+ mínimo en el arreglo de tamaño 4 es 2, y el valor mínimo en el arreglo de tamaño 3 es 6, 2 es menor que 6, así que extraemos
+ 2 de nuestro arreglo izquierdo, lo ponemos en el arreglo resultante 
+después del 1, y ya está. Al final, obtenemos el siguiente arreglo ordenado. De nuevo, el pseudocódigo del algoritmo del ordenamiento
+ por mezcla, implementa directamente esta idea. Este pseudo código toma como
+ entrada un arreglo A de tamaño n, y si n es igual a 1, entonces, en
+ este caso no se requiere hacer nada, podemos devolver directamente A. Por otro lado, si n es mayor que 1, 
+entonces dividimos el arreglo A en dos partes aproximadamente iguales,
+ y las ordenamos recursivamente, las llamamos B y C aquí. Entonces,, lo único que se necesita hacer 
+es combinar estos dos arreglos ordenados. Y esto es hecho con el procedimiento "merge", 
+que presentaremos en la siguiente lámina. Finalmente, devolvemos el resultado 
+de este procedimiento de fusión. El pseudocódigo del procedimiento 
+de fusión es también directo. Supón que nos dan dos arreglos ordenados,
+ B y C, de tamaños p y q, respectivamente, y querríamos fusionarlos 
+en un arreglo ordenado de tamaño p+q. Entonces, la primera cosa que hacemos es crear 
+un arreglo de tamaño p+q, un arreglo D. Está vacío inicialmente. Luego, seguimos haciendo lo siguiente. ¿Cuál es el valor mínimo entre todos los
+ valores guardados en los arreglos B y C? Bien, es fácil de saber. Sabemos que el primer elemento en 
+el arreglo B es su elemento más pequeño, y el primer elemento de C es también su elemento más pequeño. Así que el más pequeño entre estos
+ dos, es el más pequeño de la unión de estos dos arreglos. Así que sólo encontramos el mínimo de estos 
+primeros elementos y lo movemos desde uno de estos arreglos hasta el arreglo D, y nos 
+olvidamos de este elemento completamente. Lo que nos queda es esencialmente el mismo problema. Nos quedamos con 2 arreglos ordenados 
+y necesitamos combinarlos todavía. Así que hacemos exactamente lo mismo. Tomamos los primeros 2 elementos, los comparamos, y movemos el
+ más pequeño al arreglo resultante. Y seguimos haciendo esto mientras 
+ambos arreglos no estén vacíos. Digo, necesitamos esto para poder tomar los primeros elementos. Cuando uno de ellos se vacía, sólo copiamos el resto del otro arreglo en el arreglo resultante D, es decir, agregamos el resto al arreglo D. No es difícil ver que este 
+procedimiento es correcto y su tiempo de ejecución es p+q, esto es, el tamaño 
+del arreglo B más el tamaño del arreglo C. Y esto es porque combinamos 
+ambos arreglos de izquierda a derecha cuando se corre el procedimiento de fusión. Así es como se ve el ordenamiento
+ de nuestro arreglo inicial de tamaño 8 cuando se corre el 
+algoritmo de ordenamiento por mezcla. Así, el algoritmo primero divide el arreglo inicial de tamaño 8 en dos arreglos de tamaño 4. Cada uno de estos arreglos de tamaño 4 se dividen
+ a su vez en dos arreglos de tamaño 2, y cada uno de ellos se divide en dos arreglos de tamaño 1. Entonces el procedimiento de mezcla comienza a 
+combinar estos arreglos de tamaño 1 en arreglos de tamaño 2 y entonces estos arreglos 
+de tamaño 2 en arreglos de tamaño 4, y finalmente, combina el resultado
+ de los arreglos de tamaño 4 en el arreglo resultante de tamaño 8. Ahora vamos a probar que el tiempo de ejecución del
+ algoritmo de ordenamiento por mezcla para una secuencia que contiene n elementos es O(n log n). Noten que esto es significativamente más rápido que un algoritmo
+ de ordenamiento por selección, que es cuadrático. Por ejemplo, puedes muy bien 
+ordenar una secuencia de tamaño 1 millón en tu laptop usando el algoritmo de ordenamiento por mezcla. Mientras que para al algoritmo de ordenamiento
+ por selección, que es cuadrático, ordenar una secuencia de tamaño 10^6, 
+1 millón, tomará alrededor 10^12 operaciones, que es demasiado
+ para las computadoras actuales. OK. Para probar este lema, para probar
+ la cota superior del tiempo de ejecución del ordenamiento por mezcla, primero
+ nota que combinar dos partes de tamaño n/2 de nuestro arreglo
+ inicial, toma un tiempo lineal, a decir, O(n), porque la parte izquierda tiene tamaño n/2, la parte derecha también, y para fusionar, básicamente combinamos
+estas partes de izquierda a derecha, así que sólo toma una cantidad lineal de tiempo hacer esto. Lo que a su vez significa que si denotamos 
+por T(n) el tiempo de ejecución del algoritmo de ordenamiento por mezcla, entonces
+ satisface la siguiente recurrencia: T(n) es a lo más 2T(b/2)+O(n). Aquí, 2T(n/2) corresponde a dos llamadas recursivas. Entonces, denotamos T(n) el tiempo de 
+ejecución para una entrada de tamaño n, así que cuando ordenamos 2 secuencias de tamaño n/2, usamos un tiempo igual a dos veces T(n/2). El término O(n) corresponde a lo que
+ hacemos antes y después de hacer las llamadas recursivas. Y lo que hacemos antes es dividir 
+el arreglo de entrada en 2 mitades, mientras que lo que hacemos después es combinar 
+los resultados de los 2 arreglos en uno de tamaño n. No es difícil ver que todo esto se puede hacer en tiempo lineal. Así, tenemos esta recurrencia y en la próxima lámina vamos a mostrar que esta recurrencia
+ implica que el tiempo de ejecución de nuestro algoritmo está acotado por arriba por n log n. Para estimar el tiempo para este algoritmo, consideremos su árbol recursivo. En la copa de este árbol, tenemos un arreglo de tamaño n. Para este arreglo de tamaño n,
+ hacemos dos llamadas recursivas para arreglos de tamaño n/2. Cada uno de estos arreglos de 
+tamaño n/2 a su vez se dividen en 2 arreglos de tamaño n/4. Así que tenemos 4 arreglos de tamaño n/4, y así seguimos. Así que, en este árbol, tenemos log n niveles. Ahora estimemos el trabajo hecho en cada
+uno de los niveles de este árbol separadamente. Para resolver un problema de tamaño n, para ordenar un arreglo de tamaño n, primero
+ nos preparamos para hacer llamadas recursivas. En este caso, sólo dividimos el arreglo de
+ entrada en dos mitades de tamaño n/2. Entonces hacemos llamadas recursivas,
+ y después combinamos los resultados. Y todo el trabajo hecho dentro de las 
+llamadas recursivas será considerado en los niveles más bajos del árbol. Ahora, lo que vamos a hacer es considerar sólo el trabajo hecho antes de las llamadas recursivas y después de ellas, en cada nivel separado. Y ya sabemos que toma un tiempo lineal hacer esto. Quiero decir, si tenemos un arreglo de tamaño n, toma un tiempo lineal dividirlo en dos mitades, y también toma un tiempo lineal combinar los resultados de las llamadas recursivas en un arreglo. Denotemos pues, este tiempo por cn, digo, denotemos por c a la constante
+ escondida dentro de la O grande. Entonces lo que podemos decir es que 
+en el nivel de arriba gastamos un tiempo cn. Después, en el siguiente nivel, por cada subarreglo gastamos un tiempo cn/2, porque el tamaño del arreglo es n/2. Sin embargo, tenemos 2 arreglos, así que la 
+cantidad total de trabajo que hacemos en este nivel es 2 por cn/2, que de nuevo es cn. En el siguiente nivel gastamos 4 -porque 
+tenemos 4 arreglos- por cn/4 -porque el tamaño del arreglo es ahora n/4-. Esto es cn, de nuevo, y así seguimos. Entonces, tenemos log n niveles, en cada nivel hacemos aproximadamente cn operaciones, así que el número total de operaciones
+ en nuestro algoritmo es cn log n, lo que prueba nuestro lema. Así, lo que probamos es que el tiempo de ejecución del algoritmo de ordenamiento por mezcla, es O(n log n). En el próximo video mostraremos 
+que de hecho no hay ningún algoritmo ningún algoritmo basado en comparaciones, para ser 
+completamente formal, puede ordenar una secuencia dada de n elementos asintóticamente
+ más rápido que en un tiempo n log n. Lo que significa que el algoritmo de ordenamiento 
+por mezcla es asintóticamente óptimo.

@@ -1,0 +1,74 @@
+Hola a todos, bienvenidos de vuelta a la
+ especialización de estructuras de datos y algoritmos. Hoy vamos a hablar sobre lo que pasa 
+con los tiempos de ejecución y entender realmente cuánto tiempo le 
+lleva trabajar a un programa. Entonces, en particular, hoy vamos a profundizar realmente Digo, hasta este punto hemos usado
+ esta cuenta aproximada de número de líneas de código ejecutado. Y hoy vamos a hablar sobre qué tan preciso es esto y qué tipo de complicaciones aparecen. Y, en particular veremos que si
+ queremos algo que fundamantalmente sea una medida precisa del tiempo de ejecución, 
+resultaría en un inmenso caos. Tendríamos que llamar a todo tipo de datos extra que no son convenientes realmente para nosotros. Así que, estamos hablando realmente del problema que aparece cuando calculamos
+ tiempos de ejecución en algoritmos. Algo que no vamos a resolver realmente
+ hasta la siguiente lección. Así que, para empezar, veamos 
+este algoritmo que teníamos para calcular los números de Fibonacci. Recuerda, creamos un arreglo, asignamos el elemento cero a 0, el primer elemento a 1, entonces tenemos este gran bucle for, 
+donde el elemento i-ésimo es la suma de los elementos i-1 y i-2, y al final del día devolvemos el elemento n-ésimo. Así que, determinamos que cuando corremos 
+este programa ejecutamos alrededor de 2n+2 líneas de código, pero, lo que deberíamos preguntarnos es,
+ ¿es este número de líneas ejecutadas realmente un tipo de descripción precisa
+ del tiempo de ejecución del algoritmo? Quiero decir, de alguna manera, implícitamente, 
+esta medida de líneas de código supone que cualesquiera dos líneas de
+ código son comparables la una a la otra. Son algo así como una operación básica. Entonces, vamos a ver este programa en mayor detalle y ver qué pasa en algunas de estas líneas de 
+código y ver qué tan válida es esta suposición. Así que, para empezar, creamos este arreglo. Y, ¿qué pasa cuando tratas de inicializar un arreglo? Bueno, esto depende mucho de tu 
+sistema de manejo de memoria. Fundamentalmente, todo lo que tienes que
+ hacer es encontrar algún espacio de memoria y entonces tener un indicador para la primera posición. Por el otro lado, qué tan exacto encuentras esto, 
+puede que tengas que revolver algunas otras cosas para hacerle espacio, puede que, 
+después de colocar el arreglo, tengas que inicializar todas las entradas a cero, 
+para que no tengas basura ahí. Y, entonces no es completamente claro, depende un poco en cómo exactamente 
+está tu programa siendo interpretado Pero, podría ser muy rápido. Podría tomar un buen rato, 
+dependiendo de las circunstancias. Veamos la siguiente línea, esta es sólo una simple asignación, 
+ponemos el 0 en la entrada cero. Sin embargo, si realmente ves esto al nivel de la máquina, estás haciendo algo 
+más de trabajo, necesitas cargar el puntero al elemento cero del arreglo, a la mejor tengas
+ que hacer algo de aritmética para el puntero, necesites entonces guardar este cero
+ literal en ese lugar de la memoria. Podría no ser una operación sino unas cuantas. Similarmente, cuando fijamos el primer elemento a uno, tienes que hacer este similar conjunto de cosas. Después tenemos este bucle for, y 
+con éste, de nuevo, cada vez que tengas que hacer unas cuantas cosas, 
+necesitas incrementar el valor de i, entonces comparar i con n para saber si tienes que salir del bucle y si lo es, tienes que bifurcar, tienes que moverte a otra instrucción en
+ tu programa después del bucle for. Después hay unas adiciones, aquí tenemos
+ que hacer algunas cosas, tenemos que buscar dos valores en el arreglo, 
+escribir un tercer valor en el arreglo. Todo esto implica el mismo tipo de aritmética de punteros y búsquedas de memoria, y agregados
+ de las que hablamos antes, pero también tenemos que hacer esta suma. Y, si fuera sólo una simple suma, tal vez no sería la gran cosa. Sin embargo, esta es la suma de dos números de Fibonacci, y si recuerdas las clases pasadas, encontramos 
+que los números de Fibonacci son muy grandes, de hecho tan grandes que
+ probablemente no caben en una simple máquina así que sumar dos de ellos requiere 
+una cantidad de tiempo no trivial. Así que, de algún modo, no sólo tienes que hacer todo esto, aritmética de arreglos, sino que la suma de los números de Fibonacci es realmente una operación muy poco trivial. Y entonces hacemos esta devolución donde 
+tenemos que hacer un vector de consulta que implica todo el tipo de cosas de las que hablamos antes 
+y entonces tenemos que hacer una devolución que va a operar con el apilamiento del programa y aparecer un nivel y devolver una respuesta. Así que, en conclusión, este programa 
+tiene seis líneas de código pero la cantidad de trabajo hecho en las distintas
+ líneas de código es muy, muy diferente. Lo que pasa exactamente en cada línea 
+de código no es la misma cosa. Quizás queramos reconsiderar el hecho de que esta cuenta, el número de líneas de código, es nuestra forma 
+de contar el tiempo de ejecución. Tal vez necesitemos contar otra cosa. Entonces, ¿qué más podemos hacer? Bueno, si quieres ser exacto en lo que nos interesa, lo que necesitas es decir, bueno, 
+vamos a tomar este programa, lo vamos a correr en una computadora real y nos gustaría saber cuánto tiempo le llevará al programa para terminar. Eso es 
+fundamentalmente lo que queremos saber. Desafortunadamente, para averiguar eso 
+necesitamos saber todo tipo de detalles resultar. Necesitamos saber cosas como la velocidad
+ de la computadora que estamos ejecutando, si la corres en una super-computadora le tomará menos tiempo que si lo corres en tu celular. La arquitectura del sistema de la computadora también importa. Exactamente cuáles operaciones tu CPU
+ soporta y exactamente cuánto tiempo le lleva comparado con otras, todo eso tiene
+ un efecto en el tiempo de ejecución. El compilador que usas también hace la diferencia. En la práctica escribes el programa en algún lenguaje de alto nivel como C, Java o Python, o algo, y entonces lo corres por medio de un 
+compilador que lo convierte en código de máquina. Y entonces el complilador, no está haciendo nada más algo completamente obvio, está llevando a cabo todo tipo de
+ optimizaciones interesantes a tu código. Y qué optimizaciones realiza, y cómo interactúan con lo que has escrito todo eso tendrá un impacto en el tiempo de ejecución. Finalmente, te tendrás que  preocupar por
+ detalles sobre la jerarquía de memoria. Si tu cálculo completo cabe en el caché, correrá probablemente muy rápido. Sin embargo, si vas a hacer búsquedas en la RAM las cosas serán mucho más lentas. Búsquedas en la RAM realmente toman
+ una cantidad seria de tiempo. Si, por el otro lado, te quedas sin memoria
+ RAM y tienes que empezar a escribir algunas operaciones de memoria en el disco,
+ las cosas se pondrán aún más lentas. Búsquedas en el disco duro pueden tomar milisegundos, 
+lo que es una eternidad en tiempos de cómputo. Y así, exactamente cuánta memoria es guardada
+ en estos diferentes niveles de la jerarquía, y exactamente cuánto tiempo llevan las búsquedas, 
+y qué tan buenos son los algoritmos para predecir las cosas que buscarás en el futuro, todo eso afectará el tiempo de ejecución. Y entonces, poniendo todo junto, encontramos un problema. Proyectar tiempos de ejecución precisos es un gran despapaye. Necesitas saber todos estos detalles y necesitas resolver como todo interactúa. Y vamos a hablar mucho acerca de algoritmos en la clase, y vamos a necesitar decirte sobre
+ tiempos de ejecución para todos ellos y no queremos tener todo este despapaye cada vez que tenemos un nuevo
+ algoritmo que queremos analizar. Y este es un problema. Otro problema era que en la práctica, y esto suponiendo que supieras estos detalles, en la práctica no sabes mucho de estos detalles 
+porque estás escribiendo un programa que va a ser ejecutado en la computadora de otra persona y no tienes idea de cómo luce su arquitectura 
+de sistema en esa computadora porque no sabes qué computadora es, no sabes quién la corre. De hecho, habrá varias personas corriendo el
+ programa en diferentes computadoras con diferentes arquitecturas y diferentes
+ velocidades, y todo será un despapaye. Y no quieres realmente calcular el tiempo
+ de ejecución separadamente para cada cliente. Así que tenemos un gran problema aquí
+ y no lo vamos a resolver hoy, pero en la próxima clase vamos a hablar 
+sobre cómo le damos la vuelta. Y lo que realmente queremos es una nueva forma
+ de medir tiempos de ejecución que nos permita tener una respuesta razonable sin saber este tipo de detalles. Y, uno de los trucos claves que deberías buscar que estaremos usando para resolver este problema, 
+es que vamos a obtener cosas que nos den resultados para entradas muy grandes. Éstas nos dicen no necesariamente cuánto tiempo toma 
+en términos de segundos, minutos, y horas reales, sino que nos dicen cómo el tiempo
+ de ejecución se escala con el tamaño de entrada. Y en la práctica esto es una cosa muy
+ importante porque, a menudo, nos preocupa lo que pasa cuando tenemos entradas enormes, millones de datos que necesitamos analizar,
+ ¿cuánto tiempo le lleva? Entonces, regresa para la siguiente clase, donde hablaremos sobre cómo resolver 
+estas cosas, y hablaremos sobre una notación muy útil que estaremos usando por el resto de la serie. Así que espero que vuelvas y, ¡te veo ahí!

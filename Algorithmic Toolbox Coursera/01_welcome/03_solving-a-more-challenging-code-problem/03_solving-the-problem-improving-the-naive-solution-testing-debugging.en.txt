@@ -1,0 +1,109 @@
+In this video, we will consider
+a more interesting code problem. This problem will require us to implement
+a faster than a naive solution first, then to debug it, then to stress
+test it before we actually come up with a correct solution that will be able to
+pass all the tests in the testing system. So the problem is called the maximum
+prioritized product problem. In this problem, we're given an array,
+or a sequence of n numbers. And our goal is to find
+a number which can be obtained by multiplying some two
+numbers from this sequence. So recall that our problem is given
+a sequence of n non-negative integers to find the maximum pairwise product. So the input to this problem
+consists of two lines. The first line contains
+just a single number n, which is at least 2 and
+at most 2 multiplied by 10 to the 5. The next line contains the sequence
+of n numbers which are non-negative integers not
+exceeding 10 to the 5. So our goal is to output a single number,
+the maximum pairwise product. The page contains also two sample tests. For example, if an input to our program
+is a sequence of length 3 consisting of numbers 1, 2, 3,
+then the output should be, of course, 6, because this is just 2 multiplied by 3. For a slightly longer sequence of size 10, the output should be 140, and this is 10 multiplied by 14. So as usual there is also a section that contains starter files and let's begin, choose C++ as our programming language for
+this problem. This is how the starter C++
+solution file looks like. So we start by reading the number
+n from the standard input. We then create an array,
+or a vector of size n. We then fill in this vector by elements
+of our sequence, element by element. Then we read from the standard input. We then pass the real
+numbers to the function MaxPairwiseProduct that computes
+the answer to our problem. Let's see what is going on inside
+the function MaxPairwiseProduct. So we start by initializing
+the variable result by 0 and we then go through all possible
+pairs of different elements. That is, we go through all possible i and
+j, where i is less than j. We do this by two nested loops. And for each such pair, we check whether
+the product of the corresponding two numbers is greater than
+our current result. And if it is, we update the result. Finally, we return the result. So this algorithm is correct for
+an obvious reason. The goal in our problem is to find
+the maximum pairwise product, right? So to do this we just go
+through all possible pairs and select the maximum product. Okay, to check that it is indeed correct,
+let's, as usual, compile it. So for this we use. The compiler flags for C++. Okay, and then, we test it. For example, for the sequence of length 3, consisting of numbers 1 through 3,
+then say 6. Let's test it one more time. For example, this sequence of length 5. Consisting of numbers 3, 4, 5, 1, 2. So the answer is 20 as expected,
+because this is the product of 4 and 5. Okay, so it seems that this solution
+is correct and let's just go ahead and submit it as a solution
+to the testing system. So I've just submitted our current
+solution to the grading system, but unfortunately it
+hadn't passed all the tests. In particular, there is an error
+message shown in the grading system. Let's take a look. So it says that our solution failed test case number three,
+which consists of just two numbers. The first one is 10 to the 5, and the second one is 90,000. Let's check whether we can reproduce
+this behavior on our local machine. So let's call our program with just two numbers, 10 to the 5 and 90,000. So indeed, as a result,
+instead of getting nine billions as we would expect,
+we got some random number. So this usually happens when
+there is an integer overflow. And indeed, so
+we use the standard integer type for storing the result of
+multiplying two numbers. While nine billion is too much for the integer type, so
+it doesn't fit into the integer type. So what we are supposed to do is
+actually to use a long, long C++ type. So let's do this and check whether this will fix our problem, our solution. So for
+this we need to change all the places where we compute and store the results. So first of all we change
+the declaration of this variable, we change also the type of
+the return observe returns result. When computing the product of
+this to numbers we first cast. For example, the first one to the long, long type. Okay, and also here, great. Let's now compile it once again. Yes, and let's run it to check whether it
+correctly processes our previous data set. So 10 to the 5 and 90,000. Great, so
+it correctly outputs nine billion. So now, we must be completely sure
+that our solution is correct. Because, well, first of all,
+to find the maximum pairwise product, we'd just go through all possible
+pairs and select the maximum product. So what can we do else? And also, we now use the right type for
+storing the result. So let's go ahead and submit our new
+solution to the grading system. Unfortunately our solution
+is still incorrect. So in this particular case, the output
+of the grading system is the following: Failed case 4, time limit exceeded. So it means that our solution
+is quite slow, that for large datasets it runs
+in more than one second. So let's try to understand why it so
+happens. First of all, the maximum size of a data
+set is the maximum size of a sequence for this problem, in our case,
+it is roughly 10 to the 5. So what is the number of operations
+performed by our algorithm on such a sequence? So recall that in our algorithm
+we just go through all possible pairs of input numbers. So this is roughly n squared. So when n is equal to 10 to the 5,
+this is 10 to the 10. And this is more than one billion. And one billion is roughly the number of
+basic operations that modern computers can perform in one second. So we conclude that we need a faster
+algorithm to solve this problem. In particular, we realize that we need
+to find the maximum pairwise product, without actually going through
+all possible pairs of numbers. So in search of an inspiration,
+let's take a look at the problem page. In particular let's review
+the second sample case. In this case,
+our input consists of ten integers, and the output in this case, is 140. And why is that? Well, this is just because in our sequence
+there are two numbers, 14 and 10. These two numbers are two
+maximal numbers actually. So for any other two numbers,
+their product are less than 140. So this gives us an idea: that to find
+the maximum product of two numbers from our sequence, it is actually enough to
+find two maximal numbers in our sequence. This is because all of our integers
+in this sequence are non-negative. So let's just implement
+this idea in our C++ file. So this is already implemented,
+and it looks as follows. So the new function is called
+MaxPairwiseProductFast. So it already uses the long.long type for storing the result and
+we do the following. Just by scanning the input array two
+times, we find two maximal numbers. So in the first block,
+we find the first maximum and we store its index in
+the max_index variable, and in the second block,
+we find the second maximal element. So the difference in the second
+block is that we also need to skip the first maximal element while scanning the array. So what we do is,
+we do this in this check. Okay, and then we just return the product of two maximum numbers in our array,
+right? Let's, as usual, compile it and see that everything works correctly. So, this is our new file,
+max_pairwise_product_fast.ccp. We compile it and
+we first run it on some small sequence. For example, size 3, for example,
+2, 3, 4 it gives us 12 as expected. Great, now let's do the following. Let's check what is the running
+time when a huge data set. So for this, let's instead of reading the data from the standard input, let's just generate a huge array here. Let's use vector of int of size 10 to the 5, and let it be an array filled by zeroes, let's compile it and let's run it. So it outputs zero immediately
+which means that it, well, it is much faster then
+the previous algorithm. So now our solution just
+must be completely correct. So it is fast, it uses the right type for
+storing the solution and it is also obviously correct because, well it selects two maximal numbers,
+right, and multiplies them. No other product of two numbers can
+be larger because we selected two maximal numbers. However, unfortunately,
+even this solution is not correct. So you can submit it to the testing
+system and see that the output will be wrong answer for some test case. In the next video, Michael will
+tell you about stress testing and will show you how to fix this solution.

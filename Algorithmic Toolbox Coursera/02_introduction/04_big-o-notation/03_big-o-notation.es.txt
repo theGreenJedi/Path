@@ -1,0 +1,41 @@
+Hola. Bienvenidos de nuevo. Hoy vamos a estar hablando de la notación
+ O grande, que es la notación asintótica específica que usaremos 
+con más frecuencia aquí. La idea es que vamos a introducir el 
+significado de la notación O grande y describir algunas de sus ventajas y desventajas. Entonces, empezamos con la definición. La idea es que queremos algo que describa lo que pasa cuando las entradas son muy grandes
+ y lo haga de manera gruesa. Así que proponemos una definición. Si tienes dos funciones, f y g, f(n) es O de g(n) si hay dos constantes, N y c tales que para toda n que es al menos N, f(n) es a lo más c*g(n). Y esto significa es que, al menos para entradas muy grandes, f está acotada por arriba por algún múltiplo constante de g. Que es la idea que teníamos antes. Ahora, por ejemplo, 3n^2+5n+2 es O(n^2), porque si tomamos cualquier n que
+ no sea menor que 1, 3n^2+5n+2 es a lo más 3n^2+5n^2+2n^2 que es 10n^2. Algún múltiplo de n^2. Y en particular, si ves estas dos funciones, en algún sentido tienen la misma razón de crecimiento. Si tomas el cociente entre las dos, seguro
+ es grande, es 10 cuando n es igual a uno, pero conforme n crece se reduce a alrededor de 3. Y cuando le metes valores, cuando n es igual a ¡mil! (no 100), n^2 es un millón, 3n^2+5n+2 es un poco más de 3 millones. Entonces, no son las mismas funciones, una de ellas es distintivamente mayor que la otra, pero no es mayor por mucho, no
+ más que un factor de alrededor de 3. Entonces, a lo largo de este curso vamos 
+a estar usando la notación O grande para reportar, básicamente, todos nuestros tiempos de ejecución. Y esto nos aporta un montón de ventajas. La primera cosa que hace por nosotros
+ es clarificar la razón de crecimiento. Como dije antes, a menudo lo que nos preocupa es cómo se escala nuestro
+ tiempo de ejecución con el tamaño de la entrada. Y este es un artefacto del hecho de 
+que lo que realmente nos preocupa sobre lo que pasa cuando ingresamos datos realmente, 
+pero realmente enormes en nuestro algoritmo, hasta cuánto podemos manejar antes de que todo se caiga. Y, si me das alguna expresión complicada en la entrada, con muchos términos, entonces sería difícil comparar dos algoritmos. Quiero decir, cuál es más lento dependería 
+en exactamente qué entradas uso, lo que requiere algún tipo de cálculo 
+molesto que determine cuándo uno es exactamente mejor que el otro. Pero si miras las cosas asintóticamente, 
+¿qué pasa cuando n aumenta? A menudo resulta mucho más claro que, 
+una vez que n es muy, pero muy grande, el algoritmo "A" es mejor que el algoritmo "B". Lo segundo que hace por nosotros es limpiar la notación. Podemos escribir O(n^2) en lugar de 3n^2+5n+2. Y para trabajar eso es mucho más limpio y fácil. Podemos escribir O(n) en lugar de n + log_2(n) + sen(n). Podemos escribir O(n log n) en lugar de 4n log_2(n) + 7. Y checa que, en la notación O grande, no necesitamos especificar la base del logaritmo que usamos. Porque log_2(n) y log_3(n) y log_10(n), y log_7(n) sólo difieren por múltiplos constantes. Y hasta lo que a la O grande le concierne, 
+no le importan estos múltiplos constantes. Otra consecuencia es que, como 
+nuestra notación es más clara, porque tenemos menos términos de orden menor con que trabajar, hace que nuestra álgebra sea más fácil. Hace más fácil manipular las expresiones con
+ O grande porque no son tan caóticas. Y la última cosa que hace por nosotros 
+es que esta notación realmente resuelve estos problemas de los que
+ hablamos en unas lecciones pasadas. Para calcular tiempos de ejecución  en términos
+ de O grande, no necesitamos saber cosas cono qué tan rápida es la computadora, 
+o cómo es su jerarquía de memoria, o qué compilador usamos, porque, en general, aunque estas cosas tengan un impacto
+ notorio en el tiempo de ejecución final, ese impacto será generalmente una constante multiplicativa. Y, si dos cosas difieren sólo por un múltiplo constante, entonces tienen la misma O grande. Eso es todo. Ahora, debo decir que hay una advertencia. O grande es increíblemente útil, 
+la vamos a usar básicamente para todo en este curso, pero pierde mucha información
+ sobre el tiempo de ejecución. No cuenta ninguna constante multiplicativa. Así que, si tienes dos algoritmos, 
+y uno de ellos es 100 veces más rápido, los dos tienen la misma O grande. Pero, en la práctica, si quieres hacer las cosas más rápido, un factor de 100 cuenta mucho. Aún un factor de 2 cuenta mucho. Y entonces, si realmente quieres hacer
+ las cosas rápidas, una vez que tienes un buen tiempo asintótico, querrás checar los detalles minuciosos. ¿Puedo ahorrarme un factor de 2 aquí? ¿Puedo rearreglar esto para hacer que
+ las cosas corran de manera más suave? ¿Puedo hacerlo interactuar de forma más 
+eficiente con la jerarquía de memoria? ¿Puedo hacer x, y, z para hacerlo más rápido por estos factores 
+constantes que no habíamos visto? La segunda cosa que debes notar es que O grande es sólo asintótica. De alguna manera, lo único que te dice 
+es qué pasa cuando metes datos realmente, pero realmente, pero
+ increíblemente pesados al algoritmo. Y, si quieres correr tu algoritmo con una entrada en específico, O grande no te dice nada acerca de cuánto tiempo le lleva. Digo, usualmente las constantes escondidas
+ por O grande son moderadamente pequeñas y por tanto tienes algo útil. Pero algunas veces son grandes. Algunas veces un algoritmo con peor tiempo O grande, que es peor asintóticamente para entradas grandes, resulta que para todos los tamaños, es 
+realmente vencido por otros algoritmos. Pero hay otros casos donde, encuentras dos algoritmos en que "A" es mejor que "B" para datos enormes, monumentales. Pero algunas veces, mucho, muy, increíblemete grandes significa que nunca los podrías
+ guardar en tu computadora, para empezar. Y así, para datos prácticos, querrías usar el algoritmo "B". En cualquier caso, a pesar de estas advertencias,
+ O grande es increíblemente útil. La vamos a usar durante el curso, y, en la próxima lección, vamos a hablar sobre cómo trabajar con expresiones O grande, cómo manipularlas, cómo usarlas 
+para calcular tiempos de ejecución. Una vez que aprendas eso estaremos
+ listos para hacer algunos algoritmos. En cualquier caso, eso es todo para
+ esta clase, regresa a la siguiente y hablaremos sobre eso.

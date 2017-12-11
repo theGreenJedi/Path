@@ -1,0 +1,449 @@
+1
+00:00:00,190 --> 00:00:05,150
+En este último video mostraremos que 
+hay casos en que podemos ordenar
+
+2
+00:00:05,150 --> 00:00:09,210
+los n objetos dados sin tener que compararlos entre sí.
+
+3
+00:00:09,210 --> 00:00:14,000
+Para tales algoritmos nuestra cota 
+inferior n log n no aplica.
+
+4
+00:00:15,240 --> 00:00:19,990
+Bien, probablemente el caso más natural en 
+que podemos ordenar n objetos dados
+
+5
+00:00:19,990 --> 00:00:22,730
+sin compararlos,
+
+6
+00:00:22,730 --> 00:00:27,580
+es el caso cuando nuestra secuencia de
+ entrada consiste de enteros pequeños.
+
+7
+00:00:27,580 --> 00:00:30,500
+Lo ilustraremos con un ejemplo de caricatura.
+
+8
+00:00:30,500 --> 00:00:38,090
+Considera un arreglo de tamaño 12 que 
+consiste en sólo 3 dígitos diferentes,
+
+9
+00:00:38,090 --> 00:00:42,790
+quiero decir, cada elemento de nuestro
+ arreglo es igual a 1, 2 o 3.
+
+10
+00:00:42,790 --> 00:00:47,230
+Entonces, podemos hacer lo siguiente. Recorramos
+ el arreglo de izquierda a derecha,
+
+11
+00:00:47,230 --> 00:00:52,670
+hacemos un simple escaneo, y contamos
+ el número de ocurrencias de 1, 2 y 3.
+
+12
+00:00:52,670 --> 00:00:56,976
+Simplemente escaneando este arreglo
+ encuentras que 1 aparece 2 veces,
+
+13
+00:00:56,976 --> 00:01:00,550
+2 aparece 7 veces, y 3 aparece 3 veces.
+
+14
+00:01:00,550 --> 00:01:04,800
+Y esta información es suficiente para
+ que ordenemos estos objetos,
+
+15
+00:01:04,800 --> 00:01:10,240
+así que puedes usar esta información para
+ llenar el arreglo resultante, A-prima.
+
+16
+00:01:10,240 --> 00:01:16,950
+Así, ponemos 1 dos veces, 2 siete veces, y 3 tres veces.
+
+17
+00:01:16,950 --> 00:01:21,430
+Y esto nos da el arreglo ordenado resultante A-prima, ¿sí?
+
+18
+00:01:21,430 --> 00:01:25,740
+Lo que acaba de pasar es que ¡ordenamos este arreglo,
+
+19
+00:01:25,740 --> 00:01:30,010
+estos n objetos, sin comparar estos objetos entre sí!
+
+20
+00:01:30,010 --> 00:01:35,450
+Sólo contamos el número de ocurrencias 
+de cada número, y para esto, usamos
+
+21
+00:01:35,450 --> 00:01:42,250
+esencialmente la información de que 
+este arreglo contiene enteros pequeños.
+
+22
+00:01:42,250 --> 00:01:46,610
+El algoritmo que acabamos de ver se llama
+ algoritmo de ordenamiento por conteo.
+
+23
+00:01:47,840 --> 00:01:49,520
+Sus principales ideas son las siguientes.
+
+24
+00:01:49,520 --> 00:01:53,222
+Supón que nos dan un arreglo A de tamaño n,
+
+25
+00:01:53,222 --> 00:01:58,170
+y sabemos que todos sus elementos 
+son enteros en el rango de 1 a M.
+
+26
+00:01:59,270 --> 00:02:00,880
+Entonces hacemos lo siguiente.
+
+27
+00:02:00,880 --> 00:02:04,710
+Creamos un arreglo "Count" de tamaño M,
+
+28
+00:02:04,710 --> 00:02:09,990
+y escaneando el arreglo inicial A sólo 
+una vez de izquierda a derecha,
+
+29
+00:02:09,990 --> 00:02:14,770
+contamos el número de ocurrencias de cada i de 1 a M,
+
+30
+00:02:14,770 --> 00:02:18,670
+y guardamos este valor en la celda i de Count.
+
+31
+00:02:18,670 --> 00:02:22,129
+Entonces, escaneamos el arreglo A de izquierda
+ a derecha, y siempre que veamos 
+
+32
+00:02:23,520 --> 00:02:30,900
+un elemento igual a i, incrementamos el valor
+ guardado en la celda i de Count.
+
+33
+00:02:30,900 --> 00:02:35,831
+Cuando este arreglo se llene, usamos su información para llenar
+
+34
+00:02:35,831 --> 00:02:40,337
+el arreglo resultante A-prima, como le
+ hicimos en el ejemplo de juguete.
+
+35
+00:02:40,337 --> 00:02:44,010
+Éste es el el pseudocódigo del algoritmo 
+de ordenamiento por conteo.
+
+36
+00:02:44,010 --> 00:02:46,550
+Aquí nos dan un arreglo A de tamaño M,
+
+37
+00:02:46,550 --> 00:02:52,121
+y suponemos que todos los elementos de
+ este arreglo son enteros del 1 al M.
+
+38
+00:02:53,150 --> 00:02:59,630
+Introducimos el arreglo Count, de tamaño M, 
+que llenamos inicialmente con ceros.
+
+39
+00:02:59,630 --> 00:03:04,230
+Llenamos este arreglo escaneando
+ nuestro arreglo inicial A,
+
+40
+00:03:04,230 --> 00:03:09,360
+esto es, siempre que veamos un 
+elemento k en nuestro arreglo inicial,
+
+41
+00:03:09,360 --> 00:03:12,770
+incrementamos la cuenta en la celda k.
+
+42
+00:03:12,770 --> 00:03:17,650
+Así que después del primer bucle de este algoritmo,
+ sabemos exactamente el número total
+
+43
+00:03:17,650 --> 00:03:23,390
+de ocurrencias de cada número k del
+ 1 al M en nuestro arreglo inicial.
+
+44
+00:03:23,390 --> 00:03:27,398
+Por ejemplo, en nuestro ejemplo de
+ caricatura que vimos hace 2 diapositivas,
+
+45
+00:03:27,398 --> 00:03:32,683
+contamos el número 1 dos veces en nuestro arreglo inicial,
+
+46
+00:03:32,683 --> 00:03:36,966
+el número 2 aparece 7 veces en nuestro arreglo inicial,
+
+47
+00:03:36,966 --> 00:03:39,730
+y el número 3 aparece 3 veces.
+
+48
+00:03:40,860 --> 00:03:45,968
+En este punto, sabemos que en el arreglo 
+resultante, los primeros dos elementos
+
+49
+00:03:45,968 --> 00:03:51,076
+serán ocupados por el número 1, los 
+siguientes 7 elementos serán ocupados
+
+50
+00:03:51,076 --> 00:03:56,240
+por el número 2, y los siguientes 3 
+elementos serán ocupados por el 3.
+
+51
+00:03:56,240 --> 00:04:03,470
+Ahora, nos gustaría, además de tener 
+las longitudes de los 3 intervalos,
+
+52
+00:04:03,470 --> 00:04:08,090
+nos gustaría calcular el punto de inicio de cada intervalo.
+
+53
+00:04:08,090 --> 00:04:11,340
+Entonces hacemos esto en un nuevo bucle
+
+54
+00:04:11,340 --> 00:04:13,872
+y para ello introducimos un nuevo arreglo "Pos".
+
+55
+00:04:13,872 --> 00:04:16,179
+Así, Pos[1]=1,
+
+56
+00:04:16,179 --> 00:04:22,440
+lo que significa que el número 1 ocupará un 
+espacio que comienza en el primer índice.
+
+57
+00:04:22,440 --> 00:04:27,450
+Y el punto de inicio de los subsecuentes 
+intervalos  se calcula con el punto
+
+58
+00:04:27,450 --> 00:04:33,290
+de inicio del intervalo previo, más la longitud de ese intervalo.
+
+59
+00:04:33,290 --> 00:04:39,080
+Así, Pos[j] se calcula como Pos[j-1]+Count[j-1].
+
+60
+00:04:39,080 --> 00:04:46,050
+En este punto sabemos que el punto 
+de inicio de cada rango.
+
+61
+00:04:46,050 --> 00:04:53,310
+Esto es, el número k en el arreglo resultante ocupará 
+un intervalo que empieza en Pos[k].
+
+62
+00:04:53,310 --> 00:04:57,830
+Entonces sólo peinamos nuestro arreglo inicial, 
+y siempre que veamos un elemento
+
+63
+00:04:57,830 --> 00:05:02,350
+sabremos siempre dónde ponerlo en el arreglo final.
+
+64
+00:05:02,350 --> 00:05:07,353
+Así que déjenme recordarles que no sólo
+ llenamos el arreglo con números del 1 al M
+
+65
+00:05:07,353 --> 00:05:11,580
+sino que también copiamos elementos de nuestro arreglo inicial.
+
+66
+00:05:11,580 --> 00:05:13,700
+Esto es porque lo que estamos buscando
+
+67
+00:05:13,700 --> 00:05:19,010
+en el problema de ordenamiento, es una 
+permutación de nuestros n objetos inicales.
+
+68
+00:05:19,010 --> 00:05:24,920
+Porque lo que tenemos probablemente no 
+sea sólo un número, enteros del 1 al M,
+
+69
+00:05:24,920 --> 00:05:29,214
+sino que estos números pueden ser una clave
+ de algún objeto probablemente más complejo.
+
+70
+00:05:30,560 --> 00:05:31,244
+Está bien, entonces
+
+71
+00:05:31,244 --> 00:05:36,710
+el tiempo de ejecución de este algoritmo 
+se puede ver fácilmente que es O(n+M).
+
+72
+00:05:36,710 --> 00:05:39,940
+Esto es sólo porque aquí tenemos 3 bucles.
+
+73
+00:05:39,940 --> 00:05:45,510
+El primer bucle tiene n iteraciones, el segundo tiene M iteraciones,
+
+74
+00:05:45,510 --> 00:05:49,690
+y el último tiene también n.
+
+75
+00:05:51,130 --> 00:05:53,290
+Aquí está el enunciado formal.
+
+76
+00:05:53,290 --> 00:05:57,120
+El tiempo de ejecución del algoritmo de
+ ordenamiento por conteo es n+M,
+
+77
+00:05:57,120 --> 00:06:03,296
+y el comentario final acerca de este algoritmo
+ es que, si M no crece más rápido que n,
+
+78
+00:06:03,296 --> 00:06:09,182
+por ejemplo, si nuestro arreglo se llena con enteros del 1 al n,
+
+79
+00:06:09,182 --> 00:06:15,842
+o si este arreglo se llena sólo con enteros que están
+ acotados por alguna constante por arriba,
+
+80
+00:06:15,842 --> 00:06:21,755
+entonces el tiempo de ejecución de
+ nuestro algoritmo es sólo lineal en n.
+
+81
+00:06:21,755 --> 00:06:24,505
+Ahora resumiré los últimos tres videos.
+
+82
+00:06:24,505 --> 00:06:28,338
+Primero cubrimos el algoritmo de ordenamiento por mezcla.
+
+83
+00:06:28,338 --> 00:06:33,087
+Éste es un algoritmo del tipo divide y 
+vencerás que procede como sigue.
+
+84
+00:06:33,087 --> 00:06:37,189
+Dado un arreglo de tamaño n, 
+primero se divide en 2 mitades,
+
+85
+00:06:37,189 --> 00:06:41,462
+de aprox el mismo tamaño, después las ordena recursivamente
+
+86
+00:06:41,462 --> 00:06:44,760
+y al final las combina en el arreglo resultante.
+
+87
+00:06:46,460 --> 00:06:52,430
+Mostramos después que el tiempo de 
+ejecución de este algoritmo es O(n log n),
+
+88
+00:06:52,430 --> 00:06:53,810
+que es muy rápido, hasta esto,
+
+89
+00:06:53,810 --> 00:06:54,569
+casi lineal.
+
+90
+00:06:54,569 --> 00:06:59,375
+Después mostramos que ningún otro algoritmo basado
+ en comparación puede ordenar n elementos dados
+
+91
+00:06:59,375 --> 00:07:01,750
+asintóticamente más rápido que n log n.
+
+92
+00:07:02,920 --> 00:07:07,190
+Hicimos esto mostrando que cualquier
+ algoritmo basado en comparación,
+
+93
+00:07:07,190 --> 00:07:09,770
+debe distinguir entre bastantes casos.
+
+94
+00:07:09,770 --> 00:07:12,692
+Entre n! permutaciones posibles.
+
+95
+00:07:12,692 --> 00:07:17,444
+Para éste, en el peor de los casos, 
+un algoritmo basado en comparación
+
+96
+00:07:17,444 --> 00:07:21,925
+debe hacer al menos O(n log n) comparaciones.
+
+97
+00:07:21,925 --> 00:07:28,110
+Después mostramos que, de hecho, se puede hacer más
+ rápido, quiero decir, el problema de ordenamiento
+
+98
+00:07:28,110 --> 00:07:33,060
+puede resolverse en un tiempo menor
+ a n log n, en algunos casos.
+
+99
+00:07:33,060 --> 00:07:40,087
+Por ejemplo, en el caso en que nuestro arreglo de entrada 
+contiene enteros con valores pequeños.

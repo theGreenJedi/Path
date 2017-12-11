@@ -1,0 +1,699 @@
+1
+00:00:00,400 --> 00:00:05,160
+En este video, estudiaremos el llamado
+ algoritmo de ordenamiento por mezcla.
+
+2
+00:00:05,160 --> 00:00:07,651
+Se basa en la técnica de divide y vencerás,
+
+3
+00:00:07,651 --> 00:00:09,424
+cuya idea principal es la siguiente.
+
+4
+00:00:09,424 --> 00:00:13,513
+Para resolver un problema computacional 
+dado, primero lo divides en dos
+
+5
+00:00:13,513 --> 00:00:19,090
+o más subproblemas disjuntos. Luego resuelves
+ cada uno de los subproblemas recursivamente.
+
+6
+00:00:19,090 --> 00:00:24,078
+Y finalmente, combinas los resultados
+ que obtuviste de las llamadas
+
+7
+00:00:24,078 --> 00:00:27,959
+recursivas, para obtener el resultado de tu problema inicial.
+
+8
+00:00:27,959 --> 00:00:31,904
+Y esto es exactamente lo que vamos a hacer 
+en el algoritmo del ordenamiento por mezcla.
+
+9
+00:00:31,904 --> 00:00:33,570
+Mostremos un ejemplo de caricatura.
+
+10
+00:00:33,570 --> 00:00:37,320
+Nos dan un arreglo de tamaño 8, y lo vamos a ordenar.
+
+11
+00:00:37,320 --> 00:00:41,400
+Primero lo dividimos en dos mitades de tamaño 4,
+
+12
+00:00:41,400 --> 00:00:43,940
+la parte izquierda y la parte derecha.
+
+13
+00:00:43,940 --> 00:00:49,820
+Entonces hacemos 2 llamadas 
+recursivas para ordenar ambas partes.
+
+14
+00:00:49,820 --> 00:00:51,910
+Éstos son los resultados de los arreglos.
+
+15
+00:00:51,910 --> 00:00:57,130
+Ahora, lo que queda por hacer, es 
+combinar estos 2 arreglos en uno,
+
+16
+00:00:57,130 --> 00:01:01,010
+estos arreglos de tamaño 4 en uno de tamaño 8.
+
+17
+00:01:01,010 --> 00:01:04,070
+Bien, pensemos cómo puede hacerse.
+
+18
+00:01:04,070 --> 00:01:04,760
+En primer lugar,
+
+19
+00:01:04,760 --> 00:01:10,370
+yo afirmo que es fácil encontrar el 
+valor mínimo en el arreglo resultante.
+
+20
+00:01:10,370 --> 00:01:14,040
+De hecho, sabemos que el valor mínimo
+ en este caso, en el primer arreglo es 2,
+
+21
+00:01:14,040 --> 00:01:16,830
+y el valor mínimo en el segundo arreglo es 1.
+
+22
+00:01:16,830 --> 00:01:22,480
+Lo que significa que el valor mínimo en 
+el resultado, en el arreglo fundido, debe ser 1.
+
+23
+00:01:22,480 --> 00:01:26,790
+Así que tomemos a 1 del arreglo de la derecha, 
+pongámoslo en el arreglo resultante,
+
+24
+00:01:26,790 --> 00:01:27,930
+y olvidémonos de él.
+
+25
+00:01:27,930 --> 00:01:30,110
+Ya está en su lugar correcto.
+
+26
+00:01:31,200 --> 00:01:33,860
+Lo que queda es un arreglo de tamaño 4
+
+27
+00:01:33,860 --> 00:01:37,580
+y un arreglo de tamaño 3 que todavía necesitan fusionarse.
+
+28
+00:01:37,580 --> 00:01:41,190
+Bueno, de nuevo, es fácil encontrar el valor mínimo
+
+29
+00:01:42,870 --> 00:01:45,200
+del resultado de mezclar estos dos arreglos.
+
+30
+00:01:45,200 --> 00:01:49,360
+En este caso es 2, porque el valor
+ mínimo en el arreglo de tamaño 4
+
+31
+00:01:49,360 --> 00:01:53,580
+es 2, y el valor mínimo en el arreglo de tamaño 3 es 6,
+
+32
+00:01:53,580 --> 00:01:58,836
+2 es menor que 6, así que extraemos
+ 2 de nuestro arreglo izquierdo,
+
+33
+00:01:58,836 --> 00:02:03,807
+lo ponemos en el arreglo resultante 
+después del 1, y ya está.
+
+34
+00:02:03,807 --> 00:02:08,059
+Al final, obtenemos el siguiente arreglo ordenado.
+
+35
+00:02:08,059 --> 00:02:13,246
+De nuevo, el pseudocódigo del algoritmo del ordenamiento
+ por mezcla, implementa directamente esta idea.
+
+36
+00:02:13,246 --> 00:02:18,890
+Este pseudo código toma como
+ entrada un arreglo A de tamaño n,
+
+37
+00:02:18,890 --> 00:02:23,450
+y si n es igual a 1, entonces, en
+ este caso no se requiere hacer nada,
+
+38
+00:02:23,450 --> 00:02:27,240
+podemos devolver directamente A.
+
+39
+00:02:27,240 --> 00:02:32,326
+Por otro lado, si n es mayor que 1, 
+entonces dividimos el arreglo A
+
+40
+00:02:32,326 --> 00:02:36,957
+en dos partes aproximadamente iguales,
+ y las ordenamos recursivamente,
+
+41
+00:02:36,957 --> 00:02:39,040
+las llamamos B y C aquí.
+
+42
+00:02:39,040 --> 00:02:45,490
+Entonces,, lo único que se necesita hacer 
+es combinar estos dos arreglos ordenados.
+
+43
+00:02:45,490 --> 00:02:49,900
+Y esto es hecho con el procedimiento "merge", 
+que presentaremos en la siguiente lámina.
+
+44
+00:02:49,900 --> 00:02:54,170
+Finalmente, devolvemos el resultado 
+de este procedimiento de fusión.
+
+45
+00:02:55,210 --> 00:02:58,870
+El pseudocódigo del procedimiento 
+de fusión es también directo.
+
+46
+00:02:58,870 --> 00:03:03,748
+Supón que nos dan dos arreglos ordenados,
+ B y C, de tamaños p y q,
+
+47
+00:03:03,748 --> 00:03:09,801
+respectivamente, y querríamos fusionarlos 
+en un arreglo ordenado de tamaño p+q.
+
+48
+00:03:09,801 --> 00:03:15,297
+Entonces, la primera cosa que hacemos es crear 
+un arreglo de tamaño p+q, un arreglo D.
+
+49
+00:03:15,297 --> 00:03:17,380
+Está vacío inicialmente.
+
+50
+00:03:17,380 --> 00:03:19,988
+Luego, seguimos haciendo lo siguiente.
+
+51
+00:03:19,988 --> 00:03:26,337
+¿Cuál es el valor mínimo entre todos los
+ valores guardados en los arreglos B y C?
+
+52
+00:03:26,337 --> 00:03:28,130
+Bien, es fácil de saber.
+
+53
+00:03:28,130 --> 00:03:32,150
+Sabemos que el primer elemento en 
+el arreglo B es su elemento más pequeño,
+
+54
+00:03:32,150 --> 00:03:36,340
+y el primer elemento de C es también su elemento más pequeño.
+
+55
+00:03:36,340 --> 00:03:39,480
+Así que el más pequeño entre estos
+ dos, es el más pequeño
+
+56
+00:03:39,480 --> 00:03:42,930
+de la unión de estos dos arreglos.
+
+57
+00:03:42,930 --> 00:03:47,810
+Así que sólo encontramos el mínimo de estos 
+primeros elementos y lo movemos desde uno de
+
+58
+00:03:47,810 --> 00:03:53,090
+estos arreglos hasta el arreglo D, y nos 
+olvidamos de este elemento completamente.
+
+59
+00:03:53,090 --> 00:03:55,940
+Lo que nos queda es esencialmente el mismo problema.
+
+60
+00:03:55,940 --> 00:03:59,480
+Nos quedamos con 2 arreglos ordenados 
+y necesitamos combinarlos todavía.
+
+61
+00:03:59,480 --> 00:04:01,680
+Así que hacemos exactamente lo mismo.
+
+62
+00:04:01,680 --> 00:04:03,200
+Tomamos los primeros 2 elementos,
+
+63
+00:04:03,200 --> 00:04:08,110
+los comparamos, y movemos el
+ más pequeño al arreglo resultante.
+
+64
+00:04:08,110 --> 00:04:12,590
+Y seguimos haciendo esto mientras 
+ambos arreglos no estén vacíos.
+
+65
+00:04:12,590 --> 00:04:15,980
+Digo, necesitamos esto para poder tomar los primeros elementos.
+
+66
+00:04:15,980 --> 00:04:18,460
+Cuando uno de ellos se vacía,
+
+67
+00:04:18,460 --> 00:04:24,290
+sólo copiamos el resto del otro arreglo en el arreglo resultante D,
+
+68
+00:04:24,290 --> 00:04:27,480
+es decir, agregamos el resto al arreglo D.
+
+69
+00:04:27,480 --> 00:04:32,120
+No es difícil ver que este 
+procedimiento es correcto y su tiempo
+
+70
+00:04:32,120 --> 00:04:37,600
+de ejecución es p+q, esto es, el tamaño 
+del arreglo B más el tamaño del arreglo C.
+
+71
+00:04:37,600 --> 00:04:42,800
+Y esto es porque combinamos 
+ambos arreglos de izquierda
+
+72
+00:04:42,800 --> 00:04:46,670
+a derecha cuando se corre el procedimiento de fusión.
+
+73
+00:04:46,670 --> 00:04:50,650
+Así es como se ve el ordenamiento
+ de nuestro arreglo inicial
+
+74
+00:04:50,650 --> 00:04:53,730
+de tamaño 8 cuando se corre el 
+algoritmo de ordenamiento por mezcla.
+
+75
+00:04:53,730 --> 00:04:58,140
+Así, el algoritmo primero divide
+
+76
+00:04:58,140 --> 00:05:02,350
+el arreglo inicial de tamaño 8 en dos arreglos de tamaño 4.
+
+77
+00:05:02,350 --> 00:05:07,010
+Cada uno de estos arreglos de tamaño 4 se dividen
+ a su vez en dos arreglos de tamaño 2,
+
+78
+00:05:07,010 --> 00:05:10,840
+y cada uno de ellos se divide en dos arreglos de tamaño 1.
+
+79
+00:05:10,840 --> 00:05:16,130
+Entonces el procedimiento de mezcla comienza a 
+combinar estos arreglos de tamaño 1 en arreglos
+
+80
+00:05:16,130 --> 00:05:21,450
+de tamaño 2 y entonces estos arreglos 
+de tamaño 2 en arreglos de tamaño 4,
+
+81
+00:05:21,450 --> 00:05:26,200
+y finalmente, combina el resultado
+ de los arreglos de tamaño 4
+
+82
+00:05:26,200 --> 00:05:29,378
+en el arreglo resultante de tamaño 8.
+
+83
+00:05:29,378 --> 00:05:34,860
+Ahora vamos a probar que el tiempo de ejecución del
+ algoritmo de ordenamiento por mezcla
+
+84
+00:05:34,860 --> 00:05:38,962
+para una secuencia que contiene n elementos es O(n log n).
+
+85
+00:05:38,962 --> 00:05:45,001
+Noten que esto es significativamente más rápido que un algoritmo
+ de ordenamiento por selección, que es cuadrático.
+
+86
+00:05:45,001 --> 00:05:49,835
+Por ejemplo, puedes muy bien 
+ordenar una secuencia de tamaño 1 millón
+
+87
+00:05:49,835 --> 00:05:54,321
+en tu laptop usando el algoritmo de ordenamiento por mezcla.
+
+88
+00:05:54,321 --> 00:05:58,559
+Mientras que para al algoritmo de ordenamiento
+ por selección, que es cuadrático,
+
+89
+00:05:58,559 --> 00:06:04,117
+ordenar una secuencia de tamaño 10^6, 
+1 millón, tomará alrededor
+
+90
+00:06:04,117 --> 00:06:09,520
+10^12 operaciones, que es demasiado
+ para las computadoras actuales.
+
+91
+00:06:11,050 --> 00:06:16,038
+OK. Para probar este lema, para probar
+ la cota superior del tiempo de ejecución
+
+92
+00:06:16,038 --> 00:06:20,940
+del ordenamiento por mezcla, primero
+ nota que combinar dos partes
+
+93
+00:06:20,940 --> 00:06:25,880
+de tamaño n/2 de nuestro arreglo
+ inicial, toma un tiempo lineal,
+
+94
+00:06:25,880 --> 00:06:30,342
+a decir, O(n), porque la parte izquierda tiene tamaño n/2,
+
+95
+00:06:30,342 --> 00:06:32,930
+la parte derecha también,
+
+96
+00:06:32,930 --> 00:06:37,270
+y para fusionar, básicamente combinamos
+estas partes de izquierda a derecha,
+
+97
+00:06:37,270 --> 00:06:41,621
+así que sólo toma una cantidad lineal de tiempo hacer esto.
+
+98
+00:06:41,621 --> 00:06:46,313
+Lo que a su vez significa que si denotamos 
+por T(n) el tiempo de ejecución del algoritmo
+
+99
+00:06:46,313 --> 00:06:49,766
+de ordenamiento por mezcla, entonces
+ satisface la siguiente recurrencia:
+
+100
+00:06:49,766 --> 00:06:54,168
+T(n) es a lo más 2T(b/2)+O(n).
+
+101
+00:06:54,168 --> 00:06:59,651
+Aquí, 2T(n/2) corresponde a dos llamadas recursivas.
+
+102
+00:06:59,651 --> 00:07:06,160
+Entonces, denotamos T(n) el tiempo de 
+ejecución para una entrada de tamaño n,
+
+103
+00:07:06,160 --> 00:07:11,876
+así que cuando ordenamos 2 secuencias de tamaño n/2,
+
+104
+00:07:11,876 --> 00:07:16,210
+usamos un tiempo igual a dos veces T(n/2).
+
+105
+00:07:16,210 --> 00:07:21,456
+El término O(n) corresponde a lo que
+ hacemos antes y después de hacer
+
+106
+00:07:21,456 --> 00:07:23,774
+las llamadas recursivas.
+
+107
+00:07:23,774 --> 00:07:29,450
+Y lo que hacemos antes es dividir 
+el arreglo de entrada en 2 mitades,
+
+108
+00:07:29,450 --> 00:07:35,489
+mientras que lo que hacemos después es combinar 
+los resultados de los 2 arreglos en uno de tamaño n.
+
+109
+00:07:35,489 --> 00:07:42,441
+No es difícil ver que todo esto se puede hacer en tiempo lineal.
+
+110
+00:07:42,441 --> 00:07:45,759
+Así, tenemos esta recurrencia y en la próxima lámina
+
+111
+00:07:45,759 --> 00:07:50,183
+vamos a mostrar que esta recurrencia
+ implica que el tiempo de ejecución
+
+112
+00:07:50,183 --> 00:07:53,741
+de nuestro algoritmo está acotado por arriba por n log n.
+
+113
+00:07:53,741 --> 00:07:56,204
+Para estimar el tiempo para este algoritmo,
+
+114
+00:07:56,204 --> 00:07:58,134
+consideremos su árbol recursivo.
+
+115
+00:07:58,134 --> 00:08:03,250
+En la copa de este árbol, tenemos un arreglo de tamaño n.
+
+116
+00:08:03,250 --> 00:08:07,982
+Para este arreglo de tamaño n,
+ hacemos dos llamadas recursivas
+
+117
+00:08:07,982 --> 00:08:10,017
+para arreglos de tamaño n/2.
+
+118
+00:08:10,017 --> 00:08:14,802
+Cada uno de estos arreglos de 
+tamaño n/2 a su vez se dividen en 2
+
+119
+00:08:14,802 --> 00:08:16,827
+arreglos de tamaño n/4.
+
+120
+00:08:16,827 --> 00:08:20,400
+Así que tenemos 4 arreglos de tamaño n/4, y así seguimos.
+
+121
+00:08:20,400 --> 00:08:24,540
+Así que, en este árbol, tenemos log n niveles.
+
+122
+00:08:24,540 --> 00:08:31,010
+Ahora estimemos el trabajo hecho en cada
+uno de los niveles de este árbol separadamente.
+
+123
+00:08:31,010 --> 00:08:35,065
+Para resolver un problema de tamaño n,
+
+124
+00:08:35,065 --> 00:08:39,471
+para ordenar un arreglo de tamaño n, primero
+ nos preparamos para hacer llamadas recursivas.
+
+125
+00:08:39,471 --> 00:08:44,600
+En este caso, sólo dividimos el arreglo de
+ entrada en dos mitades de tamaño n/2.
+
+126
+00:08:44,600 --> 00:08:49,024
+Entonces hacemos llamadas recursivas,
+ y después combinamos los resultados.
+
+127
+00:08:49,024 --> 00:08:54,650
+Y todo el trabajo hecho dentro de las 
+llamadas recursivas será considerado
+
+128
+00:08:54,650 --> 00:08:57,635
+en los niveles más bajos del árbol.
+
+129
+00:08:57,635 --> 00:09:01,175
+Ahora, lo que vamos a hacer es considerar
+
+130
+00:09:01,175 --> 00:09:05,102
+sólo el trabajo hecho antes de las llamadas recursivas
+
+131
+00:09:05,102 --> 00:09:09,580
+y después de ellas, en cada nivel separado.
+
+132
+00:09:09,580 --> 00:09:14,060
+Y ya sabemos que toma un tiempo lineal hacer esto.
+
+133
+00:09:14,060 --> 00:09:16,478
+Quiero decir, si tenemos un arreglo de tamaño n,
+
+134
+00:09:16,478 --> 00:09:19,681
+toma un tiempo lineal dividirlo en dos mitades,
+
+135
+00:09:19,681 --> 00:09:24,305
+y también toma un tiempo lineal combinar los resultados
+
+136
+00:09:24,305 --> 00:09:27,192
+de las llamadas recursivas en un arreglo.
+
+137
+00:09:27,192 --> 00:09:29,800
+Denotemos pues, este tiempo por cn,
+
+138
+00:09:29,800 --> 00:09:33,801
+digo, denotemos por c a la constante
+ escondida dentro de la O grande.
+
+139
+00:09:33,801 --> 00:09:38,457
+Entonces lo que podemos decir es que 
+en el nivel de arriba gastamos un tiempo cn.
+
+140
+00:09:38,457 --> 00:09:42,379
+Después, en el siguiente nivel, por cada subarreglo
+
+141
+00:09:42,379 --> 00:09:48,530
+gastamos un tiempo cn/2, porque el tamaño del arreglo es n/2.
+
+142
+00:09:48,530 --> 00:09:53,432
+Sin embargo, tenemos 2 arreglos, así que la 
+cantidad total de trabajo que hacemos en este nivel
+
+143
+00:09:53,432 --> 00:09:57,878
+es 2 por cn/2, que de nuevo es cn.
+
+144
+00:09:57,878 --> 00:10:03,279
+En el siguiente nivel gastamos 4 -porque 
+tenemos 4 arreglos- por cn/4
+
+145
+00:10:03,279 --> 00:10:08,220
+-porque el tamaño del arreglo es ahora n/4-.
+
+146
+00:10:08,220 --> 00:10:10,211
+Esto es cn, de nuevo, y así seguimos.
+
+147
+00:10:10,211 --> 00:10:11,511
+Entonces, tenemos log n niveles,
+
+148
+00:10:11,511 --> 00:10:15,701
+en cada nivel hacemos aproximadamente cn operaciones,
+
+149
+00:10:15,701 --> 00:10:20,757
+así que el número total de operaciones
+ en nuestro algoritmo es cn log n,
+
+150
+00:10:20,757 --> 00:10:22,811
+lo que prueba nuestro lema.
+
+151
+00:10:22,811 --> 00:10:26,899
+Así, lo que probamos es que el tiempo de ejecución
+
+152
+00:10:26,899 --> 00:10:29,794
+del algoritmo de ordenamiento por mezcla, es O(n log n).
+
+153
+00:10:29,794 --> 00:10:34,435
+En el próximo video mostraremos 
+que de hecho no hay ningún algoritmo
+
+154
+00:10:34,435 --> 00:10:40,040
+ningún algoritmo basado en comparaciones, para ser 
+completamente formal, puede ordenar una secuencia
+
+155
+00:10:40,040 --> 00:10:44,961
+dada de n elementos asintóticamente
+ más rápido que en un tiempo n log n.
+
+156
+00:10:44,961 --> 00:10:50,072
+Lo que significa que el algoritmo de ordenamiento 
+por mezcla es asintóticamente óptimo.

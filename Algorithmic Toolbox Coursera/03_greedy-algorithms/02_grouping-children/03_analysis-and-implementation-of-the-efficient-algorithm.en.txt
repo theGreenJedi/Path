@@ -1,0 +1,59 @@
+Now let us consider the pseudocode
+that implements this algorithm. For the sake of simplicity we assume that
+the points in the input are given in sorted order from smallest to largest. We'll start with an empty set
+of segments denoted by R and we start with index i
+pointing at the first point which is the leftmost because
+the points are sorted. Now we go through the points,
+and we find the leftmost point. Currently i is pointing to
+the leftmost point in the set. And at the start of the while loop i will always point to the leftmost
+point which is still in the set. Now we cover it with the segment
+from l to r which has unit length, and the left end in the point xi, so
+this is a segment from xi to xi+1. We add this segment to the solution set,
+and then we need to remove all the points
+from the set which already covered. Instead of removing the points, we will
+just move the pointer to the right and forget about the points,
+which are to the left from the pointer. So the next while loop, does exactly that. We know that for any i that is
+larger than the current i, xi is to the right from the left end of the
+segment, because the points are sorted. So if xi is also to the left from R,
+then it is covered by the segment. So we just go to the right, and
+to the right with pointer i. And while xi is less than or equal to r,
+we know that the point is covered. And as soon as we find some xi which is
+bigger than r, it means that this point is not covered and all the points further
+in the array are also not covered. So we stop. And then we repeat again the iteration
+of the outer while loop. Or maybe our pointer i is already out
+of the array of the input points. And then we stop and return R, which is the set of segments
+that we've built in the process. Now let's prove that this
+algorithm works in linear time. Indeed, index i changes just from 1 to n. And we always increase it by one. For each value of i, we add at
+most one segment to the solution. So overall,
+we increase i at most n times and add at most n segments to the solution. And this leads to a solution
+which works in Big-O of n time. Now, we had an assumption that the points
+in the input are already sorted. What if we drop this assumption? Then we will have to sort
+the points first, and then apply our algorithm
+PointsCoverSorted. Later in this module, you will learn
+how to sort points in time n log n. Combining that with our procedure
+PointsCoverSorted will give you total running time of n log n. Now let's look at our improvement. We first implemented
+a straightforward solution, which worked in time at
+least 2 to the power of n. And it worked very, very slowly. So that even for 50 children, we would have to spend at least 2
+weeks of computation to group them. Our new algorithm, however,
+works in n log n time. And that means that even if we had 10
+million children coming to a party, it would spend only a few seconds grouping
+them optimally into several groups. So that's a huge improvement. Now let's see how we went to this end. First, we've invented a naive solution
+which worked in exponential time. It was too slow for us so
+we wanted to improve it. But to improve it, the very first important step was to
+reformulate it in mathematical terms. And then we had an idea to solve
+it with a greedy algorithm. So, we had to find some greedy choice and
+prove that it will be a safe move. In this case, the safe move turns
+out to be to add to the solution a segment with left and
+in the leftmost point. And then we prove that this
+is really a safe move. It is very important to prove your
+solutions before even trying to implement them. Because otherwise, it could turn out that
+you implemented the solution, tried to submit it, got wrong answer or some
+other result, different from accepted. And then, you've made a few more changes,
+but it still didn't work. And then, you understand that
+your solution was wrong, completely from the start. And then you need a new solution, and you
+will have to implement it from scratch. And that means that you've wasted all
+the time on implementation on the first wrong solution. To avoid that, you should always
+prove your solution first. So after we've proved the safe move,
+we basically got our greedy solution. Which works in combination with
+a certain algorithm in time n log n. Which is not only polynomial, but
+is very close to linear time, and works really fast in practice.

@@ -1,0 +1,629 @@
+1
+00:00:00,980 --> 00:00:03,510
+En este video veremos una demostración de cómo funciona el Teorema Maestro.
+
+2
+00:00:05,460 --> 00:00:11,100
+Les recuerdo, el Teorema Maestro dice que si T(n) es igual a
+
+3
+00:00:11,100 --> 00:00:15,360
+T del techo de n/b, más un polinomio, 
+entonces podemos tener estos 3 casos.
+
+4
+00:00:16,610 --> 00:00:19,260
+Entonces vamos, como normalmente lo
+ hacemos en una relación de recurrencia,
+
+5
+00:00:19,260 --> 00:00:20,320
+a crear un árbol de recurrencia.
+
+6
+00:00:21,900 --> 00:00:26,910
+Entonces, tendremos nuestra recurrencia arriba,
+ para acordarnos de lo que es.
+
+7
+00:00:26,910 --> 00:00:29,905
+Supongamos por simplicidad
+ que n es una potencia de b.
+
+8
+00:00:29,905 --> 00:00:36,090
+Es una suposición razonable pues siempre podemos extender n algo más, ¿no?
+
+9
+00:00:36,090 --> 00:00:41,780
+Si no lo aumentamos por más de b, podemos
+ llegar a la siguiente potencia más cercana de b
+
+10
+00:00:41,780 --> 00:00:44,750
+y esto será un análisis más fácil.
+
+11
+00:00:44,750 --> 00:00:45,600
+Entonces, tenemos nuestro problema n,
+
+12
+00:00:45,600 --> 00:00:50,340
+en el siguiente nivel dividimos el problema en
+
+13
+00:00:50,340 --> 00:00:54,920
+a copias de problemas de tamaño n/b.
+
+14
+00:00:57,050 --> 00:00:58,680
+Así. nivel cero,
+
+15
+00:00:58,680 --> 00:01:00,230
+tenemos un problema de tamaño n,
+
+16
+00:01:00,230 --> 00:01:02,288
+nivel 1, tenemos problemas de tamaño n/b.
+
+17
+00:01:02,288 --> 00:01:07,290
+En el nivel general i, tenemos 
+problemas de tamaño n/b^i.
+
+18
+00:01:07,290 --> 00:01:11,489
+Y en el nivel del fondo, que es nivel log en base
+ b de n, tenemos problemas de tamaño 1.
+
+19
+00:01:13,305 --> 00:01:14,465
+¿Cuántos problemas hay?
+
+20
+00:01:14,465 --> 00:01:17,205
+En el nivel 0, hay, por supuesto, un problema.
+
+21
+00:01:17,205 --> 00:01:19,435
+En el nivel 1. un número a de problemas.
+
+22
+00:01:19,435 --> 00:01:23,015
+Y en el nivel general i, son a^i problemas.
+
+23
+00:01:23,015 --> 00:01:26,720
+En el nivel log en base b de n,
+ es a elevado a la log en base b de n.
+
+24
+00:01:28,798 --> 00:01:30,015
+¿Cuánto trabajo debemos hacer?
+
+25
+00:01:31,070 --> 00:01:35,930
+Bien, el trabajo es sólo una función de
+ cuántos problemas tenemos
+
+26
+00:01:35,930 --> 00:01:39,740
+y la cantidad de trabajo por cada problema.
+
+27
+00:01:39,740 --> 00:01:44,300
+Entonces, a nivel 0 sólo tenemos trabajo de O(n^d).
+
+28
+00:01:44,300 --> 00:01:46,630
+Hay un problema y toma un tiempo O(n^d).
+
+29
+00:01:48,110 --> 00:01:50,628
+Al nivel 1 tenemos a problemas,
+
+30
+00:01:50,628 --> 00:01:57,129
+y cada uno de ellos requiere un
+ trabajo de O(n/b)^d.
+
+31
+00:01:57,129 --> 00:02:01,697
+Podemos juntar a, b, y d, y esto se escribe
+
+32
+00:02:01,697 --> 00:02:05,220
+como O(n^d) por a/b^d.
+
+33
+00:02:06,960 --> 00:02:09,980
+En el nivel i-ésimo tenemos a^i problemas
+
+34
+00:02:09,980 --> 00:02:14,860
+y cada uno es O(n/b^i)^d.
+
+35
+00:02:17,110 --> 00:02:22,080
+De nuevo, podemos sacar el a^i, el b^i
+
+36
+00:02:22,080 --> 00:02:24,390
+y, nos queda O(n^d) por
+
+37
+00:02:24,390 --> 00:02:27,310
+(a/b^d)^i.
+
+38
+00:02:27,310 --> 00:02:31,660
+Y finalmente, en el nivel del fondo, tenemos a elevado a la log en base b de n porque
+
+39
+00:02:31,660 --> 00:02:32,790
+los problemas son de tamaño 1,
+
+40
+00:02:32,790 --> 00:02:35,500
+lo que es O(n a la log en base b de a).
+
+41
+00:02:37,070 --> 00:02:41,480
+Entonces, la cantidad total de trabajo es la 
+suma desde 0 hasta log en base b de n
+
+42
+00:02:41,480 --> 00:02:46,550
+de O(n^d) por (a/b^d)^i.
+
+43
+00:02:48,590 --> 00:02:54,850
+Veamos ahora lo que parece un pequeño paréntesis, y es la serie geométrica.
+
+44
+00:02:54,850 --> 00:02:59,890
+La serie geométrica es una serie de números
+
+45
+00:02:59,890 --> 00:03:04,680
+que progresa por un factor multiplicativo.
+
+46
+00:03:05,770 --> 00:03:06,747
+Doy un ejemplo.
+
+47
+00:03:06,747 --> 00:03:12,855
+Si tomamos 1+2+4+8+16+32+64,
+ eso es una serie geométrica,
+
+48
+00:03:12,855 --> 00:03:16,800
+donde nuestro factor es un factor de 2 cada vez.
+
+49
+00:03:18,610 --> 00:03:22,652
+También podríamos tener una
+ serie geométrica que disminuya.
+
+50
+00:03:22,652 --> 00:03:28,073
+Así, podríamos tener por ejemplo, digamos, 10,000
+
+51
+00:03:28,073 --> 00:03:31,276
+1,000, 100, 10, 1.
+
+52
+00:03:31,276 --> 00:03:32,374
+Donde bajamos por un factor constante
+ de 10 en cada incremento.
+
+53
+00:03:32,374 --> 00:03:38,880
+Ahora, resulta, que si nuestro factor
+ multiplicativo, llamémoslo r,
+
+54
+00:03:38,880 --> 00:03:42,310
+mientras que r sea diferente de uno, 
+tenemos una simple forma cerrada para esto.
+
+55
+00:03:42,310 --> 00:03:47,434
+Esto es sólo a por 
+
+56
+00:03:47,434 --> 00:03:51,580
+(1-r^n)/(1-r).
+
+57
+00:03:51,580 --> 00:03:55,130
+Y resulta que en nuestra notación O grande,
+
+58
+00:03:55,130 --> 00:04:00,749
+nos fijamos en el término más grande.
+
+59
+00:04:01,980 --> 00:04:07,580
+Y nuestra suma va a estar acotada por una constante por el término más grande.
+
+60
+00:04:07,580 --> 00:04:13,010
+Así, si r es menor que 1, entonces el término
+ más grande es el primer elemento a
+
+61
+00:04:13,010 --> 00:04:15,890
+y por tanto, nuestra solución es O(a).
+
+62
+00:04:15,890 --> 00:04:19,120
+Porque como es nuestro término
+ más grande. se hace
+
+63
+00:04:19,120 --> 00:04:21,170
+más y más y más pequeño.
+
+64
+00:04:21,170 --> 00:04:23,930
+Y como a es un factor multiplicativo,
+
+65
+00:04:23,930 --> 00:04:26,910
+entonces, todo lo que realmente
+ importa es este primer término,
+
+66
+00:04:26,910 --> 00:04:30,480
+porque la suma del resto es no más que una constante por ese primer término.
+
+67
+00:04:30,480 --> 00:04:34,300
+Si, por el otro lado, r es mayor que 1, 
+entonces lo que importa es el último término,
+
+68
+00:04:34,300 --> 00:04:39,270
+porque ése es l término más grande y todos
+ los anteriores son más chicos.
+
+69
+00:04:39,270 --> 00:04:41,960
+Entonces, más chico, más grande,
+ más grande, el más grande.
+
+70
+00:04:43,320 --> 00:04:47,880
+Y entonces, el término más grande es ar^(n-1).
+
+71
+00:04:47,880 --> 00:04:51,670
+Así, en la serie geométrica nos
+ importa ya sea el primer
+
+72
+00:04:51,670 --> 00:04:52,949
+o el último término, el que sea más grande.
+
+73
+00:04:55,060 --> 00:04:59,510
+Ahora, si regresamos con esto al caso
+ de nuestro árbol de recurrencia,
+
+74
+00:04:59,510 --> 00:05:00,720
+vemos nuestra suma aquí,
+
+75
+00:05:00,720 --> 00:05:05,645
+es la suma que teníamos de nuestro árbol de recurrencia y vemos que lo que tenemos
+
+76
+00:05:05,645 --> 00:05:10,613
+es una serie geométrica;
+
+77
+00:05:10,613 --> 00:05:15,120
+a sería O(n^d)
+
+78
+00:05:15,120 --> 00:05:18,130
+r sería a/b^d,
+
+79
+00:05:18,130 --> 00:05:20,410
+o sea, nuestro factor multiplicativo es a/b^d.
+
+80
+00:05:20,410 --> 00:05:22,850
+Y hay tres casos.
+
+81
+00:05:22,850 --> 00:05:26,560
+Si recuerdas de cuando enunciamos 
+la solución del Teorema Maestro.
+
+82
+00:05:26,560 --> 00:05:29,730
+Caso uno es d mayor que log en base b de a.
+
+83
+00:05:29,730 --> 00:05:34,017
+Eso es equivalente a decir que 
+a/b^d es menor que 1.
+
+84
+00:05:34,017 --> 00:05:39,380
+Así que ahora tenemos que nuestro 
+término multiplicativo es menor que 1,
+
+85
+00:05:39,380 --> 00:05:41,630
+por lo que se hace cada vez más chico.
+
+86
+00:05:41,630 --> 00:05:45,470
+Eso significa que el término
+ más grande es el primero.
+
+87
+00:05:45,470 --> 00:05:46,960
+Y ese es el que vamos a usar.
+
+88
+00:05:46,960 --> 00:05:51,900
+Entonces, oficialmente, este es O de O de n^d,
+
+89
+00:05:51,900 --> 00:05:53,850
+que es lo mismo que O(n^d).
+
+90
+00:05:55,990 --> 00:06:01,560
+Caso dos, donde d es igual a log en
+ base b de a, o, equivalentemente,
+
+91
+00:06:01,560 --> 00:06:02,740
+a/b^d es igual a 1.
+
+92
+00:06:02,740 --> 00:06:07,180
+Bien, si a/b^d=1, recuerden que nuestra fórmula
+
+93
+00:06:07,180 --> 00:06:11,340
+no contempla este caso, así que 
+vamosa tener que calcular esto.
+
+94
+00:06:11,340 --> 00:06:17,490
+Pero si a/b^d=1, entonces a/b^d a 
+cualquier potencia sigue siendo 1.
+
+95
+00:06:17,490 --> 00:06:19,760
+Lo que significa que nuestra suma
+
+96
+00:06:20,770 --> 00:06:25,270
+no es más que la suma desde i igual a 0 
+hasta log en base b de n de O(n^d).
+
+97
+00:06:26,910 --> 00:06:29,340
+Y eso es 1 más log en base b de n,
+
+98
+00:06:29,340 --> 00:06:33,940
+porque ése es el número de términos
+ en nuestra suma, por O(n^d).
+
+99
+00:06:33,940 --> 00:06:37,830
+Bien, el 1 es un término de orden bajo que
+ no consideramos, y log en base b de n 
+
+100
+00:06:37,830 --> 00:06:42,830
+puede ser tratado como log n, porque un cambio de base involucra sólo un factor multiplicativo,
+
+101
+00:06:42,830 --> 00:06:45,750
+y eso desaparece en nuestra notación O grande.
+
+102
+00:06:45,750 --> 00:06:50,330
+Así que terminamos, como lo vimos
+ en el teorema, con O(n^d log n).
+
+103
+00:06:50,330 --> 00:06:55,290
+Y nuestro caso final, es cuando d
+ es menor que log en base b de a.
+
+104
+00:06:55,290 --> 00:07:00,088
+lo que es equivalente a decir que a/b^d es mayor que 1.
+
+105
+00:07:00,088 --> 00:07:04,030
+Aquí, nuestro factor multiplicativo es mayor que 1,
+
+106
+00:07:04,030 --> 00:07:08,560
+así que nuestro término más pequeño es el
+ primer término y el más grande es el último término.
+
+107
+00:07:08,560 --> 00:07:11,840
+Así que este caso es, O grande de nuestro
+
+108
+00:07:11,840 --> 00:07:16,620
+último término, que es O(n^d) por a/b^d a la log en base b de n,
+
+109
+00:07:16,620 --> 00:07:19,290
+pues i es log en base b de n.
+
+110
+00:07:19,290 --> 00:07:21,150
+Esto está algo feo.
+
+111
+00:07:21,150 --> 00:07:23,680
+Vamos a ver si podemos mejorarlo un poco.
+
+112
+00:07:23,680 --> 00:07:32,380
+Continuemos y elevemos a y b^d, a la log en base b de n separadamente.
+
+113
+00:07:32,380 --> 00:07:35,800
+Así obtenemos, en el numerador, a elevado a la log en base b de n,
+
+114
+00:07:35,800 --> 00:07:41,000
+y en el denominador, b elevado a la d por log en base b de n.
+
+115
+00:07:41,000 --> 00:07:43,780
+Bien, b a la log en base b de n, es justo n,
+
+116
+00:07:43,780 --> 00:07:48,630
+entonces eso nos deja n^d en el denominador.
+
+117
+00:07:48,630 --> 00:07:51,580
+En el numerador, a elevado a la log en base b de n,
+
+118
+00:07:51,580 --> 00:07:55,430
+por una identidad logarítmica, es igual a n a la log en base b de a,
+
+119
+00:07:55,430 --> 00:07:57,610
+así que podemos intercambiar estas dos.
+
+120
+00:07:59,480 --> 00:08:03,680
+Y ahora, si comparamos O(n^d), y n^d,
+
+121
+00:08:03,680 --> 00:08:07,700
+sabemos que O(n^d) estás acotada por una constante, k por n^d.
+
+122
+00:08:07,700 --> 00:08:11,350
+Así que tenemos k*n^d dividido entre n^d, nos deja sólo k,
+
+123
+00:08:11,350 --> 00:08:15,900
+y esa constante la podemos obviar porque
+ estamos con la notación O grande.
+
+124
+00:08:15,900 --> 00:08:19,880
+Así que nos quedamos nada más con O(n a la log en base b de a),
+
+125
+00:08:19,880 --> 00:08:21,810
+que es lo que tenemos para el caso final.
+
+126
+00:08:24,280 --> 00:08:25,570
+Así que el Teorema Maestro es un atajo.
+
+127
+00:08:26,595 --> 00:08:28,940
+Aquí mostramos de nuevo nuestro Teorema Maestro.
+
+128
+00:08:30,740 --> 00:08:32,410
+Les voy a decir un secreto, como quiera.
+
+129
+00:08:32,410 --> 00:08:34,300
+No recuerdo el Teorema Maestro
+
+130
+00:08:34,300 --> 00:08:36,500
+y ni siquiera trato de usarlo.
+
+131
+00:08:36,500 --> 00:08:38,050
+Esto es lo que hago.
+
+132
+00:08:38,050 --> 00:08:43,970
+Cuando tengo una recurrencia de esta forma,
+ checo la cantidad de trabajo
+
+133
+00:08:43,970 --> 00:08:49,110
+hecho en el primer y segundo niveles, lo que es un cálculo muy fácil,
+
+134
+00:08:49,110 --> 00:08:52,300
+y entonces me pregunto, ¿son la misma cantidad de trabajo?
+
+135
+00:08:52,300 --> 00:08:55,090
+Si es la misma cantidad de trabajo, va a ser la misma cantidad
+
+136
+00:08:55,090 --> 00:08:57,780
+en todos los niveles, y así estamos en el caso dos,
+
+137
+00:08:57,780 --> 00:09:00,850
+por lo que vamos a tener la cantidad de trabajo en el primer nivel,
+
+138
+00:09:00,850 --> 00:09:05,520
+que sabemos que es O(n^), por log n, 
+porque ese es el número de niveles.
+
+139
+00:09:05,520 --> 00:09:10,860
+Por otro lado, si el primer término es mayor que el segundo,
+
+140
+00:09:10,860 --> 00:09:14,470
+sé que el primer término va a dominar a los demás,
+
+141
+00:09:14,470 --> 00:09:16,428
+y así nos quedamos con O(n^d).
+
+142
+00:09:16,428 --> 00:09:22,020
+Y, finalmente, si el primer término es menor que el segundo,
+
+143
+00:09:22,020 --> 00:09:25,380
+sé que va a seguir aumentando, y que es
+ el término del fondo el que necesito.
+
+144
+00:09:26,820 --> 00:09:31,310
+Y eso va a ser el número de hojas, que es n a la log en base b de a.
+
+145
+00:09:33,110 --> 00:09:39,090
+El Teorema Maestro es realmente práctico de usar,
+ ya sea que lo memorices, o lo tengas
+
+146
+00:09:39,090 --> 00:09:43,650
+escrito, o, como en mi caso, lo recrees cada vez que lo necesites.
+
+147
+00:09:45,000 --> 00:09:45,500
+Gracias.

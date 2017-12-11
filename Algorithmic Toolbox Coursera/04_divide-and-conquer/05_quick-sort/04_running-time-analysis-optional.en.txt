@@ -1,0 +1,162 @@
+In this video we are going
+to prove formally an upper bound on the running time of
+the randomized quick sort algorithm. Namely we're going to prove that
+the running time on average of the randomized quick sort
+algorithm is n log n. That is it must be go for n log n. And that is, that, in the worst case,
+the running time is big O of n squared. Well, before going into
+the details of the proof. Let's again, intuition. First of all, let's know that what we need
+to estimate is the number of comparisons. Why is that? Well because a quick
+sort algorithm contains of first the call to the partition
+procedure and then to recursive calls. Each of these two recursive calls
+is going to be unwinded into the call to partition procedure and
+another to small recursive calls. So what is going on inside the quick
+sort algorithm is essentially many calls to the partition procedure. While inside the partition procedure,
+what we do actually is to compare all the elements of the curve and
+separate who is the pivot element, right? So what we estimate is a total
+number of comparisons. Which is not surprising
+because the quick sort algorithm is a comparison based algorithm. Well, now let me also explain why
+balanced partitions are better for us. I will explain this intuitively. So consider this story example. This array of size seven. Assume that we selected
+one as the pivot element. So we partitioned the rate
+is shown here on the left. Now let's see what we now know. We can pair it all the elements in
+this array to the pivot element which is one in this case. So now we know that one,
+the final position of the pivot element is just
+the first position in the array. So we known that 1 is the minimum value. However, we know nothing about
+pairs of other elements, right? So we only learn that 1
+is the minimum value. Now consider another possibility, consider the following balanced
+partition shown on the right. So assume that we selected
+4 as the pivot element. I claimed that in this case,
+this partition is much better for us because we saved many
+subsequent comparisons. So look, in this case, in the subsequent
+trends of the partition precision, we are not going to compare elements 3,
+1, 2 with element 6, 5, 7. Because we already know that all
+the elements to the left are for a. As in all the elements
+to the right are formed. Well the left part will stay in
+a separate recursive code and the right part well stay in
+a separate recursive code. So once again, balanced partitions
+save us a lot of comparisons that we do not need to make in the
+subsequent calls to partition procedure. Another thing I would like to
+discuss with you before growing and know details of the proof
+is the following. Our algorithm is randomized,
+so its running time and its number of comparisons depends on the
+random beats used inside the algorithm,. In particular for any two elements there is some probability
+that they are going to be compared. And using this toy example
+shown on the slide, I would like to just build
+an intuition on how to estimate this probability on which factors
+this probability depends. So consider this small example. So this is an array of say it's
+nine containing all the digits. And I would like to estimate
+the probability that elements 1 and 9 are going to be compared if we call
+randomized quick sort physics already. So, let's see what happens. Assume that in the very first
+quarters of partition procedure, we select the elements 3 for example
+as the pivot element, so what happens? In this case, 1 will go to the left
+of 3 and 9 will go to the right side. To the right of three, I'm sorry. So in this case 1 and
+9 will be in different parts and they will never be compared in as a partician procedure just because
+they are already in different parts. Okay, for the ways it means, that we
+already know that 1 is smaller than 9, because 1 is smaller than 3,
+and 3 is smaller than 9, right? We do not need to compare them. Well then this happens if we select as
+our pivot element, any of the elements, 2, 3, 4, 5, 6, 7 or 9, 8, I'm sorry. If on the other hand we select 1 and
+9 as our first pivot element, then 1 and 9 will become pivot. Just because, well, if we select,
+for example, 9 as the pivot element, we can pivot with all the elements
+of our array, in particular with 1. So there are two cases when 1 and
+9 are compared. And this is how exactly
+the case is when either 1 or 9 are selected as a first pivot. In all other seven cases
+there are not compared. This means that the probability that
+they are compared are 2 over 9. Okay, makes sense? Now let's try to estimate the probability
+that the elements three and four are compared. Well I claimed that in this case
+this probability is equal to 1. And the explanation is the following, there is no element inside RRE
+that can help the randomized weak sort algorithm to understand that 3
+is smaller than 4 without comparing them. I mean for 1 and 9,
+there are seven such elements. All they are is elements. I mean, if we partition with
+respect to any of the elements, we already know that 1 is smaller than
+9 because they go to other parts. Different parts with
+respect to this pivot. For three and
+four there is no such element. So algorithm just must
+compare these two elements to be sure that 3 is smaller than 4. So in this case the probability is 1. Well this shows that the probability
+of comparing two elements depends on how close they
+are in the sorted array. In particular if they're very far apart
+of each other than the probability is small and if they are close to each
+other than the probability is high. We will use this observation in
+the formal proof of our statement. We now start to formally
+prove an upper bound on the running time of
+the randomized quicksort algorithm. For this, we introduce
+the following random variable. Let i and
+j be different indices from 1 to m. We define Xi of ij to be equal
+to 1 if two elements, A'[i] and A'[j] are compared in the [INAUDIBLE]
+quick sort algorithm and to be equal to 0 otherwise. Once again, to estimate the running
+time of the quick sort algorithm, we would like to estimate the total number
+of comparisons made, so we would like to estimate, for any pair of elements, what
+is the probability that they are compared? As we discussed on the previous slide,
+the probability that two elements are compared depends on how close they
+are in the sorted version of our array. For this reason, we define c of
+ij dependent on the sorted array. We do not have this sorted array, right? We are only constructing this
+in the quick sort algorithm but we use it just for the analysis, okay? The next thing to note is the following. For any two elements of our initial array
+assorted array doesn't matter, so for any two elements they are either compared
+just once or they are not compared at all. So, why is that? Why just once? Well, if two elements
+are compared at some point, this means that at this point one of these
+elements is because in the partition procedure we can put a with all of
+the elements of the current summary. So, if two elements are compared
+that one of them is a pivot. This also means that right after
+the call of this partition procedure, we are not going
+to use this pivot element. We will put the pivot element
+into its final place, and we are not going to touch it in
+any of the subsequent calls. This immediately implies
+the quadratic upper bound on the worst case right in
+time with final algorithm. Once again we have quadratic number
+of possible pairs of element, and each pair of element is as it
+compared once or not compared at all. Right so right in time with
+the worst case is quadratic. Now comes the most important
+observation of this proof. I claim that the elements A'[i] and A'[j] are compared if and only if the first pivot selected in
+the subrange of the solitary a prime from either side to index j is either
+a prime of a, of i, or a prime of j. Well let's see why. First of all, when we select it pivot
+the random pivot which is not in their sub range, and then all
+the elements from this sub range in this sort of element goes either to the left or
+this to the right. So, they all stay together in
+the same branch of three, okay. So before we select a pivot
+which stays inside this range, all these elements stay
+together in the same sub-array. Now, assume that we selected
+a pivot from this sub-range, and assume that it is not A'[i] or
+A'[j], for example. In this case a prime of A and
+a prime of J will be splitted apart. They will go into different parts
+with respect to this pivot, right? At this point I must humor that all
+the elements in my summary are different, and in duality are different, okay? So once again,
+if the first selected element from this subrange is not prime of A or a prime of j then these two elements
+are not going to be compared. Because right after the partition
+procedure uses this pivot from this range A prime of a and A prime
+of j will go to different parts, right? If, on the other hand, the first selected pivot from this subrange is either
+A prime of a or A prime of j, then these two elements are going
+to become paired, right? So this is the most important
+observation in this proof. Everything else is just calculations. So if this is clear, let's then estimate the probability that second
+respondent to elements are compared. So we know that they're compared if and only if the first selected Pivot in this
+sub range is one of these two elements. This helps us to estimate
+the probability of not the fact that c of
+i j is equal to one. Well this is equal to two. I mean because we have only two choices. I mean either a prime of a, or a prime of
+j divided by the total number of choices, I mean the total number of
+elements in this subrange. And this is j minus i plus 1. So the probability that Z of ij is equal to 1 equals 2 divided
+by g minus i plus 1. For example, if j and i differ by 1. So j is equal to y plus 1. So neighboring element in the. Then this probability is equal
+to 2 divided by 1 plus 1. This is 2 by 2, this is 1. [INAUDIBLE] Just reflects the fact that if
+there are two neighboring elements inside. This sorted array,
+then the algorithm just must compare them, to understand that one of them is smaller. There is no other element that
+can help our algorithm to realize that one of these element is
+smaller than the other one, okay. This in turn helps us to estimate the
+expected value of this random variable. So recall that if we have a random
+variable, which takes only values zero and one, then its expected
+value is one multiplied by the probability that it takes value one plus zero multiplied by the
+probability that it takes the value zero. Well zero multiplied by something is zero. So what is left is just probability. That it takes multiplied by one. So the expected value of CIJ is equal
+to 2 divided by g minus i plus one. The final step in our proof
+is estimating the sum random variables to see
+they all possible I and J. So, once again the expected
+value of average value of the sum of the number of comparisons
+made is the expected value of the sum of all possible x adjacent,
+or for all I Js. So the expected value of their sum
+is the sum of their expected values. So we can write the following. The average running time is equal
+to the sum overall possible different of the expected values cij, and we know this expected value already. So this is a some overall
+possible different ij, in where j is greater than i of
+2 divided by g minus i plus one. Well we can take this constant two out,
+and consider all the possible. And consider a fixed i. For this i what we have
+j ranges from i+1 to n. So what we have for
+the specified time in this sum is a subset of the following sum,
+1/2+1/3+1/4 and so on. And this is actually a known sum. This is called harmonic series and
+it is known that it grows arithmetically. Once again,
+1 over 2 plus 1 over 3 plus, and so on, 1 over n, is theta of logarithm of n. Well, this means that, for
+each they correspond in sum, which ranges over all j from i plus 1 through n,
+grows, at most, logarithmically. This means since we have m traces for i from one to m that
+the grows vertically as m. Okay, and this concludes our proof.

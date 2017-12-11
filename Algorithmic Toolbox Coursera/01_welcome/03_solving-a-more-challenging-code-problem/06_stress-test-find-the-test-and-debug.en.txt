@@ -1,0 +1,81 @@
+In this video we will launch
+the stress test to find a test on which our main solution and
+alternative solutions differ, use this test to debug our
+main solution and fix it. So we save the file. Now we will compile this file
+because we will want to run it. And to compile this file, we go to the
+section Solving Programming Assignments. We look at the C++ Flags, copy them,
+and then use them to compile our file. Also, of course,
+specify which file want to compile and also the name for the output file
+will be stress_test, without .cpp. So we compile our stress test and
+then we launch it and see what happens. So we see,
+our screen was filled with a lot of lines. Actually, those lines were words,
+OK, and some numbers, like number n from 2 to 11, and
+input numbers, which are big. And there are a lot of tests for
+which our solutions didn't differ, and that all went pretty fast. And then in the end,
+we have number 11, which is n, and then 11 big numbers, which is
+the input test, and then the words, Wrong answer and two very big numbers
+which are different, which are the answers correspondingly of the first and
+the second solution we implemented. So now, we already have a test on which at least
+one of our solution runs incorrectly. But it is very hard to work with this
+test because we have 11 numbers and they are very big and
+the answer to this problem is even bigger. So let us try to find a smaller test
+on which our solution still fails. Usually we can create a very
+small test with this technique. So let's go back to our code,
+stress_test.cpp. And let's decrease the restrictions
+on n and on the numbers. So, for example,
+we want our number n to be no more than 5, then we first generate a random number
+modulo 4 so it will be from 0 to 3. And then, after adding 2,
+it will be from 2 to 5. And also,
+we want our numbers to be less than 10. So we just generate numbers modulo ten. And that's everything we change. Now we save the file. We recompile with the same options. And we again launch our stress test. Now, we found a test on which
+solutions differ even faster. Only maybe five or seven tests were OK. And now we have a test with five numbers,
+which are 2, 9, 3, 1, and 9, on which our solutions differ. And the answer of
+the first solution is 81. And the answer of
+the second solution is 27. Which one of those is correct? Of course, the first one is correct,
+because we have numbers 9 and second 9, which are the biggest in
+the input, and their product is 81. So our first naive solution
+gives a correct answer, but our second fast solution
+gives an incorrect answer. And let's think why that can be. Well, that can be if it multiplies
+wrong numbers from the array. So, let's go back in the code and
+check which are those numbers. We can go into the code and we look into the code for
+function MaxPairwiseProductFast. It's very convenient that we
+have a separate function for this solution because the error
+should be localized somewhere here. So to simplify our goal of debugging, let's output the indices of
+the maximum number and of the second maximum number that at least this function
+thinks are two maximums in the array. So we output them to cout. First the first index,
+then a space to separate them, then the second index, and
+then newline character. So we save our program. We again recompile it, and
+we again launch the stress test. So note that although we generate
+random tests, it is safe to launch our stress test again
+because those are pseudo random. The sequence of generated
+random values is the same. So this is a reproducible test. So now, again, we have the same
+test in which two solutions differ with five numbers, the same five numbers. And now, under the line with five numbers,
+we have another line which says 1 2. This is actually our debug output, which
+means that the index of the first number, which is maximum, is 1 and
+it corresponds to number 9 because we enumerate our numbers
+from 0 in our C++ array. And the second number has index 2,
+and this is number 3, again, because we enumerate from 0. So, our fast solution thinks
+that the second maximum number in the array is the number 3 instead
+of number 9, which is in position four. So let's go back to the code and
+see why it happened. Again, we open the file with the code. We go to the function
+MaxPairwiseProductFast. We ignore the code for the max_index1 and we're very
+interested in the code for max_index2. So now let's look at this
+complex if expression, where we try to determine
+whether a number at position j may be a new maximum, which is different
+from the maximum we've already found. And let's look more closely at
+this particular first condition. So here, what we do is we check
+that number at position number j is different from the maximum
+we've already found. But that's exactly the problem. What we need is instead, that j is different from max_index1 because we
+don't want to find the same number, but we can find number which is equal
+to the first found maximum. So, instead of this comparison,
+what we actually need is to compare j, To max_index1. If we fix our code this way,
+then we will be at least able to find the second number 9 in our
+input array 2 9 3 1 9, which we saw. So let's see how it
+goes after we fix this. So we save the file, we again
+recompile it with the same options and we launch our stress test. So now what we see is a screen
+which is very quickly filling with some numbers, some words OK, and
+then some numbers again and words OK. And we should wait for some time,
+for maybe 10 seconds or even 30 seconds to be sure that we cannot
+find a test in which our solutions differ. But, by now,
+it seems that that is the case. And in the next video,
+we will do more testing and then submit our main solution to
+the system and see how it goes.

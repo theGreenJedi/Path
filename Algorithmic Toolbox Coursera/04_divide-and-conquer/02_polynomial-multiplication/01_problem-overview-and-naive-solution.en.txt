@@ -1,0 +1,74 @@
+In this lecture we're going to talk about
+a more complicated divide-and-conquer algorithm to solve
+polynomial multiplication. So first we'll talk about what
+polynomial multiplication is. So polynomial multiplication is
+basically just taking two polynomials and multiplying them together. It's used in a variety of
+ways in computer science. Error correcting codes, if you want to
+multiply large integers together. Right, so
+if you've got thousand digit integers and you want to multiply them together,
+there's a quicker way than doing it the normal way you learned
+in elementary school. And that uses the idea of
+multiplying polynomials. It is used for generating functions, and
+for convolution. Let's look at an example. So let's say you have polynomial A,
+which is 3 x squared + 2x + 5, and polynomial B,
+which is 5 x squared + x + 2. If you multiply them
+together you get 15 x to the fourth + 13 x cubed +
+33 x squared + 9x + 10. Why is that? Well, let's look, for instance the 15 x
+to the fourth comes from multiplying 3 x squared times 5 x squared,
+that's 15x to the fourth. The 10 comes from multiplying 5 by 2. The 13 x cubed comes from 3 x squared
+times x, which is 3 x cubed, plus 2x times 5 x squared,
+which is 10 x cubed. For a total of 13 x cubed. So let's look at the problem statement. So we're going to have two n- 1
+degree polynomials, all right? a sub n-1 is the coefficient of
+the x to the n-1 all the way down to a0 which is the coefficient of
+the x to the 0 term or the one term. And then we similarly have
+a b polynomial as well. Now first you may wonder what happens if
+you actually want to multiply polynomials that don't happen to have the same degree? What if you want to multiply a degree three polynomial times
+a degree two polynomial? Right, where the degree is just
+the exponent of the highest term. Well in that case, what you you could do
+is just pad out the smaller polynomial, the lower degree polynomial, to have
+zeros for its earlier coefficients. I'll give an example of
+that in just a second. And then the product polynomial is
+the result that we want to come up with so that's a higher degree polynomial, right? If our incoming polynomials,
+are degree n- 1, then we're going to get a term of the x to
+the n- 1 in a, times x to the n- 1 in b, and that's going to give us
+an x to the 2n- 2 in the c term. So, the c sub 2n-2 term,
+comes about from multiplying the a sub n-1 term and
+the b sub n-1 term. The c sub 2n-3 term comes
+from the a sub n-1, b sub n-2, and a sub n-2, b sub n-1. So it's got two terms
+that multiply together. The c sub 2n-4 term would have
+three terms that multiply together. And we have more and more terms that
+get multiplied and summed together, and then fewer and fewer back down. So c sub 2 has three pairs
+which get added together, c sub 1 has two pairs and
+c sub 0 has one pair. So here's an example. This is actually the same
+example we had before. So n is three and
+all we need, notice, are the coefficients. We don't actually need to
+have the x's written out. So 3, 2, and
+5 means 3 x squared plus 2x plus 5. 5, 1, 2 means 5 x squared plus x plus 2. What if B were only
+a degree one polynomial? It was just x plus 2. Well then we would set B equal 0, 1, 2. That is, B's x squared term is 0 x squared. So A(x) is this, B(x) is that. When you multiply them together,
+we get the same result we got before. And now we just pluck off
+the coefficients here, so the 15, the 13, the 33, the 9, and the 10. And that's our resulting
+answer: those coefficients. So let's look at a naive
+algorithm to solve this. The naive algorithm basically just says, well
+first off, let's create a product array. This is basically going to be the C,
+the result, and it's going to be of highest degree 2n-2. So it's going to have 2n-1 terms all the
+way from the 0 term up to the 2n-2 term. So we'll initialize it to 0, and
+then we'll have a nested for loop. For i equals 0 to n-1,
+for j equals 0 to n-1. And at every time, what we'll do is
+we will calculate a particular pair. So we'll calculate the A[i], B[j] pair, multiply them together and add them
+into the appropriate product. Which is the appropriate
+product to put it in? It's the i + j case. As an example, when i is 0 and
+j is 0, we calculate A at 0 times B at 0 and
+we add that to product at 0. So that says the two
+zero-degree terms in A and B get multiplied together to
+the zero-degree term in C. At the other extreme,
+if i is n-1 and j is n-1, we take A at n-1 times B at n-1 and
+we store that in the product of 2n-2. As you can see,
+the intermediate values in product are going to have more terms
+added to them than the edges. And, of course,
+then we return the product. How long does this take? Well, this takes order n squared. Clearly, we've got two for
+loops, one smaller for loop that's from 0 to 2n-2,
+so that's order n. And then a nested for loop, where i goes
+from 0 to n-1, j goes from 0 to n-1, so those each go through the first one n
+times, the second one n squared times. So our runtime is O(n squared). In the next video,
+we're going to look at a divide and conquer algorithm to solve this problem. Although, we'll see that it
+too will be somewhat naive.

@@ -1,0 +1,797 @@
+1
+00:00:04,036 --> 00:00:04,880
+Hello everybody.
+
+2
+00:00:04,880 --> 00:00:05,930
+Welcome back.
+
+3
+00:00:05,930 --> 00:00:09,150
+Today we're going to be talking
+about using Big-O notation.
+
+4
+00:00:09,150 --> 00:00:12,100
+So the basic idea here, we're going
+to be talking about how to manipulate
+
+5
+00:00:12,100 --> 00:00:15,715
+expressions involving Big-O and
+other asymptotic notations.
+
+6
+00:00:15,715 --> 00:00:18,745
+And, in particular, we're going to
+talk about how to use Big-O to compute
+
+7
+00:00:18,745 --> 00:00:20,905
+algorithm runtimes in
+terms of this notation.
+
+8
+00:00:22,385 --> 00:00:26,127
+So recall,
+we said that f(n) was Big-O of g(n).
+
+9
+00:00:26,127 --> 00:00:29,717
+If for
+all sufficiently large inputs f(n) was
+
+10
+00:00:29,717 --> 00:00:33,597
+bounded above by some fixed
+constant times g(n).
+
+11
+00:00:33,597 --> 00:00:38,187
+Which really says that f is bounded
+above by some constant times g.
+
+12
+00:00:39,577 --> 00:00:43,247
+Now, we'd like to manipulate expressions,
+we'd like to, given expressions write them in
+
+13
+00:00:43,247 --> 00:00:45,917
+terms of Big O in
+the simplest possible manner.
+
+14
+00:00:45,917 --> 00:00:47,667
+So there's some common
+rules you need to know.
+
+15
+00:00:48,920 --> 00:00:53,420
+The first rule is that multiplicative
+constants can be omitted.
+
+16
+00:00:53,420 --> 00:00:55,780
+7n cubed is O of n cubed.
+
+17
+00:00:55,780 --> 00:00:58,720
+n squared over 3 is O of n squared.
+
+18
+00:00:58,720 --> 00:01:02,728
+The basic premise that we had when
+building this idea was that we wanted to
+
+19
+00:01:02,728 --> 00:01:05,960
+have something that ignores
+multiplicative constants.
+
+20
+00:01:08,210 --> 00:01:10,630
+The second thing to note is
+that you have two powers of n.
+
+21
+00:01:10,630 --> 00:01:16,110
+The one with the larger
+exponent grows faster,
+
+22
+00:01:16,110 --> 00:01:21,300
+so n grows asymptotically slower
+than Big-O of n squared.
+
+23
+00:01:21,300 --> 00:01:24,110
+Root n grows slower than n,
+so it's O of n.
+
+24
+00:01:25,160 --> 00:01:26,600
+Hopefully this isn't too bad.
+
+25
+00:01:27,960 --> 00:01:31,100
+What's more surprising is that
+if you have any polynomial and
+
+26
+00:01:31,100 --> 00:01:35,310
+any exponential,
+the exponential always grows faster.
+
+27
+00:01:35,310 --> 00:01:39,220
+So n to the fifth is O
+of root two to the n.
+
+28
+00:01:39,220 --> 00:01:41,318
+n to the 100 is O of 1.1 to the n.
+
+29
+00:01:41,318 --> 00:01:45,870
+And this latter thing is something
+that should surprise you a little bit.
+
+30
+00:01:45,870 --> 00:01:49,410
+Because n to the 100 is
+a terrible runtime.
+
+31
+00:01:49,410 --> 00:01:55,620
+Two to the 100 is already so big that
+you really can't expect to do it ever.
+
+32
+00:01:55,620 --> 00:02:00,535
+On the other hand,
+1.1 to the n grows pretty modestly.
+
+33
+00:02:00,535 --> 00:02:03,080
+1.1 to the 100 is a pretty
+reasonable-sized number.
+
+34
+00:02:04,110 --> 00:02:08,990
+On the other hand, what this really says,
+is that once n gets large, maybe 
+
+35
+00:02:08,990 --> 00:02:14,070
+100 thousand or so, 1.1 eventually takes
+over, and starts beating n to the 100.
+
+36
+00:02:14,070 --> 00:02:16,570
+And it does so by, in fact, quite a bit.
+
+37
+00:02:16,570 --> 00:02:19,440
+But it doesn't really happen
+until n gets pretty huge.
+
+38
+00:02:21,530 --> 00:02:26,220
+In a similar vein, any power of log n
+grows slower than any power of n.
+
+39
+00:02:26,220 --> 00:02:29,370
+So log n cubed is O of root n.
+
+40
+00:02:29,370 --> 00:02:30,400
+n log n is O of n squared.
+
+41
+00:02:32,490 --> 00:02:38,580
+Finally, if you have some sum of terms
+smaller terms in the sum can be omitted.
+
+42
+00:02:38,580 --> 00:02:40,280
+So n squared plus n.
+
+43
+00:02:40,280 --> 00:02:42,660
+n has a smaller rate of growth.
+
+44
+00:02:43,710 --> 00:02:45,460
+So this is O of n squared.
+
+45
+00:02:45,460 --> 00:02:48,220
+2 to the n + n to the 9th.
+
+46
+00:02:48,220 --> 00:02:53,770
+n to the 9th has a smaller rate of growth,
+so this is O(2 to the n).
+
+47
+00:02:53,770 --> 00:02:57,140
+So, these are common rules for
+manipulating these expressions.
+
+48
+00:02:57,140 --> 00:03:01,389
+Basically these are the only ones that
+you'll need most of the time to write
+
+49
+00:03:01,389 --> 00:03:03,891
+anything in terms of Big-O
+that you need.
+
+50
+00:03:05,423 --> 00:03:08,540
+Okay, so
+let's see how this works in practice.
+
+51
+00:03:08,540 --> 00:03:12,310
+If we actually want to compute
+runtimes using Big-O notation.
+
+52
+00:03:12,310 --> 00:03:14,730
+So let's look at this one algorithm again.
+
+53
+00:03:14,730 --> 00:03:16,300
+So we created an array.
+
+54
+00:03:16,300 --> 00:03:19,120
+We set the 0th element to 0 and
+the first element to 1.
+
+55
+00:03:19,120 --> 00:03:20,720
+We then went through this loop,
+
+56
+00:03:20,720 --> 00:03:24,190
+where we set each element to
+the sum of the previous two.
+
+57
+00:03:24,190 --> 00:03:26,840
+And then returned the last
+element of the array.
+
+58
+00:03:26,840 --> 00:03:30,490
+Let's try computing this runtime
+in terms of Big-O notation.
+
+59
+00:03:31,900 --> 00:03:34,890
+So, we're just going to run through
+it operation by operation and
+
+60
+00:03:34,890 --> 00:03:35,780
+ask how long it takes.
+
+61
+00:03:37,700 --> 00:03:42,330
+First operation is we created an array,
+and let's for the moment ignore
+
+62
+00:03:42,330 --> 00:03:47,380
+the memory management issues, assume that
+it's not too hard to allocate the memory.
+
+63
+00:03:47,380 --> 00:03:51,650
+But let;s suppose that what your compiler
+does is we actually want to zero out
+
+64
+00:03:51,650 --> 00:03:56,030
+all of these cells in memory and that's
+going to take us a little bit of work.
+
+65
+00:03:56,030 --> 00:03:58,500
+Because for every cell,
+basically what we have to do,
+
+66
+00:03:58,500 --> 00:04:03,120
+is we need to zero out that cell, we then
+need to increment some counter to tell us
+
+67
+00:04:03,120 --> 00:04:05,292
+which cell we're working on next and
+
+68
+00:04:05,292 --> 00:04:09,120
+then maybe we need to do a check to
+make sure that we're not at the end.
+
+69
+00:04:09,120 --> 00:04:12,920
+If we are at the end,
+to go to the next line.
+
+70
+00:04:12,920 --> 00:04:15,950
+Now for every cell we have
+to do some amount of work.
+
+71
+00:04:15,950 --> 00:04:21,130
+We have to do something like do a write,
+and the comparison, and an increment.
+
+72
+00:04:21,130 --> 00:04:25,840
+And it's not entirely clear how
+many machine operations this is.
+
+73
+00:04:25,840 --> 00:04:30,050
+But it's a constant amount of
+work per cell in the array.
+
+74
+00:04:30,050 --> 00:04:31,250
+If there are n plus 1 cells.
+
+75
+00:04:31,250 --> 00:04:37,220
+This is O of n time,
+some constant times n.
+
+76
+00:04:37,220 --> 00:04:39,570
+Next we set the zeroth
+elements of the array of zero.
+
+77
+00:04:39,570 --> 00:04:42,150
+And this might just be
+a simple assignment.
+
+78
+00:04:42,150 --> 00:04:46,400
+We might have to load a few things into
+registers or do some pointer arithmetic,
+
+79
+00:04:46,400 --> 00:04:51,080
+but no matter whether this is one
+machine operation or five or seven,
+
+80
+00:04:51,080 --> 00:04:54,770
+that's still going to be a constant number
+of machine operations, O(1).
+
+81
+00:04:56,380 --> 00:04:59,390
+Similar is setting the first element
+to one again, O(1) time.
+
+82
+00:05:00,990 --> 00:05:02,520
+Next we run through this loop, for
+
+83
+00:05:02,520 --> 00:05:07,572
+i running from two to n, we run through it
+n minus one times, that's O(n) times.
+
+84
+00:05:08,910 --> 00:05:11,540
+The main thing we do in the loop is we set
+
+85
+00:05:11,540 --> 00:05:16,110
+the ith element of the array to the sum
+of the i minus first and i minus second.
+
+86
+00:05:16,110 --> 00:05:18,800
+Now the lookups and the store,
+
+87
+00:05:18,800 --> 00:05:22,600
+those are all of the sorts of things we
+had looked at, those should be O of 1.
+
+88
+00:05:22,600 --> 00:05:25,510
+But the addition is a bit worse.
+
+89
+00:05:25,510 --> 00:05:29,010
+And normally additions are constant time.
+
+90
+00:05:29,010 --> 00:05:31,010
+But these are large numbers.
+
+91
+00:05:31,010 --> 00:05:35,260
+Remember, the nth Fibonacci number
+has about n over 5 digits to it,
+
+92
+00:05:35,260 --> 00:05:37,960
+they're very big, and
+they often won't fit in the machine word.
+
+93
+00:05:39,100 --> 00:05:42,680
+Now if you think about what happens if
+you add two very big numbers together,
+
+94
+00:05:42,680 --> 00:05:44,280
+how long does that take?
+
+95
+00:05:44,280 --> 00:05:47,460
+Well, you sort of add the tens digit and
+you carry, and
+
+96
+00:05:47,460 --> 00:05:49,440
+you add the hundreds digit and you carry,
+
+97
+00:05:49,440 --> 00:05:52,720
+and add the thousands digit,
+you carry and so on and so forth.
+
+98
+00:05:52,720 --> 00:05:55,800
+And you sort of have to do work for
+each digits place.
+
+99
+00:05:56,810 --> 00:06:01,310
+And so the amount of work that you do should
+be proportional to the number of digits.
+
+100
+00:06:01,310 --> 00:06:05,120
+And in this case, the number
+of digits is proportional to n, so
+
+101
+00:06:05,120 --> 00:06:08,590
+this should take O(n) time
+to run that line of code.
+
+102
+00:06:09,820 --> 00:06:13,570
+Finally, we have a return step, which is
+a pointer arithmetic and array lookup and
+
+103
+00:06:13,570 --> 00:06:15,660
+maybe popping up the program stack.
+
+104
+00:06:15,660 --> 00:06:19,730
+And it's not quite clear how much work
+that is, but it's pretty clear that
+
+105
+00:06:19,730 --> 00:06:24,590
+it's a constant amount of work,
+it doesn't become worse as n gets larger.
+
+106
+00:06:24,590 --> 00:06:25,410
+So, that's O of one time.
+
+107
+00:06:26,900 --> 00:06:29,690
+So, now we just have to
+add this all together.
+
+108
+00:06:29,690 --> 00:06:35,690
+O of N plus O of 1 plus O of 1 plus
+O of N times through the loop times
+
+109
+00:06:35,690 --> 00:06:41,130
+O of N times work per time through
+the loop plus O of 1, add it all together,
+
+110
+00:06:41,130 --> 00:06:46,320
+the dominant term here, which is the only
+one we need, is the O of n times O of n.
+
+111
+00:06:46,320 --> 00:06:48,160
+That's O of n squared.
+
+112
+00:06:48,160 --> 00:06:50,410
+So this algorithm runs
+in time O of n squared.
+
+113
+00:06:51,640 --> 00:06:54,890
+Now, we don't know exactly
+what the constants are,
+
+114
+00:06:54,890 --> 00:06:59,590
+but O of n squared means that if we
+want to finish this in a second,
+
+115
+00:06:59,590 --> 00:07:03,260
+you can probably handle
+inputs of size maybe 30,000.
+
+116
+00:07:03,260 --> 00:07:07,230
+Now, depending on the computer that you
+had and the compiler and all of these
+
+117
+00:07:07,230 --> 00:07:11,590
+messy details, maybe you can only handle
+inputs of size 1,000 in a second.
+
+118
+00:07:11,590 --> 00:07:14,630
+Maybe you can handle inputs
+the size of million in a second.
+
+119
+00:07:14,630 --> 00:07:19,850
+It's probably not going to be as low as
+ten or as high as a billion but, I mean,
+
+120
+00:07:19,850 --> 00:07:26,410
+30,000's a good guess and well, it takes
+work to get anything better than that.
+
+121
+00:07:27,910 --> 00:07:30,360
+And so, this doesn't give us an exact
+answer but it's pretty good.
+
+122
+00:07:31,950 --> 00:07:34,610
+Okay, so
+that's how you use Big-O notation.
+
+123
+00:07:34,610 --> 00:07:38,010
+It turns out that occasionally you
+want to say a few other things.
+
+124
+00:07:38,010 --> 00:07:42,140
+Big O really just says that my
+runtime is sort of bounded above
+
+125
+00:07:42,140 --> 00:07:44,640
+by some multiple of this thing.
+
+126
+00:07:44,640 --> 00:07:46,030
+Sometimes you want to say the reverse.
+
+127
+00:07:46,030 --> 00:07:49,530
+Sometimes you want to say
+that I'm bounded below.
+
+128
+00:07:49,530 --> 00:07:50,880
+And so
+there's different notation for that.
+
+129
+00:07:52,010 --> 00:07:56,550
+If you want to say that f is bounded below
+by g, that it grows no slower than g,
+
+130
+00:07:56,550 --> 00:08:00,810
+you say that f(n) is Omega of g(n).
+
+131
+00:08:00,810 --> 00:08:02,735
+And that says that for some constant c,
+
+132
+00:08:02,735 --> 00:08:07,290
+f(n) is at least c times g(n),
+for all large n.
+
+133
+00:08:08,520 --> 00:08:11,090
+Now instead of saying bounded above or
+bounded below,
+
+134
+00:08:11,090 --> 00:08:13,300
+sometimes that you actually want to
+say that they grow at the same rate.
+
+135
+00:08:14,460 --> 00:08:17,632
+And for
+that you'd see f is Big-Theta of g(n).
+
+136
+00:08:17,632 --> 00:08:21,913
+Which means, that F is both Big-O of g,
+and, Big-Omega of G.
+
+137
+00:08:21,913 --> 00:08:26,510
+Which says, up to constants, that f and
+g grow at the same rate.
+
+138
+00:08:28,260 --> 00:08:33,490
+Finally, sometimes instead of saying that
+f grows no faster than g,
+
+139
+00:08:33,490 --> 00:08:37,920
+you actually have to say that it
+grows strictly slower than g, and for
+
+140
+00:08:37,920 --> 00:08:39,665
+that you say f(n) is Little-o of g(n).
+
+141
+00:08:41,270 --> 00:08:45,580
+And that says that, not only is
+the ratio between f(n) and g(n) bounded
+
+142
+00:08:45,580 --> 00:08:51,070
+above by some constant, but actually this
+constant can be made as small as you like.
+
+143
+00:08:51,070 --> 00:08:55,840
+In particular this means that
+the ratio f(n) over g(n) goes to zero
+
+144
+00:08:55,840 --> 00:08:56,850
+as n goes to infinity.
+
+145
+00:08:58,250 --> 00:09:01,400
+So, these are some other notations
+that you'll see now and then.
+
+146
+00:09:01,400 --> 00:09:02,820
+You should keep them in mind.
+
+147
+00:09:02,820 --> 00:09:03,900
+They're useful.
+
+148
+00:09:03,900 --> 00:09:06,385
+Big-O is the one that usually shows up,
+
+149
+00:09:06,385 --> 00:09:09,550
+because we actually want to
+bound our runtimes above.
+
+150
+00:09:09,550 --> 00:09:12,900
+It's sort of the big, important thing,
+but these guys are also useful.
+
+151
+00:09:14,630 --> 00:09:17,750
+So, to summarize the stuff
+on asymptotic notation.
+
+152
+00:09:17,750 --> 00:09:21,380
+What it lets us do is ignore these
+messy details in the runtime
+
+153
+00:09:21,380 --> 00:09:22,300
+analysis that we saw before.
+
+154
+00:09:23,310 --> 00:09:27,050
+It produces very clean answers that tell
+us a lot about the asymptotic runtime
+
+155
+00:09:27,050 --> 00:09:27,720
+of things.
+
+156
+00:09:29,200 --> 00:09:31,280
+And these together make it very useful.
+
+157
+00:09:31,280 --> 00:09:34,090
+It means we're going to be using it
+extensively throughout the course.
+
+158
+00:09:34,090 --> 00:09:35,650
+So you really ought to get used to it.
+
+159
+00:09:36,790 --> 00:09:40,770
+But, it does throw away a lot
+of practical useful information.
+
+160
+00:09:40,770 --> 00:09:43,190
+So if you really want to
+make your program fast,
+
+161
+00:09:43,190 --> 00:09:45,370
+you need to look at more than
+just the Big-O runtime.
+
+162
+00:09:46,530 --> 00:09:49,180
+But, beyond that, we're going to use it.
+
+163
+00:09:50,270 --> 00:09:51,069
+With this lecture,
+
+164
+00:09:51,069 --> 00:09:54,210
+we basically finished the sort of
+introductory material that we need.
+
+165
+00:09:54,210 --> 00:09:57,450
+Next lecture I'll talk to you a little bit
+about sort of an overview of the rest of
+
+166
+00:09:57,450 --> 00:10:00,050
+the course and some our philosophy for it.
+
+167
+00:10:00,050 --> 00:10:02,680
+But after that, we'll really get
+into the meat of the subject.
+
+168
+00:10:02,680 --> 00:10:06,700
+We'll start talking about key
+important ways to design algorithms.
+
+169
+00:10:06,700 --> 00:10:08,080
+So, I hope you enjoy it.

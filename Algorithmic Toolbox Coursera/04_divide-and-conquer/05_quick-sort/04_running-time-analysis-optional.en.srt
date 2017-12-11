@@ -1,0 +1,1056 @@
+1
+00:00:00,470 --> 00:00:03,760
+In this video we are going
+to prove formally
+
+2
+00:00:03,760 --> 00:00:07,910
+an upper bound on the running time of
+the randomized quick sort algorithm.
+
+3
+00:00:07,910 --> 00:00:11,580
+Namely we're going to prove that
+the running time on average of
+
+4
+00:00:11,580 --> 00:00:15,260
+the randomized quick sort
+algorithm is n log n.
+
+5
+00:00:15,260 --> 00:00:17,920
+That is it must be go for n log n.
+
+6
+00:00:17,920 --> 00:00:23,400
+And that is, that, in the worst case,
+the running time is big O of n squared.
+
+7
+00:00:24,790 --> 00:00:28,190
+Well, before going into
+the details of the proof.
+
+8
+00:00:28,190 --> 00:00:30,790
+Let's again, intuition.
+
+9
+00:00:30,790 --> 00:00:35,660
+First of all, let's know that what we need
+to estimate is the number of comparisons.
+
+10
+00:00:35,660 --> 00:00:36,670
+Why is that?
+
+11
+00:00:36,670 --> 00:00:40,510
+Well because a quick
+sort algorithm contains
+
+12
+00:00:40,510 --> 00:00:44,920
+of first the call to the partition
+procedure and then to recursive calls.
+
+13
+00:00:44,920 --> 00:00:49,310
+Each of these two recursive calls
+is going to be unwinded into
+
+14
+00:00:50,330 --> 00:00:54,480
+the call to partition procedure and
+another to small recursive calls.
+
+15
+00:00:54,480 --> 00:00:59,620
+So what is going on inside the quick
+sort algorithm is essentially many calls
+
+16
+00:00:59,620 --> 00:01:01,910
+to the partition procedure.
+
+17
+00:01:01,910 --> 00:01:06,270
+While inside the partition procedure,
+what we do actually is to compare
+
+18
+00:01:06,270 --> 00:01:10,420
+all the elements of the curve and
+separate who is the pivot element, right?
+
+19
+00:01:10,420 --> 00:01:14,040
+So what we estimate is a total
+number of comparisons.
+
+20
+00:01:14,040 --> 00:01:17,030
+Which is not surprising
+because the quick sort
+
+21
+00:01:17,030 --> 00:01:19,189
+algorithm is a comparison based algorithm.
+
+22
+00:01:21,290 --> 00:01:27,940
+Well, now let me also explain why
+balanced partitions are better for us.
+
+23
+00:01:27,940 --> 00:01:29,600
+I will explain this intuitively.
+
+24
+00:01:29,600 --> 00:01:31,150
+So consider this story example.
+
+25
+00:01:31,150 --> 00:01:33,190
+This array of size seven.
+
+26
+00:01:33,190 --> 00:01:36,720
+Assume that we selected
+one as the pivot element.
+
+27
+00:01:36,720 --> 00:01:40,650
+So we partitioned the rate
+is shown here on the left.
+
+28
+00:01:40,650 --> 00:01:43,170
+Now let's see what we now know.
+
+29
+00:01:43,170 --> 00:01:47,990
+We can pair it all the elements in
+this array to the pivot element
+
+30
+00:01:47,990 --> 00:01:49,460
+which is one in this case.
+
+31
+00:01:49,460 --> 00:01:53,309
+So now we know that one,
+the final position of
+
+32
+00:01:53,309 --> 00:01:58,010
+the pivot element is just
+the first position in the array.
+
+33
+00:01:58,010 --> 00:02:00,660
+So we known that 1 is the minimum value.
+
+34
+00:02:00,660 --> 00:02:05,560
+However, we know nothing about
+pairs of other elements, right?
+
+35
+00:02:05,560 --> 00:02:09,720
+So we only learn that 1
+is the minimum value.
+
+36
+00:02:09,720 --> 00:02:11,240
+Now consider another possibility,
+
+37
+00:02:11,240 --> 00:02:15,140
+consider the following balanced
+partition shown on the right.
+
+38
+00:02:15,140 --> 00:02:18,790
+So assume that we selected
+4 as the pivot element.
+
+39
+00:02:20,560 --> 00:02:24,100
+I claimed that in this case,
+this partition is much better for
+
+40
+00:02:24,100 --> 00:02:28,300
+us because we saved many
+subsequent comparisons.
+
+41
+00:02:28,300 --> 00:02:33,130
+So look, in this case, in the subsequent
+trends of the partition precision,
+
+42
+00:02:33,130 --> 00:02:39,440
+we are not going to compare elements 3,
+1, 2 with element 6, 5, 7.
+
+43
+00:02:39,440 --> 00:02:43,284
+Because we already know that all
+the elements to the left are for a.
+
+44
+00:02:43,284 --> 00:02:46,261
+As in all the elements
+to the right are formed.
+
+45
+00:02:46,261 --> 00:02:50,784
+Well the left part will stay in
+a separate recursive code and
+
+46
+00:02:50,784 --> 00:02:54,949
+the right part well stay in
+a separate recursive code.
+
+47
+00:02:54,949 --> 00:03:00,689
+So once again, balanced partitions
+save us a lot of comparisons
+
+48
+00:03:00,689 --> 00:03:08,250
+that we do not need to make in the
+subsequent calls to partition procedure.
+
+49
+00:03:08,250 --> 00:03:11,050
+Another thing I would like to
+discuss with you before growing and
+
+50
+00:03:11,050 --> 00:03:14,040
+know details of the proof
+is the following.
+
+51
+00:03:14,040 --> 00:03:17,550
+Our algorithm is randomized,
+so its running time and
+
+52
+00:03:17,550 --> 00:03:23,400
+its number of comparisons depends on the
+random beats used inside the algorithm,.
+
+53
+00:03:23,400 --> 00:03:24,330
+In particular for
+
+54
+00:03:24,330 --> 00:03:29,310
+any two elements there is some probability
+that they are going to be compared.
+
+55
+00:03:30,570 --> 00:03:33,360
+And using this toy example
+shown on the slide,
+
+56
+00:03:33,360 --> 00:03:38,660
+I would like to just build
+an intuition on how to estimate
+
+57
+00:03:38,660 --> 00:03:43,550
+this probability on which factors
+this probability depends.
+
+58
+00:03:43,550 --> 00:03:47,180
+So consider this small example.
+
+59
+00:03:47,180 --> 00:03:50,480
+So this is an array of say it's
+nine containing all the digits.
+
+60
+00:03:50,480 --> 00:03:53,980
+And I would like to estimate
+the probability that elements 1 and
+
+61
+00:03:53,980 --> 00:03:59,010
+9 are going to be compared if we call
+randomized quick sort physics already.
+
+62
+00:03:59,010 --> 00:04:00,970
+So, let's see what happens.
+
+63
+00:04:00,970 --> 00:04:03,920
+Assume that in the very first
+quarters of partition procedure,
+
+64
+00:04:03,920 --> 00:04:09,410
+we select the elements 3 for example
+as the pivot element, so what happens?
+
+65
+00:04:09,410 --> 00:04:13,978
+In this case, 1 will go to the left
+of 3 and 9 will go to the right side.
+
+66
+00:04:13,978 --> 00:04:17,600
+To the right of three, I'm sorry.
+
+67
+00:04:17,600 --> 00:04:21,700
+So in this case 1 and
+9 will be in different parts and
+
+68
+00:04:21,700 --> 00:04:23,580
+they will never be compared in
+
+69
+00:04:24,763 --> 00:04:29,850
+as a partician procedure just because
+they are already in different parts.
+
+70
+00:04:29,850 --> 00:04:35,908
+Okay, for the ways it means, that we
+already know that 1 is smaller than 9,
+
+71
+00:04:35,908 --> 00:04:40,550
+because 1 is smaller than 3,
+and 3 is smaller than 9, right?
+
+72
+00:04:40,550 --> 00:04:42,070
+We do not need to compare them.
+
+73
+00:04:43,180 --> 00:04:47,943
+Well then this happens if we select as
+our pivot element, any of the elements,
+
+74
+00:04:47,943 --> 00:04:51,920
+2, 3, 4, 5, 6, 7 or 9, 8, I'm sorry.
+
+75
+00:04:51,920 --> 00:04:56,160
+If on the other hand we select 1 and
+9 as our first pivot element,
+
+76
+00:04:56,160 --> 00:04:58,710
+then 1 and 9 will become pivot.
+
+77
+00:04:58,710 --> 00:05:03,487
+Just because, well, if we select,
+for example, 9 as the pivot element,
+
+78
+00:05:03,487 --> 00:05:07,983
+we can pivot with all the elements
+of our array, in particular with 1.
+
+79
+00:05:07,983 --> 00:05:11,940
+So there are two cases when 1 and
+9 are compared.
+
+80
+00:05:11,940 --> 00:05:16,548
+And this is how exactly
+the case is when either 1 or
+
+81
+00:05:16,548 --> 00:05:19,632
+9 are selected as a first pivot.
+
+82
+00:05:19,632 --> 00:05:22,740
+In all other seven cases
+there are not compared.
+
+83
+00:05:22,740 --> 00:05:27,154
+This means that the probability that
+they are compared are 2 over 9.
+
+84
+00:05:28,280 --> 00:05:29,110
+Okay, makes sense?
+
+85
+00:05:30,340 --> 00:05:36,090
+Now let's try to estimate the probability
+that the elements three and
+
+86
+00:05:36,090 --> 00:05:37,560
+four are compared.
+
+87
+00:05:37,560 --> 00:05:41,310
+Well I claimed that in this case
+this probability is equal to 1.
+
+88
+00:05:42,540 --> 00:05:44,050
+And the explanation is the following,
+
+89
+00:05:44,050 --> 00:05:49,560
+there is no element inside RRE
+that can help the randomized
+
+90
+00:05:49,560 --> 00:05:54,850
+weak sort algorithm to understand that 3
+is smaller than 4 without comparing them.
+
+91
+00:05:54,850 --> 00:05:58,360
+I mean for 1 and 9,
+there are seven such elements.
+
+92
+00:05:58,360 --> 00:05:59,790
+All they are is elements.
+
+93
+00:05:59,790 --> 00:06:02,900
+I mean, if we partition with
+respect to any of the elements,
+
+94
+00:06:02,900 --> 00:06:07,570
+we already know that 1 is smaller than
+9 because they go to other parts.
+
+95
+00:06:07,570 --> 00:06:11,270
+Different parts with
+respect to this pivot.
+
+96
+00:06:11,270 --> 00:06:13,280
+For three and
+four there is no such element.
+
+97
+00:06:13,280 --> 00:06:17,910
+So algorithm just must
+compare these two elements
+
+98
+00:06:17,910 --> 00:06:20,452
+to be sure that 3 is smaller than 4.
+
+99
+00:06:20,452 --> 00:06:23,200
+So in this case the probability is 1.
+
+100
+00:06:23,200 --> 00:06:28,360
+Well this shows that the probability
+of comparing two elements
+
+101
+00:06:28,360 --> 00:06:32,820
+depends on how close they
+are in the sorted array.
+
+102
+00:06:32,820 --> 00:06:37,420
+In particular if they're very far apart
+of each other than the probability
+
+103
+00:06:37,420 --> 00:06:41,340
+is small and if they are close to each
+other than the probability is high.
+
+104
+00:06:41,340 --> 00:06:46,120
+We will use this observation in
+the formal proof of our statement.
+
+105
+00:06:46,120 --> 00:06:49,330
+We now start to formally
+prove an upper bound
+
+106
+00:06:49,330 --> 00:06:52,760
+on the running time of
+the randomized quicksort algorithm.
+
+107
+00:06:52,760 --> 00:06:56,030
+For this, we introduce
+the following random variable.
+
+108
+00:06:56,030 --> 00:07:00,280
+Let i and
+j be different indices from 1 to m.
+
+109
+00:07:00,280 --> 00:07:05,085
+We define Xi of ij to be equal
+to 1 if two elements, A'[i] and
+
+110
+00:07:05,085 --> 00:07:09,985
+A'[j] are compared in the [INAUDIBLE]
+quick sort algorithm and
+
+111
+00:07:09,985 --> 00:07:12,180
+to be equal to 0 otherwise.
+
+112
+00:07:13,470 --> 00:07:17,880
+Once again, to estimate the running
+time of the quick sort algorithm,
+
+113
+00:07:17,880 --> 00:07:22,170
+we would like to estimate the total number
+of comparisons made, so we would like to
+
+114
+00:07:22,170 --> 00:07:26,670
+estimate, for any pair of elements, what
+is the probability that they are compared?
+
+115
+00:07:26,670 --> 00:07:31,590
+As we discussed on the previous slide,
+the probability that two elements
+
+116
+00:07:31,590 --> 00:07:37,810
+are compared depends on how close they
+are in the sorted version of our array.
+
+117
+00:07:37,810 --> 00:07:44,460
+For this reason, we define c of
+ij dependent on the sorted array.
+
+118
+00:07:44,460 --> 00:07:46,280
+We do not have this sorted array, right?
+
+119
+00:07:46,280 --> 00:07:50,840
+We are only constructing this
+in the quick sort algorithm but
+
+120
+00:07:50,840 --> 00:07:53,580
+we use it just for the analysis, okay?
+
+121
+00:07:55,070 --> 00:07:57,680
+The next thing to note is the following.
+
+122
+00:07:57,680 --> 00:08:03,070
+For any two elements of our initial array
+assorted array doesn't matter, so for
+
+123
+00:08:03,070 --> 00:08:08,340
+any two elements they are either compared
+just once or they are not compared at all.
+
+124
+00:08:08,340 --> 00:08:09,090
+So, why is that?
+
+125
+00:08:09,090 --> 00:08:10,490
+Why just once?
+
+126
+00:08:10,490 --> 00:08:13,110
+Well, if two elements
+are compared at some point,
+
+127
+00:08:13,110 --> 00:08:18,800
+this means that at this point one of these
+elements is because in the partition
+
+128
+00:08:18,800 --> 00:08:23,760
+procedure we can put a with all of
+the elements of the current summary.
+
+129
+00:08:23,760 --> 00:08:26,455
+So, if two elements are compared
+that one of them is a pivot.
+
+130
+00:08:26,455 --> 00:08:31,699
+This also means that right after
+the call of this partition
+
+131
+00:08:31,699 --> 00:08:36,820
+procedure, we are not going
+to use this pivot element.
+
+132
+00:08:36,820 --> 00:08:40,230
+We will put the pivot element
+into its final place, and
+
+133
+00:08:40,230 --> 00:08:44,210
+we are not going to touch it in
+any of the subsequent calls.
+
+134
+00:08:44,210 --> 00:08:48,700
+This immediately implies
+the quadratic upper bound
+
+135
+00:08:48,700 --> 00:08:50,920
+on the worst case right in
+time with final algorithm.
+
+136
+00:08:51,930 --> 00:08:58,070
+Once again we have quadratic number
+of possible pairs of element, and
+
+137
+00:08:58,070 --> 00:09:03,470
+each pair of element is as it
+compared once or not compared at all.
+
+138
+00:09:03,470 --> 00:09:06,109
+Right so right in time with
+the worst case is quadratic.
+
+139
+00:09:08,020 --> 00:09:13,810
+Now comes the most important
+observation of this proof.
+
+140
+00:09:13,810 --> 00:09:18,691
+I claim that the elements A'[i] and
+
+141
+00:09:18,691 --> 00:09:23,590
+A'[j] are compared if and only if
+
+142
+00:09:23,590 --> 00:09:29,470
+the first pivot selected in
+the subrange of the solitary a prime
+
+143
+00:09:29,470 --> 00:09:35,810
+from either side to index j is either
+a prime of a, of i, or a prime of j.
+
+144
+00:09:37,030 --> 00:09:37,930
+Well let's see why.
+
+145
+00:09:39,030 --> 00:09:43,763
+First of all, when we select it pivot
+the random pivot which is not in
+
+146
+00:09:43,763 --> 00:09:48,578
+their sub range, and then all
+the elements from this sub range in this
+
+147
+00:09:48,578 --> 00:09:53,337
+sort of element goes either to the left or
+this to the right.
+
+148
+00:09:53,337 --> 00:10:00,970
+So, they all stay together in
+the same branch of three, okay.
+
+149
+00:10:00,970 --> 00:10:05,790
+So before we select a pivot
+which stays inside this range,
+
+150
+00:10:05,790 --> 00:10:10,310
+all these elements stay
+together in the same sub-array.
+
+151
+00:10:10,310 --> 00:10:14,450
+Now, assume that we selected
+a pivot from this sub-range, and
+
+152
+00:10:14,450 --> 00:10:19,180
+assume that it is not A'[i] or
+A'[j], for example.
+
+153
+00:10:19,180 --> 00:10:23,680
+In this case a prime of A and
+a prime of J will be splitted apart.
+
+154
+00:10:23,680 --> 00:10:30,009
+They will go into different parts
+with respect to this pivot, right?
+
+155
+00:10:30,009 --> 00:10:35,213
+At this point I must humor that all
+the elements in my summary are different,
+
+156
+00:10:35,213 --> 00:10:38,670
+and in duality are different, okay?
+
+157
+00:10:38,670 --> 00:10:43,700
+So once again,
+if the first selected element
+
+158
+00:10:43,700 --> 00:10:48,220
+from this subrange is not prime of A or
+
+159
+00:10:48,220 --> 00:10:53,290
+a prime of j then these two elements
+are not going to be compared.
+
+160
+00:10:53,290 --> 00:10:58,660
+Because right after the partition
+procedure uses this pivot
+
+161
+00:10:58,660 --> 00:11:05,290
+from this range A prime of a and A prime
+of j will go to different parts, right?
+
+162
+00:11:05,290 --> 00:11:08,480
+If, on the other hand, the first selected
+
+163
+00:11:08,480 --> 00:11:13,700
+pivot from this subrange is either
+A prime of a or A prime of j,
+
+164
+00:11:13,700 --> 00:11:18,880
+then these two elements are going
+to become paired, right?
+
+165
+00:11:18,880 --> 00:11:23,280
+So this is the most important
+observation in this proof.
+
+166
+00:11:23,280 --> 00:11:25,150
+Everything else is just calculations.
+
+167
+00:11:25,150 --> 00:11:29,510
+So if this is clear, let's then estimate
+
+168
+00:11:29,510 --> 00:11:33,710
+the probability that second
+respondent to elements are compared.
+
+169
+00:11:33,710 --> 00:11:36,590
+So we know that they're compared if and
+
+170
+00:11:36,590 --> 00:11:43,205
+only if the first selected Pivot in this
+sub range is one of these two elements.
+
+171
+00:11:43,205 --> 00:11:46,200
+This helps us to estimate
+the probability of
+
+172
+00:11:47,640 --> 00:11:50,680
+not the fact that c of
+i j is equal to one.
+
+173
+00:11:50,680 --> 00:11:52,380
+Well this is equal to two.
+
+174
+00:11:52,380 --> 00:11:55,070
+I mean because we have only two choices.
+
+175
+00:11:55,070 --> 00:12:00,490
+I mean either a prime of a, or a prime of
+j divided by the total number of choices,
+
+176
+00:12:00,490 --> 00:12:03,200
+I mean the total number of
+elements in this subrange.
+
+177
+00:12:03,200 --> 00:12:05,340
+And this is j minus i plus 1.
+
+178
+00:12:05,340 --> 00:12:09,370
+So the probability that Z of ij is
+
+179
+00:12:09,370 --> 00:12:14,180
+equal to 1 equals 2 divided
+by g minus i plus 1.
+
+180
+00:12:14,180 --> 00:12:17,840
+For example, if j and i differ by 1.
+
+181
+00:12:17,840 --> 00:12:20,270
+So j is equal to y plus 1.
+
+182
+00:12:20,270 --> 00:12:22,690
+So neighboring element in the.
+
+183
+00:12:22,690 --> 00:12:26,420
+Then this probability is equal
+to 2 divided by 1 plus 1.
+
+184
+00:12:26,420 --> 00:12:28,201
+This is 2 by 2, this is 1.
+
+185
+00:12:28,201 --> 00:12:33,740
+[INAUDIBLE] Just reflects the fact that if
+there are two neighboring elements inside.
+
+186
+00:12:33,740 --> 00:12:38,100
+This sorted array,
+then the algorithm just must compare them,
+
+187
+00:12:38,100 --> 00:12:40,730
+to understand that one of them is smaller.
+
+188
+00:12:40,730 --> 00:12:44,790
+There is no other element that
+can help our algorithm to realize
+
+189
+00:12:44,790 --> 00:12:48,270
+that one of these element is
+smaller than the other one, okay.
+
+190
+00:12:49,408 --> 00:12:54,880
+This in turn helps us to estimate the
+expected value of this random variable.
+
+191
+00:12:54,880 --> 00:12:59,780
+So recall that if we have a random
+variable, which takes only values zero and
+
+192
+00:12:59,780 --> 00:13:04,920
+one, then its expected
+value is one multiplied by
+
+193
+00:13:04,920 --> 00:13:07,260
+the probability that it takes
+
+194
+00:13:07,260 --> 00:13:12,260
+value one plus zero multiplied by the
+probability that it takes the value zero.
+
+195
+00:13:12,260 --> 00:13:14,630
+Well zero multiplied by something is zero.
+
+196
+00:13:14,630 --> 00:13:17,310
+So what is left is just probability.
+
+197
+00:13:17,310 --> 00:13:20,620
+That it takes multiplied by one.
+
+198
+00:13:20,620 --> 00:13:29,120
+So the expected value of CIJ is equal
+to 2 divided by g minus i plus one.
+
+199
+00:13:30,390 --> 00:13:35,300
+The final step in our proof
+is estimating the sum
+
+200
+00:13:36,510 --> 00:13:41,080
+random variables to see
+they all possible I and J.
+
+201
+00:13:41,080 --> 00:13:46,770
+So, once again the expected
+value of average value
+
+202
+00:13:46,770 --> 00:13:52,170
+of the sum of the number of comparisons
+made is the expected value of the sum
+
+203
+00:13:52,170 --> 00:13:57,400
+of all possible x adjacent,
+or for all I Js.
+
+204
+00:13:57,400 --> 00:14:02,860
+So the expected value of their sum
+is the sum of their expected values.
+
+205
+00:14:02,860 --> 00:14:04,740
+So we can write the following.
+
+206
+00:14:04,740 --> 00:14:09,820
+The average running time is equal
+to the sum overall possible
+
+207
+00:14:09,820 --> 00:14:15,000
+different of the expected values cij, and
+
+208
+00:14:15,000 --> 00:14:17,920
+we know this expected value already.
+
+209
+00:14:17,920 --> 00:14:21,520
+So this is a some overall
+possible different ij,
+
+210
+00:14:21,520 --> 00:14:27,520
+in where j is greater than i of
+2 divided by g minus i plus one.
+
+211
+00:14:27,520 --> 00:14:32,850
+Well we can take this constant two out,
+and consider all the possible.
+
+212
+00:14:32,850 --> 00:14:34,760
+And consider a fixed i.
+
+213
+00:14:34,760 --> 00:14:40,070
+For this i what we have
+j ranges from i+1 to n.
+
+214
+00:14:40,070 --> 00:14:45,103
+So what we have for
+the specified time in this sum is a subset
+
+215
+00:14:45,103 --> 00:14:50,256
+of the following sum,
+1/2+1/3+1/4 and so on.
+
+216
+00:14:50,256 --> 00:14:52,560
+And this is actually a known sum.
+
+217
+00:14:52,560 --> 00:14:58,000
+This is called harmonic series and
+it is known that it grows arithmetically.
+
+218
+00:14:58,000 --> 00:15:00,890
+Once again,
+1 over 2 plus 1 over 3 plus, and so on,
+
+219
+00:15:00,890 --> 00:15:05,150
+1 over n, is theta of logarithm of n.
+
+220
+00:15:05,150 --> 00:15:11,340
+Well, this means that, for
+each they correspond in sum, which
+
+221
+00:15:11,340 --> 00:15:17,490
+ranges over all j from i plus 1 through n,
+grows, at most, logarithmically.
+
+222
+00:15:17,490 --> 00:15:20,957
+This means since we have m traces for
+
+223
+00:15:20,957 --> 00:15:26,980
+i from one to m that
+the grows vertically as m.
+
+224
+00:15:26,980 --> 00:15:29,162
+Okay, and this concludes our proof.

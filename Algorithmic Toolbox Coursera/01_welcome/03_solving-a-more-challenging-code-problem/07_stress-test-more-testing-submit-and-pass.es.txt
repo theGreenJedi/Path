@@ -1,0 +1,74 @@
+En este vídeo, primero
+haremos más pruebas y después enviaremos nuestra solución
+principal al sistema y veremos cómo funciona. Al final estarás completamente preparado para probar tus ejercicios de programación
+en el futuro. Para pruebas pequeñas con n pequeño y números chicos, no hemos encontrado aún pruebas
+en las que nuestras soluciones difieran. Esto no significa aún que nuestras
+dos soluciones funcionen. Tal vez pueden interrumpirse para valores mayores de n, o para valores
+mayores de los números de entrada. Vamos a comprobarlo. Detenemos nuestro problema con Control+C Vamos al código de nuevo. Y aumentamos de nuevo las restricciones a los valores de n y de los números. Por ejemplo, n lo elevaremos hasta 100 y los números los incrementaremos hasta 100.000, el valor máximo permitido
+por el enunciado del problema. Guardamos el código, recompilamos
+y lanzamos la prueba de estrés de nuevo. Y ahora vemos que, de nuevo, nuestra pantalla se llena con números y con "OK"´s. Pero hay bastantes más números en
+cada prueba y los números son mayores. Y todavía estamos esperando
+y esperando y nada sucede. Nuestro programa sólo continúa llenando la pantalla con "OK"´s. Así que probablemente funcione. O quizás tenemos que probar con valores aún
+mayores para n, porque los números que hemos usado para probar son ya elevados,
+pero n no es todavía tan grande. Así que estimemos cuál es el valor
+de n para el que aún podemos probar. Nuestra solución lenta crece en tiempo cuadrático. Por lo que probar con 100.000 números
+puede ser probablemente demasiado lento. Así que tal vez podemos probar
+elevando el valor de n hasta 1.000. Lo hacemos, recompilamos, lanzamos
+la prueba de estrés de nuevo. Ahora nuestra pantalla está 
+prácticamente llena de números. Pero sabremos si encontramos 
+una prueba que interrumpe nuestro programa, porque entonces se parará. Y como  no se detiene y sigue llenando nuestra pantalla con números, significa que para todos nuestras
+pruebas, todo funciona correctamente. Así que ahora podemos estar bastante seguros
+de que nuestra solución debe funcionar correctamente. Paramos la prueba de estrés. Y ahora queremos retroceder a la solución 
+al problema inicial en la prueba de estrés. Y para hacer esto, vamos a la función main
+y ponemos como comentario el bucle while que implementa la prueba de estrés Y ahora, todo lo que queda en main es
+la solución al problema inicial. Así que ya está, probablemente
+podemos enviar ya este archivo. Lo guardamos y, por si acaso, recompilamos. Y lo probamos con algunos ensayos simples. Por ejemplo, introducimos el número 2, sólo dos números, y entonces tres y cinco como números de entrada. Lo que vemos es que en lugar de sólo
+el número 15, en la pantalla, también vemos los números uno y cero. De qué se trata? Bien, obviando lo que es esto, si enviamos esta solución concreta al sistema,
+obtendremos un resultado incorrecto ela primera prueba que encontremos en 
+el sistema, porque sólo tenemos que mostrar la solución correcta al problema
+y nada más que ese resultado. Y este es un fallo muy frecuente
+que la gente comete en su primer ejercicion de programación,
+así que, por favor, tengan cuidado con esto. Por favor, sólo muestren lo que se pide
+en el enunciado del problema y nada más que eso, nada menos que eso. Así que en este caso, sólo necesitamos
+mostrar el número 15. Así que vamos a solucionar esta salida adicional. Ahora probablemente hemos adivinado que
+esta salida adicional es esta lista de índices que nuestra solución rápida encuentra. Vamos a comentar esto. Guardamos el archivo, recompilamos
+y lanzamos nuestro programa de nuevo. Y volvemos a introducir la misma prueba. Ahora vemos que sólo tenemos 15 como salida, lo que es la respuesta correcta. Ahora estamos bastante seguros. Podemos intentar enviar esta solución
+a Coursera. Vamos y hagamos eso. Creamos un nuevo envío y subimos el archivo, que es stress_test.cpp Este es el archivo con el que hemos estado trabajando. Esperamos a que se suba. Y entonces lo enviamos. Ahora tenemos que esperar a
+que el corrector califique nuestra solución. Y, bien, ha pasado en el sistema. Esto ilustra la técnica de las pruebas de estrés. Pero voy a darles algunos consejos adicionales. Primero, te habrás dado cuenta que la prueba
+de estrés nos da mágicamente el ensayo en en el que nuestra solución principal y nuestra
+solución alternativa difieren rápidamente. Pero este no es siempre el caso. Por ejemplo, en este problema de MaxPairwiseProduct los únicos casos en los que nuestras soluciones
+principal y alternativa difirieron fueron los ensayos en los que los dos 
+mayores números eran el mismo. Y esto es un evento raro, especialmene cuando generas grandes
+números aleatorios entre cero y 100,000. Así que hemos sido afortunados de
+generar rápidamente tal prueba. Y esto es cierto por regla general. A menudo, los casos en que hay números iguales son algunos casos límite. También ocurre lo mismo cuando
+estás trabajando, por ejemplo, con palabras en letras latinas y
+las pruebas en los que las palabras sólo contienen una letra A o sólo 
+contienen dos letras diferentes, por ejemplo, A y B, en contraposición a palabras
+que puedan contener arbitrariamente letras latinas. Esos casos con sólo unas cuantas letras diferentes son llamados algunas veces casos límite. Así que cuando quieras hacer prueba de estrés y no puedes encontrar rápidamente una prueba en la que
+tus soluciones principal y alternativa difieran, intenta generar pruebas en un subespacio
+más enfocado de todas las posibles pruebas. Por ejemplo, si estás trabajando con grafos, intenta generar un grafo desconectado,
+un grafo completo, un grafo bipartito. Otro punto importante es que
+si encuentras una prueba en la que tus soluciones difieren, no
+tengas prisas por depurar algo. Primero intenta generar el ensayo más pequeño y más sencillo en el que las soluciones difieren. Esto simplificará mucho tu depuración. No esperes que las pruebas de 
+estrés sean una bala de plata. Por ejemplo, no podrás descubrir
+que tu solución principal es demasiado lenta porque tu solución alternativa será
+probablemente aún más lenta, alguna solución de fuerza bruta. Y tendrás que generar sólo pequeñas
+pruebas aleatorias para compararlas. En otros casos, desbordamiento de enteros. Incluso si generas pruebas aleatorias
+con grandes números ambas soluciones pueden tener potencialmente
+problemas de desbordamiento de enteros. Y entonces no te darás cuenta de que tu
+solución principal lo tiene en la prueba de estrés. Así que primero prueba estos casos
+y después aplica la prueba de estrés. Sin embargo, si ya has hecho pruebas manuales, pruebas de desbordamiento de enteros y prueba de máximos, y después aplicas las pruebas de estrés, está casi
+garantizado que tengas éxito, porque los autores del problema
+hacen básicamente lo mismo cuando preparan el conjunto de pruebas para tí. Hacen algunos ensayos manuales,
+hacen pruebas con grandes números con desbordamiento de enteros, hacen pruebas grandes para checar el límite de tiempo, y después generan algunos ensayos aleatorios
+y tal vez algunas pruebas aleatorias focalizadas. Pero esto es todo. Así que probablemente podrás encontrar todas
+las trampas que te han preparado simplemente con pruebas. En conclusión, sabemos que es muy importante
+escribir programas que funcionen en todos los posibles ensayos permitidos, no sólo 
+en la mayoría de los casos permitidos. En práctica, si escribes programas con errores que se revelan raramente algunos de tus usuarios podrían encontrarse con esos errores y su experiencia se estropeará significativamente. También, a veces, al comienzo de un proyecto,
+quieres probar algunas hipótesis y escribes algo de código para comprobarlo. Entonces obtienes algunos resultados y
+basas tus decisiones en esos resultados, para más tarde descubrir que
+tienes un error en tu código y que todas tus decisiones eran erróneas. Es por eso que hemos preparado conjuntos de prueba a fondo para checar todos los aspectos de tus problemas. Y aquí las pruebas de estrés serán de mucha 
+ayuda cuando tu solución falle en algún ensayo y ni siquiera sepas en qué
+prueba falla tu programa. Hemos ocultado los ensayos con este propósito. En la vida real, a menudo tampoco conocerás
+cuáles son las condiciones exactas bajo las que falla tu programa. Pero ahora estás completamente preparado
+para probar tus programas, depurarlos y arreglarlos.

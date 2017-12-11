@@ -1,0 +1,102 @@
+Hi, in this video you will learn
+to implement the greedy algorithm from the previous video, and
+analyze its running time. Here we have the pseudocode for
+this algorithm, and the procedure is called MinRefills. And the main input to
+this procedure is array x. From the problems statement, we know that the positions of the gas stations
+are given by numbers from x1 to xn. And those are measured in kilometers
+in terms of distance from A to the corresponding gas station
+along the path from A to B. For convenience, we actually add
+to array x positions of point A which is x0 and
+is the smallest value in the array. And point B, which is Xn plus 1, and
+it is the largest value in the array x. Along our route from A to B,
+we will visit some points. Of course we will start from point A. And then we'll probably go to
+some gas station, refilll there. And then go to another gas station and
+to another gas station and then to another and then at some point we will get
+to the point B or point x n plus 1. So we see that we only need to
+store the positions in the array x. We don't need to consider any positions
+between the elements of array x. And so, we will store in
+the variable currentRefill, the position in the array x
+where we're currently standing. And we will initialize it with 0. Because we start from point A,
+which is the same as x0, and has index 0 in the array x. And later currentRefill will
+store the index in the array x, where we're currently standing. We'll also store the answer to our
+problem in the variable numRefills. At each point in the execution
+of the algorithm, it will contain the number of
+refills we have already made. And we initialize it with zero
+because the problem statement asks us to count the minimum number
+of refills we need to do. Not counting the initial
+refill at point A. So when we are standing at point A, we consider that we haven't
+made any refills yet. Then the main external while loop goes. And it goes on while we're
+still to the left from point B, because then we need to go right
+to reach our destination B. And we check this condition
+with this inequality, that currentRefill is at most n. This means that the position or
+index in the array x is at most n, and so we're to the left from point B currently. In this case we still
+need to go to the right. And first we save our current position in
+the array x in the variable lastRefill. This means that we made our lastRefill
+in the position currentRefill. And now we need to go to the right from
+there, and either get to destination B or get to the rightmost reachable
+gas station and refill there. And the next internal while
+loop does exactly that. It gradually increases our currentRefill
+position in the array x until it reaches the rightmost point in the array x which
+is reachable from the lastRefill position. So first we check that currentRefill
+position is at most n because if it is n plus 1 already it means
+that we reached our destination B. And there is no point
+increasing it further. If it's still to the left from B, then we'll look at the next position
+to the right, x currentRefill plus 1. We need to check whether it's reachable
+from lastRefill position or not. And first we can build the distance
+from the lastRefill position to the currentRefill plus one position by
+subtracting the values of the array x. And if this distance is at most L,
+then it means that we can travel this distance with full tank,
+without any refills. And of course, at the lastRefill position, we could fill our tank
+up to the full capacity. And then we'll be able to travel for
+L kilometers. So, this inequality checks if actually
+position currentRefill plus 1 is reachable from the lastRefill position. If it is,
+we increase the value of currentRefill and go on with our internal while loop. When we exit this internal while loop
+we're already maybe in the point B, or we may be in some point which is
+the farthest reachable gas station. Now we compare it with
+our lastRefill position. And if it turns out that it is the same,
+it means that we couldn't go to the right. We don't have enough fuel even
+to get to the next gas station. And then, we cannot return the minimum
+number of refills that we need to do on the way from A to B, because it is
+impossible to get from A to B at all. And so we return this result IMPOSSIBLE. Otherwise, we moved at least a bit to
+the right, and then we need to see. If we are already in the point B,
+we don't need to do anything else. Otherwise, we need to refill there. So, we check that we're to the left
+from point B with this inequality. And if it's true then we're at some
+gas station and we need to refuel. So we increase the numRefills
+variable by one. And then we return to the start
+of our external while loop. And there we again check if
+we're to the left from point B we need another iteration. And if currentRefill is already n plus 1,
+then we've reached point B and we need to exit the external while loop. And in that case, we just return the answer which is
+number of refills we've made so far. We've implemented the greedy
+algorithm from the previous lecture. Now let's analyze its running time. From the first look it can seem that
+it works in n squared time because we have the external while loop
+which can make n iterations and internal loop which can
+make n iterations. So, n by n is n squared, but
+actually we will show that it only makes O of n actions for
+the whole algorithm. To prove that let's first look
+at the currentRefill variable. We see that it only
+changes one by one here. And it starts from zero. And what is the largest
+value that it can attain? Of course,
+the largest value is n plus 1 because this is the largest index in the array x, and
+currentRefil is index in the array x. So, variable currentRefil starts
+from zero, changes one by one. And the largest value it
+can have is n plus 1. It means that it is increased at most
+n plus 1 times which is Big-O of n. But that's not all we do. Also, we increase
+variable numRefills here. But we also increase it always one by one. It also starts from zero. And what is the largest number
+that this variable can attain? Well, of course, it is n because
+when we have n gas stations. There is no point to refuel
+twice at the same gas station. So we can refuel at most n times. So variable numRefills goes from
+0 to n and changes one by one. So it is only changed at most n times. And so, it is also linear in terms of n. And so, we have at most n plus 1
+iterations of the external while loop. Everything but the internal while
+loop takes there constant time. This assignment, this if,
+and this if with assignment. And the external loop and internal loop combined also spend
+at most linear time of iterations. Because they change
+variable currentRefill and it changes at most linear number of times. So all in all our algorithm
+works in Big-O n time. Let's go through this proof once again. The Lemma says that the running time
+of the whole algorithm is big O of n. And we prove this by first
+noticing that the currentRefill variable changes only from
+zero to at most n plus 1. And the change is always one by one. That the numRefills variable
+changes from zero to at most n. And it also changes one by one. So, both these variables
+are changed Big-O of n times. And everything else that
+happens is constant time. Each iteration of the external loop, and there are at most n plus 1
+iterations of the external loop. Thus, our algorithm works in linear time. In the next video, we will review what we've learned
+about greedy algorithms in general.

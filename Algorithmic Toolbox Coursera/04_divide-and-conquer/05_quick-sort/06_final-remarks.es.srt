@@ -1,0 +1,471 @@
+1
+00:00:00,200 --> 00:00:03,490
+Concluimos esta lección con
+unas pocas importantes observaciones.
+
+2
+00:00:04,890 --> 00:00:08,030
+La primera observación es acerca
+de un truco llamado memoización.
+
+3
+00:00:09,190 --> 00:00:13,470
+Usualmente, al diseñar un algoritmo
+de programación dinámica, empiezas
+
+4
+00:00:13,470 --> 00:00:17,940
+analizando la estructura de una solución
+óptima para tu problema computacional.
+
+5
+00:00:17,940 --> 00:00:21,460
+Haces esto para llegar a la correcta
+
+6
+00:00:21,460 --> 00:00:26,070
+definiciñon de un subproblema que
+nos permitirá expresar la solución para
+
+7
+00:00:26,070 --> 00:00:31,340
+un subproblema a través de las soluciones
+para sub-subproblemas de menor tamaño.
+
+8
+00:00:31,340 --> 00:00:36,240
+Cuando apuntas esta relación recurrente
+puedes transformarla realmente en
+
+9
+00:00:36,240 --> 00:00:39,970
+un algoritmo iterativo o
+un algoritmo recursivo.
+
+10
+00:00:39,970 --> 00:00:44,100
+El correspondiente algoritmo iterativo 
+simplemente resuelve todos los subproblemas
+
+11
+00:00:44,100 --> 00:00:47,210
+yendo de los menores a los mayores.
+
+12
+00:00:47,210 --> 00:00:51,960
+Y  por esta razón, también es denominado
+a veces como algoritmo de abajo arriba.
+
+13
+00:00:51,960 --> 00:00:56,960
+Por el otro lado, el algoritmo
+recursivo para resolver un subproblema
+
+14
+00:00:56,960 --> 00:01:00,580
+hace llamadas recursivas a
+los sub-subproblemas menores.
+
+15
+00:01:00,580 --> 00:01:04,790
+Y por esta razón, a veces se denomina
+el enfoque de arriba abajo.
+
+16
+00:01:04,790 --> 00:01:08,980
+Si implementas un algoritmo recursivo
+
+17
+00:01:08,980 --> 00:01:13,830
+sin rodeos puede resultar
+muy lento debido a que recalcula
+
+18
+00:01:15,710 --> 00:01:17,840
+algunos valores muchas, muchas veces,
+
+19
+00:01:17,840 --> 00:01:20,090
+como los números de Fibonacci, por ejemplo.
+
+20
+00:01:20,090 --> 00:01:23,950
+Sin embargo, hay un truco simple
+que se denomina memoización,
+
+21
+00:01:23,950 --> 00:01:29,060
+que te permite evitar recalcular
+varias veces lo mismo.
+
+22
+00:01:29,060 --> 00:01:33,661
+A saber, puedes hacer lo siguiente,
+mientras resuelves subproblemas,
+
+23
+00:01:33,661 --> 00:01:40,410
+justo después de resolverlo, almacenas su
+solución en una tabla, por ejemplo.
+
+24
+00:01:41,440 --> 00:01:48,880
+Y cuando haces una llamada recursiva para
+resolver algún subproblema, antes de
+
+25
+00:01:48,880 --> 00:01:52,758
+intentar resolverlo, compruebas en la tabla
+si su solución ya está almacenada.
+
+26
+00:01:52,758 --> 00:01:57,070
+Y si su solución ya está en la tabla,
+lo que significa que ya ha sido
+
+27
+00:01:57,070 --> 00:02:00,330
+calculada, entonces simplemente
+la devuelves inmediatamente.
+
+28
+00:02:00,330 --> 00:02:05,930
+Así esta llamada recursiva resulta
+ser sólo una búsqueda en una tabla.
+
+29
+00:02:05,930 --> 00:02:10,710
+Así es cómo un algoritmo recusivo
+con memoización funciona.
+
+30
+00:02:10,710 --> 00:02:15,100
+Veamos como es un algoritmo
+recusivo con memoización para
+
+31
+00:02:15,100 --> 00:02:17,320
+el problema de la mochila.
+
+32
+00:02:17,320 --> 00:02:20,760
+Por simplicidad asumimos que
+estamos hablando de una mochila
+
+33
+00:02:20,760 --> 00:02:22,200
+con repeticiones.
+
+34
+00:02:22,200 --> 00:02:27,970
+En este caso, necesitamos calcular nuestro 
+subproblema para una mochila de tamaño w
+
+35
+00:02:27,970 --> 00:02:31,970
+es simplemente el valor óptimo
+para una mochila de peso total w.
+
+36
+00:02:31,970 --> 00:02:36,350
+Calculamos como sigue,
+calculamos por procedimiento recursivo.
+
+37
+00:02:36,350 --> 00:02:40,300
+Lo primero de todo, comprobamos
+si la solución ya está en una tabla hash.
+
+38
+00:02:40,300 --> 00:02:43,880
+Usamos una tabla hash para
+almacenar pares de objetos.
+
+39
+00:02:43,880 --> 00:02:50,550
+Para el peso w, almacenamos
+el valor de w si ya ha sido calculado.
+
+40
+00:02:50,550 --> 00:02:55,660
+Si ya está en la tabla, lo devolvemos
+inmediatamente, en otro caso sólo
+
+41
+00:02:55,660 --> 00:03:00,771
+lo calculamos y hacemos llamadas 
+recursivas  para calcular los valores para
+
+42
+00:03:00,771 --> 00:03:07,810
+el subproblema de w menos wi. ¿De acuerdo?
+
+43
+00:03:07,810 --> 00:03:12,660
+Y cuando se ha calculado el valor, simplemente
+lo almacenamos en nuestra tabla hash.
+
+44
+00:03:12,660 --> 00:03:17,470
+De esta forma, usamos memoización
+almacenando esto en la tabla hash
+
+45
+00:03:17,470 --> 00:03:22,440
+para evitar recalcular lo mismo de nuevo.
+
+46
+00:03:22,440 --> 00:03:27,210
+Por lo que una vez más, un algoritmo
+iterativo resuelve todos los subproblemas
+
+47
+00:03:27,210 --> 00:03:31,100
+yendo de los menores a los mayores. ¿Correcto?
+
+48
+00:03:31,100 --> 00:03:35,380
+Y finalmente resuelve el problema inicial.
+
+49
+00:03:35,380 --> 00:03:38,580
+Por otro lado, el algoritmo recursivo
+funciona como sigue.
+
+50
+00:03:38,580 --> 00:03:40,780
+Comienza con el problema inicial y
+
+51
+00:03:40,780 --> 00:03:45,760
+hace llamadas recursivas a
+los sub-subproblemas menores. ¿Correcto?
+
+52
+00:03:45,760 --> 00:03:50,882
+Así, en cierto sentido, un algoritmo iterativo
+y el algoritmo recursivo están haciendo
+
+53
+00:03:50,882 --> 00:03:56,530
+el mismo trabajo, especialmente si necesitamos
+resolver todo el rango de subproblemas.
+
+54
+00:03:56,530 --> 00:04:01,720
+Sin embargo, un algoritmo recursivo puede
+volverse ligeramente más lento porque
+
+55
+00:04:03,550 --> 00:04:06,450
+resuelve los mismos subproblemas en una mano.
+
+56
+00:04:06,450 --> 00:04:10,550
+Por otro lado, cuando haces una llamada
+recursiva también necesitas
+
+57
+00:04:12,000 --> 00:04:14,750
+poner la dirección de vuelta en una
+pila, por ejemplo.
+
+58
+00:04:14,750 --> 00:04:18,340
+Así, el algoritmo recusivo
+tiene cierta sobrecarga.
+
+59
+00:04:18,340 --> 00:04:23,520
+Sin embargo hay caso en los que no
+necesitas resolver todos los subproblemas y
+
+60
+00:04:23,520 --> 00:04:27,450
+el problema de la mochila es una buena
+ilustración de esta situación.
+
+61
+00:04:27,450 --> 00:04:32,880
+Imagina que nos dan una entrada
+para el problema de la mochila donde todos
+
+62
+00:04:32,880 --> 00:04:38,050
+los pesos de los n objetos junto
+con el peso total de la mochila
+
+63
+00:04:38,050 --> 00:04:40,120
+son divisibles por 100, por ejemplo.
+
+64
+00:04:41,400 --> 00:04:45,280
+Esto significa que no están realmente
+interesados en los subproblemas
+
+65
+00:04:45,280 --> 00:04:49,590
+donde el peso de la mochila no
+es divisible por 100. ¿Por qué?
+
+66
+00:04:49,590 --> 00:04:55,180
+Simplemente porque para cualquier
+conjunto de objetos donde todos los pesos
+
+67
+00:04:55,180 --> 00:04:59,900
+de los objetos son divisibles por 100, su peso
+total también es divisible por 100.
+
+68
+00:04:59,900 --> 00:05:04,470
+En este caso, un algoritmo iterativo
+aún resolverá simplemente
+
+69
+00:05:04,470 --> 00:05:06,370
+todo el rango de subproblemas.
+
+70
+00:05:06,370 --> 00:05:10,610
+Mientras que un algoritmo recusivo
+hará únicamente aquellas llamadas recursivas
+
+71
+00:05:10,610 --> 00:05:13,720
+que necesito realmente para
+calcular la solución final.
+
+72
+00:05:13,720 --> 00:05:17,548
+Así hará sólo llamadas recursivas
+entre los subproblemas
+
+73
+00:05:17,548 --> 00:05:19,940
+cuyo peso sean divisibles por 100.
+
+74
+00:05:19,940 --> 00:05:26,480
+La observación final de esta lección
+es acerca del tiempo de ejecución.
+
+75
+00:05:26,480 --> 00:05:31,850
+Si recuerdas, el tiempo de ejecución de ambos
+algoritmos que hemos diseñado en
+
+76
+00:05:31,850 --> 00:05:35,020
+esta lección era O de n multiplicado por W.
+
+77
+00:05:35,020 --> 00:05:41,260
+Y este tiempo de ejecución parece
+polinómico, sin embargo, no lo es.
+
+78
+00:05:41,260 --> 00:05:45,674
+Y este es el porqué. Considera, por 
+ejemplo, la siguiente entrada.
+
+79
+00:05:48,405 --> 00:05:52,740
+Asumo que el peso total de la mochila 
+es el que se muestra en la diapositiva.
+
+80
+00:05:52,740 --> 00:05:57,290
+Es un número enorme,
+aproximadamente diez a la 20,
+
+81
+00:05:57,290 --> 00:06:00,320
+lo que significa 20 dígitos en 
+su representación decimal.
+
+82
+00:06:00,320 --> 00:06:05,160
+Al mismo tiempo, el tamaño de la entrada
+es realmente pequeño, sólo 20 dígitos. ¿Verdad?
+
+83
+00:06:05,160 --> 00:06:10,420
+No son gigabytes de datos, sólo
+20 dígitos, pero con esta entrada
+
+84
+00:06:10,420 --> 00:06:14,710
+nuestro algoritmo realmente tendrá que realizar
+aproximadamente diez a la 20 operaciones.
+
+85
+00:06:14,710 --> 00:06:20,480
+Esto es realmente enorme. Por ejemplo,
+no podemos hacer esto en nuestros portátiles.
+
+86
+00:06:20,480 --> 00:06:28,950
+Y esto es porque para representar el 
+valor de W, sólo necesitamos log W dígitos.
+
+87
+00:06:30,270 --> 00:06:33,621
+Así, en el caso del problema de la mochila,
+
+88
+00:06:33,621 --> 00:06:38,980
+nuestra entrada es proporcional no a n más W,
+sino a n más log de W.
+
+89
+00:06:40,420 --> 00:06:46,030
+¿De acuerdo? Y si representas el tiempo de
+ejecución en términos de n y log de W,
+
+90
+00:06:46,030 --> 00:06:51,400
+entonces obtienes la siguiente expresión,
+n multiplicado por 2 a la log de W,
+
+91
+00:06:51,400 --> 00:06:55,610
+lo que significa que nuestro algoritmo es, 
+de hecho, un algoritmo de tiempo exponencial.
+
+92
+00:06:56,650 --> 00:07:03,485
+Dicho de otro modo, sólo podemos procesar
+entradas donde W no sea bastante grande,
+
+93
+00:07:03,485 --> 00:07:08,240
+esto es aproximadamente menor
+de 1 billón, por ejemplo.
+
+94
+00:07:09,380 --> 00:07:15,660
+¿De acuerdo? Y, de hecho, creemos
+que es muy difícil construir un algoritmo
+
+95
+00:07:15,660 --> 00:07:22,240
+que resuelva este problema en un tiempo 
+polinómico, en verdadero tiempo polinómico.
+
+96
+00:07:22,240 --> 00:07:27,615
+En particular, aprenderemos después
+en esta especialización que este problema
+
+97
+00:07:27,615 --> 00:07:32,906
+se considera es tan difícil que para
+resolver el problema de la mochila, por
+
+98
+00:07:32,906 --> 00:07:36,939
+ejemplo, en tiempo polinómico,
+uno obtiene 1 millón de dólares.

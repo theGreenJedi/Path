@@ -1,0 +1,49 @@
+En este vídeo, estudiaremos uno de los tipos de algoritmos más 
+simples, que es el ordenamiento por selección. Su principal idea es muy simple, sólo seguimos aumentando
+ la parte ordenada de nuestro arreglo. Déjenme ilustrarlo con un ejemplo de juguete. 
+Supón que nos dan una secuencia de longitud 5 que consiste en 5 enteros, 8, 4, 2, 5 y 2. Y empezamos encontrando uno de los
+ elementos que son un mínimo en este arreglo. En este caso es 2, y ahora hagamos lo siguiente, lo intercambiamos con el primer 
+elemento de nuestro arreglo. Después del intercambio, el 2 se queda en su posición final, 2 es el valor mínimo del arreglo y
+ ya está en la primera posición. Ahora hagamos lo siguiente, 
+olvidémonos de este elemento, ya está en su posición inicial, y repitamos el mismo procedimiento 
+con lo que queda de nuestro arreglo. A decir, empezamos primero con el
+ valor mínimo, que de nuevo es 2. lo intercambiamos con el primer 
+elemento de la parte que nos quedó y finalmente nos olvidamos de este término. Así que de nuevo, encontramos el valor mínimo que 
+ahora es 4, lo intercambiamos con el primer elemento de la parte que resta, que es ahora el
+ tercer elemento de nuestro arreglo, y entonces, simplemente olvidamos los primeros 3 términos, y continuamos con nuestra parte restante. Así que, de nuevo, sólo seguimos aumentando la 
+parte ordenada de nuestro arreglo. Al final, lo que tenemos es que el arreglo completo está ordenado. El pseudo código que se muestra aquí, implementa directamente la idea del algoritmo del ordenamiento 
+por selección que acabamos de discutir. Aquí tenemos un bucle donde i va de 1 a n, inicialmente i=1. Dentro de este bucle calculamos el índice 
+de un valor mínimo en el arreglo con índices de i a n. Hacemos esto como sigue. Creamos una variable minIndex que inicialmente es igual a i, y visitamos el resto de los elementos dentro de esta parte, esto es, elementos de i+1 a n, y si encontramos un elemento más 
+pequeño actualizamos la variable minIndex. Así que al final de este bucle lo que tenemos es que minIndex es la posición de un elemento mínimo en el arreglo de i a n. Entonces intercambiamos este elemento con el elemento A[i]. A decir, cuando i=1, lo que hicimos fue encontrar el elemento mínimo en el arreglo y lo
+ intercambiamos con el primer elemento. Así que ahora el primer elemento de 
+nuestro arreglo está en su posición final. Entonces, en la segunda iteración de nuestro bucle,
+ hacemos prácticamente lo mismo. Encontramos el valor mínimo, la posición de un valor mínimo dentro de la parte que resta de nuestro arreglo
+ y lo ponemos en el segundo lugar. En la tercera iteración encontramos el
+ valor mínimo de la parte restante, lo ponemos en su lugar, y así seguimos. Así que seguimos aumentando la parte ordenada del arreglo. Ahora sería útil checar la visualización 
+en línea para ver cómo se ve esto, así que hagamos esto. Esta visualización muestra cómo se 
+desempeña el ordenamiento por selección en unos cuantos datos, a decir, en datos aleatorios, en una secuencia que está casi ordenada, también en una secuencia que está ordenada en orden inverso, y en una secuencia que contiene sólo unos cuantos elementos únicos. Corramos este algoritmo y veamos qué pasa. Puedes ver que, de hecho, este algoritmo
+ sólo aumenta la parte ordenada, la región inicialmente ordenada de nuestro arreglo. Otra propiedad interesante que se revela en la visualización es la siguiente. el tiempo de ejecución de este algoritmo 
+no depende de los datos de entrada sólo depende del tamaño de nuestra secuencia inicial. El tiempo de ejecución total de
+ nuestro algoritmo es cuadrático y esto no es difícil de ver, ¿verdad? Lo que tenemos son dos bucles anidados. En el bucle externo i va de 1 a n. En el bucle interior, j va de i+1 a n, para encontrar un mínimo en la parte
+ restante de nuestro arreglo, así que en total tenemos un número cuadrático de iteraciones. En este punto, sin embargo, nos tendríamos
+ que preguntar si nuestra estimación del tiempo para este algoritmo es demasiado pesimista. Y esto es lo que quiero decir con esto. Recuerda que tenemos 2 bucles anidados. En el bucle externo i va de 1 a n. En el bucle interno j va de i+1 hasta n. Así que cuando i=1, el número de
+ iteraciones del bucle interno es n-1. Sin embargo, cuando i=2, el número de
+ iteraciones del bucle interno es n-2, y así sucesivamente. Así que cuando i aumenta, el número de 
+iteraciones del bucle interno disminuye. Una estimación más exacta para el número
+ total de iteraciones del bucle interno sería la siguiente: (n-1)+(n-2)+(n-3), etc. Así que definitivamente es menos que n^2. Sin embargo, mostraremos que 
+asintóticamente esto es igual a n^2. A decir, esto es Theta(n^2), y es aproximadamente igual a n^2/2. La suma, que es lo que necesitamos estimar,
+ es llamada Serie aritmética, y hay una fórmula conocida para esta suma. Así, 1+2+3+...+n, es igual a n(n+1)/2. Y así podemos probar esta fórmula. Escribamos todos nuestros n enteros en un renglón, 1, 2,..., n. Debajo escribamos el mismo conjunto de 
+enteros, pero en orden inverso, n, n-1, ..., 2, 1 Entonces, lo que tenemos son 2 renglones de tamaño n, hay n columnas, y en cada una la suma de los correspondientes
+ 2 enteros es igual a n+1. Así que en la primera columna tenemos
+ n y 1, en la segunda columna 2 y n-1, y así sucesivamente hasta la 
+última columna donde tenemos n y 1. Y la suma de cada columna es 
+igual a n+1, y hay n columnas, lo que significa que la suma de todos 
+los números en la tabla es igual a n(n+1). Como la tabla contiene el doble de
+ la suma de los enteros del 1 al n, concluímos que la suma de todos 
+los enteros de 1 a n es igual a n(n+1)/2. Otra posibilidad para ver que esta fórmula es correcta, es tomar un rectángulo de dimensiones n por n+1, así que su área es n(n+1). Y lo cortamos en dos partes como se muestra en la figura, de forma que el área de cada una
+ de las dos partes es igual a 1+2+...+n. Ya estamos listos para concluir. Acabamos de discutir el algoritmo 
+del ordenamiento por selección. Este algoritmo es fácil de implementar, fácil de analizar y su tiempo de ejecución es n^2, donde n 
+es el tamaño de la secuencia de entrada. Ordena la secuencia de entrada, o arreglo, en el mismo lugar, lo que significa que casi no requiere memoria extra. Quiero decir, toda la memoria extra 
+que requiere este algoritmo es nada más para guardar índices, como i, j y n. Hay otros algoritmos cuadráticos, como ordenamiento
+ por inserción, y ordenamiento de burbuja, pero no los vamos a cubrir aquí, y mejor, en el próximo video procederemos con un algoritmo
+ de ordenamiento asintóticamente más rápido.

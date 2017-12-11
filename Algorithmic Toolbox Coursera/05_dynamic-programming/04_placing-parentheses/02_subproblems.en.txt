@@ -1,0 +1,79 @@
+As usual, we start designing our
+dynamic program in algorithm by defining a subproblem in
+a way that allows us to solve a subproblem by solving
+smaller sub subproblem. As we said already,
+this is probably the most important step in designing dynamic
+programming solutions. So before doing this,
+we define our problem formally. So the input consists of n digits. d1, d2, and so on, dn. And then -1 operations between them,
+which we call op1, op2, and so on, opn. Each operation is either summation,
+subtraction, or multiplication. And our goal is to find an order
+of applying these operations so that the value of the resulting
+expression is maximized. As we discussed already, we can specify this order just by
+placing parentheses into our expression. We start building our intuition
+by reconsidering our toy example. So assume that the multiplication is the
+last operation in some optimal ordering in an ordering leading to an optimal
+value in this toy example. Well this means that in this expression
+we already have to pairs of parentheses. And our goal is to parenthesize
+the initial sub-expression and the second sub-expression,
+so as to maximize the value. This means that it would be good for
+us to know what is an optimal value for the first subexpression and
+the second subexpression, right? And in general if you
+have an expression and if you select a realistic operation,
+which is the last one, then it splits your initial expression
+into two subexpressions, right? And for both of them it would be
+good to know an optimal value. And, in turn, each of these two
+subexpressions are split into two sub subexpressions by the last
+arithmetic operations, and so on. So this suggests Very good problem in our
+case would be find an optimal value for any subexpression or
+former initial expression. So we've just realized that it would
+be good to know the optimal values for all subexpressions of
+our initial expression. What do we mean however, by saying
+optimal values for all subexpressions? Assume for example that we need to compute
+the optimal, the maximal value for the sum of two subexpressions,
+subexpression one and subexpression two. Well this obviously means that we
+would like this subexpression to be as large as possible and this
+subexpression to be as large as possible. If on the other hand we
+would like to compute the maximum value of subexpression
+one minus subexpression two. Well this means that we would
+like subexpression one to be as large as possible while we would
+like the value of subexpression two to be as small as possible, right? Just because we compute subexpression
+one minus subexpression two. This suggests that knowing
+just the maximal value for each subexpression would not be enough. And this usually happens when designing
+a dynamic programming solution. This also suggests that,
+instead of computing just maximal, we will maintain what is
+the maximum value and the minimum possible value for
+each subexpression. Let's illustrate this reasoning once
+again with our previous toy example. So in this case we are maximizing
+the product of two small subexpressions. In this case these two subexpressions, so small, that it is not difficult to
+compute their minimal and maximal values. For example, for subexpression 5- 8 + 7, the minimum value is- 10 and
+the maximal value is 4, right? At the same time, for
+the second subexpression, (4-(8+9)), the minimum value is- 13,
+while the maximum value is 5, right? Now we would like to parenthesis
+both subexpressions, so that their product is maximal. Well it is not difficult to see, that in
+this case the optimal way to do this is to take the minimal values of
+both sub expressions, right? So this will give us- 10 multiplied
+by -13, which is equal to 130. Right? Which is much larger than
+the product of the maximum values of these two sub expressions
+which is 4 by 5, which is 20 in turn. Okay, we are now ready to write down the
+recurrent relation for our subproblems. Before this, let's formally define E of
+ij to be the subexpression of our initial expression resulting by taking digits from
+i to j and all operations between them. Then our goal is to compute the maximum
+value of the subexpression which we denote by capital M(i,j) and the minimum value
+of the sub expression denoted by m(i,j). Okay, can you see that our initial
+subexpression from I to J and assumes that we would like to
+compute one of the extreme values of the subexpression and
+implies there is a minimum or the maximum. Well we know that in many ordering for
+this subexpression there is some last operation, say okay so
+this separation splits our initial subexpression into
+two sub subexpression namely, subexpression i, k and
+subexpression k plus 1j. Right? To compute the maximum value,
+we just go through all possible such case, from i to j- 1, and through all possible
+extreme values for two subexpressions. I mean, either we apply operation k
+to the maximum values of these two subexpressions or
+we apply operation K to minimum value, the minimum values of
+these two subexpressions. Or we apply it to the maximum
+value of one subexpression and the minimum value of another or
+vice versa. To compute the maximum value
+of sub expression i j, we just select the maximum
+among all these possibilities. While to compute it's minimum value, we simply select the minimum
+among all such possibilities.

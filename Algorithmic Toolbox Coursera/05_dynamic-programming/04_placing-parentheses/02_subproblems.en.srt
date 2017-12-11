@@ -1,0 +1,433 @@
+1
+00:00:00,930 --> 00:00:06,070
+As usual, we start designing our
+dynamic program in algorithm
+
+2
+00:00:06,070 --> 00:00:11,010
+by defining a subproblem in
+a way that allows us to solve
+
+3
+00:00:11,010 --> 00:00:15,620
+a subproblem by solving
+smaller sub subproblem.
+
+4
+00:00:16,950 --> 00:00:21,090
+As we said already,
+this is probably the most important step
+
+5
+00:00:21,090 --> 00:00:23,344
+in designing dynamic
+programming solutions.
+
+6
+00:00:24,660 --> 00:00:29,010
+So before doing this,
+we define our problem formally.
+
+7
+00:00:29,010 --> 00:00:32,600
+So the input consists of n digits.
+
+8
+00:00:32,600 --> 00:00:34,560
+d1, d2, and so on, dn.
+
+9
+00:00:34,560 --> 00:00:40,580
+And then -1 operations between them,
+which we call op1, op2, and so on, opn.
+
+10
+00:00:41,620 --> 00:00:46,630
+Each operation is either summation,
+subtraction, or multiplication.
+
+11
+00:00:46,630 --> 00:00:51,750
+And our goal is to find an order
+of applying these operations so
+
+12
+00:00:51,750 --> 00:00:56,280
+that the value of the resulting
+expression is maximized.
+
+13
+00:00:56,280 --> 00:00:57,950
+As we discussed already,
+
+14
+00:00:57,950 --> 00:01:03,870
+we can specify this order just by
+placing parentheses into our expression.
+
+15
+00:01:03,870 --> 00:01:08,598
+We start building our intuition
+by reconsidering our toy example.
+
+16
+00:01:08,598 --> 00:01:16,570
+So assume that the multiplication is the
+last operation in some optimal ordering
+
+17
+00:01:16,570 --> 00:01:22,050
+in an ordering leading to an optimal
+value in this toy example.
+
+18
+00:01:22,050 --> 00:01:28,720
+Well this means that in this expression
+we already have to pairs of parentheses.
+
+19
+00:01:28,720 --> 00:01:33,330
+And our goal is to parenthesize
+the initial sub-expression and
+
+20
+00:01:33,330 --> 00:01:37,750
+the second sub-expression,
+so as to maximize the value.
+
+21
+00:01:39,245 --> 00:01:43,265
+This means that it would be good for
+us to know what is an optimal value for
+
+22
+00:01:43,265 --> 00:01:48,075
+the first subexpression and
+the second subexpression, right?
+
+23
+00:01:48,075 --> 00:01:51,895
+And in general if you
+have an expression and
+
+24
+00:01:51,895 --> 00:01:57,055
+if you select a realistic operation,
+which is the last one,
+
+25
+00:01:57,055 --> 00:02:03,010
+then it splits your initial expression
+into two subexpressions, right?
+
+26
+00:02:03,010 --> 00:02:06,900
+And for both of them it would be
+good to know an optimal value.
+
+27
+00:02:06,900 --> 00:02:12,870
+And, in turn, each of these two
+subexpressions are split into two
+
+28
+00:02:12,870 --> 00:02:18,560
+sub subexpressions by the last
+arithmetic operations, and so on.
+
+29
+00:02:18,560 --> 00:02:24,913
+So this suggests Very good problem in our
+case would be find an optimal value for
+
+30
+00:02:24,913 --> 00:02:30,510
+any subexpression or
+former initial expression.
+
+31
+00:02:30,510 --> 00:02:35,000
+So we've just realized that it would
+be good to know the optimal values for
+
+32
+00:02:35,000 --> 00:02:38,420
+all subexpressions of
+our initial expression.
+
+33
+00:02:38,420 --> 00:02:42,862
+What do we mean however, by saying
+optimal values for all subexpressions?
+
+34
+00:02:42,862 --> 00:02:47,515
+Assume for example that we need to compute
+the optimal, the maximal value for
+
+35
+00:02:47,515 --> 00:02:52,560
+the sum of two subexpressions,
+subexpression one and subexpression two.
+
+36
+00:02:52,560 --> 00:02:55,720
+Well this obviously means that we
+would like this subexpression to be
+
+37
+00:02:55,720 --> 00:02:59,250
+as large as possible and this
+subexpression to be as large as possible.
+
+38
+00:03:00,370 --> 00:03:03,740
+If on the other hand we
+would like to compute
+
+39
+00:03:03,740 --> 00:03:09,290
+the maximum value of subexpression
+one minus subexpression two.
+
+40
+00:03:09,290 --> 00:03:12,870
+Well this means that we would
+like subexpression one to be
+
+41
+00:03:12,870 --> 00:03:17,260
+as large as possible while we would
+like the value of subexpression two
+
+42
+00:03:17,260 --> 00:03:19,630
+to be as small as possible, right?
+
+43
+00:03:19,630 --> 00:03:24,960
+Just because we compute subexpression
+one minus subexpression two.
+
+44
+00:03:24,960 --> 00:03:28,920
+This suggests that knowing
+just the maximal value for
+
+45
+00:03:28,920 --> 00:03:31,270
+each subexpression would not be enough.
+
+46
+00:03:31,270 --> 00:03:35,590
+And this usually happens when designing
+a dynamic programming solution.
+
+47
+00:03:35,590 --> 00:03:39,840
+This also suggests that,
+instead of computing just maximal,
+
+48
+00:03:39,840 --> 00:03:43,520
+we will maintain what is
+the maximum value and
+
+49
+00:03:43,520 --> 00:03:48,590
+the minimum possible value for
+each subexpression.
+
+50
+00:03:48,590 --> 00:03:53,060
+Let's illustrate this reasoning once
+again with our previous toy example.
+
+51
+00:03:53,060 --> 00:03:58,380
+So in this case we are maximizing
+the product of two small subexpressions.
+
+52
+00:03:58,380 --> 00:04:01,730
+In this case these two subexpressions, so
+
+53
+00:04:01,730 --> 00:04:07,150
+small, that it is not difficult to
+compute their minimal and maximal values.
+
+54
+00:04:07,150 --> 00:04:10,830
+For example, for subexpression 5- 8 + 7,
+
+55
+00:04:10,830 --> 00:04:15,770
+the minimum value is- 10 and
+the maximal value is 4, right?
+
+56
+00:04:17,070 --> 00:04:22,625
+At the same time, for
+the second subexpression,
+
+57
+00:04:22,625 --> 00:04:28,240
+(4-(8+9)), the minimum value is- 13,
+while the maximum value is 5, right?
+
+58
+00:04:28,240 --> 00:04:32,200
+Now we would like to parenthesis
+both subexpressions, so
+
+59
+00:04:32,200 --> 00:04:34,720
+that their product is maximal.
+
+60
+00:04:34,720 --> 00:04:39,610
+Well it is not difficult to see, that in
+this case the optimal way to do this is
+
+61
+00:04:39,610 --> 00:04:43,860
+to take the minimal values of
+both sub expressions, right?
+
+62
+00:04:43,860 --> 00:04:49,390
+So this will give us- 10 multiplied
+by -13, which is equal to 130.
+
+63
+00:04:49,390 --> 00:04:50,510
+Right?
+
+64
+00:04:50,510 --> 00:04:54,890
+Which is much larger than
+the product of the maximum
+
+65
+00:04:54,890 --> 00:04:59,790
+values of these two sub expressions
+which is 4 by 5, which is 20 in turn.
+
+66
+00:05:01,590 --> 00:05:06,810
+Okay, we are now ready to write down the
+recurrent relation for our subproblems.
+
+67
+00:05:06,810 --> 00:05:12,390
+Before this, let's formally define E of
+ij to be the subexpression of our initial
+
+68
+00:05:12,390 --> 00:05:18,790
+expression resulting by taking digits from
+i to j and all operations between them.
+
+69
+00:05:19,870 --> 00:05:25,250
+Then our goal is to compute the maximum
+value of the subexpression which we denote
+
+70
+00:05:25,250 --> 00:05:30,975
+by capital M(i,j) and the minimum value
+of the sub expression denoted by m(i,j).
+
+71
+00:05:30,975 --> 00:05:36,680
+Okay, can you see that our initial
+subexpression from I to J and
+
+72
+00:05:36,680 --> 00:05:39,760
+assumes that we would like to
+compute one of the extreme
+
+73
+00:05:39,760 --> 00:05:44,090
+values of the subexpression and
+implies there is a minimum or the maximum.
+
+74
+00:05:45,370 --> 00:05:50,300
+Well we know that in many ordering for
+this subexpression there is some
+
+75
+00:05:50,300 --> 00:05:55,680
+last operation, say okay so
+this separation splits our
+
+76
+00:05:55,680 --> 00:06:01,170
+initial subexpression into
+two sub subexpression namely,
+
+77
+00:06:01,170 --> 00:06:06,350
+subexpression i, k and
+subexpression k plus 1j.
+
+78
+00:06:06,350 --> 00:06:07,440
+Right?
+
+79
+00:06:07,440 --> 00:06:12,710
+To compute the maximum value,
+we just go through all possible such case,
+
+80
+00:06:12,710 --> 00:06:18,380
+from i to j- 1, and through all possible
+extreme values for two subexpressions.
+
+81
+00:06:18,380 --> 00:06:23,536
+I mean, either we apply operation k
+to the maximum values of these two
+
+82
+00:06:23,536 --> 00:06:29,460
+subexpressions or
+we apply operation K to minimum value,
+
+83
+00:06:29,460 --> 00:06:33,600
+the minimum values of
+these two subexpressions.
+
+84
+00:06:33,600 --> 00:06:36,890
+Or we apply it to the maximum
+value of one subexpression and
+
+85
+00:06:36,890 --> 00:06:40,390
+the minimum value of another or
+vice versa.
+
+86
+00:06:40,390 --> 00:06:43,460
+To compute the maximum value
+of sub expression i j,
+
+87
+00:06:43,460 --> 00:06:48,230
+we just select the maximum
+among all these possibilities.
+
+88
+00:06:48,230 --> 00:06:50,743
+While to compute it's minimum value,
+
+89
+00:06:50,743 --> 00:06:54,634
+we simply select the minimum
+among all such possibilities.

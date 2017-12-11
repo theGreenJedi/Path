@@ -1,0 +1,69 @@
+Hi. In this lesson you will learn how to
+implement the Greedy Algorithm for the Fractional Knapsack. How to estimate its running time and
+how to improve its asymptotics. Here is the description of the greedy
+algorithm from the previous lesson. While knapsack is still not full,
+we select the best item left. The one with the highest
+value per unit of weight. And either fit all of this
+item in the knapsack or if there is only few space left in
+the knapsack, cut this item and fit as much as you can in what's
+left in the knapsack, and then repeat this process
+until the knapsack is full. In the end return the total value of
+the items taken and the amounts taken. We've proven that the selection
+of best item is a safe move. Then after we've selected the best item
+what we've got left is a knapsack with a capacity which is less, but the problem
+is the same: you have some items and you have a knapsack of some capacity and
+you should fill it optimally so as to maximize the total
+value of the items that fit. So this greedy algorithm really works. Now let's implement it. Here we have a procedure called Knapsack. It starts with filling the array A with
+amounts of items taken with 0 and the total value we also
+initialize to 0 and then, as we said on the slide, we repeat for
+n times the following iterations. If the knapsack is already
+full than in the variable W, we will have 0 because in the start
+we have in the variable W the total capacity of the knapsack, but each time we
+will put something in the knapsack, we will update W will decrease it by the amount
+of weight that we put already in. And so in the end,
+when the knapsack is full, W will be 0. If W became 0, it means that we should
+just return the total value and the amounts of the items that we took. Otherwise we should select the best item. The best item is the item which is
+still left so, wi is more than 0 and out of such items, it's the item
+with the maximum value per weight, so the one which maximizes vi over wi. When we've selected the i, we determine
+the amount which will it take, it is either the whole wi, the whole of
+this item if it fits in the knapsack. Otherwise, if the capacity of
+the knapsack is already less, then we just fill it up to the end. So A is minimum of wi and big W. After we select the amount,
+we just update all the variables. So we update wi by decreasing it by a,
+because we took already a of this item. We're also increased the amount A of i corresponding to the item
+number i by the value A. And we'll also decrease the capacity left,
+because we just decrease it by A. By putting it A of item i. Also we increase value V by this formula: a multiplied by vi and divided by wi. Why is that? Because we took A of item number i,
+we took A units and one unit brings us amount of
+value equal to vi over wi. So if you take A units,
+the total value by these items, a multiplied by vi and divided by wi. After we do n iterations, or maybe less,
+if the knapsack is full before we do all n iterations, we'll return the
+total value and the amounts in the array. Now the running time of this
+algorithm is Big-O of n squared. Why is that? Well, first we have the inner selection
+of best item, which works in linear time. Because basically, we have to go through
+all the items to select the best one. And we have the main loop, for loop, which
+is executed n times at most, maybe less. So in each iteration we do some
+linear time computation and we do this at most n times. That means that the total running
+time is Big-O of n squared. Now we can't improve on that because if
+we sort the items by decreasing value of vi over wi, then it will be easier to
+select the best item which is still left. Let's look at this pseudo code. Let's assume that we've already
+sorted the input items, size that v1 over w1 is, more than or
+equal to v2 over w2 and that is greater, or equal to the fraction for
+the next item and up to vn over wn. And we can start with
+the same array of amounts and the same total value filled with zeroes. But then we make a for loop for
+i going from 1 to n. And on each iteration i will be
+the best unit which is still left. So on the start of the iteration we check
+whether we still have some capacity in the knapsack. If it is already filled we
+just return the answer. Otherwise we know that i is the best item because we didn't consider it previously
+and it is the item with the maximum value per unit out of those
+which we didn't consider before. So we determine the amount of this
+item with the same formula and we update the weights,
+the amounts, the capacity, and the total value in the same way as
+we did in the previous pseudocode. The only change is that we change
+the order in which we consider the items. And this allows us to make each iteration
+in constant time instead of linear time. So, this new algorithm now works in linear
+time, because it has at most n iterations, and each iteration works at
+most in constant time. So, if we apply first
+some sorting algorithm to sort items by decreasing
+value of vi over wi. And then apply this new
+knapsack procedure. Total run time will be n log n,
+because sorting will work in n log n. And the knapsack itself
+will work in linear time.

@@ -1,0 +1,53 @@
+Veamos cómo el algoritmo de programación dinámica
+resuelve el problema de la distancia de edición. Comenzamos considerando dos 
+cadenas, A de longitud n y B de longitud m, y responderemos a la pregunta 
+de cuál es una alineación óptima de un prefijo i de A, que son los 
+primeros i símbolos de A y el prefijo-j de B que son los
+primeros j símbolos de B. La última columna de un alineamiento
+óptimo puede ser una inserción o una deleción, o una discrepancia o una coincidencia. Y, por favor, observa que si
+eliminamos la última columna del alineamiento óptimo de
+las cadenas lo que queda a la izquierda, es un alineamiento óptimo
+de los correspondientes dos prefijos. Y podemos ajustar la puntuación del 
+alineamiento óptimo para el prefijo i y el prefijo j añadiendo más 1 en el caso
+de una inserción, más 1 en el caso de deleción, más 1 en el caso de una discrepancia y
+no añadiendo nada en caso de coincidencia. Denominemos D(i,j) a la distancia de edición entre un prefijo i y un prefijo j. En este caso, esta figura en la parte superior de la diapositiva
+ilustra la concurrencia descendente. D(i.j) es igual al menor de los
+cuatro valores descendentes D(i,j-1)+1, D(i-1,j)+1, D(i-1,j-1)+1, en el caso de que los dos últimos símbolos sean diferentes, y D(i-1,j-1), si los últimos símbolos
+en los prefijos i y j son el mismo. Nuestro objetivo ahora es calcular
+la distancia de edición D i,j entre todos los prefijos i de la cadena !
+y todos los prefijos j de la cadena B. En el caso de las cadenas "editing" y "distance",
+construiremos una rejilla de ocho por nueve y nuestro objetivo es calcular todas las
+distancias de edición D i,j correspondientes a todos los nodos de esta rejilla. por ejemplo, para i y j
+iguales a cuatro y cuatro, ¿cómo calcularemos
+la correspondiente distancia D i,j? Comenzamos rellenando las distancias D i 0
+en la primera columna de la matriz. Es fácil porque en efecto
+estamos comparando un prefijo i de la cadena A con el prefijo
+0 de la cadena B y por tanto, las distancias visuales
+para el prefijo i serán iguales a i. Es lo que se muestra aquí. De forma similar, podemos
+rellenar fácilmente la primera fila de esta matriz. Ahora intentemos calcular cuál
+será la distancia D(1,1), correspondiente a la comparación entre
+la cadena consistente en un único símbolo "E" en contraste con una cadena
+consistente en un único símbolo D. Existen tres formas posibles
+para llegar al nodo 1,1 desde los nodos 0,0, 0,1 y 1,0. ¿Cuál debe ser la forma que seleccionaremos
+para encontrar la distancia de edición óptima? De acuerdo con la recurrencia previa,
+debemos seleccionar de las tres direcciones aquella
+que da el valor mínimo para D i,j que es el mínimo de 2, 2 y 1 y, por tanto, llegamos al nodo 1,1 por el enlace diagonal. Guardemos esto en la memoria que la dirección correcta para llegar al nodo
+1,1 era la dirección diagonal. Ahora trataremos de calcular la distancia
+de edición para el siguiente nodo en la matriz. y en este caso D(2,1) es igual
+al mínimo de D(2,0) + 1, D(1,1) + 1 y D(1,0), lo que nos dice
+que la forma óptima para llegar a este nodo será de nuevo por la diagonal. Continuando más, de nuevo 
+comparamos los tres valores y resulta que la mejor manera de
+llegar a este nodo será la arista vertical. Continuaremos y rellenaremos por
+completo la segunda columna de la matriz. Continuemos con este círculo,
+¿qué pasa con este nodo? Para este nodo D(1,2) es igual
+al mínimo de D(1,1) + 1, D(0,2) + 1 y D(0,1) + 1. Esto es el mínimo de 2, 3 y 2. De hecho, existen dos formas
+óptimas de llegar a este nodo y en este caso, muestras ambas de ellas
+mediante el enlace diagonal en esta matriz y por el enlace
+horizontal en esta matriz. Continuamos más allá y de forma lenta
+pero segura llenaremos la matriz completa. El pseudocódigo de EditDistance implementa 
+el algoritmo que acabamos de discutir. Primero rellena la primera columna y
+la primera fila de la matriz de programación dinámica, y después continua rellenando
+calculando el costo de moverse al vértice i,j 
+usando inserción, deleción o discrepancia o coincidencia o, en otras 
+palabras,  explorando todas las posibilidades. Moviendose al vértice i,j usando un enlace
+vertical, un enlace horizontal o un enlace diagonal. Y entonces encuentra cuál de estas posibilidades resulta la distancia de edición mínima.

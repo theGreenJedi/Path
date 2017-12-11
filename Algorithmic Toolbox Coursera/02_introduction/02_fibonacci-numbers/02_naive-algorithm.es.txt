@@ -1,0 +1,62 @@
+Hola a todos Bienvenidos de nuevo. Hoy hablaremos un poco más sobre
+cómo calcular los números de Fibonacci. Y, en particular, hoy lo que vamos a hacer
+es mostrarles cómo producir un algoritmo muy simple
+que calcula esto correctamente. Por otro lado, mostraremos que
+este algoritmo es realmente muy lento y hablaremos un poco sobre
+cómo analizar esto. Echemos un vistazo a la definición de nuevo. El número zero de Fibonacci es 0. El primer número de Fibonacci es 1. Y a partir de aquí cada número de 
+Fibonacci es la suma de los dos anteriores. Esto crece muy deprisa y lo que nos gustaría hacer es tener
+un algoritmo que lo calcule. Echemos un vistazo a cómo podemos hacer esto. Bien, existe una forma muy fácil de
+empezar, dada la definición. Si n es 0, se supone que debemos devolver 0. Y si n es 1, se supone que debemos devolver 1. Podemos simplemente empezar con un
+caso que diga que si n es como mucho 1, vamos a devolver n. De lo contrario, ¿qué es lo que
+se supone que tenemos que hacer? De lo contrario, se supone que tenemos que
+devolver la suma de los números n-1 y n-2 de Fibonacci. Podemos simplemente calcular estos
+dos recursivamente, sumarlos juntos y devolverlo. Esto nos da un algoritmo muy
+simple de cuatro líneas de longitud que básicamente coge la definición de nuetro 
+problema y la convierte en un algoritmo que calcula correctamente
+lo que se supone. Bien por nosotros. Tenemos un algoritmo y funciona. Sin embargo, en este curso, nos importan
+más cosas que simplemente, ¿nuestro algoritmo funciona? También queremos saber si es eficaz,
+nos gustaría conocer cuánto tarda en ejecutarse este algoritmo y hay una 
+especie de aproximación a esto. Vamos a denotar T(n) el número
+de líneas de código que son ejecutadas por este algoritmo
+sobre una entrada n. Contar esto no es
+realmente muy difícil. Si n es como mucho uno, el algoritmo
+comprueba el caso if, va a la sentencia de devolución
+y está hecho en dos líneas de código. No está mal. Si n es al menos dos,
+vamos al caso if, vamos a la condición else y
+ejecutamos la sentencia de devolución. Esto son tres líneas de código. Sin embargo, en este caso también necesitamos
+calcular recursivamente los números n-1 y n-2 de Fibonacci. Así que tenemos que añadir a esto, sin embargo, 
+varias líneas de código que las llamadas recursivas usan. Así que con todo, sin embago, tenemos una
+bonita fórmula recursiva para T(n). Es 2 en cuanto n sea como mucho uno, y en otro caso, es igual a T(n-1) más
+T(n-2) más tres. Así pues una bonita fórmula recursiva. Si miras esta fórmula un poco más,
+te darás cuenta de que es muy parecida a la fórmula original que hemos usado 
+poara definir los números de Fibonacci. Cada elemento es más o menos la suma de los dos anteriores. Y, de hecho, a partir de aquí puedes
+comprobar muy fácilmente que T(n) es al menos el enésimo
+número de Fibonacci para cualquier n. Y esto debe hacer sonar algunas campanas
+de alarma porque sabemos que los números de Fibonacci son muy, muy grandes,
+por lo que T(n) debe serlo también. De hecho, T(100) es casi
+1.77 veces 10 a la 21. 1.77 sextillones. Es un número enorme. Ahora, supongamos que estuvimos ejecutando
+este programa en un ordenador que ejecutaba mil millones de líneas
+de código por segundo. Se corrió a un gigahercio. Todavía nos llevaría alrededor de 56.000
+años completar este cálculo. Ahora, yo no tengo 56.000 años
+para esperar a que termine mi ordenador. Probablemente tú tampoco, por lo que esto
+no es de ninguna manera aceptable, si quiero calcular números de Fibonacci
+de un tamaño razonable. Lo que realmente nos gustaría
+es tener un algoritmo mejor. Y es lo que haremos en la siguiente lección. Pero primero debemos hablar un poco
+acerca de por qué este algoritmo es tan lento. Y ver que tal vez la manera más clara
+de demostrarlo es examinar todas las llamadas recursivas que este algoritmo
+necesita para calcular su respuesta. Así que si queremos calcular el enésimo
+número de Fibonacci, necesitamos hacer llamadas recursivas
+para calcular los números n-1 y n-2 de Fibonacci. Para calcular el n-1, necesitamos
+el n-2 y el n-3. Para calcular el n-2, necesitamos el n-3 y
+el n-4, y así sucesivamente. A partir de ahí obtenemos este
+gran árbol de llamadas recursivas. Ahora si miramos este árbol
+un poco más de cerca, parece que estamos haciendo
+algo un poco tonto. Estamos calculando Fn-3 tres veces en este árbol. Y por la forma en que nuestro algoritmo funciona,
+cada vez que se le pregunta para calcularlo, como es una nueva llamada recursiva,
+calculamos de nuevo todo desde el principio. Recalculamos Fn-4 y Fn-5 y después
+los sumamos y tenemos nuestra respuesta. Y esto de calcular lo mismo una y otra vez es lo que realmente nos ralentiza. Y para hacerlo aún más extremo,
+vamos a ampliar el árbol un poco más. Fn-4 es calculado cinco veces por el algoritmo. Y según sigues bajando más y más veces, simplementes estamos calculando
+lo mismo una y otra vez. Y este es realmente el problema
+con este algoritmo en particular, pero no resulta claro inmediatamente
+que podemos hacerlo mejor. Vuelve para la siguiente leccion y hablaremos
+sobre como evitar estos problemas, y obtener un algoritmo bastante eficaz.

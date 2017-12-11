@@ -1,0 +1,495 @@
+1
+00:00:03,123 --> 00:00:04,330
+Hola.
+
+2
+00:00:04,330 --> 00:00:05,928
+Bienvenidos de nuevo.
+
+3
+00:00:05,928 --> 00:00:09,220
+Hoy vamos a estar hablando de la notación
+ O grande, que es la notación
+
+4
+00:00:09,220 --> 00:00:14,290
+asintótica específica que usaremos 
+con más frecuencia aquí.
+
+5
+00:00:14,290 --> 00:00:17,360
+La idea es que vamos a introducir el 
+significado de la notación O grande
+
+6
+00:00:17,360 --> 00:00:22,000
+y describir algunas de sus ventajas y desventajas.
+
+7
+00:00:22,000 --> 00:00:23,300
+Entonces, empezamos con la definición.
+
+8
+00:00:23,300 --> 00:00:25,820
+La idea es que queremos algo que describa lo que pasa
+
+9
+00:00:25,820 --> 00:00:30,930
+cuando las entradas son muy grandes
+ y lo haga de manera gruesa.
+
+10
+00:00:30,930 --> 00:00:32,680
+Así que proponemos una definición.
+
+11
+00:00:32,680 --> 00:00:34,903
+Si tienes dos funciones, f y g,
+
+12
+00:00:34,903 --> 00:00:37,574
+f(n) es O de g(n)
+
+13
+00:00:37,574 --> 00:00:42,218
+si hay dos constantes, N y c
+
+14
+00:00:42,218 --> 00:00:45,352
+tales que para toda n que es al menos N,
+
+15
+00:00:45,352 --> 00:00:49,311
+f(n) es a lo más c*g(n).
+
+16
+00:00:49,311 --> 00:00:54,100
+Y esto significa es que, al menos para entradas muy grandes,
+
+17
+00:00:54,100 --> 00:00:57,640
+f está acotada por arriba por algún múltiplo constante de g.
+
+18
+00:00:58,690 --> 00:01:00,926
+Que es la idea que teníamos antes.
+
+19
+00:01:00,926 --> 00:01:07,580
+Ahora, por ejemplo, 3n^2+5n+2 es O(n^2),
+
+20
+00:01:08,760 --> 00:01:13,180
+porque si tomamos cualquier n que
+ no sea menor que 1, 3n^2+5n+2
+
+21
+00:01:13,180 --> 00:01:18,040
+es a lo más 3n^2+5n^2+2n^2 que es 10n^2.
+
+22
+00:01:19,470 --> 00:01:21,490
+Algún múltiplo de n^2.
+
+23
+00:01:21,490 --> 00:01:24,360
+Y en particular, si ves estas dos funciones,
+
+24
+00:01:24,360 --> 00:01:27,640
+en algún sentido tienen la misma razón de crecimiento.
+
+25
+00:01:27,640 --> 00:01:32,320
+Si tomas el cociente entre las dos, seguro
+ es grande, es 10 cuando n es igual a uno,
+
+26
+00:01:32,320 --> 00:01:35,810
+pero conforme n crece se reduce a alrededor de 3.
+
+27
+00:01:35,810 --> 00:01:39,350
+Y cuando le metes valores, cuando n es igual a ¡mil! (no 100),
+
+28
+00:01:39,350 --> 00:01:44,270
+n^2 es un millón, 3n^2+5n+2 es un poco más de 3 millones.
+
+29
+00:01:45,440 --> 00:01:48,190
+Entonces, no son las mismas funciones,
+
+30
+00:01:48,190 --> 00:01:50,750
+una de ellas es distintivamente mayor que la otra,
+
+31
+00:01:50,750 --> 00:01:54,720
+pero no es mayor por mucho, no
+ más que un factor de alrededor de 3.
+
+32
+00:01:57,720 --> 00:02:01,030
+Entonces, a lo largo de este curso vamos 
+a estar usando la notación O grande para reportar,
+
+33
+00:02:01,030 --> 00:02:03,700
+básicamente, todos nuestros tiempos de ejecución.
+
+34
+00:02:03,700 --> 00:02:06,760
+Y esto nos aporta un montón de ventajas.
+
+35
+00:02:07,890 --> 00:02:11,070
+La primera cosa que hace por nosotros
+ es clarificar la razón de crecimiento.
+
+36
+00:02:11,070 --> 00:02:12,330
+Como dije antes,
+
+37
+00:02:12,330 --> 00:02:18,350
+a menudo lo que nos preocupa es cómo se escala nuestro
+ tiempo de ejecución con el tamaño de la entrada.
+
+38
+00:02:18,350 --> 00:02:22,400
+Y este es un artefacto del hecho de 
+que lo que realmente nos preocupa
+
+39
+00:02:22,400 --> 00:02:26,390
+sobre lo que pasa cuando ingresamos datos realmente, 
+pero realmente enormes en nuestro algoritmo,
+
+40
+00:02:26,390 --> 00:02:28,820
+hasta cuánto podemos manejar antes de que todo se caiga.
+
+41
+00:02:29,840 --> 00:02:33,980
+Y, si me das alguna expresión complicada en la entrada,
+
+42
+00:02:33,980 --> 00:02:36,320
+con muchos términos,
+
+43
+00:02:36,320 --> 00:02:39,940
+entonces sería difícil comparar dos algoritmos.
+
+44
+00:02:39,940 --> 00:02:43,910
+Quiero decir, cuál es más lento dependería 
+en exactamente qué entradas uso,
+
+45
+00:02:43,910 --> 00:02:47,580
+lo que requiere algún tipo de cálculo 
+molesto que determine cuándo uno es exactamente
+
+46
+00:02:47,580 --> 00:02:49,310
+mejor que el otro.
+
+47
+00:02:49,310 --> 00:02:53,530
+Pero si miras las cosas asintóticamente, 
+¿qué pasa cuando n aumenta?
+
+48
+00:02:53,530 --> 00:02:57,610
+A menudo resulta mucho más claro que, 
+una vez que n es muy, pero muy grande,
+
+49
+00:02:57,610 --> 00:02:59,710
+el algoritmo "A" es mejor que el algoritmo "B".
+
+50
+00:03:01,510 --> 00:03:04,540
+Lo segundo que hace por nosotros es limpiar la notación.
+
+51
+00:03:04,540 --> 00:03:09,115
+Podemos escribir O(n^2) en lugar de 3n^2+5n+2.
+
+52
+00:03:09,115 --> 00:03:12,551
+Y para trabajar eso es mucho más limpio y fácil.
+
+53
+00:03:12,551 --> 00:03:18,280
+Podemos escribir O(n) en lugar de n + log_2(n) + sen(n).
+
+54
+00:03:18,280 --> 00:03:24,370
+Podemos escribir O(n log n) en lugar de 4n log_2(n) + 7.
+
+55
+00:03:24,370 --> 00:03:26,500
+Y checa que, en la notación O grande,
+
+56
+00:03:26,500 --> 00:03:30,840
+no necesitamos especificar la base del logaritmo que usamos.
+
+57
+00:03:30,840 --> 00:03:34,870
+Porque log_2(n) y log_3(n) y log_10(n),
+
+58
+00:03:34,870 --> 00:03:39,510
+y log_7(n) sólo difieren por múltiplos constantes.
+
+59
+00:03:39,510 --> 00:03:43,230
+Y hasta lo que a la O grande le concierne, 
+no le importan estos múltiplos constantes.
+
+60
+00:03:44,990 --> 00:03:48,040
+Otra consecuencia es que, como 
+nuestra notación es más clara,
+
+61
+00:03:48,040 --> 00:03:51,870
+porque tenemos menos términos de orden menor con que trabajar,
+
+62
+00:03:51,870 --> 00:03:54,330
+hace que nuestra álgebra sea más fácil.
+
+63
+00:03:54,330 --> 00:03:58,900
+Hace más fácil manipular las expresiones con
+ O grande porque no son tan caóticas.
+
+64
+00:04:00,870 --> 00:04:03,860
+Y la última cosa que hace por nosotros 
+es que esta notación realmente
+
+65
+00:04:03,860 --> 00:04:07,550
+resuelve estos problemas de los que
+ hablamos en unas lecciones pasadas.
+
+66
+00:04:07,550 --> 00:04:11,180
+Para calcular tiempos de ejecución  en términos
+ de O grande, no necesitamos saber cosas
+
+67
+00:04:11,180 --> 00:04:15,510
+cono qué tan rápida es la computadora, 
+o cómo es su jerarquía de memoria,
+
+68
+00:04:15,510 --> 00:04:18,730
+o qué compilador usamos, porque, en general,
+
+69
+00:04:18,730 --> 00:04:23,120
+aunque estas cosas tengan un impacto
+ notorio en el tiempo de ejecución final,
+
+70
+00:04:23,120 --> 00:04:26,630
+ese impacto será generalmente una constante multiplicativa.
+
+71
+00:04:26,630 --> 00:04:30,200
+Y, si dos cosas difieren sólo por un múltiplo constante,
+
+72
+00:04:30,200 --> 00:04:31,440
+entonces tienen la misma O grande.
+
+73
+00:04:32,900 --> 00:04:33,690
+Eso es todo.
+
+74
+00:04:34,830 --> 00:04:36,515
+Ahora, debo decir que hay una advertencia.
+
+75
+00:04:36,515 --> 00:04:40,490
+O grande es increíblemente útil, 
+la vamos a usar básicamente para todo
+
+76
+00:04:40,490 --> 00:04:44,960
+en este curso, pero pierde mucha información
+ sobre el tiempo de ejecución.
+
+77
+00:04:44,960 --> 00:04:48,170
+No cuenta ninguna constante multiplicativa.
+
+78
+00:04:48,170 --> 00:04:51,840
+Así que, si tienes dos algoritmos, 
+y uno de ellos es 100 veces más rápido,
+
+79
+00:04:51,840 --> 00:04:53,269
+los dos tienen la misma O grande.
+
+80
+00:04:54,360 --> 00:04:56,980
+Pero, en la práctica, si quieres hacer las cosas más rápido,
+
+81
+00:04:56,980 --> 00:04:59,810
+un factor de 100 cuenta mucho.
+
+82
+00:04:59,810 --> 00:05:01,867
+Aún un factor de 2 cuenta mucho.
+
+83
+00:05:01,867 --> 00:05:06,386
+Y entonces, si realmente quieres hacer
+ las cosas rápidas, una vez que tienes un buen
+
+84
+00:05:06,386 --> 00:05:11,661
+tiempo asintótico, querrás checar los detalles minuciosos.
+
+85
+00:05:11,661 --> 00:05:13,520
+¿Puedo ahorrarme un factor de 2 aquí?
+
+86
+00:05:13,520 --> 00:05:16,440
+¿Puedo rearreglar esto para hacer que
+ las cosas corran de manera más suave?
+
+87
+00:05:16,440 --> 00:05:19,539
+¿Puedo hacerlo interactuar de forma más 
+eficiente con la jerarquía de memoria?
+
+88
+00:05:19,539 --> 00:05:20,728
+¿Puedo hacer x, y, z
+
+89
+00:05:20,728 --> 00:05:26,690
+para hacerlo más rápido por estos factores 
+constantes que no habíamos visto?
+
+90
+00:05:26,690 --> 00:05:31,604
+La segunda cosa que debes notar es que O grande
+
+91
+00:05:31,604 --> 00:05:33,030
+es sólo asintótica.
+
+92
+00:05:33,030 --> 00:05:37,790
+De alguna manera, lo único que te dice 
+es qué pasa cuando metes datos
+
+93
+00:05:37,790 --> 00:05:40,180
+realmente, pero realmente, pero
+ increíblemente pesados al algoritmo.
+
+94
+00:05:41,215 --> 00:05:46,370
+Y, si quieres correr tu algoritmo con una entrada en específico,
+
+95
+00:05:46,370 --> 00:05:50,120
+O grande no te dice nada acerca de cuánto tiempo le lleva.
+
+96
+00:05:50,120 --> 00:05:55,210
+Digo, usualmente las constantes escondidas
+ por O grande son moderadamente pequeñas
+
+97
+00:05:55,210 --> 00:05:57,870
+y por tanto tienes algo útil.
+
+98
+00:05:57,870 --> 00:05:59,820
+Pero algunas veces son grandes.
+
+99
+00:05:59,820 --> 00:06:03,470
+Algunas veces un algoritmo con peor tiempo O grande,
+
+100
+00:06:03,470 --> 00:06:08,350
+que es peor asintóticamente para entradas grandes, resulta
+
+101
+00:06:08,350 --> 00:06:13,520
+que para todos los tamaños, es 
+realmente vencido por otros algoritmos.
+
+102
+00:06:13,520 --> 00:06:16,390
+Pero hay otros casos donde, encuentras dos algoritmos
+
+103
+00:06:16,390 --> 00:06:20,010
+en que "A" es mejor que "B" para datos enormes, monumentales.
+
+104
+00:06:20,010 --> 00:06:21,650
+Pero algunas veces, mucho, muy, increíblemete
+
+105
+00:06:21,650 --> 00:06:26,400
+grandes significa que nunca los podrías
+ guardar en tu computadora, para empezar.
+
+106
+00:06:26,400 --> 00:06:31,020
+Y así, para datos prácticos, querrías usar el algoritmo "B".
+
+107
+00:06:32,130 --> 00:06:35,920
+En cualquier caso, a pesar de estas advertencias,
+ O grande es increíblemente útil.
+
+108
+00:06:35,920 --> 00:06:38,200
+La vamos a usar durante el curso,
+
+109
+00:06:38,200 --> 00:06:39,900
+y, en la próxima lección,
+
+110
+00:06:39,900 --> 00:06:42,720
+vamos a hablar sobre cómo trabajar con expresiones O grande,
+
+111
+00:06:42,720 --> 00:06:46,660
+cómo manipularlas, cómo usarlas 
+para calcular tiempos de ejecución.
+
+112
+00:06:46,660 --> 00:06:51,310
+Una vez que aprendas eso estaremos
+ listos para hacer algunos algoritmos.
+
+113
+00:06:53,450 --> 00:06:56,450
+En cualquier caso, eso es todo para
+ esta clase, regresa a la siguiente
+
+114
+00:06:56,450 --> 00:06:57,210
+y hablaremos sobre eso.

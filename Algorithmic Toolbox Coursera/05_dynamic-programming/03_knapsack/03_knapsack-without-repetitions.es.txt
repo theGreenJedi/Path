@@ -1,0 +1,180 @@
+En este vídeo vamos a diseñar una solución 
+de programación dinámica para para el problema de la mochila sin repeticiones. Recuerda que en este problema nos dan
+una única copia de cada objeto. Esto es también para recordarte el
+enunciado formal del problema, enfatizamos una vez más que no se nos permite
+tomar más de una única copia de cada objeto. Bien, ya sabemos que nuestro algoritmo
+previo no puede producir la respuesta correcta para nuestro nuevo problema
+de mochila sin repeticiones. Esto es simplemente porque en nuestro
+ejemplo sencillo el valor óptimo para la mochila sin repeticiones era 48
+mientras que el valor óptimo para la mochila sin repeticiones era 46. Esto significa que si ejecutamos
+nuestro algoritmo previo, producirá una respuesta incorrecta. Es importante comprender
+donde nuestros algoritmos, más en general, donde nuestro
+razonamiento falla para este problema. Una vez más, vamos a considerar
+un subconjunto óptimo de objetos para una mochila de peso total W. Y, por el momento, asumimos que
+conocemos que contiene el enésimo elemento. Es decir, el último objeto. Podemos razonar, de forma similar al
+caso previo que si eliminamos este elemento de la mochila actual, entonces lo que
+obtenemos debe ser un solución óptima para una mochila de peso inferior, 
+concretamente de peso total W - wn. Si tomamos la pequeña solución y
+le añadimos el enésimo objeto, tenemos una solución óptima para
+la mochila inicial de peso total W. Asumamos, sin embargo, que
+la solución óptima para la mochila más pequeña
+ya contiene el enésimo objeto. Esto significa que no le podemos añadir
+otra copia del enésimo elemento, ¿correcto?, porque entones la solución
+resultante contendría dos copias del enésimo elemento que ahora
+está prohibido por el enunciado del problema. Por esto necesitamos encontrar
+una noción diferente de subproblema. Echemos un vistazo aún más cercano
+a nuestra solución óptima. No es difícil ver que existen
+sólo dos casos, o bien contiene el último elemento
+o bien no lo contiene. Asumamos que lo contiene, y eliminemos de nuevo el enésimo
+objeto de nuestra solución actual. ¿Qué nos queda? Primero de todo, es alguna solución para
+una mochila de peso total W - wn y además sólo usa
+objetos de 1 a n-1, porque `precisamente hemos seleccionado
+el enésimo objeto, ¿correcto? Si, por el otro lado, la solución inicial para la mochila de peso total W
+no contiene el enésimo objeto, entonces sólo contiene objetos
+de 1 a n menos 1. ¿Verdad? Esta simple observación nos
+ayudará a obtener la correcta definición de un subproblema para esta 
+versión del problema de la mochila. En la diapositiva previa,
+hemos razonado como sigue. Consideramos una solución óptima para
+una mochila de peso total W. Y existen dos casos. O bien contiene el último elemento
+o bien no lo contiene. Si lo contiene, podemos eliminarlo
+y reducir el problema a una mochila menor usando sólo
+objetos de uno a n menos uno. Por el otro lado, si no contiene el 
+enésimo objeto, entonces lo reduciremos a otro caso donde la mochila sólo
+usa objetos de 1 a n-1. En cualquier caso, reducimos el número
+de objetos y en el primer caso, también reducimos el tamaño de la mochila,
+el peso total de la mochila. Podríamos continuar este proceso y
+expresar la solución para todos los subproblemas a través
+de soluciones que fuercen los subproblemas. Si continuamos de la misma manera lo que 
+obtenemos en algún punto intermedio es una solución para una mochila de algún
+peso que sólo usa los primeros i objetos. Vamos a usar esto como definición
+de nuestro subproblema. A saber, para cada w, desde 0 a W, y para cualquier i, desde 0 a n,
+denotamos como valor de w e i al máximo valor que puede obtenerse
+usando únicamene los objetos de 1 a i, y cuyo peso total es como mucho w. De acuerdo, entonces es fácil expresar
+a través de él las soluciones para subproblemas de menor tamaño. Una vez más, el valor de w e i,
+es un subconjunto, es un valor óptimo de un subconjunto, de los primeros
+objetos cuyo peso total es como mucho w. Sabemos que en este subconjunto óptimo, o bien contiene el objeto iésimo o bien 
+no contiene el objeto iésimo. Así pues hay dos casos. Necesitamos seleccionar el
+máximo de los dos casos. Y el primer caso si eliminanos
+el objeto iésimo lo que queda es una solución óptima para
+el siguiente problema. Sólo nos está permitido usar los primeros 
+i-1 objetos y el peso total debe no ser superior a W-wi. Este es el primer 
+término en la expresión de máximo. En el segundo caso, si el objeto iésimo no
+se usa en la solución óptima, entonces sabemos que la solución
+óptima es la misma que para la mochila de peso total W,
+usando sólo los primeros i-1 objetos. Así logramos expresar la solución para nuestro problema a través de soluciones 
+para subproblemas de menor tamaño. Y esta es probablemente
+la cosa más importante en el diseño de algoritmos
+de programación dinámica. Ya tenemos nuestra fórmula recurrente
+en un algoritmo de programación dinámica. Como es habitual, empezamos por la inicialización,
+a saber, estableciendo todos los valores de 0, j a 0 para todos los j y todos
+los valores de w,0 a 0. Bien, esto sólo expresa el hecho 
+de que si no tengo objetos, entonces el valor es cero. Si tengo una mochila de
+peso total cero, entonces el valor total también
+ es cero, por supuesto. Recuerda que tenemos que calcular de
+alguna forma todos los valores de w,i. Recuerda que expresamos el valor de
+w,i a través de los valores de w e i-1 y W e i-1. Esto significa que siempre
+reducimos el problema desde w,i a algo con un menor
+número de objetos, a i-1. Esto nos ayuda realmente a comprender que tiene sentido incrementar gradualmente
+el número de objetos disponibles. Y por eso tenemos en este pseudocódigo
+un bucle exterior donde i va de 1 a n. Cuando i está fijo, calcularemos
+todos los valores de w,i. Para ello, también vamos desde w igual
+a 1 hasta W y hacemos lo siguiente. Ahora que i y w están fijas,
+necesitamos calcular el valor de w,i. Primero, comprobamos cuál
+es la solución para el subproblema cuando usamos
+la mochila con el mismo peso w pero sólo usamos los primeros i-1 objetos. Esto se implementa como sigue. Primero simplemente asignamos
+valor de w,i al valor de w,i-1. Despúes tenemos que comprobar si podemos 
+mejorar este valor usando el objeto iésimo. Lo primero sólo podemos hacer esto 
+si el peso del iésimo objeto no excede el peso de la mochila
+actual que es simplemente w. Si no lo excede, vemos qué pasa
+si tomamos un valor óptimo para la mochila de peso
+total w menos wi. Esto se hace rellenando
+sólo con los elementos de 1 a i menos 1, y añadiendo el iésimo elemento a ellos. Si nos proporciona un valor mayor al que 
+tenemos actualmente, actualizamos el valor de w,i, y al final simplemente
+devolvemos el valor de W y n, porque esta es la solución
+a nuestro problema inicial. Esta es una solución para
+una mochila de tamaño W que usa todos los n objetos. ¿De acuerdo? Ahora está claro que este algoritmo
+es correcto simplemente porque implementa directamente la fórmula 
+recurrente que ya habíamos discutido. Analicemos el tiempo de ejecución. No es difícil demostrar, de nuevo, que
+su tiempo de ejecución es realmente el mismo. Esto es una vez más n multiplicado por W. Esto es así de nuevo porque
+tenemos dos bucles aquí. Este es el primer bucle
+con n iteraciones y éste es el bucle interior con W iteraciones. Y lo que hay dentro sólo
+necesita algún tiempo constante. Apliquemos el algoritmo que acabamos 
+de diseñar a nuestro sencillo ejemplo. Recuerda que necesitamos almacenar
+los valores de todos los subproblemas para w,i, para todos los w desde cero a diez, y para 
+todos los i de cero a cuatro, en nuestro caso. Con este propósito, es natural
+usar una tabla de dos dimensiones, o un array de dos dimensiones. Puedes ver este array bidimensional
+en la diapositiva ya rellenado. Aquí tenemos i, así todas
+las filas de nuestras columnas en la celda con todos los posibles valores de i, y todas las columnas en este conjunto con
+todas los posibles valores de w. Correcto, comenzamos inicializando
+la primera fila y la primera columna de esta tabla con ceros. Esto es, rellenamos esta fila con ceros y también rellenamos esta columna con ceros. Después comenzamor rellenando
+esta tabla fila por fila. Es decir, primero rellenamos esta celda,
+después esta celda, después esta celda, después esta celda y así sucesivamente. Seguimos de esta manera. Así, primero rellenamos esta fila,
+después esta fila. A continuación, rellenamos esta fila
+y después rellenamos esta fila. El resultado de 46 es realmente la respuesta a nuestro problema inicial. Ahora, déjame enseñarte cómo algún 
+valor particular, sólo como ilustración, déjame enseñarte cómo algún
+valor particular en esta tabla es calculado. Por ejemplo, consideramos esta celda. Formalmente, este es el valor valor(10,2). Lo que significa que este es un valor
+óptimo para una mochila de peso total 10 que sólo usa
+los primeros dos objetos. Asumamos que no sabemos
+que poner aquí. Sólo tenemos que calcularlo ahora mismo. Razonamos igual que hicimos antes. Esta es una mochila de peso total 10
+que sólo usa los dos primeros objetos. Bien, entonces decimos que el
+segundo objeto puede ser usado o no. Si no lo usamos, entonces esto
+es lo mismo que rellenar la mochila de peso total diez
+usando solamente el primer objeto. Y ya sabemos este valor
+porque está en la fila anterior. Esto es valor de 10,1. ¿De acuerdo? El valor, en este caso, es 30. Por otro lado, si el segundo
+objeto es utilizado, entonces si lo eliminamos lo que nos
+queda es una solución óptima para una mochila de peso total 10 menos 3, ya que 3 es el peso del segundo objeto, lo que significa que es una solución
+óptima para una mochila de tamaño 7. De peso total 7 que
+sólo usa el primer, donde sólo está permitido
+usar el primer objeto. Además, si añadimos este objeto, si añadimos el segundo objeto
+a la solución, obtenemos 30 más 14, que es mucho mejor que
+sin usar el segundo objeto. ¿De acuerdo? POr eso tenemos 44 aquí. Además, por esta razón hemos
+rellenado esta matriz fila por fila. Ahora, cuando tenemos que
+calcular el valor de esta celda, ya hemos calculado
+el valor de estas dos celdas. Es por lo que rellenamos nuestra 
+matriz exactamente fila por fila. Déjame usar el mismo ejemplo para ilustrar una técnica importante
+en programación dinámica. A saber, reconstruir una solución óptima. Por reconstruir una solución óptima
+en este problema particular quiero decir encontrar no sólo el valor óptimo para
+la mochila de peso total diez, sino el subconjunto de objetos
+que llevan a este valor óptimo. Para ello, primero creamos 
+un array booleano de tamaño cuatro. En este array, marcaremos,
+para cada objeto, si el objeto es usado en una
+solución óptima o no. Lo que vamos a hacer es el
+camino inverso que nos ha conducido al valor óptimo, 46. En particular, tratamos de entender
+cómo este valor de 46 ha sido calculado. Lo primero de todo, 46
+es formalmente valor de 10,4, esto es un valor óptimo para una mochila de peso total diez,
+usando los primeros cuatro objetos. Razonemos si el cuarto
+objeto es usado o no. Si no se usa, entonces este valor
+es el mismo que el valor de 10, 3, que se muestra aquí. Este es el valor de una mochila del mismo 
+peso, usando los tres primeros objetos. Por otro lado, si se utiliza, entonces lo que
+queda debe ser una solución óptima para una mochila de tamaño 10 menos 2, que es 8,
+que también usa sólo los tres primeros objetos. Este valor ya está calculado, es 30, así que necesitamos calcular el máximo
+entre 30  más 9, porque el valor del último
+objeto es 9, y 46. En este caso particular,
+el máximo es igual a 46 lo que significa que hemos decidido en este
+punto no usar el último objeto. ¿De acuerdo? Ponemos 0 en nuestro array booleano
+para indicar esto y nos movemos a esta celda. De nuevo, intentamos entender
+cómo ha sido calculado este valor. Se ha calculado como el
+máximo valor de dos números que dependen
+de los siguientes valores. Podemos bien no usar el tercer objeto,
+entonces es lo mismo, tiene el valor de esta celda
+o podemos usar el tercer objeto. En este caso, lo que queda es una 
+mochila de tamaño, de peso total 6, y usando los dos primeros objetos
+y su valor es 30. Más el valor del terce objeto,
+que es 16. En este caso particular,
+30 más 16 es mayor que 44, lo que significa que este valor de
+46 se ha calculado usando este valor. Esto, a su vez, significa que hemos
+decidido usar el tercer objeto. Lo marcamos poniendo
+1 en nuestro array booleano. Permanecemos en esta celda e intentamos 
+comprender cómo se ha calculado. Se ha calculado cómo un
+máximo entre este 30 y este 0 más 14. Correcto, en este caso, el primer 
+valor es mayor por lo que nos movemos a esta celda y marcamos
+que hemos decidido no usar el segundo objeto. De acuerdo, y finalmente, nos damos cuenta
+de que hemos llegado a este valor 30 desde la esquina superior izquierda. ¿Verdad? De esta forma, hemos reconstruido
+la solución óptima completa. De nuevo, hemos recorrido a la inverso
+lo que nos conduce al valor óptimo. Aquí, lo que se muestra es que
+hemos decidido usar el primer objeto y el tercer objeto. Vamos a comprobar que, en efecto,
+nos da el valor óptimo de 46. Si, efectivamente, calculamos la
+suma de los pesos del primer y el tercer objeto, es 10. Y mientras el valor total es 30
+más 16 lo que es 46, de hecho. Como dije antes, esta técnica
+es usada habitualmente en los algoritmos de programación dinámica
+para reconstruir la solución óptima.

@@ -1,0 +1,59 @@
+Let's now see how dynamic programming
+algorithm solves the edit distance problem. We start by considering two strings,
+A of length n and B of length m and we will ask the question
+question what is an optimal alignment of an i-prefix of A,
+which is the first i symbols of A, and the j-prefix of B which
+are the first j symbols only. The last column of an optimal
+alignment is either an insertion or a deletion or a mismatch, or a match. And please notice that if
+we remove the last column from the optimal alignment of the strings,
+what is left is an optimal alignment of
+the corresponding two prefixes. And we can adjust the score of
+the optimal alignment for i prefix and j prefix by adding plus 1 in the case of
+insertion, plus 1 in the case of deletion, plus 1 in the case of mismatch and
+adding nothing in the case of match. Let's denote D (i, j)
+to be the edit distance between an i-prefix and a j-prefix. And in this case, this figure at the top of the slide
+illustrates the following recurrency. D(i,j) equal to the minimum
+of the following four values: D(i,j-1)+1, D(i-1,j)+1, D(i-1,j-1)+1, in the case the last two symbols in the i prefix of A and
+j prefix of B are different. And D(i- 1, j- 1), if the last symbols
+in i and j prefix are the same. Our goal now is to compute
+the edit distance D, i, j between all i prefixes of string A and
+all j prefixes of string B. In the case of string editing and distance
+we will construct eight by nine grid and our goal is to compute
+all edit distances D(i, j) corresponding to all nodes in this grid. For example, for i and
+j equal to four and four. How will we compute
+the corresponding distance D(i, j)? Let's start by filling distances D(i, 0)
+in the first column of this matrix. It is easy because indeed we
+are comparing an i-prefix of string A against
+a 0-prefix of string D and therefore this edit distance for
+i-prefix will be equal to i. That's what's shown here, similarly we can
+easily fill the first row in this matrix. And now let's try to compute
+what will be the distance D(1,1) corresponding to comparison of string
+consisting of single symbol E, with a string consisting
+of single symbol D, there are three possible
+ways to arrive to the node (1, 1): from the nodes (0, 0), (0, 1), and (1, 0). Which one should be the way we will select
+to find the optimal edit distance. According to the previous recurrency,
+we should select the one of three directions
+that gives minimal value for D(i, j), which is minimum of 2,
+2, and 1 and therefore we arrive to node
+(1, 1) by diagonal edge. Let's keep this in memory that the right direction to arrive at node
+(1, 1) was the diagonal direction. We will now try to compute the edit
+distance for the next node in the matrix. And in this case D(2,1) is
+equal to minimum D(2,0) + 1, D(1,1) + 1 and
+D(1,0) of each tells us that's the optimal way to arrive to this node would be again,
+by diagonal edge. You continue further,
+once again compare three values and it turn out that the best way to arrive
+to this node will be by vertical edge. We'll continue further and we'll fill
+the whole second column in the matrix. Now let's continue with the circle,
+what about this node? For this node D(1,2) =
+minimum {D(1,1) + 1, D (0,2) + 1, and D (0,1) + 1}. And it is minimum of 2, 3, and 2. In fact, there are two optimal
+ways to arrive to this node and in this case we show both
+of them by diagonal edge into this vertex and
+by horizontal edge of this vertex. You'll continue further and slowly but
+surely we will fill the whole matrix. The edit distance pseudocode implements
+the algorithm we just discussed. It first fills in the first column and
+the first row of the dynamic programming matrix and then it continues
+filling it up by computing the cost of moving to vertex (i, j)
+using insertion, deletion, or mismatch or match or in other words,
+exploring all possibility. Moving to the vertex i, j using vertical
+edge, horizontal edge, and diagonal edge. And then it finds out which
+of these possibilities results in the minimum edit distance.

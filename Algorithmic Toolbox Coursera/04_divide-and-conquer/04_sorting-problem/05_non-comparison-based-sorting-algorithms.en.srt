@@ -1,0 +1,474 @@
+1
+00:00:00,190 --> 00:00:05,150
+In this last video we will show that
+there are cases when we can sort
+
+2
+00:00:05,150 --> 00:00:09,210
+the n given objects without actually
+comparing them to each other.
+
+3
+00:00:09,210 --> 00:00:14,000
+And for such algorithms, our lower
+bound with n log n does not apply.
+
+4
+00:00:15,240 --> 00:00:19,990
+Well, probably the most natural case
+when we can sort the n given objects
+
+5
+00:00:19,990 --> 00:00:22,730
+without comparing them to each other
+
+6
+00:00:22,730 --> 00:00:27,580
+is the case when our input sequence
+consists of small integers.
+
+7
+00:00:27,580 --> 00:00:30,500
+We will illustrate it with a toy example.
+
+8
+00:00:30,500 --> 00:00:38,090
+So consider an array of size 12 which
+consists of just three different digits.
+
+9
+00:00:38,090 --> 00:00:42,790
+I mean each element of our array
+is equal to either 1, 2 or 3.
+
+10
+00:00:42,790 --> 00:00:47,230
+Then we can do the following, let's just
+go through this array from left to right.
+
+11
+00:00:47,230 --> 00:00:52,670
+I mean by a simple count and count
+the number of occurrences of 1, 2 and 3.
+
+12
+00:00:52,670 --> 00:00:56,976
+Just by scanning this array you will
+find out that 1 appears two times,
+
+13
+00:00:56,976 --> 00:01:00,550
+2 appears seven times,
+and 3 appears three times.
+
+14
+00:01:00,550 --> 00:01:04,800
+And this information is enough for
+us to sort these objects, so
+
+15
+00:01:04,800 --> 00:01:10,240
+we can use this information to fill
+in the resulting array, A prime.
+
+16
+00:01:10,240 --> 00:01:16,950
+So we put 1 two times, then we put 2 seven
+times, and then we put 3 three times.
+
+17
+00:01:16,950 --> 00:01:21,430
+And this gives us the resulting
+sorted array A prime, right?
+
+18
+00:01:21,430 --> 00:01:25,740
+So what just happened is
+that we sorted this array,
+
+19
+00:01:25,740 --> 00:01:30,010
+these n objects, without comparing
+these objects to each other.
+
+20
+00:01:30,010 --> 00:01:35,450
+We just counted the number of occurrences
+of each number, and for this we used,
+
+21
+00:01:35,450 --> 00:01:42,250
+essentially, the information that
+this array contains small integers.
+
+22
+00:01:42,250 --> 00:01:46,610
+The algorithm that we just saw is
+called counting sort algorithm.
+
+23
+00:01:47,840 --> 00:01:49,520
+Its main ideas are the following.
+
+24
+00:01:49,520 --> 00:01:53,222
+I assume that we're given
+an array A of size n, and
+
+25
+00:01:53,222 --> 00:01:58,170
+we know that all its elements
+are integers in the range from 1 to M.
+
+26
+00:01:59,270 --> 00:02:00,880
+Then, we do the following.
+
+27
+00:02:00,880 --> 00:02:04,710
+We create an array count of size M, and
+
+28
+00:02:04,710 --> 00:02:09,990
+by scanning the initial array
+A just once from left to right,
+
+29
+00:02:09,990 --> 00:02:14,770
+we count the number of occurrences
+of each i from 1 to M, and
+
+30
+00:02:14,770 --> 00:02:18,670
+we store this value in
+the cell count of i.
+
+31
+00:02:18,670 --> 00:02:22,129
+So, we scan the array A from left
+to right, and whenever we see
+
+32
+00:02:23,520 --> 00:02:30,900
+an element equal to i, we increment
+the value stored in the cell count of i.
+
+33
+00:02:30,900 --> 00:02:35,831
+Then when this array is filled,
+we can use this information to fill
+
+34
+00:02:35,831 --> 00:02:40,337
+in the resulting array A prime,
+as we did in our toy example.
+
+35
+00:02:40,337 --> 00:02:44,010
+So this is a pseudocode of the count and
+sort algorithm.
+
+36
+00:02:44,010 --> 00:02:46,550
+Here we're given an array A of size M and
+
+37
+00:02:46,550 --> 00:02:52,121
+we assume that all the elements of
+this array are integers from 1 to M.
+
+38
+00:02:53,150 --> 00:02:59,630
+So we introduce the recount of size M
+which is initially filled in by zeroes.
+
+39
+00:02:59,630 --> 00:03:04,230
+Then by scanning our initial
+array we fill in this array.
+
+40
+00:03:04,230 --> 00:03:09,360
+Namely, whenever we see an element
+k in our initial array,
+
+41
+00:03:09,360 --> 00:03:12,770
+we increase the cell count of k.
+
+42
+00:03:12,770 --> 00:03:17,650
+So after the first loop of this algorithm,
+we know exactly the total number of
+
+43
+00:03:17,650 --> 00:03:23,390
+occurrences of each number k from
+1 to M in our initial array.
+
+44
+00:03:23,390 --> 00:03:27,398
+So for example in our toy
+example two slides before,
+
+45
+00:03:27,398 --> 00:03:32,683
+we counted that the number 1 appears
+two times in our initial array,
+
+46
+00:03:32,683 --> 00:03:36,966
+the number 2 appears seven
+times in our initial array,
+
+47
+00:03:36,966 --> 00:03:39,730
+and number 3 appears three times.
+
+48
+00:03:40,860 --> 00:03:45,968
+So at this point, we know that in the
+resulting array, the first two elements
+
+49
+00:03:45,968 --> 00:03:51,076
+will be occupied by the number 1, the next
+seven elements will be occupied by
+
+50
+00:03:51,076 --> 00:03:56,240
+the number 2, and the next three elements
+will be occupied by the number 3.
+
+51
+00:03:56,240 --> 00:04:03,470
+Now we would like, instead of having just
+the lengths of these three intervals,
+
+52
+00:04:03,470 --> 00:04:08,090
+we would like to compute
+the starting point of each interval.
+
+53
+00:04:08,090 --> 00:04:11,340
+So we do this in a new loop.
+
+54
+00:04:11,340 --> 00:04:13,872
+And for this we introduce a new array Pos.
+
+55
+00:04:13,872 --> 00:04:16,179
+So Pos[1] is equal to 1,
+
+56
+00:04:16,179 --> 00:04:22,440
+meaning that number 1 will occupy
+a range starting from the first index.
+
+57
+00:04:22,440 --> 00:04:27,450
+And the starting point for each subsequent
+range is computed as a starting
+
+58
+00:04:27,450 --> 00:04:33,290
+point of each previous range,
+plus the length of this previous range.
+
+59
+00:04:33,290 --> 00:04:39,080
+So Pos[j] is computed as
+Pos[j -1] + Count[j- 1].
+
+60
+00:04:39,080 --> 00:04:46,050
+So at this point we know
+the starting point for each range.
+
+61
+00:04:46,050 --> 00:04:53,310
+Namely, k in the resulting array, number k
+will occupy a range starting from Pos[k].
+
+62
+00:04:53,310 --> 00:04:57,830
+Then we just count our initial array and
+whenever we see an element,
+
+63
+00:04:57,830 --> 00:05:02,350
+we always know where to put
+it in the initial array.
+
+64
+00:05:02,350 --> 00:05:07,353
+So then let me remind you that we do not
+just fill in the array with numbers from 1
+
+65
+00:05:07,353 --> 00:05:11,580
+to M, but
+we copy elements from our initial array.
+
+66
+00:05:11,580 --> 00:05:13,700
+This is because what we are looking for
+
+67
+00:05:13,700 --> 00:05:19,010
+in this certain problem is a permutation
+of our initial n given objects.
+
+68
+00:05:19,010 --> 00:05:24,920
+Because what we have is probably not just
+number, not just integers from 1 to M,
+
+69
+00:05:24,920 --> 00:05:29,214
+but these numbers are keys of
+some probably complex object.
+
+70
+00:05:30,560 --> 00:05:31,244
+Okay, so
+
+71
+00:05:31,244 --> 00:05:36,710
+the running time of this algorithm can
+be easily seen to be big O of M plus M.
+
+72
+00:05:36,710 --> 00:05:39,940
+This is just because
+here we have three loops.
+
+73
+00:05:39,940 --> 00:05:45,510
+So the first loop has n iterations,
+the second loop has M iterations,
+
+74
+00:05:45,510 --> 00:05:49,690
+and the last loop also has n iterations.
+
+75
+00:05:51,130 --> 00:05:53,290
+Well, so, this is the formal statement.
+
+76
+00:05:53,290 --> 00:05:57,120
+The running time of count and
+sort algorithm is just n + M.
+
+77
+00:05:57,120 --> 00:06:03,296
+And the final remark about this algorithm
+is that if M grows no faster than n,
+
+78
+00:06:03,296 --> 00:06:09,182
+namely, for example, if our array is
+filled by integers from 1 to n, or
+
+79
+00:06:09,182 --> 00:06:15,842
+if this array is filled just by integers
+which are upper bounded by some constant,
+
+80
+00:06:15,842 --> 00:06:21,755
+then the running time of our count and
+sort algorithm is just linear in n.
+
+81
+00:06:21,755 --> 00:06:24,505
+I will now summarize
+the last three videos.
+
+82
+00:06:24,505 --> 00:06:28,338
+So we first covered
+the merge sort algorithm.
+
+83
+00:06:28,338 --> 00:06:33,087
+So this is a divide and conquer based
+algorithm that proceeds as follows.
+
+84
+00:06:33,087 --> 00:06:37,189
+Given an array of size n it
+first splits it into two halves,
+
+85
+00:06:37,189 --> 00:06:41,462
+both roughly equal size,
+then it sorts them recursively and
+
+86
+00:06:41,462 --> 00:06:44,760
+then it merges them into
+the resulting array.
+
+87
+00:06:46,460 --> 00:06:52,430
+We then, and we showed that the running
+time of this algorithm is big O(n log n),
+
+88
+00:06:52,430 --> 00:06:53,810
+which is quite fast actually.
+
+89
+00:06:53,810 --> 00:06:54,569
+Almost teeny.
+
+90
+00:06:54,569 --> 00:06:59,375
+We then showed that no other comparison
+based algorithm can sort n given objects
+
+91
+00:06:59,375 --> 00:07:01,750
+asymptotically faster than an n log n.
+
+92
+00:07:02,920 --> 00:07:07,190
+So we did this by showing that
+any comparison based algorithm
+
+93
+00:07:07,190 --> 00:07:09,770
+must distinguish between too many cases.
+
+94
+00:07:09,770 --> 00:07:12,692
+Between n factorial possible permutations.
+
+95
+00:07:12,692 --> 00:07:17,444
+For this, in the worst case,
+a comparison based algorithm
+
+96
+00:07:17,444 --> 00:07:21,925
+must perform at least big
+O(n log n) interpolations.
+
+97
+00:07:21,925 --> 00:07:28,110
+We then showed that it can be actually
+done faster and in certain problems,
+
+98
+00:07:28,110 --> 00:07:33,060
+can be solved in time less than n log n,
+in some cases.
+
+99
+00:07:33,060 --> 00:07:40,087
+For example, in the case when our input
+array contains small varied integers.

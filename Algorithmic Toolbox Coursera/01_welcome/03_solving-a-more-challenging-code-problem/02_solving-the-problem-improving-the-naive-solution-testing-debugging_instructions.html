@@ -1,0 +1,303 @@
+<meta charset="utf-8"/>
+<co-content>
+ <h2 level="2">
+  Introduction and Learning Outcomes
+ </h2>
+ <p>
+  In this sequence of readings, we show a sample process of implementing and testing your solution for the maximum pairwise product problem.
+ </p>
+ <p>
+  <u>
+   <strong>
+    In this reading you will ...
+   </strong>
+  </u>
+ </p>
+ <ol bullettype="numbers">
+  <li>
+   <p>
+    Download a starter solution, then compile and run it.
+   </p>
+  </li>
+  <li>
+   <p>
+    Submit it to the testing system to find out that it is buggy.
+   </p>
+  </li>
+  <li>
+   <p>
+    Use the feedback message from the testing system to fix an integer overflow bug.
+   </p>
+  </li>
+  <li>
+   <p>
+    Submit the solution to the testing system again to figure out that it is too slow.
+   </p>
+  </li>
+  <li>
+   <p>
+    Implement a new faster algorithm.
+   </p>
+  </li>
+ </ol>
+ <p>
+ </p>
+ <h2 level="2">
+  Running a Starter Solution
+ </h2>
+ <p hasmath="true">
+  Assume that you are going to use the C++ programming language to solve this assignment. You then first download a template solution file \({\tt max\_pairwise\_product.cpp}\):
+ </p>
+ <pre language="c_cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using std::vector;
+using std::cin;
+using std::cout;
+
+int MaxPairwiseProduct(const vector&lt;int&gt;&amp; numbers) {
+  int result = 0;
+  int n = numbers.size();
+  for (int i = 0; i &lt; n; ++i) {
+    for (int j = i + 1; j &lt; n; ++j) {
+      if (numbers[i] * numbers[j] &gt; result) {
+        result = numbers[i] * numbers[j];
+      }
+    }
+  }
+  return result;
+}
+
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    vector&lt;int&gt; numbers(n);
+    for (int i = 0; i &lt; n; ++i) {
+        cin &gt;&gt; numbers[i];
+    } 
+
+    int result = MaxPairwiseProduct(numbers);
+    cout &lt;&lt; result &lt;&lt; "\n";
+    return 0;
+}</pre>
+ <p>
+ </p>
+ <p>
+  You compile it using the same flags as on the testing machine:
+ </p>
+ <pre language="sh">g++ -pipe -O2 -std=c++11 max_pairwise_product.cpp
+</pre>
+ <p hasmath="true">
+  This produces an executable file (either \({\tt a.out}\) or \({\tt a.exe}\), depending on your operating system). You run the program on a small sequence:
+ </p>
+ <pre language="sh">./a.out
+3
+7 2 5</pre>
+ <p>
+  The program outputs the correct answer:
+ </p>
+ <pre>35
+</pre>
+ <p>
+  Now you are curious what you are supposed to do in this problem. Indeed, the template solution contains a program that solves the problem correctly, for an obvious reason: to find a pairwise maximum product, it just goes through all possible pairwise products and selects the largest one. There are two hidden dangers here, however.
+ </p>
+ <h2 level="2">
+  Submitting to the Testing System
+ </h2>
+ <p>
+  You encounter the first pitfall by submitting this file as a solution to the corresponding problem. Surprisingly, you get the following feedback from the testing system:
+ </p>
+ <pre>Failed case #3 (Wrong answer)
+Input:
+2
+100000 90000
+Your output:410065408
+
+Correct output:9000000000</pre>
+ <p>
+ </p>
+ <h2 level="2">
+  Fixing an Integer Overflow Bug
+ </h2>
+ <p hasmath="true">
+  By looking at this example, you realize that the reason of this failure is an integer overflow. Indeed such a large number as \(9,000,000,000\) does not fit into the standard C++ \({\tt int}\) type (on most modern machines, it ranges from \(-2,147,483,648\) to \(2,147,483,647\)). You then adjust the type of the variable result to long long as follows (this requires to change five lines of code!):
+ </p>
+ <pre language="c_cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using std::vector;
+using std::cin;
+using std::cout;
+
+long long MaxPairwiseProduct(const vector&lt;int&gt;&amp; numbers) {
+  long long result = 0;
+  int n = numbers.size();
+  for (int i = 0; i &lt; n; ++i) {
+    for (int j = i + 1; j &lt; n; ++j) {
+      if (((long long)numbers[i]) * numbers[j] &gt; result) {
+        result = ((long long)numbers[i]) * numbers[j];
+      }
+    }
+  }
+  return result;
+}
+
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    vector&lt;int&gt; numbers(n);
+    for (int i = 0; i &lt; n; ++i) {
+        cin &gt;&gt; numbers[i];
+    } 
+
+    long long result = MaxPairwiseProduct(numbers);
+    cout &lt;&lt; result &lt;&lt; "\n";
+    return 0;
+}</pre>
+ <p hasmath="true">
+  This is already safe: the long long type ranges from \(-9,223,372,036,854,775,807\) to \(9,223,372,036,854,775,807\), while in our problem all the numbers in the sequence are non-negative integers not exceeding \(100,000\) so the product of two such numbers is an integer between \(0\) and \(10,000,000,000\).
+ </p>
+ <p>
+  Now, you are completely sure that the algorithm is correct: it correctly solves the problem and uses an appropriate type for storing the result. You submit it to the testing system.
+ </p>
+ <h2 level="2">
+  Implementing a Faster Solution
+ </h2>
+ <p>
+  Surprisingly, it fails again! Now the error message says
+ </p>
+ <pre>Failed case #4: time limit exceeded</pre>
+ <p hasmath="true">
+  This is because our program performs about \(n^2\) steps on a sequence of length \(n\). For the maximal possible value \(n=200,000=2\cdot 10^5\), the number of steps is about \(10,000,000,000=10^{10}\). This is too much. Recall that modern machines can perform roughly \(10^9\) basic operations per second (this depends on a machine of course, but \(10^9\) is a reasonable average estimate). Thus, we need a faster algorithm.
+ </p>
+ <p>
+  In search of an inspiration, you start to play with small examples. How to find the maximal pairwise product of a sequence 1,2,3,4? Well, of course, it suffices to multiply the two largest numbers — 3 and 4. And this is true in general since all numbers in our sequence are non-negative.
+ </p>
+ <p>
+  You implement the algorithm that you have just discovered as follows. For testing purposes, you also keep the previous algorithm.
+ </p>
+ <pre language="c_cpp">long long MaxPairwiseProductFast(const vector&lt;int&gt;&amp; numbers) {
+  int n = numbers.size();
+
+  int max_index1 = -1;
+  for (int i = 0; i &lt; n; ++i)
+    if ((max_index1 == -1) || (numbers[i] &gt; numbers[max_index1]))
+      max_index1 = i;
+
+  int max_index2 = -1;
+  for (int j = 0; j &lt; n; ++j)
+    if ((numbers[j] != numbers[max_index1]) &amp;&amp; ((max_index2 == -1) || (numbers[j] &gt; numbers[max_index2])))
+      max_index2 = j;
+
+  return ((long long)(numbers[max_index1])) * numbers[max_index2];
+}</pre>
+ <p>
+ </p>
+ <h2 level="2">
+  Testing
+ </h2>
+ <p>
+  You also change the main function as follows:
+ </p>
+ <pre language="c_cpp">int main() {
+  int n;
+  cin &gt;&gt; n;
+  vector&lt;int&gt; numbers(n);
+  for (int i = 0; i &lt; n; ++i) {
+    cin &gt;&gt; numbers[i];  
+  }
+
+  long long result1 = MaxPairwiseProduct(numbers);
+  long long result2 = MaxPairwiseProductFast(numbers);
+  cout &lt;&lt; result1 &lt;&lt; "\n" &lt;&lt; result2;
+  return 0;
+}</pre>
+ <p>
+  You compile your new program and run it on the previous small example:
+ </p>
+ <pre language="sh">./a.out
+3
+7 2 5</pre>
+ <p>
+  Quite satisfactory, it outputs the right answer two times:
+ </p>
+ <pre>35
+35
+</pre>
+ <p hasmath="true">
+  Now, you decide to check how long does it take your program to process a large dataset. For this, you pass an array of size \(200,000=2\cdot 10^5\) filled in by zeroes to your new function \({\tt MaxPairwiseProductFast}\):
+ </p>
+ <pre language="sh">long long result = MaxPairwiseProductFast(vector&lt;int&gt;(200000, 0));
+cout &lt;&lt; result &lt;&lt; "\n";</pre>
+ <p>
+  It outputs 0 just immediately which shows that your new algorithm is indeed fast. Thus, your new solution is both fast and correct. This is exactly what is needed to solve the problem. Inspired by this fact, you submit the solution to the testing system again. And guess what? It fails once again!!
+ </p>
+ <pre>Failed case #5: incorrect result</pre>
+ <p>
+ </p>
+ <p>
+  <strong>
+   An important remark.
+  </strong>
+  When testing your program on large data sets, it makes sense to first generate a data set and to store it in a file and then to redirect its contents to the standard input when running your program:
+ </p>
+ <pre language="sh">generate_test &gt; test.txt
+your_program &lt; test.txt</pre>
+ <p>
+  The reason for this is straightforward: for large data sets, your program may spend a noticeable amount of time already for reading the input data.
+ </p>
+ <h2 level="2">
+  What's Up Next?
+ </h2>
+ <p>
+  In the next screencast/reading we will learn how to use stress testing to locate a bug in the fast algorithm.
+ </p>
+</co-content>
+<style>
+ body {
+    padding: 50px 85px 50px 85px;
+}
+
+table th, table td {
+    border: 1px solid #e0e0e0;
+    padding: 5px 20px;
+    text-align: left;
+}
+input {
+    margin: 10px;
+}
+}
+th {
+    font-weight: bold;
+}
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+img {
+    height: auto;
+    max-width: 100%;
+}
+pre {
+    display: block;
+    margin: 20px;
+    background: #424242;
+    color: #fff;
+    font-size: 13px;
+    white-space: pre-wrap;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    border: 1px solid #ccc;
+}
+</style>
+<script async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ['$','$'] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true
+    }
+  });
+</script>

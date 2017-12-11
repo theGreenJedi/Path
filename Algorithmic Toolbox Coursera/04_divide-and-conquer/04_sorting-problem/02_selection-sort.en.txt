@@ -1,0 +1,86 @@
+In this video, we will study one of the simplest sort
+of algorithms called selection sort. So it's main idea is quite simple, we just
+keep growing the sorted part of our rate. So let me illustrate it on a toy example,
+assume we're given a sequence of links. Five consistent of five integers,
+eight four two five and two. So we start just by finding one of
+the minimum elements in this array, in this case it is two. Now lets just do the following, lets just swap it with
+the first element of our array. After swapping,
+two stays in its final position, so two is the minimum value of our array and
+it is already in its first position. Now let's do the fun one,
+let's just forget about this element. It is already in its final position and let's repeat the same procedure was
+the remaining part of our array. Namely, we began first find
+the minimum value, it is again two. We'll swap it with the first
+element of the remaining part and then we'll just forget about this element. So again, we find the minimum value which
+is now four with what was the first element of the remaining part which
+is now the sole element of our array. And then, we just forget about
+first three elements and we continue with only remaining parts. So once again, we just keep growing
+the sorted part of our array. In the end, what we have,
+is that the whole array is sorted. The pseudocode shown here on the slide,
+directly implements the idea of the selection
+sort algorithm that we just discussed. So here we have a loop
+where i ranges from 1 to n. Initially, i is equal to 1. Inside this loop, we compute the index
+of a minimal value in the array, from, within the list from i to n. We do this as follows,
+so we create a variable, minlndex which is initially equal to i. And then we go through all the remaining
+elements inside this part, I mean through elements from i + 1 to n. And if we find a smaller element
+we update the variable minlndex. So in the end of this for loop,
+what we have is that minindex is a position of a minimal element
+inside the array from i to m. Then we swap this element
+with the element Ai. Namely, when i is equal to one,
+what we've done, we've found the minimal element in the well array and
+we've swapped it with the first element. So now, the first element of our
+array is in its final position. Then under second iteration of our loop,
+we do the same actually. We find the minimum value,
+the position of a minimum value inside the remaining part of our
+array and put it on the second place. On the sort loop we find the minimum
+value in this remaining part and put it on the place and so on. So we keep growing the sorted
+part of our array. So when it would be useful to check the
+online visualization to see how it goes, so let's do this. This visualization shows how
+selection sort algorithm performs on a few different datasets. Namely on the random datasets,
+on a sequence which is nearly sorted. Also on a sequence which is
+sorted in reversed order. And on a sequence which contains
+just a few unique elements. So let's run this algorithm and
+see what happens. So you can see that indeed this
+algorithm just grows the sorted region, the sorted initial region of our array. So another interesting property is
+it is revealed by this visualization is the following. So the running time of this algorithm
+actually does not depend on input data. So it only depends on the size
+of our initial sequence. The other [INAUDIBLE] time of
+how algorithm is quadratic and this is not difficult to see right? So what we have is two nested loops. In the outer loop, i ranges from 1 to n. In the inner loop,
+j ranges from i plus 1 to n, to find a minimum inside
+the remaining part of our array. So in total we have quadratic
+number of iterations. At this point however, we should ask
+ourselves whether our estimate was right in time of the selection, so
+our algorithm was too pessimistic. And this is whar I mean by this. So recall that we have two nested loops. In the outer loop, i ranges from 1 to n. In the inner loop,
+g ranges from i + 1 to n. So when i is equal to 1, the number of
+iterations of the inner loop is n- 1. However, when i is equal to 2, the number
+of iterations of the inner loop is n- 2, and so on. So when i increases, the number of
+iterations of the inner loop decreases. So a more accurate estimate for the total
+number of iterations of the inner loop would be the following,
+(n- 1) + (n- 2) + (n- 3) and so on. So it is definitely less than n-squared. However we will show this
+it is equal to n-squared. Namely, this is xx n-squared, and this it is roughly equaled
+n-square divided by two. The sum is that we need to estimate
+is called an Arithmetic Series, and there is a known formula for
+this for this sum. Namely 1 + 2 + 3 +, and so on, n, is equal to n(n+1)/2. And this is how we can prove this formula. Let's just try it, all our n integers
+in a row, 1, 2, and so on, n. Below them let's write the same set of
+integers, but in the reverse order. So, n, then n minus 1,
+and so on, 2, and 1. Then what we get is a row of size 2 by n. Having n columns, and in each column, the sum of the corresponding two
+integers is equal to n plus 1. Great, so in the first column we have n
+and one, and in the second column we have two and minus one and so on and
+in the last column we have n and one. So the sum in each column is equal
+to n plus one and zero n columns. Which means that the sum of all
+the numbers in our table is equal to n, when supplied by n plus one. So since this table contains our sum,
+the sum of the integers from 1 to n twice, we conclude that the sum of all the
+numbers from 1 to n is equal to n(n+1)/2. Another possibility to find this formula,
+to see why this formula is correct is to take a rectangle of size n,
+of dimensions n multiplied by n plus 1. So it's area is equal to n
+multiplied by n plus one. And to cut it into two parts
+such as it's shown in the slide, such as the area of each of these two
+parts is equal to 1 + 2 + and so on n. We're all ready to conclude. So we've just discussed
+the selection sort algorithm. This algorithm is easy to implement,
+easy to analyze, and it's running time is n squared,
+where n is the size of the input sequence. So it sorts the input sequence and
+array in place. Meaning that it requires
+almost no extra memory. I mean, all extra memory which is
+required by this algorithm is only for storing indices, like i, j and m index. There are many other quadratic algorithms,
+like insertion sort and bubble sort. We're not going to cover them here,
+and instead, in the next video we will proceed,
+to do a faster, a faster sort algorithm.

@@ -1,0 +1,84 @@
+Hello, everybody. Welcome back. Today we're going to start talking
+about asymptotic notation. So here we're going to sort of just
+introduce this whole idea of asymptotic notation and describe some of
+the advantages of using it. So last time we ran into this really
+interesting problem that computing runtimes is hard, in that if you really,
+really want to know how long a particular program will take to run on
+a particular computer, it's a huge mess. It depends on knowing all kinds of fine
+details about how the program works. And all kinds of fine details about how
+the computer works, how fast it is, what kind of system architecture it is. It's a huge mess. And we don't want to go through this
+huge mess every single time we try to analyze an algorithm. So, we need something that's maybe
+a little bit less precise but much easier to work with, and we're going to
+talk about the basic idea behind that. And the basic idea is the following. That, there are lots of factors that
+have an effect on the final runtime but, most of them will only change
+the runtimes by a constant. If you're running on a computer
+that's a hundred times faster, it will take one-one hundreth of the time,
+a constant multiple. If your system architecture has
+multiplications that take three times as long as additions, then if your program
+is heavy on multiplications instead of additions, it might take three times as
+long, but it's only a factor of three. If your memory hierarchy is
+arranged in a different way, you might have to do disk
+lookups instead of RAM lookups. And those will be a lot slower,
+but only by a constant multiple. So the key idea is if we come up with
+a measure of runtime complexity that ignores all of these constant multiples,
+where running in time n and in running in time 100 times n are sort
+of considered to be the same thing, then we don't have to worry about all of these
+little, bitty details that affect runtime. Of course there's
+a problem with this idea, if you look at it sort of by itself,
+that if you have runtimes of one second or one hour or one year,
+these only differ by constant multiples. A year is just something
+like 30 million seconds. And so, if you don't care about factors of
+30 million, you can't tell the difference between a runtime of a second and
+a runtime of a year. How do we get around this problem? Well, there's a sort of
+weird solution to this. We're not going to actually consider
+the runtimes of our programs on any particular input. We're going to look at what
+are known as asymptotic runtimes. These ask, how does the runtime
+scale with input size? As the input size n gets larger, does the output scale proportional to n,
+maybe proportional to n squared? Is it exponential in n? All these things are different. And in fact they're sort of so different
+that as long as n is sufficiently large, the difference between n runtime and n squared runtime is going to be
+worse than any constant multiple. If you've got a constant multiple of 1000, 1000n might be pretty bad with
+that big number in front. But, when n becomes big,
+it's still better than n squared. And so, by sort of only caring about
+what happens in this sort of long scale behavior, we will be able to do
+this without seeing these constants, without having to care
+about these details. And in fact, this sort of asymptotic, large scale behavior is actually what you
+care about a lot of the time, because you really want to know: what happens when
+I run my program on very large inputs? And these different sorts of scalings do
+make a very large difference on that. So suppose that we have an algorithm whose
+runtime is roughly proportional to n and we want it to run it on a machine
+that runs at about a gigahertz. How large an input can we handle such that
+we'll finish the computation in a second? Well if it runs at about size n,
+you can handle about a billion sized inputs,
+before it takes more than a second. If instead of n,
+it's n log n it's a little bit slower, you can only handle inputs
+the size about 30 million. If it runs like n squared,
+it's a lot worse. You can only handle inputs
+of size about 30,000 before it starts taking
+more than a second. If the inputs are of size 2 to the n, it's incredibly bad, you can only handle
+inputs of size about 30 in a second. Inputs of size 50 already take two weeks,
+inputs of size 100 you'll never ever finish. And so the difference between n and
+n squared and 2 to the n is actually really,
+really significant. It's often more significant
+than these factors of 5 or 100 that you're seeing from other things. Now just to give you another feel of sort
+of how these sort of different types of runtimes behave, let's look at some
+sort of common times that you might see. There's log n,
+which is much smaller than root n, which is much smaller than n,
+which is much smaller than n log n, which is much smaller than n squared,
+which is much smaller than 2 to the n. So, if we graph all of these, you can see that these graphs sort
+of separate out from each other. If you just look at them at small inputs,
+it's maybe a little bit hard to tell which ones are bigger, there's a bit of
+jostling around between each other. But if we extend the graph outwards a bit,
+it becomes much more clear. 2 to the n starts after
+about 4 really taking off. Really just 2 to the n just shoots
+up thereafter and becomes 20 or 30, it just leaves everyone
+else in the dust. N squared keeps up a pretty sizable
+advantage though against everyone else. N log n and n also are pretty
+well separated from the others. In this graph, root n and log n seem
+to be roughly equal to each other, but if you kept extending,
+if you let n get larger and larger, they'd very quickly
+differentiate themselves. Square root of 1 million is about 1,000. Log of 1 million is about 20. And so really as you keep going out,
+very quickly the further out you go the further separated these
+things become from each other, and that's really the key idea
+behind sort of asymptotics. We don't care so much about the constants, we care about what happens as your inputs
+get very large, how do they scale. So that's it for today. Come back next lecture. We'll talk about in sort of detail
+what this actually means and how to actually get it to work. So until next time.

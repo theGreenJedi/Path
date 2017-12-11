@@ -1,0 +1,138 @@
+Hello everybody,
+welcome back to the Data Structures and Algorithm specialization and
+the Algorithmic Toolbox course within it. This is the last lecture in
+the introductory unit and here we're going to give sort
+of an overview of the course. And in particular, what we're going to
+do is we're going to talk about sort of the philosophy of the course, and
+how it fits into the what we're going to be teaching you within
+the rest of this course. So, there's a problem. Algorithm design is hard, and
+in particular it's hard to teach. And by this I actually mean
+something pretty specific. Now, algorithms solve many,
+many different problems. You can use them to find paths
+between locations on a map, or find good matchings with some property,
+or identify images in a photograph. Many, many different sort of
+unrelated sounding problems can all be solved by algorithms. And because the sorts of things that
+an algorithm problem might ask you to do are so varied, there's no unified technique that
+will allow you to solve all of them. And this is different from what you see in
+a lot of classes, when you're learning linear algebra they talk about how do you
+solve systems of linear equations. And they teach you some technique,
+like row reduction, and then you're sort of done. You just sort of need to practice it, and you can solve any
+system of linear equations. They give you a system
+of linear equations, you turn the crank on this row reduction
+technology and out pops an answer. For algorithms there
+isn't that sort of thing. There's no general procedure where I give
+you an algorithms problem and you sort of plug it into this machine and turn a crank
+and out pops a good algorithm for it. And this makes it hard to teach. If there was such a thing, we could just
+teach you, here's this thing that you do. You do this, and you'll have a good algorithm for
+any problem you might run into. And it's harder than that. I mean, sometimes,
+in order to find a good algorithm, it requires that you
+have a unique insight. You're working on some problem that
+no one's ever looked at before. In order to find a good algorithm for it,
+you need to come up with some clever idea that no one else has
+ever come up with before. This is why sort of algorithms are so
+well studied, why they're such an active
+field of research. There are still so many different new
+things yet to be discovered there. And we certainly can't teach you things
+that haven't been discovered yet. And we also can't teach you
+things custom tailored to the problems that you are going to run
+into in your life as a programmer. So since we can't teach you everything
+you need to know about how to solve all of your algorithm problems,
+what can we teach you? Well, there are sort of two things. One thing that we can definitely give
+you is practice designing algorithms. We're going to have lots of homework
+problems with lots of things for you to work on, and
+this will give you practice, how do you, given a problem you haven't seen before,
+come up with a good algorithm for it? Once you have the algorithm,
+how do you implement it and make sure everything works and
+runs reasonably well? That's something you can practice. And it turns out that for the type of
+problems where they're sort of very general and can be many different things,
+I mean, it's possible to solve a lot of them, and one of the ways to be
+able to solve them is practice. But we're also going to do more. We're not just going to throw you in
+the deep end and say, try to swim, try to program all of these algorithms. There is something useful. We can't teach you a generic
+procedure that will solve any algorithms problem for you. But what we can do is we can
+give you some common tools. Some very useful tools for
+algorithm design. And especially in this first
+course in our specialization we're really going to focus on helping
+to build up your algorithmic toolbox. And in particular, this course is going
+to focus on three of the most common and most generally applicable
+algorithmic design techniques. The first of these is greedy algorithms. This is something where you're trying
+to construct some big object, and the way you do it is you sort of make
+one decision in the most greedy, locally optimal way you can. And once you've made that decision you
+make another decision in the most greedy, locally optimal way you can. And you just keep making these decisions
+one at a time until you have an answer. And surprisingly somehow making
+these locally optimal decisions gives you a globally optimal solution. And when this happens it gives you
+very clean algorithms and it's great. That's the first thing we'll talk about. Next, we'll talk about divide and conquer, which is a technique where you've got
+some big problem you're trying to solve. What you do is you break it into
+a bunch of little pieces, you solve all the pieces, and then you put their answers
+together to solve the original thing. Finally we'll talk about
+dynamic programming. This is a little bit more
+subtle of a technique. This is what you get when you've got some
+sort of large problem, that has sort of a lot of, not sub-problems, but
+sort of related problems to it. And this sort of whole
+family of related problems, their solutions sort of depend on one
+another in a particular type of way. And when you have it there's
+this great trick that you have, where you sort of start at the small
+problems at the bottom of the pile. And you solve all of them. And you sort of keep track
+of all of your answers. And you use the answers
+to the small problems, to build up to obtain answers to
+the larger and larger problems. So these are what we're
+going to talk about. Each of the techniques we're going to talk
+about, how you recognize when it applies, how do you analyze it when it applies, and some practical techniques about
+how to implement, how to use them. All that good stuff. So there's one other thing before
+we let you go into the fun world of greedy algorithms that you should
+keep in mind throughout this course, and that's that there are these, maybe,
+different levels of algorithm design. There's sort of different levels
+of sophistication that go into it. At sort of the very lowest level,
+or top of this slide, I guess, there is the naive algorithm. This is sort of a thing where you
+take the definition of a problem and you turn it into an algorithm, and
+we saw this for Fibonacci numbers and greatest common divisors. You sort of interpreted the definition
+of the thing you wanted to compute as an algorithm, and you were done. Now, these things are often very slow,
+as we saw. Often they look like in order to find
+the best way of doing something, we enumerate all ways to do it, and
+then figure out which one's the best. On the other hand, these are slow, but
+it's often a good idea to first come up with a naive algorithm, just make sure
+you have some algorithm that works. Sometimes this works well and
+often you can just be done with it. Other times, it's too slow, but
+at least you made sure that you understood what problem you were working on and
+have something that runs. But after that,
+the next thing that you want to do, if this naive algorithm is too slow,
+is you try and look at your tool box. You say, are there any standard
+techniques that I know that apply here? Maybe there's a greedy algorithm
+that solves this problem, or maybe I have to use a dynamic program. But if you can find one of these
+standard techniques that work, often that doesn't involve too
+much effort on your part, and gives you something
+that works pretty well. Now once you have something that works,
+you often want to optimize it. And there are lots of ways to
+improve an existing algorithm. Reduce the runtime from n-cubed
+to n-squared or n-squared to n. And to do this,
+there are just a whole bunch of things. Maybe sometimes you could just sort of
+rearrange the order in which you do the operations to cut out
+some of the work that you do. Sometimes you have to introduce
+a data structure to speed things up. There are a bunch of ways to do this. We'll talk a little bit
+about how this works. And these three levels are things that
+you should be comfortable with and able to apply pretty well
+by the end of this course. However, sometimes these
+three are not enough. Sometimes a naive algorithm is just too
+slow, the standard tools don't apply, there's nothing that you can
+really optimize to improve things. Sometimes in order to get a workable
+algorithm, what you need is magic. You need some unique insight that
+no one else has ever had before. You need some sort of clever new idea and
+these, there's only so much we can do to teach
+you how to produce magic. We will show you some examples of things
+that really did have clever ideas that maybe you can't reproduce
+the thought process like, how do you come up with this crazy idea,
+that just happens to make this work? You should at least be able to appreciate
+the sort of thought that goes into this sort of thing. In any case it's something to keep
+in mind when looking on that, when thinking about our problems, and
+what sort of things are expected of you. In any case, that is basically it for
+the introductory segment. We've talked a lot about sort of
+why algorithms are important and given you some examples. We've talked about asymptotic notation, but now it's time to let you
+go to the rest of the course. The rest of the course will keep giving
+you exercises to hone your skills, and each unit of this course will cover
+one of these major techniques. After I leave you with the end of
+the introduction, Michael will pick up and talk to you about greedy algorithms. Next off, Neil will talk to
+you about divide and conquer. Finally, Pavel will have
+a unit on dynamic programming. Each of these, they will talk to you
+about where the technique applies, how to analyze it, how to implement it,
+all that good stuff. But this is where I leave you, I hope
+you enjoyed the introduction, and I will put you in Michael's very capable hands to
+start learning about greedy algorithms starting in the next lecture. So, until then, farewell.

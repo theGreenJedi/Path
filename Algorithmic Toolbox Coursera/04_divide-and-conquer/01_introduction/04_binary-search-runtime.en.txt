@@ -1,0 +1,103 @@
+Hi, in this video we're going to be
+looking at the run time of BinarySearch along with looking at an
+iterative version of it. So here's our BinarySearch
+algorithm again. We look in the middle, if it's not found, then we either look in the lower half or
+the upper half. So whats our recurrence relation for
+the worst-case runtime? Well, the worst case is if
+we don't find an element. So were going to look at T(n) Is
+equal to T of roughly n over 2 + c. We have a floor there of n
+over 2 because if n is odd, let's say there are five elements,
+then the question is: how big is the problem
+size on the next call. So if we have five elements we're going to
+either end up looking in the upper half of the array. Those two elements or the lower half
+of the array, those two elements because we skipped the midpoint. We already checked them. Plus some constant amount of work to add
+together, to calculate the midpoint. As well as checking
+the midpoint against the key. And then our base case is
+when we have an empty array. And that's just a constant
+amount of time to check. So what's the runtime look like? We got our original size n, and
+we're going to break it down, n over 2, n over 4. All the way down. How many of these problems are there. Well, if we're cutting something
+in two over and over again. It's going to take log base two such
+iterations until we get down to 1. So the total here,
+is actually log base two of n + 1. The amount of work we're doing is c. So at each level, we're doing c work. So the total amount of work if we sum it, is just the sum from i=0
+to log base 2 of n of c. That is just log base 2 of n + 1, that is
+log base 2 of n, that quantity, plus one times c. And that is just theta of
+log based two of n, but really what we'd normally say is theta of
+log n, because the base doesn't matter. That's just a constant
+multiplicative factor. All right,
+what's the iterative version look like. The iterative version has the same
+parameters low, high, and key. And we have a while loop that goes
+through similar to the base case so in the base case of the recursive version
+we were stopping if high is less than low. Here, we have a while loop where the while
+loop stops if high is less than low. We calculate the midpoint and
+then again check the key. If it matches the element at the midpoint
+we return the midpoint. Otherwise, if the key is less than the element, we know we're in
+the first half of the array and so instead of making a new recursive call
+like we did in the recursive version we have the original array. And we want to look at the first half of
+it so we're going to change the value of high and that will be mid minus one
+because we already checked mid. Otherwise, we want to look in the upper
+half of the array so we move low up. If we reach the end of the while loop. That is if we drop out of the while
+loop because high is less than low. That meant we have nothing more to search. We have an empty array. And therefore,
+we didn't find the element in the array. We're going to return low minus 1. So the same result as
+the recursive version. The difference is we won't be
+using the stack space that the recursive version uses. You remember we talked two videos ago
+about this real-life example where we had five languages and we were translating
+words between any two of those languages. The way we had that represented
+was parallel arrays, so that at any given index,
+each of the element in the arrays represented words that were
+the same in all those languages. So for instance,
+chair in English is at index two, and in Spanish that's silla and
+in Italian it's sedia. The problem was it took a long time to look,
+right? We had 50,000 elements in our arrays, and
+it took like ten seconds for searching, because we had to really
+search through all of them if it wasn't there, on average,
+half of them, just 25,000. So one question might be,
+why didn't we use a sorted array? Right? You could imagine, for
+instance, sorting these arrays. Here they're sorted. The good part is, it's easy to find a
+particular word in a particular language. So I can find house in English,
+for instance, and find what index that is at very quickly,
+using binary search. The problem is, I no longer have this correspondence,
+because the order of the words that are sorted in English is different from
+the order of the words sorted in Spanish. So if I look at chair, for instance,
+in English, it no longer maps to silla. So instead, if I look at chair and
+that's to casa. So although we can find a particular
+word in our source language, we don't know the corresponding
+word in the target language. So the solution was to try and
+find some way we could do sorting and yet still preserve this relationship
+where everything at an index meant the same translated word. The way
+to do that was an augmented set of arrays. So what we really did was keep these
+augmented arrays which were pointers back into the original
+arrays in sorted order. So we're having a kind
+of level of indirection. So if I look at English for example, the
+order of the words in English is chair, house, pimple. Well, what order is that
+in the original array? It is first element 2, and
+then element 1, and then element 3. So if you want to do a binary search,
+you can use this sorted array. Whenever you want to
+look at what an element is in that represented sorted array. So for instance,
+if we looked at the middle element, which in the sorted array is 2, it has
+the value 1 and that says go find house. So we basically,
+say house is sort of at element 2 and chair is at element 1 and
+pimple's at element 3. The Spanish, of course,
+has different mapping, so in Spanish, the first sorted word
+happens to be the first word in the array. The second sorted word is the third
+word in the Spanish array; and the third sorted word, silla,
+is the second element. So what happened when we ran this? Well what happened,
+we had a space time trade off. We had to pay extra space. And there were, of course, not only just English
+ and Spanish sorted but also French, Italian, and German. So,  five arrays, extra arrays. Each array, had 50,000 entries in it and what was
+the size of each element of the array? Well, it represented a number
+from one to 50,000 that can be represented in
+16-bits which is two bytes. So we had 50,000 elements times 2 bytes, that is 100,000 bytes
+times 5 is 500,000 bytes. So about a half a megabyte,
+which today is almost nothing. And even then,
+was certainly doable 20 years ago. That's the cost we have in space. What is the benefit that we get. Well, instead of having to do let's
+say 50,000 look ups in the worst-case. Instead, we have to do log
+base two of 50,000 lock ups. So log base 2 of 50,000, that's about, let's
+see, log base of 1,000 is about ten because two to the ten equals 1024, so
+we have another factor of 50 to go. Log base 2 of 50 is around, let's say six because I know that 2 to
+the 5th is equal 32, 2 to the 6th equals 64. So, what that means is, we have 16 references we have to
+do the array instead of 50,000. That's almost a factor of a thousand, so what that ended up meaning is that
+when the user clicks translate, instead of taking ten seconds,
+it was what appeared to be instantaneous. It was well under a tenth of a second. So in summary, what we've seen is that the runtime of
+binary search is big theta of log n. Substantially quicker than the big
+theta of n that linear search takes. So sorted arrays really help. In the next lesson we're going to
+be looking at a more complicated application of divide and conquer, where we actually have multiple
+subproblems instead of just one subproblem.

@@ -1,0 +1,183 @@
+In this video we will be designing
+a dynamic formatting solution for the Knapsack without Repetitions problem. Recall that in this problem we're
+give a single copy of each item. So this is also to remind you the formal
+statement of the problem, so we emphasize once again that we are not allowed to take
+more than a single copy of each item. Well, we already know that our previous
+same reason cannot produce the right answer for our new very namely for
+the Knapsack without repetitions problems. Well this is simply because in our
+toy example is that optimal value for the Knapsack with repetitions was
+48 while the optimal value for the Knapsack without repetitions was 46. So this means that if we just
+run our previous algorithm, it will produce an incorrect result. Still it is important to
+understand where our algorithms, where our reasoning more
+generally fails for this problem. So once again, let's consider
+an optimal subset of items for a knapsack of total weight capital W. And assume for the moment that we know
+that it contains the nth element. That is the last item. So we argue, well similarly to the
+previous case that if we take this item out of the current knapsack, then what
+we get must be an optimal solution for a knapsack of smaller weight,
+namely of total weight W- wn. So if we take we the smaller solution and
+we add the nth item to it, we get an optimal solution for
+the initial knapsack of total weight, W. I assume however,
+that the optimal solution for the smaller knapsack,
+already contains the nth item. This means that we cannot add another
+copy of the nth element to it, right, because then the resulting
+solution will contain two copies of the nth element which is now
+forbidden by the problem formulation. So this is why we need to come up with
+a different notion of a subproblem. So still, let's take a closer
+look at our optimal solution. It is not difficult to see
+that there are only two cases, either it contains the lost item,
+or it doesn't contain it. I assume that it contains, and let's again take this nth item
+out of our current solution. So what is left? First of all, it is some solution for
+a knapsack of total weight, capital W- wn, and
+it also uses only items from 1 to n- 1, because, well,
+we just took out the nth item, right? If, on the other hand,
+the initial optimal solution for the knapsack of total weight W
+does not contain the nth item, well, then it contains only
+items from 1 to n minus 1. Right? Well this simple observation
+will help us to get the right definition of a subproblem for
+this version of the knapsack problem. Well on the previous slide
+we argued as follows. Consider an optimal solution for
+a knapsack of total weight capital W. And there are two cases. Either it can contain the last item or
+it doesn't contain. If it contains we can take it out,
+and reduce the problem for small knapsack using only
+items from one to n minus one. On the other hand, if it doesn't
+contain the nth item, then we'll reduce it to another case when the knapsack
+only uses items from 1 to n-1. In any case, we reduce the number
+of items and in the first case, we also reduce the size of the knapsack,
+the total weight of the knapsack. We might continue this process,
+and express the solution for all sub-problems through
+solutions to force up subproblems. If we continue in the same fashion
+what we get somewhere in the middle is a solution for a knapsack of some
+weight that uses some first i items. Well let's just use this as
+a definition of our subproblem. Namely, for any w, from 0 to W, and for any i, from 0 to n,
+let's denote by value of w and i the maximum value that can be achieved
+by using only items from 1 to i, and whose total weight is at most w. Right, then it is easy to
+express it through solutions for smaller such problems. Once again, value of w and i,
+is a subset, is an optimal value of a subset, of the first items
+who stole the weight is utmost w. So we know that in this optimal subset, either there is the i-th item or
+the i-th item is not contained in it. So there are two cases. So we need to select
+the maximum out of two cases. And the first case if we take
+the i-th item out what is left is an optimal solution for
+the following problem. We are allowed only to use the first
+i-1 items and the total weight should be no more than w-wi, so
+this is the first term under the maximum. In the second case, if the i-th item
+is not used in an optimal solution, then we just know that the optimal
+solution is the same as for the knapsack of total weight, W,
+using only the first i- 1 items. So we managed to express the solution for our problems through solutions for
+smaller sub-problems. And this is probably
+the most important thing in designing dynamic
+problem in algorithms. We now done our recurrent formula
+into a dynamic problem in algorithm. As usual, we start from initialization
+namely with your set all the values of 0, j to 0 for all j and
+all the values of w, 0 to 0. Well, this just expresses the fact
+that if we have no items, well, then the value is zero. If we have the knapsack
+of total weight zero, then the total value's also zero,
+of course. Then recall, now, we need to somehow
+compute, all other values of w, i. Recall that we expressed value
+Wi of Wi through values of W, smaller w and i- 1 and W and i- 1. This means that we always
+reduce the problem from Wi to something with smaller
+number of items, to i- 1. This actually helps us to understand that it makes sense to gradually increase
+the number of allowable items. And this is why we have in this pseudocode
+an outer loop where i goes from 1 to n. When i is fixed,
+we will compute all the values of W, i. So for this, we also go from W equal
+to 1 to capital W and do the following. So now, i and W are fixed,
+we need to compute value of W, i. First, we just check what is the value of,
+what is the solution for the subproblem when we use
+the knapsack of the same weight w but we only use the first i-1 items. This is implemented as follows. We first just assign value of w,
+i to value of w, i-1. Then we need to check whether we can
+improve this value by using the i-th item. First of all we can only do this if
+the weight of the ice item does not exceed the weight of the current
+knapsack which is just W. So, if it doesn't exceed we see what
+happens if we take an optimal value for the knapsack of the total
+weight w minus wi. That is filled only by
+elements from 1 to i minus 1, and add the i-th element to it. If it gives a larger value than we
+currently have, we will update the value of wi, so in the end we just return
+the value of capital w and n. Because this is the solution
+to our initial problem. So this a solution for
+a knapsack of size capital w that uses just all the n items, right? Now so it is clear that this
+algorithm is correct just because it directly implements the recurrent
+formula that we already discussed. So let's analyze its running time. It is not difficult to show, again, that
+its running time is actually the same. It is again n multiplied by W. Well, this is again just
+because we have two loops here. So this is the first loop
+with n iterations, and this is the inner loop with W iterations. And what is going on inside
+only takes some constant time. Now let's apply the algorithm that
+we've just designed to our toy example. Recall that we need to store
+the values of all subproblems for Wi, for all W from zero to ten, and
+all i from zero to four, in our case. For these purposes, it is natural
+to use a two-dimensional table, or two-dimensional array. You can see such a two-dimensional
+array on the slide already filled in. So here we have i, so all the rows of our columns are by all possible way of i, and all the columns in this set
+by all possible values of W. Right, we start by initializing
+the first row, and the first column of this table by zero. That is, we fill this row by zeroes and we fill this column by zeroes also. Then we start filling in
+this table row by row. That is, we first fill in this cell,
+then this cell, then this cell, then this cell, and so on. So we go like this. So we first fill in this row,
+then fill in this row, then fill in this row and
+then fill in this row. So the results in value 46 is actually the answer to our initial problem. Now, let me show you how some particular
+value, just through this trait, let me show you how some particular
+value in this table was computed. For example, consider this cell. So formally, this is value, value(10, 2). Which means that this is an optimal
+value of a knapsack of total weight 10 that only uses
+the first two items. So assume that we don't
+know what to put here. So we just need to compute it right now. So let's argue as we did before. So this is a knapsack of total weight
+10 that uses only the first two items. Well, we then say that the second
+item is either used or not. So if it is not used,
+then this is the same as filling in the Knapsack of total weight
+ten just using the first item. And we already know this value
+because it is in the previous row. So this is value 10, 1, right? So the value in this case is 30. On the other hand,
+if the second item is used, then if we take it out,
+what is left is an optimal solution for a knapsack of total weight 10 minus 3. Because 3 is the weight
+of the second item, which means that it is an optimal
+solution for a knapsack of size 7. Of total weight 7 that
+only uses the first, that is only allowed
+to use the first item. Also, if we add this item to, if we add the second item to the solution,
+we get 30 plus 14. Which is much better than without
+using the second item, right? So that's why we have 44 here. And also for this reason we
+fill this matrix row by row. So now that when we need to
+compute the value of this cell, we already have computed
+the value of these two cells. So that's why we fill our
+metrics exactly row by row. Now let me use the same example to illustrate an important technique
+in dynamic programming. Namely reconstructing an optimal solution. Reconstructing an optimal solution in
+this particular problem I mean finding not only the optimal value for
+the knapsack of size of total weight. But the subset of items that lead
+to this optimal value itself. For this we first create
+a boolean array of size four. In this array, we will mark,
+for each item, whether it is used in
+an optimal solution or not. Now what we're going to do is to
+back trace the path that led us to the optimal value, 46. In particular, let's try to understand
+how this value of 46 was computed. Well, first of all,
+46 is formally value of 10, 4, that is is an optimal value for a knapsack of total weight ten
+using the first four items. We argued that the fourth
+item is either used or not. If it is not used, then this value
+is the same as the value 10, 3, which is shown here. That is the value of the knapsack of the
+same weight, using the first three items. If on the other hand it is used, then what
+is left must be an optimal solution for a knapsack of size 10 minus 2 which is 8,
+that uses also the first three items. Well this value is already computed,
+it is 30, so we need to compute
+the maximum among 30 plus 9, because, well the value of
+the last item is 9 and 46. In this particular case there,
+the maximum is equal to 46 which means that we decided at this point
+not to use the last item, right? So we put 0 into our boolean array to
+indicate this, and we move to this cell. Again, let's try to understand
+how this value was computed. It was computed as
+the maximum value of two numbers which depend on
+the following values. So either we do not use the third item,
+then it is the same, has the value of this cell or
+we use the third item. In this case, what remains is
+an knapsack of size, of total weight 6, and using the first two items and
+its value is 30. Plus the weight of the third item,
+which is 16. In this particular case,
+30 plus 16 is larger than 44, which means that this value of 46
+was computed using this value. This, in turn, means that we
+decided to use the third item. Let's mark it by putting
+1 into our boolean array. Now we stay in this cell and
+we try to understand how it was computed. It was computed as
+a maximum over this 30 and this 0, plus fourteen. Right, in this case,
+the first value is larger so we move to this cell and we mark that
+we decided not to use the second item. Okay and finally,
+we realize that we arrived at this value 30 from the right,
+from the left upper corner. Right? So, this way we reconstructed
+the wall optimal solution. Once again, we backtraced the path
+that led us to the optimal value. Here, what is shown here, is that we
+decided to use the first item and the third item. So let's check that it indeed
+gives us the optimal value of 46. So indeed if we compute the sum
+of the weight of the first and the third item, it is 10. And while the total value is
+30 plus 16 which is 46 indeed. And as I said before this technique
+is usually used in dynamic programming algorithms to
+reconstruct the optimal solution.

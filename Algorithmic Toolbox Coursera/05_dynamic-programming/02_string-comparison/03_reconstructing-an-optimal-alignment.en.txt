@@ -1,0 +1,49 @@
+We now know how to compute the edit
+distance or to compute the optimal alignment by filling in the entries
+in the dynamic programming matrix. But it doesn't tell us yet
+how to construct the alignment two rows with the first row
+representing the first sequence and the second row representing
+the second sequence. Here's an idea. Let's use the backtracking pointers
+that we constructed while filling in the dynamic programming matrix to reconstruct
+optimal alignment between strings. We can start by noting
+that any path from (0, 0) to (i, j) in the
+dynamic programming matrix spell an alignment of an i prefix
+of A with a j prefix of B. For example let's start the line in
+the sequences, which means let's start traveling from the point 0, 0 to the point
+n, m in our dynamic programming matrix. As soon as we move along diagonal left it
+will correspond to either mismatch or match, then we'll continue
+using horizontal or vertical edges and it will correspond
+to insertions or deletions. Then we will use once again diagonal edge. In this case it is a match,
+and you'll continue by constructing the
+n-alignment of two strings. Please note that the constructed path
+corresponds to distance A and is not an optimal alignment because we know that
+an optimal alignment distance is 5. To construct an optimal alignment we will
+use the backtracking pointers by starting from the last vertex in this matrix particularly from this vertex where
+the added distance is recorded as 5. Using backtracking pointers we see that there are two possible ways to
+arrive to this last vertex. Let's arbitrarily choose one of them. One of them corresponds to a mismatch and
+another corresponds to insertion. So let's arbitrarily choose a mismatch
+edge that will correspond to mismatch between j and i,
+then from the previous point there is only one way to move into this point and
+it will correspond to an indel that will continue further,
+match, further, further, further, further, and we will finally
+arrive to the initial point at the same time constructing the optimal
+alignment between two strings. The output alignment pseudoode
+implement's this idea. We simply look at the backtracking
+pointers that enters in the node (i, j). If they arrive to node (i, j)
+by using a vertical edge that we will simply output
+one column of the alignment with a of i in the first row. If on the other hand it corresponds
+to horizontal edge we output column with b of j in the second row,
+and if it corresponds to a diagonal
+edge we output a column of alignment with a of i in the first
+row and v of j in the second row. It appears that we actually need
+to store all backtracking pointers to output alignment, but
+this slightly modified pseudocode tells you that you can compute
+backtracking pointers by analyzing entries in the dynamic programming
+matrix and thus saving a little space. Edit distance is just one many applications of string comparisons
+in various disciplines that range from analyzing internet pages
+to finding similar genes. We started this lecture from
+the example of gene hunt for cystic fibrosis: one of the first
+successes of the human genome project. If you want to learn more about
+comparing genes, protein, and genomes you may enroll in the Coursera
+specialization called Bioinformatics or you can read the book Bioinformatics
+Algorithms: the Active Learning Approach.

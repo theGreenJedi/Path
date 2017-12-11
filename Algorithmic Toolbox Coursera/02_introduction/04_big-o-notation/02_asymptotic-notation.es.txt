@@ -1,0 +1,48 @@
+Hola. Bienvenidos de nuevo. Hoy vamos a empezar a hablar sobre notación asintótica. Entonces, aquí vamos a introducir esta idea de notación asintótica, y describir algunas de las ventajas de usarla. Entonces, la última vez nos topamos con este 
+problema, que es realmente interesante, que calcular tiempos de ejecución es realmente difícil, que si realmente 
+quieres saber en cuánto tiempo correrá un programa en particular en una determinada 
+computadora, es un caos terrible. Depende de saber todo tipo de detalle 
+fino sobre cómo funciona el programa, y todo tipo de detalle fino sobre cómo la 
+computadora funciona, qué tan rápida es, qué tipo de arquitectura de sistema es, es un gran despapaye. Y no queremos pasar por todo este 
+despapaye cada vez que tratamos de analizar un algoritmo, por lo que necesitamos algo que quizás es
+ un poco menos preciso pero más fácil de trabajar, y vamos a hablar sobre
+ la idea básica detrás de eso. Y la idea básica es lo siguiente. Hay muchos factores que tienen un
+ efecto en el tiempo final de ejecución, pero la mayoría de ellos cambiarán el
+ tiempo sólo por una constante. Si estás trabajando en una computadora
+ que es cientos de veces más rápida, le llevará una centésima del tiempo, 
+una constante multiplicativa. Si tu arquitectura de sistema tiene 
+multiplicaciones que le llevan tres veces más que las sumas, entonces, si tu programa está 
+cargado de multiplicaciones, en lugar de sumas, podría llevarse tres veces más,
+ pero es sólo un factor de tres. Si la jerarquía de tu memoria está 
+organizada en forma diferente, podrías hacer búsquedas en disco en lugar de en RAM. Y éstas serán mucho más lentas, pero 
+sólo por un múltiplo constante. Entonces, la idea clave es que, si proponemos una medida 
+de la complejidad del tiempo de ejecución que ignore todos estos múltiplos constantes, 
+donde correr en tiempo n y correr en tiempo 100 veces n sea 
+considerado como lo mismo, entonces no tenemos que preocuparnos sobre todos estos 
+minuciosos detalles que afectan el tiempo de ejecución. Por supuesto, hay un problema con esta idea. Si ves que tienes tiempos de un segundo o una hora o un año, éstos solo difieren por múltiplos constantes. Un año es sólo algo así como 30 millones de segundos. Y entonces si no te preocupas por los 30 millones, 
+no puedes notar la diferencia entre un tiempo de ejecución de un
+ segundo y uno de un año. ¿Cómo le damos la vuelta a este problema? Bueno, hay una especie de solución rara a esto. No vamos a considerar los tiempos de 
+ejecución de nuestro programa con alguna entrada en particular. Vamos a ver lo que se conoce como 
+tiempos de ejecución asintóticos. Aquí se pregunta, ¿cómo se escala el 
+tiempo con el tamaño de la entrada? Conforme el tamaño de entrada n aumenta, ¿la salida se escala en proporción a n, o tal vez n^2?, ¿es exponencial en n? Todas estas cosas son diferentes. Y, de hecho, son tan diferentes, que
+ cuando n es suficientemente grande, la diferencia entre el tiempo n y el tiempo n^2 va a ser peor que
+ cualquier múltiplo constante. Si tienes un múltiplo constante de 1,000, 1,000n puede ser muy malo con ese numerote enfrente. Pero, cuando n se vuelve grande, 
+es aún mejor que n^2. Y entonces, sólo considerando lo que pasa 
+en este tipo de comportamiento a escala, seremos capaces de hacer 
+esto sin ver las constantes, sin  preocuparnos por estos detalles. Y, de hecho, este tipo de comportamiento asintótico a gran escala es lo que te
+ preocupa casi todo el tiempo, porque realmente quieres saber, ¿qué pasa cuándo corro
+ mi programa con entradas muy grandes? Y estos tipos diferentes de escalamientos
+ hacen una gran diferencia. Así que, supón que tenemos un algoritmo 
+cuyo tiempo de ejecución es aproximadamente proporcional a n y queremos correrlo en una máquina que corre 
+a aproximadamente 1 Giga Hertz. ¿Qué tan grande debe ser la entrada para que
+ terminemos el cálculo en un segundo? Bueno, si corre con tamaño n, puedes
+ manejar alrededor de un billón de entradas antes de que le lleve más de un segundo. Si en lugar de n es n log n, es un poco más lento, puedes manejar entradas del tamaño de aprox 30 millones. Si corre como n^2, es mucho peor, sólo puedes manejar entradas del tamaño de 30 mil, aprox, antes de que le lleve más de un segundo. Si corre como 2^n, es increíblemente malo, sólo puedes manejar 
+entradas del tamaño de 30 en un segundo. Entradas de tamaño 50 toman ya dos 
+semanas, entradas de tamaño 100, no vas a acabar nunca. Y entonces, la diferencia entre n y n^2 y 2^n es realmente muy significativa. Es aún más significativa que los factores de 5 o 100 que ves por otras cosas. Ahora, sólo para darte más idea de cómo estos diferentes tipos de tiempos se comportan, veamos algunos 
+tipos comunes que podrías encontrar. Está el log n, que es mucho menor que raíz de n, que es mucho menor que n,
+ que es mucho menor que n log n, que es mucho menor que n^2, 
+que es mucho menor que 2^n. Entonces, si graficamos todos, puedes ver que estas gráficas se separan una de la otra. Si sólo las ves con entradas pequeñas, 
+es a la mejor un poco difícil decir cuál es más grande, hay un poco de amontonamiento ahí entre ellos. Pero si extendemos la gráfica resulta mucho más claro, 2^n empieza realmente a despegar alrededor de 4. Despega y se vuelve 20 o 30, deja a todos los demás atrás en una nube de polvo. Sin embargo, n^2 también mantiene 
+una buena ventaja sobre los demás. Y n log n y n también se separan de las demás. En esta gráfica, raíz de n y log n parecen casi iguales, pero si sigues extendiendote en n, la haces más grande, se diferenciarán rápidamente entre ellas. La raíz cuadrada de un millón es mil. Log de 1 millón (base 2), es alrededor de 20. Y así, realmente, conforme sigues, 
+rápidamente, lo más lejos vas más se separan estas cosas entre ellas. Y eso es realmente la idea clave de la notación asintótica. No nos preocupamos mucho por las constantes, nos preocupamos por lo que pasa cuando 
+las entradas son muy grandes, cómo se escalan. Así que eso es todo por hoy, Regresa a la siguiente, hablaremos con detalle sobre lo que realmente significa, cómo lo ponemos a trabajar. Entonces, hasta luego.

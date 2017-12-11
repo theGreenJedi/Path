@@ -1,0 +1,315 @@
+1
+00:00:00,800 --> 00:00:01,400
+Hello everybody.
+
+2
+00:00:01,400 --> 00:00:02,360
+Welcome back.
+
+3
+00:00:02,360 --> 00:00:06,622
+Today, we're going to be talking about
+computing greatest common divisors.
+
+4
+00:00:06,622 --> 00:00:09,970
+So, in particular,
+what we'd like to do this lecture,
+
+5
+00:00:09,970 --> 00:00:12,980
+is we're going to define
+the greatest common divisor problem.
+
+6
+00:00:12,980 --> 00:00:15,560
+And, we're going to talk about
+an inefficient way to compute them.
+
+7
+00:00:15,560 --> 00:00:18,845
+And, next lecture we'll talk
+about how to do better.
+
+8
+00:00:18,845 --> 00:00:20,040
+So, okay.
+
+9
+00:00:20,040 --> 00:00:20,640
+What are GCDs?
+
+10
+00:00:21,770 --> 00:00:24,200
+So, suppose that you have a fraction,
+a over b.
+
+11
+00:00:24,200 --> 00:00:26,910
+And, you want to put it in simplest form.
+
+12
+00:00:26,910 --> 00:00:30,730
+Now, the standard way of doing this,
+is we want to divide the numerator and
+
+13
+00:00:30,730 --> 00:00:37,175
+denominator both by some d, to get
+some equivalent fraction, a/d / b/d.
+
+14
+00:00:37,175 --> 00:00:39,260
+Fair enough.
+
+15
+00:00:39,260 --> 00:00:42,210
+Now, what d do we want to use for this?
+
+16
+00:00:42,210 --> 00:00:44,550
+Well, it needs to satisfy two properties.
+
+17
+00:00:45,850 --> 00:00:50,330
+Firstly, d had better divide both a and
+b, since the new numerator and
+
+18
+00:00:50,330 --> 00:00:52,160
+denominator are both integers.
+
+19
+00:00:53,210 --> 00:00:57,190
+But, subject to that, we would like
+this d to be as large as possible.
+
+20
+00:00:57,190 --> 00:00:59,930
+So, that we can reduce the fraction
+as much as we possibly can.
+
+21
+00:01:01,190 --> 00:01:04,970
+So, turning this into a definition,
+we say that for two integers, a and
+
+22
+00:01:04,970 --> 00:01:07,640
+b, their greatest common divisor, or GCD,
+
+23
+00:01:07,640 --> 00:01:13,340
+is the largest integer d
+that divides both a and b.
+
+24
+00:01:13,340 --> 00:01:16,300
+Okay, so this is a thing that
+you use to reduce fractions.
+
+25
+00:01:16,300 --> 00:01:20,150
+However, it turns out that GCDs
+are a critically important
+
+26
+00:01:20,150 --> 00:01:22,360
+concept in the field of number theory.
+
+27
+00:01:22,360 --> 00:01:26,780
+The study of prime numbers, and
+factorization, and things like that.
+
+28
+00:01:26,780 --> 00:01:30,960
+And, because it's so important to number
+theory, it turns out that being able to
+
+29
+00:01:30,960 --> 00:01:34,880
+compute GCDs is actually very
+important in cryptography.
+
+30
+00:01:34,880 --> 00:01:40,650
+And, the fact that you can perform
+secure online banking is, in part,
+
+31
+00:01:40,650 --> 00:01:44,790
+due to the fact that we can efficiently
+compute GCDs of numbers in order for
+
+32
+00:01:44,790 --> 00:01:46,880
+our cryptographic algorithms to work.
+
+33
+00:01:48,460 --> 00:01:53,420
+So, because of this importance, we're
+going to want to be able to compute GCDs.
+
+34
+00:01:53,420 --> 00:01:57,920
+So, we'd like an algorithm that, given two
+integers, a and b, at say, at least 0,
+
+35
+00:01:57,920 --> 00:02:00,480
+we can compute the GCD of a and b.
+
+36
+00:02:01,570 --> 00:02:05,750
+And, just to be clear as to what
+kinds of inputs we care about,
+
+37
+00:02:05,750 --> 00:02:08,890
+we'd actually like to be able to
+run this on very large numbers.
+
+38
+00:02:08,890 --> 00:02:15,020
+We don't just want something that works
+for GCD of 5 and 12, or 11 and 73.
+
+39
+00:02:15,020 --> 00:02:20,243
+We'd like to be able to
+do things like the GCD of
+
+40
+00:02:20,243 --> 00:02:26,160
+3,918,848 with 1,653,264.
+
+41
+00:02:26,160 --> 00:02:31,060
+In fact, we'd also like to be able
+to compute much bigger numbers,
+
+42
+00:02:31,060 --> 00:02:31,860
+20, 50, 100, 1000 digits.
+
+43
+00:02:31,860 --> 00:02:35,950
+We'd still like to be able to get GCDs of
+numbers of those sizes pretty quickly.
+
+44
+00:02:37,740 --> 00:02:39,250
+Well, let's get started.
+
+45
+00:02:39,250 --> 00:02:42,890
+Let's start by just finding
+an algorithm that works.
+
+46
+00:02:42,890 --> 00:02:47,210
+What we'd like is the largest
+number that divides both a and b.
+
+47
+00:02:48,250 --> 00:02:49,480
+So, one thing we can do,
+
+48
+00:02:49,480 --> 00:02:53,170
+is we can just check all of
+the numbers that are candidates for
+
+49
+00:02:53,170 --> 00:02:57,100
+this, figure out which ones divide a and
+b, and return the largest one.
+
+50
+00:02:58,590 --> 00:03:01,150
+So, there's an easy implementation for
+this.
+
+51
+00:03:01,150 --> 00:03:03,830
+We create a variable called best,
+and set it to 0.
+
+52
+00:03:03,830 --> 00:03:06,530
+This just remembers the biggest
+thing we've seen so far.
+
+53
+00:03:07,870 --> 00:03:10,624
+We then let d run from 1 to a + b,
+
+54
+00:03:10,624 --> 00:03:14,921
+since this is the range of
+numbers that are valid.
+
+55
+00:03:14,921 --> 00:03:19,692
+Now, if d divides a, and d divides b,
+well, since d is increasing,
+
+56
+00:03:19,692 --> 00:03:22,754
+this has to be the new
+best that we've seen.
+
+57
+00:03:22,754 --> 00:03:26,146
+So, we set best equal to d, and
+then, at the end the of the day,
+
+58
+00:03:26,146 --> 00:03:28,460
+we return back the best thing we've seen.
+
+59
+00:03:29,490 --> 00:03:31,620
+So, that's a perfectly good algorithm.
+
+60
+00:03:31,620 --> 00:03:32,700
+It works.
+
+61
+00:03:32,700 --> 00:03:35,030
+Unfortunately, it's a little bit slow,
+
+62
+00:03:35,030 --> 00:03:38,880
+because we need to run through
+this for loop a + b many times.
+
+63
+00:03:39,990 --> 00:03:45,290
+And, this means that, even once a and
+b are, say, 20 digit numbers, it's already
+
+64
+00:03:45,290 --> 00:03:49,280
+going to be taking us at least thousands
+of years in order to run this computation.
+
+65
+00:03:50,430 --> 00:03:54,440
+And, so that's not sufficient for the
+sorts of applications that we care about.
+
+66
+00:03:54,440 --> 00:03:56,710
+We're going to need a better algorithm.
+
+67
+00:03:56,710 --> 00:04:00,970
+So, come back next lecture, and we'll talk
+about how to find a better algorithm for
+
+68
+00:04:00,970 --> 00:04:02,500
+this problem, and what goes into that.

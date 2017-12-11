@@ -1,0 +1,236 @@
+1
+00:00:02,350 --> 00:00:06,550
+Hola a todos, bienvenidos de nuevo a la especialización
+en estructuras de datos y algoritmos.
+
+2
+00:00:07,630 --> 00:00:10,260
+Sólo quiero darles
+un breve aviso
+
+3
+00:00:10,260 --> 00:00:13,212
+sobre lo que vamos a hablar
+en las próximas dos lecciones.
+
+4
+00:00:13,212 --> 00:00:16,510
+Así, en las siguientes dos lecciones,
+vamos a zambullirnos directamente.
+
+5
+00:00:16,510 --> 00:00:20,600
+Vamos a ver un par de problemas
+algorítmicos, en particular
+
+6
+00:00:20,600 --> 00:00:24,080
+vamos a tratar algoritmos para
+calcular los números de Fibonacci
+
+7
+00:00:24,080 --> 00:00:27,320
+y algoritmos para calcular
+el máximo común divisor.
+
+8
+00:00:27,320 --> 00:00:31,150
+Podría parecer un poco raros para ser
+
+9
+00:00:31,150 --> 00:00:34,320
+los primeros algoritmos que vamos
+a ver en esta clase.
+
+10
+00:00:34,320 --> 00:00:38,160
+Son una especie de teoría de números y
+numéricos y no son
+
+11
+00:00:38,160 --> 00:00:42,480
+realmente similares de lo que hablaremos
+en el resto de la clase.
+
+12
+00:00:42,480 --> 00:00:45,150
+Podrías preguntarte por qué
+los vamos a ver y
+
+13
+00:00:45,150 --> 00:00:47,080
+en qué debemos poner atención.
+
+14
+00:00:47,080 --> 00:00:50,440
+Y esto es de lo que realmente
+vamos a hablar hoy.
+
+15
+00:00:50,440 --> 00:00:53,880
+En particular, estos dos temas han sido 
+elegidos porque eran los más claros
+
+16
+00:00:53,880 --> 00:00:59,150
+ejemplos que podemos pensar de por
+qué los algoritmos son críticamente importantes.
+
+17
+00:00:59,150 --> 00:01:04,280
+Por qué dar con un buen algoritmo
+es realmente importante en muchos problemas.
+
+18
+00:01:05,550 --> 00:01:06,800
+En particular,
+
+19
+00:01:06,800 --> 00:01:10,080
+ambos problemas tienen las siguientes
+propiedades muy interesantes.
+
+20
+00:01:11,280 --> 00:01:15,820
+Para empezar, ambos tienen un 
+algoritmo bastante directo.
+
+21
+00:01:15,820 --> 00:01:19,160
+Una vez que tienes la definición
+del problema que estás tratando
+
+22
+00:01:19,160 --> 00:01:20,040
+de resolver.
+
+23
+00:01:20,040 --> 00:01:23,570
+Y desde la que puedes más o menos
+inmediatamente extraer el algoritmo.
+
+24
+00:01:23,570 --> 00:01:26,180
+Tomas las palabras que tienes y
+
+25
+00:01:26,180 --> 00:01:28,940
+las interpretas como un algoritmo.
+
+26
+00:01:28,940 --> 00:01:32,520
+Y más o menos inmediatamente
+tienes algo de código y funciona.
+
+27
+00:01:32,520 --> 00:01:34,560
+Y calcula las cosas que quieres calcular.
+
+28
+00:01:35,950 --> 00:01:38,920
+Desafortunadamente, en ambos casos,
+
+29
+00:01:38,920 --> 00:01:43,730
+estos algoritmos directos son demasiado lentos.
+
+30
+00:01:43,730 --> 00:01:47,390
+Terminas con algoritmos que
+necesitan cientos de años para ejecutarse
+
+31
+00:01:47,390 --> 00:01:48,990
+incluso para entradas muy modestas.
+
+32
+00:01:50,240 --> 00:01:53,710
+Y esto no es aceptable para propósitos prácticos
+
+33
+00:01:53,710 --> 00:01:58,040
+no tienes milenios para esperar a
+que termine tu cálculo.
+
+34
+00:01:58,040 --> 00:02:00,510
+Y necesitas algo mejor y
+
+35
+00:02:00,510 --> 00:02:03,229
+resulta que en ambos casos hay algo mejor.
+
+36
+00:02:04,300 --> 00:02:07,620
+Hay un algoritmo ligeramente
+más complicado,
+
+37
+00:02:07,620 --> 00:02:12,040
+algo que tal vez requiere de una o dos
+ideas brillantes para hacer que funcione.
+
+38
+00:02:12,040 --> 00:02:15,240
+Este algoritmo algo más complejo
+funciona bien y
+
+39
+00:02:15,240 --> 00:02:17,280
+es increiblemente rápido.
+
+40
+00:02:17,280 --> 00:02:19,830
+Puedes manejar cualquier
+razonable entrada de estos 
+
+41
+00:02:19,830 --> 00:02:21,380
+problemas en un abrir y cerrar de ojos.
+
+42
+00:02:22,600 --> 00:02:26,830
+Y el propósito de todo esto es
+realmente mostrar con estos
+
+43
+00:02:26,830 --> 00:02:30,750
+ejemplos concretos que al
+menos en estos casos y
+
+44
+00:02:30,750 --> 00:02:33,210
+en otras muchas que vamos
+a ver a lo largo del curso,
+
+45
+00:02:33,210 --> 00:02:36,840
+encontrar el algoritmo correcto
+puede marcar toda la diferencia del mundo.
+
+46
+00:02:36,840 --> 00:02:39,730
+Es la diferencia entre tener un algoritmo que
+
+47
+00:02:39,730 --> 00:02:43,350
+necesita más tiempo que tu vida para finalizar y
+
+48
+00:02:43,350 --> 00:02:47,400
+un algoritmo que termina antes
+siquiera de que sepas que ha comenzado.
+
+49
+00:02:47,400 --> 00:02:50,680
+Y esto es realmente a lo que tienes que prestar atención.
+
+50
+00:02:50,680 --> 00:02:54,580
+Es por esto que es tan importante
+que encontremos buenos algoritmos.
+
+51
+00:02:56,170 --> 00:02:59,800
+Esto es lo que vamos a alcanzar, espero que
+disfrutes de las siguientes lecciones.

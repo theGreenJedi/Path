@@ -1,0 +1,305 @@
+1
+00:00:03,760 --> 00:00:05,060
+Hello, everybody, welcome back.
+
+2
+00:00:05,060 --> 00:00:09,010
+We're still talking about algorithms
+to compute Fibonacci numbers.
+
+3
+00:00:09,010 --> 00:00:10,460
+And in this lecture,
+
+4
+00:00:10,460 --> 00:00:13,630
+we're going to see how to actually
+compute them reasonably efficiently.
+
+5
+00:00:14,750 --> 00:00:18,060
+So, as you'll recall, the Fibonacci
+numbers was the sequence zero,
+
+6
+00:00:18,060 --> 00:00:22,790
+then one, then a bunch of elements, each
+of which is the sum of the previous two.
+
+7
+00:00:23,860 --> 00:00:28,960
+We had a very nice algorithm for them last
+time, which unfortunately was very, very
+
+8
+00:00:28,960 --> 00:00:35,090
+slow, even to compute the 100th Fibonacci
+number say. So we'd like to do better.
+
+9
+00:00:35,090 --> 00:00:38,530
+And maybe you need some idea for
+this new algorithm.
+
+10
+00:00:38,530 --> 00:00:42,450
+And one way to think about it is what do
+you do when you compute them by hand.
+
+11
+00:00:42,450 --> 00:00:43,020
+And in particular,
+
+12
+00:00:43,020 --> 00:00:45,560
+suppose we want to write down a list
+of all the Fibonacci numbers.
+
+13
+00:00:46,720 --> 00:00:49,280
+Well, there's sort of
+an obvious way to do this.
+
+14
+00:00:49,280 --> 00:00:53,240
+You start off by writing zero and
+one because those are the first two.
+
+15
+00:00:53,240 --> 00:00:56,550
+The next one going to be zero plus one,
+which is one.
+
+16
+00:00:56,550 --> 00:01:01,160
+The next one is one plus one which is two,
+and one plus two, which is three,
+
+17
+00:01:01,160 --> 00:01:03,130
+and two plus three, which is five.
+
+18
+00:01:03,130 --> 00:01:07,600
+And at each step, all I need to do is look
+at the last two elements of the list and
+
+19
+00:01:07,600 --> 00:01:08,340
+add them together.
+
+20
+00:01:08,340 --> 00:01:12,660
+So, three and five are the last two,
+I add them together, and I get eight.
+
+21
+00:01:12,660 --> 00:01:16,994
+And, this way, since I have all of
+the previous numbers written down,
+
+22
+00:01:16,994 --> 00:01:21,762
+I don't need to do these recursive calls
+that I was making in the last lecture,
+
+23
+00:01:21,762 --> 00:01:23,875
+that were really slowing us down.
+
+24
+00:01:23,875 --> 00:01:27,055
+So, let's see how this algorithm works.
+
+25
+00:01:27,055 --> 00:01:30,640
+What I need to do is I need to
+create an array in order to store
+
+26
+00:01:30,640 --> 00:01:33,881
+all the numbers in this
+list that I'm writing down.
+
+27
+00:01:33,881 --> 00:01:36,505
+The zeroth element of
+the array gets set to zero,
+
+28
+00:01:36,505 --> 00:01:41,440
+the first element gets set to one,
+that's to set our initial conditions.
+
+29
+00:01:41,440 --> 00:01:46,320
+Then as i runs from two to n, we need to
+set the ith element to be the sum of the i
+
+30
+00:01:46,320 --> 00:01:48,580
+minus first and i minus second elements.
+
+31
+00:01:48,580 --> 00:01:51,350
+That correctly computes
+the ith Fibonacci number.
+
+32
+00:01:52,350 --> 00:01:55,800
+Then, at the end of the day,
+once I've filled out the entire list,
+
+33
+00:01:55,800 --> 00:01:57,792
+I'm going to return the last
+element after that.
+
+34
+00:01:59,070 --> 00:02:01,870
+So, now we can say,
+this is another algorithm,
+
+35
+00:02:01,870 --> 00:02:05,530
+it should work just as well,
+but, how fast is it?
+
+36
+00:02:05,530 --> 00:02:08,000
+Well, how many lines of code did you use?
+
+37
+00:02:08,000 --> 00:02:09,990
+There are three lines of
+code at the beginning, and
+
+38
+00:02:09,990 --> 00:02:13,040
+there's a return statement at the end,
+so that's four lines of code.
+
+39
+00:02:14,380 --> 00:02:19,850
+Next up we have this for statement
+that we run through n minus one times,
+
+40
+00:02:19,850 --> 00:02:23,470
+and each time we have to
+execute two lines of code.
+
+41
+00:02:23,470 --> 00:02:28,340
+So adding everything together we find out
+that t of n is something like 2n plus two.
+
+42
+00:02:28,340 --> 00:02:31,790
+So if we wanted to run this
+program on input n equals 100,
+
+43
+00:02:31,790 --> 00:02:36,070
+it would take us about 202
+lines of code to run it.
+
+44
+00:02:36,070 --> 00:02:42,050
+And 202 is actually a pretty small number
+even on a very modest computer these days.
+
+45
+00:02:42,050 --> 00:02:46,102
+So essentially, this thing is going
+to be trivial to compute the 100th or
+
+46
+00:02:46,102 --> 00:02:51,390
+the 1,000th or the 10,000th Fibonacci
+number on any reasonable computer.
+
+47
+00:02:51,390 --> 00:02:55,010
+And this is much better than the results
+that we were seeing in the last lecture.
+
+48
+00:02:56,580 --> 00:02:59,980
+So in summary,
+what we've done in this last
+
+49
+00:02:59,980 --> 00:03:03,920
+few lectures, we've talked about the
+Fibonacci numbers, we've introduced them.
+
+50
+00:03:03,920 --> 00:03:05,990
+We've come up with this naive algorithm,
+
+51
+00:03:05,990 --> 00:03:10,640
+this very simple algorithm that goes
+directly from the definition, that
+
+52
+00:03:10,640 --> 00:03:15,120
+unfortunately takes thousands of years,
+even on very small examples to finish.
+
+53
+00:03:16,520 --> 00:03:20,870
+On the other hand, the algorithm we just
+saw is much better, it's incredibly fast
+
+54
+00:03:20,870 --> 00:03:24,820
+even on fairly large inputs and
+it works quite well in practice.
+
+55
+00:03:26,320 --> 00:03:27,880
+And so, the moral of this story,
+
+56
+00:03:27,880 --> 00:03:30,930
+the thing to really keep in
+mind is that in this case and
+
+57
+00:03:30,930 --> 00:03:35,370
+in many, many others the right algorithm
+makes all the difference in the world.
+
+58
+00:03:35,370 --> 00:03:37,910
+It's the difference between
+an algorithm that will
+
+59
+00:03:37,910 --> 00:03:42,050
+never finish in your entire lifetime and
+one that finishes in the blink of an eye.
+
+60
+00:03:43,400 --> 00:03:46,840
+And so,
+that's the story with Fibonacci numbers.
+
+61
+00:03:46,840 --> 00:03:49,810
+Next lecture we're going to talk about
+a very similar story that comes with
+
+62
+00:03:49,810 --> 00:03:51,970
+computing greatest common divisors.
+
+63
+00:03:51,970 --> 00:03:53,628
+So I hope you come back for that.
+
+64
+00:03:53,628 --> 00:03:56,580
+Until then, farewell.

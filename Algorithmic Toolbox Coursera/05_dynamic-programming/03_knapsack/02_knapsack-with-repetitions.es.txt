@@ -1,0 +1,92 @@
+En este vídeo, diseñaremos una 
+solución de programación dinámica para el problema de la mochila con repeticiones. Recuerda que en este problema, nos dan
+una cantidad ilimitada de cada objeto. Este es un enunciado formal del problema. Nos proporcionan n objetos con pesos
+w1, w2 y sucesivamente wn. Y sus valores son v1, v2, así hasta vn. Por W denominamos la 
+capacidad total o el peso total de la mochila. Nuestro objetivo es seleccionar un subconjunto
+de objetos donde cada objeto puede tomarse cualquier número de veces, tal que
+el peso total sea como mucho W , mientras que el valor
+total sea lo mayor posible. Para elaborar un algoritmo
+de programación dinámica, vamos a analizar la estructura
+de una solución óptima. Para ello, consideramos un subconjunto
+de objetos, de peso total como mucho W,
+cuyo valor total es máximo. Vamos a considerar algún elemento en él, veamos que pasa si eliminamos
+este elemento de esta solución. Lo que queda es un subconjunto
+de objetos cuyo peso total es como mucho W menos wi. ¿Verdad? Esto es fácil. Lo que es crucial para nosotros
+es que el valor total de este subconjunto restante debe ser óptimo. Me refiero a que debe la cantidad máxima
+de todos los subconjuntos de objetos cuyo peso total es como mucho
+W menos wi. ¿Por qué sucede eso? La
+mayoría de las neuronas que Bien, asumamos que existe algún
+otro subconjunto de objetos cuyo peso total es como mucho, W menos wi,
+pero cuyo valor total sea mayor. Entonces tomamos el mayor objeto y lo 
+devolvemos a este subconjunto de objetos. Lo que tenemos realmente es la solución
+a nuestro problema inicial con un valor superior. Me refiero a que su peso total 
+es como mucho W y su valor es superior al valor
+de nuestra solución inicial. Pero esto contradice el hecho de que 
+habíamos comenzado con una solución óptima. Dicho truco se conoce como
+el truco del corta y pega. Y se usa frecuentemente en el diseño
+de algoritmos de programación dinámica. Déjame repetir lo que acabo de demostrar. Si tomamos una solución óptima para
+una mochila de peso total W y sacamos algún elemento i de ella,
+entonces lo que queda debe ser una solución óptima para
+una mochila de menor peso. Esto sugiere que tenemos
+un subproblema separado para cada posible peso total
+desde cero a W. A saber, definimos el valor de w como el valor total óptimo de los objetos
+cuyo peso total es como mucho w. Esto nos permite expresar el valor de w
+usando los valores para mochilas de pesos menores. Es decir, para obtener una solución óptima para una mochila de peso total w,
+primero tomamos una mochila menor y una solución óptima para ella y le
+añadimos el objeto i a la misma. Así lo primero de todo debemos ser capaces
+de añadir un objeto i a la mochila de peso w, necesitamos que esta mochila sea como
+mucho de peso total w menos wi. Cuando añadimos el objeto i,
+incrementamos su valor en vi y lo último que no conocemos que elemento 
+añadir exactamente por esta razón simplemente repasaremos todos los posibles
+elementos y seleccionaremos el máximo valor. El valor máximo para la siguiente forma. valor de w menos wi más vi. Teniendo una fórmula recurrente para el valor de w que acabamos de
+discutir no resulta difícil implementar un algoritmo para resolver
+el problema de la mochila con repeticiones. Recordemos que hemos
+expresado la solución para una mochila a través de las soluciones
+de una mochila de menor peso. Esto significa que tiene sentido
+resolver nuestro problema de mochila en un orden de peso creciente. Hacemos esto en el pseudocódigo. Inicialmente, establecemos el valor de 0 a 
+0 simplemente para reflejar el hecho de que el valor total máximo posible para una
+mochila de peso 0 es claramente igual a 0. Después vamos a un bucle
+desde w = 1 hasta W. Y para cada una de estas w, simplemente calculamos
+el correspondiente máximo como sigue. Recorremos todos los objetos i
+tales que wi es como mucho w, y para cada uno de estos objetos i, vemos qué 
+ocurre si tomamos una solución óptima para una mochila de tamaño w menos wi
+y añadimos un objeto dentro de ella. Claramente en este caso,
+el valor total es el valor de W menos wi más vi, y el peso
+total es como mucho W. Esta es una solución factible para
+una mochila de peso total W. Comprobamos si el 
+resultado en valor es mayor del que tenemos actualmente y
+si es así actualizamos el valor de W. Si terminamos simplemente
+devolvemos el valor de W. Esta solución es claramente correcta
+porque simplemente implementa nuestra fórmula recurrente, ¿correcto? En particular este bucle sólo
+calcula el máximo de la diapositiva anterior. Vamos a estimar el tiempo
+de ejecución de este algoritmo. No resulta difícil ver
+que el tiempo de ejecución es O de n multiplicado por W. ¿Por qué sucede eso? La
+mayoría de las neuronas que Simplemente porque tenemos dos bucles aquí. Este es el primer bucle y 
+este es el segundo bucle. El primero tiene W iteraciones y el segundo tiene n iteraciones. n iteraciones. Lo que ocurre dentro del bucle, claramente
+necesita sólo un tiempo constante. Concluimos este vídeo aplicando
+nuestro algoritmo al ejemplo que hemos considerado unos minutos antes. En este caso, nos dan cuatro objetos
+y una mochila de capacidad total 10. Vamos a calcular el valor óptimo para todas las mochilas de tamaño
+total desde cero a diez. Lo que significa que tiene sentido almacenar
+todos estos valores simplemente en un array. Es lo que se muestra aquí en la diapositiva. Inicialmente este arreglo se
+rellena con ceros y vamos a ir rellenándolo con
+los valores de izquierda a derecha. La primera celda no obvia es dos. Este es el primer peso para el que
+ podemos añadir un objeto. En este caso, podemos 
+decir que para obtener una solución para una mochila de peso dos, podemos obtener una 
+solución para una mochila de peso total 0 y añadir el último elemento a ella. Esto nos da más nueve al valor. Esta es la única solución posible para esta celda, así que no necesitamos calcular el máximo. En este caso, el valor es igual a nueve. ¿Qué pasa con el valor de tres? En este caso, ya tenemos una elección. Podemos bien obtener una solución
+para un peso total de uno y añadir el cuarto elemento a la misma, o bien podemos obtener una solución óptima
+para una mochila de peso total cero y añadirla el segundo elemento,
+cuyo valor es 14. Entre estos dos valores,
+la segunda elección es mejor. Nos da una solución de valor 14,
+así que los escribiremos en esta celda. Ahora, para el valor de 4,
+ya existen tres alternativas. Vamos a considerarlas. Para ella podemos tomar una solución
+óptima para una mochila de peso total dos y añadirle el último objeto. Esto es más 9, o podemos tomar
+una solución óptima para una mochila de peso total uno y añadirle
+el segundo elemento, así más 14. O podemos tomar
+una solución óptima para una mochila de peso total 0
+y añadir el tercer objeto. Esto es más 16. ¿Correcto? Así en este caso, necesitamos seleccionar la cantidad máxima entre
+16, 14 y 9 más 9 que es 18. En este caso, 18 es el valor máximo. Lo escribiremos en esta celda. Continuando de la misma forma,
+podemos rellenar el array completo y ver que el último elemento
+es igual a 48, simplemente deducimos que el valor óptimo para este problema de mochila con 
+repeticiones es igual a 48. Además, déjame recordarte que este
+valor óptimo puede ser obtenido tomando una copia de este objeto y 2 copias del último objeto. En la siguiente lección, en el vídeo, aprenderemos cómo resolver este problema
+cuando las repeticiones no están permitidas.

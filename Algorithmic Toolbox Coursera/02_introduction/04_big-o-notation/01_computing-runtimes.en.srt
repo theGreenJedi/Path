@@ -1,0 +1,739 @@
+1
+00:00:03,718 --> 00:00:08,540
+Hello everybody, welcome back to data
+structures and algorithms specialization.
+
+2
+00:00:08,540 --> 00:00:13,150
+Today, we're going to be talking about
+what really goes into computing runtimes
+
+3
+00:00:13,150 --> 00:00:16,740
+and really understanding how
+long it takes a program to work.
+
+4
+00:00:16,740 --> 00:00:19,890
+So in particular,
+today we're really going to dive in.
+
+5
+00:00:19,890 --> 00:00:22,420
+Up to this point we're
+using this sort of rough
+
+6
+00:00:22,420 --> 00:00:25,410
+number of lines of code executed count.
+
+7
+00:00:25,410 --> 00:00:29,680
+And today we're going to talk
+about how accurate this is and
+
+8
+00:00:29,680 --> 00:00:32,630
+what sorts of complications come in.
+
+9
+00:00:32,630 --> 00:00:36,580
+And in particular we'll see that if we
+actually want something that's sort of
+
+10
+00:00:36,580 --> 00:00:40,762
+fundamentally an accurate measure of
+runtime, it's going to be a huge mess.
+
+11
+00:00:40,762 --> 00:00:44,140
+We're going to have to bring in all
+sorts of extra data that aren't
+
+12
+00:00:44,140 --> 00:00:45,970
+really convenient for us.
+
+13
+00:00:45,970 --> 00:00:47,780
+And so, we're really sort of
+
+14
+00:00:49,720 --> 00:00:53,770
+talking about the problem that comes in
+with computing runtimes in algorithms.
+
+15
+00:00:53,770 --> 00:00:58,564
+Something that we're not going to
+resolve really until the next lecture.
+
+16
+00:00:58,564 --> 00:01:01,230
+So to start with, let's look at
+this algorithm that we had for
+
+17
+00:01:01,230 --> 00:01:03,270
+computing Fibonacci numbers.
+
+18
+00:01:03,270 --> 00:01:05,400
+Remember we created an array.
+
+19
+00:01:05,400 --> 00:01:07,756
+We assigned the 0th element to 0.
+
+20
+00:01:07,756 --> 00:01:09,700
+The first element to 1.
+
+21
+00:01:09,700 --> 00:01:14,598
+Then, we have this big for loop where
+we set the i'th element to the sum of the i
+
+22
+00:01:14,598 --> 00:01:17,443
+minus first and
+i minus second elements and
+
+23
+00:01:17,443 --> 00:01:21,254
+then at the end of the day we
+return the nth element.
+
+24
+00:01:21,254 --> 00:01:25,839
+So we determined that when we ran this
+program we executed about 2n + 2 lines
+
+25
+00:01:25,839 --> 00:01:27,050
+of code.
+
+26
+00:01:27,050 --> 00:01:31,963
+But we should really ask ourselves,
+is this number of lines of code executed
+
+27
+00:01:31,963 --> 00:01:36,586
+really sort of an accurate description
+of the runtime of the algorithm?
+
+28
+00:01:36,586 --> 00:01:41,664
+And, I mean, somehow, implicitly,
+this measure of lines of code
+
+29
+00:01:41,664 --> 00:01:48,050
+assumes that, sort of, any two lines of code
+are sort of comparable to each other.
+
+30
+00:01:48,050 --> 00:01:51,750
+They're sort of one basic operation.
+
+31
+00:01:51,750 --> 00:01:55,010
+And so, let's actually look at
+this program in some detail and
+
+32
+00:01:55,010 --> 00:02:00,340
+see what goes into some of these lines of
+code and see how valid this assumption is.
+
+33
+00:02:01,700 --> 00:02:05,050
+So to start with, we create this array.
+
+34
+00:02:05,050 --> 00:02:08,030
+And what happens when you
+try to initialize an array?
+
+35
+00:02:09,170 --> 00:02:12,450
+Well, this depends a lot on
+your memory management system.
+
+36
+00:02:12,450 --> 00:02:16,300
+Fundamentally, all you have to do is
+find some space in memory and
+
+37
+00:02:16,300 --> 00:02:18,800
+then get to pointer to the first location.
+
+38
+00:02:19,990 --> 00:02:23,390
+On the other hand, how exactly you find
+this, maybe you need to shuffle some other
+
+39
+00:02:23,390 --> 00:02:28,240
+things around to make room for it, maybe
+after you allocate the array, you then
+
+40
+00:02:28,240 --> 00:02:33,040
+want to zero out all of the entries so
+that you don't have junk sitting in there.
+
+41
+00:02:33,040 --> 00:02:35,040
+And so, it's not entirely clear.
+
+42
+00:02:35,040 --> 00:02:39,765
+It depends a little bit on how exactly
+your program is being interpreted.
+
+43
+00:02:39,765 --> 00:02:42,320
+But it could be pretty fast.
+
+44
+00:02:42,320 --> 00:02:47,348
+It could actually take a while,
+depending on circumstances.
+
+45
+00:02:47,348 --> 00:02:48,660
+Let's look at the next line.
+
+46
+00:02:48,660 --> 00:02:52,660
+This is just a simple assignment,
+we set the 0 entry to 0.
+
+47
+00:02:52,660 --> 00:02:54,850
+However, if you really look at this,
+
+48
+00:02:54,850 --> 00:03:00,160
+at the machine level, you're doing a bit
+more work, you need to load up the pointer
+
+49
+00:03:00,160 --> 00:03:04,480
+to the 0th element to the array, you maybe
+then have to do some pointer arithmetic,
+
+50
+00:03:04,480 --> 00:03:08,850
+you then need to store this literal
+0 into that spot in memory.
+
+51
+00:03:08,850 --> 00:03:12,410
+It could actually be not one operation but
+a few operations.
+
+52
+00:03:13,930 --> 00:03:16,560
+Similarly when we set
+the first element to one,
+
+53
+00:03:16,560 --> 00:03:19,470
+you have to do 
+this very similar set of things.
+
+54
+00:03:21,030 --> 00:03:26,214
+Next there's this for loop and
+with the for loop, again every time you
+
+55
+00:03:26,214 --> 00:03:30,600
+you have to do a few things,
+you need to increment the value of i.
+
+56
+00:03:30,600 --> 00:03:36,146
+You then need to compare i to n to see
+if you need to break out of the loop and
+
+57
+00:03:36,146 --> 00:03:38,383
+if it is, you need to branch,
+
+58
+00:03:38,383 --> 00:03:44,135
+you need to move to another instruction
+in your program after the for loop.
+
+59
+00:03:44,135 --> 00:03:48,487
+Next up there's this addition and
+here we have to do some things, we have to
+
+60
+00:03:48,487 --> 00:03:53,070
+look up two values in the array, we have
+to write to a third value in the array.
+
+61
+00:03:53,070 --> 00:03:56,280
+All of this involves the same
+sort of pointer arithmetic,
+
+62
+00:03:56,280 --> 00:04:00,740
+and memory lookups, and writes that
+we were talking about before, but
+
+63
+00:04:00,740 --> 00:04:02,090
+we also have to do this addition.
+
+64
+00:04:03,210 --> 00:04:07,780
+And if it were just a normal addition,
+maybe it wouldn't be such a big deal.
+
+65
+00:04:08,810 --> 00:04:12,470
+However, this is addition of
+two Fibonacci numbers, and
+
+66
+00:04:12,470 --> 00:04:16,650
+if you'll recall from a couple of lectures
+ago, we found that Fibonacci numbers were
+
+67
+00:04:16,650 --> 00:04:22,350
+pretty big, in fact, so big, they probably
+don't fit in a single machine word.
+
+68
+00:04:22,350 --> 00:04:26,690
+So adding two of them together actually
+takes a non-trivial amount of time.
+
+69
+00:04:28,120 --> 00:04:31,589
+So somehow,
+not only do you have to do all of these,
+
+70
+00:04:31,589 --> 00:04:36,355
+array arithmetic things but,
+the actual addition of the Fibonacci
+
+71
+00:04:36,355 --> 00:04:40,174
+numbers is actually a pretty
+non-trivial operation.
+
+72
+00:04:40,174 --> 00:04:45,117
+And then we do this return stuff where we
+have to do an array lookup which involves
+
+73
+00:04:45,117 --> 00:04:49,845
+all the sorts of things we talked about
+already and then have to do a return which
+
+74
+00:04:49,845 --> 00:04:52,998
+sort of is going to operate
+with the program stack and
+
+75
+00:04:52,998 --> 00:04:55,748
+pop it up a level and
+return an answer.
+
+76
+00:04:55,748 --> 00:05:00,349
+So in conclusion, this program
+has six lines of code to it but
+
+77
+00:05:00,349 --> 00:05:06,410
+the amount of work being done in various
+lines of code is very, very different.
+
+78
+00:05:06,410 --> 00:05:12,080
+Exactly what goes into each line of
+code is not sort of at all the same thing.
+
+79
+00:05:12,080 --> 00:05:15,080
+Maybe we want to reconsider
+the fact that this count,
+
+80
+00:05:15,080 --> 00:05:18,650
+that the number of lines of code,
+is sort of our runtime.
+
+81
+00:05:18,650 --> 00:05:20,500
+Maybe we need to measure something else.
+
+82
+00:05:21,970 --> 00:05:25,110
+So what else should we do?
+
+83
+00:05:25,110 --> 00:05:29,864
+Well, if you want to be totally correct
+about what we actually care about,
+
+84
+00:05:29,864 --> 00:05:34,090
+what you need to say is, well,
+we're going to take this program,
+
+85
+00:05:34,090 --> 00:05:37,272
+we're going to run it on
+some real life computer.
+
+86
+00:05:37,272 --> 00:05:41,855
+And we'd like to know how much
+actual time it will take for
+
+87
+00:05:41,855 --> 00:05:47,406
+this program to finish. That is
+fundamentally what we want to know.
+
+88
+00:05:47,406 --> 00:05:52,119
+Unfortunately, in order to figure that
+out we need to know all kinds of messy
+
+89
+00:05:52,119 --> 00:05:53,730
+details.
+
+90
+00:05:53,730 --> 00:05:57,400
+We need to know things like the speed of
+the computer that we're running it on.
+
+91
+00:05:57,400 --> 00:06:00,070
+If you run it on a big supercomputer,
+
+92
+00:06:00,070 --> 00:06:03,970
+it'll take a lot less time than
+if you run it on your cell phone.
+
+93
+00:06:05,360 --> 00:06:08,730
+The system architecture of
+the computer will matter.
+
+94
+00:06:08,730 --> 00:06:13,380
+Exactly what operations your CPU
+supports and exactly how long they take
+
+95
+00:06:13,380 --> 00:06:17,230
+relative to one another, those are all
+going to have an effect on your runtime.
+
+96
+00:06:18,540 --> 00:06:22,080
+The compiler being used is also
+going to make a difference.
+
+97
+00:06:22,080 --> 00:06:26,365
+In practice, what you'll do is, you'll
+write this program in some high-level
+
+98
+00:06:26,365 --> 00:06:29,020
+language, in C or Java or Python or
+
+99
+00:06:29,020 --> 00:06:33,950
+something, and then you'll run it through
+a compiler to turn it into machine code.
+
+100
+00:06:33,950 --> 00:06:36,470
+And then the compiler,
+
+101
+00:06:36,470 --> 00:06:39,880
+though, isn't just sort of doing
+something completely obvious.
+
+102
+00:06:39,880 --> 00:06:44,150
+It's performing all kinds of
+interesting optimizations to your code.
+
+103
+00:06:44,150 --> 00:06:47,280
+And which optimizations it performs, and
+
+104
+00:06:47,280 --> 00:06:50,180
+how they interact with
+exactly what you've written.
+
+105
+00:06:50,180 --> 00:06:53,030
+That's all going to have
+an impact on the final runtime.
+
+106
+00:06:54,550 --> 00:06:58,050
+Finally, you're going to care about
+details of the memory hierarchy.
+
+107
+00:06:58,050 --> 00:07:01,160
+If your entire computation
+fits into cache,
+
+108
+00:07:01,160 --> 00:07:03,960
+it will probably run pretty quickly.
+
+109
+00:07:03,960 --> 00:07:06,770
+However, if you have to start
+doing lookups into RAM,
+
+110
+00:07:06,770 --> 00:07:08,040
+things will be a lot slower.
+
+111
+00:07:08,040 --> 00:07:11,560
+RAM lookups actually
+take a fair bit of time.
+
+112
+00:07:11,560 --> 00:07:16,650
+If, on the other hand, you run out of
+memory in RAM and having to start writing
+
+113
+00:07:16,650 --> 00:07:21,310
+some of these memory operations to disk,
+things are going to go a lot slower.
+
+114
+00:07:21,310 --> 00:07:27,300
+Lookups to hard disk can take milliseconds
+which are forever in computer time.
+
+115
+00:07:27,300 --> 00:07:32,600
+And so, exactly how much memory is stored
+in these various levels of the hierarchy,
+
+116
+00:07:32,600 --> 00:07:37,532
+and exactly how long the lookups take,
+and how good the algorithms
+
+117
+00:07:37,532 --> 00:07:41,780
+about to predict what things you're
+going to look up in the future are.
+
+118
+00:07:41,780 --> 00:07:43,725
+Those are all going to
+affect your runtime.
+
+119
+00:07:45,440 --> 00:07:49,320
+And so, putting it all together,
+we found basically a problem.
+
+120
+00:07:50,440 --> 00:07:54,320
+Figuring out accurate
+runtimes is a huge mess.
+
+121
+00:07:54,320 --> 00:07:56,090
+You need to know all of these details and
+
+122
+00:07:56,090 --> 00:07:58,760
+you need to figure out
+how everything interacts.
+
+123
+00:07:58,760 --> 00:08:02,320
+And we're going to be talking about
+a lot of algorithms in the class.
+
+124
+00:08:02,320 --> 00:08:06,100
+And we're going to need to tell you
+about runtimes for all of them and
+
+125
+00:08:06,100 --> 00:08:08,530
+we don't want to have to do this huge mess
+
+126
+00:08:09,840 --> 00:08:13,110
+every single time we have a new
+algorithm that we want to analyze.
+
+127
+00:08:15,462 --> 00:08:17,230
+And this is an issue.
+
+128
+00:08:17,230 --> 00:08:18,960
+And another issue it was just that,
+
+129
+00:08:18,960 --> 00:08:24,020
+in practice I mean, this is all assuming
+that you did know these details.
+
+130
+00:08:24,020 --> 00:08:28,250
+In practice, you don't know a lot of these
+details, because you're writing a program,
+
+131
+00:08:28,250 --> 00:08:31,000
+it's going to be run on
+somebody else's computer, and
+
+132
+00:08:31,000 --> 00:08:35,480
+you've got no idea what their system
+architecture looks like on that computer,
+
+133
+00:08:35,480 --> 00:08:38,280
+because you don't know
+what the computer is.
+
+134
+00:08:38,280 --> 00:08:39,500
+You don't know who's running it.
+
+135
+00:08:39,500 --> 00:08:42,260
+In fact, there'll be several people
+running it on different computers with
+
+136
+00:08:42,260 --> 00:08:45,850
+different architectures and
+different speeds, and it'll be a mess.
+
+137
+00:08:45,850 --> 00:08:50,290
+And you really don't want to
+compute the runtime separately for
+
+138
+00:08:50,290 --> 00:08:51,840
+every different client.
+
+139
+00:08:53,730 --> 00:08:58,780
+So we've got a big problem here
+and we're not going to solve it today but
+
+140
+00:08:58,780 --> 00:09:02,970
+next lecture we're going to talk
+about how we get around this.
+
+141
+00:09:02,970 --> 00:09:07,580
+And what we really want is we want a new
+way to measure runtime that allows
+
+142
+00:09:07,580 --> 00:09:12,240
+us to get some reasonable answer
+without knowing these sorts of details.
+
+143
+00:09:14,050 --> 00:09:16,550
+And one of the key tricks that
+you should be looking at,
+
+144
+00:09:16,550 --> 00:09:19,710
+that we'll be using to solve this problem,
+is we're going to be getting things that
+
+145
+00:09:19,710 --> 00:09:22,170
+really give us results for
+very large inputs.
+
+146
+00:09:23,210 --> 00:09:23,980
+They tell us,
+
+147
+00:09:23,980 --> 00:09:28,910
+not necessarily how long it
+actually takes in terms of real seconds,
+
+148
+00:09:28,910 --> 00:09:34,610
+minutes, and hours, but tell us sort of
+how our runtime scales with input size.
+
+149
+00:09:34,610 --> 00:09:39,180
+And in practice this is a very
+important thing, because oftentimes,
+
+150
+00:09:39,180 --> 00:09:42,940
+we really do care what happens
+when we have huge inputs,
+
+151
+00:09:42,940 --> 00:09:48,340
+millions of data points that we need
+to analyze, how long does it take?
+
+152
+00:09:48,340 --> 00:09:50,524
+And so, come back next lecture,
+
+153
+00:09:50,524 --> 00:09:55,672
+we'll talk about how we resolve some of
+these issues, and talk about some very
+
+154
+00:09:55,672 --> 00:10:00,668
+useful notation that we will be using
+throughout the rest of this sequence.
+
+155
+00:10:00,668 --> 00:10:03,190
+So I hope you come back then,
+and I'll see you there.

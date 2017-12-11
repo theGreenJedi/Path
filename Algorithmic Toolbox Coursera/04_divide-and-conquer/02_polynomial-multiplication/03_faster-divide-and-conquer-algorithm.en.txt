@@ -1,0 +1,63 @@
+In this video we'll look at
+creating a faster divide and conquer algorithm in order to solve
+the polynomial multiplication problem. This problem, this approach was invented
+by Karatsuba in the early 1960s. So he was a graduate
+student of Komolgorov, a famous Russian mathematician. And Komolgorov theorized that n squared
+was the best that one could do. So there was a lower bound of n squared,
+doing polynomial multiplication. Karatsuba, a grad student,
+heard the problem, went away, came back a week later with a solution. So let's look at what is involved. So if we look at A(x) it's just
+a very simple polynomial, a1x + a0. And B(x) = b1x + b0, and then C(x) is,
+what would match in there? a1b1x squared + (a1b0 + a0b1)x + a0b0. So we'll notice here we
+need four multiplications. We need to multiply a1 times b1. We need to multiply a1 times b0,
+a0 times b1, and a0 times b0. This is how we did the divide and
+conquer in fact in our last video. So we need four multiplications. Karatsuba's insight was that
+there was a way to re-write C(x), so that you only needed to do
+three multiplications. So basically what he did is
+he re-wrote that inner term, a1b0 + a0b1 as something
+slightly more complicated. So he added together, (a1 + a0) (b1 + b0). So (a1 + a0) (b1 + b0) is just
+a1b1 + a0b1 + a1b0 + a0b0. And then he subtracted out the a1b1 and the a0b0, so he's left with a1b0 + a0b1. Which is exactly what's
+there to begin with. The key here though,
+is how many multiplications are needed. It only needs three multiplications. We need to compute a1 b1,
+even though we use it twice. We need to compute a0 b0, even again,
+though we use it only twice. And then we need to multiply
+together (a1 + a0) and (b1 + b0). So we do have some extra additions. But the key is, when we have three
+multiplications instead of four. Why does this matter? Well, why it matters is because we are reducing the number
+of problems at each level. But let's first look at an example. So here we've got A(x). We're going to have 4 x
+cubed + 3 x squared + 2x +1. B(x) = x cubed + 2 x squared + 3x + 4. We're going to go ahead and
+pull out D1 and D0 like we did before. In our divide and conquer. The key is what we're going to actually
+do in terms of the subproblems. So we have D1 and D0. We have E1 and we have E0. We're going to compute D1 E1,
+again, just like we did before. We're going to compute D0 E0,
+again just like we did before. But now we won't compute D1 E0 and D0 E1. Instead we're going to sum together D1 and
+D0. Sum together E1 and E0. So (D1 + D0) is going to be (6x + 4). (E1 + E0) is going to be (4x plus 6). And then we multiply those two polynomials
+together, yielding 24 x squared + 52x + 24. So, so far,
+how many multiplications have we done? Three. And then, our final result for
+A(x) B(x) is D1E1 times x to the fourth +,
+now what do we do here? We take that (D1 + D0) (E1 + E0). (24x squared + 52x + 24), okay? Add that in the second term. And then subtract out D1 E1. Subtract out D0 E0. And then our final term will be D0 E0. If we simplify that middle portion,
+and all of it. We just end up with 4 x to the sixth + 11 x to
+the fifth + 20 x to the fourth + 3 x cubed + 20 x squared + 11x + 4. Which is the exact same result we got
+doing it in the more naive divide and conquer. And also the same way we'd do it if we
+did a straight naive problem, okay? So we get the same result, three multiplications instead
+of four multiplications. That extra multiplication
+makes a big difference. Let's look at our runtime. So our initial problem is of size n. When we break it down,
+we have three problems of size n over 2, again, rather than 4. So level 0, problem size n. Level 1, a problem of size n over 2. At level i,
+our problems are of size n over 2 to the i, just like they were in the other
+divide and conquer problem. And we have the same number of leaves. So at log base 2 of n level,
+all the problems are of size 1. And the number of problems that we have,
+1 of them at level 0, 3 instead of 4 at level 1, 3 to the i. instead of 4 to the i, at level i. And 3 to the log base 2 of n,
+instead of 4 to the log base, 2 of n at the bottom level. How much work? We'll multiply together, so we'll figure
+out for each problem how much it takes. In this case at level 0 it's kn. At level 1,
+each problem takes k(n/2) work. And there are three of them. So it's k(3/2) n. At the ith level, we end up
+with k times (3/2) to the i times n. And at the bottom level,
+k times 3 to the log base 2 of n. a to the log base b of c, is the same
+thing as c to the log base b of a. So therefore this is the same
+as kn to the log base 2 of 3. We sum those, summation from i =
+zero to log base 2 of n of 3 to the i times k times n over 2 to the i. This is bounded, it's this geometric
+series bounded by the last term. Which is big Theta of n
+to the log base 2 of 3. Log base 2 of 3 is about 1.58. So, we now have a problem where our
+solution is big Theta of n to the 1.58. Compared to our original problem, which
+had a big Theta of n squared solution. So this makes a huge difference as n gets
+large, in terms of our final runtime. It's not uncommon for divide and
+conquer algorithms sometimes to require sort of a way of looking at it in
+terms of breaking up a problem. So that you have fewer subproblems. And because of the compounding of the fact
+that the more subproblems at a level, you have more, and more, and more. Reducing the number of subproblems,
+reduces the final runtime.

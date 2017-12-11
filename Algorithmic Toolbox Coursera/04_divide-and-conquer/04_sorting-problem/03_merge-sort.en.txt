@@ -1,0 +1,120 @@
+In this video, we will study
+the so-called merge sort algorithm. It is based on the divide and
+conquer technique, which main idea is the following. To solve a given computational problem,
+you first split it into two or more disjoint subproblems, then you solve
+each of these subproblems recursively. And finally, you combine the results
+that you get from the recursive calls to get the result for
+your initial subproblem. And this is exactly what we're going
+to do in merge sort algorithm. So let's show a toy example. We're given an array of size eight,
+and we are going to sort it. First, we just split this array
+into two halves of size four, just the left half and the right half. Then we make two recursive
+calls to sort both these parts. These are two results in arrays. Now what remains to be done is to
+merge these two arrays into one, these two arrays of size four
+into one array of size eight. Well, let's think how this can be done. First of all, I claim that it is easy to find
+the minimal value in the resulting array. Indeed, we know that the minimum value in
+this case in the first array is two, and the minimum value in
+the second array is one. Which means that the minimum value in
+the result in merge array must be one. So let's take one from the right side of
+array, put it in the resulting array and forget about it. It is already in its right place. What remains is an array of size four and an array of size three that
+still need to be merged. Well, again,
+it is easy to find the minimum value of the result of merging these two arrays. In this case, it is two, because the
+minimum value in the array of size four is two, and the minimum value in
+the arrays of size three is six. So two is smaller than six, so
+we get two out of our left array, put it into the resulting array after one,
+and press hit. In the end,
+we get the following sorted array. Again, the pseudocode of the merge sort
+algorithm directly implements this idea. So this pseudocode takes an input
+array A of size n as an input. And if n is equal to 1, then in this case,
+just nothing needs to be done, we can just return the rate A itself. If n is greater than 1,
+on the other hand, then we split the rate A into two roughly equal parts and
+sort them recursively. We call them B and C here. Then the only thing that needs to be done
+is to merge these two sorted arrays. So this is done in the procedure merge,
+which we will present on the next slide. And finally, we just return
+the result of this merging procedure. The pseudocode of the merging
+procedure is also straightforward. Assumes that we are given two sorted
+arrays, B and C, of size p and q respectively, and we would like to merge
+them into a sorted array of size p + q. So the first thing we do is create
+an array of size p + q in array D. It is initially empty. Then we keep doing the following thing. So what is the minimum value among all
+the values stored in the arrays B and C? Well, it is easy to find. We know that the first element in
+the array B is its smallest element, and the first element in the array
+C is its smallest element. So the smallest one among
+these two is the smallest element inside the unit
+of these two arrays. So we just find the minimum of these
+first elements and move it from one of these arrays to the results in array D,
+and forget about this element completely. Now what is left is
+essentially the same problem. We're left with two sorted arrays,
+and we still need to merge them. So we do it exactly the same. We take the first two elements, we compare them and move the smaller
+one to the resulting array. And we keep doing this while
+both of these arrays are empty. I mean, we need this to be able
+to take their first elements. When one of them becomes empty, we just copy the rest of the other
+array to the resulting array D. I mean,
+where rest to the resulting array D. Well, it is not difficult to see that
+this procedure is correct, and the trying time is p + q, namely, the size of
+the array p plus the size of the array q. And this just because we just can
+both of these arrays from left to right in the run of
+this merging procedure. This is how sorting our
+initial array of size eight by the merge sort algorithm looks like. So the merge sort algorithm first splits the initial array of size eight
+into two arrays of size four. Each of these arrays of size four in turn
+is split into two arrays of size two, and each of them is split into
+two arrays of size one. Then merge procedure starts merging
+these arrays of size one into arrays of size twos and into, then these
+arrays of size two into a size four. And finally, it merges the result
+into arrays of size four, into the resulting array of size eight. We are now going to prove that the running
+time of the merge sort algorithm, on a sequence containing n elements,
+is big O of n log n. Know that this is significantly faster
+than a quadratic selection sort algorithm. For example, it is perfectly okay to
+sort the sequence of size 1 million, for example, 10 to the 6th,
+on your laptop using merge sort algorithm. While for the quadratic time
+selection sort algorithm, sorting a sequence of size 10 to the 6th,
+1 million, will take roughly 10 to the 12th operations,
+which is too much for modern computers. Okay, so to prove this lemma,
+to prove the upper bound on the running time of the merge sort algorithm,
+first know that to merge two parts of size n over 2 of our initial array,
+takes the linear time. Namely, big O of n, because while
+the left part has size n over 2, the right part has size n over 2. And for merging, we basically just
+combo these parts from left to right. So it takes just a linear
+amount of work to do this. Which, in turn means, that if we denote by
+T of n the running time of our merge sort algorithm, then it satisfies
+the following recurrence. T(n) is at most 2T(n / 2) + big O(n). Here 2T(n / 2) could response
+to two recursive calls. So we denote it by T(n), the running time
+of our algorithm on input of size n. So when we sort two
+sequences of size n / 2, we spend time twice T(n / 2). So the big O of n term corresponds to what
+we do before we make recursive calls and what we do after recursive calls. So what we do before is just split
+the input array into two halves. What we do after is merging the results
+of two arrays into one array of size n. So it is not difficult to see that all
+of this can be done in linear time. So we get this recurrence,
+and on the next slide, we're going to show that this
+recurrence implies that the running time of our algorithm is
+bounded from above by n log n. To estimate the running
+time of this algorithm, let's consider its recursion tree. Namely, at the top of this tree,
+we have one array of size n. So for this array of size n,
+we make two recursive calls for arrays of size n over 2. Each of these arrays of size n
+over 2 in turn is split into two arrays of size n over 4. So we get four arrays of
+size of n over 4 and so on. So in this tree, we have log n levels. Now let's estimate the work done at each
+of the levels of these three separately, namely, once again,
+to solve a problem of size n. To sort an array of size n,
+we first prepare to make recursive calls. In this case, we just split the array
+into two halves of size n over 2. Then we do make recursive calls, and
+then we need to combine the results. So all the work now inside recursive
+calls will be accounted for on the lower levels of this tree. So now what we are going
+to do is to account for only the work done before
+the recursive calls and after the recursive calls
+at each separate level. And we know already that it
+takes linear time to do this. I mean, if we have an array of size n, it takes linear time to
+split it into two halves. And then it takes linear time
+to combine the results of recursive calls into one array. So let's just denote this time by cn, I mean let's denote the hidden
+constant inside big O by c. Then what we can say is that on
+the top level we spend time cn. Then on the next level, for each subarray, we spend time c times n over 2,
+because the size of array is n over 2. However, we have 2 arrays, so the total
+work that we do at this level is 2 multiplied by c, multiplied by n over 2,
+which is again just cn. On the next level, we spend time 4
+because we have 4 arrays multiplied by c, multiplied by n over 4, because
+the size of the array is now n over 4. This is a cn again, and so on. So we have log n levels. At each level,
+we do roughly cn operations. So the total number of operations
+in our algorithm is cn log n, which proves our lemma. So again, what we've just proved
+is that the running time of the merge sort algorithm
+is big O of n log n. So in the next video,
+we will show that actually no algorithm, no comparison based algorithms,
+to be completely formal, can sort a given sequence of n elements asymptotically
+faster than in n log n time. Which actually means that the merge sort
+algorithm is asymptotically optimal.

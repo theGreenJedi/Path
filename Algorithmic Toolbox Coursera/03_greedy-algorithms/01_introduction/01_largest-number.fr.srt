@@ -1,0 +1,186 @@
+1
+00:00:00,320 --> 00:00:04,720
+Bonjour, je m'appelle Michael Levin et,
+ensemble, nous allons étudier les Algorithmes Gloutons.
+
+2
+00:00:04,720 --> 00:00:07,955
+Ils font partie des plus simples
+algorithmes qui puissent exister
+
+3
+00:00:07,955 --> 00:00:12,722
+et ils apparaissent souvent comme un
+moyen naturel d'essayer de résoudre un problème
+
+4
+00:00:12,722 --> 00:00:15,330
+Nous allons commencer avec quelques
+exemples de problèmes qui peuvent être
+
+5
+00:00:15,330 --> 00:00:19,190
+résolus par les algorithmes gloutons,
+juste pour illustrer leur fonctionnement.
+
+6
+00:00:19,190 --> 00:00:23,511
+Notre tout premier problème traite
+du nombre le plus grand.
+
+7
+00:00:23,511 --> 00:00:27,019
+Et pour ce problème, vous serez sûrement capable
+d'arriver à un algorithme glouton vous-même
+
+8
+00:00:27,019 --> 00:00:29,720
+car c'est vraiment la chose la plus naturelle à faire.
+
+9
+00:00:30,770 --> 00:00:33,091
+Imaginez donc cette situation :
+
+10
+00:00:33,091 --> 00:00:37,674
+Vous passez des entretiens dans une société
+et vous avez déjà passé quelques étapes
+
+11
+00:00:37,674 --> 00:00:39,081
+Tout se passe bien
+
+12
+00:00:39,081 --> 00:00:42,589
+Maintenant, pour votre entretien final avec le patron
+
+13
+00:00:42,589 --> 00:00:45,471
+il vous dit qu'il va vous faire une offre
+
+14
+00:00:45,471 --> 00:00:48,509
+Mais au lieu de négocier
+votre salaire avec vous
+
+15
+00:00:48,509 --> 00:00:52,500
+Il vous donne un morceau de papier
+avec des chiffres dessus.
+
+16
+00:00:53,510 --> 00:00:57,180
+Et votre tâche est de les trier
+sur une ligne, tel que
+
+17
+00:00:57,180 --> 00:01:00,890
+si vous lisez le nombre de gauche à droite,
+ce sera votre salaire.
+
+18
+00:01:01,890 --> 00:01:03,920
+En d'autres termes, le problème est :
+
+19
+00:01:03,920 --> 00:01:07,780
+À partir d'une liste de chiffres,
+Créez le nombre le plus grand possible
+
+20
+00:01:08,910 --> 00:01:11,670
+Voici quelque exemples de nombres possibles
+
+21
+00:01:13,190 --> 00:01:16,559
+D'après vous, quelle est la
+bonne solution à ce problème ?
+
+22
+00:01:18,520 --> 00:01:22,780
+Bien sûr, la réponse correcte est 997531.
+
+23
+00:01:22,780 --> 00:01:26,963
+Et c'est plutôt évident que vous devez
+trier les chiffres du plus grand au plus petit
+
+24
+00:01:26,963 --> 00:01:28,931
+de gauche à droite
+
+25
+00:01:28,931 --> 00:01:32,520
+Mais regardons comment
+l'algorithme glouton fait ça
+
+26
+00:01:33,740 --> 00:01:38,640
+Donc, l'algorithme glouton commence
+avec une liste de chiffres
+
+27
+00:01:38,640 --> 00:01:41,641
+trouve le chiffre maximum dans la liste
+
+28
+00:01:41,641 --> 00:01:47,121
+l'ajoute au résultat et
+le supprime de la liste
+
+29
+00:01:47,121 --> 00:01:52,410
+Et répète la procédure jusqu'à ce qu'il
+n'y est plus de chiffres restant dans la liste.
+
+30
+00:01:52,410 --> 00:01:57,000
+Donc, à la prochaine étape, nous trouverons
+le plus grand chiffre, qui est encore 9
+
+31
+00:01:57,000 --> 00:02:02,625
+Nous l'ajoutons au résultat depuis la droite
+Et l'enlevons de la liste
+
+32
+00:02:02,625 --> 00:02:07,680
+Ensuite, nous trouvons 7 comme nombre
+le plus grand et l'ajoutons à droite
+
+33
+00:02:07,680 --> 00:02:09,300
+le supprimons de la liste
+
+34
+00:02:09,300 --> 00:02:15,550
+Et nous continuons avec 5 puis 3 et 1
+
+35
+00:02:18,310 --> 00:02:21,710
+Nous obtenons alors la réponse correcte :
+997531
+
+36
+00:02:21,710 --> 00:02:25,820
+Dans la prochaine vidéo,
+nous allons concevoir un algorithme
+
+37
+00:02:25,820 --> 00:02:30,450
+pour trouver le nombre minimum d'arrêts
+à la station service pour un long voyage en voiture.
+
+38
+00:02:30,450 --> 00:02:33,570
+Nous trouverons des similarités entre ces deux problèmes
+
+39
+00:02:33,570 --> 00:02:37,060
+le problème du nombre le plus grand et
+le problème de la pompe à essence
+
+40
+00:02:37,060 --> 00:02:39,630
+Et nous définirons comment l'algorithme glouton
+fonctionne en général

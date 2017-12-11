@@ -1,0 +1,509 @@
+1
+00:00:01,530 --> 00:00:03,500
+So let's look at a naive divide and
+
+2
+00:00:03,500 --> 00:00:06,850
+conquer algorithm, to solve
+polynomial multiplication problem.
+
+3
+00:00:08,760 --> 00:00:12,830
+The idea is, we're going to
+take our long polynomial and
+
+4
+00:00:12,830 --> 00:00:14,300
+we're going to break it in two parts.
+
+5
+00:00:14,300 --> 00:00:16,594
+The upper half and the lower half.
+
+6
+00:00:16,594 --> 00:00:20,970
+So A(x) is going to be D sub
+one of X ,times x sub n over 2,
+
+7
+00:00:20,970 --> 00:00:23,570
+plus d sub 0 of x, the bottom half.
+
+8
+00:00:24,580 --> 00:00:28,500
+D sub 1 of x, since we've pulled
+out x sub n over 2 terms,
+
+9
+00:00:28,500 --> 00:00:31,370
+it's lowest term is actually,
+just a sub n over 2.
+
+10
+00:00:31,370 --> 00:00:37,780
+So we have two parallel sub polynomials,
+the high and the low.
+
+11
+00:00:38,790 --> 00:00:39,910
+We do the same thing for B.
+
+12
+00:00:39,910 --> 00:00:43,810
+So we break that into E sub 1 of x,
+and E sub 0 of x.
+
+13
+00:00:43,810 --> 00:00:48,360
+Again, where E sub 1 of x is the high
+terms, E sub 0 of x is the low terms.
+
+14
+00:00:49,860 --> 00:00:55,816
+When we do our multiplication, then,
+we just multiply together D 1,
+
+15
+00:00:55,816 --> 00:01:00,776
+x sub n over 2 plus D 0 and
+E 1 times x sub n over 2 plus E 0.
+
+16
+00:01:00,776 --> 00:01:05,540
+And that then yields for terms,
+D sub 1 E sub 1 times x sub n,
+
+17
+00:01:05,540 --> 00:01:11,138
+D sub 1 E sub 0 + D sub 0 E sub 1
+times x sub n/2 + D sub 0 E sub 0.
+
+18
+00:01:13,519 --> 00:01:20,690
+The key here is that, we now just need to
+calculate D1 E1, D1 E0, D0 E1, and D0 E0.
+
+19
+00:01:20,690 --> 00:01:27,510
+Those are all polynomials of degree
+n over 2.
+
+20
+00:01:27,510 --> 00:01:34,680
+And so, now we can go ahead and use a
+recursive solution to solve this problem.
+
+21
+00:01:34,680 --> 00:01:37,050
+So it gives us a divide and
+conquer problem.
+
+22
+00:01:37,050 --> 00:01:41,070
+Its run time is T of n,
+equals 4 T of n over 2.
+
+23
+00:01:41,070 --> 00:01:41,700
+Why 4?
+
+24
+00:01:41,700 --> 00:01:44,690
+4, because we're breaking 
+into 4 subproblems.
+
+25
+00:01:44,690 --> 00:01:46,890
+Each of them takes time T of n over 2
+
+26
+00:01:46,890 --> 00:01:49,440
+ecause the problem is broken in half.
+
+27
+00:01:49,440 --> 00:01:54,170
+Plus, then,
+in order to take the results and
+
+28
+00:01:54,170 --> 00:01:56,880
+do our addition that's going
+to take order n time.
+
+29
+00:01:56,880 --> 00:02:01,110
+So some constant k, times that.
+
+30
+00:02:01,110 --> 00:02:02,100
+Let's look at an example.
+
+31
+00:02:02,100 --> 00:02:07,030
+So we have, n is 4, so
+we have degree three polynomials.
+
+32
+00:02:07,030 --> 00:02:10,930
+And we're going to break up A of
+x into the top half, 4x plus 3,
+
+33
+00:02:10,930 --> 00:02:13,770
+and the bottom half, 2x plus 1.
+
+34
+00:02:13,770 --> 00:02:16,810
+Similarly, we're going to break
+up the top half of B of x.
+
+35
+00:02:16,810 --> 00:02:19,830
+X cubed plus 2 x squared
+just becomes x plus 2.
+
+36
+00:02:19,830 --> 00:02:23,280
+And 3x plus 4, stays at 3x plus 4.
+
+37
+00:02:23,280 --> 00:02:25,364
+Now, we compute D1 E1.
+
+38
+00:02:25,364 --> 00:02:31,604
+So multiplying together, 4x + 3, times x
+plus 2, gives us 4 x squared + 11x + 6.
+
+39
+00:02:31,604 --> 00:02:37,646
+Similarly, we calculate D1 E0,
+D0 E1, and D0 E0.
+
+40
+00:02:37,646 --> 00:02:44,300
+Now we've done all four of those
+computations, AB is just D1 E1,
+
+41
+00:02:44,300 --> 00:02:51,184
+4 x squared + 11x + 6 times x to the 4th,
+plus the sum of D1 E0 and
+
+42
+00:02:51,184 --> 00:02:57,040
+D0 E1, times x squared,
+plus finally D0 E0.
+
+43
+00:02:57,040 --> 00:03:01,510
+If we sum this all together,
+we get 4 x to the 6th, plus 11 x to the 5th,
+
+44
+00:03:01,510 --> 00:03:04,926
+plus 20 x to the 4th, plus 30 x cubed,
+plus 20 x squared, plus 11x plus 4.
+
+45
+00:03:04,926 --> 00:03:10,100
+Which is our solution.
+
+46
+00:03:10,100 --> 00:03:11,010
+Now, how long's this take to run?
+
+47
+00:03:11,010 --> 00:03:14,610
+We're going to look at that in a moment.
+
+48
+00:03:14,610 --> 00:03:16,280
+Let's look at the actual code for it.
+
+49
+00:03:16,280 --> 00:03:20,660
+So we're going to compute a resulting
+array, from 0 to 2n-2, so
+
+50
+00:03:20,660 --> 00:03:23,099
+is all the results coefficients.
+
+51
+00:03:24,110 --> 00:03:27,361
+And our base case is that if n of size 1,
+
+52
+00:03:27,361 --> 00:03:32,402
+we're going to multiply together
+A at a sub l, plus B at b sub l.
+
+53
+00:03:32,402 --> 00:03:34,400
+Let's look at those parameters again.
+
+54
+00:03:34,400 --> 00:03:39,800
+So A and B are our arrays of coefficients,
+n is the size of the problem,
+
+55
+00:03:39,800 --> 00:03:43,910
+a sub l is the first coefficient
+that we're interested in.
+
+56
+00:03:43,910 --> 00:03:47,520
+And b sub l is the coefficient in B,
+that we're interested in.
+
+57
+00:03:48,870 --> 00:03:54,668
+So we're going to be going from b sub l,
+b sub l plus one, b sub l plus two, etc.
+
+58
+00:03:54,668 --> 00:03:57,706
+And for n times.
+
+59
+00:03:57,706 --> 00:04:02,530
+First thing we'll do, is multiply
+together the D sub one and E sub one.
+
+60
+00:04:02,530 --> 00:04:07,100
+So basically what we're doing, I'm sorry,
+the D sub zero and E sub zero.
+
+61
+00:04:07,100 --> 00:04:11,050
+So, what we're doing is taking A and B,
+we're reducing the problem size by 2 and
+
+62
+00:04:11,050 --> 00:04:13,780
+we're starting with
+those same coefficients.
+
+63
+00:04:13,780 --> 00:04:17,790
+And we're going to assign those to
+the lower half of the elements in R.
+
+64
+00:04:18,940 --> 00:04:20,280
+Then we're going to do something similar,
+
+65
+00:04:20,280 --> 00:04:23,280
+where we take the upper
+halves of each of A and B.
+
+66
+00:04:24,380 --> 00:04:28,920
+So again, the problem size becomes n/2,
+but now we're moving the lower coefficient
+
+67
+00:04:28,920 --> 00:04:34,952
+we're interested in from a sub l to a sub
+l + n/2 and b sub l to b sub l + n/2.
+
+68
+00:04:34,952 --> 00:04:39,550
+And we're going to assign those to
+the high coefficients in our result.
+
+69
+00:04:41,330 --> 00:04:48,600
+Then, what we have to do is
+calculate D sub 0 E1, and D1 E0.
+
+70
+00:04:48,600 --> 00:04:50,650
+And then, sum those together.
+
+71
+00:04:50,650 --> 00:04:52,000
+When we sum those together,
+
+72
+00:04:52,000 --> 00:04:57,380
+we're going to assign those to the middle
+elements of the resulting array.
+
+73
+00:04:57,380 --> 00:05:00,250
+And we'll then return that result.
+
+74
+00:05:02,280 --> 00:05:04,210
+Now the question comes up,
+how long does it take?
+
+75
+00:05:04,210 --> 00:05:06,200
+So we have an original problem of size n,
+
+76
+00:05:06,200 --> 00:05:08,040
+we break it into four
+problems of size n over 2.
+
+77
+00:05:08,040 --> 00:05:13,010
+So, level 0 we have size n,
+level 1 we have size of n over 2,
+
+78
+00:05:13,010 --> 00:05:16,000
+at level i, our problems
+are of size n over 2 to the i.
+
+79
+00:05:16,000 --> 00:05:20,980
+And all the way down to the bottom
+of the tree is at log base 2 of n,
+
+80
+00:05:20,980 --> 00:05:22,714
+and each of the problems are of size 1.
+
+81
+00:05:24,710 --> 00:05:26,120
+How many problems do we have?
+
+82
+00:05:26,120 --> 00:05:27,670
+At level 0, we have 1 problem.
+
+83
+00:05:27,670 --> 00:05:29,340
+We have then 4 problems.
+
+84
+00:05:29,340 --> 00:05:32,130
+If we go to the i'th level,
+we have 4 to the i problems.
+
+85
+00:05:32,130 --> 00:05:35,790
+And at the very bottom, then we have
+4 to the log base 2 of n problems.
+
+86
+00:05:37,510 --> 00:05:38,680
+How much work is there?
+
+87
+00:05:38,680 --> 00:05:42,920
+Well, we just need to multiply
+together the number of problems
+
+88
+00:05:42,920 --> 00:05:48,310
+times the amount of work,
+so we have kn here, and
+
+89
+00:05:48,310 --> 00:05:52,600
+4 times, 4 because there are 4 problems,
+
+90
+00:05:52,600 --> 00:05:56,040
+kn over 2, because the problem
+size is n over 2 and
+
+91
+00:05:56,040 --> 00:06:00,898
+the amount of work we're doing at each
+level is k times n over 2 per problem.
+
+92
+00:06:00,898 --> 00:06:05,720
+So 4 kn over 2 just equals k times 2n,
+At the ith level for
+
+93
+00:06:05,720 --> 00:06:09,570
+the i problems, each problem
+takes k times n over 2 to the i
+
+94
+00:06:10,930 --> 00:06:15,440
+to deal with, we multiply together,
+k 2 to the i times n.
+
+95
+00:06:15,440 --> 00:06:20,180
+And at the very bottom,
+we have k amount of work,
+
+96
+00:06:20,180 --> 00:06:24,860
+we have a problem size of 1,
+times 4 to the log base 2 of n.
+
+97
+00:06:24,860 --> 00:06:27,125
+Well four the log base two of n,
+is just n squared.
+
+98
+00:06:27,125 --> 00:06:30,570
+So we have k n squared.
+Our total
+
+99
+00:06:30,570 --> 00:06:34,660
+as we sum up all the work is going
+to be summation from i equals zero
+
+100
+00:06:34,660 --> 00:06:39,590
+to log base two of n of four to
+the i k times n over two to the i.
+
+101
+00:06:39,590 --> 00:06:43,730
+And that just gets dominated by
+the very bottom term which is 
+
+102
+00:06:43,730 --> 00:06:45,070
+big theta of n squared.
+
+103
+00:06:45,070 --> 00:06:48,490
+So that's what our runtime takes.
+This is kind of weird.
+
+104
+00:06:48,490 --> 00:06:51,970
+We went through all this work to
+create a divide and conquer algorithm.
+
+105
+00:06:51,970 --> 00:06:52,860
+And yet,
+
+106
+00:06:52,860 --> 00:06:56,830
+the run time is the same run time as it
+was with our naive original algorithm.
+
+107
+00:06:58,520 --> 00:07:02,560
+We're going to see in the next video,
+a way to redo our divide and
+
+108
+00:07:02,560 --> 00:07:06,150
+conquer algorithm, so we have less
+work to do at each level, and so
+
+109
+00:07:06,150 --> 00:07:08,670
+we actually get a better final run time.

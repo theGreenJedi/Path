@@ -1,0 +1,105 @@
+In this video, we'll look at a proof
+of how the Master Theorem works. So a reminder, the Master Theorem
+states that if T(n) equals a T of ceiling of n over b plus a polynomial,
+then we have these three cases. So let's do as we normally do
+with a recurrence relation and let's create a recurrence tree. So we'll have our recurrence at the top
+to just remind ourselves what that is. Let's assume for the sake of
+argument that n is a power of b. That's a reasonable assumption since we
+can always just pad n to be larger, right, if we increase it by no more than b we can
+get to the next closest power of b and then this will be a simpler analysis. So we have our problem n. At the next level,
+we break the problem down into a copies of a problem n over b large. So level zero. We have a problem of size n. Level 1 we have problems of size n/b. At the general level i we have
+problems of size n over b to the i. At the bottom level, which is level log
+base b of n, we have problems of size 1. How many problems are there? At level 0 there's of course one problem. At level 1, a problems. And in general at the ith level,
+a to the i problems. At the log base b of n level,
+it's a to the log base b of n. How much work do we have to do? Well work is just a function of
+how many problems we have and the amount of work for each problem. So at level zero we have just
+O(n to the d) work. There's one problem and
+it takes O(n to the d) time. And level one we have a problems. And each of them takes
+O(n over b to the d) work. Okay, we can pull out the a and
+the b and the d to be all together, and that's just O(n to the d)
+times a over b to the d. At the ith level we have
+a to the i problems and each one is 
+O(n over b to the i to the d). Again, we can pull out the a to the i,
+the b to the i, and we're left with O(n to the d) times a over b to the d to the i. And finally, at the bottom level it's
+just a to the log base b of n because the problems are all size 1. It's just
+O(n to the log base b of a). So the total amount of work is the
+summation from 0 to the log base b of n. O(n to the d) times the quantity
+a over b to the d, all that to the i. So let's look at what seems like a slight
+digression, and that is geometric series. So a Geometric Series is
+a series of numbers that progresses by some multiplicative factor. I'll give you an example. If we take 1 + 2 + 4 + 8 + 16 + 32 + 64,
+that's a geometric series where our factor is
+a factor of 2 at each time. Just as well, we could have
+a geometric series that goes down. So we could have, for
+instance, let's say 10,000, 1,000, 100, 10, 1. Where we're going down by a constant
+factor of ten at each increment. Now it turns out, our multiplicative
+factor, let's call that r, as long as r is not equal to one we
+have a simple closed form for this. This is just a times (1-r) to the n over 1 minus r. And it turns out that big O notation, what happens is 
+we care about the largest term. So our sum is going to be bounded by
+a constant times our largest term. So, if r is less than 1 then our
+largest term is the first element a and therefore our solution is O(a). Okay, because it's our largest term,
+it gets smaller, smaller, smaller, smaller, smaller. And as long as it's by this
+multiplicative factor, then all that really
+matters is this first term, because the rest of it sums to no more
+than a constant times that first term. If on the other hand, r is greater than 1,
+then what matters is the very last term, because that's the biggest term and all
+the previous ones are smaller and smaller. So it's smallest, larger,
+larger, larger, largest. And so
+that largest term is a r to the (n-1). So in a geometric series we care
+about either the first term or the last term, whichever one is bigger. Now if we take that back to
+the case of our recurrence tree, we notice our summation here. This is the same summation we had from our
+recurrence tree and we see that we have a geometric series. a is taking the place of
+big O then to the d and r is taking the place
+of a over b to the d. So our multiplicative factor
+is a over b to the d. And there are three cases. You remember as we stated
+the solution to the Master Theorem. Case one is d is greater
+than log base b of a. Well it's equivalent to saying
+a over b to the d is less than 1. So now we have our multiplicative
+term is less than 1. So it's getting smaller and
+smaller and smaller. That means that the largest
+term is the first term. And that's the one that
+we have an order of. So this is big O of,
+officially big O of big O of n to the d, which is just the same
+as big O of n to the d. Case 2, where d equals log base b of a and
+equivalently, a over b to the d is equal 1. Well, if a over b to the d is equal
+to one, remember our geometric series formula didn't hold, so we're
+going to just have to calculate this. But if a over b to the d is 1, then
+a over b to the d to any power is still 1. So that means, that our summation is just a summation from i equals 0 to
+log base b of n of O(n to the d). And that's just 1 plus log base b of n, because that's the number of terms in
+our summation times O(n to the d). Well the 1 is a low order term we don't
+care about, and log base b of n can just be treated as log n, because a base
+change is just some multiplicative factor, and that disappears in our big O notation. So we end up with, as we see in the
+theorem, O(n to the d times log n). And then our final case,
+is d is less than log base b of a, which is equivalent to saying
+a over b to the d is greater than 1. So here, our multiplicative
+factor is greater than 1. So our smallest term is the first term and
+our largest term is the last term. So in this case, this is big O of our last term is O(n to the d) times
+a over b to the d to the log b of n. So, i is log base b of n. This is a bit of a mess. Let's see whether we can
+fix this a little bit. So let's go ahead and apply the log base b
+of n power separately to a and b to the d. So we have, in the numerator,
+a to the log base b of n. And then the denominator,
+b to the d times log base b of n. Well, b to the log base b of n is just n. So, that's going to disappear down
+to n to the d in the denominator. In the numerator,
+a to the log base b of n, by logarithmic identity is equal
+to n to the log base b of a. So we can swap those other two. And now, if we compare big O
+of n to the d and n to the d, we know big O of n to the d is bounded
+by some constant, k times n to the d. So we have k n to the d divided by
+n to the d, which is just some k. And that constant can go away because
+we're still talking about big O notation. So we're left just with big O
+of n to the log base b of a, which is what we have for the final case. So the Master theorem is a shortcut. Our master theorem again
+as a restatement is here. I have a secret to tell you, however. I do not remember the master theorem and I don't actually even look
+up the master theorem. Here's what I do. When I have a recurrence of this rough
+form, I look at the amount of work done at the first level and at the second
+level (which is a very easy calculation) and then I just say to myself Is
+that the same amount of work? If it's the same amount of work it's
+going to be the same amount of work all the way down and so
+we're going to be in case two. So it's going to be the amount
+of work at the first level, which we known is O(n to the d),
+times log n because there are that many levels. On the other hand, if the first
+term is larger than the second term I know the first term is going
+to dwarf all the other terms. And so, we're left with just
+O(n to the d). And finally, if the first term
+is less than the second term, I know they're going to keep increasing
+and it's the bottom term that I need. And that is just going to be the number of
+leaves which is n to the log base b of a. The master theorem is really handy to use
+whether you memorize it or you have it written down and use it or in my case you sort
+of recreate it every time you need it. Thanks.

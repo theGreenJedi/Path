@@ -1,0 +1,97 @@
+In this video, we will design
+a dynamic programming solution for the Knapsack with repetitions problem. Recall that in this problem, we are given
+an unlimited quantity of each item. This is a formal statement of the problem. We're given n items with weights w1,
+w2 and so on, wn. And its values are v1, v2 and so on, Vn. By capital W we denote the total capacity
+or the total weight of the knapsack. And our goal is to select the subset of
+items where each item can be taken any number of times such that
+the total weight is at most capital W while the total
+value is as large as possible. To come up with a dynamic
+programing algorithm, let's analyze the structure
+of an optimal solution. For this consider some subset of items,
+of total weight, at most capital W,
+whose total value is maximal. And let's consider some element i in it, let's see what happens if we take
+this element out of this solution. So what remains is some subset of
+items whose total weight is at most capital W minus wi. Right? So this is easy. What is crucial for
+us is that the total value of this remaining subset of items must be optimal. I mean it must be maximal amount
+all subset of items whose total weight is at most
+capital w minus w i. Why is that? Well, assume that there is some
+other subset of items whose total weight is at most, capital W- wi,
+but whose total value is higher? Let's then take the highest item and
+put it back to this subset of items. What we get, actually, is the solution
+to our initial problem of higher value. I mean,
+its total weight is at most capital W, and its value is higher than
+the value of our initial solution. But these contradicts to the fact that
+we started with an optimal solution. So, such trick is known as cut and
+paste trick. And it is frequently used in designing
+dynamic programming algorithms. So, let me repeat what we just proved. If we take an optimal solution for
+a knapsack of total weight W and take some item i out of it,
+then what remains must be an optimal solution for
+a knapsack of smaller weight. So this suggests that we have
+a separate subproblem for each possible total weight
+from zero to capital W. Namely, let's define value of w as a optimal total value of items
+whose total weight is, at most w. This allows us to express value of w
+using the values for a smaller weight knapsack. Namely to get an optimal solution for a knapsack of total weight w we
+first take some smaller knapsack and an optimal solution for
+it and add an item i to it. So first of all to be able to add
+an item i to it and get a knapsack of total weight W we need this smaller knapsack to be
+of total weight at most W minus wi, also when adding i'th item to it
+we increase its value by vi, and the final thing is we do not know which
+element to add exactly. For this reason, we just go through all possible elements,
+n items, and select the maximal value. The maximal value of the following thing: Value of W minus wi, plus vi. Having a recurrent formula for value of w as we just discussed,
+it is not so difficult to implement an algorithm solving
+the knapsack problem with repetitions. Recall that we
+expressed the solution for a knapsack, through solutions
+from knapsacks of smaller weight. This means that it makes sense
+to solve our subproblems in the order of increasing weight. So we do this in the pseudocode. Initially we set value of 0 to
+0 just to reflect that fact that the maximal possible total value of
+a Knapsack of weight 0, clearly equals 0. Then we go in a loop
+from w=1 to W. And for each such w we just compute
+the corresponding maximum as follows. We go through all items i
+such that wi is at most w. And for each such item i, we see what
+happens if we take an optimal solution of for a knapsack of size W minus wi,
+and add an item i into it. Clearly in this case, the total
+value is value(w minus wi) plus vi, and the total weight is at most W. So this is a feasible solution for
+a Knapsack of total weight W. So we check whether the result
+in value is larger and what we currently have and
+if it is we update value of w. In the end,
+we just return value of capital W. So this algorithm is clearly
+correct because it just implements our recurrent formula, right? So in particular this loop just computes
+the maximum from the previous slide. Now let's estimate
+the running time of this algorithm. It is not difficult to see
+that the running time is of n multiplied by capital W. Why is that? Well just because we
+have two nested loops here. So this is the first loop,
+and this is the second loop. The first one has capital W on it,
+capital W iterations. And the second one has n iterations. N iterations. What happens inside in the loop
+here it takes just constant time. We conclude this video by applying
+our algorithm to the example considered a few minutes before. So in this case we are given four items
+and a knapsack of total capacity 10. We are going to compute
+the optimal value for all knapsacks of total
+weight from zero to ten. So, which means that it makes sense to
+store all these values just in an array. So, shown here on the slide. Initially this array is
+filled by zero's and we're going to fill it in
+with values from left to right. So the first non-obvious cell is two. So this is the first weight for
+which we can add any item. So in this case we can actually
+say that to get a solution for knapsack of total weight two we can get
+a solution for knapsack of total weight 0 and add the last element to it. This will also give us
+plus nine to the value. So this is the only possible solution for
+this cell, so we do not even need
+to compute the maximum. So in this case,
+the value is equal to nine. So what about value of three? So in this case, we already have a choice. We can either get an optimal solution for
+total weight one, and add the fourth element to it, or we can get an optimal solution for
+a knapsack of total weight zero and add the second element to it,
+whose value is 14. So among these two values,
+the second choice is better. It gives us a solution of value 14,
+so we'll write it in this cell. Now, for value of 4,
+there are already three choices. Let's consider them. So also we can take an optimal solution
+for a knapsack of total weight two and add the last to it. So this is plus 9 or we can take
+an optimal solution for a knapsack of total weight one and add 
+the second item to it so plus 14 or
+we can take an optimal solution for a knapsack of total weight 0 and
+add the third item. This is plus 16. Right?
+So in this case, we need to select the maximum amount 16,
+14 and 9 plus 9 which is 18. In this case, 18 is the maximum value. So we'll write it in this cell. So by continuing in the same manner,
+we can fill in the whole array and see that the last
+element is equal to 48, we just devise that the optimal value for this knapsack with repetitions
+problem is equal to 48. And also, let me remind you that
+this optimal value can be updated by taking one copy of this item, and 2 copies of the last item. In the next video, we will learn how to solve this problem
+when repetitions are not allowed.

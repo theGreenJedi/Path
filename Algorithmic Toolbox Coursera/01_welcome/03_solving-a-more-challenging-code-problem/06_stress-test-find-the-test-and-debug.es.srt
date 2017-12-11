@@ -1,0 +1,492 @@
+1
+00:00:00,170 --> 00:00:03,890
+En este vídeo, lanzaremos la prueba
+de estrés para encontrar un ensayo
+
+2
+00:00:03,890 --> 00:00:07,690
+en el que nuestra solución principal y
+nuestra solución alternativa difieran,
+
+3
+00:00:07,690 --> 00:00:11,650
+Usamos esta prueba para depurar
+nuestra solución principal y corregirla.
+
+4
+00:00:11,650 --> 00:00:12,590
+Así que guardamos el archivo.
+
+5
+00:00:13,780 --> 00:00:18,620
+Ahora compilaremos este archivo
+porque querremos ejecutarlo.
+
+6
+00:00:18,620 --> 00:00:25,130
+Y para compilar este archivo, vamos a la sección
+"Resolviendo Ejercicios de Programación".
+
+7
+00:00:25,130 --> 00:00:33,100
+Miramos las indicaciones de C++, las copiamos
+y las usamos para compilar nuestro archivo.
+
+8
+00:00:33,100 --> 00:00:37,390
+Por supuesto, también especificamos
+qué fichero queremos compilar y
+
+9
+00:00:37,390 --> 00:00:41,401
+también el nombre para el archivo de salida
+que será stress_test, sin cpp.
+
+10
+00:00:42,890 --> 00:00:48,060
+Compilamos nuestra prueba de estrés y
+después la lanzamos y vemos que sucede.
+
+11
+00:00:48,060 --> 00:00:52,370
+Vemos que nuestra pantalla
+se ha llenado con un montón de líneas.
+
+12
+00:00:52,370 --> 00:00:57,812
+De hecho, estas líneas son las palabras
+"OK" y algunos números,
+
+13
+00:00:57,812 --> 00:01:03,695
+como el número n de 2 a 11,
+y los números de entrada que son grandes.
+
+14
+00:01:03,695 --> 00:01:08,376
+Y hay una gran cantidad de ensayos para los
+cuales nuestras soluciones no difieren, y
+
+15
+00:01:08,376 --> 00:01:10,180
+y todos se ejecutaron bastante rápido.
+
+16
+00:01:10,180 --> 00:01:15,350
+Y entonces al final, tenemos
+el número 11, que es n, y
+
+17
+00:01:15,350 --> 00:01:19,530
+después 11 números grandes, que son los datos de prueba, y después las palabras
+
+18
+00:01:19,530 --> 00:01:24,895
+respuesta incorrecta y dos números muy grandes
+que son diferentes, y se trata de las respuestas
+
+19
+00:01:24,895 --> 00:01:29,400
+correspondientes a la primera y
+la segunda solución que hemos implementado
+
+20
+00:01:29,400 --> 00:01:30,220
+Entonces, ahora,
+
+21
+00:01:30,220 --> 00:01:36,020
+ya tenemos un test en el que al menos
+una de nuestras soluciones da un resultado incorrecto
+
+22
+00:01:36,020 --> 00:01:41,030
+Pero es muy dificil trabajar con este
+test porque tenemos 11 números y
+
+23
+00:01:41,030 --> 00:01:44,250
+son muy grandes y
+la respuesta a este problema es aún más grande.
+
+24
+00:01:44,250 --> 00:01:50,160
+Así que vamos a intentar encontrar un test más pequeño
+en el que nuestra solución aún falle
+
+25
+00:01:50,160 --> 00:01:56,530
+Normalmente podemos crear un
+test muy pequeño con esta técnica
+
+26
+00:01:56,530 --> 00:02:01,820
+Así que volvamos a nuestro código,
+stress_test.cpp.
+
+27
+00:02:01,820 --> 00:02:09,050
+Y disminuyamos las restricciones
+de n y de los números.
+
+28
+00:02:09,050 --> 00:02:14,080
+Por ejemplo,
+queremos que nuestro número n no sea mayor que 5,
+
+29
+00:02:14,080 --> 00:02:18,230
+así que primero generamos un número aleatorio
+módulo 4 para que tenga un valor de 0 a 3.
+
+30
+00:02:18,230 --> 00:02:22,170
+Y, después de sumar 2,
+será entre 2 y 5.
+
+31
+00:02:22,170 --> 00:02:26,950
+Y también,
+queremos que nuestros números sean inferiores a 10,
+
+32
+00:02:26,950 --> 00:02:30,270
+Así que simplemente generamos números módulo 10.
+
+33
+00:02:31,340 --> 00:02:33,540
+Y eso es todo lo que cambiamos.
+
+34
+00:02:33,540 --> 00:02:35,720
+Ahora guardamos el fichero.
+
+35
+00:02:35,720 --> 00:02:39,110
+Recompilamos con las mismas opciones.
+
+36
+00:02:39,110 --> 00:02:41,430
+Y volvemos a lanzar nuestro test de estrés.
+
+37
+00:02:42,790 --> 00:02:49,030
+Ahora encontramos un test en el que
+las soluciones difieren incluso más rapido.
+
+38
+00:02:49,030 --> 00:02:52,260
+Puede que sólo cinco o siete tests se ejecutaron correctamente.
+
+39
+00:02:52,260 --> 00:02:56,100
+Y ahora tenemos un test con cinco números,
+que son 2, 9, 3, 1 y 9,
+
+40
+00:02:56,100 --> 00:02:59,000
+en los que nuestras soluciones difieren.
+
+41
+00:02:59,000 --> 00:03:01,820
+Y la respuesta de
+la primera solución es 81.
+
+42
+00:03:01,820 --> 00:03:04,350
+Y la respuesta de
+la segunda solución es 27.
+
+43
+00:03:04,350 --> 00:03:05,990
+¿Cuál de ellos es incorrecta?
+
+44
+00:03:05,990 --> 00:03:11,930
+Por supuesto, el primero es el correcto,
+ya que tenemos los números 9 y 
+
+45
+00:03:11,930 --> 00:03:17,100
+el segundo 9, que son los más grandes
+de los valores de entrada, y su producto es 81.
+
+46
+00:03:17,100 --> 00:03:21,330
+Por tanto, nuestra primera solucón
+da una respuesta correcta, pero
+
+47
+00:03:21,330 --> 00:03:25,040
+nuestra segunda solución
+da un resultado incorrecto.
+
+48
+00:03:25,040 --> 00:03:28,770
+Y pensemos por qué puede ser.
+
+49
+00:03:28,770 --> 00:03:33,610
+Bien, puede ser si multiplica
+números incorrectos del arreglo.
+
+50
+00:03:33,610 --> 00:03:38,810
+Así que vamos a volver al código y
+comprobar cuáles son esos números.
+
+51
+00:03:40,800 --> 00:03:43,020
+Podemos ir al código y
+
+52
+00:03:43,020 --> 00:03:48,010
+buscar en el código
+la función MaxPairwiseProductFast.
+
+53
+00:03:48,010 --> 00:03:52,070
+Es muy conveniente 
+tener una función separada para
+
+54
+00:03:52,070 --> 00:03:56,200
+esta solución porque el error
+debería encontrarse en algún lugar de esta función.
+
+55
+00:03:56,200 --> 00:03:59,650
+Así que para simplificar nuestro objetivo de depurar,
+
+56
+00:03:59,650 --> 00:04:04,900
+vamos a imprimir los índices de
+el número más alto y del segundo
+
+57
+00:04:04,900 --> 00:04:10,750
+número más alto que al menos esta función
+piensa que son los dos máximos en el arreglo.
+
+58
+00:04:10,750 --> 00:04:13,190
+Así que los devolvemos como salida.
+
+59
+00:04:13,190 --> 00:04:17,320
+Primero el primer índice,
+después un espacio para separarlos,
+
+60
+00:04:17,320 --> 00:04:21,090
+a continuación el segundo índice, y
+el carácter de nueva línea.
+
+61
+00:04:22,250 --> 00:04:24,050
+Guardamos nuestro programa.
+
+62
+00:04:24,050 --> 00:04:29,460
+Recompilamos nuevamente, y
+volvemos a lanzar los test de estrés.
+
+63
+00:04:29,460 --> 00:04:35,620
+Fijémonos en que aunque generamos
+test aleatorios, es seguro 
+
+64
+00:04:35,620 --> 00:04:40,690
+volver a lanzar nuestros tests de estrés
+porque son pseudo aleatorios.
+
+65
+00:04:40,690 --> 00:04:44,960
+La secuencia de valores
+generados aleatoriamente es la misma.
+
+66
+00:04:44,960 --> 00:04:48,590
+Por lo que es un test reproducible.
+
+67
+00:04:48,590 --> 00:04:53,300
+Por tanto, de nuevo, tenemos el mismo
+test en que nuestras soluciones difieren
+
+68
+00:04:53,300 --> 00:04:56,290
+con cinco números, los mismos cinco números.
+
+69
+00:04:56,290 --> 00:05:01,280
+Y ahora, bajo la línea con los cinco números,
+tenemos otra línea que dice 1 2.
+
+70
+00:05:01,280 --> 00:05:08,140
+Esto es de hecho nuestra traza, que
+significa que el índice del primer número,
+
+71
+00:05:08,140 --> 00:05:12,452
+que es el máximo, es 1 y
+se corresponde con el número
+
+72
+00:05:12,452 --> 00:05:18,090
+9 porque enumeramos nuestros números
+desde 0 en nuestro array de C++.
+
+73
+00:05:18,090 --> 00:05:22,402
+Y el segundo número tiene índice 2,
+y es el número 3, otra vez,
+
+74
+00:05:22,402 --> 00:05:24,810
+porque comenzamos los arreglos en 0.
+
+75
+00:05:24,810 --> 00:05:29,400
+Por tanto, nuestra solución rápida piensa
+que el segundo número máximo
+
+76
+00:05:29,400 --> 00:05:33,130
+en el arreglo es el número 3 en lugar
+del número 9, que está en la posición 4.
+
+77
+00:05:34,450 --> 00:05:38,399
+Así que volvamos al código
+y veamos por qué ha pasado.
+
+78
+00:05:39,770 --> 00:05:42,500
+De nuevo, abrimos el fichero de código.
+
+79
+00:05:42,500 --> 00:05:45,920
+Vamos a la función
+MaxPairwiseProductFast
+
+80
+00:05:45,920 --> 00:05:47,710
+Ignoramos el código para
+
+81
+00:05:47,710 --> 00:05:52,350
+el max_index1 y estamos más interesados en el código para max_index2.
+
+82
+00:05:52,350 --> 00:05:57,390
+Veamos ahora esta
+expresión if compleja,
+
+83
+00:05:58,430 --> 00:06:04,410
+en la que intentamos determinar
+si un número en la posición j
+
+84
+00:06:05,530 --> 00:06:11,660
+podría ser un nuevo máximo, que es diferente
+del máximo que ya hemos encontrado.
+
+85
+00:06:11,660 --> 00:06:16,450
+Y vamos a mirar en más detalle
+a está primera condición.
+
+86
+00:06:16,450 --> 00:06:21,240
+Lo que hacemos aquí es comprobar
+que el número en la posición j es
+
+87
+00:06:21,240 --> 00:06:24,620
+diferente del máximo
+que ya hemos encontrado.
+
+88
+00:06:24,620 --> 00:06:26,640
+Pero ese es exactamente el problema.
+
+89
+00:06:26,640 --> 00:06:30,120
+Lo que necesitamos en cambio es que j
+
+90
+00:06:30,120 --> 00:06:34,960
+sea diferente de max_index1 porque 
+no queremos encontrar el mismo número, pero
+
+91
+00:06:34,960 --> 00:06:40,600
+podemos encontrar un número que es igual
+que el primer máximo encontrado.
+
+92
+00:06:40,600 --> 00:06:45,574
+Por lo que en lugar de esta comparación
+lo que necesitamos realmente es comparar j,
+
+93
+00:06:49,210 --> 00:06:52,039
+con max_index1.
+
+94
+00:06:52,039 --> 00:06:57,360
+Si arreglamos nuestro código de esta manera,
+entonces seremos al menos capaces
+
+95
+00:06:57,360 --> 00:07:03,570
+de encontrar el segundo número 0 en nuestro
+arreglo de entrada 2 9 3 1 9, que ya vimos.
+
+96
+00:07:03,570 --> 00:07:07,450
+Así que veamos cómo
+funciona después de este arreglo.
+
+97
+00:07:07,450 --> 00:07:12,460
+Despúes, guardamos el archivo, 
+lo recompilamos con las mismas opciones y
+
+98
+00:07:12,460 --> 00:07:14,820
+lanzamos nuestra prueba de estrés.
+
+99
+00:07:14,820 --> 00:07:20,510
+Ahora vemos una pantalla que rápida y 
+repetidamente se está llenando con
+
+100
+00:07:20,510 --> 00:07:25,240
+algunos números y algunos 'OK'.
+
+101
+00:07:25,240 --> 00:07:30,170
+Esperamos algún tiempo, tal vez 10 segundos o
+
+102
+00:07:30,170 --> 00:07:37,025
+incluso 30 segundos para asegurarnos que no podemos 
+encontrar una prueba en la que nuestras soluciones difieran.
+
+103
+00:07:37,025 --> 00:07:40,380
+Por ahora, parece que ese es el caso.
+
+104
+00:07:40,380 --> 00:07:43,255
+En nuestro siguiente vídeo haremos más pruebas y
+
+105
+00:07:43,255 --> 00:07:46,984
+enviaremos nuestra solución principal al sistema para ver si funciona.

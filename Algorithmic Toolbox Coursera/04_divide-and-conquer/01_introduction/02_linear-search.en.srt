@@ -1,0 +1,619 @@
+1
+00:00:00,220 --> 00:00:02,640
+We're going to start our divide and
+conquer algorithms
+
+2
+00:00:02,640 --> 00:00:05,355
+with what might be considered
+a degenerate form of divide and conquer:
+
+3
+00:00:05,355 --> 00:00:08,980
+Searching in an unsorted array using
+linear search.
+
+4
+00:00:10,230 --> 00:00:11,840
+Here's an example of an array.
+
+5
+00:00:11,840 --> 00:00:13,730
+To find a particular element of the array,
+
+6
+00:00:13,730 --> 00:00:17,760
+we look at the first element, if it's not
+there, we look at the second element.
+
+7
+00:00:17,760 --> 00:00:21,720
+We continue until we either find
+the element we're interested in, or
+
+8
+00:00:21,720 --> 00:00:22,840
+until we reach the end of the array.
+
+9
+00:00:24,210 --> 00:00:26,740
+This same type of search is also used
+to free elements that are stored
+
+10
+00:00:26,740 --> 00:00:27,290
+in a linked list.
+
+11
+00:00:28,990 --> 00:00:31,280
+Let me describe a real-life
+use of linear search.
+
+12
+00:00:31,280 --> 00:00:34,590
+Twenty years ago I did consulting for
+a company developing software for
+
+13
+00:00:34,590 --> 00:00:36,610
+one the first hand-held computers,
+the Apple Newton.
+
+14
+00:00:37,610 --> 00:00:40,220
+The application translated words
+between any two of the languages:
+
+15
+00:00:40,220 --> 00:00:44,100
+English, French, Italian,
+German, or Spanish.
+
+16
+00:00:44,100 --> 00:00:46,630
+Its data was stored in
+five parallel arrays.
+
+17
+00:00:46,630 --> 00:00:50,030
+So for example,
+car was in English at the second position.
+
+18
+00:00:50,030 --> 00:00:51,880
+In Spanish, car is auto, so
+
+19
+00:00:51,880 --> 00:00:53,860
+the second position of
+the Spanish array contained auto.
+
+20
+00:00:55,010 --> 00:00:59,580
+The program would take the user's input
+word along with from and to languages.
+
+21
+00:00:59,580 --> 00:01:02,780
+Then it would search through
+the corresponding from array, English for
+
+22
+00:01:02,780 --> 00:01:06,300
+example with trying to translate
+car from English to Spanish.
+
+23
+00:01:06,300 --> 00:01:07,520
+If it found a match,
+
+24
+00:01:07,520 --> 00:01:10,820
+it returned the element at the same
+index location and target language.
+
+25
+00:01:12,930 --> 00:01:16,320
+With a small dictionary of three words,
+as in this example,
+
+26
+00:01:16,320 --> 00:01:18,130
+this linear search is quick.
+
+27
+00:01:18,130 --> 00:01:22,300
+However, I was brought in as a consultant
+to speed up the application.
+
+28
+00:01:22,300 --> 00:01:25,330
+When users clicked on the translate
+button, it'd take seven to ten seconds
+
+29
+00:01:25,330 --> 00:01:29,400
+to retrieve the translated word, an
+eternity as far as the user was concerned.
+
+30
+00:01:30,520 --> 00:01:34,100
+There were about 50,000
+words in the dictionary, so
+
+31
+00:01:34,100 --> 00:01:36,980
+on average it took 25,000 word
+checks in order to find a match.
+
+32
+00:01:38,000 --> 00:01:41,100
+The next video, I'll show you how we sped
+up this application using binary search.
+
+33
+00:01:41,100 --> 00:01:46,450
+The problem statement for
+linear search is as follows:
+
+34
+00:01:46,450 --> 00:01:50,780
+given an unsorted array with n elements
+in it and a key k, find an index,
+
+35
+00:01:50,780 --> 00:01:53,530
+i of the array element that's equal to k.
+
+36
+00:01:53,530 --> 00:01:56,590
+If no element array is equal to k,
+the output should be NOT_FOUND.
+
+37
+00:01:57,590 --> 00:02:02,060
+Note that we say an index rather
+than the index, to account for
+
+38
+00:02:02,060 --> 00:02:04,870
+the fact that there may be
+duplicates in the array.
+
+39
+00:02:04,870 --> 00:02:07,460
+This might seem pedantic,
+but it's important
+
+40
+00:02:07,460 --> 00:02:10,860
+to be as careful as possible in
+specifying our problem statement.
+
+41
+00:02:12,560 --> 00:02:15,350
+The well known solution to this
+problem is a linear search.
+
+42
+00:02:15,350 --> 00:02:18,230
+Iterate through the array until you
+find the chosen element. If you reach
+
+43
+00:02:18,230 --> 00:02:21,330
+the end of the array and haven't yet
+found the element, return NOT_FOUND.
+
+44
+00:02:23,520 --> 00:02:27,410
+We can construct a divide and conquer
+recursive algorithm to solve this problem.
+
+45
+00:02:27,410 --> 00:02:30,060
+Our recursive function
+will take four parameters:
+
+46
+00:02:30,060 --> 00:02:31,990
+A, the array of values;
+
+47
+00:02:31,990 --> 00:02:35,210
+low, the lower bound of
+the array in which to search;
+
+48
+00:02:35,210 --> 00:02:37,590
+hgh, the upper bound of the array
+in which to search; and k,
+
+49
+00:02:37,590 --> 00:02:38,770
+the key for which to search.
+
+50
+00:02:38,770 --> 00:02:42,290
+It will return either: an index
+in the range low to high,
+
+51
+00:02:42,290 --> 00:02:46,840
+if it finds a matching value; or
+NOT_FOUND, if it finds no such match.
+
+52
+00:02:48,170 --> 00:02:51,820
+As with all recursive solutions, we'll
+need to accurately handle the base case.
+
+53
+00:02:52,880 --> 00:02:57,420
+In particular, base cases for this problem
+will be either: be given an empty array, or
+
+54
+00:02:57,420 --> 00:02:58,640
+finding a match on the first element.
+
+55
+00:03:00,020 --> 00:03:01,330
+The subproblem is to search through
+
+56
+00:03:01,330 --> 00:03:03,520
+the sub array constructed by
+skipping the first element.
+
+57
+00:03:04,530 --> 00:03:06,800
+We'll recursively search
+through that smaller sub array,
+
+58
+00:03:06,800 --> 00:03:09,260
+and then just return the result
+of the recursive search.
+
+59
+00:03:10,730 --> 00:03:13,360
+Although this is a recursive
+routine that breaks the problem into
+
+60
+00:03:13,360 --> 00:03:14,620
+smaller problems,
+
+61
+00:03:14,620 --> 00:03:18,160
+some would argue that this shouldn't
+be called divide and conquer.
+
+62
+00:03:18,160 --> 00:03:19,220
+They claim that a divide and
+
+63
+00:03:19,220 --> 00:03:23,560
+conquer algorithm should divide
+the problem into a smaller subproblem,
+
+64
+00:03:23,560 --> 00:03:27,350
+where the smaller subproblem is some
+constant fraction of the original problem.
+
+65
+00:03:27,350 --> 00:03:31,006
+In this case the su-problem isn't 50%,
+or 80%, or
+
+66
+00:03:31,006 --> 00:03:34,840
+even 95% of the original problem size.
+
+67
+00:03:34,840 --> 00:03:38,680
+Instead, it's just one smaller
+than the original problem size.
+
+68
+00:03:38,680 --> 00:03:41,180
+I don't know, maybe we should
+call this algorithm
+
+69
+00:03:41,180 --> 00:03:43,400
+subtract and conquer rather than
+divide and conquer.
+
+70
+00:03:45,740 --> 00:03:49,150
+In order to examine the runtime of our
+recursive algorithm it's often useful to
+
+71
+00:03:49,150 --> 00:03:52,710
+define the time that the algorithm takes
+in the form of a recurrence relation.
+
+72
+00:03:53,760 --> 00:03:57,130
+A recurrence relation defines a sequence
+of values in terms of a recursive formula.
+
+73
+00:03:58,520 --> 00:04:01,870
+The example here shows the recursive
+definition of the values
+
+74
+00:04:01,870 --> 00:04:02,750
+in the Fibonacci sequence.
+
+75
+00:04:03,980 --> 00:04:06,180
+You can see that we defined the value for
+
+76
+00:04:06,180 --> 00:04:09,340
+the n'th Fibonacci as the sum
+of the preceding two values.
+
+77
+00:04:10,650 --> 00:04:14,410
+As with any recursive definition,
+we need one or more base cases.
+
+78
+00:04:14,410 --> 00:04:17,940
+Here, we define base cases when
+evaluating F(0) and F(1).
+
+79
+00:04:19,540 --> 00:04:23,392
+From this recursive definition, we've
+defined values for evaluating F(n) for
+
+80
+00:04:23,392 --> 00:04:24,940
+any non-negative integer, n.
+
+81
+00:04:24,940 --> 00:04:29,406
+The sequence starts with 0, 1,
+1, 2, 3, 5, 8, and continues on.
+
+82
+00:04:31,298 --> 00:04:34,335
+When we're doing run-time analysis for
+divide and conquer algorithms,
+
+83
+00:04:34,335 --> 00:04:36,890
+we usually define a recurrence
+relation for T(n).
+
+84
+00:04:36,890 --> 00:04:39,960
+where T stands for the worst time taken for
+the algorithm, and
+
+85
+00:04:39,960 --> 00:04:41,950
+n is the size of the problem.
+
+86
+00:04:41,950 --> 00:04:45,340
+For this algorithm, the worst-case
+time is when an element isn't found
+
+87
+00:04:45,340 --> 00:04:47,490
+because we must check every
+element of the array.
+
+88
+00:04:47,490 --> 00:04:51,850
+In this case we have a recursion for
+a problem of size n
+
+89
+00:04:51,850 --> 00:04:56,380
+which consists of a subproblem of size n
+minus one plus a constant amount of work.
+
+90
+00:04:56,380 --> 00:04:59,950
+The constant amount of work
+includes checking high versus low,
+
+91
+00:04:59,950 --> 00:05:04,130
+checking A at low equals key, preparing
+the parameters for the recursive call,
+
+92
+00:05:04,130 --> 00:05:07,040
+and then returning
+the result of that call.
+
+93
+00:05:07,040 --> 00:05:10,490
+Thus the recurrence is T(n)
+equals T(n-1) plus c,
+
+94
+00:05:10,490 --> 00:05:12,240
+where c is some constant.
+
+95
+00:05:13,710 --> 00:05:18,170
+The base case of the recursion is in an empty
+array, there's a constant amount of work:
+
+96
+00:05:18,170 --> 00:05:21,280
+checking high less than low and
+then returning NOT_FOUND.
+
+97
+00:05:21,280 --> 00:05:22,590
+Thus T(0) equals c.
+
+98
+00:05:22,590 --> 00:05:26,650
+Let's look at a recursion tree
+in order to determine how
+
+99
+00:05:26,650 --> 00:05:28,630
+much total time the algorithm takes.
+
+100
+00:05:28,630 --> 00:05:31,030
+As is normal, we're looking
+at worst-case runtime,
+
+101
+00:05:31,030 --> 00:05:32,600
+which will occur when no
+matching element is found.
+
+102
+00:05:33,780 --> 00:05:37,230
+In a recursion tree, we show the problem
+along with the size of the problem.
+
+103
+00:05:37,230 --> 00:05:40,510
+We see that we have an original problem of
+size n which then generates a subproblem
+
+104
+00:05:40,510 --> 00:05:45,505
+of size n-1, and so on all the way
+down to a subproblem of size zero:
+
+105
+00:05:45,505 --> 00:05:50,080
+an empty array. The work column shows the
+amount of work that is done at each level.
+
+106
+00:05:50,080 --> 00:05:55,210
+We have a constant amount of work at each
+level which we represent by c, a constant.
+
+107
+00:05:56,530 --> 00:05:59,430
+Alternatively, we could have represented
+this constant amount of work
+
+108
+00:05:59,430 --> 00:06:00,110
+with big theta of one.
+
+109
+00:06:01,820 --> 00:06:04,670
+The total work is just the sum
+of the work done at each level
+
+110
+00:06:04,670 --> 00:06:07,190
+that's a summation from zero to n of
+a constant c.
+
+111
+00:06:07,190 --> 00:06:10,830
+Which is n plus one times c,
+or just big theta of n.
+
+112
+00:06:12,870 --> 00:06:16,120
+This analysis seems overly complicated for
+such a simple result.
+
+113
+00:06:16,120 --> 00:06:21,420
+We already know that searching through n elements
+of the array will take big theta of n time.
+
+114
+00:06:22,560 --> 00:06:26,890
+However, this method of recurrence
+analysis will become more useful
+
+115
+00:06:26,890 --> 00:06:29,589
+as we analyze more complicated 
+divide and conquer algorithms.
+
+116
+00:06:32,050 --> 00:06:35,220
+Many times a recursive algorithm is
+translated into an iterative one.
+
+117
+00:06:35,220 --> 00:06:37,080
+Here we've done that for
+the linear search.
+
+118
+00:06:37,080 --> 00:06:40,330
+We search through the elements of array
+A from index low to index high.
+
+119
+00:06:40,330 --> 00:06:43,190
+If we find a match,
+we return the associated index.
+
+120
+00:06:43,190 --> 00:06:44,800
+If not, we return NOT_FOUND.
+
+121
+00:06:46,270 --> 00:06:50,950
+To summarize, what we've done is one:
+created a recursive solution;
+
+122
+00:06:52,000 --> 00:06:54,190
+two: defined a corresponding
+recurrence relation, T;
+
+123
+00:06:55,190 --> 00:06:59,170
+three: solved T of n to determine
+the worst-case runtime; and
+
+124
+00:06:59,170 --> 00:07:01,870
+four: created an iterative
+solution from the recursive one.
+
+125
+00:07:01,870 --> 00:07:05,400
+What you've seen in this video,
+then, is an example
+
+126
+00:07:05,400 --> 00:07:09,470
+of a trivial use of our divide and conquer
+technique in order to do a linear search.
+
+127
+00:07:10,540 --> 00:07:12,940
+In our next video we'll
+look at a non-trivial use
+
+128
+00:07:12,940 --> 00:07:16,450
+of the divide an conquer technique for
+searching in a sorted array:
+
+129
+00:07:16,450 --> 00:07:18,080
+the well known binary search.

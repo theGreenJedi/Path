@@ -1,0 +1,37 @@
+Hola, en esta clase discutiremos el problema de organizar niños en grupos. Y aprenderás que si usas un algoritmo ingenuo
+ para resolver este problema, funcionará muy, pero muy lento, porque el tiempo de ejecución
+ de este algoritmo es exponencial. Pero después, en la siguiente lección, seremos capaces
+ de mejorar el tiempo de ejecución significativamente, proponiendo un
+ algoritmo en tiempo polinomial. Consideremos la situación siguiente. Has invitado a muchos niños a la celebración de una fiesta y quieres entretenerlos y enseñarles algo en el proceso. Vas a contratar unos cuantos maestros y dividir a los niños en grupos y asignar
+ un maestro a cada uno de los grupos. Y este maestro trabajará con este grupo durante toda la fiesta. Pero sabes que para que un maestro trabaje con un
+ grupo de niños de manera eficiente, los niños de ese grupo deben ser
+ de aproximadamente la misma edad. Más específicamente, la edad de 
+cualesquiera dos niños del mismo grupo deben diferir a lo más por un año. También, quieres minimizar el número de grupos porque quieres contratar el menor número de maestros, y gastar el dinero en regalos y otro tipo
+ de entretenimiento para los niños. Entonces, necesitas dividir a los niños en el
+ menor número posible de grupos, tal que la edad de cualquier par de niños de cualquier
+ grupo difiere en a lo más un año. Ahora veamos el pseudo código del algoritmo
+ ingenuo que resuelve el problema. Básicamente, este algoritmo considerará cada posible partición de los niños en grupos, y encontrará la partición que satisfaga la propiedad de que las edades de los niños en cualquier grupo difieran a lo más por un año, y
+ que contenga el mínimo número de grupos. Empezamos asignando el valor inicial del número de grupos a la respuesta m, y este valor
+ inicial es justo el número de niños, porque siempre podemos dividir a los niños en grupos de a uno, y entonces, por supuesto, cada grupo tiene un solo
+ niño y la condición se satisface. Entonces, consideramos cada partición posible
+ de todos los niños en grupos. El número de grupos puede variar,
+ y esto es denotado por el número k, y tenemos los grupos G1, G2, hasta Gk. Y entonces cuando tenemos una partición, primero necesitamos checar si es una buena partición o no. Así que tenemos la variable good,
+ a la que le asignamos True al principio, porque pensamos que tal vez sea una buena partición. Pero entonces necesitamos checar, para cada grupo,
+ si se satisface nuestra condición o no. Así que vamos en un bucle for, con índice i del grupo de 1 a k, y entonces consideramos el grupo particular Gi y necesitamos determinar si todos los niños
+ en este grupo difieren a lo más por un año, o hay un par que difiere por más. Para checar esto, es suficiente comparar al niño
+ más chico con el mayor de edad. Si sus edades difieren por más de un año, el grupo es malo. De otra forma, cada par de niños difieren a lo más
+ por un año, y el grupo es bueno. Y así vamos por todos los grupos en el bucle for. Si al menos uno de los grupos es malo, entonces nuestra variable good tendrá valor False al final, de otra forma, si todos los grupos son buenos, la 
+variable good permanecerá con valor True. Entonces, después de este bucle for, checamos
+ el valor de la variable good, y si es True, mejoramos nuestra respuesta, al menos tratamos de mejorarla, con el mínimo de su valor actual y el número de grupos en la partición actual. Y así, al final del bucle for exterior,
+ que checa todas las particiones, nuestra variable m contendrá el número mínimo
+ posible de grupos en una partición que satisface todas las condiciones. Es obvio que este algoritmo trabaja correctamente porque considera básicamente todas las variantes posibles y selecciona la mejor de éstas que satisface nuestra
+ condición sobre los grupos. Ahora, estimemos el tiempo de ejecución de este algoritmo. Y yo enuncio que el número de 
+operaciones que hace este algoritmo es al menos 2^n, donde n es el número de niños en C. De hecho, este algoritmo corre aún más lento y hace muchas más operaciones que 2^n, pero probaremos solamente esta cota inferior para 
+mostrar que este algoritmo es muy lento. Para probarlo, consideremos sólo
+ particiones de los niños en dos grupos. Por supuesto, hay muchas más particiones además de esas. Podemos dividirlos en dos, tres, cuatro, etc., muchos más grupos, pero, consideremos sólo particiones en dos grupos y probemos que incluso el número de tales particiones es al menos, 2^n. Realmente, si C es una unión de dos grupos, G1 y G2, entonces podemos hacer esa partición básicamente para cualquier G1 que es un subconjunto de C. Para cualquier G1, sólo toma como G2 el grupo que contenga a todos los niños
+ que no forman parte del primer grupo. Y entonces, todos los niños se dividirán en estos dos grupos. Ahora, el tamaño del conjunto de todos los niños es n. Y si quieres calcular el número de 
+grupos posibles G1, entonces debemos notar que cada elemento del conjunto o cada niño, puede estar incluido o no en el conjunto G1. Así que, pueden haber 2^n grupos diferentes G1. Y entonces hay al menos 2^n particiones del conjunto de todos los niños en dos grupos, y eso significa que nuestro algoritmo hará al menos 2^n operaciones porque considera cada partición, y entre todas las particiones, están
+ todas las particiones en dos grupos. Entonces, ¿cuánto tiempo le llevara realmente? Vimos que el algoritmo ingenuo trabaja en tiempo Omega(2^n), así que hace al menos 2^n operaciones. Y, por ejemplo, para nada más 50 niños esto es al menos 2^50 o el número enorme que aparece en la pantalla. Este es el número de operaciones que necesitaremos
+ hacer y yo estimo que en una computadora regular este cálculo te
+ llevará al menos dos semanas, si este fuera exactamente el
+ número de operaciones que necesitaras. Así que realmente es muy lento. Pero en la siguiente lección mejoraremos esto significativamente.

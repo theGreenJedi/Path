@@ -1,0 +1,617 @@
+1
+00:00:00,170 --> 00:00:03,980
+Hola, en este video vamos a ver el tiempo de
+ ejecución de la búsqueda binaria
+
+2
+00:00:03,980 --> 00:00:06,510
+y veremos una versión iterativa de ésta.
+
+3
+00:00:06,510 --> 00:00:08,840
+Entonces, aquí está nuestro algoritmo 
+de búsqueda binaria de nuevo.
+
+4
+00:00:08,840 --> 00:00:11,480
+Checamos a la mitad, si no está
+
+5
+00:00:11,480 --> 00:00:13,710
+entonces buscamos en la parte inferior o en la superior.
+
+6
+00:00:14,760 --> 00:00:18,030
+Entonces, ¿cuál es nuestra relación de recurrencia 
+para el tiempo en el peor de los casos?
+
+7
+00:00:18,030 --> 00:00:20,894
+Bueno, el peor caso es si no encontramos el elemento.
+
+8
+00:00:20,894 --> 00:00:27,696
+Así que tenemos que T(n) es igual a T 
+de aproximadamente n/2, más c.
+
+9
+00:00:27,696 --> 00:00:32,330
+Tenemos la función piso de n porque, si n es impar,
+
+10
+00:00:32,330 --> 00:00:36,780
+digamos que tenemos 5 elementos, entonces la pregunta es,
+
+11
+00:00:36,780 --> 00:00:40,085
+¿qué tan grande es el tamaño del problema en la siguiente llamada?
+
+12
+00:00:40,085 --> 00:00:44,306
+Entonces, si tenemos cinco elementos vamos a, 
+ya sea buscar en la parte superior del
+
+13
+00:00:44,306 --> 00:00:44,815
+arreglo,
+
+14
+00:00:44,815 --> 00:00:47,665
+esos dos elementos, o la parte inferior del arreglo,
+ estos otros dos elementos,
+
+15
+00:00:47,665 --> 00:00:49,055
+porque saltamos el punto medio,
+
+16
+00:00:49,055 --> 00:00:50,575
+ya lo checamos.
+
+17
+00:00:50,575 --> 00:00:57,660
+Más alguna cantidad constante de tiempo
+ por calcular el punto medio
+
+18
+00:00:57,660 --> 00:01:01,000
+y por comparar el punto medio con la clave.
+
+19
+00:01:01,000 --> 00:01:07,500
+Y nuestro caso base es cuando tenemos un arreglo vacío,
+
+20
+00:01:07,500 --> 00:01:09,580
+y eso es sólo una cantidad de tiempo constante.
+
+21
+00:01:11,260 --> 00:01:12,460
+Así que ¿cómo luce el tiempo de ejecución?
+
+22
+00:01:12,460 --> 00:01:15,130
+Teníamos nuestro tamaño original n, y lo vamos a dividir,
+
+23
+00:01:15,130 --> 00:01:16,250
+n entre 2, n entre 4,
+
+24
+00:01:16,250 --> 00:01:17,710
+y así sucesivamente.
+
+25
+00:01:17,710 --> 00:01:21,150
+¿Cuántos problemas de éstos tenemos?
+
+26
+00:01:21,150 --> 00:01:23,880
+Bien, si estamos cortando algo en dos una y otra vez,
+
+27
+00:01:23,880 --> 00:01:29,030
+va a tomar log en base dos de
+ tales iteraciones hasta llegar a 1.
+
+28
+00:01:29,030 --> 00:01:34,400
+Entonces, el total aquí realmente 
+es log en base dos de n+1.
+
+29
+00:01:34,400 --> 00:01:37,410
+La cantidad de trabajo que estamos haciendo es c.
+
+30
+00:01:37,410 --> 00:01:40,900
+Entonces, en cada nivel hacemos un trabajo c,
+
+31
+00:01:40,900 --> 00:01:42,730
+por lo que la cantidad total de trabajo, si sumamos,
+
+32
+00:01:42,730 --> 00:01:46,480
+es sólo la suma de i=0 hasta log en base 2 de n, de c.
+
+33
+00:01:47,760 --> 00:01:54,110
+Eso es sólo el log en base 2 de n+1 veces c.
+
+34
+00:01:55,110 --> 00:01:58,330
+Y eso es sólo Theta grande del log en base 2 de n,
+
+35
+00:01:58,330 --> 00:02:04,207
+lo que realmente decimos es Theta de
+ log n, porque la base no importa,
+
+36
+00:02:04,207 --> 00:02:06,379
+es sólo un factor constante que se multiplica.
+
+37
+00:02:08,892 --> 00:02:12,315
+Muy bien, ¿cómo luce la versión iterativa?
+
+38
+00:02:12,315 --> 00:02:16,600
+La versión iterativa tiene los mismos
+ parámetros, low, high, y la clave k.
+
+39
+00:02:16,600 --> 00:02:20,350
+Y tenemos un bucle while con argumento similar al caso base,
+
+40
+00:02:20,350 --> 00:02:26,570
+en el caso base de la versión recursiva nos
+ detenemos si high es menor que low.
+
+41
+00:02:26,570 --> 00:02:30,510
+Aquí tenemos un bucle while, donde el 
+bucle termina si high es menor que low.
+
+42
+00:02:30,510 --> 00:02:33,790
+Calculamos el punto medio, y entonces
+ checamos de nuevo la clave.
+
+43
+00:02:33,790 --> 00:02:38,750
+Si hay coincidencia con el punto medio
+ devolvemos ese punto. De otra forma,
+
+44
+00:02:38,750 --> 00:02:40,310
+si la clave es menor que
+
+45
+00:02:40,310 --> 00:02:43,452
+el elemento, sabemos que estamos en
+ la primera mitad del arreglo
+
+46
+00:02:43,452 --> 00:02:47,308
+y entonces, en lugar de hacer una nueva llamada
+ recursiva como lo hicimos en la versión recursiva,
+
+47
+00:02:47,308 --> 00:02:48,401
+el array original. 
+
+48
+00:02:48,401 --> 00:02:52,953
+y queremos  buscar en la primera mitad, 
+así que vamos a cambiar el valor
+
+49
+00:02:52,953 --> 00:02:57,790
+de high, que será mid menos uno, porque
+ ya checamos mid (punto medio).
+
+50
+00:02:57,790 --> 00:03:02,540
+De otra forma, queremos buscar en la mitad
+ superior del arreglo así que incrementamos a low.
+
+51
+00:03:05,340 --> 00:03:08,070
+Si alcanzamos el final del bucle while,
+
+52
+00:03:08,070 --> 00:03:11,310
+esto es, si salimos del bucle porque high es menor que low,
+
+53
+00:03:11,310 --> 00:03:13,040
+eso significa que ya no hay nada que buscar,
+
+54
+00:03:13,040 --> 00:03:14,200
+tenemos un arreglo vacío.
+
+55
+00:03:14,200 --> 00:03:17,030
+Y, por tanto, no encontramos al elemento en el arreglo,
+
+56
+00:03:17,030 --> 00:03:18,740
+vamos a devolver low menos uno.
+
+57
+00:03:18,740 --> 00:03:21,408
+Que es el mismo resultado que en la versión recursiva.
+
+58
+00:03:21,408 --> 00:03:24,228
+La diferencia es que no usaremos el espacio de apilamiento
+
+59
+00:03:24,228 --> 00:03:25,730
+que la versión recursiva usa.
+
+60
+00:03:25,730 --> 00:03:30,736
+¿Recuerdas que hace dos videos hablamos de este
+ ejemplo de la vida real donde teníamos
+
+61
+00:03:30,736 --> 00:03:35,905
+cinco idiomas y queríamos traducir palabras 
+entre cualquiera par de estos idiomas?
+
+62
+00:03:35,905 --> 00:03:39,924
+La forma que teníamos para representarlo
+ eran arreglos paralelos,
+
+63
+00:03:39,924 --> 00:03:44,388
+de forma que para un índice dado, cada uno de los 
+
+64
+00:03:44,388 --> 00:03:49,051
+elementos en los arreglos representaban
+ lo mismo en todos los idiomas.
+
+65
+00:03:49,051 --> 00:03:53,362
+Así que, por ejemplo, "chair" en inglés está en el índice dos,
+
+66
+00:03:53,362 --> 00:03:57,597
+en español eso es "silla" y en italiano "sedia".
+
+67
+00:03:57,597 --> 00:04:01,439
+El problema era que llevaba mucho tiempo checar, ¿no?
+
+68
+00:04:01,439 --> 00:04:05,970
+Teníamos 50 mil elementos en nuestros arreglos, 
+y se llevaba 10 segundos en buscar,
+
+69
+00:04:05,970 --> 00:04:08,820
+porque teníamos que buscar en todos ellos
+
+70
+00:04:08,820 --> 00:04:11,530
+si no estaba ahí, y en promedio, en la mitad de ellos, 25 mil.
+
+71
+00:04:11,530 --> 00:04:14,304
+Así que una pregunta sería, ¿porqué no 
+usamos un arreglo ordenado?
+
+72
+00:04:14,304 --> 00:04:14,886
+¿Verdad?
+
+73
+00:04:14,886 --> 00:04:17,890
+Podrías imaginar, por ejemplo, ordenar estos arreglos.
+
+74
+00:04:17,890 --> 00:04:18,898
+Aquí están ordenados.
+
+75
+00:04:18,898 --> 00:04:23,930
+Lo bueno es, que es fácil encontrar una palabra
+ particular en un idioma en particular.
+
+76
+00:04:23,930 --> 00:04:26,460
+Así que puedo encontrar "house" en inglés, por ejemplo
+
+77
+00:04:26,460 --> 00:04:30,060
+y encontrar su índice rápidamente 
+usando búsqueda binaria.
+
+78
+00:04:30,060 --> 00:04:31,150
+El problema es,
+
+79
+00:04:31,150 --> 00:04:35,450
+que ya no tengo esta correspondencia porque
+ el orden de las palabras que están
+
+80
+00:04:35,450 --> 00:04:38,700
+ordenadas en inglés es diferente al orden
+ de las palabras ordenadas en español.
+
+81
+00:04:38,700 --> 00:04:43,000
+Así que si busco "chair" en inglés, por ejemplo, 
+ya no se corresponde con "silla".
+
+82
+00:04:43,000 --> 00:04:46,040
+En su lugar, se mapea con "casa".
+
+83
+00:04:46,040 --> 00:04:49,922
+Así que aunque podamos encontrar una palabra
+ en particular en nuestro idioma fuente,
+
+84
+00:04:49,922 --> 00:04:53,816
+no sabemos la correspondiente palabra
+ en el lenguaje destino.
+
+85
+00:04:53,816 --> 00:04:58,963
+Así que la solución fue intentar y encontrar
+ una forma de poder ordenar y
+
+86
+00:04:58,963 --> 00:05:04,474
+preservar la relación donde algo con 
+un índice significa lo mismo
+
+87
+00:05:04,474 --> 00:05:10,638
+en la palabra traducida. La forma de hacer eso 
+fue un conjunto más amplio de arreglos.
+
+88
+00:05:10,638 --> 00:05:15,237
+Lo que hicimos fue mantener estos 
+arreglos ampliados los que
+
+89
+00:05:15,237 --> 00:05:20,270
+apuntaban de vuelta a los arreglos
+ originales, de manera ordenada.
+
+90
+00:05:20,270 --> 00:05:22,230
+Así que tenemos un nivel de dirección.
+
+91
+00:05:22,230 --> 00:05:25,630
+Por ejemplo, si busco una palabra en inglés, 
+el orden de las palabras en inglés es "chair",
+
+92
+00:05:25,630 --> 00:05:26,580
+"house", "pimple".
+
+93
+00:05:26,580 --> 00:05:29,180
+Bueno, ¿qué orden tenían en el arreglo original?
+
+94
+00:05:29,180 --> 00:05:35,820
+Es, primer elemento, 2, entonces elemento 1, 
+y luego elemento 3.
+
+95
+00:05:35,820 --> 00:05:39,808
+Así que si quieres hacer una búsqueda binaria
+ puedes usar este arreglo ordenado.
+
+96
+00:05:39,808 --> 00:05:41,950
+Siempre que quieras saber qué elemento
+
+97
+00:05:43,440 --> 00:05:45,840
+está representado en ese arreglo ordenado,
+
+98
+00:05:45,840 --> 00:05:49,320
+por ejemplo, si buscamos en el punto medio, 
+
+99
+00:05:49,320 --> 00:05:53,740
+que en el arreglo ordenado es 2, tiene el valor de 1, 
+y eso nos dice ve y encuentra "house".
+
+100
+00:05:53,740 --> 00:05:58,620
+Así que básicamente dice que "house" 
+está, entre comillas, en 2,
+
+101
+00:05:58,620 --> 00:06:01,500
+y "chair" en 1 y "pimple" en 3.
+
+102
+00:06:01,500 --> 00:06:04,080
+El español tiene, por supuesto, un mapeo diferente,
+
+103
+00:06:04,080 --> 00:06:08,890
+así que en español, la primera palabra ordenada 
+resulta ser la primera palabra del arreglo.
+
+104
+00:06:08,890 --> 00:06:12,230
+La segunda palabra ordenada es la
+ tercera del arreglo español, 
+
+105
+00:06:12,230 --> 00:06:16,830
+y la tercera palabra ordenada, "silla", es el segundo elemento.
+
+106
+00:06:17,960 --> 00:06:19,300
+Así que, ¿qué pasa cuando corremos esto?
+
+107
+00:06:19,300 --> 00:06:22,120
+Lo que pasa, tenemos un trueque en espacio-tiempo.
+
+108
+00:06:23,300 --> 00:06:25,560
+Tenemos que pagar por espacio extra,
+
+109
+00:06:25,560 --> 00:06:29,320
+y, por supuesto, no sólo tenemos que ordenar
+ inglés y español, sino también francés,
+
+110
+00:06:29,320 --> 00:06:30,310
+italiano y alemán.
+
+111
+00:06:30,310 --> 00:06:32,950
+Así que, cinco arreglos extra.
+
+112
+00:06:32,950 --> 00:06:33,450
+Cada arreglo
+
+113
+00:06:33,450 --> 00:06:38,240
+tiene 50 mil entradas y, ¿cuál es el tamaño
+ de cada elemento en el arreglo?
+
+114
+00:06:38,240 --> 00:06:41,530
+Bueno, representa un número de 1 al 50 mil
+
+115
+00:06:41,530 --> 00:06:44,590
+que puede representarse en 16 bits, lo que son 2 bytes.
+
+116
+00:06:44,590 --> 00:06:48,080
+Así que tenemos 50 mil elementos veces 2 bytes,
+
+117
+00:06:48,080 --> 00:06:52,120
+lo que son 100 mil bytes, veces 5, son 500 mil bytes,
+
+118
+00:06:52,120 --> 00:06:55,300
+o alrededor de medio mega byte, 
+que en la actualidad es nada,
+
+119
+00:06:55,300 --> 00:06:58,580
+e incluso entonces era, seguro, 
+factible de hacer, hace 20 años.
+
+120
+00:07:00,280 --> 00:07:02,840
+Ese es el costo de espacio que tenemos.
+
+121
+00:07:02,840 --> 00:07:06,260
+¿Qué beneficio ganamos?
+
+122
+00:07:06,260 --> 00:07:11,130
+Bueno, en lugar de buscar, digamos, 
+50 mil veces en el peor de los casos,
+
+123
+00:07:11,130 --> 00:07:13,152
+tenemos que buscar log base 2 de 50 mil veces.
+
+124
+00:07:13,152 --> 00:07:19,479
+Y log en base 2 de 50 mil es, veamos, 
+si log en base 2 de 1,000 es alrededor de 10,
+
+125
+00:07:19,479 --> 00:07:24,160
+porque 2 a la 10 es igual a 1,024, tenemos
+ todavía un factor de 50 a calcular.
+
+126
+00:07:24,160 --> 00:07:26,092
+Log en base 2 de 50 es alrededor de
+
+127
+00:07:26,092 --> 00:07:31,979
+digamos, 6, porque ya sé que 2 a la 5 es 32, y a la 6 es 64.
+
+128
+00:07:31,979 --> 00:07:33,408
+Lo que quiero decir,
+
+129
+00:07:33,408 --> 00:07:37,574
+es que tenemos que hacer 16 referencias
+ en el arreglo en lugar de 50 mil.
+
+130
+00:07:37,574 --> 00:07:41,039
+Eso es casi un factor de mil,
+
+131
+00:07:41,039 --> 00:07:46,583
+lo que significa al final que, cuando 
+el usuario hacía click en traducir,
+
+132
+00:07:46,583 --> 00:07:53,250
+en lugar de tomar 10 segundos, la 
+traducción parecía casi instantánea,
+
+133
+00:07:53,250 --> 00:07:56,420
+era por debajo de una décima de segundo.
+
+134
+00:07:57,590 --> 00:07:58,190
+En resumen,
+
+135
+00:07:58,190 --> 00:08:03,130
+lo que hemos visto es que el tiempo de ejecución de 
+una búsqueda binaria es Theta grande de log n.
+
+136
+00:08:03,130 --> 00:08:08,810
+Substancialmente más rápida que la Theta grande 
+de n que lleva la búsqueda lineal.
+
+137
+00:08:08,810 --> 00:08:11,200
+Así que los arreglos ordenados ayudan.
+
+138
+00:08:11,200 --> 00:08:13,920
+En la siguiente lección revisaremos una aplicación un poco
+
+139
+00:08:13,920 --> 00:08:15,670
+más complicada de divide y vencerás,
+
+140
+00:08:15,670 --> 00:08:19,630
+donde tendremos múltiples subproblemas, 
+en lugar de un solo subproblema.

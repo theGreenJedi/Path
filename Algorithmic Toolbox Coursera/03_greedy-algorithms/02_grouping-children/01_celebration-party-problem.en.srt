@@ -1,0 +1,478 @@
+1
+00:00:00,280 --> 00:00:03,630
+Hi, in this lesson we will
+discuss the problem of
+
+2
+00:00:03,630 --> 00:00:06,020
+organizing children into groups.
+
+3
+00:00:06,020 --> 00:00:09,920
+And you will learn that if you use
+a naive algorithm to solve this problem,
+
+4
+00:00:09,920 --> 00:00:10,720
+it will work very,
+
+5
+00:00:10,720 --> 00:00:15,140
+very slowly, because the running time
+of this algorithm is exponential.
+
+6
+00:00:15,140 --> 00:00:18,900
+But later in the next lesson, we will
+be able to improve the training time
+
+7
+00:00:18,900 --> 00:00:21,979
+significantly by coming up with
+a polynomial time algorithm.
+
+8
+00:00:23,840 --> 00:00:26,180
+Let's consider the following situation.
+
+9
+00:00:26,180 --> 00:00:29,550
+You've invited a lot of children
+to a celebration party, and
+
+10
+00:00:29,550 --> 00:00:33,860
+you want to entertain them and
+also teach them something in the process.
+
+11
+00:00:33,860 --> 00:00:36,180
+You are going to hire a few teachers and
+
+12
+00:00:36,180 --> 00:00:41,070
+divide the children into groups and
+assign a teacher to each of the groups
+
+13
+00:00:41,070 --> 00:00:43,430
+this teacher will work with this
+group through the whole party.
+
+14
+00:00:44,470 --> 00:00:49,170
+But you know that for a teacher to work
+with a group of children efficiently
+
+15
+00:00:49,170 --> 00:00:53,130
+children of that group should
+be of relatively the same age.
+
+16
+00:00:53,130 --> 00:00:58,060
+More specifically age of any
+two children in the same group
+
+17
+00:00:58,060 --> 00:00:59,819
+should differ by at most one year.
+
+18
+00:01:01,220 --> 00:01:04,180
+Also, you want to minimize
+the number of groups.
+
+19
+00:01:04,180 --> 00:01:07,030
+Because you want to hire fewer teachers,
+and
+
+20
+00:01:07,030 --> 00:01:11,280
+spend the money on presents and other
+kinds of entertainment for the children.
+
+21
+00:01:11,280 --> 00:01:16,320
+So, you need to divide children into
+the minimum possible number of groups.
+
+22
+00:01:16,320 --> 00:01:21,700
+Such that the age of any two children in
+any group differs by at most one year.
+
+23
+00:01:23,200 --> 00:01:28,020
+Now, let's look at the pseudo code for the
+naive algorithm that solves this problem.
+
+24
+00:01:29,790 --> 00:01:33,900
+Basically, this algorithm will
+consider every possible partition
+
+25
+00:01:33,900 --> 00:01:39,000
+of the children into groups and
+find the partition which both
+
+26
+00:01:39,000 --> 00:01:42,860
+satisfies the property that
+the ages of the children
+
+27
+00:01:42,860 --> 00:01:47,910
+in any group should differ by at most one
+and contains the minimum number of groups.
+
+28
+00:01:49,140 --> 00:01:53,740
+We start with assigning
+the initial value of the number of
+
+29
+00:01:53,740 --> 00:01:59,150
+groups to the answer m and this initial
+value is just the number of children.
+
+30
+00:01:59,150 --> 00:02:04,000
+Because we can always divide all
+the children into groups of one, and
+
+31
+00:02:04,000 --> 00:02:08,590
+then of course each group has only one
+child so the condition is satisfied.
+
+32
+00:02:09,640 --> 00:02:14,570
+Then we consider every possible
+partition of all children into groups.
+
+33
+00:02:14,570 --> 00:02:19,560
+The number of groups can be variable,
+so this is denoted by a number k,
+
+34
+00:02:19,560 --> 00:02:22,970
+and we have groups G1, G2 and up to Gk.
+
+35
+00:02:24,360 --> 00:02:26,130
+And then we have a partition,
+
+36
+00:02:26,130 --> 00:02:29,530
+we first need to check whether
+it's a good partition or not.
+
+37
+00:02:29,530 --> 00:02:33,640
+So, we have a variable good which
+we assigned to true initially,
+
+38
+00:02:33,640 --> 00:02:36,500
+because we think that maybe
+this partition will be good.
+
+39
+00:02:36,500 --> 00:02:41,500
+But then we need to check for each group
+whether it satisfies our condition or not.
+
+40
+00:02:41,500 --> 00:02:47,130
+So, we go in a for group with
+index i of the group from 1 to k,
+
+41
+00:02:47,130 --> 00:02:50,450
+and then we consider
+the particular group GI, and
+
+42
+00:02:50,450 --> 00:02:54,800
+we need to determine whether all the
+children in this group differ by at most
+
+43
+00:02:54,800 --> 00:02:58,790
+1 year, or
+there are two children that differ more.
+
+44
+00:02:59,900 --> 00:03:05,730
+To check that, it is sufficient to compare
+the youngest child with the oldest child.
+
+45
+00:03:05,730 --> 00:03:10,700
+If their ages differ more than by one,
+then the group is bad.
+
+46
+00:03:10,700 --> 00:03:15,590
+Otherwise, every two children differ by
+at most one year, so the group is good.
+
+47
+00:03:15,590 --> 00:03:20,400
+And so we go through all
+the groups in a for loop.
+
+48
+00:03:20,400 --> 00:03:22,560
+If at least one of the groups is bad,
+
+49
+00:03:22,560 --> 00:03:26,800
+then our variable good will
+contain value false by the end.
+
+50
+00:03:26,800 --> 00:03:32,080
+Otherwise, all the groups are good, and
+the variable good will contain value true.
+
+51
+00:03:32,080 --> 00:03:36,200
+So, after this for loop, we check
+the value of the variable good, and
+
+52
+00:03:36,200 --> 00:03:40,350
+if it's true, then we improve our answer.
+
+53
+00:03:40,350 --> 00:03:42,090
+At least try to improve it.
+
+54
+00:03:42,090 --> 00:03:45,710
+With a minimum of its current value and
+
+55
+00:03:45,710 --> 00:03:48,510
+the number of the groups
+in the current partition.
+
+56
+00:03:48,510 --> 00:03:53,930
+And so, by the end of the outer for loop
+which goes through all the partitions,
+
+57
+00:03:53,930 --> 00:03:59,310
+our variable m will contain the minimum
+possible number of groups in a partition
+
+58
+00:03:59,310 --> 00:04:02,160
+that satisfies all the conditions.
+
+59
+00:04:02,160 --> 00:04:05,090
+It is obvious that this
+algorithm works correctly
+
+60
+00:04:05,090 --> 00:04:08,430
+because it basically considers
+all the possible variants and
+
+61
+00:04:08,430 --> 00:04:13,320
+selects the best one from all the variants
+which satisfy our condition on the groups.
+
+62
+00:04:14,350 --> 00:04:17,169
+Now, let us estimate the running
+time of this algorithm.
+
+63
+00:04:18,540 --> 00:04:23,000
+And I state that the number of
+operations that this algorithm makes
+
+64
+00:04:23,000 --> 00:04:27,520
+is at least 2 to the power of n,
+where n is the number of children in C.
+
+65
+00:04:27,520 --> 00:04:31,230
+Actually, this algorithm
+works much slower and
+
+66
+00:04:31,230 --> 00:04:34,700
+makes much more operations
+than 2 to the power of n, but
+
+67
+00:04:34,700 --> 00:04:38,700
+we will just prove this lower bound to
+show that this algorithm is very slow.
+
+68
+00:04:40,030 --> 00:04:45,590
+To prove it, let's consider just
+partitions of the children in two groups.
+
+69
+00:04:45,590 --> 00:04:48,290
+Of course there are much
+more partitions than that.
+
+70
+00:04:48,290 --> 00:04:52,260
+We can divide them in two, three,
+four, and so on.
+
+71
+00:04:52,260 --> 00:04:53,520
+Much more groups.
+
+72
+00:04:53,520 --> 00:04:57,120
+But, let's just consider
+partitions in two groups and
+
+73
+00:04:57,120 --> 00:05:01,690
+prove that even the number of
+such partitions is already
+
+74
+00:05:01,690 --> 00:05:02,938
+at least two to the power of n.
+
+75
+00:05:02,938 --> 00:05:09,060
+Really, if C is a union of two groups,
+
+76
+00:05:09,060 --> 00:05:12,820
+G1 and G2, then basically we
+can make such partition for
+
+77
+00:05:12,820 --> 00:05:16,958
+any G1 which is a subset
+of such C of all children.
+
+78
+00:05:16,958 --> 00:05:21,390
+For any G1, just make
+
+79
+00:05:21,390 --> 00:05:26,990
+group G2 containing all the children
+which are not in the first group.
+
+80
+00:05:26,990 --> 00:05:30,580
+And then all the children will be
+divided into these two groups.
+
+81
+00:05:30,580 --> 00:05:34,790
+So, now the size of the set
+of all children is n.
+
+82
+00:05:35,940 --> 00:05:41,760
+And if you want to compute the number
+of possible groups G1 then we should
+
+83
+00:05:41,760 --> 00:05:44,670
+note that each item of the set, or
+
+84
+00:05:44,670 --> 00:05:50,340
+each child, can be either included or
+excluded from the group G1.
+
+85
+00:05:50,340 --> 00:05:54,790
+So, there can be 2 to
+the power of n different
+
+86
+00:05:54,790 --> 00:06:00,090
+groups G1. And so
+there are at least 2 to the power of n
+
+87
+00:06:00,090 --> 00:06:03,830
+partitions of the set of
+all children in two groups.
+
+88
+00:06:03,830 --> 00:06:06,950
+and it means that our algorithm will do at
+
+89
+00:06:06,950 --> 00:06:12,200
+least 2 to the power of n operations
+because this considers every partition.
+
+90
+00:06:12,200 --> 00:06:15,289
+Among all the partitions, there are all
+the partitions into two groups.
+
+91
+00:06:16,390 --> 00:06:18,920
+So, how long will it actually work?
+
+92
+00:06:18,920 --> 00:06:22,460
+We see that the Naive algorithm
+works in time Omega (2n),
+
+93
+00:06:22,460 --> 00:06:27,370
+so it makes at least 2 to the 
+power of n operations.
+
+94
+00:06:27,370 --> 00:06:32,560
+And for example for just 50 children
+this is at least 2 to the power of 50 or
+
+95
+00:06:32,560 --> 00:06:34,790
+the larges number which is on the slide.
+
+96
+00:06:34,790 --> 00:06:39,040
+This is the number of operations that we
+will need to make and I estimate that
+
+97
+00:06:39,040 --> 00:06:43,890
+on a regular computer, this will take
+at least two weeks for you to compute
+
+98
+00:06:43,890 --> 00:06:49,050
+this if this was exactly the number
+of operations that you would need.
+
+99
+00:06:49,050 --> 00:06:51,420
+So, it works really, really slow.
+
+100
+00:06:51,420 --> 00:06:54,360
+But in the next lesson we will
+improve this significantly.

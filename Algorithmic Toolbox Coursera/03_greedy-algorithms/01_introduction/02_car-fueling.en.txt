@@ -1,0 +1,89 @@
+Hi. In this video, we will consider
+the problem to find the minimum number of refills during a long journey by a car. You will see the similarities
+between this problem and the largest number problem
+from the previous video. By the end, you will be able to describe
+how greedy algorithms work in general and define what is a safe move and
+a subproblem. Consider the following problem. You have a car such that if
+you fill it up to full tank, you can travel with it up to 400
+kilometers without refilling it. And you need to get from
+point A to point B, and the distance between
+them is 950 kilometers. Of course,
+you need to refill on your way, and luckily, there are a few gas
+stations on your way from A to B. These are denoted by blue circles, and the
+numbers above them mean the distance from A to the corresponding gas station
+along the way from A to B. And you need to find the minimum
+number of refills to get from A to B. One example of such route is to get
+from point A to the first gas station, 200 kilometers, then to get from first
+station to the third gas station, 350 kilometers distance. Then from third gas station
+to the fourth gas station, 200 km, and then from the fourth
+gas station to B, 200 kilometers. But that's not optimal. We can do better. Here is another route,
+which only uses two refills. We get from A to the second gas station,
+less than 400 kilometers, then we get from the second gas station to the fourth gas
+station, again less than 400 kilometers. And then, from the fourth gas
+station to B, only 200 kilometers. And this route uses only 2 refills, and it turns out that in this problem, the
+minimum number of refills is exactly 2. More formally,
+we have the following problem. As the input, we have a car which
+can travel at most L kilometers, where L is a parameter if
+it's filled up to full tank. We have a source and destination, A and
+B, and we have n gas station at distances from x1 to xn in kilometers,
+from A along the path from A to B. And we need to output the minimum
+number of refills to get from A to B, not counting the initial refill at A. We want to solve this problem
+using a greedy strategy, and greedy strategy in general is very easy. You first make some greedy choice,
+then you reduce your problem to a smaller subproblem, and then you
+iterate until there are no problems left. There are a few different ways to make a
+greedy choice in this particular problem. For example, you can always refill
+at the closest gas station to you. Another way is to refill at the farthest
+reachable gas station, and by reachable, I mean that you can get from your
+current position to this gas station without refills. Another way is, for example,
+to go until there is no fuel and then just hope that there will
+be a gas station in there. So what do you think is the correct
+strategy in this problem? And of course,
+the third option is obviously wrong. The first option is also wrong,
+if you think about it, but the second option is actually correct. It will give you the optimal
+number of refills. We will prove it later. For now, let's define our greedy
+algorithm as the whole algorithm. So we start at A and we need to get to
+B with the minimum number of refills. We go from A to the farthest
+reachable gas station G so that we can get from A to G with full
+tank without any refills in the middle. And now, we try to reduce this
+problem to a similar problem. We make G the new A, and now our
+problem is to get from the new A to B, again with the minimum number of refills. And by definition, a subproblem is
+a similar problem of smaller size. One example of subproblem
+is from the previous video. When we need to construct the largest
+number out of a list of digits, we first put the largest digits in front,
+and then we reduce our problem to the problem of building the largest
+number out of the digits which are left. In this problem, to find the minimum
+number of refills on the way from A to B, the first refill at the farthest
+reachable gas station G. And then solve a similar problem
+which is a subproblem to get from G to B with the minimum
+number of refills. Another important term is safe move. We call a greedy choice a safe move if it
+is consistent with some optimal solution. In other words, if there exists some
+optimal solution in which first move is this greedy choice, then this
+greedy choice is called a safe move. And we will prove a lemma that to refill
+at the farthest reachable gas station is a safe move. Let us first prove it visually. Let's consider some
+optimal route from A to B, and let the first stop on this
+route to refill B at point G1. And let G be the farthest gas
+station reachable from A. If G1 and G coincide,
+then our lemma is proved already. Otherwise, G1 has to
+be closer to A than G, because G is the farthest reachable
+from A, and G1 is reachable from A. Now, let's consider the next stop on
+the optimal route, and that would be G2. And the first case is that
+G is closer to A than G2, then the route can look like this. In this case,
+we can actually refill at G instead of G1, and then we will have another optimal route because it has the same number of
+refills and G is reachable from A. And G2 is actually reachable from G, because it was reachable from G1,
+but G is closer to G2 than G1. So this is a correct route, and
+in this case, our lemma is proved. And the second case is when G2 is
+actually closer to A than G, and then the route can look like this. But in this case we can avoid
+refilling at G1 at all and refill at G2 or
+even refill at G in the first place. And then we will reduce the number
+of refills of our optimal route, which is impossible. So the second case actually
+contradicts our statement that we are looking at an optimal route,
+and we've proved our lemma. To recap, we consider the optimal route
+R with a minimum number of refills. We denote by G1 the position of
+the first refill in R, and by G2, the next stop was R, which is either
+a refill or the destination B. And by G we denote the farthest
+refill reachable from A, and we considered two cases. In the first case,
+if G is closer than G2 to A, we can refill at G instead of G1, and
+it means that refill at G is a safe move. Otherwise, we can avoid refill at G1. So this case contradicts that the route R is the route with the minimum
+number of refills. So there is no such case,
+and we proved our lemma. And in the next lecture, we will
+implement this algorithm in pseudocode and analyze its running time.

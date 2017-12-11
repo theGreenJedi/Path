@@ -1,0 +1,262 @@
+1
+00:00:00,600 --> 00:00:02,630
+Hi, I'm Neil Rhodes.
+
+2
+00:00:02,630 --> 00:00:05,390
+Welcome to the divide and conquer module.
+
+3
+00:00:05,390 --> 00:00:08,950
+In the last module, you learned
+about how to use greedy algorithms
+
+4
+00:00:08,950 --> 00:00:10,900
+to solve particular classes of problems.
+
+5
+00:00:11,920 --> 00:00:14,770
+In this module you'll learn about ways
+of solving problems using divide and
+
+6
+00:00:14,770 --> 00:00:15,660
+conquer algorithms.
+
+7
+00:00:16,880 --> 00:00:19,030
+The term divide and
+conquer is quite old, and
+
+8
+00:00:19,030 --> 00:00:22,940
+when applied to war, suggests that it's
+easier to defeat several smaller groups of
+
+9
+00:00:22,940 --> 00:00:25,560
+opponents than trying to
+defeat one large group.
+
+10
+00:00:26,560 --> 00:00:28,500
+In a similar fashion, divide and
+
+11
+00:00:28,500 --> 00:00:33,630
+conquer algorithms take advantage of
+breaking a problem down into one or
+
+12
+00:00:33,630 --> 00:00:36,380
+more subproblems that can
+then be solved independently.
+
+13
+00:00:37,950 --> 00:00:41,140
+Just as not all problems can be
+solved with a greedy algorithm,
+
+14
+00:00:41,140 --> 00:00:44,260
+not all problems can be solved
+using divide and conquer.
+
+15
+00:00:44,260 --> 00:00:47,640
+Instead, these are both techniques
+that are part of a toolbox of
+
+16
+00:00:47,640 --> 00:00:49,950
+strategies to solve problems.
+
+17
+00:00:49,950 --> 00:00:52,740
+As you're designing an algorithm,
+you'll need to consider whether or
+
+18
+00:00:52,740 --> 00:00:54,730
+not a greedy algorithm might work.
+
+19
+00:00:54,730 --> 00:00:57,230
+If not, would a divide and
+conquer algorithm work?
+
+20
+00:00:59,510 --> 00:01:02,960
+Let's look at the general structure
+of a divide and conquer algorithm.
+
+21
+00:01:02,960 --> 00:01:06,180
+Here, we have a problem to be
+solved represented abstractly
+
+22
+00:01:06,180 --> 00:01:06,950
+as a blue rectangle.
+
+23
+00:01:08,120 --> 00:01:12,370
+We break the problem down into a set
+of non-overlapping subproblems.
+
+24
+00:01:12,370 --> 00:01:14,540
+Represented here, by colored rectangles.
+
+25
+00:01:15,610 --> 00:01:19,470
+It's important that the subproblems
+be of the same type as the original.
+
+26
+00:01:21,750 --> 00:01:26,030
+For example, here's a way to break
+down the original rectangle problem
+
+27
+00:01:26,030 --> 00:01:29,140
+into a set of subproblems that
+are not of the same type.
+
+28
+00:01:29,140 --> 00:01:30,930
+These subproblems are triangles.
+
+29
+00:01:30,930 --> 00:01:34,110
+Thus this does not represent
+the divide and conquer algorithm.
+
+30
+00:01:35,600 --> 00:01:38,710
+In this case, we've broken down
+the original rectangle problem
+
+31
+00:01:38,710 --> 00:01:41,940
+into a set of subproblems that
+are themselves rectangles.
+
+32
+00:01:41,940 --> 00:01:46,100
+The difficulty is that these
+subproblems overlap with one another.
+
+33
+00:01:46,100 --> 00:01:49,390
+Thus it too does not represent
+the divide and conquer algorithm.
+
+34
+00:01:51,110 --> 00:01:53,800
+We return now to breaking down
+
+35
+00:01:53,800 --> 00:01:58,770
+our problem into a set of non-overlapping
+subproblems of the same original type.
+
+36
+00:01:59,920 --> 00:02:04,650
+We break it apart, then we go ahead and
+solve each subproblem independently.
+
+37
+00:02:04,650 --> 00:02:07,920
+We solve the first problem,
+represented by a check mark.
+
+38
+00:02:07,920 --> 00:02:11,120
+We then continue solving each problem,
+in turn.
+
+39
+00:02:13,780 --> 00:02:17,550
+Once we've successfully solved
+each of the subproblems,
+
+40
+00:02:17,550 --> 00:02:20,510
+we combine the results into
+a solution to the original problem.
+
+41
+00:02:22,660 --> 00:02:25,520
+One question that comes up,
+how do we solve each subproblem?
+
+42
+00:02:26,930 --> 00:02:31,800
+Since each subproblem is of the same
+type as the original, we can recursively
+
+43
+00:02:31,800 --> 00:02:35,450
+solve the subproblem using the same
+divide and conquer strategy.
+
+44
+00:02:35,450 --> 00:02:39,930
+Thus, divide and conquer algorithms
+naturally lead to a recursive solution.
+
+45
+00:02:41,000 --> 00:02:44,780
+In practice, while you can program a
+divide and conquer algorithm recursively,
+
+46
+00:02:44,780 --> 00:02:48,810
+it's not uncommon to rewrite
+the recursive program into an iterative one.
+
+47
+00:02:48,810 --> 00:02:52,380
+This is often done both because some
+programmers aren't as comfortable with
+
+48
+00:02:52,380 --> 00:02:56,380
+recursion as they are with iteration, as
+well as because of the additional space
+
+49
+00:02:56,380 --> 00:03:00,120
+that a recursive implementation may 
+take in terms of additional stack space.
+
+50
+00:03:00,120 --> 00:03:03,820
+This can be language and
+implementation dependent.
+
+51
+00:03:03,820 --> 00:03:08,020
+In summary, the divide and
+conquer algorithm consists of one:
+
+52
+00:03:08,020 --> 00:03:12,330
+breaking the problem into non-overlapping
+subproblems of the same type.
+
+53
+00:03:12,330 --> 00:03:15,400
+Two: recursively solving
+those subproblems.
+
+54
+00:03:15,400 --> 00:03:17,990
+And three: combining the results.
+
+55
+00:03:17,990 --> 00:03:22,280
+In the next video, we'll see an extremely
+simple example of divide and conquer.

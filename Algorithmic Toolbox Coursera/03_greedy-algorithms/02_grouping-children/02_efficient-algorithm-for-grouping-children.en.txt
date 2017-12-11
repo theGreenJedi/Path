@@ -1,0 +1,59 @@
+Hi, in this lesson you will learn
+how to solve the problem of organizing children into
+groups more efficiently. Most specifically, we will come up
+with a polynomial time algorithm for this problem as opposed to the exponential
+type algorithm from the previous lesson. But in order to do this,
+we first need to do a very important thing that you should probably do every time
+before solving an algorithmic problem. You should reformulate it
+in mathematical terms. For example, in this problem we will consider points
+on the line instead of children. For example, if we have a child of age
+three and a half years we will instead consider a point on the line with
+coordinate 3.5 and if we have another child of age 6, we will instead consider
+a point with coordinate 6 on the line. Now, what do groups of
+children correspond to? If we have a group of children,
+it consists of several children and several points on the line correspond
+to this group and the fact that the age of any two children in the group differs
+by at most one, means that there exists a segment of length one on this line
+that contains all those points. Now the goal becomes to select
+the minimum possible number of segments of length one, such that those
+segments cover all the points. Then, if we have such segments, we can just take all the points from
+that segment in the same group, and any two children in the group
+who differ by, at most, one year. Now let's look at an example. We have a line with a few points on it and we want to cover all the points
+with segments of length one. Here is one example of such covering. All the segments on the picture
+are of the same length and we consider that this
+is length one of this line. This is not the optimal solution because
+below there is another example of covering and we have only three segments and
+they still cover all the points. Now we want to find a way to find
+the minimum possible number of segments to cover all the points in any configuration. We want to do that using greedy
+algorithm and you probably remember from the previous lessons that to come up
+with a greedy algorithm, you need to do a greedy choice and to prove that
+this greedy choice is a safe move. I state that in this problem,
+safe move is to cover the leftmost point with a segment of length one which
+starts or has left end in this point. To prove that this is really a safe move,
+we need to prove that there exists an optimal solution with
+the minimum possible number of unit length segments such
+that one of the segments has its left end in the leftmost point. Let's prove that. To do that, let's consider any
+optimal solution of a given problem with a given point. Let's consider the leftmost
+point colored in green. It is covered by some segment. Colored in red. Now, let's move this red segment
+to the right until it's left end is in this leftmost point. I say that we didn't miss any of the
+points in the process, because this green point is the leftmost point so there
+are no points to the left from it and while we are moving the segment to the
+right, we didn't miss any of the points. It means that what we have now is
+still a correct covering because all of the points are still covered and
+the number of segments in this covering is the same as in some optimal
+solution from which we started and that means that it is also
+an optimal covering. So we have just found an optimal solution in which there is a segment which
+starts in the leftmost point. So, we proved that covering the leftmost point with a
+segment which starts in it is a safe move. Now that we have a safe move,
+let's consider what happens after it. We have the leftmost point covered, and
+also maybe some other points covered. So we don't need to consider
+these points anymore. We are not interested in them and
+we need to cover all the other points with the minimum possible number
+of unit length segments. So this is the same kind of problem
+which we started with, so this is a subproblem. Basically it means that we
+have a greedy algorithm. First, make a safe move. Add
+a segment to the solution with the left hand starting
+in the leftmost point. Then remove all the points which
+are already covered by the segment from the set and if there are still
+points left, repeat the process and repeat this process until there
+are no points left in the set.

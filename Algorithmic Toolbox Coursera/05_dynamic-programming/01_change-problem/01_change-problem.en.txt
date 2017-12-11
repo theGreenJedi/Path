@@ -1,0 +1,101 @@
+Before recording this lecture,
+I stopped by the coffee shop. This cappuccino is good. And as soon as I gave $5 to the cashier,
+she faced an algorithmic problem of which coins
+to select to give me the change. And cashiers all over the world
+use an algorithmic approach called greedy algorithm
+to solve this problem. Today we will learn how cashiers and
+computer scientists use greedy algorithm for
+solving many practical problems. So the change problem is finding
+the minimum number of coins needed to make change. More formally, input to the problem
+is integer money and positive integers, coin1, coin2, coind,
+that represents coin denominations. For example in the US,
+coin1 will be 1 cents, coin2 will be 5 cents, 10 cents,
+25 cents, and 50 cents. And the output is the minimum number of coins,
+with denominations coin1, coin2, coind that changes money exactly. So today in the morning,
+when cashier had to return me 40 cents, she most likely used
+the following algorithm. First, finding the largest
+coin denomination that is smaller than 40 cents. It will be 25 cents. So she gave me 25, 15 cents left and then the next challenge is
+how to change 15 cents. The next step is she probably found
+the largest coin smaller than 15 cents, it is 10 cents. She gave me 10 cents, and
+finally, she returned 5 cents. As a result,
+she changed 40 cents as 25 plus 10 plus 5. Do you think it's the minimum number
+of coins she could possibly return? It is the minimal number of
+coins in the United States. But if you travel to Tanzania, it won't be the minimum number of coins because
+there is a 20 cent coin in Tanzania. And therefore this greedy
+approach to solving the change problem will fail in Tanzania because
+there is a better way to change 40 cents, simply as 20 cents plus 20 cents,
+using Tanzanian 20 cents coin. Since the greedy approach to
+solving the change problem failed, let's try something different. Let's try the recursive algorithm for
+solving the same problem. Suppose we want to change 9 cents, and our denominations are 1 cent,
+5 cents, and 6 cents. What would be the optimal
+way to change 9 cents? Well, if we only knew what is the optimal
+ways to change 9 minus 6 cents, 9 minus 5 cents and 9 minus 1 cents,
+then we would know, what is the optimal way to change 9 cents? In other words, to change 9 cents, we need to know how to change
+small number of cents, in our case, 3 cents,
+4 cents, and 8 cents. And therefore, an approach to
+solving this problem would be to use this recurrence to
+write the recursive program. This idea is implemented in
+the program RecursiveChange. To change money, cents using coins, coin1, coin2, coind, we do the following. We first recursively call RecursiveChange
+with the amount of money, money minus coin1, money minus coin2,
+and money minus coind. And find the minimum amount of money for
+these d choices. We have plus 1 because there is one
+more coin to add and returns this way. This looks like the right
+approach to solve the problem, but let's check how fast
+the resulting program is. So, when we're changing 76 coins,
+there are actually three choices. We need to recursively call
+RecursiveChange for 70 cents, 71 cents, and 75 cents. But for each of these values,
+we need once again to call three choices. And we will continue growing this tree and very quickly it will turn
+into a gigantic tree. Let's check how many times we have
+already tried to change 70 cents. Three times, and
+we only started expanding this tree. In fact, if we continue further,
+we will see that there were six times when we needed to compute
+RecursiveChange for 70. How many times do you think we
+will need to run recursive calls when we compute the minimal
+number of coins for 30 cents? It turn out that we will need
+to call it trillions of times, which means that our
+seemingly very elegant RecursiveChange program will not finish
+before the end of your lifetime. So as simple as the change problem looks
+like, neither a greedy approach nor a recursive approach solve
+it in a reasonable time. 60 years ago, a brilliant mathematician,
+Richard Bellman, had a different idea. Wouldn't it be nice to know all
+the answers for changing money minus coin i by the time we need to compute
+an optimal way of changing money? And instead of the time consuming
+calls to RecursiveChange, money minus coin i, that may require
+to be repeated trillions of times, they would simply look up these values. This idea resulted in dynamic programming
+approach that is applied in thousands of diverse, practical applications
+in a myriad of different fields. And the key idea of dynamic programming
+is to start filling this matrix, not from the right to the left, as we
+did before in the recursive change, but instead, from the left to the right. So, we will first ask
+the trivial question, what is the minimum number of
+coins needed to change 0 cents? And, of course, it is 0. What is the minimum number
+of coins to change 1 cents? Obviously it is one, but
+we can compute this number by finding what is the minimum number of coins to
+change 0 cents and adding one coin. We will proceed in a similar fashion
+to compute the minimum number of coins to change 2 cents,
+3 cents, and 4 cents. There is only one possibility to derive
+this number from the previous number. And for 5 cents, actually there
+are two possibilities, green and blue. For green one, you can derive
+it from 0 cents by adding 5 coins, and for blue possibility, we can derive
+it from 4 cents by adding one penny. Well, which possibility would you select? Of course the one that gives you
+the minimum change for 5 coins. And continue further and apply the code to
+6 cents and there are three possibilities and once again we select the optimal choice that
+correspond to minimum number of coins. Let's say it may be 0 coins plus 6 cents. We continue for 7 cents,
+continue for 8 cents, and finally, very quickly, we actually found
+the correct answer for 9 cents. We need four coins to change 9 cents. And this results in DPChange
+algorithm that simply fills up the table that I just
+showed you from left to right. DP change is the first dynamic programming algorithm
+that you saw in this course, and there will be thousands more. You may be wondering why is this algorithm
+called dynamic programming and what does it have to do with programming? Well, in fact programming and dynamic programming has nothing
+to do with programming. Amazingly enough,
+dynamic programming is one of the most practical algorithms
+computer scientists use. But when Richard Bellman was
+developing this idea for Air Force project he was working on,
+it looked completely impractical. And he wanted to hide that he's really
+doing mathematics from the Secretary of Defense,
+rather than working on Air Force project. Therefore he invented a name that basically has nothing to do with what
+dynamic programming algorithms do. In his own word, he said,
+what name could I choose? I was interested in planning but planning
+is not a good word for various reasons. I decided therefore to use
+the word programming, and I wanted to get across the idea
+that this was dynamic. It was something not even
+a Congressman could object.

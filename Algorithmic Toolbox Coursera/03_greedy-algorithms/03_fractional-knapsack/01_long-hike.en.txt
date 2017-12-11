@@ -1,0 +1,72 @@
+Hello. In this lesson, you will learn
+an algorithm to determine which food items and in which amounts should you take
+with yourself on a really long hike so that to maximize their total energy value. So, you're planning a long hike. It will take a few days or
+maybe a few weeks, but you don't know exactly
+how long will it take. So, to be safe,
+you need to get enough food with you. And you have a knapsack which can fit
+up to 15 kilograms of food in it. And you've already bought some cheese,
+some ham, some nuts, and maybe some other food items. You want to fit them all in the knapsack,
+so as to maximize the amount of
+calories that you can get from them. Of course you can cut the cheese. You can cut the ham. You can select only some of the nuts. And then fit all of that
+into your knapsack. To solve this maximization problem, we again need to first reformulate
+it in mathematical terms. And then it becomes an instance of
+a classical fractional knapsack problem, which goes like this. We have n items with weights w1
+through wn and values v1 though vn. And a bag of capacity big W. And we want to maximize the total value of
+fractions of items that fit into this bag. In this case, weights are also
+weights in the real life and values are the energy values of
+the food items that you've bought. So, here's an example,
+and we will denote by dollars the value of the item,
+and the weight just by numbers. So, for example,
+the first item has value $20 and has weight 4,
+the second item has value $18 and weight 3, and
+the third item has value $14 and weight 2. And we have a knapsack of capacity 7. There are a few ways with which
+we can fill this knapsack. For example,
+of them is put the whole first item and the whole second item in the knapsack. Then the total value is the sum of
+the values of the first item and the second, which is $38. We can improve on that. For example, take the whole first item,
+the whole third item, and only one third of the second item for
+a total value of $40. We can do even better by taking the whole
+third item, the whole second item, and only half of the first item,
+and that will give us $42. And actually it turns out that
+this is the optimal thing to do. So now we want to create
+a greedy algorithm that will solve this maximization problem,
+and we need to get some greedy choice and
+make a safe move. And to do that, we have to look
+at the value per unit of weight. So, for example for the first item,
+value per unit of weight is $5, for the second item, it's $6 per unit,
+and for the third one it's $7 per unit. So although the first
+item is most valuable, the third item has
+the maximum value per unit. And of course there is an intuition that
+we should probably fit first the items with the maximum value per unit. And really, the safe move is to first try to fit
+the item with the maximum value per unit. And there's a lemma that says that there always exists some optimal
+solution to our problem that uses as much as possible of an item
+with the maximum value per unit of weight. And what do we mean by
+as much as possible? Well, either use the whole item,
+if it fits into the knapsack, or, if the capacity of the knapsack is
+less than how much we have of this item, then just fill the whole
+knapsack only with this item. Let's prove that this
+is really a safe move. We will prove looking at this example. So, first let's suppose we
+have some optimal solution, and let's suppose that in this optimal
+solution, we don't use as much as possible of the best item with the highest
+value per unit of weight. Then take some item which we
+used in this solution and separate its usage into two parts,
+one part of the same size of how much we have of the best item, and
+the second part is everything else. Then we can substitute the first
+part with the best item. So, for example, in this case, we substitute half of the first
+item with second item. Of course, in this part, the total
+value will increase, because the value per unit of weight is better for the best
+item than for the item currently used. And in the general case,
+this will also work. So, either we will be able to replace
+some part of the item already used by the whole best item, or
+we can replace the whole item that is already used by
+some part of the best item. And in any case,
+if we can make such a substitution, of course the total value will increase, because the best item just has
+better value per unit of weight, so for each unit of weight,
+we will have more value. So this gives us a greedy
+algorithm to solve our problem. What we'll do is while knapsack is still
+not full, we will do a greedy choice. We will choose the item number i
+which has the maximum value of vi over wi,
+which is the value per unit of weight. And then if this item fits into knapsack
+fully, then take of all this item. Otherwise, if there is only few
+space left in the knapsack, take so much of this item as to
+fill the knapsack to the end. And then in the end, we'll return the
+total value of the items that we took and how much did we take of each item.

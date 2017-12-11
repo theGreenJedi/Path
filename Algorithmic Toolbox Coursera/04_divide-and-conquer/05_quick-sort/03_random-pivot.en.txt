@@ -1,0 +1,148 @@
+Now when the algorithm is present,
+we need to estimate the running time. For the Quicksort algorithm, the running
+time analysis is a little bit tricky. So before stating, and proving
+the theorem about it's running time, let's be allowing partition. First of all, let's consider
+a pathological case, when somehow, it always happens that we select the minimum value of our current
+subarray as our pivot element. Well in this case, well let's see what
+happens with our current subarray. Say of size n. And we select its minimum
+value as a pivot. And partition,
+the subarray with respect to the sum. Since this is the minimum value, it's final position is just the first
+position, is the resulting array, right? Which means that we
+partition into two parts. The first part is just empty, we have
+no elements smaller than our pivot. And the second part,
+contains n- 1 elements, because all the remaining elements
+are greater than our current element. Okay, so in this case,
+if this happens at this iteration, I mean at this call to
+partition procedure, then we can write the running
+time of our Quicksort algorithm, satisfies the following relation T of
+n is equal to n plus t of n minus one. The term n here, the response to the
+running time of the petition procedure. Well, it is actually big often. But just to simplify let's put n here. Let me also recall you that,
+well if we have an array of size n, then the partition procedure
+indeed works in time, big often,
+because it just becomes the subarray? So now let's see what is the solution for
+this recurrence relation. Well, we can just unwind this
+recurrence relation term by term. So we have n plus T of n minus 1. Let's replace T of n minus 1 by
+n minus 1 plus T of n minus 2. Then we replace T of n minus 2 by
+n minus 2 plus T of n minus 3. And we keep doing so. So what is left is the following sum,
+n + (n- 1) + (n- 2) and so on. So what we know is this sum already,
+so this is arithmetic series. And we know that it grows quadratically. Which give us something strange, I mean our Quicksort algorithm
+works in quadratic time. Which means that it is not quick,
+actually, right? We'll resolve this issue later. Now, let's consider
+a slightly different case. Assume that somehow,
+we always partition into two parts, such that one of them has size,
+for example, n- 5. And the other one has the size four. Well I claim that even in this case. First of all, note that both these cases
+correspond to very unbalanced partitions. In the first case, we have two parts
+one of size 0 and one of size n-1. In the second case,
+we have two parts one of size five. And one of size four and
+one of size n minus five. So the size of stuff parts
+are very unbalanced. They are very different. Okay, so I claimed that in
+this case the running time, is also going to be quadratic. And this can also be shown, just be
+unwinding this recurrence relation. So let's just throw away this T(4),
+and leave only T(n- 5). Okay, so T(n) is equal to n plus T(n-5). Let's replace T(n-5) with (n-5)+T(n)-10. Let's then replace T of
+n minus ten with T of n with n minus ten plus T of n minus 15 and
+so on. So this leaves us with the following sum. N plus n minus five plus n minus ten and
+so on and this is also an arithmetic progression. The only difference with the previous
+arithmetic progression is that now, we have step five. The difference between neighbors is five,
+but not one. Well, still, this arithmetic progression
+has a linear number of terms. Which means that it sums
+rows quadratically. With the only difference that the hidden
+constant inside this set up is smaller than in the previous case. Now let's consider another
+pathological case. Assume that it somehow so
+happens for some unknown reasons that at each iteration at each call
+there's a partition procedure. It partitions the array
+into roughly equal sizes. Well in this case we can write
+the following reference relation on the running time of our algorithm. T of n is equal to T of n
+over 2 plus the linear term. And we know this reference already. It is exactly the reference
+the running time of the satisfies. Right? And we, proved that in this case t of
+n grows as n increases vertically. Let me remind you, how we prove this. We analyzed the. So, in this three of the route
+we have one array of size n. At the next level we have two
+arrays of size n over two n, at the next level we have four rays
+of size n over four, and so on. So the height of this tree is log base
+two, well it is basically logarithmic. At each level the sum of the sizes
+of of full arrays is equal to N. So we have array of size N at the top,
+two arrays of size N over two at the next level, and four arrays of
+size N over four at the next level, the size is still N, and so on. At each level we spend
+a linear amount of work. This is essential. We spend a linear amount of work at each
+level, and we have a logarithmic number of levels, which means we spent
+an N log N in time total. Okay, let's consider another,
+again very pathological case. I assume that we alway split
+an array of size n into two parts. One of size n over 2, n over 10. I'm sorry. One of size 9n over 10. So in this case the recurrence
+is the following. T of n is equal to T of n, over 10. Plus T of 9N over 10 plus a linear term. I claim that even in this case we
+can prove [INAUDIBLE] again on the running time of how well and
+this is how we can do this. Well, lets again consider the [INAUDIBLE]
+because the [INAUDIBLE] of [INAUDIBLE] algorithm. In this case, it is not balanced. Right? Because when we go to the left branch, we reduce the size of
+the current subproblem by 10. And when we go to the right branch, we
+reduce the size of the current subproblem only by factor of 10 divided by 9. Which means that in our 3,
+the size of the left branch is of the left most branch,
+is actually log based ten. Of n while is the size of the right most
+branch is log based ten over nine over m. Well, still the height of this
+of this three is logarithmic. But the previous case is that nouns are
+based on the algorithm is different but it's still constant. It is log based, log based 9 of m. And also, but also,
+the previous property is true. The sum of the sizes of all arrays
+at each level is still equal to n. It is at most n, actually. At the root we have one array of size n. At the next level we have two arrays,
+one of size n/10, and the other one is of size 9n/10. Right?
+So the size is still n. At the next level it is the same,
+and so on. So we have a logarithmic number of levels,
+and at each level we spend a linear amount of work which gives us an n
+log n upper bound once again. Okay, all this analysis of what
+about only pathological cases if we always split in a balanced way or
+in an unbalanced way. In reality, or just when we run
+a Greek algorithm on some array, well some of the partitions
+are going to be balanced. Some of the partitions
+are going to be unbalanced. So will still do not know what
+is the actual running time of the Greek algorithm. We still need to determine this. However, we already get
+an important message. So running time of Algorithm
+of the Greeks are depends on how balanced our partitions. What we know know is the following,
+if all our politicians are balanced does that make improved that the running
+time is at most n log n hypothetically. At the same time if all of
+our partitions are unbalanced then the running time is quadratic. This means that we would like to
+have a way of selecting a pivot element such that it always
+guarantees a balanced partition. At the same time it is not
+clear at all how to do this. How to guarantee that we
+can always peek quickly. The pivot element with
+respect to this pivot, the rate is partitioned in a balanced way. So instead of this we will use
+the following elegant solutions, so let's just select the pivot element
+from the current subarray randomly. To implement this solution,
+we do the following. Before following the partition procedure. We just select a random
+index between l and m, and we swap elements A[l] and
+this random element. Okay, then we call partition, and
+then we proceed in a usual way. Let me explain intuitively why selecting
+a random partition is going to help us to prove a good upper bound on the
+running time of the Quicksort algorithm. Well, for this, consider array
+A's that we're going to partition with respect to random p and
+consider it sorted version. Assume for the moment that all the
+elements inside our array are different. In the sorted version,
+consider the middle half elements. Well we can see that n/2 elements
+that stay exactly in the middle. Well an important property of all these
+elements is the following: for each of these n/2 elements there are at least
+n/4 elements that are greater than them. And at least n over four
+elements that are smaller. Well this means that if we select any
+of these elements inside our array a, then the partition with respect to
+this element is going to be balanced. Right? In both parts there will be at
+least n over four elements. Well these n over two elements stay
+somewhere in the initial array. So they stay in the middle
+in the sorted array and they stay somewhere in the initial array. It doesn't matter for us. What is important for
+us is that there are at least n over two elements with respect to which
+the partition is going to be balanced. Which means that with probability one
+half we will have a balanced partition. And this happens to be enough
+to prove it with upper bound. So we're going to show that the randomized
+Quicksort algorithm is actually very fast. Well first of all it is
+fast in practice and we will prove it's theoretical analog
+out upper bound when it's running time. This is a formal statement of an upper
+bound on the running time of the Quicksort algorithm that we are going
+to prove in the next video. So I assume that we are given an array A,
+and assume for the moment that all the elements of
+this array are pairwise different. Then the average running time
+of the Quicksort algorithm on this array consisting of n elements,
+is big o of n log n. While the worst case running time
+of this algorithm is n squared. Well let me explain
+the word on average here. Well, this means that for any fixed array. So if we are very unlikely
+with the random beats, the running time potentially
+could be higher as an algorithm. However, on average, and
+average is over all possible random beats. The running time of the QuickSort
+algorithm is n log n. And this is true for any input. So this theorem doesn't say well,
+for Quicksort algorithm. For some arrays,
+the running time is large, for some arrays the running time is low. But on average,
+the running time is good enough. So it says that for any fixed rate,
+the average running time is then n log n. Okay, so we are going to prove
+this theorem in the next video.

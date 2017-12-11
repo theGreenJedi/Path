@@ -1,0 +1,41 @@
+Ahora consideremos el pseudo código
+ que implementa este algoritmo. Para propósitos de simplicidad, supondremos que los
+ puntos de entrada están ordenados en orden ascendente, de menor a mayor. Empezamos con un conjunto vacío de
+ segmentos al que llamamos R y empezamos con el índice i apuntando al primer punto, que es el está más a la izquierda
+ porque los puntos están ordenados. Ahora, pasamos por los puntos y encontramos
+ el punto más a la izquierda, en este momento i apunta al punto
+ más a la izquierda en el conjunto, y al principio del bucle while, i siempre apuntará al punto más a la izquierda
+ que continúe en el conjunto. Ahora lo cubrimos con el segmento
+ que va de l a r, que tiene longitud 1, y cuyo extremo izquierdo está sobre el punto xi,
+ por lo que este segmento va de xi a xi+1. Agregamos este segmento al conjunto de nuestra solución, y entonces, necesitamos borrar los puntos del
+ conjunto que ya fueron cubiertos. En lugar de remover los puntos, vamos sólo
+ a mover el apuntador a la derecha y vamos a olvidarnos de los puntos a la izquierda de éste. Así que el siguiente bucle while hace exactamente eso. Sabemos que para cualquier i que sea mayor al actual i, xi está a la derecha del extremo izquierdo del
+ segmento porque los puntos están ordenados. Así que si xi está también a la izquierda de r,
+ entonces está cubierto por el segmento. Así que sólo vamos cada vez más a la derecha con el apuntador i. Y mientras xi sea menor que o igual a r,
+ sabemos que el punto estará cubierto. Y tan pronto como encontremos una xi que sea
+ mayor que r, significa que este punto no está cubierto y todos los puntos que siguen
+ en el arreglo tampoco lo estarán. Así que paramos. Y entonces repetimos de nuevo la iteración del bucle while externo, o tal vez nuestro apuntador ya está fuera del arreglo, y en ese caso paramos y devolvemos R, que es el conjunto de segmentos
+ que hemos construido en el proceso. Ahora probemos que este algoritmo funciona en tiempo lineal. De hecho, el índice i cambia de 1 a n, y siempre lo incrementamos por uno. Para cada valor de i, agregamos a lo 
+más un segmento a la solución. Así que en total, incrementamos i a lo más n veces y agregamos a lo más n segmentos a la solución. Y esto nos lleva a una solución que corre en tiempo O(n). Ahora, habíamos supuesto que los
+ puntos están ordenados de entrada. ¿Qué tal si eliminamos esa suposición? Entonces tendremos que ordenar
+ primero los puntos y entonces aplicar nuestro algoritmo PointsCoverSorted. Más adelante en este módulo, aprenderás cómo
+ ordenar puntos en tiempo n log n. Combinando eso con nuestro 
+procedimiento PointsCoverSorted, tendrás un tiempo total de n log n. Ahora veamos nuestra mejora. Primero implementamos una solución directa, que trabajaba en un tiempo de al menos 2^n, por lo que funcionaba muy lento, de forma que tan sólo para 50 niños, habríamos que haber gastado al menos 2 semanas
+ de cálculo para agruparlos. Nuestro nuevo algoritmo, sin embargo, funciona en tiempo n log n. Y eso significa que aún si tuviéramos 10 millones
+ de niños que vinieran a la fiesta, requeriría sólo unos cuantos segundos para agruparlos
+ de manera óptima en varios grupos. Y eso es una gran mejora. Ahora, veamos cómo llegamos a este punto final. Primero, inventamos una solución ingenua
+ que trabajó en tiempo exponencial. Fue muy lenta y quisimos mejorarla. Pero para mejorarla, el primer paso importante fue
+ reformularla en términos matemáticos. Y entonces tuvimos una idea para
+ resolverla con un algoritmo voraz. Así que tuvimos que encontrar una elección voraz y
+ probar que sería un movimiento seguro. En este caso, el movimiento seguro
+ resultó ser el agregar a la solución un segmento con su extremo izquierdo
+ en el punto más a la izquierda. Y después probamos que éste es
+ realmente un movimiento seguro. Es muy importante que pruebes tus
+ soluciones antes de intentar implementarlas. Porque de otra forma, podría resultar que
+ implementaste una solución, intentaste enviarla, obtuviste un mal resultado,
+ o algo diferente a lo esperado. Y entonces, puede que hayas hecho unos
+ cuantos cambios pero nada resultó. Y al final, entiendes que tu solución fue incorrecta, desde el principio, completamente. Por lo que necesitas una nueva solución
+ que tendrás que implementar desde el principio. Lo que significa que perdiste mucho
+ tiempo implementando la primera solución incorrecta. Para evitar eso, debes primero probar tu solución siempre. Después de que probamos el movimiento seguro,
+ tenemos básicamente nuestra solución voraz, que funciona en combinación con otro algoritmo en tiempo n log n, que no solamente es no polinomial, sino que
+ es muy cercana al tiempo lineal, y funciona muy rápido en la práctica.

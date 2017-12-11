@@ -1,0 +1,61 @@
+Hola a todos Bienvenidos de nuevo. Hoy vamos a estar hablando sobre la notación O grande. Entonces, la idea básica es que vamos 
+a hablar sobre cómo manipular expresiones que involucran O grande
+ y otras notaciones asintóticas. Y en particular vamos a hablar de
+ cómo usar O grande para calcular tiempos de ejecución de algoritmos
+ en términos de esta notación. Entonces, recuerda, dijimos que f(n) era O de g(n) si para todas las entradas suficientemente grandes f(n) estaba acotada por arriba por alguna constante fija veces g(n). Lo que significa que f está acotada por
+ arriba por una constante veces g. Ahora, quisiéramos manipular expresiones, 
+quisiéramos que, dadas ciertas expresiones, las escribamos en términos de O grande en la forma más simple posible. Y así hay unas reglas comunes que debes de saber. La primera regla es que las constantes
+ multiplicativas pueden omitirse, así, 7n^3 es O(n^3), n^2/3 es O(n^2). La premisa básica que teníamos cuando 
+construimos esta idea es que queríamos algo que ignorara constantes multiplicativas. La segunda cosa a notar es que si tienes dos potencias de n, la de mayor exponente crece más rápido, por lo que n crece asintóticamente
+ de forma más lenta que O(n^2). Raíz de n crece de forma más lenta que n, que es O(n). Con suerte, esto no es tan malo. Lo que es más sorprendente es que si tienes cualquier polinomio y cualquier exponencial, la exponencial siempre crece más rápido. Entonces n^5 es O de raíz de 2^n, n^100 es O(1.1^n). Y esto último es algo que debería sorprenderte un poco, porque n^100 es un tiempo terrible, 2^100 es algo tan enorme que no
+ puedes esperar hacerlo en la vida. Por el otro lado, 1.1^n crece muy modestamente, 1.1^100 es un número muy razonable en tamaño. Por el otro lado, lo que realmente decimos es 
+que una vez que n es muy grande, tal vez, 100 mil, por ahí, 1.1 eventualmente despega y vence a n^100. Y lo hace por mucho, pero no pasa hasta que n es muy grande. En el mismo tenor, cualquier potencia de log n crece
+ más lentamente que cualquier potencia de n. Asó, log n al cubo es O de raíz de n, n log n es O(n^2). Finalmente, si tienes alguna suma de términos,
+ los más pequeños en la suma pueden omitirse. Así, n^2+n, n tiene una razón de crecimiento menor, así que esto es O(n^2); 2^n+n^9, n^9 tiene una menor razón de 
+crecimiento, así que es O(2^n). Entonces, éstas son reglas comunes
+ para manipular estas expresiones. Básicamente éstas son las únicas que necesitarás 
+la mayoría del tiempo para escribir lo que sea en términos de O grande. OK, entonces, veamos cómo funciona esto en la práctica. Queremos realmente calcular tiempos usando notación O grande. Entonces, veamos este algoritmo de nuevo. Creamos un arreglo, le dimos valor 0 al elemento 0 y valor 1 al elemento 1. Entonces entramos en el bucle, donde cada elemento va a ser la suma de los dos previos, y entonces devolvemos el último elemento en el arreglo. Intentemos calcular este tiempo en
+ términos de la notación O grande. Entonces, vamos a ver operación por operación y preguntarnos cuánto tiempo toman. La primera operación es, creamos un arreglo,
+ y vamos a ignorar por el momento el manejo de la memoria, supón que no 
+es muy difícil asignar la memoria. Pero, supongamos que, bien, lo que hacemos 
+con el compilador, queremos poner a cero todas estas celdas en la memoria y esto
+ nos va a acarrear un poco de trabajo, porque por cada celda, lo que 
+tenemos que hacer, básicamente, es poner a cero esa celda, y después necesitamos
+ incrementar un contador que nos diga en qué celda estaremos después, y entonces tal vez necesitemos checar si no estamos al final. Si estamos al final, vamos a la siguiente línea. Ahora, por cada celda necesitamos hacer
+ una cierta cantidad de trabajo. Tenemos que hacer algo como escribir, 
+comparar, hacer un incremento. Y no está completamente claro cuántas operaciones son éstas, pero es una cantidad de trabajo
+ constante por cada celda en el arreglo. Hay n+1 celdas, esto es un tiempo O(n), alguna constante veces n. Después, hacemo igual a 0 al elemento cero del arreglo. Y esto puede ser sólo una simple asignación. Podríamos cargar unas cuantas cosas en registros 
+o hacer alguna aritmética de punteros, pero, no importa si esto es sólo una
+ operación de la máquina, o 5 o 7, va a ser un número constante de
+ operaciones de máquina, O(1). Similarmente con el primer elemento,
+ lo hacemos igual a uno, tiempo O(1). Después vamos por este bucle, para i de 2 a n, el tamaño es n-1, esto es tiempo O(n). Lo más importante que hacemos en el bucle es asignar el i-ésimo elemento del arreglo
+ como la suma del i-1 e i-2 elementos. Ahora, las búsquedas, y el almacenamiento, todo eso ya vimos que deben ser O(1). Pero la suma es un poco peor. Normalmente las sumas llevan un tiempo constante. Pero éstos son números grandes. Recuerda, el Fibonacci n-ésimo tiene cerca de n/5 dígitos, son muy grandes, y a menudo no cabrán en ninguna máquina. Ahora, si te preguntas qué pasa
+ si sumas dos números muy grandes, ¿cuánto tiempo lleva eso? Bien, haces las sumas de las unidades, decenas, centenas, los millares, y así sucesivamente. Y, tienes que hacer trabajo por cada
+ uno de los lugares de los dígitos. Y así, la cantidad de trabajo que debes
+ hacer es proporcional al número de dígitos que en este caso es proporcional a n, así que esta línea de código debe llevar un tiempo O(n). Finalmente tenemos el paso de la devolución, que es
+ una aritmética de punteros y una búsqueda en el arreglo, tal vez el apilamiento del programa aparezca, y no es muy claro cuánto tiempo lleva, pero es muy claro que es una cantidad de tiempo constante,
+ no se vuelve peor conforme n aumenta. Así que es O(1). Así que sólo tenemos que sumar esto, O(n), más O(1), más O(1), más O(n)
+ por el número de veces en el bucle, que es O(n), más O(1), lo sumamos todo, el término dominante, que es el único que 
+necesitamos, es O(n) por O(n), que es O(n^2). Entonces este algoritmo corre en tiempo O(n^2). Ahora, no sabemos excatamente cuáles son las constantes, pero O(n^2) significa que si 
+quieres terminar esto en un segundo, probablemente puedas manejar datos
+ de un tamaño de alrededor de 30 mil. Ahora, dependiendo de la computadora 
+que tengas y el compilador y todos estos detalles horribles, tal vez puedas manejar 
+datos de tamaño mil en un segundo, o tal vez datos del tamaño de un millón en un segundo. Probablemente no va a ser tan bajo como 10
+ o tan alto como mil millones, pero, quiero decir, 30 mil es una buena estimación, y requiere 
+de trabajo el lograr algo mejor que eso. Entonces, esto no nos da una respuesta exacta pero es muy bueno. OK, entonces, así es como usamos la notación O grande. Resulta que, ocasionalmente, quieres decir algunas otras cosas. O grande nada más nos dice que mis 
+tiempos están acotados por arriba, por algún múltiplo de esta cosa. Algunas veces quieres decir lo contrario, algunas veces querrás decir que estás acotado por abajo. Y hay una notación diferente para eso. Si quieres decir que f está acotada por g por
+ debajo, que no crece más lento que g, entonces dices que f(n) es Omega de g(n). Y eso significa que para alguna constante c, f(n) es al menos c veces g(n), para toda n grande. Ahora, en lugar de decir, acotada por arriba o acotada por abajo, algunas veces quieres decir que crecen a la misma razón. Y para eso usas Theta grande de g(n). Lo que significa que f es tanto O de g como Omega de g. Lo que significa que, hasta una constante, f y g crecen al mismo ritmo. Finalmente, algunas veces, en lugar de 
+decir que f no crece más rápido que g, tienes que decir que crece estrictamente
+ más lento que g, y para eso dices f(n) is o pequeña de g(n). Y esto dice que, no solamente el
+ cociente entre f(n) y g(n) está acotado por arriba por alguna constante, sino que a esta constante
+ la podemos hacer realmente tan pequeña como queramos. En particular, esto significa que el cociente
+ entre f(n) y g(n) se hace cero cuando n tiende a infinito. Entonces, estas son algunas otras notaciones
+ que podrías ver de vez en cuando. Estaría bien que lo recordaras. Son útiles. O grande es la que casi siempre aparece, porque lo que queremos hacer es 
+acotar nuestros tiempos por arriba, es como la gran cosa importante, 
+pero los otros también son útiles. Entonces, para resumir la cosa sobre la notación asintótica, lo que nos permite es ignorar todas estos
+ detalles complicados en el análisis de los tiempos, como ya vimos. Produce respuestas muy limpias que nos dicen 
+mucho sobre el tiempo asintótico de las cosas. Y todo esto lo hace muy útil. Lo que significa que la vamos a usar
+ extensivamente durante el curso. Así que mejor acostúmbrate a la notación. Pero, tira por la borda mucha información práctica. Por lo que si realmente quieres hacer tu programa rápido, necesitas ver más cosas que sólo el tiempo en O grande. Pero, además de eso, la vamos a usar. Con esta lección básicamente terminamos el material 
+introductorio que necesitamos. En la próxima lección voy a hablarte sobre un resumen del resto del curso, y algo de nuestra filosofía sobre éste. Y después de eso, vamos a entrar
+ directamente al meollo del asunto. Empezaremos a hablar sobre importantes
+ formas clave de desarrollar algoritmos. Así que espero que lo disfrutes.

@@ -1,0 +1,587 @@
+1
+00:00:03,470 --> 00:00:04,780
+Hello everybody.
+
+2
+00:00:04,780 --> 00:00:05,910
+I'm Daniel Kane.
+
+3
+00:00:05,910 --> 00:00:09,300
+Welcome to the data structures and
+algorithms specialization.
+
+4
+00:00:09,300 --> 00:00:12,150
+For this very first lecture, we're going
+to start at the very beginning and
+
+5
+00:00:12,150 --> 00:00:16,310
+talk about why do you need to study
+algorithms in the first place.
+
+6
+00:00:16,310 --> 00:00:21,480
+So the basic goal in this lecture is to
+sort of talk about what are the sorts
+
+7
+00:00:21,480 --> 00:00:24,800
+of problems that we're going to be
+discussing in this algorithms class and
+
+8
+00:00:24,800 --> 00:00:26,460
+why they're important.
+
+9
+00:00:26,460 --> 00:00:30,610
+And in the context of doing this, we're
+also going to discuss some problems that
+
+10
+00:00:30,610 --> 00:00:34,910
+you might run into when writing
+computer programs that might not
+
+11
+00:00:34,910 --> 00:00:39,520
+actually require sophisticated techniques
+that we'll be discussing in this course.
+
+12
+00:00:39,520 --> 00:00:40,420
+And on the other hand,
+
+13
+00:00:40,420 --> 00:00:44,310
+we'll discuss some other sorts of problems
+that you might want to solve that
+
+14
+00:00:44,310 --> 00:00:47,620
+go beyond the sort of material that
+we will be talking about here.
+
+15
+00:00:48,720 --> 00:00:52,920
+So, to begin with, suppose that
+you're writing a computer program.
+
+16
+00:00:52,920 --> 00:00:57,280
+There are a lot of tasks that
+you might want to perform
+
+17
+00:00:57,280 --> 00:01:00,490
+that you don't really need
+to think about very hard.
+
+18
+00:01:00,490 --> 00:01:05,360
+These are things like displaying
+a given text on the screen, or copying
+
+19
+00:01:05,360 --> 00:01:10,910
+a file from one location to another,
+or searching a file for a given word.
+
+20
+00:01:10,910 --> 00:01:13,920
+Each of these algorithms has
+essentially a linear scan.
+
+21
+00:01:13,920 --> 00:01:17,160
+You go through every word in the file,
+one at a time and
+
+22
+00:01:17,160 --> 00:01:19,310
+you do the appropriate thing.
+
+23
+00:01:19,310 --> 00:01:22,280
+And for each of these problems
+there's essentially a linear scan
+
+24
+00:01:23,330 --> 00:01:26,070
+that you really can't do much better than.
+
+25
+00:01:26,070 --> 00:01:28,350
+In order to do whatever
+task it is you're doing,
+
+26
+00:01:28,350 --> 00:01:32,950
+you have to go through all the data one
+at a time and process it appropriately.
+
+27
+00:01:32,950 --> 00:01:35,250
+And so when you do more or
+
+28
+00:01:35,250 --> 00:01:38,750
+less the obvious thing,
+you have a program that works.
+
+29
+00:01:38,750 --> 00:01:40,700
+It solves the problem that you need.
+
+30
+00:01:40,700 --> 00:01:44,140
+And it does so approximately as
+efficiently as you could expect.
+
+31
+00:01:45,150 --> 00:01:49,180
+So for these sorts of problems you
+might not have to think very hard
+
+32
+00:01:49,180 --> 00:01:50,820
+about what algorithm you are using.
+
+33
+00:01:52,070 --> 00:01:56,520
+On the other hand, there are some other
+problems, actual algorithms problems,
+
+34
+00:01:56,520 --> 00:01:59,340
+where it's not so
+clear what it is you need to do.
+
+35
+00:02:00,350 --> 00:02:02,230
+For example, you might be given a map and
+
+36
+00:02:02,230 --> 00:02:06,910
+need to find the shortest path
+between two locations on this map.
+
+37
+00:02:06,910 --> 00:02:10,990
+Or you might be given,
+you might be trying to find the best
+
+38
+00:02:10,990 --> 00:02:15,920
+pairing between students and dorm rooms
+given some sort of list of preferences, or
+
+39
+00:02:15,920 --> 00:02:18,870
+you might be trying to measure the
+similarity of two different documents.
+
+40
+00:02:20,000 --> 00:02:22,650
+Now, for these problems it's
+a lot more complicated,
+
+41
+00:02:22,650 --> 00:02:26,550
+it's not immediately clear
+how to solve these problems.
+
+42
+00:02:26,550 --> 00:02:29,820
+And even when you do
+come up with solutions,
+
+43
+00:02:29,820 --> 00:02:34,600
+often the simple solutions to these
+problems are going to be far too slow.
+
+44
+00:02:34,600 --> 00:02:36,920
+You could end up with
+some simple algorithm,
+
+45
+00:02:36,920 --> 00:02:41,050
+you could try all possible pairings
+between people and dorm rooms and
+
+46
+00:02:41,050 --> 00:02:46,230
+return the one that optimizes some
+function that you're trying to deal with.
+
+47
+00:02:46,230 --> 00:02:50,240
+On the other hand, if you did that,
+it would probably take a very, very,
+
+48
+00:02:50,240 --> 00:02:52,020
+very long time.
+
+49
+00:02:52,020 --> 00:02:56,140
+And you might not have
+enough time to wait, and so
+
+50
+00:02:56,140 --> 00:02:57,409
+you might need to do something better.
+
+51
+00:02:58,530 --> 00:03:02,420
+And then even once you have
+a reasonably efficient algorithm for
+
+52
+00:03:02,420 --> 00:03:06,590
+these problems, there's often a lot
+of room for further optimization.
+
+53
+00:03:06,590 --> 00:03:10,030
+Improve things so that things run
+in an hour rather than a day.
+
+54
+00:03:10,030 --> 00:03:11,780
+Or a minute rather than an hour.
+
+55
+00:03:11,780 --> 00:03:13,540
+Or a second rather than a minute.
+
+56
+00:03:13,540 --> 00:03:17,350
+And all of these improvements
+will have a large effect
+
+57
+00:03:17,350 --> 00:03:19,850
+on how useful this program
+you've written is.
+
+58
+00:03:21,200 --> 00:03:22,670
+Now, on the other hand,
+
+59
+00:03:22,670 --> 00:03:26,720
+there are some things that you might want
+to try and do with your computer that
+
+60
+00:03:26,720 --> 00:03:30,460
+go a little bit beyond the sort of
+things we're discussing in this course.
+
+61
+00:03:30,460 --> 00:03:33,700
+We might want to call these
+Artificial Intelligence Problems.
+
+62
+00:03:33,700 --> 00:03:36,390
+And these are problems where it's sort of
+
+63
+00:03:36,390 --> 00:03:39,680
+hard to clearly state what it
+is that you're trying to do.
+
+64
+00:03:40,858 --> 00:03:44,060
+An example of this might be,
+to try and write a computer program
+
+65
+00:03:44,060 --> 00:03:46,390
+to understand natural language.
+
+66
+00:03:46,390 --> 00:03:50,900
+That is, write a program where I can type
+something in, some English sentence,
+
+67
+00:03:50,900 --> 00:03:55,230
+asking it, you know, what's the price
+of milk at the local food store today?
+
+68
+00:03:55,230 --> 00:03:59,640
+And you want the computer to then
+take this sentence that I wrote, and
+
+69
+00:03:59,640 --> 00:04:03,520
+figure out what it means,
+figure out some way to parse it.
+
+70
+00:04:03,520 --> 00:04:08,080
+And then do an appropriate lookup and
+return a useful answer to me.
+
+71
+00:04:08,080 --> 00:04:12,770
+And the problem with doing this isn't so
+much that anything involved here is
+
+72
+00:04:12,770 --> 00:04:17,650
+actually difficult to perform, but
+the problem is that fundamentally we
+
+73
+00:04:17,650 --> 00:04:22,880
+don't really understand what it means
+to interpret an English sentence.
+
+74
+00:04:22,880 --> 00:04:26,610
+Now, I mean we can all speak English,
+hopefully, if you're listening to this
+
+75
+00:04:26,610 --> 00:04:32,060
+lecture, but we don't sort of really
+fundamentally understand what it means.
+
+76
+00:04:32,060 --> 00:04:35,310
+It's hard to put it into
+precise enough language
+
+77
+00:04:35,310 --> 00:04:37,970
+that you can actually write
+a computer program to do that.
+
+78
+00:04:38,980 --> 00:04:43,300
+Now you have similar problems, like if you
+want to identify objects in a photograph.
+
+79
+00:04:43,300 --> 00:04:46,270
+You've got a picture, with maybe
+with a dog and tree and a cloud and
+
+80
+00:04:46,270 --> 00:04:49,100
+you want the computer to
+identify what's what.
+
+81
+00:04:49,100 --> 00:04:54,480
+Then once again, this is a thing that our
+brains have gotten very good at doing, and
+
+82
+00:04:54,480 --> 00:04:57,040
+we understand what the question is.
+
+83
+00:04:57,040 --> 00:05:01,580
+However, it's hard to really put into
+words how you identify that this thing's
+
+84
+00:05:01,580 --> 00:05:03,450
+a dog and this thing's a tree.
+
+85
+00:05:03,450 --> 00:05:07,338
+And this sort of business makes
+it very difficult to teach
+
+86
+00:05:07,338 --> 00:05:09,530
+a computer to do the same thing.
+
+87
+00:05:11,040 --> 00:05:14,520
+Another thing that you might want to do is
+teach a computer to play games well like
+
+88
+00:05:14,520 --> 00:05:16,880
+play chess effectively.
+
+89
+00:05:16,880 --> 00:05:18,420
+And, once again,
+
+90
+00:05:18,420 --> 00:05:21,820
+this is a thing where we can sort of
+identify what it means to do this.
+
+91
+00:05:21,820 --> 00:05:24,510
+But, actually how you want to do it,
+
+92
+00:05:24,510 --> 00:05:29,170
+there's a lot of sort of very vague,
+intuitive things that go on there.
+
+93
+00:05:29,170 --> 00:05:32,920
+It's not a clearly defined problem
+that you're trying to solve.
+
+94
+00:05:34,520 --> 00:05:38,850
+And so, for all of these problems
+sort of the difficulty is not so
+
+95
+00:05:38,850 --> 00:05:40,980
+much that it's hard to do things quickly.
+
+96
+00:05:40,980 --> 00:05:44,050
+But it's hard to even state what
+it is that you're trying to do and
+
+97
+00:05:44,050 --> 00:05:46,230
+figure out how to approach it.
+
+98
+00:05:46,230 --> 00:05:49,760
+Now, these are problems that we're not
+going to really cover in this class,
+
+99
+00:05:49,760 --> 00:05:54,230
+we're going to focus on algorithms,
+how to do things quickly and efficiently.
+
+100
+00:05:54,230 --> 00:05:58,300
+But if you do want to get into AI and
+want to try and solve these problems,
+
+101
+00:05:58,300 --> 00:06:02,230
+it will be very important that you have
+a solid grounding in algorithms, so
+
+102
+00:06:02,230 --> 00:06:07,280
+that once you have some idea of
+what does it mean to identify
+
+103
+00:06:07,280 --> 00:06:11,570
+trees in pictures, you will have
+an idea of what sort of algorithms
+
+104
+00:06:11,570 --> 00:06:16,050
+can actually support these ideas, which
+sort of ideas you can actually implement
+
+105
+00:06:16,050 --> 00:06:17,350
+in a reasonable amount of time.
+
+106
+00:06:18,450 --> 00:06:23,180
+And so, what we're going to focus on in
+this course are the algorithms problems.
+
+107
+00:06:23,180 --> 00:06:26,030
+So, we want problems that
+are cleanly formulated,
+
+108
+00:06:26,030 --> 00:06:28,110
+like clear mathematical problems.
+
+109
+00:06:28,110 --> 00:06:32,130
+And some of the things we looked
+at maybe aren't immediately clear,
+
+110
+00:06:32,130 --> 00:06:36,120
+like if you want to find the shortest
+route between two points on a map,
+
+111
+00:06:36,120 --> 00:06:38,850
+that's not immediately a math problem.
+
+112
+00:06:38,850 --> 00:06:41,580
+But, pretty quickly you
+can interpret it as such.
+
+113
+00:06:41,580 --> 00:06:45,580
+You can say, well,
+I want some sequence of intersections,
+
+114
+00:06:45,580 --> 00:06:49,970
+I'm traveling between such that each
+pair is connected by a road, and
+
+115
+00:06:49,970 --> 00:06:53,480
+the sum of the lengths of
+the roads is as small as possible.
+
+116
+00:06:53,480 --> 00:06:58,220
+And so, pretty quickly this just becomes
+a problem where we can very clearly state
+
+117
+00:06:58,220 --> 00:07:00,220
+what it is that we're trying to do
+
+118
+00:07:00,220 --> 00:07:03,880
+but, for
+which it is still nontrivial to solve it.
+
+119
+00:07:03,880 --> 00:07:07,860
+And so, that's the sort of thing we're
+going to be talking about in this class.
+
+120
+00:07:07,860 --> 00:07:08,930
+And, hopefully,
+
+121
+00:07:08,930 --> 00:07:12,210
+by the end of it you will have a good
+idea of how to solve these problems,
+
+122
+00:07:12,210 --> 00:07:17,380
+how to write programs that will solve
+them very quickly and very efficiently.
+
+123
+00:07:17,380 --> 00:07:19,590
+And that's what we'll be talking about.
+
+124
+00:07:19,590 --> 00:07:21,380
+I hope you enjoy the rest of the class.

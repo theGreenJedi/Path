@@ -1,0 +1,495 @@
+1
+00:00:00,150 --> 00:00:00,980
+Hola.
+
+2
+00:00:00,980 --> 00:00:04,810
+En este video, consideraremos el 
+problema de encontrar el mínimo número de
+
+3
+00:00:04,810 --> 00:00:06,580
+abastecimiento durante una viaje largo en carro.
+
+4
+00:00:06,580 --> 00:00:09,920
+Verás las similitudes entre este problema y
+
+5
+00:00:09,920 --> 00:00:12,990
+el problema del Número más grande del video pasado.
+
+6
+00:00:12,990 --> 00:00:17,550
+Al final, serás capaz de describir cómo
+ los algoritmos voraces funcionan en general
+
+7
+00:00:17,550 --> 00:00:20,440
+y definir qué es un movimiento seguro y un subproblema.
+
+8
+00:00:20,440 --> 00:00:22,230
+Considera el siguiente problema:
+
+9
+00:00:22,230 --> 00:00:25,880
+tienes un carro tal que si le recargas todo el tanque,
+
+10
+00:00:25,880 --> 00:00:30,170
+puedes viajar con éste hasta 400 km sin rellenarlo.
+
+11
+00:00:30,170 --> 00:00:33,070
+Y necesitas ir del punto A al punto B
+
+12
+00:00:33,070 --> 00:00:37,140
+y la distancia entre éstos es de 950 km.
+
+13
+00:00:37,140 --> 00:00:39,830
+Por supuesto, necesitas rellenar el tanque en el camino,
+
+14
+00:00:39,830 --> 00:00:44,020
+y con suerte, hay unas cuantas estaciones
+ de gasolina en el camino de A a B.
+
+15
+00:00:44,020 --> 00:00:49,840
+Éstos estám marcados por círculos azules, y los 
+números encima significan la distancia desde A
+
+16
+00:00:49,840 --> 00:00:55,420
+a la correspondiente estación de 
+gasolina en el camino de A a B.
+
+17
+00:00:55,420 --> 00:00:58,960
+Y necesitas encontrar el mínimo número
+ de recargas para llegar de A a B.
+
+18
+00:01:00,430 --> 00:01:05,410
+Un ejemplo de tal ruta es llegar del punto A a la primera estación,
+
+19
+00:01:05,410 --> 00:01:10,780
+200 km, entonces pasar de la primera estación a la tercera,
+
+20
+00:01:10,780 --> 00:01:13,590
+350 km.
+
+21
+00:01:13,590 --> 00:01:17,540
+Entonces de la tercera estación a la cuarta,
+
+22
+00:01:17,540 --> 00:01:21,670
+200 km, y entonces de la cuarta estación hasta B, 200 km.
+
+23
+00:01:22,890 --> 00:01:23,910
+Pero esto no es óptimo,
+
+24
+00:01:23,910 --> 00:01:25,120
+podemos hacerlo mejor.
+
+25
+00:01:25,120 --> 00:01:28,562
+Aquí está otra ruta, que usa sólo dos recargas.
+
+26
+00:01:28,562 --> 00:01:34,082
+Pasamos de A a la segunda estación de
+ gasolina, menos de 400 km, entonces de la 
+
+27
+00:01:34,082 --> 00:01:40,260
+segunda a la cuarta estación, de nuevo menos de 400 km,
+
+28
+00:01:40,260 --> 00:01:43,920
+y entonces de la cuarta estación a B, sólo 200 km.
+
+29
+00:01:45,150 --> 00:01:47,860
+Y esta ruta usa sólo dos recargas,
+
+30
+00:01:47,860 --> 00:01:52,750
+y resulta que en este problema, el mínimo
+ número de recargas es exactamente dos.
+
+31
+00:01:52,750 --> 00:01:56,110
+Más formalmente, tenemos el siguiente problema.
+
+32
+00:01:56,110 --> 00:02:00,020
+Como entrada tenemos un carro que
+ puede viajar a lo más L km,
+
+33
+00:02:00,020 --> 00:02:03,680
+donde L es un parámetro, si el carro se llena hasta el máximo.
+
+34
+00:02:03,680 --> 00:02:08,800
+Tenemos una fuente y un destino, A y B, y 
+tenemos n estaciones de gasolina a distancias
+
+35
+00:02:08,800 --> 00:02:14,550
+desde x1 hasta xn en km, a lo largo del camino de A a B.
+
+36
+00:02:14,550 --> 00:02:18,530
+Y necesitamos devolver el mínimo número
+ de recargas para llegar de A a B,
+
+37
+00:02:18,530 --> 00:02:20,455
+sin contar la recarga inicial en A.
+
+38
+00:02:20,455 --> 00:02:24,160
+Queremos resolver este problema usando una estrategia voraz, 
+
+39
+00:02:24,160 --> 00:02:26,710
+y una estrategia voraz en general es muy fácil.
+
+40
+00:02:26,710 --> 00:02:30,340
+Primero haces una elección voraz, 
+entonces reduces tu problema a
+
+41
+00:02:30,340 --> 00:02:34,690
+un subproblema más pequeño, y entonces
+ iteras hasta que no quedan problemas.
+
+42
+00:02:35,950 --> 00:02:40,380
+Hay unas cuantas formas diferentes de hacer
+ una elección voraz en este particular problema
+
+43
+00:02:40,380 --> 00:02:45,390
+Por ejemplo, puedes rellenar en la estación más  cercana.
+
+44
+00:02:45,390 --> 00:02:49,770
+Otra forma es rellenar en la estación más
+ lejana alcanzable, y por alcanzable
+
+45
+00:02:49,770 --> 00:02:54,040
+quiero decir que puedes llegar a esa estación desde donde estás
+
+46
+00:02:54,040 --> 00:02:55,790
+sin rellenar gasolina.
+
+47
+00:02:55,790 --> 00:02:59,740
+Otra forma es, por ejemplo, manejar
+ hasta que se acabe la gasolina
+
+48
+00:02:59,740 --> 00:03:04,260
+y entonces esperar a que una estación aparezca ahí.
+
+49
+00:03:04,260 --> 00:03:08,115
+Así que, ¿cuál piensas que es la
+ estrategia correcta en este problema?
+
+50
+00:03:10,031 --> 00:03:13,870
+Y por supuesto, la tercera opción es obviamente incorrecta.
+
+51
+00:03:13,870 --> 00:03:16,480
+La primera opción es también incorrecta, si lo piensas, pero
+
+52
+00:03:16,480 --> 00:03:18,970
+la segunda opción es correcta.
+
+53
+00:03:18,970 --> 00:03:21,800
+Te dará el número óptimo de recargas.
+
+54
+00:03:21,800 --> 00:03:23,050
+Lo probaremos después.
+
+55
+00:03:24,490 --> 00:03:30,120
+Por mientras, definamos nuestro algoritmo 
+voraz como el algoritmo completo.
+
+56
+00:03:30,120 --> 00:03:35,540
+Así que empezamos desde A y necesitamos
+ llegar a B con el mínimo número de recargas.
+
+57
+00:03:35,540 --> 00:03:40,790
+Vamos de A a la estación más lejana alcanzable G
+
+58
+00:03:40,790 --> 00:03:46,340
+de forma que lleguemos de A a G con 
+tanque lleno sin recargar en el camino.
+
+59
+00:03:46,340 --> 00:03:50,960
+Y ahora, tratamos de reducir este problema a uno similar.
+
+60
+00:03:50,960 --> 00:03:57,170
+Hacemos G el nuevo A, y ahora nuestro 
+problema es llegar del nuevo A a B,
+
+61
+00:03:57,170 --> 00:03:58,980
+de nuevo con el mínimo número de recargas.
+
+62
+00:04:00,290 --> 00:04:05,690
+Y por definición, un subproblema es un
+ problema similar de menor tamaño.
+
+63
+00:04:05,690 --> 00:04:09,140
+Un ejemplo de subproblema lo vimos en el video anterior.
+
+64
+00:04:09,140 --> 00:04:13,060
+Cuando necesitamos construir el número 
+más grande a partir de una lista de dígitos,
+
+65
+00:04:13,060 --> 00:04:17,260
+primero ponemos los dígitos más grandes enfrente,
+ y entonces reducimos el problema
+
+66
+00:04:17,260 --> 00:04:21,860
+al problema de encontrar el número más 
+grande con los dígitos que quedaron.
+
+67
+00:04:21,860 --> 00:04:25,770
+En este problema, para encontrar el mínimo
+ número de recargas del camino de A a B,
+
+68
+00:04:25,770 --> 00:04:30,210
+primero rellenamos en la estación más lejana alcanzable G
+
+69
+00:04:30,210 --> 00:04:35,310
+y entonces resolvemos un problema 
+similar que es el subproblema de llegar
+
+70
+00:04:35,310 --> 00:04:37,840
+de G a B con el mínimo número de recargas.
+
+71
+00:04:39,170 --> 00:04:41,610
+Otro término importante es "movimiento seguro".
+
+72
+00:04:41,610 --> 00:04:47,400
+LLamamos una elección voraz como movimiento 
+seguro si es consistente con alguna solución óptima.
+
+73
+00:04:47,400 --> 00:04:52,440
+En otras palabras, si existe alguna solución 
+óptima en la que el primer movimiento
+
+74
+00:04:52,440 --> 00:04:57,500
+es esta elección voraz, entonces esta
+ elección voraz es un movimiento seguro.
+
+75
+00:04:57,500 --> 00:05:02,430
+Y probaremos un lema que dice que rellenar en
+ la estación de gasolina alcanzable más lejana
+
+76
+00:05:02,430 --> 00:05:03,900
+es un  movimiento seguro.
+
+77
+00:05:03,900 --> 00:05:06,060
+Vamos a probar esto primero visualmente.
+
+78
+00:05:06,060 --> 00:05:08,570
+Consideremos una ruta óptima de A a B,
+
+79
+00:05:08,570 --> 00:05:13,450
+y sea la primera parada para recargar
+ de esta ruta el punto G1.
+
+80
+00:05:13,450 --> 00:05:17,510
+Y sea G la estación alcanzable más lejana desde A.
+
+81
+00:05:17,510 --> 00:05:21,640
+Si G1 y G coinciden, entonces ya probamos nuestro lema.
+
+82
+00:05:21,640 --> 00:05:25,390
+De otra forma, G1 tiene que estar más cerca de A que G,
+
+83
+00:05:25,390 --> 00:05:30,450
+porque G es la estación más lejana alcanzable 
+desde A, y G1 es alcanzable desde A.
+
+84
+00:05:30,450 --> 00:05:34,670
+Ahora consideremos la próxima parada 
+en la ruta óptima, que sería G2.
+
+85
+00:05:35,800 --> 00:05:39,268
+Y el primer caso es que G está más cerca de A que G2,
+
+86
+00:05:39,268 --> 00:05:42,390
+entonces la ruta se vería así.
+
+87
+00:05:42,390 --> 00:05:45,930
+En este caso, podemos rellenar en G en lugar de G1,
+
+88
+00:05:45,930 --> 00:05:49,430
+y entonces tendremos otra ruta óptima
+
+89
+00:05:49,430 --> 00:05:54,070
+porque tiene el mismo número de 
+recargas y G es alcanzable desde A.
+
+90
+00:05:54,070 --> 00:05:56,090
+Y G2 es también alcanzable desde G,
+
+91
+00:05:56,090 --> 00:06:01,640
+porque es alcanzable desde G1, pero 
+G está más cerca de G2 que G1.
+
+92
+00:06:01,640 --> 00:06:05,610
+Así que ésta es una ruta correcta y, 
+en este caso, probamos nuestro lema.
+
+93
+00:06:05,610 --> 00:06:10,470
+Y el segundo caso es cuando G2 está más cerca de A que G, y
+
+94
+00:06:10,470 --> 00:06:13,240
+entonces la ruta se vería así.
+
+95
+00:06:13,240 --> 00:06:18,000
+Pero en este caso, podemos evitar rellenar en G1 y
+
+96
+00:06:18,000 --> 00:06:23,390
+rellenar en G2 o rellenar en G, en primer lugar.
+
+97
+00:06:23,390 --> 00:06:26,862
+Y entonces reducir el número de 
+recargas de nuestra rura óptima,
+
+98
+00:06:26,862 --> 00:06:28,440
+lo que es imposible.
+
+99
+00:06:28,440 --> 00:06:32,140
+Así que el segundo caso contradice nuestro enunciado
+
+100
+00:06:32,140 --> 00:06:36,620
+de que estamos en una ruta óptima,
+ y hemos probado nuestro lema.
+
+101
+00:06:36,620 --> 00:06:42,110
+Para recapitular, consideramos la ruta óptima 
+R con un mínimo número de recargas.
+
+102
+00:06:42,110 --> 00:06:46,481
+Denotamos con G1 la posición de la primera recarga en R, y por G2
+
+103
+00:06:46,481 --> 00:06:51,600
+la siguiente parada en R, que es, ya sea
+ una recarga, o el destino B mismo.
+
+104
+00:06:51,600 --> 00:06:54,974
+Y por G denotamos la estación más
+ lejana alcanzable desde A, y
+
+105
+00:06:54,974 --> 00:06:56,760
+consideramos dos casos.
+
+106
+00:06:56,760 --> 00:07:00,570
+En el primer caso, si G está más cerca de A que G2,
+
+107
+00:07:00,570 --> 00:07:05,350
+podemos rellenar en G en lugar de en G1, y esto 
+significa que recargar en G es un movimiento seguro.
+
+108
+00:07:06,390 --> 00:07:08,930
+De otra forma, podemos evitar rellenar en G1.
+
+109
+00:07:08,930 --> 00:07:12,800
+Entonces este caso contradice que la ruta R
+
+110
+00:07:12,800 --> 00:07:14,860
+es la ruta con el mínimo número de recargas.
+
+111
+00:07:14,860 --> 00:07:18,880
+Pero no hay tal caso, y probamos nuestro lema.
+
+112
+00:07:18,880 --> 00:07:23,413
+Y en la siguiente clase, implementaremos 
+este algoritmo en pseudocódigo y
+
+113
+00:07:23,413 --> 00:07:25,137
+analizaremos su tiempo de ejecución.

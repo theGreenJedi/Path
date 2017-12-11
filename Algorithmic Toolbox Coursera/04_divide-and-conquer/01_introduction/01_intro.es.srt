@@ -1,0 +1,257 @@
+1
+00:00:00,600 --> 00:00:02,630
+Hola, soy Neil Rhodes.
+
+2
+00:00:02,630 --> 00:00:05,390
+Bienvenidos al módulo divide y vencerás.
+
+3
+00:00:05,390 --> 00:00:08,950
+En el último módulo, aprendiste 
+cómo usar algoritmos voraces
+
+4
+00:00:08,950 --> 00:00:10,900
+para resolver un particular tipo de problemas.
+
+5
+00:00:11,920 --> 00:00:14,770
+En este módulo aprenderás formas de
+ resolver problemas usando algoritmos
+
+6
+00:00:14,770 --> 00:00:15,660
+de divide y vencerás.
+
+7
+00:00:16,880 --> 00:00:19,030
+El término divide y vencerás es muy antiguo,
+
+8
+00:00:19,030 --> 00:00:22,940
+cuando se aplica en la guerra, sugiere
+ que es más fácil vencer a varios grupos pequeños
+
+9
+00:00:22,940 --> 00:00:25,560
+de oponentes que intentar vencer a un grupo grande.
+
+10
+00:00:26,560 --> 00:00:28,500
+De manera similar, los algoritmos de
+
+11
+00:00:28,500 --> 00:00:33,630
+divide y vencerás toman ventaja de
+ partir un problema en uno o más
+
+12
+00:00:33,630 --> 00:00:36,380
+subproblemas que pueden resolverse 
+de manera independiente.
+
+13
+00:00:37,950 --> 00:00:41,140
+De igual forma que no todos los problemas 
+pueden resolverse con un algoritmo voraz,
+
+14
+00:00:41,140 --> 00:00:44,260
+no todos los problemas pueden
+ resolverse usando divide y vencerás.
+
+15
+00:00:44,260 --> 00:00:47,640
+En lugar de eso, ambas son técnicas 
+que son parte de un kit de
+
+16
+00:00:47,640 --> 00:00:49,950
+estrategias para resolver problemas.
+
+17
+00:00:49,950 --> 00:00:52,740
+Conforme diseñas un algoritmo, 
+necesitarás considerar si un algoritmo
+
+18
+00:00:52,740 --> 00:00:54,730
+voraz podrá funcionar o no.
+
+19
+00:00:54,730 --> 00:00:57,230
+Si no, ¿funcionará un algoritmo de divide y vencerás?
+
+20
+00:00:59,510 --> 00:01:02,960
+Veamos la estructura general de un
+ algoritmo de divide y vencerás.
+
+21
+00:01:02,960 --> 00:01:06,180
+Aquí tenemos un problema a resolver 
+representado de manera abstracta,
+
+22
+00:01:06,180 --> 00:01:06,950
+como un rectángulo azul.
+
+23
+00:01:08,120 --> 00:01:12,370
+Dividimos el problema es un conjunto 
+de subproblemas que no se superponen
+
+24
+00:01:12,370 --> 00:01:14,540
+representados aquí con rectángulos de colores.
+
+25
+00:01:15,610 --> 00:01:19,470
+Es importante que el subproblema 
+sea del mismo tipo que el original.
+
+26
+00:01:21,750 --> 00:01:26,030
+Por ejemplo, aquí hay una manera
+ de dividir el problema rectangular original
+
+27
+00:01:26,030 --> 00:01:29,140
+en un conjunto de subproblemas 
+que no son del mismo tipo.
+
+28
+00:01:29,140 --> 00:01:30,930
+Estos subproblemas son triángulos.
+
+29
+00:01:30,930 --> 00:01:34,110
+Por tanto, esto no representa
+ el algoritmo divide y vencerás.
+
+30
+00:01:35,600 --> 00:01:38,710
+En este caso, dividimos el problema 
+del problema del rectángulo original
+
+31
+00:01:38,710 --> 00:01:41,940
+en un conjunto de subproblemas 
+que son rectángulos también.
+
+32
+00:01:41,940 --> 00:01:46,100
+La dificultad es que estos 
+subproblemas se sobreponen entre sí.
+
+33
+00:01:46,100 --> 00:01:49,390
+Por lo que no representan tampoco
+ el algoritmo de divide y vencerás.
+
+34
+00:01:51,110 --> 00:01:53,800
+Nos regresamos ahora a dividir
+
+35
+00:01:53,800 --> 00:01:58,770
+nuestro problema en un conjunto de subproblemas
+ que no se translapan y del mismo tipo original.
+
+36
+00:01:59,920 --> 00:02:04,650
+Los separamos, y entonces seguimos adelante
+ resolviendo cada subproblema independientemente.
+
+37
+00:02:04,650 --> 00:02:07,920
+Resolvemos el primer problema, 
+representado por una paloma,
+
+38
+00:02:07,920 --> 00:02:11,120
+y entonces continuamos resolviendo
+ cada problema por turno.
+
+39
+00:02:13,780 --> 00:02:17,550
+Una vez que hemos resuelto exitosamente 
+cada uno de los subproblemas,
+
+40
+00:02:17,550 --> 00:02:20,510
+combinamos los resultados en
+ una solución al problema original.
+
+41
+00:02:22,660 --> 00:02:25,520
+Una pregunta que surge es, 
+¿cómo resolvemos cada subproblema?
+
+42
+00:02:26,930 --> 00:02:31,800
+Como cada subproblema es del mismo
+ tipo que el original, podemos resolver
+
+43
+00:02:31,800 --> 00:02:35,450
+el subproblema recursivamente usando
+ la misma estrategia de dividir y vencer.
+
+44
+00:02:35,450 --> 00:02:39,930
+Así, los algoritmos de divide y vencerás 
+naturalmente implican una solución recursiva.
+
+45
+00:02:41,000 --> 00:02:44,780
+En la práctica, si puedes programar un 
+algoritmo de divide y vencerás recursivamente,
+
+46
+00:02:44,780 --> 00:02:48,810
+no es raro reescribir el programa
+ recursivo como uno iterativo.
+
+47
+00:02:48,810 --> 00:02:52,380
+Esto se hace a menudo porque algunos 
+programadores no se sienten tan cómodos
+
+48
+00:02:52,380 --> 00:02:56,380
+con la recursión como con la iteración,
+ además de por el espacio adicional
+
+49
+00:02:56,380 --> 00:03:00,120
+que una implementación recursiva puede
+ tomar en términos del espacio de apilamiento adicional.
+
+50
+00:03:00,120 --> 00:03:03,820
+Esto puede depender del lenguaje y la implementación.
+
+51
+00:03:03,820 --> 00:03:08,020
+En resumen, el algoritmo de divide
+ y vencerás consiste en, uno,
+
+52
+00:03:08,020 --> 00:03:12,330
+dividir el problema en subproblemas 
+del mismo tipo que no se translapan.
+
+53
+00:03:12,330 --> 00:03:15,400
+Dos, resolver recursivamente estos subproblemas.
+
+54
+00:03:15,400 --> 00:03:17,990
+Y tres, combinar los resultados.
+
+55
+00:03:17,990 --> 00:03:22,280
+En el siguiente video, veremos un ejemplo 
+extremadamente simple de divide y vencerás.

@@ -1,0 +1,369 @@
+1
+00:00:00,790 --> 00:00:05,380
+Now let us consider the pseudocode
+that implements this algorithm.
+
+2
+00:00:05,380 --> 00:00:09,755
+For the sake of simplicity we assume that
+the points in the input are given in
+
+3
+00:00:09,755 --> 00:00:12,980
+sorted order from smallest to largest.
+
+4
+00:00:12,980 --> 00:00:18,210
+We'll start with an empty set
+of segments denoted by R and
+
+5
+00:00:18,210 --> 00:00:22,030
+we start with index i
+pointing at the first point
+
+6
+00:00:22,030 --> 00:00:24,120
+which is the leftmost because
+the points are sorted.
+
+7
+00:00:25,190 --> 00:00:30,420
+Now we go through the points,
+and we find the leftmost point.
+
+8
+00:00:30,420 --> 00:00:34,600
+Currently i is pointing to
+the leftmost point in the set.
+
+9
+00:00:34,600 --> 00:00:37,340
+And at the start of the while loop i will
+
+10
+00:00:37,340 --> 00:00:41,260
+always point to the leftmost
+point which is still in the set.
+
+11
+00:00:41,260 --> 00:00:46,560
+Now we cover it with the segment
+from l to r which has unit length,
+
+12
+00:00:46,560 --> 00:00:52,670
+and the left end in the point xi, so
+this is a segment from xi to xi+1.
+
+13
+00:00:52,670 --> 00:00:56,910
+We add this segment to the solution set,
+and
+
+14
+00:00:56,910 --> 00:01:02,070
+then we need to remove all the points
+from the set which already covered.
+
+15
+00:01:02,070 --> 00:01:07,330
+Instead of removing the points, we will
+just move the pointer to the right and
+
+16
+00:01:07,330 --> 00:01:10,790
+forget about the points,
+which are to the left from the pointer.
+
+17
+00:01:10,790 --> 00:01:14,770
+So the next while loop, does exactly that.
+
+18
+00:01:14,770 --> 00:01:21,190
+We know that for any i that is
+larger than the current i, xi
+
+19
+00:01:21,190 --> 00:01:26,960
+is to the right from the left end of the
+segment, because the points are sorted.
+
+20
+00:01:26,960 --> 00:01:33,200
+So if xi is also to the left from R,
+then it is covered by the segment.
+
+21
+00:01:34,200 --> 00:01:38,820
+So we just go to the right, and
+to the right with pointer i.
+
+22
+00:01:38,820 --> 00:01:44,330
+And while xi is less than or equal to r,
+we know that the point is covered.
+
+23
+00:01:44,330 --> 00:01:50,310
+And as soon as we find some xi which is
+bigger than r, it means that this point is
+
+24
+00:01:50,310 --> 00:01:56,500
+not covered and all the points further
+in the array are also not covered.
+
+25
+00:01:56,500 --> 00:01:58,160
+So we stop.
+
+26
+00:01:58,160 --> 00:02:05,010
+And then we repeat again the iteration
+of the outer while loop.
+
+27
+00:02:05,010 --> 00:02:11,140
+Or maybe our pointer i is already out
+of the array of the input points.
+
+28
+00:02:11,140 --> 00:02:12,510
+And then we stop and
+
+29
+00:02:12,510 --> 00:02:17,830
+return R, which is the set of segments
+that we've built in the process.
+
+30
+00:02:17,830 --> 00:02:21,120
+Now let's prove that this
+algorithm works in linear time.
+
+31
+00:02:22,170 --> 00:02:26,160
+Indeed, index i changes just from 1 to n.
+
+32
+00:02:26,160 --> 00:02:28,540
+And we always increase it by one.
+
+33
+00:02:28,540 --> 00:02:32,990
+For each value of i, we add at
+most one segment to the solution.
+
+34
+00:02:32,990 --> 00:02:37,090
+So overall,
+we increase i at most n times and
+
+35
+00:02:37,090 --> 00:02:39,510
+add at most n segments to the solution.
+
+36
+00:02:40,530 --> 00:02:44,961
+And this leads to a solution
+which works in Big-O of n time.
+
+37
+00:02:44,961 --> 00:02:50,010
+Now, we had an assumption that the points
+in the input are already sorted.
+
+38
+00:02:50,010 --> 00:02:52,290
+What if we drop this assumption?
+
+39
+00:02:52,290 --> 00:02:55,450
+Then we will have to sort
+the points first, and
+
+40
+00:02:55,450 --> 00:02:57,790
+then apply our algorithm
+PointsCoverSorted.
+
+41
+00:02:59,370 --> 00:03:03,349
+Later in this module, you will learn
+how to sort points in time n log n.
+
+42
+00:03:04,530 --> 00:03:08,110
+Combining that with our procedure
+PointsCoverSorted will give you
+
+43
+00:03:08,110 --> 00:03:09,680
+total running time of n log n.
+
+44
+00:03:11,130 --> 00:03:12,510
+Now let's look at our improvement.
+
+45
+00:03:13,520 --> 00:03:16,650
+We first implemented
+a straightforward solution,
+
+46
+00:03:16,650 --> 00:03:19,320
+which worked in time at
+least 2 to the power of n.
+
+47
+00:03:20,540 --> 00:03:22,960
+And it worked very, very slowly.
+
+48
+00:03:22,960 --> 00:03:24,370
+So that even for 50 children,
+
+49
+00:03:24,370 --> 00:03:28,620
+we would have to spend at least 2
+weeks of computation to group them.
+
+50
+00:03:30,040 --> 00:03:33,720
+Our new algorithm, however,
+works in n log n time.
+
+51
+00:03:33,720 --> 00:03:37,430
+And that means that even if we had 10
+million children coming to a party,
+
+52
+00:03:37,430 --> 00:03:43,480
+it would spend only a few seconds grouping
+them optimally into several groups.
+
+53
+00:03:43,480 --> 00:03:44,510
+So that's a huge improvement.
+
+54
+00:03:46,170 --> 00:03:50,160
+Now let's see how we went to this end.
+
+55
+00:03:50,160 --> 00:03:55,110
+First, we've invented a naive solution
+which worked in exponential time.
+
+56
+00:03:55,110 --> 00:03:58,360
+It was too slow for us so
+we wanted to improve it.
+
+57
+00:03:58,360 --> 00:03:59,470
+But to improve it,
+
+58
+00:03:59,470 --> 00:04:03,270
+the very first important step was to
+reformulate it in mathematical terms.
+
+59
+00:04:04,300 --> 00:04:07,920
+And then we had an idea to solve
+it with a greedy algorithm.
+
+60
+00:04:07,920 --> 00:04:13,050
+So, we had to find some greedy choice and
+prove that it will be a safe move.
+
+61
+00:04:13,050 --> 00:04:17,690
+In this case, the safe move turns
+out to be to add to the solution
+
+62
+00:04:17,690 --> 00:04:21,230
+a segment with left and
+in the leftmost point.
+
+63
+00:04:21,230 --> 00:04:24,540
+And then we prove that this
+is really a safe move.
+
+64
+00:04:24,540 --> 00:04:28,000
+It is very important to prove your
+solutions before even trying to
+
+65
+00:04:28,000 --> 00:04:28,930
+implement them.
+
+66
+00:04:28,930 --> 00:04:33,340
+Because otherwise, it could turn out that
+you implemented the solution, tried to
+
+67
+00:04:33,340 --> 00:04:40,730
+submit it, got wrong answer or some
+other result, different from accepted.
+
+68
+00:04:40,730 --> 00:04:46,200
+And then, you've made a few more changes,
+but it still didn't work.
+
+69
+00:04:46,200 --> 00:04:49,800
+And then, you understand that
+your solution was wrong,
+
+70
+00:04:49,800 --> 00:04:51,970
+completely from the start.
+
+71
+00:04:51,970 --> 00:04:56,510
+And then you need a new solution, and you
+will have to implement it from scratch.
+
+72
+00:04:56,510 --> 00:05:00,570
+And that means that you've wasted all
+the time on implementation on the first
+
+73
+00:05:00,570 --> 00:05:01,850
+wrong solution.
+
+74
+00:05:01,850 --> 00:05:05,340
+To avoid that, you should always
+prove your solution first.
+
+75
+00:05:06,460 --> 00:05:10,710
+So after we've proved the safe move,
+we basically got our greedy solution.
+
+76
+00:05:11,770 --> 00:05:15,000
+Which works in combination with
+a certain algorithm in time n log n.
+
+77
+00:05:16,060 --> 00:05:20,107
+Which is not only polynomial, but
+is very close to linear time, and
+
+78
+00:05:20,107 --> 00:05:22,024
+works really fast in practice.

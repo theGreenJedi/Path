@@ -1,0 +1,43 @@
+En este video veremos una demostración de cómo funciona el Teorema Maestro. Les recuerdo, el Teorema Maestro dice que si T(n) es igual a T del techo de n/b, más un polinomio, 
+entonces podemos tener estos 3 casos. Entonces vamos, como normalmente lo
+ hacemos en una relación de recurrencia, a crear un árbol de recurrencia. Entonces, tendremos nuestra recurrencia arriba,
+ para acordarnos de lo que es. Supongamos por simplicidad
+ que n es una potencia de b. Es una suposición razonable pues siempre podemos extender n algo más, ¿no? Si no lo aumentamos por más de b, podemos
+ llegar a la siguiente potencia más cercana de b y esto será un análisis más fácil. Entonces, tenemos nuestro problema n, en el siguiente nivel dividimos el problema en a copias de problemas de tamaño n/b. Así. nivel cero, tenemos un problema de tamaño n, nivel 1, tenemos problemas de tamaño n/b. En el nivel general i, tenemos 
+problemas de tamaño n/b^i. Y en el nivel del fondo, que es nivel log en base
+ b de n, tenemos problemas de tamaño 1. ¿Cuántos problemas hay? En el nivel 0, hay, por supuesto, un problema. En el nivel 1. un número a de problemas. Y en el nivel general i, son a^i problemas. En el nivel log en base b de n,
+ es a elevado a la log en base b de n. ¿Cuánto trabajo debemos hacer? Bien, el trabajo es sólo una función de
+ cuántos problemas tenemos y la cantidad de trabajo por cada problema. Entonces, a nivel 0 sólo tenemos trabajo de O(n^d). Hay un problema y toma un tiempo O(n^d). Al nivel 1 tenemos a problemas, y cada uno de ellos requiere un
+ trabajo de O(n/b)^d. Podemos juntar a, b, y d, y esto se escribe como O(n^d) por a/b^d. En el nivel i-ésimo tenemos a^i problemas y cada uno es O(n/b^i)^d. De nuevo, podemos sacar el a^i, el b^i y, nos queda O(n^d) por (a/b^d)^i. Y finalmente, en el nivel del fondo, tenemos a elevado a la log en base b de n porque los problemas son de tamaño 1, lo que es O(n a la log en base b de a). Entonces, la cantidad total de trabajo es la 
+suma desde 0 hasta log en base b de n de O(n^d) por (a/b^d)^i. Veamos ahora lo que parece un pequeño paréntesis, y es la serie geométrica. La serie geométrica es una serie de números que progresa por un factor multiplicativo. Doy un ejemplo. Si tomamos 1+2+4+8+16+32+64,
+ eso es una serie geométrica, donde nuestro factor es un factor de 2 cada vez. También podríamos tener una
+ serie geométrica que disminuya. Así, podríamos tener por ejemplo, digamos, 10,000 1,000, 100, 10, 1. Donde bajamos por un factor constante
+ de 10 en cada incremento. Ahora, resulta, que si nuestro factor
+ multiplicativo, llamémoslo r, mientras que r sea diferente de uno, 
+tenemos una simple forma cerrada para esto. Esto es sólo a por (1-r^n)/(1-r). Y resulta que en nuestra notación O grande, nos fijamos en el término más grande. Y nuestra suma va a estar acotada por una constante por el término más grande. Así, si r es menor que 1, entonces el término
+ más grande es el primer elemento a y por tanto, nuestra solución es O(a). Porque como es nuestro término
+ más grande. se hace más y más y más pequeño. Y como a es un factor multiplicativo, entonces, todo lo que realmente
+ importa es este primer término, porque la suma del resto es no más que una constante por ese primer término. Si, por el otro lado, r es mayor que 1, 
+entonces lo que importa es el último término, porque ése es l término más grande y todos
+ los anteriores son más chicos. Entonces, más chico, más grande,
+ más grande, el más grande. Y entonces, el término más grande es ar^(n-1). Así, en la serie geométrica nos
+ importa ya sea el primer o el último término, el que sea más grande. Ahora, si regresamos con esto al caso
+ de nuestro árbol de recurrencia, vemos nuestra suma aquí, es la suma que teníamos de nuestro árbol de recurrencia y vemos que lo que tenemos es una serie geométrica; a sería O(n^d) r sería a/b^d, o sea, nuestro factor multiplicativo es a/b^d. Y hay tres casos. Si recuerdas de cuando enunciamos 
+la solución del Teorema Maestro. Caso uno es d mayor que log en base b de a. Eso es equivalente a decir que 
+a/b^d es menor que 1. Así que ahora tenemos que nuestro 
+término multiplicativo es menor que 1, por lo que se hace cada vez más chico. Eso significa que el término
+ más grande es el primero. Y ese es el que vamos a usar. Entonces, oficialmente, este es O de O de n^d, que es lo mismo que O(n^d). Caso dos, donde d es igual a log en
+ base b de a, o, equivalentemente, a/b^d es igual a 1. Bien, si a/b^d=1, recuerden que nuestra fórmula no contempla este caso, así que 
+vamosa tener que calcular esto. Pero si a/b^d=1, entonces a/b^d a 
+cualquier potencia sigue siendo 1. Lo que significa que nuestra suma no es más que la suma desde i igual a 0 
+hasta log en base b de n de O(n^d). Y eso es 1 más log en base b de n, porque ése es el número de términos
+ en nuestra suma, por O(n^d). Bien, el 1 es un término de orden bajo que
+ no consideramos, y log en base b de n puede ser tratado como log n, porque un cambio de base involucra sólo un factor multiplicativo, y eso desaparece en nuestra notación O grande. Así que terminamos, como lo vimos
+ en el teorema, con O(n^d log n). Y nuestro caso final, es cuando d
+ es menor que log en base b de a. lo que es equivalente a decir que a/b^d es mayor que 1. Aquí, nuestro factor multiplicativo es mayor que 1, así que nuestro término más pequeño es el
+ primer término y el más grande es el último término. Así que este caso es, O grande de nuestro último término, que es O(n^d) por a/b^d a la log en base b de n, pues i es log en base b de n. Esto está algo feo. Vamos a ver si podemos mejorarlo un poco. Continuemos y elevemos a y b^d, a la log en base b de n separadamente. Así obtenemos, en el numerador, a elevado a la log en base b de n, y en el denominador, b elevado a la d por log en base b de n. Bien, b a la log en base b de n, es justo n, entonces eso nos deja n^d en el denominador. En el numerador, a elevado a la log en base b de n, por una identidad logarítmica, es igual a n a la log en base b de a, así que podemos intercambiar estas dos. Y ahora, si comparamos O(n^d), y n^d, sabemos que O(n^d) estás acotada por una constante, k por n^d. Así que tenemos k*n^d dividido entre n^d, nos deja sólo k, y esa constante la podemos obviar porque
+ estamos con la notación O grande. Así que nos quedamos nada más con O(n a la log en base b de a), que es lo que tenemos para el caso final. Así que el Teorema Maestro es un atajo. Aquí mostramos de nuevo nuestro Teorema Maestro. Les voy a decir un secreto, como quiera. No recuerdo el Teorema Maestro y ni siquiera trato de usarlo. Esto es lo que hago. Cuando tengo una recurrencia de esta forma,
+ checo la cantidad de trabajo hecho en el primer y segundo niveles, lo que es un cálculo muy fácil, y entonces me pregunto, ¿son la misma cantidad de trabajo? Si es la misma cantidad de trabajo, va a ser la misma cantidad en todos los niveles, y así estamos en el caso dos, por lo que vamos a tener la cantidad de trabajo en el primer nivel, que sabemos que es O(n^), por log n, 
+porque ese es el número de niveles. Por otro lado, si el primer término es mayor que el segundo, sé que el primer término va a dominar a los demás, y así nos quedamos con O(n^d). Y, finalmente, si el primer término es menor que el segundo, sé que va a seguir aumentando, y que es
+ el término del fondo el que necesito. Y eso va a ser el número de hojas, que es n a la log en base b de a. El Teorema Maestro es realmente práctico de usar,
+ ya sea que lo memorices, o lo tengas escrito, o, como en mi caso, lo recrees cada vez que lo necesites. Gracias.

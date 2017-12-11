@@ -1,0 +1,81 @@
+Concluimos esta lección con
+unas pocas importantes observaciones. La primera observación es acerca
+de un truco llamado memoización. Usualmente, al diseñar un algoritmo
+de programación dinámica, empiezas analizando la estructura de una solución
+óptima para tu problema computacional. Haces esto para llegar a la correcta definiciñon de un subproblema que
+nos permitirá expresar la solución para un subproblema a través de las soluciones
+para sub-subproblemas de menor tamaño. Cuando apuntas esta relación recurrente
+puedes transformarla realmente en un algoritmo iterativo o
+un algoritmo recursivo. El correspondiente algoritmo iterativo 
+simplemente resuelve todos los subproblemas yendo de los menores a los mayores. Y  por esta razón, también es denominado
+a veces como algoritmo de abajo arriba. Por el otro lado, el algoritmo
+recursivo para resolver un subproblema hace llamadas recursivas a
+los sub-subproblemas menores. Y por esta razón, a veces se denomina
+el enfoque de arriba abajo. Si implementas un algoritmo recursivo sin rodeos puede resultar
+muy lento debido a que recalcula algunos valores muchas, muchas veces, como los números de Fibonacci, por ejemplo. Sin embargo, hay un truco simple
+que se denomina memoización, que te permite evitar recalcular
+varias veces lo mismo. A saber, puedes hacer lo siguiente,
+mientras resuelves subproblemas, justo después de resolverlo, almacenas su
+solución en una tabla, por ejemplo. Y cuando haces una llamada recursiva para
+resolver algún subproblema, antes de intentar resolverlo, compruebas en la tabla
+si su solución ya está almacenada. Y si su solución ya está en la tabla,
+lo que significa que ya ha sido calculada, entonces simplemente
+la devuelves inmediatamente. Así esta llamada recursiva resulta
+ser sólo una búsqueda en una tabla. Así es cómo un algoritmo recusivo
+con memoización funciona. Veamos como es un algoritmo
+recusivo con memoización para el problema de la mochila. Por simplicidad asumimos que
+estamos hablando de una mochila con repeticiones. En este caso, necesitamos calcular nuestro 
+subproblema para una mochila de tamaño w es simplemente el valor óptimo
+para una mochila de peso total w. Calculamos como sigue,
+calculamos por procedimiento recursivo. Lo primero de todo, comprobamos
+si la solución ya está en una tabla hash. Usamos una tabla hash para
+almacenar pares de objetos. Para el peso w, almacenamos
+el valor de w si ya ha sido calculado. Si ya está en la tabla, lo devolvemos
+inmediatamente, en otro caso sólo lo calculamos y hacemos llamadas 
+recursivas  para calcular los valores para el subproblema de w menos wi. ¿De acuerdo? Y cuando se ha calculado el valor, simplemente
+lo almacenamos en nuestra tabla hash. De esta forma, usamos memoización
+almacenando esto en la tabla hash para evitar recalcular lo mismo de nuevo. Por lo que una vez más, un algoritmo
+iterativo resuelve todos los subproblemas yendo de los menores a los mayores. ¿Correcto? Y finalmente resuelve el problema inicial. Por otro lado, el algoritmo recursivo
+funciona como sigue. Comienza con el problema inicial y hace llamadas recursivas a
+los sub-subproblemas menores. ¿Correcto? Así, en cierto sentido, un algoritmo iterativo
+y el algoritmo recursivo están haciendo el mismo trabajo, especialmente si necesitamos
+resolver todo el rango de subproblemas. Sin embargo, un algoritmo recursivo puede
+volverse ligeramente más lento porque resuelve los mismos subproblemas en una mano. Por otro lado, cuando haces una llamada
+recursiva también necesitas poner la dirección de vuelta en una
+pila, por ejemplo. Así, el algoritmo recusivo
+tiene cierta sobrecarga. Sin embargo hay caso en los que no
+necesitas resolver todos los subproblemas y el problema de la mochila es una buena
+ilustración de esta situación. Imagina que nos dan una entrada
+para el problema de la mochila donde todos los pesos de los n objetos junto
+con el peso total de la mochila son divisibles por 100, por ejemplo. Esto significa que no están realmente
+interesados en los subproblemas donde el peso de la mochila no
+es divisible por 100. ¿Por qué? Simplemente porque para cualquier
+conjunto de objetos donde todos los pesos de los objetos son divisibles por 100, su peso
+total también es divisible por 100. En este caso, un algoritmo iterativo
+aún resolverá simplemente todo el rango de subproblemas. Mientras que un algoritmo recusivo
+hará únicamente aquellas llamadas recursivas que necesito realmente para
+calcular la solución final. Así hará sólo llamadas recursivas
+entre los subproblemas cuyo peso sean divisibles por 100. La observación final de esta lección
+es acerca del tiempo de ejecución. Si recuerdas, el tiempo de ejecución de ambos
+algoritmos que hemos diseñado en esta lección era O de n multiplicado por W. Y este tiempo de ejecución parece
+polinómico, sin embargo, no lo es. Y este es el porqué. Considera, por 
+ejemplo, la siguiente entrada. Asumo que el peso total de la mochila 
+es el que se muestra en la diapositiva. Es un número enorme,
+aproximadamente diez a la 20, lo que significa 20 dígitos en 
+su representación decimal. Al mismo tiempo, el tamaño de la entrada
+es realmente pequeño, sólo 20 dígitos. ¿Verdad? No son gigabytes de datos, sólo
+20 dígitos, pero con esta entrada nuestro algoritmo realmente tendrá que realizar
+aproximadamente diez a la 20 operaciones. Esto es realmente enorme. Por ejemplo,
+no podemos hacer esto en nuestros portátiles. Y esto es porque para representar el 
+valor de W, sólo necesitamos log W dígitos. Así, en el caso del problema de la mochila, nuestra entrada es proporcional no a n más W,
+sino a n más log de W. ¿De acuerdo? Y si representas el tiempo de
+ejecución en términos de n y log de W, entonces obtienes la siguiente expresión,
+n multiplicado por 2 a la log de W, lo que significa que nuestro algoritmo es, 
+de hecho, un algoritmo de tiempo exponencial. Dicho de otro modo, sólo podemos procesar
+entradas donde W no sea bastante grande, esto es aproximadamente menor
+de 1 billón, por ejemplo. ¿De acuerdo? Y, de hecho, creemos
+que es muy difícil construir un algoritmo que resuelva este problema en un tiempo 
+polinómico, en verdadero tiempo polinómico. En particular, aprenderemos después
+en esta especialización que este problema se considera es tan difícil que para
+resolver el problema de la mochila, por ejemplo, en tiempo polinómico,
+uno obtiene 1 millón de dólares.

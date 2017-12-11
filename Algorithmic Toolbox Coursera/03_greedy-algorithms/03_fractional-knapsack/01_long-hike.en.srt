@@ -1,0 +1,438 @@
+1
+00:00:00,330 --> 00:00:01,280
+Hello.
+
+2
+00:00:01,280 --> 00:00:05,630
+In this lesson, you will learn
+an algorithm to determine which food items
+
+3
+00:00:05,630 --> 00:00:09,280
+and in which amounts should you take
+with yourself on a really long hike so
+
+4
+00:00:09,280 --> 00:00:11,900
+that to maximize their total energy value.
+
+5
+00:00:13,100 --> 00:00:15,360
+So, you're planning a long hike.
+
+6
+00:00:15,360 --> 00:00:17,920
+It will take a few days or
+maybe a few weeks, but
+
+7
+00:00:17,920 --> 00:00:20,540
+you don't know exactly
+how long will it take.
+
+8
+00:00:20,540 --> 00:00:24,030
+So, to be safe,
+you need to get enough food with you.
+
+9
+00:00:24,030 --> 00:00:28,660
+And you have a knapsack which can fit
+up to 15 kilograms of food in it.
+
+10
+00:00:28,660 --> 00:00:31,630
+And you've already bought some cheese,
+some ham, some nuts, and
+
+11
+00:00:31,630 --> 00:00:33,590
+maybe some other food items.
+
+12
+00:00:33,590 --> 00:00:36,370
+You want to fit them all in the knapsack,
+so
+
+13
+00:00:36,370 --> 00:00:39,830
+as to maximize the amount of
+calories that you can get from them.
+
+14
+00:00:39,830 --> 00:00:41,700
+Of course you can cut the cheese.
+
+15
+00:00:41,700 --> 00:00:42,690
+You can cut the ham.
+
+16
+00:00:42,690 --> 00:00:45,840
+You can select only some of the nuts.
+
+17
+00:00:45,840 --> 00:00:48,430
+And then fit all of that
+into your knapsack.
+
+18
+00:00:49,770 --> 00:00:52,090
+To solve this maximization problem,
+
+19
+00:00:52,090 --> 00:00:55,390
+we again need to first reformulate
+it in mathematical terms.
+
+20
+00:00:55,390 --> 00:01:00,250
+And then it becomes an instance of
+a classical fractional knapsack problem,
+
+21
+00:01:00,250 --> 00:01:02,110
+which goes like this.
+
+22
+00:01:02,110 --> 00:01:08,210
+We have n items with weights w1
+through wn and values v1 though vn.
+
+23
+00:01:09,620 --> 00:01:12,016
+And a bag of capacity big W.
+
+24
+00:01:12,016 --> 00:01:18,250
+And we want to maximize the total value of
+fractions of items that fit into this bag.
+
+25
+00:01:20,316 --> 00:01:24,679
+In this case, weights are also
+weights in the real life and
+
+26
+00:01:24,679 --> 00:01:29,770
+values are the energy values of
+the food items that you've bought.
+
+27
+00:01:31,700 --> 00:01:36,260
+So, here's an example,
+and we will denote by
+
+28
+00:01:36,260 --> 00:01:41,500
+dollars the value of the item,
+and the weight just by numbers.
+
+29
+00:01:41,500 --> 00:01:45,825
+So, for example,
+the first item has value $20 and
+
+30
+00:01:45,825 --> 00:01:49,958
+has weight 4,
+the second item has value $18 and
+
+31
+00:01:49,958 --> 00:01:54,977
+weight 3, and
+the third item has value $14 and weight 2.
+
+32
+00:01:54,977 --> 00:01:58,076
+And we have a knapsack of capacity 7.
+
+33
+00:01:58,076 --> 00:02:01,930
+There are a few ways with which
+we can fill this knapsack.
+
+34
+00:02:01,930 --> 00:02:06,410
+For example,
+of them is put the whole first item and
+
+35
+00:02:06,410 --> 00:02:09,030
+the whole second item in the knapsack.
+
+36
+00:02:09,030 --> 00:02:13,080
+Then the total value is the sum of
+the values of the first item and
+
+37
+00:02:13,080 --> 00:02:15,946
+the second, which is $38.
+
+38
+00:02:15,946 --> 00:02:18,200
+We can improve on that.
+
+39
+00:02:18,200 --> 00:02:22,952
+For example, take the whole first item,
+the whole third item,
+
+40
+00:02:22,952 --> 00:02:27,704
+and only one third of the second item for
+a total value of $40.
+
+41
+00:02:27,704 --> 00:02:34,305
+We can do even better by taking the whole
+third item, the whole second item,
+
+42
+00:02:34,305 --> 00:02:39,685
+and only half of the first item,
+and that will give us $42.
+
+43
+00:02:39,685 --> 00:02:43,040
+And actually it turns out that
+this is the optimal thing to do.
+
+44
+00:02:44,550 --> 00:02:49,530
+So now we want to create
+a greedy algorithm
+
+45
+00:02:49,530 --> 00:02:53,440
+that will solve this maximization problem,
+and
+
+46
+00:02:53,440 --> 00:02:59,250
+we need to get some greedy choice and
+make a safe move.
+
+47
+00:02:59,250 --> 00:03:04,570
+And to do that, we have to look
+at the value per unit of weight.
+
+48
+00:03:04,570 --> 00:03:09,659
+So, for example for the first item,
+value per unit of weight is $5,
+
+49
+00:03:09,659 --> 00:03:15,802
+for the second item, it's $6 per unit,
+and for the third one it's $7 per unit.
+
+50
+00:03:15,802 --> 00:03:19,479
+So although the first
+item is most valuable,
+
+51
+00:03:19,479 --> 00:03:23,267
+the third item has
+the maximum value per unit.
+
+52
+00:03:23,267 --> 00:03:28,127
+And of course there is an intuition that
+we should probably fit first the items
+
+53
+00:03:28,127 --> 00:03:30,240
+with the maximum value per unit.
+
+54
+00:03:32,060 --> 00:03:32,900
+And really,
+
+55
+00:03:32,900 --> 00:03:38,568
+the safe move is to first try to fit
+the item with the maximum value per unit.
+
+56
+00:03:38,568 --> 00:03:41,820
+And there's a lemma that says that there
+
+57
+00:03:41,820 --> 00:03:45,530
+always exists some optimal
+solution to our problem
+
+58
+00:03:45,530 --> 00:03:50,660
+that uses as much as possible of an item
+with the maximum value per unit of weight.
+
+59
+00:03:50,660 --> 00:03:53,980
+And what do we mean by
+as much as possible?
+
+60
+00:03:53,980 --> 00:03:58,920
+Well, either use the whole item,
+if it fits into the knapsack,
+
+61
+00:03:58,920 --> 00:04:04,210
+or, if the capacity of the knapsack is
+less than how much we have of this item,
+
+62
+00:04:04,210 --> 00:04:07,940
+then just fill the whole
+knapsack only with this item.
+
+63
+00:04:09,410 --> 00:04:11,370
+Let's prove that this
+is really a safe move.
+
+64
+00:04:13,060 --> 00:04:15,600
+We will prove looking at this example.
+
+65
+00:04:15,600 --> 00:04:20,740
+So, first let's suppose we
+have some optimal solution,
+
+66
+00:04:21,830 --> 00:04:27,270
+and let's suppose that in this optimal
+solution, we don't use as much as possible
+
+67
+00:04:27,270 --> 00:04:32,385
+of the best item with the highest
+value per unit of weight.
+
+68
+00:04:32,385 --> 00:04:37,890
+Then take some item which we
+used in this solution and
+
+69
+00:04:37,890 --> 00:04:44,040
+separate its usage into two parts,
+one part of the same size of
+
+70
+00:04:44,040 --> 00:04:48,776
+how much we have of the best item, and
+the second part is everything else.
+
+71
+00:04:48,776 --> 00:04:56,730
+Then we can substitute the first
+part with the best item.
+
+72
+00:04:56,730 --> 00:04:58,510
+So, for example, in this case,
+
+73
+00:04:58,510 --> 00:05:02,659
+we substitute half of the first
+item with second item.
+
+74
+00:05:03,700 --> 00:05:09,270
+Of course, in this part, the total
+value will increase, because the value
+
+75
+00:05:09,270 --> 00:05:15,031
+per unit of weight is better for the best
+item than for the item currently used.
+
+76
+00:05:15,031 --> 00:05:18,190
+And in the general case,
+this will also work.
+
+77
+00:05:18,190 --> 00:05:24,772
+So, either we will be able to replace
+some part of the item already
+
+78
+00:05:24,772 --> 00:05:30,755
+used by the whole best item, or
+we can replace the whole item
+
+79
+00:05:30,755 --> 00:05:35,799
+that is already used by
+some part of the best item.
+
+80
+00:05:35,799 --> 00:05:39,912
+And in any case,
+if we can make such a substitution,
+
+81
+00:05:39,912 --> 00:05:43,186
+of course the total value will increase,
+
+82
+00:05:43,186 --> 00:05:48,141
+because the best item just has
+better value per unit of weight,
+
+83
+00:05:48,141 --> 00:05:52,290
+so for each unit of weight,
+we will have more value.
+
+84
+00:05:52,290 --> 00:05:55,380
+So this gives us a greedy
+algorithm to solve our problem.
+
+85
+00:05:56,830 --> 00:06:02,100
+What we'll do is while knapsack is still
+not full, we will do a greedy choice.
+
+86
+00:06:02,100 --> 00:06:07,540
+We will choose the item number i
+which has the maximum value of
+
+87
+00:06:07,540 --> 00:06:12,490
+vi over wi,
+which is the value per unit of weight.
+
+88
+00:06:12,490 --> 00:06:18,425
+And then if this item fits into knapsack
+fully, then take of all this item.
+
+89
+00:06:18,425 --> 00:06:23,278
+Otherwise, if there is only few
+space left in the knapsack,
+
+90
+00:06:23,278 --> 00:06:27,956
+take so much of this item as to
+fill the knapsack to the end.
+
+91
+00:06:27,956 --> 00:06:32,989
+And then in the end, we'll return the
+total value of the items that we took and
+
+92
+00:06:32,989 --> 00:06:35,166
+how much did we take of each item.

@@ -1,0 +1,45 @@
+Hola. En este video, consideraremos el 
+problema de encontrar el mínimo número de abastecimiento durante una viaje largo en carro. Verás las similitudes entre este problema y el problema del Número más grande del video pasado. Al final, serás capaz de describir cómo
+ los algoritmos voraces funcionan en general y definir qué es un movimiento seguro y un subproblema. Considera el siguiente problema: tienes un carro tal que si le recargas todo el tanque, puedes viajar con éste hasta 400 km sin rellenarlo. Y necesitas ir del punto A al punto B y la distancia entre éstos es de 950 km. Por supuesto, necesitas rellenar el tanque en el camino, y con suerte, hay unas cuantas estaciones
+ de gasolina en el camino de A a B. Éstos estám marcados por círculos azules, y los 
+números encima significan la distancia desde A a la correspondiente estación de 
+gasolina en el camino de A a B. Y necesitas encontrar el mínimo número
+ de recargas para llegar de A a B. Un ejemplo de tal ruta es llegar del punto A a la primera estación, 200 km, entonces pasar de la primera estación a la tercera, 350 km. Entonces de la tercera estación a la cuarta, 200 km, y entonces de la cuarta estación hasta B, 200 km. Pero esto no es óptimo, podemos hacerlo mejor. Aquí está otra ruta, que usa sólo dos recargas. Pasamos de A a la segunda estación de
+ gasolina, menos de 400 km, entonces de la segunda a la cuarta estación, de nuevo menos de 400 km, y entonces de la cuarta estación a B, sólo 200 km. Y esta ruta usa sólo dos recargas, y resulta que en este problema, el mínimo
+ número de recargas es exactamente dos. Más formalmente, tenemos el siguiente problema. Como entrada tenemos un carro que
+ puede viajar a lo más L km, donde L es un parámetro, si el carro se llena hasta el máximo. Tenemos una fuente y un destino, A y B, y 
+tenemos n estaciones de gasolina a distancias desde x1 hasta xn en km, a lo largo del camino de A a B. Y necesitamos devolver el mínimo número
+ de recargas para llegar de A a B, sin contar la recarga inicial en A. Queremos resolver este problema usando una estrategia voraz, y una estrategia voraz en general es muy fácil. Primero haces una elección voraz, 
+entonces reduces tu problema a un subproblema más pequeño, y entonces
+ iteras hasta que no quedan problemas. Hay unas cuantas formas diferentes de hacer
+ una elección voraz en este particular problema Por ejemplo, puedes rellenar en la estación más  cercana. Otra forma es rellenar en la estación más
+ lejana alcanzable, y por alcanzable quiero decir que puedes llegar a esa estación desde donde estás sin rellenar gasolina. Otra forma es, por ejemplo, manejar
+ hasta que se acabe la gasolina y entonces esperar a que una estación aparezca ahí. Así que, ¿cuál piensas que es la
+ estrategia correcta en este problema? Y por supuesto, la tercera opción es obviamente incorrecta. La primera opción es también incorrecta, si lo piensas, pero la segunda opción es correcta. Te dará el número óptimo de recargas. Lo probaremos después. Por mientras, definamos nuestro algoritmo 
+voraz como el algoritmo completo. Así que empezamos desde A y necesitamos
+ llegar a B con el mínimo número de recargas. Vamos de A a la estación más lejana alcanzable G de forma que lleguemos de A a G con 
+tanque lleno sin recargar en el camino. Y ahora, tratamos de reducir este problema a uno similar. Hacemos G el nuevo A, y ahora nuestro 
+problema es llegar del nuevo A a B, de nuevo con el mínimo número de recargas. Y por definición, un subproblema es un
+ problema similar de menor tamaño. Un ejemplo de subproblema lo vimos en el video anterior. Cuando necesitamos construir el número 
+más grande a partir de una lista de dígitos, primero ponemos los dígitos más grandes enfrente,
+ y entonces reducimos el problema al problema de encontrar el número más 
+grande con los dígitos que quedaron. En este problema, para encontrar el mínimo
+ número de recargas del camino de A a B, primero rellenamos en la estación más lejana alcanzable G y entonces resolvemos un problema 
+similar que es el subproblema de llegar de G a B con el mínimo número de recargas. Otro término importante es "movimiento seguro". LLamamos una elección voraz como movimiento 
+seguro si es consistente con alguna solución óptima. En otras palabras, si existe alguna solución 
+óptima en la que el primer movimiento es esta elección voraz, entonces esta
+ elección voraz es un movimiento seguro. Y probaremos un lema que dice que rellenar en
+ la estación de gasolina alcanzable más lejana es un  movimiento seguro. Vamos a probar esto primero visualmente. Consideremos una ruta óptima de A a B, y sea la primera parada para recargar
+ de esta ruta el punto G1. Y sea G la estación alcanzable más lejana desde A. Si G1 y G coinciden, entonces ya probamos nuestro lema. De otra forma, G1 tiene que estar más cerca de A que G, porque G es la estación más lejana alcanzable 
+desde A, y G1 es alcanzable desde A. Ahora consideremos la próxima parada 
+en la ruta óptima, que sería G2. Y el primer caso es que G está más cerca de A que G2, entonces la ruta se vería así. En este caso, podemos rellenar en G en lugar de G1, y entonces tendremos otra ruta óptima porque tiene el mismo número de 
+recargas y G es alcanzable desde A. Y G2 es también alcanzable desde G, porque es alcanzable desde G1, pero 
+G está más cerca de G2 que G1. Así que ésta es una ruta correcta y, 
+en este caso, probamos nuestro lema. Y el segundo caso es cuando G2 está más cerca de A que G, y entonces la ruta se vería así. Pero en este caso, podemos evitar rellenar en G1 y rellenar en G2 o rellenar en G, en primer lugar. Y entonces reducir el número de 
+recargas de nuestra rura óptima, lo que es imposible. Así que el segundo caso contradice nuestro enunciado de que estamos en una ruta óptima,
+ y hemos probado nuestro lema. Para recapitular, consideramos la ruta óptima 
+R con un mínimo número de recargas. Denotamos con G1 la posición de la primera recarga en R, y por G2 la siguiente parada en R, que es, ya sea
+ una recarga, o el destino B mismo. Y por G denotamos la estación más
+ lejana alcanzable desde A, y consideramos dos casos. En el primer caso, si G está más cerca de A que G2, podemos rellenar en G en lugar de en G1, y esto 
+significa que recargar en G es un movimiento seguro. De otra forma, podemos evitar rellenar en G1. Entonces este caso contradice que la ruta R es la ruta con el mínimo número de recargas. Pero no hay tal caso, y probamos nuestro lema. Y en la siguiente clase, implementaremos 
+este algoritmo en pseudocódigo y analizaremos su tiempo de ejecución.

@@ -1,0 +1,176 @@
+1
+00:00:00,180 --> 00:00:01,415
+Hola, en este video,
+
+2
+00:00:01,415 --> 00:00:05,236
+revisaremos brevemente los ingredientes
+ principales de los algoritmos voraces.
+
+3
+00:00:05,236 --> 00:00:07,928
+Y el primero de ellos es la reducción a un subproblema.
+
+4
+00:00:07,928 --> 00:00:12,817
+Básicamente, cuando tienes algún problema, 
+haces un primero movimiento
+
+5
+00:00:12,817 --> 00:00:17,807
+que reduce tu problema a uno similar pero más pequeño.
+
+6
+00:00:17,807 --> 00:00:22,776
+Por ejemplo, tienes menos dígitos o 
+menos estaciones que tienes que manejar,
+
+7
+00:00:22,776 --> 00:00:27,524
+y este problema similar, que es menor, 
+es llamado subproblema.
+
+8
+00:00:27,524 --> 00:00:30,695
+Otro ingrediente clave es un movimiento seguro
+
+9
+00:00:30,695 --> 00:00:36,300
+y el movimiento es llamado seguro si es
+ consistente con una solución óptima.
+
+10
+00:00:36,300 --> 00:00:41,695
+En otras palabras, si existe alguna solución 
+óptima en la cual el primer movimiento
+
+11
+00:00:41,695 --> 00:00:46,738
+es el mismo conforme te mueves.
+ entonces se llama un movimiento seguro.
+
+12
+00:00:46,738 --> 00:00:50,080
+Pero no todas las primeras movidas son seguras, de hecho.
+
+13
+00:00:50,080 --> 00:00:51,052
+Por ejemplo, 
+
+14
+00:00:51,052 --> 00:00:56,317
+viajar hasta que no haya combustible no es un movimiento
+ seguro en el problema sobre el combustible del carro.
+
+15
+00:00:56,317 --> 00:01:01,253
+Y seguido, movidas voraces no son 
+seguras tampoco. Por ejemplo,
+
+16
+00:01:01,253 --> 00:01:06,288
+llegar a la estación más cercana y
+ recargar no es una movida segura,
+
+17
+00:01:06,288 --> 00:01:12,770
+mientras que llegar a la estación más
+ lejana alcanzable es una movida segura.
+
+18
+00:01:12,770 --> 00:01:15,740
+Ahora, la estrategia general de 
+resolver un problema es como sigue:
+
+19
+00:01:15,740 --> 00:01:20,886
+Primero, analizas el problema e ideas alguna elección voraz.
+
+20
+00:01:20,886 --> 00:01:25,700
+Y entonces, la clave es mostrar que
+ esta elección voraz es una movida segura,
+
+21
+00:01:25,700 --> 00:01:28,100
+y realmente tienes que probarlo,
+
+22
+00:01:28,100 --> 00:01:31,897
+porque, de otra manera, puedes proponer una eleción voraz
+
+23
+00:01:31,897 --> 00:01:36,315
+y de ahí proponer un algoritmo voraz, 
+implementarlo, probarlo 
+
+24
+00:01:36,315 --> 00:01:38,127
+e intentar enviarlo al sistema
+
+25
+00:01:38,127 --> 00:01:41,057
+sólo para enterarte que el algoritmo es incorrecto,
+
+26
+00:01:41,057 --> 00:01:45,744
+porque el primer movimiento no es
+ realmente seguro y hay casos en que
+
+27
+00:01:45,744 --> 00:01:49,950
+esta primer movimiento no es 
+consistente con una solución óptima.
+
+28
+00:01:49,950 --> 00:01:53,701
+Y en ese caso, tendremos que inventar una nueva solución
+
+29
+00:01:53,701 --> 00:01:55,585
+e implementarla desde el inicio.
+
+30
+00:01:55,585 --> 00:01:58,325
+Todo el trabajo que hayas hecho antes será inútil.
+
+31
+00:01:58,325 --> 00:02:05,465
+Así que, por favor, prueba tus algoritmos 
+y prueba que el primer movimiento es seguro.
+
+32
+00:02:05,465 --> 00:02:10,248
+Cuando pruebes eso, reduces un problema a un subproblema,
+
+33
+00:02:10,248 --> 00:02:14,920
+y, con suerte, es un problema similar, 
+un problema del mismo tipo,
+
+34
+00:02:14,920 --> 00:02:19,100
+y entonces empiezas a resolver este
+ subproblema de la misma forma.
+
+35
+00:02:19,100 --> 00:02:23,644
+Haces tu elección voraz y lo reduces a un subproblema,
+
+36
+00:02:23,644 --> 00:02:28,611
+e iteras hasta que ya no hay problemas 
+o hasta que tu problema sea tan simple
+
+37
+00:02:28,611 --> 00:02:31,833
+que puedes resolverlo en el acto.
+
+38
+00:02:31,833 --> 00:02:33,253
+Y en las siguientes lecciones,
+
+39
+00:02:33,253 --> 00:02:37,115
+aplicaremos algoritmos voraces para 
+resolver problemas más difíciles.

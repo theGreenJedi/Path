@@ -1,0 +1,44 @@
+Hi, I'm Neil Rhodes. Welcome to the divide and conquer module. In the last module, you learned
+about how to use greedy algorithms to solve particular classes of problems. In this module you'll learn about ways
+of solving problems using divide and conquer algorithms. The term divide and
+conquer is quite old, and when applied to war, suggests that it's
+easier to defeat several smaller groups of opponents than trying to
+defeat one large group. In a similar fashion, divide and conquer algorithms take advantage of
+breaking a problem down into one or more subproblems that can
+then be solved independently. Just as not all problems can be
+solved with a greedy algorithm, not all problems can be solved
+using divide and conquer. Instead, these are both techniques
+that are part of a toolbox of strategies to solve problems. As you're designing an algorithm,
+you'll need to consider whether or not a greedy algorithm might work. If not, would a divide and
+conquer algorithm work? Let's look at the general structure
+of a divide and conquer algorithm. Here, we have a problem to be
+solved represented abstractly as a blue rectangle. We break the problem down into a set
+of non-overlapping subproblems. Represented here, by colored rectangles. It's important that the subproblems
+be of the same type as the original. For example, here's a way to break
+down the original rectangle problem into a set of subproblems that
+are not of the same type. These subproblems are triangles. Thus this does not represent
+the divide and conquer algorithm. In this case, we've broken down
+the original rectangle problem into a set of subproblems that
+are themselves rectangles. The difficulty is that these
+subproblems overlap with one another. Thus it too does not represent
+the divide and conquer algorithm. We return now to breaking down our problem into a set of non-overlapping
+subproblems of the same original type. We break it apart, then we go ahead and
+solve each subproblem independently. We solve the first problem,
+represented by a check mark. We then continue solving each problem,
+in turn. Once we've successfully solved
+each of the subproblems, we combine the results into
+a solution to the original problem. One question that comes up,
+how do we solve each subproblem? Since each subproblem is of the same
+type as the original, we can recursively solve the subproblem using the same
+divide and conquer strategy. Thus, divide and conquer algorithms
+naturally lead to a recursive solution. In practice, while you can program a
+divide and conquer algorithm recursively, it's not uncommon to rewrite
+the recursive program into an iterative one. This is often done both because some
+programmers aren't as comfortable with recursion as they are with iteration, as
+well as because of the additional space that a recursive implementation may 
+take in terms of additional stack space. This can be language and
+implementation dependent. In summary, the divide and
+conquer algorithm consists of one: breaking the problem into non-overlapping
+subproblems of the same type. Two: recursively solving
+those subproblems. And three: combining the results. In the next video, we'll see an extremely
+simple example of divide and conquer.

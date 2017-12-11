@@ -1,0 +1,265 @@
+1
+00:00:00,380 --> 00:00:04,560
+Ahora sabemos cómo calcular la
+distancia de edición o calcular el
+
+2
+00:00:04,560 --> 00:00:10,510
+alineamiento óptimo rellenando las entradas
+en la matriz de programación dinámica.
+
+3
+00:00:10,510 --> 00:00:14,830
+Pero esto no nos dice aún
+cómo construir el alineamiento
+
+4
+00:00:14,830 --> 00:00:19,250
+en dos filas con la primera fila
+representando la primera secuencia y
+
+5
+00:00:19,250 --> 00:00:21,239
+el segundo renglón representando
+la segunda secuencia.
+
+6
+00:00:22,250 --> 00:00:23,620
+Esta es una idea.
+
+7
+00:00:23,620 --> 00:00:29,570
+Usamos los punteros de rastreo (backtracking) que
+construimos mientras rellenamos
+
+8
+00:00:29,570 --> 00:00:33,965
+la matriz de programación dinámica para
+reconstruir el alineamiento óptimo entre cadenas.
+
+9
+00:00:35,040 --> 00:00:40,056
+Podemos empezar dándonos cuenta
+de que aquello que vaya de 0,
+
+10
+00:00:40,056 --> 00:00:45,072
+0 a i,j en la matriz de programación dinámica
+
+11
+00:00:45,072 --> 00:00:51,459
+significa un alineamiento de un prefijo i
+de A con un prefijo j de B.
+
+12
+00:00:51,459 --> 00:00:56,492
+Por ejemplo, comencemos la alineación de las 
+secuencias, lo que significa empecemos
+
+13
+00:00:56,492 --> 00:01:02,081
+viajando desde el punto 0,0 al punto n,m 
+en nuestra matriz de programación dinámica.
+
+14
+00:01:02,081 --> 00:01:07,706
+Tan pronto en cuanto nos movemos a través de la
+diagonal izquierda corresponderá con una discrepancia o
+
+15
+00:01:07,706 --> 00:01:11,287
+o una coincidencia, después continuaremos
+usando los enlaces horizontales o
+
+16
+00:01:11,287 --> 00:01:16,170
+verticales que se corresponderán
+a inserciones o deleciones.
+
+17
+00:01:17,360 --> 00:01:19,950
+Después usaremos de nuevo un enlace diagonal.
+
+18
+00:01:19,950 --> 00:01:23,970
+En este caso, es una
+coincidencia y continuamos
+
+19
+00:01:23,970 --> 00:01:28,820
+construyendo el alineamiento n
+de las dos cadenas.
+
+20
+00:01:28,820 --> 00:01:35,630
+Por favor, observa que el camino construido
+se corresponde con la distancia 8 y no es
+
+21
+00:01:35,630 --> 00:01:42,587
+un alineamiento óptimo porque sabemos que
+nuestra distancia de alineamiento óptima es 5.
+
+22
+00:01:43,770 --> 00:01:49,780
+Para construir un alineamiento óptimo
+usaremos los punteros de rastreo empezando
+
+23
+00:01:49,780 --> 00:01:55,440
+desde el último vértice en esta matriz.
+
+24
+00:01:55,440 --> 00:02:01,259
+Particularmente, desde este vértice, donde la 
+distancia de edición está almacenada como 5.
+
+25
+00:02:02,780 --> 00:02:05,561
+Usando los punteros de rastreo vemos que
+
+26
+00:02:05,561 --> 00:02:10,340
+existen dos posibles formas
+de llegar a este últmo vértice.
+
+27
+00:02:10,340 --> 00:02:13,180
+Escojamos arbitrariamente uno de ellos.
+
+28
+00:02:13,180 --> 00:02:17,810
+Uno de ellos se corresponde con una discrepancia
+y el otro se corresponde con una inserción.
+
+29
+00:02:17,810 --> 00:02:23,790
+así que escojamos arbitrariamente un enlace de 
+discrepancia que se corresponderá con
+
+30
+00:02:23,790 --> 00:02:29,470
+una discrepancia entre "G" e "E", después
+a partir de los puntos previos sólo hay
+
+31
+00:02:29,470 --> 00:02:36,010
+una forma de moverse hasta este punto
+y se corresponde con un ángulo
+
+32
+00:02:36,010 --> 00:02:41,470
+seguimos,coincidencia, seguimos, 
+seguimos, seguimos, seguimos
+
+33
+00:02:41,470 --> 00:02:46,560
+y llegamos finalmente
+al punto inicial mientras 
+
+34
+00:02:46,560 --> 00:02:51,640
+al mismo tiempo construimos el
+alineamiento óptimo entre las dos cadenas.
+
+35
+00:02:52,980 --> 00:02:57,100
+El pseudocódigo de OutputAlignment
+implementa esta idea.
+
+36
+00:02:57,100 --> 00:03:05,320
+Simplemente examinamos los
+punteros que entran en el nodo i,j.
+
+37
+00:03:05,320 --> 00:03:11,080
+Si llegan al nodo i,j usando
+un enlace vertical
+
+38
+00:03:11,080 --> 00:03:17,140
+que simplemente mostrará un desplazamiento
+de una columna del alineamiento que
+
+39
+00:03:17,140 --> 00:03:19,810
+es A i en la primera columna.
+
+40
+00:03:21,200 --> 00:03:26,010
+Si, por otro lado, se corresponde
+con un enlace horizontal, la columna
+
+41
+00:03:26,010 --> 00:03:31,540
+de salida es B j en la segunda fila y
+
+42
+00:03:31,540 --> 00:03:37,110
+si se corresponde con un enlace diagonal
+la salida de una columna
+
+43
+00:03:37,110 --> 00:03:43,320
+de un alineamiento con un A de i en la primera
+fila y B de j en la segunda fila.
+
+44
+00:03:44,480 --> 00:03:49,840
+Parece que realmente necesitamos
+almacenar todos los punteros de rastreo
+
+45
+00:03:49,840 --> 00:03:54,670
+para mostrar el alineamiento, pero 
+un pseudocódigo ligeramente modificado
+
+46
+00:03:54,670 --> 00:03:59,940
+nos dice que puede calcular los
+punteros de rastreo analizando
+
+47
+00:03:59,940 --> 00:04:03,670
+entradas en la matriz de programación
+dinámica y ahorrando un poco de espacio.
+
+48
+00:04:03,670 --> 00:04:08,270
+La distancia de edición es sólo una
+
+49
+00:04:08,270 --> 00:04:12,980
+de las múltiples aplicaciones de comparaciones
+de cadenas en varias disciplinas que van 
+
+50
+00:04:12,980 --> 00:04:18,450
+desde analizar páginas de Internet hasta
+encontrar genes similares.
+
+51
+00:04:18,450 --> 00:04:22,330
+Hemos comenzado esta lección
+con el ejemplo de la búsqueda del gen
+
+52
+00:04:22,330 --> 00:04:28,110
+para la fibrosis quística, uno de los primeros 
+éxitos del proyecto del genoma humano.
+
+53
+00:04:28,110 --> 00:04:32,618
+Si quieres aprender más acerca de
+comparar genes, proteínas y 
+
+54
+00:04:32,618 --> 00:04:39,210
+genomas, puedes matricularte en la especialización
+de Coursera llamada Bioinformática o
+
+55
+00:04:39,210 --> 00:04:44,350
+puedes leer el libro de Algoritmos Bioinformáticos, 
+el enfoque de aprendizaje activo.

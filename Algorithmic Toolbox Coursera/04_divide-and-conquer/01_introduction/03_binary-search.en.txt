@@ -1,0 +1,84 @@
+Hi, so let's talk now about binary search. A dictionary is a good
+example of a ordered list. Okay, basically where
+every word is in order. And that makes finding words much easier. You can imagine how difficult it
+would be to search a dictionary if the order of the words was random. You'd have to just search
+through every single page, and in fact, every word on every page. It'd take quite a long time. So let's look at the problem statement for
+searching in a sorted array. So what we have coming in is, A,
+an array, along with a low and upper bound that specify the bounds
+within the array in which to search. What's important about the array
+is that it's in sorted order. What we mean by that is if we look
+at any index i at an element. And then the next element, that this first
+element is no more than the next element. We don't say less than
+because we want to allow for arrays that have repeated elements. So officially this is called
+a monotonic non-decreasing array. The other input is the key to look for. The output for
+this is an index such that the element at that index in the array
+is equal to the key. We say an element and not the element
+just as we did in linear search. because of the fact that there
+may be more than one element-- more than one element that matches because
+there may be duplicates in the array. If we don't have a match, instead of returning NOT_FOUND as
+we did in the linear search case, we're going to actually return
+somewhat more useful information, which is where in the array
+would you actually insert the element if
+you wanted to insert it? Or where would it have been,
+if it were there? So what we're going to return
+is the greatest index, such that A sub i is less than k. That is, if the key is not in the array, we're returning an index such that if
+you look at the element at that index, it's less than the key but
+the next element is greater than the key. And we do have to take account of
+the fact that what if every element in the array is greater than the key? In that case, we're going to go ahead and
+return low- 1. So look at an example. We've got this array with 7 elements in
+it, and the element 20 is repeated in it. So if we search in this array for 2,
+we want to go ahead and return 0, saying that every element in
+the array is larger than this. If on the other hand, we look for
+3, we're going to return 1. If we look for 4, we're also
+going to be returning 1. which really signifies between 1 and 2. That is, it's bigger than 3 but
+it's less than 5. If we search for 20, we return 4. Or we might also return 5. Either one of those is valid because
+20 is present at each of those indexes. And if we search for 60, we'll return 7. But if we search for 70,
+we'll also return 7. So let's look at our
+implementation of BinarySearch. So we're going to write a recursive
+routine, taking in A, low, high and key, just as we specified in
+the problem statement. First our base case. If we have an empty array,
+that is if high is less than low, so no elements,
+then we're going to return low-1. Otherwise, we're going to
+calculate the midpoint. So we want something halfway
+between low and high. So what we're going to do is figure
+the width, which is high- low, cut it in half, so divide by 2,
+and then add that to low. That might not be an integer because of the fact that high- low divided
+by 2 may give us a fractional portion, so we're going to take the floor of that. For example, in the previous case,
+we had 1 to 7, it'll be 7- 1 is 6, divided by 2 is 3 + our low is 1 is 4,
+so the midpoint would be 4. We'll see an example of this shortly. And now we check and see is the element
+at that midpoint equal to our key. If so, we're done, we return it. If not, the good news is of course, we don't have to check all the other
+elements, we've ruled out half of them. So if the key is less than
+the midpoint element, then all the upper ones we can ignore. So we're going to go ahead and now return
+the BinarySearch in A from low to mid- 1, completely ignoring all
+the stuff over here. Otherwise, the key is greater
+than the midpoint, and again, we can throw away the lower stuff and
+go from midpoint + 1, all the way to high. Let's look at an example. So let's say we're searching for
+the key 50 in this array with 11 elements. So we'll do a binary search on this array,
+from 1 to 11, looking for 50. Low is 1, high is 11. We'll calculate the midpoint,
+the midpoint will be 11- 1 is 10, divided by 2 is 5,
+add that to 1, the midpoint is 6. And now we check and
+see is the midpoint element equal to 50? Well, no. The midpoint element is 15 and
+the element we are looking for, the key we're looking for, is 50. So we're going to go ahead and
+ignore the lower half of the array and now call binary search again, with the low
+equal to 7, so one more than the midpoint. So now we've got a smaller
+version of the problem. We're looking for 50 within the elements
+7 to 11, we'll calculate the midpoint. 11- 7 is 4 divided by 2 is 2, so we'll add that to 7 to
+get a midpoint of 9. We check, is the element at
+index 9 equal to our key? The element at index 9 is 20,
+our key is 50, they're not equal. However, 50 is greater than 20,
+so we're going to go ahead and make a new recursive call with
+midpoint + 1, which is 10. So, again,
+we do our binary search from 10 to 11. We calculate the midpoint. High- low, 11- 10 is 1, divided by 2
+is one-half + 10 is 10 and a half, we take the floor of that, we get 10 and
+a half, so our midpoint is 10 and a half. I'm sorry, our midpoint is 10. And now we check. Is the value at element
+10 equal to our key? Well the value at element 10 is 50,
+our key is 50 so yes. We're going to go ahead and
+return that midpoint which is 10. In summary then,
+what we've done is broken our problem into non-overlapping subproblems
+of the same type. We've recursively solved the subproblems. And then we're going to combine
+the results of those subproblems. We broke the problem into
+a problem of size half (slightly less than half). We recursively solved that
+single subproblem and then we combined the result very
+simply just by returning the result. In the next video, we're going to go
+ahead and look at the runtime for binary search, along with an iterative version. And we'll get back to actually discussing
+that problem that I discussed with the dictionary translation problem. We'll see you shortly.

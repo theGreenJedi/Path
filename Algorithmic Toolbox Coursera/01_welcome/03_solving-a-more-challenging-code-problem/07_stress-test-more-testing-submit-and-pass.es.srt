@@ -1,0 +1,628 @@
+1
+00:00:00,160 --> 00:00:02,950
+En este vídeo, primero
+haremos más pruebas y
+
+2
+00:00:02,950 --> 00:00:06,720
+después enviaremos nuestra solución
+principal al sistema y veremos cómo funciona.
+
+3
+00:00:06,720 --> 00:00:09,600
+Al final estarás completamente preparado para probar tus
+
+4
+00:00:09,600 --> 00:00:11,570
+ejercicios de programación
+en el futuro.
+
+5
+00:00:11,570 --> 00:00:15,500
+Para pruebas pequeñas con n pequeño y números chicos,
+
+6
+00:00:15,500 --> 00:00:19,170
+no hemos encontrado aún pruebas
+en las que nuestras soluciones difieran.
+
+7
+00:00:19,170 --> 00:00:23,270
+Esto no significa aún que nuestras
+dos soluciones funcionen.
+
+8
+00:00:23,270 --> 00:00:25,460
+Tal vez pueden interrumpirse para
+
+9
+00:00:25,460 --> 00:00:30,220
+valores mayores de n, o para valores
+mayores de los números de entrada.
+
+10
+00:00:30,220 --> 00:00:31,370
+Vamos a comprobarlo.
+
+11
+00:00:31,370 --> 00:00:35,010
+Detenemos nuestro problema con Control+C
+
+12
+00:00:35,010 --> 00:00:36,590
+Vamos al código de nuevo.
+
+13
+00:00:38,170 --> 00:00:43,260
+Y aumentamos de nuevo las restricciones a los valores de n y de los números.
+
+14
+00:00:43,260 --> 00:00:46,928
+Por ejemplo, n lo elevaremos hasta 100
+
+15
+00:00:46,928 --> 00:00:50,000
+y los números los incrementaremos hasta 100.000,
+
+16
+00:00:50,000 --> 00:00:53,940
+el valor máximo permitido
+por el enunciado del problema.
+
+17
+00:00:53,940 --> 00:00:59,650
+Guardamos el código, recompilamos
+y lanzamos la prueba de estrés de nuevo.
+
+18
+00:00:59,650 --> 00:01:01,130
+Y ahora vemos que, de nuevo,
+
+19
+00:01:01,130 --> 00:01:05,610
+nuestra pantalla se llena con números y con "OK"´s.
+
+20
+00:01:05,610 --> 00:01:10,870
+Pero hay bastantes más números en
+cada prueba y los números son mayores.
+
+21
+00:01:10,870 --> 00:01:14,340
+Y todavía estamos esperando
+y esperando y nada sucede.
+
+22
+00:01:14,340 --> 00:01:19,320
+Nuestro programa sólo continúa llenando la pantalla con "OK"´s.
+
+23
+00:01:19,320 --> 00:01:22,320
+Así que probablemente funcione.
+
+24
+00:01:22,320 --> 00:01:27,680
+O quizás tenemos que probar con valores aún
+mayores para n, porque los números que
+
+25
+00:01:27,680 --> 00:01:32,370
+hemos usado para probar son ya elevados,
+pero n no es todavía tan grande.
+
+26
+00:01:32,370 --> 00:01:37,349
+Así que estimemos cuál es el valor
+de n para el que aún podemos probar.
+
+27
+00:01:38,370 --> 00:01:41,610
+Nuestra solución lenta crece en tiempo cuadrático.
+
+28
+00:01:41,610 --> 00:01:46,270
+Por lo que probar con 100.000 números
+puede ser probablemente demasiado lento.
+
+29
+00:01:46,270 --> 00:01:50,510
+Así que tal vez podemos probar
+elevando el valor de n hasta 1.000.
+
+30
+00:01:50,510 --> 00:01:55,820
+Lo hacemos, recompilamos, lanzamos
+la prueba de estrés de nuevo.
+
+31
+00:01:55,820 --> 00:02:00,040
+Ahora nuestra pantalla está 
+prácticamente llena de números.
+
+32
+00:02:00,040 --> 00:02:04,320
+Pero sabremos si encontramos 
+una prueba que interrumpe nuestro programa,
+
+33
+00:02:04,320 --> 00:02:06,120
+porque entonces se parará.
+
+34
+00:02:06,120 --> 00:02:10,050
+Y como  no se detiene y sigue llenando nuestra pantalla con
+
+35
+00:02:10,050 --> 00:02:14,800
+números, significa que para todos nuestras
+pruebas, todo funciona correctamente.
+
+36
+00:02:14,800 --> 00:02:19,520
+Así que ahora podemos estar bastante seguros
+de que nuestra solución debe funcionar correctamente.
+
+37
+00:02:19,520 --> 00:02:21,530
+Paramos la prueba de estrés.
+
+38
+00:02:21,530 --> 00:02:27,280
+Y ahora queremos retroceder a la solución 
+al problema inicial en la prueba de estrés.
+
+39
+00:02:27,280 --> 00:02:31,320
+Y para hacer esto, vamos a la función main
+y ponemos como comentario
+
+40
+00:02:31,320 --> 00:02:36,620
+el bucle while que implementa la prueba de estrés
+
+41
+00:02:36,620 --> 00:02:42,050
+Y ahora, todo lo que queda en main es
+la solución al problema inicial.
+
+42
+00:02:42,050 --> 00:02:46,170
+Así que ya está, probablemente
+podemos enviar ya este archivo.
+
+43
+00:02:46,170 --> 00:02:49,910
+Lo guardamos y, por si acaso, recompilamos.
+
+44
+00:02:49,910 --> 00:02:52,720
+Y lo probamos con algunos ensayos simples.
+
+45
+00:02:52,720 --> 00:02:57,210
+Por ejemplo, introducimos el número 2, sólo dos números,
+
+46
+00:02:57,210 --> 00:03:00,409
+y entonces tres y cinco como números de entrada.
+
+47
+00:03:01,450 --> 00:03:05,580
+Lo que vemos es que en lugar de sólo
+el número 15, en la pantalla,
+
+48
+00:03:05,580 --> 00:03:08,340
+también vemos los números uno y cero.
+
+49
+00:03:08,340 --> 00:03:09,762
+De qué se trata?
+
+50
+00:03:09,762 --> 00:03:12,920
+Bien, obviando lo que es esto, 
+
+51
+00:03:12,920 --> 00:03:17,720
+si enviamos esta solución concreta al sistema,
+obtendremos un resultado incorrecto
+
+52
+00:03:17,720 --> 00:03:22,770
+ela primera prueba que encontremos en 
+el sistema, porque sólo tenemos que
+
+53
+00:03:22,770 --> 00:03:27,210
+mostrar la solución correcta al problema
+y nada más que ese resultado.
+
+54
+00:03:27,210 --> 00:03:31,610
+Y este es un fallo muy frecuente
+que la gente comete
+
+55
+00:03:31,610 --> 00:03:35,320
+en su primer ejercicion de programación,
+así que, por favor, tengan cuidado con esto.
+
+56
+00:03:35,320 --> 00:03:40,710
+Por favor, sólo muestren lo que se pide
+en el enunciado del problema y
+
+57
+00:03:40,710 --> 00:03:43,580
+nada más que eso, nada menos que eso.
+
+58
+00:03:43,580 --> 00:03:46,210
+Así que en este caso, sólo necesitamos
+mostrar el número 15.
+
+59
+00:03:46,210 --> 00:03:50,170
+Así que vamos a solucionar esta salida adicional.
+
+60
+00:03:50,170 --> 00:03:54,620
+Ahora probablemente hemos adivinado que
+esta salida adicional es esta
+
+61
+00:03:54,620 --> 00:03:58,230
+lista de índices que nuestra solución rápida encuentra.
+
+62
+00:03:58,230 --> 00:04:00,640
+Vamos a comentar esto.
+
+63
+00:04:00,640 --> 00:04:05,320
+Guardamos el archivo, recompilamos
+y lanzamos nuestro programa de nuevo.
+
+64
+00:04:05,320 --> 00:04:09,380
+Y volvemos a introducir la misma prueba.
+
+65
+00:04:09,380 --> 00:04:13,860
+Ahora vemos que sólo tenemos 15 como salida, lo que es la respuesta correcta.
+
+66
+00:04:13,860 --> 00:04:15,890
+Ahora estamos bastante seguros.
+
+67
+00:04:15,890 --> 00:04:20,792
+Podemos intentar enviar esta solución
+a Coursera.
+
+68
+00:04:20,792 --> 00:04:22,536
+Vamos y hagamos eso.
+
+69
+00:04:25,624 --> 00:04:29,060
+Creamos un nuevo envío y
+
+70
+00:04:29,060 --> 00:04:34,167
+subimos el archivo, que es stress_test.cpp
+
+71
+00:04:34,167 --> 00:04:38,347
+Este es el archivo con el que hemos estado trabajando.
+
+72
+00:04:38,347 --> 00:04:40,063
+Esperamos a que se suba.
+
+73
+00:04:42,503 --> 00:04:43,340
+Y entonces lo enviamos.
+
+74
+00:04:45,820 --> 00:04:49,070
+Ahora tenemos que esperar a
+que el corrector califique nuestra solución.
+
+75
+00:04:51,740 --> 00:04:54,450
+Y, bien, ha pasado en el sistema.
+
+76
+00:04:54,450 --> 00:04:57,340
+Esto ilustra la técnica de las pruebas de estrés.
+
+77
+00:04:57,340 --> 00:04:59,580
+Pero voy a darles algunos consejos adicionales.
+
+78
+00:04:59,580 --> 00:05:04,150
+Primero, te habrás dado cuenta que la prueba
+de estrés nos da mágicamente el ensayo en
+
+79
+00:05:04,150 --> 00:05:08,170
+en el que nuestra solución principal y nuestra
+solución alternativa difieren rápidamente.
+
+80
+00:05:08,170 --> 00:05:09,870
+Pero este no es siempre el caso.
+
+81
+00:05:09,870 --> 00:05:13,002
+Por ejemplo, en este problema de MaxPairwiseProduct
+
+82
+00:05:13,002 --> 00:05:17,088
+los únicos casos en los que nuestras soluciones
+principal y alternativa difirieron
+
+83
+00:05:17,088 --> 00:05:20,715
+fueron los ensayos en los que los dos 
+mayores números eran el mismo.
+
+84
+00:05:20,715 --> 00:05:22,381
+Y esto es un evento raro,
+
+85
+00:05:22,381 --> 00:05:27,475
+especialmene cuando generas grandes
+números aleatorios entre cero y 100,000.
+
+86
+00:05:27,475 --> 00:05:31,380
+Así que hemos sido afortunados de
+generar rápidamente tal prueba.
+
+87
+00:05:31,380 --> 00:05:33,920
+Y esto es cierto por regla general.
+
+88
+00:05:33,920 --> 00:05:39,200
+A menudo, los casos en que hay números iguales son algunos casos límite.
+
+89
+00:05:39,200 --> 00:05:41,800
+También ocurre lo mismo cuando
+estás trabajando, por ejemplo,
+
+90
+00:05:41,800 --> 00:05:46,990
+con palabras en letras latinas y
+las pruebas en los que las palabras
+
+91
+00:05:46,990 --> 00:05:51,630
+sólo contienen una letra A o sólo 
+contienen dos letras diferentes,
+
+92
+00:05:51,630 --> 00:05:57,410
+por ejemplo, A y B, en contraposición a palabras
+que puedan contener arbitrariamente letras latinas.
+
+93
+00:05:57,410 --> 00:06:03,490
+Esos casos con sólo unas cuantas letras diferentes son llamados algunas veces casos límite.
+
+94
+00:06:03,490 --> 00:06:07,450
+Así que cuando quieras hacer prueba de estrés y no puedes
+
+95
+00:06:07,450 --> 00:06:12,720
+encontrar rápidamente una prueba en la que
+tus soluciones principal y alternativa difieran,
+
+96
+00:06:12,720 --> 00:06:17,990
+intenta generar pruebas en un subespacio
+más enfocado de todas las posibles pruebas.
+
+97
+00:06:17,990 --> 00:06:20,740
+Por ejemplo, si estás trabajando con grafos,
+
+98
+00:06:20,740 --> 00:06:25,780
+intenta generar un grafo desconectado,
+un grafo completo, un grafo bipartito.
+
+99
+00:06:25,780 --> 00:06:29,220
+Otro punto importante es que
+si encuentras una prueba en la que 
+
+100
+00:06:29,220 --> 00:06:31,680
+tus soluciones difieren, no
+tengas prisas por depurar algo.
+
+101
+00:06:31,680 --> 00:06:33,530
+Primero intenta generar el ensayo más pequeño y
+
+102
+00:06:33,530 --> 00:06:35,610
+más sencillo en el que las soluciones difieren.
+
+103
+00:06:35,610 --> 00:06:37,379
+Esto simplificará mucho tu depuración.
+
+104
+00:06:38,480 --> 00:06:41,068
+No esperes que las pruebas de 
+estrés sean una bala de plata.
+
+105
+00:06:41,068 --> 00:06:45,110
+Por ejemplo, no podrás descubrir
+que tu solución principal es demasiado lenta
+
+106
+00:06:45,110 --> 00:06:48,330
+porque tu solución alternativa será
+probablemente aún más lenta,
+
+107
+00:06:48,330 --> 00:06:49,620
+alguna solución de fuerza bruta.
+
+108
+00:06:49,620 --> 00:06:53,930
+Y tendrás que generar sólo pequeñas
+pruebas aleatorias para compararlas.
+
+109
+00:06:53,930 --> 00:06:55,880
+En otros casos, desbordamiento de enteros.
+
+110
+00:06:55,880 --> 00:06:58,750
+Incluso si generas pruebas aleatorias
+con grandes números
+
+111
+00:06:58,750 --> 00:07:02,250
+ambas soluciones pueden tener potencialmente
+problemas de desbordamiento de enteros.
+
+112
+00:07:02,250 --> 00:07:06,840
+Y entonces no te darás cuenta de que tu
+solución principal lo tiene en la prueba de estrés.
+
+113
+00:07:06,840 --> 00:07:10,830
+Así que primero prueba estos casos
+y después aplica la prueba de estrés.
+
+114
+00:07:10,830 --> 00:07:15,430
+Sin embargo, si ya has hecho pruebas manuales, pruebas de desbordamiento de enteros y prueba de máximos, y
+
+115
+00:07:15,430 --> 00:07:19,230
+después aplicas las pruebas de estrés, está casi
+garantizado que tengas éxito,
+
+116
+00:07:19,230 --> 00:07:23,230
+porque los autores del problema
+hacen básicamente lo mismo cuando
+
+117
+00:07:23,230 --> 00:07:25,470
+preparan el conjunto de pruebas para tí.
+
+118
+00:07:25,470 --> 00:07:29,370
+Hacen algunos ensayos manuales,
+hacen pruebas con grandes números con
+
+119
+00:07:29,370 --> 00:07:33,790
+desbordamiento de enteros, hacen pruebas grandes para checar el límite de tiempo, y
+
+120
+00:07:33,790 --> 00:07:37,440
+después generan algunos ensayos aleatorios
+y tal vez algunas pruebas aleatorias focalizadas.
+
+121
+00:07:37,440 --> 00:07:38,640
+Pero esto es todo.
+
+122
+00:07:38,640 --> 00:07:44,300
+Así que probablemente podrás encontrar todas
+las trampas que te han preparado simplemente con pruebas.
+
+123
+00:07:44,300 --> 00:07:47,930
+En conclusión, sabemos que es muy importante
+escribir programas que funcionen en
+
+124
+00:07:47,930 --> 00:07:52,200
+todos los posibles ensayos permitidos, no sólo 
+en la mayoría de los casos permitidos.
+
+125
+00:07:52,200 --> 00:07:56,560
+En práctica, si escribes programas con errores que se revelan raramente
+
+126
+00:07:56,560 --> 00:07:59,480
+algunos de tus usuarios podrían encontrarse con esos errores y
+
+127
+00:07:59,480 --> 00:08:02,080
+su experiencia se estropeará significativamente.
+
+128
+00:08:02,080 --> 00:08:05,960
+También, a veces, al comienzo de un proyecto,
+quieres probar algunas hipótesis y
+
+129
+00:08:05,960 --> 00:08:07,660
+escribes algo de código para comprobarlo.
+
+130
+00:08:07,660 --> 00:08:11,510
+Entonces obtienes algunos resultados y
+basas tus decisiones en esos resultados,
+
+131
+00:08:11,510 --> 00:08:13,736
+para más tarde descubrir que
+tienes un error en tu código y 
+
+132
+00:08:13,736 --> 00:08:16,030
+que todas tus decisiones eran erróneas.
+
+133
+00:08:16,030 --> 00:08:21,440
+Es por eso que hemos preparado conjuntos de prueba a fondo para checar todos los aspectos de tus problemas.
+
+134
+00:08:21,440 --> 00:08:25,920
+Y aquí las pruebas de estrés serán de mucha 
+ayuda cuando tu solución falle en algún 
+
+135
+00:08:25,920 --> 00:08:30,620
+ensayo y ni siquiera sepas en qué
+prueba falla tu programa.
+
+136
+00:08:30,620 --> 00:08:32,490
+Hemos ocultado los ensayos con este propósito.
+
+137
+00:08:32,490 --> 00:08:36,020
+En la vida real, a menudo tampoco conocerás
+cuáles son las condiciones exactas
+
+138
+00:08:36,020 --> 00:08:38,050
+bajo las que falla tu programa.
+
+139
+00:08:38,050 --> 00:08:44,576
+Pero ahora estás completamente preparado
+para probar tus programas, depurarlos y arreglarlos.

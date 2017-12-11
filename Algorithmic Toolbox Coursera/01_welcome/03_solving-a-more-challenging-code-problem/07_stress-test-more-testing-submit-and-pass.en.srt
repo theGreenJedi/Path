@@ -1,0 +1,656 @@
+1
+00:00:00,160 --> 00:00:02,950
+In this video,
+we will do more testing first, and
+
+2
+00:00:02,950 --> 00:00:06,720
+then submit our main solution to
+the system, and see how it goes.
+
+3
+00:00:06,720 --> 00:00:09,600
+By the end, you will be fully
+prepared to test your programming
+
+4
+00:00:09,600 --> 00:00:11,570
+assignments in the future.
+
+5
+00:00:11,570 --> 00:00:15,500
+For some small tests with a small n and
+small numbers,
+
+6
+00:00:15,500 --> 00:00:19,170
+we cannot actually find any tests
+in which our solutions differ.
+
+7
+00:00:19,170 --> 00:00:23,270
+That doesn't yet
+mean that both our solutions work.
+
+8
+00:00:23,270 --> 00:00:25,460
+Maybe they will break for
+
+9
+00:00:25,460 --> 00:00:30,220
+bigger values of n, or for
+bigger values of the input numbers.
+
+10
+00:00:30,220 --> 00:00:31,370
+Let's check for that.
+
+11
+00:00:31,370 --> 00:00:35,010
+So we stop our problem with a control-C.
+
+12
+00:00:35,010 --> 00:00:36,590
+We go into the code, again.
+
+13
+00:00:38,170 --> 00:00:43,260
+And, we increase back
+the restrictions on n, on the numbers.
+
+14
+00:00:43,260 --> 00:00:46,928
+For example, n will be up to 100.
+
+15
+00:00:46,928 --> 00:00:50,000
+And the numbers will be up to 100,000,
+
+16
+00:00:50,000 --> 00:00:53,940
+the maximum value permitted
+in the problem statement.
+
+17
+00:00:53,940 --> 00:00:59,650
+We save the code, recompile, and
+launch the stress test again.
+
+18
+00:00:59,650 --> 00:01:01,130
+And now we see that, again,
+
+19
+00:01:01,130 --> 00:01:05,610
+our screen is filling with numbers and
+sometimes words OK.
+
+20
+00:01:05,610 --> 00:01:10,870
+But, there are many more numbers in
+each test, and the numbers are bigger.
+
+21
+00:01:10,870 --> 00:01:14,340
+And still we're waiting and
+waiting and nothing happens.
+
+22
+00:01:14,340 --> 00:01:19,320
+Our program just proceeds
+filling the screen with OKs.
+
+23
+00:01:19,320 --> 00:01:22,320
+So, maybe it works.
+
+24
+00:01:22,320 --> 00:01:27,680
+Or maybe we can test for even bigger
+values of n, because the numbers we
+
+25
+00:01:27,680 --> 00:01:32,370
+used for testing are already big,
+but n is not that big yet.
+
+26
+00:01:32,370 --> 00:01:37,349
+So, let's estimate what is the value
+of n for which we still can test.
+
+27
+00:01:38,370 --> 00:01:41,610
+Our slow solution works in quadratic time.
+
+28
+00:01:41,610 --> 00:01:46,270
+So, testing on 100,000 numbers
+would be probably too long.
+
+29
+00:01:46,270 --> 00:01:50,510
+So maybe we can test for
+a value of n up to 1,000.
+
+30
+00:01:50,510 --> 00:01:55,820
+Let's do that, recompile,
+launch the stress test again.
+
+31
+00:01:55,820 --> 00:02:00,040
+So now our screen is almost
+completely filled with numbers.
+
+32
+00:02:00,040 --> 00:02:04,320
+But we will know if we find a test
+in which our program breaks,
+
+33
+00:02:04,320 --> 00:02:06,120
+because it will then stop.
+
+34
+00:02:06,120 --> 00:02:10,050
+And as soon as it doesn't stop and
+proceeds filling our screen with
+
+35
+00:02:10,050 --> 00:02:14,800
+numbers, it means that for all those
+tests, everything works correctly.
+
+36
+00:02:14,800 --> 00:02:19,520
+So by now, we're pretty sure that
+our solution should work correctly.
+
+37
+00:02:19,520 --> 00:02:21,530
+We stop the stress test.
+
+38
+00:02:21,530 --> 00:02:27,280
+And now we want to make it back a solution
+to the initial problem on the stress test.
+
+39
+00:02:27,280 --> 00:02:31,320
+And to do that, we go to the main
+function, and we comment out
+
+40
+00:02:31,320 --> 00:02:36,620
+the while loop,
+which implements the stress test.
+
+41
+00:02:36,620 --> 00:02:42,050
+And now, everything else in the main loop
+is the solution of the initial problem.
+
+42
+00:02:42,050 --> 00:02:46,170
+So, that's it,
+we can probably already submit this file.
+
+43
+00:02:46,170 --> 00:02:49,910
+So let's save it, and
+just in case, recompile it.
+
+44
+00:02:49,910 --> 00:02:52,720
+And test it on some simple test case.
+
+45
+00:02:52,720 --> 00:02:57,210
+For example,
+we input number two as the two numbers.
+
+46
+00:02:57,210 --> 00:03:00,409
+And then three and
+five as the input numbers.
+
+47
+00:03:01,450 --> 00:03:05,580
+What we see is,
+instead of just number 15, on the screen,
+
+48
+00:03:05,580 --> 00:03:08,340
+we also see some number one and zero.
+
+49
+00:03:08,340 --> 00:03:09,762
+What is that?
+
+50
+00:03:09,762 --> 00:03:12,920
+Well, disregarding what is that,
+
+51
+00:03:12,920 --> 00:03:17,720
+if we submitted this exact solution to the
+system, we would get an incorrect result
+
+52
+00:03:17,720 --> 00:03:22,770
+on the first test we encounter in
+the system, because we only have to
+
+53
+00:03:22,770 --> 00:03:27,210
+output the correct answer to the problem
+and nothing else to their output.
+
+54
+00:03:27,210 --> 00:03:31,610
+And that is a very frequent
+mistake that people do
+
+55
+00:03:31,610 --> 00:03:35,320
+in their first programming assignment,
+so please beware of that.
+
+56
+00:03:35,320 --> 00:03:40,710
+Please only output what is stated
+in the problem statement and
+
+57
+00:03:40,710 --> 00:03:43,580
+nothing more than that,
+nothing less than that.
+
+58
+00:03:43,580 --> 00:03:46,210
+So in this case,
+we only need to output number 15.
+
+59
+00:03:46,210 --> 00:03:50,170
+So let's fix this additional output.
+
+60
+00:03:50,170 --> 00:03:54,620
+Now we probably already guessed that
+this additional output is this debug
+
+61
+00:03:54,620 --> 00:03:58,230
+output of indices,
+which our fast solution finds.
+
+62
+00:03:58,230 --> 00:04:00,640
+So let's comment this also out.
+
+63
+00:04:00,640 --> 00:04:05,320
+Save the file, recompile, and
+launch our program again.
+
+64
+00:04:05,320 --> 00:04:09,380
+And then input the same test.
+
+65
+00:04:09,380 --> 00:04:13,860
+Now we see that it only outputs 15,
+which is the correct answer.
+
+66
+00:04:13,860 --> 00:04:15,890
+So now, we're pretty safe.
+
+67
+00:04:15,890 --> 00:04:20,792
+We can try to submit that
+solution to Coursera, actually.
+
+68
+00:04:20,792 --> 00:04:22,536
+So, let's go and do that.
+
+69
+00:04:25,624 --> 00:04:29,060
+So we create a new submission, and
+
+70
+00:04:29,060 --> 00:04:34,167
+we upload the file,
+the file is stress_test.cpp.
+
+71
+00:04:34,167 --> 00:04:38,347
+That is the file with which we worked,
+right now.
+
+72
+00:04:38,347 --> 00:04:40,063
+We wait for it to upload.
+
+73
+00:04:42,503 --> 00:04:43,340
+And then, we submit.
+
+74
+00:04:45,820 --> 00:04:49,070
+Now we have to wait for
+the grader to grade our solution.
+
+75
+00:04:51,740 --> 00:04:54,450
+And, great, it passed in the system.
+
+76
+00:04:54,450 --> 00:04:57,340
+This illustrates
+the stress test technique.
+
+77
+00:04:57,340 --> 00:04:59,580
+But let us give you
+some additional advice.
+
+78
+00:04:59,580 --> 00:05:04,150
+First, you notice that the stress
+test magically gave us the test in
+
+79
+00:05:04,150 --> 00:05:08,170
+which our main solution and alternative
+solution differed very quickly.
+
+80
+00:05:08,170 --> 00:05:09,870
+But that's not always the case.
+
+81
+00:05:09,870 --> 00:05:13,002
+For example, in this problem,
+max pairwise product,
+
+82
+00:05:13,002 --> 00:05:17,088
+the only test cases on which our main and
+alternative solution differed
+
+83
+00:05:17,088 --> 00:05:20,715
+were the test cases where the two
+biggest numbers are the same.
+
+84
+00:05:20,715 --> 00:05:22,381
+And that's a rare event,
+
+85
+00:05:22,381 --> 00:05:27,475
+especially when you generate big
+random numbers from zero to 100,000.
+
+86
+00:05:27,475 --> 00:05:31,380
+So we were actually lucky to
+quickly generate such a test.
+
+87
+00:05:31,380 --> 00:05:33,920
+And that's true in the general case.
+
+88
+00:05:33,920 --> 00:05:39,200
+Often, the cases when there are equal
+numbers are some kinds of corner cases.
+
+89
+00:05:39,200 --> 00:05:41,800
+Also, the same happens when
+you are working, for example,
+
+90
+00:05:41,800 --> 00:05:46,990
+with strings of Latin letters and,
+the cases where the strings
+
+91
+00:05:46,990 --> 00:05:51,630
+only contain one letter, A, or
+only contain two different letters, for
+
+92
+00:05:51,630 --> 00:05:57,410
+example A and B, as opposed to strings
+which can contain arbitrary Latin letters.
+
+93
+00:05:57,410 --> 00:06:03,490
+Those cases with only a few different
+letters are sometimes corner cases.
+
+94
+00:06:03,490 --> 00:06:07,450
+So, when you want to do stress testing and
+you cannot
+
+95
+00:06:07,450 --> 00:06:12,720
+find quickly a test on which your main
+solution and alternative solution differ,
+
+96
+00:06:12,720 --> 00:06:17,990
+try to generate tests in a more focused
+subspace of full possible tests.
+
+97
+00:06:17,990 --> 00:06:20,740
+For example,
+if you are working with graphs,
+
+98
+00:06:20,740 --> 00:06:25,780
+try generating a disconnected graph,
+a full graph, a bipartite graph.
+
+99
+00:06:25,780 --> 00:06:29,220
+Another important point is that
+if you found a test in which
+
+100
+00:06:29,220 --> 00:06:31,680
+your solutions differ,
+don't hurry to debug something.
+
+101
+00:06:31,680 --> 00:06:33,530
+First try to generate the smallest and
+
+102
+00:06:33,530 --> 00:06:35,610
+easiest test on which
+your solutions differ.
+
+103
+00:06:35,610 --> 00:06:37,379
+This will simplify your debugging a lot.
+
+104
+00:06:38,480 --> 00:06:41,068
+Don't expect stress testing
+to be a silver bullet.
+
+105
+00:06:41,068 --> 00:06:45,110
+For example, it probably won't find out
+that your main solution is too slow
+
+106
+00:06:45,110 --> 00:06:48,330
+because your alternative solution
+will probably be even slower,
+
+107
+00:06:48,330 --> 00:06:49,620
+some brute force solution.
+
+108
+00:06:49,620 --> 00:06:53,930
+And you will have to generate only
+small random tests to compare them.
+
+109
+00:06:53,930 --> 00:06:55,880
+In other cases, integer overflow.
+
+110
+00:06:55,880 --> 00:06:58,750
+Even if you generate random
+tests with big numbers,
+
+111
+00:06:58,750 --> 00:07:02,250
+both of your solutions could potentially
+have integer overflow problems.
+
+112
+00:07:02,250 --> 00:07:06,840
+And then you will not notice that your
+main solution has them in the stress test.
+
+113
+00:07:06,840 --> 00:07:10,830
+So first, test for those cases,
+and then apply stress testing.
+
+114
+00:07:10,830 --> 00:07:15,430
+However, if you've done manual tests,
+integer overflow testing, and max test, and
+
+115
+00:07:15,430 --> 00:07:19,230
+then apply stress testing, you're almost
+guaranteed to have success with it.
+
+116
+00:07:19,230 --> 00:07:23,230
+Because the authors of the problem
+do basically the same when they
+
+117
+00:07:23,230 --> 00:07:25,470
+make the test sets for you.
+
+118
+00:07:25,470 --> 00:07:29,370
+They make some manual tests,
+they make tests with big numbers for
+
+119
+00:07:29,370 --> 00:07:33,790
+integer flow, they make big tests for
+checking time limit, and
+
+120
+00:07:33,790 --> 00:07:37,440
+then they generate some random tests and
+maybe some focused random tests.
+
+121
+00:07:37,440 --> 00:07:38,640
+But that's all.
+
+122
+00:07:38,640 --> 00:07:44,300
+So, you will probably find all the traps
+they've set up for you with just testing.
+
+123
+00:07:44,300 --> 00:07:47,930
+In conclusion, know that it is very
+important to write programs that work on
+
+124
+00:07:47,930 --> 00:07:52,200
+all of the allowed test cases, not just
+on most of the allowed test cases.
+
+125
+00:07:52,200 --> 00:07:56,560
+In practice, if you write programs with
+bugs that only rarely reveal themselves,
+
+126
+00:07:56,560 --> 00:07:59,480
+still some of your users will
+encounter those bugs, and
+
+127
+00:07:59,480 --> 00:08:02,080
+their experience will
+deteriorate significantly.
+
+128
+00:08:02,080 --> 00:08:05,960
+Also, sometimes in the start of a project,
+you want to test some hypothesis and
+
+129
+00:08:05,960 --> 00:08:07,660
+you write some code to check it.
+
+130
+00:08:07,660 --> 00:08:11,510
+Then you get some results and
+base your decisions on that result.
+
+131
+00:08:11,510 --> 00:08:13,736
+Only to later learn that you
+had a bug in the code and
+
+132
+00:08:13,736 --> 00:08:16,030
+all your decisions were wrong.
+
+133
+00:08:16,030 --> 00:08:21,440
+That's why we've prepared thorough test suites
+to check all the aspects of your problems.
+
+134
+00:08:21,440 --> 00:08:25,920
+And here, stress testing will be very
+helpful when your solution fails on some
+
+135
+00:08:25,920 --> 00:08:30,620
+test and you don't even know what is
+the test on which your program fails.
+
+136
+00:08:30,620 --> 00:08:32,490
+We hide the tests on purpose.
+
+137
+00:08:32,490 --> 00:08:36,020
+In real life, you often also won't
+know what are the exact conditions
+
+138
+00:08:36,020 --> 00:08:38,050
+under which your program fails.
+
+139
+00:08:38,050 --> 00:08:44,576
+But now, you are fully prepared to test
+your programs, debug them, and fix them.

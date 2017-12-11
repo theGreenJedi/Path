@@ -1,0 +1,48 @@
+Hola, en esta clase aprenderás a 
+cómo resolver el problema de organizar a niños en grupos de manera más eficiente. Más específicamente, propondremos
+ un algoritmo de tiempo polinomial para este problema, en contraste con el algoritmo 
+de tipo exponencial de la lección pasada. Pero para hacer esto, primero necesitamos 
+hacer una cosa muy importante que probablemente debes hacer antes de
+ resolver algún problema algorítmico. Debes reformularlo en términos matemáticos. Por ejemplo, en este problema, consideraremos puntos
+ sobre una línea en lugar de niños. Por ejemplo, si tenemos un niño de 
+3 años y medio, consideraremos un punto sobre la línea con 
+coordenada 3.5, y si tenemos otro niño de 6 años, consideraremos un punto
+ con coordenada 6 sobre la línea recta. Ahora, ¿a qué corresponden los grupos de niños? Si tenemos un grupo de niños, éste consiste en varios niños, y varios puntos sobre la línea corresponden
+ a este grupo. Y el hecho de que la edad de cualesquiera dos niños en el grupo difiere
+ por a lo más un año, significa que existe un segmento de longitud uno en esta
+ línea que contiene a todos estos puntos. Ahora, el propósito es seleccionar el
+ número mínimo posible de segmentos de longitud uno, tal que estos
+ segmentos cubren todos los puntos. Entonces, si tenemos estos segmentos, podemos tomar sólo todos los puntos
+ de ese segmento en el mismo grupo. y, cualesquiera dos niños en el grupo
+ diferirán por a lo más un año. Ahora vamos a ver un ejemplo. Tenemos una línea con unos cuantos puntos en ella y queremos cubrir todos los puntos
+ con segmentos de longitud uno. Aquí hay un ejemplo de tal cobertura. Todos los segmentos en esta figura
+ tienen la misma longitud y consideramos que esta longitud es de uno. Esta no es la solución óptima porque
+ abajo hay otro ejemplo de cobertura y tenemos sólo tres segmentos 
+que aún cubren todos los puntos. Ahora queremos encontrar una forma de encontrar 
+el mínimo número posible de segmentos que cubran todos los puntos en 
+cualquier configuración. Queremos hacer eso usando un algoritmo
+ voraz, y probablemente recordarás de las clases pasadas, que para 
+proponer un algoritmo voraz, necesitas hacer una elección voraz y probar
+ que ésta es una movida segura. Enuncio que, en este problema, un movimiento
+ seguro es cubrir el punto más a la izquierda con un segmento de longitud uno que empieza
+ o tiene su extremo izquierdo en este punto. Para probar que este es realmente un movimiento 
+seguro, necesitamos probar que existe una solución óptima con el número mínimo posible de segmentos de unidad uno, tal que uno de los segmentos tiene su extremo izquierdo en el punto más a la izquierda. Probemos eso. Para hacerlo, consideremos cualquier
+ solución óptima de un problema dado con el punto dado. Consideremos el punto más a la izquierda,
+ coloreado en verde. Está cubierto por algún segmento, coloreado con rojo. Ahora, movamos este segmento rojo
+ a la derecha hasta que su extremo izquierdo quede sobre este punto más a la izquierda. Yo digo que no perdimos ningún punto
+ en el proceso porque este punto verde es el punto más a la izquierda, 
+así que no hay puntos más a la izquierda que él, y mientras movemos el segmento a
+ la derecha, no perdemos ningún punto. Lo que significa que lo que tenemos
+ ahora es todavía una cobertura correcta porque todos los puntos siguen cubiertos y el 
+número de segmentos en esta cobertura es el mismo que en una solución óptima con la que empezamos, y eso significa que es también una cobertura óptima. Así, acabamos de encontrar una solución óptima en la que hay un segmento que
+ empieza en el punto más a la izquierda. Así, probamos que cubriendo el punto más a la izquierda con
+ un segmento que empieza en él, es un movimiento seguro. Ahora que tenemos un movimiento seguro,
+ consideremos lo que pasa después. Tenemos el punto más a la izquierda cubierto, 
+y puede que hayan otros puntos cubiertos, así que ya no tenemos que considerar estos puntos. No estamos interesados en ellos, y 
+necesitamos cubrir el resto de los puntos con el número mínimo posible de
+ segmentos de longitud uno. Así que este es el mismo tipo de
+ problema como el que comenzamos, así que es subproblema. Básicamente significa que tenemos un algoritmo voraz. Primero, haz un movimiento seguro,
+ agrega un segmento a la solución, con el extremo izquierdo empezando
+ en el punto más a la izquierda. Entonces, remueve todos los puntos
+ del conjunto que ya fueron cubiertos por el segmento, y, si hay todavía puntos, repite el proceso. Y repite este proceso hasta que ya
+ no queden puntos en el conjunto.

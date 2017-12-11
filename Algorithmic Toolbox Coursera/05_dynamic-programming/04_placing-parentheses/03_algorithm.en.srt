@@ -1,0 +1,749 @@
+1
+00:00:00,650 --> 00:00:05,390
+We now convert our recurrence relation
+into a dynamic programming algorithm.
+
+2
+00:00:06,510 --> 00:00:11,707
+We start by implementing a procedure
+that computes the minimum and
+
+3
+00:00:11,707 --> 00:00:17,370
+maximum value of the subexpression
+(i,j) through optimal values for
+
+4
+00:00:17,370 --> 00:00:19,810
+smaller sub subexpressions.
+
+5
+00:00:19,810 --> 00:00:22,047
+So the procedure is called MinAndMax(i,j).
+
+6
+00:00:22,047 --> 00:00:25,360
+So we first declared two intervals,
+max and min.
+
+7
+00:00:25,360 --> 00:00:29,347
+Initially min is equal to plus infinity,
+max is equal to minus infinity, or
+
+8
+00:00:29,347 --> 00:00:32,450
+to a very large number,
+or to very small number.
+
+9
+00:00:32,450 --> 00:00:36,330
+Then we go through all possible
+values of k between i and j- 1.
+
+10
+00:00:36,330 --> 00:00:38,570
+I mean between,
+
+11
+00:00:38,570 --> 00:00:44,236
+we just go through all possibilities
+of splitting our subexpression (i,
+
+12
+00:00:44,236 --> 00:00:50,000
+j) into two sub subexpressions from
+i to k and from k plus 1 to j.
+
+13
+00:00:51,620 --> 00:00:57,370
+When such a splitting is fixed,
+we compute four possible values, applying
+
+14
+00:00:57,370 --> 00:01:02,700
+opk to either two maximum values of this
+subexpression or two minimum values or
+
+15
+00:01:02,700 --> 00:01:06,290
+two maximum and minimum value or
+two minimum and maximum value.
+
+16
+00:01:07,510 --> 00:01:10,440
+When such two values are computed,
+
+17
+00:01:10,440 --> 00:01:16,020
+we just check whether one of them can
+improve our minimum or maximum values.
+
+18
+00:01:16,020 --> 00:01:19,740
+If it improves we update the min or
+max variable.
+
+19
+00:01:19,740 --> 00:01:26,435
+Finally we return the minimum value and
+the maximum value for our subexpression.
+
+20
+00:01:27,940 --> 00:01:33,470
+Our current relation expresses
+the solution for an expression (i,j) for
+
+21
+00:01:33,470 --> 00:01:37,340
+a solution for smaller sub subexpressions.
+
+22
+00:01:37,340 --> 00:01:39,030
+What do we mean by saying smaller?
+
+23
+00:01:39,030 --> 00:01:42,290
+Well, we mean just that they are shorter,
+right?
+
+24
+00:01:42,290 --> 00:01:48,520
+So once again when we compute the value
+for a subexpression (i,j) we rely on
+
+25
+00:01:48,520 --> 00:01:54,050
+the fact that those are values for shorter
+subexpressions are already computed.
+
+26
+00:01:54,050 --> 00:01:58,710
+This means that our algorithm
+needs to compute the solutions for
+
+27
+00:01:58,710 --> 00:02:02,150
+all subproblems in order
+of increasing length.
+
+28
+00:02:02,150 --> 00:02:07,440
+Namely, in order of increasing
+value of j minus i, right?
+
+29
+00:02:07,440 --> 00:02:13,530
+So for this problem we have roughly
+quadratic number of subproblems.
+
+30
+00:02:13,530 --> 00:02:18,260
+Namely our subproblem, i, i, j,
+is parameterized by the value of i and
+
+31
+00:02:18,260 --> 00:02:22,070
+j which in turn range from 1 to n.
+
+32
+00:02:22,070 --> 00:02:27,470
+Right, so it makes sense in this
+case to store the values for
+
+33
+00:02:27,470 --> 00:02:32,770
+all subproblems in a two
+dimensional table of size n by n.
+
+34
+00:02:32,770 --> 00:02:35,960
+Recall also that we need
+to recall our subproblems
+
+35
+00:02:35,960 --> 00:02:40,070
+in the order of increasing value of j- 1.
+
+36
+00:02:40,070 --> 00:02:44,020
+We can do this just by going
+through all subproblems in an order
+
+37
+00:02:44,020 --> 00:02:45,680
+shown on the slide.
+
+38
+00:02:45,680 --> 00:02:46,790
+So, why this order?
+
+39
+00:02:46,790 --> 00:02:51,450
+Well this is simply because it goes
+through all possible values of i,
+
+40
+00:02:51,450 --> 00:02:54,470
+j in order of increasing
+j minus y as required.
+
+41
+00:02:54,470 --> 00:02:55,348
+So lets take a look.
+
+42
+00:02:55,348 --> 00:03:00,150
+On this diagonal we have
+
+43
+00:03:00,150 --> 00:03:04,910
+all the cells where I,
+where j- i is equal to 0, right?
+
+44
+00:03:07,120 --> 00:03:09,820
+So the first cell here is 1, 1.
+
+45
+00:03:09,820 --> 00:03:12,000
+The second cell is 2, 2.
+
+46
+00:03:12,000 --> 00:03:15,140
+The third cell is 3, 3 and so on.
+
+47
+00:03:15,140 --> 00:03:18,780
+We then proceed to this
+cell here i is equal to 1,
+
+48
+00:03:18,780 --> 00:03:22,260
+j is equal to 2, so the difference is 1.
+
+49
+00:03:22,260 --> 00:03:23,810
+We then proceed to this cell.
+
+50
+00:03:25,140 --> 00:03:28,580
+This is the cell 2,
+3 with the difference 1 again.
+
+51
+00:03:28,580 --> 00:03:32,810
+We then proceed to this cell which is 3,
+4 and so on.
+
+52
+00:03:32,810 --> 00:03:38,390
+So on this cell we have on this
+diagonal we have all the cells i,
+
+53
+00:03:38,390 --> 00:03:42,140
+j where i- j = 0.
+
+54
+00:03:42,140 --> 00:03:49,117
+On this diagonal we have all cells i,
+j where j- i = 1.
+
+55
+00:03:49,117 --> 00:03:55,472
+For this diagonal,
+this difference is equal to two.
+
+56
+00:03:55,472 --> 00:03:59,010
+For this diagonal, this difference
+is equal to three and so on.
+
+57
+00:03:59,010 --> 00:04:00,490
+The resulting value for
+
+58
+00:04:00,490 --> 00:04:04,910
+our initial subproblem will be computed
+as the value of the last cell.
+
+59
+00:04:06,210 --> 00:04:12,256
+Right, because of this cell responds to
+the initial subexpression from one to n.
+
+60
+00:04:12,256 --> 00:04:17,970
+Now everything is ready to
+write down an algorithm.
+
+61
+00:04:17,970 --> 00:04:22,530
+In the algorithm we will maintain
+two tables, m and capital M.
+
+62
+00:04:22,530 --> 00:04:26,230
+The first one for storing the minimum
+values for all subexpressions, and
+
+63
+00:04:26,230 --> 00:04:30,250
+the second one for storing the maximum
+values for all subexpressions.
+
+64
+00:04:30,250 --> 00:04:34,560
+We start by initializing
+these tables as follows.
+
+65
+00:04:34,560 --> 00:04:38,770
+So when subexpression
+contains just one digit,
+
+66
+00:04:38,770 --> 00:04:43,930
+which means that when j = i,
+then there is nothing,
+
+67
+00:04:43,930 --> 00:04:47,630
+actually to minimize or
+maximize because there are no operations.
+
+68
+00:04:47,630 --> 00:04:50,130
+So there is no order on operations.
+
+69
+00:04:50,130 --> 00:04:54,620
+So, because of that we just initialize
+
+70
+00:04:54,620 --> 00:04:58,940
+the main diagonals of this table with
+the most current point in digits.
+
+71
+00:04:58,940 --> 00:05:01,060
+This is with the following loop.
+
+72
+00:05:01,060 --> 00:05:07,700
+So m(i,i) and M(i,i) = di.
+
+73
+00:05:07,700 --> 00:05:12,770
+Then we go through all possible
+subproblems in order of increasing size.
+
+74
+00:05:12,770 --> 00:05:14,020
+And this is done as follows.
+
+75
+00:05:14,020 --> 00:05:20,020
+We gradually increase
+the parameter s from 1 to n- 1.
+
+76
+00:05:20,020 --> 00:05:22,130
+This is done in the following loop.
+
+77
+00:05:22,130 --> 00:05:26,660
+When s is fixed, i goes from 1 to n- s.
+
+78
+00:05:26,660 --> 00:05:29,360
+And j is computed as i + s.
+
+79
+00:05:29,360 --> 00:05:34,430
+This is done to go through
+all possible payers (i,j)
+
+80
+00:05:34,430 --> 00:05:38,990
+such that j- i = s.
+
+81
+00:05:38,990 --> 00:05:44,940
+Right when i and
+j are fixed we call the procedure min and
+
+82
+00:05:44,940 --> 00:05:51,325
+max to compute the minimum and
+maximum value of the subexpression (i,j).
+
+83
+00:05:51,325 --> 00:05:52,740
+All right.
+
+84
+00:05:52,740 --> 00:05:58,532
+So finally we return the value of
+capital M of 1,n as the result for
+
+85
+00:05:58,532 --> 00:06:02,980
+our initial problem because
+this subexpression,
+
+86
+00:06:02,980 --> 00:06:06,620
+1 n corresponds to our initial problem.
+
+87
+00:06:06,620 --> 00:06:08,600
+Containing all digits from 1 to n.
+
+88
+00:06:10,660 --> 00:06:13,240
+Okay so the running time
+of this algorithm is cubic.
+
+89
+00:06:14,350 --> 00:06:16,240
+Namely, big O of nq.
+
+90
+00:06:16,240 --> 00:06:20,820
+And these can be seen by noting
+that we have two nested loops.
+
+91
+00:06:20,820 --> 00:06:25,773
+The first one with n-1 iterations,
+the inner one is
+
+92
+00:06:25,773 --> 00:06:31,890
+with n-s iterations, which is at most n.
+
+93
+00:06:31,890 --> 00:06:36,710
+Also, inside these two loops we have
+a call to min and max procedure.
+
+94
+00:06:36,710 --> 00:06:38,934
+The running time of min and
+
+95
+00:06:38,934 --> 00:06:44,203
+max procedure is proportional
+to j-i which is also at most n.
+
+96
+00:06:44,203 --> 00:06:49,985
+So the right end time however
+algorithm is it must O and
+
+97
+00:06:49,985 --> 00:06:53,721
+n times n time n, which is n cubed.
+
+98
+00:06:53,721 --> 00:06:58,477
+This slide shows an example
+on how a table's m and
+
+99
+00:06:58,477 --> 00:07:04,393
+capital M look like if we ran
+a well reason on our toy example,
+
+100
+00:07:04,393 --> 00:07:08,930
+namely expression 5- 8 + 7 x 4- 8 + 9.
+
+101
+00:07:08,930 --> 00:07:12,960
+Let's just go through this
+example step by step.
+
+102
+00:07:12,960 --> 00:07:19,450
+So we start by filling in the values
+on the main diagonal in both matrices.
+
+103
+00:07:19,450 --> 00:07:26,190
+So this is 5, this is 8,
+this is 7, this is 4, 8, 9.
+
+104
+00:07:26,190 --> 00:07:31,190
+So this response to subexpression
+consisted of just one digit.
+
+105
+00:07:31,190 --> 00:07:33,490
+So there is nothing to maximize or
+minimize.
+
+106
+00:07:34,860 --> 00:07:37,920
+So we do the same for capital M matrix.
+
+107
+00:07:39,610 --> 00:07:42,290
+We then proceed to the second diagonal.
+
+108
+00:07:43,820 --> 00:07:49,184
+Well with -3 here and
+this corresponds to this subexpression
+
+109
+00:07:49,184 --> 00:07:53,238
+again in this case there
+is just one operation.
+
+110
+00:07:53,238 --> 00:07:57,630
+So there is nothing to minimize or
+maximize here,
+
+111
+00:07:57,630 --> 00:08:03,350
+because there will just be one
+other when we have Just one sign.
+
+112
+00:08:03,350 --> 00:08:08,910
+So we put -3 here this corresponds to
+the problem, to the subproblem one, two.
+
+113
+00:08:08,910 --> 00:08:12,393
+Let me put all the indices
+here by the way.
+
+114
+00:08:20,985 --> 00:08:26,230
+Then we proceed through the cell to 3,
+which corresponds to this subproblem.
+
+115
+00:08:26,230 --> 00:08:33,460
+Again, there is nothing to maximize or
+minimize so we continue in the same way.
+
+116
+00:08:33,460 --> 00:08:37,080
+In this case it is not so interesting and
+
+117
+00:08:37,080 --> 00:08:42,430
+then we proceed to the third
+day namely to this cell.
+
+118
+00:08:43,990 --> 00:08:48,710
+So this can respond to
+the subexpression 1,3 which
+
+119
+00:08:48,710 --> 00:08:54,270
+consists of three digits and
+two operations, minus and plus.
+
+120
+00:08:54,270 --> 00:08:58,750
+So we know that one of them is the last
+operation in the optimal order
+
+121
+00:08:58,750 --> 00:09:01,410
+when computing minimal value for example.
+
+122
+00:09:01,410 --> 00:09:03,480
+So as soon as this is minus.
+
+123
+00:09:03,480 --> 00:09:11,156
+This will split the subexpression into
+two sub subexpression, 5 and 8 + 7.
+
+124
+00:09:11,156 --> 00:09:17,320
+So for both the subexpressions we already
+know their maximum and minimum values.
+
+125
+00:09:17,320 --> 00:09:21,260
+So once again,
+this subexpression corresponds to (1, 1),
+
+126
+00:09:21,260 --> 00:09:24,640
+this subexpression corresponds to (2, 3).
+
+127
+00:09:24,640 --> 00:09:29,670
+Sort of from second to third digits, and
+third digit from first to first digit.
+
+128
+00:09:29,670 --> 00:09:34,460
+So we know that for the first
+subexpression we know already it's minimum
+
+129
+00:09:34,460 --> 00:09:38,940
+value it is here, and
+it's maximum value, it is here.
+
+130
+00:09:38,940 --> 00:09:43,380
+So for the second subexpression,
+we already know it's minimum value,
+
+131
+00:09:43,380 --> 00:09:45,110
+it is here.
+
+132
+00:09:45,110 --> 00:09:47,350
+It is 15, and then its maximum value.
+
+133
+00:09:47,350 --> 00:09:48,770
+It is also 15.
+
+134
+00:09:48,770 --> 00:09:54,580
+So by going through all possible
+pairs of obviously maximum and
+
+135
+00:09:54,580 --> 00:09:57,250
+minimum values, in this case,
+they're all the same.
+
+136
+00:09:57,250 --> 00:10:01,800
+We compute the minimum value,
+which is just 5- 15.
+
+137
+00:10:01,800 --> 00:10:03,830
+It is minus ten.
+
+138
+00:10:03,830 --> 00:10:07,710
+However, this was only the first
+case of splitting this
+
+139
+00:10:09,140 --> 00:10:12,920
+sub expression into two sub expressions.
+
+140
+00:10:12,920 --> 00:10:15,610
+And as a possibility
+would be the following so
+
+141
+00:10:15,610 --> 00:10:21,650
+we can split it into
+the following two subexpressions.
+
+142
+00:10:21,650 --> 00:10:27,020
+So this corresponds to 1,
+2 and this corresponds to 3,3.
+
+143
+00:10:28,180 --> 00:10:28,860
+Right?
+
+144
+00:10:28,860 --> 00:10:34,730
+So, for one two we know its minimum value,
+it is minus three,
+
+145
+00:10:34,730 --> 00:10:37,960
+and its maximum value,
+it is also minus three.
+
+146
+00:10:37,960 --> 00:10:41,500
+For 3, 3 we know its maximum value.
+
+147
+00:10:41,500 --> 00:10:44,850
+It is here, seven.
+
+148
+00:10:44,850 --> 00:10:50,370
+Its minimum value and its maximum value.
+
+149
+00:10:50,370 --> 00:10:54,720
+So then we can compute- 3 + 7,
+
+150
+00:10:54,720 --> 00:10:58,160
+which gives us just 4.
+
+151
+00:10:58,160 --> 00:11:05,490
+So for the maximum value of
+the subexpression (1,3) we select 4.
+
+152
+00:11:05,490 --> 00:11:08,550
+For the minimum value we select -10.
+
+153
+00:11:08,550 --> 00:11:14,610
+So we proceed filling in this
+table in a similar fashion.
+
+154
+00:11:14,610 --> 00:11:19,330
+So we then put 36 here in this cell,
+then -20 in this cell,
+
+155
+00:11:22,970 --> 00:11:27,820
+and then parallel we put 60 here,
+20 here, and so on.
+
+156
+00:11:27,820 --> 00:11:32,140
+So, in the end we see the value 200 here.
+
+157
+00:11:32,140 --> 00:11:37,990
+And this is the maximum value
+of our initial expression.
+
+158
+00:11:37,990 --> 00:11:42,430
+This still doesn't give us
+the optimal load rate itself, but
+
+159
+00:11:42,430 --> 00:11:46,270
+we will be able to reconstruct
+it from these two tables.
+
+160
+00:11:46,270 --> 00:11:52,224
+Now we are sure that the maximum value
+of our initial expression is 200,
+
+161
+00:11:52,224 --> 00:11:59,046
+and we will find out the optimal ordering,
+or the optimal sizing in a minute.

@@ -1,0 +1,271 @@
+1
+00:00:00,530 --> 00:00:01,240
+Hello everybody!
+
+2
+00:00:01,240 --> 00:00:01,939
+Welcome back.
+
+3
+00:00:01,939 --> 00:00:04,712
+Today we're going to start talk
+about Fibonacci Numbers and
+
+4
+00:00:04,712 --> 00:00:06,850
+algorithms to compute them.
+
+5
+00:00:06,850 --> 00:00:09,860
+In particular, in this lecture we're
+just going to introduce the sequence of
+
+6
+00:00:09,860 --> 00:00:14,110
+the Fibonacci numbers and
+talk a little bit about their properties.
+
+7
+00:00:14,110 --> 00:00:18,420
+So to begin with the Fibonacci numbers
+is a fairly classically studied
+
+8
+00:00:18,420 --> 00:00:20,025
+sequence of natural numbers.
+
+9
+00:00:20,025 --> 00:00:23,040
+The 0th element of the sequence is 0.
+
+10
+00:00:23,040 --> 00:00:24,220
+The first element is 1.
+
+11
+00:00:24,220 --> 00:00:28,695
+And from thereon, each element
+is the sum of the previous two.
+
+12
+00:00:28,695 --> 00:00:31,014
+So 0 and 1 is 1.
+
+13
+00:00:31,014 --> 00:00:32,418
+1 + 1 is 2.
+
+14
+00:00:32,418 --> 00:00:34,078
+1 + 2 is 3.
+
+15
+00:00:34,078 --> 00:00:35,950
+2 + 3 is 5.
+
+16
+00:00:35,950 --> 00:00:39,810
+And the sequence continues,
+8, 13, 21, 34, and so on.
+
+17
+00:00:41,930 --> 00:00:47,050
+So it's a nice sequence of numbers
+defined by some pretty simple recursive
+
+18
+00:00:47,050 --> 00:00:51,190
+rule and it's interesting for
+a number of reasons.
+
+19
+00:00:51,190 --> 00:00:55,600
+It has some interesting number theoretic
+properties, but originally this sequence
+
+20
+00:00:55,600 --> 00:00:59,730
+was developed by an Italian
+mathematician as a mathematical model.
+
+21
+00:00:59,730 --> 00:01:01,310
+And it's a little bit weird.
+
+22
+00:01:01,310 --> 00:01:04,900
+You might try and wonder what sorts
+of things this could be a model for.
+
+23
+00:01:05,970 --> 00:01:08,550
+Well, it turns out that, originally,
+
+24
+00:01:08,550 --> 00:01:12,370
+this was used as sort of a mathematical
+model for rabbit populations.
+
+25
+00:01:12,370 --> 00:01:14,620
+There was some idea that if
+you had a pair of rabbits,
+
+26
+00:01:14,620 --> 00:01:19,280
+it would take them one generation to
+mature and every generation thereafter,
+
+27
+00:01:19,280 --> 00:01:20,880
+they'd produce a pair of offspring.
+
+28
+00:01:20,880 --> 00:01:24,970
+And if you work out what this means,
+then you find out the Fibonacci numbers,
+
+29
+00:01:24,970 --> 00:01:28,530
+tell you how many pairs of rabbits
+you have after n generations.
+
+30
+00:01:29,950 --> 00:01:34,370
+Now, because rabbits are known for
+reproducing rather quickly, you might
+
+31
+00:01:34,370 --> 00:01:39,010
+assume that the sequence therefore
+grows quickly, and in fact it does.
+
+32
+00:01:39,010 --> 00:01:42,600
+It's not hard to show that
+the nth Fibonacci number is at
+
+33
+00:01:42,600 --> 00:01:47,090
+least 2 to the n over 2 for
+all n at least 6.
+
+34
+00:01:47,090 --> 00:01:49,860
+And the proof can be made by induction.
+
+35
+00:01:49,860 --> 00:01:52,580
+You prove this directly for n 6 or
+
+36
+00:01:52,580 --> 00:01:56,710
+7 just by computing the numbers and
+showing that they're big enough.
+
+37
+00:01:56,710 --> 00:02:02,382
+And after that point,
+Fn is the sum of Fn-1 and Fn-2.
+
+38
+00:02:02,382 --> 00:02:05,870
+By the inductive hypothesis,
+you bound that below and
+
+39
+00:02:05,870 --> 00:02:07,700
+do a little bit of arithmetic.
+
+40
+00:02:07,700 --> 00:02:09,660
+And it's bounded below by 2 to the n/2.
+
+41
+00:02:09,660 --> 00:02:11,420
+So that completes the proof.
+
+42
+00:02:12,550 --> 00:02:15,430
+In fact, with a little bit more work
+you can actually get a formula for
+
+43
+00:02:15,430 --> 00:02:21,490
+the nth Fibonacci number as roughly
+1 point square root of 5 over 2 to the n.
+
+44
+00:02:21,490 --> 00:02:23,910
+These things grow exponentially quickly.
+
+45
+00:02:25,280 --> 00:02:29,414
+And to sort of drive that home a little
+bit more, we can look at some examples.
+
+46
+00:02:29,414 --> 00:02:34,554
+The 20th Fibonacci number is 6765.
+
+47
+00:02:34,554 --> 00:02:39,594
+The 50th Fibonacci number is
+approximately 12 billion.
+
+48
+00:02:39,594 --> 00:02:42,803
+The 100th Fibonacci number is much,
+much bigger than that.
+
+49
+00:02:42,803 --> 00:02:47,297
+And the 500th Fibonacci number is this
+monster with something like a 100
+
+50
+00:02:47,297 --> 00:02:48,590
+digits to it.
+
+51
+00:02:48,590 --> 00:02:52,080
+So these numbers do get
+rather large quite quickly.
+
+52
+00:02:53,470 --> 00:02:56,070
+So the problem that we're
+going to be looking into for
+
+53
+00:02:56,070 --> 00:02:59,570
+the next couple of lectures is,
+how do you compute Fibonacci?
+
+54
+00:02:59,570 --> 00:03:03,120
+So, if you want to use them to
+model rabbit populations or
+
+55
+00:03:03,120 --> 00:03:06,490
+because of some number theoretic interest.
+
+56
+00:03:06,490 --> 00:03:11,100
+We'd like an algorithm that as input
+takes a non negative integer n and
+
+57
+00:03:11,100 --> 00:03:13,050
+returns the nth Fibonacci number.
+
+58
+00:03:13,050 --> 00:03:15,980
+And we're going to talk about
+how you go about doing this.
+
+59
+00:03:15,980 --> 00:03:18,740
+So, come back next lecture and
+we'll talk about that.

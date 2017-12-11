@@ -1,0 +1,63 @@
+Hi, today we are going to
+revisit the Knapsack problem, the problem that we already discussed
+in the Greedy Algorithms module. In this very first segment of this lesson, we will recall the definition of this
+problem, as well as motivate its study by providing a few examples of
+applying this problem in real life. Our first example is the following. Assume that you are given a time slot,
+say two or three minutes, and together with this time slot,
+you are given a set of TV commercials. For each commercial, you know its
+revenue and you know its duration, that is length in minutes, and
+your goal is to maximize the revenue. That is, you would like to select some
+subset of your available TV commercials, so that the total revenue is
+as large as possible while the total length does not exceed
+the length of your available time slot. In our second example, you are given a
+fixed budget and your goal is to purchase a number of computers so
+that to maximize the total performance. Again, we assume that the part of your
+input in this case is a set of available computers or machine and for each machine
+you know its price and its performance. Both the considerated problems
+can be easily seen to be special cases of the following general
+problem known as the Knapsack Problem. In this problem, you are given a set of items together
+with the total capacity of the knapsack. For each item you know its value and
+its weight. For example, the value of the green item
+here is four, while its weight is 12. And your goal is to select the subset of
+items such that the total value is as large as possible while the total weight
+is at most, the capacity of the knapsack. In our case, the total capacity
+of the knapsack is equal to 15. There are two versions
+of the knapsack problem. Fractional knapsack and
+discrete knapsack.So, for the fractional version, which you are
+already familiar with, you can take any fraction off of any item, while in
+the discrete version, for each item, you either take the whole item in your
+knapsack or you do not take it at all. So, in turn, the discrete
+version has two variants also. So, the first variant is
+knapsack with repetitions. So in this case, you are given
+an unlimited quantity of each item. While in the knapsack without repetitions, you are given just a single
+copy of each item. So we know already that the fractional
+knapsack problem can be solved by a simple greedy algorithm. Such an algorithm at each
+iteration just picks an element, an item with the currently maximal
+value per unit of weight. This strategy, however, doesn't work for the discrete version of
+the knapsack problem. So instead of using greedy strategy, we will design a dynamic programming
+solution to find an optimal value. Now let me give you a toy example. Assume that our input consists of
+a knapsack of total capacity of ten and four items shown on the slide. Then the optimal value for
+the knapsack without repetitions problem is equal to 46 and it can be obtained
+by taking the first item and the third item into your knapsack. At the same time for the knapsack
+with repetitions problem. The optimal value in this case is
+equal to 48 and it can be obtained by taking one copy of the first item and
+two copies of the last item. Finally, for the fractional knapsack
+problem, the optimal value is equal to 48 and a half and
+can be obtained by taking the first item, the second item, and
+half of the last item. Let's also use this example to show
+that greedy algorithm fails for the discrete version of
+the knapsack problem. Recall that the greedy strategy for this problem is to first compute the value
+per unit of weight for each item. In our case, the value per unit of weight
+for the first item is equal to five, for the second item it is equal to
+four and two thirds, for the third item it is equal to four, and for the last
+item it is equal to four and one half. So the first item has maximal
+value per unit of weight so we take it into our solution. The next available item with the maximal value per unit of weight is the second
+one, so we take it also into the solution. Now the remaining capacity is too
+small to add any other element. So this is our constructed solution,
+and it has weight, it has value 44 which is not optimal,
+we know it already. For example here, by replacing
+the second item by the third item, we will increase the total value. This actually means that taking an element with a maximal value per unit
+of weight is not a safe step. Just by doing this we can lose
+a possibility to construct an optimal solution. Right, so this means actually that we need some other algorithm to
+solve this problem optimally. And we will design such an algorithm based
+on the dynamic programming technique in the next video.

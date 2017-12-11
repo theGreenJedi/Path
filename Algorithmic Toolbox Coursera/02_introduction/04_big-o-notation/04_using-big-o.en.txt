@@ -1,0 +1,123 @@
+Hello everybody. Welcome back. Today we're going to be talking
+about using Big-O notation. So the basic idea here, we're going
+to be talking about how to manipulate expressions involving Big-O and
+other asymptotic notations. And, in particular, we're going to
+talk about how to use Big-O to compute algorithm runtimes in
+terms of this notation. So recall,
+we said that f(n) was Big-O of g(n). If for
+all sufficiently large inputs f(n) was bounded above by some fixed
+constant times g(n). Which really says that f is bounded
+above by some constant times g. Now, we'd like to manipulate expressions,
+we'd like to, given expressions write them in terms of Big O in
+the simplest possible manner. So there's some common
+rules you need to know. The first rule is that multiplicative
+constants can be omitted. 7n cubed is O of n cubed. n squared over 3 is O of n squared. The basic premise that we had when
+building this idea was that we wanted to have something that ignores
+multiplicative constants. The second thing to note is
+that you have two powers of n. The one with the larger
+exponent grows faster, so n grows asymptotically slower
+than Big-O of n squared. Root n grows slower than n,
+so it's O of n. Hopefully this isn't too bad. What's more surprising is that
+if you have any polynomial and any exponential,
+the exponential always grows faster. So n to the fifth is O
+of root two to the n. n to the 100 is O of 1.1 to the n. And this latter thing is something
+that should surprise you a little bit. Because n to the 100 is
+a terrible runtime. Two to the 100 is already so big that
+you really can't expect to do it ever. On the other hand,
+1.1 to the n grows pretty modestly. 1.1 to the 100 is a pretty
+reasonable-sized number. On the other hand, what this really says,
+is that once n gets large, maybe 100 thousand or so, 1.1 eventually takes
+over, and starts beating n to the 100. And it does so by, in fact, quite a bit. But it doesn't really happen
+until n gets pretty huge. In a similar vein, any power of log n
+grows slower than any power of n. So log n cubed is O of root n. n log n is O of n squared. Finally, if you have some sum of terms
+smaller terms in the sum can be omitted. So n squared plus n. n has a smaller rate of growth. So this is O of n squared. 2 to the n + n to the 9th. n to the 9th has a smaller rate of growth,
+so this is O(2 to the n). So, these are common rules for
+manipulating these expressions. Basically these are the only ones that
+you'll need most of the time to write anything in terms of Big-O
+that you need. Okay, so
+let's see how this works in practice. If we actually want to compute
+runtimes using Big-O notation. So let's look at this one algorithm again. So we created an array. We set the 0th element to 0 and
+the first element to 1. We then went through this loop, where we set each element to
+the sum of the previous two. And then returned the last
+element of the array. Let's try computing this runtime
+in terms of Big-O notation. So, we're just going to run through
+it operation by operation and ask how long it takes. First operation is we created an array,
+and let's for the moment ignore the memory management issues, assume that
+it's not too hard to allocate the memory. But let;s suppose that what your compiler
+does is we actually want to zero out all of these cells in memory and that's
+going to take us a little bit of work. Because for every cell,
+basically what we have to do, is we need to zero out that cell, we then
+need to increment some counter to tell us which cell we're working on next and then maybe we need to do a check to
+make sure that we're not at the end. If we are at the end,
+to go to the next line. Now for every cell we have
+to do some amount of work. We have to do something like do a write,
+and the comparison, and an increment. And it's not entirely clear how
+many machine operations this is. But it's a constant amount of
+work per cell in the array. If there are n plus 1 cells. This is O of n time,
+some constant times n. Next we set the zeroth
+elements of the array of zero. And this might just be
+a simple assignment. We might have to load a few things into
+registers or do some pointer arithmetic, but no matter whether this is one
+machine operation or five or seven, that's still going to be a constant number
+of machine operations, O(1). Similar is setting the first element
+to one again, O(1) time. Next we run through this loop, for i running from two to n, we run through it
+n minus one times, that's O(n) times. The main thing we do in the loop is we set the ith element of the array to the sum
+of the i minus first and i minus second. Now the lookups and the store, those are all of the sorts of things we
+had looked at, those should be O of 1. But the addition is a bit worse. And normally additions are constant time. But these are large numbers. Remember, the nth Fibonacci number
+has about n over 5 digits to it, they're very big, and
+they often won't fit in the machine word. Now if you think about what happens if
+you add two very big numbers together, how long does that take? Well, you sort of add the tens digit and
+you carry, and you add the hundreds digit and you carry, and add the thousands digit,
+you carry and so on and so forth. And you sort of have to do work for
+each digits place. And so the amount of work that you do should
+be proportional to the number of digits. And in this case, the number
+of digits is proportional to n, so this should take O(n) time
+to run that line of code. Finally, we have a return step, which is
+a pointer arithmetic and array lookup and maybe popping up the program stack. And it's not quite clear how much work
+that is, but it's pretty clear that it's a constant amount of work,
+it doesn't become worse as n gets larger. So, that's O of one time. So, now we just have to
+add this all together. O of N plus O of 1 plus O of 1 plus
+O of N times through the loop times O of N times work per time through
+the loop plus O of 1, add it all together, the dominant term here, which is the only
+one we need, is the O of n times O of n. That's O of n squared. So this algorithm runs
+in time O of n squared. Now, we don't know exactly
+what the constants are, but O of n squared means that if we
+want to finish this in a second, you can probably handle
+inputs of size maybe 30,000. Now, depending on the computer that you
+had and the compiler and all of these messy details, maybe you can only handle
+inputs of size 1,000 in a second. Maybe you can handle inputs
+the size of million in a second. It's probably not going to be as low as
+ten or as high as a billion but, I mean, 30,000's a good guess and well, it takes
+work to get anything better than that. And so, this doesn't give us an exact
+answer but it's pretty good. Okay, so
+that's how you use Big-O notation. It turns out that occasionally you
+want to say a few other things. Big O really just says that my
+runtime is sort of bounded above by some multiple of this thing. Sometimes you want to say the reverse. Sometimes you want to say
+that I'm bounded below. And so
+there's different notation for that. If you want to say that f is bounded below
+by g, that it grows no slower than g, you say that f(n) is Omega of g(n). And that says that for some constant c, f(n) is at least c times g(n),
+for all large n. Now instead of saying bounded above or
+bounded below, sometimes that you actually want to
+say that they grow at the same rate. And for
+that you'd see f is Big-Theta of g(n). Which means, that F is both Big-O of g,
+and, Big-Omega of G. Which says, up to constants, that f and
+g grow at the same rate. Finally, sometimes instead of saying that
+f grows no faster than g, you actually have to say that it
+grows strictly slower than g, and for that you say f(n) is Little-o of g(n). And that says that, not only is
+the ratio between f(n) and g(n) bounded above by some constant, but actually this
+constant can be made as small as you like. In particular this means that
+the ratio f(n) over g(n) goes to zero as n goes to infinity. So, these are some other notations
+that you'll see now and then. You should keep them in mind. They're useful. Big-O is the one that usually shows up, because we actually want to
+bound our runtimes above. It's sort of the big, important thing,
+but these guys are also useful. So, to summarize the stuff
+on asymptotic notation. What it lets us do is ignore these
+messy details in the runtime analysis that we saw before. It produces very clean answers that tell
+us a lot about the asymptotic runtime of things. And these together make it very useful. It means we're going to be using it
+extensively throughout the course. So you really ought to get used to it. But, it does throw away a lot
+of practical useful information. So if you really want to
+make your program fast, you need to look at more than
+just the Big-O runtime. But, beyond that, we're going to use it. With this lecture, we basically finished the sort of
+introductory material that we need. Next lecture I'll talk to you a little bit
+about sort of an overview of the rest of the course and some our philosophy for it. But after that, we'll really get
+into the meat of the subject. We'll start talking about key
+important ways to design algorithms. So, I hope you enjoy it.

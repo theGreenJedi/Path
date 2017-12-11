@@ -1,0 +1,51 @@
+Hello, everybody, welcome back. We're still talking about algorithms
+to compute Fibonacci numbers. And in this lecture, we're going to see how to actually
+compute them reasonably efficiently. So, as you'll recall, the Fibonacci
+numbers was the sequence zero, then one, then a bunch of elements, each
+of which is the sum of the previous two. We had a very nice algorithm for them last
+time, which unfortunately was very, very slow, even to compute the 100th Fibonacci
+number say. So we'd like to do better. And maybe you need some idea for
+this new algorithm. And one way to think about it is what do
+you do when you compute them by hand. And in particular, suppose we want to write down a list
+of all the Fibonacci numbers. Well, there's sort of
+an obvious way to do this. You start off by writing zero and
+one because those are the first two. The next one going to be zero plus one,
+which is one. The next one is one plus one which is two,
+and one plus two, which is three, and two plus three, which is five. And at each step, all I need to do is look
+at the last two elements of the list and add them together. So, three and five are the last two,
+I add them together, and I get eight. And, this way, since I have all of
+the previous numbers written down, I don't need to do these recursive calls
+that I was making in the last lecture, that were really slowing us down. So, let's see how this algorithm works. What I need to do is I need to
+create an array in order to store all the numbers in this
+list that I'm writing down. The zeroth element of
+the array gets set to zero, the first element gets set to one,
+that's to set our initial conditions. Then as i runs from two to n, we need to
+set the ith element to be the sum of the i minus first and i minus second elements. That correctly computes
+the ith Fibonacci number. Then, at the end of the day,
+once I've filled out the entire list, I'm going to return the last
+element after that. So, now we can say,
+this is another algorithm, it should work just as well,
+but, how fast is it? Well, how many lines of code did you use? There are three lines of
+code at the beginning, and there's a return statement at the end,
+so that's four lines of code. Next up we have this for statement
+that we run through n minus one times, and each time we have to
+execute two lines of code. So adding everything together we find out
+that t of n is something like 2n plus two. So if we wanted to run this
+program on input n equals 100, it would take us about 202
+lines of code to run it. And 202 is actually a pretty small number
+even on a very modest computer these days. So essentially, this thing is going
+to be trivial to compute the 100th or the 1,000th or the 10,000th Fibonacci
+number on any reasonable computer. And this is much better than the results
+that we were seeing in the last lecture. So in summary,
+what we've done in this last few lectures, we've talked about the
+Fibonacci numbers, we've introduced them. We've come up with this naive algorithm, this very simple algorithm that goes
+directly from the definition, that unfortunately takes thousands of years,
+even on very small examples to finish. On the other hand, the algorithm we just
+saw is much better, it's incredibly fast even on fairly large inputs and
+it works quite well in practice. And so, the moral of this story, the thing to really keep in
+mind is that in this case and in many, many others the right algorithm
+makes all the difference in the world. It's the difference between
+an algorithm that will never finish in your entire lifetime and
+one that finishes in the blink of an eye. And so,
+that's the story with Fibonacci numbers. Next lecture we're going to talk about
+a very similar story that comes with computing greatest common divisors. So I hope you come back for that. Until then, farewell.

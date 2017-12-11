@@ -1,0 +1,74 @@
+En este vídeo, lanzaremos la prueba
+de estrés para encontrar un ensayo en el que nuestra solución principal y
+nuestra solución alternativa difieran, Usamos esta prueba para depurar
+nuestra solución principal y corregirla. Así que guardamos el archivo. Ahora compilaremos este archivo
+porque querremos ejecutarlo. Y para compilar este archivo, vamos a la sección
+"Resolviendo Ejercicios de Programación". Miramos las indicaciones de C++, las copiamos
+y las usamos para compilar nuestro archivo. Por supuesto, también especificamos
+qué fichero queremos compilar y también el nombre para el archivo de salida
+que será stress_test, sin cpp. Compilamos nuestra prueba de estrés y
+después la lanzamos y vemos que sucede. Vemos que nuestra pantalla
+se ha llenado con un montón de líneas. De hecho, estas líneas son las palabras
+"OK" y algunos números, como el número n de 2 a 11,
+y los números de entrada que son grandes. Y hay una gran cantidad de ensayos para los
+cuales nuestras soluciones no difieren, y y todos se ejecutaron bastante rápido. Y entonces al final, tenemos
+el número 11, que es n, y después 11 números grandes, que son los datos de prueba, y después las palabras respuesta incorrecta y dos números muy grandes
+que son diferentes, y se trata de las respuestas correspondientes a la primera y
+la segunda solución que hemos implementado Entonces, ahora, ya tenemos un test en el que al menos
+una de nuestras soluciones da un resultado incorrecto Pero es muy dificil trabajar con este
+test porque tenemos 11 números y son muy grandes y
+la respuesta a este problema es aún más grande. Así que vamos a intentar encontrar un test más pequeño
+en el que nuestra solución aún falle Normalmente podemos crear un
+test muy pequeño con esta técnica Así que volvamos a nuestro código,
+stress_test.cpp. Y disminuyamos las restricciones
+de n y de los números. Por ejemplo,
+queremos que nuestro número n no sea mayor que 5, así que primero generamos un número aleatorio
+módulo 4 para que tenga un valor de 0 a 3. Y, después de sumar 2,
+será entre 2 y 5. Y también,
+queremos que nuestros números sean inferiores a 10, Así que simplemente generamos números módulo 10. Y eso es todo lo que cambiamos. Ahora guardamos el fichero. Recompilamos con las mismas opciones. Y volvemos a lanzar nuestro test de estrés. Ahora encontramos un test en el que
+las soluciones difieren incluso más rapido. Puede que sólo cinco o siete tests se ejecutaron correctamente. Y ahora tenemos un test con cinco números,
+que son 2, 9, 3, 1 y 9, en los que nuestras soluciones difieren. Y la respuesta de
+la primera solución es 81. Y la respuesta de
+la segunda solución es 27. ¿Cuál de ellos es incorrecta? Por supuesto, el primero es el correcto,
+ya que tenemos los números 9 y el segundo 9, que son los más grandes
+de los valores de entrada, y su producto es 81. Por tanto, nuestra primera solucón
+da una respuesta correcta, pero nuestra segunda solución
+da un resultado incorrecto. Y pensemos por qué puede ser. Bien, puede ser si multiplica
+números incorrectos del arreglo. Así que vamos a volver al código y
+comprobar cuáles son esos números. Podemos ir al código y buscar en el código
+la función MaxPairwiseProductFast. Es muy conveniente 
+tener una función separada para esta solución porque el error
+debería encontrarse en algún lugar de esta función. Así que para simplificar nuestro objetivo de depurar, vamos a imprimir los índices de
+el número más alto y del segundo número más alto que al menos esta función
+piensa que son los dos máximos en el arreglo. Así que los devolvemos como salida. Primero el primer índice,
+después un espacio para separarlos, a continuación el segundo índice, y
+el carácter de nueva línea. Guardamos nuestro programa. Recompilamos nuevamente, y
+volvemos a lanzar los test de estrés. Fijémonos en que aunque generamos
+test aleatorios, es seguro volver a lanzar nuestros tests de estrés
+porque son pseudo aleatorios. La secuencia de valores
+generados aleatoriamente es la misma. Por lo que es un test reproducible. Por tanto, de nuevo, tenemos el mismo
+test en que nuestras soluciones difieren con cinco números, los mismos cinco números. Y ahora, bajo la línea con los cinco números,
+tenemos otra línea que dice 1 2. Esto es de hecho nuestra traza, que
+significa que el índice del primer número, que es el máximo, es 1 y
+se corresponde con el número 9 porque enumeramos nuestros números
+desde 0 en nuestro array de C++. Y el segundo número tiene índice 2,
+y es el número 3, otra vez, porque comenzamos los arreglos en 0. Por tanto, nuestra solución rápida piensa
+que el segundo número máximo en el arreglo es el número 3 en lugar
+del número 9, que está en la posición 4. Así que volvamos al código
+y veamos por qué ha pasado. De nuevo, abrimos el fichero de código. Vamos a la función
+MaxPairwiseProductFast Ignoramos el código para el max_index1 y estamos más interesados en el código para max_index2. Veamos ahora esta
+expresión if compleja, en la que intentamos determinar
+si un número en la posición j podría ser un nuevo máximo, que es diferente
+del máximo que ya hemos encontrado. Y vamos a mirar en más detalle
+a está primera condición. Lo que hacemos aquí es comprobar
+que el número en la posición j es diferente del máximo
+que ya hemos encontrado. Pero ese es exactamente el problema. Lo que necesitamos en cambio es que j sea diferente de max_index1 porque 
+no queremos encontrar el mismo número, pero podemos encontrar un número que es igual
+que el primer máximo encontrado. Por lo que en lugar de esta comparación
+lo que necesitamos realmente es comparar j, con max_index1. Si arreglamos nuestro código de esta manera,
+entonces seremos al menos capaces de encontrar el segundo número 0 en nuestro
+arreglo de entrada 2 9 3 1 9, que ya vimos. Así que veamos cómo
+funciona después de este arreglo. Despúes, guardamos el archivo, 
+lo recompilamos con las mismas opciones y lanzamos nuestra prueba de estrés. Ahora vemos una pantalla que rápida y 
+repetidamente se está llenando con algunos números y algunos 'OK'. Esperamos algún tiempo, tal vez 10 segundos o incluso 30 segundos para asegurarnos que no podemos 
+encontrar una prueba en la que nuestras soluciones difieran. Por ahora, parece que ese es el caso. En nuestro siguiente vídeo haremos más pruebas y enviaremos nuestra solución principal al sistema para ver si funciona.

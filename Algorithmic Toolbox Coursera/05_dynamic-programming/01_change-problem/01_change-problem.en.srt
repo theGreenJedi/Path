@@ -1,0 +1,603 @@
+1
+00:00:00,370 --> 00:00:03,600
+Before recording this lecture,
+I stopped by the coffee shop.
+
+2
+00:00:04,650 --> 00:00:05,660
+This cappuccino is good.
+
+3
+00:00:08,540 --> 00:00:13,070
+And as soon as I gave $5 to the cashier,
+she faced
+
+4
+00:00:13,070 --> 00:00:17,970
+an algorithmic problem of which coins
+to select to give me the change.
+
+5
+00:00:19,340 --> 00:00:24,430
+And cashiers all over the world
+use an algorithmic approach
+
+6
+00:00:24,430 --> 00:00:28,350
+called greedy algorithm
+to solve this problem.
+
+7
+00:00:28,350 --> 00:00:33,580
+Today we will learn how cashiers and
+computer scientists
+
+8
+00:00:33,580 --> 00:00:38,520
+use greedy algorithm for
+solving many practical problems.
+
+9
+00:00:39,610 --> 00:00:43,850
+So the change problem is finding
+the minimum number of coins
+
+10
+00:00:43,850 --> 00:00:45,380
+needed to make change.
+
+11
+00:00:46,520 --> 00:00:52,440
+More formally, input to the problem
+is integer money and positive integers,
+
+12
+00:00:52,440 --> 00:00:57,400
+coin1, coin2, coind,
+that represents coin denominations.
+
+13
+00:00:57,400 --> 00:01:00,815
+For example in the US,
+coin1 will be 1 cents,
+
+14
+00:01:00,815 --> 00:01:06,500
+coin2 will be 5 cents, 10 cents,
+25 cents, and 50 cents.
+
+15
+00:01:06,500 --> 00:01:11,563
+And the output is the minimum number of coins,
+with denominations coin1,
+
+16
+00:01:11,563 --> 00:01:15,290
+coin2, coind that changes money exactly.
+
+17
+00:01:17,100 --> 00:01:21,695
+So today in the morning,
+when cashier had to return me 40 cents,
+
+18
+00:01:21,695 --> 00:01:25,650
+she most likely used
+the following algorithm.
+
+19
+00:01:25,650 --> 00:01:28,710
+First, finding the largest
+coin denomination
+
+20
+00:01:28,710 --> 00:01:31,190
+that is smaller than 40 cents.
+
+21
+00:01:31,190 --> 00:01:33,200
+It will be 25 cents.
+
+22
+00:01:33,200 --> 00:01:35,870
+So she gave me 25, 15 cents left and
+
+23
+00:01:35,870 --> 00:01:38,220
+then the next challenge is
+how to change 15 cents.
+
+24
+00:01:39,230 --> 00:01:44,180
+The next step is she probably found
+the largest coin smaller than 15 cents,
+
+25
+00:01:44,180 --> 00:01:45,500
+it is 10 cents.
+
+26
+00:01:45,500 --> 00:01:49,260
+She gave me 10 cents, and
+finally, she returned 5 cents.
+
+27
+00:01:49,260 --> 00:01:56,170
+As a result,
+she changed 40 cents as 25 plus 10 plus 5.
+
+28
+00:01:56,170 --> 00:02:00,765
+Do you think it's the minimum number
+of coins she could possibly return?
+
+29
+00:02:02,300 --> 00:02:06,750
+It is the minimal number of
+coins in the United States.
+
+30
+00:02:06,750 --> 00:02:10,250
+But if you travel to Tanzania, it won't be
+
+31
+00:02:10,250 --> 00:02:15,130
+the minimum number of coins because
+there is a 20 cent coin in Tanzania.
+
+32
+00:02:15,130 --> 00:02:20,220
+And therefore this greedy
+approach to solving the change
+
+33
+00:02:20,220 --> 00:02:24,940
+problem will fail in Tanzania because
+there is a better way to change 40 cents,
+
+34
+00:02:24,940 --> 00:02:30,540
+simply as 20 cents plus 20 cents,
+using Tanzanian 20 cents coin.
+
+35
+00:02:32,580 --> 00:02:37,570
+Since the greedy approach to
+solving the change problem failed,
+
+36
+00:02:37,570 --> 00:02:39,330
+let's try something different.
+
+37
+00:02:39,330 --> 00:02:44,660
+Let's try the recursive algorithm for
+solving the same problem.
+
+38
+00:02:44,660 --> 00:02:47,940
+Suppose we want to change 9 cents, and
+
+39
+00:02:47,940 --> 00:02:53,270
+our denominations are 1 cent,
+5 cents, and 6 cents.
+
+40
+00:02:53,270 --> 00:02:58,500
+What would be the optimal
+way to change 9 cents?
+
+41
+00:02:58,500 --> 00:03:05,414
+Well, if we only knew what is the optimal
+ways to change 9 minus 6 cents,
+
+42
+00:03:05,414 --> 00:03:10,991
+9 minus 5 cents and 9 minus 1 cents,
+then we would know,
+
+43
+00:03:10,991 --> 00:03:15,710
+what is the optimal way to change 9 cents?
+
+44
+00:03:15,710 --> 00:03:18,908
+In other words, to change 9 cents,
+
+45
+00:03:18,908 --> 00:03:23,346
+we need to know how to change
+small number of cents,
+
+46
+00:03:23,346 --> 00:03:28,340
+in our case, 3 cents,
+4 cents, and 8 cents.
+
+47
+00:03:28,340 --> 00:03:33,180
+And therefore, an approach to
+solving this problem would be
+
+48
+00:03:33,180 --> 00:03:38,170
+to use this recurrence to
+write the recursive program.
+
+49
+00:03:39,290 --> 00:03:43,765
+This idea is implemented in
+the program RecursiveChange.
+
+50
+00:03:44,800 --> 00:03:49,520
+To change money, cents using coins, coin1,
+
+51
+00:03:49,520 --> 00:03:53,750
+coin2, coind, we do the following.
+
+52
+00:03:53,750 --> 00:03:59,332
+We first recursively call RecursiveChange
+with the amount of money,
+
+53
+00:03:59,332 --> 00:04:05,130
+money minus coin1, money minus coin2,
+and money minus coind.
+
+54
+00:04:05,130 --> 00:04:10,482
+And find the minimum amount of money for
+these d choices.
+
+55
+00:04:10,482 --> 00:04:15,480
+We have plus 1 because there is one
+more coin to add and returns this way.
+
+56
+00:04:17,150 --> 00:04:22,360
+This looks like the right
+approach to solve the problem,
+
+57
+00:04:22,360 --> 00:04:26,970
+but let's check how fast
+the resulting program is.
+
+58
+00:04:28,220 --> 00:04:33,520
+So, when we're changing 76 coins,
+there are actually three choices.
+
+59
+00:04:33,520 --> 00:04:38,240
+We need to recursively call
+RecursiveChange for 70 cents,
+
+60
+00:04:38,240 --> 00:04:40,940
+71 cents, and 75 cents.
+
+61
+00:04:42,420 --> 00:04:48,670
+But for each of these values,
+we need once again to call three choices.
+
+62
+00:04:49,700 --> 00:04:53,346
+And we will continue growing this tree and
+
+63
+00:04:53,346 --> 00:04:57,520
+very quickly it will turn
+into a gigantic tree.
+
+64
+00:04:58,800 --> 00:05:05,020
+Let's check how many times we have
+already tried to change 70 cents.
+
+65
+00:05:05,020 --> 00:05:09,900
+Three times, and
+we only started expanding this tree.
+
+66
+00:05:09,900 --> 00:05:14,630
+In fact, if we continue further,
+we will see that there were six
+
+67
+00:05:14,630 --> 00:05:19,280
+times when we needed to compute
+RecursiveChange for 70.
+
+68
+00:05:21,110 --> 00:05:26,370
+How many times do you think we
+will need to run recursive calls
+
+69
+00:05:26,370 --> 00:05:31,200
+when we compute the minimal
+number of coins for 30 cents?
+
+70
+00:05:32,330 --> 00:05:37,230
+It turn out that we will need
+to call it trillions of times,
+
+71
+00:05:37,230 --> 00:05:42,158
+which means that our
+seemingly very elegant
+
+72
+00:05:42,158 --> 00:05:49,120
+RecursiveChange program will not finish
+before the end of your lifetime.
+
+73
+00:05:49,120 --> 00:05:54,196
+So as simple as the change problem looks
+like, neither a greedy approach nor
+
+74
+00:05:54,196 --> 00:05:57,860
+a recursive approach solve
+it in a reasonable time.
+
+75
+00:05:57,860 --> 00:06:05,110
+60 years ago, a brilliant mathematician,
+Richard Bellman, had a different idea.
+
+76
+00:06:06,450 --> 00:06:11,750
+Wouldn't it be nice to know all
+the answers for changing money minus
+
+77
+00:06:11,750 --> 00:06:17,050
+coin i by the time we need to compute
+an optimal way of changing money?
+
+78
+00:06:18,310 --> 00:06:21,996
+And instead of the time consuming
+calls to RecursiveChange,
+
+79
+00:06:21,996 --> 00:06:27,180
+money minus coin i, that may require
+to be repeated trillions of times,
+
+80
+00:06:27,180 --> 00:06:30,291
+they would simply look up these values.
+
+81
+00:06:32,230 --> 00:06:39,360
+This idea resulted in dynamic programming
+approach that is applied in thousands
+
+82
+00:06:39,360 --> 00:06:44,260
+of diverse, practical applications
+in a myriad of different fields.
+
+83
+00:06:45,260 --> 00:06:50,600
+And the key idea of dynamic programming
+is to start filling this matrix,
+
+84
+00:06:50,600 --> 00:06:55,760
+not from the right to the left, as we
+did before in the recursive change, but
+
+85
+00:06:55,760 --> 00:06:59,180
+instead, from the left to the right.
+
+86
+00:06:59,180 --> 00:07:01,410
+So, we will first ask
+the trivial question,
+
+87
+00:07:01,410 --> 00:07:05,710
+what is the minimum number of
+coins needed to change 0 cents?
+
+88
+00:07:05,710 --> 00:07:07,850
+And, of course, it is 0.
+
+89
+00:07:07,850 --> 00:07:10,720
+What is the minimum number
+of coins to change 1 cents?
+
+90
+00:07:10,720 --> 00:07:15,700
+Obviously it is one, but
+we can compute this number by finding what
+
+91
+00:07:15,700 --> 00:07:19,220
+is the minimum number of coins to
+change 0 cents and adding one coin.
+
+92
+00:07:19,220 --> 00:07:23,240
+We will proceed in a similar fashion
+to compute the minimum number of
+
+93
+00:07:23,240 --> 00:07:26,820
+coins to change 2 cents,
+3 cents, and 4 cents.
+
+94
+00:07:26,820 --> 00:07:32,440
+There is only one possibility to derive
+this number from the previous number.
+
+95
+00:07:32,440 --> 00:07:39,110
+And for 5 cents, actually there
+are two possibilities, green and blue.
+
+96
+00:07:39,110 --> 00:07:44,486
+For green one, you can derive
+it from 0 cents by adding 5 coins,
+
+97
+00:07:44,486 --> 00:07:51,095
+and for blue possibility, we can derive
+it from 4 cents by adding one penny.
+
+98
+00:07:51,095 --> 00:07:53,681
+Well, which possibility would you select?
+
+99
+00:07:53,681 --> 00:07:58,530
+Of course the one that gives you
+the minimum change for 5 coins.
+
+100
+00:08:00,390 --> 00:08:06,285
+And continue further and apply the code to
+6 cents and there are three possibilities and once
+
+101
+00:08:06,285 --> 00:08:12,020
+again we select the optimal choice that
+correspond to minimum number of coins.
+
+102
+00:08:12,020 --> 00:08:16,490
+Let's say it may be 0 coins plus 6 cents.
+
+103
+00:08:16,490 --> 00:08:21,550
+We continue for 7 cents,
+continue for 8 cents, and finally,
+
+104
+00:08:21,550 --> 00:08:26,815
+very quickly, we actually found
+the correct answer for 9 cents.
+
+105
+00:08:26,815 --> 00:08:31,340
+We need four coins to change 9 cents.
+
+106
+00:08:31,340 --> 00:08:36,950
+And this results in DPChange
+algorithm that simply fills
+
+107
+00:08:36,950 --> 00:08:42,330
+up the table that I just
+showed you from left to right.
+
+108
+00:08:43,470 --> 00:08:49,200
+DP change is the first dynamic programming algorithm
+that you saw in this course,
+
+109
+00:08:49,200 --> 00:08:51,010
+and there will be thousands more.
+
+110
+00:08:52,080 --> 00:08:55,970
+You may be wondering why is this algorithm
+called dynamic programming and
+
+111
+00:08:55,970 --> 00:08:58,680
+what does it have to do with programming?
+
+112
+00:08:58,680 --> 00:09:00,760
+Well, in fact programming and
+
+113
+00:09:00,760 --> 00:09:03,220
+dynamic programming has nothing
+to do with programming.
+
+114
+00:09:04,250 --> 00:09:07,730
+Amazingly enough,
+dynamic programming is one of
+
+115
+00:09:07,730 --> 00:09:12,580
+the most practical algorithms
+computer scientists use.
+
+116
+00:09:12,580 --> 00:09:16,406
+But when Richard Bellman was
+developing this idea for
+
+117
+00:09:16,406 --> 00:09:21,690
+Air Force project he was working on,
+it looked completely impractical.
+
+118
+00:09:22,710 --> 00:09:26,870
+And he wanted to hide that he's really
+doing mathematics from the Secretary
+
+119
+00:09:26,870 --> 00:09:31,380
+of Defense,
+rather than working on Air Force project.
+
+120
+00:09:31,380 --> 00:09:34,110
+Therefore he invented a name
+
+121
+00:09:34,110 --> 00:09:39,910
+that basically has nothing to do with what
+dynamic programming algorithms do.
+
+122
+00:09:39,910 --> 00:09:43,950
+In his own word, he said,
+what name could I choose?
+
+123
+00:09:43,950 --> 00:09:49,190
+I was interested in planning but planning
+is not a good word for various reasons.
+
+124
+00:09:49,190 --> 00:09:52,050
+I decided therefore to use
+the word programming, and
+
+125
+00:09:52,050 --> 00:09:56,870
+I wanted to get across the idea
+that this was dynamic.
+
+126
+00:09:56,870 --> 00:10:00,400
+It was something not even
+a Congressman could object.

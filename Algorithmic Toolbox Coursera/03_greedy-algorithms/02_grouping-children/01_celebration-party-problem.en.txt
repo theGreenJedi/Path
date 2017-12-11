@@ -1,0 +1,80 @@
+Hi, in this lesson we will
+discuss the problem of organizing children into groups. And you will learn that if you use
+a naive algorithm to solve this problem, it will work very, very slowly, because the running time
+of this algorithm is exponential. But later in the next lesson, we will
+be able to improve the training time significantly by coming up with
+a polynomial time algorithm. Let's consider the following situation. You've invited a lot of children
+to a celebration party, and you want to entertain them and
+also teach them something in the process. You are going to hire a few teachers and divide the children into groups and
+assign a teacher to each of the groups this teacher will work with this
+group through the whole party. But you know that for a teacher to work
+with a group of children efficiently children of that group should
+be of relatively the same age. More specifically age of any
+two children in the same group should differ by at most one year. Also, you want to minimize
+the number of groups. Because you want to hire fewer teachers,
+and spend the money on presents and other
+kinds of entertainment for the children. So, you need to divide children into
+the minimum possible number of groups. Such that the age of any two children in
+any group differs by at most one year. Now, let's look at the pseudo code for the
+naive algorithm that solves this problem. Basically, this algorithm will
+consider every possible partition of the children into groups and
+find the partition which both satisfies the property that
+the ages of the children in any group should differ by at most one
+and contains the minimum number of groups. We start with assigning
+the initial value of the number of groups to the answer m and this initial
+value is just the number of children. Because we can always divide all
+the children into groups of one, and then of course each group has only one
+child so the condition is satisfied. Then we consider every possible
+partition of all children into groups. The number of groups can be variable,
+so this is denoted by a number k, and we have groups G1, G2 and up to Gk. And then we have a partition, we first need to check whether
+it's a good partition or not. So, we have a variable good which
+we assigned to true initially, because we think that maybe
+this partition will be good. But then we need to check for each group
+whether it satisfies our condition or not. So, we go in a for group with
+index i of the group from 1 to k, and then we consider
+the particular group GI, and we need to determine whether all the
+children in this group differ by at most 1 year, or
+there are two children that differ more. To check that, it is sufficient to compare
+the youngest child with the oldest child. If their ages differ more than by one,
+then the group is bad. Otherwise, every two children differ by
+at most one year, so the group is good. And so we go through all
+the groups in a for loop. If at least one of the groups is bad, then our variable good will
+contain value false by the end. Otherwise, all the groups are good, and
+the variable good will contain value true. So, after this for loop, we check
+the value of the variable good, and if it's true, then we improve our answer. At least try to improve it. With a minimum of its current value and the number of the groups
+in the current partition. And so, by the end of the outer for loop
+which goes through all the partitions, our variable m will contain the minimum
+possible number of groups in a partition that satisfies all the conditions. It is obvious that this
+algorithm works correctly because it basically considers
+all the possible variants and selects the best one from all the variants
+which satisfy our condition on the groups. Now, let us estimate the running
+time of this algorithm. And I state that the number of
+operations that this algorithm makes is at least 2 to the power of n,
+where n is the number of children in C. Actually, this algorithm
+works much slower and makes much more operations
+than 2 to the power of n, but we will just prove this lower bound to
+show that this algorithm is very slow. To prove it, let's consider just
+partitions of the children in two groups. Of course there are much
+more partitions than that. We can divide them in two, three,
+four, and so on. Much more groups. But, let's just consider
+partitions in two groups and prove that even the number of
+such partitions is already at least two to the power of n. Really, if C is a union of two groups, G1 and G2, then basically we
+can make such partition for any G1 which is a subset
+of such C of all children. For any G1, just make group G2 containing all the children
+which are not in the first group. And then all the children will be
+divided into these two groups. So, now the size of the set
+of all children is n. And if you want to compute the number
+of possible groups G1 then we should note that each item of the set, or each child, can be either included or
+excluded from the group G1. So, there can be 2 to
+the power of n different groups G1. And so
+there are at least 2 to the power of n partitions of the set of
+all children in two groups. and it means that our algorithm will do at least 2 to the power of n operations
+because this considers every partition. Among all the partitions, there are all
+the partitions into two groups. So, how long will it actually work? We see that the Naive algorithm
+works in time Omega (2n), so it makes at least 2 to the 
+power of n operations. And for example for just 50 children
+this is at least 2 to the power of 50 or the larges number which is on the slide. This is the number of operations that we
+will need to make and I estimate that on a regular computer, this will take
+at least two weeks for you to compute this if this was exactly the number
+of operations that you would need. So, it works really, really slow. But in the next lesson we will
+improve this significantly.

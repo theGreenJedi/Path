@@ -1,0 +1,242 @@
+<meta charset="utf-8"/>
+<co-content>
+ <h3 level="3">
+  I submit the program, but nothing happens
+ </h3>
+ <p>
+  You need to create a submission and upload the file with your solution in one of the
+  <a href="https://www.coursera.org/learn/algorithmic-toolbox/supplement/rIqce/available-programming-languages">
+   programming languages
+  </a>
+  C, C++, C#, Haskell, Java, JavaScript, Python2, Python3, Ruby, and Scala. Make sure that after uploading the file with your solution you press on the blue "Submit" button in the bottom. After that, the grading starts, and the submission being graded is enclosed in an orange rectangle. After the testing is finished, the rectangle disappears, and the results of the testing of all problems is shown to you.
+ </p>
+ <h3 level="3">
+  I submit the solution only for one problem, but all the problems in the assignment are graded
+ </h3>
+ <p>
+  Each time you submit any solution, the last uploaded solution for each problem is tested. Don't worry: this doesn't affect your score even if the submissions for the other problems are wrong. As soon as you pass the sufficient number of problems in the assignment (see in the pdf with instructions), you pass the assignment. After that, you can improve your result if you successfully pass more problems from the assignment. We recommend working on one problem at a time, checking whether your solution for any given problem passes in the system as soon as you are confident in it. However, it is better to test it first, please refer to this
+  <a href="https://www.coursera.org/learn/algorithmic-toolbox/supplement/RULv4/stress-testing-the-almost-silver-bullet-for-debugging">
+   reading
+  </a>
+  .
+ </p>
+ <h3 level="3">
+  What are the possible grading outcomes, and how to read them?
+ </h3>
+ <p>
+  Your solution can either pass or not. To pass, it must work without crashing and return the correct answers on all the test cases we prepared for you, and do so under the time limit and memory limit constraints specified in the problem statement. If your solution passes, you get the corresponding feedback "Good job!" and get a point for the problem. If your solution fails, it can be because it crashes, returns wrong answer, works for too long or uses too much memory for some test case. The feedback will contain the number of the test case on which your solution fails and the total number of test cases in the system. The tests for the problem are numbered from 1 to the total number of test cases for the problem, and the program is always tested on all the tests in the order from the test number 1 to the test with the biggest number.
+ </p>
+ <p>
+  Here are the possible outcomes:
+ </p>
+ <ol bullettype="numbers">
+  <li>
+   <p>
+    <strong>
+     <em>
+      Good job!
+     </em>
+    </strong>
+    — Hurrah! Your solution passed, and you get a point!
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     <em>
+      Wrong answer.
+     </em>
+    </strong>
+    — Your solution has output incorrect answer for some test case. If it is a sample test case from the problem statement, or if you are solving Programming Assignment 1, you will also see the input data, the output of your program and the correct answer. Otherwise, you won't know the input, the output and the correct answer. Check that you consider all the cases correctly, avoid integer overflow, output the required whitespace, output the floating point numbers with the required precision, don't output anything in addition to what you are asked to output in the output specification of the problem statement. See this
+    <a href="https://www.coursera.org/learn/algorithmic-toolbox/supplement/RULv4/stress-testing-the-almost-silver-bullet-for-debugging">
+     reading
+    </a>
+    on testing.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     <em>
+      Time limit exceeded.
+     </em>
+    </strong>
+    — Your solution worked longer than the allowed time limit for some test case. If it is a sample test case from the problem statement, or if you are solving Programming Assignment 1, you will also see the input data and the correct answer. Otherwise, you won't know the input and the correct answer. Check again that your algorithm has a good enough running time estimate. Test your program locally on the test of maximum size allowed by the problem statement and see how long it takes. Check that your program doesn't wait for some input from the user which makes it wait forever. See this
+    <a href="https://www.coursera.org/learn/algorithmic-toolbox/supplement/RULv4/stress-testing-the-almost-silver-bullet-for-debugging">
+     reading
+    </a>
+    on testing.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     <em>
+      Memory limit exceeded.
+     </em>
+    </strong>
+    — Your solution used more than the allowed memory limit for some test case. If it is a sample test case from the problem statement, or if you are solving Programming Assignment 1, you will also see the input data and the correct answer. Otherwise, you won't know the input and the correct answer. Estimate the amount of memory that your program is going to use in the worst case and check that it is less than the memory limit. Check that you don't create too large arrays or data structures. Check that you don't create large arrays or lists or vectors consisting of empty arrays or empty strings, since those in some cases still eat up memory. Test your program locally on the test of maximum size allowed by the problem statement and look at its memory consumption in the system.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     <em>
+      Cannot check answer. Perhaps output format is wrong.
+     </em>
+    </strong>
+    — This happens when you output something completely different than expected. For example, you are required to output word "Yes" or "No", but you output number 1 or 0, or vice versa. Or your program has empty output. Or your program outputs not only the correct answer, but also some additional information (this is not allowed, so please follow exactly the output format specified in the problem statement). Maybe your program doesn't output anything, because it crashes.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Unknown signal 6
+    </strong>
+    (or 7, or 8, or 11, or some other)
+    <strong>
+     .
+    </strong>
+    — This happens when your program crashes. It can be because of division by zero, accessing memory outside of the array bounds, using uninitialized variables, too deep recursion that triggers stack overflow, sorting with contradictory comparator, removing elements from an empty data structure, trying to allocate too much memory, and many other reasons. Look at your code and think about all those possibilities. Make sure that you use the same compilers and the same compiler options as we
+    <a href="https://www.coursera.org/learn/algorithmic-toolbox/supplement/rIqce/available-programming-languages">
+     do
+    </a>
+    . Try different testing techniques from this
+    <a href="https://www.coursera.org/learn/algorithmic-toolbox/supplement/RULv4/stress-testing-the-almost-silver-bullet-for-debugging">
+     reading
+    </a>
+    .
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Grading failed.
+    </strong>
+    — Something very wrong happened with the system. Contact Coursera for help or write in the forums to let us know.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Internal error: exception...
+    </strong>
+    — Most probably, you submitted a compiled program instead of a source code.
+   </p>
+  </li>
+ </ol>
+ <h3 level="3">
+  How to understand why my program fails and to fix it?
+ </h3>
+ <p>
+  If your program works incorrectly, it gets a feedback from the grader. For the Programming Assignment 1, when your solution fails, you will see the input data, the correct answer and the output of your program in case it didn't crash, finished under the time limit and memory limit constraints. If the program crashed, worked too long or used too much memory, the system stops it, so you won't see the output of your program or will see just part of the whole output. We show you all this information so that you get used to the algorithmic problems in general and get some experience debugging your programs while knowing exactly on which tests they fail.
+ </p>
+ <p>
+  However, in the following Programming Assignments throughout the Specialization you will only get so much information for the test cases from the problem statement. For the next tests you will only get the result: passed, time limit exceeded, memory limit exceeded, wrong answer, wrong output format or some form of crash. We hide the test cases, because it is crucial for you to learn to test and fix your program even without knowing exactly the test on which it fails. In the real life, often there will be no or only partial information about the failure of your program or service. You will need to find the failing test case yourself. Stress testing is one powerful technique that allows you to do that. You should apply it after using the other testing techniques covered in this
+  <a href="https://www.coursera.org/learn/algorithmic-toolbox/supplement/RULv4/stress-testing-the-almost-silver-bullet-for-debugging">
+   reading
+  </a>
+  .
+ </p>
+ <h3 level="3">
+  Why do you hide the test on which my program fails?
+ </h3>
+ <p>
+  Often beginner programmers think by default that their programs work. Experienced programmers know, however, that their programs almost never work initially. Everyone who wants to become a better programmer needs to go through this realization.
+ </p>
+ <p>
+  When you are sure that your program works by default, you just throw a few random test cases against it, and if the answers look reasonable, you consider your work done. However, mostly this is not enough. To make one's programs work, one must test them really well. Sometimes, the programs still don't work although you tried really hard to test them, and you need to be both skilled and creative to fix your bugs. Solutions to algorithmic problems are one of the hardest to implement correctly. That's why in this Specialization you will gain this important experience which will be invaluable in the future when you write programs which you really need to get right.
+ </p>
+ <p>
+  It is crucial for you to learn to test and fix your programs yourself. In the real life, often there will be no or only partial information about the failure of your program or service. Still, you will have to reproduce the failure to fix it (or just guess what it is, but that's rare, and you will still need to reproduce the failure to make sure you have really fixed it). When you solve algorithmic problems, it is very frequent to make subtle mistakes. That's why you should apply the testing techniques described in this
+  <a href="https://www.coursera.org/learn/algorithmic-toolbox/supplement/RULv4/stress-testing-the-almost-silver-bullet-for-debugging">
+   reading
+  </a>
+  to find the failing test case and fix your program.
+ </p>
+ <p>
+ </p>
+ <h3 level="3">
+  My solution does not pass the tests? May I post it in the forum and ask for a help?
+ </h3>
+ <p>
+  No, please do not post any solutions in the forum or anywhere on the web, even if a solution does not pass the tests (as in this case you are still revealing parts of a correct solution). Recall the third item of the
+  <a href="https://www.coursera.org/about/terms/honorcode">
+   Coursera Honor Code
+  </a>
+  : "I will not make solutions to homework, quizzes, exams, projects, and other assignments available to anyone else (except to the extent an assignment explicitly permits sharing solutions). This includes both solutions written by me, as well as any solutions provided by the course staff or others''.
+ </p>
+ <h3 level="3">
+  Are you going to support my favorite language in programming assignments?
+ </h3>
+ <p>
+  Currently, we support C, C++, C#, Haskell, Java, JavaScript, Python2, Python3, Ruby, and Scala, but we may add other programming languages later if there appears a huge need. To express your interest in a particular programming language, please post its name in
+  <a href="https://www.coursera.org/learn/algorithmic-toolbox/discussions/q49FwNevEeW-EQ6jzRFIow">
+   this thread
+  </a>
+  or upvote the corresponding option if it is already there.
+ </p>
+ <h3 level="3">
+  My implementation always fails in the grader, though I already tested and stress tested it a lot. Wouldn’t it be better if you give me a solution to this problem or at least the test cases that you use? I will then be able to fix my code and will learn how to avoid making mistakes. Otherwise, I don’t feel that I learn anything from solving this problem. I’m just stuck.
+ </h3>
+ <p>
+  First of all, you always learn from your mistakes.
+ </p>
+ <p>
+  The process of trying to invent new test cases that might fail your program and proving them wrong is often enlightening. This thinking about the invariants which you expect your loops, ifs, etc. to keep and proving them wrong (or right) makes you understand what happens inside your program and in the general algorithm you're studying much more.
+ </p>
+ <p>
+  Also, it is important to be able to find a bug in your implementation without knowing a test case and without having a reference solution. Assume that you designed an application and an annoyed user reports that it crashed. Most probably, the user will not tell you the exact sequence of operations that led to a crash. Moreover, there will be no reference application. Hence, once again, it is important to be able to locate a bug in your implementation yourself, without a magic oracle giving you either a test case that your program fails or a reference solution. We encourage you to use programming assignments in this class as a way of practicing this important skill.
+ </p>
+ <p>
+  If you’ve already tested a lot (considered all corner cases that you can imagine, constructed a set of manual test cases, applied stress testing), but your program still fails and you are stuck, try to ask for help on the forum. We encourage you to do this by first explaining what kind of corner cases you have already considered (it may happen that when writing such a post you will realize that you missed some corner cases!) and only then asking other learners to give you more ideas for test cases.
+ </p>
+</co-content>
+<style>
+ body {
+    padding: 50px 85px 50px 85px;
+}
+
+table th, table td {
+    border: 1px solid #e0e0e0;
+    padding: 5px 20px;
+    text-align: left;
+}
+input {
+    margin: 10px;
+}
+}
+th {
+    font-weight: bold;
+}
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+img {
+    height: auto;
+    max-width: 100%;
+}
+pre {
+    display: block;
+    margin: 20px;
+    background: #424242;
+    color: #fff;
+    font-size: 13px;
+    white-space: pre-wrap;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    border: 1px solid #ccc;
+}
+</style>
+<script async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ['$','$'] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true
+    }
+  });
+</script>

@@ -1,0 +1,68 @@
+Hello everybody. Welcome back. Today we'll talk a little bit more
+about how to compute Fibonacci numbers. And, in particular, today what we're going
+to do is we're going to show you how to produce a very simple algorithm that
+computes these things correctly. On the other hand, we're going to show
+that this algorithm is actually very slow, and talk a little bit
+about how to analyze that. So let's take a look at
+the definition again. The zero'th Fibonacci number is 0. The first Fibonacci number is 1. And from there after each Fibonacci
+number is the sum of the previous two. Now these grow pretty rapidly, and what we would like to do is
+have an algorithm to compute them. So let's take a look at
+how we might do this. Well, there's a pretty easy way to
+go about it, given the definition. So if n is 0, we're supposed to return 0. And if n is 1, we're supposed to return 1. So we could just start with a case
+that says if n is at most 1, we're going to return n. Otherwise what are we supposed to do? Otherwise, we're supposed to
+return the sum of the n- 1, and n- 2 Fibonacci numbers. So we can just compute those two
+recursively, add them together, and return them. So, this gives us a very simple
+algorithm four lines long that basically took the definition of our
+problem and turned it into an algorithm that correctly computes
+the thing it's supposed to. Good for us. We have an algorithm and it works. However, in this course, we care a lot
+more than just, does our algorithm work? We also want to know if it's efficient, so
+we'd like to know how long this algorithm takes to run, and there's sort of
+a rough approximation to this. We're going to let T(n) denote
+the number of lines of code that are executed by this
+algorithm on input n. So to count this is
+actually not very hard. So if n is at most one,
+the algorithm checks the if case, goes to the return statement,
+and that's two lines of code. Not so bad. If n is at least two,
+we go to the if case. We go to the else condition, and
+then run a return statement. That's three lines of code. However ,in this case we also need
+to recursively compute the n-1, and n-2 Fibonacci numbers. So we need to add to that however many
+lines of code those recursive calls take. So all in all though,
+we have a nice recursive formula for T(n). It's two as long as n is at most one. And otherwise, it's equal to T(n) minus
+one plus T(n) minus two plus three. So a nice recursive formula. Now, if you look at this formula for
+a little bit, you'll notice that it looks very similar to the original formula that
+we used to define the Fibonacci numbers. Each guy was more or
+less the sum of the previous two. And in fact,
+from this you can show pretty easily that T( n) is at least the n'th
+Fibonacci number for all n. And this should be ringing some warning
+bells because we know that the Fibonacci numbers get very, very,
+very large, so T(n) must as well. In fact,
+T(100) is already 1.77 times 10 to the 21. 1.77 sextillion. This is a huge number. Now, suppose we were running
+this program on a computer that executed a billion lines of code a second. It ran it at a gigahertz. It would still take us about 56,000
+years to complete this computation. Now, I don't have 56,000 years to wait for
+my computer to finish. You probably don't either, so
+this really is somehow not acceptable, if we want to compute Fibonacci
+numbers of any reasonable size. So what we'd really like is
+we'd like a better algorithm. And we'll get to that next lecture. But first we should talk a little bit
+about why this algorithm is so slow. And to see that, maybe the clearest
+way to demonstrate it is to look at all of the recursive calls this algorithm
+needs in order to compute its answer. So, if we want to compute
+the n'th Fibonacci number, we need to make recursive calls to compute
+the n-1,and n-2 Fibonacci numbers. To compute the n-1,
+we need the n-2 to the n-3. To compute the n-2, we need the n-3, and
+n-4, and it just keeps going on and on. From there we get this big
+tree of recursive calls. Now if you'll look at this
+tree a little bit closer, it looks like we're doing
+something a little bit silly. We're computing Fn-3,
+three separate times in this tree. And the way with our algorithm works,
+every time we're asked to compute it, since this is a new recursive call,
+we compute the whole thing from scratch. We recompute Fn-4, and Fn-5, and then,
+add them together and get our answer. And it's this computing
+the same thing over and over again that's really slowing us down. And to make it even more extreme,
+let's blow up the tree a little bit more. Fn-4 actually gets computed these
+five separate times by the algorithm. And as you keep going down more and
+more and more times, are you just computing the same
+thing over and over again? And this is really the problem with
+this particular algorithm, but it's not clear immediately
+that we can do better. So, come back next lecture and we'll talk
+about how to get around this difficulty, and actually get a fairly
+efficient algorithm.

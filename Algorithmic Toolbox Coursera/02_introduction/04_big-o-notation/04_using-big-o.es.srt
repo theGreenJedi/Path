@@ -1,0 +1,735 @@
+1
+00:00:04,036 --> 00:00:04,880
+Hola a todos
+
+2
+00:00:04,880 --> 00:00:05,930
+Bienvenidos de nuevo.
+
+3
+00:00:05,930 --> 00:00:09,150
+Hoy vamos a estar hablando sobre la notación O grande.
+
+4
+00:00:09,150 --> 00:00:12,100
+Entonces, la idea básica es que vamos 
+a hablar sobre cómo manipular
+
+5
+00:00:12,100 --> 00:00:15,715
+expresiones que involucran O grande
+ y otras notaciones asintóticas.
+
+6
+00:00:15,715 --> 00:00:18,745
+Y en particular vamos a hablar de
+ cómo usar O grande para calcular
+
+7
+00:00:18,745 --> 00:00:20,905
+tiempos de ejecución de algoritmos
+ en términos de esta notación.
+
+8
+00:00:22,385 --> 00:00:26,127
+Entonces, recuerda, dijimos que f(n) era O de g(n)
+
+9
+00:00:26,127 --> 00:00:29,717
+si para todas las entradas suficientemente grandes f(n) estaba
+
+10
+00:00:29,717 --> 00:00:33,597
+acotada por arriba por alguna constante fija veces g(n).
+
+11
+00:00:33,597 --> 00:00:38,187
+Lo que significa que f está acotada por
+ arriba por una constante veces g.
+
+12
+00:00:39,577 --> 00:00:43,247
+Ahora, quisiéramos manipular expresiones, 
+quisiéramos que, dadas ciertas expresiones, las escribamos
+
+13
+00:00:43,247 --> 00:00:45,917
+en términos de O grande en la forma más simple posible.
+
+14
+00:00:45,917 --> 00:00:47,667
+Y así hay unas reglas comunes que debes de saber.
+
+15
+00:00:48,920 --> 00:00:53,420
+La primera regla es que las constantes
+ multiplicativas pueden omitirse,
+
+16
+00:00:53,420 --> 00:00:55,780
+así, 7n^3 es O(n^3),
+
+17
+00:00:55,780 --> 00:00:58,720
+n^2/3 es O(n^2).
+
+18
+00:00:58,720 --> 00:01:02,728
+La premisa básica que teníamos cuando 
+construimos esta idea es que queríamos
+
+19
+00:01:02,728 --> 00:01:05,960
+algo que ignorara constantes multiplicativas.
+
+20
+00:01:08,210 --> 00:01:10,630
+La segunda cosa a notar es que si tienes dos potencias de n,
+
+21
+00:01:10,630 --> 00:01:16,110
+la de mayor exponente crece más rápido,
+
+22
+00:01:16,110 --> 00:01:21,300
+por lo que n crece asintóticamente
+ de forma más lenta que O(n^2).
+
+23
+00:01:21,300 --> 00:01:24,110
+Raíz de n crece de forma más lenta que n, que es O(n).
+
+24
+00:01:25,160 --> 00:01:26,600
+Con suerte, esto no es tan malo.
+
+25
+00:01:27,960 --> 00:01:31,100
+Lo que es más sorprendente es que si tienes cualquier polinomio 
+
+26
+00:01:31,100 --> 00:01:35,310
+y cualquier exponencial, la exponencial siempre crece más rápido.
+
+27
+00:01:35,310 --> 00:01:39,220
+Entonces n^5 es O de raíz de 2^n,
+
+28
+00:01:39,220 --> 00:01:41,318
+n^100 es O(1.1^n).
+
+29
+00:01:41,318 --> 00:01:45,870
+Y esto último es algo que debería sorprenderte un poco,
+
+30
+00:01:45,870 --> 00:01:49,410
+porque n^100 es un tiempo terrible,
+
+31
+00:01:49,410 --> 00:01:55,620
+2^100 es algo tan enorme que no
+ puedes esperar hacerlo en la vida.
+
+32
+00:01:55,620 --> 00:02:00,535
+Por el otro lado, 1.1^n crece muy modestamente,
+
+33
+00:02:00,535 --> 00:02:03,080
+1.1^100 es un número muy razonable en tamaño.
+
+34
+00:02:04,110 --> 00:02:08,990
+Por el otro lado, lo que realmente decimos es 
+que una vez que n es muy grande, tal vez, 
+
+35
+00:02:08,990 --> 00:02:14,070
+100 mil, por ahí, 1.1 eventualmente despega y vence a n^100.
+
+36
+00:02:14,070 --> 00:02:16,570
+Y lo hace por mucho,
+
+37
+00:02:16,570 --> 00:02:19,440
+pero no pasa hasta que n es muy grande.
+
+38
+00:02:21,530 --> 00:02:26,220
+En el mismo tenor, cualquier potencia de log n crece
+ más lentamente que cualquier potencia de n.
+
+39
+00:02:26,220 --> 00:02:29,370
+Asó, log n al cubo es O de raíz de n,
+
+40
+00:02:29,370 --> 00:02:30,400
+n log n es O(n^2).
+
+41
+00:02:32,490 --> 00:02:38,580
+Finalmente, si tienes alguna suma de términos,
+ los más pequeños en la suma pueden omitirse.
+
+42
+00:02:38,580 --> 00:02:40,280
+Así, n^2+n,
+
+43
+00:02:40,280 --> 00:02:42,660
+n tiene una razón de crecimiento menor,
+
+44
+00:02:43,710 --> 00:02:45,460
+así que esto es O(n^2);
+
+45
+00:02:45,460 --> 00:02:48,220
+2^n+n^9,
+
+46
+00:02:48,220 --> 00:02:53,770
+n^9 tiene una menor razón de 
+crecimiento, así que es O(2^n).
+
+47
+00:02:53,770 --> 00:02:57,140
+Entonces, éstas son reglas comunes
+ para manipular estas expresiones.
+
+48
+00:02:57,140 --> 00:03:01,389
+Básicamente éstas son las únicas que necesitarás 
+la mayoría del tiempo para escribir
+
+49
+00:03:01,389 --> 00:03:03,891
+lo que sea en términos de O grande.
+
+50
+00:03:05,423 --> 00:03:08,540
+OK, entonces, veamos cómo funciona esto en la práctica.
+
+51
+00:03:08,540 --> 00:03:12,310
+Queremos realmente calcular tiempos usando notación O grande.
+
+52
+00:03:12,310 --> 00:03:14,730
+Entonces, veamos este algoritmo de nuevo.
+
+53
+00:03:14,730 --> 00:03:16,300
+Creamos un arreglo,
+
+54
+00:03:16,300 --> 00:03:19,120
+le dimos valor 0 al elemento 0 y valor 1 al elemento 1.
+
+55
+00:03:19,120 --> 00:03:20,720
+Entonces entramos en el bucle,
+
+56
+00:03:20,720 --> 00:03:24,190
+donde cada elemento va a ser la suma de los dos previos,
+
+57
+00:03:24,190 --> 00:03:26,840
+y entonces devolvemos el último elemento en el arreglo.
+
+58
+00:03:26,840 --> 00:03:30,490
+Intentemos calcular este tiempo en
+ términos de la notación O grande.
+
+59
+00:03:31,900 --> 00:03:34,890
+Entonces, vamos a ver operación por operación
+
+60
+00:03:34,890 --> 00:03:35,780
+y preguntarnos cuánto tiempo toman.
+
+61
+00:03:37,700 --> 00:03:42,330
+La primera operación es, creamos un arreglo,
+ y vamos a ignorar por el momento
+
+62
+00:03:42,330 --> 00:03:47,380
+el manejo de la memoria, supón que no 
+es muy difícil asignar la memoria.
+
+63
+00:03:47,380 --> 00:03:51,650
+Pero, supongamos que, bien, lo que hacemos 
+con el compilador, queremos poner a cero
+
+64
+00:03:51,650 --> 00:03:56,030
+todas estas celdas en la memoria y esto
+ nos va a acarrear un poco de trabajo,
+
+65
+00:03:56,030 --> 00:03:58,500
+porque por cada celda, lo que 
+tenemos que hacer, básicamente,
+
+66
+00:03:58,500 --> 00:04:03,120
+es poner a cero esa celda, y después necesitamos
+ incrementar un contador que nos diga
+
+67
+00:04:03,120 --> 00:04:05,292
+en qué celda estaremos después,
+
+68
+00:04:05,292 --> 00:04:09,120
+y entonces tal vez necesitemos checar si no estamos al final.
+
+69
+00:04:09,120 --> 00:04:12,920
+Si estamos al final, vamos a la siguiente línea.
+
+70
+00:04:12,920 --> 00:04:15,950
+Ahora, por cada celda necesitamos hacer
+ una cierta cantidad de trabajo.
+
+71
+00:04:15,950 --> 00:04:21,130
+Tenemos que hacer algo como escribir, 
+comparar, hacer un incremento.
+
+72
+00:04:21,130 --> 00:04:25,840
+Y no está completamente claro cuántas operaciones son éstas,
+
+73
+00:04:25,840 --> 00:04:30,050
+pero es una cantidad de trabajo
+ constante por cada celda en el arreglo.
+
+74
+00:04:30,050 --> 00:04:31,250
+Hay n+1 celdas,
+
+75
+00:04:31,250 --> 00:04:37,220
+esto es un tiempo O(n), alguna constante veces n.
+
+76
+00:04:37,220 --> 00:04:39,570
+Después, hacemo igual a 0 al elemento cero del arreglo.
+
+77
+00:04:39,570 --> 00:04:42,150
+Y esto puede ser sólo una simple asignación.
+
+78
+00:04:42,150 --> 00:04:46,400
+Podríamos cargar unas cuantas cosas en registros 
+o hacer alguna aritmética de punteros,
+
+79
+00:04:46,400 --> 00:04:51,080
+pero, no importa si esto es sólo una
+ operación de la máquina, o 5 o 7,
+
+80
+00:04:51,080 --> 00:04:54,770
+va a ser un número constante de
+ operaciones de máquina, O(1).
+
+81
+00:04:56,380 --> 00:04:59,390
+Similarmente con el primer elemento,
+ lo hacemos igual a uno, tiempo O(1).
+
+82
+00:05:00,990 --> 00:05:02,520
+Después vamos por este bucle,
+
+83
+00:05:02,520 --> 00:05:07,572
+para i de 2 a n, el tamaño es n-1, esto es tiempo O(n).
+
+84
+00:05:08,910 --> 00:05:11,540
+Lo más importante que hacemos en el bucle es asignar
+
+85
+00:05:11,540 --> 00:05:16,110
+el i-ésimo elemento del arreglo
+ como la suma del i-1 e i-2 elementos.
+
+86
+00:05:16,110 --> 00:05:18,800
+Ahora, las búsquedas, y el almacenamiento,
+
+87
+00:05:18,800 --> 00:05:22,600
+todo eso ya vimos que deben ser O(1).
+
+88
+00:05:22,600 --> 00:05:25,510
+Pero la suma es un poco peor.
+
+89
+00:05:25,510 --> 00:05:29,010
+Normalmente las sumas llevan un tiempo constante.
+
+90
+00:05:29,010 --> 00:05:31,010
+Pero éstos son números grandes.
+
+91
+00:05:31,010 --> 00:05:35,260
+Recuerda, el Fibonacci n-ésimo tiene cerca de n/5 dígitos,
+
+92
+00:05:35,260 --> 00:05:37,960
+son muy grandes, y a menudo no cabrán en ninguna máquina.
+
+93
+00:05:39,100 --> 00:05:42,680
+Ahora, si te preguntas qué pasa
+ si sumas dos números muy grandes,
+
+94
+00:05:42,680 --> 00:05:44,280
+¿cuánto tiempo lleva eso?
+
+95
+00:05:44,280 --> 00:05:47,460
+Bien, haces las sumas de las unidades, decenas,
+
+96
+00:05:47,460 --> 00:05:49,440
+centenas,
+
+97
+00:05:49,440 --> 00:05:52,720
+los millares, y así sucesivamente.
+
+98
+00:05:52,720 --> 00:05:55,800
+Y, tienes que hacer trabajo por cada
+ uno de los lugares de los dígitos.
+
+99
+00:05:56,810 --> 00:06:01,310
+Y así, la cantidad de trabajo que debes
+ hacer es proporcional al número de dígitos
+
+100
+00:06:01,310 --> 00:06:05,120
+que en este caso es proporcional a n,
+
+101
+00:06:05,120 --> 00:06:08,590
+así que esta línea de código debe llevar un tiempo O(n).
+
+102
+00:06:09,820 --> 00:06:13,570
+Finalmente tenemos el paso de la devolución, que es
+ una aritmética de punteros y una búsqueda en el arreglo,
+
+103
+00:06:13,570 --> 00:06:15,660
+tal vez el apilamiento del programa aparezca,
+
+104
+00:06:15,660 --> 00:06:19,730
+y no es muy claro cuánto tiempo lleva, pero es muy claro 
+
+105
+00:06:19,730 --> 00:06:24,590
+que es una cantidad de tiempo constante,
+ no se vuelve peor conforme n aumenta.
+
+106
+00:06:24,590 --> 00:06:25,410
+Así que es O(1).
+
+107
+00:06:26,900 --> 00:06:29,690
+Así que sólo tenemos que sumar esto,
+
+108
+00:06:29,690 --> 00:06:35,690
+O(n), más O(1), más O(1), más O(n)
+ por el número de veces en el bucle,
+
+109
+00:06:35,690 --> 00:06:41,130
+que es O(n), más O(1), lo sumamos todo,
+
+110
+00:06:41,130 --> 00:06:46,320
+el término dominante, que es el único que 
+necesitamos, es O(n) por O(n),
+
+111
+00:06:46,320 --> 00:06:48,160
+que es O(n^2).
+
+112
+00:06:48,160 --> 00:06:50,410
+Entonces este algoritmo corre en tiempo O(n^2).
+
+113
+00:06:51,640 --> 00:06:54,890
+Ahora, no sabemos excatamente cuáles son las constantes,
+
+114
+00:06:54,890 --> 00:06:59,590
+pero O(n^2) significa que si 
+quieres terminar esto en un segundo,
+
+115
+00:06:59,590 --> 00:07:03,260
+probablemente puedas manejar datos
+ de un tamaño de alrededor de 30 mil.
+
+116
+00:07:03,260 --> 00:07:07,230
+Ahora, dependiendo de la computadora 
+que tengas y el compilador y todos estos
+
+117
+00:07:07,230 --> 00:07:11,590
+detalles horribles, tal vez puedas manejar 
+datos de tamaño mil en un segundo,
+
+118
+00:07:11,590 --> 00:07:14,630
+o tal vez datos del tamaño de un millón en un segundo.
+
+119
+00:07:14,630 --> 00:07:19,850
+Probablemente no va a ser tan bajo como 10
+ o tan alto como mil millones, pero, quiero decir,
+
+120
+00:07:19,850 --> 00:07:26,410
+30 mil es una buena estimación, y requiere 
+de trabajo el lograr algo mejor que eso.
+
+121
+00:07:27,910 --> 00:07:30,360
+Entonces, esto no nos da una respuesta exacta pero es muy bueno.
+
+122
+00:07:31,950 --> 00:07:34,610
+OK, entonces, así es como usamos la notación O grande.
+
+123
+00:07:34,610 --> 00:07:38,010
+Resulta que, ocasionalmente, quieres decir algunas otras cosas.
+
+124
+00:07:38,010 --> 00:07:42,140
+O grande nada más nos dice que mis 
+tiempos están acotados por arriba,
+
+125
+00:07:42,140 --> 00:07:44,640
+por algún múltiplo de esta cosa.
+
+126
+00:07:44,640 --> 00:07:46,030
+Algunas veces quieres decir lo contrario,
+
+127
+00:07:46,030 --> 00:07:49,530
+algunas veces querrás decir que estás acotado por abajo.
+
+128
+00:07:49,530 --> 00:07:50,880
+Y hay una notación diferente para eso.
+
+129
+00:07:52,010 --> 00:07:56,550
+Si quieres decir que f está acotada por g por
+ debajo, que no crece más lento que g,
+
+130
+00:07:56,550 --> 00:08:00,810
+entonces dices que f(n) es Omega de g(n).
+
+131
+00:08:00,810 --> 00:08:02,735
+Y eso significa que para alguna constante c,
+
+132
+00:08:02,735 --> 00:08:07,290
+f(n) es al menos c veces g(n), para toda n grande.
+
+133
+00:08:08,520 --> 00:08:11,090
+Ahora, en lugar de decir, acotada por arriba o acotada por abajo,
+
+134
+00:08:11,090 --> 00:08:13,300
+algunas veces quieres decir que crecen a la misma razón.
+
+135
+00:08:14,460 --> 00:08:17,632
+Y para eso usas Theta grande de g(n).
+
+136
+00:08:17,632 --> 00:08:21,913
+Lo que significa que f es tanto O de g como Omega de g.
+
+137
+00:08:21,913 --> 00:08:26,510
+Lo que significa que, hasta una constante, f y g crecen al mismo ritmo.
+
+138
+00:08:28,260 --> 00:08:33,490
+Finalmente, algunas veces, en lugar de 
+decir que f no crece más rápido que g,
+
+139
+00:08:33,490 --> 00:08:37,920
+tienes que decir que crece estrictamente
+ más lento que g, y para eso
+
+140
+00:08:37,920 --> 00:08:39,665
+dices f(n) is o pequeña de g(n).
+
+141
+00:08:41,270 --> 00:08:45,580
+Y esto dice que, no solamente el
+ cociente entre f(n) y g(n) está acotado
+
+142
+00:08:45,580 --> 00:08:51,070
+por arriba por alguna constante, sino que a esta constante
+ la podemos hacer realmente tan pequeña como queramos.
+
+143
+00:08:51,070 --> 00:08:55,840
+En particular, esto significa que el cociente
+ entre f(n) y g(n) se hace cero
+
+144
+00:08:55,840 --> 00:08:56,850
+cuando n tiende a infinito.
+
+145
+00:08:58,250 --> 00:09:01,400
+Entonces, estas son algunas otras notaciones
+ que podrías ver de vez en cuando.
+
+146
+00:09:01,400 --> 00:09:02,820
+Estaría bien que lo recordaras.
+
+147
+00:09:02,820 --> 00:09:03,900
+Son útiles.
+
+148
+00:09:03,900 --> 00:09:06,385
+O grande es la que casi siempre aparece,
+
+149
+00:09:06,385 --> 00:09:09,550
+porque lo que queremos hacer es 
+acotar nuestros tiempos por arriba,
+
+150
+00:09:09,550 --> 00:09:12,900
+es como la gran cosa importante, 
+pero los otros también son útiles.
+
+151
+00:09:14,630 --> 00:09:17,750
+Entonces, para resumir la cosa sobre la notación asintótica,
+
+152
+00:09:17,750 --> 00:09:21,380
+lo que nos permite es ignorar todas estos
+ detalles complicados en el análisis
+
+153
+00:09:21,380 --> 00:09:22,300
+de los tiempos, como ya vimos.
+
+154
+00:09:23,310 --> 00:09:27,050
+Produce respuestas muy limpias que nos dicen 
+mucho sobre el tiempo asintótico
+
+155
+00:09:27,050 --> 00:09:27,720
+de las cosas.
+
+156
+00:09:29,200 --> 00:09:31,280
+Y todo esto lo hace muy útil.
+
+157
+00:09:31,280 --> 00:09:34,090
+Lo que significa que la vamos a usar
+ extensivamente durante el curso.
+
+158
+00:09:34,090 --> 00:09:35,650
+Así que mejor acostúmbrate a la notación.
+
+159
+00:09:36,790 --> 00:09:40,770
+Pero, tira por la borda mucha información práctica.
+
+160
+00:09:40,770 --> 00:09:43,190
+Por lo que si realmente quieres hacer tu programa rápido,
+
+161
+00:09:43,190 --> 00:09:45,370
+necesitas ver más cosas que sólo el tiempo en O grande.
+
+162
+00:09:46,530 --> 00:09:49,180
+Pero, además de eso, la vamos a usar.
+
+163
+00:09:50,270 --> 00:09:51,069
+Con esta lección
+
+164
+00:09:51,069 --> 00:09:54,210
+básicamente terminamos el material 
+introductorio que necesitamos.
+
+165
+00:09:54,210 --> 00:09:57,450
+En la próxima lección voy a hablarte sobre un resumen del resto
+
+166
+00:09:57,450 --> 00:10:00,050
+del curso, y algo de nuestra filosofía sobre éste.
+
+167
+00:10:00,050 --> 00:10:02,680
+Y después de eso, vamos a entrar
+ directamente al meollo del asunto.
+
+168
+00:10:02,680 --> 00:10:06,700
+Empezaremos a hablar sobre importantes
+ formas clave de desarrollar algoritmos.
+
+169
+00:10:06,700 --> 00:10:08,080
+Así que espero que lo disfrutes.

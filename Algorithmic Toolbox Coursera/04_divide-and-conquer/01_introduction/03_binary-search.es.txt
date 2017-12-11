@@ -1,0 +1,41 @@
+Hola, hablemos ahora de la búsqueda binaria. Un diccionario es un buen ejemplo de una lista ordenada. OK, básicamente cada palabra está ordenada. Y eso hace que encontrar palabras sea mucho más fácil. Puedes imaginar lo difícil que sería buscar en un diccionario, si el orden de las palabras fuera aleatorio. Tendrías que buscar en cada una de
+ las páginas, y, de hecho, cada palabra de cada página. Tomaría mucho tiempo. Entonces veamos el enunciado del problema
+ para buscar en en arreglo ordenado. Entonces lo que tenemos de entrada es A, 
+un arreglo, junto con las cotas inferior y superior que especifican los límites
+ en los que hay que buscar en el arreglo. Lo que es importante sobre el arreglo es que está ordenado. Lo que queremos decir con eso es que
+ si vemos un elemento en el índice i y entonces el siguiente elemento, el primer
+ elemento no es mayor que el siguiente. No decimos menor que, porque queremos permitir arreglos con elementos repetidos. Esto es llamado oficialmente un arreglo
+ monotónico no decreciente. La otra entrada es la clave que hay que buscar. La salida de esto es un índice tal que el elemento en ese índice del arreglo es igual a la clave. Decimos que "un" elemento y no "el" elemento 
+como lo hicimos en la búsqueda lineal, debido al hecho de que puedan haber más elementos, más que concuerden porque puede
+ haber duplicados en el arreglo. Si no hay concordancia, en lugar de devolver "NOT_FOUND" 
+como lo hicimos en el caso lineal, vamos a devolver información algo más útil, que es, dónde en el arreglo insertarías el elemento, si es que quisieras insertarlo, o dónde estaría, si estuviera ahí. Así que lo que vamos a devolver es el índice más alto tal que A_i es menor que k. Esto es, si la clave no está en el arreglo, devolvemos un índice tal que si ves el 
+elemento que se encuentra en ese índice, es menor que la clave, pero el siguiente
+ elemento es mayor que la clave. Y tenemos que considerar el hecho 
+de qué pasa si cada elemento del arreglo es mayor que la clave. En ese caso vamos a continuar y devolveremos low-1. Fíjate en este ejemplo. Tenemos este arreglo con 7 elementos
+ y el elemento 20 está repetido. Si buscamos a 2 en este arreglo, 
+queremos continuar y devolver 0, diciendo que cada elemento en este arreglo es mayor que 2. Si por el otro lado, buscamos a 3, entonces devolvemos 1. Si buscamos 4, también vamos a devolver 1, lo que realmente significa que está entre 1 y 2. Esto es, es mayor que 3 pero menor que 5. Si buscamos 20, devolvemos 4. O, podríamos devolver 5, cualquiera de los dos es válido porque 20
+ está presente en esos dos índices. Y si buscamos 60 devolveremos 7. Pero si buscamos 70 también devolveremos 7. Entonces veamos nuestra implementación
+ de la búsqueda binaria. Entonces vamos a escribir una rutina recursiva, 
+que toma como entrada A, low, high y k, como lo especificamos en el enunciado del problema. Primero, nuestro caso base. Si tenemos un arreglo vacío, esto es, si high es menor que low, no hay elementos, entonces devolvemos low-1. De otra forma vamos a calcular el punto medio. Queremos algo que está a medio camino de low y high, así que lo que hacemos es estimar el
+ ancho, que es high menos low, cortarlo a la mitad, o sea, dividirlo por 2, y agregarlo a low. Esto no podría ser entero, porque (high-low)/2 puede darnos una fracción, así que vamos a tomar la función piso de esto. Por ejemplo, en el caso previo, 
+teníamos 1 a 6, lo que da 7-1=6, dividido por 2 es 3, más nuestro low que
+ es 1 da 4, y el punto medio es 4. Veremos un ejemplo de esto pronto. Y ahora checamos y vemos si el elemento en
+ el punto medio es igual a nuestra clave. Si lo es, terminamos, lo devolvemos. Si no, las buenas noticias son, por supuesto, que no tenemos que checar todos los otros elementos,
+ hemos desechado la mitad de ellos. Entonces, si la clave es menor que
+ el elemento en el punto medio, entonces podemos ignorar todos los 
+que estén arriba de ese punto. Así que seguimos adelante y ahora devolvemos
+ la búsqueda binaria en A desde low a mid-1, ignorando completamente el resto. De otro modo, si la clave es mayor que el punto medio, de nuevo podemos desechar toda la parte inferior 
+e ir desde el punto medio +1 hasta high. Veamos un ejemplo. Digamos que buscamos la clave 50
+ en este arreglo de 11 elementos. Así que haremos nuestra búsqueda binaria 
+en este arreglo, del 1 al 11, buscando a 50. Low es 1, high es 11. Calculamos el punto medio, que será 11-1, 10 dividido por 2 es 5, sumamos 1, el punto medio es 6. Y ahora checamos si el elemento en
+ el punto medio es igual a 50. Pues no. El elemento en el punto medio es 15 y
+ el elemento que estamos buscando es la clave que buscamos es 50. Así que seguimos e ignoramos la parte inferior del arreglo y llamamos a la búsqueda binaria de nuevo, 
+con low=7, uno más que el punto medio. Ahora tenemos una versión más pequeña del problema. Buscamos a 50 entre los elementos del 7 al 11, 
+calculamos el punto medio, 11-7 es 4, dividido por 2 es 2, lo agregamos a 7 para obtener un punto medio de 9. Checamos si el elemento en el índice 9 es igual a la clave. El elemento en el índice 9 es 20, nuestra
+ clave es 50, no, no son iguales. Sin embargo, 50 es mayor que 20, así que continuamos y hacemos una nueva llamada recursiva con
+ low igual al punto medio +1 que es 10. Así que hacemos nuestra búsqueda binaria de 10 a 11, calculamos el punto medio, high-low, 11-10 es 1, dividido por 2 es un medio, +10 es 10.5, tomamos el piso de eso, tenemos 10, así que
+ nuestro punto medio es 10 y medio, ¡perdón!, es 10. Y ahora checamos, ¿es el valor en el elemento 10 igual a nuestra clave? Bueno pues el valor en el elemento 10 
+es 50, nuestra clave es 50, así que sí, vamos a seguir adelante y devolver el punto medio que es 10. En resumen, entonces, lo que hicimos 
+fue dividir nuestro problema en subproblemas que no se traslapan del mismo tipo. Resolvimos recursivamente estos subproblemas. Y entonces combinamos los resultados de estos subproblemas. Dividimos el problema en un problema de la mitad del tamaño, ligeramente menor a la mitad, Resolvimos recursivamente ese subproblema y entonces combinamos el resultado muy 
+sencillamente sólo devolviendo el resultado. En el siguiente video vamos a continuar
+ y checar el tiempo de ejecución de la búsqueda binaria, junto con una versión iterativa. Y regresaremos a discutir el problema que discutimos sobre el problema de la traducción del diccionario. Nos veremos pronto.

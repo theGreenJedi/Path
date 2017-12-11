@@ -1,0 +1,324 @@
+1
+00:00:00,160 --> 00:00:02,310
+Aquí vamos a hablar del Teorema Maestro.
+
+2
+00:00:02,310 --> 00:00:05,370
+Describiremos lo que es el teorema maestro y cómo lo usamos,
+
+3
+00:00:05,370 --> 00:00:08,180
+y reservaremos para el siguiente video una demostración.
+
+4
+00:00:10,960 --> 00:00:15,370
+Han sido varias las veces en que tuvimos que
+ escribir una relación de recurrencia
+
+5
+00:00:15,370 --> 00:00:16,920
+para un problema de divide y vencerás.
+
+6
+00:00:16,920 --> 00:00:19,250
+Este es un ejemplo de uno para búsqueda binaria.
+
+7
+00:00:19,250 --> 00:00:21,760
+Dividimos el problema en uno que es la mitad de grande
+
+8
+00:00:21,760 --> 00:00:24,150
+y hacemos una cantidad de trabajo constante en cada nivel.
+
+9
+00:00:24,150 --> 00:00:28,620
+Esto nos da una solución T(n)=O(log n).
+
+10
+00:00:28,620 --> 00:00:32,290
+El problema es que para cada uno de éstos tenemos
+ que crear un árbol de recurrencia,
+
+11
+00:00:32,290 --> 00:00:35,780
+averiguar cuánto trabajo se hizo en cada nivel, sumar ese trabajo.
+
+12
+00:00:35,780 --> 00:00:40,920
+Eso es mucho que hacer para resolver cada relación de recurrencia.
+
+13
+00:00:40,920 --> 00:00:46,320
+Aquí hay un ejemplo que usamos en la multiplicación de polinomios.
+
+14
+00:00:46,320 --> 00:00:50,680
+Dividimos el problema en 4 subproblemas, cada uno de mitad del tamaño,
+
+15
+00:00:50,680 --> 00:00:52,410
+e hicimos una cantidad lineal de trabajo.
+
+16
+00:00:52,410 --> 00:00:56,010
+Y la solución fue T(n)=O(n^2).
+
+17
+00:00:56,010 --> 00:00:59,040
+Cuando tuvimos el algoritmo más eficiente,
+ donde tuvimos sólo 3 subproblemas
+
+18
+00:00:59,040 --> 00:01:05,010
+en lugar de 4, obtuvimos una solución de O(n a la log_2(3)).
+
+19
+00:01:05,010 --> 00:01:08,570
+Algunas veces dividimos un problema en sólo dos subproblemas
+
+20
+00:01:08,570 --> 00:01:12,340
+y ahí la solución es O(n log n).
+
+21
+00:01:12,340 --> 00:01:16,670
+Entonces, ¿no sería bueno si hubiera una forma
+ de que tuviéramos una fórmula
+
+22
+00:01:16,670 --> 00:01:20,750
+que nos dé la solución en lugar de crear el árbol de recurrencia cada vez?
+
+23
+00:01:20,750 --> 00:01:22,420
+Y eso es lo que el Teorema Maestro hace, básicamente.
+
+24
+00:01:23,510 --> 00:01:28,080
+Entonces, el Teorema Maestro dice que si tienes una 
+relación de recurrencia T(n) igual a
+
+25
+00:01:28,080 --> 00:01:33,570
+alguna constante, veces T(el techo de n/b)
+
+26
+00:01:33,570 --> 00:01:37,520
+más un polinomio en n, de grado d,
+
+27
+00:01:39,330 --> 00:01:43,050
+y esa función techo, por cierto, podría ser también el piso
+
+28
+00:01:43,050 --> 00:01:45,840
+o no estar ahí si n fuera una potencia de b.
+
+29
+00:01:46,950 --> 00:01:49,530
+En cualquier caso, a es una constante mayor que 0,
+
+30
+00:01:49,530 --> 00:01:52,560
+b es mayor que 1 porque queremos asegurar que el tamaño del problema
+
+31
+00:01:52,560 --> 00:01:53,620
+se reduzca,
+
+32
+00:01:53,620 --> 00:01:55,340
+y d es mayor o igual a 0.
+
+33
+00:01:55,340 --> 00:01:57,860
+Bueno, en ese caso tenemos una solución para T(n).
+
+34
+00:01:57,860 --> 00:02:00,620
+Hay tres subcasos.
+
+35
+00:02:00,620 --> 00:02:04,610
+El caso número 1, como será en todos los casos,
+ depende de la relación entre d,
+
+36
+00:02:04,610 --> 00:02:05,620
+a y b.
+
+37
+00:02:05,620 --> 00:02:08,940
+En particular, si d es mayor que log en base b de a,
+
+38
+00:02:08,940 --> 00:02:13,530
+entonces la solución es polinomial en n, O(n^d).
+
+39
+00:02:14,770 --> 00:02:17,370
+Si d es exactamente igual a log en base b de a,
+
+40
+00:02:17,370 --> 00:02:21,940
+entonces la solución es O de n^d con un factor extra de log n.
+
+41
+00:02:23,010 --> 00:02:25,470
+Y finalmente, si d es menor que log en base b de a,
+
+42
+00:02:25,470 --> 00:02:28,330
+entonces la solución es O de n a la log en base b de a.
+
+43
+00:02:31,060 --> 00:02:34,050
+Veamos algunas aplicaciones de este teorema.
+
+44
+00:02:34,050 --> 00:02:38,200
+Aquí hay una, donde regresamos a la multiplicación polinomial.
+
+45
+00:02:38,200 --> 00:02:41,940
+Aquí a es 4, b es 2, y d es 1,
+
+46
+00:02:41,940 --> 00:02:44,870
+porque O(n) es O(n^1).
+
+47
+00:02:44,870 --> 00:02:48,440
+Y checamos la relación entre d, que es 1,
+
+48
+00:02:48,440 --> 00:02:52,310
+y log en base b de a, que es log_2(4), o 2.
+
+49
+00:02:52,310 --> 00:02:56,615
+Bueno, claramente d es menor que log en base b de a,
+ así que estamos en el caso 3.
+
+50
+00:02:56,615 --> 00:03:01,782
+Por tanto, T(n)=O(log en base b de a),
+
+51
+00:03:01,782 --> 00:03:04,450
+o sólo, O(n^2).
+
+52
+00:03:04,450 --> 00:03:08,180
+Si ahora cambiamos 4 por 3, a es 3, b es 2, d es 1.
+
+53
+00:03:08,180 --> 00:03:12,620
+Todavía d es menor a log en base b de a porque
+
+54
+00:03:12,620 --> 00:03:16,608
+log en base 2 de 3 es mayor que 1, y de nuevo estamos en el caso tres.
+
+55
+00:03:16,608 --> 00:03:21,924
+T(n)=O(n a la log en base b de a), que es igual a O(n a la log_2(3)).
+
+56
+00:03:24,302 --> 00:03:27,080
+Si reducimos el 3 a 2, ¿qué pasa?
+
+57
+00:03:27,080 --> 00:03:30,310
+Bueno, aquí a es 2, b es 2, d es 1,
+
+58
+00:03:30,310 --> 00:03:33,720
+log en base b de a es log_2(2) que es 1.
+
+59
+00:03:33,720 --> 00:03:35,550
+Así que ahora d es igual a log en base b de a,
+
+60
+00:03:35,550 --> 00:03:37,410
+estamos en el caso 2 ahora.
+
+61
+00:03:37,410 --> 00:03:43,385
+Y así, T(n)=O(n log n).
+
+62
+00:03:43,385 --> 00:03:47,690
+Ahora mostremos un ejemplo que también es del caso 2,
+
+63
+00:03:47,690 --> 00:03:49,926
+éste es el ejemplo de la búsqueda binaria,
+
+64
+00:03:49,926 --> 00:03:52,770
+a es 1, b es 2, d es 0.
+
+65
+00:03:52,770 --> 00:03:58,000
+El log en base 2 de uno, log en base b de a, es igual a cero.
+
+66
+00:03:58,000 --> 00:04:00,330
+Así que d es igual a log en base b de a,
+
+67
+00:04:00,330 --> 00:04:04,344
+estamos en el caso 2. T(n)=O(n^d log n),
+
+68
+00:04:04,344 --> 00:04:08,200
+lo que es O(n^0 log n), que es simplemente O(log n).
+
+69
+00:04:08,200 --> 00:04:11,970
+Y un ejemplo final donde estamos en el caso uno.
+
+70
+00:04:11,970 --> 00:04:15,500
+Aquí, a es 2, b es 2 y d es 2,
+
+71
+00:04:15,500 --> 00:04:19,090
+así que log en base b de a es log_2(2), que es 1,
+
+72
+00:04:19,090 --> 00:04:21,690
+así que d es ahora mayor que log en base b de a,
+
+73
+00:04:21,690 --> 00:04:29,452
+estamos en el caso uno, T(n)=O(n^d), que es O(n^2).
+
+74
+00:04:29,452 --> 00:04:34,974
+Así que lo que hemos visto es que tenemos este
+ Teorema Maestro que nos permite
+
+75
+00:04:34,974 --> 00:04:39,086
+para la mayoría de las recurrencias, y hacemos divide y vencerás,
+
+76
+00:04:39,086 --> 00:04:43,226
+que entra en la fórmula general, nos permite determinar fácilmente
+
+77
+00:04:43,226 --> 00:04:47,304
+en qué caso estamos, en base a la relación entre a, b y d,
+
+78
+00:04:47,304 --> 00:04:49,730
+y entonces determinar el resultado muy rápidamente.
+
+79
+00:04:51,080 --> 00:04:55,080
+En nuestro siguiente video veremos una demostración
+ de por qué el Teorema Maestro funciona.

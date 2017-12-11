@@ -1,0 +1,476 @@
+1
+00:00:00,200 --> 00:00:03,490
+We conclude this lesson with
+a few important remarks.
+
+2
+00:00:04,890 --> 00:00:08,030
+The first remark is about
+a trick called memoization.
+
+3
+00:00:09,190 --> 00:00:13,470
+Usually when designing a dynamic
+program and algorithm, you start
+
+4
+00:00:13,470 --> 00:00:17,940
+with analyzing the structure of an optimal
+solution for your computational problem.
+
+5
+00:00:17,940 --> 00:00:21,460
+You do this to come up with the right
+
+6
+00:00:21,460 --> 00:00:26,070
+definition of a sub-problem that will
+allow you to express the solution for
+
+7
+00:00:26,070 --> 00:00:31,340
+a sub-problem through solutions for
+smaller sub-sub-problems.
+
+8
+00:00:31,340 --> 00:00:36,240
+So, when you write down this recurrence
+relation you can actually transform it
+
+9
+00:00:36,240 --> 00:00:39,970
+to an ISA alternative algorithm or
+a recursive algorithm.
+
+10
+00:00:39,970 --> 00:00:44,100
+The corresponding i 20 algorithm
+just solves all sub-problems,
+
+11
+00:00:44,100 --> 00:00:47,210
+going from smaller ones to larger ones.
+
+12
+00:00:47,210 --> 00:00:51,960
+And for this reason it is also
+sometimes called a bottom up algorithm.
+
+13
+00:00:51,960 --> 00:00:56,960
+On the other hand, the recursive
+algorithm to solve a sub-problem
+
+14
+00:00:56,960 --> 00:01:00,580
+makes recursive calls to
+smaller sub-sub-problems.
+
+15
+00:01:00,580 --> 00:01:04,790
+And for this reason it is sometimes
+called the top down approach.
+
+16
+00:01:04,790 --> 00:01:08,980
+Well if you implement
+a recursive algorithms
+
+17
+00:01:08,980 --> 00:01:13,830
+straightforwardly it might turn out to
+be very slow because it will recompute
+
+18
+00:01:15,710 --> 00:01:17,840
+some radius many, many, many times.
+
+19
+00:01:17,840 --> 00:01:20,090
+Like with three-dimensional numbers for
+example.
+
+20
+00:01:20,090 --> 00:01:23,950
+However, there is a simple trick,
+and it is called memorization,
+
+21
+00:01:23,950 --> 00:01:29,060
+that allows you to avoid re-computing
+many times the same thing.
+
+22
+00:01:29,060 --> 00:01:33,661
+Namely, you can do the following,
+when solving sub-problems,
+
+23
+00:01:33,661 --> 00:01:40,410
+right after solving it you store its
+solution into a table, for example.
+
+24
+00:01:41,440 --> 00:01:48,880
+And when you make a recursive call
+to solve some sub-problem, before
+
+25
+00:01:48,880 --> 00:01:52,758
+trying to solve it, you check in a table
+whether its solution is already stored.
+
+26
+00:01:52,758 --> 00:01:57,070
+And if its solution is already in
+the table which means that it was
+
+27
+00:01:57,070 --> 00:02:00,330
+already computed then you
+just return it immediately.
+
+28
+00:02:00,330 --> 00:02:05,930
+So this recursive call,
+turns out to be just a table look up.
+
+29
+00:02:05,930 --> 00:02:10,710
+So this is how a recursive
+algorithm with memoization works.
+
+30
+00:02:10,710 --> 00:02:15,100
+Let's see how a recursive
+algorithm with memoization for
+
+31
+00:02:15,100 --> 00:02:17,320
+the Knapsack problem looks like.
+
+32
+00:02:17,320 --> 00:02:20,760
+For simplicity let's assume that
+we're talking about the Knapsack
+
+33
+00:02:20,760 --> 00:02:22,200
+we use repetitions.
+
+34
+00:02:22,200 --> 00:02:27,970
+In this case, we need to compute our
+sub-problem for a Knapsack of size w,
+
+35
+00:02:27,970 --> 00:02:31,970
+is just the optimal rate of
+a Knapsack of total weight w.
+
+36
+00:02:31,970 --> 00:02:36,350
+So we computed as follows,
+we computed by recursive procedure.
+
+37
+00:02:36,350 --> 00:02:40,300
+First of all, we check whether its
+solution is already in a hash table.
+
+38
+00:02:40,300 --> 00:02:43,880
+We use hash table to
+store pairs of objects.
+
+39
+00:02:43,880 --> 00:02:50,550
+So, for weight w, we store value
+of w if it is already computed.
+
+40
+00:02:50,550 --> 00:02:55,660
+If it is already in the table, we return
+it immediately, otherwise we just
+
+41
+00:02:55,660 --> 00:03:00,771
+compute it and we make recursive
+calls to compute the values for
+
+42
+00:03:00,771 --> 00:03:07,810
+the sub-problem on w minus wi, okay?
+
+43
+00:03:07,810 --> 00:03:12,660
+And when the value is computed,
+we just store it in our hash table.
+
+44
+00:03:12,660 --> 00:03:17,470
+So this way, we use memoization
+by storing this in the hash table
+
+45
+00:03:17,470 --> 00:03:22,440
+to avoid recomputing
+the same thing once again.
+
+46
+00:03:22,440 --> 00:03:27,210
+So once again, an iterative
+algorithm solves all sub-problems
+
+47
+00:03:27,210 --> 00:03:31,100
+going from smaller ones to larger ones,
+right?
+
+48
+00:03:31,100 --> 00:03:35,380
+And eventually solves the initial problem.
+
+49
+00:03:35,380 --> 00:03:38,580
+On the other hand the recursive
+algorithm goes as follows.
+
+50
+00:03:38,580 --> 00:03:40,780
+So it stars from the initial problem and
+
+51
+00:03:40,780 --> 00:03:45,760
+it makes recursive calls to
+smaller sub-sub-problems, right?
+
+52
+00:03:45,760 --> 00:03:50,882
+So in some sense an iterative algorithm
+and the recursive algorithm are doing
+
+53
+00:03:50,882 --> 00:03:56,530
+the same job, especially if we need to
+solve just old range of sub-problems.
+
+54
+00:03:56,530 --> 00:04:01,720
+However, a recursive algorithm might
+turn to be slightly slower because
+
+55
+00:04:03,550 --> 00:04:06,450
+it solves the same
+sub-problems on one hand.
+
+56
+00:04:06,450 --> 00:04:10,550
+On the other hand, when making
+a recursive call you also need to
+
+57
+00:04:12,000 --> 00:04:14,750
+put the return address on stamp,
+for example.
+
+58
+00:04:14,750 --> 00:04:18,340
+So, the recursive algorithm
+has some overhead.
+
+59
+00:04:18,340 --> 00:04:23,520
+There are however cases when you do not
+need to solve all the sub-problems and
+
+60
+00:04:23,520 --> 00:04:27,450
+the Knapsack problem is nice
+illustration of this situation.
+
+61
+00:04:27,450 --> 00:04:32,880
+So, imagine that we are given an input
+to the Knapsack problem where all
+
+62
+00:04:32,880 --> 00:04:38,050
+the weight of n items together
+with total weight of the Knapsack
+
+63
+00:04:38,050 --> 00:04:40,120
+are divisible by 100, for example.
+
+64
+00:04:41,400 --> 00:04:45,280
+This means that we are actually
+not interested in sub-problems
+
+65
+00:04:45,280 --> 00:04:49,590
+where the weight of the knapsack is
+not divisible by 100, why is that?
+
+66
+00:04:49,590 --> 00:04:55,180
+Well just because for
+any subset of items since all the weight
+
+67
+00:04:55,180 --> 00:04:59,900
+of items is divisible by 100 their
+total weight is also divisible by 100.
+
+68
+00:04:59,900 --> 00:05:04,470
+So in this case an iterative
+algorithm still will solve just
+
+69
+00:05:04,470 --> 00:05:06,370
+whole range of sub-problems.
+
+70
+00:05:06,370 --> 00:05:10,610
+While a recursive algorithm will
+make only those recursive calls
+
+71
+00:05:10,610 --> 00:05:13,720
+that I actually needed to
+compute the final solution.
+
+72
+00:05:13,720 --> 00:05:17,548
+So, it will make only recursive
+course through sub-problems
+
+73
+00:05:17,548 --> 00:05:19,940
+whose weight are divisible by 100.
+
+74
+00:05:19,940 --> 00:05:26,480
+The final remark of this lesson
+is about the running time.
+
+75
+00:05:26,480 --> 00:05:31,850
+So if you remember the running time of
+words that we recently designed in this
+
+76
+00:05:31,850 --> 00:05:35,020
+lesson was the log of n multiplied by w.
+
+77
+00:05:35,020 --> 00:05:41,260
+And this running time looks like
+polynomial, however it is not.
+
+78
+00:05:41,260 --> 00:05:45,674
+And this is why, so consider for
+example, the following input.
+
+79
+00:05:48,405 --> 00:05:52,740
+I mean, I assume that the total weight of
+the knapsack is as shown on this slide.
+
+80
+00:05:52,740 --> 00:05:57,290
+This is a very huge number,
+roughly ten to the 20,
+
+81
+00:05:57,290 --> 00:06:00,320
+I mean 20 digits of
+decimal representation.
+
+82
+00:06:00,320 --> 00:06:05,160
+At the same time, the input size is
+really tiny, just 20 digits, right?
+
+83
+00:06:05,160 --> 00:06:10,420
+So this is not gigabytes of data,
+just 20 digits but on this input
+
+84
+00:06:10,420 --> 00:06:14,710
+already our algorithm will need to
+perform roughly ten to the 20 operations.
+
+85
+00:06:14,710 --> 00:06:20,480
+This is really huge, for
+example we can't do this on our laptops,
+
+86
+00:06:20,480 --> 00:06:28,950
+and this is because to represent the value
+of W, we only need log W digits.
+
+87
+00:06:30,270 --> 00:06:33,621
+So, in case of the Knapsack problem,
+
+88
+00:06:33,621 --> 00:06:38,980
+our input is proportional not to n plus W,
+but to n plus log W.
+
+89
+00:06:40,420 --> 00:06:46,030
+Okay, and if you represent the running
+time in terms of n and log W,
+
+90
+00:06:46,030 --> 00:06:51,400
+then you get the following expression,
+n multiplied by 2 to the log W,
+
+91
+00:06:51,400 --> 00:06:55,610
+which means that our algorithm is
+in fact exponential time algorithm.
+
+92
+00:06:56,650 --> 00:07:03,485
+Put it otherwise, it can only process
+inputs where W is not large enough,
+
+93
+00:07:03,485 --> 00:07:08,240
+it's roughly less than 1 billion,
+for example.
+
+94
+00:07:09,380 --> 00:07:15,660
+Okay, and in fact, we believe that it is
+very difficult to construct an algorithm
+
+95
+00:07:15,660 --> 00:07:22,240
+that will solve this problem in polynomial
+time, in truly polynomial time.
+
+96
+00:07:22,240 --> 00:07:27,615
+In particular, we will learn later in
+this presentation that this problem
+
+97
+00:07:27,615 --> 00:07:32,906
+is considered to be so difficult that for
+solving the Knapsack problem for
+
+98
+00:07:32,906 --> 00:07:36,939
+example, in polynomial time,
+one gets $1 million.

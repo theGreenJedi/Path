@@ -1,0 +1,121 @@
+In the previous video, we proved that
+the running time of the Warshall algorithm on a sequence consisting
+of n elements is big log of n. In this video we will show that
+this bond is essentially optimal. We will do this by showing that
+any correct sorting algorithm that sorts an object by
+comparing pairs of them. Must make a clear stand log in operation
+such as particularly in the worst case. Once again we say that the sorting
+algorithm is comparison based if it sorts the given objects
+just by comparing pairs of them. We can imagine the following situation, we
+have add objects, that look the same, for example in walls, but
+have different weights. And we also have pen balance. And this pen balance is, our only
+way to compare pairs of these balls. And our goal is to rearrange these balls,
+in order of increasing weights. So, for example, the two source and
+algorithms that we'll already consider it, namely the selection sort algorithm and
+the merge sort algorithm are both comparison based algorithms. So for example, the selection
+sort algorithm at each region finds the minimum value in
+the remaining part of the array. And it does so exactly by
+comparing pairs of objects, right? Also, the merge sort algorithm is
+also comparison based algorithm. So it first splits an array into halves. And then it needs to merge
+the two results in arrays. And when merging the results in arrays,
+it also uses comparisons, right? So we take the first two
+elements of two sorted arrays. We compare them, and based on this
+comparison we take one of these elements out of one of those two arrays and
+put it to the result in the array. So this as a formal statement
+that we're going to prove. It says that any
+comparison based algorithm that sorts an object has running time. At least big and
+n log n in the worst case. So but
+in otherwise we can say the following. Assume that you have an algorithm
+that sorts an object by comparing pairs of them. It can be the case that for
+some given both sequences of an object, your algorithm performs less
+than analog operations. Say, linear number of operations. However, it cannot be the case that
+your algorithm always sorts in time, asymptotically less than n log n. Meaning that, there must exist, sequence
+of objects, on which your algorithm will perform at least performing a login
+comparison to sort such sequences. Any comparison based algorithm can be
+shown as a huge tree that contains all possible sequences of comparisons
+that can be made by this algorithm. For example, here on the slide. We show a simple algorithm
+that sort three object. Three objects. So it starts by comparing a1 and a2. If a1 happens to be smaller than a2, then we proceed to comparing a2 and a3. If a2 is smaller than a3,
+then we already know the permutation of the input three objects
+in non-decreasing order. Namely, we know that
+a1 is smaller than a2, and we know that a2 is smaller than a3. So we can just output
+the following permutation. Right. If on the other hand,
+a2 happened to be at least a3, then at this point we already
+know that a2 is greater than a1. And a2 Is no smaller than a3. So at this point, we know that a2 is the
+maximum element among our three elements. However, we still need to compare a1 and
+a3, so we do this comparison, and based on its result, we output either
+this permutation or this permutation. Well this was the case when a1
+happened to be small as an a2. However we need also to consider the case
+when a1 happened to be at least a2. So we proceed similarly in this case. So this is just a toy example for
+an algorithm for a comparison based algorithm comparing
+three objects, sorting three objects. However, such a huge tree can be drawn for
+any comparison based health algorithm. So at the root of this tree
+we have the first comparison. And its children will label just the next comparison that is made based on the
+result of the first comparison and so on. So each internal node is
+labeled with some comparison. And each leaf is labeled with
+a permutation of m input objects. A simple but crucial for this argument
+observation is that in this tree, we must have at least n factorial leaves. And this is because we have n factorial
+different permutations of n input objects. Where n factorial is defined to be
+the product of n and minus one and minus two and so on. So why is that? Why we must have any possible
+permutation as a leaf in our tree? Well, this is just because it is possible
+that this permutation is a lead output, is the right output of our algorithm. So for example on our previous slide, on
+our toy example, we have three objects and there are six possible permutations
+of these three objects, and there are six leaves in our tree. For example one of them is 213 and
+it says that the second element is the smallest one, then goes the first
+element, and then goes the third element. And indeed there are cases
+when this is the right answer. Right? So when the input data
+consists of three objects, such that the second element
+is the smallest one, the first one is the next one, and
+the third element is the largest one. Right? So once again, you have a huge tree which
+carries a comparison based algorithm. There must be at least n factorial leaves, because each possible permutation must
+be present as a leaf in our tree. So on the other hand the maximal number of comparisons made by our algorithm
+corresponds to the depths of our tree. So the depths is defined as
+the maximal number of edges run away from the root to the leaf,
+to some leaf of our tree. So and this is exactly the maximal
+possible number of comparisons which our algorithm makes. So now we would like to show that
+d must be large in our case, must be at least be big
+O omega of analog n. And we know already that our
+tree contains many, many leaves. Mean n factorial is a function
+that grows extremely fast. Okay so, intuitively we would like
+to show that if a tree has many, many leaves, then it has a large depth. And at least intuitively this clear. If you have a tree of very small depths
+then it must just a few leaves, right? But, we know that it has many, many, many leaves,
+in fact at least ten factorial leaves. To formally show this we need the
+following, we need the following estimate. The depths of a binary tree is at
+least a binary algorithm of its number of leaves or equivalently 2 to the depths
+is at least its number of leaves. Well this can be proved formally, but
+let me just show you this informally. Let's concede a tree for
+example of depth 1. So in this case, d is equal to 1. And it is clear that the maximal
+possible number of leaves in a tree of depth 1 is equal to 2. So now, let's try to understand
+what is the maximal possible number of leaves in a depth
+of In a tree of depth 2. For example, this is a tree of depth 2. This is another tree of depth 2,
+it has has three leaves. And this is a tree of depth 2 that has
+maximal possible number of leaves, in this case it is 4. It is 2 to the d indeed. And intuitively it is clear that
+to have a tree of depth d that has maximal possible number of leaves. We need to take a tree which has
+a full binary tree of depth d, right? And this tree has exactly
+2 to the d leaves. So the maximal number of leaves in
+a tree of depth d is 2 to the d. Which proves that 2 to
+the d is at least l. Okay, so the last step that we need to
+show is that if we have n factorial leaves, then the depths of our
+tree is at least big log n again. And we will show this on the next slide. It remains to estimate log of n factorial. We're going to show here that log of n
+factorial is at least c times n log n. Which means as it works that log of
+n factorial is big log of n log n. To do this, we express n
+factorial as a product of 1, 2, 3. And so on n minus 1, and then right algorithm of product of these
+numbers as a sum of their algorithm. So, log of n factorial is equal to log
+of 1 plus log of 2 plus log of 3 and so on plus log of n. So, this is a sum of an object. Let's just throw away the first
+half of this and elements, and leave only the second half. So in this second half,
+we have n over two elements and each of them is at least
+log of n over two, right? So this has algorithms of numbers
+which are at least n over two. So we have n over two. Elements, each of them is at
+least algorithms of n over 2. This allows us to conclude that log sum is
+at least 10 over 2 times log of n over 2. And this in turn be big log of n for
+a simple reason. So log n over 2 is equal to log n minus 1. Well, this grows like log n, right? Because log n is a growing function and
+one is a constant so again minus one goes as log n. And over grows as n, right? So, this is up to constant factors,
+this is just n. So, n over two times log n
+over two grows like n log n. Okay so this concludes our proof, and this concludes the proof of
+the fact that any comparison based algorithm must make at least n log
+n adorations in the worst case. Once again, another conclusion is that
+when merged sort algorithms that we considered in the previous lecture
+e is asymmetrically optimal. In the next video we will see
+an algorithm that actually sorts n given objects in time less than n log n. Actually in time just in linear time. In time big log of n however, it will sort the n given objects,
+knowing something about these objects. It will only sort the given objects
+if the subject has small integers. And we will sort them without actually
+comparing them to each other.

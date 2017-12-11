@@ -1,0 +1,93 @@
+Cystic Fibrosis is one of the most
+common genetic diseases in humans. Approximately one in 25 people
+carries a cystic fibrosis gene. And when both parents carry a faulty gene,
+there is a 25% chance that their child will
+have cystic fibrosis. In the early 1980s biologists started
+the hunt for cystic fibrosis genes, one of the first gene hunting projects in
+the framework of the human genome project. 30 years ago biologists
+narrowed the search for the cystic fibrosis gene to a million
+nucleotide-long region on chromosome 7. However, this region contained many genes,
+and it was not clear which of them is
+responsible for cystic fibrosis. How would you find which of these
+genes is the cause of cystic fibrosis? I'll give you a hint. Cystic fibrosis in
+involves sweat secretion with abnormally high sodium levels. Well, this is a biological
+hint that does not help us to solve the challenge
+of finding something in this one million nucleotide area that
+is responsible for cystic fibrosis. Let me give you hint number two. By that time when cystic
+fibrosis hunt was on, biologists already knew the sequences of
+some genes responsible for secretions. For example, ATP binding proteins act as transport channels responsible for
+secretion. You still may be wondering
+how these two hints may help you to find the cystic
+fibrosis gene in the found one million nucleotide-long
+region on chromosome 7. But here's my third hint. Should we search for
+genes in this region that are similar to known genes responsible for secretion? Biologists used this third hint and bingo, they found that one of genes in
+this region was similar to the ATP binding proteins that act as transport
+channels responsible for secretion. To learn how biologists find
+similarities between chance, we will first learn how to play a simple
+game called the alignment game. The alignment game is
+a single person game. I give you two strings, and
+your goal is to remove symbol from the strings in such a way that
+the number of points is maximized. I have to explain to you how you can get
+points for playing the alignment game. You can either remove the first
+symbol from both strings. And in this case, you get one
+point if they're the same symbol, you don't get any points if
+they are different symbol. Or you can remove first symbol
+from one of the strings and in this case you also
+don't get any points. So let's try to play this game. In the beginning it makes sense to remove
+the first symbol from both strings, we'll get plus one. Then another pair of identical symbols,
+another plus one. And now symbols are different so it doesn't make sense to remove them
+both because we'll get zero point. Maybe we should only remove C from
+the second string and after we've done this there is a possibility
+to remove two Gs from both string. We get another point we continue,
+continue, continue, and finally after playing this game
+we get score of plus four. Do you think you can get score
+of plus five playing this game? We also after playing this
+game have constructed something that is
+called alignment of two strings. Alignment of two strings is
+a two row matrix such that, that first row consist of symbols
+of the first string in order, possibly interspaced
+with the space symbol. And the second row consists of the
+symbols of the second string once again, possibly interspersed
+with the space symbol. After we constructed the alignment,
+we can classify different columns in the alignment
+matrix as matches or mismatches or insertions. Insertions corresponds to the case
+when we selected the symbol from the second string and deletions that correspond to the case when we
+selected the symbol from the first string. And more over we can score this
+alignment by giving premium for every match, we'll give premium plus
+one and penalty for every mismatch and every insertion and
+deletion that we denote as indel. In our case we will use penalty
+minus mu for mismatches and penalty minus sigma for
+insertions and deletions or indels. For example in our case
+if mu equals zero and sigma equal to one,
+then we get alignment score equal to one. So we define the alignment score
+as number of matches minus mu number of mismatches and
+minus sigma number of indels. And the optimal alignment problem is
+given two strings mismatch penalty mu, and indel penalty sigma find an alignment
+of two strings maximizing the score. We will be particularly interested in
+one particular score of alignment. We will define common subsequence as simply matches in
+an alignment of two strands. In this case,
+common subsequence is represented by ATGT, and the longest common subsequence
+problems that we will be interested in is the following. Given two strings we want to find the longest common
+subsequence of these strings. And of course,
+you have already recognized that to find longest common subsequence we simply
+need to find maximum score alignment with the parameters mu equals zero and
+sigma equals zero. Another classical problem in computer
+science is the edit distance problem. Given two strings, find the minimum
+number of elementary operations, insertions, deletions, or
+substitutions of symbols. That transform one string into another. And of course the minimum number
+of insertions, deletions, and mismatches in an alignment of two strings,
+represents the edit distance. For example, if you want to find
+the editing distance between the strings, editing and distance, they can construct optimal alignment of the string
+with appropriate scores. Here I show matches,
+mismatches,insertions, deletions. And to see that the edit distance problem
+is equivalent to the alignment problem let's consider this alignment
+between editing and distance. And let's compute the total
+number of symbols in the two strings. Obviously the total number of
+symbol in two strings is equal to twice number of matches,
+plus twice number of mismatches plus number of insertions
+plus number of deletions. I will take the liberty to derive this
+expression and after I rewrote it you will see that the first three terms
+corresponds to the alignment score, and the last three terms
+corresponds to the edit distance. Therefore, minimizing edit distance is the
+same as maximizing the alignment score. Which means the edit distance problem
+is just one particular version of the alignment problem.

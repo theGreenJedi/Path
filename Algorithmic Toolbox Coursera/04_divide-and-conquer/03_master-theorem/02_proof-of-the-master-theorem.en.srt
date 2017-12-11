@@ -1,0 +1,691 @@
+1
+00:00:00,980 --> 00:00:03,510
+In this video, we'll look at a proof
+of how the Master Theorem works.
+
+2
+00:00:05,460 --> 00:00:11,100
+So a reminder, the Master Theorem
+states that if T(n) equals a T of
+
+3
+00:00:11,100 --> 00:00:15,360
+ceiling of n over b plus a polynomial,
+then we have these three cases.
+
+4
+00:00:16,610 --> 00:00:19,260
+So let's do as we normally do
+with a recurrence relation and
+
+5
+00:00:19,260 --> 00:00:20,320
+let's create a recurrence tree.
+
+6
+00:00:21,900 --> 00:00:26,910
+So we'll have our recurrence at the top
+to just remind ourselves what that is.
+
+7
+00:00:26,910 --> 00:00:29,905
+Let's assume for the sake of
+argument that n is a power of b.
+
+8
+00:00:29,905 --> 00:00:36,090
+That's a reasonable assumption since we
+can always just pad n to be larger, right,
+
+9
+00:00:36,090 --> 00:00:41,780
+if we increase it by no more than b we can
+get to the next closest power of b and
+
+10
+00:00:41,780 --> 00:00:44,750
+then this will be a simpler analysis.
+
+11
+00:00:44,750 --> 00:00:45,600
+So we have our problem n.
+
+12
+00:00:45,600 --> 00:00:50,340
+At the next level,
+we break the problem down into
+
+13
+00:00:50,340 --> 00:00:54,920
+a copies of a problem n over b large.
+
+14
+00:00:57,050 --> 00:00:58,680
+So level zero.
+
+15
+00:00:58,680 --> 00:01:00,230
+We have a problem of size n.
+
+16
+00:01:00,230 --> 00:01:02,288
+Level 1 we have problems of size n/b.
+
+17
+00:01:02,288 --> 00:01:07,290
+At the general level i we have
+problems of size n over b to the i.
+
+18
+00:01:07,290 --> 00:01:11,489
+At the bottom level, which is level log
+base b of n, we have problems of size 1.
+
+19
+00:01:13,305 --> 00:01:14,465
+How many problems are there?
+
+20
+00:01:14,465 --> 00:01:17,205
+At level 0 there's of course one problem.
+
+21
+00:01:17,205 --> 00:01:19,435
+At level 1, a problems.
+
+22
+00:01:19,435 --> 00:01:23,015
+And in general at the ith level,
+a to the i problems.
+
+23
+00:01:23,015 --> 00:01:26,720
+At the log base b of n level,
+it's a to the log base b of n.
+
+24
+00:01:28,798 --> 00:01:30,015
+How much work do we have to do?
+
+25
+00:01:31,070 --> 00:01:35,930
+Well work is just a function of
+how many problems we have and
+
+26
+00:01:35,930 --> 00:01:39,740
+the amount of work for each problem.
+
+27
+00:01:39,740 --> 00:01:44,300
+So at level zero we have just
+O(n to the d) work.
+
+28
+00:01:44,300 --> 00:01:46,630
+There's one problem and
+it takes O(n to the d) time.
+
+29
+00:01:48,110 --> 00:01:50,628
+And level one we have a problems.
+
+30
+00:01:50,628 --> 00:01:57,129
+And each of them takes
+O(n over b to the d) work.
+
+31
+00:01:57,129 --> 00:02:01,697
+Okay, we can pull out the a and
+the b and the d to be all together, and
+
+32
+00:02:01,697 --> 00:02:05,220
+that's just O(n to the d)
+times a over b to the d.
+
+33
+00:02:06,960 --> 00:02:09,980
+At the ith level we have
+a to the i problems and
+
+34
+00:02:09,980 --> 00:02:14,860
+each one is 
+O(n over b to the i to the d).
+
+35
+00:02:17,110 --> 00:02:22,080
+Again, we can pull out the a to the i,
+the b to the i, and
+
+36
+00:02:22,080 --> 00:02:24,390
+we're left with O(n to the d)
+
+37
+00:02:24,390 --> 00:02:27,310
+times a over b to the d to the i.
+
+38
+00:02:27,310 --> 00:02:31,660
+And finally, at the bottom level it's
+just a to the log base b of n because
+
+39
+00:02:31,660 --> 00:02:32,790
+the problems are all size 1.
+
+40
+00:02:32,790 --> 00:02:35,500
+It's just
+O(n to the log base b of a).
+
+41
+00:02:37,070 --> 00:02:41,480
+So the total amount of work is the
+summation from 0 to the log base b of n.
+
+42
+00:02:41,480 --> 00:02:46,550
+O(n to the d) times the quantity
+a over b to the d, all that to the i.
+
+43
+00:02:48,590 --> 00:02:54,850
+So let's look at what seems like a slight
+digression, and that is geometric series.
+
+44
+00:02:54,850 --> 00:02:59,890
+So a Geometric Series is
+a series of numbers that
+
+45
+00:02:59,890 --> 00:03:04,680
+progresses by some multiplicative factor.
+
+46
+00:03:05,770 --> 00:03:06,747
+I'll give you an example.
+
+47
+00:03:06,747 --> 00:03:12,855
+If we take 1 + 2 + 4 + 8 + 16 + 32 + 64,
+that's a geometric series
+
+48
+00:03:12,855 --> 00:03:16,800
+where our factor is
+a factor of 2 at each time.
+
+49
+00:03:18,610 --> 00:03:22,652
+Just as well, we could have
+a geometric series that goes down.
+
+50
+00:03:22,652 --> 00:03:28,073
+So we could have, for
+instance, let's say 10,000,
+
+51
+00:03:28,073 --> 00:03:31,276
+1,000, 100, 10, 1.
+
+52
+00:03:31,276 --> 00:03:32,374
+Where we're going down by a constant
+factor of ten at each increment.
+
+53
+00:03:32,374 --> 00:03:38,880
+Now it turns out, our multiplicative
+factor, let's call that r,
+
+54
+00:03:38,880 --> 00:03:42,310
+as long as r is not equal to one we
+have a simple closed form for this.
+
+55
+00:03:42,310 --> 00:03:47,434
+This is just a times 
+
+56
+00:03:47,434 --> 00:03:51,580
+(1-r) to the n over 1 minus r.
+
+57
+00:03:51,580 --> 00:03:55,130
+And it turns out that big O notation,
+
+58
+00:03:55,130 --> 00:04:00,749
+what happens is 
+we care about the largest term.
+
+59
+00:04:01,980 --> 00:04:07,580
+So our sum is going to be bounded by
+a constant times our largest term.
+
+60
+00:04:07,580 --> 00:04:13,010
+So, if r is less than 1 then our
+largest term is the first element a and
+
+61
+00:04:13,010 --> 00:04:15,890
+therefore our solution is O(a).
+
+62
+00:04:15,890 --> 00:04:19,120
+Okay, because it's our largest term,
+it gets smaller,
+
+63
+00:04:19,120 --> 00:04:21,170
+smaller, smaller, smaller, smaller.
+
+64
+00:04:21,170 --> 00:04:23,930
+And as long as it's by this
+multiplicative factor,
+
+65
+00:04:23,930 --> 00:04:26,910
+then all that really
+matters is this first term,
+
+66
+00:04:26,910 --> 00:04:30,480
+because the rest of it sums to no more
+than a constant times that first term.
+
+67
+00:04:30,480 --> 00:04:34,300
+If on the other hand, r is greater than 1,
+then what matters is the very last term,
+
+68
+00:04:34,300 --> 00:04:39,270
+because that's the biggest term and all
+the previous ones are smaller and smaller.
+
+69
+00:04:39,270 --> 00:04:41,960
+So it's smallest, larger,
+larger, larger, largest.
+
+70
+00:04:43,320 --> 00:04:47,880
+And so
+that largest term is a r to the (n-1).
+
+71
+00:04:47,880 --> 00:04:51,670
+So in a geometric series we care
+about either the first term or
+
+72
+00:04:51,670 --> 00:04:52,949
+the last term, whichever one is bigger.
+
+73
+00:04:55,060 --> 00:04:59,510
+Now if we take that back to
+the case of our recurrence tree,
+
+74
+00:04:59,510 --> 00:05:00,720
+we notice our summation here.
+
+75
+00:05:00,720 --> 00:05:05,645
+This is the same summation we had from our
+recurrence tree and we see that we have
+
+76
+00:05:05,645 --> 00:05:10,613
+a geometric series.
+
+77
+00:05:10,613 --> 00:05:15,120
+a is taking the place of
+big O then to the d and
+
+78
+00:05:15,120 --> 00:05:18,130
+r is taking the place
+of a over b to the d.
+
+79
+00:05:18,130 --> 00:05:20,410
+So our multiplicative factor
+is a over b to the d.
+
+80
+00:05:20,410 --> 00:05:22,850
+And there are three cases.
+
+81
+00:05:22,850 --> 00:05:26,560
+You remember as we stated
+the solution to the Master Theorem.
+
+82
+00:05:26,560 --> 00:05:29,730
+Case one is d is greater
+than log base b of a.
+
+83
+00:05:29,730 --> 00:05:34,017
+Well it's equivalent to saying
+a over b to the d is less than 1.
+
+84
+00:05:34,017 --> 00:05:39,380
+So now we have our multiplicative
+term is less than 1.
+
+85
+00:05:39,380 --> 00:05:41,630
+So it's getting smaller and
+smaller and smaller.
+
+86
+00:05:41,630 --> 00:05:45,470
+That means that the largest
+term is the first term.
+
+87
+00:05:45,470 --> 00:05:46,960
+And that's the one that
+we have an order of.
+
+88
+00:05:46,960 --> 00:05:51,900
+So this is big O of,
+officially big O of big O of n to the d,
+
+89
+00:05:51,900 --> 00:05:53,850
+which is just the same
+as big O of n to the d.
+
+90
+00:05:55,990 --> 00:06:01,560
+Case 2, where d equals log base b of a and
+equivalently,
+
+91
+00:06:01,560 --> 00:06:02,740
+a over b to the d is equal 1.
+
+92
+00:06:02,740 --> 00:06:07,180
+Well, if a over b to the d is equal
+to one, remember our geometric
+
+93
+00:06:07,180 --> 00:06:11,340
+series formula didn't hold, so we're
+going to just have to calculate this.
+
+94
+00:06:11,340 --> 00:06:17,490
+But if a over b to the d is 1, then
+a over b to the d to any power is still 1.
+
+95
+00:06:17,490 --> 00:06:19,760
+So that means, that our summation
+
+96
+00:06:20,770 --> 00:06:25,270
+is just a summation from i equals 0 to
+log base b of n of O(n to the d).
+
+97
+00:06:26,910 --> 00:06:29,340
+And that's just 1 plus log base b of n,
+
+98
+00:06:29,340 --> 00:06:33,940
+because that's the number of terms in
+our summation times O(n to the d).
+
+99
+00:06:33,940 --> 00:06:37,830
+Well the 1 is a low order term we don't
+care about, and log base b of n can
+
+100
+00:06:37,830 --> 00:06:42,830
+just be treated as log n, because a base
+change is just some multiplicative factor,
+
+101
+00:06:42,830 --> 00:06:45,750
+and that disappears in our big O notation.
+
+102
+00:06:45,750 --> 00:06:50,330
+So we end up with, as we see in the
+theorem, O(n to the d times log n).
+
+103
+00:06:50,330 --> 00:06:55,290
+And then our final case,
+is d is less than log base b of a,
+
+104
+00:06:55,290 --> 00:07:00,088
+which is equivalent to saying
+a over b to the d is greater than 1.
+
+105
+00:07:00,088 --> 00:07:04,030
+So here, our multiplicative
+factor is greater than 1.
+
+106
+00:07:04,030 --> 00:07:08,560
+So our smallest term is the first term and
+our largest term is the last term.
+
+107
+00:07:08,560 --> 00:07:11,840
+So in this case, this is big O of our
+
+108
+00:07:11,840 --> 00:07:16,620
+last term is O(n to the d) times
+a over b to the d to the log b of n.
+
+109
+00:07:16,620 --> 00:07:19,290
+So, i is log base b of n.
+
+110
+00:07:19,290 --> 00:07:21,150
+This is a bit of a mess.
+
+111
+00:07:21,150 --> 00:07:23,680
+Let's see whether we can
+fix this a little bit.
+
+112
+00:07:23,680 --> 00:07:32,380
+So let's go ahead and apply the log base b
+of n power separately to a and b to the d.
+
+113
+00:07:32,380 --> 00:07:35,800
+So we have, in the numerator,
+a to the log base b of n.
+
+114
+00:07:35,800 --> 00:07:41,000
+And then the denominator,
+b to the d times log base b of n.
+
+115
+00:07:41,000 --> 00:07:43,780
+Well, b to the log base b of n is just n.
+
+116
+00:07:43,780 --> 00:07:48,630
+So, that's going to disappear down
+to n to the d in the denominator.
+
+117
+00:07:48,630 --> 00:07:51,580
+In the numerator,
+a to the log base b of n,
+
+118
+00:07:51,580 --> 00:07:55,430
+by logarithmic identity is equal
+to n to the log base b of a.
+
+119
+00:07:55,430 --> 00:07:57,610
+So we can swap those other two.
+
+120
+00:07:59,480 --> 00:08:03,680
+And now, if we compare big O
+of n to the d and n to the d,
+
+121
+00:08:03,680 --> 00:08:07,700
+we know big O of n to the d is bounded
+by some constant, k times n to the d.
+
+122
+00:08:07,700 --> 00:08:11,350
+So we have k n to the d divided by
+n to the d, which is just some k.
+
+123
+00:08:11,350 --> 00:08:15,900
+And that constant can go away because
+we're still talking about big O notation.
+
+124
+00:08:15,900 --> 00:08:19,880
+So we're left just with big O
+of n to the log base b of a,
+
+125
+00:08:19,880 --> 00:08:21,810
+which is what we have for the final case.
+
+126
+00:08:24,280 --> 00:08:25,570
+So the Master theorem is a shortcut.
+
+127
+00:08:26,595 --> 00:08:28,940
+Our master theorem again
+as a restatement is here.
+
+128
+00:08:30,740 --> 00:08:32,410
+I have a secret to tell you, however.
+
+129
+00:08:32,410 --> 00:08:34,300
+I do not remember the master theorem and
+
+130
+00:08:34,300 --> 00:08:36,500
+I don't actually even look
+up the master theorem.
+
+131
+00:08:36,500 --> 00:08:38,050
+Here's what I do.
+
+132
+00:08:38,050 --> 00:08:43,970
+When I have a recurrence of this rough
+form, I look at the amount of work
+
+133
+00:08:43,970 --> 00:08:49,110
+done at the first level and at the second
+level (which is a very easy calculation) and
+
+134
+00:08:49,110 --> 00:08:52,300
+then I just say to myself Is
+that the same amount of work?
+
+135
+00:08:52,300 --> 00:08:55,090
+If it's the same amount of work it's
+going to be the same amount of work
+
+136
+00:08:55,090 --> 00:08:57,780
+all the way down and so
+we're going to be in case two.
+
+137
+00:08:57,780 --> 00:09:00,850
+So it's going to be the amount
+of work at the first level,
+
+138
+00:09:00,850 --> 00:09:05,520
+which we known is O(n to the d),
+times log n because there are that many levels.
+
+139
+00:09:05,520 --> 00:09:10,860
+On the other hand, if the first
+term is larger than the second term
+
+140
+00:09:10,860 --> 00:09:14,470
+I know the first term is going
+to dwarf all the other terms.
+
+141
+00:09:14,470 --> 00:09:16,428
+And so, we're left with just
+O(n to the d).
+
+142
+00:09:16,428 --> 00:09:22,020
+And finally, if the first term
+is less than the second term,
+
+143
+00:09:22,020 --> 00:09:25,380
+I know they're going to keep increasing
+and it's the bottom term that I need.
+
+144
+00:09:26,820 --> 00:09:31,310
+And that is just going to be the number of
+leaves which is n to the log base b of a.
+
+145
+00:09:33,110 --> 00:09:39,090
+The master theorem is really handy to use
+whether you memorize it or you have it
+
+146
+00:09:39,090 --> 00:09:43,650
+written down and use it or in my case you sort
+of recreate it every time you need it.
+
+147
+00:09:45,000 --> 00:09:45,500
+Thanks.

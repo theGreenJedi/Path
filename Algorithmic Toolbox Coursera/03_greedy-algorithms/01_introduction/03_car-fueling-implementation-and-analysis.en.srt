@@ -1,0 +1,644 @@
+1
+00:00:00,240 --> 00:00:03,840
+Hi, in this video you will learn
+to implement the greedy algorithm
+
+2
+00:00:03,840 --> 00:00:07,540
+from the previous video, and
+analyze its running time.
+
+3
+00:00:07,540 --> 00:00:09,550
+Here we have the pseudocode for
+this algorithm, and
+
+4
+00:00:09,550 --> 00:00:12,240
+the procedure is called MinRefills.
+
+5
+00:00:12,240 --> 00:00:15,690
+And the main input to
+this procedure is array x.
+
+6
+00:00:15,690 --> 00:00:18,230
+From the problems statement, we know that
+
+7
+00:00:18,230 --> 00:00:23,490
+the positions of the gas stations
+are given by numbers from x1 to xn.
+
+8
+00:00:23,490 --> 00:00:27,210
+And those are measured in kilometers
+in terms of distance from
+
+9
+00:00:27,210 --> 00:00:31,910
+A to the corresponding gas station
+along the path from A to B.
+
+10
+00:00:31,910 --> 00:00:36,160
+For convenience, we actually add
+to array x positions of point
+
+11
+00:00:36,160 --> 00:00:41,020
+A which is x0 and
+is the smallest value in the array.
+
+12
+00:00:41,020 --> 00:00:47,215
+And point B, which is Xn plus 1, and
+it is the largest value in the array x.
+
+13
+00:00:49,240 --> 00:00:53,830
+Along our route from A to B,
+we will visit some points.
+
+14
+00:00:53,830 --> 00:00:55,240
+Of course we will start from point A.
+
+15
+00:00:55,240 --> 00:01:00,080
+And then we'll probably go to
+some gas station, refilll there.
+
+16
+00:01:00,080 --> 00:01:05,210
+And then go to another gas station and
+to another gas station and then to another
+
+17
+00:01:05,210 --> 00:01:10,080
+and then at some point we will get
+to the point B or point x n plus 1.
+
+18
+00:01:10,080 --> 00:01:15,970
+So we see that we only need to
+store the positions in the array x.
+
+19
+00:01:15,970 --> 00:01:20,450
+We don't need to consider any positions
+between the elements of array x.
+
+20
+00:01:20,450 --> 00:01:23,420
+And so, we will store in
+the variable currentRefill,
+
+21
+00:01:24,870 --> 00:01:28,450
+the position in the array x
+where we're currently standing.
+
+22
+00:01:28,450 --> 00:01:30,590
+And we will initialize it with 0.
+
+23
+00:01:30,590 --> 00:01:34,900
+Because we start from point A,
+which is the same as x0,
+
+24
+00:01:34,900 --> 00:01:38,209
+and has index 0 in the array x.
+
+25
+00:01:39,960 --> 00:01:45,180
+And later currentRefill will
+store the index in the array x,
+
+26
+00:01:45,180 --> 00:01:46,720
+where we're currently standing.
+
+27
+00:01:47,750 --> 00:01:52,545
+We'll also store the answer to our
+problem in the variable numRefills.
+
+28
+00:01:53,830 --> 00:01:57,200
+At each point in the execution
+of the algorithm,
+
+29
+00:01:57,200 --> 00:02:00,758
+it will contain the number of
+refills we have already made.
+
+30
+00:02:00,758 --> 00:02:05,688
+And we initialize it with zero
+because the problem statement asks us
+
+31
+00:02:05,688 --> 00:02:10,190
+to count the minimum number
+of refills we need to do.
+
+32
+00:02:10,190 --> 00:02:13,730
+Not counting the initial
+refill at point A.
+
+33
+00:02:13,730 --> 00:02:15,260
+So when we are standing at point A,
+
+34
+00:02:15,260 --> 00:02:18,320
+we consider that we haven't
+made any refills yet.
+
+35
+00:02:19,780 --> 00:02:22,560
+Then the main external while loop goes.
+
+36
+00:02:24,090 --> 00:02:27,880
+And it goes on while we're
+still to the left from point B,
+
+37
+00:02:27,880 --> 00:02:32,060
+because then we need to go right
+to reach our destination B.
+
+38
+00:02:32,060 --> 00:02:34,620
+And we check this condition
+with this inequality,
+
+39
+00:02:34,620 --> 00:02:36,430
+that currentRefill is at most n.
+
+40
+00:02:36,430 --> 00:02:41,230
+This means that the position or
+index in the array x is at most n, and so
+
+41
+00:02:41,230 --> 00:02:44,150
+we're to the left from point B currently.
+
+42
+00:02:44,150 --> 00:02:47,220
+In this case we still
+need to go to the right.
+
+43
+00:02:47,220 --> 00:02:52,990
+And first we save our current position in
+the array x in the variable lastRefill.
+
+44
+00:02:52,990 --> 00:02:58,380
+This means that we made our lastRefill
+in the position currentRefill.
+
+45
+00:02:59,510 --> 00:03:05,450
+And now we need to go to the right from
+there, and either get to destination
+
+46
+00:03:05,450 --> 00:03:09,900
+B or get to the rightmost reachable
+gas station and refill there.
+
+47
+00:03:09,900 --> 00:03:12,820
+And the next internal while
+loop does exactly that.
+
+48
+00:03:14,130 --> 00:03:20,910
+It gradually increases our currentRefill
+position in the array x until it reaches
+
+49
+00:03:20,910 --> 00:03:25,546
+the rightmost point in the array x which
+is reachable from the lastRefill position.
+
+50
+00:03:26,960 --> 00:03:31,050
+So first we check that currentRefill
+position is at most n because
+
+51
+00:03:31,050 --> 00:03:35,640
+if it is n plus 1 already it means
+that we reached our destination B.
+
+52
+00:03:35,640 --> 00:03:38,610
+And there is no point
+increasing it further.
+
+53
+00:03:38,610 --> 00:03:40,370
+If it's still to the left from B,
+
+54
+00:03:40,370 --> 00:03:45,224
+then we'll look at the next position
+to the right, x currentRefill plus 1.
+
+55
+00:03:47,020 --> 00:03:50,850
+We need to check whether it's reachable
+from lastRefill position or not.
+
+56
+00:03:50,850 --> 00:03:53,797
+And first we can build the distance
+from the lastRefill position to
+
+57
+00:03:53,797 --> 00:04:00,610
+the currentRefill plus one position by
+subtracting the values of the array x.
+
+58
+00:04:00,610 --> 00:04:05,433
+And if this distance is at most L,
+then it means that we can travel this
+
+59
+00:04:05,433 --> 00:04:08,853
+distance with full tank,
+without any refills.
+
+60
+00:04:08,853 --> 00:04:11,951
+And of course, at the lastRefill position,
+
+61
+00:04:11,951 --> 00:04:15,500
+we could fill our tank
+up to the full capacity.
+
+62
+00:04:15,500 --> 00:04:18,830
+And then we'll be able to travel for
+L kilometers.
+
+63
+00:04:18,830 --> 00:04:23,216
+So, this inequality checks if actually
+position currentRefill plus 1 is
+
+64
+00:04:23,216 --> 00:04:26,100
+reachable from the lastRefill position.
+
+65
+00:04:26,100 --> 00:04:29,890
+If it is,
+we increase the value of currentRefill and
+
+66
+00:04:29,890 --> 00:04:33,020
+go on with our internal while loop.
+
+67
+00:04:33,020 --> 00:04:39,380
+When we exit this internal while loop
+we're already maybe in the point B,
+
+68
+00:04:39,380 --> 00:04:45,189
+or we may be in some point which is
+the farthest reachable gas station.
+
+69
+00:04:46,420 --> 00:04:49,760
+Now we compare it with
+our lastRefill position.
+
+70
+00:04:49,760 --> 00:04:54,960
+And if it turns out that it is the same,
+it means that we couldn't go to the right.
+
+71
+00:04:54,960 --> 00:04:59,270
+We don't have enough fuel even
+to get to the next gas station.
+
+72
+00:04:59,270 --> 00:05:03,820
+And then, we cannot return the minimum
+number of refills that we need to do
+
+73
+00:05:03,820 --> 00:05:08,950
+on the way from A to B, because it is
+impossible to get from A to B at all.
+
+74
+00:05:08,950 --> 00:05:12,320
+And so we return this result IMPOSSIBLE.
+
+75
+00:05:12,320 --> 00:05:17,880
+Otherwise, we moved at least a bit to
+the right, and then we need to see.
+
+76
+00:05:17,880 --> 00:05:21,630
+If we are already in the point B,
+we don't need to do anything else.
+
+77
+00:05:21,630 --> 00:05:23,580
+Otherwise, we need to refill there.
+
+78
+00:05:23,580 --> 00:05:29,279
+So, we check that we're to the left
+from point B with this inequality.
+
+79
+00:05:29,279 --> 00:05:32,950
+And if it's true then we're at some
+gas station and we need to refuel.
+
+80
+00:05:32,950 --> 00:05:36,870
+So we increase the numRefills
+variable by one.
+
+81
+00:05:36,870 --> 00:05:41,000
+And then we return to the start
+of our external while loop.
+
+82
+00:05:41,000 --> 00:05:44,060
+And there we again check if
+we're to the left from point B
+
+83
+00:05:44,060 --> 00:05:46,190
+we need another iteration.
+
+84
+00:05:46,190 --> 00:05:51,110
+And if currentRefill is already n plus 1,
+then we've reached point B and
+
+85
+00:05:51,110 --> 00:05:53,620
+we need to exit the external while loop.
+
+86
+00:05:53,620 --> 00:05:54,480
+And in that case,
+
+87
+00:05:54,480 --> 00:05:58,350
+we just return the answer which is
+number of refills we've made so far.
+
+88
+00:06:00,650 --> 00:06:03,960
+We've implemented the greedy
+algorithm from the previous lecture.
+
+89
+00:06:03,960 --> 00:06:06,219
+Now let's analyze its running time.
+
+90
+00:06:06,219 --> 00:06:11,248
+From the first look it can seem that
+it works in n squared time because
+
+91
+00:06:11,248 --> 00:06:15,925
+we have the external while loop
+which can make n iterations and
+
+92
+00:06:15,925 --> 00:06:19,298
+internal loop which can
+make n iterations.
+
+93
+00:06:19,298 --> 00:06:24,203
+So, n by n is n squared, but
+actually we will show that
+
+94
+00:06:24,203 --> 00:06:29,210
+it only makes O of n actions for
+the whole algorithm.
+
+95
+00:06:29,210 --> 00:06:32,600
+To prove that let's first look
+at the currentRefill variable.
+
+96
+00:06:33,920 --> 00:06:37,690
+We see that it only
+changes one by one here.
+
+97
+00:06:40,660 --> 00:06:43,032
+And it starts from zero.
+
+98
+00:06:43,032 --> 00:06:47,480
+And what is the largest
+value that it can attain?
+
+99
+00:06:48,510 --> 00:06:53,510
+Of course,
+the largest value is n plus 1 because this
+
+100
+00:06:53,510 --> 00:06:59,670
+is the largest index in the array x, and
+currentRefil is index in the array x.
+
+101
+00:06:59,670 --> 00:07:04,389
+So, variable currentRefil starts
+from zero, changes one by one.
+
+102
+00:07:04,389 --> 00:07:08,408
+And the largest value it
+can have is n plus 1.
+
+103
+00:07:08,408 --> 00:07:12,979
+It means that it is increased at most
+n plus 1 times which is Big-O of n.
+
+104
+00:07:12,979 --> 00:07:15,270
+But that's not all we do.
+
+105
+00:07:15,270 --> 00:07:18,280
+Also, we increase
+variable numRefills here.
+
+106
+00:07:20,030 --> 00:07:23,220
+But we also increase it always one by one.
+
+107
+00:07:23,220 --> 00:07:25,070
+It also starts from zero.
+
+108
+00:07:25,070 --> 00:07:28,360
+And what is the largest number
+that this variable can attain?
+
+109
+00:07:29,560 --> 00:07:33,000
+Well, of course, it is n because
+when we have n gas stations.
+
+110
+00:07:33,000 --> 00:07:36,230
+There is no point to refuel
+twice at the same gas station.
+
+111
+00:07:36,230 --> 00:07:39,490
+So we can refuel at most n times.
+
+112
+00:07:39,490 --> 00:07:45,210
+So variable numRefills goes from
+0 to n and changes one by one.
+
+113
+00:07:45,210 --> 00:07:48,160
+So it is only changed at most n times.
+
+114
+00:07:49,210 --> 00:07:52,560
+And so, it is also linear in terms of n.
+
+115
+00:07:52,560 --> 00:07:58,220
+And so, we have at most n plus 1
+iterations of the external while loop.
+
+116
+00:07:58,220 --> 00:08:01,830
+Everything but the internal while
+loop takes there constant time.
+
+117
+00:08:01,830 --> 00:08:05,550
+This assignment, this if,
+and this if with assignment.
+
+118
+00:08:06,610 --> 00:08:08,970
+And the external loop and
+
+119
+00:08:08,970 --> 00:08:15,120
+internal loop combined also spend
+at most linear time of iterations.
+
+120
+00:08:15,120 --> 00:08:18,640
+Because they change
+variable currentRefill and
+
+121
+00:08:18,640 --> 00:08:21,320
+it changes at most linear number of times.
+
+122
+00:08:21,320 --> 00:08:24,800
+So all in all our algorithm
+works in Big-O n time.
+
+123
+00:08:25,810 --> 00:08:29,010
+Let's go through this proof once again.
+
+124
+00:08:29,010 --> 00:08:33,480
+The Lemma says that the running time
+of the whole algorithm is big O of n.
+
+125
+00:08:33,480 --> 00:08:36,440
+And we prove this by first
+noticing that the currentRefill
+
+126
+00:08:36,440 --> 00:08:40,150
+variable changes only from
+zero to at most n plus 1.
+
+127
+00:08:40,150 --> 00:08:42,610
+And the change is always one by one.
+
+128
+00:08:42,610 --> 00:08:46,220
+That the numRefills variable
+changes from zero to at most n.
+
+129
+00:08:46,220 --> 00:08:47,690
+And it also changes one by one.
+
+130
+00:08:47,690 --> 00:08:52,050
+So, both these variables
+are changed Big-O of n times.
+
+131
+00:08:52,050 --> 00:08:55,850
+And everything else that
+happens is constant time.
+
+132
+00:08:55,850 --> 00:08:58,090
+Each iteration of the external loop, and
+
+133
+00:08:58,090 --> 00:09:01,440
+there are at most n plus 1
+iterations of the external loop.
+
+134
+00:09:01,440 --> 00:09:06,329
+Thus, our algorithm works in linear time.
+
+135
+00:09:06,329 --> 00:09:07,465
+In the next video,
+
+136
+00:09:07,465 --> 00:09:11,809
+we will review what we've learned
+about greedy algorithms in general.

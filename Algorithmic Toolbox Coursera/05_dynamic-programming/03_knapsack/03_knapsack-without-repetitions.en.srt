@@ -1,0 +1,1125 @@
+1
+00:00:00,550 --> 00:00:04,520
+In this video we will be designing
+a dynamic formatting solution for
+
+2
+00:00:04,520 --> 00:00:08,470
+the Knapsack without Repetitions problem.
+
+3
+00:00:08,470 --> 00:00:14,520
+Recall that in this problem we're
+give a single copy of each item.
+
+4
+00:00:14,520 --> 00:00:20,028
+So this is also to remind you the formal
+statement of the problem, so we emphasize
+
+5
+00:00:20,028 --> 00:00:25,295
+once again that we are not allowed to take
+more than a single copy of each item.
+
+6
+00:00:25,295 --> 00:00:31,036
+Well, we already know that our previous
+same reason cannot produce the right
+
+7
+00:00:31,036 --> 00:00:37,360
+answer for our new very namely for
+the Knapsack without repetitions problems.
+
+8
+00:00:37,360 --> 00:00:43,246
+Well this is simply because in our
+toy example is that optimal value for
+
+9
+00:00:43,246 --> 00:00:48,835
+the Knapsack with repetitions was
+48 while the optimal value for
+
+10
+00:00:48,835 --> 00:00:52,655
+the Knapsack without repetitions was 46.
+
+11
+00:00:52,655 --> 00:00:56,283
+So this means that if we just
+run our previous algorithm,
+
+12
+00:00:56,283 --> 00:00:59,210
+it will produce an incorrect result.
+
+13
+00:00:59,210 --> 00:01:03,620
+Still it is important to
+understand where our algorithms,
+
+14
+00:01:03,620 --> 00:01:07,240
+where our reasoning more
+generally fails for this problem.
+
+15
+00:01:08,520 --> 00:01:13,566
+So once again, let's consider
+an optimal subset of items for
+
+16
+00:01:13,566 --> 00:01:16,681
+a knapsack of total weight capital W.
+
+17
+00:01:16,681 --> 00:01:20,820
+And assume for the moment that we know
+that it contains the nth element.
+
+18
+00:01:21,960 --> 00:01:24,140
+That is the last item.
+
+19
+00:01:24,140 --> 00:01:30,011
+So we argue, well similarly to the
+previous case that if we take this item
+
+20
+00:01:30,011 --> 00:01:36,172
+out of the current knapsack, then what
+we get must be an optimal solution for
+
+21
+00:01:36,172 --> 00:01:41,203
+a knapsack of smaller weight,
+namely of total weight W- wn.
+
+22
+00:01:41,203 --> 00:01:45,741
+So if we take we the smaller solution and
+we add the nth item to it,
+
+23
+00:01:45,741 --> 00:01:50,885
+we get an optimal solution for
+the initial knapsack of total weight, W.
+
+24
+00:01:50,885 --> 00:01:55,099
+I assume however,
+that the optimal solution for
+
+25
+00:01:55,099 --> 00:01:59,941
+the smaller knapsack,
+already contains the nth item.
+
+26
+00:01:59,941 --> 00:02:04,617
+This means that we cannot add another
+copy of the nth element to it,
+
+27
+00:02:04,617 --> 00:02:09,461
+right, because then the resulting
+solution will contain two copies
+
+28
+00:02:09,461 --> 00:02:14,405
+of the nth element which is now
+forbidden by the problem formulation.
+
+29
+00:02:14,405 --> 00:02:21,030
+So this is why we need to come up with
+a different notion of a subproblem.
+
+30
+00:02:21,030 --> 00:02:26,750
+So still, let's take a closer
+look at our optimal solution.
+
+31
+00:02:26,750 --> 00:02:29,580
+It is not difficult to see
+that there are only two cases,
+
+32
+00:02:29,580 --> 00:02:32,550
+either it contains the lost item,
+or it doesn't contain it.
+
+33
+00:02:32,550 --> 00:02:35,780
+I assume that it contains, and
+
+34
+00:02:35,780 --> 00:02:41,670
+let's again take this nth item
+out of our current solution.
+
+35
+00:02:41,670 --> 00:02:42,970
+So what is left?
+
+36
+00:02:42,970 --> 00:02:49,690
+First of all, it is some solution for
+a knapsack of total weight,
+
+37
+00:02:49,690 --> 00:02:55,630
+capital W- wn, and
+it also uses only items from 1 to n- 1,
+
+38
+00:02:55,630 --> 00:02:59,500
+because, well,
+we just took out the nth item, right?
+
+39
+00:03:01,010 --> 00:03:04,380
+If, on the other hand,
+the initial optimal solution for
+
+40
+00:03:04,380 --> 00:03:10,270
+the knapsack of total weight W
+does not contain the nth item,
+
+41
+00:03:10,270 --> 00:03:14,090
+well, then it contains only
+items from 1 to n minus 1.
+
+42
+00:03:14,090 --> 00:03:15,010
+Right?
+
+43
+00:03:15,010 --> 00:03:19,200
+Well this simple observation
+will help us to get the right
+
+44
+00:03:19,200 --> 00:03:22,730
+definition of a subproblem for
+this version of the knapsack problem.
+
+45
+00:03:23,730 --> 00:03:28,070
+Well on the previous slide
+we argued as follows.
+
+46
+00:03:28,070 --> 00:03:33,110
+Consider an optimal solution for
+a knapsack of total weight capital W.
+
+47
+00:03:33,110 --> 00:03:35,090
+And there are two cases.
+
+48
+00:03:35,090 --> 00:03:39,160
+Either it can contain the last item or
+it doesn't contain.
+
+49
+00:03:39,160 --> 00:03:43,900
+If it contains we can take it out,
+and reduce the problem for
+
+50
+00:03:43,900 --> 00:03:49,550
+small knapsack using only
+items from one to n minus one.
+
+51
+00:03:49,550 --> 00:03:54,574
+On the other hand, if it doesn't
+contain the nth item, then we'll reduce
+
+52
+00:03:54,574 --> 00:03:59,222
+it to another case when the knapsack
+only uses items from 1 to n-1.
+
+53
+00:03:59,222 --> 00:04:03,364
+In any case, we reduce the number
+of items and in the first case,
+
+54
+00:04:03,364 --> 00:04:08,970
+we also reduce the size of the knapsack,
+the total weight of the knapsack.
+
+55
+00:04:08,970 --> 00:04:14,378
+We might continue this process,
+and express the solution for
+
+56
+00:04:14,378 --> 00:04:20,650
+all sub-problems through
+solutions to force up subproblems.
+
+57
+00:04:20,650 --> 00:04:25,700
+If we continue in the same fashion
+what we get somewhere in the middle is
+
+58
+00:04:25,700 --> 00:04:32,610
+a solution for a knapsack of some
+weight that uses some first i items.
+
+59
+00:04:32,610 --> 00:04:37,080
+Well let's just use this as
+a definition of our subproblem.
+
+60
+00:04:37,080 --> 00:04:41,950
+Namely, for any w, from 0 to W, and
+
+61
+00:04:41,950 --> 00:04:46,640
+for any i, from 0 to n,
+let's denote by value of w and
+
+62
+00:04:46,640 --> 00:04:53,690
+i the maximum value that can be achieved
+by using only items from 1 to i,
+
+63
+00:04:53,690 --> 00:04:58,860
+and whose total weight is at most w.
+
+64
+00:04:58,860 --> 00:05:03,910
+Right, then it is easy to
+express it through solutions for
+
+65
+00:05:03,910 --> 00:05:05,380
+smaller such problems.
+
+66
+00:05:05,380 --> 00:05:11,480
+Once again, value of w and i,
+is a subset, is an optimal
+
+67
+00:05:12,950 --> 00:05:18,000
+value of a subset, of the first items
+who stole the weight is utmost w.
+
+68
+00:05:18,000 --> 00:05:21,750
+So we know that in this optimal subset,
+
+69
+00:05:21,750 --> 00:05:26,880
+either there is the i-th item or
+the i-th item is not contained in it.
+
+70
+00:05:26,880 --> 00:05:28,580
+So there are two cases.
+
+71
+00:05:28,580 --> 00:05:31,220
+So we need to select
+the maximum out of two cases.
+
+72
+00:05:31,220 --> 00:05:35,250
+And the first case if we take
+the i-th item out what is left
+
+73
+00:05:35,250 --> 00:05:39,860
+is an optimal solution for
+the following problem.
+
+74
+00:05:39,860 --> 00:05:45,600
+We are allowed only to use the first
+i-1 items and the total weight should
+
+75
+00:05:45,600 --> 00:05:50,590
+be no more than w-wi, so
+this is the first term under the maximum.
+
+76
+00:05:51,690 --> 00:05:56,360
+In the second case, if the i-th item
+is not used in an optimal solution,
+
+77
+00:05:56,360 --> 00:06:00,000
+then we just know that the optimal
+solution is the same as for
+
+78
+00:06:00,000 --> 00:06:05,660
+the knapsack of total weight, W,
+using only the first i- 1 items.
+
+79
+00:06:07,030 --> 00:06:10,010
+So we managed to express the solution for
+
+80
+00:06:10,010 --> 00:06:15,030
+our problems through solutions for
+smaller sub-problems.
+
+81
+00:06:15,030 --> 00:06:17,900
+And this is probably
+the most important thing
+
+82
+00:06:17,900 --> 00:06:20,579
+in designing dynamic
+problem in algorithms.
+
+83
+00:06:21,645 --> 00:06:27,250
+We now done our recurrent formula
+into a dynamic problem in algorithm.
+
+84
+00:06:27,250 --> 00:06:35,196
+As usual, we start from initialization
+namely with your set all the values of 0,
+
+85
+00:06:35,196 --> 00:06:39,818
+j to 0 for all j and
+all the values of w, 0 to 0.
+
+86
+00:06:39,818 --> 00:06:44,324
+Well, this just expresses the fact
+that if we have no items, well,
+
+87
+00:06:44,324 --> 00:06:46,500
+then the value is zero.
+
+88
+00:06:46,500 --> 00:06:50,200
+If we have the knapsack
+of total weight zero,
+
+89
+00:06:50,200 --> 00:06:53,590
+then the total value's also zero,
+of course.
+
+90
+00:06:53,590 --> 00:06:58,540
+Then recall, now, we need to somehow
+compute, all other values of w, i.
+
+91
+00:07:00,470 --> 00:07:06,800
+Recall that we expressed value
+Wi of Wi through values of
+
+92
+00:07:07,820 --> 00:07:12,370
+W, smaller w and i- 1 and W and i- 1.
+
+93
+00:07:12,370 --> 00:07:17,280
+This means that we always
+reduce the problem from
+
+94
+00:07:17,280 --> 00:07:23,240
+Wi to something with smaller
+number of items, to i- 1.
+
+95
+00:07:23,240 --> 00:07:25,990
+This actually helps us to understand that
+
+96
+00:07:25,990 --> 00:07:31,310
+it makes sense to gradually increase
+the number of allowable items.
+
+97
+00:07:31,310 --> 00:07:38,260
+And this is why we have in this pseudocode
+an outer loop where i goes from 1 to n.
+
+98
+00:07:38,260 --> 00:07:44,102
+When i is fixed,
+we will compute all the values of W, i.
+
+99
+00:07:44,102 --> 00:07:51,940
+So for this, we also go from W equal
+to 1 to capital W and do the following.
+
+100
+00:07:51,940 --> 00:07:56,900
+So now, i and W are fixed,
+we need to compute value of W, i.
+
+101
+00:07:56,900 --> 00:08:02,240
+First, we just check what is the value of,
+what is the solution for
+
+102
+00:08:02,240 --> 00:08:06,170
+the subproblem when we use
+the knapsack of the same weight w but
+
+103
+00:08:06,170 --> 00:08:09,420
+we only use the first i-1 items.
+
+104
+00:08:11,100 --> 00:08:12,750
+This is implemented as follows.
+
+105
+00:08:12,750 --> 00:08:18,090
+We first just assign value of w,
+i to value of w, i-1.
+
+106
+00:08:18,090 --> 00:08:23,320
+Then we need to check whether we can
+improve this value by using the i-th item.
+
+107
+00:08:23,320 --> 00:08:29,220
+First of all we can only do this if
+the weight of the ice item does not exceed
+
+108
+00:08:29,220 --> 00:08:34,640
+the weight of the current
+knapsack which is just W.
+
+109
+00:08:34,640 --> 00:08:40,400
+So, if it doesn't exceed we see what
+happens if we take an optimal value for
+
+110
+00:08:40,400 --> 00:08:44,010
+the knapsack of the total
+weight w minus wi.
+
+111
+00:08:44,010 --> 00:08:48,860
+That is filled only by
+elements from 1 to i minus 1,
+
+112
+00:08:48,860 --> 00:08:52,440
+and add the i-th element to it.
+
+113
+00:08:52,440 --> 00:08:56,780
+If it gives a larger value than we
+currently have, we will update the value
+
+114
+00:08:56,780 --> 00:09:02,970
+of wi, so in the end we just return
+the value of capital w and n.
+
+115
+00:09:02,970 --> 00:09:07,160
+Because this is the solution
+to our initial problem.
+
+116
+00:09:07,160 --> 00:09:11,280
+So this a solution for
+a knapsack of size capital
+
+117
+00:09:11,280 --> 00:09:16,020
+w that uses just all the n items, right?
+
+118
+00:09:16,020 --> 00:09:22,190
+Now so it is clear that this
+algorithm is correct just because
+
+119
+00:09:22,190 --> 00:09:28,240
+it directly implements the recurrent
+formula that we already discussed.
+
+120
+00:09:28,240 --> 00:09:32,620
+So let's analyze its running time.
+
+121
+00:09:32,620 --> 00:09:37,030
+It is not difficult to show, again, that
+its running time is actually the same.
+
+122
+00:09:37,030 --> 00:09:42,200
+It is again n multiplied by W.
+
+123
+00:09:42,200 --> 00:09:46,000
+Well, this is again just
+because we have two loops here.
+
+124
+00:09:46,000 --> 00:09:49,450
+So this is the first loop
+with n iterations, and
+
+125
+00:09:49,450 --> 00:09:55,155
+this is the inner loop with W iterations.
+
+126
+00:09:55,155 --> 00:10:01,150
+And what is going on inside
+only takes some constant time.
+
+127
+00:10:03,580 --> 00:10:10,570
+Now let's apply the algorithm that
+we've just designed to our toy example.
+
+128
+00:10:10,570 --> 00:10:18,470
+Recall that we need to store
+the values of all subproblems for Wi,
+
+129
+00:10:18,470 --> 00:10:23,910
+for all W from zero to ten, and
+all i from zero to four, in our case.
+
+130
+00:10:23,910 --> 00:10:28,418
+For these purposes, it is natural
+to use a two-dimensional table, or
+
+131
+00:10:28,418 --> 00:10:30,210
+two-dimensional array.
+
+132
+00:10:30,210 --> 00:10:35,120
+You can see such a two-dimensional
+array on the slide already filled in.
+
+133
+00:10:35,120 --> 00:10:39,980
+So here we have i, so all the rows of our
+
+134
+00:10:39,980 --> 00:10:45,110
+columns are by all possible way of i, and
+
+135
+00:10:45,110 --> 00:10:50,750
+all the columns in this set
+by all possible values of W.
+
+136
+00:10:50,750 --> 00:10:54,550
+Right, we start by initializing
+the first row, and
+
+137
+00:10:54,550 --> 00:10:57,730
+the first column of this table by zero.
+
+138
+00:10:57,730 --> 00:11:01,380
+That is, we fill this row by zeroes and
+
+139
+00:11:01,380 --> 00:11:06,170
+we fill this column by zeroes also.
+
+140
+00:11:06,170 --> 00:11:10,040
+Then we start filling in
+this table row by row.
+
+141
+00:11:10,040 --> 00:11:14,360
+That is, we first fill in this cell,
+then this cell,
+
+142
+00:11:14,360 --> 00:11:16,700
+then this cell, then this cell, and so on.
+
+143
+00:11:16,700 --> 00:11:20,375
+So we go like this.
+
+144
+00:11:20,375 --> 00:11:23,988
+So we first fill in this row,
+then fill in this row,
+
+145
+00:11:23,988 --> 00:11:27,283
+then fill in this row and
+then fill in this row.
+
+146
+00:11:27,283 --> 00:11:31,871
+So the results in value 46 is actually
+
+147
+00:11:31,871 --> 00:11:36,048
+the answer to our initial problem.
+
+148
+00:11:36,048 --> 00:11:41,922
+Now, let me show you how some particular
+value, just through this trait,
+
+149
+00:11:41,922 --> 00:11:47,346
+let me show you how some particular
+value in this table was computed.
+
+150
+00:11:47,346 --> 00:11:50,759
+For example, consider this cell.
+
+151
+00:11:53,197 --> 00:11:58,672
+So formally, this is value,
+
+152
+00:11:58,672 --> 00:12:02,850
+value(10, 2).
+
+153
+00:12:02,850 --> 00:12:08,040
+Which means that this is an optimal
+value of a knapsack of total
+
+154
+00:12:08,040 --> 00:12:12,570
+weight 10 that only uses
+the first two items.
+
+155
+00:12:12,570 --> 00:12:17,540
+So assume that we don't
+know what to put here.
+
+156
+00:12:18,780 --> 00:12:20,990
+So we just need to compute it right now.
+
+157
+00:12:20,990 --> 00:12:25,932
+So let's argue as we did before.
+
+158
+00:12:25,932 --> 00:12:31,690
+So this is a knapsack of total weight
+10 that uses only the first two items.
+
+159
+00:12:31,690 --> 00:12:36,810
+Well, we then say that the second
+item is either used or not.
+
+160
+00:12:36,810 --> 00:12:40,755
+So if it is not used,
+then this is the same as filling in
+
+161
+00:12:40,755 --> 00:12:45,490
+the Knapsack of total weight
+ten just using the first item.
+
+162
+00:12:45,490 --> 00:12:49,370
+And we already know this value
+because it is in the previous row.
+
+163
+00:12:49,370 --> 00:12:52,580
+So this is value 10, 1, right?
+
+164
+00:12:52,580 --> 00:12:55,408
+So the value in this case is 30.
+
+165
+00:12:55,408 --> 00:12:59,608
+On the other hand,
+if the second item is used,
+
+166
+00:12:59,608 --> 00:13:05,101
+then if we take it out,
+what is left is an optimal solution for
+
+167
+00:13:05,101 --> 00:13:08,907
+a knapsack of total weight 10 minus 3.
+
+168
+00:13:08,907 --> 00:13:13,556
+Because 3 is the weight
+of the second item,
+
+169
+00:13:13,556 --> 00:13:20,760
+which means that it is an optimal
+solution for a knapsack of size 7.
+
+170
+00:13:20,760 --> 00:13:23,852
+Of total weight 7 that
+only uses the first,
+
+171
+00:13:23,852 --> 00:13:27,670
+that is only allowed
+to use the first item.
+
+172
+00:13:27,670 --> 00:13:31,610
+Also, if we add this item to,
+
+173
+00:13:31,610 --> 00:13:37,310
+if we add the second item to the solution,
+we get 30 plus 14.
+
+174
+00:13:37,310 --> 00:13:41,150
+Which is much better than without
+using the second item, right?
+
+175
+00:13:41,150 --> 00:13:43,380
+So that's why we have 44 here.
+
+176
+00:13:45,350 --> 00:13:50,370
+And also for this reason we
+fill this matrix row by row.
+
+177
+00:13:50,370 --> 00:13:55,110
+So now that when we need to
+compute the value of this cell,
+
+178
+00:13:55,110 --> 00:13:59,680
+we already have computed
+the value of these two cells.
+
+179
+00:14:01,330 --> 00:14:05,830
+So that's why we fill our
+metrics exactly row by row.
+
+180
+00:14:07,530 --> 00:14:10,170
+Now let me use the same example to
+
+181
+00:14:10,170 --> 00:14:13,340
+illustrate an important technique
+in dynamic programming.
+
+182
+00:14:13,340 --> 00:14:16,460
+Namely reconstructing an optimal solution.
+
+183
+00:14:17,720 --> 00:14:22,630
+Reconstructing an optimal solution in
+this particular problem I mean finding
+
+184
+00:14:22,630 --> 00:14:27,710
+not only the optimal value for
+the knapsack of size of total weight.
+
+185
+00:14:27,710 --> 00:14:34,320
+But the subset of items that lead
+to this optimal value itself.
+
+186
+00:14:34,320 --> 00:14:38,863
+For this we first create
+a boolean array of size four.
+
+187
+00:14:38,863 --> 00:14:41,409
+In this array, we will mark,
+for each item,
+
+188
+00:14:41,409 --> 00:14:45,070
+whether it is used in
+an optimal solution or not.
+
+189
+00:14:45,070 --> 00:14:49,190
+Now what we're going to do is to
+back trace the path that led us
+
+190
+00:14:49,190 --> 00:14:53,110
+to the optimal value, 46.
+
+191
+00:14:53,110 --> 00:15:00,630
+In particular, let's try to understand
+how this value of 46 was computed.
+
+192
+00:15:02,780 --> 00:15:07,660
+Well, first of all,
+46 is formally value of 10, 4,
+
+193
+00:15:07,660 --> 00:15:11,110
+that is is an optimal value for
+
+194
+00:15:11,110 --> 00:15:16,170
+a knapsack of total weight ten
+using the first four items.
+
+195
+00:15:16,170 --> 00:15:19,980
+We argued that the fourth
+item is either used or not.
+
+196
+00:15:19,980 --> 00:15:24,080
+If it is not used, then this value
+is the same as the value 10,
+
+197
+00:15:24,080 --> 00:15:27,050
+3, which is shown here.
+
+198
+00:15:27,050 --> 00:15:32,550
+That is the value of the knapsack of the
+same weight, using the first three items.
+
+199
+00:15:32,550 --> 00:15:38,330
+If on the other hand it is used, then what
+is left must be an optimal solution for
+
+200
+00:15:38,330 --> 00:15:46,330
+a knapsack of size 10 minus 2 which is 8,
+that uses also the first three items.
+
+201
+00:15:46,330 --> 00:15:50,820
+Well this value is already computed,
+it is 30, so
+
+202
+00:15:50,820 --> 00:15:55,106
+we need to compute
+the maximum among 30 plus 9,
+
+203
+00:15:55,106 --> 00:15:59,922
+because, well the value of
+the last item is 9 and 46.
+
+204
+00:15:59,922 --> 00:16:05,109
+In this particular case there,
+the maximum is equal to 46 which
+
+205
+00:16:05,109 --> 00:16:10,890
+means that we decided at this point
+not to use the last item, right?
+
+206
+00:16:10,890 --> 00:16:17,180
+So we put 0 into our boolean array to
+indicate this, and we move to this cell.
+
+207
+00:16:18,410 --> 00:16:21,920
+Again, let's try to understand
+how this value was computed.
+
+208
+00:16:21,920 --> 00:16:25,450
+It was computed as
+the maximum value of two
+
+209
+00:16:25,450 --> 00:16:29,080
+numbers which depend on
+the following values.
+
+210
+00:16:29,080 --> 00:16:33,450
+So either we do not use the third item,
+then it is the same,
+
+211
+00:16:33,450 --> 00:16:39,180
+has the value of this cell or
+we use the third item.
+
+212
+00:16:39,180 --> 00:16:44,240
+In this case, what remains is
+an knapsack of size, of total weight 6,
+
+213
+00:16:44,240 --> 00:16:48,634
+and using the first two items and
+its value is 30.
+
+214
+00:16:49,860 --> 00:16:53,680
+Plus the weight of the third item,
+which is 16.
+
+215
+00:16:53,680 --> 00:16:59,230
+In this particular case,
+30 plus 16 is larger than 44,
+
+216
+00:16:59,230 --> 00:17:06,780
+which means that this value of 46
+was computed using this value.
+
+217
+00:17:06,780 --> 00:17:10,770
+This, in turn, means that we
+decided to use the third item.
+
+218
+00:17:10,770 --> 00:17:18,662
+Let's mark it by putting
+1 into our boolean array.
+
+219
+00:17:18,662 --> 00:17:23,850
+Now we stay in this cell and
+we try to understand how it was computed.
+
+220
+00:17:23,850 --> 00:17:28,740
+It was computed as
+a maximum over this 30 and
+
+221
+00:17:28,740 --> 00:17:32,210
+this 0, plus fourteen.
+
+222
+00:17:32,210 --> 00:17:38,800
+Right, in this case,
+the first value is larger so
+
+223
+00:17:38,800 --> 00:17:46,150
+we move to this cell and we mark that
+we decided not to use the second item.
+
+224
+00:17:46,150 --> 00:17:51,405
+Okay and finally,
+we realize that we arrived at this value
+
+225
+00:17:51,405 --> 00:17:57,919
+30 from the right,
+from the left upper corner.
+
+226
+00:17:57,919 --> 00:17:59,214
+Right?
+
+227
+00:17:59,214 --> 00:18:05,600
+So, this way we reconstructed
+the wall optimal solution.
+
+228
+00:18:05,600 --> 00:18:10,170
+Once again, we backtraced the path
+that led us to the optimal value.
+
+229
+00:18:11,370 --> 00:18:15,080
+Here, what is shown here, is that we
+decided to use the first item and
+
+230
+00:18:15,080 --> 00:18:16,580
+the third item.
+
+231
+00:18:16,580 --> 00:18:21,618
+So let's check that it indeed
+gives us the optimal value of 46.
+
+232
+00:18:21,618 --> 00:18:25,707
+So indeed if we compute the sum
+of the weight of the first and
+
+233
+00:18:25,707 --> 00:18:27,720
+the third item, it is 10.
+
+234
+00:18:27,720 --> 00:18:34,700
+And while the total value is
+30 plus 16 which is 46 indeed.
+
+235
+00:18:34,700 --> 00:18:39,778
+And as I said before this technique
+is usually used in dynamic
+
+236
+00:18:39,778 --> 00:18:45,167
+programming algorithms to
+reconstruct the optimal solution.

@@ -1,0 +1,427 @@
+1
+00:00:00,180 --> 00:00:01,080
+Hi.
+
+2
+00:00:01,080 --> 00:00:04,770
+In this lesson you will learn how to
+implement the Greedy Algorithm for
+
+3
+00:00:04,770 --> 00:00:06,480
+the Fractional Knapsack.
+
+4
+00:00:06,480 --> 00:00:11,620
+How to estimate its running time and
+how to improve its asymptotics.
+
+5
+00:00:11,620 --> 00:00:15,580
+Here is the description of the greedy
+algorithm from the previous lesson.
+
+6
+00:00:15,580 --> 00:00:19,610
+While knapsack is still not full,
+we select the best item left.
+
+7
+00:00:19,610 --> 00:00:23,510
+The one with the highest
+value per unit of weight.
+
+8
+00:00:23,510 --> 00:00:27,280
+And either fit all of this
+item in the knapsack or
+
+9
+00:00:27,280 --> 00:00:31,640
+if there is only few space left in
+the knapsack, cut this item and
+
+10
+00:00:31,640 --> 00:00:36,890
+fit as much as you can in what's
+left in the knapsack, and
+
+11
+00:00:36,890 --> 00:00:40,630
+then repeat this process
+until the knapsack is full.
+
+12
+00:00:40,630 --> 00:00:44,960
+In the end return the total value of
+the items taken and the amounts taken.
+
+13
+00:00:44,960 --> 00:00:50,540
+We've proven that the selection
+of best item is a safe move.
+
+14
+00:00:50,540 --> 00:00:56,600
+Then after we've selected the best item
+what we've got left is a knapsack with
+
+15
+00:00:56,600 --> 00:01:01,710
+a capacity which is less, but the problem
+is the same: you have some items and
+
+16
+00:01:01,710 --> 00:01:05,480
+you have a knapsack of some capacity and
+you should fill it optimally so
+
+17
+00:01:05,480 --> 00:01:09,980
+as to maximize the total
+value of the items that fit.
+
+18
+00:01:09,980 --> 00:01:12,810
+So this greedy algorithm really works.
+
+19
+00:01:12,810 --> 00:01:13,730
+Now let's implement it.
+
+20
+00:01:15,370 --> 00:01:18,230
+Here we have a procedure called Knapsack.
+
+21
+00:01:18,230 --> 00:01:24,260
+It starts with filling the array A with
+amounts of items taken with 0 and
+
+22
+00:01:25,590 --> 00:01:29,780
+the total value we also
+initialize to 0 and then,
+
+23
+00:01:29,780 --> 00:01:35,070
+as we said on the slide, we repeat for
+n times the following iterations.
+
+24
+00:01:35,070 --> 00:01:39,530
+If the knapsack is already
+full than in the variable W,
+
+25
+00:01:39,530 --> 00:01:44,580
+we will have 0 because in the start
+we have in the variable W the total
+
+26
+00:01:44,580 --> 00:01:49,460
+capacity of the knapsack, but each time we
+will put something in the knapsack, we will
+
+27
+00:01:49,460 --> 00:01:55,280
+update W will decrease it by the amount
+of weight that we put already in.
+
+28
+00:01:55,280 --> 00:01:58,690
+And so in the end,
+when the knapsack is full, W will be 0.
+
+29
+00:01:58,690 --> 00:02:04,190
+If W became 0, it means that we should
+just return the total value and
+
+30
+00:02:04,190 --> 00:02:06,459
+the amounts of the items that we took.
+
+31
+00:02:07,520 --> 00:02:10,350
+Otherwise we should select the best item.
+
+32
+00:02:10,350 --> 00:02:16,010
+The best item is the item which is
+still left so, wi is more than 0 and
+
+33
+00:02:16,010 --> 00:02:20,910
+out of such items, it's the item
+with the maximum value per weight,
+
+34
+00:02:20,910 --> 00:02:24,380
+so the one which maximizes vi over wi.
+
+35
+00:02:25,650 --> 00:02:30,400
+When we've selected the i, we determine
+the amount which will it take,
+
+36
+00:02:30,400 --> 00:02:35,110
+it is either the whole wi, the whole of
+this item if it fits in the knapsack.
+
+37
+00:02:35,110 --> 00:02:39,080
+Otherwise, if the capacity of
+the knapsack is already less,
+
+38
+00:02:39,080 --> 00:02:41,220
+then we just fill it up to the end.
+
+39
+00:02:41,220 --> 00:02:43,750
+So A is minimum of wi and big W.
+
+40
+00:02:45,250 --> 00:02:48,600
+After we select the amount,
+we just update all the variables.
+
+41
+00:02:48,600 --> 00:02:55,630
+So we update wi by decreasing it by a,
+because we took already a of this item.
+
+42
+00:02:55,630 --> 00:02:58,260
+We're also increased the amount
+
+43
+00:02:58,260 --> 00:03:02,060
+A of i corresponding to the item
+number i by the value A.
+
+44
+00:03:02,060 --> 00:03:09,260
+And we'll also decrease the capacity left,
+because we just decrease it by A.
+
+45
+00:03:09,260 --> 00:03:11,880
+By putting it A of item i.
+
+46
+00:03:13,000 --> 00:03:17,900
+Also we increase value V by this formula:
+
+47
+00:03:17,900 --> 00:03:21,960
+a multiplied by vi and divided by wi.
+
+48
+00:03:21,960 --> 00:03:22,970
+Why is that?
+
+49
+00:03:22,970 --> 00:03:28,480
+Because we took A of item number i,
+we took A units and
+
+50
+00:03:28,480 --> 00:03:33,670
+one unit brings us amount of
+value equal to vi over wi.
+
+51
+00:03:33,670 --> 00:03:38,780
+So if you take A units,
+the total value by these items,
+
+52
+00:03:38,780 --> 00:03:41,210
+a multiplied by vi and divided by wi.
+
+53
+00:03:42,700 --> 00:03:48,400
+After we do n iterations, or maybe less,
+if the knapsack is full before
+
+54
+00:03:48,400 --> 00:03:53,340
+we do all n iterations, we'll return the
+total value and the amounts in the array.
+
+55
+00:03:55,680 --> 00:04:00,560
+Now the running time of this
+algorithm is Big-O of n squared.
+
+56
+00:04:00,560 --> 00:04:01,980
+Why is that?
+
+57
+00:04:01,980 --> 00:04:09,230
+Well, first we have the inner selection
+of best item, which works in linear time.
+
+58
+00:04:09,230 --> 00:04:13,600
+Because basically, we have to go through
+all the items to select the best one.
+
+59
+00:04:13,600 --> 00:04:21,850
+And we have the main loop, for loop, which
+is executed n times at most, maybe less.
+
+60
+00:04:21,850 --> 00:04:26,630
+So in each iteration we do some
+linear time computation and
+
+61
+00:04:26,630 --> 00:04:28,900
+we do this at most n times.
+
+62
+00:04:28,900 --> 00:04:32,479
+That means that the total running
+time is Big-O of n squared.
+
+63
+00:04:34,138 --> 00:04:41,760
+Now we can't improve on that because if
+we sort the items by decreasing value of
+
+64
+00:04:41,760 --> 00:04:48,400
+vi over wi, then it will be easier to
+select the best item which is still left.
+
+65
+00:04:48,400 --> 00:04:50,780
+Let's look at this pseudo code.
+
+66
+00:04:50,780 --> 00:04:56,030
+Let's assume that we've already
+sorted the input items,
+
+67
+00:04:56,030 --> 00:05:03,065
+size that v1 over w1 is, more than or
+equal to v2 over w2 and that is greater,
+
+68
+00:05:03,065 --> 00:05:08,864
+or equal to the fraction for
+the next item and up to vn over wn.
+
+69
+00:05:09,970 --> 00:05:12,660
+And we can start with
+the same array of amounts and
+
+70
+00:05:12,660 --> 00:05:15,610
+the same total value filled with zeroes.
+
+71
+00:05:15,610 --> 00:05:21,160
+But then we make a for loop for
+i going from 1 to n.
+
+72
+00:05:21,160 --> 00:05:26,790
+And on each iteration i will be
+the best unit which is still left.
+
+73
+00:05:26,790 --> 00:05:31,030
+So on the start of the iteration we check
+whether we still have some capacity
+
+74
+00:05:31,030 --> 00:05:32,530
+in the knapsack.
+
+75
+00:05:32,530 --> 00:05:35,700
+If it is already filled we
+just return the answer.
+
+76
+00:05:35,700 --> 00:05:40,190
+Otherwise we know that i is the best item
+
+77
+00:05:40,190 --> 00:05:44,690
+because we didn't consider it previously
+and it is the item with the maximum
+
+78
+00:05:44,690 --> 00:05:49,630
+value per unit out of those
+which we didn't consider before.
+
+79
+00:05:49,630 --> 00:05:53,410
+So we determine the amount of this
+item with the same formula and
+
+80
+00:05:53,410 --> 00:05:56,740
+we update the weights,
+the amounts, the capacity, and
+
+81
+00:05:56,740 --> 00:06:02,040
+the total value in the same way as
+we did in the previous pseudocode.
+
+82
+00:06:02,040 --> 00:06:06,340
+The only change is that we change
+the order in which we consider the items.
+
+83
+00:06:06,340 --> 00:06:12,940
+And this allows us to make each iteration
+in constant time instead of linear time.
+
+84
+00:06:12,940 --> 00:06:18,640
+So, this new algorithm now works in linear
+time, because it has at most n iterations,
+
+85
+00:06:18,640 --> 00:06:23,322
+and each iteration works at
+most in constant time.
+
+86
+00:06:23,322 --> 00:06:27,760
+So, if we apply first
+some sorting algorithm
+
+87
+00:06:27,760 --> 00:06:31,870
+to sort items by decreasing
+value of vi over wi.
+
+88
+00:06:31,870 --> 00:06:34,730
+And then apply this new
+knapsack procedure.
+
+89
+00:06:34,730 --> 00:06:38,970
+Total run time will be n log n,
+because sorting will work in n log n.
+
+90
+00:06:38,970 --> 00:06:41,625
+And the knapsack itself
+will work in linear time.

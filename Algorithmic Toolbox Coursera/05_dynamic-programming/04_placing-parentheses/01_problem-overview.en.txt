@@ -1,0 +1,70 @@
+Hello, and welcome to the next lesson
+in the dynamic programming module. In this lesson, we will be applying the
+dynamic programming technique for solving a wide range of problems where your goal
+is to find an optimal order of something. We will illustrate this
+technique by solving the so-called placing parentheses problem. In this problem, your input is
+an arithmetic expression consisting of numbers or digits and arithmetic
+operations, and your goal is to find an order of applying these arithmetic
+operations that maximizes the radian. You specify this order by
+placing parentheses, and that's why the problem is
+called placing parentheses. As usual we start with problem overview. Consider the following toy
+arithmetic expression. 1 + 2- 3 x 4- 5. In this case we have five digits and
+four arithmetic operations. And we would like to find an order
+of applying these four arithmetic operations to maximize
+the value of this expression. So when the order of operation is fixed,
+you do the following. You take the first operation. You take two adjusting digits,
+and you apply these operations. For example, if the operation is
+multiplication, in this case, so then two digits are 3 and 4. So you multiply 3 and 4, you get 12,
+and you just replace 3 times 4 by 12. You then take the next operation,
+apply it also, and replace two numbers and the arithmetic sign by this result,
+until you proceed in a similar fashion. In the end here, you get a single number. And your goal is to find an order
+that guarantees that this number is as large as possible. You can specify an order just by placing
+a set of parentheses in your expression. For example, if you would like to
+apply all your four operations just from left to right,
+you place the parentheses as follows. In this particular case,
+we compute the results as follows. So we first compute 1 + 2, this is 3. We then subtract 3 from the results. This gives us 0. We then multiply the result by 4. This is still 0. And finally, we subtract 5. So this gives us -5. And this is actually non-optimal, because
+for example, there is a better order. In this case, we first multiply 3 and
+4, this gives us 12. We then subtract 5, this gives us 7. Then we go to compute the sum of 1 and
+2, this gives us 3. So when the final operation is
+subtraction, we subtract 7 from 3. This gives us -4. So in this case the order of applying
+operations was the following. So we first compute the product of 3 and
+4, so this is the first operation. We then subtract 5. This is the second operation. We then compute the result of 1 + 2. So this plus is the third operation, and this minus is the fourth operation,
+the last one. It is not difficult to see that the
+optimal value in this case is equal to 6. And it can be obtained as follows. You first subtract 5 from 4. This gives you -1. You then multiply it by 3, and you get -3. You then compute the sum
+of the first two digits. This is 1 + 2, and that is equal to 3. Finally you subtract -3 from 3. This is the same as 3 + 3,
+it is equal to 6. Well, you might find
+the result as follows, you just go through all possible orders. Let's see how many
+different orders are there. Well, there are four arithmetic
+operations in this case, so you can choose any of the four possible
+arithmetic operations to be the first one. You can choose any of these three
+remaining operations to be the second one, and you can select any of the two
+remaining operations to be the third one. And the last one is unique,
+it is the only remaining operations. So, in total, there are 4 by
+3 by 2 by 1 different orders. This is equal to 24, and you can just
+enumerate all of them, write them down, compute an answer for each of these
+orderings and select the maximal value. However, our method of going through all
+possible orderings does not scale well. And this is why. Consider the toy example
+shown on the slide. In this case we have six digits and
+five arithmetic operations. This example will require us to go
+through all possible 120 orderings. So just because there are five iterations,
+so any of five of them can be the first one, any of the remaining four
+of them can be the second one, and so on. So this is 5 by 4 by 3 by 2 by 1,
+which is equal to 120. This is already not so
+easy to do this by hand. I mean,
+to go through all possible such orderings. Well, this is not easy, but
+we can teach a computer to do this, right? So we can implement an algorithm that
+goes through all possible orderings. However, in general, this algorithm
+will perform roughly n factorial steps, where n is the number of arithmetic
+operations, for exactly the same reason. If you have n arithmetic operations,
+then any of them can be the first one. Any of the remaining n minus 1 operations
+can be the second one, and so on. So this is n times n minus 1,
+times n minus 2, and so on. This is equal n factorial, and n factorial
+is an extremely fastly growing function. For example, 20 factorial already
+equals roughly 2 times 10 to the 18. This means that if you implement such
+an algorithm, it will not be able to compute the maximum value of an expression
+consisting of just 20 digits in a reasonable time, even in one year,
+not to say about one second. Which means, as usual,
+that we need another algorithm, as you might well have guessed. We will use dynamic programming to find,
+to design a more efficient algorithm. In the meantime, you might want
+to check your intuition by trying a few possible orderings to
+perform in this small expression, and by using our in video quiz.

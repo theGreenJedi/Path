@@ -1,0 +1,121 @@
+Hello everybody, welcome back to data
+structures and algorithms specialization. Today, we're going to be talking about
+what really goes into computing runtimes and really understanding how
+long it takes a program to work. So in particular,
+today we're really going to dive in. Up to this point we're
+using this sort of rough number of lines of code executed count. And today we're going to talk
+about how accurate this is and what sorts of complications come in. And in particular we'll see that if we
+actually want something that's sort of fundamentally an accurate measure of
+runtime, it's going to be a huge mess. We're going to have to bring in all
+sorts of extra data that aren't really convenient for us. And so, we're really sort of talking about the problem that comes in
+with computing runtimes in algorithms. Something that we're not going to
+resolve really until the next lecture. So to start with, let's look at
+this algorithm that we had for computing Fibonacci numbers. Remember we created an array. We assigned the 0th element to 0. The first element to 1. Then, we have this big for loop where
+we set the i'th element to the sum of the i minus first and
+i minus second elements and then at the end of the day we
+return the nth element. So we determined that when we ran this
+program we executed about 2n + 2 lines of code. But we should really ask ourselves,
+is this number of lines of code executed really sort of an accurate description
+of the runtime of the algorithm? And, I mean, somehow, implicitly,
+this measure of lines of code assumes that, sort of, any two lines of code
+are sort of comparable to each other. They're sort of one basic operation. And so, let's actually look at
+this program in some detail and see what goes into some of these lines of
+code and see how valid this assumption is. So to start with, we create this array. And what happens when you
+try to initialize an array? Well, this depends a lot on
+your memory management system. Fundamentally, all you have to do is
+find some space in memory and then get to pointer to the first location. On the other hand, how exactly you find
+this, maybe you need to shuffle some other things around to make room for it, maybe
+after you allocate the array, you then want to zero out all of the entries so
+that you don't have junk sitting in there. And so, it's not entirely clear. It depends a little bit on how exactly
+your program is being interpreted. But it could be pretty fast. It could actually take a while,
+depending on circumstances. Let's look at the next line. This is just a simple assignment,
+we set the 0 entry to 0. However, if you really look at this, at the machine level, you're doing a bit
+more work, you need to load up the pointer to the 0th element to the array, you maybe
+then have to do some pointer arithmetic, you then need to store this literal
+0 into that spot in memory. It could actually be not one operation but
+a few operations. Similarly when we set
+the first element to one, you have to do 
+this very similar set of things. Next there's this for loop and
+with the for loop, again every time you you have to do a few things,
+you need to increment the value of i. You then need to compare i to n to see
+if you need to break out of the loop and if it is, you need to branch, you need to move to another instruction
+in your program after the for loop. Next up there's this addition and
+here we have to do some things, we have to look up two values in the array, we have
+to write to a third value in the array. All of this involves the same
+sort of pointer arithmetic, and memory lookups, and writes that
+we were talking about before, but we also have to do this addition. And if it were just a normal addition,
+maybe it wouldn't be such a big deal. However, this is addition of
+two Fibonacci numbers, and if you'll recall from a couple of lectures
+ago, we found that Fibonacci numbers were pretty big, in fact, so big, they probably
+don't fit in a single machine word. So adding two of them together actually
+takes a non-trivial amount of time. So somehow,
+not only do you have to do all of these, array arithmetic things but,
+the actual addition of the Fibonacci numbers is actually a pretty
+non-trivial operation. And then we do this return stuff where we
+have to do an array lookup which involves all the sorts of things we talked about
+already and then have to do a return which sort of is going to operate
+with the program stack and pop it up a level and
+return an answer. So in conclusion, this program
+has six lines of code to it but the amount of work being done in various
+lines of code is very, very different. Exactly what goes into each line of
+code is not sort of at all the same thing. Maybe we want to reconsider
+the fact that this count, that the number of lines of code,
+is sort of our runtime. Maybe we need to measure something else. So what else should we do? Well, if you want to be totally correct
+about what we actually care about, what you need to say is, well,
+we're going to take this program, we're going to run it on
+some real life computer. And we'd like to know how much
+actual time it will take for this program to finish. That is
+fundamentally what we want to know. Unfortunately, in order to figure that
+out we need to know all kinds of messy details. We need to know things like the speed of
+the computer that we're running it on. If you run it on a big supercomputer, it'll take a lot less time than
+if you run it on your cell phone. The system architecture of
+the computer will matter. Exactly what operations your CPU
+supports and exactly how long they take relative to one another, those are all
+going to have an effect on your runtime. The compiler being used is also
+going to make a difference. In practice, what you'll do is, you'll
+write this program in some high-level language, in C or Java or Python or something, and then you'll run it through
+a compiler to turn it into machine code. And then the compiler, though, isn't just sort of doing
+something completely obvious. It's performing all kinds of
+interesting optimizations to your code. And which optimizations it performs, and how they interact with
+exactly what you've written. That's all going to have
+an impact on the final runtime. Finally, you're going to care about
+details of the memory hierarchy. If your entire computation
+fits into cache, it will probably run pretty quickly. However, if you have to start
+doing lookups into RAM, things will be a lot slower. RAM lookups actually
+take a fair bit of time. If, on the other hand, you run out of
+memory in RAM and having to start writing some of these memory operations to disk,
+things are going to go a lot slower. Lookups to hard disk can take milliseconds
+which are forever in computer time. And so, exactly how much memory is stored
+in these various levels of the hierarchy, and exactly how long the lookups take,
+and how good the algorithms about to predict what things you're
+going to look up in the future are. Those are all going to
+affect your runtime. And so, putting it all together,
+we found basically a problem. Figuring out accurate
+runtimes is a huge mess. You need to know all of these details and you need to figure out
+how everything interacts. And we're going to be talking about
+a lot of algorithms in the class. And we're going to need to tell you
+about runtimes for all of them and we don't want to have to do this huge mess every single time we have a new
+algorithm that we want to analyze. And this is an issue. And another issue it was just that, in practice I mean, this is all assuming
+that you did know these details. In practice, you don't know a lot of these
+details, because you're writing a program, it's going to be run on
+somebody else's computer, and you've got no idea what their system
+architecture looks like on that computer, because you don't know
+what the computer is. You don't know who's running it. In fact, there'll be several people
+running it on different computers with different architectures and
+different speeds, and it'll be a mess. And you really don't want to
+compute the runtime separately for every different client. So we've got a big problem here
+and we're not going to solve it today but next lecture we're going to talk
+about how we get around this. And what we really want is we want a new
+way to measure runtime that allows us to get some reasonable answer
+without knowing these sorts of details. And one of the key tricks that
+you should be looking at, that we'll be using to solve this problem,
+is we're going to be getting things that really give us results for
+very large inputs. They tell us, not necessarily how long it
+actually takes in terms of real seconds, minutes, and hours, but tell us sort of
+how our runtime scales with input size. And in practice this is a very
+important thing, because oftentimes, we really do care what happens
+when we have huge inputs, millions of data points that we need
+to analyze, how long does it take? And so, come back next lecture, we'll talk about how we resolve some of
+these issues, and talk about some very useful notation that we will be using
+throughout the rest of this sequence. So I hope you come back then,
+and I'll see you there.

@@ -1,0 +1,662 @@
+1
+00:00:00,650 --> 00:00:05,390
+Ahora convertiremos nuestra relación recurrente en un algoritmo de programación dinámica
+
+2
+00:00:06,510 --> 00:00:11,707
+Comenzamos por implementar un procedimiento que calcule el mínimo y
+
+3
+00:00:11,707 --> 00:00:17,370
+el máximo valor de la sub expresión (i,j) mediante los valores óptimos para
+
+4
+00:00:17,370 --> 00:00:19,810
+sub expresiones menores.
+
+5
+00:00:19,810 --> 00:00:22,047
+El procedimiento es llamado MinAndMax(i,j).
+
+6
+00:00:22,047 --> 00:00:25,360
+Lo primero es declarar dos variables,
+ max y min.
+
+7
+00:00:25,360 --> 00:00:29,347
+Inicialmente min es igual a más infinito,
+max es igual a menos infinito, o
+
+8
+00:00:29,347 --> 00:00:32,450
+un valor lo suficientemente grande,
+o un valor lo suficientemente pequeño
+
+9
+00:00:32,450 --> 00:00:36,330
+Luego analizamos todos los posibles
+valores de k entre i y j-1,
+
+10
+00:00:36,330 --> 00:00:38,570
+es decir,
+
+11
+00:00:38,570 --> 00:00:44,236
+se analizan todas las posibles
+formas en que la sub expresión (i,j) puede ser dividida
+
+12
+00:00:44,236 --> 00:00:50,000
+en dos sub expresiones desde i hasta k y desde k + 1 hasta j.
+
+13
+00:00:51,620 --> 00:00:57,370
+Cuando se fija una partición, calculamos cuatro posibles valores, aplicando
+
+14
+00:00:57,370 --> 00:01:02,700
+opk ya sea a dos valores máximos o a dos valores mínimos de esta sub expresión o
+
+15
+00:01:02,700 --> 00:01:06,290
+a un valor máximo y uno mínimo, o un valor mínimo y un máximo.
+
+16
+00:01:07,510 --> 00:01:10,440
+Cuando los dos valores son calculados,
+
+17
+00:01:10,440 --> 00:01:16,020
+solo chequeamos si uno de ellos mejora los valores máximo o mínimo.
+
+18
+00:01:16,020 --> 00:01:19,740
+Si lo mejora entonces actualizamos la variable min o max según sea el caso.
+
+19
+00:01:19,740 --> 00:01:26,435
+Por último retornamos el valor máximo y mínimo de nuestra sub expresión.
+
+20
+00:01:27,940 --> 00:01:33,470
+Nuestra relación recursiva expresa la solución para una expresión (i,j) mediante
+
+21
+00:01:33,470 --> 00:01:37,340
+soluciones de sub sub expresiones más pequeñas
+
+22
+00:01:37,340 --> 00:01:39,030
+¿Qué significa cuando decimos más pequeñas?
+
+23
+00:01:39,030 --> 00:01:42,290
+Bueno, significa que son más cortas, ¿sí?
+
+24
+00:01:42,290 --> 00:01:48,520
+Así, de nuevo, cuando calculamos el valor para una sub expresión (i,j) nos apoyamos en
+
+25
+00:01:48,520 --> 00:01:54,050
+el hecho de que esos valores para las sub expresiones más cortas ya están calculadas.
+
+26
+00:01:54,050 --> 00:01:58,710
+Esto significa que nuestro algoritmo necesita calcular las soluciones
+
+27
+00:01:58,710 --> 00:02:02,150
+de todos los sub problemas en orden de tamaño creciente,
+
+28
+00:02:02,150 --> 00:02:07,440
+a decir, en order creciente del valor j menos i, ¿sí?
+
+29
+00:02:07,440 --> 00:02:13,530
+Entonces, para este problema, tenemos aproximadamente un número cuadrático de sub problemas.
+
+30
+00:02:13,530 --> 00:02:18,260
+A decir, nuestro sub problema E_i,j es parametrizado por el valor de i y j,
+
+31
+00:02:18,260 --> 00:02:22,070
+que a su vez corren de 1 a n.
+
+32
+00:02:22,070 --> 00:02:27,470
+Así que tiene sentido en este caso guardar los valores de
+
+33
+00:02:27,470 --> 00:02:32,770
+todos los sub problemas en una tabla bi dimensional de tamaño n por n.
+
+34
+00:02:32,770 --> 00:02:35,960
+Recuerda también que debemos resolver nuestro sub problema
+
+35
+00:02:35,960 --> 00:02:40,070
+en orden de valor j-i creciente.
+
+36
+00:02:40,070 --> 00:02:44,020
+Podemos hacer esto pasando por todos los sub problemas en el orden
+
+37
+00:02:44,020 --> 00:02:45,680
+mostrado en la pantalla.
+
+38
+00:02:45,680 --> 00:02:46,790
+¿Por qué este orden?
+
+39
+00:02:46,790 --> 00:02:51,450
+Pues simplemente porque pasa por todos los posibles valores de i y j,
+
+40
+00:02:51,450 --> 00:02:54,470
+en orden creciente de j-i, como requerimos.
+
+41
+00:02:54,470 --> 00:02:55,348
+Veamos:
+
+42
+00:02:55,348 --> 00:03:00,150
+en esta diagonal tenemos
+
+43
+00:03:00,150 --> 00:03:04,910
+todas las celdas donde j-i=0, ¿sí?
+
+44
+00:03:07,120 --> 00:03:09,820
+Así, aquí la primera celda es 1,1,
+
+45
+00:03:09,820 --> 00:03:12,000
+la segunda celda es 2,2,
+
+46
+00:03:12,000 --> 00:03:15,140
+la tercera celda es 3,3 y así.
+
+47
+00:03:15,140 --> 00:03:18,780
+Seguimos ahora con esta celda. Aquí i=1,
+
+48
+00:03:18,780 --> 00:03:22,260
+j=2, así que la diferencia es 1.
+
+49
+00:03:22,260 --> 00:03:23,810
+Seguimos con esta celda.
+
+50
+00:03:25,140 --> 00:03:28,580
+Esta es la celda 2,3, con la diferencia igual a 1, de nuevo.
+
+51
+00:03:28,580 --> 00:03:32,810
+Seguimos con esta celda, que es 3,4, y así.
+
+52
+00:03:32,810 --> 00:03:38,390
+Así, en esta diagonal tenemos todas las celdas i,j
+
+53
+00:03:38,390 --> 00:03:42,140
+donde j-i=0.
+
+54
+00:03:42,140 --> 00:03:49,117
+En esta diagonal tenemos todas las celdas i,j donde j-i=1.
+
+55
+00:03:49,117 --> 00:03:55,472
+Para esta diagonal la diferencia es igual a 2.
+
+56
+00:03:55,472 --> 00:03:59,010
+Para esta diagonal la diferencia es igual a 3, y así.
+
+57
+00:03:59,010 --> 00:04:00,490
+Así, el valor resultante de
+
+58
+00:04:00,490 --> 00:04:04,910
+nuestro sub problema inicial, será calculado como el valor de la última celda,
+
+59
+00:04:06,210 --> 00:04:12,256
+ajá, porque esta celda corresponde a la sub expresión inicial de 1 a n.
+
+60
+00:04:12,256 --> 00:04:17,970
+Ahora todo está listo para escribir un algoritmo.
+
+61
+00:04:17,970 --> 00:04:22,530
+En el algoritmo mantendremos 2 tablas, m y M.
+
+62
+00:04:22,530 --> 00:04:26,230
+La primera para guardar los valores mínimos de todas las sub expresiones,
+
+63
+00:04:26,230 --> 00:04:30,250
+y la segunda para guardar los valores máximos de todas las sub expresiones.
+
+64
+00:04:30,250 --> 00:04:34,560
+Empezamos inicializando estas tablas como sigue.
+
+65
+00:04:34,560 --> 00:04:38,770
+Cuando las sub expresiones contienen sólo un dígito,
+
+66
+00:04:38,770 --> 00:04:43,930
+es decir, cuando j=1, entonces no hay nada
+
+67
+00:04:43,930 --> 00:04:47,630
+para minimizar o maximizar porque no hay operaciones.
+
+68
+00:04:47,630 --> 00:04:50,130
+Entonces no hay order en las operaciones.
+
+69
+00:04:50,130 --> 00:04:54,620
+Debido a esto simplemente inicializamos
+
+70
+00:04:54,620 --> 00:04:58,940
+las diagonales principales de ambas tablas, con los dígitos correspondientes.
+
+71
+00:04:58,940 --> 00:05:01,060
+Esto se hace en el siguiente bucle.
+
+72
+00:05:01,060 --> 00:05:07,700
+Así, m(i,i) y M(i,i) = d_i
+
+73
+00:05:07,700 --> 00:05:12,770
+Entonces pasamos por todos los posibles sub problemas de manera creciente,
+
+74
+00:05:12,770 --> 00:05:14,020
+y esto se hace como sigue.
+
+75
+00:05:14,020 --> 00:05:20,020
+Aumentamos gradualmente el parámetro s de 1 a n-1.
+
+76
+00:05:20,020 --> 00:05:22,130
+Esto se hace en el siguiente bucle.
+
+77
+00:05:22,130 --> 00:05:26,660
+Cuando s es fija, i va de 1 a n-s,
+
+78
+00:05:26,660 --> 00:05:29,360
+y j se calcula como i+s.
+
+79
+00:05:29,360 --> 00:05:34,430
+Esto se hace para pasar por todos los pares posibles (i,j),
+
+80
+00:05:34,430 --> 00:05:38,990
+tal que j-i=s, ¿sí?
+
+81
+00:05:38,990 --> 00:05:44,940
+Cuando i y j están fijas llamamos al procedimiento MinAndMax
+
+82
+00:05:44,940 --> 00:05:51,325
+para calcular los valores mínimo y máximo de la sub expresión i,j, ¿sí?
+
+83
+00:05:51,325 --> 00:05:52,740
+su tiempo.
+Muy bien.
+
+84
+00:05:52,740 --> 00:05:58,532
+Finalmente devolvemos el valor de M(1,n), como el resultado
+
+85
+00:05:58,532 --> 00:06:02,980
+de nuestro problema inicial, porque esta sub expresión,
+
+86
+00:06:02,980 --> 00:06:06,620
+1,n, corresponde a nuestro problema inicial,
+
+87
+00:06:06,620 --> 00:06:08,600
+que contiene todos los dígitos de 1 a n.
+
+88
+00:06:10,660 --> 00:06:13,240
+Bien, el tiempo de ejecución de este algoritmo es cúbico,
+
+89
+00:06:14,350 --> 00:06:16,240
+de O(n^3),
+
+90
+00:06:16,240 --> 00:06:20,820
+y esto se puede ver notando que tenemos 2 bucles anidados,
+
+91
+00:06:20,820 --> 00:06:25,773
+el primero con n-1 iteraciones, el interior con
+
+92
+00:06:25,773 --> 00:06:31,890
+n-s iteraciones, que a lo más es n.
+
+93
+00:06:31,890 --> 00:06:36,710
+También, dentro de estos dos bucles hacemos un llamado a MinAndMax.
+
+94
+00:06:36,710 --> 00:06:38,934
+El tiempo de ejecución del procedimiento
+
+95
+00:06:38,934 --> 00:06:44,203
+MinAndMax, es proporcional a j-i, que también es a lo más n.
+
+96
+00:06:44,203 --> 00:06:49,985
+Así, el tiempo de ejecución de nuestro algoritmo es O de
+
+97
+00:06:49,985 --> 00:06:53,721
+n x n x n, que es n^3.
+
+98
+00:06:53,721 --> 00:06:58,477
+Esta diapositiva muestra un ejemplo de cómo se ven las tablas
+
+99
+00:06:58,477 --> 00:07:04,393
+m y M cuando corremos nuestro algoritmo en nuestro ejemplo de juguete,
+
+100
+00:07:04,393 --> 00:07:08,930
+esto es, la expresión 5-8+7x4-8+9.
+
+101
+00:07:08,930 --> 00:07:12,960
+veamos este ejemplo paso a paso.
+
+102
+00:07:12,960 --> 00:07:19,450
+Empezamos llenando los valores de la 
+diagonal principal en ambas matrices.
+
+103
+00:07:19,450 --> 00:07:26,190
+Así, esto es 8, esto es 7, esto es 4, 8, 9,
+
+104
+00:07:26,190 --> 00:07:31,190
+esto corresponde a las sub expresiones 
+que consisten en un solo dígito,
+
+105
+00:07:31,190 --> 00:07:33,490
+así que no hay nada que maximizar o minimizar.
+
+106
+00:07:34,860 --> 00:07:37,920
+Hacemos lo mismo para M.
+
+107
+00:07:39,610 --> 00:07:42,290
+Seguimos con la segunda diagonal.
+
+108
+00:07:43,820 --> 00:07:49,184
+Bien, ponemos -3 aquí, que corresponde a esta sub expresión,
+
+109
+00:07:49,184 --> 00:07:53,238
+de nuevo, en este caso hay una sola operación,
+
+110
+00:07:53,238 --> 00:07:57,630
+así que no hay nada que minimizar o maximizar aquí,
+
+111
+00:07:57,630 --> 00:08:03,350
+porque tenemos un solo ordenamiento, 
+cuando tenemos un signo.
+
+112
+00:08:03,350 --> 00:08:08,910
+Así, ponemos -3 aquí que corresponde al sub problema 1,2,
+
+113
+00:08:08,910 --> 00:08:12,393
+déjenme poner todos los índices aquí, por cierto.
+
+114
+00:08:20,985 --> 00:08:26,230
+Entonces procedemos a la celda 2,3,
+ que corresponde a este sub problema.
+
+115
+00:08:26,230 --> 00:08:33,460
+De nuevo, no hay nada que maximizar o minimizar, 
+así que seguimos del mismo modo.
+
+116
+00:08:33,460 --> 00:08:37,080
+En este caso, no es tan interesante
+
+117
+00:08:37,080 --> 00:08:42,430
+y entonces procedemos a la tercera diagonal, a esta celda.
+
+118
+00:08:43,990 --> 00:08:48,710
+Ésta corresponde a la sub expresión 1,3, que
+
+119
+00:08:48,710 --> 00:08:54,270
+consiste de 3 dígitos y 2 operaciones, resta y suma.
+
+120
+00:08:54,270 --> 00:08:58,750
+Sabemos que una de ellas es la última 
+operación en el orden óptimo
+
+121
+00:08:58,750 --> 00:09:01,410
+cuando calculamos el valor mínimo, por ejemplo.
+
+122
+00:09:01,410 --> 00:09:03,480
+Supón que es la resta.
+
+123
+00:09:03,480 --> 00:09:11,156
+Ésta dividirá la sub expresión en dos 
+sub sub expresiones, 5 y 8+7.
+
+124
+00:09:11,156 --> 00:09:17,320
+Para ambas sub expresiones ya
+ sabemos sus valores máximo y mínimo.
+
+125
+00:09:17,320 --> 00:09:21,260
+Entonces, de nuevo, esta sub expresión corresponde a 1,1,
+
+126
+00:09:21,260 --> 00:09:24,640
+esta sub expresión corresponde a 2,3.
+
+127
+00:09:24,640 --> 00:09:29,670
+Así, del segundo al tercer dígitos, y del primer al primer dígitos.
+
+128
+00:09:29,670 --> 00:09:34,460
+Y, ya sabemos para la primera sub expresión su valor mínimo,
+
+129
+00:09:34,460 --> 00:09:38,940
+está aquí, y su valor máximo, acá.
+
+130
+00:09:38,940 --> 00:09:43,380
+Para la segunda sub expresión ya sabemos su valor mínimo,
+
+131
+00:09:43,380 --> 00:09:45,110
+está aquí,
+
+132
+00:09:45,110 --> 00:09:47,350
+es 15, y su valor máximo,
+
+133
+00:09:47,350 --> 00:09:48,770
+es 15 también.
+
+134
+00:09:48,770 --> 00:09:54,580
+Así, yendo por todos los pares posibles de estos valores
+
+135
+00:09:54,580 --> 00:09:57,250
+máximo y mínimo, en este caso, todos son los mismos,
+
+136
+00:09:57,250 --> 00:10:01,800
+calculamos el valor mínimo, que es 5-15,
+
+137
+00:10:01,800 --> 00:10:03,830
+que es -10.
+
+138
+00:10:03,830 --> 00:10:07,710
+Sin embargo, este fue sólo el primer caso de dividir
+
+139
+00:10:09,140 --> 00:10:12,920
+esta sub expresión en dos sub expresiones.
+
+140
+00:10:12,920 --> 00:10:15,610
+Otra posibilidad sería la siguiente, entonces,
+
+141
+00:10:15,610 --> 00:10:21,650
+podríamos dividirla en las siguientes 2 sub expresiones.
+
+142
+00:10:21,650 --> 00:10:27,020
+Esto corresponde a 1,2, y esto corresponde a 3,3, ¿sí?
+
+143
+00:10:28,180 --> 00:10:28,860
+¿Verdad?
+
+144
+00:10:28,860 --> 00:10:34,730
+Entonces, para 1,2 ya sabemos su valor mínimo, es -3,
+
+145
+00:10:34,730 --> 00:10:37,960
+y su valor máximo es también -3.
+
+146
+00:10:37,960 --> 00:10:41,500
+Para 3,3 sabemos su valor máximo,
+
+147
+00:10:41,500 --> 00:10:44,850
+está aquí, 7,
+
+148
+00:10:44,850 --> 00:10:50,370
+su valor mínimo y su valor máximo.
+
+149
+00:10:50,370 --> 00:10:54,720
+Entonces podemos calcular -3+7,
+
+150
+00:10:54,720 --> 00:10:58,160
+que nos da 4.
+
+151
+00:10:58,160 --> 00:11:05,490
+Así, para la sub expresión 1,3
+ escogemos su valor máximo como 4,
+
+152
+00:11:05,490 --> 00:11:08,550
+para el valor mínimo seleccionamos -10.
+
+153
+00:11:08,550 --> 00:11:14,610
+Así, procedemos a llenar la tabla de manera similar.
+
+154
+00:11:14,610 --> 00:11:19,330
+Así, ponemos 36 aquí en esta celda, 
+entonces -28 aquí en esta celda,
+
+155
+00:11:22,970 --> 00:11:27,820
+paralelamente ponemos 60 aquí, 20 acá, y así.
+
+156
+00:11:27,820 --> 00:11:32,140
+Al final vemos el valor 200 aquí.
+
+157
+00:11:32,140 --> 00:11:37,990
+Y este es el máximo valor de nuestra expresión inicial.
+
+158
+00:11:37,990 --> 00:11:42,430
+Esto todavía no nos da el ordenamiento óptimo en sí,
+
+159
+00:11:42,430 --> 00:11:46,270
+pero seremos capaces de reconstruirlo 
+a partir de estas dos tablas.
+
+160
+00:11:46,270 --> 00:11:52,224
+Ahora estamos seguros de que el valor 
+máximo de nuestra expresión inicial es 200,
+
+161
+00:11:52,224 --> 00:11:59,046
+y encontraremos el ordenamiento óptimo, 
+o el poner paréntesis de manera óptima, en un minuto.

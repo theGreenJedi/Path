@@ -1,0 +1,42 @@
+Hola a todos, bienvenidos de nuevo. Hoy, hablaremos un poco más
+sobre calcular  el máximo común divisor. En concreto hoy, vamos a hablar sobre un algoritmo mucho
+más eficiente que la última vez. Este es conocido como el Algoritmo Euclidiano,
+hablaremos sobre él y hablaremos un poco 
+sobre como trabaja en tiempo de ejecución. Solo para recordarlo, para los enteros a y b,
+su máximo común divisor es el entero d más grande
+por el que se pueden dividir ambos. Lo que nos gustaría hacer es ser capaces de calcular esto: dados dos enteros, queremos calcular su MCD. Encontramos un mal algoritmo para esto y nos gustaría uno mejor. Resulta que para encontrar un mejor algoritmo, necesitas saber algo interesante. Hay este lema clave que tenemos, donde, supón que a' es el residuo cuando a se divide entre b, entonces, el MCD(a,b) es el mismo que el MCD(a',b), y, claro, el mismo que el MCD(b,a'). La prueba de esto, una vez que sabes qué hay
+ que mostrar, no es realmenet muy difícil. La idea es que, como a' es un residuo, esto significa que a es igual a a' más algún
+ múltiplo de b, b*q, para alguna q. De ahí puedes mostrar que si d divide a a y b, entonces esto pasa, si y solo si, divide a a' y b. Porque, por ejemplo, si d divide a' y b, 
+entonces divide a´+ bq, que es a. Entonces, de este enunciado sabemos 
+que los divisores comunes de a y b son exactamente los mismos que los de a' y b. Por tanto, el máximo común divisor de a y b es el máximo común divisor de a' y b. Esta es la idea para el algoritmo. Básicamente tenemos que el MCD(a,b) 
+es el mismo que el MCD(b,a') pero a' es generalmente más pequeña que a, así que si calculamos este nuevo MCD recursivamente, 
+con suerte éste será un problema más fácil. Ahora, necesitamos un caso base para esto, así que vamos a empezar diciendo que, si b es igual a cero, todo divide al cero, así que sólo necesitamos devolver
+ el número más grande que divide a a, así que regresamos a en este caso. De otra forma, vamos a definir a' como 
+el residuo de a dividido por b, y vamos a devolver el MCD(b,a') calculado recursivamente. Por el lema que acabamos de dar, si 
+esto llega a devolver una respuesta, será la respuesta correcta. Pero, por el momento no sabemos 
+ni siquiera si va a terminar, y mucho menos si lo va a hacer en 
+una cantidad de tiempo razonable. Veamos un ejemplo. Supón que queremos calcular el MCD 
+de 3,918,848 y 1,653,264 Así que aquí b no es cero, dividimos 
+a entre b, tenemos un residuo, que es algo como 612,000, y ahora tenemos
+ un nuevo problema de MCD para resolver. Otra vez b bo es cero, dividimos a entre b, obtenemos
+ un nuevo residuo de 428 mil y cacho, Repetimos este proceso, nos da un residuo 
+de 183 mil y cacho,..., 61 mil y cacho. dividimos de nuevo, tenemos un residuo de cero. Y ahora b es cero por lo que devolvemos la respuesta 61,232, y esta es la respuesta correcta. Notarás que todo esto nos llevó seis pasos
+ para llegar a la respuesta correcta. Mientras que si hubiéramos usado 
+el algoritmo de la vez pasada, habríamos tenido que checar algo así como 5 millones
+ de posibles divisores comunes diferentes para encontrar el mejor. Entonces, esto resultó ser mucho mejor, y para tener
+ una idea de qué tan bien funcionan las cosas o porqué funciona bien, cada vez que tomamos 
+uno de estos residuos con división, reducimos el tamaño del número por
+ un factor de alrededor de 2. Y si en cada paso las cosas se reducen por un factor de dos, después de alrededor de log(a,b) pasos nuestros 
+números serán pequeños o cero, y así, básicamente después de log(a,b) pasos, 
+este algoritmo terminará. Esto significa que, supón que queremos 
+calcular el MCD de números de 100 dígitos, esto sólo nos llevará alrededor de 600 pasos. Cada uno de los pasos que hemos usado
+ es una simple división con residuo, 600 divisiones con residuo es algo 
+que puedes hacer trivialmente en cualquier computadora razonable. Y así, este algoritmo calculará MCD
+ muy grandes bastante rápido. En resumen, de nueva cuenta, teníamos 
+este problema computacional, había un algoritmo ingenuo, uno muy simple que provino directo de la definición, pero que era 
+demasiado lento para propósitos prácticos. Hay un algoritmo correcto que es
+ muchísimo mejor, muy manejable. Una vez más, encontrar el el algoritmo correcto
+ hace toda la diferencia del mundo. Pero aquí está esta cosa muy interesante que encontramos. Para obtener el algoritmo correcto, requerimos saber algo más interesante sobre el problema. Necesitamos esta lema clave que vimos ahora, y, esto es un tema con el que te toparás durante el curso, y a lo largo de tus estudios en algoritmos. Muy seguido, para encontrar un mejor algoritmo
+ para un problema, necesitas entender algo muy interesante acerca de
+ la estructura de la solución, y eso te permitirá simplificar mucho las cosas. Como quiera, eso es todo por hoy, regresa para la
+ siguiente lección, empezaremos a hablar sobre cómo calcular tiempos de ejecución con más detalle Hasta entonces, adiós.

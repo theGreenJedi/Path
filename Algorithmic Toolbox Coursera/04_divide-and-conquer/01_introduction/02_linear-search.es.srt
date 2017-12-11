@@ -1,0 +1,577 @@
+1
+00:00:00,220 --> 00:00:02,640
+Vamos a empezar nuestros algoritmos de divide y vencerás
+
+2
+00:00:02,640 --> 00:00:05,355
+con lo que se podría considerar una forma
+ degenerada de dividir y vencer.
+
+3
+00:00:05,355 --> 00:00:08,980
+Buscar en un arreglo desordenado usando búsqueda lineal.
+
+4
+00:00:10,230 --> 00:00:11,840
+Aquí hay un ejemplo de un arreglo.
+
+5
+00:00:11,840 --> 00:00:13,730
+Para encontrar un elemento particular en el arreglo
+
+6
+00:00:13,730 --> 00:00:17,760
+checamos el primer elemento.
+ Si no está ahí, checamos el segundo.
+
+7
+00:00:17,760 --> 00:00:21,720
+Seguimos hasta que, o encontramos el elemento que nos interesa, 
+
+8
+00:00:21,720 --> 00:00:22,840
+o hasta que lleguemos al final del arreglo.
+
+9
+00:00:24,210 --> 00:00:26,740
+El mismo tipo de búsqueda se usa para 
+encontrar elementos que están guardados
+
+10
+00:00:26,740 --> 00:00:27,290
+en una lista ordenada.
+
+11
+00:00:28,990 --> 00:00:31,280
+Déjenme describir un uso en la vida 
+real de la búsqueda lineal.
+
+12
+00:00:31,280 --> 00:00:34,590
+Hace 25 años me consultó una compañía
+ que estaba desarrollando software para
+
+13
+00:00:34,590 --> 00:00:36,610
+una de las primeras computadoras
+ postátiles, la Apple Newton.
+
+14
+00:00:37,610 --> 00:00:40,220
+La aplicación traducía palabras entre
+ cualesquiera dos de los idiomas:
+
+15
+00:00:40,220 --> 00:00:44,100
+inglés, francés, italiano, alemán y español.
+
+16
+00:00:44,100 --> 00:00:46,630
+Sus datos estaban grabados en 5 arreglos paralelos.
+
+17
+00:00:46,630 --> 00:00:50,030
+Así que, por ejemplo, "car" estaba en
+ la segunda posición en inglés.
+
+18
+00:00:50,030 --> 00:00:51,880
+En español, "car" es "auto", así que
+
+19
+00:00:51,880 --> 00:00:53,860
+la segunda posición en el arreglo
+ en español contenía "auto".
+
+20
+00:00:55,010 --> 00:00:59,580
+El programa tomaría la palabra junto con los
+ idiomas fuente y destino a traducir como entrada.
+
+21
+00:00:59,580 --> 00:01:02,780
+Entonces buscaría en el correspondiente 
+arreglo fuente, inglés por ejemplo,
+
+22
+00:01:02,780 --> 00:01:06,300
+para tratar de traducir "car" de inglés a español.
+
+23
+00:01:06,300 --> 00:01:07,520
+Si encontrara una concordancia,
+
+24
+00:01:07,520 --> 00:01:10,820
+devolvería el elemento con el mismo
+ índice en el idioma destino.
+
+25
+00:01:12,930 --> 00:01:16,320
+Con un pequeño diccionario de tres
+ palabras, como en este ejemplo,
+
+26
+00:01:16,320 --> 00:01:18,130
+la búsqueda lineal es rápida.
+
+27
+00:01:18,130 --> 00:01:22,300
+Sin embargo, me consultaron para acelerar la aplicación.
+
+28
+00:01:22,300 --> 00:01:25,330
+Cuando los usuarios hacían click en el botón de 
+traducción, le tomaría entre 7 a 10 segundos
+
+29
+00:01:25,330 --> 00:01:29,400
+para devolver la palabra traducida, una eternidad
+ desde el punto de vista del usuario.
+
+30
+00:01:30,520 --> 00:01:34,100
+Habían alrededor de 50 mil palabras en el diccionario,
+
+31
+00:01:34,100 --> 00:01:36,980
+así que, en promedio, hacía 25 mil revisiones 
+para encontrar una coincidencia.
+
+32
+00:01:38,000 --> 00:01:41,100
+En el siguiente video les enseñaré cómo acelerar
+ esta aplicación usando búsqueda binaria.
+
+33
+00:01:41,100 --> 00:01:46,450
+El enunciado del problema para búsqueda lineal es el que sigue:
+
+34
+00:01:46,450 --> 00:01:50,780
+dado un arreglo desordenado con n elementos, 
+y una clave k, encuentra un índice i
+
+35
+00:01:50,780 --> 00:01:53,530
+en el que el elemento del arreglo sea igual a k.
+
+36
+00:01:53,530 --> 00:01:56,590
+Si no hay un elemento en el arreglo igual a k,
+ la salida debe ser "NOT_FOUND".
+
+37
+00:01:57,590 --> 00:02:02,060
+Nota que decimos "un" índice y no "el" índice, porque
+
+38
+00:02:02,060 --> 00:02:04,870
+pueden haber duplicados en el arreglo.
+
+39
+00:02:04,870 --> 00:02:07,460
+Esto puede sonar pedante, pero es importante
+
+40
+00:02:07,460 --> 00:02:10,860
+ser lo más cuidadoso posible al especificar 
+el enunciado de nuestro problema.
+
+41
+00:02:12,560 --> 00:02:15,350
+La muy conocida solución a este 
+problema es una búsqueda lineal
+
+42
+00:02:15,350 --> 00:02:18,230
+que itera en el arreglo hasta que encuentras 
+el elemento seleccionado. Si llegas
+
+43
+00:02:18,230 --> 00:02:21,330
+al final del arreglo y no has encontrado el elemento, 
+devuelve "NOT_FOUND".
+
+44
+00:02:23,520 --> 00:02:27,410
+Podemos construir un algoritmo recursivo
+ de dividir y vencer para resolver este problema.
+
+45
+00:02:27,410 --> 00:02:30,060
+Nuestra función recursiva tomará cuatro parámetros:
+
+46
+00:02:30,060 --> 00:02:31,990
+A, el arreglo de valores;
+
+47
+00:02:31,990 --> 00:02:35,210
+low, la cota inferior del arreglo en el que hay que buscar;
+
+48
+00:02:35,210 --> 00:02:37,590
+high, la cota superior del arreglo en
+ el que hay que buscar; y k,
+
+49
+00:02:37,590 --> 00:02:38,770
+la clave que hay que buscar.
+
+50
+00:02:38,770 --> 00:02:42,290
+Devolverá, ya sea un índice en el rango low a high,
+
+51
+00:02:42,290 --> 00:02:46,840
+si es que encuentra una concordancia, 
+o "NOT_FOUND" si no hay concordancia.
+
+52
+00:02:48,170 --> 00:02:51,820
+Como en todas las soluciones recursivas necesitamos
+ tomar con cuidado el caso base.
+
+53
+00:02:52,880 --> 00:02:57,420
+En particular, los casos base para este
+ problema serán, ya sea un arreglo vacío,
+
+54
+00:02:57,420 --> 00:02:58,640
+o encontrar una coincidencia en el primer elemento.
+
+55
+00:03:00,020 --> 00:03:01,330
+El subproblema es buscar en el
+
+56
+00:03:01,330 --> 00:03:03,520
+subarreglo construído saltando el primer elemento.
+
+57
+00:03:04,530 --> 00:03:06,800
+Buscaremos recursivamente en ese subarreglo más pequeño,
+
+58
+00:03:06,800 --> 00:03:09,260
+y entonces devolveremos el resultado
+ de la búsqueda recursiva.
+
+59
+00:03:10,730 --> 00:03:13,360
+Aunque ésta es una rutina recursiva que rompe el problema en
+
+60
+00:03:13,360 --> 00:03:14,620
+problemas más pequeños,
+
+61
+00:03:14,620 --> 00:03:18,160
+algunos argumentarían que esto no 
+debería llamarse divide y vencerás.
+
+62
+00:03:18,160 --> 00:03:19,220
+Ellos dicen que el algoritmo
+
+63
+00:03:19,220 --> 00:03:23,560
+divide y vencerás debe dividir el problema
+ en subproblemas más pequeños,
+
+64
+00:03:23,560 --> 00:03:27,350
+donde el subproblema más pequeño es alguna
+ fracción constante del problema original.
+
+65
+00:03:27,350 --> 00:03:31,006
+En este caso, el problema no es 50% u 80%
+
+66
+00:03:31,006 --> 00:03:34,840
+o incluso el 95% del tamaño del problema original.
+
+67
+00:03:34,840 --> 00:03:38,680
+En lugar de eso, es sólo uno menos que
+ el tamaño del problema original.
+
+68
+00:03:38,680 --> 00:03:41,180
+No sé, a la mejor tengamos que llamar a este algoritmo
+
+69
+00:03:41,180 --> 00:03:43,400
+resta y vencerás en lugar de divide y vencerás.
+
+70
+00:03:45,740 --> 00:03:49,150
+Para examinar el tiempo de ejecución de
+ nuestro algoritmo recursivo, a veces es útil
+
+71
+00:03:49,150 --> 00:03:52,710
+definir el tiempo que el algoritmo toma en
+ forma de una relación de recurrencia..
+
+72
+00:03:53,760 --> 00:03:57,130
+Una relación de recurrencia define una secuencia 
+de valores en términos de una fórmula recursiva.
+
+73
+00:03:58,520 --> 00:04:01,870
+El ejemplo aquí muestra la definición recursiva de los valores
+
+74
+00:04:01,870 --> 00:04:02,750
+en la secuencia de Fibonacci.
+
+75
+00:04:03,980 --> 00:04:06,180
+Puedes ver que definimos el valor para
+
+76
+00:04:06,180 --> 00:04:09,340
+el n-ésimo Fibonacci como la suma de los dos valores anteriores.
+
+77
+00:04:10,650 --> 00:04:14,410
+Como en cualquier definición recursiva, 
+necesitamos uno o más casos bases.
+
+78
+00:04:14,410 --> 00:04:17,940
+Aquí, definimos los casos base cuando evaluamos F(0) y F(1).
+
+79
+00:04:19,540 --> 00:04:23,392
+De esta definición recursiva hemos
+ definido valores para evaluar F(n)
+
+80
+00:04:23,392 --> 00:04:24,940
+para cualquier entero n que no sea negativo.
+
+81
+00:04:24,940 --> 00:04:29,406
+La secuencia empieza en 0, 1, 1, 2, 3, 5, 8, y continúa.
+
+82
+00:04:31,298 --> 00:04:34,335
+Cuando analizamos tiempos de ejecución
+ para algoritmos de divide y vencerás,
+
+83
+00:04:34,335 --> 00:04:36,890
+usualmente definimos una relación recursiva para T(n),
+
+84
+00:04:36,890 --> 00:04:39,960
+donde T representa el peor tiempo del algoritmo,
+
+85
+00:04:39,960 --> 00:04:41,950
+y n es el tamaño del problema.
+
+86
+00:04:41,950 --> 00:04:45,340
+Para este algoritmo, el tiempo en el peor de 
+los casos es cuando un elemento no se encuentra
+
+87
+00:04:45,340 --> 00:04:47,490
+porque debemos checar cada elemento del arreglo.
+
+88
+00:04:47,490 --> 00:04:51,850
+En este caso tenemos una recursión para 
+un problema de tamaño n
+
+89
+00:04:51,850 --> 00:04:56,380
+que consiste en un subproblema de tamaño n-1 
+más una cantidad constante de trabajo.
+
+90
+00:04:56,380 --> 00:04:59,950
+La cantidad constante de tiempo incluye checar high vs low,
+
+91
+00:04:59,950 --> 00:05:04,130
+checar si A en low es igual a la clave k, preparar 
+los parámetros para la llamada recursiva,
+
+92
+00:05:04,130 --> 00:05:07,040
+y devolver el resultado de la llamada.
+
+93
+00:05:07,040 --> 00:05:10,490
+Así, la recurrencia T(n) es igual a T(n-1) +c.
+
+94
+00:05:10,490 --> 00:05:12,240
+donde c es alguna constante.
+
+95
+00:05:13,710 --> 00:05:18,170
+El caso base de la recurrencia es un arreglo
+ vacío, hay una cantidad de trabajo constante
+
+96
+00:05:18,170 --> 00:05:21,280
+checando si high es menor que low, y entonces
+ devolviendo "NOT_FOUND".
+
+97
+00:05:21,280 --> 00:05:22,590
+Así, T(0) es igual a c.
+
+98
+00:05:22,590 --> 00:05:26,650
+Veamos un árbol recursivo para determinar cuánto
+
+99
+00:05:26,650 --> 00:05:28,630
+tiempo le lleva al algoritmo terminar.
+
+100
+00:05:28,630 --> 00:05:31,030
+Como es lo normal, checamos el tiempo para el peor caso
+
+101
+00:05:31,030 --> 00:05:32,600
+que ocurre cuando no hay coincidencia con el elemento.
+
+102
+00:05:33,780 --> 00:05:37,230
+En un árbol de recurrencia, mostramos el 
+problema junto con el tamaño del problema.
+
+103
+00:05:37,230 --> 00:05:40,510
+Vemos que tenemos un problema original de
+ tamaño n que genera entonces un subproblema
+
+104
+00:05:40,510 --> 00:05:45,505
+de tamaño n-1, y así por todo el camino hasta 
+llegar a un subproblema de tamaño cero,
+
+105
+00:05:45,505 --> 00:05:50,080
+un arreglo vacío. La columna "trabajo" muestra
+ la cantidad de trabajo que se hace a cada nivel.
+
+106
+00:05:50,080 --> 00:05:55,210
+Tenemos una cantidad constante de trabajo en cada 
+nivel que representamos por c, una constante.
+
+107
+00:05:56,530 --> 00:05:59,430
+Alternativamente pudimos haber representado 
+la cantidad constante de tiempo
+
+108
+00:05:59,430 --> 00:06:00,110
+con Theta grande de 1.
+
+109
+00:06:01,820 --> 00:06:04,670
+El trabajo total es nada más la suma 
+del trabajo hecho en cada nivel,
+
+110
+00:06:04,670 --> 00:06:07,190
+lo que es la suma de cero a n de la constante c,
+
+111
+00:06:07,190 --> 00:06:10,830
+lo que es n+1 veces c, o Theta grande de n.
+
+112
+00:06:12,870 --> 00:06:16,120
+Este análisis parece muy complicado para un resultado tan simple.
+
+113
+00:06:16,120 --> 00:06:21,420
+Ya sabemos que buscar a través de n elementos 
+del arreglo toma un tiempo  Theta grande de n.
+
+114
+00:06:22,560 --> 00:06:26,890
+Sin embargo, este método de análisis 
+de recurrencia será más útil
+
+115
+00:06:26,890 --> 00:06:29,589
+cuando analicemos algoritmos más 
+complicados de divide y vencerás.
+
+116
+00:06:32,050 --> 00:06:35,220
+Muchas veces un algoritmo recursivo se traduce en uno iterativo.
+
+117
+00:06:35,220 --> 00:06:37,080
+Aquí lo mostramos para una búsqueda lineal.
+
+118
+00:06:37,080 --> 00:06:40,330
+Buscamos en los elementos del arreglo A 
+desde el índice low hasta el high.
+
+119
+00:06:40,330 --> 00:06:43,190
+Si encontramos una coincidencia,
+ devolvemos el índice asociado.
+
+120
+00:06:43,190 --> 00:06:44,800
+Si no, regresamos "NOT_FOUND".
+
+121
+00:06:46,270 --> 00:06:50,950
+Para resumir, lo que hicimos fue: uno, 
+creamos una solución recursiva;
+
+122
+00:06:52,000 --> 00:06:54,190
+dos, definimos una correspondiente
+ relación de recurrencia T;
+
+123
+00:06:55,190 --> 00:06:59,170
+tres, resolvimos T(n) para determinar 
+el tiempo en el peor de los casos;
+
+124
+00:06:59,170 --> 00:07:01,870
+y cuatro, creamos una solución iterativa a partir de la recursiva.
+
+125
+00:07:01,870 --> 00:07:05,400
+Lo que hemos visto en el video es un ejemplo
+
+126
+00:07:05,400 --> 00:07:09,470
+de un uso trivial de la técnica de dividir
+ y vencer para hacer una búsqueda lineal.
+
+127
+00:07:10,540 --> 00:07:12,940
+En nuestro siguiente video veremos un uso no trivial
+
+128
+00:07:12,940 --> 00:07:16,450
+de la técnica de dividir y vencer
+ para buscar en un arreglo ordenado,
+
+129
+00:07:16,450 --> 00:07:18,080
+la muy conocida búsqueda binaria.

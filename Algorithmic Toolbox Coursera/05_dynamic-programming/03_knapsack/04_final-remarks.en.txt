@@ -1,0 +1,86 @@
+We conclude this lesson with
+a few important remarks. The first remark is about
+a trick called memoization. Usually when designing a dynamic
+program and algorithm, you start with analyzing the structure of an optimal
+solution for your computational problem. You do this to come up with the right definition of a sub-problem that will
+allow you to express the solution for a sub-problem through solutions for
+smaller sub-sub-problems. So, when you write down this recurrence
+relation you can actually transform it to an ISA alternative algorithm or
+a recursive algorithm. The corresponding i 20 algorithm
+just solves all sub-problems, going from smaller ones to larger ones. And for this reason it is also
+sometimes called a bottom up algorithm. On the other hand, the recursive
+algorithm to solve a sub-problem makes recursive calls to
+smaller sub-sub-problems. And for this reason it is sometimes
+called the top down approach. Well if you implement
+a recursive algorithms straightforwardly it might turn out to
+be very slow because it will recompute some radius many, many, many times. Like with three-dimensional numbers for
+example. However, there is a simple trick,
+and it is called memorization, that allows you to avoid re-computing
+many times the same thing. Namely, you can do the following,
+when solving sub-problems, right after solving it you store its
+solution into a table, for example. And when you make a recursive call
+to solve some sub-problem, before trying to solve it, you check in a table
+whether its solution is already stored. And if its solution is already in
+the table which means that it was already computed then you
+just return it immediately. So this recursive call,
+turns out to be just a table look up. So this is how a recursive
+algorithm with memoization works. Let's see how a recursive
+algorithm with memoization for the Knapsack problem looks like. For simplicity let's assume that
+we're talking about the Knapsack we use repetitions. In this case, we need to compute our
+sub-problem for a Knapsack of size w, is just the optimal rate of
+a Knapsack of total weight w. So we computed as follows,
+we computed by recursive procedure. First of all, we check whether its
+solution is already in a hash table. We use hash table to
+store pairs of objects. So, for weight w, we store value
+of w if it is already computed. If it is already in the table, we return
+it immediately, otherwise we just compute it and we make recursive
+calls to compute the values for the sub-problem on w minus wi, okay? And when the value is computed,
+we just store it in our hash table. So this way, we use memoization
+by storing this in the hash table to avoid recomputing
+the same thing once again. So once again, an iterative
+algorithm solves all sub-problems going from smaller ones to larger ones,
+right? And eventually solves the initial problem. On the other hand the recursive
+algorithm goes as follows. So it stars from the initial problem and it makes recursive calls to
+smaller sub-sub-problems, right? So in some sense an iterative algorithm
+and the recursive algorithm are doing the same job, especially if we need to
+solve just old range of sub-problems. However, a recursive algorithm might
+turn to be slightly slower because it solves the same
+sub-problems on one hand. On the other hand, when making
+a recursive call you also need to put the return address on stamp,
+for example. So, the recursive algorithm
+has some overhead. There are however cases when you do not
+need to solve all the sub-problems and the Knapsack problem is nice
+illustration of this situation. So, imagine that we are given an input
+to the Knapsack problem where all the weight of n items together
+with total weight of the Knapsack are divisible by 100, for example. This means that we are actually
+not interested in sub-problems where the weight of the knapsack is
+not divisible by 100, why is that? Well just because for
+any subset of items since all the weight of items is divisible by 100 their
+total weight is also divisible by 100. So in this case an iterative
+algorithm still will solve just whole range of sub-problems. While a recursive algorithm will
+make only those recursive calls that I actually needed to
+compute the final solution. So, it will make only recursive
+course through sub-problems whose weight are divisible by 100. The final remark of this lesson
+is about the running time. So if you remember the running time of
+words that we recently designed in this lesson was the log of n multiplied by w. And this running time looks like
+polynomial, however it is not. And this is why, so consider for
+example, the following input. I mean, I assume that the total weight of
+the knapsack is as shown on this slide. This is a very huge number,
+roughly ten to the 20, I mean 20 digits of
+decimal representation. At the same time, the input size is
+really tiny, just 20 digits, right? So this is not gigabytes of data,
+just 20 digits but on this input already our algorithm will need to
+perform roughly ten to the 20 operations. This is really huge, for
+example we can't do this on our laptops, and this is because to represent the value
+of W, we only need log W digits. So, in case of the Knapsack problem, our input is proportional not to n plus W,
+but to n plus log W. Okay, and if you represent the running
+time in terms of n and log W, then you get the following expression,
+n multiplied by 2 to the log W, which means that our algorithm is
+in fact exponential time algorithm. Put it otherwise, it can only process
+inputs where W is not large enough, it's roughly less than 1 billion,
+for example. Okay, and in fact, we believe that it is
+very difficult to construct an algorithm that will solve this problem in polynomial
+time, in truly polynomial time. In particular, we will learn later in
+this presentation that this problem is considered to be so difficult that for
+solving the Knapsack problem for example, in polynomial time,
+one gets $1 million.

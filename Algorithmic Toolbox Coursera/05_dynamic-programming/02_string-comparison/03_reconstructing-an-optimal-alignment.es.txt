@@ -1,0 +1,47 @@
+Ahora sabemos cómo calcular la
+distancia de edición o calcular el alineamiento óptimo rellenando las entradas
+en la matriz de programación dinámica. Pero esto no nos dice aún
+cómo construir el alineamiento en dos filas con la primera fila
+representando la primera secuencia y el segundo renglón representando
+la segunda secuencia. Esta es una idea. Usamos los punteros de rastreo (backtracking) que
+construimos mientras rellenamos la matriz de programación dinámica para
+reconstruir el alineamiento óptimo entre cadenas. Podemos empezar dándonos cuenta
+de que aquello que vaya de 0, 0 a i,j en la matriz de programación dinámica significa un alineamiento de un prefijo i
+de A con un prefijo j de B. Por ejemplo, comencemos la alineación de las 
+secuencias, lo que significa empecemos viajando desde el punto 0,0 al punto n,m 
+en nuestra matriz de programación dinámica. Tan pronto en cuanto nos movemos a través de la
+diagonal izquierda corresponderá con una discrepancia o o una coincidencia, después continuaremos
+usando los enlaces horizontales o verticales que se corresponderán
+a inserciones o deleciones. Después usaremos de nuevo un enlace diagonal. En este caso, es una
+coincidencia y continuamos construyendo el alineamiento n
+de las dos cadenas. Por favor, observa que el camino construido
+se corresponde con la distancia 8 y no es un alineamiento óptimo porque sabemos que
+nuestra distancia de alineamiento óptima es 5. Para construir un alineamiento óptimo
+usaremos los punteros de rastreo empezando desde el último vértice en esta matriz. Particularmente, desde este vértice, donde la 
+distancia de edición está almacenada como 5. Usando los punteros de rastreo vemos que existen dos posibles formas
+de llegar a este últmo vértice. Escojamos arbitrariamente uno de ellos. Uno de ellos se corresponde con una discrepancia
+y el otro se corresponde con una inserción. así que escojamos arbitrariamente un enlace de 
+discrepancia que se corresponderá con una discrepancia entre "G" e "E", después
+a partir de los puntos previos sólo hay una forma de moverse hasta este punto
+y se corresponde con un ángulo seguimos,coincidencia, seguimos, 
+seguimos, seguimos, seguimos y llegamos finalmente
+al punto inicial mientras al mismo tiempo construimos el
+alineamiento óptimo entre las dos cadenas. El pseudocódigo de OutputAlignment
+implementa esta idea. Simplemente examinamos los
+punteros que entran en el nodo i,j. Si llegan al nodo i,j usando
+un enlace vertical que simplemente mostrará un desplazamiento
+de una columna del alineamiento que es A i en la primera columna. Si, por otro lado, se corresponde
+con un enlace horizontal, la columna de salida es B j en la segunda fila y si se corresponde con un enlace diagonal
+la salida de una columna de un alineamiento con un A de i en la primera
+fila y B de j en la segunda fila. Parece que realmente necesitamos
+almacenar todos los punteros de rastreo para mostrar el alineamiento, pero 
+un pseudocódigo ligeramente modificado nos dice que puede calcular los
+punteros de rastreo analizando entradas en la matriz de programación
+dinámica y ahorrando un poco de espacio. La distancia de edición es sólo una de las múltiples aplicaciones de comparaciones
+de cadenas en varias disciplinas que van desde analizar páginas de Internet hasta
+encontrar genes similares. Hemos comenzado esta lección
+con el ejemplo de la búsqueda del gen para la fibrosis quística, uno de los primeros 
+éxitos del proyecto del genoma humano. Si quieres aprender más acerca de
+comparar genes, proteínas y genomas, puedes matricularte en la especialización
+de Coursera llamada Bioinformática o puedes leer el libro de Algoritmos Bioinformáticos, 
+el enfoque de aprendizaje activo.

@@ -1,0 +1,63 @@
+Vamos a empezar nuestros algoritmos de divide y vencerás con lo que se podría considerar una forma
+ degenerada de dividir y vencer. Buscar en un arreglo desordenado usando búsqueda lineal. Aquí hay un ejemplo de un arreglo. Para encontrar un elemento particular en el arreglo checamos el primer elemento.
+ Si no está ahí, checamos el segundo. Seguimos hasta que, o encontramos el elemento que nos interesa, o hasta que lleguemos al final del arreglo. El mismo tipo de búsqueda se usa para 
+encontrar elementos que están guardados en una lista ordenada. Déjenme describir un uso en la vida 
+real de la búsqueda lineal. Hace 25 años me consultó una compañía
+ que estaba desarrollando software para una de las primeras computadoras
+ postátiles, la Apple Newton. La aplicación traducía palabras entre
+ cualesquiera dos de los idiomas: inglés, francés, italiano, alemán y español. Sus datos estaban grabados en 5 arreglos paralelos. Así que, por ejemplo, "car" estaba en
+ la segunda posición en inglés. En español, "car" es "auto", así que la segunda posición en el arreglo
+ en español contenía "auto". El programa tomaría la palabra junto con los
+ idiomas fuente y destino a traducir como entrada. Entonces buscaría en el correspondiente 
+arreglo fuente, inglés por ejemplo, para tratar de traducir "car" de inglés a español. Si encontrara una concordancia, devolvería el elemento con el mismo
+ índice en el idioma destino. Con un pequeño diccionario de tres
+ palabras, como en este ejemplo, la búsqueda lineal es rápida. Sin embargo, me consultaron para acelerar la aplicación. Cuando los usuarios hacían click en el botón de 
+traducción, le tomaría entre 7 a 10 segundos para devolver la palabra traducida, una eternidad
+ desde el punto de vista del usuario. Habían alrededor de 50 mil palabras en el diccionario, así que, en promedio, hacía 25 mil revisiones 
+para encontrar una coincidencia. En el siguiente video les enseñaré cómo acelerar
+ esta aplicación usando búsqueda binaria. El enunciado del problema para búsqueda lineal es el que sigue: dado un arreglo desordenado con n elementos, 
+y una clave k, encuentra un índice i en el que el elemento del arreglo sea igual a k. Si no hay un elemento en el arreglo igual a k,
+ la salida debe ser "NOT_FOUND". Nota que decimos "un" índice y no "el" índice, porque pueden haber duplicados en el arreglo. Esto puede sonar pedante, pero es importante ser lo más cuidadoso posible al especificar 
+el enunciado de nuestro problema. La muy conocida solución a este 
+problema es una búsqueda lineal que itera en el arreglo hasta que encuentras 
+el elemento seleccionado. Si llegas al final del arreglo y no has encontrado el elemento, 
+devuelve "NOT_FOUND". Podemos construir un algoritmo recursivo
+ de dividir y vencer para resolver este problema. Nuestra función recursiva tomará cuatro parámetros: A, el arreglo de valores; low, la cota inferior del arreglo en el que hay que buscar; high, la cota superior del arreglo en
+ el que hay que buscar; y k, la clave que hay que buscar. Devolverá, ya sea un índice en el rango low a high, si es que encuentra una concordancia, 
+o "NOT_FOUND" si no hay concordancia. Como en todas las soluciones recursivas necesitamos
+ tomar con cuidado el caso base. En particular, los casos base para este
+ problema serán, ya sea un arreglo vacío, o encontrar una coincidencia en el primer elemento. El subproblema es buscar en el subarreglo construído saltando el primer elemento. Buscaremos recursivamente en ese subarreglo más pequeño, y entonces devolveremos el resultado
+ de la búsqueda recursiva. Aunque ésta es una rutina recursiva que rompe el problema en problemas más pequeños, algunos argumentarían que esto no 
+debería llamarse divide y vencerás. Ellos dicen que el algoritmo divide y vencerás debe dividir el problema
+ en subproblemas más pequeños, donde el subproblema más pequeño es alguna
+ fracción constante del problema original. En este caso, el problema no es 50% u 80% o incluso el 95% del tamaño del problema original. En lugar de eso, es sólo uno menos que
+ el tamaño del problema original. No sé, a la mejor tengamos que llamar a este algoritmo resta y vencerás en lugar de divide y vencerás. Para examinar el tiempo de ejecución de
+ nuestro algoritmo recursivo, a veces es útil definir el tiempo que el algoritmo toma en
+ forma de una relación de recurrencia.. Una relación de recurrencia define una secuencia 
+de valores en términos de una fórmula recursiva. El ejemplo aquí muestra la definición recursiva de los valores en la secuencia de Fibonacci. Puedes ver que definimos el valor para el n-ésimo Fibonacci como la suma de los dos valores anteriores. Como en cualquier definición recursiva, 
+necesitamos uno o más casos bases. Aquí, definimos los casos base cuando evaluamos F(0) y F(1). De esta definición recursiva hemos
+ definido valores para evaluar F(n) para cualquier entero n que no sea negativo. La secuencia empieza en 0, 1, 1, 2, 3, 5, 8, y continúa. Cuando analizamos tiempos de ejecución
+ para algoritmos de divide y vencerás, usualmente definimos una relación recursiva para T(n), donde T representa el peor tiempo del algoritmo, y n es el tamaño del problema. Para este algoritmo, el tiempo en el peor de 
+los casos es cuando un elemento no se encuentra porque debemos checar cada elemento del arreglo. En este caso tenemos una recursión para 
+un problema de tamaño n que consiste en un subproblema de tamaño n-1 
+más una cantidad constante de trabajo. La cantidad constante de tiempo incluye checar high vs low, checar si A en low es igual a la clave k, preparar 
+los parámetros para la llamada recursiva, y devolver el resultado de la llamada. Así, la recurrencia T(n) es igual a T(n-1) +c. donde c es alguna constante. El caso base de la recurrencia es un arreglo
+ vacío, hay una cantidad de trabajo constante checando si high es menor que low, y entonces
+ devolviendo "NOT_FOUND". Así, T(0) es igual a c. Veamos un árbol recursivo para determinar cuánto tiempo le lleva al algoritmo terminar. Como es lo normal, checamos el tiempo para el peor caso que ocurre cuando no hay coincidencia con el elemento. En un árbol de recurrencia, mostramos el 
+problema junto con el tamaño del problema. Vemos que tenemos un problema original de
+ tamaño n que genera entonces un subproblema de tamaño n-1, y así por todo el camino hasta 
+llegar a un subproblema de tamaño cero, un arreglo vacío. La columna "trabajo" muestra
+ la cantidad de trabajo que se hace a cada nivel. Tenemos una cantidad constante de trabajo en cada 
+nivel que representamos por c, una constante. Alternativamente pudimos haber representado 
+la cantidad constante de tiempo con Theta grande de 1. El trabajo total es nada más la suma 
+del trabajo hecho en cada nivel, lo que es la suma de cero a n de la constante c, lo que es n+1 veces c, o Theta grande de n. Este análisis parece muy complicado para un resultado tan simple. Ya sabemos que buscar a través de n elementos 
+del arreglo toma un tiempo  Theta grande de n. Sin embargo, este método de análisis 
+de recurrencia será más útil cuando analicemos algoritmos más 
+complicados de divide y vencerás. Muchas veces un algoritmo recursivo se traduce en uno iterativo. Aquí lo mostramos para una búsqueda lineal. Buscamos en los elementos del arreglo A 
+desde el índice low hasta el high. Si encontramos una coincidencia,
+ devolvemos el índice asociado. Si no, regresamos "NOT_FOUND". Para resumir, lo que hicimos fue: uno, 
+creamos una solución recursiva; dos, definimos una correspondiente
+ relación de recurrencia T; tres, resolvimos T(n) para determinar 
+el tiempo en el peor de los casos; y cuatro, creamos una solución iterativa a partir de la recursiva. Lo que hemos visto en el video es un ejemplo de un uso trivial de la técnica de dividir
+ y vencer para hacer una búsqueda lineal. En nuestro siguiente video veremos un uso no trivial de la técnica de dividir y vencer
+ para buscar en un arreglo ordenado, la muy conocida búsqueda binaria.

@@ -1,0 +1,425 @@
+1
+00:00:00,057 --> 00:00:05,134
+In this video we address the issue
+of equal elements in the.
+
+2
+00:00:05,134 --> 00:00:10,101
+So recall that we proved the upper
+bound on the running time of the render
+
+3
+00:00:10,101 --> 00:00:14,699
+Greek algorithm, in the assumption
+that all the elements inside
+
+4
+00:00:14,699 --> 00:00:17,539
+the given array are prioritized different.
+
+5
+00:00:19,180 --> 00:00:22,450
+And actually,
+we used essentially these assumptions.
+
+6
+00:00:22,450 --> 00:00:27,220
+So, recall that we estimated
+the probability that two elements,
+
+7
+00:00:27,220 --> 00:00:30,381
+A prime of I and
+A prime of J are comparative.
+
+8
+00:00:30,381 --> 00:00:34,146
+And we argued that if any element
+between them is selected,
+
+9
+00:00:34,146 --> 00:00:37,475
+the appearance is that they
+will not become period.
+
+10
+00:00:37,475 --> 00:00:42,012
+However, if they are equal, so
+if A prime of A is equal to A prime of J,
+
+11
+00:00:42,012 --> 00:00:46,570
+this means actually that all
+the elements in this range are equal.
+
+12
+00:00:46,570 --> 00:00:51,501
+So if we select any element inside this
+range, in the middle of this range,
+
+13
+00:00:51,501 --> 00:00:56,511
+as a pivot, then it is not true that
+these two elements will go into different
+
+14
+00:00:56,511 --> 00:01:01,993
+parts with respect to this element, this
+is just because all of the elements inside
+
+15
+00:01:01,993 --> 00:01:07,632
+this range are equal, which means that if
+we partition with respect of this element,
+
+16
+00:01:07,632 --> 00:01:11,990
+all of the elements in this range
+will be [INAUDIBLE] this element.
+
+17
+00:01:11,990 --> 00:01:17,390
+So, they all will be in the left part
+with respect to this element, okay?
+
+18
+00:01:17,390 --> 00:01:21,350
+So our analysis doesn't work for
+equal elements but
+
+19
+00:01:21,350 --> 00:01:23,930
+let's see what happens in real life.
+
+20
+00:01:23,930 --> 00:01:27,120
+What happens if we run
+the greek sort algorithm for
+
+21
+00:01:27,120 --> 00:01:30,790
+the array in which there
+are equal elements.
+
+22
+00:01:30,790 --> 00:01:35,040
+For this, let's use the following
+online visualization.
+
+23
+00:01:35,040 --> 00:01:39,540
+This visualization shows
+how different selection,
+
+24
+00:01:39,540 --> 00:01:43,550
+different certain algorithms that
+are formed on different datasets.
+
+25
+00:01:43,550 --> 00:01:46,110
+So there are eight
+
+26
+00:01:46,110 --> 00:01:51,210
+certain algorithms here where we are now
+interested in this QuickSort algorithm.
+
+27
+00:01:51,210 --> 00:01:55,100
+And there are four different
+types of datasets.
+
+28
+00:01:55,100 --> 00:01:59,370
+So the field datasets is
+just random sequence.
+
+29
+00:01:59,370 --> 00:02:02,140
+The next one is in sorted sequence,
+
+30
+00:02:02,140 --> 00:02:06,680
+the next one is a reversed sequence and
+the next one which is most interesting to
+
+31
+00:02:06,680 --> 00:02:11,250
+us at the moment is a sequence that
+contains a few unique elements.
+
+32
+00:02:11,250 --> 00:02:19,190
+So let's see how the greek sort
+algorithm performs on the last dataset.
+
+33
+00:02:19,190 --> 00:02:26,440
+So for this let's just run all
+the algorithms, on all data sets.
+
+34
+00:02:26,440 --> 00:02:28,210
+So let's see what happens here.
+
+35
+00:02:28,210 --> 00:02:35,100
+So you, you may notice now that, for
+example, have already sorted everything.
+
+36
+00:02:35,100 --> 00:02:41,590
+And while greek sort have just finished
+to sort the last, the last data set.
+
+37
+00:02:41,590 --> 00:02:44,150
+So Greek sort is not, is not so
+
+38
+00:02:44,150 --> 00:02:50,300
+fast on data sets that contains few
+unique elements and this is why.
+
+39
+00:02:50,300 --> 00:02:55,550
+So just consider a dataset that consists
+
+40
+00:02:55,550 --> 00:02:57,820
+of elements that are all
+equal to each other.
+
+41
+00:02:57,820 --> 00:03:00,600
+So all elements are equal to each.
+
+42
+00:03:00,600 --> 00:03:04,760
+This means that the selection,
+the partition procedure always
+
+43
+00:03:05,870 --> 00:03:10,190
+partitions the array with
+respect to the element x, right?
+
+44
+00:03:10,190 --> 00:03:12,820
+And then in this case, one of the parts,
+
+45
+00:03:12,820 --> 00:03:16,920
+namely the part of the elements that
+are greater than x, is just empty.
+
+46
+00:03:16,920 --> 00:03:18,210
+It has size zero.
+
+47
+00:03:18,210 --> 00:03:20,750
+And the other part has size n minus one.
+
+48
+00:03:20,750 --> 00:03:26,110
+So the records and equalities, the records
+equalities on the running time of
+
+49
+00:03:26,110 --> 00:03:30,690
+how a algorithm on such a data set
+always satisfies the following relation,
+
+50
+00:03:30,690 --> 00:03:36,360
+T of n is equal to T of n minus 1
+plus a linear term plus T of 0.
+
+51
+00:03:36,360 --> 00:03:39,430
+And we know already, so
+this is an unbalanced partition.
+
+52
+00:03:39,430 --> 00:03:44,960
+We know the responds to
+the quadratic right in time so,
+
+53
+00:03:44,960 --> 00:03:50,090
+which means that the running time of the
+quick sort algorithm a very simple array.
+
+54
+00:03:50,090 --> 00:03:55,400
+So it contains all the elements
+of this array are equal.
+
+55
+00:03:55,400 --> 00:03:58,320
+Which means that actually
+this array is already sorted.
+
+56
+00:03:58,320 --> 00:04:02,640
+In this array our quick sort
+algorithm spends a quadratic
+
+57
+00:04:02,640 --> 00:04:07,830
+time to sort it to overcome this
+difficulty we'll do the following.
+
+58
+00:04:07,830 --> 00:04:11,420
+Instead of partitioning
+our rate into two regions.
+
+59
+00:04:11,420 --> 00:04:15,190
+Namely these regions contain all elements
+
+60
+00:04:15,190 --> 00:04:19,410
+that contain all x and
+all elements that are greater than x.
+
+61
+00:04:19,410 --> 00:04:22,570
+We are going to partition
+into three parts.
+
+62
+00:04:22,570 --> 00:04:26,500
+The corresponding partition procedure
+is usually called three-way partition.
+
+63
+00:04:26,500 --> 00:04:29,460
+Formally, it returns two indices.
+
+64
+00:04:29,460 --> 00:04:32,360
+m1 and m2, such that,
+
+65
+00:04:32,360 --> 00:04:36,720
+all the elements inside the region
+from m1 to m2 are equal to x.
+
+66
+00:04:36,720 --> 00:04:40,950
+All the elements to the left of
+this region are smaller than x.
+
+67
+00:04:40,950 --> 00:04:44,710
+All the elements that are to the right
+of this region are greater than x.
+
+68
+00:04:46,140 --> 00:04:48,190
+So this is how it looks pictorially.
+
+69
+00:04:48,190 --> 00:04:50,690
+We have three regions.
+
+70
+00:04:50,690 --> 00:04:58,140
+So, from l to m1 minus 1, we have all
+elements that are smaller than x.
+
+71
+00:04:58,140 --> 00:05:02,500
+In the region from m1 to m2,
+we have all elements that are equal to x.
+
+72
+00:05:03,510 --> 00:05:08,880
+In the region from m2 plus 1 to r, we have
+all elements that are greater than x.
+
+73
+00:05:08,880 --> 00:05:12,440
+This procedure actually can be
+implemented in a similar way
+
+74
+00:05:12,440 --> 00:05:15,240
+to their regional partition procedure.
+
+75
+00:05:15,240 --> 00:05:20,260
+It can be implemented ties with a single
+kind of area with maintaing their regions
+
+76
+00:05:20,260 --> 00:05:22,580
+or it can be implemented with two counts.
+
+77
+00:05:22,580 --> 00:05:28,780
+So we first split our rate
+into regions which contain
+
+78
+00:05:28,780 --> 00:05:35,119
+elements of most x or greater than x and
+then we split the region into two parts.
+
+79
+00:05:36,120 --> 00:05:41,630
+Well, this is how the modified randomized
+quick sort algorithm is going to apply.
+
+80
+00:05:43,170 --> 00:05:45,060
+So we just replace it,
+
+81
+00:05:45,060 --> 00:05:49,810
+the cold partition procedure by
+a cold two partition suite procedure.
+
+82
+00:05:49,810 --> 00:05:54,420
+Now we have three regions, and, actually
+the middle region is in its final place,
+
+83
+00:05:54,420 --> 00:05:57,580
+so we do not touch it after
+the partition procedure.
+
+84
+00:05:57,580 --> 00:06:01,820
+We make two recursive calls to the first
+region and to the last region.
+
+85
+00:06:01,820 --> 00:06:05,850
+So, let's see whether the resulting
+algorithm is indeed Greek.
+
+86
+00:06:05,850 --> 00:06:08,420
+And for this,
+let's use the same visualization.
+
+87
+00:06:08,420 --> 00:06:11,790
+The resulting algorithm is
+shown here in the last column.
+
+88
+00:06:11,790 --> 00:06:18,268
+Let's, once again, run all the algorithms
+and see what happens in the last column.
+
+89
+00:06:20,685 --> 00:06:27,253
+Well we see that now, the results in
+Greek algorithm, is indeed Greek.

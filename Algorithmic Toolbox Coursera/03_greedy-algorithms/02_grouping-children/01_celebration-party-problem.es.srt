@@ -1,0 +1,435 @@
+1
+00:00:00,280 --> 00:00:03,630
+Hola, en esta clase discutiremos el problema
+
+2
+00:00:03,630 --> 00:00:06,020
+de organizar niños en grupos.
+
+3
+00:00:06,020 --> 00:00:09,920
+Y aprenderás que si usas un algoritmo ingenuo
+ para resolver este problema,
+
+4
+00:00:09,920 --> 00:00:10,720
+funcionará muy,
+
+5
+00:00:10,720 --> 00:00:15,140
+pero muy lento, porque el tiempo de ejecución
+ de este algoritmo es exponencial.
+
+6
+00:00:15,140 --> 00:00:18,900
+Pero después, en la siguiente lección, seremos capaces
+ de mejorar el tiempo de ejecución
+
+7
+00:00:18,900 --> 00:00:21,979
+significativamente, proponiendo un
+ algoritmo en tiempo polinomial.
+
+8
+00:00:23,840 --> 00:00:26,180
+Consideremos la situación siguiente.
+
+9
+00:00:26,180 --> 00:00:29,550
+Has invitado a muchos niños a la celebración de una fiesta
+
+10
+00:00:29,550 --> 00:00:33,860
+y quieres entretenerlos y enseñarles algo en el proceso.
+
+11
+00:00:33,860 --> 00:00:36,180
+Vas a contratar unos cuantos maestros
+
+12
+00:00:36,180 --> 00:00:41,070
+y dividir a los niños en grupos y asignar
+ un maestro a cada uno de los grupos.
+
+13
+00:00:41,070 --> 00:00:43,430
+Y este maestro trabajará con este grupo durante toda la fiesta.
+
+14
+00:00:44,470 --> 00:00:49,170
+Pero sabes que para que un maestro trabaje con un
+ grupo de niños de manera eficiente,
+
+15
+00:00:49,170 --> 00:00:53,130
+los niños de ese grupo deben ser
+ de aproximadamente la misma edad.
+
+16
+00:00:53,130 --> 00:00:58,060
+Más específicamente, la edad de 
+cualesquiera dos niños del mismo grupo
+
+17
+00:00:58,060 --> 00:00:59,819
+deben diferir a lo más por un año.
+
+18
+00:01:01,220 --> 00:01:04,180
+También, quieres minimizar el número de grupos
+
+19
+00:01:04,180 --> 00:01:07,030
+porque quieres contratar el menor número de maestros,
+
+20
+00:01:07,030 --> 00:01:11,280
+y gastar el dinero en regalos y otro tipo
+ de entretenimiento para los niños.
+
+21
+00:01:11,280 --> 00:01:16,320
+Entonces, necesitas dividir a los niños en el
+ menor número posible de grupos,
+
+22
+00:01:16,320 --> 00:01:21,700
+tal que la edad de cualquier par de niños de cualquier
+ grupo difiere en a lo más un año.
+
+23
+00:01:23,200 --> 00:01:28,020
+Ahora veamos el pseudo código del algoritmo
+ ingenuo que resuelve el problema.
+
+24
+00:01:29,790 --> 00:01:33,900
+Básicamente, este algoritmo considerará cada posible partición
+
+25
+00:01:33,900 --> 00:01:39,000
+de los niños en grupos, y encontrará la partición que
+
+26
+00:01:39,000 --> 00:01:42,860
+satisfaga la propiedad de que las edades de los niños
+
+27
+00:01:42,860 --> 00:01:47,910
+en cualquier grupo difieran a lo más por un año, y
+ que contenga el mínimo número de grupos.
+
+28
+00:01:49,140 --> 00:01:53,740
+Empezamos asignando el valor inicial del número de
+
+29
+00:01:53,740 --> 00:01:59,150
+grupos a la respuesta m, y este valor
+ inicial es justo el número de niños,
+
+30
+00:01:59,150 --> 00:02:04,000
+porque siempre podemos dividir a los niños en grupos de a uno,
+
+31
+00:02:04,000 --> 00:02:08,590
+y entonces, por supuesto, cada grupo tiene un solo
+ niño y la condición se satisface.
+
+32
+00:02:09,640 --> 00:02:14,570
+Entonces, consideramos cada partición posible
+ de todos los niños en grupos.
+
+33
+00:02:14,570 --> 00:02:19,560
+El número de grupos puede variar,
+ y esto es denotado por el número k,
+
+34
+00:02:19,560 --> 00:02:22,970
+y tenemos los grupos G1, G2, hasta Gk.
+
+35
+00:02:24,360 --> 00:02:26,130
+Y entonces cuando tenemos una partición,
+
+36
+00:02:26,130 --> 00:02:29,530
+primero necesitamos checar si es una buena partición o no.
+
+37
+00:02:29,530 --> 00:02:33,640
+Así que tenemos la variable good,
+ a la que le asignamos True al principio,
+
+38
+00:02:33,640 --> 00:02:36,500
+porque pensamos que tal vez sea una buena partición.
+
+39
+00:02:36,500 --> 00:02:41,500
+Pero entonces necesitamos checar, para cada grupo,
+ si se satisface nuestra condición o no.
+
+40
+00:02:41,500 --> 00:02:47,130
+Así que vamos en un bucle for, con índice i del grupo de 1 a k,
+
+41
+00:02:47,130 --> 00:02:50,450
+y entonces consideramos el grupo particular Gi
+
+42
+00:02:50,450 --> 00:02:54,800
+y necesitamos determinar si todos los niños
+ en este grupo difieren a lo más
+
+43
+00:02:54,800 --> 00:02:58,790
+por un año, o hay un par que difiere por más.
+
+44
+00:02:59,900 --> 00:03:05,730
+Para checar esto, es suficiente comparar al niño
+ más chico con el mayor de edad.
+
+45
+00:03:05,730 --> 00:03:10,700
+Si sus edades difieren por más de un año, el grupo es malo.
+
+46
+00:03:10,700 --> 00:03:15,590
+De otra forma, cada par de niños difieren a lo más
+ por un año, y el grupo es bueno.
+
+47
+00:03:15,590 --> 00:03:20,400
+Y así vamos por todos los grupos en el bucle for.
+
+48
+00:03:20,400 --> 00:03:22,560
+Si al menos uno de los grupos es malo,
+
+49
+00:03:22,560 --> 00:03:26,800
+entonces nuestra variable good tendrá valor False al final,
+
+50
+00:03:26,800 --> 00:03:32,080
+de otra forma, si todos los grupos son buenos, la 
+variable good permanecerá con valor True.
+
+51
+00:03:32,080 --> 00:03:36,200
+Entonces, después de este bucle for, checamos
+ el valor de la variable good,
+
+52
+00:03:36,200 --> 00:03:40,350
+y si es True, mejoramos nuestra respuesta,
+
+53
+00:03:40,350 --> 00:03:42,090
+al menos tratamos de mejorarla,
+
+54
+00:03:42,090 --> 00:03:45,710
+con el mínimo de su valor actual
+
+55
+00:03:45,710 --> 00:03:48,510
+y el número de grupos en la partición actual.
+
+56
+00:03:48,510 --> 00:03:53,930
+Y así, al final del bucle for exterior,
+ que checa todas las particiones,
+
+57
+00:03:53,930 --> 00:03:59,310
+nuestra variable m contendrá el número mínimo
+ posible de grupos en una partición
+
+58
+00:03:59,310 --> 00:04:02,160
+que satisface todas las condiciones.
+
+59
+00:04:02,160 --> 00:04:05,090
+Es obvio que este algoritmo trabaja correctamente
+
+60
+00:04:05,090 --> 00:04:08,430
+porque considera básicamente todas las variantes posibles
+
+61
+00:04:08,430 --> 00:04:13,320
+y selecciona la mejor de éstas que satisface nuestra
+ condición sobre los grupos.
+
+62
+00:04:14,350 --> 00:04:17,169
+Ahora, estimemos el tiempo de ejecución de este algoritmo.
+
+63
+00:04:18,540 --> 00:04:23,000
+Y yo enuncio que el número de 
+operaciones que hace este algoritmo
+
+64
+00:04:23,000 --> 00:04:27,520
+es al menos 2^n, donde n es el número de niños en C.
+
+65
+00:04:27,520 --> 00:04:31,230
+De hecho, este algoritmo corre aún más lento
+
+66
+00:04:31,230 --> 00:04:34,700
+y hace muchas más operaciones que 2^n, pero
+
+67
+00:04:34,700 --> 00:04:38,700
+probaremos solamente esta cota inferior para 
+mostrar que este algoritmo es muy lento.
+
+68
+00:04:40,030 --> 00:04:45,590
+Para probarlo, consideremos sólo
+ particiones de los niños en dos grupos.
+
+69
+00:04:45,590 --> 00:04:48,290
+Por supuesto, hay muchas más particiones además de esas.
+
+70
+00:04:48,290 --> 00:04:52,260
+Podemos dividirlos en dos, tres, cuatro, etc.,
+
+71
+00:04:52,260 --> 00:04:53,520
+muchos más grupos,
+
+72
+00:04:53,520 --> 00:04:57,120
+pero, consideremos sólo particiones en dos grupos
+
+73
+00:04:57,120 --> 00:05:01,690
+y probemos que incluso el número de tales particiones es
+
+74
+00:05:01,690 --> 00:05:02,938
+al menos, 2^n.
+
+75
+00:05:02,938 --> 00:05:09,060
+Realmente, si C es una unión de dos grupos,
+
+76
+00:05:09,060 --> 00:05:12,820
+G1 y G2, entonces podemos hacer esa partición básicamente
+
+77
+00:05:12,820 --> 00:05:16,958
+para cualquier G1 que es un subconjunto de C.
+
+78
+00:05:16,958 --> 00:05:21,390
+Para cualquier G1, sólo toma
+
+79
+00:05:21,390 --> 00:05:26,990
+como G2 el grupo que contenga a todos los niños
+ que no forman parte del primer grupo.
+
+80
+00:05:26,990 --> 00:05:30,580
+Y entonces, todos los niños se dividirán en estos dos grupos.
+
+81
+00:05:30,580 --> 00:05:34,790
+Ahora, el tamaño del conjunto de todos los niños es n.
+
+82
+00:05:35,940 --> 00:05:41,760
+Y si quieres calcular el número de 
+grupos posibles G1, entonces debemos
+
+83
+00:05:41,760 --> 00:05:44,670
+notar que cada elemento del conjunto
+
+84
+00:05:44,670 --> 00:05:50,340
+o cada niño, puede estar incluido o no en el conjunto G1.
+
+85
+00:05:50,340 --> 00:05:54,790
+Así que, pueden haber 2^n grupos
+
+86
+00:05:54,790 --> 00:06:00,090
+diferentes G1. Y entonces hay al menos 2^n
+
+87
+00:06:00,090 --> 00:06:03,830
+particiones del conjunto de todos los niños en dos grupos,
+
+88
+00:06:03,830 --> 00:06:06,950
+y eso significa que nuestro algoritmo hará al menos
+
+89
+00:06:06,950 --> 00:06:12,200
+2^n operaciones porque considera cada partición,
+
+90
+00:06:12,200 --> 00:06:15,289
+y entre todas las particiones, están
+ todas las particiones en dos grupos.
+
+91
+00:06:16,390 --> 00:06:18,920
+Entonces, ¿cuánto tiempo le llevara realmente?
+
+92
+00:06:18,920 --> 00:06:22,460
+Vimos que el algoritmo ingenuo trabaja en tiempo Omega(2^n),
+
+93
+00:06:22,460 --> 00:06:27,370
+así que hace al menos 2^n operaciones.
+
+94
+00:06:27,370 --> 00:06:32,560
+Y, por ejemplo, para nada más 50 niños esto es al menos 2^50
+
+95
+00:06:32,560 --> 00:06:34,790
+o el número enorme que aparece en la pantalla.
+
+96
+00:06:34,790 --> 00:06:39,040
+Este es el número de operaciones que necesitaremos
+ hacer y yo estimo que
+
+97
+00:06:39,040 --> 00:06:43,890
+en una computadora regular este cálculo te
+ llevará al menos dos semanas,
+
+98
+00:06:43,890 --> 00:06:49,050
+si este fuera exactamente el
+ número de operaciones que necesitaras.
+
+99
+00:06:49,050 --> 00:06:51,420
+Así que realmente es muy lento.
+
+100
+00:06:51,420 --> 00:06:54,360
+Pero en la siguiente lección mejoraremos esto significativamente.

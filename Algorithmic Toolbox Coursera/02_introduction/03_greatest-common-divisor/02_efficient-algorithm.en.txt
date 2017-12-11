@@ -1,0 +1,66 @@
+Hello everybody, welcome back. Today we're going to be talking a little
+bit more about computing greatest common divisors. In particular today, we're going to be talking about a much
+more efficient algorithm than last time. This is know as the Euclidean Algorithm,
+we'll talk about that and we'll talk a little bit
+about how its runtime works. Just to recall for integers, a and
+b, their greatest common divisor is the biggest integer d
+that divides both of them. What we'd like to do is we'd
+like to be able to compute this, given two integers we want
+to compute their GCD. We found a bad algorithm for
+this and we'd like a better one. It turns out that in order
+to find a better algorithm, you need to know something interesting. There's this Key Lemma that we have, where suppose that we let a' be
+the remainder when a is divided by b, then the gcd(a,b) is actually
+the same as the gcd(a',b), and also the same as the 
+gcd(b, a'). The proof of this, once you know what to
+prove, is actually not very difficult. The idea is that because
+a' is a remainder, this means a is equal to a' plus some
+multiple of b plus b times q, for some q. From that you can show that
+if d divides both a and b, that happens if, and only if,
+it divides both a' and b. Because, for example, if d divides a' and
+b, it divides a' plus bq, which is a. From this statement,
+we know that the common divisors of a and b are exactly the same as
+the common divisors of a' and b. Therefore, the greatest
+common divisor of a and b is the greatest common divisor of a' and
+b. This is the idea for the algorithm. Basically, we have the gcd(a,b)
+is the same as the gcd(b,a'), but a' is generally smaller than a. If we compute that new GCD recursively,
+hopefully that will be an easier problem. Now, we do need a base case for this, so we're going to start off by
+saying if b is equal to zero, everything divides zero, so we just
+need the biggest thing that divides a. We're going to return a in that case. Otherwise, we're going to let a' be
+the remainder when a is divided by b, and we're going to return the gcd(b,a'),
+computed recursively. By the Lemma that we just gave,
+if this ever returns an answer, it will always give the correct answer. At the moment, we don't even know
+that it will necessarily terminate, much less do so
+in any reasonable amount of time. Let's look at an example. Suppose that we want to compute
+the gcd(3918848,1653264). So b here is not zero,
+we divide a by b, we get a remainder that's something like 612000, and
+now we have a new GCD problem to solve. Once again, b is not zero, we divide a by
+b, we get a new remainder of 428,000 some. We repeat this process, gives us
+a remainder of 183,000 some, 61,000 some. Divide again we get a remainder of zero. And now b is 0, so we return the answer, 61232, and this is the right answer. You'll note though, this thing took us
+six steps to get to the right answer. Whereas, if we'd used
+the algorithm from last time, we would've had to check something like 5
+million different possible common divisors to find the best one. This it turns out is a lot better, and to
+get a feel of how well this thing works, or why it works well, every time we take
+one of these remainders with division, we reduce the size of the number
+involved by a factor of about 2. And if every step were reducing
+things by a factor of two, after about log(ab) many steps,
+our numbers are now tiny or zero, and so, basically after log(ab) many steps,
+this algorithm is going to terminate. This means that, suppose that we want
+to compute GCDs of 100-digit numbers, this is only going to take
+us about 600 steps to do it. Each of the steps that we've used here
+is a single division with remainder, 600 divisions with remainder is
+something you can do trivially, on any reasonable computer. This algorithm will compute
+quite large GCDs very quickly. In summary, once again,
+we had this computational problem. There was a naive algorithm,
+one that was very simple, came right from the definition, but it
+was far too slow for practical purposes. There's a correct algorithm which is much,
+much better, very usable. Once again, finding the right algorithm
+makes all the difference in the world. But here there was this
+interesting thing that we found. In order to get the correct algorithm, it required that we actually know
+something interesting about the problem. We needed this Key Lemma
+that we saw today. This is actually a theme that you'll
+see throughout this course, and throughout your study of algorithms. Very often, in order to find a better
+algorithm for a problem, you need to understand something interesting about
+the structure of the solution, and that will allow you to
+simplify things a lot. In any case, that's all for today, come
+back next lecture, we'll start talking about how to actually compute
+runtimes in a little bit more detail. Until then good bye.

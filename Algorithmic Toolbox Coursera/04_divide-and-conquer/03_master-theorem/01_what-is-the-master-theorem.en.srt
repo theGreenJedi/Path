@@ -1,0 +1,372 @@
+1
+00:00:00,160 --> 00:00:02,310
+Here we're going to talk
+about the master theorem.
+
+2
+00:00:02,310 --> 00:00:05,370
+We'll describe what the master
+theorem is and how to use it.
+
+3
+00:00:05,370 --> 00:00:08,180
+And we'll reserve to
+the next video a proof.
+
+4
+00:00:10,960 --> 00:00:15,370
+So we've had many occasions where we
+have had to write a recurrence relation for
+
+5
+00:00:15,370 --> 00:00:16,920
+a divide and conquer problem.
+
+6
+00:00:16,920 --> 00:00:19,250
+This is an example of one for
+binary search.
+
+7
+00:00:19,250 --> 00:00:21,760
+We break a problem down into
+a problem half as big and
+
+8
+00:00:21,760 --> 00:00:24,150
+we do a constant amount
+of work at each level.
+
+9
+00:00:24,150 --> 00:00:28,620
+And this gives us a solution
+T(n) = O(log n).
+
+10
+00:00:28,620 --> 00:00:32,290
+The problem is for each one of these
+we have to create a recurrence tree,
+
+11
+00:00:32,290 --> 00:00:35,780
+figure out how much work is done
+at each level, sum up that work.
+
+12
+00:00:35,780 --> 00:00:40,920
+That's a lot to do to solve
+each recurrence relation.
+
+13
+00:00:40,920 --> 00:00:46,320
+Here's an example that we used for
+the polynomial multiplication.
+
+14
+00:00:46,320 --> 00:00:50,680
+So we broke a problem into four
+sub-problems, each half the size,
+
+15
+00:00:50,680 --> 00:00:52,410
+and did a linear amount of work.
+
+16
+00:00:52,410 --> 00:00:56,010
+And the solution was T(n) = O(n squared).
+
+17
+00:00:56,010 --> 00:00:59,040
+When we had the more efficient algorithm,
+where we had only three sub-problems
+
+18
+00:00:59,040 --> 00:01:05,010
+instead of four, we then got a solution
+of O(n to the log base 2 of 3).
+
+19
+00:01:05,010 --> 00:01:08,570
+Sometimes we break a problem
+into only two subproblems and
+
+20
+00:01:08,570 --> 00:01:12,340
+there the solution is O(n log n).
+
+21
+00:01:12,340 --> 00:01:16,670
+So, wouldn't it be nice if there was
+a way that we just had a formula to
+
+22
+00:01:16,670 --> 00:01:20,750
+tell us what the solution is rather than having
+to create this recurrence tree each time?
+
+23
+00:01:20,750 --> 00:01:22,420
+And that's what the Master Theorem
+basically does.
+
+24
+00:01:23,510 --> 00:01:28,080
+So, the Master Theorem says if you have
+a recurrence relation T(n) equals a, some
+
+25
+00:01:28,080 --> 00:01:33,570
+constant, times T(
+the ceiling of n divided by b)
+
+26
+00:01:33,570 --> 00:01:37,520
++ a polynomial in n with degree d.
+
+27
+00:01:39,330 --> 00:01:43,050
+And that ceiling, by the way,
+could just as well be a floor or
+
+28
+00:01:43,050 --> 00:01:45,840
+not be there at all if
+n were a power of b.
+
+29
+00:01:46,950 --> 00:01:49,530
+In any case,
+the a is a constant greater than 0.
+
+30
+00:01:49,530 --> 00:01:52,560
+b is greater than 1 because we want to
+actually make sure the problem size
+
+31
+00:01:52,560 --> 00:01:53,620
+gets smaller.
+
+32
+00:01:53,620 --> 00:01:55,340
+And d is greater than equal to 0.
+
+33
+00:01:55,340 --> 00:01:57,860
+Well, in that case,
+we have a solution for T of n.
+
+34
+00:01:57,860 --> 00:02:00,620
+There are three sub cases.
+
+35
+00:02:00,620 --> 00:02:04,610
+Case number 1, and all of these cases
+depend on the relationship between d,
+
+36
+00:02:04,610 --> 00:02:05,620
+a, and b.
+
+37
+00:02:05,620 --> 00:02:08,940
+In particular,
+is d greater than log base b of a?
+
+38
+00:02:08,940 --> 00:02:13,530
+If so, the solution is just this
+polynomial in n, O(of n to the d).
+
+39
+00:02:14,770 --> 00:02:17,370
+If d is exactly equal log base b of a,
+
+40
+00:02:17,370 --> 00:02:21,940
+then the solution is big O of n to the d
+with an extra factor of log n.
+
+41
+00:02:23,010 --> 00:02:25,470
+And finally,
+if d is less than log base b of a,
+
+42
+00:02:25,470 --> 00:02:28,330
+then the solution is big O of
+n to the log base b of a.
+
+43
+00:02:31,060 --> 00:02:34,050
+So let's look at some
+applications of this theorem.
+
+44
+00:02:34,050 --> 00:02:38,200
+So here's one where we go back to
+the polynomial multiplication.
+
+45
+00:02:38,200 --> 00:02:41,940
+Here a is 4, b is 2, and d is 1.
+
+46
+00:02:41,940 --> 00:02:44,870
+Because O(n) is just O(n to the 1).
+
+47
+00:02:44,870 --> 00:02:48,440
+And we look at the relationship between d,
+which is 1, and
+
+48
+00:02:48,440 --> 00:02:52,310
+log base b of a,
+which is log base 2 of 4 or 2.
+
+49
+00:02:52,310 --> 00:02:56,615
+Well clearly d is less than log base
+b of a, so we're in case three.
+
+50
+00:02:56,615 --> 00:03:01,782
+Therefore T(n) = O(n to
+the log base b of a),
+
+51
+00:03:01,782 --> 00:03:04,450
+or just O(n squared).
+
+52
+00:03:04,450 --> 00:03:08,180
+If now we change the 4 to a 3,
+a is 3, b is 2, d is 1.
+
+53
+00:03:08,180 --> 00:03:12,620
+Now d is still less than
+log base b of a because log
+
+54
+00:03:12,620 --> 00:03:16,608
+base 2 of 3 is greater than 1,
+and so again we're in case three.
+
+55
+00:03:16,608 --> 00:03:21,924
+T(n) equals O(n to the log base b of a),
+which equals O(n to the log base 2 of 3).
+
+56
+00:03:24,302 --> 00:03:27,080
+If we reduce the 3 down
+to a 2 what happens?
+
+57
+00:03:27,080 --> 00:03:30,310
+Well here, a is 2, b is 2, d is 1.
+
+58
+00:03:30,310 --> 00:03:33,720
+Log base b of a is log base 2 of 2,
+which is just 1.
+
+59
+00:03:33,720 --> 00:03:35,550
+So now d is equal log base b or a.
+
+60
+00:03:35,550 --> 00:03:37,410
+We're in case two now.
+
+61
+00:03:37,410 --> 00:03:43,385
+And so, T of n equals O(n log n).
+
+62
+00:03:43,385 --> 00:03:47,690
+And now this shows
+an example also of case two.
+
+63
+00:03:47,690 --> 00:03:49,926
+So this is the binary search example.
+
+64
+00:03:49,926 --> 00:03:52,770
+A is 1, b is 2, d is 0.
+
+65
+00:03:52,770 --> 00:03:58,000
+Well the log base two of one,
+log base b of a, is equal to zero.
+
+66
+00:03:58,000 --> 00:04:00,330
+So d is equal to log base b of a.
+
+67
+00:04:00,330 --> 00:04:04,344
+We're in case two,
+T(n) = O(n to the d log n),
+
+68
+00:04:04,344 --> 00:04:08,200
+which is in the 0 log n,
+which is just O(log n).
+
+69
+00:04:08,200 --> 00:04:11,970
+And a final example where we
+are actually in case one.
+
+70
+00:04:11,970 --> 00:04:15,500
+So here a is 2, b is 2, and d is 2.
+
+71
+00:04:15,500 --> 00:04:19,090
+So log base b of a is log base 2 of 2,
+which is one.
+
+72
+00:04:19,090 --> 00:04:21,690
+So d is now greater than log base b of a.
+
+73
+00:04:21,690 --> 00:04:29,452
+We are now in case one, T(n) equals 
+O(n to the d), which is O(n squared).
+
+74
+00:04:29,452 --> 00:04:34,974
+So what we've seen now is that we have
+this master theorem that allows us,
+
+75
+00:04:34,974 --> 00:04:39,086
+for most recurrences, when
+you do a divide and conquer
+
+76
+00:04:39,086 --> 00:04:43,226
+which fit into this general formula,
+allows us to easily figure out
+
+77
+00:04:43,226 --> 00:04:47,304
+which case we are based on
+the relationships between a, b, and d.
+
+78
+00:04:47,304 --> 00:04:49,730
+And then figure out
+the result quite quickly.
+
+79
+00:04:51,080 --> 00:04:55,080
+In our next video we'll look at a proof
+of why the master theorem works.

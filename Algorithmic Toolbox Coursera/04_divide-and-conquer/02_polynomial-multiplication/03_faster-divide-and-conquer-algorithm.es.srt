@@ -1,0 +1,454 @@
+1
+00:00:00,550 --> 00:00:03,290
+En este video trataremos de crear un algoritmo de divide
+
+2
+00:00:03,290 --> 00:00:06,680
+y vencerás más rápido, para resolver el problema de la multiplicación polinomial.
+
+3
+00:00:08,650 --> 00:00:15,460
+Este problema, esta aproximación fue inventada
+ por Karatsuba a principios de los 1960s.
+
+4
+00:00:15,460 --> 00:00:18,500
+Él era un estudiante de posgrado  de Kolmogorov,
+
+5
+00:00:18,500 --> 00:00:20,946
+un matemático ruso famoso.
+
+6
+00:00:20,946 --> 00:00:26,380
+Y Kolmogorov teorizó que lo mejor que uno podía tener es n^2.
+
+7
+00:00:26,380 --> 00:00:31,680
+Así que había una cota inferior de n^2 
+al hacer la multiplicación polinomial.
+
+8
+00:00:31,680 --> 00:00:34,960
+Karatsuba, un estudiante de posgrado, se enteró del problema, se fue
+
+9
+00:00:34,960 --> 00:00:38,040
+y regresó una semana después con una solución.
+
+10
+00:00:38,040 --> 00:00:41,510
+Entonces, veamos lo que hay aquí.
+
+11
+00:00:41,510 --> 00:00:46,494
+Si vemos A(x), aquí es un polinomio muy simple, a1x+a0,
+
+12
+00:00:46,494 --> 00:00:50,824
+y B(x)=b1x+b0, y entonces C(x) es, ¿qué sería?
+
+13
+00:00:50,824 --> 00:00:55,074
+sería a1*b1x^2+(a1*b0+a0*b1)x+a0*b0.
+
+14
+00:00:55,074 --> 00:00:57,970
+Notamos que necesitamos 4 multiplicaciones.
+
+15
+00:00:57,970 --> 00:00:59,370
+Necesitamos multiplicar a1 por b1.
+
+16
+00:00:59,370 --> 00:01:05,100
+Necesitamos multiplicar a1 por b0, a0 por b1, y a0 por b0.
+
+17
+00:01:05,100 --> 00:01:10,430
+Esto es como hicimos divide y vencerás en el video pasado.
+
+18
+00:01:10,430 --> 00:01:12,590
+Así que necesitamos 4 multiplicaciones.
+
+19
+00:01:12,590 --> 00:01:17,400
+La intuición de Karatsuba era que había una forma de reescribir C(x)
+
+20
+00:01:17,400 --> 00:01:20,650
+de forma que sólo necesitaras 3 multiplicaciones.
+
+21
+00:01:20,650 --> 00:01:24,351
+Así que básicamente lo que hizo fue reescribir el término medio,
+
+22
+00:01:24,351 --> 00:01:28,580
+a1*b0+a0*b1, como algo un poco más complicado.
+
+23
+00:01:28,580 --> 00:01:32,512
+Hizo (a1+a0)(b1+b0),
+
+24
+00:01:32,512 --> 00:01:40,830
+y (a1+a0)(b1+b0) es igual a a1*b1+a0*b1+a1*b0+a0*b0.
+
+25
+00:01:40,830 --> 00:01:44,308
+Y después restó a1*b1 y a0*b0,
+
+26
+00:01:44,308 --> 00:01:48,609
+para quedarse sólo con a1*b0+a0*b1,
+
+27
+00:01:48,609 --> 00:01:50,929
+que es exactamente lo que queremos.
+
+28
+00:01:50,929 --> 00:01:54,510
+La clave aquí es, ¿cuántas multiplicaciones se necesitan?
+
+29
+00:01:54,510 --> 00:01:56,770
+Sólo necesita tres multiplicaciones.
+
+30
+00:01:56,770 --> 00:02:00,380
+Necesitamos calcular a1*b1, aunque lo usemos dos veces,
+
+31
+00:02:00,380 --> 00:02:05,920
+necesitamos calcular a0*b0, aunque, de nuevo, lo usemos dos veces,
+
+32
+00:02:05,920 --> 00:02:11,560
+y entonces necesitamos multiplicar (a1+a0) y (b1+b0).
+
+33
+00:02:11,560 --> 00:02:13,430
+Así que hacemos sumas extras.
+
+34
+00:02:13,430 --> 00:02:16,130
+Pero la clave es, que tenemos 3 multiplicaciones en lugar de 4.
+
+35
+00:02:17,240 --> 00:02:17,840
+¿Por qué esto importa?
+
+36
+00:02:19,030 --> 00:02:22,560
+Bueno, importa porque
+
+37
+00:02:22,560 --> 00:02:26,590
+estamos reduciendo el número de problemas en cada nivel.
+
+38
+00:02:26,590 --> 00:02:27,870
+Pero primero veamos un ejemplo.
+
+39
+00:02:27,870 --> 00:02:29,191
+Aquí tenemos A(x),
+
+40
+00:02:29,191 --> 00:02:32,330
+vamos a tener 4x^3+3x^2+2x+1,
+
+41
+00:02:32,330 --> 00:02:34,907
+B(x)=x^3+2x^2+3x+4,
+
+42
+00:02:34,907 --> 00:02:38,227
+seguimos y extraemos D1 y D0 como lo hicimos antes,
+
+43
+00:02:38,227 --> 00:02:40,040
+en nuestro previo divide y vencerás.
+
+44
+00:02:40,040 --> 00:02:44,420
+La clave es lo que vamos a hacer en términos de los subproblemas.
+
+45
+00:02:44,420 --> 00:02:45,770
+Entonces tenemos D1 y D0,
+
+46
+00:02:45,770 --> 00:02:47,840
+E1 y E0,
+
+47
+00:02:47,840 --> 00:02:51,165
+vamos a calcular D1*E1 otra vez, como ya lo habíamos hecho,
+
+48
+00:02:51,165 --> 00:02:54,852
+vamos a calcular también D0*E0 como lo hicimos antes,
+
+49
+00:02:54,852 --> 00:02:59,242
+pero ahora no calculamos D1*E0 y D0*E1.
+
+50
+00:02:59,242 --> 00:03:02,310
+En su lugar, vamos a sumar D1 y D0,
+
+51
+00:03:02,310 --> 00:03:03,829
+y lo mismo con E1 y E0.
+
+52
+00:03:06,200 --> 00:03:10,500
+Aquí, D1+D0 es igual a 6x+4,
+
+53
+00:03:10,500 --> 00:03:13,450
+E1+E0 es igual a 4x+6,
+
+54
+00:03:13,450 --> 00:03:18,720
+y entonces multiplicamos éstos, dando 24x^2+52x+24.
+
+55
+00:03:18,720 --> 00:03:21,510
+Entonces, hasta ahora, ¿cuántas multiplicaciones llevamos?
+
+56
+00:03:21,510 --> 00:03:22,570
+Tercero
+
+57
+00:03:22,570 --> 00:03:27,702
+Y entonces, nuestro resultado final para A(x)*B(x) es
+
+58
+00:03:27,702 --> 00:03:33,560
+D1*E1 x^4 más, ¿ahora qué hacemos aquí?
+
+59
+00:03:33,560 --> 00:03:37,460
+tomamos (D1+D0)(E1+E0),
+
+60
+00:03:37,460 --> 00:03:39,150
+24x^2+52x+24, ¿sí?
+
+61
+00:03:41,080 --> 00:03:42,340
+Agregamos eso al segundo término
+
+62
+00:03:42,340 --> 00:03:45,340
+y entonces sustraemos D1*E1
+
+63
+00:03:45,340 --> 00:03:46,920
+y D0*E0.
+
+64
+00:03:48,220 --> 00:03:51,651
+Y nuestro término final es D0*E0.
+
+65
+00:03:51,651 --> 00:03:56,863
+Si simplificamos la parte media, y luego todo,
+
+66
+00:03:56,863 --> 00:04:01,728
+terminamos con 4x^6+11x^5+20x^4+3x^3+
+
+67
+00:04:01,728 --> 00:04:03,410
++20x^2+11x+4,
+
+68
+00:04:03,410 --> 00:04:06,724
+que es exactamente el mismo resultado que
+ obtuvimos con el divide y triunfarás
+
+69
+00:04:06,724 --> 00:04:07,650
+más ingenuo.
+
+70
+00:04:07,650 --> 00:04:11,810
+Y también el mismo resultado que si lo hiciéramos directamente, ¿sí?
+
+71
+00:04:11,810 --> 00:04:13,330
+Así que tenemos el mismo resultado,
+
+72
+00:04:13,330 --> 00:04:15,700
+pero con 3 multiplicaciones en lugar de 4.
+
+73
+00:04:15,700 --> 00:04:18,540
+La multiplicación extra hace una gran diferencia.
+
+74
+00:04:18,540 --> 00:04:19,760
+Veamos nuestro tiempo.
+
+75
+00:04:19,760 --> 00:04:22,160
+Entonces, nuestro problema inicial es de tamaño n.
+
+76
+00:04:22,160 --> 00:04:25,010
+Cuando lo dividimos, tenemos 3 problemas de tamaño n/2,
+
+77
+00:04:25,010 --> 00:04:26,414
+en lugar de 4.
+
+78
+00:04:27,580 --> 00:04:29,690
+Así que, nivel 0, problema de tamaño n,
+
+79
+00:04:29,690 --> 00:04:31,640
+nivel 1, tamaño n/2,
+
+80
+00:04:31,640 --> 00:04:34,490
+en el nivel i, el tamaño de nuestros problemas es n/2^i,
+
+81
+00:04:34,490 --> 00:04:36,810
+igual que como en el otro divide y vencerás.
+
+82
+00:04:36,810 --> 00:04:38,890
+Y tenemos el mismo número de hojas.
+
+83
+00:04:40,300 --> 00:04:43,470
+Así que en el nivel log_2(n), todos los problemas tienen tamaño 1.
+
+84
+00:04:43,470 --> 00:04:48,380
+Y el número de problemas que tenemos, 1 en el nivel 0;
+
+85
+00:04:48,380 --> 00:04:51,350
+3, en lugar de 4, en el nivel 1; 3^i,
+
+86
+00:04:51,350 --> 00:04:53,070
+en lugar de 4^i, en el nivel i;
+
+87
+00:04:53,070 --> 00:04:56,062
+y 3 a la log_2(n), en lugar de 4 a la log_2(n)
+
+88
+00:04:56,062 --> 00:04:57,480
+en el nivel de la base.
+
+89
+00:04:58,690 --> 00:04:59,880
+¿Cuánto trabajo?
+
+90
+00:04:59,880 --> 00:05:03,300
+Vamos a multiplicar, para averiguar cuánto le lleva por cada problema.
+
+91
+00:05:03,300 --> 00:05:05,706
+En este caso, en el nivel 0, es kn.
+
+92
+00:05:07,935 --> 00:05:11,540
+En el nivel 1, cada problema lleva k(n/2) trabajo.
+
+93
+00:05:11,540 --> 00:05:12,640
+Y son tres,
+
+94
+00:05:12,640 --> 00:05:14,005
+así que son k(3/2)n.
+
+95
+00:05:14,005 --> 00:05:18,020
+En el nivel i, terminamos con k(3/2)^i n.
+
+96
+00:05:18,020 --> 00:05:23,040
+Y en el nivel del fondo, k por 3 a la log_2(n),
+
+97
+00:05:23,040 --> 00:05:31,030
+a elevado a la log en base b de c, es
+ lo mismo que c a la log en base b de a.
+
+98
+00:05:31,030 --> 00:05:34,480
+Por tanto, esto es lo mismo que k por n a la log_2(3).
+
+99
+00:05:35,660 --> 00:05:41,856
+Sumamos eso, suma desde i=0 hasta log _2(n) de
+
+100
+00:05:41,856 --> 00:05:47,290
+3^i k n/2^i.
+
+101
+00:05:47,290 --> 00:05:52,450
+Esto está acotado, es la serie geométrica acotada por el último término,
+
+102
+00:05:52,450 --> 00:05:56,570
+que es Theta grande de n a la log_2(3).
+
+103
+00:05:56,570 --> 00:05:58,770
+El log_2(3) es de alrededor de 1.58.
+
+104
+00:05:58,770 --> 00:06:06,210
+Entonces, ahora tenemos un problema donde nuestra
+ solución es Theta grande de n^1.58.
+
+105
+00:06:06,210 --> 00:06:12,370
+Comparado con nuestra problema original,
+ que tenía una solución en Theta (n^2).
+
+106
+00:06:12,370 --> 00:06:17,150
+Entonces esto hace una enorme diferencia conforme n aumenta, en términos de nuestros tiempos de ejecución finales.
+
+107
+00:06:18,280 --> 00:06:22,060
+No es raro, para algoritmos de divide y vencerás, requerir algunas veces
+
+108
+00:06:22,060 --> 00:06:25,450
+una forma de verlos en términos de dividir el problema,
+
+109
+00:06:25,450 --> 00:06:27,744
+y lograr tener menos subproblemas.
+
+110
+00:06:29,490 --> 00:06:34,280
+Y debido a la composición del hecho de que
+ a más subproblemas en cada nivel,
+
+111
+00:06:34,280 --> 00:06:35,830
+tienes más, y más, y más,
+
+112
+00:06:37,090 --> 00:06:40,495
+el reducir el número de subproblemas, reduce el tiempo final de ejecución.

@@ -1,0 +1,539 @@
+1
+00:00:00,150 --> 00:00:00,980
+Hi.
+
+2
+00:00:00,980 --> 00:00:04,810
+In this video, we will consider
+the problem to find the minimum number of
+
+3
+00:00:04,810 --> 00:00:06,580
+refills during a long journey by a car.
+
+4
+00:00:06,580 --> 00:00:09,920
+You will see the similarities
+between this problem and
+
+5
+00:00:09,920 --> 00:00:12,990
+the largest number problem
+from the previous video.
+
+6
+00:00:12,990 --> 00:00:17,550
+By the end, you will be able to describe
+how greedy algorithms work in general and
+
+7
+00:00:17,550 --> 00:00:20,440
+define what is a safe move and
+a subproblem.
+
+8
+00:00:20,440 --> 00:00:22,230
+Consider the following problem.
+
+9
+00:00:22,230 --> 00:00:25,880
+You have a car such that if
+you fill it up to full tank,
+
+10
+00:00:25,880 --> 00:00:30,170
+you can travel with it up to 400
+kilometers without refilling it.
+
+11
+00:00:30,170 --> 00:00:33,070
+And you need to get from
+point A to point B, and
+
+12
+00:00:33,070 --> 00:00:37,140
+the distance between
+them is 950 kilometers.
+
+13
+00:00:37,140 --> 00:00:39,830
+Of course,
+you need to refill on your way, and
+
+14
+00:00:39,830 --> 00:00:44,020
+luckily, there are a few gas
+stations on your way from A to B.
+
+15
+00:00:44,020 --> 00:00:49,840
+These are denoted by blue circles, and the
+numbers above them mean the distance from
+
+16
+00:00:49,840 --> 00:00:55,420
+A to the corresponding gas station
+along the way from A to B.
+
+17
+00:00:55,420 --> 00:00:58,960
+And you need to find the minimum
+number of refills to get from A to B.
+
+18
+00:01:00,430 --> 00:01:05,410
+One example of such route is to get
+from point A to the first gas station,
+
+19
+00:01:05,410 --> 00:01:10,780
+200 kilometers, then to get from first
+station to the third gas station,
+
+20
+00:01:10,780 --> 00:01:13,590
+350 kilometers distance.
+
+21
+00:01:13,590 --> 00:01:17,540
+Then from third gas station
+to the fourth gas station,
+
+22
+00:01:17,540 --> 00:01:21,670
+200 km, and then from the fourth
+gas station to B, 200 kilometers.
+
+23
+00:01:22,890 --> 00:01:23,910
+But that's not optimal.
+
+24
+00:01:23,910 --> 00:01:25,120
+We can do better.
+
+25
+00:01:25,120 --> 00:01:28,562
+Here is another route,
+which only uses two refills.
+
+26
+00:01:28,562 --> 00:01:34,082
+We get from A to the second gas station,
+less than 400 kilometers, then we get from
+
+27
+00:01:34,082 --> 00:01:40,260
+the second gas station to the fourth gas
+station, again less than 400 kilometers.
+
+28
+00:01:40,260 --> 00:01:43,920
+And then, from the fourth gas
+station to B, only 200 kilometers.
+
+29
+00:01:45,150 --> 00:01:47,860
+And this route uses only 2 refills, and
+
+30
+00:01:47,860 --> 00:01:52,750
+it turns out that in this problem, the
+minimum number of refills is exactly 2.
+
+31
+00:01:52,750 --> 00:01:56,110
+More formally,
+we have the following problem.
+
+32
+00:01:56,110 --> 00:02:00,020
+As the input, we have a car which
+can travel at most L kilometers,
+
+33
+00:02:00,020 --> 00:02:03,680
+where L is a parameter if
+it's filled up to full tank.
+
+34
+00:02:03,680 --> 00:02:08,800
+We have a source and destination, A and
+B, and we have n gas station at distances
+
+35
+00:02:08,800 --> 00:02:14,550
+from x1 to xn in kilometers,
+from A along the path from A to B.
+
+36
+00:02:14,550 --> 00:02:18,530
+And we need to output the minimum
+number of refills to get from A to B,
+
+37
+00:02:18,530 --> 00:02:20,455
+not counting the initial refill at A.
+
+38
+00:02:20,455 --> 00:02:24,160
+We want to solve this problem
+using a greedy strategy, and
+
+39
+00:02:24,160 --> 00:02:26,710
+greedy strategy in general is very easy.
+
+40
+00:02:26,710 --> 00:02:30,340
+You first make some greedy choice,
+then you reduce your problem to
+
+41
+00:02:30,340 --> 00:02:34,690
+a smaller subproblem, and then you
+iterate until there are no problems left.
+
+42
+00:02:35,950 --> 00:02:40,380
+There are a few different ways to make a
+greedy choice in this particular problem.
+
+43
+00:02:40,380 --> 00:02:45,390
+For example, you can always refill
+at the closest gas station to you.
+
+44
+00:02:45,390 --> 00:02:49,770
+Another way is to refill at the farthest
+reachable gas station, and by reachable,
+
+45
+00:02:49,770 --> 00:02:54,040
+I mean that you can get from your
+current position to this gas station
+
+46
+00:02:54,040 --> 00:02:55,790
+without refills.
+
+47
+00:02:55,790 --> 00:02:59,740
+Another way is, for example,
+to go until there is no fuel and
+
+48
+00:02:59,740 --> 00:03:04,260
+then just hope that there will
+be a gas station in there.
+
+49
+00:03:04,260 --> 00:03:08,115
+So what do you think is the correct
+strategy in this problem?
+
+50
+00:03:10,031 --> 00:03:13,870
+And of course,
+the third option is obviously wrong.
+
+51
+00:03:13,870 --> 00:03:16,480
+The first option is also wrong,
+if you think about it, but
+
+52
+00:03:16,480 --> 00:03:18,970
+the second option is actually correct.
+
+53
+00:03:18,970 --> 00:03:21,800
+It will give you the optimal
+number of refills.
+
+54
+00:03:21,800 --> 00:03:23,050
+We will prove it later.
+
+55
+00:03:24,490 --> 00:03:30,120
+For now, let's define our greedy
+algorithm as the whole algorithm.
+
+56
+00:03:30,120 --> 00:03:35,540
+So we start at A and we need to get to
+B with the minimum number of refills.
+
+57
+00:03:35,540 --> 00:03:40,790
+We go from A to the farthest
+reachable gas station G so
+
+58
+00:03:40,790 --> 00:03:46,340
+that we can get from A to G with full
+tank without any refills in the middle.
+
+59
+00:03:46,340 --> 00:03:50,960
+And now, we try to reduce this
+problem to a similar problem.
+
+60
+00:03:50,960 --> 00:03:57,170
+We make G the new A, and now our
+problem is to get from the new A to B,
+
+61
+00:03:57,170 --> 00:03:58,980
+again with the minimum number of refills.
+
+62
+00:04:00,290 --> 00:04:05,690
+And by definition, a subproblem is
+a similar problem of smaller size.
+
+63
+00:04:05,690 --> 00:04:09,140
+One example of subproblem
+is from the previous video.
+
+64
+00:04:09,140 --> 00:04:13,060
+When we need to construct the largest
+number out of a list of digits,
+
+65
+00:04:13,060 --> 00:04:17,260
+we first put the largest digits in front,
+and then we reduce our problem
+
+66
+00:04:17,260 --> 00:04:21,860
+to the problem of building the largest
+number out of the digits which are left.
+
+67
+00:04:21,860 --> 00:04:25,770
+In this problem, to find the minimum
+number of refills on the way from A to B,
+
+68
+00:04:25,770 --> 00:04:30,210
+the first refill at the farthest
+reachable gas station G.
+
+69
+00:04:30,210 --> 00:04:35,310
+And then solve a similar problem
+which is a subproblem to get
+
+70
+00:04:35,310 --> 00:04:37,840
+from G to B with the minimum
+number of refills.
+
+71
+00:04:39,170 --> 00:04:41,610
+Another important term is safe move.
+
+72
+00:04:41,610 --> 00:04:47,400
+We call a greedy choice a safe move if it
+is consistent with some optimal solution.
+
+73
+00:04:47,400 --> 00:04:52,440
+In other words, if there exists some
+optimal solution in which first move
+
+74
+00:04:52,440 --> 00:04:57,500
+is this greedy choice, then this
+greedy choice is called a safe move.
+
+75
+00:04:57,500 --> 00:05:02,430
+And we will prove a lemma that to refill
+at the farthest reachable gas station
+
+76
+00:05:02,430 --> 00:05:03,900
+is a safe move.
+
+77
+00:05:03,900 --> 00:05:06,060
+Let us first prove it visually.
+
+78
+00:05:06,060 --> 00:05:08,570
+Let's consider some
+optimal route from A to B,
+
+79
+00:05:08,570 --> 00:05:13,450
+and let the first stop on this
+route to refill B at point G1.
+
+80
+00:05:13,450 --> 00:05:17,510
+And let G be the farthest gas
+station reachable from A.
+
+81
+00:05:17,510 --> 00:05:21,640
+If G1 and G coincide,
+then our lemma is proved already.
+
+82
+00:05:21,640 --> 00:05:25,390
+Otherwise, G1 has to
+be closer to A than G,
+
+83
+00:05:25,390 --> 00:05:30,450
+because G is the farthest reachable
+from A, and G1 is reachable from A.
+
+84
+00:05:30,450 --> 00:05:34,670
+Now, let's consider the next stop on
+the optimal route, and that would be G2.
+
+85
+00:05:35,800 --> 00:05:39,268
+And the first case is that
+G is closer to A than G2,
+
+86
+00:05:39,268 --> 00:05:42,390
+then the route can look like this.
+
+87
+00:05:42,390 --> 00:05:45,930
+In this case,
+we can actually refill at G instead of G1,
+
+88
+00:05:45,930 --> 00:05:49,430
+and then we will have another optimal route
+
+89
+00:05:49,430 --> 00:05:54,070
+because it has the same number of
+refills and G is reachable from A.
+
+90
+00:05:54,070 --> 00:05:56,090
+And G2 is actually reachable from G,
+
+91
+00:05:56,090 --> 00:06:01,640
+because it was reachable from G1,
+but G is closer to G2 than G1.
+
+92
+00:06:01,640 --> 00:06:05,610
+So this is a correct route, and
+in this case, our lemma is proved.
+
+93
+00:06:05,610 --> 00:06:10,470
+And the second case is when G2 is
+actually closer to A than G, and
+
+94
+00:06:10,470 --> 00:06:13,240
+then the route can look like this.
+
+95
+00:06:13,240 --> 00:06:18,000
+But in this case we can avoid
+refilling at G1 at all and
+
+96
+00:06:18,000 --> 00:06:23,390
+refill at G2 or
+even refill at G in the first place.
+
+97
+00:06:23,390 --> 00:06:26,862
+And then we will reduce the number
+of refills of our optimal route,
+
+98
+00:06:26,862 --> 00:06:28,440
+which is impossible.
+
+99
+00:06:28,440 --> 00:06:32,140
+So the second case actually
+contradicts our statement
+
+100
+00:06:32,140 --> 00:06:36,620
+that we are looking at an optimal route,
+and we've proved our lemma.
+
+101
+00:06:36,620 --> 00:06:42,110
+To recap, we consider the optimal route
+R with a minimum number of refills.
+
+102
+00:06:42,110 --> 00:06:46,481
+We denote by G1 the position of
+the first refill in R, and by G2,
+
+103
+00:06:46,481 --> 00:06:51,600
+the next stop was R, which is either
+a refill or the destination B.
+
+104
+00:06:51,600 --> 00:06:54,974
+And by G we denote the farthest
+refill reachable from A, and
+
+105
+00:06:54,974 --> 00:06:56,760
+we considered two cases.
+
+106
+00:06:56,760 --> 00:07:00,570
+In the first case,
+if G is closer than G2 to A,
+
+107
+00:07:00,570 --> 00:07:05,350
+we can refill at G instead of G1, and
+it means that refill at G is a safe move.
+
+108
+00:07:06,390 --> 00:07:08,930
+Otherwise, we can avoid refill at G1.
+
+109
+00:07:08,930 --> 00:07:12,800
+So this case contradicts that the route R
+
+110
+00:07:12,800 --> 00:07:14,860
+is the route with the minimum
+number of refills.
+
+111
+00:07:14,860 --> 00:07:18,880
+So there is no such case,
+and we proved our lemma.
+
+112
+00:07:18,880 --> 00:07:23,413
+And in the next lecture, we will
+implement this algorithm in pseudocode and
+
+113
+00:07:23,413 --> 00:07:25,137
+analyze its running time.

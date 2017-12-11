@@ -1,0 +1,478 @@
+1
+00:00:05,170 --> 00:00:06,170
+Hola.
+
+2
+00:00:06,170 --> 00:00:07,100
+Bienvenidos de nuevo.
+
+3
+00:00:07,100 --> 00:00:09,430
+Hoy vamos a empezar a hablar sobre notación asintótica.
+
+4
+00:00:10,690 --> 00:00:14,620
+Entonces, aquí vamos a introducir esta idea de notación
+
+5
+00:00:14,620 --> 00:00:18,210
+asintótica, y describir algunas de las ventajas de usarla.
+
+6
+00:00:19,460 --> 00:00:23,960
+Entonces, la última vez nos topamos con este 
+problema, que es realmente interesante, que calcular 
+
+7
+00:00:23,960 --> 00:00:28,870
+tiempos de ejecución es realmente difícil, que si realmente 
+quieres saber en cuánto tiempo
+
+8
+00:00:28,870 --> 00:00:33,670
+correrá un programa en particular en una determinada 
+computadora, es un caos terrible.
+
+9
+00:00:33,670 --> 00:00:37,890
+Depende de saber todo tipo de detalle 
+fino sobre cómo funciona el programa,
+
+10
+00:00:37,890 --> 00:00:41,440
+y todo tipo de detalle fino sobre cómo la 
+computadora funciona, qué tan rápida es,
+
+11
+00:00:41,440 --> 00:00:43,550
+qué tipo de arquitectura de sistema es,
+
+12
+00:00:43,550 --> 00:00:44,850
+es un gran despapaye.
+
+13
+00:00:44,850 --> 00:00:48,640
+Y no queremos pasar por todo este 
+despapaye cada vez que tratamos
+
+14
+00:00:48,640 --> 00:00:50,030
+de analizar un algoritmo,
+
+15
+00:00:50,030 --> 00:00:55,920
+por lo que necesitamos algo que quizás es
+ un poco menos preciso pero más fácil
+
+16
+00:00:55,920 --> 00:00:59,920
+de trabajar, y vamos a hablar sobre
+ la idea básica detrás de eso.
+
+17
+00:01:01,600 --> 00:01:04,470
+Y la idea básica es lo siguiente.
+
+18
+00:01:04,470 --> 00:01:10,150
+Hay muchos factores que tienen un
+ efecto en el tiempo final de ejecución,
+
+19
+00:01:10,150 --> 00:01:14,120
+pero la mayoría de ellos cambiarán el
+ tiempo sólo por una constante.
+
+20
+00:01:14,120 --> 00:01:17,220
+Si estás trabajando en una computadora
+ que es cientos de veces más rápida,
+
+21
+00:01:17,220 --> 00:01:21,430
+le llevará una centésima del tiempo, 
+una constante multiplicativa.
+
+22
+00:01:21,430 --> 00:01:25,980
+Si tu arquitectura de sistema tiene 
+multiplicaciones que le llevan tres veces
+
+23
+00:01:25,980 --> 00:01:30,810
+más que las sumas, entonces, si tu programa está 
+cargado de multiplicaciones, en lugar 
+
+24
+00:01:30,810 --> 00:01:36,315
+de sumas, podría llevarse tres veces más,
+ pero es sólo un factor de tres.
+
+25
+00:01:36,315 --> 00:01:39,505
+Si la jerarquía de tu memoria está 
+organizada en forma diferente,
+
+26
+00:01:39,505 --> 00:01:42,515
+podrías hacer búsquedas en disco en lugar de en RAM.
+
+27
+00:01:42,515 --> 00:01:45,975
+Y éstas serán mucho más lentas, pero 
+sólo por un múltiplo constante.
+
+28
+00:01:47,190 --> 00:01:51,840
+Entonces, la idea clave es que, si proponemos una medida 
+de la complejidad del tiempo de ejecución
+
+29
+00:01:51,840 --> 00:01:57,310
+que ignore todos estos múltiplos constantes, 
+donde correr en tiempo n
+
+30
+00:01:57,310 --> 00:02:02,110
+y correr en tiempo 100 veces n sea 
+considerado como lo mismo, entonces
+
+31
+00:02:02,110 --> 00:02:07,290
+no tenemos que preocuparnos sobre todos estos 
+minuciosos detalles que afectan el tiempo de ejecución.
+
+32
+00:02:08,940 --> 00:02:11,290
+Por supuesto, hay un problema con esta idea.
+
+33
+00:02:11,290 --> 00:02:16,580
+Si ves que tienes tiempos de un segundo o
+
+34
+00:02:16,580 --> 00:02:21,130
+una hora o un año, éstos solo difieren por múltiplos constantes.
+
+35
+00:02:21,130 --> 00:02:25,070
+Un año es sólo algo así como 30 millones de segundos.
+
+36
+00:02:25,070 --> 00:02:30,020
+Y entonces si no te preocupas por los 30 millones, 
+no puedes notar la diferencia
+
+37
+00:02:30,020 --> 00:02:33,400
+entre un tiempo de ejecución de un
+ segundo y uno de un año.
+
+38
+00:02:33,400 --> 00:02:34,950
+¿Cómo le damos la vuelta a este problema?
+
+39
+00:02:35,950 --> 00:02:39,090
+Bueno, hay una especie de solución rara a esto.
+
+40
+00:02:39,090 --> 00:02:42,750
+No vamos a considerar los tiempos de 
+ejecución de nuestro programa
+
+41
+00:02:42,750 --> 00:02:44,680
+con alguna entrada en particular.
+
+42
+00:02:44,680 --> 00:02:47,810
+Vamos a ver lo que se conoce como 
+tiempos de ejecución asintóticos.
+
+43
+00:02:47,810 --> 00:02:51,890
+Aquí se pregunta, ¿cómo se escala el 
+tiempo con el tamaño de la entrada?
+
+44
+00:02:51,890 --> 00:02:55,080
+Conforme el tamaño de entrada n aumenta,
+
+45
+00:02:55,080 --> 00:03:00,390
+¿la salida se escala en proporción a n, o tal vez n^2?,
+
+46
+00:03:00,390 --> 00:03:02,210
+¿es exponencial en n?
+
+47
+00:03:02,210 --> 00:03:04,350
+Todas estas cosas son diferentes.
+
+48
+00:03:04,350 --> 00:03:09,790
+Y, de hecho, son tan diferentes, que
+ cuando n es suficientemente grande,
+
+49
+00:03:09,790 --> 00:03:12,420
+la diferencia entre el tiempo n
+
+50
+00:03:12,420 --> 00:03:17,930
+y el tiempo n^2 va a ser peor que
+ cualquier múltiplo constante.
+
+51
+00:03:18,960 --> 00:03:22,470
+Si tienes un múltiplo constante de 1,000,
+
+52
+00:03:22,470 --> 00:03:26,250
+1,000n puede ser muy malo con ese numerote enfrente.
+
+53
+00:03:26,250 --> 00:03:29,880
+Pero, cuando n se vuelve grande, 
+es aún mejor que n^2.
+
+54
+00:03:31,020 --> 00:03:34,900
+Y entonces, sólo considerando lo que pasa 
+en este tipo de comportamiento
+
+55
+00:03:34,900 --> 00:03:39,710
+a escala, seremos capaces de hacer 
+esto sin ver las constantes,
+
+56
+00:03:39,710 --> 00:03:41,370
+sin  preocuparnos por estos detalles.
+
+57
+00:03:42,830 --> 00:03:44,580
+Y, de hecho, este tipo de comportamiento
+
+58
+00:03:44,580 --> 00:03:49,070
+asintótico a gran escala es lo que te
+ preocupa casi todo el tiempo, porque
+
+59
+00:03:49,070 --> 00:03:52,900
+realmente quieres saber, ¿qué pasa cuándo corro
+ mi programa con entradas muy grandes?
+
+60
+00:03:54,330 --> 00:04:00,160
+Y estos tipos diferentes de escalamientos
+ hacen una gran diferencia.
+
+61
+00:04:00,160 --> 00:04:05,160
+Así que, supón que tenemos un algoritmo 
+cuyo tiempo de ejecución es aproximadamente proporcional a n
+
+62
+00:04:05,160 --> 00:04:09,340
+y queremos correrlo en una máquina que corre 
+a aproximadamente 1 Giga Hertz.
+
+63
+00:04:09,340 --> 00:04:14,260
+¿Qué tan grande debe ser la entrada para que
+ terminemos el cálculo en un segundo?
+
+64
+00:04:15,380 --> 00:04:20,210
+Bueno, si corre con tamaño n, puedes
+ manejar alrededor de un billón
+
+65
+00:04:20,210 --> 00:04:22,970
+de entradas antes de que le lleve más de un segundo.
+
+66
+00:04:24,230 --> 00:04:27,567
+Si en lugar de n es n log n, es un poco más lento,
+
+67
+00:04:27,567 --> 00:04:30,941
+puedes manejar entradas del tamaño de aprox 30 millones.
+
+68
+00:04:30,941 --> 00:04:33,210
+Si corre como n^2, es mucho peor,
+
+69
+00:04:33,210 --> 00:04:36,040
+sólo puedes manejar entradas del tamaño de 30 mil, aprox,
+
+70
+00:04:36,040 --> 00:04:37,740
+antes de que le lleve más de un segundo.
+
+71
+00:04:38,990 --> 00:04:41,230
+Si corre como 2^n,
+
+72
+00:04:41,230 --> 00:04:46,330
+es increíblemente malo, sólo puedes manejar 
+entradas del tamaño de 30 en un segundo.
+
+73
+00:04:46,330 --> 00:04:50,830
+Entradas de tamaño 50 toman ya dos 
+semanas, entradas de tamaño 100,
+
+74
+00:04:50,830 --> 00:04:53,030
+no vas a acabar nunca.
+
+75
+00:04:53,030 --> 00:04:55,700
+Y entonces, la diferencia entre n y n^2
+
+76
+00:04:55,700 --> 00:04:59,080
+y 2^n es realmente muy significativa.
+
+77
+00:04:59,080 --> 00:05:03,120
+Es aún más significativa que los factores de 5
+
+78
+00:05:03,120 --> 00:05:04,640
+o 100 que ves por otras cosas.
+
+79
+00:05:07,250 --> 00:05:11,255
+Ahora, sólo para darte más idea de cómo estos diferentes tipos
+
+80
+00:05:11,255 --> 00:05:16,240
+de tiempos se comportan, veamos algunos 
+tipos comunes que podrías encontrar.
+
+81
+00:05:16,240 --> 00:05:19,422
+Está el log n, que es mucho menor que raíz de n,
+
+82
+00:05:19,422 --> 00:05:23,418
+que es mucho menor que n,
+ que es mucho menor que n log n,
+
+83
+00:05:23,418 --> 00:05:28,160
+que es mucho menor que n^2, 
+que es mucho menor que 2^n.
+
+84
+00:05:28,160 --> 00:05:29,570
+Entonces, si graficamos todos,
+
+85
+00:05:29,570 --> 00:05:34,620
+puedes ver que estas gráficas se separan una de la otra.
+
+86
+00:05:34,620 --> 00:05:38,673
+Si sólo las ves con entradas pequeñas, 
+es a la mejor un poco difícil decir
+
+87
+00:05:38,673 --> 00:05:42,070
+cuál es más grande, hay un poco de amontonamiento ahí entre ellos.
+
+88
+00:05:42,070 --> 00:05:46,754
+Pero si extendemos la gráfica resulta mucho más claro,
+
+89
+00:05:46,754 --> 00:05:50,712
+2^n empieza realmente a despegar alrededor de 4.
+
+90
+00:05:50,712 --> 00:05:54,229
+Despega y se vuelve 20 o 30,
+
+91
+00:05:54,229 --> 00:05:56,414
+deja a todos los demás atrás en una nube de polvo.
+
+92
+00:05:56,414 --> 00:06:02,015
+Sin embargo, n^2 también mantiene 
+una buena ventaja sobre los demás.
+
+93
+00:06:02,015 --> 00:06:06,610
+Y n log n y n también se separan de las demás.
+
+94
+00:06:06,610 --> 00:06:11,063
+En esta gráfica, raíz de n y log n parecen casi iguales, 
+
+95
+00:06:11,063 --> 00:06:14,641
+pero si sigues extendiendote en n, la haces más grande,
+
+96
+00:06:14,641 --> 00:06:17,796
+se diferenciarán rápidamente entre ellas.
+
+97
+00:06:17,796 --> 00:06:21,338
+La raíz cuadrada de un millón es mil.
+
+98
+00:06:21,338 --> 00:06:23,754
+Log de 1 millón (base 2), es alrededor de 20.
+
+99
+00:06:23,754 --> 00:06:28,067
+Y así, realmente, conforme sigues, 
+rápidamente, lo más lejos vas
+
+100
+00:06:28,067 --> 00:06:31,799
+más se separan estas cosas entre ellas.
+
+101
+00:06:31,799 --> 00:06:35,558
+Y eso es realmente la idea clave de la notación asintótica.
+
+102
+00:06:35,558 --> 00:06:38,240
+No nos preocupamos mucho por las constantes,
+
+103
+00:06:38,240 --> 00:06:42,215
+nos preocupamos por lo que pasa cuando 
+las entradas son muy grandes, cómo se escalan.
+
+104
+00:06:43,615 --> 00:06:45,085
+Así que eso es todo por hoy,
+
+105
+00:06:45,085 --> 00:06:46,015
+Regresa a la siguiente,
+
+106
+00:06:46,015 --> 00:06:50,415
+hablaremos con detalle sobre lo que realmente significa,
+
+107
+00:06:50,415 --> 00:06:53,435
+cómo lo ponemos a trabajar.
+
+108
+00:06:53,435 --> 00:06:54,145
+Entonces, hasta luego.

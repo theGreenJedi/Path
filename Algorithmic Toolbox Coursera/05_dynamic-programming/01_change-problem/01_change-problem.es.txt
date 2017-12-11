@@ -1,0 +1,96 @@
+Antes de grabar esta lección,
+me detuve en la cafetería. Este capuchino es bueno. Tan pronto le di 5$ a la cajera, se enfrentó a un problema algorítmico, cuáles
+monedas seleccionar para darme el cambio. Y los cajeros de todo el mundo usan
+una aproximación algorítmica llamado algoritmo voraz
+para resolver este problema. Hoy aprenderemos cómo los cajeros
+y los científicos informáticos usan algoritmos voraces para
+resolver muchos problemas prácticos. El problema del cambio consiste
+en encontrar el mínimo número de monedas para devolver el cambio. Más formalmente, tenemos un problema en el que
+hay un entero money y unos enteros positivos coin1, coin2, coind, que representan 
+denominaciones de monedas. Por ejemplo, en EE.UU. coin1 será 1 centavo, coin2 serán 5 centavos, 10 centavos,
+25 centavos y 50 centavos. Y la salida es el número mínimo de monedas,
+cuyas denominaciones son coin1, coin2, coind que cambian money exactamente. Hoy por la mañana, cuando
+la cajera me devolvió 40 centavos, lo más probable es que usó
+el siguiente algoritmo. Primero, encontrar la mayor
+denominación de moneda que es menor que 40 centavos. Serán 25 centavos. Así que me dió 25, quedan 15 centavos y entonces el siguiente reto es
+cómo cambiar 15 centavos. El siguiente paso es que probablemente
+encontró la mayor moneda menor que 15 centavos, son 10 centavos. Ella me dió 10 centavos y finalmente
+me devolvió 5 centavos. Como resultado, ella devolvió
+40 centavos como 25 más 10 más 5. ¿Piensas que este es el menor número
+de monedas que podía posiblemente devolver? Es el mínimo número de monedas
+en los Estados Unidos. Pero si viajas a Tanzania, no será el número mínimo de monedas porque
+existe una moneda de 20 céntimos en Tanzania. Y, por tanto, este enfoque voraz
+para resolver el problema del cambio fracasará en Tanzania porque
+existe una mejor manera de cambiar 40 centavos, simplemente como 20 centavos más 20 centavos,
+usando la moneda de 20 centavos tanzana. Ya que el enfoque voraz
+para resolver el problema del cambio fracasa, vamos a intentar algo diferente. Vamos a intentar un algoritmo
+recursivo para resolver el mismo problema. Se supone que queremos cambiar 9 centavos y nuestras denominaciones de monedas son
+1 centavo, 5 centavos y 6 centavos. ¿Cuál sería la forma óptima de cambiar 9 centavos? Bien, si sólo supieramos cuáles son las formas
+óptimas de cambiar 9 menos 6 centavos, 9 menos 5 centavos y 9 menos 1 centavo
+entonces ¿sabríamos cuál es la forma óptima de cambiar 9 centavos? En otras palabras, para cambiar 9 centavos, necesitamos saber cómo cambiar cantidades
+menores de centavos. En nuestro caso, 3 centavos, 4 centavos
+y 8 centavos. Y, por consiguiente, un enfoque
+para resolver este problema podría ser usar esta recurrencia para
+escribir el programa recursivo. Esta idea está implementada
+en el programa RecursiveChange. Para cambiar money, centavos
+usando monedas, coin1, coin2, coind, haremos lo siguiente. Primero llamamos recursivamente a 
+RecursiveChange con la cantidad money, money menos coin1, money menos coin2,
+y money menos coind. Y encontramos la cantidad mínima
+de monedas para estas d elecciones. Tenemos más 1 porque hay una moneda 
+más que añadir y devolvemos el valor. Este parece ser el enfoque
+correcto para resolver el problema, pero vamos a comprobar cuán rápido
+es el programa resultante. Cuando queremos cambiar 76 monedas,
+existen actualmente tres elecciones. Necesitamos llamar recursivamente
+a RecursiveChange para 70 centavos 71 centavos y 75 centavos. Pero para cada uno de estos valores,
+necesitamos llamar de nuevo a tres elecciones. Y continuamos haciendo crecer este árbol y muy rápidamente se convierte
+en un árbol gigantesco. Vamos a comprobar cuantas veces
+hemos intentado cambiar 70 centavos. Tres veces, y sólo hemos
+comenzado a expandir este árbol. De hecho, si continuamos más,
+veremos que habían seis lugares en los que necesitamos
+calcular RecursiveChange para 70. ¿Cuántas veces piensas que tendremos
+que ejecutar llamadas recursivas cuando calculamos el número
+mínimo de monedas para 30 centavos? Resulta que necesitaremos
+llamarlo trillones de veces, lo que significa que nuestro,
+en apariencia muy elegante programa RecursiveChange, no finalizará
+antes del fin de tu vida. Tan simple como parece ser el problema 
+del cambio, ni el enfoque voraz ni un enfoque recursivo lo resuelven
+en un tiempo razonable. Hace 60 años, un matemático brillante,
+Richard Bellman tuvo una idea diferente. ¿No sería bueno conocer las respuestas
+para el cambio de money menos coini en el momento en el que necesitemos
+calcular una forma óptima de cambiar money? Y en lugar de las llamadas costosas en 
+tiempo a RecursiveChange money menos coin i, que pueden requerir
+repetirse trillones de veces, mirar simplemente estos valores. Esta idea condujo al enfoque de programación
+dinámica que es aplicado en miles de diversas aplicaciones prácticas en
+miriadas de campos diferentes. Y la idea clave de la programación dinámica
+es comenzar llenando esta matriz, no de derecha a izquierda, como hicimos
+antes en el cambio recursivo, sino en su lugar, de la izquierda a la derecha. Primero responderemos a la pregunta trivial de cuál es el número mínimo de monedas
+necesario para cambiar 0 centavos. Y, por supuesto, es 0. ¿Cuál es el número mínimo de
+monedas para cambiar 1 centavo? Obviamente es uno, pero podemos
+calcular este número encontrando cuál es el número mínimo de monedas para
+cambiar 0 centavos y añadir una moneda. Procederemos de forma similar
+para calcular el número mínimo de monedas para cambiar 2 centavos, 3
+centavos y 4 centavos. Solo existe una posibilidad de derivar
+este número del anterior. Y para 5 centavos, realmente existen dos
+posibilidades, verde y azul. En la verde, puedes obtenerlo de 0
+centavos añadiendo una moneda de 5. Y para la posibilidad azul, podemos obtenerlo
+desde 4 centavos añadiendo un penique. ¿Qué posibilidad eligirías? Por supuesto, la que te de el número
+mínimo de cambio para 5 monedas. Y continuarías y aplicarías el código a 
+6 centavos con sus tres posibilidades y de nuevo seleccionamos la elección óptima
+que corresponde al número mínimo de monedas. Digamos puede ser 0 monedas más 6 centavos. Continuamos para 7 centavos,
+continuamos para 8 centavos y finalmente muy rápidamente, realmente encontramos
+la respuesta correcta para 9 centavos. Necesitamos cuatro monedas para cambiar 9 centavos. Y ello resulta en el algoritmo
+DPChange que simplemente rellena la tabla que les mostré
+de izquierda a la derecha. DPChange es el primer algoritmo de programación
+dinámica que has visto en este curso, y habrá miles más. Puede que te preguntes por qué este algoritmo
+se denomina programación dinámica y qué tiene que ver con la programación. De hecho, programación en programación dinámica no tiene nada
+que ver con programación. Sorprendentemente, la programación
+dinámica es uno de los algoritmos más prácticos que
+los científicos informáticos usan. Pero cuando Richard Bellman estaba
+desarrollando esta idea para para un proyecto de las Fuerzas Aéreas en el que
+trabajaba, se veía completamente impráctico. Y quiso ocultar que realmente estaba
+haciendo matemáticas para la Secretaría de Defensa, en vez de trabajar
+en el proyecto de las Fuerzas Aéreas. Por tanto, inventó un nombre que básicamente no tiene que ver con la palabra
+programación dinámica y lo que el algoritmo hace. En sus propias palabras, dijo: "¿qué nombre puedo escoger?" Estoy interesado en planificación, pero planificación
+no es una buena palabra por varias razones. Decidí pues usar la palabra programación y quería transmitir la idea
+de que esto era dinámico. Era algo que ningún congresista
+podría objetar.

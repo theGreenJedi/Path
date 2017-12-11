@@ -1,0 +1,954 @@
+1
+00:00:00,300 --> 00:00:04,708
+Now when the algorithm is present,
+we need to estimate the running time.
+
+2
+00:00:04,708 --> 00:00:10,330
+For the Quicksort algorithm, the running
+time analysis is a little bit tricky.
+
+3
+00:00:10,330 --> 00:00:14,110
+So before stating, and proving
+the theorem about it's running time,
+
+4
+00:00:14,110 --> 00:00:17,210
+let's be allowing partition.
+
+5
+00:00:17,210 --> 00:00:21,630
+First of all, let's consider
+a pathological case, when somehow,
+
+6
+00:00:21,630 --> 00:00:25,570
+it always happens that we select
+
+7
+00:00:25,570 --> 00:00:30,500
+the minimum value of our current
+subarray as our pivot element.
+
+8
+00:00:30,500 --> 00:00:34,640
+Well in this case, well let's see what
+happens with our current subarray.
+
+9
+00:00:34,640 --> 00:00:35,850
+Say of size n.
+
+10
+00:00:35,850 --> 00:00:39,270
+And we select its minimum
+value as a pivot.
+
+11
+00:00:39,270 --> 00:00:42,470
+And partition,
+the subarray with respect to the sum.
+
+12
+00:00:42,470 --> 00:00:44,780
+Since this is the minimum value,
+
+13
+00:00:44,780 --> 00:00:49,770
+it's final position is just the first
+position, is the resulting array, right?
+
+14
+00:00:49,770 --> 00:00:53,060
+Which means that we
+partition into two parts.
+
+15
+00:00:53,060 --> 00:00:57,710
+The first part is just empty, we have
+no elements smaller than our pivot.
+
+16
+00:00:57,710 --> 00:01:00,650
+And the second part,
+contains n- 1 elements,
+
+17
+00:01:01,690 --> 00:01:04,849
+because all the remaining elements
+are greater than our current element.
+
+18
+00:01:06,550 --> 00:01:10,786
+Okay, so in this case,
+if this happens at this iteration,
+
+19
+00:01:10,786 --> 00:01:13,922
+I mean at this call to
+partition procedure,
+
+20
+00:01:13,922 --> 00:01:18,415
+then we can write the running
+time of our Quicksort algorithm,
+
+21
+00:01:18,415 --> 00:01:24,560
+satisfies the following relation T of
+n is equal to n plus t of n minus one.
+
+22
+00:01:24,560 --> 00:01:28,950
+The term n here, the response to the
+running time of the petition procedure.
+
+23
+00:01:28,950 --> 00:01:31,710
+Well, it is actually big often.
+
+24
+00:01:31,710 --> 00:01:34,430
+But just to simplify let's put n here.
+
+25
+00:01:34,430 --> 00:01:40,340
+Let me also recall you that,
+well if we have an array of size n,
+
+26
+00:01:40,340 --> 00:01:43,300
+then the partition procedure
+indeed works in time,
+
+27
+00:01:43,300 --> 00:01:47,970
+big often,
+because it just becomes the subarray?
+
+28
+00:01:47,970 --> 00:01:51,980
+So now let's see what is the solution for
+this recurrence relation.
+
+29
+00:01:51,980 --> 00:01:56,930
+Well, we can just unwind this
+recurrence relation term by term.
+
+30
+00:01:56,930 --> 00:01:59,500
+So we have n plus T of n minus 1.
+
+31
+00:01:59,500 --> 00:02:04,750
+Let's replace T of n minus 1 by
+n minus 1 plus T of n minus 2.
+
+32
+00:02:04,750 --> 00:02:09,870
+Then we replace T of n minus 2 by
+n minus 2 plus T of n minus 3.
+
+33
+00:02:09,870 --> 00:02:12,100
+And we keep doing so.
+
+34
+00:02:12,100 --> 00:02:15,640
+So what is left is the following sum,
+n + (n- 1) + (n- 2) and so on.
+
+35
+00:02:15,640 --> 00:02:19,500
+So what we know is this sum already,
+so this is arithmetic series.
+
+36
+00:02:19,500 --> 00:02:22,680
+And we know that it grows quadratically.
+
+37
+00:02:22,680 --> 00:02:24,652
+Which give us something strange,
+
+38
+00:02:24,652 --> 00:02:30,480
+I mean our Quicksort algorithm
+works in quadratic time.
+
+39
+00:02:30,480 --> 00:02:33,650
+Which means that it is not quick,
+actually, right?
+
+40
+00:02:33,650 --> 00:02:36,470
+We'll resolve this issue later.
+
+41
+00:02:36,470 --> 00:02:41,050
+Now, let's consider
+a slightly different case.
+
+42
+00:02:41,050 --> 00:02:45,670
+Assume that somehow,
+we always partition into two parts,
+
+43
+00:02:45,670 --> 00:02:49,180
+such that one of them has size,
+for example, n- 5.
+
+44
+00:02:49,180 --> 00:02:54,170
+And the other one has the size four.
+
+45
+00:02:54,170 --> 00:02:56,970
+Well I claim that even in this case.
+
+46
+00:02:56,970 --> 00:03:02,950
+First of all, note that both these cases
+correspond to very unbalanced partitions.
+
+47
+00:03:02,950 --> 00:03:07,230
+In the first case, we have two parts
+one of size 0 and one of size n-1.
+
+48
+00:03:07,230 --> 00:03:11,490
+In the second case,
+we have two parts one of size five.
+
+49
+00:03:11,490 --> 00:03:15,335
+And one of size four and
+one of size n minus five.
+
+50
+00:03:15,335 --> 00:03:19,540
+So the size of stuff parts
+are very unbalanced.
+
+51
+00:03:19,540 --> 00:03:21,140
+They are very different.
+
+52
+00:03:22,440 --> 00:03:25,920
+Okay, so I claimed that in
+this case the running time,
+
+53
+00:03:25,920 --> 00:03:28,300
+is also going to be quadratic.
+
+54
+00:03:28,300 --> 00:03:32,370
+And this can also be shown, just be
+unwinding this recurrence relation.
+
+55
+00:03:32,370 --> 00:03:38,090
+So let's just throw away this T(4),
+and leave only T(n- 5).
+
+56
+00:03:38,090 --> 00:03:44,010
+Okay, so T(n) is equal to n plus T(n-5).
+
+57
+00:03:44,010 --> 00:03:49,280
+Let's replace T(n-5) with (n-5)+T(n)-10.
+
+58
+00:03:49,280 --> 00:03:52,690
+Let's then replace T of
+n minus ten with T of n
+
+59
+00:03:52,690 --> 00:03:56,680
+with n minus ten plus T of n minus 15 and
+so on.
+
+60
+00:03:56,680 --> 00:03:59,590
+So this leaves us with the following sum.
+
+61
+00:03:59,590 --> 00:04:03,460
+N plus n minus five plus n minus ten and
+so on and
+
+62
+00:04:03,460 --> 00:04:06,110
+this is also an arithmetic progression.
+
+63
+00:04:06,110 --> 00:04:10,290
+The only difference with the previous
+arithmetic progression is that now,
+
+64
+00:04:10,290 --> 00:04:11,700
+we have step five.
+
+65
+00:04:11,700 --> 00:04:15,620
+The difference between neighbors is five,
+but not one.
+
+66
+00:04:15,620 --> 00:04:20,320
+Well, still, this arithmetic progression
+has a linear number of terms.
+
+67
+00:04:20,320 --> 00:04:23,940
+Which means that it sums
+rows quadratically.
+
+68
+00:04:23,940 --> 00:04:28,800
+With the only difference that the hidden
+constant inside this set up is
+
+69
+00:04:28,800 --> 00:04:31,630
+smaller than in the previous case.
+
+70
+00:04:31,630 --> 00:04:35,140
+Now let's consider another
+pathological case.
+
+71
+00:04:35,140 --> 00:04:40,060
+Assume that it somehow so
+happens for some unknown reasons
+
+72
+00:04:40,060 --> 00:04:43,690
+that at each iteration at each call
+there's a partition procedure.
+
+73
+00:04:43,690 --> 00:04:47,990
+It partitions the array
+into roughly equal sizes.
+
+74
+00:04:49,270 --> 00:04:52,720
+Well in this case we can write
+the following reference relation
+
+75
+00:04:52,720 --> 00:04:54,500
+on the running time of our algorithm.
+
+76
+00:04:54,500 --> 00:04:58,550
+T of n is equal to T of n
+over 2 plus the linear term.
+
+77
+00:04:58,550 --> 00:05:00,660
+And we know this reference already.
+
+78
+00:05:00,660 --> 00:05:05,290
+It is exactly the reference
+the running time of the satisfies.
+
+79
+00:05:05,290 --> 00:05:05,900
+Right?
+
+80
+00:05:05,900 --> 00:05:11,399
+And we, proved that in this case t of
+n grows as n increases vertically.
+
+81
+00:05:11,399 --> 00:05:14,530
+Let me remind you, how we prove this.
+
+82
+00:05:14,530 --> 00:05:16,270
+We analyzed the.
+
+83
+00:05:16,270 --> 00:05:19,847
+So, in this three of the route
+we have one array of size n.
+
+84
+00:05:19,847 --> 00:05:23,527
+At the next level we have two
+arrays of size n over two n,
+
+85
+00:05:23,527 --> 00:05:28,390
+at the next level we have four rays
+of size n over four, and so on.
+
+86
+00:05:28,390 --> 00:05:32,960
+So the height of this tree is log base
+two, well it is basically logarithmic.
+
+87
+00:05:32,960 --> 00:05:39,140
+At each level the sum of the sizes
+of of full arrays is equal to N.
+
+88
+00:05:39,140 --> 00:05:43,380
+So we have array of size N at the top,
+two arrays of size N over two
+
+89
+00:05:43,380 --> 00:05:48,240
+at the next level, and four arrays of
+size N over four at the next level,
+
+90
+00:05:48,240 --> 00:05:50,650
+the size is still N, and so on.
+
+91
+00:05:50,650 --> 00:05:53,350
+At each level we spend
+a linear amount of work.
+
+92
+00:05:53,350 --> 00:05:55,150
+This is essential.
+
+93
+00:05:55,150 --> 00:05:58,940
+We spend a linear amount of work at each
+level, and we have a logarithmic number of
+
+94
+00:05:58,940 --> 00:06:02,540
+levels, which means we spent
+an N log N in time total.
+
+95
+00:06:03,930 --> 00:06:07,800
+Okay, let's consider another,
+again very pathological case.
+
+96
+00:06:07,800 --> 00:06:13,180
+I assume that we alway split
+an array of size n into two parts.
+
+97
+00:06:13,180 --> 00:06:15,890
+One of size n over 2, n over 10.
+
+98
+00:06:15,890 --> 00:06:16,640
+I'm sorry.
+
+99
+00:06:16,640 --> 00:06:19,520
+One of size 9n over 10.
+
+100
+00:06:19,520 --> 00:06:23,070
+So in this case the recurrence
+is the following.
+
+101
+00:06:23,070 --> 00:06:26,280
+T of n is equal to T of n, over 10.
+
+102
+00:06:26,280 --> 00:06:29,462
+Plus T of 9N over 10 plus a linear term.
+
+103
+00:06:29,462 --> 00:06:33,723
+I claim that even in this case we
+can prove [INAUDIBLE] again on
+
+104
+00:06:33,723 --> 00:06:37,910
+the running time of how well and
+this is how we can do this.
+
+105
+00:06:37,910 --> 00:06:41,919
+Well, lets again consider the [INAUDIBLE]
+because the [INAUDIBLE] of [INAUDIBLE]
+
+106
+00:06:41,919 --> 00:06:42,610
+algorithm.
+
+107
+00:06:42,610 --> 00:06:44,540
+In this case, it is not balanced.
+
+108
+00:06:44,540 --> 00:06:45,120
+Right?
+
+109
+00:06:45,120 --> 00:06:47,810
+Because when we go to the left branch,
+
+110
+00:06:47,810 --> 00:06:51,550
+we reduce the size of
+the current subproblem by 10.
+
+111
+00:06:51,550 --> 00:06:56,640
+And when we go to the right branch, we
+reduce the size of the current subproblem
+
+112
+00:06:56,640 --> 00:06:59,860
+only by factor of 10 divided by 9.
+
+113
+00:06:59,860 --> 00:07:05,990
+Which means that in our 3,
+the size of the left branch is
+
+114
+00:07:05,990 --> 00:07:11,040
+of the left most branch,
+is actually log based ten.
+
+115
+00:07:11,040 --> 00:07:18,190
+Of n while is the size of the right most
+branch is log based ten over nine over m.
+
+116
+00:07:18,190 --> 00:07:23,050
+Well, still the height of this
+of this three is logarithmic.
+
+117
+00:07:23,050 --> 00:07:27,720
+But the previous case is that nouns are
+based on the algorithm is different but
+
+118
+00:07:27,720 --> 00:07:28,980
+it's still constant.
+
+119
+00:07:28,980 --> 00:07:31,770
+It is log based, log based 9 of m.
+
+120
+00:07:31,770 --> 00:07:36,560
+And also, but also,
+the previous property is true.
+
+121
+00:07:37,790 --> 00:07:42,040
+The sum of the sizes of all arrays
+at each level is still equal to n.
+
+122
+00:07:42,040 --> 00:07:45,230
+It is at most n, actually.
+
+123
+00:07:45,230 --> 00:07:47,560
+At the root we have one array of size n.
+
+124
+00:07:47,560 --> 00:07:50,900
+At the next level we have two arrays,
+one of size n/10,
+
+125
+00:07:50,900 --> 00:07:54,500
+and the other one is of size 9n/10.
+
+126
+00:07:54,500 --> 00:07:56,340
+Right?
+So the size is still n.
+
+127
+00:07:56,340 --> 00:07:58,170
+At the next level it is the same,
+and so on.
+
+128
+00:07:58,170 --> 00:08:02,590
+So we have a logarithmic number of levels,
+and at each level we spend a linear amount
+
+129
+00:08:02,590 --> 00:08:07,980
+of work which gives us an n
+log n upper bound once again.
+
+130
+00:08:07,980 --> 00:08:12,150
+Okay, all this analysis of what
+about only pathological cases
+
+131
+00:08:12,150 --> 00:08:16,860
+if we always split in a balanced way or
+in an unbalanced way.
+
+132
+00:08:16,860 --> 00:08:21,070
+In reality, or just when we run
+a Greek algorithm on some array,
+
+133
+00:08:21,070 --> 00:08:23,570
+well some of the partitions
+are going to be balanced.
+
+134
+00:08:23,570 --> 00:08:26,610
+Some of the partitions
+are going to be unbalanced.
+
+135
+00:08:26,610 --> 00:08:29,300
+So will still do not know what
+is the actual running time
+
+136
+00:08:29,300 --> 00:08:30,510
+of the Greek algorithm.
+
+137
+00:08:30,510 --> 00:08:32,920
+We still need to determine this.
+
+138
+00:08:32,920 --> 00:08:35,760
+However, we already get
+an important message.
+
+139
+00:08:35,760 --> 00:08:41,260
+So running time of Algorithm
+of the Greeks are depends
+
+140
+00:08:41,260 --> 00:08:45,961
+on how balanced our partitions.
+
+141
+00:08:45,961 --> 00:08:51,870
+What we know know is the following,
+if all our politicians are balanced does
+
+142
+00:08:51,870 --> 00:08:56,790
+that make improved that the running
+time is at most n log n hypothetically.
+
+143
+00:08:56,790 --> 00:08:59,480
+At the same time if all of
+our partitions are unbalanced
+
+144
+00:08:59,480 --> 00:09:00,920
+then the running time is quadratic.
+
+145
+00:09:01,940 --> 00:09:06,800
+This means that we would like to
+have a way of selecting a pivot
+
+146
+00:09:06,800 --> 00:09:12,400
+element such that it always
+guarantees a balanced partition.
+
+147
+00:09:12,400 --> 00:09:14,840
+At the same time it is not
+clear at all how to do this.
+
+148
+00:09:14,840 --> 00:09:18,410
+How to guarantee that we
+can always peek quickly.
+
+149
+00:09:18,410 --> 00:09:21,740
+The pivot element with
+respect to this pivot,
+
+150
+00:09:21,740 --> 00:09:26,000
+the rate is partitioned in a balanced way.
+
+151
+00:09:26,000 --> 00:09:30,320
+So instead of this we will use
+the following elegant solutions, so
+
+152
+00:09:30,320 --> 00:09:35,400
+let's just select the pivot element
+from the current subarray randomly.
+
+153
+00:09:35,400 --> 00:09:37,390
+To implement this solution,
+we do the following.
+
+154
+00:09:37,390 --> 00:09:39,620
+Before following the partition procedure.
+
+155
+00:09:39,620 --> 00:09:43,580
+We just select a random
+index between l and m, and
+
+156
+00:09:43,580 --> 00:09:48,470
+we swap elements A[l] and
+this random element.
+
+157
+00:09:48,470 --> 00:09:53,110
+Okay, then we call partition, and
+then we proceed in a usual way.
+
+158
+00:09:53,110 --> 00:09:58,890
+Let me explain intuitively why selecting
+a random partition is going to
+
+159
+00:09:58,890 --> 00:10:05,080
+help us to prove a good upper bound on the
+running time of the Quicksort algorithm.
+
+160
+00:10:05,080 --> 00:10:09,490
+Well, for this, consider array
+A's that we're going to partition
+
+161
+00:10:09,490 --> 00:10:14,710
+with respect to random p and
+consider it sorted version.
+
+162
+00:10:14,710 --> 00:10:18,850
+Assume for the moment that all the
+elements inside our array are different.
+
+163
+00:10:20,380 --> 00:10:25,620
+In the sorted version,
+consider the middle half elements.
+
+164
+00:10:25,620 --> 00:10:30,550
+Well we can see that n/2 elements
+that stay exactly in the middle.
+
+165
+00:10:30,550 --> 00:10:35,290
+Well an important property of all these
+elements is the following: for each
+
+166
+00:10:35,290 --> 00:10:40,890
+of these n/2 elements there are at least
+n/4 elements that are greater than them.
+
+167
+00:10:40,890 --> 00:10:44,390
+And at least n over four
+elements that are smaller.
+
+168
+00:10:44,390 --> 00:10:51,680
+Well this means that if we select any
+of these elements inside our array a,
+
+169
+00:10:51,680 --> 00:10:56,240
+then the partition with respect to
+this element is going to be balanced.
+
+170
+00:10:56,240 --> 00:10:56,780
+Right?
+
+171
+00:10:56,780 --> 00:11:00,570
+In both parts there will be at
+least n over four elements.
+
+172
+00:11:00,570 --> 00:11:04,720
+Well these n over two elements stay
+somewhere in the initial array.
+
+173
+00:11:04,720 --> 00:11:07,960
+So they stay in the middle
+in the sorted array and
+
+174
+00:11:07,960 --> 00:11:10,960
+they stay somewhere in the initial array.
+
+175
+00:11:10,960 --> 00:11:12,040
+It doesn't matter for us.
+
+176
+00:11:12,040 --> 00:11:15,630
+What is important for
+us is that there are at least n over two
+
+177
+00:11:15,630 --> 00:11:19,910
+elements with respect to which
+the partition is going to be balanced.
+
+178
+00:11:19,910 --> 00:11:24,920
+Which means that with probability one
+half we will have a balanced partition.
+
+179
+00:11:24,920 --> 00:11:28,750
+And this happens to be enough
+to prove it with upper bound.
+
+180
+00:11:28,750 --> 00:11:35,600
+So we're going to show that the randomized
+Quicksort algorithm is actually very fast.
+
+181
+00:11:35,600 --> 00:11:38,180
+Well first of all it is
+fast in practice and
+
+182
+00:11:38,180 --> 00:11:43,524
+we will prove it's theoretical analog
+out upper bound when it's running time.
+
+183
+00:11:44,820 --> 00:11:48,860
+This is a formal statement of an upper
+bound on the running time of the Quicksort
+
+184
+00:11:48,860 --> 00:11:51,890
+algorithm that we are going
+to prove in the next video.
+
+185
+00:11:51,890 --> 00:11:54,500
+So I assume that we are given an array A,
+and assume for
+
+186
+00:11:54,500 --> 00:11:58,720
+the moment that all the elements of
+this array are pairwise different.
+
+187
+00:11:58,720 --> 00:12:03,590
+Then the average running time
+of the Quicksort algorithm
+
+188
+00:12:03,590 --> 00:12:07,690
+on this array consisting of n elements,
+is big o of n log n.
+
+189
+00:12:07,690 --> 00:12:10,820
+While the worst case running time
+of this algorithm is n squared.
+
+190
+00:12:11,960 --> 00:12:15,580
+Well let me explain
+the word on average here.
+
+191
+00:12:15,580 --> 00:12:19,520
+Well, this means that for any fixed array.
+
+192
+00:12:19,520 --> 00:12:23,170
+So if we are very unlikely
+with the random beats,
+
+193
+00:12:23,170 --> 00:12:27,490
+the running time potentially
+could be higher as an algorithm.
+
+194
+00:12:27,490 --> 00:12:32,190
+However, on average, and
+average is over all possible random beats.
+
+195
+00:12:32,190 --> 00:12:35,790
+The running time of the QuickSort
+algorithm is n log n.
+
+196
+00:12:35,790 --> 00:12:37,300
+And this is true for any input.
+
+197
+00:12:37,300 --> 00:12:43,223
+So this theorem doesn't say well,
+for Quicksort algorithm.
+
+198
+00:12:43,223 --> 00:12:44,130
+For some arrays,
+the running time is large, for
+
+199
+00:12:44,130 --> 00:12:48,980
+some arrays the running time is low.
+
+200
+00:12:48,980 --> 00:12:52,080
+But on average,
+the running time is good enough.
+
+201
+00:12:52,080 --> 00:12:58,070
+So it says that for any fixed rate,
+the average running time is then n log n.
+
+202
+00:12:58,070 --> 00:13:01,410
+Okay, so we are going to prove
+this theorem in the next video.

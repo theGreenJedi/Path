@@ -1,0 +1,51 @@
+Hola. En esta lección aprenderás a implementar un Algoritmo Voraz para el Problema de la Mochila, Cómo estimar su complejidad y cómo mejorar su comportamiento asintótico. Acá está la descripción del algoritmo voraz de
+la lección anterior. Mientras la mochila no esté llena,
+seleccionaremos el mejor objeto restante; Aquel con el mayor valor por unidad de peso, Y meteremos el objeto completo en la mochila o, si queda poco espacio en la mochila,
+dividiremos el objeto y meteremos tanto como podamos, y luego repetiremos este proceso
+hasta que la mochila esté llena. Al final, retornaremos el valor total de los objetos sacados
+y la cantidad de objetos sacados. Hemos probado que la selección del mejor objeto es una movida segura. Entonces, después que seleccionemos el mejor objeto
+lo que nos queda es una mochila con una capacidad que es menor, pero el problema
+es el mismo: tienes algunos objetos y tienes una mochila de cierta capacidad 
+que deberías llenar óptimamente, de manera que se maximice el valor total
+de los objetos que quepan. Así que, este algoritmo voraz realmente funciona. Ahora, implementémoslo. Aquí tenemos una función llamada Mochila. Comienza llenando el arreglo A con
+objetos cuyo valor es 0 y el valor total también lo inicializamos en 0 y luego, como dijimos en la diapositiva, repetimos para "n"
+las siguientes iteraciones. Si la mochila ya está llena, 
+entonces la variable W estará en 0 porque en el comienzo
+teníamos en W el total de la capacidad de la mochila, pero cada vez
+que pongamos algo en la mochila, vamos a actualizar W disminuyéndolo por 
+la cantidad total de peso que hayamos puesto. Así al final, cuando la mochila esté llena, W será 0. Si W está en 0 quiere decir que deberíamos
+simplemente retornar el valor total y la cantidad de objetos que sacamos. De lo contrario, deberíamos seleccionar el mejor objeto. El mejor objeto es el que queda, 
+por lo tanto "wi" es mayor a 0 y en esos objetos está el que tiene el mayor
+valor por unidad de peso, es decir, el que maximiza la division entre "vi" y "wi". Una vez que tengamos un i, determinaremos la cantidad que tomara, es el total de "wi" o el total de este objeto si cabe en la mochila. de lo contrario, si la capacidad de la mochila ya es menor, simplemente la llenamos hasta su máxima capacidad. De esta manera, "a" es el mínimo entre wi y W. Después de que hayamos seleccionado la cantidad, 
+simplemente actualizamos las variables. Así que, actualizamos w disminuyéndola por "a", 
+ya que ya sacamos una cantidad "a" de este objeto. También incrementamos la cantidad A del i correspondiente al objeto 
+numero i por el valor de "a". Y también disminuimos la capacidad que resta, 
+porque acabamos de disminuirla en "a", ya que pusimos A del objeto i. También incrementamos V con esta fórmula: "a" multiplicado por vi y dividido por wi. ¿Por qué sucede eso? La
+mayoría de las neuronas que Porque tomamos A del objeto i, 
+tomamos "a" unidades y una unidad equivale al 
+valor de vi dividido en wi. Así que si tomamos "a" unidades, el valor total de este producto es "a" multiplicado por vi y dividido por wi. Después de haber hecho n iteraciones, o quizá menos,
+si la mochila está llena antes de haber terminado n iteraciones, retornaremos
+el valor total y las cantidades del arreglo. Ahora, la complejidad de este algoritmo es Big-O de n al cuadrado. ¿Por qué sucede eso? La
+mayoría de las neuronas que Bueno, primero tenemos la selección interior
+del mejor objeto, cuya complejidad es lineal. Porque básicamente, tenemos que revisar
+todos los objetos para seleccionar el mejor. Y tenemos el bucle principal que es ejecutado
+a lo más n veces (quizá menos). Así que en cada iteración hacemos cierta
+computación lineal. y hacemos esto a lo mas n veces. Eso quiere decir que la complejidad total es Big-O de n al cuadrado. Ahora, no podemos mejorar esa complejidad, porque
+si ordenamos los objetos por el valor decreciente de vi dividido en wi, entonces será más fácil
+seleccionar el mejor objeto que quede. Revisemos este pseudocódigo. Asumamos que ya hemos ordenado los objetos de entrada, tamaño de v1 dividido en w1 es mayor o equivalente a 
+v2 dividido en w2, y eso es mayor o equivalente a la fracción del siguiente
+objeto, y hasta vn dividido en wn. Y podemos comenzar con el mismo arreglo de cantidades el mismo valor total rellenado con 0s. Pero entonces hacemos un bucle for 
+para i desde 1 hasta n. Y en cada iteración i será la mejor unidad que aún quede. Entonces, al comienzo de cada iteración revisamos 
+si aún tenemos algo de capacidad en la mochila. Si ya está llena retornamos la respuesta. De lo contrario, sabemos que i es el mejor objeto, ya que no lo consideramos previamente 
+y es el objeto con el máximo valor por unidad de aquellos
+que no consideramos anteriormente. Entonces, determinamos la cantidad de este objeto 
+con la misma fórmula, y actualizamos los pesos,
+las cantidades, la capacidad y el valor total de la misma manera
+que lo hicimos en el pseudocódigo anterior. El único cambio es que cambiamos 
+el orden en el que consideramos los objetos. Y esto nos permite hacer cada iteración
+con complejidad constante en vez de lineal. Por lo tanto, este nuevo algoritmo funciona en complejidad lineal, 
+porque tiene a lo más n iteraciones. y cada iteración se realiza a lo más en complejidad constante. Así que, si aplicamos primero
+cierto algoritmo de ordenamiento para ordenar los objetos por 
+el valor decreciente de vi dividido en wi. Y luego aplicamos este nuevo procedimiento de la mochila. La complejidad total será n log n, 
+porque el ordenamiento funciona en n log n, y la mochila misma 
+funcionará en complejidad lineal.

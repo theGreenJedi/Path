@@ -1,0 +1,552 @@
+1
+00:00:00,220 --> 00:00:00,800
+In this video,
+
+2
+00:00:00,800 --> 00:00:05,390
+we will study one of the simplest sort
+of algorithms called selection sort.
+
+3
+00:00:06,570 --> 00:00:13,800
+So it's main idea is quite simple, we just
+keep growing the sorted part of our rate.
+
+4
+00:00:13,800 --> 00:00:20,085
+So let me illustrate it on a toy example,
+assume we're given a sequence of links.
+
+5
+00:00:20,085 --> 00:00:24,770
+Five consistent of five integers,
+eight four two five and two.
+
+6
+00:00:24,770 --> 00:00:29,550
+So we start just by finding one of
+the minimum elements in this array,
+
+7
+00:00:29,550 --> 00:00:31,560
+in this case it is two.
+
+8
+00:00:31,560 --> 00:00:33,010
+Now lets just do the following,
+
+9
+00:00:33,010 --> 00:00:36,020
+lets just swap it with
+the first element of our array.
+
+10
+00:00:37,140 --> 00:00:40,740
+After swapping,
+two stays in its final position, so
+
+11
+00:00:40,740 --> 00:00:46,030
+two is the minimum value of our array and
+it is already in its first position.
+
+12
+00:00:46,030 --> 00:00:49,820
+Now let's do the fun one,
+let's just forget about this element.
+
+13
+00:00:49,820 --> 00:00:52,222
+It is already in its final position and
+
+14
+00:00:52,222 --> 00:00:55,315
+let's repeat the same procedure was
+the remaining part of our array.
+
+15
+00:00:55,315 --> 00:01:00,280
+Namely, we began first find
+the minimum value, it is again two.
+
+16
+00:01:00,280 --> 00:01:04,200
+We'll swap it with the first
+element of the remaining part and
+
+17
+00:01:04,200 --> 00:01:07,470
+then we'll just forget about this element.
+
+18
+00:01:07,470 --> 00:01:12,030
+So again, we find the minimum value which
+is now four with what was the first
+
+19
+00:01:12,030 --> 00:01:16,100
+element of the remaining part which
+is now the sole element of our array.
+
+20
+00:01:16,100 --> 00:01:19,550
+And then, we just forget about
+first three elements and
+
+21
+00:01:19,550 --> 00:01:21,490
+we continue with only remaining parts.
+
+22
+00:01:21,490 --> 00:01:26,830
+So once again, we just keep growing
+the sorted part of our array.
+
+23
+00:01:26,830 --> 00:01:31,620
+In the end, what we have,
+is that the whole array is sorted.
+
+24
+00:01:31,620 --> 00:01:35,670
+The pseudocode shown here on the slide,
+directly
+
+25
+00:01:35,670 --> 00:01:39,279
+implements the idea of the selection
+sort algorithm that we just discussed.
+
+26
+00:01:40,440 --> 00:01:44,390
+So here we have a loop
+where i ranges from 1 to n.
+
+27
+00:01:44,390 --> 00:01:46,140
+Initially, i is equal to 1.
+
+28
+00:01:46,140 --> 00:01:51,120
+Inside this loop, we compute the index
+of a minimal value in the array,
+
+29
+00:01:51,120 --> 00:01:54,175
+from, within the list from i to n.
+
+30
+00:01:54,175 --> 00:01:57,864
+We do this as follows,
+so we create a variable,
+
+31
+00:01:57,864 --> 00:02:01,017
+minlndex which is initially equal to i.
+
+32
+00:02:01,017 --> 00:02:06,328
+And then we go through all the remaining
+elements inside this part,
+
+33
+00:02:06,328 --> 00:02:09,730
+I mean through elements from i + 1 to n.
+
+34
+00:02:09,730 --> 00:02:14,440
+And if we find a smaller element
+we update the variable minlndex.
+
+35
+00:02:14,440 --> 00:02:19,450
+So in the end of this for loop,
+what we have is that minindex is
+
+36
+00:02:19,450 --> 00:02:24,860
+a position of a minimal element
+inside the array from i to m.
+
+37
+00:02:25,980 --> 00:02:29,410
+Then we swap this element
+with the element Ai.
+
+38
+00:02:30,650 --> 00:02:34,580
+Namely, when i is equal to one,
+what we've done, we've found
+
+39
+00:02:34,580 --> 00:02:38,340
+the minimal element in the well array and
+we've swapped it with the first element.
+
+40
+00:02:38,340 --> 00:02:42,860
+So now, the first element of our
+array is in its final position.
+
+41
+00:02:42,860 --> 00:02:46,910
+Then under second iteration of our loop,
+we do the same actually.
+
+42
+00:02:46,910 --> 00:02:51,200
+We find the minimum value,
+the position of a minimum
+
+43
+00:02:51,200 --> 00:02:55,548
+value inside the remaining part of our
+array and put it on the second place.
+
+44
+00:02:55,548 --> 00:02:59,874
+On the sort loop we find the minimum
+value in this remaining part and
+
+45
+00:02:59,874 --> 00:03:02,277
+put it on the place and so on.
+
+46
+00:03:02,277 --> 00:03:06,961
+So we keep growing the sorted
+part of our array.
+
+47
+00:03:06,961 --> 00:03:12,800
+So when it would be useful to check the
+online visualization to see how it goes,
+
+48
+00:03:12,800 --> 00:03:13,720
+so let's do this.
+
+49
+00:03:15,580 --> 00:03:20,130
+This visualization shows how
+selection sort algorithm performs on
+
+50
+00:03:20,130 --> 00:03:22,770
+a few different datasets.
+
+51
+00:03:22,770 --> 00:03:28,690
+Namely on the random datasets,
+on a sequence which is nearly sorted.
+
+52
+00:03:28,690 --> 00:03:32,030
+Also on a sequence which is
+sorted in reversed order.
+
+53
+00:03:32,030 --> 00:03:35,570
+And on a sequence which contains
+just a few unique elements.
+
+54
+00:03:35,570 --> 00:03:37,849
+So let's run this algorithm and
+see what happens.
+
+55
+00:03:44,509 --> 00:03:51,690
+So you can see that indeed this
+algorithm just grows the sorted region,
+
+56
+00:03:51,690 --> 00:03:56,190
+the sorted initial region of our array.
+
+57
+00:03:56,190 --> 00:04:01,230
+So another interesting property is
+it is revealed by this visualization
+
+58
+00:04:01,230 --> 00:04:02,010
+is the following.
+
+59
+00:04:02,010 --> 00:04:06,710
+So the running time of this algorithm
+actually does not depend on input data.
+
+60
+00:04:06,710 --> 00:04:10,300
+So it only depends on the size
+of our initial sequence.
+
+61
+00:04:11,728 --> 00:04:14,940
+The other [INAUDIBLE] time of
+how algorithm is quadratic and
+
+62
+00:04:14,940 --> 00:04:16,990
+this is not difficult to see right?
+
+63
+00:04:16,990 --> 00:04:21,130
+So what we have is two nested loops.
+
+64
+00:04:21,130 --> 00:04:24,600
+In the outer loop, i ranges from 1 to n.
+
+65
+00:04:24,600 --> 00:04:28,690
+In the inner loop,
+j ranges from i plus 1 to n,
+
+66
+00:04:28,690 --> 00:04:33,880
+to find a minimum inside
+the remaining part of our array.
+
+67
+00:04:33,880 --> 00:04:37,480
+So in total we have quadratic
+number of iterations.
+
+68
+00:04:37,480 --> 00:04:42,100
+At this point however, we should ask
+ourselves whether our estimate was right
+
+69
+00:04:42,100 --> 00:04:45,050
+in time of the selection, so
+our algorithm was too pessimistic.
+
+70
+00:04:45,050 --> 00:04:46,680
+And this is whar I mean by this.
+
+71
+00:04:46,680 --> 00:04:49,870
+So recall that we have two nested loops.
+
+72
+00:04:49,870 --> 00:04:52,290
+In the outer loop, i ranges from 1 to n.
+
+73
+00:04:52,290 --> 00:04:55,630
+In the inner loop,
+g ranges from i + 1 to n.
+
+74
+00:04:55,630 --> 00:05:00,560
+So when i is equal to 1, the number of
+iterations of the inner loop is n- 1.
+
+75
+00:05:00,560 --> 00:05:04,440
+However, when i is equal to 2, the number
+of iterations of the inner loop is n- 2,
+
+76
+00:05:04,440 --> 00:05:05,310
+and so on.
+
+77
+00:05:05,310 --> 00:05:10,370
+So when i increases, the number of
+iterations of the inner loop decreases.
+
+78
+00:05:10,370 --> 00:05:14,710
+So a more accurate estimate for the total
+number of iterations of the inner loop
+
+79
+00:05:14,710 --> 00:05:18,910
+would be the following,
+(n- 1) + (n- 2) + (n- 3) and so on.
+
+80
+00:05:19,980 --> 00:05:23,690
+So it is definitely less than n-squared.
+
+81
+00:05:23,690 --> 00:05:27,410
+However we will show this
+it is equal to n-squared.
+
+82
+00:05:27,410 --> 00:05:29,464
+Namely, this is xx n-squared, and
+
+83
+00:05:29,464 --> 00:05:32,460
+this it is roughly equaled
+n-square divided by two.
+
+84
+00:05:33,460 --> 00:05:37,724
+The sum is that we need to estimate
+is called an Arithmetic Series, and
+
+85
+00:05:37,724 --> 00:05:40,560
+there is a known formula for
+this for this sum.
+
+86
+00:05:40,560 --> 00:05:44,848
+Namely 1 + 2 + 3 +, and so on, n,
+
+87
+00:05:44,848 --> 00:05:48,230
+is equal to n(n+1)/2.
+
+88
+00:05:48,230 --> 00:05:51,050
+And this is how we can prove this formula.
+
+89
+00:05:52,100 --> 00:05:57,670
+Let's just try it, all our n integers
+in a row, 1, 2, and so on, n.
+
+90
+00:05:57,670 --> 00:06:01,560
+Below them let's write the same set of
+integers, but in the reverse order.
+
+91
+00:06:01,560 --> 00:06:05,960
+So, n, then n minus 1,
+and so on, 2, and 1.
+
+92
+00:06:05,960 --> 00:06:10,580
+Then what we get is a row of size 2 by n.
+
+93
+00:06:10,580 --> 00:06:13,190
+Having n columns, and in each column,
+
+94
+00:06:13,190 --> 00:06:17,410
+the sum of the corresponding two
+integers is equal to n plus 1.
+
+95
+00:06:17,410 --> 00:06:21,310
+Great, so in the first column we have n
+and one, and in the second column we have
+
+96
+00:06:21,310 --> 00:06:25,580
+two and minus one and so on and
+in the last column we have n and one.
+
+97
+00:06:25,580 --> 00:06:30,820
+So the sum in each column is equal
+to n plus one and zero n columns.
+
+98
+00:06:30,820 --> 00:06:35,190
+Which means that the sum of all
+the numbers in our table is equal to n,
+
+99
+00:06:35,190 --> 00:06:38,200
+when supplied by n plus one.
+
+100
+00:06:38,200 --> 00:06:44,270
+So since this table contains our sum,
+the sum of the integers from 1 to n twice,
+
+101
+00:06:44,270 --> 00:06:51,979
+we conclude that the sum of all the
+numbers from 1 to n is equal to n(n+1)/2.
+
+102
+00:06:51,979 --> 00:06:58,340
+Another possibility to find this formula,
+to see why this formula is correct
+
+103
+00:06:58,340 --> 00:07:05,070
+is to take a rectangle of size n,
+of dimensions n multiplied by n plus 1.
+
+104
+00:07:05,070 --> 00:07:09,985
+So it's area is equal to n
+multiplied by n plus one.
+
+105
+00:07:09,985 --> 00:07:14,765
+And to cut it into two parts
+such as it's shown in the slide,
+
+106
+00:07:14,765 --> 00:07:22,252
+such as the area of each of these two
+parts is equal to 1 + 2 + and so on n.
+
+107
+00:07:22,252 --> 00:07:23,872
+We're all ready to conclude.
+
+108
+00:07:23,872 --> 00:07:26,852
+So we've just discussed
+the selection sort algorithm.
+
+109
+00:07:26,852 --> 00:07:30,032
+This algorithm is easy to implement,
+easy to analyze, and
+
+110
+00:07:30,032 --> 00:07:35,702
+it's running time is n squared,
+where n is the size of the input sequence.
+
+111
+00:07:35,702 --> 00:07:39,752
+So it sorts the input sequence and
+array in place.
+
+112
+00:07:39,752 --> 00:07:42,882
+Meaning that it requires
+almost no extra memory.
+
+113
+00:07:42,882 --> 00:07:47,280
+I mean, all extra memory which is
+required by this algorithm is only for
+
+114
+00:07:47,280 --> 00:07:49,800
+storing indices, like i, j and m index.
+
+115
+00:07:49,800 --> 00:07:55,270
+There are many other quadratic algorithms,
+like insertion sort and bubble sort.
+
+116
+00:07:55,270 --> 00:07:58,634
+We're not going to cover them here,
+and instead,
+
+117
+00:07:58,634 --> 00:08:04,749
+in the next video we will proceed,
+to do a faster, a faster sort algorithm.

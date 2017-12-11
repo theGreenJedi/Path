@@ -1,0 +1,94 @@
+In this last video of
+the Quicksort lesson, I would like to address
+two implementation issues. So the first issue is about space
+complexity of the QuickSort algorithm. So on one hand, when sorting
+an array by a Quicksort algorithm, we do not use any additional space. We just partition the array and
+with small elements inside the array. On the other hand, the QuickSort
+algorithm is a recursive algorithm. And when we make a recursive call we
+store some information on this tech. Right? So on one hand it is possible to show that the average recurrent
+depths is logarithmic. Meaning that we need only
+a logarithmic additional space. On the other hand,
+there is a very nice and elegant trick that allows to
+re-implement the QuickSort algorithm, such that it's worst case space
+complexity is at most logarithmic. So for this, let's recall that
+the QuickSort algorithm contains of the call to the partition procedure and
+then of two recursive calls. So the situation when we have
+a recursive call is and, if the procedure is called tail recursion. And there is a known way to
+eliminate such a recursive call. Namely, instead of making this
+recursive call, let's just update. Well, in the second recursive call,
+we sort the right part of our array. I mean,
+the part from index n+1 to index r. Instead of making this recursive call,
+let's replace the with a while loop, inside this while loop we call the
+partition procedure as shown on the slide. Then we make a recursive
+call to the left part, but instead of making the recursive call for
+the right part, we'll just update the value
+of l to be equal to m+1. And then we go to the beginning
+of this while loop, and this essentially mimics
+our recursive call. So far so good. We've just realized that we can
+eliminate the last recursive call. At the same time let's also
+realize the following thing. In our QuickSort algorithm we first
+call the partition precision, then we make two recursive calls. And these two recursive calls
+are in a sense independent. Well it doesn't matter which comes first,
+right? So they do not depend on each other. This means that we can as well eliminate
+a recursive call through the first part. Well, and this in turn means that we can
+always select which one to eliminate. And for us, it is better to remove
+a recursive call to a longer part. And this is why, if we always make
+a recursive call during the rate which is shorter, then we make
+a recursive call during the rate which is at least twice shorter
+than the initial already, right? And this in turn means that the depths of
+our recursion will be at most logarithmic. Because well,
+the first recursive call is made for an array of size of at most n over 2,
+then at most n over 4 and so on. So the depth is logarithmic,
+which is good. And this can be implemented as follows. So we first call the partition procedure. It gives us a value of m. At this point,
+we know the length of two parts. And we just compare them. If, for example,
+the lengths of the first part is shorter, then we make a recursive
+call to this part. And instead of making the recursive
+call for the second part, we just update the value of l. In the other case when the right part is
+shorter, we make the recursive call for this part, and instead of making
+the recursive call for this part, we'll just update the value of r. Right?
+So overall this gives us an implementation
+of the QuickSort algorithm which uses in the worst case
+an additional logarithmic space. So the next implementation issue concerns
+the random bits used by our algorithm. So I assume that we would like to have a deterministic version of
+our randomized QuickSort. And this is a reasonable thing to want
+because in practice we would like to have such a thing as reproducibility, which
+is for example essential for debugging. So we would like our program to always
+output the same, on the same dataset. And this is why we would probably not
+like to use random numbers, okay? Then we can do the following. The following algorithm is
+known as intro sort and is used in many practical
+implementation of QuickSort. So instead of selecting
+the pivot element randomly, let's select it as follows using, for
+example, the following simple heuristic. Each time when we're given a summary, and we need to partition it
+with respect to some pivot. So for this we need to select pivot,
+and let's select it as follows. We take the first element of the summary,
+the last element and the middle element, for example. Then we have three elements,
+and we sort them. We just compare them and
+we select the medium value of these. And we use this element
+as our pivot element. So this is a very simple heuristic,
+it can be implemented very efficiently. We just need three comparisons
+to select this median. And in many cases this is enough for the
+QuickSort algorithm to work effectively. However, this is not what we want, right. We are not happy with the statement
+that this algorithm works. Works well in many cases. We would like our algorithm to works
+well just on every possible input. Unfortunately there are pathological cases
+in which these heuristics works badly. But we can overcome this
+in the following way. While running our QuickSort algorithm, well let's count what is the current
+depths of our recursion three. And at some point when it exceeds some
+values here again, for some constant c, then we just stop the current algorithm
+and switch to some other algorithm. For example for the heap sort algorithm. This is another efficient algorithm,
+which is, asymptotically as good as MergeSort I
+mean, it has asymptotic again. However Greek sort is
+usually faster in practice. So, at this point,
+we switch to the quick sort algorithm. Which means that for
+these pathological bad instances, for the QuickSort with this simple
+heuristic of selecting the pivot element, we still work in the worst
+case in time n log m. Because before we exceeded the depth
+c log n, we spend time n log m. And after this,
+we'll start this algorithm. Immediately and
+we run the heap sort algorithm. So overall, we've spent time n log n. So this gives us an algorithm
+which in many cases performs like the QuickSort algorithm and in any case, just in the worst case, its running
+time is bounded above by n log n. So to conclude, the QuickSort algorithm
+is a comparison based algorithm whose running time is big O of n
+log n in the average case, and big O of n squared in the worst case. What is important in this algorithm is
+that it is very efficient in practice. It is more efficient than the north
+shore algorithim for example. For this reason it is commonly
+used in practice and for this reason it is called QuickSort

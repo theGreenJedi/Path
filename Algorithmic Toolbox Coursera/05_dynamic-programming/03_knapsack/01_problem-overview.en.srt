@@ -1,0 +1,381 @@
+1
+00:00:00,350 --> 00:00:03,620
+Hi, today we are going to
+revisit the Knapsack problem,
+
+2
+00:00:03,620 --> 00:00:07,160
+the problem that we already discussed
+in the Greedy Algorithms module.
+
+3
+00:00:08,620 --> 00:00:10,950
+In this very first segment of this lesson,
+
+4
+00:00:10,950 --> 00:00:15,240
+we will recall the definition of this
+problem, as well as motivate its study
+
+5
+00:00:15,240 --> 00:00:18,560
+by providing a few examples of
+applying this problem in real life.
+
+6
+00:00:20,100 --> 00:00:22,640
+Our first example is the following.
+
+7
+00:00:22,640 --> 00:00:26,870
+Assume that you are given a time slot,
+say two or three minutes, and
+
+8
+00:00:26,870 --> 00:00:31,200
+together with this time slot,
+you are given a set of TV commercials.
+
+9
+00:00:31,200 --> 00:00:36,020
+For each commercial, you know its
+revenue and you know its duration,
+
+10
+00:00:36,020 --> 00:00:42,560
+that is length in minutes, and
+your goal is to maximize the revenue.
+
+11
+00:00:42,560 --> 00:00:48,510
+That is, you would like to select some
+subset of your available TV commercials,
+
+12
+00:00:48,510 --> 00:00:54,130
+so that the total revenue is
+as large as possible while
+
+13
+00:00:54,130 --> 00:00:59,790
+the total length does not exceed
+the length of your available time slot.
+
+14
+00:01:01,100 --> 00:01:05,980
+In our second example, you are given a
+fixed budget and your goal is to purchase
+
+15
+00:01:05,980 --> 00:01:10,520
+a number of computers so
+that to maximize the total performance.
+
+16
+00:01:10,520 --> 00:01:15,010
+Again, we assume that the part of your
+input in this case is a set of available
+
+17
+00:01:15,010 --> 00:01:20,358
+computers or machine and for each machine
+you know its price and its performance.
+
+18
+00:01:20,358 --> 00:01:23,390
+Both the considerated problems
+can be easily seen to be
+
+19
+00:01:23,390 --> 00:01:28,558
+special cases of the following general
+problem known as the Knapsack Problem.
+
+20
+00:01:28,558 --> 00:01:29,590
+In this problem,
+
+21
+00:01:29,590 --> 00:01:34,110
+you are given a set of items together
+with the total capacity of the knapsack.
+
+22
+00:01:34,110 --> 00:01:38,520
+For each item you know its value and
+its weight.
+
+23
+00:01:38,520 --> 00:01:44,560
+For example, the value of the green item
+here is four, while its weight is 12.
+
+24
+00:01:44,560 --> 00:01:50,830
+And your goal is to select the subset of
+items such that the total value is as
+
+25
+00:01:50,830 --> 00:01:56,770
+large as possible while the total weight
+is at most, the capacity of the knapsack.
+
+26
+00:01:56,770 --> 00:02:00,660
+In our case, the total capacity
+of the knapsack is equal to 15.
+
+27
+00:02:00,660 --> 00:02:05,610
+There are two versions
+of the knapsack problem.
+
+28
+00:02:05,610 --> 00:02:09,380
+Fractional knapsack and
+discrete knapsack.So, for
+
+29
+00:02:09,380 --> 00:02:14,770
+the fractional version, which you are
+already familiar with, you can take any
+
+30
+00:02:14,770 --> 00:02:20,890
+fraction off of any item, while in
+the discrete version, for each item,
+
+31
+00:02:20,890 --> 00:02:25,820
+you either take the whole item in your
+knapsack or you do not take it at all.
+
+32
+00:02:25,820 --> 00:02:31,640
+So, in turn, the discrete
+version has two variants also.
+
+33
+00:02:31,640 --> 00:02:35,810
+So, the first variant is
+knapsack with repetitions.
+
+34
+00:02:35,810 --> 00:02:42,690
+So in this case, you are given
+an unlimited quantity of each item.
+
+35
+00:02:42,690 --> 00:02:45,840
+While in the knapsack without repetitions,
+
+36
+00:02:45,840 --> 00:02:49,310
+you are given just a single
+copy of each item.
+
+37
+00:02:49,310 --> 00:02:54,150
+So we know already that the fractional
+knapsack problem can be solved
+
+38
+00:02:54,150 --> 00:02:56,410
+by a simple greedy algorithm.
+
+39
+00:02:56,410 --> 00:03:00,250
+Such an algorithm at each
+iteration just picks an element,
+
+40
+00:03:00,250 --> 00:03:05,490
+an item with the currently maximal
+value per unit of weight.
+
+41
+00:03:05,490 --> 00:03:08,560
+This strategy, however, doesn't work for
+
+42
+00:03:08,560 --> 00:03:10,960
+the discrete version of
+the knapsack problem.
+
+43
+00:03:10,960 --> 00:03:13,070
+So instead of using greedy strategy,
+
+44
+00:03:13,070 --> 00:03:18,620
+we will design a dynamic programming
+solution to find an optimal value.
+
+45
+00:03:19,820 --> 00:03:22,890
+Now let me give you a toy example.
+
+46
+00:03:22,890 --> 00:03:28,430
+Assume that our input consists of
+a knapsack of total capacity of ten and
+
+47
+00:03:28,430 --> 00:03:31,120
+four items shown on the slide.
+
+48
+00:03:31,120 --> 00:03:36,550
+Then the optimal value for
+the knapsack without repetitions problem
+
+49
+00:03:36,550 --> 00:03:41,910
+is equal to 46 and it can be obtained
+by taking the first item and
+
+50
+00:03:41,910 --> 00:03:43,830
+the third item into your knapsack.
+
+51
+00:03:45,340 --> 00:03:48,740
+At the same time for the knapsack
+with repetitions problem.
+
+52
+00:03:48,740 --> 00:03:53,560
+The optimal value in this case is
+equal to 48 and it can be obtained
+
+53
+00:03:53,560 --> 00:03:58,690
+by taking one copy of the first item and
+two copies of the last item.
+
+54
+00:03:58,690 --> 00:04:03,980
+Finally, for the fractional knapsack
+problem, the optimal value is equal
+
+55
+00:04:03,980 --> 00:04:09,040
+to 48 and a half and
+can be obtained by taking the first item,
+
+56
+00:04:09,040 --> 00:04:12,110
+the second item, and
+half of the last item.
+
+57
+00:04:13,310 --> 00:04:18,030
+Let's also use this example to show
+that greedy algorithm fails for
+
+58
+00:04:18,030 --> 00:04:21,230
+the discrete version of
+the knapsack problem.
+
+59
+00:04:21,230 --> 00:04:23,190
+Recall that the greedy strategy for
+
+60
+00:04:23,190 --> 00:04:29,560
+this problem is to first compute the value
+per unit of weight for each item.
+
+61
+00:04:29,560 --> 00:04:33,920
+In our case, the value per unit of weight
+for the first item is equal to five,
+
+62
+00:04:33,920 --> 00:04:38,920
+for the second item it is equal to
+four and two thirds, for the third
+
+63
+00:04:38,920 --> 00:04:44,730
+item it is equal to four, and for the last
+item it is equal to four and one half.
+
+64
+00:04:44,730 --> 00:04:48,960
+So the first item has maximal
+value per unit of weight so
+
+65
+00:04:48,960 --> 00:04:51,460
+we take it into our solution.
+
+66
+00:04:51,460 --> 00:04:54,370
+The next available item with the maximal
+
+67
+00:04:54,370 --> 00:04:58,980
+value per unit of weight is the second
+one, so we take it also into the solution.
+
+68
+00:04:58,980 --> 00:05:03,730
+Now the remaining capacity is too
+small to add any other element.
+
+69
+00:05:03,730 --> 00:05:07,610
+So this is our constructed solution,
+and it has weight,
+
+70
+00:05:07,610 --> 00:05:12,100
+it has value 44 which is not optimal,
+we know it already.
+
+71
+00:05:12,100 --> 00:05:16,780
+For example here, by replacing
+the second item by the third item,
+
+72
+00:05:16,780 --> 00:05:19,240
+we will increase the total value.
+
+73
+00:05:20,570 --> 00:05:24,950
+This actually means that taking an element
+
+74
+00:05:24,950 --> 00:05:29,890
+with a maximal value per unit
+of weight is not a safe step.
+
+75
+00:05:31,460 --> 00:05:35,290
+Just by doing this we can lose
+a possibility to construct
+
+76
+00:05:35,290 --> 00:05:36,290
+an optimal solution.
+
+77
+00:05:37,310 --> 00:05:40,360
+Right, so this means actually that
+
+78
+00:05:40,360 --> 00:05:43,060
+we need some other algorithm to
+solve this problem optimally.
+
+79
+00:05:43,060 --> 00:05:47,776
+And we will design such an algorithm based
+on the dynamic programming technique in
+
+80
+00:05:47,776 --> 00:05:48,745
+the next video.

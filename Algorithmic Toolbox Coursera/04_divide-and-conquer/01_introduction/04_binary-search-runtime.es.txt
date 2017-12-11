@@ -1,0 +1,59 @@
+Hola, en este video vamos a ver el tiempo de
+ ejecución de la búsqueda binaria y veremos una versión iterativa de ésta. Entonces, aquí está nuestro algoritmo 
+de búsqueda binaria de nuevo. Checamos a la mitad, si no está entonces buscamos en la parte inferior o en la superior. Entonces, ¿cuál es nuestra relación de recurrencia 
+para el tiempo en el peor de los casos? Bueno, el peor caso es si no encontramos el elemento. Así que tenemos que T(n) es igual a T 
+de aproximadamente n/2, más c. Tenemos la función piso de n porque, si n es impar, digamos que tenemos 5 elementos, entonces la pregunta es, ¿qué tan grande es el tamaño del problema en la siguiente llamada? Entonces, si tenemos cinco elementos vamos a, 
+ya sea buscar en la parte superior del arreglo, esos dos elementos, o la parte inferior del arreglo,
+ estos otros dos elementos, porque saltamos el punto medio, ya lo checamos. Más alguna cantidad constante de tiempo
+ por calcular el punto medio y por comparar el punto medio con la clave. Y nuestro caso base es cuando tenemos un arreglo vacío, y eso es sólo una cantidad de tiempo constante. Así que ¿cómo luce el tiempo de ejecución? Teníamos nuestro tamaño original n, y lo vamos a dividir, n entre 2, n entre 4, y así sucesivamente. ¿Cuántos problemas de éstos tenemos? Bien, si estamos cortando algo en dos una y otra vez, va a tomar log en base dos de
+ tales iteraciones hasta llegar a 1. Entonces, el total aquí realmente 
+es log en base dos de n+1. La cantidad de trabajo que estamos haciendo es c. Entonces, en cada nivel hacemos un trabajo c, por lo que la cantidad total de trabajo, si sumamos, es sólo la suma de i=0 hasta log en base 2 de n, de c. Eso es sólo el log en base 2 de n+1 veces c. Y eso es sólo Theta grande del log en base 2 de n, lo que realmente decimos es Theta de
+ log n, porque la base no importa, es sólo un factor constante que se multiplica. Muy bien, ¿cómo luce la versión iterativa? La versión iterativa tiene los mismos
+ parámetros, low, high, y la clave k. Y tenemos un bucle while con argumento similar al caso base, en el caso base de la versión recursiva nos
+ detenemos si high es menor que low. Aquí tenemos un bucle while, donde el 
+bucle termina si high es menor que low. Calculamos el punto medio, y entonces
+ checamos de nuevo la clave. Si hay coincidencia con el punto medio
+ devolvemos ese punto. De otra forma, si la clave es menor que el elemento, sabemos que estamos en
+ la primera mitad del arreglo y entonces, en lugar de hacer una nueva llamada
+ recursiva como lo hicimos en la versión recursiva, el array original. y queremos  buscar en la primera mitad, 
+así que vamos a cambiar el valor de high, que será mid menos uno, porque
+ ya checamos mid (punto medio). De otra forma, queremos buscar en la mitad
+ superior del arreglo así que incrementamos a low. Si alcanzamos el final del bucle while, esto es, si salimos del bucle porque high es menor que low, eso significa que ya no hay nada que buscar, tenemos un arreglo vacío. Y, por tanto, no encontramos al elemento en el arreglo, vamos a devolver low menos uno. Que es el mismo resultado que en la versión recursiva. La diferencia es que no usaremos el espacio de apilamiento que la versión recursiva usa. ¿Recuerdas que hace dos videos hablamos de este
+ ejemplo de la vida real donde teníamos cinco idiomas y queríamos traducir palabras 
+entre cualquiera par de estos idiomas? La forma que teníamos para representarlo
+ eran arreglos paralelos, de forma que para un índice dado, cada uno de los elementos en los arreglos representaban
+ lo mismo en todos los idiomas. Así que, por ejemplo, "chair" en inglés está en el índice dos, en español eso es "silla" y en italiano "sedia". El problema era que llevaba mucho tiempo checar, ¿no? Teníamos 50 mil elementos en nuestros arreglos, 
+y se llevaba 10 segundos en buscar, porque teníamos que buscar en todos ellos si no estaba ahí, y en promedio, en la mitad de ellos, 25 mil. Así que una pregunta sería, ¿porqué no 
+usamos un arreglo ordenado? ¿Verdad? Podrías imaginar, por ejemplo, ordenar estos arreglos. Aquí están ordenados. Lo bueno es, que es fácil encontrar una palabra
+ particular en un idioma en particular. Así que puedo encontrar "house" en inglés, por ejemplo y encontrar su índice rápidamente 
+usando búsqueda binaria. El problema es, que ya no tengo esta correspondencia porque
+ el orden de las palabras que están ordenadas en inglés es diferente al orden
+ de las palabras ordenadas en español. Así que si busco "chair" en inglés, por ejemplo, 
+ya no se corresponde con "silla". En su lugar, se mapea con "casa". Así que aunque podamos encontrar una palabra
+ en particular en nuestro idioma fuente, no sabemos la correspondiente palabra
+ en el lenguaje destino. Así que la solución fue intentar y encontrar
+ una forma de poder ordenar y preservar la relación donde algo con 
+un índice significa lo mismo en la palabra traducida. La forma de hacer eso 
+fue un conjunto más amplio de arreglos. Lo que hicimos fue mantener estos 
+arreglos ampliados los que apuntaban de vuelta a los arreglos
+ originales, de manera ordenada. Así que tenemos un nivel de dirección. Por ejemplo, si busco una palabra en inglés, 
+el orden de las palabras en inglés es "chair", "house", "pimple". Bueno, ¿qué orden tenían en el arreglo original? Es, primer elemento, 2, entonces elemento 1, 
+y luego elemento 3. Así que si quieres hacer una búsqueda binaria
+ puedes usar este arreglo ordenado. Siempre que quieras saber qué elemento está representado en ese arreglo ordenado, por ejemplo, si buscamos en el punto medio, que en el arreglo ordenado es 2, tiene el valor de 1, 
+y eso nos dice ve y encuentra "house". Así que básicamente dice que "house" 
+está, entre comillas, en 2, y "chair" en 1 y "pimple" en 3. El español tiene, por supuesto, un mapeo diferente, así que en español, la primera palabra ordenada 
+resulta ser la primera palabra del arreglo. La segunda palabra ordenada es la
+ tercera del arreglo español, y la tercera palabra ordenada, "silla", es el segundo elemento. Así que, ¿qué pasa cuando corremos esto? Lo que pasa, tenemos un trueque en espacio-tiempo. Tenemos que pagar por espacio extra, y, por supuesto, no sólo tenemos que ordenar
+ inglés y español, sino también francés, italiano y alemán. Así que, cinco arreglos extra. Cada arreglo tiene 50 mil entradas y, ¿cuál es el tamaño
+ de cada elemento en el arreglo? Bueno, representa un número de 1 al 50 mil que puede representarse en 16 bits, lo que son 2 bytes. Así que tenemos 50 mil elementos veces 2 bytes, lo que son 100 mil bytes, veces 5, son 500 mil bytes, o alrededor de medio mega byte, 
+que en la actualidad es nada, e incluso entonces era, seguro, 
+factible de hacer, hace 20 años. Ese es el costo de espacio que tenemos. ¿Qué beneficio ganamos? Bueno, en lugar de buscar, digamos, 
+50 mil veces en el peor de los casos, tenemos que buscar log base 2 de 50 mil veces. Y log en base 2 de 50 mil es, veamos, 
+si log en base 2 de 1,000 es alrededor de 10, porque 2 a la 10 es igual a 1,024, tenemos
+ todavía un factor de 50 a calcular. Log en base 2 de 50 es alrededor de digamos, 6, porque ya sé que 2 a la 5 es 32, y a la 6 es 64. Lo que quiero decir, es que tenemos que hacer 16 referencias
+ en el arreglo en lugar de 50 mil. Eso es casi un factor de mil, lo que significa al final que, cuando 
+el usuario hacía click en traducir, en lugar de tomar 10 segundos, la 
+traducción parecía casi instantánea, era por debajo de una décima de segundo. En resumen, lo que hemos visto es que el tiempo de ejecución de 
+una búsqueda binaria es Theta grande de log n. Substancialmente más rápida que la Theta grande 
+de n que lleva la búsqueda lineal. Así que los arreglos ordenados ayudan. En la siguiente lección revisaremos una aplicación un poco más complicada de divide y vencerás, donde tendremos múltiples subproblemas, 
+en lugar de un solo subproblema.

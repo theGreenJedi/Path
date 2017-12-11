@@ -1,0 +1,351 @@
+1
+00:00:00,790 --> 00:00:05,380
+Ahora consideremos el pseudo código
+ que implementa este algoritmo.
+
+2
+00:00:05,380 --> 00:00:09,755
+Para propósitos de simplicidad, supondremos que los
+ puntos de entrada están ordenados en orden
+
+3
+00:00:09,755 --> 00:00:12,980
+ascendente, de menor a mayor.
+
+4
+00:00:12,980 --> 00:00:18,210
+Empezamos con un conjunto vacío de
+ segmentos al que llamamos R
+
+5
+00:00:18,210 --> 00:00:22,030
+y empezamos con el índice i apuntando al primer punto,
+
+6
+00:00:22,030 --> 00:00:24,120
+que es el está más a la izquierda
+ porque los puntos están ordenados.
+
+7
+00:00:25,190 --> 00:00:30,420
+Ahora, pasamos por los puntos y encontramos
+ el punto más a la izquierda,
+
+8
+00:00:30,420 --> 00:00:34,600
+en este momento i apunta al punto
+ más a la izquierda en el conjunto,
+
+9
+00:00:34,600 --> 00:00:37,340
+y al principio del bucle while, i siempre
+
+10
+00:00:37,340 --> 00:00:41,260
+apuntará al punto más a la izquierda
+ que continúe en el conjunto.
+
+11
+00:00:41,260 --> 00:00:46,560
+Ahora lo cubrimos con el segmento
+ que va de l a r, que tiene longitud 1,
+
+12
+00:00:46,560 --> 00:00:52,670
+y cuyo extremo izquierdo está sobre el punto xi,
+ por lo que este segmento va de xi a xi+1.
+
+13
+00:00:52,670 --> 00:00:56,910
+Agregamos este segmento al conjunto de nuestra solución,
+
+14
+00:00:56,910 --> 00:01:02,070
+y entonces, necesitamos borrar los puntos del
+ conjunto que ya fueron cubiertos.
+
+15
+00:01:02,070 --> 00:01:07,330
+En lugar de remover los puntos, vamos sólo
+ a mover el apuntador a la derecha
+
+16
+00:01:07,330 --> 00:01:10,790
+y vamos a olvidarnos de los puntos a la izquierda de éste.
+
+17
+00:01:10,790 --> 00:01:14,770
+Así que el siguiente bucle while hace exactamente eso.
+
+18
+00:01:14,770 --> 00:01:21,190
+Sabemos que para cualquier i que sea mayor al actual i, 
+
+19
+00:01:21,190 --> 00:01:26,960
+xi está a la derecha del extremo izquierdo del
+ segmento porque los puntos están ordenados.
+
+20
+00:01:26,960 --> 00:01:33,200
+Así que si xi está también a la izquierda de r,
+ entonces está cubierto por el segmento.
+
+21
+00:01:34,200 --> 00:01:38,820
+Así que sólo vamos cada vez más a la derecha con el apuntador i.
+
+22
+00:01:38,820 --> 00:01:44,330
+Y mientras xi sea menor que o igual a r,
+ sabemos que el punto estará cubierto.
+
+23
+00:01:44,330 --> 00:01:50,310
+Y tan pronto como encontremos una xi que sea
+ mayor que r, significa que este punto no está
+
+24
+00:01:50,310 --> 00:01:56,500
+cubierto y todos los puntos que siguen
+ en el arreglo tampoco lo estarán.
+
+25
+00:01:56,500 --> 00:01:58,160
+Así que paramos.
+
+26
+00:01:58,160 --> 00:02:05,010
+Y entonces repetimos de nuevo la iteración del bucle while externo,
+
+27
+00:02:05,010 --> 00:02:11,140
+o tal vez nuestro apuntador ya está fuera del arreglo,
+
+28
+00:02:11,140 --> 00:02:12,510
+y en ese caso paramos
+
+29
+00:02:12,510 --> 00:02:17,830
+y devolvemos R, que es el conjunto de segmentos
+ que hemos construido en el proceso.
+
+30
+00:02:17,830 --> 00:02:21,120
+Ahora probemos que este algoritmo funciona en tiempo lineal.
+
+31
+00:02:22,170 --> 00:02:26,160
+De hecho, el índice i cambia de 1 a n,
+
+32
+00:02:26,160 --> 00:02:28,540
+y siempre lo incrementamos por uno.
+
+33
+00:02:28,540 --> 00:02:32,990
+Para cada valor de i, agregamos a lo 
+más un segmento a la solución.
+
+34
+00:02:32,990 --> 00:02:37,090
+Así que en total, incrementamos i a lo más n veces
+
+35
+00:02:37,090 --> 00:02:39,510
+y agregamos a lo más n segmentos a la solución.
+
+36
+00:02:40,530 --> 00:02:44,961
+Y esto nos lleva a una solución que corre en tiempo O(n).
+
+37
+00:02:44,961 --> 00:02:50,010
+Ahora, habíamos supuesto que los
+ puntos están ordenados de entrada.
+
+38
+00:02:50,010 --> 00:02:52,290
+¿Qué tal si eliminamos esa suposición?
+
+39
+00:02:52,290 --> 00:02:55,450
+Entonces tendremos que ordenar
+ primero los puntos y entonces
+
+40
+00:02:55,450 --> 00:02:57,790
+aplicar nuestro algoritmo PointsCoverSorted.
+
+41
+00:02:59,370 --> 00:03:03,349
+Más adelante en este módulo, aprenderás cómo
+ ordenar puntos en tiempo n log n.
+
+42
+00:03:04,530 --> 00:03:08,110
+Combinando eso con nuestro 
+procedimiento PointsCoverSorted, tendrás
+
+43
+00:03:08,110 --> 00:03:09,680
+un tiempo total de n log n.
+
+44
+00:03:11,130 --> 00:03:12,510
+Ahora veamos nuestra mejora.
+
+45
+00:03:13,520 --> 00:03:16,650
+Primero implementamos una solución directa,
+
+46
+00:03:16,650 --> 00:03:19,320
+que trabajaba en un tiempo de al menos 2^n,
+
+47
+00:03:20,540 --> 00:03:22,960
+por lo que funcionaba muy lento,
+
+48
+00:03:22,960 --> 00:03:24,370
+de forma que tan sólo para 50 niños,
+
+49
+00:03:24,370 --> 00:03:28,620
+habríamos que haber gastado al menos 2 semanas
+ de cálculo para agruparlos.
+
+50
+00:03:30,040 --> 00:03:33,720
+Nuestro nuevo algoritmo, sin embargo, funciona en tiempo n log n.
+
+51
+00:03:33,720 --> 00:03:37,430
+Y eso significa que aún si tuviéramos 10 millones
+ de niños que vinieran a la fiesta,
+
+52
+00:03:37,430 --> 00:03:43,480
+requeriría sólo unos cuantos segundos para agruparlos
+ de manera óptima en varios grupos.
+
+53
+00:03:43,480 --> 00:03:44,510
+Y eso es una gran mejora.
+
+54
+00:03:46,170 --> 00:03:50,160
+Ahora, veamos cómo llegamos a este punto final.
+
+55
+00:03:50,160 --> 00:03:55,110
+Primero, inventamos una solución ingenua
+ que trabajó en tiempo exponencial.
+
+56
+00:03:55,110 --> 00:03:58,360
+Fue muy lenta y quisimos mejorarla.
+
+57
+00:03:58,360 --> 00:03:59,470
+Pero para mejorarla,
+
+58
+00:03:59,470 --> 00:04:03,270
+el primer paso importante fue
+ reformularla en términos matemáticos.
+
+59
+00:04:04,300 --> 00:04:07,920
+Y entonces tuvimos una idea para
+ resolverla con un algoritmo voraz.
+
+60
+00:04:07,920 --> 00:04:13,050
+Así que tuvimos que encontrar una elección voraz y
+ probar que sería un movimiento seguro.
+
+61
+00:04:13,050 --> 00:04:17,690
+En este caso, el movimiento seguro
+ resultó ser el agregar a la solución
+
+62
+00:04:17,690 --> 00:04:21,230
+un segmento con su extremo izquierdo
+ en el punto más a la izquierda.
+
+63
+00:04:21,230 --> 00:04:24,540
+Y después probamos que éste es
+ realmente un movimiento seguro.
+
+64
+00:04:24,540 --> 00:04:28,000
+Es muy importante que pruebes tus
+ soluciones antes de intentar
+
+65
+00:04:28,000 --> 00:04:28,930
+implementarlas.
+
+66
+00:04:28,930 --> 00:04:33,340
+Porque de otra forma, podría resultar que
+ implementaste una solución, intentaste
+
+67
+00:04:33,340 --> 00:04:40,730
+enviarla, obtuviste un mal resultado,
+ o algo diferente a lo esperado.
+
+68
+00:04:40,730 --> 00:04:46,200
+Y entonces, puede que hayas hecho unos
+ cuantos cambios pero nada resultó.
+
+69
+00:04:46,200 --> 00:04:49,800
+Y al final, entiendes que tu solución fue incorrecta,
+
+70
+00:04:49,800 --> 00:04:51,970
+desde el principio, completamente.
+
+71
+00:04:51,970 --> 00:04:56,510
+Por lo que necesitas una nueva solución
+ que tendrás que implementar desde el principio.
+
+72
+00:04:56,510 --> 00:05:00,570
+Lo que significa que perdiste mucho
+ tiempo implementando la primera
+
+73
+00:05:00,570 --> 00:05:01,850
+solución incorrecta.
+
+74
+00:05:01,850 --> 00:05:05,340
+Para evitar eso, debes primero probar tu solución siempre.
+
+75
+00:05:06,460 --> 00:05:10,710
+Después de que probamos el movimiento seguro,
+ tenemos básicamente nuestra solución voraz,
+
+76
+00:05:11,770 --> 00:05:15,000
+que funciona en combinación con otro algoritmo en tiempo n log n,
+
+77
+00:05:16,060 --> 00:05:20,107
+que no solamente es no polinomial, sino que
+ es muy cercana al tiempo lineal,
+
+78
+00:05:20,107 --> 00:05:22,024
+y funciona muy rápido en la práctica.

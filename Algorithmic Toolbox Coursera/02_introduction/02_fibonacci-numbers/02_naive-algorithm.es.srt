@@ -1,0 +1,424 @@
+1
+00:00:00,740 --> 00:00:01,410
+Hola a todos
+
+2
+00:00:01,410 --> 00:00:02,440
+Bienvenidos de nuevo.
+
+3
+00:00:02,440 --> 00:00:06,320
+Hoy hablaremos un poco más sobre
+cómo calcular los números de Fibonacci.
+
+4
+00:00:06,320 --> 00:00:09,230
+Y, en particular, hoy lo que vamos a hacer
+es mostrarles cómo
+
+5
+00:00:09,230 --> 00:00:13,640
+producir un algoritmo muy simple
+que calcula esto correctamente.
+
+6
+00:00:13,640 --> 00:00:16,970
+Por otro lado, mostraremos que
+este algoritmo es realmente muy lento
+
+7
+00:00:16,970 --> 00:00:18,940
+y hablaremos un poco sobre
+cómo analizar esto.
+
+8
+00:00:20,060 --> 00:00:22,700
+Echemos un vistazo a la definición de nuevo.
+
+9
+00:00:22,700 --> 00:00:24,550
+El número zero de Fibonacci es 0.
+
+10
+00:00:24,550 --> 00:00:26,710
+El primer número de Fibonacci es 1.
+
+11
+00:00:26,710 --> 00:00:31,470
+Y a partir de aquí cada número de 
+Fibonacci es la suma de los dos anteriores.
+
+12
+00:00:32,710 --> 00:00:34,810
+Esto crece muy deprisa
+
+13
+00:00:34,810 --> 00:00:39,010
+y lo que nos gustaría hacer es tener
+un algoritmo que lo calcule.
+
+14
+00:00:39,010 --> 00:00:41,950
+Echemos un vistazo a cómo podemos hacer esto.
+
+15
+00:00:41,950 --> 00:00:46,800
+Bien, existe una forma muy fácil de
+empezar, dada la definición.
+
+16
+00:00:46,800 --> 00:00:49,870
+Si n es 0, se supone que debemos devolver 0.
+
+17
+00:00:49,870 --> 00:00:52,740
+Y si n es 1, se supone que debemos devolver 1.
+
+18
+00:00:52,740 --> 00:00:56,810
+Podemos simplemente empezar con un
+caso que diga que si n es como mucho 1,
+
+19
+00:00:56,810 --> 00:00:58,040
+vamos a devolver n.
+
+20
+00:01:00,150 --> 00:01:02,020
+De lo contrario, ¿qué es lo que
+se supone que tenemos que hacer?
+
+21
+00:01:02,020 --> 00:01:06,257
+De lo contrario, se supone que tenemos que
+devolver la suma de los números n-1 y
+
+22
+00:01:06,257 --> 00:01:08,680
+n-2 de Fibonacci. 
+
+23
+00:01:08,680 --> 00:01:12,660
+Podemos simplemente calcular estos
+dos recursivamente, sumarlos juntos y
+
+24
+00:01:12,660 --> 00:01:13,920
+devolverlo.
+
+25
+00:01:13,920 --> 00:01:17,840
+Esto nos da un algoritmo muy
+simple de cuatro líneas de longitud que
+
+26
+00:01:17,840 --> 00:01:22,140
+básicamente coge la definición de nuetro 
+problema y la convierte en un algoritmo
+
+27
+00:01:22,140 --> 00:01:24,190
+que calcula correctamente
+lo que se supone.
+
+28
+00:01:25,670 --> 00:01:26,340
+Bien por nosotros.
+
+29
+00:01:26,340 --> 00:01:28,520
+Tenemos un algoritmo y funciona.
+
+30
+00:01:28,520 --> 00:01:34,170
+Sin embargo, en este curso, nos importan
+más cosas que simplemente, ¿nuestro algoritmo funciona?
+
+31
+00:01:34,170 --> 00:01:38,380
+También queremos saber si es eficaz,
+nos gustaría conocer cuánto tarda en
+
+32
+00:01:38,380 --> 00:01:41,920
+ejecutarse este algoritmo y hay una 
+especie de aproximación a esto.
+
+33
+00:01:41,920 --> 00:01:45,720
+Vamos a denotar T(n) el número
+de líneas de código que
+
+34
+00:01:45,720 --> 00:01:48,720
+son ejecutadas por este algoritmo
+sobre una entrada n.
+
+35
+00:01:50,140 --> 00:01:53,090
+Contar esto no es
+realmente muy difícil.
+
+36
+00:01:53,090 --> 00:01:57,390
+Si n es como mucho uno, el algoritmo
+comprueba el caso if,
+
+37
+00:01:57,390 --> 00:02:00,190
+va a la sentencia de devolución
+y está hecho en dos líneas de código.
+
+38
+00:02:01,250 --> 00:02:01,750
+No está mal.
+
+39
+00:02:02,840 --> 00:02:05,950
+Si n es al menos dos,
+vamos al caso if,
+
+40
+00:02:05,950 --> 00:02:11,060
+vamos a la condición else y
+ejecutamos la sentencia de devolución.
+
+41
+00:02:11,060 --> 00:02:12,710
+Esto son tres líneas de código.
+
+42
+00:02:13,940 --> 00:02:18,622
+Sin embargo, en este caso también necesitamos
+calcular recursivamente los números n-1 y
+
+43
+00:02:18,622 --> 00:02:20,880
+n-2 de Fibonacci. 
+
+44
+00:02:20,880 --> 00:02:24,820
+Así que tenemos que añadir a esto, sin embargo, 
+varias líneas de código que las llamadas recursivas usan.
+
+45
+00:02:25,920 --> 00:02:30,400
+Así que con todo, sin embago, tenemos una
+bonita fórmula recursiva para T(n).
+
+46
+00:02:30,400 --> 00:02:33,080
+Es 2 en cuanto n sea como mucho uno,
+
+47
+00:02:34,140 --> 00:02:40,310
+y en otro caso, es igual a T(n-1) más
+T(n-2) más tres.
+
+48
+00:02:40,310 --> 00:02:41,760
+Así pues una bonita fórmula recursiva.
+
+49
+00:02:43,240 --> 00:02:47,560
+Si miras esta fórmula un poco más,
+te darás cuenta de que es
+
+50
+00:02:47,560 --> 00:02:51,640
+muy parecida a la fórmula original que hemos usado 
+poara definir los números de Fibonacci.
+
+51
+00:02:51,640 --> 00:02:54,880
+Cada elemento es más o menos la suma de los dos anteriores.
+
+52
+00:02:56,130 --> 00:02:59,320
+Y, de hecho, a partir de aquí puedes
+comprobar muy fácilmente
+
+53
+00:02:59,320 --> 00:03:03,020
+que T(n) es al menos el enésimo
+número de Fibonacci para cualquier n.
+
+54
+00:03:04,720 --> 00:03:08,410
+Y esto debe hacer sonar algunas campanas
+de alarma porque sabemos que los números
+
+55
+00:03:08,410 --> 00:03:12,354
+de Fibonacci son muy, muy grandes,
+por lo que T(n) debe serlo también.
+
+56
+00:03:12,354 --> 00:03:19,921
+De hecho, T(100) es casi
+1.77 veces 10 a la 21.
+
+57
+00:03:19,921 --> 00:03:21,336
+1.77 sextillones.
+
+58
+00:03:21,336 --> 00:03:24,510
+Es un número enorme.
+
+59
+00:03:24,510 --> 00:03:27,980
+Ahora, supongamos que estuvimos ejecutando
+este programa en un ordenador que
+
+60
+00:03:27,980 --> 00:03:30,150
+ejecutaba mil millones de líneas
+de código por segundo.
+
+61
+00:03:30,150 --> 00:03:31,980
+Se corrió a un gigahercio.
+
+62
+00:03:31,980 --> 00:03:37,360
+Todavía nos llevaría alrededor de 56.000
+años completar este cálculo.
+
+63
+00:03:38,480 --> 00:03:42,330
+Ahora, yo no tengo 56.000 años
+para esperar a que termine mi ordenador.
+
+64
+00:03:42,330 --> 00:03:47,200
+Probablemente tú tampoco, por lo que esto
+no es de ninguna manera aceptable,
+
+65
+00:03:47,200 --> 00:03:50,500
+si quiero calcular números de Fibonacci
+de un tamaño razonable.
+
+66
+00:03:52,260 --> 00:03:54,600
+Lo que realmente nos gustaría
+es tener un algoritmo mejor.
+
+67
+00:03:54,600 --> 00:03:56,490
+Y es lo que haremos en la siguiente lección.
+
+68
+00:03:56,490 --> 00:04:00,580
+Pero primero debemos hablar un poco
+acerca de por qué este algoritmo es tan lento.
+
+69
+00:04:02,310 --> 00:04:06,790
+Y ver que tal vez la manera más clara
+de demostrarlo es examinar todas las
+
+70
+00:04:06,790 --> 00:04:11,780
+llamadas recursivas que este algoritmo
+necesita para calcular su respuesta.
+
+71
+00:04:12,820 --> 00:04:15,860
+Así que si queremos calcular el enésimo
+número de Fibonacci,
+
+72
+00:04:15,860 --> 00:04:21,960
+necesitamos hacer llamadas recursivas
+para calcular los números n-1 y n-2 de Fibonacci.
+
+73
+00:04:21,960 --> 00:04:25,590
+Para calcular el n-1, necesitamos
+el n-2 y el n-3.
+
+74
+00:04:25,590 --> 00:04:30,750
+Para calcular el n-2, necesitamos el n-3 y
+el n-4, y así sucesivamente.
+
+75
+00:04:30,750 --> 00:04:33,650
+A partir de ahí obtenemos este
+gran árbol de llamadas recursivas.
+
+76
+00:04:35,420 --> 00:04:37,850
+Ahora si miramos este árbol
+un poco más de cerca,
+
+77
+00:04:37,850 --> 00:04:41,090
+parece que estamos haciendo
+algo un poco tonto.
+
+78
+00:04:41,090 --> 00:04:44,860
+Estamos calculando Fn-3 tres veces en este árbol.
+
+79
+00:04:45,920 --> 00:04:49,860
+Y por la forma en que nuestro algoritmo funciona,
+cada vez que se le pregunta para calcularlo,
+
+80
+00:04:49,860 --> 00:04:53,810
+como es una nueva llamada recursiva,
+calculamos de nuevo todo desde el principio.
+
+81
+00:04:53,810 --> 00:05:00,828
+Recalculamos Fn-4 y Fn-5 y después
+los sumamos y tenemos nuestra respuesta.
+
+82
+00:05:00,828 --> 00:05:04,160
+Y esto de calcular lo mismo una y
+
+83
+00:05:04,160 --> 00:05:06,950
+otra vez es lo que realmente nos ralentiza.
+
+84
+00:05:06,950 --> 00:05:10,760
+Y para hacerlo aún más extremo,
+vamos a ampliar el árbol un poco más.
+
+85
+00:05:10,760 --> 00:05:15,390
+Fn-4 es calculado cinco veces por el algoritmo.
+
+86
+00:05:15,390 --> 00:05:18,300
+Y según sigues bajando más y más veces,
+
+87
+00:05:18,300 --> 00:05:20,590
+simplementes estamos calculando
+lo mismo una y otra vez.
+
+88
+00:05:21,640 --> 00:05:26,480
+Y este es realmente el problema
+con este algoritmo en particular, pero
+
+89
+00:05:26,480 --> 00:05:29,410
+no resulta claro inmediatamente
+que podemos hacerlo mejor.
+
+90
+00:05:29,410 --> 00:05:33,350
+Vuelve para la siguiente leccion y hablaremos
+sobre como evitar estos problemas,
+
+91
+00:05:33,350 --> 00:05:35,280
+y obtener un algoritmo bastante eficaz.
