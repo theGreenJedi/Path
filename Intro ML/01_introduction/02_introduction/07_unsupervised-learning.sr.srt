@@ -1,0 +1,1635 @@
+1
+00:00:00,051 --> 00:00:02,003
+U ovom videu ćemo govoriti o
+
+2
+00:00:02,003 --> 00:00:03,037
+drugoj važnoj vrsti problema
+
+3
+00:00:03,037 --> 00:00:06,002
+mašinskog učenja, pod nazivom nenadgledano učenje (unsupervised learning).
+
+4
+00:00:06,039 --> 00:00:09,057
+U prošlom videu, govorili smo o nadgledanom učenju (supervised learning).
+
+5
+00:00:09,057 --> 00:00:11,031
+Tada su setovi podataka
+
+6
+00:00:11,031 --> 00:00:12,069
+izgledali ovako, gde je
+
+7
+00:00:12,069 --> 00:00:14,091
+svaki primer bio označen bilo kao
+
+8
+00:00:14,091 --> 00:00:17,087
+pozitivan ili negativan primer,
+
+9
+00:00:17,087 --> 00:00:20,079
+u zavisnosti od toga da li se radilo o benignom ili malignom tumoru.
+
+10
+00:00:20,079 --> 00:00:22,064
+Dakle, za svaki primer u nadgledanom
+
+11
+00:00:22,064 --> 00:00:24,094
+učenju, bilo nam je eksplicitno dato šta je
+
+12
+00:00:24,094 --> 00:00:26,087
+takozvani ispravan odgovor,
+
+13
+00:00:26,087 --> 00:00:28,085
+tj. da li je tumor benigan ili maligan.
+
+14
+00:00:29,006 --> 00:00:31,035
+U nenadgledanom učenju, dati su nam
+
+15
+00:00:31,035 --> 00:00:33,023
+podaci koji izgledaju drugačije,
+
+16
+00:00:33,023 --> 00:00:35,024
+npr. podaci koji izgledaju ovako,
+
+17
+00:00:35,024 --> 00:00:36,095
+koji nemaju nikakve oznake,
+
+18
+00:00:36,095 --> 00:00:38,011
+tj. gde svi imaju
+
+19
+00:00:38,011 --> 00:00:39,078
+istu oznaku ili zaista nikakvu oznaku.
+
+20
+00:00:39,092 --> 00:00:42,002
+Dakle, dat nam je set podataka
+
+21
+00:00:42,002 --> 00:00:43,020
+i nije nam rečeno šta da
+
+22
+00:00:43,020 --> 00:00:44,061
+radimo sa njima, i nije nam
+
+23
+00:00:44,061 --> 00:00:46,033
+rečeno šta pojedinačan podatak predstavlja.
+
+24
+00:00:46,033 --> 00:00:48,052
+Umesto toga, samo nam je rečeno: ”evo seta podataka,
+
+25
+00:00:48,052 --> 00:00:51,027
+možete li da vidite neku struktuiranost u podacima?”
+
+26
+00:00:51,027 --> 00:00:52,055
+Npr. sa ovim setom podataka
+
+27
+00:00:52,055 --> 00:00:54,067
+algoritam nenadgledanog učenja može da zaključi
+
+28
+00:00:54,067 --> 00:00:58,024
+da podaci postoje u dve različite grupe (klastera).
+
+29
+00:00:58,042 --> 00:01:00,048
+Evo jedne grupe
+
+30
+00:01:00,048 --> 00:01:02,053
+i evo druge grupe.
+
+31
+00:01:02,053 --> 00:01:04,031
+Algoritam nenadgledanog učenja
+
+32
+00:01:04,031 --> 00:01:07,050
+može da razvrsta ove podatke u ove dve različite grupe.
+
+33
+00:01:07,070 --> 00:01:10,018
+Ovo se zove algoritam grupisanja (clustering algorithm).
+
+34
+00:01:10,018 --> 00:01:13,005
+I ovo ima primenu na mnogim mestima.
+
+35
+00:01:13,005 --> 00:01:14,058
+Jedan primer gde se grupisanje
+
+36
+00:01:14,058 --> 00:01:17,007
+upotrebljava je u Gugl Vestima
+
+37
+00:01:17,007 --> 00:01:18,012
+i ako niste ovo
+
+38
+00:01:18,012 --> 00:01:19,045
+videli ranije, možete otići
+
+39
+00:01:19,045 --> 00:01:21,047
+na adresu news.google.com
+
+40
+00:01:21,047 --> 00:01:22,080
+i baciti pogled.
+
+41
+00:01:22,095 --> 00:01:24,083
+Ono što Gugl Vesti rade svakog dana
+
+42
+00:01:24,083 --> 00:01:26,038
+je da pregledaju desetine hiljada
+
+43
+00:01:26,038 --> 00:01:27,043
+ili čak stotine hiljada
+
+44
+00:01:27,043 --> 00:01:29,025
+novnskih članaka na vebu
+
+45
+00:01:29,025 --> 00:01:31,091
+i grupišu ih u srodne noinske vesti.
+
+46
+00:01:31,091 --> 00:01:34,006
+Na primer, pogledajmo ovo.
+
+47
+00:01:34,006 --> 00:01:36,059
+Linkovi ovde vode
+
+48
+00:01:36,059 --> 00:01:39,018
+do različitih novinskih članaka
+
+49
+00:01:39,018 --> 00:01:42,026
+sa pričom o naftnoj bušotini kompanije BP.
+
+50
+00:01:42,026 --> 00:01:44,002
+Hajde da kliknemo na
+
+51
+00:01:44,002 --> 00:01:45,021
+jedan od ovih linkova.
+
+52
+00:01:45,038 --> 00:01:46,081
+I kada kliknem na jedan od ovih linkova
+
+53
+00:01:46,081 --> 00:01:48,081
+doći ću na jednu ovakvu veb stranicu.
+
+54
+00:01:48,081 --> 00:01:50,026
+Ovo je članak Volstrit žurnala
+
+55
+00:01:50,026 --> 00:01:52,067
+o, pogađate, curenju nafte
+
+56
+00:01:52,067 --> 00:01:54,039
+iz BP naftne bušotine
+
+57
+00:01:54,040 --> 00:01:56,019
+koju BP zove Makondo
+
+58
+00:01:56,019 --> 00:01:58,029
+što je i ime naftne mrlje.
+
+59
+00:01:58,071 --> 00:02:00,031
+I ako kliknete
+
+60
+00:02:00,031 --> 00:02:02,062
+na drugi link iz te grupe
+
+61
+00:02:02,062 --> 00:02:04,032
+možete dobiti neku drugu priču.
+
+62
+00:02:04,032 --> 00:02:06,039
+Evo ovde Si-En-Enovog članka na tu
+
+63
+00:02:06,039 --> 00:02:07,092
+temu, curenje BP nafte,
+
+64
+00:02:07,092 --> 00:02:10,019
+i ako kliknete na još jedan,
+
+65
+00:02:10,019 --> 00:02:12,076
+treći link, možete dobiti neku drugu priču.
+
+66
+00:02:12,076 --> 00:02:15,011
+Evo Gardijanove priče
+
+67
+00:02:15,011 --> 00:02:17,072
+o BP naftnoj mrlji.
+
+68
+00:02:18,012 --> 00:02:19,037
+Dakle Gugl koristi na
+
+69
+00:02:19,037 --> 00:02:21,016
+ovom veb sajtu, desetine hiljada
+
+70
+00:02:21,016 --> 00:02:23,052
+novinskih priča i automatski ih grupiše zajedno,
+
+71
+00:02:23,052 --> 00:02:26,017
+tako da se sve priče na istu temu
+
+72
+00:02:26,017 --> 00:02:28,090
+mogu prikazati zajedno.
+
+73
+00:02:29,061 --> 00:02:31,051
+Algoritmi grupisanja
+
+74
+00:02:31,051 --> 00:02:33,022
+i algoritmi nenadgledanog učenja
+
+75
+00:02:33,022 --> 00:02:36,021
+se koriste i za mnoge druge probleme.
+
+76
+00:02:36,021 --> 00:02:39,010
+Evo jednog u vezi sa razumevanjem genoma.
+
+77
+00:02:39,021 --> 00:02:42,071
+Ovo je primer DNK mikročip podataka.
+
+78
+00:02:42,071 --> 00:02:44,044
+Ideja je sastaviti
+
+79
+00:02:44,044 --> 00:02:45,067
+grupu različitih osoba i
+
+80
+00:02:45,067 --> 00:02:47,054
+za svaku od njih, meriti
+
+81
+00:02:47,054 --> 00:02:50,032
+koliko imaju ili nemaju određeni gen.
+
+82
+00:02:50,032 --> 00:02:53,000
+Tehnički merite koliko su pojedini geni izraženi.
+
+83
+00:02:53,000 --> 00:02:55,089
+Tako ove boje, crvena, zelena,
+
+84
+00:02:55,089 --> 00:02:58,041
+siva, itd, pokazuju
+
+85
+00:02:58,041 --> 00:02:59,029
+stepen u kom
+
+86
+00:02:59,029 --> 00:03:00,079
+različite osobe imaju
+
+87
+00:03:00,079 --> 00:03:03,042
+ili nemaju određeni gen.
+
+88
+00:03:03,061 --> 00:03:04,091
+Ono što možete da učinite
+
+89
+00:03:04,091 --> 00:03:06,056
+je da pokrenete algoritam grupisanja
+
+90
+00:03:06,056 --> 00:03:08,099
+i grupišete osobe u različite kategorije
+
+91
+00:03:08,099 --> 00:03:11,036
+ili različite tipove ljudi.
+
+92
+00:03:11,036 --> 00:03:12,082
+Dakle, to je nenadgledano učenje jer
+
+93
+00:03:12,082 --> 00:03:14,095
+ne govorimo algoritmu
+
+94
+00:03:14,095 --> 00:03:17,019
+”ovo su ljudi tipa 1,
+
+95
+00:03:17,019 --> 00:03:18,063
+ovo su osobe tipa 2, ovo
+
+96
+00:03:18,063 --> 00:03:20,081
+su osobe tipa 3” i tako dalje,
+
+97
+00:03:20,081 --> 00:03:24,024
+i umesto toga kažemo - ”Evo gomile podataka.
+
+98
+00:03:24,024 --> 00:03:25,089
+Ne znam šta je u tim podacima.
+
+99
+00:03:25,089 --> 00:03:27,046
+Ne znam ko je kog tipa.
+
+100
+00:03:27,046 --> 00:03:29,029
+Ne znam čak ni koji su to različiti
+
+101
+00:03:29,029 --> 00:03:30,071
+tipovi ljudi, ali možeš li
+
+102
+00:03:30,071 --> 00:03:32,031
+da mi automatski nađeš strukturu
+
+103
+00:03:32,031 --> 00:03:33,092
+u podacima ovih ljudi i možeš li
+
+104
+00:03:33,092 --> 00:03:35,051
+automatski da svrstaš individue u ove tipove
+
+105
+00:03:35,051 --> 00:03:37,011
+koje ne znam unapred?”
+
+106
+00:03:37,011 --> 00:03:39,059
+Pošto algoritmu ne dajemo
+
+107
+00:03:39,059 --> 00:03:41,009
+ispravne odgovore za
+
+108
+00:03:41,009 --> 00:03:43,011
+primere u mom setu podataka,
+
+109
+00:03:43,011 --> 00:03:45,071
+ovo je nenadgledano učenje.
+
+110
+00:03:46,011 --> 00:03:49,022
+Nenadgledano učenje, ili grupisanje, ima mnogo drugih primena.
+
+111
+00:03:49,022 --> 00:03:53,030
+Koristi se za organizovanje velikih klastera računara.
+
+112
+00:03:53,030 --> 00:03:55,065
+Neki moji prijatelji su se zanimali
+
+113
+00:03:55,065 --> 00:03:56,086
+za velike centre za obradu podataka, tj.
+
+114
+00:03:56,086 --> 00:03:58,060
+velike klastere računara, i pokušavali
+
+115
+00:03:58,060 --> 00:04:00,069
+da razumeju koje mašine imaju tendenciju
+
+116
+00:04:00,069 --> 00:04:02,024
+da rade zajedno - ukoliko bi se
+
+117
+00:04:02,024 --> 00:04:04,011
+te mašine mogle staviti zajedno,
+
+118
+00:04:04,011 --> 00:04:06,092
+mogli biste učiniti da vaš centar za obradu podataka radi efikasnije.
+
+119
+00:04:06,092 --> 00:04:09,059
+Druga primena je u analizi socijalnih mreža.
+
+120
+00:04:09,059 --> 00:04:11,024
+Ukoliko se zna kojim prijateljima
+
+121
+00:04:11,024 --> 00:04:13,007
+najčešće šaljete mejlove, ili
+
+122
+00:04:13,007 --> 00:04:14,042
+ukoliko se zna ko su vam Fejsbuk prijatelji
+
+123
+00:04:14,042 --> 00:04:16,033
+ili ko je u vašim Gugl Plus krugovima,
+
+124
+00:04:16,033 --> 00:04:18,001
+može li se automatski identifikovati
+
+125
+00:04:18,001 --> 00:04:20,044
+šta su srodne grupe prijatelja,
+
+126
+00:04:20,044 --> 00:04:22,051
+i takođe koje su grupe ljudi
+
+127
+00:04:22,051 --> 00:04:24,020
+koji se svi međusobno poznaju?
+
+128
+00:04:24,051 --> 00:04:26,008
+Segmentacija tržišta.
+
+129
+00:04:26,032 --> 00:04:29,027
+Mnoge kompanije imaju ogromne baze informacija o svojim potrošačima.
+
+130
+00:04:29,027 --> 00:04:31,011
+Možete li uvidom u ove
+
+131
+00:04:31,011 --> 00:04:32,069
+setove podataka o potrošačima automatski
+
+132
+00:04:32,069 --> 00:04:34,037
+otkriti segmente tržišta i automatski
+
+133
+00:04:34,037 --> 00:04:37,024
+grupisati svoje potrošače u različite
+
+134
+00:04:37,024 --> 00:04:39,054
+segmente tržišta tako da
+
+135
+00:04:39,054 --> 00:04:42,009
+možete automatski i efikasnije
+
+136
+00:04:42,009 --> 00:04:44,011
+prodavati ili raditi marketing
+
+137
+00:04:44,011 --> 00:04:45,089
+u okviru različitih segmenata tržišta?
+
+138
+00:04:46,009 --> 00:04:47,067
+Ovo je opet nenadgledano učenje,
+
+139
+00:04:47,067 --> 00:04:49,039
+jer imamo sve ove podatke
+
+140
+00:04:49,039 --> 00:04:50,079
+o potrošačima, ali ne znamo
+
+141
+00:04:50,079 --> 00:04:52,011
+unapred koji su
+
+142
+00:04:52,011 --> 00:04:53,024
+segmenti tržišta
+
+143
+00:04:53,024 --> 00:04:55,011
+niti ko je od potrošača iz našeg seta podataka
+
+144
+00:04:55,011 --> 00:04:56,064
+u kom segmentu - ne znamo unapred
+
+145
+00:04:56,064 --> 00:04:57,057
+ko je u prvom
+
+146
+00:04:57,057 --> 00:04:58,091
+segmentu tržišta, ko je u
+
+147
+00:04:58,091 --> 00:05:00,017
+drugom segmentu tržišta, itd.
+
+148
+00:05:00,017 --> 00:05:03,039
+Umesto toga, moramo da prepustimo algoritmu da otkrije sve ovo samo na osnovu podataka.
+
+149
+00:05:03,039 --> 00:05:06,002
+Konačno, nenadgledano učenje
+
+150
+00:05:06,002 --> 00:05:08,082
+se, na iznenađenje, takođe koristi
+
+151
+00:05:08,082 --> 00:05:10,079
+za analizu astronomskih podataka
+
+152
+00:05:10,079 --> 00:05:12,074
+i ovi algoritmi grupisanja proizvode
+
+153
+00:05:12,074 --> 00:05:14,092
+iznenađujuće interesantne i korisne teorije
+
+154
+00:05:14,092 --> 00:05:16,092
+o tome kako su galaksije nastale.
+
+155
+00:05:17,051 --> 00:05:20,036
+Sve ovo su primeri grupisanja,
+
+156
+00:05:20,036 --> 00:05:23,017
+što je samo jedna vrsta nenadgledanog učenja.
+
+157
+00:05:23,037 --> 00:05:25,004
+Dozvolite da vam ispričam o još jednoj.
+
+158
+00:05:25,004 --> 00:05:28,004
+Ispričaću vam o problemu koktel zabave.
+
+159
+00:05:28,004 --> 00:05:30,047
+Bili ste nekad na koktel zabavama, zar ne?
+
+160
+00:05:30,047 --> 00:05:31,057
+Zamislite žurku,
+
+161
+00:05:31,057 --> 00:05:33,026
+sobu punu ljudi, svi
+
+162
+00:05:33,026 --> 00:05:34,066
+sede uokolo, svi pričaju
+
+163
+00:05:34,066 --> 00:05:36,031
+u isto vreme, i imamo
+
+164
+00:05:36,031 --> 00:05:38,017
+sve te izmešane glasove pošto
+
+165
+00:05:38,017 --> 00:05:39,046
+svi pričaju istovremeno, i
+
+166
+00:05:39,046 --> 00:05:42,036
+skoro da je teško čuti čak i osobu sa kojom pričate.
+
+167
+00:05:42,036 --> 00:05:44,004
+Dakle, recimo da na
+
+168
+00:05:44,004 --> 00:05:47,022
+koktel zabavi sa dva čoveka,
+
+169
+00:05:47,022 --> 00:05:49,042
+dva čoveka pričaju istovremeno.
+
+170
+00:05:49,064 --> 00:05:51,069
+Neka to bude jedna
+
+171
+00:05:51,069 --> 00:05:53,004
+mala koktel zabava.
+
+172
+00:05:53,024 --> 00:05:55,021
+Stavićemo dva mikrofona u sobu
+
+173
+00:05:55,021 --> 00:05:57,077
+Dakle, tu su mikrofoni, i pošto
+
+174
+00:05:57,077 --> 00:05:59,026
+su ovi mikrofoni na dve
+
+175
+00:05:59,026 --> 00:06:00,089
+različite udaljenosti od
+
+176
+00:06:00,089 --> 00:06:03,006
+govornika, svaki mikrofon snima
+
+177
+00:06:03,006 --> 00:06:06,043
+različitu kombinaciju glasova ova dva govornika.
+
+178
+00:06:06,043 --> 00:06:09,044
+Možda se prvi govornik čuje
+
+179
+00:06:09,044 --> 00:06:11,044
+malo glasnije na poziciji prvog mikrofona
+
+180
+00:06:11,044 --> 00:06:12,076
+i možda se drugi govornik čuje
+
+181
+00:06:12,076 --> 00:06:14,085
+malo glasnije na poziciji drugog mikrofona
+
+182
+00:06:14,085 --> 00:06:16,076
+pošto su dva mikrofona
+
+183
+00:06:16,076 --> 00:06:18,034
+na različitim pozicijama u odnosu
+
+184
+00:06:18,034 --> 00:06:21,010
+na govornike, ali svaki
+
+185
+00:06:21,010 --> 00:06:22,094
+mikrofon dobija izmešanu
+
+186
+00:06:22,094 --> 00:06:25,086
+kombinaciju glasova oba govornika.
+
+187
+00:06:25,086 --> 00:06:28,029
+Evo konkretnog snimka
+
+188
+00:06:28,029 --> 00:06:32,057
+dva govornika koje je snimio istraživač.
+
+189
+00:06:32,057 --> 00:06:33,096
+Pustiću vam prvo
+
+190
+00:06:33,096 --> 00:06:35,019
+kako zvuči snimak sa prvog mikrofona.
+
+191
+00:06:35,032 --> 00:06:36,084
+One (uno), two (dos),
+
+192
+00:06:36,084 --> 00:06:38,021
+three (tres), four (cuatro),
+
+193
+00:06:38,021 --> 00:06:40,041
+five (cinco), six (sais), seven (siete),
+
+194
+00:06:40,041 --> 00:06:42,078
+eight (ocho), nine (nueve), ten (dies).
+
+195
+00:06:42,098 --> 00:06:45,022
+Ok, možda nije neka naročito zanimljiva koktel
+
+196
+00:06:45,022 --> 00:06:46,059
+zabava - tu su dva čoveka
+
+197
+00:06:46,059 --> 00:06:47,076
+koji broje od jedan do deset
+
+198
+00:06:47,076 --> 00:06:50,034
+na dva jezika, ali šta je tu je.
+
+199
+00:06:50,034 --> 00:06:51,097
+To što ste upravo čuli je bio
+
+200
+00:06:51,097 --> 00:06:54,037
+snimak sa prvog mikrofona. Evo drugog snimka.
+
+201
+00:06:55,036 --> 00:06:58,031
+Uno (one), dos (two), tres (three), cuatro
+
+202
+00:06:58,031 --> 00:07:00,077
+(four), cinco (five), sais (six), siete (seven),
+
+203
+00:07:00,077 --> 00:07:03,042
+ocho (eight), nueve (nine) y dies (ten).
+
+204
+00:07:03,062 --> 00:07:04,097
+Ono šta možemo da uradimo je
+
+205
+00:07:04,097 --> 00:07:06,051
+da uzmemo ova dva snimka i damo ih
+
+206
+00:07:06,051 --> 00:07:09,002
+algoritmu nenadgledanog učenja, zvanom
+
+207
+00:07:09,002 --> 00:07:11,039
+”algoritam koktel zabave” (cocktail party algorithm),
+
+208
+00:07:11,039 --> 00:07:12,071
+i kažemo algoritmu
+
+209
+00:07:12,071 --> 00:07:14,081
+- pronađi mi strukturu u ovim podacima.
+
+210
+00:07:14,081 --> 00:07:16,026
+Ono što će algoritam učiniti
+
+211
+00:07:16,026 --> 00:07:18,052
+je da će slušati ova
+
+212
+00:07:18,052 --> 00:07:19,067
+dva snimka i reći
+
+213
+00:07:19,067 --> 00:07:21,052
+- znaš, zvuči kao da su
+
+214
+00:07:21,052 --> 00:07:22,077
+dva audio snimka
+
+215
+00:07:22,077 --> 00:07:24,040
+kombinovani zajedno, tj. da su
+
+216
+00:07:24,040 --> 00:07:27,063
+sabrani zajedno da bi proizveli ove snimke koje imamo.
+
+217
+00:07:27,063 --> 00:07:29,064
+Dodatno, algoritam koktel zabave
+
+218
+00:07:29,064 --> 00:07:32,019
+će razdvojiti ova
+
+219
+00:07:32,019 --> 00:07:33,071
+dva izvora zvuka
+
+220
+00:07:33,071 --> 00:07:35,036
+koji su bili kombinovani, tj. koji
+
+221
+00:07:35,036 --> 00:07:37,004
+su bili sabrani zajedno da bi formirali
+
+222
+00:07:37,004 --> 00:07:38,023
+druge zapise. Zapravo,
+
+223
+00:07:38,023 --> 00:07:40,061
+evo prvog izlaza algoritma koktel zabave.
+
+224
+00:07:40,061 --> 00:07:43,086
+One, two, three, four,
+
+225
+00:07:43,086 --> 00:07:49,011
+five, six, seven, eight, nine, ten.
+
+226
+00:07:49,036 --> 00:07:51,017
+Dakle, izdvojio sam engleski
+
+227
+00:07:51,017 --> 00:07:54,004
+glas iz jednog od snimaka.
+
+228
+00:07:54,004 --> 00:07:55,090
+A evo i drugog.
+
+229
+00:07:56,017 --> 00:07:59,067
+Uno, dos, tres, quatro, cinco,
+
+230
+00:07:59,067 --> 00:08:03,083
+seis, siete, ocho, nueve y dies.
+
+231
+00:08:04,024 --> 00:08:05,057
+Nije loše. Kao još
+
+232
+00:08:05,057 --> 00:08:07,067
+jedan primer, evo još jednog
+
+233
+00:08:07,067 --> 00:08:09,099
+snimka druge slične situacije.
+
+234
+00:08:09,099 --> 00:08:11,058
+Evo prvog mikrofona:
+
+235
+00:08:11,073 --> 00:08:14,079
+One, two, three, four, five, six,
+
+236
+00:08:14,079 --> 00:08:18,016
+seven, eight, nine, ten.
+
+237
+00:08:18,039 --> 00:08:20,052
+Ok, jadničak je otišao
+
+238
+00:08:20,052 --> 00:08:22,022
+kući sa koktel zabave i
+
+239
+00:08:22,022 --> 00:08:24,057
+sad sedi sam u sobi i priča sa svojim radiom.
+
+240
+00:08:24,077 --> 00:08:26,075
+Evo snimka drugog mikrofona:
+
+241
+00:08:26,093 --> 00:08:34,023
+One, two, three, four, five, six, seven, eight, nine, ten.
+
+242
+00:08:34,077 --> 00:08:36,069
+Kada propustite ova dva snimka
+
+243
+00:08:36,069 --> 00:08:38,014
+kroz isti algoritam,
+
+244
+00:08:38,014 --> 00:08:40,019
+ono što će on uraditi je da ponovo
+
+245
+00:08:40,019 --> 00:08:41,044
+kaže - znaš, zvuči kao da
+
+246
+00:08:41,044 --> 00:08:43,037
+ima dva izvora - i dodatno,
+
+247
+00:08:43,037 --> 00:08:46,087
+algoritam kaže - evo prvog
+
+248
+00:08:46,087 --> 00:08:48,077
+audio izvora koji sam našao.
+
+249
+00:08:48,077 --> 00:08:51,044
+One, two, three, four,
+
+250
+00:08:51,044 --> 00:08:55,082
+five, six, seven, eight, nine, ten.
+
+251
+00:08:56,034 --> 00:08:58,024
+Dakle to nije bilo baš savršeno,
+
+252
+00:08:58,024 --> 00:08:59,067
+našao je glas, ali je takođe
+
+253
+00:08:59,067 --> 00:09:01,082
+dobio i malo muzike uz njega.
+
+254
+00:09:01,082 --> 00:09:04,024
+Evo drugog izlaza algoritma.
+
+255
+00:09:11,032 --> 00:09:12,089
+Nije loše, u tom drugom
+
+256
+00:09:12,099 --> 00:09:16,009
+izlazu je uspeo da ukloni glas u potpunosti.
+
+257
+00:09:16,009 --> 00:09:18,011
+Pročistio je muziku
+
+258
+00:09:18,011 --> 00:09:20,062
+i uklonio brojanje od jedan do deset.
+
+259
+00:09:20,062 --> 00:09:22,036
+Dakle, možete pogledati
+
+260
+00:09:22,036 --> 00:09:24,032
+algoritam nenadgledanog učenja poput
+
+261
+00:09:24,032 --> 00:09:26,047
+ovoga, i pomisliti - ”koliko je
+
+262
+00:09:26,047 --> 00:09:28,004
+komplikovano da se ovo implementira”, zar ne?
+
+263
+00:09:28,004 --> 00:09:29,051
+Čini se da je, da bi se
+
+264
+00:09:29,051 --> 00:09:30,096
+napravila ova aplikacija, čini se
+
+265
+00:09:30,096 --> 00:09:33,004
+da je, da bi se napravila ova audio obrada
+
+266
+00:09:33,004 --> 00:09:34,047
+bilo potrebno napisati mnogo koda
+
+267
+00:09:34,047 --> 00:09:36,034
+ili možda koristiti
+
+268
+00:09:36,036 --> 00:09:38,013
+gomilu C++ ili Java biblioteka koje
+
+269
+00:09:38,013 --> 00:09:39,079
+obrađuju zvuk, čini se kao
+
+270
+00:09:39,079 --> 00:09:41,049
+vrlo komplikovan program, da se
+
+271
+00:09:41,049 --> 00:09:43,084
+napravi ovo razdvajanje zvuka, itd.
+
+272
+00:09:43,084 --> 00:09:46,011
+Ali ispostavlja se da se algoritam
+
+273
+00:09:46,011 --> 00:09:47,091
+koji radi ovo što ste upravo čuli
+
+274
+00:09:47,091 --> 00:09:49,071
+može napraviti u jednoj liniji
+
+275
+00:09:49,071 --> 00:09:51,064
+koda! - Pokazanoj ovde.
+
+276
+00:09:51,064 --> 00:09:54,074
+Doduše, trebalo je istraživačima dosta
+
+277
+00:09:54,074 --> 00:09:56,057
+vremena da dođu do ove linije koda.
+
+278
+00:09:56,057 --> 00:09:58,086
+Ne kažem da je ovo lak problem.
+
+279
+00:09:58,086 --> 00:10:00,066
+Ispostavlja se da, kada koristite
+
+280
+00:10:00,066 --> 00:10:03,032
+pravo programersko okruženje, mnogi algoritmi mašinskog
+
+281
+00:10:03,032 --> 00:10:05,044
+učenja mogu biti vrlo kratki programi.
+
+282
+00:10:05,044 --> 00:10:07,012
+Ovo je takođe razlog zašto
+
+283
+00:10:07,012 --> 00:10:08,069
+ćemo na ovim predavanjima
+
+284
+00:10:08,069 --> 00:10:10,086
+koristiti Oktavu (Octave) kao programersko okruženje.
+
+285
+00:10:10,086 --> 00:10:12,084
+Oktava je besplatan, softver otvorenog
+
+286
+00:10:12,084 --> 00:10:14,071
+koda. Korišćenjem alata
+
+287
+00:10:14,071 --> 00:10:16,027
+kao što su Oktava ili Matlab,
+
+288
+00:10:16,027 --> 00:10:17,092
+mnogi algoritmi mašinskog učenja se
+
+289
+00:10:17,092 --> 00:10:19,084
+svode na samo nekoliko linija koda za implementaciju,
+
+290
+00:10:19,084 --> 00:10:21,072
+Kasnije na ovim predavanjima, učiću vas
+
+291
+00:10:21,072 --> 00:10:23,029
+malo o tome kako da
+
+292
+00:10:23,029 --> 00:10:24,091
+koristite Oktavu i neke od ovih
+
+293
+00:10:24,091 --> 00:10:26,062
+algoritama ćete implementirati u Oktavi.
+
+294
+00:10:26,062 --> 00:10:28,037
+Ili ako imate Matlab, možete i to koristiti.
+
+295
+00:10:28,037 --> 00:10:30,029
+Ispostavilo se da u Silicijumskoj dolini
+
+296
+00:10:30,029 --> 00:10:32,031
+za puno algoritama mašinskog učenja,
+
+297
+00:10:32,031 --> 00:10:34,024
+ono što radimo je da prvo napravimo prototip
+
+298
+00:10:34,024 --> 00:10:35,087
+našeg softvera u Oktavi jer se
+
+299
+00:10:35,087 --> 00:10:38,012
+u Oktavi neverovatno brzo mogu
+
+300
+00:10:38,012 --> 00:10:40,012
+implementirati ovi algoritmi.
+
+301
+00:10:40,012 --> 00:10:42,012
+Ovde je svaka od ovih funkcija,
+
+302
+00:10:42,012 --> 00:10:44,012
+kao na primer SVD,
+
+303
+00:10:44,012 --> 00:10:46,027
+funkcija za dekompoziciju singularnih
+
+304
+00:10:46,027 --> 00:10:47,049
+vrednosti, u stvari
+
+305
+00:10:47,049 --> 00:10:49,059
+rutina iz linearne algebre
+
+306
+00:10:49,059 --> 00:10:51,046
+koja je samo ugrađena u Oktavu.
+
+307
+00:10:51,046 --> 00:10:53,011
+Da ste pokušali da ovo uradite
+
+308
+00:10:53,011 --> 00:10:54,041
+u C++-u ili Javi,
+
+309
+00:10:54,041 --> 00:10:55,098
+ovo bi bilo mnogo, mnogo linija koda
+
+310
+00:10:55,098 --> 00:10:58,024
+uz linkovane kompleksne C++ ili Java biblioteke.
+
+311
+00:10:58,024 --> 00:11:00,019
+Dakle, sve ovo možete implementirati
+
+312
+00:11:00,019 --> 00:11:01,027
+u C++-u ili Javi
+
+313
+00:11:01,027 --> 00:11:02,061
+ili Pajtonu, ali je mnogo
+
+314
+00:11:02,061 --> 00:11:05,062
+komplikovanije uraditi to u tim jezicima.
+
+315
+00:11:05,062 --> 00:11:07,011
+Primetio sam nakon, sada već
+
+316
+00:11:07,011 --> 00:11:09,099
+skoro decenije podučavanja
+
+317
+00:11:09,099 --> 00:11:11,006
+mašinskog učenja, da
+
+318
+00:11:11,006 --> 00:11:12,092
+učite mnogo brže ukoliko
+
+319
+00:11:12,092 --> 00:11:14,057
+koristite Oktavu kao vaše
+
+320
+00:11:14,057 --> 00:11:16,084
+programersko okruženje, i ako
+
+321
+00:11:16,084 --> 00:11:18,079
+koristite Oktavu kao vaš
+
+322
+00:11:18,079 --> 00:11:20,061
+alat za učenje i kao vaš alat
+
+323
+00:11:20,061 --> 00:11:22,061
+za pravljenje prototipova, jer omogućava
+
+324
+00:11:22,061 --> 00:11:24,082
+mnogo brže učenje i pravljenje prototipova algoritama mašinskog učenja.
+
+325
+00:11:24,082 --> 00:11:26,064
+I zapravo, ono što će mnogi ljudi
+
+326
+00:11:26,064 --> 00:11:28,082
+učiniti u velikim kompanijama
+
+327
+00:11:28,082 --> 00:11:30,067
+Silicijumske doline, je da
+
+328
+00:11:30,067 --> 00:11:32,046
+upotrebe alat poput Oktave da prvo
+
+329
+00:11:32,046 --> 00:11:34,037
+naprave prototip učećeg algoritma, i
+
+330
+00:11:34,037 --> 00:11:35,091
+tek nakon što tamo proradi
+
+331
+00:11:35,091 --> 00:11:37,019
+će migrirati to u
+
+332
+00:11:37,019 --> 00:11:38,094
+C++, ili Javu, ili štagod.
+
+333
+00:11:38,094 --> 00:11:40,062
+Ispostavilo se da, radeći
+
+334
+00:11:40,062 --> 00:11:41,098
+na taj način, često možete
+
+335
+00:11:41,098 --> 00:11:43,082
+mnogo brže naterati vaš algoritam
+
+336
+00:11:43,082 --> 00:11:46,050
+da proradi nego ako odmah krenete iz C++-a.
+
+337
+00:11:46,078 --> 00:11:49,065
+Svestan sam da kao instruktor
+
+338
+00:11:49,065 --> 00:11:51,072
+mogu samo konačan broj puta da zatražim
+
+339
+00:11:51,072 --> 00:11:53,064
+da mi verujete na reč,
+
+340
+00:11:53,064 --> 00:11:55,011
+ali za one među vama
+
+341
+00:11:55,011 --> 00:11:56,074
+koji nikada ranije nisu koristili
+
+342
+00:11:56,074 --> 00:11:58,059
+ovu vrstu programskog okruženja kao što je Oktava,
+
+343
+00:11:58,059 --> 00:11:59,059
+zamoliću vas da mi
+
+344
+00:11:59,059 --> 00:12:00,090
+verujete na reč u vezi sa ovim.
+
+345
+00:12:00,090 --> 00:12:02,017
+Mislim da je vaše vreme,
+
+346
+00:12:02,017 --> 00:12:04,045
+vaše vreme provedeno u programiranju,
+
+347
+00:12:04,045 --> 00:12:06,012
+jedan od najdragocenijih resursa.
+
+348
+00:12:06,012 --> 00:12:08,024
+I pošto sam video dosta
+
+349
+00:12:08,024 --> 00:12:10,014
+ljudi da ovo radi, mislim da ćete
+
+350
+00:12:10,014 --> 00:12:11,092
+Vi, kao istraživač u oblasti mašinskog
+
+351
+00:12:11,092 --> 00:12:13,099
+učenja, ili inženjer na razvoju mašinskog
+
+352
+00:12:13,099 --> 00:12:15,037
+učenja, biti mnogo produktivniji
+
+353
+00:12:15,037 --> 00:12:16,084
+ako naučite da krenete od prototipa,
+
+354
+00:12:16,084 --> 00:12:19,061
+na primer u Oktavi, nego ako počnete u nekom drugom jeziku.
+
+355
+00:12:19,061 --> 00:12:22,078
+Najzad, da zaokružimo ovaj video,
+
+356
+00:12:22,078 --> 00:12:26,050
+Imam jedno brzo pitanje za vas.
+
+357
+00:12:26,050 --> 00:12:28,045
+Govorili smo o nenadgledanom učenju, što
+
+358
+00:12:28,045 --> 00:12:30,082
+je postavka učenja u kojoj
+
+359
+00:12:30,082 --> 00:12:32,043
+dajete algoritmu gomilu
+
+360
+00:12:32,043 --> 00:12:34,017
+podataka i samo ga pitate da
+
+361
+00:12:34,017 --> 00:12:35,078
+nađe za vas strukturu u tim podacima.
+
+362
+00:12:35,078 --> 00:12:37,060
+Od sledeća 4 primera, koji...
+
+363
+00:12:37,060 --> 00:12:39,018
+koji od ova četiri
+
+364
+00:12:39,018 --> 00:12:40,072
+mislite da će biti problem
+
+365
+00:12:40,072 --> 00:12:42,084
+nenadgledanog učenja, suprotno
+
+366
+00:12:42,084 --> 00:12:45,000
+od problema nadgledanog učenja.
+
+367
+00:12:45,000 --> 00:12:46,065
+Za svaki od četiri
+
+368
+00:12:46,065 --> 00:12:48,025
+kvadratića na levoj strani,
+
+369
+00:12:48,025 --> 00:12:51,013
+štiklirajte one za koje
+
+370
+00:12:51,013 --> 00:12:52,068
+mislite da bi algoritam nenadgledanog
+
+371
+00:12:52,068 --> 00:12:54,040
+učenja bio prikladan, i onda
+
+372
+00:12:54,040 --> 00:12:56,097
+kliknite na dugme dole desno da proverite svoj odgovor.
+
+373
+00:12:56,097 --> 00:12:59,030
+Kada se video pauzira, molim Vas
+
+374
+00:12:59,030 --> 00:13:01,047
+odgovorite na pitanje sa slajda.
+
+375
+00:13:03,077 --> 00:13:05,092
+Dakle, nadam se da ste se setili problema sa spam folderom.
+
+376
+00:13:05,092 --> 00:13:08,023
+Ako imate označene podatke
+
+377
+00:13:08,023 --> 00:13:10,093
+šta jeste i šta nije spam i-mejl,
+
+378
+00:13:10,093 --> 00:13:13,085
+ovo bismo posmatrali kao problem nadgledanog učenja.
+
+379
+00:13:13,085 --> 00:13:16,017
+Primer sa novinskim člancima,
+
+380
+00:13:16,017 --> 00:13:18,012
+to je upravo primer Gugl Vesti
+
+381
+00:13:18,012 --> 00:13:19,062
+koji smo videli u ovom videu,
+
+382
+00:13:19,062 --> 00:13:21,047
+videli smo kako možete da upotrebite
+
+383
+00:13:21,047 --> 00:13:22,070
+algoritam grupisanja da grupišete
+
+384
+00:13:22,070 --> 00:13:25,007
+ove članke zajedno - tako da je to nenadgledano učenje.
+
+385
+00:13:25,007 --> 00:13:28,077
+O primeru sa segmentiranjem tržišta
+
+386
+00:13:28,077 --> 00:13:31,004
+sam pričao nešto ranije. To
+
+387
+00:13:31,004 --> 00:13:32,083
+možete da tretirate kao problem
+
+388
+00:13:32,083 --> 00:13:34,050
+nenadgledanog učenja, jer ću samo
+
+389
+00:13:34,050 --> 00:13:35,089
+dati svom algoritmu podatke, i tražiti mu
+
+390
+00:13:35,089 --> 00:13:37,092
+da automatski pronađe segmente tržišta.
+
+391
+00:13:37,092 --> 00:13:39,098
+I poslednji primer, dijabetes - pa,
+
+392
+00:13:39,098 --> 00:13:41,058
+taj je baš kao naš primer sa
+
+393
+00:13:41,058 --> 00:13:43,077
+rakom dojke iz prethodnog videa.
+
+394
+00:13:43,077 --> 00:13:45,076
+Samo što umesto dobroćudnih
+
+395
+00:13:45,076 --> 00:13:47,033
+i zloćudnih tumora, iliti
+
+396
+00:13:47,033 --> 00:13:49,018
+benignih i malignih tumora,
+
+397
+00:13:49,018 --> 00:13:50,089
+imamo ili nemamo
+
+398
+00:13:50,089 --> 00:13:52,081
+dijabetes, i zato ćemo
+
+399
+00:13:52,081 --> 00:13:55,009
+koristiti algoritam nadgledanog učenja,
+
+400
+00:13:55,009 --> 00:13:56,051
+tj. rešićemo ovo kao
+
+401
+00:13:56,051 --> 00:13:58,077
+problem nadgledanog učenja, baš
+
+402
+00:13:58,077 --> 00:14:00,094
+kao što smo radili sa podacima o tumoru dojke.
+
+403
+00:14:00,094 --> 00:14:02,099
+I to je to što se tiče nenadgledanog
+
+404
+00:14:02,099 --> 00:14:04,065
+učenja. U sledećem videu
+
+405
+00:14:04,065 --> 00:14:06,043
+zaći ćemo dublje u konkretne
+
+406
+00:14:06,043 --> 00:14:08,017
+algoritme mašinskog učenja
+
+407
+00:14:08,017 --> 00:14:09,071
+i počećemo da pričamo o
+
+408
+00:14:09,071 --> 00:14:11,052
+tome kako ovi algoritmi rade i
+
+409
+00:14:11,052 --> 99:59:59,000
+kako ih možemo implementirati.
