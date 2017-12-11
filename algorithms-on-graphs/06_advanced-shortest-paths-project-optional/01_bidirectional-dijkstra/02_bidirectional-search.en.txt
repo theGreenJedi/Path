@@ -1,0 +1,117 @@
+In this lesson, we will study
+the idea of bidirectional search. And we will come up with the bidirectional
+version of the Dijkstra's algorithm. But first, let's recall what is
+the problem that we are solving. In mathematical terms,
+we are given a graph G, which can be either directed or
+undirected. But it has nonnegative edge weight. This is important. In all the lectures of this module,
+we will work with only the graphs with nonnegative edge weights,
+such as travel times or distances. We're also given a specific source
+vertex as, and the target vertex T. And we want to find the shortest path
+between S and T in the graph G, so the first question is why not just use the
+Dijkstra algorithm that we already know? It has pretty good worst case complexity,
+E plus V times log V, this is pretty good, right? Can we even do better in the worse case? Well, it turns out that we can. Mikkel Thorup came up with an algorithm
+in 1999 that solves this problem for undirected graphs in linear time. Linear times in terms of number of
+edges and vertices of the graph. Such algorithm is still not known for
+directed graphs, but for undirected graphs,
+we can definitely do better. And for directed graphs,
+we can do better also. But we just still don't know
+the linear time algorithm. However, we're not just interested
+in the worst time complexity. We're interested in the practical
+performance of our algorithms. And in practice,
+the classical Dijkstra's algorithm, on a graph of USA, with 20 million
+variances and 50 million edges. Will work roughly, for
+several seconds, on average. Several seconds, sounds like a good thing,
+but when you use, for example, Google maps, you don't want to wait for
+several seconds. You want the results on your
+screen in a blink of an eye, which in practice means that you
+want them under 100 milliseconds. And not only you, but millions of people simultaneously
+want those results in a blink of an eye. So, that's why we need something
+significantly faster for such implications. Now, let's consider how Dijkstra's
+algorithm progresses through the graph. You remember that it processes vertices
+in order of increasing distance. It starts with the source vertex S, and then it processes it by
+considering the outgoing edges and finding the vertices on the other end of
+those edges and relaxing those edges. And so,
+it goes to these vertices at distance one. And the number near the edges
+are the weights of the edges. And the numbers inside the nodes
+are the distances to those nodes. And then it goes to another layer
+of nodes at distance two, and so, you see that Dijkstra's
+algorithm actually goes in circles around the source vertices,
+and this is not coincidence. You remember the Lemma that
+when a vertex U is selected via the ExtractMin procedure
+in the Dijkstra's algorithm. The estimate of distance, to this node. Just a few. It's guaranteed to be equal, to the actual distance,
+from the source vertex to protects you. And also, all the nodes,
+on the distance smaller than that, have already been
+processed by that moment. This is guaranteed in
+the Dijkstra's algorithm. So, actually,
+a circle of processed vertices grows. And this is how it looks
+if we want to find a shortest path from source
+vertex s to the target vertex t. We start growing the circle
+around the node s. Until it touches point T, and
+as soon as it touches point T, we can actually stop
+the distrust algorithm. This is called earnest stopping. Instead of scanning all
+the vertices in the graph and finding the distance from S to
+all other vertices in the graph, we only find the distances
+to the notes we need. To actually find the distance to the node
+T, and the shortest path to node T. This is an optimization of
+distress algorithm already, but this is the simplest one. And here's the idea for
+the bidirectional search. Instead of going from S and growing
+the circle until it touches point T, we want to go simultaneously forward from
+S, and backward from T until we meet. And as soon as we meet, we can find
+the shortest path between S and T by combining the half of
+the path from S to the mid-point, and the half from the meeting point to T. In the algorithm,
+we won't go literally simultaneously. We will take alternating turns from S and
+from T. We'll do a typical digstress
+algorithm from us. We will do one turn of that algorithm,
+and then we will alternate to T, and we will make one turn of the digstress
+algorithm backwards from T. To do that, we will need not only to
+know the outgoing edges from each node, but also all the incoming
+edges to each node. But other than that, we will do the
+regular Dijkstra search from S forward, and the regular Dijkstra search from T,
+but backwards. And we will alternate
+the turns of those Dijkstra's. So, then we will make one more turn from
+S, and one more turn backwards from T. And then one more turn from S, and
+then one more turn backward from T. And now, we see that the vertex in the
+middle was discovered by both algorithms. The forward one and the backward one. And now, we can reconstruct
+the shortest path from S to T, and we can fill in the correct distances
+from S to all the nodes on that path. Now, let's see how it works compared
+to the usual Dijkstra algorithm. So, the usual distance
+algorithm will cover and scan the nodes in this big circle with
+the center in s and touching point T. What will happen in the directional search
+is we will be growing two circles of roughly the same radius until they touch. And this area, covered by these
+two smaller circles, is roughly proportional to the number of vertices
+scanned during the bidirectional search. So, let's denote the big circle by C1,
+and the two smaller circles by C2 and C3. And the distance from S to the meeting
+point V, which is roughly equal to the distance from the meeting point V to
+the target node, T, we'll denote by R. Now, let's estimate the number
+of covered vertices by the area of the corresponding circle. So, the area of the circle C1 is
+pi times the radius of C1 squared. The radius of C1 is 2r, so
+its square is 4r squared. And in the end area of
+C1 is four pi r squared. And the area covered by the directional
+search is the sum or areas of C2 and C3. The areas of C2 and C3 are roughly equal. And the area of C2 is pi r squared. So, the total area is two pi r squared. And we see that the total area covered
+by bi directional search is roughly twice smaller than the area usually
+covered by the usual distress algorithm. So, let's see what happens actually
+when the real world networks when we use the simple distress algorithm,
+and the bi directional search. This is a part of the map of USA with 1.6
+million vertices and 3.8 million arcs. And we're finding the best shortest
+path in terms of the travel time. So here, we try to find the shortest path from the small blue rectangle
+to the small green rectangle in the right edge of the map,
+and we color it with green. All the notes scanned by
+the regular dextrose algorithm while it was looking for the surest path. And on the next picture here, we see
+the result of the bid directional search. And you see that there is
+something similar to what we draw on the previous slides. So, there is something like a blue
+circle around the starting point, and there is something like a green
+circle around the target vertex. The green circle is cut in half
+because of the edge of the map, but in general,
+this is the picture we imagine. And here is another example
+on the map of the full US. And we see a full circle
+around the green point, although it is not like a real circle,
+it's more like a related square. But this is due to the way
+we humans build the roads, because we build them from north to south. And from east, to west very often, and that's why the circle is more like
+a square rotated by 45 degrees. And the blue point is surrounded by
+something more like a half a circle, which is cut by the shore. So, roughly we get a 2x
+speedup on the road networks, which is good, but not great. We were hoping for something like
+thousands of times speed up. But this is true for road networks, but
+what if we look at social networks? And in the next video, we will see
+that indeed for social networks, the bi directional search idea
+works exceptionally well. And it will work thousands of times faster
+that the regular Dijkstra's algorithm.

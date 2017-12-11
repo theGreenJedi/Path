@@ -1,0 +1,110 @@
+Hi, in this video we'll consider another
+better way to find a good potential for A star. It will be based on landmarks. So first, a landmark. Let's fix some vertex A and
+we will call this vertex a landmark. Then we choose the potential function, pi of v equal to distance from
+this landmark to the target, minus distance from this
+landmark to the node V. And by distance, I mean the distance
+in the graph we're looking at. So we can of course not know this
+distance beforehand because to find this distance we need to launch
+some shortest path algorithm. But let's suppose we know
+the distance from the landmark to all other vertices beforehand. Then we can use such potential. And I say that this potential is feasible. And that the value of this potential
+on the target vertex is zero. So let's prove this. First we write the length of the edge
+with this potential by definition. And then we write it as length
+of the initial edge, minus distance from landmark to the target plus
+distance from landmark to distance u. Then plus distance from
+the landmark to the target. And so this cancels out with the minus
+distance from the landmark to the target. And minus distance from
+the landmark to node v. And this is in turn equal to
+distance from landmark to u plus length of the s from u to v minus
+distance from the landmark to v. And now this is non-negative due to triangle inequality
+because distance from A to V cannot be bigger than distance from A to U
+plus length of the edge connecting U to V. So we have just proven that
+the edge weight for any U and V and the new graph is non negative. So the potential we provide
+is indeed feasible. And also the value of this potential on
+the target vertex is just difference of d from A to t,
+with d from A to t which is zero. So this is a physical potential
+with zero value on the target. And so this is actually a lower bound for
+any node V, on the distance from V to the target. So what can we do with this. We can select several landmarks which
+are basically any vertices of the graph. So we can select them any way we want.And
+we can optimize how good do we select those landmarks and hopefully our reason
+will become better because of that. So we select those landmarks,
+maybe 10 landmarks for example, and we precompute the distances from those
+landmarks to all other vertices. So to do that we'll need
+to launch something like algorithm which will find the distances
+from one node to all the others. We cannot really save
+anything on this one, because we need distances
+to all other vertices. So bidirectional storage or
+a star won't help us here. We will need to find distances
+to all other vertices, and we will need to scan the whole graph. But this can be done on
+the pre-computation state. And then for anyone marked A. We have the following inequalities. The distance from any vertex v
+to the target is greater than or equal to distance from A to
+the target minus distance from A to v due to triangle inequality. And also due to another triangle
+inequality, we have another low end bound, that distance from v to t
+is greater than or equal to distance from v to the landmark, minus
+distance from target to the landmark. We can use both if we can precompute
+the distances not only from landmarks to all the other nodes but
+also two landmarks from all other nodes. But to do that we just need to
+reverse the graph and run algorithm from landmarks from each
+of the landmarks again. We can use the tightest lower bounds out
+of all those lower bounds for each node v. So we take maximum over all
+landmarks A that we selected of both differences, and this will
+be the tightest lower bound we have. And this will still be visible but I'll show, we can show that and you know that the tighter the bounds,
+the better the algorithm works, the faster your A star search
+will find the target verdicts. So by choosing the landmarks wisely and maximizing the lower bounds over them,
+we can speed up our a star search a lot. And now let's think how should
+we select the landmarks. The intuition is that a good landmark
+appears either before the starting vertex or after the target vertex and
+then the lower bound Induced by this landmark will
+actually improve something. And this is if we fix the source
+vertex v and the target vertex w, then the landmark is the one which is
+either before before v or after w. But we need to select a set of landmarks
+that will work best for any query. So for any query from service to target, we need some landmarks which are before
+s and some landmarks which are after t. And so it makes, for example, to choose
+the landmarks on the border of our map. For example, here on a map of US, we have landmarks in the rectangles,
+which are red and yellow. And in this particular search, in
+the middle, from green area to blue area, we used the four yellow landmarks,
+meaning that only the lower bounds from those four landmarks
+actually improved our search in some way. And this just supports
+the idea that the landmarks should be before the starting point and
+after the ending point in some sense. And here's another example
+of a start with landmarks. And again, red and
+yellow rectangles are landmarks. And again, yellow rectangles are those
+landmarks which are used in the search. And you see that how much less
+vertices do we really visit with an a star search, which is by the way
+also bi-directional A star search, than with the regular
+bi-directional search. Because in the regular bi-directional
+search we had those a fat circle surrounding each of the starts and
+targets rectangles. And here we have only small
+tiny streams of scant vertices colored in green and blue. So this set of only something like
+21 marks significantly reduces each sequential search but
+with the cost of pre-processing. So to do fast we need to
+pre-process our graph and to compute distances from 20 vertices
+to all other vertices in the graph. So either we have a separate time
+to pre-process our graph and save the results, or this is only applicable if we know that
+we'll get a lot of queries in our problem. So if we get just one query it's
+faster to find the shortest path from source to target directly
+without first trying to find a shortest path from 20, versus through all
+other vertices on the graph. But if you have 1,000 queries
+to find the shortest path, then already we're competing for
+21 marks can be beneficial because it will only take us 20 searches
+from those landmarks. And then each of the subsequent
+1000 searches which were giving us queries will be significantly faster. In the problems of this project, in the
+programming assignment, you will have both problems where you need just to
+compute the results for queries. And you will have problems
+where you will have a separate time to pre-process
+your graph as you want. And then you will answer the queries. And there we will offer you another algorithm in the next lesson, which
+works really well for huge rod networks. But you could also try, instead of or in
+addition to implementing data algorithm, to also implement this A star
+with landmarks algorithm. And you can try different
+ideas on landmarks selection. And it is known that really,
+a very good choice of landmarks can lead to very fast algorithms for
+subsequent queries on the shortest path. In conclusion,
+we've introduced A star algorithm, which is basically a direct search. And direct search can scan fewer vertices,
+a lot fewer, as you just saw on the pictures. A star is a direct search algorithm based
+on Dijkstra and potential functions. And we can also make A star be directional
+to make it the best of both worlds, both a bidirectional and
+a with potentials. The Euclidean distance is one example of
+a potential for road network on a plane. And, we can also use landmarks to
+create a good potential function. And if we create several landmarks, and
+we choose them wisely, so that there are landmarks before and after source and
+target verdicts, for any source and target verdicts, then, this can speed up
+our algorithm even more significantly.

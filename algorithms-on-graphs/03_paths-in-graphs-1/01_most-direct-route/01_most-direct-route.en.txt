@@ -1,0 +1,109 @@
+Hi, in this module you will study
+shortest paths in graphs and algorithms to find them. These algorithms have
+lots of applications. For example, when you want to
+go from one city to another, you don't want to switch
+your transport many times. And in the travel planning systems, there
+are algorithms that help you to minimize the number of such switches, for example,
+to get from Hamburg to Moscow with the minimum possible
+number of flight segments. When you start a navigation app on your
+smartphone to get home from work faster, one of these algorithms is used to
+give you the fastest route possible. Also, one of these algorithms is
+used right now to direct the network packets with data through the Internet so
+that you can watch this video online. In this module, we will start with the most direct
+route problem about flight segments. We will then consider the problem
+of getting from point A to point B with the fastest possible route. And in the end, we'll consider
+the problem about currency exchange, which doesn't seem to be a problem
+about graphs or shortest paths, but actually the same algorithms will help
+you to exchange currency in the optimal, most profitable way. Let's start with the most
+direct route problem. It is formulated very simply. What is the minimum number of flight
+segments to get from one city to another? For example, if we look at this map
+you could go from Hamburg to Moscow with five flight segments, but
+this is obviously not optimal because you could go from Hamburg to
+Moscow with a direct flight. We can consider it as a graph problem on a
+graph where nodes correspond to cities and directed edges correspond to available
+flights from one city to another. The edges are directed because
+flights can be available one way and not available another one, for example,
+because there are no tickets left. And, of course, in the typical real world
+graph there are many more cities and many more possible flights but
+this is just an illustrative example. So here the graph problem is
+to get from node correspondent to Hamburg to node
+correspondent to Moscow. And one way to do that is to use
+these five edges corresponding to the five flight segments
+we saw on the map, but this is obviously not optimal in
+terms of minimization of number of edges. For example, we could get from
+Hamburg to Paris first, and then from Paris to Moscow, and
+that would be just two edges. Or in this case, you could go just
+directly from Hamburg to Moscow, and obviously this is the optimal way, to use just one flight segment,
+which is not always possible. For example,
+to get from Hamburg to Helsinki, you'd need at least three
+edges on this graph. Also notice that as soon as we
+formulate it as a graph problem, we don't need to name the nodes
+like Hamburg or Moscow. We can just name them to A,
+B, C, D, E, and then solve the problem
+on an abstract graph. So let's talk about paths and graphs. So, we define length of the path L(P), where P is the path,
+as the number of edges in this path. For example,
+if we consider the path from D to B, which consists of edges from D to E,
+then from E to S, from S to A, and from A to B,
+then the length of this path is 4. And note that this is an undirected graph,
+but we will also look at
+the directed example soon. Another example of a path is from
+D to B again, but through S. From D to S to C to B, and
+the length of this path is 3. Now the distance between two vertices or nodes in the graph is the length of
+the shortest possible path between them. For example, the distance between D and B is just 3 because this is the path from
+D to B which contains just three edges, and there are no paths that
+contains less than three edges. And the distance from C to A is just 2,
+because there is a path through S. There is another one through B,
+which is also of length 2, but there is no direct edge from C to A. The situation changes a little bit when
+the graph is directed because not all edges can be taken. And so distance from D to B in this graph,
+which looks like the same but has directed edges, is now 4 instead
+of 3 in the undirected case. This is because we cannot take the edge
+from D to S because it is directed in the wrong direction. So distance from D to B is 4 because
+there is this path in green and there is no shorter path. And the distance from C to
+A in this case is infinity because there is actually no path from C
+to A, because you cannot go from C to F. And even if you go from C to B, it cannot go from B to A because
+the edge is going the wrong direction. Now let's consider the paths
+from some origin node S. It turns out that to find the shortest
+path from A to B is not simpler than finding shortest paths from
+A to all other nodes in the graph, or at least almost all
+the other nodes in the graph. And so we will be studying the problem
+of finding shortest path from one starting node S to all
+other nodes in the graph. When we select the starting node, we can lay out the same graph in
+a different way using distance layers. In this case,
+we have three distance layers. The first one is layer 0,
+which contains just node S, which is a distance 0 from itself. Then we have layer 1, which contains
+four nodes a distance 1 from node S. And then we have layer 2,
+which contains just one node, B, which is a distance 2 from node S. If we added another node to this graph,
+for example, node F, which is only connected with B,
+then it will have 4 layers, and additional layer 3 contains just node F,
+which is a distance 3 from node S. Note that there cannot be an edge
+from D to F in such layered graph because otherwise there would be
+a path from S to F of length 2, S, D, F, and then F would be in the layer 2 and
+there would be no layer 3. And another example is that there cannot
+be an edge from S to F because in this case the distance from S to F would be
+1 and so F would be in the layer 1. And again there wouldn't be no layer 3. And the general property is that
+the only edges which are allowed in such layered graph are edges
+inside the layer, like edge from D to E in this example, and
+edges between a layer and the next layer, like edges from S to layer 1, edges
+from A and C to B, and edge from B to F. Now let's consider the directed case. We directed all the edges downwards and
+so the layers didn't change. We still have layer 0 with just S,
+layer 1 with four nodes, and layers 2 and 3 with nodes B and F correspondingly. What about additional edges here? For example, can F be connected to D? So yes, it can be connected to D,
+but in this direction, from F to D, because this edge from F to D doesn't
+give us any shorter path from S to F. And so
+the shortest path is still of length 3. Also, it is possible to connect F
+directly to S in this direction, or to connect B directly to S because
+the shortest paths don't change. However, it is not possible
+to add an edge from C to F, because if we add this edge,
+the layer structure will change. because the distance from S to F will
+be just 2, from S to C and from C to F. And the general property is that
+there cannot be any edge from a layer to another layer which is
+farther from S by at least two. So there can be an edge from
+a layer to the next layer. There can be an edge
+within the layer's edges, an edge from D to E in this example. And there can be an edge from a layer
+to any of the previous layers, such as the green edges in this example. But there cannot be any red edges,
+such as an edge from C to F, which is an edge from
+the layer 1 to the layer 3, which is at least farther
+by two from S than layer 1. So there cannot be any such edges
+in the layered distance graph. And in the next video, we will discuss an efficient algorithm
+to traverse the graph layer by layer so that in the end every node is
+assigned to some layer, and we know the distance to this node as the number
+of the layer to which it was assigned.

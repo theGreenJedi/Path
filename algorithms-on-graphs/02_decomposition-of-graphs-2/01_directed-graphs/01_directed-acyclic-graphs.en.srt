@@ -1,0 +1,649 @@
+1
+00:00:01,430 --> 00:00:02,020
+Hello, everybody.
+
+2
+00:00:02,020 --> 00:00:04,440
+Welcome back to the graph
+algorithms course.
+
+3
+00:00:04,440 --> 00:00:08,678
+Today, we're going to start talking
+about directed graphs versus undirected,
+
+4
+00:00:08,678 --> 00:00:13,118
+in particular, talk about directed acyclic
+graphs and some of their properties.
+
+5
+00:00:13,118 --> 00:00:15,860
+So what's the motivation for this?
+
+6
+00:00:15,860 --> 00:00:19,840
+The point is that sometimes we
+want to talk about the edges of
+
+7
+00:00:19,840 --> 00:00:21,260
+a graph that have a direction.
+
+8
+00:00:22,430 --> 00:00:26,910
+This is just because I mean, sometimes,
+like pairs of things are related in a way,
+
+9
+00:00:26,910 --> 00:00:28,460
+but the relation isn't symmetric.
+
+10
+00:00:28,460 --> 00:00:32,340
+One of them comes before the other,
+or it's a one way viewership or
+
+11
+00:00:32,340 --> 00:00:33,880
+something like that.
+
+12
+00:00:33,880 --> 00:00:37,750
+And so we define a directed graph to
+be a graph, where each edge has sort of
+
+13
+00:00:37,750 --> 00:00:43,440
+a designated start end and an end end.
+
+14
+00:00:43,440 --> 00:00:45,850
+So what are examples where
+you might want to use this?
+
+15
+00:00:45,850 --> 00:00:49,490
+For example, if you've got a city map
+where lots of your streets are one way
+
+16
+00:00:49,490 --> 00:00:53,760
+roads, the direction that the road's
+pointing is actually very relevant if you
+
+17
+00:00:53,760 --> 00:00:55,240
+want to navigate the city.
+
+18
+00:00:55,240 --> 00:00:58,350
+You can't just follow any series
+of roads you like because you'll
+
+19
+00:00:58,350 --> 00:01:01,430
+be driving down some one way streets
+in the wrong order, so you really
+
+20
+00:01:01,430 --> 00:01:04,998
+do need to keep track of this orientation
+if you want to navigate the city.
+
+21
+00:01:04,998 --> 00:01:10,150
+But then also some of the examples
+that we gave, links between webpages,
+
+22
+00:01:10,150 --> 00:01:13,570
+the web graph is probably
+a directed graph, because usually,
+
+23
+00:01:13,570 --> 00:01:17,960
+if you've got two webpages and A links
+to B, B probably doesn't link back to A.
+
+24
+00:01:19,400 --> 00:01:21,903
+Similarly, if you have
+followers on a social network,
+
+25
+00:01:21,903 --> 00:01:23,457
+it depends on the social network.
+
+26
+00:01:23,457 --> 00:01:27,860
+I mean, in Facebook,
+friendships are symmetric.
+
+27
+00:01:27,860 --> 00:01:28,940
+So they're sort of two-directional.
+
+28
+00:01:28,940 --> 00:01:30,850
+That might be an undirected graph.
+
+29
+00:01:30,850 --> 00:01:35,090
+But on lots of them, you can follow
+somebody without them following you, and
+
+30
+00:01:35,090 --> 00:01:38,920
+so then you end up with wanting
+to have a directed relation for
+
+31
+00:01:38,920 --> 00:01:40,590
+when someone's following someone else.
+
+32
+00:01:41,600 --> 00:01:45,800
+A final example that we'll look at in some
+more detail today are sort of dependencies
+
+33
+00:01:45,800 --> 00:01:46,880
+between tasks.
+
+34
+00:01:48,750 --> 00:01:53,040
+So, we have this directed graph, and we've
+already built up a lot of this theory that
+
+35
+00:01:53,040 --> 00:01:59,733
+works for undirected graphs with this
+sort of exploring DFS algorithms.
+
+36
+00:01:59,733 --> 00:02:04,230
+But most of this sort of actually
+still holds for directed graphs.
+
+37
+00:02:04,230 --> 00:02:07,270
+We can still run DFS on a directed graph.
+
+38
+00:02:07,270 --> 00:02:10,450
+The slight modification now is
+that when we run our explores,
+
+39
+00:02:10,450 --> 00:02:13,710
+we only want to check for
+directed edges out of v.
+
+40
+00:02:13,710 --> 00:02:19,250
+So when we say for all neighbors w of v,
+if w has not been visited, etc,
+
+41
+00:02:19,250 --> 00:02:24,900
+we really want to say neighbors where v
+points to w, not the other way around.
+
+42
+00:02:24,900 --> 00:02:27,610
+And what this will do is it
+means that when we explore v,
+
+43
+00:02:27,610 --> 00:02:30,800
+we find things that
+are actually reachable from v,
+
+44
+00:02:30,800 --> 00:02:34,160
+using the edges in the direction
+that they're intended.
+
+45
+00:02:34,160 --> 00:02:37,650
+So we're only sort of allowed
+to follow these one-way roads
+
+46
+00:02:37,650 --> 00:02:39,340
+in their appropriate direction.
+
+47
+00:02:40,650 --> 00:02:44,820
+Now using this new depth first search, we
+can still compute pre- and post-orderings.
+
+48
+00:02:44,820 --> 00:02:47,200
+They still have many of
+the same properties.
+
+49
+00:02:47,200 --> 00:02:50,110
+The algorithm for
+DFS still runs in linear time.
+
+50
+00:02:50,110 --> 00:02:51,920
+Basically, everything's the same.
+
+51
+00:02:51,920 --> 00:02:53,830
+The context is now
+a little bit more general.
+
+52
+00:02:55,900 --> 00:02:59,137
+Okay, so
+let's look at a sort of specific example,
+
+53
+00:02:59,137 --> 00:03:01,578
+where directed graphs are important.
+
+54
+00:03:01,578 --> 00:03:04,625
+In particular, suppose that we have
+the following morning routine.
+
+55
+00:03:04,625 --> 00:03:06,680
+We've gotta do a bunch
+of things every morning.
+
+56
+00:03:06,680 --> 00:03:09,830
+We need to wake up, we need to get
+dressed, we need to eat breakfast,
+
+57
+00:03:09,830 --> 00:03:12,450
+we need to go to work,
+we need to shower, all of these things.
+
+58
+00:03:14,800 --> 00:03:19,770
+We need to do these things in some order,
+but we can't do them in any old order.
+
+59
+00:03:19,770 --> 00:03:22,940
+Because well,
+we need to wake up before we get showered.
+
+60
+00:03:22,940 --> 00:03:24,650
+And we need to dress before we go to work.
+
+61
+00:03:24,650 --> 00:03:28,690
+And we need to eat breakfast before
+we go to work, and all of this stuff.
+
+62
+00:03:28,690 --> 00:03:32,870
+And one way of representing these sorts
+of dependencies is by a directed graph.
+
+63
+00:03:34,000 --> 00:03:36,960
+If we need to do A before we can do B,
+
+64
+00:03:36,960 --> 00:03:40,040
+then we draw a directed
+edge from A pointing to B.
+
+65
+00:03:40,040 --> 00:03:42,800
+And so, this gives us some
+sort of dependency relation.
+
+66
+00:03:42,800 --> 00:03:46,910
+And it's not just these sort of
+trivial examples of how do I
+
+67
+00:03:46,910 --> 00:03:48,280
+get dressed in the morning.
+
+68
+00:03:48,280 --> 00:03:52,140
+But if you've got some sort of complicated
+system of libraries, where some of them
+
+69
+00:03:52,140 --> 00:03:55,700
+require other ones in order to work,
+you can end up with some sort of similar
+
+70
+00:03:55,700 --> 00:04:00,910
+graphic dependencies, which you actually
+do need similar techniques to handle.
+
+71
+00:04:02,220 --> 00:04:04,780
+Okay, so what do we do when
+we have these dependencies?
+
+72
+00:04:04,780 --> 00:04:07,435
+Well, one of the things that we'd
+like to do is we'd like to find
+
+73
+00:04:07,435 --> 00:04:12,000
+the ordering of the tasks in a way
+that respects these dependencies.
+
+74
+00:04:12,000 --> 00:04:16,140
+We'd like to wake up before we,
+well, fine.
+
+75
+00:04:16,140 --> 00:04:20,740
+For example, suppose that we woke up
+at 7 o'clock and then showered at 7:05,
+
+76
+00:04:20,740 --> 00:04:26,310
+got dressed at 7:15, had breakfast
+at 7:20, and went to work at 7:30.
+
+77
+00:04:26,310 --> 00:04:28,970
+This puts all of our events in some order.
+
+78
+00:04:28,970 --> 00:04:32,610
+And you'll note that this order
+respects all of our dependencies.
+
+79
+00:04:32,610 --> 00:04:36,400
+We wake up before we shower, before
+we get dressed, before we go to work.
+
+80
+00:04:36,400 --> 00:04:39,340
+And we eat breakfast before we go to work,
+and everything works out nice.
+
+81
+00:04:40,470 --> 00:04:43,210
+And so,
+if we have one of these dependency graphs,
+
+82
+00:04:43,210 --> 00:04:48,060
+we'd like to linearly order the vertices
+to respect these dependencies.
+
+83
+00:04:49,350 --> 00:04:52,950
+Now one thing to ask is,
+is it always possible to do this?
+
+84
+00:04:52,950 --> 00:04:55,450
+And it turns out the answer is no.
+
+85
+00:04:55,450 --> 00:04:59,497
+The sort of best counter example is
+this following chicken and egg problem.
+
+86
+00:04:59,497 --> 00:05:02,953
+I mean, the point is that you need
+a chicken in order to lay eggs, and
+
+87
+00:05:02,953 --> 00:05:04,663
+you need eggs to hatch chickens.
+
+88
+00:05:04,663 --> 00:05:09,360
+And so you can't like put them in some
+order where one of them comes first.
+
+89
+00:05:10,850 --> 00:05:13,370
+If you put chickens first,
+then it would just point you from
+
+90
+00:05:13,370 --> 00:05:15,640
+eggs back to chickens going
+in the wrong direction.
+
+91
+00:05:15,640 --> 00:05:16,938
+You put eggs first,
+
+92
+00:05:16,938 --> 00:05:20,300
+there's this pointer from chickens
+back to eggs in the wrong direction.
+
+93
+00:05:20,300 --> 00:05:22,880
+Without someplace to have gotten started,
+
+94
+00:05:22,880 --> 00:05:25,130
+there's sort of no way you
+can get this ordering and go.
+
+95
+00:05:27,020 --> 00:05:31,410
+In fact, in general there's a slightly
+more complicated way in which this can
+
+96
+00:05:31,410 --> 00:05:32,630
+fail to happen.
+
+97
+00:05:32,630 --> 00:05:37,300
+In fact, if your graph has any cycle, a
+cycle here is a sequence of vertices, v1,
+
+98
+00:05:37,300 --> 00:05:42,880
+v2 to vn, such that each one connects
+to the next using a directed edge.
+
+99
+00:05:42,880 --> 00:05:44,910
+So you've got a bunch
+of vertices arranged.
+
+100
+00:05:44,910 --> 00:05:48,980
+The circles just that each one connects
+to the next one all the way around.
+
+101
+00:05:50,470 --> 00:05:54,500
+And the theorem is that if G contains
+a cycle, it cannot be linearly ordered.
+
+102
+00:05:56,510 --> 00:05:59,590
+Okay, so just to make, well, fine.
+
+103
+00:05:59,590 --> 00:06:01,340
+Let's take a look at the proof here.
+
+104
+00:06:01,340 --> 00:06:03,660
+So suppose their graph has a cycle,
+
+105
+00:06:03,660 --> 00:06:06,780
+v1 through vn,
+everything connected up in order.
+
+106
+00:06:06,780 --> 00:06:09,939
+And suppose that additionally,
+we can linearly order this graph.
+
+107
+00:06:11,230 --> 00:06:14,790
+Well, if you linearly order these things,
+there are finitely many.
+
+108
+00:06:14,790 --> 00:06:16,230
+One of them needs to come first.
+
+109
+00:06:16,230 --> 00:06:19,302
+So suppose that vk comes
+first in this order.
+
+110
+00:06:19,302 --> 00:06:24,291
+But now we're putting vk before vk-1,
+and vk-1 points to it, so
+
+111
+00:06:24,291 --> 00:06:30,331
+we have an arrow pointing in the wrong
+direction, which gives us a contradiction.
+
+112
+00:06:30,331 --> 00:06:33,240
+So, if we have a cycle,
+we cannot be linearly ordered.
+
+113
+00:06:34,840 --> 00:06:39,900
+So, what this means is that in
+order to be linearly orderable,
+
+114
+00:06:39,900 --> 00:06:44,390
+you need to be what's known as
+a directed acyclic graph or DAG.
+
+115
+00:06:44,390 --> 00:06:50,390
+And this is just a name for a directed
+graph that has no cycles, fair enough.
+
+116
+00:06:50,390 --> 00:06:55,480
+Now, by the above theorem, it is necessary
+to be a DAG in order to linearly order.
+
+117
+00:06:55,480 --> 00:07:00,060
+But one question we should ask
+ourselves perhaps is, is it sufficient?
+
+118
+00:07:00,060 --> 00:07:03,941
+Can we necessarily linearly
+order it if it's a DAG?
+
+119
+00:07:03,941 --> 00:07:07,029
+Well, okay, this is a question to
+ask a little bit later, but for now,
+
+120
+00:07:07,029 --> 00:07:08,490
+let's just review.
+
+121
+00:07:08,490 --> 00:07:10,942
+We have the following four graphs.
+
+122
+00:07:10,942 --> 00:07:14,529
+Note that the edges here are sort of
+the same, except for their orientations.
+
+123
+00:07:14,529 --> 00:07:18,920
+And which one of these graphs is a DAG?
+
+124
+00:07:20,620 --> 00:07:22,380
+Well, it turns out that only A is.
+
+125
+00:07:22,380 --> 00:07:26,690
+B has the cycle noted in red, and
+C has this other cycle noted in red.
+
+126
+00:07:26,690 --> 00:07:27,960
+But if you work out A,
+
+127
+00:07:27,960 --> 00:07:33,760
+you can actually see that it
+does not have any cycles to it.
+
+128
+00:07:33,760 --> 00:07:36,536
+Okay, but
+the question that we were posing was,
+
+129
+00:07:36,536 --> 00:07:40,210
+is it the case that any DAG
+can be linearly ordered?
+
+130
+00:07:40,210 --> 00:07:42,400
+And the theorem that we'll
+actually show is that yes,
+
+131
+00:07:42,400 --> 00:07:46,860
+if you have any directed acyclic graph,
+you can linearly order it.
+
+132
+00:07:46,860 --> 00:07:50,230
+And next time, what we're going to do
+is we're going to prove this theorem.
+
+133
+00:07:50,230 --> 00:07:51,590
+But not just that.
+
+134
+00:07:51,590 --> 00:07:54,820
+In addition to proving this theorem, we're
+actually going to make it algorithmic.
+
+135
+00:07:54,820 --> 00:07:56,500
+We're going to come up
+with an algorithm that,
+
+136
+00:07:56,500 --> 00:08:00,380
+given a DAG,
+actually produces this linear order.
+
+137
+00:08:00,380 --> 00:08:05,040
+So that's what you have to look forward
+to next time, and I'll see you then.

@@ -1,0 +1,70 @@
+Hi, in this video you will learn
+what is a shortest path tree, how to use it to reconstruct the shortest
+path from original to the node you needed shortest path to after finding
+distances with breadth-first search. And we'll need to slightly modify
+breadth-first search procedure for that. What is the shortest-path tree? On the left we some undirected
+graph with a nine nodes, and suppose we selected nodes as the origin. Then on the right we see the layered
+structure of this graph, where as in the layer zero. Four nodes in the layer one,
+two nodes in the layer two and two nodes in the layer three. So, we know the distances to those
+nodes but we also can remember is how did we come to this or that particular
+node during the breath's first search. So, for example, we example, we came to the node a during breath's
+first search, directly from s. We draw a directed edge from A to S. Saying that S is the note from which
+we came to A when we discovered it. We also draw an edge
+from B to A saying that in our breakfast search algorithm
+we discovered B from A. So we can draw such an edge for
+all the nodes but for S itself, and we will get some graph. And we'll prove later that it is a tree,
+but to make a tree, we also need to make it undirected, so we
+just remove all the arrows from the edges. And this already will be a tree. So the lemma states that
+shortest-path tree, as we define it now, is indeed a tree. So that it doesn't contain any cycles. Because the fact that this is a connected
+component is by construction. We only add those nodes in the tree,
+which we reached during breath for search. And always connect a new note
+we just discovered to some note, which was already in the tree, so
+the graph is obviously connected. We're going to need to prove that
+there are no cycles in this graph, let's prove that as
+usual by contradiction. So, suppose there is a cycle
+in the shortest path three. And suppose this is a cycle off length 5,
+A-B-C-D-E. Now this is an undirected cycle but the edges of the cycle have to
+be ordered somehow initially. So, for example, the edge between A and B can be either from A to B or
+B to A but it doesn't really matter. Let's assume that. Go from a to b without loss of generality. Now what we know is in the shortest
+path tree, at most one outgoing edge from each node because for
+each node other than s, we just saved from which
+node did we discovered it. There is only one such node
+from which this is discovered. There at most one outgoing edge from each
+node, and if we look at the edge between A and E, we know that there is
+an outgoing edge from A already. The edge between A and E cannot be
+an outgoing edge from A, because. A would have two outgoing edges. So the only way this can work is that
+there is an outgoing edge from E to A. And similarly, the edge between D and
+E can only be attached from D to E, and the same with edge CD and
+the same with edge BC. So now we see the directitude So looks like it can work but
+unfortunately it can not. So lets look at the distance from S to A. We know that when we go by the direct
+edge of a shortest path graph we go from node which was discovered from some node
+To the nodes from which it was discovered. And we know that the distance to
+the newly discovered node is assigned to distance of the nodes from
+which it was discovered plus one. So if we go by this edge to
+the parent in the shortest path tree, we decrease our distance
+from S by exactly one. We begin We stay in the node which
+is closer to S, exactly by 1. So if we go from A to B,
+the distance to S decreases by 1. If we go from B to C, decrease by 1. So we start with some
+distance D from S to A, and then when we go by edge A B,
+we stay at node B. And we know that the distance
+from S to B is at most D minus 1. And then the distance to
+C is at most d minus two, and the distance to D is at most d minus
+three, and d minus four for E, and now, we make the conclusion that the distance
+to A is at most d minus five. So, d is at most d minus 5
+which is a contradiction, which cannot happen so, By contradiction
+we'll prove that they're cannot be any cycles in the shortest
+path tree indeed. Now how to construct
+the shortest path tree? We've defined it in such a way
+that it is very easy to do. We only need to add two statements
+to the code of the BFS procedure. We need another array or map, which is
+called prev so in prev we will store for each node the previous node
+from which it was discovered. And initialize it with
+a pointer to no work with a special pointer needle, which basically
+means we don't have any previous node. And when we discover a node
+in the end of the procedure. We not only have data
+distance to those node, but we also save the node from
+which it was discovered. Now this is the only moment when berev
+changes because the next time we won't discover this node again and
+we won't change its berev. So that's the whole code for
+constructing shortest-path tree. Now for every node we know what is
+its parent in the shortest-path tree.

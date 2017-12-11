@@ -1,0 +1,65 @@
+Hi, in this video you will
+learn Bellman-Ford's algorithm, which is an algorithm for finding shortest paths in graphs
+where edges can have negative weight. Actually, do you remember the naive
+algorithm from the previous lesson about Dijkstra's algorithm? It turns out, it's not so naive and Bellman-Ford's algorithm is almost
+the same as the naive algorithm. So, that naive algorithm just
+relaxed edges while dist changed, and at some point it stopped. We didn't estimate the running
+time of that algorithm. But it turns out, that this algorithm has benefit over Dijkstra's algorithm that
+it works even for negative edge weights. It is a little bit slower
+than Dijkstra's algorithm but it works in graphs with any edge weights. So, here is Bellman-Ford's algorithm. And, it takes as input,
+graph and original node again. And we will find shortest paths from this
+original to all the nodes in the graph. And there is an additional comment
+that this algorithm assumes that there are no negative
+weight cycles in G. Otherwise, it will work still but it won't return correct distances for
+some of the nodes, so. So, if you know that there are no
+negative weight cycles in G, this algorithm will give
+you the answers you need. If there are negative weight cycles, we'll
+discuss later what to do in this case. So, this algorithm uses
+the same dist values and prev values as b f s and
+Dijkstra's algorithm. It initializes them the same way,
+infinitely for distances apart from the origin node s and
+prevs just point to nowhere. And then we repeat exactly V- 1 times. V is the number of nodes in the graph. We relax all the edges
+in the graph in order. So, this is the Bellman-Ford's algorithm. And actually,
+this repeat V- 1 times is excessive. Actually, we can just return to
+the naive algorithm interpretation when it repeated relaxation of all
+the edges until no relaxation is possible. So, this can be done, and
+this will even work faster than Bellman-Ford, in the case where
+there are no negative weight cycles. However, we write this pseudo-code in
+this form just because it is easier to prove the algorithms
+correctness this way. But, you can just know
+that if at some iteration during these V- y iterations nothing
+changed, no edge was actually relaxed, we can just stop there and
+the distances will already be correct. Now, let's estimate the running
+time of this algorithm. And I state that it's proportional to
+the product of number of nodes and number of edges. So, that is longer than Dijkstra's
+algorithm which was V squared in terms of array based implementation and
+even e + v log v in terms of heap,
+binary heap implementation. So, this is longer than that but it works
+with negative edge weights, so it's good. So initially, we just initialize dist and prev values in time proportional
+to number of nodes. And then we'll do V- 1 iteration. Each iteration takes time
+proportional to the number of edges because relaxation is
+a constant time procedure. So, totally we get time
+proportional to VE. And now, we'll look at an example
+of how Bellman-Ford's algorithm works on a real graph. So the original is, again, s. And the numbers 0 and
+infinity in blue are the dis values. And the numbers near the edges
+are the edge weights. So, what we do is we take
+all the edges in order starting from the edge with weight 4. And we try to relax it. And we improve the dist value for
+A from infinity to 4. We take the next edge with length 3 and we improve the dist value
+of B from infinity to 3. We take the edge with weight -2 and we further improve the dist value for
+B from 3 to 2. Then, we consider edge from A to C and
+improve infinity to 8. Then, we consider edge from B to C and
+improve it further from 8 to -1. Then, we consider edge from B to D and
+improve from infinity to 3. And, we consider the edge from C to D and
+improve from 3 to 1. This is just one iteration
+of Bellman-Ford's algorithm. Now, let's see what happens
+on the next iteration. We consider edge from S to A,
+it doesn't improve anything. This edge, doesn't improve anything. This edge doesn't improve. This edge also doesn't improve. And this doesn't improve. And this doesn't improve. And this does improve. And so already, on the second iteration,
+nothing can be improved. So, we actually can stop the algorithm
+just after one iteration. And it will take,
+instead of VE operations, just E operations because we made just
+one iteration over all the edges. And often,
+it will work just this way in practice. But for some graphs, of course,
+we'll need many more iterations. So now, we already know the final distances that the Bellman-Ford
+algorithm returns. And in the next video,
+we will prove that this algorithm returns correct distances in
+the absence of negative weight cycles.

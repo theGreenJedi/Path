@@ -1,0 +1,556 @@
+1
+00:00:00,240 --> 00:00:01,600
+Hi.
+In this video,
+
+2
+00:00:01,600 --> 00:00:05,840
+we will study the preprocessing phase for
+the contraction hierarchies algorithm.
+
+3
+00:00:07,100 --> 00:00:12,090
+So the general idea is that we will be
+eliminating nodes of the initial graph,
+
+4
+00:00:12,090 --> 00:00:13,920
+one by one, in some order.
+
+5
+00:00:14,960 --> 00:00:19,900
+When we eliminate the node, some of the
+shortest paths that existed in the initial
+
+6
+00:00:19,900 --> 00:00:25,550
+graph can be gone because they
+were passing through this node.
+
+7
+00:00:25,550 --> 00:00:28,830
+And in this case,
+we will need to add some shortcuts so
+
+8
+00:00:28,830 --> 00:00:30,730
+that we preserve the distances.
+
+9
+00:00:30,730 --> 00:00:34,915
+Although the distances between any
+two nodes that are still in the graph
+
+10
+00:00:34,915 --> 00:00:40,825
+are the same the distances between
+these nodes, in the initial graph.
+
+11
+00:00:40,825 --> 00:00:43,795
+So we'll add some shortcuts
+some new edges to the graph.
+
+12
+00:00:44,915 --> 00:00:47,932
+And in the end,
+we will get the augmented graph
+
+13
+00:00:47,932 --> 00:00:51,682
+which has the same set of
+vertices as the initial graph.
+
+14
+00:00:51,682 --> 00:00:54,902
+It also has all the edges
+of the initial graph.
+
+15
+00:00:54,902 --> 00:00:58,952
+But apart from that it has all
+the added shortcuts as edges.
+
+16
+00:00:58,952 --> 00:01:01,082
+This is the augmented graph.
+
+17
+00:01:01,082 --> 00:01:04,419
+Basically the graph with
+augmented set of edges, and
+
+18
+00:01:04,419 --> 00:01:10,650
+also we'll output the order of the nodes
+that we used in this preprocessing.
+
+19
+00:01:10,650 --> 00:01:12,610
+This is the general scheme.
+
+20
+00:01:12,610 --> 00:01:15,220
+Now how does the node contraction work?
+
+21
+00:01:16,220 --> 00:01:20,520
+So let's look at this very simple
+line graph, all nodes in one chain.
+
+22
+00:01:21,720 --> 00:01:23,140
+The nodes are numbered.
+
+23
+00:01:23,140 --> 00:01:25,720
+And they are numbered already in the order
+
+24
+00:01:25,720 --> 00:01:29,240
+in which we are going to contract
+the nodes in this example.
+
+25
+00:01:30,680 --> 00:01:33,580
+And let's look what happens
+when we contract the nodes.
+
+26
+00:01:33,580 --> 00:01:39,170
+So first, we contract node number one,
+it goes down, means that we contracted it.
+
+27
+00:01:39,170 --> 00:01:46,220
+And actually what's on the top line
+is the graph, which is contracted.
+
+28
+00:01:46,220 --> 00:01:51,430
+And now it is in green because it is
+already added into the augmented graph.
+
+29
+00:01:51,430 --> 00:01:56,530
+And you see that there was
+a path from node 6 to node 4,
+
+30
+00:01:56,530 --> 00:01:58,680
+which went through node 1.
+
+31
+00:01:58,680 --> 00:02:02,780
+When we contracted it,
+it's no longer in the graph.
+
+32
+00:02:02,780 --> 00:02:05,960
+So there is no path from
+6 to 4 in this graph.
+
+33
+00:02:05,960 --> 00:02:09,300
+And then we need to reconstruct that path.
+
+34
+00:02:09,300 --> 00:02:15,370
+And so we add a new edge between 6 and 4,
+which is colored in blue in the picture.
+
+35
+00:02:15,370 --> 00:02:18,730
+And the length of this edge
+should be equal to the length
+
+36
+00:02:18,730 --> 00:02:23,600
+of the path between 6 and 4, which went
+through 1, because that was the only path.
+
+37
+00:02:23,600 --> 00:02:25,860
+So it was the shortest path between 6 and
+4.
+
+38
+00:02:25,860 --> 00:02:31,070
+So we add a new edge of length 5
+because the length of the shortest
+
+39
+00:02:31,070 --> 00:02:35,860
+path between 6 and 4 was 5, and
+now after adding this edge it is again 5.
+
+40
+00:02:35,860 --> 00:02:39,904
+And all the shortest path,
+all the distances between the nodes which
+
+41
+00:02:39,904 --> 00:02:42,980
+are still in the graph on
+the top they are preserved.
+
+42
+00:02:44,040 --> 00:02:46,790
+Now what happens when we contract node 2?
+
+43
+00:02:46,790 --> 00:02:51,330
+Well nothing really happens
+because no shortest paths
+
+44
+00:02:51,330 --> 00:02:56,320
+between the nodes which are left in
+the graph went through the node 2.
+
+45
+00:02:56,320 --> 00:02:58,050
+So it's an interesting case.
+
+46
+00:02:58,050 --> 00:02:59,475
+Now let's contract node 3.
+
+47
+00:03:00,580 --> 00:03:05,010
+And again, there was the shortest path
+between 4 and 5 going through node 3, and
+
+48
+00:03:05,010 --> 00:03:06,530
+it had length through each.
+
+49
+00:03:06,530 --> 00:03:11,280
+So we add a new blue edge of length
+3 directly between nodes 4 and 5.
+
+50
+00:03:12,430 --> 00:03:14,940
+When we can track the node 4,
+
+51
+00:03:14,940 --> 00:03:20,370
+it is the most interesting node
+because it already has two blue nodes.
+
+52
+00:03:20,370 --> 00:03:25,330
+But nevertheless, when we contract
+it we remove the path between node
+
+53
+00:03:25,330 --> 00:03:30,170
+6 and 5, which runs through
+4 through two blue edges.
+
+54
+00:03:30,170 --> 00:03:32,838
+And we need to reconstruct the path.
+
+55
+00:03:32,838 --> 00:03:37,527
+So we add a new edge directly
+between node 6 and 5 of length 8,
+
+56
+00:03:37,527 --> 00:03:40,104
+because the path was of length 8.
+
+57
+00:03:40,104 --> 00:03:45,563
+And notice that in the initial
+graph there was a path from 6 to 5,
+
+58
+00:03:45,563 --> 00:03:53,370
+which went 6 to 1 to 4 to 3 to 5 and
+the total length was 3+2+1+2, which is 8.
+
+59
+00:03:53,370 --> 00:03:57,590
+And now we just added one edge
+of length 8 between 6 and 5.
+
+60
+00:03:59,420 --> 00:04:01,820
+And in the end we can track node 5.
+
+61
+00:04:01,820 --> 00:04:05,830
+Nothing changes because no shortest
+paths between other vertices
+
+62
+00:04:05,830 --> 00:04:10,240
+which are still in the graph which is
+basically only node 6 went through node 5.
+
+63
+00:04:10,240 --> 00:04:14,650
+And we don't need to contract node 6
+because it's the last node in the graph.
+
+64
+00:04:14,650 --> 00:04:19,570
+And you see that the nodes in the new
+picture are different heights.
+
+65
+00:04:19,570 --> 00:04:25,240
+And this just symbolizes that the higher
+is the node, the later it was contracted.
+
+66
+00:04:25,240 --> 00:04:27,480
+And the higher the node,
+the more important it is.
+
+67
+00:04:27,480 --> 00:04:33,720
+So we first contract or
+remove the least important nodes.
+
+68
+00:04:33,720 --> 00:04:37,070
+And the nodes which are left in
+the end are the most important nodes.
+
+69
+00:04:37,070 --> 00:04:42,090
+And we draw down from bottom to top in
+the order of increasing importance.
+
+70
+00:04:42,090 --> 00:04:48,090
+Now let's see what happens in
+general when we contract node V.
+
+71
+00:04:48,090 --> 00:04:52,850
+So, there can be some edges
+incoming into V from some nodes U1,
+
+72
+00:04:52,850 --> 00:04:54,444
+U2 and maybe some others.
+
+73
+00:04:54,444 --> 00:04:57,770
+There can be some edges outgoing from V.
+
+74
+00:04:57,770 --> 00:05:02,350
+For example, two nodes W and
+W2 and maybe some others.
+
+75
+00:05:02,350 --> 00:05:06,170
+Also there can be some undirected
+edges connect to V and
+
+76
+00:05:06,170 --> 00:05:11,960
+then there will be both an incoming
+edge from the other ends to V and
+
+77
+00:05:11,960 --> 00:05:15,510
+outgoing edge from V to
+the other end of this edges.
+
+78
+00:05:15,510 --> 00:05:20,130
+And also, there could be directed
+edges from the same nodes to V and
+
+79
+00:05:20,130 --> 00:05:21,700
+from V to this node.
+
+80
+00:05:21,700 --> 00:05:27,120
+So some nodes can be both in
+the bottom part of the example and
+
+81
+00:05:27,120 --> 00:05:29,700
+in the top bars of the example.
+
+82
+00:05:29,700 --> 00:05:31,710
+But that doesn't really matter much, and
+
+83
+00:05:31,710 --> 00:05:34,890
+we will discuss everything
+on this particular example.
+
+84
+00:05:34,890 --> 00:05:37,900
+So what happens if V is contracted?
+
+85
+00:05:37,900 --> 00:05:41,410
+Then V will be deleted, and
+the edges from U1 to V and
+
+86
+00:05:41,410 --> 00:05:44,740
+from V to W1 will also be deleted.
+
+87
+00:05:44,740 --> 00:05:49,625
+And let's suppose that this
+path from U1 to W1 of length 2,
+
+88
+00:05:49,625 --> 00:05:54,240
+1+1, was shortest in the initial graph.
+
+89
+00:05:54,240 --> 00:05:58,140
+Then we will need to add a new
+edge directly from U1 to W1 so
+
+90
+00:05:58,140 --> 00:06:00,510
+that we preserve the distances.
+
+91
+00:06:00,510 --> 00:06:03,450
+So what would be the length of this edge?
+
+92
+00:06:04,860 --> 00:06:08,670
+And the length of this edge will be of
+course 2 because the length of the new
+
+93
+00:06:08,670 --> 00:06:13,350
+edge must be equal to the length of
+the corresponding incoming edge plus
+
+94
+00:06:13,350 --> 00:06:15,530
+the length of the corresponding
+outgoing edge.
+
+95
+00:06:16,900 --> 00:06:22,090
+And for every pair of edges,
+U1 to V, V to W1.
+
+96
+00:06:22,090 --> 00:06:27,600
+Or U2 to V and V to W2,
+or U1 to V and v to W2.
+
+97
+00:06:27,600 --> 00:06:32,670
+For each such pair, we need to add
+a new edge with a shortcut, but
+
+98
+00:06:32,670 --> 00:06:35,150
+we don't have to add shortcuts always.
+
+99
+00:06:35,150 --> 00:06:38,990
+So let's consider this another example,
+with nodes U2 and W2.
+
+100
+00:06:38,990 --> 00:06:45,490
+There is this path from U2 to W2,
+going through V, of length 5, 3+2.
+
+101
+00:06:45,490 --> 00:06:50,090
+However, it could happen so
+that there is another path from U2 to W2,
+
+102
+00:06:51,240 --> 00:06:55,370
+which doesn't go through V,
+and has a length of just 3.
+
+103
+00:06:55,370 --> 00:06:58,820
+Then, it is shorter than
+the path going through V.
+
+104
+00:06:58,820 --> 00:07:01,160
+And then, if we delete node V,
+
+105
+00:07:01,160 --> 00:07:07,100
+the shortest path from U2 to W2 doesn't
+change, because it doesn't go through V.
+
+106
+00:07:07,100 --> 00:07:09,950
+And so in this case we don't
+have to add a shortcut.
+
+107
+00:07:09,950 --> 00:07:14,730
+And in practice, we don't want to add
+a shortcut when we can avoid that.
+
+108
+00:07:14,730 --> 00:07:16,910
+Because when we add a shortcut,
+
+109
+00:07:16,910 --> 00:07:21,170
+we increase the number of edges in
+the preprocessed augment draft.
+
+110
+00:07:21,170 --> 00:07:23,850
+And then our queries will work slow.
+
+111
+00:07:23,850 --> 00:07:26,060
+Less edges, faster queries.
+
+112
+00:07:26,060 --> 00:07:31,190
+So we really want to avoid adding
+shortcuts, and we need to find such paths,
+
+113
+00:07:31,190 --> 00:07:35,190
+and such paths which don't go
+through the contracted node, and
+
+114
+00:07:35,190 --> 00:07:40,240
+are shorter than the corresponding path
+going through the contracted node.
+
+115
+00:07:40,240 --> 00:07:41,580
+They are called witness paths,
+
+116
+00:07:41,580 --> 00:07:45,760
+because they are witnesses that we
+actually don't need to add a shortcut.
+
+117
+00:07:46,780 --> 00:07:51,541
+And in the next video, we'll discuss how
+to efficiently search for those witness
+
+118
+00:07:51,541 --> 00:07:55,826
+paths so that we don't have to add
+shortcuts in the preprocessing phase.

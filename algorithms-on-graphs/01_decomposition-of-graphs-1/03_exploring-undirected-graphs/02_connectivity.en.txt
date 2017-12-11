@@ -1,0 +1,77 @@
+Hello everybody, welcome back
+to the graph algorithms course. Today we're going to be talking about
+notions of connectivity in a graph, in particular,
+talking about connecting components, and how to compute the connected
+components of an undirected graph. So, to begin with, last time we talked
+about this notion of reachability, what does it mean to be able to reach
+another vertex from a given one? And what we'd like to understand now
+is really what sort of classifies reachability in a graph? Really not just from a single vertex but you sort of want to understand which
+vertices are reachable from which others? And it turns out that for an undirected graph, there's actually
+a very clean categorization of this. In particular for any graph G,
+we can always partition it into Connected Components such that two
+vertices v and w are reachable from each other, if and only if they
+are in the same connected component. So, sort of we break this
+graph up into islands, where any two islands are completely
+unconnected from each other, but within any island, you can get
+from anywhere to anywhere else. So just to make sure
+we're on the same page. If we have the following graph, how
+many connected components does it have? Well, this graph is going to have 4. So if you look at these four things, from
+each of these things they're all connected up, but there are no edges
+between any pair of them. Okay, so let's see how the proof
+of this theorem works. Why can we always divide it
+into connected components? And basically the idea is you
+need to show that reachability is an equivalence relation. That means three things, first is that
+v is reachable from v which is easy. Also that if v can be reached from w,
+w can be reached from v which sort of is just following the path in
+the opposite direction. And then there's the difficult one,
+that if v is reachable from u and v is also reachable from w,
+then w is reachable from u. What this says if you sort of take v and you take everything that it connects to,
+in fact, everything in that whole region connects
+to everything else in that whole region. And that last step is not so
+hard once you write it down. The point is that you can reach u from v,
+which means there's a path from v to u. You can also find a path from v to w. And if you should have glued these paths
+together at v then you have a path from u to w. So they can be reached from each other. Okay, so that completes the proof but what we'd now like to do
+is do this algorithmically. Given a graph G, we'd like to find
+the connected components of this graph. Okay, fair enough. Let's find an algorithm. Well the basic idea of
+this is pretty simple. If you run explore(v),
+this finds the connected component of v. It finds everything you can reach from v. That's the whole connected component. And you just need to repeat this
+to find all the other components. It turns out you can do this actually with
+only sort of a slight modifications of the original depth first
+search algorithm tha we saw. Now, in order to make this algorithm, we're about to see
+a little bit more cleanly. We're going to modify
+our goal a little bit. Instead of actually returning sort of
+returning sets of vertices that are our connected components, what we're going to
+do is we're going to label the connected components, we're going to give everything
+in the first one a label of 1, and everyone in the second components
+a label of 2, and so on and so forth. Okay, so how does this work? First we modify our Explore procedure,
+we visit the vertex, we also make sure to visit
+all of its neighbors. We also assign the vertex a number
+corresponding to it connect component, the CC number. Now the thing is that this variable
+CC is not going to change as we make these recursive calls to explore. And so everything else that gets
+found through the same explore will all get assigned the same number. However when we actually run our
+DFS first search, we're going to between different explores, between
+different vertices that we explore and then go off to find a new vertex,
+we increment this number. And so the second explore that we do
+everything gets the number one bigger. So to see how this actually works,
+on this graph our counter starts at 1. We find it on vertex say that one,
+it gets labeled with a 1. We keep exploring from that vertex and we find these other three,
+all of them get labeled with 1. But now we are done exploring that first
+vertex, so we increment the counter and find a new unexplored vertex,
+say that one. Which we now label 2. We keep exploring and the other vertex
+that we found also gets labeled with a 2. But then we finish that explore call. We now increment our counter to 3 and
+find a new vertex, this one. We explore that and
+everything we find gets labeled with a 3. And now we're done. We've got three connected components. Everything in the first one is labeled 1. Everything on the second
+one is labeled 2 and everything in the third one is labeled 3. So sort of what we wanted. Okay, to show that this is correct,
+we note that each new explore call finds a full, new connected component because
+it finds everything connected to that V. And of course,
+because V had not been found yet, it was not in a connected component
+that we had already seen. Secondly, because of the way
+this outer loop and depth for search works, every vertex
+eventually gets found, because every vertex we eventually check to see if
+it's visited, and if not, we explore it. Now the run time of this is basically
+just the run time of depth for search. We only made sort of cosmetic
+modifications to it. So the run time is still O
+of size of V plus size of E. Okay, so that's our discussion of
+how to compute connected components. Next time we're going to talk about some
+other applications of depth for search. So I'll be happy to see
+you in the next lecture.

@@ -1,0 +1,1724 @@
+[
+    [
+        "decomposition-of-graphs-1",
+        [
+            [
+                "welcome",
+                [
+                    [
+                        "welcome",
+                        {
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <p>\n  Welcome to Algorithms on Graphs!\n </p>\n <p>\n  If you have ever used a navigation service to find optimal route and estimate time to destination, you've used algorithms on graphs. Graphs arise in various real-world situations as there are road networks, computer networks and, most recently, social networks! If you're looking for the fastest time to get to work, cheapest way to connect set of computers into a network or efficient algorithm to automatically find communities and opinion leaders in Facebook, you're going to work with graphs and algorithms on graphs.\n\nIn this course, you will first learn what a Graph is and what are some of the most important properties. Then you'll learn several ways to traverse graphs and how you can do useful things while traversing the graph in some order. We will then talk about shortest paths algorithms \u2014 from the basic ones to those which open door for 1000000 times faster algorithms used in Google Maps and other navigational services. You will use these algorithms if you choose to work on our Fast Shortest Routes industrial capstone project. We will finish with minimum spanning trees which are used to plan road, telephone and computer networks and also find applications in clustering and approximate algorithms.\n </p>\n <p>\n  Programming Assignments are a very important part of this course. We believe that the main way to fully understand an algorithm is to implement it. If you're studying this course as a part of\n  <a href=\"https://www.coursera.org/specializations/algo\">\n   Data Structures and Algorithms\n  </a>\n  Specialization, you're already familiar with the style of the programming assignments from the first course of Specialization \u2014\n  <a href=\"https://www.coursera.org/learn/algorithmic-toolbox\">\n   Algorithmic Toolbox\n  </a>\n  . However, if you're taking this class independently, we strongly recommend that before you start working on the Programming Assignments in this course, you first go through the videos and readings of the first week of the\n  <a href=\"https://www.coursera.org/learn/algorithmic-toolbox\">\n   Algorithmic Toolbox\n  </a>\n  class: they will guide you through the process of implementing a solution, testing it, finding bugs, fixing them and submitting the assignment (all the materials of the Algorithmic Toolbox class are also available at\n  <a href=\"http://bit.ly/toolboxmaterials\">\n   this shared folder\n  </a>\n  ). You will learn a very powerful testing technique that will lead you to success at least 95% of the time. Also you will get general advice about working on Programming Assignments. The second week of the Algorithmic Toolbox class also introduces big-O notation that is widely used in upper bounds on the running time of algorithms.\n </p>\n <p>\n  We look forward to seeing you in this class! We know it will make you a better programmer.\n </p>\n <p>\n  <a href=\"https://cseweb.ucsd.edu/~dakane/\">\n   Daniel Kane\n  </a>\n  ,\n  <a href=\"http://logic.pdmi.ras.ru/~kulikov/en\">\n   Alexander S. Kulikov\n  </a>\n  ,\n  <a href=\"https://www.linkedin.com/in/michael-levin-5625aa58\">\n   Michael Levin\n  </a>\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ],
+            [
+                "graph-basics",
+                [
+                    [
+                        "graph-basics",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/W0iC1iH9EeaDwg4FsnAbYw.processed/full/540p/index.mp4?Expires=1512777600&Signature=cX~VK68JRiV3nDEBqypIoO~D~TWuJj6OhIUutBhn6B53dcaBwHkljFb-EKXfZu1qQuJF21smHZRm9FrBLbHAjLjtnhLS763kMf6cCX42~egHU-5ZWEn7EHZPBNGC0CvXUdGc8nVKZu4OFGmoeWjZW1WEe1o77EQvrRH3Tut30Qo_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/Xtb-vy_rRqWW_r8v68alSQ?expiry=1512777600000&hmac=NF6c8wQ0HLknNmEQWPtcxzjjiVBzSADWWK8-xLDtmaQ&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "zh-CN.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/lhcgU5ZSTv-XIFOWUm7_cw?expiry=1512777600000&hmac=b_WCenEsxInMmpygKFnPeN4AG9wud3UFUJiRpL1PtfU&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/Xtb-vy_rRqWW_r8v68alSQ?expiry=1512777600000&hmac=PigAQlgJZw2aku4epg_pPbSqudNhvjA8ABoyCNxreqk&fileExtension=txt",
+                                    ""
+                                ]
+                            ],
+                            "zh-CN.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/lhcgU5ZSTv-XIFOWUm7_cw?expiry=1512777600000&hmac=KE5V-wYpxXh7jhnZTQWMpYjjl7BjMWhhYtGDLP7BjuM&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "representing-graphs",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/1T2sCyH9EeaDwg4FsnAbYw.processed/full/540p/index.mp4?Expires=1512777600&Signature=bSRvwZCggiBYbmjkiWXLcrMc2URpa5PVQFOILYjAkM9HTbJfWGXhfT4-Jagt7xrSSgG0O1zulVCi2ZbsCvH7v1970VaS4HQHfN~ERd-5jomKQxrSMOagliIhSTQmiphEDoJX2fGrUHAV6vesxR2FfhvHepxCKv7lyh-n2V2uRUI_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/8qov-6YzSkyqL_umM6pM4w?expiry=1512777600000&hmac=zuvule8Ipwq772bjbZOFHMlGCKXkCXb_XB8ct6UWvNM&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/8qov-6YzSkyqL_umM6pM4w?expiry=1512777600000&hmac=uIYKlDSU_YNj5e5VKpZwrP6MZVvM3yduRc36-8XbB2I&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "slides-and-external-references",
+                        {
+                            "pdf": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_8af30ca627bd398de2217eb59094325b_09_graph_decomposition_1_basics.pdf?Expires=1512777600&Signature=JbiAaJ60VKMyukCV-eBFmrA8Eby7Gtjv9PO0GHm6-v51v~a5b6WnHW2PDxNfIsXqpe2J9H1LdEqe6QFZ9FLB-ogKbV-wNYo~1bnR3E49a07KXSqwWuPaOO2KPe8vOK7dOdHuvmMDFO3ioYScLkSqOLfto4Nu-NZP2gT8Bt99XFE_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "09_graph_decomposition_1_basics"
+                                ],
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_617c8fc365c080e2fa29108624242a01_09_graph_decomposition_2_representations.pdf?Expires=1512777600&Signature=fM2JIXdnFOB7XzkWZMJovSgcQCgfDIDCQ5Tb9PILPmbk7IQMDH0ub4OqhIAewhsSxvL-NxNrTmSRzNHUDwkIy99MMahrr3jOy-dsmyiKlV97XIGmHG-mehfAFGppF8SkCFIOR-OWuX~cmxRW~INTUOqimw8vl3ficnoZZgCkH2U_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "09_graph_decomposition_2_representations"
+                                ]
+                            ],
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <h2 level=\"2\">\n  Slides\n </h2>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"YHAIGiQqEeaHiBKWMgIXbw\" name=\"09_graph_decomposition_1_basics\">\n </asset>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"l5NTyCabEea--xKoFF8ixQ\" name=\"09_graph_decomposition_2_representations\">\n </asset>\n <h2 level=\"2\">\n  Reading\n </h2>\n <p>\n  Section 3.1 in [DPV]\n </p>\n <h2 level=\"2\">\n  If you find this lesson difficult to follow\n </h2>\n <p>\n  <a href=\"https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/describing-graphs\">\n   Section on graph representation\n  </a>\n  at Algorithms class by Tom Cormen and Devin Balkcom at Khan Academy\n </p>\n <h2 level=\"2\">\n  References\n </h2>\n <p>\n  [DPV] Sanjoy Dasgupta, Christos Papadimitriou, and Umesh Vazirani. Algorithms (1st Edition). McGraw-Hill Higher Education. 2008.\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ],
+            [
+                "exploring-undirected-graphs",
+                [
+                    [
+                        "exploring-graphs",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/L-DMDiH-EeaDwg4FsnAbYw.processed/full/540p/index.mp4?Expires=1512777600&Signature=TyS3dTEUMIK1gTO4Uv4aZKrn96z0K3eRDKwNbLod6CuqaWxJrDZeydgzw3ZgeZHjBTFAJudpE1RPJVchqVpNduaMYvpJAnZdyzqB2SIHp55r80EQFAjNvjAsvtdxxeiokRW-1TL48FJY3bIhhnqP3qClQJPThqXxc2PjRSzvJMg_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/pxRbmcb5TgqUW5nG-Q4KbA?expiry=1512777600000&hmac=1PUCmBd1QW842qYk9IHFpc9vjNSB-gDDHmEfZ_KIS4c&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/pxRbmcb5TgqUW5nG-Q4KbA?expiry=1512777600000&hmac=OSpEHwn7_T69qysTBPoDNPDLtUM6DwzfRlAE8Aayh1s&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "connectivity",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/QBWp0iH-Eea3kgpbcREV_w.processed/full/540p/index.mp4?Expires=1512777600&Signature=K9RjyyOaseSMgMfNWT7ZeKaNMooFuJMZ2I95Fq62Ip-Jda39EPhqCMekluOPON2Rhnk1744zIE1tRw3JbR33x0OalzwHnCJypdHAWuNJE0~38kpLVZGWhBvHtcrdRzCG0ll7wGkYdbrvrgElzsqcDACWBxQWBQHtAOkllYMA2rs_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/LNft4igjRuGX7eIoI2bh_A?expiry=1512777600000&hmac=eGErUR62aofVEpVoX9DmfLIh5oMu_8kBC7vA6IdLDIM&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/LNft4igjRuGX7eIoI2bh_A?expiry=1512777600000&hmac=x9eItYrxxJLUSexvwweSxOBEGNKOaU6lgabJrcCLrkU&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "previsit-and-postvisit-orderings",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/ab9nhCH-Eea3kgpbcREV_w.processed/full/540p/index.mp4?Expires=1512777600&Signature=NM848W--xTxiReNSINOpos9o2CORkbvYYJZAjR-5MXbXJphilYr5J4iT-ojDFFfHOz9OCDf5AUsrxU~3PG61-S7iUaeiR0Y9WORkHx4zGKjw9K~vfx7oGEE2hUm9yGMWXxtPeql~G29torn8l5-rWFpK9X4XB3kQ0xT6ml9jy-s_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/Q1U8W9xtSPCVPFvcbVjwTA?expiry=1512777600000&hmac=hfBQ6ufHIYnyduBuLMqB4oa-CM3seObqppo7lYvNj68&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/Q1U8W9xtSPCVPFvcbVjwTA?expiry=1512777600000&hmac=fsj2KwOR98V_K5zMZ65pX4Zu0ctI-J5_HDpiPYCPZaA&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "slides-and-external-references",
+                        {
+                            "html": [
+                                [
+                                    "http://www.cs.usfca.edu/~galles/visualization/DFS.html",
+                                    "DFS"
+                                ],
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <h2 level=\"2\">\n  Slides\n </h2>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"r4zmuyhFEeak5wpS_JmWWw\" name=\"09_graph_decomposition_3_explore\">\n </asset>\n <p>\n </p>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"r45s8ihFEeafWwpb6zXC8w\" name=\"09_graph_decomposition_5_pre-and-post-orders\">\n </asset>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"r7jY2ihFEea4ehL5RXz3EQ\" name=\"09_graph_decomposition_4_connectivity\">\n </asset>\n <h2 level=\"2\">\n  Reading\n </h2>\n <p>\n  Section 3.2 in [DPV]\n </p>\n <h2 level=\"2\">\n  Visualizations\n </h2>\n <p>\n  <a href=\"http://www.cs.usfca.edu/~galles/visualization/DFS.html\">\n   Depth-first search\n  </a>\n  by David Galles\n </p>\n <h2 level=\"2\">\n  References\n </h2>\n <p>\n  [DPV] Sanjoy Dasgupta, Christos Papadimitriou, and Umesh Vazirani. Algorithms (1st Edition). McGraw-Hill Higher Education. 2008.\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ],
+                            "pdf": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_a9267009ba78cede2b66112aa0f9cdb5_09_graph_decomposition_3_explore.pdf?Expires=1512777600&Signature=duJyso1wtVYa0rtYjYr2QjygqBjbErwr~b0P~pAT2Atm23-9d-cnhGLC9NQA1wSZT0odkPkV1YD6~CqgtfHELl9I3sEWZBpWSSyesna8bOkOqe7QHcE0RLNXaajnleHTVonemUzC9Op6ER4kC-hyjCUW1RUjxAEWriqxOwPqld0_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "09_graph_decomposition_3_explore"
+                                ],
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_a9267009ba78cede2b66112aa0f9cdb5_09_graph_decomposition_5_pre-and-post-orders.pdf?Expires=1512777600&Signature=dOl1v~STno0gcjDpnwQDIMkHNMWWbn5q0J5G1rFCHRo2vVCxFaXKSY4kV4u9VD2TXcM1c09fKMjrgDMIADwDx2qcJWzLHEF8AiN9u1xJjIOeQVXuK5RHji00W-tWGw~i~0kaqDl4rlww~3F7Pn2S-NQeiV~M612MZdtYmmR3rzs_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "09_graph_decomposition_5_pre-and-post-orders"
+                                ],
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_a9267009ba78cede2b66112aa0f9cdb5_09_graph_decomposition_4_connectivity.pdf?Expires=1512777600&Signature=OSQl93TnATfHTy5yYvZ75L~6pA4SVP35DsOb29vq~ykm7zISprJdvA4KtuEF74UFPI42A6rwIoXFvva0U2esCWk2iijPFbkzYnSVGECC3Xvf5Nzy7I6vANZmTd2iaAsJ~TB4qm2yAIQftdY-A5CpjtsMqjjJowZcbE07nhWZTLc_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "09_graph_decomposition_4_connectivity"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ],
+            [
+                "programming-assignment",
+                [
+                    [
+                        "programming-assignment-1-decomposition-of-graphs",
+                        {
+                            "pdf": [
+                                [
+                                    "https://www.dropbox.com/s/1gcj4n3ra5b3qy9/09_graph_decomposition_problems_1.pdf?dl=0",
+                                    "09_graph_decomposition_problems_1"
+                                ]
+                            ],
+                            "zip": [
+                                [
+                                    "https://www.dropbox.com/s/qffvc95siuu0kul/09_graph_decomposition_starter_files_1.zip?dl=0",
+                                    "09_graph_decomposition_starter_files_1"
+                                ]
+                            ],
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <p>\n  Welcome to your first programming assignment of the Algorithms on Graphs class! In this and next programming assignments you will be practicing implementing the basic building blocks of graph algorithms: computing the number of connected components, checking whether there is a path between the given two vertices, checking whether there is a cycle, etc. Such building blocks are used practically in all applications working with graphs: for example, finding shortest paths on maps, analyzing social networks, analyzing biological data.\n </p>\n <p>\n  Download\n  <a href=\"https://www.dropbox.com/s/1gcj4n3ra5b3qy9/09_graph_decomposition_problems_1.pdf?dl=0\">\n   instructions\n  </a>\n  and\n  <a href=\"https://www.dropbox.com/s/qffvc95siuu0kul/09_graph_decomposition_starter_files_1.zip?dl=0\">\n   starter files\n  </a>\n  .\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ]
+        ]
+    ],
+    [
+        "decomposition-of-graphs-2",
+        [
+            [
+                "directed-graphs",
+                [
+                    [
+                        "directed-acyclic-graphs",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/jSPrVCH-EeaEhA5mDe1Caw.processed/full/540p/index.mp4?Expires=1512777600&Signature=NF6U1u-QM-zMrRrPsrw6hBbF3gJSOsoVvHsy7zHxZJ9mn2jWpmI~1Veel9LZffkQLB8IBXvZ~011jCGY0fz4urVlb860DgrcPUCNyE3cfiVXuvT50qrWyEPHbTTWxIOm~qFI~XpYAnfckQ1YErFNrVihLTo-5CbCKLjOceP-u4o_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/FrLUYSscTISy1GErHPyEGA?expiry=1512777600000&hmac=ZA0JZd6TZAx70OmnBlAaQ3XR30vvszk0KZBzbR-lPqo&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/FrLUYSscTISy1GErHPyEGA?expiry=1512777600000&hmac=oqVrkUXPTrYoiXEOJF42M5G0D65UzVlOoJ_oGXFloUY&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "topological-sort",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/nE_k3SH-Eea-nQpkh7MSsw.processed/full/540p/index.mp4?Expires=1512777600&Signature=lI0mnswJdaj~m2zI9RVAZaAg38uW1GRCWpWVPylsvMzJMkHfiMWv~JRPvDIzbhFqNJQ7PBZ07JgqHdqJqzOQwmV6X~w3pK3b6CnDwIBLVJxSPRHJdfIPE~EABWnk~KZV0hT8cYl4LCbHAYfrrZ0qXm~3ygFHqOX1udnN9ukRyhU_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/aXXbhKaETBm124SmhNwZDQ?expiry=1512777600000&hmac=yAvkovQIdEG2xxXqPeLCdSW5uksB9m_2F2lWFT1OoFA&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/aXXbhKaETBm124SmhNwZDQ?expiry=1512777600000&hmac=f_FqSe917dDUvIm-8_OyQTtwElg2pchn56wtOjEaFAE&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "strongly-connected-components",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/xx-EliH-EeaHiBKWMgIXbw.processed/full/540p/index.mp4?Expires=1512777600&Signature=CJUvJq6HNjkJYadtfGImbQ132c~T2LP0QOYUutSNzWQTM2Zgn89taLgn8nqklGhqfmMo9pvSz33VhgjwRJPYGKHjJlLrNIhPb3U3KVbiMgQlUlm476SvHGhVmUJ9Jd7uReZj8io3H68MiVJgqQ5EWx3HYIO3IDHVddOi7PBrOHQ_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/kdZxh8yGQzWWcYfMhkM1Vw?expiry=1512777600000&hmac=ajZXKC4eXVveFmQM0fTzinOTx73H7XwEsg2lfuwGUvQ&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/kdZxh8yGQzWWcYfMhkM1Vw?expiry=1512777600000&hmac=tZliklJwYPBdHchMx16aGYoErUiqA9vzcsRWhEDyCVI&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "computing-strongly-connected-components",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/1vbYvSH-EeaHiBKWMgIXbw.processed/full/540p/index.mp4?Expires=1512777600&Signature=T5Cn9x4s3JGBQoz9IePzxuXw6lZQm2sstih8K44O~4diKpuATlZZvF4YPciJ0burP9A6-rAx0pTXITb5xe7tIXs4p9i6w~xrZz9Tq4d5Tm1I4bysvyI~~m6msSAgu07IDGb9Nt9VtcrS9PCbsUmRNQc9W72yu8PP6WOjnG9yWOQ_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/Q_43fNK5SHq-N3zSuTh6cQ?expiry=1512777600000&hmac=Hbef5wBIzXjpLsRZLbHFMER0hAfnBGA22ei4Bm_FMaQ&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/Q_43fNK5SHq-N3zSuTh6cQ?expiry=1512777600000&hmac=ZjiFg56s20KeaySPToDXAVfGefjSe-yPlLtnOdjhDW4&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "slides-and-external-references",
+                        {
+                            "html": [
+                                [
+                                    "http://www.cs.usfca.edu/~galles/visualization/ConnectedComponent.html",
+                                    "ConnectedComponent"
+                                ],
+                                [
+                                    "http://www.cs.usfca.edu/~galles/visualization/TopoSortDFS.html",
+                                    "TopoSortDFS"
+                                ],
+                                [
+                                    "http://www.cs.usfca.edu/~galles/visualization/TopoSortIndegree.html",
+                                    "TopoSortIndegree"
+                                ],
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <h2 level=\"2\">\n  Slides\n </h2>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"1Y9KLiQrEea3kgpbcREV_w\" name=\"09_graph_decomposition_8_strongly-connected-components\">\n </asset>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"1ZsxMSQrEeaEhA5mDe1Caw\" name=\"09_graph_decomposition_9_computing-sccs\">\n </asset>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"1YqOxSQrEea-nQpkh7MSsw\" name=\"09_graph_decomposition_7_topological-sort\">\n </asset>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"1YsETCQrEeaDwg4FsnAbYw\" name=\"09_graph_decomposition_6_dags\">\n </asset>\n <p>\n </p>\n <h2 level=\"2\">\n  Reading\n </h2>\n <p>\n  Section 3.3 and 3.4 in [DPV]\n </p>\n <h2 level=\"2\">\n  Visualizations\n </h2>\n <ul bullettype=\"bullets\">\n  <li>\n   <p>\n    <a href=\"http://www.cs.usfca.edu/~galles/visualization/TopoSortDFS.html\">\n     Topological sort using depth first search\n    </a>\n    by David Galles\n   </p>\n  </li>\n  <li>\n   <p>\n    <a href=\"http://www.cs.usfca.edu/~galles/visualization/TopoSortIndegree.html\">\n     Topological sort using indegree array\n    </a>\n    by David Galles\n   </p>\n  </li>\n  <li>\n   <p>\n    <a href=\"http://www.cs.usfca.edu/~galles/visualization/ConnectedComponent.html\">\n     Strongly connected components\n    </a>\n    by David Galles\n   </p>\n  </li>\n </ul>\n <h2 level=\"2\">\n  References\n </h2>\n <p>\n  [DPV] Sanjoy Dasgupta, Christos Papadimitriou, and Umesh Vazirani. Algorithms (1st Edition). McGraw-Hill Higher Education. 2008.\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ],
+                            "pdf": [
+                                [
+                                    "https://d18ky98rnyall9.cloudfront.net/_dc4aebf17f30b5504eb92843c2d9e0fc_09_graph_decomposition_8_strongly-connected-components.pdf?Expires=1512777600&Signature=Wu-IpR001uUgatH8-LGmCxIHsZ5Jn0hcs0BA5DVX~AMsXUZArmk2JTC7mCv0QS6QeOK-9t~36Qtz5nV2zwm5p4jIqzXDmGzGjML7E-2l8vHjgYxzlDC~tHwvpBJH3lVG76qnzd8o7~GSzDbR0Qxy2wKvFO4V1CmEmyI7Eg3Bc1k_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "09_graph_decomposition_8_strongly-connected-components"
+                                ],
+                                [
+                                    "https://d18ky98rnyall9.cloudfront.net/_dc4aebf17f30b5504eb92843c2d9e0fc_09_graph_decomposition_9_computing-sccs.pdf?Expires=1512777600&Signature=HqYAGqMzqJPovz4iCw2r8f1tBEgbsCWd1nAzZSJRiqiyW5tbc74FTDo2gBjOCoySN91VcFD2jLeVPQDAeXMznH4k7f27n8PrSdneEouyelk3y5-ykbqc8g6s~FQrjGjCNfo44VBdrtbIRPsVlNainelV0PQTf9oi6YcXdHdBHxI_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "09_graph_decomposition_9_computing-sccs"
+                                ],
+                                [
+                                    "https://d18ky98rnyall9.cloudfront.net/_dc4aebf17f30b5504eb92843c2d9e0fc_09_graph_decomposition_7_topological-sort.pdf?Expires=1512777600&Signature=hAr7LR~02ID-H1uWlcRrCg5YwM2NxLXVR39GI4aZ2yuwi7S-uHVMrjgSN-6GZlCFvw-ZeZq5ZSB0dExOVkXC2mjb2zLcD532M5RYK6lm0GlWaHhgPBBfFiWzOsOa-Ot5LWogdrBak2RHbyW6PJwoAqLVlmfbsmmXav6SI6-tloo_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "09_graph_decomposition_7_topological-sort"
+                                ],
+                                [
+                                    "https://d18ky98rnyall9.cloudfront.net/_dc4aebf17f30b5504eb92843c2d9e0fc_09_graph_decomposition_6_dags.pdf?Expires=1512777600&Signature=LnXj4gUFvGsgRPNhzkJCo~OlX7uHVcqvBPhYA9HpDqGn87N1QOIYGQNvmVP~dPoeOihn-OzcTX00OIaqosSkG3AI~YuBx5kMT4NwWcSAzOGEy6HWPbPxJh-y9Pz2pEd3OVXwOdAOMAmdQN5igNdzYzsxGi1i8VqvbypNAbuhFjg_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "09_graph_decomposition_6_dags"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ],
+            [
+                "programming-assignment",
+                [
+                    [
+                        "programming-assignment-2-decomposition-of-graphs",
+                        {
+                            "zip": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_8e0f723ed0cef023efb3387b662c8b98_09_graph_decomposition_starter_files_2.zip?Expires=1512777600&Signature=Da9bTV9C-o3lamNfqJxsb3ohbOOZ-gI9MYWnwjTJ6QaZ8dIWooeZQAubAg38GQcZNRXu1VUFF8qARHRpOzBCxc8EOWSN1VUToTI5BOvFFaEpGZ62WCdlP8-HUmMGauVaTBMghvMnOLBujdl7OFXLm-OFd5UxQAWxDmt7s7fDy3U_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "09_graph_decomposition_starter_files_2"
+                                ]
+                            ],
+                            "pdf": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_ad976e670709c6bf7d7d12c33f3353b3_09_graph_decomposition_problems_2.pdf?Expires=1512777600&Signature=Nbi-dQi2zPhUcXoDLVo3z7p24eTkbfhdafuehtdVGzxcjV9tqW0QLm--gus7TAZa3inK0xGANLQal0r2AT-6yEm3ZqeldHA0JVmtIzdqACNNFyq5s1uw3tclqVONCKhlqvlApOFfGQicmihUfLpDVNFNC7FqXUQs8QoMsaJzcvU_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "09_graph_decomposition_problems_2"
+                                ]
+                            ],
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <p>\n  Welcome to your second programming assignment of the Algorithms on Graphs class! In this assignment, we focus on directed graphs and their parts.\n </p>\n <asset assettype=\"generic\" extension=\"zip\" id=\"QWr7jyhKEeaNKg4a0RSP6Q\" name=\"09_graph_decomposition_starter_files_2\">\n </asset>\n <p>\n </p>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"ZfCHva_xEeajLxLfjQiSjg\" name=\"09_graph_decomposition_problems_2\">\n </asset>\n <p>\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ]
+        ]
+    ],
+    [
+        "paths-in-graphs-1",
+        [
+            [
+                "most-direct-route",
+                [
+                    [
+                        "most-direct-route",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/VsY7JByXEea3kgpbcREV_w.processed/full/540p/index.mp4?Expires=1512777600&Signature=ReQKeqC2Lr23bKMWtguIeB0qNr7WNgNbkzMuwKr9rqUKH1vnmqkh88mg51Nw3qyxoY-vBICDS5DgRngZJpHYU3Qn4Pb0RJkXsLQLdZJ15i7OpkkwlecqkdDKQYw5e9jS9g7SrmSAb2TQiQKK7E1gQFuFkEwZp3WFH-k1WWWZ9L0_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/igFXAJimQoOBVwCYphKD4w?expiry=1512777600000&hmac=DxX4S7FwnvVRGf0S9PQEomT1f6z-9MmhLShD9KjVYeU&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/igFXAJimQoOBVwCYphKD4w?expiry=1512777600000&hmac=uVAXu1rGKuqyuth_rGVD_jQSytUlanlNRm4C8iJDrEw&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "breadth-first-search",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/XK1u2hyaEea3kgpbcREV_w.processed/full/540p/index.mp4?Expires=1512777600&Signature=Ylz9kHyRVauHcoLBEzFIFQNIJegNAzUMNxVGNrb0pxUCxGozoaAxrRQF4QnNryFW0xMWGYJUAzy8r~PZQWcO675sUS01pQ~ezURFBJ4Ns4fmpN7l4-kon-4QFSyvfctkjWThI~GcOOMfHsTbrKDUEUDikDtPTtil6rKUCHWi1A0_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/YhoRWWKYRQaaEVlimHUGpQ?expiry=1512777600000&hmac=T36wgzaLBgnpJPmDZRCoDvPGnay14uOMTZOtvAKWN-w&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/YhoRWWKYRQaaEVlimHUGpQ?expiry=1512777600000&hmac=wULAj6CNrVq7NIhzmmx4pCUdb06HRouzUEdBziKAKNM&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "breadth-first-search-continued",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/rL0e4RycEearJg6UELUegQ.processed/full/540p/index.mp4?Expires=1512777600&Signature=bkASJvfM9S8IZmR1yMuMiunnBOuDu-Esd-bNBXJNZFaUn2kiVB3OpUAl8HCt0O-IQv~kIxt-7KBhuR7Fsd~wgcNRSOo0Z7FM~NiTmWAqy0b4WqVhnKZ~d2ou7t8aaI6EXbJQYnzucE2Djk8287auwFq6eTLZi0hXVRU4-xPt~Mo_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/yfOyxsT-QlyzssbE_tJcNg?expiry=1512777600000&hmac=dKncq2ZHDOVjuP2B8Te4XmEk3vYBWCfX4A0m29oWksA&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/yfOyxsT-QlyzssbE_tJcNg?expiry=1512777600000&hmac=QmoOBjddXf3B3bYZUqkZxN1DEyylyC8VtMcMeJlQhJs&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "implementation-and-analysis",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/S1VnbCEFEeaWDxLjTXZKsQ.processed/full/540p/index.mp4?Expires=1512777600&Signature=VCb8mVK-c4nLMxAIdABFEBCcYEdQ5yjyVFIygNBmdMyeqlLkAL7XRmeO9OyUOWH45WuWzy7ZkqZRAPek5rd73AJYC60bv1EzVzoPatWfxldGAYkHk84K5allyeY1ssR9WdOWwWlwGIPs2geaoPLN5Kj9bIAeX0ZtGps2hQs7-BY_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/uyemVxiLRBKnplcYiyQSDA?expiry=1512777600000&hmac=AV0Lh8IkPwSLZ2QFkcqUOAzE9NPtFRlWGhIkF86YCEY&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/uyemVxiLRBKnplcYiyQSDA?expiry=1512777600000&hmac=rXDvenobw4mCBGU-ptjsAasjwHkdMe-2uDk8vtnzKMU&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "proof-of-correctness",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/NQihzRydEea-nQpkh7MSsw.processed/full/540p/index.mp4?Expires=1512777600&Signature=bWptfTvqT3DREPLiGpFTyheBvtCRsfs0pL4ZbZMxH0l6UiUPTQB-shTRro3oFBjxl2uijbuqEszI4WOftVroETcp50Vu1B44ZLDd-V8YysDNbVF8vBgSBZIEA0feKJ28O7kdA4EkU1qQwgx1HmJJLcJ~0~7bchugRDpubXBjWE4_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/cHESdfADSEKxEnXwA2hCbw?expiry=1512777600000&hmac=Ub3zyyTOf27U-G68p4Gcph9VbOtFhPRX0z172__uHWU&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/cHESdfADSEKxEnXwA2hCbw?expiry=1512777600000&hmac=-8fQG1e3xXluQZaPRlv84eMk3sFp0vH_3ZS6x182Ix0&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "proof-of-correctness-continued",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/Q_jlsBynEeayZhIaUH000Q.processed/full/540p/index.mp4?Expires=1512777600&Signature=gGN6MtLVfLgIXgnddKD839pDgzpreIpjNBguHlXr0oj1YOZNXMl-0NhTHCC9tPSBF7nJRzNdaglKMCcMYfq78u5HibnrTVOZw~b-TIhJDpvYgWvqrBflEwXp1NeuPj02RVObjms~LBk1Bxu9PjCgpJh4vfrB5mvuIum5YTXPLdQ_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/n870OAUKQnWO9DgFChJ14A?expiry=1512777600000&hmac=xUxCaQYsUsyNN5jEeLbtN1CFp5L-qiJ4J3BLAYomAi0&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/n870OAUKQnWO9DgFChJ14A?expiry=1512777600000&hmac=3ZSF9os9Eu0dVopcc_o0h04rj_5C7rumcT5V3SiKefg&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "shortest-path-tree",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/tOUSSRytEeaWDxLjTXZKsQ.processed/full/540p/index.mp4?Expires=1512777600&Signature=IieVZwmBFh5o~lLRxmTYIOuFsBj-6K-tXKgVoNEFtbkZUFZiz6O-pkRsuUMBL9s6DRkOT66YLo~EKuY01eUKpJuFMA6nWgywyMqF1LoxQiP-b996fc5g6Zt2Ty-QIJ-CuBQStEWnxLOgLZPWxolTYPnPQJZ-W~P9PNVHQATyhWY_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/GB68Eg6GT96evBIOhk_eLQ?expiry=1512777600000&hmac=Yp3K-nhN2UKehDa9R189b9-89a0tGfSu-UJiQzZwg10&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/GB68Eg6GT96evBIOhk_eLQ?expiry=1512777600000&hmac=ZZHUSGqlKHAXRHbiNXFq6LT54Ly_H8DOHTMqATDVKQY&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "reconstructing-the-shortest-path",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/IiUPoxyuEeayZhIaUH000Q.processed/full/540p/index.mp4?Expires=1512777600&Signature=SPt6COtSOuJNULeCEFH5CBD50iRqs0-kCKqI0IchPf2jse4BbOFZiwpq7sBXnpgFnZSxqtsJVJ9hrn2S0HvVdb7gS8Bl2h3I8YuFNjO63NVK4qHXutdyWa7b1XUnMU42mLPzkPFq69n~ohaO-D00dU9q5kiMAUEf8mNYX2fxpj0_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/8rwKXVhWQQW8Cl1YVtEFSw?expiry=1512777600000&hmac=xu4iOmg5ArUqJX0nUqt43bXlvnaogKwZb-BsBaDFWtk&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/8rwKXVhWQQW8Cl1YVtEFSw?expiry=1512777600000&hmac=HkCiC572ReQTBKdzsEIPjHXhtjpLglyaUWrT_i0YlK8&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "slides-and-external-references",
+                        {
+                            "html": [
+                                [
+                                    "http://www.cs.usfca.edu/~galles/visualization/BFS.html",
+                                    "BFS"
+                                ],
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <h2 level=\"2\">\n  Slides\n </h2>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"o35oDSQsEearJg6UELUegQ\" name=\"10_shortest_paths_in_graphs_1_bfs\">\n </asset>\n <p>\n </p>\n <h2 level=\"2\">\n  Reading\n </h2>\n <p>\n  Sections 4.1 and 4.2 in [DPV]\n </p>\n <h2 level=\"2\">\n  If you find this lesson difficult to follow\n </h2>\n <p>\n  <a href=\"https://www.khanacademy.org/computing/computer-science/algorithms/breadth-first-search/a/breadth-first-search-and-its-uses\">\n   Section on breadth-first search\n  </a>\n  at Algorithms class by Tom Cormen and Devin Balkcom at Khan Academy\n </p>\n <p>\n </p>\n <h2 level=\"2\">\n  Visualizations\n </h2>\n <ul bullettype=\"bullets\">\n  <li>\n   <p>\n    <a href=\"http://www.cs.usfca.edu/~galles/visualization/BFS.html\">\n     Breadth-first search\n    </a>\n    by David Galles\n   </p>\n  </li>\n </ul>\n <h2 level=\"2\">\n  References\n </h2>\n <p>\n  [DPV] Sanjoy Dasgupta, Christos Papadimitriou, and Umesh Vazirani. Algorithms (1st Edition). McGraw-Hill Higher Education. 2008.\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ],
+                            "pdf": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_2db8444033550723d3a34a917a4ff044_10_shortest_paths_in_graphs_1_bfs.pdf?Expires=1512777600&Signature=ETc4Lu1Dl~N1JhsQj0AhWBSSzSDbseNMk3DmRIOojSiC1tGlY4~IO3ieQyv7fULfpnyc5wb~pWERLNN44yvQnxZQbQSb~WvTqH9UVOVapmcb4kcUjHqCtAKuJYfrnYgOsHaPzgKO3Bg2104Smk9KM0BbJks~C22f4e8uJmxnfcs_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "10_shortest_paths_in_graphs_1_bfs"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ],
+            [
+                "programming-assignment",
+                [
+                    [
+                        "programming-assignment-3-paths-in-graphs",
+                        {
+                            "zip": [
+                                [
+                                    "https://d18ky98rnyall9.cloudfront.net/_47be5186800dd6e1366c51974baaad53_10_paths_in_graphs_starter_files_1.zip?Expires=1512777600&Signature=I4DUZ13ZFyIOsTeKjNGLkEJVXjot~Gks4LxWamo3tsxkkKb82DPwtxXynQKUR1zpSAQyCs4S6iAcgpEo~v9rjl6-JRYqYd1wBdrdrlXAY~zeWncwlUKOZqNm50Yoq6oQsyFQlf-Rpa6P4eki-Wn6Jhr3HjKQSPSQ4lkdTv~EFeQ_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "10_paths_in_graphs_starter_files_1"
+                                ]
+                            ],
+                            "pdf": [
+                                [
+                                    "https://d18ky98rnyall9.cloudfront.net/_39569bafe56d93c9b089abdb092f8ea9_10_paths_in_graphs_problems_1.pdf?Expires=1512777600&Signature=PyA5-L10fKzVdznjEywDWVWMKxBcpTEL03FohmfRIQw81G0lFnQTw9Yux3l3H4XqZNfOJtG8ij8gk0IG2TgjUjAWOtqk3Py1doF9ufQ6Sdj1cv5VqE3vxhy0TPO7s30V0q258yfHaLgjXzlNfS6~FmymPaU5qk9jT4gHc4YD9XI_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "10_paths_in_graphs_problems_1"
+                                ]
+                            ],
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <p>\n  Welcome to your third programming assignment of the Algorithms on Graphs class! In this and the next programming assignments you will be practicing implementing algorithms for finding shortest paths in graphs.\n </p>\n <asset assettype=\"generic\" extension=\"zip\" id=\"yxt2iS2vEeaPkQpAoDV9cw\" name=\"10_paths_in_graphs_starter_files_1\">\n </asset>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"KA_uHEksEeaRXxKUx3igiQ\" name=\"10_paths_in_graphs_problems_1\">\n </asset>\n <p>\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ]
+        ]
+    ],
+    [
+        "paths-in-graphs-2",
+        [
+            [
+                "fastest-route",
+                [
+                    [
+                        "fastest-route",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/RyRF1xywEeaHiBKWMgIXbw.processed/full/540p/index.mp4?Expires=1512777600&Signature=MQ5VxDEfjkeTwKTd8D3JaezGN1~~Un~7boaIqhSM07hvPEIdGVXhl-PxnB9FXQs9mjJDaE4jeN7v5E3aGQzf9ANBOCK0EJV8m-7pDXfRcY3~IGQoNlQdIWeOZjMYpuR1DfowSXY-lmYz6d0w70F0JV-WNDoWLhdkGKNtbBPtRmI_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/7zk97MYaSfy5PezGGnn8UQ?expiry=1512777600000&hmac=6lYt_iN6ljorB2fg43o0ixuuF1eoRxjVrfHHRPSBRsc&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/7zk97MYaSfy5PezGGnn8UQ?expiry=1512777600000&hmac=t9UHvh9GDm8MMUE3muXcJ184_S_lGXu5G3s9HdAMVHE&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "naive-algorithm",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/t8y67hyzEearJg6UELUegQ.processed/full/540p/index.mp4?Expires=1512777600&Signature=OT1tHDWUh9NcmOJL5Un29NY65~A1FdtSnpfxYJp1uvU-ovtnfZ6nhiPSY5D188URD6Y5menniCRzf6BAyyMNgLeDVNu1W1iAfTsUWgThZvuM3uIiTH50Ze2wet4N6biQrwlc9w66hWFjYyNpziuxh5SWUPsGp722-sFAgbNvMEs_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/jENU6r2dQkODVOq9ncJDdA?expiry=1512777600000&hmac=LNPXiS9uiP58VuRNZR2u8LJRaPA3x3xcC_2zzY1er7U&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/jENU6r2dQkODVOq9ncJDdA?expiry=1512777600000&hmac=bAI-OWOweTVNMmeps-fuPPJ4rTBZ8um-QYMOmROURgo&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "dijkstras-algorithm-intuition-and-example",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/2YVtkRy0EeaEhA5mDe1Caw.processed/full/540p/index.mp4?Expires=1512777600&Signature=gyRw2V8-Ba0UEc1y8RzxfOmNSPJs9saYoZeK5Cqa-wmRiQYNALv8-HPV9IQwJ1wJJr5uTOSaeIxx7XdzXWU52v~S~OrTF3GJZd4tNuWAiBEhA1z0BSATUQgfMjy~cZjXuYc4GT-I7-W0wCAa4rs-liA2zxz6QUOR8w~KvDk1vIw_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/7cMb8O0jSPyDG_DtIzj8gA?expiry=1512777600000&hmac=Ik3D-elWgOi8rFU01pUulJUDFwXCs0fwLOHN2j-0mag&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/7cMb8O0jSPyDG_DtIzj8gA?expiry=1512777600000&hmac=g2XSlkPrGIBKCeDLTsObKQxO3ABSD8K1_vOk8fB1mvk&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "dijkstras-algorithm-implementation",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/jBA3CRy1EeayZhIaUH000Q.processed/full/540p/index.mp4?Expires=1512777600&Signature=TGwU45iw8hh0yMQhpsuV2pJiR4cDmg1yMFlAiyMoNFTgBIpdFocDSVMBDCHPBu1fXzgjYdmciz7U2Z9CeXYBf-KDwoDOr4tgZBI-zN9MAnU9IAvnzXgbPxjGsCGtWQspLBLReaT3u1X7OzTXR-~p4z7gunSn1FtKTmPFyh83P5A_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/mH9L94PcRjO_S_eD3HYzsg?expiry=1512777600000&hmac=yb2zpqCTBy6Sza2t1agJR82iiVVxdt5WCVZd2SZN6h8&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/mH9L94PcRjO_S_eD3HYzsg?expiry=1512777600000&hmac=jK1keFsgDG2cuGJAltVIZzuP5IEkv9AsbtpUfieAhvY&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "dijkstras-algorithm-proof-of-correctness",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/nDdU1hy8EeaDwg4FsnAbYw.processed/full/540p/index.mp4?Expires=1512777600&Signature=IKa4zXQdbSOYCZCjSec-78w~AEkfeVjIwn~kbVFEDdscfaVOGQebEU~zzWCkz4GfHVn2JoEO-Mdvz6ipCSzUDwB-SSpexO5t6Jg~XirU8mUrNWu1MaJk3Rax~XUVS7mHvV9jtMn0TgLMZjYtIbaO3XDz~RtQ5AI1rkgu9oI9N3U_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/dItLgEYUSMmLS4BGFIjJVw?expiry=1512777600000&hmac=-5y--5SLD2nil4n4O2cbv3HWD7hAxrfr7Vx8ykWRHvQ&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/dItLgEYUSMmLS4BGFIjJVw?expiry=1512777600000&hmac=VUOcyzV19_E1_-tzUhimUyLdoZBvfPxPM-qtkEZQcvY&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "dijkstras-algorithm-running-time",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/6DR1Fxy8Eea-nQpkh7MSsw.processed/full/540p/index.mp4?Expires=1512777600&Signature=ED109jR1yjc9~90YMIfoHB1AA1SeJKjaLx8yZ6iAkqDagTuqIpBlRclPEKGR2sQ1dOboBao7zndqpNXIGXAwFUCOukXr7hKwCYwUiOLQVxSf9v7VzAH~ao-UyJYlduS5~ASoA3pFsDT4dsFFsn6yKN-2D8xh5WpAZOCYiRThfAU_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/hG0-_6R5Q2WtPv-keXNlpA?expiry=1512777600000&hmac=L2sD9pv180GUNl0wDIXplv998WcjkazO4GlQ1qefrVs&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/hG0-_6R5Q2WtPv-keXNlpA?expiry=1512777600000&hmac=ht7JDaUW3dWyEnWcnOAPWRWUTb79VHUkpltIljRtD8E&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "slides-and-external-references",
+                        {
+                            "html": [
+                                [
+                                    "http://www.cs.usfca.edu/~galles/visualization/Dijkstra.html",
+                                    "Dijkstra"
+                                ],
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <h2 level=\"2\">\n  Slides\n </h2>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"7CZwbSTIEeak5wpS_JmWWw\" name=\"10_shortest_paths_in_graphs_2_dijkstra\">\n </asset>\n <h2 level=\"2\">\n  Reading\n </h2>\n <p>\n  Sections 4.3 and 4.4 in [DPV]\n </p>\n <h2 level=\"2\">\n  Visualizations\n </h2>\n <p>\n  <a href=\"http://www.cs.usfca.edu/~galles/visualization/Dijkstra.html\">\n   Dijkstra'a algorithm\n  </a>\n  by David Galles\n </p>\n <h2 level=\"2\">\n  References\n </h2>\n <p>\n  [DPV] Sanjoy Dasgupta, Christos Papadimitriou, and Umesh Vazirani. Algorithms (1st Edition). McGraw-Hill Higher Education. 2008.\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ],
+                            "pdf": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_dd335213aea9cbfb8509c60297a2019d_10_shortest_paths_in_graphs_2_dijkstra.pdf?Expires=1512777600&Signature=GjALkSxrK0PcBpfKNHRUjeapozZHHMcDUmB-3NjzqJrQ044kmgvVSc2hsLI0dOZbpX-bm9C48cW3gaqQbyVKYxwmmpL-D2phYYfD3M2EXOikxST4TMZfFVzsIXG1ebsQguebBehukCsgn38BcZfm8mJW4iiYjABvuumQcUXuOUY_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "10_shortest_paths_in_graphs_2_dijkstra"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ],
+            [
+                "currency-exchange",
+                [
+                    [
+                        "currency-exchange",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/X1W9kxy9EeaEhA5mDe1Caw.processed/full/540p/index.mp4?Expires=1512777600&Signature=ddo4-XwADc3FP5x98zi2JxCxCmBaIO-Lc~Hl89sXXr3AUjbl98pJkRMr7mrsQ7u4jwzEOnQw6MZ2N99QL7AxZyoRh7tfvX3Be84sX~SFRwiXxbj4gA28~XT3cvKQBSYqNKuIGeh7-~LHWwroR1U2f8y3NrObm~4vxcelpGOQWaw_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/wTiAJphdTmu4gCaYXf5reQ?expiry=1512777600000&hmac=scXJY0sckBs2UuEdMpkTZiY7ijwI7g6agL-0MIvAGr0&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/wTiAJphdTmu4gCaYXf5reQ?expiry=1512777600000&hmac=LplB-hUe4M-y5c9fcG_lHSRCqoOk3y_mw-_z_Sm0DJI&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "currency-exchange-reduction-to-shortest-paths",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/rw4l-hy_EeaHiBKWMgIXbw.processed/full/540p/index.mp4?Expires=1512777600&Signature=K-7qO2LMLM1ZIZy8R3oJ5p0J05~xxC8R7CRF4VUFM54yQ86KFHZGz56h3M4ez6QShJyGtQfR-CIsgYov354bxmBsIXIZ9hZg0SemeuBCq5iBqy8rj2-I4mmYfW07EUo2dBQ7IKHKJvzqh18taceWfXlDGMNdehXU0jDBVPCDeVI_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/8g3EhE7GS02NxIROxttN8Q?expiry=1512777600000&hmac=0mFpt1I6wfg3Ow0HPqZpDV43Te7EnjrKg-Ff2EUA1z4&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/8g3EhE7GS02NxIROxttN8Q?expiry=1512777600000&hmac=qNrV2Q4GmEaz4O0pY26JUk3FRJlK8WqQEVMFzxFc5js&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "bellman-ford-algorithm",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/HSShdh1eEeayZhIaUH000Q.processed/full/540p/index.mp4?Expires=1512777600&Signature=BqP8iF6ygQnEzIyNHq15J2qslCPMzKgj7jlduVpm9ri0-rnPZh0XujrNgl3xnHY4FnAIQgK6h6oMANYNCIJScMdh0Avm08r1rlNdtdSOSFukJ4A32xCXox1Uc-sAk-MdJvmCyay~OH8Sk0Y9-qBOqenDRLoIhBezQUE8Wev-6Ps_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "ru.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/O4O8geXhTRKDvIHl4e0SJg?expiry=1512777600000&hmac=YEVvfBLZ9NbqnM7n0PRi2aYgBGhlwZlU5x2FNCELKgU&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/j03DOugrRSiNwzroK7UoFQ?expiry=1512777600000&hmac=O4Dg8ilyvbK5yICFWSj7hcnkgvyGzRD1TjZuk-SzksA&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "ru.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/O4O8geXhTRKDvIHl4e0SJg?expiry=1512777600000&hmac=qznKdLat51sFLQfOKSVgbcBLGfnEn6zAPUgEZ9kIom8&fileExtension=txt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/j03DOugrRSiNwzroK7UoFQ?expiry=1512777600000&hmac=YaM_BH3EBJTztnT_YMc21yUwNJwqO6_yjd2va4SX9YY&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "bellman-ford-algorithm-proof-of-correctness",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/6GKNDRzAEeaEhA5mDe1Caw.processed/full/540p/index.mp4?Expires=1512777600&Signature=KT02G72L7WDkVuC6auZVFRVBoJouBiSs-fVQeimRiYg6GczkTNTPP7F5nqBBt-uwETbq7oRgbI3Mc6dxet-OJkxVuk0ykBZQIvelul8EEItZKPbPp-OsjJfwE0t4RQqYsX6hWxZO7WWOqwpNJLDCf40d2wJC5YWQKmL7P9heBsw_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/hqtaHuPWR0OrWh7j1kdDhg?expiry=1512777600000&hmac=EMr6O60rLzSyl6IwSH7AxfbXIYRxq_o18eTZa-GrrFs&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/hqtaHuPWR0OrWh7j1kdDhg?expiry=1512777600000&hmac=FFCwvpt2JnWt9SJFBXbWBokQDMAVElrEgvptC_4kWEw&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "negative-cycles",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/gzo3AG20Eea8kAq9b8D8dQ.processed/full/540p/index.mp4?Expires=1512777600&Signature=AhKQFF-pgVdRrWvWjSkx8uG3KdbEJsTO9LuqDHawb-aqJMOMRQpbXcO5Mn9NmzOMZF418jtSZnK4MoCtOHh5IvW0E0cQkHzNJm49~EDNIzMTNUtoaHnybZKcSKSpD47eoj86ERsNTk3PWF06xVR6f3uOqQHO6hlDWymA6IoUNZs_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/ojClbD3WSwqwpWw91osKEw?expiry=1512777600000&hmac=-9bfqDMj800JkR0mr05vH3eT3Y0gXV6wsm7KgBS4_3c&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/ojClbD3WSwqwpWw91osKEw?expiry=1512777600000&hmac=qZhogrthXQJqf4mD9jy0zyPqsaErBln6jxXySn4OIh8&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "infinite-arbitrage",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/7KnK8G20Eeaxmg47KsiIZw.processed/full/540p/index.mp4?Expires=1512777600&Signature=h21iEK26du-ixhl7hGx12S~4wodYNY8IX0xWKsuGRQANKGEz6eQYsvK6W~dMOCAR91vkVgfBbs5ust3UDur0iBQ0i7ON0Yo9zIWTP3fjF3sMxl1A4XNNPNv5qqEy6NnRcBxvWZiqkqc83N7OJ42IWI5lZrNy9mmpx8atCWRRETI_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/EToDrd2nRaS6A63dp8WkHA?expiry=1512777600000&hmac=-6lSPAad8x2bstPVOAIQbnrNL881viXB6TvBlUWSd10&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/EToDrd2nRaS6A63dp8WkHA?expiry=1512777600000&hmac=qgWITVGMCkLt_XyCgcEAVkqAv3nkz_IjOKvSgW7tA0Y&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "slides-and-external-references",
+                        {
+                            "pdf": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_9363153a6b5462c79d8ab30e2ad1708f_10_shortest_paths_in_graphs_3_bellman_ford.pdf?Expires=1512777600&Signature=gV-Vb3bd3ngxU858m~G4gR1gzxMaZa3ZwlaZdeIQdO9uptzPHlFZfJuOh9R4o255~TietTaYKgKNfaZ2NRP1GCSn-tUOXG-yhlaui89DH4-hZzuUjtugkQWSPo5xFiPtlhKuII28q2hw7xKA2IMzONvL0z2uWpo~FZha6F1Lk~o_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "10_shortest_paths_in_graphs_3_bellman_ford"
+                                ]
+                            ],
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <h2 level=\"2\">\n  Slides\n </h2>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"uU9WoW5CEeaI_hJe858l4Q\" name=\"10_shortest_paths_in_graphs_3_bellman_ford\">\n </asset>\n <h2 level=\"2\">\n  Reading\n </h2>\n <p>\n  Section 4.6 in [DPV]\n </p>\n <h2 level=\"2\">\n  References\n </h2>\n <p>\n  [DPV] Sanjoy Dasgupta, Christos Papadimitriou, and Umesh Vazirani. Algorithms (1st Edition). McGraw-Hill Higher Education. 2008.\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ],
+            [
+                "programming-assignment",
+                [
+                    [
+                        "programming-assignment-4-paths-in-graphs",
+                        {
+                            "pdf": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_ce9cda3b7147b43293eb494336e89f84_10_paths_in_graphs_problems_2.pdf?Expires=1512777600&Signature=WXgWf68faG4uRCqmDq6V2bIj7-aAtlaMqmEaSW8xzVhFgIMKVrXVRONsy~F4mLzDDS6floGuaqgjgD6b4oh7htLdW8t7qYk5e9plABGPwKEWobNWwoe9ZyByBuZUZefX7gGUEnkHLdNyZm917d6HjWhpTce54oXcmKtGU~lwwPY_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "10_paths_in_graphs_problems_2"
+                                ]
+                            ],
+                            "zip": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_efcbd6ce753b5e2256a932c991fdca28_10_paths_in_graphs_starter_files_2.zip?Expires=1512777600&Signature=hAaDBaFkiKrea7nEVZjQ-0BpPeuTKaZ-6iTJKiKyhSixUc86hQ-6H0ba0dKHVMPGfySuBH4YRI7F9z9oCnYP0Dstu6glUrNEPeXr18gNpfvMWteYmzB-uhDD6PVYsm58WeVQ3yEohh40~CBO~YpmbmUzqrUqarvJ7Bpy6KQDsRY_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "10_paths_in_graphs_starter_files_2"
+                                ]
+                            ],
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <p>\n  Welcome to your fourth programming assignment of the Algorithms on Graphs class! In this assignments we focus on shortest paths in weighted graphs.\n </p>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"xleUcShNEeaqsg6VQGUNXQ\" name=\"10_paths_in_graphs_problems_2\">\n </asset>\n <asset assettype=\"generic\" extension=\"zip\" id=\"pqsr1S8AEeaCFgopl-HV3Q\" name=\"10_paths_in_graphs_starter_files_2\">\n </asset>\n <p>\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ]
+        ]
+    ],
+    [
+        "minimum-spanning-trees",
+        [
+            [
+                "minimum-spanning-trees",
+                [
+                    [
+                        "building-a-network",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/SjUjxdvEeayZhIaUH000Q.processed/full/540p/index.mp4?Expires=1512777600&Signature=YwIlZL69QRzl8wbCdIhkJAddtx0~zyHSKbz-Cg85Ta80w1PhFU9wnXmFAbRjJQwOIO6MhcjrP7oF4dqs7sIwyQxapAjoGDfTNjelo3v8ABoq1XHO-yJUYqMrVVoA886e~HxcMmK4KbE0rEp2JHagsabMKE-Nhrj9S9OuZdsg3SU_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/4UlpH6_HSkOJaR-vxxpD3A?expiry=1512777600000&hmac=aAkhaJ8gT-Cgv_Ag6FjspScYURcb9DsrubmDb68mg8s&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/4UlpH6_HSkOJaR-vxxpD3A?expiry=1512777600000&hmac=gG6gM_DMud1Ktum8TS-ab2AnZgaL2SlkdQXBu4w_pM0&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "greedy-algorithms",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/BlgZORd4Eea3kgpbcREV_w.processed/full/540p/index.mp4?Expires=1512777600&Signature=gzJdLHpTc5P1OAKFPvnahErPbk8zmTnmJRrYSOImyuvqXQDf390mXTJAaRmvlKrtV3TjOsIt0GxXUAugsWvngSAFZaXnl672FAW2dK1f~EIA3Cd2ZhJ~TPZMN1obQebcM0XidoHvVJuw3vKhoU6KQvGK8o2P3ovb~CyhqXDwzHM_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/xJN6RcjQRcaTekXI0IXGVg?expiry=1512777600000&hmac=nVNdvTipe_QBgZfatdr9Xj4kiwjaBRWCpqbbQo9DJcE&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/xJN6RcjQRcaTekXI0IXGVg?expiry=1512777600000&hmac=BhyXa_HJrNpuh7-MfyXsDFggkBPIB3tJWS0mwSOyjOs&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "cut-property",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/I6so6hd5EeaDwg4FsnAbYw.processed/full/540p/index.mp4?Expires=1512777600&Signature=idRHslC7rOZ~XbVMU0jKxMFvqclgzURzEvpcJwlR2dLRlCxgPkHMEiz3VwP3iH4HmiMYMPSw0zS~uktc-U7swR0396z8gMW6Jp6tjPM0fIOV6-sHBslENduYKCM385LSbLGq4R0vgYQ6zQB69n-tKeWzSmJLWdD25Vah1UpFOYU_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/T1EyO4XHTYCRMjuFx42A8g?expiry=1512777600000&hmac=olpOU3ws_nOoQQBcDeeiirV6lcp3h0PvFPZ049mSQhc&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/T1EyO4XHTYCRMjuFx42A8g?expiry=1512777600000&hmac=48TOCtSmcd09NnL9XXvt24kx99FUsZy-jmAEEZVJffA&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "kruskals-algorithm",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/FQ2_LBd6EeaHiBKWMgIXbw.processed/full/540p/index.mp4?Expires=1512777600&Signature=D~fWMclbyFdLtzHj-wFCWh3oyix-PRQI2PmkUpBSwpjXjjgYjpyMe91Y~xtScSQpjWUjeuOPW89kz6AKgCrKwE0vIPPQsJ~p6uE24xlHicoqBCYRw9QVD4a1JZvksRdOgCW1gNsnbVVdO4glM~6biyclvLNv4oO8WRwEvyX9iYI_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/_9_go8UUREKf4KPFFLRCLQ?expiry=1512777600000&hmac=H6ZL5uN6t7SrtKHMK0AZeJl-Jh00DW1Uom1PGKYqKBk&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/_9_go8UUREKf4KPFFLRCLQ?expiry=1512777600000&hmac=a7fdx16bnlFp2o5IFZsIQknxFzhbn2Q1Rp_H1ZaRzmI&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "prims-algorithm",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/gMtn2ReCEea3kgpbcREV_w.processed/full/540p/index.mp4?Expires=1512777600&Signature=a6YDbuGuY8Xp4HsnDsIQmlbzPijk-U0MHLaowyFLf4FsKDhjkAFzN~5WuB~V9rO~LYb1zAmtDNeTcNy2Lfk3kxURToAHuScDHbwErjRYowJ4GeigO1m7wwgic2FmohzZXajTOa0TlZa6hksvl~pvlFPY3JZNINq6~0qwpsR9iCY_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/oafkQBQ9Ssmn5EAUPZrJgg?expiry=1512777600000&hmac=ocb6nnbO-XHzjzWAYjKXchBwPXQLrAMgfMtuWEBKtnU&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/oafkQBQ9Ssmn5EAUPZrJgg?expiry=1512777600000&hmac=6ekmhujyF0sF5m7ofQ3OcFL-RnE-YOx0NDU-WcSXNHQ&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "slides-and-external-references",
+                        {
+                            "html": [
+                                [
+                                    "http://www.cs.usfca.edu/~galles/visualization/Kruskal.html",
+                                    "Kruskal"
+                                ],
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <h2 level=\"2\">\n  Slides\n </h2>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"QRsPIjGREeaCFgopl-HV3Q\" name=\"11_1_minimum_spanning_trees\">\n </asset>\n <h2 level=\"2\">\n  Reading\n </h2>\n <p>\n  Section 5.1 in [DPV]\n </p>\n <h2 level=\"2\">\n  Visualizations\n </h2>\n <p>\n  <a href=\"http://www.cs.usfca.edu/~galles/visualization/Kruskal.html\">\n   Kruskal's algorithm\n  </a>\n  by David Galles\n </p>\n <h2 level=\"2\">\n  References\n </h2>\n <p>\n  [DPV] Sanjoy Dasgupta, Christos Papadimitriou, and Umesh Vazirani. Algorithms (1st Edition). McGraw-Hill Higher Education. 2008.\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ],
+                            "pdf": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_33e1de78cbff8069444dd63dce86bb97_11_1_minimum_spanning_trees.pdf?Expires=1512777600&Signature=bsat3FXydqI17t0i2OtXXpfuQ49Ws8PKKovZHePCKkkwR5GEONrxWbStzwHLO-ZwWjO7t8P5XL8hp3hUHKciinDbUDdLplH4nXgH~LABsUnwYfG~P5lvSzDiAAa6HoLvqZ~XTuv3VDfrH0xkxQkn1S2GdK8BOaDUUU9zTL6CrTQ_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "11_1_minimum_spanning_trees"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ],
+            [
+                "programming-assignment",
+                [
+                    [
+                        "programming-assignment-5-minimum-spanning-trees",
+                        {
+                            "zip": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_8fe025d7dab440a27f92b30241ca874a_11_spanning_trees_starter_files.zip?Expires=1512777600&Signature=D8Dig8CIEHP9RDRNqUS4AjKR6AOalAfu5E9~G4PtNGsJPql5BGGHwGnZ~rgx8kDs5B8f77CJ5xcUIKnQDFY1mxDBRt~pqFSyFNWQnIlrq4mbygmpVmranPcV5jLBxBHTWI-7-tbkQqwtnewZr3CtbA1K9oytNph2OUKbSSdJaWY_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "11_spanning_trees_starter_files"
+                                ]
+                            ],
+                            "pdf": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_8b8222a155c976cc2eec60a2dba332a4_11_spanning_trees_problems.pdf?Expires=1512777600&Signature=K0MNA9oZR1OgJGPVQnakx6rujQ8hOxzHncD0UqV-s5Ffkf2rTExbbRd9vhivjy0X5B2XsbBHCYQ9Z8DkZ0-XZ-mxWyOzEjnTAnOCT132tfhvKjloUCoW1CkG2qe4sOM3qQA6kvMt9a9ogazZfTq8ew0~gh~vmk8ln25Zt5g4o6g_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "11_spanning_trees_problems"
+                                ]
+                            ],
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <p>\n  Welcome to the third (and the last one) programming assignment of the Algorithms on Graphs class! In this programming assignment you will be practicing implementing algorithms computing minimum spanning trees.\n </p>\n <asset assettype=\"generic\" extension=\"zip\" id=\"dPBk7iDwEeaHiBKWMgIXbw\" name=\"11_spanning_trees_starter_files\">\n </asset>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"N6ByNkH6Eeafsg5lgYHmKw\" name=\"11_spanning_trees_problems\">\n </asset>\n <p>\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ]
+        ]
+    ],
+    [
+        "advanced-shortest-paths-project-optional",
+        [
+            [
+                "bidirectional-dijkstra",
+                [
+                    [
+                        "programming-project-introduction",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/qXoT5IzDEeacAAocUZL6NQ.processed/full/540p/index.mp4?Expires=1512777600&Signature=CvEe7CBmU9WK58YocIQPTwGDYCRAe0y-QgBXWIp3eAjoO0EdgHH0grkcsxmAr2SQeOSNYtYxJe~ozjClKL4az1id-ycqTXxV2XKfkezOsSs1oStDuGFvKmRaMh~8Kb8sai7scfhgWJimga9bLIKvBQ9JlUbCpsG9dPLVfcpd4Cs_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/ePXM7rI4QNq1zO6yOCDajQ?expiry=1512777600000&hmac=-n9m1xPR8Vc-z-Lw78eZmYcvREPAOSboE_NbTn06bbU&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/ePXM7rI4QNq1zO6yOCDajQ?expiry=1512777600000&hmac=e20QiUHh2OvB6WoKkQcsjS0JkOBE4dNVLPi0tlrM_UA&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "bidirectional-search",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/F6o87YzEEea7Xg7ev7rZkQ.processed/full/540p/index.mp4?Expires=1512777600&Signature=H6ZB6e~cTuoVTTeu6vsye3YBd5bBB4o2Os1Tl6D-Jz~-6AkeMmLmWIA3n8xV0qG2pFjS59hGfiII91K28nAS~aa-omSrO-Ep9ayHzSwlNFlaL2p7bFArX-OH3NJHdRVi5QmB~qHIRtFSLXE~RVHsyAgggUuHxq8Q6rafuRib~D8_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/IVRw9t1_ShaUcPbdf3oWGQ?expiry=1512777600000&hmac=47zNHFfFVPeMlI5d3MNo2nJTMoGxwcHYr3Zp-tFwam4&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/IVRw9t1_ShaUcPbdf3oWGQ?expiry=1512777600000&hmac=oJvZZ4nKX2pIFZ1ipXvJ4F191ZqN4NtDEvOUlIY-oD8&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "six-handshakes",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/RMFT1ItKEea8gwpyjKjbvQ.processed/full/540p/index.mp4?Expires=1512777600&Signature=gsyMghA0RTGTVTzXkva50LgI2jdrTVu7k669MS6g1IJVB2CqVlOMIDsMpW515-2me8aFqGlcR4Hhi1nNEb27vlYf-4tGMHsbw2MdO~QJQhWkagaJ9sT0KZMKYiN1iSBR1UTKQrxSQFnLT9oHZVA0WskIv~s1-65Pv~V1fhoJCTg_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/T2n4PZmvS5Sp-D2Zr-uUaQ?expiry=1512777600000&hmac=AdqFb-VTWKpENEBcd56jumrEO8Cse40X5VBVcAYWeBQ&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/T2n4PZmvS5Sp-D2Zr-uUaQ?expiry=1512777600000&hmac=NEevVbMaNPed-PcgjnK3TchJwY9WCIEzoSZJfDd4n9k&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "bidirectional-dijkstra",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/bVcR2IzEEeaWMg4j3ZhH-w.processed/full/540p/index.mp4?Expires=1512777600&Signature=J9QH3Q6-zy2Na2BqM4wKEy0BrLr~dTVsf~HIDzvZmMphJl-irn4~OtJP7h8EX~Osl8df3TNLVCFbSj~xTu3WAM16z8Y4WwaswC-GjNNAZAuoEMdHjDxKWr38vA6JzmlBW~bEIY8xlyVNJltFaQoLR5E7KCN7lp7JpLLF4gMHxf0_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/1J8uxBavQ5ufLsQWr1Obkw?expiry=1512777600000&hmac=Kgxv9o3t3ci183_cKCpwZSekU7JixACCTBO1_1hJ5hE&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/1J8uxBavQ5ufLsQWr1Obkw?expiry=1512777600000&hmac=KEuIJwEqfXbj873DG6G_yMvL1jvl3BdRos1afHwlNU4&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "finding-shortest-path-after-meeting-in-the-middle",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/2Gxl1IzEEeaapgob0rvkxw.processed/full/540p/index.mp4?Expires=1512777600&Signature=IHNnXCg14M~-E~K-fA7oIZoV2DMN14wtUtvMZ11g4aFz3N0sxsK7NU8E1P1EYnP5P6fyyj5ptlpIGWVwCFOq9PdD5XcisigxnPQj6G3WMcCdDR1lDaJ6xmcY7rA-VWnW~C37SVl8Bq491xcc4b0pG6VhUfq8GvKCptYhtwAs0Ks_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/SCO-3ZqMTkqjvt2ajN5KWg?expiry=1512777600000&hmac=UEEyDCbRO2wsqZ4huUS4CJBzTwfIA1CI-uZlEsnRoNQ&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/SCO-3ZqMTkqjvt2ajN5KWg?expiry=1512777600000&hmac=Cg37T7kgkJ2JHudWwJIMoqWAruv3KswhipckewnEzSg&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "computing-the-distance",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/JNCFQozFEeaGwBIH2PWi4Q.processed/full/540p/index.mp4?Expires=1512777600&Signature=LeCLTE-5r5k-pGvmTwim7NfkTtKaMAuy-B8ibeY8Mn7Lw9OxXf6tJL0fAsTtdGMaPbaUXrb9tbtr05~3ekLYT8Li5WKtkVBQmnsi7FOAXkHihLNquu3LJrnhTyULbCyPVLGkXUs41YWKmjBVGEKNF8BNxAK9Lb4rJwTiRIMkxhw_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/BqqPt4INRsOqj7eCDabDYA?expiry=1512777600000&hmac=p05z3nREDahPEWl7NY2xeZ8Mn4kgipcLLcPFjR0CB_s&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/BqqPt4INRsOqj7eCDabDYA?expiry=1512777600000&hmac=64Q6ZEXFOHb_vX-uAZktrqxLDXQ0JsUvV2Hsb8OeRxo&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "slides-and-external-references",
+                        {
+                            "pdf": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_b1eab7f17568253a367e9651d64c34ef_19_advanced_shortest_paths_1_bidirectional_dijkstra.pdf?Expires=1512777600&Signature=NTVCk37~fBDsGi5TPsLVhtzpngyGUYUOzB54oabYN1enExFCI0jKLouc4UUxa~9QCcvW2avx8v5g1zomIiW7d-Kyd3C0xtJT7qGigrHeSIZ7WHdybhD~2RrazQRMasSIEhsR07DTeoseGLNmZFi9E490h0LTlYoBG1TjoFBOA48_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "19_advanced_shortest_paths_1_bidirectional_dijkstra"
+                                ]
+                            ],
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <p>\n  Download the slides:\n </p>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"IRAk64zJEea9qA4Z6lKA3Q\" name=\"19_advanced_shortest_paths_1_bidirectional_dijkstra\">\n </asset>\n <p>\n  Note that there are additional slides with pseudocode as compared to the slides in the video lecture.\n </p>\n <h2 level=\"2\">\n  References\n </h2>\n <p>\n  See some visualizations\n  <a href=\"https://www.youtube.com/watch?v=DINCL5cd_w0\">\n   here\n  </a>\n  .\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ],
+            [
+                "a-star-algorithm-a",
+                [
+                    [
+                        "a-algorithm",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/iZNk_op6EeaDbw65org3Dw.processed/full/540p/index.mp4?Expires=1512777600&Signature=N40rsN4od23zi~jhsrLTMMaNlseqbhRB1FkKws6pzHrz-vSQA~YbnK6BO2esgexDGg-C~WJ8-cc2kdQw62-ieX3m4SmEsQGqxo15-sRG43RsnrKytzOTtr84p39L99gyhxHoFTGOhuJ~24NquYo4OAHb9SpLFUYaDMrkTmQP2cY_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/v5TCdAdoTCmUwnQHaCwpUQ?expiry=1512777600000&hmac=66UCD9gMQKu-cQMGE7wG0sf57qzMAGN4ZNsT6N0LKZk&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/v5TCdAdoTCmUwnQHaCwpUQ?expiry=1512777600000&hmac=F6xIvATVuedMfZOB9WX95Xb7a0Uz2Y9h9CcgUPZEJ4U&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "performance-of-a",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/wuPwiop6EeaoHhIiFgcrVw.processed/full/540p/index.mp4?Expires=1512777600&Signature=JY3qMCKYRXN68ZqHUEJPN4uc6wssReZdp-jxOTWwITjVsbGTIhJjavAjRfBWEBd7E0vI26KUn8iIY6tVvbKgkRcFlHa8Z96YJud8AubLbSdF5iSOLg8Phv0vymAJXFuQ4LRFNq8bEnLTkmpyyb2iVuvy1NZS7WsZmLR1dz5k94Y_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/16XNcWISSoulzXFiElqLFQ?expiry=1512777600000&hmac=a_R_U5Lyqacg8hPCbobq5r7PJtBxrR1-spVyfYlngiA&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/16XNcWISSoulzXFiElqLFQ?expiry=1512777600000&hmac=vN16OMLnqpnICpHleNcADHSHKHcyz0VeTeycsZFN058&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "bidirectional-a",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/PVhQYp7EeaXYgo_fJsBPw.processed/full/540p/index.mp4?Expires=1512777600&Signature=U2q~VNSt-TLWv5RSWoXUs15t5Vxfuw6CWxCoWIR0YH-VpBoL9tK0FWke492yfgxdxOe~c9V-~qanWK~LNn2fxbk6JqAnvN~0KaKnm8eFgu1x~8IYU4EvCNEhsNHr3Es0-gtSqx8bwlZX1gr0a~Ta~j7d0v6HIBk3-fjpLxDLP48_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/ajc3HTMyQGG3Nx0zMhBhJA?expiry=1512777600000&hmac=AGxZPG8mLoosSlae2Y6hgdlHiE5iekbY8eTCNIfaxNY&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/ajc3HTMyQGG3Nx0zMhBhJA?expiry=1512777600000&hmac=7RFoarFkGzUTLhAY0VPz6J0KIeg95B-WZ7u91vN4f1E&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "potential-functions-and-lower-bounds",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/BciAZop9EeaghhLNmbkUnw.processed/full/540p/index.mp4?Expires=1512777600&Signature=Kzt8XcW72z0bEEr6MR0Er86ktOWUYTvojOVHWKW8uigtD0CIXYumKRTNwN2gMS1xtXqTEf~MkMm0GWgFvFKwV-9QWKl~blt2~q042ez9k6Xq8Oq5QzNWG~W7oBxP8Dp7hFGTSlACo6aooPQefjsuU~~tw4jql0WGKqqcpgNWHoo_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/wP_6O4wbT6m_-juMGw-pIA?expiry=1512777600000&hmac=KvQekCzNMoecf5Nbyx6sh0bI2jQG1VBG96_F5nZztGs&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/wP_6O4wbT6m_-juMGw-pIA?expiry=1512777600000&hmac=rsjyFw1drxx0Vbbb_2JVjVP_zYMwbDT-2jP0oCPD424&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "landmarks-optional",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/SFv_w4p-EealuRI3K47d-Q.processed/full/540p/index.mp4?Expires=1512777600&Signature=XYRHTgqwPwjXobkjB5XhwhnRKkoSsGk~k87HN5Wn7Llj73u3Rz2opS957DuX8a3S8V6zGA4UnLtW4D9wMSAw7RtqhINUK7ksvORKhbeC0gZbpR1LFrOtSP4MWsY7nGgXb1NweUgvVfNlKhS4tDKBKpIkzKGmfXH7ovlLY7-xdgU_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/yL5oruwYS9q-aK7sGGvaWA?expiry=1512777600000&hmac=5clfEDjpXJtbwD05v0Jvf2QhppaVhWDhqTzM_Gtafl8&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/yL5oruwYS9q-aK7sGGvaWA?expiry=1512777600000&hmac=87WqBcaC5_wAaSHMocLkftBQew4739bZZIbFxyHs_3o&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "slides-and-external-references",
+                        {
+                            "pdf": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_ff8eb260dca0ef87389928a01b9be969_19_advanced_shortest_paths_2_A_star.pdf?Expires=1512777600&Signature=CBCeHoJNU07Uj~CO~Uby~LjLRYl4PbAZQuWwq7X5pq1a512A1FhADzAmg3JpHDgJK0GVBsSNdGl8zRwCJ2slqzlmbnyPdnYL3tz7vx0bD1U7NKoGikHrb6utMUbCVUoYaFlHIbbLfavie3DrdCvHmK4w45bmRYjFtmaBqEmYp70_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "19_advanced_shortest_paths_2_A_star"
+                                ]
+                            ],
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <p>\n  Download the slides here:\n </p>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"hd1Z-IzJEeawLhJWe1mycw\" name=\"19_advanced_shortest_paths_2_A_star\">\n </asset>\n <h2 level=\"2\">\n  References\n </h2>\n <p>\n  <a href=\"https://en.wikipedia.org/wiki/A*_search_algorithm\">\n   A-star search algorithm\n  </a>\n  .\n </p>\n <p>\n  The\n  <a href=\"https://www.youtube.com/watch?v=DINCL5cd_w0\">\n   visualization\n  </a>\n  that we suggested in the previous lesson also shows A-star algorithm.\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ],
+            [
+                "contraction-hierarchies",
+                [
+                    [
+                        "highway-hierarchies-and-node-importance",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/ppxjBaCFEeak1QogX7mfGg.processed/full/540p/index.mp4?Expires=1512777600&Signature=FUsrS~A2Qh2Or9eTWnKF~ItVM~5qBWdof-QlwAd2s6Rpo64LPogOfhgXMd8F8KUraasyCJ6Lzn6UF6bkrY4Q3QelzpDqWPlFtFmbObodiN-V7nNvpY3h3JF3C7UfOxasJ3gtFx-4z~Zu-ytHpUUkIhfYL4LUnS2kDaIi2CSG~nw_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/NQ8hnvp3QAqPIZ76dyAKSw?expiry=1512777600000&hmac=7tk1o4ZmgkqC7GJoLWsQS7QOk8_Du4-RrgjdfMStmuw&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/NQ8hnvp3QAqPIZ76dyAKSw?expiry=1512777600000&hmac=a5qgpn39vOA5lOyzraLP7B1emg7I5rQJw0cIhhVZKIU&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "preprocessing",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/PxQQF6CGEeawrQrJUtdkvA.processed/full/540p/index.mp4?Expires=1512777600&Signature=XtZAeEt2eo-rRV7iNWvCFs1bbTcPjUhdRaNgcQoNORCidpvnt8WBHgkyd7hH6p97rurwgYjydMOxRE5Ec7iYEdc8mT-tD8BMp03mMn8Xo2wtOrWDoAEflv0f8-H9U1ZHHm-WDjMJx66Hm52O7tE2iIm0t44T038zre7T~rc5oCU_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/kmn-16eRTUWp_tenkZ1FCg?expiry=1512777600000&hmac=sWPwsGgfjS-w7p1oHT_cDVrfYDGbxScBe0Q1RiGPHdo&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/kmn-16eRTUWp_tenkZ1FCg?expiry=1512777600000&hmac=bobs9W3TlfhS-6gzXcEooth74Aay-tiLs9rzl_RJZDc&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "witness-search",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/W9U_7aCHEeaOHwow71Z0Kg.processed/full/540p/index.mp4?Expires=1512777600&Signature=gIVEyBNecfMFhIki4GfIC9z9qTEwHvDKfOtttvK6-h7EM6IUdHieQIRvRlo-QsmH5SASNVFIpV9D4TKooq7prULqWBi68Kd3vdDqzS3lXkTgRWVKJ6Mae4EgC5OFdBQhNK9sS6VhNJ4oCKKhs8YGFbvdObmLoeZ5S-E6CQKKidI_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/o9Z1blsgROGWdW5bIMThDw?expiry=1512777600000&hmac=vC0dYUYRMVN7VIfL4fxXasqlg_oKPTOTff7aTDPvsGg&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/o9Z1blsgROGWdW5bIMThDw?expiry=1512777600000&hmac=92y1PTM5LQ7vitcoND8jlHBxlUKe2z67Rfa2G9QYEBE&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "query",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_NnXW6CIEeawrQrJUtdkvA.processed/full/540p/index.mp4?Expires=1512777600&Signature=K~kOPzz2dTWgokFBwzoXLktItBdcXsk-wEn6Fr5ZDw8DsDHDNONdvlYNGpyJnTbPsXd2TF0gOUhKb5KkDVm1QorMhXgdlJ1b7Sqo57Arsx3aQXe8zzuvr3b4JXOaw~KjJ9ZEoaepBYBTD2Jgc183~vusTG8TVMwLX-pcDxNOYDs_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/DYDxXhXFT9uA8V4VxY_b-Q?expiry=1512777600000&hmac=vvkaVUhNtF0q1ctY_jcI-oFgBSXD4OvnlDa0KHDBmV8&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/DYDxXhXFT9uA8V4VxY_b-Q?expiry=1512777600000&hmac=VJZCc9gnusrOf3ETGmpOUSkm2xIWbAJZiu442jQtFiQ&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "proof-of-correctness",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/ZKJxcaCJEeav5QpTGIv-Pg.processed/full/540p/index.mp4?Expires=1512777600&Signature=MAjxRcKJdrV~XoQW3OqBP5bAAmLdAvmRLmimkyYx2F-TGFwuhk8iGueAXyB5sdarJjnr5X5KqdaHdW222pTyjd3FIWptjsk4dnAASGALNAV25u-xrTQ5h1J~drFkf2JKTQ5FuEEHGsNj~mN9BcSUyY4P8dWKuiduXpCZ~xTwoSE_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/6KvIhJQdR0uryISUHbdLNA?expiry=1512777600000&hmac=r0J0KimuTqiU4kUXJlLDJXM75YX4OOsXvrRX-Awf7sc&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/6KvIhJQdR0uryISUHbdLNA?expiry=1512777600000&hmac=yPzm0f6L3jtlqrhogQXguFu27HF8jHAtNBI816qh9jw&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "node-ordering",
+                        {
+                            "mp4": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/8QmQT6CMEeaiZBL80Yza_A.processed/full/540p/index.mp4?Expires=1512777600&Signature=Jiqt~6idkx-oWZwayXKRLKHQYaW78MBPBtbUxBYTOYyU7Fv96LhCxtU~bxPbWicqfYZE2bIptMSIjfsb391VNktCEBQdqrkf7NgajonvcKbvPIwaCZzf~wT~71m6hiSeR1qeRhZmuhsU36EsDMLAu4sevGoq3tLcK3vl9f4sypg_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    ""
+                                ]
+                            ],
+                            "en.srt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/7uKsTK6kTkCirEyupI5AHg?expiry=1512777600000&hmac=dJU-JeZJ16UnSqfDrpPQuz0ug8qKrDfgbCo9Us2JIbk&fileExtension=srt",
+                                    ""
+                                ]
+                            ],
+                            "en.txt": [
+                                [
+                                    "https://www.coursera.org/api/subtitleAssetProxy.v1/7uKsTK6kTkCirEyupI5AHg?expiry=1512777600000&hmac=LELvrbrOKPhTBec_05trB1bOuHTAIT-8XvLgV5JQbi4&fileExtension=txt",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ],
+                    [
+                        "slides-and-external-refernces",
+                        {
+                            "pdf": [
+                                [
+                                    "http://algo2.iti.kit.edu/schultes/hwy/contract.pdf",
+                                    "contract"
+                                ],
+                                [
+                                    "http://logic.pdmi.ras.ru/midas/sites/default/files/midas-werneck.pdf",
+                                    "midas-werneck"
+                                ],
+                                [
+                                    "https://www.microsoft.com/en-us/research/wp-content/uploads/2010/12/HL-TR.pdf",
+                                    "HL-TR"
+                                ],
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_4b3e617775b52e3c72a457a310a2be43_19_advanced_shortest_paths_3_contraction_hierarchies.pdf?Expires=1512777600&Signature=CTOruvcdNI3fTwEwGADqNqoHj7txFfPWZ~6nHs4m665ITxL3H0aHR70FX9NpufC2p54XZyVoIjLo8eG3L5wAypvfnGeP0MG4whRXUAU0ecgVkXF3QMiYy6sETt5scsqsdRLCYkPQiZ-PiElUTqF8GY0LmufFmlvOonmCRQek-bk_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "19_advanced_shortest_paths_3_contraction_hierarchies"
+                                ]
+                            ],
+                            "shtml": [
+                                [
+                                    "http://www.dis.uniroma1.it/challenge9/download.shtml",
+                                    "download"
+                                ]
+                            ],
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <p>\n  Download the slides here:\n </p>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"GjbMS4zKEeaKKBK9HFzH_Q\" name=\"19_advanced_shortest_paths_3_contraction_hierarchies\">\n </asset>\n <h2 level=\"2\">\n  References\n </h2>\n <p>\n  See a review of advanced shortest paths algorithms including Contraction Hierarchies\n  <a href=\"http://logic.pdmi.ras.ru/midas/sites/default/files/midas-werneck.pdf\">\n   here\n  </a>\n  .\n </p>\n <p>\n  See the\n  <a href=\"http://algo2.iti.kit.edu/schultes/hwy/contract.pdf\">\n   original paper\n  </a>\n  on Contraction Hierarchies by Robert Geisberger, Peter Sanders, Dominik Schultes, and Daniel Delling.\n </p>\n <p>\n  Read about practical implementation of Contraction Hierarchies and comparisons of different approaches and heuristics in this Microsoft Research\n  <a href=\"https://www.microsoft.com/en-us/research/wp-content/uploads/2010/12/HL-TR.pdf\">\n   paper\n  </a>\n  by Ittai Abraham, Daniel Delling, Andrew Goldberg and Renato Werneck.\n </p>\n <p>\n  Download the real road network graphs from\n  <a href=\"http://www.dis.uniroma1.it/challenge9/download.shtml\">\n   here\n  </a>\n  to play with them and apply your implementation of Contraction Hierarchies, measure the time, compare with other algorithms. Download different real-world graphs from\n  <a href=\"http://dimacs.rutgers.edu/Challenges/\">\n   here\n  </a>\n  .\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ],
+            [
+                "programming-project",
+                [
+                    [
+                        "advanced-shortest-paths",
+                        {
+                            "pdf": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_e716f372383e983ed2dcd0b54726e071_Advanced-Shortest-Paths.pdf?Expires=1512777600&Signature=j-NtwKE73R5mMtvYiaxbPuKeXvo327RHUjzuzqd4kKCrW8vcSX6N1qvmWQNfqm7QDW-iycsgi7qSGz92crQAJXYCKjB-gpUSGg0e~C16sKpob6mpcFcSjwiR47DDaB1tc86L2bgkIMy437jGZ9Y2tbGsau8Q7z~7OfqKYU8Weoo_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "Advanced_Shortest_Paths"
+                                ]
+                            ],
+                            "zip": [
+                                [
+                                    "https://d3c33hcgiwev3.cloudfront.net/_dd3bc8cd8a1771d174f610e2fce3c6dc_Advanced-Shortest-Paths.zip?Expires=1512777600&Signature=Xe~aoTnnH2I3bRNLTRtVksdWvLijT8LlFaRIwK93Qukzb0w1ipLz1aqtUX1EolthtAwKC~mVlBaBxleaL5w4mJ6rDdlwELVb0OfbZ9hYyhx4Odx4cnmV6DAgNEXzOvMVkWg8pwvT53P0dMj2ZwR0oXEwajV83CzmcpvowACreGU_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A",
+                                    "Advanced_Shortest_Paths"
+                                ]
+                            ],
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <p>\n  In this programming project, you are going to implement the advanced shortest paths algorithms from the lectures, apply them to the real-world road networks and social networks graphs and optionally compete against each other on the forums based on whose implementation is the fastest. In the end, you will also solve the classical logistics problem: find the optimal way to leave the depot, visit a list of stores to deliver the goods, and return to the depot. It is known as Travelling Salesman Problem, and your programs will be able to schedule the logistics on the real road map graphs.\n </p>\n <p>\n  Download the instructions and the starter files:\n </p>\n <asset assettype=\"pdf\" extension=\"pdf\" id=\"fy-Ynh8REeeSxRJdDueEgA\" name=\"Advanced Shortest Paths\">\n </asset>\n <asset assettype=\"generic\" extension=\"zip\" id=\"awMsprp8EeajLxLfjQiSjg\" name=\"Advanced Shortest Paths\">\n </asset>\n <p>\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "instructions"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ]
+        ]
+    ],
+    [
+        "Resources",
+        [
+            [
+                "partner-specialization",
+                [
+                    [
+                        "",
+                        {
+                            "html": [
+                                [
+                                    "#inmemory#<meta charset=\"utf-8\"/>\n<co-content>\n <p>\n  If you are interested in learning more about the applications of algorithms to modern science, we highly recommend our partner specialization \"\n  <a href=\"http://goo.gl/4ya9CO\">\n   Bioinformatics\n  </a>\n  \" by UC San Diego, which covers dozens of fundamental algorithms that drive modern biology, genomics, and personalized medicine.\n </p>\n</co-content>\n<style>\n body {\n    padding: 50px 85px 50px 85px;\n}\n\ntable th, table td {\n    border: 1px solid #e0e0e0;\n    padding: 5px 20px;\n    text-align: left;\n}\ninput {\n    margin: 10px;\n}\n}\nth {\n    font-weight: bold;\n}\ntd, th {\n    display: table-cell;\n    vertical-align: inherit;\n}\nimg {\n    height: auto;\n    max-width: 100%;\n}\npre {\n    display: block;\n    margin: 20px;\n    background: #424242;\n    color: #fff;\n    font-size: 13px;\n    white-space: pre-wrap;\n    padding: 9.5px;\n    margin: 0 0 10px;\n    border: 1px solid #ccc;\n}\n</style>\n<script async=\"\" src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\">\n</script>\n<script type=\"text/x-mathjax-config\">\n MathJax.Hub.Config({\n    tex2jax: {\n      inlineMath: [ ['$$','$$'], ['$','$'] ],\n      displayMath: [ [\"\\\\[\",\"\\\\]\"] ],\n      processEscapes: true\n    }\n  });\n</script>\n",
+                                    "resources"
+                                ]
+                            ]
+                        }
+                    ]
+                ]
+            ]
+        ]
+    ]
+]

@@ -1,0 +1,236 @@
+1
+00:00:00,340 --> 00:00:03,020
+Now let's implement this algorithm.
+
+2
+00:00:03,020 --> 00:00:10,110
+So the procedure Dijkstra takes again
+graph G and origin node S as input.
+
+3
+00:00:10,110 --> 00:00:13,700
+It will also use dist values and
+prev values.
+
+4
+00:00:13,700 --> 00:00:17,740
+It will initialize dist values with
+infinities, but for the origin node S for
+
+5
+00:00:17,740 --> 00:00:20,390
+which dist value is 0.
+
+6
+00:00:20,390 --> 00:00:23,735
+And it will initialize breadth
+values with pointers to nowhere.
+
+7
+00:00:24,900 --> 00:00:31,189
+It will use also some data structure which
+can be an array or a priority queue.
+
+8
+00:00:31,189 --> 00:00:33,720
+It depends on your choice
+of data structure.
+
+9
+00:00:33,720 --> 00:00:37,900
+And the writing time will
+depend heavily on that but
+
+10
+00:00:37,900 --> 00:00:43,920
+any way this is a data structure, for
+which we need just three operations.
+
+11
+00:00:43,920 --> 00:00:46,970
+To create it from a set of these values.
+
+12
+00:00:46,970 --> 00:00:51,590
+To extract the minimum value from
+it to get the node outside of
+
+13
+00:00:51,590 --> 00:00:54,200
+known origin with a minimum dist value.
+
+14
+00:00:54,200 --> 00:00:58,710
+And, to change the dist variable of some
+
+15
+00:00:58,710 --> 00:01:02,599
+node which is currently
+in this beta structure.
+
+16
+00:01:02,599 --> 00:01:07,260
+So we will talk later about
+which data structure to choose,
+
+17
+00:01:07,260 --> 00:01:10,210
+but for example, we can use an array here
+
+18
+00:01:10,210 --> 00:01:15,890
+just to create an array from all
+the dist values and then work with it.
+
+19
+00:01:15,890 --> 00:01:20,450
+So while this data structure is not empty,
+we'll take out of it
+
+20
+00:01:20,450 --> 00:01:25,320
+the node with the minimum dist value,
+and this data
+
+21
+00:01:25,320 --> 00:01:29,750
+structure will contain only those nodes
+which are not in the known region.
+
+22
+00:01:29,750 --> 00:01:35,920
+So it will contain initially node s and
+
+23
+00:01:35,920 --> 00:01:40,420
+all the nodes, but then after we
+make the first iteration we will
+
+24
+00:01:40,420 --> 00:01:45,250
+extract node s from this data structure H.
+
+25
+00:01:45,250 --> 00:01:50,598
+Because node s has dist value of 0 and all
+other nodes have dist value of infinity,
+
+26
+00:01:50,598 --> 00:01:53,270
+so node s has the minimum dist value.
+
+27
+00:01:53,270 --> 00:01:57,050
+So we extract minimum from it,
+which means that we take
+
+28
+00:01:57,050 --> 00:02:02,600
+the node with the minimum dist value and
+remove it from the data structure.
+
+29
+00:02:02,600 --> 00:02:07,430
+And then we'll process this node u,
+basically we take all the outgoing
+
+30
+00:02:07,430 --> 00:02:12,540
+edges from u in the graph and
+we try to relax them.
+
+31
+00:02:12,540 --> 00:02:16,730
+To relax them, we check if it's
+possible to relax the edge.
+
+32
+00:02:16,730 --> 00:02:21,070
+And if it's possible we update
+the distance to the end of this edge,
+
+33
+00:02:21,070 --> 00:02:23,510
+the dist value to the end of this edge.
+
+34
+00:02:23,510 --> 00:02:28,300
+We update the prev value
+of this node V and
+
+35
+00:02:28,300 --> 00:02:34,490
+most importantly we change the priority
+of this node V in our data structure H.
+
+36
+00:02:34,490 --> 00:02:39,740
+What it means is that we improved
+the dist value for this node V.
+
+37
+00:02:39,740 --> 00:02:43,270
+And now this node could become potentially
+
+38
+00:02:43,270 --> 00:02:45,800
+the node with the minimum dist value,
+for example.
+
+39
+00:02:45,800 --> 00:02:47,186
+So we need to account for that.
+
+40
+00:02:47,186 --> 00:02:50,620
+So you know in data structure
+we need to do something, for
+
+41
+00:02:50,620 --> 00:02:53,690
+example if we store
+everything as an array,
+
+42
+00:02:53,690 --> 00:02:59,760
+we just need to decrease the value of
+this array corresponding to node V.
+
+43
+00:02:59,760 --> 00:03:04,160
+And then if we store everything in
+an array then when we do extract mean,
+
+44
+00:03:04,160 --> 00:03:09,360
+we just go through all
+the values of this array and
+
+45
+00:03:09,360 --> 00:03:13,610
+find the minimum value and the node
+corresponding to this minimum value.
+
+46
+00:03:14,620 --> 00:03:19,150
+So this all happens while our
+data structure is not empty.
+
+47
+00:03:19,150 --> 00:03:24,290
+But basically it will happen at
+most the number of nodes times,
+
+48
+00:03:24,290 --> 00:03:28,500
+because it starts with all
+the nodes in the data structure.
+
+49
+00:03:28,500 --> 00:03:33,320
+And then just extract next node for
+
+50
+00:03:33,320 --> 00:03:36,490
+each time, and
+the size increases one by one.

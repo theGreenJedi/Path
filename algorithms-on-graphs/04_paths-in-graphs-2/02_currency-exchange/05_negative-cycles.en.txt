@@ -1,0 +1,89 @@
+Hi, in this video you will learn to
+deal with negative cycles in the graphs. You will learn to detect whether there
+is a negative cycle in the graph and to find the negative cycle
+if you know there is one. And you will use that in the next
+video to achieve infinite arbitrage. But before that, you really need to learn
+to detect negative cycles in the graphs, and this lemma will help you. So, it says basically that there is a
+negative weight cycle in the graph if and only if you make one additional
+iteration of relaxation in the Bellman-Ford's algorithm,
+and some edge is relaxed. First, let's prove that
+if there is some change in the last step of Bellman-Ford's
+algorithm, then there is a negative cycle. Assume for the sake of contradiction
+that there are no negative cycles. Then it means that all
+shortest paths from S to any node in the graph contain at most,
+V- 1 edges. We've already discussed that. If they contain at least V edges,
+then there is a cycle. And this cycle is non-negative so
+it can be removed, and the path will be either improved or
+just stay shortest path. So, know this value can actually
+be updated on iteration number V. Because we already found
+the optimal shortest path length with paths that contain,
+at most, V- 1 edges, and we cannot improve anything after that. So this is a contradiction with
+the fact that the last iteration actually relaxes some edge. And so if it does, then there is
+a negative cycle in the graph. Now let's prove, in another side,
+that if there is a negative weight cycle, then there will be a relaxation
+on the iteration number V. Suppose again, for
+the sake of contradiction, that there is a negative weight cycle. For example,
+a cycle of length three a b c a, but there are no relaxations
+on the iteration number V. Now let's look at the following
+three inequalities. These inequalities basically
+state that edges (a, b), (b,c), and (c,a) cannot be
+relaxed on the V-th iteration. But if we sum these inequalities,
+on the left side, you will have sum of these values for
+a, b, and c. And on the right part,
+we will have sum of these values of a, b, and c plus sum of weights
+of the edges of the cycle. And from this sum of
+inequalities that follows, that the sum of the weights
+of edges is non-negative. But we know that the cycle is
+a negative weight cycle, so this is a contradiction and so we prove by contradiction that there will
+be some relaxation on iteration number V. So we proved our lemma, and now we know how to detect negative
+weight cycles in the graph. We just do one additional duration
+of Bellman-Ford's algorithm, and it doesn't increase its asymptotic
+complexity, its training time. And now we can determine whether
+the graph is good or bad, whether it contains negative cycles or
+not. Now, not only to detect what
+are the reason negative cycle or not, also want to find some negative
+cycle itself, at least one. Maybe they are many of them, but
+we want some negative cycle. So first, we still need to run executive V
+iterations of Bellman-Ford's relaxation. And as we know,
+if there is negative cycle, then for some node v, it will be relaxed. This value will be decreased on
+the last iteration, so save this node. And I state that this node is definitely
+reachable from a negative cycle. Because if it was not reachable
+from the negative cycle, then any shortest path to this node
+will contain at most V- 1 edge, and it won't be improved
+on the iteration number v. So it is reachable from a negative cycle,
+and also it is reachable from a negative
+cycle with at most, v steps. Because if you have
+shortest path from s to v, which contains negative cycle inside, even if there are more than the edges
+from this negative weight cycle to V, then there is another cycle
+on the shortest path. And it also has to be negative, because otherwise we can remove
+it from the shortest path. So v is definitely reachable from
+a negative cycle, with at most v steps. And we remember the previous node from
+which each node was updated last time. We store it in the prev values. So if we go by prev links from V,
+and we do that at least three times, we will be already definitely
+on this negative weight cycle. Because we will already return to
+the cycle by at most the steps, and then we will just go around the cycle for
+some amount of duration. So if we go by V times back,
+we will be on the negative cycle. Then, only thing we need to do is just to
+save the position where we started and then go once around the cycle until we
+come to the same node and we will know that the nodes we saw during this round
+trip are the nodes of the negative cycle. So this is the algorithm, and
+it works in the time of Bellman-Ford's algorithm plus proportional
+to the number of nodes. So basically, the same running
+time as Bellman-Ford's algorithm. So now the question is, again, if you have a negative cycle in your graph
+of minus logarithms, it doesn't mean that it is always possible to get as many
+rubles as you want from $1,000 dollars. And unfortunately,
+that's not always the case. For example, in this graph,
+there is a negative cycle between euro, British pounds and Norwegian crowns. And you can check that if you
+multiply the conversion rates on the edges of this triangle
+you will get more than one and it means that, for
+one euro can get more than one euro. And this means in turn that you can get
+infinite arbitrages if you just make trades along the edges of this triangle
+for as many times as you want. But there is no possibility, in this particular example,
+to exchange euros for dollars. So you cannot exchange rubles for euros then make many loops around
+this negative weight cycle. And then exchange euros to dollars. So this is not sufficient, and you cannot
+actually get any dollars from rubles, you cannot get any rubles from
+dollars in this particular case. And in the next video, you will learn
+how to determine whether it is possible to have an infinite arbitrage
+from rubles to dollars, or from any other currency
+to any other currency. And not only to detect that, but to actually find a way to
+implement it if it's possible.

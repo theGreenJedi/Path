@@ -1,0 +1,648 @@
+1
+00:00:00,028 --> 00:00:02,837
+Hi, in this video, we'll learn how
+
+2
+00:00:02,837 --> 00:00:07,835
+to find those witness paths that
+we need from the previous video.
+
+3
+00:00:07,835 --> 00:00:12,801
+So just to remind you,
+when we contract node v, then for
+
+4
+00:00:12,801 --> 00:00:17,451
+any pair of incoming edge from
+some node u to node v and
+
+5
+00:00:17,451 --> 00:00:22,733
+outgoing edge from v to some node w,
+we want to check if there
+
+6
+00:00:22,733 --> 00:00:28,015
+is some witness path from u to
+w which doesn't go through v,
+
+7
+00:00:28,015 --> 00:00:33,654
+has length at most equal to the sum
+of those length of two edges.
+
+8
+00:00:33,654 --> 00:00:38,623
+If there is such path, then there is
+no need to add a shortcut from u to w
+
+9
+00:00:38,623 --> 00:00:42,913
+after contracting v because
+the shortest path between u and
+
+10
+00:00:42,913 --> 00:00:46,971
+w will stay the same even if
+we don't add this shortcut.
+
+11
+00:00:46,971 --> 00:00:51,580
+And search for such witness path
+is called a witness search.
+
+12
+00:00:51,580 --> 00:00:56,690
+So first a few definitions,
+let's call a node u a predecessor of
+
+13
+00:00:56,690 --> 00:01:01,813
+v if there is an edge from u to v,
+either directed or undirected.
+
+14
+00:01:01,813 --> 00:01:07,095
+And also let's call w a successor
+of v if there is an edge from
+
+15
+00:01:07,095 --> 00:01:12,074
+v to w again,
+either directed from v to w or undirected.
+
+16
+00:01:12,074 --> 00:01:16,590
+Now, witness search is
+actually very straightforward.
+
+17
+00:01:16,590 --> 00:01:21,240
+So we need to check for
+each predecessor of v, and for
+
+18
+00:01:21,240 --> 00:01:26,525
+each successor of v, whether there is a
+witness path between this predecessor and
+
+19
+00:01:26,525 --> 00:01:32,965
+the successor that doesn't go through v
+and that has a length which is smaller or
+
+20
+00:01:32,965 --> 00:01:37,635
+equal to the length of the incoming edge
+plus the length of the outgoing edge.
+
+21
+00:01:39,275 --> 00:01:45,425
+So for example, in this picture, for
+u1 and w1, we need to find some path.
+
+22
+00:01:45,425 --> 00:01:49,674
+And it is drawn to the left,
+which doesn't go through v and
+
+23
+00:01:49,674 --> 00:01:52,639
+has length at most 1 plus 1 which is 2.
+
+24
+00:01:52,639 --> 00:01:57,869
+And also for pair u1 w2,
+we need to find also a path,
+
+25
+00:01:57,869 --> 00:02:04,957
+which is drawn to the right under v,
+which doesn't go through v again and
+
+26
+00:02:04,957 --> 00:02:10,556
+which has length equal to or
+smaller than 3, 1 plus 2.
+
+27
+00:02:10,556 --> 00:02:16,037
+To do that, for each predecessor ui of v,
+we just run Dijkstra's algorithm,
+
+28
+00:02:16,037 --> 00:02:20,080
+regular Dijkstra's algorithm from that ui.
+
+29
+00:02:20,080 --> 00:02:23,860
+And in that Dijkstra's algorithm
+we'll always ignore node v.
+
+30
+00:02:23,860 --> 00:02:25,450
+So we don't add it to the queue.
+
+31
+00:02:25,450 --> 00:02:30,730
+We don't extract it from the queue because
+we want only the paths that don't go
+
+32
+00:02:30,730 --> 00:02:31,700
+through node v.
+
+33
+00:02:32,760 --> 00:02:35,520
+So this is essential for
+good query performance.
+
+34
+00:02:35,520 --> 00:02:42,090
+Because again if we don't do this witness
+search, we don't find witness paths.
+
+35
+00:02:42,090 --> 00:02:44,720
+And we will have to add shortcuts for
+
+36
+00:02:44,720 --> 00:02:50,030
+every pair of neighbors of v, for
+every predecessor and every successor.
+
+37
+00:02:50,030 --> 00:02:53,680
+And this will add a lot of new
+nodes in our augmented graph.
+
+38
+00:02:53,680 --> 00:02:57,834
+And in a graph with a lot of edges,
+it's very hard to find shortest paths.
+
+39
+00:02:57,834 --> 00:02:59,754
+It will take a long time.
+
+40
+00:02:59,754 --> 00:03:03,777
+So it is essential for us to find
+as many witness paths as we can and
+
+41
+00:03:03,777 --> 00:03:07,320
+don't add the corresponding shortcuts.
+
+42
+00:03:07,320 --> 00:03:10,791
+But we also want the preprocessing
+to work really fast.
+
+43
+00:03:10,791 --> 00:03:14,477
+And so
+we want to optimize this witness search.
+
+44
+00:03:14,477 --> 00:03:19,339
+So two ideas for optimization,
+first is we can stop Dijkstra's algorithm
+
+45
+00:03:19,339 --> 00:03:22,669
+when the distance from
+the source becomes too big.
+
+46
+00:03:22,669 --> 00:03:26,994
+Basically, if we search starting
+from some predecessor and
+
+47
+00:03:26,994 --> 00:03:32,760
+the distance from this predecessor to
+the node currently extracted is very big,
+
+48
+00:03:32,760 --> 00:03:37,168
+that cannot be a sure witness
+path because it cannot be already
+
+49
+00:03:37,168 --> 00:03:41,195
+shorter than the sum of the incoming and
+outgoing edge.
+
+50
+00:03:41,195 --> 00:03:43,066
+And this is one idea.
+
+51
+00:03:43,066 --> 00:03:45,540
+We'll discuss it in detail in a minute.
+
+52
+00:03:45,540 --> 00:03:48,910
+And also another idea,
+we can limit the number of hops.
+
+53
+00:03:48,910 --> 00:03:53,654
+So we can only allow the Dijkstra's
+algorithm starting from
+
+54
+00:03:53,654 --> 00:03:58,685
+some predecessor to go through at most,
+let's say five edges.
+
+55
+00:03:58,685 --> 00:04:02,069
+If it cannot find a path
+to some successor,
+
+56
+00:04:02,069 --> 00:04:06,869
+we just say that there is no such path,
+and we add a shortcut.
+
+57
+00:04:06,869 --> 00:04:11,060
+Of course, we won't find all
+the witness paths this way.
+
+58
+00:04:11,060 --> 00:04:12,828
+But we will do it fast.
+
+59
+00:04:12,828 --> 00:04:16,622
+And this is a trade off
+between the number of edges,
+
+60
+00:04:16,622 --> 00:04:22,457
+shortcuts added in the augmented graph,
+and the speed of the preprocessing.
+
+61
+00:04:22,457 --> 00:04:29,013
+So first with the stopping Dijkstra,
+so in this example if we found,
+
+62
+00:04:29,013 --> 00:04:33,986
+in our Dijkstra running from
+the node ui some node x,
+
+63
+00:04:33,986 --> 00:04:38,055
+to which the shortest path is of length 4,
+
+64
+00:04:38,055 --> 00:04:43,366
+then it is already useless
+because this length 4 is more
+
+65
+00:04:43,366 --> 00:04:49,834
+than the maximum sum of incoming edge
+into v plus our going as from v.
+
+66
+00:04:49,834 --> 00:04:53,320
+So it's 4 is more 1 plus 2 which is 3.
+
+67
+00:04:53,320 --> 00:04:58,530
+And so there is no way there
+can be some witness path
+
+68
+00:04:58,530 --> 00:05:04,700
+going through x to either w1 or w2
+because it will be already longer than 4.
+
+69
+00:05:04,700 --> 00:05:11,510
+And so it will be longer than the path
+from ui to the corresponding w through v.
+
+70
+00:05:12,670 --> 00:05:17,860
+So in general, if when we extract node x,
+extract mean from the queue,
+
+71
+00:05:17,860 --> 00:05:22,290
+the distance from the source
+to this x is already bigger
+
+72
+00:05:22,290 --> 00:05:27,160
+than the sum of the maximum incoming
+edge and the maximum outgoing edge.
+
+73
+00:05:28,270 --> 00:05:30,560
+There is no witness path going through x.
+
+74
+00:05:30,560 --> 00:05:35,000
+And so there is no point to
+exploring further from x.
+
+75
+00:05:36,050 --> 00:05:40,650
+We can just stop the algorithm here
+because all the nodes which will
+
+76
+00:05:40,650 --> 00:05:45,360
+extracted further in the Dijkstra's
+algorithm will be even further than x
+
+77
+00:05:45,360 --> 00:05:50,250
+by the property of the general
+classic Dijkstra's algorithm.
+
+78
+00:05:50,250 --> 00:05:55,174
+And so basically, what it means is that we
+can limit the distance by the sum of two
+
+79
+00:05:55,174 --> 00:05:57,540
+edges, the maximum sum of two edges.
+
+80
+00:05:57,540 --> 00:06:02,003
+And as soon as Dijkstra finds node
+which is farther from the source,
+
+81
+00:06:02,003 --> 00:06:04,757
+we just stop the Dijkstra's algorithm.
+
+82
+00:06:04,757 --> 00:06:06,660
+There is another small improvement.
+
+83
+00:06:06,660 --> 00:06:08,810
+But it can make it
+significant in practice.
+
+84
+00:06:10,010 --> 00:06:15,632
+Consider any predecessor w
+prime of any successor w of v.
+
+85
+00:06:15,632 --> 00:06:21,763
+So for example, there can be an edge
+from w prime to w2 of length 1.
+
+86
+00:06:21,763 --> 00:06:24,350
+And then let's see.
+
+87
+00:06:24,350 --> 00:06:29,730
+For example, we found some path ui as the
+source of Djikstra's algorithm to w prime.
+
+88
+00:06:31,030 --> 00:06:33,215
+And that path has length just 1.
+
+89
+00:06:34,390 --> 00:06:39,419
+Then we already know that there is
+a witness path between the ui and
+
+90
+00:06:39,419 --> 00:06:44,273
+w2 because the path from ui to
+w2 through v has length 2, 3.
+
+91
+00:06:44,273 --> 00:06:50,324
+And now the path from ui to w2
+through w prime has length at most 2
+
+92
+00:06:50,324 --> 00:06:55,381
+because there is a path from
+ui to w prime of length 1.
+
+93
+00:06:55,381 --> 00:06:56,182
+We go through it.
+
+94
+00:06:56,182 --> 00:06:58,491
+And then go through edge of length 1.
+
+95
+00:06:58,491 --> 00:07:03,680
+And we get a path of length just 2
+which is shorter than the path to v.
+
+96
+00:07:03,680 --> 00:07:06,400
+So this is indeed a witness path.
+
+97
+00:07:07,970 --> 00:07:15,420
+So using this idea, we can just go up
+to nodes which are previous to us,
+
+98
+00:07:15,420 --> 00:07:21,920
+which are predecessors of our
+successors of v and then stop there.
+
+99
+00:07:21,920 --> 00:07:27,280
+So basically what it means is
+that we limit our distance by
+
+100
+00:07:27,280 --> 00:07:31,500
+the difference of the sum of
+the two longest incoming and
+
+101
+00:07:31,500 --> 00:07:36,710
+outgoing edges minus the length
+of the last edge on the path,
+
+102
+00:07:36,710 --> 00:07:40,020
+from some predecessor
+to some successor of v.
+
+103
+00:07:41,460 --> 00:07:45,450
+And then there are two criteria
+during the Dijkstra's algorithm.
+
+104
+00:07:45,450 --> 00:07:50,990
+If we found some w prime, which is
+connected directly to some successor of v,
+
+105
+00:07:52,160 --> 00:07:56,650
+and the distance to w prime plus
+the length of this edge is smaller
+
+106
+00:07:56,650 --> 00:08:01,300
+than the corresponding path from
+the source to the corresponding successor,
+
+107
+00:08:01,300 --> 00:08:03,220
+then we've just found the witness path.
+
+108
+00:08:04,680 --> 00:08:09,780
+And if the distance to
+some node is already
+
+109
+00:08:09,780 --> 00:08:14,710
+bigger than this maximum of maximums
+in the bottom of the slide,
+
+110
+00:08:14,710 --> 00:08:19,536
+we just stop the Dijkstra's algorithm
+because we cannot already find
+
+111
+00:08:19,536 --> 00:08:24,250
+a witness path,
+because all the nodes are already too far.
+
+112
+00:08:26,890 --> 00:08:29,010
+Another idea for
+
+113
+00:08:29,010 --> 00:08:32,450
+optimizing the witness search is to
+limit the number of hops in Dijkstra.
+
+114
+00:08:32,450 --> 00:08:35,860
+And by hop,
+I mean just the jump through an edge.
+
+115
+00:08:35,860 --> 00:08:40,490
+So we consider basically only shortest
+paths from the source from some
+
+116
+00:08:40,490 --> 00:08:43,794
+predecessor of v,
+which contain at most k edges.
+
+117
+00:08:43,794 --> 00:08:48,779
+As soon as our Dijkstra's algorithm
+considers a node, which is at least
+
+118
+00:08:48,779 --> 00:08:53,699
+k plus 1 edges from the source,
+we don't actually process this node.
+
+119
+00:08:53,699 --> 00:08:55,000
+We ignore it.
+
+120
+00:08:55,000 --> 00:08:58,890
+And if a witness path is not found
+using this Dijkstra's algorithm,
+
+121
+00:08:58,890 --> 00:09:03,010
+we just consider it as if
+there is no witness path.
+
+122
+00:09:03,010 --> 00:09:06,195
+And we add a shortcut in
+the preprocessing phase.
+
+123
+00:09:06,195 --> 00:09:10,050
+And so this is a tradeoff
+between preprocessing time and
+
+124
+00:09:10,050 --> 00:09:12,351
+the size of the augmented graph.
+
+125
+00:09:12,351 --> 00:09:16,265
+If k is small,
+then we won't find many witness paths.
+
+126
+00:09:16,265 --> 00:09:18,105
+And then we will add many shortcuts.
+
+127
+00:09:18,105 --> 00:09:20,265
+But our preprocessing will be faster.
+
+128
+00:09:21,345 --> 00:09:26,828
+In practice, you can change k
+gradually from the start to the end.
+
+129
+00:09:26,828 --> 00:09:30,806
+And typically, k is smaller in the start,
+for now k = 1.
+
+130
+00:09:30,806 --> 00:09:34,240
+And then in the A, in the end, k = 5.
+
+131
+00:09:34,240 --> 00:09:39,020
+And this can be based on the degree of
+the vertices that you're contracting.
+
+132
+00:09:40,617 --> 00:09:46,371
+So these are the ideas for
+speeding up the witness search.
+
+133
+00:09:46,371 --> 00:09:49,833
+And this is all for preprocessing.
+
+134
+00:09:49,833 --> 00:09:51,077
+So in the next video,
+
+135
+00:09:51,077 --> 00:09:55,089
+we will study how to actually do
+the queries in the preprocess graph,
+
+136
+00:09:55,089 --> 00:09:59,466
+after we preprocess it by contracting
+the nodes and adding the shortcuts.

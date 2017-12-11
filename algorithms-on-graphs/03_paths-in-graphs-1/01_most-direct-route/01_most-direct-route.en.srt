@@ -1,0 +1,643 @@
+1
+00:00:00,320 --> 00:00:04,100
+Hi, in this module you will study
+shortest paths in graphs and
+
+2
+00:00:04,100 --> 00:00:05,970
+algorithms to find them.
+
+3
+00:00:05,970 --> 00:00:09,320
+These algorithms have
+lots of applications.
+
+4
+00:00:09,320 --> 00:00:12,040
+For example, when you want to
+go from one city to another,
+
+5
+00:00:12,040 --> 00:00:15,560
+you don't want to switch
+your transport many times.
+
+6
+00:00:15,560 --> 00:00:19,870
+And in the travel planning systems, there
+are algorithms that help you to minimize
+
+7
+00:00:19,870 --> 00:00:24,960
+the number of such switches, for example,
+to get from Hamburg to Moscow with
+
+8
+00:00:24,960 --> 00:00:28,200
+the minimum possible
+number of flight segments.
+
+9
+00:00:29,290 --> 00:00:34,250
+When you start a navigation app on your
+smartphone to get home from work faster,
+
+10
+00:00:34,250 --> 00:00:38,720
+one of these algorithms is used to
+give you the fastest route possible.
+
+11
+00:00:38,720 --> 00:00:43,170
+Also, one of these algorithms is
+used right now to direct the network
+
+12
+00:00:43,170 --> 00:00:47,170
+packets with data through the Internet so
+that you can watch this video online.
+
+13
+00:00:48,520 --> 00:00:49,120
+In this module,
+
+14
+00:00:49,120 --> 00:00:53,580
+we will start with the most direct
+route problem about flight segments.
+
+15
+00:00:53,580 --> 00:00:58,370
+We will then consider the problem
+of getting from point A to point B
+
+16
+00:00:58,370 --> 00:01:00,630
+with the fastest possible route.
+
+17
+00:01:00,630 --> 00:01:04,460
+And in the end, we'll consider
+the problem about currency exchange,
+
+18
+00:01:04,460 --> 00:01:09,030
+which doesn't seem to be a problem
+about graphs or shortest paths, but
+
+19
+00:01:09,030 --> 00:01:14,840
+actually the same algorithms will help
+you to exchange currency in the optimal,
+
+20
+00:01:14,840 --> 00:01:15,800
+most profitable way.
+
+21
+00:01:17,290 --> 00:01:19,800
+Let's start with the most
+direct route problem.
+
+22
+00:01:19,800 --> 00:01:22,460
+It is formulated very simply.
+
+23
+00:01:22,460 --> 00:01:26,530
+What is the minimum number of flight
+segments to get from one city to another?
+
+24
+00:01:26,530 --> 00:01:31,286
+For example, if we look at this map
+you could go from Hamburg to Moscow
+
+25
+00:01:31,286 --> 00:01:36,124
+with five flight segments, but
+this is obviously not optimal because
+
+26
+00:01:36,124 --> 00:01:40,072
+you could go from Hamburg to
+Moscow with a direct flight.
+
+27
+00:01:40,072 --> 00:01:45,622
+We can consider it as a graph problem on a
+graph where nodes correspond to cities and
+
+28
+00:01:45,622 --> 00:01:51,300
+directed edges correspond to available
+flights from one city to another.
+
+29
+00:01:51,300 --> 00:01:54,946
+The edges are directed because
+flights can be available one way and
+
+30
+00:01:54,946 --> 00:01:59,260
+not available another one, for example,
+because there are no tickets left.
+
+31
+00:01:59,260 --> 00:02:04,286
+And, of course, in the typical real world
+graph there are many more cities and
+
+32
+00:02:04,286 --> 00:02:09,630
+many more possible flights but
+this is just an illustrative example.
+
+33
+00:02:09,630 --> 00:02:13,370
+So here the graph problem is
+to get from node correspondent
+
+34
+00:02:13,370 --> 00:02:16,420
+to Hamburg to node
+correspondent to Moscow.
+
+35
+00:02:16,420 --> 00:02:20,228
+And one way to do that is to use
+these five edges corresponding
+
+36
+00:02:20,228 --> 00:02:23,065
+to the five flight segments
+we saw on the map,
+
+37
+00:02:23,065 --> 00:02:28,011
+but this is obviously not optimal in
+terms of minimization of number of edges.
+
+38
+00:02:28,011 --> 00:02:31,527
+For example, we could get from
+Hamburg to Paris first, and
+
+39
+00:02:31,527 --> 00:02:35,860
+then from Paris to Moscow, and
+that would be just two edges.
+
+40
+00:02:35,860 --> 00:02:39,330
+Or in this case, you could go just
+directly from Hamburg to Moscow,
+
+41
+00:02:39,330 --> 00:02:41,480
+and obviously this is the optimal way,
+
+42
+00:02:41,480 --> 00:02:45,230
+to use just one flight segment,
+which is not always possible.
+
+43
+00:02:45,230 --> 00:02:47,900
+For example,
+to get from Hamburg to Helsinki,
+
+44
+00:02:47,900 --> 00:02:51,430
+you'd need at least three
+edges on this graph.
+
+45
+00:02:52,820 --> 00:02:56,560
+Also notice that as soon as we
+formulate it as a graph problem,
+
+46
+00:02:56,560 --> 00:03:00,330
+we don't need to name the nodes
+like Hamburg or Moscow.
+
+47
+00:03:00,330 --> 00:03:03,610
+We can just name them to A,
+B, C, D, E, and
+
+48
+00:03:03,610 --> 00:03:08,620
+then solve the problem
+on an abstract graph.
+
+49
+00:03:08,620 --> 00:03:11,967
+So let's talk about paths and graphs.
+
+50
+00:03:11,967 --> 00:03:15,335
+So, we define length of the path L(P),
+
+51
+00:03:15,335 --> 00:03:20,520
+where P is the path,
+as the number of edges in this path.
+
+52
+00:03:20,520 --> 00:03:24,680
+For example,
+if we consider the path from D to B,
+
+53
+00:03:24,680 --> 00:03:29,870
+which consists of edges from D to E,
+then from E to S, from S to A,
+
+54
+00:03:29,870 --> 00:03:34,140
+and from A to B,
+then the length of this path is 4.
+
+55
+00:03:34,140 --> 00:03:38,110
+And note that this is an undirected graph,
+but
+
+56
+00:03:38,110 --> 00:03:41,700
+we will also look at
+the directed example soon.
+
+57
+00:03:41,700 --> 00:03:46,490
+Another example of a path is from
+D to B again, but through S.
+
+58
+00:03:46,490 --> 00:03:52,620
+From D to S to C to B, and
+the length of this path is 3.
+
+59
+00:03:52,620 --> 00:03:55,805
+Now the distance between two vertices or
+
+60
+00:03:55,805 --> 00:04:00,670
+nodes in the graph is the length of
+the shortest possible path between them.
+
+61
+00:04:00,670 --> 00:04:03,495
+For example, the distance between D and
+
+62
+00:04:03,495 --> 00:04:08,978
+B is just 3 because this is the path from
+D to B which contains just three edges,
+
+63
+00:04:08,978 --> 00:04:13,155
+and there are no paths that
+contains less than three edges.
+
+64
+00:04:14,430 --> 00:04:20,010
+And the distance from C to A is just 2,
+because there is a path through S.
+
+65
+00:04:20,010 --> 00:04:24,818
+There is another one through B,
+which is also of length 2,
+
+66
+00:04:24,818 --> 00:04:27,907
+but there is no direct edge from C to A.
+
+67
+00:04:27,907 --> 00:04:32,784
+The situation changes a little bit when
+the graph is directed because not all
+
+68
+00:04:32,784 --> 00:04:34,708
+edges can be taken.
+
+69
+00:04:34,708 --> 00:04:39,950
+And so distance from D to B in this graph,
+which looks like the same but
+
+70
+00:04:39,950 --> 00:04:45,120
+has directed edges, is now 4 instead
+of 3 in the undirected case.
+
+71
+00:04:45,120 --> 00:04:49,850
+This is because we cannot take the edge
+from D to S because it is directed
+
+72
+00:04:49,850 --> 00:04:51,570
+in the wrong direction.
+
+73
+00:04:51,570 --> 00:04:56,320
+So distance from D to B is 4 because
+there is this path in green and
+
+74
+00:04:56,320 --> 00:04:57,751
+there is no shorter path.
+
+75
+00:04:58,840 --> 00:05:02,680
+And the distance from C to
+A in this case is infinity
+
+76
+00:05:02,680 --> 00:05:08,030
+because there is actually no path from C
+to A, because you cannot go from C to F.
+
+77
+00:05:08,030 --> 00:05:10,500
+And even if you go from C to B,
+
+78
+00:05:10,500 --> 00:05:13,950
+it cannot go from B to A because
+the edge is going the wrong direction.
+
+79
+00:05:15,980 --> 00:05:20,550
+Now let's consider the paths
+from some origin node S.
+
+80
+00:05:20,550 --> 00:05:26,560
+It turns out that to find the shortest
+path from A to B is not simpler
+
+81
+00:05:26,560 --> 00:05:31,440
+than finding shortest paths from
+A to all other nodes in the graph,
+
+82
+00:05:31,440 --> 00:05:35,520
+or at least almost all
+the other nodes in the graph.
+
+83
+00:05:35,520 --> 00:05:40,380
+And so we will be studying the problem
+of finding shortest path from
+
+84
+00:05:40,380 --> 00:05:45,060
+one starting node S to all
+other nodes in the graph.
+
+85
+00:05:45,060 --> 00:05:46,780
+When we select the starting node,
+
+86
+00:05:46,780 --> 00:05:51,980
+we can lay out the same graph in
+a different way using distance layers.
+
+87
+00:05:51,980 --> 00:05:54,250
+In this case,
+we have three distance layers.
+
+88
+00:05:54,250 --> 00:05:57,273
+The first one is layer 0,
+which contains just node S,
+
+89
+00:05:57,273 --> 00:05:59,930
+which is a distance 0 from itself.
+
+90
+00:05:59,930 --> 00:06:04,570
+Then we have layer 1, which contains
+four nodes a distance 1 from node S.
+
+91
+00:06:04,570 --> 00:06:07,716
+And then we have layer 2,
+which contains just one node, B,
+
+92
+00:06:07,716 --> 00:06:09,519
+which is a distance 2 from node S.
+
+93
+00:06:10,580 --> 00:06:14,025
+If we added another node to this graph,
+for example,
+
+94
+00:06:14,025 --> 00:06:18,694
+node F, which is only connected with B,
+then it will have 4 layers, and
+
+95
+00:06:18,694 --> 00:06:23,690
+additional layer 3 contains just node F,
+which is a distance 3 from node S.
+
+96
+00:06:23,690 --> 00:06:28,807
+Note that there cannot be an edge
+from D to F in such layered graph
+
+97
+00:06:28,807 --> 00:06:34,503
+because otherwise there would be
+a path from S to F of length 2, S, D,
+
+98
+00:06:34,503 --> 00:06:39,940
+F, and then F would be in the layer 2 and
+there would be no layer 3.
+
+99
+00:06:39,940 --> 00:06:44,340
+And another example is that there cannot
+be an edge from S to F because in this
+
+100
+00:06:44,340 --> 00:06:49,380
+case the distance from S to F would be
+1 and so F would be in the layer 1.
+
+101
+00:06:49,380 --> 00:06:53,321
+And again there wouldn't be no layer 3.
+
+102
+00:06:53,321 --> 00:06:58,213
+And the general property is that
+the only edges which are allowed
+
+103
+00:06:58,213 --> 00:07:03,194
+in such layered graph are edges
+inside the layer, like edge from D
+
+104
+00:07:03,194 --> 00:07:08,265
+to E in this example, and
+edges between a layer and the next layer,
+
+105
+00:07:08,265 --> 00:07:13,820
+like edges from S to layer 1, edges
+from A and C to B, and edge from B to F.
+
+106
+00:07:15,060 --> 00:07:16,830
+Now let's consider the directed case.
+
+107
+00:07:17,830 --> 00:07:23,850
+We directed all the edges downwards and
+so the layers didn't change.
+
+108
+00:07:23,850 --> 00:07:28,450
+We still have layer 0 with just S,
+layer 1 with four nodes, and layers 2 and
+
+109
+00:07:28,450 --> 00:07:31,710
+3 with nodes B and F correspondingly.
+
+110
+00:07:31,710 --> 00:07:33,110
+What about additional edges here?
+
+111
+00:07:34,170 --> 00:07:37,160
+For example, can F be connected to D?
+
+112
+00:07:37,160 --> 00:07:41,430
+So yes, it can be connected to D,
+but in this direction, from F to D,
+
+113
+00:07:41,430 --> 00:07:47,520
+because this edge from F to D doesn't
+give us any shorter path from S to F.
+
+114
+00:07:47,520 --> 00:07:51,990
+And so
+the shortest path is still of length 3.
+
+115
+00:07:51,990 --> 00:07:56,560
+Also, it is possible to connect F
+directly to S in this direction, or
+
+116
+00:07:56,560 --> 00:08:01,380
+to connect B directly to S because
+the shortest paths don't change.
+
+117
+00:08:01,380 --> 00:08:05,660
+However, it is not possible
+to add an edge from C to F,
+
+118
+00:08:05,660 --> 00:08:10,060
+because if we add this edge,
+the layer structure will change.
+
+119
+00:08:10,060 --> 00:08:15,490
+because the distance from S to F will
+be just 2, from S to C and from C to F.
+
+120
+00:08:15,490 --> 00:08:20,290
+And the general property is that
+there cannot be any edge from a layer
+
+121
+00:08:20,290 --> 00:08:24,350
+to another layer which is
+farther from S by at least two.
+
+122
+00:08:24,350 --> 00:08:28,050
+So there can be an edge from
+a layer to the next layer.
+
+123
+00:08:28,050 --> 00:08:30,345
+There can be an edge
+within the layer's edges,
+
+124
+00:08:30,345 --> 00:08:33,110
+an edge from D to E in this example.
+
+125
+00:08:33,110 --> 00:08:36,940
+And there can be an edge from a layer
+to any of the previous layers,
+
+126
+00:08:36,940 --> 00:08:39,700
+such as the green edges in this example.
+
+127
+00:08:39,700 --> 00:08:44,180
+But there cannot be any red edges,
+such as an edge from C to F,
+
+128
+00:08:44,180 --> 00:08:47,610
+which is an edge from
+the layer 1 to the layer 3,
+
+129
+00:08:47,610 --> 00:08:52,490
+which is at least farther
+by two from S than layer 1.
+
+130
+00:08:52,490 --> 00:08:58,560
+So there cannot be any such edges
+in the layered distance graph.
+
+131
+00:08:58,560 --> 00:08:59,610
+And in the next video,
+
+132
+00:08:59,610 --> 00:09:05,270
+we will discuss an efficient algorithm
+to traverse the graph layer by layer so
+
+133
+00:09:05,270 --> 00:09:11,440
+that in the end every node is
+assigned to some layer, and we know
+
+134
+00:09:11,440 --> 00:09:15,740
+the distance to this node as the number
+of the layer to which it was assigned.

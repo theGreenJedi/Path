@@ -1,0 +1,466 @@
+1
+00:00:00,140 --> 00:00:03,030
+This is basically how the algorithm works,
+and
+
+2
+00:00:03,030 --> 00:00:05,980
+this is more or
+less clear that it defines distances
+
+3
+00:00:05,980 --> 00:00:10,100
+correctly because it just goes
+through the graph layer by layer.
+
+4
+00:00:10,100 --> 00:00:16,240
+But to actually implement the algorithm,
+we need to do everything turn by turn.
+
+5
+00:00:16,240 --> 00:00:20,456
+We cannot just take a couple of nodes and
+process them simultaneously.
+
+6
+00:00:20,456 --> 00:00:22,969
+We need to have some order on those nodes.
+
+7
+00:00:22,969 --> 00:00:25,980
+And now let's solve this problem.
+
+8
+00:00:25,980 --> 00:00:32,100
+So we return to our initial example
+of a directed graph with S origin.
+
+9
+00:00:32,100 --> 00:00:36,010
+And now we want to process
+each node one by one.
+
+10
+00:00:36,010 --> 00:00:41,170
+To achieve that, instead of processing
+each layer of nodes simultaneously,
+
+11
+00:00:41,170 --> 00:00:43,430
+we will have a queue of notes.
+
+12
+00:00:43,430 --> 00:00:47,540
+So the nodes will get into the queue and
+wait for their turn.
+
+13
+00:00:47,540 --> 00:00:52,610
+And as soon as every node which was in the
+queue before this node has already been
+
+14
+00:00:52,610 --> 00:00:57,870
+processed, this node goes out of
+the queue, and it is being processed.
+
+15
+00:00:57,870 --> 00:01:01,400
+So, when we discover node,
+we put it into a queue.
+
+16
+00:01:01,400 --> 00:01:06,270
+And when we need to process it,
+we take it from the queue and process it.
+
+17
+00:01:06,270 --> 00:01:09,980
+And it means that the nodes
+which were discovered earlier
+
+18
+00:01:09,980 --> 00:01:11,950
+will also be processed earlier.
+
+19
+00:01:11,950 --> 00:01:16,080
+And so, in general the order
+of layers won't change because
+
+20
+00:01:16,080 --> 00:01:18,750
+first layer 0 nodes will
+get into the queue,
+
+21
+00:01:18,750 --> 00:01:22,310
+then all the nodes from layer
+1 will get into the queue.
+
+22
+00:01:22,310 --> 00:01:27,131
+And then after they all are processed,
+we'll process nodes of layer 2,
+
+23
+00:01:27,131 --> 00:01:30,790
+which were discovered
+after notes of layer one.
+
+24
+00:01:30,790 --> 00:01:32,100
+Now let's see how all it works.
+
+25
+00:01:32,100 --> 00:01:34,527
+So we discovered node S, and
+
+26
+00:01:34,527 --> 00:01:39,510
+we already know by that time
+that the distance to S is 0.
+
+27
+00:01:39,510 --> 00:01:42,730
+It is layer 0 and
+there are no more nodes in the layer 0.
+
+28
+00:01:43,750 --> 00:01:46,833
+Now we start processing this node,
+and to do that,
+
+29
+00:01:46,833 --> 00:01:49,927
+we process the edges outgoing
+from S in some order.
+
+30
+00:01:49,927 --> 00:01:52,868
+It doesn't mean which is the order.
+
+31
+00:01:52,868 --> 00:01:57,309
+It can be just the order in which they
+were saved in our data structure for
+
+32
+00:01:57,309 --> 00:01:58,057
+the graph.
+
+33
+00:01:58,057 --> 00:02:03,383
+So we chose our first edge, and
+we discover node to the right.
+
+34
+00:02:03,383 --> 00:02:08,028
+And we know that the distance to this node
+is 1 because this is a layer 1 node we
+
+35
+00:02:08,028 --> 00:02:08,889
+discovered.
+
+36
+00:02:08,889 --> 00:02:13,439
+And instead of starting to process it,
+we go to the next edge from S and
+
+37
+00:02:13,439 --> 00:02:18,068
+we discover another node of layer 1 and
+assign the distance to 1, and
+
+38
+00:02:18,068 --> 00:02:20,743
+again, and again, again, and again.
+
+39
+00:02:20,743 --> 00:02:26,490
+And so now, we have discovered
+all the nodes from the layer 1.
+
+40
+00:02:26,490 --> 00:02:29,700
+And we put them all in
+the queue in the order
+
+41
+00:02:29,700 --> 00:02:33,630
+starting from the node to the right and
+counterclockwise order.
+
+42
+00:02:34,840 --> 00:02:40,450
+So now we've processed our node S and
+we need to process something else.
+
+43
+00:02:40,450 --> 00:02:41,550
+What to process?
+
+44
+00:02:41,550 --> 00:02:46,400
+The node which is the first in the queue,
+and this is the node to the right from S.
+
+45
+00:02:46,400 --> 00:02:48,830
+So we start processing this node.
+
+46
+00:02:48,830 --> 00:02:53,510
+And to go through the edges from this
+node in the order they were saved.
+
+47
+00:02:53,510 --> 00:02:55,820
+I don't know that order, so let's see.
+
+48
+00:02:55,820 --> 00:02:59,970
+Okay, so the first edge
+outgoing from this node was to
+
+49
+00:02:59,970 --> 00:03:01,990
+another node from the first layer.
+
+50
+00:03:01,990 --> 00:03:06,110
+So it is a red edge because it goes to the
+node which has already been discovered.
+
+51
+00:03:06,110 --> 00:03:08,249
+We don't do anything with this edge.
+
+52
+00:03:08,249 --> 00:03:13,067
+Then the next edge goes to the right,
+and we discover a node from layer 2,
+
+53
+00:03:13,067 --> 00:03:16,515
+which is to the right, and
+we set its distance to 2.
+
+54
+00:03:16,515 --> 00:03:21,968
+Then the edge goes to the node right and
+up,
+
+55
+00:03:21,968 --> 00:03:27,910
+and we also assign distance
+to this node to 2.
+
+56
+00:03:27,910 --> 00:03:33,560
+And the last edge goes to the node
+to right and down from our node.
+
+57
+00:03:33,560 --> 00:03:36,330
+And it also gets distance 2
+because this is a layer 2 node.
+
+58
+00:03:37,710 --> 00:03:38,940
+And what we do next?
+
+59
+00:03:38,940 --> 00:03:43,390
+We've processed our node to the right from
+S and we need to process something else.
+
+60
+00:03:43,390 --> 00:03:47,050
+And this something else is
+the next node from the layer 1 in
+
+61
+00:03:47,050 --> 00:03:48,999
+the counterclockwise order.
+
+62
+00:03:48,999 --> 00:03:53,490
+This is this node to the right and
+up from node S.
+
+63
+00:03:53,490 --> 00:03:55,270
+We'll start processing it.
+
+64
+00:03:55,270 --> 00:03:57,540
+In some order we'll process edges from it.
+
+65
+00:03:57,540 --> 00:04:02,380
+So the first edge is a red edge to the
+left, and we don't do anything with it.
+
+66
+00:04:02,380 --> 00:04:06,660
+And the second edge is a red edge
+to the node to the right and
+
+67
+00:04:06,660 --> 00:04:12,400
+up from it, which is familiar too, but
+it has also been already discovered.
+
+68
+00:04:12,400 --> 00:04:15,710
+And then the next edge gives
+us new nodes from layer 2.
+
+69
+00:04:15,710 --> 00:04:18,055
+And the next one also gives
+us a new node from layer 2.
+
+70
+00:04:19,410 --> 00:04:22,570
+So we finished processing this node and
+we go to the next one.
+
+71
+00:04:22,570 --> 00:04:23,590
+Again, red edge,
+
+72
+00:04:23,590 --> 00:04:28,830
+red edge, new node discovered, new node
+discovered, next node from layer one.
+
+73
+00:04:28,830 --> 00:04:33,085
+Our red edge, our red edge,
+a new node from layer 2, and new node.
+
+74
+00:04:33,085 --> 00:04:36,450
+And again,
+with another node from layer 1 and
+
+75
+00:04:36,450 --> 00:04:39,652
+the last node from layer 1, we process it.
+
+76
+00:04:39,652 --> 00:04:43,777
+Okay, so we've processed
+all the nodes from layer 1.
+
+77
+00:04:43,777 --> 00:04:47,323
+We've discovered all the nodes
+from layer 2 in some order.
+
+78
+00:04:47,323 --> 00:04:50,670
+I don't even remember
+the order of those nodes.
+
+79
+00:04:50,670 --> 00:04:53,726
+It is mostly counterclockwise but
+not completely.
+
+80
+00:04:53,726 --> 00:04:57,117
+So let's see In the slides,
+what is the correct order?
+
+81
+00:04:57,117 --> 00:05:01,160
+So the first one to be discovered
+was the node to the right.
+
+82
+00:05:01,160 --> 00:05:08,750
+And start processing it, and there is
+a red edge from it, and another one.
+
+83
+00:05:08,750 --> 00:05:10,622
+And there are no more
+edges from this node so
+
+84
+00:05:10,622 --> 00:05:14,670
+we'll start processing the next
+one in the counterclockwise order.
+
+85
+00:05:14,670 --> 00:05:16,280
+And there is a red edge from it, and
+
+86
+00:05:16,280 --> 00:05:20,260
+it looks like there are no more edges from
+it, so we finished processing this node.
+
+87
+00:05:20,260 --> 00:05:24,300
+And then we go to the node
+to the right and down, and
+
+88
+00:05:24,300 --> 00:05:28,220
+there is a red edge from it,
+and that's all.
+
+89
+00:05:28,220 --> 00:05:32,700
+And so, we go through the nodes in the
+second layer and all the edges from them
+
+90
+00:05:32,700 --> 00:05:38,150
+are obviously red because we've discovered
+everything that's connected to S already.
+
+91
+00:05:38,150 --> 00:05:41,231
+So we go and
+test that all the edges are red, and
+
+92
+00:05:41,231 --> 00:05:45,750
+now we've finished, and
+again we have the graph which is layered.
+
+93
+00:05:45,750 --> 00:05:50,584
+Node S is in the layer 0,
+6 nodes in the layer 1,
+
+94
+00:05:50,584 --> 00:05:53,590
+and 12 nodes in the layer 2.
+
+95
+00:05:53,590 --> 00:05:58,221
+And if we have some node
+which was not connected to S,
+
+96
+00:05:58,221 --> 00:06:03,076
+then it stays with the distance
+estimate of infinity.
+
+97
+00:06:03,076 --> 00:06:08,118
+So this is how breadth first search
+actually works, and in the next video
+
+98
+00:06:08,118 --> 00:06:13,341
+we will discuss the pseudocode that
+actually implements this algorithm.

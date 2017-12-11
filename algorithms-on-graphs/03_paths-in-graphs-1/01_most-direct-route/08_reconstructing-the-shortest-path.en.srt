@@ -1,0 +1,248 @@
+1
+00:00:00,300 --> 00:00:04,320
+How do we reconstruct the shortest
+path given the shortest path tree?
+
+2
+00:00:04,320 --> 00:00:08,450
+So, the nice property of the shortest
+path tree is that it somehow
+
+3
+00:00:08,450 --> 00:00:11,960
+contains all of the shortest paths
+from the origin to all the nodes.
+
+4
+00:00:11,960 --> 00:00:12,930
+Why is that?
+
+5
+00:00:12,930 --> 00:00:16,090
+Because if we go by edge
+of the shortest path tree,
+
+6
+00:00:16,090 --> 00:00:18,817
+we decrease the distance exactly by what?
+
+7
+00:00:18,817 --> 00:00:21,468
+So if we start with some node, and
+
+8
+00:00:21,468 --> 00:00:26,413
+go by edges of shortest path tree
+by directed edges one by one.
+
+9
+00:00:26,413 --> 00:00:29,240
+We will each time decrease
+the distance by one.
+
+10
+00:00:29,240 --> 00:00:32,500
+And so it means that if
+the distance to the node was D,
+
+11
+00:00:32,500 --> 00:00:37,630
+then exactly after D steps,
+we will end up in the origin node.
+
+12
+00:00:37,630 --> 00:00:39,570
+Because we will be at distance zero.
+
+13
+00:00:39,570 --> 00:00:41,654
+So, we will make D steps.
+
+14
+00:00:41,654 --> 00:00:44,047
+We will have a path of length D,
+
+15
+00:00:44,047 --> 00:00:48,290
+where D is the shortest path
+length from S to this node.
+
+16
+00:00:48,290 --> 00:00:53,151
+So we'll have the shortest path itself
+because its length is the same as distance
+
+17
+00:00:53,151 --> 00:00:54,016
+to this node.
+
+18
+00:00:54,016 --> 00:00:57,430
+So what do we need to do in the code?
+
+19
+00:00:57,430 --> 00:01:03,120
+We write down the procedure
+reconstruct path, which takes in
+
+20
+00:01:03,120 --> 00:01:08,180
+the origin node as the node U for
+which we need to construct the path,
+
+21
+00:01:08,180 --> 00:01:12,770
+and the prev,
+which BFS procedure builds for us.
+
+22
+00:01:12,770 --> 00:01:17,900
+And the results variable
+will store the path itself.
+
+23
+00:01:17,900 --> 00:01:19,776
+So we will start with an empty path.
+
+24
+00:01:19,776 --> 00:01:26,985
+And then, we'll go back from
+node U until we come to node S.
+
+25
+00:01:26,985 --> 00:01:32,082
+So we start with our node U, and
+while it is not yet equal to S.
+
+26
+00:01:32,082 --> 00:01:35,252
+We append it to the shortest path, and
+
+27
+00:01:35,252 --> 00:01:41,310
+then we go by the edge of the shortest
+path tree by assigning prev of U to U.
+
+28
+00:01:41,310 --> 00:01:46,400
+And the we repeat, repeat,
+repeat it until we come to node S.
+
+29
+00:01:46,400 --> 00:01:49,760
+And U will be equal to S, and
+our while loop will start.
+
+30
+00:01:50,800 --> 00:01:55,285
+By this time, we have the shortest path
+from S to U in the result variable, but
+
+31
+00:01:55,285 --> 00:01:56,188
+for one thing.
+
+32
+00:01:56,188 --> 00:02:01,534
+It is in the reverse order so
+we have first the And note which is U.
+
+33
+00:02:01,534 --> 00:02:05,610
+Then we have the prev of U,
+then prev of prev of U, and so on up to S.
+
+34
+00:02:05,610 --> 00:02:08,485
+So the path is in the reverse order.
+
+35
+00:02:08,485 --> 00:02:12,751
+So to return the actual shortest
+path from origin to node U.
+
+36
+00:02:12,751 --> 00:02:17,360
+We need to reverse this path and
+then, we return the result.
+
+37
+00:02:17,360 --> 00:02:22,365
+So of course this procedure works fast,
+it only needs
+
+38
+00:02:22,365 --> 00:02:28,607
+amount of steps which is equal to
+the distance from node S to node U.
+
+39
+00:02:28,607 --> 00:02:35,163
+Which is definitely less than or equal to
+number of nodes in the graph for example.
+
+40
+00:02:35,163 --> 00:02:38,483
+But in most cases,
+it will be even less than that.
+
+41
+00:02:38,483 --> 00:02:42,851
+So in conclusion, we can now find
+the minimum number of flight
+
+42
+00:02:42,851 --> 00:02:45,791
+segments to get from one city to another,
+
+43
+00:02:45,791 --> 00:02:50,920
+if we have the graph of cities and
+available flights between them.
+
+44
+00:02:50,920 --> 00:02:53,980
+We can also not only find
+this number of flights.
+
+45
+00:02:53,980 --> 00:02:57,760
+But we can actually reconstruct
+the optimal path between some city and
+
+46
+00:02:57,760 --> 00:02:58,358
+another city.
+
+47
+00:02:58,358 --> 00:02:58,925
+For example,
+
+48
+00:02:58,925 --> 00:03:04,580
+you can go from Moscow to San Diego in
+the minimum number of flight segments.
+
+49
+00:03:04,580 --> 00:03:08,510
+And we also can build the tree of
+all shortest paths from one origin.
+
+50
+00:03:08,510 --> 00:03:13,930
+So we not only can build a shortest path
+from one node to another, but we actually
+
+51
+00:03:13,930 --> 00:03:19,610
+can build all the shortest paths from
+one node to all the nodes in the graph.
+
+52
+00:03:19,610 --> 00:03:21,990
+And all this works in time for
+
+53
+00:03:21,990 --> 00:03:25,200
+personal to number of edges plus
+number of nodes in the graph.

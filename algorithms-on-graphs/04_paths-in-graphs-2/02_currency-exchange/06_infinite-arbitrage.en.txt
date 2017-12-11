@@ -1,0 +1,120 @@
+Hi! In this video, you will finally learn how
+to detect whether infinite arbitrage from some source currency to some target
+currency is currently possible. And not only that, you will also learn how to actually
+implement it if it is possible. But first, let's learn a criterion for
+the existence of infinite arbitrage. The lemma states that if we
+consider some source currency S, which we want to exchange into
+some target currency u, and get as much as we want of currency
+u from a unit of currency S. And it is possible if and only if
+the node u corresponding to the currency u in the currency graph is
+reachable from some node w, which was relaxed on
+iteration number big V. Where big V is the number of
+nodes in the currency graph or just the number of different
+currencies which we consider. So we run the Bellman-Ford Algorithm for
+exactly big V iterations and if some node w was relaxed
+on the last iteration, and some node u is reachable from it,
+then it is possible to get as much as you want of u from
+the source currency S, and vice versa. If it is possible to get as
+much as you want of currency u, then it must be reachable
+from some node w, which is going to be relaxed on the last
+iteration on the Bellman-Ford's algorithm. So let's prove this lemma. First, we'll prove that if some
+currency u is reachable from w, which was relaxed on iteration number V,
+then the infinite arbitrage is possible. To see that, first note that,
+as w was relaxed on iteration number V, then we know from the previous
+video that w is reachable from some negative weight cycle, which in
+turn is reachable from the node S. It corresponds to
+the picture on the slide. And so we can get as much as we
+want of currency w from currency S. Because we can go from S,
+to the node x of the negative cycle, which is reachable from S,
+then go as many times as we want, through the negative cycle,
+return to the node x, and then go from this node x, to node w. And using this way, we will get
+as much as we want of currency w, and then we know that
+u is reachable from w. We know that w is reachable
+from the negative cycle. The negative cycle is reachable from S. So we can use this hallway
+from S to negative cycle, then go through the negative
+cycle as many times as we want. Then go to w from there, then go from there to u and this way we
+will get as much as we want of currency u. So infinite arbitrage
+is actually possible. Now let's prove the other way around. That if we can get as much as we
+want of currency u from currency S, then u must be reachable from some node w, which is going to be relaxed on the last
+iteration of the Bellman-Ford Algorithm. So first, let L be the length
+of the shortest path from S to u with at most V- 1 edges. Then we know that after V-1 iterations
+of the Bellman-Ford's algorithm, dist[u] is equal to exactly L. And we know that exists infinite
+arbitrage from S to u and so there exists some path shorter than L,
+strictly shorter, because we can get a path for
+any length which is arbitrarily small. And so in particular there it is,
+the path which is shorter than L. And so the dist[u] will be
+decreased at some point. It will become less than L also. But we know that by the iteration
+number V- 1, it is still equal to L. It is not less than L. So it will be still decreased even more
+on some iteration after iteration V- 1. So it will be decreased either
+on iteration number V or on some of the further iterations. Now let's note that if at some point,
+some edge from node x to node y was not relaxed, and also node x
+was not relaxed itself, then edge (x, y) will not be relaxed on the next
+iteration because nothing has changed. The dist[x] is the same. And dist[y] is not bigger than
+dist[x] plus length of edge (x, y) and this didn't change from this
+iteration to the next iteration. So this edge won't be relaxed
+on the next iteration. And this means that if node y
+was relaxed at some iteration, then there is some node x from which
+there is an edge to this node. And this node x was relaxed
+at some previous iteration. So basically,
+only those nodes which are reachable from nodes relaxed on previous iterations can
+be relaxed at the current iteration. And so we know that the node u will be relaxed at some iteration starting
+from iteration V and further, and this means that u is reachable from
+some other node or maybe the same node. But from node which was
+relaxed on iteration number V, note that u can be this node. For example, u can be relaxed
+exactly at iteration number V. And as we consider node to
+be reachable from itself, then this is a particular case, in which
+u was relaxed on iteration number V, and u is reachable from itself so, it is
+possible to get infinite arbitrage to u. But in any case, we'll prove
+that if infinite arbitrage from S to u is possible, then u is
+reachable from at least some node, maybe the same u which was
+relaxed on iteration number V. So now we have a criterion for
+existence of infinite arbitrage. How to apply that criteria. So this is an algorithm to
+detect infinite arbitrage. So we first do exactly V iterations
+of Bellman-Ford algorithm, and we save all the nodes which were relaxed
+on the last iteration, iteration number V. And let this set of nodes be denoted by A. Now we'll put all the nodes
+from A into the queue, and we'll use this queue for
+a breadth-first search. So we'll start our breadth-first search
+not from a queue which contains just the first node, from which we want
+to know all the reachable from it. But we will put all
+the nodes which were relaxed on iteration number V into the queue,
+and then start breadth-first search. And then this breadth-first search will
+find us all the nodes which are reachable from at least one of
+the nodes from the set A. So those will be exactly those nodes for
+which infinite arbitrage is possible. So, all those nodes and
+only those can have infinite arbitrage. And this is a way to find
+all target currencies for which infinite arbitrage from a fixed
+source currency S is possible. But this is not enough. What we want is to actually if
+infinite arbitrage is possible, is how to actually implement it. And here is the next algorithm. So let's suppose we already detected
+that the infinite arbitrage to some target currency u is possible, and we determined that using
+breadth-first search from the set A. So we need to augment this
+breadth-first search and we will remember the parent of each visited node,
+so that when a breadth-first search discovers a new node, it discovers it from
+some node which was discovered previously. This is the parent of this node. And this is what allows us to reconstruct
+the path from the source node to the end node in the regular
+breadth-first search algorithm. So we will do the same thing, and
+this will allow us to reconstruct the path to the target currency u from some node w,
+which was relaxed on iteration number V. Then we'll use the algorithm
+from the previous video to find the negative cycle from
+which w is reachable. Because we know that w was relaxed
+on iteration number V, and so it is reachable from some negative cycle,
+which is in turn reachable from S. And if we go back by the parent pointers
+from w, we will find this negative cycle. So we'll find both this negative cycle and
+the path from it to w. And of course we can also find a path
+from the source currency to this negative cycle by, for example,
+launching a regular breadth-first search from S until we encounter
+some node of that negative cycle. And then combining all that, we will have
+a path from S to the negative cycle, through which we can then go by
+as many iterations as we want. Then we'll go by a path from
+this negative cycle to w. And then we'll go by a path from w to u,
+which you already know. And that gives us a way
+implement infinite arbitrage from the source currency S
+to the target currency u. So in conclusion, we can now implement
+the best possible exchange rate, in the case it exists and
+there is no infinite arbitrage. And we can determine whether actually
+infinite arbitrage is possible currently. And we can actually implement infinite
+arbitrage from a given source currency to given target currencies. And in a more general and
+abstract way we can find shortest paths, not only in the graphs where
+all the edges are positive, like graphs of navigation systems with
+positive times to go through an edge and length of the edge, but also in the graphs
+where negative edge weights are possible, such as the graphs of currency exchange. So we can basically find
+shortest paths correctly in any graphs with weighted edges. That's what we've learned in this lesson.

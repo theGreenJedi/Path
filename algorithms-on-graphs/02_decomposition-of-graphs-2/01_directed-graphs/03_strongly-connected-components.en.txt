@@ -1,0 +1,104 @@
+Hello everybody, welcome back
+to our graph algorithms course. Today we're going to be talking about
+notions of connectivity in directed graphs which it turns out will be a little
+bit more complicated than those in the undirected case. And we'll talk about various
+notions then get to this idea of a strongly connected component. So in undirected graphs,
+connectivity is a pretty simple notion. We have these connected components where any two things in the same component
+you can get from one to the other. And if you've got two
+different components, they've got no edges between them. Nothing connects at all. In directed graphs the story
+is a bit more complicated. So let's consider
+the following example graph. Now in one sense this graph is connected,
+you can't separate it out into two islands such that you can't reach
+one island from the other. On the other hand if you want to look at
+which vertices can be reached from which others, the story is
+a bit more complicated. From vertex D it turns out you can
+reach every other vertex in this graph. However, D is a source for attacks. Once you leave D, there's no way to get back to it,
+there are just no edges that come into it. Now A just sort of, sorry,
+A F is sort of the opposite here. From every vertex in the graph you can
+reach F, but once again, once you do, you can't get back. Then again, G and A, neither of them
+can be reached from each other. H and I, you can get between them but
+once you leave, again, you can't get back. It's sort of a lot more complicated if we want to figure out which things
+are reachable from which others. Now, there are actually a bunch of
+possible notions of connectivity that show up in directed graphs. The first one is sort of that these two
+points can't be separated from each other, that you can't put them on
+two different islands where nothing in one island connects
+to anything in the other. And this sort of says that it means you
+can get from one vertex to the other, following edges in any all direction. And I mean, okay, this says you
+can't put them on different islands, but it doesn't say you can reach
+either from the other one without breaking traffic laws by following
+one-way streets in the wrong direction. So, a second notion is that maybe
+we want one of the vertices to be reachable from the other using the
+actual edges and their intended direction. And this is a more practical notion. However, it has its weird irregularities
+that makes it hard to deal with. So, third notion that's maybe a little
+bit stronger is that you should have two vertices, v and w,
+where not only can you reach w from v, but you can also go back and
+reach v from w. And this third notion turns
+out to be pretty nice. So when we say that two vertices v and w in a directed graph are connected,
+we mean this. We mean that you can reach v from w,
+and also can reach w from v. But the theorem now is that using this
+notion we actually recover much of the power that we had
+in the undirected case. A directed graph can always be partitioned
+into strongly connected components where two vertices are in the same
+strongly connected component, if and only if they are connected to each other. So, for example, the graph that we looked
+at has five strongly connected components. After you can get it all
+around around there, but there's no way to get
+from it to anything else. H and I you can get from one to the other
+but not necessarily to other things. A, B, C and E from any of those four
+vertices you can reach any other one, but once you leave again you can't get back. D and G are each their own components and
+that's it. Within each of these components you can
+get from everywhere to anywhere else. But again once you leave it,
+you can't come back. So to make sure we are on the same page,
+we have the following graph. What is the strongly connect
+component of A in this graph? Well, it turns out to
+be the following set. A, B, E, F, G, and
+H are in this component. The other ones aren't. And to see this, we can see that sort of you can
+actually get around any of these six. A goes to E goes to H goes
+to F goes to B goes back. B goes to G goes to H
+goes to F goes back to B. Sort of you can use these to navigate
+around, everywhere you like. But from D you can't get to
+D from this other component. And C and I, once you get there you can't
+get back to the other vertices here. So the result is that you
+have a directed graph. It can always be partitioned into
+strongly connected components. Such that two vertices are connected if
+and only if they're in the same component. And the proof of this is
+very similar to the proof of the sort of similar thing
+in the undirected case. Again, we need to show that
+connectivity in the strong sense is an equivalence relation. That if u is connected to v, and v is
+connected to w, then u is connected to w. But while if these connections happen,
+there's a path from u to v, and a path from v to w. And so pushing them together,
+there's a path from u to w. Similarly, there's a path
+from w back to u, and from v back to, sorry,
+w back to v and v back to u. And composing them again gives
+you a path from w back to u. And so that completes our proof. Now there's something more to say though. Once we've split our graph
+into connected components, they still have edges connecting
+these components to each other. So one useful thing to do is to
+draw what's known as the metagraph, which sort of tells us how these connected
+components connect to each other. So this metagraph has vertices that
+correspond to the connected components of the original graph. And you have an edge between the two of
+them if there's an edge in that direction connecting those vertices. So D connects to A, so there's an edge
+between D and the component of A. It also connects to G, A, B, C or E, those guys have edges
+leading to H including F and so they have edges into those components and
+so on and so forth. And this is our metagraph. Now one thing to note about this metagraph
+is if you stare for a little while, you can actually see that it's a deck and
+this is in fact no coincidence. It turns out that the metagraph
+of any graph G is always a DAG. Now the proof of this is not so
+hard, suppose that it's not. What that means is that there's a cycle. And what happens if you have
+a cycle is that every node in the cycle can be reached
+in every other node because you just travel along
+the cycle until you get there. Now, this would be true if
+they were individual vertices, but it's also true if you have a cycle
+between strongly connected components. Because you just, since everything in one
+component connects to everything else, you can just get to the guy
+leading to the next component, and then to the vertex leading
+to the next component, and this sort of follows all
+the way around the cycle. And so everything in all of those
+components are all connected to each other. But since everything is connected, they should all be the same
+strongly connected components. However the single vertices of
+the metagraph are strongly connected components, so you can't have two vertices
+that are connected to each other and that gives us a contradiction. Okay, so in summary, we can always partition our vertices
+into strongly connected components. We have a metagraph, describes how
+these strongly connected components connect to each other, and
+this metagraph is always a DAG. So, this is what we have. Next time what we're going to do is we're going to actually talk
+about how to compute these things. How do we compute the strongly
+connected components of the graph, how do we find the metagraph? So, come back for the next lecture and
+we'll talk about that.

@@ -1,0 +1,69 @@
+Hi, in the previous lesson you learned
+to find shortest paths in the graph with non-negative edge weight. In this lesson,
+you will learn to find shortest paths even in the graphs where some of
+the edge weights can be negative. We will explore that using
+a problem about currency exchange, which doesn't seem to have anything
+to do with shortest paths. But we will soon find out it does. So the problem about
+currency exchange is that you are given some possibilities that
+you can convert currency into another. For example, US dollars to Russian rubles, or rubles to Euros, or
+Euros to Norwegian crowns. And what you want to do is
+take your initial $1,000 and convert it into Russian rubles. Potentially doing many
+conversions on the way, such that you get as many Russian
+rubles as you can in the end. So one question is what is the maximum
+amount of rubles you can get? And another question is actually
+can you get as many as you want? And the same question about US dollars. Can you get as many US
+dollars as you want? It may seem that if you can get
+as many rubles as you want, then you will also be able to
+get as many dollars as you want. But that's not always the case,
+it depends on your restrictions. For example, if you lived in the USSR,
+you might be able to get some rubles for dollars you got from your
+foreign country trip. But it's very unlikely you could
+buy some dollars inside USSR. So in this problem we assume that
+you have some restrictions on which directions you can convert currencies and
+what are the rates. So this is an illustration from Wikipedia
+article called Triangular Arbitrage which illustrates the fact that sometimes
+it is possible to make three trades and exchange first dollars to Euros,
+then Euros to Great Britain pounds. And then pounds to US dollars, so
+that you generate some profit. In this case, given $5 million, you generate a profit of 25,000,
+just by doing those three trades. These triangular arbitrages
+exist very rarely and only due to some market inefficiencies. But in theory, this is possible. And this example has some
+numbers on the edges. For example, the rate of conversion
+from dollars to Euros is 0.81. And you get 1.19 Euros per British pound. And you get 1.46 dollars
+per British pound. So given these conversion rates and
+of course those should also count for commissions and any other money
+that you actually don't get. So given those numbers, you determine
+exactly how many dollars will you get from 5 million initial if you do all
+the trades shown on the picture. So we will be discussing this problem, how much you can get of each currency and
+if it's actually possible to get more of the currency you
+had initially doing some trades. So how does this conversion work? If we have some path, if we convert first
+from dollars to Euros then Euros to pounds then some other conversions,
+then we come to Norwegian crowns and then we finally convert them to rubles. Then how many rubles do
+we get per 1 US dollar? Well, it is determined by the product of
+the conversion rates written on the edges. So for example, if for $1,
+we get 0.88 Euros and for 1 Euro we get 0.84 pounds,
+and so one, and for 1 Norwegian crowns we get 8.08 rubles. Then for 1 US dollar we will get the
+product of all those numbers in rubles. That's how conversion rates work,
+if you account, again, for commissions and
+other payments in each trade inside this number,
+which right on the edge. So what are the possibilities for
+exchanges? It may look that there is only one way. You can just convert from
+dollars to rubles, or maybe use some intermediate currency. But actually, there is an infinite
+number of possibilities. For example, in this particular case,
+you could exchange dollars to Euros, Euros to pounds, pounds to dollars,
+and go through this cycle for as many times as you want,
+then convert to rubles. Or convert to Euros and then to rubles. So there are many, many possibilities, and the result of each such
+path through the graph is the product of the numbers
+written on the edges of this graph. So the problem formulated
+in mathematical terms, is that if you're given a currency
+exchange graph with weighted directed edges denoted by ei,
+between some pairs of currencies. Maybe you can convert some
+pairs of currencies but you are not able to convert some others. And this graph doesn't have to
+be symmetrical or undirected. So it is possible that you can convert
+dollars to rubles but not vice versa. And each edge has a conversion
+rate corresponding to this pair of currencies and it written as
+a weight of this edge r with index ei. And what you want to do
+is maximize the product of the weight of the edges
+over all positive paths. And a potentially infinite number of
+paths, from the node corresponding to US dollars to the node corresponding
+Russian rubles in this graph. Okay, and we could substitute these
+two currencies by any other pair, it doesn't matter.

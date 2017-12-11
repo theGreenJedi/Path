@@ -1,0 +1,135 @@
+In this video,
+we can see the Prim's Algorithm. Recall that in this algorithm, the set X always forms a tree,
+and we regularly grow it. At each iteration we attach a new vertex
+which is not currently in the tree to the current tree by
+the lightest possible edge. And this is in fact very similar
+to Dijkstra's algorithm. Recall that Dijkstra's algorithm finds
+the shortest paths between two nodes by constructing the tree of shortest
+path from a given source node. We will now illustrate
+this on a toy example. Consider the following toy
+example that we've already seen. We are now going to grow a tree which will
+eventually become a minimum spanning tree. At each iteration we're going to
+select the vertex such that it can be attached to the current tree
+by the lightest possible edge. To select such a vertex we will use
+the priority queue data structure. So initially, we know nothing about
+the graph, so the cost of attaching each vertex to the current tree
+is just equal to infinity. So initially the priority was
+a cost of attaching each vertex to the current tree is equal to infinity. That is, we show here the priorities
+of all other vertices in the priority queue data
+structures that we're going to use. Then we declare some vertex,
+just randomly picked vertex, as a root of the tree that
+we are going to grow. Assume that we consider
+this vertex as a root. Now we can change its
+priority to be equal to 0. It costs us nothing to attach
+this vertex to the current tree. It is the root. Now we need to process all
+address going out of this tree. Namely, we change the priority
+of this vertex to 1 because we see that there is an edge of cost 1 that
+attaches this vertex to our current tree. And for
+this vertex we change its priority to 8. Okay, now we have five
+vertices in our priority cube, all of the vertices except for the root. And the cost of one of them is
+equal to 1 because of priority. The priority of the second
+one is equal to 8, and the priority of the remaining three
+vertices are equal to plus infinity. So we select the vertex with
+the smallest priority, this is 1. So we attach it to our current tree. So our current tree looks as follows. Now we need to process all the address
+that grow out of this tree. Namely, when we add a new vertex, we need to check whether new vertices
+can be attached to this vertex. When we see this, first we see that
+there is a match of weight 6 so we need to change the priority of
+this vertex to 6 because it now can be attached to the current
+tree by the edge of weight 6. Also we change the priority
+of this vertex to 9. Okay, now we have four vertices in
+our priority queue data structure. And we select the vertex
+with the minimum priority, which is the vertex with priority 6. So now this vertex is also in our tree which is joined by this
+edge to our current tree. Now we need to process all the edges
+going out of this vertex to the vertices that are not
+currently in our tree. When processing the edges, we change
+the priority of this vertex to 4. And we change the priority
+of this vertex to 5. Namely, we just found a cheaper way of connecting this vertex
+to our current tree. Okay, now we have three
+vertices in our priority queue so we extract the minimum value. This gives us the following vertex,
+so we include it in our tree, which gives us, and
+attach it by this node. Then we need to process
+all the edges going out of this vertex to vertices that
+are currently not in the tree. We see that we need to change
+the priority of this vertex to 1 because there is a vertex of, because there
+is a match of weight 1 that connects this vertex to, there's a vertex
+which is currently in the tree. And we need to change this priority to 2,
+right? Okay, great, now we have two vertices in
+our priority queue, one of priority 1, and one of priority 2. So we select this vertex. Now it is in our tree, and
+it is connected by this edge, right? When processing all the edges
+going out of this vertex, we see that there is a match of weight 3. However, it doesn't decrease
+the course of attaching the remaining vertex to the tree. So we keep the perimeter
+of this vertex unchanged. So in the last step, we extract the only
+remaining vertex which is this one. And we see that the cost of
+attaching this vertex to the current tree is equal to 2, and
+this is done by this edge. So, now, let's compute the total
+weight of the resulting tree. It is 2 plus 1 plus 4, which gives us 7. Plus 6, which is 13. Plus 1, so
+this gives us the tree of total weight 14. We now provide the full pseudocode
+of the Prim's algorithm. As we've discussed before, it is very
+similar to Dijkstra's algorithm. So, once again the Prim's Algorithm
+gradually grows the tree which eventually turns
+into a minimum spanning tree. We used the priority queue
+data structure to keep for each vertex the minimum cost of
+attaching it to the current tree. At each iteration we use priority
+queue to quickly find the vertex which can be attached to the current
+vertex by the lightest edge. So specifically we do the following. Initially we have for
+each vertex we do not know the cost of attaching
+it to the current tree so we just put infinity into the array cost. We'll also going to keep
+array parent which we'll actually define as a tree, okay. Initially we do not, for each vertex of
+our graph, we do not know its parent. Then we select any vertex of our graph,
+u0. And we declare this vertex as the root
+of the tree which we are going to grow. We then update cost[u0] to be equal to 0. So, we say that attaching this node,
+this vertex to the current tree is, the cost of attaching this node is equal
+to 0 because it is already in our tree. We then create a priority queue. So at this point and
+we use costs as priorities. At this point all the vertices
+lie in priority queue. And the priorities are all of them except
+for u0 are equal to plus infinity, while the priority of u0 is equal to 0,
+okay? Then we do the following. At each iteration, we extract the vertex with the minimal priority
+out of our priority queue. This means that we're actually attaching
+this vertex to the current tree. When we do this, we also need to go
+through all the neighbors of the vertex V and to check whether the edge that
+leads from V to this neighbor of V, it has actually cost less
+than the current cost, or than the current priority
+of this neighbor. Specifically we do the following, when
+we add the vertex V to our current tree, we iterate through all its neighbors. This is not in this for loop. So we iterate through all
+neighbors z of the vertex v. And we check if z is still in
+the priority queue, namely, if z is not in our current tree,
+and if the current cost of z is greater than the weight
+of the edge from v to z. Then, this means that
+we've just found a cheaper way to attach the vertex z
+to the current tree, right? And in this case,
+we just update the value of cost at z. So we assign cost at z to be equal
+to the weight of the edge v z. And we also say that in this case
+if we attach the vertex v to the current tree,
+then this will be done through the edge v, z, which means that v is
+going to be the parent of z. Finally, we notify our priority
+queues that we need to change the priority of the vertex
+z to the updated value cost of z. Since the Prim's Algorithm is very
+similar to Dijkstra's Algorithm, its running time is also similar. So essentially,
+what we are doing here is the following. We make V calls to ExtractMin procedure,
+right, and also we make at most E calls to
+ChangePriority method, right? And the total running time depends on the implementation of
+the priority queue data structure. If we just use array to
+store all priorities and at each iteration, this means that
+change in priority is very cheap, because we just change
+the corresponding value in our array. However, for finding the minimum value,
+we need to scan the whole array. In this case, we get V squared
+upper bound on the running time. Why is that? Well once again, because ExtractMin in
+this case has running time big O of V. So this is V times big O of V, while ChangePriority has
+running time big O of 1, right. It is a constant time operation. Since the numbers of edges in
+the graph is at most V squared, this gives us big O of V squared. If on the other hand we implement
+our priority queue data structure as a binary heap, then both these operations
+have running time big O of log V. In this case, we have the following
+running time, V + E times log V. And since, in our case, again the graph
+is connected, E is at least 3 minus 1. So this allows us rewrite the whole
+expression as big O of E times log V. So once again the running time
+depends on implementation. If we use array to implement our
+priority queue, this gives us V squared. If we use binary heap,
+this gives us E log V. Which one is better depends on
+whether our graph is dense or not. We are now ready to summarize. In this module we considered
+two greedy algorithms for the minimum spanning tree problem. And it uses the following idea. At each iteration we add the next
+lightest edge to our current solution if this edge doesn't produce a cycle. To check whether the current
+edge produces a cycle or not, we use disjoint sets data structure. Namely, for the current edge
+uv we just check whether u and v belong to the same connected component. If they do, we just skip the current edge. The next algorithm is due to Prim. It uses a slightly different but
+still greedy strategy. Namely, we greedily grow a tree. At each iteration we attach a new vertex
+to the current tree by a lightest possible edge. To find such a vertex quickly we use
+the priority queue data structure.

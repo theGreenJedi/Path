@@ -1,0 +1,691 @@
+1
+00:00:00,260 --> 00:00:03,900
+In this lesson, we will study
+the idea of bidirectional search.
+
+2
+00:00:03,900 --> 00:00:09,020
+And we will come up with the bidirectional
+version of the Dijkstra's algorithm.
+
+3
+00:00:09,020 --> 00:00:12,760
+But first, let's recall what is
+the problem that we are solving.
+
+4
+00:00:12,760 --> 00:00:14,730
+In mathematical terms,
+we are given a graph G,
+
+5
+00:00:14,730 --> 00:00:17,860
+which can be either directed or
+undirected.
+
+6
+00:00:17,860 --> 00:00:19,880
+But it has nonnegative edge weight.
+
+7
+00:00:19,880 --> 00:00:20,720
+This is important.
+
+8
+00:00:20,720 --> 00:00:24,650
+In all the lectures of this module,
+we will work with only the graphs with
+
+9
+00:00:24,650 --> 00:00:28,680
+nonnegative edge weights,
+such as travel times or distances.
+
+10
+00:00:28,680 --> 00:00:33,600
+We're also given a specific source
+vertex as, and the target vertex T.
+
+11
+00:00:33,600 --> 00:00:37,570
+And we want to find the shortest path
+between S and T in the graph G, so
+
+12
+00:00:38,850 --> 00:00:44,100
+the first question is why not just use the
+Dijkstra algorithm that we already know?
+
+13
+00:00:44,100 --> 00:00:48,990
+It has pretty good worst case complexity,
+E plus V times log V,
+
+14
+00:00:48,990 --> 00:00:51,670
+this is pretty good, right?
+
+15
+00:00:51,670 --> 00:00:54,530
+Can we even do better in the worse case?
+
+16
+00:00:54,530 --> 00:00:56,530
+Well, it turns out that we can.
+
+17
+00:00:56,530 --> 00:01:02,490
+Mikkel Thorup came up with an algorithm
+in 1999 that solves this problem for
+
+18
+00:01:02,490 --> 00:01:04,690
+undirected graphs in linear time.
+
+19
+00:01:04,690 --> 00:01:09,250
+Linear times in terms of number of
+edges and vertices of the graph.
+
+20
+00:01:09,250 --> 00:01:13,140
+Such algorithm is still not known for
+directed graphs, but
+
+21
+00:01:13,140 --> 00:01:16,290
+for undirected graphs,
+we can definitely do better.
+
+22
+00:01:16,290 --> 00:01:20,010
+And for directed graphs,
+we can do better also.
+
+23
+00:01:20,010 --> 00:01:23,910
+But we just still don't know
+the linear time algorithm.
+
+24
+00:01:23,910 --> 00:01:28,232
+However, we're not just interested
+in the worst time complexity.
+
+25
+00:01:28,232 --> 00:01:32,060
+We're interested in the practical
+performance of our algorithms.
+
+26
+00:01:32,060 --> 00:01:36,230
+And in practice,
+the classical Dijkstra's algorithm,
+
+27
+00:01:36,230 --> 00:01:40,280
+on a graph of USA, with 20 million
+variances and 50 million edges.
+
+28
+00:01:40,280 --> 00:01:43,880
+Will work roughly, for
+several seconds, on average.
+
+29
+00:01:45,008 --> 00:01:49,710
+Several seconds, sounds like a good thing,
+but when you use, for example,
+
+30
+00:01:49,710 --> 00:01:52,800
+Google maps, you don't want to wait for
+several seconds.
+
+31
+00:01:52,800 --> 00:01:55,800
+You want the results on your
+screen in a blink of an eye,
+
+32
+00:01:55,800 --> 00:01:59,300
+which in practice means that you
+want them under 100 milliseconds.
+
+33
+00:01:59,300 --> 00:02:00,880
+And not only you,
+
+34
+00:02:00,880 --> 00:02:06,370
+but millions of people simultaneously
+want those results in a blink of an eye.
+
+35
+00:02:06,370 --> 00:02:09,980
+So, that's why we need something
+significantly faster for
+
+36
+00:02:09,980 --> 00:02:10,850
+such implications.
+
+37
+00:02:12,030 --> 00:02:16,490
+Now, let's consider how Dijkstra's
+algorithm progresses through the graph.
+
+38
+00:02:16,490 --> 00:02:21,250
+You remember that it processes vertices
+in order of increasing distance.
+
+39
+00:02:21,250 --> 00:02:24,010
+It starts with the source vertex S, and
+
+40
+00:02:24,010 --> 00:02:28,350
+then it processes it by
+considering the outgoing edges and
+
+41
+00:02:28,350 --> 00:02:34,700
+finding the vertices on the other end of
+those edges and relaxing those edges.
+
+42
+00:02:34,700 --> 00:02:40,100
+And so,
+it goes to these vertices at distance one.
+
+43
+00:02:40,100 --> 00:02:44,080
+And the number near the edges
+are the weights of the edges.
+
+44
+00:02:44,080 --> 00:02:48,430
+And the numbers inside the nodes
+are the distances to those nodes.
+
+45
+00:02:48,430 --> 00:02:53,650
+And then it goes to another layer
+of nodes at distance two, and
+
+46
+00:02:53,650 --> 00:02:58,980
+so, you see that Dijkstra's
+algorithm actually goes in circles
+
+47
+00:02:58,980 --> 00:03:04,000
+around the source vertices,
+and this is not coincidence.
+
+48
+00:03:04,000 --> 00:03:07,860
+You remember the Lemma that
+when a vertex U is selected
+
+49
+00:03:07,860 --> 00:03:12,160
+via the ExtractMin procedure
+in the Dijkstra's algorithm.
+
+50
+00:03:12,160 --> 00:03:15,110
+The estimate of distance, to this node.
+
+51
+00:03:15,110 --> 00:03:16,010
+Just a few.
+
+52
+00:03:16,010 --> 00:03:17,990
+It's guaranteed to be equal,
+
+53
+00:03:17,990 --> 00:03:22,620
+to the actual distance,
+from the source vertex to protects you.
+
+54
+00:03:22,620 --> 00:03:28,510
+And also, all the nodes,
+on the distance smaller than that,
+
+55
+00:03:28,510 --> 00:03:31,240
+have already been
+processed by that moment.
+
+56
+00:03:31,240 --> 00:03:34,130
+This is guaranteed in
+the Dijkstra's algorithm.
+
+57
+00:03:34,130 --> 00:03:38,550
+So, actually,
+a circle of processed vertices grows.
+
+58
+00:03:40,010 --> 00:03:43,910
+And this is how it looks
+if we want to find
+
+59
+00:03:43,910 --> 00:03:48,260
+a shortest path from source
+vertex s to the target vertex t.
+
+60
+00:03:48,260 --> 00:03:52,580
+We start growing the circle
+around the node s.
+
+61
+00:03:52,580 --> 00:03:57,560
+Until it touches point T, and
+as soon as it touches point T,
+
+62
+00:03:57,560 --> 00:04:00,590
+we can actually stop
+the distrust algorithm.
+
+63
+00:04:00,590 --> 00:04:01,880
+This is called earnest stopping.
+
+64
+00:04:01,880 --> 00:04:05,520
+Instead of scanning all
+the vertices in the graph and
+
+65
+00:04:05,520 --> 00:04:10,510
+finding the distance from S to
+all other vertices in the graph,
+
+66
+00:04:10,510 --> 00:04:14,750
+we only find the distances
+to the notes we need.
+
+67
+00:04:14,750 --> 00:04:19,390
+To actually find the distance to the node
+T, and the shortest path to node T.
+
+68
+00:04:20,530 --> 00:04:24,560
+This is an optimization of
+distress algorithm already,
+
+69
+00:04:24,560 --> 00:04:25,950
+but this is the simplest one.
+
+70
+00:04:27,160 --> 00:04:30,000
+And here's the idea for
+the bidirectional search.
+
+71
+00:04:30,000 --> 00:04:34,840
+Instead of going from S and growing
+the circle until it touches point T,
+
+72
+00:04:34,840 --> 00:04:40,370
+we want to go simultaneously forward from
+S, and backward from T until we meet.
+
+73
+00:04:40,370 --> 00:04:43,560
+And as soon as we meet, we can find
+the shortest path between S and
+
+74
+00:04:43,560 --> 00:04:47,990
+T by combining the half of
+the path from S to the mid-point,
+
+75
+00:04:47,990 --> 00:04:51,340
+and the half from the meeting point to T.
+
+76
+00:04:51,340 --> 00:04:55,280
+In the algorithm,
+we won't go literally simultaneously.
+
+77
+00:04:55,280 --> 00:04:58,500
+We will take alternating turns from S and
+from T.
+
+78
+00:04:58,500 --> 00:05:02,690
+We'll do a typical digstress
+algorithm from us.
+
+79
+00:05:02,690 --> 00:05:07,640
+We will do one turn of that algorithm,
+and then we will alternate to T, and
+
+80
+00:05:07,640 --> 00:05:11,680
+we will make one turn of the digstress
+algorithm backwards from T.
+
+81
+00:05:11,680 --> 00:05:16,560
+To do that, we will need not only to
+know the outgoing edges from each node,
+
+82
+00:05:16,560 --> 00:05:20,480
+but also all the incoming
+edges to each node.
+
+83
+00:05:20,480 --> 00:05:26,510
+But other than that, we will do the
+regular Dijkstra search from S forward,
+
+84
+00:05:26,510 --> 00:05:30,020
+and the regular Dijkstra search from T,
+but backwards.
+
+85
+00:05:30,020 --> 00:05:33,280
+And we will alternate
+the turns of those Dijkstra's.
+
+86
+00:05:33,280 --> 00:05:38,620
+So, then we will make one more turn from
+S, and one more turn backwards from T.
+
+87
+00:05:38,620 --> 00:05:43,040
+And then one more turn from S, and
+then one more turn backward from T.
+
+88
+00:05:43,040 --> 00:05:49,780
+And now, we see that the vertex in the
+middle was discovered by both algorithms.
+
+89
+00:05:49,780 --> 00:05:52,170
+The forward one and the backward one.
+
+90
+00:05:52,170 --> 00:05:56,130
+And now, we can reconstruct
+the shortest path from S to T, and
+
+91
+00:05:56,130 --> 00:06:03,415
+we can fill in the correct distances
+from S to all the nodes on that path.
+
+92
+00:06:03,415 --> 00:06:10,770
+Now, let's see how it works compared
+to the usual Dijkstra algorithm.
+
+93
+00:06:10,770 --> 00:06:14,240
+So, the usual distance
+algorithm will cover and
+
+94
+00:06:14,240 --> 00:06:19,200
+scan the nodes in this big circle with
+the center in s and touching point T.
+
+95
+00:06:19,200 --> 00:06:24,560
+What will happen in the directional search
+is we will be growing two circles of
+
+96
+00:06:24,560 --> 00:06:27,580
+roughly the same radius until they touch.
+
+97
+00:06:28,770 --> 00:06:34,450
+And this area, covered by these
+two smaller circles, is roughly
+
+98
+00:06:34,450 --> 00:06:39,610
+proportional to the number of vertices
+scanned during the bidirectional search.
+
+99
+00:06:39,610 --> 00:06:46,040
+So, let's denote the big circle by C1,
+and the two smaller circles by C2 and C3.
+
+100
+00:06:47,100 --> 00:06:51,620
+And the distance from S to the meeting
+point V, which is roughly equal to
+
+101
+00:06:51,620 --> 00:06:56,460
+the distance from the meeting point V to
+the target node, T, we'll denote by R.
+
+102
+00:06:57,500 --> 00:07:02,320
+Now, let's estimate the number
+of covered vertices by the area
+
+103
+00:07:02,320 --> 00:07:03,610
+of the corresponding circle.
+
+104
+00:07:03,610 --> 00:07:10,990
+So, the area of the circle C1 is
+pi times the radius of C1 squared.
+
+105
+00:07:10,990 --> 00:07:16,190
+The radius of C1 is 2r, so
+its square is 4r squared.
+
+106
+00:07:16,190 --> 00:07:19,420
+And in the end area of
+C1 is four pi r squared.
+
+107
+00:07:20,490 --> 00:07:25,210
+And the area covered by the directional
+search is the sum or areas of C2 and C3.
+
+108
+00:07:25,210 --> 00:07:29,620
+The areas of C2 and C3 are roughly equal.
+
+109
+00:07:29,620 --> 00:07:33,410
+And the area of C2 is pi r squared.
+
+110
+00:07:33,410 --> 00:07:36,900
+So, the total area is two pi r squared.
+
+111
+00:07:36,900 --> 00:07:43,227
+And we see that the total area covered
+by bi directional search is roughly
+
+112
+00:07:43,227 --> 00:07:50,091
+twice smaller than the area usually
+covered by the usual distress algorithm.
+
+113
+00:07:50,091 --> 00:07:55,859
+So, let's see what happens actually
+when the real world networks
+
+114
+00:07:55,859 --> 00:08:02,464
+when we use the simple distress algorithm,
+and the bi directional search.
+
+115
+00:08:02,464 --> 00:08:09,640
+This is a part of the map of USA with 1.6
+million vertices and 3.8 million arcs.
+
+116
+00:08:09,640 --> 00:08:14,246
+And we're finding the best shortest
+path in terms of the travel time.
+
+117
+00:08:14,246 --> 00:08:18,860
+So here, we try to find the shortest path
+
+118
+00:08:18,860 --> 00:08:23,800
+from the small blue rectangle
+to the small green rectangle in
+
+119
+00:08:23,800 --> 00:08:29,160
+the right edge of the map,
+and we color it with green.
+
+120
+00:08:29,160 --> 00:08:32,980
+All the notes scanned by
+the regular dextrose algorithm
+
+121
+00:08:32,980 --> 00:08:34,890
+while it was looking for the surest path.
+
+122
+00:08:36,200 --> 00:08:40,820
+And on the next picture here, we see
+the result of the bid directional search.
+
+123
+00:08:40,820 --> 00:08:44,440
+And you see that there is
+something similar to what we
+
+124
+00:08:44,440 --> 00:08:46,380
+draw on the previous slides.
+
+125
+00:08:46,380 --> 00:08:50,230
+So, there is something like a blue
+circle around the starting point, and
+
+126
+00:08:50,230 --> 00:08:55,770
+there is something like a green
+circle around the target vertex.
+
+127
+00:08:55,770 --> 00:09:00,810
+The green circle is cut in half
+because of the edge of the map, but
+
+128
+00:09:00,810 --> 00:09:05,170
+in general,
+this is the picture we imagine.
+
+129
+00:09:05,170 --> 00:09:09,430
+And here is another example
+on the map of the full US.
+
+130
+00:09:09,430 --> 00:09:14,180
+And we see a full circle
+around the green point,
+
+131
+00:09:14,180 --> 00:09:19,870
+although it is not like a real circle,
+it's more like a related square.
+
+132
+00:09:19,870 --> 00:09:23,550
+But this is due to the way
+we humans build the roads,
+
+133
+00:09:23,550 --> 00:09:25,440
+because we build them from north to south.
+
+134
+00:09:25,440 --> 00:09:28,980
+And from east, to west very often, and
+
+135
+00:09:28,980 --> 00:09:33,780
+that's why the circle is more like
+a square rotated by 45 degrees.
+
+136
+00:09:35,350 --> 00:09:41,380
+And the blue point is surrounded by
+something more like a half a circle,
+
+137
+00:09:41,380 --> 00:09:43,570
+which is cut by the shore.
+
+138
+00:09:46,310 --> 00:09:50,680
+So, roughly we get a 2x
+speedup on the road networks,
+
+139
+00:09:50,680 --> 00:09:52,550
+which is good, but not great.
+
+140
+00:09:52,550 --> 00:09:56,730
+We were hoping for something like
+thousands of times speed up.
+
+141
+00:09:56,730 --> 00:10:02,680
+But this is true for road networks, but
+what if we look at social networks?
+
+142
+00:10:02,680 --> 00:10:06,240
+And in the next video, we will see
+that indeed for social networks,
+
+143
+00:10:06,240 --> 00:10:09,460
+the bi directional search idea
+works exceptionally well.
+
+144
+00:10:09,460 --> 00:10:13,750
+And it will work thousands of times faster
+that the regular Dijkstra's algorithm.

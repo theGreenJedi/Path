@@ -1,0 +1,380 @@
+1
+00:00:00,858 --> 00:00:03,558
+Hello everybody,
+welcome to the course on graph algorithms.
+
+2
+00:00:03,558 --> 00:00:07,011
+The first unit in this course,
+we're going to be talking about various
+
+3
+00:00:07,011 --> 00:00:10,418
+algorithms to compute various
+sorts of decompositions of graphs.
+
+4
+00:00:10,418 --> 00:00:11,595
+But to begin with,
+
+5
+00:00:11,595 --> 00:00:15,421
+we're going to start with the very
+basics about what is a graph,
+
+6
+00:00:15,421 --> 00:00:19,998
+what are they good for, and how do we
+sort of interpret them and draw them.
+
+7
+00:00:19,998 --> 00:00:24,561
+So to start with,
+a graph is sort of an abstract idea, and
+
+8
+00:00:24,561 --> 00:00:30,758
+it's an abstraction that sort of
+represents connections between objects.
+
+9
+00:00:30,758 --> 00:00:34,525
+Graphs are useful both in computer
+science and elsewhere in the world,
+
+10
+00:00:34,525 --> 00:00:37,938
+because they can be used to
+describe many important phenomena.
+
+11
+00:00:37,938 --> 00:00:41,148
+For example, the Internet often
+can be thought of as a graph,
+
+12
+00:00:41,148 --> 00:00:45,376
+where you've got various web pages and
+theyre connected to each other by links.
+
+13
+00:00:45,376 --> 00:00:49,124
+And this is sort of a very, very high
+level view of the Internet that sort
+
+14
+00:00:49,124 --> 00:00:53,196
+of pays no attention to the content of
+a given page and other things like that.
+
+15
+00:00:53,196 --> 00:00:54,293
+On the other hand,
+
+16
+00:00:54,293 --> 00:00:59,025
+if you want to do something like Google's
+page rank algorithm, make sort of heavy
+
+17
+00:00:59,025 --> 00:01:03,434
+use of this very high level view of
+the Internet and connectivity within it.
+
+18
+00:01:03,434 --> 00:01:06,425
+Another example is maps,
+you can think of maps as a graph,
+
+19
+00:01:06,425 --> 00:01:09,854
+sort of where you have intersections
+that are connected by roads.
+
+20
+00:01:09,854 --> 00:01:12,559
+And this is a view that would
+be very useful if you, say,
+
+21
+00:01:12,559 --> 00:01:14,874
+wanted to plot a course
+between two locations.
+
+22
+00:01:14,874 --> 00:01:17,738
+You need to find some connections,
+
+23
+00:01:17,738 --> 00:01:22,994
+some path along this map that gets
+you from one place to the other.
+
+24
+00:01:22,994 --> 00:01:25,352
+Social networks can also
+be interpreted as graphs.
+
+25
+00:01:25,352 --> 00:01:29,732
+You have people connected by friendships
+or following relationship or
+
+26
+00:01:29,732 --> 00:01:34,112
+whatever, and this provides you
+another example of graph structure.
+
+27
+00:01:34,112 --> 00:01:36,745
+You can also sort of use
+more complicated things,
+
+28
+00:01:36,745 --> 00:01:40,892
+if you have some sort of robot arm that
+can be in many possible configurations.
+
+29
+00:01:40,892 --> 00:01:43,914
+What you could do is,
+you could think of the configurations,
+
+30
+00:01:43,914 --> 00:01:46,890
+some of them are connected to
+each other by various motions.
+
+31
+00:01:46,890 --> 00:01:49,692
+And then if you want to
+solve problems like,
+
+32
+00:01:49,692 --> 00:01:54,996
+how do I best reconfigure this robot arm
+from this position to this other position,
+
+33
+00:01:54,996 --> 00:01:59,845
+you again, want to sort of consider
+this graph relating these things to each
+
+34
+00:01:59,845 --> 00:02:02,910
+other in order to figure
+out how best to do that.
+
+35
+00:02:02,910 --> 00:02:07,266
+Okay, so these are the sorts of problems
+that we would like to be able to deal with
+
+36
+00:02:07,266 --> 00:02:08,450
+using graph theory.
+
+37
+00:02:08,450 --> 00:02:10,490
+So what is a graph?
+
+38
+00:02:10,490 --> 00:02:15,398
+Well, the formal definition of an
+undirected graph we'll talk about directed
+
+39
+00:02:15,398 --> 00:02:19,290
+ones in a few lectures is that
+it's a collection V of vertices.
+
+40
+00:02:19,290 --> 00:02:21,630
+And then a collection E of edges,
+
+41
+00:02:21,630 --> 00:02:25,570
+each of which connects a pair
+of vertices to each other.
+
+42
+00:02:25,570 --> 00:02:29,897
+So when you draw them on the paper what
+you do is your verses are usually drawn as
+
+43
+00:02:29,897 --> 00:02:31,770
+points or circles or something.
+
+44
+00:02:31,770 --> 00:02:34,452
+And the edges are lines or curves or
+
+45
+00:02:34,452 --> 00:02:38,067
+something that connect
+pairs of these point.
+
+46
+00:02:38,067 --> 00:02:43,694
+So for example the graph drawn on
+the screen has four Vertices labelled A,
+
+47
+00:02:43,694 --> 00:02:48,044
+B, C, and D and it also has
+four edges one between A and B,
+
+48
+00:02:48,044 --> 00:02:52,806
+one between A and C, one between A and
+D and one between C and D.
+
+49
+00:02:52,806 --> 00:02:56,250
+And so to make sure that
+were all in the same page in
+
+50
+00:02:56,250 --> 00:03:00,806
+we draw the following graph below,
+how many edges does it have?
+
+51
+00:03:00,806 --> 00:03:02,924
+Well, the graph here has 12 edges.
+
+52
+00:03:02,924 --> 00:03:04,695
+You can sort of count them all and
+
+53
+00:03:04,695 --> 00:03:08,444
+each of these segments between two
+of these points gives us an edge.
+
+54
+00:03:08,444 --> 00:03:11,304
+And so, there are 12 of them.
+
+55
+00:03:11,304 --> 00:03:16,097
+Now, there's one thing that sort of
+fits into this definition of graphs that
+
+56
+00:03:16,097 --> 00:03:19,504
+I gave that is a little bit weird perhaps,
+or unusual.
+
+57
+00:03:19,504 --> 00:03:21,880
+One thing that you might have is loops,
+
+58
+00:03:21,880 --> 00:03:25,204
+this would be an edge that
+connects a vertex to itself.
+
+59
+00:03:25,204 --> 00:03:30,024
+So here we just have the one vertex A, and
+then a loop that connects A to itself.
+
+60
+00:03:30,024 --> 00:03:32,764
+And there are some instances in
+which you might want to use this.
+
+61
+00:03:32,764 --> 00:03:36,995
+Sometimes you actually do have traffic
+circle that just goes in a loop or
+
+62
+00:03:36,995 --> 00:03:38,344
+something like that.
+
+63
+00:03:38,344 --> 00:03:43,182
+But only sometimes this is the sort
+of a thing we we're talking about.
+
+64
+00:03:43,182 --> 00:03:48,442
+Also sometimes you can have multiple
+edges between the same pair of vertices.
+
+65
+00:03:48,442 --> 00:03:53,640
+So in this picture we have two vertices
+A and B and two edges between them.
+
+66
+00:03:53,640 --> 00:03:57,940
+And somehow if you're just talking about,
+can I get from A to B?
+
+67
+00:03:57,940 --> 00:04:00,778
+It doesn't matter if there's one edge or
+two between them.
+
+68
+00:04:00,778 --> 00:04:04,598
+But sometimes having
+both of them is relevant.
+
+69
+00:04:04,598 --> 00:04:07,202
+On the other hand a lot of the time,
+these loops and
+
+70
+00:04:07,202 --> 00:04:11,498
+multiple edges are just a sort of a that
+we don't really need to deal with.
+
+71
+00:04:11,498 --> 00:04:14,057
+So often times you work
+with what are known as
+
+72
+00:04:14,057 --> 00:04:18,218
+simple graphs which don't have loops and
+don't have multiple edges.
+
+73
+00:04:18,218 --> 00:04:22,978
+And so, this is sort of the basics of
+what a graph is that we've just covered.
+
+74
+00:04:22,978 --> 00:04:25,518
+Next time we're going to talk
+about a couple of things.
+
+75
+00:04:25,518 --> 00:04:29,584
+First thing we're going to talk about how
+to represent graphs on a computer and
+
+76
+00:04:29,584 --> 00:04:33,458
+then we're going to talk a little bit
+about how we talk about runtimes for
+
+77
+00:04:33,458 --> 00:04:34,558
+graph algorithms.
+
+78
+00:04:34,558 --> 00:04:36,896
+So I hope this has been
+a useful introduction and
+
+79
+00:04:36,896 --> 00:04:40,410
+I'll see you at the next lecture when
+we talk about these other things.

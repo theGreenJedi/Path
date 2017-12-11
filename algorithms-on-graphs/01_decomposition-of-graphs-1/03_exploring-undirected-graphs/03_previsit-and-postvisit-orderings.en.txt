@@ -1,0 +1,101 @@
+Hello everybody, welcome back
+to the Graph Algorithms course. Today, we're going to talk about
+previsit and postvisit orderings. And these are sort of some numbers that
+you can do when running a depth for search that sort of records some
+information about the order in which you visited vertices. And and we're going to discuss a little about
+why these numbers might be important. But mostly it's going to be that they
+will turn out the be very useful in some algorithms we're going to discuss later. Okay, so
+let's talk about depth [INAUDIBLE], it is algorithm that we came up last time. And it's a little bit
+weird as an algorithm, because well what happens
+when you run depth for surge? It doesn't return anything,
+it does modify the state of some things. It marks vertices as visited or unvisited. But in the end it just ends up
+marking any vertex as being visited. If all that you wanted to do is mark every
+vertex as visited there are easier ways to do it. On the other hand the order in
+which we find these vertices and away that involves their connectivity
+is actually very useful. For example with slight modification,
+keeping track of a little bit of data we saw how to use depth for
+a search to compute connected components. So in general, if we want to make
+that depth [INAUDIBLE] useful, we need to keep track of some extra
+information about its execution. So what we're going to do for
+this is we're going to augment some of its functions in order to store
+additional information. So for example, let's look at Explore. What we're going to do is we're
+going to mark the vertex as visited. But then before we do anything else,
+we're going to run some previsit function. This is just some extra
+things that we're doing, just to maybe record some information or do a little bit of extra work sort
+of just as we found this new vertex. Then we go in this loop over neighbors and
+exploring all the unexplored neighbors. And then right before we're
+about to finish exploring v, we run some other post visit blocks. Some thing that we did,
+do it right before we're finishing. So what are these functions going to be? They could be a number of things. We'll come up with an example shortly,
+but the idea is to augment our functions a little bit to keep
+track of some extra information. So what sort of extra
+information do we want? Well one that we might want to
+do is to keep track of sort of what order are we visit vertices in. And so one way to do this
+is we sort of have a clock. This clock keeps track of time, it ticks forward once every time we hit
+a previsit or postvisit for a vertex. Every time we discover a new vertex for the first time or sort of leave
+an old vertex for the last time. And every time we do one of these
+things we'll also core the time which that happens. So for each vertex, we will have
+a record of the previsit time and the postvisit time. So to what you seen what I mean by this,
+let's look again this example. The clock starts at 1, we visit our first vertex, its gives
+us previsit number assigned as 1. From there, we explore the second
+vertex which is previsit 2, and then a third vertex which
+gets previsit of 3. From there, we start, well,
+we're done exploring that vertex. All of its neighbors have
+already been visited. So we assign it postvisit 4 and move on,
+this other vertex gets postvisit 5. We now have a new vertex to explore,
+it gets previsit 6 and postvisit 7. And our original postvisit 8 and
+that wraps up our first explore. We now find a new vertex,
+who gives previous at 9 and his neighbor previous at 10. And then they get post
+visit numbers 11 and 12. Finally, we've got a new guy with previsit
+13 and his neighbors get 14 and 15 and they get postvisits 16,
+17 and 18, we wrap them up. And we are now done and
+we just assigned the numbers 1 through 18 as the previsit and postvisit numbers
+of these 9 different vertices. So the way we compute this
+is actually pretty easy. We just have to initialize our clock to be
+1 the beginning of our depth first search. And then in the previsit
+block of our explorer, we set the previsit number of v to be this
+clock value and then increment the clock. And for the post visit block we set post
+visit number of the vertex to be the clock value and increment the clock. Very easy, doesn't really change
+the run time of anything, but allows us to compute these numbers. Now, what are these useful for? Well, really the previsit and
+postvisit numbers, the tell us something about
+the execution of the depth first search. And we'll see a little bit of this
+as we prove the following Lemma. So suppose that you have
+any two vertices u and v. From these u,
+v intervals pre(u) to post(u) and then pre(v) to post(v),
+these are two intervals. And the claim is that these intervals
+are either nested or disjoint. And in a particular whether are nested or
+disjoint will actually tell us something useful about the sort of
+way in which the depth for search ran on these two vertices. So let's take a look at
+what we mean by this. If you have two intervals, there are a few ways in which they
+can intersect with each other. Firstly, could be the case that one
+interval is strictly contained in the other one. These means that they're nested. It could also be that they're
+disjoint from each other, that they don't overlap at all. Finally, we could have two
+intervals that are interleaved. They sort of overlap
+over part of their ends, but not over the entire
+interval either side. And what we're saying in this dilemma
+is that the interleaved case is actually not possible. So let's see the proof. We first assume that
+without laws of generality, the first visit to u happens
+before the first visit to v. We now have two cases to consider. First thing that we find v for the first
+time in the midst of exploring u. And this really is an indepth research
+tree that we produced by this exploration. We found v as a descendant of u,
+we found v while exploring u. The second thing is we could find
+v after we're done exploring u. So it's sort of v and
+u are different branches of the tree, they're cousins of each other. So let's look at the first case. If we explore v while we're
+in the middle of exploring u, then explore v is actually being
+run as a subroutine of explore u. And because of the way subroutines work
+we can't finish exploring uuntil we are finished exploring v. And therefore the post of u is
+bigger than the post of v and these two intervals are nested. In the second case, we explore
+the after we're done exploring u. So we start exploring u and
+then we finish exploring u, and then sometime later we start
+exploring v and then finish exploring v. And so
+these intervals are going to be disjoined. And so these are the only cases the
+intervals are nested or they're disjoined. And which case we're in will actually tell
+us something useful about the order in which we visited vertices in this graph. Now just to review we've got these two
+tables here sort of pre and post numbers, but only one of them is a possibly
+valid table of pre and post numbers. Which one is not valid? Well the one on the right can't be
+correct, because these two intervals from pre to post for vertices A and
+B Are interleaved, and that can't happen. So that sort of pre and post orders will
+see a lot more usefulness later, but in the next lecture, we're going to
+introduce something a little bit more new. We've been talking a lot
+about undirected graphs. Here, we're going to be talking about
+what happens when the edges actually have an orientation to them. So please come back next time,
+and we can talk about that.

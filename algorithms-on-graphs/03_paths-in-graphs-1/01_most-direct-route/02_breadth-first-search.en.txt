@@ -1,0 +1,87 @@
+Hi, in this video we will discuss
+breadth-first search an efficient algorithm to find distances from an origin
+node to all the nodes in the graph. And we will use the layered
+distance structure of the graph from the previous video. We will start from the version of the
+algorithm which is easier to understand. We marked as S a blue node
+which will be our origin, and we will find distances from this
+origin to all the nodes in the graph. We'll start with a state when all
+the nodes are colored in white. And the node colored in white means that
+this node hasn't yet been discolored. During the algorithm, we'll discover some
+nodes, and then we will process them. When we discover the node
+we cover it with grey. At first, we discover the origin node S. And when we process the node
+we cover it with black. And of course after discovering
+the origin node, we start processing. We will process the graph layer by layer. We'll start with layer zero, which only consists of the node S and
+we'll start processing it. When we start processing a layer, we take
+all of the edges outgoing from this layer and we discover all of
+the nodes ends of those edges. So basically when we start from layer
+zero, we discover the whole layer one because the edges from the layer
+zero node, S, go to layer one nodes. Of course there could be an additional
+edge from S to itself, but then we would ignore this edge because it
+goes to the node we've already discovered. In this case, there is no such edge, so
+all the ends of the edges going from S are new nodes, white nodes,
+which are not yet discovered and we color them with gray to mark
+the fact that we have discovered them. After we have discovered all of them, all the layer one we start processing
+all those nodes simultaneously. So we process all six
+nodes of the layer one. And to do that we take all the edges
+outgoing from those nodes and discover the new nodes at
+the ends of those edges. You may notice that there
+are a few red edges. And those are the edges which go
+from the nodes in layer one, but which go to the nodes which were
+already discovered previously to S and to the nodes of the same layer one. And there are a lot of bold black edges, which go also from the nodes of the layer
+one, which we are not processing, but they go to the new nodes,
+which were not discovered previously. And we mark those nodes with gray. And when we process edges from the layer
+one we get all the nodes of the layer two, because the edges from layer one go
+to layer two to the same layer and to the previous layers. When edges go to the same layer or to
+previous layers, we mark them with red and we don't do anything with the nodes
+on the ends of those edges. And the edges go to the next layer,
+we discover nodes of the next layer. And of course,
+all the nodes of the next layer, of the layer two,
+have some incoming edge from layer one. So after processing layer one,
+we've discovered the whole layer two. And after we've discovered it,
+we start processing it. So we process the outer circle,
+all the nodes from the layer two. And to that we consider all their
+edges which are outgoing from them. And you see that there are only red edges
+because all the edges from layer two go to either the same layer two or
+to S or to layer one nodes. And all of them have been
+discovered before that, so we don't do anything with those nodes. So we don't discover any new nodes. And it means that we don't have
+anything new to process, so our algorithm stops with that. And we now can assign
+each node to a layer. Obviously node s, origin node,
+is in the layer 0. The nodes we discovered on the first
+step are the nodes of the letter 1. So, they're at the distance 1 from S. And the nodes discovered on the next
+step are nodes of the letter 2, and they're at distance 2 from S. And so, we've found distances from
+S to all the nodes in the graph. But actually not to all of them,
+because there can be some nodes which are not connected to S,
+which are not reachable from S. And such nodes must have
+infinite distance from S. And we'll solve this issue by
+initializing all the distances from S to all other nodes with infinity. And then, setting the distance
+from S itself to 0 and implementing the algorithm
+that I've just told you. Then every node,
+which is reachable from S, will get some finite distance from S, and all the nodes which are unreachable from
+S, will stay with their infinite distance. Now let's look how this same algorithm
+will work with an undirected graph. So we have basically the same graph,
+we just removed the arrows from the edges. So all the edges became undirected,
+and again we have the same origin S, marked with blue. We start with all the nodes being white, because they are not discovered yet, we
+discover node S, and color it with grey. And then we start processing it, and color it with black to process it without
+take all the edges outgoing from it. And you see that now there
+are more edges outgoing from S, because some of the edges which are
+incoming into S in the previous example, now are also outgoing from S
+because they are undirected edges. So, we discovered seven nodes instead
+of six, as in the previous example. And after we discovered all these
+seven nodes, this is our layer one. These are all the nodes
+of distance one from S. We discovered them. Now, we start processing them. And to do that, we consider all the edges
+out going from those seven nodes. All black ones, but for S. And you see that some red edges appear. Those are edges inside layer one, and edges from layer one to S, and
+there are a lot of bold black edges. Those are the edges from the nodes
+of layer one to the new nodes, which are not discovered before. And we've discovered almost all
+the nodes of the outer circle, but for the one in the bottom which
+was discovered before. So we have discovered 11 new nodes. We have discovered them, and
+now we need to process them. And to do that, we consider all
+the edges outgoing from those 11 nodes. And all of those edges
+are red because they all go to the nodes we previously discovered. So nothing new is discovered and
+we stop our algorithm. And now we can assign distances. And again,
+distance from S to itself is zero. Distance from S to the nodes discovered in
+the first step is one, this is layer one. And distance from S to the 11
+nodes in the outer circle is two. This is our layer too. And again we've found all
+the distances from S. And we have found all the layers, and
+also if there are some nodes which are not connected with us initially,
+we initialize the distances to infinity. And so, they stay with this
+infinite distance to them.

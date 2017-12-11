@@ -1,0 +1,103 @@
+Hi, in this video we'll study how
+to actually find the distance between nodes in the augmented
+graph after pre-processing it using contraction of the nodes. So the main idea is that we will
+use Bidirectional Dijkstra. And this Bidirectional Dijkstra
+will only use some of the edges of the augmented graph. So you remember that when
+we contracted the nodes, we placed them from bottom to top in
+the order of increasing importance. And also in the order of contraction,
+so the later the node was contracted, the more important is this node. And so we drew this arrow with
+node order from bottom to top. And we will consider
+only the upward edges. So for example if we need to find
+the shortest path between node two and node three in this graph,
+the path will look like this. It will go first, by edges, which go up to some node
+with the biggest importance. For example, in this case,
+it will be node 6. And then we'll go by edges down
+from that node 6, into node 3. And to find such a path, we will use
+Bidirectional Dijkstra, which we'll start both from 2 and from 3 and from 2
+it'll go by forward edges which go up. And from 3 it'll go by backward
+edges which also go up. And then they will meet at some node and we'll find some path which goes
+first up and then goes down. This is the general idea but
+it is someone difference still from the classical
+Bidirectional Dijkstra variant. So in the Bidirectional Dijkstra as soon
+as we find some node that is process both by the forward search and
+the backward search, we stop and compute the shortest distance. In this case, we don't stop when some
+node was processed by both searches. We stop only when the extracted
+node is already farther than our current estimate of
+the distance to the target. This is the pseudo code code for the
+function ComputeDistance which takes as inputs service node s and target node t
+and returns the distance between them. Of course it also takes as input for
+example the graph and the reverse graph for the bidirectional
+search but I just omitted those details. Note however that you only need to store
+in the graph the edges which go upwards. So we have a node A and
+a node B and an edge from A to B. If A was contracted earlier than B,
+then you need to store this edge. But if B was contracted earlier than A, then this edge goes downwards and so
+you don't need to store this edge. You can just delete it because it
+won't be used at all in the queries. And so, you don't need to
+store it in the pre-process, in the augmented graph at all. We start with initializing
+variable estimate which will store our current estimate of the distance
+between the source and the target. And we initialize it with plus
+infinity because currently, we don't know of any path
+between source and target. Then we do the standard initialization
+of the bidirectional Dijkstra data. We fill the arrays with distance
+estimates for the forward search and the backward search with plus infinities. And we'll also set the distance in the
+forward search from the source to zero. And the distance in the backwards
+search from the target also to zero. And also have the lists of
+the processed nodes for the forward and the backward search. Then we'll have the main loop and
+this loop goes while we still have some nodes to process, either in the forward
+Dijkstra or in the backward Dijkstra. Which means that basically in our
+priority queue that we use for the Djikstra algorithm,
+there still are some nodes. Either in the queue for the forward
+Djikstra search or in the queue for the backward Djikstra search. While there are still such nodes,
+we try to extract node in the forward search if there is still something
+in the queue for the forward search. And this node will all ready have
+the distance estimate which is equal to the distance from
+source s to this node v. So if the distance from s to v is
+already bigger than the estimate of the distance from s to t,
+we don't need to process node v. And we don't need to put it into queue and to process the nodes which
+are the successors of v. So we only do that if the distance
+estimate of v is smaller or equal to the current estimate. Then we process, basically we do the same,
+we do in the regular Dijkstra step. And then,
+we need to also update our estimate. So if v is processed in the reverse
+search which act that by if v in proc R, then it is processed in both searches. Because v has just been processed
+in the forward search and it is also in the list of processed
+nodes in the backward search. So it is processed by both forward and
+backward searches. This means that its distance
+estimates both in the forward and the backward search are already equal to
+the corresponding distances from s to v and from v to t. And so we know the length of the shortest
+path going from s to t through v. This path has length equal to
+dist of v plus dist R of v. If this length is smaller than our current
+estimate of the distance between s and t we need to update it. And that's what we do
+in this if statement. And then we try to do
+the backward Dijkstra search. And it is completely symmetric
+to what we have here for the forward Dijkstra search, so
+I don't write the code for that. And this while loop goes and goes until
+all the nodes and all the queues for forward and backward search are processed. And then in the end we just
+return our current estimate of the distance between source and
+the target. Now it seems that we
+already know everything. We know how to pre-process the graph
+using the contraction of the node. We also know how to implement queries
+using bidirectional Dijkstra, so are we done? Can we actually go and
+implement this algorithm? Well of course we're not done because for
+example we don't know yet whether this algorithm works correctly or
+not. So commute distance procedure returns some
+estimate of the distance between source and the target but
+is it always correct estimate? Is it always equal to the distance between
+s and t in the initial graph or not? We don't know that. Also, this can be distance procedure
+only returns us the estimate of the distance between source and the target
+but it doesn't return the actual shortest path between source and
+the target in the initial graph. But that's more of a technical moment. Using the standard bidirectional Dijkstra
+algorithm we can reconstruct the path in the augmented graph between source and
+target using the special RA with the previous node in the shortest
+path from source to this node. And the same for the backward search. And then some of the edges
+could be shortcuts, instead of the edges of the initial graph. But then while we do the pre-processing
+we should also store in the shortcut not just the edge but also which two edges
+were there before we ended the shortcut. Now we can recursively
+take the shortcut and replace it with the two edges
+that were before the shortcut. And then if some of those two edges
+are also shortcuts, we recursively get the edges that were there before
+these shortcuts were added, and so on. And then, we will eventually reconstruct
+the path in the initial graph, which only contains the edges
+of the initial graph. And in the next video we will actually
+prove that this algorithm works correctly, that the estimate from the compute
+distance procedure will always return the correct distance between source and
+the target.

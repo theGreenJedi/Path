@@ -1,0 +1,98 @@
+It is not always the case
+that the shortest path go through the meeting point. So what exactly then do we need
+to do to compute the distance when we found the common meeting point,
+and is it actually possible? Well it is possible, but
+it is little bit more complicated. So let's denote by dist of
+u the distance estimate in the forward Dijkstras from source
+s in G and by dist R of u. The same but the distance estimated in
+the backward Dijkstra from T in the GR. So dist R is an estimate of the distance
+from u to the target vertex T. So after some node v is
+processed in both G and GR. I say that there exists some shortest path
+from s to t which passes though some node U which is processed either is the forward
+search or backward search or in both. And the distance from the s to t is equal to the distance estimate
+of u in the forward search, plus the distance estimate of
+the backwards search from u. What it means is that there exist some
+vertex u that chooses path from s to t, at least some of this path from s
+to t goes through this vertex u. And this u is either processed in G,
+or is processed in GR. And also, the distance estimates for that vertex are already correct for
+both forward search and backward search. So of course, if it is processed
+in the forward search, for example, then we know that the distance
+estimated to this node is already correct. That the distance from
+source vertex to this node u is equal to it's distance
+estimate dist of u. But if it's not yet processed in the
+backwards search, in the reverse search, then this is not guaranteed in
+the general case for the dist r. For the distance estimate
+in the backwards search. But we can show that for some node u is actually
+also a correct estimate which is equal to the distance to the
+distance from U to the target vertex t. So there exists some nodes u and
+some shortest path that this node u lies on the shortest path and both distance
+estimates from source to u and u to target are already correct by the moment our
+forward search meets our backward search. Now, let's prove this dilemma. So, we have these two gray circles,
+which show us this can't vertices by the forward search
+from s, and by the backward search from t. And they touch in the vertex v,
+which is the meeting point. Now first, let's prove that
+if there is some node u which is not processed by forward search and
+is not processed by the backward search. And there is the shortest path from
+s to t going through this node u, that then there is also shortest path
+which goes from s to t through v. To see that, first let's compare
+the first half of the shortest path from s to t going through u to
+the shortest path from s to v. We know that v is already processed
+in the forward search and it means that the distance from s to v
+is at most the distance from s to u. So here the green part is less than or
+equal to the red part. Also if we consider the backward the extra
+search, we know that v Is processed, but u is still not processed
+in this backward search. So, the right half, the green right half is also less than or
+equal to the red half. So, in both halves, the green parts
+are less than or equal to the red parts. And this means that the path from s
+to t going through v is shorter or of the same length as the shortest
+path from s to t going through u. So it means that actually the path from s
+to t going through v is the shortest path. And so in this case,
+our theorem is proved. If there is at least some one vertex u
+which is not processed by forward and not processed by backwards search. And there's a shortest path going through
+the vertex then there is a shortest path, another one which goes
+through the vertex v. Which is already processed by
+both forward and backward search. And of course both distance
+estimates of v are already correct. Because it's already processed in
+both backwards and forward search. Now let's consider another
+case when there are no varices which are unprocessed by
+both forward and backward searches. But we already meet a point v. So let's consider then any shortest spot
+from s to t, and let's consider the last vertex u on such shortest spot that
+is processed by the forward surge. So u is the last vertex which
+is on the shortest path, which is processed by the forward search. And then the distance estimates of u in
+the forward search is already correct. This is equal to the distance from s to u. Let's consider the next
+edge of the shortest path. It goes to some vertex w. And this vertex w has to be
+processed by the backward search. Why?
+Because w is not processed by the forward search because u is the last
+vertex of the shortest path which is processed by the forward surge. And w cannot be unprocessed
+by both forward and backward search,
+because it lies on the shortest path. And so w is indeed inside
+the gray circle around t, it is indeed already processed
+by the backward search. And so the distance estimate of the
+backwards search for w is already correct. It is already equal to
+the distance from w to t. Now, what we know is that
+the distance between s and t is equal to the distance from s to u. Which is equal to
+the distance estimate of u, dist of u plus length of
+the edge from u to w. Plus distance from w to t which is already equal to the distance estimate of
+the backward search, dist R of w. And now what we want to prove is that
+this is also equal to the sum of distance estimate of u and
+the reverse distance estimate of u. So the first sum is the same. And now I claim that the distance
+estimate in the reverse direction is equal to the sum of the two other
+summons in the first equation. Why is that? Well from one point of view we know
+that the distance estimate of u is always bigger or
+equal to the real distance from u to t. Because the distance
+estimate in any moment of Dijkstra's algorithm is greater or
+equal to the real distance. From the other hand, we know that the vertex w is already
+processed in the reversed search. And when it was processed, in particular, the edge from u to w was relaxed
+in the backwards search. And when it was relaxed it
+made sure that the distance estimate of u in reverse
+direction is at most this sum of length of this edge plus
+the distance estimate for w. So we know that distance
+estimate of u is at most. A length of edge from u to w
+plus distance estimate of w. But this sum is the length of the shortest
+path from u to t going through w. So in fact, we know that distance
+estimate of u is both greater or equal than the true
+shortest path from u to t. And also is less than or equal to
+the shortest path from F from u to t. And this means that it is exactly equal
+to the shortest path from u to t. And that the distant from
+s to t is actually equal to the distance estimate a u plus
+the reverse distance estimated of u.

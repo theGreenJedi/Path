@@ -1,0 +1,103 @@
+Hello, everybody. Welcome back to the graph
+algorithms course. Today, we're going to start talking
+about directed graphs versus undirected, in particular, talk about directed acyclic
+graphs and some of their properties. So what's the motivation for this? The point is that sometimes we
+want to talk about the edges of a graph that have a direction. This is just because I mean, sometimes,
+like pairs of things are related in a way, but the relation isn't symmetric. One of them comes before the other,
+or it's a one way viewership or something like that. And so we define a directed graph to
+be a graph, where each edge has sort of a designated start end and an end end. So what are examples where
+you might want to use this? For example, if you've got a city map
+where lots of your streets are one way roads, the direction that the road's
+pointing is actually very relevant if you want to navigate the city. You can't just follow any series
+of roads you like because you'll be driving down some one way streets
+in the wrong order, so you really do need to keep track of this orientation
+if you want to navigate the city. But then also some of the examples
+that we gave, links between webpages, the web graph is probably
+a directed graph, because usually, if you've got two webpages and A links
+to B, B probably doesn't link back to A. Similarly, if you have
+followers on a social network, it depends on the social network. I mean, in Facebook,
+friendships are symmetric. So they're sort of two-directional. That might be an undirected graph. But on lots of them, you can follow
+somebody without them following you, and so then you end up with wanting
+to have a directed relation for when someone's following someone else. A final example that we'll look at in some
+more detail today are sort of dependencies between tasks. So, we have this directed graph, and we've
+already built up a lot of this theory that works for undirected graphs with this
+sort of exploring DFS algorithms. But most of this sort of actually
+still holds for directed graphs. We can still run DFS on a directed graph. The slight modification now is
+that when we run our explores, we only want to check for
+directed edges out of v. So when we say for all neighbors w of v,
+if w has not been visited, etc, we really want to say neighbors where v
+points to w, not the other way around. And what this will do is it
+means that when we explore v, we find things that
+are actually reachable from v, using the edges in the direction
+that they're intended. So we're only sort of allowed
+to follow these one-way roads in their appropriate direction. Now using this new depth first search, we
+can still compute pre- and post-orderings. They still have many of
+the same properties. The algorithm for
+DFS still runs in linear time. Basically, everything's the same. The context is now
+a little bit more general. Okay, so
+let's look at a sort of specific example, where directed graphs are important. In particular, suppose that we have
+the following morning routine. We've gotta do a bunch
+of things every morning. We need to wake up, we need to get
+dressed, we need to eat breakfast, we need to go to work,
+we need to shower, all of these things. We need to do these things in some order,
+but we can't do them in any old order. Because well,
+we need to wake up before we get showered. And we need to dress before we go to work. And we need to eat breakfast before
+we go to work, and all of this stuff. And one way of representing these sorts
+of dependencies is by a directed graph. If we need to do A before we can do B, then we draw a directed
+edge from A pointing to B. And so, this gives us some
+sort of dependency relation. And it's not just these sort of
+trivial examples of how do I get dressed in the morning. But if you've got some sort of complicated
+system of libraries, where some of them require other ones in order to work,
+you can end up with some sort of similar graphic dependencies, which you actually
+do need similar techniques to handle. Okay, so what do we do when
+we have these dependencies? Well, one of the things that we'd
+like to do is we'd like to find the ordering of the tasks in a way
+that respects these dependencies. We'd like to wake up before we,
+well, fine. For example, suppose that we woke up
+at 7 o'clock and then showered at 7:05, got dressed at 7:15, had breakfast
+at 7:20, and went to work at 7:30. This puts all of our events in some order. And you'll note that this order
+respects all of our dependencies. We wake up before we shower, before
+we get dressed, before we go to work. And we eat breakfast before we go to work,
+and everything works out nice. And so,
+if we have one of these dependency graphs, we'd like to linearly order the vertices
+to respect these dependencies. Now one thing to ask is,
+is it always possible to do this? And it turns out the answer is no. The sort of best counter example is
+this following chicken and egg problem. I mean, the point is that you need
+a chicken in order to lay eggs, and you need eggs to hatch chickens. And so you can't like put them in some
+order where one of them comes first. If you put chickens first,
+then it would just point you from eggs back to chickens going
+in the wrong direction. You put eggs first, there's this pointer from chickens
+back to eggs in the wrong direction. Without someplace to have gotten started, there's sort of no way you
+can get this ordering and go. In fact, in general there's a slightly
+more complicated way in which this can fail to happen. In fact, if your graph has any cycle, a
+cycle here is a sequence of vertices, v1, v2 to vn, such that each one connects
+to the next using a directed edge. So you've got a bunch
+of vertices arranged. The circles just that each one connects
+to the next one all the way around. And the theorem is that if G contains
+a cycle, it cannot be linearly ordered. Okay, so just to make, well, fine. Let's take a look at the proof here. So suppose their graph has a cycle, v1 through vn,
+everything connected up in order. And suppose that additionally,
+we can linearly order this graph. Well, if you linearly order these things,
+there are finitely many. One of them needs to come first. So suppose that vk comes
+first in this order. But now we're putting vk before vk-1,
+and vk-1 points to it, so we have an arrow pointing in the wrong
+direction, which gives us a contradiction. So, if we have a cycle,
+we cannot be linearly ordered. So, what this means is that in
+order to be linearly orderable, you need to be what's known as
+a directed acyclic graph or DAG. And this is just a name for a directed
+graph that has no cycles, fair enough. Now, by the above theorem, it is necessary
+to be a DAG in order to linearly order. But one question we should ask
+ourselves perhaps is, is it sufficient? Can we necessarily linearly
+order it if it's a DAG? Well, okay, this is a question to
+ask a little bit later, but for now, let's just review. We have the following four graphs. Note that the edges here are sort of
+the same, except for their orientations. And which one of these graphs is a DAG? Well, it turns out that only A is. B has the cycle noted in red, and
+C has this other cycle noted in red. But if you work out A, you can actually see that it
+does not have any cycles to it. Okay, but
+the question that we were posing was, is it the case that any DAG
+can be linearly ordered? And the theorem that we'll
+actually show is that yes, if you have any directed acyclic graph,
+you can linearly order it. And next time, what we're going to do
+is we're going to prove this theorem. But not just that. In addition to proving this theorem, we're
+actually going to make it algorithmic. We're going to come up
+with an algorithm that, given a DAG,
+actually produces this linear order. So that's what you have to look forward
+to next time, and I'll see you then.

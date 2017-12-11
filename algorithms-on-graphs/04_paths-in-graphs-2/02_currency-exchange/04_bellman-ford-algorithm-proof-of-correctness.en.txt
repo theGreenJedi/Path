@@ -1,0 +1,62 @@
+Hi, in this video, we will prove that Bellman-Ford's
+algorithm returns correct distances from origin node to all the nodes in the graph
+in the absence of negative weight cycles. First, we need the following lemma. After k iterations of relaxations inside
+Bellman-Ford's algorithm for any k, then if we take any node u,
+dist[u] after these k iterations will be equal to the shortest path
+length from S to this node u, but among all the paths that contain,
+at most, k edges. So not all the possible paths,
+just paths which contain 0, 1, 2, or, at most, k edges. For example, after one iteration,
+we state that dist values of all the nodes will contain
+the best possible shortest path, which consists from 0 or 1 edges. We'll prove this lemma by
+mathematical induction. And the base case is after 0 iterations, all the dist values are infinity and
+dist[S] = 0. And this is correct because for
+S, there is a path of 0 edges, which has lines to 0. And correct distance from S to S is 0. And dist value is also 0. And for all the other nodes,
+there is no path that contains 0 edges. And so the shortest path
+that contains 0 edges and goes through those nodes is infinity. Now the induction step is if we proved for
+paths with length at most k, then we need to prove it for
+paths with length at most k + 1. So, we know that before
+iteration number k + 1, dist[u] is the smallest length of a path from S
+to u, which contains at most k edges. So what do we do on
+the k + 1-th iteration? Each path from S to u goes through
+one of the incoming edges, or like from some node v into node u. And also, parts of length k+1 go this way. They go k edges to some known v, and then
+they go through this edge from v to u. So when we try relaxing edge from v to u,
+we compare the current dist value, which is the smallest path length out of
+the paths, which contain at most k edges, we compare it with the smallest
+length of a path from S to u, which contains at most k + 1 edge and
+goes through v. So all parts which contain
+at most k+1 edges and go to u, they go through one
+of the incoming edges (v, u). And so we will compare with
+all the possible paths that contain at most k+1 edges and
+go from S to u. So if initially, we had the best paths, which contain at most k edges,
+after new iteration, we have the best paths,
+which contain at most k+1 edge. Because we add one last edge
+from v to u to the best path, which contains at most
+k edges from S to v. So the lemma is proved, and
+now we have two corollaries. First that if a graph doesn't have any
+negative weight cycles, then Bellman-Ford algorithm correctly finds all
+distances from the starting node S. Why is that?
+Because it does v-1 iterations. And after v-1 iterations, for
+each node, its dist value contains the shortest path out of all paths
+that contain at most v-1 edges. But if there are no negative cycles,
+then any path, any shortest path contains
+at most v-1 edge. Because if it contains at least v edges,
+then there will be a cycle inside it. And the cycle will be non-negative, so
+we can just remove this non-negative cycle from the path, and
+it will improve or stay the same. So any shortest path contains
+just v-1 edges or less, and so Bellman-Ford algorithm correctly finds
+the best shortest paths for each node. Another corollary is harder, even if there is a negative
+cycle in the graph, that doesn't mean that there is no correct distance estimation from origin
+to some particular node because that particular node may be not reachable
+from any of the negative weight cycles. So if there is such node u, then there's no negative weight
+cycle from which it is reachable. Then Bellman-Ford algorithm will correctly
+find distance from after this node by the same reason because if we
+have any shortest path from S to u, it cannot contain cycles because u is not
+reachable from any negative weight cycles. And so the cycle on the path from S
+to u must be non-negative, and so we can just remove it from the path, and
+the path will improve or stay the same. So, any path from S to u doesn't contain
+cycles, and that means that any path from S to u, which is the shortest path,
+has at most v-1 edges. And this means that Bellman-Ford's
+algorithm will return actually a correct value for the distance from S to u. And in the next video, we will look into
+what to do with the negative cycles when they're present in the graph and
+how to use it for your own profit, potentially making yourself
+a billionaire based on currency exchange

@@ -1,0 +1,119 @@
+Hello everybody, welcome back. Today, we're going to be talking about
+the algorithm of a topological sort. And we're going to talk about this,
+we're going to show in fact that any DAG can be linearly ordered, and
+we're going to show you how to do it. So remember from last time,
+we were talking about directed graphs and in particular we wanted to be able to
+linearly order the vertices of this graph. Such that every edge pointing to a prome
+vertex with smaller index under this linear ordering something that's larger. Now we know that in order for this to be possible, our graph needed to
+have no cycles, it needed to be a DAG. And today, we're going to show
+that this is actually sufficient. So one way to look at this is if
+you have this linear ordering, let's think about which vertex
+comes last in this order. Well if it comes last it can
+have edges pointing to it, but it can have no edges pointing out of it. And so this gives a motivation for
+useful definition. We say that the source is vertex in
+a graph that has no incoming edges. So a source can have as many edges
+as it likes going outwards, but it can't have any going inwards. Similarly a sync is a vertex
+with no outgoing edges. It can have a bajillion edges coming
+into it, but nothing can escape. So to be clear that
+we're on the same page, the following graph has nine vertices,
+how many of them are sinks? Well the following highlighted
+three vertices are sinks. They each have no edges coming out,
+but every other vertex in the graph does have a few or
+at least one edge leaving it. So here's the basic idea for how we're
+going to produce our linear order. We're going to first
+find a sink in the graph. There needs to be a sink, because there needs to be
+something at the end of the order. And when we have a sink though, we're perfectly fine putting
+it at the end of our ordering. And the reason for this is well, it's got
+edges that point into it, but as long as the vertex comes at the end, everything
+pointing to it is coming from before it. So once we put it at the end of the order,
+it's sort of dealt with and we just need to order
+the rest of the graph. So what we do is remove that vertex
+from the graph and repeat this process. So to see what this means,
+we have this graph on five vertices. D is a sink so we put it at the end of
+our ordering and remove from the graph. Now we find another sink, say C. Put it at the end and
+remove from the graph. E is next, goes at the end,
+then B, then A. And finally we have this ordering,
+A, B, E, C, D. And this it turns out, is consistent with the ordering
+that we had in our original graph. Now this is all well and good, but it
+depends on us being able to find a sink. And before we even ask that, we should ask how do we even know
+that there is a sink in our graph. And it turns out that for DAG at least, there's an easy way to show that there is,
+and the idea is the following. What we're going to do is just
+start at some vertex v1 and we're just going to follow a path. We're going to follow
+directed edges forward and just keep going, finding vertices v2,
+v3, v4, etc, and just keep going. Now eventually one of
+two things will happen. Either we could hit a dead end, we could
+end up at some vertex with just no outgoing edges,
+we just can't extend this path anymore. And if that's the case, we found a sink. We found a vertex with no outgoing edges. The second possibility though is that
+maybe this path just keeps going forever. But if it does since there are only
+finitely many vertices in our graph, eventually we'll have to repeat something. We'll have to find a vertex for
+the second time. But when we do that it means there was
+a path that started at that vertex, went forward a bunch and
+eventually came back to itself. That means we have a cycle, and so at least if we're DAG
+that can't ever happen. So let's take a look at the algorithm. What we're going to do is,
+while G is non empty. We're going to follow a path until
+we can't extend it any further. That vertex at the end is going
+to be a sink which we'll call v. We take the input at the very,
+very end of our ordering and then remove it from the graph,
+and then we just repeat this. So on this graph here, well we started A,
+we follow a path A, B, C, D. Now we're stuck. D is a sink, so
+we can remove it from the graph. We now follow a new path, A, B, C. C is a sink, we remove it from the graph. A and E, E is a sink, we remove it. Path A, B, B is in sync, so we remove it. A is already in sync and so
+we remove it and now we're done. We have our order. Now what's the run time of this outcome? We need to compute one path for
+each vertex in the grid and so all of the many paths. And each path could be pretty long, it include up to all
+the vertices in the graph. It could take all of v time. So the final run time of this algorithm
+is O of V squared which is not great. On the other hand we're doing
+something a little bit inefficient with this algorithm. We started with this vertex,
+we followed this huge long path until we found the sync and
+then we remove it from the graph. Then what we probably did was we
+started that same vertex again, followed basically the same path
+until we got almost to the very end, until we get to right before
+that vertex that we removed. And we're sort of
+repeating all of this work. Why do we need to follow
+this whole path again? We could just back up one
+step along the path and then keep going from there, and
+so that's what we're going to do. Instead of retracing our entire path, we're just going to back
+up one step along our path. So to see what this does in our example,
+we go A, B, C, D. D is a sink which we can remove, but now instead of starting back at A,
+we start at C which is already a sink. And B which is already a sink now at
+A we have to follow the path E to could find the next sink and
+then we're done. And this algorithm reuses our steps a lot
+less and so it's a lot more efficient. In fact,
+we think about with this algorithm does, it's basically just adopt for search. We're starting in a vertex where following
+a path for until we can't anymore. And then finally, once we're stuck,
+we turn around and we sort of, stop using that vertex again. Then from that one step previous
+we just keep going forward again. This is exactly the depth for
+search ordering. And in particular when ever we finish
+the post visit block at a vertex, we put it at the end of our ordering. So the order in which we're sorting our
+vertices is just based on the post order. In particular, vertices with small post
+order go at the end of our ordering, and ones with large post order
+go at the beginning. So the algorithm is now super easy. We run depth for search on the graph and then we sort the vertices based
+on the reverse post order. And note, we really don't actually
+have to do any sorting here. We just have to like, remember the order
+in which we left our vertices. So that's our algorithm,
+let's take a look at the correctness. So basically what we're saying
+is that if we got g as a DAG. Then we want to say, we can order
+them by the reverse post order. Now for this to be consistent
+with our graph ordering, it needs to be the case that whenever
+we have an edge from u to v, u comes before v which means that the post
+of u is bigger than the post of v. Let's prove this. There are three cases to consider. First, that we could explore
+u before we explore. Next, we could explore v
+while were exploring u. And finally, we could explore
+v after were done exploring. Of course, this last case can't happens
+is there is edge u to v which means that if we haven't already visited v we will
+visit as part of our exploration view. But okay the first two case is
+still possible let's take a look. Firstly, if we explore
+v before we explore u, well it turns out that we can't reach u
+from v, and this is because we have a DAG. If there was a path from v to u, and
+then we add an edge to u back to v. That would give us a cycle
+which we can't take. So it must be the case therefore, that we
+can't discover u as part of exploring v. We have to finish exploring v before
+we can even start exploring u, and that tells the post of u is
+bigger than the post of v, which is what we wanted
+to show in this case. Now in the second case the analysis
+is a little bit different. If we explore v while exploring u
+remember that this means that our explore of v is a subroutine of exploring u, and
+therefore it needs to finish up first. And that again, tells us that the post
+of u is bigger than the post of v. So that completes the proof of our
+theorem and shows that this algorithm for topological sort actually works. So we've got now this nice algorithm for
+the sorting. Next time, we are going to talk about
+something a little bit different, we're going to talk about
+connectivity in digraphs. So I'll see you then.

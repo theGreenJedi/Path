@@ -1,0 +1,427 @@
+1
+00:00:00,200 --> 00:00:03,630
+Hi, in this video you will
+learn Bellman-Ford's algorithm,
+
+2
+00:00:03,630 --> 00:00:04,830
+which is an algorithm for
+
+3
+00:00:04,830 --> 00:00:08,450
+finding shortest paths in graphs
+where edges can have negative weight.
+
+4
+00:00:09,740 --> 00:00:13,555
+Actually, do you remember the naive
+algorithm from the previous lesson about
+
+5
+00:00:13,555 --> 00:00:15,120
+Dijkstra's algorithm?
+
+6
+00:00:15,120 --> 00:00:17,815
+It turns out, it's not so naive and
+
+7
+00:00:17,815 --> 00:00:22,860
+Bellman-Ford's algorithm is almost
+the same as the naive algorithm.
+
+8
+00:00:22,860 --> 00:00:27,901
+So, that naive algorithm just
+relaxed edges while dist changed,
+
+9
+00:00:27,901 --> 00:00:30,160
+and at some point it stopped.
+
+10
+00:00:30,160 --> 00:00:33,780
+We didn't estimate the running
+time of that algorithm.
+
+11
+00:00:33,780 --> 00:00:35,960
+But it turns out, that this algorithm has
+
+12
+00:00:36,980 --> 00:00:42,290
+benefit over Dijkstra's algorithm that
+it works even for negative edge weights.
+
+13
+00:00:42,290 --> 00:00:46,073
+It is a little bit slower
+than Dijkstra's algorithm but
+
+14
+00:00:46,073 --> 00:00:48,900
+it works in graphs with any edge weights.
+
+15
+00:00:50,130 --> 00:00:53,270
+So, here is Bellman-Ford's algorithm.
+
+16
+00:00:53,270 --> 00:00:58,320
+And, it takes as input,
+graph and original node again.
+
+17
+00:00:58,320 --> 00:01:03,460
+And we will find shortest paths from this
+original to all the nodes in the graph.
+
+18
+00:01:03,460 --> 00:01:08,110
+And there is an additional comment
+that this algorithm assumes
+
+19
+00:01:08,110 --> 00:01:10,300
+that there are no negative
+weight cycles in G.
+
+20
+00:01:11,510 --> 00:01:14,100
+Otherwise, it will work still but
+
+21
+00:01:14,100 --> 00:01:19,450
+it won't return correct distances for
+some of the nodes, so.
+
+22
+00:01:19,450 --> 00:01:22,908
+So, if you know that there are no
+negative weight cycles in G,
+
+23
+00:01:22,908 --> 00:01:26,220
+this algorithm will give
+you the answers you need.
+
+24
+00:01:26,220 --> 00:01:30,199
+If there are negative weight cycles, we'll
+discuss later what to do in this case.
+
+25
+00:01:31,390 --> 00:01:35,120
+So, this algorithm uses
+the same dist values and
+
+26
+00:01:35,120 --> 00:01:38,990
+prev values as b f s and
+Dijkstra's algorithm.
+
+27
+00:01:38,990 --> 00:01:44,530
+It initializes them the same way,
+infinitely for distances
+
+28
+00:01:44,530 --> 00:01:50,360
+apart from the origin node s and
+prevs just point to nowhere.
+
+29
+00:01:50,360 --> 00:01:53,900
+And then we repeat exactly V- 1 times.
+
+30
+00:01:53,900 --> 00:01:57,040
+V is the number of nodes in the graph.
+
+31
+00:01:57,040 --> 00:02:00,280
+We relax all the edges
+in the graph in order.
+
+32
+00:02:01,390 --> 00:02:03,680
+So, this is the Bellman-Ford's algorithm.
+
+33
+00:02:03,680 --> 00:02:09,110
+And actually,
+this repeat V- 1 times is excessive.
+
+34
+00:02:09,110 --> 00:02:16,153
+Actually, we can just return to
+the naive algorithm interpretation
+
+35
+00:02:16,153 --> 00:02:22,650
+when it repeated relaxation of all
+the edges until no relaxation is possible.
+
+36
+00:02:23,870 --> 00:02:28,650
+So, this can be done, and
+this will even work faster
+
+37
+00:02:28,650 --> 00:02:33,060
+than Bellman-Ford, in the case where
+there are no negative weight cycles.
+
+38
+00:02:33,060 --> 00:02:37,791
+However, we write this pseudo-code in
+this form just because it is easier
+
+39
+00:02:37,791 --> 00:02:41,300
+to prove the algorithms
+correctness this way.
+
+40
+00:02:41,300 --> 00:02:46,710
+But, you can just know
+that if at some iteration
+
+41
+00:02:46,710 --> 00:02:51,940
+during these V- y iterations nothing
+changed, no edge was actually relaxed,
+
+42
+00:02:51,940 --> 00:02:56,830
+we can just stop there and
+the distances will already be correct.
+
+43
+00:02:58,480 --> 00:03:01,200
+Now, let's estimate the running
+time of this algorithm.
+
+44
+00:03:01,200 --> 00:03:06,430
+And I state that it's proportional to
+the product of number of nodes and
+
+45
+00:03:06,430 --> 00:03:07,170
+number of edges.
+
+46
+00:03:07,170 --> 00:03:12,190
+So, that is longer than Dijkstra's
+algorithm which was V squared
+
+47
+00:03:12,190 --> 00:03:16,990
+in terms of array based implementation and
+even e + v log v
+
+48
+00:03:16,990 --> 00:03:21,740
+in terms of heap,
+binary heap implementation.
+
+49
+00:03:21,740 --> 00:03:27,800
+So, this is longer than that but it works
+with negative edge weights, so it's good.
+
+50
+00:03:27,800 --> 00:03:32,810
+So initially, we just initialize dist and
+
+51
+00:03:32,810 --> 00:03:36,310
+prev values in time proportional
+to number of nodes.
+
+52
+00:03:36,310 --> 00:03:38,770
+And then we'll do V- 1 iteration.
+
+53
+00:03:38,770 --> 00:03:41,820
+Each iteration takes time
+proportional to the number of
+
+54
+00:03:41,820 --> 00:03:45,260
+edges because relaxation is
+a constant time procedure.
+
+55
+00:03:45,260 --> 00:03:48,410
+So, totally we get time
+proportional to VE.
+
+56
+00:03:51,090 --> 00:03:55,510
+And now, we'll look at an example
+of how Bellman-Ford's algorithm
+
+57
+00:03:55,510 --> 00:03:57,830
+works on a real graph.
+
+58
+00:03:57,830 --> 00:04:00,530
+So the original is, again, s.
+
+59
+00:04:00,530 --> 00:04:06,720
+And the numbers 0 and
+infinity in blue are the dis values.
+
+60
+00:04:06,720 --> 00:04:09,500
+And the numbers near the edges
+are the edge weights.
+
+61
+00:04:10,660 --> 00:04:15,490
+So, what we do is we take
+all the edges in order
+
+62
+00:04:15,490 --> 00:04:18,960
+starting from the edge with weight 4.
+
+63
+00:04:18,960 --> 00:04:20,580
+And we try to relax it.
+
+64
+00:04:20,580 --> 00:04:24,893
+And we improve the dist value for
+A from infinity to 4.
+
+65
+00:04:24,893 --> 00:04:27,390
+We take the next edge with length 3 and
+
+66
+00:04:27,390 --> 00:04:30,680
+we improve the dist value
+of B from infinity to 3.
+
+67
+00:04:30,680 --> 00:04:34,744
+We take the edge with weight -2 and
+
+68
+00:04:34,744 --> 00:04:41,460
+we further improve the dist value for
+B from 3 to 2.
+
+69
+00:04:41,460 --> 00:04:45,892
+Then, we consider edge from A to C and
+improve infinity to 8.
+
+70
+00:04:45,892 --> 00:04:51,900
+Then, we consider edge from B to C and
+improve it further from 8 to -1.
+
+71
+00:04:51,900 --> 00:04:57,450
+Then, we consider edge from B to D and
+improve from infinity to 3.
+
+72
+00:04:57,450 --> 00:05:03,840
+And, we consider the edge from C to D and
+improve from 3 to 1.
+
+73
+00:05:03,840 --> 00:05:07,650
+This is just one iteration
+of Bellman-Ford's algorithm.
+
+74
+00:05:07,650 --> 00:05:10,340
+Now, let's see what happens
+on the next iteration.
+
+75
+00:05:10,340 --> 00:05:14,636
+We consider edge from S to A,
+it doesn't improve anything.
+
+76
+00:05:14,636 --> 00:05:17,191
+This edge, doesn't improve anything.
+
+77
+00:05:17,191 --> 00:05:17,691
+This edge doesn't improve.
+
+78
+00:05:19,230 --> 00:05:20,660
+This edge also doesn't improve.
+
+79
+00:05:20,660 --> 00:05:22,010
+And this doesn't improve.
+
+80
+00:05:22,010 --> 00:05:23,730
+And this doesn't improve.
+
+81
+00:05:23,730 --> 00:05:25,060
+And this does improve.
+
+82
+00:05:25,060 --> 00:05:30,620
+And so already, on the second iteration,
+nothing can be improved.
+
+83
+00:05:30,620 --> 00:05:34,773
+So, we actually can stop the algorithm
+just after one iteration.
+
+84
+00:05:34,773 --> 00:05:37,613
+And it will take,
+instead of VE operations,
+
+85
+00:05:37,613 --> 00:05:42,190
+just E operations because we made just
+one iteration over all the edges.
+
+86
+00:05:42,190 --> 00:05:47,590
+And often,
+it will work just this way in practice.
+
+87
+00:05:47,590 --> 00:05:50,770
+But for some graphs, of course,
+we'll need many more iterations.
+
+88
+00:05:50,770 --> 00:05:53,190
+So now, we already know the final
+
+89
+00:05:53,190 --> 00:05:56,660
+distances that the Bellman-Ford
+algorithm returns.
+
+90
+00:05:56,660 --> 00:05:59,692
+And in the next video,
+we will prove that this algorithm
+
+91
+00:05:59,692 --> 00:06:03,508
+returns correct distances in
+the absence of negative weight cycles.

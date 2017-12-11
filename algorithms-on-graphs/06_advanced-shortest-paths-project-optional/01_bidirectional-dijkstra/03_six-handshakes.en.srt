@@ -1,0 +1,475 @@
+1
+00:00:00,170 --> 00:00:03,666
+Hi, in this video we will apply
+the idea of bidirectional search
+
+2
+00:00:03,666 --> 00:00:05,100
+to social networks data.
+
+3
+00:00:05,100 --> 00:00:08,193
+And we will see that it will
+work exceptionally well,
+
+4
+00:00:08,193 --> 00:00:10,490
+going up to thousands of times faster.
+
+5
+00:00:10,490 --> 00:00:14,580
+But first, let's learn
+an interesting fact about our world.
+
+6
+00:00:14,580 --> 00:00:18,520
+So in 1929, Hungarian mathematician,
+Frigyes Karinthy,
+
+7
+00:00:18,520 --> 00:00:22,000
+made a Small World conjecture,
+which you probably heard of already.
+
+8
+00:00:23,010 --> 00:00:27,510
+So the conjecture was that basically
+when we need to pass a message from
+
+9
+00:00:27,510 --> 00:00:31,850
+any person on earth to any
+other person on earth, using
+
+10
+00:00:31,850 --> 00:00:36,630
+only personal connections in between,
+we need at most six handshakes to do that.
+
+11
+00:00:36,630 --> 00:00:41,426
+So that we need only at most five
+intermediary people to pass a message
+
+12
+00:00:41,426 --> 00:00:44,000
+from anyone to anyone else on earth.
+
+13
+00:00:44,000 --> 00:00:49,145
+This is somewhat surprising, but
+it turned out to be close to truth in
+
+14
+00:00:49,145 --> 00:00:54,220
+different experiments which people
+made after that conjecture.
+
+15
+00:00:54,220 --> 00:00:59,110
+And this is called the six handshakes or
+six degrees of separation idea.
+
+16
+00:00:59,110 --> 00:01:04,000
+Now let's look at the most
+popular social network,
+
+17
+00:01:04,000 --> 00:01:07,700
+Facebook, given that six handshakes idea.
+
+18
+00:01:07,700 --> 00:01:10,610
+So suppose an average person on
+Facebook has around 100 friends.
+
+19
+00:01:12,590 --> 00:01:15,891
+Then if we consider friends
+of friends of that person,
+
+20
+00:01:15,891 --> 00:01:21,007
+it will be 100 times 100 roughly,
+that's 10,000 friends of friends.
+
+21
+00:01:21,007 --> 00:01:24,753
+If we consider friends of friends of
+friends, that will be 100 times more or
+
+22
+00:01:24,753 --> 00:01:25,910
+1 million.
+
+23
+00:01:25,910 --> 00:01:30,698
+And if we progress with that,
+we'll get that at six handshakes,
+
+24
+00:01:30,698 --> 00:01:33,147
+we will have 1 trillion people.
+
+25
+00:01:33,147 --> 00:01:35,486
+Well, that's not actually possible,
+
+26
+00:01:35,486 --> 00:01:39,190
+as there are only roughly
+7 billion people on Earth.
+
+27
+00:01:39,190 --> 00:01:43,190
+So it will be much less than that,
+but you get the general idea, that
+
+28
+00:01:43,190 --> 00:01:47,910
+the number of friends grows exponentially
+when we increase the distance.
+
+29
+00:01:48,950 --> 00:01:53,520
+So now we want to find the shortest
+path from Michael to Bob
+
+30
+00:01:53,520 --> 00:01:55,810
+via friends connections.
+
+31
+00:01:55,810 --> 00:01:56,970
+So we want to know,
+
+32
+00:01:56,970 --> 00:02:01,520
+actually how many handshakes do we need
+to send a message from Michael to Bob.
+
+33
+00:02:02,790 --> 00:02:04,070
+And if Michael and
+
+34
+00:02:04,070 --> 00:02:09,585
+Bob turned out to be the two farthest
+people on the Facebook social network,
+
+35
+00:02:09,585 --> 00:02:14,410
+then the regular Dijkstra's algorithm
+would have to look through all
+
+36
+00:02:14,410 --> 00:02:19,160
+roughly 2 billion people which are on
+Facebook to find that shortest path.
+
+37
+00:02:19,160 --> 00:02:23,700
+Now what will happen if we
+consider bidirectional search?
+
+38
+00:02:23,700 --> 00:02:27,950
+So we'll only consider friends of
+friends of friends of Michael and
+
+39
+00:02:27,950 --> 00:02:29,410
+friends of friends of friends of Bob.
+
+40
+00:02:30,460 --> 00:02:35,260
+And if we know that the six handshakes
+conjecture is true, then there will be
+
+41
+00:02:35,260 --> 00:02:39,385
+a common person among friends of
+friends of friends of Michael and
+
+42
+00:02:39,385 --> 00:02:41,797
+friends of friends of friends of Bob.
+
+43
+00:02:41,797 --> 00:02:46,812
+If we find that person in common, then
+we'll find the shortest path of friends,
+
+44
+00:02:46,812 --> 00:02:50,040
+at most, six between Michael and Bob.
+
+45
+00:02:50,040 --> 00:02:54,180
+And to do that we can create a hash table,
+for example,
+
+46
+00:02:54,180 --> 00:02:57,730
+of all the friends of friends of
+friends of Michael or a sorted list.
+
+47
+00:02:57,730 --> 00:03:01,860
+And then search the friends of friends
+of friends of Bob in that hash table or
+
+48
+00:03:01,860 --> 00:03:06,260
+ordered list, one by one,
+to find the common person.
+
+49
+00:03:06,260 --> 00:03:09,640
+And how many people will we
+actually consider in this case?
+
+50
+00:03:09,640 --> 00:03:14,290
+We'll have roughly 1 million
+friends of friends of friends for
+
+51
+00:03:14,290 --> 00:03:18,350
+both Michael and Bob, so
+in total, 2 million people.
+
+52
+00:03:18,350 --> 00:03:22,570
+And this will work in linear
+time if we use hash tables.
+
+53
+00:03:22,570 --> 00:03:28,340
+So this will be actually 1,000 times
+faster than using Dijkstra's algorithm,
+
+54
+00:03:28,340 --> 00:03:30,895
+at least in the number of friends scanned.
+
+55
+00:03:32,390 --> 00:03:38,640
+So this is going to work really thousands
+of times faster on social networks.
+
+56
+00:03:38,640 --> 00:03:43,630
+And what we've just seen is a particular
+case of a more general idea called
+
+57
+00:03:43,630 --> 00:03:47,830
+meet in the middle, and
+this applies not only to graphs.
+
+58
+00:03:47,830 --> 00:03:52,710
+So, in general if you need to search for
+some best object of some kind, for
+
+59
+00:03:52,710 --> 00:03:58,960
+example, the best shortest path or
+a best subset of people to create a team,
+
+60
+00:03:58,960 --> 00:04:01,630
+then instead of searching for
+all possible objects,
+
+61
+00:04:01,630 --> 00:04:05,500
+all the possible shortest paths or
+all possible subsets of people,
+
+62
+00:04:06,520 --> 00:04:10,220
+we can somehow divide all
+the possible objects into halves.
+
+63
+00:04:10,220 --> 00:04:15,190
+For example, when we are searching for
+shortest paths, we can divide any path
+
+64
+00:04:15,190 --> 00:04:19,620
+on the first half from the source and
+the second half to the target.
+
+65
+00:04:19,620 --> 00:04:23,671
+And when we are talking, for
+example, about subsets of people,
+
+66
+00:04:23,671 --> 00:04:28,180
+if we have N people, we can divide any
+subset of N people into two halves.
+
+67
+00:04:28,180 --> 00:04:32,828
+First half consists of a subset of
+the first N of our two people, and
+
+68
+00:04:32,828 --> 00:04:37,650
+the second half consists of a subset
+of the second N of our two people.
+
+69
+00:04:38,710 --> 00:04:41,250
+And then we can search
+all the variants for
+
+70
+00:04:41,250 --> 00:04:46,390
+the first half separately, all the
+variants for the second half separately.
+
+71
+00:04:46,390 --> 00:04:49,850
+And then we just need to
+find the compatible halves.
+
+72
+00:04:49,850 --> 00:04:53,430
+So for example,
+we again create a hash table or
+
+73
+00:04:53,430 --> 00:04:57,160
+an or at least of the first
+halves which are possible.
+
+74
+00:04:57,160 --> 00:05:02,500
+And then for each particular second half,
+we try to find
+
+75
+00:05:02,500 --> 00:05:07,500
+whether there's a compatible first
+half to it in this hash table.
+
+76
+00:05:07,500 --> 00:05:11,170
+And this is in general how
+meet in the middle works.
+
+77
+00:05:11,170 --> 00:05:17,530
+And typically, instead of searching
+through all possible big N objects,
+
+78
+00:05:17,530 --> 00:05:22,010
+this works in time proportional
+to square root of N,
+
+79
+00:05:22,010 --> 00:05:26,810
+because only square root of
+N halves of those objects.
+
+80
+00:05:26,810 --> 00:05:31,450
+Square root of N of
+the shortest paths halves and
+
+81
+00:05:31,450 --> 00:05:35,950
+square root of N for
+first halves of the subset of people.
+
+82
+00:05:35,950 --> 00:05:38,790
+So this idea can be applied in many,
+
+83
+00:05:38,790 --> 00:05:43,310
+many different problems to
+take a significant speed up.
+
+84
+00:05:44,400 --> 00:05:48,550
+So in conclusion, we understood that
+the regular Dijkstra's algorithm
+
+85
+00:05:48,550 --> 00:05:52,820
+goes in circles of increasing
+radius around the starting point.
+
+86
+00:05:52,820 --> 00:05:56,830
+And the bidirectional search idea
+can reduce the search space.
+
+87
+00:05:56,830 --> 00:06:03,590
+We can scan less vertices than if we
+go from one source and grow the circle.
+
+88
+00:06:03,590 --> 00:06:07,956
+And on the raw networks it works
+roughly twice faster than the regular
+
+89
+00:06:07,956 --> 00:06:10,200
+Dijkstra's algorithm.
+
+90
+00:06:10,200 --> 00:06:15,603
+But if we use this meet in the middle
+idea on the social networks,
+
+91
+00:06:15,603 --> 00:06:18,705
+or actually on many other problems,
+
+92
+00:06:18,705 --> 00:06:23,708
+then it will roughly work as
+a square root of N instead of big N
+
+93
+00:06:23,708 --> 00:06:29,137
+if big N is the total number of
+objects we need to search through.
+
+94
+00:06:29,137 --> 00:06:30,486
+And in social networks,
+
+95
+00:06:30,486 --> 00:06:34,541
+it can be thousands times faster than
+the regular Dijkstra's algorithm.
+
+96
+00:06:34,541 --> 00:06:38,759
+And you will actually see that in one
+of the problems of the programming
+
+97
+00:06:38,759 --> 00:06:41,360
+assignments of this project.
+
+98
+00:06:41,360 --> 00:06:44,137
+And in the next video,
+we will actually come
+
+99
+00:06:44,137 --> 00:06:47,980
+up with a bidirectional version
+of Dijkstra's algorithm.

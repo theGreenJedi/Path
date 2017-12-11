@@ -1,0 +1,528 @@
+1
+00:00:00,210 --> 00:00:04,350
+Hi, in this video,
+you will learn Dijkstra's Algorithm,
+
+2
+00:00:04,350 --> 00:00:07,260
+which is an efficient algorithm to find
+
+3
+00:00:07,260 --> 00:00:12,320
+shortest paths from original node in the
+graph to all the nodes in the graph with
+
+4
+00:00:12,320 --> 00:00:17,220
+weighted edges where all
+the weights are non-negative.
+
+5
+00:00:17,220 --> 00:00:19,760
+First, let's improve our intuition.
+
+6
+00:00:19,760 --> 00:00:24,730
+So let's say we're in the node S,
+and this is the origin node.
+
+7
+00:00:24,730 --> 00:00:28,560
+What we know exactly is that the distance
+from this node to itself is 0.
+
+8
+00:00:28,560 --> 00:00:33,720
+We don't need to see
+anything else to decide that
+
+9
+00:00:33,720 --> 00:00:37,740
+because all the edges are non-negative,
+so it's better just to stay in s, and
+
+10
+00:00:37,740 --> 00:00:41,030
+this is the shortest path
+from S to itself, okay?
+
+11
+00:00:42,225 --> 00:00:46,600
+And now, let's look at all
+the edges outgoing of node S.
+
+12
+00:00:48,770 --> 00:00:52,040
+And let's relax all those edges.
+
+13
+00:00:52,040 --> 00:00:56,468
+So now we see that there
+are edges of length 5 and
+
+14
+00:00:56,468 --> 00:01:00,580
+10, and they go to nodes A and B.
+
+15
+00:01:00,580 --> 00:01:04,640
+And so, we can determine that
+the dist value of A is 5,
+
+16
+00:01:04,640 --> 00:01:07,430
+and the dist value of B
+is 10 after relaxation.
+
+17
+00:01:08,890 --> 00:01:12,260
+Now if there are no more
+edges outgoing from S,
+
+18
+00:01:12,260 --> 00:01:17,090
+we already know that the distance
+from S to A is exactly 5.
+
+19
+00:01:17,090 --> 00:01:22,930
+Because we cannot go around it and
+spend less time.
+
+20
+00:01:22,930 --> 00:01:26,600
+So we're sure about distance for A.
+
+21
+00:01:26,600 --> 00:01:30,190
+So now, let's relax all the edges from A.
+
+22
+00:01:30,190 --> 00:01:35,465
+And we will see that the distance
+to B will improve, and
+
+23
+00:01:35,465 --> 00:01:40,750
+the distance to B becomes 5 plus 3,
+which is just 8.
+
+24
+00:01:40,750 --> 00:01:45,726
+And also, we'll discover two more nodes,
+C and D, and
+
+25
+00:01:45,726 --> 00:01:50,220
+we will relax the edges from A to them.
+
+26
+00:01:50,220 --> 00:01:55,293
+And C will get an estimate of 12
+because it's 5 plus 7, and D will
+
+27
+00:01:55,293 --> 00:02:01,980
+get an estimate of 6, which is 5 plus 1,
+which is the way of edge from A to D.
+
+28
+00:02:01,980 --> 00:02:05,090
+So the question is what
+is the next node for
+
+29
+00:02:05,090 --> 00:02:08,260
+which we already know
+the correct distance for sure?
+
+30
+00:02:09,910 --> 00:02:11,730
+And this node is D.
+
+31
+00:02:11,730 --> 00:02:15,750
+Because it has the smallest
+dist value estimate, and
+
+32
+00:02:15,750 --> 00:02:19,450
+it means that there is
+no way to go around it.
+
+33
+00:02:19,450 --> 00:02:25,460
+We can go directly to it from
+S through A in distance 6,
+
+34
+00:02:25,460 --> 00:02:30,505
+but if we go through any of the other
+nodes, it will take us at least
+
+35
+00:02:30,505 --> 00:02:35,410
+8 to get there and
+also some non-negative amount after that.
+
+36
+00:02:35,410 --> 00:02:39,569
+So we cannot really improve
+this dist value estimate of 6.
+
+37
+00:02:39,569 --> 00:02:43,074
+So we now know exactly
+the distance to D is 6,
+
+38
+00:02:43,074 --> 00:02:46,598
+and we can continue by
+relaxing edges from D.
+
+39
+00:02:46,598 --> 00:02:47,498
+While for B and C,
+
+40
+00:02:47,498 --> 00:02:51,462
+it is still possible that their dist
+values are larger than actual distances.
+
+41
+00:02:51,462 --> 00:02:55,535
+For example, if there is an edge
+from D to B of length 1,
+
+42
+00:02:55,535 --> 00:03:00,270
+then the dist value of B will
+improve even better, it will be 7.
+
+43
+00:03:00,270 --> 00:03:04,120
+And if we get an edge
+from D to C of length 1,
+
+44
+00:03:04,120 --> 00:03:07,974
+then the distance to C will be just 7,
+also, which is much less than 12.
+
+45
+00:03:09,180 --> 00:03:14,340
+So now we have this intuition
+that at any moment of time,
+
+46
+00:03:14,340 --> 00:03:20,800
+if we have relaxed all the edges outgoing
+from some known set of nodes for
+
+47
+00:03:20,800 --> 00:03:26,700
+which the distances are already known
+correctly, then the node with the smallest
+
+48
+00:03:26,700 --> 00:03:31,696
+dist value estimate is also a node for
+which we know the distance correctly.
+
+49
+00:03:31,696 --> 00:03:36,718
+So, the main idea of
+Dijkstra's Algorithm is that we maintain
+
+50
+00:03:36,718 --> 00:03:42,470
+some set R of vertices for
+which dist value is already set correctly.
+
+51
+00:03:42,470 --> 00:03:44,850
+We call this set R, known region.
+
+52
+00:03:44,850 --> 00:03:50,370
+And initially, we only have node S,
+the region in the set R,
+
+53
+00:03:50,370 --> 00:03:54,572
+because for this node, we definitely
+know that the distance to it is 0.
+
+54
+00:03:54,572 --> 00:03:59,640
+And then on each iteration, we take
+the node outside of this region with
+
+55
+00:03:59,640 --> 00:04:04,650
+a minimum dist value out of all
+nodes in this outside region, and
+
+56
+00:04:04,650 --> 00:04:10,140
+we add this node to the known region and
+relax all the outgoing edges.
+
+57
+00:04:10,140 --> 00:04:13,070
+And so, after a number of iterations,
+
+58
+00:04:13,070 --> 00:04:15,760
+which is equal to the number
+of nodes in the graph,
+
+59
+00:04:15,760 --> 00:04:21,460
+we will know all the correct distances
+from origin to all the nodes in the graph.
+
+60
+00:04:21,460 --> 00:04:23,950
+Let's see how it works in an example.
+
+61
+00:04:23,950 --> 00:04:26,480
+Here, we have six nodes, some edges, and
+
+62
+00:04:26,480 --> 00:04:30,690
+the edge weights are written
+nearby the corresponding edges.
+
+63
+00:04:30,690 --> 00:04:35,600
+And on top of each node,
+and under the bottom nodes,
+
+64
+00:04:35,600 --> 00:04:37,610
+we have the current dist value.
+
+65
+00:04:37,610 --> 00:04:41,620
+So we start with infinities
+in all the nodes,
+
+66
+00:04:41,620 --> 00:04:45,850
+but the origin node to the left,
+which has dist value of 0.
+
+67
+00:04:45,850 --> 00:04:51,057
+Now we add this 0 node to the known
+region, and we now know for
+
+68
+00:04:51,057 --> 00:04:55,362
+sure that the distance from
+the origin to it is 0.
+
+69
+00:04:55,362 --> 00:04:58,008
+And so we color the dist value by green,
+
+70
+00:04:58,008 --> 00:05:03,960
+because we are sure that this is the
+correct distance from origin to this node.
+
+71
+00:05:03,960 --> 00:05:09,170
+And then we color our node in black,
+and we start processing it.
+
+72
+00:05:09,170 --> 00:05:13,100
+So we color nodes in black when we start
+processing them in the same way we did in
+
+73
+00:05:13,100 --> 00:05:15,240
+the breadth-first search.
+
+74
+00:05:15,240 --> 00:05:18,320
+Now relax all the outgoing
+edges from this node.
+
+75
+00:05:18,320 --> 00:05:24,897
+First relax the edge of length 3, and we
+improve the dist value from infinity to 3.
+
+76
+00:05:24,897 --> 00:05:25,578
+And next,
+
+77
+00:05:25,578 --> 00:05:31,650
+we traverse edge of length 10 to improve
+the dist value from infinity to 10.
+
+78
+00:05:31,650 --> 00:05:32,496
+Now what do we know?
+
+79
+00:05:32,496 --> 00:05:36,899
+We know that the node with
+a minimum dist value outside of
+
+80
+00:05:36,899 --> 00:05:41,313
+the known black region is
+the node with dist value of 3.
+
+81
+00:05:41,313 --> 00:05:46,292
+So this node actually has a distance of 3,
+and we color the distance with green and
+
+82
+00:05:46,292 --> 00:05:50,550
+the node with black, and
+we start processing this node.
+
+83
+00:05:50,550 --> 00:05:52,580
+So we process the outgoing edges.
+
+84
+00:05:52,580 --> 00:05:57,771
+First, edge of length 8, which goes
+to the node with distance 10, but
+
+85
+00:05:57,771 --> 00:06:02,742
+new estimate is 3 plus 8,
+which is 11, which is bigger than 10.
+
+86
+00:06:02,742 --> 00:06:04,531
+So, nothing changes because of this edge.
+
+87
+00:06:04,531 --> 00:06:09,661
+And I also have an edge of flag 3, and we
+improve the dist value from infinity to 6.
+
+88
+00:06:09,661 --> 00:06:12,740
+And there is also an edge of flag 5,
+
+89
+00:06:12,740 --> 00:06:17,170
+which improves the dist
+value from infinity to 8.
+
+90
+00:06:17,170 --> 00:06:23,200
+And now, what we see is that the node
+with the minimum dist values,
+
+91
+00:06:23,200 --> 00:06:28,704
+the node in the top right corner,
+which has this value of 6.
+
+92
+00:06:28,704 --> 00:06:34,130
+So we color it with black color and
+the distance with green and process it.
+
+93
+00:06:34,130 --> 00:06:37,920
+This edge gives us improvement
+from infinity to 8.
+
+94
+00:06:37,920 --> 00:06:40,660
+This edge gives us
+improvement from 8 to 7,
+
+95
+00:06:40,660 --> 00:06:44,370
+and this edge gives us
+an improvement from 10 to 9.
+
+96
+00:06:44,370 --> 00:06:50,320
+Now the best node is in the bottom
+to the right and has distance 7.
+
+97
+00:06:50,320 --> 00:06:54,950
+And it improves the distance estimate for
+the right most node from 8 to 7,
+
+98
+00:06:54,950 --> 00:06:59,910
+and notice that there is
+an edge of weight exactly 0.
+
+99
+00:06:59,910 --> 00:07:02,210
+This is allowed because 0 is non-negative.
+
+100
+00:07:02,210 --> 00:07:06,098
+We'll only forbid the edges
+from being negative, but
+
+101
+00:07:06,098 --> 00:07:09,150
+non-negative, including 0, is okay.
+
+102
+00:07:10,230 --> 00:07:11,000
+So now,
+
+103
+00:07:11,000 --> 00:07:17,170
+we don't have any more outgoing edges from
+these nodes to the right and the bottom.
+
+104
+00:07:17,170 --> 00:07:20,090
+And so it's like the next node process,
+
+105
+00:07:20,090 --> 00:07:23,440
+which is the right most node
+with an estimation of 7.
+
+106
+00:07:23,440 --> 00:07:29,250
+But we don't have any outgoing edges from
+it, so we process the last remaining node,
+
+107
+00:07:29,250 --> 00:07:32,240
+which has distance of 9.
+
+108
+00:07:32,240 --> 00:07:37,444
+And we can try to relax some edges,
+but they don't work
+
+109
+00:07:37,444 --> 00:07:42,210
+because this is the farthest
+node from the start.
+
+110
+00:07:42,210 --> 00:07:47,120
+So now we know all the distances from
+the origin to all the nodes in the graph.
+
+111
+00:07:47,120 --> 00:07:50,640
+And this is how Dijkstra's
+algorithm works on this example.

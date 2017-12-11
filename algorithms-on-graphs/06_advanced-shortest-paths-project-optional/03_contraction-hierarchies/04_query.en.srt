@@ -1,0 +1,597 @@
+1
+00:00:00,270 --> 00:00:05,080
+Hi, in this video we'll study how
+to actually find the distance
+
+2
+00:00:05,080 --> 00:00:09,480
+between nodes in the augmented
+graph after pre-processing it
+
+3
+00:00:09,480 --> 00:00:11,090
+using contraction of the nodes.
+
+4
+00:00:11,090 --> 00:00:15,410
+So the main idea is that we will
+use Bidirectional Dijkstra.
+
+5
+00:00:15,410 --> 00:00:19,090
+And this Bidirectional Dijkstra
+will only use some of the edges
+
+6
+00:00:19,090 --> 00:00:20,850
+of the augmented graph.
+
+7
+00:00:20,850 --> 00:00:24,330
+So you remember that when
+we contracted the nodes,
+
+8
+00:00:24,330 --> 00:00:29,240
+we placed them from bottom to top in
+the order of increasing importance.
+
+9
+00:00:29,240 --> 00:00:33,520
+And also in the order of contraction,
+so the later the node was contracted,
+
+10
+00:00:33,520 --> 00:00:36,030
+the more important is this node.
+
+11
+00:00:36,030 --> 00:00:42,790
+And so we drew this arrow with
+node order from bottom to top.
+
+12
+00:00:42,790 --> 00:00:45,250
+And we will consider
+only the upward edges.
+
+13
+00:00:46,300 --> 00:00:50,400
+So for example if we need to find
+the shortest path between node two and
+
+14
+00:00:50,400 --> 00:00:53,490
+node three in this graph,
+the path will look like this.
+
+15
+00:00:53,490 --> 00:00:56,180
+It will go first, by edges,
+
+16
+00:00:56,180 --> 00:01:01,690
+which go up to some node
+with the biggest importance.
+
+17
+00:01:01,690 --> 00:01:04,920
+For example, in this case,
+it will be node 6.
+
+18
+00:01:04,920 --> 00:01:10,800
+And then we'll go by edges down
+from that node 6, into node 3.
+
+19
+00:01:10,800 --> 00:01:14,820
+And to find such a path, we will use
+Bidirectional Dijkstra, which we'll start
+
+20
+00:01:14,820 --> 00:01:20,510
+both from 2 and from 3 and from 2
+it'll go by forward edges which go up.
+
+21
+00:01:20,510 --> 00:01:24,408
+And from 3 it'll go by backward
+edges which also go up.
+
+22
+00:01:24,408 --> 00:01:27,896
+And then they will meet at some node and
+
+23
+00:01:27,896 --> 00:01:33,469
+we'll find some path which goes
+first up and then goes down.
+
+24
+00:01:33,469 --> 00:01:38,652
+This is the general idea but
+it is someone difference still
+
+25
+00:01:38,652 --> 00:01:43,538
+from the classical
+Bidirectional Dijkstra variant.
+
+26
+00:01:43,538 --> 00:01:48,341
+So in the Bidirectional Dijkstra as soon
+as we find some node that is process both
+
+27
+00:01:48,341 --> 00:01:51,853
+by the forward search and
+the backward search, we stop and
+
+28
+00:01:51,853 --> 00:01:54,760
+compute the shortest distance.
+
+29
+00:01:54,760 --> 00:01:59,410
+In this case, we don't stop when some
+node was processed by both searches.
+
+30
+00:01:59,410 --> 00:02:04,610
+We stop only when the extracted
+node is already farther
+
+31
+00:02:04,610 --> 00:02:07,961
+than our current estimate of
+the distance to the target.
+
+32
+00:02:07,961 --> 00:02:12,530
+This is the pseudo code code for the
+function ComputeDistance which takes as
+
+33
+00:02:12,530 --> 00:02:17,530
+inputs service node s and target node t
+and returns the distance between them.
+
+34
+00:02:17,530 --> 00:02:21,475
+Of course it also takes as input for
+example the graph and
+
+35
+00:02:21,475 --> 00:02:25,915
+the reverse graph for the bidirectional
+search but I just omitted those details.
+
+36
+00:02:25,915 --> 00:02:30,990
+Note however that you only need to store
+in the graph the edges which go upwards.
+
+37
+00:02:30,990 --> 00:02:35,112
+So we have a node A and
+a node B and an edge from A to B.
+
+38
+00:02:35,112 --> 00:02:39,880
+If A was contracted earlier than B,
+then you need to store this edge.
+
+39
+00:02:39,880 --> 00:02:42,767
+But if B was contracted earlier than A,
+
+40
+00:02:42,767 --> 00:02:48,030
+then this edge goes downwards and so
+you don't need to store this edge.
+
+41
+00:02:48,030 --> 00:02:52,100
+You can just delete it because it
+won't be used at all in the queries.
+
+42
+00:02:52,100 --> 00:02:54,970
+And so, you don't need to
+store it in the pre-process,
+
+43
+00:02:54,970 --> 00:02:56,408
+in the augmented graph at all.
+
+44
+00:02:56,408 --> 00:03:02,680
+We start with initializing
+variable estimate which will
+
+45
+00:03:02,680 --> 00:03:07,060
+store our current estimate of the distance
+between the source and the target.
+
+46
+00:03:07,060 --> 00:03:10,030
+And we initialize it with plus
+infinity because currently,
+
+47
+00:03:10,030 --> 00:03:13,800
+we don't know of any path
+between source and target.
+
+48
+00:03:13,800 --> 00:03:17,620
+Then we do the standard initialization
+of the bidirectional Dijkstra data.
+
+49
+00:03:17,620 --> 00:03:21,706
+We fill the arrays with distance
+estimates for the forward search and
+
+50
+00:03:21,706 --> 00:03:24,690
+the backward search with plus infinities.
+
+51
+00:03:24,690 --> 00:03:29,660
+And we'll also set the distance in the
+forward search from the source to zero.
+
+52
+00:03:29,660 --> 00:03:33,090
+And the distance in the backwards
+search from the target also to zero.
+
+53
+00:03:33,090 --> 00:03:37,980
+And also have the lists of
+the processed nodes for
+
+54
+00:03:37,980 --> 00:03:40,540
+the forward and the backward search.
+
+55
+00:03:40,540 --> 00:03:47,010
+Then we'll have the main loop and
+this loop goes while we still have some
+
+56
+00:03:47,010 --> 00:03:52,540
+nodes to process, either in the forward
+Dijkstra or in the backward Dijkstra.
+
+57
+00:03:52,540 --> 00:03:56,400
+Which means that basically in our
+priority queue that we use for
+
+58
+00:03:56,400 --> 00:03:59,930
+the Djikstra algorithm,
+there still are some nodes.
+
+59
+00:03:59,930 --> 00:04:04,440
+Either in the queue for the forward
+Djikstra search or in the queue for
+
+60
+00:04:04,440 --> 00:04:05,510
+the backward Djikstra search.
+
+61
+00:04:06,750 --> 00:04:11,480
+While there are still such nodes,
+we try to extract node in the forward
+
+62
+00:04:11,480 --> 00:04:16,520
+search if there is still something
+in the queue for the forward search.
+
+63
+00:04:16,520 --> 00:04:21,247
+And this node will all ready have
+the distance estimate which is
+
+64
+00:04:21,247 --> 00:04:24,999
+equal to the distance from
+source s to this node v.
+
+65
+00:04:24,999 --> 00:04:30,652
+So if the distance from s to v is
+already bigger than the estimate
+
+66
+00:04:30,652 --> 00:04:36,108
+of the distance from s to t,
+we don't need to process node v.
+
+67
+00:04:36,108 --> 00:04:38,920
+And we don't need to put it into queue and
+
+68
+00:04:38,920 --> 00:04:42,980
+to process the nodes which
+are the successors of v.
+
+69
+00:04:42,980 --> 00:04:47,760
+So we only do that if the distance
+estimate of v is smaller or
+
+70
+00:04:47,760 --> 00:04:49,800
+equal to the current estimate.
+
+71
+00:04:49,800 --> 00:04:55,700
+Then we process, basically we do the same,
+we do in the regular Dijkstra step.
+
+72
+00:04:55,700 --> 00:04:58,824
+And then,
+we need to also update our estimate.
+
+73
+00:04:58,824 --> 00:05:05,992
+So if v is processed in the reverse
+search which act that by if v in proc R,
+
+74
+00:05:05,992 --> 00:05:09,946
+then it is processed in both searches.
+
+75
+00:05:09,946 --> 00:05:13,477
+Because v has just been processed
+in the forward search and
+
+76
+00:05:13,477 --> 00:05:17,377
+it is also in the list of processed
+nodes in the backward search.
+
+77
+00:05:17,377 --> 00:05:20,670
+So it is processed by both forward and
+backward searches.
+
+78
+00:05:20,670 --> 00:05:24,900
+This means that its distance
+estimates both in the forward and
+
+79
+00:05:24,900 --> 00:05:30,310
+the backward search are already equal to
+the corresponding distances from s to v
+
+80
+00:05:30,310 --> 00:05:32,400
+and from v to t.
+
+81
+00:05:32,400 --> 00:05:37,210
+And so we know the length of the shortest
+path going from s to t through v.
+
+82
+00:05:38,400 --> 00:05:44,460
+This path has length equal to
+dist of v plus dist R of v.
+
+83
+00:05:44,460 --> 00:05:49,690
+If this length is smaller than our current
+estimate of the distance between s and
+
+84
+00:05:49,690 --> 00:05:50,960
+t we need to update it.
+
+85
+00:05:52,020 --> 00:05:55,320
+And that's what we do
+in this if statement.
+
+86
+00:05:55,320 --> 00:05:58,720
+And then we try to do
+the backward Dijkstra search.
+
+87
+00:05:58,720 --> 00:06:01,640
+And it is completely symmetric
+to what we have here for
+
+88
+00:06:01,640 --> 00:06:04,460
+the forward Dijkstra search, so
+I don't write the code for that.
+
+89
+00:06:05,640 --> 00:06:10,610
+And this while loop goes and goes until
+all the nodes and all the queues for
+
+90
+00:06:10,610 --> 00:06:12,650
+forward and backward search are processed.
+
+91
+00:06:12,650 --> 00:06:15,720
+And then in the end we just
+return our current estimate
+
+92
+00:06:15,720 --> 00:06:18,100
+of the distance between source and
+the target.
+
+93
+00:06:19,230 --> 00:06:21,580
+Now it seems that we
+already know everything.
+
+94
+00:06:21,580 --> 00:06:24,740
+We know how to pre-process the graph
+using the contraction of the node.
+
+95
+00:06:24,740 --> 00:06:29,900
+We also know how to implement queries
+using bidirectional Dijkstra, so
+
+96
+00:06:29,900 --> 00:06:30,520
+are we done?
+
+97
+00:06:30,520 --> 00:06:33,120
+Can we actually go and
+implement this algorithm?
+
+98
+00:06:34,250 --> 00:06:37,440
+Well of course we're not done because for
+example we don't know yet
+
+99
+00:06:37,440 --> 00:06:40,050
+whether this algorithm works correctly or
+not.
+
+100
+00:06:40,050 --> 00:06:44,160
+So commute distance procedure returns some
+estimate of the distance between source
+
+101
+00:06:44,160 --> 00:06:47,620
+and the target but
+is it always correct estimate?
+
+102
+00:06:47,620 --> 00:06:52,220
+Is it always equal to the distance between
+s and t in the initial graph or not?
+
+103
+00:06:52,220 --> 00:06:53,695
+We don't know that.
+
+104
+00:06:53,695 --> 00:06:58,235
+Also, this can be distance procedure
+only returns us the estimate of
+
+105
+00:06:58,235 --> 00:07:02,915
+the distance between source and the target
+but it doesn't return the actual shortest
+
+106
+00:07:02,915 --> 00:07:06,660
+path between source and
+the target in the initial graph.
+
+107
+00:07:06,660 --> 00:07:09,150
+But that's more of a technical moment.
+
+108
+00:07:09,150 --> 00:07:14,680
+Using the standard bidirectional Dijkstra
+algorithm we can reconstruct the path
+
+109
+00:07:14,680 --> 00:07:19,490
+in the augmented graph between source and
+target using the special RA with
+
+110
+00:07:19,490 --> 00:07:24,530
+the previous node in the shortest
+path from source to this node.
+
+111
+00:07:24,530 --> 00:07:26,583
+And the same for the backward search.
+
+112
+00:07:26,583 --> 00:07:29,197
+And then some of the edges
+could be shortcuts,
+
+113
+00:07:29,197 --> 00:07:31,645
+instead of the edges of the initial graph.
+
+114
+00:07:31,645 --> 00:07:37,210
+But then while we do the pre-processing
+we should also store in the shortcut
+
+115
+00:07:37,210 --> 00:07:43,930
+not just the edge but also which two edges
+were there before we ended the shortcut.
+
+116
+00:07:43,930 --> 00:07:47,570
+Now we can recursively
+take the shortcut and
+
+117
+00:07:47,570 --> 00:07:51,100
+replace it with the two edges
+that were before the shortcut.
+
+118
+00:07:51,100 --> 00:07:54,600
+And then if some of those two edges
+are also shortcuts, we recursively
+
+119
+00:07:56,070 --> 00:08:00,750
+get the edges that were there before
+these shortcuts were added, and so on.
+
+120
+00:08:00,750 --> 00:08:05,330
+And then, we will eventually reconstruct
+the path in the initial graph,
+
+121
+00:08:05,330 --> 00:08:07,890
+which only contains the edges
+of the initial graph.
+
+122
+00:08:08,900 --> 00:08:13,109
+And in the next video we will actually
+prove that this algorithm works correctly,
+
+123
+00:08:13,109 --> 00:08:16,891
+that the estimate from the compute
+distance procedure will always return
+
+124
+00:08:16,891 --> 00:08:19,640
+the correct distance between source and
+the target.

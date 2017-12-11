@@ -1,0 +1,66 @@
+Hello everybody,
+welcome to the course on graph algorithms. The first unit in this course,
+we're going to be talking about various algorithms to compute various
+sorts of decompositions of graphs. But to begin with, we're going to start with the very
+basics about what is a graph, what are they good for, and how do we
+sort of interpret them and draw them. So to start with,
+a graph is sort of an abstract idea, and it's an abstraction that sort of
+represents connections between objects. Graphs are useful both in computer
+science and elsewhere in the world, because they can be used to
+describe many important phenomena. For example, the Internet often
+can be thought of as a graph, where you've got various web pages and
+theyre connected to each other by links. And this is sort of a very, very high
+level view of the Internet that sort of pays no attention to the content of
+a given page and other things like that. On the other hand, if you want to do something like Google's
+page rank algorithm, make sort of heavy use of this very high level view of
+the Internet and connectivity within it. Another example is maps,
+you can think of maps as a graph, sort of where you have intersections
+that are connected by roads. And this is a view that would
+be very useful if you, say, wanted to plot a course
+between two locations. You need to find some connections, some path along this map that gets
+you from one place to the other. Social networks can also
+be interpreted as graphs. You have people connected by friendships
+or following relationship or whatever, and this provides you
+another example of graph structure. You can also sort of use
+more complicated things, if you have some sort of robot arm that
+can be in many possible configurations. What you could do is,
+you could think of the configurations, some of them are connected to
+each other by various motions. And then if you want to
+solve problems like, how do I best reconfigure this robot arm
+from this position to this other position, you again, want to sort of consider
+this graph relating these things to each other in order to figure
+out how best to do that. Okay, so these are the sorts of problems
+that we would like to be able to deal with using graph theory. So what is a graph? Well, the formal definition of an
+undirected graph we'll talk about directed ones in a few lectures is that
+it's a collection V of vertices. And then a collection E of edges, each of which connects a pair
+of vertices to each other. So when you draw them on the paper what
+you do is your verses are usually drawn as points or circles or something. And the edges are lines or curves or something that connect
+pairs of these point. So for example the graph drawn on
+the screen has four Vertices labelled A, B, C, and D and it also has
+four edges one between A and B, one between A and C, one between A and
+D and one between C and D. And so to make sure that
+were all in the same page in we draw the following graph below,
+how many edges does it have? Well, the graph here has 12 edges. You can sort of count them all and each of these segments between two
+of these points gives us an edge. And so, there are 12 of them. Now, there's one thing that sort of
+fits into this definition of graphs that I gave that is a little bit weird perhaps,
+or unusual. One thing that you might have is loops, this would be an edge that
+connects a vertex to itself. So here we just have the one vertex A, and
+then a loop that connects A to itself. And there are some instances in
+which you might want to use this. Sometimes you actually do have traffic
+circle that just goes in a loop or something like that. But only sometimes this is the sort
+of a thing we we're talking about. Also sometimes you can have multiple
+edges between the same pair of vertices. So in this picture we have two vertices
+A and B and two edges between them. And somehow if you're just talking about,
+can I get from A to B? It doesn't matter if there's one edge or
+two between them. But sometimes having
+both of them is relevant. On the other hand a lot of the time,
+these loops and multiple edges are just a sort of a that
+we don't really need to deal with. So often times you work
+with what are known as simple graphs which don't have loops and
+don't have multiple edges. And so, this is sort of the basics of
+what a graph is that we've just covered. Next time we're going to talk
+about a couple of things. First thing we're going to talk about how
+to represent graphs on a computer and then we're going to talk a little bit
+about how we talk about runtimes for graph algorithms. So I hope this has been
+a useful introduction and I'll see you at the next lecture when
+we talk about these other things.

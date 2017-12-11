@@ -1,0 +1,103 @@
+Hi, in this video, I'll will prove that
+the algorithm suggested in the previous video for finding the distance between
+two nodes in the augmented graph always returns correct result. First, let's formally
+define the augmented graph. So augmented graph G+,
+has the same set of nodes, V, and has the augmented set of edges, E+,
+which contains all the initial edges E of the graph G along with all the shortcuts
+added at the pre-processing stage. And the lemma states that the distance,
+d+(s,t) between any two nodes s and t in the augmented graph. Is equal to the distance between
+the same nodes in the initial graph. And note that this makes sense, because actually the only thing we
+are doing is we are adding shortcuts. And those shortcuts are not shorter then the path which was initially
+between those two nodes. Just has the same length
+as the path through the contracted node V
+in the initial graph. So, always when we add the shortcut,
+we don't do anything but the path. But, more formally, first thing to know
+is that edges are only added to G. So, if there was some shortest
+path between s and t and G, it will also be present in G+. And so distance in the augmented graph is,
+at most, distance in the initial graph. But also,
+if we add some shortcut from u to w, then at that moment there was a path
+from u to w through v of length of the h from u to v plus
+length of the h from v to w. But this is equal actually to
+the length of the shortcut edit. So, there was a path before adding
+this shortcut from u to w through v. So, if there is some
+shortest path from s to t, going through this edge (u,w)
+in the augmented graph. Then in the initial graph there
+was a path going from s to u, then from u to v, from v to w and then
+from w to t, which has the same length. So there is a path of the same
+length in the initial graph. And so the distance in the augmented
+graph is the same as the distance in the initial graph. Now [COUGH] let's also define the rank
+of vertex, which is the position of this vertex In the node order
+returned by the pre-processing stage. So, basically,
+it's the importance of the node. So, if our node was constructed first,
+it has rank one. If it was constructed last, it has rank n,
+where n is the number of nodes. And the higher the rank,
+the more important is the node, the later it was contracted. Also, lets denote increasing and
+decreasing path in the augmented graph. So a path is increasing ff the ranks of
+the nodes of this path in order increase. And also it is decreasing, again, if the
+ranks of the nodes in this path decrease. And what we want to say is this lemma,
+that for any source and target there is a shortest
+path in the augmented graph. Which is first increasing and
+then decreasing. So, it contains two halfs and the first
+half is a path which is increasing, the second half is a path
+which is decreasing and those two halfs meet in some node V. This is a Justification of
+our Bidirectional Search, which goes only through edges,
+which are going upwards. So the fourth search goes through
+edges upwards to V, and the backwards search goes from target through backward
+edges, which go upwards, also to V. And then they meet, and if we prove
+that there is always the shortest path of this form, then our algorithm from
+the previous video works correctly. Now let's prove it. But first,
+let's look at this proof of the idea. So again,
+we draw here nodes such that nodes in the bottom are less important
+than the nodes in the top. And want to prove that for
+any source as in any target t, there is a path of this form when it
+first goes up and then goes down. But what if that's not the case,
+what if there is some shortest path but it's not always going first up then down. Then there is some node, Uk, for
+which it goes first down, then again up. And so both its neighbors are higher. Then lets consider the moment
+when this node Uk was contracted. Both its neighbors are higher so
+they were contracted later than Uk. And so when Uk was contracted,
+both those notes were on the graph. And those are neighbors of Uk, so
+when it was contracted, two cases. First, there was a new
+shortcut edit in blue, then what we can do is we can remove
+Uk from the shortest path and then just use the blue edge instead of it. The length will stay the same because
+the length of the shortcut is equal to the length from Uk-1 to Uk and
+then from Uk to Uk+1. And there is no more
+problem with this node Uk. Which is smaller than both neighbors. The second case is that
+no shortcut was added but then a witness path was found and
+this is drawn in green. But then all the nodes in the witness path
+were present when node Uk was contracted. So they were contracted later. So they're actually higher than node Uk. So when we remove Uk again we can
+replace it with a witness path and we will remove our problem with Uk. This doesn't prove yet
+the general case because there still can be other places where this
+going first up then down is violated. So now let's prove formally. So assume for the sake of
+contradiction that no such path from source to target which as far
+goes up and then goes down exists. Then for any shortest path from s to t,
+there is some node Ui of this path such that it's rank is smaller than the ranks
+of both neighbors, as in the example. And recall all such nodes, local minimums. Then, for any shortest path between s and
+t, denote by m(P), the minimum rank of a local
+minimum of this path. So there can be several
+local minimum on this path. But we denote by m(P) the minimum
+rank of all of those. Now let's consider the shortest
+path P* with the maximum m(P) among all the shortest
+paths between s and t. And then consider the local minimum (Uk)
+which has the rank equal to this m(P). And then there are two cases,
+when we're contracting (Uk) either there was a shortcut
+added between (Uk-1) and (Uk+1). Then there is the shortest path with
+the shortcut instead of the current path from Uk-1 to Uk to Uk+1. And this shortest path,
+P' doesn't contain Uk. And Uk has the minimum rank of all
+the local minima in the path P*. So m(P') is stricted bigger than m(P*). And this is a contradiction
+with the choice of P*, which has the maximum m (P)
+of all the shortest paths. In other case,
+when we were contracting Uk, there was a witness
+path from Uk-1 to Uk+1. And it was comprised of
+nodes which have high rank, higher than rank of Uk because
+they were contracted after Uk. And so there is another shortest path
+P'' with this witness path instead of the path Uk-1, Uk, Uk+1. And again m(P'') is
+strictly bigger than m(P*). Which is again a contradiction
+with the choice of P*. So now we have pre-processing
+via node contraction. We have an algorithm for querying via Bidirectional Dijkstra
+in the augmented graph. And we have proven that this
+algorithm always works correctly. So, are we done now? Well, it turns out we are not done yet, because the question is how
+to select the node order. Our algorithm, so far, doesn't specify how
+does it order the nodes for contraction. And it turns out that the ordering of the
+nodes influences the pre-processing time and the query time very significantly. And so in the next video, we'll finally
+discuss how to order nodes in such a way that both pre-processing and
+query work fast.

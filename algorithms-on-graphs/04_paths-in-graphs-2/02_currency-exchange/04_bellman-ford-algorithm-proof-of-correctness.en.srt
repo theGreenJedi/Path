@@ -1,0 +1,368 @@
+1
+00:00:00,290 --> 00:00:01,560
+Hi, in this video,
+
+2
+00:00:01,560 --> 00:00:05,780
+we will prove that Bellman-Ford's
+algorithm returns correct distances from
+
+3
+00:00:05,780 --> 00:00:10,440
+origin node to all the nodes in the graph
+in the absence of negative weight cycles.
+
+4
+00:00:11,580 --> 00:00:13,790
+First, we need the following lemma.
+
+5
+00:00:13,790 --> 00:00:20,570
+After k iterations of relaxations inside
+Bellman-Ford's algorithm for any k,
+
+6
+00:00:20,570 --> 00:00:25,890
+then if we take any node u,
+dist[u] after these k iterations
+
+7
+00:00:25,890 --> 00:00:31,830
+will be equal to the shortest path
+length from S to this node u,
+
+8
+00:00:31,830 --> 00:00:35,300
+but among all the paths that contain,
+at most, k edges.
+
+9
+00:00:35,300 --> 00:00:40,190
+So not all the possible paths,
+just paths which contain 0, 1,
+
+10
+00:00:40,190 --> 00:00:42,410
+2, or, at most, k edges.
+
+11
+00:00:42,410 --> 00:00:47,500
+For example, after one iteration,
+we state that dist
+
+12
+00:00:47,500 --> 00:00:52,810
+values of all the nodes will contain
+the best possible shortest path,
+
+13
+00:00:52,810 --> 00:00:56,570
+which consists from 0 or 1 edges.
+
+14
+00:00:56,570 --> 00:00:59,755
+We'll prove this lemma by
+mathematical induction.
+
+15
+00:00:59,755 --> 00:01:02,896
+And the base case is after 0 iterations,
+
+16
+00:01:02,896 --> 00:01:06,952
+all the dist values are infinity and
+dist[S] = 0.
+
+17
+00:01:06,952 --> 00:01:11,662
+And this is correct because for
+S, there is a path of 0 edges,
+
+18
+00:01:11,662 --> 00:01:13,420
+which has lines to 0.
+
+19
+00:01:13,420 --> 00:01:17,710
+And correct distance from S to S is 0.
+
+20
+00:01:17,710 --> 00:01:20,440
+And dist value is also 0.
+
+21
+00:01:20,440 --> 00:01:25,580
+And for all the other nodes,
+there is no path that contains 0 edges.
+
+22
+00:01:25,580 --> 00:01:28,530
+And so the shortest path
+that contains 0 edges and
+
+23
+00:01:28,530 --> 00:01:30,740
+goes through those nodes is infinity.
+
+24
+00:01:32,160 --> 00:01:37,710
+Now the induction step is if we proved for
+paths with length at most k,
+
+25
+00:01:37,710 --> 00:01:43,558
+then we need to prove it for
+paths with length at most k + 1.
+
+26
+00:01:43,558 --> 00:01:48,615
+So, we know that before
+iteration number k + 1, dist[u]
+
+27
+00:01:48,615 --> 00:01:55,480
+is the smallest length of a path from S
+to u, which contains at most k edges.
+
+28
+00:01:55,480 --> 00:02:00,373
+So what do we do on
+the k + 1-th iteration?
+
+29
+00:02:00,373 --> 00:02:05,550
+Each path from S to u goes through
+one of the incoming edges,
+
+30
+00:02:05,550 --> 00:02:09,310
+or like from some node v into node u.
+
+31
+00:02:09,310 --> 00:02:14,090
+And also, parts of length k+1 go this way.
+
+32
+00:02:14,090 --> 00:02:20,010
+They go k edges to some known v, and then
+they go through this edge from v to u.
+
+33
+00:02:21,230 --> 00:02:27,410
+So when we try relaxing edge from v to u,
+we compare the current dist value,
+
+34
+00:02:27,410 --> 00:02:33,790
+which is the smallest path length out of
+the paths, which contain at most k edges,
+
+35
+00:02:33,790 --> 00:02:37,640
+we compare it with the smallest
+length of a path from S to u,
+
+36
+00:02:37,640 --> 00:02:42,005
+which contains at most k + 1 edge and
+goes through v.
+
+37
+00:02:43,150 --> 00:02:50,700
+So all parts which contain
+at most k+1 edges and
+
+38
+00:02:50,700 --> 00:02:54,670
+go to u, they go through one
+of the incoming edges (v, u).
+
+39
+00:02:54,670 --> 00:02:59,440
+And so we will compare with
+all the possible paths
+
+40
+00:02:59,440 --> 00:03:03,580
+that contain at most k+1 edges and
+go from S to u.
+
+41
+00:03:03,580 --> 00:03:07,022
+So if initially, we had the best paths,
+
+42
+00:03:07,022 --> 00:03:11,581
+which contain at most k edges,
+after new iteration,
+
+43
+00:03:11,581 --> 00:03:16,563
+we have the best paths,
+which contain at most k+1 edge.
+
+44
+00:03:16,563 --> 00:03:21,690
+Because we add one last edge
+from v to u to the best path,
+
+45
+00:03:21,690 --> 00:03:25,607
+which contains at most
+k edges from S to v.
+
+46
+00:03:25,607 --> 00:03:28,720
+So the lemma is proved, and
+now we have two corollaries.
+
+47
+00:03:28,720 --> 00:03:33,200
+First that if a graph doesn't have any
+negative weight cycles, then Bellman-Ford
+
+48
+00:03:33,200 --> 00:03:36,980
+algorithm correctly finds all
+distances from the starting node S.
+
+49
+00:03:36,980 --> 00:03:40,600
+Why is that?
+Because it does v-1 iterations.
+
+50
+00:03:40,600 --> 00:03:46,226
+And after v-1 iterations, for
+each node, its dist value contains
+
+51
+00:03:46,226 --> 00:03:51,940
+the shortest path out of all paths
+that contain at most v-1 edges.
+
+52
+00:03:51,940 --> 00:03:56,141
+But if there are no negative cycles,
+then any path,
+
+53
+00:03:56,141 --> 00:03:59,972
+any shortest path contains
+at most v-1 edge.
+
+54
+00:03:59,972 --> 00:04:05,240
+Because if it contains at least v edges,
+then there will be a cycle inside it.
+
+55
+00:04:05,240 --> 00:04:09,780
+And the cycle will be non-negative, so
+we can just remove this non-negative cycle
+
+56
+00:04:09,780 --> 00:04:14,630
+from the path, and
+it will improve or stay the same.
+
+57
+00:04:14,630 --> 00:04:21,255
+So any shortest path contains
+just v-1 edges or less, and so
+
+58
+00:04:21,255 --> 00:04:27,580
+Bellman-Ford algorithm correctly finds
+the best shortest paths for each node.
+
+59
+00:04:27,580 --> 00:04:30,050
+Another corollary is harder,
+
+60
+00:04:31,060 --> 00:04:36,540
+even if there is a negative
+cycle in the graph,
+
+61
+00:04:36,540 --> 00:04:41,470
+that doesn't mean that there is no correct
+
+62
+00:04:41,470 --> 00:04:46,670
+distance estimation from origin
+to some particular node because
+
+63
+00:04:46,670 --> 00:04:51,900
+that particular node may be not reachable
+from any of the negative weight cycles.
+
+64
+00:04:51,900 --> 00:04:54,470
+So if there is such node u,
+
+65
+00:04:54,470 --> 00:04:58,150
+then there's no negative weight
+cycle from which it is reachable.
+
+66
+00:04:58,150 --> 00:05:03,746
+Then Bellman-Ford algorithm will correctly
+find distance from after this node
+
+67
+00:05:03,746 --> 00:05:10,080
+by the same reason because if we
+have any shortest path from S to u,
+
+68
+00:05:11,290 --> 00:05:18,120
+it cannot contain cycles because u is not
+reachable from any negative weight cycles.
+
+69
+00:05:18,120 --> 00:05:22,880
+And so the cycle on the path from S
+to u must be non-negative, and so
+
+70
+00:05:22,880 --> 00:05:28,840
+we can just remove it from the path, and
+the path will improve or stay the same.
+
+71
+00:05:28,840 --> 00:05:35,290
+So, any path from S to u doesn't contain
+cycles, and that means that any path from
+
+72
+00:05:35,290 --> 00:05:39,970
+S to u, which is the shortest path,
+has at most v-1 edges.
+
+73
+00:05:39,970 --> 00:05:45,240
+And this means that Bellman-Ford's
+algorithm will return actually a correct
+
+74
+00:05:45,240 --> 00:05:49,390
+value for the distance from S to u.
+
+75
+00:05:49,390 --> 00:05:53,950
+And in the next video, we will look into
+what to do with the negative cycles when
+
+76
+00:05:53,950 --> 00:05:57,830
+they're present in the graph and
+how to use it for your own profit,
+
+77
+00:05:57,830 --> 00:06:01,950
+potentially making yourself
+a billionaire based on currency exchange

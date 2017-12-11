@@ -1,0 +1,132 @@
+Hello everybody,
+welcome back to our graph algorithms. Of course, today we're going to be talking about
+how to represent graphs on a computer. And then after that we are going to talk
+a little about how to talk about graph runtime instead of how it depends
+on one graph you are using. So the first thing is graph
+representations, so from last time recall, the graph is a thing that consists of
+a bunch of vertices sometimes called nodes and also a bunch of edges that
+connect pairs of these vertices. And we're going to want to do is we're
+going to want to do a lot of computations on graphs to determine various
+properties of them, but before we can get to any of that, we
+first need to talk about how to actually represent a graph inside a computer. And there are in fact
+several ways to do this, and exactly how we do it will affect
+the runtimes of some of these algorithms. So we're going to spend a little
+bit of time talking about that. So, the first thing to do is well you want
+your vertices and you want your edges. A natural way to do this is just
+store a giant list of edges. Each edge is a pair of vertices so
+this is a big list of pairs of vertices. But now what we have is we've got
+these four vertices, A, B, C, and D. And then we just store a list. One is an edge between A and B, and
+then there's an edge between A and C, and there's an edge between A and D, and
+there's an edge between C and D. And this is a perfectly good way to
+store this graph on a computer, but there are other ways of thinking about it. One of them is the following. So at least, that you have a simple graph. We're only didn't really matter is which
+pairs of vertices have edges between. And so, if I gave you a pair of vertices. So, it's the only thing that you
+need to know is you need to know, is there an edge between
+the more is there not. So we can do is we can just
+rebuild a look-up table for this, we build a matrix where you have an entry
+that's 1 if there is an edge between that pair of vertices and a 0 if there's not. So for example, in this graph there
+is an edge between A and D and therefore the AD entry
+of this matrix is 1. There isn't an edge, however,
+between B and C, so the BC entry is 0. And so you just fill this in, you get
+this nice 4 by 4 matrix of 0s and 1s. It is another way of
+representing this graph. On the other hand there is sort of a third
+maybe a hybrid way of looking at things. And the idea here is that for each vertex in the graph it's going to
+have a bunch of neighbors, it's going to have other vertices that have edges from
+the one that we're considering to them. And another way of
+representing the graph is for each vertex we can just keep
+a list of its neighbors. So vertex A in this graph
+is adjacent to B, C, and D. B is adjacent to A. C is adjacent to A and D. D is adjacent to A and C. So for each of these vertices we store
+a list of just all of it's neighbors and that's another way to represent the graph. Now for example,
+just to be sure we're on the same page. If we have the following graph. What are the neighbors of vertex C? Well, we just draw all the edges
+that leave C and it connects to A, and B, and D, and F, and H, and I. And, those are its neighbors. Okay, but so we have these three
+ways of representing a graph. And it turns out the different basic
+operations you want to perform could be faster or slower depending
+on which representation you have. For example, if you want to determine if
+there's an edge between this specific pair of vertices. This is very fast in the adjacency
+matrix representation. All you have to do is check
+the appropriate entry of the matrix. See if it's 0 or 1. And that's your answer, constant time. However, when you have an edge list, the
+only thing that you can really do is scan the entire list of edges to see
+if that particular edge shows up. That takes time proportional
+to the number of edges. For the adjacent lists,
+it's a little bit faster than that. What you do is you pick one end of
+this edge that you're looking for and then look it for all it's neighbors who
+wants to know if A is adjacent to B, you look at the list of A's neighbors and
+see if B is on the list. And so the time there is proportional
+to the degree of the vertex. The number of neighbors
+that this one guy has. Now another thing you might want to do
+is list all of the edges in the graph. And the adjacency matrix
+is terrible here because the only thing you do there is you scan
+through every entry of the matrix. And each one gives you an edge, but that takes time proportionate to
+the number of vertices squared. However, the edge list
+does this very easily. It just lists all the edges in
+order which is what it does. The adjacency list is about as good
+though, because you just need to, for each vertex,
+you find all of its neighbors. Those are a bunch of edges. And you just do this for every vertex,
+and this actually counts each edge twice, because if there's an edge between A and
+B you count both. That A is neighbor of B and
+that B is a neighbor of A. But the only counts them twice so the time is still proportional
+to the number of edges. Finally, if you want to list all
+the neighbors of a given vertex, the adjacency matrix is
+pretty slow here again. Because the only thing you can really do
+is scan through that row of the matrix, and find all the ones. Now, in the edge list representation,
+you have scan through all the edges In your graph to see which ones
+include the vertex you want. Whereas the adjacency list, you just
+scan through the list of neighbors of the vertex, and it's very fast. Now, it turns out that for many problems
+that we'll be considering this on, and throughout most of the rest of this unit
+on what we really want is the adjacency risk representation of our graph, just
+because a lot of the operations that we need, we really want to be able to
+find neighbors of a given vertex. Okay, so that's how we represent graphs. Let's spend a little bit of time to
+talk about runtimes of graph algorithms. So, when we talk about algorithm runtimes, it's generally a function
+of the size of the input. And for the most of
+the algorithms we've seen so far, the input sort of has one size parameter,
+n. And so you runtimes like o of n squared or
+o of n cubed, or something to that effect. However, graph algorithms, well, the graph
+sort of has two measures of its size. The number of vertices and
+the number of edges. And so graph algorithms runtimes depend
+in some way on both of these quantities. You could have runtimes like
+O size of E plus size of E, which is generally considered
+to be linear time. But you can also have O of size of E,
+times size of E or size of V to the three-halves or
+V log V plus E. And there are many different possibilities
+for types of runtimes that we have. And an interesting question now is, again,
+if you sort of only have one parameter, it's easy to compare. N log N runtime versus N
+squared versus N cubed. But if you want to say which one's faster,
+say one algorithm runs in time size of V to the three-halves and
+the other one runs in time size at E. It's not actually clear
+which one's faster. And in fact which algorithm is
+faster actually depends on which graph you're using. In particular depends
+on the density how many edges you have in terms of
+the number of vertices. If you have many, many,
+many edges O of E is going to be worse. However, if you have few
+edges its going to be better. And in terms of density theres
+sort of two extremes to consider. On the one hand, you have dense graphs. Here, the number of edges is roughly
+proportional to the square of the number of vertices, meaning that almost
+every pair of vertices or some large fraction of the pairs of
+vertices actually have edges between them. If you're banned, you're going on tour and
+want to like plot a route between a bunch of cities, well there is actually
+some transportation option that would get you between basically
+any pair of cities on the map. Now, it might be indirect or
+take a while but you should still probably plot all of
+these out in order to plan your tour, just what will matter is not whether or not
+it's possible to get between two cities, but how hard it is to get
+between these cities. But for this time,
+you actually want sort of a dense graph, that talks of all pairs relations
+between these vertices. On the other end of the spectrum,
+we have sparse graphs. Here the number of edges is small
+relative to the number of vertices, often as small as roughly equal
+to the number of vertices or some small constant times
+the number of vertices. And in a sparse graph, what you have instead is that each vertex
+has only a few edges coming out of it. And this is actually very reasonable for
+a lot of models you want to think about. If you think of the internet as a graph, well, there are billions of
+web pages on the internet, but any given web page is only going to
+have links to a few dozen others. And so the number or
+the degree of any given vertex, the number of neighbors that any given
+vertex has, is much smaller than the total number of vertices, so
+you end up with a very sparse graph. Now a lot of things like this, like
+the Internet, like social networks, like actual maps that you've drawn on a piece
+of paper, these tend to be sparse graphs. Whether or not your graph is sparse or dense will affect the runtime
+of your algorithms and may even help determine which of
+your algorithms you want to be run. Okay, so that's it for today. Now that sort of the basics are out of
+the way we're going to actually talk about some of the algorithms and in particular
+we're going to talk about how to explore graphs and sort of figure out which
+vertices can be reached from which others so come back next time and
+we'll talk about that.

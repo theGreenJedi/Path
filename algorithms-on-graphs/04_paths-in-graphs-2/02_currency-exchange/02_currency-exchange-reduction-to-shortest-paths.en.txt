@@ -1,0 +1,87 @@
+So now, I want to reduce this problem to
+the problem about shortest paths, and we will do that using
+two standard approaches. First, we don't know what to do with
+this product, so instead of products of weights we want sums of weights,
+like in the shortest paths problems. And we will replace products with sums
+by taking logarithms of weights, and I will show that in a minute. And another problem is that we need to
+maximize something in this problem, while shortest paths
+are all about minimizing. So we'll have to also negate
+weights to solve minimization problem instead of maximization. First let's talk about taking
+the logarithm is a known rule that x is the same as two to the power
+of logarithm of x over two. So, we can take any product of two number,
+like x and y and rewrite x is two the logarithm of x and
+y as 2 to the power of logarithm of y. And then, x y is equal to 2 to the power
+of logarithm of x by 2 of the power of logarithm as y, and now we know
+the rule of summing the powers. So this is equal to 2 to the power of
+logarithm of x plus logarithm of y So if we want to maximize
+product effects on Y. This is actually the same of maximizing
+the sum of logarithm of X and logarithm of Y because if he sum becomes bigger then 2
+to the power of the sum becomes bigger. And if the sum becomes smaller, then 2 to
+the power of sum also becomes smaller. This is true not only for 2 numbers. For example,
+if we have 3 specific numbers. 4, 1, and 1 or 2 which one to multiply. On one hand,
+we get 2 which is 2 to the power of 1. On another hand,
+if we sum up the logarithm Terms of 4, 1, and one-half,
+we get sum of 2, 0, and -1. And the logarithms can be
+both positive and negative. They're positive when the number is
+bigger than 1 and they're negative when the number is smaller than 1, and
+they're 0 when the number is equal to 1. So in this case, we get the sum of 1,
+which is the same as the power to which we Exponentiate our 2. So you see that it works not only for
+2 numbers, but also for several numbers. And in general, to maximize
+the product of k numbers, r would EJ. It is the same as to maximize
+the corresponding the sum of logarithms of these numbers. And now that this only works if all these
+numbers are positive, because we cannot take logarithms of negative values and
+we also cannot take logarithms of 0. But if all the exchange rates
+are positive numbers, hopefully then we just take logarithms and
+we reduce our problem of maximizing product of some numbers to
+maximizing sum of some numbers. Now, we want to go from maximization
+to minimization but that is easy. If you want to maximize
+the sum of logarithms, it is the same as minimize minus the sum. And we will also want to work just
+with the sum, not with the minus sum, so we can insert this minus
+inside the sum incorporated. And so finally, we get that maximizing the sum of logarithms is the same as
+minimizing the sum of minus logarithms. Trading those two ideas,
+we've got the following reduction. We replace the initial edge weights, conversion weights,
+rei by minus algorithm of rei. And we find the shortest path between
+the nodes corresponding to USD and the nodes corresponding
+to RUR in the graph. And this is equivalent to
+the initial problem of how many rubbles you can get from $1000. So now,
+it looks like we've solved the problem because we can create the currency
+exchange graph with the conversion rates, we can replace those
+rates with logarithms. And we can find the shortest path from
+USD to RUR using Dijkstra's Algorithm, which were learned in the previous lesson. And then, we can just do the exchanges
+corresponding to the shortest path in the graph which you found. However, that doesn't exactly work. Because Dijkstra's algorithm heavily
+relies on the fact that the shortest path from s to t goes only through
+vertices that are closer to s than t. And this is because the edge
+weights are positive, but if edge weights can be negative, this is no
+longer the case and the example is below. If we used Dijkstra's algorithm
+as soon as it saw only two edges from s to A and to B. One of them with weight five,
+and another with weight ten. It would decide that the shortest
+path to S to A is exactly five, because we cannot improve it. In this example, we can improve it. We go from S to B, then from B to A, and the path will be, already, minus ten,
+which is much less than five. So Dijkstra's algorithm
+doesn't work in such cases. Such an example is also possible
+in the currency exchange problem. Here is a graph with realistic conversion
+rates between ruble, euros and U.S. dollars. And our goal is to convert rubles into
+US dollars in the most profitable way. And it turns out that if we take minus
+logarithms of these conversion rates, then although the number
+on the edge from Rubles to US Dollars is less than
+the number from Rubles to Euros. It is still beneficial to go
+through Euros to US Dollars because of the negative edge
+between euros and US dollars. And it's true that if you multiply
+the conversation rate between rubles and euros, and then between euros and dollars. It will be slightly bigger than if we
+convert directly from rubles to dollars. So, all problems in the graphs with negative weights come from
+negative weight cycles. For example, in this graph,
+we have a negative cycle abc. What it means is that we can go from a to
+b than from B to C, than from C to A. And if we add those weights we get -1. So the sum of the edges
+on the cycle is negative. And because of that, if you want to
+convert for example from S to A, if you want to go from S to A and find
+the shortest path, this is not possible. Because we can go from S to A,
+use distance of 4 But then we can just go around the cycle A B C, A B C, A B C many,
+many times, as many as we want. And the distance will only decrease. So the distance from S to node A is
+actually minus infinity, is not defined. You can do as short a path as you want. And the same is true about nodes B and
+C of course because they are on the cycle. So you can do the same thing with them. And the same is also true about node D
+because it is reachable from the cycle. So we can go to the cycle and
+make a lot of round trips on the cycle and then go to node D from either from B or
+from C. So all these nodes. Are the infinitely close to S,
+like the shortest path is minus infinity. And it turns out that in the currency
+exchange problem a cycle can potentially make you a billionaire, if you are lucky
+and if you have enough time for that. But you'll learn how to do that
+a little bit later in this lesson.

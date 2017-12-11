@@ -1,0 +1,267 @@
+1
+00:00:00,320 --> 00:00:05,930
+The goal of this whole lesson is to
+present two greedy algorithms for
+
+2
+00:00:05,930 --> 00:00:08,000
+the minimum spanning tree problem.
+
+3
+00:00:08,000 --> 00:00:11,530
+Before going in to the details
+of this algorithms,
+
+4
+00:00:11,530 --> 00:00:16,640
+let me present you the higher level
+ideas of both these algorithms.
+
+5
+00:00:16,640 --> 00:00:20,850
+So the first one is the Kruskal And
+the second one is you need to Prim.
+
+6
+00:00:22,030 --> 00:00:26,830
+The high level idea of the algorithm
+by Kruskal is the following.
+
+7
+00:00:26,830 --> 00:00:31,750
+So, we go through all edges in
+order of increasing width, and
+
+8
+00:00:31,750 --> 00:00:37,540
+we repeatedly at the next lightest
+edge which doesn't produce a cycle.
+
+9
+00:00:38,750 --> 00:00:43,020
+Alternatively, the main idea
+of the Prim's algorithm
+
+10
+00:00:43,020 --> 00:00:47,830
+is to grow a tree repeatedly so
+initially it contains just one vertex,
+
+11
+00:00:47,830 --> 00:00:51,200
+then we attach a new vertex to it,
+then a new vertex to it.
+
+12
+00:00:51,200 --> 00:00:55,070
+And we always attach the new
+vertex to the current tree
+
+13
+00:00:55,070 --> 00:00:57,570
+by the lightest available edge.
+
+14
+00:00:57,570 --> 00:01:00,572
+Let me illustrate this
+again on a toy example.
+
+15
+00:01:00,572 --> 00:01:03,453
+So for Kruskal's algorithm, again,
+
+16
+00:01:03,453 --> 00:01:08,788
+we repeatedly add the next lightest
+edge that doesn't produce a cycle.
+
+17
+00:01:08,788 --> 00:01:15,580
+Initially, our solution is empty, so
+we just add the first lightest edge.
+
+18
+00:01:15,580 --> 00:01:19,612
+In this case,
+the lightest edge has weight 1, so
+
+19
+00:01:19,612 --> 00:01:22,880
+we just put this edge into our solution.
+
+20
+00:01:22,880 --> 00:01:27,316
+And there is also another
+edge which has cost or
+
+21
+00:01:27,316 --> 00:01:32,030
+weight 1, so
+we also add it to our solution.
+
+22
+00:01:32,030 --> 00:01:34,160
+The next one has weight 2.
+
+23
+00:01:34,160 --> 00:01:37,630
+We add it.
+At the same time, the next one,
+
+24
+00:01:37,630 --> 00:01:41,200
+the next lightest available
+edge has weight 3.
+
+25
+00:01:41,200 --> 00:01:46,790
+However, if we added it to our current
+solution, this would produce a cycle.
+
+26
+00:01:46,790 --> 00:01:49,370
+So we skip this edge.
+
+27
+00:01:49,370 --> 00:01:52,350
+The next lightest available
+edge has weight 4.
+
+28
+00:01:52,350 --> 00:01:55,520
+We add it because it
+doesn't produce a cycle.
+
+29
+00:01:56,735 --> 00:02:00,305
+Then, again, we try to add the edge with
+
+30
+00:02:00,305 --> 00:02:03,945
+weight 5 because it is the next
+lightest available edge.
+
+31
+00:02:03,945 --> 00:02:05,745
+However, it produces a cycle.
+
+32
+00:02:05,745 --> 00:02:11,795
+So we skip this edge, and instead
+we add the edge of weight 6, right?
+
+33
+00:02:11,795 --> 00:02:15,090
+This gives us a solution, and we will soon
+
+34
+00:02:15,090 --> 00:02:20,300
+justify that this method indeed
+gives an optimal solution.
+
+35
+00:02:20,300 --> 00:02:22,260
+Now, to the Prim's algorithm.
+
+36
+00:02:22,260 --> 00:02:24,370
+It works in a different way.
+
+37
+00:02:24,370 --> 00:02:27,849
+So it repeatedly grows just 1, 3.
+
+38
+00:02:27,849 --> 00:02:31,587
+For this, it will select a root for
+this tree.
+
+39
+00:02:31,587 --> 00:02:34,991
+So I assume that this
+highlighted vertex is going
+
+40
+00:02:34,991 --> 00:02:39,310
+to be the root of the tree that
+we are going to construct.
+
+41
+00:02:39,310 --> 00:02:44,118
+At each iteration we are going to
+attach a new node to this tree,
+
+42
+00:02:44,118 --> 00:02:49,810
+and we would like to do this by
+using the lightest possible edge.
+
+43
+00:02:49,810 --> 00:02:57,130
+So for this vertex,
+we have four edges going out of this node.
+
+44
+00:02:57,130 --> 00:03:02,120
+One of weight 4, one of weight 5,
+of weight 6, and of weight 8.
+
+45
+00:03:02,120 --> 00:03:06,070
+In this case, we select,
+of course, the edge of weight 4.
+
+46
+00:03:06,070 --> 00:03:08,080
+So we attach it.
+
+47
+00:03:08,080 --> 00:03:11,790
+Now our tree contains two nodes, and
+
+48
+00:03:11,790 --> 00:03:17,380
+we would like to attach a new node
+to this tree by lightest edge.
+
+49
+00:03:18,410 --> 00:03:22,990
+So in this case,
+this is the vertex in the middle.
+
+50
+00:03:22,990 --> 00:03:28,610
+And it has weight, the corresponding edge,
+has weight 1 so we attach it.
+
+51
+00:03:28,610 --> 00:03:33,000
+The next one has weight 2.
+
+52
+00:03:33,000 --> 00:03:33,770
+The next one has weight 6.
+
+53
+00:03:33,770 --> 00:03:40,050
+And finally, the last node is attached
+by an edge of weight 1, right?
+
+54
+00:03:40,050 --> 00:03:43,680
+So, in the next part of this lesson,
+
+55
+00:03:43,680 --> 00:03:48,900
+we will present the implementation
+details of both these algorithms, but
+
+56
+00:03:48,900 --> 00:03:54,570
+we first will prove that both
+these algorithms are correct.
+
+57
+00:03:54,570 --> 00:03:57,411
+Namely, that they produce
+an optimal solution.

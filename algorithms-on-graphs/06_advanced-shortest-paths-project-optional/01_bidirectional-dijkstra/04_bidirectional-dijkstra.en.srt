@@ -1,0 +1,402 @@
+1
+00:00:00,320 --> 00:00:04,860
+Hi in the previous videos we've introduced
+the idea of Bidirectional Search.
+
+2
+00:00:04,860 --> 00:00:07,390
+But now we need to actually specify,
+
+3
+00:00:07,390 --> 00:00:12,090
+how exactly will we expand the Dijkstra
+algorithm to become bidirectional.
+
+4
+00:00:12,090 --> 00:00:16,165
+First let's recall how
+Dijkstra's algorithm works, so
+
+5
+00:00:16,165 --> 00:00:20,665
+it needs to find the shortest path
+from some vertex s to vertex t.
+
+6
+00:00:20,665 --> 00:00:26,655
+It initializes an auxiliary area dist,
+with a values of infinity for
+
+7
+00:00:26,655 --> 00:00:30,280
+all the nodes but for the starting node s.
+
+8
+00:00:30,280 --> 00:00:35,180
+And for the starting node s,
+it initialize the distance estimate to 0,
+
+9
+00:00:35,180 --> 00:00:37,670
+and then it goes in iterations.
+
+10
+00:00:37,670 --> 00:00:40,611
+On each iteration it calls ExtractMin,
+
+11
+00:00:40,611 --> 00:00:45,894
+to chose the unprocessed vertex u
+with the smallest distance estimate.
+
+12
+00:00:45,894 --> 00:00:48,064
+And there is a guarantee that,
+
+13
+00:00:48,064 --> 00:00:52,989
+by the time vertex u is extracted
+that way, it's distance estimate,
+
+14
+00:00:52,989 --> 00:00:58,262
+is equal to the actual distance from
+the starting vertex as to the vertex u.
+
+15
+00:00:58,262 --> 00:01:04,420
+And then we process u, meaning that we try
+to relax all the edges outgoing from u.
+
+16
+00:01:05,530 --> 00:01:10,610
+And then we repeat this process,
+until t is extracted and
+
+17
+00:01:10,610 --> 00:01:14,130
+processed, so
+then we know that the distance to t
+
+18
+00:01:14,130 --> 00:01:18,420
+is already equal to the distance estimate,
+in the distance array.
+
+19
+00:01:19,620 --> 00:01:24,760
+Now, we need to introduce
+a notion of reverse graph,
+
+20
+00:01:24,760 --> 00:01:26,740
+for our bidirectional search.
+
+21
+00:01:26,740 --> 00:01:33,010
+So the reversed graph G, R for a graph
+G is the graph with the same vertices.
+
+22
+00:01:33,010 --> 00:01:34,750
+And reversed edges.
+
+23
+00:01:34,750 --> 00:01:37,223
+You have an example in
+the bottom of the slide.
+
+24
+00:01:37,223 --> 00:01:40,850
+When we have vertices a, b and c.
+
+25
+00:01:40,850 --> 00:01:45,440
+And the graph G is on the left with
+edges going from a to b, from a to c and
+
+26
+00:01:45,440 --> 00:01:46,740
+from b to c.
+
+27
+00:01:46,740 --> 00:01:49,830
+And in the graph Gr,
+the vertices are the same, but
+
+28
+00:01:49,830 --> 00:01:54,410
+the edges go the other way around,
+from b to a, from c to a, and from c to b.
+
+29
+00:01:54,410 --> 00:01:57,640
+So this is very simple, and
+
+30
+00:01:57,640 --> 00:02:02,930
+to build the reversed graph,
+we can just copy the vertices.
+
+31
+00:02:02,930 --> 00:02:06,570
+And then, go through all the edges
+of graph G, reverse them,
+
+32
+00:02:06,570 --> 00:02:08,400
+and add them to the new graph GR.
+
+33
+00:02:10,480 --> 00:02:12,860
+So the Bidirectional Dijkstra's algorithm,
+
+34
+00:02:12,860 --> 00:02:16,070
+we'll start with building
+the reversed graph.
+
+35
+00:02:16,070 --> 00:02:20,170
+So that it can do the backward
+search from the target vertex.
+
+36
+00:02:20,170 --> 00:02:26,357
+And then, it will start Dijkstra's
+algorithm in the forward direction from,
+
+37
+00:02:26,357 --> 00:02:30,880
+the source vertex as in the graph G,
+and also the backwards
+
+38
+00:02:30,880 --> 00:02:35,706
+Dijkstra's algorithm from vertex
+t in the reverse graph GR.
+
+39
+00:02:35,706 --> 00:02:40,843
+So in the reverse graph GR,
+The regular Dijkstra's algorithm will be
+
+40
+00:02:40,843 --> 00:02:46,340
+the same as the backwards Dijkstra's
+algorithm in the initial graph of G.
+
+41
+00:02:46,340 --> 00:02:50,700
+And then will alternate
+between Dijkstra steps in
+
+42
+00:02:50,700 --> 00:02:55,794
+the forward search in G, and
+in the backward search in GR.
+
+43
+00:02:55,794 --> 00:03:03,325
+And we will stop, as soon as some vertex
+v is processed, and remember that,
+
+44
+00:03:03,325 --> 00:03:09,457
+process means that it is extracted
+from the Q with variances.
+
+45
+00:03:09,457 --> 00:03:13,400
+Both in the forward search and
+in the backward search.
+
+46
+00:03:13,400 --> 00:03:18,880
+As soon as that happens, we can compute
+the shortest path between s and t.
+
+47
+00:03:18,880 --> 00:03:21,250
+And I will show you how, in a minute.
+
+48
+00:03:21,250 --> 00:03:25,076
+But first the question, so
+let's consider this meeting point v.
+
+49
+00:03:25,076 --> 00:03:28,844
+The first vertex that is processed
+in both the forward search and
+
+50
+00:03:28,844 --> 00:03:30,990
+the backward search.
+
+51
+00:03:30,990 --> 00:03:34,320
+We said previously,
+that as soon as we meet in the forward and
+
+52
+00:03:34,320 --> 00:03:38,940
+backward search, we can re-construct
+the shortest path from s to t by
+
+53
+00:03:38,940 --> 00:03:41,570
+taking the first half from
+s to the meeting point.
+
+54
+00:03:41,570 --> 00:03:43,680
+And then from the meeting point to t.
+
+55
+00:03:43,680 --> 00:03:49,227
+So, is it right, is it always the case
+that as soon as we meet in some vertex,
+
+56
+00:03:49,227 --> 00:03:53,757
+v, there's the shortest part
+from s to t that goes through v?
+
+57
+00:03:53,757 --> 00:03:54,650
+So, what do you think?
+
+58
+00:03:56,030 --> 00:03:59,140
+Well, it turns out that this is not
+the case, and here's an example.
+
+59
+00:04:00,588 --> 00:04:05,360
+S and t, we do alternating terms
+from s and from t backwards,
+
+60
+00:04:05,360 --> 00:04:08,150
+then from s, then from t backwards.
+
+61
+00:04:08,150 --> 00:04:10,100
+And inside the vertices,
+
+62
+00:04:10,100 --> 00:04:14,760
+we have the distances on the left
+from s and on the right to t.
+
+63
+00:04:16,110 --> 00:04:18,700
+And then we meet, in the middle vertex.
+
+64
+00:04:18,700 --> 00:04:23,270
+And we see that the distance
+from this vertex 2t is 5,
+
+65
+00:04:23,270 --> 00:04:27,230
+and the distance from s
+to this vertex is 5, and
+
+66
+00:04:27,230 --> 00:04:31,618
+we can actually reconstruct
+the path of length 10 from s to t.
+
+67
+00:04:31,618 --> 00:04:39,200
+But what if there was an edge,
+this green one, I'll find 4.
+
+68
+00:04:40,270 --> 00:04:46,440
+This wouldn't contradict the progression
+of neither the forward Dijkstra search,
+
+69
+00:04:46,440 --> 00:04:50,945
+nor the backward Dijkstra search because,
+this edge has length 4,
+
+70
+00:04:50,945 --> 00:04:52,565
+which is bigger than 3.
+
+71
+00:04:52,565 --> 00:04:56,805
+And so the middle vertex
+will be considered before,
+
+72
+00:04:56,805 --> 00:04:59,805
+the vertex to the right from
+it in the forward search.
+
+73
+00:04:59,805 --> 00:05:03,375
+And also, the middle vertex will
+be considered before the vertex
+
+74
+00:05:03,375 --> 00:05:05,695
+to the left from it in
+the backwards search.
+
+75
+00:05:05,695 --> 00:05:09,866
+So, we will really meet in the middle
+vertex before even considering.
+
+76
+00:05:09,866 --> 00:05:15,227
+The edge between the vertex
+to the left of the middle,
+
+77
+00:05:15,227 --> 00:05:20,280
+and the vertex to
+the right from the middle.
+
+78
+00:05:20,280 --> 00:05:23,960
+But, here we can see that
+the shortest path from s to t,
+
+79
+00:05:23,960 --> 00:05:27,320
+doesn't actually go
+through the middle vertex.
+
+80
+00:05:27,320 --> 00:05:31,971
+It goes around it, and
+it is a length 8, instead of the path
+
+81
+00:05:31,971 --> 00:05:36,660
+which goes through this middle vertex and
+has length 10.
+
+82
+00:05:36,660 --> 00:05:39,266
+So it is not always the case,
+
+83
+00:05:39,266 --> 00:05:44,163
+that the shortest path go
+through the meeting point.
+
+84
+00:05:44,163 --> 00:05:48,940
+So what exactly then do we need to do,
+to compute the distance?
+
+85
+00:05:48,940 --> 00:05:51,896
+When we found the common meeting point.

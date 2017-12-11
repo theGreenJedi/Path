@@ -1,0 +1,143 @@
+Hello, everybody. Welcome back to our
+Graph Algorithms course. Today, we're going to talk
+about how to get an algorithm to efficiently compute the strongly
+connected components of a directed graph. So if you recall from last time, what we had was we find this notion
+of connectivity in directed graphs, where two vertices were connected if you
+could get from one to the other and back. Now, we said this graph necessarily
+would be divided into strongly connected components, where within a component,
+you could get from everything to everything else, but sort of once you
+leave the component you can't get back. Now, these components are connected to
+each other by what we call the metagraph. And the metagraph was always a DAG, which is sort of a useful
+a thing as we'll see today. So the problem we're going to look
+at today is, given a graph, G, a directed graph, G, how do we find
+the strongly connected components of G? Now there's a pretty easy algorithm for
+this, it turns out. For each vertex v, run explore on v and determine all the vertices
+reachable from v. Once you've done that for every vertex, you know that for a vertex v what you
+want to do is find all the vertices u that are both reachable from v and
+can also reach v. And that, it turns out, will give you
+the strongly connected component of v. And so this gives you the strongly
+connected component of v, you run this for all v, that gives you all
+the strongly connected components. And so the runtime of this
+algorithm is a little bit slow but you need to explore from
+every single starting vertex. So the run time is something like
+o of v squared plus v times e. This is okay but
+we'd like to find something faster. And what's the idea? The key idea of this
+algorithm is the following. If you take a vertex v and run explore,
+you find everything you can reach from v. Now this includes the components of v. But if there are other
+components downstream of that, you might find vertices from other
+connecting components as well. However, there's a case
+when this doesn't happen, if v is located in a sink
+strongly connected component. That means there are no edges out of
+that strongly connected component. So when you explore from v, you will find
+exactly it's strongly connected component. Which is good, because we want to find
+the strongly connected component. So, if you actually find one,
+that's a good start. So how do we do this? Well, we need to find the vertex in
+a sink strongly connected components which takes some thoughts. Well, there's a theorem it
+turns out that will help. If C and
+C prime are two strongly connected components where there's an edge from some
+vertex of C to some vertex of C prime. It turns out that the largest
+post number in C Is larger than the largest post number in C prime. Now to prove this,
+we split into two cases. When we run our depth first search,
+either we visit a vertex in C before we visit a vertex in C prime,
+or it could be the opposite way, visit a vertex in C prime
+before we visit a vertex of C. In the first case, where we visit C first,
+well, from a vertex in C you can reach everything else in C,
+because it is the same component. There's also an edge from C to C prime,
+so you can also, it turns out, reach everything
+in C prime from that vertex. And that means that while you're still
+exploring that first vertex in C, you actually explore everything else in C
+and everything in C prime as a subroutine. This means, that because of
+the way subroutines work, you have to finish exploring all those vertices
+before you finish that last vertex in C. So, that one vertex in C has
+the largest post number of any vertex in either component. The second case is you
+visit C prime first. Here the proclaim is that you can't
+actually reach C from C prime. Because if you could reach C from C prime,
+and you still follow the edge from C back
+to C prime and you'd have a cycle. And this is not just any cycle. This is a cycle in the metagraph, which you can't have because
+the metagraph must be a DAG. And this means that you
+can't reach C from C prime. When you explore C prime, you'll never actually find C in
+the middle of that exploration. So, in fact,
+you have to finish exploring C prime before you can even begin exploring C. And so, once again, the vertex with
+the largest post has to be in C. Okay, so what does this mean? If you look at the large
+vertex with the single largest post order number in the entire graph,
+what can we say about that? Well it has to come from a component
+with no other components pointing to it. That vertex needs to be the source
+component, which is great. It's almost what we wanted. What we wanted was a vertex
+in a sink component. Well, there's a trick for doing this. So if you have a graph, we're going to define what's called the
+Reverse Graph, which is just what you get by taking a graph reversing
+the direction of all the edges. So if a graph on the left is G, the graph
+on the right is the reverse graph. The edges are all the same, they're just
+pointing in the opposite directions. Now the cute thing here is
+that the reverse graph and G both have the same strongly
+connected components. I mean, v and w are connected if you
+can go from v to w and w back to v. But if you reverse all the edges,
+you can just follow those paths in the opposite directions,
+from v to w and w back to v. And so, the strongly connected
+components are the same, but the edges in the metagraph are different. Because if you have a source
+component in the reverse graph, that means that you have edges
+coming out of it but not into it. Well, when we reverse the edges
+to get the original graph G, the edges come into it and not out,
+and you find the sink component. So in order to find the vertex in the sink
+component of G, what you do is you run depth first search on the reverse graph,
+which by the way is easy to compute, you just take every edge and
+reverse the direction. because we run depth first
+search on the reverse graph and take the vertex to largest post order. Okay so just to review. Which of the following is true? The vertex with the largest post
+order number in the reverse graph is in the sink component? The vertex with the largest preorder
+number is in the sink component? Or the vertex with the smallest
+number is in the sink component? Well, all of these sound
+roughly equivalent. But if you work them out,
+only one of them is true. The first one. The vertex with the largest postorder
+number is in a sink component. The other ones sound plausible,
+but just don't work. Okay, but this gives us an algorithm. And the point is the following. We run depth first search
+on the reverse graph. We let v be the vertices of
+the largest post number and this has to be in the sink
+component of the G. We now explore v and
+because it was in a sink component, the vertices we find are actually
+a strongly connected component of G. So, we take them,
+we remove them from G and then we repeat. So, here's our graph,
+we depth first search the reverse graph, the largest post number is that 18. So, we explore that, we find one vertex. That's our first component. We're now going to remove that
+from the graph and try again. Depth first search on the reverse graph,
+16 is the largest post. We explore from there,
+we find this new component. Great. Depth first search the reverse graph,
+find the largest post, explore that. We have a third component. Depth first search the reverse graph, 10
+is the largest, and we explore from that. We find these four guys as a component, and then there's the one
+vertex we find out. So that gives us a strongly
+connected components. Unfortunately, this algorithm's
+a little bit inefficient again. Because we need to run depth first
+search repeatedly on the reverse graph. But it turns out that that's
+actually unnecessary. Because remember, the theorem that we had
+was that if you had an edge between two components, the one that was further
+upstream always had the larger post order. In fact, when we reversed the edges, now it's the one downstream has
+the largest post order, but whatever. But the point is that after you
+remove the sink component, and if you just then look for the vertex with
+the single largest remaining post order, that's going to be a sink
+component of the new graph. It doesn't point to anything else,
+except for maybe some components that
+you've already removed. And so the new algorithm, we just run
+depth first search once on the reverse graph, then we look for
+v in the graph in reverse postorder. Any v that has not yet been visited,
+we explore that v, and mark the vertices that we found as
+a new strongly connected component. So we have this graph. We depth first search
+on the reverse graph. We record the post numbers. Now the largest post is 18. We explore that vertex,
+find this component. Next is 17, which we explore and
+find this component. Then 15 finds this guy, 10 finds this 4,
+and 6 finds the last guy, and that's it. A much faster algorithm. In fact, the runtime, we essentially just ran a depth first
+search on the reverse graph and then ran another depth first search on G,
+which is the slight modification that we wanted to visit our vertices in
+this outer loop in some specific order. And also, we need to record
+the connected components we found. But basically, this is just two depth
+first searches, the runtime is linear O of V plus E, and this gives us
+a nice efficient algorithm for finding our strongly connected components. Well, that completes our unit
+on this graph exploration and decomposition algorithms. These tell us how to find ways to get
+from one vertex in the graph to another. However, when you're actually trying
+to solve this problems in practice, you don't just want any route
+on your map that gets me from where I am in San Diego to say,
+Los Angeles. The route that I find might
+pass me through New York and Florida on the way, and
+I don't want to do that. What I really want to do is I
+want to find an efficient path. How do I get there which spends
+as little time as possible, or maybe as little money as possible. And this is what we're going to
+start talking about in the next unit where Michael is going
+to be talking to you about how to find
+shortest paths in graphs. So, I hope you enjoyed this unit and
+will come back for the next one.

@@ -1,0 +1,194 @@
+Hello everybody, welcome back
+to the Graph Algorithms course. Today we're going to talk about algorithms
+for exploring graphs, in particular, ways to tell us which vertices
+can be reached from which others. So for an example of the type of
+problem we're trying to solve here, suppose that you're playing a video game. And you found the exit to some level,
+but you don't want to go there just yet. You want to first sort of
+explore this whole level and make sure you found all the secrets inside
+it, make sure you get all the loot and XP that there is to be found. And you can certainly wander around
+between the various rooms and find a bunch passageways and so on. And you've been wandering around for
+a while and maybe haven't discover anything new yet. But you'd like to make sure that you've
+really found everything before you leave. How do you accomplish this? How do you make sure
+that found everything? And this sort of is a notion
+of exploring a graph. You've got theses rooms,
+they're connected by passageways. And you want to make sure that everything,
+at least everything that's reachable from where you started, you can actually get to
+it and find, explore the entire region. And this actually sort of, this of related questions are actually
+very useful in a number of applications. For example, if you have a map and you want to find a route between
+some location on the map and some other, it often depends on this sort
+of exploration of the graph, making sure that you can find some sequence of roads
+to follow to get you where you want to go. This could also be used if you're
+sort of building a road system and want to ensure that the entire
+thing is connected. You need to have some sort of algorithm
+to tell what can be reached from what. And finally, it has more recreational
+things, the video game example, but also if you want to solve the maze. This is very much, well, can I get from the start to the finish
+in this sort graph that connects things? But also various puzzles, if you think of sort of vertices as
+sort of possible configurations. And then edges that describe
+moves that you can make and want to say, can I rearrange
+the puzzle to end up in this location? Again, this sort of exploration
+algorithm becomes very important. So before we get into this too much,
+we really want to formalize what we mean. In particular, we want to know what
+does it mean to be reachable from a given vertex. And basically,
+the idea is you start at the vertex and you're allowed to follow
+edges of the graph. And you want to able to see
+what you can end up at. And so to formalize this, we'd find a path in a graph G to be
+a sequence of vertices v0, v1, v2, etc., such that each vertex is connected
+to the next one by an edge of the graph. So we get some sequence
+of edges to follow. So the formal description of the problem
+that we would like to solve is given a graph G, and a vertex s in G,
+we'd like to find the collection of all vertices v in the graph such
+that there is a path from s to v, everything that we can reach from S. So, just to get a little bit of practice,
+if we have the following graph, which vertices here are reachable from A? Well think about it a little bit and
+you find out that A, C, D, F, H, and I are all reachable. And it's easy to see that these vertices
+sort of do all connect up from edges, but you then can't get to B, E, G or J. And this is sort of because
+there are no edges that connect any of these vertices we can reach
+to any of these other vertices. And so there's no way to escape,
+except for these six. And this is sort of the actual
+idea behind the algorithm. What you want to do is you want to
+make sure that you can actually find everything that you can reach. And so what you do is you sort of expand,
+you find a bunch of vertices. These are a bunch that I can reach. But then if there are any edges that
+connect ones that you can reach to ones that you can't reach so far, well, you
+have to sort of explore those edges and find the new vertices on the other end,
+and sort of add them to the list
+that you know about. And you sort of keep expanding this list
+of vertices that you know you can get to until you can't connect to
+anything new and then you're done. So to formalize this
+algorithm a little bit, we are going to keep
+a list of DiscoveredNodes. And this starts out just with the vertex
+axis you're supposed to start at. But then what you do is while there
+is an edge e that leaves this set of DiscoveredNodes that connects to something
+you have discovered to something you haven't discovered, then what you do is
+you take the vertex at the other end of that edge and
+add it to your list of DiscoveredNodes. And you just keep doing this until
+there's nothing new to be found. And then you return this
+list of DiscoveredNodes. Okay, that's a reasonable algorithm and
+it does work. But in order to really code this up,
+you need to do some work to handle the bookkeeping
+that's required for this algorithm. You need to do things like you
+need to keep track of which vertices you've discovered and
+which edges you've dealt with, which edges you've actually checked and
+which ones you haven't. You also need to know sort of which
+order to explore new edges in. If there are several possible edges to
+follow, which one do you follow next? And so, what we're going to do now is talk
+about a specific way to implement this and deal with these sort of bookkeeping isues. The first thing that we need to do
+is we need to keep track of which vertices we've already found. And for this, we're going to
+associate a boolean variable to each vertex visited(v) which basically
+tells us have we visited it yet. The next thing that we're going to
+need to do is we need to, most of the vertices that we visited will
+actually will have already sort of checked all of the edges relating to them. But some we haven't and we somewhere need
+to keep track of the list of vertices that still have edges hanging off of them that
+might connect this to something new. Now this list isn't going to
+appear explicitly in our program. It'll actually sort of to be
+hidden in the program stock so this is that points a little bit sudden. We'll sort of see it once
+we introduce the algorithm. The final thing is we need to
+discover which order to discover, to follow new edges in. And for this we are going to use what
+is known as the Depth First order. What this means is we're just going
+to start our initial vertex and we're just going to start
+following a chain of edges. We're just going to follow
+some really long path forward until one of two things happens. One thing is we could stumble across
+a vertex that we have already seen before. In which case there's no reason
+to have followed that edge and we'll just back up to
+where we were before. The second thing that could happen
+though is that we hit a dead end. And we actually hit a dead end and can't go any further forward,
+then we actually back up. And then once we back up though, we don't
+just back all the way to the beginning. We just back up once step and then try going forwards again from
+that new vertex that we found. Okay, so that's the basic idea. How do we implement this? Well part of the beauty about this is that
+we have a very simple recursive algorithm. So Explore(v), the first thing you do is you set
+the visited marker of v to be true. We say we have visited it. Next, for each neighbor w of v,
+for each w that's adjacent to v, if w has not already been visited,
+we recursively explore w. Okay, so this is a very compact program. Let's sort of actually see
+what it does on an example. Right, also I should mention that in order
+for this program to execute reasonably efficiently, we really want an adjacency
+list representation of our graph. That's because we have this for loop we want to iterate over all of
+the neighbors of v in our graph. And for that,
+if you have an adjacency list, which gives you a list of all the neighbors
+of v, that's incredibly easy to do. If you don't have an adjacency
+list on the other hand, this algorithm really
+isn't that efficient. Okay, fine. So let's look at in the example. Here's a graph, we're going to
+start by exploring that vertex. So we mark it as visited. We then check for unvisited neighbors. And hey, look there is one. So we recursively explore
+that other vertex. We mark it as visited. We search for unvisited neighbors. And we have this one. So remember now we're sort of three
+layers into the program stack here. This is sort of a sub
+routine of a sub routine. But now when we're exploring this
+vertex it has no unvisited neighbors. So after we've done
+a little bit of checking, we decide that we're done exploring
+this guy and we pop the stack. This other guy still we
+visited both of his neighbors, we pock the stock back to
+the original explorer call. Now this vortex does have some
+unvisited neighbors left, so let's visit one of them and
+explore that. Mark it as visited,
+find an unexplored neighbor, explore that. Mark as visited, unexplored neighbor,
+mark it as visited, unexplored neighbor. Now when we explore this vertex though,
+once again we're stuck. So we wrap up exploring that guy, pop
+a level up the stack, go back to exploring this other vertex, who now actually
+does have another unvisited neighbor. So we're going to go visit that one. Now we've actually visited
+everything in the graph. So all we're going to
+do is at each vertex, we're going to note that all of
+their neighbors have been visited. We're going to pop up the stack and
+get back to where we started and conclude. So here we actually have
+found all these vertices. And in fact if you look at it, we've actually figured out
+how to reach them all. If you look at sort of these darker edges
+which are the ones our algorithm sort of actually followed when you ran it, these sort of connect up
+to all the other vertices. And they actually tell us if
+you sort of follow these edges, they give you a unique path to any
+other vertex that we can reach. Okay, so that's our algorithm. Let's talk about correctness. And the theorem is that if all the
+vertices in our graph start as unvisited, when we run Explore(v) it
+marks as visited exactly the vertices that are reachable from v. And the proof here isn't so bad. The first thing to note is that
+we only ever explore things that are reachable from v. And that's because, well, the way our
+recursive calls work are we either start at v, or we explore a neighbor of
+a vertex that we've already explored. So any vertex that we end up
+exploring has to be a neighbor of a neighbor of a neighbor of a neighbor of
+a neighbor of a neighbor of the original vertex or something. But that does basically give us a path and
+say that wherever we got to was reachable. The next thing to note is that a w,
+vertex w, is not marked as visited unless
+it has already been explored, which is just the only way we mark things
+as visited is when we explore them. But finally,
+we should note that if w gets explored, well, we then look at
+all the neighbors of w. And either those neighbors have
+already been visited, in which case it means they've been explored at some
+point, or we end up exploring them. So in other words, if w gets explored,
+all of its neighbors also get explored. So to finish things, suppose that we have
+some vertex u that is reachable from v. That means that we've got
+a path from v going up to u. And if we actually explored everything
+along this path we'd be done. We would have explored u at some point. So let's assume that we don't. Assume that w's actually the furthest
+thing along this path that we've explored. However, by what we had
+on the previous slide, if you explore a vertex you also
+explore all of its neighbors. So the next vertex z along this
+path must also be explored. And so this is a contradiction. This says the only way this can work
+is if we actually explored every vertex along the path. But that means we've explored u,
+which is good. Okay, so this explore algorithm is
+actually really great if we just want to find the vertices that
+are reachable from a given one. But sometimes you want
+to do a little bit more. You actually want to find all
+the vertices of the graph G, not just those coming from a given one. So for this, we're going to use a slightly
+more complicated algorithm called depth first search. And for this what we do is the following,
+first we mark everything as unvisited. Then for each vertex in the graph, if it has not yet been visited,
+we explore that vertex. So to look at an example on this graph,
+we find an unvisited vertex, say that one, and we explore it. So we find a neighbor and another neighbor
+and then we pop back up the stack. And then we find something adjacent
+to our original vertex and come back. And now we're done exploring
+that first vertex. So now we look for a new vertex we've
+never visited before, like say that one. We explore its neighbor, come back,
+we're done exploring that guy. We find a new vertex that we
+haven't visited, that one. We explore its neighbor and
+his neighbor and then come back. And now that we've actually
+visited all the vertices, only now do we sort of wrap up and
+conclude our algorithm. So to analyze the run-time of this
+algorithm, we have to note a few things. Firstly, whenever we explore a vertex,
+we immediately mark it as being visited. That's the first thing that we do. The next thing to note is that no vertex ever gets explored if it's
+already been visited. And in fact if you look at every time we
+make an explore as even a recursive call, then we always first check if it has
+not been visited, then we explore it. And this means that no vertex
+gets explored more than once. In fact, this means that each vertex gets
+explored exactly once because the outer loop in the DFS explores every vertex
+if it hasn't already been visited. But each vertex in our graph
+gets explored exactly once. But for each vertex, when we explore it, there's this inner loop where we have
+to check all neighbors of that vertex. And so we have to do work for
+each neighbor of each vertex. And so we have to be more proportional
+to the total number of neighbors over all vertices. And that's proportional to the number of
+edges because each edge connecting A and B says that A is a neighbor of B and
+that B is a neighbor of A. So it contributes to two neighbors. But the total amount of work is
+still O of the number of edges. So total work we do, O of one work per
+vertex and O of one work per edge and the total run time is O of size of V plus
+size of E, a nice linear time algorithm. So that is depth first search. Next time we're going to talk a little bit
+more about reachability and graphs and give some more applications
+of this algorithm. So, I'll see you then.

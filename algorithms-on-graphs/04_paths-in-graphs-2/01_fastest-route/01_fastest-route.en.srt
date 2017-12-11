@@ -1,0 +1,462 @@
+1
+00:00:00,250 --> 00:00:04,990
+Hi, in this lecture, you will learn
+the algorithm for finding fastest routes,
+
+2
+00:00:04,990 --> 00:00:09,120
+which is used, for example, when you open
+your navigation app to get home from
+
+3
+00:00:09,120 --> 00:00:14,100
+work faster or by logistics
+companies when they want to deliver
+
+4
+00:00:14,100 --> 00:00:19,110
+the goods to their customers in time,
+but use less cars and less people.
+
+5
+00:00:20,550 --> 00:00:22,490
+So let's first state the problem.
+
+6
+00:00:22,490 --> 00:00:23,970
+It's really easy to do.
+
+7
+00:00:23,970 --> 00:00:27,996
+For example, what is the fastest
+route to get home from work, or
+
+8
+00:00:27,996 --> 00:00:32,785
+more generally, what is the fastest
+route from point A to point B right now?
+
+9
+00:00:32,785 --> 00:00:38,023
+And below, you see a screenshot
+from a popular navigation app,
+
+10
+00:00:38,023 --> 00:00:43,067
+Yonix Navigator, which is given
+a task of getting the fastest
+
+11
+00:00:43,067 --> 00:00:48,693
+route from the point you are currently in,
+which is marked by a circle
+
+12
+00:00:48,693 --> 00:00:54,229
+with the letter y in it, to the finish,
+which is your destination.
+
+13
+00:00:54,229 --> 00:00:55,926
+And it suggests to you a few variants.
+
+14
+00:00:55,926 --> 00:01:00,228
+So the default suggestion is the fastest
+route, but there are two others.
+
+15
+00:01:00,228 --> 00:01:05,384
+And there may be, for example,
+a route which uses less turns or
+
+16
+00:01:05,384 --> 00:01:09,287
+the route which is easiest for
+a novice driver.
+
+17
+00:01:09,287 --> 00:01:12,374
+And sometimes,
+there can be a shorter route,
+
+18
+00:01:12,374 --> 00:01:17,870
+which is not the fastest one, but
+shortest one in terms of distance.
+
+19
+00:01:17,870 --> 00:01:22,890
+So in this problem, we can represent
+the city or the country as a graph,
+
+20
+00:01:22,890 --> 00:01:26,630
+where nodes are some
+positions in the country.
+
+21
+00:01:26,630 --> 00:01:29,886
+For example, the crossroads and
+
+22
+00:01:29,886 --> 00:01:35,355
+the edges are the roads that
+connect those crossroads.
+
+23
+00:01:35,355 --> 00:01:38,559
+And there are some weights
+on those edges and
+
+24
+00:01:38,559 --> 00:01:42,973
+the weight on an edge is,
+in this case, the time in seconds or
+
+25
+00:01:42,973 --> 00:01:48,010
+in minutes you need to get from start
+of the edge to the end of the edge.
+
+26
+00:01:48,010 --> 00:01:51,570
+And what you need to find is
+the shortest path in this graph,
+
+27
+00:01:51,570 --> 00:01:55,729
+but not shortest path in the graph
+in terms of the number of edges,
+
+28
+00:01:56,780 --> 00:02:01,950
+shortest path in terms of the sum
+of the weights of those edges.
+
+29
+00:02:01,950 --> 00:02:06,840
+So if you want to get from A to B in
+the smallest amount of time possible,
+
+30
+00:02:06,840 --> 00:02:09,550
+then you get those by sum
+paths with sum edges and
+
+31
+00:02:09,550 --> 00:02:12,470
+sum weights on those edges
+corresponding to the time.
+
+32
+00:02:12,470 --> 00:02:16,230
+And you just sum up those
+weights of the edges, and
+
+33
+00:02:16,230 --> 00:02:19,230
+you get the total time it will
+take you to get from A to B.
+
+34
+00:02:19,230 --> 00:02:20,770
+You want the fastest route?
+
+35
+00:02:20,770 --> 00:02:24,490
+So you need the shortest path in
+terms of the sum of the weights of
+
+36
+00:02:24,490 --> 00:02:25,450
+edges on this path.
+
+37
+00:02:27,150 --> 00:02:28,098
+Let's see now,
+
+38
+00:02:28,098 --> 00:02:33,630
+does the breadth-first search algorithm
+from the previous lesson maybe help us?
+
+39
+00:02:33,630 --> 00:02:35,930
+So let's look at this graph, here,
+
+40
+00:02:35,930 --> 00:02:41,990
+we see that node A has a direct edge from
+A to point B, where you need to get.
+
+41
+00:02:41,990 --> 00:02:46,800
+And so, what our breadth-first search
+would say is that you already know
+
+42
+00:02:46,800 --> 00:02:51,720
+the optimal path from A to B because
+there is a direct edge, and so there is
+
+43
+00:02:51,720 --> 00:02:55,980
+no point in getting to some other nodes,
+just go directly from A to B, right?
+
+44
+00:02:57,040 --> 00:03:01,707
+Well, this doesn't work,
+for example, in this case,
+
+45
+00:03:01,707 --> 00:03:06,472
+let's suppose that it takes 5
+hours to get from A to B, and
+
+46
+00:03:06,472 --> 00:03:10,874
+the corresponding weight of
+the edge from A to B is 5.
+
+47
+00:03:10,874 --> 00:03:13,724
+And let's suppose there is another node,
+C,
+
+48
+00:03:13,724 --> 00:03:18,740
+such that there is an edge from A to C,
+which takes 2 hours to go through it.
+
+49
+00:03:18,740 --> 00:03:23,950
+And another edge from C to B, which
+also takes 2 hours to get through it.
+
+50
+00:03:23,950 --> 00:03:26,470
+And of course,
+this looks a little bit strange, but
+
+51
+00:03:26,470 --> 00:03:31,600
+if there is a traffic jam on the road
+from A to B, and roads from A to C and
+
+52
+00:03:31,600 --> 00:03:37,280
+from C to B are free roads, where there
+is no traffic jam, then this can happen.
+
+53
+00:03:37,280 --> 00:03:42,540
+And so, then we see that going from
+A to B through C will take just 4 hours,
+
+54
+00:03:42,540 --> 00:03:46,680
+while going directly from
+A to B takes 5 hours, and so
+
+55
+00:03:46,680 --> 00:03:49,140
+our breadth-first search
+algorithm doesn't work.
+
+56
+00:03:50,420 --> 00:03:55,600
+So maybe it's vice-versa,
+maybe it's always better to work around,
+
+57
+00:03:55,600 --> 00:03:59,290
+to go around some node,
+not to go directly.
+
+58
+00:03:59,290 --> 00:04:05,780
+But that's also not the case, because
+if the edge from A to B is 3 hours,
+
+59
+00:04:05,780 --> 00:04:11,080
+and edges from A to C and
+from C to B didn't change, and
+
+60
+00:04:11,080 --> 00:04:15,680
+we just removed the traffic jam from A to
+B and it became 3 hours instead of 5,
+
+61
+00:04:15,680 --> 00:04:18,830
+it is now better to go
+directly from A to B.
+
+62
+00:04:18,830 --> 00:04:23,879
+So there is now universal rule to
+go directly or not to go directly.
+
+63
+00:04:23,879 --> 00:04:29,181
+We need something more clever than
+that to solve our shortest or
+
+64
+00:04:29,181 --> 00:04:31,790
+fastest through the problem.
+
+65
+00:04:31,790 --> 00:04:33,950
+Now let's gain some intuition
+about this problem.
+
+66
+00:04:33,950 --> 00:04:37,080
+So let's look at this graph below.
+
+67
+00:04:37,080 --> 00:04:40,310
+And assume that we stay at origin node S.
+
+68
+00:04:40,310 --> 00:04:44,901
+And we only know that the edge from
+S to B is going to take 3 hours and
+
+69
+00:04:44,901 --> 00:04:48,270
+from S to C is going to take 5 hours.
+
+70
+00:04:48,270 --> 00:04:53,960
+So can we be sure that the distance
+from S to C is equal to 5,
+
+71
+00:04:53,960 --> 00:05:00,320
+that it will take 5 hours for
+the optimal route from S to C, okay?
+
+72
+00:05:01,350 --> 00:05:04,640
+So no, this is not the case,
+because for example,
+
+73
+00:05:04,640 --> 00:05:09,410
+the edge from B to C can have weight 1,
+and
+
+74
+00:05:09,410 --> 00:05:14,820
+so, the shortest route from S
+to C will be from S to B and
+
+75
+00:05:14,820 --> 00:05:19,470
+from B to C, which is only 4 hours
+instead of 5 hours if we go directly.
+
+76
+00:05:19,470 --> 00:05:25,538
+So we cannot be sure that the fastest
+route from S to C is 5 hours.
+
+77
+00:05:25,538 --> 00:05:29,568
+Now, another question is can we be
+sure that the distance from S to
+
+78
+00:05:29,568 --> 00:05:30,609
+B is equal to 3?
+
+79
+00:05:32,210 --> 00:05:34,230
+And in this case, the answer is yes,
+
+80
+00:05:34,230 --> 00:05:38,640
+because if we don't go directly from S
+to B, what other options do we have?
+
+81
+00:05:38,640 --> 00:05:43,860
+We can go only from S to C and
+then go by some other edges to come to B,
+
+82
+00:05:43,860 --> 00:05:48,470
+but if we go from S to C,
+we spent already 5 hours.
+
+83
+00:05:48,470 --> 00:05:52,260
+And after that,
+we also spend some time to get to B.
+
+84
+00:05:52,260 --> 00:05:53,810
+And the time is now negative.
+
+85
+00:05:53,810 --> 00:05:57,601
+So we cannot spend less than
+3 hours time in the end.
+
+86
+00:05:57,601 --> 00:06:00,980
+We actually cannot spend less
+than 5 hours in the end.
+
+87
+00:06:00,980 --> 00:06:05,540
+So going from S to B directly
+by 3 hours is beneficial for us.
+
+88
+00:06:05,540 --> 00:06:08,830
+In terms of the graph and
+the weights of the edges in it,
+
+89
+00:06:08,830 --> 00:06:12,800
+it means that there are no
+negative weights on the edges.
+
+90
+00:06:12,800 --> 00:06:15,060
+All the weights are non-negative numbers.
+
+91
+00:06:15,060 --> 00:06:19,352
+And so, we cannot decrease the length
+of the path by going through them.
+
+92
+00:06:19,352 --> 00:06:23,219
+So if we have already
+a path of length 3 and
+
+93
+00:06:23,219 --> 00:06:27,637
+all other paths start
+from spending more time,
+
+94
+00:06:27,637 --> 00:06:31,075
+we cannot improve this direct buff.
+
+95
+00:06:31,075 --> 00:06:35,368
+And in the next video,
+we'll use this idea to create a negative
+
+96
+00:06:35,368 --> 00:06:38,860
+algorithm that solves our
+fastest route problem.

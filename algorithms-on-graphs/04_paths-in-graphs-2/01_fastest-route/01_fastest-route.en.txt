@@ -1,0 +1,80 @@
+Hi, in this lecture, you will learn
+the algorithm for finding fastest routes, which is used, for example, when you open
+your navigation app to get home from work faster or by logistics
+companies when they want to deliver the goods to their customers in time,
+but use less cars and less people. So let's first state the problem. It's really easy to do. For example, what is the fastest
+route to get home from work, or more generally, what is the fastest
+route from point A to point B right now? And below, you see a screenshot
+from a popular navigation app, Yonix Navigator, which is given
+a task of getting the fastest route from the point you are currently in,
+which is marked by a circle with the letter y in it, to the finish,
+which is your destination. And it suggests to you a few variants. So the default suggestion is the fastest
+route, but there are two others. And there may be, for example,
+a route which uses less turns or the route which is easiest for
+a novice driver. And sometimes,
+there can be a shorter route, which is not the fastest one, but
+shortest one in terms of distance. So in this problem, we can represent
+the city or the country as a graph, where nodes are some
+positions in the country. For example, the crossroads and the edges are the roads that
+connect those crossroads. And there are some weights
+on those edges and the weight on an edge is,
+in this case, the time in seconds or in minutes you need to get from start
+of the edge to the end of the edge. And what you need to find is
+the shortest path in this graph, but not shortest path in the graph
+in terms of the number of edges, shortest path in terms of the sum
+of the weights of those edges. So if you want to get from A to B in
+the smallest amount of time possible, then you get those by sum
+paths with sum edges and sum weights on those edges
+corresponding to the time. And you just sum up those
+weights of the edges, and you get the total time it will
+take you to get from A to B. You want the fastest route? So you need the shortest path in
+terms of the sum of the weights of edges on this path. Let's see now, does the breadth-first search algorithm
+from the previous lesson maybe help us? So let's look at this graph, here, we see that node A has a direct edge from
+A to point B, where you need to get. And so, what our breadth-first search
+would say is that you already know the optimal path from A to B because
+there is a direct edge, and so there is no point in getting to some other nodes,
+just go directly from A to B, right? Well, this doesn't work,
+for example, in this case, let's suppose that it takes 5
+hours to get from A to B, and the corresponding weight of
+the edge from A to B is 5. And let's suppose there is another node,
+C, such that there is an edge from A to C,
+which takes 2 hours to go through it. And another edge from C to B, which
+also takes 2 hours to get through it. And of course,
+this looks a little bit strange, but if there is a traffic jam on the road
+from A to B, and roads from A to C and from C to B are free roads, where there
+is no traffic jam, then this can happen. And so, then we see that going from
+A to B through C will take just 4 hours, while going directly from
+A to B takes 5 hours, and so our breadth-first search
+algorithm doesn't work. So maybe it's vice-versa,
+maybe it's always better to work around, to go around some node,
+not to go directly. But that's also not the case, because
+if the edge from A to B is 3 hours, and edges from A to C and
+from C to B didn't change, and we just removed the traffic jam from A to
+B and it became 3 hours instead of 5, it is now better to go
+directly from A to B. So there is now universal rule to
+go directly or not to go directly. We need something more clever than
+that to solve our shortest or fastest through the problem. Now let's gain some intuition
+about this problem. So let's look at this graph below. And assume that we stay at origin node S. And we only know that the edge from
+S to B is going to take 3 hours and from S to C is going to take 5 hours. So can we be sure that the distance
+from S to C is equal to 5, that it will take 5 hours for
+the optimal route from S to C, okay? So no, this is not the case,
+because for example, the edge from B to C can have weight 1,
+and so, the shortest route from S
+to C will be from S to B and from B to C, which is only 4 hours
+instead of 5 hours if we go directly. So we cannot be sure that the fastest
+route from S to C is 5 hours. Now, another question is can we be
+sure that the distance from S to B is equal to 3? And in this case, the answer is yes, because if we don't go directly from S
+to B, what other options do we have? We can go only from S to C and
+then go by some other edges to come to B, but if we go from S to C,
+we spent already 5 hours. And after that,
+we also spend some time to get to B. And the time is now negative. So we cannot spend less than
+3 hours time in the end. We actually cannot spend less
+than 5 hours in the end. So going from S to B directly
+by 3 hours is beneficial for us. In terms of the graph and
+the weights of the edges in it, it means that there are no
+negative weights on the edges. All the weights are non-negative numbers. And so, we cannot decrease the length
+of the path by going through them. So if we have already
+a path of length 3 and all other paths start
+from spending more time, we cannot improve this direct buff. And in the next video,
+we'll use this idea to create a negative algorithm that solves our
+fastest route problem.

@@ -1,0 +1,160 @@
+We're now ready to present all
+the details of the Kruskal Algorithm. Namely, we will prove that
+the Kruskal strategy is optimal, it produces a spanning tree
+of minimum total weight, and we will also present implementation
+details of this algorithm. Recall that the idea of this
+algorithm is the following. We start with an empty set X,
+and we repeatedly add to this set the next lightest edge that
+doesn't produce a cycle. So it is not difficult to see that at any point of time the set
+of edges X forms a forest. That is a collection of trees. Let me illustrate this. Assume that we have some set of vertices
+and initially, the set X is empty, which means that each of our
+vertices forms a tree of size 1, namely a tree that contains 1 vertex and
+no edges. Initially each vertex is
+isolated in our set X. Now, we start adding edges. Probably, this is the first one,
+then we add this edge, then this edge, then this edge,
+then this edge, for example. At this point of time,
+our set X consists of three trees. So this is the first tree, T1. This is the second tree, T2. And this is the third tree, T3. In particular,
+the tree T3 contains just one vertex. It is an isolated vertex, okay? Assume also that the next vertex that the next edge that Kruskal's Algorithm
+is going to add is the following. [NOISE] So, it is the next lightest
+edge that doesn't produce a cycle. The first thing to note is that
+the edge e must join two edges that belong to different trees, right? Because if they were in the same tree,
+this would produce a cycle. Okay, now we need to show
+that adding e is a safe move. For this,
+we need to use cut property, right? And in turn for using cut property,
+we need to construct, we need to show a partition of the set of vertices
+such that e is the lightest branch in our graph that joins vertices
+from different parts of partition. To construct such a cut, let's just take
+all the vertices from one of these trees As one part of this cut namely
+this is going to be the set S so this is one part of our partition and all other vertices is the other
+part of this partition. In this case,
+we see that e is the lightest edge that joins two vertices
+from different parts. Which means in turn that cut
+property justifies that adding e in this case is indeed a safe move. In other words,
+if our carbon set tax is a part of some optimal spanning tree, then x with e added Is also a part of
+some minimum spanning tree. Once again, initially, the set X
+in the Kruskal algorithm is empty, which means that each
+vertex of our initial graph forms a separate connected component. So this is how initially
+the set x looks like. So each vertex lies in
+a separate connective component. Then we start adding edges to x. This creates [NOISE] a forest. In this forest currently,
+we have three trees. This is the first tree. This is the second one. And this is the third one. Assume now that the next lightest
+edge that Kruskal's Algorithm considers is the following one. First of all, we need to be able to check
+whether it joins two vertices that lie in the same tree or in other words,
+that lie in the same connected component. In this case, they lie in
+the same connected component, so Kruskal's Algorithm will
+not edit through the set x, because otherwise,
+it would produce a cycle in our set x. Now, assume that next set that Kruskal's
+Algorithm tries is the following. Again, we need to check whether
+the corresponding two end points lie in the same connected component. In this case, it is not a case. They lie in different connected component. So we add this edge and to this point,
+we should update the data structures that we use to indicate that now we
+actually merge trees T1 and T2. So what we need to check in our data
+structure is whether two given vertices lie in the same set or in the same
+connected component, and also if they lie in different connected components, we need
+to merge the corresponding two trees. So the perfect choice for data structure
+for this algorithm is, of course, the disjoint sets data structure. Once again,
+to check whether two given vertices lie in different connected components,
+we just check whether find of one endpoint is equal to find of
+the other end point of this edge. If they are different then they lie
+in different connected component. And when adding an edge to the set X, we
+need to merge the corresponding two tree and this is done by calling the method
+union of the corresponding two end points. We will now illustrate
+this on a toy example. This is a toy example where
+we have six vertices. Let's first call them A,
+B, C, D, E, F, and let's assume that we have a data
+structure disjoint set and let me show the contents of this
+disjoint sets of this data structure. So initially,
+each vertex lies in a separate set. No we start processing edges in
+order of non-decreasing weight. So the first lightest edge is AE. We check whether A and E, at this point, lie a different connected components. For this way,
+we call find of A and find of E. This gives us different IDs because
+they stay in different sets. So we add this edge to
+our current solution and we also notify our data
+structure that now A and E actually lie in the same
+connected component. So now it looks like this. The next lightest edge if the edge CF. Again we ask our data structure whether
+C and F belong to the same set and each replies that they do not belong
+to the same set because find of C is not equal to find of F, so it is safe
+to add this edge to our solution. We also notify our data structures and
+C and F now lie in the same set by
+calling union of C and F. So now C and F lie in the same set. The next edge is A, E,
+D and we see that A and D lie in different connected components so
+we just add this etch to a solution and also notify our data structures
+that we need to merge sets that contain the vertex A and
+the vertex D. So now, we have three different
+disjoint sets in our data structure, which actually corresponds to
+vertices of our three trees. So the first tree contains vertices AED, the second one contains the vertex B, and
+the last one contains vertices C and F. Now, the next lightest edge is DE,
+it has weight 3. However, we see that D and
+E belong to the same connected component. This, in turn, means that if we added
+the edge DE to our current solutions, this would produce a cycle. So we just keep the edge DE, and
+we continue to the next lightest edge. The next one is AB, and we see that A and
+B lie in different connected components, so it is safe to add the edge
+AB to the current solution. We also need to merge
+the corresponding two sets. So after this merge,
+our sets look as follows. Now, the lightest edge is the edge BE,
+it is of weight five, however, B and E belong to the same set,
+so we skip it. And the last edge that we actually
+add to our solution is the edge BBF. It is of weight 8 and, at this point,
+we also nudge two sets. And now, all our vertices lie
+in the same connected component, which means that we constructed
+an optimal spanning tree, that is a spanning tree
+of minimum total weight. The pseudocode of the Kruskal
+algorithm looks as follows. First, for each vertex in our graph,
+we create a separate disjoint set. We do this by calling MakeSet method
+of disjoint sets data structure. Then we initialize the set
+of edges X by empty set. The next step is that we sort the edges,
+all the edges of our graph, by weight. Then we process all the edges in
+order of non-decreasing weight. This is done in this is fold. Then for reach such edge, we need to check
+whether adding in the x safe or not. Namely, whether it produces a cycle or
+not. To do this, we just check whether u and v
+belong to different connector components. For this, we need to check where to
+find a few equal to find a v or not. If they're different, then they lie
+in different connected components. In this case,
+it is safe to add the edge u, v to the set X and
+produces in this line and also in this case we need to
+notify our data structure that all the vertices that before that lied in
+connected component with u and three, now lie in the same connected components,
+because we just joined these two trees, and this is done by calling
+union of of u and tree. Finally, in the end,
+we just return the resulting set X. It remains to estimate the running
+time of the Kruskal's algorithm. We start by sorting the edges, so
+this requires big O(E log E) time, right? This in turn can be rewritten
+as big O(E log of V squared), just because a simple graph
+has at most V squared edges. This, in turn,
+can be rewritten as just E times 2 log V. Again, log of V squared
+is equal to 2 log v, so we rewrite it as follows, and this is
+math analysis is just big O of E log V. So this is an upper bound on
+the running time of the first step. Then we need to process all the edges. For this,
+we make two equals to find that region. Why two equals, well,
+just because we process all the edges and follow each edge, we make two calls
+to define that region mainly, for one endpoint and for the other endpoint. Then we also make at most V minus
+one calls to the union procedure. Why V minus one? Well, just because initially we
+have n connected components. Namely, when the set x is empty, each vertex of our graph forms
+a separate connected components. Then each time when we call union, we
+actually merge two connected components. And in the end of the run
+of our algorithm, we have just one connected component. So all the vertices lie in the same tree. So initially, we have n connected
+components and then we have 1 and each time we call union, we reduce the
+number of connected components by 1 which means that we make exactly V
+minus 1 calls to union procedure. Okay, so we have roughly E calls to find
+and roughly V calls to union procedure. Now recall that if we implement the
+disjoint set data structure as a forest or as a collection of disjoint trees and
+we use union by rent. Heuristic than the running time that
+abound on the running time of each iteration is just log v, which gives
+us that amount E plus V times log v. Recall also that in our case, the graph is connected,
+which mean that e is at least v minus 1, which in turn means that E plus V,
+is at most 2E. Which allows us to rewrite it as follows. So the upper bound on
+the running time of the second step is actually the same as for
+the first step. It is O of E log V,
+which gives us that the upper bound on the running time of the whole
+algorithm is big O(E log V). Now recall that we actually know that if,
+for our implementation of disjoint sets data structure,
+we use both union by run heuristic and past compression heuristic then we
+can state a strong upper bound. That is, instead of using log v here, we actually have log star of v,
+the iterated log, right? This gives us a stronger upper bound for
+the second step. Unfortunately, this
+doesn't improve the total running time because
+still the upper bound for sorting all the edges delineates
+the upper bound for the second step. However, for some applications, the edges
+are given to us already in sorted order, which means that, in this case, we do not need to spend E log V time for
+sorting the edges. So that the total running time in this
+case becomes equal to E times log* of V. Which makes the Kruskal algorithm
+in this case even more efficient. So in this case,
+the running time is upper bounded by E times log star of V,
+which is nearly linear.

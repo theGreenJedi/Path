@@ -1,0 +1,416 @@
+1
+00:00:00,180 --> 00:00:06,030
+Hi, in this video you will learn
+what is a shortest path tree, how to
+
+2
+00:00:06,030 --> 00:00:11,660
+use it to reconstruct the shortest
+path from original to the node
+
+3
+00:00:11,660 --> 00:00:16,420
+you needed shortest path to after finding
+distances with breadth-first search.
+
+4
+00:00:16,420 --> 00:00:19,900
+And we'll need to slightly modify
+breadth-first search procedure for that.
+
+5
+00:00:21,490 --> 00:00:23,320
+What is the shortest-path tree?
+
+6
+00:00:23,320 --> 00:00:27,770
+On the left we some undirected
+graph with a nine nodes, and
+
+7
+00:00:27,770 --> 00:00:31,460
+suppose we selected nodes as the origin.
+
+8
+00:00:31,460 --> 00:00:35,590
+Then on the right we see the layered
+structure of this graph,
+
+9
+00:00:35,590 --> 00:00:37,820
+where as in the layer zero.
+
+10
+00:00:37,820 --> 00:00:41,700
+Four nodes in the layer one,
+two nodes in the layer two and
+
+11
+00:00:41,700 --> 00:00:43,490
+two nodes in the layer three.
+
+12
+00:00:43,490 --> 00:00:50,040
+So, we know the distances to those
+nodes but we also can remember is
+
+13
+00:00:50,040 --> 00:00:55,440
+how did we come to this or that particular
+node during the breath's first search.
+
+14
+00:00:55,440 --> 00:00:57,540
+So, for example, we example,
+
+15
+00:00:57,540 --> 00:01:01,368
+we came to the node a during breath's
+first search, directly from s.
+
+16
+00:01:01,368 --> 00:01:07,210
+We draw a directed edge from A to S.
+
+17
+00:01:07,210 --> 00:01:13,020
+Saying that S is the note from which
+we came to A when we discovered it.
+
+18
+00:01:13,020 --> 00:01:17,060
+We also draw an edge
+from B to A saying that
+
+19
+00:01:17,060 --> 00:01:21,280
+in our breakfast search algorithm
+we discovered B from A.
+
+20
+00:01:21,280 --> 00:01:25,660
+So we can draw such an edge for
+all the nodes but
+
+21
+00:01:25,660 --> 00:01:30,120
+for S itself, and we will get some graph.
+
+22
+00:01:30,120 --> 00:01:35,090
+And we'll prove later that it is a tree,
+but to make a tree,
+
+23
+00:01:35,090 --> 00:01:40,580
+we also need to make it undirected, so we
+just remove all the arrows from the edges.
+
+24
+00:01:40,580 --> 00:01:42,910
+And this already will be a tree.
+
+25
+00:01:44,540 --> 00:01:48,330
+So the lemma states that
+shortest-path tree,
+
+26
+00:01:48,330 --> 00:01:51,820
+as we define it now, is indeed a tree.
+
+27
+00:01:51,820 --> 00:01:53,900
+So that it doesn't contain any cycles.
+
+28
+00:01:53,900 --> 00:01:57,360
+Because the fact that this is a connected
+component is by construction.
+
+29
+00:01:57,360 --> 00:02:04,510
+We only add those nodes in the tree,
+which we reached during breath for search.
+
+30
+00:02:04,510 --> 00:02:08,970
+And always connect a new note
+we just discovered to some note,
+
+31
+00:02:08,970 --> 00:02:13,010
+which was already in the tree, so
+the graph is obviously connected.
+
+32
+00:02:13,010 --> 00:02:15,750
+We're going to need to prove that
+there are no cycles in this graph,
+
+33
+00:02:17,130 --> 00:02:19,610
+let's prove that as
+usual by contradiction.
+
+34
+00:02:19,610 --> 00:02:24,190
+So, suppose there is a cycle
+in the shortest path three.
+
+35
+00:02:24,190 --> 00:02:28,240
+And suppose this is a cycle off length 5,
+A-B-C-D-E.
+
+36
+00:02:28,240 --> 00:02:31,100
+Now this is an undirected cycle but
+
+37
+00:02:32,650 --> 00:02:36,850
+the edges of the cycle have to
+be ordered somehow initially.
+
+38
+00:02:36,850 --> 00:02:39,450
+So, for example, the edge between A and
+
+39
+00:02:39,450 --> 00:02:43,990
+B can be either from A to B or
+B to A but it doesn't really matter.
+
+40
+00:02:43,990 --> 00:02:46,070
+Let's assume that.
+
+41
+00:02:46,070 --> 00:02:48,520
+Go from a to b without loss of generality.
+
+42
+00:02:48,520 --> 00:02:53,550
+Now what we know is in the shortest
+path tree, at most one
+
+43
+00:02:53,550 --> 00:02:59,380
+outgoing edge from each node because for
+each node other than s,
+
+44
+00:02:59,380 --> 00:03:03,900
+we just saved from which
+node did we discovered it.
+
+45
+00:03:03,900 --> 00:03:07,000
+There is only one such node
+from which this is discovered.
+
+46
+00:03:07,000 --> 00:03:11,520
+There at most one outgoing edge from each
+node, and if we look at the edge between
+
+47
+00:03:11,520 --> 00:03:16,350
+A and E, we know that there is
+an outgoing edge from A already.
+
+48
+00:03:16,350 --> 00:03:21,950
+The edge between A and E cannot be
+an outgoing edge from A, because.
+
+49
+00:03:21,950 --> 00:03:23,820
+A would have two outgoing edges.
+
+50
+00:03:23,820 --> 00:03:29,410
+So the only way this can work is that
+there is an outgoing edge from E to A.
+
+51
+00:03:30,610 --> 00:03:35,430
+And similarly, the edge between D and
+E can only be attached from D to E,
+
+52
+00:03:35,430 --> 00:03:39,610
+and the same with edge CD and
+the same with edge BC.
+
+53
+00:03:39,610 --> 00:03:45,160
+So now we see the directitude So
+
+54
+00:03:45,160 --> 00:03:48,810
+looks like it can work but
+unfortunately it can not.
+
+55
+00:03:48,810 --> 00:03:52,060
+So lets look at the distance from S to A.
+
+56
+00:03:53,730 --> 00:03:59,610
+We know that when we go by the direct
+edge of a shortest path graph we go from
+
+57
+00:03:59,610 --> 00:04:04,840
+node which was discovered from some node
+To the nodes from which it was discovered.
+
+58
+00:04:04,840 --> 00:04:09,460
+And we know that the distance to
+the newly discovered node is assigned
+
+59
+00:04:09,460 --> 00:04:13,840
+to distance of the nodes from
+which it was discovered plus one.
+
+60
+00:04:13,840 --> 00:04:18,320
+So if we go by this edge to
+the parent in the shortest path tree,
+
+61
+00:04:18,320 --> 00:04:21,710
+we decrease our distance
+from S by exactly one.
+
+62
+00:04:21,710 --> 00:04:28,170
+We begin We stay in the node which
+is closer to S, exactly by 1.
+
+63
+00:04:28,170 --> 00:04:32,020
+So if we go from A to B,
+the distance to S decreases by 1.
+
+64
+00:04:32,020 --> 00:04:34,320
+If we go from B to C, decrease by 1.
+
+65
+00:04:34,320 --> 00:04:37,970
+So we start with some
+distance D from S to A,
+
+66
+00:04:37,970 --> 00:04:41,410
+and then when we go by edge A B,
+we stay at node B.
+
+67
+00:04:41,410 --> 00:04:45,100
+And we know that the distance
+from S to B is at most D minus 1.
+
+68
+00:04:45,100 --> 00:04:47,280
+And then the distance to
+C is at most d minus two,
+
+69
+00:04:47,280 --> 00:04:51,950
+and the distance to D is at most d minus
+three, and d minus four for E, and now,
+
+70
+00:04:51,950 --> 00:04:56,360
+we make the conclusion that the distance
+to A is at most d minus five.
+
+71
+00:04:56,360 --> 00:05:00,230
+So, d is at most d minus 5
+which is a contradiction,
+
+72
+00:05:00,230 --> 00:05:05,290
+which cannot happen so, By contradiction
+we'll prove that they're cannot be
+
+73
+00:05:05,290 --> 00:05:07,660
+any cycles in the shortest
+path tree indeed.
+
+74
+00:05:09,870 --> 00:05:12,560
+Now how to construct
+the shortest path tree?
+
+75
+00:05:12,560 --> 00:05:15,510
+We've defined it in such a way
+that it is very easy to do.
+
+76
+00:05:15,510 --> 00:05:21,570
+We only need to add two statements
+to the code of the BFS procedure.
+
+77
+00:05:21,570 --> 00:05:27,650
+We need another array or map, which is
+called prev so in prev we will store for
+
+78
+00:05:27,650 --> 00:05:32,490
+each node the previous node
+from which it was discovered.
+
+79
+00:05:32,490 --> 00:05:38,490
+And initialize it with
+a pointer to no work with
+
+80
+00:05:38,490 --> 00:05:44,740
+a special pointer needle, which basically
+means we don't have any previous node.
+
+81
+00:05:44,740 --> 00:05:48,470
+And when we discover a node
+in the end of the procedure.
+
+82
+00:05:48,470 --> 00:05:50,680
+We not only have data
+distance to those node, but
+
+83
+00:05:50,680 --> 00:05:54,150
+we also save the node from
+which it was discovered.
+
+84
+00:05:54,150 --> 00:05:58,600
+Now this is the only moment when berev
+changes because the next time we won't
+
+85
+00:05:58,600 --> 00:06:02,410
+discover this node again and
+we won't change its berev.
+
+86
+00:06:02,410 --> 00:06:06,590
+So that's the whole code for
+constructing shortest-path tree.
+
+87
+00:06:06,590 --> 00:06:11,679
+Now for every node we know what is
+its parent in the shortest-path tree.

@@ -1,0 +1,702 @@
+1
+00:00:00,290 --> 00:00:00,930
+Hi!
+
+2
+00:00:00,930 --> 00:00:04,870
+In this video, you will finally learn how
+to detect whether infinite arbitrage from
+
+3
+00:00:04,870 --> 00:00:09,170
+some source currency to some target
+currency is currently possible.
+
+4
+00:00:09,170 --> 00:00:09,730
+And not only that,
+
+5
+00:00:09,730 --> 00:00:14,420
+you will also learn how to actually
+implement it if it is possible.
+
+6
+00:00:14,420 --> 00:00:19,620
+But first, let's learn a criterion for
+the existence of infinite arbitrage.
+
+7
+00:00:19,620 --> 00:00:23,230
+The lemma states that if we
+consider some source currency S,
+
+8
+00:00:23,230 --> 00:00:27,260
+which we want to exchange into
+some target currency u, and
+
+9
+00:00:27,260 --> 00:00:32,020
+get as much as we want of currency
+u from a unit of currency S.
+
+10
+00:00:32,020 --> 00:00:37,800
+And it is possible if and only if
+the node u corresponding to the currency
+
+11
+00:00:37,800 --> 00:00:43,270
+u in the currency graph is
+reachable from some node w,
+
+12
+00:00:43,270 --> 00:00:46,595
+which was relaxed on
+iteration number big V.
+
+13
+00:00:46,595 --> 00:00:50,820
+Where big V is the number of
+nodes in the currency graph or
+
+14
+00:00:50,820 --> 00:00:54,100
+just the number of different
+currencies which we consider.
+
+15
+00:00:55,120 --> 00:01:00,780
+So we run the Bellman-Ford Algorithm for
+exactly big V iterations and
+
+16
+00:01:00,780 --> 00:01:04,790
+if some node w was relaxed
+on the last iteration, and
+
+17
+00:01:04,790 --> 00:01:09,740
+some node u is reachable from it,
+then it is possible to get
+
+18
+00:01:09,740 --> 00:01:14,770
+as much as you want of u from
+the source currency S, and vice versa.
+
+19
+00:01:14,770 --> 00:01:17,890
+If it is possible to get as
+much as you want of currency u,
+
+20
+00:01:17,890 --> 00:01:21,290
+then it must be reachable
+from some node w,
+
+21
+00:01:21,290 --> 00:01:25,656
+which is going to be relaxed on the last
+iteration on the Bellman-Ford's algorithm.
+
+22
+00:01:26,750 --> 00:01:28,790
+So let's prove this lemma.
+
+23
+00:01:28,790 --> 00:01:33,620
+First, we'll prove that if some
+currency u is reachable from w,
+
+24
+00:01:33,620 --> 00:01:38,320
+which was relaxed on iteration number V,
+then the infinite arbitrage is possible.
+
+25
+00:01:39,810 --> 00:01:46,025
+To see that, first note that,
+as w was relaxed on iteration number V,
+
+26
+00:01:46,025 --> 00:01:50,970
+then we know from the previous
+video that w is reachable from
+
+27
+00:01:50,970 --> 00:01:56,090
+some negative weight cycle, which in
+turn is reachable from the node S.
+
+28
+00:01:57,500 --> 00:01:59,920
+It corresponds to
+the picture on the slide.
+
+29
+00:02:00,950 --> 00:02:07,500
+And so we can get as much as we
+want of currency w from currency S.
+
+30
+00:02:07,500 --> 00:02:12,686
+Because we can go from S,
+to the node x of the negative cycle,
+
+31
+00:02:12,686 --> 00:02:17,771
+which is reachable from S,
+then go as many times as we want,
+
+32
+00:02:17,771 --> 00:02:22,451
+through the negative cycle,
+return to the node x, and
+
+33
+00:02:22,451 --> 00:02:25,548
+then go from this node x, to node w.
+
+34
+00:02:25,548 --> 00:02:30,160
+And using this way, we will get
+as much as we want of currency w,
+
+35
+00:02:30,160 --> 00:02:33,304
+and then we know that
+u is reachable from w.
+
+36
+00:02:33,304 --> 00:02:36,120
+We know that w is reachable
+from the negative cycle.
+
+37
+00:02:36,120 --> 00:02:38,720
+The negative cycle is reachable from S.
+
+38
+00:02:38,720 --> 00:02:42,960
+So we can use this hallway
+from S to negative cycle,
+
+39
+00:02:42,960 --> 00:02:46,160
+then go through the negative
+cycle as many times as we want.
+
+40
+00:02:46,160 --> 00:02:47,560
+Then go to w from there,
+
+41
+00:02:47,560 --> 00:02:52,980
+then go from there to u and this way we
+will get as much as we want of currency u.
+
+42
+00:02:52,980 --> 00:02:55,300
+So infinite arbitrage
+is actually possible.
+
+43
+00:02:56,490 --> 00:02:59,280
+Now let's prove the other way around.
+
+44
+00:02:59,280 --> 00:03:03,936
+That if we can get as much as we
+want of currency u from currency S,
+
+45
+00:03:03,936 --> 00:03:06,955
+then u must be reachable from some node w,
+
+46
+00:03:06,955 --> 00:03:13,030
+which is going to be relaxed on the last
+iteration of the Bellman-Ford Algorithm.
+
+47
+00:03:14,220 --> 00:03:19,110
+So first, let L be the length
+of the shortest path from
+
+48
+00:03:19,110 --> 00:03:22,107
+S to u with at most V- 1 edges.
+
+49
+00:03:23,260 --> 00:03:29,339
+Then we know that after V-1 iterations
+of the Bellman-Ford's algorithm,
+
+50
+00:03:29,339 --> 00:03:31,680
+dist[u] is equal to exactly L.
+
+51
+00:03:33,740 --> 00:03:38,850
+And we know that exists infinite
+arbitrage from S to u and so
+
+52
+00:03:38,850 --> 00:03:45,200
+there exists some path shorter than L,
+strictly shorter, because we can get
+
+53
+00:03:47,520 --> 00:03:52,750
+a path for
+any length which is arbitrarily small.
+
+54
+00:03:52,750 --> 00:03:56,896
+And so in particular there it is,
+the path which is shorter than L.
+
+55
+00:03:56,896 --> 00:04:02,910
+And so the dist[u] will be
+decreased at some point.
+
+56
+00:04:02,910 --> 00:04:05,420
+It will become less than L also.
+
+57
+00:04:05,420 --> 00:04:10,780
+But we know that by the iteration
+number V- 1, it is still equal to L.
+
+58
+00:04:10,780 --> 00:04:12,000
+It is not less than L.
+
+59
+00:04:12,000 --> 00:04:18,660
+So it will be still decreased even more
+on some iteration after iteration V- 1.
+
+60
+00:04:18,660 --> 00:04:22,731
+So it will be decreased either
+on iteration number V or
+
+61
+00:04:22,731 --> 00:04:25,450
+on some of the further iterations.
+
+62
+00:04:27,010 --> 00:04:32,530
+Now let's note that if at some point,
+some edge from node x to node
+
+63
+00:04:32,530 --> 00:04:38,470
+y was not relaxed, and also node x
+was not relaxed itself, then edge (x,
+
+64
+00:04:38,470 --> 00:04:42,430
+y) will not be relaxed on the next
+iteration because nothing has changed.
+
+65
+00:04:42,430 --> 00:04:44,420
+The dist[x] is the same.
+
+66
+00:04:45,532 --> 00:04:50,571
+And dist[y] is not bigger than
+dist[x] plus length of edge (x,
+
+67
+00:04:50,571 --> 00:04:55,370
+y) and this didn't change from this
+iteration to the next iteration.
+
+68
+00:04:55,370 --> 00:04:58,350
+So this edge won't be relaxed
+on the next iteration.
+
+69
+00:04:58,350 --> 00:05:02,820
+And this means that if node y
+was relaxed at some iteration,
+
+70
+00:05:02,820 --> 00:05:08,280
+then there is some node x from which
+there is an edge to this node.
+
+71
+00:05:08,280 --> 00:05:12,390
+And this node x was relaxed
+at some previous iteration.
+
+72
+00:05:12,390 --> 00:05:16,960
+So basically,
+only those nodes which are reachable from
+
+73
+00:05:16,960 --> 00:05:21,860
+nodes relaxed on previous iterations can
+be relaxed at the current iteration.
+
+74
+00:05:21,860 --> 00:05:25,170
+And so we know that the node u will be
+
+75
+00:05:25,170 --> 00:05:29,200
+relaxed at some iteration starting
+from iteration V and further, and
+
+76
+00:05:29,200 --> 00:05:33,820
+this means that u is reachable from
+some other node or maybe the same node.
+
+77
+00:05:33,820 --> 00:05:37,860
+But from node which was
+relaxed on iteration number V,
+
+78
+00:05:37,860 --> 00:05:40,510
+note that u can be this node.
+
+79
+00:05:40,510 --> 00:05:46,940
+For example, u can be relaxed
+exactly at iteration number V.
+
+80
+00:05:46,940 --> 00:05:50,437
+And as we consider node to
+be reachable from itself,
+
+81
+00:05:50,437 --> 00:05:55,601
+then this is a particular case, in which
+u was relaxed on iteration number V,
+
+82
+00:05:55,601 --> 00:06:01,110
+and u is reachable from itself so, it is
+possible to get infinite arbitrage to u.
+
+83
+00:06:01,110 --> 00:06:05,720
+But in any case, we'll prove
+that if infinite arbitrage from
+
+84
+00:06:05,720 --> 00:06:09,570
+S to u is possible, then u is
+reachable from at least some node,
+
+85
+00:06:09,570 --> 00:06:13,041
+maybe the same u which was
+relaxed on iteration number V.
+
+86
+00:06:14,190 --> 00:06:19,150
+So now we have a criterion for
+existence of infinite arbitrage.
+
+87
+00:06:19,150 --> 00:06:21,320
+How to apply that criteria.
+
+88
+00:06:21,320 --> 00:06:24,460
+So this is an algorithm to
+detect infinite arbitrage.
+
+89
+00:06:24,460 --> 00:06:30,280
+So we first do exactly V iterations
+of Bellman-Ford algorithm, and
+
+90
+00:06:30,280 --> 00:06:37,060
+we save all the nodes which were relaxed
+on the last iteration, iteration number V.
+
+91
+00:06:37,060 --> 00:06:39,490
+And let this set of nodes be denoted by A.
+
+92
+00:06:40,690 --> 00:06:44,156
+Now we'll put all the nodes
+from A into the queue, and
+
+93
+00:06:44,156 --> 00:06:47,560
+we'll use this queue for
+a breadth-first search.
+
+94
+00:06:47,560 --> 00:06:52,530
+So we'll start our breadth-first search
+not from a queue which contains just
+
+95
+00:06:52,530 --> 00:06:56,810
+the first node, from which we want
+to know all the reachable from it.
+
+96
+00:06:56,810 --> 00:07:00,100
+But we will put all
+the nodes which were relaxed
+
+97
+00:07:00,100 --> 00:07:04,050
+on iteration number V into the queue,
+and then start breadth-first search.
+
+98
+00:07:04,050 --> 00:07:08,380
+And then this breadth-first search will
+find us all the nodes which are reachable
+
+99
+00:07:08,380 --> 00:07:11,380
+from at least one of
+the nodes from the set A.
+
+100
+00:07:11,380 --> 00:07:16,840
+So those will be exactly those nodes for
+which infinite arbitrage is possible.
+
+101
+00:07:18,060 --> 00:07:23,110
+So, all those nodes and
+only those can have infinite arbitrage.
+
+102
+00:07:23,110 --> 00:07:26,500
+And this is a way to find
+all target currencies for
+
+103
+00:07:26,500 --> 00:07:31,610
+which infinite arbitrage from a fixed
+source currency S is possible.
+
+104
+00:07:31,610 --> 00:07:32,870
+But this is not enough.
+
+105
+00:07:32,870 --> 00:07:36,705
+What we want is to actually if
+infinite arbitrage is possible,
+
+106
+00:07:36,705 --> 00:07:38,280
+is how to actually implement it.
+
+107
+00:07:39,550 --> 00:07:40,948
+And here is the next algorithm.
+
+108
+00:07:40,948 --> 00:07:45,754
+So let's suppose we already detected
+that the infinite arbitrage
+
+109
+00:07:45,754 --> 00:07:48,841
+to some target currency u is possible, and
+
+110
+00:07:48,841 --> 00:07:54,470
+we determined that using
+breadth-first search from the set A.
+
+111
+00:07:54,470 --> 00:07:59,300
+So we need to augment this
+breadth-first search and we will
+
+112
+00:07:59,300 --> 00:08:05,010
+remember the parent of each visited node,
+so that when a breadth-first search
+
+113
+00:08:05,010 --> 00:08:11,130
+discovers a new node, it discovers it from
+some node which was discovered previously.
+
+114
+00:08:11,130 --> 00:08:12,730
+This is the parent of this node.
+
+115
+00:08:12,730 --> 00:08:17,285
+And this is what allows us to reconstruct
+the path from the source node to the end
+
+116
+00:08:17,285 --> 00:08:20,690
+node in the regular
+breadth-first search algorithm.
+
+117
+00:08:20,690 --> 00:08:25,220
+So we will do the same thing, and
+this will allow us to reconstruct the path
+
+118
+00:08:25,220 --> 00:08:29,400
+to the target currency u from some node w,
+which was relaxed on iteration number V.
+
+119
+00:08:30,610 --> 00:08:34,628
+Then we'll use the algorithm
+from the previous video to find
+
+120
+00:08:34,628 --> 00:08:37,300
+the negative cycle from
+which w is reachable.
+
+121
+00:08:37,300 --> 00:08:41,350
+Because we know that w was relaxed
+on iteration number V, and so
+
+122
+00:08:41,350 --> 00:08:46,710
+it is reachable from some negative cycle,
+which is in turn reachable from S.
+
+123
+00:08:46,710 --> 00:08:51,960
+And if we go back by the parent pointers
+from w, we will find this negative cycle.
+
+124
+00:08:51,960 --> 00:08:57,290
+So we'll find both this negative cycle and
+the path from it to w.
+
+125
+00:08:57,290 --> 00:09:01,941
+And of course we can also find a path
+from the source currency to this
+
+126
+00:09:01,941 --> 00:09:06,927
+negative cycle by, for example,
+launching a regular breadth-first
+
+127
+00:09:06,927 --> 00:09:11,600
+search from S until we encounter
+some node of that negative cycle.
+
+128
+00:09:11,600 --> 00:09:17,461
+And then combining all that, we will have
+a path from S to the negative cycle,
+
+129
+00:09:17,461 --> 00:09:22,920
+through which we can then go by
+as many iterations as we want.
+
+130
+00:09:22,920 --> 00:09:27,370
+Then we'll go by a path from
+this negative cycle to w.
+
+131
+00:09:27,370 --> 00:09:31,450
+And then we'll go by a path from w to u,
+which you already know.
+
+132
+00:09:31,450 --> 00:09:35,300
+And that gives us a way
+implement infinite arbitrage
+
+133
+00:09:35,300 --> 00:09:38,260
+from the source currency S
+to the target currency u.
+
+134
+00:09:39,780 --> 00:09:45,190
+So in conclusion, we can now implement
+the best possible exchange rate,
+
+135
+00:09:45,190 --> 00:09:49,210
+in the case it exists and
+there is no infinite arbitrage.
+
+136
+00:09:49,210 --> 00:09:53,910
+And we can determine whether actually
+infinite arbitrage is possible currently.
+
+137
+00:09:53,910 --> 00:09:58,520
+And we can actually implement infinite
+arbitrage from a given source currency
+
+138
+00:09:58,520 --> 00:09:59,830
+to given target currencies.
+
+139
+00:10:01,070 --> 00:10:05,850
+And in a more general and
+abstract way we can find shortest paths,
+
+140
+00:10:05,850 --> 00:10:09,430
+not only in the graphs where
+all the edges are positive,
+
+141
+00:10:09,430 --> 00:10:16,260
+like graphs of navigation systems with
+positive times to go through an edge and
+
+142
+00:10:16,260 --> 00:10:20,540
+length of the edge, but also in the graphs
+where negative edge weights are possible,
+
+143
+00:10:20,540 --> 00:10:23,420
+such as the graphs of currency exchange.
+
+144
+00:10:23,420 --> 00:10:26,770
+So we can basically find
+shortest paths correctly
+
+145
+00:10:26,770 --> 00:10:29,610
+in any graphs with weighted edges.
+
+146
+00:10:29,610 --> 00:10:31,028
+That's what we've learned in this lesson.

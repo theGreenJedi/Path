@@ -1,0 +1,54 @@
+Now let's prove that Dijkstra's
+algorithm actually finds correct distances from the original node
+to all the nodes in the graph. And the lemma states that
+when a node is selected as the node with a minimum dist value out
+of all nodes outside of a known region, it's dist value is actually equal to the
+correct distance from origin to this node. Let's prove that. Again, by contradiction. Let's assume this rule
+is broken at some point. Let's select first such moment. So this moment, we have some known region, R, which contains node S and
+maybe some other nodes colored in black. And all the nodes colored in white
+are outside the known region. So C, D, E, F, and G, in this case. And they have some dist
+values which are written in blue near the corresponding nodes. What will happen next is node C
+will be selected as the node with the minimum dist value out of all
+the nodes outside known region. And we suppose that this
+dist value of six is wrong. What we know about dist values is that
+they are upper bounds on the correct distances, that is if we have
+some dist value then we can also show some path of exactly
+the length equal to this dist value. And so the shortest path to this node
+Is less than or equal to this value. So there can be only two cases. Dist value is equal to the correct
+distance, but we assume it is not. And in this case it is strictly
+bigger than the correct distance. So we know that dist value of six is
+strictly bigger than the length of the shortest path from origin to node C. Now let's think about this shortest path. It starts in the node S,
+which is inside known region, and it ends in the node C, which is
+outside of the current known region. So there is some edge
+which goes from inside known region to outside of the known
+region in this shortest path. Let's consider this edge. This can be an edge, for
+example, from B to F. It can also go directly into C,
+that doesn't matter. What matters is what happens next. After it goes from known region
+to outside, it also goes through some path of known negative length,
+or maybe this path is empty with the edge from known
+region outside of it goes directly to C, but anyway this rest of
+the path is non-negative. What it means that if we just considered
+the first part of this path which ends in the end of the edge from known region
+to outside, now this part of the path is also strictly less than the dist
+value of C, strictly less than six. So we know that there is a path which goes from S,
+goes somewhere inside the known region and then goes outside and
+its length is strictly less than six. But it means that actually
+some of the edges, it means that this edge could be
+relaxed in the current situation, because we know for
+sure that the distance estimate for node B is equal to the shortest
+path from S to B, because the first moment when this rule breaks is with
+node C, it was not broken with node B. Okay? So, the distance estimate of node B
+is exactly equal to the shortest path from S to B. When we add the length of
+the edge from B to F to it, we will get this same thing as we
+get when we go by shortest path from S to C, but take only the part of it,
+which adds in the node F. So if we add to the value of B, the value of the length
+of the edge from B to F. We will get value very which
+is strictly less then six. And so it is strictly less
+than this value of F because this value of F is greater than or
+equal to the dist value of E. So we could relax this edge but
+we didn't do it for some reason. That's we know that we've relaxed
+all the edges from the known region to outside of the known the region. So this contradicts our algorithm. Now this contradiction proves that this
+rule is actually not broken and when we select the node with the minimum distance
+value outside of the known region, it's dist value is actually equal to the
+correct distance from origin to this node. And this proves that Dijkstra's algorithm
+finds correct distances from the region to all the nodes in the graph.

@@ -1,0 +1,80 @@
+Hi. In this video, we will prove the correctness of
+the breadth-first search algorithm for finding distances from an original
+node to all the nodes in the graph. We will also prove some properties of this
+algorithm, which can be useful when you want to extend this algorithm
+to other kinds of problems. First, recall that node u is
+called reachable from node S, if there is a path from S to u. And the lemma states that the reachable
+nodes are discovered during breadth-first search. And they get a finite
+estimate of distance from S. And unreachable nodes are not
+discovered during breadth-first search. And they stay with infinite distance
+estimate, infinite distance value. First, let's prove it for reachable nodes. So, suppose for the sake of contradiction
+that some reachable nodes were not discovered during
+the breadth-first search. Then select out of those
+nodes the one closest to S in terms of the length of the path. So, let's assume that u is
+the closest to S unreachable node, which was not discovered during
+the breadth-first search. Then take the shortest path,
+some shortest path from S to u. It goes from S to some nodes
+of v1 from there to v2 and so on and up to vk and from vk it goes to u. Then u will be discovered,
+actually, while processing vk. Why is that? Well, because first,
+we will discover and process S. Then we will discover and process v1. Then we will discover and
+process v2 and so on. And we will go up to vk. And when we process vk,
+u will be discovered. So this is a contradiction with
+the assumption we made for the sake of contradiction that some reachable node is not discovered
+during breadth-first search. So we proved that reachable
+nodes are discovered. And of course,
+they will find its estimation of distance. Because this is how the algorithm works. As soon as the node is discovered, it gets
+estimation of distance, bigger by one, than the estimation for
+the node b process. Now let's prove this statement
+about unreachable nodes. Let's suppose, again, for the sake of contradiction that some
+unreachable nodes were discovered. And let u be the first such
+unreachable node to be discovered. Now let's see when it was discovered. It was discovered while
+processing some other node v. And as u is the first unreachable
+node that was discovered and v was discovered before u, because u is
+discovered when v is already processed, it means that v is a reachable node. And it means that there is
+a path from s to v, but then it means that there is
+a path from s to u through v. So u is actually reachable, and this is
+a contradiction, and so we proved that unreachable nodes are not discovered
+during the breadth-first search. So it works correctly at least in
+the sense that it finds some distances to reachable nodes and doesn't find any
+finite distances to unreachable notes. Now we will prove the order lemma,
+which states something about the order in which nodes are discovered
+and dequeued from the queue. It says that by the time some
+node u at distance d from the original node is dequeued,
+it started processing. All the nodes at distance at most
+d have already been discovered. So they have already been
+enqueued in the queue. And maybe some of them have
+already been processed. Some of them are still in the queue, but at least,
+they have already been discovered. So let's prove this
+again by contradiction. Suppose that this lemma is not true and
+considered the first time this order was broken, so
+that some node u at distance d has already started processing, and
+that's why it is filled with black. And some other node v at distance d', which is at most d has not yet
+been discovered. Let's suppose that. So we know that d' is at most d,
+and we know that node u was discovered while
+processing some other node u'. And we know that the distance
+to this node u' is at least d-1, because if the distance
+to u' was less than d-1, then the distance to u would be less than
+d because there's an edge from u' to u. Also, we know that the node
+v has an edge from some node v' with distance d'-1 from s, because there is some
+shortest path from s to v. And there is the previous node before
+v on this path, and this is v'. And distance to v' is exactly d'-1,
+because this is a shortest path. So, it can be less than
+d'-1 because otherwise, distance to v will be less than d'. And it cannot be bigger
+than d'-1 because then the shortest path to v
+would be longer than d'. So, distance from s to d' is exactly d'-1. And we know that the prime is at most d,
+and from that, we know that d'-1 is at most d-1. And it means that v' was discovered before
+u' was dequeued because we know that the first time that order lemma
+was wrong was with nodes u and v. And now u' and v' were before that. So that point of time
+order lemma still works. So we know that v' was discovered
+before u' was dequeued. So it means that v' was gray
+before u' became black. [COUGH] And this means that also,
+v' became gray before u became gray, because u became gray while processing u'. So v' was enqueued and filled with gray before u was enqueued,
+discovered, and filled with gray. What that means is that because our
+queue works as first in first out, and v' was discovered before u, it means that
+v' was also started processing before u. So v' was dequeued and
+filled with black before u was dequeued, and immediately after v' was dequeued, v would be discovered,
+because there is an edge from v' to v. So either v was discovered
+even before that, or it was discovered during processing v'. And we see that v is already discovered,
+and u is not yet dequeued. So it is a contradiction with the fact
+that when u is already black, v was still white and not discovered. So we proved our order
+lemma by contradiction.

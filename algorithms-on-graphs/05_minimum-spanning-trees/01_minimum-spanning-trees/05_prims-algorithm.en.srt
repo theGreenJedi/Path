@@ -1,0 +1,837 @@
+1
+00:00:00,290 --> 00:00:04,050
+In this video,
+we can see the Prim's Algorithm.
+
+2
+00:00:04,050 --> 00:00:06,200
+Recall that in this algorithm,
+
+3
+00:00:06,200 --> 00:00:11,040
+the set X always forms a tree,
+and we regularly grow it.
+
+4
+00:00:11,040 --> 00:00:15,740
+At each iteration we attach a new vertex
+which is not currently in the tree
+
+5
+00:00:15,740 --> 00:00:20,460
+to the current tree by
+the lightest possible edge.
+
+6
+00:00:20,460 --> 00:00:24,231
+And this is in fact very similar
+to Dijkstra's algorithm.
+
+7
+00:00:24,231 --> 00:00:30,251
+Recall that Dijkstra's algorithm finds
+the shortest paths between two nodes
+
+8
+00:00:30,251 --> 00:00:35,560
+by constructing the tree of shortest
+path from a given source node.
+
+9
+00:00:35,560 --> 00:00:39,970
+We will now illustrate
+this on a toy example.
+
+10
+00:00:39,970 --> 00:00:43,480
+Consider the following toy
+example that we've already seen.
+
+11
+00:00:43,480 --> 00:00:51,420
+We are now going to grow a tree which will
+eventually become a minimum spanning tree.
+
+12
+00:00:51,420 --> 00:00:56,410
+At each iteration we're going to
+select the vertex such that it can
+
+13
+00:00:56,410 --> 00:01:01,680
+be attached to the current tree
+by the lightest possible edge.
+
+14
+00:01:01,680 --> 00:01:07,650
+To select such a vertex we will use
+the priority queue data structure.
+
+15
+00:01:07,650 --> 00:01:12,540
+So initially, we know nothing about
+the graph, so the cost of attaching
+
+16
+00:01:12,540 --> 00:01:18,290
+each vertex to the current tree
+is just equal to infinity.
+
+17
+00:01:18,290 --> 00:01:22,930
+So initially the priority was
+a cost of attaching each vertex
+
+18
+00:01:22,930 --> 00:01:24,670
+to the current tree is equal to infinity.
+
+19
+00:01:25,780 --> 00:01:30,520
+That is, we show here the priorities
+of all other vertices
+
+20
+00:01:30,520 --> 00:01:34,190
+in the priority queue data
+structures that we're going to use.
+
+21
+00:01:34,190 --> 00:01:39,410
+Then we declare some vertex,
+just randomly picked vertex,
+
+22
+00:01:39,410 --> 00:01:42,350
+as a root of the tree that
+we are going to grow.
+
+23
+00:01:42,350 --> 00:01:46,250
+Assume that we consider
+this vertex as a root.
+
+24
+00:01:46,250 --> 00:01:52,540
+Now we can change its
+priority to be equal to 0.
+
+25
+00:01:52,540 --> 00:01:56,410
+It costs us nothing to attach
+this vertex to the current tree.
+
+26
+00:01:56,410 --> 00:01:57,410
+It is the root.
+
+27
+00:01:57,410 --> 00:02:04,010
+Now we need to process all
+address going out of this tree.
+
+28
+00:02:04,010 --> 00:02:09,730
+Namely, we change the priority
+of this vertex to 1 because we
+
+29
+00:02:09,730 --> 00:02:17,640
+see that there is an edge of cost 1 that
+attaches this vertex to our current tree.
+
+30
+00:02:17,640 --> 00:02:25,450
+And for
+this vertex we change its priority to 8.
+
+31
+00:02:25,450 --> 00:02:31,260
+Okay, now we have five
+vertices in our priority cube,
+
+32
+00:02:31,260 --> 00:02:33,600
+all of the vertices except for the root.
+
+33
+00:02:33,600 --> 00:02:37,760
+And the cost of one of them is
+equal to 1 because of priority.
+
+34
+00:02:37,760 --> 00:02:40,540
+The priority of the second
+one is equal to 8, and
+
+35
+00:02:40,540 --> 00:02:44,580
+the priority of the remaining three
+vertices are equal to plus infinity.
+
+36
+00:02:44,580 --> 00:02:49,420
+So we select the vertex with
+the smallest priority, this is 1.
+
+37
+00:02:49,420 --> 00:02:54,638
+So we attach it to our current tree.
+
+38
+00:02:54,638 --> 00:02:58,100
+So our current tree looks as follows.
+
+39
+00:02:58,100 --> 00:03:01,934
+Now we need to process all the address
+that grow out of this tree.
+
+40
+00:03:01,934 --> 00:03:04,225
+Namely, when we add a new vertex,
+
+41
+00:03:04,225 --> 00:03:08,810
+we need to check whether new vertices
+can be attached to this vertex.
+
+42
+00:03:10,280 --> 00:03:16,330
+When we see this, first we see that
+there is a match of weight 6 so
+
+43
+00:03:16,330 --> 00:03:20,900
+we need to change the priority of
+this vertex to 6 because it now
+
+44
+00:03:20,900 --> 00:03:25,715
+can be attached to the current
+tree by the edge of weight 6.
+
+45
+00:03:26,940 --> 00:03:33,566
+Also we change the priority
+of this vertex to 9.
+
+46
+00:03:33,566 --> 00:03:39,110
+Okay, now we have four vertices in
+our priority queue data structure.
+
+47
+00:03:39,110 --> 00:03:43,130
+And we select the vertex
+with the minimum priority,
+
+48
+00:03:43,130 --> 00:03:47,820
+which is the vertex with priority 6.
+
+49
+00:03:47,820 --> 00:03:50,960
+So now this vertex is also in our tree
+
+50
+00:03:50,960 --> 00:03:55,390
+which is joined by this
+edge to our current tree.
+
+51
+00:03:55,390 --> 00:04:00,350
+Now we need to process all the edges
+going out of this vertex to
+
+52
+00:04:00,350 --> 00:04:02,930
+the vertices that are not
+currently in our tree.
+
+53
+00:04:04,200 --> 00:04:09,715
+When processing the edges, we change
+the priority of this vertex to 4.
+
+54
+00:04:11,470 --> 00:04:16,810
+And we change the priority
+of this vertex to 5.
+
+55
+00:04:16,810 --> 00:04:20,650
+Namely, we just found a cheaper way of
+
+56
+00:04:20,650 --> 00:04:24,180
+connecting this vertex
+to our current tree.
+
+57
+00:04:24,180 --> 00:04:28,320
+Okay, now we have three
+vertices in our priority queue
+
+58
+00:04:29,400 --> 00:04:32,970
+so we extract the minimum value.
+
+59
+00:04:32,970 --> 00:04:37,220
+This gives us the following vertex,
+so we include it in our tree,
+
+60
+00:04:37,220 --> 00:04:40,620
+which gives us, and
+attach it by this node.
+
+61
+00:04:40,620 --> 00:04:43,780
+Then we need to process
+all the edges going out of
+
+62
+00:04:43,780 --> 00:04:46,890
+this vertex to vertices that
+are currently not in the tree.
+
+63
+00:04:48,020 --> 00:04:52,955
+We see that we need to change
+the priority of this vertex to 1 because
+
+64
+00:04:52,955 --> 00:04:58,149
+there is a vertex of, because there
+is a match of weight 1 that connects
+
+65
+00:04:58,149 --> 00:05:03,017
+this vertex to, there's a vertex
+which is currently in the tree.
+
+66
+00:05:03,017 --> 00:05:08,810
+And we need to change this priority to 2,
+right?
+
+67
+00:05:10,090 --> 00:05:14,740
+Okay, great, now we have two vertices in
+our priority queue, one of priority 1,
+
+68
+00:05:14,740 --> 00:05:16,580
+and one of priority 2.
+
+69
+00:05:16,580 --> 00:05:19,931
+So we select this vertex.
+
+70
+00:05:19,931 --> 00:05:24,760
+Now it is in our tree, and
+it is connected by this edge, right?
+
+71
+00:05:25,770 --> 00:05:29,630
+When processing all the edges
+going out of this vertex,
+
+72
+00:05:29,630 --> 00:05:33,460
+we see that there is a match of weight 3.
+
+73
+00:05:33,460 --> 00:05:38,310
+However, it doesn't decrease
+the course of attaching
+
+74
+00:05:38,310 --> 00:05:40,360
+the remaining vertex to the tree.
+
+75
+00:05:40,360 --> 00:05:45,200
+So we keep the perimeter
+of this vertex unchanged.
+
+76
+00:05:45,200 --> 00:05:52,036
+So in the last step, we extract the only
+remaining vertex which is this one.
+
+77
+00:05:52,036 --> 00:05:57,167
+And we see that the cost of
+attaching this vertex to the current
+
+78
+00:05:57,167 --> 00:06:01,320
+tree is equal to 2, and
+this is done by this edge.
+
+79
+00:06:02,920 --> 00:06:07,312
+So, now, let's compute the total
+weight of the resulting tree.
+
+80
+00:06:07,312 --> 00:06:11,980
+It is 2 plus 1 plus 4, which gives us 7.
+
+81
+00:06:11,980 --> 00:06:13,270
+Plus 6, which is 13.
+
+82
+00:06:13,270 --> 00:06:18,869
+Plus 1, so
+this gives us the tree of total weight 14.
+
+83
+00:06:18,869 --> 00:06:22,882
+We now provide the full pseudocode
+of the Prim's algorithm.
+
+84
+00:06:22,882 --> 00:06:27,500
+As we've discussed before, it is very
+similar to Dijkstra's algorithm.
+
+85
+00:06:28,950 --> 00:06:32,603
+So, once again the Prim's Algorithm
+gradually grows
+
+86
+00:06:32,603 --> 00:06:38,170
+the tree which eventually turns
+into a minimum spanning tree.
+
+87
+00:06:38,170 --> 00:06:42,692
+We used the priority queue
+data structure to keep for
+
+88
+00:06:42,692 --> 00:06:48,356
+each vertex the minimum cost of
+attaching it to the current tree.
+
+89
+00:06:48,356 --> 00:06:53,870
+At each iteration we use priority
+queue to quickly find the vertex
+
+90
+00:06:53,870 --> 00:06:59,420
+which can be attached to the current
+vertex by the lightest edge.
+
+91
+00:06:59,420 --> 00:07:01,840
+So specifically we do the following.
+
+92
+00:07:01,840 --> 00:07:05,961
+Initially we have for
+each vertex we do not
+
+93
+00:07:05,961 --> 00:07:10,906
+know the cost of attaching
+it to the current tree so
+
+94
+00:07:10,906 --> 00:07:15,053
+we just put infinity into the array cost.
+
+95
+00:07:15,053 --> 00:07:19,275
+We'll also going to keep
+array parent which we'll
+
+96
+00:07:19,275 --> 00:07:22,130
+actually define as a tree, okay.
+
+97
+00:07:22,130 --> 00:07:29,265
+Initially we do not, for each vertex of
+our graph, we do not know its parent.
+
+98
+00:07:29,265 --> 00:07:34,150
+Then we select any vertex of our graph,
+u0.
+
+99
+00:07:34,150 --> 00:07:38,370
+And we declare this vertex as the root
+of the tree which we are going to grow.
+
+100
+00:07:39,430 --> 00:07:43,250
+We then update cost[u0] to be equal to 0.
+
+101
+00:07:43,250 --> 00:07:49,184
+So, we say that attaching this node,
+this vertex to the current tree is,
+
+102
+00:07:49,184 --> 00:07:57,380
+the cost of attaching this node is equal
+to 0 because it is already in our tree.
+
+103
+00:07:57,380 --> 00:08:00,030
+We then create a priority queue.
+
+104
+00:08:00,030 --> 00:08:03,779
+So at this point and
+we use costs as priorities.
+
+105
+00:08:03,779 --> 00:08:09,183
+At this point all the vertices
+lie in priority queue.
+
+106
+00:08:09,183 --> 00:08:16,115
+And the priorities are all of them except
+for u0 are equal to plus infinity,
+
+107
+00:08:16,115 --> 00:08:20,650
+while the priority of u0 is equal to 0,
+okay?
+
+108
+00:08:20,650 --> 00:08:21,880
+Then we do the following.
+
+109
+00:08:21,880 --> 00:08:27,076
+At each iteration, we extract the vertex
+
+110
+00:08:27,076 --> 00:08:33,760
+with the minimal priority
+out of our priority queue.
+
+111
+00:08:33,760 --> 00:08:38,560
+This means that we're actually attaching
+this vertex to the current tree.
+
+112
+00:08:38,560 --> 00:08:44,610
+When we do this, we also need to go
+through all the neighbors of the vertex V
+
+113
+00:08:44,610 --> 00:08:51,320
+and to check whether the edge that
+leads from V to this neighbor of V,
+
+114
+00:08:51,320 --> 00:08:55,930
+it has actually cost less
+than the current cost, or
+
+115
+00:08:55,930 --> 00:08:59,260
+than the current priority
+of this neighbor.
+
+116
+00:08:59,260 --> 00:09:05,230
+Specifically we do the following, when
+we add the vertex V to our current tree,
+
+117
+00:09:05,230 --> 00:09:08,030
+we iterate through all its neighbors.
+
+118
+00:09:08,030 --> 00:09:09,810
+This is not in this for loop.
+
+119
+00:09:09,810 --> 00:09:13,960
+So we iterate through all
+neighbors z of the vertex v.
+
+120
+00:09:13,960 --> 00:09:18,710
+And we check if z is still in
+the priority queue, namely,
+
+121
+00:09:18,710 --> 00:09:23,790
+if z is not in our current tree,
+and if the current cost of z
+
+122
+00:09:23,790 --> 00:09:28,000
+is greater than the weight
+of the edge from v to z.
+
+123
+00:09:29,610 --> 00:09:33,280
+Then, this means that
+we've just found a cheaper
+
+124
+00:09:33,280 --> 00:09:37,660
+way to attach the vertex z
+to the current tree, right?
+
+125
+00:09:37,660 --> 00:09:42,535
+And in this case,
+we just update the value of cost at z.
+
+126
+00:09:42,535 --> 00:09:47,245
+So we assign cost at z to be equal
+to the weight of the edge v z.
+
+127
+00:09:47,245 --> 00:09:52,335
+And we also say that in this case
+if we attach the vertex v to
+
+128
+00:09:52,335 --> 00:09:57,743
+the current tree,
+then this will be done through the edge v,
+
+129
+00:09:57,743 --> 00:10:02,321
+z, which means that v is
+going to be the parent of z.
+
+130
+00:10:02,321 --> 00:10:07,404
+Finally, we notify our priority
+queues that we need to
+
+131
+00:10:07,404 --> 00:10:13,490
+change the priority of the vertex
+z to the updated value cost of z.
+
+132
+00:10:14,580 --> 00:10:18,790
+Since the Prim's Algorithm is very
+similar to Dijkstra's Algorithm,
+
+133
+00:10:18,790 --> 00:10:21,080
+its running time is also similar.
+
+134
+00:10:21,080 --> 00:10:24,690
+So essentially,
+what we are doing here is the following.
+
+135
+00:10:24,690 --> 00:10:29,282
+We make V calls to ExtractMin procedure,
+right, and
+
+136
+00:10:29,282 --> 00:10:34,700
+also we make at most E calls to
+ChangePriority method, right?
+
+137
+00:10:36,150 --> 00:10:39,070
+And the total running time depends
+
+138
+00:10:39,070 --> 00:10:43,310
+on the implementation of
+the priority queue data structure.
+
+139
+00:10:43,310 --> 00:10:47,380
+If we just use array to
+store all priorities and
+
+140
+00:10:47,380 --> 00:10:52,060
+at each iteration, this means that
+change in priority is very cheap,
+
+141
+00:10:52,060 --> 00:10:55,240
+because we just change
+the corresponding value in our array.
+
+142
+00:10:55,240 --> 00:11:00,600
+However, for finding the minimum value,
+we need to scan the whole array.
+
+143
+00:11:00,600 --> 00:11:04,720
+In this case, we get V squared
+upper bound on the running time.
+
+144
+00:11:04,720 --> 00:11:05,490
+Why is that?
+
+145
+00:11:05,490 --> 00:11:12,680
+Well once again, because ExtractMin in
+this case has running time big O of V.
+
+146
+00:11:14,460 --> 00:11:17,164
+So this is V times big O of V,
+
+147
+00:11:17,164 --> 00:11:23,063
+while ChangePriority has
+running time big O of 1, right.
+
+148
+00:11:23,063 --> 00:11:25,841
+It is a constant time operation.
+
+149
+00:11:25,841 --> 00:11:31,743
+Since the numbers of edges in
+the graph is at most V squared,
+
+150
+00:11:31,743 --> 00:11:34,941
+this gives us big O of V squared.
+
+151
+00:11:34,941 --> 00:11:40,264
+If on the other hand we implement
+our priority queue data structure as
+
+152
+00:11:40,264 --> 00:11:46,630
+a binary heap, then both these operations
+have running time big O of log V.
+
+153
+00:11:46,630 --> 00:11:51,720
+In this case, we have the following
+running time, V + E times log V.
+
+154
+00:11:51,720 --> 00:11:59,884
+And since, in our case, again the graph
+is connected, E is at least 3 minus 1.
+
+155
+00:11:59,884 --> 00:12:07,090
+So this allows us rewrite the whole
+expression as big O of E times log V.
+
+156
+00:12:07,090 --> 00:12:10,777
+So once again the running time
+depends on implementation.
+
+157
+00:12:10,777 --> 00:12:16,879
+If we use array to implement our
+priority queue, this gives us V squared.
+
+158
+00:12:16,879 --> 00:12:19,810
+If we use binary heap,
+this gives us E log V.
+
+159
+00:12:19,810 --> 00:12:25,210
+Which one is better depends on
+whether our graph is dense or not.
+
+160
+00:12:25,210 --> 00:12:27,960
+We are now ready to summarize.
+
+161
+00:12:27,960 --> 00:12:31,969
+In this module we considered
+two greedy algorithms for
+
+162
+00:12:31,969 --> 00:12:34,680
+the minimum spanning tree problem.
+
+163
+00:12:35,840 --> 00:12:37,935
+And it uses the following idea.
+
+164
+00:12:37,935 --> 00:12:42,710
+At each iteration we add the next
+lightest edge to our current solution
+
+165
+00:12:42,710 --> 00:12:45,350
+if this edge doesn't produce a cycle.
+
+166
+00:12:45,350 --> 00:12:48,866
+To check whether the current
+edge produces a cycle or not,
+
+167
+00:12:48,866 --> 00:12:51,176
+we use disjoint sets data structure.
+
+168
+00:12:51,176 --> 00:12:54,314
+Namely, for the current edge
+uv we just check whether u and
+
+169
+00:12:54,314 --> 00:12:56,630
+v belong to the same connected component.
+
+170
+00:12:57,710 --> 00:13:01,240
+If they do, we just skip the current edge.
+
+171
+00:13:01,240 --> 00:13:03,880
+The next algorithm is due to Prim.
+
+172
+00:13:03,880 --> 00:13:07,460
+It uses a slightly different but
+still greedy strategy.
+
+173
+00:13:07,460 --> 00:13:11,840
+Namely, we greedily grow a tree.
+
+174
+00:13:11,840 --> 00:13:16,802
+At each iteration we attach a new vertex
+to the current tree by a lightest
+
+175
+00:13:16,802 --> 00:13:17,971
+possible edge.
+
+176
+00:13:17,971 --> 00:13:23,826
+To find such a vertex quickly we use
+the priority queue data structure.

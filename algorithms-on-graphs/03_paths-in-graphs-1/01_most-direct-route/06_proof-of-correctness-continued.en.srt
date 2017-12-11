@@ -1,0 +1,389 @@
+1
+00:00:00,310 --> 00:00:08,000
+Now the main result is that one node u is
+discovered during breadth-first search.
+
+2
+00:00:08,000 --> 00:00:13,197
+The dist value, the estimate of
+distance to this node from origin,
+
+3
+00:00:13,197 --> 00:00:18,490
+is assigned exactly the correct
+distance from node S to node u.
+
+4
+00:00:18,490 --> 00:00:19,120
+Let's prove this.
+
+5
+00:00:20,550 --> 00:00:24,210
+To prove it, we'll use mathematical
+induction, and as a base case,
+
+6
+00:00:24,210 --> 00:00:27,780
+we see that one node S is discovered.
+
+7
+00:00:27,780 --> 00:00:31,110
+This is the first node to be discovered.
+
+8
+00:00:31,110 --> 00:00:34,160
+The dist value is assigned to 0, and
+
+9
+00:00:34,160 --> 00:00:37,540
+this is actually the correct
+distance from S to itself.
+
+10
+00:00:37,540 --> 00:00:43,470
+So we'll use induction on
+the distance to the node.
+
+11
+00:00:43,470 --> 00:00:48,190
+So, the inductive step is that
+suppose we proved our statement about
+
+12
+00:00:48,190 --> 00:00:52,820
+correct distances for all nodes, which
+are distance at most k from the origin.
+
+13
+00:00:52,820 --> 00:00:57,600
+And now we'll prove it for
+nodes at distance exactly k + 1.
+
+14
+00:00:57,600 --> 00:01:01,110
+If we do that,
+we'll prove the lemma itself.
+
+15
+00:01:01,110 --> 00:01:05,066
+So now, taken out v at distance
+k + 1 from the origin,
+
+16
+00:01:05,066 --> 00:01:08,248
+we know that for
+all nodes which are closer,
+
+17
+00:01:08,248 --> 00:01:13,030
+the correct distances are found
+during breadth-first search.
+
+18
+00:01:13,030 --> 00:01:14,860
+Now let's prove it for
+this particular node v.
+
+19
+00:01:16,140 --> 00:01:19,220
+So we know that v was discovered,
+because it is reachable.
+
+20
+00:01:19,220 --> 00:01:21,755
+And we proved that all reachable
+nodes were discovered during
+
+21
+00:01:21,755 --> 00:01:23,290
+breadth-first research.
+
+22
+00:01:23,290 --> 00:01:27,010
+So it was discovered while
+processing some other node u.
+
+23
+00:01:27,010 --> 00:01:30,140
+Now let's estimate the distance to u.
+
+24
+00:01:30,140 --> 00:01:34,540
+From one point of view, we know that the
+distance from S to v is at most distance
+
+25
+00:01:34,540 --> 00:01:40,250
+from S to u plus 1, plus this edge from
+u to v through which v was discovered.
+
+26
+00:01:40,250 --> 00:01:43,100
+And we know the distance from
+S to v is exactly k + 1,
+
+27
+00:01:43,100 --> 00:01:46,140
+and that means the distance
+from S to u is at least k.
+
+28
+00:01:47,370 --> 00:01:53,190
+From the other hand, we know that v is
+discovered only after u is dequeued.
+
+29
+00:01:53,190 --> 00:01:58,890
+And using the order lemma, we can state
+that the distance to u is strictly less
+
+30
+00:01:58,890 --> 00:02:04,000
+than distance to v, because otherwise v
+would be discovered before u is dequeued.
+
+31
+00:02:04,000 --> 00:02:07,247
+And so distance from S to u
+is strictly less than k + 1.
+
+32
+00:02:07,247 --> 00:02:09,750
+And we already know this at least k.
+
+33
+00:02:09,750 --> 00:02:12,520
+And we also know this
+distance is integer number.
+
+34
+00:02:12,520 --> 00:02:17,570
+And so the only option is that
+distance from S to u is exactly k.
+
+35
+00:02:17,570 --> 00:02:21,510
+And then see what happens when
+we assign this value for v.
+
+36
+00:02:21,510 --> 00:02:25,150
+We assign it to this value of u + 1,
+which is k + 1.
+
+37
+00:02:25,150 --> 00:02:29,380
+Which is the same as
+the distance from original to v.
+
+38
+00:02:29,380 --> 00:02:36,440
+So we proved our lemma by induction that
+when the node is discovered at that point,
+
+39
+00:02:36,440 --> 00:02:43,070
+it is assigned correct distance
+estimate and it is saved in this value.
+
+40
+00:02:43,070 --> 00:02:47,615
+And the last property we want to prove,
+just to understand better how
+
+41
+00:02:47,615 --> 00:02:52,840
+breadth-first search works and
+to apply it to some nonstandard situation,
+
+42
+00:02:52,840 --> 00:02:57,320
+is that the queue which we use in
+the breath-first search looks like this.
+
+43
+00:02:57,320 --> 00:03:01,363
+It first has some nodes of distance d for
+some d, and
+
+44
+00:03:01,363 --> 00:03:05,510
+maybe in the end it has some
+nodes of distance d + 1.
+
+45
+00:03:05,510 --> 00:03:07,570
+But it doesn't contain
+any other distances.
+
+46
+00:03:07,570 --> 00:03:10,573
+If the first node in
+the queue has distance d,
+
+47
+00:03:10,573 --> 00:03:14,682
+then there are no nodes in the queue
+with distance less than d,
+
+48
+00:03:14,682 --> 00:03:18,022
+there are no nodes with
+distance more than d + 1.
+
+49
+00:03:18,022 --> 00:03:21,929
+And maybe there are some nodes
+at distance exactly d + 1, but
+
+50
+00:03:21,929 --> 00:03:26,170
+they all go after all the nodes
+at distance d in the queue.
+
+51
+00:03:26,170 --> 00:03:26,810
+Let's prove that.
+
+52
+00:03:28,260 --> 00:03:31,220
+So first, we know that by order lemma,
+
+53
+00:03:31,220 --> 00:03:36,250
+all nodes at distance d were enqueued
+before first such node is dequeued.
+
+54
+00:03:36,250 --> 00:03:39,440
+And nodes at distance d + 1 are only found
+
+55
+00:03:39,440 --> 00:03:42,610
+when a node at distance d
+is dequeued in process.
+
+56
+00:03:42,610 --> 00:03:47,485
+So, this means that nodes at distance
+d were enqueued before nodes at
+
+57
+00:03:47,485 --> 00:03:49,821
+distance d + 1 were dequeued.
+
+58
+00:03:49,821 --> 00:03:54,060
+Also, we know the same thing for
+nodes at distance d- 1,
+
+59
+00:03:54,060 --> 00:03:57,620
+so they were all enqueued
+before nodes at distance d.
+
+60
+00:03:57,620 --> 00:04:01,230
+So by the time node at
+distance d is dequeued,
+
+61
+00:04:01,230 --> 00:04:05,490
+all the nodes at distance d- 1
+are already dequeued from the queue.
+
+62
+00:04:05,490 --> 00:04:09,089
+So there are no more nodes in
+the queue at distance d- 1 or less.
+
+63
+00:04:10,490 --> 00:04:15,135
+And regarding the nodes at distance
+more than d + 1, they will be
+
+64
+00:04:15,135 --> 00:04:20,469
+discovered only when we start dequeuing
+nodes at distance d + 1 and more.
+
+65
+00:04:20,469 --> 00:04:24,920
+But those nodes are all going
+after nodes at distance d.
+
+66
+00:04:24,920 --> 00:04:29,009
+So at the point when the first
+node in the queue has distance d,
+
+67
+00:04:29,009 --> 00:04:32,704
+no nodes at distance more than
+d + 1 can be in the queue,
+
+68
+00:04:32,704 --> 00:04:36,322
+because no nodes at distance
+d + 1 were dequeued and so
+
+69
+00:04:36,322 --> 00:04:40,830
+we couldn't put anything at distance
+more than d + 1 in the queue.
+
+70
+00:04:42,460 --> 00:04:43,940
+So we proved this property.
+
+71
+00:04:43,940 --> 00:04:48,670
+Also, and now we have to prove that
+our algorithm finds correct distances
+
+72
+00:04:48,670 --> 00:04:51,370
+to all the reachable nodes in the graph,
+
+73
+00:04:51,370 --> 00:04:56,400
+that it finds infinite distances to
+the unreachable nodes in the graph,
+
+74
+00:04:56,400 --> 00:05:01,370
+and we also know the structure of
+the queue at any given moment in time.
+
+75
+00:05:01,370 --> 00:05:05,200
+And in the next lecture,
+we will also learn how to actually,
+
+76
+00:05:05,200 --> 00:05:06,600
+not only find distance, but
+
+77
+00:05:06,600 --> 00:05:11,525
+also reconstruct the shortest path
+from the origin to the node we need.
+
+78
+00:05:11,525 --> 00:05:16,481
+Because we don't want to just know that
+the distance in terms of number of
+
+79
+00:05:16,481 --> 00:05:21,112
+flight segments from Moscow to
+San Diego is two, we also want to find
+
+80
+00:05:21,112 --> 00:05:26,070
+are those two flight segments to
+actually get from Moscow to San Diego.
+
+81
+00:05:26,070 --> 00:05:28,861
+So, see that in the next video.

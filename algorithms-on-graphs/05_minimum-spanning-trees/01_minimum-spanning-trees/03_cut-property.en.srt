@@ -1,0 +1,561 @@
+1
+00:00:00,430 --> 00:00:05,230
+Mostly considerate to algorithms
+construct the solution iteratively.
+
+2
+00:00:05,230 --> 00:00:09,770
+Namely they start with an empty solution,
+with an empty set of edges.
+
+3
+00:00:09,770 --> 00:00:14,070
+And at each iteration they expand
+the current set of edges by one edge.
+
+4
+00:00:14,070 --> 00:00:18,147
+But they use different strategies for
+selecting the next edge,
+
+5
+00:00:18,147 --> 00:00:20,423
+namely the Kruskal's Algorithm.
+
+6
+00:00:20,423 --> 00:00:25,200
+Select the next lightest edge
+that doesn't produce a cycle.
+
+7
+00:00:25,200 --> 00:00:30,050
+While the Prim's Algorithm
+selects the next lightest edge
+
+8
+00:00:30,050 --> 00:00:33,933
+that attaches a new vertex
+to the current tree.
+
+9
+00:00:33,933 --> 00:00:38,755
+What we need to prove to show that both
+of these algorithm's optimal is that
+
+10
+00:00:38,755 --> 00:00:41,830
+this strategies are in some sense safe.
+
+11
+00:00:41,830 --> 00:00:46,293
+Namely, if at the current step
+we have a subset of edges which
+
+12
+00:00:46,293 --> 00:00:50,595
+we call e prime which is a subset
+of some optimal solution.
+
+13
+00:00:50,595 --> 00:00:56,299
+Then by adding this edge according to
+one of these two strategies to the set
+
+14
+00:00:56,299 --> 00:01:02,370
+gives us also a set of address which is
+also a part of some optimal solution.
+
+15
+00:01:02,370 --> 00:01:06,980
+This will justify at the end
+when we have a three, this three
+
+16
+00:01:06,980 --> 00:01:11,510
+is also a part of some optimal solution,
+which means that this is just optimal.
+
+17
+00:01:12,720 --> 00:01:16,920
+So in this video, we're going to prove
+a lemma which is called cut property,
+
+18
+00:01:16,920 --> 00:01:22,410
+which will justify that both
+these strategies, I indeed save.
+
+19
+00:01:22,410 --> 00:01:25,920
+The formal statement of
+the lemma is the following.
+
+20
+00:01:25,920 --> 00:01:30,390
+Assume that we have a graph G with a set
+of edges V and the set of edges E.
+
+21
+00:01:33,040 --> 00:01:38,800
+Together with this graph, we are given
+a subset of its edges that we call X.
+
+22
+00:01:38,800 --> 00:01:44,076
+X is a subset sum, subset of
+the set of edges of our graph for
+
+23
+00:01:44,076 --> 00:01:49,272
+which we knows that it is a part
+of some optimal solution.
+
+24
+00:01:49,272 --> 00:01:53,668
+It is a part of some
+minimum spanning tree.
+
+25
+00:01:53,668 --> 00:01:58,336
+I assume also that the set of vertices
+is partitioned into two parts.
+
+26
+00:01:58,336 --> 00:02:02,080
+One part is the subset of vertices S, and
+
+27
+00:02:02,080 --> 00:02:06,497
+another part all
+the remaining vertices V-S.
+
+28
+00:02:06,497 --> 00:02:09,897
+So we're given also
+a set of vertices S and
+
+29
+00:02:09,897 --> 00:02:15,010
+this set of vertices S satisfies
+the following property.
+
+30
+00:02:15,010 --> 00:02:20,163
+No edge from the set X joins
+two vertices that such as one
+
+31
+00:02:20,163 --> 00:02:25,920
+lies intercept S and
+the other one lies intercept V-S.
+
+32
+00:02:25,920 --> 00:02:33,130
+No edge from the set of X
+crosses between S and V-S.
+
+33
+00:02:33,130 --> 00:02:38,020
+Finally, assume that E,
+
+34
+00:02:38,020 --> 00:02:42,510
+the edge E of the initial graph
+satisfies the following property.
+
+35
+00:02:42,510 --> 00:02:47,538
+It is a lightest edge that
+joins the vertex from S with
+
+36
+00:02:47,538 --> 00:02:52,351
+the vertex outside of X
+with the vertex from V-S.
+
+37
+00:02:52,351 --> 00:02:56,400
+E is a lightest edge
+across this partition.
+
+38
+00:02:57,910 --> 00:03:04,780
+Then what dilemma states is that if we
+add the edge E to our current set X,
+
+39
+00:03:04,780 --> 00:03:10,390
+then what we get will also be a subset
+of some minimum spanning tree.
+
+40
+00:03:10,390 --> 00:03:15,500
+In other words,
+adding e to X in this case is a safe move.
+
+41
+00:03:15,500 --> 00:03:18,836
+So since this is a long statement,
+
+42
+00:03:18,836 --> 00:03:23,673
+let me repeat it once again
+using a small example.
+
+43
+00:03:23,673 --> 00:03:28,700
+So I assume that this is our graph G,
+so we are given a graph G.
+
+44
+00:03:28,700 --> 00:03:33,400
+Together with this graph G we
+are given some subset of its edges
+
+45
+00:03:33,400 --> 00:03:38,350
+shown here on the slide in blue,
+it is the set X.
+
+46
+00:03:40,060 --> 00:03:44,989
+So this is just subset of the set
+of edges of how we graph and
+
+47
+00:03:44,989 --> 00:03:50,859
+assumes that we know that it is
+a part of some minimum spanning tree.
+
+48
+00:03:50,859 --> 00:03:56,716
+So the set X is a subset of
+some minimum spanning tree,
+
+49
+00:03:56,716 --> 00:04:04,152
+then consider some partition of
+the set of vertices into two parts.
+
+50
+00:04:04,152 --> 00:04:08,464
+See, this is one part and
+this is also remaining vertices,
+
+51
+00:04:08,464 --> 00:04:10,283
+this is the second part.
+
+52
+00:04:10,283 --> 00:04:16,990
+Then this partition is required to satisfy
+the following property, no edge from x
+
+53
+00:04:16,990 --> 00:04:22,870
+on our picture now blue edge joins
+to vertices from different parts.
+
+54
+00:04:22,870 --> 00:04:24,960
+In this case, it is satisfied.
+
+55
+00:04:24,960 --> 00:04:32,080
+Indeed, any blue edge here joins two
+vertices that lie in the same part.
+
+56
+00:04:33,810 --> 00:04:38,750
+Next, we consider the lightest edge in our
+
+57
+00:04:38,750 --> 00:04:42,750
+initial graph that joins two
+vertices from different parts.
+
+58
+00:04:42,750 --> 00:04:46,910
+Assume that this edge is e,
+shown here in red.
+
+59
+00:04:46,910 --> 00:04:53,880
+Then what lemma states is that
+if we this edge to our set X,
+
+60
+00:04:53,880 --> 00:05:01,670
+then the resulting set of edges will also
+be a part of some minimum spanning tree.
+
+61
+00:05:03,260 --> 00:05:08,071
+So this tells that adding
+
+62
+00:05:08,071 --> 00:05:13,259
+e to our current subset which
+we grow repeatedly by one edge
+
+63
+00:05:14,310 --> 00:05:20,760
+to the subset is a safe move then
+I will proof the cut property.
+
+64
+00:05:20,760 --> 00:05:23,340
+This is our graph G and
+
+65
+00:05:23,340 --> 00:05:29,070
+this is the subset of edges X shown
+here in blue and we assume that
+
+66
+00:05:29,070 --> 00:05:34,430
+this subset X is a part of some minimum
+spanning tree which we denote by T.
+
+67
+00:05:35,540 --> 00:05:40,344
+In other words,
+X is a subset of edges is a subset
+
+68
+00:05:40,344 --> 00:05:44,570
+of some minimum spanning tree T.
+
+69
+00:05:44,570 --> 00:05:49,743
+Now, we also have a partition of
+the set of vertices into two part.
+
+70
+00:05:49,743 --> 00:05:55,351
+We said the vertices S and
+the set of vertices V-S, all that remains.
+
+71
+00:05:55,351 --> 00:05:59,579
+E is a lightest edge in
+the initial graph which joins
+
+72
+00:05:59,579 --> 00:06:03,721
+two vertices from different
+parts of partition.
+
+73
+00:06:03,721 --> 00:06:08,854
+So E joins the vertex from
+S with the vertex from V-S.
+
+74
+00:06:08,854 --> 00:06:13,982
+What we need to prove is if we add
+the edge E to our current set X,
+
+75
+00:06:13,982 --> 00:06:19,720
+then what we get is also a part
+of some minimum spanning tree.
+
+76
+00:06:19,720 --> 00:06:22,550
+Once again, what we assume about X.
+
+77
+00:06:22,550 --> 00:06:27,790
+We assume X is a part of some
+minimum spanning tree T,
+
+78
+00:06:28,990 --> 00:06:33,920
+and e joins two vertices from
+different parts of partition.
+
+79
+00:06:33,920 --> 00:06:41,100
+And what we need to prove is that
+X with e added 3 is also a part
+
+80
+00:06:41,100 --> 00:06:46,160
+of some possibly different
+minimum spanning three.
+
+81
+00:06:46,160 --> 00:06:50,820
+So the minimum spanning tree
+which contains X plus e
+
+82
+00:06:50,820 --> 00:06:55,240
+is not necessarily the same as T.
+
+83
+00:06:55,240 --> 00:06:59,010
+So to prove this, we consider two cases.
+
+84
+00:06:59,010 --> 00:07:04,520
+So first, if E happens to be a part
+of the minimum spanning tree T,
+
+85
+00:07:04,520 --> 00:07:07,140
+then there is noting to prove.
+
+86
+00:07:07,140 --> 00:07:13,668
+Once again, we assume that X is a part of
+minimum spanning tree that we denote by if
+
+87
+00:07:13,668 --> 00:07:19,300
+e is also part T sub x plus e is
+a part of minimum spanning tree T.
+
+88
+00:07:19,300 --> 00:07:21,670
+In this case, there is nothing to prove,
+we are just done.
+
+89
+00:07:22,970 --> 00:07:27,140
+So I assume that e is not a part
+of the minimum spanning tree T.
+
+90
+00:07:28,420 --> 00:07:30,950
+Let's then consider the wall tree T.
+
+91
+00:07:30,950 --> 00:07:38,280
+So it contains X, so now the edges
+showing in blue show the wall tree T.
+
+92
+00:07:39,330 --> 00:07:45,100
+Know that if we add the edge E to
+the tree T then it produces a cycle.
+
+93
+00:07:46,320 --> 00:07:50,720
+Because in the tree T,
+there is a path between the vertices,
+
+94
+00:07:50,720 --> 00:07:56,950
+between the endpoints of e, and when
+we add the edge e, it produces a cycle.
+
+95
+00:07:56,950 --> 00:08:00,530
+In this case on our example,
+this is the cycle.
+
+96
+00:08:03,460 --> 00:08:07,447
+This is the cycle, I'm sorry.
+
+97
+00:08:07,447 --> 00:08:09,351
+So this is a cycle and
+
+98
+00:08:09,351 --> 00:08:15,520
+the edge e in the cycle joins to
+vertices from different parts.
+
+99
+00:08:15,520 --> 00:08:19,380
+Since this is a cycle, so
+
+100
+00:08:19,380 --> 00:08:24,090
+the edge e joins for
+example the left part with the right part.
+
+101
+00:08:24,090 --> 00:08:28,190
+Since this is a cycle it must eventually
+at some point go from right part
+
+102
+00:08:28,190 --> 00:08:29,400
+to left part.
+
+103
+00:08:29,400 --> 00:08:37,354
+Which means that there must be an edge in
+the tree T which also joins two parts.
+
+104
+00:08:37,354 --> 00:08:40,787
+And we denote this edge by e prime and
+
+105
+00:08:40,787 --> 00:08:45,490
+in our case this is this edge,
+so this is e prime.
+
+106
+00:08:47,180 --> 00:08:53,660
+Now, I claim is that if we replace
+the edge e prime by the edge e
+
+107
+00:08:53,660 --> 00:08:58,870
+in the current tree, is then what
+we get is an optimal spanning tree.
+
+108
+00:08:58,870 --> 00:09:00,060
+So why is that?
+
+109
+00:09:00,060 --> 00:09:04,614
+First of all,
+the resulting tree is still connected,
+
+110
+00:09:04,614 --> 00:09:09,767
+because we just removed some edge,
+edge e prime from a cycle.
+
+111
+00:09:09,767 --> 00:09:12,880
+So this is still connected,
+it was connected before.
+
+112
+00:09:12,880 --> 00:09:18,630
+And when we remove an edge from a cycle,
+it cannot disconnect the graph.
+
+113
+00:09:18,630 --> 00:09:22,030
+At the same time,
+the weight of the edge e prime
+
+114
+00:09:24,120 --> 00:09:26,820
+is at least the weight of the edge e,
+
+115
+00:09:26,820 --> 00:09:33,480
+because e is the lightest edge that
+joins different part of partition.
+
+116
+00:09:33,480 --> 00:09:39,561
+Which proves that the resulting
+set of edges is a tree of minimum
+
+117
+00:09:39,561 --> 00:09:45,312
+possible weight which in turns,
+proves the cut property.

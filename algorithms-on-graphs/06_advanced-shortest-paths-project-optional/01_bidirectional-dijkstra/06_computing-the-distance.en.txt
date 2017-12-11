@@ -1,0 +1,30 @@
+So now we've proven that theorem. And we can implement
+the algorithm as follows. We do the alternating turns
+of forward search and the backwards search until
+we meet at some point v. And we remember which vertices
+are processed in forward search and which vertices are processed
+in the backward search. Then, we take all those vertices which
+are processed at least in one of them, and for each of those vertices,
+we minimize the sum of distance estimate of the forward surge plus the distance
+estimate of the backwards surge. And for the node for
+which this sum is minimal, we know that there is a shortest
+path going through this vertex. And its length is equal to the sum
+of these two distance estimates. And then to reconstruct the path itself,
+we can reconstruct the shortest path from the source vertex to this
+middle vertex in the forward search. And separately, we reconstruct the path from this vertex
+to target vertex t in the backward search. And then just join those two parts into
+a single shortest path from s to t. I won't show you the psuedocode
+in the lecture, but you can see it in the slides
+which are uploaded. So in conclusion, a few remarks. First, the worst-case running
+time of Bidirectional Dijkstra is the same asymptotically as for
+the regular Dijkstra algorithm. And we saw that it can differ, for
+example, twice for route networks, but this is not an asymptotic difference. And speedup in practice
+depends on the graph, so for the route networks it's
+roughly 2x speed up. But for social networks,
+it can be thousands of times faster. From the other hand, the memory
+consumption is somewhat worse, but again, it is not asymptotically worse. It's just 2x to store two copies of G,
+the G and the reversed G. And also we'll need to store
+some auxiliary arrays for forward search and for backwards search,
+so twice the memory for those also, so roughly 2x memory consumption. And you'll see the actual speedup
+on social network's graphs in one of the problems of the
+Programming Assignment of this project.

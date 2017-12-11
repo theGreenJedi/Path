@@ -1,0 +1,67 @@
+Now the main result is that one node u is
+discovered during breadth-first search. The dist value, the estimate of
+distance to this node from origin, is assigned exactly the correct
+distance from node S to node u. Let's prove this. To prove it, we'll use mathematical
+induction, and as a base case, we see that one node S is discovered. This is the first node to be discovered. The dist value is assigned to 0, and this is actually the correct
+distance from S to itself. So we'll use induction on
+the distance to the node. So, the inductive step is that
+suppose we proved our statement about correct distances for all nodes, which
+are distance at most k from the origin. And now we'll prove it for
+nodes at distance exactly k + 1. If we do that,
+we'll prove the lemma itself. So now, taken out v at distance
+k + 1 from the origin, we know that for
+all nodes which are closer, the correct distances are found
+during breadth-first search. Now let's prove it for
+this particular node v. So we know that v was discovered,
+because it is reachable. And we proved that all reachable
+nodes were discovered during breadth-first research. So it was discovered while
+processing some other node u. Now let's estimate the distance to u. From one point of view, we know that the
+distance from S to v is at most distance from S to u plus 1, plus this edge from
+u to v through which v was discovered. And we know the distance from
+S to v is exactly k + 1, and that means the distance
+from S to u is at least k. From the other hand, we know that v is
+discovered only after u is dequeued. And using the order lemma, we can state
+that the distance to u is strictly less than distance to v, because otherwise v
+would be discovered before u is dequeued. And so distance from S to u
+is strictly less than k + 1. And we already know this at least k. And we also know this
+distance is integer number. And so the only option is that
+distance from S to u is exactly k. And then see what happens when
+we assign this value for v. We assign it to this value of u + 1,
+which is k + 1. Which is the same as
+the distance from original to v. So we proved our lemma by induction that
+when the node is discovered at that point, it is assigned correct distance
+estimate and it is saved in this value. And the last property we want to prove,
+just to understand better how breadth-first search works and
+to apply it to some nonstandard situation, is that the queue which we use in
+the breath-first search looks like this. It first has some nodes of distance d for
+some d, and maybe in the end it has some
+nodes of distance d + 1. But it doesn't contain
+any other distances. If the first node in
+the queue has distance d, then there are no nodes in the queue
+with distance less than d, there are no nodes with
+distance more than d + 1. And maybe there are some nodes
+at distance exactly d + 1, but they all go after all the nodes
+at distance d in the queue. Let's prove that. So first, we know that by order lemma, all nodes at distance d were enqueued
+before first such node is dequeued. And nodes at distance d + 1 are only found when a node at distance d
+is dequeued in process. So, this means that nodes at distance
+d were enqueued before nodes at distance d + 1 were dequeued. Also, we know the same thing for
+nodes at distance d- 1, so they were all enqueued
+before nodes at distance d. So by the time node at
+distance d is dequeued, all the nodes at distance d- 1
+are already dequeued from the queue. So there are no more nodes in
+the queue at distance d- 1 or less. And regarding the nodes at distance
+more than d + 1, they will be discovered only when we start dequeuing
+nodes at distance d + 1 and more. But those nodes are all going
+after nodes at distance d. So at the point when the first
+node in the queue has distance d, no nodes at distance more than
+d + 1 can be in the queue, because no nodes at distance
+d + 1 were dequeued and so we couldn't put anything at distance
+more than d + 1 in the queue. So we proved this property. Also, and now we have to prove that
+our algorithm finds correct distances to all the reachable nodes in the graph, that it finds infinite distances to
+the unreachable nodes in the graph, and we also know the structure of
+the queue at any given moment in time. And in the next lecture,
+we will also learn how to actually, not only find distance, but also reconstruct the shortest path
+from the origin to the node we need. Because we don't want to just know that
+the distance in terms of number of flight segments from Moscow to
+San Diego is two, we also want to find are those two flight segments to
+actually get from Moscow to San Diego. So, see that in the next video.

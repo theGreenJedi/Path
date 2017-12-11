@@ -1,0 +1,336 @@
+1
+00:00:00,230 --> 00:00:02,970
+Now let's prove that Dijkstra's
+algorithm actually finds correct
+
+2
+00:00:02,970 --> 00:00:05,746
+distances from the original node
+to all the nodes in the graph.
+
+3
+00:00:05,746 --> 00:00:10,260
+And the lemma states that
+when a node is selected
+
+4
+00:00:10,260 --> 00:00:15,480
+as the node with a minimum dist value out
+of all nodes outside of a known region,
+
+5
+00:00:15,480 --> 00:00:20,730
+it's dist value is actually equal to the
+correct distance from origin to this node.
+
+6
+00:00:20,730 --> 00:00:21,430
+Let's prove that.
+
+7
+00:00:22,460 --> 00:00:24,660
+Again, by contradiction.
+
+8
+00:00:24,660 --> 00:00:29,270
+Let's assume this rule
+is broken at some point.
+
+9
+00:00:29,270 --> 00:00:31,020
+Let's select first such moment.
+
+10
+00:00:31,020 --> 00:00:33,540
+So this moment, we have some known region,
+
+11
+00:00:33,540 --> 00:00:39,320
+R, which contains node S and
+maybe some other nodes colored in black.
+
+12
+00:00:39,320 --> 00:00:43,630
+And all the nodes colored in white
+are outside the known region.
+
+13
+00:00:43,630 --> 00:00:46,540
+So C, D, E, F, and G, in this case.
+
+14
+00:00:46,540 --> 00:00:49,550
+And they have some dist
+values which are written in
+
+15
+00:00:49,550 --> 00:00:52,050
+blue near the corresponding nodes.
+
+16
+00:00:52,050 --> 00:00:56,800
+What will happen next is node C
+will be selected as the node with
+
+17
+00:00:56,800 --> 00:01:02,990
+the minimum dist value out of all
+the nodes outside known region.
+
+18
+00:01:02,990 --> 00:01:07,090
+And we suppose that this
+dist value of six is wrong.
+
+19
+00:01:07,090 --> 00:01:10,500
+What we know about dist values is that
+they are upper bounds on the correct
+
+20
+00:01:10,500 --> 00:01:14,590
+distances, that is if we have
+some dist value then we can
+
+21
+00:01:14,590 --> 00:01:19,420
+also show some path of exactly
+the length equal to this dist value.
+
+22
+00:01:19,420 --> 00:01:24,060
+And so the shortest path to this node
+Is less than or equal to this value.
+
+23
+00:01:24,060 --> 00:01:27,265
+So there can be only two cases.
+
+24
+00:01:27,265 --> 00:01:32,750
+Dist value is equal to the correct
+distance, but we assume it is not.
+
+25
+00:01:32,750 --> 00:01:35,800
+And in this case it is strictly
+bigger than the correct distance.
+
+26
+00:01:35,800 --> 00:01:40,432
+So we know that dist value of six is
+strictly bigger than the length of
+
+27
+00:01:40,432 --> 00:01:43,240
+the shortest path from origin to node C.
+
+28
+00:01:43,240 --> 00:01:46,060
+Now let's think about this shortest path.
+
+29
+00:01:46,060 --> 00:01:49,790
+It starts in the node S,
+which is inside known region, and
+
+30
+00:01:49,790 --> 00:01:53,770
+it ends in the node C, which is
+outside of the current known region.
+
+31
+00:01:53,770 --> 00:01:57,980
+So there is some edge
+which goes from inside
+
+32
+00:01:57,980 --> 00:02:03,070
+known region to outside of the known
+region in this shortest path.
+
+33
+00:02:03,070 --> 00:02:04,250
+Let's consider this edge.
+
+34
+00:02:04,250 --> 00:02:07,100
+This can be an edge, for
+example, from B to F.
+
+35
+00:02:07,100 --> 00:02:10,270
+It can also go directly into C,
+that doesn't matter.
+
+36
+00:02:11,480 --> 00:02:13,910
+What matters is what happens next.
+
+37
+00:02:13,910 --> 00:02:18,870
+After it goes from known region
+to outside, it also goes through
+
+38
+00:02:18,870 --> 00:02:24,040
+some path of known negative length,
+or maybe this
+
+39
+00:02:24,040 --> 00:02:29,090
+path is empty with the edge from known
+region outside of it goes directly to C,
+
+40
+00:02:29,090 --> 00:02:33,540
+but anyway this rest of
+the path is non-negative.
+
+41
+00:02:33,540 --> 00:02:38,680
+What it means that if we just considered
+the first part of this path which ends
+
+42
+00:02:38,680 --> 00:02:43,820
+in the end of the edge from known region
+to outside, now this part of the path
+
+43
+00:02:43,820 --> 00:02:49,270
+is also strictly less than the dist
+value of C, strictly less than six.
+
+44
+00:02:49,270 --> 00:02:54,000
+So we know that there is a path which
+
+45
+00:02:54,000 --> 00:02:58,690
+goes from S,
+goes somewhere inside the known region and
+
+46
+00:02:58,690 --> 00:03:02,639
+then goes outside and
+its length is strictly less than six.
+
+47
+00:03:03,800 --> 00:03:07,536
+But it means that actually
+some of the edges,
+
+48
+00:03:07,536 --> 00:03:13,301
+it means that this edge could be
+relaxed in the current situation,
+
+49
+00:03:13,301 --> 00:03:18,340
+because we know for
+sure that the distance estimate for
+
+50
+00:03:18,340 --> 00:03:23,850
+node B is equal to the shortest
+path from S to B, because the first
+
+51
+00:03:23,850 --> 00:03:29,660
+moment when this rule breaks is with
+node C, it was not broken with node B.
+
+52
+00:03:29,660 --> 00:03:30,660
+Okay?
+
+53
+00:03:30,660 --> 00:03:34,830
+So, the distance estimate of node B
+is exactly equal to the shortest path
+
+54
+00:03:34,830 --> 00:03:36,560
+from S to B.
+
+55
+00:03:36,560 --> 00:03:40,680
+When we add the length of
+the edge from B to F to it,
+
+56
+00:03:40,680 --> 00:03:45,840
+we will get this same thing as we
+get when we go by shortest path
+
+57
+00:03:45,840 --> 00:03:50,980
+from S to C, but take only the part of it,
+which adds in the node F.
+
+58
+00:03:52,080 --> 00:03:55,990
+So if we add to the value of B,
+
+59
+00:03:55,990 --> 00:04:00,500
+the value of the length
+of the edge from B to F.
+
+60
+00:04:00,500 --> 00:04:03,895
+We will get value very which
+is strictly less then six.
+
+61
+00:04:03,895 --> 00:04:08,080
+And so it is strictly less
+than this value of F because
+
+62
+00:04:08,080 --> 00:04:13,490
+this value of F is greater than or
+equal to the dist value of E.
+
+63
+00:04:13,490 --> 00:04:17,155
+So we could relax this edge but
+we didn't do it for some reason.
+
+64
+00:04:17,155 --> 00:04:21,980
+That's we know that we've relaxed
+all the edges from the known
+
+65
+00:04:21,980 --> 00:04:24,330
+region to outside of the known the region.
+
+66
+00:04:24,330 --> 00:04:26,831
+So this contradicts our algorithm.
+
+67
+00:04:26,831 --> 00:04:32,092
+Now this contradiction proves that this
+rule is actually not broken and when we
+
+68
+00:04:32,092 --> 00:04:37,273
+select the node with the minimum distance
+value outside of the known region,
+
+69
+00:04:37,273 --> 00:04:42,957
+it's dist value is actually equal to the
+correct distance from origin to this node.
+
+70
+00:04:42,957 --> 00:04:47,675
+And this proves that Dijkstra's algorithm
+finds correct distances from the region to
+
+71
+00:04:47,675 --> 00:04:49,170
+all the nodes in the graph.

@@ -1,0 +1,63 @@
+Hi. In the previous video,
+you've learned the A* algorithm. Which is an optimization of the regular
+Dijkstra shortest path algorithm using additional information. In the previous lesson, you've learned
+that you can use a bidirectional search to optimize Dijkstra's algorithm. Now, we're going to join those two ideas
+to optimize the A* algorithm further. And to get the bidirectional A* algorithm. So bidirectional A* algorithm is basically
+the same as Bidirectional Dijkstra. But with the use of potentials. So now we need two potential functions. One potential function pi
+f(v) estimates the distance from the current point to the target. This is needed for the forward search. But also we need an estimation for the backward search using Dijkstra's
+algorithm from the target. So we need another potential pi r(v). Which estimates the distance from
+the source to the vertex, v. Now we have a problem because,
+under these two potentials, we can have different edge weights. Because the new edge weight
+according to pi f is the initial edge weight minus potential
+of u plus potential of v. And the new edge weight under the reverse
+potential is the initial weight minus potential of v plus potential of u. And we need these two variables
+to be actually equal. Because in our
+Bidirectional Dijkstra's algorithm. We use the fact that we're
+going through the same graph. But just in different directions,
+forward and backward. But for it to work correctly,
+we need the fact that the edges have the same weight going in
+forward direction or backward direction. So, how to solve this problem? So we need that l pi f (u,
+v) = l pi r of (u, v). And if we rewrite by definition,
+we will see that this is equivalent to having pi f(u) + pi
+r(u) = pi f(v) + pi r(v). For any pair of vertices
+connected by an edge. Actually, we can make
+an even stronger claim. That we need a constant value
+of pi f(u) + pi r(u) for any u. If this is true, then, of course, for
+any two different vertices u and v. pi f(u) + pi r(u) = pi f(v) + pi r(v). And then all the edge weights
+will be equal both in forward and backward directions. And the solution for this is to
+take any feasible potential, pi f, for the forward search. Take any feasible potential function for
+the reverse search. And then create new potential functions. pf(u) = half the difference of
+the forward and backward potential. And the reverse potential, pr(u), is just
+=- the potential for the forward search. If we pick such potentials, then the sum of pf(u) and
+pr(u) will be equal for any u. So this will be constant. And the only thing that we
+need to prove is that these potentials are both feasible. The forward one is feasible for
+the forward direction. And the reverse one is feasible for
+the backwards direction. We will prove this for the forward
+direction and for the reverse direction. It is just symmetric. So Lemma states that if pi f is
+feasible potential for forward search. And pi r is a feasible potential for
+the reverse search. Then their half difference is a feasible
+potential for forward search. Let's prove this. First, we know that pi f
+is a feasible potential. And so for any edge, (u, v),
+length of this edge minus potential of u plus potential
+of v is greater equal to the 0. Also, we know that pi r is a feasible
+potential for the backwards search. And so the length of this edge minus
+potential of the ending vertex, now, v. Plus the pi r(u) is also greater or
+equal than 0. Notice that, in the first line,
+we subtract by f(u) and add pi f(v). And in the second line, we subtract, vice versa, pi r(v) and we add pi r(u). This important. Now, we can sum up those inequalities. And we'll get the 2l of the edge from u to v -pi f(u)- pi r(u) and + pi f(v)- pi r(v). All this is greater than or equal to 0. Now, if we divide these inequality by 2. We'll get that the length of the edge
+minus half difference of potentials on u. Plus half difference of potentials
+on v is more than or equal to 0. And this means that the potential,
+which is pf. Which is half the difference between pi f
+and pi r, is a feasible potential, indeed. Now that we've proven our Lemma,
+we have a very useful tool. If we have some kind of graphs
+with additional information for which we have good potential function. You can first take the graph with
+its regular potential function. Then we can reverse the graph. Take the potential function for
+the reverse graph. And then we can combine those two
+potentials into new potentials. Which lead to equal edge weights under
+both forward and backward search. And it allows us to launch
+bidirectional A* algorithm as Bidirectional Dijkstra
+with potentials algorithm. And it will be the best of both worlds. It will be both bidirectional and
+directed surge. And so it will work probably faster than
+both the just Bidirectional Dijkstra. And adjusted A* based on
+regular Dijkstra's algorithm. The question which is left is,
+where to get those potentials? And in the next videos, we will discuss some of the examples of
+where we can get good potentials from.

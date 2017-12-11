@@ -1,0 +1,95 @@
+Mostly considerate to algorithms
+construct the solution iteratively. Namely they start with an empty solution,
+with an empty set of edges. And at each iteration they expand
+the current set of edges by one edge. But they use different strategies for
+selecting the next edge, namely the Kruskal's Algorithm. Select the next lightest edge
+that doesn't produce a cycle. While the Prim's Algorithm
+selects the next lightest edge that attaches a new vertex
+to the current tree. What we need to prove to show that both
+of these algorithm's optimal is that this strategies are in some sense safe. Namely, if at the current step
+we have a subset of edges which we call e prime which is a subset
+of some optimal solution. Then by adding this edge according to
+one of these two strategies to the set gives us also a set of address which is
+also a part of some optimal solution. This will justify at the end
+when we have a three, this three is also a part of some optimal solution,
+which means that this is just optimal. So in this video, we're going to prove
+a lemma which is called cut property, which will justify that both
+these strategies, I indeed save. The formal statement of
+the lemma is the following. Assume that we have a graph G with a set
+of edges V and the set of edges E. Together with this graph, we are given
+a subset of its edges that we call X. X is a subset sum, subset of
+the set of edges of our graph for which we knows that it is a part
+of some optimal solution. It is a part of some
+minimum spanning tree. I assume also that the set of vertices
+is partitioned into two parts. One part is the subset of vertices S, and another part all
+the remaining vertices V-S. So we're given also
+a set of vertices S and this set of vertices S satisfies
+the following property. No edge from the set X joins
+two vertices that such as one lies intercept S and
+the other one lies intercept V-S. No edge from the set of X
+crosses between S and V-S. Finally, assume that E, the edge E of the initial graph
+satisfies the following property. It is a lightest edge that
+joins the vertex from S with the vertex outside of X
+with the vertex from V-S. E is a lightest edge
+across this partition. Then what dilemma states is that if we
+add the edge E to our current set X, then what we get will also be a subset
+of some minimum spanning tree. In other words,
+adding e to X in this case is a safe move. So since this is a long statement, let me repeat it once again
+using a small example. So I assume that this is our graph G,
+so we are given a graph G. Together with this graph G we
+are given some subset of its edges shown here on the slide in blue,
+it is the set X. So this is just subset of the set
+of edges of how we graph and assumes that we know that it is
+a part of some minimum spanning tree. So the set X is a subset of
+some minimum spanning tree, then consider some partition of
+the set of vertices into two parts. See, this is one part and
+this is also remaining vertices, this is the second part. Then this partition is required to satisfy
+the following property, no edge from x on our picture now blue edge joins
+to vertices from different parts. In this case, it is satisfied. Indeed, any blue edge here joins two
+vertices that lie in the same part. Next, we consider the lightest edge in our initial graph that joins two
+vertices from different parts. Assume that this edge is e,
+shown here in red. Then what lemma states is that
+if we this edge to our set X, then the resulting set of edges will also
+be a part of some minimum spanning tree. So this tells that adding e to our current subset which
+we grow repeatedly by one edge to the subset is a safe move then
+I will proof the cut property. This is our graph G and this is the subset of edges X shown
+here in blue and we assume that this subset X is a part of some minimum
+spanning tree which we denote by T. In other words,
+X is a subset of edges is a subset of some minimum spanning tree T. Now, we also have a partition of
+the set of vertices into two part. We said the vertices S and
+the set of vertices V-S, all that remains. E is a lightest edge in
+the initial graph which joins two vertices from different
+parts of partition. So E joins the vertex from
+S with the vertex from V-S. What we need to prove is if we add
+the edge E to our current set X, then what we get is also a part
+of some minimum spanning tree. Once again, what we assume about X. We assume X is a part of some
+minimum spanning tree T, and e joins two vertices from
+different parts of partition. And what we need to prove is that
+X with e added 3 is also a part of some possibly different
+minimum spanning three. So the minimum spanning tree
+which contains X plus e is not necessarily the same as T. So to prove this, we consider two cases. So first, if E happens to be a part
+of the minimum spanning tree T, then there is noting to prove. Once again, we assume that X is a part of
+minimum spanning tree that we denote by if e is also part T sub x plus e is
+a part of minimum spanning tree T. In this case, there is nothing to prove,
+we are just done. So I assume that e is not a part
+of the minimum spanning tree T. Let's then consider the wall tree T. So it contains X, so now the edges
+showing in blue show the wall tree T. Know that if we add the edge E to
+the tree T then it produces a cycle. Because in the tree T,
+there is a path between the vertices, between the endpoints of e, and when
+we add the edge e, it produces a cycle. In this case on our example,
+this is the cycle. This is the cycle, I'm sorry. So this is a cycle and the edge e in the cycle joins to
+vertices from different parts. Since this is a cycle, so the edge e joins for
+example the left part with the right part. Since this is a cycle it must eventually
+at some point go from right part to left part. Which means that there must be an edge in
+the tree T which also joins two parts. And we denote this edge by e prime and in our case this is this edge,
+so this is e prime. Now, I claim is that if we replace
+the edge e prime by the edge e in the current tree, is then what
+we get is an optimal spanning tree. So why is that? First of all,
+the resulting tree is still connected, because we just removed some edge,
+edge e prime from a cycle. So this is still connected,
+it was connected before. And when we remove an edge from a cycle,
+it cannot disconnect the graph. At the same time,
+the weight of the edge e prime is at least the weight of the edge e, because e is the lightest edge that
+joins different part of partition. Which proves that the resulting
+set of edges is a tree of minimum possible weight which in turns,
+proves the cut property.

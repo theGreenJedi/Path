@@ -1,0 +1,485 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>9th DIMACS Implementation Challenge: Shortest Paths
+</title>
+<LINK REL=stylesheet HREF="ch9style.css" TYPE="text/css">
+</head>
+
+<body bgcolor="#FFFFFF">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td rowspan="2"> 
+      <table width="100%" border="0" cellspacing="1" cellpadding="3">
+        <tr> 
+          <td valign="top" bgcolor="#DDDDDD"><a href="index.shtml">Goals</a></td>
+        </tr>
+        <tr> 
+          <td valign="top" bgcolor="#DDDDDD"><a href="papers.shtml">Papers</a></td>
+        </tr>
+        <tr> 
+          <td valign="top" bgcolor="#DDDDDD"><a href="competition.shtml">Competition</a></td>
+        </tr>
+        <tr> 
+          <td valign="top" bgcolor="#DDDDDD"><a href="photos.shtml">Photos</a></td>
+        </tr>
+        <tr> 
+          <td valign="top" bgcolor="#DDDDDD"><a href="index.shtml#organizers">Organizers</a></td>
+        </tr>
+        <tr> 
+          <td valign="top" bgcolor="#DDDDDD"><a href="format.shtml">File formats</a></td>
+        </tr>
+        <tr> 
+          <td valign="top" bgcolor="#DDDDDD"><a href="download.shtml">Download</a></td>
+        </tr>
+        <tr> 
+          <td valign="top" bgcolor="#DDDDDD"><a href="http://dimacs.rutgers.edu/Workshops/Challenge9/">Workshop</a></td>
+        </tr>
+        <tr> 
+          <td valign="top" bgcolor="#DDDDDD"><a href="mailinglist.shtml">Mailing 
+            list</a></td>
+        </tr>
+        <tr> 
+          <td valign="top" bgcolor="#DDDDDD"><a href="links.shtml">Links</a></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table border="0" cellspacing="0" cellpadding="6" align="center">
+        <tr> 
+          <td> <img src="images/dimacs_logo.gif" width="638" height="175"></td>
+        </tr>
+        <tr> 
+          <td> 
+            <div align="center" class="title">9th DIMACS Implementation Challenge 
+              - Shortest Paths</div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<p>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" bgcolor="#DDDDDD">
+  <tr>
+    <td>
+      <p class="sectitle">Download</p>
+    </td>
+  </tr>
+</table>
+<p><img src="images/bullet-orange.gif" width="8" height="10"> <a href="#benchmark">Challenge 
+  benchmarks</a><br>
+  <img src="images/bullet-orange.gif" width="8" height="10"> <a href="#benchmark">Contributions 
+  by Challenge participants</a></p>
+		<p>Unless otherwise stated, the files available at this page contain data/software 
+  in the public domain and can be freely downloaded.<p>
+		<table width="100%" border="0" cellspacing="0" cellpadding="2" bgcolor="#DDDDDD">
+  <tr> 
+    <td> 
+      <p class="sectitle"><a name="benchmark"></a>Challenge benchmarks</p>
+    </td>
+  </tr>
+</table>
+		<p><table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr>
+    <td>
+      <p>We have prepared a suite of benchmarks for the Challenge that includes synthetic input generators, real-world inputs, shortest path solvers, scripts for generating benchmark performance reports, and detailed documentation. The platform includes selected contributions by Challenge participants. For feeback, bug reports or comments please send mail to &lt;goldberg <font color="#FF0000">at</font> microsoft <font color="#FF0000">dot</font> 
+        com&gt; or &lt;demetres <font color="#FF0000">at</font> dis <font color="#FF0000">dot</font> 
+        uniroma1 <font color="#FF0000">dot</font> it&gt;</p>
+      <p><img src="images/bullet-orange.gif" width="8" height="10"> <a href="code/ch9-1.1.tar.gz">Download 
+        the Challenge 9 benchmarks - vs. 1.1 [ch9-1.1.tar.gz, 372 KB]</a><br>
+        <img src="images/bullet-orange.gif" width="8" height="10"> <a href="code/ch9-1.1.README.txt">View 
+        README file</a></p>
+					<p>The following table lists the 12 USA road networks that are part of the challenge core instances. 
+					Each graph comes in two versions: <a href="data/USA-road-d/">physical distance</a> and <a href="data/USA-road-t/">transit time</a> arc lengths. 
+					The node coordinates file is the same. For space reasons, this collection is not included in the experimental package, but it can be downloaded by the installer script.</p>
+					
+					<p><b>Known issues</b>: the data has numerous errors, in particular gaps in major highways and bridges. This may result in routes that are very different from real-life ones. One should take this into consideration when experimenting with the data.</p>	
+				</td>
+    <td><img src="images/chronograph.jpg" width="98" height="128" alt="chronograph"></td>
+  </tr>
+</table>
+		<p>
+		
+		<table border="0" cellspacing="1" cellpadding="4" width="100%">
+			<tr  bgcolor="#BBBBBB">
+				<td>Name</td>
+				<td>Description</td>
+				<td># nodes</td>
+				<td># arcs</td>
+				<td>Longitude</td>
+				<td>Latitude</td>
+				<td>Distance graph</td>
+				<td>Travel time graph</td>
+				<td>Coordinates</td>
+			</tr>
+			<tr bgcolor="#eeeeee">
+				<td><strong>USA</strong></td>
+				<td>Full USA</td>
+				<td>
+					<div align="right">
+							23,947,347</div>
+				</td>
+				<td>
+					<div align="right">
+							58,333,344</div>
+				</td>
+				<td>-</td>
+				<td>-</td>
+				<td><a href="data/USA-road-d/USA-road-d.USA.gr.gz">gr.gz file, 335 MB</a></td>
+				<td><a href="data/USA-road-t/USA-road-t.USA.gr.gz">gr.gz file, 342 MB</a></td>
+				<td><a href="data/USA-road-d/USA-road-d.USA.co.gz">co.gz file, 218 MB</a></td>
+			</tr>
+			<tr bgcolor="#eeeeee">
+				<td><strong>CTR</strong></td>
+				<td>Central USA</td>
+				<td>
+					<div align="right">
+						14,081,816 </div>
+				</td>
+				<td>
+					<div align="right">
+							34,292,496</div>
+				</td>
+				<td>[25.0; 50.0]</td>
+				<td>[79.0; 100.0]</td>
+				<td><a href="data/USA-road-d/USA-road-d.CTR.gr.gz">gr.gz file, 195 MB</a></td>
+				<td><a href="data/USA-road-t/USA-road-t.CTR.gr.gz">gr.gz file, 198 MB</a></td>
+				<td><a href="data/USA-road-d/USA-road-d.CTR.co.gz">co.gz file, 139 MB</a></td>
+			</tr>
+			<tr bgcolor="#eeeeee">
+				<td><strong>W</strong></td>
+				<td>Western USA</td>
+				<td>
+					<div align="right">
+							6,262,104</div>
+				</td>
+				<td>
+					<div align="right">
+							15,248,146</div>
+				</td>
+				<td>[27.0; 50.0]</td>
+				<td>[100.0; 130.0]</td>
+				<td><a href="data/USA-road-d/USA-road-d.W.gr.gz">gr.gz file, 86 MB</a></td>
+				<td><a href="data/USA-road-t/USA-road-t.W.gr.gz">gr.gz file, 88 MB</a></td>
+				<td><a href="data/USA-road-d/USA-road-d.W.co.gz">co.gz file, 57 MB</a></td>
+			</tr>
+			<tr bgcolor="#eeeeee">
+				<td><strong>E</strong></td>
+				<td>Eastern USA</td>
+				<td>
+					<div align="right">
+							3,598,623</div>
+				</td>
+				<td>
+					<div align="right">
+							8,778,114</div>
+				</td>
+				<td>[24.0; 50.0]</td>
+				<td>[-infty; 79.0]</td>
+				<td><a href="data/USA-road-d/USA-road-d.E.gr.gz">gr.gz file, 49 MB</a></td>
+				<td><a href="data/USA-road-t/USA-road-t.E.gr.gz">gr.gz file, 50 MB</a></td>
+				<td><a href="data/USA-road-d/USA-road-d.E.co.gz">co.gz file, 32 MB</a></td>
+			</tr>
+			<tr bgcolor="#eeeeee">
+				<td><strong>LKS</strong></td>
+				<td>Great Lakes</td>
+				<td>
+					<div align="right">
+							2,758,119</div>
+				</td>
+				<td>
+					<div align="right">
+							6,885,658</div>
+				</td>
+				<td>[41.0; 50.0]</td>
+				<td>[74.0; 93.0]</td>
+				<td><a href="data/USA-road-d/USA-road-d.LKS.gr.gz">gr.gz file, 38 MB</a></td>
+				<td><a href="data/USA-road-t/USA-road-t.LKS.gr.gz">gr.gz file, 39 MB</a></td>
+				<td><a href="data/USA-road-d/USA-road-d.LKS.co.gz">co.gz file, 24 MB</a></td>
+			</tr>
+			<tr bgcolor="#eeeeee">
+				<td><strong>CAL</strong></td>
+				<td>California and Nevada</td>
+				<td>
+					<div align="right">
+							1,890,815</div>
+				</td>
+				<td>
+					<div align="right">
+							4,657,742</div>
+				</td>
+				<td>[32.5; 42.0]</td>
+				<td>[114.0; 125.0]</td>
+				<td><a href="data/USA-road-d/USA-road-d.CAL.gr.gz">gr.gz file, 26 MB</a></td>
+				<td><a href="data/USA-road-t/USA-road-t.CAL.gr.gz">gr.gz file, 26 MB</a></td>
+				<td><a href="data/USA-road-d/USA-road-d.CAL.co.gz">co.gz file, 16 MB</a></td>
+			</tr>
+			<tr bgcolor="#eeeeee">
+				<td><strong>NE</strong></td>
+				<td>Northeast USA</td>
+				<td>
+					<div align="right">
+							1,524,453</div>
+				</td>
+				<td>
+					<div align="right">
+							3,897,636</div>
+				</td>
+				<td>[39.5, 43.0]</td>
+				<td>[-infty; 76.0]</td>
+				<td><a href="data/USA-road-d/USA-road-d.NE.gr.gz">gr.gz file, 21 MB</a></td>
+				<td><a href="data/USA-road-t/USA-road-t.NE.gr.gz">gr.gz file, 21 MB</a></td>
+				<td><a href="data/USA-road-d/USA-road-d.NE.co.gz">co.gz file, 13 MB</a></td>
+			</tr>
+			<tr bgcolor="#eeeeee">
+				<td><strong>NW</strong></td>
+				<td>Northwest USA</td>
+				<td>
+					<div align="right">
+							1,207,945</div>
+				</td>
+				<td>
+					<div align="right">
+							2,840,208</div>
+				</td>
+				<td>[42.0; 50.0]</td>
+				<td>[116.0; 126.0]</td>
+				<td><a href="data/USA-road-d/USA-road-d.NW.gr.gz">gr.gz file, 15 MB</a></td>
+				<td><a href="data/USA-road-t/USA-road-t.NW.gr.gz">gr.gz file, 16 MB</a></td>
+				<td><a href="data/USA-road-d/USA-road-d.NW.co.gz">co.gz file, 11 MB</a></td>
+			</tr>
+			<tr bgcolor="#eeeeee">
+				<td><strong>FLA</strong></td>
+				<td>Florida</td>
+				<td>
+					<div align="right">
+							1,070,376</div>
+				</td>
+				<td>
+					<div align="right">
+							2,712,798</div>
+				</td>
+				<td>[24.0; 31.0]</td>
+				<td>[79; 87.5]</td>
+				<td><a href="data/USA-road-d/USA-road-d.FLA.gr.gz">gr.gz file, 14 MB</a></td>
+				<td><a href="data/USA-road-t/USA-road-t.FLA.gr.gz">gr.gz file, 14 MB</a></td>
+				<td><a href="data/USA-road-d/USA-road-d.FLA.co.gz">co.gz file, 8.6 MB</a></td>
+			</tr>
+			<tr bgcolor="#eeeeee">
+				<td><strong>COL</strong></td>
+				<td>Colorado</td>
+				<td>
+					<div align="right">
+							435,666</div>
+				</td>
+				<td>
+					<div align="right">
+							1,057,066</div>
+				</td>
+				<td>[37.0; 41.0]</td>
+				<td>[102.0; 109.0]</td>
+				<td><a href="data/USA-road-d/USA-road-d.COL.gr.gz">gr.gz file, 5.5 MB</a></td>
+				<td><a href="data/USA-road-t/USA-road-t.COL.gr.gz">gr.gz file, 5.6 MB</a></td>
+				<td><a href="data/USA-road-d/USA-road-d.COL.co.gz">co.gz file, 3.8 MB</a></td>
+			</tr>
+			<tr bgcolor="#eeeeee">
+				<td><strong>BAY</strong></td>
+				<td>San Francisco Bay Area</td>
+				<td>
+					<div align="right">
+							321,270</div>
+				</td>
+				<td>
+					<div align="right">
+							800,172</div>
+				</td>
+				<td>[37.0; 39.0]</td>
+				<td>[121; 123]</td>
+				<td><a href="data/USA-road-d/USA-road-d.BAY.gr.gz">gr.gz file, 3.9 MB</a></td>
+				<td><a href="data/USA-road-t/USA-road-t.BAY.gr.gz">gr.gz file, 4.0 MB</a></td>
+				<td><a href="data/USA-road-d/USA-road-d.BAY.co.gz">co.gz file, 2.5 MB</a></td>
+			</tr>
+			<tr bgcolor="#eeeeee">
+				<td><strong>NY</strong></td>
+				<td>New York City</td>
+				<td>
+					<div align="right">
+							264,346</div>
+				</td>
+				<td>
+					<div align="right">
+							733,846</div>
+				</td>
+				<td>[40.3; 41.3]</td>
+				<td>[73.5; 74.5]</td>
+				<td><a href="data/USA-road-d/USA-road-d.NY.gr.gz">gr.gz file, 3.5 MB</a></td>
+				<td><a href="data/USA-road-t/USA-road-t.NY.gr.gz">gr.gz file, 3.6 MB</a></td>
+				<td><a href="data/USA-road-d/USA-road-d.NY.co.gz">co.gz file, 2.0 MB</a></td>
+			</tr>
+		</table>
+		<p>
+		
+		<table width="100%" border="0" cellspacing="0" cellpadding="2" bgcolor="#DDDDDD">
+  <tr> 
+    <td> 
+      <p class="sectitle"><a name="benchmark"></a>Contributions by Challenge participants</p>
+    </td>
+  </tr>
+</table>
+		<p>Instances, generators, and tools contributed by Challenge participants are 
+  listed below. The format used by real-world files and synthetic generators contributed 
+  by participants may differ from the <a href="format.shtml">standard Challenge 
+  9 file format</a> and may require additional translators. Available translators 
+  are listed in the 'Translator' column in the tables below. Missing translators 
+  will be added with the help of volunteers.</p>
+<table width="100%" border="0" cellspacing="1" cellpadding="3">
+  <tr> 
+    <td bgcolor="#BBBBBB"> 
+      <p class="sectitle">Collection 
+    </td>
+    <td bgcolor="#BBBBBB"> 
+      <p class="sectitle">Description 
+    </td>
+    <td bgcolor="#BBBBBB"> 
+      <p class="sectitle">Data source 
+    </td>
+    <td  bgcolor="#BBBBBB"> 
+      <p class="sectitle">Contributors 
+    </td>
+    <td bgcolor="#BBBBBB"> 
+      <p class="sectitle">Date 
+    </td>
+    <td bgcolor="#BBBBBB"> 
+      <p class="sectitle">Translator
+    </td>
+  </tr>
+  <tr bgcolor="#EEEEEE"> 
+    <td class="small"><a href="data/rome/rome99.gr" class="small">Rome99</a></td>
+    <td class="small">Large portion of the directed road network of the city of 
+      Rome, Italy, from 1999. The graph contains 3353 vertices and 8870 edges. 
+      Vertices correspond to intersections between roads and edges correspond 
+      to roads or road segments. The file is given in the standard <a  class="small" href="format.shtml">Challenge 
+      9 format</a>.</td>
+    <td class="small"><a href="http://www.uniroma1.it" class="small">University 
+      of Rome &quot;La Sapienza&quot;</a></td>
+    <td class="small">Gianni Storchi, Paolo Dell'Olmo, <a class="small" href="http://www.dmi.unisa.it/people/gentili/www/">Monica 
+      Gentili</a></td>
+    <td class="small">March 2006</td>
+    <td class="small" align="center">not required</td>
+  </tr>
+  <tr bgcolor="#EEEEEE"> 
+    <td class="small"><a href="http://i11www.ira.uka.de/resources/roadgraphs.php" class="small">PTV 
+      Europe</a></td>
+    <td class="small"> Road networks of 17 european countries: aut, bel, che, 
+      cze, deu, dnk, esp, fin, fra, gbr, irl, ita, lux, nld, nor, prt, swe (~19 
+      million nodes, ~23 million edges). Data available to Challenge Participants 
+      subject to signing a License Agreement.</td>
+    <td class="small"><a href="http://www.ptv.de/" class="small">PTV company, 
+      Karlsruhe</a></td>
+    <td class="small"><a href="http://i11www.ira.uka.de/group/index.php" class="small">Dorothea 
+      Wagner, Algorithmics Group - Universit&auml;t Karlsruhe Germany</a></td>
+    <td class="small">December 2005</td>
+    <td class="small" align="center">not<br>
+      available </td>
+  </tr>
+  <tr bgcolor="#EEEEEE"> 
+    <td class="small"><a class="small" href="data/tiger/">TIGER/Line</a></td>
+    <td class="small">The (undirected) road networks of the 50 US States and the 
+      District of Columbia. Text files contain node coordinates, edge lengths, 
+      travel time, and road category. The package contains tools for merging files. 
+      Merging all files yields a graph with about 24 million nodes and 29 million 
+      edges.</td>
+    <td class="small"><a class="small" href="http://www.census.gov/geo/www/tiger/tigerua/ua_tgr2k.html">U.S. 
+      Census Bureau, Washington, DC</a></td>
+    <td class="small"><a class="small" href="http://i10www.ira.uka.de/index-e.html">Peter 
+      Sanders and Dominik Schultes, ITI Algorithmics II - Universit&auml;t Karlsruhe 
+      Germany</a></td>
+    <td class="small">October 2005</td>
+    <td class="small" align="center"><a class="small" href="data/tiger/tiger2edimacs.pl">available</a></td>
+  </tr>
+</table>
+<p>
+<table width="100%" border="0" cellspacing="1" cellpadding="3">
+  <tr> 
+    <td bgcolor="#BBBBBB"> 
+      <p class="sectitle">Generators 
+    </td>
+    <td bgcolor="#BBBBBB"> 
+      <p class="sectitle">Description 
+    </td>
+    <td  bgcolor="#BBBBBB"> 
+      <p class="sectitle">Contributors 
+    </td>
+    <td bgcolor="#BBBBBB"> 
+      <p class="sectitle">Date 
+    </td>
+    <td bgcolor="#BBBBBB">
+      <p class="sectitle">Translator
+    </td>
+  </tr>
+  <tr bgcolor="#EEEEEE">
+    <td class="small"><a href="http://www.mpi-sb.mpg.de/%7Eajwani/graph_gen/" class="small">EM-BFS</a></td>
+    <td class="small">Graph generator tools for external memory BFS algorithms. 
+      The generators produce files in the standard <a  class="small" href="format.shtml">Challenge 
+      9 format</a>. </td>
+    <td class="small"><a href="http://www.mpi-inf.mpg.de/%7Eajwani" class="small">Deepak 
+      Ajwani</a>, <a href="http://i10www.ira.uka.de/dementiev/" class="small">Roman 
+      Dementiev</a>, <a href="http://www.mpi-inf.mpg.de/%7Eumeyer" class="small">Ulrich Meyer</a></td>
+    <td class="small">April 2006</td>
+    <td class="small" align="center">not required</td>
+  </tr>
+  <tr bgcolor="#EEEEEE"> 
+    <td class="small"><a href="http://www.cc.gatech.edu/%7Ekamesh/GTgraph/" class="small">GTgraph</a></td>
+    <td class="small"> A suite of three synthetic graph generators: 1) SSCA2: 
+      generates graphs used as input instances for the DARPA High Productivity 
+      Computing Systems SSCA#2 graph theory benchmark. 2) Scale-free: generates 
+      graphs power-law degree distributions and small-world characteristics. 3) 
+      Generates random graphs. The generators produce files in the standard <a  class="small" href="format.shtml">Challenge 
+      9 format</a>.</td>
+    <td class="small"><a href="http://www.cc.gatech.edu/"  class="small">Kamesh 
+      Madduri and David A. Bader, College of Computing - Georgia Institute of 
+      Technology</a></td>
+    <td class="small">February 2006</td>
+    <td class="small" align="center">not required</td>
+  </tr>
+  <tr bgcolor="#EEEEEE"> 
+    <td class="small"><a href="code/Randgraph.tar.gz" class="small">Randgraph</a></td>
+    <td class="small"> Command line tools generating various families of random 
+      graphs (e.g, bullseye, hierarchical) in a simple text format.</td>
+    <td class="small"><a href="http://www.mpi-sb.mpg.de/%7Epettie" class="small">Seth 
+      Pettie, Algorithms and Complexity Group - Max Planck Institut f&uuml;r Informatik</a> 
+      and <a href="http://www.cs.utexas.edu/%7Evlr/" class="small">Vijaya Ramachandran, 
+      Department of Computer Sciences - The University of Texas at Austin</a></td>
+    <td class="small"> February 2006</td>
+    <td class="small" align="center">not<br>
+      available</td>
+  </tr>
+  <tr bgcolor="#EEEEEE"> 
+    <td class="small"><a href="http://i11www.ira.uka.de/resources/graphgenerator.php" class="small">Gengraph</a></td>
+    <td class="small"> Command line tools generating graphs in the <a href="http://graphml.graphdrawing.org/"  class="small">GraphML</a> 
+      format, along with a Postscript converter for visualisation. </td>
+    <td class="small"><a href="http://i11www.ira.uka.de/group/index.php" class="small">Dorothea 
+      Wagner, Algorithmics Group - Universit&auml;t Karlsruhe Germany</a></td>
+    <td class="small">December 2005</td>
+    <td class="small" align="center">not<br>
+      available</td>
+  </tr>
+</table>
+<p>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" bgcolor="#DDDDDD">
+  <tr> 
+    <td> 
+      <div align="center" class="footer"><a href="index.shtml" class="footer">Goals</a> | <a href="papers.shtml" class="footer">Papers</a> | <a href="competition.shtml">Competition</a> | <a href="photos.shtml" class="footer">Photos</a> | <a href="index.shtml#organizers" class="footer">Organizers</a> | <a href="format.shtml" class="footer">File 
+        formats </a> | <a href="download.shtml" class="footer">Download</a> | 
+        <a href="http://dimacs.rutgers.edu/Workshops/Challenge9/" class="footer">Workshop</a> 
+        | <a href="mailinglist.shtml" class="footer">Mailing list</a> | <a href="links.shtml" class="footer">Links</a></div>
+    </td>
+  </tr>
+</table>
+<div align="center" class="tiny"><br>
+  Page maintained by <a href="http://www.dis.uniroma1.it/%7Edemetres/" class="tiny">Camil 
+  Demetrescu</a> - last revised on June 14, 2010 <!--#exec cmd="cgi-bin/counterhp.cgi download \"- Page visited %i times since Jul 26, 2005.\" cgi-bin/logs/"-->
+</div> 
+</body></html>
+

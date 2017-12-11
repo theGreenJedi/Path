@@ -1,0 +1,110 @@
+Hello and welcome to the next module, in which we will be talking
+about minimum spin entries. To [INAUDIBLE] this title, this problem
+considers the following toy example. Assumes that we have six machines in our
+office and we would like to join them. In doing that whereby putting
+wires between some pairs of them such that each machine, each machine
+is reachable from any other machine. I assume further that we can put wires
+only between some pairs of our machines. And for each [INAUDIBLE] we're now
+[INAUDIBLE] responding [INAUDIBLE] why between them. For example in this case we are allowed to put a Y between these two machines and
+of course this five. And we are not allowed to join
+these two machines by wire. Okay. Wire of the optimal solutions in this
+case is shown here on the slide. It is not difficult to check
+that in this case indeed any machine is reachable
+from [INAUDIBLE] machine. For example to reach the right
+machine from the left machine we would go as follows. First by this edge, then by this edge,
+and then by this edge. The total cost of the shown solution
+is equal to two plus one which is three plus three
+which is six plus four. Which gives us ten plus
+two which gives us 12. So the total cost is 12, and
+this is actually not the only solution in this case because instead of using
+this wire, we may use this wire. The result in solution is shown for
+you on the slide and it is not. Again, difficult to check that, in this
+case, any machine is reachable from any other machine and
+that the total cost is equal to 12. We will soon learn read the algorithms
+that will allow us to justify that in this, for example,
+the optimal total cost is indeed 12. These two algorithms will also allow
+us to solve very efficiently in practice instances consisting
+of thousands of machines. In our second example we have a collection
+cities and we would like to build roads between some pairs of them such that
+there is a path between any two cities. And such that the sum
+of the lengths of all the roads that we are going to
+build is as small as possible. Okay? In this case the solution looks like this. And again we will soon learn how
+to find the solution efficiently. Formally the problem is stated as follows. [INAUDIBLE] graph H [INAUDIBLE] and
+we assume that this graph is connected. Okay and it is given together
+with positive edge weight. What we're looking for
+is that subset of edges, e prime, such that if we leave
+only these edges in the graph. Then the resulting graph Is connected and
+also the total cost of folds and edges at E prime is as small as possible,
+okay? So why is the problem is
+called minimum spending tree? Well minimum corresponds to
+the fact that we are looking for a subset of edges or minimum total cost or
+minimum total weight. Okay.
+It is called spanning because we're looking for a subset of edges such that
+if we leave only these edges, then the result in graph is still connected so
+it spans all the vertices in our graph. And finally, the word tree corresponds
+those effect that in each solution, the set E prime is going to be. Is going to form a tree. We will prove this fact on the next slide. Before proving that any
+optimal solution for minimum spanning tree problem any
+optimal solution in prime forms a tree. Let me remind you a few
+useful properties of trees. First of all, just by definition,
+a tree is an undirected graph that is connected and is acyclic,
+that is it contains no cycles. Recall that we usually
+draw trees as follows. So we draw them level by level and
+look like this. In this case, we actually. We're actually talk about rooted trees. This is a rooted tree and in particular,
+this is a root of this tree. At the same time, this graph is also a tree with only
+difference that there is no root In this tree and
+it is not drawn level by level. So once again,
+this graph is also connected and there are no cycle in this graph so
+it is a tree. There is no root in this tree,
+however we can take a vertex, declare this vertex as a tree and
+then hang by this vertex. And then this will allow us to draw
+this graph level by level,okay? the next property is
+that if we have a tree with n vertices than it
+necessarily has n minus one edges. Why is that? Well let me illustrate this
+by drawling something. Initially we have just one vertices and
+zero edges. So initially the property has
+satisfied the number of edges. Is equal to the number
+of vertices minus one. Let then introduce some new vertex. So we'll attach it by
+an edge to a previous vertex. Then we introduce another vertex,
+probably another one, and another one. And so on.
+So each time when we introduce a new edge Introducing new [INAUDIBLE]
+We also have a new edge. So initially we had one vertex, and
+zero edges [INAUDIBLE] vertices and now we have, I'm sorry five vertices, now we have
+six vertices and [INAUDIBLE] five edges. So still the property is satisfied. Note that we cannot introduce a new
+edge without introducing a new vertex. Because if we introduce a new edge
+that would mean that we are connecting two existing vertices by edge. For example like this, but
+this will necessarily produce a cycle which means that this will give
+us a graph which is not at three. Okay? The next property is that,
+actually any connected graph with the number of edges equal to the number of
+vertices minus one, is necessarily a tree. Well, let me emphasize that it is
+important that here we are talking about connected graphs. Because for
+example if a graph has the property that the number of edges is equal to
+the number of vertices minus one but it is not connected,
+that it is not necessarily a tree. A counterexample is the following. Assume that we have four vertices and
+there is a [INAUDIBLE] and three vertices and there is one isolated. One isolated vertex. In this case, we have four vertices,
+and three edges, right? So this is not a tree, but at the same
+time this graph is not connected. There is no pass for example from this
+vertex to this isolated vertex, okay? And the last property says that
+an undirected graph is a tree if and only if there is a unique path
+between any two vertices. And this is also not difficult to see
+first of all if we have a tree then of course there is a unique path
+between two its vertices. On the other hand If we have to vertacise,
+and there are at least parts between them, then this gives us a cycle,
+which means that this is not a three. Okay, now let me get back
+to proving that any optimal solution [INAUDIBLE] problem
+is indeed a three, for this, consider some [INAUDIBLE]
+solution. So in this case we have six vertices,
+and we consider some way of joining them into some way of connecting them. I assume that our
+solution looks like this. So you see that this is not
+a tree because there is a cycle. On these four vertices. Well, in this cycle for any two vertices in this cycle,
+there are two paths. Right?
+For example, for this vertex and for this vertex we can go either this way or
+this way. And this is true for any cycle,
+if we have a cycle and two vertices on this cycle we can
+either go this way or this way. And this means that there
+is some redundancy here. In this particular case, we can remove,
+for example, this edge from this cycle. Or from this solution. This will only decrease the total
+weight of this solution and the resulting set of fedres
+will still be connected. Great this proves that any
+optimal solution must be acyclic, and since any solution is
+required to be connected, this proves that any optimal
+solution is in fact a tree.

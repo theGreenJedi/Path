@@ -1,0 +1,92 @@
+Now let's estimate the running
+time of Dijkstra's algorithm. In the beginning it just initializes
+dist values and prev values and that takes time proportional
+to the number of nodes. But our estimate will be bigger than that,
+so we just ignore this part. And other than that, it creates a data
+structure to store dist values and extract minimums from it. It extracts the minimum node
+from this data structure. V times, where V is the number of nodes in
+the graph, and also it examines the edges. Each edge is examined, at most once,
+when the start of this edge is processed. And during processing,
+it updates dist value, pref value, and
+changes priority in the data structure. Updating dist value and
+pref value is constant time, so the main part is in
+the ChangePriority part. So now this running time estimating
+depends on how do you actually implement The data structure
+from which you do ExtractMin, ChangePriority, and
+we should build by MakeQueue. One way to implement it
+is just using an array. Actually we'll need two arrays. First array is just the size V,
+where you store in the cell number i, you store
+the dist value of the node number i. But you also need to remove
+nodes from this array, so you'll use another boolean array,
+where you store a flag. Whether this node is still in the data
+structure or is is not already. So to build such arrays you need time
+proportional to the number of nodes, because it's basically, write down
+these values for all the nodes and you Write all the flags,
+you say that they are true. Then, each ExtractMin operation in the
+time proportional to the number of notes. because you need to go through the whole
+array, check whether this particular node is considered to be in
+the data structure or not. Just look up in the secondary, and then
+if it is then try to proof the minimum, and after you found the minimum,
+you just mark the flag as false, it's now it's no longer in
+the data structure, and you take the minimum
+value from there array. So each extractment of operation
+works in time proportional to v and we make v times, so
+this is v squared time. Now, change priority operation
+is very easy in case of array, because to priority you just need to
+change the disvalue of one node so you just get the number of that node And
+you just change the value in the first array corresponding to
+that node, so that takes constant time. And so in this case,
+the total complexity is V + V squared + E. And V squared is bigger than V obviously,
+and also V squared is bigger
+than the recall to E, because There can be at most one
+edge between each pair of nodes so V squared is the leading term and so
+our running time is big O V squared for the array implementation; and
+there is another way to implement this data structure using a binary heap or
+priority cube built on top of binary heap. We know that to build a binary heap
+from an array of size V we need time proportional to V. We now that ExtractMin works
+in the logarithmic time, so the total time for
+ExtractMin will be V log V. And the tricky part is
+ChangePriority ChangePriority operation can be implemented in the binary heap,
+but it is a little bit tricky. So instead of implementing additional
+operation in the binary heap, we can actually cheat and
+we can just insert a new element in the heap each time we need to
+decrease the dist value for some node. So We need to improve our dist value and
+to improve it means to decrease it. What we can do is we can just insert
+another element, a pair of a node and its dist value estimation
+into the priority queue. So, then when the time
+comes to extract that node The pair with the minimum dist
+value will be selected and you will extract it with the minimum
+dist value which was found by this time. And if at some other point of
+time you will also try to extract this same node but with different
+dist value, you can just ignore it, you can just write down that you
+already processed this node. Extract it again from the q, and
+just don't do anything with it. So, this will increase
+the size of the heap and so refreshes will be slower a little bit, but
+they won't be much slower because how many elements can be in the and
+in this priority queue? It will be no more than the number
+of edges because each time you change priority you examine some edge,
+and you examine some edge at most once. So total number of change priority
+operations is the number of edges. And so you will add at most
+E new elements in the heap. In addition to the values
+which were there initially. And we know that e is at most v squared. So logarithm of v is on the same,
+it's like at most two logarithms of v because logarithm of
+v squared is just two logarithms of v. So the last part, the total time for ChangePriority is proportional to
+E multiplied by logarithm of V. And the final estimation
+is V + E logarithm V. Which is much better than v squared
+in the case when there are no edges. Because there are very many edges
+like on the order of v squared than v squared will be
+equal to v squared log v. Which is worse than in the case
+of area implementation. But if the number of edges less than v
+squared the graph is far from being. Full graph with all the edges,
+then this can be much, much faster than
+the array-based implementation. In conclusion, you now know the algorithm
+to find the minimum time to get from work to home for example. And actually you also know the algorithm
+to find The fastest route itself, because the reconstruct path algorithm will be the
+same as you have in the prev first search. Because you have the same prev values and you can just reconstruct
+the path from them. And you know that this algorithm works for
+any graph with non-negative edge weights. So you can not only find, Fastest routes
+but you can also find shortest routes and routes which are minimum in some
+other senses and you know that it works either in time quadratic and
+number of nodes in the graph or in time V plus E log V depending
+on the implementation. Either array based implementation or
+binary heap based implementation.

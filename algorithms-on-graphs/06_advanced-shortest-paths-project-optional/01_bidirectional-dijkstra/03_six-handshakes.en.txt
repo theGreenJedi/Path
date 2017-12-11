@@ -1,0 +1,81 @@
+Hi, in this video we will apply
+the idea of bidirectional search to social networks data. And we will see that it will
+work exceptionally well, going up to thousands of times faster. But first, let's learn
+an interesting fact about our world. So in 1929, Hungarian mathematician,
+Frigyes Karinthy, made a Small World conjecture,
+which you probably heard of already. So the conjecture was that basically
+when we need to pass a message from any person on earth to any
+other person on earth, using only personal connections in between,
+we need at most six handshakes to do that. So that we need only at most five
+intermediary people to pass a message from anyone to anyone else on earth. This is somewhat surprising, but
+it turned out to be close to truth in different experiments which people
+made after that conjecture. And this is called the six handshakes or
+six degrees of separation idea. Now let's look at the most
+popular social network, Facebook, given that six handshakes idea. So suppose an average person on
+Facebook has around 100 friends. Then if we consider friends
+of friends of that person, it will be 100 times 100 roughly,
+that's 10,000 friends of friends. If we consider friends of friends of
+friends, that will be 100 times more or 1 million. And if we progress with that,
+we'll get that at six handshakes, we will have 1 trillion people. Well, that's not actually possible, as there are only roughly
+7 billion people on Earth. So it will be much less than that,
+but you get the general idea, that the number of friends grows exponentially
+when we increase the distance. So now we want to find the shortest
+path from Michael to Bob via friends connections. So we want to know, actually how many handshakes do we need
+to send a message from Michael to Bob. And if Michael and Bob turned out to be the two farthest
+people on the Facebook social network, then the regular Dijkstra's algorithm
+would have to look through all roughly 2 billion people which are on
+Facebook to find that shortest path. Now what will happen if we
+consider bidirectional search? So we'll only consider friends of
+friends of friends of Michael and friends of friends of friends of Bob. And if we know that the six handshakes
+conjecture is true, then there will be a common person among friends of
+friends of friends of Michael and friends of friends of friends of Bob. If we find that person in common, then
+we'll find the shortest path of friends, at most, six between Michael and Bob. And to do that we can create a hash table,
+for example, of all the friends of friends of
+friends of Michael or a sorted list. And then search the friends of friends
+of friends of Bob in that hash table or ordered list, one by one,
+to find the common person. And how many people will we
+actually consider in this case? We'll have roughly 1 million
+friends of friends of friends for both Michael and Bob, so
+in total, 2 million people. And this will work in linear
+time if we use hash tables. So this will be actually 1,000 times
+faster than using Dijkstra's algorithm, at least in the number of friends scanned. So this is going to work really thousands
+of times faster on social networks. And what we've just seen is a particular
+case of a more general idea called meet in the middle, and
+this applies not only to graphs. So, in general if you need to search for
+some best object of some kind, for example, the best shortest path or
+a best subset of people to create a team, then instead of searching for
+all possible objects, all the possible shortest paths or
+all possible subsets of people, we can somehow divide all
+the possible objects into halves. For example, when we are searching for
+shortest paths, we can divide any path on the first half from the source and
+the second half to the target. And when we are talking, for
+example, about subsets of people, if we have N people, we can divide any
+subset of N people into two halves. First half consists of a subset of
+the first N of our two people, and the second half consists of a subset
+of the second N of our two people. And then we can search
+all the variants for the first half separately, all the
+variants for the second half separately. And then we just need to
+find the compatible halves. So for example,
+we again create a hash table or an or at least of the first
+halves which are possible. And then for each particular second half,
+we try to find whether there's a compatible first
+half to it in this hash table. And this is in general how
+meet in the middle works. And typically, instead of searching
+through all possible big N objects, this works in time proportional
+to square root of N, because only square root of
+N halves of those objects. Square root of N of
+the shortest paths halves and square root of N for
+first halves of the subset of people. So this idea can be applied in many, many different problems to
+take a significant speed up. So in conclusion, we understood that
+the regular Dijkstra's algorithm goes in circles of increasing
+radius around the starting point. And the bidirectional search idea
+can reduce the search space. We can scan less vertices than if we
+go from one source and grow the circle. And on the raw networks it works
+roughly twice faster than the regular Dijkstra's algorithm. But if we use this meet in the middle
+idea on the social networks, or actually on many other problems, then it will roughly work as
+a square root of N instead of big N if big N is the total number of
+objects we need to search through. And in social networks, it can be thousands times faster than
+the regular Dijkstra's algorithm. And you will actually see that in one
+of the problems of the programming assignments of this project. And in the next video,
+we will actually come up with a bidirectional version
+of Dijkstra's algorithm.

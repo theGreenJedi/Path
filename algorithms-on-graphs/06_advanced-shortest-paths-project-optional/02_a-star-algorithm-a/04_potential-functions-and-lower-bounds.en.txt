@@ -1,0 +1,74 @@
+Hi, in the previous videos we've
+introduced a new algorithm called A*, and we even created it's
+bidirectional version. But this all was somewhat abstract because
+to implement this algorithm in practice, we need some potential function. And we don't know yet
+where to get that potential function so that it is feasible and good enough. So first we'll prove a Lemma. Remember we were talking
+about lower bounds, we were talking that most of the time,
+potential function of a vertex is a lower bound on the distance
+between this vertex and the target. So now we'll prove that actually if
+potential function is feasible, and the potential of the target
+vertex is less than or equal to 0, then this potential
+function is indeed a lower bound on the distance between the current vertex
+and the target vertex for any vertex v. To prove that,
+we should know that first l pi of (x,y) is non-negative for any x,y if pi is
+feasible, by definition of feasibility. And so also l pi of any path p, the length of any path in the new
+graph is also non-negative. Then, we take any shortest path
+between v and t, and call it P. And then we know that zero is less than or
+equal to the length of this path because the length of each path
+in the new graph is non-negative. And this length of
+the path in the new graph is equal to the length of
+the path in the initial graph minus the potential of the vertex v
+plus the potential of the target vertex. But now remember that potential of
+the target vertex is non-positive. So, this is less than or
+equal to length of the path and initial graph minus potential of vertex v. And we know that this final expression
+is bigger than or equal to zero. Which means, in turn,
+that the potential of v is less than or equal to the length of
+the path in the initial graph. Which is the shortest path between v and
+t, so it is equal to the distance from from
+v to t, so we've proven our Lemma. Now it's time to introduce at
+least one specific potential, and we'll start with the one we
+already discussed several times, we'll just prove that this is
+really a good physical potential. So we consider a road
+network on a plane map where any vertex has its coordinates x and
+y. Then the potential given
+by Euclidean distance and the Euclidean distance between two points
+is basically the length of a line segment connecting those two points. It is given by the form of pi of v is
+equal to the Euclidean distance from v to the target. Which is in turn equal to the square root of the sum of squares of differences
+of the coordinates of v and the target. So we stated this
+potential is feasible and that the potential of
+the target vertex is zero. And if we prove this Lemma this in turn
+means that given the previous Lemma that this potential is always
+a lower bound on the actual distance in this road network from v to the target. But this is also obvious in self
+because this potential is equal to the straight line segment
+length between v and the target. And of course no path in the road network
+and be shorter then the length of the straight lines segment between
+current vertex and the target vertex. So our previous Lemma
+makes sense in this case. Now lets prove that this
+is a good potential. So, we know for any edge (u,v) the length
+of this edge is greater then or equal to the Euclidean potential to the Euclidean
+distance between these two nodes. Because segment is the shortest path
+between two points on the plane. Now we see that the potential of
+any node u, is equal by definition to the Euclidean distance between
+this node u and the target node. And then we can use the triangle
+inequality for the Euclidean distance, to state that the Euclidean distance
+between u and t is less than or equal to the distance between u and
+v, plus the distance between v and t. Now we know that the Euclidean distance
+between u and v is less than or equal to the length of
+the edge between u and v. And the Euclidean distance between v and
+t is exactly equal to the potential of v. So we see that pi(u) is less than or
+equal to l(u,v) + pi(v). And we can write this as l (u,
+v)- pi (u) + pi (v) is non-negative. And this is by definition the length of the edge in the new graph
+with new edge weights. And we see that all the edge weights
+in the new graph are non-negative. And that's why the potential
+pi is really feasible. And also it's obvious that the potential
+of the target vertex is zero because it's basically the distance from the target
+vertex to itself and it is equal to zero. So to implement an actual specific
+A* algorithm on a plane map, we need to find the shortest path from
+source vertex to the target vertex, so for each node v we can compute,
+either pre compute or compute on the fly, the potential. Which is equal to the Euclidean
+distance from v to d, to do that we just need the coordinates
+of v and coordinates of t and this computation works in constant time. And then we just launch Dijkstra's
+algorithm with potentials pi of v, and this will be our A star. And even with Euclidean
+distance potential, this will work faster than
+the regular Dijkstra's algorithm. And you will see that in one of
+the problems of this project.

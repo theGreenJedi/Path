@@ -1,0 +1,966 @@
+1
+00:00:00,410 --> 00:00:06,420
+We're now ready to present all
+the details of the Kruskal Algorithm.
+
+2
+00:00:06,420 --> 00:00:09,980
+Namely, we will prove that
+the Kruskal strategy is optimal,
+
+3
+00:00:09,980 --> 00:00:15,580
+it produces a spanning tree
+of minimum total weight,
+
+4
+00:00:15,580 --> 00:00:20,130
+and we will also present implementation
+details of this algorithm.
+
+5
+00:00:20,130 --> 00:00:23,070
+Recall that the idea of this
+algorithm is the following.
+
+6
+00:00:23,070 --> 00:00:28,100
+We start with an empty set X,
+and we repeatedly add to this set
+
+7
+00:00:28,100 --> 00:00:31,720
+the next lightest edge that
+doesn't produce a cycle.
+
+8
+00:00:31,720 --> 00:00:34,379
+So it is not difficult to see that
+
+9
+00:00:34,379 --> 00:00:38,721
+at any point of time the set
+of edges X forms a forest.
+
+10
+00:00:38,721 --> 00:00:41,077
+That is a collection of trees.
+
+11
+00:00:41,077 --> 00:00:43,113
+Let me illustrate this.
+
+12
+00:00:43,113 --> 00:00:49,796
+Assume that we have some set of vertices
+and initially, the set X is empty,
+
+13
+00:00:49,796 --> 00:00:55,206
+which means that each of our
+vertices forms a tree of size 1,
+
+14
+00:00:55,206 --> 00:00:59,790
+namely a tree that contains 1 vertex and
+no edges.
+
+15
+00:00:59,790 --> 00:01:04,610
+Initially each vertex is
+isolated in our set X.
+
+16
+00:01:04,610 --> 00:01:07,190
+Now, we start adding edges.
+
+17
+00:01:07,190 --> 00:01:11,358
+Probably, this is the first one,
+then we add this edge, then this edge,
+
+18
+00:01:11,358 --> 00:01:17,880
+then this edge,
+then this edge, for example.
+
+19
+00:01:17,880 --> 00:01:23,580
+At this point of time,
+our set X consists of three trees.
+
+20
+00:01:23,580 --> 00:01:26,320
+So this is the first tree, T1.
+
+21
+00:01:26,320 --> 00:01:28,130
+This is the second tree, T2.
+
+22
+00:01:28,130 --> 00:01:31,409
+And this is the third tree, T3.
+
+23
+00:01:31,409 --> 00:01:37,640
+In particular,
+the tree T3 contains just one vertex.
+
+24
+00:01:37,640 --> 00:01:39,970
+It is an isolated vertex, okay?
+
+25
+00:01:41,210 --> 00:01:44,480
+Assume also that the next vertex that
+
+26
+00:01:44,480 --> 00:01:48,320
+the next edge that Kruskal's Algorithm
+is going to add is the following.
+
+27
+00:01:48,320 --> 00:01:56,364
+[NOISE] So, it is the next lightest
+edge that doesn't produce a cycle.
+
+28
+00:01:56,364 --> 00:02:01,296
+The first thing to note is that
+the edge e must join two edges
+
+29
+00:02:01,296 --> 00:02:05,050
+that belong to different trees, right?
+
+30
+00:02:05,050 --> 00:02:08,250
+Because if they were in the same tree,
+this would produce a cycle.
+
+31
+00:02:09,970 --> 00:02:14,320
+Okay, now we need to show
+that adding e is a safe move.
+
+32
+00:02:14,320 --> 00:02:17,650
+For this,
+we need to use cut property, right?
+
+33
+00:02:17,650 --> 00:02:21,830
+And in turn for using cut property,
+we need to construct, we need to show
+
+34
+00:02:21,830 --> 00:02:27,200
+a partition of the set of vertices
+such that e is the lightest branch
+
+35
+00:02:27,200 --> 00:02:32,250
+in our graph that joins vertices
+from different parts of partition.
+
+36
+00:02:33,600 --> 00:02:37,770
+To construct such a cut, let's just take
+all the vertices from one of these trees
+
+37
+00:02:38,970 --> 00:02:44,210
+As one part of this cut namely
+this is going to be the set S so
+
+38
+00:02:44,210 --> 00:02:46,480
+this is one part of our partition and
+
+39
+00:02:46,480 --> 00:02:52,290
+all other vertices is the other
+part of this partition.
+
+40
+00:02:52,290 --> 00:02:56,010
+In this case,
+we see that e is the lightest edge
+
+41
+00:02:56,010 --> 00:03:00,790
+that joins two vertices
+from different parts.
+
+42
+00:03:00,790 --> 00:03:05,460
+Which means in turn that cut
+property justifies that adding
+
+43
+00:03:05,460 --> 00:03:09,290
+e in this case is indeed a safe move.
+
+44
+00:03:09,290 --> 00:03:14,020
+In other words,
+if our carbon set tax is a part
+
+45
+00:03:14,020 --> 00:03:19,400
+of some optimal spanning tree, then x with
+
+46
+00:03:19,400 --> 00:03:24,540
+e added Is also a part of
+some minimum spanning tree.
+
+47
+00:03:25,840 --> 00:03:31,660
+Once again, initially, the set X
+in the Kruskal algorithm is empty,
+
+48
+00:03:31,660 --> 00:03:36,190
+which means that each
+vertex of our initial graph
+
+49
+00:03:36,190 --> 00:03:39,950
+forms a separate connected component.
+
+50
+00:03:39,950 --> 00:03:46,460
+So this is how initially
+the set x looks like.
+
+51
+00:03:46,460 --> 00:03:50,980
+So each vertex lies in
+a separate connective component.
+
+52
+00:03:50,980 --> 00:03:53,197
+Then we start adding edges to x.
+
+53
+00:03:53,197 --> 00:04:01,584
+This creates [NOISE] a forest.
+
+54
+00:04:01,584 --> 00:04:05,640
+In this forest currently,
+we have three trees.
+
+55
+00:04:05,640 --> 00:04:07,005
+This is the first tree.
+
+56
+00:04:07,005 --> 00:04:08,304
+This is the second one.
+
+57
+00:04:08,304 --> 00:04:09,941
+And this is the third one.
+
+58
+00:04:09,941 --> 00:04:14,276
+Assume now that the next lightest
+edge that Kruskal's Algorithm
+
+59
+00:04:14,276 --> 00:04:16,490
+considers is the following one.
+
+60
+00:04:17,750 --> 00:04:22,662
+First of all, we need to be able to check
+whether it joins two vertices that lie
+
+61
+00:04:22,662 --> 00:04:27,591
+in the same tree or in other words,
+that lie in the same connected component.
+
+62
+00:04:27,591 --> 00:04:31,670
+In this case, they lie in
+the same connected component, so
+
+63
+00:04:31,670 --> 00:04:35,425
+Kruskal's Algorithm will
+not edit through the set x,
+
+64
+00:04:35,425 --> 00:04:39,442
+because otherwise,
+it would produce a cycle in our set x.
+
+65
+00:04:39,442 --> 00:04:46,384
+Now, assume that next set that Kruskal's
+Algorithm tries is the following.
+
+66
+00:04:46,384 --> 00:04:50,802
+Again, we need to check whether
+the corresponding two end points lie in
+
+67
+00:04:50,802 --> 00:04:53,110
+the same connected component.
+
+68
+00:04:53,110 --> 00:04:54,840
+In this case, it is not a case.
+
+69
+00:04:54,840 --> 00:04:57,250
+They lie in different connected component.
+
+70
+00:04:57,250 --> 00:05:03,200
+So we add this edge and to this point,
+we should update the data structures that
+
+71
+00:05:03,200 --> 00:05:10,560
+we use to indicate that now we
+actually merge trees T1 and T2.
+
+72
+00:05:10,560 --> 00:05:15,140
+So what we need to check in our data
+structure is whether two given vertices
+
+73
+00:05:15,140 --> 00:05:20,100
+lie in the same set or in the same
+connected component, and also if they lie
+
+74
+00:05:20,100 --> 00:05:24,360
+in different connected components, we need
+to merge the corresponding two trees.
+
+75
+00:05:24,360 --> 00:05:28,610
+So the perfect choice for data structure
+for this algorithm is, of course,
+
+76
+00:05:28,610 --> 00:05:31,640
+the disjoint sets data structure.
+
+77
+00:05:31,640 --> 00:05:35,660
+Once again,
+to check whether two given vertices lie
+
+78
+00:05:35,660 --> 00:05:40,200
+in different connected components,
+we just check whether find of
+
+79
+00:05:40,200 --> 00:05:44,700
+one endpoint is equal to find of
+the other end point of this edge.
+
+80
+00:05:44,700 --> 00:05:48,100
+If they are different then they lie
+in different connected component.
+
+81
+00:05:48,100 --> 00:05:54,310
+And when adding an edge to the set X, we
+need to merge the corresponding two tree
+
+82
+00:05:54,310 --> 00:06:00,960
+and this is done by calling the method
+union of the corresponding two end points.
+
+83
+00:06:00,960 --> 00:06:04,800
+We will now illustrate
+this on a toy example.
+
+84
+00:06:04,800 --> 00:06:09,766
+This is a toy example where
+we have six vertices.
+
+85
+00:06:09,766 --> 00:06:14,570
+Let's first call them A,
+B, C, D, E, F, and
+
+86
+00:06:14,570 --> 00:06:20,579
+let's assume that we have a data
+structure disjoint set and
+
+87
+00:06:20,579 --> 00:06:27,691
+let me show the contents of this
+disjoint sets of this data structure.
+
+88
+00:06:27,691 --> 00:06:33,614
+So initially,
+each vertex lies in a separate set.
+
+89
+00:06:33,614 --> 00:06:40,645
+No we start processing edges in
+order of non-decreasing weight.
+
+90
+00:06:40,645 --> 00:06:43,777
+So the first lightest edge is AE.
+
+91
+00:06:43,777 --> 00:06:47,759
+We check whether A and E, at this point,
+
+92
+00:06:47,759 --> 00:06:51,830
+lie a different connected components.
+
+93
+00:06:51,830 --> 00:06:55,090
+For this way,
+we call find of A and find of E.
+
+94
+00:06:55,090 --> 00:07:00,540
+This gives us different IDs because
+they stay in different sets.
+
+95
+00:07:00,540 --> 00:07:06,339
+So we add this edge to
+our current solution and
+
+96
+00:07:06,339 --> 00:07:12,290
+we also notify our data
+structure that now A and
+
+97
+00:07:12,290 --> 00:07:18,562
+E actually lie in the same
+connected component.
+
+98
+00:07:18,562 --> 00:07:22,010
+So now it looks like this.
+
+99
+00:07:22,010 --> 00:07:26,770
+The next lightest edge if the edge CF.
+
+100
+00:07:26,770 --> 00:07:31,852
+Again we ask our data structure whether
+C and F belong to the same set and
+
+101
+00:07:31,852 --> 00:07:36,850
+each replies that they do not belong
+to the same set because find of C is
+
+102
+00:07:36,850 --> 00:07:42,250
+not equal to find of F, so it is safe
+to add this edge to our solution.
+
+103
+00:07:42,250 --> 00:07:45,396
+We also notify our data structures and
+C and
+
+104
+00:07:45,396 --> 00:07:50,690
+F now lie in the same set by
+calling union of C and F.
+
+105
+00:07:50,690 --> 00:07:55,090
+So now C and F lie in the same set.
+
+106
+00:07:56,660 --> 00:08:01,810
+The next edge is A, E,
+D and we see that A and
+
+107
+00:08:01,810 --> 00:08:09,250
+D lie in different connected components so
+we just add this etch to a solution and
+
+108
+00:08:09,250 --> 00:08:14,840
+also notify our data structures
+that we need to merge sets
+
+109
+00:08:14,840 --> 00:08:19,780
+that contain the vertex A and
+the vertex D.
+
+110
+00:08:19,780 --> 00:08:26,510
+So now, we have three different
+disjoint sets in our data structure,
+
+111
+00:08:26,510 --> 00:08:30,330
+which actually corresponds to
+vertices of our three trees.
+
+112
+00:08:30,330 --> 00:08:34,560
+So the first tree contains vertices AED,
+
+113
+00:08:34,560 --> 00:08:40,080
+the second one contains the vertex B, and
+the last one contains vertices C and F.
+
+114
+00:08:40,080 --> 00:08:44,780
+Now, the next lightest edge is DE,
+it has weight 3.
+
+115
+00:08:44,780 --> 00:08:49,410
+However, we see that D and
+E belong to the same connected component.
+
+116
+00:08:49,410 --> 00:08:54,620
+This, in turn, means that if we added
+the edge DE to our current solutions,
+
+117
+00:08:54,620 --> 00:08:56,070
+this would produce a cycle.
+
+118
+00:08:56,070 --> 00:09:03,640
+So we just keep the edge DE, and
+we continue to the next lightest edge.
+
+119
+00:09:03,640 --> 00:09:08,960
+The next one is AB, and we see that A and
+B lie in different connected components,
+
+120
+00:09:08,960 --> 00:09:15,480
+so it is safe to add the edge
+AB to the current solution.
+
+121
+00:09:15,480 --> 00:09:18,929
+We also need to merge
+the corresponding two sets.
+
+122
+00:09:20,620 --> 00:09:27,840
+So after this merge,
+our sets look as follows.
+
+123
+00:09:27,840 --> 00:09:32,820
+Now, the lightest edge is the edge BE,
+it is of weight five,
+
+124
+00:09:32,820 --> 00:09:36,670
+however, B and E belong to the same set,
+so we skip it.
+
+125
+00:09:36,670 --> 00:09:42,190
+And the last edge that we actually
+add to our solution is the edge BBF.
+
+126
+00:09:44,120 --> 00:09:50,900
+It is of weight 8 and, at this point,
+we also nudge two sets.
+
+127
+00:09:50,900 --> 00:09:57,070
+And now, all our vertices lie
+in the same connected component,
+
+128
+00:09:57,070 --> 00:10:01,780
+which means that we constructed
+an optimal spanning tree,
+
+129
+00:10:01,780 --> 00:10:04,825
+that is a spanning tree
+of minimum total weight.
+
+130
+00:10:04,825 --> 00:10:10,490
+The pseudocode of the Kruskal
+algorithm looks as follows.
+
+131
+00:10:10,490 --> 00:10:16,961
+First, for each vertex in our graph,
+we create a separate disjoint set.
+
+132
+00:10:16,961 --> 00:10:23,397
+We do this by calling MakeSet method
+of disjoint sets data structure.
+
+133
+00:10:23,397 --> 00:10:28,909
+Then we initialize the set
+of edges X by empty set.
+
+134
+00:10:28,909 --> 00:10:35,852
+The next step is that we sort the edges,
+all the edges of our graph, by weight.
+
+135
+00:10:35,852 --> 00:10:40,510
+Then we process all the edges in
+order of non-decreasing weight.
+
+136
+00:10:40,510 --> 00:10:42,790
+This is done in this is fold.
+
+137
+00:10:42,790 --> 00:10:47,250
+Then for reach such edge, we need to check
+whether adding in the x safe or not.
+
+138
+00:10:47,250 --> 00:10:50,690
+Namely, whether it produces a cycle or
+not.
+
+139
+00:10:50,690 --> 00:10:57,860
+To do this, we just check whether u and v
+belong to different connector components.
+
+140
+00:10:57,860 --> 00:11:02,600
+For this, we need to check where to
+find a few equal to find a v or not.
+
+141
+00:11:02,600 --> 00:11:06,390
+If they're different, then they lie
+in different connected components.
+
+142
+00:11:06,390 --> 00:11:09,220
+In this case,
+it is safe to add the edge u,
+
+143
+00:11:09,220 --> 00:11:13,910
+v to the set X and
+produces in this line and
+
+144
+00:11:13,910 --> 00:11:18,790
+also in this case we need to
+notify our data structure that all
+
+145
+00:11:18,790 --> 00:11:23,800
+the vertices that before that lied in
+connected component with u and three,
+
+146
+00:11:23,800 --> 00:11:28,270
+now lie in the same connected components,
+because we just joined these two trees,
+
+147
+00:11:28,270 --> 00:11:33,080
+and this is done by calling
+union of of u and tree.
+
+148
+00:11:33,080 --> 00:11:39,270
+Finally, in the end,
+we just return the resulting set X.
+
+149
+00:11:39,270 --> 00:11:43,790
+It remains to estimate the running
+time of the Kruskal's algorithm.
+
+150
+00:11:43,790 --> 00:11:51,670
+We start by sorting the edges, so
+this requires big O(E log E) time, right?
+
+151
+00:11:51,670 --> 00:11:57,049
+This in turn can be rewritten
+as big O(E log of V squared),
+
+152
+00:11:57,049 --> 00:12:02,320
+just because a simple graph
+has at most V squared edges.
+
+153
+00:12:02,320 --> 00:12:06,960
+This, in turn,
+can be rewritten as just E times 2 log V.
+
+154
+00:12:08,200 --> 00:12:11,810
+Again, log of V squared
+is equal to 2 log v, so
+
+155
+00:12:11,810 --> 00:12:15,980
+we rewrite it as follows, and this is
+math analysis is just big O of E log V.
+
+156
+00:12:17,160 --> 00:12:22,350
+So this is an upper bound on
+the running time of the first step.
+
+157
+00:12:22,350 --> 00:12:25,120
+Then we need to process all the edges.
+
+158
+00:12:25,120 --> 00:12:28,925
+For this,
+we make two equals to find that region.
+
+159
+00:12:28,925 --> 00:12:33,339
+Why two equals, well,
+just because we process all the edges and
+
+160
+00:12:33,339 --> 00:12:38,162
+follow each edge, we make two calls
+to define that region mainly, for
+
+161
+00:12:38,162 --> 00:12:41,040
+one endpoint and for the other endpoint.
+
+162
+00:12:42,280 --> 00:12:47,850
+Then we also make at most V minus
+one calls to the union procedure.
+
+163
+00:12:47,850 --> 00:12:49,390
+Why V minus one?
+
+164
+00:12:49,390 --> 00:12:53,240
+Well, just because initially we
+have n connected components.
+
+165
+00:12:53,240 --> 00:12:56,340
+Namely, when the set x is empty,
+
+166
+00:12:56,340 --> 00:13:02,350
+each vertex of our graph forms
+a separate connected components.
+
+167
+00:13:02,350 --> 00:13:07,360
+Then each time when we call union, we
+actually merge two connected components.
+
+168
+00:13:07,360 --> 00:13:11,170
+And in the end of the run
+of our algorithm,
+
+169
+00:13:11,170 --> 00:13:12,900
+we have just one connected component.
+
+170
+00:13:12,900 --> 00:13:16,660
+So all the vertices lie in the same tree.
+
+171
+00:13:16,660 --> 00:13:20,660
+So initially, we have n connected
+components and then we have 1 and
+
+172
+00:13:20,660 --> 00:13:25,560
+each time we call union, we reduce the
+number of connected components by 1 which
+
+173
+00:13:25,560 --> 00:13:31,090
+means that we make exactly V
+minus 1 calls to union procedure.
+
+174
+00:13:31,090 --> 00:13:36,901
+Okay, so we have roughly E calls to find
+and roughly V calls to union procedure.
+
+175
+00:13:36,901 --> 00:13:42,385
+Now recall that if we implement the
+disjoint set data structure as a forest or
+
+176
+00:13:42,385 --> 00:13:46,594
+as a collection of disjoint trees and
+we use union by rent.
+
+177
+00:13:46,594 --> 00:13:51,451
+Heuristic than the running time that
+abound on the running time of each
+
+178
+00:13:51,451 --> 00:13:56,410
+iteration is just log v, which gives
+us that amount E plus V times log v.
+
+179
+00:13:57,490 --> 00:14:00,480
+Recall also that in our case,
+
+180
+00:14:00,480 --> 00:14:05,130
+the graph is connected,
+which mean that e is at least v minus 1,
+
+181
+00:14:05,130 --> 00:14:10,510
+which in turn means that E plus V,
+is at most 2E.
+
+182
+00:14:10,510 --> 00:14:13,870
+Which allows us to rewrite it as follows.
+
+183
+00:14:13,870 --> 00:14:16,920
+So the upper bound on
+the running time of the second
+
+184
+00:14:16,920 --> 00:14:19,580
+step is actually the same as for
+the first step.
+
+185
+00:14:19,580 --> 00:14:25,050
+It is O of E log V,
+which gives us that the upper bound
+
+186
+00:14:25,050 --> 00:14:30,460
+on the running time of the whole
+algorithm is big O(E log V).
+
+187
+00:14:30,460 --> 00:14:36,000
+Now recall that we actually know that if,
+for our implementation
+
+188
+00:14:36,000 --> 00:14:42,060
+of disjoint sets data structure,
+we use both union by run heuristic and
+
+189
+00:14:42,060 --> 00:14:48,290
+past compression heuristic then we
+can state a strong upper bound.
+
+190
+00:14:48,290 --> 00:14:52,140
+That is, instead of using log v here,
+
+191
+00:14:52,140 --> 00:14:57,010
+we actually have log star of v,
+the iterated log, right?
+
+192
+00:14:57,010 --> 00:15:00,370
+This gives us a stronger upper bound for
+the second step.
+
+193
+00:15:00,370 --> 00:15:04,875
+Unfortunately, this
+doesn't improve the total
+
+194
+00:15:04,875 --> 00:15:09,058
+running time because
+still the upper bound for
+
+195
+00:15:09,058 --> 00:15:16,090
+sorting all the edges delineates
+the upper bound for the second step.
+
+196
+00:15:16,090 --> 00:15:22,050
+However, for some applications, the edges
+are given to us already in sorted order,
+
+197
+00:15:22,050 --> 00:15:23,690
+which means that, in this case,
+
+198
+00:15:23,690 --> 00:15:29,140
+we do not need to spend E log V time for
+sorting the edges.
+
+199
+00:15:29,140 --> 00:15:37,130
+So that the total running time in this
+case becomes equal to E times log* of V.
+
+200
+00:15:37,130 --> 00:15:42,190
+Which makes the Kruskal algorithm
+in this case even more efficient.
+
+201
+00:15:42,190 --> 00:15:47,116
+So in this case,
+the running time is upper bounded
+
+202
+00:15:47,116 --> 00:15:51,939
+by E times log star of V,
+which is nearly linear.

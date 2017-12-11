@@ -1,0 +1,1107 @@
+1
+00:00:00,370 --> 00:00:04,360
+Hi, in this video you will learn how
+to construct a good node ordering for
+
+2
+00:00:04,360 --> 00:00:06,710
+the contraction hierarchies algorithm.
+
+3
+00:00:06,710 --> 00:00:09,840
+So far if you think about it,
+our algorithm works correctly for
+
+4
+00:00:09,840 --> 00:00:10,610
+any node ordering.
+
+5
+00:00:10,610 --> 00:00:15,090
+If you just choose any order and pass
+it to the processing procedure, it will
+
+6
+00:00:15,090 --> 00:00:19,574
+contract the nodes in this particular
+order and return an augmented graph.
+
+7
+00:00:19,574 --> 00:00:23,459
+If you then run queries on this augmented
+graph using the bidirectional Dijkstra
+
+8
+00:00:23,459 --> 00:00:27,172
+approach from the previous videos,
+everything will work correctly because
+
+9
+00:00:27,172 --> 00:00:30,336
+the correctness proof doesn't
+depend on any particular order.
+
+10
+00:00:30,336 --> 00:00:34,825
+However, this order will influence the
+order of operations in the bidirectional
+
+11
+00:00:34,825 --> 00:00:36,916
+Dijkstra algorithm for the queries.
+
+12
+00:00:36,916 --> 00:00:41,565
+And actually, it will heavily
+influence the time required for
+
+13
+00:00:41,565 --> 00:00:44,032
+queries and for preprocessing.
+
+14
+00:00:44,032 --> 00:00:48,695
+So we want to choose a good node ordering,
+so that our preprocessing and
+
+15
+00:00:48,695 --> 00:00:51,590
+our queries are really fast.
+
+16
+00:00:51,590 --> 00:00:55,380
+First thing we want from the order
+is we want to minimize the number of
+
+17
+00:00:55,380 --> 00:00:56,630
+added shortcuts.
+
+18
+00:00:56,630 --> 00:00:58,780
+Because each time you add a shortcut,
+
+19
+00:00:58,780 --> 00:01:02,340
+you add an edge to
+the augmented graph in the end.
+
+20
+00:01:02,340 --> 00:01:07,190
+And the more edges, the slower
+your Dijkstra algorithm will work.
+
+21
+00:01:07,190 --> 00:01:09,100
+So we want less shortcuts.
+
+22
+00:01:09,100 --> 00:01:13,260
+Second, you want to spread
+the important nodes across the map.
+
+23
+00:01:13,260 --> 00:01:17,730
+because from the common sense,
+it follows that there are important big
+
+24
+00:01:17,730 --> 00:01:22,340
+cities in every sufficiently large
+region of the country, of the map.
+
+25
+00:01:22,340 --> 00:01:25,896
+And then in each state,
+if you divide it into sub-regions,
+
+26
+00:01:25,896 --> 00:01:30,301
+there are still relatively big cities
+which are important nodes and so on.
+
+27
+00:01:30,301 --> 00:01:32,771
+And this should work well in practice.
+
+28
+00:01:32,771 --> 00:01:37,517
+And third, you also want to minimize
+somehow the number of edges in
+
+29
+00:01:37,517 --> 00:01:41,429
+the shortest paths in general
+in the augmented graph.
+
+30
+00:01:41,429 --> 00:01:46,456
+So basically, you want to make your graph
+look less like a road network graph and
+
+31
+00:01:46,456 --> 00:01:51,562
+more like a social network graph, where
+bidirectional Dijkstra algorithm is so
+
+32
+00:01:51,562 --> 00:01:55,039
+much faster than the regular
+Dijkstra's algorithm.
+
+33
+00:01:55,039 --> 00:02:00,327
+Because any two nodes in the social
+network are at most six edges away.
+
+34
+00:02:00,327 --> 00:02:04,241
+And then bidirectional Dijkstra finds,
+with forward surge and
+
+35
+00:02:04,241 --> 00:02:07,875
+backward surge,
+in just three steps they meet each other.
+
+36
+00:02:07,875 --> 00:02:10,791
+You want the same in
+the augmented graph and
+
+37
+00:02:10,791 --> 00:02:16,520
+you can somehow become close to it by
+adding shortcuts in the right places.
+
+38
+00:02:16,520 --> 00:02:19,680
+So in general,
+you want these three things.
+
+39
+00:02:19,680 --> 00:02:22,570
+Now we'll discuss how to do that.
+
+40
+00:02:22,570 --> 00:02:25,718
+So we want to order nodes
+by some importance, so
+
+41
+00:02:25,718 --> 00:02:29,354
+we need to introduce a measure
+of importance for that.
+
+42
+00:02:29,354 --> 00:02:34,184
+And then, we will at each step
+contract the least important node.
+
+43
+00:02:34,184 --> 00:02:36,306
+However, when we contract a node,
+
+44
+00:02:36,306 --> 00:02:40,636
+the properties of the nodes which
+are neighbors of this node can change.
+
+45
+00:02:40,636 --> 00:02:44,968
+And then importance can also change for
+those nodes after that.
+
+46
+00:02:44,968 --> 00:02:48,162
+So in general,
+the algorithm will work as following.
+
+47
+00:02:48,162 --> 00:02:52,389
+We'll keep all the nodes in a priority
+queue ordered by importance, so
+
+48
+00:02:52,389 --> 00:02:55,776
+that we can extract the least
+important nodes very fast.
+
+49
+00:02:55,776 --> 00:02:59,427
+But of course, priority will be
+something like minus importance so
+
+50
+00:02:59,427 --> 00:03:03,206
+that the hat of the priority queue
+contains the least important node,
+
+51
+00:03:03,206 --> 00:03:04,758
+not the most important one.
+
+52
+00:03:04,758 --> 00:03:08,410
+Then, on each iteration we will
+extract the least important node.
+
+53
+00:03:08,410 --> 00:03:13,898
+And we want to contract this node, but
+first we need to recompute its importance.
+
+54
+00:03:13,898 --> 00:03:18,584
+Because it could have changed because
+of the contractions of the other nodes.
+
+55
+00:03:18,584 --> 00:03:23,513
+Then, we need to compare its new
+updated importance with the importances
+
+56
+00:03:23,513 --> 00:03:25,810
+of all the other nodes.
+
+57
+00:03:25,810 --> 00:03:29,770
+And to do that, we will take
+the hat of the priority queue.
+
+58
+00:03:29,770 --> 00:03:32,585
+Because we've already extracted
+these nodes from the priority queue,
+
+59
+00:03:32,585 --> 00:03:34,630
+it's no longer there.
+
+60
+00:03:34,630 --> 00:03:37,430
+So we will compare
+the importance of this node
+
+61
+00:03:37,430 --> 00:03:41,560
+with the smallest importance of all
+the nodes which are still in the queue.
+
+62
+00:03:41,560 --> 00:03:44,293
+If the importance of the extracted
+node is still minimal,
+
+63
+00:03:44,293 --> 00:03:47,380
+then we can safely contract it,
+it's the least important node.
+
+64
+00:03:47,380 --> 00:03:51,566
+Otherwise, we will need to put it
+back into the priority queue so
+
+65
+00:03:51,566 --> 00:03:55,612
+that we can extract a node with
+even smaller priority from it.
+
+66
+00:03:55,612 --> 00:03:58,203
+Of course this is only approximate,
+
+67
+00:03:58,203 --> 00:04:03,636
+because at some point we could extract
+the node's recomputed importance and
+
+68
+00:04:03,636 --> 00:04:09,334
+then decide that it has really the least
+importance of all the nodes in the queue.
+
+69
+00:04:09,334 --> 00:04:13,926
+However, there is some other node which
+is still in the queue which has a smaller
+
+70
+00:04:13,926 --> 00:04:18,598
+importance, but we haven't yet recomputed
+it and so we don't know about that.
+
+71
+00:04:18,598 --> 00:04:19,994
+And that's okay,
+
+72
+00:04:19,994 --> 00:04:25,154
+we will try just to order the nodes
+approximately by this importance.
+
+73
+00:04:25,154 --> 00:04:32,460
+Also, it can seem that this process
+can go on and on indefinitely.
+
+74
+00:04:32,460 --> 00:04:36,005
+But we'll show that it will actually
+stop after a finite number of
+
+75
+00:04:36,005 --> 00:04:36,940
+iterations, always.
+
+76
+00:04:38,070 --> 00:04:39,330
+Why is that?
+
+77
+00:04:39,330 --> 00:04:42,740
+Well, if we dont contract the node,
+we update its importance and
+
+78
+00:04:42,740 --> 00:04:43,924
+it actually changes.
+
+79
+00:04:43,924 --> 00:04:48,630
+And after that, its importance is
+corresponding to the current set of
+
+80
+00:04:48,630 --> 00:04:51,275
+nodes which are still not contracted.
+
+81
+00:04:51,275 --> 00:04:54,595
+And after at most number
+of nodes attempts,
+
+82
+00:04:54,595 --> 00:04:58,013
+all the nodes will have
+updated importance.
+
+83
+00:04:58,013 --> 00:05:01,813
+And then, the node with the minimum
+updated importance will be
+
+84
+00:05:01,813 --> 00:05:05,253
+contracted after that,
+because it will be extracted and
+
+85
+00:05:05,253 --> 00:05:08,420
+it will have the smallest
+importance at that point.
+
+86
+00:05:08,420 --> 00:05:11,000
+And then when we recompute its importance,
+
+87
+00:05:11,000 --> 00:05:15,332
+it will turn out to be the same because
+it already has updated importance.
+
+88
+00:05:15,332 --> 00:05:17,700
+And then we will just contract this node.
+
+89
+00:05:17,700 --> 00:05:24,136
+So eventually this kind of
+iteration always contracts a node.
+
+90
+00:05:24,136 --> 00:05:28,877
+And in practice, it usually takes one or
+two iterations usually,
+
+91
+00:05:28,877 --> 00:05:31,560
+to actually contract something.
+
+92
+00:05:31,560 --> 00:05:33,010
+So this works typically fast.
+
+93
+00:05:34,590 --> 00:05:37,590
+Now, we'll talk about
+the importance criteria.
+
+94
+00:05:37,590 --> 00:05:39,480
+So first is edge difference.
+
+95
+00:05:39,480 --> 00:05:42,110
+It is related to the number
+of shortcuts added and
+
+96
+00:05:42,110 --> 00:05:45,330
+minimizing the number of
+edges in the augmented graph.
+
+97
+00:05:45,330 --> 00:05:47,970
+Second one down is number
+of contracted neighbors.
+
+98
+00:05:47,970 --> 00:05:52,000
+And this is related to spreading
+the nodes across the map.
+
+99
+00:05:52,000 --> 00:05:56,380
+So if there are already many neighbors
+of this node which already contracted,
+
+100
+00:05:56,380 --> 00:06:00,050
+then we will probably contract
+some node in some other place.
+
+101
+00:06:00,050 --> 00:06:04,815
+Because we want to spread important
+nodes and also spread unimportant nodes.
+
+102
+00:06:04,815 --> 00:06:07,439
+We don't want everything to
+be clustered in one region.
+
+103
+00:06:07,439 --> 00:06:11,677
+Also, shortcut cover is connected with how
+
+104
+00:06:11,677 --> 00:06:16,381
+important that node is,
+how unavoidable it is.
+
+105
+00:06:16,381 --> 00:06:21,357
+Do you remember the picture with an island
+between San Francisco and Oakland?
+
+106
+00:06:21,357 --> 00:06:25,488
+The treasure island which was unavoidable
+if you go from San Francisco to Oakland,
+
+107
+00:06:25,488 --> 00:06:27,503
+if you want to go with the shortest path?
+
+108
+00:06:27,503 --> 00:06:33,345
+So shortcut cover will somehow
+approximate how unavoidable a node is.
+
+109
+00:06:33,345 --> 00:06:38,317
+And the last one, the node level,
+has something to do with the number
+
+110
+00:06:38,317 --> 00:06:42,279
+of edges in the shortest
+paths in the augmented graph.
+
+111
+00:06:42,279 --> 00:06:45,867
+So now we'll go through
+all of these in detail.
+
+112
+00:06:45,867 --> 00:06:47,046
+So Edge Difference.
+
+113
+00:06:47,046 --> 00:06:50,670
+You basically want to minimize the number
+of edges in the augmented graph.
+
+114
+00:06:50,670 --> 00:06:55,420
+So when we try to contract the node,
+v, we can actually compute
+
+115
+00:06:55,420 --> 00:06:59,570
+how many shortcuts would be added
+if we actually contract this node.
+
+116
+00:06:59,570 --> 00:07:03,620
+We can also always compute
+the number of incoming edges, and
+
+117
+00:07:03,620 --> 00:07:05,869
+number of outgoing edges of any node.
+
+118
+00:07:05,869 --> 00:07:08,320
+And then we can compute
+the edge difference.
+
+119
+00:07:08,320 --> 00:07:12,740
+The number of shortcuts added
+minus number of edges deleted,
+
+120
+00:07:12,740 --> 00:07:16,110
+which is the degree of this node.
+
+121
+00:07:16,110 --> 00:07:18,590
+And this is called edge difference.
+
+122
+00:07:18,590 --> 00:07:24,050
+And the number of edges increases by
+edge difference after contracting v.
+
+123
+00:07:24,050 --> 00:07:28,750
+So this influences both the number
+of edges in the final graph and
+
+124
+00:07:28,750 --> 00:07:33,490
+also the number of edges in
+the graph being preprocessed.
+
+125
+00:07:33,490 --> 00:07:36,320
+Which is important because it
+influences the preprocessing time.
+
+126
+00:07:37,460 --> 00:07:42,802
+So what we want is to contract nodes
+with small edge differences first.
+
+127
+00:07:42,802 --> 00:07:45,580
+Contracted Neighbors,
+I already talked about this.
+
+128
+00:07:45,580 --> 00:07:49,883
+We want to contract a node with small
+number of already contracted neighbors, so
+
+129
+00:07:49,883 --> 00:07:53,365
+that the nodes which we contract
+don't cluster in one place, but
+
+130
+00:07:53,365 --> 00:07:56,675
+they're actually spread out in
+all the regions of the graph.
+
+131
+00:07:56,675 --> 00:07:58,425
+Shortcut Covers, very important.
+
+132
+00:07:58,425 --> 00:08:03,199
+Basically it says how
+many nodes are there,
+
+133
+00:08:03,199 --> 00:08:11,084
+such that we cannot avoid visiting our
+node if we want to go to those nodes.
+
+134
+00:08:11,084 --> 00:08:16,922
+More formally, if we have some node,
+v, we can do the number of neighbors,
+
+135
+00:08:16,922 --> 00:08:21,482
+w of v, such that we have to
+create a shortcut, either to w or
+
+136
+00:08:21,482 --> 00:08:24,524
+from w in the case we need to contract v.
+
+137
+00:08:24,524 --> 00:08:28,577
+And this basically means
+that when we contract v,
+
+138
+00:08:28,577 --> 00:08:31,576
+we'll lose some shortest path to w.
+
+139
+00:08:31,576 --> 00:08:36,042
+And that's why we need to
+create an additional shortcut.
+
+140
+00:08:36,042 --> 00:08:40,837
+And so v is important for w, and
+if v is important for many, its neighbors,
+
+141
+00:08:40,837 --> 00:08:42,373
+then it's important.
+
+142
+00:08:42,373 --> 00:08:46,331
+And so, we need to first contract
+nodes with small importance,
+
+143
+00:08:46,331 --> 00:08:48,102
+with small shortcut cover.
+
+144
+00:08:48,102 --> 00:08:52,855
+Node level is an upper bound on
+the number of edges in the shortest
+
+145
+00:08:52,855 --> 00:08:57,220
+path from any node s to node
+v in the augmented graph.
+
+146
+00:08:57,220 --> 00:09:00,660
+It can be shown formally
+that this is an upper bound,
+
+147
+00:09:00,660 --> 00:09:02,430
+but I'll tell you the intuition.
+
+148
+00:09:02,430 --> 00:09:04,774
+So we initialize the level with 0.
+
+149
+00:09:04,774 --> 00:09:10,529
+And then when we contract some node v,
+we update the level of its neighbors.
+
+150
+00:09:10,529 --> 00:09:16,802
+So for a neighbor u of v, either we could
+get to u somehow without going through v,
+
+151
+00:09:16,802 --> 00:09:21,064
+and then contracting v
+doesn't influence its level.
+
+152
+00:09:21,064 --> 00:09:25,173
+Or we could go to u through node v.
+
+153
+00:09:25,173 --> 00:09:28,754
+But then to go to node v,
+we needed at most,
+
+154
+00:09:28,754 --> 00:09:33,138
+level of v edges, and
+then one more to get from v to u.
+
+155
+00:09:33,138 --> 00:09:39,431
+So that's why L(u) needs to
+be maximized by L(v) + 1.
+
+156
+00:09:39,431 --> 00:09:44,295
+So in the end,
+L(v) is an upper bound on the number of
+
+157
+00:09:44,295 --> 00:09:47,228
+edges on the shortest path to v.
+
+158
+00:09:47,228 --> 00:09:51,035
+And so we want to contract
+nodes with small level,
+
+159
+00:09:51,035 --> 00:09:55,668
+because first,
+we need to contract non-important nodes.
+
+160
+00:09:55,668 --> 00:10:00,270
+In the end we proposed
+the following importance measure.
+
+161
+00:10:00,270 --> 00:10:03,624
+We just sum up all those four values.
+
+162
+00:10:03,624 --> 00:10:07,943
+Note that this is a heuristic value, and
+you can actually play with weights of
+
+163
+00:10:07,943 --> 00:10:12,129
+those four quantities in the importance
+and see how preprocessing time and
+
+164
+00:10:12,129 --> 00:10:13,271
+query time change.
+
+165
+00:10:13,271 --> 00:10:19,329
+But we think that just summing them
+up will already work really well.
+
+166
+00:10:19,329 --> 00:10:23,983
+However, each of the four quantities
+is necessary for fast preprocessing and
+
+167
+00:10:23,983 --> 00:10:24,624
+queries.
+
+168
+00:10:24,624 --> 00:10:27,946
+If you avoid implementing
+at least one of them,
+
+169
+00:10:27,946 --> 00:10:31,860
+probably preprocessing or
+query time will be too long.
+
+170
+00:10:31,860 --> 00:10:35,489
+But then you can further
+optimize with the coefficients.
+
+171
+00:10:35,489 --> 00:10:36,527
+For example,
+
+172
+00:10:36,527 --> 00:10:42,156
+two times added distance plus three
+times contracted neighbors, and so on.
+
+173
+00:10:42,156 --> 00:10:46,274
+So it also means that you need to
+find a way to compute all of these
+
+174
+00:10:46,274 --> 00:10:50,280
+quantities efficiently at any
+stage of the preprocessing.
+
+175
+00:10:50,280 --> 00:10:55,690
+Both in the beginning,
+and also when you need to
+
+176
+00:10:55,690 --> 00:11:00,050
+contract a node but you've already
+contracted some other nodes.
+
+177
+00:11:00,050 --> 00:11:03,980
+This is not very hard and
+we'll leave this as an exercise to you.
+
+178
+00:11:03,980 --> 00:11:05,630
+So, we did a lot of work.
+
+179
+00:11:05,630 --> 00:11:07,410
+We've come up with a preprocessing stage.
+
+180
+00:11:07,410 --> 00:11:10,290
+We need a particular node
+ordering with that and
+
+181
+00:11:10,290 --> 00:11:14,640
+we've come up with a complex
+importance measure for nodes for that.
+
+182
+00:11:14,640 --> 00:11:17,180
+And also we need to do
+bidirectional Dijkstra, but
+
+183
+00:11:17,180 --> 00:11:19,257
+not classical bidirectional Dijkstra.
+
+184
+00:11:19,257 --> 00:11:22,370
+We need to do some tweaks
+in the query stage.
+
+185
+00:11:22,370 --> 00:11:24,880
+So, is it all worth it?
+
+186
+00:11:24,880 --> 00:11:28,370
+It turns out that yes,
+it is well worth it.
+
+187
+00:11:28,370 --> 00:11:32,640
+If we take for example, a graph of
+Europe with 18 million nodes, and
+
+188
+00:11:32,640 --> 00:11:36,310
+launch the classical
+Dijkstra's algorithm on it.
+
+189
+00:11:36,310 --> 00:11:40,383
+And we generate random pairs of vertices
+in different places of Europe and
+
+190
+00:11:40,383 --> 00:11:42,498
+then compute the shorter distances.
+
+191
+00:11:42,498 --> 00:11:47,193
+Then on average,
+it will work for 4.3 seconds.
+
+192
+00:11:47,193 --> 00:11:50,453
+However, if we launch
+Contraction Hierarchies on
+
+193
+00:11:50,453 --> 00:11:53,559
+the same graph with the same
+pairs of vertices and
+
+194
+00:11:53,559 --> 00:11:57,905
+we tweak the heuristics inside
+the contraction hierarchy as well.
+
+195
+00:11:57,905 --> 00:12:01,714
+It will work on average just for
+18 milliseconds,
+
+196
+00:12:01,714 --> 00:12:04,839
+which is almost 25000 times faster.
+
+197
+00:12:04,839 --> 00:12:07,733
+So it is very well worth it.
+
+198
+00:12:07,733 --> 00:12:12,017
+For example, for
+a service like Google Maps or Yandex Maps,
+
+199
+00:12:12,017 --> 00:12:16,889
+working 25000 times faster means
+that you actually can provide
+
+200
+00:12:16,889 --> 00:12:21,106
+your service to millions of users and
+do it blazingly fast.
+
+201
+00:12:21,106 --> 00:12:26,240
+And the speed-up will only increase
+if you increase the size of a graph.
+
+202
+00:12:26,240 --> 00:12:31,820
+For example, if you go from the graph of
+Europe to the graph of the whole world,
+
+203
+00:12:31,820 --> 00:12:33,300
+the speed-up will only increase.
+
+204
+00:12:34,680 --> 00:12:36,880
+So now, it seems that we know everything.
+
+205
+00:12:36,880 --> 00:12:40,320
+We know how to preprocess by
+contracted nodes, ordered
+
+206
+00:12:40,320 --> 00:12:44,700
+approximately by their importance and
+we have some importance measure for that.
+
+207
+00:12:44,700 --> 00:12:47,770
+We know how to query using
+bidirectional Dijkstra algorithm.
+
+208
+00:12:48,870 --> 00:12:51,190
+And our importance function is heuristic,
+but
+
+209
+00:12:51,190 --> 00:12:53,880
+works really well on road network graphs.
+
+210
+00:12:55,040 --> 00:12:57,960
+And this algorithm works 1000s
+of times faster than Dijkstra.
+
+211
+00:12:57,960 --> 00:13:02,600
+If you tweak it really well, it can work
+even tens of thousands times faster.
+
+212
+00:13:02,600 --> 00:13:07,390
+But at least 1000s of times faster,
+this is what is guaranteed for
+
+213
+00:13:07,390 --> 00:13:08,610
+your own implementations.
+
+214
+00:13:08,610 --> 00:13:13,005
+You will try to do that in the programming
+assignments of this project for
+
+215
+00:13:13,005 --> 00:13:13,879
+this module.
+
+216
+00:13:13,879 --> 00:13:16,453
+And you will see that your
+solutions are actually much,
+
+217
+00:13:16,453 --> 00:13:18,494
+much faster than the classical algorithm.
+
+218
+00:13:18,494 --> 00:13:23,100
+And you will need them to work
+1000s of times faster to actually
+
+219
+00:13:23,100 --> 00:13:24,671
+pass the assignment.
+
+220
+00:13:24,671 --> 00:13:28,894
+And also, we actually encourage you to
+compete on the forums on whose solutions
+
+221
+00:13:28,894 --> 00:13:29,784
+is the fastest.
+
+222
+00:13:29,784 --> 00:13:34,314
+So you can take the result by the grader
+and then post it on the forums, and
+
+223
+00:13:34,314 --> 00:13:38,120
+someone can organize the result
+table with the top results.
+
+224
+00:13:38,120 --> 00:13:42,728
+And it's very interesting how you can
+come up with your own heuristics for
+
+225
+00:13:42,728 --> 00:13:44,522
+improving this algorithm.
+
+226
+00:13:44,522 --> 00:13:48,931
+Because you see there are a lot of
+heuristics in the last part of this
+
+227
+00:13:48,931 --> 00:13:53,654
+lecture, and you can come up with your
+own ideas and maybe they will be so
+
+228
+00:13:53,654 --> 00:13:59,125
+good that you will speed up everyone
+else's solution 10 times or 100 times.
+
+229
+00:13:59,125 --> 00:14:01,840
+So really try to do that.
+
+230
+00:14:01,840 --> 00:14:05,570
+We will also show you some pointers
+to where you can get the data for
+
+231
+00:14:05,570 --> 00:14:09,570
+real graphs of the road networks of
+some parts of US and the whole US.
+
+232
+00:14:09,570 --> 00:14:13,618
+And in the end, this could become your own
+Open Source project which you could show,
+
+233
+00:14:13,618 --> 00:14:15,572
+for example, to potential employers.
+
+234
+00:14:15,572 --> 00:14:18,854
+So we wish you good luck with
+advanced shortest paths.

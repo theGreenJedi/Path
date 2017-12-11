@@ -1,0 +1,86 @@
+Hi, in this video,
+you will learn Dijkstra's Algorithm, which is an efficient algorithm to find shortest paths from original node in the
+graph to all the nodes in the graph with weighted edges where all
+the weights are non-negative. First, let's improve our intuition. So let's say we're in the node S,
+and this is the origin node. What we know exactly is that the distance
+from this node to itself is 0. We don't need to see
+anything else to decide that because all the edges are non-negative,
+so it's better just to stay in s, and this is the shortest path
+from S to itself, okay? And now, let's look at all
+the edges outgoing of node S. And let's relax all those edges. So now we see that there
+are edges of length 5 and 10, and they go to nodes A and B. And so, we can determine that
+the dist value of A is 5, and the dist value of B
+is 10 after relaxation. Now if there are no more
+edges outgoing from S, we already know that the distance
+from S to A is exactly 5. Because we cannot go around it and
+spend less time. So we're sure about distance for A. So now, let's relax all the edges from A. And we will see that the distance
+to B will improve, and the distance to B becomes 5 plus 3,
+which is just 8. And also, we'll discover two more nodes,
+C and D, and we will relax the edges from A to them. And C will get an estimate of 12
+because it's 5 plus 7, and D will get an estimate of 6, which is 5 plus 1,
+which is the way of edge from A to D. So the question is what
+is the next node for which we already know
+the correct distance for sure? And this node is D. Because it has the smallest
+dist value estimate, and it means that there is
+no way to go around it. We can go directly to it from
+S through A in distance 6, but if we go through any of the other
+nodes, it will take us at least 8 to get there and
+also some non-negative amount after that. So we cannot really improve
+this dist value estimate of 6. So we now know exactly
+the distance to D is 6, and we can continue by
+relaxing edges from D. While for B and C, it is still possible that their dist
+values are larger than actual distances. For example, if there is an edge
+from D to B of length 1, then the dist value of B will
+improve even better, it will be 7. And if we get an edge
+from D to C of length 1, then the distance to C will be just 7,
+also, which is much less than 12. So now we have this intuition
+that at any moment of time, if we have relaxed all the edges outgoing
+from some known set of nodes for which the distances are already known
+correctly, then the node with the smallest dist value estimate is also a node for
+which we know the distance correctly. So, the main idea of
+Dijkstra's Algorithm is that we maintain some set R of vertices for
+which dist value is already set correctly. We call this set R, known region. And initially, we only have node S,
+the region in the set R, because for this node, we definitely
+know that the distance to it is 0. And then on each iteration, we take
+the node outside of this region with a minimum dist value out of all
+nodes in this outside region, and we add this node to the known region and
+relax all the outgoing edges. And so, after a number of iterations, which is equal to the number
+of nodes in the graph, we will know all the correct distances
+from origin to all the nodes in the graph. Let's see how it works in an example. Here, we have six nodes, some edges, and the edge weights are written
+nearby the corresponding edges. And on top of each node,
+and under the bottom nodes, we have the current dist value. So we start with infinities
+in all the nodes, but the origin node to the left,
+which has dist value of 0. Now we add this 0 node to the known
+region, and we now know for sure that the distance from
+the origin to it is 0. And so we color the dist value by green, because we are sure that this is the
+correct distance from origin to this node. And then we color our node in black,
+and we start processing it. So we color nodes in black when we start
+processing them in the same way we did in the breadth-first search. Now relax all the outgoing
+edges from this node. First relax the edge of length 3, and we
+improve the dist value from infinity to 3. And next, we traverse edge of length 10 to improve
+the dist value from infinity to 10. Now what do we know? We know that the node with
+a minimum dist value outside of the known black region is
+the node with dist value of 3. So this node actually has a distance of 3,
+and we color the distance with green and the node with black, and
+we start processing this node. So we process the outgoing edges. First, edge of length 8, which goes
+to the node with distance 10, but new estimate is 3 plus 8,
+which is 11, which is bigger than 10. So, nothing changes because of this edge. And I also have an edge of flag 3, and we
+improve the dist value from infinity to 6. And there is also an edge of flag 5, which improves the dist
+value from infinity to 8. And now, what we see is that the node
+with the minimum dist values, the node in the top right corner,
+which has this value of 6. So we color it with black color and
+the distance with green and process it. This edge gives us improvement
+from infinity to 8. This edge gives us
+improvement from 8 to 7, and this edge gives us
+an improvement from 10 to 9. Now the best node is in the bottom
+to the right and has distance 7. And it improves the distance estimate for
+the right most node from 8 to 7, and notice that there is
+an edge of weight exactly 0. This is allowed because 0 is non-negative. We'll only forbid the edges
+from being negative, but non-negative, including 0, is okay. So now, we don't have any more outgoing edges from
+these nodes to the right and the bottom. And so it's like the next node process, which is the right most node
+with an estimation of 7. But we don't have any outgoing edges from
+it, so we process the last remaining node, which has distance of 9. And we can try to relax some edges,
+but they don't work because this is the farthest
+node from the start. So now we know all the distances from
+the origin to all the nodes in the graph. And this is how Dijkstra's
+algorithm works on this example.

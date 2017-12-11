@@ -1,0 +1,27 @@
+Talking about the performance of A*,
+it can only be seen in practice. It is an empirical algorithm, and it depends on the quality
+of the potential function. And, in the case when this potential
+function gives a lower bound on the distance from the current
+point to the target, which is most often the case,
+we have the following picture. The worst case is if the potential
+function is always equal to zero for all the vertices. This is always feasible
+potential function, but then the algorithm will work
+the same as the Dijkstras algorithm. It will not work better,
+but it will work the same. And the best case, is if your lower
+bound on the distance to the target is always actually equal to the distance
+to the target from the current V. Then, the edge weights will be zero,
+if and only if this edge lies on the shortest
+path to the target vertex. So, it will be very easy to distinguish
+the edges through which you should go, and the edges through
+which you shouldn't go. If the edge has void zero,
+then it leads you to the target. Otherwise, it is not optimal
+to go through this edge. So you only go through the edges with
+void zero, and then you will only visit edges which lie on the shortest
+paths from the source to the target. And so, you will explore the minimum
+possible number of edges at all before getting to the target,
+so this is the best case. And in practice, depending on
+the quality of your lower bound, you'll be somewhere in between. And it can be actually shown that
+the better your lower bounds, the tighter they are, the better will
+be the performance of the A* algorithm. And in the next video,
+we will see how to actually implement a bi-directional version of this A*
+algorithm to improve it even more.

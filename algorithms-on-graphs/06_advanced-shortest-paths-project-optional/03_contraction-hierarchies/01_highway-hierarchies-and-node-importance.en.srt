@@ -1,0 +1,537 @@
+1
+00:00:00,230 --> 00:00:04,560
+Hi, in this last lesson of
+the Advanced Shortest Paths module,
+
+2
+00:00:04,560 --> 00:00:07,020
+we will study the contraction
+hierarchies algorithm.
+
+3
+00:00:08,180 --> 00:00:11,770
+In the previous lessons, we've learned
+the idea of bidirectional search.
+
+4
+00:00:11,770 --> 00:00:15,741
+And we've studied the bidirectional
+Dijkstra's algorithm,
+
+5
+00:00:15,741 --> 00:00:20,604
+which can be thousands of times faster
+when applied to social network drafts.
+
+6
+00:00:20,604 --> 00:00:26,053
+However, for road networks, it typically
+gives just roughly 2x speedup.
+
+7
+00:00:26,053 --> 00:00:30,934
+And in this lecture, we'll start an
+algorithm that gives much better speedup,
+
+8
+00:00:30,934 --> 00:00:32,739
+thousands of times and more.
+
+9
+00:00:32,739 --> 00:00:35,830
+And the idea for
+such speedup is the following.
+
+10
+00:00:35,830 --> 00:00:39,630
+Long-distance trips go
+mostly through highways.
+
+11
+00:00:39,630 --> 00:00:44,510
+For example, if you consider this
+long trip by car from San Francisco
+
+12
+00:00:44,510 --> 00:00:49,000
+to New York, and if you look at
+the navigational directions,
+
+13
+00:00:49,000 --> 00:00:53,000
+then you'll see that basically,
+you need to first merge into the highway.
+
+14
+00:00:53,000 --> 00:00:58,110
+Then you need to merge from that highway
+into a bigger interstate highway,
+
+15
+00:00:58,110 --> 00:01:02,940
+go through it, then exit to a smaller
+highway, and then exit to a street, and
+
+16
+00:01:02,940 --> 00:01:04,830
+then get to your address.
+
+17
+00:01:04,830 --> 00:01:06,730
+And this is the general case.
+
+18
+00:01:06,730 --> 00:01:10,560
+When you need to get from some point A to
+point B, you need to first merge from
+
+19
+00:01:10,560 --> 00:01:15,440
+streets to a highway, then merge from
+there into an even bigger highway,
+
+20
+00:01:15,440 --> 00:01:19,170
+and repeat that maybe several times,
+and then start exiting.
+
+21
+00:01:19,170 --> 00:01:22,700
+You exit to a smaller highway,
+then to an even smaller highway,
+
+22
+00:01:22,700 --> 00:01:25,170
+and then exit to your street,
+and then go to your address.
+
+23
+00:01:26,360 --> 00:01:29,793
+And so less important roads
+merge into more important roads.
+
+24
+00:01:29,793 --> 00:01:34,972
+And there is some kind of hierarchy of
+those roads, which is obvious to humans.
+
+25
+00:01:34,972 --> 00:01:38,140
+But we don't know that hierarchy
+when we're given the graph.
+
+26
+00:01:39,160 --> 00:01:45,650
+So the idea is to use the structure of the
+shortest paths in the real road networks.
+
+27
+00:01:45,650 --> 00:01:51,390
+And this will allow us to actually
+avoid scanning many small roads,
+
+28
+00:01:51,390 --> 00:01:55,175
+many not important vertices in the graph.
+
+29
+00:01:55,175 --> 00:01:58,790
+because if you go from San Francisco to
+New York, then most probably you don't
+
+30
+00:01:58,790 --> 00:02:03,740
+need to go through small streets
+somewhere in Las Vegas or Chicago.
+
+31
+00:02:03,740 --> 00:02:07,130
+Most of the way,
+you'll be going through a big highway.
+
+32
+00:02:07,130 --> 00:02:10,940
+And you won't go into small streets
+in the middle of your trip.
+
+33
+00:02:12,620 --> 00:02:17,570
+And there are algorithms which are based
+on this idea, Highway Hierarchies and
+
+34
+00:02:17,570 --> 00:02:20,470
+Transit Node Routing by Sanders and
+Schultes.
+
+35
+00:02:20,470 --> 00:02:25,040
+And transit node routing is one of
+the fastest known algorithms for
+
+36
+00:02:25,040 --> 00:02:27,850
+shorter paths in real road networks.
+
+37
+00:02:27,850 --> 00:02:32,090
+They can be millions of times faster
+than the classical Dijkstra algorithm.
+
+38
+00:02:32,090 --> 00:02:33,918
+But those algorithms are pretty complex.
+
+39
+00:02:33,918 --> 00:02:38,179
+And in this lecture, we'll study
+the contraction hierarchies algorithm,
+
+40
+00:02:38,179 --> 00:02:41,928
+which is at least thousands of times and
+more faster than Dijkstra.
+
+41
+00:02:41,928 --> 00:02:43,490
+But it is pretty simple, and
+
+42
+00:02:43,490 --> 00:02:47,790
+you will be able to implement it as
+part of the project of this module.
+
+43
+00:02:47,790 --> 00:02:50,500
+And you will be even
+able to play with it and
+
+44
+00:02:50,500 --> 00:02:55,860
+implement different, your own ideas and
+heuristics to improve it even further.
+
+45
+00:02:58,700 --> 00:03:01,770
+So the idea of the contraction
+hierarchies algorithm
+
+46
+00:03:01,770 --> 00:03:04,350
+is to order the nodes by importance.
+
+47
+00:03:04,350 --> 00:03:09,350
+Instead of ordering the highways by
+their importance, we order the nodes.
+
+48
+00:03:09,350 --> 00:03:13,650
+And the idea is that the importance
+of the nodes on your
+
+49
+00:03:13,650 --> 00:03:18,530
+shortest path should first increase and
+then decrease back.
+
+50
+00:03:18,530 --> 00:03:19,680
+And for example,
+
+51
+00:03:19,680 --> 00:03:24,300
+these could be points where a highway
+merges into another highway.
+
+52
+00:03:24,300 --> 00:03:30,754
+And it can't really get away
+without passing through this node.
+
+53
+00:03:30,754 --> 00:03:35,102
+And then if this is true that
+the importance first increases and
+
+54
+00:03:35,102 --> 00:03:39,863
+then decreases back, we can use
+bidirectional search from source to
+
+55
+00:03:39,863 --> 00:03:43,079
+the most important node
+on our shortest path.
+
+56
+00:03:43,079 --> 00:03:44,467
+This is a forward search.
+
+57
+00:03:44,467 --> 00:03:48,844
+And then from the target to the most
+important node on our shortest path,
+
+58
+00:03:48,844 --> 00:03:50,507
+this is a backward search.
+
+59
+00:03:50,507 --> 00:03:54,712
+And then when they meet in the common
+middle point which has the biggest
+
+60
+00:03:54,712 --> 00:03:59,360
+importance on the path, then we have
+the path between source and the target.
+
+61
+00:04:01,750 --> 00:04:06,060
+So the idea is about which nodes
+are important, which are not.
+
+62
+00:04:07,380 --> 00:04:10,599
+First, many shortest paths
+involve important nodes.
+
+63
+00:04:10,599 --> 00:04:14,920
+If you look at this map of the US,
+you will see that there are many,
+
+64
+00:04:14,920 --> 00:04:17,841
+many big routes coming
+out from big cities.
+
+65
+00:04:17,841 --> 00:04:19,440
+And that's no coincidence.
+
+66
+00:04:19,440 --> 00:04:23,930
+And as most of the shortest paths,
+which are long-distance
+
+67
+00:04:23,930 --> 00:04:28,020
+go through these big roads,
+they also go through these big cities.
+
+68
+00:04:28,020 --> 00:04:31,854
+So big cities are important nodes.
+
+69
+00:04:31,854 --> 00:04:36,637
+And many shortest paths go
+through those important nodes.
+
+70
+00:04:36,637 --> 00:04:40,866
+Another idea is that the important
+nodes are somewhat spread around.
+
+71
+00:04:40,866 --> 00:04:45,163
+Because in each region of the map,
+we have some big cities and
+
+72
+00:04:45,163 --> 00:04:48,953
+capital of the state or
+some bigger city in the state,
+
+73
+00:04:48,953 --> 00:04:54,445
+which is important node, such that many
+shortest paths again go through it.
+
+74
+00:04:54,445 --> 00:04:58,869
+It can't just have one single important
+node, and everything else is unimportant.
+
+75
+00:04:58,869 --> 00:05:03,095
+You always have them spread
+out through all the map.
+
+76
+00:05:03,095 --> 00:05:07,910
+And another thing is that important nodes
+are sometimes completely unavoidable.
+
+77
+00:05:07,910 --> 00:05:13,807
+For example, for many, many different
+source points in San Francisco
+
+78
+00:05:13,807 --> 00:05:19,898
+on the left shore and for many target
+points in Oakland on the right shore,
+
+79
+00:05:19,898 --> 00:05:25,203
+there is no other way to get from
+the source to this target via some
+
+80
+00:05:25,203 --> 00:05:30,145
+shortest path and
+bypass this Treasure Island in between.
+
+81
+00:05:30,145 --> 00:05:34,094
+And so this Treasure Island
+node is very important
+
+82
+00:05:34,094 --> 00:05:38,615
+because you cannot just avoid
+it with the shortest path.
+
+83
+00:05:38,615 --> 00:05:43,250
+And the contraction hierarchies algorithm
+uses this scheme of shortest paths with
+
+84
+00:05:43,250 --> 00:05:44,300
+preprocessing.
+
+85
+00:05:44,300 --> 00:05:46,930
+When you don't just get a graph, and
+
+86
+00:05:46,930 --> 00:05:52,660
+then instantly start to answer queries,
+how long does it take to get from A to B?
+
+87
+00:05:52,660 --> 00:05:56,950
+Now instead you first get the graph and
+you get some time to preprocess it.
+
+88
+00:05:56,950 --> 00:05:58,350
+It can be a long process.
+
+89
+00:05:58,350 --> 00:06:00,710
+It can take a few hours or even days.
+
+90
+00:06:00,710 --> 00:06:03,660
+But then when you're ready, and you've
+saved the results of your preprocessing,
+
+91
+00:06:03,660 --> 00:06:09,180
+you can answer the queries for
+distance and shortest paths much faster.
+
+92
+00:06:09,180 --> 00:06:11,190
+And you work with this
+preprocessed graph to do that.
+
+93
+00:06:11,190 --> 00:06:12,830
+And this is a very practical case.
+
+94
+00:06:12,830 --> 00:06:16,938
+For example in Google Maps or
+in Yanix Maps, that's what people do.
+
+95
+00:06:16,938 --> 00:06:19,060
+They first preprocess the graph.
+
+96
+00:06:19,060 --> 00:06:23,210
+And then they push the preprocessed
+graph and the algorithm into production.
+
+97
+00:06:23,210 --> 00:06:27,765
+And then they can answer your
+queries millions of times faster
+
+98
+00:06:27,765 --> 00:06:29,698
+without you noticing it.
+
+99
+00:06:29,698 --> 00:06:34,587
+And it doesn't matter that we have to
+spend a few hours or a few days before
+
+100
+00:06:34,587 --> 00:06:39,576
+pushing the graph into production
+because it happens behind the scenes.
+
+101
+00:06:39,576 --> 00:06:43,724
+And so the general schema is that you
+prerpocess the graph then implement
+
+102
+00:06:43,724 --> 00:06:49,290
+a special algorithm to find distance and
+shortest path in this preprocessed graph.
+
+103
+00:06:49,290 --> 00:06:53,290
+And then you reconstruct the shortest
+path in the initial graph and
+
+104
+00:06:53,290 --> 00:06:54,540
+show it to the user somehow.
+
+105
+00:06:55,740 --> 00:07:00,440
+In the next videos, we will first
+study how the preprocessing works for
+
+106
+00:07:00,440 --> 00:07:02,110
+the contraction hierarchies.
+
+107
+00:07:02,110 --> 00:07:06,900
+Then we'll study how to implement
+the distance and shortest path queries.
+
+108
+00:07:06,900 --> 00:07:09,930
+We'll prove the correctness
+of the overall algorithm.
+
+109
+00:07:09,930 --> 00:07:14,270
+And we'll point out some very important
+optimizations of this algorithm.
+
+110
+00:07:14,270 --> 00:07:18,413
+And in the end, we will understand
+how we can actually measure
+
+111
+00:07:18,413 --> 00:07:22,158
+the importance of the nodes
+that this algorithm uses and
+
+112
+00:07:22,158 --> 00:07:25,754
+how to implement this
+importance in your algorithm.

@@ -1,0 +1,449 @@
+1
+00:00:00,220 --> 00:00:00,827
+Hi.
+
+2
+00:00:00,827 --> 00:00:04,008
+In the previous video,
+you've learned the A* algorithm.
+
+3
+00:00:04,008 --> 00:00:08,166
+Which is an optimization of the regular
+Dijkstra shortest path algorithm using
+
+4
+00:00:08,166 --> 00:00:10,590
+additional information.
+
+5
+00:00:10,590 --> 00:00:14,910
+In the previous lesson, you've learned
+that you can use a bidirectional search
+
+6
+00:00:14,910 --> 00:00:17,200
+to optimize Dijkstra's algorithm.
+
+7
+00:00:17,200 --> 00:00:21,878
+Now, we're going to join those two ideas
+to optimize the A* algorithm further.
+
+8
+00:00:21,878 --> 00:00:25,603
+And to get the bidirectional A* algorithm.
+
+9
+00:00:25,603 --> 00:00:30,308
+So bidirectional A* algorithm is basically
+the same as Bidirectional Dijkstra.
+
+10
+00:00:30,308 --> 00:00:32,369
+But with the use of potentials.
+
+11
+00:00:32,369 --> 00:00:35,750
+So now we need two potential functions.
+
+12
+00:00:35,750 --> 00:00:39,246
+One potential function pi
+f(v) estimates the distance
+
+13
+00:00:39,246 --> 00:00:41,588
+from the current point to the target.
+
+14
+00:00:41,588 --> 00:00:43,180
+This is needed for the forward search.
+
+15
+00:00:44,190 --> 00:00:45,990
+But also we need an estimation for
+
+16
+00:00:45,990 --> 00:00:49,500
+the backward search using Dijkstra's
+algorithm from the target.
+
+17
+00:00:49,500 --> 00:00:51,740
+So we need another potential pi r(v).
+
+18
+00:00:51,740 --> 00:00:56,360
+Which estimates the distance from
+the source to the vertex, v.
+
+19
+00:00:57,620 --> 00:01:01,360
+Now we have a problem because,
+under these two potentials,
+
+20
+00:01:01,360 --> 00:01:02,810
+we can have different edge weights.
+
+21
+00:01:02,810 --> 00:01:08,230
+Because the new edge weight
+according to pi f is the initial
+
+22
+00:01:08,230 --> 00:01:11,400
+edge weight minus potential
+of u plus potential of v.
+
+23
+00:01:12,530 --> 00:01:17,820
+And the new edge weight under the reverse
+potential is the initial weight
+
+24
+00:01:17,820 --> 00:01:22,360
+minus potential of v plus potential of u.
+
+25
+00:01:22,360 --> 00:01:25,510
+And we need these two variables
+to be actually equal.
+
+26
+00:01:25,510 --> 00:01:29,150
+Because in our
+Bidirectional Dijkstra's algorithm.
+
+27
+00:01:29,150 --> 00:01:32,250
+We use the fact that we're
+going through the same graph.
+
+28
+00:01:32,250 --> 00:01:35,470
+But just in different directions,
+forward and backward.
+
+29
+00:01:35,470 --> 00:01:40,010
+But for it to work correctly,
+we need the fact that
+
+30
+00:01:40,010 --> 00:01:45,630
+the edges have the same weight going in
+forward direction or backward direction.
+
+31
+00:01:45,630 --> 00:01:47,960
+So, how to solve this problem?
+
+32
+00:01:47,960 --> 00:01:54,810
+So we need that l pi f (u,
+v) = l pi r of (u, v).
+
+33
+00:01:54,810 --> 00:02:00,295
+And if we rewrite by definition,
+we will see that this is equivalent
+
+34
+00:02:00,295 --> 00:02:05,350
+to having pi f(u) + pi
+r(u) = pi f(v) + pi r(v).
+
+35
+00:02:05,350 --> 00:02:09,790
+For any pair of vertices
+connected by an edge.
+
+36
+00:02:09,790 --> 00:02:13,199
+Actually, we can make
+an even stronger claim.
+
+37
+00:02:13,199 --> 00:02:18,790
+That we need a constant value
+of pi f(u) + pi r(u) for any u.
+
+38
+00:02:18,790 --> 00:02:24,546
+If this is true, then, of course, for
+any two different vertices u and v.
+
+39
+00:02:24,546 --> 00:02:29,373
+pi f(u) + pi r(u) = pi f(v) + pi r(v).
+
+40
+00:02:29,373 --> 00:02:32,956
+And then all the edge weights
+will be equal both in forward and
+
+41
+00:02:32,956 --> 00:02:34,370
+backward directions.
+
+42
+00:02:35,570 --> 00:02:40,109
+And the solution for this is to
+take any feasible potential, pi f,
+
+43
+00:02:40,109 --> 00:02:41,821
+for the forward search.
+
+44
+00:02:41,821 --> 00:02:46,043
+Take any feasible potential function for
+the reverse search.
+
+45
+00:02:46,043 --> 00:02:50,192
+And then create new potential functions.
+
+46
+00:02:50,192 --> 00:02:55,600
+pf(u) = half the difference of
+the forward and backward potential.
+
+47
+00:02:55,600 --> 00:03:01,730
+And the reverse potential, pr(u), is just
+=- the potential for the forward search.
+
+48
+00:03:02,840 --> 00:03:05,157
+If we pick such potentials,
+
+49
+00:03:05,157 --> 00:03:09,899
+then the sum of pf(u) and
+pr(u) will be equal for any u.
+
+50
+00:03:09,899 --> 00:03:11,959
+So this will be constant.
+
+51
+00:03:11,959 --> 00:03:16,020
+And the only thing that we
+need to prove is that these
+
+52
+00:03:16,020 --> 00:03:18,600
+potentials are both feasible.
+
+53
+00:03:18,600 --> 00:03:21,550
+The forward one is feasible for
+the forward direction.
+
+54
+00:03:21,550 --> 00:03:25,910
+And the reverse one is feasible for
+the backwards direction.
+
+55
+00:03:25,910 --> 00:03:29,761
+We will prove this for the forward
+direction and for the reverse direction.
+
+56
+00:03:29,761 --> 00:03:31,350
+It is just symmetric.
+
+57
+00:03:32,520 --> 00:03:36,290
+So Lemma states that if pi f is
+feasible potential for forward search.
+
+58
+00:03:36,290 --> 00:03:39,520
+And pi r is a feasible potential for
+the reverse search.
+
+59
+00:03:39,520 --> 00:03:43,240
+Then their half difference is a feasible
+potential for forward search.
+
+60
+00:03:45,490 --> 00:03:46,430
+Let's prove this.
+
+61
+00:03:46,430 --> 00:03:49,272
+First, we know that pi f
+is a feasible potential.
+
+62
+00:03:49,272 --> 00:03:53,529
+And so for any edge, (u, v),
+length of this edge minus
+
+63
+00:03:53,529 --> 00:03:58,070
+potential of u plus potential
+of v is greater equal to the 0.
+
+64
+00:03:59,340 --> 00:04:05,340
+Also, we know that pi r is a feasible
+potential for the backwards search.
+
+65
+00:04:05,340 --> 00:04:11,064
+And so the length of this edge minus
+potential of the ending vertex, now, v.
+
+66
+00:04:11,064 --> 00:04:15,690
+Plus the pi r(u) is also greater or
+equal than 0.
+
+67
+00:04:15,690 --> 00:04:21,624
+Notice that, in the first line,
+we subtract by f(u) and add pi f(v).
+
+68
+00:04:21,624 --> 00:04:25,583
+And in the second line, we subtract,
+
+69
+00:04:25,583 --> 00:04:30,176
+vice versa, pi r(v) and we add pi r(u).
+
+70
+00:04:30,176 --> 00:04:32,679
+This important.
+
+71
+00:04:32,679 --> 00:04:35,839
+Now, we can sum up those inequalities.
+
+72
+00:04:35,839 --> 00:04:40,275
+And we'll get the 2l of the edge
+
+73
+00:04:40,275 --> 00:04:45,366
+from u to v -pi f(u)- pi r(u) and
+
+74
+00:04:45,366 --> 00:04:48,990
++ pi f(v)- pi r(v).
+
+75
+00:04:48,990 --> 00:04:52,730
+All this is greater than or equal to 0.
+
+76
+00:04:52,730 --> 00:04:56,463
+Now, if we divide these inequality by 2.
+
+77
+00:04:56,463 --> 00:05:03,170
+We'll get that the length of the edge
+minus half difference of potentials on u.
+
+78
+00:05:03,170 --> 00:05:07,800
+Plus half difference of potentials
+on v is more than or equal to 0.
+
+79
+00:05:07,800 --> 00:05:12,870
+And this means that the potential,
+which is pf.
+
+80
+00:05:12,870 --> 00:05:18,325
+Which is half the difference between pi f
+and pi r, is a feasible potential, indeed.
+
+81
+00:05:19,465 --> 00:05:23,245
+Now that we've proven our Lemma,
+we have a very useful tool.
+
+82
+00:05:23,245 --> 00:05:26,302
+If we have some kind of graphs
+with additional information for
+
+83
+00:05:26,302 --> 00:05:28,312
+which we have good potential function.
+
+84
+00:05:28,312 --> 00:05:32,655
+You can first take the graph with
+its regular potential function.
+
+85
+00:05:32,655 --> 00:05:34,565
+Then we can reverse the graph.
+
+86
+00:05:34,565 --> 00:05:37,265
+Take the potential function for
+the reverse graph.
+
+87
+00:05:37,265 --> 00:05:41,690
+And then we can combine those two
+potentials into new potentials.
+
+88
+00:05:41,690 --> 00:05:47,250
+Which lead to equal edge weights under
+both forward and backward search.
+
+89
+00:05:47,250 --> 00:05:51,880
+And it allows us to launch
+bidirectional A* algorithm
+
+90
+00:05:51,880 --> 00:05:55,130
+as Bidirectional Dijkstra
+with potentials algorithm.
+
+91
+00:05:55,130 --> 00:05:57,600
+And it will be the best of both worlds.
+
+92
+00:05:57,600 --> 00:06:01,550
+It will be both bidirectional and
+directed surge.
+
+93
+00:06:01,550 --> 00:06:07,059
+And so it will work probably faster than
+both the just Bidirectional Dijkstra.
+
+94
+00:06:07,059 --> 00:06:11,514
+And adjusted A* based on
+regular Dijkstra's algorithm.
+
+95
+00:06:11,514 --> 00:06:15,139
+The question which is left is,
+where to get those potentials?
+
+96
+00:06:15,139 --> 00:06:16,731
+And in the next videos,
+
+97
+00:06:16,731 --> 00:06:21,916
+we will discuss some of the examples of
+where we can get good potentials from.

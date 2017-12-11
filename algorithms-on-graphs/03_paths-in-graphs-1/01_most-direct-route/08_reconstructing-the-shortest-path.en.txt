@@ -1,0 +1,38 @@
+How do we reconstruct the shortest
+path given the shortest path tree? So, the nice property of the shortest
+path tree is that it somehow contains all of the shortest paths
+from the origin to all the nodes. Why is that? Because if we go by edge
+of the shortest path tree, we decrease the distance exactly by what? So if we start with some node, and go by edges of shortest path tree
+by directed edges one by one. We will each time decrease
+the distance by one. And so it means that if
+the distance to the node was D, then exactly after D steps,
+we will end up in the origin node. Because we will be at distance zero. So, we will make D steps. We will have a path of length D, where D is the shortest path
+length from S to this node. So we'll have the shortest path itself
+because its length is the same as distance to this node. So what do we need to do in the code? We write down the procedure
+reconstruct path, which takes in the origin node as the node U for
+which we need to construct the path, and the prev,
+which BFS procedure builds for us. And the results variable
+will store the path itself. So we will start with an empty path. And then, we'll go back from
+node U until we come to node S. So we start with our node U, and
+while it is not yet equal to S. We append it to the shortest path, and then we go by the edge of the shortest
+path tree by assigning prev of U to U. And the we repeat, repeat,
+repeat it until we come to node S. And U will be equal to S, and
+our while loop will start. By this time, we have the shortest path
+from S to U in the result variable, but for one thing. It is in the reverse order so
+we have first the And note which is U. Then we have the prev of U,
+then prev of prev of U, and so on up to S. So the path is in the reverse order. So to return the actual shortest
+path from origin to node U. We need to reverse this path and
+then, we return the result. So of course this procedure works fast,
+it only needs amount of steps which is equal to
+the distance from node S to node U. Which is definitely less than or equal to
+number of nodes in the graph for example. But in most cases,
+it will be even less than that. So in conclusion, we can now find
+the minimum number of flight segments to get from one city to another, if we have the graph of cities and
+available flights between them. We can also not only find
+this number of flights. But we can actually reconstruct
+the optimal path between some city and another city. For example, you can go from Moscow to San Diego in
+the minimum number of flight segments. And we also can build the tree of
+all shortest paths from one origin. So we not only can build a shortest path
+from one node to another, but we actually can build all the shortest paths from
+one node to all the nodes in the graph. And all this works in time for personal to number of edges plus
+number of nodes in the graph.

@@ -1,0 +1,107 @@
+Hi. In this video, we will implement
+the Breadth-first Search algorithm from the previous video and
+analyze it's running time. Let's look at this pseudocode. The procedure of BFS is called
+after Breadth-first Search and it takes graph G and
+origin node S as input parameters. It also uses array dist to
+store the distances from the original node S to
+all nodes in the graph. It can be not an array,
+it can be a map from nodes to distances, depending on what are your nodes. If your nodes are numbered from 0 to
+n minus 1, then it will probably be convenient to use an array of size n
+to store distances for those nodes. But if your nodes are labeled with
+some strings or some other objects, then it maybe wise to use a map
+from nodes to distances and call this data structure dist. Anyway, we'll use this dist data
+structure to store our estimations of distances from origin to
+all the nodes in the graph. And we initialize all these distances with
+infinity, with the exception of the node as itself, which gets an estimation
+of 0 from the beginning. And we will also use another data
+structure Q, which is a queue, the data structure which works in
+the principle of first in, first out. So the first element that goes into the queue is the first
+element that goes out of the queue. And we initialize this Q with just
+one element, the origin node S. And this symbolizes that we already
+discovered node S and put it in the queue. So all the discovered nodes
+are those which are in the queue. All of the nodes which
+haven't been in the queue yet are white nodes which
+are not discovered yet. And the black nodes, in the terms
+of the example I showed you before, are those nodes which are already
+out from the queue and are being processed or
+have been processed before. And we will take nodes from Q one by one,
+process them, discover new nodes and put new
+discovered nodes back into the queue. So we'll start with Q initialized
+with only starting node S. And while this Q is not empty, we take the first element
+from it using method dequeue. So we get it to variable u. So, this is the first node in the queue,
+and we start processing it. And to start processing it, we triggers all the edges outgoing
+from this node u in the graph. So we have a for loop for all edges (u,v)
+in the set of edges of the graph and this means that we traverse all the edges
+which have starting nodes u and some other node as it's end. And we'll look at node v and
+now we need to determine whether this node is already discovered and
+maybe already processed or not. And to determine that,
+we'll use our dist values. So if dist value of the node is infinity,
+then it means that this node hasn't been discovered yet,
+because as soon as it will be discovered, we will change the estimation of the
+distance to it and it will becomes finite. While it is still infinite, it means
+that the node hasn't been discovered. And vice versa, if dist Is finite,
+then we have discovered this node already. So if this node was discovered previously,
+then we don't need to do anything with it. This is a red edge. And we don't do anything
+with a red edge from our currently processing node to
+the node which was discovered earlier. But if the edge is to a white node
+which was not discussed previously, we need to process this edge. And by processing it we first
+discover the end of this edge v and we do that by calling enqueue, so
+adding these v to the end of the queue. And we'll also change the estimate
+of the distance to this node v and we set it to distance to
+the current node plus one. Because we know that when we process
+a node from somewhere, some of the edges are red because they go to the same
+layer of or one of the previous layers. But the edges that go to the undiscovered
+nodes go to the next layer. So the distance to v is equal
+to distance to u plus 1. And we repeat and repeat this process
+while our queue is not empty. And we need to make a few notes. First, this infinity thing. Of course, in a real programming language,
+there won't be any infinity, so you will have to use
+something special for that. One variant is to estimate what
+is the maximum possible distance from origin node to any nodes
+in the graph, and just use a constant value or some computable value
+which is definitely bigger than that. For example, distance from origin
+cannot be bigger than the number of nodes in the graph,
+because every path without cycles inside it will have, at most,
+a number of nodes minus 1 edges. Or you can just say that it is not bigger
+than the number of edges in the graph. Because you won't use the same edge twice
+in the shortest path from origin node to your node. So anyway,
+[COUGH] you can assign infinity to number of nodes plus 1 or number of
+edges plus 1 or some other big value. And another thing you can do is you just,
+instead of using integer numbers for storing distances, you create a special
+structure which has two fields. One of them is distance if is determined. And another field is just a boolean field,
+which tells you whether the distance is defined or it is still not defined,
+and then this means infinity. And another note is that why
+this algorithm even stops. And the key observation is that we
+only put a node into the queue once, because as soon as we put this
+node in the queue, we enqueue it, we also change the estimation of distance
+to this node and it becomes finite. And so one, we will try to pull it in
+the queue next time, we will compare the distance to it with infinity and
+it won't be equal to infinity. So we won't put node into the queue again. And it means that we put at most number of
+nodes in the graph, elements in the queue. And on each step of the while loop, we take some node out of this queue,
+so its size decreases. So it can increase at most number
+of nodes in the graph times and it decreases in each steps. So, this means that these others
+definitely stops and it definitely stops after at most number of nodes in the graph
+steps of the external while loop. Now let's estimate the running time
+of this algorithm more precisely. I state that the running time of
+breadth-first search is proportional to the number of edges plus
+number of nodes in the graph. Why is that? First we've already discovered that
+each vertex, each node of the graph, is enqueued at most once. So the number of iterations
+of the external while loop is at most number of nodes of the graph. Another observation is that each
+edge is examined either once for directed graphs, or
+twice for undirected graphs. Why is that? Well, the edge is examined when
+one of its ends is processed. The node, which is one of its ends,
+is processed. And if the graph is directed, then the edge is actually examined
+only if it's start is processed. And if the graph is undirected,
+then for each of its nodes, the edge is examined when
+this end is processed. Of course, this edge will work and discover a new node at most once out
+of those two times it is examined. But still it will be examined
+twice from both ends. And of course, if the edge is not
+connected to the original node, it won't be examined at all. But we say that each edge in any case
+will be processed at most twice. And what it means is that the total
+number of iterations of the internal for loop is, at most,
+number of edges of the graph. And so adding those up and
+adding the constant number of operations in the start and adding the
+initialization of the dist values which goes in time proportional to the number
+of nodes of the graph, in total, we got number of edges plus
+number of nodes in the graph. And in the next video we will prove that
+breadth-first search actually returns correct distances to all
+the nodes from the origin node.

@@ -1,0 +1,609 @@
+1
+00:00:00,280 --> 00:00:04,780
+Hi, in this video, I'll will prove that
+the algorithm suggested in the previous
+
+2
+00:00:04,780 --> 00:00:09,110
+video for finding the distance between
+two nodes in the augmented graph
+
+3
+00:00:09,110 --> 00:00:10,760
+always returns correct result.
+
+4
+00:00:12,360 --> 00:00:15,860
+First, let's formally
+define the augmented graph.
+
+5
+00:00:15,860 --> 00:00:20,250
+So augmented graph G+,
+has the same set of nodes,
+
+6
+00:00:21,560 --> 00:00:27,580
+V, and has the augmented set of edges, E+,
+which contains all the initial edges E of
+
+7
+00:00:27,580 --> 00:00:31,810
+the graph G along with all the shortcuts
+added at the pre-processing stage.
+
+8
+00:00:33,330 --> 00:00:37,970
+And the lemma states that the distance,
+d+(s,t) between any two nodes s and
+
+9
+00:00:37,970 --> 00:00:39,590
+t in the augmented graph.
+
+10
+00:00:39,590 --> 00:00:44,030
+Is equal to the distance between
+the same nodes in the initial graph.
+
+11
+00:00:44,030 --> 00:00:45,470
+And note that this makes sense,
+
+12
+00:00:45,470 --> 00:00:49,620
+because actually the only thing we
+are doing is we are adding shortcuts.
+
+13
+00:00:49,620 --> 00:00:52,605
+And those shortcuts are not shorter then
+
+14
+00:00:52,605 --> 00:00:55,785
+the path which was initially
+between those two nodes.
+
+15
+00:00:55,785 --> 00:00:59,895
+Just has the same length
+as the path through
+
+16
+00:00:59,895 --> 00:01:02,525
+the contracted node V
+in the initial graph.
+
+17
+00:01:02,525 --> 00:01:07,515
+So, always when we add the shortcut,
+we don't do anything but the path.
+
+18
+00:01:07,515 --> 00:01:12,020
+But, more formally, first thing to know
+is that edges are only added to G.
+
+19
+00:01:12,020 --> 00:01:14,540
+So, if there was some shortest
+path between s and t and
+
+20
+00:01:14,540 --> 00:01:17,870
+G, it will also be present in G+.
+
+21
+00:01:17,870 --> 00:01:23,870
+And so distance in the augmented graph is,
+at most, distance in the initial graph.
+
+22
+00:01:23,870 --> 00:01:27,780
+But also,
+if we add some shortcut from u to w,
+
+23
+00:01:27,780 --> 00:01:33,520
+then at that moment there was a path
+from u to w through v of length
+
+24
+00:01:33,520 --> 00:01:36,510
+of the h from u to v plus
+length of the h from v to w.
+
+25
+00:01:36,510 --> 00:01:40,500
+But this is equal actually to
+the length of the shortcut edit.
+
+26
+00:01:41,590 --> 00:01:46,860
+So, there was a path before adding
+this shortcut from u to w through v.
+
+27
+00:01:46,860 --> 00:01:51,000
+So, if there is some
+shortest path from s to t,
+
+28
+00:01:51,000 --> 00:01:56,239
+going through this edge (u,w)
+in the augmented graph.
+
+29
+00:01:56,239 --> 00:02:01,620
+Then in the initial graph there
+was a path going from s to u,
+
+30
+00:02:01,620 --> 00:02:08,338
+then from u to v, from v to w and then
+from w to t, which has the same length.
+
+31
+00:02:08,338 --> 00:02:12,270
+So there is a path of the same
+length in the initial graph.
+
+32
+00:02:12,270 --> 00:02:17,090
+And so the distance in the augmented
+graph is the same as the distance
+
+33
+00:02:17,090 --> 00:02:18,397
+in the initial graph.
+
+34
+00:02:18,397 --> 00:02:24,360
+Now [COUGH] let's also define the rank
+of vertex, which is the position
+
+35
+00:02:24,360 --> 00:02:30,730
+of this vertex In the node order
+returned by the pre-processing stage.
+
+36
+00:02:30,730 --> 00:02:33,780
+So, basically,
+it's the importance of the node.
+
+37
+00:02:33,780 --> 00:02:38,080
+So, if our node was constructed first,
+it has rank one.
+
+38
+00:02:38,080 --> 00:02:42,510
+If it was constructed last, it has rank n,
+where n is the number of nodes.
+
+39
+00:02:42,510 --> 00:02:45,774
+And the higher the rank,
+the more important is the node,
+
+40
+00:02:45,774 --> 00:02:47,475
+the later it was contracted.
+
+41
+00:02:49,448 --> 00:02:54,210
+Also, lets denote increasing and
+decreasing path in the augmented graph.
+
+42
+00:02:55,440 --> 00:03:03,260
+So a path is increasing ff the ranks of
+the nodes of this path in order increase.
+
+43
+00:03:03,260 --> 00:03:09,670
+And also it is decreasing, again, if the
+ranks of the nodes in this path decrease.
+
+44
+00:03:10,820 --> 00:03:15,510
+And what we want to say is this lemma,
+that for any source and
+
+45
+00:03:15,510 --> 00:03:19,720
+target there is a shortest
+path in the augmented graph.
+
+46
+00:03:20,790 --> 00:03:23,740
+Which is first increasing and
+then decreasing.
+
+47
+00:03:23,740 --> 00:03:28,520
+So, it contains two halfs and the first
+half is a path which is increasing,
+
+48
+00:03:28,520 --> 00:03:31,070
+the second half is a path
+which is decreasing and
+
+49
+00:03:31,070 --> 00:03:32,890
+those two halfs meet in some node V.
+
+50
+00:03:34,370 --> 00:03:38,000
+This is a Justification of
+our Bidirectional Search,
+
+51
+00:03:38,000 --> 00:03:42,720
+which goes only through edges,
+which are going upwards.
+
+52
+00:03:42,720 --> 00:03:47,943
+So the fourth search goes through
+edges upwards to V, and the backwards
+
+53
+00:03:47,943 --> 00:03:54,400
+search goes from target through backward
+edges, which go upwards, also to V.
+
+54
+00:03:54,400 --> 00:03:58,590
+And then they meet, and if we prove
+that there is always the shortest path
+
+55
+00:03:58,590 --> 00:04:03,650
+of this form, then our algorithm from
+the previous video works correctly.
+
+56
+00:04:03,650 --> 00:04:05,240
+Now let's prove it.
+
+57
+00:04:05,240 --> 00:04:08,600
+But first,
+let's look at this proof of the idea.
+
+58
+00:04:08,600 --> 00:04:13,430
+So again,
+we draw here nodes such that nodes
+
+59
+00:04:13,430 --> 00:04:16,810
+in the bottom are less important
+than the nodes in the top.
+
+60
+00:04:17,850 --> 00:04:21,930
+And want to prove that for
+any source as in any target t,
+
+61
+00:04:21,930 --> 00:04:25,700
+there is a path of this form when it
+first goes up and then goes down.
+
+62
+00:04:27,150 --> 00:04:31,040
+But what if that's not the case,
+what if there is some shortest path but
+
+63
+00:04:31,040 --> 00:04:34,000
+it's not always going first up then down.
+
+64
+00:04:34,000 --> 00:04:39,760
+Then there is some node, Uk, for
+which it goes first down, then again up.
+
+65
+00:04:40,970 --> 00:04:45,420
+And so both its neighbors are higher.
+
+66
+00:04:46,790 --> 00:04:52,298
+Then lets consider the moment
+when this node Uk was contracted.
+
+67
+00:04:52,298 --> 00:04:58,470
+Both its neighbors are higher so
+they were contracted later than Uk.
+
+68
+00:04:58,470 --> 00:05:01,900
+And so when Uk was contracted,
+both those notes were on the graph.
+
+69
+00:05:02,960 --> 00:05:07,560
+And those are neighbors of Uk, so
+when it was contracted, two cases.
+
+70
+00:05:07,560 --> 00:05:13,030
+First, there was a new
+shortcut edit in blue,
+
+71
+00:05:13,030 --> 00:05:18,190
+then what we can do is we can remove
+Uk from the shortest path and
+
+72
+00:05:18,190 --> 00:05:21,610
+then just use the blue edge instead of it.
+
+73
+00:05:21,610 --> 00:05:24,680
+The length will stay the same because
+the length of the shortcut is equal to
+
+74
+00:05:24,680 --> 00:05:30,390
+the length from Uk-1 to Uk and
+then from Uk to Uk+1.
+
+75
+00:05:30,390 --> 00:05:35,320
+And there is no more
+problem with this node Uk.
+
+76
+00:05:35,320 --> 00:05:37,200
+Which is smaller than both neighbors.
+
+77
+00:05:37,200 --> 00:05:41,890
+The second case is that
+no shortcut was added but
+
+78
+00:05:41,890 --> 00:05:45,670
+then a witness path was found and
+this is drawn in green.
+
+79
+00:05:46,790 --> 00:05:52,310
+But then all the nodes in the witness path
+were present when node Uk was contracted.
+
+80
+00:05:52,310 --> 00:05:54,380
+So they were contracted later.
+
+81
+00:05:54,380 --> 00:05:57,150
+So they're actually higher than node Uk.
+
+82
+00:05:57,150 --> 00:06:02,390
+So when we remove Uk again we can
+replace it with a witness path and
+
+83
+00:06:02,390 --> 00:06:03,770
+we will remove our problem with Uk.
+
+84
+00:06:03,770 --> 00:06:08,710
+This doesn't prove yet
+the general case because there
+
+85
+00:06:08,710 --> 00:06:14,170
+still can be other places where this
+going first up then down is violated.
+
+86
+00:06:14,170 --> 00:06:16,050
+So now let's prove formally.
+
+87
+00:06:17,340 --> 00:06:20,880
+So assume for the sake of
+contradiction that no such path
+
+88
+00:06:20,880 --> 00:06:24,110
+from source to target which as far
+goes up and then goes down exists.
+
+89
+00:06:25,170 --> 00:06:31,720
+Then for any shortest path from s to t,
+there is some node Ui of this path such
+
+90
+00:06:31,720 --> 00:06:37,550
+that it's rank is smaller than the ranks
+of both neighbors, as in the example.
+
+91
+00:06:37,550 --> 00:06:40,410
+And recall all such nodes, local minimums.
+
+92
+00:06:42,600 --> 00:06:46,789
+Then, for any shortest path between s and
+t, denote by m(P),
+
+93
+00:06:46,789 --> 00:06:50,120
+the minimum rank of a local
+minimum of this path.
+
+94
+00:06:50,120 --> 00:06:53,860
+So there can be several
+local minimum on this path.
+
+95
+00:06:53,860 --> 00:06:56,670
+But we denote by m(P) the minimum
+rank of all of those.
+
+96
+00:06:58,290 --> 00:07:02,941
+Now let's consider the shortest
+path P* with the maximum
+
+97
+00:07:02,941 --> 00:07:06,230
+m(P) among all the shortest
+paths between s and t.
+
+98
+00:07:07,460 --> 00:07:12,380
+And then consider the local minimum (Uk)
+which has the rank equal to this m(P).
+
+99
+00:07:12,380 --> 00:07:17,477
+And then there are two cases,
+when we're contracting (Uk)
+
+100
+00:07:17,477 --> 00:07:23,370
+either there was a shortcut
+added between (Uk-1) and (Uk+1).
+
+101
+00:07:24,410 --> 00:07:29,345
+Then there is the shortest path with
+the shortcut instead of the current
+
+102
+00:07:29,345 --> 00:07:31,657
+path from Uk-1 to Uk to Uk+1.
+
+103
+00:07:31,657 --> 00:07:35,280
+And this shortest path,
+P' doesn't contain Uk.
+
+104
+00:07:36,830 --> 00:07:44,420
+And Uk has the minimum rank of all
+the local minima in the path P*.
+
+105
+00:07:44,420 --> 00:07:50,170
+So m(P') is stricted bigger than m(P*).
+
+106
+00:07:50,170 --> 00:07:53,150
+And this is a contradiction
+with the choice of P*,
+
+107
+00:07:53,150 --> 00:07:56,920
+which has the maximum m (P)
+of all the shortest paths.
+
+108
+00:07:58,330 --> 00:08:00,450
+In other case,
+when we were contracting Uk,
+
+109
+00:08:00,450 --> 00:08:03,640
+there was a witness
+path from Uk-1 to Uk+1.
+
+110
+00:08:03,640 --> 00:08:09,110
+And it was comprised of
+nodes which have high rank,
+
+111
+00:08:09,110 --> 00:08:12,800
+higher than rank of Uk because
+they were contracted after Uk.
+
+112
+00:08:13,890 --> 00:08:19,020
+And so there is another shortest path
+P'' with this witness path instead
+
+113
+00:08:19,020 --> 00:08:23,360
+of the path Uk-1, Uk, Uk+1.
+
+114
+00:08:23,360 --> 00:08:28,040
+And again m(P'') is
+strictly bigger than m(P*).
+
+115
+00:08:28,040 --> 00:08:32,034
+Which is again a contradiction
+with the choice of P*.
+
+116
+00:08:32,034 --> 00:08:37,540
+So now we have pre-processing
+via node contraction.
+
+117
+00:08:37,540 --> 00:08:38,935
+We have an algorithm for
+
+118
+00:08:38,935 --> 00:08:42,920
+querying via Bidirectional Dijkstra
+in the augmented graph.
+
+119
+00:08:42,920 --> 00:08:47,280
+And we have proven that this
+algorithm always works correctly.
+
+120
+00:08:48,310 --> 00:08:49,100
+So, are we done now?
+
+121
+00:08:49,100 --> 00:08:53,000
+Well, it turns out we are not done yet,
+
+122
+00:08:53,000 --> 00:08:56,550
+because the question is how
+to select the node order.
+
+123
+00:08:56,550 --> 00:09:02,940
+Our algorithm, so far, doesn't specify how
+does it order the nodes for contraction.
+
+124
+00:09:04,320 --> 00:09:09,620
+And it turns out that the ordering of the
+nodes influences the pre-processing time
+
+125
+00:09:09,620 --> 00:09:12,080
+and the query time very significantly.
+
+126
+00:09:12,080 --> 00:09:17,048
+And so in the next video, we'll finally
+discuss how to order nodes in such
+
+127
+00:09:17,048 --> 00:09:20,669
+a way that both pre-processing and
+query work fast.

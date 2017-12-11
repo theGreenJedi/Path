@@ -1,0 +1,38 @@
+Now let's implement this algorithm. So the procedure Dijkstra takes again
+graph G and origin node S as input. It will also use dist values and
+prev values. It will initialize dist values with
+infinities, but for the origin node S for which dist value is 0. And it will initialize breadth
+values with pointers to nowhere. It will use also some data structure which
+can be an array or a priority queue. It depends on your choice
+of data structure. And the writing time will
+depend heavily on that but any way this is a data structure, for
+which we need just three operations. To create it from a set of these values. To extract the minimum value from
+it to get the node outside of known origin with a minimum dist value. And, to change the dist variable of some node which is currently
+in this beta structure. So we will talk later about
+which data structure to choose, but for example, we can use an array here just to create an array from all
+the dist values and then work with it. So while this data structure is not empty,
+we'll take out of it the node with the minimum dist value,
+and this data structure will contain only those nodes
+which are not in the known region. So it will contain initially node s and all the nodes, but then after we
+make the first iteration we will extract node s from this data structure H. Because node s has dist value of 0 and all
+other nodes have dist value of infinity, so node s has the minimum dist value. So we extract minimum from it,
+which means that we take the node with the minimum dist value and
+remove it from the data structure. And then we'll process this node u,
+basically we take all the outgoing edges from u in the graph and
+we try to relax them. To relax them, we check if it's
+possible to relax the edge. And if it's possible we update
+the distance to the end of this edge, the dist value to the end of this edge. We update the prev value
+of this node V and most importantly we change the priority
+of this node V in our data structure H. What it means is that we improved
+the dist value for this node V. And now this node could become potentially the node with the minimum dist value,
+for example. So we need to account for that. So you know in data structure
+we need to do something, for example if we store
+everything as an array, we just need to decrease the value of
+this array corresponding to node V. And then if we store everything in
+an array then when we do extract mean, we just go through all
+the values of this array and find the minimum value and the node
+corresponding to this minimum value. So this all happens while our
+data structure is not empty. But basically it will happen at
+most the number of nodes times, because it starts with all
+the nodes in the data structure. And then just extract next node for each time, and
+the size increases one by one.

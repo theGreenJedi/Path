@@ -1,0 +1,173 @@
+Hi, in this video you will learn how
+to construct a good node ordering for the contraction hierarchies algorithm. So far if you think about it,
+our algorithm works correctly for any node ordering. If you just choose any order and pass
+it to the processing procedure, it will contract the nodes in this particular
+order and return an augmented graph. If you then run queries on this augmented
+graph using the bidirectional Dijkstra approach from the previous videos,
+everything will work correctly because the correctness proof doesn't
+depend on any particular order. However, this order will influence the
+order of operations in the bidirectional Dijkstra algorithm for the queries. And actually, it will heavily
+influence the time required for queries and for preprocessing. So we want to choose a good node ordering,
+so that our preprocessing and our queries are really fast. First thing we want from the order
+is we want to minimize the number of added shortcuts. Because each time you add a shortcut, you add an edge to
+the augmented graph in the end. And the more edges, the slower
+your Dijkstra algorithm will work. So we want less shortcuts. Second, you want to spread
+the important nodes across the map. because from the common sense,
+it follows that there are important big cities in every sufficiently large
+region of the country, of the map. And then in each state,
+if you divide it into sub-regions, there are still relatively big cities
+which are important nodes and so on. And this should work well in practice. And third, you also want to minimize
+somehow the number of edges in the shortest paths in general
+in the augmented graph. So basically, you want to make your graph
+look less like a road network graph and more like a social network graph, where
+bidirectional Dijkstra algorithm is so much faster than the regular
+Dijkstra's algorithm. Because any two nodes in the social
+network are at most six edges away. And then bidirectional Dijkstra finds,
+with forward surge and backward surge,
+in just three steps they meet each other. You want the same in
+the augmented graph and you can somehow become close to it by
+adding shortcuts in the right places. So in general,
+you want these three things. Now we'll discuss how to do that. So we want to order nodes
+by some importance, so we need to introduce a measure
+of importance for that. And then, we will at each step
+contract the least important node. However, when we contract a node, the properties of the nodes which
+are neighbors of this node can change. And then importance can also change for
+those nodes after that. So in general,
+the algorithm will work as following. We'll keep all the nodes in a priority
+queue ordered by importance, so that we can extract the least
+important nodes very fast. But of course, priority will be
+something like minus importance so that the hat of the priority queue
+contains the least important node, not the most important one. Then, on each iteration we will
+extract the least important node. And we want to contract this node, but
+first we need to recompute its importance. Because it could have changed because
+of the contractions of the other nodes. Then, we need to compare its new
+updated importance with the importances of all the other nodes. And to do that, we will take
+the hat of the priority queue. Because we've already extracted
+these nodes from the priority queue, it's no longer there. So we will compare
+the importance of this node with the smallest importance of all
+the nodes which are still in the queue. If the importance of the extracted
+node is still minimal, then we can safely contract it,
+it's the least important node. Otherwise, we will need to put it
+back into the priority queue so that we can extract a node with
+even smaller priority from it. Of course this is only approximate, because at some point we could extract
+the node's recomputed importance and then decide that it has really the least
+importance of all the nodes in the queue. However, there is some other node which
+is still in the queue which has a smaller importance, but we haven't yet recomputed
+it and so we don't know about that. And that's okay, we will try just to order the nodes
+approximately by this importance. Also, it can seem that this process
+can go on and on indefinitely. But we'll show that it will actually
+stop after a finite number of iterations, always. Why is that? Well, if we dont contract the node,
+we update its importance and it actually changes. And after that, its importance is
+corresponding to the current set of nodes which are still not contracted. And after at most number
+of nodes attempts, all the nodes will have
+updated importance. And then, the node with the minimum
+updated importance will be contracted after that,
+because it will be extracted and it will have the smallest
+importance at that point. And then when we recompute its importance, it will turn out to be the same because
+it already has updated importance. And then we will just contract this node. So eventually this kind of
+iteration always contracts a node. And in practice, it usually takes one or
+two iterations usually, to actually contract something. So this works typically fast. Now, we'll talk about
+the importance criteria. So first is edge difference. It is related to the number
+of shortcuts added and minimizing the number of
+edges in the augmented graph. Second one down is number
+of contracted neighbors. And this is related to spreading
+the nodes across the map. So if there are already many neighbors
+of this node which already contracted, then we will probably contract
+some node in some other place. Because we want to spread important
+nodes and also spread unimportant nodes. We don't want everything to
+be clustered in one region. Also, shortcut cover is connected with how important that node is,
+how unavoidable it is. Do you remember the picture with an island
+between San Francisco and Oakland? The treasure island which was unavoidable
+if you go from San Francisco to Oakland, if you want to go with the shortest path? So shortcut cover will somehow
+approximate how unavoidable a node is. And the last one, the node level,
+has something to do with the number of edges in the shortest
+paths in the augmented graph. So now we'll go through
+all of these in detail. So Edge Difference. You basically want to minimize the number
+of edges in the augmented graph. So when we try to contract the node,
+v, we can actually compute how many shortcuts would be added
+if we actually contract this node. We can also always compute
+the number of incoming edges, and number of outgoing edges of any node. And then we can compute
+the edge difference. The number of shortcuts added
+minus number of edges deleted, which is the degree of this node. And this is called edge difference. And the number of edges increases by
+edge difference after contracting v. So this influences both the number
+of edges in the final graph and also the number of edges in
+the graph being preprocessed. Which is important because it
+influences the preprocessing time. So what we want is to contract nodes
+with small edge differences first. Contracted Neighbors,
+I already talked about this. We want to contract a node with small
+number of already contracted neighbors, so that the nodes which we contract
+don't cluster in one place, but they're actually spread out in
+all the regions of the graph. Shortcut Covers, very important. Basically it says how
+many nodes are there, such that we cannot avoid visiting our
+node if we want to go to those nodes. More formally, if we have some node,
+v, we can do the number of neighbors, w of v, such that we have to
+create a shortcut, either to w or from w in the case we need to contract v. And this basically means
+that when we contract v, we'll lose some shortest path to w. And that's why we need to
+create an additional shortcut. And so v is important for w, and
+if v is important for many, its neighbors, then it's important. And so, we need to first contract
+nodes with small importance, with small shortcut cover. Node level is an upper bound on
+the number of edges in the shortest path from any node s to node
+v in the augmented graph. It can be shown formally
+that this is an upper bound, but I'll tell you the intuition. So we initialize the level with 0. And then when we contract some node v,
+we update the level of its neighbors. So for a neighbor u of v, either we could
+get to u somehow without going through v, and then contracting v
+doesn't influence its level. Or we could go to u through node v. But then to go to node v,
+we needed at most, level of v edges, and
+then one more to get from v to u. So that's why L(u) needs to
+be maximized by L(v) + 1. So in the end,
+L(v) is an upper bound on the number of edges on the shortest path to v. And so we want to contract
+nodes with small level, because first,
+we need to contract non-important nodes. In the end we proposed
+the following importance measure. We just sum up all those four values. Note that this is a heuristic value, and
+you can actually play with weights of those four quantities in the importance
+and see how preprocessing time and query time change. But we think that just summing them
+up will already work really well. However, each of the four quantities
+is necessary for fast preprocessing and queries. If you avoid implementing
+at least one of them, probably preprocessing or
+query time will be too long. But then you can further
+optimize with the coefficients. For example, two times added distance plus three
+times contracted neighbors, and so on. So it also means that you need to
+find a way to compute all of these quantities efficiently at any
+stage of the preprocessing. Both in the beginning,
+and also when you need to contract a node but you've already
+contracted some other nodes. This is not very hard and
+we'll leave this as an exercise to you. So, we did a lot of work. We've come up with a preprocessing stage. We need a particular node
+ordering with that and we've come up with a complex
+importance measure for nodes for that. And also we need to do
+bidirectional Dijkstra, but not classical bidirectional Dijkstra. We need to do some tweaks
+in the query stage. So, is it all worth it? It turns out that yes,
+it is well worth it. If we take for example, a graph of
+Europe with 18 million nodes, and launch the classical
+Dijkstra's algorithm on it. And we generate random pairs of vertices
+in different places of Europe and then compute the shorter distances. Then on average,
+it will work for 4.3 seconds. However, if we launch
+Contraction Hierarchies on the same graph with the same
+pairs of vertices and we tweak the heuristics inside
+the contraction hierarchy as well. It will work on average just for
+18 milliseconds, which is almost 25000 times faster. So it is very well worth it. For example, for
+a service like Google Maps or Yandex Maps, working 25000 times faster means
+that you actually can provide your service to millions of users and
+do it blazingly fast. And the speed-up will only increase
+if you increase the size of a graph. For example, if you go from the graph of
+Europe to the graph of the whole world, the speed-up will only increase. So now, it seems that we know everything. We know how to preprocess by
+contracted nodes, ordered approximately by their importance and
+we have some importance measure for that. We know how to query using
+bidirectional Dijkstra algorithm. And our importance function is heuristic,
+but works really well on road network graphs. And this algorithm works 1000s
+of times faster than Dijkstra. If you tweak it really well, it can work
+even tens of thousands times faster. But at least 1000s of times faster,
+this is what is guaranteed for your own implementations. You will try to do that in the programming
+assignments of this project for this module. And you will see that your
+solutions are actually much, much faster than the classical algorithm. And you will need them to work
+1000s of times faster to actually pass the assignment. And also, we actually encourage you to
+compete on the forums on whose solutions is the fastest. So you can take the result by the grader
+and then post it on the forums, and someone can organize the result
+table with the top results. And it's very interesting how you can
+come up with your own heuristics for improving this algorithm. Because you see there are a lot of
+heuristics in the last part of this lecture, and you can come up with your
+own ideas and maybe they will be so good that you will speed up everyone
+else's solution 10 times or 100 times. So really try to do that. We will also show you some pointers
+to where you can get the data for real graphs of the road networks of
+some parts of US and the whole US. And in the end, this could become your own
+Open Source project which you could show, for example, to potential employers. So we wish you good luck with
+advanced shortest paths.

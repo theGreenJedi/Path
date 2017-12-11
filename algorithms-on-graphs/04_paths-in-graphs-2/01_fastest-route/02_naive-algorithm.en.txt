@@ -1,0 +1,117 @@
+Hi. In this video, we'll solve the fastest
+route problem using the idea from the previous video, but
+we will do it using a naive algorithm in which we will need
+to improve in the next video. First, let's make an observation
+that if we have some optimal path, some fastest route or some shortest route. Than any part of it between
+some note in the middle and some other note in the middle. It's also optimal in the same sense. Let's prove it. Consider an optimal path from
+some origin S to some note T and consider some two vertices u and
+v on this path. They can coincide with s or t or
+they can be somewhere in the middle. Suppose there was some shorter path
+from u to v which is marked with green. Then we would be able to go from
+s to u as there is no path. Take a shorter path from u to v,
+take a shortcut and then go where there is
+no path from v to t. And in total, this new path will be shorter than
+the initial path, which was optimal. So this cannot happen. And so we know that actually any part of
+an optimal path is also optimal itself. Corollary from that is that if
+there is some shortest path from S two nodes and
+u is the previous node on that path. Then, distance from the origin
+to the final destination, t, is equal to the distance
+from origin to node u, which is the previous node,
+plus wight of the edge between u and t. And we will use this property
+to improve our estimates of distances from origin
+to some nodes gradient. You remember that in the breath
+research algorithm we had an area or map called dist, and
+we use these dist values to store. Our estimation from the distance to
+the region to this particular now. In the reference research we found
+distance of started from Infinity. As soon as they get update they
+became correct distances formal region to the corresponding note. This will not be the case in algorithm. These distances will change Several
+times maybe before they become correct. But in the end they will become correct. And during the process these distances will be upper
+bounds on the actual distance. So they will be more than or equal to the real distance from
+origin to the corresponding node. [INAUDIBLE] the procedure called Edge
+relaxation, and it means the following. We take the edge U, V. We check, is it better to go to V,
+through the optimal currently known path from S to U, and
+then following the edge from U, to V. Does it improve our current upper
+ont he distance to v, or not? So, we have some upper bound dist value,
+dist of v, and we achieve that,
+maybe using u on the way or not. We might have come to v in a different
+way, and we might have come using the same distance as if we go
+from s to u, and then follow huv. Or we could use longer path. So we just check whether it is possible
+to improve our current estimation of distance of feet. We are using distance of U
+plus weight of the edge to U. So here is the code of
+relaxation procedure. It takes one edge from U to V. As input and it checks if
+the current distance estimate of v is bigger than the current distance
+estimate of u plus weight of the edge. That means that definitely
+we can come to know u from s with a path with
+a length at most dist of u. And if we then follow edge
+uv with a weight w of uv we will improve the distance estimate of v. So in this case we update this distance
+estimate we decrease always as you see And we also remember that the node from
+which we came into v is now u. Remember that in the breadth for
+search algorithm, we start in pref the node from
+which this node was discovered. In this case, we use the same
+data structure to the store the node from where we've updated
+the distance to our node last time. Now, we're ready to suggest
+a naive algorithm to solve our fastest route problem. Procedure naive takes graph g and
+origin node S as inputs. It uses dist values and prev values
+the same as in the breth first search, and we initialize these values
+with infinity as dist[u]. And the prev[u] value with
+point resting no where, we also initialize the dist of
+the original nod withe zero. And then, the only thing we
+do we relax all the edges. More specifically,
+on each iteration of the do while loop, we try to relax each of
+the edges in the graph. And if at least one is effective, that is, some dist value changes,
+then we continue to the next iteration. And we only stop When the whole iteration, after going through all the edges in
+the graph, couldn't relax anything. And we state that this Naive algorithm
+works, basically that it stops and when it stops it finds correct
+distances to all the nodes. To prove that assume for the sake of
+contradiction, that at some point no edge can be relaxed and there is
+a vertex v such that the distance to the vertex is bigger than the actual
+distance from origin to the note. We know that this estimation
+of distance cannot become less than the actual distance because
+this is always an upper bound. It starts from infinity and it is only decreased when we find
+a better path from origin to this node. So there is some path from origin to
+this node of length exactly dist[v], so it cannot be less than the actual
+distance from origin to this node. And this also means that there can
+actually be no such situation that we do relaxations [INAUDIBLE] and we do many
+iterations and we don't stop at any point. Because after any successful relaxation, some distance estimation is
+decreased by at least one. And if we started with infinity
+then the value just becomes finite, but that can happen at most
+a number of nodes times. And if the value was already finite
+it just decreases by at least one. And if we started with some
+number of finite values, which are bigger than
+the actual distances and that each iteration we decrease at
+least one distance by at least one. This process cannot be infinite. It will at some point come to
+the stage when the distance, and the distance estimate are the same, and
+so this edge cannot be relaxed anymore. And if that happens for
+all the edges our algorithm will stop. So our algorithm definitely stops. The question is whether it
+comes to exactly the same dist values as distances from
+origin To the corresponding nodes. So for
+contradiction we assume that it does not. And for that for at least some node v dist value is bigger
+than the actual distance from our agent. And then, we consider some shortest
+path from S to this node v. V definitely is a broken note, in
+the sense that [INAUDIBLE] is bigger than the correct distance, but there can be
+some other notes on this path from S to V, which have the same property,
+which are broken. U, V the first note of counting from S on
+this path, which is broken in some sense. U is definitely not the same as S,
+because for S we know that the [INAUDIBLE] value is
+zero, and the correct distance is zero. U is at least the second note on the path,
+or maybe much later then. There is a previous note
+on the path before U. And what is denoted by p. And let's look at S, p, and u. What we know is that p is
+not a broken node, and so its dist value is the same as
+the distance from origin to this node p. And so
+we know that the distance from S to u Is actually equal to the distance from S
+to p plus weight of the edge from p to u. Why is that? Because the part of path from S to u is optimal because it is a part
+of an optimal path from S to v. And also part of path from S
+to p is also optimal, and so this equality It's true that distance from
+S to u is equal to distance from S to P. And then add the weight
+of the S from p to u, but we also know that distance from S
+to p is equal to this value of p. And so, the second quality is true that it is equal to dist value of p plus
+weight of the S from p to u. But we also know that note u is broken and the dist value of u is strictly bigger
+than the correct distance from s to u. Is equal to dist value of p plus
+weight of the edge from p to u. But this inequality is exactly the
+property we checked to determine whether an edge from b to u can be relaxed or not. And so, from one hand we know
+that this edge can be relaxed and from the another we know that we cannot
+relax anymore edges in our graph and our nef algorithms stopped and
+this is a contradiction. So now, we proved by contradiction that our nef algorithm returns
+correct distances from orignal to. So now it's in the graph. We won't analyze the running time of this
+algorithm, because in the next video we'll improve this algorithm and
+then we'll estimate its running time.

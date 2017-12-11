@@ -1,0 +1,656 @@
+1
+00:00:00,250 --> 00:00:05,798
+Hi, in this video we'll consider another
+better way to find a good potential for
+
+2
+00:00:05,798 --> 00:00:06,647
+A star.
+
+3
+00:00:06,647 --> 00:00:08,250
+It will be based on landmarks.
+
+4
+00:00:09,450 --> 00:00:11,860
+So first, a landmark.
+
+5
+00:00:11,860 --> 00:00:16,420
+Let's fix some vertex A and
+we will call this vertex a landmark.
+
+6
+00:00:16,420 --> 00:00:20,102
+Then we choose the potential function,
+
+7
+00:00:20,102 --> 00:00:25,407
+pi of v equal to distance from
+this landmark to the target,
+
+8
+00:00:25,407 --> 00:00:29,864
+minus distance from this
+landmark to the node V.
+
+9
+00:00:29,864 --> 00:00:36,970
+And by distance, I mean the distance
+in the graph we're looking at.
+
+10
+00:00:36,970 --> 00:00:41,536
+So we can of course not know this
+distance beforehand because to
+
+11
+00:00:41,536 --> 00:00:46,880
+find this distance we need to launch
+some shortest path algorithm.
+
+12
+00:00:46,880 --> 00:00:51,360
+But let's suppose we know
+the distance from the landmark to
+
+13
+00:00:51,360 --> 00:00:53,660
+all other vertices beforehand.
+
+14
+00:00:53,660 --> 00:00:55,410
+Then we can use such potential.
+
+15
+00:00:55,410 --> 00:00:58,740
+And I say that this potential is feasible.
+
+16
+00:00:58,740 --> 00:01:03,010
+And that the value of this potential
+on the target vertex is zero.
+
+17
+00:01:03,010 --> 00:01:07,220
+So let's prove this.
+
+18
+00:01:07,220 --> 00:01:13,480
+First we write the length of the edge
+with this potential by definition.
+
+19
+00:01:13,480 --> 00:01:18,770
+And then we write it as length
+of the initial edge, minus
+
+20
+00:01:18,770 --> 00:01:24,510
+distance from landmark to the target plus
+distance from landmark to distance u.
+
+21
+00:01:24,510 --> 00:01:28,360
+Then plus distance from
+the landmark to the target.
+
+22
+00:01:28,360 --> 00:01:33,480
+And so this cancels out with the minus
+distance from the landmark to the target.
+
+23
+00:01:33,480 --> 00:01:36,160
+And minus distance from
+the landmark to node v.
+
+24
+00:01:37,520 --> 00:01:42,786
+And this is in turn equal to
+distance from landmark to u plus
+
+25
+00:01:42,786 --> 00:01:48,494
+length of the s from u to v minus
+distance from the landmark to v.
+
+26
+00:01:48,494 --> 00:01:52,020
+And now this is non-negative due
+
+27
+00:01:52,020 --> 00:01:56,640
+to triangle inequality
+because distance from A to V
+
+28
+00:01:56,640 --> 00:02:01,345
+cannot be bigger than distance from A to U
+plus length of the edge connecting U to V.
+
+29
+00:02:02,440 --> 00:02:07,167
+So we have just proven that
+the edge weight for any U and
+
+30
+00:02:07,167 --> 00:02:10,580
+V and the new graph is non negative.
+
+31
+00:02:10,580 --> 00:02:14,660
+So the potential we provide
+is indeed feasible.
+
+32
+00:02:14,660 --> 00:02:20,780
+And also the value of this potential on
+the target vertex is just difference of
+
+33
+00:02:20,780 --> 00:02:25,930
+d from A to t,
+with d from A to t which is zero.
+
+34
+00:02:25,930 --> 00:02:31,040
+So this is a physical potential
+with zero value on the target.
+
+35
+00:02:31,040 --> 00:02:34,977
+And so this is actually a lower bound for
+any node V,
+
+36
+00:02:34,977 --> 00:02:37,827
+on the distance from V to the target.
+
+37
+00:02:39,483 --> 00:02:41,970
+So what can we do with this.
+
+38
+00:02:41,970 --> 00:02:48,600
+We can select several landmarks which
+are basically any vertices of the graph.
+
+39
+00:02:48,600 --> 00:02:53,621
+So we can select them any way we want.And
+we can optimize how good do we select
+
+40
+00:02:53,621 --> 00:02:59,630
+those landmarks and hopefully our reason
+will become better because of that.
+
+41
+00:02:59,630 --> 00:03:03,500
+So we select those landmarks,
+maybe 10 landmarks for example, and
+
+42
+00:03:03,500 --> 00:03:08,590
+we precompute the distances from those
+landmarks to all other vertices.
+
+43
+00:03:08,590 --> 00:03:11,690
+So to do that we'll need
+to launch something like
+
+44
+00:03:13,522 --> 00:03:19,940
+algorithm which will find the distances
+from one node to all the others.
+
+45
+00:03:19,940 --> 00:03:23,830
+We cannot really save
+anything on this one,
+
+46
+00:03:23,830 --> 00:03:26,120
+because we need distances
+to all other vertices.
+
+47
+00:03:26,120 --> 00:03:30,450
+So bidirectional storage or
+a star won't help us here.
+
+48
+00:03:30,450 --> 00:03:34,390
+We will need to find distances
+to all other vertices, and
+
+49
+00:03:34,390 --> 00:03:36,600
+we will need to scan the whole graph.
+
+50
+00:03:36,600 --> 00:03:39,950
+But this can be done on
+the pre-computation state.
+
+51
+00:03:39,950 --> 00:03:41,670
+And then for anyone marked A.
+
+52
+00:03:41,670 --> 00:03:44,960
+We have the following inequalities.
+
+53
+00:03:44,960 --> 00:03:49,530
+The distance from any vertex v
+to the target is greater than or
+
+54
+00:03:49,530 --> 00:03:53,310
+equal to distance from A to
+the target minus distance from A to v
+
+55
+00:03:54,410 --> 00:03:56,260
+due to triangle inequality.
+
+56
+00:03:56,260 --> 00:04:00,930
+And also due to another triangle
+inequality, we have another low end bound,
+
+57
+00:04:00,930 --> 00:04:04,670
+that distance from v to t
+is greater than or equal to
+
+58
+00:04:04,670 --> 00:04:09,110
+distance from v to the landmark, minus
+distance from target to the landmark.
+
+59
+00:04:09,110 --> 00:04:14,130
+We can use both if we can precompute
+the distances not only from landmarks
+
+60
+00:04:14,130 --> 00:04:18,820
+to all the other nodes but
+also two landmarks from all other nodes.
+
+61
+00:04:18,820 --> 00:04:23,710
+But to do that we just need to
+reverse the graph and run algorithm
+
+62
+00:04:23,710 --> 00:04:28,890
+from landmarks from each
+of the landmarks again.
+
+63
+00:04:28,890 --> 00:04:35,690
+We can use the tightest lower bounds out
+of all those lower bounds for each node v.
+
+64
+00:04:35,690 --> 00:04:40,750
+So we take maximum over all
+landmarks A that we selected
+
+65
+00:04:40,750 --> 00:04:45,560
+of both differences, and this will
+be the tightest lower bound we have.
+
+66
+00:04:45,560 --> 00:04:50,370
+And this will still be visible but
+
+67
+00:04:50,370 --> 00:04:53,440
+I'll show, we can show that and
+
+68
+00:04:54,650 --> 00:04:59,550
+you know that the tighter the bounds,
+the better the algorithm works,
+
+69
+00:04:59,550 --> 00:05:03,850
+the faster your A star search
+will find the target verdicts.
+
+70
+00:05:03,850 --> 00:05:07,580
+So by choosing the landmarks wisely and
+
+71
+00:05:07,580 --> 00:05:12,470
+maximizing the lower bounds over them,
+we can speed up our a star search a lot.
+
+72
+00:05:13,530 --> 00:05:17,820
+And now let's think how should
+we select the landmarks.
+
+73
+00:05:17,820 --> 00:05:24,050
+The intuition is that a good landmark
+appears either before the starting vertex
+
+74
+00:05:24,050 --> 00:05:30,089
+or after the target vertex and
+then the lower bound
+
+75
+00:05:31,290 --> 00:05:35,750
+Induced by this landmark will
+actually improve something.
+
+76
+00:05:35,750 --> 00:05:40,510
+And this is if we fix the source
+vertex v and the target vertex w,
+
+77
+00:05:40,510 --> 00:05:45,730
+then the landmark is the one which is
+either before before v or after w.
+
+78
+00:05:45,730 --> 00:05:51,190
+But we need to select a set of landmarks
+that will work best for any query.
+
+79
+00:05:51,190 --> 00:05:53,420
+So for any query from service to target,
+
+80
+00:05:53,420 --> 00:05:58,090
+we need some landmarks which are before
+s and some landmarks which are after t.
+
+81
+00:05:58,090 --> 00:06:03,480
+And so it makes, for example, to choose
+the landmarks on the border of our map.
+
+82
+00:06:03,480 --> 00:06:05,910
+For example, here on a map of US,
+
+83
+00:06:05,910 --> 00:06:11,360
+we have landmarks in the rectangles,
+which are red and yellow.
+
+84
+00:06:12,620 --> 00:06:19,000
+And in this particular search, in
+the middle, from green area to blue area,
+
+85
+00:06:19,000 --> 00:06:23,710
+we used the four yellow landmarks,
+meaning that only
+
+86
+00:06:23,710 --> 00:06:29,750
+the lower bounds from those four landmarks
+actually improved our search in some way.
+
+87
+00:06:29,750 --> 00:06:34,830
+And this just supports
+the idea that the landmarks
+
+88
+00:06:34,830 --> 00:06:39,010
+should be before the starting point and
+after the ending point in some sense.
+
+89
+00:06:40,300 --> 00:06:44,820
+And here's another example
+of a start with landmarks.
+
+90
+00:06:44,820 --> 00:06:48,770
+And again, red and
+yellow rectangles are landmarks.
+
+91
+00:06:48,770 --> 00:06:52,600
+And again, yellow rectangles are those
+landmarks which are used in the search.
+
+92
+00:06:52,600 --> 00:06:57,810
+And you see that how much less
+vertices do we really visit
+
+93
+00:06:57,810 --> 00:07:02,730
+with an a star search, which is by the way
+also bi-directional A star search,
+
+94
+00:07:02,730 --> 00:07:05,470
+than with the regular
+bi-directional search.
+
+95
+00:07:05,470 --> 00:07:09,300
+Because in the regular bi-directional
+search we had those a fat
+
+96
+00:07:09,300 --> 00:07:13,650
+circle surrounding each of the starts and
+targets rectangles.
+
+97
+00:07:13,650 --> 00:07:18,101
+And here we have only small
+tiny streams of scant
+
+98
+00:07:18,101 --> 00:07:22,170
+vertices colored in green and blue.
+
+99
+00:07:22,170 --> 00:07:29,090
+So this set of only something like
+21 marks significantly reduces
+
+100
+00:07:29,090 --> 00:07:33,740
+each sequential search but
+with the cost of pre-processing.
+
+101
+00:07:33,740 --> 00:07:37,348
+So to do fast we need to
+pre-process our graph and
+
+102
+00:07:37,348 --> 00:07:43,670
+to compute distances from 20 vertices
+to all other vertices in the graph.
+
+103
+00:07:43,670 --> 00:07:47,480
+So either we have a separate time
+to pre-process our graph and
+
+104
+00:07:47,480 --> 00:07:49,880
+save the results, or
+
+105
+00:07:49,880 --> 00:07:55,030
+this is only applicable if we know that
+we'll get a lot of queries in our problem.
+
+106
+00:07:55,030 --> 00:08:00,640
+So if we get just one query it's
+faster to find the shortest
+
+107
+00:08:00,640 --> 00:08:07,170
+path from source to target directly
+without first trying to find a shortest
+
+108
+00:08:07,170 --> 00:08:11,750
+path from 20, versus through all
+other vertices on the graph.
+
+109
+00:08:11,750 --> 00:08:14,650
+But if you have 1,000 queries
+to find the shortest path,
+
+110
+00:08:14,650 --> 00:08:19,500
+then already we're competing for
+21 marks can be beneficial because it
+
+111
+00:08:19,500 --> 00:08:24,700
+will only take us 20 searches
+from those landmarks.
+
+112
+00:08:24,700 --> 00:08:29,550
+And then each of the subsequent
+1000 searches which were giving us
+
+113
+00:08:29,550 --> 00:08:34,120
+queries will be significantly faster.
+
+114
+00:08:34,120 --> 00:08:39,440
+In the problems of this project, in the
+programming assignment, you will have both
+
+115
+00:08:39,440 --> 00:08:46,700
+problems where you need just to
+compute the results for queries.
+
+116
+00:08:46,700 --> 00:08:49,400
+And you will have problems
+where you will have a separate
+
+117
+00:08:49,400 --> 00:08:52,990
+time to pre-process
+your graph as you want.
+
+118
+00:08:52,990 --> 00:08:54,840
+And then you will answer the queries.
+
+119
+00:08:54,840 --> 00:09:00,640
+And there we will offer you another
+
+120
+00:09:00,640 --> 00:09:06,600
+algorithm in the next lesson, which
+works really well for huge rod networks.
+
+121
+00:09:06,600 --> 00:09:12,720
+But you could also try, instead of or in
+addition to implementing data algorithm,
+
+122
+00:09:12,720 --> 00:09:16,070
+to also implement this A star
+with landmarks algorithm.
+
+123
+00:09:16,070 --> 00:09:19,340
+And you can try different
+ideas on landmarks selection.
+
+124
+00:09:19,340 --> 00:09:24,840
+And it is known that really,
+a very good choice of landmarks can
+
+125
+00:09:24,840 --> 00:09:29,820
+lead to very fast algorithms for
+subsequent queries on the shortest path.
+
+126
+00:09:32,060 --> 00:09:34,860
+In conclusion,
+we've introduced A star algorithm,
+
+127
+00:09:34,860 --> 00:09:37,710
+which is basically a direct search.
+
+128
+00:09:37,710 --> 00:09:41,770
+And direct search can scan fewer vertices,
+a lot fewer,
+
+129
+00:09:41,770 --> 00:09:44,547
+as you just saw on the pictures.
+
+130
+00:09:44,547 --> 00:09:48,640
+A star is a direct search algorithm based
+on Dijkstra and potential functions.
+
+131
+00:09:48,640 --> 00:09:53,430
+And we can also make A star be directional
+to make it the best of both worlds,
+
+132
+00:09:53,430 --> 00:09:57,400
+both a bidirectional and
+a with potentials.
+
+133
+00:09:57,400 --> 00:10:04,010
+The Euclidean distance is one example of
+a potential for road network on a plane.
+
+134
+00:10:05,260 --> 00:10:09,590
+And, we can also use landmarks to
+create a good potential function.
+
+135
+00:10:09,590 --> 00:10:14,850
+And if we create several landmarks, and
+we choose them wisely, so that there
+
+136
+00:10:14,850 --> 00:10:19,510
+are landmarks before and after source and
+target verdicts, for any source and
+
+137
+00:10:19,510 --> 00:10:24,600
+target verdicts, then, this can speed up
+our algorithm even more significantly.

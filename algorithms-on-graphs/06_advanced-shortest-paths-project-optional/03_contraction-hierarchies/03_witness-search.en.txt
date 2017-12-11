@@ -1,0 +1,106 @@
+Hi, in this video, we'll learn how to find those witness paths that
+we need from the previous video. So just to remind you,
+when we contract node v, then for any pair of incoming edge from
+some node u to node v and outgoing edge from v to some node w,
+we want to check if there is some witness path from u to
+w which doesn't go through v, has length at most equal to the sum
+of those length of two edges. If there is such path, then there is
+no need to add a shortcut from u to w after contracting v because
+the shortest path between u and w will stay the same even if
+we don't add this shortcut. And search for such witness path
+is called a witness search. So first a few definitions,
+let's call a node u a predecessor of v if there is an edge from u to v,
+either directed or undirected. And also let's call w a successor
+of v if there is an edge from v to w again,
+either directed from v to w or undirected. Now, witness search is
+actually very straightforward. So we need to check for
+each predecessor of v, and for each successor of v, whether there is a
+witness path between this predecessor and the successor that doesn't go through v
+and that has a length which is smaller or equal to the length of the incoming edge
+plus the length of the outgoing edge. So for example, in this picture, for
+u1 and w1, we need to find some path. And it is drawn to the left,
+which doesn't go through v and has length at most 1 plus 1 which is 2. And also for pair u1 w2,
+we need to find also a path, which is drawn to the right under v,
+which doesn't go through v again and which has length equal to or
+smaller than 3, 1 plus 2. To do that, for each predecessor ui of v,
+we just run Dijkstra's algorithm, regular Dijkstra's algorithm from that ui. And in that Dijkstra's algorithm
+we'll always ignore node v. So we don't add it to the queue. We don't extract it from the queue because
+we want only the paths that don't go through node v. So this is essential for
+good query performance. Because again if we don't do this witness
+search, we don't find witness paths. And we will have to add shortcuts for every pair of neighbors of v, for
+every predecessor and every successor. And this will add a lot of new
+nodes in our augmented graph. And in a graph with a lot of edges,
+it's very hard to find shortest paths. It will take a long time. So it is essential for us to find
+as many witness paths as we can and don't add the corresponding shortcuts. But we also want the preprocessing
+to work really fast. And so
+we want to optimize this witness search. So two ideas for optimization,
+first is we can stop Dijkstra's algorithm when the distance from
+the source becomes too big. Basically, if we search starting
+from some predecessor and the distance from this predecessor to
+the node currently extracted is very big, that cannot be a sure witness
+path because it cannot be already shorter than the sum of the incoming and
+outgoing edge. And this is one idea. We'll discuss it in detail in a minute. And also another idea,
+we can limit the number of hops. So we can only allow the Dijkstra's
+algorithm starting from some predecessor to go through at most,
+let's say five edges. If it cannot find a path
+to some successor, we just say that there is no such path,
+and we add a shortcut. Of course, we won't find all
+the witness paths this way. But we will do it fast. And this is a trade off
+between the number of edges, shortcuts added in the augmented graph,
+and the speed of the preprocessing. So first with the stopping Dijkstra,
+so in this example if we found, in our Dijkstra running from
+the node ui some node x, to which the shortest path is of length 4, then it is already useless
+because this length 4 is more than the maximum sum of incoming edge
+into v plus our going as from v. So it's 4 is more 1 plus 2 which is 3. And so there is no way there
+can be some witness path going through x to either w1 or w2
+because it will be already longer than 4. And so it will be longer than the path
+from ui to the corresponding w through v. So in general, if when we extract node x,
+extract mean from the queue, the distance from the source
+to this x is already bigger than the sum of the maximum incoming
+edge and the maximum outgoing edge. There is no witness path going through x. And so there is no point to
+exploring further from x. We can just stop the algorithm here
+because all the nodes which will extracted further in the Dijkstra's
+algorithm will be even further than x by the property of the general
+classic Dijkstra's algorithm. And so basically, what it means is that we
+can limit the distance by the sum of two edges, the maximum sum of two edges. And as soon as Dijkstra finds node
+which is farther from the source, we just stop the Dijkstra's algorithm. There is another small improvement. But it can make it
+significant in practice. Consider any predecessor w
+prime of any successor w of v. So for example, there can be an edge
+from w prime to w2 of length 1. And then let's see. For example, we found some path ui as the
+source of Djikstra's algorithm to w prime. And that path has length just 1. Then we already know that there is
+a witness path between the ui and w2 because the path from ui to
+w2 through v has length 2, 3. And now the path from ui to w2
+through w prime has length at most 2 because there is a path from
+ui to w prime of length 1. We go through it. And then go through edge of length 1. And we get a path of length just 2
+which is shorter than the path to v. So this is indeed a witness path. So using this idea, we can just go up
+to nodes which are previous to us, which are predecessors of our
+successors of v and then stop there. So basically what it means is
+that we limit our distance by the difference of the sum of
+the two longest incoming and outgoing edges minus the length
+of the last edge on the path, from some predecessor
+to some successor of v. And then there are two criteria
+during the Dijkstra's algorithm. If we found some w prime, which is
+connected directly to some successor of v, and the distance to w prime plus
+the length of this edge is smaller than the corresponding path from
+the source to the corresponding successor, then we've just found the witness path. And if the distance to
+some node is already bigger than this maximum of maximums
+in the bottom of the slide, we just stop the Dijkstra's algorithm
+because we cannot already find a witness path,
+because all the nodes are already too far. Another idea for optimizing the witness search is to
+limit the number of hops in Dijkstra. And by hop,
+I mean just the jump through an edge. So we consider basically only shortest
+paths from the source from some predecessor of v,
+which contain at most k edges. As soon as our Dijkstra's algorithm
+considers a node, which is at least k plus 1 edges from the source,
+we don't actually process this node. We ignore it. And if a witness path is not found
+using this Dijkstra's algorithm, we just consider it as if
+there is no witness path. And we add a shortcut in
+the preprocessing phase. And so this is a tradeoff
+between preprocessing time and the size of the augmented graph. If k is small,
+then we won't find many witness paths. And then we will add many shortcuts. But our preprocessing will be faster. In practice, you can change k
+gradually from the start to the end. And typically, k is smaller in the start,
+for now k = 1. And then in the A, in the end, k = 5. And this can be based on the degree of
+the vertices that you're contracting. So these are the ideas for
+speeding up the witness search. And this is all for preprocessing. So in the next video, we will study how to actually do
+the queries in the preprocess graph, after we preprocess it by contracting
+the nodes and adding the shortcuts.

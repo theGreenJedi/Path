@@ -1,0 +1,91 @@
+Hi, in this last lesson of
+the Advanced Shortest Paths module, we will study the contraction
+hierarchies algorithm. In the previous lessons, we've learned
+the idea of bidirectional search. And we've studied the bidirectional
+Dijkstra's algorithm, which can be thousands of times faster
+when applied to social network drafts. However, for road networks, it typically
+gives just roughly 2x speedup. And in this lecture, we'll start an
+algorithm that gives much better speedup, thousands of times and more. And the idea for
+such speedup is the following. Long-distance trips go
+mostly through highways. For example, if you consider this
+long trip by car from San Francisco to New York, and if you look at
+the navigational directions, then you'll see that basically,
+you need to first merge into the highway. Then you need to merge from that highway
+into a bigger interstate highway, go through it, then exit to a smaller
+highway, and then exit to a street, and then get to your address. And this is the general case. When you need to get from some point A to
+point B, you need to first merge from streets to a highway, then merge from
+there into an even bigger highway, and repeat that maybe several times,
+and then start exiting. You exit to a smaller highway,
+then to an even smaller highway, and then exit to your street,
+and then go to your address. And so less important roads
+merge into more important roads. And there is some kind of hierarchy of
+those roads, which is obvious to humans. But we don't know that hierarchy
+when we're given the graph. So the idea is to use the structure of the
+shortest paths in the real road networks. And this will allow us to actually
+avoid scanning many small roads, many not important vertices in the graph. because if you go from San Francisco to
+New York, then most probably you don't need to go through small streets
+somewhere in Las Vegas or Chicago. Most of the way,
+you'll be going through a big highway. And you won't go into small streets
+in the middle of your trip. And there are algorithms which are based
+on this idea, Highway Hierarchies and Transit Node Routing by Sanders and
+Schultes. And transit node routing is one of
+the fastest known algorithms for shorter paths in real road networks. They can be millions of times faster
+than the classical Dijkstra algorithm. But those algorithms are pretty complex. And in this lecture, we'll study
+the contraction hierarchies algorithm, which is at least thousands of times and
+more faster than Dijkstra. But it is pretty simple, and you will be able to implement it as
+part of the project of this module. And you will be even
+able to play with it and implement different, your own ideas and
+heuristics to improve it even further. So the idea of the contraction
+hierarchies algorithm is to order the nodes by importance. Instead of ordering the highways by
+their importance, we order the nodes. And the idea is that the importance
+of the nodes on your shortest path should first increase and
+then decrease back. And for example, these could be points where a highway
+merges into another highway. And it can't really get away
+without passing through this node. And then if this is true that
+the importance first increases and then decreases back, we can use
+bidirectional search from source to the most important node
+on our shortest path. This is a forward search. And then from the target to the most
+important node on our shortest path, this is a backward search. And then when they meet in the common
+middle point which has the biggest importance on the path, then we have
+the path between source and the target. So the idea is about which nodes
+are important, which are not. First, many shortest paths
+involve important nodes. If you look at this map of the US,
+you will see that there are many, many big routes coming
+out from big cities. And that's no coincidence. And as most of the shortest paths,
+which are long-distance go through these big roads,
+they also go through these big cities. So big cities are important nodes. And many shortest paths go
+through those important nodes. Another idea is that the important
+nodes are somewhat spread around. Because in each region of the map,
+we have some big cities and capital of the state or
+some bigger city in the state, which is important node, such that many
+shortest paths again go through it. It can't just have one single important
+node, and everything else is unimportant. You always have them spread
+out through all the map. And another thing is that important nodes
+are sometimes completely unavoidable. For example, for many, many different
+source points in San Francisco on the left shore and for many target
+points in Oakland on the right shore, there is no other way to get from
+the source to this target via some shortest path and
+bypass this Treasure Island in between. And so this Treasure Island
+node is very important because you cannot just avoid
+it with the shortest path. And the contraction hierarchies algorithm
+uses this scheme of shortest paths with preprocessing. When you don't just get a graph, and then instantly start to answer queries,
+how long does it take to get from A to B? Now instead you first get the graph and
+you get some time to preprocess it. It can be a long process. It can take a few hours or even days. But then when you're ready, and you've
+saved the results of your preprocessing, you can answer the queries for
+distance and shortest paths much faster. And you work with this
+preprocessed graph to do that. And this is a very practical case. For example in Google Maps or
+in Yanix Maps, that's what people do. They first preprocess the graph. And then they push the preprocessed
+graph and the algorithm into production. And then they can answer your
+queries millions of times faster without you noticing it. And it doesn't matter that we have to
+spend a few hours or a few days before pushing the graph into production
+because it happens behind the scenes. And so the general schema is that you
+prerpocess the graph then implement a special algorithm to find distance and
+shortest path in this preprocessed graph. And then you reconstruct the shortest
+path in the initial graph and show it to the user somehow. In the next videos, we will first
+study how the preprocessing works for the contraction hierarchies. Then we'll study how to implement
+the distance and shortest path queries. We'll prove the correctness
+of the overall algorithm. And we'll point out some very important
+optimizations of this algorithm. And in the end, we will understand
+how we can actually measure the importance of the nodes
+that this algorithm uses and how to implement this
+importance in your algorithm.

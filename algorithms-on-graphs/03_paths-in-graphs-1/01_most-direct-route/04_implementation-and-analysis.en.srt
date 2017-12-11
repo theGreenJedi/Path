@@ -1,0 +1,629 @@
+1
+00:00:00,230 --> 00:00:00,990
+Hi.
+
+2
+00:00:00,990 --> 00:00:03,830
+In this video, we will implement
+the Breadth-first Search algorithm from
+
+3
+00:00:03,830 --> 00:00:06,500
+the previous video and
+analyze it's running time.
+
+4
+00:00:07,500 --> 00:00:09,170
+Let's look at this pseudocode.
+
+5
+00:00:09,170 --> 00:00:12,780
+The procedure of BFS is called
+after Breadth-first Search and
+
+6
+00:00:12,780 --> 00:00:18,470
+it takes graph G and
+origin node S as input parameters.
+
+7
+00:00:18,470 --> 00:00:23,080
+It also uses array dist to
+store the distances from
+
+8
+00:00:23,080 --> 00:00:27,690
+the original node S to
+all nodes in the graph.
+
+9
+00:00:27,690 --> 00:00:32,760
+It can be not an array,
+it can be a map from nodes to distances,
+
+10
+00:00:32,760 --> 00:00:35,390
+depending on what are your nodes.
+
+11
+00:00:35,390 --> 00:00:41,390
+If your nodes are numbered from 0 to
+n minus 1, then it will probably be
+
+12
+00:00:41,390 --> 00:00:46,450
+convenient to use an array of size n
+to store distances for those nodes.
+
+13
+00:00:46,450 --> 00:00:51,250
+But if your nodes are labeled with
+some strings or some other objects,
+
+14
+00:00:51,250 --> 00:00:56,710
+then it maybe wise to use a map
+from nodes to distances and
+
+15
+00:00:56,710 --> 00:00:58,870
+call this data structure dist.
+
+16
+00:00:58,870 --> 00:01:03,970
+Anyway, we'll use this dist data
+structure to store our estimations
+
+17
+00:01:03,970 --> 00:01:08,920
+of distances from origin to
+all the nodes in the graph.
+
+18
+00:01:08,920 --> 00:01:14,060
+And we initialize all these distances with
+infinity, with the exception of the node
+
+19
+00:01:14,060 --> 00:01:19,780
+as itself, which gets an estimation
+of 0 from the beginning.
+
+20
+00:01:19,780 --> 00:01:23,650
+And we will also use another data
+structure Q, which is a queue,
+
+21
+00:01:23,650 --> 00:01:29,110
+the data structure which works in
+the principle of first in, first out.
+
+22
+00:01:29,110 --> 00:01:31,590
+So the first element that
+
+23
+00:01:31,590 --> 00:01:36,060
+goes into the queue is the first
+element that goes out of the queue.
+
+24
+00:01:36,060 --> 00:01:42,080
+And we initialize this Q with just
+one element, the origin node S.
+
+25
+00:01:42,080 --> 00:01:48,780
+And this symbolizes that we already
+discovered node S and put it in the queue.
+
+26
+00:01:48,780 --> 00:01:53,640
+So all the discovered nodes
+are those which are in the queue.
+
+27
+00:01:53,640 --> 00:01:56,500
+All of the nodes which
+haven't been in the queue yet
+
+28
+00:01:56,500 --> 00:01:59,590
+are white nodes which
+are not discovered yet.
+
+29
+00:01:59,590 --> 00:02:04,790
+And the black nodes, in the terms
+of the example I showed you before,
+
+30
+00:02:04,790 --> 00:02:10,480
+are those nodes which are already
+out from the queue and
+
+31
+00:02:10,480 --> 00:02:13,910
+are being processed or
+have been processed before.
+
+32
+00:02:13,910 --> 00:02:18,287
+And we will take nodes from Q one by one,
+process them,
+
+33
+00:02:18,287 --> 00:02:23,823
+discover new nodes and put new
+discovered nodes back into the queue.
+
+34
+00:02:23,823 --> 00:02:29,674
+So we'll start with Q initialized
+with only starting node S.
+
+35
+00:02:29,674 --> 00:02:32,211
+And while this Q is not empty,
+
+36
+00:02:32,211 --> 00:02:37,900
+we take the first element
+from it using method dequeue.
+
+37
+00:02:37,900 --> 00:02:41,220
+So we get it to variable u.
+
+38
+00:02:41,220 --> 00:02:46,250
+So, this is the first node in the queue,
+and we start processing it.
+
+39
+00:02:46,250 --> 00:02:47,820
+And to start processing it,
+
+40
+00:02:47,820 --> 00:02:53,760
+we triggers all the edges outgoing
+from this node u in the graph.
+
+41
+00:02:53,760 --> 00:03:00,450
+So we have a for loop for all edges (u,v)
+in the set of edges of the graph and
+
+42
+00:03:00,450 --> 00:03:05,650
+this means that we traverse all the edges
+which have starting nodes u and
+
+43
+00:03:05,650 --> 00:03:08,469
+some other node as it's end.
+
+44
+00:03:09,690 --> 00:03:14,650
+And we'll look at node v and
+now we need to determine whether
+
+45
+00:03:14,650 --> 00:03:18,990
+this node is already discovered and
+maybe already processed or not.
+
+46
+00:03:18,990 --> 00:03:23,570
+And to determine that,
+we'll use our dist values.
+
+47
+00:03:23,570 --> 00:03:28,040
+So if dist value of the node is infinity,
+then it means that this node
+
+48
+00:03:28,040 --> 00:03:31,490
+hasn't been discovered yet,
+because as soon as it will be discovered,
+
+49
+00:03:31,490 --> 00:03:37,240
+we will change the estimation of the
+distance to it and it will becomes finite.
+
+50
+00:03:37,240 --> 00:03:41,490
+While it is still infinite, it means
+that the node hasn't been discovered.
+
+51
+00:03:41,490 --> 00:03:48,090
+And vice versa, if dist Is finite,
+then we have discovered this node already.
+
+52
+00:03:48,090 --> 00:03:53,110
+So if this node was discovered previously,
+then we don't need to do anything with it.
+
+53
+00:03:53,110 --> 00:03:54,810
+This is a red edge.
+
+54
+00:03:54,810 --> 00:03:57,490
+And we don't do anything
+with a red edge from
+
+55
+00:03:57,490 --> 00:04:02,430
+our currently processing node to
+the node which was discovered earlier.
+
+56
+00:04:02,430 --> 00:04:07,290
+But if the edge is to a white node
+which was not discussed previously,
+
+57
+00:04:07,290 --> 00:04:09,430
+we need to process this edge.
+
+58
+00:04:09,430 --> 00:04:14,320
+And by processing it we first
+discover the end of this edge v and
+
+59
+00:04:14,320 --> 00:04:20,950
+we do that by calling enqueue, so
+adding these v to the end of the queue.
+
+60
+00:04:20,950 --> 00:04:26,308
+And we'll also change the estimate
+of the distance to this node v and
+
+61
+00:04:26,308 --> 00:04:30,260
+we set it to distance to
+the current node plus one.
+
+62
+00:04:30,260 --> 00:04:35,190
+Because we know that when we process
+a node from somewhere, some of the edges
+
+63
+00:04:35,190 --> 00:04:39,140
+are red because they go to the same
+layer of or one of the previous layers.
+
+64
+00:04:39,140 --> 00:04:44,140
+But the edges that go to the undiscovered
+nodes go to the next layer.
+
+65
+00:04:44,140 --> 00:04:48,890
+So the distance to v is equal
+to distance to u plus 1.
+
+66
+00:04:48,890 --> 00:04:54,300
+And we repeat and repeat this process
+while our queue is not empty.
+
+67
+00:04:55,860 --> 00:04:57,270
+And we need to make a few notes.
+
+68
+00:04:57,270 --> 00:04:59,290
+First, this infinity thing.
+
+69
+00:04:59,290 --> 00:05:04,440
+Of course, in a real programming language,
+there won't be any infinity,
+
+70
+00:05:04,440 --> 00:05:08,200
+so you will have to use
+something special for that.
+
+71
+00:05:08,200 --> 00:05:13,460
+One variant is to estimate what
+is the maximum possible distance
+
+72
+00:05:13,460 --> 00:05:18,395
+from origin node to any nodes
+in the graph, and just use
+
+73
+00:05:18,395 --> 00:05:23,845
+a constant value or some computable value
+which is definitely bigger than that.
+
+74
+00:05:23,845 --> 00:05:28,700
+For example, distance from origin
+cannot be bigger than the number of
+
+75
+00:05:28,700 --> 00:05:34,350
+nodes in the graph,
+because every path without
+
+76
+00:05:34,350 --> 00:05:40,740
+cycles inside it will have, at most,
+a number of nodes minus 1 edges.
+
+77
+00:05:40,740 --> 00:05:44,640
+Or you can just say that it is not bigger
+than the number of edges in the graph.
+
+78
+00:05:44,640 --> 00:05:49,545
+Because you won't use the same edge twice
+in the shortest path from origin node
+
+79
+00:05:49,545 --> 00:05:50,449
+to your node.
+
+80
+00:05:50,449 --> 00:05:55,520
+So anyway,
+[COUGH] you can assign infinity to
+
+81
+00:05:55,520 --> 00:06:00,420
+number of nodes plus 1 or number of
+edges plus 1 or some other big value.
+
+82
+00:06:00,420 --> 00:06:06,170
+And another thing you can do is you just,
+instead of using integer numbers for
+
+83
+00:06:06,170 --> 00:06:10,880
+storing distances, you create a special
+structure which has two fields.
+
+84
+00:06:10,880 --> 00:06:13,440
+One of them is distance if is determined.
+
+85
+00:06:13,440 --> 00:06:17,790
+And another field is just a boolean field,
+which tells you whether the distance
+
+86
+00:06:17,790 --> 00:06:22,490
+is defined or it is still not defined,
+and then this means infinity.
+
+87
+00:06:23,560 --> 00:06:28,310
+And another note is that why
+this algorithm even stops.
+
+88
+00:06:28,310 --> 00:06:35,370
+And the key observation is that we
+only put a node into the queue once,
+
+89
+00:06:35,370 --> 00:06:40,250
+because as soon as we put this
+node in the queue, we enqueue it,
+
+90
+00:06:40,250 --> 00:06:44,700
+we also change the estimation of distance
+to this node and it becomes finite.
+
+91
+00:06:44,700 --> 00:06:48,970
+And so one, we will try to pull it in
+the queue next time, we will compare
+
+92
+00:06:48,970 --> 00:06:52,330
+the distance to it with infinity and
+it won't be equal to infinity.
+
+93
+00:06:52,330 --> 00:06:55,770
+So we won't put node into the queue again.
+
+94
+00:06:55,770 --> 00:07:02,649
+And it means that we put at most number of
+nodes in the graph, elements in the queue.
+
+95
+00:07:03,770 --> 00:07:06,640
+And on each step of the while loop,
+
+96
+00:07:06,640 --> 00:07:11,180
+we take some node out of this queue,
+so its size decreases.
+
+97
+00:07:11,180 --> 00:07:16,250
+So it can increase at most number
+of nodes in the graph times and
+
+98
+00:07:16,250 --> 00:07:17,460
+it decreases in each steps.
+
+99
+00:07:17,460 --> 00:07:23,070
+So, this means that these others
+definitely stops and it definitely stops
+
+100
+00:07:23,070 --> 00:07:29,330
+after at most number of nodes in the graph
+steps of the external while loop.
+
+101
+00:07:29,330 --> 00:07:32,850
+Now let's estimate the running time
+of this algorithm more precisely.
+
+102
+00:07:32,850 --> 00:07:36,310
+I state that the running time of
+breadth-first search is proportional to
+
+103
+00:07:36,310 --> 00:07:41,420
+the number of edges plus
+number of nodes in the graph.
+
+104
+00:07:41,420 --> 00:07:42,660
+Why is that?
+
+105
+00:07:42,660 --> 00:07:46,250
+First we've already discovered that
+each vertex, each node of the graph,
+
+106
+00:07:46,250 --> 00:07:48,180
+is enqueued at most once.
+
+107
+00:07:48,180 --> 00:07:52,420
+So the number of iterations
+of the external while loop
+
+108
+00:07:52,420 --> 00:07:55,800
+is at most number of nodes of the graph.
+
+109
+00:07:55,800 --> 00:08:00,130
+Another observation is that each
+edge is examined either once for
+
+110
+00:08:00,130 --> 00:08:04,210
+directed graphs, or
+twice for undirected graphs.
+
+111
+00:08:04,210 --> 00:08:04,740
+Why is that?
+
+112
+00:08:04,740 --> 00:08:10,290
+Well, the edge is examined when
+one of its ends is processed.
+
+113
+00:08:10,290 --> 00:08:12,782
+The node, which is one of its ends,
+is processed.
+
+114
+00:08:12,782 --> 00:08:14,643
+And if the graph is directed,
+
+115
+00:08:14,643 --> 00:08:18,973
+then the edge is actually examined
+only if it's start is processed.
+
+116
+00:08:18,973 --> 00:08:24,495
+And if the graph is undirected,
+then for each of its nodes,
+
+117
+00:08:24,495 --> 00:08:29,080
+the edge is examined when
+this end is processed.
+
+118
+00:08:29,080 --> 00:08:32,490
+Of course, this edge will work and
+
+119
+00:08:32,490 --> 00:08:37,660
+discover a new node at most once out
+of those two times it is examined.
+
+120
+00:08:37,660 --> 00:08:40,810
+But still it will be examined
+twice from both ends.
+
+121
+00:08:41,920 --> 00:08:45,100
+And of course, if the edge is not
+connected to the original node,
+
+122
+00:08:45,100 --> 00:08:47,180
+it won't be examined at all.
+
+123
+00:08:47,180 --> 00:08:53,020
+But we say that each edge in any case
+will be processed at most twice.
+
+124
+00:08:53,020 --> 00:08:58,810
+And what it means is that the total
+number of iterations of the internal for
+
+125
+00:08:58,810 --> 00:09:03,340
+loop is, at most,
+number of edges of the graph.
+
+126
+00:09:03,340 --> 00:09:08,560
+And so adding those up and
+adding the constant number of
+
+127
+00:09:08,560 --> 00:09:13,670
+operations in the start and adding the
+initialization of the dist values which
+
+128
+00:09:13,670 --> 00:09:18,390
+goes in time proportional to the number
+of nodes of the graph, in total,
+
+129
+00:09:18,390 --> 00:09:22,580
+we got number of edges plus
+number of nodes in the graph.
+
+130
+00:09:22,580 --> 00:09:27,291
+And in the next video we will prove that
+breadth-first search actually returns
+
+131
+00:09:27,291 --> 00:09:30,678
+correct distances to all
+the nodes from the origin node.

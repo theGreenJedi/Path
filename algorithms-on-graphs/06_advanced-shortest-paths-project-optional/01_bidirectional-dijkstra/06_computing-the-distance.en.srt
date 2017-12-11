@@ -1,0 +1,168 @@
+1
+00:00:00,005 --> 00:00:04,370
+So now we've proven that theorem.
+
+2
+00:00:04,370 --> 00:00:07,910
+And we can implement
+the algorithm as follows.
+
+3
+00:00:07,910 --> 00:00:12,460
+We do the alternating turns
+of forward search and
+
+4
+00:00:12,460 --> 00:00:16,021
+the backwards search until
+we meet at some point v.
+
+5
+00:00:17,110 --> 00:00:21,910
+And we remember which vertices
+are processed in forward search and
+
+6
+00:00:21,910 --> 00:00:24,940
+which vertices are processed
+in the backward search.
+
+7
+00:00:24,940 --> 00:00:30,410
+Then, we take all those vertices which
+are processed at least in one of them,
+
+8
+00:00:30,410 --> 00:00:35,544
+and for each of those vertices,
+we minimize the sum of distance estimate
+
+9
+00:00:35,544 --> 00:00:40,705
+of the forward surge plus the distance
+estimate of the backwards surge.
+
+10
+00:00:40,705 --> 00:00:44,343
+And for the node for
+which this sum is minimal,
+
+11
+00:00:44,343 --> 00:00:49,392
+we know that there is a shortest
+path going through this vertex.
+
+12
+00:00:49,392 --> 00:00:54,360
+And its length is equal to the sum
+of these two distance estimates.
+
+13
+00:00:54,360 --> 00:01:00,800
+And then to reconstruct the path itself,
+we can reconstruct the shortest path
+
+14
+00:01:00,800 --> 00:01:06,690
+from the source vertex to this
+middle vertex in the forward search.
+
+15
+00:01:06,690 --> 00:01:07,980
+And separately,
+
+16
+00:01:07,980 --> 00:01:14,180
+we reconstruct the path from this vertex
+to target vertex t in the backward search.
+
+17
+00:01:14,180 --> 00:01:19,970
+And then just join those two parts into
+a single shortest path from s to t.
+
+18
+00:01:19,970 --> 00:01:22,520
+I won't show you the psuedocode
+in the lecture, but
+
+19
+00:01:22,520 --> 00:01:25,520
+you can see it in the slides
+which are uploaded.
+
+20
+00:01:27,480 --> 00:01:29,598
+So in conclusion, a few remarks.
+
+21
+00:01:29,598 --> 00:01:33,130
+First, the worst-case running
+time of Bidirectional Dijkstra
+
+22
+00:01:33,130 --> 00:01:37,120
+is the same asymptotically as for
+the regular Dijkstra algorithm.
+
+23
+00:01:37,120 --> 00:01:41,675
+And we saw that it can differ, for
+example, twice for route networks, but
+
+24
+00:01:41,675 --> 00:01:44,075
+this is not an asymptotic difference.
+
+25
+00:01:44,075 --> 00:01:47,706
+And speedup in practice
+depends on the graph, so for
+
+26
+00:01:47,706 --> 00:01:51,016
+the route networks it's
+roughly 2x speed up.
+
+27
+00:01:51,016 --> 00:01:54,840
+But for social networks,
+it can be thousands of times faster.
+
+28
+00:01:56,070 --> 00:01:59,710
+From the other hand, the memory
+consumption is somewhat worse, but
+
+29
+00:01:59,710 --> 00:02:01,526
+again, it is not asymptotically worse.
+
+30
+00:02:01,526 --> 00:02:07,960
+It's just 2x to store two copies of G,
+the G and the reversed G.
+
+31
+00:02:07,960 --> 00:02:12,690
+And also we'll need to store
+some auxiliary arrays for
+
+32
+00:02:12,690 --> 00:02:17,590
+forward search and for backwards search,
+so twice the memory for those also, so
+
+33
+00:02:17,590 --> 00:02:20,280
+roughly 2x memory consumption.
+
+34
+00:02:20,280 --> 00:02:25,020
+And you'll see the actual speedup
+on social network's graphs
+
+35
+00:02:25,020 --> 00:02:28,850
+in one of the problems of the
+Programming Assignment of this project.

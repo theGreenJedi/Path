@@ -1,0 +1,556 @@
+1
+00:00:00,150 --> 00:00:02,770
+It is not always the case
+that the shortest
+
+2
+00:00:02,770 --> 00:00:04,840
+path go through the meeting point.
+
+3
+00:00:04,840 --> 00:00:09,140
+So what exactly then do we need
+to do to compute the distance
+
+4
+00:00:09,140 --> 00:00:14,650
+when we found the common meeting point,
+and is it actually possible?
+
+5
+00:00:14,650 --> 00:00:19,290
+Well it is possible, but
+it is little bit more complicated.
+
+6
+00:00:19,290 --> 00:00:23,887
+So let's denote by dist of
+u the distance estimate in
+
+7
+00:00:23,887 --> 00:00:28,915
+the forward Dijkstras from source
+s in G and by dist R of u.
+
+8
+00:00:28,915 --> 00:00:35,530
+The same but the distance estimated in
+the backward Dijkstra from T in the GR.
+
+9
+00:00:35,530 --> 00:00:40,890
+So dist R is an estimate of the distance
+from u to the target vertex T.
+
+10
+00:00:42,380 --> 00:00:47,810
+So after some node v is
+processed in both G and GR.
+
+11
+00:00:47,810 --> 00:00:54,470
+I say that there exists some shortest path
+from s to t which passes though some node
+
+12
+00:00:54,470 --> 00:01:01,000
+U which is processed either is the forward
+search or backward search or in both.
+
+13
+00:01:02,030 --> 00:01:06,030
+And the distance from the s to t
+
+14
+00:01:06,030 --> 00:01:10,630
+is equal to the distance estimate
+of u in the forward search,
+
+15
+00:01:10,630 --> 00:01:16,500
+plus the distance estimate of
+the backwards search from u.
+
+16
+00:01:16,500 --> 00:01:24,390
+What it means is that there exist some
+vertex u that chooses path from s to t,
+
+17
+00:01:24,390 --> 00:01:28,970
+at least some of this path from s
+to t goes through this vertex u.
+
+18
+00:01:28,970 --> 00:01:34,870
+And this u is either processed in G,
+or is processed in GR.
+
+19
+00:01:34,870 --> 00:01:37,710
+And also, the distance estimates for
+
+20
+00:01:37,710 --> 00:01:42,610
+that vertex are already correct for
+both forward search and backward search.
+
+21
+00:01:42,610 --> 00:01:46,430
+So of course, if it is processed
+in the forward search, for
+
+22
+00:01:46,430 --> 00:01:50,650
+example, then we know that the distance
+estimated to this node is already correct.
+
+23
+00:01:50,650 --> 00:01:53,770
+That the distance from
+source vertex to this node u
+
+24
+00:01:53,770 --> 00:01:57,310
+is equal to it's distance
+estimate dist of u.
+
+25
+00:01:57,310 --> 00:02:03,040
+But if it's not yet processed in the
+backwards search, in the reverse search,
+
+26
+00:02:03,040 --> 00:02:07,450
+then this is not guaranteed in
+the general case for the dist r.
+
+27
+00:02:07,450 --> 00:02:09,815
+For the distance estimate
+in the backwards search.
+
+28
+00:02:09,815 --> 00:02:12,390
+But we can show that for
+
+29
+00:02:12,390 --> 00:02:17,890
+some node u is actually
+also a correct estimate
+
+30
+00:02:17,890 --> 00:02:22,240
+which is equal to the distance to the
+distance from U to the target vertex t.
+
+31
+00:02:22,240 --> 00:02:27,330
+So there exists some nodes u and
+some shortest path that this node u lies
+
+32
+00:02:27,330 --> 00:02:33,240
+on the shortest path and both distance
+estimates from source to u and u to target
+
+33
+00:02:33,240 --> 00:02:37,920
+are already correct by the moment our
+forward search meets our backward search.
+
+34
+00:02:38,980 --> 00:02:40,090
+Now, let's prove this dilemma.
+
+35
+00:02:41,250 --> 00:02:47,200
+So, we have these two gray circles,
+which show us
+
+36
+00:02:47,200 --> 00:02:53,220
+this can't vertices by the forward search
+from s, and by the backward search from t.
+
+37
+00:02:53,220 --> 00:02:58,370
+And they touch in the vertex v,
+which is the meeting point.
+
+38
+00:02:58,370 --> 00:03:05,470
+Now first, let's prove that
+if there is some node u which
+
+39
+00:03:05,470 --> 00:03:11,840
+is not processed by forward search and
+is not processed by the backward search.
+
+40
+00:03:11,840 --> 00:03:16,760
+And there is the shortest path from
+s to t going through this node u,
+
+41
+00:03:16,760 --> 00:03:21,720
+that then there is also shortest path
+which goes from s to t through v.
+
+42
+00:03:23,170 --> 00:03:27,600
+To see that, first let's compare
+the first half of the shortest path from
+
+43
+00:03:27,600 --> 00:03:31,430
+s to t going through u to
+the shortest path from s to v.
+
+44
+00:03:31,430 --> 00:03:37,140
+We know that v is already processed
+in the forward search and
+
+45
+00:03:37,140 --> 00:03:43,750
+it means that the distance from s to v
+is at most the distance from s to u.
+
+46
+00:03:43,750 --> 00:03:49,860
+So here the green part is less than or
+equal to the red part.
+
+47
+00:03:50,890 --> 00:03:56,240
+Also if we consider the backward the extra
+search, we know that v Is processed,
+
+48
+00:03:56,240 --> 00:03:59,880
+but u is still not processed
+in this backward search.
+
+49
+00:03:59,880 --> 00:04:03,300
+So, the right half,
+
+50
+00:04:03,300 --> 00:04:08,720
+the green right half is also less than or
+equal to the red half.
+
+51
+00:04:08,720 --> 00:04:15,040
+So, in both halves, the green parts
+are less than or equal to the red parts.
+
+52
+00:04:15,040 --> 00:04:21,520
+And this means that the path from s
+to t going through v is shorter or
+
+53
+00:04:21,520 --> 00:04:26,710
+of the same length as the shortest
+path from s to t going through u.
+
+54
+00:04:26,710 --> 00:04:31,840
+So it means that actually the path from s
+to t going through v is the shortest path.
+
+55
+00:04:31,840 --> 00:04:34,590
+And so in this case,
+our theorem is proved.
+
+56
+00:04:34,590 --> 00:04:40,280
+If there is at least some one vertex u
+which is not processed by forward and
+
+57
+00:04:40,280 --> 00:04:42,280
+not processed by backwards search.
+
+58
+00:04:42,280 --> 00:04:48,420
+And there's a shortest path going through
+the vertex then there is a shortest path,
+
+59
+00:04:48,420 --> 00:04:50,870
+another one which goes
+through the vertex v.
+
+60
+00:04:50,870 --> 00:04:54,920
+Which is already processed by
+both forward and backward search.
+
+61
+00:04:54,920 --> 00:04:59,260
+And of course both distance
+estimates of v are already correct.
+
+62
+00:04:59,260 --> 00:05:02,490
+Because it's already processed in
+both backwards and forward search.
+
+63
+00:05:03,800 --> 00:05:06,720
+Now let's consider another
+case when there are no
+
+64
+00:05:06,720 --> 00:05:10,639
+varices which are unprocessed by
+both forward and backward searches.
+
+65
+00:05:11,970 --> 00:05:13,550
+But we already meet a point v.
+
+66
+00:05:15,350 --> 00:05:22,440
+So let's consider then any shortest spot
+from s to t, and let's consider the last
+
+67
+00:05:22,440 --> 00:05:28,770
+vertex u on such shortest spot that
+is processed by the forward surge.
+
+68
+00:05:28,770 --> 00:05:33,700
+So u is the last vertex which
+is on the shortest path,
+
+69
+00:05:33,700 --> 00:05:36,910
+which is processed by the forward search.
+
+70
+00:05:36,910 --> 00:05:42,130
+And then the distance estimates of u in
+the forward search is already correct.
+
+71
+00:05:42,130 --> 00:05:44,830
+This is equal to the distance from s to u.
+
+72
+00:05:45,970 --> 00:05:49,010
+Let's consider the next
+edge of the shortest path.
+
+73
+00:05:49,010 --> 00:05:50,610
+It goes to some vertex w.
+
+74
+00:05:50,610 --> 00:05:56,130
+And this vertex w has to be
+processed by the backward search.
+
+75
+00:05:56,130 --> 00:05:59,145
+Why?
+Because w is not processed by the forward
+
+76
+00:05:59,145 --> 00:06:02,270
+search because u is the last
+vertex of the shortest path
+
+77
+00:06:02,270 --> 00:06:03,966
+which is processed by the forward surge.
+
+78
+00:06:03,966 --> 00:06:08,720
+And w cannot be unprocessed
+by both forward and
+
+79
+00:06:08,720 --> 00:06:12,120
+backward search,
+because it lies on the shortest path.
+
+80
+00:06:12,120 --> 00:06:16,830
+And so w is indeed inside
+the gray circle around t,
+
+81
+00:06:16,830 --> 00:06:20,900
+it is indeed already processed
+by the backward search.
+
+82
+00:06:20,900 --> 00:06:25,590
+And so the distance estimate of the
+backwards search for w is already correct.
+
+83
+00:06:25,590 --> 00:06:28,390
+It is already equal to
+the distance from w to t.
+
+84
+00:06:29,800 --> 00:06:34,300
+Now, what we know is that
+the distance between s and
+
+85
+00:06:34,300 --> 00:06:37,948
+t is equal to the distance from s to u.
+
+86
+00:06:37,948 --> 00:06:41,790
+Which is equal to
+the distance estimate of u,
+
+87
+00:06:41,790 --> 00:06:46,140
+dist of u plus length of
+the edge from u to w.
+
+88
+00:06:46,140 --> 00:06:49,190
+Plus distance from w to t which is already
+
+89
+00:06:49,190 --> 00:06:54,110
+equal to the distance estimate of
+the backward search, dist R of w.
+
+90
+00:06:54,110 --> 00:06:58,820
+And now what we want to prove is that
+this is also equal to the sum of distance
+
+91
+00:06:58,820 --> 00:07:04,300
+estimate of u and
+the reverse distance estimate of u.
+
+92
+00:07:04,300 --> 00:07:06,380
+So the first sum is the same.
+
+93
+00:07:08,460 --> 00:07:14,090
+And now I claim that the distance
+estimate in the reverse direction
+
+94
+00:07:14,090 --> 00:07:19,620
+is equal to the sum of the two other
+summons in the first equation.
+
+95
+00:07:20,660 --> 00:07:22,120
+Why is that?
+
+96
+00:07:22,120 --> 00:07:27,620
+Well from one point of view we know
+that the distance estimate of u
+
+97
+00:07:27,620 --> 00:07:35,450
+is always bigger or
+equal to the real distance from u to t.
+
+98
+00:07:36,530 --> 00:07:40,330
+Because the distance
+estimate in any moment
+
+99
+00:07:40,330 --> 00:07:45,590
+of Dijkstra's algorithm is greater or
+equal to the real distance.
+
+100
+00:07:45,590 --> 00:07:46,500
+From the other hand,
+
+101
+00:07:46,500 --> 00:07:52,490
+we know that the vertex w is already
+processed in the reversed search.
+
+102
+00:07:52,490 --> 00:07:55,310
+And when it was processed, in particular,
+
+103
+00:07:55,310 --> 00:08:01,670
+the edge from u to w was relaxed
+in the backwards search.
+
+104
+00:08:01,670 --> 00:08:04,940
+And when it was relaxed it
+made sure that the distance
+
+105
+00:08:04,940 --> 00:08:10,440
+estimate of u in reverse
+direction is at most this sum
+
+106
+00:08:10,440 --> 00:08:15,360
+of length of this edge plus
+the distance estimate for w.
+
+107
+00:08:15,360 --> 00:08:20,180
+So we know that distance
+estimate of u is at most.
+
+108
+00:08:20,180 --> 00:08:24,270
+A length of edge from u to w
+plus distance estimate of w.
+
+109
+00:08:24,270 --> 00:08:31,394
+But this sum is the length of the shortest
+path from u to t going through w.
+
+110
+00:08:31,394 --> 00:08:36,690
+So in fact, we know that distance
+estimate of u is both greater or
+
+111
+00:08:36,690 --> 00:08:40,040
+equal than the true
+shortest path from u to t.
+
+112
+00:08:40,040 --> 00:08:45,960
+And also is less than or equal to
+the shortest path from F from u to t.
+
+113
+00:08:45,960 --> 00:08:50,980
+And this means that it is exactly equal
+to the shortest path from u to t.
+
+114
+00:08:50,980 --> 00:08:54,530
+And that the distant from
+s to t is actually equal
+
+115
+00:08:54,530 --> 00:08:58,630
+to the distance estimate a u plus
+the reverse distance estimated of u.

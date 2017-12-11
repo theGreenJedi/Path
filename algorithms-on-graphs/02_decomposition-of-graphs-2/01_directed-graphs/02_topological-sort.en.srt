@@ -1,0 +1,745 @@
+1
+00:00:00,880 --> 00:00:02,680
+Hello everybody, welcome back.
+
+2
+00:00:02,680 --> 00:00:06,520
+Today, we're going to be talking about
+the algorithm of a topological sort.
+
+3
+00:00:06,520 --> 00:00:09,370
+And we're going to talk about this,
+we're going to show in fact that
+
+4
+00:00:09,370 --> 00:00:12,760
+any DAG can be linearly ordered, and
+we're going to show you how to do it.
+
+5
+00:00:14,130 --> 00:00:18,354
+So remember from last time,
+we were talking about directed graphs and
+
+6
+00:00:18,354 --> 00:00:23,168
+in particular we wanted to be able to
+linearly order the vertices of this graph.
+
+7
+00:00:23,168 --> 00:00:27,791
+Such that every edge pointing to a prome
+vertex with smaller index under this
+
+8
+00:00:27,791 --> 00:00:31,300
+linear ordering something that's larger.
+
+9
+00:00:31,300 --> 00:00:32,760
+Now we know that in order for
+
+10
+00:00:32,760 --> 00:00:37,640
+this to be possible, our graph needed to
+have no cycles, it needed to be a DAG.
+
+11
+00:00:37,640 --> 00:00:41,158
+And today, we're going to show
+that this is actually sufficient.
+
+12
+00:00:41,158 --> 00:00:44,638
+So one way to look at this is if
+you have this linear ordering,
+
+13
+00:00:44,638 --> 00:00:48,000
+let's think about which vertex
+comes last in this order.
+
+14
+00:00:49,310 --> 00:00:53,500
+Well if it comes last it can
+have edges pointing to it, but
+
+15
+00:00:53,500 --> 00:00:55,080
+it can have no edges pointing out of it.
+
+16
+00:00:56,250 --> 00:01:00,420
+And so this gives a motivation for
+useful definition.
+
+17
+00:01:00,420 --> 00:01:04,048
+We say that the source is vertex in
+a graph that has no incoming edges.
+
+18
+00:01:04,048 --> 00:01:07,288
+So a source can have as many edges
+as it likes going outwards, but
+
+19
+00:01:07,288 --> 00:01:09,030
+it can't have any going inwards.
+
+20
+00:01:10,610 --> 00:01:13,670
+Similarly a sync is a vertex
+with no outgoing edges.
+
+21
+00:01:13,670 --> 00:01:16,930
+It can have a bajillion edges coming
+into it, but nothing can escape.
+
+22
+00:01:18,070 --> 00:01:20,180
+So to be clear that
+we're on the same page,
+
+23
+00:01:20,180 --> 00:01:23,800
+the following graph has nine vertices,
+how many of them are sinks?
+
+24
+00:01:25,920 --> 00:01:28,910
+Well the following highlighted
+three vertices are sinks.
+
+25
+00:01:28,910 --> 00:01:33,894
+They each have no edges coming out,
+but every other vertex
+
+26
+00:01:33,894 --> 00:01:38,888
+in the graph does have a few or
+at least one edge leaving it.
+
+27
+00:01:38,888 --> 00:01:44,420
+So here's the basic idea for how we're
+going to produce our linear order.
+
+28
+00:01:44,420 --> 00:01:46,450
+We're going to first
+find a sink in the graph.
+
+29
+00:01:46,450 --> 00:01:48,110
+There needs to be a sink,
+
+30
+00:01:48,110 --> 00:01:51,180
+because there needs to be
+something at the end of the order.
+
+31
+00:01:51,180 --> 00:01:52,670
+And when we have a sink though,
+
+32
+00:01:52,670 --> 00:01:55,730
+we're perfectly fine putting
+it at the end of our ordering.
+
+33
+00:01:55,730 --> 00:01:59,540
+And the reason for this is well, it's got
+edges that point into it, but as long as
+
+34
+00:01:59,540 --> 00:02:04,270
+the vertex comes at the end, everything
+pointing to it is coming from before it.
+
+35
+00:02:05,390 --> 00:02:08,810
+So once we put it at the end of the order,
+it's sort of dealt with and
+
+36
+00:02:08,810 --> 00:02:10,830
+we just need to order
+the rest of the graph.
+
+37
+00:02:11,860 --> 00:02:15,630
+So what we do is remove that vertex
+from the graph and repeat this process.
+
+38
+00:02:17,220 --> 00:02:20,850
+So to see what this means,
+we have this graph on five vertices.
+
+39
+00:02:20,850 --> 00:02:25,530
+D is a sink so we put it at the end of
+our ordering and remove from the graph.
+
+40
+00:02:25,530 --> 00:02:27,358
+Now we find another sink, say C.
+
+41
+00:02:27,358 --> 00:02:29,970
+Put it at the end and
+remove from the graph.
+
+42
+00:02:29,970 --> 00:02:33,690
+E is next, goes at the end,
+then B, then A.
+
+43
+00:02:33,690 --> 00:02:36,918
+And finally we have this ordering,
+A, B, E, C, D.
+
+44
+00:02:36,918 --> 00:02:38,177
+And this it turns out,
+
+45
+00:02:38,177 --> 00:02:41,900
+is consistent with the ordering
+that we had in our original graph.
+
+46
+00:02:44,000 --> 00:02:48,890
+Now this is all well and good, but it
+depends on us being able to find a sink.
+
+47
+00:02:48,890 --> 00:02:50,520
+And before we even ask that,
+
+48
+00:02:50,520 --> 00:02:53,350
+we should ask how do we even know
+that there is a sink in our graph.
+
+49
+00:02:55,180 --> 00:02:58,130
+And it turns out that for DAG at least,
+
+50
+00:02:58,130 --> 00:03:01,900
+there's an easy way to show that there is,
+and the idea is the following.
+
+51
+00:03:01,900 --> 00:03:04,451
+What we're going to do is just
+start at some vertex v1 and
+
+52
+00:03:04,451 --> 00:03:06,118
+we're just going to follow a path.
+
+53
+00:03:06,118 --> 00:03:08,885
+We're going to follow
+directed edges forward and
+
+54
+00:03:08,885 --> 00:03:13,598
+just keep going, finding vertices v2,
+v3, v4, etc, and just keep going.
+
+55
+00:03:13,598 --> 00:03:16,410
+Now eventually one of
+two things will happen.
+
+56
+00:03:17,930 --> 00:03:22,023
+Either we could hit a dead end, we could
+end up at some vertex with just no
+
+57
+00:03:22,023 --> 00:03:25,448
+outgoing edges,
+we just can't extend this path anymore.
+
+58
+00:03:25,448 --> 00:03:27,700
+And if that's the case, we found a sink.
+
+59
+00:03:27,700 --> 00:03:29,930
+We found a vertex with no outgoing edges.
+
+60
+00:03:31,390 --> 00:03:36,300
+The second possibility though is that
+maybe this path just keeps going forever.
+
+61
+00:03:36,300 --> 00:03:40,520
+But if it does since there are only
+finitely many vertices in our graph,
+
+62
+00:03:40,520 --> 00:03:42,620
+eventually we'll have to repeat something.
+
+63
+00:03:42,620 --> 00:03:45,470
+We'll have to find a vertex for
+the second time.
+
+64
+00:03:45,470 --> 00:03:48,670
+But when we do that it means there was
+a path that started at that vertex,
+
+65
+00:03:48,670 --> 00:03:52,390
+went forward a bunch and
+eventually came back to itself.
+
+66
+00:03:52,390 --> 00:03:55,696
+That means we have a cycle, and so
+
+67
+00:03:55,696 --> 00:04:00,428
+at least if we're DAG
+that can't ever happen.
+
+68
+00:04:00,428 --> 00:04:03,638
+So let's take a look at the algorithm.
+
+69
+00:04:03,638 --> 00:04:06,500
+What we're going to do is,
+while G is non empty.
+
+70
+00:04:06,500 --> 00:04:09,470
+We're going to follow a path until
+we can't extend it any further.
+
+71
+00:04:10,520 --> 00:04:13,420
+That vertex at the end is going
+to be a sink which we'll call v.
+
+72
+00:04:14,570 --> 00:04:18,170
+We take the input at the very,
+very end of our ordering and
+
+73
+00:04:18,170 --> 00:04:21,330
+then remove it from the graph,
+and then we just repeat this.
+
+74
+00:04:21,330 --> 00:04:26,958
+So on this graph here, well we started A,
+we follow a path A, B, C, D.
+
+75
+00:04:26,958 --> 00:04:28,378
+Now we're stuck.
+
+76
+00:04:28,378 --> 00:04:31,600
+D is a sink, so
+we can remove it from the graph.
+
+77
+00:04:31,600 --> 00:04:33,846
+We now follow a new path, A, B, C.
+
+78
+00:04:33,846 --> 00:04:36,906
+C is a sink, we remove it from the graph.
+
+79
+00:04:36,906 --> 00:04:39,371
+A and E, E is a sink, we remove it.
+
+80
+00:04:39,371 --> 00:04:43,250
+Path A, B, B is in sync, so we remove it.
+
+81
+00:04:43,250 --> 00:04:46,818
+A is already in sync and so
+we remove it and now we're done.
+
+82
+00:04:46,818 --> 00:04:48,978
+We have our order.
+
+83
+00:04:48,978 --> 00:04:51,850
+Now what's the run time of this outcome?
+
+84
+00:04:51,850 --> 00:04:54,730
+We need to compute one path for
+each vertex in the grid and
+
+85
+00:04:54,730 --> 00:04:56,900
+so all of the many paths.
+
+86
+00:04:56,900 --> 00:04:58,610
+And each path could be pretty long,
+
+87
+00:04:58,610 --> 00:05:00,838
+it include up to all
+the vertices in the graph.
+
+88
+00:05:00,838 --> 00:05:02,220
+It could take all of v time.
+
+89
+00:05:03,390 --> 00:05:11,380
+So the final run time of this algorithm
+is O of V squared which is not great.
+
+90
+00:05:11,380 --> 00:05:14,690
+On the other hand we're doing
+something a little bit inefficient
+
+91
+00:05:14,690 --> 00:05:15,760
+with this algorithm.
+
+92
+00:05:15,760 --> 00:05:19,070
+We started with this vertex,
+we followed this huge long path
+
+93
+00:05:19,070 --> 00:05:21,850
+until we found the sync and
+then we remove it from the graph.
+
+94
+00:05:23,150 --> 00:05:26,100
+Then what we probably did was we
+started that same vertex again,
+
+95
+00:05:26,100 --> 00:05:30,560
+followed basically the same path
+until we got almost to the very end,
+
+96
+00:05:30,560 --> 00:05:33,510
+until we get to right before
+that vertex that we removed.
+
+97
+00:05:34,760 --> 00:05:37,108
+And we're sort of
+repeating all of this work.
+
+98
+00:05:37,108 --> 00:05:39,630
+Why do we need to follow
+this whole path again?
+
+99
+00:05:39,630 --> 00:05:43,280
+We could just back up one
+step along the path and
+
+100
+00:05:43,280 --> 00:05:46,730
+then keep going from there, and
+so that's what we're going to do.
+
+101
+00:05:46,730 --> 00:05:49,228
+Instead of retracing our entire path,
+
+102
+00:05:49,228 --> 00:05:52,568
+we're just going to back
+up one step along our path.
+
+103
+00:05:52,568 --> 00:05:56,768
+So to see what this does in our example,
+we go A, B, C, D.
+
+104
+00:05:56,768 --> 00:05:58,728
+D is a sink which we can remove, but
+
+105
+00:05:58,728 --> 00:06:03,620
+now instead of starting back at A,
+we start at C which is already a sink.
+
+106
+00:06:03,620 --> 00:06:08,419
+And B which is already a sink now at
+A we have to follow the path E to
+
+107
+00:06:08,419 --> 00:06:11,968
+could find the next sink and
+then we're done.
+
+108
+00:06:11,968 --> 00:06:16,810
+And this algorithm reuses our steps a lot
+less and so it's a lot more efficient.
+
+109
+00:06:18,290 --> 00:06:20,230
+In fact,
+we think about with this algorithm does,
+
+110
+00:06:20,230 --> 00:06:22,710
+it's basically just adopt for search.
+
+111
+00:06:22,710 --> 00:06:28,068
+We're starting in a vertex where following
+a path for until we can't anymore.
+
+112
+00:06:28,068 --> 00:06:31,656
+And then finally, once we're stuck,
+we turn around and
+
+113
+00:06:31,656 --> 00:06:34,360
+we sort of, stop using that vertex again.
+
+114
+00:06:35,440 --> 00:06:39,068
+Then from that one step previous
+we just keep going forward again.
+
+115
+00:06:39,068 --> 00:06:42,490
+This is exactly the depth for
+search ordering.
+
+116
+00:06:42,490 --> 00:06:46,797
+And in particular when ever we finish
+the post visit block at a vertex,
+
+117
+00:06:46,797 --> 00:06:48,988
+we put it at the end of our ordering.
+
+118
+00:06:48,988 --> 00:06:54,140
+So the order in which we're sorting our
+vertices is just based on the post order.
+
+119
+00:06:54,140 --> 00:06:58,741
+In particular, vertices with small post
+order go at the end of our ordering, and
+
+120
+00:06:58,741 --> 00:07:01,458
+ones with large post order
+go at the beginning.
+
+121
+00:07:01,458 --> 00:07:04,170
+So the algorithm is now super easy.
+
+122
+00:07:04,170 --> 00:07:06,460
+We run depth for search on the graph and
+
+123
+00:07:06,460 --> 00:07:09,790
+then we sort the vertices based
+on the reverse post order.
+
+124
+00:07:09,790 --> 00:07:12,208
+And note, we really don't actually
+have to do any sorting here.
+
+125
+00:07:12,208 --> 00:07:18,728
+We just have to like, remember the order
+in which we left our vertices.
+
+126
+00:07:18,728 --> 00:07:22,310
+So that's our algorithm,
+let's take a look at the correctness.
+
+127
+00:07:23,510 --> 00:07:27,630
+So basically what we're saying
+is that if we got g as a DAG.
+
+128
+00:07:27,630 --> 00:07:31,810
+Then we want to say, we can order
+them by the reverse post order.
+
+129
+00:07:31,810 --> 00:07:35,465
+Now for this to be consistent
+with our graph ordering,
+
+130
+00:07:35,465 --> 00:07:39,597
+it needs to be the case that whenever
+we have an edge from u to v,
+
+131
+00:07:39,597 --> 00:07:44,458
+u comes before v which means that the post
+of u is bigger than the post of v.
+
+132
+00:07:44,458 --> 00:07:45,798
+Let's prove this.
+
+133
+00:07:45,798 --> 00:07:48,430
+There are three cases to consider.
+
+134
+00:07:48,430 --> 00:07:51,280
+First, that we could explore
+u before we explore.
+
+135
+00:07:52,900 --> 00:07:56,430
+Next, we could explore v
+while were exploring u.
+
+136
+00:07:57,700 --> 00:08:01,630
+And finally, we could explore
+v after were done exploring.
+
+137
+00:08:01,630 --> 00:08:06,800
+Of course, this last case can't happens
+is there is edge u to v which means that
+
+138
+00:08:06,800 --> 00:08:11,820
+if we haven't already visited v we will
+visit as part of our exploration view.
+
+139
+00:08:13,830 --> 00:08:16,980
+But okay the first two case is
+still possible let's take a look.
+
+140
+00:08:18,460 --> 00:08:21,630
+Firstly, if we explore
+v before we explore u,
+
+141
+00:08:21,630 --> 00:08:27,098
+well it turns out that we can't reach u
+from v, and this is because we have a DAG.
+
+142
+00:08:27,098 --> 00:08:31,770
+If there was a path from v to u, and
+then we add an edge to u back to v.
+
+143
+00:08:31,770 --> 00:08:34,748
+That would give us a cycle
+which we can't take.
+
+144
+00:08:34,748 --> 00:08:41,586
+So it must be the case therefore, that we
+can't discover u as part of exploring v.
+
+145
+00:08:41,586 --> 00:08:45,697
+We have to finish exploring v before
+we can even start exploring u, and
+
+146
+00:08:45,697 --> 00:08:48,692
+that tells the post of u is
+bigger than the post of v,
+
+147
+00:08:48,692 --> 00:08:51,290
+which is what we wanted
+to show in this case.
+
+148
+00:08:53,190 --> 00:08:56,100
+Now in the second case the analysis
+is a little bit different.
+
+149
+00:08:56,100 --> 00:09:01,090
+If we explore v while exploring u
+remember that this means that our explore
+
+150
+00:09:01,090 --> 00:09:06,110
+of v is a subroutine of exploring u, and
+therefore it needs to finish up first.
+
+151
+00:09:06,110 --> 00:09:09,510
+And that again, tells us that the post
+of u is bigger than the post of v.
+
+152
+00:09:10,910 --> 00:09:14,680
+So that completes the proof of our
+theorem and shows that this algorithm for
+
+153
+00:09:14,680 --> 00:09:17,960
+topological sort actually works.
+
+154
+00:09:17,960 --> 00:09:21,790
+So we've got now this nice algorithm for
+the sorting.
+
+155
+00:09:21,790 --> 00:09:24,783
+Next time, we are going to talk about
+something a little bit different,
+
+156
+00:09:24,783 --> 00:09:27,028
+we're going to talk about
+connectivity in digraphs.
+
+157
+00:09:27,028 --> 00:09:28,580
+So I'll see you then.

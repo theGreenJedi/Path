@@ -1,0 +1,715 @@
+1
+00:00:00,230 --> 00:00:00,870
+Hi.
+
+2
+00:00:00,870 --> 00:00:05,020
+In this video, we'll solve the fastest
+route problem using the idea
+
+3
+00:00:05,020 --> 00:00:08,570
+from the previous video, but
+we will do it using a naive
+
+4
+00:00:08,570 --> 00:00:11,960
+algorithm in which we will need
+to improve in the next video.
+
+5
+00:00:13,720 --> 00:00:18,340
+First, let's make an observation
+that if we have some optimal path,
+
+6
+00:00:18,340 --> 00:00:22,000
+some fastest route or some shortest route.
+
+7
+00:00:22,000 --> 00:00:26,820
+Than any part of it between
+some note in the middle and
+
+8
+00:00:26,820 --> 00:00:28,460
+some other note in the middle.
+
+9
+00:00:28,460 --> 00:00:31,080
+It's also optimal in the same sense.
+
+10
+00:00:31,080 --> 00:00:31,700
+Let's prove it.
+
+11
+00:00:32,880 --> 00:00:37,740
+Consider an optimal path from
+some origin S to some note T and
+
+12
+00:00:37,740 --> 00:00:41,880
+consider some two vertices u and
+v on this path.
+
+13
+00:00:41,880 --> 00:00:47,070
+They can coincide with s or t or
+they can be somewhere in the middle.
+
+14
+00:00:47,070 --> 00:00:52,800
+Suppose there was some shorter path
+from u to v which is marked with green.
+
+15
+00:00:52,800 --> 00:00:57,210
+Then we would be able to go from
+s to u as there is no path.
+
+16
+00:00:57,210 --> 00:01:00,690
+Take a shorter path from u to v,
+take a shortcut and
+
+17
+00:01:00,690 --> 00:01:03,860
+then go where there is
+no path from v to t.
+
+18
+00:01:03,860 --> 00:01:05,420
+And in total,
+
+19
+00:01:05,420 --> 00:01:10,230
+this new path will be shorter than
+the initial path, which was optimal.
+
+20
+00:01:10,230 --> 00:01:12,130
+So this cannot happen.
+
+21
+00:01:12,130 --> 00:01:18,710
+And so we know that actually any part of
+an optimal path is also optimal itself.
+
+22
+00:01:20,910 --> 00:01:25,280
+Corollary from that is that if
+there is some shortest path from
+
+23
+00:01:25,280 --> 00:01:30,820
+S two nodes and
+u is the previous node on that path.
+
+24
+00:01:30,820 --> 00:01:34,550
+Then, distance from the origin
+to the final destination,
+
+25
+00:01:34,550 --> 00:01:38,740
+t, is equal to the distance
+from origin to node u,
+
+26
+00:01:38,740 --> 00:01:45,500
+which is the previous node,
+plus wight of the edge between u and t.
+
+27
+00:01:45,500 --> 00:01:50,350
+And we will use this property
+to improve our estimates
+
+28
+00:01:50,350 --> 00:01:54,820
+of distances from origin
+to some nodes gradient.
+
+29
+00:01:56,080 --> 00:01:59,820
+You remember that in the breath
+research algorithm we had an area or
+
+30
+00:01:59,820 --> 00:02:04,230
+map called dist, and
+we use these dist values to store.
+
+31
+00:02:04,230 --> 00:02:07,940
+Our estimation from the distance to
+the region to this particular now.
+
+32
+00:02:09,060 --> 00:02:12,900
+In the reference research we found
+distance of started from Infinity.
+
+33
+00:02:12,900 --> 00:02:17,290
+As soon as they get update they
+became correct distances formal
+
+34
+00:02:17,290 --> 00:02:19,450
+region to the corresponding note.
+
+35
+00:02:19,450 --> 00:02:21,950
+This will not be the case in algorithm.
+
+36
+00:02:21,950 --> 00:02:28,470
+These distances will change Several
+times maybe before they become correct.
+
+37
+00:02:28,470 --> 00:02:30,950
+But in the end they will become correct.
+
+38
+00:02:30,950 --> 00:02:33,880
+And during the process
+
+39
+00:02:33,880 --> 00:02:37,490
+these distances will be upper
+bounds on the actual distance.
+
+40
+00:02:37,490 --> 00:02:40,320
+So they will be more than or
+
+41
+00:02:40,320 --> 00:02:44,455
+equal to the real distance from
+origin to the corresponding node.
+
+42
+00:02:44,455 --> 00:02:51,110
+[INAUDIBLE] the procedure called Edge
+relaxation, and it means the following.
+
+43
+00:02:51,110 --> 00:02:53,580
+We take the edge U, V.
+
+44
+00:02:53,580 --> 00:02:59,300
+We check, is it better to go to V,
+through the optimal
+
+45
+00:02:59,300 --> 00:03:03,750
+currently known path from S to U, and
+then following the edge from U, to V.
+
+46
+00:03:03,750 --> 00:03:09,010
+Does it improve our current upper
+ont he distance to v, or not?
+
+47
+00:03:09,010 --> 00:03:14,070
+So, we have some upper bound dist value,
+dist of v, and
+
+48
+00:03:14,070 --> 00:03:18,450
+we achieve that,
+maybe using u on the way or not.
+
+49
+00:03:18,450 --> 00:03:23,110
+We might have come to v in a different
+way, and we might have come
+
+50
+00:03:23,110 --> 00:03:28,270
+using the same distance as if we go
+from s to u, and then follow huv.
+
+51
+00:03:28,270 --> 00:03:31,180
+Or we could use longer path.
+
+52
+00:03:31,180 --> 00:03:35,510
+So we just check whether it is possible
+to improve our current estimation of
+
+53
+00:03:35,510 --> 00:03:37,170
+distance of feet.
+
+54
+00:03:37,170 --> 00:03:41,790
+We are using distance of U
+plus weight of the edge to U.
+
+55
+00:03:41,790 --> 00:03:44,830
+So here is the code of
+relaxation procedure.
+
+56
+00:03:44,830 --> 00:03:46,830
+It takes one edge from U to V.
+
+57
+00:03:48,180 --> 00:03:52,820
+As input and it checks if
+the current distance estimate of
+
+58
+00:03:52,820 --> 00:03:57,930
+v is bigger than the current distance
+estimate of u plus weight of the edge.
+
+59
+00:03:57,930 --> 00:04:01,970
+That means that definitely
+we can come to know
+
+60
+00:04:01,970 --> 00:04:07,310
+u from s with a path with
+a length at most dist of u.
+
+61
+00:04:07,310 --> 00:04:12,460
+And if we then follow edge
+uv with a weight w of uv we
+
+62
+00:04:12,460 --> 00:04:16,210
+will improve the distance estimate of v.
+
+63
+00:04:16,210 --> 00:04:22,400
+So in this case we update this distance
+estimate we decrease always as you see And
+
+64
+00:04:22,400 --> 00:04:28,980
+we also remember that the node from
+which we came into v is now u.
+
+65
+00:04:28,980 --> 00:04:32,740
+Remember that in the breadth for
+search algorithm,
+
+66
+00:04:32,740 --> 00:04:39,420
+we start in pref the node from
+which this node was discovered.
+
+67
+00:04:39,420 --> 00:04:44,380
+In this case, we use the same
+data structure to the store
+
+68
+00:04:44,380 --> 00:04:50,270
+the node from where we've updated
+the distance to our node last time.
+
+69
+00:04:50,270 --> 00:04:53,230
+Now, we're ready to suggest
+a naive algorithm to solve our
+
+70
+00:04:53,230 --> 00:04:54,600
+fastest route problem.
+
+71
+00:04:54,600 --> 00:04:58,580
+Procedure naive takes graph g and
+origin node S as inputs.
+
+72
+00:04:59,590 --> 00:05:05,250
+It uses dist values and prev values
+the same as in the breth first search,
+
+73
+00:05:05,250 --> 00:05:08,402
+and we initialize these values
+with infinity as dist[u].
+
+74
+00:05:08,402 --> 00:05:11,030
+And the prev[u] value with
+point resting no where,
+
+75
+00:05:11,030 --> 00:05:15,280
+we also initialize the dist of
+the original nod withe zero.
+
+76
+00:05:15,280 --> 00:05:18,580
+And then, the only thing we
+do we relax all the edges.
+
+77
+00:05:18,580 --> 00:05:22,770
+More specifically,
+on each iteration of the do while loop,
+
+78
+00:05:22,770 --> 00:05:27,210
+we try to relax each of
+the edges in the graph.
+
+79
+00:05:27,210 --> 00:05:31,010
+And if at least one is effective, that is,
+
+80
+00:05:31,010 --> 00:05:36,010
+some dist value changes,
+then we continue to the next iteration.
+
+81
+00:05:36,010 --> 00:05:39,390
+And we only stop When the whole iteration,
+
+82
+00:05:39,390 --> 00:05:43,000
+after going through all the edges in
+the graph, couldn't relax anything.
+
+83
+00:05:44,660 --> 00:05:49,340
+And we state that this Naive algorithm
+works, basically that it stops and
+
+84
+00:05:49,340 --> 00:05:54,590
+when it stops it finds correct
+distances to all the nodes.
+
+85
+00:05:57,450 --> 00:06:01,440
+To prove that assume for the sake of
+contradiction, that at some point
+
+86
+00:06:01,440 --> 00:06:06,470
+no edge can be relaxed and there is
+a vertex v such that the distance to
+
+87
+00:06:06,470 --> 00:06:12,520
+the vertex is bigger than the actual
+distance from origin to the note.
+
+88
+00:06:12,520 --> 00:06:16,690
+We know that this estimation
+of distance cannot become less
+
+89
+00:06:16,690 --> 00:06:20,540
+than the actual distance because
+this is always an upper bound.
+
+90
+00:06:20,540 --> 00:06:22,800
+It starts from infinity and
+
+91
+00:06:22,800 --> 00:06:28,260
+it is only decreased when we find
+a better path from origin to this node.
+
+92
+00:06:28,260 --> 00:06:34,120
+So there is some path from origin to
+this node of length exactly dist[v],
+
+93
+00:06:34,120 --> 00:06:39,460
+so it cannot be less than the actual
+distance from origin to this node.
+
+94
+00:06:39,460 --> 00:06:44,530
+And this also means that there can
+actually be no such situation that we
+
+95
+00:06:44,530 --> 00:06:51,760
+do relaxations [INAUDIBLE] and we do many
+iterations and we don't stop at any point.
+
+96
+00:06:51,760 --> 00:06:55,470
+Because after any successful relaxation,
+
+97
+00:06:55,470 --> 00:06:59,900
+some distance estimation is
+decreased by at least one.
+
+98
+00:06:59,900 --> 00:07:05,160
+And if we started with infinity
+then the value just becomes finite,
+
+99
+00:07:05,160 --> 00:07:09,540
+but that can happen at most
+a number of nodes times.
+
+100
+00:07:09,540 --> 00:07:14,670
+And if the value was already finite
+it just decreases by at least one.
+
+101
+00:07:14,670 --> 00:07:17,320
+And if we started with some
+number of finite values,
+
+102
+00:07:17,320 --> 00:07:19,620
+which are bigger than
+the actual distances and
+
+103
+00:07:19,620 --> 00:07:24,820
+that each iteration we decrease at
+least one distance by at least one.
+
+104
+00:07:24,820 --> 00:07:27,660
+This process cannot be infinite.
+
+105
+00:07:27,660 --> 00:07:33,080
+It will at some point come to
+the stage when the distance, and
+
+106
+00:07:33,080 --> 00:07:38,530
+the distance estimate are the same, and
+so this edge cannot be relaxed anymore.
+
+107
+00:07:38,530 --> 00:07:42,320
+And if that happens for
+all the edges our algorithm will stop.
+
+108
+00:07:42,320 --> 00:07:44,790
+So our algorithm definitely stops.
+
+109
+00:07:44,790 --> 00:07:50,390
+The question is whether it
+comes to exactly the same
+
+110
+00:07:50,390 --> 00:07:56,310
+dist values as distances from
+origin To the corresponding nodes.
+
+111
+00:07:56,310 --> 00:07:58,490
+So for
+contradiction we assume that it does not.
+
+112
+00:07:58,490 --> 00:07:59,600
+And for that for
+
+113
+00:07:59,600 --> 00:08:05,620
+at least some node v dist value is bigger
+than the actual distance from our agent.
+
+114
+00:08:05,620 --> 00:08:10,600
+And then, we consider some shortest
+path from S to this node v.
+
+115
+00:08:13,370 --> 00:08:18,950
+V definitely is a broken note, in
+the sense that [INAUDIBLE] is bigger than
+
+116
+00:08:18,950 --> 00:08:24,110
+the correct distance, but there can be
+some other notes on this path from S to V,
+
+117
+00:08:24,110 --> 00:08:27,640
+which have the same property,
+which are broken.
+
+118
+00:08:27,640 --> 00:08:35,390
+U, V the first note of counting from S on
+this path, which is broken in some sense.
+
+119
+00:08:35,390 --> 00:08:38,000
+U is definitely not the same as S,
+because for
+
+120
+00:08:38,000 --> 00:08:42,100
+S we know that the [INAUDIBLE] value is
+zero, and the correct distance is zero.
+
+121
+00:08:42,100 --> 00:08:47,330
+U is at least the second note on the path,
+or maybe much later then.
+
+122
+00:08:47,330 --> 00:08:50,950
+There is a previous note
+on the path before U.
+
+123
+00:08:50,950 --> 00:08:52,760
+And what is denoted by p.
+
+124
+00:08:52,760 --> 00:08:55,600
+And let's look at S, p, and u.
+
+125
+00:08:55,600 --> 00:08:59,780
+What we know is that p is
+not a broken node, and so
+
+126
+00:08:59,780 --> 00:09:05,130
+its dist value is the same as
+the distance from origin to this node p.
+
+127
+00:09:05,130 --> 00:09:09,700
+And so
+we know that the distance from S to u
+
+128
+00:09:09,700 --> 00:09:14,210
+Is actually equal to the distance from S
+to p plus weight of the edge from p to u.
+
+129
+00:09:14,210 --> 00:09:15,770
+Why is that?
+
+130
+00:09:15,770 --> 00:09:19,630
+Because the part of path from S to u
+
+131
+00:09:19,630 --> 00:09:24,070
+is optimal because it is a part
+of an optimal path from S to v.
+
+132
+00:09:24,070 --> 00:09:28,850
+And also part of path from S
+to p is also optimal, and so
+
+133
+00:09:28,850 --> 00:09:35,260
+this equality It's true that distance from
+S to u is equal to distance from S to P.
+
+134
+00:09:35,260 --> 00:09:39,230
+And then add the weight
+of the S from p to u, but
+
+135
+00:09:39,230 --> 00:09:43,990
+we also know that distance from S
+to p is equal to this value of p.
+
+136
+00:09:43,990 --> 00:09:47,550
+And so, the second quality is true that it
+
+137
+00:09:47,550 --> 00:09:50,960
+is equal to dist value of p plus
+weight of the S from p to u.
+
+138
+00:09:52,120 --> 00:09:56,330
+But we also know that note u is broken and
+
+139
+00:09:56,330 --> 00:10:00,953
+the dist value of u is strictly bigger
+than the correct distance from s to u.
+
+140
+00:10:02,060 --> 00:10:06,700
+Is equal to dist value of p plus
+weight of the edge from p to u.
+
+141
+00:10:06,700 --> 00:10:10,740
+But this inequality is exactly the
+property we checked to determine whether
+
+142
+00:10:10,740 --> 00:10:13,570
+an edge from b to u can be relaxed or not.
+
+143
+00:10:13,570 --> 00:10:16,780
+And so, from one hand we know
+that this edge can be relaxed and
+
+144
+00:10:16,780 --> 00:10:21,980
+from the another we know that we cannot
+relax anymore edges in our graph and
+
+145
+00:10:21,980 --> 00:10:25,082
+our nef algorithms stopped and
+this is a contradiction.
+
+146
+00:10:25,082 --> 00:10:28,470
+So now, we proved by contradiction
+
+147
+00:10:28,470 --> 00:10:32,665
+that our nef algorithm returns
+correct distances from orignal to.
+
+148
+00:10:32,665 --> 00:10:35,250
+So now it's in the graph.
+
+149
+00:10:35,250 --> 00:10:39,770
+We won't analyze the running time of this
+algorithm, because in the next video
+
+150
+00:10:39,770 --> 00:10:44,420
+we'll improve this algorithm and
+then we'll estimate its running time.

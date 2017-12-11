@@ -1,0 +1,529 @@
+1
+00:00:00,490 --> 00:00:04,740
+So now, I want to reduce this problem to
+the problem about shortest paths, and
+
+2
+00:00:04,740 --> 00:00:06,950
+we will do that using
+two standard approaches.
+
+3
+00:00:06,950 --> 00:00:10,980
+First, we don't know what to do with
+this product, so instead of products of
+
+4
+00:00:10,980 --> 00:00:15,010
+weights we want sums of weights,
+like in the shortest paths problems.
+
+5
+00:00:15,010 --> 00:00:20,370
+And we will replace products with sums
+by taking logarithms of weights, and
+
+6
+00:00:20,370 --> 00:00:22,880
+I will show that in a minute.
+
+7
+00:00:22,880 --> 00:00:27,660
+And another problem is that we need to
+maximize something in this problem,
+
+8
+00:00:27,660 --> 00:00:30,950
+while shortest paths
+are all about minimizing.
+
+9
+00:00:30,950 --> 00:00:34,390
+So we'll have to also negate
+weights to solve minimization
+
+10
+00:00:34,390 --> 00:00:35,720
+problem instead of maximization.
+
+11
+00:00:36,720 --> 00:00:43,000
+First let's talk about taking
+the logarithm is a known rule that x
+
+12
+00:00:43,000 --> 00:00:49,450
+is the same as two to the power
+of logarithm of x over two.
+
+13
+00:00:49,450 --> 00:00:54,530
+So, we can take any product of two number,
+like x and y and
+
+14
+00:00:54,530 --> 00:01:01,130
+rewrite x is two the logarithm of x and
+y as 2 to the power of logarithm of y.
+
+15
+00:01:01,130 --> 00:01:05,990
+And then, x y is equal to 2 to the power
+of logarithm of x by 2 of the power of
+
+16
+00:01:05,990 --> 00:01:12,010
+logarithm as y, and now we know
+the rule of summing the powers.
+
+17
+00:01:12,010 --> 00:01:16,520
+So this is equal to 2 to the power of
+logarithm of x plus logarithm of y
+
+18
+00:01:19,380 --> 00:01:22,930
+So if we want to maximize
+product effects on Y.
+
+19
+00:01:22,930 --> 00:01:27,950
+This is actually the same of maximizing
+the sum of logarithm of X and logarithm of
+
+20
+00:01:27,950 --> 00:01:34,590
+Y because if he sum becomes bigger then 2
+to the power of the sum becomes bigger.
+
+21
+00:01:34,590 --> 00:01:40,110
+And if the sum becomes smaller, then 2 to
+the power of sum also becomes smaller.
+
+22
+00:01:40,110 --> 00:01:42,930
+This is true not only for 2 numbers.
+
+23
+00:01:42,930 --> 00:01:45,340
+For example,
+if we have 3 specific numbers.
+
+24
+00:01:45,340 --> 00:01:50,050
+4, 1, and 1 or 2 which one to multiply.
+
+25
+00:01:50,050 --> 00:01:53,740
+On one hand,
+we get 2 which is 2 to the power of 1.
+
+26
+00:01:53,740 --> 00:01:57,860
+On another hand,
+if we sum up the logarithm Terms of 4,
+
+27
+00:01:57,860 --> 00:02:01,970
+1, and one-half,
+we get sum of 2, 0, and -1.
+
+28
+00:02:01,970 --> 00:02:07,170
+And the logarithms can be
+both positive and negative.
+
+29
+00:02:07,170 --> 00:02:10,430
+They're positive when the number is
+bigger than 1 and they're negative
+
+30
+00:02:10,430 --> 00:02:14,700
+when the number is smaller than 1, and
+they're 0 when the number is equal to 1.
+
+31
+00:02:14,700 --> 00:02:19,240
+So in this case, we get the sum of 1,
+which is the same as the power to which
+
+32
+00:02:19,240 --> 00:02:24,290
+we Exponentiate our 2.
+
+33
+00:02:24,290 --> 00:02:30,260
+So you see that it works not only for
+2 numbers, but also for several numbers.
+
+34
+00:02:30,260 --> 00:02:36,133
+And in general, to maximize
+the product of k numbers, r would EJ.
+
+35
+00:02:36,133 --> 00:02:40,260
+It is the same as to maximize
+the corresponding the sum of
+
+36
+00:02:40,260 --> 00:02:41,989
+logarithms of these numbers.
+
+37
+00:02:43,160 --> 00:02:48,450
+And now that this only works if all these
+numbers are positive, because we cannot
+
+38
+00:02:48,450 --> 00:02:54,040
+take logarithms of negative values and
+we also cannot take logarithms of 0.
+
+39
+00:02:54,040 --> 00:02:59,540
+But if all the exchange rates
+are positive numbers, hopefully then we
+
+40
+00:02:59,540 --> 00:03:04,810
+just take logarithms and
+we reduce our problem of maximizing
+
+41
+00:03:04,810 --> 00:03:10,080
+product of some numbers to
+maximizing sum of some numbers.
+
+42
+00:03:10,080 --> 00:03:13,480
+Now, we want to go from maximization
+to minimization but that is easy.
+
+43
+00:03:13,480 --> 00:03:16,430
+If you want to maximize
+the sum of logarithms,
+
+44
+00:03:16,430 --> 00:03:18,880
+it is the same as minimize minus the sum.
+
+45
+00:03:20,000 --> 00:03:25,090
+And we will also want to work just
+with the sum, not with the minus sum,
+
+46
+00:03:25,090 --> 00:03:30,120
+so we can insert this minus
+inside the sum incorporated.
+
+47
+00:03:30,120 --> 00:03:33,200
+And so finally, we get that maximizing
+
+48
+00:03:33,200 --> 00:03:37,559
+the sum of logarithms is the same as
+minimizing the sum of minus logarithms.
+
+49
+00:03:38,870 --> 00:03:42,460
+Trading those two ideas,
+we've got the following reduction.
+
+50
+00:03:42,460 --> 00:03:44,680
+We replace the initial edge weights,
+
+51
+00:03:44,680 --> 00:03:50,330
+conversion weights,
+rei by minus algorithm of rei.
+
+52
+00:03:50,330 --> 00:03:54,330
+And we find the shortest path between
+the nodes corresponding to USD and
+
+53
+00:03:54,330 --> 00:03:57,690
+the nodes corresponding
+to RUR in the graph.
+
+54
+00:03:58,740 --> 00:04:02,240
+And this is equivalent to
+the initial problem of how
+
+55
+00:04:02,240 --> 00:04:05,410
+many rubbles you can get from $1000.
+
+56
+00:04:05,410 --> 00:04:09,720
+So now,
+it looks like we've solved the problem
+
+57
+00:04:09,720 --> 00:04:14,020
+because we can create the currency
+exchange graph with the conversion rates,
+
+58
+00:04:14,020 --> 00:04:17,570
+we can replace those
+rates with logarithms.
+
+59
+00:04:17,570 --> 00:04:22,510
+And we can find the shortest path from
+USD to RUR using Dijkstra's Algorithm,
+
+60
+00:04:22,510 --> 00:04:24,860
+which were learned in the previous lesson.
+
+61
+00:04:24,860 --> 00:04:29,690
+And then, we can just do the exchanges
+corresponding to the shortest path in
+
+62
+00:04:29,690 --> 00:04:31,530
+the graph which you found.
+
+63
+00:04:31,530 --> 00:04:34,570
+However, that doesn't exactly work.
+
+64
+00:04:34,570 --> 00:04:39,290
+Because Dijkstra's algorithm heavily
+relies on the fact that the shortest path
+
+65
+00:04:39,290 --> 00:04:45,000
+from s to t goes only through
+vertices that are closer to s than t.
+
+66
+00:04:45,000 --> 00:04:51,180
+And this is because the edge
+weights are positive, but if
+
+67
+00:04:51,180 --> 00:04:56,720
+edge weights can be negative, this is no
+longer the case and the example is below.
+
+68
+00:04:56,720 --> 00:05:01,620
+If we used Dijkstra's algorithm
+as soon as it saw only two
+
+69
+00:05:01,620 --> 00:05:03,920
+edges from s to A and to B.
+
+70
+00:05:03,920 --> 00:05:07,730
+One of them with weight five,
+and another with weight ten.
+
+71
+00:05:07,730 --> 00:05:12,990
+It would decide that the shortest
+path to S to A is exactly five,
+
+72
+00:05:12,990 --> 00:05:14,330
+because we cannot improve it.
+
+73
+00:05:14,330 --> 00:05:16,080
+In this example, we can improve it.
+
+74
+00:05:16,080 --> 00:05:19,410
+We go from S to B, then from B to A, and
+
+75
+00:05:19,410 --> 00:05:23,610
+the path will be, already, minus ten,
+which is much less than five.
+
+76
+00:05:23,610 --> 00:05:27,110
+So Dijkstra's algorithm
+doesn't work in such cases.
+
+77
+00:05:27,110 --> 00:05:30,990
+Such an example is also possible
+in the currency exchange problem.
+
+78
+00:05:30,990 --> 00:05:36,120
+Here is a graph with realistic conversion
+rates between ruble, euros and U.S.
+
+79
+00:05:36,120 --> 00:05:37,120
+dollars.
+
+80
+00:05:37,120 --> 00:05:42,350
+And our goal is to convert rubles into
+US dollars in the most profitable way.
+
+81
+00:05:42,350 --> 00:05:48,850
+And it turns out that if we take minus
+logarithms of these conversion rates,
+
+82
+00:05:48,850 --> 00:05:53,710
+then although the number
+on the edge from Rubles to
+
+83
+00:05:53,710 --> 00:05:57,440
+US Dollars is less than
+the number from Rubles to Euros.
+
+84
+00:05:57,440 --> 00:06:01,309
+It is still beneficial to go
+through Euros to US Dollars
+
+85
+00:06:02,440 --> 00:06:07,390
+because of the negative edge
+between euros and US dollars.
+
+86
+00:06:07,390 --> 00:06:13,110
+And it's true that if you multiply
+the conversation rate between rubles and
+
+87
+00:06:13,110 --> 00:06:15,900
+euros, and then between euros and dollars.
+
+88
+00:06:15,900 --> 00:06:21,499
+It will be slightly bigger than if we
+convert directly from rubles to dollars.
+
+89
+00:06:22,920 --> 00:06:27,960
+So, all problems in the graphs with
+
+90
+00:06:27,960 --> 00:06:31,840
+negative weights come from
+negative weight cycles.
+
+91
+00:06:33,150 --> 00:06:37,430
+For example, in this graph,
+we have a negative cycle abc.
+
+92
+00:06:39,070 --> 00:06:46,100
+What it means is that we can go from a to
+b than from B to C, than from C to A.
+
+93
+00:06:46,100 --> 00:06:49,350
+And if we add those weights we get -1.
+
+94
+00:06:49,350 --> 00:06:54,720
+So the sum of the edges
+on the cycle is negative.
+
+95
+00:06:54,720 --> 00:06:59,770
+And because of that, if you want to
+convert for example from S to A,
+
+96
+00:06:59,770 --> 00:07:04,580
+if you want to go from S to A and find
+the shortest path, this is not possible.
+
+97
+00:07:04,580 --> 00:07:09,580
+Because we can go from S to A,
+use distance of 4 But then we can just go
+
+98
+00:07:09,580 --> 00:07:14,770
+around the cycle A B C, A B C, A B C many,
+many times, as many as we want.
+
+99
+00:07:14,770 --> 00:07:17,090
+And the distance will only decrease.
+
+100
+00:07:17,090 --> 00:07:22,040
+So the distance from S to node A is
+actually minus infinity, is not defined.
+
+101
+00:07:22,040 --> 00:07:25,650
+You can do as short a path as you want.
+
+102
+00:07:25,650 --> 00:07:30,030
+And the same is true about nodes B and
+C of course because they are on the cycle.
+
+103
+00:07:30,030 --> 00:07:31,880
+So you can do the same thing with them.
+
+104
+00:07:31,880 --> 00:07:36,260
+And the same is also true about node D
+because it is reachable from the cycle.
+
+105
+00:07:36,260 --> 00:07:41,920
+So we can go to the cycle and
+make a lot of round trips on the cycle and
+
+106
+00:07:41,920 --> 00:07:45,120
+then go to node D from either from B or
+from C.
+
+107
+00:07:45,120 --> 00:07:48,180
+So all these nodes.
+
+108
+00:07:48,180 --> 00:07:55,200
+Are the infinitely close to S,
+like the shortest path is minus infinity.
+
+109
+00:07:55,200 --> 00:08:01,020
+And it turns out that in the currency
+exchange problem a cycle can potentially
+
+110
+00:08:01,020 --> 00:08:05,460
+make you a billionaire, if you are lucky
+and if you have enough time for that.
+
+111
+00:08:05,460 --> 00:08:09,353
+But you'll learn how to do that
+a little bit later in this lesson.

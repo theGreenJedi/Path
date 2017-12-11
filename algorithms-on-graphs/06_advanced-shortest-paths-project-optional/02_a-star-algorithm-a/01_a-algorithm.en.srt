@@ -1,0 +1,710 @@
+1
+00:00:00,290 --> 00:00:03,420
+Hi, these lesson rules tell
+you the A-star algorithm.
+
+2
+00:00:03,420 --> 00:00:06,540
+It is another optimization of
+the Dijkstra's algorithm for
+
+3
+00:00:06,540 --> 00:00:11,570
+the case when you have a specific source
+and specific target, and at any point,
+
+4
+00:00:11,570 --> 00:00:16,910
+we have an estimation of how long does it
+take to get from this point to the target.
+
+5
+00:00:16,910 --> 00:00:20,200
+This estimation doesn't have
+to be exactly precise, but
+
+6
+00:00:20,200 --> 00:00:23,820
+if it is good enough it can
+speed up your search a lot.
+
+7
+00:00:23,820 --> 00:00:26,200
+An example of such
+estimations is very simple.
+
+8
+00:00:26,200 --> 00:00:29,490
+If you have the coordinates
+of your target point, and
+
+9
+00:00:29,490 --> 00:00:33,520
+you have a phone with GPS controller,
+and you know the GPS coordinates of your
+
+10
+00:00:33,520 --> 00:00:38,250
+current point, you can have
+an estimation based on the distance
+
+11
+00:00:38,250 --> 00:00:43,515
+by the straight line between those
+two points and the speed of your car.
+
+12
+00:00:43,515 --> 00:00:47,540
+So,this is the kind of
+information we can use to
+
+13
+00:00:47,540 --> 00:00:51,009
+greatly improve the performance
+of the Dijkstra's algorithm.
+
+14
+00:00:52,040 --> 00:00:56,270
+So, let's first understand the notion
+of the directed search, and
+
+15
+00:00:56,270 --> 00:01:01,170
+to accomplish directed search, we will
+need the notion of potential function.
+
+16
+00:01:01,170 --> 00:01:05,785
+So, we can take any function
+mapping vertices to real numbers,
+
+17
+00:01:05,785 --> 00:01:09,716
+and it will be called
+a potential function, and then,
+
+18
+00:01:09,716 --> 00:01:15,798
+the value of this potential function on
+a vertex is called this vertex' potential.
+
+19
+00:01:15,798 --> 00:01:18,650
+This potential function
+defines new edge weights.
+
+20
+00:01:18,650 --> 00:01:24,270
+If we had edge weight L of
+u v on the initial graph,
+
+21
+00:01:24,270 --> 00:01:28,580
+then we can denote by L pi
+of u v the new edge weight,
+
+22
+00:01:28,580 --> 00:01:32,520
+which is equal to the old edge weight
+minus the potential of the starting
+
+23
+00:01:32,520 --> 00:01:37,100
+vertex, plus the potential of
+the ending vertex of that edge.
+
+24
+00:01:37,100 --> 00:01:41,280
+And it turns out that if we replace
+the old edge weights with these
+
+25
+00:01:41,280 --> 00:01:45,180
+new edge weights,
+it doesn't change the shortest paths.
+
+26
+00:01:45,180 --> 00:01:49,450
+Well, of course it does change
+the distances between vertices.
+
+27
+00:01:49,450 --> 00:01:53,080
+What I'm saying is only
+that the paths themselves,
+
+28
+00:01:53,080 --> 00:01:57,190
+which were shortest in the initial graph,
+they're also the shortest
+
+29
+00:01:57,190 --> 00:02:01,920
+paths between the same pair of vertices
+in the new graph and vice versa.
+
+30
+00:02:01,920 --> 00:02:06,550
+The shortest paths in the new graph with
+new edge weights are also the shortest
+
+31
+00:02:06,550 --> 00:02:10,120
+path between the same pair of
+vertices in the initial graph.
+
+32
+00:02:11,180 --> 00:02:13,300
+And to prove this, I need this lemma.
+
+33
+00:02:13,300 --> 00:02:17,690
+For any potential function mapping
+vertices to the real numbers, for
+
+34
+00:02:17,690 --> 00:02:20,850
+any two fixed vertices s and
+t in the graph and
+
+35
+00:02:20,850 --> 00:02:25,630
+any path P between them, the length
+of this path in the new graph with
+
+36
+00:02:25,630 --> 00:02:29,920
+new edge weights is equal to the length
+of this path in the initial graph minus
+
+37
+00:02:29,920 --> 00:02:35,100
+the potential of the starting vertex, and
+plus the potential of the ending vertex.
+
+38
+00:02:35,100 --> 00:02:36,540
+Why is this important?
+
+39
+00:02:36,540 --> 00:02:42,121
+Well, because if you fix the starting and
+ending vertex, then for any path it slacks
+
+40
+00:02:42,121 --> 00:02:47,319
+in the initial graph, and it slacks in
+the new graph, differed by a constant.
+
+41
+00:02:47,319 --> 00:02:50,897
+Because this constant only depends
+on the starting vertex and
+
+42
+00:02:50,897 --> 00:02:53,720
+the ending vertex, and we fixed that.
+
+43
+00:02:53,720 --> 00:02:58,083
+And so, if some path worth
+the shortest path between s and t,
+
+44
+00:02:58,083 --> 00:03:02,874
+then it will stay the shortest path
+between s and t In the new graph,
+
+45
+00:03:02,874 --> 00:03:07,090
+because all the paths just add
+a constant to their length.
+
+46
+00:03:07,090 --> 00:03:11,550
+And so, the paths which were shorter than
+others, they stay shorter than others.
+
+47
+00:03:11,550 --> 00:03:16,658
+And the same goes vice versa,
+if the path was shortest in the new graph,
+
+48
+00:03:16,658 --> 00:03:19,479
+it was also shown in the initial graph.
+
+49
+00:03:19,479 --> 00:03:22,493
+And now let's prove this lemma,
+
+50
+00:03:22,493 --> 00:03:27,014
+we consider some particular
+path P from s to t, and
+
+51
+00:03:27,014 --> 00:03:33,150
+we also denote s as v1 and t as Vk and
+the intermediate vertices V2,
+
+52
+00:03:33,150 --> 00:03:38,342
+V3 and so on, Vk minus one
+are the vertices of this path.
+
+53
+00:03:38,342 --> 00:03:43,170
+Now we consider the length of this path
+in the new graph, with the new edgeways.
+
+54
+00:03:43,170 --> 00:03:48,480
+By definition, it is equal to the sum of
+the length of the edges of this path,
+
+55
+00:03:48,480 --> 00:03:54,590
+which is l pi(v1,v2) + l pi (v2,v3),
+and so on.
+
+56
+00:03:55,830 --> 00:04:01,749
+And then we can rewrite each l pi
+from vi to vi plus 1 by definition,
+
+57
+00:04:01,749 --> 00:04:06,607
+and we know that l pi of v1 to
+v2 is equal to l of v1 to v2
+
+58
+00:04:06,607 --> 00:04:11,404
+minus the potential of v1
+plus the potential of v2.
+
+59
+00:04:11,404 --> 00:04:16,300
+So, this first line is equal
+
+60
+00:04:16,300 --> 00:04:20,180
+to l pi (v1, v2).
+
+61
+00:04:21,980 --> 00:04:27,105
+And each of the next lines is similar,
+it corresponds to
+
+62
+00:04:27,105 --> 00:04:32,898
+the length of the edge in the new
+graph with the new edge weight.
+
+63
+00:04:32,898 --> 00:04:36,238
+So we write each edge on its own line, and
+
+64
+00:04:36,238 --> 00:04:40,880
+now we can notice that there
+are somes which cancel out.
+
+65
+00:04:40,880 --> 00:04:43,113
+For example pi(v2) here, and
+
+66
+00:04:43,113 --> 00:04:48,250
+pi(v2) here are with different signs,
+so they cancel out.
+
+67
+00:04:48,250 --> 00:04:54,583
+And the same will happen with pi(v3) and
+pi(v3) here and
+
+68
+00:04:54,583 --> 00:05:01,784
+the same and the same will
+happen with Pi (Vk-1)- Pi(Vk-1).
+
+69
+00:05:01,784 --> 00:05:07,420
+So, most of the terms,
+including this Pi(Vk-2) will cancel out.
+
+70
+00:05:07,420 --> 00:05:13,169
+The only thing that is left is
+the sum of the length of the initial
+
+71
+00:05:13,169 --> 00:05:20,223
+edges minus the first potential of
+the starting verdicts minus pi(v1) and
+
+72
+00:05:20,223 --> 00:05:25,630
+plus Plus pi(Vk), the last verdicts.
+
+73
+00:05:25,630 --> 00:05:31,730
+Those are the only two summons of the form
+pi of something which don't cancel out.
+
+74
+00:05:33,420 --> 00:05:35,920
+And then, we can rewrite this as
+
+75
+00:05:35,920 --> 00:05:39,380
+the first summoned is the length
+of this path in the initial graph.
+
+76
+00:05:39,380 --> 00:05:44,450
+l(P), minus the potential
+of the starting vertex,
+
+77
+00:05:44,450 --> 00:05:47,950
+because v1 is the same as s, and
+
+78
+00:05:47,950 --> 00:05:53,810
+plus the potential of the last vertex,
+and Vk is the same as t.
+
+79
+00:05:53,810 --> 00:05:57,600
+So, the length of
+the path in the new graph
+
+80
+00:05:57,600 --> 00:06:00,350
+is equal to the length of
+the path in the initial graph,
+
+81
+00:06:00,350 --> 00:06:05,060
+minus the potential of starting vertex,
+plus the potential of the target vertex.
+
+82
+00:06:05,060 --> 00:06:10,390
+So, we've proved our lemma,
+so we know that the shortest
+
+83
+00:06:10,390 --> 00:06:15,160
+path in the initial graph and in the new
+graph with new edge rates, are the same.
+
+84
+00:06:16,270 --> 00:06:21,400
+Although their lengths differ by some
+constant depending on the starting and
+
+85
+00:06:21,400 --> 00:06:24,730
+ending vertex of the path.
+
+86
+00:06:24,730 --> 00:06:29,700
+Now, we can formulate an algorithm which
+can be called Dijkstra with potentials.
+
+87
+00:06:29,700 --> 00:06:34,780
+So, we take some potential function pi,
+and we'll launch the Dijkstra
+
+88
+00:06:34,780 --> 00:06:39,365
+algorithm with new edge weights l pi
+instead of the initial edge weight l.
+
+89
+00:06:40,740 --> 00:06:45,589
+And the result endurance path is also
+a shortest path in the initial graph.
+
+90
+00:06:45,589 --> 00:06:50,416
+So, the result of this algorithm is
+the same as the result of the initial
+
+91
+00:06:50,416 --> 00:06:51,949
+Dijkstra algorithm.
+
+92
+00:06:51,949 --> 00:06:57,182
+But, depending on the result of the
+potential function pie maybe it will come
+
+93
+00:06:57,182 --> 00:07:02,655
+from the vertex to the target vertex t
+faster than with the initial edge weights,
+
+94
+00:07:02,655 --> 00:07:08,080
+because the order of vertices that this
+algorithm considers can be different.
+
+95
+00:07:09,470 --> 00:07:14,281
+So, this is the idea of optimization, but
+does any potential function feed us in
+
+96
+00:07:14,281 --> 00:07:18,697
+this case, if we want run Dijkstra
+algorithm using the new edge weights?
+
+97
+00:07:19,955 --> 00:07:22,815
+Well, the answer is no, because for
+
+98
+00:07:22,815 --> 00:07:27,800
+any edge (u,v) the new length
+l pi(u,v) must be negative,
+
+99
+00:07:27,800 --> 00:07:32,808
+so that we can apply Dijkstra
+algorithm for these edge weights.
+
+100
+00:07:32,808 --> 00:07:37,342
+Such pie, such potential function for
+which this is true that
+
+101
+00:07:37,342 --> 00:07:42,150
+all the new edge lines will be
+non negative, is called feasible.
+
+102
+00:07:43,990 --> 00:07:47,135
+Now, the intuition behind
+the potential functions the following.
+
+103
+00:07:47,135 --> 00:07:52,190
+Pi(v) is going to be an estimation
+of the distance from
+
+104
+00:07:52,190 --> 00:07:58,190
+current the vertex v to the target vertex
+t, so how far is it from here to t?
+
+105
+00:07:58,190 --> 00:08:02,180
+If we have such estimation, we can
+often avoid going to wrong direction,
+
+106
+00:08:02,180 --> 00:08:04,450
+and that's why we'll get directed search.
+
+107
+00:08:04,450 --> 00:08:05,835
+And typically in practice,
+
+108
+00:08:05,835 --> 00:08:11,310
+pi(v) a lower bound on the distance
+from the current point to the target.
+
+109
+00:08:12,460 --> 00:08:13,532
+For example,
+
+110
+00:08:13,532 --> 00:08:19,157
+on a real map a path from the current
+point to target cannot be shorter than,
+
+111
+00:08:19,157 --> 00:08:25,431
+if you manage to go directly on a straight
+line from the current point to the target.
+
+112
+00:08:25,431 --> 00:08:29,209
+This is often not possible,
+because of houses or mountains,
+
+113
+00:08:29,209 --> 00:08:33,361
+but if this is possible,
+this is the shortest path possible at all.
+
+114
+00:08:33,361 --> 00:08:36,758
+And our real path cannot be
+shorter than the straight line
+
+115
+00:08:36,758 --> 00:08:39,960
+segment between the current point and
+the end point.
+
+116
+00:08:39,960 --> 00:08:44,882
+So A* algorithm is basically
+this Djikstra with potentials.
+
+117
+00:08:44,882 --> 00:08:47,110
+What does Djikstra with potentials do?
+
+118
+00:08:47,110 --> 00:08:50,760
+It goes in iterations,
+and at each iteration it
+
+119
+00:08:50,760 --> 00:08:55,260
+picks the vertex v which minimizes
+the current estimate of distance to v.
+
+120
+00:08:56,700 --> 00:08:59,308
+And what will be equal to?
+
+121
+00:08:59,308 --> 00:09:04,091
+We know that any path in the new
+graph differs from the same path in
+
+122
+00:09:04,091 --> 00:09:08,345
+the old graph by minus potential
+of the starting vertex,
+
+123
+00:09:08,345 --> 00:09:11,200
+plus potential of the ending vertex.
+
+124
+00:09:12,290 --> 00:09:17,740
+So, we are going to pick
+the minimizing dist of v,
+
+125
+00:09:17,740 --> 00:09:22,500
+which is the distance estimate if we
+ran the regular Djikstra algorithm on
+
+126
+00:09:22,500 --> 00:09:27,290
+the same graph, which is basically,
+the length of the best known path from
+
+127
+00:09:27,290 --> 00:09:32,340
+the source vertex to v
+minus pi(s) plus pi(v).
+
+128
+00:09:32,340 --> 00:09:37,170
+Now notice that pi of s
+summoned is the same for all v.
+
+129
+00:09:37,170 --> 00:09:40,260
+So, vertex v which
+minimizes this expression
+
+130
+00:09:40,260 --> 00:09:44,779
+is the same v that minimizes
+just dist[v] + pi(v).
+
+131
+00:09:44,779 --> 00:09:49,042
+In the some sense, this is basically
+the most promising vertex,
+
+132
+00:09:49,042 --> 00:09:53,319
+because pi of v is an estimate of
+the distance from v to the target.
+
+133
+00:09:53,319 --> 00:09:58,005
+And so, we pick vertex v with the minimum
+current estimate of the distance from
+
+134
+00:09:58,005 --> 00:10:02,180
+source vertex to v plus the distance
+from v to the target vertex.
+
+135
+00:10:02,180 --> 00:10:09,200
+And this is in term, an estimation of the
+shortest path from s to t going through v.
+
+136
+00:10:10,530 --> 00:10:13,220
+So this is why the search is directed.
+
+137
+00:10:13,220 --> 00:10:18,150
+We always go, not just to
+the closest vertex to s, which is
+
+138
+00:10:18,150 --> 00:10:23,240
+still not unprocessed, but we also want
+it to be close enough to the target.
+
+139
+00:10:23,240 --> 00:10:30,740
+And this is why while we're searching, we
+avoid going away directly from the target.
+
+140
+00:10:30,740 --> 00:10:37,097
+And then, as soon as we find
+the vertex t as the vertex minimizing
+
+141
+00:10:37,097 --> 00:10:44,541
+this expression in the Dijkstra's
+algorithm on this new graph, we stop.
+
+142
+00:10:44,541 --> 00:10:49,408
+So, of course, this algorithm could still
+go through the whole graph because before
+
+143
+00:10:49,408 --> 00:10:50,870
+it gets to the target.
+
+144
+00:10:50,870 --> 00:10:55,000
+But in practice, if you have a good
+estimate of the distance left
+
+145
+00:10:55,000 --> 00:10:58,800
+from the current point of the target,
+we will get to the target and
+
+146
+00:10:58,800 --> 00:11:01,770
+extract it much earlier.
+
+147
+00:11:01,770 --> 00:11:07,634
+And on the way there, we avoid a lot
+of turns in the wrong direction.

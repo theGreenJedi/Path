@@ -1,0 +1,76 @@
+This is basically how the algorithm works,
+and this is more or
+less clear that it defines distances correctly because it just goes
+through the graph layer by layer. But to actually implement the algorithm,
+we need to do everything turn by turn. We cannot just take a couple of nodes and
+process them simultaneously. We need to have some order on those nodes. And now let's solve this problem. So we return to our initial example
+of a directed graph with S origin. And now we want to process
+each node one by one. To achieve that, instead of processing
+each layer of nodes simultaneously, we will have a queue of notes. So the nodes will get into the queue and
+wait for their turn. And as soon as every node which was in the
+queue before this node has already been processed, this node goes out of
+the queue, and it is being processed. So, when we discover node,
+we put it into a queue. And when we need to process it,
+we take it from the queue and process it. And it means that the nodes
+which were discovered earlier will also be processed earlier. And so, in general the order
+of layers won't change because first layer 0 nodes will
+get into the queue, then all the nodes from layer
+1 will get into the queue. And then after they all are processed,
+we'll process nodes of layer 2, which were discovered
+after notes of layer one. Now let's see how all it works. So we discovered node S, and we already know by that time
+that the distance to S is 0. It is layer 0 and
+there are no more nodes in the layer 0. Now we start processing this node,
+and to do that, we process the edges outgoing
+from S in some order. It doesn't mean which is the order. It can be just the order in which they
+were saved in our data structure for the graph. So we chose our first edge, and
+we discover node to the right. And we know that the distance to this node
+is 1 because this is a layer 1 node we discovered. And instead of starting to process it,
+we go to the next edge from S and we discover another node of layer 1 and
+assign the distance to 1, and again, and again, again, and again. And so now, we have discovered
+all the nodes from the layer 1. And we put them all in
+the queue in the order starting from the node to the right and
+counterclockwise order. So now we've processed our node S and
+we need to process something else. What to process? The node which is the first in the queue,
+and this is the node to the right from S. So we start processing this node. And to go through the edges from this
+node in the order they were saved. I don't know that order, so let's see. Okay, so the first edge
+outgoing from this node was to another node from the first layer. So it is a red edge because it goes to the
+node which has already been discovered. We don't do anything with this edge. Then the next edge goes to the right,
+and we discover a node from layer 2, which is to the right, and
+we set its distance to 2. Then the edge goes to the node right and
+up, and we also assign distance
+to this node to 2. And the last edge goes to the node
+to right and down from our node. And it also gets distance 2
+because this is a layer 2 node. And what we do next? We've processed our node to the right from
+S and we need to process something else. And this something else is
+the next node from the layer 1 in the counterclockwise order. This is this node to the right and
+up from node S. We'll start processing it. In some order we'll process edges from it. So the first edge is a red edge to the
+left, and we don't do anything with it. And the second edge is a red edge
+to the node to the right and up from it, which is familiar too, but
+it has also been already discovered. And then the next edge gives
+us new nodes from layer 2. And the next one also gives
+us a new node from layer 2. So we finished processing this node and
+we go to the next one. Again, red edge, red edge, new node discovered, new node
+discovered, next node from layer one. Our red edge, our red edge,
+a new node from layer 2, and new node. And again,
+with another node from layer 1 and the last node from layer 1, we process it. Okay, so we've processed
+all the nodes from layer 1. We've discovered all the nodes
+from layer 2 in some order. I don't even remember
+the order of those nodes. It is mostly counterclockwise but
+not completely. So let's see In the slides,
+what is the correct order? So the first one to be discovered
+was the node to the right. And start processing it, and there is
+a red edge from it, and another one. And there are no more
+edges from this node so we'll start processing the next
+one in the counterclockwise order. And there is a red edge from it, and it looks like there are no more edges from
+it, so we finished processing this node. And then we go to the node
+to the right and down, and there is a red edge from it,
+and that's all. And so, we go through the nodes in the
+second layer and all the edges from them are obviously red because we've discovered
+everything that's connected to S already. So we go and
+test that all the edges are red, and now we've finished, and
+again we have the graph which is layered. Node S is in the layer 0,
+6 nodes in the layer 1, and 12 nodes in the layer 2. And if we have some node
+which was not connected to S, then it stays with the distance
+estimate of infinity. So this is how breadth first search
+actually works, and in the next video we will discuss the pseudocode that
+actually implements this algorithm.

@@ -1,0 +1,141 @@
+1
+00:00:00,240 --> 00:00:06,840
+Talking about the performance of A*,
+it can only be seen in practice.
+
+2
+00:00:06,840 --> 00:00:08,660
+It is an empirical algorithm, and
+
+3
+00:00:08,660 --> 00:00:13,170
+it depends on the quality
+of the potential function.
+
+4
+00:00:13,170 --> 00:00:16,300
+And, in the case when this potential
+function gives a lower bound
+
+5
+00:00:16,300 --> 00:00:18,740
+on the distance from the current
+point to the target,
+
+6
+00:00:18,740 --> 00:00:23,620
+which is most often the case,
+we have the following picture.
+
+7
+00:00:23,620 --> 00:00:28,220
+The worst case is if the potential
+function is always equal to zero for
+
+8
+00:00:28,220 --> 00:00:29,240
+all the vertices.
+
+9
+00:00:29,240 --> 00:00:33,340
+This is always feasible
+potential function, but
+
+10
+00:00:33,340 --> 00:00:36,660
+then the algorithm will work
+the same as the Dijkstras algorithm.
+
+11
+00:00:37,950 --> 00:00:40,120
+It will not work better,
+but it will work the same.
+
+12
+00:00:41,150 --> 00:00:45,460
+And the best case, is if your lower
+bound on the distance to the target
+
+13
+00:00:45,460 --> 00:00:50,960
+is always actually equal to the distance
+to the target from the current V.
+
+14
+00:00:50,960 --> 00:00:56,040
+Then, the edge weights will be zero,
+if and
+
+15
+00:00:56,040 --> 00:01:01,990
+only if this edge lies on the shortest
+path to the target vertex.
+
+16
+00:01:01,990 --> 00:01:07,080
+So, it will be very easy to distinguish
+the edges through which you should go,
+
+17
+00:01:07,080 --> 00:01:09,260
+and the edges through
+which you shouldn't go.
+
+18
+00:01:09,260 --> 00:01:13,910
+If the edge has void zero,
+then it leads you to the target.
+
+19
+00:01:13,910 --> 00:01:16,880
+Otherwise, it is not optimal
+to go through this edge.
+
+20
+00:01:16,880 --> 00:01:22,170
+So you only go through the edges with
+void zero, and then you will only visit
+
+21
+00:01:22,170 --> 00:01:27,480
+edges which lie on the shortest
+paths from the source to the target.
+
+22
+00:01:27,480 --> 00:01:31,810
+And so, you will explore the minimum
+possible number of edges
+
+23
+00:01:31,810 --> 00:01:35,215
+at all before getting to the target,
+so this is the best case.
+
+24
+00:01:35,215 --> 00:01:40,350
+And in practice, depending on
+the quality of your lower bound,
+
+25
+00:01:40,350 --> 00:01:42,100
+you'll be somewhere in between.
+
+26
+00:01:42,100 --> 00:01:46,213
+And it can be actually shown that
+the better your lower bounds,
+
+27
+00:01:46,213 --> 00:01:51,425
+the tighter they are, the better will
+be the performance of the A* algorithm.
+
+28
+00:01:52,971 --> 00:01:57,156
+And in the next video,
+we will see how to actually implement
+
+29
+00:01:57,156 --> 00:02:02,363
+a bi-directional version of this A*
+algorithm to improve it even more.

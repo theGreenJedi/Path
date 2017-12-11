@@ -1,0 +1,64 @@
+Hi in the previous videos we've introduced
+the idea of Bidirectional Search. But now we need to actually specify, how exactly will we expand the Dijkstra
+algorithm to become bidirectional. First let's recall how
+Dijkstra's algorithm works, so it needs to find the shortest path
+from some vertex s to vertex t. It initializes an auxiliary area dist,
+with a values of infinity for all the nodes but for the starting node s. And for the starting node s,
+it initialize the distance estimate to 0, and then it goes in iterations. On each iteration it calls ExtractMin, to chose the unprocessed vertex u
+with the smallest distance estimate. And there is a guarantee that, by the time vertex u is extracted
+that way, it's distance estimate, is equal to the actual distance from
+the starting vertex as to the vertex u. And then we process u, meaning that we try
+to relax all the edges outgoing from u. And then we repeat this process,
+until t is extracted and processed, so
+then we know that the distance to t is already equal to the distance estimate,
+in the distance array. Now, we need to introduce
+a notion of reverse graph, for our bidirectional search. So the reversed graph G, R for a graph
+G is the graph with the same vertices. And reversed edges. You have an example in
+the bottom of the slide. When we have vertices a, b and c. And the graph G is on the left with
+edges going from a to b, from a to c and from b to c. And in the graph Gr,
+the vertices are the same, but the edges go the other way around,
+from b to a, from c to a, and from c to b. So this is very simple, and to build the reversed graph,
+we can just copy the vertices. And then, go through all the edges
+of graph G, reverse them, and add them to the new graph GR. So the Bidirectional Dijkstra's algorithm, we'll start with building
+the reversed graph. So that it can do the backward
+search from the target vertex. And then, it will start Dijkstra's
+algorithm in the forward direction from, the source vertex as in the graph G,
+and also the backwards Dijkstra's algorithm from vertex
+t in the reverse graph GR. So in the reverse graph GR,
+The regular Dijkstra's algorithm will be the same as the backwards Dijkstra's
+algorithm in the initial graph of G. And then will alternate
+between Dijkstra steps in the forward search in G, and
+in the backward search in GR. And we will stop, as soon as some vertex
+v is processed, and remember that, process means that it is extracted
+from the Q with variances. Both in the forward search and
+in the backward search. As soon as that happens, we can compute
+the shortest path between s and t. And I will show you how, in a minute. But first the question, so
+let's consider this meeting point v. The first vertex that is processed
+in both the forward search and the backward search. We said previously,
+that as soon as we meet in the forward and backward search, we can re-construct
+the shortest path from s to t by taking the first half from
+s to the meeting point. And then from the meeting point to t. So, is it right, is it always the case
+that as soon as we meet in some vertex, v, there's the shortest part
+from s to t that goes through v? So, what do you think? Well, it turns out that this is not
+the case, and here's an example. S and t, we do alternating terms
+from s and from t backwards, then from s, then from t backwards. And inside the vertices, we have the distances on the left
+from s and on the right to t. And then we meet, in the middle vertex. And we see that the distance
+from this vertex 2t is 5, and the distance from s
+to this vertex is 5, and we can actually reconstruct
+the path of length 10 from s to t. But what if there was an edge,
+this green one, I'll find 4. This wouldn't contradict the progression
+of neither the forward Dijkstra search, nor the backward Dijkstra search because,
+this edge has length 4, which is bigger than 3. And so the middle vertex
+will be considered before, the vertex to the right from
+it in the forward search. And also, the middle vertex will
+be considered before the vertex to the left from it in
+the backwards search. So, we will really meet in the middle
+vertex before even considering. The edge between the vertex
+to the left of the middle, and the vertex to
+the right from the middle. But, here we can see that
+the shortest path from s to t, doesn't actually go
+through the middle vertex. It goes around it, and
+it is a length 8, instead of the path which goes through this middle vertex and
+has length 10. So it is not always the case, that the shortest path go
+through the meeting point. So what exactly then do we need to do,
+to compute the distance? When we found the common meeting point.

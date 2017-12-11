@@ -1,0 +1,482 @@
+1
+00:00:00,210 --> 00:00:03,530
+Now let's estimate the running
+time of Dijkstra's algorithm.
+
+2
+00:00:03,530 --> 00:00:06,920
+In the beginning it just initializes
+dist values and prev values and
+
+3
+00:00:06,920 --> 00:00:10,420
+that takes time proportional
+to the number of nodes.
+
+4
+00:00:10,420 --> 00:00:14,890
+But our estimate will be bigger than that,
+so we just ignore this part.
+
+5
+00:00:14,890 --> 00:00:19,570
+And other than that, it creates a data
+structure to store dist values and
+
+6
+00:00:19,570 --> 00:00:20,820
+extract minimums from it.
+
+7
+00:00:22,120 --> 00:00:27,270
+It extracts the minimum node
+from this data structure.
+
+8
+00:00:27,270 --> 00:00:32,960
+V times, where V is the number of nodes in
+the graph, and also it examines the edges.
+
+9
+00:00:32,960 --> 00:00:38,050
+Each edge is examined, at most once,
+when the start of this edge is processed.
+
+10
+00:00:38,050 --> 00:00:42,390
+And during processing,
+it updates dist value,
+
+11
+00:00:42,390 --> 00:00:45,750
+pref value, and
+changes priority in the data structure.
+
+12
+00:00:45,750 --> 00:00:48,230
+Updating dist value and
+pref value is constant time,
+
+13
+00:00:48,230 --> 00:00:52,280
+so the main part is in
+the ChangePriority part.
+
+14
+00:00:53,570 --> 00:00:58,570
+So now this running time estimating
+depends on how do you actually
+
+15
+00:00:58,570 --> 00:01:02,980
+implement The data structure
+from which you do ExtractMin,
+
+16
+00:01:02,980 --> 00:01:04,740
+ChangePriority, and
+we should build by MakeQueue.
+
+17
+00:01:06,590 --> 00:01:09,500
+One way to implement it
+is just using an array.
+
+18
+00:01:09,500 --> 00:01:10,880
+Actually we'll need two arrays.
+
+19
+00:01:10,880 --> 00:01:16,600
+First array is just the size V,
+where you store
+
+20
+00:01:16,600 --> 00:01:22,390
+in the cell number i, you store
+the dist value of the node number i.
+
+21
+00:01:22,390 --> 00:01:26,470
+But you also need to remove
+nodes from this array, so
+
+22
+00:01:26,470 --> 00:01:30,760
+you'll use another boolean array,
+where you store a flag.
+
+23
+00:01:30,760 --> 00:01:36,650
+Whether this node is still in the data
+structure or is is not already.
+
+24
+00:01:36,650 --> 00:01:41,250
+So to build such arrays you need time
+proportional to the number of nodes,
+
+25
+00:01:41,250 --> 00:01:44,680
+because it's basically, write down
+these values for all the nodes and
+
+26
+00:01:44,680 --> 00:01:50,770
+you Write all the flags,
+you say that they are true.
+
+27
+00:01:50,770 --> 00:01:56,890
+Then, each ExtractMin operation in the
+time proportional to the number of notes.
+
+28
+00:01:56,890 --> 00:02:01,230
+because you need to go through the whole
+array, check whether this particular node
+
+29
+00:02:01,230 --> 00:02:03,940
+is considered to be in
+the data structure or not.
+
+30
+00:02:03,940 --> 00:02:10,280
+Just look up in the secondary, and then
+if it is then try to proof the minimum,
+
+31
+00:02:10,280 --> 00:02:15,470
+and after you found the minimum,
+you just mark the flag as false,
+
+32
+00:02:15,470 --> 00:02:19,570
+it's now it's no longer in
+the data structure, and
+
+33
+00:02:19,570 --> 00:02:23,120
+you take the minimum
+value from there array.
+
+34
+00:02:23,120 --> 00:02:28,020
+So each extractment of operation
+works in time proportional to v and
+
+35
+00:02:28,020 --> 00:02:32,320
+we make v times, so
+this is v squared time.
+
+36
+00:02:32,320 --> 00:02:36,650
+Now, change priority operation
+is very easy in case of array,
+
+37
+00:02:36,650 --> 00:02:41,640
+because to priority you just need to
+change the disvalue of one node so
+
+38
+00:02:41,640 --> 00:02:46,570
+you just get the number of that node And
+you just change the value
+
+39
+00:02:47,860 --> 00:02:52,680
+in the first array corresponding to
+that node, so that takes constant time.
+
+40
+00:02:52,680 --> 00:02:57,310
+And so in this case,
+the total complexity is V + V squared + E.
+
+41
+00:02:57,310 --> 00:03:00,440
+And V squared is bigger than V obviously,
+and
+
+42
+00:03:00,440 --> 00:03:03,390
+also V squared is bigger
+than the recall to E,
+
+43
+00:03:03,390 --> 00:03:08,270
+because There can be at most one
+edge between each pair of nodes so
+
+44
+00:03:08,270 --> 00:03:13,590
+V squared is the leading term and so
+our running time is big O V squared for
+
+45
+00:03:13,590 --> 00:03:17,940
+the array implementation; and
+there is another way to implement
+
+46
+00:03:17,940 --> 00:03:23,850
+this data structure using a binary heap or
+priority cube built on top of binary heap.
+
+47
+00:03:23,850 --> 00:03:28,210
+We know that to build a binary heap
+from an array of size V we need
+
+48
+00:03:28,210 --> 00:03:29,980
+time proportional to V.
+
+49
+00:03:29,980 --> 00:03:32,790
+We now that ExtractMin works
+in the logarithmic time, so
+
+50
+00:03:32,790 --> 00:03:36,480
+the total time for
+ExtractMin will be V log V.
+
+51
+00:03:36,480 --> 00:03:41,080
+And the tricky part is
+ChangePriority ChangePriority operation
+
+52
+00:03:41,080 --> 00:03:44,620
+can be implemented in the binary heap,
+but it is a little bit tricky.
+
+53
+00:03:44,620 --> 00:03:48,630
+So instead of implementing additional
+operation in the binary heap,
+
+54
+00:03:48,630 --> 00:03:53,860
+we can actually cheat and
+we can just insert a new element
+
+55
+00:03:53,860 --> 00:03:58,830
+in the heap each time we need to
+decrease the dist value for some node.
+
+56
+00:03:58,830 --> 00:04:05,900
+So We need to improve our dist value and
+to improve it means to decrease it.
+
+57
+00:04:05,900 --> 00:04:10,520
+What we can do is we can just insert
+another element, a pair of a node and
+
+58
+00:04:10,520 --> 00:04:14,080
+its dist value estimation
+into the priority queue.
+
+59
+00:04:14,080 --> 00:04:18,070
+So, then when the time
+comes to extract that node
+
+60
+00:04:18,070 --> 00:04:21,720
+The pair with the minimum dist
+value will be selected and
+
+61
+00:04:21,720 --> 00:04:26,480
+you will extract it with the minimum
+dist value which was found by this time.
+
+62
+00:04:26,480 --> 00:04:30,680
+And if at some other point of
+time you will also try to extract
+
+63
+00:04:32,070 --> 00:04:36,400
+this same node but with different
+dist value, you can just ignore it,
+
+64
+00:04:36,400 --> 00:04:40,590
+you can just write down that you
+already processed this node.
+
+65
+00:04:40,590 --> 00:04:45,300
+Extract it again from the q, and
+just don't do anything with it.
+
+66
+00:04:45,300 --> 00:04:48,260
+So, this will increase
+the size of the heap and so
+
+67
+00:04:48,260 --> 00:04:53,650
+refreshes will be slower a little bit, but
+they won't be much slower because how many
+
+68
+00:04:53,650 --> 00:04:58,450
+elements can be in the and
+in this priority queue?
+
+69
+00:04:58,450 --> 00:05:03,100
+It will be no more than the number
+of edges because each time
+
+70
+00:05:03,100 --> 00:05:08,480
+you change priority you examine some edge,
+and you examine some edge at most once.
+
+71
+00:05:08,480 --> 00:05:13,050
+So total number of change priority
+operations is the number of edges.
+
+72
+00:05:13,050 --> 00:05:17,640
+And so you will add at most
+E new elements in the heap.
+
+73
+00:05:18,870 --> 00:05:22,780
+In addition to the values
+which were there initially.
+
+74
+00:05:22,780 --> 00:05:26,560
+And we know that e is at most v squared.
+
+75
+00:05:26,560 --> 00:05:32,060
+So logarithm of v is on the same,
+it's like at most
+
+76
+00:05:32,060 --> 00:05:38,270
+two logarithms of v because logarithm of
+v squared is just two logarithms of v.
+
+77
+00:05:38,270 --> 00:05:40,640
+So the last part, the total time for
+
+78
+00:05:40,640 --> 00:05:46,930
+ChangePriority is proportional to
+E multiplied by logarithm of V.
+
+79
+00:05:46,930 --> 00:05:51,565
+And the final estimation
+is V + E logarithm V.
+
+80
+00:05:51,565 --> 00:05:56,735
+Which is much better than v squared
+in the case when there are no edges.
+
+81
+00:05:56,735 --> 00:06:02,015
+Because there are very many edges
+like on the order of v squared
+
+82
+00:06:02,015 --> 00:06:04,715
+than v squared will be
+equal to v squared log v.
+
+83
+00:06:04,715 --> 00:06:08,655
+Which is worse than in the case
+of area implementation.
+
+84
+00:06:08,655 --> 00:06:14,780
+But if the number of edges less than v
+squared the graph is far from being.
+
+85
+00:06:14,780 --> 00:06:18,920
+Full graph with all the edges,
+then this can be much,
+
+86
+00:06:18,920 --> 00:06:22,620
+much faster than
+the array-based implementation.
+
+87
+00:06:22,620 --> 00:06:26,650
+In conclusion, you now know the algorithm
+to find the minimum time to get from
+
+88
+00:06:26,650 --> 00:06:28,410
+work to home for example.
+
+89
+00:06:28,410 --> 00:06:33,430
+And actually you also know the algorithm
+to find The fastest route itself, because
+
+90
+00:06:33,430 --> 00:06:40,070
+the reconstruct path algorithm will be the
+same as you have in the prev first search.
+
+91
+00:06:40,070 --> 00:06:42,320
+Because you have the same prev values and
+
+92
+00:06:42,320 --> 00:06:45,400
+you can just reconstruct
+the path from them.
+
+93
+00:06:45,400 --> 00:06:49,680
+And you know that this algorithm works for
+any graph with non-negative edge weights.
+
+94
+00:06:49,680 --> 00:06:55,200
+So you can not only find, Fastest routes
+but you can also find shortest routes and
+
+95
+00:06:55,200 --> 00:06:59,920
+routes which are minimum in some
+other senses and you know that
+
+96
+00:06:59,920 --> 00:07:04,750
+it works either in time quadratic and
+number of nodes in the graph or
+
+97
+00:07:04,750 --> 00:07:08,710
+in time V plus E log V depending
+on the implementation.
+
+98
+00:07:08,710 --> 00:07:13,270
+Either array based implementation or
+binary heap based implementation.
