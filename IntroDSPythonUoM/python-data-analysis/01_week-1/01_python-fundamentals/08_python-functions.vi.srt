@@ -1,0 +1,629 @@
+1
+00:00:08,706 --> 00:00:09,959
+Trong phần còn lại của bài học này,
+
+2
+00:00:09,959 --> 00:00:13,750
+tôi sẽ cung cấp một tổng quan cơ bản
+về ngôn ngữ lập trình python.
+
+3
+00:00:13,750 --> 00:00:15,890
+Nếu bạn có nền tảng trong lập trình,
+
+4
+00:00:15,890 --> 00:00:19,530
+tổng quan này sẽ đủ để giúp bạn thành công
+trong phần còn lại của khóa học này
+
+5
+00:00:19,530 --> 00:00:22,090
+và các khóa học sau trong chuỗi này.
+
+6
+00:00:22,090 --> 00:00:24,330
+Nếu bạn không có kinh nghiệm lập trình hoặc
+
+7
+00:00:24,330 --> 00:00:28,180
+cảm thấy nội dung là quá khó thì
+tôi sẽ khuyên bạn dừng lại và
+
+8
+00:00:28,180 --> 00:00:30,750
+tham gia vào lớp giới thiệu lập trình.
+
+9
+00:00:30,750 --> 00:00:34,320
+Một cộng sự của tôi, tiến sĩ Chuck Severance
+đưa ra một ngành tuyệt vời
+
+10
+00:00:34,320 --> 00:00:36,760
+trong Coursera gọi là
+python cho mọi người.
+
+11
+00:00:36,760 --> 00:00:38,780
+Bạn có thể tìm thấy một liên kết
+trong nguồn khóa học.
+
+12
+00:00:39,980 --> 00:00:44,240
+Hệ thống Coursera cho phép bạn chạy mã python
+từ trình duyệt của bạn theo hai cách.
+
+13
+00:00:44,240 --> 00:00:47,390
+Đầu tiên chúng ta có thể sử dụng các chỉ dẫn
+trong video nơi một câu hỏi sẽ đưa ra và
+
+14
+00:00:47,390 --> 00:00:50,030
+bạn có thể thử và giải quyết câu hỏi
+đó trong trình duyệt.
+
+15
+00:00:50,030 --> 00:00:52,070
+Đây là điều mới với nền tảng Coursera và
+
+16
+00:00:52,070 --> 00:00:54,840
+chúng ta sẽ thử nó trong hai bài giảng tiếp theo.
+
+17
+00:00:54,840 --> 00:00:58,080
+Thứ hai hệ thống Coursera đã được
+tích hợp với ghi chú jupyter.
+
+18
+00:00:59,120 --> 00:01:02,370
+Các ghi chú cho phép bạn chia
+mã thành các phần nhỏ và
+
+19
+00:01:02,370 --> 00:01:04,710
+thực hiện các phần nhỏ này theo yêu cầu.
+
+20
+00:01:04,710 --> 00:01:07,640
+Điều tuyệt vời về ghi chú này là
+chúng cung cấp một
+
+21
+00:01:07,640 --> 00:01:10,330
+lưu trữ bán cố định cho việc học của bạn
+và bạn có thể thử nghiệm và
+
+22
+00:01:10,330 --> 00:01:14,230
+chơi với các chương trình mà không phải
+cài đặt bất kì cái gì trên máy tính của bạn.
+
+23
+00:01:14,230 --> 00:01:17,300
+Tất cả các bài tập sẽ được làm trên các
+ghi chú jupyter nhưng bạn có thể
+
+24
+00:01:17,300 --> 00:01:21,390
+tải và cài đặt, python, jupyter tất cả các
+thư viện liên quan bạn cần cho
+
+25
+00:01:21,390 --> 00:01:24,300
+khóa học này trên máy tính
+của bạn nếu bạn thích.
+
+26
+00:01:24,300 --> 00:01:27,260
+Trợ lý hướng dẫn của chúng tôi sẽ
+cung cấp một tổng quan về
+
+27
+00:01:27,260 --> 00:01:31,170
+quá trình này bằng việc cài đặt ghi chú
+jupyter trong video tiếp theo cho
+
+28
+00:01:31,170 --> 00:01:34,890
+những thứ bạn quan tâm, tôi sẽ đưa ra
+một tổng quan về cách bạn có thể sử dụng
+
+29
+00:01:34,890 --> 00:01:37,360
+các ghi chú này trong môi trường
+Coursera trong bài giảng này.
+
+30
+00:01:38,540 --> 00:01:41,470
+Nhưng bây giờ hãy đào sâu
+về một số python cơ bản.
+
+31
+00:01:41,470 --> 00:01:45,040
+Đầu tiên python là một ngôn ngữ cấp cao,
+điều này có nghĩa là nó được tối ưu hóa cho
+
+32
+00:01:45,040 --> 00:01:46,830
+việc đọc thay vì máy.
+
+33
+00:01:46,830 --> 00:01:51,210
+Nó cũng là một ngôn ngữ thông dịch, nghĩa là
+nó không biên dịch trực tiếp tới
+
+34
+00:01:51,210 --> 00:01:56,680
+mã máy và quan trọng nó được sử dụng
+phổ biến trong phong cách tương tác.
+
+35
+00:01:56,680 --> 00:01:59,750
+Điều này có thể khá khác nếu bạn
+được sử dụng để lập trình trong
+
+36
+00:01:59,750 --> 00:02:04,930
+java hoặc C nơi bạn viết mã, biên dịch nó,
+chạy nó và xem đầu ra.
+
+37
+00:02:04,930 --> 00:02:08,680
+Trong Python bạn có thể bắt đầu các
+thông dịch tương tác và bắt đầu viết mã,
+
+38
+00:02:08,680 --> 00:02:13,240
+từng dòng với việc đánh giá
+mỗi câu khi bạn viết nó.
+
+39
+00:02:13,240 --> 00:02:15,090
+Điều này rất hữu ích với
+
+40
+00:02:15,090 --> 00:02:20,100
+các nhiệm vụ mà đòi hỏi nhiều điều tra,
+so với những yêu cầu nhiều thiết kế.
+
+41
+00:02:20,100 --> 00:02:22,320
+Tập hợp các lệnh là một ví dụ cho điều này.
+
+42
+00:02:22,320 --> 00:02:24,415
+Một dữ liệu sạch là cái khác.
+
+43
+00:02:24,415 --> 00:02:27,750
+Trong khi bạn có thể viết các lệnh mà bạn
+thực hiện các chương trình như bạn có thể
+
+44
+00:02:27,750 --> 00:02:29,310
+sử dụng các ngôn ngữ khác nữa,
+
+45
+00:02:29,310 --> 00:02:32,030
+chúng ta sẽ sử dụng python trong chuỗi này
+
+46
+00:02:32,030 --> 00:02:33,429
+trong phòng cách tương tác này.
+
+47
+00:02:35,030 --> 00:02:39,260
+Một điều phổ biến với các lập trình viên
+đến từ nền tảng java hoặc C là
+
+48
+00:02:39,260 --> 00:02:44,100
+python là một ngôn ngữ nhập tương tự
+với các ngôn ngữ như JavaScript.
+
+49
+00:02:44,100 --> 00:02:46,120
+Điều này có nghĩa là khi bạn khai báo một biến,
+
+50
+00:02:46,120 --> 00:02:49,390
+bạn có thể gán cho nó một số nguyên trên
+một dòng và một chuỗi trên dòng tiếp theo.
+
+51
+00:02:50,670 --> 00:02:52,450
+Bởi vì không có bước biên soạn,
+
+52
+00:02:52,450 --> 00:02:54,910
+bạn không có bất kì ai
+giúp bạn quản lí các loại.
+
+53
+00:02:54,910 --> 00:02:58,700
+Bạn cần phải kiểm tra sự hiện diện của
+chức năng khi bạn sử dụng nó hoặc
+
+54
+00:02:58,700 --> 00:03:02,530
+thử và sử dụng chức năng và
+nắm bắt các lỗi xảy ra.
+
+55
+00:03:02,530 --> 00:03:05,970
+Loại python động này rất tốt khi sử dụng trong
+
+56
+00:03:05,970 --> 00:03:09,200
+một cách tương tác, nó cho phép
+bạn thiết lập nhanh chóng và
+
+57
+00:03:09,200 --> 00:03:13,460
+thay đổi các nội dung mà không
+lo lắng về cú pháp cơ bản
+
+58
+00:03:13,460 --> 00:03:14,559
+khai báo các biến.
+
+59
+00:03:15,590 --> 00:03:18,030
+Ok hãy lấy một ví dụ.
+
+60
+00:03:18,030 --> 00:03:21,250
+Với tất cả các ví dụ mã tôi sẽ cho bạn thấy,
+bạn sẽ thấy một phiên bản chú thích của
+
+61
+00:03:21,250 --> 00:03:24,970
+ghi chú với các ý kiến trong
+phần nguồn khóa học.
+
+62
+00:03:24,970 --> 00:03:28,410
+Bạn được khuyến khích theo dõi điều đó nếu
+bạn muốn hoặc tạo ra một ghi chú mới và
+
+63
+00:03:28,410 --> 00:03:30,060
+viết mã nếu bạn thích.
+
+64
+00:03:31,140 --> 00:03:33,710
+Python có rất ít mã.
+
+65
+00:03:33,710 --> 00:03:37,110
+Thực tế nếu bạn chỉ muốn thiết lập
+giá trị các biến và đầu ra
+
+66
+00:03:37,110 --> 00:03:41,240
+các kết quả của các biến thêm vào với nhau,
+bạn có thể làm trong ba dòng.
+
+67
+00:03:41,240 --> 00:03:43,570
+Trong ví dụ này tôi sẽ viết ba câu.
+
+68
+00:03:43,570 --> 00:03:48,380
+Hai câu tạo biến x và y,
+mỗi câu là giá trị nguyên.
+
+69
+00:03:48,380 --> 00:03:49,420
+Sau đó chúng ta sẽ làm một số bổ sung.
+
+70
+00:03:50,420 --> 00:03:53,710
+Chúng ta sẽ chạy phần nhỏ này
+bằng việc ấn Shift+Enter hoặc
+
+71
+00:03:53,710 --> 00:03:57,000
+bằng việc ấn vào biểu tượng trên thanh công cụ.
+
+72
+00:03:57,000 --> 00:04:00,150
+Đầu ra từ câu này được in ngay lập tức.
+
+73
+00:04:00,150 --> 00:04:03,610
+Nếu bạn đang sử dụng python trong một
+chế độ không tương tác, sẽ không in.
+
+74
+00:04:03,610 --> 00:04:07,960
+Nhưng bởi vì chúng ta đang sử dụng nó trong
+chế độ tương tác, chúng ta có giá trị ngay lập tức.
+
+75
+00:04:07,960 --> 00:04:11,740
+Điều đang xảy ra bên dưới là trình duyệt
+đang gửi mã python của bạn
+
+76
+00:04:11,740 --> 00:04:13,550
+trên một máy trong đám mây,
+
+77
+00:04:13,550 --> 00:04:18,100
+cái mà thực hiện trong thông dịch python 3
+và gửi lại các kết quả.
+
+78
+00:04:19,640 --> 00:04:24,880
+Chúng ta có thể thấy sau khi thực hiện,
+một phần nhỏ trống mới được tạo ra bên dưới.
+
+79
+00:04:24,880 --> 00:04:28,200
+Nếu chúng ta đặt trong x và thực hiện,
+chúng ta có giá trị 1.
+
+80
+00:04:28,200 --> 00:04:31,820
+Nó rất quan trọng để biết thông dịch
+python là một trạng thái.
+
+81
+00:04:31,820 --> 00:04:34,560
+Đó là các biến tồn tại giữa các phần nhỏ.
+
+82
+00:04:35,710 --> 00:04:39,130
+Ngoài ra nếu chúng ta quay lại và
+thay đổi trong phần trước,
+
+83
+00:04:39,130 --> 00:04:43,050
+chúng ta phải thực hiện lại
+lệnh để thay đổi chỗ.
+
+84
+00:04:43,050 --> 00:04:46,730
+Bắt đầu lại và chạy tất cả các hàm
+là rất hữu ích vì nó quét
+
+85
+00:04:46,730 --> 00:04:50,670
+bản dịch và chạy lại tất cả các
+phần trong ghi chú hiện tại.
+
+86
+00:04:51,760 --> 00:04:54,310
+Bạn sẽ chú ý rằng python không
+đòi hỏi việc sử dụng
+
+87
+00:04:54,310 --> 00:04:57,330
+các từ khóa như var để đặt tên biến hoặc
+
+88
+00:04:57,330 --> 00:05:01,680
+dấu chấm phẩy ở cuối các dòng một cách
+phổ biến trong các ngôn ngữ khác.
+
+89
+00:05:01,680 --> 00:05:05,280
+Python thúc đẩy không gian màu trắng để
+hiểu phạm vi của các hàm và
+
+90
+00:05:05,280 --> 00:05:08,700
+các vòng lặp và kết thúc các dòng đánh dấu
+để hiểu kết thúc của câu.
+
+91
+00:05:09,830 --> 00:05:13,680
+Tất nhiên python có các cấu trúc phần
+mềm như là các hàm.
+
+92
+00:05:13,680 --> 00:05:17,750
+Đây là một ví dụ, mã trước đây
+trong một hàm.
+
+93
+00:05:17,750 --> 00:05:21,470
+Bạn sẽ thấy trạng thái chỉ ra rằng
+chúng ta đang viết một hàm.
+
+94
+00:05:21,470 --> 00:05:24,320
+Sau đó mỗi dòng là một phần của hàm
+cần phải được lùi vào
+
+95
+00:05:24,320 --> 00:05:26,440
+với một kí tự hoặc khoảng trống.
+
+96
+00:05:27,510 --> 00:05:31,200
+Bởi vì chúng ta ở trong môi trường
+tương tác khi trạng thái
+
+97
+00:05:31,200 --> 00:05:35,330
+được đánh giá trên Shift+Enter, kết quả
+được xuất ra ngay lập tức bên dưới.
+
+98
+00:05:37,240 --> 00:05:39,110
+Đây là tương tác đầu tiên của chúng ta.
+
+99
+00:05:39,110 --> 00:05:43,878
+Tại sao bạn không thử và thay hàm này
+để chấp nhận ba thông số thay vì hai
+
+100
+00:05:43,878 --> 00:05:46,175
+và quay lại tổng của cả ba.
+
+101
+00:05:49,048 --> 00:05:52,168
+Ok các hàm rất tuyệt nhưng chúng có
+chút khác biết so với bạn thấy trong
+
+102
+00:05:52,168 --> 00:05:55,420
+các ngôn ngữ khác và đây là một số loại tham gia.
+
+103
+00:05:55,420 --> 00:05:59,810
+Đầu tiên bởi vì không có cách gõ,
+bạn không phải tạo lệnh quay lại của bạn.
+
+104
+00:05:59,810 --> 00:06:02,930
+Thứ hai bạn không phải sử dụng câu lệnh quay lại.
+
+105
+00:06:02,930 --> 00:06:06,030
+Có một giá trị đặc biệt được gọi là None là trở lại.
+
+106
+00:06:06,030 --> 00:06:09,650
+None tương tự như null trong java và
+thể hiện sự vắng mặt của giá trị.
+
+107
+00:06:10,730 --> 00:06:14,820
+Thứ ba trong python bạn có thể có
+giá trị mặc định cho các tham số.
+
+108
+00:06:14,820 --> 00:06:15,980
+Đây là một ví dụ.
+
+109
+00:06:15,980 --> 00:06:20,390
+Trong ví dụ này chúng ta có thể viết lại
+chức năng thêm số để lấy ba tham số,
+
+110
+00:06:20,390 --> 00:06:23,970
+nhưng chúng ta có thể tạo tham số
+cuối cùng là None theo mặc định.
+
+111
+00:06:23,970 --> 00:06:28,220
+Điều này nghĩa là bạn có thể thêm
+các số chỉ với hai hoặc ba giá trị và
+
+112
+00:06:28,220 --> 00:06:31,100
+bạn không phải viết lại kí hiệu hàm để tải nó.
+
+113
+00:06:32,290 --> 00:06:34,650
+Điều này có ý nghĩa quan trọng.
+
+114
+00:06:34,650 --> 00:06:38,580
+Tất cả các tham số tùy chọn, những
+tham số mà bạn cho là giá trị măc định,
+
+115
+00:06:38,580 --> 00:06:42,030
+cần phải đi đến cuối hàm.
+
+116
+00:06:42,030 --> 00:06:46,100
+Nó cũng có nghĩa là bạn có thể vượt qua
+các tham số tùy chọn như các giá trị đã dán nhãn.
+
+117
+00:06:46,100 --> 00:06:48,600
+Đây là một ví dụ về các tham số đã dán nhãn.
+
+118
+00:06:48,600 --> 00:06:52,135
+Chúng ta có thể viết lại hàm đó
+để có hai thông số tùy chọn.
+
+119
+00:06:52,135 --> 00:06:55,300
+Nếu chúng ta muốn gọi hàm với hai số nhưng
+
+120
+00:06:55,300 --> 00:06:58,690
+cũng tạo giá trị cờ, chúng ta
+phải đặt tên rõ ràng và
+
+121
+00:06:58,690 --> 00:07:02,670
+tạo tham số là True khi gọi hàm.
+
+122
+00:07:02,670 --> 00:07:05,650
+Bây giờ bạn cũng thấy việc
+sử dụng của các câu lệnh.
+
+123
+00:07:05,650 --> 00:07:08,000
+Chungsta sẽ đi vào chi tiết hơn nhưng
+
+124
+00:07:08,000 --> 00:07:11,950
+in sẽ lấy một mục, thử và chuyển nó
+vào một chuỗi và in đầu ra.
+
+125
+00:07:11,950 --> 00:07:14,910
+Chúng ta không sử dụng điều này nhiều
+trong chế độ tương tác của bộ thông dịch nhưng
+
+126
+00:07:14,910 --> 00:07:18,110
+nó rất hữu ích khi chúng ta muốn in
+ra nhiều giá trị cho một phần đơn.
+
+127
+00:07:19,220 --> 00:07:22,840
+Ok một từ cuối cùng trên những căn
+bản của các hàm trong python.
+
+128
+00:07:22,840 --> 00:07:25,740
+Trong Python, bạn có thể gán một biến với một hàm.
+
+129
+00:07:25,740 --> 00:07:27,910
+Điều này có vẻ như là rất
+bình thường với bạn hoặc
+
+130
+00:07:27,910 --> 00:07:31,410
+hoàn toàn phụ thuộc vào
+nền tảng lập trình của bạn.
+
+131
+00:07:31,410 --> 00:07:34,950
+Bằng việc gán một hàm cho một biến,
+bạn có thể thực hiện biến đó trong
+
+132
+00:07:34,950 --> 00:07:38,830
+các hàm khác cho phép một
+số lập trình chức năng cơ bản.
+
+133
+00:07:38,830 --> 00:07:41,160
+Chúng ta sẽ nói về điều đó sau trong khóa học.
+
+134
+00:07:41,160 --> 00:07:44,620
+Nhưng đây là một ví dụ về nơi chúng ta
+định nghĩa một hàm cộng số,
+
+135
+00:07:44,620 --> 00:07:48,290
+sau đó chúng ta gán hàm đó cho
+một biến, và rồi chúng ta gọi biến.

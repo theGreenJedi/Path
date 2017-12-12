@@ -1,0 +1,50 @@
+Welcome to today's tutorial, where we'll be looking at the time series and
+date functionally in pandas. Pandas has four main time related classes. Timestamp, DatetimeIndex,
+Period, and PeriodIndex. First, let's look at Timestamp. Timestamp represents a single timestamp
+and associates values with points in time. For example,
+let's create a timestamp using a string 9/1/2016 10:05AM, and
+here we have our timestamp. Timestamp is interchangeable with
+Python's datetime in most cases. Suppose we weren't interested
+in a specific point in time, and instead wanted a span of time. This is where Period comes into play. Period represents a single time span,
+such as a specific day or month. Here we are creating a period
+that is January 2016, and here's an example of
+a period that is March 5th, 2016. The index of a timestamp
+is DatetimeIndex. Let's look at a quick example. First, let's create our example series t1, we'll use the Timestamp of September 1st,
+2nd and 3rd of 2016. When we look at the series,
+each Timestamp is the index and has a value associated with it,
+in this case, a, b and c. Looking at the type of our series index,
+we see that it's DatetimeIndex. Similarly, the index of
+period is PeriodIndex. Let's create another example series t2. This time, we'll use the values d,
+e, and f and match them with the period September,
+October and November 2016. Looking at the type of the ts2.index,
+we can see that it's PeriodIndex. Now, let's look into how
+to convert to Datetime. Suppose we have a list
+of dates as strings. If we create a DataFrame using
+these dates as the index. And some randomly generated data,
+this is the DataFrame we get. Looking at the index we can
+see that it’s pretty messy and the dates are all in different formats. Using pandas to_datetime, pandas will
+try to convert these to Datetime and put them in a standard format. to_datetime also has options to
+change the date parse order. For example, we can pass in
+the argument dayfirst = True to parse the date in European date format. Timedeltas are differences in times. We can see that when we take
+the difference between September 3rd and September 1st, we get a Timedelta of two days. We can also do something like find what
+the date and time is for 12 days and three hours past September 2nd,
+at 8:10 AM. Next, let's look at a few tricks for
+working with dates in a DataFrame. Suppose we want to look at nine
+measurements, taken bi-weekly, every Sunday, starting in October 2016. Using date_range,
+we can create this DatetimeIndex. Now, let's create a DataFrame using
+these dates, and some random data, and see what we can do with it. First, we can check what day of
+the week a specific date is. For example, here we can see that all
+the dates in our index are on a Sunday. We can use diff to find the difference
+between each date's value. Suppose we wanted to know what the mean
+count is for each month in our DataFrame. We can do this using resample. We can use partial string indexing to
+find values from a particular year, or from a particular month, or
+we can even slice on a range of dates. For example, here we only want
+the values from December 2016 onwards. Another cool thing we can do is change the
+frequency of our dates in our DataFrame using asfreq. If we use this to change the frequency
+from bi-weekly to weekly, we'll end up with missing
+values every other week. So let's use the forward fill
+method on those missing values. One last thing I wanted to briefly
+touch upon is plotting time series. Importing matplotlib.pyplot, and using
+the iPython magic %mapplotlib inline, will allow you to visualize
+the time series in the notebook. In the next course,
+we will learn more about understanding and creating visualizations. Thanks for watching, see you next time.

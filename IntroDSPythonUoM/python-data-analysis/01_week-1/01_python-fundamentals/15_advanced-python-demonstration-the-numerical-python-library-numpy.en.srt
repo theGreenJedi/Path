@@ -1,0 +1,466 @@
+1
+00:00:09,144 --> 00:00:10,550
+Hi everyone.
+
+2
+00:00:10,550 --> 00:00:14,170
+Today, we will be learning Numpy,
+a package widely used in the data science
+
+3
+00:00:14,170 --> 00:00:18,200
+community which lets us work efficiently
+with arrays and matrices in Python.
+
+4
+00:00:20,040 --> 00:00:22,710
+First, let's import Numpy as np.
+
+5
+00:00:24,200 --> 00:00:26,520
+This lets us use the shortcut
+np to refer to Numpy.
+
+6
+00:00:28,210 --> 00:00:30,070
+Now let's make our first array.
+
+7
+00:00:30,070 --> 00:00:32,830
+We can start by creating a list and
+converting it to an array.
+
+8
+00:00:34,270 --> 00:00:35,610
+So here's our first Numpy array.
+
+9
+00:00:37,270 --> 00:00:39,659
+We can do it more succinctly
+by passing the list directly.
+
+10
+00:00:41,740 --> 00:00:44,870
+Now let's make multidimensional
+arrays by passing in a list of lists.
+
+11
+00:00:46,700 --> 00:00:51,130
+We passed in two lists with three elements
+each, and we get a two by three array.
+
+12
+00:00:52,610 --> 00:00:55,020
+We can check the dimensions
+by using the shape attribute.
+
+13
+00:00:56,970 --> 00:01:01,232
+For the arange function, we pass in
+a start, a stop, and a step size,
+
+14
+00:01:01,232 --> 00:01:05,016
+and it returns evenly spaced
+values within a given interval.
+
+15
+00:01:07,086 --> 00:01:11,830
+So suppose we wanted to convert this array
+of numbers to a three by five array.
+
+16
+00:01:11,830 --> 00:01:13,100
+We can use reshape to do that.
+
+17
+00:01:15,590 --> 00:01:20,170
+The linspace function is similar
+to arange, except we tell
+
+18
+00:01:20,170 --> 00:01:23,920
+it how many numbers we want returned, and
+it will split up the interval accordingly.
+
+19
+00:01:25,410 --> 00:01:28,480
+We can use resize to change
+the dimensions in place.
+
+20
+00:01:30,645 --> 00:01:34,300
+Numpy also has several built-in functions
+and shortcuts for creating arrays.
+
+21
+00:01:35,330 --> 00:01:41,720
+ones returns an array of ones,
+zeros an array of zeros.
+
+22
+00:01:41,720 --> 00:01:46,575
+eye returns an array with ones on
+the diagonal and zeros everywhere else,
+
+23
+00:01:46,575 --> 00:01:49,170
+and diag constructs a diagonal array.
+
+24
+00:01:51,220 --> 00:01:56,510
+To create an array with repeated values,
+we can pass in a repeated list, or
+
+25
+00:01:56,510 --> 00:01:59,240
+we can use Numpy's repeat function.
+
+26
+00:01:59,240 --> 00:02:01,240
+Notice the difference
+between the two outputs.
+
+27
+00:02:03,590 --> 00:02:05,780
+We can also combine arrays
+to create new ones.
+
+28
+00:02:07,330 --> 00:02:12,280
+Let's create a two by three array of ones
+and stack it vertically with itself,
+
+29
+00:02:12,280 --> 00:02:13,480
+multiplied by 2.
+
+30
+00:02:13,480 --> 00:02:17,396
+And here's the same thing,
+but stacking horizontally.
+
+31
+00:02:20,207 --> 00:02:24,063
+Now, let's look into some of the
+operations you can do with Numpy arrays.
+
+32
+00:02:26,998 --> 00:02:30,958
+Performing elementwise addition,
+subtraction, multiplication, and
+
+33
+00:02:30,958 --> 00:02:35,369
+division is straightforward, as is raising
+all the numbers of an array to a power.
+
+34
+00:02:37,270 --> 00:02:39,260
+For those familiar with linear algebra,
+
+35
+00:02:39,260 --> 00:02:41,760
+the dot product can be done
+using the dot function.
+
+36
+00:02:43,800 --> 00:02:48,250
+Let's create a new array using a previous
+array y and its squared values.
+
+37
+00:02:49,910 --> 00:02:51,550
+The shape of this array is two by three.
+
+38
+00:02:54,190 --> 00:02:58,510
+We can also take the transpose
+of an array using the t method,
+
+39
+00:02:58,510 --> 00:03:00,060
+which swaps the rows and columns.
+
+40
+00:03:01,380 --> 00:03:03,909
+The shape of the transposed
+array is three by two.
+
+41
+00:03:06,346 --> 00:03:10,975
+Using dtype, we can see what
+type of data the array has, and
+
+42
+00:03:10,975 --> 00:03:14,782
+with astype,
+cast an array to a different type.
+
+43
+00:03:16,631 --> 00:03:21,330
+Numpy also has many useful math
+functions that we can use.
+
+44
+00:03:21,330 --> 00:03:22,820
+Let's look at a few commonly used ones.
+
+45
+00:03:24,670 --> 00:03:26,324
+Here's our new array a.
+
+46
+00:03:30,427 --> 00:03:36,423
+And we can look the sum of the values
+in the array, the maximum and
+
+47
+00:03:36,423 --> 00:03:41,353
+minimum, Or
+
+48
+00:03:41,353 --> 00:03:44,255
+the mean and standard deviation.
+
+49
+00:03:46,606 --> 00:03:53,027
+To find the index of a maximum or minimum
+value, we can use argmax and argmin.
+
+50
+00:03:57,621 --> 00:04:00,240
+Next, let's learn about indexing and
+slicing.
+
+51
+00:04:01,690 --> 00:04:05,470
+Let's create an array with
+the squares of 0 through 12.
+
+52
+00:04:05,470 --> 00:04:10,290
+We can use bracket notation to get
+the value at a particular index,
+
+53
+00:04:10,290 --> 00:04:13,590
+and the colon notation to get a range.
+
+54
+00:04:15,550 --> 00:04:18,790
+The notation is start and stepsize.
+
+55
+00:04:20,410 --> 00:04:24,190
+Specifying the starting or
+ending index is not necessary.
+
+56
+00:04:24,190 --> 00:04:28,836
+And we can also use negatives to
+count back from the end of the array.
+
+57
+00:04:28,836 --> 00:04:33,398
+For our first example, let's take a look
+at the range starting from index one and
+
+58
+00:04:33,398 --> 00:04:35,090
+stopping before index five.
+
+59
+00:04:36,960 --> 00:04:40,540
+Next, let's get a slice of the last
+four elements of the array.
+
+60
+00:04:42,760 --> 00:04:47,400
+And here, we're starting fifth from
+the end to the beginning of the array and
+
+61
+00:04:47,400 --> 00:04:48,480
+counting backwards by two.
+
+62
+00:04:50,680 --> 00:04:52,787
+Let's see how this extends
+to a two-dimensional array.
+
+63
+00:04:54,190 --> 00:04:58,825
+First, let's make a two dimensional array,
+0 to 35.
+
+64
+00:04:58,825 --> 00:05:02,720
+We can get a specific value
+by using the comma notation.
+
+65
+00:05:02,720 --> 00:05:04,900
+Here's the value at the second row and
+second column.
+
+66
+00:05:06,990 --> 00:05:11,396
+Now let's use colon notation to
+get a slice of the third row and
+
+67
+00:05:11,396 --> 00:05:13,019
+columns three to six.
+
+68
+00:05:13,019 --> 00:05:16,336
+We can also do something like
+get the first two rows and
+
+69
+00:05:16,336 --> 00:05:18,560
+all of the columns except the last.
+
+70
+00:05:20,350 --> 00:05:23,310
+This is how we would select every
+second element from the last row.
+
+71
+00:05:25,180 --> 00:05:29,010
+We can also use the bracket operator to
+do conditional indexing and assignment.
+
+72
+00:05:30,720 --> 00:05:35,106
+For example, this will return
+an array that is the elements of our
+
+73
+00:05:35,106 --> 00:05:38,078
+original array that are greater than 30.
+
+74
+00:05:38,078 --> 00:05:41,824
+And this assignment will take those
+elements within our original array and
+
+75
+00:05:41,824 --> 00:05:43,200
+assign them to a new value.
+
+76
+00:05:44,580 --> 00:05:49,950
+Here, we're capping the maximum value
+of the elements in our array to 30.
+
+77
+00:05:49,950 --> 00:05:55,040
+Next, let's look at copying data in Numpy.
+
+78
+00:05:55,040 --> 00:05:59,540
+First, let's create a new array r2,
+which is a slice of the array r.
+
+79
+00:06:01,040 --> 00:06:03,930
+Now, let's set all the elements
+of this array to zero.
+
+80
+00:06:05,590 --> 00:06:07,820
+When we look at the original array r,
+
+81
+00:06:07,820 --> 00:06:10,770
+we can see that the slice
+in r has also been changed.
+
+82
+00:06:13,010 --> 00:06:14,700
+So this is something to keep in mind and
+
+83
+00:06:14,700 --> 00:06:18,230
+be careful about when
+working with Numpy arrays.
+
+84
+00:06:18,230 --> 00:06:22,660
+If we wish to create a copy of the r array
+that will not change the original array,
+
+85
+00:06:22,660 --> 00:06:23,765
+we can use r_copy.
+
+86
+00:06:25,230 --> 00:06:30,144
+We can see that if we change the values
+of all the elements in r_copy to ten,
+
+87
+00:06:30,144 --> 00:06:32,879
+the original array r remains unchanged.
+
+88
+00:06:37,490 --> 00:06:41,470
+Lastly, let's learn how
+to iterate over arrays.
+
+89
+00:06:41,470 --> 00:06:45,698
+First, let's create a four by three array
+of random numbers, from zero through nine.
+
+90
+00:06:49,523 --> 00:06:54,230
+We can iterate by row by typing for
+row in test, for example.
+
+91
+00:06:55,720 --> 00:06:59,860
+We can iterate by row index by
+using the length function on test,
+
+92
+00:06:59,860 --> 00:07:01,310
+which returns the number of rows.
+
+93
+00:07:03,140 --> 00:07:06,719
+We can combine these two ways
+of iterating by using enumerate,
+
+94
+00:07:06,719 --> 00:07:09,360
+which gives us the row and
+the index of the row.
+
+95
+00:07:16,103 --> 00:07:17,905
+Let's make a new array, test2.
+
+96
+00:07:19,920 --> 00:07:23,045
+If we wish to iterate through both arrays,
+we can use zip.
+
+97
+00:07:29,035 --> 00:07:30,900
+Numpy has a lot to offer.
+
+98
+00:07:30,900 --> 00:07:34,680
+So be sure to look at the documentation
+to find out about more great features.
+
+99
+00:07:35,710 --> 00:07:36,980
+Thanks for joining me.
+
+100
+00:07:36,980 --> 00:07:38,031
+Hope to see you next time.

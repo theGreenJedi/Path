@@ -1,0 +1,461 @@
+1
+00:00:08,762 --> 00:00:12,930
+Up to this point, we haven't spoken
+much about object-oriented Python.
+
+2
+00:00:12,930 --> 00:00:17,240
+While functions play a big role in the
+Python ecosystem, Python does have classes
+
+3
+00:00:17,240 --> 00:00:21,600
+which can have attached methods,
+and be instantiated as objects.
+
+4
+00:00:21,600 --> 00:00:25,350
+Now, this course isn't about the
+nitty-gritty details of objects in Python,
+
+5
+00:00:25,350 --> 00:00:27,370
+or object-oriented programming.
+
+6
+00:00:27,370 --> 00:00:30,390
+And actually, while you'll 
+use objects a lot in Python,
+
+7
+00:00:30,390 --> 00:00:33,890
+you're less likely to be creating new
+classes when you use the interactive
+
+8
+00:00:33,890 --> 00:00:36,470
+environment, because it's a bit verbose.
+
+9
+00:00:36,470 --> 00:00:40,200
+But I think it's important to go over a
+few details of objects in Python, just so
+
+10
+00:00:40,200 --> 00:00:41,839
+that you aren't surprised
+when you see them.
+
+11
+00:00:43,300 --> 00:00:47,430
+First, you can define a class using
+a class keyword, and ending with a colon.
+
+12
+00:00:48,470 --> 00:00:51,550
+Anything indented below this,
+is within the scope of the class.
+
+13
+00:00:52,580 --> 00:00:56,080
+Classes in Python are generally
+named using camel case,
+
+14
+00:00:56,080 --> 00:00:59,070
+which means the first character
+of each word is capitalized.
+
+15
+00:01:00,070 --> 00:01:04,580
+You don't declare variables within
+the object, you just start using them.
+
+16
+00:01:04,580 --> 00:01:06,730
+Class variables can also be declared.
+
+17
+00:01:06,730 --> 00:01:10,510
+These are just variables which
+are shared across all instances.
+
+18
+00:01:10,510 --> 00:01:13,730
+So in this example,
+we're saying that the default for
+
+19
+00:01:13,730 --> 00:01:16,430
+all people is at
+the school of information.
+
+20
+00:01:18,010 --> 00:01:20,760
+It's not very useful here, but
+I wanted to show it for completeness.
+
+21
+00:01:22,520 --> 00:01:26,480
+To define a method, you just write
+it as you would have a function.
+
+22
+00:01:26,480 --> 00:01:30,420
+The one change, is that to have access
+to the instance which a method is
+
+23
+00:01:30,420 --> 00:01:34,480
+being invoked upon, you must include self,
+in the method signature.
+
+24
+00:01:35,490 --> 00:01:39,800
+Similarly, if you want to refer to
+instance variables set on the object,
+
+25
+00:01:39,800 --> 00:01:42,590
+you prepend them with the word self,
+with a full stop.
+
+26
+00:01:43,600 --> 00:01:48,020
+In this definition of a person, for
+instance, we have written two methods.
+
+27
+00:01:48,020 --> 00:01:50,280
+Set name and set location.
+
+28
+00:01:50,280 --> 00:01:54,800
+And both change instance bound variables,
+called name and location respectively.
+
+29
+00:01:56,220 --> 00:01:58,860
+When we run this cell, we see no output.
+
+30
+00:01:58,860 --> 00:02:02,950
+The class exists, but
+we haven't created any objects yet.
+
+31
+00:02:02,950 --> 00:02:06,290
+We can instantiate this class
+by calling the class name with
+
+32
+00:02:06,290 --> 00:02:07,630
+empty parenthesis behind it.
+
+33
+00:02:08,970 --> 00:02:12,870
+Then we can call functions and print out
+attributes of the class using the dot
+
+34
+00:02:12,870 --> 00:02:15,170
+notation, common in most languages.
+
+35
+00:02:16,290 --> 00:02:19,730
+There are a couple of implications of
+object-oriented programming in Python,
+
+36
+00:02:19,730 --> 00:02:22,910
+that you should take away
+from this very brief example.
+
+37
+00:02:22,910 --> 00:02:27,260
+First, objects in Python do not
+have private or protected members.
+
+38
+00:02:27,260 --> 00:02:28,740
+If you instantiate an object,
+
+39
+00:02:28,740 --> 00:02:33,140
+you have full access to any of
+the methods or attributes of that object.
+
+40
+00:02:33,140 --> 00:02:34,480
+Second, there's no need for
+
+41
+00:02:34,480 --> 00:02:38,200
+an explicit constructor when
+creating objects in Python.
+
+42
+00:02:38,200 --> 00:02:42,370
+You can add a constructor if you
+want to by declaring the
+
+43
+00:02:42,370 --> 00:02:44,180
+__init__ method.
+
+44
+00:02:45,590 --> 00:02:49,740
+Now I'm not going to dive any more
+into Python objects, because there's lots
+
+45
+00:02:49,740 --> 00:02:53,410
+of subtlety and, to be honest, most of
+the object oriented features of
+
+46
+00:02:53,410 --> 00:02:57,715
+Python aren't really all that salient for
+introduction to data science.
+
+47
+00:02:57,715 --> 00:02:59,235
+If you're more interested,
+
+48
+00:02:59,235 --> 00:03:03,815
+I'd recommend checking out the Python
+documentation from the Python tutorial.
+
+49
+00:03:03,815 --> 00:03:07,550
+It's fairly comprehensive overview of
+the object features of the language, and
+
+50
+00:03:07,550 --> 00:03:09,836
+there will be a reference
+in the class resources.
+
+51
+00:03:11,859 --> 00:03:16,940
+The map function is one of the basis for
+functional programming in Python.
+
+52
+00:03:16,940 --> 00:03:21,310
+Functional programming is a programming
+paradigm in which you explicitly declare
+
+53
+00:03:21,310 --> 00:03:25,600
+all parameters which could change
+through execution of a given function.
+
+54
+00:03:25,600 --> 00:03:29,980
+Thus functional programming is referred to
+as being side-effect free, because there
+
+55
+00:03:29,980 --> 00:03:35,270
+is a software contract that describes what
+can actually change by calling a function.
+
+56
+00:03:35,270 --> 00:03:38,930
+Now, Python isn't a functional
+programming language in the pure sense.
+
+57
+00:03:38,930 --> 00:03:41,840
+Since you can have many side effects of
+functions, and certainly you don't have to
+
+58
+00:03:41,840 --> 00:03:44,790
+pass in the parameters of everything
+that you're interested in changing.
+
+59
+00:03:45,880 --> 00:03:49,200
+But functional programming
+causes one to think more heavily
+
+60
+00:03:49,200 --> 00:03:50,840
+while chaining operations together.
+
+61
+00:03:50,840 --> 00:03:55,230
+And this really is a sort of underlying
+theme in much of data science and
+
+62
+00:03:55,230 --> 00:03:57,400
+date cleaning in particular.
+
+63
+00:03:57,400 --> 00:04:00,520
+So, functional programming
+methods are often used in Python,
+
+64
+00:04:00,520 --> 00:04:04,826
+and it's not uncommon to see a parameter
+for a function, be a function itself.
+
+65
+00:04:04,826 --> 00:04:10,710
+The map built-in function is one example
+of a functional programming feature
+
+66
+00:04:10,710 --> 00:04:15,140
+of Python, that I think ties together
+a number of aspects of the language.
+
+67
+00:04:15,140 --> 00:04:17,970
+The map function signature
+looks like this.
+
+68
+00:04:17,970 --> 00:04:22,220
+The first parameters of function that you
+want executed, and the second parameter,
+
+69
+00:04:22,220 --> 00:04:25,610
+and every following parameter,
+is something which can be iterated upon.
+
+70
+00:04:26,640 --> 00:04:29,400
+All the iterable arguments
+are unpacked together, and
+
+71
+00:04:29,400 --> 00:04:31,950
+passed into the given function.
+
+72
+00:04:31,950 --> 00:04:35,110
+That's a little cryptic, so
+let's take a look at an example.
+
+73
+00:04:35,110 --> 00:04:37,120
+Imagine we have two list of numbers,
+
+74
+00:04:37,120 --> 00:04:41,290
+maybe prices from two different
+stores on exactly the same items.
+
+75
+00:04:41,290 --> 00:04:44,280
+And we wanted to find the minimum
+that we would have to pay
+
+76
+00:04:44,280 --> 00:04:47,510
+if we bought the cheaper
+item between the two stores.
+
+77
+00:04:47,510 --> 00:04:51,050
+To do this, we could iterate through
+each list, comparing items and
+
+78
+00:04:51,050 --> 00:04:52,860
+choosing the cheapest.
+
+79
+00:04:52,860 --> 00:04:56,000
+With map, we can do this
+comparison in a single statement.
+
+80
+00:04:57,230 --> 00:05:00,490
+But when we go to print out the map,
+we see that we get an odd reference value
+
+81
+00:05:00,490 --> 00:05:03,360
+instead of a list of items
+that we're expecting.
+
+82
+00:05:03,360 --> 00:05:05,950
+This is called lazy evaluation.
+
+83
+00:05:05,950 --> 00:05:10,010
+In Python, the map function
+returns to you a map object.
+
+84
+00:05:10,010 --> 00:05:14,010
+It doesn't actually try and
+run the function min on two items,
+
+85
+00:05:14,010 --> 00:05:16,490
+until you look inside for a value.
+
+86
+00:05:16,490 --> 00:05:19,330
+This is an interesting design
+pattern of the language, and
+
+87
+00:05:19,330 --> 00:05:22,460
+it's commonly used when
+dealing with big data.
+
+88
+00:05:22,460 --> 00:05:26,700
+This allows us to have very
+efficient memory management,
+
+89
+00:05:26,700 --> 00:05:29,080
+even though something might
+be computationally complex.
+
+90
+00:05:30,430 --> 00:05:34,470
+Maps are iterable, just like lists and
+tuples, so we can use a for
+
+91
+00:05:34,470 --> 00:05:36,560
+loop to look at all of
+the values in the map.
+
+92
+00:05:38,430 --> 00:05:41,980
+This passing around of functions and data
+structures which they should be applied
+
+93
+00:05:41,980 --> 00:05:44,360
+to, is a hallmark of
+functional programming.
+
+94
+00:05:44,360 --> 00:05:47,840
+It's very common in data analysis and
+cleaning.
+
+95
+00:05:47,840 --> 00:05:51,040
+Here's a problem for you to try,
+that brings together some of the tasks
+
+96
+00:05:51,040 --> 00:05:53,300
+you might be expecting to
+do with data cleaning.

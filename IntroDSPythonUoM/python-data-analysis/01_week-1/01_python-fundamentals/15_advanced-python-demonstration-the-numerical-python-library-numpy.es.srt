@@ -1,0 +1,491 @@
+1
+00:00:09,144 --> 00:00:10,550
+Hola a todos.
+
+2
+00:00:10,550 --> 00:00:14,170
+Hoy aprenderemos Numpy,
+un paquete muy usado en la comunidad
+
+3
+00:00:14,170 --> 00:00:18,200
+de la ciencia de los datos y que nos permite trabajar
+eficientemente con arreglos y matrices en Python.
+
+4
+00:00:20,040 --> 00:00:22,710
+Primero, vamos a importar
+Numpy como np.
+
+5
+00:00:24,200 --> 00:00:26,520
+Esto nos permite usar el atajo np
+para referirnos a Numpy
+
+6
+00:00:28,210 --> 00:00:30,070
+Ahora creamos
+nuestro primer arreglo.
+
+7
+00:00:30,070 --> 00:00:32,830
+Podemos comenzar creando una lista
+y convirtiéndola en un arreglo.
+
+8
+00:00:34,270 --> 00:00:35,610
+Así que aquí está nuestro
+primer arreglo Numpy.
+
+9
+00:00:37,270 --> 00:00:39,659
+Podemos hacerlo de manera más sencilla,
+pasando la lista directamente.
+
+10
+00:00:41,740 --> 00:00:44,870
+Ahora vamos a crear matrices 
+multidimensionales pasando una lista de listas.
+
+11
+00:00:46,700 --> 00:00:51,130
+Pasamos dos listas con tres elementos cada una,
+y obtenemos una matriz de dos por tres.
+
+12
+00:00:52,610 --> 00:00:55,020
+Podemos comprobar las dimensiones
+mediante el atributo "shape".
+
+13
+00:00:56,970 --> 00:01:01,232
+Para la función "arange", pasamos
+inicio, fin y un tamaño de paso,
+
+14
+00:01:01,232 --> 00:01:05,016
+Y retorna valores uniformemente
+espaciados dentro del intervalo dado.
+
+15
+00:01:07,086 --> 00:01:11,830
+Supongamos que queremos convertir esta matriz
+de números a una matriz de tres por cinco.
+
+16
+00:01:11,830 --> 00:01:13,100
+Podemos usar "reshape"
+para hacer eso.
+
+17
+00:01:15,590 --> 00:01:20,170
+La función "linspace" es similar a "arange",
+ excepto que debemos decir
+
+18
+00:01:20,170 --> 00:01:23,920
+cuántos números queremos que retorne,
+ y se dividirá el intervalo en consecuencia.
+
+19
+00:01:25,410 --> 00:01:28,480
+Podemos usar "resize" para
+cambiar las dimensiones.
+
+20
+00:01:30,645 --> 00:01:34,300
+Numpy también incluey funciones 
+y atajos para crear arreglos.
+
+21
+00:01:35,330 --> 00:01:41,720
+"ones" devuelve una matriz de unos,
+"zeros" devuelve una matriz de ceros.
+
+22
+00:01:41,720 --> 00:01:46,575
+"eye" devuelve una matriz con unos en
+la diagonal y ceros en el resto de los lugares,
+
+23
+00:01:46,575 --> 00:01:49,170
+y "diag" construye
+una matriz diagonal.
+
+24
+00:01:51,220 --> 00:01:56,510
+Para crear un arreglo con valores repetidos,
+podemos pasar una lista repetida, o
+
+25
+00:01:56,510 --> 00:01:59,240
+podemos usar la función
+"repeat" de Numpy.
+
+26
+00:01:59,240 --> 00:02:01,240
+Observa la diferencia
+entre las dos salidas.
+
+27
+00:02:03,590 --> 00:02:05,780
+También podemos combinar arreglos
+para crear otros nuevos.
+
+28
+00:02:07,330 --> 00:02:12,280
+Vamos a crear una matriz con unos de dos por tres
+y apilarla verticalmente consigo misma,
+
+29
+00:02:12,280 --> 00:02:13,480
+multiplicada por 2.
+
+30
+00:02:13,480 --> 00:02:17,396
+Y aquí hacemos lo mismo,
+pero apilado horizontalmente.
+
+31
+00:02:20,207 --> 00:02:24,063
+Ahora, veamos algunas operaciones
+que podemos hacer sobre arreglos con Numpy.
+
+32
+00:02:26,998 --> 00:02:30,958
+Realizar la adición, sustracción,
+multiplicación y división
+
+33
+00:02:30,958 --> 00:02:35,369
+de elementos es sencillo, como lo
+es también elevar a una potencia.
+
+34
+00:02:37,270 --> 00:02:39,260
+Para aquellos que están
+familiarizados con el álgebra lineal,
+
+35
+00:02:39,260 --> 00:02:41,760
+El producto punto se puede
+hacer usando la función "dot".
+
+36
+00:02:43,800 --> 00:02:48,250
+Ahora creamos una nueva matriz usando
+la matriz "y" anterior y sus valores al cuadrado.
+
+37
+00:02:49,910 --> 00:02:51,550
+La forma de este arreglo
+es dos por tres.
+
+38
+00:02:54,190 --> 00:02:58,510
+También podemos obtener la transpuesta 
+de una matriz usando el método "t",
+
+39
+00:02:58,510 --> 00:03:00,060
+que intercambia 
+filas y columnas.
+
+40
+00:03:01,380 --> 00:03:03,909
+La forma de la matriz 
+transpuesta es de tres por dos.
+
+41
+00:03:06,346 --> 00:03:10,975
+Con "dtype" podemos ver qué
+tipo de datos tiene la matriz, y
+
+42
+00:03:10,975 --> 00:03:14,782
+con "astype", convertimos una
+matriz a un tipo diferente.
+
+43
+00:03:16,631 --> 00:03:21,330
+En Numpy hay también muchas funciones
+matemáticas útiles que podemos usar.
+
+44
+00:03:21,330 --> 00:03:22,820
+Echemos un vistazo a
+algunas de uso común.
+
+45
+00:03:24,670 --> 00:03:26,324
+Aquí tenemos nuestro
+nuevo arreglo "a".
+
+46
+00:03:30,427 --> 00:03:36,423
+Y podemos ver la suma de
+los valores, el máximo y
+
+47
+00:03:36,423 --> 00:03:41,353
+el mínimo, o
+
+48
+00:03:41,353 --> 00:03:44,255
+el promedio y
+la desviación estándar.
+
+49
+00:03:46,606 --> 00:03:53,027
+Para encontrar el índice de un valor máximo o mínimo,
+ podemos usar "argmax" y "argmin".
+
+50
+00:03:57,621 --> 00:04:00,240
+A continuación, vamos a aprender
+sobre la indexación y el "rebanado".
+
+51
+00:04:01,690 --> 00:04:05,470
+Vamos a crear una matriz
+con los cuadrados de 0 a 12.
+
+52
+00:04:05,470 --> 00:04:10,290
+Podemos usar la notación de paréntesis
+para obtener el valor en un posición particular,
+
+53
+00:04:10,290 --> 00:04:13,590
+y la notación de dos puntos
+para obtener un rango.
+
+54
+00:04:15,550 --> 00:04:18,790
+La notación es inicio
+y tamaño del paso.
+
+55
+00:04:20,410 --> 00:04:24,190
+No es necesario especificar
+el índice inicial o final.
+
+56
+00:04:24,190 --> 00:04:28,836
+Incluso podemos usar negativos
+para contar desde el final de la matriz.
+
+57
+00:04:28,836 --> 00:04:33,398
+Para nuestro primer ejemplo,
+veamos el rango que comienza del índice uno y
+
+58
+00:04:33,398 --> 00:04:35,090
+se detiene antes
+del índice cinco.
+
+59
+00:04:36,960 --> 00:04:40,540
+A continuación, obtengamos una porción 
+con los últimos cuatro elementos de la matriz.
+
+60
+00:04:42,760 --> 00:04:47,400
+Y aquí tomamos desde la quinta posición
+empezando desde el final hasta el comienzo de la matriz y
+
+61
+00:04:47,400 --> 00:04:48,480
+contando hacia atrás
+en pasos de a dos.
+
+62
+00:04:50,680 --> 00:04:52,787
+Veamos cómo se extiende
+esto a una matriz bidimensional.
+
+63
+00:04:54,190 --> 00:04:58,825
+Primero, hagamos una matriz
+bidimensional, 0 a 35.
+
+64
+00:04:58,825 --> 00:05:02,720
+Podemos obtener un valor específico
+usando la notación de coma.
+
+65
+00:05:02,720 --> 00:05:04,900
+Este es el valor de la 
+segunda fila y segunda columna.
+
+66
+00:05:06,990 --> 00:05:11,396
+Ahora vamos a usar la notación de dos puntos
+para obtener una porción de la tercera fila y
+
+67
+00:05:11,396 --> 00:05:13,019
+columnas tres a seis.
+
+68
+00:05:13,019 --> 00:05:16,336
+También podemos
+obtener las dos primeras filas y
+
+69
+00:05:16,336 --> 00:05:18,560
+todas las columnas
+excepto la última.
+
+70
+00:05:20,350 --> 00:05:23,310
+Así es como seleccionaríamos cada
+segundo elemento de la última fila.
+
+71
+00:05:25,180 --> 00:05:29,010
+También podemos usar el operador de paréntesis
+para hacer indexación y asignación condicional.
+
+72
+00:05:30,720 --> 00:05:35,106
+Por ejemplo, esto devolverá un
+arreglo que son los elementos 
+
+73
+00:05:35,106 --> 00:05:38,078
+mayores a 30 de
+nuestra matriz original.
+
+74
+00:05:38,078 --> 00:05:41,824
+Y esta asignación tomará esos elementos
+dentro de nuestra matriz original y
+
+75
+00:05:41,824 --> 00:05:43,200
+les asignará
+un nuevo valor.
+
+76
+00:05:44,580 --> 00:05:49,950
+Aquí estamos limitando el valor máximo
+de los elementos de nuestra matriz a 30.
+
+77
+00:05:49,950 --> 00:05:55,040
+A continuación, veamos
+cómo se copian datos en Numpy.
+
+78
+00:05:55,040 --> 00:05:59,540
+En primer lugar, vamos a crear una nueva matriz "r2",
+que es una porción de la matriz "r".
+
+79
+00:06:01,040 --> 00:06:03,930
+Ahora, vamos a ponerle cero
+a todos los elementos de la matriz.
+
+80
+00:06:05,590 --> 00:06:07,820
+Cuando miramos la matriz original "r",
+
+81
+00:06:07,820 --> 00:06:10,770
+podemos ver que la porción
+en "r" también se ha cambiado.
+
+82
+00:06:13,010 --> 00:06:14,700
+Esto es algo a tener en cuenta y
+
+83
+00:06:14,700 --> 00:06:18,230
+hay que ser cuidadoso
+al trabajar con matrices en Numpy.
+
+84
+00:06:18,230 --> 00:06:22,660
+Si deseamos crear una copia de la matriz "r"
+que no modifique la matriz original,
+
+85
+00:06:22,660 --> 00:06:23,765
+podemos usar "r_copy".
+
+86
+00:06:25,230 --> 00:06:30,144
+Podemos ver que si cambiamos a diez el valor
+de todos los elementos con "r_copy",
+
+87
+00:06:30,144 --> 00:06:32,879
+La matriz original "r"
+permanece sin cambios.
+
+88
+00:06:37,490 --> 00:06:41,470
+Por último, vamos a aprender
+cómo iterar sobre matrices.
+
+89
+00:06:41,470 --> 00:06:45,698
+En primer lugar, vamos a crear un arreglo de números
+aleatorios de cero a nuevo con un tamaño  de cuatro por tres.
+
+90
+00:06:49,523 --> 00:06:54,230
+Podemos iterar por fila escribiendo
+"for row in test", por ejemplo.
+
+91
+00:06:55,720 --> 00:06:59,860
+Podemos iterar por el índice de fila 
+usando la función length sobre "test",
+
+92
+00:06:59,860 --> 00:07:01,310
+que devuelve el
+número de filas.
+
+93
+00:07:03,140 --> 00:07:06,719
+Podemos combinar estas dos formas
+de iterar usando "enumerate",
+
+94
+00:07:06,719 --> 00:07:09,360
+que nos da la fila y
+el índice de la fila.
+
+95
+00:07:16,103 --> 00:07:17,905
+Hagamos una nueva
+matriz, "test2".
+
+96
+00:07:19,920 --> 00:07:23,045
+Si deseamos iterar a través de
+ambos arreglos, podemos usar "zip".
+
+97
+00:07:29,035 --> 00:07:30,900
+Numpy tiene
+mucho que ofrecer.
+
+98
+00:07:30,900 --> 00:07:34,680
+Asegúrate de revisar la documentación
+para obtener más información.
+
+99
+00:07:35,710 --> 00:07:36,980
+Gracias por acompañarme.
+
+100
+00:07:36,980 --> 00:07:38,031
+Espero verte
+nuevamente.

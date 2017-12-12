@@ -1,0 +1,155 @@
+1
+00:00:08,362 --> 00:00:12,500
+Mucho del análisis que hacemos puede
+estar relacionado con fechas y horas.
+
+2
+00:00:12,500 --> 00:00:16,630
+Por ejemplo, encontrar el promedio de
+ventas en un período de tiempo dado.
+
+3
+00:00:16,630 --> 00:00:20,815
+o hacer minería de datos sobre una selección de productos
+que se adquirieron en un período determinado.
+
+4
+00:00:20,815 --> 00:00:24,395
+O tratar de encontrar el período de
+tiempo en que hubo mayor actividad en
+
+5
+00:00:24,395 --> 00:00:26,130
+en un foro de discusión
+en línea.
+
+6
+00:00:26,130 --> 00:00:30,670
+En este curso, no profundizaremos
+en el análisis de series de tiempo, pero
+
+7
+00:00:30,670 --> 00:00:32,960
+Quiero mostrarte algunos
+fundamentos en Python.
+
+8
+00:00:34,240 --> 00:00:36,020
+En primer lugar, debes tener en
+cuenta que las fechas y
+
+9
+00:00:36,020 --> 00:00:38,710
+y horas pueden ser almacenadas
+de muchas maneras diferentes.
+
+10
+00:00:38,710 --> 00:00:41,670
+Uno de los métodos más comunes 
+para almacenar la fecha y
+
+11
+00:00:41,670 --> 00:00:46,390
+la hora en sistemas de transacciones en línea
+está basado en el desplazamiento de la época,
+
+12
+00:00:46,390 --> 00:00:47,610
+que es el 1 de enero de 1970.
+
+13
+00:00:47,610 --> 00:00:53,650
+Hay mucha historia detrás de esto,
+y no es raro encontrar sistemas
+
+14
+00:00:53,650 --> 00:00:59,060
+que almacenan la fecha de una transacción en
+segundos o milisegundos contados a partir de esa fecha.
+
+15
+00:00:59,060 --> 00:01:02,270
+Así que si te encuentras con números grandes
+donde esperabas ver fechas y horas,
+
+16
+00:01:02,270 --> 00:01:04,920
+tendrás que convertirlos
+para darle sentido a los datos.
+
+17
+00:01:06,190 --> 00:01:10,570
+En Python, puedes obtener la hora
+desde la época utilizando el módulo de tiempo.
+
+18
+00:01:10,570 --> 00:01:14,310
+A continuación, puedes crear un "timestamp"
+mediante la la función "fromtimestamp"
+
+19
+00:01:14,310 --> 00:01:16,460
+sobre el objeto "fecha y hora".
+
+20
+00:01:16,460 --> 00:01:20,210
+Cuando imprimimos este valor, 
+vemos que el año, mes, día, etc.
+
+21
+00:01:20,210 --> 00:01:21,630
+se imprimen también.
+
+22
+00:01:22,690 --> 00:01:27,960
+El objeto de fecha y hora tiene atributos
+útiles para obtener la hora, el día,
+
+23
+00:01:27,960 --> 00:01:29,260
+segundos. etc.
+
+24
+00:01:30,772 --> 00:01:34,930
+Los objetos de fecha y hora permiten
+una matemática simple usando deltas de tiempo.
+
+25
+00:01:34,930 --> 00:01:38,780
+Por ejemplo, aquí, podemos
+crear un delta de 100 días,
+
+26
+00:01:38,780 --> 00:01:42,790
+y luego hacer la sustracción en comparaciones
+con el objeto de fecha y hora.
+
+27
+00:01:42,790 --> 00:01:47,040
+Esto se utiliza comúnmente en la ciencia de datos
+para crear ventanas "corredizas".
+
+28
+00:01:47,040 --> 00:01:49,140
+Por ejemplo, podríamos
+desear buscar
+
+29
+00:01:49,140 --> 00:01:53,880
+un período de cinco días donde las ventas fueron 
+superiores, y dejarlo marcado para seguimiento.
+
+30
+00:01:54,930 --> 00:01:57,830
+Esto ha sido sólo un pequeño vistazo
+al tema de fechas y horas en Python.
+
+31
+00:01:57,830 --> 00:02:01,100
+En la tercera semana del curso,
+vamos a investigar un poco mas
+
+32
+00:02:01,100 --> 00:02:04,170
+sobre fechas y horas
+utilizando una librería para tal fin.

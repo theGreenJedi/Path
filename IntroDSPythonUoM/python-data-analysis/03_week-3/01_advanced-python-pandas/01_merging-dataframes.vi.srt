@@ -1,0 +1,559 @@
+1
+00:00:09,082 --> 00:00:12,021
+Tuần trước, chúng ta đã được giới thiệu dữ liệu thao tác panda và
+
+2
+00:00:12,021 --> 00:00:13,430
+phân tích thư viện.
+
+3
+00:00:13,430 --> 00:00:16,649
+Chúng ta thấy rằng có hai cấu trúc dữ liệu tương tự nhau,
+
+4
+00:00:16,649 --> 00:00:20,540
+chuỗi đối tượng một chiều và đối tượng khung dữ liệu hai chiều.
+
+5
+00:00:20,540 --> 00:00:23,579
+Truy vấn hai cấu trúc dữ liệu đã được hoàn thành theo các cách khác nhau,
+
+6
+00:00:23,579 --> 00:00:26,671
+như là sử dụng iloc hoặc thuộc tính loc cho việc truy vấn hàng, hoặc
+
+7
+00:00:26,671 --> 00:00:31,040
+sử dụng dấu ngoặc vuông trên đối tượng cho truy vấn cột.
+
+8
+00:00:31,040 --> 00:00:33,810
+Quan trọng nhất chúng ta thấy rằng có thể truy vấn khung dữ liệu và
+
+9
+00:00:33,810 --> 00:00:36,080
+các đối tượng chuỗi qua hàm bool.
+
+10
+00:00:36,080 --> 00:00:38,810
+Và hàm bool là phương pháp lọc rất tốt cái mà
+
+11
+00:00:38,810 --> 00:00:42,730
+cho phép chúng ta sử dụng phát sóng để xác định dữ liệu được giữ trong phân tích của chúng ta là gì.
+
+12
+00:00:44,860 --> 00:00:46,080
+Trong bài giảng tuần này,
+
+13
+00:00:46,080 --> 00:00:50,840
+chúng ta sẽ đi vào chi tiết làm thế nào để thao tác khung dữ liệu.
+
+14
+00:00:50,840 --> 00:00:54,220
+Chúng ta sẽ khám phá cách giảm và xử lí dữ liệu sử dụng Groupby và Apply,
+
+15
+00:00:54,220 --> 00:00:58,420
+cách tham gia bộ dữ liệu từ các tệp đồng thời.
+
+16
+00:00:58,420 --> 00:01:01,020
+Chúng ta cũng sẽ nói về các tính năng mà hàm panda sử dụng cho
+
+17
+00:01:01,020 --> 00:01:04,970
+cả phân tích thống kê truyền thống và học máy.
+
+18
+00:01:04,970 --> 00:01:07,160
+Hãy bắt đầu với cách hợp nhất bộ dữ liệu.
+
+19
+00:01:07,160 --> 00:01:10,260
+Chúng ta đã xem cách chúng ta thêm dữ liệu mới vào khung dữ liệu đang tồn tại.
+
+20
+00:01:10,260 --> 00:01:12,910
+Chúng ta sử dụng dấu ngoặc vuông với tên cột mới,
+
+21
+00:01:12,910 --> 00:01:16,430
+và dữ liệu được thêm vào miễn là chỉ số được chia sẻ.
+
+22
+00:01:16,430 --> 00:01:20,080
+Nếu không có chỉ số chia sẻ và giá trị vô hướng được xuất,
+
+23
+00:01:20,080 --> 00:01:24,240
+hãy nhớ giá trị vô hướng là một giá trị đơn như là một số nguyên hoặc một chuỗi.
+
+24
+00:01:24,240 --> 00:01:27,780
+Cột giá trị mới được thêm vào với một giá trị vô hướng là giá trị mặc định.
+
+25
+00:01:27,780 --> 00:01:31,060
+Nếu chúng ta muốn gán giá trị khác vào mỗi hàng thì sao?
+
+26
+00:01:31,060 --> 00:01:32,488
+Nó có mẹo.
+
+27
+00:01:32,488 --> 00:01:35,500
+Chúng ta có thể lập mã các giá trị trong danh sách, sau đó hàm panda sẽ giải nén chúng và
+
+28
+00:01:35,500 --> 00:01:36,940
+gán chúng vào các hàng.
+
+29
+00:01:36,940 --> 00:01:39,500
+Nhưng nếu danh sách chúng ta có không đủ dài, thì chúng ta không thể làm điều này,
+
+30
+00:01:39,500 --> 00:01:41,850
+bởi vì hàm panda không biết nơi các giá trị mất đi sẽ đi.
+
+31
+00:01:43,040 --> 00:01:44,256
+Đây là một ví dụ.
+
+32
+00:01:44,256 --> 00:01:48,160
+Chúng ta đã sử dụng khung dữ liệu của việc mua bán từ các bài học trước,
+
+33
+00:01:48,160 --> 00:01:51,950
+chỉ số là một danh sách của các cửa hàng và các cột là dữ liệu mua bán.
+
+34
+00:01:51,950 --> 00:01:56,555
+Nếu chúng ta muốn thêm các cột mới là Date vào khung dữ liệu, ok.
+
+35
+00:01:56,555 --> 00:01:59,570
+Chúng ta chỉ cần sử dụng dấu ngoặc vuông trực tiếp trên khung dữ liệu,
+
+36
+00:01:59,570 --> 00:02:02,270
+miễn là cột dài bằng phần hồ sơ còn lại.
+
+37
+00:02:02,270 --> 00:02:04,000
+Nếu chúng ta muốn thêm một số lĩnh vực mới,
+
+38
+00:02:04,000 --> 00:02:07,260
+có thể là một dấu hiệu chuyển, điều đó rất dễ bởi vì nó là một giá trị vô hướng.
+
+39
+00:02:08,540 --> 00:02:11,450
+Vấn đề đến khi chúng ta chỉ cố một vài mục để thêm.
+
+40
+00:02:11,450 --> 00:02:14,760
+Để cái này hoạt động, chúng ta phải cung cấp hàm danh sách
+
+41
+00:02:14,760 --> 00:02:18,440
+cái mà đủ dài cho khung dữ liệu để mỗi hàng có thể được quy hoạch.
+
+42
+00:02:18,440 --> 00:02:22,035
+Điều này có nghĩa là chúng ta phải có đầu vào không có giá trị.
+
+43
+00:02:22,035 --> 00:02:24,265
+Nếu mỗi hàng có chỉ số duy nhất,
+
+44
+00:02:24,265 --> 00:02:27,775
+thì chúng ta có thể gán định dạng cột mới với chuỗi.
+
+45
+00:02:27,775 --> 00:02:31,455
+Ví dụ nếu chúng ta đặt lại chỉ số trong ví dụ này để khung dữ liệu được dán nhãn
+
+46
+00:02:31,455 --> 00:02:36,475
+từ 1 tới 2, thì chúng ta tạo ra một chuỗi mới với các nhãn mác, chúng ta có thể áp dụng nó.
+
+47
+00:02:36,475 --> 00:02:39,565
+Các kết quả chúng ta có như chúng ta mong muốn.
+
+48
+00:02:39,565 --> 00:02:42,925
+Mặt tốt của tiếp cận này là chúng ta có thể bỏ các mục mà chúng ta
+
+49
+00:02:42,925 --> 00:02:46,170
+không biết, và hàm panda sẽ đặt các giá trị bỏ lỡ cho chúng ta.
+
+50
+00:02:46,170 --> 00:02:48,650
+Đây là cách tốt để làm nó.
+
+51
+00:02:48,650 --> 00:02:52,460
+Phổ biến hơn nữa chúng ta muốn tham gia vào hai khung dữ liệu lớn hơn và
+
+52
+00:02:52,460 --> 00:02:54,650
+nó hơ phức tạp hơn một chút.
+
+53
+00:02:54,650 --> 00:02:57,870
+Trước khi chúng ta nhảy vào mã, chúng ta cần phải giải quyết lí thuyết liên quan và
+
+54
+00:02:57,870 --> 00:03:00,600
+có một số ngôn ngữ dưới đây.
+
+55
+00:03:00,600 --> 00:03:02,250
+Đây là sơ đồ Venn.
+
+56
+00:03:02,250 --> 00:03:06,000
+Sơ đồ venn được sử dụng để chỉ ra tập thành viên.
+
+57
+00:03:06,000 --> 00:03:10,210
+Ví dụ vòng tròn bên trái là số sinh viên ở trường đại học.
+
+58
+00:03:10,210 --> 00:03:13,820
+Vòng tròn bên phải là số nhân viên ở trường đại học.
+
+59
+00:03:13,820 --> 00:03:17,327
+Và vùng chồng chéo ở giữa là tất cả các sinh viên
+
+60
+00:03:17,327 --> 00:03:18,129
+và nhân viên.
+
+61
+00:03:18,129 --> 00:03:21,210
+Có thể sinh viên là hướng dẫn cho khóa học hoặc các bài tập ở lớp,
+
+62
+00:03:21,210 --> 00:03:23,990
+hoặc tham gia hoạt động nghiên cứu.
+
+63
+00:03:23,990 --> 00:03:27,940
+Chúng ta có thể nghĩ về hai quần thể như các chỉ mục trong khung dữ liệu riêng biệt,
+
+64
+00:03:27,940 --> 00:03:30,040
+có thể với nhãn mác của tên người.
+
+65
+00:03:30,040 --> 00:03:34,060
+Khi chúng ta muốn tham gia cùng khung dữ liệu, chúng ta có một số lựa chọn để thực hiện.
+
+66
+00:03:34,060 --> 00:03:36,796
+Đầu tiên cái mà chúng ta muốn là một danh sách tất cả mọi người bất kể
+
+67
+00:03:36,796 --> 00:03:41,480
+họ là nhân viên hay sinh viên và tất cả thông tin chúng ta có thể có.
+
+68
+00:03:41,480 --> 00:03:44,700
+Trong dữ liệu thuật ngữ, đó là một bộ đầy đủ.
+
+69
+00:03:44,700 --> 00:03:46,820
+Và theo lí thuyết nó được gọi là một tập hợp.
+
+70
+00:03:46,820 --> 00:03:50,350
+Trong sơ đồ Venn nó thể hiện mọi người trong vòng tròn bất kì.
+
+71
+00:03:51,370 --> 00:03:54,600
+Mặc dù có thể là chúng ta chỉ muốn những người có
+
+72
+00:03:54,600 --> 00:03:59,010
+thông tin nhiều nhất, mọi người cả nhân viên và sinh viên.
+
+73
+00:03:59,010 --> 00:04:01,610
+Trong dữ liệu thuật ngữ đây được gọi là tham gia bên trong.
+
+74
+00:04:01,610 --> 00:04:03,810
+Hoặc tập lí thuyết, ngã tư.
+
+75
+00:04:03,810 --> 00:04:07,300
+Điều này được thể hiện trong sơ đồ venn như các phần trùng nhau
+
+76
+00:04:07,300 --> 00:04:07,920
+của mỗi vòng.
+
+77
+00:04:09,290 --> 00:04:13,610
+OK hãy xem một ví dụ về cách chúng ta sẽ làm điều này trong hàm panda,
+
+78
+00:04:13,610 --> 00:04:15,169
+nơi chúng ta sẽ sử dụng chức năng.
+
+79
+00:04:16,260 --> 00:04:19,020
+Đầu tiên chúng ta tạo ra hai khung dữ liệu, nhân viên và sinh viên.
+
+80
+00:04:19,020 --> 00:04:21,510
+Có sự chồng chéo trong khung dữ liệu, Jame và
+
+81
+00:04:21,510 --> 00:04:25,330
+Sally là sinh viên và nhân viên nhưng Mike và Kelly thì không phải.
+
+82
+00:04:25,330 --> 00:04:29,870
+Quan trọng cả khung dữ liệu được chỉ dọc theo giá trị chúng ta muốn hợp nhất chúng,
+
+83
+00:04:29,870 --> 00:04:30,600
+nó được gọi là tên.
+
+84
+00:04:31,770 --> 00:04:33,100
+Nếu chúng ta muốn thống nhất chúng,
+
+85
+00:04:33,100 --> 00:04:36,324
+chúng ta sẽ hợp nhất khung dữ liệu bên trai và khung dữ liệu
+
+86
+00:04:36,324 --> 00:04:40,190
+bên phải và chúng ta muốn sử dụng outer.
+
+87
+00:04:40,190 --> 00:04:44,280
+Chúng ta muốn sử dụng các chỉ mục bên trái và bên phải như các cột tham gia.
+
+88
+00:04:45,500 --> 00:04:48,460
+Chúng ta thấy trong khung dữ liệu kết quả mà mọi người liệt kê.
+
+89
+00:04:48,460 --> 00:04:50,170
+Và bởi vì Mike không có vai trò và
+
+90
+00:04:50,170 --> 00:04:53,305
+John không có trường, các phần được liệt kê là mất giá trị.
+
+91
+00:04:53,305 --> 00:04:56,585
+Nếu chúng ta muốn có giao điểm,
+
+92
+00:04:56,585 --> 00:05:01,405
+những sinh viên người mà cũng là nhân viên chúng ta có thể tạo thuộc tính bên trong như thế nào.
+
+93
+00:05:01,405 --> 00:05:04,925
+Và chúng ta có khung dữ liệu kết quả chỉ có Jame và Sally trong đó.
+
+94
+00:05:07,597 --> 00:05:11,077
+Bây giờ có hai trường hợp phổ biến khi hợp nhất khung dữ liệu.
+
+95
+00:05:11,077 --> 00:05:13,997
+Cả hai là ví dụ về cái chúng ta sẽ bổ sung.
+
+96
+00:05:13,997 --> 00:05:17,977
+Đầu tiên là khi chúng ta muốn có một danh sách tất cả nhân viên bất kể
+
+97
+00:05:17,977 --> 00:05:19,657
+họ là sinh viên hay không.
+
+98
+00:05:19,657 --> 00:05:23,457
+Nhưng nếu họ là sinh viên chúng ta muốn có chi tiết của họ.
+
+99
+00:05:23,457 --> 00:05:25,097
+Để làm điều này chúng ta sẽ sử dụng tham gia bên trái.
+
+100
+00:05:26,100 --> 00:05:28,060
+Chúng ta sẽ có thể đoán tiếp theo là gì.
+
+101
+00:05:28,060 --> 00:05:32,080
+Chúng ta muốn một danh sách tất cả các sinh viên và các vai trò nếu họ cũng là nhân viên.
+
+102
+00:05:32,080 --> 00:05:34,750
+Để làm điều này chúng ta sẽ làm là tham gia bên phải.
+
+103
+00:05:34,750 --> 00:05:37,790
+Phương pháp kết hợp có một cặp các thông số thú vị khác.
+
+104
+00:05:37,790 --> 00:05:41,410
+Đầu tiên bạn không cần phải sử dụng chỉ số, bạn có thể sử dụng các cột.
+
+105
+00:05:41,410 --> 00:05:42,218
+Đây là một ví dụ.
+
+106
+00:05:50,807 --> 00:05:54,360
+Điều gì xảy ra khi chúng ta có sự xung đột giữa khung dữ liệu?
+
+107
+00:05:54,360 --> 00:05:56,290
+Hãy xem xét cách tạo ra khung dữ liệu nhân viên mới và
+
+108
+00:05:56,290 --> 00:06:00,000
+sinh viên mới có vị trí thông tin được thêm vào chúng.
+
+109
+00:06:00,000 --> 00:06:00,950
+Trong khung dữ liệu nhân viên,
+
+110
+00:06:00,950 --> 00:06:03,830
+đó là một vị trí nơi mà chúng ta có thể tìm ra người nhân viên.
+
+111
+00:06:03,830 --> 00:06:06,335
+Và chúng ta có thể thấy giám đốc nhân sự ở trên State Street,
+
+112
+00:06:06,335 --> 00:06:09,360
+trong khi cả hai sinh viên ở trên Washington Avenue.
+
+113
+00:06:09,360 --> 00:06:10,580
+Nhưng đối với khung dữ liệu sinh viên,
+
+114
+00:06:10,580 --> 00:06:13,160
+thông tin vị trí là địa chỉ nhà của họ.
+
+115
+00:06:14,310 --> 00:06:18,816
+Chức năng kết hợp giữu thông tin này, nhưng gắn thêm một _x hoặc
+
+116
+00:06:18,816 --> 00:06:22,652
+_y để giúp phân biệt sự khác nhau giữa chỉ số đi với cột dữ liệu.
+
+117
+00:06:22,652 --> 00:06:26,600
+_x luôn là thông tin khung dữ liệu bên trái và
+
+118
+00:06:26,600 --> 00:06:29,910
+_y luôn là thông tin khung dữ liệu bên phải.
+
+119
+00:06:29,910 --> 00:06:32,492
+Bạn có thể kiểm soát tên của _x và
+
+120
+00:06:32,492 --> 00:06:35,520
+_y với các thông số bổ sung nếu bạn muốn.
+
+121
+00:06:35,520 --> 00:06:36,470
+Bây giờ bạn thử nó.
+
+122
+00:06:36,470 --> 00:06:38,950
+Đây là khung dữ liệu của các sản phẩm và hóa đơn.
+
+123
+00:06:38,950 --> 00:06:41,310
+Sản phẩm có thông tin nhận dạng và một giá nhãn dán.
+
+124
+00:06:41,310 --> 00:06:45,110
+Hóa đơn liệt kê mọi người, sản phẩm, định danh và số lượng.
+
+125
+00:06:45,110 --> 00:06:49,243
+Giả sử chúng ta muốn tổng hợp tất cả, cách chúng ta tham gia hai khung dữ liệu
+
+126
+00:06:49,243 --> 00:06:53,069
+cùng lúc để chúng ta có danh sách của tất cả các thông tin chúng ta cần như thế nào?
+
+127
+00:06:56,757 --> 00:07:00,558
+Trước khi chúng a bỏ việc sát nhập khung dữ liệu, hãy nói về đa chỉ mục và
+
+128
+00:07:00,558 --> 00:07:02,340
+các cột.
+
+129
+00:07:02,340 --> 00:07:06,310
+Có thể là tên đầu tiên các sinh viên và nhân viên chồng chéo nhưng
+
+130
+00:07:06,310 --> 00:07:07,930
+tên cuối thì không.
+
+131
+00:07:07,930 --> 00:07:11,560
+Trong trường hợp này chungst a sử dụng danh sách các cột nên được sử dụng để
+
+132
+00:07:11,560 --> 00:07:14,920
+tham gia vào các thông số left_on và right_on.
+
+133
+00:07:14,920 --> 00:07:19,050
+Như bạn thấy ở đây Jame Wilde và jame Hammond không phù hợp với cả hai.
+
+134
+00:07:19,050 --> 00:07:22,500
+Tham gia vào trong không bao gồm các cá nhân trong đầu ra và
+
+135
+00:07:22,500 --> 00:07:24,960
+chỉ Sally Brook được giữ lại.
+
+136
+00:07:24,960 --> 00:07:26,531
+Đó là nó để sát nhập của khung dữ liệu.
+
+137
+00:07:26,531 --> 00:07:30,420
+Hàm panda có nhiều lựa chọn nhưng tôi nghĩ chức năng kết hợp có lẽ
+
+138
+00:07:30,420 --> 00:07:33,880
+là dễ dàng nhất để hiểu và linh hoạt nhất.
+
+139
+00:07:33,880 --> 00:07:37,060
+Trong phần tiếp theo chúng ta sẽ nói về cách viết hàm panda và
+
+140
+00:07:37,060 --> 00:07:41,150
+nghiên cứu kĩ hơn về các chức năng nâng cao cho việc thao tác khung dữ liệu.

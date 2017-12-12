@@ -1,0 +1,148 @@
+We use statistics in a lot of
+different ways in data science. In this lecture, I want to refresh
+your knowledge of hypothesis testing, which is a core data analysis
+activity behind experimentation. We're starting to see experimentation
+used more and more commonly outside of academic scientific, and
+in day to day business environments. Part of the reason for this is
+the rise of big data and web commerce. It's now easy to change
+your digital storefront and deliver a different experience
+to some of your customers, and then see how those customer actions
+might differ from one another. For instance, if you sell books, you might
+want to have one condition where the cover of the book is featured
+on the web page and another condition where the focus is on
+the author and the reviews of the book. This is often called A/B testing. And while it's not unique to this time in
+history, it's now becoming so common that if you're using a website, you are
+undoubtedly part of an A/B test somewhere. This raises some interesting ethical
+questions and I've added a reading to the course resources and I would like
+to encourage you to check it out and join in the discussion, but
+let's refocus back on statistics. A hypothesis is a statement
+that we can test. I'll pull an example from my own
+research of educational technology and learning analytics. Let's say that we have an expectation that
+when a new course is launched on a MOOC platform, the keenest students find
+out about it and all flock to it. Thus, we might expect that those
+students who sign up quite quickly after the course is launched with
+higher performance than those students who signed up after the MOOC
+has been around for a while. In this example, we have samples from two
+different groups which we want to compare. The early sign ups and the late sign ups. When we do hypothesis testing, we hold out
+that our hypothesis as the alternative and we create a second hypothesis
+called the null hypothesis, which in this case would be that there
+is no difference between groups. We then examine the groups to determine
+whether this null hypothesis is true or not. If we find that there is
+a difference between groups, then we can reject the null hypothesis and
+we accept our alternative. There are subtleties in this description. We aren't saying that our
+hypothesis is true per se, but we're saying that there's evidence
+against the null hypothesis. So, we're more confident in
+our alternative hypothesis. Let's see an example of this. We can load a file called grids.csv. If we take a look at
+the data frame inside, we see we have six different assignments. Each with a submission time and it looks like there just under
+3,000 entries in this data file. For the purpose of this lecture, let's
+segment this population in to two pieces. Those who finish the first assignment
+by the end of December 2015 and those who finish it sometimes after that. I just made this date up and
+it gives us two data frames, which are roughly the same size. As you've seen, the pandas data frame
+object has a variety of statistical functions associated with it. If we call the mean function
+directly on the data frame, we see that each of the means for
+the assignments are calculated. Note that the date time values are ignored
+as panda's knows this isn't a number, but an object type. If we look at the mean values for
+the late data frame as well, we get surprisingly similar numbers. There are slight differences, though. It looks like the end
+of the six assignments, the early users are doing better
+by about a percentage point. So, is this enough to go ahead and make
+some interventions to actually try and change something in the way we teach? When doing hypothesis testing, we have to
+choose a significance level as a threshold for how much of a chance
+we're willing to accept. This significance level is
+typically called alpha. It can vary greatly, depending on what
+you're going to do with the result and the amount of noise you
+expect in your data. For instance, in social sciences research,
+a value of 0.05 or 0.01 is often used,
+which indicates a tolerance for a probability of between 5% and
+1% of chance. In a physics experiment where the
+conditions are much more controlled and thus, the burden of proof is much higher,
+you might expect to see alpha levels of 10 to the negative 5 or
+100,000th of a percentage. You can think of the significance level
+from the perspective of interventions as well and this is something I run
+into regularly with my research. What am I going to do when I find out that
+two student populations are different? For instance, if I'm going to send
+an email nudge to encourage students to continue working on their homework,
+that's a pretty low-cost intervention. Emails are cheap and while I certainly
+don't want to annoy students, one extra email isn't
+going to ruin their day. But what if the intervention
+is a little more involved, like having our tutorial assistant
+followup with a student via phone? This is all of a sudden much more
+expensive for both the institution and for the student. So, I might want to ensure
+a higher burden of proof. So the threshold you set for alpha depends on what you might
+do with the result, as well. For this example, let's use a threshold
+of 0.05 for our alpha or 5%. Now, how do we actually test whether
+these means are different in Python? The SciPy library contains a number
+of different statistical tests and forms a basis for
+hypothesis testing in Python. A T test is one way to compare
+the means of two different populations. In the SciPy library,
+the T test end function will compare two independent samples to
+see if they have different means. I'm not going to go into the details
+of any of this statistical test here. But instead, we'd recommend that you check
+out the Wikipedia page on particular test or consider taking a full statistics
+course if this is unfamiliar to you. But I do want to note that most
+statistical tests expect that the data conforms to a certain
+distribution, a shape. So, you shouldn't apply such tests blindly
+and should investigate your data first. If we want to compare
+the assignment grades for the first assignment between the two
+populations, we could generate a T test by passing these two series
+into the T test in function. The result is a two with a test
+statistic and a p-value. The p-value here is much
+larger than our 0.05. So we cannot reject the null hypothesis, which is that the two
+populations are the same. In more late terms,
+we would say that there's no statistically significant difference
+between these two sample means. Let's check with assignment two grade. No, that's much larger than 0.052. How about with assignment three? Well, that's much closer, but
+still beyond our threshold value. It's important to stop here and talk
+about serious process from with how we're handling this investigation of the
+difference between these two populations. When we set the alpha to be 0.05,
+we're saying that we expect it that there will be positive result,
+5% of the time just to the chance. As we run more and more T tests, we're
+more likely to find a positive result just because of the number
+of T tests we have run. When a data scientist run many tests
+in this way, it's called p-hacking or dredging and
+it's a serious methodological issue. P-hacking results in spurious correlations
+instead of generalizable results. There are a couple of different
+ways you can deal with p-hacking. The first is called
+the Bonferroni correction. In this case,
+you simply tighten your alpha value, the threshold of significance based on
+the number of tests you're running. So if you choose 0.05 with 1 test,
+you want to run 3 test, you reduce alpha by multiplying 0.05 by
+one-third to get a new value of 0.01 sub. I personally find this approach
+to be very conservative. Another option is to hold
+out some of your data for testing to see how
+generizable your result is. In this case,
+we might take half of our data for each of the two data frames,
+run our T test with that. Form specific hypothesis based
+on the result of these tests, then run very limited tests
+on the rest of the data. This method is actually heavily
+used in machine learning when building predictive models where it's
+called cross fold validation and you'll learn more about this in
+third course in this specialization. A final method which has come about is
+the pre-registration of your experiment. In this step, you would outline what
+you expect to find and why, and describe the test that would
+backup a positive proof of this. You register it with a third party, in
+academic circles, this is often a journal who determines whether it's
+a reasonable test or rather not. You then run your study and
+report the results, regardless as to whether
+they were positive or not. Here, there is a larger burden on
+connecting to existing theory since you need to convince reviewers that
+the experiment is likely to test fully a given hypothesis. In this lecture, we've discussed just some of the basics
+of hypothesis testing in Python. I introduced you to the SciPy library,
+which you can use for T testing. We've discussed some of the practical
+issues which arise from looking for statistical significance. There's much more to learn
+about hypothesis testing. For instance,
+there are different tests used, depending on the shape of your data and
+different ways to report results instead of just p-values
+such as confidence intervals. But I hope this gives you a start
+to comparing the means of two different populations, which is
+a common task for data scientists and we'll followup some of this work in
+the second course in this series. This lecture also
+completes the lectures for the first course in the Applied Data
+Science with Python Specialization. We've covered the basics
+of Python programming, some more advanced features like maps,
+lambdas and miscomprehensions. How to read and manipulate data using
+the panda's library, including querying, joining, grouping and processing of data
+frames and the creation of pivot tables. And now we've talked a little bit
+about statistics in Python and dug deeper into the Num-Py and
+SciPy toolkit. In the next course, we'll dig into
+plotting and charting of data. Dealing a bit more with statistics and
+how we present data to others, and how we build a compelling story for
+the data we have. I'll see you then.

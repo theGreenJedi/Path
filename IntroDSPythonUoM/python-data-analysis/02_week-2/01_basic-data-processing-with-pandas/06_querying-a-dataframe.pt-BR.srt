@@ -1,0 +1,420 @@
+1
+00:00:08,790 --> 00:00:11,109
+Antes de falarmos como
+consultar data frames,
+
+2
+00:00:11,109 --> 00:00:13,900
+precisamos falar sobre
+mascaramento booleano.
+
+3
+00:00:13,900 --> 00:00:17,920
+Mascaramento booleano é primordial
+para uma consulta rápida e eficiente no NumPy.
+
+4
+00:00:17,920 --> 00:00:21,089
+É análogo ao mascaramento de bits
+usado em outras áreas computacionais.
+
+5
+00:00:22,660 --> 00:00:26,420
+Uma máscara booleana é uma matriz que pode ser
+ de uma dimensão como uma série, ou
+
+6
+00:00:26,420 --> 00:00:28,380
+de duas dimensões, como
+num data frame,
+
+7
+00:00:28,380 --> 00:00:32,280
+onde cada um dos valores na
+matriz são true (verdadeiro) ou false (falso).
+
+8
+00:00:32,280 --> 00:00:36,680
+Tal matriz é, basicamente, sobreposta sobre
+a estrutura que estamos consultando.
+
+9
+00:00:36,680 --> 00:00:40,800
+Assim, qualquer célula alinhada com o valor true
+será admitida em nosso resultado final,
+
+10
+00:00:40,800 --> 00:00:43,020
+e as alinhadas com o valor
+false não serão.
+
+11
+00:00:44,350 --> 00:00:46,780
+O mascaramento booleano é
+ conceitualmente poderoso e
+
+12
+00:00:46,780 --> 00:00:50,800
+é crucial nas consultas eficientes
+do Numpy e da Pandas.
+
+13
+00:00:50,800 --> 00:00:54,470
+Esta técnica é bem usada em outras
+áreas da ciência dos computadores, por exemplo,
+
+14
+00:00:54,470 --> 00:00:55,590
+nos gráficos.
+
+15
+00:00:55,590 --> 00:00:59,940
+Mas, ele não tem algo parecido em
+outros bancos de dados relacionais, então,
+
+16
+00:00:59,940 --> 00:01:02,410
+acho que vale a pena salientar aqui.
+
+17
+00:01:02,410 --> 00:01:06,700
+Mascaramentos booleanos são criados aplicando
+operadores diretamente nas séries pandas ou
+
+18
+00:01:06,700 --> 00:01:08,770
+objetos DataFrame.
+
+19
+00:01:08,770 --> 00:01:12,720
+Por exemplo, no conjunto de dados Olympics,
+poderíamos estar interessados em ver apenas
+
+20
+00:01:12,720 --> 00:01:16,660
+os países que obtiveram
+uma medalha de ouro nas Olimpíadas de verão.
+
+21
+00:01:16,660 --> 00:01:21,280
+Para criar uma máscara booleana para esta consulta,
+projetamos a coluna 'gold' usando o operador
+
+22
+00:01:21,280 --> 00:01:26,670
+de indexação e aplicando o operador maior que
+comparando-o ao valor zero.
+
+23
+00:01:26,670 --> 00:01:29,900
+Isso é, essencialmente, fazer broadcasting
+de um operador de comparação,
+
+24
+00:01:29,900 --> 00:01:33,770
+o maior que, cujos resultados
+retornarão como sendo uma série de booleanos.
+
+25
+00:01:33,770 --> 00:01:37,480
+A série resultante é indexada e tem
+o valor de cada célula como ou True ou
+
+26
+00:01:37,480 --> 00:01:41,690
+False, dependendo se o país
+ganhou ao menos uma medalha de ouro, e
+
+27
+00:01:41,690 --> 00:01:42,890
+o índice é o nome do país.
+
+28
+00:01:43,920 --> 00:01:47,380
+Então, isso cria para nós a máscara booleana,
+a qual é metade da batalha.
+
+29
+00:01:47,380 --> 00:01:50,790
+O que queremos em seguida, é sobrepor
+esta máscara no data frame.
+
+30
+00:01:50,790 --> 00:01:53,310
+Podemos, par tanto,
+usar a função <where>.
+
+31
+00:01:53,310 --> 00:01:57,230
+A função where pega a máscara booleana como
+uma condição, a aplica ao data frame
+
+32
+00:01:57,230 --> 00:02:01,830
+ou à série, e retorna um novo data frame ou
+ nova série de mesmo formato.
+
+33
+00:02:01,830 --> 00:02:05,520
+Vamos aplicar esta máscara booleana aos nossos
+dados Olympics e criar um data frame com
+
+34
+00:02:05,520 --> 00:02:08,580
+apenas os países que ganharam
+ouro nos jogos de verão.
+
+35
+00:02:09,650 --> 00:02:13,990
+Vemos que o data frame resultante
+mantém os valores índices originais, e
+
+36
+00:02:13,990 --> 00:02:17,750
+apenas os dados dos países que
+satisfazem a condição são mantidos.
+
+37
+00:02:17,750 --> 00:02:22,540
+Todos os países que não satisfazem a condição
+têm dados trocados por NaN.
+
+38
+00:02:22,540 --> 00:02:23,440
+Isso é certo.
+
+39
+00:02:23,440 --> 00:02:28,000
+A maioria das funções estatísticas incorporadas a
+ objetos data frame ignoram valores NaN.
+
+40
+00:02:29,330 --> 00:02:33,580
+Por exemplo, se chamamos df.count 
+no data frame only_gold
+
+41
+00:02:33,580 --> 00:02:37,290
+vemos que existem 100 países que tiveram
+ medalhas de ouro nos
+
+42
+00:02:37,290 --> 00:02:40,840
+jogos de verão, enquanto que se chamamos
+count no data frame original,
+
+43
+00:02:40,840 --> 00:02:43,550
+veremos que há 147 países no total.
+
+44
+00:02:44,950 --> 00:02:48,630
+Muitas vezes queremos jogar fora 
+as linhas que não têm nenhum dado.
+
+45
+00:02:48,630 --> 00:02:51,600
+Para isso, 
+podemos usar a função dropna.
+
+46
+00:02:51,600 --> 00:02:55,230
+E podemos, opcionalmente, fornecer a ela
+os eixos que deveria considerar.
+
+47
+00:02:55,230 --> 00:02:59,020
+Lembra que os eixos são apenas
+indicação para colunas e linhas e
+
+48
+00:02:59,020 --> 00:03:01,130
+que o default é zero,
+e significa linhas.
+
+49
+00:03:02,410 --> 00:03:05,770
+Quando você se pega falando sobre
+pandas e dizendo frases como,
+
+50
+00:03:05,770 --> 00:03:10,120
+"frequentemente, eu quero...", é bem provável que
+os desenvolvedores tenham incluído um atalho para
+
+51
+00:03:10,120 --> 00:03:11,830
+esta operação comum.
+
+52
+00:03:11,830 --> 00:03:13,552
+Por exemplo, neste exemplo,
+
+53
+00:03:13,552 --> 00:03:16,820
+não precisamos, de fato, usar
+a função where explicitamente.
+
+54
+00:03:16,820 --> 00:03:20,246
+Os desenvolvedores do pandas permitem
+operadores de indexação
+
+55
+00:03:20,246 --> 00:03:24,594
+pegar uma máscara booleana como um valor ao invés de
+apenas uma lista de nomes de colunas.
+
+56
+00:03:24,594 --> 00:03:27,988
+A sintaxe parace um pouco bagunçada,
+especialmente se você não está acostumado a
+
+57
+00:03:27,988 --> 00:03:30,916
+programar em linguagens com 
+operadores de sobreposição, mas
+
+58
+00:03:30,916 --> 00:03:35,150
+o resultado é que você está apto a filtrar
+ e reduzir os data frames relativamente rápido.
+
+59
+00:03:36,300 --> 00:03:40,120
+Eis aqui um exemplo mais conciso de
+como poderíamos consultar este data frame.
+
+60
+00:03:40,120 --> 00:03:44,060
+Note que não existem NaNs quando
+consultamos o data frame desta maneira.
+
+61
+00:03:44,060 --> 00:03:46,920
+O Pandas automaticamente filtra
+(elimina) as linhas que não têm valores.
+
+62
+00:03:48,480 --> 00:03:51,960
+Mais uma coisa para ter em mente, é se
+não estiver acostumado com booleanos ou mascaramento de bits
+
+63
+00:03:51,960 --> 00:03:53,310
+em redução de dados...
+
+64
+00:03:53,310 --> 00:03:57,500
+.... o resultado de duas máscaras booleans sendo
+comparadas com operadores lógicos
+
+65
+00:03:57,500 --> 00:03:59,490
+é outra máscara booleana.
+
+66
+00:03:59,490 --> 00:04:03,070
+Isso quer dizer que é possível encadear
+um monte de cláusulas and/or
+
+67
+00:04:03,070 --> 00:04:06,980
+de modo a criar consultas mais complexas,
+e o resultado será uma única máscara booleana.
+
+68
+00:04:08,450 --> 00:04:11,970
+Por exemplo, poderíamos criar uma máscara para
+todos os países que receberam
+
+69
+00:04:11,970 --> 00:04:15,320
+um ouro nos jogos Olímpicos de verão e
+logicamente ordená-los com
+
+70
+00:04:15,320 --> 00:04:19,050
+todos os países que ganharam ouro
+nos jogos Olímpicos de inverno.
+
+71
+00:04:19,050 --> 00:04:20,840
+Se aplicarmos isso ao data frame e
+
+72
+00:04:20,840 --> 00:04:23,430
+usarmos a função length para
+ver quantas linhas são,
+
+73
+00:04:23,430 --> 00:04:27,100
+encontramos 101 países que
+ganharam uma medalha de ouro em algum momento.
+
+74
+00:04:28,560 --> 00:04:30,180
+Outro exemplo, só
+por diversão,
+
+75
+00:04:30,180 --> 00:04:33,870
+há algum país que ganhou
+apenas uma medalha de ouro nos jogos Olímpicos de inverno e
+
+76
+00:04:33,870 --> 00:04:35,890
+nenhuma nos jogos Olímpicos de verão?
+
+77
+00:04:35,890 --> 00:04:37,192
+Eis aqui uma forma de responder a esta pergunta:
+
+78
+00:04:42,971 --> 00:04:44,730
+pobre Liechtenstein.
+
+79
+00:04:44,730 --> 00:04:47,220
+Felizmente, os jogos Olímpicos
+ocorrem a cada quatro anos.
+
+80
+00:04:47,220 --> 00:04:50,899
+Sei para quem estarei torcendo em 2020
+para que ganhem seu primeiro ouro de verão.
+
+81
+00:04:52,190 --> 00:04:55,160
+Extremamente importante e muitas vezes
+ um problema para novos usuários,
+
+82
+00:04:55,160 --> 00:04:59,310
+é se lembrar de que cada máscara booleana
+precisa estar entre parênteses,
+
+83
+00:04:59,310 --> 00:05:01,570
+por conta da ordem das operações.
+
+84
+00:05:01,570 --> 00:05:05,280
+Isso pode terminar em frustração, se 
+não estiver acostumado, então, tenha cuidado.
+
+85
+00:05:06,340 --> 00:05:08,940
+Nesta aula, 
+vimos mascaramento booleano.
+
+86
+00:05:08,940 --> 00:05:12,260
+Não tivemos muito que codificar, mas
+aplicar máscaras aos data frames é realmente
+
+87
+00:05:12,260 --> 00:05:15,050
+algo chave no trabalho do pandas
+e vale a pena praticar.
+[Tradução: Carlos Lage.]

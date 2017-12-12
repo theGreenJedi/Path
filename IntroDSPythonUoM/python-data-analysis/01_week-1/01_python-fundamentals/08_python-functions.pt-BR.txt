@@ -1,0 +1,117 @@
+No resto desse módulo, fornecerei uma visão geral muito básica
+da linguagem de programação Python. Se você tem conhecimento em programação, esta visão geral deve ser suficiente para
+completar o resto do curso e também os demais cursos
+desta especialização. Se não tiver experiência
+em programação ou sentir que o conteúdo é muito complexo,
+então, eu sugiro que pare e faça um curso introdutório em programação. Meu colega, Dr. Chuck Severance
+dá uma excelente especialização aqui no Coursera, chamado "Python para Todos"
+- Python for Everybody. Há um link para ela
+nos recursos deste curso. O sistema do Coursera permite a você
+rodar códigos Python a partir do seu navegador, de duas formas: Primeira - podemos digitar no prompt de comandos 
+quando perguntado no vídeo da aula e você poderá tentar resolver
+a questão no browser. Isso é novo na plataforma do Coursera e testaremos isso
+nas próximas aulas. Segunda - o sistema Coursera foi integrado 
+ao Jupyter notebooks (da plataforma Python). Os notebooks Jupyter nos possibilitam dividir
+nosso código no que eles chamam de células, e executar tais células sob demanda. O bom sobre os notebooks
+é que eles oferecem um armazenamento semi-permanente para seu aprendizado e
+você pode experimentar e programar sem ter que
+instalar nada em seu computador. Todas as tarefas serão feitas no
+Jupyter notebooks, mas você pode, é claro, baixar e instalar o Python, Jupyter, todas
+as bibliotecas associadas de que precisar para este curso no seu computador
+se preferir. Nosso assistente tutorial fornecerá
+uma visão geral deste processo instalando o Jupyter
+notebooks localmente, no próximo vídeo, para aqueles que se interessarem, e eu
+darei uma visão geral de como usar os notebooks no ambiente Coursera
+nesta aula. Por hora,
+vejamos um pouco de Python básico. Primeiro, Python é uma linguagem de alto nível,
+o que significa que é otimizado para que as pessoas, ao invés das máquinas,
+possam ler. Também é uma linguagem interpretada, que significa
+ que o código fonte não é compilado diretamente em código de máquina, assim, importa dizer
+é comumente usado de modo interativo. Isso pode ser um pouco diferente se você
+costuma programar em linguagens como Java ou C, onde escreve-se o código,
+depois compila, executa e vê o resultado. Em Python, pode-se iniciar o interpretador
+interativo e começar a codificar, linha por linha, com o interpretador
+avaliando cada instrução à medida que ela é escrita. Isto acaba por ser muito útil para tarefas que exigem muita investigação, 
+contra aqueles que exigem muito do design. Shell script é um exemplo disso. E limpeza de dados é outro exemplo. Ou você escreve scripts, os quais
+executam programas, como você pode estar acostumado em outras linguagens. Usaremos Python
+nesta especialização, no modo interativo. Algo que surpreende alguns programadores
+que vem de Java ou C é que Python é uma linguagem com tipos dinâmicos
+semelhantes a linguagens como JavaScript. Isto quer dizer que quando você
+declara uma variável, pode atribuir a ela um inteiro numa linha
+e uma string (sequência de caracteres) na linha seguinte. Já que não existe o passo da compilação, não tem nada que lhe
+auxilie a gerenciar tipos. Você precisa ou verificar a presença da
+funcionalidade quando vai usá-la, ou tentar usar a funcionalidade e
+usar catch para tratar os erros que ocorrerem. Os tipos serem dinâmicos em Python é
+uma peculiaridade interessante quando usada no modo interativo,
+já que isso permite rapidamente atribuir e modificar o conteúdo das variáveis sem ter
+que se preocupar sobre a sintaxe que está por trás da definição da variável. Ok, então, vamos direto a um exemplo. Para todos os exemplos codificados aqui,
+você encontrará uma versão comentada no notebook
+na seção de recursos deste curso. Fique à vontade para me seguir, se você quiser ou para criar um novo notebook e de modo ativo, digitar
+seu próprio código, se preferir. O Python é um econômico criador
+de códigos. De fato, se quiser atribuir valores a
+algumas variáveis, e exibir o resultados delas todas juntas,
+dá para fazer isso em apenas três linhas. Neste exemplo,
+codificarei três instruções. As duas primeiras atribuirão valores inteiros
+às variáveis x e y. Depois, as adicionaremos. Podemos executar esta célula
+pressionando as teclas Shift Enter, ou clicando no ícone "play"
+que está no cabeçalho das ferramentas. O resultado da instrução é
+logo exibida. Se não estivesse usando Python
+no modo interativo, nada seria exibido. Mas já que vamos usá-lo no modo interativo,
+ podemos obter o valor imediatamente. O que acontece nos bastidores, 
+é que o navegador está enviando seu código Python para uma máquina que
+está na nuvem, a qual executa o código num interpretador
+Python, e então envia de volta o resultado. Podemos ver que depois da execução de uma célula,
+uma nova célula vazia é criada para nós abaixo. Se apenas digitarmos x e executarmos,
+receberemos o resultado = 1. Então, é importante saber que o interpretador Python
+mantém o estado - é 'stateful'. Isso quer dizer que
+suas variáveis perduram nas células seguintes. Além disso, se voltar atrás
+e mudar alguma coisa em uma célula anterior, terá que executar de novo 
+o script para fazer essas mudanças serem refletidas. A função 'restart and run all', para reiniciar e executar tudo,
+é particularmente útil, já que limpa o estado do interpretador e reexecuta todas
+as células do notebook atual. Você notará que o Python
+não requer o uso de palavras-chave como 'var' para
+declarar uma variável ou ponto e vírgula no final das linhas,
+que são comumente usados em outras linguagens. Python utiliza o espaço em branco
+ para compreender o escopo das funções e laços de repetição e marcadores de fim de linha
+para entender o final das instruções. Claro, o Python tem estruturas de software
+tradicionais como as funções. Eis aqui um exemplo, recriando o código anterior
+ agora como uma função. Veja que a instrução 'def' indica que estamos 
+escrevendo, estamos definindo uma função. Em seguida, cada linha que é parte da 
+função precisa ser recuada (aninhada, denteada) usando a tecla 'tab'
+ou alguns espaços em branco. Novamente, porque estamos em um 
+ambiente interativo, quando a instrução é avaliada ao teclar Shift Enter, 
+os resultados são exibidos imediatamente abaixo. Eis aqui nosso primeiro pedaço
+do que interagimos. Por que não tenta mudar esta função para 
+aceitar três parâmetros em vez de dois, e para que ela retorne a soma deles três? Ok, funções são uma maravilha, mas elas são 
+um pouco diferentes do que você pode encontrar em outras linguagens. Aqui vão
+ algumas das sutilezas envolvidas. Primeira: como não há tipo de variável,
+você não tem que definir o tempo de resposta. Segunda: na verdade, não precisa da instrução
+'return' para retornar ao usuário. Há um valor especial chamado 'none', 
+significando nada ou nenhum, que é retornado. 'None' é semelhante a 'null' em Java 
+e representa a ausência de valor. Terceira sutileza: em Python, você pode ter
+valores default, padrão, para parâmetros. Eis um exemplo: Neste exemplo, podemos reescrever a função
+add_numbers para pegar 3 parâmetros mas, poderíamos atribuir ao terceiro,
+caso nada seja passado, 'none' por default. Isso quer dizer que podemos chamar add_numbers
+passando dois números, ou três, e você não precisa escrever outra função
+para executar ambos os casos (overload). Esta é uma implicação importante! Quaisquer parâmetros opcionais,
+aqueles que possuírem valor default codificado, precisam vir ao final
+da declaração da função. Isso significa também que você pode passar
+parâmetros opcionais explicitamente nomeando-os na passagem, chamamos isso de parâmetros rotulados
+(labeled params), vejam um exemplo. Reescrevemos aquela função de modo
+que agora temos dois parâmetros opcionais. Se quisermos chamá-la passando
+apenas dois números, mas também marcando a flag de valor,
+temos que explicitamente nomear e marcar a flag do parâmetro para true
+quando invocando a função. Agora, você já viu também
+o uso da instrução print. Vamos mergulhar em cadeias de caracteres 
+(tipo string) mais detalhadamente, mas o print pega um item, tenta convertê-lo para string
+e imprime o resultado. Não usamos tanto o print no modo
+interativo do interpretador, mas ele é útil quando queremos imprimir
+muitos valores numa única célula. Certo, uma última palavra sobre
+conceitos básicos de funções em Python. Em Python, você pode atribuir uma variável a uma função. Isto pode parecer 
+ou completamente normal para você, ou completamente estranho,
+dependendo do seu conhecimento em programação. Ao atribuir uma variável a uma função,
+você pode passar essa variável para outras funções permitindo alguma
+programação funcional básica. Falaremos sobre isso um pouco
+mais adiante no curso. Mas aqui está um exemplo onde definimos
+uma função para adicionar números, depois, atribuímos essa função a uma variável 'a',
+e então invocamos esta variável 'a'. [Tradução: Carlos Lage

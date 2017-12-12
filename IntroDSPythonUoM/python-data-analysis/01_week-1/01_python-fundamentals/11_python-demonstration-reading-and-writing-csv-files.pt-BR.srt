@@ -1,0 +1,275 @@
+1
+00:00:08,987 --> 00:00:12,782
+Bem-vindo ao tutorial de hoje, onde aprenderemos
+os fundamentos de iterações
+
+2
+00:00:12,782 --> 00:00:16,370
+via arquivos CSV, separados por vírgula, para criar dicionários
+e organizar estatísticas sumarizadas.
+
+3
+00:00:17,770 --> 00:00:22,870
+Primeiro, vamos importar o módulo CSV, o qual
+nos ajudará a ler nosso arquivo CSV.
+
+4
+00:00:24,560 --> 00:00:26,732
+Usando alguma magia do iPython,
+
+5
+00:00:26,732 --> 00:00:31,557
+vamos estabelecer a precisão de 
+mostrar 2 casas decimais (números reais).
+
+6
+00:00:31,557 --> 00:00:35,772
+E em seguida, ler o nosso mpg.csv
+usando csv.DictReader e
+
+7
+00:00:35,772 --> 00:00:38,530
+convertê-lo em uma lista de dicionários.
+
+8
+00:00:39,880 --> 00:00:42,170
+Vejamos os três primeiros
+elementos de nossa lista.
+
+9
+00:00:44,100 --> 00:00:48,190
+Podemos ver que os dicionários na 
+lista têm os nomes das colunas separadas por vírgulas (do arquivo csv)
+
+10
+00:00:48,190 --> 00:00:51,710
+e os dados de cada
+carro em particular, que são os seus valores.
+
+11
+00:00:53,460 --> 00:00:55,970
+O comprimento da nossa lista é 234,
+
+12
+00:00:55,970 --> 00:01:00,240
+isso significa que temos um dicionário para
+cada um dos 234 carros no arquivo CSV.
+
+13
+00:01:02,490 --> 00:01:06,308
+Podemos ver o nome das colunas do 
+CSV usando o método key.
+
+14
+00:01:08,354 --> 00:01:13,670
+Se quisermos encontrar a média do consumo na cidade,
+em MPG - milhas por galão, para todos os carros do arquivo CSV,
+
+15
+00:01:15,080 --> 00:01:19,430
+temos que somar 'city MPG' de todos
+os dicionários da nossa lista e
+
+16
+00:01:19,430 --> 00:01:20,629
+dividir pelo comprimento da lista.
+
+17
+00:01:21,770 --> 00:01:24,860
+Dado que o tipo de todos os valores
+em nosso dicionário é string,
+
+18
+00:01:24,860 --> 00:01:27,830
+precisamos converter para float
+ante de realizarmos as operações matemáticas.
+
+19
+00:01:30,502 --> 00:01:36,420
+De modo semelhante, podemos descobrir a média, em MPG, na
+estrada, de todos os carros do nosso arquivo CSV.
+
+20
+00:01:36,420 --> 00:01:40,063
+E faz sentido que a média de consumo de combustível
+ na estrada seja maior do que
+
+21
+00:01:40,063 --> 00:01:40,609
+a média de consumo na cidade.
+
+22
+00:01:42,600 --> 00:01:44,490
+Vejamos um exemplo um pouco
+mais complexo.
+
+23
+00:01:45,815 --> 00:01:49,180
+Digamos que queremos saber
+MPG médio na cidade e
+
+24
+00:01:49,180 --> 00:01:51,390
+agrupado pelo número de
+cilindros que um carro tem.
+
+25
+00:01:52,570 --> 00:01:56,420
+Criar um conjunto de valores na
+coluna cylinder dos dicionários
+
+26
+00:01:56,420 --> 00:01:59,499
+nos dará os distintos 
+número de cilindros que existem.
+
+27
+00:02:00,540 --> 00:02:04,530
+Veja: temos carros, no nosso 
+conjunto de dados, com 4, 5, 6 e 8 cilindros.
+
+28
+00:02:06,160 --> 00:02:10,600
+Primeiro, criaremos uma lista vazia
+onde armazenaremos nossos cálculos.
+
+29
+00:02:10,600 --> 00:02:14,510
+Depois, laços de repetição 'for...'
+para iterações em todos os dicionários.
+
+30
+00:02:14,510 --> 00:02:16,359
+E então, repetindo isso
+em todos os dicionários, certo?
+
+31
+00:02:18,420 --> 00:02:21,020
+Se o nível de cilindros para
+o dicionário que estivermos na iteração
+
+32
+00:02:21,020 --> 00:02:24,710
+bater com o nível de cilindros que estivermos
+calculando a média,
+
+33
+00:02:24,710 --> 00:02:29,730
+adicionamos o MPG dele à variável summpg e
+incrementamos o contador.
+
+34
+00:02:31,740 --> 00:02:36,750
+Após passar por todos os dicionários,
+fazemos o cálculo da média de MPG e
+
+35
+00:02:36,750 --> 00:02:37,480
+a acrescentamos à nossa lista.
+
+36
+00:02:39,250 --> 00:02:40,471
+Para que fique mais claro,
+
+37
+00:02:40,471 --> 00:02:43,970
+classificarei a lista do menor para 
+o maior número de cilindros.
+
+38
+00:02:43,970 --> 00:02:48,290
+E podemos ver que a economia de combustível da cidade
+ parece estar diminuindo à medida que o número de
+
+39
+00:02:48,290 --> 00:02:49,590
+cilindros aumenta.
+
+40
+00:02:51,160 --> 00:02:52,670
+Vejamos outro exemplo semelhante.
+
+41
+00:02:54,408 --> 00:02:57,360
+Vamos supor que estamos interessados em descobrir
+a média, em MPG, de consumo para
+
+42
+00:02:57,360 --> 00:02:58,659
+as distintas classes de veículos.
+
+43
+00:02:59,820 --> 00:03:04,743
+Analisando as diferentes classes de veículos
+temos 2seater, compact, midsize,
+
+44
+00:03:04,743 --> 00:03:07,320
+minivan, pickup, subcompact e suv.
+
+45
+00:03:09,160 --> 00:03:13,035
+Tal como no último exemplo,
+vamos iterar todas as classes de veículos,
+
+46
+00:03:13,035 --> 00:03:15,100
+e depois, em todos os dicionários.
+
+47
+00:03:16,580 --> 00:03:17,760
+Se a classe do veículos para
+
+48
+00:03:17,760 --> 00:03:21,420
+o dicionário bater com a classe do 
+veículo que estivermos calculando a média
+
+49
+00:03:21,420 --> 00:03:25,130
+MPG na estrada, adicionamos o valor dela
+ao total, e incrementamos o contador, vclasscount.
+
+50
+00:03:26,890 --> 00:03:30,370
+Depois, calculamos a média
+e a adicionamos ao final da nossa lista.
+
+51
+00:03:31,960 --> 00:03:34,720
+Desta vez, vamos classificar nossa lista
+do menor consumo em MPG para o maior consumo.
+
+52
+00:03:35,720 --> 00:03:39,220
+Parece que pickup tem a pior economia de
+combustível e que o compact tem a melhor.
+
+53
+00:03:40,680 --> 00:03:43,850
+É assim que sumarizamos
+os dados via iterações.
+
+54
+00:03:43,850 --> 00:03:46,948
+Não se preocupe se isso parece
+de alguma forma ineficiente ou entediante.
+
+55
+00:03:46,948 --> 00:03:50,770
+Semana que vem, aprenderemos sobre o
+Pandas, uma biblioteca Python que nos permite
+
+56
+00:03:50,770 --> 00:03:54,960
+realizar análise de dados mais robusta,
+ mais fácil, mais eficiente em Python.
+[Tradução: Carlos Lage]
+
+57
+00:03:54,960 --> 00:03:55,820
+Obrigado por assitir!
+
+58
+00:03:55,820 --> 00:03:56,640
+Espero te rever logo.

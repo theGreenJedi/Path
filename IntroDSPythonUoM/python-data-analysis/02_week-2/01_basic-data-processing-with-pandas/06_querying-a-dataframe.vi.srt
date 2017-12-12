@@ -1,0 +1,400 @@
+1
+00:00:08,790 --> 00:00:11,109
+Trước khi chúng ta nói về cách
+truy vấn khung dữ liệu,
+
+2
+00:00:11,109 --> 00:00:13,900
+chúng ta cần nói về hàm Boolean.
+
+3
+00:00:13,900 --> 00:00:17,920
+Hàm Bool là trung tâm của truy vấn
+nhanh và hiệu quả trong NumPy.
+
+4
+00:00:17,920 --> 00:00:21,089
+Nó có một chút tương tự với việc che giấu
+được sử dụng trong lĩnh vực tính toán khác.
+
+5
+00:00:22,660 --> 00:00:26,420
+Hàm Boolean là một mảng có thể là
+một chiều như một chuỗi hoặc
+
+6
+00:00:26,420 --> 00:00:28,380
+hai chiều giống như khung dữ liệu,
+
+7
+00:00:28,380 --> 00:00:32,280
+mỗi một giá trị trong mảng
+hoặc là đúng hoặc là sai.
+
+8
+00:00:32,280 --> 00:00:36,680
+Mảng này chủ yếu bị che khuất phía trên
+của cấu trức dữ liệu mà chúng ta truy vấn.
+
+9
+00:00:36,680 --> 00:00:40,800
+Và bất kì phần nào liên kết với giá trị đúng sẽ được chấp nhận
+vào trong kết quả cuối cùng của chúng ta,
+
+10
+00:00:40,800 --> 00:00:43,020
+và bất kì dấu hiệu nào liên kết với sai
+sẽ không được chấp nhận.
+
+11
+00:00:44,350 --> 00:00:46,780
+Hàm Boolean có đầy sức mạnh và
+
+12
+00:00:46,780 --> 00:00:50,800
+là nền tảng hiệu quả của truy vấn NumPy và panda.
+
+13
+00:00:50,800 --> 00:00:54,470
+Kĩ thuật này được sử dụng trong các
+lĩnh vực khoa học máy tính, ví dụ,
+
+14
+00:00:54,470 --> 00:00:55,590
+trong đồ họa.
+
+15
+00:00:55,590 --> 00:00:59,940
+Nhưng nó không thực sự có sự tương tác trong
+các cơ sở dữ liệu quan hệ truyền thống khác vì thế
+
+16
+00:00:59,940 --> 00:01:02,410
+tôi nghĩ nó đáng để chỉ ra ở đây.
+
+17
+00:01:02,410 --> 00:01:06,700
+Hàm Boolean được tạo ra với việc áp dụng các toán tử
+trực tiếp với các chuỗi panda hoặc
+
+18
+00:01:06,700 --> 00:01:08,770
+các đối tượng khung dữ liệu.
+
+19
+00:01:08,770 --> 00:01:12,720
+Ví dụ trong tập dữ liệu Olympics của
+chúng ta, bạn có thể quan tâm xem
+
+20
+00:01:12,720 --> 00:01:16,660
+các quốc gia dành huy chương vàng
+ở thế vận hội mùa hè.
+
+21
+00:01:16,660 --> 00:01:21,280
+Để xây dựng hàm Boolean cho truy vấn này, chúng ta lên
+kế hoạch cột vàng sử dụng toán tử chỉ số
+
+22
+00:01:21,280 --> 00:01:26,670
+và áp dụng toán tử lớn hơn
+bằng việc so sánh giá trị với 0.
+
+23
+00:01:26,670 --> 00:01:29,900
+Đây là truyền phát cơ bản một toán tử so sánh,
+
+24
+00:01:29,900 --> 00:01:33,770
+lớn hơn với kết quả được trả về
+là một chuỗi hàm Boolean.
+
+25
+00:01:33,770 --> 00:01:37,480
+Kết quả được chỉ ra giá trị của
+mỗi phần hoặc là đúng hoặc là
+
+26
+00:01:37,480 --> 00:01:41,690
+sai phụ thuộc vào một quốc gia ít nhất
+đạt một huy chương vàng và
+
+27
+00:01:41,690 --> 00:01:42,890
+chỉ số này là tên của quốc gia.
+
+28
+00:01:43,920 --> 00:01:47,380
+Điều này xây dựng cho chúng ta
+hàm Boolean, đó là một nửa trận chiến.
+
+29
+00:01:47,380 --> 00:01:50,790
+Cái chúng ta muốn là che phủ trên khung dữ liệu.
+
+30
+00:01:50,790 --> 00:01:53,310
+Chúng ta có thể làm điều này sử dụng hàm Where.
+
+31
+00:01:53,310 --> 00:01:57,230
+Hàm Where dùng hàm Boolean như một
+điều kiện áp dụng nó với khung dữ liệu
+
+32
+00:01:57,230 --> 00:02:01,830
+hoặc chuỗi và trả lại khung dữ liệu mới
+hoặc chuỗi hình dạng tương tự.
+
+33
+00:02:01,830 --> 00:02:05,520
+Hãy áp dụng hàm Boolean với dữ liệu Olympics
+của chúng ta và tạo ra khung dữ liệu của
+
+34
+00:02:05,520 --> 00:02:08,580
+các quốc gia dành huy chương vàng
+ở thế vận hội mùa hè.
+
+35
+00:02:09,650 --> 00:02:13,990
+Chúng ta thấy rằng khung dữ liệu giữ
+các giá trị chỉ số gốc và
+
+36
+00:02:13,990 --> 00:02:17,750
+chỉ dữ liệu từ các quốc gia mà
+đáp ứng điều kiện được giữ lại.
+
+37
+00:02:17,750 --> 00:02:22,540
+Tất cả các quốc gia không đáp ứng
+điều kiện dữ liệu NaN.
+
+38
+00:02:22,540 --> 00:02:23,440
+Như thế này vẫn ổn.
+
+39
+00:02:23,440 --> 00:02:28,000
+Hầu hết các hàm thống kê xây dựng
+trong khung dữ liệu bỏ qua các giá trị NaN.
+
+40
+00:02:29,330 --> 00:02:33,580
+Ví dụ nếu chúng ta nhập df.count
+trên khung dữ liệu vàng,
+
+41
+00:02:33,580 --> 00:02:37,290
+chúng ta thấy có 100 quốc gia có huy
+chương vàng được trao ở thế vận hội mùa hè,
+
+42
+00:02:37,290 --> 00:02:40,840
+trong khi nếu chúng ta đếm
+trên khung dữ liệu gốc,
+
+43
+00:02:40,840 --> 00:02:43,550
+chúng ta thấy có tổng số 147 quốc gia.
+
+44
+00:02:44,950 --> 00:02:48,630
+Thường chúng ta muốn xóa những dòng không có dữ liệu.
+
+45
+00:02:48,630 --> 00:02:51,600
+Để làm điều này, chúng ta có thể sử dụng hàm xóa NA.
+
+46
+00:02:51,600 --> 00:02:55,230
+Bạn có thể tùy chọn cung cấp xóa NA
+ở những trục được xem xét.
+
+47
+00:02:55,230 --> 00:02:59,020
+Hãy nhớ rắng các trục chỉ là định hướng
+cho cột hoặc hàng và
+
+48
+00:02:59,020 --> 00:03:01,130
+mặc định là 0, có nghĩa là hàng.
+
+49
+00:03:02,410 --> 00:03:05,770
+Khi bạn thấy mình nói về pandas và các cụm từ như vậy,
+
+50
+00:03:05,770 --> 00:03:10,120
+thường tôi muốn như vậy, giống như
+người lập trình có phím tắt cho
+
+51
+00:03:10,120 --> 00:03:11,830
+toán tử phổ biến này.
+
+52
+00:03:11,830 --> 00:03:13,552
+Ví dụ, trong ví dụ này,
+
+53
+00:03:13,552 --> 00:03:16,820
+chúng ta không thực sự phải sử dụng
+hàm where một cách rõ ràng.
+
+54
+00:03:16,820 --> 00:03:20,246
+Các nhà phát triển pandas cho phép toán tử chỉ số
+
+55
+00:03:20,246 --> 00:03:24,594
+lấy hàm Boolean như một giá trị
+thay cho một danh sách tên các cột.
+
+56
+00:03:24,594 --> 00:03:27,988
+Cú pháp này có thể nhìn lộn xộn một chút,
+đặc biệt nếu bạn không quen
+
+57
+00:03:27,988 --> 00:03:30,916
+lập trình ngôn ngữ với quá nhiều toán tử, nhưng
+
+58
+00:03:30,916 --> 00:03:35,150
+kết quả là bạn có thể lọc và làm giảm
+các khung dữ liệu tương đối nhanh chóng.
+
+59
+00:03:36,300 --> 00:03:40,120
+Dưới đây là một ví dụ ngắn gọn hơn về làm thế nào
+chúng ta có thể truy vấn các khung dữ liệu này.
+
+60
+00:03:40,120 --> 00:03:44,060
+Bạn sẽ nhận thấy rằng không có NaNs khi bạn
+truy vấn các khung dữ liệu theo cách này.
+
+61
+00:03:44,060 --> 00:03:46,920
+pandas tự động lọc ra những hàng không giá trị.
+
+62
+00:03:48,480 --> 00:03:51,960
+Một điều nữa cần lưu ý nếu bạn
+không quen Boolean hoặc bit cho
+
+63
+00:03:51,960 --> 00:03:53,310
+giảm bớt dữ liệu.
+
+64
+00:03:53,310 --> 00:03:57,500
+Đầu ra của hai đánh dấu Boolean
+được so sánh với toán tử logic
+
+65
+00:03:57,500 --> 00:03:59,490
+là một Boolean khác.
+
+66
+00:03:59,490 --> 00:04:03,070
+Có nghĩa là bạn có thể nối cùng nhau
+một nhóm các lệnh and/or
+
+67
+00:04:03,070 --> 00:04:06,980
+để tạo một truy vấn phức tạp và
+kết quả trả về là một Boolean đơn giản.
+
+68
+00:04:08,450 --> 00:04:11,970
+Ví dụ chúng ta có thể tạo ra một đánh dấu
+cho tất cả các quốc gia dành
+
+69
+00:04:11,970 --> 00:04:15,320
+huy chương vàng tại thế vận hội
+mùa hè và sắp xếp hợp lý với
+
+70
+00:04:15,320 --> 00:04:19,050
+các quốc gia dành huy chương vàng
+ở thế vận hội mùa đông.
+
+71
+00:04:19,050 --> 00:04:20,840
+Nếu chúng ta áp dụng điều này cho khung dữ liệu và
+
+72
+00:04:20,840 --> 00:04:23,430
+sử dụng hàm length để xem có bao nhiêu hàng ở đây,
+
+73
+00:04:23,430 --> 00:04:27,100
+chúng ta thấy rằng có 101 quốc gia
+dành huy chương vàng một vài lần.
+
+74
+00:04:28,560 --> 00:04:30,180
+Một ví dụ khác cho vui.
+
+75
+00:04:30,180 --> 00:04:33,870
+Có quốc gia nào dành huy chương vàng
+ở thế vận hội mùa đông nhưng
+
+76
+00:04:33,870 --> 00:04:35,890
+chưa có ở thế vận hội mùa hè không?
+
+77
+00:04:35,890 --> 00:04:37,192
+Dưới đây là một cách để trả lời.
+
+78
+00:04:42,971 --> 00:04:44,730
+Đó là Liechtenstein.
+
+79
+00:04:44,730 --> 00:04:47,220
+Rất may, thế vận hội diễn ra bốn năm một lần.
+
+80
+00:04:47,220 --> 00:04:50,899
+Tôi biết trong năm 2020 tôi sẽ chúc mừng cho
+người dành huy chương vàng mùa hè đầu tiên.
+
+81
+00:04:52,190 --> 00:04:55,160
+Vô cùng quan trọng, và thường là vấn đề
+cho những người dùng mới,
+
+82
+00:04:55,160 --> 00:04:59,310
+là nhớ những dấu Boolean cần thiết để trong dấu ngoặc đơn
+
+83
+00:04:59,310 --> 00:05:01,570
+theo thứ tự của các toán tử.
+
+84
+00:05:01,570 --> 00:05:05,280
+Đây có thể gây ra nhiều sự khó chịu nếu
+bạn không quen, nên hãy cẩn thận.
+
+85
+00:05:06,340 --> 00:05:08,940
+Trong bài giảng này, chúng ta đã xem xét đánh dấu Boolean.
+
+86
+00:05:08,940 --> 00:05:12,260
+Chúng ta đã không lập trình nhiều, nhưng áp dụng
+đánh dấu cho khung dữ liệu là thực sự
+
+87
+00:05:12,260 --> 00:05:15,050
+luồng công việc cốt lõi của panda
+và có giá trị cho việc thực hành.

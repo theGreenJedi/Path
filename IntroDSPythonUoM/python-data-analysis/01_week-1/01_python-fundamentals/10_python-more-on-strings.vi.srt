@@ -1,0 +1,254 @@
+1
+00:00:08,716 --> 00:00:11,808
+Chúng ta đã nói về các chuỗi khi
+chúng ta nói đến danh sách và việc cắt,
+
+2
+00:00:11,808 --> 00:00:15,116
+bạn đã thấy các cách để tách các
+chuỗi qua việc sử dụng các chức năng phân chia,
+
+3
+00:00:15,116 --> 00:00:17,430
+và qua chỉ số trực tiếp.
+
+4
+00:00:17,430 --> 00:00:20,390
+Các chuỗi trên python có thể có một
+chút khó chịu và tôi muốn chia sẻ
+
+5
+00:00:20,390 --> 00:00:23,220
+chi tiết hơn về cách các chuỗi
+được xử lí để bạn biết về chúng.
+
+6
+00:00:24,230 --> 00:00:26,820
+Trong python 3, chuỗi dựa trên Unicode.
+
+7
+00:00:26,820 --> 00:00:30,060
+Các kí tự máy tính đầu tiên của
+các chuỗi bị giới hạn bởi 256
+
+8
+00:00:30,060 --> 00:00:31,970
+giá trị khác nhau.
+
+9
+00:00:31,970 --> 00:00:33,400
+Điều này đủ để có tất cả ký tự viết hoa hoặc
+
+10
+00:00:33,400 --> 00:00:37,890
+viết thường trong trường hợp kí tự latin
+cũng như số lượng chữ số được biểu diễn.
+
+11
+00:00:37,890 --> 00:00:40,330
+Ngô ngữ này được gọi là
+ASCII và khá nhỏ gọn.
+
+12
+00:00:40,330 --> 00:00:44,625
+Nhưng thế giới không chỉ chạy trên các
+kí tự Latin và cần có hỗ trợ
+
+13
+00:00:44,625 --> 00:00:48,590
+các ngôn ngữ không phải tiếng Anh
+cũng như các kí tự không sử dụng phổ biến
+
+14
+00:00:48,590 --> 00:00:51,700
+nhưng được sử dụng phổ biến ở
+những nơi như các phép tính toán học.
+
+15
+00:00:52,860 --> 00:00:57,610
+Định dạng chuyển đổi Unicode hoặc
+UTF là sự nỗ lực để giải quyết điều này.
+
+16
+00:00:57,610 --> 00:01:00,880
+Nó có thể được sử dụng để đưa ra
+hơn một triệu các kí tự khác nhau.
+
+17
+00:01:00,880 --> 00:01:04,170
+Điều này bao gồm không chỉ các ngôn ngữ
+con người như bạn mong muốn mà
+
+18
+00:01:04,170 --> 00:01:05,640
+còn các biểu tượng như emojis.
+
+19
+00:01:06,700 --> 00:01:08,990
+Python 3 sử dụng Unicode là mặc định vì thế
+
+20
+00:01:08,990 --> 00:01:11,850
+không có vấn đề trong việc
+xử lí các tập kí tự quốc tế.
+
+21
+00:01:12,860 --> 00:01:16,220
+Ngoài Unicode, python sử dụng
+một ngôn ngữ đặc biệt cho
+
+22
+00:01:16,220 --> 00:01:18,536
+việc định dạng đầu ra của chuỗi.
+
+23
+00:01:18,536 --> 00:01:22,051
+Một trong các thách thức với kiểu động
+là nó không rõ ràng khi
+
+24
+00:01:22,051 --> 00:01:24,890
+bạn phải tự làm chuyển đổi kiểu.
+
+25
+00:01:24,890 --> 00:01:27,605
+Chúng ta thấy trong bài học trước rằng
+nếu chúng ta muốn xuất tên và
+
+26
+00:01:27,605 --> 00:01:32,275
+một số mà chúng ta không thể sử dụng
+sự kết nối mà không gọi hàm str
+
+27
+00:01:32,275 --> 00:01:34,945
+để đổi số thành chuỗi đầu tiên.
+
+28
+00:01:34,945 --> 00:01:38,565
+Điều này tạo ra nhiều mã khó nơi mà
+mọi toán tử bạn đang tìm kiếm để
+
+29
+00:01:38,565 --> 00:01:41,235
+kết nối bị bọc trong hàm str này.
+
+30
+00:01:41,235 --> 00:01:46,155
+chuỗi Python định dạng ngôn ngữ mini cho phép bạn viết
+
+31
+00:01:46,155 --> 00:01:50,490
+câu lệnh chuỗi chỉ ra nơi giữ
+các biến được đánh giá.
+
+32
+00:01:50,490 --> 00:01:55,530
+Sau đó bạn chuyển các biến này thành
+tên hoặc đánh số thứ tự,
+
+33
+00:01:55,530 --> 00:01:58,110
+và python kiểm soát các thao tác chuỗi cho bạn.
+
+34
+00:01:59,530 --> 00:02:00,940
+Đây là một ví dụ.
+
+35
+00:02:00,940 --> 00:02:03,360
+Tưởng tượng rằng chúng ta có các
+thông tin chi tiết đặt mua hàng và
+
+36
+00:02:03,360 --> 00:02:08,120
+một quyển từ điển, bao gồm
+số lượng các mục, giá và tên của một cá nhân.
+
+37
+00:02:09,480 --> 00:02:13,100
+Chúng ta có thể viết một chuỗi câu lệnh
+bán hàng bao gồm các mặt hàng này
+
+38
+00:02:13,100 --> 00:02:14,130
+sử dụng dấu ngoặc nhọn.
+
+39
+00:02:15,140 --> 00:02:18,440
+Chúng ta có thể sử dụng phương pháp
+định dạng trên chuỗi đó và
+
+40
+00:02:18,440 --> 00:02:21,439
+thực hiện trong các giá trị mà
+chúng ta muốn thay thế cho phù hợp.
+
+41
+00:02:22,570 --> 00:02:26,210
+Bây giờ ngôn ngữ định dạng chuỗi
+cho phép bạn làm nhiều hơn điều này.
+
+42
+00:02:26,210 --> 00:02:30,210
+Bạn có thể kiểm soát mọi thứ
+khác nhau như chữ số thập phân,
+
+43
+00:02:30,210 --> 00:02:33,970
+số thực dấu phẩy động hoặc cho dù
+bạn muốn biểu diễn số dương với
+
+44
+00:02:33,970 --> 00:02:38,870
+dấu cộng hoặc đặt căn chỉnh các
+chuỗi sang trái hoặc sang phải.
+
+45
+00:02:38,870 --> 00:02:42,380
+Thậm chí có thể sử dụng kí hiệu khoa học.
+
+46
+00:02:42,380 --> 00:02:45,740
+Tôi đã kết nối trang tài liệu trong
+nguồn tài nguyên khóa học.
+
+47
+00:02:45,740 --> 00:02:47,855
+Và có thể sử dụng thư viện chuỗi và
+
+48
+00:02:47,855 --> 00:02:51,210
+ngôn ngữ định dạng sẽ là một phần
+quan trọng của nhiệm vụ đầu tiên của bạn.
+
+49
+00:02:52,600 --> 00:02:54,090
+Đây là một bài học ngắn nhưng
+
+50
+00:02:54,090 --> 00:02:57,460
+thao tác chuỗi là một phần lớn của việc làm sạch dữ liệu.
+
+51
+00:02:57,460 --> 00:03:00,611
+Bạn sẽ học nhiều hơn về thao tác
+chuỗi trong khóa học này qua
+
+52
+00:03:00,611 --> 00:03:02,300
+các bài tập.
+
+53
+00:03:02,300 --> 00:03:03,440
+Trong video tiếp theo
+
+54
+00:03:03,440 --> 00:03:06,810
+trợ lí của chúng tôi sẽ cho bạn thấy
+cách để mang các
+
+55
+00:03:06,810 --> 00:03:10,430
+phân tích dữ liệu cơ bản cùng nhau qua việc
+đọc và viết các tập dữ liệu phân cách.

@@ -1,0 +1,167 @@
+1
+00:00:08,757 --> 00:00:13,620
+Một bảng phân tích là cách tổng hợp dữ liệu trong khung dữ liệu với một mục đích cụ thể.
+
+2
+00:00:13,620 --> 00:00:16,610
+Nó tạo ra hiệu suất sử dụng của chức năng agg này.
+
+3
+00:00:16,610 --> 00:00:20,830
+Một bảng phân tích là khung dữ liệu của chính nó nơi mà các hàng đại diện một biến mà
+
+4
+00:00:20,830 --> 00:00:25,770
+bạn quan tâm, các một khác nữa và tế bào là các giá trị agg.
+
+5
+00:00:25,770 --> 00:00:29,190
+Một bảng phân tích có xu hướng bao gồm các giá trị rìa,
+
+6
+00:00:29,190 --> 00:00:31,590
+đó là tổng của mỗi cột và hàng.
+
+7
+00:00:31,590 --> 00:00:36,030
+Điều này cho phép bạn có thể xem mối quan hệ giữa hai biến
+
+8
+00:00:36,030 --> 00:00:36,640
+trong nháy mắt.
+
+9
+00:00:36,640 --> 00:00:38,980
+Hãy cùng xem xét một ví dụ.
+
+10
+00:00:38,980 --> 00:00:42,713
+Ở đây chúng ta sẽ tải một tập dữ liệu mới cars.csv.
+
+11
+00:00:42,713 --> 00:00:46,275
+Tập dữ liệu này đến từ các dữ liệu mở của chính phủ Canada.
+
+12
+00:00:46,275 --> 00:00:49,774
+Và có thông tin về hiệu quả của các chiếc xe điện khác nhau mà
+
+13
+00:00:49,774 --> 00:00:52,070
+có sẵn để mua.
+
+14
+00:00:52,070 --> 00:00:54,326
+Khi chúng ta nhìn vào phần đầu của khung dữ liệu,
+
+15
+00:00:54,326 --> 00:00:58,837
+chúng ta sẽ thấy có các năm, kích thước của xe và các thống kê
+
+16
+00:00:58,837 --> 00:01:01,364
+như pin trong kilowat lớn như thế nào.
+
+17
+00:01:01,364 --> 00:01:06,009
+Một bảng phân tích cho phép chúng ta chỉ ra một trong các cột trong một cột mới
+
+18
+00:01:06,009 --> 00:01:09,980
+và so sánh nó với cột khác như chỉ số hàng.
+
+19
+00:01:09,980 --> 00:01:10,770
+Chẳng hạn như 
+
+20
+00:01:10,770 --> 00:01:15,360
+Giả sử chúng ta muốn so sánh việc tạo ra xe điện với các năm và
+
+21
+00:01:15,360 --> 00:01:19,770
+chúng ta muốn làm sự so sánh về dung lượng pin.
+
+22
+00:01:19,770 --> 00:01:23,500
+Để làm điều này chúng ta dùng hàm panda chúng ta muốn các giá trị là kilowat,
+
+23
+00:01:23,500 --> 00:01:27,240
+chỉ số là năm và các cột được tạo ra.
+
+24
+00:01:27,240 --> 00:01:30,369
+Sau đó chúng ta xác định chức năng agg,
+
+25
+00:01:30,369 --> 00:01:32,667
+ở đây chúng ta sẽ sử dụng numpy.
+
+26
+00:01:32,667 --> 00:01:34,030
+Đây là kết quả.
+
+27
+00:01:34,030 --> 00:01:35,806
+Chúng ta thấy có các giá trị n/a với
+
+28
+00:01:35,806 --> 00:01:39,918
+các nhà cung cấp người mà không có mục nhập trong năm được cho trước như Ford năm 2012.
+
+29
+00:01:39,918 --> 00:01:43,937
+Và cái chúng ta thấy hầu hết các nhà cung cấp không thay đổi dung lượng pin những năm qua,
+
+30
+00:01:43,937 --> 00:01:47,010
+ngoại trừ Tesla khi họ giới thiệu các mô hình mới.
+
+31
+00:01:48,270 --> 00:01:52,250
+Bây giờ các bảng phân tích không bị giới hạn với một chức năng mà bạn muốn áp dụng.
+
+32
+00:01:52,250 --> 00:01:55,905
+Bạn có thể xuất một danh sách các chức năng khác nhau để áp dụng.
+
+33
+00:01:55,905 --> 00:02:00,110
+Và hàm panda sẽ cung cấp cho bạn kết quả dử dụng nên cột theo thứ bậc.
+
+34
+00:02:00,110 --> 00:02:02,822
+Ở đây tất cả xuất cùng nhau.
+
+35
+00:02:02,822 --> 00:02:06,882
+Và bạn có thể thấy mỗi một chức năng có một loại,
+
+36
+00:02:06,882 --> 00:02:10,687
+điều này chỉ ra ý nghĩa tổng thể và các giá trị nhỏ nhất với năm được cho trước và
+
+37
+00:02:10,687 --> 00:02:11,610
+nhà cung cấp.
+
+38
+00:02:12,790 --> 00:02:14,300
+ĐÓ là bảng phân tích.
+
+39
+00:02:14,300 --> 00:02:16,190
+Đây là mô tả ngắn nhưng
+
+40
+00:02:16,190 --> 00:02:19,180
+chúng rất hữu ích khi xử lí dữ liệu số.
+
+41
+00:02:19,180 --> 00:02:22,670
+Và tất nhiên bạn có thể xuất bất kì chức ăng bạn muốn tới chức năng agg,
+
+42
+00:02:22,670 --> 00:02:24,460
+bao gồm những thứ mà bạn xác định.

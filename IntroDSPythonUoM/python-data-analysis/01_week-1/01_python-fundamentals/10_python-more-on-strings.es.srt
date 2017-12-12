@@ -1,0 +1,270 @@
+1
+00:00:08,716 --> 00:00:11,808
+Hemos hablado de cadenas 
+cuando hablamos de listas y "rebanado" y
+
+2
+00:00:11,808 --> 00:00:15,116
+has visto maneras de dividir cadenas
+a través de la función "split",
+
+3
+00:00:15,116 --> 00:00:17,430
+Y mediante la
+indexación directa.
+
+4
+00:00:17,430 --> 00:00:20,390
+Las cadenas en Python pueden resultar
+un poco frustrantes, por eso quiero compartir
+
+5
+00:00:20,390 --> 00:00:23,220
+algunos detalles más
+sobre el manejo de cadenas,
+
+6
+00:00:24,230 --> 00:00:26,820
+En Python 3, las cadenas
+están basadas en Unicode.
+
+7
+00:00:26,820 --> 00:00:30,060
+Antiguamente las cadenas 
+estaban limitadas a 256
+
+8
+00:00:30,060 --> 00:00:31,970
+valores diferentes.
+
+9
+00:00:31,970 --> 00:00:33,400
+Esto era suficiente
+para obtener todas las
+
+10
+00:00:33,400 --> 00:00:37,890
+letras minúsculas con caracteres latinos, 
+y representar los números de un solo dígito.
+
+11
+00:00:37,890 --> 00:00:40,330
+Esa representación se llamaba ASCII
+y era bastante compacta.
+
+12
+00:00:40,330 --> 00:00:44,625
+Pero el mundo no vive sólo con caracteres
+latinos, y hay una necesidad de soporte
+
+13
+00:00:44,625 --> 00:00:48,590
+para otros idiomas distintos del inglés
+y caracteres menos usuales
+
+14
+00:00:48,590 --> 00:00:51,700
+en las palabras, pero comunes en otros
+ámbitos, como los operadores matemáticos.
+
+15
+00:00:52,860 --> 00:00:57,610
+El formato de transformación Unicode o  UTF,
+es un intento de resolver esta situación.
+
+16
+00:00:57,610 --> 00:01:00,880
+Se puede utilizar para representar
+más de un millón de caracteres diferentes.
+
+17
+00:01:00,880 --> 00:01:04,170
+Esto no sólo incluye
+a los idiomas humanos, sino
+
+18
+00:01:04,170 --> 00:01:05,640
+también a símbolos
+como los emojis.
+
+19
+00:01:06,700 --> 00:01:08,990
+Python 3, por defecto,
+utiliza Unicode por lo tanto
+
+20
+00:01:08,990 --> 00:01:11,850
+No hay problema en el manejo 
+de caracteres internacionales.
+
+21
+00:01:12,860 --> 00:01:16,220
+Además de Unicode,
+Python utiliza un lenguaje especial para
+
+22
+00:01:16,220 --> 00:01:18,536
+formatear la forma
+en que se muestran las cadenas.
+
+23
+00:01:18,536 --> 00:01:22,051
+Uno de los desafíos con la tipificación dinámica
+es que no suele quedar claro cuando
+
+24
+00:01:22,051 --> 00:01:24,890
+es necesario que uno
+mismo haga la conversión.
+
+25
+00:01:24,890 --> 00:01:27,605
+En la última lección habíamos visto
+que si queríamos imprimir un nombre y
+
+26
+00:01:27,605 --> 00:01:32,275
+un número no era posible concatenarlos
+sin invocar previamente a la función "str"
+
+27
+00:01:32,275 --> 00:01:34,945
+para convertir el
+número en una cadena.
+
+28
+00:01:34,945 --> 00:01:38,565
+Esto crea un montón de código desagradable,
+donde cada operador que buscas para
+
+29
+00:01:38,565 --> 00:01:41,235
+concatenar queda 
+envuelto en la función "str".
+
+30
+00:01:41,235 --> 00:01:46,155
+El mini lenguaje que ofrece Python para
+formateo de cadenas permite escribir
+
+31
+00:01:46,155 --> 00:01:50,490
+una sentencia indicando marcadores de posición
+para las variables que se van a evaluar.
+
+32
+00:01:50,490 --> 00:01:55,530
+Luego pasas las variables,
+ya sea nombrándolas o en argumentos ordenados
+
+33
+00:01:55,530 --> 00:01:58,110
+y Python se encarga de la
+manipulación de la cadena.
+
+34
+00:01:59,530 --> 00:02:00,940
+Pero la ciencia forense no es muy buena determinando Mens Rea, la intención.
+
+35
+00:02:00,940 --> 00:02:03,360
+Imaginemos que tenemos detalles
+de órdenes de compra y
+
+36
+00:02:03,360 --> 00:02:08,120
+un diccionario, que incluye cantidad de artículos,
+precio y el nombre de una persona.
+
+37
+00:02:09,480 --> 00:02:13,100
+Podemos escribir una sentencia con
+la cadena que incluye estos artículos
+
+38
+00:02:13,100 --> 00:02:14,130
+usando llaves.
+
+39
+00:02:15,140 --> 00:02:18,440
+Luego podemos llamar al
+método "format" en dicha cadena y
+
+40
+00:02:18,440 --> 00:02:21,439
+pasar los valores que queremos
+que sean sustituidos según corresponda.
+
+41
+00:02:22,570 --> 00:02:26,210
+Ahora bien, el lenguaje de formateo de cadenas
+permite hacer mucho más que esto.
+
+42
+00:02:26,210 --> 00:02:30,210
+Puedes controlar una serie de 
+cosas  diferentes como espacios decimales,
+
+43
+00:02:30,210 --> 00:02:33,970
+agregado de signos de más
+en números positivos,
+
+44
+00:02:33,970 --> 00:02:38,870
+establecer la alineación de 
+cadenas a izquierda o justificación a derecha.
+
+45
+00:02:38,870 --> 00:02:42,380
+O incluso habilitar
+el uso de notación científica.
+
+46
+00:02:42,380 --> 00:02:45,740
+He dejado un enlace a la página de documentación
+en la sección de recursos del curso.
+
+47
+00:02:45,740 --> 00:02:47,855
+Ser capaz de usar la
+librería de cadenas y
+
+48
+00:02:47,855 --> 00:02:51,210
+manejar su lenguaje de formateo son una
+parte importante de la primera tarea.
+
+49
+00:02:52,600 --> 00:02:54,090
+Esta ha sido una
+lección corta, pero
+
+50
+00:02:54,090 --> 00:02:57,460
+la manipulación de cadenas es
+una parte importante de la limpieza de datos.
+
+51
+00:02:57,460 --> 00:03:00,611
+Aprenderás mucho más sobre manipulación
+de cadenas en este curso a través de
+
+52
+00:03:00,611 --> 00:03:02,300
+las tareas.
+
+53
+00:03:02,300 --> 00:03:03,440
+De todos modos, 
+en el próximo video,
+
+54
+00:03:03,440 --> 00:03:06,810
+Un estudiante de posgrado que será nuestro asistente
+te mostrará cómo hacer análisis de datos básico
+
+55
+00:03:06,810 --> 00:03:10,430
+a través de la lectura y escritura
+de archivos de datos delimitados.

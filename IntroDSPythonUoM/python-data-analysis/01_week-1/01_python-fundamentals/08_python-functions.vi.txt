@@ -1,0 +1,91 @@
+Trong phần còn lại của bài học này, tôi sẽ cung cấp một tổng quan cơ bản
+về ngôn ngữ lập trình python. Nếu bạn có nền tảng trong lập trình, tổng quan này sẽ đủ để giúp bạn thành công
+trong phần còn lại của khóa học này và các khóa học sau trong chuỗi này. Nếu bạn không có kinh nghiệm lập trình hoặc cảm thấy nội dung là quá khó thì
+tôi sẽ khuyên bạn dừng lại và tham gia vào lớp giới thiệu lập trình. Một cộng sự của tôi, tiến sĩ Chuck Severance
+đưa ra một ngành tuyệt vời trong Coursera gọi là
+python cho mọi người. Bạn có thể tìm thấy một liên kết
+trong nguồn khóa học. Hệ thống Coursera cho phép bạn chạy mã python
+từ trình duyệt của bạn theo hai cách. Đầu tiên chúng ta có thể sử dụng các chỉ dẫn
+trong video nơi một câu hỏi sẽ đưa ra và bạn có thể thử và giải quyết câu hỏi
+đó trong trình duyệt. Đây là điều mới với nền tảng Coursera và chúng ta sẽ thử nó trong hai bài giảng tiếp theo. Thứ hai hệ thống Coursera đã được
+tích hợp với ghi chú jupyter. Các ghi chú cho phép bạn chia
+mã thành các phần nhỏ và thực hiện các phần nhỏ này theo yêu cầu. Điều tuyệt vời về ghi chú này là
+chúng cung cấp một lưu trữ bán cố định cho việc học của bạn
+và bạn có thể thử nghiệm và chơi với các chương trình mà không phải
+cài đặt bất kì cái gì trên máy tính của bạn. Tất cả các bài tập sẽ được làm trên các
+ghi chú jupyter nhưng bạn có thể tải và cài đặt, python, jupyter tất cả các
+thư viện liên quan bạn cần cho khóa học này trên máy tính
+của bạn nếu bạn thích. Trợ lý hướng dẫn của chúng tôi sẽ
+cung cấp một tổng quan về quá trình này bằng việc cài đặt ghi chú
+jupyter trong video tiếp theo cho những thứ bạn quan tâm, tôi sẽ đưa ra
+một tổng quan về cách bạn có thể sử dụng các ghi chú này trong môi trường
+Coursera trong bài giảng này. Nhưng bây giờ hãy đào sâu
+về một số python cơ bản. Đầu tiên python là một ngôn ngữ cấp cao,
+điều này có nghĩa là nó được tối ưu hóa cho việc đọc thay vì máy. Nó cũng là một ngôn ngữ thông dịch, nghĩa là
+nó không biên dịch trực tiếp tới mã máy và quan trọng nó được sử dụng
+phổ biến trong phong cách tương tác. Điều này có thể khá khác nếu bạn
+được sử dụng để lập trình trong java hoặc C nơi bạn viết mã, biên dịch nó,
+chạy nó và xem đầu ra. Trong Python bạn có thể bắt đầu các
+thông dịch tương tác và bắt đầu viết mã, từng dòng với việc đánh giá
+mỗi câu khi bạn viết nó. Điều này rất hữu ích với các nhiệm vụ mà đòi hỏi nhiều điều tra,
+so với những yêu cầu nhiều thiết kế. Tập hợp các lệnh là một ví dụ cho điều này. Một dữ liệu sạch là cái khác. Trong khi bạn có thể viết các lệnh mà bạn
+thực hiện các chương trình như bạn có thể sử dụng các ngôn ngữ khác nữa, chúng ta sẽ sử dụng python trong chuỗi này trong phòng cách tương tác này. Một điều phổ biến với các lập trình viên
+đến từ nền tảng java hoặc C là python là một ngôn ngữ nhập tương tự
+với các ngôn ngữ như JavaScript. Điều này có nghĩa là khi bạn khai báo một biến, bạn có thể gán cho nó một số nguyên trên
+một dòng và một chuỗi trên dòng tiếp theo. Bởi vì không có bước biên soạn, bạn không có bất kì ai
+giúp bạn quản lí các loại. Bạn cần phải kiểm tra sự hiện diện của
+chức năng khi bạn sử dụng nó hoặc thử và sử dụng chức năng và
+nắm bắt các lỗi xảy ra. Loại python động này rất tốt khi sử dụng trong một cách tương tác, nó cho phép
+bạn thiết lập nhanh chóng và thay đổi các nội dung mà không
+lo lắng về cú pháp cơ bản khai báo các biến. Ok hãy lấy một ví dụ. Với tất cả các ví dụ mã tôi sẽ cho bạn thấy,
+bạn sẽ thấy một phiên bản chú thích của ghi chú với các ý kiến trong
+phần nguồn khóa học. Bạn được khuyến khích theo dõi điều đó nếu
+bạn muốn hoặc tạo ra một ghi chú mới và viết mã nếu bạn thích. Python có rất ít mã. Thực tế nếu bạn chỉ muốn thiết lập
+giá trị các biến và đầu ra các kết quả của các biến thêm vào với nhau,
+bạn có thể làm trong ba dòng. Trong ví dụ này tôi sẽ viết ba câu. Hai câu tạo biến x và y,
+mỗi câu là giá trị nguyên. Sau đó chúng ta sẽ làm một số bổ sung. Chúng ta sẽ chạy phần nhỏ này
+bằng việc ấn Shift+Enter hoặc bằng việc ấn vào biểu tượng trên thanh công cụ. Đầu ra từ câu này được in ngay lập tức. Nếu bạn đang sử dụng python trong một
+chế độ không tương tác, sẽ không in. Nhưng bởi vì chúng ta đang sử dụng nó trong
+chế độ tương tác, chúng ta có giá trị ngay lập tức. Điều đang xảy ra bên dưới là trình duyệt
+đang gửi mã python của bạn trên một máy trong đám mây, cái mà thực hiện trong thông dịch python 3
+và gửi lại các kết quả. Chúng ta có thể thấy sau khi thực hiện,
+một phần nhỏ trống mới được tạo ra bên dưới. Nếu chúng ta đặt trong x và thực hiện,
+chúng ta có giá trị 1. Nó rất quan trọng để biết thông dịch
+python là một trạng thái. Đó là các biến tồn tại giữa các phần nhỏ. Ngoài ra nếu chúng ta quay lại và
+thay đổi trong phần trước, chúng ta phải thực hiện lại
+lệnh để thay đổi chỗ. Bắt đầu lại và chạy tất cả các hàm
+là rất hữu ích vì nó quét bản dịch và chạy lại tất cả các
+phần trong ghi chú hiện tại. Bạn sẽ chú ý rằng python không
+đòi hỏi việc sử dụng các từ khóa như var để đặt tên biến hoặc dấu chấm phẩy ở cuối các dòng một cách
+phổ biến trong các ngôn ngữ khác. Python thúc đẩy không gian màu trắng để
+hiểu phạm vi của các hàm và các vòng lặp và kết thúc các dòng đánh dấu
+để hiểu kết thúc của câu. Tất nhiên python có các cấu trúc phần
+mềm như là các hàm. Đây là một ví dụ, mã trước đây
+trong một hàm. Bạn sẽ thấy trạng thái chỉ ra rằng
+chúng ta đang viết một hàm. Sau đó mỗi dòng là một phần của hàm
+cần phải được lùi vào với một kí tự hoặc khoảng trống. Bởi vì chúng ta ở trong môi trường
+tương tác khi trạng thái được đánh giá trên Shift+Enter, kết quả
+được xuất ra ngay lập tức bên dưới. Đây là tương tác đầu tiên của chúng ta. Tại sao bạn không thử và thay hàm này
+để chấp nhận ba thông số thay vì hai và quay lại tổng của cả ba. Ok các hàm rất tuyệt nhưng chúng có
+chút khác biết so với bạn thấy trong các ngôn ngữ khác và đây là một số loại tham gia. Đầu tiên bởi vì không có cách gõ,
+bạn không phải tạo lệnh quay lại của bạn. Thứ hai bạn không phải sử dụng câu lệnh quay lại. Có một giá trị đặc biệt được gọi là None là trở lại. None tương tự như null trong java và
+thể hiện sự vắng mặt của giá trị. Thứ ba trong python bạn có thể có
+giá trị mặc định cho các tham số. Đây là một ví dụ. Trong ví dụ này chúng ta có thể viết lại
+chức năng thêm số để lấy ba tham số, nhưng chúng ta có thể tạo tham số
+cuối cùng là None theo mặc định. Điều này nghĩa là bạn có thể thêm
+các số chỉ với hai hoặc ba giá trị và bạn không phải viết lại kí hiệu hàm để tải nó. Điều này có ý nghĩa quan trọng. Tất cả các tham số tùy chọn, những
+tham số mà bạn cho là giá trị măc định, cần phải đi đến cuối hàm. Nó cũng có nghĩa là bạn có thể vượt qua
+các tham số tùy chọn như các giá trị đã dán nhãn. Đây là một ví dụ về các tham số đã dán nhãn. Chúng ta có thể viết lại hàm đó
+để có hai thông số tùy chọn. Nếu chúng ta muốn gọi hàm với hai số nhưng cũng tạo giá trị cờ, chúng ta
+phải đặt tên rõ ràng và tạo tham số là True khi gọi hàm. Bây giờ bạn cũng thấy việc
+sử dụng của các câu lệnh. Chungsta sẽ đi vào chi tiết hơn nhưng in sẽ lấy một mục, thử và chuyển nó
+vào một chuỗi và in đầu ra. Chúng ta không sử dụng điều này nhiều
+trong chế độ tương tác của bộ thông dịch nhưng nó rất hữu ích khi chúng ta muốn in
+ra nhiều giá trị cho một phần đơn. Ok một từ cuối cùng trên những căn
+bản của các hàm trong python. Trong Python, bạn có thể gán một biến với một hàm. Điều này có vẻ như là rất
+bình thường với bạn hoặc hoàn toàn phụ thuộc vào
+nền tảng lập trình của bạn. Bằng việc gán một hàm cho một biến,
+bạn có thể thực hiện biến đó trong các hàm khác cho phép một
+số lập trình chức năng cơ bản. Chúng ta sẽ nói về điều đó sau trong khóa học. Nhưng đây là một ví dụ về nơi chúng ta
+định nghĩa một hàm cộng số, sau đó chúng ta gán hàm đó cho
+một biến, và rồi chúng ta gọi biến.

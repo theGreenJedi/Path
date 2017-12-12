@@ -1,0 +1,27 @@
+A lot of analysis you do might
+relate to dates and times. For instance, finding the average
+number of sales over a given period, selecting a list of products to data mine
+if they were purchased in a given period, or trying to find the period with
+the most activity in online discussion forum systems. In this course, we're not going to delve
+too deeply into time series analysis, but I wanted to show you some
+of the basics in Python. First, you should be aware that date and times can be stored in
+many different ways. One of the most common legacy methods for
+storing the date and time in online transactions systems is
+based on the offset from the epoch, which is January 1, 1970. There's a lot of historical cruft around
+this, but it's not uncommon to see systems storing the date of a transaction in
+seconds or milliseconds since this date. So if you see large numbers where
+you expect to see date and time, you'll need to convert them to
+make much sense out of the data. In Python, you can get the current time
+since the epoch using the time module. You can then create a time stamp
+using the from time stamp function on the date time object. When we print this value out,
+we see that the year, month, day, and so forth are also printed out. The date time object has handy attributes
+to get the representative hour, day, seconds, etc. Date time objects allow for
+simple math using time deltas. For instance, here,
+we can create a time delta of 100 days, then do subtraction and comparisons
+with the date time object. This is commonly used in data science for
+creating sliding windows. For instance,
+where you might want to look for any five day span of time where sales were
+highest, and flag that for follow up. This is just a little glimpse at dates and
+times in Python. In week three of this course,
+we're going to investigate dates and times a bit more using
+the pandas date time library.

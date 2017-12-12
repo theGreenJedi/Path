@@ -1,0 +1,124 @@
+En el resto de este módulo, Voy a proporcionar una visión general muy
+básica del lenguaje de programación de Python. Si tienes conocimientos
+de programación, Este resumen será suficiente para
+tener éxito en el resto del este curso... y los siguientes cursos
+de la especialización. Si no tienes experiencia
+en programación o sientes que el contenido es excesivamente desafiante,
+entonces te animo a que te detengas y... tomes una clase de 
+programación introductoria Un colega mío, el Dr. Chuck Severance,
+ofrece una excelente especialización en Coursera, llamada
+"Python para Todos". Puedes encontrar un enlace al
+curso en la sección de recursos. El sistema Coursera permite ejecutar código
+Python desde el navegador de dos maneras. Primero, podemos usar avisos incrustados
+en video, donde surgirá una pregunta y puedes probar y resolver esa
+pregunta desde el navegador. Esto es nuevo en la plataforma Coursera y vamos a probarlo en el
+próximo par de lecciones. En segundo lugar, el sistema Coursera ha
+sido integrado con los cuadernos Jupyter. Estos cuadernos te permiten
+dividir tu código en celdas ejecutar dichas celdas
+bajo demanda. Lo bueno de estos cuadernos es que
+ofrecen un almacenamiento semi-permanente para tu aprendizaje y
+puedes experimentar con la programación sin tener que 
+instalar nada en tu computadora. Todas las asignaciones se realizarán en cuadernos
+Júpyter, pero por supuesto que puedes descargar e instalar, Python, Jupyter, y todas
+las librerías asociadas que se necesitan para seguir este curso desde tu 
+propio ordenador si lo deseas. En el siguiente video, nuestro asistente
+ofrecerá una visión general de este proceso instalando los cuadernos 
+Jupyter de forma local para aquellos que estén interesados, y en esta clase 
+voy a dar una visión general de cómo se pueden utilizar estos cuadernos en 
+el ambiente de Coursera. Pero por ahora, veamos algunos
+conceptos básicos de Python. Primero, Python es un lenguaje de alto nivel, 
+lo que significa que está optimizado para ser leído por personas
+más que por máquinas. También es un lenguaje interpretado, lo que
+significa que no se compila directamente a código de máquina y lo más importante es que es
+comúnmente utilizado de manera interactiva. Esto podría resultarte muy diferente si
+estás acostumbrado a la programación en Java o C, donde escribes código,
+compilas, ejecutas y ves la salida. En Python, puedes iniciar el intérprete 
+interactivo y comenzar a escribir código, línea por línea, con el intérprete, evaluando
+cada instrucción a medida que la escribes. Esto resulta
+muy útil para tareas que requieren mucha investigación, 
+frente a aquellas que requieren mucho diseño. "Shell scripting" es
+un ejemplo de esto. Y la limpieza de datos 
+es otro ejemplo. O puedes escribir scripts que ejecuten
+programas como sueles hacer en otros lenguajes. A lo largo de esta especialización
+usaremos Python de esta manera
+interactiva Una sorpresa común para algunos programadores
+que provienen de Java o C es que Python es un lenguaje con "tipo dinámico",
+similar a lenguajes como JavaScript. Esto significa que cuando 
+declaras una variable, puedes asignarla como un entero en una línea,
+y como una cadena en la línea siguiente. Como no hay ningún
+paso de compilación, No tienes a nadie que te
+ayude a administrar los tipos. Necesitas comprobar la presencia de la
+funcionalidad cuando vayas a usarla o Intentar usar la funcionalidad y
+capturar los errores que se produzcan. El "tipo dinámico" es particularmente
+agradable cuando se usa Python de de manera interactiva, ya
+que permite configurar y modificar los contenidos de las variables sin
+tener que preocuparse por la definición sintáctica subyacente de la variable. Bien, saltemos a un ejemplo. Para todos los ejemplos de código que te
+mostraré, encontrarás una versión anotada y con comentarios en un cuaderno
+ubicado en la sección de recursos del curso. Te invito a seguirlo o, si prefieres,
+a crear un nuevo cuaderno y escribir código activamente. Python requiere
+escribir poco código. De hecho, si sólo quieres establecer el
+valor de un par de variables, y la salida con el resultado de estas variables sumadas,
+podrías hacerlo en tres líneas. En este ejemplo, voy a
+escribir tres sentencias. Las dos primeras establecen las variables X e Y,
+cada una con un valor entero... Luego hago la suma. Podemos ejecutar esta celda
+pulsando MAYUSCULA + INTRO o Haciendo clic en el icono de reproducción
+en la barra de herramientas. La salida de la sentencia 
+se imprime inmediatamente. Si estuvieras usando Python en un modo
+no interactivo, no se imprimiría nada. Pero como lo estamos usando en modo interactivo,
+obtendremos el valor inmediatamente. Lo que está sucediendo por detrás es que
+el browser está enviando su código Python a una máquina en la nube, que ejecuta el código en un intérprete
+de Python y envía los resultados. Podemos ver que después de ejecutar una celda,
+se crea una nueva celda vacía a continuación. Si sólo ponemos X y ejecutamos,
+obtenemos el valor de 1. Por lo tanto, es importante saber que
+el intérprete de Python mantiene el estado. Es decir que sus variables siguen
+existiendo entre celdas. Más allá de eso, si volvemos y
+cambiamos algo en una celda anterior, Tenemos que volver a ejecutar el script
+para que tengan lugar los cambios. El "Reinicio y ejecutar todo" es una función
+particularmente útil, ya que limpia el estado del intérprete y vuelve a ejecutar
+todas las celdas del cuaderno actual. Te darás cuenta de que Python
+no requiere el uso de palabras clave como VAR, TO, DECLARE 
+o un nombre de variable o punto y coma al final de las líneas,
+que se usan comúnmente en otros lenguajes. Python hace uso del espacio en blanco para
+comprender el alcance de las funciones, bucles y marcadores de fin de línea
+para comprender el final de las sentencias. Por supuesto, Python tiene estructuras de
+software tradicionales como funciones. He aquí un ejemplo, en el que refactorizamos
+el código anterior en una función. Verás que la sentencia DEF indica
+que estamos escribiendo una función. Entonces cada línea que es parte de 
+la función necesita ser sangrada con un carácter de tabulación
+o un par de espacios. Una vez más, como estamos en un entorno
+interactivo, cuando la sentencia es evaluada luego de presionar MAYUSCULA + INTRO, 
+los resultados se imprimen inmediatamente abajo. Aquí está nuestra primera interacción. ¿Por qué no intentas cambiar esta función para
+aceptar tres parámetros en lugar de dos? Y que retorne la suma
+de los tres valores? OK, las funciones son geniales, pero son un
+poco diferente de lo que podrías encontrar en otros lenguajes y aquí van
+algunas sutilezas involucradas. En primer lugar, como no hay tipificación, no
+tienes que establecer el tipo de dato de retorno. En segundo lugar, no tienes que
+poner una sentencia de retorno. Hay un valor especial llamado
+"none" que se retorna. "None" es similar a null en Java y
+representa la ausencia de valor. En tercer lugar, en Python, puedes tener
+valores predeterminados para los parámetros. Pero la ciencia forense no es muy buena determinando Mens Rea, la intención. En este ejemplo, podemos reescribir la función
+"add_numbers" para que tome tres parámetros, Pero podríamos configurar el último parámetro
+para que sea "None" por defecto. Esto significa que puedes llamar a la
+función con sólo dos valores o con tres, y No es necesario volver a escribir la
+firma de la función para sobrecargarla. Esta es una implicación importante. Todos los parámetros opcionales, 
+los que tienen valores por defecto necesitan ir al final de
+la declaración de la función. También significa que puedes pasar
+parámetros opcionales como valores etiquetados. He aquí un ejemplo de
+un parámetro etiquetado. Podemos reescribir la función para
+que haya dos parámetros opcionales. Si queremos llamar a la función
+con sólo dos números pero establecer también el valor de la bandera,
+tenemos que nombrar explícitamente y Establecer el valor de la bandera en
+verdadero cuando invoca la función. Por ahora, también has visto el
+uso de la sentencia de impresión. Entraremos en más detalle, pero PRINT tomará un item, intentará convertirlo
+en una cadena y luego imprimirá la salida. No usamos esto mucho en el modo
+interactivo del intérprete, pero Es útil cuando queremos imprimir
+múltiples valores para una sola celda. Bueno, una última palabra sobre
+las funciones básicas en Python. En Python, puedes asignar
+una variable a una función. Esto puede parecer
+completamente normal o completamente extraño dependiendo
+de tu experiencia en programación. Al asignar una variable a una función, 
+puedes pasar esa variable a otras funciones permitiendo una cierta
+programación funcional básica. Hablaremos un poco de esto
+más adelante en el curso. Pero he aquí un ejemplo donde 
+definimos una función para sumar números, y entonces asignamos esa función a la variable "a",
+y luego invocamos la variable.

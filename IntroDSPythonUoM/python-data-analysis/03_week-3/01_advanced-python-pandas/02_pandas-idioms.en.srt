@@ -1,0 +1,571 @@
+1
+00:00:08,619 --> 00:00:13,137
+Python programmers will often suggest that
+there many ways the language can be used
+
+2
+00:00:13,137 --> 00:00:15,140
+to solve a particular problem.
+
+3
+00:00:15,140 --> 00:00:18,090
+But that some are more
+appropriate than others.
+
+4
+00:00:18,090 --> 00:00:21,340
+The best solutions are celebrated
+as Idiomatic Python and
+
+5
+00:00:21,340 --> 00:00:24,662
+there are lots of great examples of
+this on stack overflow and websites.
+
+6
+00:00:25,720 --> 00:00:30,200
+An idiomatic solution is often one
+which has both high performance and
+
+7
+00:00:30,200 --> 00:00:31,650
+high readability.
+
+8
+00:00:31,650 --> 00:00:33,260
+This isn't necessarily true.
+
+9
+00:00:33,260 --> 00:00:39,200
+A sort of sub-language within Python,
+Pandas has its own set of idioms.
+
+10
+00:00:39,200 --> 00:00:42,680
+We've alluded to some of these already,
+such as using vectorization whenever
+
+11
+00:00:42,680 --> 00:00:46,570
+possible, and not using iterative
+loops if you don't need to.
+
+12
+00:00:46,570 --> 00:00:47,640
+Several developers and
+
+13
+00:00:47,640 --> 00:00:52,200
+users within the Panda's community have
+used the term pandorable for these idioms.
+
+14
+00:00:52,200 --> 00:00:53,650
+I think it's a great term.
+
+15
+00:00:53,650 --> 00:00:57,810
+So, I wanted to share with you a couple of
+key features of how you can make your code
+
+16
+00:00:57,810 --> 00:00:58,530
+pandorable.
+
+17
+00:00:59,770 --> 00:01:02,150
+The first of these is
+called method chaining.
+
+18
+00:01:02,150 --> 00:01:04,140
+Now we saw that previously,
+
+19
+00:01:04,140 --> 00:01:07,460
+you could chain pandas calls together
+when you're querying DataFrames.
+
+20
+00:01:07,460 --> 00:01:11,890
+For, instance if you wanted to select
+rows based on index like county name.
+
+21
+00:01:11,890 --> 00:01:15,680
+Then you wanted to only project certain
+columns like the total population,
+
+22
+00:01:15,680 --> 00:01:20,870
+you can write a query, like 
+df.loc[“Washtenaw”][“Total Population”]
+
+23
+00:01:20,870 --> 00:01:24,480
+This is a form of chaining,
+called chain indexing.
+
+24
+00:01:24,480 --> 00:01:26,030
+And it's generally a bad practice.
+
+25
+00:01:26,030 --> 00:01:28,910
+Because it's possible that pandas
+could be returning a copy or
+
+26
+00:01:28,910 --> 00:01:33,722
+a view of the DataFrame depending
+upon the underlying NumPy library.
+
+27
+00:01:33,722 --> 00:01:37,100
+In his descriptions of idiomatic
+Pandas patterns developer
+
+28
+00:01:37,100 --> 00:01:40,470
+Tom Osberger described a rule of thumb for
+this.
+
+29
+00:01:40,470 --> 00:01:42,590
+If you see back to back square brackets,
+
+30
+00:01:42,590 --> 00:01:46,260
+then you should think carefully if
+you want to be doing chain indexing.
+
+31
+00:01:46,260 --> 00:01:49,350
+I think this is great as a sort
+of code smell or anti pattern.
+
+32
+00:01:50,550 --> 00:01:53,620
+Method chaining though,
+little bit different.
+
+33
+00:01:53,620 --> 00:01:56,440
+The general idea behind method
+chaining is that every method on
+
+34
+00:01:56,440 --> 00:01:58,980
+an object returns
+a reference to that object.
+
+35
+00:01:58,980 --> 00:02:02,470
+The beauty of this is that you can
+condense many different operations on
+
+36
+00:02:02,470 --> 00:02:07,140
+a DataFrame, for instance, into one
+line or at least one statement of code.
+
+37
+00:02:07,140 --> 00:02:11,310
+Here's an example of two pieces of
+code in pandas using our census data.
+
+38
+00:02:11,310 --> 00:02:15,290
+The first is the pandorable way to
+write the code with method chaining.
+
+39
+00:02:15,290 --> 00:02:18,660
+In this code, there's no in place flag
+being used and you can see that when we
+
+40
+00:02:18,660 --> 00:02:23,260
+first run a where query, then a dropna,
+then a set_index, and then a rename.
+
+41
+00:02:23,260 --> 00:02:26,920
+You might wonder why the whole statement
+is enclosed in parentheses and
+
+42
+00:02:26,920 --> 00:02:29,020
+that's just to make
+the statement more readable.
+
+43
+00:02:29,020 --> 00:02:31,190
+In Python,
+if you begin with an open parentheses,
+
+44
+00:02:31,190 --> 00:02:35,930
+you can span a statement over multiple
+lines and things read a little bit nicer.
+
+45
+00:02:35,930 --> 00:02:38,890
+The second example is a more
+traditional way of writing code.
+
+46
+00:02:38,890 --> 00:02:41,450
+There's nothing wrong with this
+code in the functional sense,
+
+47
+00:02:41,450 --> 00:02:46,010
+you might even be able to understand it
+better as a new person to the language.
+
+48
+00:02:46,010 --> 00:02:50,050
+It's just not as pandorable
+as the first example.
+
+49
+00:02:50,050 --> 00:02:54,810
+Now, the key with any good idiom is to
+understand when it isn't helping you.
+
+50
+00:02:54,810 --> 00:02:56,960
+In this case,
+you can actually time both methods and
+
+51
+00:02:56,960 --> 00:02:58,610
+see that the latter method is faster.
+
+52
+00:02:58,610 --> 00:03:02,460
+So, this is a particular example of
+a classic time readability trade off.
+
+53
+00:03:03,890 --> 00:03:06,130
+You'll see lots of examples
+on stock overflow and
+
+54
+00:03:06,130 --> 00:03:09,130
+in documentation of people using
+method chaining in their pandas.
+
+55
+00:03:09,130 --> 00:03:10,680
+And so, I think being able to read and
+
+56
+00:03:10,680 --> 00:03:13,076
+understand the syntax is
+really worth your time.
+
+57
+00:03:13,076 --> 00:03:16,260
+Here's another pandas idiom.
+
+58
+00:03:16,260 --> 00:03:19,420
+Python has a wonderful function called
+map, which is sort of a basis for
+
+59
+00:03:19,420 --> 00:03:21,760
+functional programming in the language.
+
+60
+00:03:21,760 --> 00:03:25,310
+When you want to use map in Python, you
+pass it some function you want called, and
+
+61
+00:03:25,310 --> 00:03:29,530
+some iterable, like a list, that you
+want the function to be applied to.
+
+62
+00:03:29,530 --> 00:03:33,280
+The results are that the function is
+called against each item in the list,
+
+63
+00:03:33,280 --> 00:03:36,799
+and there's a resulting list of all
+of the evaluations of that function.
+
+64
+00:03:37,820 --> 00:03:40,480
+Python has a similar
+function called applymap.
+
+65
+00:03:40,480 --> 00:03:43,420
+In applymap, you provide some function
+which should operate on each cell of
+
+66
+00:03:43,420 --> 00:03:47,190
+a DataFrame, and
+the return set is itself a DataFrame.
+
+67
+00:03:47,190 --> 00:03:50,330
+Now I think applymap is fine,
+but I actually rarely use it.
+
+68
+00:03:50,330 --> 00:03:53,910
+Instead, I find myself often wanting
+to map across all of the rows in
+
+69
+00:03:53,910 --> 00:03:54,830
+a DataFrame.
+
+70
+00:03:54,830 --> 00:03:58,250
+And pandas has a function that I
+use heavily there, called apply.
+
+71
+00:03:58,250 --> 00:03:59,310
+Let's look at an example.
+
+72
+00:04:00,760 --> 00:04:02,570
+Let's take our census DataFrame.
+
+73
+00:04:02,570 --> 00:04:05,560
+In this DataFrame, we have five
+columns for population estimates.
+
+74
+00:04:05,560 --> 00:04:08,710
+Each column corresponding
+with one year of estimates.
+
+75
+00:04:08,710 --> 00:04:12,130
+It's quite reasonable to want to
+create some new columns for minimum or
+
+76
+00:04:12,130 --> 00:04:15,259
+maximum values, and the apply
+function is an easy way to do this.
+
+77
+00:04:16,350 --> 00:04:19,770
+First, we need to write a function which
+takes in a particular row of data,
+
+78
+00:04:19,770 --> 00:04:23,880
+finds a minimum and maximum values,
+and returns a new row of data.
+
+79
+00:04:23,880 --> 00:04:27,230
+We'll call this function min_max,
+this is pretty straight forward.
+
+80
+00:04:27,230 --> 00:04:31,140
+We can create some small slice of a row
+by projecting the population columns.
+
+81
+00:04:31,140 --> 00:04:33,720
+Then use the NumPy min and
+max functions, and
+
+82
+00:04:33,720 --> 00:04:37,390
+create a new series with a label values
+represent the new values we want to apply.
+
+83
+00:04:39,180 --> 00:04:41,590
+Then we just need to call
+apply on the DataFrame.
+
+84
+00:04:41,590 --> 00:04:45,890
+Apply takes the function and the axis
+on which to operate as parameters.
+
+85
+00:04:45,890 --> 00:04:47,360
+Now, we have to be a bit careful,
+
+86
+00:04:47,360 --> 00:04:50,790
+we've talked about axis zero being
+the rows of the DataFrame in the past.
+
+87
+00:04:50,790 --> 00:04:54,690
+But this parameter is really
+the parameter of the index to use.
+
+88
+00:04:54,690 --> 00:04:59,090
+So, to apply across all rows,
+you pass axis equal to one.
+
+89
+00:04:59,090 --> 00:05:02,648
+Of course there's no need to limit
+yourself to returning a new series object.
+
+90
+00:05:02,648 --> 00:05:05,575
+If you're doing this as part of data
+cleaning your likely to find yourself
+
+91
+00:05:05,575 --> 00:05:08,660
+wanting to add new data to
+the existing DataFrame.
+
+92
+00:05:08,660 --> 00:05:10,892
+In that case you just
+take the row values and
+
+93
+00:05:10,892 --> 00:05:14,705
+add in new columns indicating the max and
+minimum scores.
+
+94
+00:05:14,705 --> 00:05:18,675
+This is a regular part of my workflow when
+bringing in data and building summary or
+
+95
+00:05:18,675 --> 00:05:20,385
+descriptive statistics.
+
+96
+00:05:20,385 --> 00:05:22,755
+And is often used heavily with
+the merging of DataFrames.
+
+97
+00:05:24,305 --> 00:05:28,435
+Okay, this is all great, and apply is an
+extremely important tool in your toolkit.
+
+98
+00:05:28,435 --> 00:05:31,795
+But this lecture wasn't really supposed
+to be about the new features of the API,
+
+99
+00:05:31,795 --> 00:05:34,710
+but about making pandorable code.
+
+100
+00:05:34,710 --> 00:05:38,040
+The reason I introduced supply
+here is because you rarely see it
+
+101
+00:05:38,040 --> 00:05:41,680
+used with large function definitions,
+like we did.
+
+102
+00:05:41,680 --> 00:05:44,750
+Instead, you typically
+see it used with lambdas.
+
+103
+00:05:44,750 --> 00:05:47,920
+Now, you'll recall from the first week
+of this course that knowing lambda isn't
+
+104
+00:05:47,920 --> 00:05:49,590
+a requirement of the course.
+
+105
+00:05:49,590 --> 00:05:51,920
+But to get the most of
+the discussions you'll see online,
+
+106
+00:05:51,920 --> 00:05:54,970
+you're going to need to know
+how at least read lambdas.
+
+107
+00:05:54,970 --> 00:05:58,410
+Here's a one line example of how you might
+calculate the max of the columns using
+
+108
+00:05:58,410 --> 00:05:59,950
+the apply function.
+
+109
+00:05:59,950 --> 00:06:03,710
+You can imagine how you might chain
+several apply calls with lambdas together
+
+110
+00:06:03,710 --> 00:06:06,740
+to create a readable yet
+succinct data manipulation script.
+
+111
+00:06:08,340 --> 00:06:10,070
+So there are a couple of pandas idioms.
+
+112
+00:06:10,070 --> 00:06:13,090
+But I think there's many more, and
+I haven't talked about them here.
+
+113
+00:06:13,090 --> 00:06:15,160
+So here's an unofficial assignment for
+you.
+
+114
+00:06:15,160 --> 00:06:19,030
+Go look at some of the top ranked
+questions on pandas on Stack Overflow, and
+
+115
+00:06:19,030 --> 00:06:22,230
+look at how some of the more experienced
+authors, answer those questions.
+
+116
+00:06:22,230 --> 00:06:24,600
+Do you see any interesting patterns?
+
+117
+00:06:24,600 --> 00:06:26,567
+Chime in on the course
+discussion forums and
+
+118
+00:06:26,567 --> 00:06:28,980
+let's build some pandorable
+documents together.
+
+119
+00:06:30,130 --> 00:06:32,810
+Our next lectures is going to be on
+group functions and I'll see you then.

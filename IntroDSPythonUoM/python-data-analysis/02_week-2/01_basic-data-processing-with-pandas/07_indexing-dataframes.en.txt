@@ -1,0 +1,79 @@
+As we've seen, both series and DataFrames
+can have indices applied to them. The index is essentially
+a row level label, and we know that rows correspond to axis zero. In our Olympics data, we indexed the data
+frame by the name of the country. Indices can either be inferred,
+such as when we create a new series without an index,
+in which case we get numeric values, or they can be set explicitly, like when we use the dictionary
+object to create the series, or when we loaded data from the CSV
+file and specified the header. Another option for setting an index
+is to use the set_index function. This function takes a list of columns and
+promotes those columns to an index. Set index is a destructive process,
+it doesn't keep the current index. If you want to keep the current index, you
+need to manually create a new column and copy into it values from
+the index attribute. Let's go back to our Olympics DataFrame. Let's say that we don't want to index
+the DataFrame by countries, but instead want to index by the number of
+gold medals that were won at summer games. First we need to preserve the country
+information into a new column. We can do this using the indexing operator
+or the string that has the column label. Then we can use the set_index to set index
+of the column to summer gold medal wins. You'll see that when we create a new index
+from an existing column it appears that a new first row has been
+added with empty values. This isn't quite what's happening. And we know this in part because
+an empty value is actually rendered either as a none or an NaN if the data
+type of the column is numeric. What's actually happened is
+that the index has a name. Whatever the column name was in the
+Jupiter notebook has just provided this in the output. We can get rid of the index completely
+by calling the function reset_index. This promotes the index into a column and
+creates a default numbered index. One nice feature of pandas is that it has
+the option to do multi-level indexing. This is similar to composite keys
+in relational database systems. To create a multi-level index,
+we simply call set index and give it a list of columns that we're
+interested in promoting to an index. Pandas will search through these in order,
+finding the distinct data and forming composite indices. A good example of this is often found
+when dealing with geographical data which is sorted by regions or demographics. Let's change data sets and look at
+some census data for a better example. This data is stored in
+the file census.csv and comes from
+the United States Census Bureau. In particular, this is a breakdown of the population
+level data at the US county level. It's a great example of how
+different kinds of data sets might be formatted when you're
+trying to clean them. For instance, in this data set
+there are two summarized levels, one that contains summary data for
+the whole country. And one that contains summary data for
+each state, and one that contains summary data for
+each county. I often find that I want to see a list of
+all the unique values in a given column. In this DataFrame,
+we see that the possible values for the sum level are using the unique
+function on the DataFrame. This is similar to the SQL
+distinct operator. Here we can run unique on the sum
+level of our current DataFrame and see that there are only two
+different values, 40 and 50. Let's get rid of all of the rows that
+are summaries at the state level and just keep the county data. Also while this data set is interesting
+for a number of different reasons, let's reduce the data that we're going
+to look at to just the total population estimates and the total number of births. We can do this by creating a list of
+column names that we want to keep then project those and assign the
+resulting DataFrame to our df variable. The US Census data breaks down estimates
+of population data by state and county. We can load the data and set the index
+to be a combination of the state and county values and
+see how pandas handles it in a DataFrame. We do this by creating a list of
+the column identifiers we want to have indexed. And then calling set index with this list
+and assigning the output as appropriate. We see here that we have a dual index,
+first the state name and then the county name. An immediate question which comes up
+is how we can query this DataFrame. For instance, we saw previously
+that the loc attribute of the DataFrame can take
+multiple arguments. And it could query both the row and
+the columns. When you use a MultiIndex, you must provide the arguments in
+order by the level you wish to query. Inside of the index,
+each column is called a level and the outermost column is level zero. For instance, if we want to see the
+population results from Washtenaw County, which is where I live, you'd want to the
+first argument as the state of Michigan. You might be interested in
+just comparing two counties. For instance, Washtenaw where I live and
+Wayne County which covers Detroit. To do this, we can pass the loc method, a list of tuples which describe
+the indices we wish to query. Since we have a MultiIndex of two values,
+the state and the county, we need to provide two values as
+each element of our filtering list. Okay so that's how hierarchical
+indices work in a nutshell. They're a special part of
+the pandas library which I think can make management and
+reasoning about data easier. Of course hierarchical
+labeling isn't just for rows. For example, you can transpose this matrix
+and now have hierarchical column labels. And projecting a single
+column which has these labels works exactly the way
+you would expect it to.

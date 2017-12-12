@@ -1,0 +1,58 @@
+Chào mọi người Hôm nay, chúng ta sẽ học về NumPy, một package được sử dụng
+rộng rãi trong cộng đồng khoa học dữ liệu cho phép chúng ta làm việc có hiệu quả
+với các mảng (array) và ma trận trong Python Đầu tiên, chúng ta import NumPy với np. Nó sẽ cho phép chúng ta sử dụng tắt
+np đại diện cho NumPy. Bây giờ, ta hãy thử tạo mảng đầu tiên. Bắt đầu bằng việc tạo một danh sách
+và chuyển nó thành mảng. Và đây là mảng NumPy đầu của chúng ta. Chúng ta có thể làm tắt
+bằng cách chuyển đổi list trực tiếp. Bây giờ hãy tạo mảng đa chiều bằng cách
+chuyển một danh sách chứa các danh sách. Chúng ta truyền vào 2 danh sách với 3 phần tử
+mỗi danh sách, và ta có một mảng 2x3 Chúng ta có thể kiểm tra kích thước
+bằng cách sử dụng thuộc tính hình dạng. Với hàm sắp xếp, chúng ta truyền vào
+vị trí mở đầu, vị trí kết thúc và bước nhảy, và nó trả về các giá trị cách đều nhau
+trong một khoảng xác định. Vì vậy, giả sử chúng ta muốn biến mảng số liệu này 
+thành một mảng 3x5. Chúng ta có thể dùng reshape để thực hiện. Chức năng linspace cũng tương tự để
+sắp xếp, trừ việc chúng ta phải khai báo bao nhiêu số cần được trả về, và
+nó sẽ chia ra thành các khoảng phù hợp. Chúng ta có thể dùng resize để thay đổi
+kích thước tại chỗ. NumPy cũng có một số chức năng đi kèm
+và đường dẫn tắt để tạo mảng. ones trả về một mảng chứa toàn số 1,
+zeros trả về mảng toàn số 0 eye trả về mảng với 1 xếp theo đường chéo
+và 0 ở các vị trí còn lại và diag tạo ra một mảng chéo. Để tạo một mảng với các giá trị lặp lại,
+chúng ta có thể truyền một danh sách lặp, hoặc ta có thể dùng hàm lặp của NumPy. Hãy để ý sự khác biệt
+giữa 2 kết quả. Chúng ta cũng có thể kết hợp các mảng
+để tạo một mảng mới. Hãy thử tạo một mảng 2x3 và
+ghép với chính nó theo chiều dọc, sau khi nhân với 2. Và đây là điều tương tự,
+nhưng ghép theo chiều ngang. Giờ hãy quan sát vài phép toán
+bạn có thể làm với các mảng NumPy. Tiến hành cộng, trừ, nhân chia
+từng phần tử một cách đơn giản, cũng như lũy thừa
+tất cả các số trong mảng với một số mũ. Với những người quen với đại số tuyến tính, tích vô hướng có thể được thực hiện
+qua chức năng dot. Hãy tạo một mảng mới bằng mảng y đã có
+và giá trị bình phương của nó. Kích thước của mảng này là 2x3. Chúng ta có thể chuyển vị
+mảng thông qua phương pháp T hoán vị giữa các dòng và cột. Kích thước của mảng sau khi chuyển vị là 3x2 Sử dụng dtype, ta có thể thấy
+kiểu dữ liệu mà mảng đang có, và với astype,
+ ta có thể chuyển mảng thành kiểu khác. NumPy cũng có nhiều chức năng
+toán học hữu ích có thể sử dụng Hãy thử vài ứng dụng phổ biến. Đây là mảng a mới được tạo. Và ta có thể tính tổng các giá trị trong mảng,
+giá trị lớn nhất nhỏ nhất, hay trung bình và độ lệch chuẩn. Để tìm chỉ số của giá trị lớn nhất hay nhỏ nhất
+ta có thể dùng argmax và argmin. Tiếp theo, ta sẽ học về chỉ số và chia từng phần. Tạo một mảng với giá trị từ 0 đến 12 Chúng ta có thể dùng ngoặc vuông để lấy
+giá trị tại một vị trí nhất định, và ngoặc tròn để lấy giá trị trong một khoảng. Trong ngoặc là giá trị bắt đầu và bước nhảy. Không cần thiết phải chỉ rõ chỉ số bắt đầu hoặc kết thúc. Và chúng ta cũng có thể dùng số âm để
+lấy giá trị ngược từ cuối lên trong mảng. Với ví dụ đầu tiên, hãy cùng xem
+khoảng giá trị bắt đầu từ chỉ số 1 và kết thúc trước chỉ số 5. Tiếp đó, ta hãy lấy một lát gồm
+4 số cuối của mảng. Và đây, chúng ta bắt đầu từ
+chỉ số thứ 5 từ cuối, tới đầu mảng và bước nhảy ngược là 2. Ta hãy xem nó hoạt động như thế nào với mảng 2 chiều. Đầu tiên, ta tạo mảng 2 chiều, từ 0 đến 35. Ta có thể lấy một giá trị cụ thể
+bằng cách sử dụng dấu phẩy. Đây là giá trị của số ở hàng thứ 2, cột 2. Giờ hãy thử dùng ngoặc tròn để
+lấy giá trị hàng thứ 3 và cột thứ 3 tới cột 6. Chúng ta cũng có thể làm những việc
+như lấy 2 hàng đầu tiên, ở tất cả các cột trừ cột cuối. Đây là cách chúng ta chọn bước nhảy 2
+phần tử một tính từ dòng cuối cùng. Ta cũng có thể dùng ngoặc vuông để
+thiết lập thứ tự cũng như gán giá trị. Ví dụ, điều này sẽ trả về
+một mảng chứa các phần tử trong mảng ban đầu của ta có giá trị lớn hơn 30. Và việc gán sẽ lấy những giá trị trong
+mảng ban đầu của ta và gán một giá trị mới cho nó. Ở đây, chúng ta giới hạn giá trị lớn nhất của
+các phần tử trong mảng là 30. Tiếp theo, hãy tìm hiểu về sao chép dữ liệu trong NumPy. Đầu tiên, tạo một mảng mới r2,
+là một phần của mảng r. Bây giờ, hãy gán tất cả các phần tử
+của mảng này bằng 0. Khi chúng ta kiểm tra mảng gốc r, Ta có thể thấy phần giá trị
+trong r cũng đã bị thay đổi. Do đó, chúng ta cần phải nhớ điều này và thật cẩn thận khi làm việc với mảng trong NumPy. Nếu chúng ta muốn tạo một bản sao của mảng r
+mà sẽ không làm thay đổi giá trị mảng ban đầu, ta có thể dùng r_copy. Có thể thấy nếu ta thay đổi giá trị
+của tất cả phần tử trong r_copy thành 10, các giá trị mảng gốc không hề bị thay đổi. Cuối cùng, chúng ta học về vòng lặp trong mảng. Đầu tiên, tạo một mảng 4x3
+bằng các số ngẫu nhiên từ 0 đến 9. Chúng ta có thể tạo vòng lặp từng hàng
+bằng cách ghi "for row in test" Chúng ta có thể tạo vòng lặp qua số thứ tự hàng
+ bằng cách sử dụng hàm length lên test, length sẽ trả về số hàng mảng có. Ta có thể phối hợp 2 cách tạo vòng lặp này bằng enumerate, với chức năng trả về hàng và
+số thứ tự hàng. Ta sẽ tạo một mảng mới, test2. Nếu ta muốn dùng vòng lặp trong cả 2 mảng,
+có thể sử dụng zip. NumPy có rất nhiều chức năng. Vì vậy, hãy nhớ xem tài liệu hướng dẫn
+để tìm hiểu thêm các tính năng tuyệt với này. Cám ơn đã đến cùng tôi Hy vọng gặp bạn lần sau.

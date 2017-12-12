@@ -1,0 +1,45 @@
+Series là một trong những cấu trúc dữ liệu chính của Pandas. Bạn có thể coi nó như một dạng kết hợp giữa List và Dictionary của Python. Mọi dữ liệu được lưu trữ theo thứ tự và có Labels để bạn có thể gọi chúng. Một cách dễ hình dung đây là dữ liệu gồm hai cột. Cột đầu tiên là Index, nó giống như Keys trong Dictionary. Trong khi cột thứ hai mới là dữ liệu. Bạn phải chú ý là cột dữ liệu có Label riêng của nó và có thể gọi chúng bằng thuộc tính .name Điều này khác với từ điển và rất hữu ích khi nó hợp nhất nhiều cột dữ liệu. Và chúng ta sẽ nói về điều đó sau trong khóa học. Như bạn mong muốn, bạn có thể tạo ra một chuỗi
+bằng việc truyền vào một danh sách các giá trị. Khi bạn làm điều này hàm panda tự động
+gán một chỉ số bắt đầu từ 0 và đặt tên của chuỗi là None. Hãy xem ví dụ về điều này. Đầu tiên tôi sẽ bắt đầu bằng việc nhập
+thư viện hàm panda là pd, sau đó hãy nhìn vào đối tượng. Ở đây bạn có thể thấy tài liệu chỉ ra rằng
+bạn có thể thực hiện trong một số dữ liệu, một chỉ số và một tên. Dữ liệu có thể là bất cứ cái gì, nó
+giống như một mảng, như một danh sách. Vậy hãy thử. Chúng ta sẽ chỉ làm một danh sách về
+ba loài vật yêu thích nhất, một con hổ, một con gấu và một con nai. Chúng ta sẽ thấy ở đây hàm
+pandas tự động xác định kiểu dữ liệu được tổ chức trong danh sách, trong trường hợp này
+chúng ta thực hiện trong danh sách các chuỗi và hàm panda đặt kiểu cho đối tượng. Chúng ta không phải sử dụng các chuỗi. Nếu chúng ta thực hiện trong
+danh sách tất cả các số, ví dụ, chúng ta có thể thấy hàm panda đặt kiểu int64. Bên dưới hàm panda lưu trữ các giá trị trong
+một hàng đã nhập sử dụng thư viện numpy. Điều này cung cấp tốc độ tăng lên
+đáng kể khi xử lí dữ liệu so với danh sách python truyền thống. Có một số loại chi tiết tồn tại cho hiệu suất mà rất quan trọng để biết. Điều quan trọng nhất là numpy và hàm
+panda xử lí dữ liệu bị thiếu thế nào. Trong pyhton chúng ta có kiểu none
+để chỉ ra việc thiếu dữ liệu. Nhưng chúng ta làm gì nếu chúng ta muốn có
+một danh sách định kiểu giống như chúng ta làm trong hàng loạt đối tượng? Bên dưới hàm panda thực hiện
+một số loại chuyển đổi. Nếu chúng ta tạo ra danh sách các chuỗi
+và chúng ta có một phần tử, một kiểu None, hàm panda chèn nó là None và sử dụng
+loại đối tượng này cho hàng nằm bên dưới. Nếu chúng ta tạo ra danh sách các số,
+các số nguyên và đặt vào loại None, hàm panda tự động chuyển điều này thành
+một giá trị số thực động đặc biệt được xác định là NaN, viết tắt của not a number. Với những người có thể không làm
+khoa học máy tính trong python trước đây, điều này là một điểm rất quan trọng. NaN không phải là None và khi
+chúng ta thử kiểm tra, nó sai. Hóa ra là bạn không thể tự động
+làm kiểm tra NaN với chính nó. Khi bạn làm, câu trả lời luôn luôn là sai. Bạn cần phải sử dụng các
+hàm đặc biệt để kiểm tra sự biểu thị không phải số như là số pi. Chúng ta sẽ quay lại điều này sau trong bài tập nhưng nhớ rằng khi bạn thấy NaN có
+nghĩa là tương tự như none nhưng nó là giá trị số và nó được thực hiện
+khác vì các lí do hiệu quả. Hãy nói nhiều hơn về cách các
+chuỗi hàm panda có thể được tạo ra. Trong khi danh sách động vật của tôi có thể là
+một cách phổ biến để tạo ra một số dữ liệu, thông thường bạn dán nhãn dữ liệu
+mà bạn muốn thao tác. Một chuỗi có thể được tạo ra từ từ điển dữ liệu. Nếu bạn làm điều này, chỉ số được gán
+tự động vào các chìa khóa của từ điển mà bạn đã cung cấp và
+không chỉ gia tăng số nguyên. Đây là một ví dụ sử dụng các dữ liệu từ wikipedia
+trên các môn thể thao quốc gia chính thức. Khi chúng ta tạo ra các chuỗi, bạn thấy rằng, bởi vì nó là một chuỗi dữ liệu, hàm panda
+tạo ra kiểu dữ liệu của các chuỗi đối tượng. Chúng ta thấy danh sách của các
+quốc gia là giá trị của các chuỗi và giá trị chỉ số có thể được đặt vào các
+chìa khóa từ từ điển của chúng ta. Khi các chuỗi được tạo ra, chúng ta có thể có chỉ số
+sử dụng thuộc tính chỉ số. Bạn có thể chia chỉ số từ dữ liệu bằng cách truyền chỉ số như một danh sách tới các chuỗi. Điều gì xảy ra nếu danh sách các giá trị
+của bạn trong đối tượng chỉ số không liên kết với các chìa khóa trong
+thư viện của bạn để tạo ra các chuỗi? Vâng, hàm panda ghi đè lên
+tự động để ưu tiên và chỉ tất cả các giá trị chỉ số mà bạn đã cung cấp. Nó sẽ bỏ qua nó từ từ điển của bạn, tất cả các
+chìa khóa không nằm trong chỉ số của bạn và hàm panda sẽ thêm kiểu non hoặc các
+giá trị NaN cho các chỉ số bạn cung cấp, điều này không nằm trong danh sách
+chìa khóa thư viện của bạn. Trong ví dụ này chúng ta truyền vào
+một thư viện có bốn mục nhưng chỉ hai mục được thực hiện trong chuỗi theo danh sách chỉ số. Chúng ta thấy rằng khúc côn cầu đã được thêm vào
+nhưng bởi vì nó cũng nằm trong danh sách chỉ số, nó không có giá trị liên quan đến nó. Đó là cách chúng ta tạo ra một chuỗi. Trong lớp tiếp theo chúng ta sẽ đào sâu hơn
+và xem cách lấy dữ liệu từ các chuỗi.

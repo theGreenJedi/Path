@@ -1,0 +1,68 @@
+Hi everyone. Today, we will be learning Numpy,
+a package widely used in the data science community which lets us work efficiently
+with arrays and matrices in Python. First, let's import Numpy as np. This lets us use the shortcut
+np to refer to Numpy. Now let's make our first array. We can start by creating a list and
+converting it to an array. So here's our first Numpy array. We can do it more succinctly
+by passing the list directly. Now let's make multidimensional
+arrays by passing in a list of lists. We passed in two lists with three elements
+each, and we get a two by three array. We can check the dimensions
+by using the shape attribute. For the arange function, we pass in
+a start, a stop, and a step size, and it returns evenly spaced
+values within a given interval. So suppose we wanted to convert this array
+of numbers to a three by five array. We can use reshape to do that. The linspace function is similar
+to arange, except we tell it how many numbers we want returned, and
+it will split up the interval accordingly. We can use resize to change
+the dimensions in place. Numpy also has several built-in functions
+and shortcuts for creating arrays. ones returns an array of ones,
+zeros an array of zeros. eye returns an array with ones on
+the diagonal and zeros everywhere else, and diag constructs a diagonal array. To create an array with repeated values,
+we can pass in a repeated list, or we can use Numpy's repeat function. Notice the difference
+between the two outputs. We can also combine arrays
+to create new ones. Let's create a two by three array of ones
+and stack it vertically with itself, multiplied by 2. And here's the same thing,
+but stacking horizontally. Now, let's look into some of the
+operations you can do with Numpy arrays. Performing elementwise addition,
+subtraction, multiplication, and division is straightforward, as is raising
+all the numbers of an array to a power. For those familiar with linear algebra, the dot product can be done
+using the dot function. Let's create a new array using a previous
+array y and its squared values. The shape of this array is two by three. We can also take the transpose
+of an array using the t method, which swaps the rows and columns. The shape of the transposed
+array is three by two. Using dtype, we can see what
+type of data the array has, and with astype,
+cast an array to a different type. Numpy also has many useful math
+functions that we can use. Let's look at a few commonly used ones. Here's our new array a. And we can look the sum of the values
+in the array, the maximum and minimum, Or the mean and standard deviation. To find the index of a maximum or minimum
+value, we can use argmax and argmin. Next, let's learn about indexing and
+slicing. Let's create an array with
+the squares of 0 through 12. We can use bracket notation to get
+the value at a particular index, and the colon notation to get a range. The notation is start and stepsize. Specifying the starting or
+ending index is not necessary. And we can also use negatives to
+count back from the end of the array. For our first example, let's take a look
+at the range starting from index one and stopping before index five. Next, let's get a slice of the last
+four elements of the array. And here, we're starting fifth from
+the end to the beginning of the array and counting backwards by two. Let's see how this extends
+to a two-dimensional array. First, let's make a two dimensional array,
+0 to 35. We can get a specific value
+by using the comma notation. Here's the value at the second row and
+second column. Now let's use colon notation to
+get a slice of the third row and columns three to six. We can also do something like
+get the first two rows and all of the columns except the last. This is how we would select every
+second element from the last row. We can also use the bracket operator to
+do conditional indexing and assignment. For example, this will return
+an array that is the elements of our original array that are greater than 30. And this assignment will take those
+elements within our original array and assign them to a new value. Here, we're capping the maximum value
+of the elements in our array to 30. Next, let's look at copying data in Numpy. First, let's create a new array r2,
+which is a slice of the array r. Now, let's set all the elements
+of this array to zero. When we look at the original array r, we can see that the slice
+in r has also been changed. So this is something to keep in mind and be careful about when
+working with Numpy arrays. If we wish to create a copy of the r array
+that will not change the original array, we can use r_copy. We can see that if we change the values
+of all the elements in r_copy to ten, the original array r remains unchanged. Lastly, let's learn how
+to iterate over arrays. First, let's create a four by three array
+of random numbers, from zero through nine. We can iterate by row by typing for
+row in test, for example. We can iterate by row index by
+using the length function on test, which returns the number of rows. We can combine these two ways
+of iterating by using enumerate, which gives us the row and
+the index of the row. Let's make a new array, test2. If we wish to iterate through both arrays,
+we can use zip. Numpy has a lot to offer. So be sure to look at the documentation
+to find out about more great features. Thanks for joining me. Hope to see you next time.

@@ -1,0 +1,411 @@
+1
+00:00:08,684 --> 00:00:11,363
+The common work flow is to read
+your data into a DataFrame
+
+2
+00:00:11,363 --> 00:00:14,042
+then reduce this DataFrame
+to the particular columns or
+
+3
+00:00:14,042 --> 00:00:17,260
+rows that you're interested
+in working with.
+
+4
+00:00:17,260 --> 00:00:20,500
+As you've seen, the Panda's toolkit
+tries to give you views on a DataFrame.
+
+5
+00:00:20,500 --> 00:00:24,650
+This is much faster than copying data and
+much more memory efficient too.
+
+6
+00:00:25,740 --> 00:00:28,800
+But it does mean that if you're
+manipulating the data you have to be aware
+
+7
+00:00:28,800 --> 00:00:31,430
+that any changes to
+the DataFrame you're working on
+
+8
+00:00:31,430 --> 00:00:34,630
+may have an impact on the base
+data frame you used originally.
+
+9
+00:00:35,810 --> 00:00:39,380
+Here's an example using our same
+purchasing DataFrame from earlier.
+
+10
+00:00:39,380 --> 00:00:44,460
+We can create a series based on just the
+cost category using the square brackets.
+
+11
+00:00:44,460 --> 00:00:48,540
+Then we can increase the cost in
+this series using broadcasting.
+
+12
+00:00:48,540 --> 00:00:53,620
+Now if we look at our original DataFrame,
+we see those costs have risen as well.
+
+13
+00:00:53,620 --> 00:00:56,150
+This is an important
+consideration to watch out for.
+
+14
+00:00:56,150 --> 00:00:58,113
+If you want to explicitly use a copy,
+
+15
+00:00:58,113 --> 00:01:02,511
+then you should consider calling the copy
+method on the DataFrame for it first.
+
+16
+00:01:04,327 --> 00:01:08,930
+In this course, we'll be largely using
+smaller, moderate-sized datasets.
+
+17
+00:01:08,930 --> 00:01:09,700
+As I mentioned,
+
+18
+00:01:09,700 --> 00:01:14,470
+a common workflow is to read the dataset
+in, usually from some external file.
+
+19
+00:01:14,470 --> 00:01:18,630
+We saw previously how you can do this
+using Python, and lists, and dictionaries.
+
+20
+00:01:18,630 --> 00:01:22,190
+You can imagine how you might use those
+dictionaries to create a Pandas DataFrame.
+
+21
+00:01:23,310 --> 00:01:25,620
+Thankfully, Pandas has
+built-in support for
+
+22
+00:01:25,620 --> 00:01:29,140
+delimited files such as CSV
+files as well as a variety of
+
+23
+00:01:29,140 --> 00:01:33,850
+other data formats including relational
+databases, Excel, and HTML tables.
+
+24
+00:01:34,990 --> 00:01:37,440
+I've saved a CSV file called olympics.csv,
+
+25
+00:01:37,440 --> 00:01:41,940
+which has data from Wikipedia that
+contains a summary list of the medal
+
+26
+00:01:41,940 --> 00:01:43,690
+various countries have
+won at the Olympics.
+
+27
+00:01:44,950 --> 00:01:48,180
+We can take a look at this file
+using the shell command cat.
+
+28
+00:01:48,180 --> 00:01:51,110
+Which we can invoke directly
+using the exclamation point.
+
+29
+00:01:52,110 --> 00:01:55,550
+What happens here is that when the Jupyter
+notebook sees a line beginning with
+
+30
+00:01:55,550 --> 00:02:00,632
+an exclamation mark, it sends the rest of
+the line to the operating system shell for
+
+31
+00:02:00,632 --> 00:02:01,540
+evaluation.
+
+32
+00:02:01,540 --> 00:02:05,690
+So cat works on Linux and Macs,
+as well as in the Coursera platform, but
+
+33
+00:02:05,690 --> 00:02:07,610
+might not work on Windows.
+
+34
+00:02:07,610 --> 00:02:09,310
+You don't need to worry
+too much about this.
+
+35
+00:02:09,310 --> 00:02:12,752
+I just wanted to show how a Jupyter
+notebook can integrate with the operating
+
+36
+00:02:12,752 --> 00:02:15,618
+system to provide you with even
+more tools to look at your data.
+
+37
+00:02:17,346 --> 00:02:20,490
+We see from the cat output that
+there seems to be a numeric list
+
+38
+00:02:20,490 --> 00:02:24,240
+of columns followed by a bunch
+of column identifiers.
+
+39
+00:02:24,240 --> 00:02:27,470
+The column identifiers have some
+odd looking characters in them.
+
+40
+00:02:27,470 --> 00:02:30,510
+This is the unicode numero sign,
+which means number of.
+
+41
+00:02:31,630 --> 00:02:33,990
+Then we have rows of data,
+all columns separated.
+
+42
+00:02:35,270 --> 00:02:38,170
+We can read this into a DataFrame
+by calling the read_csv
+
+43
+00:02:38,170 --> 00:02:40,200
+function of the module.
+
+44
+00:02:40,200 --> 00:02:43,610
+When we look at the DataFrame we see
+that the first cell has an NaN in it
+
+45
+00:02:43,610 --> 00:02:47,320
+since it's an empty value, and the rows
+have been automatically indexed for us.
+
+46
+00:02:48,680 --> 00:02:51,890
+It seems pretty clear that the first
+row of data in the DataFrame is what
+
+47
+00:02:51,890 --> 00:02:53,390
+we really want to see as the column names.
+
+48
+00:02:53,390 --> 00:02:57,500
+It also seems like the first column
+in the data is the country name,
+
+49
+00:02:57,500 --> 00:02:58,990
+which we would like to make an index.
+
+50
+00:03:00,170 --> 00:03:04,060
+Read csv has a number of parameters
+that we can use to indicate
+
+51
+00:03:04,060 --> 00:03:06,429
+to Pandas how rows and
+columns should be labeled.
+
+52
+00:03:08,320 --> 00:03:13,380
+For instance, we can use the index call to
+indicate which column should be the index
+
+53
+00:03:13,380 --> 00:03:17,180
+and we can also use the header parameter
+to indicate which row from the data file
+
+54
+00:03:17,180 --> 00:03:19,010
+should be used as the header.
+
+55
+00:03:19,010 --> 00:03:23,732
+Let's re-import that data and center index
+value to be 0 which is the first column
+
+56
+00:03:23,732 --> 00:03:27,458
+and let set a column headers to be
+read from the second row of data.
+
+57
+00:03:27,458 --> 00:03:30,060
+We can do this by using
+the skip rows parameters,
+
+58
+00:03:30,060 --> 00:03:34,316
+to tell Pandas to ignore the first row,
+which was made up of numeric column names.
+
+59
+00:03:36,758 --> 00:03:41,520
+Now this data came from the all time
+Olympic games medal table on Wikipedia.
+
+60
+00:03:41,520 --> 00:03:46,897
+If we head to the page we could see
+that instead of running gold, silver and
+
+61
+00:03:46,897 --> 00:03:51,839
+bronze in the pages, these nice
+little icons with a one, a two, and
+
+62
+00:03:51,839 --> 00:03:57,564
+a three in them In our csv file these
+were represented with the strings 01 !,
+
+63
+00:03:57,564 --> 00:03:59,090
+02 !, and so on.
+
+64
+00:03:59,090 --> 00:04:03,510
+We see that the column values are repeated
+which really isn't good practice.
+
+65
+00:04:03,510 --> 00:04:08,759
+Panda's recognize this in a panda.1 and
+.2 to make things more unique.
+
+66
+00:04:09,950 --> 00:04:12,540
+But this labeling isn't really
+as clear as it could be, so
+
+67
+00:04:12,540 --> 00:04:14,570
+we should clean up the data file.
+
+68
+00:04:14,570 --> 00:04:18,500
+We can of course do this just by going and
+editing the CSV file directly, but
+
+69
+00:04:18,500 --> 00:04:21,640
+we can also set the column names
+using the Pandas name property.
+
+70
+00:04:22,930 --> 00:04:27,090
+Panda stores a list of all of
+the columns in the .columns attribute.
+
+71
+00:04:27,090 --> 00:04:30,540
+We can change the values of the column
+names by iterating over this list and
+
+72
+00:04:30,540 --> 00:04:33,280
+calling the rename method
+of the data frame.
+
+73
+00:04:33,280 --> 00:04:36,650
+Now, I'm going to copy and
+paste this in to speed up things but
+
+74
+00:04:36,650 --> 00:04:38,400
+we can walk through what is going on here.
+
+75
+00:04:39,600 --> 00:04:44,520
+Here we just iterate through all
+of the columns looking to see if
+
+76
+00:04:44,520 --> 00:04:47,830
+they start with a 01, 02,
+03 or numeric character.
+
+77
+00:04:47,830 --> 00:04:50,210
+If they do, we can call rename and
+
+78
+00:04:50,210 --> 00:04:54,030
+set the column parameters to a dictionary
+with the keys being the column we want to
+
+79
+00:04:54,030 --> 00:04:56,630
+replace and
+the value being the new value we want.
+
+80
+00:04:57,700 --> 00:05:00,730
+Here we'll slice some of
+the old values in two,
+
+81
+00:05:00,730 --> 00:05:03,890
+since we don't want to lose
+the unique appended values.
+
+82
+00:05:03,890 --> 00:05:07,343
+We'll also set the ever-important
+in place parameter to true so
+
+83
+00:05:07,343 --> 00:05:09,991
+Pandas knows to update
+this data frame directly.
+
+84
+00:05:12,625 --> 00:05:16,191
+All right, that's more on the data frame
+with a focus on the workflow of actually
+
+85
+00:05:16,191 --> 00:05:19,660
+getting data in and into a place
+where we might want to query it.

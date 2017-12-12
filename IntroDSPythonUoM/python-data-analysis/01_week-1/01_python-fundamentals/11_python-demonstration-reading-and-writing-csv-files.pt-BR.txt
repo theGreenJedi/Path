@@ -1,0 +1,45 @@
+Bem-vindo ao tutorial de hoje, onde aprenderemos
+os fundamentos de iterações via arquivos CSV, separados por vírgula, para criar dicionários
+e organizar estatísticas sumarizadas. Primeiro, vamos importar o módulo CSV, o qual
+nos ajudará a ler nosso arquivo CSV. Usando alguma magia do iPython, vamos estabelecer a precisão de 
+mostrar 2 casas decimais (números reais). E em seguida, ler o nosso mpg.csv
+usando csv.DictReader e convertê-lo em uma lista de dicionários. Vejamos os três primeiros
+elementos de nossa lista. Podemos ver que os dicionários na 
+lista têm os nomes das colunas separadas por vírgulas (do arquivo csv) e os dados de cada
+carro em particular, que são os seus valores. O comprimento da nossa lista é 234, isso significa que temos um dicionário para
+cada um dos 234 carros no arquivo CSV. Podemos ver o nome das colunas do 
+CSV usando o método key. Se quisermos encontrar a média do consumo na cidade,
+em MPG - milhas por galão, para todos os carros do arquivo CSV, temos que somar 'city MPG' de todos
+os dicionários da nossa lista e dividir pelo comprimento da lista. Dado que o tipo de todos os valores
+em nosso dicionário é string, precisamos converter para float
+ante de realizarmos as operações matemáticas. De modo semelhante, podemos descobrir a média, em MPG, na
+estrada, de todos os carros do nosso arquivo CSV. E faz sentido que a média de consumo de combustível
+ na estrada seja maior do que a média de consumo na cidade. Vejamos um exemplo um pouco
+mais complexo. Digamos que queremos saber
+MPG médio na cidade e agrupado pelo número de
+cilindros que um carro tem. Criar um conjunto de valores na
+coluna cylinder dos dicionários nos dará os distintos 
+número de cilindros que existem. Veja: temos carros, no nosso 
+conjunto de dados, com 4, 5, 6 e 8 cilindros. Primeiro, criaremos uma lista vazia
+onde armazenaremos nossos cálculos. Depois, laços de repetição 'for...'
+para iterações em todos os dicionários. E então, repetindo isso
+em todos os dicionários, certo? Se o nível de cilindros para
+o dicionário que estivermos na iteração bater com o nível de cilindros que estivermos
+calculando a média, adicionamos o MPG dele à variável summpg e
+incrementamos o contador. Após passar por todos os dicionários,
+fazemos o cálculo da média de MPG e a acrescentamos à nossa lista. Para que fique mais claro, classificarei a lista do menor para 
+o maior número de cilindros. E podemos ver que a economia de combustível da cidade
+ parece estar diminuindo à medida que o número de cilindros aumenta. Vejamos outro exemplo semelhante. Vamos supor que estamos interessados em descobrir
+a média, em MPG, de consumo para as distintas classes de veículos. Analisando as diferentes classes de veículos
+temos 2seater, compact, midsize, minivan, pickup, subcompact e suv. Tal como no último exemplo,
+vamos iterar todas as classes de veículos, e depois, em todos os dicionários. Se a classe do veículos para o dicionário bater com a classe do 
+veículo que estivermos calculando a média MPG na estrada, adicionamos o valor dela
+ao total, e incrementamos o contador, vclasscount. Depois, calculamos a média
+e a adicionamos ao final da nossa lista. Desta vez, vamos classificar nossa lista
+do menor consumo em MPG para o maior consumo. Parece que pickup tem a pior economia de
+combustível e que o compact tem a melhor. É assim que sumarizamos
+os dados via iterações. Não se preocupe se isso parece
+de alguma forma ineficiente ou entediante. Semana que vem, aprenderemos sobre o
+Pandas, uma biblioteca Python que nos permite realizar análise de dados mais robusta,
+ mais fácil, mais eficiente em Python.
+[Tradução: Carlos Lage] Obrigado por assitir! Espero te rever logo.

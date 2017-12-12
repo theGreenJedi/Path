@@ -1,0 +1,638 @@
+1
+00:00:09,315 --> 00:00:12,588
+Now that we've covered many of the
+mechanics of Pandas, I want to stop and
+
+2
+00:00:12,588 --> 00:00:15,590
+talk for
+a moment about data types and scales.
+
+3
+00:00:15,590 --> 00:00:19,140
+We've already seen that Pandas supports
+a number of different computational data
+
+4
+00:00:19,140 --> 00:00:22,510
+types such as strings, integers and
+floating point numbers.
+
+5
+00:00:22,510 --> 00:00:25,120
+What this doesn't capture is what
+we call the scale of the data.
+
+6
+00:00:26,190 --> 00:00:27,930
+Let's say that we have
+a data frame of students and
+
+7
+00:00:27,930 --> 00:00:31,010
+their academic levels such as being
+in grade 1 or grade 2 and grade 3.
+
+8
+00:00:31,010 --> 00:00:35,300
+There's a difference between a student in
+grade 1 and a student in grade 2, the same
+
+9
+00:00:35,300 --> 00:00:39,200
+as the difference between a student
+in grade 8 and a student in grade 9.
+
+10
+00:00:39,200 --> 00:00:41,630
+Well let's think about the final
+exam scores these students might get
+
+11
+00:00:41,630 --> 00:00:42,780
+on assignments.
+
+12
+00:00:42,780 --> 00:00:44,530
+Is the difference between an A and
+
+13
+00:00:44,530 --> 00:00:48,970
+an A minus the same as the difference
+between an A minus and a B plus?
+
+14
+00:00:48,970 --> 00:00:51,640
+At the University of Michigan at least,
+the answer is usually no.
+
+15
+00:00:53,330 --> 00:00:55,870
+We've intuitively seen
+some different scales, and
+
+16
+00:00:55,870 --> 00:00:59,170
+as we move through data cleaning and
+statistical analysis and
+
+17
+00:00:59,170 --> 00:01:03,430
+machine learning, it's important to
+clarify our knowledge and terminology.
+
+18
+00:01:03,430 --> 00:01:06,330
+As a data scientist there four
+scales that it's worth knowing.
+
+19
+00:01:07,410 --> 00:01:08,785
+The first is a ratio scale.
+
+20
+00:01:08,785 --> 00:01:13,150
+In the ratio scale the measurements units
+are equally spaced and mathematical
+
+21
+00:01:13,150 --> 00:01:17,430
+operations, such as subtract, division,
+and multiplication are all valid.
+
+22
+00:01:17,430 --> 00:01:20,809
+Good examples of ratio scale measurements
+might be the height and weight.
+
+23
+00:01:21,970 --> 00:01:23,880
+The next scale is the interval scale.
+
+24
+00:01:23,880 --> 00:01:26,620
+In the interval scale the measurement
+units are equally spaced
+
+25
+00:01:26,620 --> 00:01:27,930
+like the ratio scale.
+
+26
+00:01:27,930 --> 00:01:30,030
+But there's no clear absence of value.
+
+27
+00:01:30,030 --> 00:01:34,440
+That is there isn't a true zero, and so
+operation such as multiplication and
+
+28
+00:01:34,440 --> 00:01:36,049
+division are not valid.
+
+29
+00:01:37,080 --> 00:01:40,860
+An example of the interval scale might be
+the temperatures measured in Celsius or
+
+30
+00:01:40,860 --> 00:01:41,800
+Fahrenheit.
+
+31
+00:01:41,800 --> 00:01:44,045
+Since there's never
+an absence of temperature and
+
+32
+00:01:44,045 --> 00:01:46,650
+0 degrees is a meaningful
+value of temperature.
+
+33
+00:01:48,430 --> 00:01:52,810
+The direction on a campus might be another
+good example where 0 degrees on the campus
+
+34
+00:01:52,810 --> 00:01:54,760
+doesn't indicate a lack of direction.
+
+35
+00:01:56,170 --> 00:01:58,850
+For most of the work you do at data
+mining, the differences between
+
+36
+00:01:58,850 --> 00:02:01,830
+the ratio and interval scales
+might not be clearly apparent or
+
+37
+00:02:01,830 --> 00:02:04,130
+important than the algorithm
+you're applying.
+
+38
+00:02:04,130 --> 00:02:06,990
+But it's important to have this clear in
+your mind when you're applying advanced
+
+39
+00:02:06,990 --> 00:02:08,040
+statistical tests.
+
+40
+00:02:09,340 --> 00:02:13,160
+The next scale is the ordinal scale,
+and this is also important.
+
+41
+00:02:13,160 --> 00:02:16,270
+In the ordinal scale the order
+of values is important but
+
+42
+00:02:16,270 --> 00:02:19,770
+the differences between the values
+are not equally spaced.
+
+43
+00:02:19,770 --> 00:02:23,260
+Here is a grading method that is used in
+many classes at the University of Michigan
+
+44
+00:02:23,260 --> 00:02:27,500
+as a great example, where letter grades
+are given with pluses and minuses.
+
+45
+00:02:27,500 --> 00:02:31,570
+But when you compare this to percentage
+values you see that a letter by itself
+
+46
+00:02:31,570 --> 00:02:35,270
+covers 4% of the available grades and
+that a letter with a plus or
+
+47
+00:02:35,270 --> 00:02:39,160
+minus is usually just 4% for
+the available grades.
+
+48
+00:02:39,160 --> 00:02:42,250
+Based on this, it would be odd if there
+were as many students who received
+
+49
+00:02:42,250 --> 00:02:45,420
+an A plus or A minus as there
+were who received a straight A.
+
+50
+00:02:46,980 --> 00:02:49,430
+Ordinal data is very common
+in machine learning and
+
+51
+00:02:49,430 --> 00:02:52,320
+can sometimes be a challenge to work with.
+
+52
+00:02:52,320 --> 00:02:55,010
+The last scale I'll mention
+is the nominal scale which is
+
+53
+00:02:55,010 --> 00:02:57,450
+often just called categorical data.
+
+54
+00:02:57,450 --> 00:03:00,500
+Here the names of teams in
+a sport might be good example.
+
+55
+00:03:00,500 --> 00:03:03,100
+There are a limited number of teams but
+changing their order or
+
+56
+00:03:03,100 --> 00:03:05,179
+playing mathematical function
+to them is meaningless.
+
+57
+00:03:06,240 --> 00:03:10,600
+Categorical values are very common and
+we generally refer to categories
+
+58
+00:03:10,600 --> 00:03:13,240
+where there are only two
+possible values as binary.
+
+59
+00:03:15,280 --> 00:03:19,500
+So why did I stop talking about Pandas and
+jump into this discussion of scale.
+
+60
+00:03:19,500 --> 00:03:21,685
+Well, given how important
+they are in statistics and
+
+61
+00:03:21,685 --> 00:03:24,555
+machine learning, Pandas has
+a number of interesting functions to
+
+62
+00:03:24,555 --> 00:03:27,735
+deal with converting
+between measurement scales.
+
+63
+00:03:27,735 --> 00:03:32,057
+Let's start first with nominal data, which
+in Pandas is called categorical data.
+
+64
+00:03:32,057 --> 00:03:35,363
+Panda is actually has a built in type for
+categorical data and you could
+
+65
+00:03:35,363 --> 00:03:39,497
+set a column of your data to categorical
+data by using the as type method.
+
+66
+00:03:39,497 --> 00:03:42,164
+As type tries to change
+the underlying type of your data,
+
+67
+00:03:42,164 --> 00:03:44,247
+in this case to category data.
+
+68
+00:03:44,247 --> 00:03:48,117
+You can further change this to ordinal
+data by passing in an ordered flags set to
+
+69
+00:03:48,117 --> 00:03:51,900
+true and passing in the categories
+in an ordered fashion.
+
+70
+00:03:51,900 --> 00:03:52,595
+Here's an example.
+
+71
+00:03:52,595 --> 00:03:56,210
+Let's create a data frame of letter
+grades in the descending order.
+
+72
+00:03:56,210 --> 00:03:59,490
+We can also set an index value of
+some more course grain measure.
+
+73
+00:04:00,690 --> 00:04:04,630
+Now when we instruct Pandas to render this
+as categorical data, we see that the D
+
+74
+00:04:04,630 --> 00:04:08,109
+type has been set as category and
+that there are 11 different categories.
+
+75
+00:04:09,284 --> 00:04:12,520
+If we want to indicate to Pandas that
+this data is in a logical order,
+
+76
+00:04:12,520 --> 00:04:15,030
+we pass the ordered equals true flag and
+
+77
+00:04:15,030 --> 00:04:19,430
+we see those reflected in the category
+D type using the less than sign.
+
+78
+00:04:19,430 --> 00:04:20,860
+What can you do with this?
+
+79
+00:04:20,860 --> 00:04:25,160
+Well, ordinal data has ordering so
+it can help you with the Boolean masking.
+
+80
+00:04:25,160 --> 00:04:28,540
+For instance, if we have our list of
+grades and we compared them with a C.
+
+81
+00:04:28,540 --> 00:04:31,860
+If we did this lexographically,
+we would that a C+ and
+
+82
+00:04:31,860 --> 00:04:33,980
+a C- are both actually greater than a C.
+
+83
+00:04:35,560 --> 00:04:38,600
+Instead of coding each of these to
+something which is lexographical,
+
+84
+00:04:38,600 --> 00:04:42,500
+like a number, we can indicate that
+there's a clear order to the data.
+
+85
+00:04:42,500 --> 00:04:45,690
+And then broadcasting
+will work as we expect.
+
+86
+00:04:45,690 --> 00:04:49,120
+We can then use a certain set of
+mathematical operators like minimum,
+
+87
+00:04:49,120 --> 00:04:51,790
+maximum and others on the ordinal data.
+
+88
+00:04:53,090 --> 00:04:57,710
+Sometimes it's useful to represent
+categorical values as each being a column
+
+89
+00:04:57,710 --> 00:05:01,760
+with a true or a false as to
+whether that category applies.
+
+90
+00:05:01,760 --> 00:05:04,560
+This is especially common
+in feature extraction,
+
+91
+00:05:04,560 --> 00:05:07,180
+which is a topic in the third
+course in this specialization.
+
+92
+00:05:08,690 --> 00:05:12,700
+Variables with a Boolean value
+are typically called dummy variables.
+
+93
+00:05:12,700 --> 00:05:15,540
+And pandas has a built-in
+function called get dummies,
+
+94
+00:05:15,540 --> 00:05:20,100
+which will convert the values of a single
+column into multiple columns of 0's and
+
+95
+00:05:20,100 --> 00:05:22,909
+1's, indicating the presence
+of a dummy variable.
+
+96
+00:05:25,180 --> 00:05:28,048
+There's one more function on scales
+that I'd like to talk about.
+
+97
+00:05:28,048 --> 00:05:30,680
+And that's on reducing a value
+which is on the interval or
+
+98
+00:05:30,680 --> 00:05:36,560
+ratio scale, like a number grade, into one
+that is categorical like a letter grade.
+
+99
+00:05:36,560 --> 00:05:39,900
+Now, this might seem a bit counter
+intuitive to you since you're losing
+
+100
+00:05:39,900 --> 00:05:41,910
+information about the value.
+
+101
+00:05:41,910 --> 00:05:43,956
+But it's useful on a couple of places.
+
+102
+00:05:43,956 --> 00:05:47,550
+First, if you're visualizing
+the frequencies of categories, and
+
+103
+00:05:47,550 --> 00:05:50,100
+this can be an extremely
+useful approach and
+
+104
+00:05:50,100 --> 00:05:54,620
+histograms are regularly used with
+converted interval or racial data.
+
+105
+00:05:54,620 --> 00:05:58,660
+And we'll take a look at histograms in
+the second course in this specialization.
+
+106
+00:06:00,160 --> 00:06:04,570
+Second, if you're using a machine
+learning classification approach on data,
+
+107
+00:06:04,570 --> 00:06:06,980
+then you need to be
+using categorical data.
+
+108
+00:06:06,980 --> 00:06:09,735
+So reducing dimensionality
+is useful there too.
+
+109
+00:06:09,735 --> 00:06:14,133
+panda says a function called cut,
+which takes in argument which is some real
+
+110
+00:06:14,133 --> 00:06:17,237
+like structure of a column or
+a data frame or a series.
+
+111
+00:06:17,237 --> 00:06:22,420
+It also takes a number of bins to be used
+and all bins are kept at equal spacing.
+
+112
+00:06:22,420 --> 00:06:25,270
+Let's go back to our census data for
+an example.
+
+113
+00:06:25,270 --> 00:06:26,920
+We saw that we could group by state,
+
+114
+00:06:26,920 --> 00:06:30,650
+then aggregate to get a list of
+the average county size by state.
+
+115
+00:06:30,650 --> 00:06:34,830
+If we further apply cut to this
+with say 10 bins, we can see that
+
+116
+00:06:34,830 --> 00:06:39,500
+the states listed as categoricals
+using the average county size.
+
+117
+00:06:39,500 --> 00:06:44,000
+Here we see the states like Alabama and
+Alaska fall into the same category, while
+
+118
+00:06:44,000 --> 00:06:48,410
+California and the District of Colombia
+fall into a very different category.
+
+119
+00:06:48,410 --> 00:06:51,350
+Now, cutting is just one way to
+build categories from your data, and
+
+120
+00:06:51,350 --> 00:06:53,020
+there's many other methods.
+
+121
+00:06:53,020 --> 00:06:54,932
+For instance, cut gives you interval data,
+
+122
+00:06:54,932 --> 00:06:57,380
+where the spacing between
+each category is equal sized.
+
+123
+00:06:57,380 --> 00:07:00,940
+But sometimes you want to form
+categories based on frequency.
+
+124
+00:07:00,940 --> 00:07:03,230
+You want the number of items
+in each bin to be the same,
+
+125
+00:07:03,230 --> 00:07:05,650
+instead of the spacing between bins.
+
+126
+00:07:05,650 --> 00:07:07,480
+It really depends on
+the shape of your data and
+
+127
+00:07:07,480 --> 00:07:08,740
+what you're planning to do with it.
+
+128
+00:07:08,740 --> 00:07:11,760
+And we'll look at some examples of this
+in the graphing and charting course for
+
+129
+00:07:11,760 --> 00:07:13,820
+those of you who are enrolled
+in the specialization.
+
+130
+00:07:13,820 --> 00:07:16,880
+That's it for this module of the course.
+
+131
+00:07:16,880 --> 00:07:20,060
+There's a programming assignment to test
+your knowledge of this module's content
+
+132
+00:07:20,060 --> 00:07:23,550
+and I'll see you back in the next module
+as a wrap up where we'll talk more
+
+133
+00:07:23,550 --> 00:07:26,910
+about statistics and set up some basics
+for comparing results of analysis.

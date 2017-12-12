@@ -1,0 +1,395 @@
+1
+00:00:09,478 --> 00:00:13,042
+Chúng ta đã thấy rằng mặc dù panda cho phép chúng ta lặp mỗi hàng trong khung dữ liệu
+
+2
+00:00:13,042 --> 00:00:15,904
+đó là cách chậm để thực hiện một nhiệm vụ cho trước và
+
+3
+00:00:15,904 --> 00:00:17,950
+nó rất không hay.
+
+4
+00:00:17,950 --> 00:00:20,868
+Ví dụ nếu bạn muốn viết mã để lặp tất cả
+
+5
+00:00:20,868 --> 00:00:23,944
+các bang và tạo ra một danh sách điều tra dân số trung bình.
+
+6
+00:00:23,944 --> 00:00:27,370
+CHúng ta có thể làm sử dụng vòng lặp trong chức năng đặc biệt.
+
+7
+00:00:27,370 --> 00:00:30,710
+Lựa chọn khác nữa là để sử dụng khung dữ liệu nhóm lại bởi chức năng.
+
+8
+00:00:30,710 --> 00:00:35,137
+Chức năng này lấy một số tên cột hoặc các tên và chia khung dữ liệu thành
+
+9
+00:00:35,137 --> 00:00:39,170
+các khối dựa trên các tên, nó trả về nhóm khung dữ liệu theo đối tượng.
+
+10
+00:00:39,170 --> 00:00:40,825
+Điều này có thể được lặp và
+
+11
+00:00:40,825 --> 00:00:44,197
+sau đó trả về một tập hợp nơi mà mục đầu tiên là điều kiện nhóm,
+
+12
+00:00:44,197 --> 00:00:48,100
+mục thứ hai là khung dữ liệu bị giảm bởi nhóm đó.
+
+13
+00:00:48,100 --> 00:00:50,940
+Bởi vì nó tạo ra hai giá trị, bạn có thể giải nén và
+
+14
+00:00:50,940 --> 00:00:54,220
+thực hiện cột mà bạn quan tâm để tính trung bình.
+
+15
+00:00:56,290 --> 00:00:59,090
+Đây là một số ví dụ về cả hai phương pháp hoạt động.
+
+16
+00:00:59,090 --> 00:01:04,442
+Đầu tiên hãy tải dữ liệu điều tra dân số sau đó loại trừ tổng hợp mức,
+
+17
+00:01:04,442 --> 00:01:06,741
+cái mà có giá trị tổng là 40.
+
+18
+00:01:06,741 --> 00:01:09,905
+Đây là các ví dụ về các phương pháp hoạt động.
+
+19
+00:01:09,905 --> 00:01:13,911
+Đầu tiên hãy tải dữ liệu điều tra dân số, sau đó loại trừ tổng hợp mức độ
+
+20
+00:01:13,911 --> 00:01:16,815
+cái mà có tổng là 40.
+
+21
+00:01:16,815 --> 00:01:19,135
+Trong phần đầu chungst a đã sử dụng điều tra dân số.
+
+22
+00:01:19,135 --> 00:01:21,075
+Chúng ta có danh sách các bang.
+
+23
+00:01:21,075 --> 00:01:25,355
+Mỗi bạng chúng ta giảm khung dữ liệu và tính toán trung bình.
+
+24
+00:01:26,595 --> 00:01:28,695
+Nếu chúng ta làm điều này chúng ta sẽ thấy mất một khoảng thời gian.
+
+25
+00:01:28,695 --> 00:01:31,605
+Tôi đã tạo một vòng lặp ở đây nó đến 10
+
+26
+00:01:31,605 --> 00:01:32,465
+bởi vì tôi đang tải.
+
+27
+00:01:33,780 --> 00:01:36,800
+Đây là tiếp cận với nhóm bằng đối tượng.
+
+28
+00:01:36,800 --> 00:01:40,210
+Chúng ta nói hàm panda chúng ta quan tâm nhóm và với tên bang sau đó chúng ta
+
+29
+00:01:40,210 --> 00:01:44,780
+tính trung bình sử dụng một cột và tất cả dữ liệu trong cột đó.
+
+30
+00:01:44,780 --> 00:01:47,100
+Khi chúng ta làm nó chúng ta thấy sự khác biệt lớn trong tốc độ.
+
+31
+00:02:04,196 --> 00:02:08,248
+Bây giờ 99% thời gian bạn sẽ sử dụng nhóm bằng một hoặc nhiều cột.
+
+32
+00:02:08,248 --> 00:02:11,375
+Nhưng bạn có thể cung cấp một chức năng để nhóm và
+
+33
+00:02:11,375 --> 00:02:13,760
+sử dụng điều đó để phân khúc dữ liệu của bạn.
+
+34
+00:02:13,760 --> 00:02:15,910
+Đây là một ví dụ được chế tạo nhưng
+
+35
+00:02:15,910 --> 00:02:19,430
+giả sử bạn có một công việc lớn với rất nhiều quá trình và
+
+36
+00:02:19,430 --> 00:02:23,210
+bạn muốn chỉ làm một phần ba.
+
+37
+00:02:23,210 --> 00:02:26,130
+Chúng ta có thể tạo ra một số chức năng trả về một số giữa 0 và
+
+38
+00:02:26,130 --> 00:02:29,530
+2 dựa trên đặc điểm đầu tiên của câu lệnh.
+
+39
+00:02:29,530 --> 00:02:33,300
+Sau đó chúng ta có thể lập nhóm bằng cách sử dụng chức năng này để chia khung dữ liệu của chúng ta.
+
+40
+00:02:33,300 --> 00:02:36,250
+Cần lưu ý là để làm điều này chúng ta cần phải thiết lập chỉ số của
+
+41
+00:02:36,250 --> 00:02:38,970
+khung dữ liệu là cột mà bạn muốn tạo nhóm đầu tiên.
+
+42
+00:02:40,810 --> 00:02:41,930
+Đây là một ví dụ.
+
+43
+00:02:41,930 --> 00:02:44,301
+Chúng ta sẽ tọa ra chức năng mới gọi là fun và
+
+44
+00:02:44,301 --> 00:02:47,840
+nếu chữ đầu tiên của thông số là M chúng ta sẽ trả về 0.
+
+45
+00:02:47,840 --> 00:02:52,010
+Nếu nó là Q chúng ta sẽ trả về 1 và nếu không chúng ta sẽ trả về 2.
+
+46
+00:02:52,010 --> 00:02:54,620
+Sau đó chúng ta sẽ xuất chức nawngnayf vào khung dữ liệu trả lời,
+
+47
+00:02:54,620 --> 00:02:58,470
+thấy rằng khung dữ liệu được phân đoạn theo số nhóm đã được tính toán.
+
+48
+00:02:58,470 --> 00:03:01,753
+Loại kĩ thuật này là phân loại trọng lượng,
+
+49
+00:03:01,753 --> 00:03:04,989
+được sử dụng phổ biến để phân phối các nhiệm vụ.
+
+50
+00:03:04,989 --> 00:03:09,690
+Cho dù chúng ta cốt lõi trong bộ xử lí, các nút trong siêu máy tính hay
+
+51
+00:03:09,690 --> 00:03:11,156
+các đĩa trong cơ sở dữ liệu.
+
+52
+00:03:11,156 --> 00:03:14,381
+Một nhiệm vụ phổ biến với nhóm mà bạn tách dữ liệu,
+
+53
+00:03:14,381 --> 00:03:17,540
+bạn áp dụng một số chức năng sau đó bạn kết hợp các kết quả.
+
+54
+00:03:17,540 --> 00:03:19,548
+Điều này được gọi là ứng dụng phân tách kết hợp mô hình.
+
+55
+00:03:19,548 --> 00:03:22,840
+Và chúng ta đã thấy phương pháp chia tách nhưng áp dụng cái gì?
+
+56
+00:03:22,840 --> 00:03:25,900
+Các phương pháp lặp như chúng ta đã thấy có thể làm điều này nhưng
+
+57
+00:03:25,900 --> 00:03:30,890
+đối tượng nhóm cũng có một phương pháp gọi là agg viết tắt của từ tổng hợp.
+
+58
+00:03:30,890 --> 00:03:33,030
+Phương pháp này áp dụng một chức năng cho cột hoặc
+
+59
+00:03:33,030 --> 00:03:35,460
+các cột của dữ liệu trong nhóm và trả lại kết quả.
+
+60
+00:03:36,600 --> 00:03:40,650
+Với agg bạn chỉ đơn giản xuất trong thư viện nên cột mà bạn quan tâm,
+
+61
+00:03:40,650 --> 00:03:43,140
+chức năng mà bạn muốn áp dụng.
+
+62
+00:03:43,140 --> 00:03:46,720
+Ví dụ để xây dựng một khung dữ liệu tóm tắt dân số trung bình mỗi bang.
+
+63
+00:03:46,720 --> 00:03:51,304
+Chúng ta chỉ có thể đưa ra agg một thứ viện với điều tra dân số năm 2010 và
+
+64
+00:03:51,304 --> 00:03:59,110
+chức năng trung bình numb/pie.
+
+65
+00:04:03,496 --> 00:04:05,393
+Bây giờ tôi muốn gắn một vấn đề tiềm năng và
+
+66
+00:04:05,393 --> 00:04:07,860
+sử dụng phương pháp tổng hợp của nhóm các đối tượng.
+
+67
+00:04:07,860 --> 00:04:10,930
+Khi nào bạn xuất trong thư viện nó có thể đước sử dụng để xác định
+
+68
+00:04:10,930 --> 00:04:13,160
+các cột để áp dụng một chức năng hoặc
+
+69
+00:04:13,160 --> 00:04:16,980
+để đặt tên một cột đầu ra nếu có các chức năng được chạy.
+
+70
+00:04:16,980 --> 00:04:20,950
+Sự khác biệt phụ thuộc vào các chìa khóa mà bạn xuất trong thư viện và
+
+71
+00:04:20,950 --> 00:04:21,520
+cách chúng được đặt tên.
+
+72
+00:04:22,570 --> 00:04:26,230
+Tóm lại trong khi nhiều tài liệu và các ví dụ sẽ nói về
+
+73
+00:04:26,230 --> 00:04:29,190
+đối tượng nhóm đơn, thì thực sự có hai đối tượng khác nhau.
+
+74
+00:04:29,190 --> 00:04:31,584
+Nhóm khung dữ liệu và nhóm chuỗi.
+
+75
+00:04:31,584 --> 00:04:34,499
+Các đôi tượng hoạt động khác nhau một chút với agg.
+
+76
+00:04:35,580 --> 00:04:39,700
+Ví dụ chúng ta lấy dữ liệu điều tra dân số và chuyển nó thành chuỗi với
+
+77
+00:04:39,700 --> 00:04:44,110
+tên bang như là chỉ số và các cột là điều tra dân số 2010.
+
+78
+00:04:44,110 --> 00:04:47,860
+Sau đó chúng ta có thể tạo nhóm bằng chỉ mục sử dụng thông số định mức.
+
+79
+00:04:47,860 --> 00:04:50,800
+Sau đó chúng ta dùng phương pháp agg nơi từ điển này có
+
+80
+00:04:50,800 --> 00:04:53,445
+chức năng numpie trung bình và chức năng numpie 
+
+81
+00:04:53,445 --> 00:04:57,317
+Hàm panda ứng dụng các chức năng với đối tượng chuỗi và chỉ có một
+
+82
+00:04:57,317 --> 00:05:01,145
+cột dữ liệu áp dụng cả chức năng với cột đó và xuất đầu ra.
+
+83
+00:05:14,743 --> 00:05:17,750
+Chúng ta có thể làm điều tương tự với một khung dữ liệu thay vì chuỗi.
+
+84
+00:05:17,750 --> 00:05:20,890
+Chúng ta thiết lập chỉ mục là tên bang, chúng ta tạo nhóm bởi chỉ mục và
+
+85
+00:05:20,890 --> 00:05:22,540
+chúng ta thực hiện hai cột.
+
+86
+00:05:22,540 --> 00:05:26,830
+Dân số ước tính năm 2010, dân số ước tính năm 2011.
+
+87
+00:05:26,830 --> 00:05:28,969
+Khi chúng ta dùng agg với hai thông số.
+
+88
+00:05:28,969 --> 00:05:33,670
+Nó tạo ra một không gian cột và tất cả các chức năng được áp dụng.
+
+89
+00:05:33,670 --> 00:05:37,630
+Nơi mà sự nhầm lẫn có thể xảy ra khi chúng ta thay đổi các nhãn của thư viện chúng ta
+
+90
+00:05:37,630 --> 00:05:41,980
+đã xuất ra agg, tương ứng với các nhãn trong khung dữ liệu.
+
+91
+00:05:41,980 --> 00:05:46,050
+Trong trường hợp này hàm panda nhận ra rằng chúng giống nhau và chức năng bản đồ
+
+92
+00:05:46,050 --> 00:05:50,620
+với các cột thay vì tạo ra cột nhãn mác.
+
+93
+00:05:50,620 --> 00:05:52,980
+Theo tôi điều này là hoạt động lẻ,
+
+94
+00:05:52,980 --> 00:05:55,770
+không phải cái tôi muốn đưa ra sự thay đổi nhãn mác.
+
+95
+00:05:55,770 --> 00:05:58,510
+Chỉ cần biết điều này khi sử dụng chức năng agg.
+
+96
+00:05:59,690 --> 00:06:01,360
+Đó là nhóm theo chức năng.
+
+97
+00:06:01,360 --> 00:06:05,390
+Tôi sử dụng nhóm theo chức năng thường xuyên trong công việc và nó rất tiện lợi cho
+
+98
+00:06:05,390 --> 00:06:08,650
+việc phân khúc khung dữ liệu, hoạt động trên các phần nhỏ của khung dữ liệu,
+
+99
+00:06:08,650 --> 00:06:10,980
+và sau đó tạo ra khung dữ liệu lớn hơn sau này.

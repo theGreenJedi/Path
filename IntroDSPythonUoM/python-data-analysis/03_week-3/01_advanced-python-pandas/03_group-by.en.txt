@@ -1,0 +1,82 @@
+We've seen that even though PANDAS allows
+us to iterate over every row in a data frame this is generally a slow way
+to accomplish a given task and it's not very pandorable. For instance, if we wanted to write
+some code to iterate over all the of the states and generate a list of
+the average census population numbers. We could do so
+using a loop in the unique function. Another option is to use
+the dataframe group by function. This function takes some column name or
+names and splits the dataframe up into chunks based on those names,
+it returns a dataframe group by object. Which can be iterated upon, and then returns a tuple where the first
+item is the group condition, and the second item is the data
+frame reduced by that grouping. Since it's made up of two values,
+you can unpack this, and project just the column that you're
+interested in, to calculate the average. Here's some examples of
+both methods in action. Let's first load the census data, then
+exclude the state level summarizations, which had a sum level value of 40. Here's some examples of
+both methods in action. Let's first load the census data,
+then exclude the state level summarizations which
+had a sum level of 40. In the first we used the census date. We get a list of the unique states. Then for each state we reduce the data
+frame and calculate the average. If we time this we see it takes a while. I've set the number of loops here
+the time it should take to ten because I'm live loading. Here's the same approach
+with a group by object. We tell pandas we're interested in
+group and with a state name and then we calculate the average using just one
+column and all of the data in that column. When we time it we see a huge
+difference in the speed Now, 99% of the time, you'll use
+group by on one or more columns. But you can actually provide
+a function to group by as well and use that to segment your data. This is a bit of a fabricated example but lets say that you have a big batch
+job with lots of processing and you want to work on only a third or
+so of the states at a given time. We could create some function which
+returns a number between zero and two based on the first
+character of the state name. Then we can tell group by to use this
+function to split up our data frame. It's important to note that in order
+to do this you need to set the index of the data frame to be the column
+that you want to group by first. Here's an example. We'll create some new
+function called fun and if the first letter of the parameter
+is a capital M we'll return a 0. If it's a capital Q we'll return a 1 and
+otherwise we'll return a 2. Then we'll pass this function
+to the data frame reply, and see that the data frame is segmented
+by the calculated group number. This kind of technique,
+which is sort of a light weight hashing, is commonly used to distribute
+tasks across multiple workers. Whether they are cores in a processor,
+nodes in a supercomputer, or disks in a database. A common work flow with group
+bias that you split your data, you apply some function,
+then you combine the results. This is called split
+apply combine pattern. And we've seen the splitting method,
+but what about apply? Certainly iterative methods as
+we've seen can do this, but the groupby object also has a method
+called agg which is short for aggregate. This method applies
+a function to the column or columns of data in the group,
+and returns the results. With agg, you simply pass in a dictionary
+of the column names that you're interested in, and
+the function that you want to apply. For instance to build a summary data frame
+for the average populations per state, we could just give agg a dictionary
+with the Census 2010 pop key and the numb/pie average function. Now, I want to flag a potential issue and using the aggregate method
+of group by objects. You see, when you pass in a dictionary
+it can be used to either to identify the columns to apply a function on or to name an output column if there's
+multiple functions to be run. The difference depends on the keys that
+you pass in from the dictionary and how they're named. In short, while much of the documentation
+and examples will talk about a single groupby object,
+there's really two different objects. The data frame groupby and
+the series groupby. And these objects behave a little
+bit differently with aggregate. For instance, we take our census data and
+convert it into a series with the state names as the index and only columns
+as the census 2010 population. And then we can group this by
+index using the level parameter. Then we call the agg method where
+the dictionary that has both the numpie average and the numpie sum functions. PANDAS applies those functions to the
+series object and, since there's only one column of data It apples both functions
+to that column and prints out the output. We can do the same thing with
+a data frame instead of a series. We set the index to be the state name,
+we group by the index, and we project two columns. The population estimate in 2010,
+the population estimate in 2011. When we call aggregate
+with two parameters, it builds a nice hierarchical column space
+and all of our functions are applied. Where the confusion can come in is when
+we change the labels of the dictionary we passed to aggregate, to correspond to
+the labels in our group data frame. In this case, pandas recognizes that
+they're the same and maps the functions directly to columns instead of creating
+a hierarchically labeled column. From my perspective this
+is very odd behavior, not what I would expect
+given the labeling change. So just be aware of this when
+using the aggregate function. So that's the group by function. I use the group by function regularly
+in my work, and it's very handy for segmenting a data frame,
+working on small pieces of the data frame, and then creating bigger
+data frames later.

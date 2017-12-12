@@ -1,0 +1,69 @@
+Luồng công việc phổ biến là để đọc
+dữ liệu của bạn bên trong khung dữ liệu sau đó làm giảm khung dữ liệu này
+với các cột cụ thể hoặc các hàng mà bạn quan tâm đến
+việc hoạt động cùng. Như bạn đã thấy bộ công cụ panda cố gắng cung cấp
+cho bạn khung nhìn trên khung dữ liệu. Điều này nhanh hơn nhiều so với việc sao chép dữ liệu
+và cũng hiệu quả hơn bộ nhớ nhiều. Nhưng nó có nghĩa là nếu bạn
+thao tác dữ liệu, bạn phải biết bất kì thay đổi nào với khung
+dữ liệu bạn đang làm việc có tác động trên khung dữ liệu cơ sở
+bạn sử dụng ban đầu. Đây là một ví dụ sử dụng khung dữ liệu
+mua bán giống nhau của chúng ta trước đây. Chúng ta có thể tạo ra một chuỗi dựa trên loại
+chi phí bằng cách sử dụng dấu ngoặc vuông. Sau đó chúng ta có thể tăng chi phí
+trong chuỗi này sử dụng kỹ thuật truyền phát. Bây giờ nếu chúng ta nhìn vào khung dữ liệu gốc,
+chúng ta thấy các chi phí này cũng tăng lên. Đó làm một cân nhắc quan trọng để xem xét. Nếu bạn muốn sử dụng bản
+sao một cách rõ ràng. thì bạn nên cân nhắc việc dùng phương pháp
+sao chép trên khung dữ liệu cho nó đầu tiên. Trong khóa học này chúng ta sẽ chủ yếu sử dụng
+tập dữ liệu có kích thước vừa, hoặc nhỏ hơn. Như tôi đã đề cập một luồng công việc phổ biến là để đọc
+tập dữ liệu, thường là từ một tập bên ngoài. Chúng ta đã thấy rất rõ ràng cách bạn có thể
+làm điều này sử dụng python và các danh sách, các từ điển. Bạn có thể tưởng tượng cách bạn sử dụng các
+từ điển đó để tạo ra khung dữ liệu panda. Rất may panda có hỗ trợ sẵn bên trong cho các tập có dấu phân cách như CSV cũng như các dạng dữ liệu khác bao gồm cơ sở
+dữ liệu quan hệ, Excel và bảng HTML. Tôi đã lưu một tập CSV gọi là olympics.csv, đó là dữ liệu từ wikipedia chứa
+một danh sách tóm tắt về huy chương các quốc gia đã chiến thắng ở Olympics. Chúng ta có thể nhìn vào tập này sử dụng lệnh cat. Cái mà chúng ta có thể lấy trực tiếp
+sử dụng dấu chấm than. Cái xảy ra ở đây là khi ghi chú jupyter
+thấy một dòng bắt đầu với một dấu chấm than, nó gửi phần còn lại
+của dòng tới hệ điều hành để đánh giá. Vì thế cat làm việc trên Linux và Macs cũng
+như trong nền tảng Coursera nhưng có thể không làm việc trên Windows. Bạn không cần lo lắng quá nhiều về điều này. Tôi chỉ muốn chỉ ra cách ghi chú jupyter
+có thể tích hợp với hệ điều hành để cung cấp cho bạn nhiều công cụ hơn
+để nhìn vào dữ liệu của bạn. Chúng ta thấy từ đầu ra cat rằng
+có một danh sách số các cột được theo dõi bởi
+một loạt các định dạng cột. Các định dạng cột có một số
+kí tự lẻ trong chúng. Đó là kí hiệu số unicode,
+có ý nghĩa về số lượng. Sau đó chúng ta có các hàng dữ liệu,
+tất cả các cột tách ra. Chúng ta có thể đọc điều này trong
+khung dữ liệu bằng cách gọi hàm đọc csv của mô đun. Khi chúng ta nhìn vào khung dữ liệu chúng ta
+thấy rằng phần đầu tiên có NaN trong nó. Bởi vì nó là một giá trị trống và các hàng
+được lập chỉ số tự động cho chúng ta. Nó khá là rõ rằng hàng dữ liệu đầu tiên
+trong khung dữ liệu là cái chúng ta thực sự muốn thấy như các tên cột. Nó giống với cột đầu tiên
+trong dữ liệu là tên quốc gia, Cái mà chúng ta muốn tạo một chỉ số. Đọc csv có một số các thông số mà
+chúng ta có thể sử dụng để chỉ ra tới hàm panda các hàm và các cột nên
+được dán nhãn như thế nào. Ví dụ chúng ta có thể sử dụng chỉ số
+để chi ra cột nào là chỉ số và chúng ta cũng có thể sử dụng tham số
+tiêu đề để chỉ ra hàng nào từ tập dữ liệu nên được sử dụng là tiêu đề. Hãy nhập lại dữ liệu đó và giá trị chỉ số
+trung tâm là 0, cột đầu tiên và hãy đặt các cột tiêu đề để đọc
+từ hàng thứ hai của dữ liệu. Chúng ta có thể làm điều này bằng cách
+bỏ qua các thông số hàng, để cho panda biết bỏ qua hàng
+đầu tiên, cái được tạo ra từ các cột tên số. Bây giờ dữ liệu này đến từ tất cả
+các bảng huy chương Olympics trên wikipedia. Nếu chúng ta đến trang chúng ta
+có thể thấy điều đó thay vì chạy vàng, bạc và đồng trong các trang, các biểu
+tượng nhỏ với một, hai và ba trong tệp scv của chúng ta những
+điều này được thể hiện bằng các chuỗi 01 !, 02 !, và vân vân. Chúng ta thấy rằng các giá trị cột được
+nhắc lại thực sự không phải là thực tế tốt. Hàm panda nhận ra điều này trong
+panda.1 và .2 để tạo ra nhiều thứ độc đáo hơn. Nhưng nhãn dán này không
+rõ ràng như nó có thể vì thế chúng ta sẽ làm sạch tập dữ liệu. Chúng ta có thể làm điều này bằng việc
+chỉnh sửa tập csv trực tiếp nhưng chúng ta cũng có thể đặt các
+cột tên sử dụng tên panda. Hàm panda lưu trữ danh sách của
+tất cả các cột trong thuộc tính .columns. Chúng ta có thể thay đổi các giá trị của
+các cột tên bằng cách lặp danh sách này và dùng phương pháp đặt lại
+tên của khung dữ liệu. Bây giờ tôi sẽ sao chép và dán vào
+để tăng tốc mọi thứ nhưng chúng ta có thể đi qua những gì sẽ xảy ra ở đây. Ở đây chúng ta chỉ cần
+lặp qua tất cả các cột nếu chúng bắt đầu với 01, 02, 03 hoặc kí tự số. Nếu chúng làm, chúng ta sẽ đặt lại tên và đặt các cột thông số với một từ điển bằng
+các chìa khóa là cột chúng ta muốn thay thế và giá trị là giá trị mới chúng ta muốn. Ở đây chúng ta sẽ cắt một
+số giá trị cũ thành hai, bởi vì chúng ta không muốn
+mất các giá trị duy nhất. Chúng ta cũng sẽ đặt thông số
+quan trọng là True để hàm panda biết để cập nhật
+khung dữ liệu trực tiếp. Được rồi, đó là thêm vào khung dữ liệu
+với sự tập trung vào luồng hoạt động để có dữ liệu thực sự và vào bên trong
+nơi chúng ta muốn truy vấn. Vẫn còn một chút lộn xộn trong
+dữ liệu này về tên chỉ số và một số cột. Trong hướng dẫn tiếp theo, trợ lý sinh viên sau đại học của chúng tôi
+sẽ chỉ cho bạn cách làm sạch file, và các phương pháp tiếp cận khác bạn
+có thể muốn sử dụng để lấy dữ liệu định dạng.

@@ -1,0 +1,285 @@
+1
+00:00:08,701 --> 00:00:11,210
+Hãy bắt đầu thảo luận về phân phối.
+
+2
+00:00:11,210 --> 00:00:13,280
+Chúng ta sẽ bắt đầu với cách phổ biến nhất là sử dụng đồng xu.
+
+3
+00:00:13,280 --> 00:00:17,230
+Khi một đồng xu được tung lên nó có khả năng rơi xuống mặt ngửa và
+
+4
+00:00:17,230 --> 00:00:19,430
+có khả năng tiếp đất mặt sấp.
+
+5
+00:00:19,430 --> 00:00:23,120
+Nếu chúng ta tung một đồng xu nhiều lần chúng ta
+thu số lượng đo lường của mặt ngửa và
+
+6
+00:00:23,120 --> 00:00:24,900
+sấp và
+
+7
+00:00:24,900 --> 00:00:28,040
+bằng trực giác chúng ta biết số lần chúng ta có mặt ngửa
+
+8
+00:00:28,040 --> 00:00:31,600
+bằng với số lần chúng ta có mặt sấp.
+
+9
+00:00:31,600 --> 00:00:34,250
+Nếu bạn lật đồng xu một trăm lần và
+
+10
+00:00:34,250 --> 00:00:38,690
+bạn nhận được mặt ngửa mỗi lần bạn có thể
+nghi ngờ sự công bằng của đồng xu đó.
+
+11
+00:00:38,690 --> 00:00:42,689
+Chúng ta có thể xem xét kết quả mỗi lần tung đồng xu là biến ngẫu nhiên.
+
+12
+00:00:43,950 --> 00:00:48,020
+Khi chúng ta xem xét tất cả các biến ngẫu nhiên cùng nhau
+
+13
+00:00:48,020 --> 00:00:50,370
+chúng ta gọi đó là sự phân phối.
+
+14
+00:00:50,370 --> 00:00:53,290
+Trong trường hợp này sự phân phối được gọi là nhị thức
+
+15
+00:00:53,290 --> 00:00:57,230
+bởi vì có hai đầu ra là ngửa và sấp.
+
+16
+00:00:57,230 --> 00:01:00,770
+Nó cũng là một ví dụ về sự phân phối kín bởi vì chỉ có
+
+17
+00:01:00,770 --> 00:01:05,020
+các loại được sử dụng đầu và đuôi và không phải số thực.
+
+18
+00:01:06,135 --> 00:01:09,100
+Numpy thực sự có một số phân phối được xây dựng trong nó
+
+19
+00:01:09,100 --> 00:01:12,950
+cho phép chúng ta tung ngẫu nhiên đồng xu với các thông số được đưa ra.
+
+20
+00:01:12,950 --> 00:01:13,650
+Hãy thử ví dụ này nhé. 
+
+21
+00:01:14,650 --> 00:01:18,830
+Ở đây chúng ta yêu cầu một số từ phân phối nhị thức numpy.
+
+22
+00:01:18,830 --> 00:01:20,380
+Chúng ta có hai thông số xuất ra.
+
+23
+00:01:20,380 --> 00:01:23,460
+Đầu tiên là số lần chúng ta muốn nó chạy.
+
+24
+00:01:23,460 --> 00:01:28,200
+Thứ hai là cơ hội chúng ta nhận được 0 cái mà chúng ta sẽ sử dụng để đại diện phần đầu ở đây.
+
+25
+00:01:28,200 --> 00:01:30,330
+Hãy chạy một vòng mô phỏng.
+
+26
+00:01:31,420 --> 00:01:32,000
+Tuyệt vời vì thế
+
+27
+00:01:32,000 --> 00:01:35,880
+nếu bạn theo dõi một notebook jupiter bạn nhận được 0 hoặc là 1.
+
+28
+00:01:35,880 --> 00:01:38,420
+Và một nửa giá trị đồng ý với cái mà tôi có.
+
+29
+00:01:39,680 --> 00:01:41,760
+Nếu chúng ta chạy mô phỏng một trăm lần và
+
+30
+00:01:41,760 --> 00:01:43,690
+chia kết quả cho một nghìn.
+
+31
+00:01:43,690 --> 00:01:46,510
+Khi bạn thấy số gần bằng 0.5 có nghĩa là
+
+32
+00:01:46,510 --> 00:01:49,740
+một nửa thời gian chúng ta đã có phần đầu và một nửa thời gian chúng ta có phần đuôi
+
+33
+00:01:50,990 --> 00:01:55,760
+tất nhiên sự phân phối nhị thức chỉ là một ví dụ đơn giản.
+
+34
+00:01:55,760 --> 00:01:59,120
+Chúng ta cũng có sự phân phối nhị thức không đồng đều.
+
+35
+00:01:59,120 --> 00:02:03,710
+Ví dụ mặc dù chúng ta ở trong vòng xoáy ngày hôm này.
+
+36
+00:02:03,710 --> 00:02:06,200
+Nó khá là thấp thậm chí chúng ta có vòng xoáy ở đây.
+
+37
+00:02:06,200 --> 00:02:10,150
+Có thể có một phần trăm cơ hội
+
+38
+00:02:10,150 --> 00:02:14,740
+chúng ta có thể đặt phân phối nhị thức là trọng lường trong numpy.
+
+39
+00:02:14,740 --> 00:02:19,020
+Nếu chúng ta chạy cái này 100,000 lần chúng ta thấy có một vòng xoáy nhỏ.
+
+40
+00:02:20,460 --> 00:02:23,550
+Vì thế bạn có thể băn khoăn tại sao tôi nói đến sự phân phối đơn giản và
+
+41
+00:02:23,550 --> 00:02:25,150
+trực quan.
+
+42
+00:02:25,150 --> 00:02:27,620
+Ý tôi là chúng ta hiểu việc lật một đồng xu
+
+43
+00:02:27,620 --> 00:02:30,120
+khi chúng ta phải đưa ra quyết định quan trọng như trẻ con.
+
+44
+00:02:31,220 --> 00:02:34,870
+Nhưng cái tôi muốn minh họa là các công cụ tính toán bắt đầu cho phép
+
+45
+00:02:34,870 --> 00:02:38,510
+chúng ta mô phỏng thế giới cái mà giuso chúng ta trả lời các câu hỏi.
+
+46
+00:02:38,510 --> 00:02:40,590
+Tôi có thể cho bạn thấy bài toán đằng sau điều này vì vậy
+
+47
+00:02:40,590 --> 00:02:42,770
+chúng ta có thể đưa ra các khả năng.
+
+48
+00:02:42,770 --> 00:02:46,470
+Nhưng sự mô phỏng là một hình thức của sự truy vấn.
+
+49
+00:02:46,470 --> 00:02:48,330
+Hãy lấy một ví dụ nữa.
+
+50
+00:02:48,330 --> 00:02:51,940
+Giả sử lốc xoáy ở đây trong Ann Arbor trong bất kì ngày nào.
+
+51
+00:02:51,940 --> 00:02:55,130
+1% bất kể thời gian nào trong năm.
+
+52
+00:02:55,130 --> 00:02:58,030
+Điều đó cao hơn thực tế nhưng nó tạo ra một phiên bản nhanh hơn.
+
+53
+00:02:58,030 --> 00:03:00,970
+Giả sử nếu có một cơn lốc xoáy tôi sẽ tránh xa cửa sổ và
+
+54
+00:03:00,970 --> 00:03:04,620
+trốn sau đó quay trở lại và ghi lại ngày hôm sau.
+
+55
+00:03:04,620 --> 00:03:07,355
+Điều này xảy ra hai ngày liên tiếp.
+
+56
+00:03:08,680 --> 00:03:12,540
+Chúng ta có thể sử dụng sự phân phối nhị thức trong numpy để mô phỏng điều này.
+
+57
+00:03:13,580 --> 00:03:17,990
+Ở đây chúng ta tạo ra một danh sách trống và chúng ta tạo ra một số sự kiện có thể xảy ra bằng việc
+
+58
+00:03:17,990 --> 00:03:21,490
+yêu cầu chức năng nhị phân numpy.
+
+59
+00:03:21,490 --> 00:03:26,700
+Chúng ta sẽ làm điều này một trăm lần.
+
+60
+00:03:28,080 --> 00:03:30,840
+Quá trình này được gọi là lấy mẫu phân phối.
+
+61
+00:03:31,920 --> 00:03:34,360
+Bây giờ chúng ta có thể viết một vòng lặp nhỏ đi qua danh sách và tìm kiếm
+
+62
+00:03:34,360 --> 00:03:37,240
+hai cặp liền kề bất kì có nghĩa là
+
+63
+00:03:37,240 --> 00:03:40,820
+có hai ngày cơn lốc xoáy quay trở lại.
+
+64
+00:03:40,820 --> 00:03:46,880
+Chúng ta thấy rằng điều này kết thúc khoảng ngày 102 hơn 3,000 năm.
+
+65
+00:03:46,880 --> 00:03:49,440
+Rõ ràng nó quá nhiều với tôi.
+
+66
+00:03:49,440 --> 00:03:53,690
+Mục đích của tôi cở đây là sức mạnh tính toán hiện đại cho phép chúng ta
+
+67
+00:03:53,690 --> 00:03:58,370
+mô phỏng nhanh chóng hiệu quả của các thông số khác nhau trong phân phối.
+
+68
+00:03:58,370 --> 00:04:00,530
+Dẫn đến một cách mới để tìm hiểu vấn đề.
+
+69
+00:04:00,530 --> 00:04:03,520
+Bạn không phải làm tất cả các bài toán bạn có thể
+
+70
+00:04:03,520 --> 00:04:07,380
+khá thường xuyên mô phỏng và quan sát kết quả.
+
+71
+00:04:08,410 --> 00:04:11,430
+Trong bài giảng tiếp theo chúng ta sẽ nói một chút về sự phân phát.

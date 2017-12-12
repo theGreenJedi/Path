@@ -1,0 +1,153 @@
+1
+00:00:08,362 --> 00:00:12,500
+A lot of analysis you do might
+relate to dates and times.
+
+2
+00:00:12,500 --> 00:00:16,630
+For instance, finding the average
+number of sales over a given period,
+
+3
+00:00:16,630 --> 00:00:20,815
+selecting a list of products to data mine
+if they were purchased in a given period,
+
+4
+00:00:20,815 --> 00:00:24,395
+or trying to find the period with
+the most activity in online discussion
+
+5
+00:00:24,395 --> 00:00:26,130
+forum systems.
+
+6
+00:00:26,130 --> 00:00:30,670
+In this course, we're not going to delve
+too deeply into time series analysis, but
+
+7
+00:00:30,670 --> 00:00:32,960
+I wanted to show you some
+of the basics in Python.
+
+8
+00:00:34,240 --> 00:00:36,020
+First, you should be aware that date and
+
+9
+00:00:36,020 --> 00:00:38,710
+times can be stored in
+many different ways.
+
+10
+00:00:38,710 --> 00:00:41,670
+One of the most common legacy methods for
+storing the date and
+
+11
+00:00:41,670 --> 00:00:46,390
+time in online transactions systems is
+based on the offset from the epoch,
+
+12
+00:00:46,390 --> 00:00:47,610
+which is January 1, 1970.
+
+13
+00:00:47,610 --> 00:00:53,650
+There's a lot of historical cruft around
+this, but it's not uncommon to see systems
+
+14
+00:00:53,650 --> 00:00:59,060
+storing the date of a transaction in
+seconds or milliseconds since this date.
+
+15
+00:00:59,060 --> 00:01:02,270
+So if you see large numbers where
+you expect to see date and time,
+
+16
+00:01:02,270 --> 00:01:04,920
+you'll need to convert them to
+make much sense out of the data.
+
+17
+00:01:06,190 --> 00:01:10,570
+In Python, you can get the current time
+since the epoch using the time module.
+
+18
+00:01:10,570 --> 00:01:14,310
+You can then create a time stamp
+using the from time stamp function
+
+19
+00:01:14,310 --> 00:01:16,460
+on the date time object.
+
+20
+00:01:16,460 --> 00:01:20,210
+When we print this value out,
+we see that the year, month, day, and so
+
+21
+00:01:20,210 --> 00:01:21,630
+forth are also printed out.
+
+22
+00:01:22,690 --> 00:01:27,960
+The date time object has handy attributes
+to get the representative hour, day,
+
+23
+00:01:27,960 --> 00:01:29,260
+seconds, etc.
+
+24
+00:01:30,772 --> 00:01:34,930
+Date time objects allow for
+simple math using time deltas.
+
+25
+00:01:34,930 --> 00:01:38,780
+For instance, here,
+we can create a time delta of 100 days,
+
+26
+00:01:38,780 --> 00:01:42,790
+then do subtraction and comparisons
+with the date time object.
+
+27
+00:01:42,790 --> 00:01:47,040
+This is commonly used in data science for
+creating sliding windows.
+
+28
+00:01:47,040 --> 00:01:49,140
+For instance,
+where you might want to look for
+
+29
+00:01:49,140 --> 00:01:53,880
+any five day span of time where sales were
+highest, and flag that for follow up.
+
+30
+00:01:54,930 --> 00:01:57,830
+This is just a little glimpse at dates and
+times in Python.
+
+31
+00:01:57,830 --> 00:02:01,100
+In week three of this course,
+we're going to investigate dates and
+
+32
+00:02:01,100 --> 00:02:04,170
+times a bit more using
+the pandas date time library.

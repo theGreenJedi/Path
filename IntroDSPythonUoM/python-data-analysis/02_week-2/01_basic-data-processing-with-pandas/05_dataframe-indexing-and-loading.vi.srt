@@ -1,0 +1,427 @@
+1
+00:00:08,684 --> 00:00:11,363
+Luồng công việc phổ biến là để đọc
+dữ liệu của bạn bên trong khung dữ liệu
+
+2
+00:00:11,363 --> 00:00:14,042
+sau đó làm giảm khung dữ liệu này
+với các cột cụ thể hoặc
+
+3
+00:00:14,042 --> 00:00:17,260
+các hàng mà bạn quan tâm đến
+việc hoạt động cùng.
+
+4
+00:00:17,260 --> 00:00:20,500
+Như bạn đã thấy bộ công cụ panda cố gắng cung cấp
+cho bạn khung nhìn trên khung dữ liệu.
+
+5
+00:00:20,500 --> 00:00:24,650
+Điều này nhanh hơn nhiều so với việc sao chép dữ liệu
+và cũng hiệu quả hơn bộ nhớ nhiều.
+
+6
+00:00:25,740 --> 00:00:28,800
+Nhưng nó có nghĩa là nếu bạn
+thao tác dữ liệu, bạn phải biết
+
+7
+00:00:28,800 --> 00:00:31,430
+bất kì thay đổi nào với khung
+dữ liệu bạn đang làm việc
+
+8
+00:00:31,430 --> 00:00:34,630
+có tác động trên khung dữ liệu cơ sở
+bạn sử dụng ban đầu.
+
+9
+00:00:35,810 --> 00:00:39,380
+Đây là một ví dụ sử dụng khung dữ liệu
+mua bán giống nhau của chúng ta trước đây.
+
+10
+00:00:39,380 --> 00:00:44,460
+Chúng ta có thể tạo ra một chuỗi dựa trên loại
+chi phí bằng cách sử dụng dấu ngoặc vuông.
+
+11
+00:00:44,460 --> 00:00:48,540
+Sau đó chúng ta có thể tăng chi phí
+trong chuỗi này sử dụng kỹ thuật truyền phát.
+
+12
+00:00:48,540 --> 00:00:53,620
+Bây giờ nếu chúng ta nhìn vào khung dữ liệu gốc,
+chúng ta thấy các chi phí này cũng tăng lên.
+
+13
+00:00:53,620 --> 00:00:56,150
+Đó làm một cân nhắc quan trọng để xem xét.
+
+14
+00:00:56,150 --> 00:00:58,113
+Nếu bạn muốn sử dụng bản
+sao một cách rõ ràng.
+
+15
+00:00:58,113 --> 00:01:02,511
+thì bạn nên cân nhắc việc dùng phương pháp
+sao chép trên khung dữ liệu cho nó đầu tiên.
+
+16
+00:01:04,327 --> 00:01:08,930
+Trong khóa học này chúng ta sẽ chủ yếu sử dụng
+tập dữ liệu có kích thước vừa, hoặc nhỏ hơn.
+
+17
+00:01:08,930 --> 00:01:09,700
+Như tôi đã đề cập
+
+18
+00:01:09,700 --> 00:01:14,470
+một luồng công việc phổ biến là để đọc
+tập dữ liệu, thường là từ một tập bên ngoài.
+
+19
+00:01:14,470 --> 00:01:18,630
+Chúng ta đã thấy rất rõ ràng cách bạn có thể
+làm điều này sử dụng python và các danh sách, các từ điển.
+
+20
+00:01:18,630 --> 00:01:22,190
+Bạn có thể tưởng tượng cách bạn sử dụng các
+từ điển đó để tạo ra khung dữ liệu panda.
+
+21
+00:01:23,310 --> 00:01:25,620
+Rất may panda có hỗ trợ sẵn bên trong cho
+
+22
+00:01:25,620 --> 00:01:29,140
+các tập có dấu phân cách như CSV cũng như các
+
+23
+00:01:29,140 --> 00:01:33,850
+dạng dữ liệu khác bao gồm cơ sở
+dữ liệu quan hệ, Excel và bảng HTML.
+
+24
+00:01:34,990 --> 00:01:37,440
+Tôi đã lưu một tập CSV gọi là olympics.csv,
+
+25
+00:01:37,440 --> 00:01:41,940
+đó là dữ liệu từ wikipedia chứa
+một danh sách tóm tắt về huy chương
+
+26
+00:01:41,940 --> 00:01:43,690
+các quốc gia đã chiến thắng ở Olympics.
+
+27
+00:01:44,950 --> 00:01:48,180
+Chúng ta có thể nhìn vào tập này sử dụng lệnh cat.
+
+28
+00:01:48,180 --> 00:01:51,110
+Cái mà chúng ta có thể lấy trực tiếp
+sử dụng dấu chấm than.
+
+29
+00:01:52,110 --> 00:01:55,550
+Cái xảy ra ở đây là khi ghi chú jupyter
+thấy một dòng bắt đầu với
+
+30
+00:01:55,550 --> 00:02:00,632
+một dấu chấm than, nó gửi phần còn lại
+của dòng tới hệ điều hành để
+
+31
+00:02:00,632 --> 00:02:01,540
+đánh giá.
+
+32
+00:02:01,540 --> 00:02:05,690
+Vì thế cat làm việc trên Linux và Macs cũng
+như trong nền tảng Coursera nhưng
+
+33
+00:02:05,690 --> 00:02:07,610
+có thể không làm việc trên Windows.
+
+34
+00:02:07,610 --> 00:02:09,310
+Bạn không cần lo lắng quá nhiều về điều này.
+
+35
+00:02:09,310 --> 00:02:12,752
+Tôi chỉ muốn chỉ ra cách ghi chú jupyter
+có thể tích hợp với hệ điều hành
+
+36
+00:02:12,752 --> 00:02:15,618
+để cung cấp cho bạn nhiều công cụ hơn
+để nhìn vào dữ liệu của bạn.
+
+37
+00:02:17,346 --> 00:02:20,490
+Chúng ta thấy từ đầu ra cat rằng
+có một danh sách số
+
+38
+00:02:20,490 --> 00:02:24,240
+các cột được theo dõi bởi
+một loạt các định dạng cột.
+
+39
+00:02:24,240 --> 00:02:27,470
+Các định dạng cột có một số
+kí tự lẻ trong chúng.
+
+40
+00:02:27,470 --> 00:02:30,510
+Đó là kí hiệu số unicode,
+có ý nghĩa về số lượng.
+
+41
+00:02:31,630 --> 00:02:33,990
+Sau đó chúng ta có các hàng dữ liệu,
+tất cả các cột tách ra.
+
+42
+00:02:35,270 --> 00:02:38,170
+Chúng ta có thể đọc điều này trong
+khung dữ liệu bằng cách gọi hàm
+
+43
+00:02:38,170 --> 00:02:40,200
+đọc csv của mô đun.
+
+44
+00:02:40,200 --> 00:02:43,610
+Khi chúng ta nhìn vào khung dữ liệu chúng ta
+thấy rằng phần đầu tiên có NaN trong nó.
+
+45
+00:02:43,610 --> 00:02:47,320
+Bởi vì nó là một giá trị trống và các hàng
+được lập chỉ số tự động cho chúng ta.
+
+46
+00:02:48,680 --> 00:02:51,890
+Nó khá là rõ rằng hàng dữ liệu đầu tiên
+trong khung dữ liệu là cái
+
+47
+00:02:51,890 --> 00:02:53,390
+chúng ta thực sự muốn thấy như các tên cột.
+
+48
+00:02:53,390 --> 00:02:57,500
+Nó giống với cột đầu tiên
+trong dữ liệu là tên quốc gia,
+
+49
+00:02:57,500 --> 00:02:58,990
+Cái mà chúng ta muốn tạo một chỉ số.
+
+50
+00:03:00,170 --> 00:03:04,060
+Đọc csv có một số các thông số mà
+chúng ta có thể sử dụng để chỉ ra
+
+51
+00:03:04,060 --> 00:03:06,429
+tới hàm panda các hàm và các cột nên
+được dán nhãn như thế nào.
+
+52
+00:03:08,320 --> 00:03:13,380
+Ví dụ chúng ta có thể sử dụng chỉ số
+để chi ra cột nào là chỉ số
+
+53
+00:03:13,380 --> 00:03:17,180
+và chúng ta cũng có thể sử dụng tham số
+tiêu đề để chỉ ra hàng nào từ tập dữ liệu
+
+54
+00:03:17,180 --> 00:03:19,010
+nên được sử dụng là tiêu đề.
+
+55
+00:03:19,010 --> 00:03:23,732
+Hãy nhập lại dữ liệu đó và giá trị chỉ số
+trung tâm là 0, cột đầu tiên
+
+56
+00:03:23,732 --> 00:03:27,458
+và hãy đặt các cột tiêu đề để đọc
+từ hàng thứ hai của dữ liệu.
+
+57
+00:03:27,458 --> 00:03:30,060
+Chúng ta có thể làm điều này bằng cách
+bỏ qua các thông số hàng,
+
+58
+00:03:30,060 --> 00:03:34,316
+để cho panda biết bỏ qua hàng
+đầu tiên, cái được tạo ra từ các cột tên số.
+
+59
+00:03:36,758 --> 00:03:41,520
+Bây giờ dữ liệu này đến từ tất cả
+các bảng huy chương Olympics trên wikipedia.
+
+60
+00:03:41,520 --> 00:03:46,897
+Nếu chúng ta đến trang chúng ta
+có thể thấy điều đó thay vì chạy vàng, bạc và
+
+61
+00:03:46,897 --> 00:03:51,839
+đồng trong các trang, các biểu
+tượng nhỏ với một, hai và
+
+62
+00:03:51,839 --> 00:03:57,564
+ba trong tệp scv của chúng ta những
+điều này được thể hiện bằng các chuỗi 01 !,
+
+63
+00:03:57,564 --> 00:03:59,090
+02 !, và vân vân.
+
+64
+00:03:59,090 --> 00:04:03,510
+Chúng ta thấy rằng các giá trị cột được
+nhắc lại thực sự không phải là thực tế tốt.
+
+65
+00:04:03,510 --> 00:04:08,759
+Hàm panda nhận ra điều này trong
+panda.1 và .2 để tạo ra nhiều thứ độc đáo hơn.
+
+66
+00:04:09,950 --> 00:04:12,540
+Nhưng nhãn dán này không
+rõ ràng như nó có thể vì thế
+
+67
+00:04:12,540 --> 00:04:14,570
+chúng ta sẽ làm sạch tập dữ liệu.
+
+68
+00:04:14,570 --> 00:04:18,500
+Chúng ta có thể làm điều này bằng việc
+chỉnh sửa tập csv trực tiếp nhưng
+
+69
+00:04:18,500 --> 00:04:21,640
+chúng ta cũng có thể đặt các
+cột tên sử dụng tên panda.
+
+70
+00:04:22,930 --> 00:04:27,090
+Hàm panda lưu trữ danh sách của
+tất cả các cột trong thuộc tính .columns.
+
+71
+00:04:27,090 --> 00:04:30,540
+Chúng ta có thể thay đổi các giá trị của
+các cột tên bằng cách lặp danh sách này và
+
+72
+00:04:30,540 --> 00:04:33,280
+dùng phương pháp đặt lại
+tên của khung dữ liệu.
+
+73
+00:04:33,280 --> 00:04:36,650
+Bây giờ tôi sẽ sao chép và dán vào
+để tăng tốc mọi thứ nhưng
+
+74
+00:04:36,650 --> 00:04:38,400
+chúng ta có thể đi qua những gì sẽ xảy ra ở đây.
+
+75
+00:04:39,600 --> 00:04:44,520
+Ở đây chúng ta chỉ cần
+lặp qua tất cả các cột nếu
+
+76
+00:04:44,520 --> 00:04:47,830
+chúng bắt đầu với 01, 02, 03 hoặc kí tự số.
+
+77
+00:04:47,830 --> 00:04:50,210
+Nếu chúng làm, chúng ta sẽ đặt lại tên và
+
+78
+00:04:50,210 --> 00:04:54,030
+đặt các cột thông số với một từ điển bằng
+các chìa khóa là cột chúng ta muốn
+
+79
+00:04:54,030 --> 00:04:56,630
+thay thế và giá trị là giá trị mới chúng ta muốn.
+
+80
+00:04:57,700 --> 00:05:00,730
+Ở đây chúng ta sẽ cắt một
+số giá trị cũ thành hai,
+
+81
+00:05:00,730 --> 00:05:03,890
+bởi vì chúng ta không muốn
+mất các giá trị duy nhất.
+
+82
+00:05:03,890 --> 00:05:07,343
+Chúng ta cũng sẽ đặt thông số
+quan trọng là True để
+
+83
+00:05:07,343 --> 00:05:09,991
+hàm panda biết để cập nhật
+khung dữ liệu trực tiếp.
+
+84
+00:05:12,625 --> 00:05:16,191
+Được rồi, đó là thêm vào khung dữ liệu
+với sự tập trung vào luồng hoạt động
+
+85
+00:05:16,191 --> 00:05:19,660
+để có dữ liệu thực sự và vào bên trong
+nơi chúng ta muốn truy vấn.
+
+86
+00:05:19,660 --> 00:05:22,640
+Vẫn còn một chút lộn xộn trong
+dữ liệu này về tên chỉ số và
+
+87
+00:05:22,640 --> 00:05:24,060
+một số cột.
+
+88
+00:05:24,060 --> 00:05:25,210
+Trong hướng dẫn tiếp theo,
+
+89
+00:05:25,210 --> 00:05:28,760
+trợ lý sinh viên sau đại học của chúng tôi
+sẽ chỉ cho bạn cách làm sạch file,
+
+90
+00:05:28,760 --> 00:05:32,020
+và các phương pháp tiếp cận khác bạn
+có thể muốn sử dụng để lấy dữ liệu định dạng.

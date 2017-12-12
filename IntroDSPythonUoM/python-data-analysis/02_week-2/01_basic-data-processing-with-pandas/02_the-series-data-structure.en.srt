@@ -1,0 +1,394 @@
+1
+00:00:09,048 --> 00:00:12,110
+The series is one of the core
+data structures in pandas.
+
+2
+00:00:12,110 --> 00:00:14,710
+You think of it a cross between a list and
+a dictionary.
+
+3
+00:00:14,710 --> 00:00:16,165
+The items are all stored in an order and
+
+4
+00:00:16,165 --> 00:00:18,670
+there's labels with which
+you can retrieve them.
+
+5
+00:00:18,670 --> 00:00:21,450
+An easy way to visualize
+this is two columns of data.
+
+6
+00:00:21,450 --> 00:00:24,485
+The first is the special index,
+a lot like the dictionary keys.
+
+7
+00:00:24,485 --> 00:00:26,670
+While the second is your actual data.
+
+8
+00:00:26,670 --> 00:00:30,058
+It's important to note that the data
+column has a label of its own and
+
+9
+00:00:30,058 --> 00:00:32,391
+can be retrieved using
+the .name attribute.
+
+10
+00:00:32,391 --> 00:00:34,425
+This is different than
+with dictionaries and
+
+11
+00:00:34,425 --> 00:00:37,162
+is useful when it comes to
+merging multiple columns of data.
+
+12
+00:00:37,162 --> 00:00:39,389
+And we'll talk about that
+later on in the course.
+
+13
+00:00:40,700 --> 00:00:44,860
+As you might expect, you can create
+a series by passing in a list of values.
+
+14
+00:00:44,860 --> 00:00:48,540
+When you do this, Pandas automatically
+assigns an index starting with zero and
+
+15
+00:00:48,540 --> 00:00:50,950
+sets the name of the series to None.
+
+16
+00:00:50,950 --> 00:00:52,740
+Let's see an example of this.
+
+17
+00:00:52,740 --> 00:00:56,250
+First, I'll start off by importing
+the pandas library as pd,
+
+18
+00:00:56,250 --> 00:00:58,990
+then let's take a look
+at the series object.
+
+19
+00:00:58,990 --> 00:01:03,311
+Here you could see the documentation
+indicates that you can pass in some data,
+
+20
+00:01:03,311 --> 00:01:04,432
+an index and a name.
+
+21
+00:01:04,432 --> 00:01:07,617
+The data can be anything,
+that's array-like, like a list.
+
+22
+00:01:07,617 --> 00:01:10,037
+So let's give that a try.
+
+23
+00:01:10,037 --> 00:01:13,759
+We'll just make a list of the three
+of my favorite animals, a tiger,
+
+24
+00:01:13,759 --> 00:01:14,795
+a bear and a moose.
+
+25
+00:01:14,795 --> 00:01:18,274
+We'll see here that the pandas has
+automatically identified the type of
+
+26
+00:01:18,274 --> 00:01:21,923
+the data being held in the list, in this
+case we passed in a list of strings and
+
+27
+00:01:21,923 --> 00:01:23,368
+panda set the type to object.
+
+28
+00:01:27,320 --> 00:01:28,461
+We don't have to use strings.
+
+29
+00:01:28,461 --> 00:01:31,619
+If we passed in a list of whole numbers,
+for instance,
+
+30
+00:01:31,619 --> 00:01:34,311
+we could see that panda
+sets the type to n 64.
+
+31
+00:01:34,311 --> 00:01:39,680
+Underneath panda stores series values in
+a typed array using the Numpy library.
+
+32
+00:01:39,680 --> 00:01:43,130
+This offers significant speed-up when
+processing data versus traditional
+
+33
+00:01:43,130 --> 00:01:43,740
+python lists.
+
+34
+00:01:45,260 --> 00:01:47,280
+There's some other typing
+details that exist for
+
+35
+00:01:47,280 --> 00:01:49,320
+performance that are important to know.
+
+36
+00:01:49,320 --> 00:01:53,839
+The most important is how Numpy and
+thus pandas handle missing data.
+
+37
+00:01:53,839 --> 00:01:56,840
+In Python, we have the none type
+to indicate a lack of data.
+
+38
+00:01:56,840 --> 00:01:59,684
+But what do we do if we want to
+have a typed list like we do in
+
+39
+00:01:59,684 --> 00:02:00,726
+the series object?
+
+40
+00:02:07,315 --> 00:02:09,700
+Underneath, pandas does
+some type conversion.
+
+41
+00:02:09,700 --> 00:02:13,596
+If we create a list of strings and
+we have one element, a None type,
+
+42
+00:02:13,596 --> 00:02:18,139
+pandas inserts it as a None and uses
+the type object for the underlying array.
+
+43
+00:02:18,139 --> 00:02:22,406
+If we create a list of numbers, integers
+or floats, and put in the None type,
+
+44
+00:02:22,406 --> 00:02:27,073
+pandas automatically converts this to a
+special floating point value designated as
+
+45
+00:02:27,073 --> 00:02:29,130
+NAN, which stands for not a number.
+
+46
+00:02:30,480 --> 00:02:33,580
+For those who might not have done
+scientific computing in Python before,
+
+47
+00:02:33,580 --> 00:02:35,020
+this is a pretty important point.
+
+48
+00:02:37,760 --> 00:02:41,784
+NAN is not none and
+when we try the equality test, it's false.
+
+49
+00:02:45,417 --> 00:02:49,690
+It turns out that you actually can't
+do an equality test of NAN to itself.
+
+50
+00:02:49,690 --> 00:02:52,300
+When you do, the answer is always false.
+
+51
+00:02:52,300 --> 00:02:54,340
+You need to use special
+functions to test for
+
+52
+00:02:54,340 --> 00:02:59,160
+the presence of not a number,
+such as the Numpy library is NAN.
+
+53
+00:03:00,160 --> 00:03:02,290
+We'll come back to this
+later in the assignment, but
+
+54
+00:03:02,290 --> 00:03:05,840
+keep in mind when you see NAN,
+it's meaning is similar to none, but
+
+55
+00:03:05,840 --> 00:03:09,690
+it's a numeric value and it's treated
+differently for efficiency reasons.
+
+56
+00:03:09,690 --> 00:03:12,590
+Let's talk more about how
+pandas' series can be created.
+
+57
+00:03:12,590 --> 00:03:16,390
+While my list of animals might be
+a common way to create some play data,
+
+58
+00:03:16,390 --> 00:03:19,210
+often you have label data
+that you want to manipulate.
+
+59
+00:03:19,210 --> 00:03:21,630
+A series can be created
+from dictionary data.
+
+60
+00:03:21,630 --> 00:03:24,850
+If you do this, the index is automatically
+assigned to the keys of the dictionary
+
+61
+00:03:24,850 --> 00:03:28,290
+that you provided and
+not just incrementing integers.
+
+62
+00:03:28,290 --> 00:03:32,640
+Here's an example using some data from
+Wikipedia on official national sports.
+
+63
+00:03:32,640 --> 00:03:34,610
+When we create the series, we see that,
+
+64
+00:03:34,610 --> 00:03:39,160
+since it was string data, panda set
+the data type of the series to object.
+
+65
+00:03:39,160 --> 00:03:42,770
+We set the list of the countries
+as the value of the series and
+
+66
+00:03:42,770 --> 00:03:45,860
+that the index values can be set
+to the keys from our dictionary.
+
+67
+00:03:47,200 --> 00:03:48,600
+Once the series has been created,
+
+68
+00:03:48,600 --> 00:03:52,490
+we can get the index object
+using the index attribute.
+
+69
+00:03:52,490 --> 00:03:55,900
+You could also separate your index
+creation from the data by passing in
+
+70
+00:03:55,900 --> 00:03:58,520
+the index as a list
+explicitly to the series.
+
+71
+00:03:59,690 --> 00:04:02,290
+So what happens if your
+list of values in the index
+
+72
+00:04:02,290 --> 00:04:06,748
+object are not aligned with the keys in
+your dictionary for creating the series?
+
+73
+00:04:06,748 --> 00:04:10,390
+Well, pandas overrides the automatic
+creation to favor only and
+
+74
+00:04:10,390 --> 00:04:13,275
+all of the indices values
+that you provided.
+
+75
+00:04:13,275 --> 00:04:17,210
+So it will ignore it from your dictionary,
+all keys, which are not in your index, and
+
+76
+00:04:17,210 --> 00:04:21,610
+pandas will add non type or NAN values for
+any index value you provide,
+
+77
+00:04:21,610 --> 00:04:24,290
+which is not in your dictionary key list.
+
+78
+00:04:24,290 --> 00:04:27,500
+In this example,
+we pass in a dictionary of four items but
+
+79
+00:04:27,500 --> 00:04:31,520
+only two are preserved in the series
+object because of the index list.
+
+80
+00:04:31,520 --> 00:04:35,395
+We see that hockey has been added but
+since it's also in the index list,
+
+81
+00:04:35,395 --> 00:04:37,345
+it has no value associated with it.
+
+82
+00:04:40,016 --> 00:04:41,870
+So that's how we create a series.
+
+83
+00:04:41,870 --> 00:04:45,280
+In the next class, we'll dig deeper and
+look at how we get data out of the series.

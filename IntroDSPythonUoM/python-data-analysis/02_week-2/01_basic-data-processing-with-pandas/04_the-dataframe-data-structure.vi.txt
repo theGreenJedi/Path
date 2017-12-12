@@ -1,0 +1,80 @@
+Cấu trúc dữ liệu khung dữ liệu là
+trọng tâm của thư viện panda. Nó là một vấn đề quan trọng mà bạn sẽ
+làm việc trong phân tích dữ liệu và các nhiệm vụ làm sạch. Khung dữ liệu là khái niệm về một
+đối tượng chuỗi hai chiều, có một chỉ mục và các cột nội dung,
+mỗi cột có một nhãn mác. Thực tế sự khác biệt giữa cột và hàng chỉ là phân biệt về khái niệm. Và bạn có thể nghĩ về khung dữ liệu là
+một mảng được dán nhãn có hai trục. Bạn có thể tạo ra khung dữ liệu
+bằng nhiều cách khác nhau, một số cái bạn có thể mong muốn. Ví dụ bạn có thể sử dụng một nhóm các chuỗi, mỗi chuỗi đại diện một hàng dữ liệu. Hoặc bạn có thể sử dụng
+một nhóm các từ điển, mỗi từ điển đại diện một hàng dữ liệu. Hãy cùng xem xét một ví dụ. Tôi sẽ tạo ra ba bản ghi đơn đặt hàng
+là các đối tượng chuỗi với một cửa hàng hư cấu. Mỗi một dòng có tên của khách hàng, một xâu mô tả mặt hàng được mua
+và giá của mặt hàng. Tôi thích chó vì thế tôi sẽ
+mua thức ăn cho chó. Kevin Collins Thompson, người hướng dẫn
+khóa học thứ ba trong chuỗi bài giảng, anh ấy dường như thích mèo hơn tôi vì thế
+tôi sẽ nhờ anh ấy mua mèo nhỏ. Và tôi nghĩ Vinod, người dạy khóa thứ
+tư trong chuỗi bài giảng này thích chim vì thế tôi sẽ thêm
+hạt thức ăn cho chim vào đây. Sau đó chúng ta sẽ đưa chúng vào
+khung dữ liệu như đối số đầu tiên và thiết lập các giá trị chỉ số chỉ ra cửa
+hàng nơi mua hàng đã được hoàn thành. Bạn sẽ thấy khi chúng ta xuất ra khung dữ liệu,
+ghi chú jupyter đang cố gắng để làm nó tốt hơn một chút và xuất nó ra
+như một bảng, điều này rất tốt. Tương tự với chuỗi chúng ta có thể
+trích xuất dữ liệu sử dụng iloc và loc. Bởi vì khung dữ liệu là hai chiều,
+thực hiện giá trị đơn với toán tử chỉ số lock sẽ trả lại một
+chuỗi nếu chỉ có một hàng. Trong ví dụ này nếu chúng ta muốn lựa
+chọn dữ liệu liên quan đến cửa hàng số 2, chúng ta sẽ chỉ truy vấn thuộc
+tính loc với một tham số. Bạn sẽ lưu ý tên của chuỗi được quay lại
+như một giá trị chỉ số hàng, trong khi kết quả ra bao gồm cột tên. Chúng ta có thể kiểm tra loại dữ liệu
+trả về bằng việc sử dụng hàm kiểu python. Rất quan trọng để ghi nhớ các chỉ số và tên cột theo trục dọc, trục ngang và
+thẳng đứng, có thể không phải duy nhất. Ví dụ, trong ví dụ này chúng ta
+thấy hai hồ sơ mua bán cho cửa hàng 1 là các hàng khác nhau. Nếu chúng ta sử dụng một giá trị đơn
+với thuộc tính khóa khung dữ liệu, nhiều hàng của khung dữ liệu sẽ được trả lại, không phải
+là một chuỗi mới mà là một khung dữ liệu mới. Ví dụ nếu chúng ta truy vấn cho các hồ sơ của cửa hàng 1, chúng ta thấy rằng Chris và Kevin đều cùng mua
+ở một cửa hàng cung cấp đồ cho vật nuôi. Một trong những tính năng của khung dữ liệu panda
+là bạn có thể nhanh chóng chọn lựa tập dữ liệu trên nhiều trục. Ví dụ nếu bạn muốn liệt kê giá
+của cửa hàng 1, bạn sẽ cung cấp hai thông số đến.log, một là chỉ số
+hàng và một là tên cột. Nếu chúng ta chỉ quan tâm đến giá của
+cửa hàng 1, chúng ta có thể viết điều này là df.lock('Store 1','Cost'). Nếu chúng ta chỉ muốn lựa chọn cột và chỉ có một danh sách tất cả các chi phí thì sao? Đúng, có một số lựa chọn. Đầu tiên bạn có thể nhận được một
+chuyển vị của khung dữ liệu, sử dụng thuộc tính T, hoán đổi
+tất cả các cột và các hàng. Cái này chuyển tên cột của bạn thành các chỉ số. Và chúng ta có thể sử dụng phương pháp .loc. Nó hoạt động nhưng nó khá là xấu. Bởi vì iloc và loc được sử dụng cho việc chọn hàng,
+các nhà phát triển panda đảo ngược toán tử chỉ số trực tiếp
+trên DataFrame cho việc chọn cột. Trong khung dữ liệu của panda,
+các cột luôn luôn có tên. Vì thế lựa chọn này luôn luôn được dán nhãn,
+không bị nhầm lẫn như trước khi sử dụng toán tử dấu ngoặc vuông trên các đối tượng. Những điều đó quen thuộc với
+cơ sở dữ liệu quan hệ, toán tử này tương tự với ánh xạ cột. Cuối cùng bởi vì kết quả của việc
+sử dụng toán tử chỉ số là khung dữ liệu hoặc chuỗi, bạn có thể
+sâu chuỗi các toán tử với nhau. Ví dụ bạn có thể viết lại truy vấn cho all Store 1 costs as df.loc('Store 1',⏎'Cost'). Cái này nhìn khá là hợp lí và
+đưa ra kết quả chúng ta muốn. Nhưng việc sâu chuỗi có thể đi kèm với chi phí và tránh được tốt nhất nếu bạn có thể
+sử dụng cách tiếp cận khác. Cụ thể sâu chuỗi có xu hướng làm cho
+hàm panda trả về một bản sao của khung dữ liệu thay vì nhìn vào một khung dữ liệu. Với việc lựa chọn dữ liệu, điều này không phải là một vấn đề lớn
+mặc dù nó có thể sẽ chậm hơn cần thiết. Nếu bạn đang thay đổi dữ liệu, điều này
+là một khác biệt quan trọng và có thể là lý do của lỗi. Đây là một phương pháp khác. Như chúng ta thấy .loc thực hiện việc
+chọn hàng và nó có thể lấy hai thông số, chỉ số hàng và danh sách tên cột. .loc cũng hỗ trợ việc cắt. Nếu chúng ta muốn chọn tất cả các hàng, chúng ta có thể sử dụng một cột để chỉ ra
+một mảng đầy đủ từ bắt đầu đến kết thúc. Sau đó thêm tên cột là thông số
+thứ hai như một chuỗi. Thực tế nếu chúng ta muốn bao gồm nhiều cột,
+chúng ta có thể làm trong một danh sách. Và panda sẽ mang lại các cột chúng ta yêu cầu. Đây là một ví dụ, chúng ta yêu cầu tất cả tên và giá trị chi phí cho tất cả
+các cửa hàng sử dụng toán tử .loc. Đó là lựa chọn và dữ liệu kế hoạch từ
+khung dữ liệu dựa trên hàng và các nhãn mác cột. Khái niệm chính phải nhớ là các hàng
+và các cột thực sự chỉ cho lợi ích của chúng ta. Bên dưới của điều này là
+hai mảng được dán nhãn và hoán đổi các cột rất dễ dàng. Ngoài ra cân nhắc vấn đề sâu chuỗi cẩn thận và cố gắng tránh nó, nó có thể gây ra
+những kết quả không đoán trước được. Mục đích của bạn là để có được
+một tầm nhìn về dữ liệu nhưng thay vì panda chuyển thành một bản sao. Trong thế giới của panda, các
+bạn đừng cho phép sâu chuỗi. Vì thế nếu bạn thấy nó, hãy chỉ ra nó và
+chia sẻ một giải pháp ít mơ hồ nhất. Bây giờ trước khi chúng ta dừng thảo luận
+về truy cập dữ liệu trong khung dữ liệu, hãy nói về việc loại bỏ dữ liệu. Rất dễ dàng để xóa dữ liệu trong
+chuỗi và khung dữ liệu và chúng ta có thể sử dung hàm xóa để làm điều đó. Hàm này lấy một tham số đơn,
+là chỉ số hoặc cuộn để xóa. Nó là một việc khó cho người
+mới sử dụng hàm panda. Chức năng xóa không thay đổi
+khung dữ liệu theo mặc định. Thay vì thế trả lại cho bạn một bản sao
+của khung dữ liệu với các hàng bị gỡ bỏ. Chúng ta có thể thấy rằng khung dữ liệu
+gốc của chúng ta vẫn còn nguyên vẹn. Hãy làm một bản sao với phương pháp
+sao chép và thực hiện việc giảm trên nó. Đó là một mô hình điển hình trong hàm
+panda, nơi thay đổi khung dữ liệu nếu cần thiết, thường thay đổi
+liên quan đến các chỉ số. Vì thế nó rất quan trọng để nhận biết. Xóa có hai tham số lựa chọn. Đầu tiên được gọi tại chỗ, nếu
+nó được thiết lập là True, khung dữ liệu sẽ được cập nhật tại chỗ
+thay vì một bản sao được trả lại. Thông số thứ hai là trục mà sẽ bị xóa. Mặc định giá trị này là 0,
+là trục hàng. Nhưng bạn có thể thay đổi nó
+thành 1 nếu bạn muốn xóa cột. Có cách thứ hai để xóa cột. Và đó là qua việc sử dụng toán tử chỉ số, sử dụng từ khóa del. Cách xóa dữ liệu này tuy nhiên ảnh hưởng ngay lập tức trên
+khung dữ liệu và không trả về kết quả để xem. Cuối cùng thêm một cột mới
+vào khung dữ liệu dễ như việc gán nó vào một số giá trị. Chẳng hạn như Nếu chúng ra muốn thêm địa điểm mới
+như là một cột với giá trị mặc định là không, chúng ta có thể làm bằng việc sử dụng
+toán tử gán sau dấu ngoặc vuông. Điều này lan truyền giá trị mặc định
+tới cột mới ngay lập tức.

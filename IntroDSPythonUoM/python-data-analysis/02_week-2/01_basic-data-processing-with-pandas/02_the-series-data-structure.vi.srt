@@ -1,0 +1,375 @@
+1
+00:00:09,048 --> 00:00:12,110
+Series là một trong những cấu trúc dữ liệu chính của Pandas.
+
+2
+00:00:12,110 --> 00:00:14,710
+Bạn có thể coi nó như một dạng kết hợp giữa List và Dictionary của Python.
+
+3
+00:00:14,710 --> 00:00:16,165
+Mọi dữ liệu được lưu trữ theo thứ tự và
+
+4
+00:00:16,165 --> 00:00:18,670
+có Labels để bạn có thể gọi chúng.
+
+5
+00:00:18,670 --> 00:00:21,450
+Một cách dễ hình dung đây là dữ liệu gồm hai cột.
+
+6
+00:00:21,450 --> 00:00:24,485
+Cột đầu tiên là Index, nó giống như Keys trong Dictionary.
+
+7
+00:00:24,485 --> 00:00:26,670
+Trong khi cột thứ hai mới là dữ liệu.
+
+8
+00:00:26,670 --> 00:00:30,058
+Bạn phải chú ý là cột dữ liệu có Label riêng của nó và 
+
+9
+00:00:30,058 --> 00:00:32,391
+có thể gọi chúng bằng thuộc tính .name
+
+10
+00:00:32,391 --> 00:00:34,425
+Điều này khác với từ điển và
+
+11
+00:00:34,425 --> 00:00:37,162
+rất hữu ích khi nó hợp nhất nhiều cột dữ liệu.
+
+12
+00:00:37,162 --> 00:00:39,389
+Và chúng ta sẽ nói về điều đó sau trong khóa học.
+
+13
+00:00:40,700 --> 00:00:44,860
+Như bạn mong muốn, bạn có thể tạo ra một chuỗi
+bằng việc truyền vào một danh sách các giá trị.
+
+14
+00:00:44,860 --> 00:00:48,540
+Khi bạn làm điều này hàm panda tự động
+gán một chỉ số bắt đầu từ 0 và
+
+15
+00:00:48,540 --> 00:00:50,950
+đặt tên của chuỗi là None.
+
+16
+00:00:50,950 --> 00:00:52,740
+Hãy xem ví dụ về điều này.
+
+17
+00:00:52,740 --> 00:00:56,250
+Đầu tiên tôi sẽ bắt đầu bằng việc nhập
+thư viện hàm panda là pd,
+
+18
+00:00:56,250 --> 00:00:58,990
+sau đó hãy nhìn vào đối tượng.
+
+19
+00:00:58,990 --> 00:01:03,311
+Ở đây bạn có thể thấy tài liệu chỉ ra rằng
+bạn có thể thực hiện trong một số dữ liệu,
+
+20
+00:01:03,311 --> 00:01:04,432
+một chỉ số và một tên.
+
+21
+00:01:04,432 --> 00:01:07,617
+Dữ liệu có thể là bất cứ cái gì, nó
+giống như một mảng, như một danh sách.
+
+22
+00:01:07,617 --> 00:01:10,037
+Vậy hãy thử.
+
+23
+00:01:10,037 --> 00:01:13,759
+Chúng ta sẽ chỉ làm một danh sách về
+ba loài vật yêu thích nhất, một con hổ,
+
+24
+00:01:13,759 --> 00:01:14,795
+một con gấu và một con nai.
+
+25
+00:01:14,795 --> 00:01:18,274
+Chúng ta sẽ thấy ở đây hàm
+pandas tự động xác định kiểu
+
+26
+00:01:18,274 --> 00:01:21,923
+dữ liệu được tổ chức trong danh sách, trong trường hợp này
+chúng ta thực hiện trong danh sách các chuỗi và
+
+27
+00:01:21,923 --> 00:01:23,368
+hàm panda đặt kiểu cho đối tượng.
+
+28
+00:01:27,320 --> 00:01:28,461
+Chúng ta không phải sử dụng các chuỗi.
+
+29
+00:01:28,461 --> 00:01:31,619
+Nếu chúng ta thực hiện trong
+danh sách tất cả các số, ví dụ,
+
+30
+00:01:31,619 --> 00:01:34,311
+chúng ta có thể thấy hàm panda đặt kiểu int64.
+
+31
+00:01:34,311 --> 00:01:39,680
+Bên dưới hàm panda lưu trữ các giá trị trong
+một hàng đã nhập sử dụng thư viện numpy.
+
+32
+00:01:39,680 --> 00:01:43,130
+Điều này cung cấp tốc độ tăng lên
+đáng kể khi xử lí dữ liệu so với
+
+33
+00:01:43,130 --> 00:01:43,740
+danh sách python truyền thống.
+
+34
+00:01:45,260 --> 00:01:47,280
+Có một số loại chi tiết tồn tại cho
+
+35
+00:01:47,280 --> 00:01:49,320
+hiệu suất mà rất quan trọng để biết.
+
+36
+00:01:49,320 --> 00:01:53,839
+Điều quan trọng nhất là numpy và hàm
+panda xử lí dữ liệu bị thiếu thế nào.
+
+37
+00:01:53,839 --> 00:01:56,840
+Trong pyhton chúng ta có kiểu none
+để chỉ ra việc thiếu dữ liệu.
+
+38
+00:01:56,840 --> 00:01:59,684
+Nhưng chúng ta làm gì nếu chúng ta muốn có
+một danh sách định kiểu giống như chúng ta làm trong
+
+39
+00:01:59,684 --> 00:02:00,726
+hàng loạt đối tượng?
+
+40
+00:02:07,315 --> 00:02:09,700
+Bên dưới hàm panda thực hiện
+một số loại chuyển đổi.
+
+41
+00:02:09,700 --> 00:02:13,596
+Nếu chúng ta tạo ra danh sách các chuỗi
+và chúng ta có một phần tử, một kiểu None,
+
+42
+00:02:13,596 --> 00:02:18,139
+hàm panda chèn nó là None và sử dụng
+loại đối tượng này cho hàng nằm bên dưới.
+
+43
+00:02:18,139 --> 00:02:22,406
+Nếu chúng ta tạo ra danh sách các số,
+các số nguyên và đặt vào loại None,
+
+44
+00:02:22,406 --> 00:02:27,073
+hàm panda tự động chuyển điều này thành
+một giá trị số thực động đặc biệt được xác định là
+
+45
+00:02:27,073 --> 00:02:29,130
+NaN, viết tắt của not a number.
+
+46
+00:02:30,480 --> 00:02:33,580
+Với những người có thể không làm
+khoa học máy tính trong python trước đây,
+
+47
+00:02:33,580 --> 00:02:35,020
+điều này là một điểm rất quan trọng.
+
+48
+00:02:37,760 --> 00:02:41,784
+NaN không phải là None và khi
+chúng ta thử kiểm tra, nó sai.
+
+49
+00:02:45,417 --> 00:02:49,690
+Hóa ra là bạn không thể tự động
+làm kiểm tra NaN với chính nó.
+
+50
+00:02:49,690 --> 00:02:52,300
+Khi bạn làm, câu trả lời luôn luôn là sai.
+
+51
+00:02:52,300 --> 00:02:54,340
+Bạn cần phải sử dụng các
+hàm đặc biệt để kiểm tra
+
+52
+00:02:54,340 --> 00:02:59,160
+sự biểu thị không phải số như là số pi.
+
+53
+00:03:00,160 --> 00:03:02,290
+Chúng ta sẽ quay lại điều này sau trong bài tập nhưng
+
+54
+00:03:02,290 --> 00:03:05,840
+nhớ rằng khi bạn thấy NaN có
+nghĩa là tương tự như none nhưng
+
+55
+00:03:05,840 --> 00:03:09,690
+nó là giá trị số và nó được thực hiện
+khác vì các lí do hiệu quả.
+
+56
+00:03:09,690 --> 00:03:12,590
+Hãy nói nhiều hơn về cách các
+chuỗi hàm panda có thể được tạo ra.
+
+57
+00:03:12,590 --> 00:03:16,390
+Trong khi danh sách động vật của tôi có thể là
+một cách phổ biến để tạo ra một số dữ liệu,
+
+58
+00:03:16,390 --> 00:03:19,210
+thông thường bạn dán nhãn dữ liệu
+mà bạn muốn thao tác.
+
+59
+00:03:19,210 --> 00:03:21,630
+Một chuỗi có thể được tạo ra từ từ điển dữ liệu.
+
+60
+00:03:21,630 --> 00:03:24,850
+Nếu bạn làm điều này, chỉ số được gán
+tự động vào các chìa khóa của từ điển
+
+61
+00:03:24,850 --> 00:03:28,290
+mà bạn đã cung cấp và
+không chỉ gia tăng số nguyên.
+
+62
+00:03:28,290 --> 00:03:32,640
+Đây là một ví dụ sử dụng các dữ liệu từ wikipedia
+trên các môn thể thao quốc gia chính thức.
+
+63
+00:03:32,640 --> 00:03:34,610
+Khi chúng ta tạo ra các chuỗi, bạn thấy rằng,
+
+64
+00:03:34,610 --> 00:03:39,160
+bởi vì nó là một chuỗi dữ liệu, hàm panda
+tạo ra kiểu dữ liệu của các chuỗi đối tượng.
+
+65
+00:03:39,160 --> 00:03:42,770
+Chúng ta thấy danh sách của các
+quốc gia là giá trị của các chuỗi và
+
+66
+00:03:42,770 --> 00:03:45,860
+giá trị chỉ số có thể được đặt vào các
+chìa khóa từ từ điển của chúng ta.
+
+67
+00:03:47,200 --> 00:03:48,600
+Khi các chuỗi được tạo ra,
+
+68
+00:03:48,600 --> 00:03:52,490
+chúng ta có thể có chỉ số
+sử dụng thuộc tính chỉ số.
+
+69
+00:03:52,490 --> 00:03:55,900
+Bạn có thể chia chỉ số từ dữ liệu bằng cách truyền
+
+70
+00:03:55,900 --> 00:03:58,520
+chỉ số như một danh sách tới các chuỗi.
+
+71
+00:03:59,690 --> 00:04:02,290
+Điều gì xảy ra nếu danh sách các giá trị
+của bạn trong đối tượng chỉ số
+
+72
+00:04:02,290 --> 00:04:06,748
+không liên kết với các chìa khóa trong
+thư viện của bạn để tạo ra các chuỗi?
+
+73
+00:04:06,748 --> 00:04:10,390
+Vâng, hàm panda ghi đè lên
+tự động để ưu tiên và chỉ
+
+74
+00:04:10,390 --> 00:04:13,275
+tất cả các giá trị chỉ số mà bạn đã cung cấp.
+
+75
+00:04:13,275 --> 00:04:17,210
+Nó sẽ bỏ qua nó từ từ điển của bạn, tất cả các
+chìa khóa không nằm trong chỉ số của bạn và
+
+76
+00:04:17,210 --> 00:04:21,610
+hàm panda sẽ thêm kiểu non hoặc các
+giá trị NaN cho các chỉ số bạn cung cấp,
+
+77
+00:04:21,610 --> 00:04:24,290
+điều này không nằm trong danh sách
+chìa khóa thư viện của bạn.
+
+78
+00:04:24,290 --> 00:04:27,500
+Trong ví dụ này chúng ta truyền vào
+một thư viện có bốn mục nhưng
+
+79
+00:04:27,500 --> 00:04:31,520
+chỉ hai mục được thực hiện trong chuỗi theo danh sách chỉ số.
+
+80
+00:04:31,520 --> 00:04:35,395
+Chúng ta thấy rằng khúc côn cầu đã được thêm vào
+nhưng bởi vì nó cũng nằm trong danh sách chỉ số,
+
+81
+00:04:35,395 --> 00:04:37,345
+nó không có giá trị liên quan đến nó.
+
+82
+00:04:40,016 --> 00:04:41,870
+Đó là cách chúng ta tạo ra một chuỗi.
+
+83
+00:04:41,870 --> 00:04:45,280
+Trong lớp tiếp theo chúng ta sẽ đào sâu hơn
+và xem cách lấy dữ liệu từ các chuỗi.

@@ -1,0 +1,132 @@
+La ausencia de tipificación estática en
+Python no significa que no haya tipos. En Python hay una función preconstruida
+denominada "type" que te mostrará el tipo de una
+referencia dada. Algunos de los tipos comunes incluyen cadenas,
+el tipo "None", que discutiremos, Enteros y variables
+de punto flotante. Como hemos visto, puedes también 
+hacer referencia a una función, pues el tipo "función"
+también existe. Los objetos con tipo tienen
+propiedades asociadas, y estas propiedades pueden
+ser datos o funciones. Gran cantidad de Python es construido alrededor de
+diferentes tipos de secuencias o tipos de colecciones. Y hay tres tipos nativos de
+colecciones de las que vamos a hablar tuplas, listas y diccionarios. Una tupla es una secuencia de variables.
+La tupla es inmutable. Esto significa que una tupla tiene
+elementos ordenados, pero no se pueden modificar
+una una vez creados. Escribimos tuplas utilizando paréntesis, y
+podemos mezclar tipos en los contenidos de las tuplas. Aquí hay una tupla que
+tiene cuatro elementos. Dos son números y
+dos son cadenas. Ten en cuenta que he usado
+comillas simples para una cadena, mientras que previamente
+he usado comillas dobles. En Python, se pueden usar comillas simples
+o dobles para denotar valores de cadena. Las listas son muy similares, pero
+pueden ser mutables, por lo que Puedes modificar su longitud, número y
+valores de los elementos. Una lista se declara
+usando corchetes. Hay un par de maneras diferentes de
+cambiar el contenido de una lista. Uno es a través de la función "append"
+que te permite añadir nuevos elementos al final de la lista. Tanto las listas como las tuplas
+son tipos iterables, por lo que puedes escribir bucles para ir a
+través de cada uno de sus valores. La norma para una lista es, si deseas ver cada item,
+utilizar la sentencia "for". Esto es similar bucle "for"
+de lenguajes como Java y C #, pero ten en cuenta que
+no se requieren tipos. También se puede acceder a las listas y tuplas 
+como se accede a los arreglos en otros lenguajes, utilizando el corchete, que se
+denomina operador de indexación El primer elemento de la lista
+comienza en la posición cero y Para obtener la longitud de la lista,
+utilizamos la función preconstruida "len". Hay algunas otras funciones
+comunes como "min" y "max" que encontrarán los valores mínimos
+o máximos en una lista o tupla dada. Las listas y tuplas de
+Python también admiten algunas operaciones
+matemáticas básicas. Por ejemplo, el signo
+más concatena listas. Y los asteriscos repiten
+los valores de una lista. Un operador muy común
+es el operador "in", que analiza la pertenencia al conjunto y
+devuelve un valor booleano de "verdadero" o "falso" dependiendo de si un
+elemento pertenece a una lista dada. Vamos a trabajar más con operadores
+y tipos especiales de secuencias... en una próxima semana, cuando veamos
+una técnica llamada "broadcasting". Probablemente las operaciones más interesantes
+que puedas hacer con las listas son las de "rebanar". Mientras que la sintaxis de corchetes para
+acceder a un elemento puede parecer bastante similar a la que 
+has visto en otros lenguajes, En Python, el operador de
+indexación admite varios valores. El primer parámetro es,
+la ubicación inicial, Si éste elemento es único entonces
+se retorna un elemento de la lista. El segundo parámetro indica
+el final de la rebanada, y es un final exclusivo. Así que si rebanaste
+con el primer parámetro siendo cero... y el segundo parámetro siendo uno, 
+entonces consigues solamente un item. Esto es mucho más fácil
+de explicar con un ejemplo. Un aspecto práctico de Python
+es que todas las cadenas son simplemente listas de caracteres, por lo tanto
+el rebanado funciona maravillosamente en ellas. Pero la ciencia forense no es muy buena determinando Mens Rea, la intención. Cuando ejecutamos X sub 0 o X sub 0: 1
+obtendremos sólo el primer carácter de la cadena. Pero cuando ejecutamos X sub 0: 2, obtenemos
+los dos primeros caracteres de la cadena. Nuestros valores de indexación también pueden
+ser negativos, lo cual es realmente genial. Y eso significa indexar desde
+el final de la cadena. Así X sub -1 obtiene la última letra
+de la cadena, y X sub -4, -2 toma los caracteres desde el 4to
+hasta el 2do comenzando desde el  último. Finalmente, si queremos
+referenciar el inicio o el final de la cadena implícitamente, podemos 
+simplemente dejar el parámetro vacío. Así X sub :3 comienza con el primer
+carácter y va hasta la posición tres. Y X sub 3: comienza con el cuarto carácter,
+porque la indexación siempre comienza... desde cero y va hasta
+el final de la lista. El "rebanado" (slicing) es 
+fundamental en Python y es también una gran parte de la
+computación científica con Python. Especialmente si empiezas
+a manipular matrices. Hablaremos más sobre el
+"rebanado" en el módulo siguiente. Pero he aquí hay una pregunta
+para que comiences. Ahora me estoy yendo un poco de tema
+para hablar sobre manipulación de cadenas. El "rebanado" no es la única
+manera de manipular cadenas Y una actividad común es partir cadenas
+basándanos en subcadenas. Es decir, ir a través de una
+cadena buscando patrones, y segmentarla
+según corresponda. A esto se lo conoce como 
+evaluación de expresiones regulares, y vamos a cubrir esto en detalle en la sección
+de la especialización que trata con la minería de texto ya
+que es una operación muy común. Pero Python tiene algunas herramientas
+básicas para el análisis de texto. Y aquí te las
+voy a mostrar. Como hemos visto, las cadenas
+son simples listas de caracteres. Así que las operaciones que se pueden hacer
+en una lista, también se pueden hacer en una cadena. Esto significa que puedes concatenar dos
+cadenas utilizando el operador de suma. Y la multiplicación de cadenas ,
+repetirá una cadena dada. Incluso puedes buscar
+cadenas con el operador "in". El tipo cadena tiene asociada
+una función llamada "split". Esta función divide una cadena en
+sub-subcadenas basándose en un simple patrón. Aquí, por ejemplo, voy a dividir mi nombre completo basandome
+en la presencia de un carácter de espacio. El resultado es una
+lista de cuatro elementos. Podemos elegir el primer elemento utilizando el
+operador de indexación para que sea el primer nombre, y el último elemento para
+que sea mi apellido. Vamos a seguir un poco más con
+las cadenas, pero antes de continuar, quiero hablar acerca
+de los diccionarios. Los diccionarios se asimilan a las listas y tuplas
+por el hecho de que contienen una colección de elementos, pero se trata de colecciones
+etiquetadas que no tienen un orden. Esto significa que por cada
+valor que insertas en el diccionario, debes también proveer una
+clave de acceso a dicho valor. En otros lenguajes a esta estructura
+se la suele llamar "mapa". Y en Python usamos llaves
+para denotar un diccionario. Aquí tenemos un ejemplo donde vinculamos
+nombres a direcciones de correo electrónico. Puedes ver que para crear cada
+elemento del diccionario utilizamos pares de valores
+separados por "dos puntos". Luego puedes recuperar un valor para una
+etiqueta dada usando el operador de indexación. Los índices o valores del diccionario
+pueden ser de cualquier tipo. Podría ser una mezcla
+de tipos si así lo quisieras. Podemos agregar nuevos elementos al diccionario
+mediante el mismo operador de indexación que estamos
+acostumbrados a usar. simplemente en el lado
+izquierdo de una sentencia. En un diccionario puedes iterar sobre
+todos los elementos de varias maneras. En primer lugar, se puede iterar
+sobre todas las claves y simplemente extraer
+el contenido. O puedes iterar sobre los
+valores e ignorar las claves. Finalmente se puede iterar
+sobre los valores y claves simultáneamente a
+través de la función "items". Este último ejemplo
+es un poco diferente. Es un ejemplo de algo
+que se llama "desempaquetar" En Python puedes tener una secuencia,
+sea una lista o una tupla de valores, y puedes "desempaquetar" sus elementos
+en diferentes variables mediante la asignación en una sentencia. He aquí otro ejemplo de lo mismo,
+en donde tenemos una tupla que tiene mi nombre, apellido y dirección
+de correo electrónico. Declaro tres variables
+y las asigno a la tupla. Por detrás, Python ha
+desempaquetado la tupla y asignado en orden sus valores a
+cada una de las variables. Podemos ver que si añadimos un
+cuarto elemento a la tupla, Python no está seguro de cómo desempaquetarlo,
+así que tenemos un error. Esto ha sido una descripción de
+los tipos incorporados en Python En la próxima lección, vamos a
+regresar brevemente al tema de cadenas, luego comenzaremos a trabajar
+con algunos archivos de datos.

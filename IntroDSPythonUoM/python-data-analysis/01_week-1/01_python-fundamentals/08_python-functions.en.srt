@@ -1,0 +1,650 @@
+1
+00:00:08,706 --> 00:00:09,959
+In the rest of this module,
+
+2
+00:00:09,959 --> 00:00:13,750
+I'm going to provide a very basic overview
+of the Python programming language.
+
+3
+00:00:13,750 --> 00:00:15,890
+If you have a background in programming,
+
+4
+00:00:15,890 --> 00:00:19,530
+this overview should be enough to help you
+be successful in the rest of this course
+
+5
+00:00:19,530 --> 00:00:22,090
+and the following courses
+in this specialization.
+
+6
+00:00:22,090 --> 00:00:24,330
+If you don't have
+a programming experience or
+
+7
+00:00:24,330 --> 00:00:28,180
+feel like content is overly challenging,
+then I would encourage you to stop and
+
+8
+00:00:28,180 --> 00:00:30,750
+take an introductory programming class.
+
+9
+00:00:30,750 --> 00:00:34,320
+A colleague of mine, Dr. Chuck Severance
+offers an excellent specialization on
+
+10
+00:00:34,320 --> 00:00:36,760
+Coursera, called Python for Everybody.
+
+11
+00:00:36,760 --> 00:00:38,780
+You can find a link to that
+in the course resources.
+
+12
+00:00:39,980 --> 00:00:44,240
+The Coursera system allows you to run
+Python code from your browser in two ways.
+
+13
+00:00:44,240 --> 00:00:47,390
+First, we can use in-video prompts,
+where a question will come up and
+
+14
+00:00:47,390 --> 00:00:50,030
+you can try and
+solve that question in the browser.
+
+15
+00:00:50,030 --> 00:00:52,070
+This is new to the Coursera platform and
+
+16
+00:00:52,070 --> 00:00:54,840
+we're going to try it in
+the next couple of lectures.
+
+17
+00:00:54,840 --> 00:00:58,080
+Second, the Coursera system has been
+integrated with Jupyter notebooks.
+
+18
+00:00:59,120 --> 00:01:02,370
+These notebooks allow you to divide your
+code up into what they call cells, and
+
+19
+00:01:02,370 --> 00:01:04,710
+execute these cells on demand.
+
+20
+00:01:04,710 --> 00:01:07,640
+The nice thing about these notebook
+is that they offer a semi-permanent
+
+21
+00:01:07,640 --> 00:01:10,330
+storage for your learning and
+you can experiment and
+
+22
+00:01:10,330 --> 00:01:14,230
+play with programming without having
+to install anything on your computer.
+
+23
+00:01:14,230 --> 00:01:17,300
+All of the assignments will be done in the
+Jupiter notebooks but you can of course
+
+24
+00:01:17,300 --> 00:01:21,390
+download and install, Python, Jupyter, all
+of the associated libraries you need for
+
+25
+00:01:21,390 --> 00:01:24,300
+this course on your own
+computer if you'd like.
+
+26
+00:01:24,300 --> 00:01:27,260
+Our tutorial assistant will
+provide an overview of this
+
+27
+00:01:27,260 --> 00:01:31,170
+process by installing the Jupyter
+notebooks locally in the next video for
+
+28
+00:01:31,170 --> 00:01:34,890
+those of you who are interested, and I'll
+give an overview of how you can use these
+
+29
+00:01:34,890 --> 00:01:37,360
+notebooks in the Coursera
+environment in this lecture.
+
+30
+00:01:38,540 --> 00:01:41,470
+But for now,
+let's dig in to some basic Python.
+
+31
+00:01:41,470 --> 00:01:45,040
+First, Python is a high level language,
+which means it's optimized for
+
+32
+00:01:45,040 --> 00:01:46,830
+reading by people instead of machines.
+
+33
+00:01:46,830 --> 00:01:51,210
+It's also an interpreted language which
+means it isn't compiled directly to
+
+34
+00:01:51,210 --> 00:01:56,680
+machine code and importantly is commonly
+used in an interactive fashion.
+
+35
+00:01:56,680 --> 00:01:59,750
+This might be quite different if you're
+used to programming in something like
+
+36
+00:01:59,750 --> 00:02:04,930
+Java or C, where you write your code,
+compile it, run it, and watch the output.
+
+37
+00:02:04,930 --> 00:02:08,680
+In Python, you can start the interactive
+interpreter and begin writing code,
+
+38
+00:02:08,680 --> 00:02:13,240
+line by line, with the interpreter
+evaluating each statement as you write it.
+
+39
+00:02:13,240 --> 00:02:15,090
+This turns out to be very useful for
+
+40
+00:02:15,090 --> 00:02:20,100
+tasks that require a lot of investigation,
+versus those that require a lot of design.
+
+41
+00:02:20,100 --> 00:02:22,320
+Shell scripting is one example of this.
+
+42
+00:02:22,320 --> 00:02:24,415
+And data cleaning is another.
+
+43
+00:02:24,415 --> 00:02:27,750
+Or you can write scripts that
+execute programs like you might be
+
+44
+00:02:27,750 --> 00:02:29,310
+used to another languages.
+
+45
+00:02:29,310 --> 00:02:32,030
+We're going to use Python
+throw specialization
+
+46
+00:02:32,030 --> 00:02:33,429
+in this interactive fashion.
+
+47
+00:02:35,030 --> 00:02:39,260
+A common surprise for some programmers
+coming from a Java or C background is that
+
+48
+00:02:39,260 --> 00:02:44,100
+Python is a dynamically typed language,
+similar to languages like JavaScript.
+
+49
+00:02:44,100 --> 00:02:46,120
+This means that when
+you declare a variable,
+
+50
+00:02:46,120 --> 00:02:49,390
+you can assign it to be an integer on
+one line, and a string on the next line.
+
+51
+00:02:50,670 --> 00:02:52,450
+Since there is no compilation step,
+
+52
+00:02:52,450 --> 00:02:54,910
+you don't have anyone to
+help you manage types.
+
+53
+00:02:54,910 --> 00:02:58,700
+You need to either check for the presence
+of functionality when you go to use it or
+
+54
+00:02:58,700 --> 00:03:02,530
+try and use the functionality and
+catch any errors that occur.
+
+55
+00:03:02,530 --> 00:03:05,970
+The dynamic typing of Python is
+particularly nice when used in
+
+56
+00:03:05,970 --> 00:03:09,200
+an interactive fashion,
+as it allows you to quickly set and
+
+57
+00:03:09,200 --> 00:03:13,460
+modify variable contents without having
+to worry about the underlying syntactic
+
+58
+00:03:13,460 --> 00:03:14,559
+definition of the variable.
+
+59
+00:03:15,590 --> 00:03:18,030
+Okay, so let's jump in with an example.
+
+60
+00:03:18,030 --> 00:03:21,250
+For all of the coded examples I'll show
+you, you'll find an annotated version of
+
+61
+00:03:21,250 --> 00:03:24,970
+the notebook with more comments
+in the course resources section.
+
+62
+00:03:24,970 --> 00:03:28,410
+You're welcome to follow along with that
+if you'd like or create a new notebook and
+
+63
+00:03:28,410 --> 00:03:30,060
+actively write code, if you prefer.
+
+64
+00:03:31,140 --> 00:03:33,710
+Python is very little boiler plate code.
+
+65
+00:03:33,710 --> 00:03:37,110
+In fact, if you just wanted to set the
+value of a couple of variables, and output
+
+66
+00:03:37,110 --> 00:03:41,240
+the results of these variables added
+together, you could do so in three lines.
+
+67
+00:03:41,240 --> 00:03:43,570
+In this example,
+I'll write three statements.
+
+68
+00:03:43,570 --> 00:03:48,380
+The first two set the variables x and
+y, each to be some integer value.
+
+69
+00:03:48,380 --> 00:03:49,420
+Then we'll do some addition.
+
+70
+00:03:50,420 --> 00:03:53,710
+We can run this cell by
+hitting shift+enter or
+
+71
+00:03:53,710 --> 00:03:57,000
+by clicking on the play
+head icon in the tool bar.
+
+72
+00:03:57,000 --> 00:04:00,150
+The output from the statement
+is immediately printed.
+
+73
+00:04:00,150 --> 00:04:03,610
+If you were using Python in a non
+interactive mode, nothing would print.
+
+74
+00:04:03,610 --> 00:04:07,960
+But since we're using it in interactive
+mode, we get the value immediately.
+
+75
+00:04:07,960 --> 00:04:11,740
+What's happening underneath is that
+the browser is sending your Python code
+
+76
+00:04:11,740 --> 00:04:13,550
+across to a machine in the cloud,
+
+77
+00:04:13,550 --> 00:04:18,100
+which executes the code in a Python three
+interpreter, and sends the results back.
+
+78
+00:04:19,640 --> 00:04:24,880
+We can see that after executing a cell,
+a new empty cell is created for us below.
+
+79
+00:04:24,880 --> 00:04:28,200
+If we just put in x and
+execute, we get the value of 1.
+
+80
+00:04:28,200 --> 00:04:31,820
+So it's important to know that
+the Python interpreter is stateful.
+
+81
+00:04:31,820 --> 00:04:34,560
+That is,
+that your variables exist between cells.
+
+82
+00:04:35,710 --> 00:04:39,130
+Beyond that, if we go back and
+change something in a previous cell,
+
+83
+00:04:39,130 --> 00:04:43,050
+we have to re-execute the script
+to make those changes take place.
+
+84
+00:04:43,050 --> 00:04:46,730
+The restart and run all function is
+particularly useful, as it wipes
+
+85
+00:04:46,730 --> 00:04:50,670
+the interpreter state and reruns all
+of the cells in the current notebook.
+
+86
+00:04:51,760 --> 00:04:54,310
+You'll notice that Python
+doesn't require the use of
+
+87
+00:04:54,310 --> 00:04:57,330
+keywords like var to
+declare a variable name or
+
+88
+00:04:57,330 --> 00:05:01,680
+semicolons at the end of lines which
+are commonly used in other languages.
+
+89
+00:05:01,680 --> 00:05:05,280
+Python leverages white space to
+understand the scope of functions and
+
+90
+00:05:05,280 --> 00:05:08,700
+loops and end of line markers to
+understand the end of statements.
+
+91
+00:05:09,830 --> 00:05:13,680
+Of course, Python has traditional
+software structures like functions.
+
+92
+00:05:13,680 --> 00:05:17,750
+Here's an example, refactoring that
+previous code into a function.
+
+93
+00:05:17,750 --> 00:05:21,470
+You'll see the deaf statement indicates
+that we're writing a function.
+
+94
+00:05:21,470 --> 00:05:24,320
+Then each line that is part of
+the function needs to be indented
+
+95
+00:05:24,320 --> 00:05:26,440
+with a tab character or
+a couple of spaces.
+
+96
+00:05:27,510 --> 00:05:31,200
+Again, because we're in an interactive
+environment, when the statement is
+
+97
+00:05:31,200 --> 00:05:35,330
+evaluated on a shift+enter, the results
+are printed out immediately below.
+
+98
+00:05:37,240 --> 00:05:39,110
+Here's our first bit of interaction.
+
+99
+00:05:39,110 --> 00:05:43,878
+Why don't you try and change this function
+to accept three parameters instead of two
+
+100
+00:05:43,878 --> 00:05:46,175
+and return the sum of all three of those.
+
+101
+00:05:49,048 --> 00:05:52,168
+Okay, functions are great but they're
+a bit different than you might find in
+
+102
+00:05:52,168 --> 00:05:55,420
+other languages and
+here are some of subtleties involved.
+
+103
+00:05:55,420 --> 00:05:59,810
+First, since there's no typing,
+you don't have to set your return time.
+
+104
+00:05:59,810 --> 00:06:02,930
+Second, you don't have to set user
+return statement at all actually.
+
+105
+00:06:02,930 --> 00:06:06,030
+There's a special value
+called none that's returned.
+
+106
+00:06:06,030 --> 00:06:09,650
+None a similar to null in Java and
+represents the absence of value.
+
+107
+00:06:10,730 --> 00:06:14,820
+Third, in Python, you can have
+default values for parameters.
+
+108
+00:06:14,820 --> 00:06:15,980
+Here's an example.
+
+109
+00:06:15,980 --> 00:06:20,390
+In this example, we can rewrite the add
+numbers function to take three parameters,
+
+110
+00:06:20,390 --> 00:06:23,970
+but we could set the last
+parameter to be none by default.
+
+111
+00:06:23,970 --> 00:06:28,220
+This means that you can call add numbers
+with just two values or with three, and
+
+112
+00:06:28,220 --> 00:06:31,100
+you don't have to rewrite the function
+signature to overload it.
+
+113
+00:06:32,290 --> 00:06:34,650
+This is an important implication.
+
+114
+00:06:34,650 --> 00:06:38,580
+All of the optional parameters,
+the ones that you got default values for,
+
+115
+00:06:38,580 --> 00:06:42,030
+need to come at the end of
+the function declaration.
+
+116
+00:06:42,030 --> 00:06:46,100
+It also means that you can pass
+an optional parameters as labeled values.
+
+117
+00:06:46,100 --> 00:06:48,600
+Here's an example of a labeled parameters.
+
+118
+00:06:48,600 --> 00:06:52,135
+We can rewrite that function so
+that there's two optional parameters.
+
+119
+00:06:52,135 --> 00:06:55,300
+If we want to call the function
+with just two numbers but
+
+120
+00:06:55,300 --> 00:06:58,690
+also set the flag value,
+we have to explicitly name and
+
+121
+00:06:58,690 --> 00:07:02,670
+set the flag parameter to true
+when invoking the function.
+
+122
+00:07:02,670 --> 00:07:05,650
+By now, you've also seen
+the use of the print statement.
+
+123
+00:07:05,650 --> 00:07:08,000
+We're going to dive into
+strings in more detail, but
+
+124
+00:07:08,000 --> 00:07:11,950
+print will take an item, try and convert
+it to a string and print the output.
+
+125
+00:07:11,950 --> 00:07:14,910
+We don't use this much in the interactive
+mode of the interpreter, but
+
+126
+00:07:14,910 --> 00:07:18,110
+it's useful when we want to print out
+multiple values for a single cell.
+
+127
+00:07:19,220 --> 00:07:22,840
+Okay, a final word on the basics
+of functions in Python.
+
+128
+00:07:22,840 --> 00:07:25,740
+In Python,
+you can assign a variable to a function.
+
+129
+00:07:25,740 --> 00:07:27,910
+This might seem either
+completely normal to you or
+
+130
+00:07:27,910 --> 00:07:31,410
+completely odd depending upon
+on your programming background.
+
+131
+00:07:31,410 --> 00:07:34,950
+By assigning a variable to a function,
+you can pass that variable into
+
+132
+00:07:34,950 --> 00:07:38,830
+other functions allowing some
+basic functional programming.
+
+133
+00:07:38,830 --> 00:07:41,160
+We'll talk about that a little
+bit later on in the course.
+
+134
+00:07:41,160 --> 00:07:44,620
+But here's an example where we
+define a function to add numbers,
+
+135
+00:07:44,620 --> 00:07:48,290
+then we assign that function to a
+variable, and then we invoke the variable.

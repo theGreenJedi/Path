@@ -1,0 +1,31 @@
+Chào mừng đến với bài học ngày hôm nay,
+chúng ta sẽ học về những điều cơ bản của việc lặp qua tệp CSV để tạo ra các từ điển và
+thu thập các thống kê tóm tắt. Đầu tiên hãy nhập mô đun CSV, sẽ giúp chúng ta
+trong việc đọc tệp CSV của chúng ta. Sử dụng một số ma thuật ipython, hãy đặt độ chính xác của số thực là 2 số sau dấu chấm. Bây giờ hãy đọc trong mpg.csv sử dụng csv.DictReader và chuyển nó thành một danh sách các từ điển. Hãy nhìn vào ba phần tử đầu tiên trong danh sách của chúng ta. Chúng ta có thể thấy rằng các từ điển trong danh sách có cột các tên của csv khóa và dữ liệu cho mỗi chiếc xe hơi cụ thể là các giá trị. Độ dài của danh sách là 234, có nghĩa là chúng ta có một từ điển
+cho 234 chiếc xe trong tệp csv. Chúng ta có thể nhìn vào tên các cột của csv bằng cách sử dụng phương pháp chìa khóa. Giả sử chúng ta muốn tìm MPG thành phố trên
+tất cả các xe hơi trong tệp csv của chúng ta. Chúng ta tổng hợp mục MPG trên tất cả
+các từ điển trong danh sách của chúng ta và chia theo chiều dài của danh sách. Bởi vì kiểu giá trị trong từ điển
+của chúng ta là các chuỗi, chúng ta cần phải đổi sang số thực để
+thực hiện các phép tính toán học. Tương tự chúng ta có thể tìm thấy MPG đường cao tốc
+trên tất cả các xe hơi trong tập .csv của chúng ta. Và có thể hiểu rằng trung bình nền kinh tế
+nhiên liệu đường cao tốc cao hơn so với thành phố. Bây giờ hãy nhìn vào một ví dụ phức tạp hơn. Giả sử chúng ta muốn biết
+mpg trung bình thành phố được nhóm bởi số lượng xi lanh mà một chiếc xe có. Tạo ra một tập các giá trị trong
+mục xi lanh của các từ điển sẽ cho chúng ta cấp độ duy nhất
+cho số lượng xi lanh. Chúng ta thấy rằng chúng ta có những
+chiếc xe hơi trong tập dữ liệu với 4,5,6 và 8 xi lanh. Đầu tiên chúng ta sẽ tạo ra một danh sách trống
+nơi chúng ta sẽ lưu các tính toán của chúng ta. Tiếp theo hãy lặp qua tất cả các cấp độ xi lanh. Và sau đó chúng ta sẽ lặp qua tất cả các từ điển. Nếu mức xi lanh cho từ điển chúng ta trên mức phù hợp với mức xi lanh
+chúng ta đang tính trung bình, chúng ta thêm mpg vào biến
+summpg và tăng số đếm. Sau khi đi qua tất cả các từ điển, chúng ta
+thực hiện tính toán mpg trung bình và thêm nó vào danh sách của chúng ta. Để làm điều này rõ ràng hơn, tôi sẽ sắp xếp danh sách từ số
+xi lanh thấp nhất đến cao nhất. Và chúng ta có thể thấy rằng nền kinh tế nhiên liệu
+thành phố dường như đang giảm khi số lượng xi lanh tăng. Hãy nhìn vào một ví dụ tương tự. Giả sử chúng ta quan tâm đến việc tìm
+trung bình mpg đường cao tốc cho các loại phương tiện khác nhau. Nhìn vào các loại phương tiện khác nhau,
+chúng ta có 2seater, compact, midsize, minivan, pickup, subcompact và SUV. Tương tự như ví dụ trước chúng ta
+lặp tất cả các loại phương tiện sau đó lặp trên tất cả các từ điển. Nếu phương tiện cho thư viện phù hợp với phương tiện
+chúng ta đang tính toán mpg trung bình, chúng ta thêm giá trị vào tổng và tăng số đếm. Sau đó chúng ta thực hiện tính trung bình và thêm vào danh sách. Hãy sắp xếp danh sách từ mpg
+thấp nhất đến cao nhất. Giống như pickup có kinh tế nhiên liệu
+tệ nhất và compact thì tốt nhất. Đó là một cái nhìn vào cách tóm tắt
+dữ liệu qua việc lặp. Đừng lo nếu điều này có vẻ hơi
+kém hiệu quả và hơi chán. Tuần tiếp theo chúng ta sẽ học về Pandas,
+một thư viện python cho phép phân tích dữ liệu dễ dàng hơn,
+hiệu quả hơn và mạnh hơn trong python. Cảm ơn các bạn đã theo dõi. Mong sớm được gặp lại bạn.

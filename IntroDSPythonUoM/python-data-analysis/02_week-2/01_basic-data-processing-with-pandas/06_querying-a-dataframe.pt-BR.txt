@@ -1,0 +1,74 @@
+Antes de falarmos como
+consultar data frames, precisamos falar sobre
+mascaramento booleano. Mascaramento booleano é primordial
+para uma consulta rápida e eficiente no NumPy. É análogo ao mascaramento de bits
+usado em outras áreas computacionais. Uma máscara booleana é uma matriz que pode ser
+ de uma dimensão como uma série, ou de duas dimensões, como
+num data frame, onde cada um dos valores na
+matriz são true (verdadeiro) ou false (falso). Tal matriz é, basicamente, sobreposta sobre
+a estrutura que estamos consultando. Assim, qualquer célula alinhada com o valor true
+será admitida em nosso resultado final, e as alinhadas com o valor
+false não serão. O mascaramento booleano é
+ conceitualmente poderoso e é crucial nas consultas eficientes
+do Numpy e da Pandas. Esta técnica é bem usada em outras
+áreas da ciência dos computadores, por exemplo, nos gráficos. Mas, ele não tem algo parecido em
+outros bancos de dados relacionais, então, acho que vale a pena salientar aqui. Mascaramentos booleanos são criados aplicando
+operadores diretamente nas séries pandas ou objetos DataFrame. Por exemplo, no conjunto de dados Olympics,
+poderíamos estar interessados em ver apenas os países que obtiveram
+uma medalha de ouro nas Olimpíadas de verão. Para criar uma máscara booleana para esta consulta,
+projetamos a coluna 'gold' usando o operador de indexação e aplicando o operador maior que
+comparando-o ao valor zero. Isso é, essencialmente, fazer broadcasting
+de um operador de comparação, o maior que, cujos resultados
+retornarão como sendo uma série de booleanos. A série resultante é indexada e tem
+o valor de cada célula como ou True ou False, dependendo se o país
+ganhou ao menos uma medalha de ouro, e o índice é o nome do país. Então, isso cria para nós a máscara booleana,
+a qual é metade da batalha. O que queremos em seguida, é sobrepor
+esta máscara no data frame. Podemos, par tanto,
+usar a função <where>. A função where pega a máscara booleana como
+uma condição, a aplica ao data frame ou à série, e retorna um novo data frame ou
+ nova série de mesmo formato. Vamos aplicar esta máscara booleana aos nossos
+dados Olympics e criar um data frame com apenas os países que ganharam
+ouro nos jogos de verão. Vemos que o data frame resultante
+mantém os valores índices originais, e apenas os dados dos países que
+satisfazem a condição são mantidos. Todos os países que não satisfazem a condição
+têm dados trocados por NaN. Isso é certo. A maioria das funções estatísticas incorporadas a
+ objetos data frame ignoram valores NaN. Por exemplo, se chamamos df.count 
+no data frame only_gold vemos que existem 100 países que tiveram
+ medalhas de ouro nos jogos de verão, enquanto que se chamamos
+count no data frame original, veremos que há 147 países no total. Muitas vezes queremos jogar fora 
+as linhas que não têm nenhum dado. Para isso, 
+podemos usar a função dropna. E podemos, opcionalmente, fornecer a ela
+os eixos que deveria considerar. Lembra que os eixos são apenas
+indicação para colunas e linhas e que o default é zero,
+e significa linhas. Quando você se pega falando sobre
+pandas e dizendo frases como, "frequentemente, eu quero...", é bem provável que
+os desenvolvedores tenham incluído um atalho para esta operação comum. Por exemplo, neste exemplo, não precisamos, de fato, usar
+a função where explicitamente. Os desenvolvedores do pandas permitem
+operadores de indexação pegar uma máscara booleana como um valor ao invés de
+apenas uma lista de nomes de colunas. A sintaxe parace um pouco bagunçada,
+especialmente se você não está acostumado a programar em linguagens com 
+operadores de sobreposição, mas o resultado é que você está apto a filtrar
+ e reduzir os data frames relativamente rápido. Eis aqui um exemplo mais conciso de
+como poderíamos consultar este data frame. Note que não existem NaNs quando
+consultamos o data frame desta maneira. O Pandas automaticamente filtra
+(elimina) as linhas que não têm valores. Mais uma coisa para ter em mente, é se
+não estiver acostumado com booleanos ou mascaramento de bits em redução de dados... .... o resultado de duas máscaras booleans sendo
+comparadas com operadores lógicos é outra máscara booleana. Isso quer dizer que é possível encadear
+um monte de cláusulas and/or de modo a criar consultas mais complexas,
+e o resultado será uma única máscara booleana. Por exemplo, poderíamos criar uma máscara para
+todos os países que receberam um ouro nos jogos Olímpicos de verão e
+logicamente ordená-los com todos os países que ganharam ouro
+nos jogos Olímpicos de inverno. Se aplicarmos isso ao data frame e usarmos a função length para
+ver quantas linhas são, encontramos 101 países que
+ganharam uma medalha de ouro em algum momento. Outro exemplo, só
+por diversão, há algum país que ganhou
+apenas uma medalha de ouro nos jogos Olímpicos de inverno e nenhuma nos jogos Olímpicos de verão? Eis aqui uma forma de responder a esta pergunta: pobre Liechtenstein. Felizmente, os jogos Olímpicos
+ocorrem a cada quatro anos. Sei para quem estarei torcendo em 2020
+para que ganhem seu primeiro ouro de verão. Extremamente importante e muitas vezes
+ um problema para novos usuários, é se lembrar de que cada máscara booleana
+precisa estar entre parênteses, por conta da ordem das operações. Isso pode terminar em frustração, se 
+não estiver acostumado, então, tenha cuidado. Nesta aula, 
+vimos mascaramento booleano. Não tivemos muito que codificar, mas
+aplicar máscaras aos data frames é realmente algo chave no trabalho do pandas
+e vale a pena praticar.
+[Tradução: Carlos Lage.]

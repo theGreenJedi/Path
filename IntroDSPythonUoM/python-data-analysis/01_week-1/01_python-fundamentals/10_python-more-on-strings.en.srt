@@ -1,0 +1,259 @@
+1
+00:00:08,716 --> 00:00:11,808
+We talked about strings when we
+talked about lists and slicing, and
+
+2
+00:00:11,808 --> 00:00:15,116
+you've seen ways to break up strings
+through use of the split function,
+
+3
+00:00:15,116 --> 00:00:17,430
+and through direct indexing.
+
+4
+00:00:17,430 --> 00:00:20,390
+Strings in Python can be a bit
+frustrating too, and I want to share
+
+5
+00:00:20,390 --> 00:00:23,220
+some more details of how strings
+are handled, so that you're aware of them.
+
+6
+00:00:24,230 --> 00:00:26,820
+In Python 3 strings are Unicode based.
+
+7
+00:00:26,820 --> 00:00:30,060
+In early computing characters of
+strings were limited to one of 256
+
+8
+00:00:30,060 --> 00:00:31,970
+different values.
+
+9
+00:00:31,970 --> 00:00:33,400
+This was enough to get all of the upper or
+
+10
+00:00:33,400 --> 00:00:37,890
+lower case Latin characters, as well
+as single digit numbers represented.
+
+11
+00:00:37,890 --> 00:00:40,330
+This language was called ASCII and
+was fairly compact.
+
+12
+00:00:40,330 --> 00:00:44,625
+But the world doesn't just run on Latin
+characters and there's a need to support
+
+13
+00:00:44,625 --> 00:00:48,590
+non-English languages as well as
+characters which are not commonly used in
+
+14
+00:00:48,590 --> 00:00:51,700
+words, but are commonly used elsewhere
+like mathematical operators.
+
+15
+00:00:52,860 --> 00:00:57,610
+The Unicode Transformation Format,
+or UTF, is an attempt to solve this.
+
+16
+00:00:57,610 --> 00:01:00,880
+It can be used to represent over
+a million different characters.
+
+17
+00:01:00,880 --> 00:01:04,170
+This includes not only human
+languages like you might expect, but
+
+18
+00:01:04,170 --> 00:01:05,640
+symbols like emojis too.
+
+19
+00:01:06,700 --> 00:01:08,990
+Python 3 uses Unicode by default so
+
+20
+00:01:08,990 --> 00:01:11,850
+there is no problem in dealing
+with international character sets.
+
+21
+00:01:12,860 --> 00:01:16,220
+In addition to Unicode,
+Python uses a special language for
+
+22
+00:01:16,220 --> 00:01:18,536
+formatting the output of strings.
+
+23
+00:01:18,536 --> 00:01:22,051
+One of the challenges with dynamic
+typing is that it's bit unclear when
+
+24
+00:01:22,051 --> 00:01:24,890
+you have to do type conversion yourself.
+
+25
+00:01:24,890 --> 00:01:27,605
+We saw on the last lecture that if
+we wanted to print out a name and
+
+26
+00:01:27,605 --> 00:01:32,275
+a number that we can't use concatenation
+without calling the str function
+
+27
+00:01:32,275 --> 00:01:34,945
+to convert the number to a string first.
+
+28
+00:01:34,945 --> 00:01:38,565
+This creates a lot of nasty looking code
+where every operator you're looking to
+
+29
+00:01:38,565 --> 00:01:41,235
+concatenate is wrapped
+in this str function.
+
+30
+00:01:41,235 --> 00:01:46,155
+The Python string formatting mini
+language allows you to write
+
+31
+00:01:46,155 --> 00:01:50,490
+a string statement indicating placeholders
+for variables to be evaluated.
+
+32
+00:01:50,490 --> 00:01:55,530
+You then pass these variables in
+either named or in order arguments,
+
+33
+00:01:55,530 --> 00:01:58,110
+and Python handles the string
+manipulation for you.
+
+34
+00:01:59,530 --> 00:02:00,940
+Here's an example.
+
+35
+00:02:00,940 --> 00:02:03,360
+Imagine we have purchase order details and
+
+36
+00:02:03,360 --> 00:02:08,120
+a dictionary, which includes a number
+of items, a price, and a person's name.
+
+37
+00:02:09,480 --> 00:02:13,100
+We can write a sales statement
+string which includes these items
+
+38
+00:02:13,100 --> 00:02:14,130
+using curly brackets.
+
+39
+00:02:15,140 --> 00:02:18,440
+We can then call the format
+method on that string and
+
+40
+00:02:18,440 --> 00:02:21,439
+pass in the values that we want
+substituted as appropriate.
+
+41
+00:02:22,570 --> 00:02:26,210
+Now the string formatting language
+allows you to do much more than this.
+
+42
+00:02:26,210 --> 00:02:30,210
+You can control a number of different
+things like decimal places, for
+
+43
+00:02:30,210 --> 00:02:33,970
+floating point numbers, or whether you
+want to prepend the positive numbers with
+
+44
+00:02:33,970 --> 00:02:38,870
+the plus sign, or set the alignment of
+strings to left or right justified.
+
+45
+00:02:38,870 --> 00:02:42,380
+or even enable to use
+of scientific notation.
+
+46
+00:02:42,380 --> 00:02:45,740
+I've linked the documentation
+page in the course resources.
+
+47
+00:02:45,740 --> 00:02:47,855
+And being able to use
+the string library and
+
+48
+00:02:47,855 --> 00:02:51,210
+formatting language will be an important
+part of your first assignment.
+
+49
+00:02:52,600 --> 00:02:54,090
+This has been a short lecture, but
+
+50
+00:02:54,090 --> 00:02:57,460
+string manipulation is a big
+part of data cleaning.
+
+51
+00:02:57,460 --> 00:03:00,611
+You're going to learn a lot more about
+string manipulation in this course through
+
+52
+00:03:00,611 --> 00:03:02,300
+the assignments.
+
+53
+00:03:02,300 --> 00:03:03,440
+In the next video though,
+
+54
+00:03:03,440 --> 00:03:06,810
+our graduate student assistant is going
+to show you how to bring some basic
+
+55
+00:03:06,810 --> 00:03:10,430
+data analysis together through the reading
+and writing of delimited data files.

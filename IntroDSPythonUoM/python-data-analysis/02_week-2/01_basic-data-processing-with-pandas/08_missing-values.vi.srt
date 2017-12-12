@@ -1,0 +1,359 @@
+1
+00:00:08,720 --> 00:00:12,660
+Chúng ta sẽ kết thúc bài giảng tuần này bằng cuộc thảo luận nhanh về các giá trị bị mất.
+
+2
+00:00:12,660 --> 00:00:16,685
+CHúng ta đã thấy cách panda xử lí giá trị mất đi sử dụng non-type,
+
+3
+00:00:16,685 --> 00:00:18,820
+và non-pi, các giá trị n.
+
+4
+00:00:18,820 --> 00:00:21,800
+Các giá trị mất đi khá phổ biến trong các hoạt động làm sạch dữ liệu.
+
+5
+00:00:21,800 --> 00:00:24,480
+Có các thông báo trước và thảo luận chỉ ra cái chúng ta nên giải quyết.
+
+6
+00:00:25,480 --> 00:00:28,960
+Đầu tiên, xây dựng từ tập tin phân cách cung cấp điều khiển cho
+
+7
+00:00:28,960 --> 00:00:30,840
+các giá trị mất đi theo một số cách.
+
+8
+00:00:30,840 --> 00:00:34,380
+Phù hợp nhất với điều này là danh sách na_values,
+
+9
+00:00:34,380 --> 00:00:38,590
+chỉ ra các dây khác nhau cái mà có thể để cập tới các giá trị mất đi.
+
+10
+00:00:38,590 --> 00:00:41,580
+Một số nhà xã hội học thường
+
+11
+00:00:41,580 --> 00:00:46,120
+sử dụng giá trị 99 trong phân loại nhị phân để chỉ ra không có giá trị.
+
+12
+00:00:46,120 --> 00:00:47,950
+Điều này rất thuận tiện.
+
+13
+00:00:47,950 --> 00:00:52,530
+Bạn có thể sử dụng na_filter để tắt bộ lọc không gian trắng,
+
+14
+00:00:52,530 --> 00:00:55,480
+nếu không gian trắng là giá trị thực.
+
+15
+00:00:55,480 --> 00:00:58,101
+Nhưng trong thực tế điều này khá hiếm.
+
+16
+00:00:58,101 --> 00:01:01,759
+thêm vào đó các quy định kiểm soát cách làm mất đi giá trị có thể được tải,
+
+17
+00:01:01,759 --> 00:01:06,230
+đôi khi nó rất hữu ích để xem xét các giá trị mất đi để có thêm thông tin.
+
+18
+00:01:06,230 --> 00:01:08,730
+Tôi sẽ đưa ra một ví dụ từ nghiên cứu của tôi.
+
+19
+00:01:08,730 --> 00:01:11,730
+Tôi thường xử lí với log từ hệ thống học trực tuyến.
+
+20
+00:01:11,730 --> 00:01:12,400
+Đặc biệt,
+
+21
+00:01:12,400 --> 00:01:17,390
+Tôi đã làm hai dự án nhìn vào video sử dụng hệ thống nắm bắt bài giảng.
+
+22
+00:01:17,390 --> 00:01:21,590
+Trong hệ thống này nó rất phổ biến cho người chơi để có đo nhịp tim nơi mà
+
+23
+00:01:21,590 --> 00:01:25,450
+các số liệu phát lại được gửi tới máy chủ thường xuyên, có thể 30 giây một lần.
+
+24
+00:01:26,530 --> 00:01:29,950
+Nhịp tim có thể lớn khi chúng thực hiện toàn bộ
+
+25
+00:01:29,950 --> 00:01:34,270
+hệ thống phát lại như là nơi video phát lúc đầu, nơi có kích thước của video,
+
+26
+00:01:34,270 --> 00:01:37,420
+video được trả về màn hình, âm thanh lớn, vân vân.
+
+27
+00:01:38,880 --> 00:01:41,300
+Nếu chúng ta tải tệp dữ liệu log.txt,
+
+28
+00:01:41,300 --> 00:01:44,070
+chúng ta có thể thấy ví dụ về những gì có thể nhìn thấy.
+
+29
+00:01:44,070 --> 00:01:48,520
+Trong dữ liệu này cột đầu tiên là dấu thời gian trong định dạng Unix.
+
+30
+00:01:48,520 --> 00:01:51,900
+Cột tiếp theo là tên người sử dụng được theo dõi bởi trang web chúng ta truy cập và
+
+31
+00:01:51,900 --> 00:01:52,940
+video mà họ đang phát.
+
+32
+00:01:54,190 --> 00:01:56,710
+Mỗi hàng khung dữ liệu có một vị trí phát lại.
+
+33
+00:01:56,710 --> 00:01:59,960
+Chúng ta có thể thấy vị trí phát lại tăng lên 1,
+
+34
+00:01:59,960 --> 00:02:02,210
+thời gian tăng lên khoảng 30 giây.
+
+35
+00:02:03,300 --> 00:02:04,820
+Ngoại trừ cho người sử dụng Bob.
+
+36
+00:02:04,820 --> 00:02:07,060
+Hóa ra là Bob đã dừng phát lại của anh ấy vì thế
+
+37
+00:02:07,060 --> 00:02:10,530
+thời gian tăng lên không thay đổi.
+
+38
+00:02:10,530 --> 00:02:14,960
+Lưu ý là là quá khó cho chúng ta để thử và lấy kiến thức từ dữ liệu,
+
+39
+00:02:14,960 --> 00:02:18,470
+bởi vì nó không được sắp xếp theo thời gian.
+
+40
+00:02:18,470 --> 00:02:22,240
+Điều này không phải phổ biến trên các hệ thống có mức độ xử lí song song.
+
+41
+00:02:24,000 --> 00:02:27,420
+Có nhiều các giá trị mất đi trong cột tạm dừng và âm lượng.
+
+42
+00:02:27,420 --> 00:02:30,380
+Nó không hiệu quả để guiwr thông tin trên mạng nếu nó
+
+43
+00:02:30,380 --> 00:02:31,320
+không thay đổi.
+
+44
+00:02:31,320 --> 00:02:34,740
+Hệ thống cụ thể này chỉ cần chen giá trị vào tập dữ liệu nếu
+
+45
+00:02:34,740 --> 00:02:35,479
+không có sự thay đổi.
+
+46
+00:02:36,590 --> 00:02:38,850
+Một trong các chức năng tiện lợi là panda
+
+47
+00:02:38,850 --> 00:02:43,230
+làm việc với giá trị mất đi là chức năng lấp đầy, fillna.
+
+48
+00:02:43,230 --> 00:02:45,780
+CHức năng này lấy các số và thống số, ví dụ,
+
+49
+00:02:45,780 --> 00:02:49,210
+bạn có thể xuất một giá trị đơn gọi là giá trị vô hướng
+
+50
+00:02:49,210 --> 00:02:51,650
+để thay đổi tất cả giá trị mất đi tới một giá trị.
+
+51
+00:02:51,650 --> 00:02:55,470
+Điều này không thực sự áp dụng trong trường hợp này nhưng nó khá là phổ biến.
+
+52
+00:02:55,470 --> 00:02:57,720
+Tiếp theo là thông số phương pháp.
+
+53
+00:02:57,720 --> 00:03:00,780
+Hai giá trị phổ biến là f và b.
+
+54
+00:03:00,780 --> 00:03:04,490
+F fill là điền vào phía trước và ccaapj nhật giá trị na cho
+
+55
+00:03:04,490 --> 00:03:07,650
+phần cụ thể với giá trị từ hàng trước đó.
+
+56
+00:03:07,650 --> 00:03:10,770
+Nó rất quan trọng để lưu ý rằng dữ liệu của bạn cần được sắp xếp theo thứ tự cho
+
+57
+00:03:10,770 --> 00:03:13,250
+điều này để có hiệu quả bạn muốn.
+
+58
+00:03:13,250 --> 00:03:17,210
+Dữ liệu mà đến từ hệ thống quản lí tập dữ liệu thường không có
+
+59
+00:03:17,210 --> 00:03:19,630
+bảo đảm trật tự, giống như dữ liệu này.
+
+60
+00:03:19,630 --> 00:03:20,300
+Hãy cẩn thận.
+
+61
+00:03:21,810 --> 00:03:25,360
+Trong panda chúng ta có thể sắp xếp bằng chỉ số hoặc bằng các giá trị.
+
+62
+00:03:25,360 --> 00:03:28,780
+Ở đây chúng ta sẽ thúc đẩy thời gian tới chỉ mục sau đó sắp xếp trên chỉ mục.
+
+63
+00:03:30,080 --> 00:03:33,140
+Nếu chúng ta nhìn vào đầu ra dù chúng ta lưu ý rằng chỉ mục
+
+64
+00:03:33,140 --> 00:03:34,560
+không phải duy nhất.
+
+65
+00:03:34,560 --> 00:03:37,830
+Hai người sử dụng có thể sử dụng hệ thống cùng lúc.
+
+66
+00:03:37,830 --> 00:03:39,620
+Một lần nữa, một trường hợp rất phổ biến.
+
+67
+00:03:40,770 --> 00:03:44,380
+Hãy đặt lại chỉ mục và sử dụng chỉ mục đa caaos thay thế và
+
+68
+00:03:44,380 --> 00:03:48,200
+thúc đẩy tên người sử dụng tới mức độ thứ hai của chỉ mục để xử lí vấn đề đó.
+
+69
+00:03:49,520 --> 00:03:50,918
+bây giờ chúng ta có dữ liệu được chỉ ra và
+
+70
+00:03:50,918 --> 00:03:55,550
+lưu trữ, chúng ta có thể điền các dữ liệu mất đi sử dụng f fill.
+
+71
+00:03:55,550 --> 00:03:57,800
+Thật tốt đẻ nhớ khi xử lí các giá trị mất đi để
+
+72
+00:03:57,800 --> 00:03:59,570
+bạn có thể xử lí các cột cá nhân hoặc
+
+73
+00:03:59,570 --> 00:04:02,860
+đặt các cột bằng cách đối chiếu như chúng ta đã nói trước đây.
+
+74
+00:04:02,860 --> 00:04:05,920
+Bạn không phải sửa tất cả các giá trị mất đi bằng một lệnh.
+
+75
+00:04:06,940 --> 00:04:10,520
+Đôi khi nó rất hữu ích để sử dụng việc điền, và
+
+76
+00:04:10,520 --> 00:04:12,686
+cũng hữu ích để sử dụng số đơn.
+
+77
+00:04:12,686 --> 00:04:16,900
+Gần đây nhóm panda đã giưới thiệu phuuwong pháp làm đầy các giá trị mất đi bằng
+
+78
+00:04:16,900 --> 00:04:19,960
+chuỗi có độ dài bằng nhau như khung dữ liệu của bạn.
+
+79
+00:04:19,960 --> 00:04:22,730
+Điều này rất dễ để lấy các gia trị đang bị mất nếu bạn
+
+80
+00:04:22,730 --> 00:04:24,160
+làm như vậy.
+
+81
+00:04:24,160 --> 00:04:26,880
+Ví dụ nếu bạn xử lí các giấy tờ và bạn có một cột cho
+
+82
+00:04:26,880 --> 00:04:30,770
+giá cuối cùng và một cột giảm giá nhưng là thông tin bị mất đi từ
+
+83
+00:04:30,770 --> 00:04:34,104
+cột giá gốc, bạn có thể điền tự động sử dụng fillna.
+
+84
+00:04:35,650 --> 00:04:37,510
+Lưu ý cuối về các giá trị mất đi.
+
+85
+00:04:37,510 --> 00:04:39,760
+Khi bạn sử dụng các chức năng thống kê trên khung dữ liệu,
+
+86
+00:04:39,760 --> 00:04:42,670
+các chức năng bỏ qua các giá trị mất đi.
+
+87
+00:04:42,670 --> 00:04:45,740
+Ví dụ nếu bạn thử và tính toán giá trị ý nghĩa của khung dữ liệu,
+
+88
+00:04:45,740 --> 00:04:49,360
+chwucs năng non pi sẽ bỏ các giá trị mất đi.
+
+89
+00:04:49,360 --> 00:04:50,940
+Đây là cái bạn muốn nhưng
+
+90
+00:04:50,940 --> 00:04:53,360
+bạn nên biết các giá trị bị loại trừ.

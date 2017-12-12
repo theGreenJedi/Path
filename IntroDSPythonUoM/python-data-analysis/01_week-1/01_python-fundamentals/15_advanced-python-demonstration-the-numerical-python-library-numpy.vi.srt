@@ -1,0 +1,456 @@
+1
+00:00:09,144 --> 00:00:10,550
+Chào mọi người
+
+2
+00:00:10,550 --> 00:00:14,170
+Hôm nay, chúng ta sẽ học về NumPy, một package được sử dụng
+rộng rãi trong cộng đồng khoa học dữ liệu
+
+3
+00:00:14,170 --> 00:00:18,200
+cho phép chúng ta làm việc có hiệu quả
+với các mảng (array) và ma trận trong Python
+
+4
+00:00:20,040 --> 00:00:22,710
+Đầu tiên, chúng ta import NumPy với np.
+
+5
+00:00:24,200 --> 00:00:26,520
+Nó sẽ cho phép chúng ta sử dụng tắt
+np đại diện cho NumPy.
+
+6
+00:00:28,210 --> 00:00:30,070
+Bây giờ, ta hãy thử tạo mảng đầu tiên.
+
+7
+00:00:30,070 --> 00:00:32,830
+Bắt đầu bằng việc tạo một danh sách
+và chuyển nó thành mảng.
+
+8
+00:00:34,270 --> 00:00:35,610
+Và đây là mảng NumPy đầu của chúng ta.
+
+9
+00:00:37,270 --> 00:00:39,659
+Chúng ta có thể làm tắt
+bằng cách chuyển đổi list trực tiếp.
+
+10
+00:00:41,740 --> 00:00:44,870
+Bây giờ hãy tạo mảng đa chiều bằng cách
+chuyển một danh sách chứa các danh sách.
+
+11
+00:00:46,700 --> 00:00:51,130
+Chúng ta truyền vào 2 danh sách với 3 phần tử
+mỗi danh sách, và ta có một mảng 2x3
+
+12
+00:00:52,610 --> 00:00:55,020
+Chúng ta có thể kiểm tra kích thước
+bằng cách sử dụng thuộc tính hình dạng.
+
+13
+00:00:56,970 --> 00:01:01,232
+Với hàm sắp xếp, chúng ta truyền vào
+vị trí mở đầu, vị trí kết thúc và bước nhảy,
+
+14
+00:01:01,232 --> 00:01:05,016
+và nó trả về các giá trị cách đều nhau
+trong một khoảng xác định.
+
+15
+00:01:07,086 --> 00:01:11,830
+Vì vậy, giả sử chúng ta muốn biến mảng số liệu này 
+thành một mảng 3x5.
+
+16
+00:01:11,830 --> 00:01:13,100
+Chúng ta có thể dùng reshape để thực hiện.
+
+17
+00:01:15,590 --> 00:01:20,170
+Chức năng linspace cũng tương tự để
+sắp xếp, trừ việc chúng ta phải khai báo
+
+18
+00:01:20,170 --> 00:01:23,920
+bao nhiêu số cần được trả về, và
+nó sẽ chia ra thành các khoảng phù hợp.
+
+19
+00:01:25,410 --> 00:01:28,480
+Chúng ta có thể dùng resize để thay đổi
+kích thước tại chỗ.
+
+20
+00:01:30,645 --> 00:01:34,300
+NumPy cũng có một số chức năng đi kèm
+và đường dẫn tắt để tạo mảng.
+
+21
+00:01:35,330 --> 00:01:41,720
+ones trả về một mảng chứa toàn số 1,
+zeros trả về mảng toàn số 0
+
+22
+00:01:41,720 --> 00:01:46,575
+eye trả về mảng với 1 xếp theo đường chéo
+và 0 ở các vị trí còn lại
+
+23
+00:01:46,575 --> 00:01:49,170
+và diag tạo ra một mảng chéo.
+
+24
+00:01:51,220 --> 00:01:56,510
+Để tạo một mảng với các giá trị lặp lại,
+chúng ta có thể truyền một danh sách lặp, hoặc
+
+25
+00:01:56,510 --> 00:01:59,240
+ta có thể dùng hàm lặp của NumPy.
+
+26
+00:01:59,240 --> 00:02:01,240
+Hãy để ý sự khác biệt
+giữa 2 kết quả.
+
+27
+00:02:03,590 --> 00:02:05,780
+Chúng ta cũng có thể kết hợp các mảng
+để tạo một mảng mới.
+
+28
+00:02:07,330 --> 00:02:12,280
+Hãy thử tạo một mảng 2x3 và
+ghép với chính nó theo chiều dọc,
+
+29
+00:02:12,280 --> 00:02:13,480
+sau khi nhân với 2.
+
+30
+00:02:13,480 --> 00:02:17,396
+Và đây là điều tương tự,
+nhưng ghép theo chiều ngang.
+
+31
+00:02:20,207 --> 00:02:24,063
+Giờ hãy quan sát vài phép toán
+bạn có thể làm với các mảng NumPy.
+
+32
+00:02:26,998 --> 00:02:30,958
+Tiến hành cộng, trừ, nhân chia
+từng phần tử
+
+33
+00:02:30,958 --> 00:02:35,369
+một cách đơn giản, cũng như lũy thừa
+tất cả các số trong mảng với một số mũ.
+
+34
+00:02:37,270 --> 00:02:39,260
+Với những người quen với đại số tuyến tính,
+
+35
+00:02:39,260 --> 00:02:41,760
+tích vô hướng có thể được thực hiện
+qua chức năng dot.
+
+36
+00:02:43,800 --> 00:02:48,250
+Hãy tạo một mảng mới bằng mảng y đã có
+và giá trị bình phương của nó.
+
+37
+00:02:49,910 --> 00:02:51,550
+Kích thước của mảng này là 2x3.
+
+38
+00:02:54,190 --> 00:02:58,510
+Chúng ta có thể chuyển vị
+mảng thông qua phương pháp T
+
+39
+00:02:58,510 --> 00:03:00,060
+hoán vị giữa các dòng và cột.
+
+40
+00:03:01,380 --> 00:03:03,909
+Kích thước của mảng sau khi chuyển vị là 3x2
+
+41
+00:03:06,346 --> 00:03:10,975
+Sử dụng dtype, ta có thể thấy
+kiểu dữ liệu mà mảng đang có, và
+
+42
+00:03:10,975 --> 00:03:14,782
+với astype,
+ ta có thể chuyển mảng thành kiểu khác.
+
+43
+00:03:16,631 --> 00:03:21,330
+NumPy cũng có nhiều chức năng
+toán học hữu ích có thể sử dụng
+
+44
+00:03:21,330 --> 00:03:22,820
+Hãy thử vài ứng dụng phổ biến.
+
+45
+00:03:24,670 --> 00:03:26,324
+Đây là mảng a mới được tạo.
+
+46
+00:03:30,427 --> 00:03:36,423
+Và ta có thể tính tổng các giá trị trong mảng,
+giá trị lớn nhất
+
+47
+00:03:36,423 --> 00:03:41,353
+nhỏ nhất, hay
+
+48
+00:03:41,353 --> 00:03:44,255
+trung bình và độ lệch chuẩn.
+
+49
+00:03:46,606 --> 00:03:53,027
+Để tìm chỉ số của giá trị lớn nhất hay nhỏ nhất
+ta có thể dùng argmax và argmin.
+
+50
+00:03:57,621 --> 00:04:00,240
+Tiếp theo, ta sẽ học về chỉ số và chia từng phần.
+
+51
+00:04:01,690 --> 00:04:05,470
+Tạo một mảng với giá trị từ 0 đến 12
+
+52
+00:04:05,470 --> 00:04:10,290
+Chúng ta có thể dùng ngoặc vuông để lấy
+giá trị tại một vị trí nhất định,
+
+53
+00:04:10,290 --> 00:04:13,590
+và ngoặc tròn để lấy giá trị trong một khoảng.
+
+54
+00:04:15,550 --> 00:04:18,790
+Trong ngoặc là giá trị bắt đầu và bước nhảy.
+
+55
+00:04:20,410 --> 00:04:24,190
+Không cần thiết phải chỉ rõ chỉ số bắt đầu hoặc kết thúc.
+
+56
+00:04:24,190 --> 00:04:28,836
+Và chúng ta cũng có thể dùng số âm để
+lấy giá trị ngược từ cuối lên trong mảng.
+
+57
+00:04:28,836 --> 00:04:33,398
+Với ví dụ đầu tiên, hãy cùng xem
+khoảng giá trị bắt đầu từ chỉ số 1 và
+
+58
+00:04:33,398 --> 00:04:35,090
+kết thúc trước chỉ số 5.
+
+59
+00:04:36,960 --> 00:04:40,540
+Tiếp đó, ta hãy lấy một lát gồm
+4 số cuối của mảng.
+
+60
+00:04:42,760 --> 00:04:47,400
+Và đây, chúng ta bắt đầu từ
+chỉ số thứ 5 từ cuối, tới đầu mảng và
+
+61
+00:04:47,400 --> 00:04:48,480
+bước nhảy ngược là 2.
+
+62
+00:04:50,680 --> 00:04:52,787
+Ta hãy xem nó hoạt động như thế nào với mảng 2 chiều.
+
+63
+00:04:54,190 --> 00:04:58,825
+Đầu tiên, ta tạo mảng 2 chiều, từ 0 đến 35.
+
+64
+00:04:58,825 --> 00:05:02,720
+Ta có thể lấy một giá trị cụ thể
+bằng cách sử dụng dấu phẩy.
+
+65
+00:05:02,720 --> 00:05:04,900
+Đây là giá trị của số ở hàng thứ 2, cột 2.
+
+66
+00:05:06,990 --> 00:05:11,396
+Giờ hãy thử dùng ngoặc tròn để
+lấy giá trị hàng thứ 3 và
+
+67
+00:05:11,396 --> 00:05:13,019
+cột thứ 3 tới cột 6.
+
+68
+00:05:13,019 --> 00:05:16,336
+Chúng ta cũng có thể làm những việc
+như lấy 2 hàng đầu tiên,
+
+69
+00:05:16,336 --> 00:05:18,560
+ở tất cả các cột trừ cột cuối.
+
+70
+00:05:20,350 --> 00:05:23,310
+Đây là cách chúng ta chọn bước nhảy 2
+phần tử một tính từ dòng cuối cùng.
+
+71
+00:05:25,180 --> 00:05:29,010
+Ta cũng có thể dùng ngoặc vuông để
+thiết lập thứ tự cũng như gán giá trị.
+
+72
+00:05:30,720 --> 00:05:35,106
+Ví dụ, điều này sẽ trả về
+một mảng chứa các phần tử trong
+
+73
+00:05:35,106 --> 00:05:38,078
+mảng ban đầu của ta có giá trị lớn hơn 30.
+
+74
+00:05:38,078 --> 00:05:41,824
+Và việc gán sẽ lấy những giá trị trong
+mảng ban đầu của ta và
+
+75
+00:05:41,824 --> 00:05:43,200
+gán một giá trị mới cho nó.
+
+76
+00:05:44,580 --> 00:05:49,950
+Ở đây, chúng ta giới hạn giá trị lớn nhất của
+các phần tử trong mảng là 30.
+
+77
+00:05:49,950 --> 00:05:55,040
+Tiếp theo, hãy tìm hiểu về sao chép dữ liệu trong NumPy.
+
+78
+00:05:55,040 --> 00:05:59,540
+Đầu tiên, tạo một mảng mới r2,
+là một phần của mảng r.
+
+79
+00:06:01,040 --> 00:06:03,930
+Bây giờ, hãy gán tất cả các phần tử
+của mảng này bằng 0.
+
+80
+00:06:05,590 --> 00:06:07,820
+Khi chúng ta kiểm tra mảng gốc r,
+
+81
+00:06:07,820 --> 00:06:10,770
+Ta có thể thấy phần giá trị
+trong r cũng đã bị thay đổi.
+
+82
+00:06:13,010 --> 00:06:14,700
+Do đó, chúng ta cần phải nhớ điều này và
+
+83
+00:06:14,700 --> 00:06:18,230
+thật cẩn thận khi làm việc với mảng trong NumPy.
+
+84
+00:06:18,230 --> 00:06:22,660
+Nếu chúng ta muốn tạo một bản sao của mảng r
+mà sẽ không làm thay đổi giá trị mảng ban đầu,
+
+85
+00:06:22,660 --> 00:06:23,765
+ta có thể dùng r_copy.
+
+86
+00:06:25,230 --> 00:06:30,144
+Có thể thấy nếu ta thay đổi giá trị
+của tất cả phần tử trong r_copy thành 10,
+
+87
+00:06:30,144 --> 00:06:32,879
+các giá trị mảng gốc không hề bị thay đổi.
+
+88
+00:06:37,490 --> 00:06:41,470
+Cuối cùng, chúng ta học về vòng lặp trong mảng.
+
+89
+00:06:41,470 --> 00:06:45,698
+Đầu tiên, tạo một mảng 4x3
+bằng các số ngẫu nhiên từ 0 đến 9.
+
+90
+00:06:49,523 --> 00:06:54,230
+Chúng ta có thể tạo vòng lặp từng hàng
+bằng cách ghi "for row in test"
+
+91
+00:06:55,720 --> 00:06:59,860
+Chúng ta có thể tạo vòng lặp qua số thứ tự hàng
+ bằng cách sử dụng hàm length lên test,
+
+92
+00:06:59,860 --> 00:07:01,310
+length sẽ trả về số hàng mảng có.
+
+93
+00:07:03,140 --> 00:07:06,719
+Ta có thể phối hợp 2 cách tạo vòng lặp này bằng enumerate,
+
+94
+00:07:06,719 --> 00:07:09,360
+với chức năng trả về hàng và
+số thứ tự hàng.
+
+95
+00:07:16,103 --> 00:07:17,905
+Ta sẽ tạo một mảng mới, test2.
+
+96
+00:07:19,920 --> 00:07:23,045
+Nếu ta muốn dùng vòng lặp trong cả 2 mảng,
+có thể sử dụng zip.
+
+97
+00:07:29,035 --> 00:07:30,900
+NumPy có rất nhiều chức năng.
+
+98
+00:07:30,900 --> 00:07:34,680
+Vì vậy, hãy nhớ xem tài liệu hướng dẫn
+để tìm hiểu thêm các tính năng tuyệt với này.
+
+99
+00:07:35,710 --> 00:07:36,980
+Cám ơn đã đến cùng tôi
+
+100
+00:07:36,980 --> 00:07:38,031
+Hy vọng gặp bạn lần sau.

@@ -1,0 +1,598 @@
+1
+00:00:08,779 --> 00:00:12,230
+Cấu trúc dữ liệu khung dữ liệu là
+trọng tâm của thư viện panda.
+
+2
+00:00:12,230 --> 00:00:15,450
+Nó là một vấn đề quan trọng mà bạn sẽ
+làm việc trong phân tích dữ liệu
+
+3
+00:00:15,450 --> 00:00:16,110
+và các nhiệm vụ làm sạch.
+
+4
+00:00:17,380 --> 00:00:20,916
+Khung dữ liệu là khái niệm về một
+đối tượng chuỗi hai chiều,
+
+5
+00:00:20,916 --> 00:00:25,890
+có một chỉ mục và các cột nội dung,
+mỗi cột có một nhãn mác.
+
+6
+00:00:25,890 --> 00:00:28,293
+Thực tế sự khác biệt giữa cột và
+
+7
+00:00:28,293 --> 00:00:30,766
+hàng chỉ là phân biệt về khái niệm.
+
+8
+00:00:30,766 --> 00:00:34,951
+Và bạn có thể nghĩ về khung dữ liệu là
+một mảng được dán nhãn có hai trục.
+
+9
+00:00:36,550 --> 00:00:38,630
+Bạn có thể tạo ra khung dữ liệu
+bằng nhiều cách khác nhau,
+
+10
+00:00:38,630 --> 00:00:40,610
+một số cái bạn có thể mong muốn.
+
+11
+00:00:40,610 --> 00:00:42,890
+Ví dụ bạn có thể sử dụng một nhóm các chuỗi,
+
+12
+00:00:42,890 --> 00:00:45,119
+mỗi chuỗi đại diện một hàng dữ liệu.
+
+13
+00:00:45,119 --> 00:00:46,957
+Hoặc bạn có thể sử dụng
+một nhóm các từ điển,
+
+14
+00:00:46,957 --> 00:00:49,120
+mỗi từ điển đại diện một hàng dữ liệu.
+
+15
+00:00:50,370 --> 00:00:52,400
+Hãy cùng xem xét một ví dụ.
+
+16
+00:00:52,400 --> 00:00:55,650
+Tôi sẽ tạo ra ba bản ghi đơn đặt hàng
+là các đối tượng chuỗi với
+
+17
+00:00:55,650 --> 00:00:57,860
+một cửa hàng hư cấu.
+
+18
+00:00:57,860 --> 00:00:59,860
+Mỗi một dòng có tên của khách hàng,
+
+19
+00:00:59,860 --> 00:01:04,430
+một xâu mô tả mặt hàng được mua
+và giá của mặt hàng.
+
+20
+00:01:04,430 --> 00:01:07,150
+Tôi thích chó vì thế tôi sẽ
+mua thức ăn cho chó.
+
+21
+00:01:07,150 --> 00:01:10,510
+Kevin Collins Thompson, người hướng dẫn
+khóa học thứ ba trong chuỗi bài giảng,
+
+22
+00:01:10,510 --> 00:01:14,630
+anh ấy dường như thích mèo hơn tôi vì thế
+tôi sẽ nhờ anh ấy mua mèo nhỏ.
+
+23
+00:01:14,630 --> 00:01:17,600
+Và tôi nghĩ Vinod, người dạy khóa thứ
+tư trong chuỗi bài giảng này
+
+24
+00:01:17,600 --> 00:01:20,210
+thích chim vì thế tôi sẽ thêm
+hạt thức ăn cho chim vào đây.
+
+25
+00:01:21,780 --> 00:01:25,283
+Sau đó chúng ta sẽ đưa chúng vào
+khung dữ liệu như đối số đầu tiên và
+
+26
+00:01:25,283 --> 00:01:29,112
+thiết lập các giá trị chỉ số chỉ ra cửa
+hàng nơi mua hàng đã được hoàn thành.
+
+27
+00:01:29,112 --> 00:01:32,448
+Bạn sẽ thấy khi chúng ta xuất ra khung dữ liệu,
+ghi chú jupyter đang cố gắng để
+
+28
+00:01:32,448 --> 00:01:35,160
+làm nó tốt hơn một chút và xuất nó ra
+như một bảng, điều này rất tốt.
+
+29
+00:01:36,720 --> 00:01:41,370
+Tương tự với chuỗi chúng ta có thể
+trích xuất dữ liệu sử dụng iloc và loc.
+
+30
+00:01:41,370 --> 00:01:44,850
+Bởi vì khung dữ liệu là hai chiều,
+thực hiện giá trị đơn với
+
+31
+00:01:44,850 --> 00:01:48,830
+toán tử chỉ số lock sẽ trả lại một
+chuỗi nếu chỉ có một hàng.
+
+32
+00:01:50,370 --> 00:01:53,300
+Trong ví dụ này nếu chúng ta muốn lựa
+chọn dữ liệu liên quan đến cửa hàng số 2,
+
+33
+00:01:53,300 --> 00:01:56,110
+chúng ta sẽ chỉ truy vấn thuộc
+tính loc với một tham số.
+
+34
+00:01:57,460 --> 00:02:01,090
+Bạn sẽ lưu ý tên của chuỗi được quay lại
+như một giá trị chỉ số hàng,
+
+35
+00:02:01,090 --> 00:02:03,440
+trong khi kết quả ra bao gồm cột tên.
+
+36
+00:02:04,630 --> 00:02:09,517
+Chúng ta có thể kiểm tra loại dữ liệu
+trả về bằng việc sử dụng hàm kiểu python.
+
+37
+00:02:09,517 --> 00:02:12,636
+Rất quan trọng để ghi nhớ các chỉ số và
+
+38
+00:02:12,636 --> 00:02:17,980
+tên cột theo trục dọc, trục ngang và
+thẳng đứng, có thể không phải duy nhất.
+
+39
+00:02:17,980 --> 00:02:21,240
+Ví dụ, trong ví dụ này chúng ta
+thấy hai hồ sơ mua bán cho
+
+40
+00:02:21,240 --> 00:02:23,770
+cửa hàng 1 là các hàng khác nhau.
+
+41
+00:02:23,770 --> 00:02:27,470
+Nếu chúng ta sử dụng một giá trị đơn
+với thuộc tính khóa khung dữ liệu, nhiều hàng của
+
+42
+00:02:27,470 --> 00:02:31,110
+khung dữ liệu sẽ được trả lại, không phải
+là một chuỗi mới mà là một khung dữ liệu mới.
+
+43
+00:02:32,710 --> 00:02:35,729
+Ví dụ nếu chúng ta truy vấn cho các hồ sơ của cửa hàng 1,
+
+44
+00:02:35,729 --> 00:02:39,868
+chúng ta thấy rằng Chris và Kevin đều cùng mua
+ở một cửa hàng cung cấp đồ cho vật nuôi.
+
+45
+00:02:39,868 --> 00:02:43,737
+Một trong những tính năng của khung dữ liệu panda
+là bạn có thể nhanh chóng chọn lựa tập dữ liệu
+
+46
+00:02:43,737 --> 00:02:45,370
+trên nhiều trục.
+
+47
+00:02:45,370 --> 00:02:49,534
+Ví dụ nếu bạn muốn liệt kê giá
+của cửa hàng 1, bạn sẽ cung cấp
+
+48
+00:02:49,534 --> 00:02:53,961
+hai thông số đến.log, một là chỉ số
+hàng và một là tên cột.
+
+49
+00:02:53,961 --> 00:02:58,920
+Nếu chúng ta chỉ quan tâm đến giá của
+cửa hàng 1, chúng ta có thể viết điều này là
+
+50
+00:02:58,920 --> 00:02:59,690
+df.lock('Store 1','Cost').
+
+51
+00:03:01,260 --> 00:03:03,790
+Nếu chúng ta chỉ muốn lựa chọn cột và
+
+52
+00:03:03,790 --> 00:03:06,170
+chỉ có một danh sách tất cả các chi phí thì sao?
+
+53
+00:03:06,170 --> 00:03:07,870
+Đúng, có một số lựa chọn.
+
+54
+00:03:07,870 --> 00:03:10,142
+Đầu tiên bạn có thể nhận được một
+chuyển vị của khung dữ liệu,
+
+55
+00:03:10,142 --> 00:03:14,260
+sử dụng thuộc tính T, hoán đổi
+tất cả các cột và các hàng.
+
+56
+00:03:14,260 --> 00:03:16,925
+Cái này chuyển tên cột của bạn thành các chỉ số.
+
+57
+00:03:16,925 --> 00:03:19,790
+Và chúng ta có thể sử dụng phương pháp .loc.
+
+58
+00:03:19,790 --> 00:03:21,280
+Nó hoạt động nhưng nó khá là xấu.
+
+59
+00:03:22,640 --> 00:03:26,270
+Bởi vì iloc và loc được sử dụng cho việc chọn hàng,
+các nhà phát triển panda
+
+60
+00:03:26,270 --> 00:03:30,226
+đảo ngược toán tử chỉ số trực tiếp
+trên DataFrame cho việc chọn cột.
+
+61
+00:03:30,226 --> 00:03:33,779
+Trong khung dữ liệu của panda,
+các cột luôn luôn có tên.
+
+62
+00:03:33,779 --> 00:03:37,568
+Vì thế lựa chọn này luôn luôn được dán nhãn,
+không bị nhầm lẫn như trước khi
+
+63
+00:03:37,568 --> 00:03:41,460
+sử dụng toán tử dấu ngoặc vuông trên các đối tượng.
+
+64
+00:03:41,460 --> 00:03:43,770
+Những điều đó quen thuộc với
+cơ sở dữ liệu quan hệ,
+
+65
+00:03:43,770 --> 00:03:46,340
+toán tử này tương tự với ánh xạ cột.
+
+66
+00:03:48,090 --> 00:03:51,200
+Cuối cùng bởi vì kết quả của việc
+sử dụng toán tử chỉ số là
+
+67
+00:03:51,200 --> 00:03:55,180
+khung dữ liệu hoặc chuỗi, bạn có thể
+sâu chuỗi các toán tử với nhau.
+
+68
+00:03:55,180 --> 00:03:58,243
+Ví dụ bạn có thể viết lại truy vấn cho
+
+69
+00:03:58,243 --> 00:04:01,800
+all Store 1 costs as df.loc('Store 1',⏎'Cost').
+
+70
+00:04:02,850 --> 00:04:06,280
+Cái này nhìn khá là hợp lí và
+đưa ra kết quả chúng ta muốn.
+
+71
+00:04:06,280 --> 00:04:08,431
+Nhưng việc sâu chuỗi có thể đi kèm với chi phí và
+
+72
+00:04:08,431 --> 00:04:11,030
+tránh được tốt nhất nếu bạn có thể
+sử dụng cách tiếp cận khác.
+
+73
+00:04:11,030 --> 00:04:15,705
+Cụ thể sâu chuỗi có xu hướng làm cho
+hàm panda trả về một bản sao của khung dữ liệu
+
+74
+00:04:15,705 --> 00:04:17,840
+thay vì nhìn vào một khung dữ liệu.
+
+75
+00:04:17,840 --> 00:04:18,880
+Với việc lựa chọn dữ liệu,
+
+76
+00:04:18,880 --> 00:04:22,590
+điều này không phải là một vấn đề lớn
+mặc dù nó có thể sẽ chậm hơn cần thiết.
+
+77
+00:04:22,590 --> 00:04:25,510
+Nếu bạn đang thay đổi dữ liệu, điều này
+là một khác biệt quan trọng và
+
+78
+00:04:25,510 --> 00:04:26,559
+có thể là lý do của lỗi.
+
+79
+00:04:27,810 --> 00:04:29,370
+Đây là một phương pháp khác.
+
+80
+00:04:29,370 --> 00:04:32,810
+Như chúng ta thấy .loc thực hiện việc
+chọn hàng và nó có thể lấy hai thông số,
+
+81
+00:04:32,810 --> 00:04:35,490
+chỉ số hàng và danh sách tên cột.
+
+82
+00:04:35,490 --> 00:04:38,130
+.loc cũng hỗ trợ việc cắt.
+
+83
+00:04:38,130 --> 00:04:39,634
+Nếu chúng ta muốn chọn tất cả các hàng,
+
+84
+00:04:39,634 --> 00:04:42,721
+chúng ta có thể sử dụng một cột để chỉ ra
+một mảng đầy đủ từ bắt đầu đến kết thúc.
+
+85
+00:04:42,721 --> 00:04:47,150
+Sau đó thêm tên cột là thông số
+thứ hai như một chuỗi.
+
+86
+00:04:47,150 --> 00:04:50,620
+Thực tế nếu chúng ta muốn bao gồm nhiều cột,
+chúng ta có thể làm trong một danh sách.
+
+87
+00:04:50,620 --> 00:04:53,330
+Và panda sẽ mang lại các cột chúng ta yêu cầu.
+
+88
+00:04:54,750 --> 00:04:56,190
+Đây là một ví dụ, chúng ta yêu cầu
+
+89
+00:04:56,190 --> 00:05:00,370
+tất cả tên và giá trị chi phí cho tất cả
+các cửa hàng sử dụng toán tử .loc.
+
+90
+00:05:02,010 --> 00:05:05,290
+Đó là lựa chọn và dữ liệu kế hoạch từ
+khung dữ liệu dựa trên hàng và
+
+91
+00:05:05,290 --> 00:05:06,580
+các nhãn mác cột.
+
+92
+00:05:06,580 --> 00:05:10,120
+Khái niệm chính phải nhớ là các hàng
+và các cột thực sự chỉ cho
+
+93
+00:05:10,120 --> 00:05:11,120
+lợi ích của chúng ta.
+
+94
+00:05:11,120 --> 00:05:14,220
+Bên dưới của điều này là
+hai mảng được dán nhãn và
+
+95
+00:05:14,220 --> 00:05:15,800
+hoán đổi các cột rất dễ dàng.
+
+96
+00:05:16,830 --> 00:05:19,610
+Ngoài ra cân nhắc vấn đề sâu chuỗi cẩn thận và
+
+97
+00:05:19,610 --> 00:05:22,740
+cố gắng tránh nó, nó có thể gây ra
+những kết quả không đoán trước được.
+
+98
+00:05:22,740 --> 00:05:25,140
+Mục đích của bạn là để có được
+một tầm nhìn về dữ liệu nhưng
+
+99
+00:05:25,140 --> 00:05:27,044
+thay vì panda chuyển thành một bản sao.
+
+100
+00:05:27,044 --> 00:05:30,810
+Trong thế giới của panda, các
+bạn đừng cho phép sâu chuỗi.
+
+101
+00:05:30,810 --> 00:05:33,710
+Vì thế nếu bạn thấy nó, hãy chỉ ra nó và
+chia sẻ một giải pháp ít mơ hồ nhất.
+
+102
+00:05:34,870 --> 00:05:38,520
+Bây giờ trước khi chúng ta dừng thảo luận
+về truy cập dữ liệu trong khung dữ liệu,
+
+103
+00:05:38,520 --> 00:05:40,060
+hãy nói về việc loại bỏ dữ liệu.
+
+104
+00:05:41,680 --> 00:05:44,610
+Rất dễ dàng để xóa dữ liệu trong
+chuỗi và khung dữ liệu và
+
+105
+00:05:44,610 --> 00:05:47,090
+chúng ta có thể sử dung hàm xóa để làm điều đó.
+
+106
+00:05:47,090 --> 00:05:52,121
+Hàm này lấy một tham số đơn,
+là chỉ số hoặc cuộn để xóa.
+
+107
+00:05:52,121 --> 00:05:55,400
+Nó là một việc khó cho người
+mới sử dụng hàm panda.
+
+108
+00:05:55,400 --> 00:05:58,480
+Chức năng xóa không thay đổi
+khung dữ liệu theo mặc định.
+
+109
+00:05:58,480 --> 00:06:03,270
+Thay vì thế trả lại cho bạn một bản sao
+của khung dữ liệu với các hàng bị gỡ bỏ.
+
+110
+00:06:03,270 --> 00:06:07,030
+Chúng ta có thể thấy rằng khung dữ liệu
+gốc của chúng ta vẫn còn nguyên vẹn.
+
+111
+00:06:07,030 --> 00:06:10,960
+Hãy làm một bản sao với phương pháp
+sao chép và thực hiện việc giảm trên nó.
+
+112
+00:06:10,960 --> 00:06:15,360
+Đó là một mô hình điển hình trong hàm
+panda, nơi thay đổi khung dữ liệu
+
+113
+00:06:15,360 --> 00:06:19,360
+nếu cần thiết, thường thay đổi
+liên quan đến các chỉ số.
+
+114
+00:06:19,360 --> 00:06:20,700
+Vì thế nó rất quan trọng để nhận biết.
+
+115
+00:06:21,950 --> 00:06:24,460
+Xóa có hai tham số lựa chọn.
+
+116
+00:06:24,460 --> 00:06:27,240
+Đầu tiên được gọi tại chỗ, nếu
+nó được thiết lập là True,
+
+117
+00:06:27,240 --> 00:06:31,460
+khung dữ liệu sẽ được cập nhật tại chỗ
+thay vì một bản sao được trả lại.
+
+118
+00:06:31,460 --> 00:06:34,680
+Thông số thứ hai là trục mà sẽ bị xóa.
+
+119
+00:06:34,680 --> 00:06:37,997
+Mặc định giá trị này là 0,
+là trục hàng.
+
+120
+00:06:37,997 --> 00:06:40,310
+Nhưng bạn có thể thay đổi nó
+thành 1 nếu bạn muốn xóa cột.
+
+121
+00:06:42,210 --> 00:06:44,670
+Có cách thứ hai để xóa cột.
+
+122
+00:06:44,670 --> 00:06:49,360
+Và đó là qua việc sử dụng toán tử chỉ số, sử dụng từ khóa del.
+
+123
+00:06:50,940 --> 00:06:52,050
+Cách xóa dữ liệu này
+
+124
+00:06:52,050 --> 00:06:55,650
+tuy nhiên ảnh hưởng ngay lập tức trên
+khung dữ liệu và không trả về kết quả để xem.
+
+125
+00:06:56,870 --> 00:06:59,750
+Cuối cùng thêm một cột mới
+vào khung dữ liệu
+
+126
+00:06:59,750 --> 00:07:02,270
+dễ như việc gán nó vào một số giá trị.
+
+127
+00:07:02,270 --> 00:07:02,930
+Chẳng hạn như 
+
+128
+00:07:02,930 --> 00:07:06,850
+Nếu chúng ra muốn thêm địa điểm mới
+như là một cột với giá trị mặc định là không,
+
+129
+00:07:06,850 --> 00:07:11,270
+chúng ta có thể làm bằng việc sử dụng
+toán tử gán sau dấu ngoặc vuông.
+
+130
+00:07:11,270 --> 00:07:15,274
+Điều này lan truyền giá trị mặc định
+tới cột mới ngay lập tức.

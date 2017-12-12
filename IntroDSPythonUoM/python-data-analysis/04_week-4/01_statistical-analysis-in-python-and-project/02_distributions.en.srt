@@ -1,0 +1,339 @@
+1
+00:00:08,701 --> 00:00:11,210
+Let's start with a discussion
+of distributions.
+
+2
+00:00:11,210 --> 00:00:13,280
+And we'll start with the most
+common using a coin.
+
+3
+00:00:13,280 --> 00:00:17,230
+When a coin is flipped it has
+a probability of landing heads up and
+
+4
+00:00:17,230 --> 00:00:19,430
+a probability of landing tails up.
+
+5
+00:00:19,430 --> 00:00:23,120
+If we flip a coin many times we collect
+a number of measurements of the heads and
+
+6
+00:00:23,120 --> 00:00:24,900
+tails that landed face up and
+
+7
+00:00:24,900 --> 00:00:28,040
+intuitively we know that the number
+of times we get a heads up
+
+8
+00:00:28,040 --> 00:00:31,600
+will be equal about the number of times
+we get a tails up for a fair coin.
+
+9
+00:00:31,600 --> 00:00:34,250
+If you flipped a coin a hundred times and
+
+10
+00:00:34,250 --> 00:00:38,690
+you received heads each time you'd
+probably doubt the fairness of that coin.
+
+11
+00:00:38,690 --> 00:00:42,689
+We can consider the result of each flip
+of this coin as a random variable.
+
+12
+00:00:43,950 --> 00:00:48,020
+When we can consider the set of all
+possible random variables together
+
+13
+00:00:48,020 --> 00:00:50,370
+we call this a distribution.
+
+14
+00:00:50,370 --> 00:00:53,290
+In this case the distribution
+is called binomial
+
+15
+00:00:53,290 --> 00:00:57,230
+since there's two possible
+outputs a heads or a tails.
+
+16
+00:00:57,230 --> 00:01:00,770
+It's also an example of a discreet
+distribution since there are only
+
+17
+00:01:00,770 --> 00:01:05,020
+categories being used a heads and
+a tails and not real numbers.
+
+18
+00:01:06,135 --> 00:01:09,100
+NumPy actually has some
+distributions built into it
+
+19
+00:01:09,100 --> 00:01:12,950
+allowing us to make random flips
+of a coin with given parameters.
+
+20
+00:01:12,950 --> 00:01:13,650
+Let's give it a try.
+
+21
+00:01:14,650 --> 00:01:18,830
+Here we ask for a number from
+the NumPy binomial distribution.
+
+22
+00:01:18,830 --> 00:01:20,380
+We have two parameters to pass in.
+
+23
+00:01:20,380 --> 00:01:23,460
+The first is the number of
+times we want it to run.
+
+24
+00:01:23,460 --> 00:01:28,200
+The second is the chance we get a zero,
+which we will use to represent heads here.
+
+25
+00:01:28,200 --> 00:01:30,330
+Let's run one round of this simulation.
+
+26
+00:01:31,420 --> 00:01:32,000
+Great so
+
+27
+00:01:32,000 --> 00:01:35,880
+if you're following along in a Jupyter
+notebook you either got a zero or a one.
+
+28
+00:01:35,880 --> 00:01:38,420
+And half of you got a value that
+agreed with the one that I got.
+
+29
+00:01:39,680 --> 00:01:41,760
+What if we run the simulation
+a thousand times and
+
+30
+00:01:41,760 --> 00:01:43,690
+divided the result by a thousand.
+
+31
+00:01:43,690 --> 00:01:46,510
+Well you see a number
+pretty close to 0.5 which
+
+32
+00:01:46,510 --> 00:01:49,740
+means half of the time we had a heads and
+half of the time we had a tails.
+
+33
+00:01:50,990 --> 00:01:55,760
+Of course an even weighted binomial
+distribution is only one simple example.
+
+34
+00:01:55,760 --> 00:01:59,120
+We can also have unevenly
+weighted binomial distributions.
+
+35
+00:01:59,120 --> 00:02:03,710
+For instance what's the chance although
+we're tornado today while I’m filming.
+
+36
+00:02:03,710 --> 00:02:06,200
+It's pretty low even though
+we do get tornadoes here.
+
+37
+00:02:06,200 --> 00:02:10,150
+So maybe there a hundredth of a percentage chance.
+
+38
+00:02:10,150 --> 00:02:14,740
+We can put this into a binomial
+distribution as a weighting in NumPy.
+
+39
+00:02:14,740 --> 00:02:19,020
+If we run this 100,000 times we see
+there are pretty minimal tornado events.
+
+40
+00:02:20,460 --> 00:02:23,550
+So you might be wondering why I'm
+talking about such a simple and
+
+41
+00:02:23,550 --> 00:02:25,150
+intuitive distribution.
+
+42
+00:02:25,150 --> 00:02:27,620
+I mean we all understand
+flipping a coin for
+
+43
+00:02:27,620 --> 00:02:30,120
+when we had to make important
+decisions as children.
+
+44
+00:02:31,220 --> 00:02:34,870
+But what I want to demonstrate is that the
+computational tools are starting to allow
+
+45
+00:02:34,870 --> 00:02:38,510
+us to simulate the world which
+helps us answer questions.
+
+46
+00:02:38,510 --> 00:02:40,590
+I could have shown you
+the math behind this so
+
+47
+00:02:40,590 --> 00:02:42,770
+we could have worked
+out the probabilities.
+
+48
+00:02:42,770 --> 00:02:46,470
+But a simulation is essentially
+another form of inquiry.
+
+49
+00:02:46,470 --> 00:02:48,330
+Let's take one more example.
+
+50
+00:02:48,330 --> 00:02:51,940
+Let's say the chance of a tornado
+here in Ann Arbor on any given day,
+
+51
+00:02:51,940 --> 00:02:55,130
+is 1% regardless of the time of year.
+
+52
+00:02:55,130 --> 00:02:58,030
+That's higher than realistic but
+it makes for a quicker demo.
+
+53
+00:02:58,030 --> 00:03:00,970
+And lets say if there's a tornado I'm
+going to get away from the windows and
+
+54
+00:03:00,970 --> 00:03:04,620
+hide, then come back and
+do my recording the next day.
+
+55
+00:03:04,620 --> 00:03:07,355
+So what's the chance of this
+happening two days in a row?
+
+56
+00:03:08,680 --> 00:03:12,540
+Well we can use the binomial
+distribution in NumPy to simulate this.
+
+57
+00:03:13,580 --> 00:03:17,990
+Here we create an empty list and we create
+a number of potential tornado events by
+
+58
+00:03:17,990 --> 00:03:21,490
+asking the NumPy binomial function
+using our chance of tornado.
+
+59
+00:03:21,490 --> 00:03:26,700
+We'll do this a million times which is
+just shy of 3,000 years worth of events.
+
+60
+00:03:28,080 --> 00:03:30,840
+This process is called
+sampling the distribution.
+
+61
+00:03:31,920 --> 00:03:34,360
+Now we can write a little loop to
+go through the list and look for
+
+62
+00:03:34,360 --> 00:03:37,240
+any two adjacent pairs of ones which means
+
+63
+00:03:37,240 --> 00:03:40,820
+that there were two days
+that had back to back tornadoes.
+
+64
+00:03:40,820 --> 00:03:46,880
+We see that this ends up being roughly 102
+day tornado events over the 3,000 years.
+
+65
+00:03:46,880 --> 00:03:49,440
+Which frankly is still too many for me.
+
+66
+00:03:49,440 --> 00:03:53,690
+My point here though is that modern
+computational power allows us to very
+
+67
+00:03:53,690 --> 00:03:58,370
+quickly simulate the effects of
+different parameters in a distribution.
+
+68
+00:03:58,370 --> 00:04:00,530
+Leading to a new way of
+understanding the problem.
+
+69
+00:04:00,530 --> 00:04:03,520
+You don't have to work
+out all the math you can
+
+70
+00:04:03,520 --> 00:04:07,380
+quite often simulate the problem
+instead and observe the results.
+
+71
+00:04:08,410 --> 00:04:11,430
+In the next lecture we'll talk
+a little bit more about distributions.

@@ -1,0 +1,273 @@
+1
+00:00:08,987 --> 00:00:12,782
+Welcome to today's tutorial, where we'll
+be learning the basics of iterating
+
+2
+00:00:12,782 --> 00:00:16,370
+through a CSV file to create dictionaries
+and collect summary statistics.
+
+3
+00:00:17,770 --> 00:00:22,870
+First, let's import the CSV module, which
+will assist us in reading in our CSV file.
+
+4
+00:00:24,560 --> 00:00:26,732
+Using some iPython magic,
+
+5
+00:00:26,732 --> 00:00:31,557
+let's set the floating point precision for
+printing to 2.
+
+6
+00:00:31,557 --> 00:00:35,772
+Now let's read in our mpg.csv
+using csv.DictReader and
+
+7
+00:00:35,772 --> 00:00:38,530
+convert it to a list of dictionaries.
+
+8
+00:00:39,880 --> 00:00:42,170
+Let's look at the first
+three elements of our list.
+
+9
+00:00:44,100 --> 00:00:48,190
+We can see that the dictionaries in
+the list have the column names of the CSV as
+
+10
+00:00:48,190 --> 00:00:51,710
+keys, and data for
+each specific car are the values.
+
+11
+00:00:53,460 --> 00:00:55,970
+The length of our list is 234,
+
+12
+00:00:55,970 --> 00:01:00,240
+meaning we have a dictionary for
+each of the 234 cars in the CSV file.
+
+13
+00:01:02,490 --> 00:01:06,308
+We can look at what the column names
+of the CSV are by using the key method.
+
+14
+00:01:08,354 --> 00:01:13,670
+Suppose we want to find the average city
+MPG across all cars in our CSV file.
+
+15
+00:01:15,080 --> 00:01:19,430
+We sum the city MPG entry across all
+the dictionaries in our list and
+
+16
+00:01:19,430 --> 00:01:20,629
+divide by the length of the list.
+
+17
+00:01:21,770 --> 00:01:24,860
+Because the type for all the values
+in our dictionary are strings,
+
+18
+00:01:24,860 --> 00:01:27,830
+we need to convert to float to
+perform mathematical operations.
+
+19
+00:01:30,502 --> 00:01:36,420
+Similarly, we can find the average highway
+MPG across all the cars in our CSV file.
+
+20
+00:01:36,420 --> 00:01:40,063
+And it makes sense that the average
+highway fuel economy is higher than in
+
+21
+00:01:40,063 --> 00:01:40,609
+the city.
+
+22
+00:01:42,600 --> 00:01:44,490
+Now, let's look at a more complex example.
+
+23
+00:01:45,815 --> 00:01:49,180
+Say we want to know what
+the average city MPG is
+
+24
+00:01:49,180 --> 00:01:51,390
+grouped by the number
+of cylinders a car has.
+
+25
+00:01:52,570 --> 00:01:56,420
+Creating a set of the values in
+the cylinder entry of the dictionaries
+
+26
+00:01:56,420 --> 00:01:59,499
+will give us the unique levels for
+a number of cylinders.
+
+27
+00:02:00,540 --> 00:02:04,530
+We see that we have cars in out
+dataset with 4, 5, 6, and 8 cylinders.
+
+28
+00:02:06,160 --> 00:02:10,600
+First, we'll create an empty list
+where we'll store our calculations.
+
+29
+00:02:10,600 --> 00:02:14,510
+Next, let's iterate over
+all the cylinder levels.
+
+30
+00:02:14,510 --> 00:02:16,359
+And then we'll iterate
+over all the dictionaries.
+
+31
+00:02:18,420 --> 00:02:21,020
+If the cylinder level for
+the dictionary we're on
+
+32
+00:02:21,020 --> 00:02:24,710
+matches the cylinder level we're
+calculating the average for,
+
+33
+00:02:24,710 --> 00:02:29,730
+we add the mpg to our summpg variable and
+increment the count.
+
+34
+00:02:31,740 --> 00:02:36,750
+After going through all the dictionaries,
+we perform the average MPG calculation and
+
+35
+00:02:36,750 --> 00:02:37,480
+append it to our list.
+
+36
+00:02:39,250 --> 00:02:40,471
+To make things clearer,
+
+37
+00:02:40,471 --> 00:02:43,970
+I'm going to sort the list from lowest
+number of cylinders to highest.
+
+38
+00:02:43,970 --> 00:02:48,290
+And we can see that the city fuel economy
+appears to be decreasing as the number of
+
+39
+00:02:48,290 --> 00:02:49,590
+cylinders increases.
+
+40
+00:02:51,160 --> 00:02:52,670
+Let's look at one more similar example.
+
+41
+00:02:54,408 --> 00:02:57,360
+Suppose we're interested in finding
+the average highway MPG for
+
+42
+00:02:57,360 --> 00:02:58,659
+the different vehicle classes.
+
+43
+00:02:59,820 --> 00:03:04,743
+Looking at the different vehicle classes,
+we have 2seater, compact, midsize,
+
+44
+00:03:04,743 --> 00:03:07,320
+minivan, pickup, subcompact, and SUV.
+
+45
+00:03:09,160 --> 00:03:13,035
+Similar to the last example,
+we iterate over all the vehicle classes,
+
+46
+00:03:13,035 --> 00:03:15,100
+then iterate over all the dictionaries.
+
+47
+00:03:16,580 --> 00:03:17,760
+If the vehicle class for
+
+48
+00:03:17,760 --> 00:03:21,420
+the dictionary matches the vehicle
+class we're computing the average
+
+49
+00:03:21,420 --> 00:03:25,130
+highway MPG for, we add the value to
+our total, and increment the count.
+
+50
+00:03:26,890 --> 00:03:30,370
+Then we perform the average
+calculation and append it to our list.
+
+51
+00:03:31,960 --> 00:03:34,720
+This time, let's sort our list
+from lowest MPG to highest.
+
+52
+00:03:35,720 --> 00:03:39,220
+Looks like the pickup had the worst fuel
+economy and the compact had the best.
+
+53
+00:03:40,680 --> 00:03:43,850
+So that was a look into how to
+summarize data through iteration.
+
+54
+00:03:43,850 --> 00:03:46,948
+Don't worry if this seems
+somewhat inefficient or tedious.
+
+55
+00:03:46,948 --> 00:03:50,770
+Next week, we will be learning about
+Pandas, a Python library that allows for
+
+56
+00:03:50,770 --> 00:03:54,960
+easier, more efficient, and
+more powerful data analysis in Python.
+
+57
+00:03:54,960 --> 00:03:55,820
+Thanks for watching.
+
+58
+00:03:55,820 --> 00:03:56,640
+Hope to see you again soon.

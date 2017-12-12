@@ -1,0 +1,662 @@
+1
+00:00:09,082 --> 00:00:12,021
+Last week, we were introduced to
+the pandas data manipulation and
+
+2
+00:00:12,021 --> 00:00:13,430
+analysis library.
+
+3
+00:00:13,430 --> 00:00:16,649
+We saw that there is really two-core
+data structures which are very similar,
+
+4
+00:00:16,649 --> 00:00:20,540
+the one-dimensional series object and
+the two-dimensional DataFrame object.
+
+5
+00:00:20,540 --> 00:00:23,579
+Querying these two data structures
+is done in a few different ways,
+
+6
+00:00:23,579 --> 00:00:26,671
+such as using the iloc or
+loc attributes for row-based querying, or
+
+7
+00:00:26,671 --> 00:00:31,040
+using the square brackets on the object
+itself for column-based querying.
+
+8
+00:00:31,040 --> 00:00:33,810
+Most importantly, we saw that
+one can query the DataFrame and
+
+9
+00:00:33,810 --> 00:00:36,080
+Series objects through Boolean masking.
+
+10
+00:00:36,080 --> 00:00:38,810
+And Boolean masking is a powerful
+filtering method which
+
+11
+00:00:38,810 --> 00:00:42,730
+allows us to use broadcasting to determine
+what data should be kept in our analysis.
+
+12
+00:00:44,860 --> 00:00:46,080
+In this week's lecture,
+
+13
+00:00:46,080 --> 00:00:50,840
+we're going to go into more detail on how
+to manipulate DataFrame, in particular.
+
+14
+00:00:50,840 --> 00:00:54,220
+We're going to explore how to reduce and
+process data using GroupBy and Apply,
+
+15
+00:00:54,220 --> 00:00:58,420
+and how to join data sets from
+multiple files together into one.
+
+16
+00:00:58,420 --> 00:01:01,020
+We'll also talk about some features
+that pandas has which are useful for
+
+17
+00:01:01,020 --> 00:01:04,970
+both traditional statistical analyses and
+machine learning.
+
+18
+00:01:04,970 --> 00:01:07,160
+Let's start with how to merge data sets.
+
+19
+00:01:07,160 --> 00:01:10,260
+We've already seen how we add new
+data to an existing DataFrame.
+
+20
+00:01:10,260 --> 00:01:12,910
+We simply use the square bracket
+operator with the new column name,
+
+21
+00:01:12,910 --> 00:01:16,430
+and the data is added as
+long as an index is shared.
+
+22
+00:01:16,430 --> 00:01:20,080
+If there is no shared index and
+a scalar value is passed in,
+
+23
+00:01:20,080 --> 00:01:24,240
+which remember a scalar value is just a
+single value like an integer or a string.
+
+24
+00:01:24,240 --> 00:01:27,780
+The new value column is added with
+the scalar value as the default value.
+
+25
+00:01:27,780 --> 00:01:31,060
+What if we wanted to assign
+a different value for every row?
+
+26
+00:01:31,060 --> 00:01:32,488
+Well, it gets trickier.
+
+27
+00:01:32,488 --> 00:01:35,500
+If we could hardcode the values into
+a list, then pandas will unpack them and
+
+28
+00:01:35,500 --> 00:01:36,940
+assign them to the rows.
+
+29
+00:01:36,940 --> 00:01:39,500
+But if the list we have isn't long enough,
+then we can't do this,
+
+30
+00:01:39,500 --> 00:01:41,850
+since Pandas doesn't know where
+the missing values should go.
+
+31
+00:01:43,040 --> 00:01:44,256
+Here's an example.
+
+32
+00:01:44,256 --> 00:01:48,160
+We used the DataFrame of store purchases
+from one of our previous lectures,
+
+33
+00:01:48,160 --> 00:01:51,950
+where the index is a list of stores and
+the columns store purchase data.
+
+34
+00:01:51,950 --> 00:01:56,555
+If we want to add some new column called
+Date to the DataFrame, that's fine.
+
+35
+00:01:56,555 --> 00:01:59,570
+We just use the square bracket
+operator directly on the DataFrame,
+
+36
+00:01:59,570 --> 00:02:02,270
+as long as the column is as long
+as the rest of the records.
+
+37
+00:02:02,270 --> 00:02:04,000
+If we want to add some new field,
+
+38
+00:02:04,000 --> 00:02:07,260
+may be a delivery flag,
+that's easy too since it's a scalar value.
+
+39
+00:02:08,540 --> 00:02:11,450
+The problem comes in when we
+have only a few items to add.
+
+40
+00:02:11,450 --> 00:02:14,760
+In order for this to work,
+we have to supply pandas the list
+
+41
+00:02:14,760 --> 00:02:18,440
+which is long enough for the DataFrame,
+so that each row could be populated.
+
+42
+00:02:18,440 --> 00:02:22,035
+This means that we have to
+input none values ourselves.
+
+43
+00:02:22,035 --> 00:02:24,265
+If each of our rows has a unique index,
+
+44
+00:02:24,265 --> 00:02:27,775
+then we could just assign the new
+column identifier to the series.
+
+45
+00:02:27,775 --> 00:02:31,455
+For instance, if we reset the index in
+this example so the DataFrame is labeled
+
+46
+00:02:31,455 --> 00:02:36,475
+from 1 through 2, then we create a new
+series with these labels, we can apply it.
+
+47
+00:02:36,475 --> 00:02:39,565
+And the results we get are as we expected.
+
+48
+00:02:39,565 --> 00:02:42,925
+The nice aspect of this approach is that
+we could just ignore the items that we
+
+49
+00:02:42,925 --> 00:02:46,170
+don't know about, and
+pandas will put missing values in for us.
+
+50
+00:02:46,170 --> 00:02:48,650
+So this is a really nice way to do it.
+
+51
+00:02:48,650 --> 00:02:52,460
+More commonly, we want to join two
+larger DataFrames together, and
+
+52
+00:02:52,460 --> 00:02:54,650
+this is a bit more complex.
+
+53
+00:02:54,650 --> 00:02:57,870
+Before we jump into the code, we need to
+address a little relational theory, and
+
+54
+00:02:57,870 --> 00:03:00,600
+to get some language conventions down.
+
+55
+00:03:00,600 --> 00:03:02,250
+This is a Venn Diagram.
+
+56
+00:03:02,250 --> 00:03:06,000
+A Venn Diagram is traditionally
+used to show set membership.
+
+57
+00:03:06,000 --> 00:03:10,210
+For example, the circle on the left is the
+population of students at a university.
+
+58
+00:03:10,210 --> 00:03:13,820
+The circle on the right is
+the population of staff at a university.
+
+59
+00:03:13,820 --> 00:03:17,327
+And the overlapping region in the middle
+are all of those students who
+
+60
+00:03:17,327 --> 00:03:18,129
+are also staff.
+
+61
+00:03:18,129 --> 00:03:21,210
+Maybe these students run tutorials for
+a course, or grade assignments,
+
+62
+00:03:21,210 --> 00:03:23,990
+or engage in running research experiments.
+
+63
+00:03:23,990 --> 00:03:27,940
+We could think of these two populations
+as indices in separate DataFrames,
+
+64
+00:03:27,940 --> 00:03:30,040
+maybe with the label of Person Name.
+
+65
+00:03:30,040 --> 00:03:34,060
+When we want to join the DataFrames
+together, we have some choices to make.
+
+66
+00:03:34,060 --> 00:03:36,796
+First what if we want a list of
+all the people regardless of
+
+67
+00:03:36,796 --> 00:03:41,480
+whether they're staff or student, and
+all of the information we can get on them?
+
+68
+00:03:41,480 --> 00:03:44,700
+In database terminology,
+this is called a full outer join.
+
+69
+00:03:44,700 --> 00:03:46,820
+And in set theory, it's called a union.
+
+70
+00:03:46,820 --> 00:03:50,350
+In the Venn diagram,
+it represents everyone in any circle.
+
+71
+00:03:51,370 --> 00:03:54,600
+It's quite possible though that we only
+want those people who we have maximum
+
+72
+00:03:54,600 --> 00:03:59,010
+information for, those people
+who are both staff and students.
+
+73
+00:03:59,010 --> 00:04:01,610
+In database terminology,
+this is called an inner join.
+
+74
+00:04:01,610 --> 00:04:03,810
+Or in set theory, the intersection.
+
+75
+00:04:03,810 --> 00:04:07,300
+And this is represented in the Venn
+diagram as the overlapping parts
+
+76
+00:04:07,300 --> 00:04:07,920
+of each circle.
+
+77
+00:04:09,290 --> 00:04:13,610
+Okay, so let's see an example of
+how we would do this in pandas,
+
+78
+00:04:13,610 --> 00:04:15,169
+where we would use the merge function.
+
+79
+00:04:16,260 --> 00:04:19,020
+First we create two DataFrames,
+staff and students.
+
+80
+00:04:19,020 --> 00:04:21,510
+There's some overlap in these DataFrames,
+in that James and
+
+81
+00:04:21,510 --> 00:04:25,330
+Sally are both students and staff,
+but Mike and Kelly are not.
+
+82
+00:04:25,330 --> 00:04:29,870
+Importantly, both DataFrames are indexed
+along the value we want to merge them on,
+
+83
+00:04:29,870 --> 00:04:30,600
+which is called Name.
+
+84
+00:04:31,770 --> 00:04:33,100
+If we want the union of these,
+
+85
+00:04:33,100 --> 00:04:36,324
+we would call merge passing in the
+DataFrame on the left and the DataFrame on
+
+86
+00:04:36,324 --> 00:04:40,190
+the right, and telling merge that
+we want it to use an outer join.
+
+87
+00:04:40,190 --> 00:04:44,280
+We tell merge that we want to use the left
+and right indices as the joining columns.
+
+88
+00:04:45,500 --> 00:04:48,460
+We see in the resulting DataFrame
+that everyone is listed.
+
+89
+00:04:48,460 --> 00:04:50,170
+And since Mike does not have a role, and
+
+90
+00:04:50,170 --> 00:04:53,305
+John does not have a school,
+those cells are listed as missing values.
+
+91
+00:04:53,305 --> 00:04:56,585
+If we wanted to get the intersection,
+that is,
+
+92
+00:04:56,585 --> 00:05:01,405
+just those students who are also staff,
+we could set the how attribute to inner.
+
+93
+00:05:01,405 --> 00:05:04,925
+And we set the resulting DataFrame
+has only James and Sally in it.
+
+94
+00:05:07,597 --> 00:05:11,077
+Now there are two other common use
+cases when merging DataFrames.
+
+95
+00:05:11,077 --> 00:05:13,997
+Both are examples of what
+we would call set addition.
+
+96
+00:05:13,997 --> 00:05:17,977
+The first is when we would want to get
+a list of all staff regardless of whether
+
+97
+00:05:17,977 --> 00:05:19,657
+they were students or not.
+
+98
+00:05:19,657 --> 00:05:23,457
+But if they were students, we would want
+to get their student details as well.
+
+99
+00:05:23,457 --> 00:05:25,097
+To do this we would use a left join.
+
+100
+00:05:26,100 --> 00:05:28,060
+You could probably guess what comes next.
+
+101
+00:05:28,060 --> 00:05:32,080
+We want a list of all of the students and
+their roles if they were also staff.
+
+102
+00:05:32,080 --> 00:05:34,750
+To do this we would do a right join.
+
+103
+00:05:34,750 --> 00:05:37,790
+The merge method has a couple
+of other interesting parameters.
+
+104
+00:05:37,790 --> 00:05:41,410
+First, you don't need to use indices to
+join on, you can use columns as well.
+
+105
+00:05:41,410 --> 00:05:42,218
+Here's an example.
+
+106
+00:05:50,807 --> 00:05:54,360
+So what happens when we have
+conflicts between the DataFrames?
+
+107
+00:05:54,360 --> 00:05:56,290
+Let's take a look by
+creating new staff and
+
+108
+00:05:56,290 --> 00:06:00,000
+student DataFrames that have
+a location information added to them.
+
+109
+00:06:00,000 --> 00:06:00,950
+In the staff DataFrame,
+
+110
+00:06:00,950 --> 00:06:03,830
+this is an office location where
+we can find the staff person.
+
+111
+00:06:03,830 --> 00:06:06,335
+And we can see the Director
+of HR is on State Street,
+
+112
+00:06:06,335 --> 00:06:09,360
+while the two students
+are on Washington Avenue.
+
+113
+00:06:09,360 --> 00:06:10,580
+But for the student DataFrame,
+
+114
+00:06:10,580 --> 00:06:13,160
+the location information is
+actually their home address.
+
+115
+00:06:14,310 --> 00:06:18,816
+The merge function preserves this
+information, but appends an _x or
+
+116
+00:06:18,816 --> 00:06:22,652
+_y to help differentiate between which
+index went with which column of data.
+
+117
+00:06:22,652 --> 00:06:26,600
+The _x is always the left
+DataFrame information, and
+
+118
+00:06:26,600 --> 00:06:29,910
+the _ y is always the right
+DataFrame information.
+
+119
+00:06:29,910 --> 00:06:32,492
+And you could control the names of _x and
+
+120
+00:06:32,492 --> 00:06:35,520
+_y with additional
+parameters if you want to.
+
+121
+00:06:35,520 --> 00:06:36,470
+Now you try it.
+
+122
+00:06:36,470 --> 00:06:38,950
+Here's a DataFrame of products and
+invoices.
+
+123
+00:06:38,950 --> 00:06:41,310
+The product has an identifier and
+a sticker price.
+
+124
+00:06:41,310 --> 00:06:45,110
+The invoice lists the people,
+products, identifiers, and quantity.
+
+125
+00:06:45,110 --> 00:06:49,243
+Assuming that we want to generate totals,
+how do we join these two DataFrames
+
+126
+00:06:49,243 --> 00:06:53,069
+together so that we have one which
+lists all of the information we need?
+
+127
+00:06:56,757 --> 00:07:00,558
+Before we leave merging of DataFrames,
+let's talk about multi-indexing and
+
+128
+00:07:00,558 --> 00:07:02,340
+multiple columns.
+
+129
+00:07:02,340 --> 00:07:06,310
+It's quite possible that the first name
+for students and staff might overlap, but
+
+130
+00:07:06,310 --> 00:07:07,930
+the last name might not.
+
+131
+00:07:07,930 --> 00:07:11,560
+In this case, we use a list of the
+multiple columns that should be used to
+
+132
+00:07:11,560 --> 00:07:14,920
+join keys on the left_on and
+right_on parameters.
+
+133
+00:07:14,920 --> 00:07:19,050
+As you see here, James Wilde and
+James Hammond don't match on both keys.
+
+134
+00:07:19,050 --> 00:07:22,500
+So the inner join doesn't include
+these individuals in the output, and
+
+135
+00:07:22,500 --> 00:07:24,960
+only Sally Brooks is retained.
+
+136
+00:07:24,960 --> 00:07:26,531
+That's it for merging of DataFrames.
+
+137
+00:07:26,531 --> 00:07:30,420
+pandas has a lot more options in the area,
+but I think the merge function is perhaps
+
+138
+00:07:30,420 --> 00:07:33,880
+the most easiest to understand and
+the most flexible.
+
+139
+00:07:33,880 --> 00:07:37,060
+In the next section, we're going to talk
+about how to write idiomatic pandas and
+
+140
+00:07:37,060 --> 00:07:41,150
+delve a bit deeper into more advanced
+functions for manipulating DataFrames.

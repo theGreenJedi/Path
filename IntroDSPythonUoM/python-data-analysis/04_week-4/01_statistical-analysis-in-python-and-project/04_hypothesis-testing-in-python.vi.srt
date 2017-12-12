@@ -1,0 +1,691 @@
+1
+00:00:08,965 --> 00:00:12,550
+Chúng ta sử dụng các thống kế trong nhiều cách khác nhau trong khoa học dữ liệu.
+
+2
+00:00:12,550 --> 00:00:17,019
+Trong bài giảng này tôi muốn làm mới hiểu biết của bạn về giả thuyết thử nghiệm,
+
+3
+00:00:17,019 --> 00:00:20,995
+đó là hoạt động phân tích dữ liệu cốt lõi đằng sau thí nghiệm.
+
+4
+00:00:20,995 --> 00:00:25,157
+Chúng ta bắt đầu thấy sự thử nghiệm sử dụng
+
+5
+00:00:25,157 --> 00:00:29,838
+khoa học ngày càng nhiều và trong môi trường kinh doanh hằng ngày.
+
+6
+00:00:29,838 --> 00:00:34,510
+Một phần lí do cho điều này là sự gia tăng dữ liệu và thương mại điện tử.
+
+7
+00:00:34,510 --> 00:00:37,300
+Nó thật dễ dàng để thay đổi giao dịch chứng khoán số hóa và
+
+8
+00:00:37,300 --> 00:00:40,620
+cung cấp các trải nghiệm khác nhau tới các khách hàng của bạn và
+
+9
+00:00:40,620 --> 00:00:44,560
+sau đó xem cách các hoạt động của khách hàng khác với những cái khác như thế nào.
+
+10
+00:00:44,560 --> 00:00:49,298
+Ví dụ nếu bạn bán sách, bạn có thể muốn có một điều kiện nơi mà một trang bìa
+
+11
+00:00:49,298 --> 00:00:51,565
+của cuốn sách là đặc trưng trên trang web và
+
+12
+00:00:51,565 --> 00:00:55,984
+điều kiện khác tập trung vào tác giả và các đánh giá cuốn sách.
+
+13
+00:00:55,984 --> 00:00:58,382
+Điều này được gọi là kiểm tra A/B.
+
+14
+00:00:58,382 --> 00:01:03,246
+Trong khi nó không phải là duy nhất đến thời điểm này, nó bây giờ trở thành quá phổ biến đến nỗi mà
+
+15
+00:01:03,246 --> 00:01:07,918
+nếu bạn sử dụng trang web, bạn chắc chắn thử nghiệm một phần của kiểm tra A/B.
+
+16
+00:01:07,918 --> 00:01:12,378
+Điều này đưa ra một số câu hỏi về đạo đức và tôi đã thêm việc đọc cho
+
+17
+00:01:12,378 --> 00:01:16,558
+khóa học và tôi sẽ khuyến khích bạn kiểm tra nó,
+
+18
+00:01:16,558 --> 00:01:20,410
+tham gia thảo luận nhưng hãy tập trung lại vào các thống kê.
+
+19
+00:01:21,470 --> 00:01:24,347
+Một giả thuyết là một tuyên bố mà chúng ta có thể kiểm tra.
+
+20
+00:01:24,347 --> 00:01:28,542
+Chúng ta sẽ kéo một ví dụ từ nghiên cứu của tôi về công nghệ giáo dục và
+
+21
+00:01:28,542 --> 00:01:29,858
+học phân tích.
+
+22
+00:01:29,858 --> 00:01:34,567
+Giả sử chúng ta mong muốn là khi một khóa học mới được mở ra trong nền tảng MOOC,
+
+23
+00:01:34,567 --> 00:01:38,739
+sinh viên tìm ra nó và tất cả tham gia vào nó.
+
+24
+00:01:38,739 --> 00:01:42,507
+Như vậy chúng ta có thể hi vọng là sinh viên đăng kí khá nhanh sau khi
+
+25
+00:01:42,507 --> 00:01:45,487
+khóa học được mở ra với hiệu suất cao hơn
+
+26
+00:01:45,487 --> 00:01:48,850
+những sinh viên đăng kí sau khi MOOC đã mở một thời gian.
+
+27
+00:01:48,850 --> 00:01:53,469
+Trong ví dụ này chúng ta có các mẫu từ hai nhóm khác nhau cái mà chúng ta muốn so sánh.
+
+28
+00:01:53,469 --> 00:01:55,740
+Đăng kí muộn và đăng kí sớm.
+
+29
+00:01:56,940 --> 00:02:02,980
+Khi chúng ta làm thử nghiệm giả thuyết, chúng ta nắm rõ giả thuyết là sự thay đổi và
+
+30
+00:02:02,980 --> 00:02:07,010
+chúng ta tạo ra giả thuyết thứ hai gọi là giả thuyết vô hiệu,
+
+31
+00:02:07,010 --> 00:02:11,100
+trong trường hợp này sẽ là không có sự khác nhau giữa các nhóm.
+
+32
+00:02:11,100 --> 00:02:14,820
+Sau đó chúng ta kiểm tra các nhóm xác định liệu giả thuyết vô hiệu là
+
+33
+00:02:14,820 --> 00:02:15,430
+đúng hay không.
+
+34
+00:02:16,560 --> 00:02:19,371
+Nếu chúng ta thấy có sự khác nhau giữa các nhóm,
+
+35
+00:02:19,371 --> 00:02:23,064
+thì chúng ta có thể bỏ giả thuyết này và chúng ta chấp nhận thay đổi.
+
+36
+00:02:23,064 --> 00:02:25,035
+Có sự tài tình trong mô tả này.
+
+37
+00:02:25,035 --> 00:02:28,553
+Chúng ta không nói giả thuyết của chúng ta là đúng nhưng
+
+38
+00:02:28,553 --> 00:02:32,822
+chúng ta nói có bằng chứng chống lại giả thuyết vô hiệu.
+
+39
+00:02:32,822 --> 00:02:37,396
+Vì thế chúng ta tự tin hơn trong giả thuyết thay thế của chúng ta.
+
+40
+00:02:37,396 --> 00:02:39,685
+Hãy xem ví dụ về điều này.
+
+41
+00:02:39,685 --> 00:02:42,885
+Chúng ta có thể tải một tệp gọi là grid.csv.
+
+42
+00:02:42,885 --> 00:02:45,008
+Nếu chúng ta nhìn vào khung dữ liệu bên trong.
+
+43
+00:02:45,008 --> 00:02:47,203
+Chúng ta thấy chúng ta có sau bài tập khác nhau.
+
+44
+00:02:47,203 --> 00:02:49,258
+Mỗi một thời điểm và
+
+45
+00:02:49,258 --> 00:02:53,853
+nó dường như chỉ có dưới 3,000 mục trong tệp dữ liệu này.
+
+46
+00:02:53,853 --> 00:02:58,470
+Với mục đích của bài giảng này, hãy phân khúc dân số này thành hai phần.
+
+47
+00:02:58,470 --> 00:03:01,650
+Những người hoàn thành nhiệm vụ đầu tiên vào cuối tháng 12 năm 2015 và
+
+48
+00:03:01,650 --> 00:03:04,340
+những người hoàn thành vào thời điểm nào đó sau đó.
+
+49
+00:03:05,470 --> 00:03:08,120
+Tôi chỉ làm điều này và nó cho chúng ta hai khung dữ liệu,
+
+50
+00:03:08,120 --> 00:03:09,530
+nó có cùng kích thước.
+
+51
+00:03:11,010 --> 00:03:14,770
+Như bạn thấy, đối tượng khung dữ liệu panda có một loạt
+
+52
+00:03:14,770 --> 00:03:17,210
+các chức năng thống kê liên quan đến nó.
+
+53
+00:03:17,210 --> 00:03:19,860
+Nếu chúng ta dùng trực tiếp chức năng này trên khung dữ liệu,
+
+54
+00:03:19,860 --> 00:03:22,579
+chúng ta thấy mỗi một chức năng có các bài tập được tính toán.
+
+55
+00:03:23,640 --> 00:03:28,488
+Lưu ý rằng giá trị thời gian bị bỏ qua bởi vì hàm panda biết nó không phải một số,
+
+56
+00:03:28,488 --> 00:03:29,692
+mà là một loại đối tượng.
+
+57
+00:03:29,692 --> 00:03:33,165
+Nếu chúng ta nhìn vào các giá trị ý nghĩa cho khung dữ liệu sau,
+
+58
+00:03:33,165 --> 00:03:35,468
+chúng ta có các số tương tự.
+
+59
+00:03:35,468 --> 00:03:37,180
+Có sự khác biệt nhỏ.
+
+60
+00:03:37,180 --> 00:03:39,430
+Nó ở phần cuối của bài tập 6,
+
+61
+00:03:39,430 --> 00:03:42,400
+người sử dụng đầu tiên làm tốt hơn khoảng 1%.
+
+62
+00:03:43,400 --> 00:03:47,100
+Vì thế đủ để tiếp tục và thực hiện thử nghiệm và
+
+63
+00:03:47,100 --> 00:03:50,180
+thay đổi điều gì đó theo cách chúng tôi dạy phải không?
+
+64
+00:03:50,180 --> 00:03:55,370
+Khi kiểm tra giả thuyết, chúng ta phải lựa chọn mức độ như một ngưỡng
+
+65
+00:03:55,370 --> 00:03:58,930
+với số lượng cơ hội chúng ta sẵn sàng chấp nhận.
+
+66
+00:03:58,930 --> 00:04:02,140
+Mức độ này gọi là alpha.
+
+67
+00:04:02,140 --> 00:04:05,890
+Nó có thể khác nhau, phụ thuộc vào cái bạn sẽ làm với kết quả và
+
+68
+00:04:05,890 --> 00:04:07,850
+phần nhiều bạn mong đợi trong dữ liệu của bạn.
+
+69
+00:04:08,870 --> 00:04:13,221
+Ví dụ trong nghiên cứu khoa học xã hội, giá trị là 0.05 hoặc
+
+70
+00:04:13,221 --> 00:04:17,940
+0.01 là thường được sử dụng, nó chỉ ra
+
+71
+00:04:17,940 --> 00:04:22,350
+xác suất cơ hội giữa 5% và 1%.
+
+72
+00:04:22,350 --> 00:04:25,490
+Trong thí nghiệm vật lí nơi mà các điều kiện được kiểm soát nhiều hơn và
+
+73
+00:04:25,490 --> 00:04:29,320
+như vậy chứng minh cao hơn, bạn có thể mong đợ mức độ alpha
+
+74
+00:04:29,320 --> 00:04:33,590
+10 đến 5 hoặc 100,000 phần trăm.
+
+75
+00:04:35,490 --> 00:04:40,280
+Bạn có thể nghĩ đến mức độ ý nghĩa từ góc nhìn của sự can thiệp cũng như
+
+76
+00:04:40,280 --> 00:04:44,165
+đó là cái tôi chạy thường xuyên với nghiên cứu của tôi.
+
+77
+00:04:44,165 --> 00:04:48,637
+Tôi sẽ làm gì khi tôi thấy hai sinh viên khác nhau?
+
+78
+00:04:48,637 --> 00:04:52,076
+Ví dụ nếu tôi sẽ gửi một email để khuyến khích sinh viên
+
+79
+00:04:52,076 --> 00:04:56,720
+tiếp tục làm bài tập về nhà của họ, đó là sự can thiệp với chi phí thấp.
+
+80
+00:04:56,720 --> 00:05:00,540
+Email rất rẻ và trong khi tôi không muốn làm phiền sinh viên,
+
+81
+00:05:00,540 --> 00:05:03,140
+một email sẽ không phá hủy ngày của họ.
+
+82
+00:05:03,140 --> 00:05:06,101
+Nhưng nếu sự cân thiệp nhiều hơn
+
+83
+00:05:06,101 --> 00:05:09,885
+như là dám sát sinh viên qua điện thoại?
+
+84
+00:05:09,885 --> 00:05:13,189
+Điều này đắt hơn nhiều cho cả học viện và cho
+
+85
+00:05:13,189 --> 00:05:13,834
+sinh viên.
+
+86
+00:05:13,834 --> 00:05:16,430
+Vì thế tôi muốn đảm bảo chứng minh.
+
+87
+00:05:17,530 --> 00:05:19,187
+Ngưỡng mà bạn thiết lập cho
+
+88
+00:05:19,187 --> 00:05:22,868
+alpha phụ thuộc vào cái bạn có thể tạo ra kết quả.
+
+89
+00:05:22,868 --> 00:05:29,181
+Ví dụ hãy sử dụng ngưỡng 0.05 cho alpha của chúng ta hoặc 5%.
+
+90
+00:05:29,181 --> 00:05:33,693
+Bây giờ chúng ta kiểm tra liệu những điều này có khác biệt trong python hay không?
+
+91
+00:05:33,693 --> 00:05:37,782
+Thư viện Scipy chứa số lượng các bài kiểm tra thống kê khác nhau và
+
+92
+00:05:37,782 --> 00:05:40,584
+các dạng cơ bản của kiểm tra giả thuyết trong python.
+
+93
+00:05:40,584 --> 00:05:45,060
+Một thử nghiệm T là cách để so sánh ý nghĩa giữa hai ví dụ khác nhau.
+
+94
+00:05:45,060 --> 00:05:48,444
+Trong thư viện Scipy kiểm tra T kết thúc chức năng sẽ
+
+95
+00:05:48,444 --> 00:05:53,210
+so sánh hai mẫu độc lập để xem liệu chúng ta ý nghĩa khác nhau.
+
+96
+00:05:53,210 --> 00:05:56,721
+Tôi sẽ không đi vào chi tiết của kiểm tra thống kê này ở đây.
+
+97
+00:05:56,721 --> 00:06:01,247
+Nhưng thay vì đó chúng tôi khuyên bạn kiểm tra trang wikipedia trên kiểm tra cụ thể
+
+98
+00:06:01,247 --> 00:06:06,072
+hoặc xân nhắc việc lấy khóa học thống kê nếu điều này không quen thuộc với bạn.
+
+99
+00:06:06,072 --> 00:06:09,637
+Nhưng tôi muốn lưu ý rằng các kiểm tra thống kê mong đợi điều rằng
+
+100
+00:06:09,637 --> 00:06:13,071
+các dữ liệu phù hợp với phân bố nhất định, một hình dạng.
+
+101
+00:06:13,071 --> 00:06:19,098
+Bạn không nên áp dụng các kiểm tra một cách bừa bãi và nên đầu tư dữ liệu của bạn trước.
+
+102
+00:06:19,098 --> 00:06:21,649
+Nếu chúng ta muốn so sánh các lớp bài tập với
+
+103
+00:06:21,649 --> 00:06:26,012
+bài tập đầu tiên giữa hai ví dụ, chúng ta có thể tạo ra kiểm tra T
+
+104
+00:06:26,012 --> 00:06:29,182
+bằng cách xuất hai mẫu vào kiểm tra T trong chức năng.
+
+105
+00:06:29,182 --> 00:06:33,144
+Kết quả là hai với thống kê thử nghiệm và một giá trị p.
+
+106
+00:06:33,144 --> 00:06:36,887
+Giá trị p ở đây lớn hơn 0.05.
+
+107
+00:06:36,887 --> 00:06:39,591
+Vì thế chúng ta không thể bỏ giả thuyết null,
+
+108
+00:06:39,591 --> 00:06:42,690
+đó là phần giống nhau.
+
+109
+00:06:42,690 --> 00:06:45,349
+Trong các thuật ngữ sau chúng ta sẽ nói
+
+110
+00:06:45,349 --> 00:06:49,721
+không có sự khác biệt đáng kể giữa hai mẫu này.
+
+111
+00:06:49,721 --> 00:06:51,413
+Hãy kiểm tra bằng hai lớp.
+
+112
+00:06:58,037 --> 00:07:01,118
+Không cái đó lớn hơn 0.052.
+
+113
+00:07:01,118 --> 00:07:02,639
+Câu hỏi số ba thì sao?
+
+114
+00:07:08,857 --> 00:07:13,191
+Cái đó gần hơn nhưng vẫn vượt quá ngưỡng giá trị.
+
+115
+00:07:13,191 --> 00:07:17,832
+Rất quan trọng để dừng lại ở đây và nói về xử lí với cách chúng ta
+
+116
+00:07:17,832 --> 00:07:22,557
+xử lí cuộc điều tra này về sự khác biệt giữa hai quần thể.
+
+117
+00:07:22,557 --> 00:07:27,424
+Khi chúng ta đặt alpha bằng 0.05, chúng ta nói rằng chúng ta mong đợi
+
+118
+00:07:27,424 --> 00:07:31,280
+sẽ có kết quả tích cực, 5% thời gian để có cơ hội.
+
+119
+00:07:32,440 --> 00:07:36,880
+Khi chúng ta chạy kiểm tra T nhiều hơn nữa, chúng ta có thể tìm ra một kết quả tích cực
+
+120
+00:07:36,880 --> 00:07:39,250
+bởi vì số lượng của kiểm tra T chúng ta đã chạy.
+
+121
+00:07:40,340 --> 00:07:44,853
+Khi nhà khoa học dữ liệu chạy nhiều thử nghiệm theo cách này, nó được gọi là hack hoặc
+
+122
+00:07:44,853 --> 00:07:48,039
+nạo vét và nó là một vấn đề pháp luật nghiêm trọng.
+
+123
+00:07:48,039 --> 00:07:54,875
+Các kết quả p hacking trong mối tương quan giả thay vì kết quả.
+
+124
+00:07:54,875 --> 00:07:57,684
+Có các cách khác nhau bạn có thể xử lí bằng p hacking.
+
+125
+00:07:57,684 --> 00:08:00,490
+Đầu tiên gọi là phân tích phương sai.
+
+126
+00:08:00,490 --> 00:08:03,187
+Trong trường hợp này bạn thắt chặt giá trị alpha của bạn,
+
+127
+00:08:03,187 --> 00:08:07,187
+ngưỡng ý nghĩa dựa trên số lượng thử nghiệm bạn đang chạy.
+
+128
+00:08:07,187 --> 00:08:12,130
+Nếu bạn lựa chọn 0.05 với 1 thử nghiệm, bạn muốn chạy 3 thử nghiệm,
+
+129
+00:08:12,130 --> 00:08:19,406
+bạn giảm alpha bằng cách nhân 0.05 với 1/3 để có giá trị mới là 0.01.
+
+130
+00:08:19,406 --> 00:08:23,400
+Cá nhân tôi thấy tiếp cận này rất hiệu quả.
+
+131
+00:08:23,400 --> 00:08:26,639
+Lựa chọn khác nữa là giữ một số dữ liệu của bạn để
+
+132
+00:08:26,639 --> 00:08:29,799
+thử nghiệm xem kết quả khái quát như thế nào.
+
+133
+00:08:29,799 --> 00:08:32,550
+Trong trường hợp này chúng ta lấy một nửa dữ liệu của chúng ta cho
+
+134
+00:08:32,550 --> 00:08:35,741
+mỗi khung dữ liệu, chyaj thử nghiệm T với điều đó.
+
+135
+00:08:35,741 --> 00:08:39,435
+Giả thuyết cụ thể dựa trên kết quả của các thử nghiệm,
+
+136
+00:08:39,435 --> 00:08:42,500
+sau đó chạy các thử nghiệm hạn chế trên phần còn lại của dữ liệu.
+
+137
+00:08:43,540 --> 00:08:46,400
+Phương pháp này thực sự được sử dụng trong học máy khi
+
+138
+00:08:46,400 --> 00:08:50,410
+xây dựng mô hình dự đoán gọi là phương pháp đo độ chính xác và
+
+139
+00:08:50,410 --> 00:08:53,740
+bạn sẽ học nhiều hơn về điều này trong khóa học này trong chuỗi.
+
+140
+00:08:55,270 --> 00:08:59,240
+Phương pháp cuối cùng là về đăng kí trước thử nghiệm của bạn.
+
+141
+00:09:00,400 --> 00:09:04,060
+Trong bước này bạn sẽ phác thảo cái bạn mong đợi để tìm ra lí do và
+
+142
+00:09:04,060 --> 00:09:08,120
+mô tả thử nghiệm sẽ hỗ trợ một chứng cứ tích cực của điều này.
+
+143
+00:09:08,120 --> 00:09:12,150
+Bạn đăng kí với bên thứ ba, nó thường là một tạp chí
+
+144
+00:09:12,150 --> 00:09:14,330
+người mà xác định dù nó là một thử nghiệm hợp lí hay không.
+
+145
+00:09:15,360 --> 00:09:17,707
+Sau đó bạn làm nghiên cứu và thông báo các kết quả,
+
+146
+00:09:17,707 --> 00:09:20,299
+bất kể liệu chúng là tích cực hay không.
+
+147
+00:09:20,299 --> 00:09:25,060
+Ở đây có một gánh nặng hơn về việc kết nối để tồn tại lí thuyết bởi vì
+
+148
+00:09:25,060 --> 00:09:29,661
+bạn cần phải thuyết phục người đánh giá rằng thí nghiệm có thể kiểm tra
+
+149
+00:09:29,661 --> 00:09:31,531
+đầy đủ giả thuyết được đưa ra.
+
+150
+00:09:31,531 --> 00:09:32,611
+Trong bài giảng này,
+
+151
+00:09:32,611 --> 00:09:37,147
+Chúng ta đã thảo luận một số điều cơ bản trong fiar thuyết thử nghiệm trong python.
+
+152
+00:09:37,147 --> 00:09:41,421
+Tôi đã giới thiệu bạn tới thư viện Scipy, bạn có thể sử dụng thử nghiệm T.
+
+153
+00:09:41,421 --> 00:09:44,384
+Chúng ta đã thảo luận một số các vấn đề thực tế cái mà phát sinh từ việc tìm kiếm
+
+154
+00:09:44,384 --> 00:09:46,420
+số liệu.
+
+155
+00:09:46,420 --> 00:09:49,240
+Có nhiều điều để học về giả thuyết thử nghiệm.
+
+156
+00:09:49,240 --> 00:09:51,120
+Ví dụ có các thử nghiệm khác nhau được sử dụng,
+
+157
+00:09:51,120 --> 00:09:53,800
+phụ thuộc vào hình dạng của dữ liệu và các cách khác nhau để thông báo
+
+158
+00:09:53,800 --> 00:09:57,610
+kết quả thay vì các giá trị p như là sự tin tưởng.
+
+159
+00:09:57,610 --> 00:10:00,450
+Nhưng tôi hi vọng điều này sẽ cho bạn một khởi đầu để so sánh ý nghĩa của
+
+160
+00:10:00,450 --> 00:10:03,772
+hai phần khác nhau, đó là nhiệm vụ phổ biến cho các nhà khoa học dữ liệu và
+
+161
+00:10:03,772 --> 00:10:07,239
+chúng ta sẽ theo dõi hoạt động này trong khóa học thửu hai trong chuỗi.
+
+162
+00:10:09,320 --> 00:10:11,731
+Bài giảng này cũng hoàn tất các bài học cho
+
+163
+00:10:11,731 --> 00:10:15,735
+khóa học đầu tiên trong khoa học dữ liệu được áp dụng với chuỗi python.
+
+164
+00:10:15,735 --> 00:10:18,350
+Chúng ta đã tìm hiểu cơ bản về lập trình python,
+
+165
+00:10:18,350 --> 00:10:22,199
+một số các tính năng nâng cao như sơ đồ, đồi tượng hàm và lỗi.
+
+166
+00:10:22,199 --> 00:10:26,827
+Cách đọc và thao tác dữ liệu sử dụng thư viện panda bao gồm truy vấn,
+
+167
+00:10:26,827 --> 00:10:31,538
+tham gia, tạo nhóm và xử lí dữ liệu và tạo ra các bảng phân tích.
+
+168
+00:10:31,538 --> 00:10:35,398
+Bây giờ chúng ta đã nói một chút về thống kê trong python và
+
+169
+00:10:35,398 --> 00:10:38,274
+đào sâu honw về Num-Py và bộ công cụ Scipy.
+
+170
+00:10:38,274 --> 00:10:41,717
+Trong khóa học tiếp theo, chúng ta sẽ đào sâu sự thâm nhập và lập biểu đồ dữ liệu.
+
+171
+00:10:41,717 --> 00:10:45,056
+Xử lí các số liệu và cách chúng ta đại diện dữ liệu với những cái khác,
+
+172
+00:10:45,056 --> 00:10:48,160
+cách chúng ta xây dựng một câu chuyện hấp dẫn cho dữ liệu chúng ta có.
+
+173
+00:10:48,160 --> 00:10:48,690
+Tôi sẽ gặp lại bạn sau.

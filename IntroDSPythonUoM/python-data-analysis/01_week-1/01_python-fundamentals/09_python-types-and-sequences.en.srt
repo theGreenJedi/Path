@@ -1,0 +1,661 @@
+1
+00:00:08,722 --> 00:00:12,830
+The absence of static typing in Python
+doesn't mean that there aren't types.
+
+2
+00:00:12,830 --> 00:00:16,738
+The Python language has a built in
+function called type which will show you
+
+3
+00:00:16,738 --> 00:00:18,513
+what type a given reference is.
+
+4
+00:00:18,513 --> 00:00:22,890
+Some of the common types includes strings,
+the none type as we’ve discussed.
+
+5
+00:00:22,890 --> 00:00:25,480
+Integers and floating point variables.
+
+6
+00:00:25,480 --> 00:00:28,580
+As we've seen you can have
+reference as to function as well
+
+7
+00:00:28,580 --> 00:00:30,050
+as a function type also exist.
+
+8
+00:00:31,640 --> 00:00:34,310
+Typed objects have properties
+associated with them, and
+
+9
+00:00:34,310 --> 00:00:37,110
+these properties can be data or functions.
+
+10
+00:00:37,110 --> 00:00:41,165
+A lot of Python's built around different
+kinds of sequences or collection types.
+
+11
+00:00:41,165 --> 00:00:45,150
+And there's three native kinds of
+collections that we're going to talk
+
+12
+00:00:45,150 --> 00:00:47,710
+about, tuples, lists, and dictionaries.
+
+13
+00:00:49,370 --> 00:00:53,028
+A tuple is a sequence of variables
+which itself is immutable.
+
+14
+00:00:53,028 --> 00:00:55,851
+That means that a tuple has
+items in an ordering, but
+
+15
+00:00:55,851 --> 00:00:58,680
+that it cannot be changed once created.
+
+16
+00:00:58,680 --> 00:01:02,968
+We write tuples using parentheses, and
+we can mix types for the contents of
+
+17
+00:01:02,968 --> 00:01:03,707
+the tuple.
+
+18
+00:01:03,707 --> 00:01:06,380
+Here's a tuple which has four items.
+
+19
+00:01:06,380 --> 00:01:08,150
+Two are numbers, and two are strings.
+
+20
+00:01:09,230 --> 00:01:11,190
+Note here that I've used single quotes for
+
+21
+00:01:11,190 --> 00:01:14,660
+a string, whereas previously
+I've used double quotes.
+
+22
+00:01:14,660 --> 00:01:19,390
+In Python, either single or double quotes
+can be used to denote string values.
+
+23
+00:01:21,020 --> 00:01:23,880
+Lists are very similar, but
+they can be mutable, so
+
+24
+00:01:23,880 --> 00:01:27,440
+you can change their length, number
+of elements, and the element values.
+
+25
+00:01:28,900 --> 00:01:31,683
+A list is declared using
+the square brackets.
+
+26
+00:01:31,683 --> 00:01:35,340
+There are a couple of different ways
+to change the contents of a list.
+
+27
+00:01:35,340 --> 00:01:39,738
+One is through the append function which
+allows you to append new items to the end
+
+28
+00:01:39,738 --> 00:01:40,467
+of the list.
+
+29
+00:01:42,557 --> 00:01:45,175
+Both lists and tuples are iterable types, so
+
+30
+00:01:45,175 --> 00:01:49,340
+you can write loops to go
+through every value they hold.
+
+31
+00:01:49,340 --> 00:01:53,760
+The norm, if you want to look each item
+in the list is to use a for statement.
+
+32
+00:01:53,760 --> 00:01:58,740
+This is similar to the for each loop
+in languages like Java and C# but
+
+33
+00:01:58,740 --> 00:02:00,700
+note that there's no typing required.
+
+34
+00:02:03,270 --> 00:02:07,360
+Lists and tuples can also be accessed
+as arrays might in other languages,
+
+35
+00:02:07,360 --> 00:02:12,000
+by using the square bracket operator,
+which is called the indexing operator.
+
+36
+00:02:12,000 --> 00:02:15,175
+The first item of the list
+starts at position zero and
+
+37
+00:02:15,175 --> 00:02:19,013
+to get the length of the list,
+we use the built in len function.
+
+38
+00:02:19,013 --> 00:02:22,837
+There are some other common functions
+that you might expect like min and
+
+39
+00:02:22,837 --> 00:02:26,800
+max which will find the minimum or
+maximum values in a given list or tuple.
+
+40
+00:02:28,465 --> 00:02:29,410
+Python lists and
+
+41
+00:02:29,410 --> 00:02:34,420
+tuples also have some basic mathematical
+operations that can be allowed on them.
+
+42
+00:02:34,420 --> 00:02:38,100
+The plus sign concatenates lists for
+instance.
+
+43
+00:02:38,100 --> 00:02:41,380
+And the asterisks repeats
+the values of a list.
+
+44
+00:02:41,380 --> 00:02:45,620
+A very common operator is the in operator.
+
+45
+00:02:45,620 --> 00:02:49,810
+This looks at set membership and
+returns a boolean value of true or
+
+46
+00:02:49,810 --> 00:02:54,770
+false depending on whether
+one item is in a given list.
+
+47
+00:02:54,770 --> 00:02:58,570
+We're going to dive more into operators
+and special kinds of sequences
+
+48
+00:02:58,570 --> 00:03:02,020
+in a future week when we look at
+a technique called broadcasting.
+
+49
+00:03:03,380 --> 00:03:08,090
+Perhaps the most interesting operations
+you can do with lists are called slicing.
+
+50
+00:03:08,090 --> 00:03:11,920
+Where the square bracket array syntax for
+accessing an element might look
+
+51
+00:03:11,920 --> 00:03:15,200
+fairly similar to that which
+you've seen in other languages.
+
+52
+00:03:15,200 --> 00:03:20,070
+In Python, the indexing operator
+allows you to submit multiple values.
+
+53
+00:03:20,070 --> 00:03:22,405
+The first parameter is
+the starting location,
+
+54
+00:03:22,405 --> 00:03:26,315
+if this is the only element then
+one item is return from the list.
+
+55
+00:03:26,315 --> 00:03:29,015
+The second parameter is
+the end of the slice.
+
+56
+00:03:29,015 --> 00:03:33,815
+It's an exclusive end so if you slice
+with the first parameter being zero
+
+57
+00:03:33,815 --> 00:03:36,795
+the next parameter being one,
+then you only get back one item.
+
+58
+00:03:37,940 --> 00:03:40,580
+This is much easier to
+explain with an example.
+
+59
+00:03:40,580 --> 00:03:44,100
+One handy aspect of Python is
+that all strings are actually
+
+60
+00:03:44,100 --> 00:03:48,770
+just lists of characters so
+slicing works wonderfully on them.
+
+61
+00:03:48,770 --> 00:03:49,960
+Here's an example.
+
+62
+00:03:49,960 --> 00:03:57,320
+When we run x[0] or x[0:1] we get
+just the first character of the string.
+
+63
+00:03:57,320 --> 00:04:02,240
+But when we run x[0:2], we get
+the first two characters of the string.
+
+64
+00:04:03,350 --> 00:04:07,210
+Our indexing values can also be
+negative which is really cool.
+
+65
+00:04:07,210 --> 00:04:10,465
+And this means to index from
+the back of the string.
+
+66
+00:04:10,465 --> 00:04:16,799
+So x[-1] gets us the last letter
+of the string, and x[-4:-2]
+
+67
+00:04:16,799 --> 00:04:21,815
+reads in all of the characters from
+the 4th last to the 2nd last positions.
+
+68
+00:04:22,885 --> 00:04:25,245
+Finally if we want to
+reference the start or
+
+69
+00:04:25,245 --> 00:04:29,910
+the end of the string implicitly, we can
+by just leaving the parameter empty.
+
+70
+00:04:29,910 --> 00:04:35,584
+So x[:3] starts with the first character and
+goes until position three.
+
+71
+00:04:35,584 --> 00:04:40,502
+And the x[3:] starts with the fourth
+character because indexing always begins
+
+72
+00:04:40,502 --> 00:04:43,050
+with zero and goes to the end of the list.
+
+73
+00:04:44,290 --> 00:04:46,910
+Slicing is core to the Python language and
+
+74
+00:04:46,910 --> 00:04:50,330
+is a big part of the scientific
+computing with Python as well.
+
+75
+00:04:50,330 --> 00:04:53,480
+Especially if you start
+manipulating matrices.
+
+76
+00:04:53,480 --> 00:04:56,370
+We're going to talk more about
+slicing in the next module.
+
+77
+00:04:56,370 --> 00:04:58,345
+But here's a question to get you started.
+
+78
+00:05:00,499 --> 00:05:04,940
+Now, I'm taking a bit of an aside here
+to talk about manipulating strings.
+
+79
+00:05:04,940 --> 00:05:07,450
+Slicing isn't the only way
+to manipulate strings.
+
+80
+00:05:07,450 --> 00:05:10,990
+And a common activity is to split
+strings based on substrings.
+
+81
+00:05:10,990 --> 00:05:13,360
+That is, to go through
+the string looking for patterns,
+
+82
+00:05:13,360 --> 00:05:15,880
+and segmenting it as appropriate.
+
+83
+00:05:15,880 --> 00:05:18,330
+This is called regular
+expression evaluation, and
+
+84
+00:05:18,330 --> 00:05:22,170
+we're going to cover this in detail in the
+section of the specialization which deals
+
+85
+00:05:22,170 --> 00:05:25,860
+with text mining since it's
+a very common operation.
+
+86
+00:05:25,860 --> 00:05:28,387
+But Python has some basic tools for
+text analysis.
+
+87
+00:05:28,387 --> 00:05:29,800
+And I'm going to show you them here.
+
+88
+00:05:31,490 --> 00:05:34,800
+As we saw,
+strings are just lists of characters.
+
+89
+00:05:34,800 --> 00:05:38,800
+So operations you can do on a list,
+you can do on a string.
+
+90
+00:05:38,800 --> 00:05:43,260
+This means that you can concatenate two
+strings together using the plus operator.
+
+91
+00:05:43,260 --> 00:05:46,730
+And multiplying strings
+will repeat a given string.
+
+92
+00:05:46,730 --> 00:05:50,080
+You can also search for
+strings using the in operator.
+
+93
+00:05:51,380 --> 00:05:54,047
+The string type has an associated
+function called split.
+
+94
+00:05:55,240 --> 00:06:00,530
+This function breaks the string up into
+substrings based on a simple pattern.
+
+95
+00:06:00,530 --> 00:06:01,810
+Here for instance,
+
+96
+00:06:01,810 --> 00:06:06,030
+I'll just split my full name based on
+the presence of a space character.
+
+97
+00:06:06,030 --> 00:06:08,420
+The result is a list of four elements.
+
+98
+00:06:08,420 --> 00:06:12,510
+We can choose the first element with the
+indexing operator to be the first name,
+
+99
+00:06:12,510 --> 00:06:14,060
+and the last element to be my last name.
+
+100
+00:06:15,890 --> 00:06:18,570
+We'll touch on strings just a bit more but
+before we do,
+
+101
+00:06:18,570 --> 00:06:20,234
+I want to talk about dictionaries.
+
+102
+00:06:20,234 --> 00:06:23,923
+Dictionaries are similar to lists and
+tuples in that they hold a collection of
+
+103
+00:06:23,923 --> 00:06:28,110
+items, but they're labeled collections
+which do not have an ordering.
+
+104
+00:06:28,110 --> 00:06:31,430
+This means that for
+each value you insert into the dictionary,
+
+105
+00:06:31,430 --> 00:06:34,490
+you must also give a key
+to get that value out.
+
+106
+00:06:34,490 --> 00:06:37,130
+In other languages the structure
+is often called a map.
+
+107
+00:06:37,130 --> 00:06:40,940
+And in Python we use curly
+braces to denote a dictionary.
+
+108
+00:06:40,940 --> 00:06:44,710
+Here is an example where we might
+link names to email addresses.
+
+109
+00:06:44,710 --> 00:06:48,580
+You can see that we indicate each item
+of the dictionary when creating it
+
+110
+00:06:48,580 --> 00:06:51,485
+using a pair of values
+separated by colons.
+
+111
+00:06:51,485 --> 00:06:55,520
+Then you can retrieve a value for
+a given label using the indexing operator.
+
+112
+00:06:56,820 --> 00:07:00,349
+The types you use for indices or
+values in the dictionary can be anything.
+
+113
+00:07:00,349 --> 00:07:02,870
+And this could be a mixture
+of types if you prefer.
+
+114
+00:07:03,880 --> 00:07:07,700
+We can add new items to the dictionary
+using the same indexing operator
+
+115
+00:07:07,700 --> 00:07:08,910
+we are used to.
+
+116
+00:07:08,910 --> 00:07:10,640
+Just on the left hand side of a statement.
+
+117
+00:07:11,800 --> 00:07:16,420
+You an iterate over all of the items
+in a dictionary in a number of ways.
+
+118
+00:07:16,420 --> 00:07:18,910
+First you can iterate
+over all of the keys and
+
+119
+00:07:18,910 --> 00:07:20,810
+just pull the contents out as you see fit.
+
+120
+00:07:21,850 --> 00:07:25,190
+Or you can iterate over the values and
+just ignore the keys.
+
+121
+00:07:26,840 --> 00:07:29,530
+Finally you can iterate
+over both the values and
+
+122
+00:07:29,530 --> 00:07:31,950
+the keys at once using
+the item's function.
+
+123
+00:07:33,550 --> 00:07:39,330
+
+124
+00:07:39,330 --> 00:07:42,760
+This last example is
+a little bit different, and
+
+125
+00:07:42,760 --> 00:07:44,470
+it's an example of
+something called unpacking.
+
+126
+00:07:44,470 --> 00:07:48,010
+In Python you can have a sequence.
+That's a list or a tuple of values, and
+
+127
+00:07:48,010 --> 00:07:53,480
+you can unpack those items into different
+variables through assignment in
+
+128
+00:07:53,480 --> 00:07:54,830
+one statement.
+
+129
+00:07:54,830 --> 00:07:57,840
+Here's another example of that, where
+we have a tuple that has my first name,
+
+130
+00:07:57,840 --> 00:07:59,960
+last name, and email address.
+
+131
+00:07:59,960 --> 00:08:08,330
+
+132
+00:08:08,330 --> 00:08:11,000
+I declare three variables and
+assign them to the tuple.
+
+133
+00:08:11,000 --> 00:08:15,470
+
+134
+00:08:15,470 --> 00:08:18,280
+Underneath, Python has unpacked the tuple,
+and
+
+135
+00:08:18,660 --> 00:08:20,020
+assigned each of these variables in order.
+
+136
+00:08:20,060 --> 00:08:23,390
+We can see that if we add
+a fourth item to the tuple,
+
+137
+00:08:23,390 --> 00:08:26,980
+Python isn't sure how to unpack that,
+so we have an error.
+
+138
+00:08:26,980 --> 00:08:29,980
+That's an overview of built
+in types with Python.
+
+139
+00:08:29,980 --> 00:08:33,980
+In the next lecture,
+we're going to revisit strings briefly,
+
+140
+00:08:33,980 --> 00:08:36,980
+then start working with some data files.

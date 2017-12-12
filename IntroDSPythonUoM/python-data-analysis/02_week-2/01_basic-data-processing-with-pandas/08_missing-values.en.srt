@@ -1,0 +1,427 @@
+1
+00:00:08,720 --> 00:00:12,660
+We're going to end this week of lecture
+with a quick discussion of missing values.
+
+2
+00:00:12,660 --> 00:00:16,685
+We've seen a preview of how Pandas
+handles missing values using the None type
+
+3
+00:00:16,685 --> 00:00:18,820
+and NumPy NaN values.
+
+4
+00:00:18,820 --> 00:00:21,800
+Missing values are pretty common
+in data cleaning activities.
+
+5
+00:00:21,800 --> 00:00:24,480
+There are couple of caveats and
+discussion points which we should address.
+
+6
+00:00:25,480 --> 00:00:28,960
+First, the built in loading from
+delimited files provides control for
+
+7
+00:00:28,960 --> 00:00:30,840
+missing values in a few ways.
+
+8
+00:00:30,840 --> 00:00:34,380
+The most germane of these,
+is the na_values list,
+
+9
+00:00:34,380 --> 00:00:38,590
+to indicate other strings which
+could refer to missing values.
+
+10
+00:00:38,590 --> 00:00:41,580
+Some of my sociologist colleagues for
+instance, regularly
+
+11
+00:00:41,580 --> 00:00:46,120
+use the value of 99 in binary categories
+to indicate that there's no value.
+
+12
+00:00:46,120 --> 00:00:47,950
+So this comes in handy.
+
+13
+00:00:47,950 --> 00:00:52,530
+You can also use the na_filter option
+to turn off white space filtering,
+
+14
+00:00:52,530 --> 00:00:55,480
+if white space is an actual
+value of interest.
+
+15
+00:00:55,480 --> 00:00:58,101
+But in practice, this is pretty rare.
+
+16
+00:00:58,101 --> 00:01:01,759
+In addition to rules controlling
+how missing values might be loaded,
+
+17
+00:01:01,759 --> 00:01:06,230
+it's sometimes useful to consider missing
+values as actually having information.
+
+18
+00:01:06,230 --> 00:01:08,730
+I'll give an example from my own research.
+
+19
+00:01:08,730 --> 00:01:11,730
+I often deal with logs from
+online learning systems.
+
+20
+00:01:11,730 --> 00:01:12,400
+In particular,
+
+21
+00:01:12,400 --> 00:01:17,390
+I've done a couple of projects looking
+at video use in lecture capture systems.
+
+22
+00:01:17,390 --> 00:01:21,590
+In these systems it's common for the player
+for have a heartbeat functionality where
+
+23
+00:01:21,590 --> 00:01:25,450
+playback statistics are sent to the server
+every so often, maybe every 30 seconds.
+
+24
+00:01:26,530 --> 00:01:29,950
+These heartbeats can get big as they can
+carry the whole state of the playback
+
+25
+00:01:29,950 --> 00:01:34,270
+system, such as where the video play
+head is at, where the video size is,
+
+26
+00:01:34,270 --> 00:01:37,420
+which video is being rendered to
+the screen, how loud the volume is, etc.
+
+27
+00:01:38,880 --> 00:01:41,300
+If we load the data file log.txt,
+
+28
+00:01:41,300 --> 00:01:44,070
+we can see an example of
+what this might look like.
+
+29
+00:01:44,070 --> 00:01:48,520
+In this data the first column is
+a timestamp in the Unix epoch format.
+
+30
+00:01:48,520 --> 00:01:51,900
+The next column is the user name followed
+by a web page they're visiting and
+
+31
+00:01:51,900 --> 00:01:52,940
+the video that they're playing.
+
+32
+00:01:54,190 --> 00:01:56,710
+Each row of the DataFrame
+has a playback position.
+
+33
+00:01:56,710 --> 00:01:59,960
+And we can see that as the playback
+position increases by one,
+
+34
+00:01:59,960 --> 00:02:02,210
+the time stamp increases
+by about 30 seconds.
+
+35
+00:02:03,300 --> 00:02:04,820
+Except for user Bob.
+
+36
+00:02:04,820 --> 00:02:07,060
+It turns out that Bob has
+paused his playback so
+
+37
+00:02:07,060 --> 00:02:10,530
+as time increases the playback
+position doesn't change.
+
+38
+00:02:10,530 --> 00:02:14,960
+Note too how difficult it is for us to try
+and derive this knowledge from the data,
+
+39
+00:02:14,960 --> 00:02:18,470
+because it's not sorted by time
+stamp as one might expect.
+
+40
+00:02:18,470 --> 00:02:22,240
+This is actually not uncommon on systems
+which have a high degree of parallelism.
+
+41
+00:02:24,000 --> 00:02:27,420
+There are a lot of missing values
+in the paused and volume columns.
+
+42
+00:02:27,420 --> 00:02:30,380
+It's not efficient to send this
+information across the network if it
+
+43
+00:02:30,380 --> 00:02:31,320
+hasn't changed.
+
+44
+00:02:31,320 --> 00:02:34,740
+So this particular system just inserts
+null values into the database if
+
+45
+00:02:34,740 --> 00:02:35,479
+there's no changes.
+
+46
+00:02:36,590 --> 00:02:38,850
+One of the handy functions
+that Pandas has for
+
+47
+00:02:38,850 --> 00:02:43,230
+working with missing values is
+the filling function, fillna.
+
+48
+00:02:43,230 --> 00:02:45,780
+This function takes a number or
+parameters, for
+
+49
+00:02:45,780 --> 00:02:49,210
+instance, you could pass in a single
+value which is called a scalar value
+
+50
+00:02:49,210 --> 00:02:51,650
+to change all of the missing
+data to one value.
+
+51
+00:02:51,650 --> 00:02:55,470
+This isn't really applicable in this case,
+but it's a pretty common use case.
+
+52
+00:02:55,470 --> 00:02:57,720
+Next up though is the method parameter.
+
+53
+00:02:57,720 --> 00:03:00,780
+The two common fill values are ffill and
+bfill.
+
+54
+00:03:00,780 --> 00:03:04,490
+ffill is for forward filling and
+it updates an na value for
+
+55
+00:03:04,490 --> 00:03:07,650
+a particular cell with the value
+from the previous row.
+
+56
+00:03:07,650 --> 00:03:10,770
+It's important to note that your
+data needs to be sorted in order for
+
+57
+00:03:10,770 --> 00:03:13,250
+this to have the effect you might want.
+
+58
+00:03:13,250 --> 00:03:17,210
+Data that comes from traditional database
+management systems usually has no
+
+59
+00:03:17,210 --> 00:03:19,630
+order guarantee, just like this data.
+
+60
+00:03:19,630 --> 00:03:20,300
+So be careful.
+
+61
+00:03:21,810 --> 00:03:25,360
+In Pandas we can sort either by index or
+by values.
+
+62
+00:03:25,360 --> 00:03:28,780
+Here we'll just promote the time stamp
+to an index then sort on the index.
+
+63
+00:03:30,080 --> 00:03:33,140
+If we look closely at the output
+though we'll notice that the index
+
+64
+00:03:33,140 --> 00:03:34,560
+isn't really unique.
+
+65
+00:03:34,560 --> 00:03:37,830
+Two users seem to be able to use
+the system at the same time.
+
+66
+00:03:37,830 --> 00:03:39,620
+Again, a very common case.
+
+67
+00:03:40,770 --> 00:03:44,380
+Let's reset the index, and
+use some multi-level indexing instead, and
+
+68
+00:03:44,380 --> 00:03:48,200
+promote the user name to a second level
+of the index to deal with that issue.
+
+69
+00:03:49,520 --> 00:03:50,918
+Now that we have the data indexed and
+
+70
+00:03:50,918 --> 00:03:55,550
+sorted appropriately, we can fill
+the missing datas using ffill.
+
+71
+00:03:55,550 --> 00:03:57,800
+It's good to remember when
+dealing with missing values so
+
+72
+00:03:57,800 --> 00:03:59,570
+you can deal with individual columns or
+
+73
+00:03:59,570 --> 00:04:02,860
+sets of columns by projecting them
+just as we spoke about earlier.
+
+74
+00:04:02,860 --> 00:04:05,920
+So you don't have to fix all
+missing values in one command.
+
+75
+00:04:06,940 --> 00:04:10,520
+It's sometimes useful to use forward
+filling, sometimes backwards filling, and
+
+76
+00:04:10,520 --> 00:04:12,686
+sometimes useful to just
+use a single number.
+
+77
+00:04:12,686 --> 00:04:16,900
+More recently, the Pandas team introduced
+a method of filling missing values with
+
+78
+00:04:16,900 --> 00:04:19,960
+a series which is the same
+length as your DataFrame.
+
+79
+00:04:19,960 --> 00:04:22,730
+This makes it easy to derive values
+which are missing if you have
+
+80
+00:04:22,730 --> 00:04:24,160
+the underlying to do so.
+
+81
+00:04:24,160 --> 00:04:26,880
+For instance, if you're dealing with
+receipts and you have a column for
+
+82
+00:04:26,880 --> 00:04:30,770
+final price and a column for discount but
+are missing information from the original
+
+83
+00:04:30,770 --> 00:04:34,104
+price column, you can fill this
+automatically using fillna.
+
+84
+00:04:35,650 --> 00:04:37,510
+One last note on missing values.
+
+85
+00:04:37,510 --> 00:04:39,760
+When you use statistical
+functions on DataFrames,
+
+86
+00:04:39,760 --> 00:04:42,670
+these functions typically
+ignore missing values.
+
+87
+00:04:42,670 --> 00:04:45,740
+For instance if you try and
+calculate the mean value of a DataFrame,
+
+88
+00:04:45,740 --> 00:04:49,360
+the underlying NumPy function
+will ignore missing values.
+
+89
+00:04:49,360 --> 00:04:50,940
+This is usually what you want but
+
+90
+00:04:50,940 --> 00:04:53,360
+you should be aware that
+values are being excluded.

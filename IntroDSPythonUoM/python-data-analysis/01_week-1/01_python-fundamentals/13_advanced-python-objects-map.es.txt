@@ -1,0 +1,90 @@
+Llegado a este punto, no hemos hablado
+mucho acerca de Python orientado a objetos. Aunque las funciones desempeñan
+un papel importante en el ecosistema Python, Python tiene clases que pueden tener
+métodos adjuntos, y ser instanciados como objetos. Este curso no abarca
+detalles de objetos en Python, ni programación orientada
+a objetos. Usarás mucho
+objetos en Python, Es menos probable que
+crees nuevas clases cuando utilices el entorno interactivo. Pero creo que es importante repasar
+algunos detalles acerca de objetos en Python, de modo tal de que no te
+sorprendamos cuando los veas. En primer lugar, puedes definir una clase
+con la palabra clave "class" y terminando con dos puntos. Cualquier cosa con sangría por debajo de esto, 
+está dentro del alcance de la clase. En Python, las clases son generalmente
+nombradas usando "Mayúsculas/Minúsculas Camello", es decir que el primer carácter
+de cada palabra va con mayúscula. Dentro del objeto, no declaras variables,
+simplemente empiezas a usarlas. También es posible
+declarar variables de clase. Estas son sólo variables que
+se comparten entre todas las instancias. Así que en este ejemplo, 
+estamos diciendo que el valor predeterminado para toda la gente es
+"School of Information". No es muy útil aquí, pero
+quería mostrarlo para completar el tema. Para definir un método,
+simplemente escribes como si fuera una función. El único cambio es que para tener acceso a
+la instancia en la que se invoca un método debes incluir "self", 
+en la firma del método. De manera similar, si deseas referirte a
+variables de instancia definidas en el objeto, debes utilizar la palabra "self" como prefijo,
+y luego un punto. Por ejemplo, en esta definición de una persona,
+hemos escrito dos métodos. "set_name" y "set_location". Y ambos cambian respectivamente las variables
+"name" y "location" dependientes de la instancia. Cuando ejecutamos esta celda,
+no vemos ninguna salida. La clase existe, pero aún
+no hemos creado ningún objeto. Podemos instanciar esta clase
+llamándola por su nombre y concatenando paréntesis vacíos
+detrás de él. Luego podemos invocar funciones e imprimir
+atributos de la clase mediante el uso de la notación con punto,
+algo común a la mayoría de los lenguajes. Hay un par de implicaciones en 
+la programación orientada a objetos en Python, que debes considerar luego
+de ver este breve ejemplo. Primero, en Python los objetos
+no tienen miembros privados o protegidos. Si instancias un objeto, tienes acceso completo a cualquiera
+de los métodos o atributos de dicho objeto. Segundo,
+no hay necesidad de un constructor explícito 
+al crear objetos en Python. Puedes agregar un constructor
+si lo deseas declarando el método "__init__" No voy a meterme más en objetos de Python,
+porque hay muchas sutilezas y, para ser honesto, la mayor parte
+de las características de objetos en Python no son realmente importantes
+para la introducción a la ciencia de los datos. Si estás interesado, Te recomiendo revisar la documentación
+en el tutorial de Python. Es una visión bastante completa de las
+características de los objetos del lenguaje, y hay una referencia
+en la sección de recursos de la clase. La función "map" es una de las bases
+para la programación funcional en Python. La programación funcional es un paradigma
+de programación en el cual declaras explícitamente Todos los parámetros que podrían cambiar
+mediante la ejecución de una función dada. Por lo tanto, se suele decir que la programación
+funcional es libre de efectos secundarios, porque allí hay un contrato de software que describe
+lo que realmente puede cambiar al llamar a una función. Python no es un lenguaje de
+programación funcional en el sentido puro. Puesto que tus funciones pueden tener
+muchos efectos secundarios y ciertamente no tienes que pasar parámetros de todo
+lo que estás interesado en cambiar. Pero la programación funcional
+hace que uno piense con más detenimiento cuando empieza a
+encadenar operaciones. Y este es un tema subyacente en
+gran parte de la ciencia de los datos y de la limpieza de datos
+en particular. Por lo tanto, en Python se suelen utilizar
+métodos de la programación funcional, Y no es raro encontrarse con un parámetro
+de una función, que es una función en sí misma. La función "map" es un ejemplo
+de una función de programación funcional en Python, que vincula  una serie
+de aspectos del lenguaje. La función "map"
+se parece a esto. El primer parámetro es la función
+que deseas ejecutar, y el segundo y y subsiguientes parámetros, 
+son algo sobre lo que se puede iterar. Todos los argumentos iterables
+se desempaquetan de manera conjunta y son pasados a
+la función dada. Esto es un poco críptico, 
+echemos un vistazo a un ejemplo. Imaginemos que tenemos
+dos listas de números, Quizás los precios de dos tiendas diferentes
+con exactamente los mismos artículos. Y queremos encontrar el mínimo
+que tendríamos que pagar Si compráramos el artículo
+más barato entre las dos tiendas. Para hacer esto, podríamos iterar
+cada lista, comparando artículos y eligiendo el más barato. Con "map", podemos hacer esta
+comparación en una sola sentencia. Pero cuando vamos a imprimir el resultado,
+vemos que obtenemos un valor de referencia, En lugar de la lista de items
+que estamos esperando. A esto se lo conoce como
+"Evaluación perezosa". En Python, la función "map"
+retorna un objeto mapeado. En realidad no ejecuta
+la función sobre los dos elementos, hasta que mires dentro de un valor. Este es un interesante 
+patrón de diseño del lenguaje, y es de uso frecuente
+cuando trabajamos con "Big Data". Esto nos permite gestionar la
+memoria de una manera muy eficiente, Incluso con algo que podría ser 
+computacionalmente complejo. Los "map" son iterables, al igual que las listas y
+tuplas, por lo que podemos usarlos un para ver todos los
+valores del mapa. Este pasaje de funciones y estructuras de datos 
+sobre las que se deben aplicar, constituyen un sello distintivo
+de la programación funcional. Es muy común en el análisis
+y limpieza de datos. Aquí hay un problema para que pruebes,
+y que reúne algunas de las tareas con las que te encontrarás 
+al hacer limpieza de datos.

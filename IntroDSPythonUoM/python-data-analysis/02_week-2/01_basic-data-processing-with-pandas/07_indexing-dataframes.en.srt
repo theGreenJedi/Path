@@ -1,0 +1,449 @@
+1
+00:00:08,793 --> 00:00:12,780
+As we've seen, both series and DataFrames
+can have indices applied to them.
+
+2
+00:00:12,780 --> 00:00:15,110
+The index is essentially
+a row level label, and
+
+3
+00:00:15,110 --> 00:00:17,830
+we know that rows correspond to axis zero.
+
+4
+00:00:17,830 --> 00:00:21,130
+In our Olympics data, we indexed the data
+frame by the name of the country.
+
+5
+00:00:21,130 --> 00:00:23,740
+Indices can either be inferred,
+such as when we create a new
+
+6
+00:00:23,740 --> 00:00:27,230
+series without an index,
+in which case we get numeric values,
+
+7
+00:00:27,230 --> 00:00:28,980
+or they can be set explicitly,
+
+8
+00:00:28,980 --> 00:00:31,910
+like when we use the dictionary
+object to create the series,
+
+9
+00:00:31,910 --> 00:00:36,190
+or when we loaded data from the CSV
+file and specified the header.
+
+10
+00:00:36,190 --> 00:00:40,370
+Another option for setting an index
+is to use the set_index function.
+
+11
+00:00:40,370 --> 00:00:44,590
+This function takes a list of columns and
+promotes those columns to an index.
+
+12
+00:00:44,590 --> 00:00:49,338
+Set index is a destructive process,
+it doesn't keep the current index.
+
+13
+00:00:49,338 --> 00:00:53,020
+If you want to keep the current index, you
+need to manually create a new column and
+
+14
+00:00:53,020 --> 00:00:56,360
+copy into it values from
+the index attribute.
+
+15
+00:00:56,360 --> 00:00:58,600
+Let's go back to our Olympics DataFrame.
+
+16
+00:00:58,600 --> 00:01:01,440
+Let's say that we don't want to index
+the DataFrame by countries, but
+
+17
+00:01:01,440 --> 00:01:05,660
+instead want to index by the number of
+gold medals that were won at summer games.
+
+18
+00:01:05,660 --> 00:01:09,070
+First we need to preserve the country
+information into a new column.
+
+19
+00:01:09,070 --> 00:01:13,510
+We can do this using the indexing operator
+or the string that has the column label.
+
+20
+00:01:13,510 --> 00:01:18,015
+Then we can use the set_index to set index
+of the column to summer gold medal wins.
+
+21
+00:01:19,220 --> 00:01:23,200
+You'll see that when we create a new index
+from an existing column it appears that
+
+22
+00:01:23,200 --> 00:01:25,910
+a new first row has been
+added with empty values.
+
+23
+00:01:25,910 --> 00:01:27,670
+This isn't quite what's happening.
+
+24
+00:01:27,670 --> 00:01:30,640
+And we know this in part because
+an empty value is actually rendered
+
+25
+00:01:30,640 --> 00:01:35,140
+either as a none or an NaN if the data
+type of the column is numeric.
+
+26
+00:01:35,140 --> 00:01:37,680
+What's actually happened is
+that the index has a name.
+
+27
+00:01:37,680 --> 00:01:41,140
+Whatever the column name was in the
+Jupiter notebook has just provided this
+
+28
+00:01:41,140 --> 00:01:41,710
+in the output.
+
+29
+00:01:42,860 --> 00:01:46,930
+We can get rid of the index completely
+by calling the function reset_index.
+
+30
+00:01:46,930 --> 00:01:51,378
+This promotes the index into a column and
+creates a default numbered index.
+
+31
+00:01:54,522 --> 00:01:59,360
+One nice feature of pandas is that it has
+the option to do multi-level indexing.
+
+32
+00:01:59,360 --> 00:02:02,426
+This is similar to composite keys
+in relational database systems.
+
+33
+00:02:02,426 --> 00:02:06,450
+To create a multi-level index,
+we simply call set index and
+
+34
+00:02:06,450 --> 00:02:09,330
+give it a list of columns that we're
+interested in promoting to an index.
+
+35
+00:02:10,400 --> 00:02:13,560
+Pandas will search through these in order,
+finding the distinct data and
+
+36
+00:02:13,560 --> 00:02:15,770
+forming composite indices.
+
+37
+00:02:15,770 --> 00:02:19,520
+A good example of this is often found
+when dealing with geographical data which
+
+38
+00:02:19,520 --> 00:02:22,200
+is sorted by regions or demographics.
+
+39
+00:02:22,200 --> 00:02:26,330
+Let's change data sets and look at
+some census data for a better example.
+
+40
+00:02:26,330 --> 00:02:28,620
+This data is stored in
+the file census.csv and
+
+41
+00:02:28,620 --> 00:02:31,460
+comes from
+the United States Census Bureau.
+
+42
+00:02:31,460 --> 00:02:32,130
+In particular,
+
+43
+00:02:32,130 --> 00:02:36,670
+this is a breakdown of the population
+level data at the US county level.
+
+44
+00:02:36,670 --> 00:02:39,545
+It's a great example of how
+different kinds of data sets might
+
+45
+00:02:39,545 --> 00:02:41,865
+be formatted when you're
+trying to clean them.
+
+46
+00:02:41,865 --> 00:02:45,445
+For instance, in this data set
+there are two summarized levels,
+
+47
+00:02:45,445 --> 00:02:47,665
+one that contains summary data for
+the whole country.
+
+48
+00:02:47,665 --> 00:02:50,895
+And one that contains summary data for
+each state, and
+
+49
+00:02:50,895 --> 00:02:52,985
+one that contains summary data for
+each county.
+
+50
+00:02:52,985 --> 00:02:58,505
+I often find that I want to see a list of
+all the unique values in a given column.
+
+51
+00:02:58,505 --> 00:03:00,735
+In this DataFrame,
+we see that the possible values for
+
+52
+00:03:00,735 --> 00:03:04,510
+the sum level are using the unique
+function on the DataFrame.
+
+53
+00:03:04,510 --> 00:03:06,780
+This is similar to the SQL
+distinct operator.
+
+54
+00:03:08,480 --> 00:03:11,945
+Here we can run unique on the sum
+level of our current DataFrame and
+
+55
+00:03:11,945 --> 00:03:15,226
+see that there are only two
+different values, 40 and 50.
+
+56
+00:03:15,226 --> 00:03:18,983
+Let's get rid of all of the rows that
+are summaries at the state level and
+
+57
+00:03:18,983 --> 00:03:20,429
+just keep the county data.
+
+58
+00:03:20,429 --> 00:03:24,003
+Also while this data set is interesting
+for a number of different reasons,
+
+59
+00:03:24,003 --> 00:03:27,749
+let's reduce the data that we're going
+to look at to just the total population
+
+60
+00:03:27,749 --> 00:03:30,540
+estimates and the total number of births.
+
+61
+00:03:30,540 --> 00:03:33,440
+We can do this by creating a list of
+column names that we want to keep
+
+62
+00:03:33,440 --> 00:03:37,960
+then project those and assign the
+resulting DataFrame to our df variable.
+
+63
+00:03:37,960 --> 00:03:43,370
+The US Census data breaks down estimates
+of population data by state and county.
+
+64
+00:03:43,370 --> 00:03:46,910
+We can load the data and set the index
+to be a combination of the state and
+
+65
+00:03:46,910 --> 00:03:50,990
+county values and
+see how pandas handles it in a DataFrame.
+
+66
+00:03:50,990 --> 00:03:53,800
+We do this by creating a list of
+the column identifiers we want to
+
+67
+00:03:53,800 --> 00:03:54,446
+have indexed.
+
+68
+00:03:54,446 --> 00:03:59,480
+And then calling set index with this list
+and assigning the output as appropriate.
+
+69
+00:03:59,480 --> 00:04:02,780
+We see here that we have a dual index,
+first the state name and
+
+70
+00:04:02,780 --> 00:04:03,540
+then the county name.
+
+71
+00:04:04,950 --> 00:04:08,540
+An immediate question which comes up
+is how we can query this DataFrame.
+
+72
+00:04:08,540 --> 00:04:11,080
+For instance, we saw previously
+that the loc attribute of
+
+73
+00:04:11,080 --> 00:04:13,462
+the DataFrame can take
+multiple arguments.
+
+74
+00:04:13,462 --> 00:04:16,910
+And it could query both the row and
+the columns.
+
+75
+00:04:16,910 --> 00:04:18,110
+When you use a MultiIndex,
+
+76
+00:04:18,110 --> 00:04:21,880
+you must provide the arguments in
+order by the level you wish to query.
+
+77
+00:04:21,880 --> 00:04:24,540
+Inside of the index,
+each column is called a level and
+
+78
+00:04:24,540 --> 00:04:27,070
+the outermost column is level zero.
+
+79
+00:04:27,070 --> 00:04:30,920
+For instance, if we want to see the
+population results from Washtenaw County,
+
+80
+00:04:30,920 --> 00:04:35,720
+which is where I live, you'd want to the
+first argument as the state of Michigan.
+
+81
+00:04:35,720 --> 00:04:38,280
+You might be interested in
+just comparing two counties.
+
+82
+00:04:38,280 --> 00:04:42,130
+For instance, Washtenaw where I live and
+Wayne County which covers Detroit.
+
+83
+00:04:42,130 --> 00:04:43,900
+To do this, we can pass the loc method,
+
+84
+00:04:43,900 --> 00:04:47,470
+a list of tuples which describe
+the indices we wish to query.
+
+85
+00:04:47,470 --> 00:04:51,107
+Since we have a MultiIndex of two values,
+the state and the county,
+
+86
+00:04:51,107 --> 00:04:54,635
+we need to provide two values as
+each element of our filtering list.
+
+87
+00:05:01,324 --> 00:05:04,730
+Okay so that's how hierarchical
+indices work in a nutshell.
+
+88
+00:05:04,730 --> 00:05:07,460
+They're a special part of
+the pandas library which I
+
+89
+00:05:07,460 --> 00:05:10,720
+think can make management and
+reasoning about data easier.
+
+90
+00:05:10,720 --> 00:05:14,100
+Of course hierarchical
+labeling isn't just for rows.
+
+91
+00:05:14,100 --> 00:05:18,570
+For example, you can transpose this matrix
+and now have hierarchical column labels.
+
+92
+00:05:18,570 --> 00:05:21,340
+And projecting a single
+column which has these labels
+
+93
+00:05:21,340 --> 00:05:23,420
+works exactly the way
+you would expect it to.

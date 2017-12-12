@@ -1,0 +1,101 @@
+Một hàm panda Series có thể được truy vấn theo
+vị trí chỉ số hoặc nhãn dán chỉ số. Như bạn thấy, nếu bạn không đưa ra
+một chỉ số vào các chuỗi, vị trí và nhãn mác là các giá trị giống nhau. Để truy vấn bởi định vị số, bắt đầu ở 0,
+sử dụng thuộc tính iloc. Để truy vấn vởi nhãn mác chỉ số,
+bạn có thể sử dụng thuộc tính loc. Đây là ví dụ về sử dụng dữ liệu sự kiện
+thể thao quốc gia từ wikipedia. Hãy giả sử chúng ta muốn có một danh sách
+tất cả các mon thể thao trong chỉ số của chúng ta và danh sách các quốc gia như là các giá trị. Bạn có thể giữ những điều này trong một từ điển
+và tạo ra một chuỗi như chúng ta đã thảo luận. Nếu bạn muốn thấy quốc gia thứ tư trong này, bạn sẽ sử dụng thuộc tính iloc với tham số 3. Nếu bạn muốn xem quốc gia nào coi
+đánh gôn là một môn thể thao quốc gia, bạn sẽ sử dụng thuộc tính loc với tham số golf. Nhớ rằng iloc và loc không phải các
+phương pháp, chúng là các thuộc tính. Vì thế bạn sử dụng các dấu ngoặc đơn để
+truy vấn chúng thay vì dấu ngoặc vuông, cái mà chúng ta sẽ gọi là toán tử chỉ số. Mặc dù trong python, điều này tạo ra và gán một phương pháp
+phụ thuộc vào nội dung sử dụng. Cái này có vẻ hơi rắc rối nếu bạn đã sử dụng
+các ngôn ngữ nơi đóng gói các các thuộc tính, các biến, properties là
+phổ biến giống như trong java. Hàm panda cố gắng tạo ra mã có thể
+đọc được và cung cấp các loại cú pháp thông minh sử dụng toán tử chỉ số trực tiếp trên các chuỗi. Ví dụ nếu bạn truyền một thông số số nguyên, toán tử sẽ hoạt động như thể
+bạn muốn truy vấn qua thuộc tính iloc. Nếu bạn truyền vào một đối tượng, nó sẽ truy vấn liệu bạn muốn sử dụng
+thuộc tính loc dựa trên nhãn dán. Điều gì xảy ra nếu chỉ số của bạn
+là một danh sách các số nguyên? Điều này hơi phức tạp và hàm
+panda không thể xác định tự động liệu bạn đang dự định truy vấn bằng
+vị trí chỉ số hay nhãn dán chỉ số. Vì thế bạn cần phải cẩn thận khi sử dụng
+toán tử chỉ số trên chính các chuỗi. Và lựa chọn an toàn hơn là
+rõ ràng hơn và sử dụng iloc hoặc loc trực tiếp. Đây là ví dụ sử dụng một số dữ liệu
+các môn thể thao mới, nơi các quốc gia được lập
+chỉ số bằng số nguyên. Nếu chúng ta thử đặt s trước 0,
+chúng ta có khóa sai, bởi vì không có phần tử nào trong danh sách
+các môn thể thao với một chỉ số của 0. Thay vì chúng ta phải lấy iloc nếu
+chúng ta muốn phần tử đầu tiên. OK vì thế bây giờ chúng ta biết cách
+để lấy dữ liệu ra khỏi các chuỗi. Hãy nói về việc hoạt động dữ liệu. Một nhiệm vụ phổ biến là muốn xem xét
+tất cả các giá trị bên trong của chuỗi và làm một số phép toán. Điều này có thể đang cố tìm ra các số
+nhất định, tổng dữ liệu hoặc chuyển dữ liệu bằng một số cách. Một cách lập trình tiêu biểu để
+tiếp cận cái này là lặp lại tất cả các mục trong chuỗi và dùng
+một phép toán được quan tâm. Ví dụ chúng ta có thể tạo ra một
+khung dữ liệu của các giá trị số thực động. Hãy nghĩ về những thứ như là giá cả
+cho các sản phẩm khác nhau. Chúng ta có thể viết một chương trình
+quen thuộc lặp tất cả các mục trong chuỗi và cộng chúng với nhau để có tổng số. Cái này hoạt động nhưng nó chậm. Các máy tính hiện đại có thể làm
+nhiều nhiệm vụ cùng lúc nhưng không chỉ là các nhiệm vụ liên quan đến toán học. Hàm panda và các thư viện NumPy bên
+dưới hỗ trợ phương pháp tính toán gọi là vecto hóa. Phương pháp vecto làm việc với hầu hết
+các chức năng trong thư viện NumPy, bao gồm hàm tính tổng. Đây là cách chúng ta sẽ viết mã sử dụng
+phương pháp tính tổng NumPy. Đầu tiên chúng ta cần phải nhập mô đun numpy,
+sau đó chúng ta chỉ cần gọi np.sum và truyền vào một phần tử lặp. Trong trường hợp này các chuỗi panda của chúng ta. Bây giờ cả hai phương pháp này tạo ra giá trị
+giống nhau nhưng có một cái nhanh hơn phải không? Ghi chú jupyter có một hàm có thể giúp được. Đầu tiên hãy tạo ra một chuỗi lớn
+các số liệu ngẫu nhiên. Bạn sẽ thấy nó được sử dụng rất nhiều
+khi các kĩ thuật minh họa bằng hàm panda. Lưu ý rằng tôi chỉ sử dụng phương pháp đầu giảm số lượng của dữ liệu được xuất ra bởi các chuỗi
+tới năm yếu tố đầu tiên. Chúng ta có thể xác minh độ dài của chuỗi là đúng
+bằng cách sử dụng hàm len. Các hàm ma thuật bắt đầu bằng
+một kí hiệu tỉ lệ phần trăm. Nếu chúng ta nhập kí hiệu này
+và sau đó ấn phím Tab, chúng ta có thể thấy một danh sách
+các hàm ma thuật có sẵn. Bạn có thể viết các hàm ma thuật của bạn nhưng điều đó hơi vượt quá phạm vi của khóa học này. Chúng ta sẽ sử dụng cái được gọi là
+hàm ma thuật di động. Cái này bắt đầu với hai kí hiệu tỉ lệ phần trăm và sửa đổi mã trong ghi chú jupyter hiện nay. Chức năng chúng ta sẽ
+sử dụng được gọi là timeit. Và khi bạn đoán từ tên gọi, chức năng này
+sẽ chạy mã của chúng ta một vài lần để xác định, trung bình nó mất bao lâu. Hãy chạy timeit với mã lặp gốc của chúng ta. Bạn có thể đưa timeit số lượng
+vòng lặp mà bạn muốn chạy. Theo mặc định chúng ta sẽ
+sử dụng 1,000 vòng lặp. Tôi sẽ yêu cầu timeit ở đây để sử dụng
+100 vòng chạy bởi vì chúng ta đang ghi lại cái này. Không tệ nhỉ. Timeit chạy mã này và nó dường như không lâu lắm. Bây giờ hãy thử với phương pháp vecto. Ồ! Điều này khá là khác trong tốc độ và chứng tỏ lí do các nhà khoa học dữ liệu cần nhận thức
+về các tính năng tính toán song song và bắt đầu suy nghĩ đến thuật ngữ lập trình chức năng. Tính năng liên quan trong hàm panda
+và numpy được gọi là broadcasting. Với broadcasting, bạn có thể áp dụng
+một toán tử với mỗi giá trị trong chuỗi, thay đổi các chuỗi. Ví dụ nếu chúng ta muốn tăng
+mỗi biến bất kì lên 2, chúng ta có thể làm nhanh chóng sử dụng
+toán tử += trực tiếp trên chuỗi đối tượng. Ở đây tôi sẽ chỉ sử dụng toán tử head
+để in ra năm hàng đầu trong chuỗi. Cách làm này sẽ lặp qua tất cả các mục trong chuỗi và tăng giá trị trực tiếp. Một cách nhanh chóng. Hàm panda hỗ trợ việc lặp thông qua
+một chuỗi giống như một từ điển, cho phép bạn giải nén các
+giá trị một cách dễ dàng. Nhưng nếu bạn thấy bạn có thể
+tự lặp thông qua một chuỗi, bạn nên đặt câu hỏi liệu bạn đang làm
+mọi thứ theo cách tốt nhất chưa. Đây là cách chúng ta sẽ làm bằng cách
+sử dụng phương pháp tập giá trị. Hãy thử và đo thời gian hai cách tiếp cận. Thật tuyệt vời. Nó không chỉ nhanh hơn
+mà còn ngắn gọn hơn và thậm chí dễ đọc hơn. Các phép toán học điển hình
+bạn mong muốn là vecto và tài liệu hàm NumPy để tạo ra
+các hàm vecto của chính bạn. Lưu ý cuối cùng về việc sử dụng toán tử chỉ số
+để truy cập các chuỗi dữ liệu. .loc cho phép bạn không chỉ
+sửa đổi dữ liệu tại chỗ mà còn thêm dữ liệu mới. Nếu giá trị bạn truyền vào là chỉ số không tồn tại,
+thì một phần tử mới được thêm vào. Và hãy nhớ, chỉ số có thể có các kiểu hỗn hợp. Trong khi nó rất quan trọng
+để biết về cách nhập bên dưới, Hàm panda sẽ tự động thay đổi các kiểu
+hàm NumPy bên dưới cho phù hợp. Đây là một ví dụ sử dụng một chuỗi các số. Chúng ta có thể thêm một số giá trị mới,
+có thể là một con vật như bạn biết, tôi thích gấu. Chỉ bằng cách gọi toán tử chỉ số .loc. Chúng ta thấy rằng các loại kết hợp cho các giá trị dữ liệu
+hoặc chỉ số nhãn dán đều không thành vấn đề với hàm panda. Cho tới khi tôi thấy một số ví dụ về chuỗi
+nơi mà các giá trị chỉ số là duy nhất. Tôi muốn kết thúc bài giảng này bằng việc chỉ ra
+một ví dụ nơi các giá trị chỉ số không phải duy nhất, và điều này làm cho khung dữ liệu khác biệt, có thể là cơ sở dữ liệu liên quan. Nhắc lại vấn đề về các quốc giá và
+các môn thể thao quốc gia. Hóa ra là nhiều nước dường như
+thích môn thể thao cricket. Chúng ta quay lại với chuỗi các môn thể thao cơ bản. Nó có thể tạo ra một chuỗi mới với các mục bóng gậy và sau đó sử dụng append
+để mang chúng lại với nhau. Có một số các cân nhắc quan trọng
+khi sử dụng append. Đầu tiên hàm panda sẽ lấy
+một chuỗi của bạn và cố gắng để suy ra loại dữ liệu
+tốt nhất để sử dụng. Trong ví dụ này tất cả mọi thứ là một
+chuỗi vì thế không có vấn đề gì ở đây. Thứ hai phương pháp append không
+thực sự thay đổi các chuỗi bên dưới. Thay vào đó nó quay trở lại một chuỗi mới
+được tạo ta khi nối 2 cái cùng nhau. Chúng ta có thể thấy điều này bằng cách
+quay lại và xuất ra các chuỗi gốc của các giá trị và thấy rằng chúng không thay đổi. Đó là một vấn đề rất có ý nghĩa với người sử dụng hàm panda mà đã từng
+sử dụng các đối tượng được thay đổi tại chỗ. Vì thế hãy coi chừng nó, không chỉ với append mà còn
+với các chức năng hàm panda khác cũng vậy. Cuối cùng chúng ta thấy rằng chúng ta
+truy vấn chuỗi append với những người chơi bóng gậy như là môn thể thao quốc gia của họ, chúng ta không
+có giá trị đơn ngoại trừ một chuỗi giá trị của chính nó. Điều này rất phổ biến và nếu bạn có nền tảng cơ sở dữ liệu quan hệ
+điều này tương tự với mỗi bảng kết quả truy vấn trong thiết lập trở lại. Trong bài giảng này, chúng ta tập trung vào một trong các loại
+dữ liệu chính của thư viện panda, các chuỗi. Có rất nhiều phương pháp liên quan đến
+đối tượng chuỗi này mà chúng ta không có. mà chúng ta đã nhắc đến. Nhưng với những điều cơ bản
+chúng ta sẽ chuyển sang nói về cấu trúc dữ liệu hai chiều
+của hàm panda, khung dữ liệu. Khung dữ liệu tương tự như
+đối tượng chuỗi nhưng bao gồm các cột dữ liệu và là
+cấu trúc mà bạn sẽ dành thời gian của bạn làm việc khi
+làm sạch và tập hợp dữ liệu. Nhưng trước khi chúng ta chuyển sang thảo luận
+về khung dữ liệu, trợ lý hướng dẫn cho khóa học này sẽ cung cấp một cái nhìn sâu hơn
+cách đối tượng chuỗi được sử dụng.

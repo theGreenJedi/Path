@@ -1,0 +1,261 @@
+1
+00:00:08,987 --> 00:00:12,782
+Chào mừng đến với bài học ngày hôm nay,
+chúng ta sẽ học về những điều cơ bản của việc lặp
+
+2
+00:00:12,782 --> 00:00:16,370
+qua tệp CSV để tạo ra các từ điển và
+thu thập các thống kê tóm tắt.
+
+3
+00:00:17,770 --> 00:00:22,870
+Đầu tiên hãy nhập mô đun CSV, sẽ giúp chúng ta
+trong việc đọc tệp CSV của chúng ta.
+
+4
+00:00:24,560 --> 00:00:26,732
+Sử dụng một số ma thuật ipython,
+
+5
+00:00:26,732 --> 00:00:31,557
+hãy đặt độ chính xác của số thực là 2 số sau dấu chấm.
+
+6
+00:00:31,557 --> 00:00:35,772
+Bây giờ hãy đọc trong mpg.csv sử dụng csv.DictReader và
+
+7
+00:00:35,772 --> 00:00:38,530
+chuyển nó thành một danh sách các từ điển.
+
+8
+00:00:39,880 --> 00:00:42,170
+Hãy nhìn vào ba phần tử đầu tiên trong danh sách của chúng ta.
+
+9
+00:00:44,100 --> 00:00:48,190
+Chúng ta có thể thấy rằng các từ điển trong danh sách có cột các tên của csv
+
+10
+00:00:48,190 --> 00:00:51,710
+khóa và dữ liệu cho mỗi chiếc xe hơi cụ thể là các giá trị.
+
+11
+00:00:53,460 --> 00:00:55,970
+Độ dài của danh sách là 234,
+
+12
+00:00:55,970 --> 00:01:00,240
+có nghĩa là chúng ta có một từ điển
+cho 234 chiếc xe trong tệp csv.
+
+13
+00:01:02,490 --> 00:01:06,308
+Chúng ta có thể nhìn vào tên các cột của csv bằng cách sử dụng phương pháp chìa khóa.
+
+14
+00:01:08,354 --> 00:01:13,670
+Giả sử chúng ta muốn tìm MPG thành phố trên
+tất cả các xe hơi trong tệp csv của chúng ta.
+
+15
+00:01:15,080 --> 00:01:19,430
+Chúng ta tổng hợp mục MPG trên tất cả
+các từ điển trong danh sách của chúng ta và
+
+16
+00:01:19,430 --> 00:01:20,629
+chia theo chiều dài của danh sách.
+
+17
+00:01:21,770 --> 00:01:24,860
+Bởi vì kiểu giá trị trong từ điển
+của chúng ta là các chuỗi,
+
+18
+00:01:24,860 --> 00:01:27,830
+chúng ta cần phải đổi sang số thực để
+thực hiện các phép tính toán học.
+
+19
+00:01:30,502 --> 00:01:36,420
+Tương tự chúng ta có thể tìm thấy MPG đường cao tốc
+trên tất cả các xe hơi trong tập .csv của chúng ta.
+
+20
+00:01:36,420 --> 00:01:40,063
+Và có thể hiểu rằng trung bình nền kinh tế
+nhiên liệu đường cao tốc cao hơn so với
+
+21
+00:01:40,063 --> 00:01:40,609
+thành phố.
+
+22
+00:01:42,600 --> 00:01:44,490
+Bây giờ hãy nhìn vào một ví dụ phức tạp hơn.
+
+23
+00:01:45,815 --> 00:01:49,180
+Giả sử chúng ta muốn biết
+mpg trung bình thành phố
+
+24
+00:01:49,180 --> 00:01:51,390
+được nhóm bởi số lượng xi lanh mà một chiếc xe có.
+
+25
+00:01:52,570 --> 00:01:56,420
+Tạo ra một tập các giá trị trong
+mục xi lanh của các từ điển
+
+26
+00:01:56,420 --> 00:01:59,499
+sẽ cho chúng ta cấp độ duy nhất
+cho số lượng xi lanh.
+
+27
+00:02:00,540 --> 00:02:04,530
+Chúng ta thấy rằng chúng ta có những
+chiếc xe hơi trong tập dữ liệu với 4,5,6 và 8 xi lanh.
+
+28
+00:02:06,160 --> 00:02:10,600
+Đầu tiên chúng ta sẽ tạo ra một danh sách trống
+nơi chúng ta sẽ lưu các tính toán của chúng ta.
+
+29
+00:02:10,600 --> 00:02:14,510
+Tiếp theo hãy lặp qua tất cả các cấp độ xi lanh.
+
+30
+00:02:14,510 --> 00:02:16,359
+Và sau đó chúng ta sẽ lặp qua tất cả các từ điển.
+
+31
+00:02:18,420 --> 00:02:21,020
+Nếu mức xi lanh cho từ điển chúng ta trên
+
+32
+00:02:21,020 --> 00:02:24,710
+mức phù hợp với mức xi lanh
+chúng ta đang tính trung bình,
+
+33
+00:02:24,710 --> 00:02:29,730
+chúng ta thêm mpg vào biến
+summpg và tăng số đếm.
+
+34
+00:02:31,740 --> 00:02:36,750
+Sau khi đi qua tất cả các từ điển, chúng ta
+thực hiện tính toán mpg trung bình và
+
+35
+00:02:36,750 --> 00:02:37,480
+thêm nó vào danh sách của chúng ta.
+
+36
+00:02:39,250 --> 00:02:40,471
+Để làm điều này rõ ràng hơn,
+
+37
+00:02:40,471 --> 00:02:43,970
+tôi sẽ sắp xếp danh sách từ số
+xi lanh thấp nhất đến cao nhất.
+
+38
+00:02:43,970 --> 00:02:48,290
+Và chúng ta có thể thấy rằng nền kinh tế nhiên liệu
+thành phố dường như đang giảm khi số lượng
+
+39
+00:02:48,290 --> 00:02:49,590
+xi lanh tăng.
+
+40
+00:02:51,160 --> 00:02:52,670
+Hãy nhìn vào một ví dụ tương tự.
+
+41
+00:02:54,408 --> 00:02:57,360
+Giả sử chúng ta quan tâm đến việc tìm
+trung bình mpg đường cao tốc cho
+
+42
+00:02:57,360 --> 00:02:58,659
+các loại phương tiện khác nhau.
+
+43
+00:02:59,820 --> 00:03:04,743
+Nhìn vào các loại phương tiện khác nhau,
+chúng ta có 2seater, compact, midsize,
+
+44
+00:03:04,743 --> 00:03:07,320
+minivan, pickup, subcompact và SUV.
+
+45
+00:03:09,160 --> 00:03:13,035
+Tương tự như ví dụ trước chúng ta
+lặp tất cả các loại phương tiện
+
+46
+00:03:13,035 --> 00:03:15,100
+sau đó lặp trên tất cả các từ điển.
+
+47
+00:03:16,580 --> 00:03:17,760
+Nếu phương tiện cho
+
+48
+00:03:17,760 --> 00:03:21,420
+thư viện phù hợp với phương tiện
+chúng ta đang tính toán mpg trung bình,
+
+49
+00:03:21,420 --> 00:03:25,130
+chúng ta thêm giá trị vào tổng và tăng số đếm.
+
+50
+00:03:26,890 --> 00:03:30,370
+Sau đó chúng ta thực hiện tính trung bình và thêm vào danh sách.
+
+51
+00:03:31,960 --> 00:03:34,720
+Hãy sắp xếp danh sách từ mpg
+thấp nhất đến cao nhất.
+
+52
+00:03:35,720 --> 00:03:39,220
+Giống như pickup có kinh tế nhiên liệu
+tệ nhất và compact thì tốt nhất.
+
+53
+00:03:40,680 --> 00:03:43,850
+Đó là một cái nhìn vào cách tóm tắt
+dữ liệu qua việc lặp.
+
+54
+00:03:43,850 --> 00:03:46,948
+Đừng lo nếu điều này có vẻ hơi
+kém hiệu quả và hơi chán.
+
+55
+00:03:46,948 --> 00:03:50,770
+Tuần tiếp theo chúng ta sẽ học về Pandas,
+một thư viện python cho phép
+
+56
+00:03:50,770 --> 00:03:54,960
+phân tích dữ liệu dễ dàng hơn,
+hiệu quả hơn và mạnh hơn trong python.
+
+57
+00:03:54,960 --> 00:03:55,820
+Cảm ơn các bạn đã theo dõi.
+
+58
+00:03:55,820 --> 00:03:56,640
+Mong sớm được gặp lại bạn.

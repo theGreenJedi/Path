@@ -1,0 +1,475 @@
+1
+00:00:08,619 --> 00:00:13,137
+Các bộ lập trình sẽ thường gợi ý là có nhiều ngôn ngữ có thể được sử dụng
+
+2
+00:00:13,137 --> 00:00:15,140
+để giải quyết vấn đề cụ thể.
+
+3
+00:00:15,140 --> 00:00:18,090
+Nhưng điều đó thích hợp hơn các cái khác.
+
+4
+00:00:18,090 --> 00:00:21,340
+Giải pháp tốt nhất được tổ chức là Idiomatic Python và
+
+5
+00:00:21,340 --> 00:00:24,662
+có nhiều các ví dụ hay về điều này trên ngăn xếp và trang web.
+
+6
+00:00:25,720 --> 00:00:30,200
+Giải pháp này thường có cả hiệu suất cao và
+
+7
+00:00:30,200 --> 00:00:31,650
+khả năng đọc được cao.
+
+8
+00:00:31,650 --> 00:00:33,260
+Điều này không nhất thiết là đúng.
+
+9
+00:00:33,260 --> 00:00:39,200
+Một loại ngôn ngữ phụ trong python, panda có bộ thành ngữ của riêng nó.
+
+10
+00:00:39,200 --> 00:00:42,680
+Chúng ta đã ám chỉ một số cái đó rồi như là sử dugnj vecto bất cứ khi nào
+
+11
+00:00:42,680 --> 00:00:46,570
+có thể, không sử dụng vòng lặp nếu bạn không cần.
+
+12
+00:00:46,570 --> 00:00:47,640
+Một số nhà phát triển và
+
+13
+00:00:47,640 --> 00:00:52,200
+người sử dụng trong cộng đồng panda sử dụng các thuật ngữ này.
+
+14
+00:00:52,200 --> 00:00:53,650
+Tôi nghĩ nó là một thuật ngữ hay.
+
+15
+00:00:53,650 --> 00:00:57,810
+Vì thế tôi muốn chia sẻ với bạn một cặp tính năng quan trong về cách bạn có thể tạo mã
+
+16
+00:00:57,810 --> 00:00:58,530
+pandorable.
+
+17
+00:00:59,770 --> 00:01:02,150
+Đầu tiên điều này được gọi là phương pháp sâu chuỗi.
+
+18
+00:01:02,150 --> 00:01:04,140
+Bây giờ chúng ta đã thấy rất rõ ràng
+
+19
+00:01:04,140 --> 00:01:07,460
+bạn có thể sâu chuỗi hà panda cùng nhau khi bạn truy vấn khung dữ liệu.
+
+20
+00:01:07,460 --> 00:01:11,890
+Ví dụ nếu bạn muốn lựa chọn các hàng dựa trên chỉ số như đếm tên.
+
+21
+00:01:11,890 --> 00:01:15,680
+Sau đó bạn muốn các cột dựa án như tổng dân số,
+
+22
+00:01:15,680 --> 00:01:20,870
+bạn có thể viết một truy vấn như dflocks, subwashtenaw.
+
+23
+00:01:20,870 --> 00:01:24,480
+Đó là dạng sâu chỗi gọi là lập chỉ mục chuỗi.
+
+24
+00:01:24,480 --> 00:01:26,030
+Và nó là một thực tế tệ.
+
+25
+00:01:26,030 --> 00:01:28,910
+Bởi vì nó có thể là hàm panda có thể trả lại một bản sao hoặc
+
+26
+00:01:28,910 --> 00:01:33,722
+một đánh giá khung dữ liệu phụ thuộc vào thư viện numpi nằm dưới.
+
+27
+00:01:33,722 --> 00:01:37,100
+Trong sự mô tả của anh ánh về mô hình cấu trúc panda,
+
+28
+00:01:37,100 --> 00:01:40,470
+Tom Osberger đã mô tả một quy tắc các ngón tay của điều này.
+
+29
+00:01:40,470 --> 00:01:42,590
+Nếu bạn nhìn lại các dâu ngoặc vuông,
+
+30
+00:01:42,590 --> 00:01:46,260
+thì bạn nên nghĩ kĩ liệu bạn muốn làm lập chỉ mục chuỗi ha không.
+
+31
+00:01:46,260 --> 00:01:49,350
+Tôi nghĩ điều này rất hay như một lọa mã thối, mẫu xấu.
+
+32
+00:01:50,550 --> 00:01:53,620
+Phương pháp sâu chuỗi có một chút khác biệt.
+
+33
+00:01:53,620 --> 00:01:56,440
+Ý tưởng chung đằng sau phương pháp chuỗi là mỗi phương pháp trên
+
+34
+00:01:56,440 --> 00:01:58,980
+một dự án trả lại sự tham khảo với dự án đó.
+
+35
+00:01:58,980 --> 00:02:02,470
+cái hay của điều này là bạn có thể ngưng tụ nhiều hoạt động khác nhau trên
+
+36
+00:02:02,470 --> 00:02:07,140
+mọt khung dữ liệu, ví dụ trong một dòng hoặc tối thiểu một trạng thái của mã.
+
+37
+00:02:07,140 --> 00:02:11,310
+Đây là ví dụ về hai mã trong panda sử dụng dữ liệu điều tra dân số của chúng ta.
+
+38
+00:02:11,310 --> 00:02:15,290
+Đầu tiên là loại pandotable để viết mã với phương pháp sâu chuỗi.
+
+39
+00:02:15,290 --> 00:02:18,660
+Trong mã này không có chỗ sử dụng và bạn có thể thấy khi chúng ta
+
+40
+00:02:18,660 --> 00:02:23,260
+chạy lần đầu tiên set_index và sau đó đặt lại tên.
+
+41
+00:02:23,260 --> 00:02:26,920
+Bạn có thể băn khoăn lí do toàn bộ trạng thái được đóng lại trong dấu ngoặc đơn và
+
+42
+00:02:26,920 --> 00:02:29,020
+điều đó tạo ra trạng thái có thể đọc được.
+
+43
+00:02:29,020 --> 00:02:31,190
+Trong python nếu bạn bắt đầu với mở dấu ngoặc đơn,
+
+44
+00:02:31,190 --> 00:02:35,930
+bạn có thể kéo dài trạng tháo trên nhiều dòng và nọi thứ đọc tốt hơn.
+
+45
+00:02:35,930 --> 00:02:38,890
+Ví dụ thứ hai là cách truyền thống hơn khi viết mã.
+
+46
+00:02:38,890 --> 00:02:41,450
+Không có lỗi với mã này trong ý nghĩa về mặt chức năng,
+
+47
+00:02:41,450 --> 00:02:46,010
+bạn thậm chí có thể hiểu nó là một người mới với ngôn ngữ.
+
+48
+00:02:46,010 --> 00:02:50,050
+Nó không chỉ giống ví dụ đầu tiên.
+
+49
+00:02:50,050 --> 00:02:54,810
+Chìa khóa thuật ngữ hay là hiểu khi nó không giúp bạn.
+
+50
+00:02:54,810 --> 00:02:56,960
+Trong trường hợp này bạn có thể có cả phương pháp và
+
+51
+00:02:56,960 --> 00:02:58,610
+thấy rằng phương pháp bậc thang nhanh hơn.
+
+52
+00:02:58,610 --> 00:03:02,460
+Đây là ví dụ cụ thể về khả năng đọc cũ.
+
+53
+00:03:03,890 --> 00:03:06,130
+Bạ sẽ thấy nhiều ví dụ trên sàn chứng khoán và
+
+54
+00:03:06,130 --> 00:03:09,130
+trong tài liệu mọ người sử dụng phương pháp gây nhiễu trong hàm panda của họ.
+
+55
+00:03:09,130 --> 00:03:10,680
+Vì vậy tôi nghĩ có thể đọc và
+
+56
+00:03:10,680 --> 00:03:13,076
+hiểu cú pháp là rất đáng.
+
+57
+00:03:13,076 --> 00:03:16,260
+Đây là thuật ngữ panda nữa.
+
+58
+00:03:16,260 --> 00:03:19,420
+Python có một chức năng tuyệt vời được gọi là bản đồ, cái này là một loại cơ bản cho
+
+59
+00:03:19,420 --> 00:03:21,760
+lập trình trong ngôn ngữ.
+
+60
+00:03:21,760 --> 00:03:25,310
+Khi bạn muốn sử dụng bản đồ trong python, bạn trích xuất nó một số chuwcsnawng bạn muốn và
+
+61
+00:03:25,310 --> 00:03:29,530
+một số công cụ như một danh sách mà bạn muốn chức năng có thể được áo dụng.
+
+62
+00:03:29,530 --> 00:03:33,280
+Các kết quả là chức năng được gọi là đối lập với mỗi mục trong danh sách.
+
+63
+00:03:33,280 --> 00:03:36,799
+Và có mọt danh sách kết quả của tất cả các đánh giá chức năng đó.
+
+64
+00:03:37,820 --> 00:03:40,480
+Python có chức năng tương tự gọi là ứng dụng bản đồ.
+
+65
+00:03:40,480 --> 00:03:43,420
+Trong ứng dụng bản đồ bạn cung cấp các chức năng sẽ hoạt động trên mỗi phần
+
+66
+00:03:43,420 --> 00:03:47,190
+của khung dữ liệu và trả lại chính khung dữ liệu.
+
+67
+00:03:47,190 --> 00:03:50,330
+Bây giờ tôi nghĩ ứng dụng bản đồ rất tốt nhưng tôi hiếm khi sử dụng nó.
+
+68
+00:03:50,330 --> 00:03:53,910
+Thay vì đó tôi thường muốn lập bản đồ trên tất cả các hàng.
+
+69
+00:03:53,910 --> 00:03:54,830
+khung dữ liệu.
+
+70
+00:03:54,830 --> 00:03:58,250
+Và hàm panda có chức năng mà tôi sử dụng ở đó gọi là áp dụng.
+
+71
+00:03:58,250 --> 00:03:59,310
+Cùng nhìn vào một ví dụ
+
+72
+00:04:00,760 --> 00:04:02,570
+Hãy lấy khung dữ liệu điều tra dân số của chúng ta.
+
+73
+00:04:02,570 --> 00:04:05,560
+Trong khung dữ liệu này chúng ta có năm cột cho ước tính dân số.
+
+74
+00:04:05,560 --> 00:04:08,710
+Mỗi cột tương ứng với một năm ước tính.
+
+75
+00:04:08,710 --> 00:04:12,130
+Khá là hợp lí để muốn tạo ra một số cột mới cho các gị nhỏ nhất hoặc
+
+76
+00:04:12,130 --> 00:04:15,259
+lớn nhất và chức năng áp dụng là một cách dễ dàng để làm điều đó.
+
+77
+00:04:16,350 --> 00:04:19,770
+Đầu tiên chúng ta cần phải viết một chức năng cái mà lấy một hàng dữ liệu cụ thể,
+
+78
+00:04:19,770 --> 00:04:23,880
+tìm các giá trị nhỏ nhất và lớn nhất và quay trở lại hàng dữ liệu mới.
+
+79
+00:04:23,880 --> 00:04:27,230
+Chúng ta sẽ gọi chức năng này là min max, cái này khá là thẳng.
+
+80
+00:04:27,230 --> 00:04:31,140
+Chúng ta có thể tạo ra một số phần nhỏ của hàng bằng việc lập các cột dân số.
+
+81
+00:04:31,140 --> 00:04:33,720
+Sau đó sử dụng các chức năng min max và
+
+82
+00:04:33,720 --> 00:04:37,390
+tạo ra một chuỗi mới với các giá trị nhãn dán đại diện các giá trị mới chúng ta muốn áp dụng.
+
+83
+00:04:39,180 --> 00:04:41,590
+Sau đó chúng ta chỉ cần áp dụng trên khung dữ liệu.
+
+84
+00:04:41,590 --> 00:04:45,890
+Ứng dụng dùng chức năng và trục trên cái này để điều khiển các thông số.
+
+85
+00:04:45,890 --> 00:04:47,360
+Bây giờ chugns ta phải cẩn thận một chút.
+
+86
+00:04:47,360 --> 00:04:50,790
+Chúng ta đã nói về trục 0 là các hàng khung dữ liệu trước đây.
+
+87
+00:04:50,790 --> 00:04:54,690
+Nhưng thông số này là thông số của chỉ số để sử dụng.
+
+88
+00:04:54,690 --> 00:04:59,090
+Vì thế để áp dụng trên tất cả các hàng, bạn thực hiện qua trục băng 1.
+
+89
+00:04:59,090 --> 00:05:02,648
+Tất nhiên không cần giới hạn để chuyển về một chuỗi đối tượng mới.
+
+90
+00:05:02,648 --> 00:05:05,575
+Nếu bạn đang thực hiện điều này như một phần dữ liệu sạch để tìm ra
+
+91
+00:05:05,575 --> 00:05:08,660
+cái bạn muốn thêm dữ liệu mới vào khung dữ liệu đang có sẵn.
+
+92
+00:05:08,660 --> 00:05:10,892
+Trong trường hợp đó bạn chỉ cần lấy các giá trị hàng và
+
+93
+00:05:10,892 --> 00:05:14,705
+thêm vào các cột mới cho thấy các điểm đối đa và tối thiểu.
+
+94
+00:05:14,705 --> 00:05:18,675
+Đây là một phần công việc của tôi khi đưa vào dữ liệu và xây dựng tóm tắt hoặc
+
+95
+00:05:18,675 --> 00:05:20,385
+các thống kê mô tả.
+
+96
+00:05:20,385 --> 00:05:22,755
+Và thướng được sử dụng với sự kết hợp các khung dữ liệu.
+
+97
+00:05:24,305 --> 00:05:28,435
+Ok điều này thật tuyệt, ứng dụng là một công cụ cực kì quan trọng trong bộ công cụ của bạn.
+
+98
+00:05:28,435 --> 00:05:31,795
+Nhưng bài giảng này không chỉ về các tính năng mới của API,
+
+99
+00:05:31,795 --> 00:05:34,710
+mà còn về việc thực hiện mã có thể theo dõi.
+
+100
+00:05:34,710 --> 00:05:38,040
+Lí do tôi giới thiêu điều này là bởi vì tôi hiếm khi thấy nó
+
+101
+00:05:38,040 --> 00:05:41,680
+sử dụng với chức năng lớn như chúng ta đã làm.
+
+102
+00:05:41,680 --> 00:05:44,750
+Thay vì đó bạn thấy nó được sử dụng với đối tượng hàm.
+
+103
+00:05:44,750 --> 00:05:47,920
+Bây giờ bạn sẽ nhớ lại từ tuần đầu tiên của khóa học này là hiểu biết đối tượng hàm không
+
+104
+00:05:47,920 --> 00:05:49,590
+phải là yêu cầu của khóa học.
+
+105
+00:05:49,590 --> 00:05:51,920
+Nhưng để có hầu hết sự thảo luận bạn sẽ thấy trực tiếp,
+
+106
+00:05:51,920 --> 00:05:54,970
+bạn sẽ cần phải biết tối thiểu là đối tượng hàm đọc thế nào.
+
+107
+00:05:54,970 --> 00:05:58,410
+Đây là một dòng ví dụ về cách bạn có thể tính toán tối đa các cột sử dụng
+
+108
+00:05:58,410 --> 00:05:59,950
+chức năng áp dụng.
+
+109
+00:05:59,950 --> 00:06:03,710
+Bạn có thể tưởng tượng cách bạn có thể sâu chuỗi một vài áp dụng với đối tượng hàm
+
+110
+00:06:03,710 --> 00:06:06,740
+để tạo ra thao tác dữ liệu gọn.
+
+111
+00:06:08,340 --> 00:06:10,070
+Có một số các thuật ngữ hàm panda.
+
+112
+00:06:10,070 --> 00:06:13,090
+Nhưng tôi nghĩ có nhiều hơn nữa và tôi không nói đến chúng ở đây.
+
+113
+00:06:13,090 --> 00:06:15,160
+Đây là một nhiệm vụ không chính thức cho bạn.
+
+114
+00:06:15,160 --> 00:06:19,030
+Nhìn vào các câu hỏi xếp hạng phía trên trên hàm panda trên Stack Overflow và
+
+115
+00:06:19,030 --> 00:06:22,230
+nhìn vào một số tác giả có nhiều kinh nghiệm trả lời các câu hỏi này.
+
+116
+00:06:22,230 --> 00:06:24,600
+Bạn có thấy bất kì mô hình thú vị nào không?
+
+117
+00:06:24,600 --> 00:06:26,567
+Tiếng chuông trong hình thức thảo luận khóa học này và
+
+118
+00:06:26,567 --> 00:06:28,980
+hãy xây dựng một số tài liệu có thể theo dõi cùng nhau.
+
+119
+00:06:30,130 --> 00:06:32,810
+Các bài giảng tiếp theo của chúng ta sẽ ở trong nhóm các chức ăng và tôi sẽ tìm thấy sau.

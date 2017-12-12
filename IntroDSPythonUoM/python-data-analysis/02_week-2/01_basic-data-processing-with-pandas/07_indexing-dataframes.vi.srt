@@ -1,0 +1,371 @@
+1
+00:00:08,793 --> 00:00:12,780
+Như chúng ta đã thấy cả chuỗi và khung dữ liệu có thể áp dụng cho chúng.
+
+2
+00:00:12,780 --> 00:00:15,110
+Chỉ số là cần thiết cho nhãn mác định mức hàng và
+
+3
+00:00:15,110 --> 00:00:17,830
+chúng ta biết các hàng tương ứng với trục 0.
+
+4
+00:00:17,830 --> 00:00:21,130
+Trong dữ liệu Olumpics, chúng ta đã chỉ ra khung dữ liệu bằng tên đất nước.
+
+5
+00:00:21,130 --> 00:00:23,740
+Các chỉ số có thể được suy ra như khi chúng ta tạo ra chuỗi mới
+
+6
+00:00:23,740 --> 00:00:27,230
+mà không có chỉ số, trong trường hợp chúng ta có các giá trị số.
+
+7
+00:00:27,230 --> 00:00:28,980
+Hoặc chúng ta thiết lập một cách rõ ràng,
+
+8
+00:00:28,980 --> 00:00:31,910
+như là khi chúng ta sử dụng đối tượng thư viện để tạo ra các chuỗi.
+
+9
+00:00:31,910 --> 00:00:36,190
+Hoặc khi chúng ta tải dữ liệu từ tệp csv và tiêu đề cụ thể.
+
+10
+00:00:36,190 --> 00:00:40,370
+Lựa chọn khác nữa cho việc đặt chỉ số để sử dụng chức năng chỉ số.
+
+11
+00:00:40,370 --> 00:00:44,590
+Chức năng này lấy danh sách các cột và thúc đẩy các cột với một chỉ số.
+
+12
+00:00:44,590 --> 00:00:49,338
+Bộ chỉ số là quá trình phá hỏng, nó không giữ chỉ số hiện tại.
+
+13
+00:00:49,338 --> 00:00:53,020
+Nếu bạn muốn giữ chỉ số hiện tại, bạn cần tạo ra cột mới và
+
+14
+00:00:53,020 --> 00:00:56,360
+sao chép các giá trị từ thuộc tính chỉ mục.
+
+15
+00:00:56,360 --> 00:00:58,600
+Hãy quay lại với khung dữ liệu Olympic.
+
+16
+00:00:58,600 --> 00:01:01,440
+Giả sử chúng ta không muốn chỉ ra khung dữ liệu bằng các đất nước nhưng
+
+17
+00:01:01,440 --> 00:01:05,660
+thay vì đó muốn chỉ bằng số huy chương vàng chiến thắng ở thế vận hội mùa hè.
+
+18
+00:01:05,660 --> 00:01:09,070
+Đầu tiên chúng ta cần phải giữ gìn thông tin đất nước trong cột mới.
+
+19
+00:01:09,070 --> 00:01:13,510
+Chúng ta có thể làm điều này sử dụng toán tử hoặc chuỗi có nhãn mác cột.
+
+20
+00:01:13,510 --> 00:01:18,015
+Sau đó chúng ta có thể dùng chỉ mục để tạo chỉ số cột với huy chương vàng chiến thắng.
+
+21
+00:01:19,220 --> 00:01:23,200
+Bạn sẽ thấy khi chúng ta tạo ra chỉ số mới từ cột nó dường như là
+
+22
+00:01:23,200 --> 00:01:25,910
+một hàng mới đầu tiên được thêm vào với các giá trị trống.
+
+23
+00:01:25,910 --> 00:01:27,670
+Điều này không phải những gì xảy ra.
+
+24
+00:01:27,670 --> 00:01:30,640
+Và chúng ta biết đó là một phần bởi vì giá trị trống được hiểu
+
+25
+00:01:30,640 --> 00:01:35,140
+là không có hoặc NAN nếu dữ liệu của cột là số.
+
+26
+00:01:35,140 --> 00:01:37,680
+Điều là thực sự xảy ra là chỉ mục có tên.
+
+27
+00:01:37,680 --> 00:01:41,140
+Bất cứ cột nào ở trong notebook jupiter được cung cấp điều này
+
+28
+00:01:41,140 --> 00:01:41,710
+trong đầu ra.
+
+29
+00:01:42,860 --> 00:01:46,930
+Chúng ta có thể loại bỏ chỉ mục hoàn toàn bằng cách lấy chức năng đặt lại chỉ mục.
+
+30
+00:01:46,930 --> 00:01:51,378
+Điều này thúc đẩy chỉ mục trong cột và tạo ra chỉ số mặc định.
+
+31
+00:01:54,522 --> 00:01:59,360
+Một tính năng tốt của hàm panda là nó có lựa chọn để thực hiện chỉ mục đa cấp.
+
+32
+00:01:59,360 --> 00:02:02,426
+Điều này tương tự với các chìa khóa trong hệ thống dữ liệu liên quan.
+
+33
+00:02:02,426 --> 00:02:06,450
+Để tạo ra chỉ mục đa cấp, chúng ta tạo chỉ mục và
+
+34
+00:02:06,450 --> 00:02:09,330
+đưa một danh sách cột mà chúng ta quan tâm đến để thúc đẩy chỉ mục.
+
+35
+00:02:10,400 --> 00:02:13,560
+Hàm panda sẽ nghiên cứu theo thứ tự, tìm ra dữ liệu riêng biệt và
+
+36
+00:02:13,560 --> 00:02:15,770
+tạo thành hỗn hợp chỉ số.
+
+37
+00:02:15,770 --> 00:02:19,520
+Một ví dụ hay về điều này thường tìm thấy khi xử lí dữ liệu địa lí cái mà
+
+38
+00:02:19,520 --> 00:02:22,200
+được sắp xếp theo vùng hoặc nhân khẩu.
+
+39
+00:02:22,200 --> 00:02:26,330
+Hãy thay đổi tập dữ liệu và nhìn vào dữ liệu điều tra dân số.
+
+40
+00:02:26,330 --> 00:02:28,620
+Dữ liệu này được lưu trong tệp census.csv và
+
+41
+00:02:28,620 --> 00:02:31,460
+đến từ cục điều tra dân số Hoa Kỳ.
+
+42
+00:02:31,460 --> 00:02:32,130
+Đặc biệt,
+
+43
+00:02:32,130 --> 00:02:36,670
+Đâu là phân tích về dữ liệu mức độ dân số ở cấp quận hoa Kỳ.
+
+44
+00:02:36,670 --> 00:02:39,545
+Nó là ví dụ tuyệt vời về các tập dữ liệu khác nhau có thể
+
+45
+00:02:39,545 --> 00:02:41,865
+được định dạng khi bạn đang cố gắng làm sạch chúng.
+
+46
+00:02:41,865 --> 00:02:45,445
+Ví dụ trong tập dữ liệu này có hai cấp độ được tóm tắt,
+
+47
+00:02:45,445 --> 00:02:47,665
+một cái chứa dữ liệu tổng với toàn bộ đất nước.
+
+48
+00:02:47,665 --> 00:02:50,895
+Và một cái chứa dữ lieuj tóm tắt cho mỗi bang và
+
+49
+00:02:50,895 --> 00:02:52,985
+một cái chứa dữ liệu tóm tắt cho mỗi quận.
+
+50
+00:02:52,985 --> 00:02:58,505
+Tôi thấy rằng tôi muốn xem danh sách tất cả các giá trị độc đáo trong cột cho trước.
+
+51
+00:02:58,505 --> 00:03:00,735
+Trong khung dữ liệu chúng ta thấy các giá trị cho
+
+52
+00:03:00,735 --> 00:03:04,510
+mức độ tổng sử dụng chức năng duy nhất trên khung dữ liệu.
+
+53
+00:03:04,510 --> 00:03:06,780
+Điều này tương tự với hệ điều hành riêng biệt SQL.
+
+54
+00:03:08,480 --> 00:03:11,945
+Ở đây chúng ta có thể chạy trên mức độ tổng khung dữ liệu hiện tại và
+
+55
+00:03:11,945 --> 00:03:15,226
+thấy rằng có hai giá trị khác nhau 40 và 50.
+
+56
+00:03:15,226 --> 00:03:18,983
+Loại bỏ các hàng là tổng ở mức độ bang và
+
+57
+00:03:18,983 --> 00:03:20,429
+chỉ giữ dữ liệu quận.
+
+58
+00:03:20,429 --> 00:03:24,003
+Trong khi dữ liệu này quan tâm đến một số lí do khác nhau,
+
+59
+00:03:24,003 --> 00:03:27,749
+hãy giảm dữ liệu mà chúng ta sẽ nhìn vào tổng dân số
+
+60
+00:03:27,749 --> 00:03:30,540
+ước tính và tổng số sinh.
+
+61
+00:03:30,540 --> 00:03:33,440
+Chúng ta có thể làm điều này bằng việc tạo ra danh sách tên cột mà chúng ta muốn giữ
+
+62
+00:03:33,440 --> 00:03:37,960
+sau đó gán kết quả khung dữ liệu vào biến DF.
+
+63
+00:03:37,960 --> 00:03:43,370
+Dữ liệu điều tra dân số Hoa Kỳ phá vỡ ước tính dữ liệu dân số theo bang và quận.
+
+64
+00:03:43,370 --> 00:03:46,910
+Chúng ta có thể tải dữ liệu và thiết lập chỉ mục có thể là sự kết hợp bang và
+
+65
+00:03:46,910 --> 00:03:50,990
+các giá trị quận và xem cách panda xử lí trong khung dữ liệu.
+
+66
+00:03:50,990 --> 00:03:53,800
+Chúng ta làm điều này bằng cách tạo ra một danh sách định dạng cột chúng ta muốn
+
+67
+00:03:53,800 --> 00:03:54,446
+chỉ ra.
+
+68
+00:03:54,446 --> 00:03:59,480
+Sau đó thiết lập chỉ mục với danh sách này và gán đầu ra thích hợp.
+
+69
+00:03:59,480 --> 00:04:02,780
+Chúng ta thấy có chỉ số kép, tên bang đầu tiên và
+
+70
+00:04:02,780 --> 00:04:03,540
+sau đó là tên quận.
+
+71
+00:04:04,950 --> 00:04:08,540
+Câu hỏi là cách chúng ta có thể truy vấn khung dữ liệu này.
+
+72
+00:04:08,540 --> 00:04:11,080
+Ví dụ, chúng ta thấy trước rằng thuộc tính khóa của
+
+73
+00:04:11,080 --> 00:04:13,462
+khung dữ liệu có thể lấy nhiều đối số.
+
+74
+00:04:13,462 --> 00:04:16,910
+Nó có thể truy vấncarar hàng và cột.
+
+75
+00:04:16,910 --> 00:04:18,110
+Khi bạn sử dụng chỉ mục Balti,
+
+76
+00:04:18,110 --> 00:04:21,880
+bạn phải cung cấp đối số bởi mức độ bạn muốn truy vấn.
+
+77
+00:04:21,880 --> 00:04:24,540
+Bên trong chỉ mục, mỗi cột được gọi là một mức và
+
+78
+00:04:24,540 --> 00:04:27,070
+cột bên ngoài ở mức 0.
+
+79
+00:04:27,070 --> 00:04:30,920
+Ví dụ nếu chúng ta muốn thấy các kết quả dân số từ quận Washenaw,
+
+80
+00:04:30,920 --> 00:04:35,720
+đó là nơi tôi sống, bạn muốn các đối số đầu tiên là bang Michigan.
+
+81
+00:04:35,720 --> 00:04:38,280
+Bạn có thể quan tâm đến việc so sánh hai quận.
+
+82
+00:04:38,280 --> 00:04:42,130
+Ví dụ Washtenaw nơi tôi sống và quận Wayne bao gồm Detroit.
+
+83
+00:04:42,130 --> 00:04:43,900
+Để làm điều này chúng ta có thể dùng phương khóa,
+
+84
+00:04:43,900 --> 00:04:47,470
+một danh sách hai quận mô tả các chỉ số chúng ta muốn truy vấn.
+
+85
+00:04:47,470 --> 00:04:51,107
+Bởi vì chúng ta có nhiều chỉ số của hai giá trị, bang và quận,
+
+86
+00:04:51,107 --> 00:04:54,635
+chúng ta cần phải cung cấp hai giá trị là mỗi phần tử của danh sách lọc.
+
+87
+00:05:01,324 --> 00:05:04,730
+Ok đó là cách phân cấp chỉ số hoạt động tóm tắt.
+
+88
+00:05:04,730 --> 00:05:07,460
+Chúng là một phần đặc biệt của thư viện panda cái mà tôi
+
+89
+00:05:07,460 --> 00:05:10,720
+nghĩ có thể quản lí dữ liệu dễ dàng hơn.
+
+90
+00:05:10,720 --> 00:05:14,100
+Tất nhiên nhãn dán thứ bậc không chỉ cho các hàng.
+
+91
+00:05:14,100 --> 00:05:18,570
+Ví dụ bạn có thể chuyển đổi ma trận này và bây giờ có các nhãn mác cột thứ bậc.
+
+92
+00:05:18,570 --> 00:05:21,340
+Và chiếu một cột đơn có các nhãn mác này
+
+93
+00:05:21,340 --> 00:05:23,420
+hoạt động chính xác theo cách bạn mong muốn.

@@ -1,0 +1,30 @@
+Uma tabela dinâmica é uma maneira de resumir os dados
+em uma estrutura de dados para um propósito particular. Faz uso intenso da 
+função de agregação. Uma tabela dinâmica é em si um quadro de dados,
+onde as linhas representam uma variável que você tem interesse, as colunas outra variável,
+e a célula é um valor agregado. Uma tabela dinâmica também tende
+ a incluir valores marginais também, que são as somas para
+cada linha e para cada coluna. Isso permite que você veja
+ o relacionamento entre duas variáveis, num relance. Vamos ver um exemplo. Vamos carregar um novo conjunto de dados,
+cars.csv. Este conjunto de dados vem do
+Open Data Initiative, do governo canadense. E tem informações sobre a eficiência
+de diferentes carros elétricos que estão disponíveis no mercado. Quando olhamos para o cabeçalho
+dos dados, vemos que há ano (YEAR), modelo (Model), 
+fornecedor (Make), tamanhos de carros (Size) e estatísticas, como o tamanho da bateria (em quilowatts-hora). Uma tabela dinâmica nos permite
+girar uma dessas colunas em um novo cabeçalho de colunas e compará-la contra outra coluna, como índices de linha. Por exemplo, se quiséssemos comparar a
+marca de veículos elétricos contra os anos e que queríamos fazer essa comparação
+em termos de capacidade da bateria. Para isso, dizemos ao Pandas
+que queremos os valores em quilowatts, que o índice será o ano e
+as colunas serão os fabricantes (Make). Em seguida, especificamos
+a função de agregação, que aqui será a média:
+ aggfunc=np.mean Eis os resultados. Vemos que há valores NaN para fornecedores que não têm uma entrada
+ num determinado ano, como Ford em 2012. E vemos que a maioria dos fornecedores
+não têm uma mudança na capacidade da bateria ao longo dos anos, exceto Tesla, que introduziu vários modelos novos. Agora, tabelas dinâmicas não se limitam a uma função
+que você pode querer aplicar. Você pode passar uma lista das
+ funções diferentes para aplicar. E Pandas irá fornecer o resultado,
+usando hierarquida de nomes de colunas. Aqui, para passar margens:
+margins=True Note que, para cada função,
+há uma categorial 'all'. All exibe a média geral e
+valores mínimos de um dado ano e de um dado fornecedor. Isso é o que são as tabelas dinâmicas. Foi uma descrição sucinta, mas elas serão muito úteis na
+manipulação de dados numéricos. E, é claro, você pode passar qualquer função
+que quiser para a função de agregação, incluindo as suas, as que você criar.

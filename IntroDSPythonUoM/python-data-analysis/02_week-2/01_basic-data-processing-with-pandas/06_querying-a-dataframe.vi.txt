@@ -1,0 +1,54 @@
+Trước khi chúng ta nói về cách
+truy vấn khung dữ liệu, chúng ta cần nói về hàm Boolean. Hàm Bool là trung tâm của truy vấn
+nhanh và hiệu quả trong NumPy. Nó có một chút tương tự với việc che giấu
+được sử dụng trong lĩnh vực tính toán khác. Hàm Boolean là một mảng có thể là
+một chiều như một chuỗi hoặc hai chiều giống như khung dữ liệu, mỗi một giá trị trong mảng
+hoặc là đúng hoặc là sai. Mảng này chủ yếu bị che khuất phía trên
+của cấu trức dữ liệu mà chúng ta truy vấn. Và bất kì phần nào liên kết với giá trị đúng sẽ được chấp nhận
+vào trong kết quả cuối cùng của chúng ta, và bất kì dấu hiệu nào liên kết với sai
+sẽ không được chấp nhận. Hàm Boolean có đầy sức mạnh và là nền tảng hiệu quả của truy vấn NumPy và panda. Kĩ thuật này được sử dụng trong các
+lĩnh vực khoa học máy tính, ví dụ, trong đồ họa. Nhưng nó không thực sự có sự tương tác trong
+các cơ sở dữ liệu quan hệ truyền thống khác vì thế tôi nghĩ nó đáng để chỉ ra ở đây. Hàm Boolean được tạo ra với việc áp dụng các toán tử
+trực tiếp với các chuỗi panda hoặc các đối tượng khung dữ liệu. Ví dụ trong tập dữ liệu Olympics của
+chúng ta, bạn có thể quan tâm xem các quốc gia dành huy chương vàng
+ở thế vận hội mùa hè. Để xây dựng hàm Boolean cho truy vấn này, chúng ta lên
+kế hoạch cột vàng sử dụng toán tử chỉ số và áp dụng toán tử lớn hơn
+bằng việc so sánh giá trị với 0. Đây là truyền phát cơ bản một toán tử so sánh, lớn hơn với kết quả được trả về
+là một chuỗi hàm Boolean. Kết quả được chỉ ra giá trị của
+mỗi phần hoặc là đúng hoặc là sai phụ thuộc vào một quốc gia ít nhất
+đạt một huy chương vàng và chỉ số này là tên của quốc gia. Điều này xây dựng cho chúng ta
+hàm Boolean, đó là một nửa trận chiến. Cái chúng ta muốn là che phủ trên khung dữ liệu. Chúng ta có thể làm điều này sử dụng hàm Where. Hàm Where dùng hàm Boolean như một
+điều kiện áp dụng nó với khung dữ liệu hoặc chuỗi và trả lại khung dữ liệu mới
+hoặc chuỗi hình dạng tương tự. Hãy áp dụng hàm Boolean với dữ liệu Olympics
+của chúng ta và tạo ra khung dữ liệu của các quốc gia dành huy chương vàng
+ở thế vận hội mùa hè. Chúng ta thấy rằng khung dữ liệu giữ
+các giá trị chỉ số gốc và chỉ dữ liệu từ các quốc gia mà
+đáp ứng điều kiện được giữ lại. Tất cả các quốc gia không đáp ứng
+điều kiện dữ liệu NaN. Như thế này vẫn ổn. Hầu hết các hàm thống kê xây dựng
+trong khung dữ liệu bỏ qua các giá trị NaN. Ví dụ nếu chúng ta nhập df.count
+trên khung dữ liệu vàng, chúng ta thấy có 100 quốc gia có huy
+chương vàng được trao ở thế vận hội mùa hè, trong khi nếu chúng ta đếm
+trên khung dữ liệu gốc, chúng ta thấy có tổng số 147 quốc gia. Thường chúng ta muốn xóa những dòng không có dữ liệu. Để làm điều này, chúng ta có thể sử dụng hàm xóa NA. Bạn có thể tùy chọn cung cấp xóa NA
+ở những trục được xem xét. Hãy nhớ rắng các trục chỉ là định hướng
+cho cột hoặc hàng và mặc định là 0, có nghĩa là hàng. Khi bạn thấy mình nói về pandas và các cụm từ như vậy, thường tôi muốn như vậy, giống như
+người lập trình có phím tắt cho toán tử phổ biến này. Ví dụ, trong ví dụ này, chúng ta không thực sự phải sử dụng
+hàm where một cách rõ ràng. Các nhà phát triển pandas cho phép toán tử chỉ số lấy hàm Boolean như một giá trị
+thay cho một danh sách tên các cột. Cú pháp này có thể nhìn lộn xộn một chút,
+đặc biệt nếu bạn không quen lập trình ngôn ngữ với quá nhiều toán tử, nhưng kết quả là bạn có thể lọc và làm giảm
+các khung dữ liệu tương đối nhanh chóng. Dưới đây là một ví dụ ngắn gọn hơn về làm thế nào
+chúng ta có thể truy vấn các khung dữ liệu này. Bạn sẽ nhận thấy rằng không có NaNs khi bạn
+truy vấn các khung dữ liệu theo cách này. pandas tự động lọc ra những hàng không giá trị. Một điều nữa cần lưu ý nếu bạn
+không quen Boolean hoặc bit cho giảm bớt dữ liệu. Đầu ra của hai đánh dấu Boolean
+được so sánh với toán tử logic là một Boolean khác. Có nghĩa là bạn có thể nối cùng nhau
+một nhóm các lệnh and/or để tạo một truy vấn phức tạp và
+kết quả trả về là một Boolean đơn giản. Ví dụ chúng ta có thể tạo ra một đánh dấu
+cho tất cả các quốc gia dành huy chương vàng tại thế vận hội
+mùa hè và sắp xếp hợp lý với các quốc gia dành huy chương vàng
+ở thế vận hội mùa đông. Nếu chúng ta áp dụng điều này cho khung dữ liệu và sử dụng hàm length để xem có bao nhiêu hàng ở đây, chúng ta thấy rằng có 101 quốc gia
+dành huy chương vàng một vài lần. Một ví dụ khác cho vui. Có quốc gia nào dành huy chương vàng
+ở thế vận hội mùa đông nhưng chưa có ở thế vận hội mùa hè không? Dưới đây là một cách để trả lời. Đó là Liechtenstein. Rất may, thế vận hội diễn ra bốn năm một lần. Tôi biết trong năm 2020 tôi sẽ chúc mừng cho
+người dành huy chương vàng mùa hè đầu tiên. Vô cùng quan trọng, và thường là vấn đề
+cho những người dùng mới, là nhớ những dấu Boolean cần thiết để trong dấu ngoặc đơn theo thứ tự của các toán tử. Đây có thể gây ra nhiều sự khó chịu nếu
+bạn không quen, nên hãy cẩn thận. Trong bài giảng này, chúng ta đã xem xét đánh dấu Boolean. Chúng ta đã không lập trình nhiều, nhưng áp dụng
+đánh dấu cho khung dữ liệu là thực sự luồng công việc cốt lõi của panda
+và có giá trị cho việc thực hành.

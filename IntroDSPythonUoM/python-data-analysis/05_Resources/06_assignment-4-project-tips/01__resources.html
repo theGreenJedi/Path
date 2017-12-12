@@ -1,0 +1,310 @@
+<meta charset="utf-8"/>
+<co-content>
+ <p>
+  For the function get_list_of_university towns, the data is in the text file
+  <em>
+   university_towns.txt
+  </em>
+  is in the following format:
+ </p>
+ <p>
+ </p>
+ <p>
+  StateOne[edit]
+ </p>
+ <p>
+  RegionOne (UniversityOne)[1]
+ </p>
+ <p>
+  RegionTwo (UniversityTwo)
+ </p>
+ <p>
+  RegionThree (UniversityThree)[2]
+ </p>
+ <p>
+ </p>
+ <p>
+  The question asks for this data to be cleaned up and returned in a DataFrame of this format:
+ </p>
+ <table columns="3" rows="4">
+  <tr>
+   <td>
+    <p>
+    </p>
+   </td>
+   <td>
+    <p>
+     State
+    </p>
+   </td>
+   <td>
+    <p>
+     RegionName
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p>
+     0
+    </p>
+   </td>
+   <td>
+    <p>
+     StateOne
+    </p>
+   </td>
+   <td>
+    <p>
+     RegionOne
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p>
+     1
+    </p>
+   </td>
+   <td>
+    <p>
+     StateOne
+    </p>
+   </td>
+   <td>
+    <p>
+     RegionTwo
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p>
+     2
+    </p>
+   </td>
+   <td>
+    <p>
+     StateOne
+    </p>
+   </td>
+   <td>
+    <p>
+     RegionThree
+    </p>
+   </td>
+  </tr>
+ </table>
+ <p>
+ </p>
+ <p>
+  So for example if you have:
+ </p>
+ <p>
+  Alabama[edit]
+ </p>
+ <p>
+  Auburn (Auburn University)[1]
+ </p>
+ <p>
+  Florence (University of North Alabama)
+ </p>
+ <p>
+  Jacksonville (Jacksonville State University)[2]
+ </p>
+ <p>
+ </p>
+ <p>
+  This needs to be converted into the dataframe:
+ </p>
+ <table columns="3" rows="4">
+  <tr>
+   <td>
+    <p>
+    </p>
+   </td>
+   <td>
+    <p>
+     State
+    </p>
+   </td>
+   <td>
+    <p>
+     RegionName
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p>
+     0
+    </p>
+   </td>
+   <td>
+    <p>
+     Alabama
+    </p>
+   </td>
+   <td>
+    <p>
+     Auburn
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p>
+     1
+    </p>
+   </td>
+   <td>
+    <p>
+     Alabama
+    </p>
+   </td>
+   <td>
+    <p>
+     Florence
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p>
+     2
+    </p>
+   </td>
+   <td>
+    <p>
+     Alabama
+    </p>
+   </td>
+   <td>
+    <p>
+     Jacksonville
+    </p>
+   </td>
+  </tr>
+ </table>
+ <p>
+ </p>
+ <p>
+  Some tips for cleaning the data:
+ </p>
+ <p>
+  1. For "State", removing characters from "[" to the end.
+ </p>
+ <p>
+  2. For "RegionName", when applicable, removing every character from " (" to the end.
+ </p>
+ <p>
+  3. Depending on how you read the data, you may need to remove newline character '\n'.
+ </p>
+ <p>
+ </p>
+ <p>
+  There may be a few RegionNames in the list that don't match up well to actual cities, but don't worry about doing anything special for these entries for the purposes of this assignment. Punctuation at the end of the RegionName not encapsulated in the parenthesis does not need to be removed.
+ </p>
+ <p>
+  An example:
+ </p>
+ <p>
+  The RegionName given to us by the text file:
+ </p>
+ <p>
+  The Five College Region of Western Massachusetts:
+ </p>
+ <p>
+ </p>
+ <p>
+  Should be unmodified:
+ </p>
+ <table columns="3" rows="2">
+  <tr>
+   <td>
+    <p>
+    </p>
+   </td>
+   <td>
+    <p>
+     State
+    </p>
+   </td>
+   <td>
+    <p>
+     RegionName
+    </p>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <p>
+     184
+    </p>
+   </td>
+   <td>
+    <p>
+     Massachusetts
+    </p>
+   </td>
+   <td>
+    <p>
+     The Five College Region of Western Massachusetts:
+    </p>
+   </td>
+  </tr>
+ </table>
+ <p>
+ </p>
+ <p>
+  Good luck on the project!
+ </p>
+</co-content>
+<style>
+ body {
+    padding: 50px 85px 50px 85px;
+}
+
+table th, table td {
+    border: 1px solid #e0e0e0;
+    padding: 5px 20px;
+    text-align: left;
+}
+input {
+    margin: 10px;
+}
+}
+th {
+    font-weight: bold;
+}
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+img {
+    height: auto;
+    max-width: 100%;
+}
+pre {
+    display: block;
+    margin: 20px;
+    background: #424242;
+    color: #fff;
+    font-size: 13px;
+    white-space: pre-wrap;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    border: 1px solid #ccc;
+}
+</style>
+<script async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ['$','$'] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true
+    }
+  });
+</script>

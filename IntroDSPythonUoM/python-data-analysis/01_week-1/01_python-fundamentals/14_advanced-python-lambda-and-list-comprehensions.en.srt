@@ -1,0 +1,232 @@
+1
+00:00:08,907 --> 00:00:12,328
+You may have seen the keyword lambda
+appear in this week's content, and
+
+2
+00:00:12,328 --> 00:00:16,196
+you'll certainly see it appear more as you
+spend more and more time with Python and
+
+3
+00:00:16,196 --> 00:00:17,880
+data science.
+
+4
+00:00:17,880 --> 00:00:21,770
+Lambda's are Python's way of
+creating anonymous functions.
+
+5
+00:00:21,770 --> 00:00:24,630
+These are the same as other functions,
+but they have no name.
+
+6
+00:00:24,630 --> 00:00:26,060
+The intent is that they're simple or
+
+7
+00:00:26,060 --> 00:00:29,440
+short lived and it's easier just to
+write out the function in one line
+
+8
+00:00:29,440 --> 00:00:32,169
+instead of going to the trouble
+of creating a named function.
+
+9
+00:00:33,300 --> 00:00:35,460
+The lambda syntax is fairly simple.
+
+10
+00:00:35,460 --> 00:00:37,590
+But it might take a bit
+of time to get used to.
+
+11
+00:00:38,610 --> 00:00:42,270
+You declare a lambda function with
+the word lambda followed by a list of
+
+12
+00:00:42,270 --> 00:00:47,610
+arguments, followed by a colon and
+then a single expression and this is key.
+
+13
+00:00:47,610 --> 00:00:50,596
+There's only one expression
+to be evaluated in a lambda.
+
+14
+00:00:50,596 --> 00:00:54,299
+The expression value is returned
+on execution of the lambda.
+
+15
+00:00:55,570 --> 00:00:58,520
+The return of a lambda
+is a function reference.
+
+16
+00:00:58,520 --> 00:01:01,550
+So in this case,
+you would execute my_function and
+
+17
+00:01:01,550 --> 00:01:03,290
+pass in three different parameters.
+
+18
+00:01:04,290 --> 00:01:07,530
+Note that you can't have default
+values for lambda parameters and
+
+19
+00:01:07,530 --> 00:01:10,870
+you can't have complex logic
+inside of the lambda itself
+
+20
+00:01:10,870 --> 00:01:12,950
+because you're limited
+to a single expression.
+
+21
+00:01:14,130 --> 00:01:18,420
+So lambdas are really much more limited
+than full function definitions.
+
+22
+00:01:18,420 --> 00:01:22,360
+But I think they're very useful for
+simple little data cleaning tasks.
+
+23
+00:01:22,360 --> 00:01:25,040
+And you'll see lots of
+examples with them on the web.
+
+24
+00:01:25,040 --> 00:01:27,530
+So you should be able to read and
+write lambdas.
+
+25
+00:01:27,530 --> 00:01:28,510
+Let's give it a try here.
+
+26
+00:01:30,800 --> 00:01:33,530
+We've learned a lot about sequences and
+in Python.
+
+27
+00:01:33,530 --> 00:01:36,470
+Tuples, lists, dictionaries and so forth.
+
+28
+00:01:37,510 --> 00:01:40,580
+Sequences are structures that
+we can iterate over, and
+
+29
+00:01:40,580 --> 00:01:44,590
+often we create these through loops or
+by reading in data from a file.
+
+30
+00:01:45,850 --> 00:01:50,720
+Python has built in support for creating
+these collections using a more abbreviated
+
+31
+00:01:50,720 --> 00:01:53,140
+syntax called list comprehensions.
+
+32
+00:01:54,230 --> 00:01:55,690
+Here's an example.
+
+33
+00:01:55,690 --> 00:01:58,380
+First we write up a little for-loop.
+
+34
+00:01:58,380 --> 00:02:02,740
+Here I'm iterating between zero and
+1,000 and then checking with the modulus
+
+35
+00:02:02,740 --> 00:02:07,230
+operator to see if the number divided
+by two results in any decimals.
+
+36
+00:02:07,230 --> 00:02:10,880
+If the modulus two of the number is zero,
+then I know it divides evenly so
+
+37
+00:02:10,880 --> 00:02:13,530
+this must be an even number and
+I'll add it to our list.
+
+38
+00:02:15,450 --> 00:02:18,360
+We can rewrite this as
+a list comprehension by
+
+39
+00:02:18,360 --> 00:02:20,980
+pulling the iteration on one line.
+
+40
+00:02:20,980 --> 00:02:24,300
+We start the list comprehension
+with the value we want in the list.
+
+41
+00:02:24,300 --> 00:02:25,770
+In this case, it's a number.
+
+42
+00:02:25,770 --> 00:02:31,030
+Then we put it in the for-loop, and then
+finally, we add any condition clauses.
+
+43
+00:02:31,030 --> 00:02:33,920
+You can see that this is much
+more compact of a format.
+
+44
+00:02:33,920 --> 00:02:35,690
+And it tends to be faster as well.
+
+45
+00:02:36,910 --> 00:02:40,890
+Just like with lambdas,
+list comprehensions are a condensed format
+
+46
+00:02:40,890 --> 00:02:44,030
+which may offer readability and
+performance benefits and
+
+47
+00:02:44,030 --> 00:02:49,190
+you'll often find them being used in data
+science tutorials or on stack overflow.
+
+48
+00:02:49,190 --> 00:02:53,170
+But you're not required to use them
+in the assignments in this course.
+
+49
+00:02:53,170 --> 00:02:56,702
+Here, why don't you try converting
+a function into a list comprehension.

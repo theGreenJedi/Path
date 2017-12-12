@@ -1,0 +1,472 @@
+1
+00:00:08,762 --> 00:00:12,930
+Llegado a este punto, no hemos hablado
+mucho acerca de Python orientado a objetos.
+
+2
+00:00:12,930 --> 00:00:17,240
+Aunque las funciones desempeñan
+un papel importante en el ecosistema Python,
+
+3
+00:00:17,240 --> 00:00:21,600
+ Python tiene clases que pueden tener
+métodos adjuntos, y ser instanciados como objetos.
+
+4
+00:00:21,600 --> 00:00:25,350
+Este curso no abarca
+detalles de objetos en Python,
+
+5
+00:00:25,350 --> 00:00:27,370
+ni programación orientada
+a objetos.
+
+6
+00:00:27,370 --> 00:00:30,390
+Usarás mucho
+objetos en Python,
+
+7
+00:00:30,390 --> 00:00:33,890
+Es menos probable que
+crees nuevas clases 
+
+8
+00:00:33,890 --> 00:00:36,470
+cuando utilices el entorno interactivo.
+
+9
+00:00:36,470 --> 00:00:40,200
+Pero creo que es importante repasar
+algunos detalles acerca de objetos en Python,
+
+10
+00:00:40,200 --> 00:00:41,839
+de modo tal de que no te
+sorprendamos cuando los veas.
+
+11
+00:00:43,300 --> 00:00:47,430
+En primer lugar, puedes definir una clase
+con la palabra clave "class" y terminando con dos puntos.
+
+12
+00:00:48,470 --> 00:00:51,550
+Cualquier cosa con sangría por debajo de esto, 
+está dentro del alcance de la clase.
+
+13
+00:00:52,580 --> 00:00:56,080
+En Python, las clases son generalmente
+nombradas usando "Mayúsculas/Minúsculas Camello",
+
+14
+00:00:56,080 --> 00:00:59,070
+es decir que el primer carácter
+de cada palabra va con mayúscula.
+
+15
+00:01:00,070 --> 00:01:04,580
+Dentro del objeto, no declaras variables,
+simplemente empiezas a usarlas.
+
+16
+00:01:04,580 --> 00:01:06,730
+También es posible
+declarar variables de clase.
+
+17
+00:01:06,730 --> 00:01:10,510
+Estas son sólo variables que
+se comparten entre todas las instancias.
+
+18
+00:01:10,510 --> 00:01:13,730
+Así que en este ejemplo, 
+estamos diciendo que el valor predeterminado para
+
+19
+00:01:13,730 --> 00:01:16,430
+toda la gente es
+"School of Information".
+
+20
+00:01:18,010 --> 00:01:20,760
+No es muy útil aquí, pero
+quería mostrarlo para completar el tema.
+
+21
+00:01:22,520 --> 00:01:26,480
+Para definir un método,
+simplemente escribes como si fuera una función.
+
+22
+00:01:26,480 --> 00:01:30,420
+El único cambio es que para tener acceso a
+la instancia en la que se invoca un método
+
+23
+00:01:30,420 --> 00:01:34,480
+debes incluir "self", 
+en la firma del método.
+
+24
+00:01:35,490 --> 00:01:39,800
+De manera similar, si deseas referirte a
+variables de instancia definidas en el objeto,
+
+25
+00:01:39,800 --> 00:01:42,590
+debes utilizar la palabra "self" como prefijo,
+y luego un punto.
+
+26
+00:01:43,600 --> 00:01:48,020
+Por ejemplo, en esta definición de una persona,
+hemos escrito dos métodos.
+
+27
+00:01:48,020 --> 00:01:50,280
+"set_name" y "set_location".
+
+28
+00:01:50,280 --> 00:01:54,800
+Y ambos cambian respectivamente las variables
+"name" y "location" dependientes de la instancia.
+
+29
+00:01:56,220 --> 00:01:58,860
+Cuando ejecutamos esta celda,
+no vemos ninguna salida.
+
+30
+00:01:58,860 --> 00:02:02,950
+La clase existe, pero aún
+no hemos creado ningún objeto.
+
+31
+00:02:02,950 --> 00:02:06,290
+Podemos instanciar esta clase
+llamándola por su nombre y
+
+32
+00:02:06,290 --> 00:02:07,630
+concatenando paréntesis vacíos
+detrás de él.
+
+33
+00:02:08,970 --> 00:02:12,870
+Luego podemos invocar funciones e imprimir
+atributos de la clase mediante el uso de la
+
+34
+00:02:12,870 --> 00:02:15,170
+notación con punto,
+algo común a la mayoría de los lenguajes.
+
+35
+00:02:16,290 --> 00:02:19,730
+Hay un par de implicaciones en 
+la programación orientada a objetos en Python,
+
+36
+00:02:19,730 --> 00:02:22,910
+que debes considerar luego
+de ver este breve ejemplo.
+
+37
+00:02:22,910 --> 00:02:27,260
+Primero, en Python los objetos
+no tienen miembros privados o protegidos.
+
+38
+00:02:27,260 --> 00:02:28,740
+Si instancias un objeto,
+
+39
+00:02:28,740 --> 00:02:33,140
+tienes acceso completo a cualquiera
+de los métodos o atributos de dicho objeto.
+
+40
+00:02:33,140 --> 00:02:34,480
+Segundo,
+no hay necesidad de
+
+41
+00:02:34,480 --> 00:02:38,200
+un constructor explícito 
+al crear objetos en Python.
+
+42
+00:02:38,200 --> 00:02:42,370
+Puedes agregar un constructor
+si lo deseas declarando
+
+43
+00:02:42,370 --> 00:02:44,180
+el método "__init__"
+
+44
+00:02:45,590 --> 00:02:49,740
+No voy a meterme más en objetos de Python,
+porque hay muchas
+
+45
+00:02:49,740 --> 00:02:53,410
+sutilezas y, para ser honesto, la mayor parte
+de las características de objetos en
+
+46
+00:02:53,410 --> 00:02:57,715
+Python no son realmente importantes
+para la introducción a la ciencia de los datos.
+
+47
+00:02:57,715 --> 00:02:59,235
+Si estás interesado,
+
+48
+00:02:59,235 --> 00:03:03,815
+Te recomiendo revisar la documentación
+en el tutorial de Python.
+
+49
+00:03:03,815 --> 00:03:07,550
+Es una visión bastante completa de las
+características de los objetos del lenguaje, y
+
+50
+00:03:07,550 --> 00:03:09,836
+hay una referencia
+en la sección de recursos de la clase.
+
+51
+00:03:11,859 --> 00:03:16,940
+La función "map" es una de las bases
+para la programación funcional en Python.
+
+52
+00:03:16,940 --> 00:03:21,310
+La programación funcional es un paradigma
+de programación en el cual declaras explícitamente
+
+53
+00:03:21,310 --> 00:03:25,600
+Todos los parámetros que podrían cambiar
+mediante la ejecución de una función dada.
+
+54
+00:03:25,600 --> 00:03:29,980
+Por lo tanto, se suele decir que la programación
+funcional es libre de efectos secundarios, porque allí
+
+55
+00:03:29,980 --> 00:03:35,270
+hay un contrato de software que describe
+lo que realmente puede cambiar al llamar a una función.
+
+56
+00:03:35,270 --> 00:03:38,930
+Python no es un lenguaje de
+programación funcional en el sentido puro.
+
+57
+00:03:38,930 --> 00:03:41,840
+Puesto que tus funciones pueden tener
+muchos efectos secundarios y ciertamente
+
+58
+00:03:41,840 --> 00:03:44,790
+ no tienes que pasar parámetros de todo
+lo que estás interesado en cambiar.
+
+59
+00:03:45,880 --> 00:03:49,200
+Pero la programación funcional
+hace que uno piense con más detenimiento
+
+60
+00:03:49,200 --> 00:03:50,840
+cuando empieza a
+encadenar operaciones.
+
+61
+00:03:50,840 --> 00:03:55,230
+Y este es un tema subyacente en
+gran parte de la ciencia de los datos y
+
+62
+00:03:55,230 --> 00:03:57,400
+de la limpieza de datos
+en particular.
+
+63
+00:03:57,400 --> 00:04:00,520
+Por lo tanto, en Python se suelen utilizar
+métodos de la programación funcional,
+
+64
+00:04:00,520 --> 00:04:04,826
+Y no es raro encontrarse con un parámetro
+de una función, que es una función en sí misma.
+
+65
+00:04:04,826 --> 00:04:10,710
+La función "map" es un ejemplo
+de una función de programación funcional
+
+66
+00:04:10,710 --> 00:04:15,140
+en Python, que vincula  una serie
+de aspectos del lenguaje.
+
+67
+00:04:15,140 --> 00:04:17,970
+La función "map"
+se parece a esto.
+
+68
+00:04:17,970 --> 00:04:22,220
+El primer parámetro es la función
+que deseas ejecutar, y el segundo y
+
+69
+00:04:22,220 --> 00:04:25,610
+y subsiguientes parámetros, 
+son algo sobre lo que se puede iterar.
+
+70
+00:04:26,640 --> 00:04:29,400
+Todos los argumentos iterables
+se desempaquetan de manera conjunta y
+
+71
+00:04:29,400 --> 00:04:31,950
+son pasados a
+la función dada.
+
+72
+00:04:31,950 --> 00:04:35,110
+Esto es un poco críptico, 
+echemos un vistazo a un ejemplo.
+
+73
+00:04:35,110 --> 00:04:37,120
+Imaginemos que tenemos
+dos listas de números,
+
+74
+00:04:37,120 --> 00:04:41,290
+Quizás los precios de dos tiendas diferentes
+con exactamente los mismos artículos.
+
+75
+00:04:41,290 --> 00:04:44,280
+Y queremos encontrar el mínimo
+que tendríamos que pagar
+
+76
+00:04:44,280 --> 00:04:47,510
+Si compráramos el artículo
+más barato entre las dos tiendas.
+
+77
+00:04:47,510 --> 00:04:51,050
+Para hacer esto, podríamos iterar
+cada lista, comparando artículos y
+
+78
+00:04:51,050 --> 00:04:52,860
+eligiendo el más barato.
+
+79
+00:04:52,860 --> 00:04:56,000
+Con "map", podemos hacer esta
+comparación en una sola sentencia.
+
+80
+00:04:57,230 --> 00:05:00,490
+Pero cuando vamos a imprimir el resultado,
+vemos que obtenemos un valor de referencia,
+
+81
+00:05:00,490 --> 00:05:03,360
+En lugar de la lista de items
+que estamos esperando.
+
+82
+00:05:03,360 --> 00:05:05,950
+A esto se lo conoce como
+"Evaluación perezosa".
+
+83
+00:05:05,950 --> 00:05:10,010
+En Python, la función "map"
+retorna un objeto mapeado.
+
+84
+00:05:10,010 --> 00:05:14,010
+En realidad no ejecuta
+la función sobre los dos elementos,
+
+85
+00:05:14,010 --> 00:05:16,490
+hasta que mires dentro de un valor.
+
+86
+00:05:16,490 --> 00:05:19,330
+Este es un interesante 
+patrón de diseño del lenguaje, y
+
+87
+00:05:19,330 --> 00:05:22,460
+es de uso frecuente
+cuando trabajamos con "Big Data".
+
+88
+00:05:22,460 --> 00:05:26,700
+Esto nos permite gestionar la
+memoria de una manera muy eficiente,
+
+89
+00:05:26,700 --> 00:05:29,080
+Incluso con algo que podría ser 
+computacionalmente complejo.
+
+90
+00:05:30,430 --> 00:05:34,470
+Los "map" son iterables, al igual que las listas y
+tuplas, por lo que podemos usarlos un para
+
+91
+00:05:34,470 --> 00:05:36,560
+ver todos los
+valores del mapa.
+
+92
+00:05:38,430 --> 00:05:41,980
+Este pasaje de funciones y estructuras de datos 
+sobre las que se deben aplicar,
+
+93
+00:05:41,980 --> 00:05:44,360
+constituyen un sello distintivo
+de la programación funcional.
+
+94
+00:05:44,360 --> 00:05:47,840
+Es muy común en el análisis
+y limpieza de datos.
+
+95
+00:05:47,840 --> 00:05:51,040
+Aquí hay un problema para que pruebes,
+y que reúne algunas de las tareas
+
+96
+00:05:51,040 --> 00:05:53,300
+con las que te encontrarás 
+al hacer limpieza de datos.
