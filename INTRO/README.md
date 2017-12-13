@@ -1,10 +1,3 @@
-
-PDF To Markdown Converter
-
-    Debug View
-    Result View
-
-dga.ps
 A Few Useful Things to Know about Machine Learning
 Pedro Domingos
 Department of Computer Science and Engineering
