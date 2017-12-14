@@ -1,0 +1,208 @@
+1
+00:00:00,000 --> 00:00:05,060
+To extend the learning rule for a linear
+neuron to a learning rule we can use for
+
+2
+00:00:05,060 --> 00:00:09,036
+multilayer nets of nonlinear neurons, we
+need two steps.
+
+3
+00:00:09,036 --> 00:00:14,021
+First, we need to extend the learning rule
+to a single nonlinear neuron.
+
+4
+00:00:14,021 --> 00:00:19,040
+And we're going to use logistic neurons,
+although many other kinds of nonlinear
+
+5
+00:00:19,040 --> 00:00:25,012
+neurons could be used instead.
+We're now going to generalize the learning
+
+6
+00:00:25,012 --> 00:00:31,141
+rule for a linear neuron to a logistic
+neuron, which is a non linear neuron.
+
+7
+00:00:31,141 --> 00:00:38,048
+So, a logistic neuron, computes its logic,
+z, which is its total input, its, its bias
+
+8
+00:00:38,048 --> 00:00:45,038
+plus the sum over all its input lines of
+the value of, on an input line xi times
+
+9
+00:00:45,038 --> 00:00:50,088
+the weight on that line, wi.
+It then gives an output y that's a smooth
+
+10
+00:00:50,088 --> 00:00:57,019
+nonlinear function of that logit.
+As shown in the graph here, that function
+
+11
+00:00:57,019 --> 00:01:02,090
+is approximately zero when z is big and
+negative, approximately one when z is big
+
+12
+00:01:02,090 --> 00:01:07,091
+and positive, and in bet, in between, it
+changes smoothly and nonlinearly.
+
+13
+00:01:07,091 --> 00:01:13,021
+The fact that it changes continuously
+gives it nice derivatives, which make
+
+14
+00:01:13,021 --> 00:01:18,011
+learning easy.
+So to get the derivatives of a logistic
+
+15
+00:01:18,011 --> 00:01:23,681
+neuron with respect to the weight, which
+is what we need for learning, we first
+
+16
+00:01:23,681 --> 00:01:29,379
+need to compute the derivative of the
+logit itself, that is the total input with
+
+17
+00:01:29,379 --> 00:01:35,051
+respect to our weight, that's very simple.
+The logit is just a bias plus the sum of
+
+18
+00:01:35,051 --> 00:01:40,539
+all the input lines of the failure on the
+input lines times the weight.
+
+19
+00:01:40,539 --> 00:01:45,338
+So, when we differentiate with respect to
+wi, we just get xi.
+
+20
+00:01:45,338 --> 00:01:50,387
+So, the derivative of the logit with
+respect to wi is xi, and similarly, the
+
+21
+00:01:50,387 --> 00:01:53,696
+derivative of the logit with respect to xi
+is wi.
+
+22
+00:01:53,696 --> 00:02:01,310
+The derivative of the output with respect
+to the logic is also simple if you express
+
+23
+00:02:01,310 --> 00:02:10,872
+it terms of the output.
+So, the output is one / one + e^-z. And dy
+
+24
+00:02:10,872 --> 00:02:16,086
+by dz is just y into one - y. That's not
+obvious.
+
+25
+00:02:16,086 --> 00:02:21,012
+For those of you who like to see the math,
+I've put it on the next slide.
+
+26
+00:02:21,012 --> 00:02:25,056
+The math is tedious but perfectly
+straightforward so you can go through it
+
+27
+00:02:25,056 --> 00:02:30,687
+by yourself.
+Now, we've got the derivative, the output
+
+28
+00:02:30,687 --> 00:02:37,067
+with respect to the logic and the
+derivative, the logit with respect to the
+
+29
+00:02:37,067 --> 00:02:44,026
+weight, we can start to figure out the
+derivative, the output with respect to the
+
+30
+00:02:44,026 --> 00:02:47,055
+weight.
+We just use the chain rule again.
+
+31
+00:02:47,055 --> 00:02:54,703
+So, dy by dw is dz by dw times dy by dz.
+And dz by dw, as we just saw, is xi, dy by
+
+32
+00:02:54,703 --> 00:03:00,635
+dz is y into one minus y.
+And so, we now have the learning row for a
+
+33
+00:03:00,635 --> 00:03:05,256
+logistic neuron.
+We've got dy by dw, and all we need to do
+
+34
+00:03:05,256 --> 00:03:10,277
+is use the chain rule once more, and
+multiply it by de by dy.
+
+35
+00:03:10,277 --> 00:03:15,404
+And we get something that looks very like
+the delta rule.
+
+36
+00:03:15,404 --> 00:03:23,002
+So, the way the arrow changes is we change
+the weight, de by dwi, is just the sum of
+
+37
+00:03:23,002 --> 00:03:29,627
+all the row of training cases and of the
+value on input line xin times the
+
+38
+00:03:29,627 --> 00:03:35,971
+residual, the difference between the
+target and the output, on the actual
+
+39
+00:03:35,971 --> 00:03:41,201
+output of the neuron.
+But it's got this extra term in it, which
+
+40
+00:03:41,201 --> 00:03:47,062
+comes from the slope of the logistic
+function, which is yn into one - yn.
+
+41
+00:03:47,062 --> 00:03:53,714
+So, a slight modification of the delta
+rule gives us the gradiant decent learning
+
+42
+00:03:53,714 --> 00:03:56,082
+rule for training a logistic unit.

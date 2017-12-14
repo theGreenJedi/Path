@@ -1,0 +1,418 @@
+1
+00:00:00,000 --> 00:00:05,330
+In this video, I'll talk about another way
+of restricting the capacity of a neural
+
+2
+00:00:05,330 --> 00:00:08,515
+network.
+We can do that by adding noise, either to
+
+3
+00:00:08,515 --> 00:00:13,764
+the weights or to the activities.
+I'll start by showing, that if we add
+
+4
+00:00:13,764 --> 00:00:18,809
+noise to the inputs in a simple linear
+network, that's trying to minimize the
+
+5
+00:00:18,809 --> 00:00:24,117
+squared error, that's exactly equivalent
+to imposing an L2 penalty on the weights
+
+6
+00:00:24,117 --> 00:00:28,112
+of the network.
+I'll then describe uses of noisy weights
+
+7
+00:00:28,112 --> 00:00:33,843
+in more complicated networks and I'll
+finish by describing a recent discovery
+
+8
+00:00:33,843 --> 00:00:39,206
+that extreme noise in the activities can
+also be a very good regularizer.
+
+9
+00:00:39,206 --> 00:00:45,157
+So let's look at what happens if we add
+Gaussian noise to the inputs to a simple
+
+10
+00:00:45,157 --> 00:00:50,070
+neural network.
+The variance of the noise gets amplified
+
+11
+00:00:50,070 --> 00:00:55,320
+by the squared weights on the connections
+going into the next hidden layer.
+
+12
+00:00:56,960 --> 00:01:02,371
+If we have a very simple net, with just a
+linear output unit that's directly
+
+13
+00:01:02,371 --> 00:01:07,640
+connected to the inputs, the amplified
+noise then gets added to the output.
+
+14
+00:01:09,080 --> 00:01:13,967
+So if you look at the diagram,
+We put in an input Xi with additional
+
+15
+00:01:13,967 --> 00:01:20,562
+Gaussian noise that's sampled from a
+Gaussian with zero mean and variant sigma
+
+16
+00:01:20,562 --> 00:01:24,442
+I^..
+That additional noise has it's variants
+
+17
+00:01:24,442 --> 00:01:30,028
+multiplied by the squared weight.
+It then goes through the linear output
+
+18
+00:01:30,028 --> 00:01:36,313
+unit j. And so what comes out of j is the
+yj that would have come out before plus
+
+19
+00:01:36,313 --> 00:01:41,899
+Gaussian noise but has zero mean and has
+variance Wi^ sigma I^..
+
+20
+00:01:44,200 --> 00:01:49,306
+This additional variance makes an additive
+contribution to the squared error.
+
+21
+00:01:49,306 --> 00:01:54,346
+You can think of it like Pythagoras
+theorem, that the squared error is going
+
+22
+00:01:54,346 --> 00:01:59,784
+to be the sum of the squared error caused
+by Yj, and this additional noise, because
+
+23
+00:01:59,784 --> 00:02:05,678
+the noise is independent of Yj.
+So when we minimize the total squared
+
+24
+00:02:05,678 --> 00:02:11,644
+error, we'll minimize the squared error
+that will come out if it was a noise-free
+
+25
+00:02:11,644 --> 00:02:16,063
+system. And in addition, we'll be
+minimizing that second term.
+
+26
+00:02:16,063 --> 00:02:22,102
+That is, we'd be minimizing the expected
+squared value of that second term and the
+
+27
+00:02:22,102 --> 00:02:27,920
+expected squared value is just Wi^2, sigma
+I^2, so that corresponds to an I2 penalty
+
+28
+00:02:27,920 --> 00:02:30,940
+on wi with a penalty strength of sigma
+I^2.
+
+29
+00:02:33,760 --> 00:02:38,890
+For those of you who like math, I'm gonna
+derive that on this slide.
+
+30
+00:02:38,890 --> 00:02:42,871
+If you don't like math, you can just skip
+this slide.
+
+31
+00:02:42,871 --> 00:02:49,150
+The output, Y noisy, when we add noise to
+all of the inputs, is just what the output
+
+32
+00:02:49,150 --> 00:02:55,352
+would have been with noise-free system.
+The sum of all the inputs at wixi, plus wi
+
+33
+00:02:55,352 --> 00:02:58,721
+times the noise that we added to each
+input.
+
+34
+00:02:58,721 --> 00:03:04,694
+And those noises are sampled from a
+Gaussian with zero mean of variance sigma
+
+35
+00:03:04,694 --> 00:03:10,499
+I^..so
+So if we compute the expected squared
+
+36
+00:03:10,499 --> 00:03:15,741
+difference between Y noise E and the
+target value t, that's the quantity that's
+
+37
+00:03:15,741 --> 00:03:18,589
+shown on the left-hand side of the
+equation.
+
+38
+00:03:18,589 --> 00:03:23,119
+And I'm using an e followed by square
+brackets to mean an expectation.
+
+39
+00:03:23,119 --> 00:03:25,902
+That's not the arrow, that's an
+expectation.
+
+40
+00:03:25,902 --> 00:03:31,079
+And what we're computing the expectation
+of is the thing in the square brackets.
+
+41
+00:03:31,079 --> 00:03:35,869
+So in this case, we're computing the
+expectation of the squared arrow that
+
+42
+00:03:35,869 --> 00:03:43,082
+we'll get with the noisy system.
+So if we substitute the equation above for
+
+43
+00:03:43,082 --> 00:03:50,120
+Y noisy, we need the expectation of Y.
+Plus the sum of all the I, WI, epsilon I
+
+44
+00:03:58,820 --> 00:04:04,449
+So when we complete the square, the first
+time we get is Yt^ and that's not in the
+
+45
+00:04:04,449 --> 00:04:08,640
+side of expectation bracket because it
+doesn't involve any noise.
+
+46
+00:04:08,980 --> 00:04:15,510
+The second term is the cross product of
+the two terms above and the third term is
+
+47
+00:04:15,510 --> 00:04:21,700
+the square of the last term.
+Now that equation simplifies a lot.
+
+48
+00:04:22,380 --> 00:04:26,556
+In fact, it simplifies down to the normal
+squared error.
+
+49
+00:04:26,556 --> 00:04:30,733
+Plus the expectation of WI^2, epsilon I^2,
+summed over all I.
+
+50
+00:04:30,733 --> 00:04:36,352
+The reason it simplifies is because
+epsilon I is independent of epsilon J.
+
+51
+00:04:36,352 --> 00:04:42,503
+So if you look at the last term, when we
+multiply at that square, all of the cross
+
+52
+00:04:42,503 --> 00:04:48,274
+terms have an expected value of zero.
+Because we're multiplying together two
+
+53
+00:04:48,274 --> 00:04:54,813
+independent things that are zero mean.
+If you look at the middle chart, that also
+
+54
+00:04:54,813 --> 00:05:00,893
+has an expectation of zero, because each
+of the epsilon I's is independent of the
+
+55
+00:05:00,893 --> 00:05:06,241
+residual error.
+So we can rewrite the expectation of the
+
+56
+00:05:06,241 --> 00:05:12,062
+sum over all I of Wi^ epsilon squared, as
+simply the sum over all I with w I
+
+57
+00:05:12,062 --> 00:05:17,260
+squared, sigma I squared, because the
+expectation of up to I squared is just
+
+58
+00:05:17,260 --> 00:05:21,280
+sigma I squared, because that's how we
+generated epsilon i.
+
+59
+00:05:21,560 --> 00:05:27,249
+And so we see that the expected squared
+error we get is just the squared error we
+
+60
+00:05:27,249 --> 00:05:31,066
+get in the noise free system.
+Plus this additional term.
+
+61
+00:05:31,066 --> 00:05:34,466
+And that looks just like an L2 penalty on
+the WI.
+
+62
+00:05:34,466 --> 00:05:38,560
+With the sigma I^ being the strength of
+the penalty.
+
+63
+00:05:39,160 --> 00:05:45,334
+In more complex nets, we can restrict the
+capacity by adding Gaussian noise to the
+
+64
+00:05:45,334 --> 00:05:49,100
+weights.
+This isn't exactly equal to an L2 penalty.
+
+65
+00:05:49,600 --> 00:05:53,840
+But it seems actually to work better,
+especially in recurring networks.
+
+66
+00:05:54,560 --> 00:06:00,766
+So Alex Graves recently took his recurrent
+net that recognizes handwriting and tried
+
+67
+00:06:00,766 --> 00:06:05,440
+it with noise added to the weights.
+And it actually works better.
+
+68
+00:06:07,440 --> 00:06:13,259
+We can also use noise in the activities as
+a regularizer So suppose we use back
+
+69
+00:06:13,259 --> 00:06:17,640
+propagation to train a multi-lanural match
+with logistic hidden units.
+
+70
+00:06:18,940 --> 00:06:24,153
+What's gonna happen if we make the units
+binary and stochastic on the forward pass
+
+71
+00:06:24,153 --> 00:06:29,304
+but then we do the backward pass as if
+we'd done the normal deterministic forward
+
+72
+00:06:29,304 --> 00:06:34,923
+pass using the real values?
+So we're going to treat a logistic unit,
+
+73
+00:06:34,923 --> 00:06:38,719
+in the forward pass, as if it's a
+stacastic binary neuron.
+
+74
+00:06:38,719 --> 00:06:43,780
+That is, we compute the output of the
+logistic P, and then we treat that P as
+
+75
+00:06:43,780 --> 00:06:48,974
+the probability of outputting a one.
+And in the forward pass, you make a random
+
+76
+00:06:48,974 --> 00:06:53,370
+decision whether to output a one or a zero
+using that probability.
+
+77
+00:06:53,370 --> 00:06:58,499
+But in the backward paths, you use the
+real value of p for back propagating
+
+78
+00:06:58,499 --> 00:07:03,834
+derivatives through the hidden unit.
+This isn't exactly correct, but it's close
+
+79
+00:07:03,834 --> 00:07:09,443
+to being a correct thing to do for the
+stochastic system if all of the units make
+
+80
+00:07:09,443 --> 00:07:13,000
+small contributions to each unit in the
+layer above.
+
+81
+00:07:15,020 --> 00:07:20,903
+When we do this the performance on the
+training set is worse and training is
+
+82
+00:07:20,903 --> 00:07:24,800
+considerably slower.
+It may be several times slower.
+
+83
+00:07:25,080 --> 00:07:28,372
+But it does significantly better on the
+test set.
+
+84
+00:07:28,372 --> 00:07:31,060
+This is currently an unpublished result.

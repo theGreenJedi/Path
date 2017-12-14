@@ -1,0 +1,303 @@
+1
+00:00:00,000 --> 00:00:05,002
+In this video, we're going to, look at a
+proof that the perceptron learning
+
+2
+00:00:05,002 --> 00:00:10,032
+procedure will eventually get the weights
+into the cone of feasible solutions.
+
+3
+00:00:10,032 --> 00:00:15,021
+I don't want you to get the wrong idea
+about the course from this video.
+
+4
+00:00:15,021 --> 00:00:19,097
+In general, it's gonna be about
+engineering, not about proofs of things.
+
+5
+00:00:19,097 --> 00:00:25,067
+There'll be very few proofs in the course.
+But we get to understand quite a lot more
+
+6
+00:00:25,067 --> 00:00:31,011
+about perceptrons when we try and prove
+that they will eventually get the right
+
+7
+00:00:31,011 --> 00:00:33,071
+answer.
+So we going to use our geometric
+
+8
+00:00:33,071 --> 00:00:39,013
+understanding of what's happening in
+weight space as subset from learns, to get
+
+9
+00:00:39,013 --> 00:00:44,034
+a proof that the perceptron will
+eventually find a weight vector if it gets
+
+10
+00:00:44,034 --> 00:00:49,034
+the right answer for all of the training
+cases, if any such vector exists.
+
+11
+00:00:49,034 --> 00:00:55,010
+And our proof is gonna assume that there
+is a vector that gets the right answer for
+
+12
+00:00:55,010 --> 00:00:58,073
+all training cases.
+We'll call that a feasible vector.
+
+13
+00:00:58,073 --> 00:01:03,074
+An example of a feasible vector is shown
+by the green dot in the diagram.
+
+14
+00:01:04,054 --> 00:01:09,005
+So we start with the wait vector that's
+getting some of the training cases wrong,
+
+15
+00:01:09,005 --> 00:01:12,090
+and in the diagram we've shown a training
+case that is getting wrong.
+
+16
+00:01:13,034 --> 00:01:17,070
+And what we want to show.
+This is the idea for the proof.
+
+17
+00:01:17,070 --> 00:01:23,062
+Is that, every time he gets a training
+case wrong, it will update the current
+
+18
+00:01:23,062 --> 00:01:29,000
+weight vector.
+In a way that makes it closer to every
+
+19
+00:01:29,000 --> 00:01:34,080
+feasible weight factor.
+So we can represent the squared distance
+
+20
+00:01:34,080 --> 00:01:40,056
+of the current weight factor from a
+feasible weight factor, as the sum of a
+
+21
+00:01:40,056 --> 00:01:46,054
+squared distance along the line of the
+input factor that defines the training
+
+22
+00:01:46,054 --> 00:01:51,015
+case, and another squared difference
+orthogonal to that line.
+
+23
+00:01:51,015 --> 00:01:57,021
+The orthogonal squared distance won't
+change, and the squared distance along the
+
+24
+00:01:57,021 --> 00:02:03,079
+line of the input factor will get smaller.
+So our hopeful claim is that, every time
+
+25
+00:02:03,079 --> 00:02:09,164
+the perceptor makes a mistake.
+Our current weight factor is going to get
+
+26
+00:02:09,164 --> 00:02:15,076
+closer to all feasible weight factors.
+Now this is almost right, but there's an
+
+27
+00:02:15,076 --> 00:02:20,079
+unfortunate problem.
+If you look at the feasible weight vector
+
+28
+00:02:20,079 --> 00:02:26,092
+in gold, it's just on the right side of
+the plane that defines one of the training
+
+29
+00:02:26,092 --> 00:02:30,043
+cases.
+And the current weight factor is just on
+
+30
+00:02:30,043 --> 00:02:34,009
+the wrong side, and the input vector is
+quite big.
+
+31
+00:02:34,009 --> 00:02:39,069
+So when we add the input factor to the
+count weight factor, we actually get
+
+32
+00:02:39,069 --> 00:02:44,690
+further away from that gold feasible
+weight factor.
+
+33
+00:02:44,690 --> 00:02:51,008
+So our hopeful claim doesn't work, but we
+can fix it up so that it does.
+
+34
+00:02:53,053 --> 00:02:58,087
+So what we're gonna do is we're gonna
+define a generously feasible weight
+
+35
+00:02:58,087 --> 00:03:02,040
+factor.
+That's a weight factor that not only gets
+
+36
+00:03:02,040 --> 00:03:07,089
+every training case right, but it gets it
+right by at least a certain margin.
+
+37
+00:03:07,089 --> 00:03:12,093
+Where the margin is as big as the input
+factor for that training case.
+
+38
+00:03:13,068 --> 00:03:19,075
+So we take the cone of feasible solutions,
+and inside that we have another cone of
+
+39
+00:03:19,075 --> 00:03:25,021
+generously feasible solutions.
+Which get everything right by at least the
+
+40
+00:03:25,021 --> 00:03:28,088
+size of the input vector.
+And now, our proof will work.
+
+41
+00:03:28,088 --> 00:03:33,712
+Now we can make the claim, that every time
+the perceptron makes a mistake.
+
+42
+00:03:33,712 --> 00:03:39,093
+The squared distance to all of the
+generously feasible weight vectors would
+
+43
+00:03:39,093 --> 00:03:44,097
+be decreased by at least the squared
+length of the input vector, which is the
+
+44
+00:03:44,097 --> 00:03:50,122
+update we make.
+So given that, we can get an informal
+
+45
+00:03:50,122 --> 00:03:53,979
+sketch of a proof of convergence.
+I'm not gonna try and make this formal.
+
+46
+00:03:54,131 --> 00:03:57,480
+I'm more interested in the engineering
+than the mathematics.
+
+47
+00:03:57,480 --> 00:04:02,842
+If your mathematician i'm sure you can
+make it formal yourself.
+
+48
+00:04:02,842 --> 00:04:09,924
+So, every time the preceptor makes a
+mistake, the current weight vector moves
+
+49
+00:04:09,924 --> 00:04:15,932
+and it decreases its squared distance from
+every feas, generously feasible weight
+
+50
+00:04:15,932 --> 00:04:21,385
+vector, by at least the squared length of
+the current input vector.
+
+51
+00:04:21,385 --> 00:04:27,304
+And so the squared distance to all the
+generously feasible weight vectors
+
+52
+00:04:27,304 --> 00:04:32,444
+decreases by at least that squared length
+and assuming that none of the input
+
+53
+00:04:32,444 --> 00:04:37,343
+vectors are infinitesimally small.
+That means that after a finite number of
+
+54
+00:04:37,343 --> 00:04:42,621
+mistakes the weight vector must lie in the
+feasible region if this region exists.
+
+55
+00:04:42,621 --> 00:04:48,104
+Notice it doesn't have to lie in the
+generously feasible region, but it has to
+
+56
+00:04:48,104 --> 00:04:52,340
+get into the feasible region to make, to
+stop it making mistakes.
+
+57
+00:04:52,340 --> 00:04:56,286
+And that's it.
+That's our informal sketch of a proof that
+
+58
+00:04:56,286 --> 00:04:59,347
+the perceptron convergence procedure
+works.
+
+59
+00:04:59,347 --> 00:05:03,587
+But notice, it all depends on the
+assumption that there is a generously
+
+60
+00:05:03,587 --> 00:05:07,872
+feasible weight vector.
+And if there is no such vector, the whole
+
+61
+00:05:07,872 --> 00:05:09,091
+proof falls apart.

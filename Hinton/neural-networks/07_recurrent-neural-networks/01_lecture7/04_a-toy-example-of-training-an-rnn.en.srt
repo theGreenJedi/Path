@@ -1,0 +1,364 @@
+1
+00:00:00,000 --> 00:00:05,819
+In this video, I'm going to describe how a
+recurrent neural network solves a toy
+
+2
+00:00:05,819 --> 00:00:08,729
+problem.
+It's a problem that's chosen to
+
+3
+00:00:08,729 --> 00:00:14,621
+demonstrate what it is you can do with
+recurrent neural networks that you cannot
+
+4
+00:00:14,621 --> 00:00:18,259
+do conveniently with feet forward neural
+networks.
+
+5
+00:00:18,259 --> 00:00:21,460
+The problem is adding up two binary
+numbers.
+
+6
+00:00:21,460 --> 00:00:26,205
+Off to the recurrent neural network, has
+learned to solve the problem.
+
+7
+00:00:26,205 --> 00:00:31,500
+It's interesting to look at its hidden
+states, and see how they relate to the
+
+8
+00:00:31,500 --> 00:00:36,588
+hidden states in a finite state automaton
+that's solving the same problem.
+
+9
+00:00:36,588 --> 00:00:40,440
+So consider the problem of adding up two
+binary numbers.
+
+10
+00:00:41,040 --> 00:00:44,898
+We could train a feed-forward neural
+network to do that.
+
+11
+00:00:44,898 --> 00:00:50,411
+And the diagram on the right shows a
+network that gets some inputs and produces
+
+12
+00:00:50,411 --> 00:00:53,650
+some outputs.
+But there's problems with using a
+
+13
+00:00:53,650 --> 00:00:58,754
+feed-forward neural network.
+We have to decide in advance what the
+
+14
+00:00:58,754 --> 00:01:04,785
+maximum number of digits is both for both
+of the input numbers and for the output
+
+15
+00:01:04,785 --> 00:01:08,785
+number.
+And more importantly, the processing that
+
+16
+00:01:08,785 --> 00:01:14,094
+we apply to the different bits of the
+input numbers, doesn't generalize.
+
+17
+00:01:14,094 --> 00:01:20,226
+That is, when we learn how to add up the
+last two digits and deal with the carries,
+
+18
+00:01:20,226 --> 00:01:25,834
+that knowledges in some weights.
+And as we go to a different part of a long
+
+19
+00:01:25,834 --> 00:01:30,694
+binary number, the knowledge will have to
+be in different weights.
+
+20
+00:01:30,694 --> 00:01:36,938
+So we won't get automatic generalization.
+As a result, although you can train a
+
+21
+00:01:36,938 --> 00:01:41,578
+neuron feedfoward neural network, and it
+will eventually learn to do binary
+
+22
+00:01:41,578 --> 00:01:46,340
+addition on fixed-length numbers, it's not
+an elegant way to solve the problem.
+
+23
+00:01:47,360 --> 00:01:51,863
+This is a picture of the algorithm for
+binary addition.
+
+24
+00:01:51,863 --> 00:01:58,576
+The states shown here are like the states
+in a hidden Markov model, except they're
+
+25
+00:01:58,576 --> 00:02:03,080
+not really hidden.
+The system is in one state at a time.
+
+26
+00:02:03,080 --> 00:02:06,954
+When it enters a state it performs an
+action.
+
+27
+00:02:06,954 --> 00:02:13,927
+So it either prints a one or prints a zero
+and when it's in a state it gets some
+
+28
+00:02:13,927 --> 00:02:18,232
+input, which is the two numbers in the
+next column.
+
+29
+00:02:18,232 --> 00:02:22,365
+And that input causes it to go into a new
+state.
+
+30
+00:02:22,365 --> 00:02:27,918
+So if you look on the top right,
+It's in the carry station and it's just
+
+31
+00:02:27,918 --> 00:02:32,069
+printed a one.
+If it sees a one, one, it goes back in to
+
+32
+00:02:32,069 --> 00:02:38,844
+the same stage and print another one.
+If however it sees a one, zero or zero,
+
+33
+00:02:38,844 --> 00:02:43,419
+one, It goes into the carry state but
+prints a zero.
+
+34
+00:02:43,419 --> 00:02:49,882
+If it sees a zero, zero, it goes into the
+no carry state, and prints a one.
+
+35
+00:02:49,882 --> 00:02:55,562
+And so on.
+So a recurring neuro net for binary
+
+36
+00:02:55,562 --> 00:02:59,820
+edition needs to have two input units and
+one output unit.
+
+37
+00:03:00,240 --> 00:03:04,480
+It's given two input digits at each time
+stamp.
+
+38
+00:03:05,720 --> 00:03:09,656
+And it also has to produce an output at
+each time step.
+
+39
+00:03:09,656 --> 00:03:15,311
+And the output is the output for the
+column that it took in two time steps ago.
+
+40
+00:03:15,311 --> 00:03:20,966
+The reason we need a delay of two time
+steps, is that it takes one time step to
+
+41
+00:03:20,966 --> 00:03:26,477
+update the hidden units based on the
+inputs, and another time step to produce
+
+42
+00:03:26,477 --> 00:03:32,436
+the output from the hidden state.
+So the net looks like this.
+
+43
+00:03:32,436 --> 00:03:36,389
+I only gave it three hidden units.
+That's sufficient to do the job.
+
+44
+00:03:36,389 --> 00:03:40,761
+It would learn faster with more hidden
+units, but it can do it with three.
+
+45
+00:03:40,761 --> 00:03:45,192
+The three hidden units are fully
+interconnected and they have connections
+
+46
+00:03:45,192 --> 00:03:48,965
+in both directions that don't necessarily
+have the same weight.
+
+47
+00:03:48,965 --> 00:03:52,020
+In fact in general they don't have the
+same weight.
+
+48
+00:03:53,780 --> 00:04:00,137
+The connections between hidden units allow
+the pattern of one time step to insensate
+
+49
+00:04:00,137 --> 00:04:06,553
+the pattern of the next time step.
+The input units have feed forward
+
+50
+00:04:06,553 --> 00:04:12,230
+connections to the hidden units and that's
+how it sees the two digits in a column.
+
+51
+00:04:12,230 --> 00:04:18,046
+And similarly, the hidden units have feed
+forward connections to the output unit and
+
+52
+00:04:18,046 --> 00:04:25,577
+that's how it produces its output.
+It's interesting to look at what the
+
+53
+00:04:25,577 --> 00:04:31,854
+recurring neural network learns.
+It learns four distinct patterns of
+
+54
+00:04:31,854 --> 00:04:36,781
+activity in its three hidden units.
+And these patterns correspond to the nodes
+
+55
+00:04:36,781 --> 00:04:39,940
+in the finite state automaton for binary
+addition.
+
+56
+00:04:41,420 --> 00:04:46,791
+We must confuse the units in a neural
+network, with the nodes in a final state
+
+57
+00:04:46,791 --> 00:04:50,329
+automaton.
+The nodes in the finite state automaton
+
+58
+00:04:50,329 --> 00:04:54,400
+correspond to the activity vectors of the
+recurrent neural network.
+
+59
+00:04:56,160 --> 00:05:01,125
+The automaton is restricted to being
+exactly one state at each time.
+
+60
+00:05:01,125 --> 00:05:06,767
+And similarly, the hidden units are
+restricted to have exactly one activity
+
+61
+00:05:06,767 --> 00:05:10,680
+vector at each time in the recurrent
+neural network.
+
+62
+00:05:12,500 --> 00:05:18,089
+So a recurrent neural network can emulate
+a finite state automaton but it's
+
+63
+00:05:18,089 --> 00:05:21,766
+exponentially more powerful in its
+representation.
+
+64
+00:05:21,766 --> 00:05:26,620
+With any hidden neurons, it has 2n to the
+N possible binary activity vectors.
+
+65
+00:05:27,180 --> 00:05:32,455
+Of course it only has n squared weights so
+it can't necessarily make full use of all
+
+66
+00:05:32,455 --> 00:05:36,565
+that representational power.
+But if the bottleneck is in the
+
+67
+00:05:36,565 --> 00:05:42,114
+representation a recurrent neural network
+can do much better than a finite state
+
+68
+00:05:42,114 --> 00:05:46,715
+automaton.
+This is important when the input stream
+
+69
+00:05:46,715 --> 00:05:53,199
+has two separate things going on at once.
+A finite state automaton needs to square
+
+70
+00:05:53,199 --> 00:05:58,628
+its number of states in order to deal with
+the fact that there's two things going on
+
+71
+00:05:58,628 --> 00:06:03,160
+at once.
+A recurrent neural network only needs to
+
+72
+00:06:03,160 --> 00:06:08,286
+double its number of hidden units.
+By doubling the number of units, it does
+
+73
+00:06:08,286 --> 00:06:12,720
+of course square the number of binary
+vector states that it has.

@@ -1,0 +1,98 @@
+En este vídeo describiré algunos modelos
+de neuronas relativamente simples. Describiré varios modelos diferentes
+comenzando por neuronas lineales simples con umbral y
+luego modelos más complicados Son mucho más simples que las neuronas reales.
+pero aún así son suficientemente complicadas como para permitirnos armar redes neuronales
+que hacen clases muy interesantes de aprendizaje automático Para entender cualquier cosa complicada tenemos que idealizarla.
+Es decir, hacer simplificaciones que nos permitan tener una idea
+de como trabajan Con los átomos, por ejemplo, los simplificamos
+pensándolos como pequeños sistemas solares. La idealización elimina los detalles 
+complejos que no son esenciales para entender los principios fundamentales.
+Nos permite aplicar matemáticas y hacer analogías con otros sistemas familiares.
+Y, una vez que entedemos los principios básicos es fácil agregar complejidad,
+y hacer el modelo más fiel a la realidad.
+Por supuesto, tenemos que ser cuidadosos cuando idealizamos algo, 
+para no eliminar aquello que le da sus propiedades más importantes.
+Es útil entender modelos que se sabe que son erróneos, mientras no 
+olvidemos que lo son. Por ejemplo, mucho del trabajo sobre redes 
+neuronales usa neuronas que comunican valores reales en lugar de picos discretos de actividad
+y sabemos que las neuronas corticales no se comportan así, pero aún así es útil 
+entender un sistema como ese, y en la práctica pueden ser muy útiles 
+para el aprendizaje automático La primer clase de neuronas de la que
+quiero hablarles es la más simple. Es la neurona lineal
+Es simple. Es limitada en el cálculo que puede hacer. Puede permitirnos entender luego
+las neuronas más complicadas. pero puede llevar a confusión.
+En la neurona lineal, la salida y es una función del "sesgo" de la neurona b
+y la suma sobre todas las conexiones entrantes de la actividad x 
+de la línea por el peso w de esa línea Ese es el peso peso sináptico sobre la entrada.
+Y si graficas esa curva, entonces pones sobre el eje-x el sesgo más 
+las actividades pesadas sobre las líneas de entrada obtenemos una línea recta que pasapor cero. Muy distintas de las neuronas lineales
+son las neuronas de umbral binario que fueron introducidas por McCulloch y Pitts.
+En realidad influenciarion a Von Roenam cuando estaba pensando en cómo diseñar
+un computador universal. En una neurona de umbral binario
+primero calculas la suma pesada de las entradas y luego envías un pico de activdad 
+si esa suma ponderada supera el umbral McCulloch y Pitts pensaron que cada 
+pico era como los valores verderos de las proposiciones. De modo que cada 
+neurona está combinando los valores verdaderos que recibe de otras neuronas para
+producer su propio valor verdadero. Y eso es como combinar algunas proposiciones
+para calcular el valor verdadero de otra proposición.
+En los años 1940s la lógica era el paradigma principal de como la mente podría funcionar.
+Desde entonces los investigadores sobre el funcionamiento del cerebro se han interesado más
+en la idea de que el cerebro combina muchas fuentes diferentes 
+de evidencia no confiable De modo que la lógica no es un buen paradigma
+de lo que hace el cerebro. Para la neurona de umbral binario 
+podemos pensar su función entrada/salida como que si las entradas ponderadas están por encima del umbral
+entrega un valor uno O si no, entrega un cero.
+Hay en realidad dos formas equivalentes de escribir la ecuación para una 
+neurona de umbral binario Podemos decir la entrada total z es 
+la suma de las actidades de las líneas de entrada por los pesos
+Y luego la salida y es uno si z está por encima del umbral y cero de lo contrario.
+Por otro lado,  podemos decir que la entrada total incluye el término de sesgo.
+De modo que la entrada total es lo que llega en las líneas de entrada por los pesos más
+el término de sesgo. Y luego podemos decir que la salida es uno si
+la entrada total está sobre cero y cero de lo contrario.
+Y la equivalencia es simplemente que el umbral en la primera formulación es igual
+al sesgo cambiado de signo en la segunda formulación.
+La clase de neuronas que combinan las propiedades de las neuronas lineales
+y las neuronas de umbral binario es la la neurona lineal rectificada.
+Primero calcula la suma ponderada lineal de sus entradas, pero da una salida 
+que es una función no lineal de la suma ponderada.
+Calculamos z en la misma forma que antes Si z está debajo de cero, 
+entregamos una salida de cero de lo contrario, entregamos una salida 
+que es igual a z Por encima de cero es lineal, y en cero
+toma una decisión difícil. La curva entrada/salida es como ésta.
+Es definitivamente no lineal, pero encima de cero es lineal.
+Con una neurona como ésta podemos tener muchas propiedades interesantes 
+de los sistemas lineales cuando está encima de cero Podemos también tener la capacidad 
+de tomar decisiones alrededor de cero Las neuronas que usaremos más en 
+este curso, son probablemente las más comunes usadas en redes neuronas artificiales. 
+son las neuronas sigmoideas Dan un valor real de salida que es 
+una función continua y limitada de la entrada total
+Es típico usar la función logística. donde la entrada total se calcula como antes
+como el sesgo más lo que viene en las líneas de entrada ponderado.
+La salida de las neuronas logísticas es uno dividido por un más e elevado a la menos la entrada total Piénsenlo, si la entrada total es grande y positiva e elevada a la menos un número positivo grande 
+es cero. Y entonces la salida será uno.
+Si la entrada total es un número grande negativo, e a la menos un número negativo grande, 
+es un número grande y entonces la salidad debe ser cero.
+De modo que la función entrada/salida funciona así Cuando la entrada total es cero, e a la menos cero es uno, de modo que la salida
+es un medio. Y lo bueno de la función sigmoide es que tiene derivadas continuas
+Las derivadas cambian en forma continua. Y por lo tanto se comportan bien, y 
+facilitan el aprendizaje como veremos en la clase tres.
+Por último las neuronas binarias estocásticas. Usan las mismas ecuaciones que
+las unidades logísticas Calculan la entrada total en la misma forma
+y usan la función logística para calcular un valor real que es la 
+probabilidad de que produzcan un pico Pero en lugar de entregar esa 
+probabilidad como un número real toman una decisión probabilística, y 
+en realidad entrega o un uno o un cero.
+Son intrínsecamente aleatoreas. Están tratando p como la probabilidad 
+de producir un uno, no como un número real.
+Por supuesto que si la entrada es muy grande y positiva producirán casi siempre un uno. Si la entrada es grande y negativa, 
+producirán casi siempre un cero Podemos lograr un comportamiento similar
+con unidades lineales rectificadas. Podemos decir que la salida , 
+este valor real que sale de la unidad lineal rectificada es la tasa de picos 
+producidos si está por encima de cero Eso es determinista.
+Pero una vez que averiguamos esa tasa de picos producidos, la verdadera cantidad de veces 
+que se producen picos es un proceso aleatoreo. Es un proceso 
+con distribución de Poisson. De modo que la unidad lineal rectificada determina la tasa, 
+pero la naturaleza aleatorea intrínseca de la unidad determina cuándo 
+se producirán picos en realidad.

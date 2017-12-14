@@ -1,0 +1,504 @@
+1
+00:00:00,000 --> 00:00:05,672
+In this video, I'm going to talk about 
+some recent work on learning a joint 
+
+2
+00:00:05,672 --> 00:00:10,600
+model of captions and feature vectors 
+that describe images. 
+
+3
+00:00:10,600 --> 00:00:15,404
+In the previous lecture, I talked about 
+how we might extract semantically 
+
+4
+00:00:15,404 --> 00:00:20,209
+meaningful features from images. 
+But we were doing that with no help from 
+
+5
+00:00:20,209 --> 00:00:23,828
+the captions. 
+Obviously the words in a caption ought to 
+
+6
+00:00:23,828 --> 00:00:28,370
+be helpful in extracting appropriate 
+semantic categories from images. 
+
+7
+00:00:28,370 --> 00:00:33,503
+And similarly, the images ought to be 
+helpful in disambiguating what the words 
+
+8
+00:00:33,503 --> 00:00:38,004
+in the caption mean. 
+So the idea is we're going to try in a 
+
+9
+00:00:38,004 --> 00:00:43,243
+great big net that gets its input, stand 
+to computer vision feature vectors 
+
+10
+00:00:43,243 --> 00:00:48,762
+extractive for images and pack up words 
+representations of captions and learns 
+
+11
+00:00:48,762 --> 00:00:52,954
+how the two input representations are 
+related to each other. 
+
+12
+00:00:52,954 --> 00:00:58,682
+At the end of the video I'll show you a 
+movie of the final network using words to 
+
+13
+00:00:58,682 --> 00:01:04,271
+create feature vectors for images and 
+then showing you the closest image in its 
+
+14
+00:01:04,271 --> 00:01:07,953
+data base. 
+And also using images to create bytes of 
+
+15
+00:01:07,953 --> 00:01:11,227
+words. 
+I'm now going to describe some work by 
+
+16
+00:01:11,227 --> 00:01:16,830
+Natish Rivastiva, who's one of the TAs 
+for this course, and Roslyn Salakutinov, 
+
+17
+00:01:16,830 --> 00:01:21,439
+that will appear shortly. 
+The goal is to build a joint density 
+
+18
+00:01:21,439 --> 00:01:27,017
+model of captions and of images except 
+that the images represented by the 
+
+19
+00:01:27,017 --> 00:01:33,349
+features standardly used in computeration 
+rather than by the ropic cells.This needs 
+
+20
+00:01:33,349 --> 00:01:39,304
+a lot more computation than building a 
+joint density model of labels and digit 
+
+21
+00:01:39,304 --> 00:01:42,470
+images which we saw earlier in the 
+course. 
+
+22
+00:01:42,470 --> 00:01:46,749
+So what they did was they first trained a 
+multi-layer model of images alone. 
+
+23
+00:01:46,749 --> 00:01:51,028
+That is it's really a multi-layer model 
+of the features they extracted from 
+
+24
+00:01:51,028 --> 00:01:54,460
+images using the standard computer vision 
+features. 
+
+25
+00:01:54,460 --> 00:02:00,461
+Then separately, they train a multi-layer 
+model of the word count vectors from the 
+
+26
+00:02:00,461 --> 00:02:03,724
+captions. 
+Once they trained both of those models, 
+
+27
+00:02:03,724 --> 00:02:07,736
+they had a new top layer, that's 
+connected to the top layers of both of 
+
+28
+00:02:07,736 --> 00:02:11,954
+the individual models. 
+After that, they use further joint 
+
+29
+00:02:11,954 --> 00:02:17,537
+training of the whole system so that each 
+modality can improve the earlier layers 
+
+30
+00:02:17,537 --> 00:02:21,826
+of the other modality. 
+Instead of using a deep belief net, which 
+
+31
+00:02:21,826 --> 00:02:27,068
+is what you might expect, they used a 
+deep Bolton machine, where the symmetric 
+
+32
+00:02:27,068 --> 00:02:32,727
+connections bring in all pairs of layers. 
+The further joint training of the whole 
+
+33
+00:02:32,727 --> 00:02:37,178
+deep Boltzmann machine is then what 
+allows each modality to change the 
+
+34
+00:02:37,178 --> 00:02:41,560
+feature detectors in the early layers of 
+the other modality. 
+
+35
+00:02:41,560 --> 00:02:44,934
+That's the reason they used a deep 
+Boltzmann machine. 
+
+36
+00:02:44,934 --> 00:02:49,965
+They could've also used a deep belief 
+net, and done generative fine tuning with 
+
+37
+00:02:49,965 --> 00:02:53,912
+contrastive wake sleep. 
+But the fine tuning algorithm for deep 
+
+38
+00:02:53,912 --> 00:02:59,268
+Boltzmann machines may well work better. 
+This leaves the question of how they 
+
+39
+00:02:59,268 --> 00:03:02,392
+pretrained the hidden layers of a deep 
+Boltzmann machine. 
+
+40
+00:03:02,392 --> 00:03:06,393
+because what we've seen so far in the 
+course is that if you train a stack of 
+
+41
+00:03:06,393 --> 00:03:10,449
+restricted Boltzmann machines and you 
+combine them together into a single 
+
+42
+00:03:10,449 --> 00:03:15,520
+composite model what you get is a deep 
+belief net not a deep Boltzmann machine. 
+
+43
+00:03:15,520 --> 00:03:20,918
+So I'm now going to explain how, despite 
+what I said earlier in the course, you 
+
+44
+00:03:20,918 --> 00:03:25,601
+can actually pre-trail a stack of 
+restrictive Boltzmann machines in such a 
+
+45
+00:03:25,601 --> 00:03:29,828
+way that you can then combine them to 
+make a deep Boltzmann machine. 
+
+46
+00:03:29,828 --> 00:03:35,162
+The trick is that the top and the bottom 
+restrictive bowser machines in the stack 
+
+47
+00:03:35,162 --> 00:03:40,500
+have to trained with weights that it 
+twices begin one directions the other. 
+
+48
+00:03:40,500 --> 00:03:44,881
+So, the bottom Boltzmann machine, that 
+looks at the visible units is trained 
+
+49
+00:03:44,881 --> 00:03:48,863
+with the bottom up weights being twice as 
+big as the top down weights. 
+
+50
+00:03:48,863 --> 00:03:51,367
+Apart from that, the weights are 
+symmetrical. 
+
+51
+00:03:51,367 --> 00:03:54,180
+So, this is what I call scale 
+symmetrical. 
+
+52
+00:03:54,180 --> 00:03:57,487
+But the bottom up weights are always 
+twice as big as their top down 
+
+53
+00:03:57,487 --> 00:04:01,816
+counterparts. 
+This can be justified, and I'll show you 
+
+54
+00:04:01,816 --> 00:04:07,122
+the justification in a little while. 
+The next restrictive Boltzmann machine in 
+
+55
+00:04:07,122 --> 00:04:10,161
+the stack, is trained with symmetrical 
+weights. 
+
+56
+00:04:10,161 --> 00:04:14,851
+I've called them two W, here rather then 
+W for reasons you'll see later. 
+
+57
+00:04:14,851 --> 00:04:20,136
+We can keep training with restrictive 
+bowsler machines like that with genuinely 
+
+58
+00:04:20,136 --> 00:04:23,967
+symmetrical weights. 
+But then the top one in the stack has 
+
+59
+00:04:23,967 --> 00:04:28,790
+be-trained with the bottom up weights 
+being half of the top down weights. 
+
+60
+00:04:28,790 --> 00:04:33,554
+So again, these are scale symmetric 
+weights, but now, the top down weights 
+
+61
+00:04:33,554 --> 00:04:36,333
+are twice as big as the bottom up 
+weights. 
+
+62
+00:04:36,333 --> 00:04:41,561
+That's the opposite of what we had when 
+we trained the first restricted Bolton 
+
+63
+00:04:41,561 --> 00:04:45,135
+machine in the stack. 
+After having trained these three 
+
+64
+00:04:45,135 --> 00:04:50,296
+restricted Bolton machines, we can then 
+combine them to make a composite model, 
+
+65
+00:04:50,296 --> 00:04:55,656
+and the composite model looks like this. 
+For the restricted Bolton machine in the 
+
+66
+00:04:55,656 --> 00:05:00,620
+middle, we simply halved its weights. 
+That's why they were 2W2 to begin with. 
+
+67
+00:05:01,660 --> 00:05:05,773
+For the one at the bottom, we've halved 
+the up-going weights but kept the 
+
+68
+00:05:05,773 --> 00:05:09,606
+down-going weights the same. 
+And for the one at the top we've halved 
+
+69
+00:05:09,606 --> 00:05:13,520
+the down-going weights and kept the 
+up-going weights the same. 
+
+70
+00:05:13,520 --> 00:05:18,746
+Now the question is: Why do we do this 
+funny business of halving the whites? 
+
+71
+00:05:18,746 --> 00:05:24,181
+The explanation is quite complicated but 
+I'll give you a rough idea of what's 
+
+72
+00:05:24,181 --> 00:05:27,180
+going on. 
+If you look at the layer H1. 
+
+73
+00:05:27,180 --> 00:05:32,545
+We have two different ways of inferring 
+the states of the units in h1, in the 
+
+74
+00:05:32,545 --> 00:05:36,580
+stack of restricted bolts and machines on 
+the left. 
+
+75
+00:05:36,580 --> 00:05:42,125
+We can either infer the states of H1 
+bottom up from V or we can infer the 
+
+76
+00:05:42,125 --> 00:05:47,595
+states of H1 top down from H2. 
+When we combine these Boltzmann machines 
+
+77
+00:05:47,595 --> 00:05:53,665
+together, what we're going to do is we're 
+going to an average of those two ways of 
+
+78
+00:05:53,665 --> 00:05:58,434
+inferring H1. 
+And to take a geometric average, what we 
+
+79
+00:05:58,434 --> 00:06:04,212
+need to do, is halve the weights. 
+So we're going to use half of what the 
+
+80
+00:06:04,212 --> 00:06:07,711
+bottom up model says. 
+So that's half of 2W1. 
+
+81
+00:06:07,711 --> 00:06:12,593
+And we're going to use half of what the 
+top down model says. 
+
+82
+00:06:12,593 --> 00:06:16,689
+That's half of 2W2. 
+And if you look at the deep Boltzmann 
+
+83
+00:06:16,689 --> 00:06:20,988
+machine on the right, that's exactly 
+what's being used to infer the state of 
+
+84
+00:06:20,988 --> 00:06:23,137
+H1. 
+In other words, if you're given the 
+
+85
+00:06:23,137 --> 00:06:27,606
+states in H2, and you're given the states 
+in V, those are the weights you'll use 
+
+86
+00:06:27,606 --> 00:06:32,832
+for inferring the states of H1. 
+The reason we need to halve the weights 
+
+87
+00:06:32,832 --> 00:06:38,439
+is so that we don't double count. 
+You see, in the Boltzmann machine on the 
+
+88
+00:06:38,439 --> 00:06:41,882
+right. 
+The state of H2 already depends on V. 
+
+89
+00:06:41,882 --> 00:06:47,074
+At least it does after we've done some 
+settling down in the Boltzmann Machine. 
+
+90
+00:06:47,074 --> 00:06:51,999
+So if we were to use the bottom up input 
+coming from the first restricted 
+
+91
+00:06:51,999 --> 00:06:56,858
+Boltzmann Machine in the stack. 
+And we use the top down input coming from 
+
+92
+00:06:56,858 --> 00:07:01,651
+the second Boltzmann Machine in the 
+stack, we'd be counting the evidence 
+
+93
+00:07:01,651 --> 00:07:06,909
+twice.'Cause we'd be inferring H1 from V. 
+And we'd also be inferring it from H2, 
+
+94
+00:07:06,909 --> 00:07:10,834
+which, itself, depends on V. 
+In order not to double count the 
+
+95
+00:07:10,834 --> 00:07:15,761
+evidence, we have to halve the weights. 
+That's a very high level and perhaps not 
+
+96
+00:07:15,761 --> 00:07:19,483
+totally clear description of why we have 
+to half the weights. 
+
+97
+00:07:19,483 --> 00:07:24,400
+If you want to know the mathematical 
+details, you can go and read the paper. 
+
+98
+00:07:24,400 --> 00:07:28,359
+But that's what's going on. 
+And that's why we need to halve the 
+
+99
+00:07:28,359 --> 00:07:31,313
+weights. 
+So that the intermediate layers can be 
+
+100
+00:07:31,313 --> 00:07:36,152
+doing geometric averaging of the two 
+different models of that layer, from the 
+
+101
+00:07:36,152 --> 00:07:40,300
+two different restricted Boltzmann 
+machines in the original stack. 

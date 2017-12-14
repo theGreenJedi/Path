@@ -1,0 +1,873 @@
+1
+00:00:00,530 --> 00:00:06,370
+In this video, we're going to
+look at various ways to avoid
+
+2
+00:00:06,370 --> 00:00:10,810
+having to use 100,000 different
+output units in the softmax
+
+3
+00:00:10,810 --> 00:00:15,170
+if we want to get probability
+from 100,000 different words.
+
+4
+00:00:15,170 --> 00:00:21,270
+At the end of the video,
+I'll show an example of the words or
+
+5
+00:00:21,270 --> 00:00:24,550
+the word representations that it
+learned by a particular method.
+
+6
+00:00:26,800 --> 00:00:28,790
+To see what these
+representations look like,
+
+7
+00:00:29,980 --> 00:00:34,280
+what we do is we embed them
+in a two dimensional space.
+
+8
+00:00:34,280 --> 00:00:38,390
+And then, we can see which words have
+extremely similar representations.
+
+9
+00:00:38,390 --> 00:00:43,730
+That gives us a feel for what the neural
+network has been able to learn just in
+
+10
+00:00:43,730 --> 00:00:49,100
+trying to predict the next word or perhaps
+the middle word of a stream of words.
+
+11
+00:00:50,340 --> 00:00:51,762
+So one way to avoid,
+
+12
+00:00:51,762 --> 00:00:57,555
+having a 100,000 different output
+units is to use a serial architecture.
+
+13
+00:00:59,972 --> 00:01:05,029
+We put in the context words as before,
+but now, we also put in a candidate for
+
+14
+00:01:05,029 --> 00:01:09,300
+the next word in the same
+way as the context words.
+
+15
+00:01:09,300 --> 00:01:14,260
+Then we go forwards through the net and
+what we output is a score for
+
+16
+00:01:14,260 --> 00:01:17,179
+how good that candidate
+word is in that context.
+
+17
+00:01:18,650 --> 00:01:23,270
+Of course, we have to run force
+through this net many, many times but
+
+18
+00:01:23,270 --> 00:01:25,640
+most of the work only
+needs to be done once.
+
+19
+00:01:26,820 --> 00:01:30,490
+So, the input from
+the context to that big,
+
+20
+00:01:30,490 --> 00:01:35,500
+big hidden layer, are the same for
+every different candidate word.
+
+21
+00:01:35,500 --> 00:01:39,300
+The only bit we need to run for
+each candidate word
+
+22
+00:01:39,300 --> 00:01:44,270
+is the inputs coming from the candidate
+word and the final output to the score.
+
+23
+00:01:45,600 --> 00:01:47,570
+And of course,
+that doesn't have many weights met.
+
+24
+00:01:51,250 --> 00:01:56,370
+So, we try all the candidate
+words one at a time and
+
+25
+00:01:56,370 --> 00:01:58,826
+by putting in the word as
+a candidate at the bottom,
+
+26
+00:01:58,826 --> 00:02:03,990
+we're able to use the learned feature
+
+27
+00:02:03,990 --> 00:02:09,570
+vector for that candidate word that we
+learned when it was a context word.
+
+28
+00:02:09,570 --> 00:02:14,810
+So, we can have the same representation of
+the word when it's part of the context and
+
+29
+00:02:14,810 --> 00:02:17,250
+when it's a candidate for the next
+word that we're trying to predict.
+
+30
+00:02:18,580 --> 00:02:22,330
+Learning in the serial architecture
+works in the following way.
+
+31
+00:02:22,330 --> 00:02:27,180
+We first compute the score for
+each possible candidate word and
+
+32
+00:02:27,180 --> 00:02:30,580
+then we put all those scores
+which we computed sequentially
+
+33
+00:02:30,580 --> 00:02:32,770
+into a big softmax to
+get word probabilities.
+
+34
+00:02:34,730 --> 00:02:37,200
+Now, the difference between
+the word probabilities and
+
+35
+00:02:37,200 --> 00:02:41,400
+their target probabilities, which is
+normally one for the correct word and
+
+36
+00:02:41,400 --> 00:02:46,780
+zero for everything else, gives us
+the cross-entropy error derivatives.
+
+37
+00:02:46,780 --> 00:02:51,100
+And, we use those derivatives to change
+the weights in such a way that we
+
+38
+00:02:51,100 --> 00:02:54,850
+raise the score for the correct
+candidate and we lower the scores for
+
+39
+00:02:54,850 --> 00:02:56,100
+all of its high scoring rivals.
+
+40
+00:02:57,330 --> 00:03:00,920
+We can save a lot of time in this
+architecture if instead of considering
+
+41
+00:03:00,920 --> 00:03:04,730
+all possible candidate words,
+we only consider a small set.
+
+42
+00:03:04,730 --> 00:03:07,330
+Perhaps candidate words suggested
+by some other predictor.
+
+43
+00:03:08,590 --> 00:03:12,789
+For example, we could use the neural net
+to revise the probabilities of the words
+
+44
+00:03:12,789 --> 00:03:15,024
+that the trigram model thinks are likely.
+
+45
+00:03:18,114 --> 00:03:21,650
+A different way to avoid
+a great big softmax is
+
+46
+00:03:21,650 --> 00:03:24,450
+to structure the words into a tree.
+
+47
+00:03:25,790 --> 00:03:30,420
+So we arrange all of the words in a binary
+tree with the words as its leaves.
+
+48
+00:03:32,580 --> 00:03:37,620
+We then use the context of previous
+words to generate a prediction vector v.
+
+49
+00:03:40,020 --> 00:03:43,804
+We compare that prediction vector
+with a vector that we learn for
+
+50
+00:03:43,804 --> 00:03:45,143
+each node of the tree.
+
+51
+00:03:48,088 --> 00:03:52,723
+The way we do the comparison is by taking
+a scalar product of the prediction vector
+
+52
+00:03:52,723 --> 00:03:56,130
+and the vector that we've learned for
+the node of tree, and
+
+53
+00:03:56,130 --> 00:03:59,700
+then we apply the logistic
+function to that scale of product.
+
+54
+00:04:00,720 --> 00:04:05,440
+And that will give us the probability
+of taking the right branch in the tree.
+
+55
+00:04:05,440 --> 00:04:06,970
+And one minus that,
+
+56
+00:04:06,970 --> 00:04:09,320
+gives us the probability of taking
+the left branch in the tree.
+
+57
+00:04:11,050 --> 00:04:12,420
+So the tree looks like this.
+
+58
+00:04:13,680 --> 00:04:17,351
+And if that sigma is
+the logistic function,
+
+59
+00:04:17,351 --> 00:04:23,505
+you can see at the top of the tree that
+we take the logistic of the prediction
+
+60
+00:04:23,505 --> 00:04:28,384
+vector times the vector that
+we learned ui at the top node.
+
+61
+00:04:28,384 --> 00:04:31,531
+And that tells us the probability
+taking the right branch.
+
+62
+00:04:31,531 --> 00:04:35,535
+And conversely we take the left
+branch which is 1- at probability.
+
+63
+00:04:35,535 --> 00:04:40,240
+And so on, all the way down
+the tree to the word we want.
+
+64
+00:04:40,240 --> 00:04:45,020
+So when we're learning, we use our
+context to get a prediction vector,
+
+65
+00:04:45,020 --> 00:04:48,100
+we use quite a simple neural network for
+this work.
+
+66
+00:04:49,260 --> 00:04:54,470
+Where we take the feature vector for
+each word, and
+
+67
+00:04:54,470 --> 00:04:59,320
+those feature vectors directly contribute
+evidence in favor of a prediction vector,
+
+68
+00:04:59,320 --> 00:05:03,650
+we simply add up the evidence
+contributed by those feature vectors and
+
+69
+00:05:03,650 --> 00:05:05,400
+that gives us the prediction vector.
+
+70
+00:05:05,400 --> 00:05:12,230
+That prediction vector then gets
+compared with the vectors that
+
+71
+00:05:12,230 --> 00:05:17,410
+have been learned for all the nodes in the
+tree on the path to the correct next word.
+
+72
+00:05:18,720 --> 00:05:22,270
+So, that would be nodes i,
+j, and m in this tree.
+
+73
+00:05:22,270 --> 00:05:27,200
+That red path shows you to the path to
+the word that actually occurred next, and
+
+74
+00:05:27,200 --> 00:05:29,970
+those are the only nodes we need
+to consider during learning.
+
+75
+00:05:31,480 --> 00:05:32,540
+What we know is that,
+
+76
+00:05:33,630 --> 00:05:37,420
+we'd like the probability of predicting
+that word to be as high as possible.
+
+77
+00:05:38,538 --> 00:05:42,442
+And so, we'd like the probability taking
+that path to be as high as possible.
+
+78
+00:05:42,442 --> 00:05:45,450
+So, we'd like the product
+of the probabilities
+
+79
+00:05:45,450 --> 00:05:47,980
+on the individual elements of
+the path based high as possible.
+
+80
+00:05:49,050 --> 00:05:53,140
+And that means, we'd like some of
+the lower probabilities to be high.
+
+81
+00:05:53,140 --> 00:05:56,230
+So, we benefit from a nice
+decomposition here.
+
+82
+00:05:57,530 --> 00:06:02,610
+That, when we try maximize the probability
+of picking the correct target word,
+
+83
+00:06:02,610 --> 00:06:07,380
+we're really trying to maximize
+the sum of the log probabilities
+
+84
+00:06:07,380 --> 00:06:11,250
+of taking all the branches on the path
+that leads to that target word.
+
+85
+00:06:11,250 --> 00:06:12,150
+So during learning,
+
+86
+00:06:12,150 --> 00:06:17,750
+we only need to consider the nodes on
+that correct path, and that's a huge win.
+
+87
+00:06:17,750 --> 00:06:21,720
+That's exponentially fewer nodes
+in considering all of the nodes.
+
+88
+00:06:21,720 --> 00:06:23,720
+So, it's log to the base
+2 of N instead of N.
+
+89
+00:06:25,010 --> 00:06:26,030
+For each of those nodes,
+
+90
+00:06:26,030 --> 00:06:29,900
+we know the correct branch because
+we know what the next word is.
+
+91
+00:06:29,900 --> 00:06:32,900
+We know the current probability
+of taking that branch
+
+92
+00:06:32,900 --> 00:06:37,320
+by comparing the prediction vector
+with the learn vector of the node.
+
+93
+00:06:37,320 --> 00:06:42,020
+And so, we can get derivatives for
+learning both the prediction vector v and
+
+94
+00:06:42,020 --> 00:06:44,870
+the learn vector of that node, u.
+
+95
+00:06:44,870 --> 00:06:47,870
+This makes the training
+hundreds of times faster.
+
+96
+00:06:47,870 --> 00:06:49,820
+Unfortunately, it's
+still slow at test time.
+
+97
+00:06:50,840 --> 00:06:54,268
+At test time, you need to know
+the probabilities of many words to help
+
+98
+00:06:54,268 --> 00:06:57,600
+the speech recognizer, and so
+you can't just consider one path.
+
+99
+00:06:58,870 --> 00:07:02,960
+There's a much simpler way to
+learn feature vectors for words.
+
+100
+00:07:02,960 --> 00:07:05,200
+This is what by Collobert and Weston.
+
+101
+00:07:05,200 --> 00:07:07,780
+And what they did was,
+learned feature vectors for words and
+
+102
+00:07:07,780 --> 00:07:10,990
+then showed that the feature vectors
+they learned were very good for
+
+103
+00:07:10,990 --> 00:07:14,330
+a whole bunch of different natural
+language processing tasks.
+
+104
+00:07:14,330 --> 00:07:16,730
+They're not trying to
+predict the next word,
+
+105
+00:07:16,730 --> 00:07:19,790
+they're just trying to get good
+feature vectors for words.
+
+106
+00:07:19,790 --> 00:07:24,890
+And so, they used both the past
+context and the future context.
+
+107
+00:07:24,890 --> 00:07:30,180
+So, they look at a window of 11 words,
+5 in the past and 5 in the future,
+
+108
+00:07:30,180 --> 00:07:34,360
+and in the middle of that window,
+they put either the correct word,
+
+109
+00:07:34,360 --> 00:07:38,770
+the one that actually occurred
+in the text, or a random word.
+
+110
+00:07:38,770 --> 00:07:42,910
+And then, we train the neural
+net to produce an output
+
+111
+00:07:42,910 --> 00:07:48,240
+that's high if it's a correct word,
+and low if it's a random word.
+
+112
+00:07:48,240 --> 00:07:50,680
+The neural network's
+the same way as before.
+
+113
+00:07:50,680 --> 00:07:55,290
+We map the individual
+words to feature vectors,
+
+114
+00:07:55,290 --> 00:07:59,850
+these word codes, and then we use
+the feature vectors in the neural net,
+
+115
+00:07:59,850 --> 00:08:03,590
+possibly with more layers
+than neural net to try and
+
+116
+00:08:03,590 --> 00:08:07,320
+predict whether this is the right or
+wrong word for that context.
+
+117
+00:08:07,320 --> 00:08:09,970
+So, what they're really doing is
+judging whether the middle word
+
+118
+00:08:11,150 --> 00:08:15,260
+is an appropriate word for the five
+word context on either side of it.
+
+119
+00:08:15,260 --> 00:08:20,380
+They train this up on about 600
+million examples from Wikipedia and
+
+120
+00:08:20,380 --> 00:08:23,800
+they showed that the vectors
+they get are good for
+
+121
+00:08:23,800 --> 00:08:28,000
+a variety of different natural
+language processing tasks.
+
+122
+00:08:28,000 --> 00:08:33,410
+One way of getting a sense of
+the vectors that they learned per words
+
+123
+00:08:33,410 --> 00:08:37,210
+is to display the vectors
+into a two dimensional map.
+
+124
+00:08:37,210 --> 00:08:40,780
+What we want to do is,
+layout the word vectors
+
+125
+00:08:40,780 --> 00:08:43,780
+in such a way that very similar
+vectors are very close to one another.
+
+126
+00:08:44,900 --> 00:08:46,850
+So then you'll discover,
+
+127
+00:08:46,850 --> 00:08:50,780
+what words the neural network
+thinks have similar meanings?
+
+128
+00:08:52,080 --> 00:08:55,330
+We're going to use a multi-scale
+method called t-sne.
+
+129
+00:08:55,330 --> 00:08:58,230
+You can look up t-sne on Google and
+discover how it works if you want.
+
+130
+00:08:59,670 --> 00:09:05,260
+And t-sne is able, in addition to putting
+very similar words close to each other,
+
+131
+00:09:05,260 --> 00:09:08,270
+it's also able to what similar
+clusters close to each other so
+
+132
+00:09:08,270 --> 00:09:11,160
+it gives you structure in
+many different scales.
+
+133
+00:09:11,160 --> 00:09:12,570
+What we see is that,
+
+134
+00:09:12,570 --> 00:09:17,240
+the learned feature vectors capture
+lots of subtle semantic distinctions.
+
+135
+00:09:17,240 --> 00:09:21,000
+And they do this just by looking at
+strings of words from Wikipedia.
+
+136
+00:09:21,000 --> 00:09:24,120
+Nobody tells some anything other than
+the fact that these 11 words occurred
+
+137
+00:09:24,120 --> 00:09:25,640
+in a string.
+
+138
+00:09:25,640 --> 00:09:26,800
+There is no extra supervision.
+
+139
+00:09:28,010 --> 00:09:32,050
+What's remarkable is that contextual
+information, the fact of these
+
+140
+00:09:32,050 --> 00:09:36,360
+words occurred together, tells you
+an awful lot about what the word means.
+
+141
+00:09:37,720 --> 00:09:41,340
+In fact, some people think that's the main
+way we learn the meaning of words.
+
+142
+00:09:41,340 --> 00:09:42,130
+So here's an example.
+
+143
+00:09:43,280 --> 00:09:47,480
+If I give a sentence with a word
+you've never heard before,
+
+144
+00:09:47,480 --> 00:09:50,080
+like she scrommed him with the frying pan,
+
+145
+00:09:50,080 --> 00:09:54,090
+from that one sentence you already have
+a pretty good idea of what scrommed means.
+
+146
+00:09:55,730 --> 00:10:00,720
+It's conceivable that she was trying to
+impress him with her cooking skills, and
+
+147
+00:10:00,720 --> 00:10:02,270
+so scrommed means impressed or
+
+148
+00:10:02,270 --> 00:10:05,390
+something like that but
+probably it means something like walloped.
+
+149
+00:10:06,830 --> 00:10:11,820
+So, here's part of a two dimensional
+map in which we laid out the two and
+
+150
+00:10:11,820 --> 00:10:13,930
+a half thousand commonest words.
+
+151
+00:10:15,090 --> 00:10:17,550
+And you'll see this part of
+the map is all about games.
+
+152
+00:10:19,320 --> 00:10:23,900
+Not only that,
+it's got similar kinds of words together.
+
+153
+00:10:23,900 --> 00:10:26,170
+So, matches and games and
+races are together.
+
+154
+00:10:27,690 --> 00:10:30,010
+It's got players and
+teams and clubs together.
+
+155
+00:10:31,500 --> 00:10:35,180
+It's got the things you win at games
+together, like cups and bowls, and medals,
+
+156
+00:10:35,180 --> 00:10:36,765
+and prizes.
+
+157
+00:10:36,765 --> 00:10:38,590
+It's got different kinds
+of games together.
+
+158
+00:10:39,790 --> 00:10:44,870
+It's done a very good job of taking
+these words to do with games and
+
+159
+00:10:44,870 --> 00:10:47,050
+finding out which ones
+are very similar in meaning.
+
+160
+00:10:48,520 --> 00:10:52,795
+And because it's using very similar
+feature vectors for those, it can in any
+
+161
+00:10:52,795 --> 00:10:57,135
+natural language processing task, say
+that if one word was a good word for that
+
+162
+00:10:57,135 --> 00:11:01,570
+context, the other words probably also
+are pretty good word for that context.
+
+163
+00:11:02,760 --> 00:11:04,440
+Here's another part of the map.
+
+164
+00:11:04,440 --> 00:11:07,200
+This part of the map is
+entirely about places.
+
+165
+00:11:07,200 --> 00:11:11,470
+At the top, it has US states,
+under that, it has some cities, mainly
+
+166
+00:11:11,470 --> 00:11:17,070
+ones in North America, and under that
+other cities, then, it has some countries.
+
+167
+00:11:17,070 --> 00:11:21,640
+So, if you look at the cities,
+this one is clearly Cambridge and
+
+168
+00:11:21,640 --> 00:11:25,250
+underneath Cambridge, there's something
+else that's very similar to Cambridge.
+
+169
+00:11:26,720 --> 00:11:32,710
+Here we see that, it's put Toronto
+with Detroit and Ontario, and Boston.
+
+170
+00:11:32,710 --> 00:11:37,558
+Toronto is an English-speaking Canada and
+it's put Quebec which is in
+
+171
+00:11:37,558 --> 00:11:40,966
+French-speaking Canada with Berlin and
+Paris.
+
+172
+00:11:40,966 --> 00:11:42,461
+If we look at the bottom,
+
+173
+00:11:42,461 --> 00:11:46,037
+we can see that it thinks Iraq
+is pretty similar to Vietnam.
+
+174
+00:11:48,445 --> 00:11:54,240
+Here's another example,
+if you look here, these are adverbs.
+
+175
+00:11:54,240 --> 00:11:57,100
+And, it's understood that likely and
+probably,
+
+176
+00:11:57,100 --> 00:12:00,040
+and possibly, and perhaps,
+all mean very similar things.
+
+177
+00:12:01,750 --> 00:12:05,270
+It's also understood that entirely,
+completely, fully and
+
+178
+00:12:05,270 --> 00:12:06,840
+greatly have very similar meanings.
+
+179
+00:12:08,090 --> 00:12:12,050
+And, it's understood various other kind
+of similarity, for example, which and
+
+180
+00:12:12,050 --> 00:12:15,830
+that, or whom and what, or
+how and whether and why.

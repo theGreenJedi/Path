@@ -1,0 +1,57 @@
+En este video voy a explicar cómo es que una máquina de Boltzman modela un conjunto de vectores de datos binarios.
+Voy a comenzar por explicar por qué querríamos modelar un conjunto de vectores de datos binarios y
+qué podríamos hacer con tal modelo si lo tuviéramos.
+Luego voy a mostrar cómo las probabilidades asignadas a vectores de datos binarios
+quedan determinadas por los pesos en una máquina de Boltzmann.
+Las redes de Hopfield estocásticas con unidades ocultas, también conocidas como máquinas de Boltzmann,
+son buenas modelando datos binarios. Dado un conjunto de entrenamiento de vectores binarios, pueden utilizar a las unidades ocultas para ajustar un modelo
+que asigna una probabilidad a cada vector binario posible.
+Hay varias razones, por las cuales querrías poder hacer eso.
+Si, por ejemplo, tuvieras varias distribuciones diferentes de vectores binarios,
+podrías querer tomar un vector binario nuevo determinar de qué distribución vino.
+Puedes tener diferentes tipos de documentos y representar cada documento con un cierto número de características binarias cada una de las cuales indica si hay más de cero ocurrencias de una palabra en particular en ese documento.
+Para diferentes tipos de documento, esperarías conteos distintos para las diferentes palabras,
+tal vez encontrarías correlaciones diferentes entre las palabras.
+Entonces podrías utilizar un conjunto de unidades ocultas para modelar la distribución para cada documento.
+Así podrías elegir el documento más probable viendo...
+Y luego podrías asignar un documento de prueba a la clase apropiada, viendo qué clase de documento es más probable que hubiera producido ese vector binario.
+También podrías utilizar máquinas de Boltzmann para monitorear sistemas complejos para detectar comportamientos inusuales. Supón por ejemplo que tienes una planta de energía nuclear, y todos los marcadores fueran binarios.
+Entonces tienes un montón de números binarios que te dicen algo sobre el estado de la planta de energía. Lo que te gustaría hacer, es notar que se encuentra en un estado inusual. Un estado que no se parece a estados que hayas visto antes. Y no quieres utilizar aprendizaje supervisado para esto. Porque realmente no quieres tener ningún ejemplar de estados que provoquen que explote.
+Más bien querrías detectar que se dirige a uno de estos estados sin haber visto uno de ellos nunca antes. Y podrías hacer eso construyendo un modelo de su estado normal y notando que este estado es distinto de los estados normales.
+Si tienes modelos de varias distribuciones, puedes calcular la distribución de probabilidad a posteriori de que una distribución en particular produjo los datos observados utilizando el teorema de Bayes. Entonces, dados los datos observados, la probabilidad de que hayan venido del Modelo_i, suponiendo que provinieron de alguno de tus modelos, es la probabilidad de que el Modelo_i hubiera producido esos datos, dividida entre la cantidad equivalente para todos los modelos. Ahora quiero hablar sobre dos formas de producir modelos de datos, en particular vectores binarios.
+La forma más natural de pensar acerca de generar un vector de datos binarios consiste en generar primero los estados de algunas variables latentes.
+Y luego utilizar las variables latentes para generar el vector binario.
+Entonces, en un modelo causal, usamos dos pasos secuenciales.
+Estas son las variables latentes o unidades ocultas.  Primero elegimos los estados de las variables latentes a partir de sus distribuciones a priori.
+A menudo en un modelo causal éstas serán independientes a priori.
+Entonces la probabilidad de que se activen, si fueran variables latentes binarias, sólo dependería de algún sesgo que tenga cada una de ellas. Entonces, una vez que hayamos elegido el estado para ellas, los usaremos para generar los estados de las unidades visibles,
+utilizando las conexiones pesadas en este modelo.
+Entonces este es un tipo de red neuronal y modelo generativo, causal.
+Está utilizando unidades logísticas, sesgos para las unidades ocultas y pesos en las conexiones entre unidades ocultas y visibles para asignar una probabilidad a cada posible vector visible. La probabilidad de generar un vector v en particular es justo la suma sobre todos los estados ocultos posibles, de la probabilidad de generar ese estado oculto por la probabilidad de generar v dado que ya se generó ese estado oculto. Este fue un modelo causal. El análisis de factores, por ejemplo, es un modelo causal que utiliza variables continuas. Y es probablemente la forma más natural para pensar acerca de la generación de datos. De hecho, cuando algunas personas hablan de un "modelo generativo", se refieren a un modelo causal como éste.
+Pero, hay un tipo de modelo completamente diferente. Una máquina de Boltzmann es un modelo basado en energía y, en este tipo de modelo, no se generan los datos causalmente. No es modelos generativo causal.
+En vez de ello, todo está definido en términos de las energías de configuraciones conjuntas de unidades visibles y ocultas. Hay dos formas de relacionar la energía de una configuración conjunta con su probabilidad. Simplemente se puede definir a su probabilidad como la probabilidad conjunta de una configuración de las variables visibles y ocultas, que es proporcional a 'e' elevada al negativo de la energía de esa configuración conjunta. O se puede definir procedimentalmente, diciendo que vamos a definir a la probabilidad como la probabilidad de encontrar a la red en ese estado, después de haber actualizado a todas las unidades estocásticas tantas veces como fuera necesario para alcanzar el equilibrio térmico.
+Las buenas noticias son que estas dos definiciones están de acuerdo.
+La energía de una configuración conjunta de las unidades visibles y ocultas contiene cinco términos. He puesto el negativo de la energía para ahorrarme escribir muchos signos menos. Entonces, el negativo de la energía de la configuración conjunta v,h esto es, con el vector v siendo las unidades visibles y h, las ocultas, tiene términos de sesgo donde v_i es el estado binario de la i-ésima unidad en el vector v, y b_k es el sesgo de la k-ésima unidad, en este caso, una unidad oculta. Estos son los dos primeros términos.
+Luego están las interacciones visible-visible y para evitar contarlas dos veces, podemos decir que vamos a contar dentro de las sumas a las i's y las j's asegurándonos de que i siempre sea menor que j.
+Esto impedirá contar la interacción de algo consigo mismo y también impedirá contar los pares dos veces, de modo que no tengamos que anteponer un 'un medio'.
+Luego vienen las interacciones visible-oculta donde w_ik es un peso en un interacción visible-oculta.
+Y luego están las interacciones oculta-oculta.
+De modo que la forma en que utilizamos la energía para definir probabilidades es: la probabilidad conjunta sobre una configuración v,h es proporcional a e a la -E(v,h).
+Para convertirlo en una igualdad necesitamos normalizar el lado derecho para todas las configuraciones posibles sobre las unidades visibles y ocultas y eso es el divisor de ahí. A menudo se le llama la "función de partición". Así es como la llaman los físicos.
+Nota que tiene un número exponencial de términos.
+Para obtener la probabilidad de una configuración de las unidades visibles únicamente, se tiene que sumar sobre todas las posibles configuraciones de las unidades ocultas.
+Entonces, p de v es la suma sobre todas las h's posibles de e a la menos la energía que obtienes con esa h, normalizada por la función de partición.
+Quiero darte un ejemplo de cómo calculamos las probabilidades de los diferentes vectores visibles, porque eso te dará una buena idea de lo que involucra.
+Está muy bien ver las ecuaciones, pero me doy cuenta de que las entiendo mejor cuando he realizado los cálculos.
+Así que tomemos una red con dos unidades ocultas y dos visibles. E ignoraremos los sesgos, así que sólo tendremos tres pesos aquí.
+Para mantener las cosas simples, no voy a conectar las unidades visibles entre sí.
+Así que lo primero que hacemos es escribir todos los estados posibles de las unidades visibles.
+Necesito ponerlos de colores diferentes y voy a escribir cada estado cuatro veces, porque para cada estado de las unidades visibles, hay cuatro posibles estados de las unidades ocultas, que podrían ir con ellos.
+Esto nos da dieciséis  configuraciones conjuntas posibles.
+Ahora, para cada una de esas configuraciones conjuntas, vamos a calcular su energía negativa, menos E. Así que si miras la primera línea, donde todas las unidades están encendidas, el negativo de la energía será más dos, menos uno, más uno es más dos. Y hacemos esto para todas las dieciséis configuraciones. Entonces tomamos los negativos de las energías y los exponenciamos. Esto nos dará probabilidades no normalizadas. Así que estas son las probabilidades no normalizadas de las configuraciones. Sus probabilidades son proporcionales a esto. Si las sumamos todas, para obtener 39.7 y luego dividimos todo entre 39.7, obtenemos las probabilidades de las configuraciones conjuntas.
+Aquí las tenemos. Ahora, si queremos la probabilidad de una configuración de las unidades visibles en particular, tenemos que sumar sobre todas las configuraciones de las unidades ocultas, que podrían ir con ella. Así que sumamos los número en cada bloque. Y ahora hemos calculado la probabilidad de cada vector visible posible en la máquina de Boltzmann que tiene estos tres pesos. Ahora preguntemos, cómo obtenemos una muestra del modelo, cuando la red es más grande que ésta. Obviamente, en la red que acabamos de calcular, podemos obtener la probabilidad de todo porque es pequeña. Pero cuando la red es grande, no podemos hacer estos cálculos exponencialmente grandes. Así que, si hay más que unas pocas unidades ocultas, no podemos calcular la función de partición, hay demasiados términos en ella. Pero, podemos utilizar Cadenas de Markov Monte Carlo para obtener muestras del modelo, iniciando desde una configuración global aleatoria,
+luego escogiendo unidades al azar y actualizándolas estocásticamente, con base en sus diferencias de energía. Estas diferencias de energía, estando determinadas por los estados de todas las demás unidades en la red. Si seguimos haciendo esto, hasta que la cadena de Markov alcance su distribución estacionaria,
+obtendremos una muestra del modelo. Y la probabilidad de esa muestra está relacionada con su energía mediante la distribución de Boltzmann.  Esto es, la probabilidad de la muestra es proporcional a e a la menos energía.
+¿Qué hay acerca de obtener una muestra de la distribución a posteriori, sobre las configuraciones de las unidades ocultas, dado un vector de datos? Resulta que vamos a necesitar eso para el aprendizaje. El número de configuraciones ocultas posibles es exponencial otra vez. Así que, de nuevo utilizamos Cadenas de Markov Monte Carlo.
+Y es justo lo mismo que obtener una muestra del modelo, excepto que mantenemos las unidades visibles fijas con los valores del vector de datos en el que estamos interesados.
+Así que sólo actualizamos las unidades ocultas. La razón por la cual necesitamos obtener muestras de la distribución a posteriori, dado un vector de datos, es que podríamos estar interesados en conocer una buena explicación para los datos observados. Y podríamos querer basar nuestras acciones en esa buena explicación. Pero también lo vamos a necesitar para el aprendizaje.

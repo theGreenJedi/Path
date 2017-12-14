@@ -1,0 +1,671 @@
+1
+00:00:00,000 --> 00:00:06,400
+En este video voy a explicar cómo es que una máquina de Boltzman modela un conjunto de
+
+2
+00:00:06,400 --> 00:00:10,588
+vectores de datos binarios.
+Voy a comenzar por explicar por qué
+
+3
+00:00:10,588 --> 00:00:17,068
+querríamos modelar un conjunto de vectores de datos binarios y
+qué podríamos hacer con tal modelo
+
+4
+00:00:17,068 --> 00:00:20,758
+si lo tuviéramos.
+Luego voy a mostrar cómo las
+
+5
+00:00:20,758 --> 00:00:26,298
+probabilidades asignadas a vectores de datos binarios
+quedan determinadas por los pesos en una
+
+6
+00:00:26,298 --> 00:00:30,196
+máquina de Boltzmann.
+Las redes de Hopfield estocásticas con unidades ocultas,
+
+7
+00:00:30,196 --> 00:00:35,672
+también conocidas como máquinas de Boltzmann,
+son buenas modelando datos binarios.
+
+8
+00:00:35,672 --> 00:00:38,482
+Dado un conjunto de entrenamiento de vectores binarios,
+
+9
+00:00:38,482 --> 00:00:44,535
+pueden utilizar a las unidades ocultas para ajustar un modelo
+que asigna una probabilidad a
+
+10
+00:00:44,535 --> 00:00:49,651
+cada vector binario posible.
+Hay varias razones, por las cuales querrías
+
+11
+00:00:49,651 --> 00:00:53,254
+poder hacer eso.
+Si, por ejemplo, tuvieras varias
+
+12
+00:00:53,254 --> 00:00:58,515
+distribuciones diferentes de vectores binarios,
+podrías querer tomar un vector binario nuevo
+
+13
+00:00:58,515 --> 00:01:03,495
+determinar de qué distribución vino.
+Puedes tener diferentes tipos de
+
+14
+00:01:03,495 --> 00:01:08,170
+documentos y representar cada documento con un cierto número de características binarias
+
+15
+00:01:08,170 --> 00:01:13,337
+cada una de las cuales indica si hay más de cero ocurrencias de una palabra en particular
+
+16
+00:01:13,337 --> 00:01:16,659
+en ese documento.
+Para diferentes tipos de documento,
+
+17
+00:01:16,659 --> 00:01:20,904
+esperarías conteos distintos para las diferentes palabras,
+tal vez encontrarías
+
+18
+00:01:20,904 --> 00:01:26,772
+correlaciones diferentes entre las palabras.
+Entonces podrías utilizar un conjunto de unidades ocultas para
+
+19
+00:01:26,772 --> 00:01:32,465
+modelar la distribución para cada documento.
+Así podrías elegir el documento más probable
+
+20
+00:01:32,465 --> 00:01:36,752
+viendo...
+Y luego podrías asignar un documento de prueba
+
+21
+00:01:36,752 --> 00:01:42,585
+a la clase apropiada, viendo qué clase de documento es más probable que hubiera
+
+22
+00:01:42,585 --> 00:01:47,364
+producido ese vector binario.
+También podrías utilizar máquinas de Boltzmann para
+
+23
+00:01:47,364 --> 00:01:51,160
+monitorear sistemas complejos para detectar comportamientos inusuales.
+
+24
+00:01:51,600 --> 00:01:56,782
+Supón por ejemplo que tienes una planta de energía nuclear, y todos los
+
+25
+00:01:56,782 --> 00:02:01,125
+marcadores fueran binarios.
+Entonces tienes un montón de números binarios
+
+26
+00:02:01,125 --> 00:02:05,047
+que te dicen algo sobre el estado de la planta de energía.
+
+27
+00:02:05,047 --> 00:02:09,034
+Lo que te gustaría hacer, es notar que se encuentra en un estado inusual.
+
+28
+00:02:09,034 --> 00:02:12,250
+Un estado que no se parece a estados que hayas visto antes.
+
+29
+00:02:12,250 --> 00:02:15,295
+Y no quieres utilizar aprendizaje supervisado para esto.
+
+30
+00:02:15,295 --> 00:02:19,615
+Porque realmente no quieres tener ningún ejemplar de estados que provoquen que
+
+31
+00:02:19,615 --> 00:02:22,273
+explote.
+Más bien querrías detectar que se
+
+32
+00:02:22,273 --> 00:02:26,150
+dirige a uno de estos estados sin haber visto uno de ellos nunca antes.
+
+33
+00:02:26,150 --> 00:02:31,588
+Y podrías hacer eso construyendo un modelo de su estado normal y notando que este
+
+34
+00:02:31,588 --> 00:02:36,799
+estado es distinto de los estados normales.
+Si tienes modelos de varias distribuciones,
+
+35
+00:02:36,799 --> 00:02:40,533
+puedes calcular la distribución de probabilidad a posteriori
+
+36
+00:02:40,533 --> 00:02:46,014
+de que una distribución en particular produjo los datos observados utilizando el teorema de Bayes.
+
+37
+00:02:46,014 --> 00:02:50,759
+Entonces, dados los datos observados, la probabilidad de que hayan venido del Modelo_i, suponiendo
+
+38
+00:02:50,759 --> 00:02:56,240
+que provinieron de alguno de tus modelos, es la probabilidad de que el Modelo_i
+
+39
+00:02:56,240 --> 00:03:01,320
+hubiera producido esos datos, dividida entre la cantidad equivalente para todos los modelos.
+
+40
+00:03:01,320 --> 00:03:06,843
+Ahora quiero hablar sobre dos formas de producir modelos de datos,
+
+41
+00:03:06,843 --> 00:03:10,599
+en particular vectores binarios.
+La forma más natural de pensar acerca de
+
+42
+00:03:10,599 --> 00:03:16,049
+generar un vector de datos binarios consiste en generar primero los estados de algunas
+
+43
+00:03:16,049 --> 00:03:19,511
+variables latentes.
+Y luego utilizar las variables latentes para
+
+44
+00:03:19,511 --> 00:03:24,509
+generar el vector binario.
+Entonces, en un modelo causal, usamos dos
+
+45
+00:03:24,509 --> 00:03:28,260
+pasos secuenciales.
+Estas son las variables latentes o unidades
+
+46
+00:03:28,260 --> 00:03:33,174
+ocultas.  Primero elegimos los estados de las variables latentes a partir de sus
+
+47
+00:03:33,174 --> 00:03:36,750
+distribuciones a priori.
+A menudo en un modelo causal éstas serán
+
+48
+00:03:36,750 --> 00:03:40,956
+independientes a priori.
+Entonces la probabilidad de que se activen, si
+
+49
+00:03:40,956 --> 00:03:46,431
+fueran variables latentes binarias, sólo dependería de algún sesgo que tenga cada una de ellas.
+
+50
+00:03:46,431 --> 00:03:49,770
+Entonces, una vez que hayamos elegido el estado para ellas,
+
+51
+00:03:49,770 --> 00:03:54,978
+los usaremos para generar los estados de las unidades visibles,
+utilizando las conexiones
+
+52
+00:03:54,978 --> 00:03:59,117
+pesadas en este modelo.
+Entonces este es un tipo de red neuronal
+
+53
+00:03:59,117 --> 00:04:02,988
+y modelo generativo, causal.
+Está utilizando unidades logísticas,
+
+54
+00:04:02,988 --> 00:04:08,409
+sesgos para las unidades ocultas y pesos en las conexiones entre unidades ocultas y visibles
+
+55
+00:04:08,409 --> 00:04:12,380
+para asignar una probabilidad a cada posible vector visible.
+
+56
+00:04:12,380 --> 00:04:17,381
+La probabilidad de generar un vector v en particular es justo la suma sobre todos los
+
+57
+00:04:17,381 --> 00:04:22,762
+estados ocultos posibles, de la probabilidad de generar ese estado oculto por la
+
+58
+00:04:22,762 --> 00:04:27,573
+probabilidad de generar v dado que ya se generó ese estado oculto.
+
+59
+00:04:27,573 --> 00:04:30,548
+Este fue un modelo causal. El análisis de factores,
+
+60
+00:04:30,548 --> 00:04:34,157
+por ejemplo, es un modelo causal que utiliza variables continuas.
+
+61
+00:04:34,157 --> 00:04:38,588
+Y es probablemente la forma más natural para pensar acerca de la generación de datos.
+
+62
+00:04:38,588 --> 00:04:43,146
+De hecho, cuando algunas personas hablan de un "modelo generativo", se refieren a un modelo causal
+
+63
+00:04:43,146 --> 00:04:47,091
+como éste.
+Pero, hay un tipo de modelo completamente diferente.
+
+64
+00:04:47,091 --> 00:04:50,264
+Una máquina de Boltzmann es un modelo basado en energía y,
+
+65
+00:04:50,264 --> 00:04:55,060
+en este tipo de modelo, no se generan los datos causalmente.
+
+66
+00:04:55,980 --> 00:05:00,592
+No es modelos generativo causal.
+En vez de ello, todo está definido en términos de
+
+67
+00:05:00,592 --> 00:05:04,590
+las energías de configuraciones conjuntas de unidades visibles y ocultas.
+
+68
+00:05:04,590 --> 00:05:09,756
+Hay dos formas de relacionar la energía de una configuración conjunta con su probabilidad.
+
+69
+00:05:09,756 --> 00:05:14,122
+Simplemente se puede definir a su probabilidad como la probabilidad conjunta de una
+
+70
+00:05:14,122 --> 00:05:19,104
+configuración de las variables visibles y ocultas, que es proporcional a 'e' elevada al
+
+71
+00:05:19,104 --> 00:05:21,810
+negativo de la energía de esa configuración conjunta.
+
+72
+00:05:21,810 --> 00:05:27,067
+O se puede definir procedimentalmente, diciendo que vamos a definir a la
+
+73
+00:05:27,067 --> 00:05:33,261
+probabilidad como la probabilidad de encontrar a la red en ese estado, después de haber actualizado
+
+74
+00:05:33,261 --> 00:05:38,374
+a todas las unidades estocásticas tantas veces como fuera necesario para alcanzar el equilibrio
+
+75
+00:05:38,374 --> 00:05:41,543
+térmico.
+Las buenas noticias son que estas dos
+
+76
+00:05:41,543 --> 00:05:46,575
+definiciones están de acuerdo.
+La energía de una configuración conjunta de las
+
+77
+00:05:46,575 --> 00:05:50,294
+unidades visibles y ocultas contiene cinco términos.
+
+78
+00:05:50,294 --> 00:05:56,275
+He puesto el negativo de la energía para ahorrarme escribir muchos signos menos.
+
+79
+00:05:56,275 --> 00:06:00,883
+Entonces, el negativo de la energía de la configuración conjunta v,h
+
+80
+00:06:00,883 --> 00:06:06,380
+esto es, con el vector v siendo las unidades visibles y h, las ocultas,
+
+81
+00:06:06,380 --> 00:06:12,200
+tiene términos de sesgo donde v_i es el estado binario de la i-ésima unidad en el vector v,
+
+82
+00:06:13,600 --> 00:06:22,580
+y b_k es el sesgo de la k-ésima unidad, en este caso, una unidad oculta.
+
+83
+00:06:23,640 --> 00:06:27,900
+Estos son los dos primeros términos.
+Luego están las interacciones
+
+84
+00:06:27,900 --> 00:06:30,817
+visible-visible y para evitar contarlas
+
+85
+00:06:30,817 --> 00:06:35,062
+dos veces, podemos decir que vamos a contar dentro de las sumas a las i's y las j's
+
+86
+00:06:35,062 --> 00:06:39,816
+asegurándonos de que i siempre sea menor que j.
+Esto impedirá contar la interacción de algo consigo mismo
+
+87
+00:06:39,816 --> 00:06:44,287
+y también impedirá contar los pares dos veces, de modo que no tengamos que anteponer
+
+88
+00:06:44,287 --> 00:06:47,356
+un 'un medio'.
+Luego vienen las interacciones
+
+89
+00:06:47,356 --> 00:06:50,780
+visible-oculta donde w_ik es un peso en un interacción
+
+90
+00:06:50,780 --> 00:06:54,320
+visible-oculta.
+Y luego están las interacciones
+
+91
+00:06:54,320 --> 00:06:58,228
+oculta-oculta.
+De modo que la forma en que utilizamos la energía para definir
+
+92
+00:06:58,228 --> 00:07:03,657
+probabilidades es: la probabilidad conjunta sobre una configuración v,h es
+
+93
+00:07:03,657 --> 00:07:08,724
+proporcional a e a la -E(v,h).
+Para convertirlo en una igualdad necesitamos
+
+94
+00:07:08,724 --> 00:07:14,369
+normalizar el lado derecho para todas las configuraciones posibles sobre las
+
+95
+00:07:14,369 --> 00:07:17,843
+unidades visibles y ocultas y eso es el divisor de ahí.
+
+96
+00:07:17,843 --> 00:07:20,956
+A menudo se le llama la "función de partición".
+
+97
+00:07:20,956 --> 00:07:26,306
+Así es como la llaman los físicos.
+Nota que tiene un número exponencial
+
+98
+00:07:26,306 --> 00:07:29,906
+de términos.
+Para obtener la probabilidad de una configuración
+
+99
+00:07:29,906 --> 00:07:35,952
+de las unidades visibles únicamente, se tiene que sumar sobre todas las posibles configuraciones de las
+
+100
+00:07:35,952 --> 00:07:40,007
+unidades ocultas.
+Entonces, p de v es la suma sobre todas las h's posibles
+
+101
+00:07:40,007 --> 00:07:45,905
+de e a la menos la energía que obtienes con esa h, normalizada por la función
+
+102
+00:07:45,905 --> 00:07:49,517
+de partición.
+Quiero darte un ejemplo de cómo
+
+103
+00:07:49,517 --> 00:07:55,710
+calculamos las probabilidades de los diferentes vectores visibles, porque eso te dará
+
+104
+00:07:55,710 --> 00:08:00,447
+una buena idea de lo que involucra.
+Está muy bien ver las ecuaciones,
+
+105
+00:08:00,447 --> 00:08:04,785
+pero me doy cuenta de que las entiendo mejor cuando he realizado los
+
+106
+00:08:04,785 --> 00:08:07,875
+cálculos.
+Así que tomemos una red con dos unidades ocultas
+
+107
+00:08:07,875 --> 00:08:11,856
+y dos visibles. E ignoraremos los sesgos, así que sólo tendremos
+
+108
+00:08:11,856 --> 00:08:15,124
+tres pesos aquí.
+Para mantener las cosas simples, no voy a
+
+109
+00:08:15,124 --> 00:08:19,819
+conectar las unidades visibles entre sí.
+Así que lo primero que hacemos es escribir
+
+110
+00:08:19,819 --> 00:08:24,335
+todos los estados posibles de las unidades visibles.
+Necesito ponerlos de colores diferentes
+
+111
+00:08:24,335 --> 00:08:27,010
+y voy a escribir cada estado cuatro veces,
+
+112
+00:08:27,010 --> 00:08:32,810
+porque para cada estado de las unidades visibles, hay cuatro posibles estados de las unidades
+
+113
+00:08:32,810 --> 00:08:37,561
+ocultas, que podrían ir con ellos.
+Esto nos da dieciséis  configuraciones conjuntas
+
+114
+00:08:37,561 --> 00:08:40,990
+posibles.
+Ahora, para cada una de esas
+
+115
+00:08:40,990 --> 00:08:46,430
+configuraciones conjuntas, vamos a calcular su energía negativa, menos E.
+
+116
+00:08:46,430 --> 00:08:51,700
+Así que si miras la primera línea, donde todas las unidades están encendidas,
+
+117
+00:08:51,700 --> 00:08:57,640
+el negativo de la energía será más dos, menos uno, más uno es más dos.
+
+118
+00:08:58,600 --> 00:09:03,223
+Y hacemos esto para todas las dieciséis configuraciones.
+
+119
+00:09:03,223 --> 00:09:07,770
+Entonces tomamos los negativos de las energías y los exponenciamos.
+
+120
+00:09:07,770 --> 00:09:11,560
+Esto nos dará probabilidades no normalizadas.
+
+121
+00:09:12,980 --> 00:09:18,444
+Así que estas son las probabilidades no normalizadas de las configuraciones.
+
+122
+00:09:18,444 --> 00:09:22,115
+Sus probabilidades son proporcionales a esto.
+
+123
+00:09:22,115 --> 00:09:28,640
+Si las sumamos todas, para obtener 39.7 y luego dividimos todo entre 39.7, obtenemos
+
+124
+00:09:28,640 --> 00:09:33,290
+las probabilidades de las configuraciones conjuntas.
+Aquí las tenemos.
+
+125
+00:09:33,290 --> 00:09:38,763
+Ahora, si queremos la probabilidad de una configuración de las unidades visibles en particular, tenemos que
+
+126
+00:09:38,763 --> 00:09:43,313
+sumar sobre todas las configuraciones de las unidades ocultas, que podrían ir con ella.
+
+127
+00:09:43,313 --> 00:09:46,369
+Así que sumamos los número en cada bloque.
+
+128
+00:09:46,369 --> 00:09:51,772
+Y ahora hemos calculado la probabilidad de cada vector visible posible en
+
+129
+00:09:51,772 --> 00:09:55,540
+la máquina de Boltzmann que tiene estos tres pesos.
+
+130
+00:09:56,000 --> 00:10:01,363
+Ahora preguntemos, cómo obtenemos una muestra del modelo, cuando la red es más grande que ésta.
+
+131
+00:10:01,363 --> 00:10:05,402
+Obviamente, en la red que acabamos de calcular, podemos obtener la
+
+132
+00:10:05,402 --> 00:10:08,116
+probabilidad de todo porque es pequeña.
+
+133
+00:10:08,116 --> 00:10:13,038
+Pero cuando la red es grande, no podemos hacer estos cálculos exponencialmente grandes.
+
+134
+00:10:13,038 --> 00:10:17,708
+Así que, si hay más que unas pocas unidades ocultas, no podemos calcular la
+
+135
+00:10:17,708 --> 00:10:20,737
+función de partición, hay demasiados términos en ella.
+
+136
+00:10:20,737 --> 00:10:25,091
+Pero, podemos utilizar Cadenas de Markov Monte Carlo para obtener muestras del modelo, iniciando
+
+137
+00:10:25,091 --> 00:10:29,791
+desde una configuración global aleatoria,
+luego escogiendo unidades al azar y
+
+138
+00:10:29,791 --> 00:10:33,426
+actualizándolas estocásticamente, con base en sus diferencias de energía.
+
+139
+00:10:33,426 --> 00:10:38,745
+Estas diferencias de energía, estando determinadas por los estados de todas las demás unidades en la red.
+
+140
+00:10:38,745 --> 00:10:41,775
+Si seguimos haciendo esto, hasta que la cadena
+
+141
+00:10:41,977 --> 00:10:47,296
+de Markov alcance su distribución estacionaria,
+obtendremos una muestra del modelo.
+
+142
+00:10:47,296 --> 00:10:52,481
+Y la probabilidad de esa muestra está relacionada con su energía mediante la distribución
+
+143
+00:10:52,481 --> 00:10:57,328
+de Boltzmann.  Esto es, la probabilidad de la muestra es proporcional a e
+
+144
+00:10:57,328 --> 00:11:02,965
+a la menos energía.
+¿Qué hay acerca de obtener una muestra de la distribución a posteriori,
+
+145
+00:11:02,965 --> 00:11:06,540
+sobre las configuraciones de las unidades ocultas, dado un vector de datos?
+
+146
+00:11:06,540 --> 00:11:09,840
+Resulta que vamos a necesitar eso para el aprendizaje.
+
+147
+00:11:11,180 --> 00:11:15,285
+El número de configuraciones ocultas posibles es exponencial otra vez.
+
+148
+00:11:15,285 --> 00:11:20,284
+Así que, de nuevo utilizamos Cadenas de Markov Monte Carlo.
+Y es justo lo mismo que obtener una muestra
+
+149
+00:11:20,284 --> 00:11:25,104
+del modelo, excepto que mantenemos las unidades visibles fijas con los
+
+150
+00:11:25,104 --> 00:11:29,090
+valores del vector de datos en el que estamos interesados.
+Así que sólo actualizamos las unidades ocultas.
+
+151
+00:11:29,090 --> 00:11:33,791
+La razón por la cual necesitamos obtener muestras de la distribución a posteriori, dado un vector
+
+152
+00:11:33,791 --> 00:11:38,135
+de datos, es que podríamos estar interesados en conocer una buena explicación para los datos observados.
+
+153
+00:11:38,135 --> 00:11:41,884
+Y podríamos querer basar nuestras acciones en esa buena explicación.
+
+154
+00:11:41,884 --> 00:11:44,443
+Pero también lo vamos a necesitar para el aprendizaje.

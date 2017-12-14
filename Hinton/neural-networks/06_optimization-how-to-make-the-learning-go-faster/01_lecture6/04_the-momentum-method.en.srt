@@ -1,0 +1,539 @@
+1
+00:00:00,000 --> 00:00:05,734
+In this video we're going to look at the
+momentum method for improving the learning
+
+2
+00:00:05,734 --> 00:00:08,849
+speed when doing grading descent into
+neural network.
+
+3
+00:00:08,849 --> 00:00:14,867
+The momentum method can be applied to full
+batch learning, but it also works for mini
+
+4
+00:00:14,867 --> 00:00:17,486
+batch learning.
+It's very widely used.
+
+5
+00:00:17,486 --> 00:00:22,654
+And probably the commonest recipe for
+learning big neural nets is to use
+
+6
+00:00:22,654 --> 00:00:27,610
+stochastic grade and descent with mini
+batches combined with momentum.
+
+7
+00:00:27,610 --> 00:00:32,000
+I'm going to start with the intuition
+behind the momentum method.
+
+8
+00:00:32,500 --> 00:00:37,320
+So, we think of a ball on the area
+surface, where the location of the ball in
+
+9
+00:00:37,320 --> 00:00:41,000
+the horizontal plane represents the
+current weight vector.
+
+10
+00:00:42,060 --> 00:00:47,187
+The ball starts off stationary and so
+initially it will follow the direction of
+
+11
+00:00:47,187 --> 00:00:50,072
+steepest descent.
+It will follow the gradient.
+
+12
+00:00:50,072 --> 00:00:55,136
+But as soon as it's got some velocity
+it'll no longer go in the same direction
+
+13
+00:00:55,136 --> 00:00:58,725
+as the gradient.
+Its momentum will make it keep going in
+
+14
+00:00:58,725 --> 00:01:03,693
+the previous direction.
+Obviously we wanted eventually to get to a
+
+15
+00:01:03,693 --> 00:01:07,211
+low point on the surface, so we wanted to
+lose energy.
+
+16
+00:01:07,211 --> 00:01:10,065
+So we need to introduce a bit of
+viscosity.
+
+17
+00:01:10,065 --> 00:01:14,180
+That is, we make its velocity die off
+gently on each update.
+
+18
+00:01:15,800 --> 00:01:21,623
+What the momentum method does, is it damps
+oscillations in directions of high
+
+19
+00:01:21,623 --> 00:01:25,645
+curvature.
+So if you look at the red starting point,
+
+20
+00:01:25,645 --> 00:01:31,761
+and then look at the green point we get to
+after two steps, they have gradients that
+
+21
+00:01:31,761 --> 00:01:36,863
+are pretty much equal and opposite.
+As a result, the gradient across the
+
+22
+00:01:36,863 --> 00:01:41,616
+ravine has cancelled out.
+But the gradient along the ravine has not
+
+23
+00:01:41,616 --> 00:01:45,021
+cancelled out.
+Along the ravine, we're going to keep
+
+24
+00:01:45,021 --> 00:01:49,631
+building up speed, and so, after the
+momentum method has settled down, it'll
+
+25
+00:01:49,631 --> 00:01:55,448
+tend to go along the bottom of the ravine,
+accumulating velocity as it goes, and if
+
+26
+00:01:55,448 --> 00:02:01,194
+you're lucky, that'll make you go a whole
+lot faster, than if you just judge
+
+27
+00:02:01,194 --> 00:02:06,275
+steepest descent.
+The equations of the momentum method are
+
+28
+00:02:06,275 --> 00:02:10,949
+fairly simple.
+We say that the velocity vector at time t,
+
+29
+00:02:10,949 --> 00:02:16,986
+is just the velocity vector at time t
+minus one, time here is the updates of the
+
+30
+00:02:16,986 --> 00:02:20,500
+weights.
+So it's the velocity vector that we got
+
+31
+00:02:20,500 --> 00:02:23,483
+after mini batch t minus one, attenuated a
+bit.
+
+32
+00:02:23,483 --> 00:02:26,612
+So we multiply by some number like
+point.9.
+
+33
+00:02:26,612 --> 00:02:30,832
+Which is really viscosity, or it's related
+to viscosity.
+
+34
+00:02:30,832 --> 00:02:35,853
+But unfortunately, I called it momentum.
+So we now call alpha momentum.
+
+35
+00:02:35,853 --> 00:02:39,782
+And then we add in the effect of the
+current gradient,
+
+36
+00:02:39,782 --> 00:02:45,312
+Which is to make us go downhill by some
+learning rate times the gradient that we
+
+37
+00:02:45,312 --> 00:02:52,247
+have at time t And that'll be our new
+velocity at time t We then make our weight
+
+38
+00:02:52,247 --> 00:02:57,602
+change at time t equal to velocity.
+That velocity can actually be expressed in
+
+39
+00:02:57,602 --> 00:03:02,133
+terms of previous weight changes as it's
+shown on the slide share.
+
+40
+00:03:02,133 --> 00:03:05,360
+Then I will leave it to you to follow the
+math.
+
+41
+00:03:07,600 --> 00:03:11,463
+The behavior of the momentum method is
+very intuitive.
+
+42
+00:03:11,463 --> 00:03:17,474
+On an air surface that's just a plane, the
+ball will reach some terminal velocity of
+
+43
+00:03:17,474 --> 00:03:22,840
+which the gaining velocity that comes from
+the gradient is balanced by the
+
+44
+00:03:22,840 --> 00:03:27,419
+multiplicative attenuation of velocity due
+to the momentum term,
+
+45
+00:03:27,419 --> 00:03:33,283
+Which is really viscosity.
+If that momentum term is close to one,
+
+46
+00:03:33,283 --> 00:03:39,260
+then it'll be going down much faster than
+a simple gradient descent method would.
+
+47
+00:03:40,120 --> 00:03:46,914
+So the terminal velocity, the velocity you
+get at time infinity is the gradient times
+
+48
+00:03:46,914 --> 00:03:52,367
+the learning weight, multiplied by this
+factor of one over one minus alpha.
+
+49
+00:03:52,367 --> 00:03:58,522
+So if alpha is 0.99, you'll go 100 times
+as fast as you would with the learning
+
+50
+00:03:58,522 --> 00:04:02,540
+rate alone.
+You have to be careful in setting
+
+51
+00:04:02,540 --> 00:04:05,245
+momentum.
+At the very beginning of learning, if you
+
+52
+00:04:05,245 --> 00:04:09,358
+make the initial random weights quite big,
+there may be very large gradients.
+
+53
+00:04:09,358 --> 00:04:13,363
+You have a bunch of weights that's
+completely no good for the task you're
+
+54
+00:04:13,363 --> 00:04:15,907
+doing.
+And it may be very obvious how to change
+
+55
+00:04:15,907 --> 00:04:20,058
+these weights to make things a lot better.
+You don't want a big momentum.
+
+56
+00:04:20,058 --> 00:04:23,247
+Because you're going to quickly change
+them to make things better.
+
+57
+00:04:23,247 --> 00:04:27,449
+And then you're going to start on the hard
+problem of finding out how to get just the
+
+58
+00:04:27,449 --> 00:04:29,625
+right relative values of different
+weights.
+
+59
+00:04:29,625 --> 00:04:35,130
+So you have sensible feature detectors.
+So it pays at the beginning of learning to
+
+60
+00:04:35,130 --> 00:04:39,768
+have a small momentum.
+It is probably better to have 0.5 than
+
+61
+00:04:39,768 --> 00:04:44,560
+zero, because 0.5 will average out some
+sloshes and obvious ravines.
+
+62
+00:04:45,020 --> 00:04:49,890
+Once the large gradients have disappeared,
+and you've reached the sort of normal
+
+63
+00:04:49,890 --> 00:04:52,873
+phase of learning, where you're stuck in a
+ravine.
+
+64
+00:04:52,873 --> 00:04:57,682
+And you need to go along the bottom of
+this ravine without sloshing to and fro
+
+65
+00:04:57,682 --> 00:05:00,848
+sideways.
+You can smoothly raise the momentum to its
+
+66
+00:05:00,848 --> 00:05:03,891
+final value.
+Or you could raise it in one step, but
+
+67
+00:05:03,891 --> 00:05:09,534
+that might start an oscillation.
+You might think that, why didn't we just
+
+68
+00:05:09,534 --> 00:05:13,978
+use a bigger learning rate.
+But what you'll discover is that, using a
+
+69
+00:05:13,978 --> 00:05:19,077
+small learning rate and a big momentum
+allows you to get away with an overall
+
+70
+00:05:19,077 --> 00:05:24,436
+learning rate that's much bigger than you
+could have had if you used learning rate
+
+71
+00:05:24,436 --> 00:05:28,619
+alone with no momentum.
+If you use a big learning rate by itself,
+
+72
+00:05:28,619 --> 00:05:32,280
+you'll get big divergent oscillations]
+across the ravine.
+
+73
+00:05:34,100 --> 00:05:40,895
+Very recently Ilya Sutskever has
+discovered that there's a better type of
+
+74
+00:05:40,895 --> 00:05:44,820
+momentum.
+The standard momentum method works by
+
+75
+00:05:44,820 --> 00:05:48,280
+first computing the gradient at the
+current location.
+
+76
+00:05:48,560 --> 00:05:53,764
+It combines that with its stored memory of
+previous gradients, which is in the
+
+77
+00:05:53,764 --> 00:05:57,567
+velocity of the ball.
+And then it takes a big jump in the
+
+78
+00:05:57,567 --> 00:06:02,037
+direction of the current gradient combined
+with previous gradients.
+
+79
+00:06:02,037 --> 00:06:05,040
+So that's its accumulated gradient
+direction.
+
+80
+00:06:06,120 --> 00:06:11,067
+Ilya Sutskever has found that it works
+better in many cases to use a form of
+
+81
+00:06:11,067 --> 00:06:16,482
+momentum suggested by Nesterov who was
+trying to optimize convex functions, where
+
+82
+00:06:16,482 --> 00:06:22,098
+we first make a big jump in the direction
+of the previous accumulating gradient, and
+
+83
+00:06:22,098 --> 00:06:26,577
+then we measure the gradient where we end
+up and make a correction.
+
+84
+00:06:26,577 --> 00:06:31,324
+It's very, very similar, and you need a
+picture to really understand the
+
+85
+00:06:31,324 --> 00:06:35,718
+difference.
+One way of thinking about what's going on
+
+86
+00:06:35,718 --> 00:06:41,200
+is in the standard momentum method, you
+add in the current gradient and then you
+
+87
+00:06:41,200 --> 00:06:45,312
+gamble on this big jump.
+In the Nesterov method, you use your
+
+88
+00:06:45,312 --> 00:06:51,069
+previously accumulated gradient, you make
+the big jump and then you correct yourself
+
+89
+00:06:51,069 --> 00:06:57,669
+at the place you've got to.
+So here's the picture, when we first make
+
+90
+00:06:57,669 --> 00:07:04,675
+the jump and then make a correction.
+Here is a stamp in the direction of the
+
+91
+00:07:04,675 --> 00:07:10,075
+accumulated gradient.
+So this depends on the gradient that we've
+
+92
+00:07:10,075 --> 00:07:14,800
+accumulated on, in our previous iteration.
+We take that step.
+
+93
+00:07:15,100 --> 00:07:21,340
+We then make it the gradient, and go
+downhill in the direction of the gradient.
+
+94
+00:07:21,340 --> 00:07:26,799
+Like that.
+We then combine that little correction
+
+95
+00:07:26,799 --> 00:07:32,640
+stat with the big jump we made to get our
+new accumulated gradient.
+
+96
+00:07:33,380 --> 00:07:39,070
+We then take that accumulated gradient, we
+attenuate it by some number, like nine.
+
+97
+00:07:39,070 --> 00:07:44,538
+Or 99. multiply it by that number, and we
+now take our next big jump in the
+
+98
+00:07:44,538 --> 00:07:48,160
+direction of that accumulated gradient,
+like that.
+
+99
+00:07:48,420 --> 00:07:54,357
+Then again, at the place where we end up,
+we measure the gradient and we go
+
+100
+00:07:54,357 --> 00:07:58,429
+downhill.
+That correct any errors you made, and we
+
+101
+00:07:58,429 --> 00:08:04,422
+our new accumulated gradient.
+Now if you compare that with the standard
+
+102
+00:08:04,422 --> 00:08:09,706
+momentum method, the standard momentum
+method starts with a accumulating
+
+103
+00:08:09,706 --> 00:08:15,798
+gradient, like that initial brand vector,
+but then it measures the gradient where it
+
+104
+00:08:15,798 --> 00:08:21,596
+is, so it measures the gradient at its
+current location, and it adds that to the
+
+105
+00:08:21,596 --> 00:08:26,220
+brown vector, so that it makes a jump like
+this big blue vector.
+
+106
+00:08:26,600 --> 00:08:31,151
+That is just the brown vector plus the
+current gradient.
+
+107
+00:08:31,151 --> 00:08:37,572
+It turns out, if you're going to gamble,
+it's much better to gamble and then make a
+
+108
+00:08:37,572 --> 00:08:41,880
+correction, than to make a correction and
+then gamble.

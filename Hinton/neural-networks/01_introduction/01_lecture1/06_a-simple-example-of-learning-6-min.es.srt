@@ -1,0 +1,303 @@
+1
+00:00:00,176 --> 00:00:03,949
+En este vídeo les mostraré 
+
+2
+00:00:03,949 --> 00:00:06,663
+un ejemplo de aprendizaje automático.
+
+3
+00:00:06,663 --> 00:00:08,756
+Es una clase muy simple de red neuronal
+
+4
+00:00:08,756 --> 00:00:12,672
+y aprenderá a reconocer números
+
+5
+00:00:12,672 --> 00:00:15,029
+y veremos como evolucionan los pesos
+
+6
+00:00:15,082 --> 00:00:18,135
+a medida que corremos un 
+algoritmo de aprendizaje muy simple.
+
+7
+00:00:18,711 --> 00:00:20,326
+Vamos a ver un algoritmo
+
+8
+00:00:20,326 --> 00:00:24,250
+ de aprendizaje muy simple para 
+entrenar una red muy simple
+
+9
+00:00:24,250 --> 00:00:29,273
+en reconocer formas manuscritas. 
+La red tiene dos capas de neuronas.
+
+10
+00:00:29,588 --> 00:00:31,646
+Tiene neuronas de entrada
+
+11
+00:00:31,646 --> 00:00:38,033
+cuya activación representa la intensidad de los pixeles, 
+y neuronas de salida cuya activación representa 
+
+12
+00:00:38,033 --> 00:00:39,010
+la clase.
+
+13
+00:00:41,857 --> 00:00:43,587
+Lo que quisiéramos es que 
+cuando le mostremos
+
+14
+00:00:43,587 --> 00:00:49,611
+una forma en particular, la neurona de 
+salida para esa forma se active.
+
+15
+00:00:51,287 --> 00:00:53,863
+Si un pixel está activo lo que hace
+
+16
+00:00:53,863 --> 00:00:57,096
+es votar por una forma en particular.
+
+17
+00:00:57,096 --> 00:01:00,889
+Es decir, a la forma que contiene ese pixel.
+
+18
+00:01:00,889 --> 00:01:04,031
+Cada pixel coloreado puede 
+votar por varias formas
+
+19
+00:01:04,031 --> 00:01:09,803
+y los votos pueden tener diferentes intensidades. 
+La forma que tiene más votos gana,
+
+20
+00:01:09,803 --> 00:01:10,794
+Estamos suponiendo
+
+21
+00:01:10,794 --> 00:01:12,960
+que hay una competencia entre las unidades de salida
+
+22
+00:01:12,960 --> 00:01:14,772
+y eso es algo que no he explicado todavía
+
+23
+00:01:14,772 --> 00:01:17,951
+u que será explicado en una clase posterior
+
+24
+00:01:20,028 --> 00:01:24,297
+Primero, necesitamos decidir como mostrar los pesos.
+
+25
+00:01:24,297 --> 00:01:29,385
+Y parece natural anotar los pesos sobre la conexión entre
+
+26
+00:01:29,385 --> 00:01:34,809
+la unidad de entrada y la unidad de salida. 
+Pero nunca vamos a poder ver qué pasa si hacemos eso.
+
+27
+00:01:35,255 --> 00:01:39,309
+Necesitamos un display en el que podamos 
+ver los valores de miles de pesos.
+
+28
+00:01:39,447 --> 00:01:45,196
+La idea es que para cada unidad de salida 
+hacemos un pequeño mapa. En ese mapa 
+
+29
+00:01:46,180 --> 00:01:53,032
+mostrarmos la fuerza de la conexión que llega de cada 
+pixel de entrada en la posición de ese pixel de entrada.
+
+30
+00:01:53,324 --> 00:01:59,375
+Y mostraremos la fuerza de la conexión usando 
+puntitos negros y blancos cuya área representa la magnitud.
+
+31
+00:01:59,375 --> 00:02:09,822
+y cuyo color representa el signo. De modo que los pesos 
+iniciales que vemos ahí son solo pequeños pesos aleatorios.
+
+32
+00:02:10,083 --> 00:02:18,643
+Lo vamos a hacer ahora es mostrarle algunos datos a la red 
+y hacerla aprender pesos que sean mejores que los aleatorios.
+
+33
+00:02:19,550 --> 00:02:27,240
+La forma en que aprenderá es que cuando le mostremos 
+una imagen, vamos a incrementar los pesos
+
+34
+00:02:27,240 --> 00:02:33,274
+de los pixeles activos en la 
+imagen hacia la clase correcta
+
+35
+00:02:33,274 --> 00:02:37,942
+Si lo hicieramos así los pesos solo podrán ser 
+solo más grandes, y a la larga cada clase
+
+36
+00:02:37,942 --> 00:02:40,782
+tendría una entrada enorme cuando 
+le mostremos una imagen.
+
+37
+00:02:40,782 --> 00:02:44,124
+Necesitamos alguna forma de 
+mantener los pesos bajo control.
+
+38
+00:02:44,124 --> 00:02:50,311
+Lo que vamos a hacer es decrementar los 
+pesos de los pixeles activos en la clase
+
+39
+00:02:50,311 --> 00:02:53,040
+que la red suponga.
+
+40
+00:02:53,040 --> 00:03:00,113
+La entrenaremos en lo correcto, en lugar de 
+dejarla que haga que tenga tendencia a hacer.
+
+41
+00:03:00,113 --> 00:03:04,909
+Por supuesto, si hace lo correcto, entonces los incrementos que hacemos,
+
+42
+00:03:04,909 --> 00:03:11,358
+en le primer paso de la regla de aprendizaje cancelarán los 
+decrementos, de modo que nada cambiará, que es lo que queremos.
+
+43
+00:03:12,896 --> 00:03:18,569
+Estos son los pesos iniciales. Ahora le mostraremos 
+algunos cientos de ejemplos de entrenamiento y
+
+44
+00:03:18,569 --> 00:03:20,706
+luego observaremos los pesos otra vez.
+
+45
+00:03:20,706 --> 00:03:25,893
+Ahora los pesos han cambiado. Comenzaron a formar
+
+46
+00:03:25,893 --> 00:03:31,204
+esquemas regulares. Y si le mostramos 
+algunos cientos de ejemplos más
+
+47
+00:03:31,204 --> 00:03:34,871
+lo pesos cambiarán un poco, 
+algunos cientos de ejemplos más
+
+48
+00:03:34,871 --> 00:03:39,648
+y algunos cientos más. Algunos cientos más
+
+49
+00:03:39,648 --> 00:03:43,016
+y ahora los pesos se parecen 
+mucho a los valores finales
+
+50
+00:03:43,186 --> 00:03:50,720
+Hablaré más de los detalles precisos del algoritmo 
+de aprendizaje en futuras lecciones. Pero lo que podemos ver
+
+51
+00:03:50,720 --> 00:03:54,082
+es que los pesos ahora se ven como pequeñas plantillas de las formas.
+
+52
+00:03:54,082 --> 00:04:02,128
+Si observamos los pesos que van a unidad del uno por ejemplo,
+ no parecen plantillas como para identificar unos. No son plantillas
+
+53
+00:04:02,128 --> 00:04:04,786
+Si observamos los pesos que van para la unidad nueve
+
+54
+00:04:04,786 --> 00:04:08,875
+no tienen ningún peso positivo 
+debajo de la línea media
+
+55
+00:04:08,875 --> 00:04:16,137
+Es que para marcar la diferencia entre un 9 y un 7 
+los pesos debajo de la línea media no son útiles.
+
+56
+00:04:16,137 --> 00:04:21,710
+Tenemos que marcar la diferencia decidiendo si en 
+la parte superior hay un lazo o una raya horizontal.
+
+57
+00:04:21,710 --> 00:04:26,421
+Es así que esas unidades de salida 
+están dedicadas a esa discriminación
+
+58
+00:04:29,928 --> 00:04:38,703
+Hay que tener en cuenta que debido a que la red es muy simple,
+ no es capaz de aprender una buena forma de discriminar las formas.
+
+59
+00:04:40,995 --> 00:04:45,707
+Lo que aprendió es equivalente a tener 
+una pequeña plantilla para cada forma
+
+60
+00:04:45,707 --> 00:04:53,533
+y luego decide el ganador basándose en que forma 
+tiene la plantilla que se superpone más con la tinta.
+
+61
+00:04:54,425 --> 00:05:03,043
+El problema es que la variación de los números manuscritos es 
+demasiado compleja como para que una simple plantilla sirva para todas.
+
+62
+00:05:03,043 --> 00:05:13,250
+Debemos modelar variaciones permisibles para los números, extrayendo características y luego viendo como están combinadas.
+
+63
+00:05:14,774 --> 00:05:18,090
+Éstos son ejemplos de lo que hemos estado viendo
+
+64
+00:05:18,090 --> 00:05:29,790
+Si se fijan en en los números 2 en el recuadro verde, verán que no hay 
+plantilla que los abarque a todos, y fallará en el 3 del recuadro rojo.
+
+65
+00:05:29,790 --> 00:05:33,721
+Esta tarea no pudes resolverse 
+con una red simple como esa.
+
+66
+00:05:35,025 --> 00:05:38,800
+La red hizo lo mejor que pudo pero
+no puede resolver este problema.

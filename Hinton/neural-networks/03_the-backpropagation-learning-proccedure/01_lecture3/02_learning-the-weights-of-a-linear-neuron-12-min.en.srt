@@ -1,0 +1,714 @@
+1
+00:00:00,000 --> 00:00:04,041
+This video introduces the learning
+algorithm for a linear neuron.
+
+2
+00:00:04,041 --> 00:00:09,050
+This is quite like the learning algorithm
+for a perceptron, but it achieves
+
+3
+00:00:09,050 --> 00:00:13,058
+something different.
+In a perceptron, what's happening is the
+
+4
+00:00:13,058 --> 00:00:17,045
+weight, so always getting closer to a good
+set of weights.
+
+5
+00:00:17,045 --> 00:00:22,082
+In a linear neuron, the outputs are always
+getting closer to the target outputs.
+
+6
+00:00:25,053 --> 00:00:30,081
+The perception convergence procedure works
+by ensuring that when we change the
+
+7
+00:00:30,081 --> 00:00:33,095
+weights, we get closer to a good set of
+weights.
+
+8
+00:00:33,095 --> 00:00:38,042
+That type of guarantee cannot be extended
+to more complex networks.
+
+9
+00:00:38,042 --> 00:00:44,003
+Because in more complex networks when you
+average two good set of weights, you might
+
+10
+00:00:44,003 --> 00:00:48,034
+get a bad set of weights.
+So for multilayer neural networks, we
+
+11
+00:00:48,034 --> 00:00:51,049
+don't use the perceptron learning
+procedure.
+
+12
+00:00:51,049 --> 00:00:57,021
+And to prove that when they're learning
+something is improving, we don't use the
+
+13
+00:00:57,021 --> 00:01:01,057
+same kind of proof at all.
+They should never have been called
+
+14
+00:01:01,057 --> 00:01:05,073
+multilayer perceptrons.
+It's partly my fault and I'm sorry.
+
+15
+00:01:05,073 --> 00:01:10,065
+For multilayer nets we're gonna need a
+different way to show that the learning
+
+16
+00:01:10,065 --> 00:01:14,075
+procedure makes progress.
+Instead of showing that the weights get
+
+17
+00:01:14,075 --> 00:01:19,073
+closer to a good set of weights, we're
+gonna show that the actual output values
+
+18
+00:01:19,073 --> 00:01:24,077
+get closer to the target output values.
+This can be true even for non-convex
+
+19
+00:01:24,077 --> 00:01:29,064
+problems in which averaging the weights of
+two good solutions does not give you a
+
+20
+00:01:29,064 --> 00:01:33,092
+good solution.
+It's not true for perceptual learning.
+
+21
+00:01:33,092 --> 00:01:39,057
+In perceptual learning, the outputs as a
+whole can get further away from the target
+
+22
+00:01:39,057 --> 00:01:44,068
+outputs even though the weights are
+getting closer to good sets of weights.
+
+23
+00:01:45,043 --> 00:01:50,085
+The simplest example of learning in which
+you're making the outputs get closer to
+
+24
+00:01:50,085 --> 00:01:56,007
+the target outputs is learning in a linear
+neuron with a squared error measure.
+
+25
+00:01:56,084 --> 00:02:01,074
+Linear neurons, which are also called
+linear filters in electrical engineering,
+
+26
+00:02:01,074 --> 00:02:06,040
+have a real valued output that's simply
+the weighted sum of their outputs.
+
+27
+00:02:06,070 --> 00:02:13,034
+So the output Y, which is the neuron's
+estimate of the target value, is the sum
+
+28
+00:02:13,034 --> 00:02:18,071
+over all the inputs i of a weight vector
+times an input vector.
+
+29
+00:02:18,071 --> 00:02:25,009
+So we can write it in summation form or we
+can write it in vector notation.
+
+30
+00:02:26,075 --> 00:02:32,090
+The aim of the learning is to minimize the
+error summed over all training cases.
+
+31
+00:02:33,080 --> 00:02:39,044
+We need a measure of that error and to
+keep life simple, we use the square
+
+32
+00:02:39,044 --> 00:02:43,093
+difference between the target output and
+the actual output.
+
+33
+00:02:45,024 --> 00:02:48,092
+So one question is why don't we just solve
+it analytically.
+
+34
+00:02:48,092 --> 00:02:53,066
+It's straightforward to write down a set
+of equations with one equation per
+
+35
+00:02:53,066 --> 00:02:57,009
+training case, and to solve for the best
+set of weights.
+
+36
+00:02:57,036 --> 00:03:02,018
+That's the standard engineering approach,
+and so why don't we use it?
+
+37
+00:03:02,086 --> 00:03:07,091
+The first answer, and the scientific
+answer, is we'd like to understand what
+
+38
+00:03:07,091 --> 00:03:13,031
+real neurons might be doing, and they're
+probably not solving a set of equations
+
+39
+00:03:13,031 --> 00:03:16,089
+symbolically.
+An engineering answer is that we want a
+
+40
+00:03:16,089 --> 00:03:21,047
+method that we can then generalize to
+multilayer, nonlinear networks.
+
+41
+00:03:21,081 --> 00:03:27,014
+The analytic solution relies on it being
+linear and having a squared error measure.
+
+42
+00:03:27,014 --> 00:03:32,041
+An iterative method, which we're gonna see
+next, is usually less efficient, but much
+
+43
+00:03:32,041 --> 00:03:35,030
+easier to generalize to more complex
+systems.
+
+44
+00:03:36,050 --> 00:03:42,013
+So I'm now gonna go through a toy example
+that illustrates an iterative method for
+
+45
+00:03:42,013 --> 00:03:47,063
+finding the weights of a linear neuron.
+Suppose that every day, you get lunch at a
+
+46
+00:03:47,063 --> 00:03:51,003
+cafeteria.
+And your diet consists entirely of fish,
+
+47
+00:03:51,003 --> 00:03:54,085
+chips, and ketchup.
+Each day, you order several portions of
+
+48
+00:03:54,085 --> 00:03:58,041
+each, but on different days, it's
+different numbers of portions.
+
+49
+00:03:58,041 --> 00:04:03,000
+The cashier only shows you the total price
+of the meal, but after a few days, you
+
+50
+00:04:03,000 --> 00:04:07,071
+ought to be able to figure out what the
+price is for each portion of each kind of
+
+51
+00:04:07,071 --> 00:04:13,030
+thing.
+In the iterative approach, you start with
+
+52
+00:04:13,030 --> 00:04:19,007
+random guesses for the prices of portions.
+And then you adjust these guesses so that
+
+53
+00:04:19,007 --> 00:04:23,034
+you get a better fit to the prices that
+the cashier tells you.
+
+54
+00:04:23,034 --> 00:04:26,043
+Those are the observed prices of whole
+meals.
+
+55
+00:04:27,039 --> 00:04:32,095
+So each meal, you get a price and that
+gives you a linear constraint on the
+
+56
+00:04:32,095 --> 00:04:38,089
+prices of the individual portions.
+It looks like this, the price of the whole
+
+57
+00:04:38,089 --> 00:04:44,094
+meal is the number of portion of fish, x
+fish, times the cost of a portion of fish,
+
+58
+00:04:44,094 --> 00:04:48,007
+w fish.
+And the same for chips and ketchup.
+
+59
+00:04:49,045 --> 00:04:53,009
+So the prices of the portions are like the
+weights of a linear neuron.
+
+60
+00:04:53,009 --> 00:04:57,025
+And we can think of the whole weight
+vector as being the price of a portion of
+
+61
+00:04:57,025 --> 00:05:01,019
+fish, the price of a portion of chips, and
+the price of a portion of ketchup.
+
+62
+00:05:02,068 --> 00:05:06,086
+We're going to start with guesses for
+these prices and then we're going to
+
+63
+00:05:06,086 --> 00:05:11,027
+adjust the guesses slightly, so that we
+agree better with what the cashier says.
+
+64
+00:05:12,016 --> 00:05:18,007
+So let's suppose that the true weights
+that the cashier using to figure out the
+
+65
+00:05:18,007 --> 00:05:23,069
+price, are 150 for a portion of fish, 50
+for portion of chips and a 100 for a
+
+66
+00:05:23,069 --> 00:05:28,038
+portion of Ketchup.
+For the meals shown here, that will lead
+
+67
+00:05:28,038 --> 00:05:32,069
+to a price of 850.
+So that's going to be our target value.
+
+68
+00:05:33,051 --> 00:05:39,042
+That suppose that we start with guesses,
+but each portion costs 50.
+
+69
+00:05:40,022 --> 00:05:45,025
+So for the meal with two portions of fish,
+five of chips, and three of ketchup, we're
+
+70
+00:05:45,025 --> 00:05:48,053
+going to initially think that the price
+should be 500.
+
+71
+00:05:48,053 --> 00:05:53,009
+That gives us a residual error of 350.
+The residual error is the difference
+
+72
+00:05:53,009 --> 00:05:58,025
+between what the cashier says and what we
+think the price should be with our current
+
+73
+00:05:58,025 --> 00:06:03,012
+weights.
+We're then gonna use the delta rule for
+
+74
+00:06:03,012 --> 00:06:09,055
+revising our prices of portions.
+We make the change in a weight, delta WI
+
+75
+00:06:09,055 --> 00:06:15,562
+be equal to a learning rate, epsilon times
+the number of portions of the i-th thing,
+
+76
+00:06:15,562 --> 00:06:21,077
+times the residual error.
+The difference between the target and our
+
+77
+00:06:21,077 --> 00:06:27,013
+estimate.
+So if we make the learning rate be one
+
+78
+00:06:27,013 --> 00:06:34,094
+over 35, so the maths stays simple, then
+the learning rate times the residual error
+
+79
+00:06:34,094 --> 00:06:42,000
+for this particular example is ten.
+And so, our change in the weight for fish
+
+80
+00:06:42,000 --> 00:06:46,050
+will be two times ten.
+We'll increase that weight by twenty.
+
+81
+00:06:46,050 --> 00:06:50,092
+Our change in the weight for chips will be
+five times ten.
+
+82
+00:06:50,092 --> 00:06:55,087
+And our change in the weight for ketchup
+will be three times ten.
+
+83
+00:06:56,062 --> 00:06:59,062
+That'll give us new weights of 70, 100,
+and 80.
+
+84
+00:06:59,062 --> 00:07:03,003
+And notice, the weight for chips actually
+got worse.
+
+85
+00:07:03,003 --> 00:07:08,044
+There's no guarantee with this kind of
+learning that the individual weights will
+
+86
+00:07:08,044 --> 00:07:12,045
+keep getting better.
+What's getting better is the difference
+
+87
+00:07:12,045 --> 00:07:15,060
+between what the cashier says and our
+estimate.
+
+88
+00:07:17,013 --> 00:07:20,004
+So now, we're going to derive the delta
+rule.
+
+89
+00:07:21,007 --> 00:07:26,072
+We start by defining the arrow measure,
+which is simply our squared residual
+
+90
+00:07:26,072 --> 00:07:32,022
+summed over all training cases.
+That is the squared difference between the
+
+91
+00:07:32,022 --> 00:07:37,043
+target and what the neural net predicts.
+Or the linear neuron predicts.
+
+92
+00:07:37,043 --> 00:07:43,044
+Squared, in some liberal training cases.
+And we put a one-half in front, which will
+
+93
+00:07:43,044 --> 00:07:50,036
+cancel the two, when we differentiate.
+We now differentiate that error measure
+
+94
+00:07:50,036 --> 00:07:56,040
+with respect to one of the weights, WI.
+To do that differentiation we need to use
+
+95
+00:07:56,040 --> 00:07:59,086
+the chain rule.
+The chain rule says that how the error
+
+96
+00:07:59,086 --> 00:08:04,085
+changes as we change a weight, will be how
+the output changes as we change the
+
+97
+00:08:04,085 --> 00:08:08,062
+weight, times how the error changes as we
+change the output.
+
+98
+00:08:08,062 --> 00:08:13,352
+The chain rule is easy to remember, you
+just cancel those two DYs but you can only
+
+99
+00:08:13,352 --> 00:08:16,093
+do that when there's no mathematicians
+looking.
+
+100
+00:08:17,031 --> 00:08:22,087
+The reason the first one, DY by DW is
+written with a curly D is because it's a
+
+101
+00:08:22,087 --> 00:08:27,000
+partial derivative.
+That is, there's many different weights
+
+102
+00:08:27,000 --> 00:08:32,012
+you can change to change the output.
+And here, we're just considering the
+
+103
+00:08:32,012 --> 00:08:37,068
+change to weight i.
+So, DY by DWi, is actually equal to Xi,
+
+104
+00:08:37,068 --> 00:08:45,099
+and that's because Y is just Wi times Xi,
+and DE by DY, is just T minus Y, because
+
+105
+00:08:45,099 --> 00:08:53,089
+when we differentiate that T minus Y
+squared, and use the half to cancel the
+
+106
+00:08:53,089 --> 00:09:01,045
+two we just get T minus Y.
+So our learning rule is now, we change the
+
+107
+00:09:01,045 --> 00:09:07,760
+weights by an amount that's equal to the
+learning rate epsilon times the derivative
+
+108
+00:09:07,760 --> 00:09:12,001
+of the error with respect to a weight, to
+E by DWi.
+
+109
+00:09:12,001 --> 00:09:17,062
+And with a minus sign in front cuz we want
+the error to go down.
+
+110
+00:09:17,062 --> 00:09:24,023
+And that minus sign cancels the minus sign
+in the line above and we get that.
+
+111
+00:09:24,023 --> 00:09:31,034
+The change in a weight is the sum of all
+training cases of the learning rate times
+
+112
+00:09:31,034 --> 00:09:37,077
+the input value times the difference
+between the target and actual outputs.
+
+113
+00:09:39,077 --> 00:09:44,052
+Now we can ask how does this learning
+procedure, this delta rule, behave?
+
+114
+00:09:44,052 --> 00:09:48,013
+Does this, for example, eventually get the
+right answer?
+
+115
+00:09:49,062 --> 00:09:53,098
+There may be no perfect answer.
+It may be that we give the linear neuron a
+
+116
+00:09:53,098 --> 00:09:56,064
+bunch of training cases with desired
+answers.
+
+117
+00:09:56,064 --> 00:10:00,029
+And there's no set of weights that'll give
+the desired answer.
+
+118
+00:10:00,029 --> 00:10:05,001
+There's still some set of weights that
+gets the best approximation on all those
+
+119
+00:10:05,001 --> 00:10:07,061
+training cases, minimizes that error
+measure.
+
+120
+00:10:07,061 --> 00:10:11,080
+Some that are all training cases.
+And if we make the learning rate small
+
+121
+00:10:11,080 --> 00:10:16,052
+enough and we learn for long enough, we
+can get as close as we like to that best
+
+122
+00:10:16,052 --> 00:10:22,008
+answer.
+Another question is, how quickly do we get
+
+123
+00:10:22,008 --> 00:10:27,021
+towards the best answer.
+And even for a linear system.
+
+124
+00:10:27,021 --> 00:10:31,068
+The learning can be quite slow in this
+kind of intricate learning.
+
+125
+00:10:31,068 --> 00:10:36,091
+If two input dimensions are highly
+correlated, its very hard to tell how much
+
+126
+00:10:36,091 --> 00:10:41,582
+of the sum of the weight on both input
+dimensions should be attributed to each
+
+127
+00:10:41,582 --> 00:10:45,053
+input dimension.
+So if for example, you always get the same
+
+128
+00:10:45,053 --> 00:10:50,354
+number of portions of ketchup and chips
+is, we can't decide how much of the price
+
+129
+00:10:50,354 --> 00:10:53,678
+is due to the ketchup and how much is used
+to the chips.
+
+130
+00:10:53,678 --> 00:10:58,702
+And if they're almost always the same, it
+can take a long time for the learning to
+
+131
+00:10:58,702 --> 00:11:02,944
+correctly attribute the price to the
+ketchup and the chips.
+
+132
+00:11:02,944 --> 00:11:08,035
+There's an interesting relationship
+between the delta rule and the learning
+
+133
+00:11:08,035 --> 00:11:11,541
+rule for perceptrons.
+So, if you, you use the online version of
+
+134
+00:11:11,541 --> 00:11:15,971
+the delta rule, but we change the weights
+after each training case, it's quite
+
+135
+00:11:15,971 --> 00:11:20,501
+similar to the perceptron learning rule.
+In perceptron learning, we increment or
+
+136
+00:11:20,501 --> 00:11:24,716
+decrement the weight vector by the input
+vector, but we only change the input
+
+137
+00:11:24,716 --> 00:11:28,666
+vector when we make an error.
+In the online version of the delta rule,
+
+138
+00:11:28,666 --> 00:11:32,665
+we increment or decrement the weight
+vector by the imperfector.
+
+139
+00:11:32,665 --> 00:11:36,729
+But we scale that by both the residual
+error and the learning rate.
+
+140
+00:11:36,729 --> 00:11:41,259
+And one annoying thing about this is we
+have to choose a learning rate.
+
+141
+00:11:41,259 --> 00:11:46,248
+If we choose a learning rate that's too
+big, the system will be unstable.
+
+142
+00:11:46,248 --> 00:11:51,599
+And if we choose a learning rate that's
+too small, it will take an unnecessarily
+
+143
+00:11:51,599 --> 00:11:54,074
+long time to, to learn a sensible set of
+weights

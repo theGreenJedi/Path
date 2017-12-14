@@ -1,0 +1,559 @@
+1
+00:00:00,000 --> 00:00:05,964
+In this video, I'm going to describe a 
+technique called semantic hashing that 
+
+2
+00:00:05,964 --> 00:00:11,850
+provides an extremely efficient way of 
+finding documents similar to a query 
+
+3
+00:00:11,850 --> 00:00:15,723
+document. 
+The idea is to convert the document into 
+
+4
+00:00:15,723 --> 00:00:19,946
+a memory address. 
+And in that memory to organize things so 
+
+5
+00:00:19,946 --> 00:00:25,165
+that if you go to a particular address 
+and look at the nearby addresses, you'll 
+
+6
+00:00:25,165 --> 00:00:30,384
+find documents that are very similar. 
+This is much like a supermarket where if 
+
+7
+00:00:30,384 --> 00:00:35,736
+you go to a location where a particular 
+product is stored and look around, you'll 
+
+8
+00:00:35,736 --> 00:00:40,218
+find similar products. 
+People have known for a long time that if 
+
+9
+00:00:40,218 --> 00:00:45,624
+you could get binary descriptors of 
+images, you'd have a very good way of 
+
+10
+00:00:45,624 --> 00:00:50,511
+retrieving images quickly. 
+Some binary descriptors are easy to get. 
+
+11
+00:00:50,511 --> 00:00:54,510
+For example, is it an indoor scene or an 
+outdoor scene? 
+
+12
+00:00:54,510 --> 00:00:58,560
+Is to color image or black and white 
+image? 
+
+13
+00:00:58,560 --> 00:01:04,010
+But it's much harder to get a list of 
+say, 30 binary descriptors which are more 
+
+14
+00:01:04,010 --> 00:01:08,356
+or less orthogonal to one another, which 
+is what we really need. 
+
+15
+00:01:08,356 --> 00:01:12,288
+This is a problem that machine learning 
+can help us with. 
+
+16
+00:01:12,288 --> 00:01:17,532
+We're going to start by looking at the 
+equivalent problem for documents, but 
+
+17
+00:01:17,532 --> 00:01:22,706
+then we're going to apply it to images. 
+So consider, instead of getting real 
+
+18
+00:01:22,706 --> 00:01:27,270
+valued codes for documents, 
+getting binary codes, from the word 
+
+19
+00:01:27,270 --> 00:01:30,990
+cancer documents. 
+We do this by training a deep 
+
+20
+00:01:30,990 --> 00:01:34,790
+auto-encoder that has a logistic units in 
+it's code layer. 
+
+21
+00:01:36,440 --> 00:01:42,533
+That by itself is not sufficient because 
+the logistic units will be used in their 
+
+22
+00:01:42,533 --> 00:01:48,774
+middle ranges where they have real values 
+in order to convey as much information as 
+
+23
+00:01:48,774 --> 00:01:54,199
+possible about the 2,000 word counts. 
+To prevent that, we add noise to the 
+
+24
+00:01:54,199 --> 00:02:00,217
+inputs to the code units during the fine 
+tuning stage. So, we first train it as a 
+
+25
+00:02:00,217 --> 00:02:06,304
+stack of restricted Boltzmann machines. 
+We can unroll these Boltzmann machines by 
+
+26
+00:02:06,304 --> 00:02:11,374
+using the transposes of the white 
+matrices for the decoder, and then we 
+
+27
+00:02:11,374 --> 00:02:16,095
+fine tune it with back propagation. 
+And as we're doing that, we add 
+
+28
+00:02:16,095 --> 00:02:20,185
+additional Gaussian noise to the inputs 
+to the code units. 
+
+29
+00:02:20,185 --> 00:02:25,755
+In order to be resistant to that noise, 
+the code units need to be either firmly 
+
+30
+00:02:25,755 --> 00:02:29,773
+on or firmly off. 
+And so the noise will encourage the 
+
+31
+00:02:29,773 --> 00:02:35,273
+learning to avoid the middle region of 
+the logistic where it conveys a lot of 
+
+32
+00:02:35,273 --> 00:02:39,362
+information, but it's very sensitive to 
+noise in its inputs. 
+
+33
+00:02:39,362 --> 00:02:44,932
+At test time, we simply threshold the 
+logistic units in the middle layer to get 
+
+34
+00:02:44,932 --> 00:02:48,968
+binary values. 
+So, if we can train an auto-encoder like 
+
+35
+00:02:48,968 --> 00:02:54,832
+this, we will be able to convert the 
+counts for a bag of words into a small 
+
+36
+00:02:54,832 --> 00:02:59,835
+number of binary values. 
+In other words, we'll have learned a set 
+
+37
+00:02:59,835 --> 00:03:05,230
+of binary features that are good for 
+reconstructing the bag of words. 
+
+38
+00:03:05,230 --> 00:03:10,818
+Later on, Alex Krizhevsky discovered that 
+we don't actually have to add Gaussian 
+
+39
+00:03:10,818 --> 00:03:16,546
+noise to the inputs to the 30 code units. 
+Instead, we can just make them stochastic 
+
+40
+00:03:16,546 --> 00:03:19,549
+binary units. 
+So, during the forward pass, we 
+
+41
+00:03:19,549 --> 00:03:24,760
+stochastically pick a binary value using 
+the output of the logistic. 
+
+42
+00:03:24,760 --> 00:03:30,093
+And then, during the backward pass, we 
+pretend that we've transmitted the real 
+
+43
+00:03:30,093 --> 00:03:35,287
+value probability from the logistic, 
+and that gives us a smooth gradient for 
+
+44
+00:03:35,287 --> 00:03:39,235
+back propagation. 
+Once we've got these short binary codes, 
+
+45
+00:03:39,235 --> 00:03:44,983
+we could of course do a sequential search 
+where for each known document, we store a 
+
+46
+00:03:44,983 --> 00:03:48,031
+code. 
+And then when a query document arrives, 
+
+47
+00:03:48,031 --> 00:03:53,364
+we first extract its code, if it's not 
+one of our known documents, and then we 
+
+48
+00:03:53,364 --> 00:03:57,520
+compare the code with the codes of all 
+the stored documents. 
+
+49
+00:03:57,520 --> 00:04:03,040
+The comparisons can be very fast, because 
+they can use special bit operations on a 
+
+50
+00:04:03,040 --> 00:04:07,160
+typical CPU which can compare many bits 
+in parallel. 
+
+51
+00:04:07,160 --> 00:04:12,266
+But we have to go through a very long 
+list of documents, possibly billions. 
+
+52
+00:04:12,266 --> 00:04:17,511
+There's a much faster thing we can do, 
+there's a much faster thing we can do. 
+
+53
+00:04:17,511 --> 00:04:21,480
+We can treat the code as if it was a 
+memory address. 
+
+54
+00:04:21,480 --> 00:04:27,432
+So, the idea is that we take a document, 
+and we use our deep auto-encoder as a 
+
+55
+00:04:27,432 --> 00:04:33,240
+hash function that converts a document 
+into a 30 bit address Now, we have a 
+
+56
+00:04:33,240 --> 00:04:38,101
+memory with 30 bit addresses. 
+And in that memory, each address will 
+
+57
+00:04:38,101 --> 00:04:42,519
+have a pointer back to the documents that 
+have that address. 
+
+58
+00:04:42,519 --> 00:04:48,042
+If several documents have the same 
+address, we can make a little list there. 
+
+59
+00:04:48,042 --> 00:04:53,860
+Now, if the auto-ncoder is successful in 
+making similar documents have similar 
+
+60
+00:04:53,860 --> 00:04:58,500
+addresses, we have a very fast way of 
+finding similar documents. 
+
+61
+00:04:58,500 --> 00:05:04,484
+We simply take the query document, you go 
+to the address in memory that corresponds 
+
+62
+00:05:04,484 --> 00:05:08,594
+to its binary code, and then you look at 
+nearby addresses. 
+
+63
+00:05:08,594 --> 00:05:13,785
+In other words, you start flipping bits 
+in that address to access nearby 
+
+64
+00:05:13,785 --> 00:05:17,147
+addresses. 
+And you could imagine a little humming 
+
+65
+00:05:17,147 --> 00:05:21,420
+ball of nearby addresses that differ by 
+just a few bits. 
+
+66
+00:05:21,420 --> 00:05:26,970
+What we expect to find at those nearby 
+addresses is semantically similar 
+
+67
+00:05:26,970 --> 00:05:30,772
+documents. 
+So, we've completely avoided searching a 
+
+68
+00:05:30,772 --> 00:05:34,498
+big list. 
+We simply compute a memory address, flip 
+
+69
+00:05:34,498 --> 00:05:37,920
+a few bits, and look up the similar 
+documents. 
+
+70
+00:05:37,920 --> 00:05:43,287
+It's extremely efficient especially if we 
+have a very large database of say, a 
+
+71
+00:05:43,287 --> 00:05:47,002
+billion documents. 
+We've completely avoided the serial 
+
+72
+00:05:47,002 --> 00:05:51,957
+search through a billion items. 
+I sometimes call this supermarket search 
+
+73
+00:05:51,957 --> 00:05:55,604
+because it's like what you would do in a 
+supermarket. 
+
+74
+00:05:55,604 --> 00:06:00,351
+Suppose you went to an unfamiliar 
+supermarket and you wanted to find 
+
+75
+00:06:00,351 --> 00:06:03,241
+anchovies. 
+You might ask the teller at the 
+
+76
+00:06:03,241 --> 00:06:07,140
+supermarket, where do you keep the cans 
+of tuna fish? 
+
+77
+00:06:07,140 --> 00:06:11,749
+You'd then go to that address in the 
+supermarket and you'd look around. 
+
+78
+00:06:11,749 --> 00:06:16,878
+Hopefully, near there is things like cans 
+of salmon and maybe cans of anchovies. 
+
+79
+00:06:16,878 --> 00:06:21,422
+Of course, if you're unlucky, the 
+anchovies might have been stored in a 
+
+80
+00:06:21,422 --> 00:06:24,928
+completely different place, 
+next to the pizza toppings. 
+
+81
+00:06:24,928 --> 00:06:28,780
+And that's the downside of this kind of 
+search. 
+
+82
+00:06:28,780 --> 00:06:34,140
+Known as supermarket, it's essentially a 
+2-D surface. 
+
+83
+00:06:34,140 --> 00:06:39,385
+So, it's really a 1-D string of shells, 
+which have height and that gives you 2-D, 
+
+84
+00:06:39,385 --> 00:06:44,631
+and so you only have two dimensions in 
+which to locate things. And that's not 
+
+85
+00:06:44,631 --> 00:06:49,809
+sufficient to put all the things you'd 
+like to be near one another, near one 
+
+86
+00:06:49,809 --> 00:06:52,739
+another. 
+You'd like, for example, to have the 
+
+87
+00:06:52,739 --> 00:06:58,053
+vegetarian version of things nearby, or 
+the Kosher version of things nearby, or 
+
+88
+00:06:58,053 --> 00:07:03,026
+the slightly out of date version of 
+things nearby. And in 2-D you can't do 
+
+89
+00:07:03,026 --> 00:07:07,003
+all that. 
+But what we have here is a 30 dimensional 
+
+90
+00:07:07,003 --> 00:07:12,082
+supermarket and that's a hugely more 
+complex space where it's very easy to 
+
+91
+00:07:12,082 --> 00:07:17,093
+have things near an item for many 
+different reasons because of similarity 
+
+92
+00:07:17,093 --> 00:07:21,366
+along many different dimensions. 
+Here's another view of what we're doing 
+
+93
+00:07:21,366 --> 00:07:25,117
+in semantic haching. 
+Most of the first retrieval methods work 
+
+94
+00:07:25,117 --> 00:07:30,381
+by intersecting stored lists that are 
+associated with cues extracted from the 
+
+95
+00:07:30,381 --> 00:07:33,342
+query. 
+So, Google, for example, will have a list 
+
+96
+00:07:33,342 --> 00:07:37,290
+of all the documents that contain some 
+particular rare word. 
+
+97
+00:07:37,290 --> 00:07:42,554
+And when you use that rare word in your 
+query, they will immediately have access 
+
+98
+00:07:42,554 --> 00:07:45,923
+to that list. 
+They then have to intersect that list 
+
+99
+00:07:45,923 --> 00:07:51,016
+with other lists in order to find a 
+document that satisfies all the terms in 
+
+100
+00:07:51,016 --> 00:07:54,124
+your query. 
+Now, computers actually have special 
+
+101
+00:07:54,124 --> 00:07:59,350
+hardware that can intersect 32 very long 
+lists in a single machine instruction. 
+
+102
+00:07:59,350 --> 00:08:05,534
+The hardware is called the memory bus. 
+So, each bit in a 32-bit binary address 
+
+103
+00:08:05,534 --> 00:08:09,470
+specifies a list of half the addresses in 
+memory. 
+
+104
+00:08:09,470 --> 00:08:13,608
+For example, if the bit is on and it's 
+the first bit in the address, it 
+
+105
+00:08:13,608 --> 00:08:17,629
+specifies the top half of memory. 
+If the bit is off, it specifies the 
+
+106
+00:08:17,629 --> 00:08:21,234
+bottom half of memory. 
+What the memory bus is doing is 
+
+107
+00:08:21,234 --> 00:08:26,922
+intersecting 32 lists to find the one 
+location that satisfies all 32 values in 
+
+108
+00:08:26,922 --> 00:08:31,027
+the binary code. 
+So, we can think of semantic hashing as a 
+
+109
+00:08:31,027 --> 00:08:36,715
+way of using machine learning to map the 
+retrial problem onto the type of list 
+
+110
+00:08:36,715 --> 00:08:42,155
+intersection computer's good at. 
+As long as our 32-bits correspond to 
+
+111
+00:08:42,155 --> 00:08:45,530
+meaningful properties of documents or 
+images, 
+
+112
+00:08:45,530 --> 00:08:50,180
+then we can find similar ones very fast 
+with no search at all. 

@@ -1,0 +1,86 @@
+En este vídeo voy a mostrar un ejemplo simple
+de máquina de Boltzmann restringida aprendiendo un modelo de imágenes 
+de números dos manuscritos Luego de que se haya aprendido el modelo 
+veremos que tan bueno es reconstruyendo números dos Y veremos qué pasa si le damos una
+número diferente y le pedimos que lo reconstruya.
+Veremos también los pesos que obtenemos si entrenamos una máquina de Boltzmann restringida, 
+que es considerablemente más grande, en todas las clases de números. Aprende 
+una gran cantidad de variables explicativas que juntas son buenas para reconstruir 
+todas las diferentes clases de números y que también constituyen un buen modelo 
+para esos números. Es decir, si tomamos un vector binario de una imagen 
+del número manuscrito el modelo será capaz de encontrar un estado de baja energía,
+compatible con esa imagen y se le damos una imagen que está lejos de corresponder 
+al número manuscrito, el modelo no será capaz de encontrar estados de 
+baja energía compatibles con esa imagen. Voy a mostrarles ahora como un RBM relativamente simple
+puede aprender a construir un modelo de imágenes del número dos. Las imágenes son 
+de dieciseis pixeles por dieciseis pixeles. Y tiene 50 unidades binarias ocultas que van a aprender para convertirse en 
+detectores de variables explicativas interesantes De modo que cuando se los exponga con los datos, 
+lo primero que hace es usar los pesos y las conexiones desde pixeles a vectores de variables explicativas como ésta,  
+para activar los vectores de variables explicativas Para cada una de las neuronas 
+binarias toma una decisión estocástica sobre si debe deducir un estado de uno o cero. y luego usa las clase de activación 
+binaria para reconstruir el dato Para cada pixel toma una decisión binaria
+sobre si debe ser uno o cero. y luego vuelve a activar 
+el vector de la variables explicativas de característica binaria usando la reconstrucción para
+activarla en lugar de los datos Los pesos se cambian incrementando 
+los pesos entre un pixel activo y un vector de variable explicativa activo cuando 
+la red está observando los datos Eso bajará la energía de la configuración
+global de los datos y cualquiera sea el esquema oculto que vaya con él.
+Y decrementa los pesos entre un pixel activo y el vector de variable 
+explicativa activa cuando observa la reconstrucción y eso aumentaría 
+la energía de la reconstrucción. Cerca del principio del aprendizaje cuando
+los pesos son aleatorios, la reconstrucción casi con seguridad tendrá menos energía que los datos. Debido a que la reconstrucción es 
+lo que la red quiere reproducir en la unidad visible, dado 
+el esquema oculto de la actividad Y obviamente querrá reproducir esquemas que tengan 
+baja energía de acuerdo con la función de energía. Puedes pensar que lo que el aprendizaje hace es cambiar los pesos de modo que 
+los datos son de baja energía y la reconstrucción de los datos 
+es en general de energía más alta Comencemos con algunos pesos al azar para
+los 50 vectores de variables explicativas Usaremos pequeños pesos aleatorios,
+y cada uno de esos cuadrados muestra los pesos de los pixels viniendo de un detector 
+de variable explicativa en particular Los pequeños pesos aleatorios 
+se usan para romper la simetría Pero debido a que la actualización es estocástica
+en realidad no los necesitamos. Luego de observar algunos cientos de muestras de números,
+y digiriendo los pesos algunas veces, los pesos comienzan a formar esquemas. Si lo repetimos, podrán ver que muchos
+de los detectores de variables explicativas están detectando el esquema del dos como un todo.
+Son justamente detectores de variables de característica globales Y esos detectores de variables de 
+característica se vuelven más fuertes cada vez y ahora algunos comienzan a 
+localizarse y se vuelven más locales cada vez, y esos son los pesos finales y pueden ver que cada neurona se convierte en 
+un detector de variable de característica diferente y muchos de esos detectores son justamente locales.
+Si observan el detector de variable de característica en el recuadro rojo, por ejemplo, está 
+detectando la parte de arriba del dos Y está feliz cuando la parte de arriba del dos 
+está donde están los pixeles blancos y donde no hay nada donde 
+los pixeles negros están De modo que se está representando 
+donde está la parte de arriba del dos. Una vez que se ha aprendido el modelo podremos 
+ver que tan bien reconstruye números y le daremos algunos números de 
+prueba que no haya visto antes Comenzaremos dándole una muestra 
+de prueba de un dos Y su reconstrucción es bastante fiel con la muestra Está ligeramente borrosa.  La muestra de prueba 
+tiene un gancho en la parte superior que se ha borroneado luego de la 
+reconstrucción pero es una reconstrucción bastante buena. Lo más interesante 
+que podemos hacer es darle una muestra de prueba 
+de un número diferente. Si le damos un ejemplo de 
+un tres para reconstruir Lo que reconstruye se parece más 
+a un dos que a un tres. Todo lo que los detectores de variable explicativa 
+han aprendido es bueno para representar un dos pero no tiene detectores de variable explicativa que 
+representen esa cúspide en el medio de un tres De modo que termina reconstruyendo algo que obedece a las regularidades del dos 
+más que representar las regularidades del tres En realidad, la red trata de ver todo como un dos Aquí hay algunos detectores de
+ variables explicativas que fueron aprendidos en la primer capa oculta de 
+un modelo que usa 500 unidades ocultas para modelizar las diez clases de números.
+Y este modelo ha sido entrenado un largo tiempo con divergencia contrastiva. Tiene una gran 
+variedad de detectores de variables explicativas Si observan el recuadro azul.
+ésta será obviamente útlil para detectar cosas como un ocho. 
+Si observan el recuadro rojo no hay lo que esperarían ver. Quiere ver 
+pixeles muy cercanos al borde inferior y no quire encontrar pixeles 
+activos en la línea que está 21 pixeles por encima del borde inferior. 
+Lo que pasa acá es que los datos están normalizados y los números no pueden
+tener una altura mayor que veinte pixeles Quiere decir que si sabes que hay un pixel 
+activo donde están esos pesos positivos grandes no puede haber un pixel activo 
+donde están esos pesos negativos. Está captando regularidades en una 
+zona amplia que fue introducida cuando normalizamos los datos. 
+Acá hay otra que hace lo mismo por el hecho de que los datos no 
+pueden ser más anchos que veinte pixeles La variable explicativa detectada en 
+el recuadro verde es muy interesante Está detectando dónde la parte inferior 
+de un trazo vertical llega y lo detectará en una cantidad diferente de posiciones 
+y rehusará detectarlo en posiciones intermedias. 
+Es como pasa con el dígito menos significativo de un número binario.
+A medida que aumenta la magnitud del número se activa y se desactiva, se activa 
+y se desactiva otra vez y demuestra que desarrolla formas bastante complejas 
+de representar dónde están las cosas.

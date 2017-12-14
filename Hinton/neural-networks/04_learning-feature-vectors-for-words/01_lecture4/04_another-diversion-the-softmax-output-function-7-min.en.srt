@@ -1,0 +1,433 @@
+1
+00:00:00,000 --> 00:00:04,051
+In this video, we're going to look at the
+soft max output function.
+
+2
+00:00:04,051 --> 00:00:10,000
+This is a way of forcing the outputs of a
+neural network to sum to one so they can
+
+3
+00:00:10,000 --> 00:00:14,075
+represent a probability distribution
+across discreet mutually exclusive
+
+4
+00:00:14,075 --> 00:00:18,038
+alternatives.
+Before we get back to the issue of how we
+
+5
+00:00:18,038 --> 00:00:23,086
+learn feature vectors to represent words,
+we're gonna have one more digression, this
+
+6
+00:00:23,086 --> 00:00:28,075
+time it's a technical diversion.
+So far I talked about using a square area
+
+7
+00:00:28,075 --> 00:00:34,017
+measure for training a neural net and for
+linear neurons it's a sensible thing to
+
+8
+00:00:34,017 --> 00:00:37,039
+do.
+But the squared error measure has some
+
+9
+00:00:37,039 --> 00:00:41,020
+drawbacks.
+If for example the design acuities are
+
+10
+00:00:41,020 --> 00:00:46,088
+one, so you have a target of one, and the
+actual output of a neuron is one
+
+11
+00:00:46,088 --> 00:00:52,602
+billionth, then there's almost no gradient
+to allow a logistic unit to change.
+
+12
+00:00:52,602 --> 00:00:58,038
+It's way out on a plateau where the slope
+is almost exactly horizantal.
+
+13
+00:00:58,038 --> 00:01:03,080
+And so, it will take a very, very long
+time to change its weights, even though
+
+14
+00:01:03,080 --> 00:01:08,009
+it's making almost as big an error as it's
+possible to make.
+
+15
+00:01:08,009 --> 00:01:13,030
+Also, if we're trying to assign
+probabilities to mutually exclusive class
+
+16
+00:01:13,030 --> 00:01:16,080
+labels, we know that the output should sum
+to one.
+
+17
+00:01:16,080 --> 00:01:21,079
+Any answer in which we say, the
+probability this is A is three quarters
+
+18
+00:01:21,079 --> 00:01:27,043
+and the probability that it's a B is also
+three quarters is just a crazy answer.
+
+19
+00:01:27,043 --> 00:01:31,695
+And we ought to tell the network that
+information, we shouldn't deprive it of
+
+20
+00:01:31,695 --> 00:01:35,087
+the knowledge that these are mutually
+exclusive answers.
+
+21
+00:01:35,087 --> 00:01:40,070
+So the question is, is there a different
+cost function that will work better?
+
+22
+00:01:40,070 --> 00:01:45,077
+Is there a way of telling it that these
+are mutually exclusive and then using a,
+
+23
+00:01:45,077 --> 00:01:50,043
+an appropriate cost function?
+The answer, of course is, that there is.
+
+24
+00:01:50,087 --> 00:01:56,075
+What we need to do is force the outputs of
+the neural net to represent a probability
+
+25
+00:01:56,075 --> 00:02:02,035
+distribution across discrete alternatives,
+if that's what we plan to use them for.
+
+26
+00:02:02,035 --> 00:02:06,043
+The way we do this is by using something
+called a soft-max.
+
+27
+00:02:06,043 --> 00:02:10,078
+It's a kind of soft continuous version of
+the maximum function.
+
+28
+00:02:10,078 --> 00:02:16,052
+So the way the units in a soft-max group
+work is that they each receive some total
+
+29
+00:02:16,052 --> 00:02:19,076
+input they've accumulated from the layer
+below.
+
+30
+00:02:19,076 --> 00:02:23,063
+That's Zi for the i-th unit, and that's
+called the logit.
+
+31
+00:02:23,063 --> 00:02:29,075
+And then they give an output Yi that
+doesn't just depend on their own Zi.
+
+32
+00:02:29,075 --> 00:02:34,053
+It depends on the Zs accumulated by their
+rivals as well.
+
+33
+00:02:34,053 --> 00:02:41,006
+So we say that the output of the i-th
+neuron is E to the Zi divided by the sum
+
+34
+00:02:41,006 --> 00:02:47,018
+of that same quantity for all the
+different neurons in the softmax group.
+
+35
+00:02:47,047 --> 00:02:52,086
+And because the bottom line of that
+equation is the sum of the top line over
+
+36
+00:02:52,086 --> 00:02:58,060
+all possibilities, we know that when you
+add over all possibilities you'll get one.
+
+37
+00:02:58,060 --> 00:03:02,003
+That is, the sum of all the Yi's must come
+to one.
+
+38
+00:03:02,003 --> 00:03:05,081
+What's more, the Yi's have to lie between
+zero and one.
+
+39
+00:03:05,081 --> 00:03:11,076
+So we force the Yi to represent a
+probability distribution over mutually
+
+40
+00:03:11,076 --> 00:03:16,059
+exclusive alternatives just by using that
+soft max equation.
+
+41
+00:03:16,059 --> 00:03:20,069
+The soft max equation has a nice simple
+derivative.
+
+42
+00:03:20,069 --> 00:03:27,098
+If you ask about how the YI changes as you
+change the Zi, that obviously depends on,
+
+43
+00:03:27,098 --> 00:03:33,025
+all the other Zs.
+But then the Yi itself depends on all the
+
+44
+00:03:33,025 --> 00:03:37,038
+other Zs.
+And it turns out, that you get a nice
+
+45
+00:03:37,038 --> 00:03:44,032
+simple form, just like you do for the
+majestic unit, where the derivative of the
+
+46
+00:03:44,032 --> 00:03:51,034
+output with respect to the input, for an
+individual neuron in a softmax group, is
+
+47
+00:03:51,034 --> 00:03:57,017
+just Yi times one minus Yi.
+It's not totally trivial to derive that.
+
+48
+00:03:57,017 --> 00:04:03,018
+If you tried differentiating the equation
+above, you must remember that things turn
+
+49
+00:04:03,018 --> 00:04:06,066
+up in that normalization term on the
+bottom row.
+
+50
+00:04:06,066 --> 00:04:11,015
+It's very easy to forget those terms and
+get the wrong answer.
+
+51
+00:04:12,097 --> 00:04:19,034
+Now the question is, if we're using a soft
+max group for the outputs, what's the
+
+52
+00:04:19,034 --> 00:04:24,090
+right cost function?
+And the answer, as usual, is that the most
+
+53
+00:04:24,090 --> 00:04:30,069
+appropriate cost function is the negative
+log probability of the correct answer.
+
+54
+00:04:30,069 --> 00:04:36,018
+That is, we want to maximize the log
+probability of getting the answer right.
+
+55
+00:04:36,018 --> 00:04:41,097
+So if one of the target values is a one
+and the remaining ones are zero, then we
+
+56
+00:04:41,097 --> 00:04:47,033
+simply sum of all possible answers.
+We put zeros in front of all the wrong
+
+57
+00:04:47,033 --> 00:04:50,002
+answers.
+And we put one in front of the right
+
+58
+00:04:50,002 --> 00:04:54,076
+answer and that gets us the negative log
+probability of the correct answer, as you
+
+59
+00:04:54,076 --> 00:05:00,071
+can see in the equation.
+That's called the cross entropy cost
+
+60
+00:05:00,071 --> 00:05:06,037
+function.
+It has a nice property that it has a very
+
+61
+00:05:06,037 --> 00:05:12,001
+big gradient when the target value is one
+and the output is almost zero.
+
+62
+00:05:12,001 --> 00:05:15,093
+You can see that by considering a couple
+of cases.
+
+63
+00:05:17,036 --> 00:05:22,065
+So value of one in a million is much
+better than a value of one in a billion,
+
+64
+00:05:22,065 --> 00:05:25,095
+even though it differs by less than a
+millionth.
+
+65
+00:05:25,095 --> 00:05:31,011
+So when you make the output value, you
+increase by less than one millionth.
+
+66
+00:05:31,011 --> 00:05:35,072
+The value of C improves by a lot.
+That means it's a very, very steep
+
+67
+00:05:35,072 --> 00:05:39,064
+gradient for C.
+One way of seeing why a value of one in a
+
+68
+00:05:39,064 --> 00:05:45,225
+million is much better than a value of one
+in a billion, if the correct answer is one
+
+69
+00:05:45,225 --> 00:05:49,479
+is that if you believe the one in a
+million, you'd be willing to bet but odds
+
+70
+00:05:49,479 --> 00:05:52,093
+of one in a million, then you'd lose $one
+million.
+
+71
+00:05:52,093 --> 00:05:57,512
+If you thought the answer was one in a one
+billion you'd, you'd lose $one billion
+
+72
+00:05:57,512 --> 00:06:00,092
+making the same bet.
+So we get a nice property that.
+
+73
+00:06:01,030 --> 00:06:07,680
+That cost function, C has a very steep
+derivative when the answer is very wrong
+
+74
+00:06:07,680 --> 00:06:14,707
+and that exactly bounces the fact that the
+way which the advert changes is to change
+
+75
+00:06:14,707 --> 00:06:20,072
+the import, the Y or the Z is very flat
+when the once is very wrong.
+
+76
+00:06:20,072 --> 00:06:27,076
+And when you multiply the two together to
+get the derivative of cross entropy with
+
+77
+00:06:27,076 --> 00:06:30,998
+respect to the logic going into i put unit
+i.
+
+78
+00:06:30,998 --> 00:06:38,142
+You use the chain rule so that derivative
+is how fast the cost function changes as
+
+79
+00:06:38,142 --> 00:06:46,283
+you change the output of the unit times
+how fast the output of the unit changes as
+
+80
+00:06:46,283 --> 00:06:50,421
+you change Zi.
+And notice we need to add up across all
+
+81
+00:06:50,421 --> 00:06:57,651
+the Js, because when you change the i, the
+output of all the different units changes.
+
+82
+00:06:57,651 --> 00:07:02,351
+The result is just the actual output minus
+the target output.
+
+83
+00:07:02,351 --> 00:07:07,601
+And you can see that when the actual
+target outputs are very different, that
+
+84
+00:07:07,601 --> 00:07:11,842
+has a slope of one or -one.
+And the slope is never bigger than one or
+
+85
+00:07:11,842 --> 00:07:14,191
+-one.
+But the slope never gets small until the
+
+86
+00:07:14,191 --> 00:07:18,913
+two things are pretty much the same.
+In other words, you're getting pretty much
+
+87
+00:07:18,913 --> 00:07:20,055
+the right answer.

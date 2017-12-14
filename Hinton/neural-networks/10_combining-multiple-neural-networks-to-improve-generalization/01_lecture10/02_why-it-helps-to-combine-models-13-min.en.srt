@@ -1,0 +1,849 @@
+1
+00:00:00,000 --> 00:00:05,312
+In this video, I'm going to talk about the
+reason why we want to combine many models
+
+2
+00:00:05,312 --> 00:00:09,360
+when we're making predictions.
+If we have a single model, we have to
+
+3
+00:00:09,360 --> 00:00:13,787
+choose some capacity for it.
+If we choose too little capacity, it would
+
+4
+00:00:13,787 --> 00:00:17,140
+be able to fit the regularities in the
+training data.
+
+5
+00:00:17,140 --> 00:00:22,563
+And if we choose too much capacity, it
+won't be able to fit the sampling error in
+
+6
+00:00:22,563 --> 00:00:27,784
+the particular training set we have.
+By using many models, we can actually get
+
+7
+00:00:27,784 --> 00:00:33,546
+a better tradeoff between fitting the true
+regularities, and overfitting the sampling
+
+8
+00:00:33,546 --> 00:00:36,530
+error in the data.
+At the start of the video,
+
+9
+00:00:36,530 --> 00:00:41,841
+I'll show you that when you average models
+together, you can expect to do better than
+
+10
+00:00:41,841 --> 00:00:45,340
+any single model.
+This effect is largest when the models
+
+11
+00:00:45,340 --> 00:00:48,339
+make very different predictions from each
+other.
+
+12
+00:00:48,339 --> 00:00:53,650
+And at the end of this video, I'll discuss
+various ways in which we can encourage the
+
+13
+00:00:53,650 --> 00:00:56,900
+different models to make very different
+predictions.
+
+14
+00:00:57,340 --> 00:01:02,169
+As we've seen before, when we have a
+limited amount of training data, we tend
+
+15
+00:01:02,169 --> 00:01:06,652
+to get overfitting.
+If we average the predictions of many
+
+16
+00:01:06,652 --> 00:01:10,240
+different models we can typically reduce
+that overfitting.
+
+17
+00:01:11,320 --> 00:01:16,220
+This helps most when the models make very
+different predictions from one another.
+
+18
+00:01:17,620 --> 00:01:23,529
+For regression, the squared arrow can be
+decomposed into a bias term and a variance
+
+19
+00:01:23,529 --> 00:01:26,946
+term.
+And that allows us to analyze what's going
+
+20
+00:01:26,946 --> 00:01:30,768
+on.
+The bias term is big if the model has too
+
+21
+00:01:30,768 --> 00:01:35,177
+little capacity to fit the data.
+It measures how poorly the model
+
+22
+00:01:35,177 --> 00:01:40,314
+approximates the true function.
+The variance term is big if the model has
+
+23
+00:01:40,314 --> 00:01:44,171
+so much capacity that it's good at
+modeling the sampling error in our
+
+24
+00:01:44,171 --> 00:01:47,753
+particular training set.
+So, it's called variance, because if we go
+
+25
+00:01:47,753 --> 00:01:52,327
+and get another training set of the same
+size from the same distribution, our model
+
+26
+00:01:52,327 --> 00:01:56,846
+will fit differently to that training set,
+because it has different sampling error.
+
+27
+00:01:56,846 --> 00:02:01,200
+And so we'll get variance in the way the
+models fit to different training sets.
+
+28
+00:02:03,240 --> 00:02:08,067
+If we average models together, what we're
+doing is we're averaging away the
+
+29
+00:02:08,067 --> 00:02:11,028
+variance,
+And that allows us to use individual
+
+30
+00:02:11,028 --> 00:02:14,825
+models that have high capacity and
+therefore high variance.
+
+31
+00:02:14,825 --> 00:02:18,044
+These high capacity model typically have
+low bias.
+
+32
+00:02:18,044 --> 00:02:22,678
+So we can get the low bias without
+incurring the high variance by using
+
+33
+00:02:22,678 --> 00:02:30,383
+averaging to get rid of the variance.
+So now let's try and analyze how an
+
+34
+00:02:30,383 --> 00:02:34,780
+individual model compares with an average
+of models.
+
+35
+00:02:36,120 --> 00:02:41,275
+On any one test case some individual
+predictors may be better than the combined
+
+36
+00:02:41,275 --> 00:02:45,673
+predictor.
+The different individual predictors will
+
+37
+00:02:45,673 --> 00:02:50,497
+be better on different cases.
+And if the individual predictors disagree
+
+38
+00:02:50,497 --> 00:02:55,125
+a lot, the combined predictor is typically
+better than all of the individual
+
+39
+00:02:55,125 --> 00:02:57,744
+predictors when we average over test
+cases.
+
+40
+00:02:57,744 --> 00:03:02,616
+So we should aim to make the individual
+predictors disagree, without making them
+
+41
+00:03:02,616 --> 00:03:06,270
+be poor predictors.
+The art is to have individual predictors
+
+42
+00:03:06,270 --> 00:03:11,020
+that make very different errors from one
+another, but are each fairly accurate.
+
+43
+00:03:13,240 --> 00:03:17,603
+So, now let's look at the math and what
+happens when we combine networks.
+
+44
+00:03:17,603 --> 00:03:20,693
+We're going to compare two expected
+squared errors.
+
+45
+00:03:20,693 --> 00:03:25,117
+The first expected squared error is the
+one we get if we pick one of the
+
+46
+00:03:25,117 --> 00:03:28,814
+predictors at random and use that for
+making our predictions.
+
+47
+00:03:28,814 --> 00:03:33,843
+And then what we do is we average overall
+predictors, the error we'd expect to get
+
+48
+00:03:33,843 --> 00:03:39,899
+if we followed that policy.
+So Y bar is the average of what all the
+
+49
+00:03:39,899 --> 00:03:44,145
+predictors say, and YI is what an
+individual predictor says.
+
+50
+00:03:44,145 --> 00:03:50,191
+So Y bar is just the expectation over all
+the individual predictors I of YI and I'm
+
+51
+00:03:50,191 --> 00:03:56,093
+using those angle brackets to represent an
+expectation, where the thing that comes
+
+52
+00:03:56,093 --> 00:04:00,700
+after the angle bracket tells you what
+it's an expectation over.
+
+53
+00:04:01,020 --> 00:04:06,560
+We can write the same thing as one over n
+times the sum overall of the n of the yi.
+
+54
+00:04:09,620 --> 00:04:14,405
+Now, if we look at the expected squared
+error we'd get if we chose a predictor at
+
+55
+00:04:14,405 --> 00:04:17,005
+random,
+What we'd have to do is compare that
+
+56
+00:04:17,005 --> 00:04:20,195
+predictor with the target, take the
+squared difference.
+
+57
+00:04:20,195 --> 00:04:25,040
+And then average that over all predictors.
+That's also on the left hand side there.
+
+58
+00:04:25,300 --> 00:04:30,448
+If I simply add a Y bar and subtract a Y
+bar, I don't change the value.
+
+59
+00:04:30,448 --> 00:04:34,420
+And now it's going to be easier to do some
+manipulations.
+
+60
+00:04:36,360 --> 00:04:43,753
+I can now multiply it that squared and
+inside this expectation bracket I have t
+
+61
+00:04:43,753 --> 00:04:50,702
+minus y bar squared, y I minus y bar
+square, and t minus y bar into y I minus y
+
+62
+00:04:50,702 --> 00:04:58,310
+bar, which has the c will disappear.
+So the first term, T minus Y bar squared,
+
+63
+00:04:58,310 --> 00:05:03,457
+doesn't have an I in it anymore, and so we
+can forget about the expectation brackets
+
+64
+00:05:03,457 --> 00:05:06,275
+for that.
+That really is T minus Y bar squared.
+
+65
+00:05:06,275 --> 00:05:11,238
+And that's the squared arrow you'd get if
+you compared the average of the models
+
+66
+00:05:11,238 --> 00:05:14,669
+with the target.
+And our aim is to show the thing on the
+
+67
+00:05:14,669 --> 00:05:19,570
+left hand side is bigger than that, i.e.,
+by using that average, we've reduced the
+
+68
+00:05:19,570 --> 00:05:24,299
+expected squared error.
+So the extra term we have on the right
+
+69
+00:05:24,299 --> 00:05:28,205
+hand side, is the expectation of y i minus
+y bar squared.
+
+70
+00:05:28,205 --> 00:05:33,575
+And that's just the variance of the y i.
+It's the expected squared difference
+
+71
+00:05:33,575 --> 00:05:37,849
+between y I and y bar.
+And then the last tone disappears, it
+
+72
+00:05:37,849 --> 00:05:43,846
+disappears because the difference of Y I
+from Y bar we expect to be uncorrelated
+
+73
+00:05:43,846 --> 00:05:50,065
+with the difference between the arrow that
+the average of the networks makes on the
+
+74
+00:05:50,065 --> 00:05:53,397
+target.
+And so we're multiplying together two
+
+75
+00:05:53,397 --> 00:05:59,320
+things that are zero mean and uncorrelated
+and we expect to get zero on average.
+
+76
+00:05:59,660 --> 00:06:06,321
+So the result is that the expected squared
+error we get by picking a model at random
+
+77
+00:06:06,321 --> 00:06:12,904
+is greater than the squared error we get
+by averaging the models by the variance of
+
+78
+00:06:12,904 --> 00:06:18,233
+the outputs of the models.
+That's how much we win by when we take an
+
+79
+00:06:18,233 --> 00:06:23,846
+average.
+So, I want to show you that in a picture.
+
+80
+00:06:23,846 --> 00:06:28,755
+So, along the horizontal line, we have the
+possible values of the output, and in this
+
+81
+00:06:28,755 --> 00:06:32,660
+case, all of the different models predict
+a value that is too high.
+
+82
+00:06:33,260 --> 00:06:38,078
+The predictors that are further than
+average from T make bigger than average
+
+83
+00:06:38,078 --> 00:06:43,210
+squared errors, like that bad guy in red,
+and the predictors that are less than the
+
+84
+00:06:43,210 --> 00:06:47,278
+average distance from T make smaller than
+average squared arrows.
+
+85
+00:06:47,278 --> 00:06:51,346
+And the first effect dominates, because
+we're using squared error.
+
+86
+00:06:51,346 --> 00:06:56,352
+So if you look at the math, let's suppose
+that the good guy and the bad guy were
+
+87
+00:06:56,352 --> 00:07:01,628
+equally far from the mean.
+So the average squared error they make is
+
+88
+00:07:01,628 --> 00:07:06,182
+Y bar minus epsilon squared plus Y bar
+plus epsilon squared.
+
+89
+00:07:06,182 --> 00:07:11,648
+And when we work that out, we get the
+squared error that the mean of the
+
+90
+00:07:11,648 --> 00:07:17,873
+predictors makes, plus an epsilon squared.
+So we win by averaging predictors before
+
+91
+00:07:17,873 --> 00:07:22,048
+we compare them with the target.
+That's not always true.
+
+92
+00:07:22,048 --> 00:07:25,540
+It depends very much on using a squared
+error.
+
+93
+00:07:25,840 --> 00:07:28,985
+If, for example, you have a whole bunch of
+clocks.
+
+94
+00:07:28,985 --> 00:07:33,048
+And you try and make them more accurate by
+averaging them all,
+
+95
+00:07:33,048 --> 00:07:37,242
+That'll be a disaster.
+And it'll be a disaster because the noise
+
+96
+00:07:37,242 --> 00:07:42,746
+you expect in clocks isn't Gaussian noise.
+What you expect is that, many of them will
+
+97
+00:07:42,746 --> 00:07:48,185
+be very slightly wrong and a few of them
+will have stopped or will be wildly wrong.
+
+98
+00:07:48,185 --> 00:07:53,690
+And if you average, you make sure they are
+all significantly wrong, which is not what
+
+99
+00:07:53,690 --> 00:07:56,972
+you want.
+The same thing applies to the discrete
+
+100
+00:07:56,972 --> 00:08:00,700
+distribution as we have our class labeled
+probabilities.
+
+101
+00:08:01,760 --> 00:08:07,416
+So suppose that we have two models, and
+one gives the correct label of probability
+
+102
+00:08:07,416 --> 00:08:11,900
+of Pi, and the other gives the correct
+label of probability of Pj.
+
+103
+00:08:13,120 --> 00:08:18,262
+Is it better to pick one model at random,
+or it is it better to average those two
+
+104
+00:08:18,262 --> 00:08:21,500
+probabilities, and predict the average of
+Pi and Pj.
+
+105
+00:08:21,780 --> 00:08:26,820
+What if I had a measure is the log
+probability of getting the right answer?
+
+106
+00:08:27,200 --> 00:08:34,231
+Then, the log of the average of Pi and Pj
+is going to be a better bet than the log
+
+107
+00:08:34,231 --> 00:08:40,550
+of Pi plus the log of Pj averaged.
+That's most easily seen in a diagram
+
+108
+00:08:40,550 --> 00:08:48,238
+because of the shape of the log function.
+So that black curve is the log.
+
+109
+00:08:48,238 --> 00:08:52,600
+On the horizontal access I've drawn Pi and
+Pj,
+
+110
+00:08:53,000 --> 00:08:57,500
+And the gold colored line, joins log Pi to
+log Pj.
+
+111
+00:08:57,940 --> 00:09:04,608
+You can see that if we first start with Pi
+and Pj together, to get that average value
+
+112
+00:09:04,608 --> 00:09:10,100
+at the blue arrow is, and then we compute
+the log, we get that blue dot.
+
+113
+00:09:10,480 --> 00:09:16,103
+Whereas if we first take the log of pi,
+and separately take the log of pj, and
+
+114
+00:09:16,103 --> 00:09:21,215
+then we average those two logs, we get the
+mid-point of that gold line,
+
+115
+00:09:21,215 --> 00:09:28,334
+Which is below the blue dot.
+So to make this averaging be a big win, we
+
+116
+00:09:28,334 --> 00:09:33,252
+want our predictors to differ by a lot.
+And there's many different ways to make
+
+117
+00:09:33,252 --> 00:09:36,624
+them differ.
+You could just rely on a learning
+
+118
+00:09:36,624 --> 00:09:41,652
+algorithm that doesn't work too well, and
+get stuck in different local optima each
+
+119
+00:09:41,652 --> 00:09:44,412
+time.
+It's not a very intelligent thing to do,
+
+120
+00:09:44,412 --> 00:09:50,056
+but it's worth a try.
+You could use lots of different kinds of
+
+121
+00:09:50,056 --> 00:09:53,509
+models, including ones that are not neural
+networks.
+
+122
+00:09:53,509 --> 00:09:58,858
+So, it makes sense to try decision trees,
+Gaussian process models, support vector
+
+123
+00:09:58,858 --> 00:10:02,176
+machines.
+I'm not explaining any of those in this
+
+124
+00:10:02,176 --> 00:10:05,765
+course.
+In Andrew Ng's machine on Coursera, you
+
+125
+00:10:05,765 --> 00:10:10,709
+can learn about all those things.
+Well you could try many other different
+
+126
+00:10:10,709 --> 00:10:15,478
+kinds of model.
+If you really want to use a bunch of
+
+127
+00:10:15,478 --> 00:10:20,115
+different neural-network models, you can
+make them different by using a different
+
+128
+00:10:20,115 --> 00:10:24,580
+number of hidden layers or a different
+number of units per layer or different
+
+129
+00:10:24,580 --> 00:10:27,214
+types of unit.
+Like in some nets you could use
+
+130
+00:10:27,214 --> 00:10:30,649
+rectified-linear units,
+And in other nets you could use logistic
+
+131
+00:10:30,649 --> 00:10:33,454
+units.
+You could use different types or strengths
+
+132
+00:10:33,454 --> 00:10:36,831
+of weight penalty.
+So you might use early stopping for some
+
+133
+00:10:36,831 --> 00:10:41,240
+nets, and an L2 weight penalty for others,
+and an L1 weight penalty for others.
+
+134
+00:10:42,320 --> 00:10:44,485
+You could use different learning
+algorithms.
+
+135
+00:10:44,485 --> 00:10:48,816
+So for example you could use full batch
+for some, and mini batch for others, if
+
+136
+00:10:48,816 --> 00:10:51,260
+your data set is small enough to allow
+that.
+
+137
+00:10:51,260 --> 00:10:56,575
+You can also make the models differ by
+training the models on different training
+
+138
+00:10:56,575 --> 00:10:59,397
+data.
+So, there's a method introduced by Leo
+
+139
+00:10:59,397 --> 00:11:04,646
+Breiman called bagging, where you train
+different models on different subsets of
+
+140
+00:11:04,646 --> 00:11:07,993
+the data.
+And you get these subsets by sampling the
+
+141
+00:11:07,993 --> 00:11:12,456
+training set with replacement.
+So we sampled a training set that had
+
+142
+00:11:12,456 --> 00:11:16,590
+examples A, B, C, D, and E.
+And we got five examples, but we'll have
+
+143
+00:11:16,590 --> 00:11:21,315
+some missing and some duplicated.
+And we train one of our models on that
+
+144
+00:11:21,315 --> 00:11:25,328
+particular training set.
+This is done in a method called random
+
+145
+00:11:25,328 --> 00:11:30,330
+forest that uses bagging with decision
+trees, which Leo Breiman was also involved
+
+146
+00:11:30,330 --> 00:11:33,832
+in inventing.
+When you train decision trees with bagging
+
+147
+00:11:33,832 --> 00:11:39,022
+and then average them together, they work
+much better than single decision tree bys
+
+148
+00:11:39,022 --> 00:11:41,887
+themselves.
+In fact, the connect box uses random
+
+149
+00:11:41,887 --> 00:11:46,848
+forests to convert information about depth
+into information about where your body
+
+150
+00:11:46,848 --> 00:11:49,994
+parts are.
+We could use bagging with neural nets, but
+
+151
+00:11:49,994 --> 00:11:53,261
+it's very expensive.
+If you wanted to train say, twenty
+
+152
+00:11:53,261 --> 00:11:58,101
+different neural nets this way, you'd have
+to get your twenty different training
+
+153
+00:11:58,101 --> 00:12:00,763
+sets.
+And then it would take twenty times as
+
+154
+00:12:00,763 --> 00:12:04,695
+long as training one net.
+That doesn't matter with decision tress
+
+155
+00:12:04,695 --> 00:12:08,707
+cuz they're so fast to train.
+Also, at test time, you'd have to run
+
+156
+00:12:08,707 --> 00:12:12,908
+these twenty different nets.
+Again, with decision trees, that doesn't
+
+157
+00:12:12,908 --> 00:12:15,981
+matter, cuz they're so fast to use at test
+time.
+
+158
+00:12:15,981 --> 00:12:20,997
+Another method for making the training
+data different is to train each model on
+
+159
+00:12:20,997 --> 00:12:24,948
+the whole training set,
+But to weight the cases differently So, in
+
+160
+00:12:24,948 --> 00:12:29,337
+boosting, we typically we use a sequence
+of fairly low capacity models.
+
+161
+00:12:29,337 --> 00:12:33,100
+And we weight the training cases for each
+model differently.
+
+162
+00:12:33,460 --> 00:12:38,079
+What we do is we up weight the cases the
+previous model got wrong and we down
+
+163
+00:12:38,079 --> 00:12:40,685
+weight the case of previous model got
+right.
+
+164
+00:12:40,685 --> 00:12:45,660
+So the next model in the sequence doesn't
+waste its time trying to model cases that
+
+165
+00:12:45,660 --> 00:12:49,331
+are already correct.
+It uses its resources to try to deal with
+
+166
+00:12:49,331 --> 00:12:55,721
+cases the other models are getting wrong.
+An early use of boosting, was with neural
+
+167
+00:12:55,721 --> 00:12:59,138
+nets for MNIST,
+And there when computer's are actually
+
+168
+00:12:59,138 --> 00:13:02,059
+slower.
+One of the big advantage is was that it
+
+169
+00:13:02,059 --> 00:13:06,098
+focused to competitional resources on
+modelling the tricky cases,
+
+170
+00:13:06,098 --> 00:13:10,386
+And didn't waste a lot of time, going over
+easy cases again and again.

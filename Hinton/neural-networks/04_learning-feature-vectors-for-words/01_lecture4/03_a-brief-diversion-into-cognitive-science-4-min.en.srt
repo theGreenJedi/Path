@@ -1,0 +1,279 @@
+1
+00:00:00,000 --> 00:00:05,009
+We're now going to talk a little bit about
+an issue that's of interest according to
+
+2
+00:00:05,009 --> 00:00:08,050
+scientists, but may not be of much
+interest to engineers.
+
+3
+00:00:08,050 --> 00:00:11,090
+So if you're an engineer you can just
+ignore this video.
+
+4
+00:00:12,040 --> 00:00:18,058
+In computer science, there's been a debate
+going on for maybe a 100 years about the
+
+5
+00:00:18,058 --> 00:00:23,066
+relationship between feature vector
+representations of concepts and
+
+6
+00:00:23,066 --> 00:00:28,050
+representations of concepts by their
+relations to other concepts.
+
+7
+00:00:28,050 --> 00:00:34,069
+And the learning algorithm we've just seen
+for family trees has a lot to say about
+
+8
+00:00:34,069 --> 00:00:38,072
+that debate.
+We're now going to make a brief diversion
+
+9
+00:00:38,072 --> 00:00:43,024
+into cognitive science.
+There's been a long debate between two
+
+10
+00:00:43,024 --> 00:00:46,042
+rival theories of what it means to have a
+concept.
+
+11
+00:00:47,020 --> 00:00:52,006
+The feature says a concept is a big set of
+semantic features.
+
+12
+00:00:52,035 --> 00:00:56,012
+This is good for explaining similarities
+between concepts.
+
+13
+00:00:56,012 --> 00:00:59,057
+And it's convenient for things like
+machine learning.
+
+14
+00:00:59,057 --> 00:01:02,088
+Because we like to deal with vectors of
+activities.
+
+15
+00:01:02,088 --> 00:01:07,056
+The structuralist theory says that the
+meaning of a concept lies in its
+
+16
+00:01:07,056 --> 00:01:13,026
+relationships to other concepts.
+So conceptual knowledge is best expressed
+
+17
+00:01:13,026 --> 00:01:16,051
+not as a big vector, but as a relational
+graph.
+
+18
+00:01:16,051 --> 00:01:22,044
+In the early 1970s, Marvin Minsky use the
+limitations of perceptrons as evidence
+
+19
+00:01:22,044 --> 00:01:27,056
+against featured actors in favor of
+relational graph representations.
+
+20
+00:01:27,056 --> 00:01:32,044
+My belief is that both sides in this
+debate are wrong because both sides
+
+21
+00:01:32,044 --> 00:01:37,020
+believe that the two theories are rivals
+and they're not rivals at all.
+
+22
+00:01:37,020 --> 00:01:42,069
+A neural net can use vectors of semantic
+features to implement a relational graph.
+
+23
+00:01:42,069 --> 00:01:48,018
+In the neural network that learns family
+trees, we can think of explicit inference
+
+24
+00:01:48,018 --> 00:01:53,073
+as I give you person one and I give you a
+relationship then you tell me person two.
+
+25
+00:01:54,012 --> 00:01:59,073
+And to arrive at that conclusion, the
+neural net doesn't follow a whole bunch of
+
+26
+00:01:59,073 --> 00:02:04,007
+rules of inference.
+It just passes information forward through
+
+27
+00:02:04,007 --> 00:02:09,009
+the net.
+As far as the neural net is concerned, the
+
+28
+00:02:09,009 --> 00:02:14,035
+answer is intuitively obvious.
+Now if you look at the details of what's
+
+29
+00:02:14,035 --> 00:02:19,040
+happening, there's lots of probabilistic
+features that are influencing each other.
+
+30
+00:02:19,040 --> 00:02:24,007
+We call these microfeatures to sort of
+emphasize they're not like explicit
+
+31
+00:02:24,007 --> 00:02:28,059
+conscious features.
+In a real brain, there might be millions
+
+32
+00:02:28,059 --> 00:02:34,025
+of them and millions of interactions, and
+as a result of all these interactions, we
+
+33
+00:02:34,025 --> 00:02:39,091
+can make one step of explicit inference.
+And that's what we believe is involved in
+
+34
+00:02:39,091 --> 00:02:45,022
+just seeing the answer to something.
+There are no intervening conscious steps,
+
+35
+00:02:45,022 --> 00:02:50,040
+but nevertheless there's a lot of
+computation going on in the interactions
+
+36
+00:02:50,040 --> 00:02:55,044
+of neurons.
+So we may use explicit rules for conscious
+
+37
+00:02:55,044 --> 00:03:00,045
+deliberate reasoning, but a lot of our
+common sense reasoning, particularly
+
+38
+00:03:00,045 --> 00:03:06,007
+analogical reasoning, works by just seeing
+the answer, with no conscious intervening
+
+39
+00:03:06,007 --> 00:03:09,018
+steps.
+And even when we do conscious reasoning,
+
+40
+00:03:09,018 --> 00:03:14,052
+we have to have some way of just seeing
+which rules apply, in order to avoid an
+
+41
+00:03:14,052 --> 00:03:19,077
+infinite regress.
+So, many people, when they think about
+
+42
+00:03:19,077 --> 00:03:25,009
+implementing a relational graph in a
+neural net, just assume that you should
+
+43
+00:03:25,009 --> 00:03:30,096
+make a neuron correspond to a node in the
+relational graph and a connection between,
+
+44
+00:03:30,096 --> 00:03:34,033
+two neurons correspond to a binary
+relationship.
+
+45
+00:03:34,033 --> 00:03:39,026
+But this method doesn't work.
+For a start, the relationships come in
+
+46
+00:03:39,026 --> 00:03:42,047
+different flavors.
+They're are different kinds of
+
+47
+00:03:42,047 --> 00:03:45,347
+relationship.
+Like mother of, or aunt of and, a
+
+48
+00:03:45,347 --> 00:03:48,050
+connection in a neural net only has a
+strength.
+
+49
+00:03:48,050 --> 00:03:54,087
+It doesn't come in different types.
+Also we need to do we turn around your
+
+50
+00:03:54,087 --> 00:03:57,074
+relationships like'a' is between'b'
+and'c'.
+
+51
+00:03:58,034 --> 00:04:03,080
+We still don't know for sure the right way
+to implement relational knowledge in a
+
+52
+00:04:03,080 --> 00:04:07,060
+neural net.
+But it seems very probable that many
+
+53
+00:04:07,060 --> 00:04:13,042
+neurons are used for representing each of
+the concepts we know, and each of those
+
+54
+00:04:13,042 --> 00:04:18,039
+neurons is probably involved in dealing
+with many different concepts.
+
+55
+00:04:18,039 --> 00:04:21,056
+This is called a distributed
+representation.
+
+56
+00:04:22,013 --> 00:04:26,043
+It's a many to many mapping between
+concepts and neurons.

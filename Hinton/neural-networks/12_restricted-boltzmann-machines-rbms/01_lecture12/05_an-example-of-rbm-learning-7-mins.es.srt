@@ -1,0 +1,460 @@
+1
+00:00:00,000 --> 00:00:05,689
+En este vídeo voy a mostrar un ejemplo simple
+de máquina de Boltzmann restringida
+
+2
+00:00:05,689 --> 00:00:08,834
+aprendiendo un modelo de imágenes 
+de números dos manuscritos
+
+3
+00:00:08,834 --> 00:00:14,256
+Luego de que se haya aprendido el modelo 
+veremos que tan bueno es reconstruyendo números dos
+
+4
+00:00:14,256 --> 00:00:19,945
+Y veremos qué pasa si le damos una
+número diferente y le pedimos
+
+5
+00:00:19,945 --> 00:00:23,827
+que lo reconstruya.
+Veremos también los pesos que obtenemos
+
+6
+00:00:23,827 --> 00:00:29,382
+si entrenamos una máquina de Boltzmann restringida, 
+que es considerablemente más grande, en todas
+
+7
+00:00:29,382 --> 00:00:33,229
+las clases de números. Aprende 
+una gran cantidad de variables explicativas
+
+8
+00:00:33,229 --> 00:00:38,146
+que juntas son buenas para reconstruir 
+todas las diferentes clases de números
+
+9
+00:00:38,146 --> 00:00:42,649
+y que también constituyen un buen modelo 
+para esos números. Es decir, si tomamos
+
+10
+00:00:42,649 --> 00:00:48,259
+un vector binario de una imagen 
+del número manuscrito el modelo
+
+11
+00:00:48,259 --> 00:00:53,593
+será capaz de encontrar un estado de baja energía,
+compatible con esa imagen y se le damos
+
+12
+00:00:53,593 --> 00:00:58,995
+una imagen que está lejos de corresponder 
+al número manuscrito, el modelo
+
+13
+00:00:58,995 --> 00:01:04,260
+no será capaz de encontrar estados de 
+baja energía compatibles con esa imagen.
+
+14
+00:01:04,260 --> 00:01:10,281
+Voy a mostrarles ahora como un RBM relativamente simple
+puede aprender a construir un modelo de imágenes
+
+15
+00:01:10,281 --> 00:01:15,779
+del número dos. Las imágenes son 
+de dieciseis pixeles por dieciseis pixeles.
+
+16
+00:01:15,779 --> 00:01:19,009
+Y tiene 50 unidades binarias ocultas que
+
+17
+00:01:19,009 --> 00:01:22,993
+van a aprender para convertirse en 
+detectores de variables explicativas interesantes
+
+18
+00:01:22,993 --> 00:01:28,437
+De modo que cuando se los exponga con los datos, 
+lo primero que hace es usar los pesos y las conexiones
+
+19
+00:01:28,437 --> 00:01:33,351
+ desde pixeles a vectores de variables explicativas como ésta,  
+para activar los vectores de variables explicativas
+
+20
+00:01:33,351 --> 00:01:37,401
+Para cada una de las neuronas 
+binarias toma una decisión estocástica
+
+21
+00:01:37,401 --> 00:01:43,045
+sobre si debe deducir un estado de uno o cero.
+
+22
+00:01:43,045 --> 00:01:47,560
+y luego usa las clase de activación 
+binaria para reconstruir el dato
+
+23
+00:01:47,560 --> 00:01:53,149
+Para cada pixel toma una decisión binaria
+sobre si debe ser uno o cero. 
+
+24
+00:01:53,149 --> 00:01:56,449
+y luego vuelve a activar 
+el vector de la variables explicativas
+
+25
+00:01:56,449 --> 00:02:01,366
+de característica binaria usando la reconstrucción para
+activarla en lugar de los datos
+
+26
+00:02:01,366 --> 00:02:06,956
+Los pesos se cambian incrementando 
+los pesos entre un pixel activo y un vector
+
+27
+00:02:06,956 --> 00:02:10,997
+de variable explicativa activo cuando 
+la red está observando los datos
+
+28
+00:02:10,997 --> 00:02:16,048
+Eso bajará la energía de la configuración
+global de los datos y
+
+29
+00:02:16,048 --> 00:02:21,890
+cualquiera sea el esquema oculto que vaya con él.
+Y decrementa los pesos entre 
+
+30
+00:02:21,890 --> 00:02:26,025
+un pixel activo y el vector de variable 
+explicativa activa cuando observa
+
+31
+00:02:26,025 --> 00:02:30,160
+la reconstrucción y eso aumentaría 
+la energía de la reconstrucción.
+
+32
+00:02:30,700 --> 00:02:35,718
+Cerca del principio del aprendizaje cuando
+los pesos son aleatorios, la reconstrucción
+
+33
+00:02:35,718 --> 00:02:39,256
+casi con seguridad tendrá menos energía que los datos.
+
+34
+00:02:39,256 --> 00:02:44,467
+Debido a que la reconstrucción es 
+lo que la red quiere reproducir 
+
+35
+00:02:44,467 --> 00:02:47,233
+en la unidad visible, dado 
+el esquema oculto de la actividad
+
+36
+00:02:47,233 --> 00:02:52,316
+Y obviamente querrá reproducir esquemas que tengan 
+baja energía de acuerdo con la función de energía.
+
+37
+00:02:52,316 --> 00:02:56,369
+Puedes pensar que lo que el aprendizaje hace es 
+
+38
+00:02:56,369 --> 00:02:59,392
+cambiar los pesos de modo que 
+los datos son de baja energía
+
+39
+00:02:59,392 --> 00:03:03,510
+y la reconstrucción de los datos 
+es en general de energía más alta
+
+40
+00:03:03,510 --> 00:03:08,221
+Comencemos con algunos pesos al azar para
+los 50 vectores de variables explicativas
+
+41
+00:03:08,221 --> 00:03:14,093
+Usaremos pequeños pesos aleatorios,
+y cada uno de esos cuadrados muestra los
+
+42
+00:03:14,093 --> 00:03:17,439
+pesos de los pixels viniendo de un detector 
+de variable explicativa en particular
+
+43
+00:03:17,439 --> 00:03:20,990
+Los pequeños pesos aleatorios 
+se usan para romper la simetría
+
+44
+00:03:20,990 --> 00:03:25,665
+Pero debido a que la actualización es estocástica
+en realidad no los necesitamos.
+
+45
+00:03:25,665 --> 00:03:31,190
+Luego de observar algunos cientos de muestras de números,
+y digiriendo los pesos algunas veces, 
+
+46
+00:03:31,190 --> 00:03:34,661
+los pesos comienzan a formar esquemas.
+
+47
+00:03:34,661 --> 00:03:40,541
+Si lo repetimos, podrán ver que muchos
+de los detectores de variables explicativas están
+
+48
+00:03:40,541 --> 00:03:44,464
+detectando el esquema del dos como un todo.
+Son justamente detectores de variables de característica globales
+
+49
+00:03:44,464 --> 00:03:47,360
+Y esos detectores de variables de 
+característica se vuelven más fuertes
+
+50
+00:03:47,900 --> 00:03:53,006
+cada vez y ahora algunos comienzan a 
+localizarse y se vuelven más locales 
+
+51
+00:03:53,006 --> 00:03:58,444
+cada vez, y esos son los pesos finales
+
+52
+00:03:58,444 --> 00:04:04,081
+y pueden ver que cada neurona se convierte en 
+un detector de variable de característica diferente
+
+53
+00:04:04,081 --> 00:04:09,253
+y muchos de esos detectores son justamente locales.
+Si observan el detector de variable de característica
+
+54
+00:04:09,253 --> 00:04:13,126
+en el recuadro rojo, por ejemplo, está 
+detectando la parte de arriba del dos
+
+55
+00:04:13,126 --> 00:04:18,242
+Y está feliz cuando la parte de arriba del dos 
+está donde están los pixeles blancos
+
+56
+00:04:18,242 --> 00:04:21,099
+y donde no hay nada donde 
+los pixeles negros están
+
+57
+00:04:21,099 --> 00:04:24,355
+De modo que se está representando 
+donde está la parte de arriba del dos.
+
+58
+00:04:24,355 --> 00:04:29,405
+Una vez que se ha aprendido el modelo podremos 
+ver que tan bien reconstruye números
+
+59
+00:04:29,405 --> 00:04:33,524
+y le daremos algunos números de 
+prueba que no haya visto antes
+
+60
+00:04:33,524 --> 00:04:36,980
+Comenzaremos dándole una muestra 
+de prueba de un dos
+
+61
+00:04:37,640 --> 00:04:41,967
+Y su reconstrucción es bastante fiel con la muestra
+
+62
+00:04:41,967 --> 00:04:46,363
+Está ligeramente borrosa.  La muestra de prueba 
+tiene un gancho en la parte superior
+
+63
+00:04:46,363 --> 00:04:51,033
+que se ha borroneado luego de la 
+reconstrucción pero es una reconstrucción
+
+64
+00:04:51,033 --> 00:04:54,811
+bastante buena. Lo más interesante 
+que podemos hacer es
+
+65
+00:04:54,811 --> 00:04:58,383
+darle una muestra de prueba 
+de un número diferente.
+
+66
+00:04:58,383 --> 00:05:02,230
+Si le damos un ejemplo de 
+un tres para reconstruir
+
+67
+00:05:02,230 --> 00:05:06,860
+Lo que reconstruye se parece más 
+a un dos que a un tres.
+
+68
+00:05:06,860 --> 00:05:11,568
+Todo lo que los detectores de variable explicativa 
+han aprendido es bueno para representar un dos
+
+69
+00:05:11,568 --> 00:05:16,638
+pero no tiene detectores de variable explicativa que 
+representen esa cúspide en el medio de un tres
+
+70
+00:05:16,638 --> 00:05:19,777
+De modo que termina reconstruyendo algo
+
+71
+00:05:19,777 --> 00:05:24,546
+que obedece a las regularidades del dos 
+más que representar las regularidades del tres
+
+72
+00:05:24,546 --> 00:05:27,415
+En realidad, la red trata de ver todo como un dos
+
+73
+00:05:27,415 --> 00:05:31,625
+Aquí hay algunos detectores de
+ variables explicativas que
+
+74
+00:05:31,625 --> 00:05:37,037
+fueron aprendidos en la primer capa oculta de 
+un modelo que usa 500 unidades ocultas para
+
+75
+00:05:37,037 --> 00:05:41,381
+modelizar las diez clases de números.
+Y este modelo ha sido entrenado un largo
+
+76
+00:05:41,381 --> 00:05:46,393
+tiempo con divergencia contrastiva. Tiene una gran 
+variedad de detectores de variables explicativas
+
+77
+00:05:46,393 --> 00:05:51,672
+Si observan el recuadro azul.
+ésta será obviamente útlil para
+
+78
+00:05:51,672 --> 00:05:57,903
+detectar cosas como un ocho. 
+Si observan el recuadro rojo no hay 
+
+79
+00:05:57,903 --> 00:06:02,104
+lo que esperarían ver. Quiere ver 
+pixeles muy cercanos al borde
+
+80
+00:06:02,104 --> 00:06:07,330
+inferior y no quire encontrar pixeles 
+activos en la línea que está 
+
+81
+00:06:07,330 --> 00:06:11,741
+21 pixeles por encima del borde inferior. 
+Lo que pasa acá es que los datos
+
+82
+00:06:11,741 --> 00:06:17,102
+están normalizados y los números no pueden
+tener una altura mayor que veinte pixeles
+
+83
+00:06:17,102 --> 00:06:22,803
+Quiere decir que si sabes que hay un pixel 
+activo donde están esos pesos positivos grandes
+
+84
+00:06:22,803 --> 00:06:27,690
+no puede haber un pixel activo 
+donde están esos pesos negativos.
+
+85
+00:06:27,690 --> 00:06:33,180
+Está captando regularidades en una 
+zona amplia que fue introducida
+
+86
+00:06:33,180 --> 00:06:37,560
+cuando normalizamos los datos. 
+Acá hay otra que hace lo mismo
+
+87
+00:06:37,560 --> 00:06:42,201
+por el hecho de que los datos no 
+pueden ser más anchos que veinte pixeles
+
+88
+00:06:42,201 --> 00:06:46,220
+La variable explicativa detectada en 
+el recuadro verde es muy interesante
+
+89
+00:06:46,220 --> 00:06:51,550
+Está detectando dónde la parte inferior 
+de un trazo vertical llega y lo detectará
+
+90
+00:06:51,550 --> 00:06:56,360
+en una cantidad diferente de posiciones 
+y rehusará detectarlo en
+
+91
+00:06:56,360 --> 00:07:00,130
+posiciones intermedias. 
+Es como pasa con el 
+
+92
+00:07:00,130 --> 00:07:05,525
+dígito menos significativo de un número binario.
+A medida que aumenta la magnitud del número
+
+93
+00:07:05,525 --> 00:07:10,270
+se activa y se desactiva, se activa 
+y se desactiva otra vez y demuestra
+
+94
+00:07:10,270 --> 00:07:14,886
+que desarrolla formas bastante complejas 
+de representar dónde están las cosas.

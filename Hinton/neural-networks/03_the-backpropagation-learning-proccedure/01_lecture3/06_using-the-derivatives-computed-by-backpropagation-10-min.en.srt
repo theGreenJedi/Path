@@ -1,0 +1,713 @@
+1
+00:00:00,840 --> 00:00:04,060
+Figuring out how to get
+the error derivatives for
+
+2
+00:00:04,060 --> 00:00:07,360
+all of the weights in a multi
+line network is the key to
+
+3
+00:00:07,360 --> 00:00:10,330
+being able to learn
+efficiently in these networks.
+
+4
+00:00:10,330 --> 00:00:13,070
+But there are a number of other issues
+that have to be addressed before we
+
+5
+00:00:13,070 --> 00:00:15,460
+actually get a learning procedure
+that's fully specified.
+
+6
+00:00:16,770 --> 00:00:21,860
+For example, we need to decide
+how often to update the weights.
+
+7
+00:00:21,860 --> 00:00:26,570
+And we need to decide how to prevent
+the network from over fitting very badly
+
+8
+00:00:26,570 --> 00:00:27,880
+if we use a large network.
+
+9
+00:00:29,810 --> 00:00:34,740
+The backpropagation algorithm is an
+efficient way to compute the derivatives
+
+10
+00:00:34,740 --> 00:00:38,560
+with the respect to each weight of
+the error for a single training case.
+
+11
+00:00:39,660 --> 00:00:41,730
+But that's not a learning algorithm.
+
+12
+00:00:41,730 --> 00:00:45,880
+You have to specify a number of other
+things to get a proper learning procedure.
+
+13
+00:00:47,630 --> 00:00:49,310
+We need to make lots of other decisions.
+
+14
+00:00:51,070 --> 00:00:54,630
+Some of these decisions are about
+how we're going to optimize.
+
+15
+00:00:54,630 --> 00:00:58,600
+That is, how we're going to use the error
+derivatives on the individual cases
+
+16
+00:00:58,600 --> 00:01:00,900
+to discover a good set of weights.
+
+17
+00:01:00,900 --> 00:01:03,380
+Those will be described
+in detail in lecture six.
+
+18
+00:01:05,560 --> 00:01:09,220
+Another set of issues is how to ensure
+that the weights that we've learned
+
+19
+00:01:09,220 --> 00:01:10,950
+will generalize well.
+
+20
+00:01:10,950 --> 00:01:15,450
+That is, how do we make sure they work on
+cases that we didn't see during training?
+
+21
+00:01:15,450 --> 00:01:17,390
+And lecture seven will be
+devoted to that issue.
+
+22
+00:01:19,340 --> 00:01:21,840
+What I'm going to do now is
+give you a very brief overview
+
+23
+00:01:21,840 --> 00:01:23,170
+of these two sets of issues.
+
+24
+00:01:25,260 --> 00:01:28,820
+So optimization issues are about
+how you use the weight derivatives.
+
+25
+00:01:30,280 --> 00:01:33,040
+The first question is,
+how often should you update the weights?
+
+26
+00:01:34,655 --> 00:01:38,280
+We could try updating the weights
+after each training case.
+
+27
+00:01:38,280 --> 00:01:42,692
+So you compute the error derivatives on
+a training case using backpropagation,
+
+28
+00:01:42,692 --> 00:01:44,860
+and then you make a small
+change to the weights.
+
+29
+00:01:46,230 --> 00:01:49,290
+Obviously this is going to zig zag around,
+because on each training case,
+
+30
+00:01:49,290 --> 00:01:52,330
+you'll get different error derivatives.
+
+31
+00:01:52,330 --> 00:01:53,210
+But on average,
+
+32
+00:01:53,210 --> 00:01:57,720
+if we make the weight changes small
+enough, it'll go in the right direction.
+
+33
+00:01:59,970 --> 00:02:05,160
+What seems more sensible is to use full
+batch training where you do a full sweep
+
+34
+00:02:05,160 --> 00:02:09,380
+through all of the training data, you add
+together all of the error derivatives you
+
+35
+00:02:09,380 --> 00:02:13,260
+get on the individual cases, and then
+you take a small step in that direction.
+
+36
+00:02:15,450 --> 00:02:19,340
+A problem with this is that we start
+off with a bad set of weights.
+
+37
+00:02:19,340 --> 00:02:21,770
+And we might have a very big training set.
+
+38
+00:02:21,770 --> 00:02:25,130
+And we don't want to do all that work
+of going through the whole training set
+
+39
+00:02:25,130 --> 00:02:27,820
+in order to fix up some weights
+that we know are pretty bad.
+
+40
+00:02:28,870 --> 00:02:33,010
+Really, we only need to look at
+a few training cases before we get
+
+41
+00:02:33,010 --> 00:02:35,650
+a reasonable idea of what direction
+we want to move the weights in.
+
+42
+00:02:36,680 --> 00:02:39,345
+And we don't need to look at a large
+number of training cases until we get
+
+43
+00:02:39,345 --> 00:02:40,189
+towards the end of learning.
+
+44
+00:02:41,550 --> 00:02:44,920
+So that gives us mini-batch learning,
+where we take a small
+
+45
+00:02:44,920 --> 00:02:49,610
+random sample of the training cases and
+we go in that direction.
+
+46
+00:02:49,610 --> 00:02:53,420
+We'll do a little bit of zig zagging, not
+nearly as much zig zagging as if we did
+
+47
+00:02:53,420 --> 00:02:55,530
+online where we use one
+training case at a time.
+
+48
+00:02:56,860 --> 00:03:00,470
+And mini-batch learning is
+what people typically do when
+
+49
+00:03:00,470 --> 00:03:03,189
+they're training big neural
+networks on big data sets.
+
+50
+00:03:04,838 --> 00:03:08,000
+Then there's the issue of how
+much we update the weights,
+
+51
+00:03:08,000 --> 00:03:09,040
+how big a change we make.
+
+52
+00:03:10,610 --> 00:03:14,680
+So we could just by hand try and
+pick some fixed learning rate.
+
+53
+00:03:14,680 --> 00:03:19,980
+And then learn the weights by changing
+each weight by the derivative
+
+54
+00:03:19,980 --> 00:03:22,470
+that we've computed times
+that learning rate.
+
+55
+00:03:24,040 --> 00:03:27,410
+It seems more sensible to
+actually adapt the learning rate.
+
+56
+00:03:27,410 --> 00:03:33,550
+We could get the computer to adapt it by,
+if we're oscillating around,
+
+57
+00:03:33,550 --> 00:03:37,220
+if the error keeps going up and down,
+then we'll reduce the learning rate.
+
+58
+00:03:37,220 --> 00:03:40,160
+But if we're making steady progress,
+we might increase the learning rate.
+
+59
+00:03:42,460 --> 00:03:46,380
+We might even have a separate learning
+weight for each connection in the network,
+
+60
+00:03:46,380 --> 00:03:49,170
+so that some weights learn rapidly and
+other weights learn more slowly.
+
+61
+00:03:51,050 --> 00:03:53,540
+Or we might go even further and
+
+62
+00:03:53,540 --> 00:03:57,900
+say, we don't really want to go in
+the direction of steepest descent at all.
+
+63
+00:03:57,900 --> 00:04:02,880
+If you look at the figure on the right,
+when we had a very elongated ellipse,
+
+64
+00:04:02,880 --> 00:04:07,230
+the direction of steepest descent is
+almost at right angles to the direction to
+
+65
+00:04:07,230 --> 00:04:08,830
+the minimum that we want to find.
+
+66
+00:04:10,080 --> 00:04:11,580
+And this is typical,
+
+67
+00:04:11,580 --> 00:04:15,380
+particularly towards the end of learning,
+of most learning problems.
+
+68
+00:04:16,730 --> 00:04:20,800
+So there's much better directions to go in
+than the direction of steepest descent.
+
+69
+00:04:20,800 --> 00:04:22,940
+The problem is it's quite hard
+to figure out what they are.
+
+70
+00:04:25,920 --> 00:04:29,220
+The second set of issues is to
+do with how well the network
+
+71
+00:04:29,220 --> 00:04:31,780
+generalizes to cases it
+didn't see during training.
+
+72
+00:04:33,710 --> 00:04:38,520
+And the problem here is that
+the training data contains information
+
+73
+00:04:38,520 --> 00:04:43,310
+about the regularities In
+the mapping from input to output.
+
+74
+00:04:43,310 --> 00:04:45,770
+But it also contains two types of noise.
+
+75
+00:04:47,100 --> 00:04:50,090
+The first type of noise is that
+the target values may be unreliable.
+
+76
+00:04:50,090 --> 00:04:53,640
+And for neural noise,
+that's usually only a minor worry.
+
+77
+00:04:55,020 --> 00:04:59,110
+The second type of noise is
+that there's sampling error.
+
+78
+00:04:59,110 --> 00:05:03,570
+If we take any particular training set,
+especially if it's a small one, there will
+
+79
+00:05:03,570 --> 00:05:08,440
+be accidental regularities that are caused
+by the particular cases that we chose.
+
+80
+00:05:09,770 --> 00:05:14,770
+So for example, if you show someone
+some polygons, if you're a bad teacher,
+
+81
+00:05:14,770 --> 00:05:17,620
+you might choose to show them a square and
+a rectangle.
+
+82
+00:05:19,250 --> 00:05:24,060
+Those are both polygons but there's no
+way for someone to realize from that,
+
+83
+00:05:24,060 --> 00:05:28,800
+that polygons might have three sides or
+seven sides, there's no way for
+
+84
+00:05:28,800 --> 00:05:31,290
+them to understand that the angles
+don't have to be right angles.
+
+85
+00:05:32,450 --> 00:05:35,390
+If you're a slightly better teacher
+you might show them a triangle and
+
+86
+00:05:35,390 --> 00:05:37,540
+a hexagon, but
+
+87
+00:05:37,540 --> 00:05:41,990
+again, from that they can't tell whether
+the polygons are always convex, and they
+
+88
+00:05:41,990 --> 00:05:46,720
+can't tell whether the angles on polygons
+are always multiples of 60 degrees.
+
+89
+00:05:46,720 --> 00:05:49,530
+And however carefully you choose examples,
+for
+
+90
+00:05:49,530 --> 00:05:53,100
+any finite set of examples,
+there'll be accidental regularities.
+
+91
+00:05:55,210 --> 00:06:00,270
+Now when we fit a model, there's no
+way it can tell the difference between
+
+92
+00:06:00,270 --> 00:06:05,742
+an accidental regularity that's just
+there because of the particular samples
+
+93
+00:06:05,742 --> 00:06:11,230
+we chose, and a real regularity that
+we'll generalize properly to new cases.
+
+94
+00:06:12,930 --> 00:06:15,680
+So what the model will do is it
+will fit both kinds of regularity.
+
+95
+00:06:17,260 --> 00:06:18,790
+And if you've got a big, powerful model,
+
+96
+00:06:18,790 --> 00:06:22,450
+it'll be very good at
+fitting the sampling error.
+
+97
+00:06:22,450 --> 00:06:24,150
+And that will be a real disaster.
+
+98
+00:06:24,150 --> 00:06:25,930
+That will cause it to
+generalize really badly.
+
+99
+00:06:27,940 --> 00:06:29,990
+This is best understood by
+looking at a little example.
+
+100
+00:06:32,240 --> 00:06:35,850
+So, here we've got six data
+points shown in black.
+
+101
+00:06:37,270 --> 00:06:39,500
+And we can fit a straight line to them.
+
+102
+00:06:39,500 --> 00:06:42,390
+That's a model that has two
+degrees of freedom, and
+
+103
+00:06:42,390 --> 00:06:45,900
+it's fitting the six Y values,
+given the six X values.
+
+104
+00:06:47,160 --> 00:06:50,550
+Or we can fit a polynomial that
+has six degrees of freedom.
+
+105
+00:06:51,730 --> 00:06:54,420
+And by hand, I've drawn in red
+
+106
+00:06:54,420 --> 00:06:57,600
+my idea of a polynomial with six
+degrees of freedom fitting this data.
+
+107
+00:06:58,810 --> 00:07:02,990
+And you'll see the polynomial goes
+through the data points exactly and so
+
+108
+00:07:02,990 --> 00:07:07,100
+it's a much better fit to the data,
+but which model do you trust?
+
+109
+00:07:09,640 --> 00:07:14,490
+The complicated model certainly fits the
+data much better but it's not economical.
+
+110
+00:07:16,430 --> 00:07:19,160
+For a model to be convincing,
+what you want it to do
+
+111
+00:07:19,160 --> 00:07:23,320
+is be a simple model that explains
+a lot of data surprisingly well.
+
+112
+00:07:23,320 --> 00:07:25,440
+And the polynomial doesn't do that.
+
+113
+00:07:25,440 --> 00:07:29,150
+It explains these six data points,
+but it's got six degrees of freedom.
+
+114
+00:07:29,150 --> 00:07:32,329
+So wherever these data points were
+it will be able to explain them.
+
+115
+00:07:34,870 --> 00:07:38,820
+We're not surprised that a model this
+complicated can fit that data very well,
+
+116
+00:07:38,820 --> 00:07:40,850
+and it doesn't convince us
+that this is a good model.
+
+117
+00:07:42,640 --> 00:07:47,160
+So if you look at the arrow, which output
+value do you predict for this input value?
+
+118
+00:07:48,670 --> 00:07:51,470
+Well you'd have to have a lot of
+faith in the polynomial model in
+
+119
+00:07:51,470 --> 00:07:55,870
+order to predict a value that's outside
+the range of values in all of the training
+
+120
+00:07:55,870 --> 00:07:56,800
+data you've seen so far.
+
+121
+00:07:58,140 --> 00:08:03,116
+And I think almost everybody would
+prefer to predict the blue circle that's
+
+122
+00:08:03,116 --> 00:08:06,546
+on the green line rather than
+the one on the red line.
+
+123
+00:08:06,546 --> 00:08:11,356
+However, if we had ten times as much data,
+and all of these data points lay
+
+124
+00:08:11,356 --> 00:08:16,100
+very close to the red line, then we
+would certainly prefer the red line.
+
+125
+00:08:19,212 --> 00:08:23,978
+There's a number of ways to reduce
+overfitting that have been developed for
+
+126
+00:08:23,978 --> 00:08:26,740
+neural networks and for many other models.
+
+127
+00:08:27,780 --> 00:08:30,250
+And I'm going to give just
+a brief survey of them here.
+
+128
+00:08:31,870 --> 00:08:36,660
+There's weight-decay, where you try and
+keep the weights of the networks small.
+
+129
+00:08:36,660 --> 00:08:39,020
+We'll try and
+keep many of the weights at 0.
+
+130
+00:08:39,020 --> 00:08:41,961
+And the idea of this is that it
+will make the model simpler.
+
+131
+00:08:44,254 --> 00:08:48,673
+There's weight sharing where again, you
+make the model simpler by insisting that
+
+132
+00:08:48,673 --> 00:08:52,330
+many of the weights have exactly
+the same value as each other.
+
+133
+00:08:52,330 --> 00:08:54,440
+You don't know what the value is and
+you're going to learn it but
+
+134
+00:08:54,440 --> 00:08:56,789
+it has to be exactly the same for
+many of the weights.
+
+135
+00:08:57,830 --> 00:09:02,500
+We'll see that in the next lecture
+how weight-sharing is used.
+
+136
+00:09:02,500 --> 00:09:06,570
+There's early stopping,
+where you make yourself a fake test set.
+
+137
+00:09:06,570 --> 00:09:11,880
+And as you're training the net, you peak
+at what's happening on this fake test set.
+
+138
+00:09:11,880 --> 00:09:15,590
+And once the performance on the fake
+test set starts getting worse,
+
+139
+00:09:15,590 --> 00:09:16,280
+you stop training.
+
+140
+00:09:17,720 --> 00:09:21,600
+There's model averaging, where you
+train lots of different neural nets.
+
+141
+00:09:21,600 --> 00:09:25,070
+And you average them together in
+the hopes that that will reduce
+
+142
+00:09:25,070 --> 00:09:26,010
+the errors you're making.
+
+143
+00:09:27,790 --> 00:09:30,190
+There's Bayesian fitting of neural nets,
+
+144
+00:09:30,190 --> 00:09:32,310
+which is really just a fancy
+form of model averaging.
+
+145
+00:09:34,108 --> 00:09:37,820
+There's dropout, where you try and
+make your model more robust
+
+146
+00:09:37,820 --> 00:09:40,410
+by randomly emitting hidden
+units when you're training it.
+
+147
+00:09:42,540 --> 00:09:46,260
+And there's generative pre-training,
+which is somewhat more complicated,
+
+148
+00:09:46,260 --> 00:09:47,980
+and I'll describe towards
+the end of the course.

@@ -1,0 +1,403 @@
+1
+00:00:00,000 --> 00:00:05,433
+In this video, I'll talk about how we can
+control compacity by limiting the size of
+
+2
+00:00:05,433 --> 00:00:08,444
+the weights.
+The standard way to do this is to
+
+3
+00:00:08,444 --> 00:00:12,961
+introduce a penalty that prevents the
+weights from getting too large.
+
+4
+00:00:12,961 --> 00:00:17,870
+With the implicite assumption that a
+network with small weights is somehow
+
+5
+00:00:17,870 --> 00:00:24,263
+simpler than a network with large weights.
+There are several different penalty terms
+
+6
+00:00:24,263 --> 00:00:28,129
+we can use.
+And it's also possible to constrain the
+
+7
+00:00:28,129 --> 00:00:34,042
+weights, so that the incoming weight
+vector to each of the hidden units is not
+
+8
+00:00:34,042 --> 00:00:37,302
+allowed to be longer than a certain
+length.
+
+9
+00:00:37,302 --> 00:00:43,139
+The standard weight can limit the size of
+the weights, is to use an L2 weight
+
+10
+00:00:43,139 --> 00:00:48,370
+penalty, which means that we penalize the
+squared value of the weight.
+
+11
+00:00:48,370 --> 00:00:53,770
+This is sometimes called weight decay in
+the neural network literature, because the
+
+12
+00:00:53,770 --> 00:01:00,659
+derivative of that penalty acts like a
+force pulling the weight towards zero.
+
+13
+00:01:00,660 --> 00:01:05,419
+This weight penalty keeps the weight
+small, unless they have big urge
+
+14
+00:01:05,419 --> 00:01:11,707
+derivatives to counteract it.
+So if you look at what the penalty term
+
+15
+00:01:11,707 --> 00:01:17,420
+looks like, as the weight moves away from
+zero, you get this parabolic cost.
+
+16
+00:01:19,420 --> 00:01:25,326
+If you look at the equation, the cost that
+you're optimizing is the normal error that
+
+17
+00:01:25,326 --> 00:01:31,232
+you're trying to reduce, plus a term which
+is the sum of the squares of the weights,
+
+18
+00:01:31,232 --> 00:01:36,356
+with a coefficient in front, Lambda.
+And we divide by two so that when we
+
+19
+00:01:36,356 --> 00:01:41,548
+differentiate the two is cancelled.
+That coefficient in front of the sum
+
+20
+00:01:41,548 --> 00:01:45,382
+squared weights is sometimes called the
+weight cost.
+
+21
+00:01:45,382 --> 00:01:51,334
+That determines how strong the penalty is.
+If you differentiate, you can see the
+
+22
+00:01:51,334 --> 00:01:56,512
+derivative of this cost is just the
+derivative of the error plus something
+
+23
+00:01:56,512 --> 00:02:01,000
+that's to do with the size of the weight
+and the value of Lambda.
+
+24
+00:02:02,700 --> 00:02:08,553
+That derivative will be zero when the
+magnitude of the weight is one over Lambda
+
+25
+00:02:08,553 --> 00:02:13,975
+times the magnitude of the derivative.
+So the only way you can have big weights,
+
+26
+00:02:13,975 --> 00:02:18,400
+when you're at a minimum of the cost
+function, is if they also have big error
+
+27
+00:02:18,400 --> 00:02:21,503
+derivatives.
+And this makes the weights much easier to
+
+28
+00:02:21,503 --> 00:02:24,548
+interpret.
+You don't have a whole lot of weights that
+
+29
+00:02:24,548 --> 00:02:29,087
+are large but aren't doing anything.
+The effect of an L2 penalty on the weights
+
+30
+00:02:29,087 --> 00:02:32,880
+is to prevent the network from using
+weights that it doesn't need.
+
+31
+00:02:33,580 --> 00:02:38,626
+This often improves generalization a lot,
+because it can use those weights that it
+
+32
+00:02:38,626 --> 00:02:41,457
+doesn't really need to fit the sampling
+error.
+
+33
+00:02:41,457 --> 00:02:46,258
+It also makes a smoother model in which
+the output changes more slowly as the
+
+34
+00:02:46,258 --> 00:02:50,015
+input changes.
+So if the network has two very similar
+
+35
+00:02:50,015 --> 00:02:54,767
+inputs, when you put in an L2 weight
+penalty, it prefers to put half the weight
+
+36
+00:02:54,767 --> 00:02:59,946
+on each of those two similar inputs rather
+than all of the weight on one, as shown on
+
+37
+00:02:59,946 --> 00:03:03,873
+the right here.
+If the two inputs are very similar, those
+
+38
+00:03:03,873 --> 00:03:06,754
+two networks will produce very similar
+outputs.
+
+39
+00:03:06,754 --> 00:03:11,474
+But the one with the half weights will
+have much less extreme changes in its
+
+40
+00:03:11,474 --> 00:03:18,864
+outputs when you change the inputs.
+There are other kinds of weight penalty.
+
+41
+00:03:18,864 --> 00:03:23,310
+For example, an L1 penalty, where the cost
+function is just this v shape.
+
+42
+00:03:23,310 --> 00:03:27,819
+So here what we're doing is we're
+penalizing the absolute values of the
+
+43
+00:03:27,819 --> 00:03:31,848
+weights.
+This has the nice effect that it drives
+
+44
+00:03:31,848 --> 00:03:36,856
+many of the weights to be exactly zero and
+that helps a lot in interpretation.
+
+45
+00:03:36,856 --> 00:03:41,672
+If there's only a few non zero weights
+left, it's much easier to understand
+
+46
+00:03:41,672 --> 00:03:45,396
+what's going on.
+We can also use weight penalties that are
+
+47
+00:03:45,396 --> 00:03:50,725
+more extreme than L1 where the gradient of
+the cost function actually gets smaller
+
+48
+00:03:50,725 --> 00:03:55,482
+when the weight gets really big.
+This allows the network to keep large
+
+49
+00:03:55,482 --> 00:03:58,377
+weights without them being pulled towards
+zero.
+
+50
+00:03:58,380 --> 00:04:03,216
+It's just the small weights that'll get
+pulled towards zero.
+
+51
+00:04:03,220 --> 00:04:07,900
+So we then even more like that getting it
+with a few large weight.
+
+52
+00:04:08,540 --> 00:04:13,470
+Instead of putting penalties on the
+weights, we could actually use weight
+
+53
+00:04:13,470 --> 00:04:16,577
+constraints.
+What I mean by that is instead of
+
+54
+00:04:16,577 --> 00:04:21,846
+penalizing the squared value of each
+weight separately, we put a constraint on
+
+55
+00:04:21,846 --> 00:04:27,249
+the maximum squared length of the incoming
+weight vector of each hidden unit or
+
+56
+00:04:27,249 --> 00:04:32,830
+output unit.
+When we update the weights, if the length
+
+57
+00:04:32,830 --> 00:04:38,196
+of that incoming vector gets longer than
+allowed by the constraint, we simply scale
+
+58
+00:04:38,196 --> 00:04:42,915
+the vector down by dividing all the
+weights by the same amount until its
+
+59
+00:04:42,915 --> 00:04:49,465
+length fits the allowed length.
+Using weight constraints like this, has a
+
+60
+00:04:49,465 --> 00:04:53,723
+number of advantages over weight
+penalties, and I found these work
+
+61
+00:04:53,723 --> 00:04:58,531
+necessary better.
+It's much easier to select the sensible
+
+62
+00:04:58,531 --> 00:05:02,798
+value for the squared length of the
+incoming weight factor than it is to
+
+63
+00:05:02,798 --> 00:05:07,120
+select the weight penalty.
+That's because, logistic units.
+
+64
+00:05:07,120 --> 00:05:12,480
+Have, a natural scale to them so we know
+what a weight of one means.
+
+65
+00:05:14,640 --> 00:05:18,933
+Using weight constraints also prevents
+hidden units getting stuck near zero with
+
+66
+00:05:18,933 --> 00:05:22,060
+all their weights being tiny and not doing
+anything useful.
+
+67
+00:05:22,060 --> 00:05:26,141
+Because when all their weights are tiny,
+there's no constraint on the weights.
+
+68
+00:05:26,141 --> 00:05:28,420
+So there's nothing preventing them
+growing.
+
+69
+00:05:28,840 --> 00:05:32,340
+Weight constraints also prevent the weight
+from exploding.
+
+70
+00:05:32,880 --> 00:05:38,026
+One of the subtle things that weight
+constraints do is that when a unit hits
+
+71
+00:05:38,026 --> 00:05:43,373
+its constraint, the effective penalty on
+all of its weights is determined by the
+
+72
+00:05:43,373 --> 00:05:46,983
+big gradients.
+So if some of the incoming weights have
+
+73
+00:05:46,983 --> 00:05:52,263
+very big gradients, they'll be trying to
+push the length of the incoming weight
+
+74
+00:05:52,263 --> 00:05:55,672
+factor up.
+And that will push down on all the other
+
+75
+00:05:55,672 --> 00:05:58,813
+weights.
+So in effect, if you think of it like a
+
+76
+00:05:58,813 --> 00:06:04,294
+penalty, the penalty scales itself so as
+to be appropriate for the big weights and
+
+77
+00:06:04,294 --> 00:06:10,554
+to suppress the small weights.
+This is much more effective than a fixed
+
+78
+00:06:10,554 --> 00:06:14,459
+penalty of pushing irrelevant weights
+towards zero.
+
+79
+00:06:14,460 --> 00:06:17,556
+For those of you who knows about La Grange
+multipliers,
+
+80
+00:06:17,556 --> 00:06:21,611
+The penalties of in just the La Grange
+multipliers required to keep the
+
+81
+00:06:21,611 --> 00:06:22,850
+constraints satisfied.

@@ -1,0 +1,633 @@
+1
+00:00:00,000 --> 00:00:05,088
+In this video, I'm going to talk about 
+the use of binary codes for image 
+
+2
+00:00:05,088 --> 00:00:08,554
+retrieval. 
+For retrieving documents, people like 
+
+3
+00:00:08,554 --> 00:00:14,380
+Google have such good methods already, 
+the techniques like semantic hashing may 
+
+4
+00:00:14,380 --> 00:00:18,510
+not be of much value. 
+But retrieving images is much more 
+
+5
+00:00:18,510 --> 00:00:24,631
+difficult and the methods that convert an 
+image into a fairly large binary code of 
+
+6
+00:00:24,631 --> 00:00:30,674
+say, 256 bits, seem to work quite well. 
+However, we don't want to do a very long 
+
+7
+00:00:30,674 --> 00:00:36,333
+sequencial search through vectors of 256 
+bits so semantic hashing can be used to 
+
+8
+00:00:36,333 --> 00:00:41,782
+first create a short list and then we can 
+get better quality matches by using 
+
+9
+00:00:41,782 --> 00:00:47,371
+longer binary codes in a serial search. 
+Now, we get to look at using binary codes 
+
+10
+00:00:47,371 --> 00:00:51,563
+for image retrieval. 
+Image retrieval of present is typically 
+
+11
+00:00:51,563 --> 00:00:55,357
+done by using the captions. 
+But why not use the images too? 
+
+12
+00:00:55,357 --> 00:00:59,295
+They obviously contain a lot more 
+information than the captions. 
+
+13
+00:00:59,295 --> 00:01:02,495
+The basic problem is that pixels are not 
+like words. 
+
+14
+00:01:02,495 --> 00:01:06,618
+Individual pixels don't tell us much 
+about the content of an image. 
+
+15
+00:01:06,618 --> 00:01:11,171
+Obviously if you could recognize the 
+objects in the images, then we'd have 
+
+16
+00:01:11,171 --> 00:01:15,416
+things that were much more like words. 
+But recognizing objects is hard. 
+
+17
+00:01:15,416 --> 00:01:18,038
+At least it was when we first did this 
+work. 
+
+18
+00:01:18,038 --> 00:01:22,984
+Now deep neural nets have got much better 
+at it, and so that may well be the way to 
+
+19
+00:01:22,984 --> 00:01:25,487
+go. 
+So if we're not going to recognize the 
+
+20
+00:01:25,487 --> 00:01:29,837
+objects, maybe what we should do is 
+extract a vector that has information 
+
+21
+00:01:29,837 --> 00:01:34,067
+about the content of the image. 
+And the obvious thing to extract is the 
+
+22
+00:01:34,067 --> 00:01:38,517
+real valued vector. 
+But the problem is that matching real 
+
+23
+00:01:38,517 --> 00:01:43,264
+value vectors in the real data base is 
+slow and it also requires a lot of 
+
+24
+00:01:43,264 --> 00:01:48,075
+storage for the real value vectors. 
+If we can extract a fairly short binary 
+
+25
+00:01:48,075 --> 00:01:53,206
+vector that contains a lot of information 
+about the image that's much easier to 
+
+26
+00:01:53,206 --> 00:01:57,825
+store and much faster to match, even 
+faster is to use a two stage method. 
+
+27
+00:01:57,825 --> 00:02:02,892
+So first, we extract a short binary code 
+of about 30 bids and that short binary 
+
+28
+00:02:02,892 --> 00:02:07,639
+code is used with semantic hashing to 
+very rapidly get us a short list of 
+
+29
+00:02:07,639 --> 00:02:11,550
+promising images. 
+So we simply take the short binary code, 
+
+30
+00:02:11,550 --> 00:02:15,075
+and flip a few bits in it to get 
+candidate images. 
+
+31
+00:02:15,075 --> 00:02:20,505
+The candidate images can then be matched 
+using 256 bit binary codes that are 
+
+32
+00:02:20,505 --> 00:02:25,300
+stored with each known image. 
+To search for much better matches than 
+
+33
+00:02:25,300 --> 00:02:31,757
+can be found with a 28 bit binary code. 
+Even a 256 bit binary code only requires 
+
+34
+00:02:31,757 --> 00:02:37,561
+four words of memory per image. 
+And even though we're then going to do a 
+
+35
+00:02:37,561 --> 00:02:42,109
+serial on these binary codes. 
+The search can be done very fast, because 
+
+36
+00:02:42,109 --> 00:02:47,326
+it only requires a few operations to 
+compare two, 256 binary codes to find out 
+
+37
+00:02:47,326 --> 00:02:52,331
+how many bits they have in common. 
+The question is, how good is a binary 
+
+38
+00:02:52,331 --> 00:02:58,015
+code of that size at retrieving images?. 
+Are they going to find images that we 
+
+39
+00:02:58,015 --> 00:03:02,665
+think of as being similar? 
+So here's a net that trained by Alex 
+
+40
+00:03:02,665 --> 00:03:06,283
+Krizhevsky. 
+It's working on small color images so 
+
+41
+00:03:06,283 --> 00:03:11,967
+they're only 32 pixels by 32 pixels and 
+he takes his input the red, green, and 
+
+42
+00:03:11,967 --> 00:03:15,510
+blue channels from those images so 3,000 
+inputs. 
+
+43
+00:03:15,510 --> 00:03:21,342
+He then expands that to a larger number 
+of hidden units because we're going to go 
+
+44
+00:03:21,342 --> 00:03:24,839
+from real value inputs to logistic hidden 
+units, 
+
+45
+00:03:24,839 --> 00:03:30,310
+which probably have less capacity. 
+We then progressively decrease the number 
+
+46
+00:03:30,310 --> 00:03:33,910
+units in each layer until we get down to 
+256 bits. 
+
+47
+00:03:33,910 --> 00:03:37,787
+This encoder has about 67 million 
+parameters. 
+
+48
+00:03:37,787 --> 00:03:42,193
+It's quite big. 
+It takes a few days to train it on, in 
+
+49
+00:03:42,193 --> 00:03:45,308
+video GPU. 
+And I'll exchange it on two million 
+
+50
+00:03:45,308 --> 00:03:48,491
+images. 
+There's absolutely no theory to justify 
+
+51
+00:03:48,491 --> 00:03:52,487
+the architecture we used. 
+We know we want a fairly deep net. 
+
+52
+00:03:52,487 --> 00:03:55,941
+It makes sense to make it get an arrow as 
+we go up. 
+
+53
+00:03:55,941 --> 00:04:01,291
+But this particular architecture, where 
+you have the number of units each layer, 
+
+54
+00:04:01,291 --> 00:04:04,948
+is just a guess. 
+The interesting thing is, a guess like 
+
+55
+00:04:04,948 --> 00:04:09,010
+this already works quite well. 
+And presumably, there are some other 
+
+56
+00:04:09,010 --> 00:04:13,537
+architectures that will work better. 
+The first question to ask is how well 
+
+57
+00:04:13,537 --> 00:04:17,810
+does an ordering coder like this do at 
+reconstructing the images? 
+
+58
+00:04:17,810 --> 00:04:22,674
+So, here is a face image and it's 
+reconstruction and you can see that from 
+
+59
+00:04:22,674 --> 00:04:26,552
+the reconstruction you can tell the kind 
+of an image it is. 
+
+60
+00:04:26,552 --> 00:04:31,285
+Here's another example, where it's a 
+scene probably at a party, you can't 
+
+61
+00:04:31,285 --> 00:04:36,741
+really tell what kind of scene it is from 
+the image but you might guess that there 
+
+62
+00:04:36,741 --> 00:04:39,962
+are a number of people involved or you 
+might not. 
+
+63
+00:04:39,962 --> 00:04:44,002
+Here's an outdoor scene. 
+And you can see that the reconstruction 
+
+64
+00:04:44,002 --> 00:04:47,020
+captures a lot of information about the 
+accuracy. 
+
+65
+00:04:47,020 --> 00:04:52,061
+It captures the water in the sky and the 
+hyphens of thin strip land. 
+
+66
+00:04:52,061 --> 00:04:57,176
+So lets look at the quality of 
+retrievable we can do within ordering 
+
+67
+00:04:57,176 --> 00:05:00,661
+codes that gives those kinds of 
+reconstruction. 
+
+68
+00:05:00,661 --> 00:05:06,073
+We'll start with a picture of Michael 
+Jackson in the red square and Alex 
+
+69
+00:05:06,073 --> 00:05:11,707
+retrieved the most similar images and 
+above each image you can see how many 
+
+70
+00:05:11,707 --> 00:05:14,970
+bits had differed from Michael Jackson 
+body. 
+
+71
+00:05:14,970 --> 00:05:19,483
+And you'll notice they're all a fairly 
+similar number of bits. 
+
+72
+00:05:19,483 --> 00:05:25,235
+In 256 bits, differing by only 61 bits is 
+extraordinarily unlikely to happen by 
+
+73
+00:05:25,235 --> 00:05:30,549
+chance if they were random images. 
+It has to be a pretty similar image to 
+
+74
+00:05:30,549 --> 00:05:35,136
+differ by so few bits. 
+One nice thing about what's retrieved is, 
+
+75
+00:05:35,136 --> 00:05:40,669
+with one exception, they're all faces. 
+If we look at the retrieval you get by 
+
+76
+00:05:40,669 --> 00:05:44,280
+using euclidean distance on the raw 
+pixels, 
+
+77
+00:05:44,280 --> 00:05:47,730
+then some of them are faces, but most of 
+them aren't. 
+
+78
+00:05:47,730 --> 00:05:52,641
+So obviously the ordering coder has 
+understood something about faces that 
+
+79
+00:05:52,641 --> 00:05:56,360
+isn't in the information about Euclidean 
+distance. 
+
+80
+00:05:56,360 --> 00:06:00,020
+It's clearly giving much better 
+retrieval. 
+
+81
+00:06:00,020 --> 00:06:05,519
+Let's take another example, here we took 
+the image of a party scene and we treat 
+
+82
+00:06:05,519 --> 00:06:09,231
+of the images. 
+And you can see that about half of them 
+
+83
+00:06:09,231 --> 00:06:14,250
+have images you would think of as fairly 
+similar that other party scenes. 
+
+84
+00:06:14,250 --> 00:06:19,200
+The tip of the other party scenes with 
+something bright in the middle, like the 
+
+85
+00:06:19,200 --> 00:06:24,087
+oiginal party scene, and you'll also 
+notice that most of the bad matches also 
+
+86
+00:06:24,087 --> 00:06:28,912
+have something bright in the middle. 
+So even though we're getting down to 256 
+
+87
+00:06:28,912 --> 00:06:33,924
+bit binary codes through a lot of hidden 
+layers, it's still sensitive to quite a 
+
+88
+00:06:33,924 --> 00:06:37,997
+lot about the image structure and where 
+the brighter patches are. 
+
+89
+00:06:37,997 --> 00:06:41,757
+If you look at what Euclidean distance 
+does, it's much worse. 
+
+90
+00:06:41,757 --> 00:06:45,830
+Euclidean distance gets one other scene 
+with a, a group of people. 
+
+91
+00:06:45,830 --> 00:06:49,720
+And then everything else is fairly 
+dissimilar. 
+
+92
+00:06:49,720 --> 00:06:54,780
+You'll notice with Euclidean distance, it 
+often gets very smooth images. 
+
+93
+00:06:54,780 --> 00:06:59,661
+That's because if you can't match the 
+high frequency variation in the image, 
+
+94
+00:06:59,661 --> 00:07:04,607
+it's better to match its average then to 
+get other stuff with high frequency 
+
+95
+00:07:04,607 --> 00:07:08,462
+variations out of phase. 
+So when you got a complicated image, 
+
+96
+00:07:08,462 --> 00:07:12,830
+including in distance will typically find 
+smooth images to match it. 
+
+97
+00:07:12,830 --> 00:07:16,530
+And that's because it's minimizing a 
+squared error in pixel space. 
+
+98
+00:07:16,530 --> 00:07:20,806
+So obviously we'd like the image 
+retrievable to be more sensitive to the 
+
+99
+00:07:20,806 --> 00:07:25,668
+content of the image that is stored kinds 
+of objects in the relationships in image 
+
+100
+00:07:25,668 --> 00:07:28,245
+and less sensitive to the pixel 
+intensities. 
+
+101
+00:07:28,245 --> 00:07:32,932
+We can do that by first training a big 
+net to recognize lots of different kinds 
+
+102
+00:07:32,932 --> 00:07:37,150
+of object in real images and we show you 
+how to do that in lecture five. 
+
+103
+00:07:37,150 --> 00:07:42,149
+Then we take the activity vector, in the 
+last hidden layer of the big net, and use 
+
+104
+00:07:42,149 --> 00:07:47,087
+that as a representation of the image. 
+This should be much better than the pixel 
+
+105
+00:07:47,087 --> 00:07:51,840
+intensities at capturing information 
+about the kinds of objects in the image. 
+
+106
+00:07:51,840 --> 00:07:56,631
+So to see if this approach is likely to 
+work, we use the net described in lecture 
+
+107
+00:07:56,631 --> 00:08:01,305
+five, the one the image that competition. 
+So far, we've only tried it on Euclidan 
+
+108
+00:08:01,305 --> 00:08:05,210
+distance, between the activity of vectors 
+in the last hidden layer. 
+
+109
+00:08:05,210 --> 00:08:10,327
+But obviously if it works for that, 
+we could then that those activity vectors 
+
+110
+00:08:10,327 --> 00:08:15,179
+and build an ordering code around those 
+to get them down to binary codes. 
+
+111
+00:08:15,179 --> 00:08:19,100
+So let's first see if it works with the 
+Euclidean distance. 
+
+112
+00:08:19,100 --> 00:08:24,660
+It turns out it works really well. 
+We don't know yet whether it will work 
+
+113
+00:08:24,660 --> 00:08:28,892
+with binary codes. 
+So, in the column on the left, you see 
+
+114
+00:08:28,892 --> 00:08:33,206
+the query images. 
+And then to the right of them, you see 
+
+115
+00:08:33,206 --> 00:08:38,349
+all the things that were retrieved. 
+If you look at the elephant query image, 
+
+116
+00:08:38,349 --> 00:08:43,767
+you'll see that what gets retrieved is 
+other elephants but elephants with very 
+
+117
+00:08:43,767 --> 00:08:47,745
+different poses. 
+So those images wouldn't have a very good 
+
+118
+00:08:47,745 --> 00:08:52,203
+overlap in pixel space, although the 
+overlap wouldn't be that bad. 
+
+119
+00:08:52,203 --> 00:08:57,621
+If you look at the Halloween pumpkins, 
+you'll see that all the retrieved things 
+
+120
+00:08:57,621 --> 00:09:02,826
+are other Halloween pumpkins. 
+And some of them, would have a pretty bad 
+
+121
+00:09:02,826 --> 00:09:07,689
+overlapping pixel space. 
+Similar with the aircraft carriers, we 
+
+122
+00:09:07,689 --> 00:09:12,867
+retrieve other images of aircraft carrier 
+that are very different. 
+
+123
+00:09:12,867 --> 00:09:19,300
+So we anticipate that if we could reduce 
+the activity vector to short binary code. 
+
+124
+00:09:19,300 --> 00:09:25,026
+We would have a fast and effective way of 
+retrieving similar images just by the 
+
+125
+00:09:25,026 --> 00:09:29,178
+content of the image. 
+We'll see in lecture sixteen that we 
+
+126
+00:09:29,178 --> 00:09:34,976
+could actually combine the content of the 
+image with the caption of the image, to 
+
+127
+00:09:34,976 --> 00:09:37,410
+get an even better representation. 

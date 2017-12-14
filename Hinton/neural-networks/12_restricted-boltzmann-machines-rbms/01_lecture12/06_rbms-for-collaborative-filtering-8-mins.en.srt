@@ -1,0 +1,509 @@
+1
+00:00:00,000 --> 00:00:04,998
+In this video, I'm going to talk about
+applying restrictive Boltzmann machines to
+
+2
+00:00:04,998 --> 00:00:09,100
+collaborative filtering.
+Collaborative filtering means trying to
+
+3
+00:00:09,100 --> 00:00:14,483
+figure out how much a user would like one
+product based on how much that user liked
+
+4
+00:00:14,483 --> 00:00:18,265
+other products and how much many other
+users like products.
+
+5
+00:00:18,265 --> 00:00:23,392
+The particular case we'll look at is the
+Netflix competition, in which a machine
+
+6
+00:00:23,392 --> 00:00:28,775
+learning algorithm has to predict how much
+a particular user will like a particular
+
+7
+00:00:28,775 --> 00:00:31,739
+movie.
+The training data for this competition
+
+8
+00:00:31,739 --> 00:00:36,566
+consists of 100 million ratings of 18,000
+movies by half a million users.
+
+9
+00:00:36,566 --> 00:00:41,262
+So it's quite a big data set.
+It's not the kind of thing anybody at the
+
+10
+00:00:41,262 --> 00:00:44,370
+time imagined a Boltzmann machine could
+deal with.
+
+11
+00:00:44,370 --> 00:00:49,264
+As we'll see, there's an important trick
+to being able to get a restricted
+
+12
+00:00:49,264 --> 00:00:54,488
+Boltzmann machine to cope with the fact
+that nearly all the ratings of nearly all
+
+13
+00:00:54,488 --> 00:00:58,529
+the movies are missing.
+But when we use this trick, we're able to
+
+14
+00:00:58,529 --> 00:01:03,137
+train models, that are very useful in
+practice, and were in fact used in the
+
+15
+00:01:03,137 --> 00:01:06,639
+winning entry.
+So now I'm going to explain how restricted
+
+16
+00:01:06,639 --> 00:01:11,062
+Boltzmann machines were used for
+collaborative filtering in the Netflix
+
+17
+00:01:11,062 --> 00:01:16,377
+competition.
+In that competition, you're given most of
+
+18
+00:01:16,377 --> 00:01:22,080
+the ratings that half a million users
+gave, to 18,000 movies, and each movie
+
+19
+00:01:22,080 --> 00:01:28,011
+gets rated on a scale from one to five.
+Each user, of course, only rates a small
+
+20
+00:01:28,011 --> 00:01:32,058
+fraction of the movies.
+But even so, there's about a hundred
+
+21
+00:01:32,058 --> 00:01:34,931
+million ratings, so it's quite a big data
+set.
+
+22
+00:01:34,931 --> 00:01:40,167
+You have to predict the ratings that the
+users gave to held out movies, and if you
+
+23
+00:01:40,167 --> 00:01:44,900
+can do that well you get a big prize.
+You actually win a million dollars if
+
+24
+00:01:44,900 --> 00:01:49,516
+you're the best person at doing that.
+So, you can draw the ratings in a big
+
+25
+00:01:49,516 --> 00:01:54,319
+matrix like this where we have movies
+across the top, and users down the side.
+
+26
+00:01:54,319 --> 00:01:59,496
+And so for example, user two gave a rating
+of five to movie one, and a rating of one
+
+27
+00:01:59,496 --> 00:02:02,990
+to movie three.
+User four gave a rating of four to movie
+
+28
+00:02:02,990 --> 00:02:06,920
+one, and the question is what rating did
+he give to movie three.
+
+29
+00:02:06,920 --> 00:02:11,761
+You might decide he's quite like user two
+because he rated movie one the same way.
+
+30
+00:02:11,761 --> 00:02:14,360
+So maybe like user two he hated movie
+three.
+
+31
+00:02:14,360 --> 00:02:17,034
+On the other hand, user four liked movie
+six.
+
+32
+00:02:17,034 --> 00:02:21,587
+So maybe he likes all the movies.
+By the time you've done that much
+
+33
+00:02:21,587 --> 00:02:24,780
+reasoning, you realize you better use some
+statistics.
+
+34
+00:02:25,500 --> 00:02:28,702
+Let's start by trying to use a language
+model.
+
+35
+00:02:28,702 --> 00:02:33,784
+It sounds bizarre, but as you'll see it's
+equivalent to a standard method.
+
+36
+00:02:33,784 --> 00:02:38,727
+So we can write the data as a string of
+triples, much like family trees.
+
+37
+00:02:38,727 --> 00:02:41,860
+Each triple has a form, user, movie and
+rating.
+
+38
+00:02:42,500 --> 00:02:48,626
+So here's some of the data on that table
+on the previous slide and we just have to
+
+39
+00:02:48,626 --> 00:02:54,162
+predict the third term of a triple.
+So if we built a language model, what we
+
+40
+00:02:54,162 --> 00:03:00,215
+would do is we'd convert each user into a
+vector features for that user, that is a
+
+41
+00:03:00,215 --> 00:03:05,973
+vector that we learned and we converted
+movie into a vector features for that
+
+42
+00:03:05,973 --> 00:03:11,657
+movie, a vector that we learned and from
+those two feature vectors, we try and
+
+43
+00:03:11,657 --> 00:03:15,978
+predict the rating.
+Now, the obvious way to do this is to put
+
+44
+00:03:15,978 --> 00:03:20,959
+in a big hidden layer, and make the
+feature vectors feed into the hidden layer
+
+45
+00:03:20,959 --> 00:03:24,152
+and then have the hidden layer predict the
+rating.
+
+46
+00:03:24,152 --> 00:03:29,516
+We tried that, and we couldn't get that to
+work any better than a very simple method.
+
+47
+00:03:29,516 --> 00:03:34,497
+Which is simply, to take the scalar
+product of the feature vector for the user
+
+48
+00:03:34,497 --> 00:03:39,535
+and the feature vector for the movie.
+You just multiply them together point
+
+49
+00:03:39,535 --> 00:03:42,774
+wise, add it up and output that as your
+rating.
+
+50
+00:03:42,774 --> 00:03:48,547
+So it's not even a soft max, you actually
+output whatever real number you get form
+
+51
+00:03:48,547 --> 00:03:52,701
+the scaler product.
+Now that's exactly equivalent to doing
+
+52
+00:03:52,701 --> 00:03:57,560
+something else, which is normally called a
+Matrix Factorization model.
+
+53
+00:03:57,560 --> 00:04:05,093
+If we arrange the user features down the
+rows and the movie features above the
+
+54
+00:04:05,093 --> 00:04:12,593
+columns, we can see that if we multiply,
+that matrix of users times features by the
+
+55
+00:04:12,593 --> 00:04:18,519
+matrix of features times movies, then
+we'll get predictions for the ratings.
+
+56
+00:04:18,519 --> 00:04:24,287
+And it will be exactly equivalent to the
+language model that's beside it.
+
+57
+00:04:24,287 --> 00:04:30,924
+So the matrix factorization model is the
+most commonly used model for collaborative
+
+58
+00:04:30,924 --> 00:04:34,480
+filtering like this, and it works pretty
+well.
+
+59
+00:04:34,960 --> 00:04:39,193
+Now let's consider an alternative model,
+using our restrictive Boltzmann.
+
+60
+00:04:39,193 --> 00:04:42,556
+Machine.
+It's not obvious how you would apply a
+
+61
+00:04:42,556 --> 00:04:44,887
+restrictive Boltzmann machine to this
+problem.
+
+62
+00:04:44,887 --> 00:04:49,748
+And so we had to do some thinking.
+In the end we decided that we would treat
+
+63
+00:04:49,748 --> 00:04:54,698
+each user as a training case.
+And so a user is really a vector of movie
+
+64
+00:04:54,698 --> 00:04:58,254
+ratings.
+And for each movie we would have a visible
+
+65
+00:04:58,254 --> 00:05:03,761
+unit that had five alternative values.
+So visible units instead of being binary,
+
+66
+00:05:03,761 --> 00:05:08,433
+are five way softmaxes.
+And so the network of our restrictive
+
+67
+00:05:08,433 --> 00:05:13,801
+Boltzmann machine looks like this.
+Each of it's visible units is a five way
+
+68
+00:05:13,801 --> 00:05:20,140
+softmax, with one visible unit per movie.
+You might start worrying about there being
+
+69
+00:05:20,140 --> 00:05:25,482
+18,000 visible units here.
+And then we had about 100 binary hidden
+
+70
+00:05:25,482 --> 00:05:29,286
+units.
+And each hidden unit is connected to all
+
+71
+00:05:29,286 --> 00:05:33,090
+five values of the soft max.
+It also has a bias.
+
+72
+00:05:33,090 --> 00:05:37,909
+And so you can see the number of
+parameters we'll have is large.
+
+73
+00:05:37,909 --> 00:05:43,633
+The CD learning rule for softmax,
+incidentally is exactly the same as for a
+
+74
+00:05:43,633 --> 00:05:48,076
+binary unit and like I said we've got
+about a 100 in units.
+
+75
+00:05:48,076 --> 00:05:53,875
+And what we're going to do is learn a
+model and then try and fill in one of the
+
+76
+00:05:53,875 --> 00:05:59,435
+missing values using the model.
+Now the problem with this approach, is we
+
+77
+00:05:59,435 --> 00:06:03,526
+don't want to have an RBM with 18,000
+visible units.
+
+78
+00:06:03,526 --> 00:06:09,820
+Only a few of which have known values.
+That's a huge number of missing values to
+
+79
+00:06:09,820 --> 00:06:13,440
+begin with.
+And there's a neat way around that.
+
+80
+00:06:14,760 --> 00:06:22,464
+For each user we use an RBM that only has
+as many visual units as the movies that
+
+81
+00:06:22,464 --> 00:06:27,986
+the user rated.
+So, it's possible that every user will
+
+82
+00:06:27,986 --> 00:06:33,800
+correspond to a different RBM, with a
+different subset, with visible units.
+
+83
+00:06:33,800 --> 00:06:38,420
+Now, all of these RBMs are going to share
+the same weights.
+
+84
+00:06:38,880 --> 00:06:46,214
+That is, we know which move is which.
+And so if two users saw the same movie and
+
+85
+00:06:46,214 --> 00:06:52,684
+rated the same movie, the weights from
+that movie to the hidden units will be the
+
+86
+00:06:52,684 --> 00:06:57,716
+same for those two users.
+So we're doing an awful lot of weight
+
+87
+00:06:57,716 --> 00:07:01,870
+sharing here.
+And that's lucky, because for each user,
+
+88
+00:07:01,870 --> 00:07:06,553
+We only get one training case.
+We make this specific RBM for each user
+
+89
+00:07:06,553 --> 00:07:11,771
+with the right architecture, that is, the
+right number of visible units for the
+
+90
+00:07:11,771 --> 00:07:16,186
+movies that the user rated.
+And now there's only one training case,
+
+91
+00:07:16,186 --> 00:07:21,444
+which is that rating vector.
+But all of these half a million training
+
+92
+00:07:21,444 --> 00:07:26,520
+cases share weights to hidden units.
+So the learning works fine.
+
+93
+00:07:27,440 --> 00:07:33,473
+The models are trained with CD1 and then
+after a while with CD3. That is you go up
+
+94
+00:07:33,473 --> 00:07:39,507
+and down three times before you collect
+the statistics for the negative phase and
+
+95
+00:07:39,507 --> 00:07:43,480
+then we CD5 and then we CD9 and how well
+does it work?
+
+96
+00:07:43,480 --> 00:07:49,661
+Well the RBM's work about as well as the
+matrix factorization methods but they give
+
+97
+00:07:49,661 --> 00:07:54,331
+very different errors.
+What that means is that if you average the
+
+98
+00:07:54,331 --> 00:07:58,930
+predictions of the RBM's with the
+predictions of the matrix factorization
+
+99
+00:07:58,930 --> 00:08:03,341
+methods, you get a big win, and the
+winning group actually used multiple
+
+100
+00:08:03,341 --> 00:08:08,436
+different RBM models in their average and
+multiple different matrix factorization
+
+101
+00:08:08,436 --> 00:08:11,481
+models and I think probably other models
+as well.
+
+102
+00:08:11,481 --> 00:08:16,204
+As far as I know their main models were
+matrix factorization models and RBM

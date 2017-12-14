@@ -1,0 +1,404 @@
+1
+00:00:00,098 --> 00:00:06,048
+In this figure, we're going to get a
+geometrical understanding of what happens
+
+2
+00:00:06,048 --> 00:00:11,020
+when a perceptron learns.
+To do this, we have to think in terms of a
+
+3
+00:00:11,020 --> 00:00:14,087
+weight space.
+It's a high dimensional space in which
+
+4
+00:00:14,087 --> 00:00:19,060
+each point corresponds to a particular
+setting for all the weights.
+
+5
+00:00:19,089 --> 00:00:25,025
+In this phase, we can represent the
+training cases as planes and learning
+
+6
+00:00:25,025 --> 00:00:30,354
+consists of trying to get the weight
+vector on the right side of all the
+
+7
+00:00:30,354 --> 00:00:35,014
+training planes.
+For non-mathematicians, this may be
+
+8
+00:00:35,014 --> 00:00:40,037
+tougher than previous material.
+You may have to spend quite a long time
+
+9
+00:00:40,037 --> 00:00:44,092
+studying the next two parts.
+In particular, if you're not used to
+
+10
+00:00:44,092 --> 00:00:48,099
+thinking about hyperplanes and high
+dimensional spaces, you're going to have
+
+11
+00:00:48,099 --> 00:00:52,013
+to learn that.
+To deal with hyperplanes in a
+
+12
+00:00:52,013 --> 00:00:56,709
+14-dimensional space, for example, what
+you do is you visualize a 3-dimensional
+
+13
+00:00:56,709 --> 00:01:00,076
+space and you say, fourteen to yourself
+very loudly.
+
+14
+00:01:00,076 --> 00:01:05,011
+Everybody does it.
+But remember, that when you go from
+
+15
+00:01:05,011 --> 00:01:10,307
+13-dimensional space to a 14-dimensional
+space, your creating as much extra
+
+16
+00:01:10,307 --> 00:01:13,090
+complexity as when you go from a 2D space
+to a 3D space.
+
+17
+00:01:13,090 --> 00:01:17,059
+14-dimensional space is very big and very
+complicated.
+
+18
+00:01:20,026 --> 00:01:24,007
+So, we are going to start off by thinking
+about weight space.
+
+19
+00:01:24,007 --> 00:01:28,084
+This is the space that has one dimension
+for each weight in the perceptron.
+
+20
+00:01:29,043 --> 00:01:34,059
+A point in the space represents a
+particular setting of all the weights.
+
+21
+00:01:35,035 --> 00:01:42,006
+Assuming we've eliminated the threshold,
+we can represent every training case as a
+
+22
+00:01:42,006 --> 00:01:45,082
+hyperplane through the origin in weight
+space.
+
+23
+00:01:45,082 --> 00:01:51,062
+So, points in the space correspond to
+weight vectors and training cases
+
+24
+00:01:51,062 --> 00:01:57,014
+correspond to planes.
+And, for a particular training case, the
+
+25
+00:01:57,014 --> 00:02:02,021
+weights must lie on one side of that
+hyperplane, in order to get the answer
+
+26
+00:02:02,021 --> 00:02:06,752
+correct for that training case.
+So, let's look at a picture of it so we
+
+27
+00:02:06,752 --> 00:02:12,013
+can understand what's going on.
+Here's a picture of white space.
+
+28
+00:02:13,068 --> 00:02:19,034
+The training case, we're going to think of
+one training case for now, it defines a
+
+29
+00:02:19,034 --> 00:02:23,025
+plane, which in this 2D picture is just
+the black line.
+
+30
+00:02:24,069 --> 00:02:30,080
+The plane goes through the origin and it's
+perpendicular to the input vector for that
+
+31
+00:02:30,080 --> 00:02:34,041
+training case, which here is shown as a
+blue vector.
+
+32
+00:02:35,059 --> 00:02:40,046
+We're going to consider a training case in
+which the correct answer is one.
+
+33
+00:02:40,046 --> 00:02:45,074
+And for that kind of training case, the
+weight vector needs to be on the correct
+
+34
+00:02:45,074 --> 00:02:49,053
+side of the hyperplane in order to get the
+answer right.
+
+35
+00:02:49,053 --> 00:02:54,094
+It needs to be on the same side of the
+hyperplane as the direction in which the
+
+36
+00:02:54,094 --> 00:02:59,084
+training vector points.
+For any weight vector like the green one,
+
+37
+00:02:59,084 --> 00:03:05,045
+that's on that side of the hyperplane, the
+angle with the input vector will be less
+
+38
+00:03:05,045 --> 00:03:09,036
+than 90 degrees.
+So, the scaler product of the input vector
+
+39
+00:03:09,036 --> 00:03:14,036
+with a weight vector will be positive.
+And since we already got rid of the
+
+40
+00:03:14,036 --> 00:03:18,068
+threshold, that means the perceptron will
+give an output of what?
+
+41
+00:03:18,068 --> 00:03:21,092
+It'll say yes, and so we'll get the right
+answer.
+
+42
+00:03:21,092 --> 00:03:27,033
+Conversely, if we have a weight vector
+like the red one, that's on the wrong side
+
+43
+00:03:27,033 --> 00:03:31,923
+of the plane, the angle with the input
+vector will be more than 90 degrees, so
+
+44
+00:03:31,923 --> 00:03:37,782
+the scalar product of the weight vector
+and the input vector will be negative, and
+
+45
+00:03:37,782 --> 00:03:43,124
+we'll get a scalar product that is less
+than zero so the perceptron will say, no
+
+46
+00:03:43,124 --> 00:03:47,037
+or zero, and in this case, we'll get the
+wrong answer.
+
+47
+00:03:49,021 --> 00:03:53,716
+So, to summarize, on one side of the
+plane, all the weight vectors will get the
+
+48
+00:03:53,716 --> 00:03:57,536
+right answer.
+And on the other side of the plane, all
+
+49
+00:03:57,536 --> 00:04:01,418
+the possible weight vectors will get the
+wrong answer.
+
+50
+00:04:01,418 --> 00:04:06,669
+Now, let's look at a different training
+case, in which the correct answers are
+
+51
+00:04:06,669 --> 00:04:09,589
+zero.
+So here, we have the weight space again.
+
+52
+00:04:09,589 --> 00:04:15,614
+We've chosen a different input vector, of
+this input factor, the right answer is
+
+53
+00:04:15,614 --> 00:04:18,953
+zero.
+So again, the input case corresponds to a
+
+54
+00:04:18,953 --> 00:04:24,465
+plane shown by the black line.
+And in this case, any weight vectors will
+
+55
+00:04:24,465 --> 00:04:31,106
+make an angle of less than 90 degrees with
+the input factor, will give us a positive
+
+56
+00:04:31,106 --> 00:04:37,522
+scalar product, [unknown] perceptron to
+say yes or one, and it will get the answer
+
+57
+00:04:37,522 --> 00:04:41,150
+wrong conversely.
+And the input vector on the other side of
+
+58
+00:04:41,150 --> 00:04:44,547
+the plain, will have an angle of greater
+than 90 degrees.
+
+59
+00:04:44,547 --> 00:04:47,718
+And they will correctly give the answer of
+zero.
+
+60
+00:04:47,718 --> 00:04:53,036
+So, as before, the plane goes through the
+origin, it's perpendicular to the input
+
+61
+00:04:53,036 --> 00:04:57,393
+vector, and on one side of the plane, all
+the weight vectors are bad, and on the
+
+62
+00:04:57,393 --> 00:05:01,623
+other side, they're all good.
+Now, let's put those two training cases
+
+63
+00:05:01,623 --> 00:05:06,101
+together in one picture weight space.
+Our picture of weight space is getting a
+
+64
+00:05:06,101 --> 00:05:10,018
+little bit crowded.
+I've moved the input vector over so we
+
+65
+00:05:10,018 --> 00:05:13,215
+don't have all the vectors in quite the
+same place.
+
+66
+00:05:13,215 --> 00:05:19,909
+And now, you can see that there's a code
+of possible weight vectors.
+
+67
+00:05:19,909 --> 00:05:25,815
+And any weight vectors inside that cone,
+will get the right answer for both
+
+68
+00:05:25,815 --> 00:05:29,227
+training cases.
+Of course, there doesn't have to be any
+
+69
+00:05:29,227 --> 00:05:32,998
+cone like that.
+It could be there are no weight vectors
+
+70
+00:05:32,998 --> 00:05:37,183
+that get the right answers for all of the
+training cases.
+
+71
+00:05:37,183 --> 00:05:40,349
+But if there are any, they'll lie in a
+cone.
+
+72
+00:05:40,349 --> 00:05:45,990
+So, what the learning algorithm needs to
+do is consider the training cases one at a
+
+73
+00:05:45,990 --> 00:05:51,776
+time and move the weight vector around in
+such a way that it eventually lies in this
+
+74
+00:05:51,776 --> 00:05:56,515
+cone.
+One thing to notice is that if you get a
+
+75
+00:05:56,515 --> 00:06:02,847
+good weight factor, that is something that
+works for all the training cases, it'll
+
+76
+00:06:02,847 --> 00:06:06,395
+lie on the cone.
+Ad if you had another one, it'll lie on
+
+77
+00:06:06,395 --> 00:06:09,083
+the cone.
+And so, if you take the average of those
+
+78
+00:06:09,083 --> 00:06:12,074
+two weight vectors, that will also lie on
+the cone.
+
+79
+00:06:12,074 --> 00:06:17,026
+That means the problem is convex.
+The average of two solutions is itself a
+
+80
+00:06:17,026 --> 00:06:20,061
+solution.
+And in general in machine learning if you
+
+81
+00:06:20,061 --> 00:06:24,001
+can get a convex learning problem, that
+makes life easy.

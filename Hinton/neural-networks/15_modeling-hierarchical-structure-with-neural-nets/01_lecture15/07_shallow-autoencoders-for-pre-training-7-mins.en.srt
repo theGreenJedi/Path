@@ -1,0 +1,489 @@
+1
+00:00:00,000 --> 00:00:05,930
+In this video, I'm going to talk about 
+alternative pre-training methods for 
+
+2
+00:00:05,930 --> 00:00:11,054
+learning deep neural nets. 
+I introduced pre-training using 
+
+3
+00:00:11,054 --> 00:00:16,400
+restrictive Boltzmann machines trained 
+with contrastive divergence. 
+
+4
+00:00:16,400 --> 00:00:21,777
+But after that, people discovered there 
+are many other ways to pre-train layers 
+
+5
+00:00:21,777 --> 00:00:25,384
+of features. 
+And indeed, if you initialize the weights 
+
+6
+00:00:25,384 --> 00:00:30,829
+correctly, you may not need pre-training 
+at all provided you have enough labeled 
+
+7
+00:00:30,829 --> 00:00:33,477
+data. 
+We've seen some of the neat things that 
+
+8
+00:00:33,477 --> 00:00:36,995
+can be done with the codes produced by 
+deep auto-encoders. 
+
+9
+00:00:36,995 --> 00:00:41,263
+I now want to consider shallow 
+auto-encoders that just have one hidden 
+
+10
+00:00:41,263 --> 00:00:44,165
+layer. 
+Restricted Boltzmann machines can be used 
+
+11
+00:00:44,165 --> 00:00:48,667
+with shallow auto-encoders, particularly 
+if they're trained with contrastive 
+
+12
+00:00:48,667 --> 00:00:53,596
+divergence because they're trying to make 
+the reconstructions look like the data. 
+
+13
+00:00:53,596 --> 00:00:57,916
+When do you use an autoencoder? 
+A restricted Boltzmann machine has very 
+
+14
+00:00:57,916 --> 00:01:02,723
+strong regularization because the hidden 
+units are only allowed to have binary 
+
+15
+00:01:02,723 --> 00:01:05,826
+activities, 
+and this restricts their capacity a lot. 
+
+16
+00:01:05,826 --> 00:01:10,754
+If we train restricted Boltzmann machines 
+with maximum likelihood, they're not at 
+
+17
+00:01:10,754 --> 00:01:14,846
+all like auto-encoders. 
+One way to see that is if you had a pixel 
+
+18
+00:01:14,846 --> 00:01:20,294
+that was pure noise, an auto-encoder 
+would try to reconstruct whatever noise 
+
+19
+00:01:20,294 --> 00:01:23,926
+value it had. 
+A restricted Boltzmann machine trained 
+
+20
+00:01:23,926 --> 00:01:29,723
+with maximum likelihood would completely 
+ignore that pixel and model it just using 
+
+21
+00:01:29,723 --> 00:01:33,565
+the bias for that input. 
+So, since we can view a restricted 
+
+22
+00:01:33,565 --> 00:01:38,595
+Boltzmann machine as a kind of a strongly 
+regularized auto-encoder, maybe we can 
+
+23
+00:01:38,595 --> 00:01:42,480
+replace the RBMs that we use for 
+pre-training with a stack of 
+
+24
+00:01:42,480 --> 00:01:45,409
+autoencoders. 
+It turns out that if you do that, 
+
+25
+00:01:45,409 --> 00:01:49,994
+pre-training is not as effective. 
+At least, that's true if you use shallow 
+
+26
+00:01:49,994 --> 00:01:54,642
+auto-encoders that are regularized just 
+by penalizing the squared weights. 
+
+27
+00:01:54,642 --> 00:01:59,418
+So, stacking these autoencoders doesn't 
+work as well as stacking restricted 
+
+28
+00:01:59,418 --> 00:02:02,921
+Boltzmann machines. 
+However, there's a different kind of 
+
+29
+00:02:02,921 --> 00:02:06,734
+auto-encoder that does work as well, 
+and that's the denoising auto-encoder. 
+
+30
+00:02:06,734 --> 00:02:12,040
+And, it's been studied extensively by the 
+group in Montreal. 
+
+31
+00:02:12,040 --> 00:02:17,095
+Denoising auto-encoders work by adding 
+noise to each input vector by setting 
+
+32
+00:02:17,095 --> 00:02:22,484
+many of the components to zero, but it's 
+different components for different input 
+
+33
+00:02:22,484 --> 00:02:25,677
+vectors. 
+This resembles dropout, but it's for the 
+
+34
+00:02:25,677 --> 00:02:30,400
+inputs rather than the hidden units. 
+The denoising auto-encoder is still 
+
+35
+00:02:30,400 --> 00:02:35,589
+required to reconstruct, the inputs that 
+have been set to zero. And so, it can't 
+
+36
+00:02:35,589 --> 00:02:39,373
+just copy its input. 
+The danger with the shallow auto-encoder 
+
+37
+00:02:39,373 --> 00:02:44,034
+is that if you give it enough hidden 
+units, it might just copy each pixel to 
+
+38
+00:02:44,034 --> 00:02:48,328
+one hidden unit, and then reconstruct 
+that pixel from that hidden unit. 
+
+39
+00:02:48,328 --> 00:02:53,173
+A denoising auto-encoder clearly can't do 
+that so it has to use hidden units to 
+
+40
+00:02:53,173 --> 00:02:58,080
+catch a correlation between inputs so 
+that it can use the values of some inputs 
+
+41
+00:02:58,080 --> 00:03:01,760
+to help it reconstruct the inputs that 
+have been zeroed out. 
+
+42
+00:03:01,760 --> 00:03:05,625
+If we use a stack of denoising 
+auto-encoders, pre-training is very 
+
+43
+00:03:05,625 --> 00:03:08,598
+effective. 
+There's some cases in which RBMs still 
+
+44
+00:03:08,598 --> 00:03:12,879
+work better, but in most cases denoising 
+auto-encoders are more effective. 
+
+45
+00:03:12,879 --> 00:03:17,041
+It's also much simpler to evaluate the 
+pre-training using a denoising 
+
+46
+00:03:17,041 --> 00:03:21,680
+autoencoder because we can easily compute 
+the value of the objective function. 
+
+47
+00:03:21,680 --> 00:03:25,728
+When we pre-train a restricted Boltzmann 
+machine with contrast divergence, we 
+
+48
+00:03:25,728 --> 00:03:29,510
+can't compute the value of the real 
+objective function we're trying to 
+
+49
+00:03:29,510 --> 00:03:31,747
+minimize. 
+So, we often just use the squared 
+
+50
+00:03:31,747 --> 00:03:35,262
+reconstruction error, which is not 
+actually what's being minimized. 
+
+51
+00:03:35,262 --> 00:03:39,523
+In a denoising auto-encoder, we can print 
+out the value of the thing we're trying 
+
+52
+00:03:39,523 --> 00:03:43,252
+to minimize, and that's very helpful. 
+One disadvantage of the denoising 
+
+53
+00:03:43,252 --> 00:03:47,034
+autoencoder is that it lacks the nice 
+variational boundary we get with 
+
+54
+00:03:47,034 --> 00:03:50,762
+restricted Boltzmann machines. 
+But that's only of theoretical interest 
+
+55
+00:03:50,762 --> 00:03:55,024
+because it only applies if the restricted 
+Boltzmann machine is trained with maximum 
+
+56
+00:03:55,024 --> 00:03:57,817
+likelihood. 
+Yet another kind of auto-encoder is the 
+
+57
+00:03:57,817 --> 00:04:01,950
+contractive auto-encoder, that was also 
+developed by the group in Montreal. 
+
+58
+00:04:01,950 --> 00:04:07,607
+The way this works is that we try to make 
+the hidden activities be as insensitive 
+
+59
+00:04:07,607 --> 00:04:12,023
+as possible to the inputs. 
+Of course, the hidden units can't just 
+
+60
+00:04:12,023 --> 00:04:17,405
+ignore the inputs altogether because they 
+have to be able to reconstruct them. 
+
+61
+00:04:17,405 --> 00:04:22,856
+The way we achieve this insensitivity is 
+by penalizing the squared gradient of 
+
+62
+00:04:22,856 --> 00:04:27,962
+each hidden unit with respect to each 
+input. So, we try to make each hidden 
+
+63
+00:04:27,962 --> 00:04:32,240
+unit so that it won't change much if we 
+change an input value. 
+
+64
+00:04:32,240 --> 00:04:36,149
+Contractive auto-encoders also work very 
+well for pre-training. 
+
+65
+00:04:36,149 --> 00:04:41,005
+Their codes tend to have the property 
+that only a small subset of the hidden 
+
+66
+00:04:41,005 --> 00:04:45,734
+units are in their sensitive range. 
+For different parts of the space, it's a 
+
+67
+00:04:45,734 --> 00:04:49,770
+different subset and so this active set 
+acts like a sparse code. 
+
+68
+00:04:49,770 --> 00:04:54,105
+The other hidden units are unsaturated 
+and are insensitive. 
+
+69
+00:04:54,105 --> 00:04:57,265
+RBMs actually have a very similar 
+behavior. 
+
+70
+00:04:57,265 --> 00:05:02,997
+After they've been trained, many of the 
+hidden units will be saturated, and the 
+
+71
+00:05:02,997 --> 00:05:08,655
+working set of the unsaturated ones will 
+be different for different training 
+
+72
+00:05:08,655 --> 00:05:11,668
+cases. 
+I want to finish by summarizing my 
+
+73
+00:05:11,668 --> 00:05:16,932
+current view of pre-training. 
+There are now many different ways to do 
+
+74
+00:05:16,932 --> 00:05:20,597
+layer by layer pre-training that 
+discovers good features. 
+
+75
+00:05:20,597 --> 00:05:24,198
+When our data set does not have a huge 
+number of labels, 
+
+76
+00:05:24,198 --> 00:05:29,342
+this way of discovering features before 
+you ever use the labels is very helpful 
+
+77
+00:05:29,342 --> 00:05:32,300
+for the subsequent discriminative fine 
+tuning. 
+
+78
+00:05:32,300 --> 00:05:37,352
+It discovers the features without using 
+the information in the labels, and then 
+
+79
+00:05:37,352 --> 00:05:42,725
+the information in the labels is used for 
+fine tuning the decision banquets between 
+
+80
+00:05:42,725 --> 00:05:45,794
+classes. 
+It's especially useful if we have a lot 
+
+81
+00:05:45,794 --> 00:05:50,208
+of unlabeled data so that the 
+pre-training can be a very good job of 
+
+82
+00:05:50,208 --> 00:05:53,597
+discovering interesting features, using a 
+lot of data. 
+
+83
+00:05:53,597 --> 00:05:58,258
+For very large labeled data sets however, 
+initializing the weights that are going 
+
+84
+00:05:58,258 --> 00:06:03,055
+to be used for supervised learning by 
+using unsupervised pre-training is not 
+
+85
+00:06:03,055 --> 00:06:07,552
+necessary, even if the nets are deep. 
+Pre-training was the first good way to 
+
+86
+00:06:07,552 --> 00:06:11,870
+initialize the weights for deep nets, but 
+now we have lots of other ways. 
+
+87
+00:06:11,870 --> 00:06:17,890
+However, even if we have a lot of labels, 
+if we make the nets much larger again, 
+
+88
+00:06:17,890 --> 00:06:22,016
+we'll need pretraining again. 
+So, an argument I often have with people 
+
+89
+00:06:22,016 --> 00:06:26,561
+from Google is they say, we've got lots 
+and lots of labelled data so we don't 
+
+90
+00:06:26,561 --> 00:06:30,568
+need regularization methods. 
+Our nets won't over fit anyway because 
+
+91
+00:06:30,568 --> 00:06:34,096
+we've got so much data. 
+The counter-argument is, that's only 
+
+92
+00:06:34,096 --> 00:06:37,087
+because you're using nets that are much 
+too small. 
+
+93
+00:06:37,087 --> 00:06:41,512
+You should use much, much bigger nets on 
+much, much more powerful computers. 
+
+94
+00:06:41,512 --> 00:06:46,177
+And then, you'll start over fitting again 
+and you'll need these regularization 
+
+95
+00:06:46,177 --> 00:06:50,860
+methods, like dropout and pre-training. 
+If you ask which regime the brain is in, 
+
+96
+00:06:50,860 --> 00:06:55,492
+the brain is clearly in the regime where 
+it got huge numbers of parameters 
+
+97
+00:06:55,492 --> 00:06:59,753
+compared with the amount of data its got. 
+And so to the brain, at least, 
+
+98
+00:06:59,753 --> 00:07:02,347
+regularization methods are very 
+important. 

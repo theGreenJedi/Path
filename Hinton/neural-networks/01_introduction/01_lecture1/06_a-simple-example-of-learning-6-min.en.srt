@@ -1,0 +1,263 @@
+1
+00:00:00,176 --> 00:00:03,949
+In this video I am going to show you
+
+2
+00:00:03,949 --> 00:00:06,663
+an example of machine learning
+
+3
+00:00:06,663 --> 00:00:08,756
+It is a very simple kind of NeuralNet
+
+4
+00:00:08,756 --> 00:00:12,672
+and it is gonna be learning to recognize digits.
+
+5
+00:00:12,672 --> 00:00:15,029
+And you gonna be able to see how the weights evolve,
+
+6
+00:00:15,082 --> 00:00:18,135
+as we run a very simple learning algorithm.
+
+7
+00:00:18,711 --> 00:00:20,326
+So we gonna look at the very
+
+8
+00:00:20,326 --> 00:00:24,250
+simple learning algorithm for training a very simple network
+
+9
+00:00:24,250 --> 00:00:29,273
+to recognize handwritten shapes. The network has two layers of neurons.
+
+10
+00:00:29,588 --> 00:00:31,646
+It has got input neurons.
+
+11
+00:00:31,646 --> 00:00:38,033
+whose activities represent the intensity of pixels, and output neurons, whose activities represent the class
+
+12
+00:00:38,033 --> 00:00:39,010
+classes.
+
+13
+00:00:41,857 --> 00:00:43,587
+What we'd like is that when we show
+
+14
+00:00:43,587 --> 00:00:49,611
+a particular shape. The output neuron for that shape gets active.
+
+15
+00:00:51,287 --> 00:00:53,863
+If a pixel is active what it does
+
+16
+00:00:53,863 --> 00:00:57,096
+is it votes for  particular shapes.
+
+17
+00:00:57,096 --> 00:01:00,889
+Namely the shapes that contain that pixel.
+
+18
+00:01:00,889 --> 00:01:04,031
+Each inked pixel can vote for several shapes.
+
+19
+00:01:04,031 --> 00:01:09,803
+and the votes can have different intensities, the shape that gets the most vote wins.
+
+20
+00:01:09,803 --> 00:01:10,794
+So we are assuming
+
+21
+00:01:10,794 --> 00:01:12,960
+there is a competition between the output units.
+
+22
+00:01:12,960 --> 00:01:14,772
+and that something I haven't explained yet
+
+23
+00:01:14,772 --> 00:01:17,951
+will explain in a later lecture.
+
+24
+00:01:20,028 --> 00:01:24,297
+So first, we need to decide how to display the weights. And
+
+25
+00:01:24,297 --> 00:01:29,385
+it seems natural to write the weights on the connection between
+
+26
+00:01:29,385 --> 00:01:34,809
+input unit and output unit. But, we are never able to see what was going on if we get that.
+
+27
+00:01:35,255 --> 00:01:39,309
+We need a display in which we can see the values of thousands of weights.
+
+28
+00:01:39,447 --> 00:01:45,196
+So the idea is for each output unit, we make a little map. And in that map we show
+
+29
+00:01:46,180 --> 00:01:53,032
+the strength of connection coming from each input pixel in the location of that input pixel.
+
+30
+00:01:53,324 --> 00:01:59,375
+And we show the strength of connection by using black and white blobs, whose area represents the magnitude.
+
+31
+00:01:59,375 --> 00:02:09,822
+and whose sign represent, whose color represents the sign. So the initial weights that you see there are just small random weights.
+
+32
+00:02:10,083 --> 00:02:18,643
+Now what we are gonna do is show that network some data and get it to learn weights that are better than the random weights.
+
+33
+00:02:19,550 --> 00:02:27,240
+the way we are gonna look is when we show it an image, we are going to increment the weights
+
+34
+00:02:27,240 --> 00:02:33,274
+from the active pixels in the image to the correct class
+
+35
+00:02:33,274 --> 00:02:37,942
+if we just did that, the weights could get only bigger and eventually every class
+
+36
+00:02:37,942 --> 00:02:40,782
+will get huge input whenever we show it to the image.
+
+37
+00:02:40,782 --> 00:02:44,124
+So we need some way of keeping the weights under the control.
+
+38
+00:02:44,124 --> 00:02:50,311
+What we gonna do is we will also gonna decrement the weights from the active pixels to whatever class
+
+39
+00:02:50,311 --> 00:02:53,040
+the network guesses.
+
+40
+00:02:53,040 --> 00:03:00,113
+So (??) training it to the right thing, rather than (??) currently   has a tendency to do.
+
+41
+00:03:00,113 --> 00:03:04,909
+If of course it does the right thing, then the increments we make,
+
+42
+00:03:04,909 --> 00:03:11,358
+in the first step the learning rule will exactly cancel the decrements so nothing will change, which is what we want to.
+
+43
+00:03:12,896 --> 00:03:18,569
+So, these are the initial weights. Now we are going to show you few hundred training examples and then
+
+44
+00:03:18,569 --> 00:03:20,706
+look at the weights again.
+
+45
+00:03:20,706 --> 00:03:25,893
+So now the weights have changed, they started to
+
+46
+00:03:25,893 --> 00:03:31,204
+form regular patterns. And we show it a few more hundred examples.
+
+47
+00:03:31,204 --> 00:03:34,871
+And the weights have changed small, and a few more hundred examples.
+
+48
+00:03:34,871 --> 00:03:39,648
+and a few more hundred examples. Few more hundred.
+
+49
+00:03:39,648 --> 00:03:43,016
+and now the weights are pretty much at their final values.
+
+50
+00:03:43,186 --> 00:03:50,720
+I'll talk more in future lectures about precise details of the learning algorithm. But what you can see is
+
+51
+00:03:50,720 --> 00:03:54,082
+the weights now look like the little templates from the shapes.
+
+52
+00:03:54,082 --> 00:04:02,128
+If you look at the weights going into the one unit for example, they don't (??) little template for identifying ones. they are not quite templates.
+
+53
+00:04:02,128 --> 00:04:04,786
+If you look at the weights going into the nine unit
+
+54
+00:04:04,786 --> 00:04:08,875
+, they don't have any positive weight below the half way line.
+
+55
+00:04:08,875 --> 00:04:16,137
+That's because for telling the difference between 9s and 7s the weights below the half way line aren't much used.
+
+56
+00:04:16,137 --> 00:04:21,710
+You have to tell the difference by deciding whether there is a loop at the top or horizontal bar at the top.
+
+57
+00:04:21,710 --> 00:04:26,421
+And so, those output units are focused on that discrimination.
+
+58
+00:04:29,928 --> 00:04:38,703
+One thing about this learning algorithm is because the network is so simple, it's unable to learn a very good way of discriminating shapes.
+
+59
+00:04:40,995 --> 00:04:45,707
+what it learns is equivalent to having a little template for each shape.
+
+60
+00:04:45,707 --> 00:04:53,533
+And then deciding the winner based on which shape has the template that overlapped most with the ink.
+
+61
+00:04:54,425 --> 00:05:03,043
+The problem is that the weights in which handwritten digits vary are much too complicated to be captured by simple template matches of whole shapes.
+
+62
+00:05:03,043 --> 00:05:13,250
+You have to model allowable  variation for digits. By first extracting features and then looking arrangement of those features.
+
+63
+00:05:14,774 --> 00:05:18,090
+So here is examples we have seen already.
+
+64
+00:05:18,090 --> 00:05:29,790
+If you look at those 2's in green box. You can see there is no template that will fit all those well and will fail to fit that 3 in the red box there.
+
+65
+00:05:29,790 --> 00:05:33,721
+So task simply can't be solved by a simple network like that.
+
+66
+00:05:35,025 --> 00:05:38,800
+The network did the best it could but it can't solve this problem.

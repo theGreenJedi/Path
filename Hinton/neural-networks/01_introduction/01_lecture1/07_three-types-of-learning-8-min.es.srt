@@ -1,0 +1,486 @@
+1
+00:00:00,000 --> 00:00:04,052
+En este vídeo hablaré de tres tipos 
+distintos de aprendizaje automático:
+
+2
+00:00:04,052 --> 00:00:08,057
+aprendizaje supervisado, aprendizaje por
+refuerzo y aprendizaje no supervisado
+
+3
+00:00:08,057 --> 00:00:13,027
+En general, la primer mitad del curso 
+tratará sobre aprendizaje supervisado.
+
+4
+00:00:13,027 --> 00:00:17,079
+La segunda mitad del curso tratará mayormente 
+de aprendizaje no supervisado y
+
+5
+00:00:17,079 --> 00:00:22,049
+El aprendizaje por refuerzo no será tratado 
+en este curso porque no podemos cubrir todo.
+
+6
+00:00:22,049 --> 00:00:26,060
+El aprendizaje puede dividirse 
+en tres grandes grupos
+
+7
+00:00:26,060 --> 00:00:30,067
+de algoritmos. 
+En aprendizaje supervisado se trata 
+
+8
+00:00:30,067 --> 00:00:35,092
+de predecir una salida dado un vector 
+de entrada, o sea que está muy claro
+
+9
+00:00:35,092 --> 00:00:41,017
+cuál es el objetivo del aprendizaje supervisado. 
+En aprendizaje por refuerzo se trata
+
+10
+00:00:41,017 --> 00:00:46,607
+de seleccionar acciones o secuencias de 
+acciones para maximizar la recompensa
+
+11
+00:00:46,607 --> 00:00:53,030
+y esa recompensa ocurre solo ocasionalmente. 
+En el aprendizaje no supervisado se trata de
+
+12
+00:00:53,030 --> 00:00:59,577
+descubrir una buena representación interna de la entrada 
+y vamos a ver más adelante qué significa eso. 
+
+13
+00:00:59,577 --> 00:01:03,795
+El aprendizaje supervisado en sí 
+se divide en dos tipos diferentes. 
+
+14
+00:01:03,795 --> 00:01:08,121
+En la regresión se busca 
+como salida un número real
+
+15
+00:01:08,121 --> 00:01:14,135
+o un vector completo de números reales, como el 
+precio de una acción en un período de seis meses
+
+16
+00:01:14,135 --> 00:01:21,059
+o la temperatura al mediodía mañana. 
+Y el objetivo es llegar tan cerca como se pueda
+
+17
+00:01:21,059 --> 00:01:25,399
+al número real correcto. 
+En clasificación, se busca como salida
+
+18
+00:01:25,399 --> 00:01:29,364
+un rótulo de clase. El caso más simple 
+es una elección entre
+
+19
+00:01:29,364 --> 00:01:32,606
+ uno y cero, 
+entre casos positivos y negativos,
+
+20
+00:01:32,606 --> 00:01:37,636
+pero obviamente podemos tener 
+múltiples rótulos alternativos como 
+
+21
+00:01:37,636 --> 00:01:44,492
+cuando clasificamos números manuscritos. 
+El aprendizaje supervisado funciona primero
+
+22
+00:01:44,492 --> 00:01:49,512
+seleccionando una clase de modelos, es decir, 
+un conjunto completo de modelos que estamos preparados
+
+23
+00:01:49,512 --> 00:01:53,422
+para considerar como candidatos. 
+Se puede pensar la clase de modelos como
+
+24
+00:01:53,422 --> 00:01:59,825
+ función que toma un vector de entrada 
+y algunos parámetros y devuelve una salida y
+
+25
+00:01:59,825 --> 00:02:03,836
+De modo que la clase de modelo es
+simplemente una forma de asignar
+
+26
+00:02:03,836 --> 00:02:10,939
+una entrada con una salida usando algunos 
+parámetros numéricos W y luego ajustando esos
+
+27
+00:02:10,939 --> 00:02:16,394
+parámetros numéricos para lograr que la asignación se
+corresponda con los datos de entrenamiento supervisado
+
+28
+00:02:16,394 --> 00:02:22,046
+Lo que queremos decir con que se correspondan es
+que minimicen la discrepancia entre el objetivo de salida
+
+29
+00:02:22,046 --> 00:02:27,255
+en cada caso de entrenamiento y la salida real 
+producida por el sistema de aprendizaje automático
+
+30
+00:02:27,255 --> 00:02:32,591
+La medida obvia de esa discrepancia 
+si estamos usando números reales como salidas
+
+31
+00:02:32,591 --> 00:02:38,746
+es la diferencia cuadrática 
+entre la salida de nuestro sistema y
+
+32
+00:02:38,746 --> 00:02:44,057
+la salida correcta t, y ponemos el un-medio
+ de modo que se cancele cuando derivemos.
+
+33
+00:02:44,057 --> 00:02:47,453
+Para clasificación se puede usar
+
+34
+00:02:47,453 --> 00:02:51,994
+ esa medida pero hay otras métricas 
+más sensibles que veremos más tarde, y
+
+35
+00:02:51,994 --> 00:02:56,203
+esas métricas más sensibles en general funcionan mejor también.
+
+36
+00:02:56,203 --> 00:03:03,055
+En aprendizaje por refuerzo, las salidas 
+son en realidad secuencias de acciones, 
+
+37
+00:03:03,055 --> 00:03:07,080
+y hay que decidir sobre esas acciones 
+basandose en recompensas esporádicas 
+
+38
+00:03:07,080 --> 00:03:12,516
+El objetivo al seleccionar cada acción es 
+maximizar la suma esperada de la futura
+
+39
+00:03:12,516 --> 00:03:17,139
+recompensa, y en general usamos 
+un factor de descuento de modo de no tener
+
+40
+00:03:17,139 --> 00:03:20,472
+que mirar demasiado a futuro. Decimos 
+que las recompensas en un futuro lejano
+
+41
+00:03:20,472 --> 00:03:24,592
+no cuentan como las recompensas que 
+se pueden obtener bastante más rápido.
+
+42
+00:03:24,592 --> 00:03:29,538
+El aprendizaje por refuerzo es difícil. 
+Es difícil porque las recompensas
+
+43
+00:03:29,538 --> 00:03:34,451
+están en general demoradas, de modo que 
+es difícil saber exactamente que acción fue errónea
+
+44
+00:03:34,451 --> 00:03:38,007
+en una larga secuencia de acciones. 
+También es difícil porque un premio
+
+45
+00:03:38,007 --> 00:03:41,879
+escalar, especialmente uno que ocurre 
+ocasionalmente no brinda mucha
+
+46
+00:03:41,879 --> 00:03:45,082
+información en que basar los cambios en los parámetros.
+
+47
+00:03:45,082 --> 00:03:50,235
+En general no se pueden aprender millones de 
+parámetros usando aprendizaje por refuerzo
+
+48
+00:03:50,235 --> 00:03:53,830
+Mientras que en aprendizaje supervisado
+ y no supervisado se puede.
+
+49
+00:03:53,830 --> 00:03:57,798
+En general, en aprendizaje por refuerzo 
+se trata de aprender docenas
+
+50
+00:03:57,798 --> 00:04:00,755
+de parámetros o quizás 1.000 parámetros, pero no millones.
+
+51
+00:04:00,755 --> 00:04:04,827
+En este curso no podemos abarcarlo 
+todo, de modo que no veremos
+
+52
+00:04:04,827 --> 00:04:08,552
+aprendizaje por refuerzo, 
+aunque sea un tema importante.
+
+53
+00:04:08,552 --> 00:04:14,350
+Veremos aprendizaje no supervisado 
+en la segunda mitad del curso.
+
+54
+00:04:14,350 --> 00:04:20,040
+Por aproximadamente 40 años la 
+comunidad de aprendizaje automático ignoró 
+
+55
+00:04:20,040 --> 00:04:24,282
+el aprendizaje no supervisado excepto para una forma 
+muy limitada llamada agrupación (clustering)
+
+56
+00:04:24,282 --> 00:04:28,990
+En realidad se usaron definiciones de 
+aprendizaje automático que lo excluyen.
+
+57
+00:04:28,990 --> 00:04:34,481
+Definieron aprendizaje automático en algunos 
+textos como una aplicación de las entradas
+
+58
+00:04:34,481 --> 00:04:37,589
+hacia las salidas. Y muchos 
+investigadores pensaron que
+
+59
+00:04:37,589 --> 00:04:40,822
+la agrupación era la única forma 
+de aprendizaje no supervisado.
+
+60
+00:04:40,822 --> 00:04:46,870
+Una razón para eso es que es difícil decir 
+cuál es el objetivo del aprendizaje no supervisado.
+
+61
+00:04:46,870 --> 00:04:50,518
+Un objetivo principal es obtener una representación 
+
+62
+00:04:50,518 --> 00:04:54,879
+interna de las entradas que sea útil para 
+posteriores aprendizajes supervisados
+
+63
+00:04:54,879 --> 00:04:59,188
+o por refuerzo. Y la razón por la 
+que podemos querer hacerlo 
+
+64
+00:04:59,188 --> 00:05:04,481
+en dos etapas es que no queremos usar, 
+por ejemplo, la recompensa para el aprendizaje
+
+65
+00:05:04,481 --> 00:05:08,503
+por refuerzo para establecer los 
+parámetros  para nuestro sistema visual.
+
+66
+00:05:08,503 --> 00:05:13,310
+De modo que se puede calcular la 
+distancia a una superficie usando la diferencia
+
+67
+00:05:13,310 --> 00:05:17,076
+entre las imágenes que obtenemos 
+entre nuestros dos ojos. Pero no quieres
+
+68
+00:05:17,076 --> 00:05:21,003
+aprender ese cálculo de distancia ajustando 
+los parámetros cada vez que pateas
+
+69
+00:05:21,003 --> 00:05:24,566
+algo con tu pie desnudo en forma repetida.
+
+70
+00:05:24,566 --> 00:05:29,100
+Eso implica golpearte los dedos del 
+pie un número muy grande de veces y
+
+71
+00:05:29,100 --> 00:05:33,474
+hay formas mucho mejores de aprender a 
+fundir dos imágenes basándose puramente
+
+72
+00:05:33,474 --> 00:05:37,799
+en la información de las entradas. 
+Otras metas del aprendizaje no supervisado son
+
+73
+00:05:37,799 --> 00:05:42,194
+suministrar una representación de la entrada 
+compacta, de pocas dimensiones.
+
+74
+00:05:42,194 --> 00:05:47,149
+Las entradas con muchas dimensiones como las 
+imágenes, en general están en o son cercanos 
+
+75
+00:05:47,149 --> 00:05:51,599
+a manifolds de bajas dimensiones. 
+O varios de esos manifolds para el caso
+
+76
+00:05:51,599 --> 00:05:55,584
+de los números manuscritos. Significa que, aunque tengas
+
+77
+00:05:55,584 --> 00:06:00,605
+un millón de pixeles, en realidad no hay 
+un millón de grados de libertad
+
+78
+00:06:00,605 --> 00:06:04,118
+en lo que puede suceder. 
+Podría haber solo algunos cientos de grados
+
+79
+00:06:04,118 --> 00:06:08,025
+de libertad en lo que pueda ocurrir.
+De modo que lo que queremos es mudar la
+
+80
+00:06:08,025 --> 00:06:12,617
+representación de un millón de pixeles a 
+esa de algunos cientos de grados de libertad
+
+81
+00:06:12,617 --> 00:06:15,804
+que coincidirá con decir que 
+estamos sobre un manifold
+
+82
+00:06:15,804 --> 00:06:18,342
+También necesitamos saber 
+sobre qué manifold estamos.
+
+83
+00:06:18,342 --> 00:06:24,321
+Una forma bastante limitada de ésto es el análisis 
+de componentes principales que es lineal.
+
+84
+00:06:24,321 --> 00:06:29,064
+Supone que hay un manifold y ese 
+manifold es un plano en el espacio
+
+85
+00:06:29,064 --> 00:06:33,323
+multidimensional. 
+Otra definición de aprendizaje
+
+86
+00:06:33,323 --> 00:06:37,846
+no supervisado, u otra meta del 
+aprendizaje no supervisado es brindar
+
+87
+00:06:37,846 --> 00:06:41,746
+una representación económica para las entradas 
+en términos de características
+
+88
+00:06:41,746 --> 00:06:46,605
+Por ejemplo, si podemos representar la 
+entrada en términos de características binarias
+
+89
+00:06:46,605 --> 00:06:51,552
+Eso es en general económico, porque luego 
+toma solo un bit para expresar el estado 
+
+90
+00:06:51,552 --> 00:06:54,600
+de la característica binaria.
+Alternativamente, podemos usar un gran número
+
+91
+00:06:54,600 --> 00:06:59,330
+de características expresadas con números reales, 
+pero insistir en que para cada entrada casi todas
+
+92
+00:06:59,330 --> 00:07:03,481
+las características valen cero. En este caso, 
+para cada entrada solo necesitamos
+
+93
+00:07:03,481 --> 00:07:07,107
+representar algunos números reales 
+y eso es económico.
+
+94
+00:07:07,107 --> 00:07:13,711
+Como dije antes, otra definición de 
+aprendizaje no supervisado, u otra meta
+
+95
+00:07:13,711 --> 00:07:18,543
+del aprendizaje no supervisado es encontrar 
+agrupamientos entre las entradas, y podemos ver
+
+96
+00:07:18,543 --> 00:07:23,969
+esos agrupamientos como códigos muy dispersos,
+ es decir tenemos una característica por agrupamiento
+
+97
+00:07:23,969 --> 00:07:30,062
+e insistiremos en que todas las características 
+excepto una son cero y esa única tiene
+
+98
+00:07:30,062 --> 00:07:33,814
+el valor uno. De modo que el 
+agrupamiento es en realidad un caso
+
+99
+00:07:33,814 --> 00:07:36,037
+extremo de hallar características dispersas

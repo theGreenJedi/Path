@@ -1,0 +1,653 @@
+1
+00:00:00,000 --> 00:00:05,883
+In this video, I am going to describe how 
+we might be able to combine recognition 
+
+2
+00:00:05,883 --> 00:00:11,476
+of objects by using the relationships 
+between their parts and recognition of 
+
+3
+00:00:11,476 --> 00:00:16,851
+objects using a deep neural network. 
+At present in computer vision, there's 
+
+4
+00:00:16,851 --> 00:00:20,337
+broadly three approaches to recognizing 
+objects. 
+
+5
+00:00:20,337 --> 00:00:26,003
+Either you use a deep convolutional 
+neural net and this currently works best. 
+
+6
+00:00:26,003 --> 00:00:31,886
+Or you use a parts-based approach, which 
+I think in the long run is going to work 
+
+7
+00:00:31,886 --> 00:00:36,803
+best,. Or you use the existing features 
+that computer vision people know how to 
+
+8
+00:00:36,803 --> 00:00:41,419
+extract from images and make histograms 
+of them and then use lots of hand 
+
+9
+00:00:41,419 --> 00:00:44,038
+engineering. 
+This is the approach that the 
+
+10
+00:00:44,038 --> 00:00:47,220
+convolutional neural networks have 
+recently beaten. 
+
+11
+00:00:47,220 --> 00:00:53,065
+The point of this video is to show how we 
+might combine a parts-based approach with 
+
+12
+00:00:53,065 --> 00:00:56,892
+early stages that use convolutional 
+neraul networks. 
+
+13
+00:00:56,892 --> 00:01:02,667
+Even though convolutional neural networks 
+have worked very well for recognizing 
+
+14
+00:01:02,667 --> 00:01:06,288
+objects and images, 
+I think there's something missing. 
+
+15
+00:01:06,288 --> 00:01:11,968
+When we pool the activities of a bunch of 
+replicator feature detectors, we lose the 
+
+16
+00:01:11,968 --> 00:01:16,160
+precise position of the feature detector 
+that was most active. 
+
+17
+00:01:16,160 --> 00:01:21,033
+This means we don't know exactly where 
+things are and that's fatal for high 
+
+18
+00:01:21,033 --> 00:01:23,791
+level parts, such as the nose and the 
+mouth. 
+
+19
+00:01:23,791 --> 00:01:28,600
+In order to recognize whose face it is, 
+you need to use the precise spatial 
+
+20
+00:01:28,600 --> 00:01:32,512
+relationships between high level parts, 
+like noses and mouths. 
+
+21
+00:01:32,512 --> 00:01:37,257
+If you overlap the pools so that each 
+feature occurs in several different 
+
+22
+00:01:37,257 --> 00:01:42,516
+pools, you retain more information about 
+its position and that makes things work a 
+
+23
+00:01:42,516 --> 00:01:45,530
+bit better, but I don't think that's the 
+answer. 
+
+24
+00:01:45,530 --> 00:01:50,290
+A related problem is that convolutional 
+neural nets that use translations to 
+
+25
+00:01:50,290 --> 00:01:54,617
+replicate feature detectors cannot 
+extrapolate their understanding of 
+
+26
+00:01:54,617 --> 00:01:58,883
+geometrical relationships to radically 
+new viewpoints like different 
+
+27
+00:01:58,883 --> 00:02:03,086
+orientations or different scales. 
+We could, of course, try replicating 
+
+28
+00:02:03,086 --> 00:02:08,032
+across orientation and scale, but then, 
+we get huge numbers of replicated feature 
+
+29
+00:02:08,032 --> 00:02:10,381
+detectors. 
+Now, people are very good at 
+
+30
+00:02:10,381 --> 00:02:13,658
+extrapolating. 
+After seeing a new shape once, they can 
+
+31
+00:02:13,658 --> 00:02:16,440
+recognize it from a very different 
+viewpoint. 
+
+32
+00:02:16,440 --> 00:02:22,004
+Currently, the way we deal with that with 
+convolutional neural networks is to train 
+
+33
+00:02:22,004 --> 00:02:25,876
+them on transformed data. 
+So this involves giving them huge 
+
+34
+00:02:25,876 --> 00:02:30,527
+training sets, where we tried to 
+transform the data through different 
+
+35
+00:02:30,527 --> 00:02:35,695
+orientations, and scales, and lightings, 
+and all sorts of other things so that the 
+
+36
+00:02:35,695 --> 00:02:40,799
+network can cope with those variations. 
+But that's a very clumsy way of dealing 
+
+37
+00:02:40,799 --> 00:02:44,546
+with the variations. 
+I think a much better way is to use a 
+
+38
+00:02:44,546 --> 00:02:49,584
+hierarchy of coordinate frames and to use 
+a group of neurons to represent the 
+
+39
+00:02:49,584 --> 00:02:54,430
+conjunction of the shape of a feature and 
+it's pose relative to the retina. 
+
+40
+00:02:54,430 --> 00:02:59,034
+So when these neurons are active, it 
+tells you a feature of that kind is 
+
+41
+00:02:59,034 --> 00:03:02,680
+there, like a nose. 
+And the precise activities or relative 
+
+42
+00:03:02,680 --> 00:03:06,390
+activities of these neurons tell you the 
+pose of the nose. 
+
+43
+00:03:06,390 --> 00:03:11,042
+If you think about representing the pose 
+of something, that's really a 
+
+44
+00:03:11,042 --> 00:03:13,900
+relationship between two coordinate 
+frames. 
+
+45
+00:03:13,900 --> 00:03:17,892
+So it's a relationship between a 
+coordinate frame embedded in the thing 
+
+46
+00:03:17,892 --> 00:03:20,610
+and the coordinate frame of the camera or 
+retina. 
+
+47
+00:03:20,610 --> 00:03:26,072
+So, in order to represent the pose of 
+something, we have to embed a coordinate 
+
+48
+00:03:26,072 --> 00:03:29,737
+frame within it. 
+Once we've done this and we have a 
+
+49
+00:03:29,737 --> 00:03:35,487
+representation of the pose of thoughts of 
+objects relative to the reckoner, it's 
+
+50
+00:03:35,487 --> 00:03:40,590
+easy to use the relationships between 
+paths to recognize larger objects. 
+
+51
+00:03:40,590 --> 00:03:45,901
+So we're going to use the consistency of 
+the poses of the parts as a cue for 
+
+52
+00:03:45,901 --> 00:03:50,567
+recognizing a larger shape. 
+If you look at this picture, we have a 
+
+53
+00:03:50,567 --> 00:03:56,165
+nose and we have a mouth and then the 
+right spacial relationship to one 
+
+54
+00:03:56,165 --> 00:03:59,218
+another. 
+One way of thinking about that is that if 
+
+55
+00:03:59,218 --> 00:04:03,972
+you ask the mouth to predict the pose of 
+the whole face, and if you ask the nose 
+
+56
+00:04:03,972 --> 00:04:08,190
+to predict the pose of the whole face, 
+they'll make similar predictions. 
+
+57
+00:04:08,190 --> 00:04:12,944
+If you look on the right share, we have 
+the same nose and the same mouth, but now 
+
+58
+00:04:12,944 --> 00:04:15,440
+they're in the wrong spatial 
+relationship. 
+
+59
+00:04:15,440 --> 00:04:21,169
+And that means that if they separately 
+make predictions about the pose of the 
+
+60
+00:04:21,169 --> 00:04:24,695
+whole face, those predictions won't agree 
+at all. 
+
+61
+00:04:24,695 --> 00:04:30,204
+So here's two layers in a hierarchy of 
+parts, where the larger parts can be 
+
+62
+00:04:30,204 --> 00:04:34,318
+recognized by consistent predictions from 
+smaller parts. 
+
+63
+00:04:34,318 --> 00:04:39,680
+Let's suppose we're looking for a face. 
+And so in the middle here the ellipse 
+
+64
+00:04:39,680 --> 00:04:45,557
+with Tj in it is a collection of neurons 
+that are going to be used for recognizing 
+
+65
+00:04:45,557 --> 00:04:49,705
+the pose of the face. 
+And the Pj next to it is a single 
+
+66
+00:04:49,705 --> 00:04:54,624
+logistic neuron that's going to be used 
+for representing whether or not we think 
+
+67
+00:04:54,624 --> 00:04:58,764
+there's a face there. 
+We have a similar representation in the 
+
+68
+00:04:58,764 --> 00:05:03,067
+lab below, where we have a representation 
+of the pose for a mouth and a 
+
+69
+00:05:03,067 --> 00:05:08,062
+representation of the pose for a nose, 
+and we can recognize the phase by 
+
+70
+00:05:08,062 --> 00:05:13,448
+noticing that those two representations 
+make consistent predictions. 
+
+71
+00:05:13,448 --> 00:05:19,151
+So we take a vector of activities that 
+represents the pose of the mouth. 
+
+72
+00:05:19,151 --> 00:05:26,199
+We multiply by matrix Tij that represents 
+the spatial relationship between a mouth 
+
+73
+00:05:26,199 --> 00:05:32,780
+and a face, and we get a prediction, Ti * 
+Tij for the pose of the face. 
+
+74
+00:05:32,780 --> 00:05:37,135
+We do the same thing with the nose. 
+We take a vector of neural activities 
+
+75
+00:05:37,135 --> 00:05:41,609
+that represents the pose of the nose, Th. 
+We multiply it by the relationship 
+
+76
+00:05:41,609 --> 00:05:46,382
+between the nose and the face and we get 
+another prediction for the pose of the 
+
+77
+00:05:46,382 --> 00:05:49,126
+face. 
+If those two predictions agree, there's a 
+
+78
+00:05:49,126 --> 00:05:53,124
+face there, because the nose and the 
+mouth are in the right spacial 
+
+79
+00:05:53,124 --> 00:05:57,360
+relationship and that's very unlikely 
+without there being a face there. 
+
+80
+00:05:57,360 --> 00:06:00,834
+What we're doing here is inverse computer 
+graphics. 
+
+81
+00:06:00,834 --> 00:06:06,011
+In computer graphics, if you knew the 
+pose of the face, you could now compute 
+
+82
+00:06:06,011 --> 00:06:11,256
+by using the inverse of Tij, the pose of 
+the mouth and similarly for the nose. 
+
+83
+00:06:11,256 --> 00:06:16,910
+So in computer graphics you're going from 
+poses of larger things to poses of their 
+
+84
+00:06:16,910 --> 00:06:19,975
+parts. 
+In computer vision, you need to go from 
+
+85
+00:06:19,975 --> 00:06:25,084
+the poses of the parts to the poses of 
+larger things and you need to check 
+
+86
+00:06:25,084 --> 00:06:29,579
+consistency when you do that. 
+Now if we can get a neural net to 
+
+87
+00:06:29,579 --> 00:06:35,359
+represent these pose vectors, as vectors 
+of neural activity, then we get a very 
+
+88
+00:06:35,359 --> 00:06:38,916
+nice property. 
+Spatial relationships can then be 
+
+89
+00:06:38,916 --> 00:06:43,634
+modelled as linear operations. 
+That makes it very easy to learn 
+
+90
+00:06:43,634 --> 00:06:48,312
+hierarchy visual entities, 
+and it also makes it very easy to 
+
+91
+00:06:48,312 --> 00:06:53,498
+generalize across viewpoints. 
+So, what's going to happen when we make 
+
+92
+00:06:53,498 --> 00:06:59,163
+small changes in viewpoint is the pose 
+vectors, those vectors of neural 
+
+93
+00:06:59,163 --> 00:07:04,588
+activities are all going to change. 
+What's going to be invariant is the 
+
+94
+00:07:04,588 --> 00:07:08,418
+weights. 
+It was the weights that represented the 
+
+95
+00:07:08,418 --> 00:07:12,726
+relationship between the part from the 
+hole, like Tij on the previous slide, and 
+
+96
+00:07:12,726 --> 00:07:17,671
+those don't depend on viewpoint. 
+So we want to get the invariant 
+
+97
+00:07:17,671 --> 00:07:22,737
+properties of a shape into the weights. 
+And we want to have the pose vectors in 
+
+98
+00:07:22,737 --> 00:07:26,071
+the activities, 
+because when we change viewpoint, all 
+
+99
+00:07:26,071 --> 00:07:30,764
+those pose vectors are going to change. 
+So, rather than trying to get neural 
+
+100
+00:07:30,764 --> 00:07:35,533
+activities that are invariant to 
+viewpoint, which is what the pooling in 
+
+101
+00:07:35,533 --> 00:07:40,104
+the convolutional net is trying to do. 
+We're going to aim to get neural 
+
+102
+00:07:40,104 --> 00:07:43,084
+activities that are equivariant of 
+viewpoint. 
+
+103
+00:07:43,084 --> 00:07:47,588
+As the pose of the object varies the 
+activities of the neurons vary. 
+
+104
+00:07:47,588 --> 00:07:52,622
+That means the percept of an object, not 
+its label but what it looks like, is 
+
+105
+00:07:52,622 --> 00:07:57,981
+going to change as the viewpoint changes. 
+I'm going to finish by giving you some 
+
+106
+00:07:57,981 --> 00:08:03,811
+evidence that our visual systems really 
+do impose coordinate frames in order to 
+
+107
+00:08:03,811 --> 00:08:07,440
+represent shapes. 
+This was pointed out a long time ago by a 
+
+108
+00:08:07,440 --> 00:08:11,824
+great psychologist called Irvin Rock. 
+So if you look at this shape and I tell 
+
+109
+00:08:11,824 --> 00:08:15,353
+you it's a country, most people don't 
+know which country it is. 
+
+110
+00:08:15,353 --> 00:08:19,679
+They look at it, and they think it looks 
+a bit like Australia, but it's so sort, 
+
+111
+00:08:19,679 --> 00:08:24,005
+sort of mirror image of Australia, 
+but it's not really a familiar country at 
+
+112
+00:08:24,005 --> 00:08:26,453
+all. 
+If you tell them where the top is, that 
+
+113
+00:08:26,453 --> 00:08:30,460
+it's that way up, they immediately 
+recognize that's it's Africa. 
+
+114
+00:08:30,460 --> 00:08:35,138
+If they knew what coordinate frame to 
+impose on it, it immediately becomes a 
+
+115
+00:08:35,138 --> 00:08:38,339
+familiar shape. 
+Similarly, if I give you a shape like 
+
+116
+00:08:38,339 --> 00:08:43,820
+this one, you can perceive it as a square 
+or you can perceive it as a diamond. 
+
+117
+00:08:43,820 --> 00:08:46,518
+Those are two completely different 
+percepts. 
+
+118
+00:08:46,518 --> 00:08:50,934
+What you know about the shape is totally 
+different depending on which way you 
+
+119
+00:08:50,934 --> 00:08:55,090
+perceive it. 
+So for example, if you perceive it as a 
+
+120
+00:08:55,090 --> 00:09:01,930
+tilted square, you're acutely sensitive 
+to whether the angles are right angles. 
+
+121
+00:09:01,930 --> 00:09:06,074
+If you perceive it as an upright diamond, 
+you're not sensitive to that at all. 
+
+122
+00:09:06,074 --> 00:09:10,704
+The angles could be 5 degrees off and you 
+wouldn't notice it, but you are sensitive 
+
+123
+00:09:10,704 --> 00:09:13,880
+to something else. 
+If you perceive it as an upright diamond, 
+
+124
+00:09:13,880 --> 00:09:18,240
+you're acutely sensitive to whether the 
+corner on the left and the corner of the 
+
+125
+00:09:18,240 --> 00:09:21,900
+right are at the same height. 
+And you'll probably notice now that, in 
+
+126
+00:09:21,900 --> 00:09:24,700
+this figure, they're very slightly 
+different heights. 
+
+127
+00:09:24,700 --> 00:09:28,478
+These kind of demonstrations are 
+evidence, that in order to represent 
+
+128
+00:09:28,478 --> 00:09:30,833
+shapes we impose coordinate frames on 
+them. 
+
+129
+00:09:30,833 --> 00:09:34,885
+Because when you're looking at that 
+square or diamond, it's the same thing 
+
+130
+00:09:34,885 --> 00:09:38,828
+you're looking at, but the percept's 
+totally different depending on what 
+
+131
+00:09:38,828 --> 00:09:40,362
+coordinate frame you impose. 

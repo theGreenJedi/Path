@@ -1,0 +1,579 @@
+1
+00:00:00,000 --> 00:00:05,717
+In this video, I'm going to explain a very
+different way of using Hopfield's energy
+
+2
+00:00:05,717 --> 00:00:09,012
+function.
+We add some hidden units to the network.
+
+3
+00:00:09,012 --> 00:00:14,124
+And what we are trying to do is make the
+states of those hidden units represent an
+
+4
+00:00:14,124 --> 00:00:19,034
+interpretation of the perception input
+that's shown on the visible units.
+
+5
+00:00:19,034 --> 00:00:24,012
+So, the idea is that the weights on
+between units represent constraints on
+
+6
+00:00:24,012 --> 00:00:28,249
+good interpretations.
+And by finding a low energy state, we find
+
+7
+00:00:28,249 --> 00:00:34,500
+a good interpretation of the input data.
+Hopfield nets combine two ideals, the idea
+
+8
+00:00:34,500 --> 00:00:39,345
+of that you can find a local energy
+minimum by using a network of
+
+9
+00:00:39,345 --> 00:00:45,195
+symmetrically connected binary threshold
+units, and the idea that these local
+
+10
+00:00:45,195 --> 00:00:48,420
+energy minima might correspond to
+memories.
+
+11
+00:00:49,140 --> 00:00:54,420
+There's a different way of using the
+ability to find local minima.
+
+12
+00:00:55,340 --> 00:01:00,403
+Instead of using the net to store
+memories, we can use it to construct
+
+13
+00:01:00,403 --> 00:01:07,450
+interpretations of the sensory input.
+So, the idea is that we have the input
+
+14
+00:01:07,450 --> 00:01:13,004
+represented by some visible units.
+And we can structure an interpretation of
+
+15
+00:01:13,004 --> 00:01:18,704
+that input in the set of hidden units.
+So, the interpretation or explanation of
+
+16
+00:01:18,704 --> 00:01:23,820
+the input is going to be a binary
+configuration over the hidden units.
+
+17
+00:01:24,740 --> 00:01:29,325
+The energy of the whole system will
+represent the badness of that
+
+18
+00:01:29,325 --> 00:01:33,217
+interpretation.
+So, to get good interpretations according
+
+19
+00:01:33,217 --> 00:01:38,914
+to our current model of the world, which
+is in the energy function, we need to find
+
+20
+00:01:38,914 --> 00:01:43,987
+low energy states of the hidden units,
+given, the input represented by the
+
+21
+00:01:43,987 --> 00:01:50,047
+visible units.
+I want to give an example of this to make
+
+22
+00:01:50,047 --> 00:01:55,808
+the idea clearer, in order to give the
+example, I need to go into a little bit of
+
+23
+00:01:55,808 --> 00:02:00,574
+detail, about what you can infer, when you
+see a 2-D line in an image.
+
+24
+00:02:00,574 --> 00:02:04,700
+What does that tell you about the
+three-dimensional world?
+
+25
+00:02:06,340 --> 00:02:11,986
+So, a 2-D line in an image could have been
+caused by many different three-dimensional
+
+26
+00:02:11,986 --> 00:02:16,552
+edges in the world.
+If this blue dot is your eyeball and the
+
+27
+00:02:16,552 --> 00:02:21,280
+red lines are two lines of sight coming
+from the center of your eyeball,
+
+28
+00:02:21,700 --> 00:02:28,630
+Then the black line is a possible 3-D edge
+that would lead to a two-dimensional line
+
+29
+00:02:28,630 --> 00:02:34,454
+on your retina.
+Here's another 3-D edge that would lead to
+
+30
+00:02:34,454 --> 00:02:38,484
+exactly the same thing on your retina.
+And here's another one.
+
+31
+00:02:38,484 --> 00:02:42,447
+And here's another one.
+All of these different 3-D edges have
+
+32
+00:02:42,447 --> 00:02:47,930
+exactly the same appearance in the image.
+That's because we've lost the information
+
+33
+00:02:47,930 --> 00:02:52,489
+about how far away the ends of the line
+are along that line of sight.
+
+34
+00:02:52,489 --> 00:02:57,840
+We know the end is somewhere along the
+line of sight but we don't know the depth.
+
+35
+00:02:58,660 --> 00:03:04,850
+So, if we assume that a straight 3-D edge
+in the world is the cause of a straight
+
+36
+00:03:04,850 --> 00:03:11,332
+2-D line in the image, then we've lost two
+degrees of freedom of that 3-D edge, its
+
+37
+00:03:11,332 --> 00:03:15,848
+depth at each end.
+So, there is a whole family of 3-D edges
+
+38
+00:03:15,848 --> 00:03:22,531
+that all correspond to the same 2-D line.
+You can only see one of these 3-D edges at
+
+39
+00:03:22,531 --> 00:03:25,600
+a time because they all get in the way of
+each other.
+
+40
+00:03:26,240 --> 00:03:31,754
+So now, we're in a position to see a
+little example of what you might be able
+
+41
+00:03:31,754 --> 00:03:37,627
+to do, if you can use the fact that you
+can find low energy states of a network of
+
+42
+00:03:37,627 --> 00:03:42,140
+binary units, to help you find
+interpretations of sensory input.
+
+43
+00:03:43,560 --> 00:03:48,276
+So, here's the example.
+You imagine we see a line drawing, and we
+
+44
+00:03:48,276 --> 00:03:51,720
+want to interpret it as a
+three-dimensional thing.
+
+45
+00:03:53,460 --> 00:03:59,622
+So, the data we have, let's suppose, is a
+bunch of 2-D lines like the lines shown in
+
+46
+00:03:59,622 --> 00:04:03,578
+the picture.
+And for each possible line, we will have
+
+47
+00:04:03,578 --> 00:04:08,066
+set aside a neuron.
+Don't worry for now about the fact that,
+
+48
+00:04:08,066 --> 00:04:13,620
+that will require too many neurons.
+So, for every possible 2-D line, we have
+
+49
+00:04:13,620 --> 00:04:16,967
+neuron.
+In any one picture, only a few of the
+
+50
+00:04:16,967 --> 00:04:22,064
+possible lines will be present.
+And so , we'll activate just a few of
+
+51
+00:04:22,064 --> 00:04:26,020
+those neurons.
+So, I've shown two edges in that picture,
+
+52
+00:04:26,020 --> 00:04:31,078
+activating two of the neurons.
+And those are neurons that represent 2-D
+
+53
+00:04:31,078 --> 00:04:32,740
+lines.
+They're the data.
+
+54
+00:04:35,080 --> 00:04:41,333
+Now, what we're going to do is have a
+whole bunch of 3-D line units, one for
+
+55
+00:04:41,333 --> 00:04:47,942
+each possible 3-D line or 3-D edge.
+So, each of the 2-D line units could be
+
+56
+00:04:47,942 --> 00:04:53,619
+the projection of many different possible
+3-D lines. We therefore need to make the
+
+57
+00:04:53,619 --> 00:04:59,295
+2-D line unit excite all those 3-D lines,
+but we also need to make them all compete
+
+58
+00:04:59,295 --> 00:05:06,427
+with one another, cuz you can only see one
+of them at a time. So, here's an example
+
+59
+00:05:06,427 --> 00:05:11,881
+where I have a stack of 3-D line units,
+the green connections are excitrity
+
+60
+00:05:11,881 --> 00:05:17,630
+connections coming from the 2-D line unit,
+all of them with equal weight, saying, if
+
+61
+00:05:17,630 --> 00:05:22,200
+this line unit is present, I'm going to
+try and turn on all those.
+
+62
+00:05:22,540 --> 00:05:27,058
+But in addition, we need competition
+between those so that only one of them
+
+63
+00:05:27,058 --> 00:05:31,696
+will turn on, and that's what the red
+lines represent. And we do that for each
+
+64
+00:05:31,696 --> 00:05:36,516
+2-D line unit. So, I'm just showing it to
+you for the 2-D line units that happen to
+
+65
+00:05:36,516 --> 00:05:40,311
+be active at present.
+And again, don't worry about the fact that
+
+66
+00:05:40,311 --> 00:05:45,455
+this would need far to many units.
+Now, the story is not quite complete.
+
+67
+00:05:45,455 --> 00:05:50,913
+We've now wired into the neural network
+the information about projection that I
+
+68
+00:05:50,913 --> 00:05:53,164
+showed on the previous slide,
+I.e.,
+
+69
+00:05:53,164 --> 00:05:58,894
+The neural network in those green and red
+connections understands that each 2-D line
+
+70
+00:05:58,894 --> 00:06:04,420
+can cross upon to many 3-D edges, but only
+one of them should be present at a time.
+
+71
+00:06:05,200 --> 00:06:08,630
+But now, we know a lot about how 3-D edges
+connect.
+
+72
+00:06:08,630 --> 00:06:14,160
+For example, when we see two 2-D lines
+connect in the image, we think it's almost
+
+73
+00:06:14,160 --> 00:06:20,180
+certain that they correspond to edges that
+have the same depth at the point where the
+
+74
+00:06:20,180 --> 00:06:25,085
+lines connect.
+So, let's suppose that the two 3-D edges
+
+75
+00:06:25,085 --> 00:06:30,396
+I've joined there correspond to having the
+same depth at the point where the two 2-D
+
+76
+00:06:30,396 --> 00:06:33,746
+lines join.
+That means they should support each other.
+
+77
+00:06:33,746 --> 00:06:38,172
+It doesn't have to be like that.
+You could have a very funny viewpoint
+
+78
+00:06:38,172 --> 00:06:43,356
+where one line ends at a different depth
+from the other and you just happen to be
+
+79
+00:06:43,356 --> 00:06:46,959
+at the viewpoint from which they coincide
+on your retina.
+
+80
+00:06:46,959 --> 00:06:51,336
+But that's very unlikely.
+So, we're going to need to use the fact
+
+81
+00:06:51,336 --> 00:06:56,885
+that we expect 2-D lines that coincide in
+the image to correspond to 3-D edges that
+
+82
+00:06:56,885 --> 00:07:01,961
+agree on the depth of that point.
+So, we'll put in a lot of connections like
+
+83
+00:07:01,961 --> 00:07:06,344
+that.
+But there's an even stronger fact we can
+
+84
+00:07:06,344 --> 00:07:12,344
+use which is that in our manufactured
+world, we expect that quite often, 3-D
+
+85
+00:07:12,344 --> 00:07:18,180
+edges will join in a right angle.
+And so, for two particular 3-D edges that
+
+86
+00:07:18,180 --> 00:07:21,725
+happen to agree in depth and join at a
+right angle,
+
+87
+00:07:21,725 --> 00:07:24,923
+We'll put in a particularly strong
+connection.
+
+88
+00:07:24,923 --> 00:07:28,260
+And I've indicated that by a thicker green
+line.
+
+89
+00:07:29,040 --> 00:07:34,923
+So, by putting in lots of connections like
+that, we can indicate how we expect 3-D
+
+90
+00:07:34,923 --> 00:07:38,600
+edges to go together to form a coherent
+3-D object.
+
+91
+00:07:38,600 --> 00:07:43,599
+And now, we have a network that contains
+information about how edges go together in
+
+92
+00:07:43,599 --> 00:07:47,575
+the world and about how edges project to
+cause lines in the image.
+
+93
+00:07:47,575 --> 00:07:52,213
+And so, if we give that network an image,
+it should be able to come up with an
+
+94
+00:07:52,213 --> 00:07:56,430
+interpretation of the image.
+And for the image I'm showing you, there's
+
+95
+00:07:56,430 --> 00:08:01,128
+two quite different interpretations.
+It's called a Necker cube, and if you look
+
+96
+00:08:01,128 --> 00:08:03,960
+at it long enough, it will flip in depth
+on you.
+
+97
+00:08:03,960 --> 00:08:08,411
+And this network would have two pretty
+much equally deep energy minima that
+
+98
+00:08:08,411 --> 00:08:12,160
+correspond to those two interpretations of
+the Necker cube.
+
+99
+00:08:12,900 --> 00:08:18,096
+Remember, this is all just a analogy so
+you understand the idea of using low
+
+100
+00:08:18,096 --> 00:08:21,606
+energy states as interpretations of
+perceptial data.
+
+101
+00:08:21,606 --> 00:08:27,072
+To actually build a proper model of what
+happens when the Necker cube flips will be
+
+102
+00:08:27,072 --> 00:08:33,899
+a lot more complicated than this.
+So, if we decide we're going to use low
+
+103
+00:08:33,899 --> 00:08:39,430
+energy states to represent good
+interpretations, then we have two issues.
+
+104
+00:08:39,430 --> 00:08:44,629
+The first is to do with search and I'm
+going to deal with that in the next video.
+
+105
+00:08:44,629 --> 00:08:49,960
+The search question is, how do we avoid
+the hidden units getting trapped in poor
+
+106
+00:08:49,960 --> 00:08:55,438
+local minima of the energy function?
+The poor minima represent interpretations
+
+107
+00:08:55,438 --> 00:09:00,141
+that are sub-optimal, given our current
+model and the weights of the network.
+
+108
+00:09:00,141 --> 00:09:05,091
+Can we do anything better than simply
+going downhill in energy from some random
+
+109
+00:09:05,091 --> 00:09:09,811
+starting state?
+The second issue which seems even more
+
+110
+00:09:09,811 --> 00:09:15,029
+difficult is how do we learn the weights
+on the connections between hidden units
+
+111
+00:09:15,029 --> 00:09:17,412
+and between visible units and hidden
+units.
+
+112
+00:09:17,412 --> 00:09:22,822
+Is the sum simple learning algorithm for
+adjusting all those weights so that we get
+
+113
+00:09:22,822 --> 00:09:27,266
+sensible perception interpretations?
+And notice here we haven't got a
+
+114
+00:09:27,266 --> 00:09:30,938
+supervisor anywhere.
+We're just showing it input and we would
+
+115
+00:09:30,938 --> 00:09:36,090
+like it to construct tons of activity in
+the hidden units that represent sensible
+
+116
+00:09:36,090 --> 00:09:39,440
+interpretations.
+This seems like a rather tall order.

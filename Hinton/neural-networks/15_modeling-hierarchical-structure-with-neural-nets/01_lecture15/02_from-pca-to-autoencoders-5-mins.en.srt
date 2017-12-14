@@ -1,0 +1,513 @@
+1
+00:00:00,000 --> 00:00:05,361
+In this video, I'm going to introduce 
+Principal Component Analysis, which is a 
+
+2
+00:00:05,361 --> 00:00:09,660
+very widely used technique in signal 
+processing. 
+
+3
+00:00:09,660 --> 00:00:15,441
+The idea of principal components 
+analysis, is that high dimensional data 
+
+4
+00:00:15,441 --> 00:00:20,600
+can often be represented using a much 
+lower dimensional code. 
+
+5
+00:00:20,600 --> 00:00:26,436
+This happens when the data lies near a 
+linear manifold in the high dimensional 
+
+6
+00:00:26,436 --> 00:00:29,894
+space. 
+So the idea is, if we can find this 
+
+7
+00:00:29,894 --> 00:00:33,862
+linear manifold, we can project the data 
+onto the manifold, 
+
+8
+00:00:33,862 --> 00:00:37,420
+and then just represent where it is on 
+the manifold. 
+
+9
+00:00:37,420 --> 00:00:41,867
+And we haven't lost much, 
+because in the directions orthogonal to 
+
+10
+00:00:41,867 --> 00:00:45,425
+the manifold, there's not much variation 
+in the data. 
+
+11
+00:00:45,425 --> 00:00:50,557
+As we'll see, we can do this operation 
+efficiently using standard principle 
+
+12
+00:00:50,557 --> 00:00:54,457
+components methods, 
+or we can do it inefficiently using a 
+
+13
+00:00:54,457 --> 00:00:59,656
+neural net with one hidden layer, where 
+both the hidden units and the output 
+
+14
+00:00:59,656 --> 00:01:04,426
+units are linear. 
+The advantage of doing it with the neural 
+
+15
+00:01:04,426 --> 00:01:09,749
+net is that we can then generalize the 
+technique to using deep neural nets in 
+
+16
+00:01:09,749 --> 00:01:13,298
+which the code is a nonlinear function of 
+the input. 
+
+17
+00:01:13,298 --> 00:01:18,825
+And our reconstruction of the data from 
+the code is also a nonlinear function of 
+
+18
+00:01:18,825 --> 00:01:22,431
+the code. 
+This enables us to deal with curved 
+
+19
+00:01:22,431 --> 00:01:27,329
+manifolds in the input space. 
+So we represent data by where it gets 
+
+20
+00:01:27,329 --> 00:01:32,080
+projected on the curve manifold. 
+And this is a much more powerful 
+
+21
+00:01:32,080 --> 00:01:36,173
+representation. 
+In principal components analysis, we have 
+
+22
+00:01:36,173 --> 00:01:41,510
+N dimensional data, and we want to 
+represent it using less than N numbers. 
+
+23
+00:01:41,510 --> 00:01:47,500
+And so we find M orthagonal directions in 
+which the data has the most variance. 
+
+24
+00:01:47,500 --> 00:01:52,430
+And we ignore the directions in which the 
+data doesn't vary much. 
+
+25
+00:01:52,430 --> 00:01:58,572
+The M principal dimensions form a lower 
+dimensional subspace, and we represent an 
+
+26
+00:01:58,572 --> 00:02:03,956
+N dimensional data point by its 
+projections onto these M dimensions in 
+
+27
+00:02:03,956 --> 00:02:09,764
+the lower dimensional space. 
+So we've lost all information about where 
+
+28
+00:02:09,764 --> 00:02:14,445
+the data point is located in the 
+remaining orthogonal directions. 
+
+29
+00:02:14,445 --> 00:02:20,133
+But since these don't have much variance, 
+we haven't lost that much information. 
+
+30
+00:02:20,133 --> 00:02:25,606
+If we wanted to reconstruct the data 
+point, from our representation in terms 
+
+31
+00:02:25,606 --> 00:02:31,367
+of M numbers, we reduce the mean value 
+for all the N minus M directions that are 
+
+32
+00:02:31,367 --> 00:02:36,220
+not represented, and then the area in our 
+reconstruction. 
+
+33
+00:02:36,220 --> 00:02:40,389
+Would be the sum over all these 
+unrepresented directions of the square 
+
+34
+00:02:40,389 --> 00:02:45,028
+difference between the value of the data 
+point count on that direction, and the 
+
+35
+00:02:45,028 --> 00:02:49,680
+mean value on that direction. 
+This is most easily seen in the picture. 
+
+36
+00:02:49,680 --> 00:02:55,395
+So consider 2-dimensional data. 
+This distributed according to an 
+
+37
+00:02:55,395 --> 00:03:00,478
+elongated Gaussian like this. 
+The ellipse is meant to show kind of one 
+
+38
+00:03:00,478 --> 00:03:03,600
+standard deviation contour of the 
+Gaussian. 
+
+39
+00:03:03,600 --> 00:03:06,840
+And consider a data point like that red 
+one. 
+
+40
+00:03:06,840 --> 00:03:11,730
+If we used principal components analysis 
+with a single component. 
+
+41
+00:03:11,730 --> 00:03:17,487
+That component would be the direction in 
+the data that had the greatest variance. 
+
+42
+00:03:17,487 --> 00:03:23,245
+And so to represent the red point, we'd 
+represent how far along that direction it 
+
+43
+00:03:23,245 --> 00:03:25,946
+lay. 
+In other words we'd represent the 
+
+44
+00:03:25,946 --> 00:03:29,287
+projection of the red point onto that 
+line, i.e. 
+
+45
+00:03:29,287 --> 00:03:32,983
+the green point. 
+When we need to reconstruct the red 
+
+46
+00:03:32,983 --> 00:03:36,335
+point, 
+what we'll do is simply use the mean 
+
+47
+00:03:36,335 --> 00:03:41,474
+value of all the data points, in the 
+direction that we've ignored. 
+
+48
+00:03:41,474 --> 00:03:46,960
+In other words you'll represent a point 
+on that black line. 
+
+49
+00:03:46,960 --> 00:03:51,469
+And so the lost in the reconstruction 
+will be the squared difference between 
+
+50
+00:03:51,469 --> 00:03:56,683
+the red point and the green point. 
+That is, would have lost the difference 
+
+51
+00:03:56,683 --> 00:04:02,631
+between the data point and the mean value 
+of all the data, in the direction we're 
+
+52
+00:04:02,631 --> 00:04:06,890
+not representing, which is the direction 
+of least variance. 
+
+53
+00:04:06,890 --> 00:04:12,335
+And so we obviously have minimized our 
+loss if we choose to ignore the direction 
+
+54
+00:04:12,335 --> 00:04:16,166
+of least variance. 
+Now, we can actually implement PCA, or a 
+
+55
+00:04:16,166 --> 00:04:20,536
+version of it, using back propagation, 
+but it's not very efficient. 
+
+56
+00:04:20,536 --> 00:04:25,712
+So what we do is we make a network in 
+which the output of the network is the 
+
+57
+00:04:25,712 --> 00:04:30,351
+reconstruction of the data. 
+And we try and minimize the squared error 
+
+58
+00:04:30,351 --> 00:04:34,663
+in the reconstruction. 
+The network has a central bottleneck that 
+
+59
+00:04:34,663 --> 00:04:38,847
+only has M hidden units. 
+And those are going to correspond to the 
+
+60
+00:04:38,847 --> 00:04:41,815
+principal components, or something like 
+them. 
+
+61
+00:04:41,815 --> 00:04:44,919
+So it looks like this. 
+We have an input vector. 
+
+62
+00:04:44,919 --> 00:04:50,047
+We project that onto a code vector. 
+And from the code vector, we construct an 
+
+63
+00:04:50,047 --> 00:04:53,758
+output vector. 
+And the aim is to make the output vector 
+
+64
+00:04:53,758 --> 00:04:56,660
+as similar as possible to the input 
+vector. 
+
+65
+00:04:58,520 --> 00:05:02,940
+The activities of the hidden units in the 
+code vector from a bottleneck. 
+
+66
+00:05:02,940 --> 00:05:07,602
+So the code vector is a compressed 
+representation of the input vector. 
+
+67
+00:05:07,602 --> 00:05:13,131
+If the hidden units and the output units 
+are linear, then ordering coder like 
+
+68
+00:05:13,131 --> 00:05:15,862
+this, 
+we'll learn codes that minimize the 
+
+69
+00:05:15,862 --> 00:05:20,058
+squared reconstruction error. 
+And that's exactly what principle 
+
+70
+00:05:20,058 --> 00:05:23,655
+components analysis does. 
+It will get exactly the same 
+
+71
+00:05:23,655 --> 00:05:27,585
+reconstruction error as principle 
+components analysis does. 
+
+72
+00:05:27,585 --> 00:05:32,581
+But it won't necessarily have hidden 
+units that correspond exactly the, the 
+
+73
+00:05:32,581 --> 00:05:37,432
+principle components. 
+They will span the same space as the 
+
+74
+00:05:37,432 --> 00:05:43,402
+first N-principal components, but there 
+may be a rotation and skewing of those 
+
+75
+00:05:43,402 --> 00:05:46,694
+axes. 
+So the incoming weight vectors of the 
+
+76
+00:05:46,694 --> 00:05:52,817
+code units, which are what represent the 
+directions of the components, may not be 
+
+77
+00:05:52,817 --> 00:05:56,621
+orthogonal. 
+And unlike principal components analysis, 
+
+78
+00:05:56,621 --> 00:06:01,787
+they will typically have equal variances. 
+But the space spanned by the incoming 
+
+79
+00:06:01,787 --> 00:06:07,085
+weight vectors of those code units will 
+be exactly the same as the space spanned 
+
+80
+00:06:07,085 --> 00:06:11,728
+by the M principal components. 
+So in that sense this network will do an 
+
+81
+00:06:11,728 --> 00:06:16,825
+equivalent thing to principal components. 
+It's just if we use to cast the great 
+
+82
+00:06:16,825 --> 00:06:21,783
+descend learning for this network, it 
+will typically much less sufficient than 
+
+83
+00:06:21,783 --> 00:06:24,580
+the algorithm used for principle 
+components. 
+
+84
+00:06:24,580 --> 00:06:29,153
+Although if there's a huge amount of 
+data, it might actually be more 
+
+85
+00:06:29,153 --> 00:06:32,583
+efficient. 
+The main point of implementing principal 
+
+86
+00:06:32,583 --> 00:06:38,098
+component analysis using back-propagation 
+in a neural net is that it allows us to 
+
+87
+00:06:38,098 --> 00:06:43,613
+generalize principal component analysis. 
+If we use a neural net that has nonlinear 
+
+88
+00:06:43,613 --> 00:06:48,926
+layers before and after the code layer, 
+it should be possible to represent data 
+
+89
+00:06:48,926 --> 00:06:53,365
+that lies on a curved manifold rather 
+than a linear manifold in a 
+
+90
+00:06:53,365 --> 00:06:56,930
+high-dimensional space. 
+And this is much more general. 
+
+91
+00:06:56,930 --> 00:07:02,524
+So our network will look something like 
+this, the B input vector, and then one or 
+
+92
+00:07:02,524 --> 00:07:07,350
+more, layer of non-linear hidden unit, 
+typically we use logistic units. 
+
+93
+00:07:07,350 --> 00:07:11,203
+Then there'll be a code layer which might 
+be linear units. 
+
+94
+00:07:11,203 --> 00:07:15,720
+And then following the code layer, 
+there'll be one or more layers of 
+
+95
+00:07:15,720 --> 00:07:19,840
+non-linear hidden units. 
+And then there'll be an output vector, 
+
+96
+00:07:19,840 --> 00:07:24,091
+which we train to be as similar as 
+possible to the input vector. 
+
+97
+00:07:24,091 --> 00:07:28,875
+So this is a curious network in which 
+we're using a supervised learning 
+
+98
+00:07:28,875 --> 00:07:34,738
+algorithm to do unsupervised learning. 
+The bottom part of the network is an 
+
+99
+00:07:34,738 --> 00:07:38,770
+encoder. 
+Which takes the input vector and convert 
+
+100
+00:07:38,770 --> 00:07:45,956
+it into a code using a non-linear method. 
+The top part of the network is a decoder, 
+
+101
+00:07:45,956 --> 00:07:52,863
+which takes the nonlinear code and maps 
+it back to a reconstruction of the input 
+
+102
+00:07:52,863 --> 00:07:56,249
+vector. 
+So after we've done the learning, we have 
+
+103
+00:07:56,249 --> 00:07:57,936
+mappings in both directions. 

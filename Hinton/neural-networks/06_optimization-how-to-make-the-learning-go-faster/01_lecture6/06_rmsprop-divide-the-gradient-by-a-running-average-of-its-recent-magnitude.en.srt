@@ -1,0 +1,749 @@
+1
+00:00:00,000 --> 00:00:04,805
+In this video, I'm first going to
+introduce a method called rprop, that is
+
+2
+00:00:04,805 --> 00:00:09,679
+used for full batch learning.
+It's like Robbie Jacobs method, but not
+
+3
+00:00:09,679 --> 00:00:13,454
+quite the same.
+I'm then going to show how to extend RPROP
+
+4
+00:00:13,454 --> 00:00:18,946
+so that it works for mini-batches. This
+gives you the advantages of rprop and it
+
+5
+00:00:18,946 --> 00:00:24,507
+also gives you the advantage of mini-batch
+learning, which is essential for large,
+
+6
+00:00:24,507 --> 00:00:29,159
+redundant data sets.
+The method that we end up with called RMS
+
+7
+00:00:29,159 --> 00:00:34,313
+Pro is currently my favorite method as a
+sort of basic method for learning the
+
+8
+00:00:34,313 --> 00:00:38,880
+weights in a large neural network with a
+large redundant data set.
+
+9
+00:00:39,360 --> 00:00:44,865
+I'm now going to describe rprop which is
+an interesting way of trying to deal with
+
+10
+00:00:44,865 --> 00:00:48,580
+the fact that gradients vary widely in
+their magnitudes.
+
+11
+00:00:50,740 --> 00:00:53,916
+Some gradients can be tiny and others can
+be huge.
+
+12
+00:00:53,916 --> 00:00:57,920
+And that makes it hard to choose a single
+global learning rate.
+
+13
+00:00:58,520 --> 00:01:03,552
+If we're doing full batch learning, we can
+cope with this big variations in
+
+14
+00:01:03,552 --> 00:01:06,840
+gradients, by just using the sign of the
+gradient.
+
+15
+00:01:07,660 --> 00:01:11,580
+That makes all of the weight updates be
+the same size.
+
+16
+00:01:13,280 --> 00:01:18,597
+For issues like escaping from plateaus
+with very small gradients this is a great
+
+17
+00:01:18,597 --> 00:01:23,061
+technique cause even with tiny gradients
+we'll take quite big steps.
+
+18
+00:01:23,061 --> 00:01:28,248
+We couldn't achieve that by just turning
+up the learning rate because then the
+
+19
+00:01:28,248 --> 00:01:32,843
+steps we took for weights that had big
+gradients would be much to big.
+
+20
+00:01:32,843 --> 00:01:38,161
+Rprop combines the idea of just using the
+sign of the gradient with the idea of
+
+21
+00:01:38,161 --> 00:01:41,764
+making the step size.
+Depend on which weight it is.
+
+22
+00:01:41,764 --> 00:01:46,896
+So to decide how much to change your
+weight, you don't look at the magnitude of
+
+23
+00:01:46,896 --> 00:01:50,469
+the gradient, you just look at the sign of
+the gradient.
+
+24
+00:01:50,469 --> 00:01:54,887
+But, you do look at the step size you
+decided around for that weight.
+
+25
+00:01:54,887 --> 00:01:59,955
+And, that step size adopts over time,
+again without looking at the magnitude of
+
+26
+00:01:59,955 --> 00:02:04,626
+the gradient.
+So we increase the step size for a weight
+
+27
+00:02:04,626 --> 00:02:07,562
+multiplicatively.
+For example by factor 1.2.
+
+28
+00:02:07,562 --> 00:02:10,633
+If the signs of the last two gradients
+agree.
+
+29
+00:02:10,633 --> 00:02:16,299
+This is like in Robbie Jacobs' adapted
+weights methods except that we did, gonna
+
+30
+00:02:16,299 --> 00:02:21,376
+do a multiplicative increase here.
+If the signs of the last two gradients
+
+31
+00:02:21,376 --> 00:02:26,139
+disagree, we decrease the step size
+multiplicatively, and in this case, we'll
+
+32
+00:02:26,139 --> 00:02:31,282
+make that more powerful than the increase,
+so that we can die down faster than we
+
+33
+00:02:31,282 --> 00:02:33,693
+grow.
+We need to limit the step sizes.
+
+34
+00:02:33,693 --> 00:02:38,075
+Mike Shuster's advice was to limit them
+between 50 and a millionth.
+
+35
+00:02:38,271 --> 00:02:42,261
+I think it depends a lot on what problem
+you're dealing with.
+
+36
+00:02:42,261 --> 00:02:47,494
+If for example you have a problem with
+some tiny inputs, you might need very big
+
+37
+00:02:47,494 --> 00:02:50,830
+weights on those inputs for them to have
+an effect.
+
+38
+00:02:50,830 --> 00:02:55,534
+I suspect that if you're not dealing with
+that kind of problem, having an upper
+
+39
+00:02:55,534 --> 00:02:59,941
+limit on the weight changes that's much
+less than 50 would be a good idea.
+
+40
+00:02:59,941 --> 00:03:03,515
+So one question is, why doesn't rprop work
+with mini-batches.
+
+41
+00:03:03,515 --> 00:03:06,850
+People have tried it, and find it hard to
+get it to work.
+
+42
+00:03:06,850 --> 00:03:11,257
+You can get it to work with very big
+mini-batches, where you use much more
+
+43
+00:03:11,257 --> 00:03:16,045
+conservative changes to the step sizes.
+But it's difficult.
+
+44
+00:03:16,045 --> 00:03:21,440
+So the reason it doesn't work is it
+violates the central idea behind
+
+45
+00:03:21,440 --> 00:03:26,365
+stochastic gradient descent,
+Which is, that when we have a small
+
+46
+00:03:26,365 --> 00:03:31,994
+loaning rate, the gradient gets
+effectively average over successive mini
+
+47
+00:03:31,994 --> 00:03:37,495
+batches.
+So consider a weight that gets a gradient
+
+48
+00:03:37,495 --> 00:03:44,270
+of +.01 on nine mini batches, and then a
+gradient of -.09 on the tenth mini batch.
+
+49
+00:03:44,270 --> 00:03:49,006
+What we'd like is those gradients will
+roughly average out so the weight will
+
+50
+00:03:49,006 --> 00:03:51,617
+stay where it is.
+Rprop won't give us that.
+
+51
+00:03:51,617 --> 00:03:56,414
+Rprop would increment the weight nine
+times by whatever its current step size
+
+52
+00:03:56,414 --> 00:04:00,664
+is, and decrement it only once.
+And that would make the weight get much
+
+53
+00:04:00,664 --> 00:04:04,141
+bigger.
+We're assuming here that the step sizes
+
+54
+00:04:04,141 --> 00:04:09,070
+adapt much slower than the time scale of
+these mini batches.
+
+55
+00:04:09,070 --> 00:04:15,297
+So the question is, can we combine the
+robustness that you get from rprop by just
+
+56
+00:04:15,297 --> 00:04:20,170
+using the sign of the gradient.
+The efficiency that you get from many
+
+57
+00:04:20,170 --> 00:04:23,334
+batches.
+And this averaging of gradients over
+
+58
+00:04:23,334 --> 00:04:28,894
+mini-batches is what allows mini-batches
+to combine gradients in the right way.
+
+59
+00:04:28,894 --> 00:04:32,343
+That leads to a method which I'm calling
+Rmsprop.
+
+60
+00:04:32,343 --> 00:04:37,974
+And you can consider to be a mini-batch
+version of rprop. rprop is equivalent to
+
+61
+00:04:37,974 --> 00:04:42,268
+using the gradient,
+But also dividing by the magnitude of the
+
+62
+00:04:42,268 --> 00:04:45,435
+gradient.
+And the reason it has problems with
+
+63
+00:04:45,435 --> 00:04:50,925
+mini-batches is that we divide the
+gradient by a different magnitude for each
+
+64
+00:04:50,925 --> 00:04:54,522
+mini batch.
+So the idea is that we're going to force
+
+65
+00:04:54,522 --> 00:05:00,539
+the number we divide by to be pretty much
+the same for nearby mini-batches. We do
+
+66
+00:05:00,539 --> 00:05:05,961
+that by keeping a moving average of the
+squared gradient for each weight.
+
+67
+00:05:05,961 --> 00:05:11,012
+So mean square WT means this moving
+average for weight W at time T,
+
+68
+00:05:11,012 --> 00:05:14,354
+Where time is an indicator of weight
+updates.
+
+69
+00:05:14,354 --> 00:05:20,891
+Time increments by one each time we update
+the weights The numbers I put in of 0.9
+
+70
+00:05:20,891 --> 00:05:25,915
+and 0.1 for computing moving average are
+just examples, but their reasonably
+
+71
+00:05:25,915 --> 00:05:31,361
+sensible examples.
+So the mean square is the previous mean
+
+72
+00:05:31,361 --> 00:05:36,920
+square times 0.9,
+Plus the value of the squared gradient for
+
+73
+00:05:36,920 --> 00:05:40,041
+that weight at time t,
+Times 0.1.
+
+74
+00:05:40,041 --> 00:05:45,308
+We then take that mean square.
+We take its square root,
+
+75
+00:05:45,308 --> 00:05:52,428
+Which is why it has the name RMS.
+And then we divide the gradient by that
+
+76
+00:05:52,428 --> 00:05:56,720
+RMS, and make an update proportional to
+that.
+
+77
+00:05:57,720 --> 00:06:02,129
+That makes the learning work much better.
+Notice that we're not adapting the
+
+78
+00:06:02,129 --> 00:06:05,030
+learning rate separately for each
+connection here.
+
+79
+00:06:05,030 --> 00:06:09,440
+This is a simpler method where we simply,
+for each connection, keep a running
+
+80
+00:06:09,440 --> 00:06:12,980
+average of the route mean square gradient
+and divide by that.
+
+81
+00:06:12,980 --> 00:06:17,797
+There's many further developments one
+could make for rmsprop. You could combine
+
+82
+00:06:17,797 --> 00:06:21,591
+the standard moment.
+My experiment so far suggests that doesn't
+
+83
+00:06:21,591 --> 00:06:26,175
+help as much as momentum normally does,
+And that needs more investigation.
+
+84
+00:06:26,175 --> 00:06:31,835
+You could combine our rmsprop with
+Nesterov momentum where you first make the
+
+85
+00:06:31,835 --> 00:06:36,560
+jump and then make a correction.
+And Ilya Sutskever has tried that recently
+
+86
+00:06:36,560 --> 00:06:40,645
+and got good results.
+He's discovered that it works best if the
+
+87
+00:06:40,645 --> 00:06:45,816
+rms of the recent gradients is used to
+divide the correction term we make rather
+
+88
+00:06:45,816 --> 00:06:50,732
+than the large jump you make in the
+direction of the accumulated corrections.
+
+89
+00:06:50,732 --> 00:06:56,158
+Obviously you could combine rmsprop with
+adaptive learning rates on each connection
+
+90
+00:06:56,158 --> 00:07:00,968
+which would make it much more like rprop.
+That just needs a lot more investigation.
+
+91
+00:07:00,968 --> 00:07:03,771
+I just don't know at present how helpful
+that will be.
+
+92
+00:07:03,771 --> 00:07:08,131
+And then there is a bunch of other methods
+related to rmsprop that have a lot in
+
+93
+00:07:08,131 --> 00:07:11,508
+common with it.
+Yann LeCun's group has an interesting
+
+94
+00:07:11,508 --> 00:07:16,142
+paper called No More Pesky Learning Rates
+that came out this year.
+
+95
+00:07:16,142 --> 00:07:21,689
+And some of the terms in that looked like
+rmsprop, but it has many other terms.
+
+96
+00:07:21,689 --> 00:07:27,377
+I suspect, at present, that most of the
+advantage that comes from this complicated
+
+97
+00:07:27,377 --> 00:07:33,064
+method recommended by Yann LeCun's group
+comes from the fact that it's similar to
+
+98
+00:07:33,064 --> 00:07:35,943
+rmsprop.
+But I don't really know that.
+
+99
+00:07:35,943 --> 00:07:41,210
+So, a summary of the learning methods for
+neural networks, goes like this.
+
+100
+00:07:41,210 --> 00:07:46,350
+If you've got a small data set, say 10,000
+cases or less,
+
+101
+00:07:46,350 --> 00:07:52,200
+Or a big data set without much redundancy,
+you should consider using a full batch
+
+102
+00:07:52,200 --> 00:07:55,776
+method.
+This full batch methods adapted from the
+
+103
+00:07:55,776 --> 00:08:00,484
+optimization literature like non-linear
+conjugate gradient or lbfgs, or
+
+104
+00:08:00,484 --> 00:08:03,963
+LevenbergMarkhart,Marquardt.
+And one advantage of using those methods
+
+105
+00:08:03,963 --> 00:08:09,284
+is they typically come with a package.
+And when you report the results in your
+
+106
+00:08:09,284 --> 00:08:14,059
+paper you just have to say, I used this
+package and here's what it did.
+
+107
+00:08:14,059 --> 00:08:17,880
+You don't have to justify all sorts of
+little decisions.
+
+108
+00:08:18,160 --> 00:08:23,025
+Alternatively you could use the adaptive
+learning rates I described in another
+
+109
+00:08:23,025 --> 00:08:28,136
+video or rprop, which are both essentially
+full batch methods but they are methods
+
+110
+00:08:28,136 --> 00:08:33,186
+that were developed for neural networks.
+If you have a big redundant data set it's
+
+111
+00:08:33,186 --> 00:08:37,066
+essential to use mini batches.
+It's a huge waste not to do that.
+
+112
+00:08:37,066 --> 00:08:41,070
+The first thing to try is just standard
+gradient descent with momentum.
+
+113
+00:08:41,070 --> 00:08:45,860
+You're going to have to choose a global
+learning rate, and you might want to write
+
+114
+00:08:45,860 --> 00:08:50,105
+a little loop to adapt that global
+learning rate based on whether the
+
+115
+00:08:50,105 --> 00:08:53,864
+gradient has changed side.
+But to begin with, don't go for anything
+
+116
+00:08:53,864 --> 00:08:58,109
+as fancy as adapting individual learning
+rates for individual weights.
+
+117
+00:08:58,109 --> 00:09:02,900
+The next thing to try is RMS prop.
+That's very simple to implement if you do
+
+118
+00:09:02,900 --> 00:09:07,629
+it without momentum, and in my experiment
+so far, that seems to work as well as
+
+119
+00:09:07,629 --> 00:09:10,480
+gradient descent with momentum, would be
+better.
+
+120
+00:09:11,880 --> 00:09:17,344
+You can also consider all sorts of ways of
+improving rmsprop by adding momentum or
+
+121
+00:09:17,344 --> 00:09:21,929
+adaptive step sizes for each weight, but
+that's still basically uncharted
+
+122
+00:09:21,929 --> 00:09:25,572
+territory.
+Finally, you could find out whatever Yann
+
+123
+00:09:25,572 --> 00:09:30,094
+Lecun's latest receipt is and try that.
+He's probably the person who's tried the
+
+124
+00:09:30,094 --> 00:09:35,370
+most different ways of getting stochastic
+gradient descent to work well, and so it's
+
+125
+00:09:35,370 --> 00:09:40,709
+worth keeping up with whatever he's doing.
+One question you might ask is why is there
+
+126
+00:09:40,709 --> 00:09:44,629
+no simple recipe.
+We have been messing around with neural
+
+127
+00:09:44,629 --> 00:09:49,154
+nets, including deep neural nets, for more
+than 25 years now, and you would think
+
+128
+00:09:49,154 --> 00:09:53,060
+that we would come up with an agreed way
+of doing the learning.
+
+129
+00:09:53,440 --> 00:09:57,340
+There's really two reasons I think why
+there isn't a simple recipe.
+
+130
+00:09:58,000 --> 00:10:02,196
+First, neural nets differ a lot.
+Very deep networks, especially ones that
+
+131
+00:10:02,196 --> 00:10:06,807
+have narrow bottlenecks in them, which
+I'll come to in later lectures, are very
+
+132
+00:10:06,807 --> 00:10:11,595
+hard things to optimize and they need
+methods that can be very sensitive to very
+
+133
+00:10:11,595 --> 00:10:14,906
+small gradients.
+Recurring nets are another special case,
+
+134
+00:10:14,906 --> 00:10:19,575
+they're typically very hard to optimize,
+if you want them to notice things that
+
+135
+00:10:19,575 --> 00:10:24,186
+happened a long time in the past and
+change the weights based on these things
+
+136
+00:10:24,186 --> 00:10:29,213
+that happened a long time ago.
+Then there's wide shallow networks, which
+
+137
+00:10:29,213 --> 00:10:33,222
+are quite different in flavor and are used
+a lot in practice.
+
+138
+00:10:33,222 --> 00:10:37,690
+They often can be optimized with methods
+that are not very accurate.
+
+139
+00:10:37,690 --> 00:10:42,158
+Because we stop the optimization early
+before it starts overfitting.
+
+140
+00:10:42,158 --> 00:10:47,480
+So for these different kinds of networks,
+there's very different methods that are
+
+141
+00:10:47,480 --> 00:10:52,249
+probably appropriate.
+The other consideration is that tasks
+
+142
+00:10:52,249 --> 00:10:56,440
+differ a lot.
+Some tasks require very accurate weights.
+
+143
+00:10:56,700 --> 00:11:00,440
+Some tasks don't require weights to be
+very accurate at all.
+
+144
+00:11:01,100 --> 00:11:08,786
+Also there's some tasks that have weird
+properties, like if your inputs are words
+
+145
+00:11:08,786 --> 00:11:14,700
+rare words may only occur on one case in a
+hundred thousand.
+
+146
+00:11:14,980 --> 00:11:20,174
+That's a very, very different flavor from
+what happens if your inputs are pixels.
+
+147
+00:11:20,174 --> 00:11:25,499
+So to summarize we really don't have nice
+clear cut advice for how to train a neural
+
+148
+00:11:25,499 --> 00:11:28,356
+net.
+We have a bunch of rules of sum, it's not
+
+149
+00:11:28,356 --> 00:11:33,745
+entirely satisfactory, but just think how
+much better in your all natural work once
+
+150
+00:11:33,745 --> 00:11:36,992
+we've got this sorted out, and they
+already work pretty well.

@@ -1,0 +1,544 @@
+1
+00:00:00,098 --> 00:00:05,058
+En este vídeo voy a hablar un poco de 
+las neuronas reales y el cerebro real
+
+2
+00:00:05,058 --> 00:00:10,046
+que son fuente de inspiración para 
+las redes neuronales artificiales
+
+3
+00:00:10,046 --> 00:00:14,094
+que vamos a estudiar en este curso.
+En gran parte del curso no hablaremos mucho
+
+4
+00:00:14,094 --> 00:00:20,085
+sobre las neuronas reales pero quería 
+darles un breve panorama en el comienzo.
+
+5
+00:00:21,032 --> 00:00:26,097
+Hay varias razones para estudiar
+como las neuronas pueden resolver
+
+6
+00:00:26,097 --> 00:00:29,059
+cosas. Primero necesitamos 
+entender cómo el cerebro
+
+7
+00:00:29,059 --> 00:00:34,036
+trabaja en ralidad. Se podría 
+pensar que podemos hacerlo 
+
+8
+00:00:34,036 --> 00:00:38,041
+haciendo experimentos en el cerebro. 
+Pero es muy grande y complicado
+
+9
+00:00:38,041 --> 00:00:42,081
+y muere cuando hurgamos en él. Necesitamos 
+usar simulaciones en computadores
+
+10
+00:00:42,081 --> 00:00:46,085
+que nos ayuden a entender qué estamos 
+descubriendo en los estudios empíricos.
+
+11
+00:00:47,017 --> 00:00:52,016
+En segundo término es necesario entender el estilo de 
+computación en paralelo que se inspira en el hecho
+
+12
+00:00:52,016 --> 00:00:56,727
+de que el cerebro resuelve con una 
+gran red en paralelo un mundo de 
+
+13
+00:00:56,727 --> 00:00:59,080
+neuronas relativamente lentas.
+Si podemos entender ese estilo de
+
+14
+00:00:59,080 --> 00:01:04,013
+computación en paralelo podremos ser capaces 
+de hacer mejores computadores paralelos
+
+15
+00:01:04,013 --> 00:01:08,039
+Es una manera muy diferente de cómo 
+se hace computación en un procesador
+
+16
+00:01:08,039 --> 00:01:11,076
+convencional en serie. 
+Debería ser muy bueno para esas cosas
+
+17
+00:01:11,076 --> 00:01:16,057
+para las que el cerebro es muy bueno como la visión y 
+debería ser malo para esas cosas en las que el cerebro
+
+18
+00:01:16,057 --> 00:01:19,040
+es malo como la multiplicación de dos números entre sí
+
+19
+00:01:20,054 --> 00:01:25,037
+La tercera razón que es la más relevante 
+para este curso es el resolver problemas
+
+20
+00:01:25,037 --> 00:01:29,065
+prácticos usando nuevos algoritmos
+de aprendizaje que se inspiraron 
+
+21
+00:01:29,065 --> 00:01:32,052
+en el cerebro. Esos algoritmos 
+pueden ser muy útiles aun
+
+22
+00:01:32,052 --> 00:01:35,021
+cuando no sea la forma en 
+que el cerebro realmente trabaja
+
+23
+00:01:35,021 --> 00:01:40,011
+En gran parte del curso no hablaremos mucho 
+sobre cómo el cerebro realmente trabaja.
+
+24
+00:01:40,011 --> 00:01:45,012
+Solo lo usaremos como fuente de inspiración 
+que nos dice como grandes redes de neuronas
+
+25
+00:01:45,012 --> 00:01:47,081
+en paralelo pueden resolver 
+cuestiones muy complicadas
+
+26
+00:01:49,037 --> 00:01:55,002
+Hablaré más en este vídeo sobre 
+cómo el cerebro realmente trabaja.
+
+27
+00:01:55,002 --> 00:02:01,003
+Una neurona cortical típica tiene una 
+estructura física gruesa que consiste en
+
+28
+00:02:01,003 --> 00:02:06,090
+el cuerpo de la célula, un axón por el que envía 
+mensajes a otras neuronas y un árbol de dendritas
+
+29
+00:02:06,090 --> 00:02:10,031
+por las que recibe mensajes 
+de otras neuronas
+
+30
+00:02:10,068 --> 00:02:16,019
+Donde el axón de una neurona entra en 
+contacto con el árbol de dendritas de otra
+
+31
+00:02:16,019 --> 00:02:22,027
+hay una estructura llamada sinapsis.
+Un pico de actividad viajando a lo largo
+
+32
+00:02:22,027 --> 00:02:29,009
+del axón hace que se inyecte carga 
+en la neurona post-sináptica
+
+33
+00:02:29,009 --> 00:02:33,072
+en la sinapsis.
+Una neurona genera picos cuando
+
+34
+00:02:33,072 --> 00:02:39,031
+recibe suficiente carga en su árbol de dendritas 
+para despolarizar una parte del cuerpo de la célula
+
+35
+00:02:39,031 --> 00:02:43,075
+llamado el montículo del axón.
+Y cuando eso resulta despolarizado, la neurona
+
+36
+00:02:43,075 --> 00:02:48,006
+envía un pico a través de su axón.
+El pico es una onda de 
+
+37
+00:02:48,006 --> 00:02:50,096
+despolarización que viaja 
+a lo largo del axón
+
+38
+00:02:52,052 --> 00:02:57,046
+Las propias sinapsis tienen 
+una estructura interesante.
+
+39
+00:02:57,046 --> 00:03:01,071
+Contienen pequeñas vesículas de 
+transmisores químicos y cuando
+
+40
+00:03:01,072 --> 00:03:07,011
+llega un pico en el axón provoca que esas 
+vesículas emigren hacia la supervicie
+
+41
+00:03:07,011 --> 00:03:11,039
+y sean liberadas dentro de la hendidura 
+sináptica. Hay varias clases de 
+
+42
+00:03:11,039 --> 00:03:14,024
+transmisores químicos. 
+Hay unos que implementan
+
+43
+00:03:14,024 --> 00:03:17,053
+pesos positivos y hay otros 
+que implementan pesos negativos
+
+44
+00:03:17,053 --> 00:03:22,073
+Las moléculas transmisoras se difunden a través 
+de la hendidura sináptica y se enlazan con las
+
+45
+00:03:22,073 --> 00:03:26,041
+moléculas receptoras en el la membrana 
+de la neurona post-sináptica y al enlazarse
+
+46
+00:03:26,041 --> 00:03:31,040
+con esas moléculas grandes en la 
+membrana cambian su forma y crean
+
+47
+00:03:31,040 --> 00:03:36,043
+agujeros en la membrana. Esos agujeros 
+permiten que determinados iones fluyan
+
+48
+00:03:36,043 --> 00:03:41,018
+hacia dentro y hacia afuera de la neurona 
+post-sináptica cambiando su estado
+
+49
+00:03:41,018 --> 00:03:46,092
+de despolarización. Las sinapsis se adaptan, 
+y eso es lo que la mayor parte
+
+50
+00:03:46,092 --> 00:03:50,052
+del aprendizaje es, cambiando 
+la efectividad de la sinapsis.
+
+51
+00:03:50,052 --> 00:03:56,007
+Se pueden adaptar cambiando el número 
+de vesículas que resultan liberadas cuando 
+
+52
+00:03:56,007 --> 00:03:59,019
+el pico llega, o cambiando 
+el número de moléculas
+
+53
+00:03:59,019 --> 00:04:03,084
+receptoras que son sensibles a las 
+moléculas transmisoras liberadas.
+
+54
+00:04:04,046 --> 00:04:07,097
+Las sinapsis son muy lentas en comparación 
+con la memoria de un computador
+
+55
+00:04:07,097 --> 00:04:13,014
+pero tienen gran cantidad de ventajas 
+sobre la memoria RAM de un computador.
+
+56
+00:04:13,014 --> 00:04:17,086
+son muy pequeñas y de muy bajo 
+consumo de energía. Y se pueden adaptar.
+
+57
+00:04:17,086 --> 00:04:22,003
+Esa es la propiedad más importante.
+Usan señales disponibles localmente para
+
+58
+00:04:22,003 --> 00:04:26,077
+cambiar su fuerza y así es como
+aprendemos a realizar cálculos complicados.
+
+59
+00:04:27,012 --> 00:04:31,045
+La cuestión, por supuesto, es 
+cómo deciden como cambiar su fuerza.
+
+60
+00:04:31,045 --> 00:04:34,093
+Cuáles son las reglas que siguen para adaptarse.
+
+61
+00:04:36,012 --> 00:04:39,035
+En una sola diapositiva, así es 
+como funciona el cerebro.
+
+62
+00:04:39,035 --> 00:04:42,051
+Cada neurona recibe entradas de otras neuronas.
+
+63
+00:04:42,051 --> 00:04:46,022
+Algunas neuronas reciben entradas 
+desde los receptores
+
+64
+00:04:46,022 --> 00:04:50,059
+Es un gran número de neuornas pero 
+solo una pequeña fracción de ellas.
+
+65
+00:04:50,059 --> 00:04:55,028
+Y las neuronas se comunican entre ellas 
+en la corteza cerebral enviando
+
+66
+00:04:55,028 --> 00:05:01,005
+estos picos de actividad. La efectividad 
+en la entrada de una neurona
+
+67
+00:05:01,005 --> 00:05:05,017
+está controlada por el peso sináptico 
+que puede ser positivo o negativo.
+
+68
+00:05:05,017 --> 00:05:09,087
+Y esos pesos sinápticos se adaptan. 
+Y al adaptarse la red completa aprende
+
+69
+00:05:09,087 --> 00:05:12,090
+a realizar diferentes clases de cálculos.
+
+70
+00:05:12,090 --> 00:05:16,040
+Por ejemplo a reconocer objetos, 
+entender el lenguaje, hacer planes,
+
+71
+00:05:16,040 --> 00:05:23,037
+controlar los movimientos de tu cuerpo.
+Tienes alrededor de diez a la once neuronas,
+
+72
+00:05:23,037 --> 00:05:26,056
+cada una de las cuales tiene 
+alrededor de diez a la cuarta pesos.
+
+73
+00:05:26,056 --> 00:05:31,056
+Probablemente tengas diez a la quince 
+o quizás diez a la catorce pesos
+
+74
+00:05:31,056 --> 00:05:35,043
+sinápticos. Y un enorme número 
+de esos pesos, una gran parte
+
+75
+00:05:35,043 --> 00:05:40,049
+pueden incidir en el cálculo que se 
+está efectuando en una muy pequeña
+
+76
+00:05:40,049 --> 00:05:43,036
+fracción de segundo, en algunos milisegundos.
+
+77
+00:05:43,036 --> 00:05:48,069
+Es un ancho de banda para almacenar 
+conocimiento mucho mejor que el que tiene
+
+78
+00:05:48,069 --> 00:05:52,071
+la mejor y más moderna estación de trabajo.
+Por último podemos señalar que 
+
+79
+00:05:52,071 --> 00:05:56,045
+la corteza cerebral es modular. 
+Al menos aprende a ser modular
+
+80
+00:05:56,045 --> 00:06:00,039
+Porciones diferentes de la corteza 
+terminan haciendo cosas diferentes
+
+81
+00:06:00,039 --> 00:06:05,032
+Genéticamente, las entradas desde los sentidos 
+van a diferentes porciones del cerebro
+
+82
+00:06:05,032 --> 00:06:08,099
+y eso determina mucho de lo que terminan haciendo.
+
+83
+00:06:08,099 --> 00:06:14,019
+Si se daña una parte del cerebro de un adulto,
+ese daño puntual 
+
+84
+00:06:14,019 --> 00:06:17,032
+tiene un efecto específico.
+El daño en un sitio puede hacerte
+
+85
+00:06:17,032 --> 00:06:22,092
+perder tu habilidad de entender el lenguaje.
+El daño en otro punto podría provocarte
+
+86
+00:06:22,092 --> 00:06:29,045
+la pérdida de capacidad de reconocer objetos.
+Sabemos mucho sobre dónde están localizadas
+
+87
+00:06:29,045 --> 00:06:34,057
+las funciones en el cerebro porque cuando
+usas una parte del cerebro para hacer algo
+
+88
+00:06:34,057 --> 00:06:39,046
+gastas energía y eso demanda más flujo de sangre
+y se puede ver el flujo sanguíneo
+
+89
+00:06:39,046 --> 00:06:43,008
+en un escáner cerebral.
+Te permite ver qué porciones
+
+90
+00:06:43,008 --> 00:06:48,083
+estás usando para realizar una determinada tarea.
+Pero lo remarcable acerca de la corteza cerebral
+
+91
+00:06:48,083 --> 00:06:53,090
+es que se ve igual en todas partes 
+y eso sugiere fuertemente que  contiene
+
+92
+00:06:53,090 --> 00:06:57,005
+un algoritmo de aprendizaje universal y bastante flexible
+
+93
+00:06:57,005 --> 00:07:01,058
+Y eso también surge del hecho de que si 
+el daño en el cerebro es a temprana edad esas funciones
+
+94
+00:07:01,058 --> 00:07:07,056
+relocalizarán en otras partes del cerebro.
+De modo que no está genéticamente predeterminado,
+
+95
+00:07:07,056 --> 00:07:12,048
+al menos, no directamente, qué 
+parte del cerebro realiza qué función
+
+96
+00:07:12,048 --> 00:07:18,009
+Hay experimentos convincentes en 
+crías de hurones que demuestran que
+
+97
+00:07:18,009 --> 00:07:23,050
+si cortas la entrada a la corteza cerebral 
+que llega de los oídos, y en su lugar se la reencamina
+
+98
+00:07:23,050 --> 00:07:29,025
+la entrada visual a la corteza auditiva, 
+entonces la corteza auditiva que estaba 
+
+99
+00:07:29,025 --> 00:07:34,094
+destinada a procesar sonidos aprenderá a 
+tratar con entradas visuales y producirá neuronas
+
+100
+00:07:34,094 --> 00:07:38,048
+que se verán similares a las del sistema visual.
+
+101
+00:07:40,048 --> 00:07:45,026
+Eso sugiere que la corteza está hecha de 
+materia de propósito general que tiene la habilidad de 
+
+102
+00:07:45,026 --> 00:07:48,094
+transformarse en un hardware de próposito 
+específico para una tarea en particular, en respuesta
+
+103
+00:07:48,094 --> 00:07:52,050
+a la experiencia.
+Y nos da una linda combinación de
+
+104
+00:07:52,050 --> 00:07:58,025
+cálculo paralelo veloz, una vez que 
+se ha aprendido, más flexibilidad
+
+105
+00:07:58,025 --> 00:08:03,093
+de modo que se puede aprender nuevas funciones;
+estás aprendiendo a ejecutar cálculos en paralelo.
+
+106
+00:08:03,093 --> 00:08:09,068
+Es como la tecnología FPGA donde se  
+construye un hardware paralelo estándar, y 
+
+107
+00:08:09,068 --> 00:08:15,094
+luego de construido, se le pone información 
+que le dice que cálculo paralelo en particular debe hacer.
+
+108
+00:08:15,094 --> 00:08:19,005
+Los computadores convencionales logran 
+
+109
+00:08:19,005 --> 00:08:21,097
+flexibilidad ejecutando un programa secuencial almacenado.
+
+110
+00:08:21,097 --> 00:08:26,031
+Pero eso requiere de un procesador central 
+muy rápido que acceda a las líneas
+
+111
+00:08:26,031 --> 00:08:29,093
+de programa secuencial y realicen 
+largos cálculos secuenciales.

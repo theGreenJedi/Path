@@ -1,0 +1,904 @@
+1
+00:00:00,000 --> 00:00:04,471
+In this video, we are going to look at a
+number of issues that arise when using
+
+2
+00:00:04,471 --> 00:00:07,075
+stochastic gradient descent with mini
+patches.
+
+3
+00:00:07,075 --> 00:00:10,923
+There is a large number of tricks that
+make things work much better.
+
+4
+00:00:10,923 --> 00:00:13,753
+These are the kind of black outed neural
+networks.
+
+5
+00:00:13,753 --> 00:00:17,150
+And I'm going to go over some of the main
+tricks in this video.
+
+6
+00:00:17,150 --> 00:00:21,817
+The first issue I want to talk about, is
+initializing the way it's in your own
+
+7
+00:00:21,817 --> 00:00:24,808
+network.
+If two hidden units have exactly the same
+
+8
+00:00:24,808 --> 00:00:29,535
+weights, the same bioses, with incoming
+and I current, then they can never become
+
+9
+00:00:29,535 --> 00:00:33,664
+different from one another.
+Because they would always get exactly the
+
+10
+00:00:33,664 --> 00:00:36,596
+same gradient.
+So, to allow them to learn diffrent
+
+11
+00:00:36,596 --> 00:00:40,605
+feature detectors, you need to start them
+off different from one another.
+
+12
+00:00:40,605 --> 00:00:44,614
+We do this by using small random weights
+to initialize the weights.
+
+13
+00:00:44,614 --> 00:00:48,971
+That breaks the symmetry.
+Those small random weights umm shouldn't
+
+14
+00:00:48,971 --> 00:00:52,251
+all necessarily be the same size as each
+other.
+
+15
+00:00:52,251 --> 00:00:57,765
+So if you've got a hidden unit that has a
+very big fan in if you use quite big
+
+16
+00:00:57,765 --> 00:01:03,627
+weights it'll tend to saturate it so you
+can afford to use much smaller weights for
+
+17
+00:01:03,627 --> 00:01:08,319
+a hidden unit that has a big fan in.
+If you have a hidden unit with a very
+
+18
+00:01:08,319 --> 00:01:11,128
+small fan, then you want to use bigger
+weights.
+
+19
+00:01:11,128 --> 00:01:15,601
+And since the weights are random, it
+scales with the square root of the number
+
+20
+00:01:15,601 --> 00:01:18,697
+of the weights.
+And so a good principle is to make the
+
+21
+00:01:18,697 --> 00:01:22,711
+size of the initial weights be
+proportional to the square root of the
+
+22
+00:01:22,711 --> 00:01:25,973
+fan.
+We can also scale the learning rates for
+
+23
+00:01:25,973 --> 00:01:30,724
+the weights the same way.
+One thing that has a surprisingly big
+
+24
+00:01:30,724 --> 00:01:36,063
+affect on the speed with which a neural
+network will learn, is shifting the
+
+25
+00:01:36,063 --> 00:01:39,480
+inputs.
+That is adding a constant to each of the
+
+26
+00:01:39,480 --> 00:01:44,190
+components of the inputs.
+It seems surprising that, that could make
+
+27
+00:01:44,190 --> 00:01:48,050
+much difference.
+But when you're using steepest decent,
+
+28
+00:01:48,050 --> 00:01:53,483
+shifting an input value by adding a
+constant can make a very big difference.
+
+29
+00:01:53,483 --> 00:01:59,416
+It usually helps to shift each component
+of the input, so that averaged over all of
+
+30
+00:01:59,416 --> 00:02:04,920
+the training data, it has a value of zero.
+That is, make sure it's mean is zero.
+
+31
+00:02:05,600 --> 00:02:09,976
+So suppose we have a little neuron-like
+likeness, just a linear neuron with two
+
+32
+00:02:09,976 --> 00:02:13,729
+weights.
+And suppose we have some training cases.
+
+33
+00:02:13,729 --> 00:02:18,311
+The first training case is where the
+inputs are 101 and a 101, you should give
+
+34
+00:02:18,311 --> 00:02:21,719
+an output of two.
+And the second one says when there are a
+
+35
+00:02:21,719 --> 00:02:26,360
+101 and 99 you should output a zero.
+And I'm using color here to indicate which
+
+36
+00:02:26,360 --> 00:02:32,088
+training case I'm talking about If you
+look at the error surface you get for
+
+37
+00:02:32,088 --> 00:02:35,046
+those two training cases, it looks like
+this.
+
+38
+00:02:35,046 --> 00:02:40,626
+The green line is the line along which the
+weights will satisfy the first training
+
+39
+00:02:40,626 --> 00:02:46,138
+case, and the red line is the line along
+which the weights will satisfy the second
+
+40
+00:02:46,138 --> 00:02:50,607
+training case.
+And what we notice is that they're almost
+
+41
+00:02:50,607 --> 00:02:56,570
+parallel, and so when you combine them,
+you get a very elongated ellipse.
+
+42
+00:02:56,570 --> 00:03:01,094
+One way to think about what's going on
+here is that, because we're using a
+
+43
+00:03:01,094 --> 00:03:05,190
+squared error measure, we get a parabolic
+trough along the red line.
+
+44
+00:03:05,190 --> 00:03:09,959
+The red line is the bottom of this
+parabolic trough that tells us the squared
+
+45
+00:03:09,959 --> 00:03:14,911
+error we'll be getting on the red case.
+And there's another parabolic trough with
+
+46
+00:03:14,911 --> 00:03:19,008
+the green line along its bottom.
+And it turns out, although this may
+
+47
+00:03:19,008 --> 00:03:23,532
+surprise your spatial intuition.
+If you add together two parabolic troughs,
+
+48
+00:03:23,532 --> 00:03:27,323
+you get a quadratic bowl.
+And elongated quadratic bowl, in this
+
+49
+00:03:27,323 --> 00:03:30,074
+case.
+So that's where that error surface came
+
+50
+00:03:30,074 --> 00:03:34,462
+from.
+Now, look what happens, if we subtract a
+
+51
+00:03:34,462 --> 00:03:38,964
+hundred from each of those two inbook
+components.
+
+52
+00:03:38,964 --> 00:03:42,914
+We get a completely different area
+surface.
+
+53
+00:03:42,914 --> 00:03:46,864
+It's, in this case, it's a circle, it's
+ideal.
+
+54
+00:03:46,864 --> 00:03:52,560
+The green line is the line along which the
+weights add to two.
+
+55
+00:03:52,560 --> 00:03:55,345
+We're going to take the first weight, and
+multiply it by one.
+
+56
+00:03:55,345 --> 00:03:58,179
+We're going to take the second weight and
+multiply it by one.
+
+57
+00:03:58,179 --> 00:04:00,916
+And we need to get two.
+So the weights better add to two.
+
+58
+00:04:00,916 --> 00:04:03,995
+The red line is the line along which the
+two weights are equal.
+
+59
+00:04:03,995 --> 00:04:07,171
+Because we're going to take the first
+weight, and multiply it by one.
+
+60
+00:04:07,171 --> 00:04:10,198
+And we're going to take the second weight,
+and multiply it by -one.
+
+61
+00:04:10,201 --> 00:04:13,720
+So if the weights are equal, we'll be able
+to get that zero that we need.
+
+62
+00:04:14,360 --> 00:04:19,917
+So the error surface in this case is a
+nice circle where gradient descent is
+
+63
+00:04:19,917 --> 00:04:24,320
+really easy, and all we did was subtract
+100 from every input.
+
+64
+00:04:25,380 --> 00:04:30,330
+If you're thinking about what happens not
+with the input but with the hidden units.
+
+65
+00:04:30,330 --> 00:04:36,039
+It makes sense to have hidden units that
+are hyperbolic tangents that go between
+
+66
+00:04:36,039 --> 00:04:40,339
+-one and one.
+The hyperbolic tangent is simply twice the
+
+67
+00:04:40,339 --> 00:04:44,709
+logistic -one.
+And the reason that makes sense is because
+
+68
+00:04:44,709 --> 00:04:50,560
+then the activities of the hidden units
+are roughly mean zero and that should make
+
+69
+00:04:50,560 --> 00:04:56,128
+the learning faster in the next level.
+Of course, that's only true if the inputs
+
+70
+00:04:56,128 --> 00:05:00,640
+to the hyperbolic tangents are distributed
+sensibly around zero.
+
+71
+00:05:01,140 --> 00:05:05,302
+But in that respect, a hyperbolic tangent
+is better than a logistic.
+
+72
+00:05:05,302 --> 00:05:09,154
+However there is other respects in which a
+logistic is better.
+
+73
+00:05:09,154 --> 00:05:12,820
+For example, logistic gives you a rug to
+sweep things under.
+
+74
+00:05:13,080 --> 00:05:17,575
+It gives an output of zero, and if you
+make the input even smaller than it was,
+
+75
+00:05:17,575 --> 00:05:21,379
+the output is still zero.
+So fluctuations in big native inputs are
+
+76
+00:05:21,379 --> 00:05:25,184
+ignored by the logistic.
+For the hyperbolic tangent you have to go
+
+77
+00:05:25,184 --> 00:05:28,700
+out to the end of its plateaus before it
+can ignore anything.
+
+78
+00:05:30,700 --> 00:05:35,219
+Another thing that makes a big difference
+is scaling the inputs.
+
+79
+00:05:35,219 --> 00:05:41,060
+When we use the steepest descent, scaling
+the input values is a very simple thing to
+
+80
+00:05:41,060 --> 00:05:44,119
+do.
+We transform them so that each component
+
+81
+00:05:44,119 --> 00:05:48,221
+of the input has unit variance over the
+whole training set.
+
+82
+00:05:48,221 --> 00:05:55,352
+So it has a typical value of one or -one.
+So, again if we take this simple net with
+
+83
+00:05:55,352 --> 00:06:02,503
+two rates and we look at the error surface
+when the first component is very small and
+
+84
+00:06:02,503 --> 00:06:08,082
+the second component is much bigger.
+We get an error surface in which we get an
+
+85
+00:06:08,082 --> 00:06:12,607
+ellipse that has got a very high
+curvature, when the input components big
+
+86
+00:06:12,607 --> 00:06:17,196
+because small changes in the weight make a
+big difference in the output.
+
+87
+00:06:17,196 --> 00:06:22,677
+And very low curvature in the direction in
+which the input component is small because
+
+88
+00:06:22,677 --> 00:06:27,011
+small changes to the weight hardly make
+any difference to the error.
+
+89
+00:06:27,011 --> 00:06:32,045
+The color here is indicating which axis
+we're using, not which training example
+
+90
+00:06:32,045 --> 00:06:34,850
+we're using, as it did in the previous
+slide.
+
+91
+00:06:34,850 --> 00:06:39,317
+If we simply change the variance of the
+inputs, just re-scale them.
+
+92
+00:06:39,317 --> 00:06:44,733
+Make the first component ten times as big
+and the second component ten times as
+
+93
+00:06:44,733 --> 00:06:47,780
+small, we now get a nice circular error
+surface.
+
+94
+00:06:49,980 --> 00:06:55,716
+Shifting and scaling the inputs is a very
+simple thing to do, but something that's a
+
+95
+00:06:55,716 --> 00:07:00,087
+bit more complicated.
+That actually works even better cause it's
+
+96
+00:07:00,087 --> 00:07:03,842
+guaranteed to give you a circle, a
+circular error surface.
+
+97
+00:07:03,842 --> 00:07:08,416
+At least it is for linear neuron. What we
+do is we try and decorrelate the
+
+98
+00:07:08,416 --> 00:07:12,849
+components of the input vectors.
+In other words, if you take two components
+
+99
+00:07:12,849 --> 00:07:17,641
+and look at how they're correlated with
+one another over the whole training set.
+
+100
+00:07:17,641 --> 00:07:22,134
+Like, if you remember the early example
+how the number of portions of chips.
+
+101
+00:07:22,134 --> 00:07:26,028
+And the number of portions of ketchup
+might be highly correlated.
+
+102
+00:07:26,028 --> 00:07:28,963
+We want to try and get rid of those
+correlations.
+
+103
+00:07:28,963 --> 00:07:34,260
+That will make learning much easier.
+There's actually many ways to de-correlate
+
+104
+00:07:34,260 --> 00:07:37,316
+things.
+For those of you who know about principle
+
+105
+00:07:37,316 --> 00:07:41,056
+components analysis.
+A very sensible thing to do is apply
+
+106
+00:07:41,056 --> 00:07:45,171
+principle components analysis.
+Remove the components that have the
+
+107
+00:07:45,171 --> 00:07:49,349
+smallest eigenvalues which already
+achieves some dimensionality reduction.
+
+108
+00:07:49,349 --> 00:07:54,711
+And then scale the remaining components by
+dividing them by the square roots of their
+
+109
+00:07:55,085 --> 00:07:58,078
+eigenvalues.
+For a linear system, that will give you a
+
+110
+00:07:58,078 --> 00:08:01,631
+circular error surface.
+If you don't know about principle
+
+111
+00:08:01,631 --> 00:08:04,500
+components, we'll cover it later in the
+course.
+
+112
+00:08:05,580 --> 00:08:09,294
+Once you got a circular error surface, the
+gradient points straight towards the
+
+113
+00:08:09,294 --> 00:08:14,463
+minimum, so learning is really easy.
+Now, let's talk about a few of the common
+
+114
+00:08:14,463 --> 00:08:19,382
+problems that people encounter.
+One thing that can happen is if you start
+
+115
+00:08:19,382 --> 00:08:24,908
+with a learning rate that's much too big,
+you drive the hidden units either to be
+
+116
+00:08:24,908 --> 00:08:29,356
+firmly on, or firmly off.
+That is the incoming weights are very big
+
+117
+00:08:29,356 --> 00:08:34,545
+in positive or very big in negative.
+And their state no longer depends on the
+
+118
+00:08:34,545 --> 00:08:39,861
+input and of course that means that error
+root is coming from output won't affect
+
+119
+00:08:39,861 --> 00:08:44,472
+them, because they are on the plateaus
+where the derivative is basically zero.
+
+120
+00:08:44,472 --> 00:08:48,570
+And so learning will stop.
+Because people are expecting to see local
+
+121
+00:08:48,570 --> 00:08:53,350
+minimum, when learning stops they say, oh,
+I'm at a local minimum and the error's
+
+122
+00:08:53,350 --> 00:08:56,072
+terrible.
+So there are these really bad local
+
+123
+00:08:56,072 --> 00:08:58,008
+minimum,
+Usually that's not true.
+
+124
+00:08:58,008 --> 00:09:01,820
+Usually it's because you got stuck out on
+the end of a plateau.
+
+125
+00:09:02,660 --> 00:09:07,992
+A second problem that occurs, is, if you
+are classifying things and you're using
+
+126
+00:09:07,992 --> 00:09:11,232
+either a squared error or a cross entropy
+error.
+
+127
+00:09:11,232 --> 00:09:16,362
+The best guessing strategy is normally to
+make the output unit equal to the
+
+128
+00:09:16,362 --> 00:09:19,400
+proportion of the time that it should be
+one.
+
+129
+00:09:20,180 --> 00:09:25,002
+The network will fairly quickly find that
+strategy and so the error will fall
+
+130
+00:09:25,002 --> 00:09:29,886
+quickly, but particularly if the network
+has many layers it may take a long time
+
+131
+00:09:29,886 --> 00:09:34,098
+before it improves much on that.
+Because to improve over the guessing
+
+132
+00:09:34,098 --> 00:09:38,677
+statedgy it has to get sensible
+information from the input through all the
+
+133
+00:09:38,677 --> 00:09:43,682
+hidden layers to the output and that could
+take a long time to learn if you start
+
+134
+00:09:43,682 --> 00:09:47,284
+with small weights.
+So again, you learn quickly and then the
+
+135
+00:09:47,284 --> 00:09:52,351
+error stops decreasing, and it looks like
+a local minimum but actually it's another
+
+136
+00:09:52,351 --> 00:09:56,720
+platter.
+I mentioned earlier that towards the end
+
+137
+00:09:56,720 --> 00:09:59,607
+of learning, you should turn down the
+learning rate.
+
+138
+00:09:59,777 --> 00:10:03,910
+You should also be careful about turning
+down the learning rate too soon.
+
+139
+00:10:03,910 --> 00:10:08,962
+When you turn down the learning rate you
+reduce the random fluctuations in the area
+
+140
+00:10:08,962 --> 00:10:12,270
+do to the different gradings on different
+mini batches.
+
+141
+00:10:12,270 --> 00:10:15,337
+But of course you also reduce the rate of
+learning.
+
+142
+00:10:15,337 --> 00:10:20,209
+So if you look at the red curve you see
+that when we turn the learning rate down
+
+143
+00:10:20,209 --> 00:10:23,577
+we got a great win.
+The error fell but after that we get
+
+144
+00:10:23,577 --> 00:10:26,885
+slower learning.
+And if we do that too soon we're gonna
+
+145
+00:10:26,885 --> 00:10:31,577
+loose relative to the green curve.
+So don't turn down the learning rate too
+
+146
+00:10:31,577 --> 00:10:37,561
+soon, not too much.
+I'm now gonna talk about four main ways to
+
+147
+00:10:37,561 --> 00:10:42,727
+speed up mini-batch learning a lot.
+The previous things I talked about were
+
+148
+00:10:42,727 --> 00:10:46,447
+kind of a bag of tricks for making things
+work better.
+
+149
+00:10:46,447 --> 00:10:51,957
+And these are four methods all explicitly
+designed to make the learning go much
+
+150
+00:10:51,957 --> 00:10:56,274
+faster.
+I'm now gonna talk about a mathical
+
+151
+00:10:56,274 --> 00:10:59,520
+moment.
+In this method we don't use the gradient
+
+152
+00:10:59,520 --> 00:11:04,727
+to change the position of the whites.
+That is, if you think of the whites as a
+
+153
+00:11:04,727 --> 00:11:09,663
+ball on the error surface, standard
+gradient descent uses the gradient to
+
+154
+00:11:09,663 --> 00:11:14,464
+change the position of that ball.
+You simply multiply the gradient by a
+
+155
+00:11:14,464 --> 00:11:18,860
+learning rate and change the position of
+the ball by that vector.
+
+156
+00:11:18,860 --> 00:11:24,343
+In the momentum method, we use the
+gradient to accelerate this ball.
+
+157
+00:11:24,343 --> 00:11:27,863
+That is the gradient changes it's
+velocity.
+
+158
+00:11:27,863 --> 00:11:33,020
+And then the velocity is what changes the
+position of the ball.
+
+159
+00:11:33,020 --> 00:11:37,757
+The reason that's different is because the
+bull can have momentum.
+
+160
+00:11:37,757 --> 00:11:41,920
+That is, it remembers previous gradients
+in its philosophy.
+
+161
+00:11:43,160 --> 00:11:47,707
+A second method for speeding up when
+you're batch learning is to use a separate
+
+162
+00:11:47,707 --> 00:11:52,369
+adaptive learning rate for each parameter.
+And then to slowly adjust that learning
+
+163
+00:11:52,369 --> 00:11:56,802
+rate based on empirical measurements.
+And the obvious empirical measurement is
+
+164
+00:11:56,802 --> 00:12:01,180
+are we keeping making progress by changing
+the weights in the same direction?
+
+165
+00:12:01,180 --> 00:12:05,557
+Or does the gradient keep oscillating
+around so that the sign of the grading
+
+166
+00:12:05,557 --> 00:12:08,797
+keeps changing.
+If the sign of the grading keeps changing,
+
+167
+00:12:08,797 --> 00:12:13,288
+what we're going to do is reduce the
+learning rate and if it keeps staying the
+
+168
+00:12:13,288 --> 00:12:15,960
+same, we're going to increase the learning
+rate.
+
+169
+00:12:16,780 --> 00:12:22,698
+A third method is what I now call rms prop
+and what we do in this method is we divide
+
+170
+00:12:22,698 --> 00:12:27,860
+by a running average of the magnitudes of
+the recent gradients flat weight.
+
+171
+00:12:27,860 --> 00:12:32,953
+So that if the gradients are big you
+divided by a large number and if the
+
+172
+00:12:32,953 --> 00:12:37,220
+gradients is small and you divide then
+divide by small number.
+
+173
+00:12:37,220 --> 00:12:41,900
+That will deal very nicely with a wide
+range of different gradients.
+
+174
+00:12:42,220 --> 00:12:47,612
+It's actually a mini batch version of just
+using the sign of the gradient which is a
+
+175
+00:12:47,612 --> 00:12:51,736
+method called R prompt, that was designed
+for full batch learning.
+
+176
+00:12:51,736 --> 00:12:56,684
+The final way of speeding up learning,
+which is what optimization people would
+
+177
+00:12:56,684 --> 00:12:59,857
+naturally recommend, is to use full batch
+learning.
+
+178
+00:12:59,857 --> 00:13:04,425
+And to use a fancy method that takes
+curvature information into account.
+
+179
+00:13:04,425 --> 00:13:07,279
+To adapt that method to work for neural
+nets.
+
+180
+00:13:07,279 --> 00:13:12,038
+And then maybe to try and adapt it some
+more, so it works with mini batches.
+
+181
+00:13:12,038 --> 00:13:15,020
+I am not going to talk about that in this
+lecture.

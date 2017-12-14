@@ -1,0 +1,1043 @@
+1
+00:00:00,000 --> 00:00:05,428
+In this video, I'm going to talk about
+convolusional neural networks for hundred
+
+2
+00:00:05,428 --> 00:00:10,669
+and digit recognition.
+This was one of the big success stories of
+
+3
+00:00:10,669 --> 00:00:15,801
+neuron networks in the 1980s.
+The deep convolutional nets developed by
+
+4
+00:00:15,801 --> 00:00:21,004
+Yann LaCun and his collaborators did a
+really good job of recognizing handwriting
+
+5
+00:00:21,004 --> 00:00:25,889
+and were actually used in practice.
+They're one of the few examples from that
+
+6
+00:00:25,889 --> 00:00:30,648
+period of deep neural nets that it was
+possible to train on computers that
+
+7
+00:00:30,648 --> 00:00:33,440
+existed then, and that performed really
+well.
+
+8
+00:00:33,440 --> 00:00:38,250
+Convolutional neural networks are based on
+the idea of replicated features.
+
+9
+00:00:38,250 --> 00:00:43,124
+So, because objects move around and show
+up on different pixels, if we have a
+
+10
+00:00:43,124 --> 00:00:48,126
+feature detector that's useful in one
+place in the image, it's likely that the
+
+11
+00:00:48,126 --> 00:00:51,461
+same feature detector will be useful
+somewhere else.
+
+12
+00:00:51,461 --> 00:00:56,720
+So, the idea is to build many different
+copies of the same feature detector in all
+
+13
+00:00:56,720 --> 00:01:01,016
+the different positions.
+If you look on the right I've shown you
+
+14
+00:01:01,016 --> 00:01:04,943
+three feature detectors, which are
+replicas of each other.
+
+15
+00:01:04,943 --> 00:01:10,128
+Each of them has weights to nine pixels.
+And those weights are identical between
+
+16
+00:01:10,128 --> 00:01:15,046
+the three different feature detectors.
+So the red arrow has the same weight on it
+
+17
+00:01:15,046 --> 00:01:19,599
+for all three feature detectors.
+And when we learn we keep those red arrows
+
+18
+00:01:19,599 --> 00:01:24,517
+all having the same weight as each other
+and we keep the green arrows having all
+
+19
+00:01:24,517 --> 00:01:28,888
+the same weight as each other.
+Even though the red and green arrows will
+
+20
+00:01:28,888 --> 00:01:32,895
+have different weights.
+We could also try replicating across scale
+
+21
+00:01:32,895 --> 00:01:37,752
+and orientation but that's much more
+difficult and expensive and probably not a
+
+22
+00:01:37,752 --> 00:01:41,347
+good idea.
+Replication across position greatly
+
+23
+00:01:41,347 --> 00:01:45,460
+reduces the number of free parameters that
+you have to learn.
+
+24
+00:01:45,940 --> 00:01:52,067
+So those 27 pixels that you see in those
+three replicated detectors only have nine
+
+25
+00:01:52,067 --> 00:01:56,497
+different weights.
+Now we don't just want to use one feature
+
+26
+00:01:56,497 --> 00:01:59,303
+type.
+So we're going to have many maps.
+
+27
+00:01:59,303 --> 00:02:05,283
+Each map will have replicas of the same
+feature, features that are constrained to
+
+28
+00:02:05,283 --> 00:02:10,736
+be identical in different places.
+And then different maps will learn to
+
+29
+00:02:10,736 --> 00:02:15,667
+detect different features.
+This allows each patch of the image to be
+
+30
+00:02:15,667 --> 00:02:19,149
+represented by features of many different
+types.
+
+31
+00:02:19,149 --> 00:02:24,733
+Replicated features fit in nicely with
+back propagation that is it's easy to
+
+32
+00:02:24,733 --> 00:02:29,447
+learn using back propagation.
+In fact its easy to modify the back
+
+33
+00:02:29,447 --> 00:02:34,960
+propagation algorithm incorporate any
+linear constraint between the weights.
+
+34
+00:02:36,100 --> 00:02:39,488
+So what we do is we compute the gradients
+as usual.
+
+35
+00:02:39,488 --> 00:02:44,537
+But then we modify the gradients, so that
+if the weight satisfied the linear
+
+36
+00:02:44,537 --> 00:02:49,785
+constraint before the weight update,
+they'll also satisfy the linear constraint
+
+37
+00:02:49,785 --> 00:02:54,780
+after the weight update.
+So, the simplest example is we want two
+
+38
+00:02:54,780 --> 00:02:57,780
+weights to be equal.
+We want w1 to equal w2.
+
+39
+00:02:59,100 --> 00:03:03,345
+That would be true if we start off with W1
+equal to W2.
+
+40
+00:03:03,345 --> 00:03:09,520
+And then we make sure that the change in
+W1 is always equal to the change in W2.
+
+41
+00:03:09,520 --> 00:03:14,680
+The way we do that is we compute the
+gradient of the arrow with respect to W1.
+
+42
+00:03:14,680 --> 00:03:19,576
+And the gradient with respect to W2.
+And then we use the sum or average of
+
+43
+00:03:19,576 --> 00:03:24,869
+those two gradients for both W1 and W2.
+By using weight constraints like that, we
+
+44
+00:03:24,869 --> 00:03:29,170
+can force back propagation to learn
+replicated feature detectors.
+
+45
+00:03:29,170 --> 00:03:34,529
+There's quite a lot of confusion in the
+literature about what replicated feature
+
+46
+00:03:34,529 --> 00:03:39,094
+detectors are actually achieving.
+Many people claim they're achieving
+
+47
+00:03:39,094 --> 00:03:41,940
+translation invariance.
+And that's not true.
+
+48
+00:03:42,280 --> 00:03:46,698
+Well at least it's not true in the
+activities of the neurons.
+
+49
+00:03:46,698 --> 00:03:51,769
+So if you look at the activities, what
+replication features achieve is
+
+50
+00:03:51,769 --> 00:03:56,260
+equivariance not invariance.
+An example should make that clear.
+
+51
+00:03:57,080 --> 00:04:02,070
+Here's an image, and the black dots are
+the activated neurons.
+
+52
+00:04:02,070 --> 00:04:06,870
+Here's a translated image.
+And notice the black dots have also
+
+53
+00:04:06,870 --> 00:04:09,967
+translated.
+So the image changed and the
+
+54
+00:04:09,967 --> 00:04:14,380
+representation also changed by just as
+much as the image.
+
+55
+00:04:14,380 --> 00:04:20,921
+That's equivariance not invariance.
+There is somethings invariant, and that's
+
+56
+00:04:20,921 --> 00:04:24,622
+the knowledge.
+So if you learn replicative feature
+
+57
+00:04:24,622 --> 00:04:29,806
+detectors, if you know how to detect a
+feature in one place, you'll know how to
+
+58
+00:04:29,806 --> 00:04:35,124
+detect that same feature in another place.
+And it's important to note that we're
+
+59
+00:04:35,124 --> 00:04:39,843
+achieving equivariance in the activities
+and invariance in the weights.
+
+60
+00:04:39,843 --> 00:04:45,160
+If you want to achieve some invariance in
+the activities, what you need to do is
+
+61
+00:04:45,160 --> 00:04:48,550
+pool the acts replicative feature
+detectors.
+
+62
+00:04:48,550 --> 00:04:54,048
+So you can get a small amount of
+translation in variance at each level of a
+
+63
+00:04:54,048 --> 00:04:58,389
+deep net, by averaging full neighboring
+replicated detectors.
+
+64
+00:04:58,389 --> 00:05:04,250
+One advantage of this is that it reduces
+the number of inputs for the next layer.
+
+65
+00:05:04,250 --> 00:05:09,319
+So that we can have more different maps,
+allowing us to learn more different kinds
+
+66
+00:05:09,319 --> 00:05:13,770
+of features in the next layer.
+It actually works slightly better to take
+
+67
+00:05:13,770 --> 00:05:18,530
+the maximum of four neighboring feature
+detectors, rather than an average, but
+
+68
+00:05:18,530 --> 00:05:22,054
+there is a problem.
+And the problem is that after several
+
+69
+00:05:22,054 --> 00:05:26,999
+levels of doing this kind of pooling,
+we've lost precise information about where
+
+70
+00:05:26,999 --> 00:05:30,549
+things are.
+That's okay if we just want to recognize
+
+71
+00:05:30,549 --> 00:05:33,958
+that it's a face.
+The fact that we've got a few eyes, and a
+
+72
+00:05:33,958 --> 00:05:38,308
+nose, and a mouth floating about in
+vaguely the same position is very good
+
+73
+00:05:38,308 --> 00:05:42,363
+evidence that it's a face.
+But if you want to recognize whose face it
+
+74
+00:05:42,363 --> 00:05:47,183
+is, you need to use the precise spatial
+relationships between the eyes and between
+
+75
+00:05:47,183 --> 00:05:50,298
+the nose and the mouth.
+And that's been lost by these
+
+76
+00:05:50,298 --> 00:05:54,060
+convolutional neural nets.
+I'll come back to that issue later on.
+
+77
+00:05:54,460 --> 00:05:59,768
+So the first impressive example of a
+convolution on your own end was done by
+
+78
+00:05:59,768 --> 00:06:05,146
+Yann Lecun and his collaborators who
+developed a really good recognizer for a
+
+79
+00:06:05,146 --> 00:06:08,180
+hundred digits.
+In it had many hidden layers.
+
+80
+00:06:08,480 --> 00:06:11,811
+In each layer, it had many maps of
+replicated units.
+
+81
+00:06:11,811 --> 00:06:16,513
+And it had pooling between layers.
+So you pool adjacent replicated units
+
+82
+00:06:16,513 --> 00:06:21,869
+before you send them to the next layer.
+But I also used a wide net that could cope
+
+83
+00:06:21,869 --> 00:06:26,768
+with several characters at once.
+And that would work even if the characters
+
+84
+00:06:26,768 --> 00:06:29,707
+overlapped.
+So you didn't have to segment out
+
+85
+00:06:29,707 --> 00:06:33,300
+individual characters before you fed them
+to their net.
+
+86
+00:06:33,780 --> 00:06:39,613
+And something which, people often forget,
+is that they used a clever way of training
+
+87
+00:06:39,613 --> 00:06:43,750
+a complete system.
+They weren't just training a recognizer of
+
+88
+00:06:43,750 --> 00:06:47,955
+individual characters.
+They were training a complete system, so
+
+89
+00:06:47,955 --> 00:06:53,585
+that you put in pixels at one end and you
+get out whole zip codes at the other end.
+
+90
+00:06:53,585 --> 00:06:59,011
+And in training that system they used a
+method that would now be called maximum
+
+91
+00:06:59,011 --> 00:07:02,131
+margin.
+But when they did it, it was way before
+
+92
+00:07:02,131 --> 00:07:06,586
+maximum margin had been invented.
+The net they used was at one point
+
+93
+00:07:06,586 --> 00:07:11,210
+responsible reading about for ten percent
+of the checks in North America.
+
+94
+00:07:11,210 --> 00:07:15,960
+So it was of great practical value.
+There were some very nice demos on that,
+
+95
+00:07:15,960 --> 00:07:19,380
+on Yann's workpaget.
+You should really go look at them.
+
+96
+00:07:19,380 --> 00:07:22,610
+Look at all of them.
+Because they show you just how.
+
+97
+00:07:22,610 --> 00:07:28,522
+Well it copes with variations in size,
+orientation, position, overlap of digits,
+
+98
+00:07:28,522 --> 00:07:33,821
+and all sorts of background noise that
+would, would kill most methods.
+
+99
+00:07:33,821 --> 00:07:37,200
+The architecture of LeNet-5 looks like
+this.
+
+100
+00:07:37,640 --> 00:07:43,604
+There's an input, which is pixels.
+And then there's a whole sequence of
+
+101
+00:07:43,604 --> 00:07:49,143
+feature maps followed by sub sampling.
+So in the C1 feature map, the six
+
+102
+00:07:49,143 --> 00:07:54,969
+different maps, each which is 28 by 28.
+Of those maps contain small features that
+
+103
+00:07:54,969 --> 00:07:58,101
+just look at I think three by three
+pixels.
+
+104
+00:07:58,101 --> 00:08:01,233
+And their weights are constrained
+together.
+
+105
+00:08:01,233 --> 00:08:04,583
+So per map there's only about nine
+parameters.
+
+106
+00:08:04,583 --> 00:08:09,900
+That makes learning much more efficient.
+It means you need much less data.
+
+107
+00:08:11,020 --> 00:08:17,660
+Then after the feature map, there's what
+they call sub-sampling which is now called
+
+108
+00:08:17,660 --> 00:08:22,515
+pooling.
+And so, you pool together the outputs of a
+
+109
+00:08:22,515 --> 00:08:26,898
+bunch of neighboring replicated features
+in C1.
+
+110
+00:08:26,898 --> 00:08:34,263
+And that gives you a smaller map, which
+will then provide the input to the next
+
+111
+00:08:34,263 --> 00:08:40,230
+layer, which is discovering more
+complicated replicated features.
+
+112
+00:08:40,230 --> 00:08:47,316
+As you go up this hierarchy, you get
+features that are much more complicated,
+
+113
+00:08:47,316 --> 00:08:53,121
+but are more invariant to position.
+Here's the errors that LeNet5 made.
+
+114
+00:08:53,121 --> 00:08:57,724
+And this shows you the data that it's
+dealing with is quite tricky.
+
+115
+00:08:57,724 --> 00:09:02,396
+There's 10,000 test cases, and these are
+the 82 errors that it makes.
+
+116
+00:09:02,396 --> 00:09:07,754
+So it's doing better than 99% correct.
+Nevertheless, most of the errors it makes
+
+117
+00:09:07,754 --> 00:09:11,601
+are the things that people find quite easy
+to recognize.
+
+118
+00:09:11,601 --> 00:09:16,243
+So there's some way to go still.
+Nobody knows the human error rate on this
+
+119
+00:09:16,243 --> 00:09:18,746
+data.
+But it's probably twenty to 30 errors.
+
+120
+00:09:18,746 --> 00:09:23,517
+Of course the might-be digits that LeNet5
+got right and you would get wrong.
+
+121
+00:09:23,517 --> 00:09:26,718
+So you have to be careful in estimating
+the error rate.
+
+122
+00:09:26,718 --> 00:09:31,548
+You can't just look at these 82 and ask
+which ones you'll get right and which ones
+
+123
+00:09:31,548 --> 00:09:34,864
+you'll get wrong.
+You have to worry about all those other
+
+124
+00:09:34,864 --> 00:09:38,880
+ones that Lynette Five might've got right
+and you might've got wrong.
+
+125
+00:09:39,260 --> 00:09:44,679
+I'm now want to go to a very general
+point, about how to inject prior knowledge
+
+126
+00:09:44,679 --> 00:09:49,274
+in machine learning, and it applies
+particularly to neural networks.
+
+127
+00:09:49,274 --> 00:09:54,831
+We can put in prior knowledge as it is
+done in the net five, by the design of the
+
+128
+00:09:54,831 --> 00:09:57,260
+network.
+We can have local connectivity.
+
+129
+00:09:57,260 --> 00:10:01,688
+We can have weight constraints.
+Or we can choose neuro-activites that are
+
+130
+00:10:01,688 --> 00:10:04,721
+particularly appropriate for the task
+we're doing.
+
+131
+00:10:04,721 --> 00:10:08,907
+This is much less intrusive than trying to
+hand-engineer the futures.
+
+132
+00:10:08,907 --> 00:10:13,517
+But it still prejudices the network
+towards a particular way of solving the
+
+133
+00:10:13,517 --> 00:10:17,581
+problem that we had in mind.
+We have an idea about how to do object
+
+134
+00:10:17,581 --> 00:10:21,160
+recognition by gradually making bigger and
+bigger features.
+
+135
+00:10:21,160 --> 00:10:24,011
+And by replicating these features across
+space.
+
+136
+00:10:24,011 --> 00:10:26,620
+And we force the network to do it that
+way.
+
+137
+00:10:27,520 --> 00:10:32,775
+There is an alternative way to put in
+prior knowledge that gives the network a
+
+138
+00:10:32,775 --> 00:10:37,081
+much freer hand.
+What we can do is use our prior knowledge
+
+139
+00:10:37,081 --> 00:10:43,602
+to get a whole lot more training data.
+One of the first examples of this was work
+
+140
+00:10:43,602 --> 00:10:48,710
+by Hofmann and Tresp on trying to model
+what happens in a steel mill.
+
+141
+00:10:48,710 --> 00:10:53,843
+They wanted to know the relationship
+between what comes out of the steel mill
+
+142
+00:10:53,843 --> 00:10:59,043
+and various input variables, and they
+actually had an, big old Fortran simulator
+
+143
+00:10:59,043 --> 00:11:02,268
+that would allow them to simulate the
+steel mill.
+
+144
+00:11:02,268 --> 00:11:07,600
+Of course, the simulator wasn't reality.
+It was making all sorts of approximations.
+
+145
+00:11:07,600 --> 00:11:10,430
+So they had real data, and also a
+simulator.
+
+146
+00:11:10,430 --> 00:11:15,630
+And what they did was run the simulator in
+order to create some synthetic data.
+
+147
+00:11:15,630 --> 00:11:20,434
+We then added that to the real data, and
+showed that they could do better than just
+
+148
+00:11:20,434 --> 00:11:24,113
+using the real data alone.
+If I remember right, their great, big
+
+149
+00:11:24,113 --> 00:11:28,279
+Fortran simulator was only worth a few
+dozen extra real examples, but
+
+150
+00:11:28,279 --> 00:11:32,385
+nevertheless, they made the point.
+Of course, if you generate a lot of
+
+151
+00:11:32,385 --> 00:11:35,585
+synthetic data, it may make learning take
+much longer.
+
+152
+00:11:35,585 --> 00:11:40,718
+So in terms of the speed of learning, it's
+much more efficient to put in knowledge by
+
+153
+00:11:40,718 --> 00:11:45,669
+using things like connectivity and weight
+constraints, as was done in Lynette five.
+
+154
+00:11:45,669 --> 00:11:50,560
+But as computers get faster, this other
+way of putting in knowledge, by generating
+
+155
+00:11:50,560 --> 00:11:53,700
+synthetic examples, begins to look better
+and better.
+
+156
+00:11:54,620 --> 00:12:00,221
+In particular, it allows optimization to
+discover clever ways of using the
+
+157
+00:12:00,221 --> 00:12:03,476
+multilayer network that we didn't think
+of.
+
+158
+00:12:03,476 --> 00:12:07,640
+If fact, we might never fully understand
+how it does it.
+
+159
+00:12:08,060 --> 00:12:12,192
+If we just want good solutions to a
+problem, that might be fine.
+
+160
+00:12:12,192 --> 00:12:16,783
+So using the idea of synthetic data,
+there's a brute force approach to
+
+161
+00:12:16,783 --> 00:12:22,227
+handwritten digit recognition.
+Lenet5 uses knowledge about invariances to
+
+162
+00:12:22,227 --> 00:12:26,360
+design the connectivity and the weight
+sharing and the pooling.
+
+163
+00:12:26,620 --> 00:12:32,450
+And that achieves about 80 errors.
+Adding a lot more tricks, including
+
+164
+00:12:32,450 --> 00:12:38,725
+synthetic data, [UNKNOWN] was able to get
+that down to about 40 errors.
+
+165
+00:12:38,725 --> 00:12:45,960
+A group in Switzerland, led by [UNKNOWN]
+went to town with injecting knowledge by
+
+166
+00:12:45,960 --> 00:12:51,886
+putting in synthetic data.
+They put a lot of work into creating very
+
+167
+00:12:51,886 --> 00:12:57,360
+instructive synthetic data.
+So for every real training case, they
+
+168
+00:12:57,360 --> 00:13:01,662
+transformed it to make many more training
+examples.
+
+169
+00:13:01,662 --> 00:13:08,494
+They then trained a large net with many
+units per layer, many layers on a graphic
+
+170
+00:13:08,494 --> 00:13:12,774
+processor unit.
+The graphics processor unit gave them a
+
+171
+00:13:12,774 --> 00:13:17,499
+factor of thirteen computation.
+And because of all the synthetic data they
+
+172
+00:13:17,499 --> 00:13:21,650
+put in, it didn't overfit.
+If they just use a large net with a GPU.
+
+173
+00:13:21,650 --> 00:13:26,721
+It would have been a disaster that over
+fitted terribly that they would have done
+
+174
+00:13:26,721 --> 00:13:29,876
+on the training data but terribly on the
+test data.
+
+175
+00:13:29,876 --> 00:13:32,535
+So they were really combining three
+tricks.
+
+176
+00:13:32,535 --> 00:13:37,730
+Put your effort in to generating lots of
+synthetic data then train a large net on a
+
+177
+00:13:37,730 --> 00:13:40,390
+gpu.
+They managed to achieve 35 errors like
+
+178
+00:13:40,390 --> 00:13:43,050
+that.
+So here's the 35 errors that they got.
+
+179
+00:13:43,050 --> 00:13:48,625
+The top printed digit is the right answer.
+And the bottom two digits are their top
+
+180
+00:13:48,625 --> 00:13:52,092
+two answers.
+What you'll notice is that they nearly
+
+181
+00:13:52,092 --> 00:13:55,152
+always get the right answer in their top
+two.
+
+182
+00:13:55,152 --> 00:14:00,607
+There's only five cases where they don't.
+With some more work by building several
+
+183
+00:14:00,607 --> 00:14:06,142
+different models like this and then using
+a consensus to decide what the digit was,
+
+184
+00:14:06,142 --> 00:14:09,076
+they managed to get down to about 25
+errors.
+
+185
+00:14:09,076 --> 00:14:12,477
+And that must be around about the human
+error rate.
+
+186
+00:14:12,477 --> 00:14:17,745
+One question this work raises is how do
+you tell if a model makes 30 errors is
+
+187
+00:14:17,745 --> 00:14:20,946
+really better than a model that makes 40
+errors.
+
+188
+00:14:20,946 --> 00:14:26,304
+Is that significantly different?
+Rather surprisingly, it turns out it
+
+189
+00:14:26,304 --> 00:14:30,746
+depends on which errors they make.
+The numbers then provide you enough
+
+190
+00:14:30,746 --> 00:14:34,236
+information.
+You have to know which ones they get wrong
+
+191
+00:14:34,236 --> 00:14:38,424
+and which ones they get right.
+So this statistical test called the
+
+192
+00:14:38,424 --> 00:14:43,564
+McNemar test that uses the particular
+errors and is far more sensitive than just
+
+193
+00:14:43,564 --> 00:14:46,420
+using the numbers.
+Let me give you an example.
+
+194
+00:14:47,480 --> 00:14:53,268
+If you look at this two by two tape.
+It shows you, in the top left hand corner,
+
+195
+00:14:53,268 --> 00:14:58,233
+how many examples Model one got wrong and
+Model two also got wrong.
+
+196
+00:14:58,233 --> 00:15:02,012
+That's 29.
+And in the bottom right, it shows you how
+
+197
+00:15:02,012 --> 00:15:06,681
+many examples Model one got right and
+Model two also got right.
+
+198
+00:15:06,681 --> 00:15:11,646
+And in the Magnema Test, you can just
+ignore those numbers in black.
+
+199
+00:15:11,646 --> 00:15:17,575
+All you're interested in is ones where
+Model one got it right and Model two get
+
+200
+00:15:17,575 --> 00:15:22,170
+it wrong, or Model two got it right and
+Model one get it wrong.
+
+201
+00:15:22,170 --> 00:15:27,874
+And if you look at that, there's an eleven
+to one ratio, and it turns out that's
+
+202
+00:15:27,874 --> 00:15:32,278
+pretty significant.
+Model two is definitely better than model
+
+203
+00:15:32,278 --> 00:15:35,311
+one.
+That didn't happen by accident, almost
+
+204
+00:15:35,311 --> 00:15:38,776
+certainly.
+By contrast if you look at this table,
+
+205
+00:15:38,776 --> 00:15:42,535
+again.
+Model one is making 40 hours, model two is
+
+206
+00:15:42,535 --> 00:15:48,870
+making 30 hours, but now model one is
+winning fifteen times when model two loses
+
+207
+00:15:48,870 --> 00:15:52,988
+and model 2's winning 25 times when model
+one loses.
+
+208
+00:15:52,988 --> 00:15:59,797
+That difference is not very significant so
+we wouldn't be confident that model two is
+
+209
+00:15:59,797 --> 00:16:01,540
+better than model one.

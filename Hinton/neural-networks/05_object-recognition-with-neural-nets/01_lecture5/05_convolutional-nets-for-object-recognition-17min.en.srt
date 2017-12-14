@@ -1,0 +1,1228 @@
+1
+00:00:00,000 --> 00:00:04,900
+It was always a question for speculation
+whether the kinds of nets developed for
+
+2
+00:00:04,900 --> 00:00:09,377
+recognizing handwritten digits could
+actually be scaled up to what vision
+
+3
+00:00:09,377 --> 00:00:13,008
+people call a real task.
+That is, recognizing objects in high
+
+4
+00:00:13,008 --> 00:00:16,154
+resolution color images when the scene is
+cluttered.
+
+5
+00:00:16,154 --> 00:00:20,571
+So that you have to do things like
+segmentation, you have to deal with 3D
+
+6
+00:00:20,571 --> 00:00:23,233
+viewpoint, you have to deal with 5-foot
+list.
+
+7
+00:00:23,233 --> 00:00:28,254
+Many different objects surrounding, you're
+not quite sure which is the intended one,
+
+8
+00:00:28,254 --> 00:00:32,218
+and so on.
+Since the start of this course, we've got
+
+9
+00:00:32,218 --> 00:00:37,147
+some interesting new results on that.
+So in my first lecture, I described the
+
+10
+00:00:37,147 --> 00:00:42,011
+network developed by Alex Krizhevsky and
+showed that it was good at object
+
+11
+00:00:42,011 --> 00:00:44,929
+recognition.
+But at that point it hadn't been
+
+12
+00:00:44,929 --> 00:00:48,366
+benchmarked against the best computer
+vision systems,
+
+13
+00:00:48,366 --> 00:00:52,211
+Now it has.
+People worked on Emenise for many years,
+
+14
+00:00:52,211 --> 00:00:58,200
+gradually improving their ability of these
+networks to recognize handwritten digits.
+
+15
+00:00:58,980 --> 00:01:04,339
+Many computer vision researchers thought
+this was a waste of time if you wanted to
+
+16
+00:01:04,339 --> 00:01:09,698
+be able to recognize real objects in color
+images, because they thought the lessons
+
+17
+00:01:09,698 --> 00:01:13,637
+learned from Emnise would not generalize
+to that domain.
+
+18
+00:01:13,637 --> 00:01:16,478
+That was a fairly reasonable thing to
+think.
+
+19
+00:01:16,478 --> 00:01:20,546
+Here's a number of reasons why it's a much
+more difficult task.
+
+20
+00:01:20,546 --> 00:01:24,614
+First of all, there's many, many more
+different kinds of objects.
+
+21
+00:01:24,614 --> 00:01:29,263
+Even if we only recognize a thousand
+classes, that's still a factor of a
+
+22
+00:01:29,263 --> 00:01:34,149
+hundred.
+Secondly there is many more pixels even if
+
+23
+00:01:34,149 --> 00:01:41,825
+we use trans sampled images that are only
+256 by 256 with color pixels that's still
+
+24
+00:01:41,825 --> 00:01:47,576
+100 or 300 times of many pixels Another
+factor is that in real scenes you have to
+
+25
+00:01:47,576 --> 00:01:51,929
+deal with the fact you've got a two
+dimensional image of a three dimensional
+
+26
+00:01:51,929 --> 00:01:54,529
+reality so a lot of information is being
+lost.
+
+27
+00:01:54,529 --> 00:01:58,655
+And real scenes have clutter of a kind
+that doesn't occur in handwriting.
+
+28
+00:01:58,655 --> 00:02:03,347
+In handwriting you can have overlapping
+letters and that requires segmentation but
+
+29
+00:02:03,347 --> 00:02:07,813
+you don't have things like occlusion of
+large parts of objects by opaque other
+
+30
+00:02:07,813 --> 00:02:10,470
+objects.
+You don't have many different kinds of
+
+31
+00:02:10,470 --> 00:02:14,298
+objects in the same scene.
+And you don't have a little lighting
+
+32
+00:02:14,298 --> 00:02:19,642
+variations that you get in real scenes.
+So the question is will the same kind of
+
+33
+00:02:19,642 --> 00:02:25,486
+convolution neural network that proved to
+be so good on recognizing hand written
+
+34
+00:02:25,486 --> 00:02:31,615
+digits work for real color images In the
+domain of real color images we probably do
+
+35
+00:02:31,615 --> 00:02:37,321
+need to wire in some prior knowledge.
+Because, if we try and do it in the sera
+
+36
+00:02:37,321 --> 00:02:43,101
+san way with no knowledge wired in,
+putting in all the knowledge by generating
+
+37
+00:02:43,101 --> 00:02:47,555
+extra training examples.
+The computational problem is still too
+
+38
+00:02:47,555 --> 00:02:51,810
+large for current computers.
+So there was a recent competition.
+
+39
+00:02:51,810 --> 00:02:59,300
+And it was on a data base called ImageNet.
+ImageNet actually has many more than a
+
+40
+00:02:59,300 --> 00:03:04,559
+machine images but a subset of 1.2
+millimeters was chosen and the
+
+41
+00:03:04,559 --> 00:03:09,021
+classification task was to correctly label
+those images.
+
+42
+00:03:09,021 --> 00:03:15,359
+Now the images were hand labelled with a
+thousand different classes but this wasn't
+
+43
+00:03:15,359 --> 00:03:18,462
+very reliable.
+There could be an image that has two of
+
+44
+00:03:18,462 --> 00:03:22,542
+those thousand different objects in it and
+only one of them is labeled.
+
+45
+00:03:22,542 --> 00:03:27,139
+So, to make the task feasible the computer
+vision system is allowed to make five
+
+46
+00:03:27,139 --> 00:03:29,667
+bets.
+And it's set to get it right if one of
+
+47
+00:03:29,667 --> 00:03:33,690
+those bets corresponds to the label that a
+person has given the image.
+
+48
+00:03:33,690 --> 00:03:38,325
+There's also a localization task.
+The reason for the localization task is
+
+49
+00:03:38,325 --> 00:03:42,453
+that many computer vision systems use a
+bag of features approach.
+
+50
+00:03:42,453 --> 00:03:47,723
+For the whole image or for say, a quadrant
+of the image they know what the features
+
+51
+00:03:47,723 --> 00:03:52,735
+are, but they don't know where they are.
+This allows them to recognize objects but
+
+52
+00:03:52,735 --> 00:03:57,316
+without knowing exactly where they are.
+That's very unlike how people behave
+
+53
+00:03:57,316 --> 00:04:02,430
+except people with a curious kind of brain
+damage called balance syndrome where they
+
+54
+00:04:02,430 --> 00:04:05,619
+can recognize objects and not be sure
+where they are.
+
+55
+00:04:05,619 --> 00:04:10,553
+So for the localization task you have to
+place a box around an object once you've
+
+56
+00:04:10,553 --> 00:04:15,607
+recognized it and to get it right your box
+must have at least a 50% overlap with the
+
+57
+00:04:15,607 --> 00:04:19,155
+correct box.
+On this task, people tried some of the
+
+58
+00:04:19,155 --> 00:04:24,806
+best existing computer vision methods.
+So, leading groups from Oxford and the
+
+59
+00:04:24,806 --> 00:04:30,532
+French National Research Labs Inria and
+Xerox's European Research Center and
+
+60
+00:04:30,532 --> 00:04:35,960
+various other universities tried this task
+and discovered it's very hard.
+
+61
+00:04:36,900 --> 00:04:42,246
+The computer vision systems typically use
+complicated multi-stage systems.
+
+62
+00:04:42,246 --> 00:04:47,954
+The early stages of these systems are
+typically hand-tuned by optimizing a few
+
+63
+00:04:47,954 --> 00:04:53,156
+parameters using some of the data.
+And, the top stage of these systems is
+
+64
+00:04:53,156 --> 00:04:58,060
+always a learning algorithm.
+But they don't learn all the way through.
+
+65
+00:04:58,060 --> 00:05:02,904
+In the way that a deep neural net does
+when its trained to do back propagation.
+
+66
+00:05:02,904 --> 00:05:07,993
+They don't have end-to-end learning, where
+the parameters used in the early feature
+
+67
+00:05:07,993 --> 00:05:12,899
+detectors are being influenced by how
+useful they are for making final decision
+
+68
+00:05:12,899 --> 00:05:16,210
+about classes.
+So here are some examples from the test
+
+69
+00:05:16,210 --> 00:05:21,656
+set to show you what the data is like.
+You already sow some examples in the first
+
+70
+00:05:21,656 --> 00:05:25,966
+lecture, but here's some more.
+So you can see that it's fairly obvious
+
+71
+00:05:25,966 --> 00:05:29,652
+what the object is in that image, but a
+lot of it's missing.
+
+72
+00:05:29,652 --> 00:05:32,276
+It doesn't have ears, it doesn't have
+legs.
+
+73
+00:05:32,276 --> 00:05:36,837
+The predictions are the un-normalized
+probabilities of Alex Krizhevsky's
+
+74
+00:05:36,837 --> 00:05:40,647
+deep-neural-network.
+And you can see it's confident that, that
+
+75
+00:05:40,647 --> 00:05:45,250
+is a cheetah And if it's not a cheetah, it
+thinks it almost sudden a leopard.
+
+76
+00:05:45,250 --> 00:05:49,292
+It also understands there's other
+possibilities, like a snow leopard, it's
+
+77
+00:05:49,292 --> 00:05:52,283
+the wrong color for a snow leopard, or an
+Egyptian cat.
+
+78
+00:05:52,283 --> 00:05:56,824
+Here's an example the other way around,
+here there's many objects in the image and
+
+79
+00:05:56,824 --> 00:06:00,534
+the object of interest is only a very
+small fraction of the pixels.
+
+80
+00:06:00,534 --> 00:06:04,984
+The network correctly says bullet train.
+But it also has other bets, like subway
+
+81
+00:06:04,984 --> 00:06:08,192
+train or electric locomotive, which are
+presentable bets.
+
+82
+00:06:08,192 --> 00:06:12,833
+If you look at the image, there's lots of
+other things that could be labeled, like
+
+83
+00:06:12,833 --> 00:06:17,301
+the roof which occupies a much larger
+fraction of the image than the train or
+
+84
+00:06:17,301 --> 00:06:20,510
+the pillar that's supporting the roof or
+the pedestrian.
+
+85
+00:06:20,510 --> 00:06:23,386
+Or the large apartment block in the
+background.
+
+86
+00:06:23,569 --> 00:06:28,221
+In these kinds of images you really have
+to be able cope with the fact that there's
+
+87
+00:06:28,221 --> 00:06:32,198
+lots of alternative targets.
+Last image shows a different kind of
+
+88
+00:06:32,198 --> 00:06:34,952
+example where there is no background
+clutter.
+
+89
+00:06:34,952 --> 00:06:39,298
+The object is quite well isolated,
+probably a picture from a catalog or
+
+90
+00:06:39,298 --> 00:06:42,494
+something.
+And the network doesn't get it right for
+
+91
+00:06:42,494 --> 00:06:45,897
+its first bet, but it does get it in its
+top five bets.
+
+92
+00:06:45,897 --> 00:06:49,174
+But here the network isn't confident about
+anything.
+
+93
+00:06:49,174 --> 00:06:54,405
+These are the relative probabilities, and
+the network correctly realizes it doesn't
+
+94
+00:06:54,405 --> 00:06:56,989
+really know.
+And if you look at the other
+
+95
+00:06:56,989 --> 00:06:59,888
+possibilities, they're all perfectly
+plausible.
+
+96
+00:06:59,888 --> 00:07:04,993
+If you screw your eyes up so you can't see
+the image too well, you can see how it
+
+97
+00:07:04,993 --> 00:07:08,082
+might think it was a frying pan or a
+stethoscope.
+
+98
+00:07:08,082 --> 00:07:13,769
+So how did the systems do on this data?
+Here's the error rates for the computer
+
+99
+00:07:13,769 --> 00:07:17,479
+vision systems.
+One thing you'll notice is that the best
+
+100
+00:07:17,479 --> 00:07:22,515
+systems are all very similar.
+So the University of Tokyo managed to get
+
+101
+00:07:22,515 --> 00:07:27,660
+26.1%, and here what I'm doing is just
+reporting the best system from each group.
+
+102
+00:07:27,660 --> 00:07:32,492
+Oxford University, which has a very good
+computer vision group, generally
+
+103
+00:07:32,492 --> 00:07:37,861
+recognized to be possibly the best group
+in Europe, again got in the 26 percents
+
+104
+00:07:37,861 --> 00:07:43,297
+and the French National Research Labs in
+the Xerox Park Center, which are, again, a
+
+105
+00:07:43,297 --> 00:07:48,867
+very good computer vision groups, got 27%.
+So you'll guess from this that it is going
+
+106
+00:07:48,867 --> 00:07:54,169
+to be hard to be 26%, and if you do beat
+26% you're comparable with the very best
+
+107
+00:07:54,169 --> 00:07:58,880
+computer vision systems.
+So Alex Krizhevsky's neural net got
+
+108
+00:07:58,880 --> 00:08:01,463
+sixteen percent error.
+It's a huge gap.
+
+109
+00:08:01,463 --> 00:08:06,974
+Normally, in these competitions you don't
+see big gaps like that.
+
+110
+00:08:06,974 --> 00:08:10,850
+So Alex Krizhevsky's network works like
+this.
+
+111
+00:08:10,850 --> 00:08:15,265
+It's a very deep convolutional neural net
+of the type pioneered by Yann Le Cun was
+
+112
+00:08:15,265 --> 00:08:20,020
+first used for digit recognition and then
+Yann later applied it to recognizing real
+
+113
+00:08:20,020 --> 00:08:22,737
+objects.
+And we're using all the lessons that we
+
+114
+00:08:22,737 --> 00:08:28,001
+learned by Yann's group from [UNKNOWN]
+group and various other groups, developing
+
+115
+00:08:28,001 --> 00:08:30,548
+these deep neural nets for doing real
+vision.
+
+116
+00:08:30,548 --> 00:08:34,964
+It has seven hidden layers, which is
+deeper than usual and that's not counting
+
+117
+00:08:34,964 --> 00:08:38,700
+some of the max-pooling layers.
+The early layers are convolutional.
+
+118
+00:08:38,700 --> 00:08:43,133
+We could probably get away with using just
+local receptive fields, without tying any
+
+119
+00:08:43,133 --> 00:08:47,514
+weights, if we had a much bigger computer.
+But by making them convolutionary, you cut
+
+120
+00:08:47,514 --> 00:08:52,000
+down the parameters a lot, so you cut down
+the amount of training data you need a lot
+
+121
+00:08:52,000 --> 00:08:54,798
+which cuts down the amount of computation
+time a lot.
+
+122
+00:08:54,798 --> 00:08:59,178
+The last two loads were globally connected
+and that's where most of the parameters
+
+123
+00:08:59,178 --> 00:09:01,749
+are.
+I think there's about sixteen million
+
+124
+00:09:01,749 --> 00:09:04,543
+parameters between each pair of those
+layers.
+
+125
+00:09:04,543 --> 00:09:09,572
+What the last two layers are doing is
+looking for combinations of local features
+
+126
+00:09:09,572 --> 00:09:14,850
+that were extracted by the early layers.
+And obviously this commonly tourily many
+
+127
+00:09:14,850 --> 00:09:18,451
+combinations to look for.
+And that's why you need a lot of
+
+128
+00:09:18,451 --> 00:09:21,990
+parameters there.
+The activation functions were rectified
+
+129
+00:09:21,990 --> 00:09:26,398
+linear units in every hidden layer.
+These train much faster than logistic
+
+130
+00:09:26,398 --> 00:09:31,136
+units and they're more expressive.
+Most of the people seriously applying deep
+
+131
+00:09:31,136 --> 00:09:36,266
+in your own networks to real images to the
+object recognition of I switch direct fi
+
+132
+00:09:36,266 --> 00:09:39,732
+linear units.
+We also used competitive normalization,
+
+133
+00:09:39,732 --> 00:09:45,350
+within a layer to suppress the activity of
+a unit, if other units that are looking
+
+134
+00:09:45,350 --> 00:09:50,304
+nearby localities are very active.
+This helps a lot with variations in
+
+135
+00:09:50,304 --> 00:09:53,655
+intensity.
+So, you might have an edge detector, which
+
+136
+00:09:53,655 --> 00:09:57,005
+gets somewhat active due to some fairly
+faint edge.
+
+137
+00:09:57,005 --> 00:10:02,129
+And that's pretty much irrelevant, if
+there is much more intense things around.
+
+138
+00:10:02,129 --> 00:10:07,253
+There's other tricks that we used to
+significantly improve the generalization
+
+139
+00:10:07,253 --> 00:10:10,209
+of this net.
+First of all, we use the trick of
+
+140
+00:10:10,209 --> 00:10:13,100
+enhancing the data by using
+transformations.
+
+141
+00:10:13,440 --> 00:10:18,637
+So here's a skit for down-sampled the
+images in the competition to 256 by 256.
+
+142
+00:10:18,637 --> 00:10:23,835
+But instead of using those whole images
+Alex Krizhevsky took random 224 by 224
+
+143
+00:10:23,835 --> 00:10:28,375
+patches from those images.
+Which gave him hugely more images to train
+
+144
+00:10:28,375 --> 00:10:31,270
+on.
+And helped him deal with translation and
+
+145
+00:10:31,270 --> 00:10:34,428
+variance.
+Even though they're convolutional nets
+
+146
+00:10:34,428 --> 00:10:38,573
+that's still a help.
+He also used left-right reflections of the
+
+147
+00:10:38,573 --> 00:10:41,600
+images, which again doubled the amount of
+data.
+
+148
+00:10:41,600 --> 00:10:45,944
+He didn't use up dime reflections.
+Because, gravity's very important.
+
+149
+00:10:45,944 --> 00:10:51,004
+Left right reflections don't really change
+what things look like much unless they're
+
+150
+00:10:51,004 --> 00:10:54,398
+things like writing.
+At test time, he doesn't just use one
+
+151
+00:10:54,398 --> 00:10:57,255
+patch.
+He uses a number of different patches, the
+
+152
+00:10:57,255 --> 00:11:02,018
+four corners, the middle, that gives him
+five, and then the left right reflections
+
+153
+00:11:02,018 --> 00:11:06,304
+of all those, that gives him ten.
+He runs all ten through the network and
+
+154
+00:11:06,304 --> 00:11:10,174
+then combines their opinions.
+In the top layers, where most of the
+
+155
+00:11:10,174 --> 00:11:14,341
+parameters are, he uses a new
+regularization technique, called drop-out,
+
+156
+00:11:14,341 --> 00:11:18,157
+which is very effective.
+And stops the network over fitting.
+
+157
+00:11:18,157 --> 00:11:21,160
+That's worth several percent in his
+results.
+
+158
+00:11:21,160 --> 00:11:25,710
+I'll describe drop pouch at some length in
+the later lecture.
+
+159
+00:11:25,710 --> 00:11:30,568
+But for now, the basic idea of drop out is
+that each time you present a training
+
+160
+00:11:30,568 --> 00:11:33,726
+example, you omit half the hidden units
+from a layer.
+
+161
+00:11:33,726 --> 00:11:38,645
+This means that the other hidden units in
+that layer, the survivors, can't rely on
+
+162
+00:11:38,645 --> 00:11:43,442
+the their com rates being present.
+They can't learn to fix up the errors left
+
+163
+00:11:43,442 --> 00:11:48,179
+over by the other hidden units in that
+layer, cuz the other hidden units might
+
+164
+00:11:48,179 --> 00:11:52,188
+not be there no matter be fixing up an
+error that doesn't exist.
+
+165
+00:11:52,188 --> 00:11:57,350
+So they have to become more individualist.
+They have to individually do useful things
+
+166
+00:11:57,350 --> 00:12:02,224
+but they still have to do useful things
+that are different from what the other
+
+167
+00:12:02,224 --> 00:12:05,247
+survivors do.
+So drop out is stopping too much
+
+168
+00:12:05,247 --> 00:12:10,661
+cooperation between the hidden units.
+And a lot of cooperation is very good for
+
+169
+00:12:10,661 --> 00:12:14,584
+fitting the training data.
+But if the test distribution is
+
+170
+00:12:14,584 --> 00:12:18,926
+significantly different, then all that
+cooperation causes over-fitting.
+
+171
+00:12:18,926 --> 00:12:23,888
+Alex couldn't have done this work without
+significant hardware, but the hardware
+
+172
+00:12:23,888 --> 00:12:28,602
+only costs a few thousand dollars now.
+Alex is a very good programmer, and he
+
+173
+00:12:28,602 --> 00:12:33,750
+used a very efficient implementation of
+convolution and neural nets on two Invidia
+
+174
+00:12:33,750 --> 00:12:37,906
+GTX 580 graphics processors.
+Each of these has over 500 fast little
+
+175
+00:12:37,906 --> 00:12:42,619
+cores, which are very good at doing
+arithmetic and not much good at anything
+
+176
+00:12:42,619 --> 00:12:45,869
+else.
+The GP use are very good at doing matrix,
+
+177
+00:12:45,869 --> 00:12:49,803
+matrix multiplies.
+So if you stack together the vector of
+
+178
+00:12:49,803 --> 00:12:54,370
+activities of a hidden layer, over many
+training cases, that gives you a matrix.
+
+179
+00:12:54,370 --> 00:12:58,996
+And now you multiply that by matrix of
+weights to figure out the activities in
+
+180
+00:12:58,996 --> 00:13:01,983
+the next hidden layer for all those
+training cases.
+
+181
+00:13:01,983 --> 00:13:06,140
+And if both those matrices are big, the
+GPU's give you a huge advantage.
+
+182
+00:13:06,140 --> 00:13:10,159
+They give you about a factor of 30.
+They also have very high bandwidth to
+
+183
+00:13:10,159 --> 00:13:14,410
+memory, and that's needed for neural nets.
+Cause in neural nets you keep wanting to
+
+184
+00:13:14,410 --> 00:13:17,676
+know another weight so that you can
+multiply it by an activity.
+
+185
+00:13:17,676 --> 00:13:21,720
+And there's millions of these weights, so
+you can't keep them all in the cache.
+
+186
+00:13:22,300 --> 00:13:28,750
+Using all that hard brac, he could train
+his final network, in a week.
+
+187
+00:13:28,750 --> 00:13:33,075
+And you could also combine results from
+ten, ten different patches of TestTime
+
+188
+00:13:33,075 --> 00:13:36,124
+very quickly.
+So Test Time you can run it at just about
+
+189
+00:13:36,124 --> 00:13:39,229
+the frame rate.
+In the future we are going to be able to
+
+190
+00:13:39,229 --> 00:13:42,390
+spread this kind of network over a large
+number of calls.
+
+191
+00:13:42,390 --> 00:13:46,660
+As calls become cheaper, people at Google
+are already experimenting with that.
+
+192
+00:13:46,660 --> 00:13:51,318
+And if we can communicate the stakes fast
+enough we are going to be able to do much
+
+193
+00:13:51,318 --> 00:13:55,643
+bigger networks on many more calls.
+Google has already simulated networks with
+
+194
+00:13:55,643 --> 00:13:59,580
+1.7 billion connections and I think that
+it's only going to get bigger.
+
+195
+00:14:01,320 --> 00:14:06,417
+As the cores get cheaper and the data sets
+get bigger, these big deep neural nets are
+
+196
+00:14:06,417 --> 00:14:10,794
+gonna improve much faster than the
+old-fashioned computer vision systems,
+
+197
+00:14:10,794 --> 00:14:15,411
+because they don't involve much hand
+engineering, and they can make very good
+
+198
+00:14:15,411 --> 00:14:18,650
+use of huge data sets and huge amounts of
+computation.
+
+199
+00:14:18,650 --> 00:14:24,595
+So the fact that we've already opened up a
+big gap I think means there's no looking
+
+200
+00:14:24,595 --> 00:14:27,781
+back.
+I think from now on all the best object
+
+201
+00:14:27,781 --> 00:14:33,160
+recognition systems, at least of static
+images, will use big deep neural nets.
+
+202
+00:14:33,160 --> 00:14:39,106
+There are other application domains where
+we've learned the same lesson so Vladimir
+
+203
+00:14:39,106 --> 00:14:43,416
+Nee.
+Used a net with local fields but without
+
+204
+00:14:43,416 --> 00:14:48,129
+convolution to extract roads from aerial
+images.
+
+205
+00:14:48,129 --> 00:14:53,040
+These are cluttered aerial images of urban
+scenes.
+
+206
+00:14:53,040 --> 00:14:57,167
+Again he uses multiple layers of rectified
+linear units.
+
+207
+00:14:57,167 --> 00:15:02,991
+And he takes a relatively large image
+patch, and predicts for the central 16x16
+
+208
+00:15:02,991 --> 00:15:08,740
+pixels whether each of those pixels is a
+piece of road or not a piece of road.
+
+209
+00:15:08,740 --> 00:15:14,342
+The nice thing about this task is that
+there's a lot of label training data
+
+210
+00:15:14,342 --> 00:15:18,518
+available.
+That's because maps tell you where the
+
+211
+00:15:18,518 --> 00:15:22,332
+centre lines of roads are and roads are
+roughly fixed width.
+
+212
+00:15:22,332 --> 00:15:27,544
+So from the vectors in the map that tell
+you where the centre line of the road is
+
+213
+00:15:27,544 --> 00:15:30,595
+you can estimate which pixels are probably
+road.
+
+214
+00:15:30,595 --> 00:15:34,980
+Nevertheless, the task is very hard.
+There's the normal kind of vision
+
+215
+00:15:34,980 --> 00:15:39,684
+problems: so roads are occluded by
+buildings because a plane isn't looking
+
+216
+00:15:39,684 --> 00:15:42,417
+straight down when it takes the
+photograph.
+
+217
+00:15:42,417 --> 00:15:46,548
+They're occluded by trees.
+They're also occluded by cars that are
+
+218
+00:15:46,548 --> 00:15:50,597
+sitting on the road.
+The shadow effects from building, the
+
+219
+00:15:50,597 --> 00:15:55,338
+major lighting changes depending on
+whether it's a sunny day or a cloudy day
+
+220
+00:15:55,338 --> 00:15:58,355
+for example and there's minor view point
+changes.
+
+221
+00:15:58,355 --> 00:16:03,034
+So the plane is basically looking
+downwards, but in any large photo it can't
+
+222
+00:16:03,034 --> 00:16:05,804
+be looking straight downwards at every
+pixel.
+
+223
+00:16:05,804 --> 00:16:09,313
+The worst problems in this data are the
+incorrect labels.
+
+224
+00:16:09,313 --> 00:16:13,623
+You get incorrect labels because the maps
+aren't perfectly registered.
+
+225
+00:16:13,623 --> 00:16:18,610
+For most purposes, you don't need a map to
+be registered better than a few meters.
+
+226
+00:16:18,610 --> 00:16:21,953
+The pixels are about one meter square in
+this data.
+
+227
+00:16:21,953 --> 00:16:27,263
+And so if the registration of the map is
+off by three meters, you're going to get
+
+228
+00:16:27,263 --> 00:16:31,459
+at least three of the labels wrong for
+pixels, across every road.
+
+229
+00:16:31,459 --> 00:16:36,507
+Another, severe problem, is that the
+people making maps have to make arbitrary
+
+230
+00:16:36,507 --> 00:16:40,900
+decisions about what counts as a road and
+what counts as a laneway.
+
+231
+00:16:41,200 --> 00:16:45,947
+So, in may of the maps, you look at
+something, and you've no idea whether
+
+232
+00:16:45,947 --> 00:16:49,557
+that's gonna be considered to be a road or
+a lane-way.
+
+233
+00:16:49,557 --> 00:16:54,104
+And so you simply don't know what label
+it's gonna get from the map.
+
+234
+00:16:54,104 --> 00:16:59,185
+Big neural nets trained on big image
+patches, using millions of examples, are,
+
+235
+00:16:59,185 --> 00:17:03,264
+I think, the only real hope for doing a
+good job at this task.
+
+236
+00:17:03,264 --> 00:17:06,340
+It's very hard to find out what people can
+do.
+
+237
+00:17:06,340 --> 00:17:10,566
+So, here is what the data looks like.
+This is a part of Toronto.
+
+238
+00:17:10,566 --> 00:17:14,929
+If you know Toronto, you can tell that by
+the angle of the roads.
+
+239
+00:17:14,929 --> 00:17:20,111
+And, above the image of the part of
+Toronto, I put two patches extracted from
+
+240
+00:17:20,111 --> 00:17:23,656
+that image.
+And if you look at those patches, you can
+
+241
+00:17:23,656 --> 00:17:27,405
+see it's not trivial to tell which the
+road pixels are.
+
+242
+00:17:27,405 --> 00:17:30,746
+On the right, is the output of [UNKNOWN]
+system.
+
+243
+00:17:30,746 --> 00:17:36,336
+Green is correctly identified pixels of
+road, and red means things that his system
+
+244
+00:17:36,336 --> 00:17:39,200
+thought might be road, but actually
+aren't.
+
+245
+00:17:39,200 --> 00:17:43,471
+Actually that thing is a parking lot but
+you can see why he might have thought it
+
+246
+00:17:43,471 --> 00:17:44,045
+was a road.

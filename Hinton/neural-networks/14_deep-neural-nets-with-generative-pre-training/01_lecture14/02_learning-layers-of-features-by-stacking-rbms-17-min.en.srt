@@ -1,0 +1,1128 @@
+1
+00:00:00,000 --> 00:00:06,348
+In this video, I'll talk about a 
+different way of learning sigmoid belief 
+
+2
+00:00:06,348 --> 00:00:09,179
+notes. 
+This different method arrived in an 
+
+3
+00:00:09,179 --> 00:00:12,772
+unexpected way. 
+I stopped working on sigmoid belief nets 
+
+4
+00:00:12,772 --> 00:00:17,455
+and went back to Boltzmann machines. 
+And discovered that restricted Boltz 
+
+5
+00:00:17,455 --> 00:00:20,919
+machines could actually be learned fairly 
+efficiently. 
+
+6
+00:00:20,919 --> 00:00:25,923
+Given that a restricted Boltzmann machine 
+could efficiently learn a layer of 
+
+7
+00:00:25,923 --> 00:00:30,927
+nonlinear features. It was tempting to 
+take those features, treat them as data, 
+
+8
+00:00:30,927 --> 00:00:35,417
+and apply another restricted Boltzmann 
+machine to model the correlations between 
+
+9
+00:00:35,417 --> 00:00:39,293
+those features. 
+And one can continue like this, stacking 
+
+10
+00:00:39,293 --> 00:00:44,459
+one Boltzmann machine on top of the next 
+one to learn lots of layers of nonlinear 
+
+11
+00:00:44,459 --> 00:00:47,508
+features. 
+This eventually led to a big resurgence 
+
+12
+00:00:47,508 --> 00:00:52,544
+of interest in deep neural nets. 
+The issue then arose. Once you stacked up 
+
+13
+00:00:52,544 --> 00:00:57,910
+lots of restricted Boltzmann machines, 
+each which is learned by modeling the 
+
+14
+00:00:57,910 --> 00:01:02,935
+patterns of future activities produced by 
+the previous Boltzmann machines. 
+
+15
+00:01:02,935 --> 00:01:08,233
+Do you just have a set of separate 
+restricted Boltzmann machines or can they 
+
+16
+00:01:08,233 --> 00:01:13,318
+all be combined together into one model? 
+Now, anybody sensible would expect that 
+
+17
+00:01:13,318 --> 00:01:17,932
+if you combined a set of restricted 
+Boltzmann machines together to make one 
+
+18
+00:01:17,932 --> 00:01:21,697
+model, what you'd get would be a 
+multilayer Boltzmann machine. 
+
+19
+00:01:21,697 --> 00:01:25,097
+However, a brilliant graduate student of 
+mine called G.Y. 
+
+20
+00:01:25,097 --> 00:01:27,829
+Tay, figured out that that's not what you 
+get. 
+
+21
+00:01:27,829 --> 00:01:32,322
+You actually get something that looks 
+much more like a sigmoid belief net. 
+
+22
+00:01:32,322 --> 00:01:36,263
+This was a big surprise. 
+It was very surprising to me that we'd 
+
+23
+00:01:36,263 --> 00:01:41,293
+actually solved the problem of how to 
+learn deep sigmoid belief nets by giving 
+
+24
+00:01:41,293 --> 00:01:45,559
+up on it and focusing on learning 
+undirected models like Boltzmann 
+
+25
+00:01:45,559 --> 00:01:48,615
+machines. 
+Using the efficient learning algorithm 
+
+26
+00:01:48,615 --> 00:01:53,942
+for restricted Boltzmann machines. 
+It's easy to train a layer of features 
+
+27
+00:01:53,942 --> 00:01:57,510
+that receive input directly from the 
+pixels. 
+
+28
+00:01:57,510 --> 00:02:03,093
+We can treat the patterns of activation 
+of those feature detectors as if they 
+
+29
+00:02:03,093 --> 00:02:06,888
+were pixels, 
+and learn another layer of features in a 
+
+30
+00:02:06,888 --> 00:02:11,171
+second hidden layer. 
+We can repeat this as many times as we 
+
+31
+00:02:11,171 --> 00:02:16,873
+like with each new layer of features 
+modelling the correlated activity in the 
+
+32
+00:02:16,873 --> 00:02:21,802
+features in the layer below. 
+It can be proved that each time we add 
+
+33
+00:02:21,802 --> 00:02:26,608
+another layer of features, we improve a 
+variational lower bound on the log 
+
+34
+00:02:26,608 --> 00:02:30,679
+probability that some combined model 
+would generate the data. 
+
+35
+00:02:30,679 --> 00:02:36,019
+The proof is actually complicated, and it 
+only applies if you do everything just 
+
+36
+00:02:36,019 --> 00:02:38,488
+right, 
+which you don't do in practice. 
+
+37
+00:02:38,488 --> 00:02:43,027
+But, the proof is very reassuring, 
+because it suggests that something 
+
+38
+00:02:43,027 --> 00:02:48,300
+sensible is going on when you stack up 
+restricted Boltzmann machines like this. 
+
+39
+00:02:48,300 --> 00:02:54,373
+The proof is based on a neat equivalence 
+between a restricted bolson machine and 
+
+40
+00:02:54,373 --> 00:02:59,537
+an infinitely deep belief net. 
+So here's a picture of what happens when 
+
+41
+00:02:59,537 --> 00:03:04,275
+you learn two restricted Boltzmann 
+machines, one on top of the other, 
+
+42
+00:03:04,275 --> 00:03:09,781
+and then you combine them to make one 
+overall model, which I call a deep belief 
+
+43
+00:03:09,781 --> 00:03:13,312
+net. 
+So first we learn one Boltzmann machine 
+
+44
+00:03:13,312 --> 00:03:17,273
+with its own weights. 
+Once that's been trained, we take the 
+
+45
+00:03:17,273 --> 00:03:22,191
+hidden activity patterns of that 
+Boltzmann machine when it's looking at 
+
+46
+00:03:22,191 --> 00:03:27,450
+data and we treat each hidden activity 
+pattern as data for training a second 
+
+47
+00:03:27,450 --> 00:03:31,836
+Boltzmann machine. 
+So we just copy the binary states to the 
+
+48
+00:03:31,836 --> 00:03:36,709
+second Boltzmann machine, and then we 
+learn another Boltzmann machine. 
+
+49
+00:03:36,709 --> 00:03:42,219
+Now one interesting thing about this, is 
+that if we start the second Boltzmann 
+
+50
+00:03:42,219 --> 00:03:47,799
+machine off with W2 being the transpose 
+of W1, and with as many hidden units in 
+
+51
+00:03:47,799 --> 00:03:52,955
+h2 as there are in v, then the second 
+Boltzmann machine will already be a 
+
+52
+00:03:52,955 --> 00:03:57,546
+pretty good model of h1, 
+because it's just the first model upside 
+
+53
+00:03:57,546 --> 00:04:00,495
+down. 
+And for a restricted Boltzmann machine, 
+
+54
+00:04:00,495 --> 00:04:04,399
+it doesn't really care which you call 
+visible and which you call hidden. 
+
+55
+00:04:04,399 --> 00:04:07,700
+It's just a bipartite graph that's 
+learned to model. 
+
+56
+00:04:07,700 --> 00:04:12,949
+After we've learned those two Boltzmann 
+machines, we're going to compose them 
+
+57
+00:04:12,949 --> 00:04:18,520
+together to form a single model and the 
+single model looks like this. 
+
+58
+00:04:18,520 --> 00:04:24,870
+Its top two layers adjust the same as the 
+top restricted Boltzmann machine. 
+
+59
+00:04:24,870 --> 00:04:29,966
+So that's an undirected model with 
+symmetric connections, but its bottom two 
+
+60
+00:04:29,966 --> 00:04:33,587
+layers are a directed model like a 
+sigmoid belief net. 
+
+61
+00:04:33,587 --> 00:04:38,750
+So what we've done is we've taken the 
+symmetric connections between v and h1 
+
+62
+00:04:38,750 --> 00:04:44,181
+and we've thrown away the upgoing part of 
+those and just kept the dangering part. 
+
+63
+00:04:44,181 --> 00:04:49,113
+To understand why we've done that is 
+quite complicated and that will be 
+
+64
+00:04:49,113 --> 00:04:53,723
+explained in video 13F. 
+The resulting combined model is clearly 
+
+65
+00:04:53,723 --> 00:04:58,991
+not a Boltzmann machine, because its 
+bottom layer of connections are not 
+
+66
+00:04:58,991 --> 00:05:02,503
+symmetric. 
+It's a graphical model that we call a 
+
+67
+00:05:02,503 --> 00:05:08,430
+deep belief net, where the lower layers 
+are just like sigmoid belief nets and the 
+
+68
+00:05:08,430 --> 00:05:12,161
+top two layers form a restricted 
+Boltzmann machine. 
+
+69
+00:05:12,161 --> 00:05:16,959
+So it's a kind of hybrid model. 
+If we do it with three Boltzmann machines 
+
+70
+00:05:16,959 --> 00:05:20,391
+stacked up, we'll get a hybrid model that 
+looks like this. 
+
+71
+00:05:20,391 --> 00:05:25,269
+The top two layers again are a restricted 
+Boltzmann machine and the layers below 
+
+72
+00:05:25,269 --> 00:05:28,040
+are directed layers like in a sigmoid 
+belief net. 
+
+73
+00:05:29,300 --> 00:05:34,060
+To generate data from this model the 
+correct procedure is, 
+
+74
+00:05:34,060 --> 00:05:38,484
+first of all, you go backwards and 
+forwards between h2 and h3 to reach 
+
+75
+00:05:38,484 --> 00:05:42,213
+equilibrium in that top level restricted 
+Boltamann machine. 
+
+76
+00:05:42,213 --> 00:05:47,333
+This involves alternating Gibbs sampling, 
+where you update all of the units in h3 
+
+77
+00:05:47,333 --> 00:05:50,999
+in parallel, and update all of the units 
+in h2 in parallel, 
+
+78
+00:05:50,999 --> 00:05:56,055
+then go back and update all of the units 
+in h3 in parallel. And you go backwards 
+
+79
+00:05:56,055 --> 00:06:00,986
+and forwards like that for a long time 
+until you've got an equilibrium sample 
+
+80
+00:06:00,986 --> 00:06:04,860
+from the top-level restricted Boltamann 
+machine. 
+
+81
+00:06:04,860 --> 00:06:09,796
+So the top-level restricted Bolson 
+machine is defining the prior 
+
+82
+00:06:09,796 --> 00:06:16,030
+distribution of h2. 
+Once you've done that, you simply go once 
+
+83
+00:06:16,030 --> 00:06:21,580
+from h2 to h1 using the generative 
+connections w2. 
+
+84
+00:06:21,580 --> 00:06:28,870
+And then, whatever binary patent you get 
+in h1, you go once more to get generated 
+
+85
+00:06:28,870 --> 00:06:33,807
+data, using the weights w1. 
+So we're performing a top-down pass from 
+
+86
+00:06:33,807 --> 00:06:36,625
+h2, to get the states of all the other 
+layers, 
+
+87
+00:06:36,625 --> 00:06:41,133
+just like in a sigmoid belief net. 
+The bottom-up connections, shown in red 
+
+88
+00:06:41,133 --> 00:06:44,703
+at the lower levels, are not part of the 
+generative model. 
+
+89
+00:06:44,703 --> 00:06:49,274
+They're actually going to be the 
+transposes of the corresponding weights. 
+
+90
+00:06:49,274 --> 00:06:52,718
+So they're the transpose of w1 and the 
+transpose of w2, 
+
+91
+00:06:52,718 --> 00:06:57,164
+and they're going to be used for 
+influence, but they're not part of the 
+
+92
+00:06:57,164 --> 00:07:00,921
+model. 
+Now, before I explain why stacking up 
+
+93
+00:07:00,921 --> 00:07:07,573
+Boltzmann machines is a good idea, I need 
+to sort out what it means to average two 
+
+94
+00:07:07,573 --> 00:07:12,904
+factorial distributions. 
+And it may surprise you to know that if I 
+
+95
+00:07:12,904 --> 00:07:18,300
+average two factorial distributions, I do 
+not get a factorial distribution. 
+
+96
+00:07:18,300 --> 00:07:23,860
+What I mean by averaging here is taking a 
+mixture of the distributions, so you 
+
+97
+00:07:23,860 --> 00:07:29,706
+first pick one of the two at random, and 
+then you generate from whichever one you 
+
+98
+00:07:29,706 --> 00:07:32,273
+picked. 
+So, you don't get a factorial 
+
+99
+00:07:32,273 --> 00:07:36,213
+distribution. 
+Suppose we have an RBM with 4 hidden 
+
+100
+00:07:36,213 --> 00:07:39,310
+units and suppose we give it a visible 
+vector. 
+
+101
+00:07:39,310 --> 00:07:44,225
+And given this visible vector, the 
+posterior distribution over those 4 
+
+102
+00:07:44,225 --> 00:07:48,534
+hidden units is factorial. 
+And lets suppose the distribution was 
+
+103
+00:07:48,534 --> 00:07:53,785
+that the first and second units have a 
+probability of 0.9 of turning on and the 
+
+104
+00:07:53,785 --> 00:07:56,950
+last two have a probability of 0.1 of 
+turning on. 
+
+105
+00:07:56,950 --> 00:08:02,830
+What it means for this to be factorial is 
+that, for example, the probability that 
+
+106
+00:08:02,830 --> 00:08:08,409
+the first two units were both be on in a 
+sample from this distribution, is exactly 
+
+107
+00:08:08,409 --> 00:08:12,103
+0.81. 
+Now suppose we have a different angle 
+
+108
+00:08:12,103 --> 00:08:18,285
+vector v2, and the posterior distribution 
+over the same 4 hidden units is now 0.1, 
+
+109
+00:08:18,285 --> 00:08:22,055
+0.1, 0.9, 0.9, which I chose just to make 
+the math easy. 
+
+110
+00:08:22,055 --> 00:08:28,215
+If we average those two distributions, 
+the mean probability of each hidden unit 
+
+111
+00:08:28,215 --> 00:08:33,521
+being on, is indeed, the average of the 
+means for each distribution. 
+
+112
+00:08:33,521 --> 00:08:38,666
+So the means are 0.5, 0.5, 0.5, 0.5, 
+but what you get is not a factorial 
+
+113
+00:08:38,666 --> 00:08:42,605
+distribution defined by those 4 
+probabilities. 
+
+114
+00:08:42,605 --> 00:08:47,910
+To see that, consider the binary vector 
+1, 1, 0, 0 over the hidden units. 
+
+115
+00:08:47,910 --> 00:08:54,262
+In the posterior for v1, 
+that has a probability of 0.9^4, because 
+
+116
+00:08:54,262 --> 00:09:00,988
+it's 0.9 * 0.9 * 1 - 0.1 * 1 - 0.1. 
+So that's 0.43. 
+
+117
+00:09:00,988 --> 00:09:06,112
+In the posterior for v2, this vector is 
+extremely unlikely. 
+
+118
+00:09:06,112 --> 00:09:13,179
+It has a probability of 1 in 10,000. 
+If we average those two probabilities for 
+
+119
+00:09:13,179 --> 00:09:17,950
+that particular vector, we'll get a 
+probability of 0.215, 
+
+120
+00:09:17,950 --> 00:09:22,830
+and that's much bigger than the 
+probability assigned to the vector 1, 1, 
+
+121
+00:09:22,830 --> 00:09:26,254
+0, 0 by factorial distribution with means 
+of 0.5. 
+
+122
+00:09:26,254 --> 00:09:31,354
+That probability will be 0.5^4, which is 
+much smaller. 
+
+123
+00:09:31,354 --> 00:09:37,109
+So, the point of all this, is that when 
+you average two factorial posteriors, you 
+
+124
+00:09:37,109 --> 00:09:40,606
+get a mixture distribution that's not 
+factorial. 
+
+125
+00:09:40,606 --> 00:09:44,467
+Now, let's look at why the greedy 
+learning works. 
+
+126
+00:09:44,467 --> 00:09:49,640
+That is why it's a good idea to learn one 
+restricted Boltzmann machine. 
+
+127
+00:09:49,640 --> 00:09:53,444
+And then learn a second restricted 
+Boltzmann machine that models the 
+
+128
+00:09:53,444 --> 00:09:56,643
+patterns of activity in the hidden units 
+of the first one. 
+
+129
+00:09:56,643 --> 00:10:00,503
+The weights of the bottom level 
+restricted Boltzmann machine, actually 
+
+130
+00:10:00,503 --> 00:10:04,253
+define four different distributions. 
+Of course, they define them in a 
+
+131
+00:10:04,253 --> 00:10:06,900
+consistent way. 
+So the first distribution is the 
+
+132
+00:10:06,900 --> 00:10:09,988
+probability of the visible units given 
+the hidden units. 
+
+133
+00:10:09,988 --> 00:10:14,510
+And the second one is the probability of 
+the hidden units given the visible units. 
+
+134
+00:10:14,510 --> 00:10:18,950
+And those are the two distributions we 
+use for running our alternating mark of 
+
+135
+00:10:18,950 --> 00:10:23,391
+chain that updates the visibles given the 
+hiddens and then updates the hiddens 
+
+136
+00:10:23,391 --> 00:10:27,544
+given the visibles. 
+If we run that chain long enough, we'll 
+
+137
+00:10:27,544 --> 00:10:30,671
+get a sample from the joint distribution 
+of v and h. 
+
+138
+00:10:30,671 --> 00:10:34,398
+And so the weights clearly also define 
+the joint distribution. 
+
+139
+00:10:34,398 --> 00:10:39,268
+They also define the joint distribution 
+more directly in terms of E to the minus 
+
+140
+00:10:39,268 --> 00:10:42,175
+the energy, 
+but for nets with a large number of 
+
+141
+00:10:42,175 --> 00:10:46,104
+units, we can't compute that. 
+If you take the joint distribution, 
+
+142
+00:10:46,104 --> 00:10:50,095
+p(v|h), and you just ignore v, we now a 
+distribution for h. 
+
+143
+00:10:50,095 --> 00:10:54,711
+That's the prior distribution over h, 
+defined by this restricted Boltzmann 
+
+144
+00:10:54,711 --> 00:10:57,517
+machine. 
+And similarly, if we ignore h, we have 
+
+145
+00:10:57,517 --> 00:11:02,132
+the prior distribution over v, defined by 
+the restricted Boltzmann machine. 
+
+146
+00:11:02,132 --> 00:11:06,560
+And now, we're going to pick a rather 
+surprising pair of distributions from 
+
+147
+00:11:06,560 --> 00:11:10,783
+those four distributions. 
+We're going to define the probability 
+
+148
+00:11:10,783 --> 00:11:16,450
+that the restricted Boltzmann machine 
+assigns to a visible vector v as the sum 
+
+149
+00:11:16,450 --> 00:11:22,100
+over all hidden vectors of the 
+probability it assigns to h times the 
+
+150
+00:11:22,100 --> 00:11:27,095
+probability of v given h. 
+This seems like a silly thing to do, 
+
+151
+00:11:27,095 --> 00:11:31,762
+because defining p(h) is just as hard as 
+defining p(v). 
+
+152
+00:11:31,762 --> 00:11:36,102
+And nevertheless, we're going to define 
+p(v) that way. 
+
+153
+00:11:36,102 --> 00:11:42,227
+Now, if we now leave p(v|h) alone, 
+but learn a better model of p(h), 
+
+154
+00:11:42,227 --> 00:11:48,315
+that is, learn some new parameters that 
+give us a better model of p(h) and 
+
+155
+00:11:48,315 --> 00:11:53,139
+substitute that in instead of the old 
+model we had of p(h). 
+
+156
+00:11:53,139 --> 00:11:59,543
+We'll actually improve our model of v. 
+And what we mean by a better model of 
+
+157
+00:11:59,543 --> 00:12:04,446
+p(h) is a prior over h that fits the 
+aggregated posterior better. 
+
+158
+00:12:04,446 --> 00:12:10,771
+The aggregated posterior is the average 
+over all vectors in the training set of 
+
+159
+00:12:10,771 --> 00:12:17,727
+the posterior distribution over h. 
+So, what we're going to do, is use our 
+
+160
+00:12:17,727 --> 00:12:24,360
+first RBM to get this aggregated 
+posterior and then use our second RBM to 
+
+161
+00:12:24,360 --> 00:12:30,200
+build a better model of this aggregated 
+posterior than the first RBM has. 
+
+162
+00:12:30,200 --> 00:12:35,936
+And if we start the second RBM off as the 
+first one upside down, it will start with 
+
+163
+00:12:35,936 --> 00:12:40,359
+the same model of the aggregated 
+posterior as the first RBM has. 
+
+164
+00:12:40,359 --> 00:12:44,851
+And then, if we change the weights we can 
+only make things better. 
+
+165
+00:12:44,851 --> 00:12:49,481
+So, that's an explanation of what's 
+happening when we stack up RBMs. 
+
+166
+00:12:49,481 --> 00:12:55,010
+Once we've learned to stack up Boltzmann 
+machines, then combine them together to 
+
+167
+00:12:55,010 --> 00:12:59,374
+make a deep belief net, 
+we can then actually fine-tune the whole 
+
+168
+00:12:59,374 --> 00:13:03,570
+composite model using a variation of the 
+wake-sleep algorithm. 
+
+169
+00:13:03,570 --> 00:13:08,590
+So we first learn many layers of features 
+by stacking up IBMs. 
+
+170
+00:13:08,590 --> 00:13:14,263
+And then we want to fine-tune both the 
+bottom-up recognition weights and the 
+
+171
+00:13:14,263 --> 00:13:19,237
+top-down generative weights to get a 
+better generative model and we can do 
+
+172
+00:13:19,237 --> 00:13:22,459
+this by using three different learning 
+routes. 
+
+173
+00:13:22,459 --> 00:13:27,922
+First, we do a stochastic bottom-up pass, 
+and we adjust the top down generative 
+
+174
+00:13:27,922 --> 00:13:33,736
+weights of the lower layers to be good at 
+reconstructing the feature activities in 
+
+175
+00:13:33,736 --> 00:13:37,799
+the layer below. 
+That's just as in the standard wake-sleep 
+
+176
+00:13:37,799 --> 00:13:43,866
+algorithm Then, in the top level RBM, we 
+go backwards and forwards a few times, 
+
+177
+00:13:43,866 --> 00:13:49,555
+sampling the hiddens of that RBM, and the 
+visibles of that RBM, and the hiddens of 
+
+178
+00:13:49,555 --> 00:13:54,085
+the RBM, and so on. 
+So that's just like the learning 
+
+179
+00:13:54,085 --> 00:13:58,531
+algorithm for RBMs. 
+And having done a few iterations of that, 
+
+180
+00:13:58,531 --> 00:14:04,310
+we do contrastive divergence learning. 
+That is, we update the weights of the RBM 
+
+181
+00:14:04,310 --> 00:14:09,720
+using the difference between the 
+correlations when activity first got to 
+
+182
+00:14:09,720 --> 00:14:14,536
+that RBM and the correlations after a few 
+iterations in that RBM. 
+
+183
+00:14:14,536 --> 00:14:19,360
+We take that difference and use it to 
+update the weights. 
+
+184
+00:14:19,360 --> 00:14:24,703
+And then, the third stage, we take the 
+visible units of that top-level RBM by 
+
+185
+00:14:24,703 --> 00:14:29,096
+its lower level units. 
+And starting there, we do a top-down 
+
+186
+00:14:29,096 --> 00:14:34,805
+stochastic pass, using the directed lower 
+connections, which are just a sigmoid 
+
+187
+00:14:34,805 --> 00:14:38,319
+belief net. 
+Then, having generated some data from 
+
+188
+00:14:38,319 --> 00:14:43,297
+that sigmoid belief net, we adjust the 
+bottom up rates to be good at 
+
+189
+00:14:43,297 --> 00:14:47,671
+reconstructing the feature activities in 
+the layer above. 
+
+190
+00:14:47,671 --> 00:14:51,626
+So that's just the sleep phase of the 
+wake-sleep algorithm. 
+
+191
+00:14:51,626 --> 00:14:56,386
+The difference from the standard 
+wake-sleep algorithm is that that 
+
+192
+00:14:56,386 --> 00:15:01,683
+top-level RBM acts as a much better prior 
+over the top layers, than just a layer of 
+
+193
+00:15:01,683 --> 00:15:06,443
+units which are assumed to be 
+independent, which is what you get with a 
+
+194
+00:15:06,443 --> 00:15:10,157
+sigmoid belief net. 
+Also, rather than generating data by 
+
+195
+00:15:10,157 --> 00:15:15,855
+sampling from the prior, what we're 
+actually doing is looking at a training 
+
+196
+00:15:15,855 --> 00:15:21,856
+case, going up to the top-level RBM and 
+just running a few iterations before we 
+
+197
+00:15:21,856 --> 00:15:25,909
+generate data. 
+So now we're going to look at an example 
+
+198
+00:15:25,909 --> 00:15:29,410
+where we first learn some RBMs, stacking 
+them up, 
+
+199
+00:15:29,410 --> 00:15:33,274
+and then we do contrastive wake-sleep to 
+fine-tune it, 
+
+200
+00:15:33,274 --> 00:15:37,941
+and then we look to see what it's like. 
+Is it a generative model? 
+
+201
+00:15:37,941 --> 00:15:44,195
+And also if we're recognizing things. 
+So first of all, we're going to use 500 
+
+202
+00:15:44,195 --> 00:15:50,999
+binary hidden units to learn to model all 
+10 digit classes in images of 28 by 28 
+
+203
+00:15:50,999 --> 00:15:54,566
+pixels. 
+Once we've learned that RBM, without 
+
+204
+00:15:54,566 --> 00:15:58,659
+knowing what the labels are, 
+so it's unsupervised learning. 
+
+205
+00:15:58,659 --> 00:16:03,142
+We're going to take the patterns of 
+activity in those 500 hidden units that 
+
+206
+00:16:03,142 --> 00:16:07,742
+they have when they're looking at data. 
+We're going to treat those patterns of 
+
+207
+00:16:07,742 --> 00:16:12,343
+activity as data and we're going to learn 
+another RBM that also has 500 units, 
+
+208
+00:16:12,343 --> 00:16:16,620
+and those two are learned without knowing 
+what the labels are. 
+
+209
+00:16:16,620 --> 00:16:20,880
+Once we've done that we'll actually tell 
+it the labels. 
+
+210
+00:16:20,880 --> 00:16:24,300
+So the first two hidden layers are 
+learned without labels, 
+
+211
+00:16:24,300 --> 00:16:28,877
+and then, we add a big top layer and we 
+give it the 10 labels. 
+
+212
+00:16:28,877 --> 00:16:34,709
+And you can think that we concatenate 
+those 10 labels with the 500 units that 
+
+213
+00:16:34,709 --> 00:16:39,212
+represent features, 
+except that the 10 labels are really one 
+
+214
+00:16:39,212 --> 00:16:43,493
+soft match unit. 
+Then we train that top-level RBM to model 
+
+215
+00:16:43,493 --> 00:16:49,473
+the concatenation of the soft match unit 
+for the 10 labels with the 500 feature 
+
+216
+00:16:49,473 --> 00:16:53,460
+activities that were produced by the two 
+layers below. 
+
+217
+00:16:53,460 --> 00:16:59,370
+Once we've trained the top-level RBM, we 
+can then fine-tune the whole system by 
+
+218
+00:16:59,370 --> 00:17:03,434
+using contrastive wake-sleep. 
+And then we'll have a very good 
+
+219
+00:17:03,434 --> 00:17:08,749
+generative model and that's the model 
+that I showed you in the intro video. 
+
+220
+00:17:08,749 --> 00:17:13,419
+So if you go back, and you find the 
+introduction video for this course, 
+
+221
+00:17:13,419 --> 00:17:16,555
+you'll see what happens when we run that 
+model. 
+
+222
+00:17:16,555 --> 00:17:21,958
+You'll see how good it is at recognition 
+and you'll also see that it's very good 
+
+223
+00:17:21,958 --> 00:17:25,428
+at generation. 
+In that introductory video, I promised 
+
+224
+00:17:25,428 --> 00:17:28,563
+you, you would eventually explain how it 
+worked, 
+
+225
+00:17:28,563 --> 00:17:33,767
+and I think you've now seen enough to 
+know what's going on when this model is 
+
+226
+00:17:33,767 --> 00:17:34,301
+learned. 

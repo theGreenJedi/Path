@@ -1,0 +1,468 @@
+1
+00:00:00,090 --> 00:00:05,060
+In this video I'm going to describe
+various kinds of architectures for neural
+
+2
+00:00:05,060 --> 00:00:08,067
+networks.
+What I mean by an architecture, is the way
+
+3
+00:00:08,067 --> 00:00:11,033
+in which the neurons are connected
+together.
+
+4
+00:00:11,033 --> 00:00:16,003
+By far the commonest type of architecture
+in practical applications is a feet
+
+5
+00:00:16,003 --> 00:00:20,061
+forward neural network where the
+information comes into the imput units and
+
+6
+00:00:20,061 --> 00:00:25,013
+flows in one direction through hidden
+layers until each reaches the output
+
+7
+00:00:25,013 --> 00:00:28,042
+units.
+A much more interesting kind architecture
+
+8
+00:00:28,042 --> 00:00:33,013
+is a recurrent neural network in which
+information can flow round in cycles.
+
+9
+00:00:33,013 --> 00:00:36,060
+These networks can remember information
+for a long time.
+
+10
+00:00:36,060 --> 00:00:41,044
+They can exhibit all sorts of interesting
+oscillations but they are much more
+
+11
+00:00:41,044 --> 00:00:46,052
+difficult to train in part because they
+are so much more complicated in what they
+
+12
+00:00:46,052 --> 00:00:50,040
+can do.
+Recently, however, people have made a lot
+
+13
+00:00:50,040 --> 00:00:55,045
+of progress in training recurrent neural
+networks, and they can now do some fairly
+
+14
+00:00:55,045 --> 00:00:59,002
+impressive things.
+The last kind of architecture that I'll
+
+15
+00:00:59,002 --> 00:01:03,088
+describe is a symmetrically-connected
+network, one in which the weights are the
+
+16
+00:01:03,088 --> 00:01:08,093
+same in both directions between two units.
+The commonest type of neural network in
+
+17
+00:01:08,093 --> 00:01:12,037
+practical applications is a feed-forward
+neural network.
+
+18
+00:01:12,037 --> 00:01:17,011
+This has some input units.
+And in the first layer at the bottom, some
+
+19
+00:01:17,011 --> 00:01:22,049
+output units in the last layer at the top,
+and one or more layers of hidden units.
+
+20
+00:01:22,049 --> 00:01:27,087
+If there's more than one layer of hidden
+units, we call them deep neural networks.
+
+21
+00:01:28,054 --> 00:01:32,090
+These networks compute a series of
+transformations between their input and
+
+22
+00:01:32,090 --> 00:01:35,046
+their output.
+So at each layer, you get a new
+
+23
+00:01:35,046 --> 00:01:40,000
+representation of the input in which
+things that were similar in the previous
+
+24
+00:01:40,000 --> 00:01:44,025
+layer may have become less similar, or
+things that were dissimilar in the
+
+25
+00:01:44,025 --> 00:01:46,081
+previous layer may have become more
+similar.
+
+26
+00:01:46,081 --> 00:01:51,047
+So in speech recognition, for example,
+we'd like the same thing said by different
+
+27
+00:01:51,047 --> 00:01:56,001
+speakers to become more similar, and
+different things said by the same speaker
+
+28
+00:01:56,001 --> 00:01:59,079
+to be less similar as we go up through the
+layers of the network.
+
+29
+00:02:00,045 --> 00:02:04,097
+In order to achieve this, we need the
+activities of the neurons in each layer to
+
+30
+00:02:04,097 --> 00:02:08,047
+be a non-linear function of the activities
+in the layer below.
+
+31
+00:02:10,034 --> 00:02:15,053
+Recurrent neural networks are much more
+powerful than feed forward neural
+
+32
+00:02:15,053 --> 00:02:18,096
+networks.
+They have directed cycles in the direct,
+
+33
+00:02:18,096 --> 00:02:23,073
+in their connection graph.
+What this means is that if you start at a
+
+34
+00:02:23,073 --> 00:02:29,013
+node or a neuron and you follow the
+arrows, you can sometimes get back to the
+
+35
+00:02:29,013 --> 00:02:34,063
+neuron you started at.
+They can have very complicated dynamics,
+
+36
+00:02:34,063 --> 00:02:37,074
+and this can make them very difficult to
+train.
+
+37
+00:02:38,078 --> 00:02:42,097
+There's a lot of interest at present at
+finding efficient ways of training our
+
+38
+00:02:42,097 --> 00:02:46,069
+current [inaudible], because they are so
+powerful if we can train them.
+
+39
+00:02:47,050 --> 00:02:54,086
+They're also more biologically realistic.
+Recurrent neural networks with multiple
+
+40
+00:02:54,086 --> 00:02:59,026
+hidden layers are really just a special
+case of a general recurrent neural network
+
+41
+00:02:59,026 --> 00:03:02,034
+that has some of its hidden to hidden
+connections missing.
+
+42
+00:03:05,012 --> 00:03:09,069
+Recurring networks are a very natural way
+to model sequential data.
+
+43
+00:03:10,080 --> 00:03:15,052
+So what we do is we have connections
+between hidden units.
+
+44
+00:03:15,078 --> 00:03:20,036
+And the hidden units act like a network
+that's very deep in time.
+
+45
+00:03:20,036 --> 00:03:26,008
+So at each time step the states of the
+hidden units determines the states of the
+
+46
+00:03:26,008 --> 00:03:32,073
+hidden units of the next time step.
+One way in which they differ from
+
+47
+00:03:32,073 --> 00:03:36,049
+feed-forward nets is that we use the same
+weights at every time step.
+
+48
+00:03:36,049 --> 00:03:41,001
+So if you look at those red arrows where
+the hidden units are determining the next
+
+49
+00:03:41,001 --> 00:03:45,026
+state of the hidden units, the weight
+matrix depicted by each red arrow is the
+
+50
+00:03:45,026 --> 00:03:50,023
+same at each time step.
+They also get inputs at every time stamp
+
+51
+00:03:50,023 --> 00:03:54,086
+and often give outputs at every time
+stamp, and those'll use the same weight
+
+52
+00:03:54,086 --> 00:03:59,171
+matrices too.
+Recurrent networks have the ability to
+
+53
+00:03:59,171 --> 00:04:02,030
+remember information in the hidden state
+for a long time.
+
+54
+00:04:02,062 --> 00:04:07,097
+Unfortunately, it's quite hard to train
+them to use that ability.
+
+55
+00:04:07,097 --> 00:04:12,031
+However, recent algorithms have been able
+to do that.
+
+56
+00:04:13,052 --> 00:04:19,032
+So just to show you what recurrent neural
+nets can now do, I'm gonna show you a net
+
+57
+00:04:19,032 --> 00:04:24,001
+designed by Ilya Sutskever.
+It's a special kind of recurrent neural
+
+58
+00:04:24,001 --> 00:04:29,048
+net, slightly different from the kind in
+the diagram on the previous slide, and
+
+59
+00:04:29,048 --> 00:04:33,025
+it's used to predict the next character in
+a sequence.
+
+60
+00:04:33,080 --> 00:04:38,042
+So Ilya trained it on lots and lots of
+strings from English Wikipedia.
+
+61
+00:04:38,042 --> 00:04:43,070
+It's seeing English characters and trying
+to predict the next English character.
+
+62
+00:04:43,070 --> 00:04:49,006
+He actually used 86 different characters
+to allow for punctuation, and digits, and
+
+63
+00:04:49,006 --> 00:04:54,000
+capital letters and so on.
+After you trained it, one way of seeing
+
+64
+00:04:54,000 --> 00:04:59,069
+how well it can do is to see whether it
+assigns high probability to the next
+
+65
+00:04:59,069 --> 00:05:05,060
+character that actually occurs.
+Another way of seeing what it can do is to
+
+66
+00:05:05,060 --> 00:05:10,073
+get it to generate text.
+So what you do is you give it a string of
+
+67
+00:05:10,073 --> 00:05:14,093
+characters and get it to predict
+probabilities for the next character.
+
+68
+00:05:14,093 --> 00:05:19,000
+Then you pick the next character from that
+probability distribution.
+
+69
+00:05:19,000 --> 00:05:21,076
+It's no use picking the most likely
+character.
+
+70
+00:05:21,076 --> 00:05:26,044
+If you do that after a while it starts
+saying the United States of the United
+
+71
+00:05:26,044 --> 00:05:29,038
+States of the United States of the United
+States.
+
+72
+00:05:29,038 --> 00:05:34,065
+That tells you something about Wikipedia.
+But if you pick from the probability
+
+73
+00:05:34,065 --> 00:05:40,097
+distribution, so if it says there's a one
+in 100 chance it was a Z, you pick a Z one
+
+74
+00:05:40,097 --> 00:05:45,045
+time in 100, then you see much more about
+what it's learned.
+
+75
+00:05:45,095 --> 00:05:50,002
+The next slide shows an example of the
+text that it generates, and it's
+
+76
+00:05:50,002 --> 00:05:54,071
+interesting to notice how much is learned
+just by reading Wikipedia, and trying to
+
+77
+00:05:54,071 --> 00:06:00,011
+predict the next character.
+So remember this text was generated one
+
+78
+00:06:00,011 --> 00:06:06,000
+character at a time.
+Notice that it makes reasonable sensible
+
+79
+00:06:06,000 --> 00:06:11,000
+sentences and they composed always
+entirely of real English words.
+
+80
+00:06:11,000 --> 00:06:15,099
+Occasionally, it makes a non-word but they
+typically sensible ones.
+
+81
+00:06:15,099 --> 00:06:20,084
+And notice that within a sentence, it has
+some thematic sentence.
+
+82
+00:06:20,084 --> 00:06:25,053
+So the phrase, Several perishing
+intelligence agents is in the
+
+83
+00:06:25,053 --> 00:06:30,031
+Mediterranean region, has problems but
+it's almost good English.
+
+84
+00:06:30,031 --> 00:06:35,095
+Notice also the thing it says at the end,
+such that it is the blurring of appearing
+
+85
+00:06:35,095 --> 00:06:41,026
+on any well-paid type of box printer.
+There's a certain sort of thematic thing
+
+86
+00:06:41,026 --> 00:06:45,096
+there about appearance and printing, and
+the syntax is pretty good.
+
+87
+00:06:45,096 --> 00:06:48,095
+And remember, that's one character at a
+time.
+
+88
+00:06:52,062 --> 00:06:57,043
+Quite different for a current nets,
+symmetrically connected networks.
+
+89
+00:06:58,050 --> 00:07:03,030
+In these the connections between units
+have the same weight in both directions.
+
+90
+00:07:03,056 --> 00:07:09,077
+John Hopfield and others realized that
+symmetric networks are much easier to
+
+91
+00:07:09,077 --> 00:07:15,032
+analyze than recurrent networks.
+This is mainly because they're more
+
+92
+00:07:15,032 --> 00:07:19,086
+restricted in what they can do, and that's
+because they obey an energy function.
+
+93
+00:07:20,069 --> 00:07:25,054
+So they come, for example, model cycles.
+You can't get back to where you started in
+
+94
+00:07:25,054 --> 00:07:27,045
+one of these symmetric networks.

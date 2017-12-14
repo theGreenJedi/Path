@@ -1,0 +1,544 @@
+1
+00:00:00,000 --> 00:00:06,038
+In this video, I am going to describe an
+approach to training recurrent neural
+
+2
+00:00:06,038 --> 00:00:09,600
+networks that's called Long Short Term
+Memory.
+
+3
+00:00:10,480 --> 00:00:16,447
+You can consider the dynamic state of a
+neural network to be a short term memory.
+
+4
+00:00:16,447 --> 00:00:22,120
+And the idea is, you want to make that
+short term memory last for a long time.
+
+5
+00:00:22,420 --> 00:00:28,426
+This is done by creating special modules
+that are designed to allow information to
+
+6
+00:00:28,426 --> 00:00:32,841
+be gated in, and then information to be
+gated out when needed.
+
+7
+00:00:32,841 --> 00:00:38,558
+And in the intermediate period, the gate
+is closed, so the stuff that arrives in
+
+8
+00:00:38,558 --> 00:00:43,480
+the intermediate period doesn't interfere
+with the remembered state.
+
+9
+00:00:44,020 --> 00:00:49,732
+Long short term memory has been very
+successful for tasks like recognizing
+
+10
+00:00:49,732 --> 00:00:53,670
+handwriting, where it's won a number of
+competitions.
+
+11
+00:00:53,670 --> 00:00:59,094
+In 1997, Hochreiter & Schmidhuber
+published a paper in neural computation
+
+12
+00:00:59,094 --> 00:01:04,240
+that solved the problem of getting a
+recurring neural network to remember
+
+13
+00:01:04,240 --> 00:01:08,830
+things for a long time.
+There recurrent nets could remember things
+
+14
+00:01:08,830 --> 00:01:13,560
+for hundreds of time steps.
+They did this by designing a memory cell
+
+15
+00:01:13,560 --> 00:01:18,358
+that used logistic and linear units with
+multiplicative interactions.
+
+16
+00:01:18,358 --> 00:01:24,061
+So information gets into the memory cell
+whenever a logistic write gate is turned
+
+17
+00:01:24,061 --> 00:01:26,312
+on.
+The rest of the recurrent network
+
+18
+00:01:26,312 --> 00:01:31,297
+determines the state of that write gate,
+and when the rest of the recurrent network
+
+19
+00:01:31,297 --> 00:01:35,801
+wants information to be stored, it turns
+the write gate on, and whatever the
+
+20
+00:01:35,801 --> 00:01:40,606
+current input from the rest of the net to
+the memory cell is, gets stored in the
+
+21
+00:01:40,606 --> 00:01:43,789
+memory cell.
+The information stays in the memory cell
+
+22
+00:01:43,789 --> 00:01:47,753
+so long as its keep gate is on.
+So again, the rest of the system is
+
+23
+00:01:47,753 --> 00:01:52,378
+determining the state of a logistic keep
+gate, and if it keeps it on, then the
+
+24
+00:01:52,378 --> 00:01:56,608
+information will stay there.
+And finally, the information gets read
+
+25
+00:01:56,608 --> 00:02:02,107
+from the memory cell so that it then goes
+off to the rest of the recurrent neural
+
+26
+00:02:02,107 --> 00:02:07,270
+network and influences future states and
+it's read by turning on a read gate,
+
+27
+00:02:07,270 --> 00:02:12,367
+Which again is a logistic unit controlled
+by the rest of the neural network.
+
+28
+00:02:12,367 --> 00:02:17,873
+The memory cell actually stores an analog
+value, so we can think of it as a linear
+
+29
+00:02:17,873 --> 00:02:23,515
+neuron that has an analog value and keeps
+writing that value to itself at each time
+
+30
+00:02:23,515 --> 00:02:27,545
+step by a weight of one, so the
+information just stays there.
+
+31
+00:02:27,545 --> 00:02:33,187
+The weight of one is determined by a keep
+gate so the rest of the system determines
+
+32
+00:02:33,187 --> 00:02:38,829
+the state of that logistic keep gate and
+if it puts it into a state of one or close
+
+33
+00:02:38,829 --> 00:02:44,270
+to one the information just cycles around
+and that value of 1.73 will stay there.
+
+34
+00:02:44,270 --> 00:02:48,918
+As soon as the rest of the system wants to
+get rid of that value, all it has to do is
+
+35
+00:02:48,918 --> 00:02:53,129
+set the keep gate to have a value of zero
+and the information will disappear.
+
+36
+00:02:53,129 --> 00:02:57,450
+To store the information in the memory
+cell, the rest of the system has to turn
+
+37
+00:02:57,450 --> 00:03:00,731
+on the write gate.
+And then whatever input is being provided
+
+38
+00:03:00,731 --> 00:03:05,106
+to the memory cell from the rest of the
+system will get written into the memory
+
+39
+00:03:05,106 --> 00:03:08,883
+cell.
+Similarly, to read the information from
+
+40
+00:03:08,883 --> 00:03:13,895
+the memory cell, the rest of the system
+turns on the logistic read gate and then,
+
+41
+00:03:13,895 --> 00:03:19,158
+the value in the memory cell comes out and
+affects the rest of the recurring neural
+
+42
+00:03:19,158 --> 00:03:22,762
+network.
+The point of using logistic units is that
+
+43
+00:03:22,762 --> 00:03:28,352
+we can back propagate through them because
+they have nice derivatives, and that means
+
+44
+00:03:28,352 --> 00:03:32,430
+we can learn to use this kind of circuit
+over many time steps.
+
+45
+00:03:32,430 --> 00:03:38,086
+So I'm going to show you now a picture of
+what backpropagation through a memory cell
+
+46
+00:03:38,086 --> 00:03:41,177
+looks like.
+First we're going to do a forward pass.
+
+47
+00:03:41,177 --> 00:03:46,702
+So at the initial time, let's suppose that
+the keep gate was set to zero, so we wiped
+
+48
+00:03:46,702 --> 00:03:50,320
+out whatever information was in the memory
+cell before,
+
+49
+00:03:50,580 --> 00:03:55,534
+And the write gate is set to one.
+So the value of 1.7 that is coming from
+
+50
+00:03:55,534 --> 00:04:00,625
+the rest of the recurrent neural network
+gets written into the memory cell.
+
+51
+00:04:00,625 --> 00:04:06,820
+And we're not going to read it at this
+time, so the read gate is set to zero.
+
+52
+00:04:06,820 --> 00:04:12,208
+We then set the keep gate to one, or
+rather the rest of the, neural network has
+
+53
+00:04:12,208 --> 00:04:17,665
+to set the keep gate to one, And that
+means that the value is written back into
+
+54
+00:04:17,665 --> 00:04:19,600
+the memory cell.
+It's stored.
+
+55
+00:04:19,960 --> 00:04:24,939
+At the next time step, we're going to set
+the right gate to zero and the read gate
+
+56
+00:04:24,939 --> 00:04:29,665
+to zero, so the information isn't
+influenced by what's going on in the rest
+
+57
+00:04:29,665 --> 00:04:34,392
+of the net, and it doesn't influence
+what's going on in the rest of the net.
+
+58
+00:04:34,392 --> 00:04:37,670
+It's insulated.
+Again, at the next time step, the keep
+
+59
+00:04:37,670 --> 00:04:42,144
+gate is set to one, so the information is
+stored for one more time step.
+
+60
+00:04:42,144 --> 00:04:46,997
+And then, we're going to t set the right
+gate to zero, so no information is written
+
+61
+00:04:46,997 --> 00:04:51,787
+in, but we're now going to retrieve the
+information by setting the reed gate to
+
+62
+00:04:51,787 --> 00:04:54,931
+one.
+The value of 1.7 then comes out of the
+
+63
+00:04:54,931 --> 00:04:59,020
+memory cell and goes off to influence the
+rest of the network.
+
+64
+00:04:59,480 --> 00:05:05,657
+And if we don't need it anymore then the
+keep gate can be set to zero and the
+
+65
+00:05:05,657 --> 00:05:11,202
+information will be removed.
+Now, if you look at the 1.7 that comes out
+
+66
+00:05:11,202 --> 00:05:17,380
+when we do the retrieve and you look at
+the path back to the 1.7 that came in,
+
+67
+00:05:17,920 --> 00:05:24,600
+along that path is these little triangular
+symbols and next to each triangular symbol
+
+68
+00:05:24,600 --> 00:05:29,667
+is a one.
+That means that the effective weight on
+
+69
+00:05:29,667 --> 00:05:34,349
+that connection is a one.
+So as we go back along that path whatever
+
+70
+00:05:34,349 --> 00:05:40,290
+error derivative we have for the 1.7 when
+it's retrieved gets backpropagated to 1.7
+
+71
+00:05:40,290 --> 00:05:44,134
+when it's stored.
+So if you'd rather retrieved a bigger
+
+72
+00:05:44,134 --> 00:05:50,074
+value to make the right things happen now
+you can send the information back and tell
+
+73
+00:05:50,074 --> 00:05:55,145
+it, it should have stored a bigger value.
+And notice that as long as the relevant
+
+74
+00:05:55,145 --> 00:05:59,581
+gates have values of one, there's no
+attenuation in this backpropagated signal.
+
+75
+00:05:59,581 --> 00:06:04,074
+It's got just the properties we want.
+Of course if they're logistic gates there
+
+76
+00:06:04,074 --> 00:06:07,714
+will be some slight attenuation,
+But it can be very small and so
+
+77
+00:06:07,714 --> 00:06:11,070
+information can travel back through
+hundreds of time steps.
+
+78
+00:06:11,070 --> 00:06:17,693
+Now, let's look at a task that a recurrent
+neural network with long short term memory
+
+79
+00:06:17,693 --> 00:06:21,342
+is very good at.
+It's a very natural task for recurrent
+
+80
+00:06:21,342 --> 00:06:24,300
+neural network.
+It's reading cursive handwriting.
+
+81
+00:06:24,840 --> 00:06:30,970
+The input is just a sequence of the x and
+y coordinance of the tip of the pen,
+
+82
+00:06:30,970 --> 00:06:35,355
+Plus some information about whether the
+pen is on the paper or not.
+
+83
+00:06:35,355 --> 00:06:39,161
+The output is going to be a sequence of
+recognized characters.
+
+84
+00:06:39,161 --> 00:06:44,643
+Graves & Schmidhuber in 2009, showed that
+recurrent neural networks with long short
+
+85
+00:06:44,643 --> 00:06:47,481
+term memory are extremely good at this
+task.
+
+86
+00:06:47,481 --> 00:06:52,627
+So far as I know, they're currently the
+best systems there are and I believe
+
+87
+00:06:52,627 --> 00:06:57,547
+Canada Post is starting to use them for
+reading handwriting.
+
+88
+00:06:57,547 --> 00:07:02,466
+Graves & Schmidhuber who, in 2009, didn't
+use pen coordinates as input.
+
+89
+00:07:02,466 --> 00:07:08,467
+They used a sequence of small images.
+And that means they can deal with optical
+
+90
+00:07:08,467 --> 00:07:11,717
+input where the timing of the pen isn't
+known.
+
+91
+00:07:11,717 --> 00:07:16,310
+They can look at images after they've been
+written and read them.
+
+92
+00:07:16,310 --> 00:07:22,033
+So I'm now gonna show you a demonstration
+of Alex Graves's system working on pen
+
+93
+00:07:22,033 --> 00:07:25,919
+coordinates.
+And in the movie that follows you're going
+
+94
+00:07:25,919 --> 00:07:31,863
+to see four streams of information.
+The top row shows the characters as
+
+95
+00:07:31,863 --> 00:07:35,810
+they're recognized.
+The system never revises its output.
+
+96
+00:07:35,810 --> 00:07:41,183
+So if it has to make a difficult decision,
+it delays it for a little bit, so that it
+
+97
+00:07:41,183 --> 00:07:45,909
+can see a little distance into the future
+to help it resolve ambiguities.
+
+98
+00:07:45,909 --> 00:07:51,023
+The second row shows the states in a
+subset of the memory cells, and you should
+
+99
+00:07:51,023 --> 00:07:54,713
+notice how they get reset when it
+recognizes a character.
+
+100
+00:07:54,713 --> 00:07:59,373
+The third row shows the actual writing and
+all the net sees is the x and y
+
+101
+00:07:59,373 --> 00:08:04,099
+coordinates of the tip of the pen.
+Just two numbers plus some information
+
+102
+00:08:04,099 --> 00:08:09,906
+about whether the pen is up or down.
+Finally, the fourth row shows something
+
+103
+00:08:09,906 --> 00:08:15,522
+much more complicated.
+It shows the gradient backpropagated all
+
+104
+00:08:15,522 --> 00:08:21,494
+the way to the xy locations.
+So what you get to see is, for the most
+
+105
+00:08:21,494 --> 00:08:26,123
+active character,
+If you backpropagate from that character
+
+106
+00:08:26,123 --> 00:08:31,907
+and ask what would make that most active
+character more active, you get to see
+
+107
+00:08:31,907 --> 00:08:37,764
+which bits of the input are affecting the
+probability that it's that character.
+
+108
+00:08:37,764 --> 00:08:43,769
+So that let's you see how the decisions,
+are depending on things that happened in
+
+109
+00:08:43,769 --> 00:08:45,920
+the past.
+So here's the movie.

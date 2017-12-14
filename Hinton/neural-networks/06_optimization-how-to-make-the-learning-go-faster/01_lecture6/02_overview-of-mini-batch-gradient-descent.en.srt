@@ -1,0 +1,574 @@
+1
+00:00:00,000 --> 00:00:05,108
+In this video, we're going to look at
+stochastic gradient descent learning for a
+
+2
+00:00:05,108 --> 00:00:08,794
+neural network,
+Particularly the mini batch version, which
+
+3
+00:00:08,794 --> 00:00:13,838
+is probably the most widely used learning
+algorithm for large neural networks.
+
+4
+00:00:13,838 --> 00:00:18,753
+We've seen this before, but let's start
+with a reminder about what the error
+
+5
+00:00:18,753 --> 00:00:23,797
+surface looks like for a linear neuron.
+The error surface means a surface that
+
+6
+00:00:23,797 --> 00:00:29,100
+lies in a space where the horizontal axes
+correspond to the weights of the neural
+
+7
+00:00:29,100 --> 00:00:32,010
+net.
+And the vertical axis corresponds to the
+
+8
+00:00:32,010 --> 00:00:35,741
+error it makes.
+For a linear neuron with a squared error,
+
+9
+00:00:35,741 --> 00:00:38,710
+that surface always forms a quadratic
+bowl.
+
+10
+00:00:38,710 --> 00:00:44,435
+The vertical cross sections are parabolas,
+and the horizontal cross sections are
+
+11
+00:00:44,435 --> 00:00:47,882
+ellipses.
+For multilayer non linear nets the error
+
+12
+00:00:47,882 --> 00:00:52,435
+surface is much more complicated,
+But as long as the weights aren't to big
+
+13
+00:00:52,435 --> 00:00:57,481
+it's a smooth error surface, and locally
+it's well approximated by a fraction of a
+
+14
+00:00:57,481 --> 00:01:01,234
+quadratic bowl.
+It might not be the bottom of the bowl but
+
+15
+00:01:01,234 --> 00:01:05,972
+there's a piece of quadratic bowl that
+will fit the local error surface very
+
+16
+00:01:05,972 --> 00:01:09,390
+well.
+If we look at the conversion speed when we
+
+17
+00:01:09,390 --> 00:01:13,771
+do full-batch learning, when the error
+surface is a quadratic bubble,
+
+18
+00:01:13,771 --> 00:01:18,023
+The obvious thing to do is go downhill,
+this will reduce the error.
+
+19
+00:01:18,023 --> 00:01:23,177
+But the problem is, that the direction of
+steepest descent does not point to the
+
+20
+00:01:23,177 --> 00:01:26,850
+place we want to go to.
+As you can see in the ellipse, the
+
+21
+00:01:26,850 --> 00:01:32,326
+direction of steepest descent is almost at
+rectangles to the direction we want to go
+
+22
+00:01:32,326 --> 00:01:34,844
+in.
+You've got a gradient that's very big
+
+23
+00:01:34,844 --> 00:01:39,675
+across the ellipse, which is the direction
+which we only want to travel a small
+
+24
+00:01:39,675 --> 00:01:44,079
+distance, and the gradient's very small
+along the ellipse, and that's the
+
+25
+00:01:44,079 --> 00:01:47,198
+direction which we want to travel a large
+distance.
+
+26
+00:01:47,198 --> 00:01:52,082
+It's precisely the wrong way around.
+Now you might think that studying linear
+
+27
+00:01:52,082 --> 00:01:57,579
+systems like this, is not a good idea if
+you want to optimize big non-linear nets.
+
+28
+00:01:57,579 --> 00:02:02,552
+But even for these non-linear multi-line
+nets, this kind of a problem arises.
+
+29
+00:02:02,552 --> 00:02:07,656
+It's a very similar problem that arises
+even though the error surfaces aren't
+
+30
+00:02:07,656 --> 00:02:11,974
+globally quadratic bowls.
+Locally they have all these same kind of
+
+31
+00:02:11,974 --> 00:02:15,246
+properties.
+That is they tend to be very curved in
+
+32
+00:02:15,246 --> 00:02:18,780
+some directions, and very uncurved in
+other directions.
+
+33
+00:02:19,480 --> 00:02:25,725
+So the way the learning goes wrong if you
+use a big learning rate is that you slash
+
+34
+00:02:25,725 --> 00:02:30,930
+to and fro in the directions in which the
+area surface is very curved.
+
+35
+00:02:30,930 --> 00:02:34,288
+So we'll say call that slashing across a
+ravine.
+
+36
+00:02:34,288 --> 00:02:38,137
+And with the line rate too big you'll
+actually diverge.
+
+37
+00:02:38,137 --> 00:02:43,525
+What we want to achieve, is that we go
+quickly along the ravine in directions
+
+38
+00:02:43,525 --> 00:02:46,744
+that have small, but very consistent
+gradients.
+
+39
+00:02:46,744 --> 00:02:51,642
+And we move slowly in directions with
+these big, but very inconsistent
+
+40
+00:02:51,642 --> 00:02:55,281
+gradients.
+That is if you go in that direction for a
+
+41
+00:02:55,281 --> 00:02:58,500
+short distance, the gradient will reverse
+sign.
+
+42
+00:03:00,040 --> 00:03:05,196
+Before we go into how we achieve that, I
+need to talk a little bit about stochastic
+
+43
+00:03:05,196 --> 00:03:08,240
+gradient descent, and the motivation for
+using it.
+
+44
+00:03:08,540 --> 00:03:12,843
+If you have a data set that's highly
+redundant, then if you compute the
+
+45
+00:03:12,843 --> 00:03:17,814
+gradient for a weight on the first half of
+the data set, you'll get almost exactly
+
+46
+00:03:17,814 --> 00:03:22,300
+the same answer as you get if you compute
+the gradient on the second half.
+
+47
+00:03:22,300 --> 00:03:26,681
+So it's a complete waste of time to
+compute the gradient on the whole data
+
+48
+00:03:26,681 --> 00:03:29,194
+set.
+You'd be much better off computing the
+
+49
+00:03:29,194 --> 00:03:33,868
+gradient on a subset of the data, then
+updating the weights and on the remaining
+
+50
+00:03:33,868 --> 00:03:36,906
+data, computing the gradient for the
+updated weights.
+
+51
+00:03:36,906 --> 00:03:41,872
+We can take that to extremes and say we're
+going to compute the gradient on a single
+
+52
+00:03:41,872 --> 00:03:46,546
+training case, we're going to update the
+weights and then we're going to compute
+
+53
+00:03:46,546 --> 00:03:50,227
+the gradient on the next training case
+using those new weights.
+
+54
+00:03:50,227 --> 00:03:55,397
+That's called online learning.
+In general, we don't want to go quite that
+
+55
+00:03:55,397 --> 00:03:58,815
+far.
+It's usually better to use small mini
+
+56
+00:03:58,815 --> 00:04:04,787
+batches, typically ten or a 100 or even
+1000 examples. One advantage of a small
+
+57
+00:04:04,787 --> 00:04:09,710
+mini batch, is that less computation is
+used for actually updating the weights,
+
+58
+00:04:09,710 --> 00:04:12,740
+cuz you do that less often, compared with
+online.
+
+59
+00:04:12,740 --> 00:04:17,998
+Another advantage is that when you compute
+the gradient, you can compute the gradient
+
+60
+00:04:17,998 --> 00:04:22,762
+for a whole bunch of cases in parallel.
+Most computers are very good at doing
+
+61
+00:04:22,762 --> 00:04:27,587
+matrix, matrix multiplies, and that will
+allow you to consider a whole bunch of
+
+62
+00:04:27,587 --> 00:04:32,784
+training cases and apply the weights to a
+whole bunch of training cases at the same
+
+63
+00:04:32,784 --> 00:04:37,548
+time to figure out the activities going
+into the next layer for all of those
+
+64
+00:04:37,548 --> 00:04:40,950
+training cases.
+That gives you a matrix, matrix multiply,
+
+65
+00:04:40,950 --> 00:04:44,910
+and it's very efficient, especially on a
+graphics processor unit.
+
+66
+00:04:44,910 --> 00:04:50,489
+One point about using mini batches is you
+wouldn't want to have a mini batch in
+
+67
+00:04:50,489 --> 00:04:55,719
+which the answer is always the same and
+then on the next mini batch have a
+
+68
+00:04:55,719 --> 00:05:01,158
+different answer that's always the same.
+That would cause the weights to slosh
+
+69
+00:05:01,158 --> 00:05:04,785
+unnecessarily.
+The ideal, if you have say ten classes,
+
+70
+00:05:04,785 --> 00:05:10,713
+would be to have a mini batch with say ten
+examples or 100 examples, that has exactly
+
+71
+00:05:10,713 --> 00:05:14,200
+the same number from each class in the
+mini batch.
+
+72
+00:05:14,200 --> 00:05:19,374
+One way to approximate that is simply to
+take all your data and just put it in
+
+73
+00:05:19,374 --> 00:05:24,679
+random order and grab random mini-batches.
+But you must avoid having mini batches
+
+74
+00:05:24,679 --> 00:05:29,984
+that are very uncharacteristic of the
+whole set of data because the mini-batches
+
+75
+00:05:29,984 --> 00:05:34,755
+are all of one class.
+So basically there's two types of learning
+
+76
+00:05:34,755 --> 00:05:39,045
+algorithms for neural nets.
+There's full gradient algorithms, where
+
+77
+00:05:39,045 --> 00:05:42,685
+you compute the gradient from all of the
+training cases.
+
+78
+00:05:42,685 --> 00:05:47,625
+And once you've done that, there's a lot
+of clever ways to speed up learning.
+
+79
+00:05:47,625 --> 00:05:51,525
+There's things like nonlinear versions of
+a method called conjugate gradient.
+
+80
+00:05:51,525 --> 00:05:56,465
+The optimization community has been
+studying the general problem of how you
+
+81
+00:05:56,465 --> 00:05:59,780
+optimize smooth nonlinear functions for
+many years.
+
+82
+00:05:59,780 --> 00:06:04,690
+Now multi-layer neural networks are pretty
+untypical of the kinds of problems they
+
+83
+00:06:04,690 --> 00:06:07,589
+study.
+So applying the methods they developed may
+
+84
+00:06:07,589 --> 00:06:11,967
+need a lot of modification to make them
+work for these multi-layer neural
+
+85
+00:06:11,967 --> 00:06:15,209
+networks.
+But when you have highly redundant and
+
+86
+00:06:15,209 --> 00:06:20,280
+large training sets, it's nearly always
+better to use mini batch learning.
+
+87
+00:06:20,560 --> 00:06:26,400
+The mini batches may need to be quite big,
+But that's not so bad because big mini
+
+88
+00:06:26,400 --> 00:06:28,760
+batches are more computationally
+efficient.
+
+89
+00:06:30,380 --> 00:06:34,753
+I'm now going to describe a basic
+mini-batch grading descent linear
+
+90
+00:06:34,753 --> 00:06:37,711
+algorithm.
+This is what most people would use when
+
+91
+00:06:37,711 --> 00:06:42,020
+they started training a big neural net on
+a big redundant data set.
+
+92
+00:06:42,020 --> 00:06:45,220
+Tyou start by guessing an initial learning
+rate,
+
+93
+00:06:45,220 --> 00:06:50,555
+And you look to see if the network learned
+satisfactorily or if the error keeps
+
+94
+00:06:50,555 --> 00:06:55,356
+getting worse, oscillates wildly.
+If that happens, you reduce the learning
+
+95
+00:06:55,356 --> 00:06:58,125
+rate.
+You also look to see if the error is
+
+96
+00:06:58,125 --> 00:07:02,142
+falling too slowly.
+You expect that the error might fluctuate
+
+97
+00:07:02,142 --> 00:07:06,948
+a bit if you measure it on a validation
+set, because the great electronic
+
+98
+00:07:06,948 --> 00:07:10,964
+mini-batch is just a rough estimate of the
+over all gradient.
+
+99
+00:07:10,964 --> 00:07:15,836
+So you don't want to reduce the learning
+rate every time the error arises.
+
+100
+00:07:15,836 --> 00:07:20,510
+But what you're hoping is that the error
+will fall fairly consistently.
+
+101
+00:07:20,510 --> 00:07:25,974
+And if it is falling fairly consistently
+and very slowly, you can probably increase
+
+102
+00:07:25,974 --> 00:07:30,227
+the learning rate.
+Once you've got that working, you can then
+
+103
+00:07:30,227 --> 00:07:34,740
+write a simple program to automate that
+way of adjusting the learning rate.
+
+104
+00:07:35,000 --> 00:07:39,149
+One thing that nearly always helps is,
+towards the end of learning with
+
+105
+00:07:39,149 --> 00:07:42,246
+mini-batches. It helps to turn down the
+learning rate.
+
+106
+00:07:42,246 --> 00:07:46,570
+That's because you're going to get
+fluctuations in the weights caused by the
+
+107
+00:07:46,570 --> 00:07:50,194
+fluctuations in the gradients that come
+from the mini batches.
+
+108
+00:07:50,194 --> 00:07:53,934
+And you'd like a final set of weights.
+As a good compromise.
+
+109
+00:07:53,934 --> 00:07:58,667
+So, when you turn down the learning rate,
+you're smoothing away those fluctuations,
+
+110
+00:07:58,667 --> 00:08:02,700
+and getting a final set of weights that's
+good for many mini-batches.
+
+111
+00:08:03,240 --> 00:08:08,006
+So a good time to turn down the learning
+rate is when the error stops decreasing
+
+112
+00:08:08,006 --> 00:08:11,243
+consistently.
+And a good criterion for saying the error
+
+113
+00:08:11,243 --> 00:08:15,245
+stopped decreasing is to use the error on
+a separate validation set.
+
+114
+00:08:15,245 --> 00:08:19,835
+That is, it's a bunch of examples that you
+are not using for training and also
+
+115
+00:08:19,835 --> 00:08:22,543
+they're not going to be used for your
+final test.

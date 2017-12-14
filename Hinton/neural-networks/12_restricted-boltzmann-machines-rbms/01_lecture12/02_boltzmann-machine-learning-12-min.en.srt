@@ -1,0 +1,764 @@
+1
+00:00:00,000 --> 00:00:05,048
+In the previous video,
+I showed how a Boltzmann machine can be
+
+2
+00:00:05,048 --> 00:00:08,910
+used a probabilistic model of a set of
+binary data vectors.
+
+3
+00:00:08,910 --> 00:00:14,213
+In this video we're finally going to get
+around to the Boltzmann machine learning
+
+4
+00:00:14,213 --> 00:00:17,646
+algorithm.
+This is a very simple learning model which
+
+5
+00:00:17,646 --> 00:00:22,285
+has an elegant theoretical justification,
+but it turned out in practice, it was
+
+6
+00:00:22,285 --> 00:00:25,319
+extremely slow and noisy, and just wasn't
+practical.
+
+7
+00:00:25,319 --> 00:00:29,482
+And for many years, people thought that
+Boltzmann machines would never be
+
+8
+00:00:29,482 --> 00:00:32,931
+practical devices.
+Then we found several different ways of
+
+9
+00:00:32,931 --> 00:00:35,489
+greatly speeding up the learning
+algorithm.
+
+10
+00:00:35,489 --> 00:00:39,890
+And now the algorithm is much more
+practical, and has, in fact, been used as
+
+11
+00:00:39,890 --> 00:00:44,767
+part of the winning entry for a million
+dollar machine learning competition, which
+
+12
+00:00:44,767 --> 00:00:49,168
+I'll talk about in a later video.
+The Bolton machine learning algorithm is
+
+13
+00:00:49,168 --> 00:00:54,023
+an unsupervised learning algorithm.
+Unlike the typical user back propagation,
+
+14
+00:00:54,023 --> 00:00:58,892
+where we have a input vector and we
+provide it with a desired output. In
+
+15
+00:00:58,892 --> 00:01:03,086
+Boltzmann machine learning we just give it
+the input vector.
+
+16
+00:01:03,086 --> 00:01:08,767
+There are q labels. What the algorithm is
+trying to do is build a model of a set of
+
+17
+00:01:08,767 --> 00:01:13,840
+input vectors, though it might be better
+to think of them as output vectors.
+
+18
+00:01:15,980 --> 00:01:21,127
+What we want to do is maximize the product
+of the probabilities, that the Boltzmann
+
+19
+00:01:21,127 --> 00:01:23,762
+machine assigns to a set of binary
+vectors,
+
+20
+00:01:23,762 --> 00:01:29,520
+The ones in the training set.
+This is equivalent to maximizing the sum
+
+21
+00:01:29,520 --> 00:01:34,320
+of the log probabilities that the
+Boltzmann machine assigns to the training
+
+22
+00:01:34,320 --> 00:01:38,102
+vectors.
+It's also equivalent to maximizing the
+
+23
+00:01:38,102 --> 00:01:42,697
+probability that we'd obtain exactly the
+end training cases, if we ran the
+
+24
+00:01:42,697 --> 00:01:49,301
+Boltzmann machine in the following way.
+First, we let it settle to its stationary
+
+25
+00:01:49,301 --> 00:01:53,620
+distribution, and different times, with no
+external input.
+
+26
+00:01:54,900 --> 00:02:01,621
+Then we sample the visible vector once.
+Then we let it settle again, and sample
+
+27
+00:02:01,621 --> 00:02:03,740
+the visible vector again.
+And so on.
+
+28
+00:02:07,140 --> 00:02:11,221
+Now the main reasons why the learning
+could be difficult.
+
+29
+00:02:11,221 --> 00:02:14,300
+This is probably the most important
+reason.
+
+30
+00:02:14,600 --> 00:02:20,773
+If you consider a chain of units,
+A chain of hidden units here, with visible
+
+31
+00:02:20,773 --> 00:02:26,865
+units attached to the two ends,
+And if we use a training set that consist
+
+32
+00:02:26,865 --> 00:02:30,446
+of one, zero and zero, one.
+In other words, we want the two visible
+
+33
+00:02:30,446 --> 00:02:34,839
+units to be in opposite states.
+Then the way to achieve that is by making
+
+34
+00:02:34,839 --> 00:02:38,148
+sure that the product of all those weights
+is negative.
+
+35
+00:02:38,148 --> 00:02:43,082
+So, for example, if all of the weights are
+positive, turning on W1 will tend to turn
+
+36
+00:02:43,082 --> 00:02:47,054
+on the first hidden unit.
+And that will tend to turn on the second
+
+37
+00:02:47,054 --> 00:02:50,784
+hidden unit, and so on.
+And the fourth hidden unit will tend to
+
+38
+00:02:50,784 --> 00:02:55,658
+turn on the other visible unit.
+If one of those weights is negative, then
+
+39
+00:02:55,658 --> 00:03:00,060
+we'll get an anti-correlation between the
+two visible units.
+
+40
+00:03:01,000 --> 00:03:07,457
+What this means is, that if we're thinking
+about learning weight W1, we need to know
+
+41
+00:03:07,457 --> 00:03:09,635
+other weights.
+So there's W1.
+
+42
+00:03:09,635 --> 00:03:13,758
+To know how to change that weight, we need
+to know W3.
+
+43
+00:03:13,758 --> 00:03:19,905
+We need to have information about W3,
+because if W3 is negative what we want to
+
+44
+00:03:19,905 --> 00:03:25,740
+do with W1 is the opposite of what we want
+to do with W1 if W3 is positive.
+
+45
+00:03:28,560 --> 00:03:33,149
+So given that one weight needs to know
+about other weights in order to be able to
+
+46
+00:03:33,149 --> 00:03:37,794
+change even in the right direction, it's
+very surprising that there's a very simple
+
+47
+00:03:37,794 --> 00:03:42,440
+learning algorithm, and that the learning
+algorithm only requires local information.
+
+48
+00:03:44,200 --> 00:03:49,642
+So it turns out that everything that one
+weight needs to know about all the other
+
+49
+00:03:49,642 --> 00:03:54,819
+weights and about the data is contained in
+the difference of two correlations.
+
+50
+00:03:54,819 --> 00:03:59,864
+Another way of saying that is that if you
+take the log probability that the
+
+51
+00:03:59,864 --> 00:04:03,050
+Boltzmann machine assigns to a visible
+vector V.
+
+52
+00:04:03,050 --> 00:04:10,199
+And ask about the derivative of that log
+probability with respect to a weight, WIJ.
+
+53
+00:04:10,199 --> 00:04:17,436
+It's the difference of the expected value
+of the products of the states of I and J.
+
+54
+00:04:17,436 --> 00:04:24,236
+When the networks settle to thermal
+equilibrium with v clamped on the visible
+
+55
+00:04:24,236 --> 00:04:28,614
+units.
+That is how often are INJ on together when
+
+56
+00:04:28,614 --> 00:04:35,606
+V is clamped in visible units and the
+network is at thermal equilibrium, minus
+
+57
+00:04:35,606 --> 00:04:39,820
+the same quantity.
+But when V is not clamped on visible
+
+58
+00:04:39,820 --> 00:04:45,301
+units, so because the derivative of the
+log probability of a visible vector is
+
+59
+00:04:45,301 --> 00:04:50,853
+this simple difference of correlations we
+can make the change in the weight be
+
+60
+00:04:50,853 --> 00:04:56,475
+proportional to the expected product of
+the activities average over all visible
+
+61
+00:04:56,475 --> 00:05:00,200
+vectors in the training set, that's what
+we call data.
+
+62
+00:05:00,460 --> 00:05:05,616
+Minus the product of the same two
+activities when your not clamping anything
+
+63
+00:05:05,616 --> 00:05:10,840
+and the network has reached thermal
+equilibrium with no external interference.
+
+64
+00:05:11,400 --> 00:05:14,097
+So this is a very interesting learning
+rule.
+
+65
+00:05:14,097 --> 00:05:19,001
+The first term in the learning rule says
+raise the weights in proportion to the
+
+66
+00:05:19,001 --> 00:05:23,231
+product of the activities the units have
+when you're presenting data.
+
+67
+00:05:23,231 --> 00:05:27,400
+That's the simplest form of what's known
+as a Hebbian learning rule.
+
+68
+00:05:27,880 --> 00:05:32,842
+Donald Hebb, a long time ago, in the 1940s
+or 1950s, suggested that synapses in the
+
+69
+00:05:32,842 --> 00:05:37,437
+brain might use a rule like that.
+But if you just use that rule, the synapse
+
+70
+00:05:37,437 --> 00:05:42,277
+strengths will keep getting stronger.
+The weights will all become very positive,
+
+71
+00:05:42,277 --> 00:05:46,688
+and the whole system will blow up.
+You have to somehow keep things under
+
+72
+00:05:46,688 --> 00:05:51,712
+control, and this learning algorithm is
+keeping things under control by using that
+
+73
+00:05:51,712 --> 00:05:55,082
+second term.
+It's reducing the weights in proportion to
+
+74
+00:05:55,082 --> 00:05:59,983
+how often those two units are on together,
+when you're sampling from the model's
+
+75
+00:05:59,983 --> 00:06:04,719
+distribution.
+You can also think of this as the first
+
+76
+00:06:04,719 --> 00:06:07,854
+term is like the storage term for a
+Hopfield Net.
+
+77
+00:06:07,854 --> 00:06:12,461
+And the second term is like the term for
+getting rid of spurious minima.
+
+78
+00:06:12,461 --> 00:06:16,044
+And in fact this is the correct way to
+think about that.
+
+79
+00:06:16,044 --> 00:06:19,500
+This rule tells you exactly how much
+unlearning to do.
+
+80
+00:06:21,660 --> 00:06:25,260
+One obvious question is why is the
+derivative so simple.
+
+81
+00:06:26,400 --> 00:06:31,471
+Well, the probability of a global
+configuration at thermal equilibrium, that
+
+82
+00:06:31,471 --> 00:06:36,543
+is once you've let it settle down, is an
+exponential function of its energy.
+
+83
+00:06:36,543 --> 00:06:40,060
+The probability is related to E to the
+minus energy.
+
+84
+00:06:41,180 --> 00:06:46,494
+So when we settle to equilibrium we
+achieve a linear relationship between the
+
+85
+00:06:46,494 --> 00:06:52,775
+log probability and the energy function.
+Now, the energy function is linear in the
+
+86
+00:06:52,775 --> 00:06:56,093
+weights.
+So, we have a linear relationship between
+
+87
+00:06:56,093 --> 00:07:01,306
+the weights and the log probability.
+And since we're trying to manipulate log
+
+88
+00:07:01,306 --> 00:07:05,775
+probabilities by manipulating weights,
+that's a good thing to have.
+
+89
+00:07:05,775 --> 00:07:12,097
+It's a log linear model.
+In fact, the relationship's very simple.
+
+90
+00:07:12,097 --> 00:07:17,643
+It's that the derivative of the energy
+with respect to a particular weight WIJ is
+
+91
+00:07:17,643 --> 00:07:22,040
+just the product of the two activities
+that, that weight connects.
+
+92
+00:07:23,720 --> 00:07:27,998
+So what's happening here?
+Is the process of settling to thermal
+
+93
+00:07:27,998 --> 00:07:31,597
+equilibrium is propagating information
+about weights?
+
+94
+00:07:31,597 --> 00:07:34,925
+We don't need an explicit back propagation
+stage.
+
+95
+00:07:34,925 --> 00:07:38,593
+We do need two stages.
+We need to settle with the data.
+
+96
+00:07:38,593 --> 00:07:43,595
+And we need to settle with no data.
+But notice that the networks behaving in
+
+97
+00:07:43,595 --> 00:07:46,477
+pretty much the same way in those two
+phases.
+
+98
+00:07:46,477 --> 00:07:51,408
+The unit deep within the network is doing
+the same thing, just with different
+
+99
+00:07:51,408 --> 00:07:55,250
+boundary conditions.
+With back prop the forward pass and the
+
+100
+00:07:55,250 --> 00:08:02,666
+backward pass are really rather different.
+Another question you could ask is what's
+
+101
+00:08:02,666 --> 00:08:06,794
+that negative phase for.
+I've already said it's like the unlearning
+
+102
+00:08:06,794 --> 00:08:10,121
+we do in a Hopfield net to get rid of
+spurious minima.
+
+103
+00:08:10,121 --> 00:08:15,792
+But let's look at it in more detail.
+The equation for the probability of a
+
+104
+00:08:15,792 --> 00:08:21,638
+visible vector, is that it's a sum overall
+hidden vectors of E to the minus the
+
+105
+00:08:21,638 --> 00:08:25,338
+energy of that visible and hidden vector
+together.
+
+106
+00:08:25,338 --> 00:08:30,000
+Normalized by the same quantity, summed
+overall visible vectors.
+
+107
+00:08:30,480 --> 00:08:36,758
+So if you look at the top term, what the
+first term in the learning rule is doing
+
+108
+00:08:36,758 --> 00:08:42,608
+is decreasing the energy of terms in that
+sum that are already large and it finds
+
+109
+00:08:42,608 --> 00:08:48,315
+those terms by settling to thermal
+equilibrium with the vector V clamped so
+
+110
+00:08:48,315 --> 00:08:53,880
+that it can find an H that goes nicely
+with V, that is gives a nice low energy
+
+111
+00:08:53,880 --> 00:08:57,663
+with V.
+Having sampled those vectors H, it then
+
+112
+00:08:57,663 --> 00:09:01,460
+changes the weights to make that energy
+even lower.
+
+113
+00:09:03,000 --> 00:09:08,413
+The second phase in the learning, the
+negative phase, is doing the same thing,
+
+114
+00:09:08,413 --> 00:09:13,185
+but for the partition function.
+That is, the normalizing term on the
+
+115
+00:09:13,185 --> 00:09:16,802
+bottom line.
+It's finding global configurations,
+
+116
+00:09:16,802 --> 00:09:21,198
+combinations of visible and hidden states
+that give low energy,
+
+117
+00:09:21,198 --> 00:09:25,593
+And therefore, are large contributors to
+the partition function.
+
+118
+00:09:25,593 --> 00:09:30,338
+And having find those global
+configurations, it tries to raise their
+
+119
+00:09:30,338 --> 00:09:36,591
+energy so that the can contribute less.
+So the first term is making the top line
+
+120
+00:09:36,591 --> 00:09:39,940
+big, and the second term is making the
+bottom line small.
+
+121
+00:09:43,300 --> 00:09:47,292
+Now in order to run this learning rule,
+you need to collect those statistics.
+
+122
+00:09:47,292 --> 00:09:51,506
+You need to collect what we call the
+positive statistics, those are the ones
+
+123
+00:09:51,506 --> 00:09:55,997
+when you have data clamped on the visible
+units, and also the negative statistics,
+
+124
+00:09:55,997 --> 00:10:00,488
+those are the ones when you don't have
+data clamped and that you're going to use
+
+125
+00:10:00,488 --> 00:10:05,194
+for unlearning.
+An inefficient way to track these
+
+126
+00:10:05,194 --> 00:10:09,740
+statistics was suggested by me and Terry
+Sejnowski in 1983.
+
+127
+00:10:10,140 --> 00:10:15,987
+And the idea is, in the positive phase you
+clamp a data vector on the visible units,
+
+128
+00:10:15,987 --> 00:10:19,440
+you set the hidden units to random binary
+states,
+
+129
+00:10:20,100 --> 00:10:24,632
+And then you keep updating the hidden
+units in the network, one unit at a time,
+
+130
+00:10:24,632 --> 00:10:28,700
+until the network reaches thermal
+equilibrium at a temperature of one.
+
+131
+00:10:29,400 --> 00:10:34,227
+We actually did that by starting at a high
+temperature and reducing it, but that's
+
+132
+00:10:34,227 --> 00:10:39,592
+not the main point here.
+And then once you reach thermal
+
+133
+00:10:39,592 --> 00:10:43,633
+equilibrium, you sample how often two
+units are on together.
+
+134
+00:10:43,633 --> 00:10:48,840
+So you're measuring the correlation of INJ
+with that visible vector clamped.
+
+135
+00:10:49,120 --> 00:10:54,175
+You then repeat that, over all the visible
+vectors, so that, that correlation you're
+
+136
+00:10:54,175 --> 00:11:00,876
+sampling is averaged over all the data.
+Then in the negative phase, you don't
+
+137
+00:11:00,876 --> 00:11:04,314
+clamp anything.
+The network is free from external
+
+138
+00:11:04,314 --> 00:11:08,103
+interference.
+So, you set all of the units, both visible
+
+139
+00:11:08,103 --> 00:11:13,624
+and hidden, to random binary states.
+And then you update the units, one at a
+
+140
+00:11:13,624 --> 00:11:18,017
+time, until the network reaches thermal
+equilibrium, at a temperature of one.
+
+141
+00:11:18,017 --> 00:11:24,142
+Just like you did in the positive phase.
+And again, you sample the correlation of
+
+142
+00:11:24,142 --> 00:11:29,762
+every pair of units INJ,
+And you repeat that many times.
+
+143
+00:11:29,762 --> 00:11:35,071
+Now it's very difficult to know how many
+times you need to repeat it, but certainly
+
+144
+00:11:35,071 --> 00:11:39,996
+in the negative phase you expect the
+energy landscape to have many different
+
+145
+00:11:39,996 --> 00:11:43,770
+minima, but are fairly separated and have
+about the same energy.
+
+146
+00:11:43,770 --> 00:11:48,153
+The reason you expect that is we're going
+to be using Boltzmann machines to do
+
+147
+00:11:48,153 --> 00:11:52,199
+things like model a set of images.
+And you expect there to be reasonable
+
+148
+00:11:52,199 --> 00:11:54,841
+images, all of which have about the same
+energy.
+
+149
+00:11:54,841 --> 00:11:58,437
+And then very unreasonable images, which
+have much higher energy.
+
+150
+00:11:58,437 --> 00:12:02,821
+And so you expect a small fraction of the
+space to be these low energy states.
+
+151
+00:12:02,821 --> 00:12:06,980
+And a very large fraction of the space to
+be these bad high energy states.
+
+152
+00:12:07,360 --> 00:12:12,787
+If you have multiple modes, it's very
+unclear how many times you need to repeat
+
+153
+00:12:12,787 --> 00:12:15,398
+this process to be able to sample those
+modes.

@@ -1,0 +1,41 @@
+En este vídeo les mostraré un ejemplo de aprendizaje automático. Es una clase muy simple de red neuronal y aprenderá a reconocer números y veremos como evolucionan los pesos a medida que corremos un 
+algoritmo de aprendizaje muy simple. Vamos a ver un algoritmo de aprendizaje muy simple para 
+entrenar una red muy simple en reconocer formas manuscritas. 
+La red tiene dos capas de neuronas. Tiene neuronas de entrada cuya activación representa la intensidad de los pixeles, 
+y neuronas de salida cuya activación representa la clase. Lo que quisiéramos es que 
+cuando le mostremos una forma en particular, la neurona de 
+salida para esa forma se active. Si un pixel está activo lo que hace es votar por una forma en particular. Es decir, a la forma que contiene ese pixel. Cada pixel coloreado puede 
+votar por varias formas y los votos pueden tener diferentes intensidades. 
+La forma que tiene más votos gana, Estamos suponiendo que hay una competencia entre las unidades de salida y eso es algo que no he explicado todavía u que será explicado en una clase posterior Primero, necesitamos decidir como mostrar los pesos. Y parece natural anotar los pesos sobre la conexión entre la unidad de entrada y la unidad de salida. 
+Pero nunca vamos a poder ver qué pasa si hacemos eso. Necesitamos un display en el que podamos 
+ver los valores de miles de pesos. La idea es que para cada unidad de salida 
+hacemos un pequeño mapa. En ese mapa mostrarmos la fuerza de la conexión que llega de cada 
+pixel de entrada en la posición de ese pixel de entrada. Y mostraremos la fuerza de la conexión usando 
+puntitos negros y blancos cuya área representa la magnitud. y cuyo color representa el signo. De modo que los pesos 
+iniciales que vemos ahí son solo pequeños pesos aleatorios. Lo vamos a hacer ahora es mostrarle algunos datos a la red 
+y hacerla aprender pesos que sean mejores que los aleatorios. La forma en que aprenderá es que cuando le mostremos 
+una imagen, vamos a incrementar los pesos de los pixeles activos en la 
+imagen hacia la clase correcta Si lo hicieramos así los pesos solo podrán ser 
+solo más grandes, y a la larga cada clase tendría una entrada enorme cuando 
+le mostremos una imagen. Necesitamos alguna forma de 
+mantener los pesos bajo control. Lo que vamos a hacer es decrementar los 
+pesos de los pixeles activos en la clase que la red suponga. La entrenaremos en lo correcto, en lugar de 
+dejarla que haga que tenga tendencia a hacer. Por supuesto, si hace lo correcto, entonces los incrementos que hacemos, en le primer paso de la regla de aprendizaje cancelarán los 
+decrementos, de modo que nada cambiará, que es lo que queremos. Estos son los pesos iniciales. Ahora le mostraremos 
+algunos cientos de ejemplos de entrenamiento y luego observaremos los pesos otra vez. Ahora los pesos han cambiado. Comenzaron a formar esquemas regulares. Y si le mostramos 
+algunos cientos de ejemplos más lo pesos cambiarán un poco, 
+algunos cientos de ejemplos más y algunos cientos más. Algunos cientos más y ahora los pesos se parecen 
+mucho a los valores finales Hablaré más de los detalles precisos del algoritmo 
+de aprendizaje en futuras lecciones. Pero lo que podemos ver es que los pesos ahora se ven como pequeñas plantillas de las formas. Si observamos los pesos que van a unidad del uno por ejemplo,
+ no parecen plantillas como para identificar unos. No son plantillas Si observamos los pesos que van para la unidad nueve no tienen ningún peso positivo 
+debajo de la línea media Es que para marcar la diferencia entre un 9 y un 7 
+los pesos debajo de la línea media no son útiles. Tenemos que marcar la diferencia decidiendo si en 
+la parte superior hay un lazo o una raya horizontal. Es así que esas unidades de salida 
+están dedicadas a esa discriminación Hay que tener en cuenta que debido a que la red es muy simple,
+ no es capaz de aprender una buena forma de discriminar las formas. Lo que aprendió es equivalente a tener 
+una pequeña plantilla para cada forma y luego decide el ganador basándose en que forma 
+tiene la plantilla que se superpone más con la tinta. El problema es que la variación de los números manuscritos es 
+demasiado compleja como para que una simple plantilla sirva para todas. Debemos modelar variaciones permisibles para los números, extrayendo características y luego viendo como están combinadas. Éstos son ejemplos de lo que hemos estado viendo Si se fijan en en los números 2 en el recuadro verde, verán que no hay 
+plantilla que los abarque a todos, y fallará en el 3 del recuadro rojo. Esta tarea no pudes resolverse 
+con una red simple como esa. La red hizo lo mejor que pudo pero
+no puede resolver este problema.

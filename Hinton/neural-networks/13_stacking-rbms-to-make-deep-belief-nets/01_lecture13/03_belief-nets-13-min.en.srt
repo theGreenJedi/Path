@@ -1,0 +1,838 @@
+1
+00:00:00,000 --> 00:00:02,725
+In this lecture, I'll introduce belief
+nets.
+
+2
+00:00:02,725 --> 00:00:07,592
+One of the reason I abandoned back
+propagation in the 1990's is because it
+
+3
+00:00:07,592 --> 00:00:11,810
+required too many labels.
+Back then, we just didn't have data sets
+
+4
+00:00:11,810 --> 00:00:16,547
+with sufficient numbers of labels.
+I was also influenced by the fact that
+
+5
+00:00:16,547 --> 00:00:20,052
+people managed to learn with very few
+explicit labels.
+
+6
+00:00:20,052 --> 00:00:24,854
+However, I didn't want to abandon the
+advantages of doing gradient descend
+
+7
+00:00:24,854 --> 00:00:27,644
+learning to learn a whole bunch of
+weights.
+
+8
+00:00:27,644 --> 00:00:32,251
+So the issue was, was there another
+objective function that we could do
+
+9
+00:00:32,251 --> 00:00:36,252
+grading decentive?
+The obvious place to look was generative
+
+10
+00:00:36,252 --> 00:00:41,434
+models where the objective function is to
+model the input data rather than
+
+11
+00:00:41,434 --> 00:00:45,580
+predicting a label.
+This meshed nicely with a major movement
+
+12
+00:00:45,580 --> 00:00:50,140
+in statistics and artificial intelligence
+called the graphical models.
+
+13
+00:00:50,140 --> 00:00:55,348
+The idea of graphical models was to
+combine discrete graph structures for
+
+14
+00:00:55,348 --> 00:00:58,938
+representing how variables depended on one
+another.
+
+15
+00:00:58,938 --> 00:01:04,287
+With real valued computations that
+inferred the probability of one variable,
+
+16
+00:01:04,287 --> 00:01:07,454
+given the observed values of other
+variables.
+
+17
+00:01:07,454 --> 00:01:12,733
+Boltzmann Machines were actually a very
+early example of a graphical model,
+
+18
+00:01:12,733 --> 00:01:18,463
+But they were undirected graphical models.
+In 1992, Radford Neal pointed out that
+
+19
+00:01:18,463 --> 00:01:23,864
+using the same kinds of units as we used
+in Boltzmann machines, we could make
+
+20
+00:01:23,864 --> 00:01:28,390
+directed graphical models which he called
+Sigmoid Belief Nets.
+
+21
+00:01:28,390 --> 00:01:33,820
+And the issue then became, how can we
+learn Sigmoid belief nets?
+
+22
+00:01:34,100 --> 00:01:38,894
+The second problem is that for deep
+networks, the learning time does not scale
+
+23
+00:01:38,894 --> 00:01:41,784
+well.
+When there's multiple hidden layers, the
+
+24
+00:01:41,784 --> 00:01:44,857
+learning was very slow.
+You might ask why this was,
+
+25
+00:01:44,857 --> 00:01:49,959
+And we now know that one of the reasons
+was we did not initialize the weights in a
+
+26
+00:01:49,959 --> 00:01:52,726
+sensible way.
+Yet, another problem is the back
+
+27
+00:01:52,726 --> 00:01:55,615
+propagation can get stuck in poor local
+optima.
+
+28
+00:01:55,615 --> 00:01:59,119
+These are often quite good, so back
+propagation is useful.
+
+29
+00:01:59,119 --> 00:02:04,037
+But we can now show that for deep nets,
+the local optima you get stuck in, if you
+
+30
+00:02:04,037 --> 00:02:07,910
+start with small random weights are
+typically far from optimal.
+
+31
+00:02:07,910 --> 00:02:12,420
+There is the possibility of retreating to
+simpler models that allow convex
+
+32
+00:02:12,420 --> 00:02:15,488
+optimization.
+But, I don't think this is a good idea.
+
+33
+00:02:15,488 --> 00:02:19,156
+Mathematicians like to do that because
+they can prove things.
+
+34
+00:02:19,156 --> 00:02:23,607
+But in practice, you're just running away
+from the complexity of real data.
+
+35
+00:02:23,607 --> 00:02:28,358
+So, one way to overcome the limits of back
+propagation is by using unsupervised
+
+36
+00:02:28,358 --> 00:02:31,275
+learning.
+The idea is that we want to keep the
+
+37
+00:02:31,275 --> 00:02:36,284
+efficiency and simplicity of using a
+gradient method and stochastic mini batch
+
+38
+00:02:36,284 --> 00:02:40,522
+descent for adjusting weights.
+But, we're going to use that method for
+
+39
+00:02:40,522 --> 00:02:45,274
+modeling the structure of the sensory
+input, not for modeling the relation
+
+40
+00:02:45,274 --> 00:02:50,395
+between input and output.
+So the idea is, the weights are going to
+
+41
+00:02:50,395 --> 00:02:55,225
+be adjusted to maximize the probability
+that a generative model would have
+
+42
+00:02:55,225 --> 00:02:59,540
+generated the sensory input.
+We already saw that in learning Boltzmann
+
+43
+00:02:59,540 --> 00:03:04,036
+machines.
+And one way to think about it is, if you
+
+44
+00:03:04,036 --> 00:03:08,764
+want to do computer vision, you should
+first learn to do computer graphics.
+
+45
+00:03:08,764 --> 00:03:13,046
+To first order, computer graphics works
+and computer vision doesn't.
+
+46
+00:03:13,046 --> 00:03:17,902
+The learning objective for a generative
+model, as we saw with Boltzmann machines,
+
+47
+00:03:17,902 --> 00:03:22,503
+is to maximize the probability of the
+observed data not to maximize the
+
+48
+00:03:22,503 --> 00:03:27,517
+probability of labels given inputs.
+Then the question arises, what kind of
+
+49
+00:03:27,517 --> 00:03:32,799
+generative model should we learn?
+We might learn an energy based model like
+
+50
+00:03:32,799 --> 00:03:37,598
+the Boltzmann machine,
+Or we might learn a causal model made of
+
+51
+00:03:37,598 --> 00:03:41,120
+idealized neurons, and that's what we'll
+look at first.
+
+52
+00:03:41,620 --> 00:03:46,318
+Well finally, we might learn some kind of
+hybrid of the two, and that's where we'll
+
+53
+00:03:46,318 --> 00:03:49,643
+end up.
+So, before I go into causal belief nets
+
+54
+00:03:49,643 --> 00:03:54,673
+made of neurons, I want to give you a
+little bit of background about artificial
+
+55
+00:03:54,673 --> 00:03:59,436
+intelligence and probability.
+In the 1970's and early 1980's, people in
+
+56
+00:03:59,436 --> 00:04:03,085
+artificial intelligence were unbelievably
+anti-probability.
+
+57
+00:04:03,085 --> 00:04:07,725
+When I was a graduate student, if you
+mentioned probability, it was assigned
+
+58
+00:04:07,725 --> 00:04:11,003
+that you were stupid and that you just
+hadn't got it.
+
+59
+00:04:11,003 --> 00:04:15,890
+Computers were all about discrete single
+processing, and if you'd introduce any
+
+60
+00:04:15,890 --> 00:04:18,860
+probabilities they would just infect
+everything.
+
+61
+00:04:19,140 --> 00:04:24,958
+It's hard to conceive of how much people
+are against probability, so here's a quote
+
+62
+00:04:24,958 --> 00:04:28,255
+to help you.
+I'll read it out.
+
+63
+00:04:28,255 --> 00:04:33,251
+Many ancient Greeks supported Socrates
+opinion that deep, inexplicable thoughts
+
+64
+00:04:33,251 --> 00:04:36,982
+came from the gods.
+Today's equivelant to those gods is the
+
+65
+00:04:36,982 --> 00:04:41,220
+erratic, even probabilistic neuron.
+It is more likely that increased
+
+66
+00:04:41,220 --> 00:04:46,026
+randomness of neural behavior is the
+problem of the epileptic and the drunk,
+
+67
+00:04:46,026 --> 00:04:52,281
+not the advantage of the brilliant.
+That was in Patrick Henry Winston's first
+
+68
+00:04:52,281 --> 00:04:57,456
+AI textbook, in the first edition.
+And it was the general opinion at the
+
+69
+00:04:57,456 --> 00:05:00,736
+time.
+Winston was to become the leader of the
+
+70
+00:05:00,736 --> 00:05:03,506
+MIT AI Lab.
+Here's an alternative view.
+
+71
+00:05:03,506 --> 00:05:09,265
+All of this will lead to theories of
+computation which are much less rigidly of
+
+72
+00:05:09,265 --> 00:05:13,420
+an all-or-none nature than past and
+present formal logic.
+
+73
+00:05:14,020 --> 00:05:18,860
+There are numerous indications to make us
+believe that this new system of formal
+
+74
+00:05:18,860 --> 00:05:23,462
+logic will move closer to another
+discipline which has been little linked in
+
+75
+00:05:23,462 --> 00:05:27,048
+the past with logic.
+This is thermodynamics, primarily in the
+
+76
+00:05:27,048 --> 00:05:32,282
+form it was received from Boltzmann.
+That was written by John von Neumann in
+
+77
+00:05:32,282 --> 00:05:36,810
+1957, and was part of the unfinished
+manuscript he left behind for what was to
+
+78
+00:05:36,810 --> 00:05:40,700
+be his crowning achievement,
+His book on The Computer and the Brain.
+
+79
+00:05:41,540 --> 00:05:45,432
+I think if von Neumann had lived, the
+history of artificial intelligence might
+
+80
+00:05:45,432 --> 00:05:50,262
+have been somewhat different.
+So, probabilities eventually found their
+
+81
+00:05:50,262 --> 00:05:53,816
+way into AI by something called graphical
+models,
+
+82
+00:05:53,816 --> 00:05:58,081
+Which are a marriage of graph theory and
+probability theory.
+
+83
+00:05:58,081 --> 00:06:03,766
+In the 1980's, there was a lot of work on
+expert systems in AI that use bags of
+
+84
+00:06:03,766 --> 00:06:08,600
+rules for tasks such as, medical diagnosis
+or exploring for minerals.
+
+85
+00:06:08,900 --> 00:06:12,700
+Now, these were practical problems so they
+had to deal with uncertainty.
+
+86
+00:06:12,700 --> 00:06:16,180
+They couldn't just use toy examples where
+everything was certain.
+
+87
+00:06:16,560 --> 00:06:21,935
+People in AI dislike probability so much
+that even when they were dealing with
+
+88
+00:06:21,935 --> 00:06:25,337
+uncertainty, they didn't want to use
+probabilities.
+
+89
+00:06:25,337 --> 00:06:30,917
+So, they made up their own ways of dealing
+with uncertainties that did not involve
+
+90
+00:06:30,917 --> 00:06:34,727
+probabilities.
+You can actually prove that this is a bad
+
+91
+00:06:34,727 --> 00:06:38,191
+bet.
+Graphical models were introduced by Pearl,
+
+92
+00:06:38,191 --> 00:06:43,374
+Heckman, Lauritz and many others who
+shared that probabilities actually worked
+
+93
+00:06:43,374 --> 00:06:48,159
+better than the ad hoc methods developed
+by people doing expert systems.
+
+94
+00:06:48,159 --> 00:06:53,475
+Discrete graphs were good for representing
+what variable dependent on what other
+
+95
+00:06:53,475 --> 00:06:57,189
+variables.
+But once you have those graphs, you then
+
+96
+00:06:57,189 --> 00:07:02,565
+needed to do real value computations that
+respected the rules of probability so that
+
+97
+00:07:02,565 --> 00:07:07,309
+you could compute the expected values of
+some nodes in the graph, given the
+
+98
+00:07:07,309 --> 00:07:12,210
+observed states of other nodes.
+Belief nets is the name that people in
+
+99
+00:07:12,210 --> 00:07:17,788
+graphical models give to a particular
+subset of graphs which are directed
+
+100
+00:07:17,788 --> 00:07:22,085
+acyclic graphs.
+And typically, they use sparsely connected
+
+101
+00:07:22,085 --> 00:07:24,950
+ones.
+And if those graphs are sparsely
+
+102
+00:07:24,950 --> 00:07:30,152
+connected, they have clever inference
+algorithms that can compute the
+
+103
+00:07:30,152 --> 00:07:33,620
+probabilities of unobserved nodes
+efficiently.
+
+104
+00:07:33,900 --> 00:07:38,769
+But, these clever of algorithms are
+exponential in the number of nodes that
+
+105
+00:07:38,769 --> 00:07:43,120
+influence each node, so they won't work
+for densely connected nodes.
+
+106
+00:07:43,520 --> 00:07:48,612
+So, belief net is directed acyclic graph
+composed of stochastic variables,
+
+107
+00:07:48,612 --> 00:07:54,120
+And here's a picture of one.
+In general, you might observe any of the
+
+108
+00:07:54,120 --> 00:07:57,692
+variables.
+I'm going to restrict myself to nets in
+
+109
+00:07:57,692 --> 00:08:04,971
+which you only observe the leaf nodes.
+So, we imagine is these unobserved hidden
+
+110
+00:08:04,971 --> 00:08:10,726
+causes, and they may be lead,
+And they eventually give rise to some
+
+111
+00:08:10,726 --> 00:08:15,182
+observed effects.
+Once we observe some variables, there's
+
+112
+00:08:15,182 --> 00:08:20,269
+two problems we'd like to solve.
+The first is what I call the inference
+
+113
+00:08:20,269 --> 00:08:24,064
+problem, and that's to infer the states of
+unobserved variables.
+
+114
+00:08:24,064 --> 00:08:28,160
+Of course, we can't infer them with
+certainty, so what we're after is the
+
+115
+00:08:28,160 --> 00:08:31,171
+probability distributions of unobserved
+variables.
+
+116
+00:08:31,171 --> 00:08:35,568
+And if unobserved variables are not
+independent of one another, given the
+
+117
+00:08:35,568 --> 00:08:40,086
+observed variables, there is probability
+distributions are likely to be big
+
+118
+00:08:40,086 --> 00:08:43,520
+cumbersome things with an exponential
+number of terms in.
+
+119
+00:08:45,220 --> 00:08:48,080
+The second problem is the learning
+problem.
+
+120
+00:08:48,440 --> 00:08:54,333
+That is, given a training set composed of
+observed vectors of states of all of the
+
+121
+00:08:54,333 --> 00:08:58,143
+leaf nodes,
+How do we adjust the interactions between
+
+122
+00:08:58,143 --> 00:09:03,390
+variables to make the network more likely
+to generate that training data?
+
+123
+00:09:03,390 --> 00:09:08,565
+So, adjusting the interactions would
+involve both deciding which node is
+
+124
+00:09:08,565 --> 00:09:13,669
+affected by which other node,
+And also deciding on the strength of that
+
+125
+00:09:13,669 --> 00:09:17,191
+effect.
+So, let me just say a little bit about the
+
+126
+00:09:17,191 --> 00:09:21,360
+relationship between graphical models and
+neural networks.
+
+127
+00:09:22,760 --> 00:09:28,460
+The early graphical models used experts to
+define the graph structure and also the
+
+128
+00:09:28,460 --> 00:09:33,199
+conditional probabilities.
+They would typically take a medical expert
+
+129
+00:09:33,199 --> 00:09:38,763
+and ask him how likely is this to cause
+that, and then they would make a graph in
+
+130
+00:09:38,763 --> 00:09:43,159
+which the nodes had meanings.
+And they typically had conditional
+
+131
+00:09:43,159 --> 00:09:48,653
+probability tables that described how a
+set of values for the parents of a node
+
+132
+00:09:48,653 --> 00:09:52,500
+would determine the distribution of values
+for the node.
+
+133
+00:09:54,360 --> 00:10:00,159
+Their graph was sparsely connected.
+And the initial problem they focused on
+
+134
+00:10:00,159 --> 00:10:04,435
+was how to do correct inference.
+Initially, they weren't interested in
+
+135
+00:10:04,435 --> 00:10:07,720
+learning because the knowledge came from
+the experts.
+
+136
+00:10:07,720 --> 00:10:12,863
+By contrast, for neural nets, learning was
+always a central issue and hand wiring the
+
+137
+00:10:12,863 --> 00:10:17,456
+knowledge was regarded as not cool.
+Although, of course, wiring in some basic
+
+138
+00:10:17,456 --> 00:10:21,620
+properties, as in convolutional nets, was
+a very sensible thing to do.
+
+139
+00:10:21,620 --> 00:10:27,094
+But basically, the knowledge in the net
+came from learning the training data, not
+
+140
+00:10:27,094 --> 00:10:30,378
+from experts.
+Neural networks didn't aim to have
+
+141
+00:10:30,378 --> 00:10:34,963
+interpretability or sparse connectivity to
+make the inference easy.
+
+142
+00:10:34,963 --> 00:10:39,205
+Nevertheless, there are neural network
+versions of belief nets.
+
+143
+00:10:39,205 --> 00:10:43,858
+So, if we think about how to make
+generative models out of idealized
+
+144
+00:10:43,858 --> 00:10:47,279
+neurons,
+There's basically two types of generative
+
+145
+00:10:47,279 --> 00:10:51,466
+model you can make.
+This energy based models, where you
+
+146
+00:10:51,466 --> 00:10:56,650
+connect binary stochastic neurons using
+symmetric connections, and then you get a
+
+147
+00:10:56,650 --> 00:11:01,484
+Boltzmann machine.
+A Boltzmann machine, as we've seen, is
+
+148
+00:11:01,484 --> 00:11:04,969
+hard to learn.
+But if we restrict the connectivity, then
+
+149
+00:11:04,969 --> 00:11:08,137
+it's easy to learn a restricted Boltzmann
+machine.
+
+150
+00:11:08,137 --> 00:11:11,939
+However, when we do that, we've only
+learned one hidden layer.
+
+151
+00:11:11,939 --> 00:11:17,072
+And so, we're giving up on a lot of the
+power of neural nets with multiple hidden
+
+152
+00:11:17,072 --> 00:11:23,708
+layers in order to make learning easy.
+The other kind of model you can make is a
+
+153
+00:11:23,708 --> 00:11:27,464
+causal model.
+That is a directed acyclic graph composed
+
+154
+00:11:27,464 --> 00:11:32,108
+of binary stochastic neurons.
+And when you do that, you get a sigmoid
+
+155
+00:11:32,108 --> 00:11:36,435
+belief net.
+In 1992, Neal introduced models like this
+
+156
+00:11:36,435 --> 00:11:42,297
+and compared them with Boltzmann machines
+and showed that Sigmoid belief nets were
+
+157
+00:11:42,297 --> 00:11:46,958
+slightly easier to learn.
+So, a Sigmoid belief net is just a belief
+
+158
+00:11:46,958 --> 00:11:51,265
+net in which all of the variables are
+binary stochastic neurons.
+
+159
+00:11:51,265 --> 00:11:56,280
+To generate data from this model, you take
+the neurons in the top layer.
+
+160
+00:11:56,640 --> 00:12:00,673
+You determine whether they should be ones
+or zeros based on their biases,
+
+161
+00:12:00,673 --> 00:12:05,110
+So you determine out stochastically.
+And then, given the states of the neurons
+
+162
+00:12:05,110 --> 00:12:09,662
+in the top layer, you'd make stochastic
+decisions about what the neurons in the
+
+163
+00:12:09,662 --> 00:12:13,580
+middle layer should be doing.
+And then, given their binary states, you
+
+164
+00:12:13,580 --> 00:12:16,750
+make decisions about what the visible
+effect should be.
+
+165
+00:12:16,750 --> 00:12:22,298
+And by doing that sequence of operations,
+a causal sequence from layer to layer,
+
+166
+00:12:22,298 --> 00:12:27,917
+You would get an unbiased sample of the
+kinds of vectors of visible values that
+
+167
+00:12:27,917 --> 00:12:32,974
+your neural network believes in.
+So, in a causal model, unlike a Boltzmann
+
+168
+00:12:32,974 --> 00:12:35,643
+machine, it's easy to generate samples.

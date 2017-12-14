@@ -1,0 +1,749 @@
+1
+00:00:00,000 --> 00:00:05,376
+In this video, I'm going to talk about
+improving generalization by reducing the
+
+2
+00:00:05,376 --> 00:00:11,092
+overfitting that occurs when a network has
+too much capacity for the amount of data
+
+3
+00:00:11,092 --> 00:00:15,888
+it's given during training.
+I'll describe various ways of controlling
+
+4
+00:00:15,888 --> 00:00:20,536
+the capacity of a network.
+And I'll also describe how we determine
+
+5
+00:00:20,536 --> 00:00:26,100
+how to set the metric parameters when we
+use a method for controlling capacity.
+
+6
+00:00:26,100 --> 00:00:31,523
+I'll then go on to give an example where
+we control capacity by stopping the
+
+7
+00:00:31,523 --> 00:00:35,062
+learning early.
+Just to remind you, the reason we get
+
+8
+00:00:35,062 --> 00:00:40,765
+over-fitting is because as well as having
+information about the true regularities in
+
+9
+00:00:40,765 --> 00:00:46,333
+the mapping from the input or output, any
+finite set of training data also contains
+
+10
+00:00:46,333 --> 00:00:50,972
+sampling error.
+There's accidental regularities in the
+
+11
+00:00:50,972 --> 00:00:55,064
+training set, just because of the
+particular training cases that were
+
+12
+00:00:55,064 --> 00:00:59,322
+chosen.
+So when we fit the model, it can't tell
+
+13
+00:00:59,322 --> 00:01:03,804
+which of the regularities are real, and
+would also exist if we sampled the
+
+14
+00:01:03,804 --> 00:01:07,196
+training set again,
+And which are caused by the sampling
+
+15
+00:01:07,196 --> 00:01:11,568
+error.
+So the model fits both kinds of
+
+16
+00:01:11,568 --> 00:01:14,927
+regularity.
+And if the model's too flexible, it'll fit
+
+17
+00:01:14,927 --> 00:01:18,920
+the sampling error really well, and then
+it'll generalize badly.
+
+18
+00:01:19,580 --> 00:01:22,560
+So we need a way to prevent this over
+fitting.
+
+19
+00:01:23,020 --> 00:01:26,228
+The first method I'll describe is by far
+the best.
+
+20
+00:01:26,228 --> 00:01:30,784
+And it's simply to get more data.
+There's no point coming up with fancy
+
+21
+00:01:30,784 --> 00:01:35,019
+schemes to prevent over fitting if you can
+get yourself more data.
+
+22
+00:01:35,019 --> 00:01:39,318
+Data has exactly the right characteristics
+to prevent over fitting.
+
+23
+00:01:39,318 --> 00:01:44,130
+The more of it you have the better.
+Assuming your computer's fast enough to
+
+24
+00:01:44,130 --> 00:01:49,622
+use it.
+A second method is to try and judiciously
+
+25
+00:01:49,622 --> 00:01:55,066
+limit the capacity of the model so that
+it's got enough capacity to fit the true
+
+26
+00:01:55,066 --> 00:02:00,443
+regularities but not enough capacity to
+fit the spurious regularities caused by
+
+27
+00:02:00,443 --> 00:02:04,467
+the sampling error.
+This of course is very difficult to do.
+
+28
+00:02:04,467 --> 00:02:09,443
+And I'll describe in the rest of this
+lecture, various approaches to trying to
+
+29
+00:02:09,443 --> 00:02:16,808
+regulate the capacity appropriately.
+In the next lecture, I'll talk about
+
+30
+00:02:16,808 --> 00:02:22,627
+averaging together many different models.
+If we average models that have different
+
+31
+00:02:22,627 --> 00:02:27,462
+forms and make different mistakes, the
+average will do better than the individual
+
+32
+00:02:27,462 --> 00:02:32,497
+models.
+We could make the models different just by
+
+33
+00:02:32,497 --> 00:02:35,646
+training them on different subsets of the
+training data.
+
+34
+00:02:35,646 --> 00:02:39,919
+This is a technique called bagging.
+There's also other ways to mess with the
+
+35
+00:02:39,919 --> 00:02:43,180
+training data to make the models as
+different as possible.
+
+36
+00:02:44,320 --> 00:02:49,942
+And the fourth approach, which is the
+basian approach, is to use a single neural
+
+37
+00:02:49,942 --> 00:02:54,584
+network architecture, but to find many
+different sets of weights that do a good
+
+38
+00:02:54,584 --> 00:02:58,964
+job of predicting the output.
+And then on test data, you average the
+
+39
+00:02:58,964 --> 00:03:02,560
+predictions made by all those different
+weight vectors.
+
+40
+00:03:05,100 --> 00:03:08,577
+So, there's many ways to control the
+capacity of a model.
+
+41
+00:03:08,577 --> 00:03:13,732
+The most obvious is via the architecture.
+You limit the number of hidden layers, and
+
+42
+00:03:13,732 --> 00:03:17,582
+the number of units per layer.
+And this controls the number of
+
+43
+00:03:17,582 --> 00:03:21,060
+connections in the network, i.e.
+The number of parameters.
+
+44
+00:03:22,900 --> 00:03:27,397
+A second method which is often very
+convenient is to start with small weights
+
+45
+00:03:27,397 --> 00:03:30,683
+and then stop the learning before it has
+time to overfit.
+
+46
+00:03:30,683 --> 00:03:35,296
+Again on the assumption that it finds the
+true regularities before it finds the
+
+47
+00:03:35,296 --> 00:03:40,139
+spurious regularities that have just to do
+with the particular training set we have.
+
+48
+00:03:40,139 --> 00:03:43,080
+I'll describe that method at the end of
+this video.
+
+49
+00:03:45,140 --> 00:03:50,500
+A very common way to control the capacity
+of a neural network is to give it a number
+
+50
+00:03:50,500 --> 00:03:55,545
+of hidden lairs or units per lair is a
+little to large, but then to penalize the
+
+51
+00:03:55,545 --> 00:04:00,464
+weights using penalties or constraints
+using squared values of the weights or
+
+52
+00:04:00,464 --> 00:04:06,922
+absolute values of the weights.
+And finally, we can control the capacity
+
+53
+00:04:06,922 --> 00:04:12,260
+of a model by adding noise to the weights,
+or by adding noise to the activities.
+
+54
+00:04:12,600 --> 00:04:18,078
+Typically, we use a combination of several
+of these different capacity control
+
+55
+00:04:18,078 --> 00:04:23,429
+methods.
+Now for most of these methods, there's
+
+56
+00:04:23,429 --> 00:04:28,007
+meta parameters that you have to set.
+Like the number of hidden units, or the
+
+57
+00:04:28,007 --> 00:04:31,080
+number of layers, or the size of the
+weight penalty.
+
+58
+00:04:32,580 --> 00:04:36,934
+An obvious way to transit those meta
+parameters is to try lots of different
+
+59
+00:04:36,934 --> 00:04:41,575
+values of one of the meta parameters like,
+for example, the number of hidden units,
+
+60
+00:04:41,575 --> 00:04:44,841
+and see which gives the best performance
+on the test set.
+
+61
+00:04:44,841 --> 00:04:47,420
+But there's something deeply wrong with
+that.
+
+62
+00:04:47,860 --> 00:04:53,041
+It gives a false impression of how well
+the method will work if you give it
+
+63
+00:04:53,041 --> 00:04:57,760
+another test set.
+So the settings that work best for one
+
+64
+00:04:57,760 --> 00:05:02,275
+particular test set are unlikely to work
+as well on a new test set that's drawn
+
+65
+00:05:02,275 --> 00:05:06,903
+from the same distribution because they've
+been tuned to that particular test set.
+
+66
+00:05:06,903 --> 00:05:11,474
+And that means you get a false impression
+of how well you would do on a new test
+
+67
+00:05:11,474 --> 00:05:16,473
+set.
+Let me give you an extreme example of
+
+68
+00:05:16,473 --> 00:05:19,545
+that.
+Suppose the test set really is random,
+
+69
+00:05:19,545 --> 00:05:23,175
+quite a lot of financial data seems to be
+like that.
+
+70
+00:05:23,175 --> 00:05:28,691
+So the answers just don't depend on the
+inputs or can't be predictive from the
+
+71
+00:05:28,691 --> 00:05:33,084
+inputs.
+If you choose the model that does best on
+
+72
+00:05:33,084 --> 00:05:38,425
+your test set, that will obviously do
+better than chance because you selected it
+
+73
+00:05:38,425 --> 00:05:42,832
+to do better than chance.
+But if you take that model and try it on
+
+74
+00:05:42,832 --> 00:05:47,706
+new data that's also random, you can't
+expect it to do better than chance.
+
+75
+00:05:47,706 --> 00:05:53,181
+So by selecting a model, you got a false
+impression of how well a model will do on
+
+76
+00:05:53,181 --> 00:05:56,920
+new data and the question is, is there a
+way around that?
+
+77
+00:05:59,640 --> 00:06:03,131
+So here's a better way to choose the
+meta-parameters.
+
+78
+00:06:03,131 --> 00:06:07,084
+You start by dividing the total data set
+into three subsets.
+
+79
+00:06:07,084 --> 00:06:12,420
+You have the training data, which is what
+you're going to use to train your model.
+
+80
+00:06:13,560 --> 00:06:17,676
+You hold back some validation data, which
+isn't going to be used for training.
+
+81
+00:06:17,676 --> 00:06:21,292
+But is going to be used for deciding how
+to set the meta parameters.
+
+82
+00:06:21,292 --> 00:06:25,631
+In other words, you're going to look at
+how well the model does on the validation
+
+83
+00:06:25,631 --> 00:06:29,970
+data to decide what's an appropriate
+number of hidden units or an appropriate
+
+84
+00:06:29,970 --> 00:06:33,366
+size of weight penalty.
+But then once you've done that, and
+
+85
+00:06:33,366 --> 00:06:38,203
+trained your model with what looks like
+the best number of hidden units and the
+
+86
+00:06:38,203 --> 00:06:41,952
+best weight penalty,
+You're then going to see how well it does
+
+87
+00:06:41,952 --> 00:06:46,184
+on the final set of data that you've held
+back which is the test data.
+
+88
+00:06:46,184 --> 00:06:50,658
+And you must only use that once.
+And that'll give you an unbiased estimate
+
+89
+00:06:50,658 --> 00:06:54,830
+of how well the network works.
+And in general that estimate will be a
+
+90
+00:06:54,830 --> 00:06:59,417
+little worse than on the validation data.
+Nowadays in competitions, the people
+
+91
+00:06:59,417 --> 00:07:04,217
+organizing the competitions have learned
+to hold back that true test data and get
+
+92
+00:07:04,217 --> 00:07:08,959
+people to send in predictions so they can
+see whether they really can predict on
+
+93
+00:07:08,959 --> 00:07:13,525
+true test data, or whether they're just
+over-fitting to the validation data by
+
+94
+00:07:13,525 --> 00:07:17,915
+selecting meta-parameters that do
+particularly well on the validation data
+
+95
+00:07:17,915 --> 00:07:25,689
+but won't generalize to new test sets.
+One way we can get a better estimate of
+
+96
+00:07:25,689 --> 00:07:31,295
+our weight penalties or number of hidden
+units or anything else we're trying to fix
+
+97
+00:07:31,295 --> 00:07:35,165
+using the validation data, is to rotate
+the validation set.
+
+98
+00:07:35,165 --> 00:07:39,703
+So, we hold back a final test set to get
+our final unbiased estimate.
+
+99
+00:07:39,703 --> 00:07:45,109
+But then we divide the other data into N
+equal sized subsets and we train on all
+
+100
+00:07:45,109 --> 00:07:48,780
+but one of those N, and use the Nth as a
+validation set.
+
+101
+00:07:48,780 --> 00:07:53,065
+Then we can rotate and a hold back a
+different subset as a validation set, and
+
+102
+00:07:53,065 --> 00:07:57,516
+so we can get many different estimates of
+what the best weight penalty is, or the
+
+103
+00:07:57,516 --> 00:08:03,004
+best number of hidden units is.
+This is called N-fold cross-validation.
+
+104
+00:08:03,004 --> 00:08:07,825
+It's important to remember, the N
+different estimates we get are not
+
+105
+00:08:07,825 --> 00:08:12,993
+independent of one another.
+If for example, we were really unlucky and
+
+106
+00:08:12,993 --> 00:08:16,731
+all the examples of one class fell into
+one of those subsets,
+
+107
+00:08:16,731 --> 00:08:21,511
+We'd expect to generalize very badly.
+And we'd expect to generalize very badly,
+
+108
+00:08:21,511 --> 00:08:26,413
+whether that subset was the validation
+subset or whether it was in the training
+
+109
+00:08:26,413 --> 00:08:29,060
+data.
+So now I'm going to describe one
+
+110
+00:08:29,060 --> 00:08:32,681
+particularly easy to use method for
+printing over fitting.
+
+111
+00:08:32,681 --> 00:08:37,926
+It's good when you have a big model on a
+small computer and you don't have the time
+
+112
+00:08:37,926 --> 00:08:42,921
+to train a model many different times with
+different numbers of hidden units or
+
+113
+00:08:42,921 --> 00:08:48,207
+different size weight penalties.
+What you do is you start with small
+
+114
+00:08:48,207 --> 00:08:51,318
+weights, and as the model trains, they
+grow.
+
+115
+00:08:51,318 --> 00:08:55,171
+And you watch the performance on the
+validation set.
+
+116
+00:08:55,171 --> 00:08:59,320
+And as soon as it starts to get worse, you
+stop training.
+
+117
+00:09:00,220 --> 00:09:05,110
+Now, the performance civilization on the
+set may fluctuate particularly if you're
+
+118
+00:09:05,110 --> 00:09:08,672
+error rate rather than a squared error or
+presentory error.
+
+119
+00:09:08,672 --> 00:09:13,622
+And so its hard to decide when to stop and
+so what you typically do is keep going
+
+120
+00:09:13,622 --> 00:09:18,573
+until you're sure things are getting worse
+and then go back to the point at which
+
+121
+00:09:18,573 --> 00:09:22,623
+things were best.
+The reason this controls the capacity of
+
+122
+00:09:22,623 --> 00:09:27,228
+the model, is because models with small
+weights generally don't have as much
+
+123
+00:09:27,228 --> 00:09:30,500
+capacity, and the weights haven't had time
+to grow big.
+
+124
+00:09:31,180 --> 00:09:36,300
+It's interesting to ask why small weights
+lower the capacity.
+
+125
+00:09:37,380 --> 00:09:43,680
+So consider a model with some input units,
+some hidden units, and some output units.
+
+126
+00:09:43,960 --> 00:09:49,116
+When the weight's very small, if the
+hidden unit's a logistic units, their
+
+127
+00:09:49,116 --> 00:09:54,767
+total inputs will be close to zero, and
+they'll be in the middle of their linear
+
+128
+00:09:54,767 --> 00:09:58,016
+range.
+That is, they'll behave very like linear
+
+129
+00:09:58,016 --> 00:10:02,139
+units.
+What that means is, when the weights are
+
+130
+00:10:02,139 --> 00:10:08,452
+small, the whole network is the same as a
+linear network that maps the inputs
+
+131
+00:10:08,452 --> 00:10:13,445
+straight to the outputs.
+So, if you multiply that weight matrix W1
+
+132
+00:10:13,678 --> 00:10:18,504
+by that weight matrix W2, you'll get a
+weight matrix that you can use to connect
+
+133
+00:10:18,504 --> 00:10:23,330
+the inputs to the outputs and provided the
+weights are small, a net with a layer of
+
+134
+00:10:23,330 --> 00:10:27,692
+logistic hidden units will behave pretty
+much the same as that linear note.
+
+135
+00:10:27,692 --> 00:10:32,285
+Provided we also divide the weights in the
+linear note by four, which take into
+
+136
+00:10:32,285 --> 00:10:36,937
+account the fact that when there's hidden
+units there, in that linear region, and
+
+137
+00:10:36,937 --> 00:10:41,824
+they have a slope of a quarter.
+So it's got no more capacity than the
+
+138
+00:10:41,824 --> 00:10:46,520
+linear net, so even though in that network
+I'm showing you there's three  six + six
+
+139
+00:10:46,520 --> 00:10:54,487
+two weights, it's really got no more
+capacity than a network with three  two
+
+140
+00:10:54,490 --> 00:10:57,952
+weights.
+That's the way its grow.
+
+141
+00:10:57,952 --> 00:11:01,616
+We start using the non linear region of
+the sequence.
+
+142
+00:11:01,616 --> 00:11:05,280
+And then we start making use of all those
+parameters.
+
+143
+00:11:06,120 --> 00:11:12,483
+So if the network has six weights at the
+beginning of learning and has 30 weights
+
+144
+00:11:12,483 --> 00:11:17,070
+at the end of learning,
+Then we could think of the capacity as
+
+145
+00:11:17,070 --> 00:11:23,360
+changing smoothly from six perimeters to
+30 perimeters as the weights get bigger.
+
+146
+00:11:23,360 --> 00:11:28,102
+And what's happening in early stopping is
+we're stopping the learning when it has
+
+147
+00:11:28,102 --> 00:11:32,728
+the right number of parameters to do as
+well as possible on the validation data.
+
+148
+00:11:32,728 --> 00:11:37,529
+That is when it's optimized the trade off
+between fitting the true regularities in
+
+149
+00:11:37,529 --> 00:11:41,866
+the data and fitting the spurious
+regularities that are just there because
+
+150
+00:11:41,866 --> 00:11:44,469
+of the particular training examples we
+chose.

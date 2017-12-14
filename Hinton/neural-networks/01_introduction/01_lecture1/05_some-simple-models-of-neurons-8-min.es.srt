@@ -1,0 +1,512 @@
+1
+00:00:00,000 --> 00:00:05,013
+En este vídeo describiré algunos modelos
+de neuronas relativamente simples.
+
+2
+00:00:05,013 --> 00:00:10,081
+Describiré varios modelos diferentes
+comenzando por neuronas lineales 
+
+3
+00:00:10,081 --> 00:00:14,088
+simples con umbral y
+luego modelos más complicados
+
+4
+00:00:14,088 --> 00:00:20,028
+Son mucho más simples que las neuronas reales.
+pero aún así son suficientemente complicadas
+
+5
+00:00:20,028 --> 00:00:25,035
+como para permitirnos armar redes neuronales
+que hacen clases muy interesantes de aprendizaje automático
+
+6
+00:00:25,035 --> 00:00:28,083
+Para entender cualquier cosa complicada
+
+7
+00:00:28,083 --> 00:00:34,050
+tenemos que idealizarla.
+Es decir, hacer simplificaciones
+
+8
+00:00:34,050 --> 00:00:38,036
+que nos permitan tener una idea
+de como trabajan
+
+9
+00:00:38,036 --> 00:00:44,025
+Con los átomos, por ejemplo, los simplificamos
+pensándolos como pequeños sistemas solares.
+
+10
+00:00:45,015 --> 00:00:49,019
+La idealización elimina los detalles 
+complejos que no son esenciales
+
+11
+00:00:49,019 --> 00:00:54,010
+para entender los principios fundamentales.
+Nos permite aplicar matemáticas y
+
+12
+00:00:54,010 --> 00:00:58,096
+hacer analogías con otros sistemas familiares.
+Y, una vez que entedemos los principios
+
+13
+00:00:58,096 --> 00:01:03,088
+básicos es fácil agregar complejidad,
+y hacer el modelo más fiel a la
+
+14
+00:01:03,088 --> 00:01:07,003
+realidad.
+Por supuesto, tenemos que ser cuidadosos
+
+15
+00:01:07,003 --> 00:01:11,055
+cuando idealizamos algo, 
+para no eliminar aquello que le da sus
+
+16
+00:01:11,055 --> 00:01:15,060
+propiedades más importantes.
+Es útil entender modelos que
+
+17
+00:01:15,060 --> 00:01:19,035
+se sabe que son erróneos, mientras no 
+olvidemos que lo son.
+
+18
+00:01:19,035 --> 00:01:24,000
+Por ejemplo, mucho del trabajo sobre redes 
+neuronales usa neuronas que comunican
+
+19
+00:01:24,000 --> 00:01:28,083
+valores reales en lugar de picos discretos de actividad
+y sabemos que las neuronas corticales
+
+20
+00:01:28,083 --> 00:01:33,060
+no se comportan así, pero aún así es útil 
+entender un sistema como ese, y
+
+21
+00:01:33,060 --> 00:01:37,000
+en la práctica pueden ser muy útiles 
+para el aprendizaje automático
+
+22
+00:01:37,095 --> 00:01:42,081
+La primer clase de neuronas de la que
+quiero hablarles es la más simple.
+
+23
+00:01:42,081 --> 00:01:44,055
+Es la neurona lineal
+Es simple.
+
+24
+00:01:44,055 --> 00:01:47,089
+Es limitada en el cálculo que puede hacer.
+
+25
+00:01:47,089 --> 00:01:52,030
+Puede permitirnos entender luego
+las neuronas más complicadas.
+
+26
+00:01:52,052 --> 00:01:59,085
+pero puede llevar a confusión.
+En la neurona lineal, la salida y
+
+27
+00:02:00,018 --> 00:02:05,067
+es una función del "sesgo" de la neurona b
+y la suma 
+
+28
+00:02:05,067 --> 00:02:11,075
+sobre todas las conexiones entrantes de la actividad x 
+de la línea por el peso w de esa línea
+
+29
+00:02:11,075 --> 00:02:17,069
+Ese es el peso peso sináptico sobre la entrada.
+Y si graficas esa curva, entonces 
+
+30
+00:02:17,069 --> 00:02:23,062
+pones sobre el eje-x el sesgo más 
+las actividades pesadas sobre las líneas de entrada
+
+31
+00:02:23,062 --> 00:02:26,081
+obtenemos una línea recta que pasapor cero.
+
+32
+00:02:30,069 --> 00:02:34,086
+Muy distintas de las neuronas lineales
+son las neuronas de umbral binario
+
+33
+00:02:34,086 --> 00:02:39,014
+que fueron introducidas por McCulloch y Pitts.
+En realidad influenciarion a Von Roenam cuando
+
+34
+00:02:39,014 --> 00:02:42,036
+estaba pensando en cómo diseñar
+un computador universal.
+
+35
+00:02:43,090 --> 00:02:49,096
+En una neurona de umbral binario
+primero calculas la suma pesada de las entradas 
+
+36
+00:02:49,096 --> 00:02:56,009
+y luego envías un pico de activdad 
+si esa suma ponderada supera el umbral
+
+37
+00:02:56,069 --> 00:03:01,040
+McCulloch y Pitts pensaron que cada 
+pico era como los valores verderos
+
+38
+00:03:01,040 --> 00:03:04,057
+de las proposiciones. De modo que cada 
+neurona está combinando los valores verdaderos
+
+39
+00:03:04,057 --> 00:03:09,003
+que recibe de otras neuronas para
+producer su propio valor verdadero.
+
+40
+00:03:09,003 --> 00:03:13,062
+Y eso es como combinar algunas proposiciones
+para calcular el valor verdadero de 
+
+41
+00:03:13,062 --> 00:03:17,078
+otra proposición.
+En los años 1940s la lógica era
+
+42
+00:03:17,078 --> 00:03:24,006
+el paradigma principal de como la mente podría funcionar.
+Desde entonces los investigadores sobre el funcionamiento 
+
+43
+00:03:24,006 --> 00:03:29,039
+del cerebro se han interesado más
+en la idea de que el cerebro
+
+44
+00:03:29,039 --> 00:03:33,069
+combina muchas fuentes diferentes 
+de evidencia no confiable
+
+45
+00:03:33,069 --> 00:03:38,052
+De modo que la lógica no es un buen paradigma
+de lo que hace el cerebro.
+
+46
+00:03:39,043 --> 00:03:44,041
+Para la neurona de umbral binario 
+podemos pensar su función entrada/salida como que 
+
+47
+00:03:44,041 --> 00:03:48,070
+si las entradas ponderadas están por encima del umbral
+entrega un valor uno
+
+48
+00:03:48,070 --> 00:03:55,022
+O si no, entrega un cero.
+Hay en realidad dos formas equivalentes 
+
+49
+00:03:55,022 --> 00:03:57,097
+de escribir la ecuación para una 
+neurona de umbral binario
+
+50
+00:03:58,024 --> 00:04:04,087
+Podemos decir la entrada total z es 
+la suma de las actidades de las líneas de entrada
+
+51
+00:04:04,087 --> 00:04:09,024
+por los pesos
+Y luego la salida y es uno si z está
+
+52
+00:04:09,024 --> 00:04:15,031
+por encima del umbral y cero de lo contrario.
+Por otro lado,  podemos decir que la entrada
+
+53
+00:04:15,031 --> 00:04:20,018
+total incluye el término de sesgo.
+De modo que la entrada total es lo que llega
+
+54
+00:04:20,018 --> 00:04:23,066
+en las líneas de entrada por los pesos más
+el término de sesgo.
+
+55
+00:04:23,066 --> 00:04:29,063
+Y luego podemos decir que la salida es uno si
+la entrada total está sobre cero y cero
+
+56
+00:04:29,063 --> 00:04:33,004
+de lo contrario.
+Y la equivalencia es simplemente que
+
+57
+00:04:33,004 --> 00:04:38,074
+el umbral en la primera formulación es igual
+al sesgo cambiado de signo en la segunda 
+
+58
+00:04:38,074 --> 00:04:44,049
+formulación.
+La clase de neuronas que combinan
+
+59
+00:04:44,049 --> 00:04:49,033
+las propiedades de las neuronas lineales
+y las neuronas de umbral binario es la
+
+60
+00:04:49,033 --> 00:04:54,051
+la neurona lineal rectificada.
+Primero calcula la suma ponderada lineal de
+
+61
+00:04:54,051 --> 00:04:59,025
+sus entradas, pero da una salida 
+que es una función no lineal de
+
+62
+00:04:59,025 --> 00:05:04,042
+la suma ponderada.
+Calculamos z en la misma forma que antes
+
+63
+00:05:05,010 --> 00:05:08,054
+Si z está debajo de cero, 
+entregamos una salida de cero
+
+64
+00:05:08,054 --> 00:05:12,006
+de lo contrario, entregamos una salida 
+que es igual a z
+
+65
+00:05:12,006 --> 00:05:16,073
+Por encima de cero es lineal, y en cero
+toma una decisión difícil.
+
+66
+00:05:16,073 --> 00:05:23,016
+La curva entrada/salida es como ésta.
+Es definitivamente no lineal, pero encima de cero
+
+67
+00:05:23,016 --> 00:05:27,022
+es lineal.
+Con una neurona como ésta podemos
+
+68
+00:05:27,022 --> 00:05:32,027
+tener muchas propiedades interesantes 
+de los sistemas lineales cuando está encima de cero
+
+69
+00:05:32,027 --> 00:05:36,063
+Podemos también tener la capacidad 
+de tomar decisiones alrededor de cero
+
+70
+00:05:40,036 --> 00:05:45,032
+Las neuronas que usaremos más en 
+este curso, son probablemente las más comunes
+
+71
+00:05:45,032 --> 00:05:50,016
+usadas en redes neuronas artificiales. 
+son las neuronas sigmoideas
+
+72
+00:05:50,016 --> 00:05:55,044
+Dan un valor real de salida que es 
+una función continua y limitada de 
+
+73
+00:05:55,044 --> 00:05:59,051
+la entrada total
+Es típico usar la función logística.
+
+74
+00:05:59,051 --> 00:06:05,042
+donde la entrada total se calcula como antes
+como el sesgo más lo que viene en 
+
+75
+00:06:05,042 --> 00:06:10,046
+las líneas de entrada ponderado.
+La salida de las neuronas logísticas es uno
+
+76
+00:06:10,046 --> 00:06:13,095
+dividido por un más e elevado a la menos la entrada total
+
+77
+00:06:14,025 --> 00:06:19,014
+Piénsenlo, si la entrada total es grande y positiva
+
+78
+00:06:19,014 --> 00:06:22,069
+ e elevada a la menos un número positivo grande 
+es cero.
+
+79
+00:06:22,069 --> 00:06:28,021
+Y entonces la salida será uno.
+Si la entrada total es un número grande negativo, e
+
+80
+00:06:28,021 --> 00:06:34,044
+a la menos un número negativo grande, 
+es un número grande y entonces
+
+81
+00:06:34,044 --> 00:06:38,045
+la salidad debe ser cero.
+De modo que la función entrada/salida funciona así
+
+82
+00:06:38,045 --> 00:06:42,016
+Cuando la entrada total es cero, e a la
+
+83
+00:06:42,016 --> 00:06:48,074
+menos cero es uno, de modo que la salida
+es un medio. Y lo bueno de la función sigmoide es que
+
+84
+00:06:48,074 --> 00:06:53,047
+tiene derivadas continuas
+Las derivadas cambian en forma continua.
+
+85
+00:06:53,047 --> 00:06:59,089
+Y por lo tanto se comportan bien, y 
+facilitan el aprendizaje como veremos en
+
+86
+00:06:59,089 --> 00:07:04,069
+la clase tres.
+Por último las neuronas binarias estocásticas.
+
+87
+00:07:04,069 --> 00:07:07,098
+Usan las mismas ecuaciones que
+las unidades logísticas
+
+88
+00:07:07,098 --> 00:07:13,027
+Calculan la entrada total en la misma forma
+y usan la función logística para
+
+89
+00:07:13,027 --> 00:07:18,018
+calcular un valor real que es la 
+probabilidad de que produzcan un pico
+
+90
+00:07:18,018 --> 00:07:23,028
+Pero en lugar de entregar esa 
+probabilidad como un número real
+
+91
+00:07:23,028 --> 00:07:28,070
+toman una decisión probabilística, y 
+en realidad entrega o un uno o 
+
+92
+00:07:28,070 --> 00:07:30,089
+un cero.
+Son intrínsecamente aleatoreas.
+
+93
+00:07:32,025 --> 00:07:36,075
+Están tratando p como la probabilidad 
+de producir un uno, no como
+
+94
+00:07:36,075 --> 00:07:39,089
+un número real.
+Por supuesto que si la entrada es muy grande 
+
+95
+00:07:39,089 --> 00:07:42,079
+y positiva producirán casi siempre un uno.
+
+96
+00:07:42,079 --> 00:07:47,004
+Si la entrada es grande y negativa, 
+producirán casi siempre un cero
+
+97
+00:07:48,045 --> 00:07:52,067
+Podemos lograr un comportamiento similar
+con unidades lineales rectificadas.
+
+98
+00:07:52,067 --> 00:07:59,015
+Podemos decir que la salida , 
+este valor real que sale de la unidad lineal
+
+99
+00:07:59,015 --> 00:08:04,014
+rectificada es la tasa de picos 
+producidos si está por encima de cero
+
+100
+00:08:04,014 --> 00:08:08,076
+Eso es determinista.
+Pero una vez que averiguamos esa tasa de
+
+101
+00:08:08,076 --> 00:08:13,016
+picos producidos, la verdadera cantidad de veces 
+que se producen picos es un proceso
+
+102
+00:08:13,016 --> 00:08:14,098
+aleatoreo. Es un proceso 
+con distribución de Poisson.
+
+103
+00:08:14,098 --> 00:08:19,073
+De modo que la unidad lineal rectificada determina la tasa, 
+pero la naturaleza aleatorea intrínseca de la 
+
+104
+00:08:19,073 --> 00:08:22,089
+unidad determina cuándo 
+se producirán picos en realidad.

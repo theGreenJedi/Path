@@ -1,0 +1,137 @@
+En este video, vamos a ver algunos de 
+los problemas que surgen al usar el método de descenso de gradiente 
+estocástico con lotes pequeños. Hay muchas técnicas que hacen 
+que funcione mejor Estas son el tipo de redes neuronales
+de salida oculta Voy a recorrer las técnicas principales 
+en este vídeo. El primer tema sobre el que voy a hablar es
+la inicialización de los pesos en la red neuronal. Si dos unidades ocultas tienen exactamente los mismos pesos, el mismo sesgo con 
+entradas y salidas, nunca podrán diferenciarse una de otra.
+Porque siempre tendrán exactamente el mismo gradiente.
+Para lograr que aprendan a ser detectores de características diferentes,
+necesitamos empezar con diferencias entre ellas. Lo conseguimos usando pequeños pesos aleatorios
+para inicializar los pesos. Eso rompe la simetría.
+Esos pequeños pesos aleatorios no deberían ser necesariamente del mismo tamaño. De modo que si tienes una unidad oculta que tiene
+una gran abanico de entrada, si usas un peso bastante grande, tenderá a saturarse. De modo 
+que si puedes usa pesos mucho menores para las unidades ocultas que tienen gran abanico de entrada.
+Si tienes una unidad oculta con un abanico muy pequeño, entonces querrás usar 
+pesos más grandes Y como los pesos son aleatorios, 
+crecen con la raiz cuadrada del número de pesos. 
+Una buena regla es hacer que el tamaño original de los pesos
+sea proporcional a la raíz cuadrada del abanico.
+Podemos escalar las tasas de aprendizaje para los pesos del mismo modo.
+Algo que tiene un enorme efecto sorpresivo en la velocidad con que la red neuronal 
+puede aprender es centrar las entradas Es decir, agregar una constante a cada componente de las entradas.
+Es sorprendente que pueda hacer gran diferencia.
+Pero cuando estás usando un descenso escarpado cambiar el valor de la entrada sumando
+una constante puede hacer una gran diferencia. Es útil generalmente desplazar cada componente
+de la entrada, de modo que promediado sobre todos los datos de entrenamiento tenga un valor de cero.
+Es decir, asegúrate que el valor medio sea cero. Así que supongamos que tenemos una pequeña red neuronal
+como esta con solamente una neurona lineal con dos pesos y supongamos que tenemos algunos casos de entrenamiento. El primer caso de entrenamiento es cuando 
+las entradas 101 y 101 producen una salida 2 y el segundo caso es cuando 
+se produce una salida 0 con las entradas 101 y 99.
+Y aquí estoy usando color para indicar a cuál caso de entrenamiento me estoy refiriendo. Si observas la superficie de error que se obtiene 
+para estos dos casos de entrenamiento se parece a esto. La línea verde es aquella en la que los pesos 
+satisfacen el primer caso de entrenamiento y la línea roja es aquella en la que los pesos
+satisfacen el segundo caso de entrenamiento. Y lo que notamos es que ambas líneas
+son casi paralelas, entonces cuando las combinamos obtenemos
+una elipse muy alargada. Una manera de pensar en lo que está pasando aquí es que debido a que 
+estamos usando una medida cuadrática de error obtenemos una zanja parabólica a lo largo de la línea roja. La línea roja es el fondo de esta zanja parabólica que 
+nos dice el error cuadrático que obtenemos en el caso rojo, y hay otra zanja parabólica cuyo fondo es la línea verde. Resulta que, aunque esto podría sorprender 
+tu intuición espacial, si se suman dos zanjas parabólicas se obtiene un tazón cuadrático. 
+Un tazón cuadrático alargado en este caso. Así que de ahí viene esa superficie de error. Ahora, observa lo que pasa si restamos un ciento de esos componentes de entrada, obtenemos una superficie de error completamente diferente. Es un círculo en este caso, es ideal. La línea verde es aquella en la que la suma de los pesos es dos. Vamos a tomar el primer peso y multiplicarlo por uno, vamos a tomar el segundo peso y multiplicarlo por uno.
+Necesitamos que resulte dos, así que más vale que la suma de los pesos sea dos. La línea roja es aquella en la que los dos pesos son iguales Debido a que vamos a tomar el primer peso y multiplicarlo por uno, y vamos a tomar el segundo peso y multiplicarlo por menos uno, de manera que si los pesos son iguales obtendremos el cero que se necesita. Así que la superficie de error en este caso es un lindo círculo donde
+el descenso por gradiente es muy fácil y todo lo que hicimos fue restar 100 de cada entrada. Si piensas lo que sucede, no con las entradas sino, con las unidades ocultas tiene sentido tener unidades ocultas que sean tangentes hiperbólicas
+cuyos valores estén entre menos uno y uno.
+El rango de la tangente hiperbólica es el doble del de la curva logística menos uno. Y la razón por la que tiene sentido es porque entonces, las actividades de las unidades ocultas son cero en promedio
+y eso debería hacer más rápido el aprendizaje en el siguiente nivel.
+Por supuesto, eso es cierto si las entradas a las tangentes hiperbólicas están distribuidas
+sensatamente alrededor del cero. En ese sentido, una tangente hiperbólica es mejor que una curva lógistica. No obstante, hay otros sentidos en los que una curva logística es mejor. Por ejemplo, la curva logística te da "un tapete bajo el cual puedes ocultar el polvo". Te da una salida de cero, y si haces la entrada aún más pequeña de lo que era, la salida sigue siendo cero.
+De manera que las fluctuaciones en entradas grandes de origen son ignoradas por la curva logística.
+Para la tangente hiperbólica tienes que ir al final de las planicies antes de que pueda ignorar algo. Otra cosa que hace una gran diferencia es escalar las entradas. Cuando se usa el descenso más pronunciado, escalar los valores de entrada es una cosa muy sencilla de hacer. La transformamos de forma que cada componente de la entrada tiene varianza unitaria sobre el conjunto de datos completo De modo que tiene un valor típico de uno o menos uno. 
+De nuevo, si tomamos esta simple red con dos pesos y miramos la superficie de error
+cuando el primer componente es muy pequeño y el segundo componente es mucho mayor.
+Obtenemos una superficie de error en la que obtenemos una elipse que tiene una gran curvatura, 
+cuando los componentes de la entrada son grandes porque pequeños cambios en los pesos provocan una
+gran diferencia en la salida Y una curvatura muy pequeña en la dirección en la que
+el componente de entrada es pequeño porque pequeños cambios en el peso apenas producen
+alguna diferencia en el error. El color aquí indica cual eje estamos usando, no cual ejemplo de entrenamiento estamos usando, como en la diapositiva anterior. Si simplemente cambiamos la varianza de las entradas,
+si simplemente las re-escalamos, Hacemos la primera componente diez veces más grande
+y la segunda componente diez veces más pequeña, ahora obtenemos una agradable superficie de error circular. Centrar y reescalar las entradas es una cosa
+muy sencilla de hacer, pero hay algo que es un poco más complicado, pero que
+realmente funciona incluso mejor porque garantiza que te dará un círculo,
+una superficie de error circular, al menos para una neurona lineal.
+Lo que hacemos es intentar descorrelacionar las componentes de los vectores de entrada.
+En otras palabras, si tomamos dos componentes, y miramos cómo están correlacionadas la una
+con la otra a lo largo de todo el conjunto de entrenamiento, como, si recuerdas aquel ejemplo de
+cómo el número de porciones de patatas y el número de porciones de ketchup
+podía estar altamente correlacionado, queremos intentar deshacernos de
+esas correlaciones. Eso hará el aprendizaje mucho más fácil.
+Hay muchas formas de descorrelacionar cosas.
+Para aquellos de vosotros que conocen el Análisis de Componentes Principales,
+una cosa muy sensible de hacer es aplicar Análisis de Componentes Principales,
+eliminar los componentes que tengan los Eigenvalores más bajos, lo que
+de por sí logra alguna reducción de dimensionalidad, y entonces escalar los componentes restantes
+dividiéndolos por la raíz cuadrada de sus Eigenvalores. 
+Para un sistema lineal, esto nos dará una superficie de error circular.
+Si no sabéis sobre componentes principales, lo cubriremos más tarde
+en el curso. Una vez que tenemos una superficie de error circular,
+el gradiente apunta directo hacia el mínimo, de modo que el aprendizaje es realmente fácil.
+Ahora, hablemos sobre algunos de los problemas comunes que la gente encuentra.
+Una cosa que puede ocurrir es que si empezamos con una tasa de aprendizaje que es demasiado grande,
+conducimos a las unidades ocultas o a estar firmemente encendidas, o firmemente apagadas.
+Es decir, los pesos entrantes son demasiado grandes en positivo o demasiado grandes en negativo.
+Y su estado ya no depende de la entrada y por supuesto esto significa que las
+derivadas del error que vienen de la salida no les afectarán, puesto que están en mesetas
+donde la derivada es básicamente cero. y por eso el aprendizaje se detendrá.
+Como la gente está esperando ver un mínimo local, cuando el aprendizaje se detiene dicen:
+"oh!, estoy en un mínimo local, y el error es terrible! Así que ahí están, 
+esos malvados mínimos locales" Usualmente eso no es cierto. Usualmente es porque te has quedado atascado
+al final de una meseta. Un segundo problema que ocurre es, que si
+estás clasificando cosas y estás usando bien el error cuadrático o 
+el error de entropía cruzada la mejor estrategia a suponer es normalmente
+hacer la unidad de salida igual a la proporción de tiempo que debería ser uno. La red encontrará esa estrategia
+bastante rápidamente y el error caerá rápidamente, pero particularmente si la red tiene
+muchas capas puede llevar mucho tiempo antes de que mejore mucho en eso.
+Dado que para mejorar sobre la estrategia supuesta tiene que obtener información 
+sensible desde la entrada a través de todas las capas ocultas hasta la salida y eso podría tomar
+un gran tiempo para aprender si empiezas con pesos pequeños.
+Así que, de nuevo, aprendes rápidamente y entonces el error deja de bajar, y parece que
+es un mínimo local, pero realmente es otra meseta. 
+Mencioné antes que hacia el final del aprendizaje, deberías bajar la 
+tasa de aprendizaje. También deberías tener cuidado con
+bajar la tasa de aprendizaje demasiado pronto. Cuando bajas la tasa de aprendizaje, 
+reduces las fluctuaciones aleatorias en el área debidas a diferentes gradientes en diferentes mini lotes, pero por supuesto también reduces la 
+tasa de aprendizaje, de modo que si miras a la curva roja,
+verás que cuando bajamos la tasa de aprendizaje, obtenemos una ganancia rápida, el error cae,
+pero tras eso obtenemos un aprendizaje más lento.
+Y si hacemos eso demasiado pronto vamos a perder relativamente a la curva verde. 
+Así que no bajen la tasa de aprendizaje demasiado pronto, o demasiado.
+A continuación voy a hablar sobre cuatro formas de acelerar mucho el aprendizaje de mini lotes. 
+Las cosas de las que he hablado previamente eran como una bolsa de trucos para hacer que
+las cosas funcionen mejor. Y estos son cuatro métodos diseñados explícitamente para
+hacer el aprendizaje ir mucho más rápido. Ahora voy a hablar sobre el 
+"momentum" matemático. En este método no usamos el gradiente para cambiar la posición de los pesos.
+Esto es, si piensas en los pesos como una bola en la superficie de error, el descenso
+de gradiente estándar utiliza el gradiente para cambiar la posición de esa bola. 
+Simplemente multiplicas el gradiente por la tasa de aprendizaje, y cambias la posición de la
+bola por ese vector. En el método del momentum, usamos el gradiente
+para acelerar esa bola, es decir, el gradiente cambia su velocidad, y la velocidad es lo que cambia 
+la posición de la bola. La razón por la que es diferente es porque la
+bola puede tener "momentum" es decir, recuerda los gradientes previos
+en su velocidad. Un segundo método para acelerar cuando
+hacemos aprendizaje de lotes es usar una tasa de aprendizaje adaptativa separada para cada parámetro.
+Y entonces, ajustar lentamente esa tasa de aprendizaje basándose en las medidas empíricas. 
+Y la medida empírica obvia es, ¿seguimos haciendo progreso cambiando los pesos
+en la misma dirección? ¿o el gradiente se mantiene oscilando alrededor
+de modo que el signo del gradiente sigue cambiando?
+Si el signo del gradiente sigue cambiando, lo que vamos a hacer es reducir la tasa de aprendizaje,
+y si el signo se mantiene igual, vamos a aumentar la tasa de
+aprendizaje. Un tercer método es lo que yo llamo RMS-PROP
+y lo que hacemos en este método es dividir por una media móvil de las magnitudes de los
+gradientes recientes para ese peso, de modo que si los gradientes son grandes
+divides por un número grande y si los gradientes son pequeños divides por
+un número pequeño. Esto manejará muy bien una amplia
+gama de gradientes diferentes. Es realmente una versión mini lote,
+solo que usando el signo del gradiente de lo que es un método llamado r-prop, que fue diseñado
+para aprendizaje con el lote completo. La última forma de acelerar el aprendizaje, 
+que es lo que la gente de optimización naturalmente recomendaría, es usar aprendizaje con el lote completo, y usar un método sofisticado que tome en cuenta la información de la curvatura para adaptar ese método para que trabaje para las redes neuronales y entonces, tal vez intentar adaptarlo un poco más, para que trabaje con lotes pequeños. No hablaré acerca de eso en esta clase.

@@ -1,0 +1,463 @@
+1
+00:00:00,000 --> 00:00:06,311
+In this video, I'm going to talk about the
+exploding and vanishing gradients problem,
+
+2
+00:00:06,311 --> 00:00:11,420
+which is what makes it difficult to train
+recurrent neural networks.
+
+3
+00:00:11,680 --> 00:00:16,825
+For many years, researchers in URL
+networks thought they would never be able
+
+4
+00:00:16,825 --> 00:00:21,496
+to train these networks to model
+dependencies over long time periods.
+
+5
+00:00:21,496 --> 00:00:26,776
+But at the end of this video, I can
+describe four different ways in which that
+
+6
+00:00:26,776 --> 00:00:31,278
+can now be done.
+To understand why it's so difficult to
+
+7
+00:00:31,278 --> 00:00:36,742
+train recurrent neural networks, we have
+to understand a very important difference
+
+8
+00:00:36,742 --> 00:00:41,140
+between the forward and backward passes in
+a recurrent neural net.
+
+9
+00:00:42,080 --> 00:00:47,860
+In the forward pass, we used squashing
+functions, like the logistic, to prevent
+
+10
+00:00:47,860 --> 00:00:53,339
+the activity vectors from exploding.
+So, if you look at the picture on the
+
+11
+00:00:53,339 --> 00:00:59,420
+right, each neuron is using a logistic
+unit shown by that blue curve and it can't
+
+12
+00:00:59,420 --> 00:01:03,323
+output any value greater than one or less
+than zero,
+
+13
+00:01:03,323 --> 00:01:09,440
+So that stops explosions.
+The backward pass, however, is completely
+
+14
+00:01:09,440 --> 00:01:12,860
+linear.
+Most people find this very surprising.
+
+15
+00:01:12,860 --> 00:01:17,554
+If you double the error derivatives is it
+the final layers of this net, all the
+
+16
+00:01:17,554 --> 00:01:20,770
+error derivatives will double when you
+back propagate.
+
+17
+00:01:20,770 --> 00:01:24,914
+So, if you look at the red dots that I put
+on the blue curves,
+
+18
+00:01:24,914 --> 00:01:30,350
+We'll suppose those are the activity
+levels of the neurons on the forward pass.
+
+19
+00:01:30,350 --> 00:01:36,313
+And so, when you back propagate, you're
+using the gradients of the blue curves at
+
+20
+00:01:36,313 --> 00:01:40,413
+those red dots.
+So the red lines are meant to throw the
+
+21
+00:01:40,413 --> 00:01:43,692
+tangents to the blue curves at the red
+dots.
+
+22
+00:01:43,692 --> 00:01:49,060
+And, once you finish the forward pass, the
+slope of that tangent is fixed.
+
+23
+00:01:49,060 --> 00:01:54,456
+You now back propagate and the back
+propagation is like going forwards though
+
+24
+00:01:54,456 --> 00:01:59,368
+a linear system in which the slope of the
+non-linearity has been fixed.
+
+25
+00:01:59,368 --> 00:02:04,972
+Of course, each time you back propagate,
+the slopes will be different because they
+
+26
+00:02:04,972 --> 00:02:10,022
+were determined by the forward pass.
+But during the back propagation, it's a
+
+27
+00:02:10,022 --> 00:02:15,488
+linear system and so it suffers from a
+problem of linear systems, which is when
+
+28
+00:02:15,488 --> 00:02:18,740
+you iterate, they tend to either explode
+or die.
+
+29
+00:02:18,740 --> 00:02:24,315
+So when we backpropagate through many
+layers if the weights are small the
+
+30
+00:02:24,315 --> 00:02:29,816
+gradients will shrink and become
+exponentially small. And that means that
+
+31
+00:02:29,816 --> 00:02:35,768
+when you backpropagate through time
+gradients that are many steps earlier than
+
+32
+00:02:35,768 --> 00:02:40,861
+the targets arrive will be tiny.
+Similarly, if the weights are big, the
+
+33
+00:02:40,861 --> 00:02:44,415
+gradients will explode.
+And that means when you back propagate
+
+34
+00:02:44,415 --> 00:02:48,600
+through time, the gradients will get huge
+and wipe out all your knowledge.
+
+35
+00:02:50,540 --> 00:02:56,120
+In a feed-forward neural net, unless it's
+very deep, these problems aren't nearly as
+
+36
+00:02:56,120 --> 00:02:59,300
+bad because we typically only have a few
+hidden layers.
+
+37
+00:03:00,280 --> 00:03:05,379
+But as soon as we have a recurrent neural
+network trained on a long sequence, for
+
+38
+00:03:05,379 --> 00:03:09,659
+example 100 time steps, then if the
+gradients are growing as we back
+
+39
+00:03:09,659 --> 00:03:14,947
+propagate, we'll get whatever that growth
+rate is to the power of 100 and if they're
+
+40
+00:03:14,947 --> 00:03:20,046
+dying, we'll get whatever that decay is to
+the power of 100 and, so, they'll either
+
+41
+00:03:20,046 --> 00:03:25,048
+explode or vanish.
+We might be able to initialize the weights
+
+42
+00:03:25,048 --> 00:03:29,375
+very carefully to avoid this and more
+recent work, shows that indeed careful
+
+43
+00:03:29,375 --> 00:03:33,020
+initialization of the weights does make
+things work much better.
+
+44
+00:03:34,420 --> 00:03:39,639
+But even with good initial weights, it's
+hard to detect the dependency of the
+
+45
+00:03:39,639 --> 00:03:43,164
+current output or an input from many
+time-steps ago.
+
+46
+00:03:43,164 --> 00:03:48,520
+So it's hard to make the output depend on
+things that happened a long time ago.
+
+47
+00:03:49,941 --> 00:03:54,140
+Rnn's have difficulty dealing with
+long-range dependencies.
+
+48
+00:03:56,020 --> 00:04:01,921
+Here's an example of exploding and dying
+gradients for a system that's trying to
+
+49
+00:04:01,921 --> 00:04:06,074
+learn attractors.
+So suppose we try and train a recurrent
+
+50
+00:04:06,074 --> 00:04:10,082
+neural network,
+So that whatever state we started in, it
+
+51
+00:04:10,082 --> 00:04:13,360
+ends up in one of these two attractor
+states.
+
+52
+00:04:13,360 --> 00:04:18,971
+So we're going a learn blue basin of
+attraction and a pink basin of attraction.
+
+53
+00:04:18,971 --> 00:04:25,018
+And if we start anywhere within the blue
+basin of attraction, we will end up at the
+
+54
+00:04:25,018 --> 00:04:28,905
+same point.
+What that means is that, small differences
+
+55
+00:04:28,905 --> 00:04:33,240
+in our initial state make no difference to
+where we end up.
+
+56
+00:04:33,580 --> 00:04:39,186
+So the derivative of the final state with
+respect to changes in the initial state,
+
+57
+00:04:39,186 --> 00:04:41,579
+is zero.
+That's vanishing gradients.
+
+58
+00:04:41,579 --> 00:04:46,775
+When we back propagate through the
+dynamics of this system we will discover
+
+59
+00:04:46,775 --> 00:04:52,107
+there's no gradience from where you start,
+and the same with the pink basin of
+
+60
+00:04:52,107 --> 00:04:57,143
+attraction.
+If however, we start very close to the
+
+61
+00:04:57,143 --> 00:05:03,413
+boundary between the two attractors.
+Then, a tiny difference in where we start,
+
+62
+00:05:03,413 --> 00:05:09,286
+that's the other side of the watershed,
+makes the huge difference to where we end
+
+63
+00:05:09,286 --> 00:05:14,955
+up, that's the explosion gradient problem.
+And so whenever your trying to use a
+
+64
+00:05:14,955 --> 00:05:19,160
+recurrent neural network to learn
+attractors like this, you're bound to get
+
+65
+00:05:19,160 --> 00:05:25,382
+vanishing or exploding gradients.
+It turns out, there's at least four
+
+66
+00:05:25,382 --> 00:05:28,680
+effective ways to learn a recurrent neural
+network.
+
+67
+00:05:29,280 --> 00:05:34,685
+The first is a method called long short
+term memory and I'll talk about that more
+
+68
+00:05:34,685 --> 00:05:38,047
+in this lecture.
+The idea is we actually change the
+
+69
+00:05:38,047 --> 00:05:42,860
+architecture of the neural network to make
+it good at remembering things.
+
+70
+00:05:45,340 --> 00:05:50,813
+The second method is to use a much better
+optimizer that can deal with very small
+
+71
+00:05:50,813 --> 00:05:54,218
+gradients.
+I'll talk about that in the next lecture.
+
+72
+00:05:54,218 --> 00:05:59,558
+The real problem in optimization is to
+detect small gradients that have an even
+
+73
+00:05:59,558 --> 00:06:03,296
+smaller curvature.
+Heissan-free Optimization, tailored to
+
+74
+00:06:03,296 --> 00:06:12,099
+your own apps is good at doing that.
+The third method really kind of evades the
+
+75
+00:06:12,099 --> 00:06:15,583
+problem.
+What we do is we carefully initialize the
+
+76
+00:06:15,583 --> 00:06:20,790
+input to hidden weights and we very
+carefully initialize the hidden to hidden
+
+77
+00:06:20,790 --> 00:06:25,529
+weights, and also feedback weights from
+the outputs to the hidden units.
+
+78
+00:06:25,529 --> 00:06:30,135
+And the idea of this careful
+initialization is to make sure that the
+
+79
+00:06:30,135 --> 00:06:34,407
+hidden state has a huge reservoir of
+weakly coupled oscillators.
+
+80
+00:06:34,407 --> 00:06:39,614
+So if you hit it with an input sequence,
+it will reverberate for a long time and
+
+81
+00:06:39,614 --> 00:06:44,905
+those reverberations are remembering what
+happened in the input sequence You then
+
+82
+00:06:44,905 --> 00:06:51,660
+try and couple those reverberations to the
+output you want and so the only thing that
+
+83
+00:06:51,660 --> 00:06:57,279
+learns in an Echo State Network is the
+connections between the hidden units and
+
+84
+00:06:57,279 --> 00:07:01,120
+the outputs.
+And if the output units are linear, that's
+
+85
+00:07:01,120 --> 00:07:04,890
+very easy to train.
+So this hasn't really learned the
+
+86
+00:07:04,890 --> 00:07:10,581
+recurrent. It's used a fixed random
+recurrent bit, but a carefully chosen one
+
+87
+00:07:10,581 --> 00:07:14,280
+and then just learned the hidden tripod
+connections.
+
+88
+00:07:16,040 --> 00:07:21,090
+And the final method is to use momentum,
+but to use momentum with the kind of
+
+89
+00:07:21,090 --> 00:07:26,271
+initialization that was being used for
+Echo State Networks and that makes them
+
+90
+00:07:26,271 --> 00:07:30,075
+work even better.
+So it was very clever to find out how to
+
+91
+00:07:30,075 --> 00:07:35,126
+initialize these recurrent networks so
+they'll have interesting dynamics, but
+
+92
+00:07:35,126 --> 00:07:40,373
+they work even better if you now modify
+that dynamic slightly in that direction
+
+93
+00:07:40,373 --> 00:07:42,800
+that will help with the task at hand.

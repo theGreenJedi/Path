@@ -1,0 +1,269 @@
+1
+00:00:00,000 --> 00:00:05,055
+In this video, we're going to look at the 
+issue of training deep autoencoders. 
+
+2
+00:00:05,055 --> 00:00:08,797
+People thought of these a long time ago, 
+in the mid 1980s. 
+
+3
+00:00:08,797 --> 00:00:13,852
+But they simply couldn't train them well 
+enough for them to do significantly 
+
+4
+00:00:13,852 --> 00:00:16,609
+better than principal components 
+analysis. 
+
+5
+00:00:16,609 --> 00:00:21,664
+There were various papers published about 
+them, but no good demonstrations of 
+
+6
+00:00:21,664 --> 00:00:25,144
+impressive performance. 
+After we developed methods of 
+
+7
+00:00:25,144 --> 00:00:28,230
+pre-training deep networks one layer at a 
+time. 
+
+8
+00:00:28,230 --> 00:00:33,128
+Russ Salakhutdinov and I applied these 
+methods to pretraining deep autoencoders, 
+
+9
+00:00:33,128 --> 00:00:37,468
+and for the first time, we got much 
+better representations out of deep 
+
+10
+00:00:37,468 --> 00:00:41,560
+autoencoders than we could get from 
+principal components analysis. 
+
+11
+00:00:41,560 --> 00:00:46,517
+Deep autoencoders always seemed like a 
+really nice way to do dimensionality 
+
+12
+00:00:46,517 --> 00:00:51,539
+reduction because it seemed like they 
+should work much better than principal 
+
+13
+00:00:51,539 --> 00:00:55,387
+components analysis. 
+They provide flexible mappings in both 
+
+14
+00:00:55,387 --> 00:00:58,387
+directions, and the mappings can be 
+non-linear. 
+
+15
+00:00:58,387 --> 00:01:03,540
+Their learning time should be linear or 
+better in the number of training cases. 
+
+16
+00:01:03,540 --> 00:01:08,367
+And after they've been learned, the 
+encoding part of the network is fairly 
+
+17
+00:01:08,367 --> 00:01:12,150
+fast because it's just a matrix 
+multiplier for each layer. 
+
+18
+00:01:12,150 --> 00:01:18,041
+Unfortunately, it was very difficult to 
+optimize deep autoencoders using back 
+
+19
+00:01:18,041 --> 00:01:21,498
+propagation. 
+Typically people try small initial 
+
+20
+00:01:21,498 --> 00:01:27,012
+weights, and then the back propagated 
+gradient died, so for deep network, they 
+
+21
+00:01:27,012 --> 00:01:31,364
+never got off the ground. 
+But now we have much better way to 
+
+22
+00:01:31,364 --> 00:01:35,518
+optimize them. 
+We can use unsupervised layer by layer 
+
+23
+00:01:35,518 --> 00:01:39,702
+pre-training, 
+or we can simply initialize the weight 
+
+24
+00:01:39,702 --> 00:01:45,978
+sensibly, as an echo statement it works. 
+The first really successful deep water 
+
+25
+00:01:45,978 --> 00:01:50,404
+encoders were learned by Russ 
+Salakhutdinov and I in 2006. 
+
+26
+00:01:50,404 --> 00:01:56,197
+We applied them to the N-ness digits. 
+So we started with images with 784 
+
+27
+00:01:56,197 --> 00:01:59,657
+pixels. 
+And we then encoded those via three 
+
+28
+00:01:59,657 --> 00:02:05,210
+hidden layers, into 30 real valued 
+activities in a central code layer. 
+
+29
+00:02:05,210 --> 00:02:09,620
+We then decoded those 30 real valued 
+activities, 
+
+30
+00:02:09,620 --> 00:02:15,440
+back to 784 reconstructed pixels. 
+We used a stack of restricted Boltzmann 
+
+31
+00:02:15,440 --> 00:02:19,530
+machine to initialize the weights used 
+for encoding, 
+
+32
+00:02:19,530 --> 00:02:25,744
+and we then took the transposers of those 
+weights and initialized the decoding 
+
+33
+00:02:25,744 --> 00:02:30,348
+network with them. 
+So initially, the 784 pixels were 
+
+34
+00:02:30,348 --> 00:02:36,799
+reconstructed, using a weight matrix that 
+was just the transpose of the weight 
+
+35
+00:02:36,799 --> 00:02:42,448
+matrix used for encoding them. 
+But after the four restricted Boltzmann 
+
+36
+00:02:42,448 --> 00:02:47,940
+machines have being trained and unrolled 
+to give the transposes for decoding, 
+
+37
+00:02:47,940 --> 00:02:54,123
+we then applied back propagation to 
+minimize the reconstruction error of the 
+
+38
+00:02:54,123 --> 00:02:57,335
+784 pixels. 
+In this case we were using a 
+
+39
+00:02:57,335 --> 00:03:03,277
+cross-entropy error, because the pixels 
+were represented by logistic units. 
+
+40
+00:03:03,277 --> 00:03:08,255
+So that error was back propagated through 
+this whole deep net. 
+
+41
+00:03:08,255 --> 00:03:12,030
+And we once started back propagating the 
+error, 
+
+42
+00:03:12,030 --> 00:03:17,331
+the weights used for reconstructing the 
+pixels became different from the weights 
+
+43
+00:03:17,331 --> 00:03:21,716
+used for encoding the pixels. 
+Although they, typically stayed fairly 
+
+44
+00:03:21,716 --> 00:03:23,680
+similar. 
+This worked very well. 
+
+45
+00:03:24,760 --> 00:03:31,025
+So if you look at the first row, that's 
+one random sample from each digit class. 
+
+46
+00:03:31,025 --> 00:03:37,371
+If you look at the second row, that's the 
+reconstruction of the random sample by 
+
+47
+00:03:37,371 --> 00:03:43,320
+the deep autoencoder that uses 30 linear 
+hidden units in its central layer. 
+
+48
+00:03:43,320 --> 00:03:47,886
+So the data has been compressed to 30 
+real numbers and then reconstructed. 
+
+49
+00:03:47,886 --> 00:03:52,391
+If you look at the eight, you can see 
+that the reconstruction is actually 
+
+50
+00:03:52,391 --> 00:03:56,279
+better than the eight. 
+It's got rid of the little defect in the 
+
+51
+00:03:56,279 --> 00:03:59,735
+eight because it doesn't have the 
+capacity to encode it. 
+
+52
+00:03:59,735 --> 00:04:04,795
+If you compare that with linear principal 
+commands analysis, you can see it's much 
+
+53
+00:04:04,795 --> 00:04:07,449
+better. 
+A linear mapping to 30 real numbers 
+
+54
+00:04:07,449 --> 00:04:10,905
+cannot do nearly as good a job of 
+representing the data. 

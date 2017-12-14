@@ -1,0 +1,634 @@
+1
+00:00:00,000 --> 00:00:05,921
+In this video, I'm gonna describe the
+Bayesian Approach to fitting models, using
+
+2
+00:00:05,921 --> 00:00:10,398
+a simple coin tossing example.
+If you're already know about the Bayesian
+
+3
+00:00:10,398 --> 00:00:14,915
+Approach, you can skip this video.
+The main idea behind the Bayesian Approach
+
+4
+00:00:14,915 --> 00:00:20,317
+is instead of looking for the most likely
+setting of the parameters of the model, we
+
+5
+00:00:20,317 --> 00:00:25,591
+should consider all possible settings of
+the parameters and try to figure out for
+
+6
+00:00:25,591 --> 00:00:30,028
+each of those possible settings, how
+probable it is, given the data we
+
+7
+00:00:30,028 --> 00:00:33,115
+observed.
+The Bayesian framework assumes that we
+
+8
+00:00:33,115 --> 00:00:36,202
+always have a prior distribution for
+everything.
+
+9
+00:00:36,202 --> 00:00:41,283
+That is, for any event that you might care
+to mention, I have to have some prior
+
+10
+00:00:41,283 --> 00:00:47,780
+probability that, that event might happen.
+The problem might be very vague.
+
+11
+00:00:49,320 --> 00:00:53,907
+So what's happening is, our data gives us
+a likelihood term.
+
+12
+00:00:53,907 --> 00:00:58,340
+We combine it with our prior and then we
+get a posterior.
+
+13
+00:00:59,120 --> 00:01:05,660
+The likelihood term favors settings of our
+parameters that make the data more likely.
+
+14
+00:01:06,940 --> 00:01:11,602
+It can disagree with the prior.
+And in the limit, if we get enough data,
+
+15
+00:01:11,602 --> 00:01:15,332
+however unlikely the prior is, the data
+can overwhelm it.
+
+16
+00:01:15,332 --> 00:01:18,730
+And in the end, with enough data, the
+truth will out.
+
+17
+00:01:18,730 --> 00:01:23,725
+That is, even if your prior's wrong,
+you'll end up with the right hypothesis.
+
+18
+00:01:23,725 --> 00:01:29,387
+But that may take an awful lot of data if
+you thought that things were very unlikely
+
+19
+00:01:29,387 --> 00:01:34,887
+under your prior.
+So let's start with a coin tossing
+
+20
+00:01:34,887 --> 00:01:37,973
+example.
+Suppose you don't know anything about
+
+21
+00:01:37,973 --> 00:01:43,609
+coins except that they can be tossed and
+when you toss a coin you get either a head
+
+22
+00:01:43,609 --> 00:01:46,963
+or a tail.
+And we're also going to assume you know
+
+23
+00:01:46,963 --> 00:01:50,720
+that each time you do that it's an
+independent decision.
+
+24
+00:01:53,180 --> 00:01:57,100
+So our model of a coin is going to have
+one parameter P.
+
+25
+00:01:57,100 --> 00:02:02,210
+This parameter P determines the
+probability that the coin will produce a
+
+26
+00:02:02,210 --> 00:02:08,280
+head.
+What happens now if we see 100 tosses and
+
+27
+00:02:08,280 --> 00:02:12,640
+there are 53 heads.
+What is a good value for P.
+
+28
+00:02:13,180 --> 00:02:19,220
+Well obviously you're tempted to say.53.
+But what's the justification for that?.
+
+29
+00:02:20,800 --> 00:02:26,917
+The frequentest answer, which is also
+called maximum likelihood, is to pick the
+
+30
+00:02:26,917 --> 00:02:31,074
+value of p that makes the observations
+most probable.
+
+31
+00:02:31,074 --> 00:02:36,407
+And that value of p is.53.
+It's not obvious that's true, let's derive
+
+32
+00:02:36,407 --> 00:02:40,662
+that.
+So the probability of a particular
+
+33
+00:02:40,662 --> 00:02:47,368
+sequence that contains 53 heads and 47
+tails could be written out by writing down
+
+34
+00:02:47,368 --> 00:02:52,602
+p every time you toss a head.
+And 1-p every time you toss a tail.
+
+35
+00:02:52,602 --> 00:02:58,655
+And then if we collect all the p's
+together, and all the 1-p's together, we
+
+36
+00:02:58,655 --> 00:03:04,320
+get p^53, and 1-p^47.
+If we now ask, how does the probability of
+
+37
+00:03:04,320 --> 00:03:10,674
+observing that data depend on p, we can
+differentiate with respect to p, and we
+
+38
+00:03:10,674 --> 00:03:16,620
+get the expression shown here, and if we
+then set that derivative to zero.
+
+39
+00:03:17,020 --> 00:03:24,256
+We discover that the probability of the
+data is maximized by setting P to be.53.
+
+40
+00:03:24,256 --> 00:03:31,202
+So that's maximum likelihood.
+But there's some problems with using
+
+41
+00:03:31,202 --> 00:03:34,780
+maximum likelihood to decide on the
+parameters of a model.
+
+42
+00:03:35,640 --> 00:03:39,743
+Suppose for example, we only toss the coin
+once and we got one head.
+
+43
+00:03:39,743 --> 00:03:44,643
+It doesn't really make sense to say we
+think the probability of the coin coming
+
+44
+00:03:44,643 --> 00:03:48,746
+down heads in future is one.
+That would mean we'd be willing to bet
+
+45
+00:03:48,746 --> 00:03:51,747
+that infinite odds that it can't come down
+tails.
+
+46
+00:03:51,747 --> 00:03:58,603
+And that seems ridiculous.
+It's sort of intuitively obvious that a
+
+47
+00:03:58,603 --> 00:04:02,920
+much better answer is not.5.
+But how can we justify that.
+
+48
+00:04:02,920 --> 00:04:08,240
+More importantly, we can ask, is it
+reasonable to give a single answer.
+
+49
+00:04:10,280 --> 00:04:14,147
+We don't know much.
+We don't have much data, and so we're
+
+50
+00:04:14,147 --> 00:04:19,604
+unsure about what the value of P is.
+So what we really ought to do is refuse to
+
+51
+00:04:19,604 --> 00:04:24,991
+give a single answer and instead give a
+whole probability distribution across
+
+52
+00:04:24,991 --> 00:04:28,651
+possible answers.
+An answer like 0.5 is fairly likely.
+
+53
+00:04:28,651 --> 00:04:34,453
+An answer like one is maybe still pretty
+unlikely if we have some prior belief that
+
+54
+00:04:34,453 --> 00:04:43,722
+coins come down heads half the time.
+So, now I'm going to go through an example
+
+55
+00:04:43,722 --> 00:04:47,992
+where we start with some prior
+distribution over parameter values, and
+
+56
+00:04:47,992 --> 00:04:51,469
+we'll pick a prior distribution that's
+easy to work with.
+
+57
+00:04:51,469 --> 00:04:55,556
+Not one that necessarily fits what we
+really believe about commons.
+
+58
+00:04:55,556 --> 00:05:00,131
+And then we'll show how that prior
+distribution get modified by data if we
+
+59
+00:05:00,131 --> 00:05:04,929
+adopt the Bayesian Approach.
+So, we're gonna start with a prior
+
+60
+00:05:04,929 --> 00:05:09,016
+distribution that says all the different
+values of p are equally likely.
+
+61
+00:05:09,016 --> 00:05:12,024
+We believe that coins come biased to
+various extents.
+
+62
+00:05:12,024 --> 00:05:16,621
+And any amount of bias is equally likely.
+So that some coins come down heads half
+
+63
+00:05:16,621 --> 00:05:19,515
+the time.
+Other coins come downs heads all the time.
+
+64
+00:05:19,515 --> 00:05:22,240
+And those two kinds of coins are equally
+likely.
+
+65
+00:05:22,520 --> 00:05:29,058
+We now observe a coin coming down heads.
+So what we do now, is for each possible
+
+66
+00:05:29,058 --> 00:05:36,010
+value of p, we take its prior probability
+and we multiply by the probability that we
+
+67
+00:05:36,010 --> 00:05:41,970
+would have observed ahead, given that,
+that value of p is the correct one.
+
+68
+00:05:41,970 --> 00:05:47,464
+So, for example, if we take the value of P
+= one which says coins come down heads
+
+69
+00:05:47,464 --> 00:05:51,984
+every time then the probability of
+observing a head would be one.
+
+70
+00:05:51,984 --> 00:05:56,922
+There would be no alternative.
+And if we take the value of P to be zero
+
+71
+00:05:56,922 --> 00:06:00,400
+the probability of observing a head would
+be zero.
+
+72
+00:06:00,400 --> 00:06:05,048
+And if we take it to b.5, the probability
+of observing having b is.5.
+
+73
+00:06:05,048 --> 00:06:10,311
+So we take that red line, that's our
+prior, and we multiply each point on that
+
+74
+00:06:10,311 --> 00:06:14,959
+by the probability of observing a head
+according to that hypothesis.
+
+75
+00:06:14,959 --> 00:06:19,334
+And now we get the sloping-like, that's a
+unnormalized posterior.
+
+76
+00:06:19,334 --> 00:06:24,324
+It's unnormalized because the area under
+that line doesn't add up to one.
+
+77
+00:06:24,324 --> 00:06:29,382
+And of course for a probability
+distribution, the probabilities of all the
+
+78
+00:06:29,382 --> 00:06:35,065
+alternative events have to add to one.
+So the last thing we do is re-normalize
+
+79
+00:06:35,065 --> 00:06:38,458
+it.
+We scale everything up so the area under
+
+80
+00:06:38,458 --> 00:06:43,066
+the curve is one.
+And now if we started with the uniform pri
+
+81
+00:06:43,066 --> 00:06:49,583
+distribution of the P we end up with this
+triangular posterior distribution of the P
+
+82
+00:06:49,583 --> 00:06:54,201
+having observed one head.
+Now let's do it again.
+
+83
+00:06:54,201 --> 00:07:01,483
+And this time let's suppose we get a tail.
+So, the prior distribution that we start
+
+84
+00:07:01,483 --> 00:07:07,189
+with now is the post-serial distribution
+we had after observing our one head.
+
+85
+00:07:07,189 --> 00:07:12,301
+And now, the green line shows the
+probability that we will get a tail
+
+86
+00:07:12,301 --> 00:07:17,488
+according to each of those hypotheses that
+correspond to a value of P.
+
+87
+00:07:17,488 --> 00:07:22,749
+So, for example, if P is one, the
+probability we would observe at time is
+
+88
+00:07:22,749 --> 00:07:27,294
+zero.
+So we have to multiply our prior by our
+
+89
+00:07:27,294 --> 00:07:31,797
+likelihood term.
+And now we get a curve like that.
+
+90
+00:07:31,797 --> 00:07:35,744
+Then we have to re-normalize to make the
+area be one.
+
+91
+00:07:35,744 --> 00:07:41,627
+And that's now a posterior distribution,
+after having observed one head and one
+
+92
+00:07:41,627 --> 00:07:44,501
+tail.
+I notice it's a pretty sensible
+
+93
+00:07:44,501 --> 00:07:48,182
+distribution.
+After observing one of each, we know that
+
+94
+00:07:48,182 --> 00:07:53,839
+P can't be either zero or one, and it also
+seems very sensible that the most likely
+
+95
+00:07:53,839 --> 00:08:00,499
+thing is now in the middle.
+If we do this again another 98 times, and
+
+96
+00:08:00,499 --> 00:08:06,427
+keep applying the same strategy of
+multiplying the posterior we had after the
+
+97
+00:08:06,427 --> 00:08:12,007
+last task, by the likelihood of observing
+that event, given the various different
+
+98
+00:08:12,007 --> 00:08:17,608
+settings of the parameter p.
+And let's suppose we get 53 heads and 47
+
+99
+00:08:17,608 --> 00:08:21,509
+tails in all.
+Then we'll end up with a curve that looks
+
+100
+00:08:21,509 --> 00:08:24,488
+like this.
+It'll have its mean at 53..
+
+101
+00:08:24,488 --> 00:08:30,802
+Because we started with the uniform prior.
+And it'll be fairly sharply peaked by 53..
+
+102
+00:08:30,802 --> 00:08:36,902
+But it'll allow other values like 49. is a
+perfectly reasonable value under this
+
+103
+00:08:36,902 --> 00:08:40,307
+curve.
+Not quite as lengthy as 53., but very
+
+104
+00:08:40,307 --> 00:08:43,995
+reasonable.
+Whereas a value of 25. is extremely
+
+105
+00:08:43,995 --> 00:08:51,093
+unlikely under this curve.
+So we can summarize all that with base
+
+106
+00:08:51,093 --> 00:08:56,177
+therm.
+Determine the middle of this equation is
+
+107
+00:08:56,177 --> 00:09:00,844
+the joint probability of a set of
+parameters W, and some data D.
+
+108
+00:09:00,844 --> 00:09:06,400
+And for supervised learning, the data is
+gonna consist of the target values.
+
+109
+00:09:06,400 --> 00:09:12,475
+So we assume we are given inputs and the
+data values consist of the target values
+
+110
+00:09:12,475 --> 00:09:16,920
+that are associated with those iinputs.
+That what we observe.
+
+111
+00:09:17,580 --> 00:09:22,804
+That joint probability can be re-written
+as the product of an individual
+
+112
+00:09:22,804 --> 00:09:28,744
+probability and a conditional probability.
+So on the right, we're written it as p of
+
+113
+00:09:28,744 --> 00:09:34,327
+w times p of d given w, and on the left,
+I've written it as p of d times p of w
+
+114
+00:09:34,327 --> 00:09:39,960
+given d.
+Now we can divide both sides by p of d.
+
+115
+00:09:40,220 --> 00:09:43,640
+And this gives us base there, I mean it's
+usual form.
+
+116
+00:09:44,200 --> 00:09:50,431
+Base theorem says that the posterior
+probability of a particular value of W,
+
+117
+00:09:50,431 --> 00:09:56,745
+given the data D, is just the prior
+probability of that particular value of W
+
+118
+00:09:56,745 --> 00:10:02,894
+times the probability given that
+particular value of W, that you would have
+
+119
+00:10:02,894 --> 00:10:08,716
+observed the data you observed.
+And that has to be normalized by P of D.
+
+120
+00:10:08,716 --> 00:10:14,866
+The probability of the data which is
+simply the integral over all possible
+
+121
+00:10:14,866 --> 00:10:21,083
+values of W, of P of W, P of D, given W.
+The bottom line needs to be the sum of the
+
+122
+00:10:21,083 --> 00:10:25,563
+top line a row of possible values w in
+order for this to be a probability
+
+123
+00:10:25,563 --> 00:10:30,764
+distribution that adds to one.
+Because that p of d has integrated over
+
+124
+00:10:30,764 --> 00:10:36,168
+all possible values of w, it's not
+affected by picking a particular value of
+
+125
+00:10:36,168 --> 00:10:40,790
+w on the left-hand side.
+So when we're looking for the best value
+
+126
+00:10:40,790 --> 00:10:45,127
+of w, for example, we can ignore p of d.
+It doesn't depend on w.
+
+127
+00:10:45,127 --> 00:10:49,821
+The other two terms on the right-hand
+side, however, do depend on w.

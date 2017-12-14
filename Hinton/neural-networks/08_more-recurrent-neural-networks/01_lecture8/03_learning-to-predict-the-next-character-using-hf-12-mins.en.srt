@@ -1,0 +1,769 @@
+1
+00:00:00,760 --> 00:00:06,190
+In this video, we're going to see what
+happens when the Hessian free optimizer is
+
+2
+00:00:06,190 --> 00:00:10,882
+used to optimize the current neural
+network containing multiplicative
+
+3
+00:00:10,882 --> 00:00:16,380
+connections and the network is trained to
+predict the next character in Wikipedia.
+
+4
+00:00:16,700 --> 00:00:22,261
+The network is trained on millions of
+characters and it works remarkably well.
+
+5
+00:00:22,261 --> 00:00:27,894
+It learns a lot about English and it
+becomes very good at completing sentences
+
+6
+00:00:27,894 --> 00:00:33,131
+in interesting ways.
+Ilya Sutskever used five million strings
+
+7
+00:00:33,131 --> 00:00:36,896
+of 100 characters each taken from English
+Wikipedia.
+
+8
+00:00:36,896 --> 00:00:41,313
+For each string, he starts predicting
+after eleventh characters.
+
+9
+00:00:41,313 --> 00:00:45,296
+So the recurrent network starts off in a
+default state.
+
+10
+00:00:45,296 --> 00:00:49,857
+It reads eleven characters, changing its
+hidden state each time.
+
+11
+00:00:49,857 --> 00:00:55,578
+And then its ready to start predicting.
+And it gets trained by back propagating
+
+12
+00:00:55,578 --> 00:01:03,745
+the errors it makes in prediction.
+He used the Hessian free optimizer, and it
+
+13
+00:01:03,745 --> 00:01:09,300
+took about a month on a very fast GPU
+board to get a really good model.
+
+14
+00:01:11,940 --> 00:01:17,161
+His current best recurrent neural network
+for character prediction is probably the
+
+15
+00:01:17,161 --> 00:01:20,494
+best single model there is for predicting
+characters.
+
+16
+00:01:20,494 --> 00:01:25,338
+You can do better than this model by
+combining many different models, using a
+
+17
+00:01:25,338 --> 00:01:30,496
+neural network to decide which one to use,
+but for a single model, it is as good as
+
+18
+00:01:30,496 --> 00:01:36,374
+it gets.
+It works in a very different way, from the
+
+19
+00:01:36,374 --> 00:01:41,697
+best other models.
+So Ilya's model can balance quotes and
+
+20
+00:01:41,697 --> 00:01:47,235
+brackets over long distances.
+Any model that relies on matching a
+
+21
+00:01:47,235 --> 00:01:53,705
+specific previous context can't do that
+So, for example, if it has a bracket, and
+
+22
+00:01:53,705 --> 00:01:59,419
+it wants to close it 35 characters later,
+in order to do that properly a model that
+
+23
+00:01:59,419 --> 00:02:04,651
+relies on matching previous contexts,
+would have to match all 35 intervening
+
+24
+00:02:04,651 --> 00:02:08,163
+characters.
+And it's very unlikely that it has that
+
+25
+00:02:08,163 --> 00:02:14,520
+whole string stored.
+Once the model's learned, you can see what
+
+26
+00:02:14,520 --> 00:02:17,411
+it knows by generating strings from the
+model.
+
+27
+00:02:17,411 --> 00:02:22,000
+Of course you have to be very careful not
+to over-interpret what it says.
+
+28
+00:02:23,020 --> 00:02:27,660
+The way we generate strings is we start in
+the default to hidden state.
+
+29
+00:02:27,980 --> 00:02:32,807
+We then give it a burning sequence.
+So we feed it characters and let it update
+
+30
+00:02:32,807 --> 00:02:38,442
+its hidden state after each character.
+And then we let it stop predicting.
+
+31
+00:02:38,442 --> 00:02:42,820
+We look at the probability distribution it
+predicts for the next character.
+
+32
+00:02:43,840 --> 00:02:47,340
+We pick a character randomly from that
+distribution.
+
+33
+00:02:47,340 --> 00:02:52,457
+So if it predicts, the probability Q is
+one in a thousand, we pick a Q one times
+
+34
+00:02:52,457 --> 00:02:56,164
+in a thousand.
+We then tell the net that whatever
+
+35
+00:02:56,164 --> 00:03:01,059
+character we picked was the character that
+actually occurred, and ask it to predict
+
+36
+00:03:01,059 --> 00:03:04,953
+the next character.
+In other words, we're telling it whatever
+
+37
+00:03:04,953 --> 00:03:10,046
+he guesses is correct.
+We let it continue to make characters
+
+38
+00:03:10,046 --> 00:03:15,584
+until we've got as many as we want, and
+then we look at the strings it produces to
+
+39
+00:03:15,584 --> 00:03:20,318
+see what it knows.
+So here's an example of a string produced
+
+40
+00:03:20,318 --> 00:03:26,223
+by Ilya's network after some burn in.
+This was selected from a much longer
+
+41
+00:03:26,223 --> 00:03:30,557
+passage of text.
+But it's a continuous passage, which shows
+
+42
+00:03:30,557 --> 00:03:39,840
+you that it works pretty well.
+You'll notice that it has weird semantic
+
+43
+00:03:39,840 --> 00:03:42,200
+associations.
+So, Opus Paul at rome.
+
+44
+00:03:42,200 --> 00:03:47,756
+No person would never say that.
+But we understand that Opus and Paul and
+
+45
+00:03:47,756 --> 00:03:54,077
+Rome are all highly interconnected.
+You'll notice it doesn't really have any
+
+46
+00:03:54,077 --> 00:03:58,717
+long range thematic structure.
+It pretty much changes topic after each
+
+47
+00:03:58,717 --> 00:04:03,680
+full stop.
+One amazing thing is that is produces very
+
+48
+00:04:03,680 --> 00:04:07,958
+few non words.
+What that means is that, even though it's
+
+49
+00:04:07,958 --> 00:04:13,527
+predicting probabilities of characters,
+As soon as you've got enough characters so
+
+50
+00:04:13,527 --> 00:04:18,959
+there's only one way to complete it as an
+English word, it will predict the next
+
+51
+00:04:18,959 --> 00:04:23,577
+character almost perfectly.
+If that wasn't the case, it would produce
+
+52
+00:04:23,577 --> 00:04:28,363
+non words.
+Even when it does produce a non word, like
+
+53
+00:04:28,363 --> 00:04:31,406
+the word in red, it's a very good non
+word.
+
+54
+00:04:31,406 --> 00:04:36,913
+I'm not absolutely certain, or I wasn't
+when I first saw it, that ephemerable
+
+55
+00:04:36,913 --> 00:04:42,330
+wasn't an English word.
+You'll also notice it's produced a closing
+
+56
+00:04:42,330 --> 00:04:47,031
+bracket without an opening one.
+So it doesn't always balance brackets.
+
+57
+00:04:47,031 --> 00:04:51,938
+It just does it quite frequently.
+You'll also notice at the end, that its
+
+58
+00:04:51,938 --> 00:04:56,162
+produced an opening quote and then a
+closing quote much later.
+
+59
+00:04:56,162 --> 00:05:01,614
+That's consistent behavior on its part.
+It really did produce that closing quote,
+
+60
+00:05:01,614 --> 00:05:07,819
+because it had an open quote earlier on.
+If you look at this text you can see
+
+61
+00:05:07,819 --> 00:05:12,871
+there's a lot of good local syntax.
+So, little strings of three or four words
+
+62
+00:05:12,871 --> 00:05:19,480
+look perfectly reasonable.
+There's also lots of semantic knowledge.
+
+63
+00:05:21,380 --> 00:05:27,736
+So one thing we can do is we can test the
+model by giving it carefully designed
+
+64
+00:05:27,736 --> 00:05:32,583
+strings to see what it knows.
+So I tried giving it a non word.
+
+65
+00:05:32,583 --> 00:05:36,874
+The word thrunge T H R U N G E is not an
+english word.
+
+66
+00:05:36,874 --> 00:05:43,151
+But most English speakers, when they see
+that word, would expect it to be a verb
+
+67
+00:05:43,151 --> 00:05:48,640
+because of it's form.
+So I gave it opening contexts in which
+
+68
+00:05:48,640 --> 00:05:54,220
+that might be averred, to see what
+character was most likely to come next.
+
+69
+00:05:54,820 --> 00:06:00,527
+So, if you give it Sheila Thrunge and ask
+for the next character, the most frequent
+
+70
+00:06:00,527 --> 00:06:06,304
+one is an s, which suggests that it knows
+that Sheila is singular, just from reading
+
+71
+00:06:06,304 --> 00:06:10,709
+Wikipedia.
+If you give it people thrunge the most
+
+72
+00:06:10,709 --> 00:06:16,531
+frequent next character is a space, not an
+s, which suggests that it knows that
+
+73
+00:06:16,531 --> 00:06:21,599
+people is plural.
+I then tried giving it a list of names.
+
+74
+00:06:21,599 --> 00:06:25,631
+So I used capitals for the names with a
+comma in between.
+
+75
+00:06:25,631 --> 00:06:31,220
+And I put a capital T for Thrunge so it
+looked like a name, to see what it would
+
+76
+00:06:31,220 --> 00:06:35,456
+do with that.
+So it actually completed it as a name.
+
+77
+00:06:35,456 --> 00:06:39,635
+And if you look at the name it made, it's
+not a bad name.
+
+78
+00:06:39,635 --> 00:06:44,860
+It indicates that it knows an awful lot
+about names in many languages.
+
+79
+00:06:47,160 --> 00:06:52,000
+You can also give it the meaning of life
+is, and the see what comes next.
+
+80
+00:06:52,000 --> 00:06:57,715
+If it produced 42, that wouldn't be very
+interesting cuz I'm fairly sure that will
+
+81
+00:06:57,715 --> 00:07:01,211
+be somewhere in Wikipedia.
+It produces random things.
+
+82
+00:07:01,211 --> 00:07:06,118
+But in it's first ten tries, it produced
+the meaning of life is literally
+
+83
+00:07:06,118 --> 00:07:09,614
+recognition.
+Which is syntactically and semantically
+
+84
+00:07:09,614 --> 00:07:13,686
+sensible.
+We then trained the model some more and
+
+85
+00:07:13,686 --> 00:07:16,865
+presented it with a Meaning of Life is
+again.
+
+86
+00:07:16,865 --> 00:07:22,023
+We took the first ten things it produced
+and I'm going to show you the most
+
+87
+00:07:22,023 --> 00:07:26,192
+interesting one.
+The completion it produced for the Meaning
+
+88
+00:07:26,192 --> 00:07:31,279
+of Life is, suggests that by reading
+Wikipedia it really is beginning to
+
+89
+00:07:31,279 --> 00:07:34,600
+understand something about the meaning of
+life.
+
+90
+00:07:35,020 --> 00:07:38,620
+That's probably just wild
+over-interpretation, though.
+
+91
+00:07:39,300 --> 00:07:53,960
+So here's its completion.
+So, what does the model know after it's
+
+92
+00:07:53,960 --> 00:07:59,605
+read all these characters in Wikipedia?
+Well, it certainly knows about words.
+
+93
+00:07:59,605 --> 00:08:05,020
+It produces almost always, English words.
+It will produce strings of initials,
+
+94
+00:08:05,020 --> 00:08:09,224
+typically in capitals.
+It can produce numbers and dates and
+
+95
+00:08:09,224 --> 00:08:13,143
+things like that.
+But it doesn't produce non words very
+
+96
+00:08:13,143 --> 00:08:15,993
+often.
+It produces them extremely rarely.
+
+97
+00:08:15,993 --> 00:08:21,194
+And when it does produce them, they're
+typically very plausible non words.
+
+98
+00:08:21,194 --> 00:08:25,683
+It also knows a lot about proper names,
+like Frangelini Del Rey.
+
+99
+00:08:25,683 --> 00:08:30,600
+It knows about dates and numbers, and the
+context in which they occur.
+
+100
+00:08:31,500 --> 00:08:36,044
+It's good at balancing quotes and
+brackets, and in fact it can actually
+
+101
+00:08:36,044 --> 00:08:39,565
+count brackets.
+If you give it no opening brackets, it's
+
+102
+00:08:39,565 --> 00:08:42,317
+very unlikely to produce a closing
+bracket.
+
+103
+00:08:42,317 --> 00:08:47,566
+If you give it one opening bracket, it's
+quite likely to produce a closing bracket
+
+104
+00:08:47,566 --> 00:08:52,559
+in the next twenty characters or so.
+If you give it two opening brackets, it'll
+
+105
+00:08:52,559 --> 00:08:57,615
+produce a closing bracket very quickly.
+Giving it three doesn't seem to make it
+
+106
+00:08:57,615 --> 00:09:03,820
+any faster.
+It clearly knows a lot about syntax
+
+107
+00:09:03,820 --> 00:09:08,551
+because it's able to produce these little
+strings of English words that are
+
+108
+00:09:08,551 --> 00:09:11,538
+sensible.
+But it's very hard to pin down exactly
+
+109
+00:09:11,538 --> 00:09:15,833
+what form this knowledge has.
+It's not like trigram models which have
+
+110
+00:09:15,833 --> 00:09:20,875
+just learned little sequences of words.
+Or rather they have a table that contains
+
+111
+00:09:20,875 --> 00:09:24,858
+little sequences of words.
+It's actually synthesizing strings of
+
+112
+00:09:24,858 --> 00:09:27,784
+words.
+And it's synthesizing them with sensible
+
+113
+00:09:27,784 --> 00:09:31,216
+syntax.
+It's very hard to say though what form
+
+114
+00:09:31,216 --> 00:09:36,623
+that syntactic knowledge had.
+It's not a bunch of rules like a linguist
+
+115
+00:09:36,623 --> 00:09:39,517
+has.
+It's much more like what's in the
+
+116
+00:09:39,517 --> 00:09:47,268
+linguists head when he speaks a language.
+It knows a lot of weak semantic
+
+117
+00:09:47,268 --> 00:09:50,793
+associations.
+So, for example, it only ever produced the
+
+118
+00:09:50,793 --> 00:09:54,970
+word Wittgenstein once.
+And it produced that soon after producing
+
+119
+00:09:54,970 --> 00:09:58,495
+the word Plato.
+So it knows that Plato and Wittgenstein
+
+120
+00:09:58,495 --> 00:10:01,889
+are associated.
+Well, that's a pretty good assumption.
+
+121
+00:10:01,889 --> 00:10:05,740
+It clearly knows that cabbage is
+associated with vegetable.
+
+122
+00:10:06,340 --> 00:10:11,465
+It doesn't know much about the precise
+ways in which these things are associated.
+
+123
+00:10:11,465 --> 00:10:15,389
+People are like that too if you get them
+to respond very fast.
+
+124
+00:10:15,389 --> 00:10:20,071
+So I'm going to ask you a question, and I
+want you to shout out the answer.
+
+125
+00:10:20,071 --> 00:10:22,856
+So you're sitting there watching this
+video.
+
+126
+00:10:22,856 --> 00:10:28,108
+And this experiment will work, by far, the
+best, if you actually shout out the answer
+
+127
+00:10:28,108 --> 00:10:31,272
+out loud.
+And you have to shout it out really fast.
+
+128
+00:10:31,272 --> 00:10:34,119
+You get rewarded for responding very
+quickly.
+
+129
+00:10:34,119 --> 00:10:37,980
+It doesn't matter what you say.
+You just have to respond fast.
+
+130
+00:10:37,980 --> 00:10:44,422
+So the question is, what do cows drink.
+Most people, when given that question,
+
+131
+00:10:44,422 --> 00:10:48,278
+shout out milk.
+Now, most cows don't drink milk most of
+
+132
+00:10:48,278 --> 00:10:52,062
+the time.
+We say milk cuz it's associated with both
+
+133
+00:10:52,062 --> 00:10:55,775
+drink and with cow.
+But it's not logical to say milk.
+
+134
+00:10:55,775 --> 00:11:01,131
+Recently, Thomas Mikolov and his
+collaborators have been training large
+
+135
+00:11:01,131 --> 00:11:06,130
+recurrent neural networks to predict the
+next word in large data sets.
+
+136
+00:11:06,130 --> 00:11:09,668
+They use the same technique as the feet
+forward neural nets.
+
+137
+00:11:09,668 --> 00:11:13,089
+That first convert a word to a real valued
+feature vector.
+
+138
+00:11:13,089 --> 00:11:17,277
+And then use those feature vectors as
+input to the rest of the network.
+
+139
+00:11:17,277 --> 00:11:20,403
+And they do better than the feed forward
+neural nets.
+
+140
+00:11:20,403 --> 00:11:23,175
+They also do better than the best other
+models.
+
+141
+00:11:23,175 --> 00:11:27,540
+And when you average them with the best
+other models, they do better still.
+
+142
+00:11:27,540 --> 00:11:31,170
+So that's the best language models there
+are currently.
+
+143
+00:11:31,170 --> 00:11:36,420
+One interesting property of the RNNs is
+that they require less training data than
+
+144
+00:11:36,420 --> 00:11:39,800
+the other methods to reach a given level
+of performance.
+
+145
+00:11:40,280 --> 00:11:46,336
+More importantly, as the data sets get
+bigger, the RNNs improve faster than the
+
+146
+00:11:46,336 --> 00:11:50,183
+other methods.
+So methods like trigrams, for example, do
+
+147
+00:11:50,183 --> 00:11:54,601
+get better with bigger data sets but it's
+a very slow process.
+
+148
+00:11:54,601 --> 00:11:59,660
+You need to double the size of the data
+set to get a small improvement.
+
+149
+00:12:00,000 --> 00:12:03,716
+With RNNs, they can make much better use
+of the data.
+
+150
+00:12:03,716 --> 00:12:08,439
+This means it's going to be very hard to
+beat them as data sets get bigger.
+
+151
+00:12:08,439 --> 00:12:13,604
+I think it may be the same story as for
+object recognition with large, deep neural
+
+152
+00:12:13,604 --> 00:12:16,438
+nets.
+But once the neural nets get ahead, they
+
+153
+00:12:16,438 --> 00:12:20,280
+can make better use of faster computers
+and bigger data sets.
+
+154
+00:12:20,280 --> 00:12:24,123
+And so, it's going to be very hard for
+other methods to catch up.

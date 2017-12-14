@@ -1,0 +1,514 @@
+1
+00:00:00,000 --> 00:00:07,040
+In this video, we're going to look at a
+practical use for feature vectors that
+
+2
+00:00:07,040 --> 00:00:12,008
+represent words.
+The uses in speech recognition systems,
+
+3
+00:00:12,008 --> 00:00:17,054
+where having a good idea of what somebody
+might say next is very helpful in
+
+4
+00:00:17,054 --> 00:00:24,007
+recognizing the sounds they make.
+We're now going to see an important
+
+5
+00:00:24,007 --> 00:00:28,082
+practical use for feature factors that
+describe words.
+
+6
+00:00:29,060 --> 00:00:34,032
+When we're trying to do speech
+recognition, it's impossible to identify
+
+7
+00:00:34,032 --> 00:00:39,052
+phonemes perfectly in noisy speech.
+The acoustic input just isn't good enough.
+
+8
+00:00:39,052 --> 00:00:43,071
+It's often ambiguous.
+There may be several different words that
+
+9
+00:00:43,071 --> 00:00:50,038
+fit the acoustic signal equally well.
+We don't notice this a lot of the time,
+
+10
+00:00:50,038 --> 00:00:55,075
+because we're so good at using the meaning
+of the utterance to hear the right words.
+
+11
+00:00:56,078 --> 00:01:01,097
+So if I read the next comment on the
+slide, I would say we do this
+
+12
+00:01:01,097 --> 00:01:07,033
+unconsciously when we recognize beach.
+And you would hear, we do this
+
+13
+00:01:07,033 --> 00:01:13,000
+unconsciously when we recognize speech.
+You can actually hear the slight
+
+14
+00:01:13,000 --> 00:01:17,042
+difference between recognize beach and
+recognize speech.
+
+15
+00:01:17,042 --> 00:01:23,088
+But if you're expecting recognize speech,
+particularly if there's noise around you
+
+16
+00:01:23,088 --> 00:01:26,064
+wouldn't hear recognize beach.
+Okay.
+
+17
+00:01:26,064 --> 00:01:30,064
+So we're very good at doing this.
+We do it all the time when we do it
+
+18
+00:01:30,064 --> 00:01:36,025
+unconsciously.
+That means that speech recognizers have to
+
+19
+00:01:36,025 --> 00:01:41,052
+know which words are likely to come next
+and which are not.
+
+20
+00:01:41,052 --> 00:01:45,065
+Fortunately.
+Words can be predicted quite well without
+
+21
+00:01:45,065 --> 00:01:48,073
+having a full understanding of what's
+being said.
+
+22
+00:01:50,001 --> 00:01:54,053
+So there's a standard method for
+predicting the probabilities of the
+
+23
+00:01:54,053 --> 00:01:58,086
+various words that might come next, it's
+called the trigram method.
+
+24
+00:01:58,086 --> 00:02:04,003
+You take a huge amount of text and you
+count the frequencies of all triples of
+
+25
+00:02:04,003 --> 00:02:06,098
+words.
+Then you use these frequencies to make
+
+26
+00:02:06,098 --> 00:02:12,028
+bets on the relative probabilities of the
+next word given the previous two words.
+
+27
+00:02:12,028 --> 00:02:19,002
+So if we've heard the words A and B.
+We can look at the counts that we have in
+
+28
+00:02:19,002 --> 00:02:23,049
+our huge body of text.
+For the sequence ABC, and the sequence
+
+29
+00:02:23,049 --> 00:02:29,008
+ABD, we can say that the relative
+probability that the third word will be C
+
+30
+00:02:29,008 --> 00:02:34,044
+versus the third word will be D, is given
+by the ratio of the two counts.
+
+31
+00:02:34,044 --> 00:02:37,080
+Abc and ABD.
+Until very recently, this was the state of
+
+32
+00:02:37,080 --> 00:02:42,066
+the art method for getting the probability
+of the next word to help out the speech
+
+33
+00:02:42,066 --> 00:02:45,083
+recognizer.
+We can't use much bigger contexts than two
+
+34
+00:02:45,083 --> 00:02:50,075
+previous words, because there are just too
+many possibilities to store, and if we did
+
+35
+00:02:50,075 --> 00:02:53,081
+use bigger contexts, the counts would be
+mostly zero.
+
+36
+00:02:53,081 --> 00:02:58,089
+Even for two word contexts there's many
+contexts that you will never have heard.
+
+37
+00:02:58,089 --> 00:03:03,090
+For example, if I say dinosaur pizza,
+that's probably a string of two words that
+
+38
+00:03:03,090 --> 00:03:08,015
+you've never heard before.
+For cases like that, we have to back off
+
+39
+00:03:08,015 --> 00:03:12,004
+to individual words.
+So, after dinosaur pizza, you predict the
+
+40
+00:03:12,004 --> 00:03:17,043
+next word by just seeing what's likely to
+come after the word pizza, because you've
+
+41
+00:03:17,043 --> 00:03:21,090
+never heard dinosaur pizza before.
+What you mustn't do is to say that
+
+42
+00:03:22,010 --> 00:03:26,012
+probability's a zero just because you
+haven't seen an example.
+
+43
+00:03:26,012 --> 00:03:30,024
+That's clearly not true.
+Now the trigram model fails to use a lot
+
+44
+00:03:30,024 --> 00:03:34,025
+of obvious information that will help you
+predict the next word.
+
+45
+00:03:34,025 --> 00:03:39,055
+Suppose for example, you have seen the
+sentence the cat got squashed in the yard
+
+46
+00:03:39,055 --> 00:03:43,080
+on Friday.
+That should help you predict the words in
+
+47
+00:03:43,080 --> 00:03:47,078
+the sentence, the dog got flattened in the
+yard on Monday.
+
+48
+00:03:47,078 --> 00:03:53,066
+In particular, the trigram model doesn't
+understand the similarities between words
+
+49
+00:03:53,066 --> 00:03:58,071
+like cat and dog, or squashed and
+flattened, or garden and yard, or Friday
+
+50
+00:03:58,071 --> 00:04:02,053
+and Monday.
+So it can't use past experience with one
+
+51
+00:04:02,053 --> 00:04:05,059
+of those words to help it with the other
+one.
+
+52
+00:04:05,059 --> 00:04:11,018
+To overcome this limitation, what we need
+to do is convert the words into a vector
+
+53
+00:04:11,018 --> 00:04:16,043
+of semantic and syntactic features.
+And use the features of previous words to
+
+54
+00:04:16,043 --> 00:04:22,072
+predict the features of the next word.
+Using a feature representation, allows us
+
+55
+00:04:22,072 --> 00:04:26,078
+to use much bigger context, that contains
+many more words.
+
+56
+00:04:26,078 --> 00:04:32,007
+For example, ten previous words.
+Yoshua Bengio pioneered this approach for
+
+57
+00:04:32,007 --> 00:04:37,072
+language models, and his initial network
+for doing this looks rather familiar.
+
+58
+00:04:37,072 --> 00:04:41,083
+It is actually very similar to the family
+trees network.
+
+59
+00:04:41,083 --> 00:04:45,087
+It's just applied to a real problem, and
+is much bigger.
+
+60
+00:04:45,087 --> 00:04:51,066
+So at the bottom you can think of us as
+putting in the index of a word, and you
+
+61
+00:04:51,066 --> 00:04:56,043
+could think of that as a set of neurons of
+which just one is on.
+
+62
+00:04:56,043 --> 00:05:02,192
+And then the weight from that on neuron
+will determine the pattern of activity in
+
+63
+00:05:02,192 --> 00:05:06,021
+the next hidden layer.
+And so the weights from the active neuron
+
+64
+00:05:06,021 --> 00:05:10,068
+in the bottom layer will give you the
+pattern of activity in the layer that has
+
+65
+00:05:10,068 --> 00:05:13,008
+the distributed representation of the
+word.
+
+66
+00:05:13,008 --> 00:05:16,099
+That is it's feature vector.
+But this is just equivalent to saying you
+
+67
+00:05:16,099 --> 00:05:20,012
+do table look-up.
+You have a stored feature vector reach
+
+68
+00:05:20,012 --> 00:05:23,014
+word, and with learning, you modify that
+feature vector.
+
+69
+00:05:23,014 --> 00:05:27,027
+Which is exactly equivalent to modifying
+the weights coming from a single
+
+70
+00:05:27,027 --> 00:05:30,062
+active-input unit.
+After getting distributed representations
+
+71
+00:05:30,062 --> 00:05:35,014
+of a few previous words, I've only shown
+two here but you would typically use, say,
+
+72
+00:05:35,014 --> 00:05:38,047
+five.
+You can then, use those distributed
+
+73
+00:05:38,047 --> 00:05:44,023
+representations, via hidden layer, to
+predict, via huge softmax, what the
+
+74
+00:05:44,023 --> 00:05:49,058
+probabilities are for all the various
+words that might come next.
+
+75
+00:05:49,058 --> 00:05:54,065
+When extra refinement that makes it work
+better is to use skip-lag connections that
+
+76
+00:05:54,065 --> 00:05:57,085
+go straight from the input words to the
+output words.
+
+77
+00:05:57,085 --> 00:06:02,067
+Because the individual input words are,
+are individually quite informative about
+
+78
+00:06:02,067 --> 00:06:07,007
+what the output word might be.
+Bengio's model was actually slightly worse
+
+79
+00:06:07,007 --> 00:06:11,084
+than Trigram's at predicting the next
+word, but it was in the same ballpark, and
+
+80
+00:06:11,084 --> 00:06:15,004
+if you combined it with Trigram's it
+improved things.
+
+81
+00:06:15,004 --> 00:06:19,081
+Since then these language models that use
+feature vectors for words have been
+
+82
+00:06:19,081 --> 00:06:24,058
+improved considerably, and they're now
+considerably better than trigram models.
+
+83
+00:06:24,058 --> 00:06:29,054
+One problem with having a big softmax
+output layer, is that you might have to
+
+84
+00:06:29,054 --> 00:06:34,124
+deal with 100,000 different output works.
+Because typically in these language
+
+85
+00:06:34,124 --> 00:06:37,802
+models, the plural of a word is a
+different word from the singular.
+
+86
+00:06:37,802 --> 00:06:42,487
+And the various different tenses of a verb
+are different words from other tenses.
+
+87
+00:06:42,487 --> 00:06:46,896
+So each unit in the last hidden layer of
+the net, might have to have a
+
+88
+00:06:46,896 --> 00:06:51,281
+hundred-thousand outgoing weights.
+And that means we can only afford to have
+
+89
+00:06:51,281 --> 00:06:54,026
+a few units there before we start
+over-fitting.
+
+90
+00:06:54,026 --> 00:06:58,613
+That's not necessarily true.
+We might have a huge number of training
+
+91
+00:06:58,613 --> 00:07:01,025
+cases.
+So some organization like Google might
+
+92
+00:07:01,025 --> 00:07:05,453
+have so much training tech that it can
+afford to have a very big softmax layer.
+
+93
+00:07:05,453 --> 00:07:10,469
+We could try and make the last hidden less
+small, so we don't need too many weights.
+
+94
+00:07:10,469 --> 00:07:15,181
+But then we have the problem that we have
+to get the 100,000 probabilities of the
+
+95
+00:07:15,181 --> 00:07:18,582
+various words that might come next fairly
+accurately right.
+
+96
+00:07:18,582 --> 00:07:21,379
+It's not just the big probabilities we
+need.
+
+97
+00:07:21,379 --> 00:07:25,053
+A very large number of words will have
+small probabilities.
+
+98
+00:07:25,053 --> 00:07:27,607
+And the small probabilities are often
+relevant.
+
+99
+00:07:27,607 --> 00:07:33,400
+It might be that the speech recognizer Has
+to decide whether it's two different rare
+
+100
+00:07:33,400 --> 00:07:39,055
+words, and then it's very relevant which
+of those is more common in the context,
+
+101
+00:07:39,055 --> 00:07:42,140
+even though both of them are pretty
+unlikely.
+
+102
+00:07:42,140 --> 00:07:47,550
+The question is, is there a better way to
+deal with such a large number of outputs?
+
+103
+00:07:47,550 --> 00:07:52,024
+And we'll see several different ways of
+doing that in the next video.

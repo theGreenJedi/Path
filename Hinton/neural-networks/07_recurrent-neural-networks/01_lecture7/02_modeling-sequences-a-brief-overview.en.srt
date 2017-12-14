@@ -1,0 +1,1084 @@
+1
+00:00:00,000 --> 00:00:06,334
+In this video, I am going to give an
+overview of various types of models that
+
+2
+00:00:06,334 --> 00:00:11,185
+have been used for sequences.
+I'll start with the simplest kinds of
+
+3
+00:00:11,185 --> 00:00:15,799
+model, which is ultra aggressive models,
+that just try and predict the next term or
+
+4
+00:00:15,799 --> 00:00:21,299
+the sequence from previous terms.
+I'll talk about more elaborate variants of
+
+5
+00:00:21,299 --> 00:00:26,347
+them using hidden units.
+And then I'll talk about, more interesting
+
+6
+00:00:26,347 --> 00:00:30,741
+kinds of models, that have hidden state,
+and hidden dynamics.
+
+7
+00:00:30,741 --> 00:00:35,880
+These include linear dynamical systems and
+hidden Markov models.
+
+8
+00:00:36,160 --> 00:00:41,230
+Most of these are quite complicated kinds
+of models, and I don't expect you to
+
+9
+00:00:41,230 --> 00:00:46,300
+understand all the details of them.
+The main point of mentioning them is to be
+
+10
+00:00:46,300 --> 00:00:51,175
+able to show how recurrent your own
+networks are related to models of that
+
+11
+00:00:51,175 --> 00:00:54,553
+kind.
+When we're using machine learning to model
+
+12
+00:00:54,553 --> 00:00:58,812
+sequences, we often want to turn one
+sequence into another sequence.
+
+13
+00:00:58,812 --> 00:01:04,088
+For example, we might want to turn English
+words into French words or we might want
+
+14
+00:01:04,088 --> 00:01:09,428
+to take a sequence of sand pressures and
+turn it into a sequence of word identities
+
+15
+00:01:09,428 --> 00:01:12,480
+which is what's happening in speech
+recognition.
+
+16
+00:01:13,340 --> 00:01:18,713
+Sometimes we don't have a separate target
+sequence, and in that case we can get a
+
+17
+00:01:18,713 --> 00:01:23,556
+teaching signal by trying to predict the
+next term in the input sequence.
+
+18
+00:01:23,556 --> 00:01:28,996
+So the target output sequence is simply
+the input sequence with an advance of one
+
+19
+00:01:28,996 --> 00:01:32,888
+time step.
+This seems much more natural, than trying
+
+20
+00:01:32,888 --> 00:01:38,315
+to predict one pixel in an image from all
+the other pixels or one patch of an image
+
+21
+00:01:38,315 --> 00:01:43,837
+from the rest of the image.
+One reason it probably seems more natural
+
+22
+00:01:43,837 --> 00:01:48,807
+is that for temporal sequences, there is a
+natural order to do the predictions in.
+
+23
+00:01:48,807 --> 00:01:52,980
+Whereas for images it's not clear what you
+should predict from what.
+
+24
+00:01:52,980 --> 00:01:56,540
+But in fact a similar approach works very
+well for images.
+
+25
+00:01:58,200 --> 00:02:02,538
+When we predict the next term in a
+sequence, it blurs the distinction,
+
+26
+00:02:02,538 --> 00:02:07,379
+between supervised and unsupervised
+learning, that I made at beginning of the
+
+27
+00:02:07,379 --> 00:02:10,761
+course.
+So we use methods that were designed for
+
+28
+00:02:10,761 --> 00:02:13,682
+supervised learning to predict the next
+term.
+
+29
+00:02:13,682 --> 00:02:16,668
+But we don't require separate teaching
+signal.
+
+30
+00:02:16,668 --> 00:02:22,877
+So in that sense, it's unsupervised.
+I'm now going to give a quick review of
+
+31
+00:02:22,877 --> 00:02:27,893
+some of the, other models of sequences,
+before we get on to using recurrent neural
+
+32
+00:02:27,893 --> 00:02:33,126
+nets to model sequences.
+So a nice simple model for sequences that
+
+33
+00:02:33,126 --> 00:02:36,798
+doesn't have any memory is an auto
+regressive model.
+
+34
+00:02:36,798 --> 00:02:42,660
+What that does is take some previous terms
+in the sequence and try and predict the
+
+35
+00:02:42,660 --> 00:02:46,897
+next term basically as a weighted average
+of previous terms.
+
+36
+00:02:46,897 --> 00:02:52,335
+The previous terms might be individual
+values or they might be whole vectors.
+
+37
+00:02:52,335 --> 00:02:58,126
+And a linear auto regressive model would
+just take a weighted average of those to
+
+38
+00:02:58,126 --> 00:03:04,716
+predict the next term.
+We can make that considerably more
+
+39
+00:03:04,716 --> 00:03:10,380
+complicated by adding hidden units.
+So in a feedforward neural net, we might
+
+40
+00:03:10,380 --> 00:03:16,744
+take some previous input terms, put them
+through some hidden units, and predict the
+
+41
+00:03:16,744 --> 00:03:21,359
+next term.
+Memory list models are only one subclass
+
+42
+00:03:21,359 --> 00:03:26,909
+of models that can be used for sequences.
+We can think about ways of generating
+
+43
+00:03:26,909 --> 00:03:32,317
+sequences, and one very natural way to
+generate a sequence is to have a model
+
+44
+00:03:32,317 --> 00:03:36,743
+that has some hidden state which has its
+own internal dynamics.
+
+45
+00:03:36,743 --> 00:03:42,222
+So, the hidden state evolves according to
+its internal dynamics, and the hidden
+
+46
+00:03:42,222 --> 00:03:47,139
+state also produces observations, and we
+get to see those observations.
+
+47
+00:03:47,139 --> 00:03:50,300
+That's a much more interesting kind of
+model.
+
+48
+00:03:51,660 --> 00:03:55,446
+It can store information in its hidden
+state for a long time.
+
+49
+00:03:55,446 --> 00:04:00,350
+Unlike the memoryless models, there's no
+simple band, to how far we have to look
+
+50
+00:04:00,350 --> 00:04:03,640
+back before we can be sure it's not
+affecting things.
+
+51
+00:04:04,840 --> 00:04:09,637
+If the dynamics of the hidden state is
+noisy and the way it generates outputs
+
+52
+00:04:09,637 --> 00:04:14,681
+from its hidden state is noisy, then by
+observing the output of a generative model
+
+53
+00:04:14,681 --> 00:04:18,680
+like this, you can never know for sure
+what it's hidden state was.
+
+54
+00:04:19,100 --> 00:04:23,491
+The best you can do is to infer
+probability distribution over the space of
+
+55
+00:04:23,491 --> 00:04:27,824
+all possible hidden state vectors.
+You can know that it's probably in some
+
+56
+00:04:27,824 --> 00:04:32,391
+part of the space and not another part of
+the space, but you can't pin it down
+
+57
+00:04:32,391 --> 00:04:37,421
+exactly.
+So with a generative model like this, if
+
+58
+00:04:37,421 --> 00:04:43,484
+you get to observe what it produces, and
+you now try to infer what the hidden state
+
+59
+00:04:43,484 --> 00:04:49,036
+was, in general that's very hard, but
+there's two types of hidden state model
+
+60
+00:04:49,036 --> 00:04:54,880
+for which the computation is tractable.
+That is, there's a fairly straightforward
+
+61
+00:04:54,880 --> 00:05:00,869
+computation that allows you to infer the
+probability distribution over the hidden
+
+62
+00:05:00,869 --> 00:05:04,230
+state vectors that might have caused the
+data.
+
+63
+00:05:04,230 --> 00:05:07,430
+Of course when we do this and apply it to
+real data.
+
+64
+00:05:07,430 --> 00:05:11,123
+We're assuming that the real data is
+generated by our model.
+
+65
+00:05:11,123 --> 00:05:14,692
+So that's typically what we do when we're
+modeling things.
+
+66
+00:05:14,692 --> 00:05:19,554
+We assume the data was generated by the
+model and then we infer what state the
+
+67
+00:05:19,554 --> 00:05:22,940
+model must have been in, in order to
+generate that data.
+
+68
+00:05:23,920 --> 00:05:30,025
+The next three slides are mainly intended
+for people who already know about the two
+
+69
+00:05:30,025 --> 00:05:33,660
+types of hidden state model I'm going to
+describe.
+
+70
+00:05:34,020 --> 00:05:39,936
+The point of the slides is so that I make
+it clear how recurrent neural networks
+
+71
+00:05:39,936 --> 00:05:45,533
+differ from those standard models.
+If you can't follow the details of the two
+
+72
+00:05:45,533 --> 00:05:49,480
+standard models, don't worry too much.
+That's not the main point.
+
+73
+00:05:50,440 --> 00:05:54,424
+So one standard model is a linear
+dynamical system.
+
+74
+00:05:54,424 --> 00:06:00,517
+It's very widely used in engineering.
+This is a generative model that has real
+
+75
+00:06:00,517 --> 00:06:05,205
+valued hidden state.
+The hidden state has linear dynamics,
+
+76
+00:06:05,205 --> 00:06:11,400
+shown by those red arrows on the right.
+And the dynamics has Gaussian noise, so
+
+77
+00:06:11,400 --> 00:06:15,020
+that the hidden state evolves
+probabilistically.
+
+78
+00:06:15,780 --> 00:06:22,765
+There may also be driving inputs, shown at
+the bottom there, which directly influence
+
+79
+00:06:22,765 --> 00:06:27,588
+the hidden state.
+So the inputs, influence the hidden state
+
+80
+00:06:27,588 --> 00:06:34,387
+directly, the hidden state determines the
+output to predict the next output of a
+
+81
+00:06:34,387 --> 00:06:38,897
+system like this, we need to be able to
+infer its hidden state.
+
+82
+00:06:38,897 --> 00:06:43,989
+And these kinds of systems are used, for
+example, for tracking missiles.
+
+83
+00:06:43,989 --> 00:06:49,590
+In fact, one of the earliest uses of
+Gaussian distributions was for trying to
+
+84
+00:06:49,590 --> 00:06:55,191
+track planets from noisy observations.
+Gaussian actually figured out that, if you
+
+85
+00:06:55,191 --> 00:06:59,120
+assume Gaussian noise, you could do a good
+job of that.
+
+86
+00:07:00,420 --> 00:07:06,205
+One nice property that a Gaussian has is
+that if you linearly transform a gaseon
+
+87
+00:07:06,205 --> 00:07:10,965
+you get another Gaussian.
+Because all the noise in a linear dynamic
+
+88
+00:07:10,965 --> 00:07:15,480
+system is gaseon.
+It turns out that the distribution over
+
+89
+00:07:15,480 --> 00:07:22,101
+the hidden state given the observation so
+far, that is given the output so far, is
+
+90
+00:07:22,101 --> 00:07:26,262
+also a Gaussian.
+It's a full covariance Gaussian, and it's
+
+91
+00:07:26,262 --> 00:07:31,480
+quite complicated to compute what it is.
+But it can be computed efficiently.
+
+92
+00:07:31,480 --> 00:07:35,167
+And there's a technique called Kalman
+Filtering.
+
+93
+00:07:35,167 --> 00:07:40,802
+This is an efficient recursive way of
+updating your representation of the hidden
+
+94
+00:07:40,802 --> 00:07:44,057
+state given a new observation.
+So, to summarize,
+
+95
+00:07:44,057 --> 00:07:50,040
+Given observations of the output of the
+system, we can't be sure what hidden state
+
+96
+00:07:50,040 --> 00:07:55,804
+it was in, but we can, estimate a Gaussian
+distribution over the possible hidden
+
+97
+00:07:55,804 --> 00:08:00,911
+states it might have been in.
+Always assuming, of course, that our model
+
+98
+00:08:00,911 --> 00:08:04,560
+is a correct model of the reality we're
+observing.
+
+99
+00:08:06,140 --> 00:08:11,823
+A different kind of hidden state model
+that uses discrete distributions rather
+
+100
+00:08:11,823 --> 00:08:15,637
+than Gaussian distributions, is a hidden
+Markov model.
+
+101
+00:08:15,637 --> 00:08:20,817
+And because it's based on discrete
+mathematics, computer scientists love
+
+102
+00:08:20,817 --> 00:08:24,630
+these ones.
+In a hidden Markov model, the hidden state
+
+103
+00:08:24,630 --> 00:08:26,789
+consists of a one of N.
+Choice.
+
+104
+00:08:26,789 --> 00:08:32,904
+So there a number of things called states.
+And the system is always in exactly one of
+
+105
+00:08:32,904 --> 00:08:36,846
+those states.
+The transitions between states are
+
+106
+00:08:36,846 --> 00:08:40,440
+probabilistic.
+They're controlled by a transition matrix
+
+107
+00:08:40,440 --> 00:08:45,639
+which is simply a bunch of probabilities
+that say, if you're in state one at time
+
+108
+00:08:45,639 --> 00:08:48,399
+one,
+What's the probability of you going to
+
+109
+00:08:48,399 --> 00:08:53,531
+state three at time two?
+The output model is also stochastic.
+
+110
+00:08:53,531 --> 00:08:59,466
+So, the state that the system is in
+doesn't completely determine what output
+
+111
+00:08:59,466 --> 00:09:03,683
+it produces.
+There's some variation in the output that
+
+112
+00:09:03,683 --> 00:09:09,083
+each state can produce.
+Because of that, we can't be sure which
+
+113
+00:09:09,083 --> 00:09:14,510
+state produced a given output.
+In a sense, the states are hidden behind
+
+114
+00:09:14,510 --> 00:09:19,240
+this probabilistic veil, and that's why
+they're called hidden.
+
+115
+00:09:19,800 --> 00:09:24,889
+Historically the reason hidden units in a
+neural network are called hidden, is
+
+116
+00:09:24,889 --> 00:09:29,196
+because I like this term.
+It sounded mysterious, so I stole it from
+
+117
+00:09:29,196 --> 00:09:34,238
+neural networks.
+It is easy to represent the probability
+
+118
+00:09:34,238 --> 00:09:36,921
+distribution across n states with n
+numbers.
+
+119
+00:09:36,921 --> 00:09:42,226
+So, the nice thing about a hidden Markov
+model, is we can represent the probability
+
+120
+00:09:42,226 --> 00:09:46,921
+distribution across its discreet states.
+So, even though we don't know what it,
+
+121
+00:09:46,921 --> 00:09:51,860
+what state it's in for sure, we can easily
+represent the probability distribution.
+
+122
+00:09:53,080 --> 00:09:58,154
+And to predict the next output from a
+hidden Markov model, we need to infer what
+
+123
+00:09:58,154 --> 00:10:02,594
+hidden state it's probably in.
+And so we need to get our hands on that
+
+124
+00:10:02,594 --> 00:10:07,303
+probability distribution.
+It turns out there's an easy method based
+
+125
+00:10:07,303 --> 00:10:12,765
+on dynamic programming that allows us to
+take the observations we've made and from
+
+126
+00:10:12,765 --> 00:10:17,240
+those compute the probability distribution
+across the hidden states.
+
+127
+00:10:17,600 --> 00:10:22,531
+Once we have that distribution, there is a
+nice elegant learning algorithm hidden
+
+128
+00:10:22,531 --> 00:10:26,854
+Markov models, and that's what made them
+so appropriate for speech.
+
+129
+00:10:26,854 --> 00:10:30,020
+And in the 1970s, they took over speech
+recognition.
+
+130
+00:10:30,820 --> 00:10:36,624
+There's a fundamental limitation of HMMs.
+It's easiest to understand this
+
+131
+00:10:36,624 --> 00:10:42,977
+limitation, if we consider what happens
+when a hidden Markov model generates data.
+
+132
+00:10:42,977 --> 00:10:48,860
+At each time step when it's generating, it
+selects one of its hidden states.
+
+133
+00:10:48,860 --> 00:10:54,900
+So if it's got n hidden states, the
+temporal information stored in the hidden
+
+134
+00:10:54,900 --> 00:10:59,998
+state is at most logn) n bits.
+So that's all it knows about what it's
+
+135
+00:10:59,998 --> 00:11:04,964
+done so far.
+So now let's consider how much information
+
+136
+00:11:04,964 --> 00:11:10,555
+a hidden Markov model can convey to the
+second half of an utterance it produces
+
+137
+00:11:10,555 --> 00:11:14,957
+from the first half.
+So imagine it's already produced the first
+
+138
+00:11:14,957 --> 00:11:19,150
+half of an utterance.
+And now it's going to have to produce the
+
+139
+00:11:19,150 --> 00:11:22,783
+second half.
+And remember, its memory of what it said
+
+140
+00:11:22,783 --> 00:11:26,766
+for the first half is in which of the n
+states it's in.
+
+141
+00:11:26,766 --> 00:11:30,610
+So its memory only has log n bits of
+information in it.
+
+142
+00:11:30,610 --> 00:11:36,998
+To produce the second half that's
+compatible with the first half, we must
+
+143
+00:11:36,998 --> 00:11:42,074
+make the syntax fit.
+So for example, the number intend must
+
+144
+00:11:42,074 --> 00:11:45,918
+agree.
+It also needs to make the semantics fit.
+
+145
+00:11:45,918 --> 00:11:49,967
+It can't have the second half of the
+sentence be about something totally
+
+146
+00:11:49,967 --> 00:11:53,795
+different from the first half.
+Also the intonation needs to fit so it
+
+147
+00:11:53,795 --> 00:11:58,398
+would look very silly if the, intonation
+contour completely changed halfway through
+
+148
+00:11:58,398 --> 00:12:02,213
+the sentence.
+There's a lot of other things that also
+
+149
+00:12:02,213 --> 00:12:04,524
+have to fit.
+The accent of the speaker,
+
+150
+00:12:04,524 --> 00:12:07,991
+The rate they're speaking at,
+How loudly they're speaking.
+
+151
+00:12:07,991 --> 00:12:11,093
+And the vocal tract characteristics of the
+speaker.
+
+152
+00:12:11,093 --> 00:12:16,142
+All of those things must fit between the
+second half of the sentence and the first
+
+153
+00:12:16,142 --> 00:12:19,061
+half.
+And so if you wanted a hidden Markov model
+
+154
+00:12:19,061 --> 00:12:24,353
+to actually generate a sentence, the
+hidden state has to be able to convey all
+
+155
+00:12:24,353 --> 00:12:27,760
+that information from the first half to
+the second half.
+
+156
+00:12:28,380 --> 00:12:32,648
+Now the problem is that all of those
+aspects could easily come to a hundred
+
+157
+00:12:32,648 --> 00:12:36,186
+bits of information.
+So the first half of the sentence needs to
+
+158
+00:12:36,186 --> 00:12:40,679
+convey a hundred bits of information to
+the second half and that means that the
+
+159
+00:12:40,679 --> 00:12:45,060
+hidden Markov model needs two to the
+hundreds states and that's just too many.
+
+160
+00:12:46,240 --> 00:12:49,231
+So that brings us to recurrence your own
+networks.
+
+161
+00:12:49,231 --> 00:12:53,000
+They have a much more efficient way of
+remembering information.
+
+162
+00:12:53,340 --> 00:12:59,602
+They're very powerful because they combine
+two properties that have distributed
+
+163
+00:12:59,602 --> 00:13:04,022
+hidden state.
+That means, several different units can be
+
+164
+00:13:04,022 --> 00:13:07,933
+active at once.
+So they can remember several different
+
+165
+00:13:07,933 --> 00:13:11,700
+things at once.
+They don't just have one active unit.
+
+166
+00:13:12,080 --> 00:13:16,380
+They're also nonlinear.
+You see, a linear dynamical system has a
+
+167
+00:13:16,380 --> 00:13:21,022
+whole hidden state vector.
+So it's got more than one value at a time,
+
+168
+00:13:21,022 --> 00:13:26,825
+but those values are constrained to act in
+a linear way so as to make inference easy,
+
+169
+00:13:26,825 --> 00:13:32,560
+and in a recurrent neural network we allow
+the dynamics to be much more complicated.
+
+170
+00:13:34,220 --> 00:13:39,120
+With enough neurons and enough time, a
+recurring neuron network can compute
+
+171
+00:13:39,120 --> 00:13:42,190
+anything that can be computed by your
+computer.
+
+172
+00:13:42,190 --> 00:13:49,702
+It's a very powerful device.
+So linear dynamical systems and hidden
+
+173
+00:13:49,702 --> 00:13:53,255
+mark off models are both stochastic
+models.
+
+174
+00:13:53,255 --> 00:14:00,030
+That is the dynamics and the production of
+observations from the underlying state
+
+175
+00:14:00,030 --> 00:14:05,813
+both involve intrinsic noise.
+And the question is do models need to be
+
+176
+00:14:05,813 --> 00:14:10,100
+like that.
+Well one thing to notice is that the
+
+177
+00:14:10,100 --> 00:14:15,666
+posterior probability distribution over
+hidden states in either a limited anomical
+
+178
+00:14:15,666 --> 00:14:20,762
+system or hidden markoff model is a
+deterministic function of the data that
+
+179
+00:14:20,762 --> 00:14:24,852
+you've seen so far.
+That is the inference algorithm for these
+
+180
+00:14:24,852 --> 00:14:29,479
+systems ends up with a probability
+distribution, and that probability
+
+181
+00:14:29,479 --> 00:14:34,709
+distribution is just a bunch of numbers,
+and those numbers are a deterministic
+
+182
+00:14:34,709 --> 00:14:40,453
+version of the data so far.
+In a recurrent neural network, you get a
+
+183
+00:14:40,453 --> 00:14:46,007
+bunch of numbers that are a deterministic
+function of the data so far.
+
+184
+00:14:46,007 --> 00:14:52,433
+And it might be a good idea to think of
+those numbers that constitute the hidden
+
+185
+00:14:52,433 --> 00:14:57,987
+state of a recurrent neural network.
+They're very like the probability
+
+186
+00:14:57,987 --> 00:15:01,320
+distribution for these simple stocastic
+models.
+
+187
+00:15:04,320 --> 00:15:09,020
+So what kinds of behavior can recur at
+your own networks exhibit?
+
+188
+00:15:09,620 --> 00:15:13,512
+Well, they can oscillate.
+That's obviously good for things like
+
+189
+00:15:13,512 --> 00:15:18,408
+motion control, where when you're walking,
+for example, you want to know regular
+
+190
+00:15:18,408 --> 00:15:23,306
+oscillation, which is your stride.
+They can settle to point attractors.
+
+191
+00:15:23,306 --> 00:15:25,989
+That might be good for retrieving
+memories.
+
+192
+00:15:25,989 --> 00:15:31,168
+And later on in the course we'll look at
+Hopfield nets where they use the settling
+
+193
+00:15:31,168 --> 00:15:36,035
+to point attractors to store memories.
+So the idea is you have a sort of rough
+
+194
+00:15:36,035 --> 00:15:41,026
+idea of what you're trying to retrieve.
+You then let the system settle down to a
+
+195
+00:15:41,026 --> 00:15:45,831
+stable point and those stable points
+correspond to the things you know about.
+
+196
+00:15:45,831 --> 00:15:49,700
+And so by settling to that stable point
+you retrieve a memory.
+
+197
+00:15:50,840 --> 00:15:56,140
+They can also behave chaotically if you
+set the weights in the appropriate regime.
+
+198
+00:15:56,540 --> 00:16:00,837
+Often, chaotic behavior is bad for
+information processing, because in
+
+199
+00:16:00,837 --> 00:16:04,755
+information processing, you want to be
+able to behave reliably.
+
+200
+00:16:04,755 --> 00:16:09,305
+You want to achieve something.
+There are some circumstances where it's a
+
+201
+00:16:09,305 --> 00:16:12,212
+good idea.
+If you're up against a much smarter
+
+202
+00:16:12,212 --> 00:16:17,457
+adversary, you probably can't outwit them,
+so it might be a good idea just to behave
+
+203
+00:16:17,457 --> 00:16:20,364
+randomly.
+And one way to get the appearance of
+
+204
+00:16:20,364 --> 00:16:27,428
+randomness is to behave chaotically.
+One nice thing about R and N's, which, a
+
+205
+00:16:27,428 --> 00:16:32,382
+long time ago, I thought was gonna make
+them very powerful, is that an R and N
+
+206
+00:16:32,382 --> 00:16:37,528
+could learn to implement lots of little
+programs, using different subsets of its
+
+207
+00:16:37,528 --> 00:16:40,938
+hidden state.
+And each of these little programs could
+
+208
+00:16:40,938 --> 00:16:45,248
+capture a nugget of knowledge.
+And all of these things could run in
+
+209
+00:16:45,248 --> 00:16:48,980
+parallel, and interact with each other in
+complicated ways.
+
+210
+00:16:50,000 --> 00:16:55,270
+Unfortunately the computational power of
+recurrent neural networks makes them very
+
+211
+00:16:55,270 --> 00:16:59,397
+hard to train.
+For many years, we couldn't exploit the
+
+212
+00:16:59,397 --> 00:17:02,460
+computational power of recurrent neural
+networks.
+
+213
+00:17:02,460 --> 00:17:06,773
+It was some heroic efforts.
+For example, Tony Robinson managed to make
+
+214
+00:17:06,773 --> 00:17:10,023
+quite a good speech recognizer using
+recurrent nets.
+
+215
+00:17:10,023 --> 00:17:15,086
+He had to do a lot of work implementing
+them on a parallel computer built out of
+
+216
+00:17:15,086 --> 00:17:18,149
+transputers.
+And it was only recently that people
+
+217
+00:17:18,149 --> 00:17:23,087
+managed to produce recurrent neural
+networks that outperformed Tony Robinson's

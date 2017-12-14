@@ -1,0 +1,859 @@
+1
+00:00:00,000 --> 00:00:04,471
+En este video, vamos a ver algunos de 
+los problemas que surgen al usar
+
+2
+00:00:04,471 --> 00:00:07,075
+el método de descenso de gradiente 
+estocástico con lotes pequeños.
+
+3
+00:00:07,075 --> 00:00:10,923
+Hay muchas técnicas que hacen 
+que funcione mejor
+
+4
+00:00:10,923 --> 00:00:13,753
+Estas son el tipo de redes neuronales
+de salida oculta
+
+5
+00:00:13,753 --> 00:00:17,150
+Voy a recorrer las técnicas principales 
+en este vídeo.
+
+6
+00:00:17,150 --> 00:00:21,817
+El primer tema sobre el que voy a hablar es
+la inicialización de los pesos en la red neuronal.
+
+7
+00:00:21,817 --> 00:00:24,808
+Si dos unidades ocultas tienen exactamente
+
+8
+00:00:24,808 --> 00:00:29,535
+los mismos pesos, el mismo sesgo con 
+entradas y salidas, nunca podrán
+
+9
+00:00:29,535 --> 00:00:33,664
+diferenciarse una de otra.
+Porque siempre tendrán exactamente 
+
+10
+00:00:33,664 --> 00:00:36,596
+el mismo gradiente.
+Para lograr que aprendan a ser
+
+11
+00:00:36,596 --> 00:00:40,605
+detectores de características diferentes,
+necesitamos empezar con diferencias entre ellas.
+
+12
+00:00:40,605 --> 00:00:44,614
+Lo conseguimos usando pequeños pesos aleatorios
+para inicializar los pesos.
+
+13
+00:00:44,614 --> 00:00:48,971
+Eso rompe la simetría.
+Esos pequeños pesos aleatorios no deberían
+
+14
+00:00:48,971 --> 00:00:52,251
+ser necesariamente del mismo tamaño.
+
+15
+00:00:52,251 --> 00:00:57,765
+De modo que si tienes una unidad oculta que tiene
+una gran abanico de entrada, si usas un peso bastante
+
+16
+00:00:57,765 --> 00:01:03,627
+grande, tenderá a saturarse. De modo 
+que si puedes usa pesos mucho menores para
+
+17
+00:01:03,627 --> 00:01:08,319
+las unidades ocultas que tienen gran abanico de entrada.
+Si tienes una unidad oculta con un abanico 
+
+18
+00:01:08,319 --> 00:01:11,128
+muy pequeño, entonces querrás usar 
+pesos más grandes
+
+19
+00:01:11,128 --> 00:01:15,601
+Y como los pesos son aleatorios, 
+crecen con la raiz cuadrada del número
+
+20
+00:01:15,601 --> 00:01:18,697
+de pesos. 
+Una buena regla es hacer
+
+21
+00:01:18,697 --> 00:01:22,711
+que el tamaño original de los pesos
+sea proporcional a la raíz cuadrada del
+
+22
+00:01:22,711 --> 00:01:25,973
+abanico.
+Podemos escalar las tasas de aprendizaje para
+
+23
+00:01:25,973 --> 00:01:30,724
+los pesos del mismo modo.
+Algo que tiene un enorme efecto sorpresivo
+
+24
+00:01:30,724 --> 00:01:36,063
+en la velocidad con que la red neuronal 
+puede aprender es centrar las entradas
+
+25
+00:01:36,063 --> 00:01:39,480
+Es decir, agregar una constante a 
+
+26
+00:01:39,480 --> 00:01:44,190
+cada componente de las entradas.
+Es sorprendente que pueda hacer
+
+27
+00:01:44,190 --> 00:01:48,050
+gran diferencia.
+Pero cuando estás usando un descenso escarpado
+
+28
+00:01:48,050 --> 00:01:53,483
+cambiar el valor de la entrada sumando
+una constante puede hacer una gran diferencia.
+
+29
+00:01:53,483 --> 00:01:59,416
+Es útil generalmente desplazar cada componente
+de la entrada, de modo que promediado sobre todos
+
+30
+00:01:59,416 --> 00:02:04,920
+los datos de entrenamiento tenga un valor de cero.
+Es decir, asegúrate que el valor medio sea cero.
+
+31
+00:02:05,600 --> 00:02:09,976
+Así que supongamos que tenemos una pequeña red neuronal
+como esta con solamente una neurona lineal con dos pesos
+
+32
+00:02:09,976 --> 00:02:13,729
+y supongamos que tenemos algunos casos de entrenamiento.
+
+33
+00:02:13,729 --> 00:02:18,311
+El primer caso de entrenamiento es cuando 
+las entradas 101 y 101 producen una salida 2
+
+34
+00:02:18,311 --> 00:02:21,719
+y el segundo caso es cuando 
+se produce una salida 0 con
+
+35
+00:02:21,719 --> 00:02:26,360
+las entradas 101 y 99.
+Y aquí estoy usando color para indicar a cuál caso de entrenamiento me estoy refiriendo.
+
+36
+00:02:26,360 --> 00:02:32,088
+Si observas la superficie de error que se obtiene 
+para estos dos casos de entrenamiento
+
+37
+00:02:32,088 --> 00:02:35,046
+se parece a esto.
+
+38
+00:02:35,046 --> 00:02:40,626
+La línea verde es aquella en la que los pesos 
+satisfacen el primer caso de entrenamiento
+
+39
+00:02:40,626 --> 00:02:46,138
+y la línea roja es aquella en la que los pesos
+satisfacen el segundo caso de entrenamiento.
+
+40
+00:02:46,138 --> 00:02:50,607
+Y lo que notamos es que ambas líneas
+son casi paralelas, 
+
+41
+00:02:50,607 --> 00:02:56,570
+entonces cuando las combinamos obtenemos
+una elipse muy alargada.
+
+42
+00:02:56,570 --> 00:03:01,094
+Una manera de pensar en lo que está pasando aquí es que debido a que 
+estamos usando una medida cuadrática de error
+
+43
+00:03:01,094 --> 00:03:05,190
+obtenemos una zanja parabólica a lo largo de la línea roja.
+
+44
+00:03:05,190 --> 00:03:09,959
+La línea roja es el fondo de esta zanja parabólica que 
+nos dice el error cuadrático que obtenemos en el caso rojo,
+
+45
+00:03:09,959 --> 00:03:14,911
+y hay otra zanja parabólica cuyo fondo es la línea verde.
+
+46
+00:03:14,911 --> 00:03:19,008
+Resulta que, aunque esto podría sorprender 
+tu intuición espacial,
+
+47
+00:03:19,008 --> 00:03:23,532
+si se suman dos zanjas parabólicas se obtiene
+
+48
+00:03:23,532 --> 00:03:27,323
+un tazón cuadrático. 
+Un tazón cuadrático alargado en este caso.
+
+49
+00:03:27,323 --> 00:03:30,074
+Así que de ahí viene esa superficie de error.
+
+50
+00:03:30,074 --> 00:03:34,462
+Ahora, observa lo que pasa si restamos
+
+51
+00:03:34,462 --> 00:03:38,964
+un ciento de esos componentes de entrada,
+
+52
+00:03:38,964 --> 00:03:42,914
+obtenemos una superficie de error completamente diferente.
+
+53
+00:03:42,914 --> 00:03:46,864
+Es un círculo en este caso, es ideal.
+
+54
+00:03:46,864 --> 00:03:52,560
+La línea verde es aquella en la que la suma de los pesos es dos.
+
+55
+00:03:52,560 --> 00:03:55,345
+Vamos a tomar el primer peso y multiplicarlo por uno,
+
+56
+00:03:55,345 --> 00:03:58,179
+vamos a tomar el segundo peso y multiplicarlo por uno.
+Necesitamos que resulte dos, 
+
+57
+00:03:58,179 --> 00:04:00,916
+así que más vale que la suma de los pesos sea dos.
+
+58
+00:04:00,916 --> 00:04:03,995
+La línea roja es aquella en la que los dos pesos son iguales
+
+59
+00:04:03,995 --> 00:04:07,171
+Debido a que vamos a tomar el primer peso y multiplicarlo por uno, 
+
+60
+00:04:07,171 --> 00:04:10,198
+y vamos a tomar el segundo peso y multiplicarlo por menos uno,
+
+61
+00:04:10,201 --> 00:04:13,720
+de manera que si los pesos son iguales obtendremos el cero que se necesita.
+
+62
+00:04:14,360 --> 00:04:19,917
+Así que la superficie de error en este caso es un lindo círculo donde
+el descenso por gradiente es
+
+63
+00:04:19,917 --> 00:04:24,320
+muy fácil y todo lo que hicimos fue restar 100 de cada entrada.
+
+64
+00:04:25,380 --> 00:04:30,330
+Si piensas lo que sucede, no con las entradas sino, con las unidades ocultas
+
+65
+00:04:30,330 --> 00:04:36,039
+tiene sentido tener unidades ocultas que sean tangentes hiperbólicas
+cuyos valores estén entre 
+
+66
+00:04:36,039 --> 00:04:40,339
+menos uno y uno.
+El rango de la tangente hiperbólica es el doble del
+
+67
+00:04:40,339 --> 00:04:44,709
+de la curva logística menos uno. Y la razón por la que tiene sentido es porque
+
+68
+00:04:44,709 --> 00:04:50,560
+entonces, las actividades de las unidades ocultas son cero en promedio
+y eso debería hacer
+
+69
+00:04:50,560 --> 00:04:56,128
+más rápido el aprendizaje en el siguiente nivel.
+Por supuesto, eso es cierto si las entradas
+
+70
+00:04:56,128 --> 00:05:00,640
+a las tangentes hiperbólicas están distribuidas
+sensatamente alrededor del cero.
+
+71
+00:05:01,140 --> 00:05:05,302
+En ese sentido, una tangente hiperbólica es mejor que una curva lógistica.
+
+72
+00:05:05,302 --> 00:05:09,154
+No obstante, hay otros sentidos en los que una curva logística es mejor.
+
+73
+00:05:09,154 --> 00:05:12,820
+Por ejemplo, la curva logística te da "un tapete bajo el cual puedes ocultar el polvo".
+
+74
+00:05:13,080 --> 00:05:17,575
+Te da una salida de cero, y si haces la entrada aún más pequeña de lo que era, 
+
+75
+00:05:17,575 --> 00:05:21,379
+la salida sigue siendo cero.
+De manera que las fluctuaciones en entradas grandes de origen son
+
+76
+00:05:21,379 --> 00:05:25,184
+ignoradas por la curva logística.
+Para la tangente hiperbólica tienes que ir
+
+77
+00:05:25,184 --> 00:05:28,700
+al final de las planicies antes de que pueda ignorar algo.
+
+78
+00:05:30,700 --> 00:05:35,219
+Otra cosa que hace una gran diferencia es escalar las entradas.
+
+79
+00:05:35,219 --> 00:05:41,060
+Cuando se usa el descenso más pronunciado, escalar los valores de entrada es una cosa muy sencilla de
+
+80
+00:05:41,060 --> 00:05:44,119
+hacer. La transformamos de forma que cada componente
+
+81
+00:05:44,119 --> 00:05:48,221
+de la entrada tiene varianza unitaria sobre el conjunto de datos completo
+
+82
+00:05:48,221 --> 00:05:55,352
+De modo que tiene un valor típico de uno o menos uno. 
+De nuevo, si tomamos esta simple red con
+
+83
+00:05:55,352 --> 00:06:02,503
+dos pesos y miramos la superficie de error
+cuando el primer componente es muy pequeño y
+
+84
+00:06:02,503 --> 00:06:08,082
+el segundo componente es mucho mayor.
+Obtenemos una superficie de error en la que obtenemos
+
+85
+00:06:08,082 --> 00:06:12,607
+una elipse que tiene una gran curvatura, 
+cuando los componentes de la entrada son grandes
+
+86
+00:06:12,607 --> 00:06:17,196
+porque pequeños cambios en los pesos provocan una
+gran diferencia en la salida
+
+87
+00:06:17,196 --> 00:06:22,677
+Y una curvatura muy pequeña en la dirección en la que
+el componente de entrada es pequeño porque
+
+88
+00:06:22,677 --> 00:06:27,011
+pequeños cambios en el peso apenas producen
+alguna diferencia en el error.
+
+89
+00:06:27,011 --> 00:06:32,045
+El color aquí indica cual eje estamos usando, no cual ejemplo de entrenamiento
+
+90
+00:06:32,045 --> 00:06:34,850
+estamos usando, como en la diapositiva anterior.
+
+91
+00:06:34,850 --> 00:06:39,317
+Si simplemente cambiamos la varianza de las entradas,
+si simplemente las re-escalamos,
+
+92
+00:06:39,317 --> 00:06:44,733
+Hacemos la primera componente diez veces más grande
+y la segunda componente diez veces más pequeña,
+
+93
+00:06:44,733 --> 00:06:47,780
+ahora obtenemos una agradable superficie de error circular.
+
+94
+00:06:49,980 --> 00:06:55,716
+Centrar y reescalar las entradas es una cosa
+muy sencilla de hacer, pero hay algo que
+
+95
+00:06:55,716 --> 00:07:00,087
+es un poco más complicado, pero que
+realmente funciona incluso mejor porque
+
+96
+00:07:00,087 --> 00:07:03,842
+garantiza que te dará un círculo,
+una superficie de error circular, 
+
+97
+00:07:03,842 --> 00:07:08,416
+al menos para una neurona lineal.
+Lo que hacemos es intentar descorrelacionar 
+
+98
+00:07:08,416 --> 00:07:12,849
+las componentes de los vectores de entrada.
+En otras palabras, si tomamos dos componentes,
+
+99
+00:07:12,849 --> 00:07:17,641
+y miramos cómo están correlacionadas la una
+con la otra a lo largo de todo el conjunto de entrenamiento,
+
+100
+00:07:17,641 --> 00:07:22,134
+como, si recuerdas aquel ejemplo de
+cómo el número de porciones de patatas
+
+101
+00:07:22,134 --> 00:07:26,028
+y el número de porciones de ketchup
+podía estar altamente correlacionado,
+
+102
+00:07:26,028 --> 00:07:28,963
+queremos intentar deshacernos de
+esas correlaciones.
+
+103
+00:07:28,963 --> 00:07:34,260
+Eso hará el aprendizaje mucho más fácil.
+Hay muchas formas de descorrelacionar
+
+104
+00:07:34,260 --> 00:07:37,316
+cosas.
+Para aquellos de vosotros que conocen el
+
+105
+00:07:37,316 --> 00:07:41,056
+Análisis de Componentes Principales,
+una cosa muy sensible de hacer es aplicar
+
+106
+00:07:41,056 --> 00:07:45,171
+Análisis de Componentes Principales,
+eliminar los componentes que tengan
+
+107
+00:07:45,171 --> 00:07:49,349
+los Eigenvalores más bajos, lo que
+de por sí logra alguna reducción de dimensionalidad,
+
+108
+00:07:49,349 --> 00:07:54,711
+y entonces escalar los componentes restantes
+dividiéndolos por la raíz cuadrada de sus
+
+109
+00:07:55,085 --> 00:07:58,078
+Eigenvalores. 
+Para un sistema lineal, esto nos dará
+
+110
+00:07:58,078 --> 00:08:01,631
+una superficie de error circular.
+Si no sabéis sobre componentes 
+
+111
+00:08:01,631 --> 00:08:04,500
+principales, lo cubriremos más tarde
+en el curso.
+
+112
+00:08:05,580 --> 00:08:09,294
+Una vez que tenemos una superficie de error circular,
+el gradiente apunta directo hacia el mínimo,
+
+113
+00:08:09,294 --> 00:08:14,463
+de modo que el aprendizaje es realmente fácil.
+Ahora, hablemos sobre algunos de los
+
+114
+00:08:14,463 --> 00:08:19,382
+problemas comunes que la gente encuentra.
+Una cosa que puede ocurrir es que si empezamos
+
+115
+00:08:19,382 --> 00:08:24,908
+con una tasa de aprendizaje que es demasiado grande,
+conducimos a las unidades ocultas o a estar
+
+116
+00:08:24,908 --> 00:08:29,356
+firmemente encendidas, o firmemente apagadas.
+Es decir, los pesos entrantes son demasiado grandes
+
+117
+00:08:29,356 --> 00:08:34,545
+en positivo o demasiado grandes en negativo.
+Y su estado ya no depende de
+
+118
+00:08:34,545 --> 00:08:39,861
+la entrada y por supuesto esto significa que las
+derivadas del error que vienen de la salida
+
+119
+00:08:39,861 --> 00:08:44,472
+no les afectarán, puesto que están en mesetas
+donde la derivada es básicamente cero.
+
+120
+00:08:44,472 --> 00:08:48,570
+y por eso el aprendizaje se detendrá.
+Como la gente está esperando ver un
+
+121
+00:08:48,570 --> 00:08:53,350
+mínimo local, cuando el aprendizaje se detiene dicen:
+"oh!, estoy en un mínimo local, y el error
+
+122
+00:08:53,350 --> 00:08:56,072
+es terrible! Así que ahí están, 
+esos malvados mínimos locales"
+
+123
+00:08:56,072 --> 00:08:58,008
+Usualmente eso no es cierto.
+
+124
+00:08:58,008 --> 00:09:01,820
+Usualmente es porque te has quedado atascado
+al final de una meseta. 
+
+125
+00:09:02,660 --> 00:09:07,992
+Un segundo problema que ocurre es, que si
+estás clasificando cosas y estás usando
+
+126
+00:09:07,992 --> 00:09:11,232
+bien el error cuadrático o 
+el error de entropía cruzada
+
+127
+00:09:11,232 --> 00:09:16,362
+la mejor estrategia a suponer es normalmente
+hacer la unidad de salida igual a
+
+128
+00:09:16,362 --> 00:09:19,400
+la proporción de tiempo que debería ser uno.
+
+129
+00:09:20,180 --> 00:09:25,002
+La red encontrará esa estrategia
+bastante rápidamente y el error caerá
+
+130
+00:09:25,002 --> 00:09:29,886
+rápidamente, pero particularmente si la red tiene
+muchas capas puede llevar mucho tiempo
+
+131
+00:09:29,886 --> 00:09:34,098
+antes de que mejore mucho en eso.
+Dado que para mejorar sobre la
+
+132
+00:09:34,098 --> 00:09:38,677
+estrategia supuesta tiene que obtener información 
+sensible desde la entrada a través de todas las
+
+133
+00:09:38,677 --> 00:09:43,682
+capas ocultas hasta la salida y eso podría tomar
+un gran tiempo para aprender si empiezas
+
+134
+00:09:43,682 --> 00:09:47,284
+con pesos pequeños.
+Así que, de nuevo, aprendes rápidamente y entonces
+
+135
+00:09:47,284 --> 00:09:52,351
+el error deja de bajar, y parece que
+es un mínimo local, pero realmente es otra
+
+136
+00:09:52,351 --> 00:09:56,720
+meseta. 
+Mencioné antes que hacia el final del
+
+137
+00:09:56,720 --> 00:09:59,607
+aprendizaje, deberías bajar la 
+tasa de aprendizaje. 
+
+138
+00:09:59,777 --> 00:10:03,910
+También deberías tener cuidado con
+bajar la tasa de aprendizaje demasiado pronto.
+
+139
+00:10:03,910 --> 00:10:08,962
+Cuando bajas la tasa de aprendizaje, 
+reduces las fluctuaciones aleatorias en el área
+
+140
+00:10:08,962 --> 00:10:12,270
+debidas a diferentes gradientes en diferentes mini lotes,
+
+141
+00:10:12,270 --> 00:10:15,337
+pero por supuesto también reduces la 
+tasa de aprendizaje,
+
+142
+00:10:15,337 --> 00:10:20,209
+de modo que si miras a la curva roja,
+verás que cuando bajamos la tasa de aprendizaje,
+
+143
+00:10:20,209 --> 00:10:23,577
+obtenemos una ganancia rápida, el error cae,
+pero tras eso obtenemos
+
+144
+00:10:23,577 --> 00:10:26,885
+un aprendizaje más lento.
+Y si hacemos eso demasiado pronto vamos a
+
+145
+00:10:26,885 --> 00:10:31,577
+perder relativamente a la curva verde. 
+Así que no bajen la tasa de aprendizaje demasiado
+
+146
+00:10:31,577 --> 00:10:37,561
+pronto, o demasiado.
+A continuación voy a hablar sobre cuatro formas de
+
+147
+00:10:37,561 --> 00:10:42,727
+acelerar mucho el aprendizaje de mini lotes. 
+Las cosas de las que he hablado previamente eran
+
+148
+00:10:42,727 --> 00:10:46,447
+como una bolsa de trucos para hacer que
+las cosas funcionen mejor. 
+
+149
+00:10:46,447 --> 00:10:51,957
+Y estos son cuatro métodos diseñados explícitamente para
+hacer el aprendizaje ir mucho más
+
+150
+00:10:51,957 --> 00:10:56,274
+rápido. Ahora voy a hablar sobre el 
+"momentum" matemático.
+
+151
+00:10:56,274 --> 00:10:59,520
+En este método no usamos el gradiente
+
+152
+00:10:59,520 --> 00:11:04,727
+para cambiar la posición de los pesos.
+Esto es, si piensas en los pesos como
+
+153
+00:11:04,727 --> 00:11:09,663
+una bola en la superficie de error, el descenso
+de gradiente estándar utiliza el gradiente para
+
+154
+00:11:09,663 --> 00:11:14,464
+cambiar la posición de esa bola. 
+Simplemente multiplicas el gradiente por
+
+155
+00:11:14,464 --> 00:11:18,860
+la tasa de aprendizaje, y cambias la posición de la
+bola por ese vector. 
+
+156
+00:11:18,860 --> 00:11:24,343
+En el método del momentum, usamos el gradiente
+para acelerar esa bola, 
+
+157
+00:11:24,343 --> 00:11:27,863
+es decir, el gradiente cambia su velocidad,
+
+158
+00:11:27,863 --> 00:11:33,020
+y la velocidad es lo que cambia 
+la posición de la bola.
+
+159
+00:11:33,020 --> 00:11:37,757
+La razón por la que es diferente es porque la
+bola puede tener "momentum"
+
+160
+00:11:37,757 --> 00:11:41,920
+es decir, recuerda los gradientes previos
+en su velocidad. 
+
+161
+00:11:43,160 --> 00:11:47,707
+Un segundo método para acelerar cuando
+hacemos aprendizaje de lotes es usar una tasa
+
+162
+00:11:47,707 --> 00:11:52,369
+de aprendizaje adaptativa separada para cada parámetro.
+Y entonces, ajustar lentamente esa tasa de
+
+163
+00:11:52,369 --> 00:11:56,802
+aprendizaje basándose en las medidas empíricas. 
+Y la medida empírica obvia es, 
+
+164
+00:11:56,802 --> 00:12:01,180
+¿seguimos haciendo progreso cambiando los pesos
+en la misma dirección?
+
+165
+00:12:01,180 --> 00:12:05,557
+¿o el gradiente se mantiene oscilando alrededor
+de modo que el signo del gradiente
+
+166
+00:12:05,557 --> 00:12:08,797
+sigue cambiando?
+Si el signo del gradiente sigue cambiando, 
+
+167
+00:12:08,797 --> 00:12:13,288
+lo que vamos a hacer es reducir la tasa de aprendizaje,
+y si el signo se mantiene
+
+168
+00:12:13,288 --> 00:12:15,960
+igual, vamos a aumentar la tasa de
+aprendizaje.
+
+169
+00:12:16,780 --> 00:12:22,698
+Un tercer método es lo que yo llamo RMS-PROP
+y lo que hacemos en este método es dividir
+
+170
+00:12:22,698 --> 00:12:27,860
+por una media móvil de las magnitudes de los
+gradientes recientes para ese peso,
+
+171
+00:12:27,860 --> 00:12:32,953
+de modo que si los gradientes son grandes
+divides por un número grande y si
+
+172
+00:12:32,953 --> 00:12:37,220
+los gradientes son pequeños divides por
+un número pequeño.
+
+173
+00:12:37,220 --> 00:12:41,900
+Esto manejará muy bien una amplia
+gama de gradientes diferentes. 
+
+174
+00:12:42,220 --> 00:12:47,612
+Es realmente una versión mini lote,
+solo que usando el signo del gradiente de lo que
+
+175
+00:12:47,612 --> 00:12:51,736
+es un método llamado r-prop, que fue diseñado
+para aprendizaje con el lote completo. 
+
+176
+00:12:51,736 --> 00:12:56,684
+La última forma de acelerar el aprendizaje, 
+que es lo que la gente de optimización
+
+177
+00:12:56,684 --> 00:12:59,857
+naturalmente recomendaría, es usar aprendizaje con el lote completo, 
+
+178
+00:12:59,857 --> 00:13:04,425
+y usar un método sofisticado que tome en cuenta la información de la curvatura
+
+179
+00:13:04,425 --> 00:13:07,279
+para adaptar ese método para que trabaje para las redes neuronales
+
+180
+00:13:07,279 --> 00:13:12,038
+y entonces, tal vez intentar adaptarlo un poco más, para que trabaje con lotes pequeños.
+
+181
+00:13:12,038 --> 00:13:15,020
+No hablaré acerca de eso en esta clase.

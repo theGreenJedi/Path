@@ -1,0 +1,83 @@
+1
+00:00:00,176 --> 00:00:03,949
+Dans cette vidéo je vais vous présenter
+
+2
+00:00:03,949 --> 00:00:06,663
+un exemple d'apprentissage automatique.
+
+3
+00:00:06,663 --> 00:00:08,756
+C'est un modèle très simple de réseau de neurones
+
+4
+00:00:08,756 --> 00:00:12,672
+et il va apprendre à reconnaitre des chiffres.
+
+5
+00:00:12,672 --> 00:00:15,029
+Et vous allez pouvoir voir comment les poids évoluent,
+
+6
+00:00:15,082 --> 00:00:18,135
+en appliquant un algorithme d'apprentissage très simple.
+
+7
+00:00:18,711 --> 00:00:20,326
+Nous allons donc voir un algorithme d'apprentissage très simple
+
+8
+00:00:20,326 --> 00:00:24,250
+pour entraîner un réseau très simple
+
+9
+00:00:24,250 --> 00:00:29,273
+de reconnaissance de formes manuscrites. Le réseau a deux couches de neurones.
+
+10
+00:00:29,588 --> 00:00:31,646
+Il possède des neurones en entrée
+
+11
+00:00:31,646 --> 00:00:38,033
+dont l'activité représente l'intensité des pixels, et des neurones en sortie, dont l'activité représente la classe
+
+12
+00:00:38,033 --> 00:00:39,010
+de la forme identifiée.
+
+13
+00:00:41,857 --> 00:00:43,587
+Ce que nous aimerions c'est que lorsque nous présentons
+
+14
+00:00:43,587 --> 00:00:49,611
+une forme particulière, le neurone en sortie pour cette forme s'active.
+
+15
+00:00:51,287 --> 00:00:53,863
+Lorsqu'un pixel est actif
+
+16
+00:00:53,863 --> 00:00:57,096
+il vote pour des formes particulières.
+
+17
+00:00:57,096 --> 00:01:00,889
+Plus précisement pour les formes qui contiennent ce pixel.
+
+18
+00:01:00,889 --> 00:01:04,031
+Chaque pixel coloré peut voter pour plusieurs formes.
+
+19
+00:01:04,031 --> 00:01:09,803
+Et les votes peuvent être d'intensités différentes. La forme qui obtient le plus de votes gagne.
+
+20
+00:01:09,803 --> 00:01:10,794
+Nous pouvons ainsi dire
+
+21
+00:01:10,794 --> 00:01:12,960
+qu'il y a une compétition entre les neurones de sortie.

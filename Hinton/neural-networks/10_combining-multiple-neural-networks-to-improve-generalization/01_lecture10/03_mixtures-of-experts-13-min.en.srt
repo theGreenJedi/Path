@@ -1,0 +1,808 @@
+1
+00:00:00,000 --> 00:00:06,133
+In this video, I'm going to talk about the
+mixture of experts model that was
+
+2
+00:00:06,133 --> 00:00:11,378
+developed in the early 1990s.
+The idea of this model is to train a
+
+3
+00:00:11,378 --> 00:00:16,969
+number of neural nets, each of which
+specializes in a different part of the
+
+4
+00:00:16,969 --> 00:00:20,100
+data.
+That is, we assume we have a data set
+
+5
+00:00:20,100 --> 00:00:23,603
+which comes from a number of different
+regimes,
+
+6
+00:00:23,603 --> 00:00:29,790
+And we train a system in which one neural
+net will specialize in each regime, and a
+
+7
+00:00:29,790 --> 00:00:36,052
+managing neural net will look at the input
+data, and decide which specialist to give
+
+8
+00:00:36,052 --> 00:00:39,897
+it to.
+This kind of system, doesn't make very
+
+9
+00:00:39,897 --> 00:00:45,198
+efficient use of data, because the data
+is, fractionated over all these different
+
+10
+00:00:45,198 --> 00:00:48,379
+experts.
+And so with small data sets, it can't be
+
+11
+00:00:48,379 --> 00:00:52,752
+expected to do very well.
+But as data sets get bigger, this kind of
+
+12
+00:00:52,752 --> 00:00:58,119
+system may well come into its own, because
+it can make very good use of extremely
+
+13
+00:00:58,119 --> 00:01:02,721
+large data sets.
+In boosting, the weights on the models are
+
+14
+00:01:02,721 --> 00:01:06,630
+not all equal,
+But after we finish training, each model
+
+15
+00:01:06,630 --> 00:01:11,916
+has the same weight for every test case.
+We don't make the weights on the
+
+16
+00:01:11,916 --> 00:01:16,912
+individual models depend on which
+particular case we're dealing with.
+
+17
+00:01:16,912 --> 00:01:22,892
+In mixture of experts, we do.
+So the idea is that we can look at the
+
+18
+00:01:22,892 --> 00:01:27,656
+input data for a particular case during
+both training and testing to help us
+
+19
+00:01:27,656 --> 00:01:34,484
+decide which model we can rely on.
+During training this will allow models to
+
+20
+00:01:34,484 --> 00:01:40,618
+specialize on a subset of the cases.
+They then will not learn on cases for
+
+21
+00:01:40,618 --> 00:01:44,706
+which they're not picked.
+So they can ignore stuff they're not good
+
+22
+00:01:44,706 --> 00:01:47,940
+at modeling.
+This will lead to individual models that
+
+23
+00:01:47,940 --> 00:01:51,480
+are very good at some things and very bad
+at other things.
+
+24
+00:01:53,480 --> 00:01:58,632
+The key idea is to make each model, or
+expert as we call it, focus on predicting
+
+25
+00:01:58,632 --> 00:02:03,458
+the right answer for cases where it's
+already doing better than the other
+
+26
+00:02:03,458 --> 00:02:07,160
+experts.
+That will cause specialization.
+
+27
+00:02:09,520 --> 00:02:14,736
+So there's a spectrum of models from very
+local models to very global models.
+
+28
+00:02:14,736 --> 00:02:18,260
+Nearest neighbors, for example, is a very
+local model.
+
+29
+00:02:18,880 --> 00:02:21,735
+To fit it, you just store the training
+cases.
+
+30
+00:02:21,735 --> 00:02:25,954
+So, that's really simple,
+And then if you have to predict Y from X,
+
+31
+00:02:25,954 --> 00:02:30,887
+you simply find the stored value of X
+that's closest to the test value of X,
+
+32
+00:02:30,887 --> 00:02:35,560
+then you predict the value of Y that's the
+same as for the stored value.
+
+33
+00:02:36,040 --> 00:02:41,084
+The result of that is that the curve
+relating the input to the output consists
+
+34
+00:02:41,084 --> 00:02:44,148
+of lots of horizontal lines connected by
+cliffs.
+
+35
+00:02:44,148 --> 00:02:47,980
+It would clearly make more sense to smooth
+things out a bit.
+
+36
+00:02:48,300 --> 00:02:54,119
+At the other extreme, we have fully global
+models, like fitting one polynomial to all
+
+37
+00:02:54,119 --> 00:02:57,444
+the data.
+They're much harder to fit to data, and
+
+38
+00:02:57,444 --> 00:03:01,878
+they may also be unstable.
+That is, small changes in the data may
+
+39
+00:03:01,878 --> 00:03:07,517
+cause big changes in the model you fit.
+That's because each parameter depends on
+
+40
+00:03:07,517 --> 00:03:11,109
+all the data.
+In between these two ends of the spectrum,
+
+41
+00:03:11,109 --> 00:03:15,420
+we have multiple local models, that are of
+intermediate complexity.
+
+42
+00:03:16,340 --> 00:03:20,987
+This is good if the data set contains
+several different regimes and those
+
+43
+00:03:20,987 --> 00:03:24,756
+different regimes have different
+input/output relationships.
+
+44
+00:03:24,756 --> 00:03:29,467
+In financial data for example the state of
+the economy has a big effect on
+
+45
+00:03:29,467 --> 00:03:34,429
+determining the mappings between inputs
+and outputs, and you might want to have
+
+46
+00:03:34,429 --> 00:03:37,757
+different models for different states of
+the economy.
+
+47
+00:03:37,757 --> 00:03:42,908
+But you might not know in advance how to
+decide what constitutes different states
+
+48
+00:03:42,908 --> 00:03:46,300
+of the economy, you're going to have to
+learn that too.
+
+49
+00:03:47,820 --> 00:03:51,962
+So we have this problem if we're going to
+use different models for different
+
+50
+00:03:51,962 --> 00:03:56,160
+regimes, of how do we partition the data
+session to these different regimes.
+
+51
+00:03:58,040 --> 00:04:03,981
+In order to fit different models to
+different regimes we need to cluster the
+
+52
+00:04:03,981 --> 00:04:08,380
+training data into subsets, one for each
+of these regimes.
+
+53
+00:04:09,200 --> 00:04:14,805
+But we don't want to cluster the data
+based on the similarity of input vectors.
+
+54
+00:04:14,805 --> 00:04:19,560
+All we're interested in is the similarity
+of input-output mappings.
+
+55
+00:04:19,980 --> 00:04:24,635
+So if you look at the case on the right,
+there's four data points that are nicely
+
+56
+00:04:24,635 --> 00:04:29,348
+fitted by the red parabola and another
+four data points that are nicely fitted by
+
+57
+00:04:29,348 --> 00:04:35,549
+the green parabola If she partition the
+data based on the input I put mapping,
+
+58
+00:04:35,549 --> 00:04:40,895
+that is based on the idea that a parabola
+will fit the data nicely, then you
+
+59
+00:04:40,895 --> 00:04:44,060
+partition the data where that brown line
+is.
+
+60
+00:04:45,300 --> 00:04:50,015
+If however you partitioned the data by
+just clustering the inputs, we partition
+
+61
+00:04:50,015 --> 00:04:54,793
+where the blue line is, and then if you
+looked to the left of that blue line,
+
+62
+00:04:54,793 --> 00:05:00,200
+you'll be stuck with a subset of data that
+can't be modeled nicely by a simple model.
+
+63
+00:05:00,600 --> 00:05:05,176
+So I'm going to explain an error function
+that encourages models to cooperate.
+
+64
+00:05:05,176 --> 00:05:09,508
+And then I'm going to explain an error
+function that encourages models to
+
+65
+00:05:09,508 --> 00:05:12,436
+specialize.
+And I'm going to try to give you a good
+
+66
+00:05:12,436 --> 00:05:16,951
+intuition for why these two different
+functions have these very different
+
+67
+00:05:16,951 --> 00:05:21,870
+effects.
+So if you want to encourage cooperation,
+
+68
+00:05:21,870 --> 00:05:27,493
+what you should do is compare the average
+predictors with the target and train all
+
+69
+00:05:27,493 --> 00:05:32,777
+the predictors together to reduce the
+difference between the target and their
+
+70
+00:05:32,777 --> 00:05:37,166
+average.
+So using angle back as for expectation
+
+71
+00:05:37,166 --> 00:05:43,060
+again, the error would be the difference
+between the target and the average of all
+
+72
+00:05:43,060 --> 00:05:48,800
+the predictors of what they predict.
+That will overfit badly.
+
+73
+00:05:49,360 --> 00:05:53,831
+It will make the model much more powerful
+in training each predictor separately,
+
+74
+00:05:53,831 --> 00:05:58,080
+because the models will learn to fix up
+the error is that other models make.
+
+75
+00:05:59,720 --> 00:06:05,016
+So, if you're averaging models during
+training, and training so that the average
+
+76
+00:06:05,016 --> 00:06:08,369
+works nicely, you have to consider cases
+like this.
+
+77
+00:06:08,369 --> 00:06:13,062
+On the right, we have the average of all
+the models except for model I.
+
+78
+00:06:13,062 --> 00:06:18,359
+So, that's what everybody else is saying
+when their votes are averaged together.
+
+79
+00:06:18,359 --> 00:06:21,175
+On the left, we have the output of model
+I.
+
+80
+00:06:21,175 --> 00:06:26,740
+Now if we'd like the overall average to be
+closer to the target, what do we have to
+
+81
+00:06:26,740 --> 00:06:32,263
+do to the output of the Ith model?
+We have to move it away from the target.
+
+82
+00:06:32,263 --> 00:06:35,994
+That will take the overall average towards
+the target.
+
+83
+00:06:35,994 --> 00:06:41,936
+You can see that what's happening is model
+I is learning to compensate for the errors
+
+84
+00:06:41,936 --> 00:06:48,350
+made by all the other models.
+But do we really want to move model I in
+
+85
+00:06:48,350 --> 00:06:52,630
+the wrong direction?
+Intuitively it seems better to move model
+
+86
+00:06:52,630 --> 00:06:59,660
+I towards the target.
+So here is an arrow function that
+
+87
+00:06:59,660 --> 00:07:03,440
+encourages specialization, and it's not
+very different.
+
+88
+00:07:03,440 --> 00:07:08,970
+To encourage specialization, we compare
+the output of each model with the target
+
+89
+00:07:08,970 --> 00:07:13,305
+separately.
+We also need to use a manager to determine
+
+90
+00:07:13,305 --> 00:07:18,372
+the weight we put on each of these models,
+which we can think of as the probability
+
+91
+00:07:18,372 --> 00:07:21,120
+of picking each model, if we have to pick
+one.
+
+92
+00:07:22,680 --> 00:07:28,808
+So now, our error is the expectation over
+all the different models of the squared
+
+93
+00:07:28,808 --> 00:07:34,028
+error made by that model times the
+probability of picking that model,
+
+94
+00:07:34,028 --> 00:07:40,232
+Where the manager or gating network, is
+determining that probability by looking at
+
+95
+00:07:40,232 --> 00:07:46,025
+the input for this particular case.
+What will happen if you try to minimize
+
+96
+00:07:46,025 --> 00:07:50,675
+this error is that most of the experts
+will end up ignoring most of the targets.
+
+97
+00:07:50,675 --> 00:07:55,500
+Each expert will only deal with the small
+subset of the training cases and it will
+
+98
+00:07:55,500 --> 00:07:58,000
+learn to do very well on that small
+subset.
+
+99
+00:07:59,260 --> 00:08:02,997
+So here's a picture of the mixture of
+expert's architecture.
+
+100
+00:08:02,997 --> 00:08:07,419
+Our cost function is the squared
+difference between the output of each
+
+101
+00:08:07,419 --> 00:08:10,596
+expert in the target averaged over all the
+experts.
+
+102
+00:08:10,596 --> 00:08:14,520
+But with the weights in that average
+determined by the manager.
+
+103
+00:08:15,560 --> 00:08:19,842
+It's actually a better cost function will
+come to later, based on the mixture model.
+
+104
+00:08:19,842 --> 00:08:23,807
+But this was a cost function I first
+thought of, and I think it's easier to
+
+105
+00:08:23,807 --> 00:08:26,240
+explain the intuition with this cost
+function.
+
+106
+00:08:28,660 --> 00:08:32,544
+So we have an input.
+Our different experts will look at that
+
+107
+00:08:32,544 --> 00:08:35,587
+input.
+They all make their predictions based on
+
+108
+00:08:35,587 --> 00:08:39,309
+that input.
+In addition we have a manager, a manager
+
+109
+00:08:39,309 --> 00:08:44,876
+might have multiple layers and the last
+layer for manager is a soft max layer, so
+
+110
+00:08:44,876 --> 00:08:49,206
+the manager outputs as many probabilities
+as there are experts,
+
+111
+00:08:49,206 --> 00:08:54,361
+And using the outputs of the manger and
+outputs of the experts, we can then
+
+112
+00:08:54,361 --> 00:09:01,918
+compute the value of that error fraction.
+If we look at the derivative of that other
+
+113
+00:09:01,918 --> 00:09:06,897
+function,
+The outputs of the manager are determined
+
+114
+00:09:06,897 --> 00:09:12,699
+by the inputs xi to the soft max group in
+the final layer of the manager.
+
+115
+00:09:12,699 --> 00:09:18,739
+And then the error is determined by the
+outputs of the experts, and also the
+
+116
+00:09:18,739 --> 00:09:24,000
+probabilities output by the manager.
+If we differentiate that error with
+
+117
+00:09:24,000 --> 00:09:29,401
+respect to the outputs of an expert, we
+get a signal for training that expert and
+
+118
+00:09:29,401 --> 00:09:34,602
+that gradient that we get with respect to
+the output of an expert is just the
+
+119
+00:09:34,602 --> 00:09:40,003
+probability of picking that expert, times
+the difference between what that expert
+
+120
+00:09:40,003 --> 00:09:43,698
+says in the target.
+So if the manager decides that there's a
+
+121
+00:09:43,698 --> 00:09:48,319
+very low probability of picking that
+expert for that particular training case,
+
+122
+00:09:48,319 --> 00:09:53,058
+the expert will get a very small gradient,
+and the parameters inside that expert
+
+123
+00:09:53,058 --> 00:09:57,975
+won't get disturbed by that training case.
+It'll be able to save its parameters for
+
+124
+00:09:57,975 --> 00:10:02,300
+modeling the training cases where the
+manager gives it a big probability.
+
+125
+00:10:03,760 --> 00:10:08,420
+We can differentiate with respect to the
+outputs of the gating network.
+
+126
+00:10:08,420 --> 00:10:13,138
+And actually what we're gonna do is
+differentiate with respect to, the
+
+127
+00:10:13,138 --> 00:10:18,060
+quantity that goes into the soft max.
+That's called the low jet, that's xi,
+
+128
+00:10:18,060 --> 00:10:24,789
+And if we take the derivative with respect
+to xi, we get the probability that, that
+
+129
+00:10:24,789 --> 00:10:31,190
+expert was picked times the difference
+between the squared arrow made by that
+
+130
+00:10:31,190 --> 00:10:37,920
+expert and the average overall experts
+when you use the weighting provided by the
+
+131
+00:10:37,920 --> 00:10:43,256
+manager of the squared arrow.
+So what that means is, if expert I makes a
+
+132
+00:10:43,256 --> 00:10:49,028
+lower squared error than the average of
+the other experts, then we'll try to raise
+
+133
+00:10:49,028 --> 00:10:53,744
+the probability of expert i.
+But if expert I makes a higher squared
+
+134
+00:10:53,744 --> 00:10:58,320
+error than the other experts, we'll try
+and lower his probability.
+
+135
+00:10:58,600 --> 00:11:06,006
+That's what causes specialization.
+Now there's actually a better cost
+
+136
+00:11:06,006 --> 00:11:08,440
+function.
+It's just more complicated.
+
+137
+00:11:08,440 --> 00:11:13,174
+It depends on mixture models, which I
+haven't explained in this course.
+
+138
+00:11:13,174 --> 00:11:17,095
+Again, those will be well explained in
+Andrew Ing's course.
+
+139
+00:11:17,095 --> 00:11:22,572
+I did explain, however, the interpretation
+of maximum likelihood, when you're doing
+
+140
+00:11:22,572 --> 00:11:28,050
+regression, as the idea that the network
+is actually making a Gaussian prediction.
+
+141
+00:11:28,050 --> 00:11:34,016
+That is the network outputs a particular
+value, say Y1 and we think of it as making
+
+142
+00:11:34,016 --> 00:11:40,341
+bets about what the target value might be
+that are a Gaussian distribution around Y1
+
+143
+00:11:40,341 --> 00:11:44,438
+with unit variance.
+So the red expert makes a Gaussian
+
+144
+00:11:44,438 --> 00:11:50,261
+distribution of predictions around by Y1
+and the green expert makes a prediction
+
+145
+00:11:50,261 --> 00:11:54,465
+around Y2.
+The manager then decides probabilities for
+
+146
+00:11:54,465 --> 00:11:59,597
+the two experts and those probabilities
+are used to scale down the Gaussians.
+
+147
+00:11:59,597 --> 00:12:04,795
+Those probabilities have to add to one and
+they are called mixing proportions.
+
+148
+00:12:04,795 --> 00:12:10,260
+And so once we scale down the Gaussians we
+get to distribution that's no longer a
+
+149
+00:12:10,260 --> 00:12:15,324
+Gaussian, is the sum of the scale down red
+Gaussian and the scale down green
+
+150
+00:12:15,324 --> 00:12:18,523
+Gaussian.
+And that's the predictive distribution
+
+151
+00:12:18,523 --> 00:12:22,682
+from share experts.
+What we want to do now is maximize the log
+
+152
+00:12:22,682 --> 00:12:28,334
+probability of the target value under that
+black curve and remember the black curve
+
+153
+00:12:28,334 --> 00:12:31,900
+is just the sum of the red curve and the
+green curve.
+
+154
+00:12:32,640 --> 00:12:39,756
+So that leads to the following model for
+the probability re-target, given a mixture
+
+155
+00:12:39,756 --> 00:12:44,440
+of experts.
+The probability, is on the left,
+
+156
+00:12:45,640 --> 00:12:50,906
+And it's the sum over all the experts, of
+the mixing proportion assigned to that
+
+157
+00:12:50,906 --> 00:12:57,134
+expert by the manager or gating network
+times e squared the squared difference
+
+158
+00:12:57,134 --> 00:13:01,720
+between the target and the output of that
+expert,
+
+159
+00:13:02,200 --> 00:13:06,740
+Scaled by the normalization term for a
+Gaussian with a variance of one.
+
+160
+00:13:07,140 --> 00:13:11,468
+And so our cost function is simply going
+to be the negative log of that probability
+
+161
+00:13:11,468 --> 00:13:13,873
+on the left.
+We're going to try and minimize the
+
+162
+00:13:13,873 --> 00:13:15,637
+negative log of that probability.

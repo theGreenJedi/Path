@@ -1,0 +1,209 @@
+1
+00:00:00,000 --> 00:00:06,074
+In this video, I'm going to describe a
+method developed by David MacKay in the
+
+2
+00:00:06,074 --> 00:00:12,771
+1990s for determining the weight penalties
+to use in a neural network without using a
+
+3
+00:00:12,771 --> 00:00:17,152
+validation set.
+It's based on the idea that we can
+
+4
+00:00:17,152 --> 00:00:23,671
+interpret weight penalties as doing map
+estimation so that the magnitude of the
+
+5
+00:00:23,671 --> 00:00:30,028
+weight penalty is related to the tightness
+of the prior distribution over the
+
+6
+00:00:30,028 --> 00:00:34,265
+weights.
+Mackay showed we can empirically fit both
+
+7
+00:00:34,265 --> 00:00:39,891
+the weight penalties and the assumed noise
+in the output of the neural net to get a
+
+8
+00:00:39,891 --> 00:00:45,181
+method for fitting weight penalties that
+does not require a validation set and
+
+9
+00:00:45,181 --> 00:00:50,539
+therefore, allows us to have different
+weight penalties for different subsets as
+
+10
+00:00:50,539 --> 00:00:55,227
+the connections in a neural network,
+something that will be very expensive to
+
+11
+00:00:55,227 --> 00:00:59,580
+do using validation sets.
+Mackay went on to win competitions using
+
+12
+00:00:59,580 --> 00:01:04,062
+this kind of method.
+I'm now going to describe a simple and
+
+13
+00:01:04,062 --> 00:01:09,624
+practical method developed by David MacKay
+for making use of the fact that we can
+
+14
+00:01:09,624 --> 00:01:13,490
+interpret weight penalties as the ratio of
+two variances.
+
+15
+00:01:13,490 --> 00:01:18,985
+After we've learned a model to minimize
+squared error we can find the best value
+
+16
+00:01:18,985 --> 00:01:24,683
+for the output variance and the best value
+is found by simply using the variance of
+
+17
+00:01:24,683 --> 00:01:31,264
+the residual errors.
+We can also estimate the variance in the
+
+18
+00:01:31,264 --> 00:01:36,796
+Gaussian prior of the weight.
+We have to start with some guess about
+
+19
+00:01:36,796 --> 00:01:41,923
+what this variance should be.
+Then, we do some learning, and then we use
+
+20
+00:01:41,923 --> 00:01:48,687
+a very dirty trick called empirical Bayes.
+We set the variance of our prior to be the
+
+21
+00:01:48,687 --> 00:01:53,636
+variance of the weights of the model
+learned because that's the variance that
+
+22
+00:01:53,636 --> 00:01:58,742
+will make those weights most likely.
+This really violates a lot of the
+
+23
+00:01:58,742 --> 00:02:03,514
+presuppositions of the Bayesian approach.
+We're using the data to decide what our
+
+24
+00:02:03,514 --> 00:02:06,989
+prior beliefs are.
+So, once we've learned the weights, we fit
+
+25
+00:02:06,989 --> 00:02:10,641
+a zero mean Gaussian to the
+one-dimensional distribution of the
+
+26
+00:02:10,641 --> 00:02:13,822
+learned weights.
+And then, we take the variance of that
+
+27
+00:02:13,822 --> 00:02:20,733
+Gaussian, and we use that for our prior.
+Now, one nice thing about that is, is the
+
+28
+00:02:20,733 --> 00:02:25,172
+different subsets of weights.
+Like in different layers, for example, we
+
+29
+00:02:25,172 --> 00:02:28,840
+could learn different variances for the
+different layers.
+
+30
+00:02:30,760 --> 00:02:36,900
+We don't need a validation set so we can
+use all of the non-test data for training.
+
+31
+00:02:36,900 --> 00:02:42,744
+And because we don't need validation sets
+to determine the weight penalties in
+
+32
+00:02:42,744 --> 00:02:47,923
+different layers, we can actually have
+many different weight penalties.
+
+33
+00:02:47,923 --> 00:02:51,622
+This will be very hard to do with
+validation sets.
+
+34
+00:02:51,622 --> 00:02:57,687
+So, here's MacKay's method.
+You start by guessing the noise variance
+
+35
+00:02:57,687 --> 00:03:02,647
+and the weight prior variance.
+Actually, all you have to really do is
+
+36
+00:03:02,647 --> 00:03:06,132
+guess their ratio.
+Then, you do some gradient descent
+
+37
+00:03:06,132 --> 00:03:11,427
+learning, trying to improve the weights.
+Then, you reset the noise variance to be
+
+38
+00:03:11,427 --> 00:03:18,230
+the variance of the residual errors and
+you reset the weight prior variance to be
+
+39
+00:03:18,230 --> 00:03:22,060
+the distribution of the actually learned
+weight.
+
+40
+00:03:22,880 --> 00:03:25,660
+And then, you go back around this loop
+again.
+
+41
+00:03:26,220 --> 00:03:28,843
+So, this actually works quite well in
+practice.
+
+42
+00:03:28,843 --> 00:03:31,696
+And MacKay won several competitions this
+way.

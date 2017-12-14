@@ -1,0 +1,703 @@
+1
+00:00:00,000 --> 00:00:05,001
+Now that we have the preliminaries out the
+way, we can get back to the central issue,
+
+2
+00:00:05,001 --> 00:00:08,000
+which is how to learn multiple layers of
+features.
+
+3
+00:00:08,041 --> 00:00:13,015
+So in this video, I'm finally going to
+describe the back propagation algorithm
+
+4
+00:00:13,015 --> 00:00:18,000
+which was the main advance in the 1980s
+that led to an explosion of interest in
+
+5
+00:00:18,000 --> 00:00:21,034
+neural networks.
+Before I describe back propagation, I'm
+
+6
+00:00:21,034 --> 00:00:26,007
+going to describe another very obvious
+algorithm that does not work nearly as
+
+7
+00:00:26,007 --> 00:00:28,098
+well, but is something that many people
+think of.
+
+8
+00:00:28,098 --> 00:00:33,095
+Now that we know how to learn the weights
+of the logistic units, we're going to
+
+9
+00:00:33,095 --> 00:00:38,085
+return to the central issue, which is how
+to learn the weights of hidden units.
+
+10
+00:00:38,085 --> 00:00:43,075
+If you have neural networks without hidden
+units, they are very limited in the
+
+11
+00:00:43,075 --> 00:00:48,019
+mappings they can model.
+If you add a layer of hand coded features
+
+12
+00:00:48,019 --> 00:00:53,036
+as in a perceptron, you make the net much
+more powerful but the difficult bit for a
+
+13
+00:00:53,036 --> 00:00:58,015
+new task is designing the features.
+The learning won't solve the hard problem;
+
+14
+00:00:58,015 --> 00:01:03,054
+you have to solve it by hand.
+What we'd like is a way of finding good
+
+15
+00:01:03,054 --> 00:01:08,453
+features without requiring insights into
+the tasks or repeated trial and error,
+
+16
+00:01:08,453 --> 00:01:13,018
+where we guess some features and see how
+well they work.
+
+17
+00:01:13,079 --> 00:01:18,042
+In effect, what we need to do is automate
+the loop of designing features for a task
+
+18
+00:01:18,042 --> 00:01:22,026
+and seeing how well they work.
+We'd like the computer to do that loop,
+
+19
+00:01:22,026 --> 00:01:28,032
+instead of having a person in that loop.
+So the thing that occurs to everybody who
+
+20
+00:01:28,032 --> 00:01:32,030
+knows about evolution is to learn by
+perturbing the weights.
+
+21
+00:01:32,030 --> 00:01:37,021
+You randomly perturb one weight.
+So that's meant to be like a mutation, and
+
+22
+00:01:37,021 --> 00:01:42,277
+you see if it improves performance.
+And if it improves performance of the net,
+
+23
+00:01:42,277 --> 00:01:47,020
+you save that change in the weight.
+You can think of this as a form of
+
+24
+00:01:47,020 --> 00:01:51,014
+reinforcement learning.
+Your action consists of making a small
+
+25
+00:01:51,014 --> 00:01:54,018
+change.
+And then you check whether that pays off,
+
+26
+00:01:54,018 --> 00:01:57,029
+and if it does, you decide to perform that
+action.
+
+27
+00:01:58,084 --> 00:02:03,093
+The problem is it's very inefficient.
+Just to decide whether to change one
+
+28
+00:02:03,093 --> 00:02:09,051
+weight, we need to do multiple forward
+passes on a representative set of training
+
+29
+00:02:09,051 --> 00:02:12,061
+cases.
+We have to see if changing that weight
+
+30
+00:02:12,061 --> 00:02:17,030
+improves things, and you can't judge that
+by one training case alone.
+
+31
+00:02:17,078 --> 00:02:22,058
+Relative to this method of randomly
+changing weight, and seeing if it helps,
+
+32
+00:02:22,058 --> 00:02:27,077
+back propagation is much more efficient.
+It's actually more efficient by a factor
+
+33
+00:02:27,077 --> 00:02:31,087
+of the number of weights in the network,
+which could be millions.
+
+34
+00:02:33,008 --> 00:02:37,052
+An additional problem with randomly
+changing weights and seeing if it helps is
+
+35
+00:02:37,052 --> 00:02:41,096
+that towards the end of learning, any
+large change in weight will nearly always
+
+36
+00:02:41,096 --> 00:02:46,046
+make things worse, because the weights
+have to have the right relative values to
+
+37
+00:02:46,046 --> 00:02:49,066
+work properly.
+So towards the end of learning not only do
+
+38
+00:02:49,066 --> 00:02:54,010
+you have to do a lot of work to decide
+whether each of these changes helps but
+
+39
+00:02:54,010 --> 00:02:56,063
+the changes themselves have to be very
+small.
+
+40
+00:02:58,097 --> 00:03:04,006
+There are slightly better ways of using
+perturbations in order to learn.
+
+41
+00:03:04,006 --> 00:03:10,000
+One thing we might try is to perturb all
+the weights in parallel and then correlate
+
+42
+00:03:10,000 --> 00:03:13,018
+the performance gain with the weight
+changes.
+
+43
+00:03:13,018 --> 00:03:19,002
+That actually doesn't really help at all.
+The problem is that we need to do lots and
+
+44
+00:03:19,002 --> 00:03:23,079
+lots of trials with different random
+perturbation of all the weights, in order
+
+45
+00:03:23,079 --> 00:03:28,087
+to see the effect of changing one weight,
+through the noise created by changing all
+
+46
+00:03:28,087 --> 00:03:32,010
+the other weights.
+So it doesn't help to do it all in
+
+47
+00:03:32,010 --> 00:03:36,011
+parallel.
+Something that does help, is to randomly
+
+48
+00:03:36,011 --> 00:03:41,028
+perturb the activities of the hidden
+units, instead of perturbing the weight.
+
+49
+00:03:42,019 --> 00:03:47,018
+Once you've decided that perturbing the
+activity of a hidden unit on a particular
+
+50
+00:03:47,018 --> 00:03:49,092
+training case is going to make things
+better.
+
+51
+00:03:49,092 --> 00:03:52,078
+You can then compute how to change the
+weights.
+
+52
+00:03:53,091 --> 00:03:58,050
+Since there's many fewer activities than
+weights, there's less things that you're
+
+53
+00:03:58,050 --> 00:04:01,050
+randomly exploring.
+And this makes the algorithm more
+
+54
+00:04:01,050 --> 00:04:04,033
+efficient.
+But it's still much less efficient than
+
+55
+00:04:04,033 --> 00:04:07,061
+backpropagation.
+Backpropagation still wins by a factor of
+
+56
+00:04:07,061 --> 00:04:13,058
+the number of neurons.
+So the idea behind back propagation is
+
+57
+00:04:13,058 --> 00:04:17,009
+that we don't know what the hidden units
+ought to be doing.
+
+58
+00:04:17,009 --> 00:04:21,050
+They're called hidden units because
+nobody's telling us what their states
+
+59
+00:04:21,050 --> 00:04:24,048
+ought to be.
+But we can compute how fast the error
+
+60
+00:04:24,048 --> 00:04:28,060
+changes as we change a hidden activity on
+a particular training case.
+
+61
+00:04:29,000 --> 00:04:34,072
+So instead of using activities of the
+hidden units as our desired states, we use
+
+62
+00:04:34,072 --> 00:04:38,051
+the error derivatives with respect to our
+activities.
+
+63
+00:04:39,048 --> 00:04:45,006
+Since each hidden unit can affect many
+different output units, it can have many
+
+64
+00:04:45,006 --> 00:04:49,087
+different effects on the overall error if
+we have many output units.
+
+65
+00:04:50,016 --> 00:04:56,080
+These affects have to be combined.
+And we can do that efficiently.
+
+66
+00:04:57,006 --> 00:05:02,025
+So that allows us to compute error
+derivatives for all of the hidden units
+
+67
+00:05:02,025 --> 00:05:07,059
+efficiently at the same time.
+Once we've got those error derivatives for
+
+68
+00:05:07,059 --> 00:05:12,030
+the hidden units, that is, we know how
+fast the error changes as we changed the
+
+69
+00:05:12,030 --> 00:05:16,089
+hidden activity on that particular
+training case, it's easy to convert those
+
+70
+00:05:16,089 --> 00:05:21,091
+error derivatives for the activities into
+error derivatives for the weights coming
+
+71
+00:05:21,091 --> 00:05:28,006
+into a hidden unit.
+So here's a sketch of how backpropagation
+
+72
+00:05:28,006 --> 00:05:33,064
+works, for a single training case.
+First we have to define the error, and
+
+73
+00:05:33,064 --> 00:05:39,022
+here we'll use the error being the square
+difference between the target values of
+
+74
+00:05:39,022 --> 00:05:44,074
+the output unit J and the actual value
+that the net produces for the output unit
+
+75
+00:05:44,074 --> 00:05:47,073
+J.
+And we're gonna imagine there are several
+
+76
+00:05:47,073 --> 00:05:51,088
+output units in this case.
+We differentiate that, and we get a
+
+77
+00:05:51,088 --> 00:05:57,026
+familiar expression for how the error
+changes as you change the activity of an
+
+78
+00:05:57,026 --> 00:06:00,091
+output unit J.
+And I'll use a notation here where the
+
+79
+00:06:00,091 --> 00:06:03,081
+index on a unit will tell you which layer
+it's in.
+
+80
+00:06:03,081 --> 00:06:08,044
+So the output layer has a typical index of
+J, and the layer in front of that, the
+
+81
+00:06:08,044 --> 00:06:12,038
+hidden layer below it in the diagram, will
+have a typical index of I.
+
+82
+00:06:12,038 --> 00:06:16,095
+And I won't bother to say which layer
+we're in because the index will tell you.
+
+83
+00:06:18,022 --> 00:06:23,093
+So once we've got the aeroderivative with
+respect to the output of one of these
+
+84
+00:06:23,093 --> 00:06:28,860
+output units, we then want to use all
+those aeroderivatives in the output layer
+
+85
+00:06:28,860 --> 00:06:35,057
+to compute the same quantity in the hidden
+layer that comes before the output layer.
+
+86
+00:06:35,057 --> 00:06:41,014
+So back propagation, the core of back
+propagation is taking error derivatives in
+
+87
+00:06:41,014 --> 00:06:46,072
+one layer and from them computing the
+error derivatives in the layer that comes
+
+88
+00:06:46,072 --> 00:06:51,024
+before that.
+So we want to compute DE by DY, I.
+
+89
+00:06:51,024 --> 00:06:58,091
+Now obviously, when we change the output
+of unit I, it'll change the activities of
+
+90
+00:06:58,091 --> 00:07:06,001
+all three of those output units, and so we
+have to sum up all those effects.
+
+91
+00:07:06,063 --> 00:07:12,062
+So we're going to have an algorithm that
+takes error derivatives we've already
+
+92
+00:07:12,062 --> 00:07:18,037
+computed for the top layer here.
+And combines them using the same weights
+
+93
+00:07:18,037 --> 00:07:24,019
+as we use in the forward pass to get error
+derivatives in the layer below.
+
+94
+00:07:25,083 --> 00:07:29,014
+So, this slide is going to explain the
+backpropagation algorithm.
+
+95
+00:07:29,014 --> 00:07:31,055
+And you really need to understand this
+slide.
+
+96
+00:07:31,055 --> 00:07:35,033
+And the first time you see it, you may
+have to study it for a long time.
+
+97
+00:07:35,098 --> 00:07:41,064
+This is how you backpropagate the error
+derivative with respect to the output of a
+
+98
+00:07:41,064 --> 00:07:46,035
+unit.
+So we'll consider an output unit J on a
+
+99
+00:07:46,035 --> 00:07:50,064
+hidden unit I.
+The output of the hidden unit I will be
+
+100
+00:07:50,064 --> 00:07:54,005
+YI.
+The output of the output unit J will be
+
+101
+00:07:54,005 --> 00:07:57,070
+YJ.
+And the total input received by the output
+
+102
+00:07:57,070 --> 00:08:04,011
+unit J will be ZJ.
+The first thing we need to do is convert
+
+103
+00:08:04,011 --> 00:08:11,034
+the error derivative with respect to Y J,
+into an error derivative with respect to Z
+
+104
+00:08:11,034 --> 00:08:15,079
+J.
+To do that we use the chain rule.
+
+105
+00:08:15,079 --> 00:08:22,004
+So we say DE by DZJ, equals DYJ by DZJ,
+times DE by DYJ.
+
+106
+00:08:23,016 --> 00:08:29,007
+And af, as we've seen before, when we were
+looking at logistic units, that's just YJ
+
+107
+00:08:29,007 --> 00:08:34,049
+into one minus YJ times the error
+derivative with respect to the output of
+
+108
+00:08:34,049 --> 00:08:38,010
+unit J.
+So now we've got the error derivative with
+
+109
+00:08:38,010 --> 00:08:41,041
+respect to the total input received by
+unit J.
+
+110
+00:08:43,010 --> 00:08:48,039
+Now we can compute the error derivative
+with respect to the output of unit I.
+
+111
+00:08:48,094 --> 00:08:58,035
+It's going to be the sum over all of the
+three outgoing connections of unit I, of
+
+112
+00:08:58,035 --> 00:09:06,089
+this quantity, DZJ by DYI times DE by DZJ.
+So the first term there is how the total
+
+113
+00:09:06,089 --> 00:09:11,064
+input to unit J changes as we change the
+output of unit I.
+
+114
+00:09:11,064 --> 00:09:18,052
+And then we have to multiply that by how
+the error root of changes as we change the
+
+115
+00:09:18,052 --> 00:09:23,027
+total input to unit J which we computed on
+the line above.
+
+116
+00:09:23,027 --> 00:09:29,050
+And as we saw before when studying the
+logistic unit dzj by dyi is just the
+
+117
+00:09:29,050 --> 00:09:35,065
+weight on the connection wij.
+So what we get is that the error
+
+118
+00:09:35,065 --> 00:09:40,047
+derivative.
+We respect to the output of unit I is the
+
+119
+00:09:40,047 --> 00:09:48,000
+sum over all the outgoing connections to
+the layer above of the weight wij on that
+
+120
+00:09:48,000 --> 00:09:55,045
+connection times a quantity we would have
+already computed which is de by dzj for
+
+121
+00:09:55,045 --> 00:09:59,065
+the layer above.
+And so you can see the computation looks
+
+122
+00:09:59,065 --> 00:10:05,002
+very like what we do on the forward pass,
+but we're going in the other direction.
+
+123
+00:10:05,002 --> 00:10:10,039
+What we do for each unit in that hidden
+layer that contains I, is we compute the
+
+124
+00:10:10,039 --> 00:10:15,001
+sum of a quantity in the layer above the
+weights on the connections.
+
+125
+00:10:15,058 --> 00:10:23,037
+Once we've got to E by DZJ, which we
+computed on the first line here, it's very
+
+126
+00:10:23,037 --> 00:10:30,066
+easy to get the error derivatives for all
+the weights coming into unit J.
+
+127
+00:10:30,066 --> 00:10:38,075
+To E by DWIJ is simply D, E, by DZJ, which
+we computed already, times how ZJ changes.
+
+128
+00:10:38,075 --> 00:10:47,024
+As we change the weight on the connection.
+And that's simply the activity of the unit
+
+129
+00:10:47,024 --> 00:10:51,093
+in the layer below YI.
+So the rule for changing the weight is
+
+130
+00:10:51,093 --> 00:10:56,087
+just you multiply, this quantity you've
+computed at a unit, to E by DZJ, by the
+
+131
+00:10:56,087 --> 00:11:02,019
+activity coming in from the layer below.
+And that gives you the error of derivative
+
+132
+00:11:02,019 --> 00:11:06,084
+with respect to weight.
+So on this slide we have seen how we can
+
+133
+00:11:06,084 --> 00:11:13,042
+stop with DE by DYJ and back propagate to
+get DE by DYI we'll come backwards through
+
+134
+00:11:13,042 --> 00:11:19,077
+one layer and computed the same quantity
+the derivative of the error with respect
+
+135
+00:11:19,077 --> 00:11:25,050
+to the output in the previous layer.
+So we can clearly do that for as many
+
+136
+00:11:25,050 --> 00:11:29,057
+layers as we like.
+And after we've done that for all these
+
+137
+00:11:29,057 --> 00:11:34,071
+layers, we can compute how the error
+changes as you change the weights on the
+
+138
+00:11:34,071 --> 00:11:38,005
+connections.
+That's the backpropagation algorithm.
+
+139
+00:11:38,005 --> 00:11:43,019
+It's an algorithm for taking one training
+case, and computing, efficiently, for
+
+140
+00:11:43,019 --> 00:11:48,027
+every weight in the network, how the error
+will change as, on that particular
+
+141
+00:11:48,027 --> 00:11:50,087
+training case, as you change the weight.

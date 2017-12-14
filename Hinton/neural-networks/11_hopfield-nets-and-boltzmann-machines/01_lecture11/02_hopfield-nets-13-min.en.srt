@@ -1,0 +1,789 @@
+1
+00:00:00,000 --> 00:00:03,530
+In this video, I'm going to introduce
+Hopfield Nets.
+
+2
+00:00:03,530 --> 00:00:09,783
+Together with back propagation, these were
+one of the main reasons for the resurgence
+
+3
+00:00:09,783 --> 00:00:13,020
+of interest in neural networks in the
+1980s.
+
+4
+00:00:13,460 --> 00:00:18,799
+Hopfield networks are beautifully simple
+devices that can be used for storing
+
+5
+00:00:18,799 --> 00:00:21,880
+memories as distributed patterns of
+activity.
+
+6
+00:00:22,980 --> 00:00:27,517
+We are now going to learn about a
+different kind of model from a feet
+
+7
+00:00:27,517 --> 00:00:31,721
+forward neural net.
+These are sometimes called energy based
+
+8
+00:00:31,721 --> 00:00:36,520
+models because their properties derive
+from a global energy function.
+
+9
+00:00:38,320 --> 00:00:43,339
+So, a Hopfield net is one of the simplest
+kinds of energy-based model.
+
+10
+00:00:43,339 --> 00:00:49,160
+It's composed of binary threshold units
+with recurrent connections between them.
+
+11
+00:00:50,420 --> 00:00:55,030
+In general, if you have networks of
+non-linear units with recurrent
+
+12
+00:00:55,030 --> 00:01:00,535
+connections, they're very hard to analyze.
+They can behave in many different ways.
+
+13
+00:01:00,535 --> 00:01:04,182
+They can settle to a stable state.
+They can oscillate.
+
+14
+00:01:04,182 --> 00:01:09,962
+They can even be chaotic which means that,
+unless you know their starting state with
+
+15
+00:01:09,962 --> 00:01:15,398
+infinite precision, you can't predict the
+state they'll be in very far into the
+
+16
+00:01:15,398 --> 00:01:20,378
+future.
+Fortunately, John Hopfield and various
+
+17
+00:01:20,378 --> 00:01:25,806
+other groups, like Stephen Grossberg's
+group, realized that if the connections
+
+18
+00:01:25,806 --> 00:01:29,120
+are symmetric, there's a global energy
+function.
+
+19
+00:01:30,340 --> 00:01:34,170
+Each binary configuration of the whole
+network has an energy.
+
+20
+00:01:34,170 --> 00:01:39,508
+And so what I mean by binary configuration
+is, an assignment of binary values to each
+
+21
+00:01:39,508 --> 00:01:43,401
+neuron in the network.
+So, every neuron has a particular binary
+
+22
+00:01:43,401 --> 00:01:49,833
+value in that configuration.
+The thing that Hopfield realized is that,
+
+23
+00:01:49,833 --> 00:01:54,882
+if you set up the right energy function
+for binary threshold decision rule, is
+
+24
+00:01:54,882 --> 00:02:00,061
+actually causing the network, to go down
+hill in energy, and if you keep applying
+
+25
+00:02:00,061 --> 00:02:02,780
+that rule, it'll end up in a energy
+minima.
+
+26
+00:02:05,600 --> 00:02:10,602
+So, everything's controlled by the energy
+function. The global energy of a
+
+27
+00:02:10,602 --> 00:02:15,674
+configuration is the sum of a number of
+local contributions, and the main
+
+28
+00:02:15,674 --> 00:02:21,511
+contributions have the form of the product
+of one connection weight, with the binary
+
+29
+00:02:21,511 --> 00:02:26,720
+states of two nuerons.
+So, the energy function looks like this.
+
+30
+00:02:27,280 --> 00:02:32,276
+Energy is bad, so low energy is good.
+And that's what those minus signs are
+
+31
+00:02:32,276 --> 00:02:36,058
+doing in there.
+If you look at the main term here, it has
+
+32
+00:02:36,058 --> 00:02:40,920
+a weight which is the symmetric connection
+strength between two neurons.
+
+33
+00:02:41,260 --> 00:02:45,557
+And it has the activities of the two
+connected neurons.
+
+34
+00:02:45,557 --> 00:02:50,088
+So, Si is a binary variable that has
+values of one or zero.
+
+35
+00:02:50,088 --> 00:02:55,480
+Or in another kind of Hopfield net, it has
+values of one or minus one.
+
+36
+00:02:56,220 --> 00:03:02,435
+In addition to that quadratic term that
+involves the states of two units, there's
+
+37
+00:03:02,435 --> 00:03:07,500
+also a bias term that only involves the
+state of individual units.
+
+38
+00:03:10,040 --> 00:03:15,601
+The quadratic energy function makes it
+possible for each unit to compute locally
+
+39
+00:03:15,601 --> 00:03:19,240
+how changing its state will change the
+global energy.
+
+40
+00:03:21,380 --> 00:03:24,728
+So, we first need to define the energy
+gap.
+
+41
+00:03:24,728 --> 00:03:30,628
+The energy gap for a unit i is the
+difference in the global energy of the
+
+42
+00:03:30,628 --> 00:03:35,093
+whole configuration depending on whether
+or not i is on.
+
+43
+00:03:35,093 --> 00:03:41,790
+So, the energy gap can be actually defined
+as the difference between the energy when
+
+44
+00:03:41,790 --> 00:03:47,832
+i is off and the energy when i is on.
+And that difference is what is just what
+
+45
+00:03:47,832 --> 00:03:51,400
+is being computed by the binary threshold
+decision rule.
+
+46
+00:03:52,160 --> 00:03:56,668
+So, if you look at the equation for the
+energy and you differentiate it with a
+
+47
+00:03:56,668 --> 00:04:01,408
+respect to the state of the i-th unit,
+it's a funny thing to do cuz it's a binary
+
+48
+00:04:01,408 --> 00:04:05,859
+variable. But, if you differentiate it,
+you'll see you get the binary threshold
+
+49
+00:04:05,859 --> 00:04:10,600
+decision rule, but without the minus sign
+cuz that's for going down hill in energy.
+
+50
+00:04:13,780 --> 00:04:19,650
+So, by following the binary threshold
+decision rule, a Hopfield net will go
+
+51
+00:04:19,650 --> 00:04:24,453
+downhill in its global energy.
+One way to find an energy minimum in a
+
+52
+00:04:24,453 --> 00:04:29,488
+Hopfield net is to start from a random
+state and then update the units one at a
+
+53
+00:04:29,488 --> 00:04:32,968
+time in random order.
+So, we're doing a sequential update.
+
+54
+00:04:32,968 --> 00:04:37,816
+And for each unit that you pick, you
+compute whichever of its two states gives
+
+55
+00:04:37,816 --> 00:04:42,975
+the lowest global energy and you put it in
+that state independent of what state it
+
+56
+00:04:42,975 --> 00:04:46,704
+was previously in.
+That's equivalent to saying you just used
+
+57
+00:04:46,704 --> 00:04:52,003
+the binary threshold decision rule.
+So, let's look at a little example for the
+
+58
+00:04:52,003 --> 00:04:55,700
+net on the right.
+We'll start with a random global state.
+
+59
+00:04:56,140 --> 00:04:58,953
+This was a carefully selected random
+state,
+
+60
+00:04:58,953 --> 00:05:02,552
+And that has an energy of -three, or a
+goodness of three.
+
+61
+00:05:02,552 --> 00:05:07,328
+It's easier to think about negative
+energies which are called goodnesses.
+
+62
+00:05:07,328 --> 00:05:11,908
+There aren't any biases here.
+So to compute the goodness, you just look
+
+63
+00:05:11,908 --> 00:05:16,423
+at all pairs of units that are on and add
+in the weight between them.
+
+64
+00:05:16,423 --> 00:05:21,068
+And in this configuration, there's only
+one pair of units that's active.
+
+65
+00:05:21,068 --> 00:05:25,060
+And that has a weight of three,
+So we get a goodness of three.
+
+66
+00:05:25,920 --> 00:05:31,089
+Now, let's start probing the units.
+Let's pick a unit at random, like that
+
+67
+00:05:31,089 --> 00:05:34,033
+one.
+And ask, what state should that be in,
+
+68
+00:05:34,033 --> 00:05:37,480
+given the current states of all the other
+units?
+
+69
+00:05:38,100 --> 00:05:44,531
+So, if we look at total input to that, it
+gets an input of one  -four + zero
+
+70
+00:05:44,531 --> 00:05:52,282
+three, plus another zero  three, so it
+gets a total input of -four.
+
+71
+00:05:52,286 --> 00:05:57,860
+That's below zero, so we turn it off, i.e.
+It stays in the off state.
+
+72
+00:05:58,780 --> 00:06:05,774
+And let's probe another unit.
+If we look at this unit, again, it gets a
+
+73
+00:06:05,774 --> 00:06:14,336
+total input of one  three + -one  zero,
+so it gets a total input of three, so the
+
+74
+00:06:14,336 --> 00:06:18,880
+binary threshold decision rule will make
+it turn on.
+
+75
+00:06:19,560 --> 00:06:25,737
+Let's probe one more unit.
+This unit's more interesting.
+
+76
+00:06:25,737 --> 00:06:32,235
+It's getting an input of one  two + one 
+-one + zero  three + zero <i>, -one, So</i>
+
+77
+00:06:32,235 --> 00:06:36,838
+that's a total input of one.
+So, it will now turn on.
+
+78
+00:06:36,838 --> 00:06:41,982
+Previously it was off.
+And so, when it turns on, the global
+
+79
+00:06:41,982 --> 00:06:47,037
+energy changes.
+We now have a global energy of -four or a
+
+80
+00:06:47,037 --> 00:06:51,640
+goodness of four,
+And that's a local energy minimum.
+
+81
+00:06:51,640 --> 00:06:56,754
+If you now try probing any of the units,
+you'll see that they don't want to change
+
+82
+00:06:56,754 --> 00:07:00,060
+their current state.
+The next is settled to a minimum.
+
+83
+00:07:01,940 --> 00:07:06,895
+However, the minimum it settled to is not
+the deepest energy minimum.
+
+84
+00:07:06,895 --> 00:07:10,247
+It's just one of two minima that this net
+has.
+
+85
+00:07:10,247 --> 00:07:14,182
+The deepest energy minimum is shown on the
+right here,
+
+86
+00:07:14,182 --> 00:07:19,428
+And it's when the other triangle of units
+that support each other is on.
+
+87
+00:07:19,428 --> 00:07:24,019
+That has a goodness of three + three +
+-one is five.
+
+88
+00:07:24,019 --> 00:07:27,080
+So, that's a slightly better energy
+minima.
+
+89
+00:07:28,700 --> 00:07:33,656
+If you look at that net, you can see the
+nets composed of these two triangles in
+
+90
+00:07:33,656 --> 00:07:38,860
+which the units mostly support each other,
+although there's a bit of disagreement at
+
+91
+00:07:38,860 --> 00:07:43,816
+the bottom. And each of those triangles
+mostly hates the other triangle via that
+
+92
+00:07:43,816 --> 00:07:49,205
+connection at the top.
+The triangle on the left differs from the
+
+93
+00:07:49,205 --> 00:07:53,654
+one on the right by having a weight of
+two, where the other one has a weight of
+
+94
+00:07:53,654 --> 00:07:56,188
+three.
+So, the triangle on the right will give
+
+95
+00:07:56,188 --> 00:08:03,449
+you the deepest minimum.
+So, if you ask, why did the decisions need
+
+96
+00:08:03,449 --> 00:08:08,122
+to be sequential in the Hopfield net?
+The problem is that if units make
+
+97
+00:08:08,122 --> 00:08:12,606
+simultaneous decisions, they could each
+think they were using energy but actually
+
+98
+00:08:12,606 --> 00:08:17,580
+the energy could go up.
+With simultaneous parallel updating, we
+
+99
+00:08:17,580 --> 00:08:21,200
+can get oscillations which always have a
+period of two.
+
+100
+00:08:22,240 --> 00:08:27,761
+So, here's a little network where the
+units have biases of +five, and a weight
+
+101
+00:08:27,761 --> 00:08:31,830
+between them of -100.
+So when both units are off, the next
+
+102
+00:08:31,830 --> 00:08:37,497
+parallel step, if we update them both at
+the same time, will turn both units on
+
+103
+00:08:37,497 --> 00:08:42,220
+because they each think they cam improve
+things by the bias term.
+
+104
+00:08:42,580 --> 00:08:45,822
+But, as soon as you do that, you get this
+-100,
+
+105
+00:08:45,822 --> 00:08:48,805
+And so you've actually made things much
+worse.
+
+106
+00:08:48,805 --> 00:08:53,020
+So then, in the next parallel step, both
+units will turn off again.
+
+107
+00:08:54,260 --> 00:08:57,971
+If we do the updates in parallel but with
+random timing.
+
+108
+00:08:57,971 --> 00:09:02,743
+In other words, we don't wait for one
+update to communicate the state to
+
+109
+00:09:02,743 --> 00:09:05,659
+everybody before we consider another
+update,
+
+110
+00:09:05,659 --> 00:09:10,961
+But we do wait for random lengths of time
+between doing updates of a given unit.
+
+111
+00:09:10,961 --> 00:09:15,800
+Then, those random timings will often
+destroy these bi-phase oscillations.
+
+112
+00:09:16,080 --> 00:09:21,206
+That means that the idea that the updates
+have to be sequential isn't quite as bad
+
+113
+00:09:21,206 --> 00:09:27,738
+as it seems from a biological perspective.
+Now, what Hopfield suggested was that we
+
+114
+00:09:27,738 --> 00:09:33,819
+could make use of this kind of energy
+based model that settles to a minimum of
+
+115
+00:09:33,819 --> 00:09:39,428
+it's energy for storing memories.
+So, we had a very influential paper in
+
+116
+00:09:39,428 --> 00:09:44,835
+1982 that proposed that memories could be
+energy minima of a neural net with
+
+117
+00:09:44,835 --> 00:09:49,771
+symmetric weights.
+The binary threshold decision rule can
+
+118
+00:09:49,771 --> 00:09:55,434
+then take partial memories, and clean them
+up into full memories. So, the memory
+
+119
+00:09:55,434 --> 00:10:00,734
+could be corrupted by part of it being
+wrong, or part of it could just be
+
+120
+00:10:00,734 --> 00:10:04,800
+undecided, and we can use the net, to fill
+out the memory.
+
+121
+00:10:06,600 --> 00:10:12,521
+The idea of memories as energy minima goes
+back a long way. The first example I know
+
+122
+00:10:12,521 --> 00:10:16,492
+of is in a book called Principles of
+Literary Criticism by I.
+
+123
+00:10:16,492 --> 00:10:19,349
+A.
+Richards, where he proposes that memories
+
+124
+00:10:19,349 --> 00:10:23,320
+are like a large crystal that can sit on
+different faces.
+
+125
+00:10:25,920 --> 00:10:31,237
+Using energy minima to represent memories
+gives a content erasable memory, as
+
+126
+00:10:31,237 --> 00:10:35,407
+Hopfield realized.
+So, that you can access an item just by
+
+127
+00:10:35,407 --> 00:10:39,070
+knowing part of its content.
+I can tell you a few properties of
+
+128
+00:10:39,070 --> 00:10:42,966
+something that'll set the states of some
+of the neurons in the net.
+
+129
+00:10:42,966 --> 00:10:47,617
+And if you've put the other neurons in
+random states and now go around applying
+
+130
+00:10:47,617 --> 00:10:51,512
+the binary threshold rule,
+With a bit of luck, you'll feel like that
+
+131
+00:10:51,512 --> 00:10:54,420
+memory to be some stored item that you
+know about.
+
+132
+00:10:55,060 --> 00:11:01,854
+When Hopfield nets were proposed in 1982,
+that was a very interesting property.
+
+133
+00:11:01,854 --> 00:11:08,648
+1982 was sixteen years before Google, now
+that we have Google, we regard this as
+
+134
+00:11:08,648 --> 00:11:13,370
+perfectly obvious.
+Another property of Hopfield netsg is
+
+135
+00:11:13,370 --> 00:11:16,938
+biologically interesting, is their robust
+against hardware damage.
+
+136
+00:11:16,938 --> 00:11:21,494
+You could remove a few of the units in the
+netg and unlike the central processor of
+
+137
+00:11:21,494 --> 00:11:24,020
+your computer, everything will still work
+fine.
+
+138
+00:11:25,380 --> 00:11:29,145
+Psychologists have a nice analogy for this
+kind of memory.
+
+139
+00:11:29,145 --> 00:11:34,469
+It's like reconstructing a dinosaur from
+just a few of its bones because you know
+
+140
+00:11:34,469 --> 00:11:38,104
+something about how the bones are meant to
+fit together.
+
+141
+00:11:38,104 --> 00:11:43,233
+So, the weights in the network give you
+information about how states of neurons
+
+142
+00:11:43,233 --> 00:11:46,739
+fit together.
+And now, given the state of a few neurons,
+
+143
+00:11:46,739 --> 00:11:50,440
+I can fill out the whole state to recover
+a whole memory.
+
+144
+00:11:52,420 --> 00:11:56,860
+The storage rule for memories in the
+Hopfield net is very simple.
+
+145
+00:11:57,240 --> 00:12:02,378
+The idea is, if we use activities of one
+and minus one, that we can store a binary
+
+146
+00:12:02,378 --> 00:12:07,643
+statement by just incrementing the weights
+between any two units by the product of
+
+147
+00:12:07,643 --> 00:12:11,259
+their activities.
+So, it's a very simple rule shown on the
+
+148
+00:12:11,259 --> 00:12:16,034
+right.
+One nice thing about this rule, is that
+
+149
+00:12:16,034 --> 00:12:20,903
+you just go through the data once and
+you're done. So, it really is the genuine
+
+150
+00:12:20,903 --> 00:12:25,834
+online rule. that's because it's not error
+driven. You're not comparing what you
+
+151
+00:12:25,834 --> 00:12:30,390
+would have predicted with what the right
+answer is, and then making small
+
+152
+00:12:30,390 --> 00:12:34,149
+adjustments.
+The fact that it's not an error correction
+
+153
+00:12:34,149 --> 00:12:36,671
+rule is both it's strength and it's
+weakness.
+
+154
+00:12:36,671 --> 00:12:41,098
+It means it can be online, but as we'll
+see later, it also means it's not a very
+
+155
+00:12:41,098 --> 00:12:46,455
+efficient way to store things.
+We can also have biases, and as usual, we
+
+156
+00:12:46,455 --> 00:12:50,080
+treat the biases as weights from a
+permanently on unit.
+
+157
+00:12:51,520 --> 00:12:57,160
+If you want to use states of zero and one
+for units, which is what we'll use later,
+
+158
+00:12:57,160 --> 00:13:00,600
+the update rule is only slightly more
+complicated.

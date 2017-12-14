@@ -1,0 +1,293 @@
+1
+00:00:00,000 --> 00:00:05,778
+In this video, I'm going to describe some
+of the things that make it difficult to
+
+2
+00:00:05,778 --> 00:00:11,128
+recognize objects in real scenes.
+We're incredibly good at this, and so it's
+
+3
+00:00:11,128 --> 00:00:16,834
+very hard for us to realize how difficult
+it is to take a bunch of numbers that
+
+4
+00:00:16,834 --> 00:00:22,470
+describe the intensities of pixels and go
+from there to the label of an object.
+
+5
+00:00:22,470 --> 00:00:26,689
+There's all sorts of difficulties.
+We have to segment the object out.
+
+6
+00:00:26,689 --> 00:00:30,226
+We have to deal with variations in
+lighting, in viewpoint.
+
+7
+00:00:30,226 --> 00:00:34,693
+We have to deal with the fact that the
+definitions of objects are quite
+
+8
+00:00:34,693 --> 00:00:37,858
+complicated.
+It's also possible that to get from an
+
+9
+00:00:37,858 --> 00:00:42,760
+image to an object requires huge amounts
+of knowledge, even for the lower level
+
+10
+00:00:42,760 --> 00:00:47,476
+processes that involve segmentation and
+dealing with viewpoint and lighting.
+
+11
+00:00:47,476 --> 00:00:52,502
+If that's the case, it's gonna be very
+hard for any hand engineered program to be
+
+12
+00:00:52,502 --> 00:00:58,274
+able to do a good job of those things.
+There are many reasons why it's hard to
+
+13
+00:00:58,274 --> 00:01:04,366
+recognize objects and images.
+First of all, it's hard to segment out an
+
+14
+00:01:04,366 --> 00:01:09,515
+object from the other things in an image.
+In the real world, we move around, and so
+
+15
+00:01:09,515 --> 00:01:13,330
+we have motion cues.
+We also have two eyes, so we have stereo
+
+16
+00:01:13,330 --> 00:01:16,000
+cues.
+You don't get those in static images.
+
+17
+00:01:16,000 --> 00:01:21,022
+So it's very hard to tell which pieces go
+together as parts of the same object.
+
+18
+00:01:21,022 --> 00:01:25,853
+Also, parts of an object can be hidden
+behind other objects, and so, you often
+
+19
+00:01:25,853 --> 00:01:30,494
+don't see the whole of an object.
+You're so good at doing vision that you
+
+20
+00:01:30,494 --> 00:01:35,159
+don't often notice this.
+Another thing that makes it very hard to
+
+21
+00:01:35,159 --> 00:01:40,620
+recognize objects is that the intensity of
+a pixel is determined as much by the
+
+22
+00:01:40,620 --> 00:01:43,761
+lighting as it is by the nature of the
+object.
+
+23
+00:01:43,761 --> 00:01:49,154
+So, for example, a black surface in bright
+light will give you much more intense
+
+24
+00:01:49,154 --> 00:01:52,500
+pixels than a white surface in very gloomy
+light.
+
+25
+00:01:53,480 --> 00:01:58,551
+Remember, to recognize an object you've
+got to convert a bunch of numbers, that is
+
+26
+00:01:58,551 --> 00:02:01,620
+the intensities of the pixels, into a
+class label.
+
+27
+00:02:02,160 --> 00:02:07,457
+And, these intensities are varying for all
+sorts of reasons that have nothing to do
+
+28
+00:02:07,457 --> 00:02:12,053
+with the nature of the object.
+Or nothing to do with the identity of the
+
+29
+00:02:12,053 --> 00:02:16,089
+object.
+Objects can also deform in a variety of
+
+30
+00:02:16,089 --> 00:02:19,186
+ways.
+So for relatively simple things like
+
+31
+00:02:19,186 --> 00:02:25,159
+handwritten digits there's a wide variety
+of different shapes that have the same
+
+32
+00:02:25,159 --> 00:02:28,404
+name.
+A two for example could be very italic
+
+33
+00:02:28,404 --> 00:02:34,525
+with just a cusp instead of a loop or it
+could be a very loopy two with a, a big
+
+34
+00:02:34,525 --> 00:02:42,420
+loop and very round.
+It's also the case that for many types of
+
+35
+00:02:42,420 --> 00:02:49,206
+object, the class is defined more by what
+the object's for, than by its visual
+
+36
+00:02:49,206 --> 00:02:51,849
+appearance.
+So consider chairs.
+
+37
+00:02:51,849 --> 00:02:58,899
+There's a huge variety of things we call
+chairs, from armchairs to modern chairs
+
+38
+00:02:58,899 --> 00:03:05,914
+made with steel frames and wood backs to
+basically anything you can sit on.
+
+39
+00:03:05,914 --> 00:03:11,663
+One other thing that makes it hard to
+recognize objects, is that we have
+
+40
+00:03:11,663 --> 00:03:17,105
+different viewpoints.
+So, there's a wide variety of viewpoints
+
+41
+00:03:17,105 --> 00:03:23,717
+from which we can recognize a 3D object.
+Now, changes in viewpoint cause changes in
+
+42
+00:03:23,717 --> 00:03:29,120
+the images that standard machine learning
+methods cannot cope with.
+
+43
+00:03:29,960 --> 00:03:34,590
+The problem is that information hops about
+between the input dimensions.
+
+44
+00:03:34,590 --> 00:03:39,156
+So, typically envision the input
+dimensions correspond to pixels, and, if
+
+45
+00:03:39,156 --> 00:03:43,980
+an object moves in the world and you don't
+move your eyes to follow it, the
+
+46
+00:03:43,980 --> 00:03:47,839
+information about the object will occur on
+different pixels.
+
+47
+00:03:47,839 --> 00:03:52,920
+That's not the kind of thing we normally
+have to deal with in machine learning.
+
+48
+00:03:53,320 --> 00:03:58,128
+Just to stress that point, suppose we had
+a medical database in which one of the
+
+49
+00:03:58,128 --> 00:04:02,816
+inputs is the age of a patient and another
+input is the weight of the patient.
+
+50
+00:04:02,816 --> 00:04:07,385
+And we start doing machine learning, and
+then we realize that some coder has
+
+51
+00:04:07,385 --> 00:04:11,352
+actually changed which input I mentioned
+is coding which property.
+
+52
+00:04:11,352 --> 00:04:16,100
+So for one of the coders they've put
+weight where they should have put age, and
+
+53
+00:04:16,100 --> 00:04:18,925
+they put age where they should have put
+weight.
+
+54
+00:04:18,925 --> 00:04:22,231
+Obviously, we wouldn't just carry on doing
+our learning.
+
+55
+00:04:22,231 --> 00:04:26,980
+We'd try and do something to fix that.
+That's going to make everything go wrong.
+
+56
+00:04:26,980 --> 00:04:31,704
+I call that phenomenon dimension hopping.
+When information jumps from one input
+
+57
+00:04:31,704 --> 00:04:35,352
+dimension to another.
+And that's what Viewpoint does and it's
+
+58
+00:04:35,352 --> 00:04:39,239
+something we need to fix.
+And preferably we'd like to fix it in a
+
+59
+00:04:39,239 --> 00:04:40,136
+systematic way.

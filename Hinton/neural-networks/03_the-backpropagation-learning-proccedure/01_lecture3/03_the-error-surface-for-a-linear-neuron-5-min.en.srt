@@ -1,0 +1,304 @@
+1
+00:00:00,000 --> 00:00:04,095
+In this video we're going to look at the
+error surface for a linear neuron.
+
+2
+00:00:04,095 --> 00:00:10,016
+By understanding the shape of this error
+surface, we can understand a lot about
+
+3
+00:00:10,016 --> 00:00:13,007
+what happens as a linear neuron is
+learning.
+
+4
+00:00:13,007 --> 00:00:18,025
+We can get a nice geometrical
+understanding of what's happening when we
+
+5
+00:00:18,025 --> 00:00:23,080
+learn the weights of a linear neuron.
+By considering a space that's very like
+
+6
+00:00:23,080 --> 00:00:29,027
+the weight space that we use to understand
+perceptrons, but it has one extra
+
+7
+00:00:29,027 --> 00:00:32,080
+dimension.
+So we imagine a space in which all the
+
+8
+00:00:32,080 --> 00:00:36,026
+horizontal dimensions correspond to the
+weights.
+
+9
+00:00:36,026 --> 00:00:40,095
+And there's one vertical dimension that
+corresponds to the error.
+
+10
+00:00:40,095 --> 00:00:46,085
+So in this space, points on the horizontal
+plane, correspond to different settings of
+
+11
+00:00:46,085 --> 00:00:50,050
+the weights.
+And the height corresponds to the error
+
+12
+00:00:50,050 --> 00:00:55,064
+that your making with that set of weights,
+summed over all training cases.
+
+13
+00:00:55,096 --> 00:01:03,073
+For a linear neuron, the errors you make
+for each set of weights define error
+
+14
+00:01:03,073 --> 00:01:07,597
+surface.
+And this error surface is a quadratic
+
+15
+00:01:07,597 --> 00:01:10,362
+bowl.
+That is, if you take a vertical
+
+16
+00:01:10,362 --> 00:01:15,260
+cross-section, it's always a parabola.
+And if you take a horizontal
+
+17
+00:01:15,260 --> 00:01:20,956
+cross-section, it's always an ellipse.
+This is only true for linear systems with
+
+18
+00:01:20,956 --> 00:01:25,162
+a squared error.
+As soon as we go to a multilayer nonlinear
+
+19
+00:01:25,162 --> 00:01:29,202
+neuron nets, this error surface will get
+more complicated.
+
+20
+00:01:29,202 --> 00:01:35,067
+As long as the weights aren't too big, the
+error surface will still be smooth, but it
+
+21
+00:01:35,067 --> 00:01:42,091
+may have many local minimum.
+Using this error surface we can get a
+
+22
+00:01:42,091 --> 00:01:47,741
+picture of what's happening as we do
+gradient descent learning using the delta
+
+23
+00:01:47,741 --> 00:01:51,645
+rule.
+So what the delta rule does is it computes
+
+24
+00:01:51,645 --> 00:01:55,984
+the derivative of the error with respect
+to the weights.
+
+25
+00:01:55,984 --> 00:02:00,961
+And if you change the weights in
+proportion to that derivative, that's
+
+26
+00:02:00,961 --> 00:02:05,598
+equivalent to doing steepest descent on
+the error surface.
+
+27
+00:02:05,598 --> 00:02:11,264
+To put it another way, if we look at the
+error surface from above, we get
+
+28
+00:02:11,264 --> 00:02:15,956
+elliptical contour lines.
+And the delta rule is gonna take it at
+
+29
+00:02:15,956 --> 00:02:21,219
+right angles to those elliptical contour
+lines, as shown in the picture.
+
+30
+00:02:21,219 --> 00:02:26,757
+That's what happens with what's called
+batch learning, where we get the grayed
+
+31
+00:02:26,757 --> 00:02:31,905
+in, summed overall training cases.
+But we could also do online learning,
+
+32
+00:02:31,905 --> 00:02:38,582
+where after each training case, we change
+the weights in proportion to the gradient
+
+33
+00:02:38,582 --> 00:02:44,079
+for that single training case.
+That's much more like what we do in
+
+34
+00:02:44,079 --> 00:02:48,493
+perceptrons.
+And, as you can see, the change in the
+
+35
+00:02:48,493 --> 00:02:53,241
+weights moves us towards one of these
+constraint planes.
+
+36
+00:02:53,241 --> 00:02:57,617
+So in the picture on the right, there are
+two training cases.
+
+37
+00:02:57,617 --> 00:03:04,021
+To get the first training case correct, we
+must lie on one of those blue lines.
+
+38
+00:03:04,021 --> 00:03:09,883
+And to get the second training case
+correct, the two weights must lie on the
+
+39
+00:03:09,883 --> 00:03:14,094
+other blue line.
+So if we start at one of those red points,
+
+40
+00:03:14,094 --> 00:03:20,391
+and we compute the gradient on the first
+training case, the delta rule will move us
+
+41
+00:03:20,391 --> 00:03:25,526
+perpendicularly towards that line.
+If we then consider the other training
+
+42
+00:03:25,526 --> 00:03:28,927
+case, we'll move perpendicularly towards
+the other line.
+
+43
+00:03:28,927 --> 00:03:33,692
+And if we alternate between the two
+training cases, we'll zigzag backwards and
+
+44
+00:03:33,692 --> 00:03:38,368
+forwards, moving towards the solution
+point which is where those two lines
+
+45
+00:03:38,368 --> 00:03:40,971
+intersect.
+That's the set of weights that is correct
+
+46
+00:03:40,971 --> 00:03:47,297
+for both training cases.
+Using this picture of the error surface,
+
+47
+00:03:47,297 --> 00:03:52,940
+we can also understand the conditions it
+will make learning very slow.
+
+48
+00:03:52,940 --> 00:03:59,315
+If that ellipse is very elongated, which
+is gonna happen if the lines that
+
+49
+00:03:59,315 --> 00:04:05,923
+correspond to training cases is almost
+parallel, then when we look at the
+
+50
+00:04:05,923 --> 00:04:09,612
+gradient, it's going to have a nasty
+property.
+
+51
+00:04:09,612 --> 00:04:14,362
+If you look at the red arrow in the
+picture, the gradient is big in the
+
+52
+00:04:14,362 --> 00:04:20,253
+direction in which we don't want to move
+very far, and it's small in the direction
+
+53
+00:04:20,253 --> 00:04:26,227
+in which we want to move a long way.
+So the gradient will quickly take us
+
+54
+00:04:26,227 --> 00:04:31,584
+across the bottom of that ravine.
+Corresponding to the narrow axis of the
+
+55
+00:04:31,584 --> 00:04:35,166
+ellipse.
+And will take a long time to take us along
+
+56
+00:04:35,166 --> 00:04:38,880
+the ravine, corresponding to the long Xs
+of the ellipse.
+
+57
+00:04:38,880 --> 00:04:43,643
+It's just the opposite of what we want.
+We'd like to get a great into a small
+
+58
+00:04:43,643 --> 00:04:48,088
+across the ravine, and big along the
+ravine but that's not what we get.
+
+59
+00:04:48,088 --> 00:04:54,022
+And so, simple steepest descent, in which
+you change each weight in proportion to a
+
+60
+00:04:54,022 --> 00:04:59,056
+learning rate times the error derivative,
+is gonna have great difficulty, with very
+
+61
+00:04:59,056 --> 00:05:03,001
+elongated surfaces like the one shown in
+the picture.

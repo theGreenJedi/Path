@@ -1,0 +1,514 @@
+1
+00:00:00,000 --> 00:00:04,075
+In this video, I'm gonna talk about
+perceptrons.
+
+2
+00:00:05,050 --> 00:00:10,014
+These were investigated in the early
+1960's, and initially they looked very
+
+3
+00:00:10,014 --> 00:00:14,053
+promising as learning devices.
+But then they fell into disfavor because
+
+4
+00:00:14,053 --> 00:00:19,073
+Minsky and Papert showed they were rather
+restricted in what they could learn to do.
+
+5
+00:00:21,005 --> 00:00:26,055
+In statistical pattern recognition,
+there's a statistical way to recognize
+
+6
+00:00:26,055 --> 00:00:31,082
+patterns.
+We first take the raw input, and we
+
+7
+00:00:31,082 --> 00:00:37,046
+convert it into a set or vector feature
+activations.
+
+8
+00:00:38,052 --> 00:00:43,006
+We do this using hand written programs
+which are based on common sense.
+
+9
+00:00:43,006 --> 00:00:48,044
+So that part of the system does not learn.
+We look at the problem we decide what the
+
+10
+00:00:48,044 --> 00:00:52,060
+good features should be.
+We try some features to see if they work
+
+11
+00:00:52,060 --> 00:00:57,086
+or don't work we try some more features
+and eventually set of features that allow
+
+12
+00:00:57,086 --> 00:01:01,096
+us to solve the problem by using a
+subsequent learning stage.
+
+13
+00:01:03,032 --> 00:01:09,006
+What we learn is how to weight each of the
+feature activations, in order to get a
+
+14
+00:01:09,006 --> 00:01:14,016
+single scalar quantity.
+So the weights on the features represent
+
+15
+00:01:14,016 --> 00:01:19,083
+how much evidence the feature gives you,
+in favor or against the hypothesis that
+
+16
+00:01:19,083 --> 00:01:25,029
+the current input is an example of the
+kind of pattern you want to recognize.
+
+17
+00:01:25,029 --> 00:01:30,075
+And when we add up all the weighted
+features, we get a sort of total evidence
+
+18
+00:01:30,075 --> 00:01:36,050
+in favor of the hypothesis that this is
+the kind of pattern we want to recognize.
+
+19
+00:01:36,081 --> 00:01:42,056
+And if that evidence is above some
+threshold, we decide that the input vector
+
+20
+00:01:42,056 --> 00:01:48,001
+is a positive example of the class of
+patterns we're trying to recognize.
+
+21
+00:01:48,001 --> 00:01:54,006
+A perceptron is a particular example of a
+statistical pattern recognition system.
+
+22
+00:01:54,095 --> 00:02:00,041
+So there are actually many different kinds
+of perceptrons, but the standard kind,
+
+23
+00:02:00,041 --> 00:02:05,045
+which Rosenblatt called an alpha
+perceptron, consists of some inputs which
+
+24
+00:02:05,045 --> 00:02:10,098
+are then converted into future activities.
+They might be converted by things that
+
+25
+00:02:10,098 --> 00:02:15,062
+look a bit like neurons, but that stage of
+the system does not learn.
+
+26
+00:02:15,091 --> 00:02:20,088
+Once you've got the activities of the
+features, you then learn some weights, so
+
+27
+00:02:20,088 --> 00:02:26,009
+that you can take the feature activities
+times the weights and you decide whether
+
+28
+00:02:26,009 --> 00:02:31,043
+or not it's an example of the class you're
+interested in by seeing whether that sum
+
+29
+00:02:31,043 --> 00:02:36,002
+of feature activities times learned
+weights is greater than a threshold.
+
+30
+00:02:38,059 --> 00:02:43,050
+Perceptrons have an interesting history.
+They were popularized in the early 1960s
+
+31
+00:02:43,050 --> 00:02:46,072
+by Frank Rosenblatt.
+He wrote a great big book called
+
+32
+00:02:46,072 --> 00:02:51,020
+Principles of Neurodynamics, in which he
+described many different kinds of
+
+33
+00:02:51,020 --> 00:02:53,087
+perceptrons, and that book was full of
+ideas.
+
+34
+00:02:53,087 --> 00:02:58,065
+The most important thing in the book was a
+very powerful learning algorithm, or
+
+35
+00:02:58,065 --> 00:03:02,059
+something that appeared to be a very
+powerful learning algorithm.
+
+36
+00:03:03,047 --> 00:03:08,095
+A lot of grand claims were made for what
+perceptrons could do using this learning
+
+37
+00:03:08,095 --> 00:03:12,082
+algorithm.
+For example, people claimed they could
+
+38
+00:03:12,082 --> 00:03:18,059
+tell the difference between pictures of
+tanks and pictures of trucks, even if the
+
+39
+00:03:18,059 --> 00:03:22,093
+tanks and trucks were sort of partially
+obscured in a forest.
+
+40
+00:03:23,069 --> 00:03:26,065
+Now some of those claims turned out to be
+false.
+
+41
+00:03:26,065 --> 00:03:31,057
+In the case of the tanks and the trucks,
+it turned out the pictures of the tanks
+
+42
+00:03:31,057 --> 00:03:36,006
+were taken on a sunny day, and the
+pictures of the trucks were taken on a
+
+43
+00:03:36,006 --> 00:03:39,038
+cloudy day.
+All the perceptron was doing was measuring
+
+44
+00:03:39,038 --> 00:03:44,005
+the total intensity of all the pixels.
+That's something we humans are fairly
+
+45
+00:03:44,005 --> 00:03:47,019
+insensitive to.
+We notice the things in the picture.
+
+46
+00:03:47,019 --> 00:03:51,012
+But a perceptron can easily learn to add
+up the total intensity.
+
+47
+00:03:51,012 --> 00:03:54,081
+That's the kind of thing that gives an
+algorithm a bad name.
+
+48
+00:03:56,037 --> 00:04:02,097
+In 1969, Minsky and Papert published a
+book called Perceptrons that analyzed what
+
+49
+00:04:02,097 --> 00:04:07,003
+perceptrons could do and showed their
+limitations.
+
+50
+00:04:08,021 --> 00:04:13,006
+Many people thought those limitations
+applied to all neural network models.
+
+51
+00:04:13,006 --> 00:04:18,027
+And the general feeling within artificial
+intelligence was that Minsky and Papert
+
+52
+00:04:18,027 --> 00:04:23,030
+had shown that neural network models were
+nonsense or that they couldn't learn
+
+53
+00:04:23,030 --> 00:04:26,086
+difficult things.
+Minsky and Papert themselves knew that
+
+54
+00:04:26,086 --> 00:04:31,000
+they hadn't shown that.
+They'd just shown that perceptrons of the
+
+55
+00:04:31,000 --> 00:04:35,090
+kind for which the powerful learning
+algorithm applied could not do a lot of
+
+56
+00:04:35,090 --> 00:04:39,015
+things, or rather they couldn't do them by
+learning.
+
+57
+00:04:39,015 --> 00:04:43,086
+They could do them if you sort of
+hand-wired the answer in the inputs, but
+
+58
+00:04:43,086 --> 00:04:46,070
+not by learning.
+But that result got wildly
+
+59
+00:04:46,070 --> 00:04:50,095
+overgeneralized, and when I started
+working on neural network models in the
+
+60
+00:04:50,095 --> 00:04:55,042
+1970s, people in artificial intelligence
+kept telling me that Minsky and Papert
+
+61
+00:04:55,042 --> 00:04:57,086
+have proved that these models were no
+good.
+
+62
+00:04:59,056 --> 00:05:04,060
+Actually, the perceptron convergence
+procedure, which we'll see in a minute, is
+
+63
+00:05:04,060 --> 00:05:09,012
+still widely used today for tasks that
+have very big feature vectors.
+
+64
+00:05:09,012 --> 00:05:14,011
+So, Google, for example, uses it to
+predict things from very big vectors of
+
+65
+00:05:14,011 --> 00:05:19,018
+features.
+So, the decision unit in a perceptron is a
+
+66
+00:05:19,018 --> 00:05:23,021
+binary threshold neuron.
+We've seen this before and just to re-,
+
+67
+00:05:23,021 --> 00:05:27,093
+refresh you on those.
+They compute a weighted sum of inputs they
+
+68
+00:05:27,093 --> 00:05:32,035
+get from other neurons.
+They add on a bias to get their total
+
+69
+00:05:32,035 --> 00:05:35,062
+input.
+And then they give an output of one if
+
+70
+00:05:35,062 --> 00:05:40,025
+that sum exceeds zero, and they give an
+output of zero otherwise.
+
+71
+00:05:42,019 --> 00:05:47,029
+We don't want to have to have a separate
+learning rule for learning biases, and it
+
+72
+00:05:47,029 --> 00:05:50,027
+turns out we can treat biases just like
+weights.
+
+73
+00:05:50,027 --> 00:05:55,055
+If we take every input vector and we stick
+a one on the front of it, and we treat the
+
+74
+00:05:55,055 --> 00:06:00,033
+bias as like the weight on that first
+feature that always has a value of one.
+
+75
+00:06:00,033 --> 00:06:03,043
+So the bias is just the negative of the
+threshold.
+
+76
+00:06:03,095 --> 00:06:08,065
+And using this trick, we don't need a
+separate learning rule for the bias.
+
+77
+00:06:08,065 --> 00:06:13,016
+It's exactly equivalent to learning a
+weight on this extra input line.
+
+78
+00:06:16,063 --> 00:06:21,005
+So here's the very powerful learning
+procedure for perceptrons, and it's a
+
+79
+00:06:21,005 --> 00:06:25,071
+learning procedure that's guaranteed to
+work, which is a nice property to have.
+
+80
+00:06:25,071 --> 00:06:30,031
+Of course you have to look at the small
+print later, about why that guarantee
+
+81
+00:06:30,031 --> 00:06:36,068
+isn't quite as good as you think it is.
+So we first had this extra component with
+
+82
+00:06:36,068 --> 00:06:41,031
+a value of one to every input vector.
+Now we can forget about the biases.
+
+83
+00:06:41,081 --> 00:06:46,076
+And then we keep picking training cases,
+using any policy we like, as long as we
+
+84
+00:06:46,076 --> 00:06:51,009
+ensure that every training case gets
+picked without waiting too long.
+
+85
+00:06:51,009 --> 00:06:54,028
+I'm not gonna define precisely what I mean
+by that.
+
+86
+00:06:54,028 --> 00:06:59,030
+If you're a mathematician, you could think
+about what might be a good definition.
+
+87
+00:07:02,056 --> 00:07:07,009
+Now, having picked a training case, you
+look to see if the output's correct.
+
+88
+00:07:07,009 --> 00:07:09,092
+If it is correct, you don't change the
+weights.
+
+89
+00:07:10,072 --> 00:07:15,090
+If the output unit outputs a zero when it
+should've output a one, in other words, it
+
+90
+00:07:15,090 --> 00:07:21,002
+said it's not an instance of the pattern
+we're trying to recognize, when it really
+
+91
+00:07:21,002 --> 00:07:25,059
+is, then all we do is we add the input
+vector to the weight vector of the
+
+92
+00:07:25,059 --> 00:07:29,086
+perceptron.
+Conversely, if the output unit, outputs a
+
+93
+00:07:29,086 --> 00:07:35,029
+one, when is should have output a zero, we
+subract the input vector, from the weight
+
+94
+00:07:35,029 --> 00:07:40,063
+vector of the [inaudible].
+And what's surprising is that, that simple
+
+95
+00:07:40,063 --> 00:07:45,073
+learning procedure is guaranteed to find
+you a set of weights that will get a right
+
+96
+00:07:45,073 --> 00:07:50,067
+answer for every training case.
+The proviso is that it can only do it if
+
+97
+00:07:50,067 --> 00:07:55,060
+it is such a set of weights and for many
+interesting problems there is no such set
+
+98
+00:07:55,060 --> 00:07:58,051
+of weights.
+Whether or not a set of weights exist
+
+99
+00:07:58,051 --> 00:08:01,007
+depends very much on what features you
+use.
+
+100
+00:08:01,007 --> 00:08:05,088
+So it turns out for many problems the
+difficult bit is deciding what features to
+
+101
+00:08:05,088 --> 00:08:08,056
+use.
+If you're using the appropriate features
+
+102
+00:08:08,056 --> 00:08:12,066
+learning then may become easy.
+If you're not using the right features
+
+103
+00:08:12,066 --> 00:08:16,081
+learning becomes impossible and all the
+work is deciding the features.

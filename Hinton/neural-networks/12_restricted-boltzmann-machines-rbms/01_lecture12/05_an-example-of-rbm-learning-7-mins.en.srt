@@ -1,0 +1,469 @@
+1
+00:00:00,000 --> 00:00:05,689
+In this video, I'm going to show a simple
+example of a restricted Boltzmann machine
+
+2
+00:00:05,689 --> 00:00:08,834
+learning a model of images of handwritten
+twos.
+
+3
+00:00:08,834 --> 00:00:14,256
+After it's learned the model, we'll look
+at how good it is at reconstructing twos.
+
+4
+00:00:14,256 --> 00:00:19,945
+And we'll look at what happens if we give
+it a different kind of digit and ask it to
+
+5
+00:00:19,945 --> 00:00:23,827
+reconstruct that.
+We'll also look at the weights we get if
+
+6
+00:00:23,827 --> 00:00:29,382
+we train a restricted Boltzmann machine
+that's considerably larger on all of the
+
+7
+00:00:29,382 --> 00:00:33,229
+digit classes.
+It lends a wide variety of features, which
+
+8
+00:00:33,229 --> 00:00:38,146
+between them are very good at
+reconstructing all the different classes
+
+9
+00:00:38,146 --> 00:00:42,649
+of digits, and also are quite a good model
+of those digit classes.
+
+10
+00:00:42,649 --> 00:00:48,259
+That is, if you take a binary vector, this
+image of a hundred digit, the model will
+
+11
+00:00:48,259 --> 00:00:53,593
+be able to find low energy states,
+compatible with that image and if you give
+
+12
+00:00:53,593 --> 00:00:58,995
+it an image that's a long way away from
+being an image of a hundred digit, the
+
+13
+00:00:58,995 --> 00:01:04,260
+model will not be able to find low energy
+states compatible with that image.
+
+14
+00:01:04,260 --> 00:01:10,281
+I'm now gonna show how a relatively simple
+RBM can learn to build a model of images
+
+15
+00:01:10,281 --> 00:01:15,779
+of the digit two.
+The images of sixteen pixels by sixteen
+
+16
+00:01:15,779 --> 00:01:19,009
+pixels.
+And it has 50 binary hidden units that
+
+17
+00:01:19,009 --> 00:01:22,993
+they're gonna learn to become interesting
+feature detectors.
+
+18
+00:01:22,993 --> 00:01:28,437
+So when it's presented with the data case,
+the first thing that it does is use the
+
+19
+00:01:28,437 --> 00:01:33,351
+weight and the connection from pixel to
+feature like this, to activate the
+
+20
+00:01:33,351 --> 00:01:37,401
+features like this.
+That is for each of the binary neurons, it
+
+21
+00:01:37,401 --> 00:01:43,045
+makes the sarcastic decision about whether
+it should deduct the state of one or zero.
+
+22
+00:01:43,045 --> 00:01:47,560
+It then uses the binary pans for
+activation to reconstruct the data.
+
+23
+00:01:47,560 --> 00:01:53,149
+That is, for each pixel, it makes a binary
+decision about whether it should be a one
+
+24
+00:01:53,149 --> 00:01:56,449
+or a zero.
+It then reactivates the binary feature
+
+25
+00:01:56,449 --> 00:02:01,366
+detectors using the reconstruction to
+activate them rather than the data.
+
+26
+00:02:01,366 --> 00:02:06,956
+The weights are changed by incrementing
+the weights between an active pixel and an
+
+27
+00:02:06,956 --> 00:02:10,997
+active feature detector when the network
+is looking at data.
+
+28
+00:02:10,997 --> 00:02:16,048
+And that will lower the energy of the
+global configuration of the data, and
+
+29
+00:02:16,048 --> 00:02:21,890
+whatever hidden pattern went with it.
+And it decrements the weights, between an
+
+30
+00:02:21,890 --> 00:02:26,025
+active pixel and an active feature
+detector, when it's looking at a
+
+31
+00:02:26,025 --> 00:02:30,160
+reconstruction, and that would raise the
+energy of the reconstruction.
+
+32
+00:02:30,700 --> 00:02:35,718
+Near the beginning of learning when the
+weights are random, the reconstruction
+
+33
+00:02:35,718 --> 00:02:39,256
+would almost certainly have lower energy
+than the data.
+
+34
+00:02:39,256 --> 00:02:44,467
+Because the reconstruction is what the
+network likes to reproduce on the visible
+
+35
+00:02:44,467 --> 00:02:47,233
+units, given the hidden pattern of
+activity.
+
+36
+00:02:47,233 --> 00:02:52,316
+And obviously it likes to reproduce
+patterns that have low energy according to
+
+37
+00:02:52,316 --> 00:02:56,369
+its energy function.
+And you can think of what learning does as
+
+38
+00:02:56,369 --> 00:02:59,392
+changing the weights so the data is low
+energy.
+
+39
+00:02:59,392 --> 00:03:03,510
+And the reconstructions of the data are
+generally higher energy.
+
+40
+00:03:03,510 --> 00:03:08,221
+So let's start with some random weights
+for the 50 feature detectors.
+
+41
+00:03:08,221 --> 00:03:14,093
+We'll use small random weights and each of
+these squares shows you the weights to the
+
+42
+00:03:14,093 --> 00:03:17,439
+pixels coming from a particular feature
+detector.
+
+43
+00:03:17,439 --> 00:03:20,990
+The small random weights are used to break
+symmetry.
+
+44
+00:03:20,990 --> 00:03:25,665
+That because the update were stochastic,
+we don't really need that.
+
+45
+00:03:25,665 --> 00:03:31,190
+After seeing a few hundred examples of
+digits, and digesting the weights a few
+
+46
+00:03:31,190 --> 00:03:34,661
+times, the weights are beginning to form
+patterns.
+
+47
+00:03:34,661 --> 00:03:40,541
+If we do it again, you can see that many
+of the feature detectors are detecting the
+
+48
+00:03:40,541 --> 00:03:44,464
+pattern of a hole two.
+They're fairly global feature detectors.
+
+49
+00:03:44,464 --> 00:03:47,360
+And those feature detectors are getting
+stronger,
+
+50
+00:03:47,900 --> 00:03:53,006
+And stronger, and now some of them begin
+to localize, and they're getting more
+
+51
+00:03:53,006 --> 00:03:58,444
+local, and even more local, and even more
+local, and these are the final weights and
+
+52
+00:03:58,444 --> 00:04:04,081
+you can see that each neuron has become a
+different feature detector and most of the
+
+53
+00:04:04,081 --> 00:04:09,253
+feature detectors are fairly local.
+If you look at the feature detector in the
+
+54
+00:04:09,253 --> 00:04:13,126
+red box, for example, it's detecting the
+top of a two,
+
+55
+00:04:13,126 --> 00:04:18,242
+And it's happy when the top of a two is
+where its white pixels are and where
+
+56
+00:04:18,242 --> 00:04:21,099
+there's nothing where the black pixels
+are.
+
+57
+00:04:21,099 --> 00:04:24,355
+So it's representing where the top of the
+two is.
+
+58
+00:04:24,355 --> 00:04:29,405
+Once we've learned the model, we can look
+at how well it reconstructs digits.
+
+59
+00:04:29,405 --> 00:04:33,524
+And we'll give it some test digits that it
+hasn't seen before.
+
+60
+00:04:33,524 --> 00:04:36,980
+So we'll start by giving it a test example
+of a two.
+
+61
+00:04:37,640 --> 00:04:41,967
+And its reconstruction is pretty faithful
+to the test example.
+
+62
+00:04:41,967 --> 00:04:46,363
+It's slightly blurry.
+The test example has a hook at the top and
+
+63
+00:04:46,363 --> 00:04:51,033
+that's been blurred after the
+reconstruction, but it's a pretty good
+
+64
+00:04:51,033 --> 00:04:54,811
+reconstruction.
+The more interesting thing we can do, is
+
+65
+00:04:54,811 --> 00:04:58,383
+give it a test example from a different
+digit class.
+
+66
+00:04:58,383 --> 00:05:02,230
+So if we give it an example of the three
+to reconstruct.
+
+67
+00:05:02,230 --> 00:05:06,860
+What it reconstructs actually looks more
+like a two then like a three.
+
+68
+00:05:06,860 --> 00:05:11,568
+All of the feature detectors is learned,
+are good for representing twos, but it
+
+69
+00:05:11,568 --> 00:05:16,638
+doesn't have feature detectors for things
+like representing that cusp in the middle
+
+70
+00:05:16,638 --> 00:05:19,777
+of the three.
+So it ends up reconstructing something,
+
+71
+00:05:19,777 --> 00:05:24,546
+but obeys the regularities of a two,
+better than it represents the regularities
+
+72
+00:05:24,546 --> 00:05:27,415
+of a three.
+In fact, the network tries to see
+
+73
+00:05:27,415 --> 00:05:31,625
+everything as a two.
+So here's some feature detectors that were
+
+74
+00:05:31,625 --> 00:05:37,037
+learned in the first hidden layer of a
+model that uses 500 hidden units to model
+
+75
+00:05:37,037 --> 00:05:41,381
+all ten digit classes.
+And this model has been trained for a long
+
+76
+00:05:41,381 --> 00:05:46,393
+time with contrastive divergence.
+It has a big variety of feature detectors.
+
+77
+00:05:46,393 --> 00:05:51,672
+If you look at the one in the blue box,
+that's obviously going to be useful for
+
+78
+00:05:51,672 --> 00:05:57,903
+detecting things like eights If you look
+at the one in the red box, it's not what
+
+79
+00:05:57,903 --> 00:06:02,104
+you expect to see.
+It likes to see pixels on very near the
+
+80
+00:06:02,104 --> 00:06:07,330
+bottom there, and it really doesn't like
+to see pixels on in a road that's 21
+
+81
+00:06:07,330 --> 00:06:11,741
+pixels above the bottom.
+What's going on here is that the data is
+
+82
+00:06:11,741 --> 00:06:17,102
+normalized and so the digits can't have a
+height of greater than twenty pixels.
+
+83
+00:06:17,102 --> 00:06:22,803
+And that means if you know that there's a
+pixel on where those big positive weights
+
+84
+00:06:22,803 --> 00:06:27,690
+are, there can't possibly be a pixel on,
+where those negative weights are.
+
+85
+00:06:27,690 --> 00:06:33,180
+So this is picking up on the long range
+regularity that was introduced by the way
+
+86
+00:06:33,180 --> 00:06:37,560
+we normalized the data.
+Here's another one that's doing the same
+
+87
+00:06:37,560 --> 00:06:42,201
+thing for the fact that the data can't be
+wider than twenty pixels.
+
+88
+00:06:42,201 --> 00:06:46,220
+The feature detected in the green box is
+very interesting.
+
+89
+00:06:46,220 --> 00:06:51,550
+It's for detecting where the bottom of a
+vertical stroke comes and it will detect
+
+90
+00:06:51,550 --> 00:06:56,360
+it in a number of different positions and
+then refuse to detect it in the
+
+91
+00:06:56,360 --> 00:07:00,130
+intermediate positions.
+So it's very like one of the least
+
+92
+00:07:00,130 --> 00:07:05,525
+significant digits in a binary number, as
+you increase the magnitude of a number it
+
+93
+00:07:05,525 --> 00:07:10,270
+goes on again, and off again, and on
+again, and off again and it shows that
+
+94
+00:07:10,270 --> 00:07:14,886
+this is developing quite complex ways of
+representing where things are.

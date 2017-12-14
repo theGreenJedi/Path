@@ -1,0 +1,669 @@
+1
+00:00:00,000 --> 00:00:06,311
+In this video, I'm going to explain how
+adding noise can help systems escape from
+
+2
+00:00:06,311 --> 00:00:10,362
+local minima.
+And, I'm going to show what you have to do
+
+3
+00:00:10,362 --> 00:00:15,427
+to the units in Hopfield net to add noise
+in the appropriate way.
+
+4
+00:00:15,427 --> 00:00:21,816
+I'm not going to introduce the idea that
+we confined better minima by using noise.
+
+5
+00:00:21,816 --> 00:00:27,971
+So, Hopfield net always makes decisions
+that reduce the energy, or if it doesn't
+
+6
+00:00:27,971 --> 00:00:31,400
+state of the unit, the energy stays the
+same.
+
+7
+00:00:31,400 --> 00:00:35,199
+This makes it impossible to climb out of a
+local minimum.
+
+8
+00:00:35,199 --> 00:00:39,998
+So, if you look at the landscape here.
+If we get into the local minimum A,
+
+9
+00:00:39,998 --> 00:00:45,064
+there's no way we're going to get over the
+energy barrier to get to the better
+
+10
+00:00:45,064 --> 00:00:48,197
+minimum B because we can't go uphill in
+energy.
+
+11
+00:00:48,197 --> 00:00:53,530
+If we add random noise, we can escape from
+poor minima, especially minima that is
+
+12
+00:00:53,530 --> 00:00:58,130
+shallow, that is, ones that don't have big
+energy barriers around them.
+
+13
+00:00:58,130 --> 00:01:03,342
+It turns out, rather than using a fixed
+noise level, the most effective strategy
+
+14
+00:01:03,342 --> 00:01:08,290
+is to start with a lot of noise which
+allows you to explore the space on a
+
+15
+00:01:08,290 --> 00:01:13,767
+coarse scale and find the generally good
+regions of the space, and then to decrease
+
+16
+00:01:13,767 --> 00:01:17,329
+the noise level.
+With a lot of noise, you can cross big
+
+17
+00:01:17,329 --> 00:01:20,694
+barriers.
+As you decrease the noise level, you start
+
+18
+00:01:20,694 --> 00:01:26,702
+concentrating on the best nearby minima.
+If you slowly reduce the noise, so the
+
+19
+00:01:26,702 --> 00:01:31,680
+system ends up in a deep minimum, that's
+called simulated annealing.
+
+20
+00:01:31,680 --> 00:01:37,178
+And this ideal was, propogated by
+Kirkpatrick at around the same time as
+
+21
+00:01:37,178 --> 00:01:42,375
+Hopfield nets were proposed.
+So, the reason for simulated annealing is
+
+22
+00:01:42,375 --> 00:01:48,174
+because the temperature, in a physical
+system, or in a simulated system with a
+
+23
+00:01:48,174 --> 00:01:52,311
+energy function,
+Affects the transition probabilities.
+
+24
+00:01:52,311 --> 00:01:58,571
+So, in a high temperature system, the
+probability of going uphill from B to A is
+
+25
+00:01:58,571 --> 00:02:03,088
+lower than the probability of going
+downhill from A to B.
+
+26
+00:02:03,088 --> 00:02:07,362
+But it's not much lower.
+In effect, the temperature flattens the
+
+27
+00:02:07,362 --> 00:02:11,741
+energy landscape, and so the little black
+dots are meant to be particles.
+
+28
+00:02:11,741 --> 00:02:16,606
+And what we are imagining is particles
+moving about according to the transition
+
+29
+00:02:16,606 --> 00:02:20,803
+probabilities that you get with an energy
+function and a temperature.
+
+30
+00:02:20,803 --> 00:02:25,304
+And this might be a typical distribution
+if you're on the system of high
+
+31
+00:02:25,304 --> 00:02:30,170
+temperature where it's easier to cross
+barriers, but it's also hard to stay in a
+
+32
+00:02:30,170 --> 00:02:34,610
+deep minimum once you've got that.
+If you are in the system of much lower
+
+33
+00:02:34,610 --> 00:02:38,876
+temperature,
+Then your probability of crossing barriers
+
+34
+00:02:38,876 --> 00:02:42,640
+gets much smaller but your ratio gets much
+better.
+
+35
+00:02:42,900 --> 00:02:48,430
+So, the ratio of the probability of going
+from A to B versus the probability of
+
+36
+00:02:48,430 --> 00:02:52,840
+going from B to A is much better in the
+low temperature system.
+
+37
+00:02:53,100 --> 00:02:58,879
+And so, if we run it long enough, we would
+expect all of the particles to end up in
+
+38
+00:02:58,879 --> 00:03:01,922
+B.
+But if we just run it for a long time at
+
+39
+00:03:01,922 --> 00:03:06,322
+low temperature, it will take a very long
+time for particles to escape from A.
+
+40
+00:03:06,322 --> 00:03:11,065
+And it turns out a good compromise is to
+start at a high temperature and gradually
+
+41
+00:03:11,065 --> 00:03:16,201
+reduce the temperature.
+The way we get noise in to Hopfield net is
+
+42
+00:03:16,201 --> 00:03:22,366
+to replace the binary threshold units by
+binary stochastic units and make biased
+
+43
+00:03:22,366 --> 00:03:27,184
+random decisions.
+And the amount of noise is controlled by
+
+44
+00:03:27,184 --> 00:03:31,827
+something called temperature,
+Which you'll see in a minute in the
+
+45
+00:03:31,827 --> 00:03:34,948
+equation.
+Raising the noise level is equivalent to
+
+46
+00:03:34,948 --> 00:03:38,320
+decreasing all the energy gaps between
+configurations.
+
+47
+00:03:39,500 --> 00:03:47,290
+So, this is our normal logistic equation.
+But with the energy gap scaled by a
+
+48
+00:03:47,290 --> 00:03:53,514
+temperature.
+If the temperature is very high, that
+
+49
+00:03:53,514 --> 00:03:58,969
+exponent will be roughly zero, so the
+right hand side will be one over one plus
+
+50
+00:03:58,969 --> 00:04:03,871
+one. And so, the probability of the unit
+turning on will be about a half.
+
+51
+00:04:03,871 --> 00:04:07,945
+It'll be in it's on and off states, more
+or less equally off.
+
+52
+00:04:09,080 --> 00:04:15,645
+As we lower the temperature,
+Depending on the sign of delta E, the unit
+
+53
+00:04:15,645 --> 00:04:21,757
+will become either more and more firmly on
+and more and more firmly off.
+
+54
+00:04:21,757 --> 00:04:27,530
+At zero temperature, which is what we're
+be using in a Hopfield net,
+
+55
+00:04:27,530 --> 00:04:34,066
+Then the sign of delta E determines
+whether the right hand side goes to zero
+
+56
+00:04:34,066 --> 00:04:38,479
+or goes to one.
+But, with T zero, it will either be zero
+
+57
+00:04:38,479 --> 00:04:42,344
+or one on the right hand side.
+And so, the unit will behave
+
+58
+00:04:42,344 --> 00:04:45,877
+deterministically and that's a binary
+threshold unit.
+
+59
+00:04:45,877 --> 00:04:50,476
+It will always adopt whatever of the two
+states is the lowest energy.
+
+60
+00:04:50,476 --> 00:04:55,874
+So, the energy gap we saw on a previous
+slide, and it's just the difference in the
+
+61
+00:04:55,874 --> 00:05:01,140
+energy of the whole system depending on
+whether unit I is off, or the unit I is
+
+62
+00:05:01,140 --> 00:05:04,612
+on.
+Although simulated annealing is a very
+
+63
+00:05:04,612 --> 00:05:09,909
+powerful method for improving searches
+that get stuck in local optima, and
+
+64
+00:05:09,909 --> 00:05:15,708
+although it was influential in leading
+Terry Sejnowski and I to the ideas behind
+
+65
+00:05:15,708 --> 00:05:21,435
+Boltzmann machines, it's actually a big
+distraction from understanding Boltzmann
+
+66
+00:05:21,435 --> 00:05:25,585
+machines.
+So, I'm not going to talk about it anymore
+
+67
+00:05:25,585 --> 00:05:29,139
+in this course even though it's a very
+interesting idea.
+
+68
+00:05:29,139 --> 00:05:33,835
+And, from now on, I'm going to use binary
+stochastic units that have a temperature
+
+69
+00:05:33,835 --> 00:05:37,043
+of one.
+That is, it's the standard logistic
+
+70
+00:05:37,043 --> 00:05:41,885
+function in the energy gap.
+So, one concept that you need to
+
+71
+00:05:41,885 --> 00:05:47,526
+understand in order to understand the
+learning procedure for both the machines,
+
+72
+00:05:47,526 --> 00:05:53,052
+is the concept of thermal equilibrium.
+And because we're setting the temperature
+
+73
+00:05:53,052 --> 00:05:57,120
+to one, this the concept of thermal
+equilibrium at a fix temperature.
+
+74
+00:05:57,120 --> 00:06:01,845
+It's a difficult concept. Most people
+think that it means the system is settled
+
+75
+00:06:01,845 --> 00:06:06,631
+down and isn't changing anymore. That's
+normally what equilibrium means. But it's
+
+76
+00:06:06,631 --> 00:06:10,280
+not the states of the individual units
+that are settled down.
+
+77
+00:06:10,920 --> 00:06:16,411
+The individual units are still rattling
+around at thermal equilibrium, and less
+
+78
+00:06:16,411 --> 00:06:22,111
+temperature zero. The thing that settles
+down is the probability distribution over
+
+79
+00:06:22,111 --> 00:06:27,672
+configurations. That's a difficult concept
+the first time you meet it, and so I'm
+
+80
+00:06:27,672 --> 00:06:32,520
+going to give you an example.
+The probability distribution settles to a
+
+81
+00:06:32,520 --> 00:06:36,145
+particular distribution called the
+Stationary Distribution.
+
+82
+00:06:36,145 --> 00:06:41,000
+The stationary distribution is determined
+by the energy function of the system.
+
+83
+00:06:41,260 --> 00:06:45,550
+And, in fact, in the stationary
+distribution, the probability of any
+
+84
+00:06:45,550 --> 00:06:49,580
+configuration is proportional to each of
+the minus its energy.
+
+85
+00:06:50,000 --> 00:06:55,405
+A nice intuitive way to think about
+thermal equilibrium is to imagine a huge
+
+86
+00:06:55,405 --> 00:07:00,810
+ensemble of identical systems that all
+have exactly the same energy function.
+
+87
+00:07:00,810 --> 00:07:06,356
+So, imagine a very large number of
+stochastic Hopfield nets all with the same
+
+88
+00:07:06,356 --> 00:07:09,725
+weights.
+Now, in that huge ensemble, we can define
+
+89
+00:07:09,725 --> 00:07:15,411
+the probability of configuration as the
+fraction of the systems that are in that
+
+90
+00:07:15,411 --> 00:07:19,343
+configuration.
+So, now we can understand what's happening
+
+91
+00:07:19,343 --> 00:07:25,452
+as we approach thermal equilibrium.
+We can start with any distribution we like
+
+92
+00:07:25,452 --> 00:07:29,501
+over all these identical systems. We could
+make them all, be in the same
+
+93
+00:07:29,501 --> 00:07:33,550
+configuration. So, that's the distribution
+with a property of one on one
+
+94
+00:07:33,550 --> 00:07:37,941
+configuration, and zero on everything
+else. Or we could start them off, with an
+
+95
+00:07:37,941 --> 00:07:41,078
+equal number of systems in each possible
+configuration.
+
+96
+00:07:41,078 --> 00:07:45,514
+So that's a uniform distribution.
+And then, we're going to keep applying our
+
+97
+00:07:45,514 --> 00:07:49,247
+stochastic update rule.
+Which, in the case of a stochastic
+
+98
+00:07:49,247 --> 00:07:53,373
+Hopfield net would mean,
+You pick a unit, and you look at its
+
+99
+00:07:53,373 --> 00:07:56,713
+energy gap.
+And you make a random decision based on
+
+100
+00:07:56,713 --> 00:08:00,578
+that energy gap about whether to turn it
+on or turn it off.
+
+101
+00:08:00,578 --> 00:08:03,460
+Then, you go and pick another unit, and so
+on.
+
+102
+00:08:03,880 --> 00:08:10,001
+We keep applying that stochastic rule.
+And after we've run systems stochastically
+
+103
+00:08:10,001 --> 00:08:13,499
+in this way,
+We may eventually reach a situation where
+
+104
+00:08:13,499 --> 00:08:17,840
+the fraction of the systems in each
+configuration remains constant.
+
+105
+00:08:17,840 --> 00:08:22,051
+In fact, that's what will happen if we
+have symmetric connections.
+
+106
+00:08:22,051 --> 00:08:26,975
+That's the stationary distribution that
+physicists call thermal equilibrium.
+
+107
+00:08:26,975 --> 00:08:30,214
+Any given system keeps changing its
+configuration.
+
+108
+00:08:30,214 --> 00:08:34,296
+We apply the update rule,
+And the states of its units will keep
+
+109
+00:08:34,296 --> 00:08:39,226
+flipping between zero and one.
+But, the fraction of systems in any
+
+110
+00:08:39,226 --> 00:08:45,098
+particular configuration doesn't change.
+And that's because we have many, many more
+
+111
+00:08:45,098 --> 00:08:51,000
+systems than we have configurations.
+So, here's an analogy kust to help with
+
+112
+00:08:51,000 --> 00:08:55,443
+the concept.
+Imagine a very large casino in Las Vegas
+
+113
+00:08:55,443 --> 00:09:00,416
+with lots of card dealers. And, in fact,
+we have many more than 52 factorial card
+
+114
+00:09:00,416 --> 00:09:05,848
+dealers. We start with all the card packs
+in the standard order that they come from
+
+115
+00:09:05,848 --> 00:09:11,149
+the manufacturer. Let's suppose that has
+the ace of spades, and the king of spades,
+
+116
+00:09:11,149 --> 00:09:15,688
+and the queen of spades.
+And then, the dealers all start shuffling.
+
+117
+00:09:15,688 --> 00:09:20,930
+And they do random shuffles, they don't do
+fancy shuffles that bring them back to the
+
+118
+00:09:20,930 --> 00:09:24,569
+same order again.
+After a few shuffles, there's still a good
+
+119
+00:09:24,569 --> 00:09:29,502
+chance that the king of spades will be
+next to the queen of spades in any given
+
+120
+00:09:29,502 --> 00:09:32,401
+pack.
+So, the packs have not yet forgotten where
+
+121
+00:09:32,401 --> 00:09:35,731
+they started.
+Their initial order is still influencing
+
+122
+00:09:35,731 --> 00:09:39,184
+their current order.
+If we keep shuffling, eventually the
+
+123
+00:09:39,184 --> 00:09:43,622
+initial order will be irrelevant.
+The packs will have forgotten where they
+
+124
+00:09:43,622 --> 00:09:46,377
+started.
+And, in fact, in this example, there will
+
+125
+00:09:46,377 --> 00:09:50,596
+be an equal number of packs in each of the
+52 factorial possible orders.
+
+126
+00:09:50,596 --> 00:09:53,410
+Once this has happened, if we carry on
+shuffling,
+
+127
+00:09:53,410 --> 00:09:58,126
+There'll still be an equal number of packs
+in each of the 52 factorial orders.
+
+128
+00:09:58,126 --> 00:10:02,419
+That's why it's called equilibrium.
+It's because the fraction in any one
+
+129
+00:10:02,419 --> 00:10:06,531
+configuration doesn't change,
+Even though the individual systems are
+
+130
+00:10:06,531 --> 00:10:09,917
+still changing.
+The thing that's wrong with this analogy
+
+131
+00:10:09,917 --> 00:10:14,634
+is that once we've each equilibrium here,
+all configurations have equal energy.
+
+132
+00:10:14,634 --> 00:10:17,173
+And so, they all have the same
+probability.
+
+133
+00:10:17,173 --> 00:10:21,708
+In general, we're interested in reaching
+equilibrium for systems where some
+
+134
+00:10:21,708 --> 00:10:24,430
+configurations have lower energy than
+others.

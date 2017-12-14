@@ -1,0 +1,779 @@
+1
+00:00:00,000 --> 00:00:06,019
+The next few videos are about using the
+back propagation algorithm to learn a
+
+2
+00:00:06,019 --> 00:00:10,016
+feature representation of the meaning of
+the word.
+
+3
+00:00:10,046 --> 00:00:16,014
+I'm gonna start with a very simple case
+from the 1980s, when computers were very
+
+4
+00:00:16,014 --> 00:00:19,041
+slow.
+It's a small case, but it illustrates the
+
+5
+00:00:19,041 --> 00:00:24,060
+idea about how you can take some
+relational information, and use the back
+
+6
+00:00:24,060 --> 00:00:30,022
+propagation algorithm to turn relational
+information into feature vectors that
+
+7
+00:00:30,022 --> 00:00:35,020
+capture the meanings of words.
+This diagram shows a simple family tree,
+
+8
+00:00:35,020 --> 00:00:40,067
+in which, for example, Christopher and
+Penelope marry, and have children Arthur
+
+9
+00:00:40,067 --> 00:00:45,088
+and Victoria.
+What we'd like is to train a neural
+
+10
+00:00:45,088 --> 00:00:49,083
+network to understand the information in
+this family tree.
+
+11
+00:00:49,083 --> 00:00:55,054
+We've also given it another family tree of
+Italian people which has pretty much the
+
+12
+00:00:55,054 --> 00:01:00,043
+same structure as the English tree.
+And perhaps when it tries to learn both
+
+13
+00:01:00,043 --> 00:01:05,062
+sets of facts, the neural net is going to
+be able to take advantage of that analogy.
+
+14
+00:01:05,062 --> 00:01:10,062
+The information in these family trees can
+be expressed as a set of propositions.
+
+15
+00:01:10,062 --> 00:01:15,012
+If we make up names for the relationships
+depicted by the trees.
+
+16
+00:01:15,012 --> 00:01:20,054
+So we're gonna use the relationships son
+daughter, nephew niece, father mother,
+
+17
+00:01:20,054 --> 00:01:23,056
+uncle aunt, brother sister and husband
+wife.
+
+18
+00:01:23,056 --> 00:01:29,054
+And using those relationships we can write
+down a set of triples such as, Colleen has
+
+19
+00:01:29,054 --> 00:01:34,040
+father James, Colleen has mother Victoria
+and James has wife Victoria.
+
+20
+00:01:34,040 --> 00:01:40,068
+And in the nice simple families depicted
+in the diagram, the third proposition
+
+21
+00:01:40,068 --> 00:01:46,023
+follows from the previous two.
+Similarly, the third proposition in the
+
+22
+00:01:46,023 --> 00:01:52,096
+next set follows from the previous two.
+So the relational learning task, that is,
+
+23
+00:01:52,096 --> 00:01:59,017
+the task of learning the information in
+those family trees, can be viewed as
+
+24
+00:01:59,017 --> 00:02:05,013
+figuring out the regularities in a large
+set of triples that express the
+
+25
+00:02:05,013 --> 00:02:10,039
+information in those trees.
+Now the obvious way to express
+
+26
+00:02:10,039 --> 00:02:15,041
+irregularities is as symbolic rules.
+For example, X has mother Y, and Y has
+
+27
+00:02:15,041 --> 00:02:20,043
+husband Z, implies X has father Z.
+We could search for such rules, but this
+
+28
+00:02:20,043 --> 00:02:24,713
+would involve a search through quite a
+large space, a combinatorially large
+
+29
+00:02:24,713 --> 00:02:30,094
+space, of discrete possibilities.
+A very different way to try and capture
+
+30
+00:02:30,094 --> 00:02:37,008
+the same information is to use a neural
+network that searches through a continuous
+
+31
+00:02:37,008 --> 00:02:41,083
+space of real valued weights to try and
+capture the information.
+
+32
+00:02:41,083 --> 00:02:48,019
+And the way it's going to do that is we're
+going to say it's captured the information
+
+33
+00:02:48,019 --> 00:02:53,031
+if it can predict the third terminal
+triple from the first two terms.
+
+34
+00:02:53,031 --> 00:02:58,071
+So at the bottom of this diagram here,
+We're going to put in a person and a
+
+35
+00:02:58,071 --> 00:03:04,065
+relationship and the information is going
+to flow forwards through this neural
+
+36
+00:03:04,065 --> 00:03:08,048
+network.
+And what we are going to try to get out of
+
+37
+00:03:08,048 --> 00:03:14,041
+the neural network after it's learned is
+the person who's related to the first
+
+38
+00:03:14,041 --> 00:03:19,098
+person by that relationship.
+The architecture of this net was designed
+
+39
+00:03:19,098 --> 00:03:23,066
+by hand, that is I decided how many layers
+it should have.
+
+40
+00:03:23,066 --> 00:03:28,068
+And I also decided where to put bottle
+necks to force it to learn interesting
+
+41
+00:03:28,068 --> 00:03:32,502
+representations.
+So what we do is we encode the information
+
+42
+00:03:32,502 --> 00:03:36,031
+in a neutral way, because there are 24
+possible people.
+
+43
+00:03:36,031 --> 00:03:41,088
+So the block at the bottom of the diagram
+that says, local encoding of person one,
+
+44
+00:03:41,088 --> 00:03:47,046
+has 24 neurons, and exactly one of those
+will be turned on for each training case.
+
+45
+00:03:47,046 --> 00:03:53,018
+Similarly there are twelve relationships.
+And exactly one of the relationship units
+
+46
+00:03:53,018 --> 00:03:56,091
+will be turned on.
+And then for a relationship that has a
+
+47
+00:03:56,091 --> 00:04:02,010
+unique answer, we would like one of the 24
+people at the top, one of the 24 output
+
+48
+00:04:02,010 --> 00:04:07,089
+people to turn on to represent the answer.
+By using a representation in which exactly
+
+49
+00:04:07,089 --> 00:04:12,079
+one of the neurons is on, we don't
+accidentally give the network any
+
+50
+00:04:12,079 --> 00:04:17,012
+similarities between people.
+All pairs of people are equally
+
+51
+00:04:17,012 --> 00:04:20,051
+dissimilar.
+So, we're not cheating by giving the
+
+52
+00:04:20,051 --> 00:04:26,028
+network information about who's like who.
+The people, as far as the network is
+
+53
+00:04:26,028 --> 00:04:33,014
+concerned, are uninterpreted symbols.
+But now in the next layer of the network,
+
+54
+00:04:33,014 --> 00:04:39,055
+we've taken the local encoding of person
+one, and we've connected it to a small set
+
+55
+00:04:39,055 --> 00:04:45,088
+of neurons, actually six neurons for this.
+And because there are 24 people, it can't
+
+56
+00:04:45,088 --> 00:04:49,027
+possibly dedicate one neuron to each
+person.
+
+57
+00:04:49,027 --> 00:04:54,091
+It has to re-represent the people as
+patterns of activity over those six
+
+58
+00:04:54,091 --> 00:04:59,046
+neurons.
+And what we're hoping is that when it
+
+59
+00:04:59,046 --> 00:05:05,382
+learns these propositions, the way in
+which thing encodes a person, in that
+
+60
+00:05:05,382 --> 00:05:10,074
+distributive panel activities.
+Will reveal structuring the task, or
+
+61
+00:05:10,074 --> 00:05:14,837
+structuring the domain.
+So what we're going to do is we're going
+
+62
+00:05:14,837 --> 00:05:18,140
+to train it up on 112 of these
+propositions.
+
+63
+00:05:18,140 --> 00:05:21,978
+And we go through the 112 propositions
+many times.
+
+64
+00:05:21,978 --> 00:05:26,779
+Slowly changing the weights as we go,
+using back propagation.
+
+65
+00:05:26,779 --> 00:05:32,786
+And after training we're gonna look at the
+six units in that layer that says
+
+66
+00:05:32,786 --> 00:05:37,390
+distributed encoding of person one to see
+what they are doing.
+
+67
+00:05:37,390 --> 00:05:41,017
+So here are those six units as the big
+gray blocks.
+
+68
+00:05:41,017 --> 00:05:46,621
+And I laid out the 24 people, with the
+twelve English people in a row along the
+
+69
+00:05:46,621 --> 00:05:50,144
+top, and the twelve Italian people in a
+row underneath.
+
+70
+00:05:50,144 --> 00:05:54,077
+So each of these blocks you'll see, has 24
+blobs in it.
+
+71
+00:05:54,077 --> 00:05:59,412
+And the blobs tell you the incoming
+weights for one of the hidden units in
+
+72
+00:05:59,412 --> 00:06:02,588
+that layer.
+So going back to the previous slide.
+
+73
+00:06:02,588 --> 00:06:07,914
+If you look at that layer that says
+distributed and coding of person one.
+
+74
+00:06:07,914 --> 00:06:13,008
+There are six neurons there.
+And we're looking at the incoming weights
+
+75
+00:06:13,008 --> 00:06:19,579
+of each of those six neurons.
+If you look at the big gray rectangle on
+
+76
+00:06:19,579 --> 00:06:24,966
+the top right, you'll see an interesting
+structure to the weights.
+
+77
+00:06:24,966 --> 00:06:30,017
+The weights along the top that come from
+English people are all positive.
+
+78
+00:06:30,017 --> 00:06:33,047
+And the weights along the bottom are all
+negative.
+
+79
+00:06:33,047 --> 00:06:38,063
+That means this unit tells you whether the
+input person is English or Italian.
+
+80
+00:06:38,063 --> 00:06:41,060
+We never gave it that information
+explicitly.
+
+81
+00:06:41,060 --> 00:06:46,036
+But obviously, it's useful information to
+have in this very simple world.
+
+82
+00:06:46,036 --> 00:06:51,045
+Because in the family trees that we're
+learning about, if the input person is
+
+83
+00:06:51,045 --> 00:06:54,036
+English, the output person is always
+English.
+
+84
+00:06:54,036 --> 00:07:00,008
+And so just knowing that someone's English
+already allows you to predict one bit of
+
+85
+00:07:00,008 --> 00:07:04,099
+information about the output.
+Which is according to saying it halves the
+
+86
+00:07:04,099 --> 00:07:09,042
+number of possibilities.
+If you look at the gray blob immediately
+
+87
+00:07:09,042 --> 00:07:14,061
+below that, the second one down on the
+right, you'll see that it has four big
+
+88
+00:07:14,061 --> 00:07:20,007
+positive weights at the beginning.
+Those correspond to Christopher and Andrew
+
+89
+00:07:20,007 --> 00:07:24,046
+with our Italian equivalents.
+Then it has some smaller weights.
+
+90
+00:07:24,046 --> 00:07:29,010
+Then it has two big negative weights, that
+correspond to Collin, or his Italian
+
+91
+00:07:29,010 --> 00:07:31,090
+equivalent.
+Then there's four more big positive
+
+92
+00:07:31,090 --> 00:07:36,043
+weights, corresponding to Penelope or
+Christina, or their Italian equivalents.
+
+93
+00:07:36,043 --> 00:07:40,065
+And right at the end, there's two big
+negative weights, corresponding to
+
+94
+00:07:40,065 --> 00:07:46,094
+Charlotte, or her Italian equivalent.
+By now you've probably realized that, that
+
+95
+00:07:46,094 --> 00:07:50,034
+neuron represents what generation somebody
+is.
+
+96
+00:07:50,034 --> 00:07:56,026
+It has big positive weights to the oldest
+generation, big negative weight to the
+
+97
+00:07:56,026 --> 00:08:01,081
+youngest generation, and intermediate
+weights which are roughly zero to the
+
+98
+00:08:01,081 --> 00:08:06,047
+intermediate generation.
+So that's really a three-value feature,
+
+99
+00:08:06,047 --> 00:08:10,016
+and it's telling you the generation of the
+person.
+
+100
+00:08:10,016 --> 00:08:15,093
+Finally, if you look at the bottom gray
+rectangle on the left hand side, you'll
+
+101
+00:08:15,093 --> 00:08:22,558
+see that has a different structure, and if
+we look at the top row and we look at the
+
+102
+00:08:22,558 --> 00:08:25,646
+negative weights in the top row of that
+unit.
+
+103
+00:08:25,646 --> 00:08:31,053
+It has a negative weight to Andrew, James,
+Charles, Christine and Jennifer and now if
+
+104
+00:08:31,053 --> 00:08:36,947
+you look at the English family tree you'll
+see Andrew, James, Charles, Christine, and
+
+105
+00:08:36,947 --> 00:08:41,366
+Jennifer are all in the right hand branch
+of the family tree.
+
+106
+00:08:41,366 --> 00:08:46,844
+So that unit has learned to represent
+which branch of the family tree someone is
+
+107
+00:08:46,844 --> 00:08:49,063
+in.
+Again, that's a very useful feature to
+
+108
+00:08:49,063 --> 00:08:53,546
+have for predicting the output person,
+because if you know it's a close family
+
+109
+00:08:53,546 --> 00:08:58,485
+relationship, you expect the output to be
+in the same branch of the family tree as
+
+110
+00:08:58,485 --> 00:09:01,536
+the input.
+So the networks in the bottleneck have
+
+111
+00:09:01,536 --> 00:09:06,681
+learned to represent features of people
+that are useful for predicting the answer.
+
+112
+00:09:06,681 --> 00:09:10,607
+And notice, we didn't tell it anything
+about what features to use.
+
+113
+00:09:10,607 --> 00:09:15,694
+We never mentioned things like nationality
+or brunch or family tree or generation.
+
+114
+00:09:15,694 --> 00:09:20,397
+It figured out that those are good
+features for expressing the regularity in
+
+115
+00:09:20,397 --> 00:09:23,663
+this domain.
+Of course, those features are only useful
+
+116
+00:09:23,663 --> 00:09:28,058
+if the other bottlenecks, the one for
+relationships, and the one near the top of
+
+117
+00:09:28,058 --> 00:09:31,526
+the network before the output person, use
+similar representations.
+
+118
+00:09:31,526 --> 00:09:36,053
+And the central layer is able to say how
+the features of the input person and the
+
+119
+00:09:36,053 --> 00:09:40,620
+features of the relationship predict the
+features of the output person.
+
+120
+00:09:40,620 --> 00:09:46,552
+So for example if the input person is a
+generation three, and the relationship
+
+121
+00:09:46,552 --> 00:09:51,977
+requires the output person to be one
+generation up, then the output person is a
+
+122
+00:09:51,977 --> 00:09:55,623
+generation two.
+But notice to capture that rule, you have
+
+123
+00:09:55,623 --> 00:10:01,288
+to extract appropriate features at the
+first hidden layer, and the last hidden
+
+124
+00:10:01,288 --> 00:10:05,497
+layer of the network.
+And you have to make the units in the
+
+125
+00:10:05,497 --> 00:10:12,650
+middle, relate those features correctly.
+Another way to see that the network works,
+
+126
+00:10:12,650 --> 00:10:15,742
+is to train it on all but a few of the
+triples.
+
+127
+00:10:15,742 --> 00:10:19,682
+And see if it can complete those triples
+correctly.
+
+128
+00:10:19,682 --> 00:10:24,210
+So does it generalize?
+So there's 112 triples, and I trained it
+
+129
+00:10:24,210 --> 00:10:30,022
+on 108 of them and tested it on the
+remaining four, I did that several times
+
+130
+00:10:30,022 --> 00:10:33,401
+and it got either two or three of those
+right.
+
+131
+00:10:33,401 --> 00:10:39,268
+That's not so bad for a 24 way choice, so
+it's true it makes mistakes, but it didn't
+
+132
+00:10:39,268 --> 00:10:44,652
+have much training data, there's not
+enough triples in this domain to really
+
+133
+00:10:44,652 --> 00:10:50,282
+nail down the regularities very well.
+And it does much better than chance.
+
+134
+00:10:50,282 --> 00:10:56,642
+If you train it on a much bigger data set,
+it can generalize from a much smaller
+
+135
+00:10:56,642 --> 00:11:00,696
+fraction of the data.
+So if you have thousands and thousands of
+
+136
+00:11:00,696 --> 00:11:05,138
+relationships you only need to show a
+small percentage before it can start
+
+137
+00:11:05,138 --> 00:11:09,454
+guessing the other ones correctly.
+That research was done in the 1980s, and
+
+138
+00:11:09,454 --> 00:11:13,755
+was a way of showing that back-propagation
+could learn interesting features.
+
+139
+00:11:13,755 --> 00:11:17,546
+And it was a toy example.
+Now we have much bigger computers, and we
+
+140
+00:11:17,546 --> 00:11:20,445
+have databases of millions of relational
+facts.
+
+141
+00:11:20,445 --> 00:11:25,877
+Many of which of the form A, R, B, A has
+relationship R to B, we could imagine
+
+142
+00:11:25,877 --> 00:11:31,968
+training a net to discover feature vector
+representations of A and R, that allow it
+
+143
+00:11:31,968 --> 00:11:35,769
+to predict the feature vector
+representation of B.
+
+144
+00:11:35,769 --> 00:11:41,069
+If we did that, it would be a very good
+way of cleaning a database.
+
+145
+00:11:41,069 --> 00:11:45,703
+It wouldn't necessarily be able to make
+perfect predictions.
+
+146
+00:11:45,703 --> 00:11:51,982
+But it could find things in the database
+that it thought were highly implausible.
+
+147
+00:11:51,982 --> 00:11:57,474
+So if the database contained information,
+like, for example, Bach was born in 1902.
+
+148
+00:11:57,474 --> 00:12:02,540
+It could probably realize that was wrong,
+'cuz Bach's a much older kind of person,
+
+149
+00:12:02,540 --> 00:12:06,069
+and everything else he's related to is
+much older than 1902.
+
+150
+00:12:06,069 --> 00:12:10,562
+Instead of actually using the first two
+terms to predict the third term, we could
+
+151
+00:12:10,562 --> 00:12:14,986
+use the whole set of terms, three of them
+in this case, but possibly more, and
+
+152
+00:12:14,986 --> 00:12:17,784
+predict the probability that the fact is
+correct.
+
+153
+00:12:17,784 --> 00:12:22,541
+To train a net to do that, we'd need
+examples of a whole bunch of correct
+
+154
+00:12:22,541 --> 00:12:25,442
+facts, and we'd ask it to give a high
+output.
+
+155
+00:12:25,442 --> 00:12:29,619
+We'd also need a good source of incorrect
+facts, and we'd ask it to give a low
+
+156
+00:12:29,619 --> 00:12:32,079
+output when we're told it was something
+that was false.

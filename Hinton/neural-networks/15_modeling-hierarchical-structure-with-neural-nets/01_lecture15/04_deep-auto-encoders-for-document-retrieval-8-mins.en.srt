@@ -1,0 +1,519 @@
+1
+00:00:00,000 --> 00:00:05,110
+In this video, I'm going to talk about 
+applying deep autoencoders to document 
+
+2
+00:00:05,110 --> 00:00:08,320
+retrieval. 
+There was a method developed some time 
+
+3
+00:00:08,320 --> 00:00:13,692
+ago called latent semantic analysis, that 
+amounts to applying principal components 
+
+4
+00:00:13,692 --> 00:00:17,623
+analysis to vectors of word counts 
+extracted from documents. 
+
+5
+00:00:17,623 --> 00:00:22,602
+The codes produced by latent semantic 
+analysis can then be used for judging 
+
+6
+00:00:22,602 --> 00:00:27,320
+similarity between documents so they can 
+be used for document retrieval. 
+
+7
+00:00:27,320 --> 00:00:32,646
+Obviously, if deep autoencoders work much 
+better than PCA, we would expect to be 
+
+8
+00:00:32,646 --> 00:00:37,840
+able to extract much better codes using a 
+deep autoencoder than using latent 
+
+9
+00:00:37,840 --> 00:00:41,302
+semantic analysis. 
+And Rus-lan Salakhutdinov and I showed 
+
+10
+00:00:41,302 --> 00:00:45,781
+that, that was indeed the case. 
+Using a big database of documents, we 
+
+11
+00:00:45,781 --> 00:00:51,280
+showed that ten components extracted with 
+a deep autoencoder are actually worth 
+
+12
+00:00:51,280 --> 00:00:56,377
+more than 50 components extracted with a 
+linear method, like latent semantic 
+
+13
+00:00:56,377 --> 00:00:59,731
+analysis. 
+We also showed that if you make the code 
+
+14
+00:00:59,731 --> 00:01:04,761
+very small, having just two components, 
+you can use those two components for 
+
+15
+00:01:04,761 --> 00:01:08,651
+visualizing documents as a point in a 
+two-dimensional map. 
+
+16
+00:01:08,651 --> 00:01:13,882
+And this, again, works much better than 
+just extracting the first two principal 
+
+17
+00:01:13,882 --> 00:01:17,470
+components. 
+To find documents that are similar to a 
+
+18
+00:01:17,470 --> 00:01:21,551
+query document, 
+the first thing we do is convert each 
+
+19
+00:01:21,551 --> 00:01:27,336
+document into a big bag of words. 
+In other words, we have a vector of word 
+
+20
+00:01:27,336 --> 00:01:31,140
+counts that ignores the order of the 
+words. 
+
+21
+00:01:31,140 --> 00:01:34,700
+This clearly throws away quite a lot of 
+information. 
+
+22
+00:01:34,700 --> 00:01:39,286
+But it also retains a lot of information 
+about the topic of the document. 
+
+23
+00:01:39,286 --> 00:01:43,935
+We ignore words like the or over" which 
+are called stop words," because they 
+
+24
+00:01:43,935 --> 00:01:46,700
+don't have much information about the 
+topic. 
+
+25
+00:01:46,700 --> 00:01:51,966
+So if you look on the right, I've done 
+the counts for various words, and they're 
+
+26
+00:01:51,966 --> 00:01:55,233
+actually the counts for the document on 
+the left. 
+
+27
+00:01:55,233 --> 00:01:59,033
+So, if you look at what words we have 
+nonzero counts for, 
+
+28
+00:01:59,033 --> 00:02:03,300
+they are vector, and count, and query, 
+and reduce, and bag, and a word, 
+
+29
+00:02:03,300 --> 00:02:07,300
+that tells you quite a lot about what the 
+document is about. 
+
+30
+00:02:07,300 --> 00:02:12,859
+Now, we could compare the word counts of 
+the query document with the word counts 
+
+31
+00:02:12,859 --> 00:02:17,724
+of millions of other documents. 
+But that would involve comparing quite 
+
+32
+00:02:17,724 --> 00:02:21,059
+big vectors. 
+In fact, we use vectors of size 2000. 
+
+33
+00:02:21,059 --> 00:02:25,229
+So, that would be slow. 
+Alternatively, we could use each query 
+
+34
+00:02:25,229 --> 00:02:30,580
+vector to a much smaller vector that 
+still contained most of the information 
+
+35
+00:02:30,580 --> 00:02:35,053
+about the content. 
+So, here's how we do the reduction. 
+
+36
+00:02:35,053 --> 00:02:40,803
+We take the deep autoencoder and we 
+compress the 2,000-word counts down to 
+
+37
+00:02:40,803 --> 00:02:45,819
+ten real numbers, from which we can 
+reconstruct the 2,000-word counts, 
+
+38
+00:02:45,819 --> 00:02:49,090
+although we can't reconstruct them very 
+well. 
+
+39
+00:02:49,090 --> 00:02:54,711
+We train the neural network to reproduce 
+its input vector as its output vector as 
+
+40
+00:02:54,711 --> 00:02:58,207
+well as possible. 
+And that forces it to put as much 
+
+41
+00:02:58,207 --> 00:03:02,526
+information about the input into those 
+ten numbers as possible. 
+
+42
+00:03:02,526 --> 00:03:06,160
+We can then compare documents using just 
+ten numbers. 
+
+43
+00:03:06,160 --> 00:03:11,086
+That's going to be much faster. 
+So, there's one problem with this, which 
+
+44
+00:03:11,086 --> 00:03:15,449
+is word counts aren't quite the same as 
+pixels or real values. 
+
+45
+00:03:15,449 --> 00:03:20,798
+What we do is we divide the counts in a 
+bag of words by the total number of 
+
+46
+00:03:20,798 --> 00:03:25,935
+non-stop words and that converts the 
+vector of counts into a probability 
+
+47
+00:03:25,935 --> 00:03:32,085
+vector where the numbers add up to one. 
+You can think of it as the probability of 
+
+48
+00:03:32,085 --> 00:03:37,996
+getting a particular word if you picked a 
+word at random in the document, as long 
+
+49
+00:03:37,996 --> 00:03:42,958
+as that is not a stop word. 
+So, the output of the autoencoder, we're 
+
+50
+00:03:42,958 --> 00:03:47,775
+using a great, big 2,000-way softmax. 
+And our target values are the 
+
+51
+00:03:47,775 --> 00:03:53,540
+probabilities of words when we reduce the 
+count vector to a probability factor. 
+
+52
+00:03:53,540 --> 00:04:00,312
+There's one further trick we have to do. 
+We treat the word counts as probabilities 
+
+53
+00:04:00,312 --> 00:04:06,443
+when we're reconstructing them. 
+But when we're using them to activate the 
+
+54
+00:04:06,443 --> 00:04:11,120
+first hidden layer, we multiply all the 
+weights by N. 
+
+55
+00:04:11,120 --> 00:04:15,771
+And that's because we have N different 
+observations from that probability 
+
+56
+00:04:15,771 --> 00:04:19,903
+distribution. 
+If we left them as probabilities, the 
+
+57
+00:04:19,903 --> 00:04:25,167
+input units would have very small 
+activities and wouldn't provide much 
+
+58
+00:04:25,167 --> 00:04:30,619
+input to the first hidden layer. 
+So, we have this funny property that for 
+
+59
+00:04:30,619 --> 00:04:36,177
+the first restricted Boltzmann machine, 
+the bottom up weights, are N times bigger 
+
+60
+00:04:36,177 --> 00:04:40,160
+than the top down weights. 
+So, how well does this work? 
+
+61
+00:04:40,160 --> 00:04:45,988
+We trained using bags of 2,000 words on 
+4,000 business documents from the Reuters 
+
+62
+00:04:45,988 --> 00:04:49,121
+data set. 
+And these documents had been hand 
+
+63
+00:04:49,121 --> 00:04:52,400
+labelled with about a 100 different 
+categories. 
+
+64
+00:04:52,400 --> 00:04:57,865
+We first trained a stack of restricted 
+Boltzmann machines, and then, we fine 
+
+65
+00:04:57,865 --> 00:05:03,800
+tuned with back propagation using a 
+2,000-way softmax as the output. 
+
+66
+00:05:03,800 --> 00:05:08,120
+And then, we test it on a different set 
+of 4,000 documents. 
+
+67
+00:05:09,580 --> 00:05:15,840
+And to test, you pick one document to be 
+the query, one of the test documents, 
+
+68
+00:05:15,840 --> 00:05:21,183
+and then you rank order all the other 
+test documents by using the cosine of the 
+
+69
+00:05:21,183 --> 00:05:26,640
+angles between the ten-dimensional 
+vectors that the ordering code gives you. 
+
+70
+00:05:26,640 --> 00:05:34,520
+You repeat this for each of the 4,000 
+possible test documents and then you plot 
+
+71
+00:05:34,520 --> 00:05:39,549
+the number of documents you're going to 
+retrieve, that is how far down that rank 
+
+72
+00:05:39,549 --> 00:05:44,139
+list you're going to go, against the 
+proportion that are in the same hand 
+
+73
+00:05:44,139 --> 00:05:48,917
+labelled class as the query document. 
+This is not a very good measure of the 
+
+74
+00:05:48,917 --> 00:05:53,003
+quality of the retrieval. 
+But we're going to use the same measure 
+
+75
+00:05:53,003 --> 00:05:56,838
+for comparing the LSA. 
+And so, at least, it's a fair comparison. 
+
+76
+00:05:56,838 --> 00:06:01,931
+So, here's the accuracy of the retrieval 
+as a function of the number of retrieved 
+
+77
+00:06:01,931 --> 00:06:06,425
+documents. 
+When you see that an autoencoder was just 
+
+78
+00:06:06,425 --> 00:06:11,968
+using a code with ten real numbers is 
+doing better than latent emantic 
+
+79
+00:06:11,968 --> 00:06:18,336
+analysis, using 50 real numbers. 
+And, of course, it's five times less work 
+
+80
+00:06:18,336 --> 00:06:24,652
+per document after you've got the code. 
+Latent semantic analysis with ten real 
+
+81
+00:06:24,652 --> 00:06:29,534
+numbers is much worse. 
+We can also do the same thing where we 
+
+82
+00:06:29,534 --> 00:06:34,229
+reduce to two real numbers, and then, 
+instead of doing retrieval, we're just 
+
+83
+00:06:34,229 --> 00:06:39,139
+going to plot all the documents in a map 
+but we're going to color that 
+
+84
+00:06:39,139 --> 00:06:47,215
+two-dimensional point that corresponds to 
+the two numbers produced by PCA by the 
+
+85
+00:06:47,215 --> 00:06:51,488
+class of the document. 
+So, we took the major classes of the 
+
+86
+00:06:51,488 --> 00:06:55,024
+documents. 
+We gave those major classes different 
+
+87
+00:06:55,024 --> 00:06:59,615
+colors. 
+And then, we used PCA on log of one plus 
+
+88
+00:06:59,615 --> 00:07:04,589
+the count. 
+The point of doing that is that it 
+
+89
+00:07:04,589 --> 00:07:10,300
+suppresses counts with very big numbers 
+which tends to make PCA work better. 
+
+90
+00:07:11,980 --> 00:07:18,078
+This is the distribution you get. 
+As you can see, there is some separation 
+
+91
+00:07:18,078 --> 00:07:21,354
+of the classes. 
+The green class is in one place. 
+
+92
+00:07:21,354 --> 00:07:24,166
+The red class is in a slightly different 
+place. 
+
+93
+00:07:24,166 --> 00:07:29,849
+But the classes are very mixed up. 
+Then, we did the same thing by using a 
+
+94
+00:07:29,849 --> 00:07:35,566
+deep autoencoder to reduce the documents 
+to two numbers, and, again, plotting the 
+
+95
+00:07:35,566 --> 00:07:40,487
+documents in a two-dimensional space 
+using those two numbers as the 
+
+96
+00:07:40,487 --> 00:07:43,940
+coordinates. 
+And here's what we got. 
+
+97
+00:07:43,940 --> 00:07:47,696
+It's a much better layout. 
+It tells you much more about the 
+
+98
+00:07:47,696 --> 00:07:51,771
+structure of the data set. 
+You can see the different classes, and 
+
+99
+00:07:51,771 --> 00:07:54,699
+you can see that they're quite 
+well-separated. 
+
+100
+00:07:54,699 --> 00:07:59,474
+We assume that the documents in the 
+middle are ones which didn't have many 
+
+101
+00:07:59,474 --> 00:08:04,250
+words in them, and therefore, it was hard 
+to distinguish between the classes. 
+
+102
+00:08:04,250 --> 00:08:09,494
+A visual display like this could be very 
+useful. If, for example, you saw one of 
+
+103
+00:08:09,494 --> 00:08:15,008
+green dots was the accounts and earning 
+reports from Enron, you probably wouldn't 
+
+104
+00:08:15,008 --> 00:08:19,043
+want to buy shares in a company that has 
+a green dot nearby. 

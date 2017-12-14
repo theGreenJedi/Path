@@ -1,0 +1,569 @@
+1
+00:00:00,000 --> 00:00:05,974
+In this video, I'm going to describe a new
+way of combining a very large number of
+
+2
+00:00:05,974 --> 00:00:11,803
+neural network models without having to
+separately train a very large number of
+
+3
+00:00:11,803 --> 00:00:15,155
+models.
+This is a method called dropout that's
+
+4
+00:00:15,155 --> 00:00:19,090
+recently been very successful in winning
+competitions.
+
+5
+00:00:19,090 --> 00:00:23,136
+For each training case, we randomly omit
+some of the hidden units.
+
+6
+00:00:23,136 --> 00:00:27,245
+So, we end up with a different
+architecture for each training case.
+
+7
+00:00:27,245 --> 00:00:31,789
+We can think of this as having a different
+model for every training case.
+
+8
+00:00:31,789 --> 00:00:36,333
+And then, the question is, how could we
+possibly train a model on only one
+
+9
+00:00:36,333 --> 00:00:41,500
+training case and how could we average all
+these models together efficiently at test
+
+10
+00:00:41,500 --> 00:00:44,426
+time?
+The answer is that we use a great deal of
+
+11
+00:00:44,426 --> 00:00:47,477
+weight sharing.
+I want to start by describing two
+
+12
+00:00:47,477 --> 00:00:51,150
+different ways of combining the outputs of
+multiple models.
+
+13
+00:00:51,150 --> 00:00:57,260
+In a mixture, we combine models by
+averaging their output probabilities.
+
+14
+00:00:57,520 --> 00:01:03,299
+So, if model A assigns probabilities of
+0.3, 0.2 and 0.5, to three different
+
+15
+00:01:03,299 --> 00:01:09,247
+answers, model B assigns probabilities of
+0.1, 0.8 and 0.1, the combined model
+
+16
+00:01:09,247 --> 00:01:13,519
+simply assigns the averages of those
+probabilities.
+
+17
+00:01:13,519 --> 00:01:20,387
+A different way of combining models is to
+use a product of the probabilities. Here,
+
+18
+00:01:20,387 --> 00:01:24,660
+we take a geometric mean of the same
+probabilities.
+
+19
+00:01:25,040 --> 00:01:30,730
+So, model A and model B again assign the
+same probabilities as they did before.
+
+20
+00:01:30,730 --> 00:01:36,493
+But now, what we do is we multiply each
+pair of probabilities together and then
+
+21
+00:01:36,493 --> 00:01:40,505
+take the square root.
+That's the geometric mean and the
+
+22
+00:01:40,505 --> 00:01:44,517
+geometric means will generally add up to
+less than one.
+
+23
+00:01:44,517 --> 00:01:49,697
+So, we have to divide by the sum of the
+geometric means to normalize the
+
+24
+00:01:49,697 --> 00:01:52,980
+distribution so that it adds up to one
+again.
+
+25
+00:01:54,440 --> 00:02:01,573
+You'll notice that in a product, a small
+probability output by one model, has veto
+
+26
+00:02:01,573 --> 00:02:07,085
+power over the other models.
+Now I want to describe an efficient way to
+
+27
+00:02:07,085 --> 00:02:12,043
+average a large number of neural nets that
+gives us an alternative to doing the
+
+28
+00:02:12,043 --> 00:02:15,823
+correct Bayesian thing.
+The alternative probably doesn't work
+
+29
+00:02:15,823 --> 00:02:20,100
+quite as well as doing the correct
+Bayesian thing, but it's much more
+
+30
+00:02:20,100 --> 00:02:23,750
+practical.
+So, consider the neural net with one
+
+31
+00:02:23,750 --> 00:02:29,649
+hidden layer, shown on the right.
+Each time we present a training example to
+
+32
+00:02:29,649 --> 00:02:32,412
+it,
+What we're going to do is randomly emit
+
+33
+00:02:32,412 --> 00:02:35,520
+each hidden unit with a probability of
+0.5.
+
+34
+00:02:35,520 --> 00:02:38,905
+So, we crossed out three of the hidden
+units here.
+
+35
+00:02:38,905 --> 00:02:43,740
+And we run the example through the net
+with those hidden units absent.
+
+36
+00:02:43,740 --> 00:02:48,953
+What this means is that we're randomly
+sampling from two to the h architectures,
+
+37
+00:02:48,953 --> 00:02:53,775
+where h is the number of hidden units,
+It's a huge number of architectures.
+
+38
+00:02:53,775 --> 00:02:57,033
+Of course, all of these architectures show
+weights.
+
+39
+00:02:57,033 --> 00:03:02,116
+That ism whenever we use a hidden unit,
+it's got the same weight as it's got in
+
+40
+00:03:02,116 --> 00:03:07,634
+other architectures.
+So, we can think of dropout as a form of
+
+41
+00:03:07,634 --> 00:03:11,993
+model averaging.
+We sample from these two to the h models.
+
+42
+00:03:11,993 --> 00:03:15,740
+Most of the models, in fact, will never be
+sampled.
+
+43
+00:03:16,180 --> 00:03:20,140
+And a model of this sampled only gets one
+training example.
+
+44
+00:03:20,560 --> 00:03:25,905
+That's a very extreme form of bagging.
+The training sets are very different for
+
+45
+00:03:25,905 --> 00:03:29,062
+the different models, but they're also
+very small.
+
+46
+00:03:29,062 --> 00:03:34,214
+The sharing of the weights between all the
+models means that each model is very
+
+47
+00:03:34,214 --> 00:03:39,238
+strongly regularized by the others.
+And this is a much better regularizer than
+
+48
+00:03:39,238 --> 00:03:43,811
+things like L2 or L1 penalties.
+Those penalties pull the weights toward
+
+49
+00:03:43,811 --> 00:03:46,645
+zero.
+By sharing weights with other models, a
+
+50
+00:03:46,645 --> 00:03:51,605
+models gets regularized by something
+that's going to tend to pull the weight
+
+51
+00:03:51,605 --> 00:03:56,281
+towards the correct value.
+The question still remains what we do with
+
+52
+00:03:56,281 --> 00:03:59,459
+test time.
+So, we could sample many of the
+
+53
+00:03:59,459 --> 00:04:03,870
+architectures, maybe a hundred, and take
+the geometric mean of the output
+
+54
+00:04:03,870 --> 00:04:06,688
+distributions.
+But that would be a lot of work.
+
+55
+00:04:06,688 --> 00:04:12,662
+There's something much simpler we can do.
+We use all of the hidden units, but we
+
+56
+00:04:12,662 --> 00:04:17,456
+halve their outgoing weights.
+So, they have the same expected effect as
+
+57
+00:04:17,456 --> 00:04:23,953
+they did when we were sampling.
+It turns out that using all of the hidden
+
+58
+00:04:23,953 --> 00:04:29,694
+units with half their outgoing weights,
+exactly computes the geometric mean that
+
+59
+00:04:29,694 --> 00:04:35,147
+the predictions that all two to the h
+models would have used, provided we're
+
+60
+00:04:35,147 --> 00:04:40,706
+using a softmax output group.
+If we have more than one hidden layer, we
+
+61
+00:04:40,706 --> 00:04:44,020
+can simply use drop out at 0.5 in every
+layer.
+
+62
+00:04:44,600 --> 00:04:49,500
+At test time, we halve all the outgoing
+weights of hidden units,
+
+63
+00:04:49,760 --> 00:04:53,153
+And that gives us what I call the mean
+net.
+
+64
+00:04:53,153 --> 00:04:58,600
+So, we use a net that has all of the units
+but the weights are halved.
+
+65
+00:04:59,520 --> 00:05:05,157
+When we have multiple hidden layers, this
+is not exactly the same as averaging lots
+
+66
+00:05:05,157 --> 00:05:09,980
+of set per dropout model, but it's a good
+approximation and it's fast.
+
+67
+00:05:10,840 --> 00:05:16,063
+We could run lots of stochastic models
+with dropout, and then average across
+
+68
+00:05:16,063 --> 00:05:20,609
+those stochastic models.
+And that would have one advantage over the
+
+69
+00:05:20,609 --> 00:05:23,808
+mean net.
+It would give us an idea of the
+
+70
+00:05:23,808 --> 00:05:27,432
+uncertainty in the answer.
+What about the input layer?
+
+71
+00:05:27,432 --> 00:05:30,236
+Well, we can use the same trick there,
+too.
+
+72
+00:05:30,236 --> 00:05:35,912
+We use dropout on the inputs, but we use a
+higher probability of keeping an input.
+
+73
+00:05:35,912 --> 00:05:41,519
+This trick's already in use in a system
+called denoising autoencoders, developed
+
+74
+00:05:41,519 --> 00:05:46,511
+by Pascal Vincent, Hugo Laracholle and
+Yoshua Bengio at the University of
+
+75
+00:05:46,511 --> 00:05:50,882
+Montreal, and it works very well.
+So, how well does dropout work?
+
+76
+00:05:50,882 --> 00:05:55,528
+Well, the record breaking object
+recognition net developed by Alex
+
+77
+00:05:55,528 --> 00:05:59,823
+Krizhevsky would have broken the record
+even without dropout.
+
+78
+00:05:59,823 --> 00:06:05,666
+But it broke a lot more by using dropout.
+In general, if you have a deep neural net
+
+79
+00:06:05,666 --> 00:06:10,735
+and it's overfitting dropout, it will
+typically reduce the number errors by
+
+80
+00:06:10,735 --> 00:06:13,624
+quite a lot.
+I think any net that requires early
+
+81
+00:06:13,624 --> 00:06:17,736
+stopping in order to prevent it
+overfitting would do better by using
+
+82
+00:06:17,736 --> 00:06:22,376
+dropout. It would, of course, take longer
+to train and it might mean more hidden
+
+83
+00:06:22,376 --> 00:06:25,078
+units.
+If you got a deep neural net and it's not
+
+84
+00:06:25,078 --> 00:06:29,776
+overfitting, you should probably be using
+a bigger one and using dropout, that's
+
+85
+00:06:29,776 --> 00:06:32,420
+assuming you have enough computational
+power.
+
+86
+00:06:32,420 --> 00:06:37,195
+There's another way to think about
+dropout, which is how I originally arrived
+
+87
+00:06:37,195 --> 00:06:41,576
+at the idea.
+And you'll see it's a bit related to
+
+88
+00:06:41,576 --> 00:06:46,728
+mixtures of experts, and what's going
+wrong when all the experts cooperate,
+
+89
+00:06:46,728 --> 00:06:51,672
+What's preventing specialization?
+So, if a hidden unit knows which other
+
+90
+00:06:51,672 --> 00:06:57,451
+hidden units are present, it can co-adapt
+to the other hidden units on the training
+
+91
+00:06:57,451 --> 00:07:00,723
+data.
+What that means is, the real signal that's
+
+92
+00:07:00,723 --> 00:07:06,294
+training a hidden unit is, try to fix up
+the error that's leftover when all the
+
+93
+00:07:06,294 --> 00:07:11,638
+other hidden units have had their say.
+That's what's being back propagated to
+
+94
+00:07:11,638 --> 00:07:16,412
+train the weights of each hidden unit.
+Now, that's going to cause complex
+
+95
+00:07:16,412 --> 00:07:21,808
+co-adaptations between the hidden units.
+And these are likely to go wrong when
+
+96
+00:07:21,808 --> 00:07:25,130
+there's a change in the data.
+So, a new test data,
+
+97
+00:07:25,130 --> 00:07:30,249
+If you rely on a complex co-adaptation to
+get things right on the training data,
+
+98
+00:07:30,249 --> 00:07:34,120
+it's quite likely to not work nearly so
+well on new test data.
+
+99
+00:07:34,120 --> 00:07:38,575
+It's like the idea that a big, complex
+conspiracy involving lots of people is
+
+100
+00:07:38,575 --> 00:07:43,030
+almost certain to go wrong because there's
+always things you didn't think of.
+
+101
+00:07:43,030 --> 00:07:47,601
+And if there's a large number of people
+involved, one of them will behave in an
+
+102
+00:07:47,601 --> 00:07:50,667
+unexpected way.
+And then, the others will be doing the
+
+103
+00:07:50,667 --> 00:07:53,791
+wrong thing.
+It's much better if you want conspiracies,
+
+104
+00:07:53,791 --> 00:07:58,189
+to have lots of little conspiracies.
+Then, when unexpected things happen, many
+
+105
+00:07:58,189 --> 00:08:02,412
+of the little conspiracies will fail, but
+some of them will still succeed.
+
+106
+00:08:02,412 --> 00:08:06,137
+So, by using dropout,
+We force a hidden unit to work with
+
+107
+00:08:06,137 --> 00:08:09,560
+combinatorially many other sets of hidden
+units.
+
+108
+00:08:09,560 --> 00:08:13,523
+And that makes it much more likely to do
+something that's individually useful
+
+109
+00:08:13,523 --> 00:08:17,436
+rather than only useful because of the way
+particular other hidden units are
+
+110
+00:08:17,436 --> 00:08:20,180
+collaborating with it.
+But it is also going to tend to do
+
+111
+00:08:20,180 --> 00:08:24,397
+something that's individually useful and
+is different from what other hidden units
+
+112
+00:08:24,397 --> 00:08:27,222
+do.
+It needs to be something that's marginally
+
+113
+00:08:27,222 --> 00:08:30,266
+useful, given what its co-workers tend to
+achieve.
+
+114
+00:08:30,266 --> 00:08:35,238
+And I think this is what's giving nets
+with dropout, their very good performance.

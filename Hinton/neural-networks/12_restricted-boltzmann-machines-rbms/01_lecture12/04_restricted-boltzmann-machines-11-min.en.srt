@@ -1,0 +1,649 @@
+1
+00:00:00,000 --> 00:00:05,320
+In this video, I will introduce Restricted
+Boltzmann Machines.
+
+2
+00:00:05,660 --> 00:00:11,245
+These have a much simplified architecture
+in which there are no connections between
+
+3
+00:00:11,245 --> 00:00:14,519
+hidden units.
+This makes it very easy to get the
+
+4
+00:00:14,519 --> 00:00:19,750
+equilibrium distribution of the hidden
+units if the visible units are given.
+
+5
+00:00:19,750 --> 00:00:23,379
+That is, once you've clamped the
+datavector on the visible units,
+
+6
+00:00:23,379 --> 00:00:28,125
+The equilibrium distribution of the hidden
+units can be computed exactly in one step
+
+7
+00:00:28,125 --> 00:00:32,535
+because they're all independent of one
+another, given the states of the visible
+
+8
+00:00:32,535 --> 00:00:35,104
+units.
+The proper Boltzmann machine learning
+
+9
+00:00:35,104 --> 00:00:38,510
+algorithm is still slow for a restricted
+Boltzmann machine.
+
+10
+00:00:38,510 --> 00:00:43,050
+But in 1998, I discovered a very
+surprising shortcut that leads to the
+
+11
+00:00:43,050 --> 00:00:46,923
+first efficient learning algorithm for
+Boltzmann machines.
+
+12
+00:00:46,923 --> 00:00:52,532
+Even though this algorithm has theoretical
+problems, it works quite well in practice.
+
+13
+00:00:52,532 --> 00:00:56,940
+And it led to a revival of interest in
+Boltzmann machine learning.
+
+14
+00:00:57,220 --> 00:01:02,298
+In a restricted Boltzmann machine, we
+restrict the connectivity of the network
+
+15
+00:01:02,298 --> 00:01:05,600
+in order to make both inference and
+learning easier.
+
+16
+00:01:06,000 --> 00:01:11,403
+So, it only has one layer of hidden units
+and there's no connections between the
+
+17
+00:01:11,403 --> 00:01:14,983
+hidden units.
+There's also no connections between the
+
+18
+00:01:14,983 --> 00:01:18,697
+visible units.
+So, the architecture looks like that, it's
+
+19
+00:01:18,697 --> 00:01:22,007
+what computer scientists call a bipartite
+graph.
+
+20
+00:01:22,007 --> 00:01:26,060
+There's two pieces, and within each piece,
+there's no connections.
+
+21
+00:01:27,560 --> 00:01:33,401
+The good thing about an RBM is that if you
+clamp a datavector in the visible units,
+
+22
+00:01:33,401 --> 00:01:36,600
+you can reach thermal equilibrium in one
+step.
+
+23
+00:01:37,260 --> 00:01:43,382
+That means with a datavector clamped, we
+can quickly compute the expected value of
+
+24
+00:01:43,382 --> 00:01:48,472
+vihj because we can compute the exact
+probability with each j will turn on, and
+
+25
+00:01:48,472 --> 00:01:53,120
+that is independent of all the other units
+in the hidden layer.
+
+26
+00:01:55,420 --> 00:02:00,234
+The probability that j will turn on is
+just the logistic function of the input
+
+27
+00:02:00,234 --> 00:02:05,049
+that it gets from the visible units and
+quite independent of what other hidden
+
+28
+00:02:05,049 --> 00:02:08,584
+units are doing.
+So, we can compute that probability all in
+
+29
+00:02:08,584 --> 00:02:15,720
+parallel and that's a tremendous win.
+If you want to make a good model of a set
+
+30
+00:02:15,720 --> 00:02:20,443
+of binary vectors, then the right
+algorithm to use for a restricted
+
+31
+00:02:20,443 --> 00:02:26,083
+Boltzmann machine is one introduced by
+Tieleman in 2008 that's based on earlier
+
+32
+00:02:26,083 --> 00:02:31,924
+work by Neal.
+In the positive phase, you clamp the
+
+33
+00:02:31,924 --> 00:02:36,784
+datavector on the visible units.
+You then compute the exact value of the
+
+34
+00:02:36,784 --> 00:02:41,568
+expectation vihj for all pairs of
+invisible in the hidden unit.
+
+35
+00:02:41,568 --> 00:02:46,580
+And you could do that cuz vi is fixed, and
+you can compute vj exactly.
+
+36
+00:02:47,660 --> 00:02:53,170
+And then, for every connected pair of
+units, you average the expected value of
+
+37
+00:02:53,170 --> 00:02:56,240
+vihj over all the data vectors in the mini
+batch.
+
+38
+00:02:58,280 --> 00:03:04,238
+For the negative phase, you keep a set of
+fantasy particles that is global
+
+39
+00:03:04,238 --> 00:03:09,090
+configurations.
+And then, you update each fantasy particle
+
+40
+00:03:09,090 --> 00:03:12,365
+a few times by using alternating parallel
+updates.
+
+41
+00:03:12,365 --> 00:03:17,474
+So, after each weight update, you update
+the fantasy particles a little bit and
+
+42
+00:03:17,474 --> 00:03:20,880
+that should bring them back to close to
+equilibrium.
+
+43
+00:03:21,820 --> 00:03:26,736
+And then, for every connected pair of
+units, you average vihj over all the
+
+44
+00:03:26,736 --> 00:03:30,777
+fantasy particles, and that gives you your
+negative statistics.
+
+45
+00:03:30,777 --> 00:03:36,097
+This algorithm actually works very well,
+and allows RBMs to build good density
+
+46
+00:03:36,097 --> 00:03:43,618
+models or sets of binary vectors.
+Now, I am going to go on to our learning
+
+47
+00:03:43,618 --> 00:03:48,520
+algorithm that is not as good at building
+density model but is much faster.
+
+48
+00:03:48,860 --> 00:03:53,901
+So, I'm going to start with a picture of
+an inefficient learning algorithm for
+
+49
+00:03:53,901 --> 00:04:00,163
+restrictive Boltzmann machines.
+We're going to start by clamping a
+
+50
+00:04:00,163 --> 00:04:04,954
+datavector on the visible units, and we're
+going to call that time t0.
+
+51
+00:04:04,954 --> 00:04:10,532
+So, we're going to use times now, not to
+denote weight updates, but to denote steps
+
+52
+00:04:10,532 --> 00:04:15,304
+in a Markov chain.
+Given that visible vector, we now update
+
+53
+00:04:15,304 --> 00:04:19,353
+the hidden units.
+So, we choose binary states for the hidden
+
+54
+00:04:19,353 --> 00:04:24,911
+units and we measure the expected value,
+vihj, for all pairs of visible and binary
+
+55
+00:04:24,911 --> 00:04:29,440
+units that are connected.
+And I'll call that vihj zero to indicate
+
+56
+00:04:29,440 --> 00:04:34,518
+that it's measured at time zero,
+With the hidden units being determined by
+
+57
+00:04:34,518 --> 00:04:38,224
+the visible units.
+And, of course, we can update all the
+
+58
+00:04:38,224 --> 00:04:43,385
+hidden units in parallel.
+We then use the hidden vector to update
+
+59
+00:04:43,385 --> 00:04:48,544
+all the visible units in parallel, and
+again we update all the hidden units in
+
+60
+00:04:48,544 --> 00:04:52,009
+parallel.
+So, the visible vector t1 = one, we'll
+
+61
+00:04:52,009 --> 00:04:55,935
+call a reconstruction, or a one-step
+reconstruction,
+
+62
+00:04:55,935 --> 00:05:00,401
+And we can keep going with the alternating
+chain that way,
+
+63
+00:05:00,401 --> 00:05:03,865
+Updating visible units, and then hidden
+units,
+
+64
+00:05:03,865 --> 00:05:09,820
+Each set being updated in parallel.
+And after we've gone for a long time,
+
+65
+00:05:10,320 --> 00:05:15,832
+We'll get to some state of the visible
+units, or I'll call t infinity to indicate
+
+66
+00:05:15,832 --> 00:05:21,345
+it needs to be a long time and the system
+will be at thermal equilibrium, and now,
+
+67
+00:05:21,345 --> 00:05:26,654
+we can measure the correlation of vi and
+hj after the chains run for a long time
+
+68
+00:05:26,654 --> 00:05:32,497
+and I'll call that vihj infinity.
+And the visible state we have after a long
+
+69
+00:05:32,497 --> 00:05:37,221
+time, I'll call it fantasy.
+So now, the learning rule is simply, we
+
+70
+00:05:37,221 --> 00:05:42,725
+change Wij by the learning rate times the
+difference between vihj at time zero and
+
+71
+00:05:42,725 --> 00:05:46,818
+vihj at time infinity.
+And, of course, the problem with this
+
+72
+00:05:46,818 --> 00:05:52,322
+algorithm is that we have to run this
+chain for a long time before it reaches
+
+73
+00:05:52,322 --> 00:05:56,485
+thermal equilibrium.
+And if we don't run it for long enough,
+
+74
+00:05:56,485 --> 00:06:02,321
+the learning may go wrong.
+In fact, that last statement is very
+
+75
+00:06:02,321 --> 00:06:07,064
+misleading.
+It turns out that even if we only run the
+
+76
+00:06:07,064 --> 00:06:11,360
+chain for a short time, the learning still
+works.
+
+77
+00:06:13,280 --> 00:06:20,498
+So, here's the very surprising shortcut.
+You just run the chain up, down, and up
+
+78
+00:06:20,498 --> 00:06:23,550
+again.
+So, from the data, you generate a hidden
+
+79
+00:06:23,550 --> 00:06:26,329
+state, from that.
+You generate a reconstruction, and from
+
+80
+00:06:26,329 --> 00:06:31,567
+that, you generate another hidden state.
+And you may have a statistics once you've
+
+81
+00:06:31,567 --> 00:06:35,907
+done that.
+So, instead of using the statistics
+
+82
+00:06:35,907 --> 00:06:42,636
+measured at equilibrium, we're using the
+statistics measured after doing one full
+
+83
+00:06:42,636 --> 00:06:49,321
+update of the Markov chain.
+The learning rule is, and the same as
+
+84
+00:06:49,321 --> 00:06:54,190
+before, except this much quicker to
+compute, and this is clearly is not doing
+
+85
+00:06:54,190 --> 00:06:59,659
+maximum likelihood learning because the
+term we are using for negative statistics
+
+86
+00:07:00,259 --> 00:07:04,301
+is wrong.
+But the learning, nevertheless, works
+
+87
+00:07:04,301 --> 00:07:08,025
+quite well.
+Next week, we'll understand a bit more
+
+88
+00:07:08,025 --> 00:07:11,840
+about why it works well.
+But for now, we'll just see that it does.
+
+89
+00:07:14,820 --> 00:07:18,360
+So, the obvious question is why does
+actual cut work at all?
+
+90
+00:07:18,700 --> 00:07:24,439
+And here's the reasoning.
+If we start the chain at the data, the
+
+91
+00:07:24,439 --> 00:07:29,175
+Markov chain will wander away from the
+data and towards its equilibrium
+
+92
+00:07:29,175 --> 00:07:32,595
+distribution.
+That is towards things that is initial
+
+93
+00:07:32,595 --> 00:07:39,205
+weights like more than the data.
+We can see what direction it's wandering
+
+94
+00:07:39,205 --> 00:07:43,657
+in after only a few steps.
+And if we know the initial weights aren't
+
+95
+00:07:43,657 --> 00:07:47,066
+very good, it's a waste of time to go all
+the way to equilibrium.
+
+96
+00:07:47,066 --> 00:07:51,381
+We know how to change them to stop it
+wandering away from the data without going
+
+97
+00:07:51,381 --> 00:07:57,751
+all the way to equilibrium.
+All we need to do is lower the probability
+
+98
+00:07:57,751 --> 00:08:02,779
+of the reconstructions of confabulations
+as a psychologist would call them, it
+
+99
+00:08:02,779 --> 00:08:07,420
+produces after one full step, and then,
+raise the probability of the data.
+
+100
+00:08:08,300 --> 00:08:11,180
+That will stop it wandering away from the
+data.
+
+101
+00:08:12,340 --> 00:08:17,178
+Once the data and the places it goes to
+after one full step have the same
+
+102
+00:08:17,178 --> 00:08:24,120
+distribution, then the learning will stop.
+So, here's a picture of what's going on.
+
+103
+00:08:25,460 --> 00:08:29,880
+Here's the energy surface in the space of
+global configurations.
+
+104
+00:08:31,140 --> 00:08:36,589
+Here's a data point on the energy surface,
+and by data point, I mean, both the
+
+105
+00:08:36,589 --> 00:08:42,541
+visible vector and the particular hidden
+vector that we got by stochastic updating
+
+106
+00:08:42,541 --> 00:08:46,289
+the hidden units.
+So, that hidden vector is a function of
+
+107
+00:08:46,289 --> 00:08:50,967
+what the data point is.
+So, starting at that data point, we run
+
+108
+00:08:50,967 --> 00:08:56,397
+the Markov chain for one full step to get
+a new visible vector and the hidden vector
+
+109
+00:08:56,397 --> 00:08:59,974
+that goes with it.
+So, a reconstruction of the data point
+
+110
+00:08:59,974 --> 00:09:03,680
+plus the hidden vector that goes with that
+reconstruction.
+
+111
+00:09:05,780 --> 00:09:11,795
+We then change the weights to pull the
+energy down at the data point, and pull to
+
+112
+00:09:11,795 --> 00:09:17,032
+the energy up the reconstruction.
+And the effect of that would be to make
+
+113
+00:09:17,032 --> 00:09:20,667
+the surface look like this.
+And you'll notice we're beginning to
+
+114
+00:09:20,667 --> 00:09:26,025
+construct an energy minimum at the data.
+You'll also notice that far away from the
+
+115
+00:09:26,025 --> 00:09:29,260
+data, things have stayed pretty much as
+they were before.
+
+116
+00:09:32,000 --> 00:09:38,466
+So, this shortcut of only doing one full
+step to get the reconstruction fails for
+
+117
+00:09:38,466 --> 00:09:45,375
+places that are far away from the data.
+We need to worry about regions of the
+
+118
+00:09:45,375 --> 00:09:50,380
+data-space that the model likes but which
+are very far from any data point.
+
+119
+00:09:51,000 --> 00:09:56,614
+These low energy holes cause the
+normalization term to be big, and we can't
+
+120
+00:09:56,614 --> 00:10:02,086
+sense them if we use the shortcut.
+If we use persistent particles, where we
+
+121
+00:10:02,086 --> 00:10:07,234
+remembered their states, and after each
+update, we updated them a few more times,
+
+122
+00:10:07,234 --> 00:10:10,102
+then they would eventually find these
+holes.
+
+123
+00:10:10,102 --> 00:10:15,120
+They'd move into the holes, and the
+learning would cause the holes to fill up.
+
+124
+00:10:17,220 --> 00:10:22,464
+A good compromise between speed and
+correctness is to start with small weights
+
+125
+00:10:22,464 --> 00:10:27,310
+and to use CD1, that is contrust
+divergence with one full step to get the
+
+126
+00:10:27,310 --> 00:10:32,157
+negative data.
+Once the weights have grown a bit, the
+
+127
+00:10:32,157 --> 00:10:36,780
+Markov chain is mixing more slowly, and
+now we can use CD3.
+
+128
+00:10:37,480 --> 00:10:42,300
+Once the weights have grown more, we can
+use CD5, or nine, or ten.
+
+129
+00:10:42,900 --> 00:10:48,317
+So, by increasing the number of steps as
+the weights grow, we can keep the learning
+
+130
+00:10:48,317 --> 00:10:53,669
+working reasonably well, even though the
+mixing rate of the Markov chain is going

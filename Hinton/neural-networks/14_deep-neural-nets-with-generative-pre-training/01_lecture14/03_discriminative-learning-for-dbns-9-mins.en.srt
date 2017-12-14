@@ -1,0 +1,639 @@
+1
+00:00:00,000 --> 00:00:04,108
+. 
+In this video I'm going to show how we 
+
+2
+00:00:04,108 --> 00:00:08,969
+can first learn a deep belief net by 
+stacking up restricted Boltzmann 
+
+3
+00:00:08,969 --> 00:00:12,164
+machines. 
+And then we can treat that as a deep 
+
+4
+00:00:12,164 --> 00:00:16,140
+neural net that we fine tune 
+discriminatory. 
+
+5
+00:00:16,140 --> 00:00:21,331
+So instead of fine tuning it to be better 
+at generation, as we did in the previous 
+
+6
+00:00:21,331 --> 00:00:26,880
+video, we're going to fine tune it to be 
+better at discriminating between classes. 
+
+7
+00:00:26,880 --> 00:00:32,320
+This works very well and led to a big 
+renewal of interest in neural networks. 
+
+8
+00:00:33,440 --> 00:00:39,489
+In speech recognition, it's had a major 
+influence and many leading groups are now 
+
+9
+00:00:39,489 --> 00:00:45,463
+switching to using deep neural nets in 
+order to reduce the error rate, in speech 
+
+10
+00:00:45,463 --> 00:00:48,895
+recognition. 
+I now want to talk about fine tuning 
+
+11
+00:00:48,895 --> 00:00:52,390
+these deep networks to be better at 
+discrimination. 
+
+12
+00:00:52,390 --> 00:00:57,598
+So we first learn one layer of features 
+at a time, by stacking up restricted 
+
+13
+00:00:57,598 --> 00:01:01,817
+Boltzmann machines. 
+Then we treat this as pre-training that 
+
+14
+00:01:01,817 --> 00:01:07,506
+finds a good initial set of weights in 
+the DPO network and we fine tune those 
+
+15
+00:01:07,506 --> 00:01:10,569
+weights using some local search 
+procedure. 
+
+16
+00:01:10,569 --> 00:01:16,696
+In the previous video I showed you how to 
+use contrustive weight sleep to fine tune 
+
+17
+00:01:16,696 --> 00:01:21,620
+a deep network so that it was better 
+generating its inputs. 
+
+18
+00:01:21,620 --> 00:01:27,120
+In this video we're going to use back 
+propagation to fine tune a model to be 
+
+19
+00:01:27,120 --> 00:01:31,691
+better at discrimination. 
+If we do this it overcomes many of the 
+
+20
+00:01:31,691 --> 00:01:38,636
+standard limitations of back propagation. 
+It makes it much easier to learn deep 
+
+21
+00:01:38,636 --> 00:01:41,990
+nets. 
+And it makes those nets generalise 
+
+22
+00:01:41,990 --> 00:01:44,911
+better. 
+We need to understand why back 
+
+23
+00:01:44,911 --> 00:01:48,420
+propagation when we pre-train the 
+weights. 
+
+24
+00:01:48,420 --> 00:01:53,395
+And there's really two effects. 
+There's an effect on optimization and 
+
+25
+00:01:53,395 --> 00:01:59,020
+there's an effect on generalization. 
+So the pre-training scales really well if 
+
+26
+00:01:59,020 --> 00:02:03,274
+we have big networks, especially if each 
+layer has locality. 
+
+27
+00:02:03,274 --> 00:02:08,899
+So if we're doing vision, for example, 
+and we had local receptor fields in each 
+
+28
+00:02:08,899 --> 00:02:14,235
+layer, then there's not much interaction 
+between widely separate locations. 
+
+29
+00:02:14,235 --> 00:02:19,139
+And so it's very easy to learn a big 
+layer more or less in parallel. 
+
+30
+00:02:19,139 --> 00:02:23,310
+When we do pre-training. 
+We don't start back propagation until 
+
+31
+00:02:23,310 --> 00:02:26,456
+we've already learned sensible feature 
+detectors. 
+
+32
+00:02:26,456 --> 00:02:30,952
+And these feature detectors should be 
+very helpful for discrimination. 
+
+33
+00:02:30,952 --> 00:02:35,768
+So the initial gradients are much more 
+sensible than if we use random ones. 
+
+34
+00:02:35,768 --> 00:02:39,364
+And back propagation doesn't need to do a 
+global search. 
+
+35
+00:02:39,364 --> 00:02:43,603
+It just needs to do a local search from a 
+sensible starting point. 
+
+36
+00:02:43,603 --> 00:02:48,419
+In addition to being easier to optimize, 
+pre-trained nets exhibit much less 
+
+37
+00:02:48,419 --> 00:02:51,901
+overfitting. 
+That's because most of the information in 
+
+38
+00:02:51,901 --> 00:02:56,550
+the final weights comes from modeling the 
+distribution of input vectors. 
+
+39
+00:02:56,550 --> 00:03:01,005
+And these input vectors, if you're 
+dealing with something like images, 
+
+40
+00:03:01,005 --> 00:03:04,427
+generally contain a lot more information 
+than labels. 
+
+41
+00:03:04,427 --> 00:03:09,269
+A label typically only contains a few 
+bits of information to constrain the 
+
+42
+00:03:09,269 --> 00:03:13,401
+mapping from input to output. 
+Whereas an image contains a lot of 
+
+43
+00:03:13,401 --> 00:03:18,115
+information which will constrain any 
+generative model of a set of images. 
+
+44
+00:03:18,115 --> 00:03:22,803
+The information in the labels is only 
+used for the final fine tuning And 
+
+45
+00:03:22,803 --> 00:03:27,183
+because by that stage we've already 
+decided on the feature detectors, we're 
+
+46
+00:03:27,183 --> 00:03:32,030
+not squandering that precious information 
+designing feature detectors from scratch. 
+
+47
+00:03:32,030 --> 00:03:37,890
+The fine tuning only makes slight changes 
+to the feature detectors we learned in 
+
+48
+00:03:37,890 --> 00:03:43,248
+the generative pre-training phase. 
+And those are the changes required to get 
+
+49
+00:03:43,248 --> 00:03:46,216
+the category boundaries in the right 
+place. 
+
+50
+00:03:46,216 --> 00:03:50,979
+The important thing is the back 
+propagation is not being required to 
+
+51
+00:03:50,979 --> 00:03:55,120
+discover new features. 
+And so it doesn't need nearly as much 
+
+52
+00:03:55,120 --> 00:03:58,517
+label data. 
+In fact, this type of learning works well 
+
+53
+00:03:58,517 --> 00:04:03,341
+when most of the data is unlabeled, 
+because the generative pre-training can 
+
+54
+00:04:03,341 --> 00:04:07,650
+make use of the light data. 
+The unlabeled data is still very useful 
+
+55
+00:04:07,650 --> 00:04:12,024
+for discovering good features. 
+There is an obvious objection to this 
+
+56
+00:04:12,024 --> 00:04:16,270
+type of learning, which is that when we 
+do generative pre-training. 
+
+57
+00:04:16,270 --> 00:04:20,511
+We'll be learning lots of features that 
+are useless for the particular 
+
+58
+00:04:20,511 --> 00:04:23,020
+discriminative task we want the net to 
+do. 
+
+59
+00:04:23,020 --> 00:04:27,382
+Consider, for example, that you might 
+want the net to discriminate between 
+
+60
+00:04:27,382 --> 00:04:31,922
+shapes or you might want the net to 
+discriminate between different poses of 
+
+61
+00:04:31,922 --> 00:04:35,692
+one shape. 
+They need very different features, and if 
+
+62
+00:04:35,692 --> 00:04:41,129
+you don't know the task in advance. 
+You'll inevitably learn features that are 
+
+63
+00:04:41,129 --> 00:04:44,314
+never used. 
+When computers were much smaller, that 
+
+64
+00:04:44,314 --> 00:04:48,603
+was the serious objection. 
+But now that computers are large enough, 
+
+65
+00:04:48,603 --> 00:04:51,982
+we can afford to learn features that are 
+never used. 
+
+66
+00:04:51,982 --> 00:04:57,181
+And, we can afford it because among all 
+the features we learn, there will be some 
+
+67
+00:04:57,181 --> 00:05:00,301
+that are much more useful than their raw 
+inputs. 
+
+68
+00:05:00,301 --> 00:05:05,565
+And that more than makes up for the fact 
+that we have learned some features that 
+
+69
+00:05:05,565 --> 00:05:09,400
+aren't helpful for the particular task 
+we're interested in. 
+
+70
+00:05:09,400 --> 00:05:13,125
+So let's apply this to modeling the 
+m-list digits. 
+
+71
+00:05:13,125 --> 00:05:18,600
+We'll now learn three hidden layers of 
+features entirely unsupervised. 
+
+72
+00:05:18,600 --> 00:05:23,020
+Once we've done that learning, when we 
+generate from the model, 
+
+73
+00:05:23,020 --> 00:05:26,089
+it will generate things that look like 
+real digits. 
+
+74
+00:05:26,089 --> 00:05:29,399
+And it'll generate them from all the 
+different classes. 
+
+75
+00:05:29,399 --> 00:05:34,093
+And it'll typically take a while before 
+it switches from one class to another. 
+
+76
+00:05:34,093 --> 00:05:38,907
+And it will typically take a while before 
+it switches from one class to another 
+
+77
+00:05:38,907 --> 00:05:43,541
+because it'll tend to stay in the same 
+ravine for a while before it jumps to 
+
+78
+00:05:43,541 --> 00:05:46,670
+another ravine. 
+But the question is, are the features 
+
+79
+00:05:46,670 --> 00:05:50,281
+that we've learned that way useful for 
+doing discrimination? 
+
+80
+00:05:50,281 --> 00:05:54,072
+So all we need to do is add a final 
+10-way soft max at the top. 
+
+81
+00:05:54,072 --> 00:05:58,827
+And fine tune it with back propagation. 
+And see if we do better than purely 
+
+82
+00:05:58,827 --> 00:06:03,173
+discriminative training. 
+So here's the results on the permutation 
+
+83
+00:06:03,173 --> 00:06:07,386
+invariant M-ness task. 
+And what I mean is permutation invariant 
+
+84
+00:06:07,386 --> 00:06:12,535
+is, if we were to apply a fixed random 
+permutation to all the pixels, the same 
+
+85
+00:06:12,535 --> 00:06:17,417
+permutation to every test and training 
+case, the results of our algorithm 
+
+86
+00:06:17,417 --> 00:06:21,028
+wouldn't change. 
+That's clearly not true for something 
+
+87
+00:06:21,028 --> 00:06:25,627
+like a convolutional net. 
+A convolutional net's been told something 
+
+88
+00:06:25,627 --> 00:06:29,320
+about the task. 
+By applying this fixed permutation, we 
+
+89
+00:06:29,320 --> 00:06:34,965
+destroy all simple ways of telling the 
+net something about the spatial nature of 
+
+90
+00:06:34,965 --> 00:06:37,683
+the task. 
+So if you apply standard back 
+
+91
+00:06:37,683 --> 00:06:42,370
+propagation. 
+It's hard to do better than 1.6% errors. 
+
+92
+00:06:42,370 --> 00:06:47,308
+John Platt and myself have both tried 
+quite hard applying standard back 
+
+93
+00:06:47,308 --> 00:06:50,669
+propagation with various different 
+architectures. 
+
+94
+00:06:50,669 --> 00:06:55,060
+And we're both quite good at doing it. 
+You can actually beat 1.6%. 
+
+95
+00:06:55,060 --> 00:07:00,289
+By using constraints on the incoming 
+weight vectors of the hidden units. 
+
+96
+00:07:00,289 --> 00:07:06,173
+If you use an appropriate restriction on 
+the length of an incoming weight vector, 
+
+97
+00:07:06,173 --> 00:07:12,309
+you can do a bit better than 1.6%. 
+Support vector machines can get 1.4 
+
+98
+00:07:12,309 --> 00:07:15,719
+percent. 
+And this was one of the pieces of 
+
+99
+00:07:15,719 --> 00:07:21,333
+evidence that led to support vector 
+machines, supplanting back propagation. 
+
+100
+00:07:21,333 --> 00:07:26,037
+If you pretrain a network using a stack 
+of Boltzmann Machines. 
+
+101
+00:07:26,037 --> 00:07:32,182
+And then you fine tune it to be better at 
+generating the joint density of digits 
+
+102
+00:07:32,182 --> 00:07:35,748
+and image labels. 
+Then you can get down to 1.25%. 
+
+103
+00:07:35,748 --> 00:07:40,831
+If you train a stack of Boltzmann 
+machines, and simply put a 10-way 
+
+104
+00:07:40,831 --> 00:07:45,080
+[INAUDIBLE] on top, and fine tune it. 
+You can get to 1.15%. 
+
+105
+00:07:45,080 --> 00:07:49,519
+And with more fiddling around, you can 
+get that down to about one%. 
+
+106
+00:07:49,519 --> 00:07:53,480
+So you can do a lot better than standard 
+back propagation. 
+
+107
+00:07:53,480 --> 00:07:59,026
+And also better than support vector 
+machines by using generative pre-training 
+
+108
+00:07:59,026 --> 00:08:04,286
+followed by discriminative fine tuning. 
+Mackerie Yerenzato working in Yan 
+
+109
+00:08:04,286 --> 00:08:09,772
+LeCanne's group also showed, using a 
+slightly different pre-training method, 
+
+110
+00:08:09,772 --> 00:08:15,112
+that pre-training helps for models that 
+have more data and better prions. 
+
+111
+00:08:15,112 --> 00:08:19,428
+So they used an additional 60,000 
+distorted digital images. 
+
+112
+00:08:19,428 --> 00:08:24,987
+So they had a lot more training data. 
+They also used convolution multilinear 
+
+113
+00:08:24,987 --> 00:08:28,279
+network. 
+And Yan's group is the best group, at 
+
+114
+00:08:28,279 --> 00:08:32,188
+tuning those. 
+With back propagation, they managed to 
+
+115
+00:08:32,188 --> 00:08:36,471
+get down to.49%. 
+When they did the unsupervised layer by 
+
+116
+00:08:36,471 --> 00:08:41,765
+layer pre-training, followed by back 
+propagation they got down to.39%. 
+
+117
+00:08:41,765 --> 00:08:47,449
+Which at the time was a record. 
+So you may remember this picture from the 
+
+118
+00:08:47,449 --> 00:08:52,152
+first lecture. 
+This was one of the examples I gave of 
+
+119
+00:08:52,152 --> 00:08:56,013
+the successive neural nets. 
+It's the same picture. 
+
+120
+00:08:56,013 --> 00:09:01,764
+Back then, I said we could get down to 
+20.7% by pre-training and then fine 
+
+121
+00:09:01,764 --> 00:09:07,988
+tuning with back propagation, and that 
+the previous, and that the previous speak 
+
+122
+00:09:07,988 --> 00:09:14,291
+independent record on Timint was 24.4%. 
+Which actually required averaging several 
+
+123
+00:09:14,291 --> 00:09:18,072
+models. 
+Lee Ding at Microsoft Research picked up 
+
+124
+00:09:18,072 --> 00:09:23,540
+at this result immediately and 
+collaborated on improving it. 
+
+125
+00:09:23,540 --> 00:09:27,222
+And this has led to a big change in 
+speech recognition. 
+
+126
+00:09:27,222 --> 00:09:32,243
+If you look at this news story, it will 
+refer you to a blog where the chief 
+
+127
+00:09:32,243 --> 00:09:37,532
+research officer for Microsoft is talking 
+about the big improvements in speech 
+
+128
+00:09:37,532 --> 00:09:40,545
+recognition caused by using deep neural 
+nets. 

@@ -1,0 +1,658 @@
+1
+00:00:00,000 --> 00:00:04,295
+In this video, I'm going to talk about the
+history of backpropagation.
+
+2
+00:00:05,560 --> 00:00:10,850
+I'll start with where it came from in the
+70s' and 80s,' and then I'll talk a bit
+
+3
+00:00:10,850 --> 00:00:16,274
+about why it failed in the 90s.' That is,
+why serious machine learning research has
+
+4
+00:00:16,274 --> 00:00:19,622
+abandoned it.
+There was a popular view of why this
+
+5
+00:00:19,622 --> 00:00:24,243
+happened, and we can now see that, that
+popular view was largely wrong.
+
+6
+00:00:24,243 --> 00:00:29,600
+The real reasons it was abandoned were
+because computers were too slow and data
+
+7
+00:00:29,600 --> 00:00:35,237
+sets were too small.
+I'll conclude by showing you a historical
+
+8
+00:00:35,237 --> 00:00:39,352
+document.
+There was a bet made between two machine
+
+9
+00:00:39,352 --> 00:00:45,016
+learning researchers in 1995.
+It's interesting to see what people back
+
+10
+00:00:45,016 --> 00:00:50,968
+then believed and how wrong they were.
+Backpropagation was invented independently
+
+11
+00:00:50,968 --> 00:00:55,993
+several times in the 70s' and 80s'.
+It started in the late 60s' with control
+
+12
+00:00:55,993 --> 00:01:01,500
+theories called Bryson and Ho who invented
+a linear version of backpropagation.
+
+13
+00:01:02,200 --> 00:01:07,237
+Paul Werbos went to their lectures and
+realized it could be made non-linear.
+
+14
+00:01:07,237 --> 00:01:12,540
+And in his thesis in 1974, he published
+what's probably the first proper version
+
+15
+00:01:12,540 --> 00:01:16,517
+of backpropogation.
+Rumelhart and Williams and I invented it
+
+16
+00:01:16,517 --> 00:01:19,765
+in 1981 without knowing about Paul
+Werbos's work.
+
+17
+00:01:19,765 --> 00:01:25,134
+But we tried it out, and it didn't work
+very well for the first thing we tried it
+
+18
+00:01:25,134 --> 00:01:26,924
+for,
+And so we abandoned it.
+
+19
+00:01:26,924 --> 00:01:30,570
+David Parker invented it in 1985, and so
+did Yann LeCun.
+
+20
+00:01:30,570 --> 00:01:36,095
+Also in 1985, I went back and tried again
+the thing that Rumelhart, Williams and I
+
+21
+00:01:36,095 --> 00:01:39,574
+had abandoned and discovered it worked
+pretty well.
+
+22
+00:01:39,574 --> 00:01:45,100
+In 1986, we produced a paper with a really
+convincing example of what it could do.
+
+23
+00:01:45,380 --> 00:01:51,170
+It was clear the backpropagation had a lot
+of promise for learning multiple layers of
+
+24
+00:01:51,170 --> 00:01:55,874
+non-linear future detectors.
+But it didn't really live up to its
+
+25
+00:01:55,874 --> 00:01:58,923
+promise.
+And by the late 1990s, most of the serious
+
+26
+00:01:58,923 --> 00:02:02,825
+researchers in machine learning had given
+up on backpropagation.
+
+27
+00:02:02,825 --> 00:02:07,215
+For example, in David Mukai's textbook,
+there's very little mention of it.
+
+28
+00:02:07,215 --> 00:02:11,726
+It was still widely used by psychologists
+for making psychological models.
+
+29
+00:02:11,726 --> 00:02:16,299
+And it was also quite widely used in
+practical applications, such as credit
+
+30
+00:02:16,299 --> 00:02:20,155
+card fraud detection.
+But in machine learning, people thought it
+
+31
+00:02:20,155 --> 00:02:22,680
+had been supplanted by support vector
+machines.
+
+32
+00:02:23,120 --> 00:02:28,263
+The popular explanation of what happened
+to backpropagation in the late 90s' was
+
+33
+00:02:28,263 --> 00:02:32,700
+that it couldn't make use of multiple
+layers and non-linear features.
+
+34
+00:02:33,440 --> 00:02:37,030
+This wasn't true in convolutional nets,
+which were the exception.
+
+35
+00:02:37,030 --> 00:02:41,349
+But in general, people couldn't get feed
+forward neural networks trained with
+
+36
+00:02:41,349 --> 00:02:45,613
+backpropagation to do impressive things if
+they had multiple hidden layers,
+
+37
+00:02:45,613 --> 00:02:49,982
+Except for some toy examples.
+It also did not work well in recurrent
+
+38
+00:02:49,982 --> 00:02:55,160
+networks or in deep auto-encoders,
+Which we'll cover in our later lecture.
+
+39
+00:02:55,160 --> 00:03:00,211
+And recurrent networks were perhaps the
+place where its most exciting, and so it
+
+40
+00:03:00,211 --> 00:03:05,262
+was there that it was most disappointing
+that people couldn't make it work well.
+
+41
+00:03:05,262 --> 00:03:10,061
+Support vector machines by contrast,
+worked well. They didn't require as much
+
+42
+00:03:10,061 --> 00:03:15,176
+expertise to make them work, they produced
+repeatable results, and they had a much
+
+43
+00:03:15,176 --> 00:03:19,560
+better theory.
+And they had much fancy of theory.
+
+44
+00:03:20,020 --> 00:03:23,751
+So, that was the popular explanation of
+what went wrong with backpropagation.
+
+45
+00:03:25,300 --> 00:03:29,597
+With a more historical prospective, we can
+see why really failed.
+
+46
+00:03:29,597 --> 00:03:32,618
+The computers were thousands of times too
+slow,
+
+47
+00:03:32,618 --> 00:03:37,855
+And the label data's sets hundreds of
+times too small for the regime in which
+
+48
+00:03:37,855 --> 00:03:43,674
+backpropagation would really shine.
+Also, the deep networks, as well as being
+
+49
+00:03:43,674 --> 00:03:49,015
+too small, were not sensibly initialized.
+And so, backpropagating through deep
+
+50
+00:03:49,015 --> 00:03:54,148
+networks didn't work well because the
+gradients tended to die, because the
+
+51
+00:03:54,148 --> 00:03:58,934
+initial weights were typically too small.
+These issues prevented backpropagation
+
+52
+00:03:59,767 --> 00:04:03,582
+from being successful.
+For tasks like vision and speech,
+
+53
+00:04:03,582 --> 00:04:08,088
+They would eventually be a big win.
+So, we need to distinguish between
+
+54
+00:04:08,088 --> 00:04:13,163
+different kinds of machine learning task.
+There's ones that are more typical of the
+
+55
+00:04:13,163 --> 00:04:15,792
+kinds of things people study in
+statistics,
+
+56
+00:04:15,792 --> 00:04:20,745
+And ones that are more typical of the
+kinds of things people study in artificial
+
+57
+00:04:20,745 --> 00:04:24,803
+intelligence.
+So, at the statistics end of the spectrum,
+
+58
+00:04:24,803 --> 00:04:30,729
+you typically have low dimensional data.
+A statistician thinks of a 100 dimensions
+
+59
+00:04:30,729 --> 00:04:34,631
+as high dimensional data.
+At the artificial intelligence end of the
+
+60
+00:04:34,631 --> 00:04:39,979
+spectrum, things like images or
+coefficients representing speech typically
+
+61
+00:04:39,979 --> 00:04:45,400
+have many more than a 100 dimensions.
+At the statistics end of the spectrum,
+
+62
+00:04:45,900 --> 00:04:49,020
+There's usually a lot of noise in the
+data.
+
+63
+00:04:49,300 --> 00:04:54,120
+Whereas, in the AI end of the spectrum,
+noise isn't the real problem.
+
+64
+00:04:55,180 --> 00:05:00,658
+For statistics, there's often not that
+much structure in the data, and what
+
+65
+00:05:00,658 --> 00:05:05,100
+structure there is can be captured by a
+fairly simple model.
+
+66
+00:05:05,900 --> 00:05:11,292
+At the AI end of the spectrum, there's
+typically a huge amount of structure in
+
+67
+00:05:11,292 --> 00:05:14,773
+the data.
+So if you take a set of images, its highly
+
+68
+00:05:14,773 --> 00:05:18,801
+structured data.
+But the structure is too complicated to be
+
+69
+00:05:18,801 --> 00:05:23,169
+captured by a simple model.
+So in statistics, the main problem is
+
+70
+00:05:23,169 --> 00:05:28,698
+separating true structure from noise, not
+thinking that noise is really structure.
+
+71
+00:05:28,698 --> 00:05:32,180
+This can be done by a Bayesian neural net
+pretty well.
+
+72
+00:05:32,180 --> 00:05:37,131
+But for typical non-Bayesian neural nets,
+it's not the kind of problem they're good
+
+73
+00:05:37,131 --> 00:05:39,637
+at.
+And so, for problems like that, it makes
+
+74
+00:05:39,637 --> 00:05:44,768
+sense to try a support vector machine or a
+method called a Gaussian process if you're
+
+75
+00:05:44,768 --> 00:05:47,930
+doing regression, which I'll talk about
+briefly later.
+
+76
+00:05:47,930 --> 00:05:53,049
+At the artificial intelligence end of the
+spectrum, the main problem is to find a
+
+77
+00:05:53,049 --> 00:05:57,916
+way of representing all this complicated
+structure so that it can be learned.
+
+78
+00:05:57,916 --> 00:06:02,783
+The obvious thing to do is to try to hand
+design appropriate representations.
+
+79
+00:06:02,783 --> 00:06:06,891
+But actually, it's easier to let back
+propagation figure out what
+
+80
+00:06:06,891 --> 00:06:11,378
+representations to use by giving it
+multiple layers and using a lot of
+
+81
+00:06:11,378 --> 00:06:15,740
+computation power to let it decide what
+the representation should be.
+
+82
+00:06:16,120 --> 00:06:19,926
+I now want to talk very briefly about
+support vector machines.
+
+83
+00:06:19,926 --> 00:06:24,837
+I'm not going to explain how they work,
+But I am going to say what I think their
+
+84
+00:06:24,837 --> 00:06:28,337
+limitations are.
+So, there's several ways in which you can
+
+85
+00:06:28,337 --> 00:06:33,003
+view a support vector machine, and I'm
+going to give you two different views of
+
+86
+00:06:33,003 --> 00:06:35,520
+them.
+According to the first view, support
+
+87
+00:06:35,520 --> 00:06:40,616
+vector machines are just the reincarnation
+of perceptions with a clever trick called
+
+88
+00:06:40,616 --> 00:06:46,308
+the kernel trick.
+So, the idea is that you take the inputs,
+
+89
+00:06:46,308 --> 00:06:53,508
+You expand the raw input into a very large
+lair of non-linear, but also non adaptive
+
+90
+00:06:53,508 --> 00:06:57,138
+features.
+So, that's just like perceptrons where you
+
+91
+00:06:57,138 --> 00:07:00,123
+have this big layer of features it doesn't
+learn.
+
+92
+00:07:00,123 --> 00:07:05,178
+And then, you only have to learn one layer
+of adaptive weights, the weights from the
+
+93
+00:07:05,178 --> 00:07:09,503
+features to the decision unit.
+And support vector machines have a very
+
+94
+00:07:09,503 --> 00:07:13,462
+clever way of avoiding overfitting when
+they learn those weights.
+
+95
+00:07:13,462 --> 00:07:18,214
+They look for what's called a maximum
+margin hyperplane in a high dimensional
+
+96
+00:07:18,214 --> 00:07:21,198
+space,
+And they can do that much more efficiently
+
+97
+00:07:21,198 --> 00:07:25,280
+than you might have thought possible.
+And, that's why they work well.
+
+98
+00:07:25,640 --> 00:07:30,430
+The second view also views support vector
+machines as a clever reincarnation of
+
+99
+00:07:30,430 --> 00:07:33,604
+perceptrons.
+But, it has a completely different notion
+
+100
+00:07:33,604 --> 00:07:39,080
+of what kinds of features they're using.
+So, according to the second view,
+
+101
+00:07:39,460 --> 00:07:44,380
+Each input vector in the training set is
+used to define one feature.
+
+102
+00:07:44,380 --> 00:07:50,314
+I'll spell it differently to indicate it's
+a completely different kind of feature
+
+103
+00:07:50,314 --> 00:07:54,656
+from the first kind.
+Each of these features gives a scale of
+
+104
+00:07:54,656 --> 00:08:00,663
+value which involves doing a global match
+between a test input and that particular
+
+105
+00:08:00,663 --> 00:08:04,715
+training input.
+So, roughly speaking, it's how similar the
+
+106
+00:08:04,715 --> 00:08:07,900
+test input is to a particular training
+case.
+
+107
+00:08:08,280 --> 00:08:13,301
+Then, there's a clever way of
+simultaneously finding how to weight those
+
+108
+00:08:13,301 --> 00:08:16,230
+features, so as to make the right
+decision,
+
+109
+00:08:16,230 --> 00:08:20,807
+And also during feature selection.
+That is, deciding which of those features
+
+110
+00:08:20,807 --> 00:08:23,920
+not to use.
+So, although these views sound extremely
+
+111
+00:08:23,920 --> 00:08:28,803
+different from one another, they're just
+two alternatives ways of looking at the
+
+112
+00:08:28,803 --> 00:08:31,001
+same thing,
+A support vector machine.
+
+113
+00:08:31,001 --> 00:08:35,167
+And, in both cases,
+It's using non-adaptive features and then
+
+114
+00:08:35,167 --> 00:08:40,280
+one layer of adaptive weights.
+And that limits to what you can do that
+
+115
+00:08:40,280 --> 00:08:43,128
+way.
+You can't learn multiple layers of
+
+116
+00:08:43,128 --> 00:08:46,415
+representation with a support vector
+machine.
+
+117
+00:08:46,415 --> 00:08:52,612
+This is a historical document from 1995.
+It was given to me by [unknown] and it's a
+
+118
+00:08:52,612 --> 00:08:58,379
+bet between Larry Jackel, who headed the
+adaptive systems research group at Bell
+
+119
+00:08:58,379 --> 00:09:01,586
+Labs,
+And Vladamir Vapnik, who is the leading
+
+120
+00:09:01,586 --> 00:09:06,852
+proponent of support vector machines.
+Larry Jackel bet that by 2000, people
+
+121
+00:09:06,852 --> 00:09:12,474
+would understand why big neural nets
+trained with backpropagation worked well
+
+122
+00:09:12,474 --> 00:09:16,174
+on large data sets.
+That is, they would understand it
+
+123
+00:09:16,174 --> 00:09:19,519
+theoretically in terms of conditions and
+bands.
+
+124
+00:09:19,519 --> 00:09:23,361
+Vapnik bet that they wouldn't,
+But he made a side bet.
+
+125
+00:09:23,361 --> 00:09:27,631
+That if he was the one to figure it out,
+he would win anyway.
+
+126
+00:09:27,631 --> 00:09:31,404
+Vapnik in turn,
+Bet that by 2005, nobody will be using big
+
+127
+00:09:31,404 --> 00:09:33,661
+neural nets like that train
+backpropagation.
+
+128
+00:09:34,414 --> 00:09:39,369
+It turns out that they were both wrong.
+The limitation to using big neural nets
+
+129
+00:09:39,369 --> 00:09:44,198
+with backpropagation was not that we
+didn't have a good theory and not that
+
+130
+00:09:44,198 --> 00:09:49,403
+they were essentially helpless, but that
+we didn't have big enough computers or big
+
+131
+00:09:49,403 --> 00:09:52,853
+enough data sets.
+It was a practical limitation not a
+
+132
+00:09:52,853 --> 00:09:53,606
+theoretical one.

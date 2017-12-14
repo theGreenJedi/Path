@@ -1,0 +1,908 @@
+1
+00:00:00,000 --> 00:00:05,018
+In this video, I'm going to talk about 
+some exciting recent work, which I think 
+
+2
+00:00:05,018 --> 00:00:09,779
+will go a long way towards answering the 
+question how do you settle those 
+
+3
+00:00:09,779 --> 00:00:15,933
+hyper-parameters in a neural network? 
+This recent work uses a different kind of 
+
+4
+00:00:15,933 --> 00:00:22,260
+machine learning to help us decide what 
+values to use for hyper-parameters. 
+
+5
+00:00:22,260 --> 00:00:26,502
+In other words, it's using machine 
+learning to replace the graduate student 
+
+6
+00:00:26,502 --> 00:00:30,236
+who fiddles around with all these 
+different settings of the 
+
+7
+00:00:30,236 --> 00:00:35,256
+hyper-parameters to find out what works. 
+It relies on a way of modeling smooth 
+
+8
+00:00:35,256 --> 00:00:39,390
+functions called Gaussian processes, 
+which I had always thought of as 
+
+9
+00:00:39,390 --> 00:00:44,063
+inadequate for doing things like speech 
+and vision and I still think they are 
+
+10
+00:00:44,063 --> 00:00:47,538
+inadequate for that. 
+But when you're in a domain where you 
+
+11
+00:00:47,538 --> 00:00:52,391
+don't have much prior knowledge and the 
+only thing that you can really appeal to 
+
+12
+00:00:52,391 --> 00:00:57,304
+is that you expect similar inputs to have 
+similar outputs, then Gaussian processes 
+
+13
+00:00:57,304 --> 00:01:00,419
+are ideal. 
+And that's the domain we're in when we're 
+
+14
+00:01:00,419 --> 00:01:04,673
+fiddling around with vectors of 
+hyper-parameters hoping to find a vector 
+
+15
+00:01:04,673 --> 00:01:09,168
+of hyper-parameters that works well. 
+So, for example is the number of hidden 
+
+16
+00:01:09,168 --> 00:01:12,233
+units, the number of layers, the weight 
+penalty, 
+
+17
+00:01:12,233 --> 00:01:17,496
+whether it's used drop out or not. Those 
+are all hyper-parameters and different 
+
+18
+00:01:17,496 --> 00:01:22,826
+combinations of them work well together. 
+So this is a very hard space to explore 
+
+19
+00:01:22,826 --> 00:01:26,404
+by hand. 
+It's very easy when we're exploring by 
+
+20
+00:01:26,404 --> 00:01:31,083
+hand to fail to notice things. 
+Gaussian processes are very good at 
+
+21
+00:01:31,083 --> 00:01:36,542
+noticing trends in the data and they 
+provide a very good way of finding good 
+
+22
+00:01:36,542 --> 00:01:40,300
+sets of hyper-parameters if you have 
+enough computers. 
+
+23
+00:01:41,400 --> 00:01:46,575
+One of the commonest reasons that people 
+give for not using neural networks is 
+
+24
+00:01:46,575 --> 00:01:50,408
+that it requires a lot of skill to set 
+the hyper-parameters. 
+
+25
+00:01:50,408 --> 00:01:55,327
+This is actually a pretty good reason. 
+If you don't have much experience, it's 
+
+26
+00:01:55,327 --> 00:01:59,544
+easy to get stuck using a completely 
+wrong value for one of the 
+
+27
+00:01:59,544 --> 00:02:04,619
+hyper-parameters, and then nothing works. 
+You have to set things like the number of 
+
+28
+00:02:04,619 --> 00:02:06,838
+layers, 
+the number of units per layer, 
+
+29
+00:02:06,838 --> 00:02:10,676
+what types of units to use, 
+the weight penalty, the learning rate, 
+
+30
+00:02:10,676 --> 00:02:14,935
+the momentum, and so on and so on. 
+If you use a learning rate that's 100 
+
+31
+00:02:14,935 --> 00:02:19,013
+times too big or 100 times too small, 
+your network simply won't work. 
+
+32
+00:02:19,013 --> 00:02:22,252
+One way to approach this is to do a naive 
+grid search. 
+
+33
+00:02:22,252 --> 00:02:25,911
+That is, for each of these 
+hyper-parameters, you make a list of 
+
+34
+00:02:25,911 --> 00:02:30,230
+alternative values and then you try all 
+possible combinations of values. 
+
+35
+00:02:30,230 --> 00:02:32,630
+You can see that this is going to blow 
+up. 
+
+36
+00:02:32,630 --> 00:02:35,276
+If you have more than a few 
+hyper-parameters, 
+
+37
+00:02:35,276 --> 00:02:39,830
+you're going to end up with many more 
+combinations than you can possibly try. 
+
+38
+00:02:39,830 --> 00:02:44,115
+It turns out that there's something 
+that's considerably better than doing a 
+
+39
+00:02:44,115 --> 00:02:47,781
+naive grid search. 
+We can just sample random combinations. 
+
+40
+00:02:47,781 --> 00:02:53,288
+That is for each hyper-parameter, we make 
+a list of alternatives and then we pick 
+
+41
+00:02:53,288 --> 00:02:58,720
+one thing randomly from each list. 
+The reason that's better is because some 
+
+42
+00:02:58,720 --> 00:03:03,446
+of the hyper-parameters won't have much 
+effect and others will have a lot of 
+
+43
+00:03:03,446 --> 00:03:06,369
+effect. 
+And what we don't want to do is exactly 
+
+44
+00:03:06,369 --> 00:03:10,224
+repeat the settings of the 
+hyper-parameters that have a lot of 
+
+45
+00:03:10,224 --> 00:03:14,797
+effect for different settings of 
+hyper-parameters that don't have much 
+
+46
+00:03:14,797 --> 00:03:17,162
+effect. 
+We don't learn much that way. 
+
+47
+00:03:17,162 --> 00:03:22,350
+In a grid search, you'll have several 
+points along each axis that are identical 
+
+48
+00:03:22,350 --> 00:03:26,882
+for all the other parameters. 
+And so, if moving along that axis of the 
+
+49
+00:03:26,882 --> 00:03:32,202
+grid search makes no difference, you've 
+replicated the same experiment many times 
+
+50
+00:03:32,202 --> 00:03:36,220
+and haven't learned anything about the 
+other parameters. 
+
+51
+00:03:36,220 --> 00:03:40,548
+There's something you can do that's much 
+better than random combinations, 
+
+52
+00:03:40,548 --> 00:03:45,173
+and basically it amounts to saying, let's 
+use machine learning to simulate the 
+
+53
+00:03:45,173 --> 00:03:49,680
+graduate student who is trying to decide 
+what the hyper-parameter should be. 
+
+54
+00:03:51,140 --> 00:03:56,179
+So, instead of using random combinations, 
+we look at the results we've got so far 
+
+55
+00:03:56,179 --> 00:04:00,084
+and try and predict what combinations are 
+likely to work well. 
+
+56
+00:04:00,084 --> 00:04:04,619
+That is, we have to predict regions of 
+the hyper-parameter space, in which we 
+
+57
+00:04:04,619 --> 00:04:09,146
+expect to get good results. 
+It's not sufficient just to say how well 
+
+58
+00:04:09,146 --> 00:04:12,350
+we expect to do. 
+We also have to have an idea of the 
+
+59
+00:04:12,350 --> 00:04:15,246
+uncertainty. 
+We might, for example, have a region, 
+
+60
+00:04:15,246 --> 00:04:19,067
+where we expect to do about the same as 
+we're currently doing, 
+
+61
+00:04:19,067 --> 00:04:23,688
+but maybe we would do much better. 
+In that case, it would be worth going and 
+
+62
+00:04:23,688 --> 00:04:27,509
+exploring that region. 
+It's even worth exploring regions where 
+
+63
+00:04:27,509 --> 00:04:31,500
+we expect to do worse, 
+but we might just do a lot better. 
+
+64
+00:04:31,500 --> 00:04:36,148
+Now we're going to assume that the amount 
+of computation involved in evaluating one 
+
+65
+00:04:36,148 --> 00:04:40,797
+setting of the hyper-parameters is huge. 
+It involves training a big neura; network 
+
+66
+00:04:40,797 --> 00:04:45,040
+on a huge data set and it might take 
+several days on a big computer. 
+
+67
+00:04:45,040 --> 00:04:50,676
+Relative to that amount of work, building 
+a model to predict how well a setting of 
+
+68
+00:04:50,676 --> 00:04:56,037
+the hyper-parameters will do, given all 
+the settings we've experimented with so 
+
+69
+00:04:56,037 --> 00:05:00,024
+far is much less work. 
+And so it's going to require much less 
+
+70
+00:05:00,024 --> 00:05:05,523
+computation to fit the predictive model 
+to the results of the experiments we've 
+
+71
+00:05:05,523 --> 00:05:08,960
+seen so far than it is to run a single 
+experiment. 
+
+72
+00:05:08,960 --> 00:05:13,551
+So what kind of model are we going to use 
+for predicting the results of future 
+
+73
+00:05:13,551 --> 00:05:16,632
+experiments? 
+It turns out there's a kind of model I 
+
+74
+00:05:16,632 --> 00:05:21,440
+haven't talked about in the course called 
+Gaussian process models. 
+
+75
+00:05:21,440 --> 00:05:26,696
+Basically, all these models do is assume 
+that similar inputs give similar outputs. 
+
+76
+00:05:26,696 --> 00:05:30,265
+They don't have any more sophisticated 
+prior than that, 
+
+77
+00:05:30,265 --> 00:05:34,288
+but they're very good at using that prior 
+in an effective way. 
+
+78
+00:05:34,288 --> 00:05:39,285
+So if you don't know much about what you 
+expect hyper-parameters could do, a weak 
+
+79
+00:05:39,285 --> 00:05:42,740
+prior like that is probably the best you 
+can do. 
+
+80
+00:05:42,740 --> 00:05:47,836
+Gaussian processes are able to learn for 
+each input dimension what the appropriate 
+
+81
+00:05:47,836 --> 00:05:52,374
+scale is for measuring similarity. 
+So for example, if the number of hidden 
+
+82
+00:05:52,374 --> 00:05:57,098
+units could be 200 or it could 300, 
+the question is are those similar number 
+
+83
+00:05:57,098 --> 00:06:01,884
+or are those very different numbers? 
+Should we expect the results we get with 
+
+84
+00:06:01,884 --> 00:06:06,981
+200 to be very similar to the results we 
+get with 300 or should we expect them to 
+
+85
+00:06:06,981 --> 00:06:11,514
+be very different? 
+If we don't know anything about neural 
+
+86
+00:06:11,514 --> 00:06:17,214
+nets, initially we have no idea, but we 
+could look at the results of experiments 
+
+87
+00:06:17,214 --> 00:06:20,578
+so far. 
+And if experiments with 200 and 
+
+88
+00:06:20,578 --> 00:06:25,385
+experiments with 300 tend to give very 
+similar answers when you take into 
+
+89
+00:06:25,385 --> 00:06:28,892
+account the other differences between the 
+experiments, 
+
+90
+00:06:28,892 --> 00:06:33,894
+then 200 is probably similar to 300. 
+And so, we set a scale for that dimension 
+
+91
+00:06:33,894 --> 00:06:38,831
+such that you need differences of much 
+more than that to expect to get very 
+
+92
+00:06:38,831 --> 00:06:41,949
+different results. 
+Now, it's important that Gaussian 
+
+93
+00:06:41,949 --> 00:06:46,430
+processes models do more than just 
+predicting the expected outcome of a 
+
+94
+00:06:46,430 --> 00:06:50,959
+particular experiment. 
+That is how well the neural net that we 
+
+95
+00:06:50,959 --> 00:06:56,032
+train will do on a validation set. 
+In addition to predicting a mean value 
+
+96
+00:06:56,032 --> 00:07:00,548
+for how well they expect the neural 
+network to do, they predict a 
+
+97
+00:07:00,548 --> 00:07:03,540
+distribution, 
+they predict the variance. 
+
+98
+00:07:03,540 --> 00:07:09,260
+They're called Gaussian processes because 
+their predictions are Gaussian. 
+
+99
+00:07:09,260 --> 00:07:14,213
+When they're making a prediction for new 
+settings of hyper-parameters that are 
+
+100
+00:07:14,213 --> 00:07:19,354
+close to several consistent settings that 
+we've already run, so we know the answer. 
+
+101
+00:07:19,354 --> 00:07:23,994
+The predictions will tend to be fairly 
+sharp, that is well have low variance, 
+
+102
+00:07:23,994 --> 00:07:28,571
+but when they are predictions for 
+experiments with hyper-parameters that 
+
+103
+00:07:28,571 --> 00:07:33,399
+are very different from in setting the 
+hyper-parameters we'd experimented it 
+
+104
+00:07:33,399 --> 00:07:36,722
+with so far, 
+the predictions made by Gaussian process 
+
+105
+00:07:36,722 --> 00:07:42,815
+models will have very high variance. 
+So here's quite a good strategy for using 
+
+106
+00:07:42,815 --> 00:07:47,140
+Gaussian processes to decide what to try 
+next. 
+
+107
+00:07:47,140 --> 00:07:51,836
+So remember, we have one kind of learning 
+model, which is a big neural network that 
+
+108
+00:07:51,836 --> 00:07:55,559
+takes a long time to route, 
+and we're trying to figure out a good 
+
+109
+00:07:55,559 --> 00:07:58,080
+setting of the hyper-parameters to try 
+next. 
+
+110
+00:07:58,080 --> 00:08:02,434
+We have a different kind of machine 
+learning algorith, called a Gaussian 
+
+111
+00:08:02,434 --> 00:08:07,492
+process, that's looking at the results of 
+the experiments we've done so far and 
+
+112
+00:08:07,492 --> 00:08:12,679
+trying to predict for some proposed new 
+setting of the hyper-parameters How well 
+
+113
+00:08:12,679 --> 00:08:16,969
+the neural network would do and also how 
+unsure that prediction is? 
+
+114
+00:08:16,969 --> 00:08:22,027
+So what we're going to do is we're going 
+to keep track of the hyper-parameters 
+
+115
+00:08:22,027 --> 00:08:26,317
+that have worked best so far. 
+That is a single setting of all the 
+
+116
+00:08:26,317 --> 00:08:31,120
+hyper-parameters that gave us the neural 
+net with the highest performance so far. 
+
+117
+00:08:31,120 --> 00:08:36,722
+Now, when we run the next experiment, our 
+best setting so far might be replaced by 
+
+118
+00:08:36,722 --> 00:08:42,116
+the new experiment because it gives 
+better performances in neural net or it 
+
+119
+00:08:42,116 --> 00:08:46,197
+might stay the same. 
+So since we're going to substitute the 
+
+120
+00:08:46,197 --> 00:08:51,384
+results of the new experiment it is 
+better than anything we've seen so far, 
+
+121
+00:08:51,384 --> 00:08:57,480
+our best setting so far can only improve. 
+So here's a good strategy for what 
+
+122
+00:08:57,480 --> 00:09:01,320
+setting of the hyper-parameters to try 
+next. 
+
+123
+00:09:01,320 --> 00:09:05,164
+We pick a setting of the 
+hyper-parameters, 
+
+124
+00:09:05,164 --> 00:09:11,220
+such that the expected improvement in our 
+best setting is big. 
+
+125
+00:09:11,220 --> 00:09:16,381
+We don't worry about the fact that we 
+might do an experiment that leads to a 
+
+126
+00:09:16,381 --> 00:09:20,202
+really bad result, 
+because if it gets a really bad result, 
+
+127
+00:09:20,202 --> 00:09:24,090
+we won't replace our best so far with 
+this new experiment. 
+
+128
+00:09:24,090 --> 00:09:29,029
+Also, when learn something. 
+This is a phenomenon that managers of 
+
+129
+00:09:29,029 --> 00:09:34,651
+hedge funds know about. 
+I often tell the client if the fund goes 
+
+130
+00:09:34,651 --> 00:09:41,000
+up, I'll take 3% of your profits. 
+If the fund goes down, you lose. 
+
+131
+00:09:41,000 --> 00:09:46,388
+Now that's a crazy thing for a client to 
+agree to, because that gives the hedge 
+
+132
+00:09:46,388 --> 00:09:51,846
+fund manager huge incentive for taking 
+huge risks, because he has no significant 
+
+133
+00:09:51,846 --> 00:09:54,915
+answer. 
+But, for finding hyper-parameters that 
+
+134
+00:09:54,915 --> 00:09:59,895
+work well, it's a sensible strategy. 
+So, consider these three predictions, A, 
+
+135
+00:09:59,895 --> 00:10:02,828
+B, and C. 
+We're going to suppose that A, B, and C 
+
+136
+00:10:02,828 --> 00:10:08,000
+are different settings of the 
+hyper-parameters that have not been tried 
+
+137
+00:10:08,000 --> 00:10:13,524
+and those green Gaussians are the 
+prediction of our Gaussian process model 
+
+138
+00:10:13,524 --> 00:10:16,722
+for how well each of those setting would 
+do. 
+
+139
+00:10:16,722 --> 00:10:22,391
+For setting A, the mean is well below our 
+current best so far and there's only 
+
+140
+00:10:22,391 --> 00:10:28,495
+moderate variance. 
+For setting B, the mean is closer to our 
+
+141
+00:10:28,495 --> 00:10:32,710
+best so far, 
+but since there isn't much variance, 
+
+142
+00:10:32,710 --> 00:10:38,721
+there really isn't that much upside. 
+For setting C, the mean is actually lower 
+
+143
+00:10:38,721 --> 00:10:43,780
+than for setting B, but because it's high 
+variance there's a big upside. 
+
+144
+00:10:43,780 --> 00:10:48,981
+We're going to take the area under 
+Gaussian C that's above the red line and 
+
+145
+00:10:48,981 --> 00:10:54,528
+we're going to take the moment of that 
+area above the red line and that's the 
+
+146
+00:10:54,528 --> 00:10:59,681
+thing we're looking for the matching 
+margin and you can see that C has a much 
+
+147
+00:10:59,681 --> 00:11:04,481
+bigger moment than B or A. 
+It may only have the same area as B above 
+
+148
+00:11:04,481 --> 00:11:07,728
+the line, 
+but some of that area is much further 
+
+149
+00:11:07,728 --> 00:11:11,681
+above the line, 
+so we might get a very big win if we try 
+
+150
+00:11:11,681 --> 00:11:15,210
+setting C. 
+So that's the one our policy would tell 
+
+151
+00:11:15,210 --> 00:11:18,600
+us to pick here. 
+Here's the worst part, 
+
+152
+00:11:18,600 --> 00:11:25,380
+B is intermediate and c is the best bet. 
+So how well does this work? 
+
+153
+00:11:25,380 --> 00:11:30,580
+Well, if you got the resources to run a 
+lot of experiments, it's much better than 
+
+154
+00:11:30,580 --> 00:11:34,610
+a person of finding good combinations of 
+the hyper-parameters. 
+
+155
+00:11:34,610 --> 00:11:39,420
+The policy I gave you so far is a 
+strictly sequential policy that assumes 
+
+156
+00:11:39,420 --> 00:11:42,670
+that it can see all of the experiments 
+run so far, 
+
+157
+00:11:42,670 --> 00:11:47,895
+but there's no reason why you shouldn't 
+make it a bit more complicated and run a 
+
+158
+00:11:47,895 --> 00:11:53,120
+whole bunch of experiments in parallel. 
+Using a Gaussian process model to predict 
+
+159
+00:11:53,120 --> 00:11:57,829
+how well a particular setting of the 
+hyper-parameters will do is sensible, 
+
+160
+00:11:57,829 --> 00:12:00,926
+because it's not the kind of task we're 
+good at. 
+
+161
+00:12:00,926 --> 00:12:05,506
+It's not like visional speech, and it's 
+not clear that there's a lot of 
+
+162
+00:12:05,506 --> 00:12:08,474
+complicated structure to be found in the 
+data. 
+
+163
+00:12:08,474 --> 00:12:13,892
+It may be that the only real structure is 
+that things are smooth and they have some 
+
+164
+00:12:13,892 --> 00:12:17,308
+scale. 
+Also, a person can't keep in mind the 
+
+165
+00:12:17,308 --> 00:12:20,785
+results of 50 different experiments, to 
+see what they predict. 
+
+166
+00:12:20,785 --> 00:12:25,060
+If you're doing all this by hand, you 
+might just fail to notice that all of 
+
+167
+00:12:25,060 --> 00:12:29,791
+your good results had very small learning 
+rates, and all of your really bad results 
+
+168
+00:12:29,791 --> 00:12:33,781
+had very big learning rates, 
+because you're attending to lots of other 
+
+169
+00:12:33,781 --> 00:12:38,669
+things that you're varying. 
+A Gaussian process model would not miss a 
+
+170
+00:12:38,669 --> 00:12:42,358
+trend like that. 
+One final reason why Gaussian process 
+
+171
+00:12:42,358 --> 00:12:47,550
+models are a very good way of setting 
+hyper-parameters is they're much less 
+
+172
+00:12:47,550 --> 00:12:52,339
+likely than a person to cheat. 
+Typically when we're doing research, we 
+
+173
+00:12:52,339 --> 00:12:57,004
+want to compare a new method that we 
+thought of with some old or standard 
+
+174
+00:12:57,004 --> 00:12:59,842
+method, 
+and there's a very strong tendency to 
+
+175
+00:12:59,842 --> 00:13:04,886
+work harder to find good hyperparameters 
+for our new method than for the stupid 
+
+176
+00:13:04,886 --> 00:13:08,365
+old method. 
+That's why when you compare methods, you 
+
+177
+00:13:08,365 --> 00:13:11,882
+should really compare the results got by 
+different groups, 
+
+178
+00:13:11,882 --> 00:13:16,551
+where for each method, the results are 
+produced by the group that believes in 
+
+179
+00:13:16,551 --> 00:13:19,522
+that method. 
+If we use Gaussian process models to 
+
+180
+00:13:19,522 --> 00:13:24,312
+search for good sets of hyper-parameters, 
+they're going to do just as hard a search 
+
+181
+00:13:24,312 --> 00:13:29,285
+for the type of model we don't believe in 
+as they are for the type of model we do 
+
+182
+00:13:29,285 --> 00:13:29,952
+believe in. 

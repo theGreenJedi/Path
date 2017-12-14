@@ -1,0 +1,519 @@
+1
+00:00:00,000 --> 00:00:05,013
+In this video, I'm going to describe some
+relatively simple models of neurons.
+
+2
+00:00:05,013 --> 00:00:10,081
+I'll describe a number of different models
+starting with simple linear and threshold
+
+3
+00:00:10,081 --> 00:00:14,088
+neurons, and then, describing slightly
+more complicated models.
+
+4
+00:00:14,088 --> 00:00:20,028
+These are much simpler than real neurons,
+but they're still complicated enough, to
+
+5
+00:00:20,028 --> 00:00:25,035
+allow us to make neural nets, that do some
+very interesting kinds of machine
+
+6
+00:00:25,035 --> 00:00:28,083
+learning.
+In order to understand anything
+
+7
+00:00:28,083 --> 00:00:34,050
+complicated, we have to idealize it.
+That is, we have to make simplifications
+
+8
+00:00:34,050 --> 00:00:38,036
+that allow us to get a handle on how it
+might work.
+
+9
+00:00:38,036 --> 00:00:44,025
+With atoms, for example, we simplify them
+as behaving like little solar systems.
+
+10
+00:00:45,015 --> 00:00:49,019
+Idealization removes the complicated
+details that are not essential for
+
+11
+00:00:49,019 --> 00:00:54,010
+understanding the main principles.
+It allows us to apply mathematics, and to
+
+12
+00:00:54,010 --> 00:00:58,096
+make analogies to other familiar systems.
+And once we understand the basic
+
+13
+00:00:58,096 --> 00:01:03,088
+principles, it's easy to add complexity,
+and make the model more faithful to
+
+14
+00:01:03,088 --> 00:01:07,003
+reality.
+Of course, we have to be careful when we
+
+15
+00:01:07,003 --> 00:01:11,055
+idealize something, not to remove the
+thing that's giving it its main
+
+16
+00:01:11,055 --> 00:01:15,060
+properties.
+It's often worth understanding models that
+
+17
+00:01:15,060 --> 00:01:19,035
+are known to be wrong, as long as we don't
+forget they're wrong.
+
+18
+00:01:19,035 --> 00:01:24,000
+So for example, a lot of work on neural
+networks uses neurons that communicate
+
+19
+00:01:24,000 --> 00:01:28,083
+real values rather than discrete spikes of
+activity, and we know cortical neurons
+
+20
+00:01:28,083 --> 00:01:33,060
+don't behave like that, but it's still
+worth understanding systems like that, and
+
+21
+00:01:33,060 --> 00:01:37,000
+in practice they can be very useful for
+machine learning.
+
+22
+00:01:37,095 --> 00:01:42,081
+The first kind of neuron I want to tell
+you about is the simplest, it's a linear
+
+23
+00:01:42,081 --> 00:01:44,055
+neuron.
+It's simple.
+
+24
+00:01:44,055 --> 00:01:47,089
+It's computationally limited in what it
+can do.
+
+25
+00:01:47,089 --> 00:01:52,030
+It may allow us to get insights into more
+complicated neurons.
+
+26
+00:01:52,052 --> 00:01:59,085
+But it may be somewhat misleading.
+So in a linear neuron, the output Y.
+
+27
+00:02:00,018 --> 00:02:05,067
+Is a function of a bi-asset in your run B
+and the sum of all its incoming
+
+28
+00:02:05,067 --> 00:02:11,075
+connections of the activity on an input
+line times the weight on that line that's
+
+29
+00:02:11,075 --> 00:02:17,069
+the synaptic weight on the input line and
+if you plot that as curve, then if you
+
+30
+00:02:17,069 --> 00:02:23,062
+plot on the X-axis, the buyers plus the
+weighted activities on the input line we
+
+31
+00:02:23,062 --> 00:02:26,081
+get a straight line that goes through
+zero.
+
+32
+00:02:30,069 --> 00:02:34,086
+Very different from linear neurons, are
+binary threshold neurons that were
+
+33
+00:02:34,086 --> 00:02:39,014
+introduced by McCulloch and Pitts.
+They actually influenced Von Roenam when
+
+34
+00:02:39,014 --> 00:02:42,036
+he was thinking about how to design a
+universal computer.
+
+35
+00:02:43,090 --> 00:02:49,096
+In a binary threshold neuron you first
+compute a weighted sum of the inputs and
+
+36
+00:02:49,096 --> 00:02:56,009
+then you send out a spike of activity if
+that weighted sum exceeds the threshold.
+
+37
+00:02:56,069 --> 00:03:01,040
+[inaudible] and Pitts thought that the
+spikes were like the truth values of
+
+38
+00:03:01,040 --> 00:03:04,057
+propositions.
+So each neuron is combining the truth
+
+39
+00:03:04,057 --> 00:03:09,003
+values it gets from other neurons to
+produce the truth value of its own.
+
+40
+00:03:09,003 --> 00:03:13,062
+And that's like combining some
+propositions to compute the truth value of
+
+41
+00:03:13,062 --> 00:03:17,078
+another proposition.
+At the time in the 1940's logic was the
+
+42
+00:03:17,078 --> 00:03:24,006
+main paradigm for how the mind might work.
+Since then people thinking about how the
+
+43
+00:03:24,006 --> 00:03:29,039
+brain computes have become much more
+interested in the idea the brain is
+
+44
+00:03:29,039 --> 00:03:33,069
+combining lots of different sources of
+unreliable evidence.
+
+45
+00:03:33,069 --> 00:03:38,052
+And so logic isn't such a good pardigm for
+what the brain's up to.
+
+46
+00:03:39,043 --> 00:03:44,041
+For a binary threshold neuron, you can
+think of its input/output function as if
+
+47
+00:03:44,041 --> 00:03:48,070
+the weighted input is above the threshold,
+it gives an output of one.
+
+48
+00:03:48,070 --> 00:03:55,022
+Otherwise, it gives an output of zero.
+There are actually two equivalent ways to
+
+49
+00:03:55,022 --> 00:03:57,097
+write the equations for a binary threshold
+neuron.
+
+50
+00:03:58,024 --> 00:04:04,087
+We can say that the total input Z is just
+the activities on the input lines times
+
+51
+00:04:04,087 --> 00:04:09,024
+the weights.
+And then the output Y is one if that Z is
+
+52
+00:04:09,024 --> 00:04:15,031
+above the threshold and zero otherwise.
+Alternatively, we could say that the total
+
+53
+00:04:15,031 --> 00:04:20,018
+input includes a bias term.
+So the total input is what comes in on the
+
+54
+00:04:20,018 --> 00:04:23,066
+input lines, times the weights, plus this
+bias term.
+
+55
+00:04:23,066 --> 00:04:29,063
+And then we could say the output is one if
+that total input is above zero and is zero
+
+56
+00:04:29,063 --> 00:04:33,004
+otherwise.
+And the equivalence is simply that the
+
+57
+00:04:33,004 --> 00:04:38,074
+threshold in first formulation is equal to
+the negative of the bias in the second
+
+58
+00:04:38,074 --> 00:04:44,049
+formulation.
+A kind of neuron that combines the
+
+59
+00:04:44,049 --> 00:04:49,033
+properties of both linear neurons and
+binary threshold neurons is a rectified
+
+60
+00:04:49,033 --> 00:04:54,051
+linear neuron.
+It first computes a linear weighted sum of
+
+61
+00:04:54,051 --> 00:04:59,025
+its inputs, but then it gives an output
+that's a non-linear function of this
+
+62
+00:04:59,025 --> 00:05:04,042
+weighted sum.
+So we compute Z in the same way as before.
+
+63
+00:05:05,010 --> 00:05:08,054
+If z is below zero, we give an output of
+zero.
+
+64
+00:05:08,054 --> 00:05:12,006
+Otherwise, we give an output that's equal
+to z.
+
+65
+00:05:12,006 --> 00:05:16,073
+So above zero is linear, and at zero, it
+makes a hard decision.
+
+66
+00:05:16,073 --> 00:05:23,016
+So the input/output curve looks like this.
+It's definitely not linear, but above zero
+
+67
+00:05:23,016 --> 00:05:27,022
+it is linear.
+So with a neuron like this, we can get a
+
+68
+00:05:27,022 --> 00:05:32,027
+lot of the nice properties of linear
+systems, when it's above zero.
+
+69
+00:05:32,027 --> 00:05:36,063
+We can also get the ability to make
+decisions, at zero.
+
+70
+00:05:40,036 --> 00:05:45,032
+The neurons that we'll use a lot in this
+course, and are probably the commonest
+
+71
+00:05:45,032 --> 00:05:50,016
+kinds of neurons to use in artificial
+neuron [inaudible], are sigmoid neurons.
+
+72
+00:05:50,016 --> 00:05:55,044
+They give a real valued output that is a
+smooth and bounded function of their total
+
+73
+00:05:55,044 --> 00:05:59,051
+input.
+It's typical to use the logistic function,
+
+74
+00:05:59,051 --> 00:06:05,042
+where the total input is computed as
+before, as a bias plus what comes in on
+
+75
+00:06:05,042 --> 00:06:10,046
+the input lines, weighted.
+The output for a logistic neuron is one
+
+76
+00:06:10,046 --> 00:06:13,095
+over one plus e to the minus, the total
+input.
+
+77
+00:06:14,025 --> 00:06:19,014
+If you think about that, if the total
+input's big and positive.
+
+78
+00:06:19,014 --> 00:06:22,069
+E to the minus a big positive number is
+zero.
+
+79
+00:06:22,069 --> 00:06:28,021
+And so, the output will be one.
+If the total input's big and negative, E
+
+80
+00:06:28,021 --> 00:06:34,044
+to the minus a big negative number is a
+large number, and so the output will be
+
+81
+00:06:34,044 --> 00:06:38,045
+zero.
+So the input output function looks like
+
+82
+00:06:38,045 --> 00:06:42,016
+this.
+When, the total input's zero, e to the
+
+83
+00:06:42,016 --> 00:06:48,074
+minus zero is one, so the output's a half.
+And the nice thing about a sigmoid is it
+
+84
+00:06:48,074 --> 00:06:53,047
+has, smooth derivatives.
+The derivatives, change continuously.
+
+85
+00:06:53,047 --> 00:06:59,089
+And, so they're nicely behaved, and they
+make it easy to do learning as we'll see
+
+86
+00:06:59,089 --> 00:07:04,069
+in lecture three.
+Finally the stochastic binary neurons.
+
+87
+00:07:04,069 --> 00:07:07,098
+They use just the same equations as
+logistic units.
+
+88
+00:07:07,098 --> 00:07:13,027
+They compute their total input the same
+way and they use the logistic function to
+
+89
+00:07:13,027 --> 00:07:18,018
+compute a real value which is the
+probability that they will output a spike.
+
+90
+00:07:18,018 --> 00:07:23,028
+But then instead of outputting that
+probability as a real number they actually
+
+91
+00:07:23,028 --> 00:07:28,070
+make a probabilistic decision, and so what
+they actually output is either a one or a
+
+92
+00:07:28,070 --> 00:07:30,089
+zero.
+They're intrinsically random.
+
+93
+00:07:32,025 --> 00:07:36,075
+So they're treating the P as the
+probability of producing a one, not as a
+
+94
+00:07:36,075 --> 00:07:39,089
+real number.
+Of course, if the input is very big and
+
+95
+00:07:39,089 --> 00:07:42,079
+positive they will almost always produce a
+one.
+
+96
+00:07:42,079 --> 00:07:47,004
+If the input's big and negative they'll
+almost always produce a zero.
+
+97
+00:07:48,045 --> 00:07:52,067
+We can do a similar trick with rectified
+linear units.
+
+98
+00:07:52,067 --> 00:07:59,015
+We can say that the output, there's real
+value that comes out of a rectified linear
+
+99
+00:07:59,015 --> 00:08:04,014
+unit, if its input is above zero, is the
+rate of producing spikes.
+
+100
+00:08:04,014 --> 00:08:08,076
+So that's deterministic.
+But once we've figured out these rate of
+
+101
+00:08:08,076 --> 00:08:13,016
+producing spikes, the actual times at
+which spikes are produced is a random
+
+102
+00:08:13,016 --> 00:08:14,098
+process.
+It's a Poisson process.
+
+103
+00:08:14,098 --> 00:08:19,073
+So the rectified linear unit determines
+the rate, but intrinsic randomness in the
+
+104
+00:08:19,073 --> 00:08:22,089
+unit determines when the spikes are
+actually produced.

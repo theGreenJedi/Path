@@ -1,0 +1,92 @@
+En este vídeo hablaré de tres tipos 
+distintos de aprendizaje automático: aprendizaje supervisado, aprendizaje por
+refuerzo y aprendizaje no supervisado En general, la primer mitad del curso 
+tratará sobre aprendizaje supervisado. La segunda mitad del curso tratará mayormente 
+de aprendizaje no supervisado y El aprendizaje por refuerzo no será tratado 
+en este curso porque no podemos cubrir todo. El aprendizaje puede dividirse 
+en tres grandes grupos de algoritmos. 
+En aprendizaje supervisado se trata de predecir una salida dado un vector 
+de entrada, o sea que está muy claro cuál es el objetivo del aprendizaje supervisado. 
+En aprendizaje por refuerzo se trata de seleccionar acciones o secuencias de 
+acciones para maximizar la recompensa y esa recompensa ocurre solo ocasionalmente. 
+En el aprendizaje no supervisado se trata de descubrir una buena representación interna de la entrada 
+y vamos a ver más adelante qué significa eso. El aprendizaje supervisado en sí 
+se divide en dos tipos diferentes. En la regresión se busca 
+como salida un número real o un vector completo de números reales, como el 
+precio de una acción en un período de seis meses o la temperatura al mediodía mañana. 
+Y el objetivo es llegar tan cerca como se pueda al número real correcto. 
+En clasificación, se busca como salida un rótulo de clase. El caso más simple 
+es una elección entre uno y cero, 
+entre casos positivos y negativos, pero obviamente podemos tener 
+múltiples rótulos alternativos como cuando clasificamos números manuscritos. 
+El aprendizaje supervisado funciona primero seleccionando una clase de modelos, es decir, 
+un conjunto completo de modelos que estamos preparados para considerar como candidatos. 
+Se puede pensar la clase de modelos como función que toma un vector de entrada 
+y algunos parámetros y devuelve una salida y De modo que la clase de modelo es
+simplemente una forma de asignar una entrada con una salida usando algunos 
+parámetros numéricos W y luego ajustando esos parámetros numéricos para lograr que la asignación se
+corresponda con los datos de entrenamiento supervisado Lo que queremos decir con que se correspondan es
+que minimicen la discrepancia entre el objetivo de salida en cada caso de entrenamiento y la salida real 
+producida por el sistema de aprendizaje automático La medida obvia de esa discrepancia 
+si estamos usando números reales como salidas es la diferencia cuadrática 
+entre la salida de nuestro sistema y la salida correcta t, y ponemos el un-medio
+ de modo que se cancele cuando derivemos. Para clasificación se puede usar esa medida pero hay otras métricas 
+más sensibles que veremos más tarde, y esas métricas más sensibles en general funcionan mejor también. En aprendizaje por refuerzo, las salidas 
+son en realidad secuencias de acciones, y hay que decidir sobre esas acciones 
+basandose en recompensas esporádicas El objetivo al seleccionar cada acción es 
+maximizar la suma esperada de la futura recompensa, y en general usamos 
+un factor de descuento de modo de no tener que mirar demasiado a futuro. Decimos 
+que las recompensas en un futuro lejano no cuentan como las recompensas que 
+se pueden obtener bastante más rápido. El aprendizaje por refuerzo es difícil. 
+Es difícil porque las recompensas están en general demoradas, de modo que 
+es difícil saber exactamente que acción fue errónea en una larga secuencia de acciones. 
+También es difícil porque un premio escalar, especialmente uno que ocurre 
+ocasionalmente no brinda mucha información en que basar los cambios en los parámetros. En general no se pueden aprender millones de 
+parámetros usando aprendizaje por refuerzo Mientras que en aprendizaje supervisado
+ y no supervisado se puede. En general, en aprendizaje por refuerzo 
+se trata de aprender docenas de parámetros o quizás 1.000 parámetros, pero no millones. En este curso no podemos abarcarlo 
+todo, de modo que no veremos aprendizaje por refuerzo, 
+aunque sea un tema importante. Veremos aprendizaje no supervisado 
+en la segunda mitad del curso. Por aproximadamente 40 años la 
+comunidad de aprendizaje automático ignoró el aprendizaje no supervisado excepto para una forma 
+muy limitada llamada agrupación (clustering) En realidad se usaron definiciones de 
+aprendizaje automático que lo excluyen. Definieron aprendizaje automático en algunos 
+textos como una aplicación de las entradas hacia las salidas. Y muchos 
+investigadores pensaron que la agrupación era la única forma 
+de aprendizaje no supervisado. Una razón para eso es que es difícil decir 
+cuál es el objetivo del aprendizaje no supervisado. Un objetivo principal es obtener una representación interna de las entradas que sea útil para 
+posteriores aprendizajes supervisados o por refuerzo. Y la razón por la 
+que podemos querer hacerlo en dos etapas es que no queremos usar, 
+por ejemplo, la recompensa para el aprendizaje por refuerzo para establecer los 
+parámetros  para nuestro sistema visual. De modo que se puede calcular la 
+distancia a una superficie usando la diferencia entre las imágenes que obtenemos 
+entre nuestros dos ojos. Pero no quieres aprender ese cálculo de distancia ajustando 
+los parámetros cada vez que pateas algo con tu pie desnudo en forma repetida. Eso implica golpearte los dedos del 
+pie un número muy grande de veces y hay formas mucho mejores de aprender a 
+fundir dos imágenes basándose puramente en la información de las entradas. 
+Otras metas del aprendizaje no supervisado son suministrar una representación de la entrada 
+compacta, de pocas dimensiones. Las entradas con muchas dimensiones como las 
+imágenes, en general están en o son cercanos a manifolds de bajas dimensiones. 
+O varios de esos manifolds para el caso de los números manuscritos. Significa que, aunque tengas un millón de pixeles, en realidad no hay 
+un millón de grados de libertad en lo que puede suceder. 
+Podría haber solo algunos cientos de grados de libertad en lo que pueda ocurrir.
+De modo que lo que queremos es mudar la representación de un millón de pixeles a 
+esa de algunos cientos de grados de libertad que coincidirá con decir que 
+estamos sobre un manifold También necesitamos saber 
+sobre qué manifold estamos. Una forma bastante limitada de ésto es el análisis 
+de componentes principales que es lineal. Supone que hay un manifold y ese 
+manifold es un plano en el espacio multidimensional. 
+Otra definición de aprendizaje no supervisado, u otra meta del 
+aprendizaje no supervisado es brindar una representación económica para las entradas 
+en términos de características Por ejemplo, si podemos representar la 
+entrada en términos de características binarias Eso es en general económico, porque luego 
+toma solo un bit para expresar el estado de la característica binaria.
+Alternativamente, podemos usar un gran número de características expresadas con números reales, 
+pero insistir en que para cada entrada casi todas las características valen cero. En este caso, 
+para cada entrada solo necesitamos representar algunos números reales 
+y eso es económico. Como dije antes, otra definición de 
+aprendizaje no supervisado, u otra meta del aprendizaje no supervisado es encontrar 
+agrupamientos entre las entradas, y podemos ver esos agrupamientos como códigos muy dispersos,
+ es decir tenemos una característica por agrupamiento e insistiremos en que todas las características 
+excepto una son cero y esa única tiene el valor uno. De modo que el 
+agrupamiento es en realidad un caso extremo de hallar características dispersas
