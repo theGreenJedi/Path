@@ -41,6 +41,8 @@ https://github.com/JediKoder/CUP
 
 https://github.com/JediKoder/Paddle
 
+https://github.com/theGreenJedi/Meetups
+
 # Videos
 
 Ray Kurzweil: How To Create A Mind: @ TEDxSiliconAlley  -- https://www.youtube.com/watch?v=RIkxVci-R4k
