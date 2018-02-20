@@ -1,2 +1,2 @@
-![algorithmic toolbox certificate-1](https://user-images.githubusercontent.com/16416542/35996969-14dfcd98-0ce6-11e8-84f0-078957554018.png)
+![algorithmic toolbox certificate-1](https://github.com/theGreenJedi/Path/blob/master/Courses/GoogleIT/technical-support-fundamentals/01_introduction-to-it/01_introduction-to-it-support/TechnicalSupportFundamentals.pdf)
 
