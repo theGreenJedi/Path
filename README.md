@@ -142,3 +142,6 @@ Usually, important news is disseminated pretty fast on Twitter and often shared 
 - [Inside AI](https://inside.com/ai)
 
 
+### Certs
+
+(https://github.com/theGreenJedi/Path/blob/master/Courses/GoogleIT/technical-support-fundamentals/01_introduction-to-it/01_introduction-to-it-support/TechnicalSupportFundamentals-1.png)
