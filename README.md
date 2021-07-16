@@ -37,8 +37,6 @@ https://github.com/karpathy/neuraltalk2
 
 https://github.com/HFTrader/DeepLearningBook/blob/master/DeepLearningPapers.md
 
-https://github.com/JediKoder/Paddle
-
 https://github.com/theGreenJedi/Meetups
 
 # Videos
